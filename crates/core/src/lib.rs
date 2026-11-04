@@ -14,6 +14,7 @@ pub mod program;
 pub mod quote;
 pub mod response;
 pub mod review;
+pub mod selfassess;
 pub mod session;
 pub mod srs;
 pub mod stats;
