@@ -670,3 +670,14 @@ fn coming_back_to_a_summary_keeps_it() {
     app.tap(Screen::Study.label());
     app.assert_has(tx::SUMMARY_TITLE);
 }
+
+#[test]
+fn a_repro_card_in_review_hovers_with_the_repro_glossary() {
+    // #318: the item is marked with its course, and hover.js has repro's
+    // own meanings, so ER over a repro card reads estrogen receptor.
+    let card = ids_of("card").into_iter().find(|id| id.starts_with("repro.")).expect("a repro card");
+    let app = session(&[&card]);
+    assert!(app.html().contains(r#"data-course="repro""#), "the item carries its course");
+    let er = &crate::hover::course_overrides()["repro"]["exact"]["ER"][0];
+    assert!(er.as_str().is_some_and(|t| t.starts_with("Estrogen receptor")), "{er}");
+}

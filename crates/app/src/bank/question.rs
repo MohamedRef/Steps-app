@@ -38,6 +38,7 @@ pub fn QuestionView(
     let quote = item.src.quote.clone();
     let primary = rsx! {
         crate::ui::Card { element: crate::ui::CardElement::Article, class: "q",
+            "data-course": steps_core::program::course_of(&item.id),
             // Once the answer shows, the lecture chip opens the lecture's
             // page. While a paper runs it stays a label, so a stray tap never
             // leaves the paper.

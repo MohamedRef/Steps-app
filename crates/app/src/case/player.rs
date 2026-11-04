@@ -44,7 +44,7 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
     };
 
     rsx! {
-        article { class: "player case",
+        article { class: "player case", "data-course": steps_core::program::course_of(&item_id),
             ItemMeta { lecture: lecture.to_owned(), item_id: item.id.clone(), on_back: leave }
             if save_failed.read().as_ref().is_some_and(|id| id == &item_id) {
                 p { class: "verdict bad", role: "alert", {tx::SAVE_FAILED} }

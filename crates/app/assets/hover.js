@@ -12,7 +12,7 @@
 // Adapted from batna-app main: crates/app/assets/reader.js (pointer plumbing).
 (() => {
   if (window.__stepsHover) return;
-  const state = { exact: {}, lower: {}, unverified: "", timer: 0, shownFor: null };
+  const state = { exact: {}, lower: {}, courses: {}, unverified: "", timer: 0, shownFor: null };
   const card = document.createElement("div");
   card.className = "peek";
   card.setAttribute("role", "tooltip");
@@ -55,8 +55,21 @@
     return { word: text.slice(a, b).replace(/^-+|-+$/g, ""), rect, node, a };
   }
 
-  function lookup(word) {
+  // A word inside an element marked data-course (an item, a question, a
+  // case, an oral prompt) reads that course's own meaning first (#318).
+  function courseOf(node) {
+    const el = node && (node.nodeType === Node.TEXT_NODE ? node.parentElement : node);
+    const c = el && el.closest ? el.closest("[data-course]") : null;
+    return c ? state.courses[c.dataset.course] : null;
+  }
+
+  function lookup(word, node) {
     if (!word) return null;
+    const own = courseOf(node);
+    if (own) {
+      const hit = (own.exact && own.exact[word]) || (own.lower && own.lower[word.toLowerCase()]);
+      if (hit) return hit;
+    }
     return state.exact[word] || state.lower[word.toLowerCase()] || null;
   }
 
@@ -98,7 +111,7 @@
       return;
     }
     const hit = wordAt(x, y);
-    const entry = hit && lookup(hit.word);
+    const entry = hit && lookup(hit.word, hit.node);
     if (!entry) return hide();
     const key = hit.word + "@" + hit.a;
     if (state.shownFor === key) return;
@@ -138,7 +151,7 @@
       return;
     }
     const hit = wordAt(e.clientX, e.clientY);
-    const entry = hit && lookup(hit.word);
+    const entry = hit && lookup(hit.word, hit.node);
     if (!entry) return;
     const key = hit.word + "@" + hit.a;
     if (touchShown === key) return;
@@ -169,6 +182,11 @@
       state.exact = g.exact || {};
       state.lower = g.lower || {};
       state.unverified = unverifiedNote || "";
+    },
+    // { course: { exact, lower } }: each course's meanings that differ
+    // from the shared table.
+    setCourses(c) {
+      state.courses = c || {};
     },
     hide,
     visible: () => !card.hidden,
