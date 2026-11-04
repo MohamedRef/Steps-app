@@ -1,0 +1,696 @@
+schema: steps.lesson/v1
+lecture: bio.L01
+lessons:
+  - id: bio.L01.lesson1
+    title: "الـ DNA بيتلف إزاي، وإمتى بيتكلم وإمتى بيسكت؟"
+    hook: "كل الـ epigenetics في الامتحان سؤال واحد: الـ DNA ملفوف جامد ولا سايب؟"
+    minutes: 8
+    pages: [32, 33]
+    topics: [chromatin-structure, dna-methylation, histone-modifications, nucleotides]
+    goals:
+      - "تفهم ليه الـ histones بتمسك في الـ DNA"
+      - "تفرّق بين الـ methylation والـ acetylation وأثر كل واحد"
+      - "تحفظ الـ purines والـ pyrimidines وليه الـ C-G أقوى"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "مغناطيس سالب على بكرة موجبة"
+        text: |-
+          الـ DNA طويل جداً ولازم يتطبق عشان يدخل النواة. بيتلف ==مرتين== حوالين **histone octamer** فيطلع **nucleosome** (شكل «beads on a string»)، والـ **H1** بيمسك الـ linker DNA ويثبت الليفة.
+
+          ليه بيلزقوا في بعض؟ الـ DNA ==سالب== من الـ phosphate، والـ histones ==موجبة== من الـ **lysine** والـ **arginine**. سالب وموجب بيتجاذبوا.
+        page: 32
+        quote: "DNA has ⊝ charge from phosphate groups. Histones are large and have ⊕ charge from lysine and arginine."
+      - kind: figure
+        title: "سايب ولا ملفوف"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-good" x="10" y="15" width="160" height="130" rx="10"/>
+            <text x="22" y="38" class="t-sm t-b">Euchromatin</text>
+            <circle class="fg-dot-good" cx="45" cy="80" r="12"/>
+            <circle class="fg-dot-good" cx="100" cy="80" r="12"/>
+            <path class="fg-arrow" d="M20 80 L33 80 M57 80 L88 80 M112 80 L160 80"/>
+            <text x="22" y="115" class="t-sm">acetylation: loose</text>
+            <text x="22" y="133" class="t-sm t-good">transcribed</text>
+            <rect class="fg-bad" x="190" y="15" width="160" height="130" rx="10"/>
+            <text x="202" y="38" class="t-sm t-b">Heterochromatin</text>
+            <circle class="fg-dot-bad" cx="240" cy="75" r="12"/>
+            <circle class="fg-dot-bad" cx="262" cy="75" r="12"/>
+            <circle class="fg-dot-bad" cx="284" cy="75" r="12"/>
+            <circle class="fg-dot-bad" cx="306" cy="75" r="12"/>
+            <text x="202" y="115" class="t-sm">methylation: tight</text>
+            <text x="202" y="133" class="t-sm t-bad">silent</text>
+          </svg>
+        caption: "الـ euchromatin سايب وفاتح، فالـ RNA polymerase يقدر يوصله. الـ heterochromatin مضغوط ومقفول، فمحدش يقدر يقرأه."
+        alt: "Two panels. Left: euchromatin with widely spaced nucleosomes, labelled acetylation, loose, transcribed. Right: heterochromatin with tightly packed nucleosomes, labelled methylation, tight, silent."
+        page: 32
+        quote: "Condensed, appears darker on EM (labeled H in A ; Nu, nucleolus). Sterically inaccessible, thus transcriptionally inactive. ↑ methylation, ↓ acetylation."
+      - kind: explain
+        title: "Heterochromatin و Euchromatin"
+        text: |-
+          - **Heterochromatin**: مضغوط، ==أغمق== في الـ EM، مقفول فمش بيتنسخ. فيه methylation أكتر و acetylation أقل. مثال: **Barr body** (الـ X اللي اتقفل) على أطراف النواة.
+          - **Euchromatin**: سايب، أفتح، بيتنسخ. «Eu = true، truly transcribed».
+        page: 32
+        quote: "Barr bodies (inactive X chromosomes) may be visible on the periphery of nucleus."
+      - kind: reveal
+        prompt: "الـ acetylation بيشيل الشحنة الموجبة من الـ histone. ده هيعمل إيه في الـ DNA؟"
+        answer: "الـ histone يفقد الموجب ← الـ DNA السالب ما يبقاش مشدود له ← اللفة ==ترتخي== ← الـ transcription يزيد. والـ deacetylation العكس: يرجّع اللفة تتشد ← transcription يقل."
+        page: 32
+        quote: "Histone acetylation Removal of histone’s ⊕ charge → relaxed DNA coiling → ↑ transcription."
+      - kind: mnemonic
+        word: "MAD"
+        parts:
+          - { key: "M", text: "Methylation makes DNA Mute (الـ DNA methylation في الـ CpG islands، ومعظم الـ histone methylation)" }
+          - { key: "A", text: "Acetylation makes DNA Active" }
+          - { key: "D", text: "Deacetylation Deactivates DNA" }
+        hook: "الكتاب بيديك الجمل التلاتة، وأنا جمعتهم في كلمة MAD"
+        page: 32
+        quote: "Histone methylation mostly makes DNA mute."
+      - kind: explain
+        title: "الـ DNA methylation: تغيير من غير ما الحروف تتغير"
+        text: |-
+          الـ methylation بيغير ==التعبير== من غير ما يغير الـ sequence، وده قابل للرجوع. وبيكتم الجين لما يحصل في الـ promoter (**CpG islands**).
+
+          بيدخل في: aging، carcinogenesis، epigenetics، **genomic imprinting**، تكتيم الـ transposons، و **X inactivation (lyonization)**. والـ methylation المضروب له علاقة بـ ==fragile X==.
+        page: 32
+        quote: "Involved with aging, carcinogenesis, epigenetics, genomic imprinting, transposable element repression, and X chromosome inactivation (lyonization)."
+      - kind: check
+        question: "A drug inhibits histone deacetylases. What happens to the target genes?"
+        options:
+          - "Histones stay acetylated, DNA loosens, transcription rises"
+          - "Histones gain positive charge, DNA tightens, transcription falls"
+          - "CpG islands get methylated and genes go silent"
+          - "The DNA sequence changes"
+        answer: 0
+        why:
+          - "صح: الـ acetyl فاضل، الشحنة الموجبة راحت، اللفة سايبة، والجين بيتنسخ."
+          - "ده اللي بيعمله الـ deacetylation نفسه، والدوا بيمنعه."
+          - "ده DNA methylation، مش شغل الـ histone deacetylases."
+          - "الـ epigenetics كلها من غير تغيير في الـ sequence."
+        page: 32
+        quote: "Histone deacetylation Removal of acetyl groups → tightened DNA coiling → ↓ transcription."
+      - kind: explain
+        title: "الحروف نفسها: purines و pyrimidines"
+        text: |-
+          - **Nucleoside** = base + sugar. **Nucleotide** = base + sugar + ==phosphate== (nucleo-«tri»-des، 3 حاجات)، ومربوطين بـ 3′-5′ phosphodiester bond.
+          - **Purines (A, G)**: حلقتين. «Pure As Gold».
+          - **Pyrimidines (C, U, T)**: حلقة واحدة. «CUT the pyramid».
+          - الـ uracil في الـ RNA والـ thymine في الـ DNA، والـ thymine = uracil + methyl.
+        page: 33
+        quote: "Purines (A,G)—2 rings. Pyrimidines (C,U,T)—1 ring."
+      - kind: aside
+        tone: analogy
+        text: "الـ **C-G** بيتمسكوا بـ ==3== hydrogen bonds والـ A-T بـ 2 بس. يعني الـ C-G زي الـ Crazy Glue: كل ما الـ DNA فيه C-G أكتر، محتاج حرارة أعلى عشان يفك (↑ melting temperature)."
+        page: 33
+        quote: "C-G bond (3 H bonds) stronger than A-T bond (2 H bonds). ↑ C-G content → ↑ melting temperature of DNA."
+      - kind: match
+        prompt: "وصّل كل base باللي بيبقاه بعد الـ deamination"
+        pairs:
+          - ["Cytosine", "Uracil"]
+          - ["Adenine", "Hypoxanthine"]
+          - ["Guanine", "Xanthine"]
+          - ["5-methylcytosine", "Thymine"]
+        why: "الـ cytosine من غير amine بيبقى uracil، ولو كان عليه methyl أصلاً بيبقى thymine (لأن thymine = uracil + methyl)."
+        page: 33
+        quote: "Deamination reactions: Cytosine → uracil Adenine → hypoxanthine Guanine → xanthine 5-methylcytosine → thymine"
+      - kind: try
+        items: [bio.L01.002, bio.L01.005, bio.L01.010, bio.L01.019, bio.L01.023]
+    recap:
+      - "DNA سالب (phosphate) و histones موجبة (lysine و arginine)."
+      - "Heterochromatin مضغوط وساكت (Barr body). Euchromatin سايب وبيتنسخ."
+      - "Methylation = Mute، Acetylation = Active، Deacetylation = Deactivates."
+      - "Purines A و G حلقتين، pyrimidines C و U و T حلقة. C-G فيها 3 H bonds."
+    practice: [bio.L01.001, bio.L01.002, bio.L01.003, bio.L01.004, bio.L01.005, bio.L01.006, bio.L01.007, bio.L01.008, bio.L01.009, bio.L01.010, bio.L01.011, bio.L01.012, bio.L01.013, bio.L01.014, bio.L01.015, bio.L01.016, bio.L01.017, bio.L01.018, bio.L01.019, bio.L01.020, bio.L01.021, bio.L01.022, bio.L01.023, bio.L01.024, bio.L01.025]
+  - id: bio.L01.lesson2
+    title: "مصنع الـ nucleotides، والأدوية اللي بتقفله"
+    hook: "نص أدوية الـ chemo والـ immunosuppression بتضرب في نفس المصنع ده، فاحفظ الخريطة مرة"
+    minutes: 9
+    pages: [34, 35]
+    topics: [de-novo-nucleotide-synthesis, purine-salvage-deficiencies]
+    goals:
+      - "تحط كل دوا على الإنزيم بتاعه"
+      - "تفهم ليه allopurinol مع azathioprine خطر"
+      - "تفرّق بين ADA deficiency و Lesch-Nyhan"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "ليه نضرب المصنع ده؟"
+        text: |-
+          أي خلية بتتقسم بسرعة (سرطان، lymphocytes، بكتيريا، طفيل) محتاجة nucleotides كتير عشان تعمل DNA. فلو قفلنا خط الإنتاج، الخلية دي تقف.
+
+          عشان كده أدوية ==immunosuppressive و antineoplastic و antibiotic== كتير شغالة هنا.
+        page: 34
+        quote: "Various immunosuppressive, antineoplastic, and antibiotic drugs function by interfering with nucleotide synthesis"
+      - kind: figure
+        title: "خريطة المصنع"
+        svg: |-
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="20" y="20" class="t-sm t-b">Pyrimidines</text>
+            <rect class="fg-box" x="10" y="28" width="150" height="24" rx="6"/><text x="18" y="45" class="t-sm">Carbamoyl phosphate</text>
+            <line class="fg-arrow" x1="85" y1="52" x2="85" y2="74" marker-end="url(#b1a)"/>
+            <rect class="fg-box" x="10" y="76" width="150" height="24" rx="6"/><text x="18" y="93" class="t-sm">Orotic acid → UMP</text>
+            <text x="165" y="70" class="t-sm t-bad">Leflunomide</text>
+            <line class="fg-arrow" x1="85" y1="100" x2="85" y2="122" marker-end="url(#b1a)"/>
+            <rect class="fg-box" x="10" y="124" width="150" height="24" rx="6"/><text x="18" y="141" class="t-sm">dUMP</text>
+            <line class="fg-arrow" x1="85" y1="148" x2="85" y2="170" marker-end="url(#b1a)"/>
+            <rect class="fg-good" x="10" y="172" width="150" height="24" rx="6"/><text x="18" y="189" class="t-sm">dTMP</text>
+            <text x="165" y="164" class="t-sm t-bad">5-FU: thymidylate synthase</text>
+            <text x="165" y="182" class="t-sm t-bad">MTX, TMP: DHFR</text>
+            <text x="200" y="20" class="t-sm t-b">Purines</text>
+            <rect class="fg-box" x="200" y="28" width="150" height="24" rx="6"/><text x="208" y="45" class="t-sm">PRPP → IMP</text>
+            <text x="200" y="100" class="t-sm t-bad">6-MP, azathioprine</text>
+            <text x="200" y="118" class="t-sm t-bad">Mycophenolate: IMPDH</text>
+            <text x="10" y="220" class="t-sm t-bad">Hydroxyurea: ribonucleotide reductase (both)</text>
+          </svg>
+        caption: "الشمال: الـ pyrimidines من الـ carbamoyl phosphate لحد الـ dTMP. اليمين: الـ purines من الـ PRPP للـ IMP. الأحمر: الدوا وفين بيضرب."
+        alt: "Pathway map. Pyrimidines: carbamoyl phosphate to orotic acid to UMP to dUMP to dTMP, with leflunomide, 5-FU at thymidylate synthase and methotrexate and trimethoprim at DHFR. Purines: PRPP to IMP, with 6-MP, azathioprine and mycophenolate. Hydroxyurea blocks ribonucleotide reductase for both."
+        page: 34
+        quote: "Hydroxyurea: inhibits ribonucleotide reductase"
+      - kind: explain
+        title: "CPS1 ولا CPS2؟"
+        text: |-
+          الـ rate-limiting step بتاع الـ pyrimidines هو ==CPS2==. ما تلخبطهوش مع CPS1:
+          - **CPS1** = m**1**tochondria، urea cycle، في الكبد.
+          - **CPS2** = cyt**w**osol، pyrimidine synthesis، في معظم الخلايا.
+        page: 34
+        quote: "CPS1 = m1tochondria, urea cycle, found in liver CPS2 = cytwosol, pyrimidine synthesis, found in most cells"
+      - kind: table
+        title: "كل دوا وإنزيمه"
+        columns: ["Drug", "Blocks"]
+        rows:
+          - ["Leflunomide", "Dihydroorotate dehydrogenase"]
+          - ["5-FU, capecitabine", "Thymidylate synthase"]
+          - ["Mycophenolate, ribavirin", "IMP dehydrogenase"]
+          - ["Hydroxyurea", "Ribonucleotide reductase"]
+          - ["MTX, TMP, pyrimethamine", "Dihydrofolate reductase"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+        page: 34
+        quote: "Mycophenolate and ribavirin: inhibit inosine monophosphate dehydrogenase"
+      - kind: aside
+        tone: tip
+        text: "التلاتة اللي بيضربوا الـ DHFR كل واحد في كائن: **methotrexate** في الإنسان، **trimethoprim** في البكتيريا، **pyrimethamine** في الـ protozoa. نفس الإنزيم، 3 أهداف."
+        page: 34
+        quote: "inhibit dihydrofolate reductase (↓ dTMP) in humans (methotrexate), bacteria (trimethoprim), and protozoa (pyrimethamine)"
+      - kind: reveal
+        prompt: "مريض على azathioprine وجاله gout فاداله allopurinol. ليه ده ممكن يموّته؟"
+        answer: "الـ azathioprine بيتحول لـ 6-MP. الـ xanthine oxidase عادةً بيكسّر جزء منه. لو قفلناه بالـ allopurinol، الـ 6-MP يتحول أكتر لـ ==6-TGNs== (سامة) ← immunosuppression شديد (leukopenia). الحل: قلل الجرعة وتابع الـ CBC."
+        page: 34
+        quote: "Concurrent use of xanthine oxidase inhibitors (eg, allopurinol) ↑ 6-MP conversion → ↑ 6-TGN levels (toxic) → ↑ risk of severe immunosuppression; reduce dose and monitor CBC."
+      - kind: check
+        question: "A woman with RA starts a drug that blocks dihydroorotate dehydrogenase. Which drug?"
+        options: ["Leflunomide", "Methotrexate", "Mycophenolate", "Hydroxyurea"]
+        answer: 0
+        why:
+          - "صح: leflunomide بيضرب الـ pyrimidine synthesis عند الـ dihydroorotate dehydrogenase."
+          - "Methotrexate بيضرب الـ DHFR."
+          - "Mycophenolate بيضرب الـ IMP dehydrogenase (purines)."
+          - "Hydroxyurea بيضرب الـ ribonucleotide reductase."
+        page: 34
+        quote: "Leflunomide: inhibits dihydroorotate dehydrogenase"
+      - kind: explain
+        title: "الـ salvage: إعادة التدوير"
+        text: |-
+          الخلية مش بتعمل كل الـ purines من الأول؛ بتعيد تدوير الـ bases القديمة.
+
+          - **ADA deficiency**: الـ adenosine ما بيتكسرش ← ==dATP يعلى== ← يقفل الـ ribonucleotide reductase ← مفيش DNA precursors ← الـ lymphocytes تموت ← **SCID** (autosomal recessive).
+          - **Lesch-Nyhan**: الـ ==HGPRT== بايظ ← الـ guanine والـ hypoxanthine ما بيترجعوش ← الخلية تعوّض بإنتاج purines أكتر ← uric acid يعلى. X-linked recessive.
+        page: 35
+        quote: "↓ ADA → ↑ dATP → ↓ ribonucleotide reductase activity → ↓ DNA precursors in cells → ↓ lymphocytes."
+      - kind: mnemonic
+        word: "HGPRT"
+        parts:
+          - { key: "H", text: "Hyperuricemia" }
+          - { key: "G", text: "Gout" }
+          - { key: "P", text: "Pissed off: aggression و self-mutilation" }
+          - { key: "R", text: "Red/orange crystals in urine (الرملة البرتقاني في البامبرز)" }
+          - { key: "T", text: "Tense muscles: dystonia" }
+        hook: "اسم الإنزيم نفسه هو الأعراض (mnemonic الكتاب)"
+        page: 35
+        quote: "HGPRT: Hyperuricemia Gout Pissed off (aggression, self-mutilation) Red/orange crystals in urine Tense muscles (dystonia)"
+      - kind: check
+        question: "A 2-year-old boy bites his fingers, has dystonia and orange sand in his diaper. Treatment?"
+        options: ["Allopurinol or febuxostat", "Enzyme replacement with ADA", "Leflunomide", "Hydroxyurea"]
+        answer: 0
+        why:
+          - "صح: Lesch-Nyhan، والعلاج allopurinol أو febuxostat عشان الـ uric acid."
+          - "ده للـ ADA deficiency (SCID)، مش Lesch-Nyhan."
+          - "Leflunomide immunosuppressant، مالوش دعوة."
+          - "Hydroxyurea بيقفل الـ ribonucleotide reductase."
+        page: 35
+        quote: "Treatment: allopurinol, febuxostat."
+      - kind: try
+        items: [bio.L01.028, bio.L01.031, bio.L01.035, bio.L01.039, bio.L01.026]
+    recap:
+      - "CPS2 = cytosol و pyrimidines، CPS1 = mitochondria و urea cycle."
+      - "Leflunomide، 5-FU، 6-MP، mycophenolate، hydroxyurea، MTX: كل واحد وإنزيمه."
+      - "Allopurinol + azathioprine ← 6-TGNs سامة ← قلل الجرعة."
+      - "ADA ← dATP ← SCID. HGPRT ← Lesch-Nyhan (X-linked)."
+    practice: [bio.L01.026, bio.L01.027, bio.L01.028, bio.L01.029, bio.L01.030, bio.L01.031, bio.L01.032, bio.L01.033, bio.L01.034, bio.L01.035, bio.L01.036, bio.L01.037, bio.L01.038, bio.L01.039, bio.L01.040, bio.L01.041, bio.L01.042]
+  - id: bio.L01.lesson3
+    title: "نسخ الـ DNA وتصليحه"
+    hook: "كل إنزيم هنا له دوا أو مرض، فالسؤال دايماً: مين بيعمل إيه؟"
+    minutes: 9
+    pages: [36, 37]
+    topics: [dna-replication, dna-repair]
+    goals:
+      - "ترتب شغل الإنزيمات على الـ replication fork"
+      - "تربط كل topoisomerase بالدوا بتاعه"
+      - "تربط كل نوع repair بالمرض بتاعه"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الاتجاه دايماً 5′ ← 3′"
+        text: |-
+          الـ DNA بيتعمل في اتجاه واحد بس: ==5′ → 3′== («5ynth3sis»). عشان كده:
+          - الـ **leading strand** بيتعمل على طول (continuous).
+          - الـ **lagging strand** بيتعمل حتت (==Okazaki fragments==).
+
+          والنسخ **semiconservative**: كل DNA جديد فيه strand قديم و strand جديد.
+        page: 36
+        quote: "Occurs in 5′ → 3′ direction (“5ynth3sis”) in continuous and discontinuous (Okazaki fragment) fashion. Semiconservative."
+      - kind: order
+        prompt: "رتّب شغل الإنزيمات في الـ prokaryotes على الـ fork"
+        steps:
+          - "Helicase unwinds the template"
+          - "Single-stranded binding proteins keep the strands apart"
+          - "Primase lays an RNA primer"
+          - "DNA polymerase III elongates from the primer"
+          - "DNA polymerase I removes the primer and fills in DNA"
+          - "DNA ligase joins the Okazaki fragments"
+        why: "لازم تفتح الأول (helicase)، تمسك الفتحة (SSB)، تحط نقطة بداية (primer)، تبني (pol III)، تشيل الـ primer (pol I)، وتلحم (ligase)."
+        page: 36
+        quote: "Makes RNA primer for DNA polymerase III to initiate replication."
+      - kind: figure
+        title: "الـ replication fork"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b1b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <line class="fg-ink" x1="10" y1="80" x2="140" y2="80" stroke-width="4"/>
+            <line class="fg-ink" x1="140" y1="80" x2="340" y2="30" stroke-width="2"/>
+            <line class="fg-ink" x1="140" y1="80" x2="340" y2="130" stroke-width="2"/>
+            <circle class="fg-dot-acc" cx="140" cy="80" r="9"/>
+            <text x="100" y="105" class="t-sm">Helicase</text>
+            <line class="fg-arrow-acc" x1="330" y1="42" x2="170" y2="82" marker-end="url(#b1b)"/>
+            <text x="230" y="20" class="t-sm t-acc">Leading (continuous)</text>
+            <line class="fg-arrow-acc" x1="190" y1="102" x2="240" y2="114" marker-end="url(#b1b)"/>
+            <line class="fg-arrow-acc" x1="255" y1="118" x2="305" y2="130" marker-end="url(#b1b)"/>
+            <text x="200" y="155" class="t-sm t-acc">Lagging (Okazaki fragments)</text>
+            <text x="10" y="60" class="t-sm t-mut">Topoisomerase ahead</text>
+          </svg>
+        caption: "الـ helicase بيفتح الـ fork. الـ leading strand ماشي ورا الفتحة على طول، والـ lagging strand بيتبني حتت عكس اتجاه الفتح، وبعدين الـ ligase يلحمهم."
+        alt: "Replication fork: helicase at the fork, the leading strand synthesized continuously toward the fork, the lagging strand synthesized as Okazaki fragments away from it, and topoisomerase working ahead of the fork."
+        page: 36
+        quote: "Y-shaped region along DNA template where leading and lagging strands are synthesized."
+      - kind: explain
+        title: "Topoisomerases: فك العُقد"
+        text: |-
+          لما الـ helicase يفتح، الـ DNA قدامه بيتلف زيادة (supercoils). الـ topoisomerase بيقطع ويلحم عشان يفك اللفة:
+          - **TOP I**: قطع في strand ==واحد== ← irinotecan و topotecan («tecone»).
+          - **TOP II**: قطع في الـ ==اتنين== ← etoposide و teniposide («bothside»).
+          - في البكتيريا: الـ **fluoroquinolones** بتضرب TOP II (DNA gyrase) و TOP IV.
+        page: 36
+        quote: "In eukaryotes: irinotecan/topotecan inhibit TOP I (“tecone”); etoposide/teniposide inhibit TOP II (“bothside”). In prokaryotes: fluoroquinolones inhibit TOP II (DNA gyrase) and TOP IV."
+      - kind: check
+        question: "Which enzyme is deficient in Bloom syndrome?"
+        options: ["Helicase", "Telomerase", "Primase", "DNA ligase"]
+        answer: 0
+        why:
+          - "صح: Bloom syndrome = طفرة في الـ BLM gene، وده helicase. «Helicase halves DNA»."
+          - "الـ telomerase بيقل في الـ aging والـ progeria، مش Bloom."
+          - "الـ primase بيعمل الـ RNA primer."
+          - "الـ ligase بيلحم الـ Okazaki fragments."
+        page: 36
+        quote: "Helicase C Unwinds DNA template at replication fork. Helicase halves DNA. Deficient in Bloom syndrome (BLM gene mutation)."
+      - kind: explain
+        title: "Telomerase: بيحمي الأطراف"
+        text: |-
+          كل مرة الـ DNA بيتنسخ، طرف الكروموسوم بيقصر شوية. الـ **telomerase** (reverse transcriptase، موجود في الـ eukaryotes بس) بيضيف ==TTAGGG== على الـ 3′ end عشان يعوّض.
+
+          بيزيد في الـ progenitor cells وفي ==السرطان== كتير، وبيقل في الـ aging والـ progeria. «Telomerase TAGs for Greatness and Glory».
+        page: 36
+        quote: "Upregulated in progenitor cells and also often in cancer; downregulated in aging and progeria."
+      - kind: explain
+        title: "أنواع التصليح"
+        text: |-
+          **Single strand** (في strand تاني سليم نقرأ منه):
+          - **Nucleotide excision**: بيشيل حتة كاملة فيها تشويه كبير زي ==pyrimidine dimers== (من الـ UV). في G1. لو بايظ: **xeroderma pigmentosum**.
+          - **Base excision**: بيشيل base واحدة بايظة (deamination، oxidation، radiation، alkylation). طول الـ cycle. «GEL Please».
+          - **Mismatch repair**: بيصلح غلطات النسخ في الـ strand الجديد. في S. لو بايظ: ==Lynch syndrome==.
+
+          **Double strand**: homologous recombination (دقيق، BRCA1/2 و Fanconi) أو nonhomologous end joining (بيلزق الطرفين وممكن يضيع حتة).
+        page: 37
+        quote: "Occurs predominantly in S phase of cell cycle. Defective in Lynch syndrome (hereditary nonpolyposis colorectal cancer [HNPCC])."
+      - kind: mnemonic
+        word: "GELP"
+        parts:
+          - { key: "G", text: "Glycosylase يشيل الـ base البايظة ويعمل AP site" }
+          - { key: "E", text: "AP-Endonuclease يقطع الـ 5′" }
+          - { key: "L", text: "AP-Lyase يقطع الـ 3′" }
+          - { key: "P", text: "Polymerase-β يملا الفراغ، والـ ligase يقفل" }
+        hook: "الكتاب: «GEL Please»"
+        page: 37
+        quote: "Base-specific Glycosylase removes altered base and creates AP (apurinic/apyrimidinic) site. AP-Endonuclease cleaves 5’ end, removing one or more nucleotides. AP-Lyase cleaves 3’ end. DNA Polymerase-β fills the gap. DNA ligase seals it."
+      - kind: sort
+        prompt: "حط كل مرض تحت نوع التصليح البايظ فيه"
+        bins: ["Nucleotide excision", "Mismatch", "Homologous recombination"]
+        cards:
+          - { text: "Xeroderma pigmentosum", bin: 0 }
+          - { text: "Lynch syndrome (HNPCC)", bin: 1 }
+          - { text: "BRCA1 breast/ovarian cancer", bin: 2 }
+          - { text: "Some Fanconi anemia", bin: 2 }
+          - { text: "Can't repair UV thymine dimers", bin: 0 }
+        why: "UV dimers = nucleotide excision (XP). أورام القولون مع microsatellite instability = mismatch (Lynch). BRCA و Fanconi = homologous recombination."
+        page: 37
+        quote: "Defective in breast/ovarian cancers with BRCA1 or BRCA2 mutations and in certain types of Fanconi anemia."
+      - kind: try
+        items: [bio.L01.051, bio.L01.053, bio.L01.055, bio.L01.057, bio.L01.059]
+    recap:
+      - "5′ ← 3′: leading continuous، lagging Okazaki."
+      - "TOP I: irinotecan/topotecan. TOP II: etoposide/teniposide. Fluoroquinolones: gyrase و TOP IV."
+      - "Helicase بايظ في Bloom. Telomerase يضيف TTAGGG ويعلى في السرطان."
+      - "NER (G1) ← XP. Mismatch (S) ← Lynch. HR ← BRCA و Fanconi."
+    practice: [bio.L01.047, bio.L01.048, bio.L01.049, bio.L01.050, bio.L01.051, bio.L01.052, bio.L01.053, bio.L01.054, bio.L01.055, bio.L01.056, bio.L01.057, bio.L01.058, bio.L01.059, bio.L01.060, bio.L01.061, bio.L01.062]
+  - id: bio.L01.lesson4
+    title: "الطفرات، والجين بيتشغل ويتقفل إزاي"
+    hook: "من حرف واحد بيتغير لحد بكتيريا بتقرر تاكل lactose: كله منطق"
+    minutes: 9
+    pages: [38, 40]
+    topics: [dna-mutations, lac-operon, eukaryotic-gene, gene-expression-regulation]
+    goals:
+      - "ترتب الطفرات من الأخف للأتقل بالأمثلة"
+      - "تحل أي سؤال lac operon بجدول واحد"
+      - "تعرف الـ promoter والـ enhancer والـ silencer"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الطفرة بتأذي قد إيه؟"
+        text: |-
+          الترتيب: ==silent << missense < nonsense < frameshift==.
+          - **Silent**: نفس الـ amino acid (غالباً الحرف التالت، الـ wobble).
+          - **Missense**: amino acid تاني. مثال: **sickle cell** (glutamic acid ← valine).
+          - **Nonsense**: stop codon بدري ← بروتين مش شغال. «Stop the nonsense!».
+          - **Frameshift**: إضافة أو حذف مش من مضاعفات الـ 3 ← كل اللي بعده يتقرا غلط. أمثلة: **Duchenne** و **Tay-Sachs**.
+        page: 38
+        quote: "Degree of change: silent << missense < nonsense < frameshift."
+      - kind: aside
+        tone: analogy
+        text: "تخيّل جملة كل كلمة فيها 3 حروف: «THE CAT ATE THE RAT». لو غيرت حرف (missense) كلمة واحدة بتبوظ. لو شلت حرف واحد (frameshift) الجملة كلها بعدها بتبقى كلام فارغ: «THE ATA TET HER AT»."
+        page: 38
+        quote: "Deletion or insertion of any number of nucleotides not divisible by 3 (or if divisible by 3 split across adjacent codons) → misreading of all nucleotides downstream."
+      - kind: explain
+        title: "Transition و transversion، و splice site، و slipped strand"
+        text: |-
+          - **Transition**: purine ← purine أو pyrimidine ← pyrimidine. **Transversion**: من نوع للتاني.
+          - **Splice site**: intron بيفضل في الـ mRNA. أمثلة: بعض الـ β-thalassemia، Gaucher، Marfan.
+          - **Slipped strand mispairing**: الـ polymerase بيتزحلق على repeats ويزود، فالـ repeats تكبر من جيل لجيل (==anticipation==)، زي الـ CAG في **Huntington**.
+        page: 38
+        quote: "Anticipation occurs secondary to insertion of increased repeats across generations. Example: CAG repeat expansion in Huntington disease."
+      - kind: check
+        question: "Sickle cell disease is caused by which type of mutation?"
+        options: ["Missense", "Nonsense", "Frameshift", "Silent"]
+        answer: 0
+        why:
+          - "صح: glutamic acid اتغير لـ valine، amino acid بدل amino acid."
+          - "Nonsense كان هيعمل stop codon."
+          - "Frameshift زي Duchenne و Tay-Sachs."
+          - "Silent ما بيغيرش الـ amino acid."
+        page: 38
+        quote: "Examples: sickle cell disease (substitution of glutamic acid with valine)."
+      - kind: explain
+        title: "الـ lac operon: البكتيريا بتختار أكلها"
+        text: |-
+          الـ E coli بتحب الـ ==glucose==. لو مفيش glucose وفيه lactose، بتشغل جينات الـ lactose. محتاجة شرطين:
+          - **Glucose قليل** ← adenylate cyclase يزيد ← **cAMP** يعلى ← ينشّط الـ ==CAP== ← transcription يزيد (دوّاسة البنزين).
+          - **Lactose موجود** ← يشيل الـ **repressor** من الـ operator (يشيل الفرامل).
+        page: 39
+        quote: "Low glucose → ↑ adenylate cyclase activity → ↑ generation of cAMP from ATP → activation of catabolite activator protein (CAP) → ↑ transcription."
+      - kind: table
+        title: "الـ 4 حالات"
+        columns: ["Glucose", "Lactose", "Lac genes"]
+        rows:
+          - ["Low", "Available", "Strongly expressed"]
+          - ["High", "Available", "Very low (basal)"]
+          - ["High", "Unavailable", "Not expressed"]
+          - ["Low", "Unavailable", "Not expressed"]
+        hide: [[0, 2], [1, 2], [2, 2], [3, 2]]
+        page: 39
+        quote: "Lac genes strongly expressed Low glucose Lactose available High glucose Lactose unavailable High glucose Lactose available Low glucose Lactose unavailable"
+      - kind: aside
+        tone: trap
+        text: "لو مفيش lactose، الـ repressor قاعد على الـ operator، فمفيش expression حتى لو الـ glucose قليل والـ CAP شغال. الفرامل بتغلب البنزين."
+        page: 39
+        quote: "High lactose → unbinds repressor protein from repressor/operator site → ↑ transcription."
+      - kind: explain
+        title: "الجين في الـ eukaryotes"
+        text: |-
+          - **Promoter**: قبل الجين (upstream)، غني بـ AT (==TATA== و CAAT boxes). هنا الـ RNA polymerase II يقعد. طفرة فيه ← transcription يقل جامد.
+          - **Enhancer**: بيقعد عليه activators ← يزود. **Silencer**: بيقعد عليه repressors ← يقلل. الاتنين ممكن يبقوا قريبين أو بعيد أو جوه intron.
+          - **Epigenetics**: تغيير وراثي في التعبير من غير تغيير الـ sequence: DNA methylation، histone modification، noncoding RNA.
+        page: 40
+        quote: "Promoter mutation commonly results in dramatic ↓ in level of gene transcription."
+      - kind: check
+        question: "A point mutation in the TATA box of a globin gene most likely causes:"
+        options:
+          - "Much less mRNA of that gene"
+          - "Normal mRNA but no protein"
+          - "A longer protein"
+          - "A retained intron"
+        answer: 0
+        why:
+          - "صح: الـ TATA box جزء من الـ promoter، وطفرته بتقلل الـ transcription جامد."
+          - "ده يحصل لو المشكلة في الـ translation (زي الـ Kozak)."
+          - "ده ممكن مع frameshift أو stop codon ضايع."
+          - "ده splice site mutation."
+        page: 40
+        quote: "Promoter mutation commonly results in dramatic ↓ in level of gene transcription."
+      - kind: try
+        items: [bio.L01.063, bio.L01.065, bio.L01.071, bio.L01.076, bio.L01.078]
+    recap:
+      - "Silent << missense (sickle) < nonsense < frameshift (Duchenne، Tay-Sachs)."
+      - "Slipped strand ← anticipation (CAG في Huntington)."
+      - "Lac operon: glucose قليل ← cAMP و CAP (بنزين)، lactose ← يشيل الـ repressor (فرامل)."
+      - "Promoter (TATA) طفرته تقلل الـ transcription. Enhancer يزود، silencer يقلل."
+    practice: [bio.L01.063, bio.L01.064, bio.L01.065, bio.L01.066, bio.L01.067, bio.L01.068, bio.L01.069, bio.L01.070, bio.L01.071, bio.L01.072, bio.L01.073, bio.L01.074, bio.L01.075, bio.L01.076, bio.L01.077, bio.L01.078, bio.L01.079]
+  - id: bio.L01.lesson5
+    title: "من hnRNA لـ mRNA: الطاقية والديل والقص"
+    hook: "الـ mRNA ما بيخرجش من النواة غير لما يلبس ويتظبط. وفي الطريق: مشروم سام، وطفل floppy، و SLE"
+    minutes: 8
+    pages: [40, 41]
+    topics: [rna-processing, rna-polymerases, introns-exons, pre-mrna-splicing]
+    goals:
+      - "تعرف الـ 3 تعديلات في النواة"
+      - "تفرّق بين RNA polymerase I و II و III والسموم بتاعتهم"
+      - "تربط الـ splicing بـ SMA و SLE"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "3 تعديلات قبل الخروج"
+        text: |-
+          أول نسخة اسمها **hnRNA**. في النواة بيحصلها 3 حاجات:
+          - **5′ cap**: 7-methylguanosine (وهو بيتنسخ).
+          - **Poly-A tail**: حوالي 200 A على الـ 3′ end. والـ poly-A polymerase ==مش محتاج template==.
+          - **Splicing**: شيل الـ introns.
+
+          بعدها يبقى mRNA ويخرج للـ cytosol.
+        page: 40
+        quote: "Capping of 5′ end (addition of 7-methylguanosine cap; cotranscriptional) ▘ Polyadenylation of 3′ end (∼200 A’s → poly-A tail; posttranscriptional) ▘ Splicing out of introns (posttranscriptional)"
+      - kind: explain
+        title: "إشارات صغيرة، أثرها كبير"
+        text: |-
+          - **AAUAAA**: إشارة الـ polyadenylation. طفرتها ← الـ mRNA يتكسر بدري قبل ما يتترجم.
+          - **Kozak sequence**: مكان البداية في معظم الـ mRNA، بيساعد الـ small subunit يمسك. طفرته ← الـ translation يقل (والـ mRNA نفسه طبيعي).
+          - **P-bodies** في الـ cytoplasm: ==quality control== للـ mRNA (exonucleases، decapping، microRNAs): يكسّر أو يخزّن.
+        page: 40
+        quote: "AAUAAA = polyadenylation signal. Mutation in polyadenylation signal → early degradation prior to translation."
+      - kind: mnemonic
+        word: "RMT"
+        parts:
+          - { key: "R", text: "RNA polymerase I: rRNA (rampant)، في الـ nucleolus بس" }
+          - { key: "M", text: "RNA polymerase II: mRNA (massive)، و miRNA و snRNA" }
+          - { key: "T", text: "RNA polymerase III: tRNA (tiny) و 5S rRNA" }
+        hook: "I و II و III بنفس ترتيب استخدامهم في عمل البروتين: rRNA، mRNA، tRNA"
+        page: 40
+        quote: "I, II, and III are numbered in the same order that their products are used in protein synthesis: rRNA, mRNA, then tRNA."
+      - kind: figure
+        title: "مين بيقفل مين"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="10" y="15" width="100" height="40" rx="8"/><text x="22" y="40" class="t-sm">RNA pol II</text>
+            <rect class="fg-box" x="130" y="15" width="100" height="40" rx="8"/><text x="138" y="40" class="t-sm">All RNA pols</text>
+            <rect class="fg-box" x="250" y="15" width="100" height="40" rx="8"/><text x="256" y="40" class="t-sm">Bacterial pol</text>
+            <rect class="fg-bad" x="10" y="85" width="100" height="40" rx="8"/><text x="20" y="110" class="t-sm">α-amanitin</text>
+            <rect class="fg-bad" x="130" y="85" width="100" height="40" rx="8"/><text x="134" y="110" class="t-sm">Dactinomycin</text>
+            <rect class="fg-bad" x="250" y="85" width="100" height="40" rx="8"/><text x="264" y="110" class="t-sm">Rifampin</text>
+            <line class="fg-arrow-bad" x1="60" y1="85" x2="60" y2="55"/>
+            <line class="fg-arrow-bad" x1="180" y1="85" x2="180" y2="55"/>
+            <line class="fg-arrow-bad" x1="300" y1="85" x2="300" y2="55"/>
+          </svg>
+        caption: "الـ α-amanitin (مشروم death cap) بيقفل الـ RNA polymerase II في الإنسان. الـ dactinomycin بيقفل الاتنين، بكتيريا وإنسان. الـ rifamycins بتقفل بتاع البكتيريا بس."
+        alt: "Three inhibitors and their targets: alpha-amanitin blocks RNA polymerase II, dactinomycin blocks RNA polymerases of both prokaryotes and eukaryotes, rifampin blocks bacterial RNA polymerase."
+        page: 40
+        quote: "Rifamycins (rifampin, rifabutin) inhibit DNA- dependent RNA polymerase in prokaryotes."
+      - kind: check
+        question: "A man ate wild mushrooms; he has bloody diarrhea and then severe hepatotoxicity. Which RNA is not being made?"
+        options: ["mRNA", "rRNA", "tRNA", "Bacterial RNA"]
+        answer: 0
+        why:
+          - "صح: الـ α-amanitin بيقفل الـ RNA polymerase II اللي بيعمل الـ mRNA؛ dysentery و hepatotoxicity."
+          - "الـ rRNA من الـ polymerase I."
+          - "الـ tRNA من الـ polymerase III."
+          - "ده شغل الـ rifamycins."
+        page: 40
+        quote: "α-amanitin, found in Amanita phalloides (death cap mushrooms), inhibits RNA polymerase II. Causes dysentery and severe hepatotoxicity if ingested."
+      - kind: explain
+        title: "Introns و exons والـ alternative splicing"
+        text: |-
+          - **Exons**: فيها الكود؛ بتخرج وبتتعبّر (==ex==it و ==ex==pressed).
+          - **Introns**: ما بتكوّدش، بس بتنظم التعبير، وبتفضل في النواة.
+
+          الـ **alternative splicing**: نفس الـ hnRNA يتقص بطرق مختلفة فيدّي بروتينات مختلفة. أمثلة الكتاب: Ig على السطح ولا Ig متفرز، tropomyosin variants، dopamine receptors، وهروب الأورام من المناعة.
+        page: 41
+        quote: "Introns are intervening sequences and stay in the nucleus, whereas exons exit and are expressed."
+      - kind: order
+        prompt: "رتّب خطوات الـ splicing"
+        steps:
+          - "Primary transcript + snRNPs form the spliceosome"
+          - "Cleavage at the 5′ splice site (GU) makes a lariat"
+          - "Cleavage at the 3′ splice site (AG) releases the lariat"
+          - "The 2 exons are joined"
+        why: "الـ intron بيبدأ بـ GU وبيخلص بـ AG، والـ spliceosome بيقص من الأول ويعمل لفة (lariat)، وبعدين يقص من الآخر ويرمي اللفة."
+        page: 41
+        quote: "Cleavage at 5′ splice site; lariat- shaped (loop) intermediate is generated. Cleavage at 3′ splice site; lariat is released to precisely remove intron and join 2 exons."
+      - kind: explain
+        title: "لما الـ spliceosome يبوظ"
+        text: |-
+          - **Spinal muscular atrophy**: ==SMN protein== قليل ← تجميع الـ snRNPs يبوظ ← الـ anterior horn cells تموت ← ضعف متماثل و hypotonia («floppy baby»).
+          - الـ snRNPs = snRNA + بروتينات (زي **Smith [Sm]**). الـ **anti-U1 snRNP** antibodies بتيجي مع SLE و mixed connective tissue disease.
+        page: 41
+        quote: "in spinal muscular atrophy, snRNP assembly is affected due to ↓ SMN protein → congenital degeneration of anterior horns of spinal cord → symmetric weakness (hypotonia, or “floppy baby syndrome”)."
+      - kind: check
+        question: "Anti-U1 snRNP antibodies are most associated with:"
+        options: ["Mixed connective tissue disease", "Lynch syndrome", "Bloom syndrome", "Fragile X syndrome"]
+        answer: 0
+        why:
+          - "صح: anti-U1 snRNP مع MCTD و SLE وأمراض روماتيزمية تانية."
+          - "Lynch = mismatch repair."
+          - "Bloom = helicase."
+          - "Fragile X = DNA methylation."
+        page: 41
+        quote: "Anti-U1 snRNP antibodies are associated with SLE, mixed connective tissue disease, other rheumatic diseases."
+      - kind: try
+        items: [bio.L01.080, bio.L01.083, bio.L01.085, bio.L01.087, bio.L01.095]
+    recap:
+      - "hnRNA ← cap و poly-A tail و splicing ← mRNA."
+      - "AAUAAA طفرتها ← تكسير بدري. Kozak طفرتها ← translation يقل."
+      - "Pol I rRNA، pol II mRNA (α-amanitin)، pol III tRNA. Rifamycins للبكتيريا، dactinomycin للاتنين."
+      - "Intron: GU…AG. SMA = SMN قليل. Anti-U1 snRNP = SLE و MCTD."
+    practice: [bio.L01.080, bio.L01.081, bio.L01.082, bio.L01.083, bio.L01.084, bio.L01.085, bio.L01.086, bio.L01.087, bio.L01.088, bio.L01.089, bio.L01.090, bio.L01.091, bio.L01.092, bio.L01.093, bio.L01.094, bio.L01.095, bio.L01.096]
+  - id: bio.L01.lesson6
+    title: "الكود والـ tRNA والريبوسوم: البروتين بيتعمل"
+    hook: "AUG بيبدأ، و UGA بيقول U Go Away، والـ diphtheria بتقفل الخط في النص"
+    minutes: 9
+    pages: [35, 43]
+    topics: [genetic-code, trna, start-stop-codons, protein-synthesis, posttranslational-modifications]
+    goals:
+      - "تعرف صفات الـ genetic code والاستثناءات"
+      - "تفهم الـ tRNA بيتشحن إزاي وليه الـ mischarging خطر"
+      - "تمشي مع الريبوسوم من الـ initiation للـ termination"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "صفات الكود"
+        text: |-
+          - **Unambiguous**: كل codon = amino acid واحد بس.
+          - **Degenerate**: معظم الـ amino acids لها أكتر من codon، والحرف التالت بيتهز (==wobble==). الاستثناء: methionine (AUG) و tryptophan (UGG) لهم codon واحد.
+          - **Commaless، nonoverlapping**: بيتقرا متصل من نقطة ثابتة (إلا بعض الفيروسات).
+          - **Universal**: ثابت عبر التطور (استثناءات نادرة زي الـ mitochondria).
+        page: 35
+        quote: "Exceptions: methionine (AUG) and tryptophan (UGG) are encoded by only 1 codon."
+      - kind: explain
+        title: "الـ tRNA: الشيّال"
+        text: |-
+          - كل الـ tRNAs في آخرها ==CCA== عند الـ 3′، والـ amino acid بيتربط هناك. «CCA Can Carry Amino acids».
+          - **T-arm** (TΨC): يمسك في الريبوسوم (Tethers).
+          - **D-arm** (dihydrouridine): الـ synthetase الصح يتعرف عليه (Detection).
+        page: 42
+        quote: "T-arm: contains the TΨC (ribothymidine, pseudouridine, cytidine) sequence necessary for tRNA ribosome binding. T-arm Tethers tRNA molecule to ribosome."
+      - kind: reveal
+        prompt: "لو الـ tRNA شال amino acid غلط، الريبوسوم هيكتشفه؟"
+        answer: "لأ. الـ tRNA بيقرا الـ codon بالـ anticodon بتاعه، مش بالـ amino acid. فالـ mischarged tRNA بيحط ==الـ amino acid الغلط== في المكان العادي. الفحص الوحيد بيحصل عند الـ **aminoacyl-tRNA synthetase** (قبل وبعد الربط، وبيكسر الربطة لو غلط)."
+        page: 42
+        quote: "If an incorrect amino acid is attached, the bond is hydrolyzed. A mischarged tRNA reads the usual codon but inserts the wrong amino acid."
+      - kind: explain
+        title: "البداية والنهاية"
+        text: |-
+          - **AUG** («inAUGurates»): في الـ eukaryotes = methionine. في الـ prokaryotes = ==fMet==، والـ fMet بيجذب الـ neutrophils (chemotaxis).
+          - **Stop**: UGA (U Go Away)، UAA (U Are Away)، UAG (U Are Gone)، والـ release factors بتتعرف عليهم.
+        page: 42
+        quote: "Codes for N-formylmethionine (fMet). fMet stimulates neutrophil chemotaxis."
+      - kind: figure
+        title: "الريبوسوم: going APE"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b1c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="40" y="20" width="270" height="70" rx="30"/>
+            <rect class="fg-thin" x="70" y="40" width="60" height="40" rx="6"/><text x="95" y="65" class="t-lg t-b">E</text>
+            <rect class="fg-acc" x="145" y="40" width="60" height="40" rx="6"/><text x="168" y="65" class="t-lg t-b">P</text>
+            <rect class="fg-good" x="220" y="40" width="60" height="40" rx="6"/><text x="243" y="65" class="t-lg t-b">A</text>
+            <line class="fg-ink" x1="10" y1="105" x2="350" y2="105" stroke-width="3"/>
+            <text x="10" y="125" class="t-sm">5′ mRNA</text>
+            <text x="290" y="125" class="t-sm">3′</text>
+            <line class="fg-arrow-acc" x1="150" y1="138" x2="250" y2="138" marker-end="url(#b1c)"/>
+            <text x="20" y="145" class="t-sm t-acc">moves 3 nt</text>
+          </svg>
+        caption: "الـ tRNA الجديد بيدخل الـ A، السلسلة اللي بتكبر في الـ P، والـ tRNA الفاضي بيخرج من الـ E. والريبوسوم بيمشي 3 nucleotides ناحية الـ 3′."
+        alt: "Ribosome with three sites, E, P and A, from left to right over an mRNA running 5 prime to 3 prime; an arrow shows the ribosome moving 3 nucleotides toward the 3 prime end."
+        page: 43
+        quote: "Think of “going APE”: A site = incoming Aminoacyl-tRNA. P site = accommodates growing Peptide. E site = holds Empty tRNA as it Exits."
+      - kind: explain
+        title: "خطوات الـ translation"
+        text: |-
+          - **Initiation**: الـ eIFs يتعرفوا على الـ 5′ cap، يجمّعوا الـ 40S مع الـ initiator tRNA، وبعدين الـ 60S يركب (GTP).
+          - **Elongation**: الـ aminoacyl-tRNA يدخل الـ A (إلا الـ initiator بيدخل الـ P)، الـ ==rRNA== (ribozyme) يعمل الـ peptide bond، والريبوسوم يتحرك (translocation).
+          - **Termination**: الـ eRFs يتعرفوا على الـ stop codon (GTP).
+
+          eukaryotes: 40S + 60S = 80S (even). prokaryotes: 30S + 50S = 70S (prime). والطاقة: ATP للشحن، GTP للمسك والحركة.
+        page: 43
+        quote: "Aminoacyl-tRNA binds to A site (except for initiator methionine, which binds the P site), requires an elongation factor and GTP."
+      - kind: check
+        question: "Diphtheria toxin and Pseudomonas exotoxin stop protein synthesis by targeting:"
+        options: ["Elongation factors", "Release factors", "The 5′ cap", "Aminoacyl-tRNA synthetase"]
+        answer: 0
+        why:
+          - "صح: الـ elongation factors هدف السموم البكتيرية دي."
+          - "الـ release factors في الـ termination."
+          - "الـ cap بتتعرف عليه الـ eIFs."
+          - "الـ synthetase بيشحن الـ tRNA ومش هدفهم."
+        page: 43
+        quote: "Elongation factors are targets of bacterial toxins (eg, Diphtheria, Pseudomonas)."
+      - kind: explain
+        title: "بعد ما البروتين يخلص"
+        text: |-
+          - **Trimming**: شيل propeptide من zymogen (==trypsinogen ← trypsin==).
+          - **Covalent alterations**: phosphorylation، glycosylation، hydroxylation، methylation، acetylation، ubiquitination.
+          - **Chaperones**: بتساعد البروتين يتطبق صح. الـ heat shock proteins (HSP60) بتزيد مع الحرارة والـ acidic pH والـ hypoxia عشان تمنع الـ misfolding.
+        page: 43
+        quote: "Removal of N- or C-terminal propeptides from zymogen to generate mature protein (eg, trypsinogen to trypsin)."
+      - kind: check
+        question: "Which ribosome is 'prime' (bacterial)?"
+        options: ["30S + 50S → 70S", "40S + 60S → 80S", "40S + 50S → 90S", "30S + 60S → 70S"]
+        answer: 0
+        why:
+          - "صح: البكتيريا 70S، ودي اللي الـ antibiotics بتضربها."
+          - "ده الـ eukaryotic (even)."
+          - "مش موجود."
+          - "تركيبة غلط."
+        page: 43
+        quote: "Eukaryotes: 40S + 60S → 80S (even). Prokaryotes: 30S + 50S → 70S (prime)."
+      - kind: try
+        items: [bio.L01.045, bio.L01.097, bio.L01.103, bio.L01.106, bio.L01.108]
+    recap:
+      - "Met (AUG) و Trp (UGG) لهم codon واحد. الحرف التالت wobble."
+      - "CCA في الـ 3′. T-arm يمسك الريبوسوم، D-arm للـ synthetase."
+      - "fMet بيجذب الـ neutrophils. Stop: UGA و UAA و UAG."
+      - "A ← P ← E. rRNA بيعمل الـ peptide bond. Diphtheria و Pseudomonas على الـ elongation factors."
+    practice: [bio.L01.043, bio.L01.044, bio.L01.045, bio.L01.046, bio.L01.097, bio.L01.098, bio.L01.099, bio.L01.100, bio.L01.101, bio.L01.102, bio.L01.103, bio.L01.104, bio.L01.105, bio.L01.106, bio.L01.107, bio.L01.108, bio.L01.109, bio.L01.110, bio.L01.111, bio.L01.112, bio.L01.113, bio.L01.114, bio.L01.115]
