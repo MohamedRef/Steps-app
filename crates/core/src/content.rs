@@ -112,16 +112,6 @@ pub enum Body {
         prompt: String,
         steps: Vec<String>,
     },
-    /// A vignette with numbers: compute the score, then interpret it.
-    Calc {
-        calculator: String,
-        stem: String,
-        #[serde(default, skip_serializing_if = "Option::is_none")]
-        question: Option<String>,
-        inputs: BTreeMap<String, CalcValue>,
-        expect: String,
-        interpret: String,
-    },
 }
 
 impl Body {
@@ -135,7 +125,6 @@ impl Body {
             Self::Case { .. } => "case",
             Self::Table { .. } => "table",
             Self::Order { .. } => "order",
-            Self::Calc { .. } => "calc",
         }
     }
 }
@@ -152,109 +141,11 @@ pub fn allowed_keys(kind: &str) -> Option<&'static [&'static str]> {
         "case" => &["stem", "steps"],
         "table" => &["title", "columns", "rows", "blanks"],
         "order" => &["prompt", "steps"],
-        "calc" => &["calculator", "stem", "question", "inputs", "expect", "interpret"],
         _ => return None,
     })
 }
 
 pub const SHARED_KEYS: &[&str] = &["id", "kind", "topic", "src", "status", "update", "tags"];
-
-/// The calculators the app knows, as written in `calculator:`. Implemented in
-/// [`crate::calc`] (chunk 5); a test there keeps the two lists equal.
-pub const CALCULATORS: &[&str] = &[
-    "child_pugh",
-    "meld",
-    "meld_na",
-    "albi",
-    "fib4",
-    "apri",
-    "fli",
-    "baveno_vi",
-    "r_ratio",
-    "maddrey",
-    "glasgow_ah",
-    "saag",
-    "ascitic_pmn",
-    "sos_criteria",
-    "cha2ds2_vasc",
-    "bclc",
-    "milan",
-    "okuda",
-    "page_b",
-    "kings_college",
-    "clichy",
-    "ranson",
-    "bisap",
-    "ctsi",
-    "atlanta_2012",
-    "glasgow_blatchford",
-    "shock_index",
-    "oakland",
-    "uc_activity",
-    "kyoto_gastritis",
-    "rome4_ibs",
-    "anion_gap",
-    "delta_ratio",
-    "expected_compensation",
-    "osmolal_gap",
-    "kdigo_aki",
-    "fena",
-    "feurea",
-    "bun_creatinine",
-    "ckd_epi_2021",
-    "kdigo_ckd",
-    "aa_gradient",
-    "free_water_deficit",
-    "plasmic",
-    "cockcroft_gault",
-    "katz_adl",
-    "lawton_iadl",
-    "gds15",
-    "mna_sf",
-    "clinical_frailty",
-    "cam",
-    "sarc_f",
-    "mmse",
-    "abi",
-    "acr_eular_2010_ra",
-    "caspar",
-    "asas_axial_spa",
-    "asas_peripheral_spa",
-    "modified_new_york",
-    "sle_acr_1997",
-    "sle_eular_acr_2019",
-    "gpa_2022",
-    "mpa_2022",
-    "corrected_sodium",
-    "effective_osmolality",
-    "dka_severity",
-    "premixed_insulin",
-    "bmi",
-    "ipss_mf",
-    "rpi",
-    "rai_cll",
-    "binet_cll",
-    "ann_arbor",
-    "ipi_nhl",
-    "who_pv",
-    "who_et",
-    "who_pmf",
-    "incidence",
-    "prevalence",
-    "prevalence_id",
-    "attack_rate",
-    "sar",
-    "cfr",
-    "pmr",
-    "imr",
-    "nmr",
-    "relative_risk",
-    "odds_ratio",
-    "attributable_risk",
-    "nnt",
-    "diagnostic_accuracy",
-    "z_score",
-];
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(untagged)]
@@ -274,14 +165,6 @@ pub struct CaseStep {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub answer: Option<usize>,
     pub why: String,
-}
-
-#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
-#[serde(untagged)]
-pub enum CalcValue {
-    Bool(bool),
-    Number(f64),
-    Text(String),
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
