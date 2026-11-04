@@ -385,6 +385,13 @@ items:
     src: { page: 290, quote: "∝ r4 R ∝ 1/r4" }
     status: unverified
   # ---------- p290: cardiac and vascular function curves ----------
+  - id: cvs.L03.110
+    kind: cloze
+    topic: resistance-pressure-flow
+    text: "Volumetric flow rate Q = {{c1::flow velocity (v) × cross-sectional area (A)}}. ΔP = {{c2::Q × R}}, which is analogous to Ohm's law (V = I × R). Flow is proportional to {{c3::r⁴}}, so resistance ∝ 1/r⁴."
+    src: { page: 290, quote: "Volumetric flow rate ( ) = flow velocity (v) × cross-sectional area (A)" }
+    status: unverified
+    tags: [high-yield]
   - id: cvs.L03.034
     kind: card
     topic: cardiac-vascular-function-curves
@@ -473,7 +480,7 @@ items:
       - [Timing, Early diastole (rapid ventricular filling), "Late diastole (\"atrial kick\")"]
       - [Cause, Blood from LA mixing with ↑ ESV, Blood entering a stiffened LV; high atrial pressure]
       - [Associations, "↑ filling pressures (MR, AR, HF, thyrotoxicosis); dilated ventricles", "Ventricular noncompliance (eg, hypertrophy)"]
-      - [Can be normal in, "Children, young adults, athletes, pregnancy", "Common in older adults; abnormal if palpable"]
+      - ["Normal or abnormal?", "Can be normal in children, young adults, athletes, pregnancy", "Common in older adults; considered abnormal if palpable"]
     blanks: [[0, 1], [0, 2], [2, 1], [2, 2]]
     src: { page: 291, quote: "S4—in late diastole (“atrial kick”). Turbulence caused by blood entering stiffened LV." }
     status: unverified
@@ -546,6 +553,42 @@ items:
     src: { page: 291, quote: "Prominent in AV dissociation (cannon a wave)" }
     status: unverified
   # ---------- p292: JVP tracings ----------
+  - id: cvs.L03.105
+    kind: table
+    topic: pressure-volume-loops-cardiac-cycle
+    title: How the LV pressure-volume loop changes
+    columns: [Change, Effect on the loop]
+    rows:
+      - [↑ Preload, ↑ SV]
+      - [↑ Afterload, "↑ aortic pressure, ↑ ESV, ↓ SV"]
+      - [↑ Contractility, "↑ SV, ↑ EF, ↓ ESV"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 291, quote: "Contractility SV EF ESV Preload SV" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.106
+    kind: mcq
+    topic: pressure-volume-loops-cardiac-cycle
+    stem: >-
+      A 61-year-old man becomes hypotensive after induction of general anesthesia. He is given an infusion
+      of a pure arteriolar vasoconstrictor, and his aortic pressure rises. Heart rate, venous return and
+      contractility do not change. Which of the following changes in his left ventricular pressure-volume
+      loop is most likely?
+    options:
+      - ↑ End-systolic volume and ↓ stroke volume
+      - ↓ End-systolic volume and ↑ ejection fraction
+      - ↑ End-diastolic volume and ↑ stroke volume
+      - ↓ End-diastolic volume with no change in end-systolic volume
+      - No change in end-systolic volume and ↑ stroke volume
+    answer: 0
+    why:
+      - "Right. ↑ Afterload: the ventricle must reach a higher aortic pressure before the aortic valve opens, so it ejects less, ESV rises and SV falls."
+      - "That is ↑ contractility (↑ SV, ↑ EF, ↓ ESV)."
+      - "That is ↑ preload; venous return did not change."
+      - "Lower filling would shrink EDV and SV, but nothing here lowers preload."
+      - "Afterload moves ESV; it cannot raise SV."
+    src: { page: 291, quote: "Afterload Aortic pressure SV ESV" }
+    status: unverified
   - id: cvs.L03.046
     kind: table
     topic: jugular-venous-pressure-tracings
@@ -659,6 +702,13 @@ items:
     front: In paradoxical splitting of S2, what happens on inspiration and on expiration?
     back: P2 occurs before A2. On inspiration P2 closes later and moves closer to A2, eliminating the split; on expiration the split can be heard (opposite to physiologic splitting).
     src: { page: 293, quote: "On inspiration, P2 closes later and moves closer to A2, “paradoxically” eliminating the split. On expiration, the split can be heard (opposite to physiologic splitting)." }
+    status: unverified
+  - id: cvs.L03.112
+    kind: card
+    topic: splitting-of-s2
+    front: Besides more RV filling, what else on inspiration delays closure of the pulmonic valve?
+    back: ↓ Pulmonary impedance (↑ capacity of the pulmonary circulation) during inspiration.
+    src: { page: 293, quote: "pulmonary impedance (↑ capacity of the pulmonary circulation) also occurs during inspiration, which contributes to delayed closure of pulmonic valve." }
     status: unverified
   - id: cvs.L03.054
     kind: mcq
@@ -846,6 +896,21 @@ items:
     src: { page: 295, quote: "Continuous machinelike murmur, best heard at left infraclavicular area Loudest at S2 Often due to congenital rubella or prematurity" }
     status: unverified
     tags: [high-yield]
+  - id: cvs.L03.108
+    kind: card
+    topic: heart-murmurs
+    front: What causes the opening snap (OS) in mitral stenosis?
+    back: An abrupt halt in leaflet motion in diastole after rapid opening, because the leaflets are fused at the tips.
+    src: { page: 295, quote: "OS due to abrupt halt in leaflet motion in diastole after rapid opening due to fusion at leaflet tips" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.109
+    kind: card
+    topic: heart-murmurs
+    front: Which pressure gradient makes the murmur in aortic stenosis, and which in mitral stenosis?
+    back: "Aortic stenosis: LV pressure > aortic pressure during systole. Mitral stenosis: LA >> LV pressure during diastole."
+    src: { page: 295, quote: "LA >> LV pressure during diastole" }
+    status: unverified
   - id: cvs.L03.071
     kind: mcq
     topic: heart-murmurs
@@ -922,9 +987,10 @@ items:
     kind: mcq
     topic: myocardial-action-potential
     stem: >-
-      A researcher records action potentials from isolated ventricular myocytes. Adding a toxin abolishes
-      the plateau and markedly weakens contraction, although the rapid upstroke is preserved. Which
-      channel does the toxin most likely block?
+      A 54-year-old woman is brought to the emergency department 2 hours after swallowing a bottle of her
+      antihypertensive tablets. Her pulse is 44/min and blood pressure 76/40 mm Hg. Echocardiography shows
+      markedly reduced left ventricular contractility. The drug shortens the plateau of the ventricular
+      action potential but leaves its rapid upstroke intact. Which channel does the drug most likely block?
     options:
       - Fast voltage-gated Na+ channels
       - Voltage-gated (L-type) Ca2+ channels
@@ -934,7 +1000,7 @@ items:
     answer: 1
     why:
       - "Na+ channels make the phase 0 upstroke, which is preserved."
-      - "Right. Phase 2 is Ca2+ influx through voltage-gated Ca2+ channels balancing K+ efflux; that Ca2+ triggers SR release and contraction."
+      - "Right. Phase 2 (plateau) is Ca2+ influx through voltage-gated Ca2+ channels balancing K+ efflux; that Ca2+ triggers SR Ca2+ release and contraction, so blocking it (eg, verapamil) weakens the heart."
       - "Blocking delayed-rectifier K+ channels would prolong repolarization, not abolish the plateau."
       - "HCN channels give the funny current of pacemaker cells, not ventricular myocytes."
       - "Transient outward K+ channels shape phase 1."
@@ -969,6 +1035,12 @@ items:
     topic: pacemaker-action-potential
     text: The pacemaker action potential occurs in the {{c1::SA and AV nodes}}; phases {{c2::1 and 2}} are absent.
     src: { page: 296, quote: "Occurs in the SA and AV nodes. Phases 1 and 2 are absent." }
+    status: unverified
+  - id: cvs.L03.111
+    kind: cloze
+    topic: pacemaker-action-potential
+    text: "Pacemaker phase 3 (repolarization) = {{c1::inactivation of Ca2+ channels}} and ↑ {{c2::activation of K+ channels}} → ↑ K+ efflux."
+    src: { page: 296, quote: "Phase 3 = repolarization—inactivation of Ca2+ channels and ↑ activation of K+ channels" }
     status: unverified
   - id: cvs.L03.080
     kind: mcq
@@ -1157,6 +1229,20 @@ items:
     src: { page: 298, quote: "Component of Cushing reflex (triad of hypertension, bradycardia, and respiratory depression)" }
     status: unverified
     tags: [high-yield]
+  - id: cvs.L03.113
+    kind: order
+    topic: baroreceptors-chemoreceptors
+    prompt: Put the steps of the Cushing reflex in order.
+    steps:
+      - ↑ Intracranial pressure constricts arterioles
+      - Cerebral ischemia
+      - ↑ pCO2 and ↓ pH
+      - Central reflex sympathetic ↑ in perfusion pressure (hypertension)
+      - ↑ Stretch of the baroreceptors
+      - Peripheral reflex baroreceptor-induced bradycardia
+    src: { page: 298, quote: "pressure constricts arterioles → cerebral ischemia → ↑ pCO2 and ↓ pH → central reflex sympathetic ↑ in perfusion pressure (hypertension) → ↑ stretch → peripheral reflex baroreceptor– induced bradycardia." }
+    status: unverified
+    tags: [high-yield]
   - id: cvs.L03.095
     kind: mcq
     topic: baroreceptors-chemoreceptors
@@ -1211,6 +1297,22 @@ items:
     src: { page: 298, quote: "except in mitral stenosis, where PCWP > LVEDP" }
     status: unverified
   # ---------- p299: autoregulation ----------
+  - id: cvs.L03.107
+    kind: table
+    topic: normal-resting-cardiac-pressures
+    title: Normal resting cardiac pressures (mm Hg)
+    columns: [Site, Pressure]
+    rows:
+      - [Right atrium, <5]
+      - [Right ventricle, 25/<5]
+      - [Pulmonary artery, 25/<8]
+      - [PCWP (≈ left atrium), 4-12 (LA <12)]
+      - [Left ventricle, 120/<12]
+      - [Aorta, 120/80]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 298, quote: "Measured via Swan-Ganz catheter. <12 <5 4-12 PCWP 120 80 120 <12 25 <8 25 <5" }
+    status: unverified
+    tags: [high-yield]
   - id: cvs.L03.098
     kind: table
     topic: autoregulation

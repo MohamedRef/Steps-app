@@ -1,0 +1,65 @@
+name: Failure alerts
+
+# The platform checks run only at night and the deploys run on their own
+# after CI, so nobody watches them (#108). When one of them fails, this opens
+# one issue "<workflow> failed on main" (or comments on the open one), and
+# closes it when the next run of that workflow passes. Coverage keeps its
+# own issue (nightly.yml). Runs started by hand are left alone: whoever
+# started one is looking at it.
+
+on:
+  workflow_run:
+    workflows:
+      - Nightly checks
+      - Mac
+      - Settings browser regression
+      - Android WebView renderer regression
+      - Android preview APK
+      - QBank sync
+      - Deploy Steps Cloud
+      - Deploy Steps web
+    types: [completed]
+    branches: [main]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: alerts-${{ github.event.workflow_run.name }}
+  cancel-in-progress: false
+
+jobs:
+  alert:
+    name: Open or close the alert
+    if: >-
+      contains(fromJSON('["schedule", "workflow_run"]'), github.event.workflow_run.event) &&
+      contains(fromJSON('["success", "failure", "timed_out"]'), github.event.workflow_run.conclusion)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          NAME: ${{ github.event.workflow_run.name }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+          SHA: ${{ github.event.workflow_run.head_sha }}
+          URL: ${{ github.event.workflow_run.html_url }}
+        run: |
+          title="$NAME failed on main"
+          open="$(gh issue list --state open --search "in:title \"$title\"" --json number,title \
+            --jq ".[] | select(.title == \"$title\") | .number" | head -1)"
+          if [ "$CONCLUSION" = success ]; then
+            if [ -n "$open" ]; then
+              gh issue close "$open" --comment "Passed again on ${SHA::7}: $URL"
+            fi
+            exit 0
+          fi
+          body="$NAME ended **$CONCLUSION** on ${SHA::7}: $URL"
+          if [ -n "$open" ]; then
+            gh issue comment "$open" --body "$body"
+          else
+            gh issue create --title "$title" --body "$body
+
+          These checks gate no pull request (they run nightly or after CI), so this issue is where a break shows up. It closes itself when the next run passes."
+          fi

@@ -2,7 +2,7 @@
 //! an export, and the file picker for a restore (`app.steps.Documents` in
 //! android/). The Mac writes to ~/Downloads and uses the WebView's own file
 //! input, so these are Android-only; elsewhere they report `Failed`.
-// Adapted from kabar-app main: crates/app/src/platform/android.rs (save_document, save_state).
+// Adapted from batna-app main: crates/app/src/platform/android.rs (save_document, save_state).
 
 use std::time::Duration;
 

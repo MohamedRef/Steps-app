@@ -89,7 +89,7 @@ mod android {
     /// folder into its generated Gradle project as a library module and the
     /// manifest merger adds OralService. The macro only embeds that metadata
     /// in the binary; the JNI calls below are hand-written.
-    /// (Adapted from kabar-app main: crates/app/src/platform/android.rs.)
+    /// (Adapted from batna-app main: crates/app/src/platform/android.rs.)
     mod kotlin_module {
         #![allow(unused_imports)]
 

@@ -9,7 +9,7 @@
 // the same card, and the next tap or a scroll hides it (no dead
 // highlighted words on the phone). The book page chip is a button that
 // opens its own sheet.
-// Adapted from kabar-app main: crates/app/assets/reader.js (pointer plumbing).
+// Adapted from batna-app main: crates/app/assets/reader.js (pointer plumbing).
 (() => {
   if (window.__stepsHover) return;
   const state = { exact: {}, lower: {}, unverified: "", timer: 0, shownFor: null };

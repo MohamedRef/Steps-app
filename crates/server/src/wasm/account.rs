@@ -1,6 +1,6 @@
 //! The account's Durable Object: device registry + sync hub, with WebSocket
 //! hibernation so idle sockets cost nothing.
-// adapted from kabar-app main: crates/server/src/wasm/account.rs (no push
+// adapted from batna-app main: crates/server/src/wasm/account.rs (no push
 // reminders, no image blobs)
 
 use steps_protocol::cloud::{DeviceList, ErrorCode};

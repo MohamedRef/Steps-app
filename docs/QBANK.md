@@ -10,5 +10,6 @@ Each First Aid lecture in Steps lists its Boards and Beyond videos and, under ea
 ## Keeping it current
 - `scripts/qbank-sync.sh` downloads the doc's text export and rewrites `uworld.yaml`; `--check` only reports. It needs `curl` and `cargo`.
 - `.github/workflows/qbank-sync.yml` runs it every Monday (and by hand from Actions) and opens a pull request when the numbers changed. Close and reopen that PR to start CI, then merge it like any other.
+  It needs one repo setting, once: Settings › Actions › General › Workflow permissions › **Allow GitHub Actions to create and approve pull requests**. Without it the run pushes the branch `qbank/sync-<date>` and fails, saying so; open the PR from that branch by hand.
 - When the doc adds a video the map doesn't cover, the run stops and names it (`no lecture for B&B Cardiology › … › …`). Add a line to `bb-map.yaml` and run again.
 - `steps-tools validate` checks that every lecture in the map exists, that no QID appears twice or retired, and that `uworld.yaml` was not edited by hand.

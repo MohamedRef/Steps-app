@@ -117,8 +117,12 @@ pub enum ClientMsg {
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum RejectReason {
+    /// The hub doesn't know the table yet: the device is newer than the hub.
+    /// The op is fine; the device keeps it and sends it again on a later
+    /// connection, once the hub has been updated.
     UnknownTable,
-    /// e.g. an `upsert` on an immutable table.
+    /// e.g. an `upsert` on an immutable table. Like `UnknownTable`, this
+    /// means a hub older than the app, so the op is kept for a newer hub.
     KindNotAllowed,
     /// `hlc.device` is not the device that is connected.
     WrongDevice,
@@ -133,7 +137,7 @@ pub enum RejectReason {
 impl RejectReason {
     /// The hub will never take this op, however often it is sent.
     pub fn is_final(self) -> bool {
-        self != RejectReason::ClockSkew
+        !matches!(self, RejectReason::ClockSkew | RejectReason::UnknownTable | RejectReason::KindNotAllowed)
     }
 }
 

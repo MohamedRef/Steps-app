@@ -2,30 +2,24 @@ name: Deploy Steps web
 
 # Builds the web app (docs/WEB.md) and deploys it as a static-assets Worker,
 # `steps-web`, on the same free Cloudflare account and token as Steps Cloud
-# (CLOUDFLARE_API_TOKEN, "Edit Cloudflare Workers" template). Runs by hand and
-# on every push to main that changes what the app shows. Without the token the
-# run says so and stops green.
+# (CLOUDFLARE_API_TOKEN, "Edit Cloudflare Workers" template). Runs by hand
+# from main, and after CI passes on main when what the app shows changed
+# since the last deploy, so a main commit that fails CI never ships (#103).
+# Without the token the run says so and stops green.
 
 on:
   workflow_dispatch:
-  push:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
     branches: [main]
-    paths:
-      - crates/app/**
-      - crates/core/**
-      - crates/protocol/**
-      - crates/anki/**
-      - content/**
-      - assets/**
-      - web/**
-      - scripts/web/**
-      - Cargo.lock
-      - .github/workflows/web-deploy.yml
 
 permissions:
   contents: read
+  # To find the commit the last successful deploy shipped.
+  actions: read
 
-# A running deploy always finishes; newer pushes wait as one pending run (the
+# A running deploy always finishes; newer runs wait as one pending run (the
 # newest), so a busy day of merges can't cancel every deploy in turn.
 concurrency:
   group: web-deploy
@@ -34,35 +28,82 @@ concurrency:
 jobs:
   deploy:
     name: Build and deploy
+    # By hand from main only; otherwise after a green CI run of a push to main.
+    if: >-
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push')
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      # The commit CI passed on (a hand-started run: the newest main).
+      SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
     steps:
       - uses: actions/checkout@v5
         with:
+          ref: ${{ env.SHA }}
           persist-credentials: false
+          fetch-depth: 0
+      # CI cancels older main runs, so one green run can cover several
+      # merges: compare with the commit the last successful deploy shipped.
+      - name: Anything new for the web app?
+        id: due
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" != workflow_run ]; then
+            echo "go=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          last="$(gh run list --workflow web-deploy.yml --branch main --status success --limit 1 \
+            --json headSha --jq '.[0].headSha // empty' || true)"
+          if [ -n "$last" ] && git cat-file -e "$last^{commit}" 2>/dev/null \
+            && git diff --quiet "$last" "$SHA" -- crates/app crates/core crates/protocol crates/anki \
+              content assets web scripts/web Cargo.lock .github/workflows/web-deploy.yml; then
+            echo "Nothing the web app shows changed since ${last::7}: no deploy."
+            echo "go=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "go=true" >> "$GITHUB_OUTPUT"
+          fi
       - uses: dtolnay/rust-toolchain@stable
+        if: steps.due.outputs.go == 'true'
         with:
           targets: wasm32-unknown-unknown
       - uses: Swatinem/rust-cache@v2
+        if: steps.due.outputs.go == 'true'
         with:
           key: web-deploy
       - uses: cargo-bins/cargo-binstall@8a2045612414e945291083f820cd50b4d8fc2218 # v1.26.0
+        if: steps.due.outputs.go == 'true'
       - name: Install wasm-bindgen-cli and binaryen
+        if: steps.due.outputs.go == 'true'
         run: |
           version=$(awk '/^name = "wasm-bindgen"$/{getline; gsub(/version = |"/, ""); print; exit}' Cargo.lock)
           cargo binstall -y --force "wasm-bindgen-cli@$version"
           # wasm-opt shrinks the download; the build still works without it.
-          if curl -fsSL https://github.com/WebAssembly/binaryen/releases/download/version_123/binaryen-version_123-x86_64-linux.tar.gz | tar xz; then
-            echo "$PWD/binaryen-version_123/bin" >> "$GITHUB_PATH"
+          # The tarball must match its pinned SHA-256 before anything in it runs (#116).
+          tgz=binaryen-version_123-x86_64-linux.tar.gz
+          if curl -fsSL -o "$RUNNER_TEMP/$tgz" "https://github.com/WebAssembly/binaryen/releases/download/version_123/$tgz" \
+            && echo "e959f2170af4c20c552e9de3a0253704d6a9d2766e8fdb88e4d6ac4bae9388fe  $RUNNER_TEMP/$tgz" | sha256sum -c --quiet \
+            && tar xzf "$RUNNER_TEMP/$tgz" -C "$RUNNER_TEMP"; then
+            echo "$RUNNER_TEMP/binaryen-version_123/bin" >> "$GITHUB_PATH"
           else
             echo "::warning::binaryen not installed; the wasm is not shrunk"
           fi
+      # Content reaches the browser without an install, so it passes the
+      # same checks as CI before it is built in (as the preview and release
+      # paths do).
+      - name: Content checks
+        if: steps.due.outputs.go == 'true'
+        run: cargo run -q -p steps-tools -- validate
       - name: Build
+        if: steps.due.outputs.go == 'true'
         run: scripts/web/build.sh
       - name: Check the Cloudflare token
         id: ready
+        if: steps.due.outputs.go == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
             echo "::notice::No CLOUDFLARE_API_TOKEN secret yet; built but not deployed."
@@ -70,12 +111,15 @@ jobs:
           else
             echo "go=true" >> "$GITHUB_OUTPUT"
           fi
+      # Only this step holds the token (#116).
       - name: Deploy
         if: steps.ready.outputs.go == 'true'
         working-directory: web
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
           set -o pipefail
           npx -y wrangler@4 deploy 2>&1 | tee deploy.log
           url="$(grep -oE 'https://[a-z0-9.-]+\.workers\.dev' deploy.log | head -1 || true)"
           rm -f deploy.log
-          { echo "### Steps web is deployed"; [ -n "$url" ] && echo "Open: $url"; } >> "$GITHUB_STEP_SUMMARY"
+          { echo "### Steps web is deployed (${SHA::7})"; if [ -n "$url" ]; then echo "Open: $url"; fi; } >> "$GITHUB_STEP_SUMMARY"

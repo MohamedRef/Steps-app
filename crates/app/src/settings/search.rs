@@ -1,4 +1,4 @@
-// adapted from kabar-app: crates/app/src/settings/search.rs
+// adapted from batna-app main: crates/app/src/settings/search.rs
 //! Local settings search, tolerant of Arabic marks and common letter variants.
 
 fn normalize(text: &str) -> String {

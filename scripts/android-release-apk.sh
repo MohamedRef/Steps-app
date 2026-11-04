@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Adapted from kabar-app main: scripts/android-release-apk.sh.
+# Adapted from batna-app main: scripts/android-release-apk.sh.
 # Rebuilds the APK that `dx bundle --platform android --release` left behind
 # as a real release build, and prints the unsigned APK's path.
 #

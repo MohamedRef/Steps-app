@@ -1,7 +1,7 @@
 //! Android's status and navigation bars take the theme's background, with
 //! icons that read on it, through `app.steps.SystemBars` (android/). With
 //! True black the whole OLED screen stays dark. Nothing on the Mac.
-// Adapted from kabar-app main: crates/app/src/platform/mod.rs (system_bars).
+// Adapted from batna-app main: crates/app/src/platform/mod.rs (system_bars).
 
 /// `day` and `night` are `#rrggbb`: the same for a fixed theme.
 pub fn apply(day: &str, night: &str) {

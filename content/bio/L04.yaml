@@ -42,21 +42,24 @@ items:
     kind: mcq
     topic: gene-expression-modifications
     stem: >-
-      Investigators want mice that express a human gene only in the liver and only after the mice are
-      fed a specific drug. Which strategy fits best?
+      A 9-year-old boy has progressive exercise intolerance, and echocardiography shows hypertrophic
+      cardiomyopathy. Genetic testing finds a new missense mutation in a sarcomere gene. To study it, his
+      physician's research group wants mice that carry the boy's mutant human gene in place of the mouse
+      gene, so that it is switched on only in the heart and only after a drug is given. Which strategy,
+      and which kind of expression, fits this aim?
     options:
-      - Random insertion of the gene into the mouse genome
-      - Targeted insertion of the gene by homologous recombination
-      - siRNA knockdown of the mouse gene
-      - Introducing a nonsense mutation into the mouse gene
-      - Breeding for a dominant negative allele
+      - Random insertion into the mouse genome; constitutive expression
+      - Targeted insertion by homologous recombination with the mouse gene; conditional expression
+      - Random insertion into the mouse genome; conditional expression
+      - siRNA against the mouse gene; constitutive expression
+      - Targeted deletion of the mouse gene (knock-out); no expression of the human gene
     answer: 1
     why:
-      - "Random insertion gives constitutive expression, everywhere and always."
-      - "Right. Targeted insertion through homologous recombination gives conditional expression."
-      - "siRNA lowers expression of an existing gene; it doesn't add a human one."
-      - "A nonsense mutation knocks a gene out."
-      - "A dominant negative allele blocks the normal protein; it doesn't control where a new gene is expressed."
+      - "Random insertion gives constitutive expression, everywhere and always, not a switchable gene."
+      - "Right. Targeted insertion through homologous recombination with the mouse gene gives conditional expression, so the human gene can be switched on where and when it is wanted."
+      - "In the book, random insertion pairs with constitutive, not conditional, expression."
+      - "siRNA lowers expression of an existing mRNA; it doesn't add the human gene."
+      - "A knock-out only removes the mouse gene; it inserts nothing."
     src: { page: 54, quote: "Random insertion—constitutive expression. Targeted insertion—conditional expression." }
     status: unverified
   # ---------- p54: RNA interference ----------
@@ -149,6 +152,13 @@ items:
     src: { page: 55, quote: "Locus heterogeneity Mutations at different loci result in the same disease. Albinism, retinitis pigmentosa, familial hypercholesteremia. Allelic heterogeneity Different mutations in the same locus result in the same disease. β-thalassemia." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L04.084
+    kind: card
+    topic: genetic-terms
+    front: In heteroplasmy, which children receive the mother's mtDNA?
+    back: All of them; mtDNA is passed from the mother to all children.
+    src: { page: 55, quote: "mtDNA passed from mother to all children." }
+    status: unverified
   - id: bio.L04.011
     kind: card
     topic: genetic-terms
@@ -395,6 +405,19 @@ items:
     src: { page: 57, quote: "Unaffected individual with affected sibling has 2/3 probability of being a carrier." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L04.085
+    kind: card
+    topic: modes-of-inheritance
+    front: In X-linked recessive disease, who is usually more severely affected, and what must a female usually have to be affected?
+    back: Males are commonly more severely affected. Females usually must be homozygous to be affected.
+    src: { page: 57, quote: "Commonly more severe in males. Females usually must be homozygous to be affected." }
+    status: unverified
+  - id: bio.L04.086
+    kind: cloze
+    topic: modes-of-inheritance
+    text: "Mitochondrial inheritance is caused by mutations in {{c1::mtDNA}} and is transmitted only through the {{c2::mother}}."
+    src: { page: 57, quote: "Caused by mutations in mtDNA." }
+    status: unverified
   - id: bio.L04.030
     kind: card
     topic: modes-of-inheritance
@@ -508,23 +531,24 @@ items:
     kind: mcq
     topic: autosomal-recessive-diseases
     stem: >-
-      A 3-year-old girl born to first-cousin parents has coarse facial features, corneal clouding and
-      hepatosplenomegaly from a mucopolysaccharidosis. Her parents ask about the risk for their next
-      child. Which mucopolysaccharidosis does she NOT have, given the inheritance pattern?
+      A 3-year-old girl born to first-cousin parents has developmental delay, coarse facial features,
+      clouded corneas, skeletal anomalies and hepatosplenomegaly. Urine shows heparan sulfate and
+      dermatan sulfate. Neither parent is affected. What is the chance that their next child will have
+      the same disease?
     options:
-      - Hurler syndrome
-      - Hunter syndrome
-      - Any autosomal recessive mucopolysaccharidosis
-      - Sanfilippo syndrome
-      - Morquio syndrome
+      - "0%"
+      - "25%"
+      - "50%"
+      - "67%"
+      - "100%"
     answer: 1
     why:
-      - "Hurler is autosomal recessive and fits a girl with consanguineous parents and corneal clouding."
-      - "Right. Mucopolysaccharidoses are autosomal recessive except Hunter syndrome, which is X-linked recessive and rarely affects girls."
-      - "Most mucopolysaccharidoses are autosomal recessive, and consanguinity raises that risk."
-      - "Sanfilippo is one of the autosomal recessive mucopolysaccharidoses."
-      - "Morquio is one of the autosomal recessive mucopolysaccharidoses."
-    src: { page: 58, quote: "mucopolysaccharidoses (except Hunter syndrome)" }
+      - "A recurrence risk of 0% would need a new mutation; her disease follows a recessive pattern from carrier parents."
+      - "Right. A girl with corneal clouding has Hurler syndrome, which is autosomal recessive (only Hunter syndrome, without corneal clouding, is X-linked). With 2 carrier parents, each child has a 25% chance of being affected."
+      - "50% is the risk for each child of one affected parent with an autosomal dominant disease, or for sons of a carrier mother in X-linked recessive disease."
+      - "2/3 is the chance that an unaffected sibling of an affected child is a carrier."
+      - "100% would need both parents to be affected (homozygous)."
+    src: { page: 57, quote: "With 2 carrier (heterozygous) parents, on average: each child has a 25% chance of being affected, 50% chance of being a carrier, and 25% chance of not being affected nor a carrier." }
     status: unverified
   # ---------- p58: cystic fibrosis ----------
   - id: bio.L04.037
@@ -646,6 +670,21 @@ items:
     back: Turner syndrome (45,XO) or skewed X-inactivation (lyonization), as in G6PD deficiency.
     src: { page: 59, quote: "If skewed inactivation occurs, XX individuals may express X-linked recessive diseases (eg, G6PD)" }
     status: unverified
+  - id: bio.L04.087
+    kind: card
+    topic: x-linked-recessive-diseases
+    front: What is X-inactivation (lyonization), and what does the inactive X become?
+    back: During development, one X chromosome in each XX cell is randomly deactivated and condensed into a Barr body (methylated heterochromatin).
+    src: { page: 59, quote: "X-inactivation (lyonization)—during development, one of the X chromosomes in each XX cell is randomly deactivated and condensed into a Barr body (methylated heterochromatin)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.088
+    kind: card
+    topic: x-linked-recessive-diseases
+    front: How can skewed X-inactivation affect X-linked dominant diseases in XX individuals?
+    back: It may change their penetrance and severity.
+    src: { page: 59, quote: "penetrance and severity of X-linked dominant diseases in XX individuals may also be impacted." }
+    status: unverified
   - id: bio.L04.047
     kind: mcq
     topic: x-linked-recessive-diseases
@@ -704,6 +743,19 @@ items:
     front: Why are dystrophin mutations so common, and what does dystrophin do?
     back: DMD is the largest protein-coding human gene, so spontaneous mutation is more likely. Dystrophin anchors muscle fibers to the extracellular matrix, mainly in skeletal and cardiac muscle; its loss → myonecrosis.
     src: { page: 59, quote: "Dystrophin gene (DMD) is the largest protein-coding human gene → ↑ chance of spontaneous mutation." }
+    status: unverified
+  - id: bio.L04.089
+    kind: card
+    topic: muscular-dystrophies
+    front: Besides frameshift deletions and nonsense mutations, what else can cause Duchenne muscular dystrophy?
+    back: Splicing errors.
+    src: { page: 59, quote: "Can also result from splicing errors." }
+    status: unverified
+  - id: bio.L04.090
+    kind: cloze
+    topic: muscular-dystrophies
+    text: "Deletions can cause both Duchenne and Becker muscular dystrophies; {{c1::2/3}} of cases have {{c2::large deletions spanning one or more exons}}."
+    src: { page: 59, quote: "Deletions can cause both Duchenne and Becker muscular dystrophies." }
     status: unverified
   - id: bio.L04.052
     kind: card
@@ -764,8 +816,8 @@ items:
     topic: mitochondrial-diseases
     stem: >-
       A 19-year-old man loses central vision in his right eye over 2 weeks, then in his left eye a month
-      later. His maternal uncle and his mother's brother's sister's son had the same problem; his own
-      father and paternal relatives are unaffected. Which structure carries the mutation?
+      later. His maternal uncle and a son of his mother's sister had the same problem; his own father
+      and paternal relatives are unaffected. Which structure carries the mutation?
     options:
       - Complex I of the electron transport chain encoded by mtDNA
       - The dystrophin gene on the X chromosome
@@ -829,6 +881,13 @@ items:
     src: { page: 60, quote: "Most common inherited cause of intellectual disability (Down syndrome is most common genetic cause, but most cases occur sporadically)." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L04.091
+    kind: card
+    topic: fragile-x
+    front: Which behavior in fragile X syndrome can be confused with Lesch-Nyhan syndrome?
+    back: Self-mutilation, which is common in fragile X.
+    src: { page: 60, quote: "Self-mutilation is common and can be confused with Lesch-Nyhan syndrome." }
+    status: unverified
   - id: bio.L04.062
     kind: table
     topic: fragile-x
@@ -886,20 +945,20 @@ items:
     stem: >-
       A 13-year-old boy has worsening clumsiness, a wide-based gait, absent ankle reflexes and loss of
       vibration sense. He also has pes cavus and scoliosis, and echocardiography shows hypertrophic
-      cardiomyopathy. His parents are healthy. Which repeat is most likely expanded?
+      cardiomyopathy. His parents are healthy. Which genetic change is most likely?
     options:
-      - (CAG)n
-      - (CTG)n
-      - (CGG)n
-      - (GAA)n
-      - (CCG)n
+      - (CAG)n expansion
+      - (CTG)n expansion
+      - (CGG)n expansion
+      - (GAA)n expansion
+      - Mitochondrial DNA mutation
     answer: 3
     why:
       - "CAG is Huntington disease (AD), with chorea in adults."
       - "CTG is myotonic dystrophy (AD), with myotonia and cataracts."
       - "CGG is fragile X."
       - "Right. Friedreich ataxia is an autosomal recessive (GAA)n expansion: Ataxic GAAit, with healthy carrier parents."
-      - "This repeat isn't in the book's table."
+      - "Mitochondrial disease passes from the mother, whose heteroplasmy would usually show some signs, and causes myopathy or optic neuropathy rather than this picture."
     src: { page: 60, quote: "Friedreich ataxia (GAA)n AR Ataxic GAAit" }
     status: unverified
   # ---------- p61: autosomal trisomies ----------
@@ -909,12 +968,51 @@ items:
     text: "Incidence of trisomies: {{c1::Down (21)}} > {{c2::Edwards (18)}} > {{c3::Patau (13)}}. Autosomal monosomies are incompatible with life."
     src: { page: 61, quote: "Incidence of trisomies: Down (21) > Edwards (18) > Patau (13). Autosomal monosomies are incompatible with life" }
     status: unverified
+  - id: bio.L04.092
+    kind: card
+    topic: autosomal-trisomies
+    front: When and how are autosomal trisomies screened for?
+    back: In the first and second trimesters, with noninvasive prenatal tests.
+    src: { page: 61, quote: "Autosomal trisomies are screened in first and second trimesters with noninvasive prenatal tests." }
+    status: unverified
   - id: bio.L04.067
     kind: card
     topic: autosomal-trisomies
-    front: What are the findings of Down syndrome?
-    back: Intellectual disability, flat facies, prominent epicanthal folds, single palmar crease, incurved 5th finger, gap between the 1st 2 toes, duodenal atresia, Hirschsprung disease, congenital heart disease (AVSD), Brushfield spots. Early-onset Alzheimer and ↑ AML/ALL; ↑ umbilical hernia.
+    front: Why is Down syndrome associated with early-onset Alzheimer disease?
+    back: Chromosome 21 codes for amyloid precursor protein, so trisomy 21 gives an extra copy.
+    src: { page: 61, quote: "Associated with early-onset Alzheimer disease (chromosome 21 codes for amyloid precursor protein), ↑ risk of AML/ALL." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.093
+    kind: enumerate
+    topic: autosomal-trisomies
+    prompt: Enumerate the findings of Down syndrome.
+    points:
+      - Intellectual disability
+      - Flat facies
+      - Prominent epicanthal folds
+      - Single palmar crease
+      - Incurved 5th finger
+      - Gap between the 1st 2 toes
+      - Duodenal atresia
+      - Hirschsprung disease
+      - Congenital heart disease (eg, AVSD)
+      - Brushfield spots
+    pass: 8
     src: { page: 61, quote: "Findings: intellectual disability, flat facies, prominent epicanthal folds, single palmar crease, incurved 5th finger, gap between 1st 2 toes, duodenal atresia, Hirschsprung disease, congenital heart disease (eg, AVSD)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.094
+    kind: cloze
+    topic: autosomal-trisomies
+    text: "Down syndrome raises the risk of {{c1::AML/ALL}} and of {{c2::umbilical hernia}} (incomplete closure of the umbilical ring)."
+    src: { page: 61, quote: "↑ risk of umbilical hernia (incomplete closure of umbilical ring)." }
+    status: unverified
+  - id: bio.L04.095
+    kind: cloze
+    topic: autosomal-trisomies
+    text: "Down syndrome is the most common {{c1::viable chromosomal disorder}} and the most common cause of {{c2::genetic intellectual disability}}."
+    src: { page: 61, quote: "Most common viable chromosomal disorder and most common cause of genetic intellectual disability." }
     status: unverified
     tags: [high-yield]
   - id: bio.L04.068
@@ -983,11 +1081,43 @@ items:
     src: { page: 61, quote: "Findings: PRINCE Edward—Prominent occiput, Rocker-bottom feet, Intellectual disability, Nondisjunction, Clenched fists with overlapping fingers, low-set Ears, micrognathia" }
     status: unverified
     tags: [high-yield]
+  - id: bio.L04.096
+    kind: cloze
+    topic: autosomal-trisomies
+    text: "Edwards syndrome is the {{c1::2nd}} most common autosomal trisomy resulting in live birth (the most common is {{c2::Down syndrome}})."
+    src: { page: 61, quote: "2nd most common autosomal trisomy resulting in live birth (most common is Down syndrome)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.097
+    kind: cloze
+    topic: autosomal-trisomies
+    text: "In both Edwards and Patau syndromes, death usually occurs by age {{c1::1}}."
+    src: { page: 61, quote: "Death usually occurs by age 1." }
+    status: unverified
   - id: bio.L04.073
     kind: card
     topic: autosomal-trisomies
-    front: What are the findings of Patau syndrome, and what is the underlying developmental defect?
-    back: Severe intellectual disability, rocker-bottom feet, microphthalmia, microcephaly, cleft lip/palate, holoprosencephaly, polydactyly, cutis aplasia, congenital heart disease, polycystic kidneys, omphalocele. Defective fusion of prechordal mesoderm → midline defects. Death usually by 1 year.
+    front: What developmental defect underlies Patau syndrome?
+    back: Defective fusion of the prechordal mesoderm → midline defects.
+    src: { page: 61, quote: "Defect in fusion of prechordal mesoderm → midline defects." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.098
+    kind: enumerate
+    topic: autosomal-trisomies
+    prompt: Enumerate the findings of Patau syndrome.
+    points:
+      - Severe intellectual disability
+      - Rocker-bottom feet
+      - Microphthalmia, microcephaly
+      - Cleft lip/palate
+      - Holoprosencephaly
+      - Polydactyly
+      - Cutis aplasia
+      - Congenital heart disease
+      - Polycystic kidney disease
+      - Omphalocele
+    pass: 8
     src: { page: 61, quote: "Findings: severe intellectual disability, rocker- bottom feet, microphthalmia, microcephaly, cleft lip/palate, holoprosencephaly, polydactyly, cutis aplasia" }
     status: unverified
     tags: [high-yield]

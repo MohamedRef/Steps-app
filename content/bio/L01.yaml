@@ -196,9 +196,10 @@ items:
     kind: mcq
     topic: histone-modifications
     stem: >-
-      An investigational drug for a hematologic cancer inhibits histone deacetylases. In treated
-      cells, chromatin around several tumor-suppressor genes becomes less condensed and their mRNA
-      levels rise. Which change in the histones best explains the effect?
+      A 61-year-old man with cutaneous T-cell lymphoma has itchy red plaques on his trunk that progress
+      despite skin-directed therapy. He starts an oral drug that inhibits histone deacetylases. In his
+      tumor cells, chromatin around several tumor-suppressor genes becomes less condensed and their
+      mRNA levels rise. Which change in the histones best explains the drug's effect?
     options:
       - Gain of positive charge on lysine residues, tightening DNA binding
       - Persistent acetylation that neutralizes the positive charge of lysines
@@ -386,22 +387,22 @@ items:
     kind: mcq
     topic: de-novo-nucleotide-synthesis
     stem: >-
-      A 52-year-old woman with rheumatoid arthritis starts a drug that blocks pyrimidine synthesis in
-      activated lymphocytes by inhibiting the enzyme that oxidizes dihydroorotate. Which drug was she
-      given?
+      A 52-year-old woman with rheumatoid arthritis has morning stiffness and swollen
+      metacarpophalangeal joints despite methotrexate. Leflunomide is added to slow the proliferation
+      of her activated lymphocytes. Which reaction does the new drug block?
     options:
-      - Methotrexate
-      - Leflunomide
-      - Mycophenolate mofetil
-      - Hydroxyurea
-      - 5-fluorouracil
+      - Dihydrofolate → tetrahydrofolate
+      - Dihydroorotate → orotate
+      - IMP → GMP
+      - Ribonucleotides → deoxyribonucleotides
+      - dUMP → dTMP
     answer: 1
     why:
-      - "Methotrexate inhibits dihydrofolate reductase."
-      - "Right. Leflunomide inhibits dihydroorotate dehydrogenase in pyrimidine synthesis."
-      - "Mycophenolate inhibits IMP dehydrogenase, a purine step."
+      - "Methotrexate, the drug she already takes, inhibits dihydrofolate reductase."
+      - "Right. Leflunomide inhibits dihydroorotate dehydrogenase, a step of de novo pyrimidine synthesis before orotic acid and UMP."
+      - "Mycophenolate (and ribavirin) inhibit IMP dehydrogenase, which blocks purine (GMP) synthesis."
       - "Hydroxyurea inhibits ribonucleotide reductase."
-      - "5-FU inhibits thymidylate synthase via 5-F-dUMP."
+      - "5-FU inhibits thymidylate synthase (dUMP → dTMP)."
     src: { page: 34, quote: "Leflunomide: inhibits dihydroorotate dehydrogenase" }
     status: unverified
   # ---------- p35: purine salvage deficiencies ----------
@@ -440,6 +441,7 @@ items:
     text: Lesch-Nyhan syndrome is inherited {{c1::X-linked recessive}} and is treated with {{c2::allopurinol or febuxostat}}.
     src: { page: 35, quote: "X-linked recessive." }
     status: unverified
+    tags: [high-yield]
   - id: bio.L01.039
     kind: enumerate
     topic: purine-salvage-deficiencies
@@ -460,9 +462,9 @@ items:
   - id: bio.L01.040
     kind: card
     topic: purine-salvage-deficiencies
-    front: Which drugs act on adenosine deaminase, and which enzyme does rasburicase supply?
-    back: Cladribine and pentostatin act on ADA. Rasburicase is urate oxidase (uric acid → allantoin).
-    src: { page: 35, quote: "Urate oxidase (rasburicase)" }
+    front: Which drugs does the book's purine salvage figure place at the adenosine deaminase (ADA) step, and which enzyme does rasburicase supply?
+    back: Cladribine and pentostatin sit at the ADA step (pentostatin inhibits ADA). Rasburicase is urate oxidase (uric acid → allantoin).
+    src: { page: 35, quote: "Cladribine, pentostatin ADA SCID" }
     status: unverified
   - id: bio.L01.041
     kind: mcq
@@ -569,6 +571,7 @@ items:
     back: 5′ → 3′ ("5ynth3sis"), continuous on the leading strand and discontinuous (Okazaki fragments) on the lagging strand. It is semiconservative.
     src: { page: 36, quote: "Occurs in 5′ → 3′ direction (“5ynth3sis”) in continuous and discontinuous (Okazaki fragment) fashion. Semiconservative." }
     status: unverified
+    tags: [high-yield]
   - id: bio.L01.048
     kind: card
     topic: dna-replication
@@ -613,7 +616,7 @@ items:
   - id: bio.L01.053
     kind: table
     topic: dna-replication
-    title: Prokaryotic DNA polymerases
+    title: Prokaryotic replication enzymes
     columns: [Enzyme, Job, Exonuclease]
     rows:
       - [Primase, Makes the RNA primer for DNA polymerase III, "—"]
@@ -643,7 +646,7 @@ items:
     kind: mcq
     topic: dna-replication
     stem: >-
-      A 23-year-old woman with small-cell lung cancer is treated with etoposide. Tumor cells accumulate
+      A 63-year-old man who has smoked for 40 years has small-cell lung cancer and is treated with etoposide. Tumor cells accumulate
       permanent double-stranded DNA breaks and die. Which normal function of the targeted enzyme is
       blocked?
     options:
@@ -756,6 +759,14 @@ items:
     prompt: Order the mutations from the least to the greatest degree of change.
     steps: [Silent, Missense, Nonsense, Frameshift]
     src: { page: 38, quote: "Degree of change: silent << missense < nonsense < frameshift." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L01.116
+    kind: card
+    topic: dna-mutations
+    front: Which enzymes repair single nucleotide substitutions?
+    back: DNA polymerase and DNA ligase.
+    src: { page: 38, quote: "Single nucleotide substitutions are repaired by DNA polymerase and DNA ligase." }
     status: unverified
   - id: bio.L01.064
     kind: card
@@ -871,17 +882,33 @@ items:
   - id: bio.L01.073
     kind: card
     topic: eukaryotic-gene
-    front: Name the signals on a eukaryotic gene and its mRNA from the promoter to the poly-A tail.
-    back: "Promoter boxes CAAT and TATA (TATAAA), 5′ UTR, AUG start codon, exons and introns (introns start GU, end AG), stop codon, 3′ UTR with the polyadenylation signal AAUAAA, then the poly-A tail; the mRNA carries a 5′ cap."
+    front: Which 2 promoter boxes lie upstream of a eukaryotic gene?
+    back: The CAAT box and the TATA box.
+    src: { page: 39, quote: "CAAT Box Polyadenylation signal TATA Box AUG start codon" }
+    status: unverified
+  - id: bio.L01.117
+    kind: order
+    topic: eukaryotic-gene
+    prompt: Put the parts of a eukaryotic gene and its mRNA in order, from upstream to the 3′ end.
+    steps:
+      - CAAT box
+      - TATA box
+      - 5′ UTR
+      - AUG start codon
+      - Exons and introns (introns start GU, end AG)
+      - Stop codon
+      - 3′ UTR with the polyadenylation signal (AAUAAA)
+      - Poly-A tail
     src: { page: 39, quote: "CAAT Box Polyadenylation signal TATA Box AUG start codon" }
     status: unverified
   - id: bio.L01.074
     kind: mcq
     topic: eukaryotic-gene
     stem: >-
-      A mutation in a eukaryotic gene changes the sequence AATAAA, located downstream of the stop codon
-      in the coding strand, to AAGAAA. Which step in the life of this gene's mRNA is most directly
-      affected?
+      A 3-year-old boy of Mediterranean descent has pallor and fatigue. His hemoglobin is low with
+      microcytic red cells and target cells, and iron studies are normal. Sequencing of his β-globin
+      gene shows that the sequence AATAAA, located downstream of the stop codon in the coding strand,
+      has changed to AAGAAA. Which step in the life of the β-globin mRNA is most directly affected?
     options:
       - Binding of RNA polymerase II at the promoter
       - Addition of the 7-methylguanosine cap
@@ -892,9 +919,9 @@ items:
     why:
       - "RNA polymerase II binds the promoter (TATA and CAAT boxes), upstream of the gene."
       - "Capping happens at the 5′ end, independent of this signal."
-      - "Right. AAUAAA in the mRNA is the polyadenylation signal; mutating it → early degradation before translation."
+      - "Right. AAUAAA in the mRNA is the polyadenylation signal; mutating it → early degradation before translation, so less β-globin is made."
       - "AUG is at the start of the open reading frame, not after the stop codon."
-      - "Splice sites are at intron edges (GU…AG)."
+      - "Splice sites are at intron edges (GU…AG); splice site mutations are another cause of some β-thalassemias."
     src: { page: 40, quote: "AAUAAA = polyadenylation signal. Mutation in polyadenylation signal → early degradation prior to translation." }
     status: unverified
   # ---------- p40: regulation of gene expression ----------
@@ -1026,6 +1053,14 @@ items:
     src: { page: 40, quote: "RNA polymerase I makes rRNA, the most common (rampant) type; present only in nucleolus. RNA polymerase II makes mRNA (massive), microRNA (miRNA), and small nuclear RNA (snRNA). RNA polymerase III makes 5S rRNA, tRNA (tiny)." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L01.118
+    kind: card
+    topic: rna-polymerases
+    front: Why are the eukaryotic RNA polymerases numbered I, II and III?
+    back: In the same order that their products are used in protein synthesis; rRNA (I), mRNA (II), then tRNA (III).
+    src: { page: 40, quote: "I, II, and III are numbered in the same order that their products are used in protein synthesis: rRNA, mRNA, then tRNA." }
+    status: unverified
+    tags: [high-yield]
   - id: bio.L01.086
     kind: card
     topic: rna-polymerases
@@ -1120,6 +1155,7 @@ items:
     text: Introns typically begin with {{c1::GU}} and end with {{c2::AG}}.
     src: { page: 41, quote: "Introns typically begin with GU and end with AG." }
     status: unverified
+    tags: [high-yield]
   - id: bio.L01.094
     kind: order
     topic: pre-mrna-splicing
@@ -1171,6 +1207,19 @@ items:
     src: { page: 42, quote: "All tRNAs, both eukaryotic and prokaryotic, have CCA at 3′ end along with a high percentage of chemically modified bases. The amino acid is covalently bound to the 3′ end of the tRNA." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L01.119
+    kind: card
+    topic: trna
+    front: Describe the structure of tRNA.
+    back: 75–90 nucleotides with 2º structure in a cloverleaf form; the anticodon end is opposite the 3′ aminoacyl end.
+    src: { page: 42, quote: "Structure 75-90 nucleotides, 2º structure, cloverleaf form, anticodon end is opposite 3′ aminoacyl end." }
+    status: unverified
+  - id: bio.L01.120
+    kind: cloze
+    topic: trna
+    text: "All tRNAs, eukaryotic and prokaryotic, have {{c1::CCA}} at the 3′ end along with a high percentage of {{c2::chemically modified bases}}."
+    src: { page: 42, quote: "All tRNAs, both eukaryotic and prokaryotic, have CCA at 3′ end along with a high percentage of chemically modified bases." }
+    status: unverified
   - id: bio.L01.098
     kind: table
     topic: trna
@@ -1269,6 +1318,27 @@ items:
       - The mRNA and the 60S subunit assemble with the complex (GTP), and the eIFs are released
     src: { page: 43, quote: "1. Eukaryotic initiation factors (eIFs) identify the 5′ cap. 2. eIFs help assemble the 40S ribosomal subunit with the initiator tRNA. 3. eIFs released when the mRNA and the ribosomal 60S subunit assemble with the complex. Requires GTP." }
     status: unverified
+  - id: bio.L01.121
+    kind: cloze
+    topic: protein-synthesis
+    text: "Protein synthesis runs from the {{c1::N}}-terminus to the {{c2::C}}-terminus."
+    src: { page: 43, quote: "Synthesis occurs from N-terminus to C-terminus." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L01.122
+    kind: card
+    topic: protein-synthesis
+    front: During elongation, what does the incoming aminoacyl-tRNA need to bind the A site?
+    back: An elongation factor and GTP.
+    src: { page: 43, quote: "Aminoacyl-tRNA binds to A site (except for initiator methionine, which binds the P site), requires an elongation factor and GTP." }
+    status: unverified
+  - id: bio.L01.123
+    kind: card
+    topic: protein-synthesis
+    front: What ends translation in eukaryotes, and which energy source does it need?
+    back: Eukaryotic release factors (eRFs) recognize the stop codon and halt translation, releasing the polypeptide from the ribosome. Requires GTP.
+    src: { page: 43, quote: "Termination Eukaryotic release factors (eRFs) recognize the stop codon and halt translation → completed polypeptide is released from ribosome. Requires GTP." }
+    status: unverified
   - id: bio.L01.106
     kind: cloze
     topic: protein-synthesis
@@ -1283,6 +1353,7 @@ items:
     back: "ATP for tRNA Activation (charging); GTP for tRNA Gripping and Going places (translocation)."
     src: { page: 43, quote: "ATP—tRNA Activation (charging). GTP—tRNA Gripping and Going places (translocation)." }
     status: unverified
+    tags: [high-yield]
   - id: bio.L01.108
     kind: table
     topic: protein-synthesis
@@ -1295,6 +1366,7 @@ items:
     blanks: [[0, 1], [1, 1], [2, 1]]
     src: { page: 43, quote: "Think of “going APE”: A site = incoming Aminoacyl-tRNA. P site = accommodates growing Peptide. E site = holds Empty tRNA as it Exits." }
     status: unverified
+    tags: [high-yield]
   - id: bio.L01.109
     kind: card
     topic: protein-synthesis

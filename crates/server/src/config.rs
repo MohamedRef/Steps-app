@@ -1,6 +1,6 @@
 //! Worker configuration: `[vars]` from wrangler.toml plus Worker secrets.
 //! Built from a lookup function so tests don't need the Cloudflare runtime.
-// adapted from kabar-app main: crates/server/src/config.rs (sign-in only)
+// adapted from batna-app main: crates/server/src/config.rs (sign-in only)
 
 use crate::tokens::TokenKey;
 
@@ -54,11 +54,18 @@ impl Config {
         self.web_origins.iter().any(|o| o == origin)
     }
 
-    /// Sign-in needs all three.
+    /// Google sign-in needs all three.
     pub fn auth_ready(&self) -> Result<&TokenKey, ConfigError> {
         if self.google_client_ids.is_empty() {
             return Err(ConfigError::Missing("GOOGLE_CLIENT_IDS"));
         }
+        self.session_ready()
+    }
+
+    /// Refreshing a session and password sign-in check no Google token, so
+    /// they work without `GOOGLE_CLIENT_IDS` (a missing client id once
+    /// stopped every sign-in, #102).
+    pub fn session_ready(&self) -> Result<&TokenKey, ConfigError> {
         if self.allowed_emails.is_empty() {
             return Err(ConfigError::Missing("ALLOWED_EMAILS"));
         }
@@ -98,6 +105,15 @@ mod tests {
         assert_eq!(c.auth_ready().unwrap_err(), ConfigError::Missing("GOOGLE_CLIENT_IDS"));
         let c = cfg(&[("GOOGLE_CLIENT_IDS", "a.apps.googleusercontent.com")]).unwrap();
         assert_eq!(c.auth_ready().unwrap_err(), ConfigError::Missing("ALLOWED_EMAILS"));
+    }
+
+    #[test]
+    fn sessions_and_passwords_do_not_need_google_client_ids() {
+        let seed = "BwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwcHBwc=";
+        let c = cfg(&[("ALLOWED_EMAILS", "learner@example.com"), ("TOKEN_SIGNING_KEY", seed)]).unwrap();
+        assert_eq!(c.auth_ready().unwrap_err(), ConfigError::Missing("GOOGLE_CLIENT_IDS"));
+        assert!(c.session_ready().is_ok());
+        assert_eq!(cfg(&[]).unwrap().session_ready().unwrap_err(), ConfigError::Missing("ALLOWED_EMAILS"));
     }
 
     #[test]

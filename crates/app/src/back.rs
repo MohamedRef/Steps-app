@@ -11,7 +11,7 @@
 //!
 //! On Today with nothing open no entry is kept (one left over from a sheet
 //! closed by tap is popped), so Back leaves Steps as Android users expect.
-// adapted from kabar-app main: crates/app/src/back.rs
+// adapted from batna-app main: crates/app/src/back.rs
 //!
 //! On Android the Back key itself goes to the page first (`BackKey.kt` in
 //! android/, `__stepsNativeBack` in system-back.js), because WebView skips

@@ -32,9 +32,11 @@ pub(super) fn check(conn: &Connection, marker: &Path, device: &str) -> Result<St
             let fresh = new_device_id();
             crate::diag::report!("database copied from device {device}; this install is now {fresh}");
             conn.execute("UPDATE meta SET value = ?1 WHERE key = 'device_id'", [&fresh])?;
-            // The other device sends its own changes; this one asks for the
-            // whole log again under its new name.
-            conn.execute("DELETE FROM sync_outbox", [])?;
+            // What the other device hadn't sent yet goes up from here as
+            // relays (the old phone may be wiped). The ops keep their ids, so
+            // if the other device does send them too, the hub takes them once.
+            conn.execute("UPDATE sync_outbox SET op = json_set(op, '$.relay', json('true'))", [])?;
+            // This one asks for the whole log again under its new name.
             sync::forget_position(conn)?;
             // Device-only settings (`local.*`: which device rings reminders,
             // theme, an open paper) belong to the other device (#284).
@@ -94,7 +96,9 @@ mod tests {
         let s = Store::open_marked(&copy, Some(&tablet.join("no_backup/steps-install"))).unwrap();
         assert_ne!(s.device(), id);
         assert_eq!(s.reviews().unwrap().len(), 1, "his answers come along");
-        assert!(s.outbox(10).unwrap().is_empty(), "the phone sends its own answers");
+        // The phone may be gone: its unsent answers go up from here, as relays.
+        let outbox = s.outbox(10).unwrap();
+        assert!(!outbox.is_empty() && outbox.iter().all(|o| o.relay && o.hlc.device == id), "{outbox:?}");
         assert_eq!(s.last_seq(), 0);
         assert_eq!(s.local_setting::<bool>("remind_here"), None, "the phone keeps ringing, not both");
         // And it stays that new id.

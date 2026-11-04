@@ -5,7 +5,7 @@
 //! it pure means every ordering of messages can be tested without a socket.
 
 use crate::PROTOCOL_VERSION;
-use crate::sync::{ClientMsg, MAX_OPS_PER_PUSH, Op, Rejected, SeqOp, ServerMsg, SyncErrorCode};
+use crate::sync::{ClientMsg, MAX_OPS_PER_PUSH, Op, RejectReason, Rejected, SeqOp, ServerMsg, SyncErrorCode};
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Phase {
@@ -41,6 +41,13 @@ pub enum Effect {
     /// The hub found this device's clock too far ahead. These ops stay in the
     /// outbox; hold pushes for a while and tell the user to fix the clock.
     ClockAhead {
+        kept: Vec<String>,
+    },
+    /// The hub is older than this device: it doesn't know these ops' tables
+    /// (or their kind on that table).
+    /// They stay in the outbox; skip their tables until the next connection
+    /// (the hub may have been updated by then) so newer ops aren't blocked.
+    HubBehind {
         kept: Vec<String>,
     },
     /// Close the socket and reconnect after a backoff.
@@ -131,9 +138,14 @@ impl SyncClient {
                 }
                 let (rejected, kept): (Vec<_>, Vec<_>) =
                     rejected.into_iter().partition(|r| r.reason.is_final());
+                let (behind, skewed): (Vec<_>, Vec<_>) =
+                    kept.into_iter().partition(|r| r.reason != RejectReason::ClockSkew);
                 let mut out = vec![Effect::Acked { done, rejected }];
-                if !kept.is_empty() {
-                    out.push(Effect::ClockAhead { kept: kept.into_iter().map(|r| r.op_id).collect() });
+                if !skewed.is_empty() {
+                    out.push(Effect::ClockAhead { kept: skewed.into_iter().map(|r| r.op_id).collect() });
+                }
+                if !behind.is_empty() {
+                    out.push(Effect::HubBehind { kept: behind.into_iter().map(|r| r.op_id).collect() });
                 }
                 // Live sockets get every other op before the ack of a later
                 // push, so everything up to head_seq is here now.
@@ -212,7 +224,7 @@ impl Backoff {
 #[cfg(test)]
 mod tests {
     use crate::Hlc;
-    use crate::sync::{OpKind, RejectReason};
+    use crate::sync::OpKind;
     use serde_json::json;
 
     use super::*;
@@ -306,11 +318,10 @@ mod tests {
         assert_eq!(
             fx,
             vec![
-                Effect::Acked {
-                    done: vec!["a".into()],
-                    rejected: vec![Rejected { op_id: "c".into(), reason: RejectReason::UnknownTable }],
-                },
+                Effect::Acked { done: vec!["a".into()], rejected: vec![] },
                 Effect::ClockAhead { kept: vec!["b".into()] },
+                // A hub older than the app: the op waits for a newer hub.
+                Effect::HubBehind { kept: vec!["c".into()] },
             ]
         );
         assert!(c.in_flight().is_empty());

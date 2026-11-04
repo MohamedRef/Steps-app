@@ -1,6 +1,6 @@
 //! Stats and the mistakes log: pure functions of the content, the review log
 //! and Mohamed's item statuses, so every device shows the same numbers.
-//! (Ideas adapted from kabar-app main: crates/core/src/stats/mod.rs.)
+//! (Ideas adapted from batna-app main: crates/core/src/stats/mod.rs.)
 //!
 //! Rules, stated once:
 //! - **Seen:** the item has at least one answer. **Seen twice:** answers on
