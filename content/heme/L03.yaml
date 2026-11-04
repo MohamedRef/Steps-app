@@ -148,12 +148,24 @@ items:
     steps:
       - "Injury: endothelial damage → transient vasoconstriction (neural reflex and endothelin)"
       - "Exposure: vWF binds to exposed collagen"
-      - "Adhesion: platelets bind vWF via GpIb at the site of injury"
-      - "Activation: ADP binding to P2Y12 induces GpIIb/IIIa expression; platelets release ADP, Ca2+ and TXA2"
+      - "Adhesion: platelets bind vWF via GpIb at the site of injury and release ADP, Ca2+ and TXA2"
+      - "Activation: ADP binding to P2Y12 induces GpIIb/IIIa expression"
       - "Aggregation: fibrinogen binds GpIIb/IIIa and links platelets"
     src: { page: 417, quote: "AGGREGATION Fibrinogen binds GpIIb/IIIa receptors and links platelets" }
     status: unverified
     tags: [high-yield]
+  - id: heme.L03.042
+    kind: cloze
+    topic: platelet-plug-formation
+    text: During adhesion, platelets release ADP and {{c1::Ca2+}}; the latter is necessary for the {{c2::coagulation cascade}}.
+    src: { page: 417, quote: "Platelets release ADP and Ca2+ (necessary for coagulation cascade), TXA2" }
+    status: unverified
+  - id: heme.L03.043
+    kind: cloze
+    topic: platelet-plug-formation
+    text: In the adhesion step, released {{c1::ADP}} helps platelets adhere to the endothelium.
+    src: { page: 417, quote: "ADP helps platelets adhere to endothelium" }
+    status: unverified
   - id: heme.L03.011
     kind: card
     topic: platelet-plug-formation
@@ -223,7 +235,7 @@ items:
     kind: card
     topic: thrombogenesis
     front: How does aspirin inhibit platelets?
-    back: It irreversibly inhibits cyclooxygenase, thereby inhibiting TXA2 synthesis.
+    back: It blocks cyclooxygenase permanently, so platelets can no longer make TXA2.
     src: { page: 417, quote: "Aspirin irreversibly inhibits cyclooxygenase, thereby inhibiting TXA2 synthesis." }
     status: unverified
     tags: [high-yield]
@@ -231,7 +243,7 @@ items:
     kind: card
     topic: thrombogenesis
     front: How do clopidogrel, prasugrel and ticagrelor inhibit platelets?
-    back: They block the P2Y12 receptor, inhibiting ADP-induced expression of GpIIb/IIIa.
+    back: They block the platelet ADP receptor P2Y12, so ADP can no longer make platelets put GpIIb/IIIa on their surface.
     src: { page: 417, quote: "Clopidogrel, prasugrel, and ticagrelor inhibit ADP-induced expression of GpIIb/IIIa by blocking P2Y12 receptor." }
     status: unverified
   - id: heme.L03.018
@@ -332,15 +344,22 @@ items:
   - id: heme.L03.027
     kind: card
     topic: coagulation-and-kinin-pathways
-    front: What do plasmin and the fibrinolytic system produce, and what activates plasminogen?
-    back: tPA converts plasminogen to plasmin, which breaks fibrin into fibrin degradation products (eg, D-dimer).
+    front: What does plasmin break fibrin into?
+    back: Fibrin degradation products, such as D-dimer.
     src: { page: 418, quote: "Fibrin degradation products (eg, D-dimer)" }
+    status: unverified
+  - id: heme.L03.044
+    kind: card
+    topic: coagulation-and-kinin-pathways
+    front: What do the thrombolytics (alteplase, reteplase, tenecteplase) do to plasminogen?
+    back: They convert plasminogen to plasmin, like tPA (tissue plasminogen activator), so plasmin can break down fibrin.
+    src: { page: 418, quote: "Plasminogen Plasmin THROMBOLYTICS: - alteplase, reteplase, tenecteplase" }
     status: unverified
   - id: heme.L03.028
     kind: cloze
     topic: coagulation-and-kinin-pathways
     text: Factor {{c1::XIIIa}} (fibrin stabilizing factor) cross-links fibrin monomers into the mesh that stabilizes the platelet plug; it needs {{c2::Ca2+}}.
-    src: { page: 418, quote: "Fibrin mesh stabilizes platelet plug" }
+    src: { page: 418, quote: "Fibrin mesh stabilizes platelet plug Aggregation Fibrin monomers Ia Ca2+ XIIIa XIII" }
     status: unverified
   - id: heme.L03.029
     kind: mcq
@@ -391,11 +410,18 @@ items:
   - id: heme.L03.031
     kind: card
     topic: vitamin-k-dependent-coagulation
-    front: Which factors and proteins are vitamin K–dependent, and what happens in vitamin K deficiency?
-    back: Factors II, VII, IX and X, protein C and protein S. Deficiency → ↓ carboxylation and maturation of all of them.
-    src: { page: 419, quote: "Vitamin K deficiency—↓ carboxylation and maturation of factors II, VII, IX, X, protein C, protein S." }
+    front: Which clotting factors and anticoagulant proteins are vitamin K–dependent?
+    back: Factors II, VII, IX and X, plus protein C and protein S.
+    src: { page: 419, quote: "↓ carboxylation and maturation of factors II, VII, IX, X, protein C, protein S." }
     status: unverified
     tags: [high-yield]
+  - id: heme.L03.045
+    kind: card
+    topic: vitamin-k-dependent-coagulation
+    front: What does vitamin K deficiency do to the vitamin K–dependent factors?
+    back: They are not carboxylated, so they do not mature (↓ carboxylation and maturation).
+    src: { page: 419, quote: "Vitamin K deficiency—↓ carboxylation and maturation" }
+    status: unverified
   - id: heme.L03.032
     kind: card
     topic: vitamin-k-dependent-coagulation
@@ -407,9 +433,17 @@ items:
   - id: heme.L03.033
     kind: card
     topic: vitamin-k-dependent-coagulation
-    front: How is warfarin reversed, and how fast does each option act?
-    back: Vitamin K can reverse warfarin's effect on clotting factor synthesis, but it is delayed. FFP or PCC reverses warfarin immediately and can be given with vitamin K in severe bleeding.
-    src: { page: 419, quote: "FFP or PCC administration reverses action of warfarin immediately and can be given with vitamin K in cases of severe bleeding." }
+    front: Does vitamin K reverse warfarin quickly?
+    back: No. It can undo warfarin's block on clotting factor synthesis, but only after a delay.
+    src: { page: 419, quote: "Vitamin K administration can potentially reverse inhibitory effect of warfarin on clotting factor synthesis (delayed)." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.046
+    kind: card
+    topic: vitamin-k-dependent-coagulation
+    front: What reverses warfarin at once in severe bleeding?
+    back: FFP or PCC, which act immediately; they can be given together with vitamin K.
+    src: { page: 419, quote: "FFP or PCC administration reverses action of warfarin immediately" }
     status: unverified
     tags: [high-yield]
   - id: heme.L03.034
@@ -429,9 +463,24 @@ items:
   - id: heme.L03.036
     kind: card
     topic: vitamin-k-dependent-coagulation
-    front: Which factors does antithrombin inhibit, and which are its principal targets?
-    back: Thrombin (IIa) and factors VIIa, IXa, Xa, XIa and XIIa. Principal targets are thrombin and factor Xa. Heparin enhances its activity.
-    src: { page: 419, quote: "Antithrombin inhibits thrombin (factor IIa) and factors VIIa, IXa, Xa, XIa, XIIa. Heparin enhances the activity of antithrombin. Principal targets of antithrombin: thrombin and factor Xa." }
+    front: Which factors does antithrombin inhibit?
+    back: Thrombin (IIa) and the activated factors VIIa, IXa, Xa, XIa and XIIa.
+    src: { page: 419, quote: "Antithrombin inhibits thrombin (factor IIa) and factors VIIa, IXa, Xa, XIa, XIIa." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.047
+    kind: cloze
+    topic: vitamin-k-dependent-coagulation
+    text: The principal targets of antithrombin are {{c1::thrombin}} and factor {{c2::Xa}}.
+    src: { page: 419, quote: "Principal targets of antithrombin: thrombin and factor Xa." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.048
+    kind: card
+    topic: vitamin-k-dependent-coagulation
+    front: Which drug enhances the activity of antithrombin?
+    back: Heparin.
+    src: { page: 419, quote: "Heparin enhances the activity of antithrombin." }
     status: unverified
     tags: [high-yield]
   - id: heme.L03.037

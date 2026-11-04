@@ -119,14 +119,14 @@ items:
     kind: card
     topic: neutrophils
     front: What is a left shift, and what does it reflect?
-    back: ↑ neutrophil precursors (eg, band cells, metamyelocytes) in peripheral blood. It reflects ↑ myeloid proliferation (eg, inflammation, CML).
+    back: More immature neutrophil forms (bands, metamyelocytes) circulating in the blood. It means the marrow is turning out myeloid cells faster, as in inflammation or CML.
     src: { page: 412, quote: "Left shift—↑ neutrophil precursors (eg, band cells, metamyelocytes) in peripheral blood. Reflects states of ↑ myeloid proliferation (eg, inflammation, CML)." }
     status: unverified
   - id: heme.L02.010
     kind: card
     topic: neutrophils
     front: What is a leukoerythroblastic reaction, and what does it suggest?
-    back: A left shift accompanied by immature RBCs. It suggests bone marrow infiltration (eg, myelofibrosis, metastasis).
+    back: Immature white cells (a left shift) plus immature red cells in the blood. It points to something occupying the marrow, such as myelofibrosis or metastatic cancer.
     src: { page: 412, quote: "Leukoerythroblastic reaction—left shift accompanied by immature RBCs. Suggests bone marrow infiltration (eg, myelofibrosis, metastasis)." }
     status: unverified
     tags: [high-yield]
@@ -160,6 +160,12 @@ items:
     front: What shape are erythrocytes, and why does it help?
     back: Biconcave, anucleate and without organelles. The shape gives a large surface area-to-volume ratio for rapid gas exchange.
     src: { page: 413, quote: "Anucleate and lack organelles; biconcave A , with large surface area-to-volume ratio for rapid gas exchange." }
+    status: unverified
+  - id: heme.L02.067
+    kind: cloze
+    topic: erythrocytes
+    text: Erythrocytes carry {{c1::O2}} to the tissues and {{c2::CO2}} to the lungs.
+    src: { page: 413, quote: "Carry O2 to tissues and CO2 to lungs." }
     status: unverified
   - id: heme.L02.013
     kind: cloze
@@ -233,6 +239,20 @@ items:
     src: { page: 413, quote: "Anucleate, small cytoplasmic fragments A derived from megakaryocytes. Life span of 8-10 days (pl8lets)." }
     status: unverified
     tags: [high-yield]
+  - id: heme.L02.068
+    kind: cloze
+    topic: thrombocytes
+    text: Platelets are involved in {{c1::primary (1°)}} hemostasis.
+    src: { page: 413, quote: "Involved in 1° hemostasis." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.069
+    kind: card
+    topic: thrombocytes
+    front: What do platelets do when endothelial injury activates them?
+    back: They clump with other platelets and bind fibrinogen, which together form the platelet plug.
+    src: { page: 413, quote: "When activated by endothelial injury, aggregate with other platelets and interact with fibrinogen to form platelet plug." }
+    status: unverified
   - id: heme.L02.020
     kind: table
     topic: thrombocytes
@@ -262,9 +282,16 @@ items:
   - id: heme.L02.023
     kind: card
     topic: thrombocytes
-    front: What does thrombocytopenia or ↓ platelet function cause, and what stimulates megakaryocyte proliferation?
-    back: Petechiae. Thrombopoietin stimulates megakaryocyte proliferation.
+    front: What does thrombocytopenia or ↓ platelet function cause on the skin?
+    back: Petechiae.
     src: { page: 413, quote: "Thrombocytopenia or ↓ platelet function results in petechiae." }
+    status: unverified
+  - id: heme.L02.070
+    kind: card
+    topic: thrombocytes
+    front: Which hormone stimulates megakaryocyte proliferation?
+    back: Thrombopoietin.
+    src: { page: 413, quote: "Thrombopoietin stimulates megakaryocyte proliferation." }
     status: unverified
   - id: heme.L02.024
     kind: mcq
@@ -301,31 +328,52 @@ items:
     kind: mcq
     topic: monocytes
     stem: >-
-      A hematology resident reviews a normal peripheral smear. She points to the largest white cell in
-      the field: it has a big kidney-shaped nucleus and abundant pale gray "frosted glass" cytoplasm.
-      Into which cell does this cell differentiate after it leaves the blood?
+      A 48-year-old man who emigrated from India has 3 months of cough, night sweats and weight loss.
+      A transbronchial lung biopsy shows caseating granulomas containing multinucleated giant cells,
+      and acid-fast bacilli are seen. The giant cells formed by fusion of tissue cells that came from
+      a circulating blood leukocyte. On a peripheral smear, which appearance does that circulating
+      precursor have?
     options:
-      - Plasma cell
-      - Mast cell
-      - Macrophage
-      - Natural killer cell
-      - Megakaryocyte
-    answer: 2
+      - Eccentric nucleus with clock-face chromatin
+      - Large kidney-shaped nucleus with abundant frosted-glass cytoplasm
+      - Bilobed nucleus packed with uniform pink granules
+      - Multilobed nucleus with fine cytoplasmic granules
+      - Dense dark purple granules that obscure the nucleus
+    answer: 1
     why:
-      - "Plasma cells come from B cells; they have a clock-face nucleus."
-      - "Mast cells share a precursor with basophils, not with monocytes."
-      - "Right. This is a monocyte; in tissues monocytes differentiate into macrophages or dendritic cells."
-      - "NK cells are lymphocytes with cytoplasmic lytic granules."
-      - "Megakaryocytes are marrow cells that shed platelets."
-    src: { page: 413, quote: "Found in blood, differentiate into macrophages or dendritic cells. in tissues." }
+      - "Clock-face chromatin with an eccentric nucleus is a plasma cell, which makes antibody and does not form giant cells."
+      - "Right. Granuloma giant cells are fused macrophages, and macrophages differentiate from blood monocytes: large kidney-shaped nucleus, extensive frosted-glass cytoplasm."
+      - "A bilobed nucleus with uniform eosinophilic granules is an eosinophil."
+      - "A multilobed nucleus is a neutrophil, the acute inflammatory cell."
+      - "Dense basophilic granules hiding the nucleus describe a basophil."
+    src: { page: 413, quote: "Large, kidney-shaped nucleus A . Extensive “frosted glass” cytoplasm." }
     status: unverified
   # ---------- p413: macrophages ----------
   - id: heme.L02.027
     kind: card
     topic: macrophages
-    front: What do macrophages phagocytose, what activates them, and how do they present antigen?
-    back: Bacteria, cellular debris and senescent RBCs. Activated by IFN-γ. They present antigen via MHC II and also engage in antibody-dependent cellular cytotoxicity.
-    src: { page: 413, quote: "Phagocytose bacteria, cellular debris, and senescent RBCs. Long life in tissues. Differentiate from circulating blood monocytes A . Activated by IFN-γ. Can function as antigen-presenting cell via MHC II." }
+    front: What do macrophages phagocytose?
+    back: Bacteria, cellular debris and old (senescent) red cells.
+    src: { page: 413, quote: "Phagocytose bacteria, cellular debris, and senescent RBCs." }
+    status: unverified
+  - id: heme.L02.071
+    kind: cloze
+    topic: macrophages
+    text: Macrophages are activated by {{c1::IFN-γ}}.
+    src: { page: 413, quote: "Activated by IFN-γ." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.072
+    kind: cloze
+    topic: macrophages
+    text: Macrophages can act as antigen-presenting cells via {{c1::MHC II}}.
+    src: { page: 413, quote: "Can function as antigen-presenting cell via MHC II." }
+    status: unverified
+  - id: heme.L02.073
+    kind: cloze
+    topic: macrophages
+    text: Besides phagocytosis, macrophages also take part in {{c1::antibody-dependent cellular cytotoxicity}}.
+    src: { page: 413, quote: "Also engage in antibody-dependent cellular cytotoxicity." }
     status: unverified
   - id: heme.L02.028
     kind: table
@@ -397,10 +445,11 @@ items:
     kind: mcq
     topic: dendritic-cells
     stem: >-
-      A researcher infects mice with a virus that infects only skin keratinocytes. Antigen-presenting
-      cells in the skin engulf dying infected keratinocytes, migrate to the lymph node, and activate
-      naive CD8+ T cells against the viral protein, although these presenting cells are never infected
-      themselves. Which process explains the activation of the CD8+ T cells?
+      A 16-year-old boy has had a common wart on his finger for 8 months. Human papillomavirus
+      replicates only in keratinocytes. The wart now regresses, and a biopsy shows CD8+ cytotoxic T
+      cells specific for a viral protein attacking the lesion. Skin antigen-presenting cells that were
+      never infected had engulfed dying infected keratinocytes, migrated to the draining lymph node, and
+      activated the naive CD8+ T cells there. Which process explains this activation?
     options:
       - Macrophage presentation of antigen on MHC class II
       - Dendritic cell cross-presentation of exogenous antigen on MHC class I
@@ -458,9 +507,10 @@ items:
     kind: mcq
     topic: eosinophils
     stem: >-
-      A 9-year-old boy from a rural area has 3 weeks of abdominal pain and itching around the anus.
-      A complete blood count shows eosinophilia. Stool examination shows helminth eggs. Which
-      eosinophil product is the main toxin against the parasite?
+      A 52-year-old man who moved from rural Brazil 2 years ago has 1 month of epigastric pain,
+      diarrhea, a dry cough, and an itchy red rash on his buttocks and thighs. The
+      leukocyte count is 11,000/mm3 with 22% eosinophils. Stool microscopy shows rhabditiform larvae.
+      Which eosinophil product is the main toxin against this parasite?
     options:
       - Histaminase
       - Major basic protein
@@ -470,7 +520,7 @@ items:
     answer: 1
     why:
       - "Histaminase breaks down histamine; it is not the helminthotoxin."
-      - "Right. Major basic protein (MBP) is the eosinophil's helminthotoxin."
+      - "Right. This is a tissue-invading helminth (Strongyloides) with eosinophilia; eosinophils defend against helminths with major basic protein (MBP), their helminthotoxin."
       - "Myeloperoxidase is in neutrophil azurophilic granules."
       - "Heparin is in basophil and mast cell granules."
       - "Tryptase is released by mast cells."
@@ -515,6 +565,20 @@ items:
     back: They originate from the same precursor as basophils but are not the same cell type. They mediate local tissue allergic reactions.
     src: { page: 414, quote: "Originate from same precursor as basophils but are not the same cell type." }
     status: unverified
+  - id: heme.L02.074
+    kind: card
+    topic: mast-cells
+    front: Which part of IgE do mast cells bind on their membrane?
+    back: The Fc portion of IgE.
+    src: { page: 414, quote: "Can bind the Fc portion of IgE to membrane." }
+    status: unverified
+  - id: heme.L02.075
+    kind: cloze
+    topic: mast-cells
+    text: Mast cells are involved in type {{c1::I}} hypersensitivity reactions.
+    src: { page: 414, quote: "Involved in type I hypersensitivity reactions." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L02.042
     kind: enumerate
     topic: mast-cells
@@ -551,9 +615,29 @@ items:
   - id: heme.L02.046
     kind: card
     topic: mast-cells
-    front: What is mastocytosis, what is it associated with, and what symptoms does it cause?
-    back: A rare proliferation of mast cells in skin and/or extracutaneous organs. Associated with c-KIT mutations and ↑ serum tryptase. ↑ histamine → flushing, pruritus, hypotension, abdominal pain, diarrhea, peptic ulcer disease.
-    src: { page: 414, quote: "Associated with c-KIT mutations and ↑ serum tryptase. ↑ histamine → flushing, pruritus, hypotension, abdominal pain, diarrhea, peptic ulcer disease." }
+    front: What is mastocytosis?
+    back: A rare disorder in which mast cells multiply in the skin, in organs outside the skin, or both.
+    src: { page: 414, quote: "Mastocytosis—rare; proliferation of mast cells in skin and/or extracutaneous organs." }
+    status: unverified
+  - id: heme.L02.076
+    kind: cloze
+    topic: mast-cells
+    text: Mastocytosis is associated with {{c1::c-KIT}} mutations and a raised serum {{c2::tryptase}}.
+    src: { page: 414, quote: "Associated with c-KIT mutations and ↑ serum tryptase." }
+    status: unverified
+  - id: heme.L02.077
+    kind: enumerate
+    topic: mast-cells
+    prompt: Enumerate the symptoms of excess histamine in mastocytosis (6).
+    points:
+      - Flushing
+      - Pruritus
+      - Hypotension
+      - Abdominal pain
+      - Diarrhea
+      - Peptic ulcer disease
+    pass: 5
+    src: { page: 414, quote: "↑ histamine → flushing, pruritus, hypotension, abdominal pain, diarrhea, peptic ulcer disease." }
     status: unverified
   - id: heme.L02.047
     kind: mcq
@@ -650,7 +734,7 @@ items:
     kind: cloze
     topic: natural-killer-cells
     text: NK cells carry {{c1::CD56}} and {{c2::CD16}} (an Fc receptor), and are larger than B and T cells.
-    src: { page: 415, quote: "NK cells are larger than B and T cells" }
+    src: { page: 415, quote: "CD56 Lytic granules CD16 (FcR)" }
     status: unverified
   - id: heme.L02.054
     kind: mcq
@@ -738,6 +822,12 @@ items:
     src: { page: 415, quote: "Differentiate into cytotoxic T cells (express CD8, recognize MHC I), helper T cells (express CD4, recognize MHC II), and regulatory T cells." }
     status: unverified
     tags: [high-yield]
+  - id: heme.L02.078
+    kind: cloze
+    topic: t-cells
+    text: Besides cytotoxic and helper T cells, T cells also differentiate into {{c1::regulatory}} T cells.
+    src: { page: 415, quote: "Differentiate into cytotoxic T cells (express CD8, recognize MHC I), helper T cells (express CD4, recognize MHC II), and regulatory T cells." }
+    status: unverified
   - id: heme.L02.061
     kind: cloze
     topic: t-cells
@@ -748,10 +838,24 @@ items:
   - id: heme.L02.062
     kind: card
     topic: t-cells
-    front: Which costimulatory signal is necessary for T-cell activation, and what share of circulating lymphocytes are T cells?
-    back: CD28. About 80% of circulating lymphocytes are T cells.
-    src: { page: 415, quote: "CD28 (costimulatory signal) necessary for T-cell activation. Most circulating lymphocytes are T cells (80%)." }
+    front: Which costimulatory signal is necessary for T-cell activation?
+    back: CD28.
+    src: { page: 415, quote: "CD28 (costimulatory signal) necessary for T-cell activation." }
     status: unverified
+  - id: heme.L02.079
+    kind: cloze
+    topic: t-cells
+    text: Most circulating lymphocytes are T cells, about {{c1::80%}}.
+    src: { page: 415, quote: "Most circulating lymphocytes are T cells (80%)." }
+    status: unverified
+  - id: heme.L02.080
+    kind: card
+    topic: t-cells
+    front: Which cells are the primary target of HIV?
+    back: CD4+ helper T cells.
+    src: { page: 415, quote: "CD4+ helper T cells are the primary target of HIV." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L02.063
     kind: mcq
     topic: t-cells
