@@ -17,7 +17,7 @@ const SIZES = ['normal', 'larger'];
 // its buttons with the app's `--tap`/`--tap-lg` tokens (assets/main.css), so
 // it is held to `--tap` (at most 48px) here and its controls under 48px are counted in the
 // report as a known gap.
-const FLOOR = { learn: 'var(--target)', study: 'min(var(--tap), var(--target))' };
+const FLOOR = { learn: 'var(--target)', study: 'min(var(--tap), var(--target))', scores: 'min(var(--tap), var(--target))' };
 
 // Gaps on main when this suite was added (2026-10-30). They are left out of
 // the failures, listed in report.json and the log so they stay visible, and
@@ -173,7 +173,7 @@ async function run() {
   const seen = new Set();
   let current = '';
   try {
-    for (const screen of ['learn', 'study']) {
+    for (const screen of ['learn', 'study', 'scores']) {
       const dir = path.join(fixtures, screen);
       const manifest = JSON.parse(await fs.readFile(path.join(dir, 'manifest.json'), 'utf8'));
       const knownSmall = KNOWN.small.filter(([s]) => s === screen).map(([, sel]) => sel);
@@ -221,7 +221,8 @@ async function run() {
                   seen.add(KNOWN.small.find(([s, k]) => s === screen && k === sel));
                   known.push({ name, gap: `under ${FLOOR[screen]}`, selector: sel });
                 }
-                assert.ok(m.back.length >= 1 || item.phase === 'setup' || item.phase === 'summary',
+                // A top-level tab (nav destination) has no Back target of its own.
+                assert.ok(m.back.length >= 1 || item.phase === 'setup' || item.phase === 'summary' || item.top,
                   `${name}: a visible Back target for Escape and Android Back`);
                 assert.deepEqual(m.unnamed, [], `${name}: controls without a name`);
                 assert.deepEqual(m.tooSmall, [], `${name}: controls under ${FLOOR[screen]} (${m.target}px)`);

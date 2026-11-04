@@ -261,6 +261,7 @@ fn table_label(name: &str) -> String {
         "settings" => tx::T_SETTINGS.to_string(),
         "own_cards" => tx::T_OWN.to_string(),
         "notes" => tx::T_NOTES.to_string(),
+        "self_assessments" => tx::T_SCORES.to_string(),
         other => other.replace('_', " "),
     }
 }

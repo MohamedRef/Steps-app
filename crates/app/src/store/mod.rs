@@ -15,6 +15,7 @@ pub mod notes;
 pub mod own;
 pub mod pages;
 mod paths;
+pub mod selfassess;
 pub mod sync;
 
 use std::collections::BTreeMap;
@@ -25,7 +26,7 @@ use rusqlite::{Connection, OptionalExtension, params};
 use serde::Serialize;
 use serde::de::DeserializeOwned;
 use steps_core::review::verify::Judgement;
-use steps_core::review::{Grade, Hlc, HlcClock, LoggedReview, Origin, ReviewEvent};
+use steps_core::review::{Confidence, ErrorReason, Grade, Hlc, HlcClock, LoggedReview, Origin, ReviewEvent};
 use steps_core::srs::ReviewSettings;
 use steps_core::zone::Zone;
 
@@ -132,6 +133,25 @@ const MIGRATIONS: &[&str] = &[
     -- Mohamed's notes on items, lesson steps and pages
     -- (steps_core::note::Note as JSON), keyed by Anchor::row_id. Last writer wins.
     CREATE TABLE notes (
+        id          TEXT PRIMARY KEY,
+        value       TEXT NOT NULL,
+        account_id  TEXT,
+        device_id   TEXT NOT NULL,
+        hlc_wall    INTEGER NOT NULL,
+        hlc_counter INTEGER NOT NULL,
+        deleted     INTEGER NOT NULL DEFAULT 0
+    ) STRICT;
+",
+    "
+    -- How sure he was before the answer (sure / unsure / guess) and why he
+    -- missed it (steps_core::review::ErrorReason); both optional, so rows
+    -- from older builds and devices stay as they are.
+    ALTER TABLE review_events ADD COLUMN confidence TEXT;
+    ALTER TABLE review_events ADD COLUMN reason TEXT;
+",
+    "
+    -- His self-assessment scores (steps_core::selfassess::SelfAssessment as JSON). Last writer wins.
+    CREATE TABLE self_assessments (
         id          TEXT PRIMARY KEY,
         value       TEXT NOT NULL,
         account_id  TEXT,
@@ -289,7 +309,8 @@ impl Store {
     pub fn reviews(&self) -> Result<Vec<LoggedReview>> {
         let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
         let mut stmt = conn.prepare(
-            "SELECT id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter
+            "SELECT id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter,
+                    confidence, reason
              FROM review_events WHERE deleted = 0
              ORDER BY hlc_wall, hlc_counter, device_id",
         )?;
@@ -304,18 +325,30 @@ impl Store {
                 r.get::<_, String>(6)?,
                 r.get::<_, i64>(7)?,
                 r.get::<_, u32>(8)?,
+                r.get::<_, Option<String>>(9)?,
+                r.get::<_, Option<String>>(10)?,
             ))
         })?;
         let mut out = Vec::new();
         for row in rows {
-            let (id, item_id, grade, origin, at_ms, took_ms, device, wall_ms, counter) = row?;
+            let (id, item_id, grade, origin, at_ms, took_ms, device, wall_ms, counter, confidence, reason) =
+                row?;
             let (Some(grade), Some(origin)) = (Grade::parse(&grade), Origin::parse(&origin)) else {
                 continue;
             };
             out.push(LoggedReview {
                 id,
                 hlc: Hlc { wall_ms, counter, device },
-                event: ReviewEvent { item_id, grade, origin, at_ms, took_ms },
+                event: ReviewEvent {
+                    item_id,
+                    grade,
+                    origin,
+                    at_ms,
+                    took_ms,
+                    // A value from a newer build that this one doesn't know reads as unset.
+                    confidence: confidence.as_deref().and_then(Confidence::parse),
+                    reason: reason.as_deref().and_then(ErrorReason::parse),
+                },
             });
         }
         Ok(out)
@@ -490,8 +523,8 @@ fn insert_review(conn: &rusqlite::Connection, l: &LoggedReview) -> Result<()> {
     let e = &l.event;
     conn.execute(
         "INSERT OR IGNORE INTO review_events
-         (id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter)
-         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)",
+         (id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter, confidence, reason)
+         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9, ?10, ?11)",
         params![
             l.id,
             e.item_id,
@@ -501,7 +534,9 @@ fn insert_review(conn: &rusqlite::Connection, l: &LoggedReview) -> Result<()> {
             e.took_ms,
             l.hlc.device,
             l.hlc.wall_ms,
-            l.hlc.counter
+            l.hlc.counter,
+            e.confidence.map(Confidence::as_str),
+            e.reason.map(ErrorReason::as_str)
         ],
     )?;
     Ok(())
@@ -713,11 +748,42 @@ mod tests {
     use super::*;
 
     fn ev(item: &str, grade: Grade, at_ms: i64) -> ReviewEvent {
-        ReviewEvent { item_id: item.into(), grade, origin: Origin::Study, at_ms, took_ms: 3000 }
+        ReviewEvent::new(item, grade, Origin::Study, at_ms, 3000)
     }
 
     fn judgement(verdict: Verdict) -> Judgement {
         Judgement { verdict, edit: Edit::new(), note: None, fingerprint: "f".into(), at_ms: 1 }
+    }
+
+    #[test]
+    fn answers_logged_before_the_tags_read_without_them() {
+        // A database from the build before confidence and reasons.
+        let conn = Connection::open_in_memory().unwrap();
+        for sql in &MIGRATIONS[..4] {
+            conn.execute_batch(sql).unwrap();
+        }
+        conn.pragma_update(None, "user_version", 4).unwrap();
+        conn.execute(
+            "INSERT INTO review_events (id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter)
+             VALUES ('old-1', 'hb.L01.001', 'again', 'bank', 5, 900, 'old', 5, 0)",
+            [],
+        )
+        .unwrap();
+        let s = Store::init(conn, None, None).unwrap();
+        let log = s.reviews().unwrap();
+        assert_eq!(log[0].event, ReviewEvent::new("hb.L01.001", Grade::Again, Origin::Bank, 5, 900));
+        // And a new answer keeps its tags.
+        let tagged = ReviewEvent {
+            confidence: Some(Confidence::Guess),
+            reason: Some(ErrorReason::Timing),
+            ..ev("hb.L01.002", Grade::Again, 10)
+        };
+        s.append_review(tagged.clone()).unwrap();
+        assert_eq!(s.reviews().unwrap()[1].event, tagged);
+        // A value from a newer build reads as unset, and the answer still counts.
+        s.conn.lock().unwrap().execute("UPDATE review_events SET reason = 'future'", []).unwrap();
+        assert_eq!(s.reviews().unwrap()[1].event.reason, None);
+        assert_eq!(s.reviews().unwrap().len(), 2);
     }
 
     #[test]

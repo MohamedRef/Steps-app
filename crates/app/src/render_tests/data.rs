@@ -42,6 +42,8 @@ fn tablet_backup() -> String {
     for grade in [Grade::Good, Grade::Again] {
         let at_ms = crate::store::now_ms();
         tab.append_review(ReviewEvent {
+            confidence: None,
+            reason: None,
             item_id: item.clone(),
             grade,
             origin: Origin::Study,

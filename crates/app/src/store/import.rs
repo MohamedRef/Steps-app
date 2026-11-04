@@ -309,7 +309,7 @@ mod tests {
     use super::*;
 
     fn ev(item: &str, at_ms: i64) -> ReviewEvent {
-        ReviewEvent { item_id: item.into(), grade: Grade::Good, origin: Origin::Review, at_ms, took_ms: 3000 }
+        ReviewEvent::new(item, Grade::Good, Origin::Review, at_ms, 3000)
     }
 
     fn judged(verdict: Verdict) -> Judgement {

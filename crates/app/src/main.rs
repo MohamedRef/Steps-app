@@ -36,6 +36,7 @@ mod labs;
 mod learn;
 mod lecture;
 mod look;
+mod metacog;
 mod more;
 mod notes;
 mod onboarding;

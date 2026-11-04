@@ -1,0 +1,642 @@
+schema: steps.lesson/v1
+lecture: heme.L05
+lessons:
+  - id: heme.L05.lesson1
+    title: "الـ tumor lysis والـ heparin والـ warfarin: مين بيضرب فين"
+    hook: "BreaK the CUP، والـ heparin في الدم والـ warfarin في الكبد: لو فهمت المكان فهمت كل الفروق"
+    minutes: 9
+    pages: [440, 441]
+    topics: [tumor-lysis-syndrome, heparin, warfarin, heparin-vs-warfarin, direct-coagulation-factor-inhibitors]
+    goals:
+      - "تعرف الـ labs الأربعة في الـ tumor lysis syndrome وعلاجها"
+      - "تفرّق بين HIT type 1 و type 2"
+      - "تفهم ليه الـ warfarin بيعمل clotting في الأول، وليه بنعمل bridging"
+      - "تحط كل direct inhibitor على الـ factor بتاعه"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Tumor lysis syndrome: الخلايا بتفرغ اللي جواها"
+        text: |-
+          لما خلايا كتير تتكسر مرة واحدة (غالباً ==lymphoma أو leukemia== أول ما نبدأ العلاج) اللي جواها بينزل الدم:
+
+          - **K+** يعلى ← arrhythmias و muscle weakness.
+          - **PO4** يعلى، ويمسك الـ **Ca2+** فينزل ← seizures و tetany.
+          - الـ nucleic acids تتكسر ← **uric acid** يعلى ← crystals في الكلى ← ==acute kidney injury==.
+
+          الوقاية والعلاج: **hydration** جامد، و **allopurinol**، و **rasburicase**.
+        page: 440
+        quote: "Release of K+ → hyperkalemia, release of PO4 3– → hyperphosphatemia, hypocalcemia due to Ca2+ sequestration by PO4 3– . ↑ nucleic acid breakdown → hyperuricemia → acute kidney injury."
+      - kind: mnemonic
+        word: "CUP"
+        parts:
+          - { key: "C", text: "Ca2+ نازل (الـ PO4 مسكه)" }
+          - { key: "U", text: "Uric acid طالع" }
+          - { key: "P", text: "PO4 طالع" }
+        hook: "BreaK the CUP: والـ K في Break هو الـ K+ اللي طالع"
+        page: 440
+        quote: "Tumor cell breakdown causes ↑ K+ , ↓ Ca2+ , ↑ Uric acid, and ↑ PO 3– 4 (BreaK the CUP)."
+      - kind: check
+        question: "Which electrolyte falls in tumor lysis syndrome?"
+        options:
+          - "Calcium"
+          - "Potassium"
+          - "Phosphate"
+          - "Uric acid"
+        answer: 0
+        why:
+          - "صح: الـ PO4 العالي بيمسك الـ Ca2+ فينزل."
+          - "الـ K+ بيطلع من الخلايا فيعلى."
+          - "الـ PO4 بيطلع من الخلايا فيعلى."
+          - "الـ uric acid بيعلى من تكسير الـ nucleic acids."
+        page: 440
+        quote: "hypocalcemia due to Ca2+ sequestration by PO4 3–"
+      - kind: explain
+        title: "Heparin: بيشغّل الـ antithrombin"
+        text: |-
+          الـ heparin مش بيوقف الـ factors بنفسه. بيشغّل الـ ==antithrombin== اللي بيوقف أساساً **IIa (thrombin)** و **Xa**. مفعوله سريع وقصير، ونتابعه بالـ **PTT**.
+
+          بنستخدمه لما نحتاج anticoagulation فوري: PE و DVT و MI و acute coronary syndrome. وهو ==آمن في الحمل== لأنه ما بيعديش الـ placenta (والـ LMWH زي الـ enoxaparin هو المفضل).
+
+          الـ **LMWH** (enoxaparin و dalteparin) شغلها على Xa أساساً وعمرها أطول، والـ **fondaparinux** على Xa بس. الاتنين صعب نعكسهم، والـ LMWH بتخرج من الكلى، فلو فيه renal insufficiency نرجع للـ unfractionated.
+        page: 440
+        quote: "Activates antithrombin, which ↓ action primarily of factors IIa (thrombin) and Xa. Short half-life."
+      - kind: table
+        title: "HIT type 1 و type 2"
+        columns: ["", "Type 1", "Type 2"]
+        rows:
+          - ["السبب", "مش مناعي", "IgG ضد heparin-PF4"]
+          - ["إمتى", "أول يومين", "بعد 5 لـ 10 أيام"]
+          - ["الـ platelets", "فوق 100,000 ومؤقت", "↓↓ مع thrombosis"]
+          - ["نعمل إيه", "ولا حاجة", "نوقف الـ heparin ونبدأ argatroban"]
+        hide: [[1, 1], [1, 2], [3, 2]]
+        page: 440
+        quote: "Antibody-heparin-PF4 complex binds and activates platelets → removal by splenic macrophages and thrombosis → ↓↓ platelet count."
+      - kind: aside
+        tone: trap
+        text: "الـ HIT type 2 ==بيجلّط== مش بس بيقلّل الـ platelets، لأن الـ antibody بيشغّل الـ platelets. عشان كده ما نديش platelets، ونوقف كل heparin. والـ **fondaparinux** آمن لأنه ما بيتفاعلش مع الـ PF4."
+        page: 440
+        quote: "Fondaparinux safe to use (does not interact with PF4)."
+      - kind: check
+        question: "On day 8 of unfractionated heparin, a patient's platelets fall by 70% and a new arterial clot forms. What is the mechanism?"
+        options:
+          - "IgG against heparin-bound PF4 activating platelets"
+          - "Nonimmune direct platelet clumping by heparin"
+          - "Early depletion of protein C"
+          - "Consumption of factors by tissue factor"
+        answer: 0
+        why:
+          - "صح: ده HIT type 2، بعد 5 لـ 10 أيام، والـ complex بيشغّل الـ platelets فيعمل thrombosis."
+          - "ده HIT type 1: أول يومين وخفيف ومن غير جلطات."
+          - "ده سبب الـ warfarin skin necrosis."
+          - "ده DIC، ومحتاج سبب زي sepsis."
+        page: 440
+        quote: "HIT type 2—development of IgG antibodies against heparin-bound platelet factor 4 (PF4) that typically occurs 5-10 days after heparin administration."
+      - kind: explain
+        title: "Warfarin: بيضرب الـ vitamin K في الكبد"
+        text: |-
+          الـ warfarin بيوقف الـ ==vitamin K epoxide reductase==، فالكبد ما يقدرش يعمل γ-carboxylation للـ factors **II و VII و IX و X** ولا للـ **protein C و S**. مفعوله بطيء وطويل، وبيطوّل الـ **PT** (extrinsic): "The ex-PresidenT went to war(farin)".
+
+          جيناته: الـ **VKORC1** بيأثر على الجرعة، والـ **CYP2C9** بيكسّره، فعنده تداخلات كتير.
+
+          وبيعدّي الـ placenta (teratogenic) فممنوع في الحمل.
+        page: 441
+        quote: "Inhibits vitamin K epoxide reductase by competing with vitamin K → inhibition of vitamin K– dependent γ-carboxylation of clotting factors II, VII, IX, and X and proteins C and S."
+      - kind: reveal
+        prompt: "الـ warfarin anticoagulant. إزاي ممكن يعمل جلطات وskin necrosis في أول كام يوم؟"
+        answer: "الـ **protein C** عمره أقصر من الـ factors II و X. فالـ protein C الموجود ==يخلص الأول== قبل ما الـ II و X يخلصوا، فالمريض يبقى hypercoagulable لفترة. ده بيعمل microthrombosis في الأوعية الصغيرة ← skin necrosis. الحل: **heparin bridging** لحد ما الـ warfarin يشتغل."
+        page: 441
+        quote: "Initial risk of hypercoagulation: protein C has shorter half-life than factors II and X. Existing protein C depletes before existing factors II and X deplete"
+      - kind: figure
+        title: "الـ heparin في الدم والـ warfarin في الكبد"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="heme5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fg-dot"/></marker></defs>
+            <rect class="fg-box" x="10" y="20" width="150" height="160" rx="10"/>
+            <text x="85" y="40" text-anchor="middle" class="t-b">Liver</text>
+            <text x="85" y="66" text-anchor="middle" class="t-sm">vitamin K</text>
+            <text x="85" y="90" text-anchor="middle" class="t-sm">γ-carboxylation</text>
+            <text x="85" y="114" text-anchor="middle" class="t-sm">II, VII, IX, X, C, S</text>
+            <text x="85" y="150" text-anchor="middle" class="t-sm t-acc">warfarin blocks</text>
+            <text x="85" y="168" text-anchor="middle" class="t-sm t-mut">PT/INR, oral, days</text>
+            <line class="fg-line" x1="160" y1="100" x2="200" y2="100" marker-end="url(#heme5a)"/>
+            <rect class="fg-box" x="200" y="20" width="150" height="160" rx="10"/>
+            <text x="275" y="40" text-anchor="middle" class="t-b">Blood</text>
+            <text x="275" y="66" text-anchor="middle" class="t-sm">antithrombin</text>
+            <text x="275" y="90" text-anchor="middle" class="t-sm">IIa and Xa</text>
+            <text x="275" y="150" text-anchor="middle" class="t-sm t-acc">heparin activates</text>
+            <text x="275" y="168" text-anchor="middle" class="t-sm t-mut">PTT, IV/SC, hours</text>
+          </svg>
+        caption: "الـ warfarin بيمنع تصنيع الـ factors في الكبد، فلازم يستنى الـ factors القديمة تخلص (أيام). الـ heparin بيشتغل على الـ factors الموجودة في الدم (ثواني)."
+        alt: "Two boxes. Left, Liver: vitamin K, gamma-carboxylation of factors II, VII, IX, X, C and S, blocked by warfarin; PT/INR, oral, days. An arrow leads to the right box, Blood: antithrombin acts on IIa and Xa, activated by heparin; PTT, IV or SC, hours."
+        page: 441
+        quote: "SITE OF ACTION Blood Liver ONSET OF ACTION Rapid (seconds) Slow, limited by half-lives of normal clotting factors"
+      - kind: explain
+        title: "الـ direct inhibitors"
+        text: |-
+          ما بيحتاجوش labs غالباً، و ==ممنوعين مع الـ mechanical heart valves==.
+
+          - **Thrombin (IIa)**: bivalirudin و argatroban و dabigatran. ينفعوا في الـ HIT، لما الـ heparin يبقى **BAD** للمريض. الـ dabigatran بيتعكس بالـ **idarucizumab**.
+          - **Xa**: apixaban و edoxaban و rivaroxaban، اللي بـ "ban" الـ Xa. Oral، للـ DVT/PE والـ atrial fibrillation، وبيتعكسوا بالـ **andexanet alfa**.
+        page: 441
+        quote: "Do not usually require lab monitoring. Not to be used in patients with mechanical heart valves."
+      - kind: check
+        question: "A patient with HIT type 2 needs ongoing anticoagulation. Which drug fits?"
+        options:
+          - "Argatroban"
+          - "Enoxaparin"
+          - "Warfarin alone"
+          - "Protamine sulfate"
+        answer: 0
+        why:
+          - "صح: direct thrombin inhibitor، والـ BAD (Bivalirudin، Argatroban، Dabigatran) ينفعوا في الـ HIT."
+          - "الـ enoxaparin heparin برضه، فممنوع."
+          - "الـ warfarin لوحده في الأول بيزوّد الـ clotting."
+          - "الـ protamine بيعكس الـ heparin، مش anticoagulant."
+        page: 441
+        quote: "Can be used in HIT, when heparin is BAD for the patient"
+      - kind: try
+        items: [heme.L05.006, heme.L05.014, heme.L05.023, heme.L05.025, heme.L05.029]
+    recap:
+      - "Tumor lysis: ↑ K+ و ↓ Ca2+ و ↑ uric acid و ↑ PO4 (BreaK the CUP)، بالـ hydration و allopurinol و rasburicase."
+      - "Heparin بيشغّل الـ antithrombin (IIa و Xa)، بالـ PTT، وآمن في الحمل. HIT type 2 بعد 5 لـ 10 أيام وبيجلّط."
+      - "Warfarin بيضرب الـ vitamin K epoxide reductase، بالـ PT/INR، وبيعدّي الـ placenta. الـ protein C بيخلص الأول، فنعمل bridging."
+      - "Thrombin: BAD. Xa: الـ -xaban. الاتنين ممنوعين مع الـ mechanical valves."
+    practice: [heme.L05.001, heme.L05.002, heme.L05.003, heme.L05.004, heme.L05.005, heme.L05.007, heme.L05.008, heme.L05.009, heme.L05.010, heme.L05.011, heme.L05.012, heme.L05.013, heme.L05.015, heme.L05.016, heme.L05.017, heme.L05.018, heme.L05.019, heme.L05.020, heme.L05.021, heme.L05.022, heme.L05.024, heme.L05.026, heme.L05.027, heme.L05.028]
+  - id: heme.L05.lesson2
+    title: "نعكس الـ anticoagulant ونوقف الـ platelets ونكسّر الجلطة"
+    hook: "لكل anticoagulant مفتاح بيقفله، ولكل خطوة في الـ platelet plug دوا بيوقفها"
+    minutes: 8
+    pages: [442, 442]
+    topics: [anticoagulation-reversal, antiplatelets, thrombolytics]
+    goals:
+      - "تحفظ الـ reversal agent لكل anticoagulant"
+      - "تحط كل antiplatelet على الـ receptor بتاعه"
+      - "تعرف استخدامات الـ thrombolytics وموانعها"
+    status: unverified
+    steps:
+      - kind: match
+        prompt: "وصّل كل anticoagulant بالـ reversal بتاعه"
+        pairs:
+          - ["Heparin", "Protamine sulfate"]
+          - ["Warfarin", "Vitamin K (slow), FFP or PCC (rapid)"]
+          - ["Dabigatran", "Idarucizumab"]
+          - ["Apixaban, rivaroxaban", "Andexanet alfa"]
+        page: 442
+        quote: "Heparin Protamine sulfate ⊕ charged peptide that binds ⊝ charged heparin Warfarin Vitamin K (slow) +/– FFP or PCC (rapid) Dabigatran Idarucizumab"
+      - kind: explain
+        title: "كل reversal بيشتغل إزاي"
+        text: |-
+          - **Protamine**: peptide ==موجب== بيمسك الـ heparin السالب.
+          - **Idarucizumab**: Fab fragments من monoclonal antibody بتمسك الـ dabigatran.
+          - **Andexanet alfa**: Xa ==مزيّف ومش شغّال==، بيشرب الـ inhibitor بداله.
+          - **Warfarin**: الـ vitamin K بطيء لأن الكبد لازم يعمل factors جديدة. لو مستعجلين ندّي الـ factors جاهزة: **FFP** أو **PCC**.
+        page: 442
+        quote: "Andexanet alfa Recombinant modified factor Xa (inactive)"
+      - kind: explain
+        title: "الـ antiplatelets: كل واحد على خطوة"
+        text: |-
+          افتكر الـ platelet plug: adhesion ثم activation (ADP و TXA2) ثم aggregation على الـ GpIIb/IIIa.
+
+          - **Aspirin**: بيقفل الـ COX ==irreversibly== ← ↓ TXA2.
+          - **Clopidogrel و prasugrel و ticagrelor**: بيقفلوا الـ ADP receptor (**P2Y12**) ← الـ GpIIb/IIIa ما يظهرش. ومع الـ aspirin = dual antiplatelet therapy.
+          - **Eptifibatide و tirofiban و abciximab**: بيقفلوا الـ **GpIIb/IIIa** نفسه (الـ fibrinogen receptor)، في الـ unstable angina والـ PCI. ممكن يعملوا thrombocytopenia.
+          - **Cilostazol و dipyridamole**: بيقفلوا الـ phosphodiesterase ← ↑ cAMP في الـ platelets. الـ claudication والـ stroke prevention.
+        page: 442
+        quote: "Aspirin Irreversibly blocks COX → ↓ TXA2 release"
+      - kind: check
+        question: "A drug blocks the receptor that fibrinogen uses to link activated platelets. Which drug is it?"
+        options:
+          - "Eptifibatide"
+          - "Clopidogrel"
+          - "Aspirin"
+          - "Cilostazol"
+        answer: 0
+        why:
+          - "صح: الـ eptifibatide بيقفل الـ GpIIb/IIIa، الـ fibrinogen receptor."
+          - "الـ clopidogrel بيقفل الـ P2Y12 فالـ GpIIb/IIIa ما يظهرش، بس مش بيقفله هو."
+          - "الـ aspirin بيقفل الـ COX."
+          - "الـ cilostazol بيقفل الـ phosphodiesterase."
+        page: 442
+        quote: "Eptifibatide, tirofiban, abciximab Block GpIIb/IIIa (fibrinogen receptor) on activated platelets"
+      - kind: aside
+        tone: exam
+        text: "أعراض الـ aspirin الجانبية كتير بتيجي في الأسئلة: gastric ulcers و ==tinnitus== و allergic reactions و renal injury، و **Reye syndrome** لو اتدّى لطفل."
+        page: 442
+        quote: "Gastric ulcers, tinnitus, allergic reactions, renal injury, Reye syndrome (in children)"
+      - kind: figure
+        title: "الـ thrombolytics بيشغّلوا الـ plasmin"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="heme5b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="fg-dot"/></marker></defs>
+            <rect class="fg-box" x="10" y="40" width="100" height="40" rx="8"/>
+            <text x="60" y="65" text-anchor="middle" class="t-sm">Plasminogen</text>
+            <line class="fg-line" x1="110" y1="60" x2="150" y2="60" marker-end="url(#heme5b)"/>
+            <text x="130" y="30" text-anchor="middle" class="t-sm t-acc">tPA</text>
+            <rect class="fg-box" x="150" y="40" width="80" height="40" rx="8"/>
+            <text x="190" y="65" text-anchor="middle" class="t-sm">Plasmin</text>
+            <line class="fg-line" x1="230" y1="60" x2="270" y2="60" marker-end="url(#heme5b)"/>
+            <rect class="fg-box" x="270" y="40" width="80" height="40" rx="8"/>
+            <text x="310" y="65" text-anchor="middle" class="t-sm">Fibrin cut</text>
+            <text x="180" y="115" text-anchor="middle" class="t-sm t-mut">antifibrinolytics (tranexamic, aminocaproic acid) block this</text>
+            <text x="180" y="135" text-anchor="middle" class="t-sm t-mut">↑ PT, ↑ PTT, platelets unchanged</text>
+          </svg>
+        caption: "الـ alteplase والـ reteplase والـ tenecteplase بيحوّلوا الـ plasminogen لـ plasmin، والـ plasmin بيقطّع الـ fibrin. لو حصل نزيف بنستخدم antifibrinolytics."
+        alt: "Plasminogen converts to plasmin under tPA, and plasmin cuts fibrin. A note says antifibrinolytics such as tranexamic and aminocaproic acid block this, and that PT and PTT rise while platelets are unchanged."
+        page: 442
+        quote: "Directly or indirectly aid conversion of plasminogen to plasmin, which cleaves fibrin clots. ↑ PT, ↑ PTT, no change in platelet count."
+      - kind: explain
+        title: "إمتى وإمتى لأ"
+        text: |-
+          **الاستخدام**: early MI، و early ischemic stroke، و high-risk PE.
+
+          **ممنوع** لو: active bleeding، أو ==تاريخ intracranial bleeding==، أو surgery قريبة، أو bleeding diathesis، أو severe hypertension.
+
+          لو نزف: مفيش antidote خاص. بنستخدم **antifibrinolytics** (aminocaproic acid و tranexamic acid) و platelets و cryoprecipitate أو FFP أو PCC.
+        page: 442
+        quote: "Contraindicated in patients with active bleeding, history of intracranial bleeding, recent surgery, known bleeding diatheses, or severe hypertension."
+      - kind: check
+        question: "Which finding rules out alteplase in a patient with an acute ischemic stroke?"
+        options:
+          - "A past intracranial hemorrhage"
+          - "Age over 60"
+          - "Atrial fibrillation"
+          - "Taking a statin"
+        answer: 0
+        why:
+          - "صح: تاريخ intracranial bleeding من الموانع."
+          - "السن مش من موانع الكتاب."
+          - "الـ atrial fibrillation سبب شائع للـ stroke، مش مانع."
+          - "الـ statin مش من الموانع."
+        page: 442
+        quote: "history of intracranial bleeding"
+      - kind: try
+        items: [heme.L05.033, heme.L05.037, heme.L05.042]
+    recap:
+      - "Heparin ← protamine. Warfarin ← vitamin K (بطيء) أو FFP/PCC (سريع). Dabigatran ← idarucizumab. Xa inhibitors ← andexanet alfa."
+      - "Aspirin على الـ COX، clopidogrel على الـ P2Y12، eptifibatide على الـ GpIIb/IIIa، cilostazol على الـ phosphodiesterase."
+      - "Thrombolytics: plasminogen ← plasmin، ↑ PT و PTT والـ platelets زي ما هي. الموانع أي نزيف."
+    practice: [heme.L05.030, heme.L05.031, heme.L05.032, heme.L05.033, heme.L05.034, heme.L05.035, heme.L05.036, heme.L05.037, heme.L05.038, heme.L05.039, heme.L05.040, heme.L05.041, heme.L05.042]
+  - id: heme.L05.lesson3
+    title: "الـ chemotherapy والـ cell cycle: الـ antibiotics والـ antimetabolites"
+    hook: "كل دوا كيماوي بيستنى الخلية في مرحلة معينة: اعرف المرحلة تعرف الدوا"
+    minutes: 10
+    pages: [443, 444]
+    topics: [cancer-therapy-cell-cycle, cancer-therapy-targets, antibody-drug-conjugates, antitumor-antibiotics, antimetabolites]
+    goals:
+      - "تحط كل مجموعة أدوية على مرحلتها في الـ cell cycle"
+      - "تعرف الـ toxicity المميزة لكل antitumor antibiotic"
+      - "تفهم الـ antimetabolites ونقط تداخلها (6-MP مع allopurinol، الـ leucovorin)"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "الـ cell cycle وأدواته"
+        svg: |-
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+            <circle class="fg-thin" cx="120" cy="115" r="80" fill="none"/>
+            <text x="120" y="30" text-anchor="middle" class="t-b">G1</text>
+            <text x="210" y="120" text-anchor="middle" class="t-b">S</text>
+            <text x="120" y="210" text-anchor="middle" class="t-b">G2</text>
+            <text x="30" y="120" text-anchor="middle" class="t-b">M</text>
+            <text x="120" y="110" text-anchor="middle" class="t-sm t-mut">Rb, p53:</text>
+            <text x="120" y="126" text-anchor="middle" class="t-sm t-mut">G1 checkpoint</text>
+            <text x="230" y="60" class="t-sm t-acc">S: antimetabolites</text>
+            <text x="230" y="80" class="t-sm t-acc">S, G2: topoisomerase</text>
+            <text x="230" y="160" class="t-sm t-acc">G2: bleomycin,</text>
+            <text x="230" y="176" class="t-sm t-acc">anthracyclines</text>
+            <text x="230" y="200" class="t-sm t-acc">M: taxanes, vinca</text>
+            <text x="10" y="226" class="t-sm t-mut">Any phase: alkylating agents, platinum, dactinomycin</text>
+          </svg>
+        caption: "الـ S للـ antimetabolites، والـ S و G2 للـ topoisomerase inhibitors، والـ G2 للـ bleomycin والـ anthracyclines، والـ M للـ microtubule inhibitors. الـ alkylating agents والـ platinum والـ dactinomycin شغالين في أي مرحلة."
+        alt: "A cell cycle circle with G1, S, G2 and M. Rb and p53 control the G1 checkpoint. Labels: S phase antimetabolites; S and G2 topoisomerase inhibitors; G2 bleomycin and anthracyclines; M taxanes and vinca alkaloids. Any phase: alkylating agents, platinum compounds, dactinomycin."
+        page: 443
+        quote: "Cell cycle–independent drugs Platinum compounds Alkylating agents Busulfan Nitrogen mustards Nitrosoureas Procarbazine Dactinomycin"
+      - kind: sort
+        prompt: "حط كل دوا في مرحلته"
+        bins: ["S phase", "M phase", "Any phase"]
+        cards:
+          - { text: "Methotrexate", bin: 0 }
+          - { text: "5-fluorouracil", bin: 0 }
+          - { text: "Hydroxyurea", bin: 0 }
+          - { text: "Vincristine", bin: 1 }
+          - { text: "Paclitaxel", bin: 1 }
+          - { text: "Cisplatin", bin: 2 }
+          - { text: "Busulfan", bin: 2 }
+          - { text: "Dactinomycin", bin: 2 }
+        why: "الـ antimetabolites في الـ S، والـ microtubule inhibitors في الـ M، والـ platinum والـ alkylating والـ dactinomycin في أي مرحلة."
+        page: 443
+        quote: "Antimetabolites Cladribine* Cytarabine 5-ﬂuorouracil Hydroxyurea Methotrexate Pentostatin Thiopurines"
+      - kind: explain
+        title: "كل دوا بيضرب فين في الـ DNA"
+        text: |-
+          - **MTX و 5-FU**: ↓ thymidine. **Thiopurines**: ↓ purines. **Hydroxyurea**: ribonucleotide reductase.
+          - **Alkylating و platinum**: ==cross-link== للـ DNA.
+          - **Bleomycin**: يقطع الـ DNA. **Anthracyclines و dactinomycin**: intercalation.
+          - **Etoposide**: topoisomerase II. **Irinotecan و topotecan**: topoisomerase I.
+          - **Vinca**: تمنع ==تكوين== الـ microtubules. **Taxanes**: تمنع ==تفكيكها==.
+        page: 443
+        quote: "Vinca alkaloids: inhibit microtubule formation Taxanes: inhibit microtubule disassembly"
+      - kind: explain
+        title: "Antibody-drug conjugate: صاروخ موجّه"
+        text: |-
+          monoclonal antibody مربوط بدوا كيماوي. الـ antibody يمسك ==antigen على الورم==، الخلية تبلعه (receptor-mediated endocytosis)، الـ lysosome يكسّره، والدوا يطلع جوه الخلية. النتيجة: فعالية أكتر وسمّية أقل.
+
+          المثال: **ado-trastuzumab emtansine (T-DM1)** لسرطان الثدي الـ HER2 ⊕.
+        page: 443
+        quote: "Antibody selectivity against tumor antigens allows targeted drug delivery to tumor cells while sparing healthy cells → ↑ efficacy and ↓ toxicity."
+      - kind: table
+        title: "الـ antitumor antibiotics"
+        columns: ["Drug", "بيعمل إيه", "بيستخدم في", "الـ toxicity"]
+        rows:
+          - ["Bleomycin", "free radicals ← DNA breaks", "testicular، Hodgkin", "pulmonary fibrosis، hyperpigmentation"]
+          - ["Dactinomycin", "intercalation ← ↓ RNA", "Wilms، Ewing، rhabdomyosarcoma", "myelosuppression"]
+          - ["Doxorubicin، daunorubicin", "free radicals، intercalation، topo II", "solid tumors، leukemias، lymphomas", "dilated cardiomyopathy (dexrazoxane)"]
+        hide: [[0, 3], [1, 2], [2, 3]]
+        page: 444
+        quote: "Dactinomycin (actinomycin D) Intercalates into DNA, preventing RNA synthesis Wilms tumor, Ewing sarcoma, rhabdomyosarcoma Myelosuppression"
+      - kind: check
+        question: "A child with Wilms tumor is treated with an antibiotic that intercalates into DNA and blocks RNA synthesis. Which drug?"
+        options:
+          - "Dactinomycin"
+          - "Bleomycin"
+          - "Doxorubicin"
+          - "Vincristine"
+        answer: 0
+        why:
+          - "صح: الـ dactinomycin للـ Wilms والـ Ewing والـ rhabdomyosarcoma، وبيمنع الـ RNA synthesis."
+          - "الـ bleomycin بيعمل free radicals، للـ testicular والـ Hodgkin."
+          - "الـ doxorubicin intercalation برضه، بس بيوقف الـ replication والـ topoisomerase II، ومشهور بالقلب."
+          - "الـ vincristine microtubule inhibitor."
+        page: 444
+        quote: "Intercalates into DNA, preventing RNA synthesis Wilms tumor, Ewing sarcoma, rhabdomyosarcoma"
+      - kind: explain
+        title: "الـ thiopurines والـ purine analogs"
+        text: |-
+          - **Azathioprine** بيتحول لـ **6-MP**، والـ **HGPRT** بيشغّله ← ↓ de novo purine synthesis. استخدامه أكتر في الـ immunosuppression (RA و IBD و SLE والـ transplant) والـ ALL.
+          - الـ 6-MP بيتكسّر بالـ **TPMT** وبالـ ==xanthine oxidase==، فلو اديت **allopurinol** أو febuxostat السمّية تعلى.
+          - **Cladribine و pentostatin**: الـ ADA ما يقدرش يتعامل معاهم. الاتنين للـ **hairy cell leukemia**.
+        page: 444
+        quote: "6-MP is inactivated by thiopurine S-methyl- transferase (genetic polymorphism) and xanthine oxidase (↑ toxicity with allopurinol or febuxostat)"
+      - kind: explain
+        title: "الـ pyrimidines والـ folate"
+        text: |-
+          - **Cytarabine**: pyrimidine analog ← chain termination. الدوا الأساسي في الـ **AML**.
+          - **5-FU**: يتحول لـ 5-FdUMP ← يوقف الـ ==thymidylate synthase==. للـ colon والـ pancreas، وموضعي للـ basal cell. بيعمل hand-foot syndrome. والـ capecitabine هو الـ prodrug بتاعه.
+          - **Hydroxyurea**: يوقف الـ ribonucleotide reductase. للـ CML والـ polycythemia vera، وفي الـ **sickle cell** لأنه ↑ HbF.
+          - **Methotrexate**: يوقف الـ ==dihydrofolate reductase==. للـ ALL والـ choriocarcinoma، وبرّه الأورام للـ ectopic pregnancy والـ RA والـ psoriasis. سمّيته (myelosuppression) بتتعكس بالـ **leucovorin rescue**.
+        page: 444
+        quote: "Pyrimidine analog bioactivated to 5-FdUMP → thymidylate synthase inhibition"
+      - kind: aside
+        tone: tip
+        text: "الـ **leucovorin** بيعمل حاجتين عكس بعض: ==بينقذ== من الـ methotrexate (بيدّي folate بعد الإنزيم المقفول)، و==بيقوّي== الـ 5-FU."
+        page: 444
+        quote: "Effects enhanced with the addition of leucovorin"
+      - kind: check
+        question: "A patient on azathioprine is started on allopurinol for gout and develops pancytopenia. Why?"
+        options:
+          - "Xanthine oxidase, which inactivates 6-MP, is blocked"
+          - "HGPRT is induced"
+          - "Dihydrofolate reductase is blocked"
+          - "Thymidylate synthase is blocked"
+        answer: 0
+        why:
+          - "صح: الـ allopurinol بيقفل الـ xanthine oxidase اللي بيكسّر الـ 6-MP، فالسمّية تعلى."
+          - "الـ HGPRT بيشغّل الـ 6-MP، والـ allopurinol مالوش دعوة بيه."
+          - "ده شغل الـ methotrexate."
+          - "ده شغل الـ 5-FU."
+        page: 444
+        quote: "xanthine oxidase (↑ toxicity with allopurinol or febuxostat)"
+      - kind: try
+        items: [heme.L05.045, heme.L05.050, heme.L05.054, heme.L05.067, heme.L05.068]
+    recap:
+      - "S = antimetabolites. M = taxanes و vinca. G2 = bleomycin و anthracyclines. أي مرحلة = alkylating و platinum و dactinomycin."
+      - "Bleomycin ← الرئة والجلد. Dactinomycin ← أورام الأطفال. Anthracyclines ← القلب (dexrazoxane)."
+      - "6-MP + allopurinol = سمّية. MTX ← DHFR (leucovorin rescue). 5-FU ← thymidylate synthase. Hydroxyurea ← ↑ HbF."
+    practice: [heme.L05.043, heme.L05.044, heme.L05.045, heme.L05.046, heme.L05.047, heme.L05.048, heme.L05.049, heme.L05.050, heme.L05.051, heme.L05.052, heme.L05.053, heme.L05.054, heme.L05.055, heme.L05.056, heme.L05.057, heme.L05.058, heme.L05.059, heme.L05.060, heme.L05.061, heme.L05.062, heme.L05.063, heme.L05.064, heme.L05.065, heme.L05.066, heme.L05.067, heme.L05.068]
+  - id: heme.L05.lesson4
+    title: "الـ alkylating والـ platinum والـ microtubules والـ topoisomerase"
+    hook: "Vincristine بيحرق الأعصاب و vinblastine بيفجّر النخاع: كل دوا ليه بصمة"
+    minutes: 8
+    pages: [445, 445]
+    topics: [alkylating-agents, platinum-compounds, microtubule-inhibitors, topoisomerase-inhibitors]
+    goals:
+      - "تعرف استخدام وسمّية كل alkylating agent"
+      - "تعرف سمّية الـ platinum وإزاي نحمي الكلى"
+      - "تفرّق بين الـ taxanes والـ vinca، والـ topoisomerase I و II"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ alkylating agents: cross-link في أي مرحلة"
+        text: |-
+          كلهم ==cell cycle nonspecific== وبيعملوا cross-link للـ DNA.
+
+          - **Busulfan**: يمسح النخاع قبل الـ bone marrow transplant. Myelosuppression شديد، و pulmonary fibrosis، و hyperpigmentation.
+          - **Cyclophosphamide و ifosfamide**: محتاجين الكبد يشغّلهم. بيعملوا ==hemorrhagic cystitis== وسرطان المثانة (نمنعه بالـ **mesna**)، و SIADH، والـ ifosfamide بيعمل Fanconi syndrome.
+          - **Carmustine و lomustine (nitrosoureas)**: بيعدّوا الـ blood-brain barrier ← للـ brain tumors والـ glioblastoma، وسمّيتهم في الـ CNS.
+          - **Procarbazine**: MAO inhibitor ضعيف (حذر من الـ tyramine)، و disulfiram-like reaction. للـ Hodgkin والـ brain tumors.
+        page: 445
+        quote: "Myelosuppression, SIADH, Fanconi syndrome (ifosfamide), hemorrhagic cystitis and bladder cancer (prevent with mesna)"
+      - kind: aside
+        tone: analogy
+        text: "جملة الكتاب للـ nitrosoureas: ==Put nitro in your Mustang and travel the globe==. الـ nitro في الـ Mustang (mustard)، والـ globe هو الـ glioblastoma."
+        page: 445
+        quote: "Put nitro in your Mustang and travel the globe"
+      - kind: check
+        question: "Which alkylating agent is chosen for a glioblastoma because it crosses the blood-brain barrier?"
+        options:
+          - "Carmustine"
+          - "Busulfan"
+          - "Cyclophosphamide"
+          - "Cisplatin"
+        answer: 0
+        why:
+          - "صح: الـ nitrosoureas (carmustine و lomustine) بيعدّوا الـ blood-brain barrier."
+          - "الـ busulfan لمسح النخاع قبل الـ transplant."
+          - "الـ cyclophosphamide للـ solid tumors والـ lymphomas والـ SLE."
+          - "الـ cisplatin platinum compound للـ solid tumors."
+        page: 445
+        quote: "Cross blood-brain barrier → CNS entry Brain tumors (including glioblastoma multiforme)"
+      - kind: explain
+        title: "Platinum: الكلى والودن والأعصاب"
+        text: |-
+          **Cisplatin و carboplatin و oxaliplatin**: cross-link، أي مرحلة. للـ testicular والـ bladder والـ ovarian والـ GI والـ lung والـ lymphomas.
+
+          السمّية: ==nephrotoxicity== (زي Fanconi syndrome، ونحمي بالـ **amifostine**)، و peripheral neuropathy، و ==ototoxicity==.
+        page: 445
+        quote: "Nephrotoxicity (eg, Fanconi syndrome; prevent with amifostine), peripheral neuropathy, ototoxicity."
+      - kind: explain
+        title: "الـ microtubules: نبنيها ولا نهدّها"
+        text: |-
+          كلهم ==M-phase specific==.
+
+          - **Taxanes (docetaxel و paclitaxel)**: يثبّتوا الـ microtubules فالـ spindle ما يتفكّش. "Taxes stabilize society". للـ ovarian والـ breast. سمّيتهم myelosuppression و neuropathy و hypersensitivity.
+          - **Vinca (vincristine و vinblastine)**: يمسكوا الـ β-tubulin فالـ microtubules ما تتبنيش. للـ leukemias والـ lymphomas والـ solid tumors.
+        page: 445
+        quote: "Hyperstabilize polymerized microtubules → prevent mitotic spindle breakdown"
+      - kind: mnemonic
+        word: "CB"
+        parts:
+          - { key: "C", text: "vinCristine: Crisps the nerves (axonal neuropathy و constipation لحد الـ ileus)" }
+          - { key: "B", text: "vinBlastine: Blasts the marrow (myelosuppression)" }
+        hook: "Crisps و Blasts: الحرف التاني في الاسم بيقولك السمّية"
+        page: 445
+        quote: "Vincristine (crisps the nerves): neurotoxicity (axonal neuropathy), constipation (including ileus) Vinblastine (blasts the marrow): myelosuppression"
+      - kind: explain
+        title: "الـ topoisomerase inhibitors"
+        text: |-
+          كلهم بيزوّدوا الـ DNA breaks فالخلية تقف في ==S و G2==.
+
+          - **Topoisomerase I**: irinotecan و topotecan ("-tecone"). للـ colon والـ ovarian والـ small cell lung. سمّيتهم severe myelosuppression و ==diarrhea==.
+          - **Topoisomerase II**: etoposide و teniposide ("-bothside"، يعني 2). للـ testicular والـ small cell lung والـ leukemia والـ lymphoma. سمّيتهم myelosuppression و alopecia.
+        page: 445
+        quote: "All cause ↑ DNA strand breaks, resulting in cell cycle arrest in S and G2 phases."
+      - kind: check
+        question: "A child on chemotherapy for ALL develops foot drop and constipation with near-normal counts. Which drug?"
+        options:
+          - "Vincristine"
+          - "Vinblastine"
+          - "Irinotecan"
+          - "Busulfan"
+        answer: 0
+        why:
+          - "صح: الـ vincristine بيحرق الأعصاب وبيعمل constipation، ومش بيضرب النخاع قوي."
+          - "الـ vinblastine بيفجّر النخاع."
+          - "الـ irinotecan بيعمل diarrhea مش constipation."
+          - "الـ busulfan بيعمل myelosuppression شديد."
+        page: 445
+        quote: "Vincristine (crisps the nerves): neurotoxicity (axonal neuropathy), constipation (including ileus)"
+      - kind: try
+        items: [heme.L05.073, heme.L05.076, heme.L05.080, heme.L05.083]
+    recap:
+      - "Busulfan ← مسح النخاع والرئة. Cyclophosphamide ← hemorrhagic cystitis (mesna). Nitrosoureas ← المخ. Procarbazine ← MAO و disulfiram."
+      - "Platinum ← الكلى (amifostine) والأعصاب والودن."
+      - "Taxanes تثبّت و vinca تمنع البناء. Vincristine ← الأعصاب، vinblastine ← النخاع."
+      - "Topo I (-tecan) ← diarrhea. Topo II (etoposide) ← alopecia."
+    practice: [heme.L05.069, heme.L05.070, heme.L05.071, heme.L05.072, heme.L05.073, heme.L05.074, heme.L05.075, heme.L05.076, heme.L05.077, heme.L05.078, heme.L05.079, heme.L05.080, heme.L05.081, heme.L05.082, heme.L05.083]
+  - id: heme.L05.lesson5
+    title: "الـ targeted therapy وإزاي نحمي المريض من الكيماوي"
+    hook: "Don't Trast HER, she will break your heart: كل target ليه مرض وليه أثر جانبي"
+    minutes: 10
+    pages: [446, 448]
+    topics: [tamoxifen, anticancer-monoclonal-antibodies, anticancer-small-molecule-inhibitors, chemotoxicity-amelioration, key-chemotoxicities]
+    goals:
+      - "تفهم ليه الـ tamoxifen بيحمي الثدي ويأذي الـ endometrium"
+      - "تحط كل monoclonal antibody وكل small molecule على الـ target بتاعه"
+      - "تعرف دوا الحماية لكل سمّية، والسمّيات المميزة لكل دوا"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Tamoxifen: نسيج يقفله ونسيج يشغّله"
+        text: |-
+          **SERM**: ==antagonist في الثدي==، و ==partial agonist في الـ endometrium والعضم==.
+
+          فهو بيمنع ويعالج سرطان الثدي (ER ⊕)، وبيمنع الـ gynecomastia مع علاج سرطان البروستاتا. بس لأنه بيشغّل الـ endometrium بيزوّد **endometrial cancer** و uterine sarcoma، وكمان hot flashes و DVT و PE.
+        page: 446
+        quote: "Selective estrogen receptor modulator with complex mode of action: antagonist in breast tissue, partial agonist in endometrium and bone."
+      - kind: explain
+        title: "الـ monoclonal antibodies"
+        text: |-
+          بيشتغلوا على targets ==برّه الخلية==، يعادلوها أو يخلّوا المناعة تشوفها (ADCC من الـ NK cells و complement). وبيخرجوا عن طريق الـ macrophages، مش الكلى ولا الكبد.
+
+          - **Alemtuzumab** على CD52: الـ CLL والـ MS، و ↑ infections و autoimmunity.
+          - **Bevacizumab** على VEGF: يمنع الأوعية، فيعمل نزيف وجلطات وجرح ما يلمّش.
+          - **Cetuximab و panitumumab** على EGFR: الـ CRC لو الـ ==RAS wild-type==، و rash.
+          - **Rituximab** على CD20: الـ NHL والـ CLL والـ ITP والـ TTP والـ RA. أول infusion ممكن يعمل cytokine release reaction.
+          - **Trastuzumab** على HER2: الثدي والمعدة، و dilated cardiomyopathy غالباً reversible.
+          - **PD-1 و PD-L1 و CTLA-4** (pembrolizumab و nivolumab و atezolizumab و ipilimumab): بيشيلوا الفرامل عن الـ T cells، فبيعملوا autoimmunity.
+        page: 446
+        quote: "Work against extracellular targets to neutralize them or to promote immune system recognition (eg, ADCC by NK cells and complement-dependent cytotoxicity)."
+      - kind: match
+        prompt: "وصّل كل antibody بالـ target بتاعه"
+        pairs:
+          - ["Rituximab", "CD20"]
+          - ["Alemtuzumab", "CD52"]
+          - ["Bevacizumab", "VEGF"]
+          - ["Trastuzumab", "HER2"]
+          - ["Ipilimumab", "CTLA-4"]
+        page: 446
+        quote: "Rituximab CD20 Non-Hodgkin lymphoma, CLL, rheumatoid arthritis, ITP, TTP, AIHA, multiple sclerosis"
+      - kind: aside
+        tone: trap
+        text: "القلب بيتأذي من الاتنين: الـ **anthracyclines** (غالباً ==irreversible==، والحماية بالـ dexrazoxane) والـ **trastuzumab** (غالباً ==reversible==). Don't Trast HER, she will break your heart."
+        page: 446
+        quote: "Don’t Trast HER, she will break your heart Breast cancer, gastric cancer Dilated cardiomyopathy (often reversible)"
+      - kind: check
+        question: "A patient on pembrolizumab develops colitis and hypothyroidism. What explains it?"
+        options:
+          - "Loss of checkpoint brakes on T cells causing autoimmunity"
+          - "Direct toxicity to the thyroid and colon"
+          - "B-cell depletion"
+          - "VEGF blockade"
+        answer: 0
+        why:
+          - "صح: الـ PD-1 inhibitors بيزوّدوا الـ autoimmunity: colitis و endocrinopathies و hepatitis و pneumonitis و dermatitis."
+          - "الـ checkpoint inhibitors مش cytotoxic."
+          - "ده الـ rituximab."
+          - "ده الـ bevacizumab."
+        page: 446
+        quote: "↑ risk of autoimmunity (eg, dermatitis, enterocolitis, hepatitis, pneumonitis, endocrinopathies)"
+      - kind: table
+        title: "الـ small molecule inhibitors"
+        columns: ["Drug", "Target", "المرض"]
+        rows:
+          - ["Imatinib، dasatinib، nilotinib", "BCR-ABL (و c-KIT)", "CML، ALL، GIST"]
+          - ["Ruxolitinib", "JAK1/2", "polycythemia vera"]
+          - ["Bortezomib، carfilzomib", "proteasome", "multiple myeloma، mantle cell"]
+          - ["Vemurafenib، dabrafenib", "BRAF", "melanoma"]
+          - ["Erlotinib، gefitinib", "EGFR", "NSCLC"]
+          - ["Alectinib، crizotinib", "ALK", "NSCLC"]
+          - ["Palbociclib", "CDK 4/6", "breast"]
+          - ["Olaparib", "PARP (↓ DNA repair)", "breast، ovarian، pancreatic، prostate"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [7, 1]]
+        page: 447
+        quote: "Imatinib, dasatinib, nilotinib BCR-ABL (also other tyrosine kinases [eg, c-KIT]) CML, ALL, GISTs"
+      - kind: aside
+        tone: exam
+        text: "الـ **bortezomib** بيقلّل تنشيط الـ T cells ← ↓ cell-mediated immunity ← ==herpes zoster reactivation==. وكمان بيعمل peripheral neuropathy."
+        page: 447
+        quote: "Peripheral neuropathy, herpes zoster reactivation (↓ T-cell activation → ↓ cell-mediated immunity)"
+      - kind: explain
+        title: "نحمي المريض إزاي"
+        text: |-
+          - **Amifostine** (free radical scavenger) ← الكلى من الـ platinum.
+          - **Dexrazoxane** (iron chelator) ← القلب من الـ anthracyclines.
+          - **Leucovorin** ← النخاع من الـ methotrexate.
+          - **Mesna** (بيمسك الـ ==acrolein==) ← المثانة من الـ cyclophosphamide.
+          - **Rasburicase** (uric acid ← allantoin) ← الـ tumor lysis.
+          - القيء ==الحاد== (أول ساعة أو اتنين): ondansetron (5-HT3) أو metoclopramide (D2). القيء ==المتأخر== (بعد 24 ساعة): aprepitant (NK1).
+          - الـ neutropenia: filgrastim. الـ anemia: epoetin alfa.
+        page: 447
+        quote: "Mesna Sulfhydryl compound that binds acrolein (toxic metabolite of cyclophosphamide/ifosfamide) Hemorrhagic cystitis from cyclophosphamide/ ifosfamide"
+      - kind: match
+        prompt: "وصّل كل سمّية بالدوا اللي عاملها (Key chemotoxicities)"
+        pairs:
+          - ["Ototoxicity and nephrotoxicity", "Cisplatin, carboplatin"]
+          - ["Peripheral neuropathy", "Vincristine"]
+          - ["Pulmonary fibrosis", "Bleomycin, busulfan"]
+          - ["Cardiotoxicity", "Doxorubicin, daunorubicin, trastuzumab"]
+          - ["Hemorrhagic cystitis", "Cyclophosphamide"]
+        page: 448
+        quote: "Vincristine peripheral neuropathy ↓ Bleomycin, Busulfan pulmonary fibrosis"
+      - kind: check
+        question: "Three days after chemotherapy, a patient still has nausea and vomiting despite ondansetron. Which drug class targets this delayed phase?"
+        options:
+          - "NK1 receptor antagonists"
+          - "5-HT3 receptor antagonists"
+          - "D2 receptor antagonists"
+          - "Recombinant G-CSF"
+        answer: 0
+        why:
+          - "صح: الـ aprepitant والـ fosaprepitant للقيء المتأخر (بعد 24 ساعة)."
+          - "الـ ondansetron للقيء الحاد، وهو أصلاً واخده."
+          - "الـ D2 antagonists للقيء الحاد برضه."
+          - "الـ filgrastim للـ neutropenia."
+        page: 447
+        quote: "Aprepitant, fosaprepitant NK1 receptor antagonists Delayed nausea and vomiting (>24 hr after chemotherapy)"
+      - kind: try
+        items: [heme.L05.086, heme.L05.093, heme.L05.098, heme.L05.102, heme.L05.105]
+    recap:
+      - "Tamoxifen: antagonist في الثدي، agonist في الـ endometrium (سرطان الـ endometrium) والعضم."
+      - "CD20 rituximab، CD52 alemtuzumab، VEGF bevacizumab، EGFR cetuximab، HER2 trastuzumab، والـ checkpoint inhibitors ← autoimmunity."
+      - "BCR-ABL imatinib، JAK ruxolitinib، proteasome bortezomib (zoster)، BRAF vemurafenib، PARP olaparib."
+      - "Amifostine للكلى، dexrazoxane للقلب، leucovorin للـ MTX، mesna للمثانة، rasburicase للـ tumor lysis، aprepitant للقيء المتأخر."
+    practice: [heme.L05.084, heme.L05.085, heme.L05.086, heme.L05.087, heme.L05.088, heme.L05.089, heme.L05.090, heme.L05.091, heme.L05.092, heme.L05.093, heme.L05.094, heme.L05.095, heme.L05.096, heme.L05.097, heme.L05.098, heme.L05.099, heme.L05.100, heme.L05.101, heme.L05.102, heme.L05.103, heme.L05.104, heme.L05.105]

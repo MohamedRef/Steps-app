@@ -1,0 +1,239 @@
+schema: steps.lesson/v1
+lecture: repro.L05
+lessons:
+  - id: repro.L05.lesson1
+    title: "أدوية الـ estrogen والـ progesterone ومنع الحمل"
+    hook: "نفس الدوا يشغّل الـ ovulation لو اديته pulses، ويطفيها لو اديته على طول. ونفس الـ SERM يحمي الصدر ويأذي الرحم"
+    minutes: 10
+    pages: [673, 675]
+    topics: [control-of-reproductive-hormones, gnrh-analogs, degarelix, ethinyl-estradiol, serms, aromatase-inhibitors, progestins, antiprogestins, contraception, tocolytics]
+    status: unverified
+    steps:
+      - kind: figure
+        title: "كل دوا بيضرب فين"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rp5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="10" width="110" height="30" rx="6"/>
+            <text x="20" y="30" class="t-sm t-b">Hypothalamus</text>
+            <text x="135" y="30" class="t-sm">clomiphene</text>
+            <rect class="fg-box" x="10" y="60" width="110" height="30" rx="6"/>
+            <text x="20" y="80" class="t-sm t-b">Pituitary</text>
+            <text x="135" y="80" class="t-sm">leuprolide · degarelix</text>
+            <rect class="fg-acc" x="10" y="110" width="110" height="30" rx="6"/>
+            <text x="20" y="130" class="t-sm t-b">Androgens</text>
+            <text x="135" y="130" class="t-sm">aromatase ← anastrozole</text>
+            <rect class="fg-good" x="10" y="160" width="110" height="30" rx="6"/>
+            <text x="20" y="180" class="t-sm t-b">Estrogen</text>
+            <text x="135" y="180" class="t-sm">receptor ← tamoxifen</text>
+            <line class="fg-arrow" x1="65" y1="40" x2="65" y2="58" marker-end="url(#rp5a)"/>
+            <line class="fg-arrow" x1="65" y1="90" x2="65" y2="108" marker-end="url(#rp5a)"/>
+            <line class="fg-arrow" x1="65" y1="140" x2="65" y2="158" marker-end="url(#rp5a)"/>
+          </svg>
+        caption: "امشي في السكة من فوق لتحت: الـ hypothalamus (clomiphene)، الـ pituitary (الـ GnRH analogs)، تحويل الـ androgen لـ estrogen (aromatase inhibitors)، وفي الآخر الـ receptor نفسه (الـ SERMs)."
+        alt: "The hormone axis from hypothalamus to pituitary to androgens to estrogen, with clomiphene at the hypothalamus, leuprolide and degarelix at the pituitary, anastrozole at aromatase, and tamoxifen at the estrogen receptor."
+        page: 673
+        quote: "Combined hormonal contraceptives Danazol –/+ Anastrozole Letrozole Exemestane Ketoconazole Danazol Tamoxifen Raloxifene"
+      - kind: explain
+        title: "GnRH analogs: pulses ولا على طول"
+        text: |-
+          **Leuprolide** و goserelin: لو اديتهم ==pulses== بيشتغلوا زي الـ GnRH، فبتستخدمهم للـ infertility.
+
+          لو اديتهم ==continuous==: في الأول agonist (**tumor flare**)، وبعدين الـ receptors في الـ pituitary تقفل، فالـ FSH والـ LH يقعوا، والـ estrogen أو الـ testosterone يقعوا. ده للـ fibroids والـ endometriosis والبلوغ البدري والـ prostate cancer.
+        page: 673
+        quote: "Act as GnRH agonists when used in pulsatile fashion. When used in continuous fashion, first transiently act as GnRH agonists (tumor flare), but subsequently act as GnRH antagonists"
+      - kind: reveal
+        prompt: "راجل عنده prostate cancer في العمود الفقري. ليه ممكن تختار degarelix بدل leuprolide؟"
+        answer: "الـ **degarelix** ==GnRH antagonist== من الأول، فمفيش start-up flare. أما الـ leuprolide فالأسبوع الأول ممكن يعلّي الـ testosterone ويزوّد الألم. آثار الـ degarelix: hot flashes و liver toxicity."
+        page: 674
+        quote: "MECHANISM GnRH antagonist. No start-up flare. CLINICAL USE Prostate cancer. ADVERSE EFFECTS Hot flashes, liver toxicity."
+      - kind: check
+        question: "A woman with severe endometriosis gets continuous leuprolide. Why do her symptoms improve after a few weeks?"
+        options:
+          - "Pituitary GnRH receptors downregulate, so FSH, LH and estrogen fall"
+          - "It blocks estrogen receptors in the endometrium"
+          - "It inhibits aromatase in fat"
+          - "It acts as a progestin"
+        answer: 0
+        why:
+          - "صح: continuous ← downregulation ← ↓ FSH و LH ← ↓ estrogen، فالـ endometriosis تنشف."
+          - "ده شغل SERM زي raloxifene."
+          - "ده anastrozole."
+          - "الـ leuprolide مش progestin."
+        page: 673
+        quote: "(downregulate GnRH receptor in pituitary → ↓ FSH and ↓ LH → ↓ estrogen in females and ↓ testosterone in males)"
+      - kind: explain
+        title: "Ethinyl estradiol"
+        text: |-
+          بيستخدم في الـ hypogonadism، ومنع الحمل مع progestin، والـ HRT (أقل من 5 سنين).
+
+          آثاره: ==endometrial cancer== لو من غير progesterone، و hepatic adenoma، و **جلطات**. ممنوع: ==مدخنة فوق 35==، جلطات أو قلب أو stroke، migraine بـ aura، سرطان صدر، كبد.
+        page: 674
+        quote: "Contraindications—people >35 years old who smoke tobacco (↑ risk of cardiovascular events), patients with ↑ risk of cardiovascular disease (including history of venous thromboembolism, coronary artery disease, stroke), migraine (especially with aura), breast cancer, liver disease."
+      - kind: table
+        title: "الـ SERMs: نفس العيلة، شغل مختلف"
+        columns: ["Drug", "Breast", "Uterus", "Bone", "Use"]
+        rows:
+          - ["Tamoxifen", "Antagonist", "Partial agonist", "Partial agonist", "ER/PR ⊕ breast cancer"]
+          - ["Raloxifene", "Antagonist", "Antagonist", "Agonist", "Postmenopausal osteoporosis"]
+          - ["Clomiphene", "–", "–", "–", "Anovulatory infertility (hypothalamic antagonist)"]
+        hide: [[0, 2], [1, 2], [1, 4], [2, 4]]
+        page: 674
+        quote: "Antagonist at breast, partial agonist at uterus, bone. Hot flashes, ↑ risk of thromboembolic events (especially with tobacco smoking), and endometrial hyperplasia and/or cancer."
+      - kind: aside
+        tone: tip
+        text: "الـ **raloxifene** antagonist في الرحم، فمفيش ↑ endometrial cancer زي الـ tamoxifen. الكتاب بيقولها: «so you can ==relax==». بس الاتنين بيعملوا جلطات، خصوصاً مع التدخين."
+        page: 674
+        quote: "but no increased risk of endometrial cancer (vs tamoxifen, so you can “relax”); used primarily to treat postmenopausal osteoporosis."
+      - kind: check
+        question: "How does clomiphene make an anovulatory woman ovulate?"
+        options:
+          - "It blocks hypothalamic estrogen receptors, so feedback stops and LH and FSH rise"
+          - "It is an LH analog"
+          - "It inhibits aromatase"
+          - "It blocks progesterone receptors"
+        answer: 0
+        why:
+          - "صح: المخ مش شايف الـ estrogen، فيفتكر إنه واطي، فيعلّي الـ LH والـ FSH. خلي بالك من الـ multiple pregnancies."
+          - "مش analog."
+          - "ده letrozole، وهو كمان بيستخدم في الـ PCOS."
+          - "ده mifepristone."
+        page: 674
+        quote: "Antagonist at estrogen receptors in hypothalamus. Prevents normal feedback inhibition and ↑ release of LH and FSH from pituitary, which stimulates ovulation."
+      - kind: explain
+        title: "Aromatase inhibitors و progestins"
+        text: |-
+          - **Anastrozole** و letrozole و exemestane: بيمنعوا تحويل الـ androgens لـ estrogen في الأنسجة. لسرطان الصدر ER ⊕ ==بعد الـ menopause==.
+          - **Progestins**: بيقللوا نمو الـ endometrium، و ==بيتقّلوا الـ cervical mucus==. لمنع الحمل، والـ endometrial cancer، والنزيف.
+
+          والـ progestins أمان في الرضاعة، وهي البديل لو الـ estrogen ممنوع.
+        page: 674
+        quote: "Bind progesterone receptors, ↓ growth and ↑ vascularization of endometrium, thicken cervical mucus."
+      - kind: reveal
+        prompt: "ست عندها amenorrhea اديتها progestin ووقفته فنزل دم. ده بيقولك إيه؟"
+        answer: "إن الـ endometrium موجود وفيه estrogen، والسكة مفتوحة. يعني ==مش Asherman== (مش anatomic defect)، ومش chronic anovulation ==من غير estrogen==."
+        page: 674
+        quote: "Progestin challenge: presence of bleeding upon withdrawal of progestins excludes anatomic defects (eg, Asherman syndrome) and chronic anovulation without estrogen."
+      - kind: table
+        title: "منع الحمل"
+        columns: ["Method", "How it works"]
+        rows:
+          - ["Combined or progestin-only hormones", "↓ GnRH → ↓ LH/FSH → no LH surge; progestins thicken mucus and thin endometrium"]
+          - ["Copper IUD", "Local inflammation toxic to sperm and ova (hormone free)"]
+          - ["Ulipristal", "Progesterone receptor blocker (emergency contraception)"]
+          - ["Vasectomy or tubal ligation", "Sperm can't reach ova; irreversible"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+        page: 675
+        quote: "Prevent ovulation by ↓ GnRH → ↓ LH/FSH → no estrogen surge → no LH surge"
+      - kind: aside
+        tone: exam
+        text: "الـ **Tocolytics** بيرخّوا الرحم في الولادة المبكرة: «Keep baby in the ==TIN==»: **T**erbutaline (β2)، **I**ndomethacin (NSAID)، **N**ifedipine. الهدف كسب وقت للـ ==glucocorticoids== (رئة الجنين) أو النقل."
+        page: 675
+        quote: "Medications that relax the uterus; include Terbutaline (β2 -agonist action), Indomethacin (NSAID), Nifedipine (Ca2+ channel blocker)."
+      - kind: try
+        items: [repro.L05.005, repro.L05.010, repro.L05.013, repro.L05.014, repro.L05.022]
+    recap:
+      - "GnRH analogs: pulses تشغّل، continuous تطفي (بعد flare). Degarelix من غير flare."
+      - "Estrogen ممنوع: مدخنة فوق 35، جلطات، migraine بـ aura، سرطان صدر، كبد."
+      - "Tamoxifen يحمي الصدر ويعلّي endometrial cancer. Raloxifene للعضم (relax). Clomiphene للـ ovulation."
+      - "Aromatase inhibitors بعد الـ menopause. Progestins أمان في الرضاعة."
+      - "Copper IUD من غير هرمونات. Mifepristone للإجهاض، ulipristal للطوارئ. TIN للـ preterm labor."
+    practice: [repro.L05.001, repro.L05.002, repro.L05.003, repro.L05.004, repro.L05.005, repro.L05.006, repro.L05.007, repro.L05.008, repro.L05.009, repro.L05.010, repro.L05.011, repro.L05.012, repro.L05.013, repro.L05.014, repro.L05.015, repro.L05.016, repro.L05.017, repro.L05.018, repro.L05.019, repro.L05.020, repro.L05.021, repro.L05.022, repro.L05.023, repro.L05.024]
+  - id: repro.L05.lesson2
+    title: "الـ androgens وأعداءها"
+    hook: "بطل كمال أجسام عضلاته كبيرة وخصيته صغيرة؟ الـ testosterone من برّه بيطفي اللي جوه"
+    minutes: 7
+    pages: [675, 676]
+    topics: [danazol, testosterone, anabolic-steroids, antiandrogens, tamsulosin, minoxidil]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Testosterone و danazol"
+        text: |-
+          - **Testosterone**: للـ hypogonadism. آثاره: virilization في الست، ==خصية صغيرة== في الراجل، الـ epiphysis تقفل بدري، acne، erythrocytosis، و LDL يعلى.
+          - **Danazol**: androgen صناعي، partial agonist. للـ ==endometriosis== و hereditary angioedema. آثاره: وزن و acne و hirsutism و ↓ HDL، و idiopathic intracranial hypertension.
+        page: 675
+        quote: "Synthetic androgen that acts as partial agonist at androgen receptors. CLINICAL USE Endometriosis, hereditary angioedema."
+      - kind: reveal
+        prompt: "الـ anabolic steroids بتكبّر العضلات. طب ليه الخصية بتصغر والـ sperm بيختفي؟"
+        answer: "الـ androgen اللي من برّه بيعمل negative feedback ← ==↓ GnRH== ← ↓ LH و FSH ← الـ testosterone ==جوه الخصية== يقع ← azoospermia. والرجوع بطيء بعد ما يوقف."
+        page: 676
+        quote: "Chronic use → ↓ GnRH → ↓ LH/FSH → ↓ intratesticular T → azoospermia, infertility. Recovery slow post-discontinuation."
+      - kind: figure
+        title: "الـ steroids من راسك لرجلك"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <circle class="fg-box" cx="60" cy="30" r="20"/>
+            <text x="95" y="35" class="t-sm">Brain: roid rage, mania, depression</text>
+            <rect class="fg-acc" x="40" y="58" width="40" height="30" rx="6"/>
+            <text x="95" y="78" class="t-sm">Heart: ↑ LDL, ↓ HDL → MI</text>
+            <rect class="fg-box" x="40" y="98" width="40" height="30" rx="6"/>
+            <text x="95" y="118" class="t-sm">Liver: adenoma · Blood: ↑ EPO</text>
+            <rect class="fg-good" x="40" y="138" width="40" height="30" rx="6"/>
+            <text x="95" y="150" class="t-sm">Males: small testes, gynecomastia</text>
+            <text x="95" y="168" class="t-sm">Females: virilization, ↓ breast</text>
+          </svg>
+        caption: "المخ (roid rage)، القلب (LDL عالي)، الكبد (adenoma)، الدم (polycythemia من الـ EPO)، والـ gonads. والـ gynecomastia من الـ aromatization، إلا الـ stanozolol لأن الـ A ring بتاعه مقفول."
+        alt: "A figure from head to pelvis listing anabolic steroid effects: brain aggression and mood changes, heart high LDL and low HDL, liver adenoma and high EPO, small testes and gynecomastia in males, and virilization in females."
+        page: 676
+        quote: "Hepatotoxicity (↑ AST/ALT, cholestasis, hepatic adenoma), polycythemia (↑ EPO). Psychiatric: aggression (“roid rage”), mania, withdrawal depression; mood swings common. Cardiovascular: ↑ LDL, ↓ HDL → ↑ atherosclerosis/MI risk."
+      - kind: check
+        question: "A young bodybuilder has infertility, small testes and gynecomastia. Which levels fit?"
+        options:
+          - "↓ LH and FSH, ↓ intratesticular testosterone"
+          - "↑ LH and FSH"
+          - "↑ LH with ↑ testosterone"
+          - "Normal LH with ↓ DHT"
+        answer: 0
+        why:
+          - "صح: الـ feedback قافل الـ GnRH، فكل اللي تحته واطي."
+          - "ده primary hypogonadism."
+          - "ده androgen insensitivity."
+          - "ده 5α-reductase deficiency."
+        page: 676
+        quote: "Suspect usage in young male with infertility + high muscle mass + small testes + gynecomastia"
+      - kind: table
+        title: "Antiandrogens"
+        columns: ["Drug", "Mechanism", "Use", "Adverse effect"]
+        rows:
+          - ["Abiraterone", "17α-hydroxylase/17,20-lyase inhibitor", "Prostate cancer", "Hypertension, hypokalemia"]
+          - ["Finasteride", "5α-reductase inhibitor", "BPH, alopecia", "Gynecomastia, sexual dysfunction"]
+          - ["Flutamide, bicalutamide", "Androgen receptor blocker", "Prostate cancer", "Gynecomastia"]
+          - ["Ketoconazole", "17α-hydroxylase/17,20-lyase inhibitor", "Prostate cancer", "Gynecomastia"]
+          - ["Spironolactone", "Androgen receptor and 17α-hydroxylase inhibitor", "PCOS", "Amenorrhea"]
+        hide: [[0, 3], [1, 1], [2, 1], [4, 2]]
+        page: 676
+        quote: "Abiraterone 17α-hydroxylase/17,20-lyase inhibitor (↓ steroid synthesis) Prostate cancer Hypertension, hypokalemia (↑ mineralocorticoids)"
+      - kind: reveal
+        prompt: "ليه الـ abiraterone بيعلّي الضغط ويوطّي الـ potassium؟"
+        answer: "لأنه بيقفل الـ ==17α-hydroxylase==، فالـ precursors ما تروحش للـ androgens والـ cortisol، وتتزنق في سكة الـ **mineralocorticoids**. Mineralocorticoid كتير ← hypertension و hypokalemia."
+        page: 676
+        quote: "Hypertension, hypokalemia (↑ mineralocorticoids)"
+      - kind: check
+        question: "Why does tamsulosin cause less orthostatic hypotension than other α1-blockers?"
+        options:
+          - "It is selective for prostatic α1A/D over vascular α1B receptors"
+          - "It acts only on β2 receptors"
+          - "It is a 5α-reductase inhibitor"
+          - "It is a direct arteriolar vasodilator"
+        answer: 0
+        why:
+          - "صح: الـ α1A/D في البروستاتا، والـ α1B في الأوعية، فالـ tamsulosin بيسيب الأوعية في حالها."
+          - "الـ β2 ده terbutaline."
+          - "ده finasteride."
+          - "ده minoxidil."
+        page: 676
+        quote: "α1 -antagonist selective for α1A/D receptors in prostate (vs vascular α1B receptors) → ↓ smooth muscle tone → ↑ urine flow."
+      - kind: aside
+        tone: tip
+        text: "الصلع الوراثي (androgenetic alopecia) ليه دوايين: **finasteride** (يقلل الـ DHT)، و **minoxidil**، وده ==direct arteriolar vasodilator== كان أصلاً للضغط العالي اللي مش بيستجيب."
+        page: 676
+        quote: "Direct arteriolar vasodilator. CLINICAL USE Androgenetic alopecia, severe refractory hypertension."
+      - kind: try
+        items: [repro.L05.030, repro.L05.033, repro.L05.034, repro.L05.036]
+    recap:
+      - "Testosterone: خصية صغيرة، epiphysis تقفل، erythrocytosis، LDL يعلى. Danazol للـ endometriosis."
+      - "Anabolic steroids: ↓ GnRH ← ↓ LH و FSH ← azoospermia. Gynecomastia من aromatization."
+      - "Abiraterone: hypertension و hypokalemia. Finasteride: 5α-reductase للـ BPH والصلع."
+      - "Tamsulosin: α1A/D بس. Minoxidil: vasodilator للصلع والضغط."
+    practice: [repro.L05.025, repro.L05.026, repro.L05.027, repro.L05.028, repro.L05.029, repro.L05.030, repro.L05.031, repro.L05.032, repro.L05.033, repro.L05.034, repro.L05.035, repro.L05.036, repro.L05.037]
