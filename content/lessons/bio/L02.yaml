@@ -1,0 +1,408 @@
+schema: steps.lesson/v1
+lecture: bio.L02
+lessons:
+  - id: bio.L02.lesson1
+    title: "الخلية بتقرر تتقسم إزاي، ومين بيمسك الفرامل؟"
+    hook: "p53 و Rb هما الفرامل. افهم السلسلة مرة وهتحل أسئلة Li-Fraumeni والـ chemo"
+    minutes: 7
+    pages: [44, 44]
+    topics: [cell-cycle-phases, cell-types]
+    goals:
+      - "ترتب سلسلة p53 ← p21 ← CDK ← Rb"
+      - "تفرّق بين الخلايا permanent و stable و labile"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "دورة الخلية في سطرين"
+        text: |-
+          G1 ← S (الـ DNA بيتنسخ) ← G2 ← M (mitosis + cytokinesis). الـ ==M أقصر مرحلة==، والـ ==G1 مدته بتتغير== من خلية للتانية.
+
+          الانتقال من مرحلة للتانية بيعدّي على **checkpoints** بتتحكم فيها الـ cyclins والـ CDKs والـ tumor suppressors.
+        page: 44
+        quote: "M phase (shortest phase of cell cycle) includes mitosis (prophase, prometaphase, metaphase, anaphase, telophase) and cytokinesis (cytoplasm splits in two). G1 is of variable duration."
+      - kind: aside
+        tone: analogy
+        text: "الـ **CDK** عربية موجودة دايماً في الجراج بس من غير مفتاح. الـ **cyclin** هو المفتاح، وبيتعمل بس في مرحلة معينة لما growth factor ييجي. العربية تدور ← تعمل phosphorylation للـ ==Rb== ← الخلية تعدّي."
+        page: 44
+        quote: "Constitutively expressed but inactive when not bound to cyclin."
+      - kind: figure
+        title: "الفرامل: p53"
+        svg: |-
+          <svg viewBox="0 0 360 120" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-bad" x="5" y="20" width="60" height="34" rx="6"/><text x="22" y="42" class="t-sm t-b">p53</text>
+            <line class="fg-arrow" x1="65" y1="37" x2="85" y2="37" marker-end="url(#b2a)"/>
+            <rect class="fg-box" x="87" y="20" width="55" height="34" rx="6"/><text x="102" y="42" class="t-sm">p21</text>
+            <line class="fg-arrow-bad" x1="142" y1="37" x2="162" y2="37"/><text x="146" y="30" class="t-sm t-bad">⊣</text>
+            <rect class="fg-box" x="164" y="20" width="55" height="34" rx="6"/><text x="177" y="42" class="t-sm">CDK</text>
+            <line class="fg-arrow" x1="219" y1="37" x2="239" y2="37" marker-end="url(#b2a)"/>
+            <rect class="fg-good" x="241" y="20" width="110" height="34" rx="6"/><text x="248" y="42" class="t-sm">Rb active</text>
+            <text x="200" y="85" class="t-sm t-bad">G1 → S blocked</text>
+            <text x="5" y="85" class="t-sm t-mut">DNA damage</text>
+            <text x="5" y="105" class="t-sm t-mut">HPV E6 blocks p53</text>
+          </svg>
+        caption: "لما الـ DNA يتضرب، الـ p53 يشغّل p21، والـ p21 يقفل الـ CDK، فالـ Rb يفضل من غير phosphate (شغّال) ويمسك الخلية في G1."
+        alt: "Chain: DNA damage activates p53, which induces p21; p21 inhibits CDK, so Rb stays hypophosphorylated and active, blocking G1 to S. HPV E6 blocks p53."
+        page: 44
+        quote: "p53 → p21 induction → CDK inhibition → Rb hypophosphorylation (activation) → G1-S progression inhibition."
+      - kind: reveal
+        prompt: "لو الـ p53 ضايع من الولادة (germline)، تتوقع إيه؟"
+        answer: "الخلايا المضروبة تكمل تتقسم ← سرطانات كتير وبدري في نفس العيلة: ده ==Li-Fraumeni syndrome== (loss of function في p53)."
+        page: 44
+        quote: "Mutations in tumor suppressor genes can result in unrestrained cell division (eg, Li-Fraumeni syndrome)."
+      - kind: check
+        question: "In which form is Rb active as a brake on G1-S?"
+        options: ["Hypophosphorylated", "Hyperphosphorylated", "Bound to cyclin", "Acetylated"]
+        answer: 0
+        why:
+          - "صح: الـ Rb من غير phosphate هو الشغّال، والـ CDK لما يعمله phosphorylation يفك الفرامل."
+          - "الـ phosphorylation بيعطّله فالخلية تعدّي."
+          - "الـ cyclin بيرتبط بالـ CDK مش الـ Rb."
+          - "الكتاب ما ربطش الـ acetylation بالـ Rb."
+        page: 44
+        quote: "p53 → p21 induction → CDK inhibition → Rb hypophosphorylation (activation) → G1-S progression inhibition."
+      - kind: explain
+        title: "مين بيتقسم ومين لأ"
+        text: |-
+          - **Permanent**: قاعدين في G0 للأبد (neurons، skeletal و cardiac muscle، RBCs).
+          - **Stable**: في G0 بس بيرجعوا G1 لو اتنبهوا (hepatocytes، lymphocytes، PCT، periosteal cells).
+          - **Labile**: ==عمرهم ما بيروحوا G0== وبيتقسموا بسرعة (bone marrow، gut، skin، hair follicles، germ cells). ودول ==أكتر حاجة بتتضرب بالـ chemo==.
+        page: 44
+        quote: "Labile Never go to G0, divide rapidly with a short G1. Most affected by chemotherapy."
+      - kind: sort
+        prompt: "حط كل خلية في نوعها"
+        bins: ["Permanent", "Stable", "Labile"]
+        cards:
+          - { text: "Neurons", bin: 0 }
+          - { text: "Cardiac muscle", bin: 0 }
+          - { text: "Hepatocytes", bin: 1 }
+          - { text: "Lymphocytes", bin: 1 }
+          - { text: "Gut epithelium", bin: 2 }
+          - { text: "Hair follicles", bin: 2 }
+        why: "الـ chemo بيوقّع الشعر ويعمل mucositis و neutropenia عشان دول labile، وما بيأثرش على القلب والأعصاب بنفس الطريقة لأنهم permanent."
+        page: 44
+        quote: "Permanent Remain in G0, regenerate from stem cells. Neurons, skeletal and cardiac muscle, RBCs. Stable (quiescent) Enter G1 from G0 when stimulated. Hepatocytes, lymphocytes, PCT, periosteal cells."
+      - kind: try
+        items: [bio.L02.002, bio.L02.005, bio.L02.006, bio.L02.010]
+    recap:
+      - "M أقصر مرحلة، G1 متغير."
+      - "CDK موجود دايماً بس محتاج cyclin."
+      - "p53 ← p21 ← CDK يتقفل ← Rb شغّال ← G1 يقف. Li-Fraumeni = p53."
+      - "Labile (marrow، gut، skin، hair) أكتر حاجة تتضرب بالـ chemo."
+    practice: [bio.L02.001, bio.L02.002, bio.L02.003, bio.L02.004, bio.L02.005, bio.L02.006, bio.L02.007, bio.L02.008, bio.L02.009, bio.L02.010, bio.L02.011]
+  - id: bio.L02.lesson2
+    title: "مصنع البروتين ومكتب البريد"
+    hook: "الـ RER بيصنع، والـ Golgi بيلزق الطوابع، ولو طابع واحد وقع يبقى I-cell disease"
+    minutes: 9
+    pages: [45, 46]
+    topics: [rough-er, smooth-er, cell-trafficking, peroxisome, proteasome]
+    goals:
+      - "تفرّق بين RER و SER وأي خلايا غنية بكل واحد"
+      - "تفهم I-cell disease خطوة خطوة"
+      - "تفرّق بين Zellweger و Refsum و adrenoleukodystrophy"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "RER ولا SER؟"
+        text: |-
+          - **RER**: عليه ribosomes، فبيعمل ==البروتين اللي هيخرج== من الخلية وبروتينات الـ organelles، وبيضيف الـ N-linked sugars (eNdoplasmic). غني فيه: **plasma cells** و **goblet cells**. وفي الأعصاب اسمه **Nissl bodies**.
+          - **Free ribosomes**: البروتين اللي هيفضل جوه (cytosol، peroxisome، mitochondria).
+          - **SER**: من غير ribosomes: ==steroids== و detox، وفيه **glucose-6-phosphatase**. غني فيه: hepatocytes والـ adrenal cortex والـ gonads.
+        page: 45
+        quote: "Site of steroid synthesis and detoxification of drugs and poisons. Lacks surface ribosomes. Location of glucose-6-phosphatase (last step in both glycogenolysis and gluconeogenesis)."
+      - kind: check
+        question: "Which cell is richest in SER?"
+        options: ["Adrenal cortex cell", "Plasma cell", "Goblet cell", "Neuron cell body (Nissl)"]
+        answer: 0
+        why:
+          - "صح: الـ adrenal cortex بيعمل steroids، والـ steroids بتتعمل في الـ SER."
+          - "الـ plasma cell بيفرز antibodies فهو RER."
+          - "الـ goblet cell بيفرز mucus فهو RER."
+          - "الـ Nissl bodies هي RER."
+        page: 45
+        quote: "Hepatocytes and steroid hormone–producing cells of the adrenal cortex and gonads are rich in SER."
+      - kind: explain
+        title: "الـ Golgi: مكتب البريد"
+        text: |-
+          الـ Golgi بيستلم من الـ ER ويوزّع. بيعدّل الـ N-oligosaccharides على الـ asparagine، ويحط O-oligosaccharides على الـ serine والـ threonine، والأهم: بيلزق ==mannose-6-phosphate== على الإنزيمات اللي رايحة الـ lysosome. ده العنوان.
+
+          والـ **SRP** هو اللي بيوصّل الريبوسوم والبروتين اللي بيتعمل من الـ cytosol للـ RER أصلاً.
+        page: 45
+        quote: "Posttranslational events in GOlgi include modifying N-oligosaccharides on asparagine, adding O-oligosaccharides on serine and threonine, and adding mannose-6-phosphate to proteins for targeting to lysosomes"
+      - kind: reveal
+        prompt: "لو الـ Golgi ما عرفش يلزق الـ mannose-6-phosphate، الإنزيمات هتروح فين، والـ lysosome هيحصله إيه؟"
+        answer: "من غير عنوان، الإنزيمات ==بتتفرز بره الخلية== (فتلاقيها عالية في الـ plasma)، والـ lysosome يفضل فاضي من الإنزيمات، فالزبالة تتراكم جواه (inclusion bodies). ده **I-cell disease** (AR): coarse face، gingival hyperplasia، corneal clouding، مفاصل ناشفة، زي Hurler بس أوحش."
+        page: 45
+        quote: "failure of the Golgi to phosphorylate mannose residues (↓ mannose-6-phosphate) on glycoproteins → enzymes secreted extracellularly rather than delivered to lysosomes"
+      - kind: mnemonic
+        word: "COP"
+        parts:
+          - { key: "C", text: "COPII: ER ← cis-Golgi، anterograde. «Two steps forward»" }
+          - { key: "O", text: "COPI: Golgi ← Golgi و cis-Golgi ← ER، retrograde. «One step back»" }
+          - { key: "P", text: "Plus clathrin: trans-Golgi ← lysosomes، و plasma membrane ← endosomes (LDL receptor)" }
+        hook: "الكتاب: Two (COPII) steps forward; one (COPI) step back"
+        page: 45
+        quote: "COPII: ER → cis-Golgi (anterograde). “Two (COPII) steps forward (anterograde); one (COPI) step back (retrograde).”"
+      - kind: explain
+        title: "الـ peroxisome: بيكسّر الدهون الغريبة"
+        text: |-
+          حاجتين ==بيعملهم لوحده== ومحدش غيره: β-oxidation للـ **VLCFA** و α-oxidation للـ **branched-chain** fatty acids. وكمان بيكسّر amino acids و ethanol، وبيبني bile acids و **plasmalogens** (مهمة في الـ white matter).
+
+          والـ **proteasome** حاجة تانية خالص: برميل بيكسّر البروتينات اللي عليها polyubiquitin، وبيخدم الـ MHC I.
+        page: 46
+        quote: "β-oxidation of very-long-chain fatty acids (VLCFA) (strictly peroxisomal process) ▘ α-oxidation of branched-chain fatty acids (strictly peroxisomal process)"
+      - kind: table
+        title: "التلاتة بتوع الـ peroxisome"
+        columns: ["Disease", "Defect", "Builds up"]
+        rows:
+          - ["Zellweger (AR)", "Peroxisome biogenesis (PEX)", "VLCFA + pipecolic acid"]
+          - ["Refsum (AR)", "α-oxidation", "Phytanic acid"]
+          - ["Adrenoleukodystrophy (XR)", "β-oxidation (ABCD1)", "VLCFA in adrenals, white matter, testes"]
+        hide: [[0, 1], [1, 2], [2, 1], [2, 2]]
+        page: 46
+        quote: "Refsum disease—autosomal recessive disorder of α-oxidation → buildup of phytanic acid due to inability to degrade it."
+      - kind: aside
+        tone: exam
+        text: "ولد صغير سلوكه اتغير ومستواه في المدرسة نزل، وجلده غامق (adrenal insufficiency)، وخاله مات بنفس الحكاية؟ ده ==adrenoleukodystrophy==: X-linked، ABCD1، VLCFA عالي."
+        page: 46
+        quote: "Adrenoleukodystrophy—X-linked recessive disorder of β-oxidation due to mutation in ABCD1 gene → VLCFA buildup in adrenal glands, white (leuko) matter of brain, testes."
+      - kind: check
+        question: "Retinitis pigmentosa, anosmia, ataxia, ichthyosis and high phytanic acid. Treatment?"
+        options: ["Diet and plasmapheresis", "Bisphosphonates", "Allopurinol", "Copper injections"]
+        answer: 0
+        why:
+          - "صح: Refsum disease، والعلاج diet و plasmapheresis."
+          - "Bisphosphonates للـ osteogenesis imperfecta."
+          - "Allopurinol للـ uric acid."
+          - "النحاس بيتكلم عنه في Menkes."
+        page: 46
+        quote: "Vision loss (retinitis pigmentosa), anosmia, hearing loss, ataxia, peripheral neuropathy, ichthyosis, and cardiac conduction defects. Treatment: diet, plasmapheresis."
+      - kind: try
+        items: [bio.L02.017, bio.L02.020, bio.L02.022, bio.L02.025, bio.L02.029]
+    recap:
+      - "RER: بروتين بيخرج (plasma و goblet cells). SER: steroids و detox و glucose-6-phosphatase."
+      - "Golgi يلزق mannose-6-phosphate. لو باظ ← I-cell disease والإنزيمات في الدم."
+      - "COPII قدام، COPI ورا، clathrin للـ lysosomes والـ endocytosis."
+      - "Zellweger (PEX)، Refsum (phytanic acid)، ALD (ABCD1، XR)."
+    practice: [bio.L02.012, bio.L02.013, bio.L02.014, bio.L02.015, bio.L02.016, bio.L02.017, bio.L02.018, bio.L02.019, bio.L02.020, bio.L02.021, bio.L02.022, bio.L02.023, bio.L02.024, bio.L02.025, bio.L02.026, bio.L02.027, bio.L02.028, bio.L02.029, bio.L02.030, bio.L02.031, bio.L02.032, bio.L02.033]
+  - id: bio.L02.lesson3
+    title: "الهيكل والقطارات والشعيرات"
+    hook: "الـ tetanus بيركب dynein، والـ HSV بيرجع على kinesin، و Kartagener قلبه في اليمين"
+    minutes: 8
+    pages: [46, 47]
+    topics: [cytoskeletal-elements, cilia-structure, primary-ciliary-dyskinesia, sodium-potassium-pump]
+    goals:
+      - "تعرف الـ 3 أنواع filaments وأمثلتهم"
+      - "تفرّق بين dynein و kinesin"
+      - "تشرح Kartagener والـ digoxin"
+    status: unverified
+    steps:
+      - kind: table
+        title: "الهيكل: 3 أنواع"
+        columns: ["Filament", "Job", "Examples"]
+        rows:
+          - ["Microfilaments", "Contraction, cytokinesis, phagocytosis", "Actin, microvilli"]
+          - ["Intermediate", "Cell structure", "Vimentin, desmin, cytokeratin, lamins, GFAP"]
+          - ["Microtubules", "Movement, cell division", "Cilia, flagella, spindle, axonal transport"]
+        hide: [[0, 2], [1, 1], [2, 2]]
+        page: 46
+        quote: "Microtubules Movement, cell division Cilia, flagella, mitotic spindle, axonal trafficking, centrioles"
+      - kind: explain
+        title: "الـ microtubule: سكة قطر"
+        text: |-
+          أنبوبة من α و β tubulin. الطرف ==السالب جنب النواة== والموجب ناحية الأطراف.
+
+          عليها قطرين:
+          - **Dynein**: من + لـ − يعني ==retrograde== (راجع للـ cell body).
+          - **Kinesin**: من − لـ + يعني anterograde (رايح للأطراف).
+        page: 46
+        quote: "Retrograde to microtubule (+ → −)—dynein. ▘ Anterograde to microtubule (− → +)—kinesin."
+      - kind: figure
+        title: "مين راكب أنهي قطر"
+        svg: |-
+          <svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b2b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker><marker id="b2c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <circle class="fg-acc" cx="40" cy="70" r="30"/><text x="18" y="74" class="t-sm">Cell body</text>
+            <line class="fg-ink" x1="70" y1="70" x2="340" y2="70" stroke-width="3"/>
+            <text x="74" y="62" class="t-sm">−</text><text x="330" y="62" class="t-sm">+</text>
+            <line class="fg-arrow-bad" x1="330" y1="40" x2="80" y2="40" marker-end="url(#b2c)"/>
+            <text x="110" y="30" class="t-sm t-bad">Dynein: tetanus, polio, rabies, HSV</text>
+            <line class="fg-arrow-acc" x1="80" y1="100" x2="330" y2="100" marker-end="url(#b2b)"/>
+            <text x="110" y="125" class="t-sm t-acc">Kinesin: HSV reactivation</text>
+          </svg>
+        caption: "الـ tetanus toxin والـ polio والـ rabies والـ HSV بيدخلوا من الأطراف ويركبوا الـ dynein راجعين للـ cell body. والـ HSV لما يصحى بيركب الـ kinesin طالع للجلد."
+        alt: "An axon from cell body (minus end) to periphery (plus end). Dynein carries tetanus toxin, poliovirus, rabies and HSV toward the cell body; kinesin carries HSV outward on reactivation."
+        page: 46
+        quote: "Clostridium tetani toxin, poliovirus, rabies virus, and herpes simplex virus (HSV) use dynein for retrograde transport to the neuronal cell body. HSV reactivation occurs via anterograde transport from cell body (kinesin mediated)."
+      - kind: check
+        question: "Which drug does NOT act on microtubules?"
+        options: ["Digoxin", "Mebendazole", "Griseofulvin", "Vinca alkaloids", "Taxanes"]
+        answer: 0
+        why:
+          - "صح: الـ digoxin بيقفل الـ Na+/K+-ATPase."
+          - "Mebendazole (antihelminthic) على الـ microtubules."
+          - "Griseofulvin (antifungal) على الـ microtubules."
+          - "Vinca alkaloids (anticancer) على الـ microtubules."
+          - "Taxanes (anticancer) على الـ microtubules."
+        page: 46
+        quote: "Drugs that act on microtubules (microtubules get constructed very terribly): ▘ Mebendazole (antihelminthic) ▘ Griseofulvin (antifungal) ▘ Vinca alkaloids (anticancer) ▘ Taxanes (anticancer)"
+      - kind: explain
+        title: "الـ cilia"
+        text: |-
+          - الـ **motile cilium**: ==9 doublets + 2 singlets== (axoneme)، والـ **axonemal dynein** (ATPase) بيزحلق الـ doublets على بعض فالـ cilium يتني.
+          - الـ **basal body**: 9 triplets ومفيش حاجة في النص.
+          - الـ **primary (nonmotile) cilia**: حساسات. لو اتعملت غلط: polycystic kidney، mitral valve prolapse، retinal degeneration.
+        page: 47
+        quote: "Motile cilia consist of 9 doublet + 2 singlet arrangement of microtubules (axoneme) A . Basal body (base of cilium below cell membrane) consists of 9 microtubule triplets B with no central microtubules."
+      - kind: reveal
+        prompt: "لو الـ dynein arm بايظ والـ cilia واقفة، إيه اللي هيبوظ في الجسم؟"
+        answer: "كل مكان فيه cilia: ==situs inversus== (الـ cilia بتوجّه الأعضاء في الجنين)، sinusitis و ear infections و bronchiectasis (مفيش تنضيف)، hearing loss (eustachian tube)، و ==infertility== (sperm مش بيتحرك، والـ fallopian tube ← ectopic). ده **primary ciliary dyskinesia**، وأشهر نوع **Kartagener**. والـ screening: nasal nitric oxide واطي."
+        page: 47
+        quote: "Autosomal recessive. Dynein arm defect → immotile cilia → dysfunctional ciliated epithelia. Most common type is Kartagener syndrome (PCD with situs inversus)."
+      - kind: explain
+        title: "الـ Na+/K+ pump"
+        text: |-
+          لكل ATP: ==3 Na+ بره و 2 K+ جوه==. «2 strikes? K, you're still in. 3 strikes? Nah, you're out!».
+
+          الـ **digoxin** بيقفل الـ pump ← الـ Na+ يتراكم جوه ← الـ Na+/Ca2+ exchanger يشتغل أقل (مش لاقي gradient) ← ==Ca2+ يعلى== جوه ← contractility تزيد.
+        page: 47
+        quote: "2 strikes? K, you’re still in. 3 strikes? Nah, you’re out!"
+      - kind: check
+        question: "Digoxin raises contractility because intracellular ___ rises."
+        options: ["Ca2+", "K+", "cAMP", "ATP"]
+        answer: 0
+        why:
+          - "صح: الـ pump يتقفل ← الـ Na+/Ca2+ exchange يقل ← Ca2+ يعلى."
+          - "الـ K+ جوه بيقل مش بيزيد لما الـ pump يتقفل."
+          - "ده ميكانيزم الـ β agonists والـ PDE inhibitors."
+          - "الـ ATP مش هو الوسيط."
+        page: 47
+        quote: "Digoxin directly inhibits -ATPase → indirect inhibition of"
+      - kind: try
+        items: [bio.L02.034, bio.L02.036, bio.L02.041, bio.L02.047, bio.L02.050]
+    recap:
+      - "Microfilaments (actin)، intermediate (vimentin، desmin، GFAP)، microtubules (cilia، spindle)."
+      - "Dynein راجع (tetanus، polio، rabies، HSV). Kinesin رايح (HSV reactivation)."
+      - "Cilium 9+2، basal body 9 triplets. PCD = dynein arm، Kartagener، nasal NO واطي."
+      - "3 Na+ بره و 2 K+ جوه. Digoxin ← Ca2+ يعلى ← contractility."
+    practice: [bio.L02.034, bio.L02.035, bio.L02.036, bio.L02.037, bio.L02.038, bio.L02.039, bio.L02.040, bio.L02.041, bio.L02.042, bio.L02.043, bio.L02.044, bio.L02.045, bio.L02.046, bio.L02.047, bio.L02.048, bio.L02.049, bio.L02.050, bio.L02.051, bio.L02.052]
+  - id: bio.L02.lesson4
+    title: "الكولاجين: كل خطوة ليها مرض"
+    hook: "scurvy و OI و Ehlers-Danlos و Menkes: نفس الخط، بس كل واحد وقف في محطة"
+    minutes: 9
+    pages: [48, 49]
+    topics: [collagen, osteogenesis-imperfecta, ehlers-danlos, menkes-disease]
+    goals:
+      - "تحفظ أنواع الكولاجين بـ SCAB"
+      - "تحط كل مرض على خطوته في الـ synthesis"
+      - "تفرّق بين OI و Ehlers-Danlos و Menkes"
+    status: unverified
+    steps:
+      - kind: mnemonic
+        word: "SCAB"
+        parts:
+          - { key: "S", text: "Type I: Skeleton (bone، skin، tendon، dentin، cornea)، 90%" }
+          - { key: "C", text: "Type II: Cartilage (hyaline، vitreous، nucleus pulposus)" }
+          - { key: "A", text: "Type III: Arteries (reticulin، vessels، uterus، early wound)" }
+          - { key: "B", text: "Type IV: Basement membrane (glomerulus، cochlea، lens)" }
+        hook: "الكولاجين بيعمل قشرة الجرح (SCAB)"
+        page: 48
+        quote: "Type I: Skeleton Type II: Cartilage Type III: Arteries Type IV: Basement membrane SCAB"
+      - kind: explain
+        title: "كل type ومرضه"
+        text: |-
+          - **Type I** (bone، tendone): بيقل في ==osteogenesis imperfecta==.
+          - **Type II** (cartwolage).
+          - **Type III**: ناقص في الـ ==vascular Ehlers-Danlos== (threE D).
+          - **Type IV** (under the floor): بايظ في **Alport**، وعليه antibodies في **Goodpasture**.
+        page: 48
+        quote: "Type III: deficient in vascular type of Ehlers- Danlos syndrome (threE D)."
+      - kind: figure
+        title: "خط إنتاج الكولاجين"
+        svg: |-
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b2d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="8" width="190" height="24" rx="6"/><text x="18" y="25" class="t-sm">1. α chains (Gly-X-Y) on RER</text>
+            <line class="fg-arrow" x1="105" y1="32" x2="105" y2="42" marker-end="url(#b2d)"/>
+            <rect class="fg-box" x="10" y="44" width="190" height="24" rx="6"/><text x="18" y="61" class="t-sm">2. Hydroxylation (vit C)</text>
+            <text x="210" y="61" class="t-sm t-bad">Scurvy</text>
+            <line class="fg-arrow" x1="105" y1="68" x2="105" y2="78" marker-end="url(#b2d)"/>
+            <rect class="fg-box" x="10" y="80" width="190" height="24" rx="6"/><text x="18" y="97" class="t-sm">3. Glycosylation, triple helix</text>
+            <text x="210" y="97" class="t-sm t-bad">Osteogenesis imperfecta</text>
+            <line class="fg-arrow" x1="105" y1="104" x2="105" y2="114" marker-end="url(#b2d)"/>
+            <rect class="fg-box" x="10" y="116" width="190" height="24" rx="6"/><text x="18" y="133" class="t-sm">4. Exocytosis of procollagen</text>
+            <line class="fg-arrow" x1="105" y1="140" x2="105" y2="150" marker-end="url(#b2d)"/>
+            <rect class="fg-box" x="10" y="152" width="190" height="24" rx="6"/><text x="18" y="169" class="t-sm">5. Cleavage → tropocollagen</text>
+            <text x="210" y="169" class="t-sm t-bad">Ehlers-Danlos (peptidase)</text>
+            <line class="fg-arrow" x1="105" y1="176" x2="105" y2="186" marker-end="url(#b2d)"/>
+            <rect class="fg-box" x="10" y="188" width="190" height="24" rx="6"/><text x="18" y="205" class="t-sm">6. Cross-linking (lysyl oxidase, Cu)</text>
+            <text x="210" y="205" class="t-sm t-bad">Menkes</text>
+          </svg>
+        caption: "الخطوات جوه الخلية (1 لـ 3) وبعدين بره (4 لـ 6). المرض بيطلع حسب المحطة اللي وقفت: vitamin C للـ hydroxylation، الـ triple helix في OI، الـ peptidase في نوع من Ehlers-Danlos، والنحاس للـ lysyl oxidase في Menkes."
+        alt: "Collagen synthesis in six steps with diseases beside them: hydroxylation needs vitamin C (scurvy), triple helix formation (osteogenesis imperfecta), cleavage by procollagen peptidase (a form of Ehlers-Danlos), cross-linking by copper-dependent lysyl oxidase (Menkes)."
+        page: 48
+        quote: "Problems with cross-linking → Menkes disease."
+      - kind: explain
+        title: "ليه glycine تلت الكولاجين؟"
+        text: |-
+          السلسلة بتتكرر **Gly-X-Y**: X غالباً proline أو lysine، و Y غالباً hydroxyproline أو hydroxylysine. فكل تالت amino acid ==glycine==، يعني الكولاجين 1/3 glycine.
+
+          والـ hydroxylation («hydroxCylation») محتاجة ==vitamin C==، ومن غيرها: **scurvy**.
+        page: 48
+        quote: "Hydroxylation—hydroxylation (“hydroxCylation”) of specific proline and lysine residues. Requires vitamin C; deficiency → scurvy."
+      - kind: check
+        question: "Which step needs a copper-containing enzyme?"
+        options: ["Cross-linking by lysyl oxidase", "Hydroxylation of proline", "Triple helix formation", "Translation on the RER"]
+        answer: 0
+        why:
+          - "صح: الـ lysyl oxidase فيه نحاس، وده اللي بيبوظ في Menkes."
+          - "الـ hydroxylation محتاجة vitamin C."
+          - "الـ triple helix بيتمسك بـ hydrogen و disulfide bonds."
+          - "الـ translation مالهاش علاقة بالنحاس."
+        page: 48
+        quote: "Cross-linking—reinforcement of staggered tropocollagen molecules by covalent lysine- hydroxylysine cross-linkage (by copper- containing lysyl oxidase) to make collagen fibers."
+      - kind: mnemonic
+        word: "BITE"
+        parts:
+          - { key: "B", text: "Bones: كسور متكررة مع أقل خبطة" }
+          - { key: "I", text: "I (eye): blue sclerae" }
+          - { key: "T", text: "Teeth: dentinogenesis imperfecta" }
+          - { key: "E", text: "Ear: hearing loss (ossicles)" }
+        hook: "الكتاب: Patients can't BITE"
+        page: 49
+        quote: "Patients can’t BITE: Bones = multiple fractures I (eye) = blue sclerae Teeth = dental imperfections Ear = hearing loss"
+      - kind: aside
+        tone: trap
+        text: "طفل بكسور كتير؟ قبل ما تقول ==child abuse== دوّر على blue sclerae والسنان وتاريخ العيلة: ممكن يكون **OI** (غالباً AD، COL1A1/COL1A2). والعلاج bisphosphonates."
+        page: 49
+        quote: "May be confused with child abuse. Treat with bisphosphonates to ↓ fracture risk."
+      - kind: explain
+        title: "Ehlers-Danlos و Menkes"
+        text: |-
+          **Ehlers-Danlos**: جلد بيتمط ورقيق، مفاصل hypermobile، وكدمات بسهولة. ومعاه aneurysms و rupture.
+          - **Hypermobility**: الأشهر.
+          - **Classical**: type ==V== (COL5A1/2).
+          - **Vascular**: type ==III== (COL3A1): الـ aorta والـ uterus الحامل يتقطعوا.
+
+          **Menkes** (XR): ATP7A (Absent copper) ← lysyl oxidase ضعيف ← شعر «kinky» وتأخر نمو و hypotonia و cerebral aneurysms. عكس Wilson: ATP7B (copper Buildup).
+        page: 49
+        quote: "X-linked recessive connective tissue disease caused by impaired copper absorption and transport due to defective Menkes protein ATP7A (Absent copper), vs ATP7B in Wilson disease (copper Buildup)."
+      - kind: check
+        question: "A pregnant woman with thin translucent skin has a uterine rupture; her brother died of aortic dissection. Which gene?"
+        options: ["COL3A1", "COL1A1", "COL5A1", "ATP7A"]
+        answer: 0
+        why:
+          - "صح: vascular Ehlers-Danlos = type III procollagen (COL3A1)."
+          - "COL1A1 للـ osteogenesis imperfecta."
+          - "COL5A1 للـ classical EDS (جلد ومفاصل)."
+          - "ATP7A للـ Menkes."
+        page: 49
+        quote: "Vascular type (fragile tissues including vessels [eg, aorta], muscles, and organs that are prone to rupture [eg, gravid uterus]): mutations in type III procollagen (eg, COL3A1)."
+      - kind: try
+        items: [bio.L02.054, bio.L02.056, bio.L02.058, bio.L02.062, bio.L02.066]
+    recap:
+      - "SCAB: I skeleton، II cartilage، III arteries، IV basement membrane."
+      - "Vitamin C ← hydroxylation (scurvy). Triple helix ← OI. Lysyl oxidase (Cu) ← Menkes."
+      - "OI = BITE، ممكن يتلخبط مع child abuse، bisphosphonates."
+      - "EDS: classical type V، vascular type III. Menkes ATP7A مقابل Wilson ATP7B."
+    practice: [bio.L02.053, bio.L02.054, bio.L02.055, bio.L02.056, bio.L02.057, bio.L02.058, bio.L02.059, bio.L02.060, bio.L02.061, bio.L02.062, bio.L02.063, bio.L02.064, bio.L02.065, bio.L02.066, bio.L02.067, bio.L02.068, bio.L02.069, bio.L02.070, bio.L02.071, bio.L02.072]
