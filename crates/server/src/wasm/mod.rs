@@ -7,7 +7,7 @@ mod login;
 
 use std::cell::{Cell, RefCell};
 
-// adapted from kabar-app main: crates/server/src/wasm/mod.rs (sign-in,
+// adapted from batna-app main: crates/server/src/wasm/mod.rs (sign-in,
 // devices and sync only)
 use serde::Serialize;
 use serde::de::DeserializeOwned;
@@ -252,7 +252,7 @@ async fn sign_in_google(mut req: Request, env: &Env, cfg: &Config) -> Result<Res
 }
 
 async fn refresh_session(mut req: Request, env: &Env, cfg: &Config) -> Result<Response> {
-    let key = match cfg.auth_ready() {
+    let key = match cfg.session_ready() {
         Ok(k) => k.clone(),
         Err(e) => return api_error(ErrorCode::Internal, format!("server not set up: {e}")),
     };
@@ -298,7 +298,7 @@ async fn call_login(env: &Env, username: &str, path: &str, payload: &impl Serial
 
 /// `POST /v1/auth/password`: the same account as Google, on a device without it.
 async fn sign_in_password(mut req: Request, env: &Env, cfg: &Config) -> Result<Response> {
-    let key = match cfg.auth_ready() {
+    let key = match cfg.session_ready() {
         Ok(k) => k.clone(),
         Err(e) => return api_error(ErrorCode::Internal, format!("server not set up: {e}")),
     };

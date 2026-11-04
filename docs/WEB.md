@@ -82,9 +82,11 @@ Cloud project as the desktop one:
 
 It exists ("Steps web", created 2026-11-02, same project as Steps Desktop).
 Its client ID is public (it is in every sign-in URL), and the web app keeps no
-secret. It is `WEB_GOOGLE_CLIENT_ID` in `crates/app/src/cloud/mod.rs` and the
-second entry of `GOOGLE_CLIENT_IDS` in `crates/server/wrangler.toml`, so the hub
-accepts its ID tokens. As with the desktop client, only the test users on the
+secret. The web build reads it from `STEPS_WEB_GOOGLE_CLIENT_ID` (or
+`WEB_GOOGLE_CLIENT_ID` in `crates/app/src/cloud/mod.rs`), and the hub accepts
+its ID tokens once it is in the repo variable `STEPS_GOOGLE_CLIENT_IDS` (or
+`STEPS_WEB_GOOGLE_CLIENT_ID`), which the deploy passes to the Worker
+([CLOUD.md](CLOUD.md) §3.2). As with the desktop client, only the test users on the
 consent screen can sign in.
 
 ## Run it

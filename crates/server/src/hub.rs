@@ -407,7 +407,7 @@ mod tests {
     }
 
     /// A verdict on an item, as `item_status` syncs it.
-    fn word(id: &str, device: &str, wall_ms: i64, item: &str, status: &str) -> Op {
+    fn item_op(id: &str, device: &str, wall_ms: i64, item: &str, status: &str) -> Op {
         Op {
             id: id.into(),
             table: "item_status".into(),
@@ -437,7 +437,7 @@ mod tests {
         assert_eq!(send(&hub, &mut phone, &hello(0)).replies, vec![ServerMsg::CaughtUp { head_seq: 0 }]);
         send(&hub, &mut tablet, &hello(0));
 
-        let op = word("op-1", "s24u", NOW_I, "rumah", "learning");
+        let op = item_op("op-1", "s24u", NOW_I, "cvs.L04.002", "learning");
         let out = send(&hub, &mut phone, &ClientMsg::Push { batch: 1, ops: vec![op.clone()] });
         assert_eq!(
             out.replies,
@@ -465,7 +465,7 @@ mod tests {
         let hub = Hub::new(&db).unwrap();
         let mut phone = conn("s24u");
         send(&hub, &mut phone, &hello(0));
-        let op = word("op-1", "s24u", NOW_I, "rumah", "learning");
+        let op = item_op("op-1", "s24u", NOW_I, "cvs.L04.002", "learning");
         send(&hub, &mut phone, &ClientMsg::Push { batch: 1, ops: vec![op.clone()] });
         // Lost ack → the outbox sends it again.
         let out = send(&hub, &mut phone, &ClientMsg::Push { batch: 2, ops: vec![op.clone(), op] });
@@ -490,8 +490,8 @@ mod tests {
         send(&hub, &mut phone, &hello(0));
         send(&hub, &mut tablet, &hello(0));
         // The tablet's later edit arrives first (the phone was offline).
-        let newer = word("t-1", "tab-s11", NOW_I + 5, "sega", "known");
-        let older = word("p-1", "s24u", NOW_I, "sega", "learning");
+        let newer = item_op("t-1", "tab-s11", NOW_I + 5, "sega", "known");
+        let older = item_op("p-1", "s24u", NOW_I, "sega", "learning");
         assert_eq!(
             send(&hub, &mut tablet, &ClientMsg::Push { batch: 1, ops: vec![newer] }).broadcast.len(),
             1
@@ -510,13 +510,13 @@ mod tests {
         let mut phone = conn("s24u");
         send(&hub, &mut phone, &hello(0));
 
-        let spoofed = word("a", "tab-s11", NOW_I, "rumah", "known");
-        let future = word("b", "s24u", NOW_I + MAX_CLOCK_SKEW_MS + 1, "rumah", "known");
-        let mut unknown = word("c", "s24u", NOW_I, "rumah", "known");
+        let spoofed = item_op("a", "tab-s11", NOW_I, "cvs.L04.002", "known");
+        let future = item_op("b", "s24u", NOW_I + MAX_CLOCK_SKEW_MS + 1, "cvs.L04.002", "known");
+        let mut unknown = item_op("c", "s24u", NOW_I, "cvs.L04.002", "known");
         unknown.table = "secrets".into();
-        let mut review_edit = word("d", "s24u", NOW_I, "r1", "known");
+        let mut review_edit = item_op("d", "s24u", NOW_I, "r1", "known");
         review_edit.table = "review_events".into();
-        let bad_id = word("e f", "s24u", NOW_I, "rumah", "known");
+        let bad_id = item_op("e f", "s24u", NOW_I, "cvs.L04.002", "known");
         let out = send(
             &hub,
             &mut phone,
@@ -557,7 +557,7 @@ mod tests {
         ));
         send(&hub, &mut phone, &hello(0));
         let many =
-            (0..=MAX_OPS_PER_PUSH).map(|i| word(&format!("o{i}"), "s24u", NOW_I, "x", "known")).collect();
+            (0..=MAX_OPS_PER_PUSH).map(|i| item_op(&format!("o{i}"), "s24u", NOW_I, "x", "known")).collect();
         assert!(matches!(
             send(&hub, &mut phone, &ClientMsg::Push { batch: 1, ops: many }).replies[0],
             ServerMsg::Error { code: SyncErrorCode::TooManyOps, .. }
@@ -575,7 +575,7 @@ mod tests {
         for chunk in (0..total).collect::<Vec<_>>().chunks(MAX_OPS_PER_PUSH) {
             let ops = chunk
                 .iter()
-                .map(|i| word(&format!("o{i}"), "s24u", NOW_I, &format!("w{i}"), "known"))
+                .map(|i| item_op(&format!("o{i}"), "s24u", NOW_I, &format!("w{i}"), "known"))
                 .collect();
             send(&hub, &mut phone, &ClientMsg::Push { batch: 1, ops });
         }
@@ -601,12 +601,12 @@ mod tests {
         let hub = Hub::new(&db).unwrap();
         let mut phone = conn("s24u");
         send(&hub, &mut phone, &hello(0));
-        let mut op = word("x", "server", NOW_I, "rumah", "known");
+        let mut op = item_op("x", "server", NOW_I, "cvs.L04.002", "known");
         op.hlc.device = "server".into();
         let out = send(&hub, &mut phone, &ClientMsg::Push { batch: 1, ops: vec![op] });
         let ServerMsg::Ack { rejected, .. } = &out.replies[0] else { panic!() };
         assert_eq!(rejected[0].reason, RejectReason::WrongDevice);
-        let mut relayed = word("y", "server", NOW_I, "rumah", "known");
+        let mut relayed = item_op("y", "server", NOW_I, "cvs.L04.002", "known");
         relayed.relay = true;
         let out = send(&hub, &mut phone, &ClientMsg::Push { batch: 2, ops: vec![relayed] });
         let ServerMsg::Ack { rejected, .. } = &out.replies[0] else { panic!() };
@@ -620,7 +620,7 @@ mod tests {
         let mut tab = conn("tab");
         send(&hub, &mut tab, &hello(0));
         // The old phone's verdict, restored on the tablet and passed on.
-        let mut old = word("oldphone-5-0", "oldphone", NOW_I - 1000, "rumah", "known");
+        let mut old = item_op("oldphone-5-0", "oldphone", NOW_I - 1000, "cvs.L04.002", "known");
         old.relay = true;
         let out = send(&hub, &mut tab, &ClientMsg::Push { batch: 1, ops: vec![old.clone()] });
         let ServerMsg::Ack { done, rejected, .. } = &out.replies[0] else { panic!("{out:?}") };
@@ -633,9 +633,9 @@ mod tests {
         let out = send(&hub, &mut phone, &ClientMsg::Push { batch: 1, ops: vec![old] });
         assert!(out.broadcast.is_empty());
         // A relay never beats a newer write.
-        let newer = word("tab-9", "tab", NOW_I, "rumah", "unknown");
+        let newer = item_op("tab-9", "tab", NOW_I, "cvs.L04.002", "unknown");
         send(&hub, &mut tab, &ClientMsg::Push { batch: 2, ops: vec![newer] });
-        let mut stale = word("oldphone-1-0", "oldphone", NOW_I - 5000, "rumah", "known");
+        let mut stale = item_op("oldphone-1-0", "oldphone", NOW_I - 5000, "cvs.L04.002", "known");
         stale.relay = true;
         let out = send(&hub, &mut tab, &ClientMsg::Push { batch: 3, ops: vec![stale] });
         assert!(out.broadcast.is_empty());
@@ -691,14 +691,14 @@ mod tests {
         send(&hub, &mut phone, &hello(0));
         let statuses = ["new", "learning", "known"];
         for (i, status) in statuses.iter().enumerate() {
-            let op = word(&format!("r{i}"), "s24u", NOW_I + i as i64, "rumah", status);
+            let op = item_op(&format!("r{i}"), "s24u", NOW_I + i as i64, "cvs.L04.002", status);
             send(&hub, &mut phone, &ClientMsg::Push { batch: i as u64, ops: vec![op] });
         }
         let mid = hub.head_seq().unwrap();
         send(
             &hub,
             &mut phone,
-            &ClientMsg::Push { batch: 9, ops: vec![word("k1", "s24u", NOW_I, "kabar", "new")] },
+            &ClientMsg::Push { batch: 9, ops: vec![item_op("k1", "s24u", NOW_I, "cvs.L04.001", "new")] },
         );
 
         // A new tablet gets one op per row: the current one.
@@ -713,10 +713,10 @@ mod tests {
         let out = send(
             &hub,
             &mut phone,
-            &ClientMsg::Push { batch: 10, ops: vec![word("r0", "s24u", NOW_I, "rumah", "new")] },
+            &ClientMsg::Push { batch: 10, ops: vec![item_op("r0", "s24u", NOW_I, "cvs.L04.002", "new")] },
         );
         assert!(out.broadcast.is_empty());
-        assert_eq!(hub.current_payload("item_status", "rumah").unwrap().unwrap()["status"], "known");
+        assert_eq!(hub.current_payload("item_status", "cvs.L04.002").unwrap().unwrap()["status"], "known");
     }
 
     #[test]
@@ -726,13 +726,13 @@ mod tests {
         let mut phone = conn("s24u");
         send(&hub, &mut phone, &hello(0));
         let ops =
-            vec![word("a", "s24u", NOW_I, "rumah", "known"), word("b", "s24u", NOW_I, "kabar", "learning")];
+            vec![item_op("a", "s24u", NOW_I, "cvs.L04.002", "known"), item_op("b", "s24u", NOW_I, "cvs.L04.001", "learning")];
         send(&hub, &mut phone, &ClientMsg::Push { batch: 1, ops });
         let before = replay(&hub.catch_up(0).unwrap());
         // A version a server from before compaction kept.
         db.exec(
             "INSERT INTO ops (op_id, tbl, row_id, kind, wall_ms, counter, device, payload, received_ms)
-             VALUES ('old', 'item_status', 'rumah', 'upsert', 1, 0, 's24u', '{\"item_id\":\"rumah\",\"status\":\"new\"}', 1)",
+             VALUES ('old', 'item_status', 'cvs.L04.002', 'upsert', 1, 0, 's24u', '{\"item_id\":\"cvs.L04.002\",\"status\":\"new\"}', 1)",
             &[],
         )
         .unwrap();

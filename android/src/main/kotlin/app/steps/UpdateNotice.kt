@@ -34,7 +34,7 @@ import kotlin.concurrent.thread
  * window is in front: Settings › Updates opens, and the
  * button's action starts.
  *
- * Adapted from kabar-app main: android/src/main/kotlin/app/kabar/UpdateNotice.kt.
+ * Adapted from batna-app main: android/src/main/kotlin/…/UpdateNotice.kt.
  */
 object UpdateNotice {
     private const val TAG = "StepsUpdate"

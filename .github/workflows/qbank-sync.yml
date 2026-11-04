@@ -2,6 +2,10 @@
 # (docs/QBANK.md). Opens a pull request when the numbers changed; never pushes
 # to main and never merges. A B&B video the map doesn't cover fails the run
 # with its name instead of opening a broken PR.
+#
+# Opening the PR needs Settings › Actions › General › Workflow permissions ›
+# "Allow GitHub Actions to create and approve pull requests" (docs/QBANK.md).
+# Without it the last step says so and fails, after pushing the branch.
 name: QBank sync
 
 on:
@@ -10,8 +14,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 concurrency:
   group: qbank-sync
@@ -22,7 +25,13 @@ env:
 
 jobs:
   sync:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    # Only the last step pushes and opens the PR; the token's write scopes
+    # cover this job only.
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v5
       - uses: dtolnay/rust-toolchain@stable
@@ -50,6 +59,9 @@ jobs:
           git add content/qbank/uworld.yaml "changes/qbank-sync-$day.yaml"
           git commit -m "Refresh UWorld QIDs per lecture ($day)"
           git push -u origin "$branch"
-          gh pr create --base main --head "$branch" \
+          if ! gh pr create --base main --head "$branch" \
             --title "Refresh UWorld QIDs per lecture ($day)" \
-            --body "Weekly refresh from the public B&B ↔ UWorld doc (docs/QBANK.md). Numbers only. Review the diff and merge by hand. A PR opened by this workflow doesn't start CI on its own: close and reopen it to run CI."
+            --body "Weekly refresh from the public B&B ↔ UWorld doc (docs/QBANK.md). Numbers only. Review the diff and merge by hand. A PR opened by this workflow doesn't start CI on its own: close and reopen it to run CI."; then
+            echo "::error::The branch $branch is pushed, but GitHub refused the pull request. Turn on Settings › Actions › General › \"Allow GitHub Actions to create and approve pull requests\" (docs/QBANK.md), or open it by hand from $branch."
+            exit 1
+          fi

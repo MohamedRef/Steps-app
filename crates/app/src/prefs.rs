@@ -1,7 +1,7 @@
 //! Preferences that belong to one device and never sync: the phone, the
 //! tablet and the Mac each keep their own theme and text size. A small
 //! `key=value` file in the app's data folder, written whole on every change.
-// adapted from kabar-app main: crates/app/src/settings/device.rs
+// adapted from batna-app main: crates/app/src/settings/device.rs
 
 #[cfg(not(target_arch = "wasm32"))] // the web keeps prefs in localStorage
 mod storage;

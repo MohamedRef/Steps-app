@@ -1,6 +1,6 @@
 package app.steps
 
-// Adapted from kabar-app main: android/src/main/kotlin/app/kabar/Haptics.kt
+// Adapted from batna-app main: android/src/main/kotlin/…/Haptics.kt
 
 import android.content.Context
 import android.media.AudioAttributes

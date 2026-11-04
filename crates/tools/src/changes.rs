@@ -19,7 +19,7 @@
 //! English-only lines older feeds carry; only then does it fall back to its
 //! title in English. CI, docs, refactor and test titles are skipped.
 //!
-//! Adapted from kabar-app main: `crates/tools/src/changes.rs` (anyhow and
+//! Adapted from batna-app main: `crates/tools/src/changes.rs` (anyhow and
 //! clap swapped for this crate's plain errors; English optional).
 
 use std::collections::BTreeMap;

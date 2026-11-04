@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # One-time Steps Cloud setup on your Cloudflare account (Workers Free plan).
 # Safe to re-run: it skips what already exists. Needs `wrangler login` first.
-# Adapted from Kabar's scripts/cloud-setup.sh (no D1: Steps keeps everything
-# in the account's Durable Object). Nothing here is shared with Kabar Cloud.
+# Adapted from batna-app main: scripts/cloud-setup.sh (no D1: Steps keeps everything
+# in the account's Durable Object). Nothing here is shared with another app's cloud.
 set -euo pipefail
 
 cd "$(dirname "$0")/../crates/server"
@@ -29,7 +29,8 @@ fi
 cat <<'MSG'
 
 Done. Next:
-  1. Put Steps's Google OAuth client id in crates/server/wrangler.toml → GOOGLE_CLIENT_IDS
-     (docs/CLOUD.md §3.2 shows how to create it).
-  2. just cloud-deploy
+  1. Put Steps's Google OAuth client id(s) in the repo variable STEPS_GOOGLE_CLIENT_IDS
+     (docs/CLOUD.md §3.2 shows how to create them).
+  2. Run Actions › Deploy Steps Cloud, or: just cloud-deploy (then set
+     GOOGLE_CLIENT_IDS in the Cloudflare dashboard).
 MSG

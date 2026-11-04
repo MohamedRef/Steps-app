@@ -26,8 +26,28 @@ fn fresh<R: Send + 'static>(f: impl FnOnce() -> R + Send + 'static) -> R {
         .unwrap_or_else(|e| std::panic::resume_unwind(e))
 }
 
+/// At most this many buttons of one kind (the same class) are crawled per
+/// screen. Lists drawn from the content repeat one kind of button per row
+/// (Stats had a topic link for each of ~1,400 topics, Learn a row per
+/// lecture), so crawling every row made these tests grow with every course
+/// written (#111); a few rows of each kind prove the kind works.
+const PER_KIND: usize = 6;
+
+/// `sigs` with at most [`PER_KIND`] of each class, in order.
+fn per_kind(sigs: impl IntoIterator<Item = String>) -> Vec<String> {
+    let mut seen = std::collections::HashMap::<String, usize>::new();
+    sigs.into_iter()
+        .filter(|sig| {
+            let kind = sig.split('|').nth(1).unwrap_or_default().to_owned();
+            let n = seen.entry(kind).or_default();
+            *n += 1;
+            *n <= PER_KIND
+        })
+        .collect()
+}
+
 fn crawl(screen: Screen) {
-    let first = fresh(move || open(screen).tappables());
+    let first = fresh(move || per_kind(open(screen).tappables()));
     // Every button starts from a fresh app. Taps saved by an earlier button
     // (Today's session-length chips change the hero's label) would otherwise
     // rename the next one, and the crawl would skip it. Fresh apps share
@@ -69,17 +89,30 @@ fn crawl_from(screen: Screen, sig: &str) -> bool {
         return false;
     }
     // Then everything the tap brought up, in turn, in the same app.
-    let new: Vec<String> = app.tappables().into_iter().filter(|s| !before.contains(s)).take(25).collect();
+    let new: Vec<String> =
+        per_kind(app.tappables().into_iter().filter(|s| !before.contains(s))).into_iter().take(25).collect();
     for next in new {
         let seen = app.tappables();
         if app.tap_signature(&next) {
-            for third in app.tappables().into_iter().filter(|s| !seen.contains(s)).take(6) {
+            for third in
+                per_kind(app.tappables().into_iter().filter(|s| !seen.contains(s))).into_iter().take(6)
+            {
                 app.tap_signature(&third);
             }
         }
     }
     assert!(app.html().contains("data-screen="), "{screen:?} after {sig}");
     true
+}
+
+#[test]
+fn per_kind_keeps_a_few_of_each_kind() {
+    let rows = (0..20).map(|i| format!("|tap topic-link|Topic {i}"));
+    let tabs = ["|tab|A", "|tab|B"].map(String::from);
+    let kept = per_kind(tabs.clone().into_iter().chain(rows));
+    assert_eq!(kept.len(), 2 + PER_KIND);
+    assert_eq!(kept[..2], tabs);
+    assert_eq!(kept.last().map(String::as_str), Some("|tap topic-link|Topic 5"));
 }
 
 #[test]

@@ -8,7 +8,7 @@
 # Prepared, not run: only once Mohamed says go. Needs `gh auth login`, the
 # Keychain key from `just update-keygen`, and `just apk` + `just bundle-mac`.
 # Usage: scripts/update-publish.sh "<notes en>" "<notes ar-EG>"
-# Adapted from kabar-app main: scripts/update-publish.sh.
+# Adapted from batna-app main: scripts/update-publish.sh.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
@@ -42,6 +42,9 @@ $tools packs build --out dist/packs
 # The tool says which channels this version goes on, and fails loudly on a
 # version it can't read, so a broken build never publishes nowhere quietly.
 channels="$($tools update channels --version "$v")"
+# The same build number the apps were built with (`just apk`, `just mac`):
+# main's commit count, one scale with the preview and Release (#110).
+build="$(scripts/build-number.sh)"
 for channel in $channels; do
   out="dist/update/$channel"
   # What's new: changes/ since the version this channel carries now, on top
@@ -49,7 +52,7 @@ for channel in $channels; do
   previous="$(mktemp)"
   gh release download "steps-$channel" --repo "$repo" --pattern update.json --output "$previous" --clobber \
     2>/dev/null || rm -f "$previous"
-  $tools update manifest --channel "$channel" --version "$v" --commit "$(git rev-parse --short HEAD)" \
+  $tools update manifest --channel "$channel" --version "$v" --build "$build" --commit "$(git rev-parse --short HEAD)" \
     --notes-en "$notes_en" --notes-ar-eg "$notes_ar_eg" --previous "$previous" --changes \
     --asset "android-arm64=$apk" --asset "$mac=dist/mac/Steps.app.zip" --asset "content=$pack" \
     --out "$out"

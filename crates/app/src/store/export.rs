@@ -5,7 +5,7 @@
 //!
 //! Secrets never leave: Steps keeps none in SQLite, and as a second line of
 //! defence any table, column or row key that names a secret is skipped.
-// adapted from kabar-app main: crates/app/src/store/export.rs
+// adapted from batna-app main: crates/app/src/store/export.rs
 
 use rusqlite::types::ValueRef;
 use serde_json::{Map, Value, json};

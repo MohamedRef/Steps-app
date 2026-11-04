@@ -3,7 +3,7 @@
 //! UNUserNotificationCenter from the bundled Steps.app on the Mac. Elsewhere
 //! (and from `cargo run`, which has no bundle) every call is a no-op and
 //! [`local`] is false, so Settings hides the rows.
-// Adapted from kabar-app main: crates/app/src/platform/android.rs and
+// Adapted from batna-app main: crates/app/src/platform/android.rs and
 // crates/app/src/platform/macos.rs (reminders).
 
 /// This device can arm reminders itself.

@@ -1,4 +1,4 @@
-// adapted from kabar-app: crates/app/assets/settings-dialog.js
+// adapted from batna-app main: crates/app/assets/settings-dialog.js
 // The Settings modal owns these listeners until it is removed. Reopening
 // installs a fresh boundary rather than keeping a stale evaluation channel.
 (() => {

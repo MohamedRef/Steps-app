@@ -3,8 +3,8 @@
 //! `speechSynthesis` on the Mac and other desktops, and nothing at all when
 //! neither has a voice (the text is always on screen, so the session goes on).
 //!
-//! Adapted from kabar-app main: crates/app/src/platform/mod.rs (`speak`) and
-//! crates/app/src/lesson.rs (the WebView path). Kabar fires and forgets; here
+//! Adapted from batna-app main: crates/app/src/platform/mod.rs (`speak`) and
+//! crates/app/src/lesson.rs (the WebView path). Batna fires and forgets; here
 //! [`say`] waits until the voice has finished, so the think timer starts
 //! when the question ends.
 

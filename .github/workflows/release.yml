@@ -9,8 +9,9 @@ name: Release
 # - a release of its own (`steps-v<version>`) with the APK and the zipped
 #   Steps.app for installing by hand.
 #
-# By hand only (Actions › Release › Run workflow): nothing is released
-# unless Mohamed says go. The keys come from repo secrets that
+# By hand only (Actions › Release › Run workflow), and from main only:
+# nothing is released unless Mohamed says go, and never from a branch that
+# hasn't been reviewed and merged (#104). The keys come from repo secrets that
 # scripts/release-secrets.sh copies from the Mac's Keychain; the public
 # update key is crates/app/update-key.pub. Same build steps as
 # steps-android-preview.yml and mac.yml, with the release keys.
@@ -42,20 +43,25 @@ env:
   # build steps. Never echo these.
   STEPS_CLOUD_URL: ${{ vars.STEPS_CLOUD_URL || 'https://steps-cloud.hamorefaat85.workers.dev' }}
   STEPS_GOOGLE_CLIENT_ID: ${{ vars.STEPS_GOOGLE_CLIENT_ID }}
-  STEPS_BUILD: ${{ github.run_number }}
 
 jobs:
   prepare:
     name: Version, keys and content pack
+    # Signed with the permanent release keys: main only (#104). Every other
+    # job needs this one, so a dispatch from a branch builds nothing.
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     outputs:
       version: ${{ steps.v.outputs.version }}
       channels: ${{ steps.v.outputs.channels }}
+      build: ${{ steps.v.outputs.build }}
     steps:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
+          # The build number is main's commit count (scripts/build-number.sh).
+          fetch-depth: 0
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
         with:
@@ -67,9 +73,24 @@ jobs:
           v="$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)"
           channels="$(cargo run -q -p steps-tools -- update channels --version "$v" | tr '\n' ' ')"
           [ -n "${channels// }" ] || { echo "::error::$v belongs on no channel"; exit 1; }
+          # Refuse the -alpha.0 placeholder and a version that isn't newer
+          # than what a channel's feed already carries (a re-run included).
+          previous=()
+          for channel in $channels; do
+            if curl -fsSL --retry 3 -o "$RUNNER_TEMP/$channel.json" \
+              "https://github.com/$GITHUB_REPOSITORY/releases/download/steps-$channel/update.json"; then
+              previous+=(--previous "$RUNNER_TEMP/$channel.json")
+            fi
+          done
+          if ! out="$(cargo run -q -p steps-tools -- update guard --version "$v" "${previous[@]}" 2>&1)"; then
+            echo "::error::$out"
+            exit 1
+          fi
+          build="$(scripts/build-number.sh)"
           echo "version=$v" >> "$GITHUB_OUTPUT"
           echo "channels=$channels" >> "$GITHUB_OUTPUT"
-          echo "Steps $v → $channels"
+          echo "build=$build" >> "$GITHUB_OUTPUT"
+          echo "Steps $v (build $build) → $channels"
       - name: Every key is there
         env:
           HAVE_UPDATE: ${{ secrets.STEPS_UPDATE_SECRET != '' }}
@@ -102,6 +123,8 @@ jobs:
     needs: prepare
     runs-on: ubuntu-24.04
     timeout-minutes: 60
+    env:
+      STEPS_BUILD: ${{ needs.prepare.outputs.build }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -178,6 +201,8 @@ jobs:
     needs: prepare
     runs-on: macos-15
     timeout-minutes: 60
+    env:
+      STEPS_BUILD: ${{ needs.prepare.outputs.build }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -244,6 +269,8 @@ jobs:
     needs: [prepare, android, mac]
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    env:
+      STEPS_BUILD: ${{ needs.prepare.outputs.build }}
     permissions:
       contents: write
     steps:

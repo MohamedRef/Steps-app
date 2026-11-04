@@ -9,7 +9,7 @@ The app uses Rust structs/enums with `impl` methods and Dioxus component
 composition. It does not need an inheritance hierarchy to share card behavior.
 `crates/core` owns pure logic, `protocol` owns boundary types, and `app` owns
 rendering, persistence and platform adapters. Steps remains independent of
-Kabar; adapted primitives live in this repository.
+Batna; adapted primitives live in this repository.
 
 `Ui` in `state.rs` supplies reactive device preferences. Study data already has
 a central `store::Review` context: `store/backend.rs` bumps its revision after
@@ -123,8 +123,8 @@ These workflows do not enqueue append-only review events in preference recovery.
 4. **Native visual coverage.** Verify 384/600/840dp and wider windows,
    maximum interface size, Paper/Night/True black, keyboard, Android Back and
    nested sheets on actual WebViews. A browser fixture is a narrower check.
-5. **Repository independence.** Port useful Kabar changes deliberately with
-   source credit. Do not depend on Kabar crates or couple releases merely to
+5. **Repository independence.** Port useful Batna changes deliberately with
+   source credit. Do not depend on Batna crates or couple releases merely to
    avoid maintaining a small adapted component.
 
 No medical content, approvals, scheduling data, runtime service or dependency

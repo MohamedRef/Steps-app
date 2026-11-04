@@ -6,7 +6,7 @@
 //! the build just installed brought (once, at the first launch after an
 //! update), and the whole history in Settings › Updates, offline.
 //!
-//! Adapted from kabar-app main: `crates/app/src/update/changelog.rs` (one
+//! Adapted from batna-app main: `crates/app/src/update/changelog.rs` (one
 //! language). The layout follows Morphe Manager's update dialog (ideas
 //! only, no code).
 

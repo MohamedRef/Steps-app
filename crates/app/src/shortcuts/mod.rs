@@ -8,7 +8,7 @@
 //! Screens don't register handlers: a key presses the visible, enabled button
 //! whose `aria-keyshortcuts` names it (`"Space"`, `"1"`, `"A"`, `"Enter"`,
 //! `"Escape"`, `"ArrowLeft"`, `"F"`). That is also how screen readers learn the key.
-// adapted from kabar-app main: crates/app/src/settings/menu.rs ("?" key) and
+// adapted from batna-app main: crates/app/src/settings/menu.rs ("?" key) and
 // crates/app/src/review.rs (keys on visible buttons).
 
 use dioxus::prelude::*;
