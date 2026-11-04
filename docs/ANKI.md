@@ -43,7 +43,7 @@ cargo run -q -p steps-tools -- anki --own steps-export-2026-10-28.json
 - A lecture that isn't merged yet comes from the project's shared folder (`content-wip/<course>/LNN.yaml` under `/mnt/project-files/steps`, or `--drafts DIR`), so the file never shrinks; those notes are tagged `draft`. `--merged-only` uses only `content/`.
 - `content/approved.txt` also marks items `approved`. Items with `status: rejected` are always left out.
 - The deck itself is built by the `steps-anki` crate, shared with the app's export button.
-- The deck, note type and note ids match the old `make_apkg.py` (genanki), so decks imported from either one update each other. The Rust exporter replaces that script; `crates/tools/src/anki.rs` has the test that pins the ids.
+- The deck, note type and note ids match the old `make_apkg.py` (genanki), so decks imported from either one update each other. Both note types have a sixth field, `Notes`, with Mohamed's own note on the item (from the app, or `--own <export>` in `steps-tools anki`); the first import of a deck with it asks Anki to update the note type, and reviews are kept. The Rust exporter replaces that script; `crates/tools/src/anki.rs` has the test that pins the ids.
 
 ## Fix list from the app
 ```

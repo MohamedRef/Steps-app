@@ -1,0 +1,1151 @@
+schema: steps.lesson/v1
+lecture: bio.L06
+lessons:
+  - id: bio.L06.lesson1
+    title: "خريطة الـ metabolism: مين بيتحكم ومين بيشيل إيه"
+    hook: "قبل ما تدخل في أي مسار: كل مسار ليه enzyme واحد بيتحكم فيه، ومكان بيحصل فيه، وحاجة بتشيل الطاقة"
+    minutes: 10
+    pages: [71, 73]
+    topics: [enzyme-terminology, rate-determining-enzymes, metabolic-compartmentation, summary-of-pathways, activated-carriers, universal-electron-acceptors, hexokinase-vs-glucokinase]
+    goals:
+      - "تفهم أسامي الـ enzymes من وظيفتها"
+      - "تحفظ الـ rate-limiting enzymes ومين بيشغّلها"
+      - "تعرف المسار بيحصل فين، والـ NADPH بيروح فين"
+      - "تفرّق بين hexokinase و glucokinase"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الاسم بيقولك الشغلانة"
+        text: |-
+          - **Kinase**: بيحط phosphate من ==ATP==. **Phosphorylase**: بيحط phosphate من غير ATP (glycogen phosphorylase). **Phosphatase**: بيشيل الـ phosphate.
+          - **Carboxylase**: بيحط carboxyl بمساعدة ==biotin==. **Mutase**: بينقل group جوه نفس الجزيء (methylmalonyl-CoA mutase، B12).
+          - **Synthase**: بيبني من غير ATP.
+        page: 71
+        quote: "Carboxylase Transfers carboxyl groups (−COOH) with the help of biotin (eg, pyruvate carboxylase)."
+      - kind: table
+        title: "الـ rate-limiting enzymes"
+        columns: [Process, Enzyme]
+        rows:
+          - ["Glycolysis", "PFK-1"]
+          - ["Gluconeogenesis", "Fructose-1,6-bisphosphatase 1"]
+          - ["TCA cycle", "Isocitrate dehydrogenase"]
+          - ["Urea cycle", "CPS I"]
+          - ["Fatty acid synthesis", "Acetyl-CoA carboxylase"]
+          - ["Fatty acid oxidation", "Carnitine acyltransferase I"]
+          - ["Cholesterol synthesis", "HMG-CoA reductase"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+        page: 71
+        quote: "Cholesterol synthesis HMG-CoA reductase Insulin ⊕, thyroxine ⊕, estrogen ⊕ Glucagon ⊝, cholesterol ⊝"
+      - kind: reveal
+        prompt: "بعد الأكل، ليه الكبد مش بيحرق الدهون اللي لسه عاملها؟"
+        answer: "الـ insulin والـ citrate بيشغّلوا ==acetyl-CoA carboxylase== فيطلع malonyl-CoA. والـ malonyl-CoA ده نفسه بيوقف ==carnitine acyltransferase I==، فالدهون الجديدة مش بتدخل الـ mitochondria تتحرق."
+        page: 71
+        quote: "Fatty acid oxidation Carnitine acyltransferase I Malonyl-CoA ⊝"
+      - kind: check
+        question: "Which molecule activates the rate-limiting enzyme of the urea cycle?"
+        options: ["N-acetylglutamate", "Malonyl-CoA", "Citrate", "PRPP", "AMP"]
+        answer: 0
+        why:
+          - "صح: N-acetylglutamate بيشغّل CPS I."
+          - "ده بيوقف carnitine acyltransferase I."
+          - "ده بيشغّل acetyl-CoA carboxylase."
+          - "ده بيشغّل CPS II والـ purine synthesis."
+          - "ده بيشغّل PFK-1 و glycogen phosphorylase."
+        page: 71
+        quote: "Urea cycle Carbamoyl phosphate synthetase I N-acetylglutamate ⊕"
+      - kind: sort
+        prompt: "المسار ده بيحصل فين؟"
+        bins: ["Mitochondria", "Cytoplasm", "Both"]
+        cards:
+          - { text: "β-oxidation", bin: 0 }
+          - { text: "Ketogenesis", bin: 0 }
+          - { text: "TCA cycle", bin: 0 }
+          - { text: "Glycolysis", bin: 1 }
+          - { text: "HMP shunt", bin: 1 }
+          - { text: "Fatty acid synthesis", bin: 1 }
+          - { text: "Heme synthesis", bin: 2 }
+          - { text: "Urea cycle", bin: 2 }
+          - { text: "Gluconeogenesis", bin: 2 }
+        why: "الحرق في الـ mitochondria، والبناء في الـ cytoplasm. و Hugs take two: Heme و Urea و Gluconeogenesis في المكانين."
+        page: 72
+        quote: "Both Heme synthesis, urea cycle, gluconeogenesis. Hugs take two (both)."
+      - kind: explain
+        title: "مين بيشيل إيه"
+        text: |-
+          - ATP ← phosphoryl. NADH و NADPH و FADH2 ← electrons. CoA ← acyl. ==Biotin== ← CO2. THF ← 1-carbon. ==SAM== ← CH3. TPP ← aldehydes.
+          - الـ **NAD+** للهدم (catabolic)، والـ **NADPH** للبناء (anabolic، زي الـ steroids والـ fatty acids).
+          - الـ NADPH جاي من ==HMP shunt==، وبيستخدم في: البناء، الـ respiratory burst، الـ P-450، والـ glutathione reductase.
+        page: 73
+        quote: "NADPH is used in: ▘ Anabolic processes ▘ Respiratory burst ▘ Cytochrome P-450 system ▘ Glutathione reductase"
+      - kind: figure
+        title: "Hexokinase ضد glucokinase"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="40" y1="150" x2="340" y2="150"/>
+            <line class="fg-ink" x1="40" y1="150" x2="40" y2="20"/>
+            <text x="250" y="170" class="t-sm t-mut">Glucose</text>
+            <text x="44" y="16" class="t-sm t-mut">Rate</text>
+            <path class="fg-arrow-acc" d="M40,150 C55,90 70,80 340,78" fill="none"/>
+            <path class="fg-arrow" d="M40,150 C140,140 220,60 340,32" fill="none"/>
+            <text x="200" y="96" class="t-sm t-acc">Hexokinase: low Km, low Vmax</text>
+            <text x="150" y="40" class="t-sm t-b">Glucokinase: high Km, high Vmax</text>
+            <text x="60" y="130" class="t-sm t-mut">works even at low glucose</text>
+          </svg>
+        caption: "الـ hexokinase بيمسك الـ glucose حتى لو قليل (affinity عالية) بس سعته صغيرة. الـ glucokinase في الكبد والـ β cells بيشتغل لما الـ glucose يعلى، وسعته كبيرة، والـ insulin بيزوّده."
+        alt: "Two saturation curves. Hexokinase rises steeply at low glucose and flattens at a low maximum (low Km, low Vmax). Glucokinase rises slowly and reaches a much higher maximum (high Km, high Vmax)."
+        page: 73
+        quote: "Hexokinase sequesters glucose in tissues, where it is used even when glucose concentrations are low."
+      - kind: aside
+        tone: exam
+        text: "نقص الـ ==glucokinase== = الـ β cell مش بتحس بالسكر غير لما يعلى أوي ← insulin أقل ← **MODY** (و gestational diabetes). عيلة فيها سكر خفيف ثابت في كل جيل، والـ antibodies سلبية."
+        page: 73
+        quote: "is a cause of maturity onset diabetes of the young (MODY) and gestational diabetes."
+      - kind: check
+        question: "A 19-year-old, her father and her grandmother all have mild, stable fasting hyperglycemia without insulin need. Which enzyme is likely deficient?"
+        options: ["Glucokinase", "Hexokinase", "Glucose-6-phosphatase", "Pyruvate kinase"]
+        answer: 0
+        why:
+          - "صح: MODY من نقص الـ glucokinase."
+          - "الـ hexokinase مش سبب MODY."
+          - "ده von Gierke، hypoglycemia مش hyperglycemia."
+          - "ده hemolytic anemia."
+        page: 73
+        quote: "Glucokinase deficiency (→ ↑↑ glucose needed for activation → impaired insulin release [vs. diabetes mellitus])"
+      - kind: try
+        items: [bio.L06.003, bio.L06.008, bio.L06.012, bio.L06.020, bio.L06.023]
+    recap:
+      - "PFK-1 للـ glycolysis، FBPase-1 للـ gluconeogenesis، isocitrate DH للـ TCA، CPS I للـ urea."
+      - "Malonyl-CoA بيوقف carnitine acyltransferase I."
+      - "Hugs take two: Heme، Urea، Gluconeogenesis في المكانين."
+      - "NADPH من HMP shunt: بناء، respiratory burst، P-450، glutathione."
+      - "Glucokinase: Km و Vmax عاليين؛ نقصه MODY."
+    practice: [bio.L06.001, bio.L06.002, bio.L06.003, bio.L06.004, bio.L06.005, bio.L06.006, bio.L06.007, bio.L06.008, bio.L06.009, bio.L06.010, bio.L06.011, bio.L06.012, bio.L06.013, bio.L06.014, bio.L06.015, bio.L06.016, bio.L06.017, bio.L06.018, bio.L06.019, bio.L06.020, bio.L06.021, bio.L06.022, bio.L06.023]
+  - id: bio.L06.lesson2
+    title: "Glycolysis والـ PDH والـ TCA"
+    hook: "رضيع عنده lactic acidosis بتزيد كل ما ياكل نشويات. الـ pyruvate واقف على باب الـ mitochondria ومش عارف يدخل"
+    minutes: 10
+    pages: [74, 75]
+    topics: [glycolysis-regulation, fructose-2-6-bisphosphate, pyruvate-dehydrogenase-complex, pdh-complex-deficiency, pyruvate-metabolism, tca-cycle]
+    goals:
+      - "تعرف الـ enzymes المتحكمة في الـ glycolysis"
+      - "تفهم الـ fructose-2,6-BP في الصيام والأكل"
+      - "تحفظ الـ 5 cofactors بتوع الـ PDH وتعرف نقصه"
+      - "تعرف مصير الـ pyruvate وناتج الـ TCA"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Glycolysis في سطرين"
+        text: |-
+          - في الـ cytoplasm: glucose ← ==2 pyruvate + 2 ATP + 2 NADH==.
+          - بيصرف ATP عند hexokinase و ==PFK-1== (الـ rate-limiting)، وبيكسب ATP عند phosphoglycerate kinase و pyruvate kinase.
+          - الـ **pyruvate kinase** بيشغّله fructose-1,6-BP، وبيوقفه ATP و alanine و glucagon.
+        page: 74
+        quote: "Net glycolysis (cytoplasm): Glucose + 2 Pi + 2 ADP + 2 NAD+ → 2 pyruvate + 2 ATP + 2 NADH + 2 H+ + 2 H2O."
+      - kind: figure
+        title: "مفتاح واحد بوشّين"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b6a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-good" x="10" y="15" width="150" height="50" rx="8"/>
+            <text x="20" y="35" class="t-sm t-b">Fed: insulin</text>
+            <text x="20" y="55" class="t-sm">↑ PFK-2 → ↑ F-2,6-BP</text>
+            <rect class="fg-bad" x="200" y="15" width="150" height="50" rx="8"/>
+            <text x="210" y="35" class="t-sm t-b">Fasting: glucagon</text>
+            <text x="210" y="55" class="t-sm">cAMP → PKA → ↑ FBPase-2</text>
+            <line class="fg-arrow" x1="85" y1="65" x2="85" y2="105" marker-end="url(#b6a)"/>
+            <line class="fg-arrow" x1="275" y1="65" x2="275" y2="105" marker-end="url(#b6a)"/>
+            <rect class="fg-box" x="10" y="108" width="150" height="40" rx="8"/><text x="20" y="133" class="t-sm">PFK-1 on: glycolysis</text>
+            <rect class="fg-box" x="200" y="108" width="150" height="40" rx="8"/><text x="210" y="133" class="t-sm">FBPase-1 on: gluconeo</text>
+          </svg>
+        caption: "الـ PFK-2 والـ FBPase-2 enzyme واحد. الـ insulin يشغّل وش الـ PFK-2 فيعلى الـ fructose-2,6-BP ويشغّل الـ glycolysis. الـ glucagon يفسفره فيقلب للـ FBPase-2 ويشغّل الـ gluconeogenesis."
+        alt: "Fed state: insulin raises PFK-2 and fructose-2,6-bisphosphate, turning on PFK-1 and glycolysis. Fasting: glucagon raises cAMP and protein kinase A, raising FBPase-2, turning on FBPase-1 and gluconeogenesis."
+        page: 74
+        quote: "Fed state: ↑ insulin → ↑ PFK-2 → more glycolysis, less gluconeogenesis."
+      - kind: aside
+        tone: tip
+        text: "**FaBian the Peasant** (FBP) بيشتغل جامد وهو جعان. **Prince FredericK** (PFK) بيشتغل بس وهو شبعان."
+        page: 74
+        quote: "FaBian the Peasant (FBP) has to work hard when starving."
+      - kind: mnemonic
+        word: "TLCFN"
+        parts:
+          - { key: "T", text: "Thiamine pyrophosphate (B1)" }
+          - { key: "L", text: "Lipoic acid" }
+          - { key: "C", text: "CoA (B5)" }
+          - { key: "F", text: "FAD (B2)" }
+          - { key: "N", text: "NAD+ (B3)" }
+        hook: "The Lovely Coenzymes For Nerds: نفس الـ 5 بتوع ==α-ketoglutarate dehydrogenase== كمان."
+        page: 74
+        quote: "The lovely coenzymes for nerds."
+      - kind: check
+        question: "A worker with garlic breath, vomiting, diarrhea, skin pigmentation and long QT. Which PDH cofactor is blocked?"
+        options: ["Lipoic acid", "TPP", "FAD", "CoA", "NAD+"]
+        answer: 0
+        why:
+          - "صح: الـ arsenic بيوقف الـ lipoic acid."
+          - "الـ TPP بيقل في نقص B1."
+          - "الـ arsenic مش بيضرب الـ FAD."
+          - "الـ arsenic مش بيضرب الـ CoA."
+          - "الـ arsenic مش بيضرب الـ NAD+."
+        page: 74
+        quote: "Arsenic inhibits lipoic acid."
+      - kind: explain
+        title: "نقص الـ PDH complex"
+        text: |-
+          - **X-linked**. الـ pyruvate مش بيدخل الـ TCA، فبيروح ==lactate== (LDH) و ==alanine== (ALT).
+          - من الطفولة: مشاكل أعصاب، lactic acidosis، و ↑ alanine.
+          - العلاج: أكل ==ketogenic== (دهون، lysine و leucine) لأنه بيتجاوز الـ pyruvate، مع B1 و lipoic acid.
+        page: 75
+        quote: "Neurologic defects, lactic acidosis, ↑ serum alanine starting in infancy."
+      - kind: table
+        title: "الـ pyruvate بيروح فين"
+        columns: [Enzyme, Cofactor, Product]
+        rows:
+          - ["ALT", "B6", "Alanine (to liver)"]
+          - ["Pyruvate carboxylase", "B7", "Oxaloacetate"]
+          - ["PDH", "B1, B2, B3, B5, lipoic acid", "Acetyl-CoA"]
+          - ["LDH", "B3", "Lactate"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+        page: 75
+        quote: "Pyruvate dehydrogenase (B1, B2, B3, B5, lipoic acid): transition from glycolysis to the TCA cycle"
+      - kind: check
+        question: "An infant has lactic acidosis and high alanine that worsen with carbohydrate feeds. Best diet?"
+        options: ["High fat, ↑ lysine and leucine", "High carbohydrate", "Low phenylalanine", "Fructose-free"]
+        answer: 0
+        why:
+          - "صح: نقص PDH؛ الـ ketogenic nutrients بتتجاوز الـ pyruvate."
+          - "النشويات بتعمل pyruvate أكتر ← lactate أكتر."
+          - "ده للـ PKU."
+          - "ده للـ hereditary fructose intolerance."
+        page: 75
+        quote: "↑ intake of ketogenic nutrients (eg, high fat content or ↑ lysine and leucine), B1 and lipoic acid."
+      - kind: explain
+        title: "الـ TCA: الحسبة"
+        text: |-
+          - كل acetyl-CoA ← ==3 NADH + 1 FADH2 + 2 CO2 + 1 GTP== = 10 ATP. ضاعف كل حاجة لكل glucose.
+          - الـ pyruvate ← acetyl-CoA بيدّي NADH واحد و CO2 واحد زيادة.
+          - Citrate is Krebs’ starting substrate for making oxaloacetate: citrate، isocitrate، α-KG، succinyl-CoA، succinate، fumarate، malate، oxaloacetate.
+        page: 75
+        quote: "The TCA cycle produces 3 NADH, 1 FADH2, 2 CO2, 1 GTP per acetyl-CoA = 10 ATP/ acetyl-CoA (2× everything per glucose)."
+      - kind: try
+        items: [bio.L06.026, bio.L06.028, bio.L06.032, bio.L06.034, bio.L06.040]
+    recap:
+      - "PFK-1 هو الـ rate-limiting؛ AMP و F-2,6-BP بيشغّلوه."
+      - "Insulin ← PFK-2 ← glycolysis. Glucagon ← FBPase-2 ← gluconeogenesis."
+      - "PDH: 5 cofactors (TLCFN)، والـ arsenic بيوقف الـ lipoic acid."
+      - "نقص PDH: X-linked، lactate و alanine عاليين، أكل ketogenic."
+      - "TCA: 3 NADH، 1 FADH2، 1 GTP = 10 ATP لكل acetyl-CoA."
+    practice: [bio.L06.024, bio.L06.025, bio.L06.026, bio.L06.027, bio.L06.028, bio.L06.029, bio.L06.030, bio.L06.031, bio.L06.032, bio.L06.033, bio.L06.034, bio.L06.035, bio.L06.036, bio.L06.037, bio.L06.038, bio.L06.039, bio.L06.040]
+  - id: bio.L06.lesson3
+    title: "الـ ETC، والـ gluconeogenesis، والـ HMP shunt"
+    hook: "واحد واخد aspirin كتير سخن 40 درجة، وواحد واخد primaquine بوله بقى غامق. الاتنين أصلهم في الـ mitochondria والـ NADPH"
+    minutes: 10
+    pages: [76, 77]
+    topics: [electron-transport-chain, gluconeogenesis, pentose-phosphate-pathway, g6pd-deficiency]
+    goals:
+      - "تعرف NADH و FADH2 بيدخلوا فين، وكام ATP"
+      - "تفرّق بين inhibitor و uncoupler"
+      - "تحفظ الـ 4 enzymes بتوع الـ gluconeogenesis"
+      - "تفهم الـ G6PD deficiency من الـ NADPH للـ bite cells"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "سلسلة نقل الإلكترونات"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="10" y="50" width="55" height="40" rx="6"/><text x="22" y="75" class="t-sm t-b">I</text>
+            <rect class="fg-box" x="75" y="50" width="55" height="40" rx="6"/><text x="87" y="75" class="t-sm t-b">II</text>
+            <rect class="fg-box" x="140" y="50" width="55" height="40" rx="6"/><text x="152" y="75" class="t-sm t-b">III</text>
+            <rect class="fg-bad" x="205" y="50" width="55" height="40" rx="6"/><text x="217" y="75" class="t-sm t-b">IV</text>
+            <rect class="fg-good" x="275" y="50" width="75" height="40" rx="6"/><text x="282" y="75" class="t-sm t-b">V: ATP</text>
+            <text x="10" y="110" class="t-sm">NADH</text>
+            <text x="75" y="110" class="t-sm">FADH2</text>
+            <text x="200" y="110" class="t-sm t-bad">Cyanide, CO</text>
+            <text x="200" y="125" class="t-sm">O2 → H2O</text>
+            <text x="10" y="35" class="t-sm t-mut">Proton gradient builds across the inner membrane</text>
+            <text x="10" y="155" class="t-sm t-bad">Uncouplers (brown fat, aspirin): gradient leaks → heat</text>
+          </svg>
+        caption: "الـ NADH بيدخل من complex I (2.5 ATP)، والـ FADH2 من complex II (1.5 ATP). الـ cyanide والـ CO بيقفلوا complex IV. الـ uncoupler بيخرّم الغشا: الإلكترونات ماشية بس مفيش ATP، والطاقة بتطلع حرارة."
+        alt: "Complexes I to V in a row. NADH enters at complex I, FADH2 at complex II. Cyanide and carbon monoxide block complex IV, where oxygen becomes water. Complex V makes ATP. Uncouplers such as brown fat proteins and aspirin let the proton gradient leak as heat."
+        page: 76
+        quote: "NADH electrons are transferred to complex I. FADH2 electrons are transferred to complex II (at a lower energy level than NADH)."
+      - kind: explain
+        title: "الحسبة النهائية"
+        text: |-
+          - 1 NADH ← 2.5 ATP، و 1 FADH2 ← 1.5 ATP.
+          - glucose واحدة aerobic ← ==32 ATP== (malate-aspartate shuttle: قلب وكبد) أو ==30 ATP== (glycerol-3-phosphate shuttle: عضلات).
+          - Anaerobic ← ==2 ATP== بس.
+        page: 76
+        quote: "1 NADH → 2.5 ATP; 1 FADH2 → 1.5 ATP"
+      - kind: check
+        question: "A girl took an aspirin overdose and has a temperature of 39.8 °C. What happens in her mitochondria?"
+        options: ["Electron transport continues but ATP synthesis stops", "Electron transport stops at complex IV", "ATP synthase runs faster", "NADH can't enter complex I"]
+        answer: 0
+        why:
+          - "صح: uncoupling؛ الـ gradient بيضيع والطاقة بتطلع حرارة."
+          - "ده cyanide أو CO."
+          - "الـ ATP بيقل مش بيزيد."
+          - "الـ NADH بيدخل عادي."
+        page: 76
+        quote: "ATP synthesis stops, but electron transport continues."
+      - kind: table
+        title: "الـ 4 خطوات اللي مش بترجع في الـ gluconeogenesis"
+        columns: [Enzyme, Site, Needs]
+        rows:
+          - ["Pyruvate carboxylase", "Mitochondria", "Biotin, ATP; ⊕ acetyl-CoA"]
+          - ["PEP carboxykinase", "Cytosol", "GTP"]
+          - ["Fructose-1,6-bisphosphatase 1", "Cytosol", "⊕ citrate; ⊝ AMP"]
+          - ["Glucose-6-phosphatase", "ER", "Liver mainly"]
+        hide: [[0, 1], [0, 2], [1, 2], [3, 1]]
+        page: 76
+        quote: "Phosphoenolpyruvate carboxykinase In cytosol. Oxaloacetate → phosphoenolpyruvate (PEP). Requires GTP."
+      - kind: reveal
+        prompt: "ليه العضلة عندها glycogen كتير بس مش بتدّي سكر للدم؟"
+        answer: "مفيهاش ==glucose-6-phosphatase==، فالـ glucose-6-P بيفضل جواها وتحرقه هي. عشان كده الكبد (والكلية) بس اللي بيعمل glucose للدم."
+        page: 76
+        quote: "(Muscle cannot participate in gluconeogenesis because it lacks glucose-6-phosphatase)."
+      - kind: aside
+        tone: trap
+        text: "الدهون مش بتعمل glucose، ماعدا الـ ==odd-chain== fatty acids: بيطلعوا propionyl-CoA ← succinyl-CoA ← glucose. الـ even-chain بيطلعوا acetyl-CoA بس. It’s odd for fatty acids to make glucose."
+        page: 76
+        quote: "Odd-chain fatty acids yield 1 propionyl-CoA during metabolism, which can enter the TCA cycle (as succinyl-CoA), undergo gluconeogenesis, and serve as a glucose source"
+      - kind: explain
+        title: "الـ HMP shunt"
+        text: |-
+          - بيعمل ==NADPH== (للـ glutathione في الـ RBC، والدهون والـ cholesterol) و ==ribose== للـ nucleotides. مفيش ATP.
+          - **Oxidative** (مش بيرجع): G6PD ← NADPH. **Nonoxidative** (بيرجع): transketolase (B1).
+          - أنشط مكان: الثدي وقت الرضاعة، الكبد، الـ adrenal cortex، والـ RBCs.
+        page: 77
+        quote: "Additionally, this pathway yields ribose for nucleotide synthesis."
+      - kind: explain
+        title: "G6PD deficiency"
+        text: |-
+          - NADPH قليل ← الـ glutathione مش بيرجع reduced ← الـ RBC مش بيستحمل الـ oxidants ← ==hemolysis==.
+          - المحفزات: ==infection== (الأشهر)، fava beans، sulfonamides، nitrofurantoin، primaquine.
+          - X-linked recessive، أشهر نقص enzyme في البشر، وكتير في مناطق الـ malaria.
+          - **Heinz bodies** (globin متكسر) و **bite cells** (الطحال قضمها).
+        page: 77
+        quote: "Infection (most common cause) can also precipitate hemolysis; inflammatory response produces free radicals that diffuse into RBCs, causing oxidative damage."
+      - kind: check
+        question: "A man from Nigeria gets dark urine 3 days after primaquine. Smear shows bite cells. What is low in his RBCs?"
+        options: ["NADPH", "ATP", "NADH", "2,3-BPG"]
+        answer: 0
+        why:
+          - "صح: G6PD deficiency ← NADPH قليل ← glutathione مش reduced."
+          - "الـ ATP يقل في نقص pyruvate kinase، من غير oxidant."
+          - "الـ NADH جاي من الـ glycolysis."
+          - "الـ 2,3-BPG مش ليه دعوة بالـ oxidants."
+        page: 77
+        quote: "↓ NADPH in RBCs leads to hemolytic anemia due to poor RBC defense against oxidizing agents (eg, fava beans, sulfonamides, nitrofurantoin, primaquine)."
+      - kind: try
+        items: [bio.L06.045, bio.L06.049, bio.L06.052, bio.L06.056]
+    recap:
+      - "NADH ← complex I (2.5)، FADH2 ← complex II (1.5). 32 أو 30 ATP aerobic، 2 anaerobic."
+      - "Cyanide و CO على complex IV. الـ uncoupler (aspirin، brown fat) = حرارة."
+      - "Gluconeogenesis: PC، PEPCK، FBPase-1، G6Pase. العضلة مفيهاش G6Pase."
+      - "HMP: NADPH و ribose. G6PD: X-linked، Heinz bodies و bite cells."
+    practice: [bio.L06.041, bio.L06.042, bio.L06.043, bio.L06.044, bio.L06.045, bio.L06.046, bio.L06.047, bio.L06.048, bio.L06.049, bio.L06.050, bio.L06.051, bio.L06.052, bio.L06.053, bio.L06.054, bio.L06.055, bio.L06.056]
+  - id: bio.L06.lesson4
+    title: "سكريات تانية: fructose و galactose و sorbitol و lactose، والـ amino acids"
+    hook: "طفل كويس على الرضاعة وتعب أول ما أكل فاكهة، وطفل تاني تعب من أول رضعة. الفرق في enzyme واحد"
+    minutes: 10
+    pages: [78, 79]
+    topics: [fructose-disorders, galactose-disorders, sorbitol, lactase-deficiency, amino-acids]
+    goals:
+      - "تفرّق بين أمراض الـ fructose الاتنين"
+      - "تفرّق بين أمراض الـ galactose الاتنين"
+      - "تعرف الـ sorbitol بيأذي فين في السكر"
+      - "تحفظ الـ essential والـ ketogenic amino acids"
+    status: unverified
+    steps:
+      - kind: table
+        title: "Fructose: بريء ولا خطير"
+        columns: ["", "Essential fructosuria", "Hereditary fructose intolerance"]
+        rows:
+          - ["Enzyme", "Fructokinase", "Aldolase B"]
+          - ["Course", "Benign", "Hypoglycemia, jaundice, cirrhosis, vomiting"]
+          - ["When", "Fructose in urine", "After fruit, juice or honey"]
+        hide: [[0, 1], [0, 2], [1, 2]]
+        page: 78
+        quote: "Asymptomatic, benign. Fructose appears in blood and urine (fructokinase deficiency is kinder)."
+      - kind: reveal
+        prompt: "ليه نقص الـ aldolase B بيعمل hypoglycemia؟"
+        answer: "الـ fructose-1-P بيتراكم ويحبس الـ ==phosphate==، فمفيش phosphate كفاية للـ glycogenolysis والـ gluconeogenesis. العلاج: شيل الـ fructose والـ sucrose والـ sorbitol."
+        page: 78
+        quote: "↓ intake of fructose, sucrose (glucose + fructose), and sorbitol (metabolized to fructose)."
+      - kind: table
+        title: "Galactose: خفيف ولا خطير"
+        columns: ["", "Galactokinase deficiency", "Classic galactosemia"]
+        rows:
+          - ["Enzyme", "Galactokinase", "Galactose-1-P uridyltransferase"]
+          - ["Course", "Mild: cataracts", "Failure to thrive, jaundice, hepatomegaly, cataracts, intellectual disability"]
+          - ["Danger", "Failure to track objects", "E coli sepsis"]
+        hide: [[0, 1], [0, 2], [2, 2]]
+        page: 78
+        quote: "Relatively mild/benign condition (galactokinase deficiency is kinder)."
+      - kind: aside
+        tone: exam
+        text: "في الاتنين، الـ urine dipstick ==سلبي== (بيدوّر على glucose بس)، بس الـ ==reducing sugar== test إيجابي. العلاج في الـ galactose: شيل الـ galactose والـ lactose."
+        page: 78
+        quote: "Urine dipstick will be ⊝ (tests for glucose only); reducing sugar can be detected in the urine"
+      - kind: check
+        question: "A 10-day-old breastfed baby has jaundice, hepatomegaly, cataracts and E coli sepsis. Which enzyme is missing?"
+        options: ["Galactose-1-P uridyltransferase", "Galactokinase", "Aldolase B", "Fructokinase"]
+        answer: 0
+        why:
+          - "صح: classic galactosemia من أول رضعة، ومعاها E coli sepsis."
+          - "الـ galactokinase خفيف، cataracts بس."
+          - "الـ aldolase B بيبان بعد الفاكهة."
+          - "الـ fructokinase benign."
+        page: 78
+        quote: "Can predispose neonates to E coli sepsis."
+      - kind: figure
+        title: "الـ sorbitol بيتحبس فين"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b6b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="20" width="80" height="30" rx="6"/><text x="22" y="40" class="t-sm">Glucose</text>
+            <line class="fg-arrow" x1="90" y1="35" x2="135" y2="35" marker-end="url(#b6b)"/>
+            <text x="88" y="16" class="t-sm t-mut">aldose reductase</text>
+            <rect class="fg-bad" x="137" y="20" width="80" height="30" rx="6"/><text x="149" y="40" class="t-sm">Sorbitol</text>
+            <line class="fg-arrow" x1="217" y1="35" x2="262" y2="35" marker-end="url(#b6b)"/>
+            <text x="215" y="16" class="t-sm t-mut">sorbitol DH</text>
+            <rect class="fg-good" x="264" y="20" width="80" height="30" rx="6"/><text x="276" y="40" class="t-sm">Fructose</text>
+            <text x="10" y="85" class="t-sm t-b">Only aldose reductase (sorbitol trapped):</text>
+            <text x="10" y="105" class="t-sm t-bad">Lens, Retina, Kidneys, Schwann cells</text>
+            <text x="10" y="135" class="t-sm t-b">Both enzymes (sorbitol leaves):</text>
+            <text x="10" y="153" class="t-sm t-good">Liver, ovaries, seminal vesicles</text>
+          </svg>
+        caption: "الأنسجة اللي ناقصها sorbitol dehydrogenase بتحبس الـ sorbitol، فيشد مية ويأذيها: cataracts و retinopathy و neuropathy في السكر (LARKS)."
+        alt: "Glucose becomes sorbitol by aldose reductase, then fructose by sorbitol dehydrogenase. Lens, retina, kidneys and Schwann cells have only aldose reductase, so sorbitol is trapped. Liver, ovaries and seminal vesicles have both enzymes."
+        page: 79
+        quote: "Lens has primarily Aldose reductase. Retina, Kidneys, and Schwann cells have only aldose reductase (LARKS)."
+      - kind: explain
+        title: "Lactase deficiency"
+        text: |-
+          - **Primary**: بيقل بعد الطفولة (كتير في الأصول الآسيوية والأفريقية). **Secondary**: الـ brush border اتأذى (rotavirus). **Congenital**: نادر.
+          - البكتيريا بتخمّر الـ lactose ← غازات وانتفاخ و osmotic diarrhea.
+          - التشخيص: stool pH ==قليل== و breath hydrogen ==عالي==. الـ biopsy طبيعية في الوراثي.
+        page: 79
+        quote: "Stool demonstrates ↓ pH and breath shows ↑ hydrogen content with lactose hydrogen breath test"
+      - kind: explain
+        title: "الـ essential amino acids"
+        text: |-
+          - الجسم مش بيعملهم، فلازم من الأكل: **PVT TIM HaLL**.
+          - ==P==henylalanine، ==V==aline، ==T==ryptophan، Threonine، Isoleucine، Methionine، Histidine، Leucine، Lysine.
+          - الـ L-amino acids بس هي اللي في البروتينات.
+        page: 79
+        quote: "Essential PVT TIM HaLL: Phenylalanine, Valine, Tryptophan, Threonine, Isoleucine, Methionine, Histidine, Leucine, Lysine."
+      - kind: sort
+        prompt: "Glucogenic ولا ketogenic؟"
+        bins: ["Glucogenic", "Both", "Ketogenic only"]
+        cards:
+          - { text: "Methionine", bin: 0 }
+          - { text: "Histidine", bin: 0 }
+          - { text: "Valine", bin: 0 }
+          - { text: "Isoleucine", bin: 1 }
+          - { text: "Phenylalanine", bin: 1 }
+          - { text: "Tryptophan", bin: 1 }
+          - { text: "Leucine", bin: 2 }
+          - { text: "Lysine", bin: 2 }
+        why: "We met his valentine, who is so sweet: methionine و histidine و valine بيعملوا سكر. Leucine و lysine بس هم الـ ketogenic الصافيين."
+        page: 79
+        quote: "Glucogenic: Methionine, histidine, valine. We met his valentine, who is so sweet (glucogenic)."
+      - kind: aside
+        tone: tip
+        text: "**Acidic**: aspartic و glutamic. **Basic**: histidine و lysine و ==arginine== (أقواهم). الـ arginine والـ lysine كتير في الـ ==histones== عشان يمسكوا الـ DNA السالب."
+        page: 79
+        quote: "Arginine and lysine are ↑ in histones which bind negatively charged DNA."
+      - kind: try
+        items: [bio.L06.059, bio.L06.062, bio.L06.065, bio.L06.068, bio.L06.073]
+    recap:
+      - "Fructokinase: benign. Aldolase B: hypoglycemia بعد الفاكهة."
+      - "Galactokinase: cataracts بس. Uridyltransferase: كبد و cataracts و E coli sepsis."
+      - "Sorbitol بيتحبس في الـ lens والـ retina والكلية والـ Schwann cells."
+      - "Lactase: ↓ stool pH، ↑ breath H2."
+      - "Leucine و lysine بس ketogenic صافي."
+    practice: [bio.L06.057, bio.L06.058, bio.L06.059, bio.L06.060, bio.L06.061, bio.L06.062, bio.L06.063, bio.L06.064, bio.L06.065, bio.L06.066, bio.L06.067, bio.L06.068, bio.L06.069, bio.L06.070, bio.L06.071, bio.L06.072, bio.L06.073]
+  - id: bio.L06.lesson5
+    title: "الـ urea cycle والـ ammonia، ومشتقات الـ amino acids"
+    hook: "مولود ولد كويس، وفي اليوم التالت بطّل يرضع ونام. الـ ammonia عالية، والـ BUN واطي. الـ nitrogen مش لاقي مخرج"
+    minutes: 10
+    pages: [80, 81]
+    topics: [urea-cycle, ammonia-transport, hyperammonemia, otc-deficiency, amino-acid-derivatives, catecholamine-synthesis]
+    goals:
+      - "ترتّب الـ urea cycle وتعرف الـ rate-limiting step"
+      - "تفهم ليه الـ ammonia بتأذي المخ وإزاي بنقللها"
+      - "تعرف OTC deficiency من الـ orotic acid"
+      - "تعرف كل amino acid بيعمل إيه، وخطوات الـ catecholamines"
+    status: unverified
+    steps:
+      - kind: order
+        prompt: "رتّب الـ urea cycle (Ordinarily, Careless Crappers Are Also Frivolous About Urination)"
+        steps: ["Ornithine", "Carbamoyl phosphate", "Citrulline", "Aspartate", "Argininosuccinate", "Fumarate", "Arginine", "Urea"]
+        why: "أول حرف من كل كلمة في الجملة. أول خطوتين في الـ mitochondria، والباقي في الـ cytoplasm."
+        page: 80
+        quote: "Ordinarily, Careless Crappers Are Also Frivolous About Urination."
+      - kind: explain
+        title: "البداية في الـ mitochondria"
+        text: |-
+          - HCO3− + NH3 ← carbamoyl phosphate بالـ ==CPS I== (الـ rate-limiting، 2 ATP).
+          - الـ ==N-acetylglutamate== هو الـ allosteric activator.
+          - الـ urea بيروح للكلية تطلّعه.
+          - العضلة بتبعت الـ nitrogen للكبد على شكل ==alanine== (Cahill cycle)، والكبد يرجّعلها glucose.
+        page: 80
+        quote: "N-acetylglutamate Carbamoyl phosphate synthetase I*"
+      - kind: figure
+        title: "الـ ammonia بتعمل إيه في المخ"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b6c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="10" y="20" width="95" height="30" rx="6"/><text x="18" y="40" class="t-sm">α-KG (TCA)</text>
+            <line class="fg-arrow-bad" x1="105" y1="35" x2="140" y2="35" marker-end="url(#b6c)"/>
+            <text x="108" y="28" class="t-sm t-bad">+NH3</text>
+            <rect class="fg-box" x="142" y="20" width="85" height="30" rx="6"/><text x="150" y="40" class="t-sm">Glutamate</text>
+            <line class="fg-arrow-bad" x1="227" y1="35" x2="262" y2="35" marker-end="url(#b6c)"/>
+            <text x="230" y="28" class="t-sm t-bad">+NH3</text>
+            <rect class="fg-bad" x="264" y="20" width="85" height="30" rx="6"/><text x="272" y="40" class="t-sm">Glutamine</text>
+            <text x="10" y="80" class="t-sm">↓ α-KG: TCA slows</text>
+            <text x="142" y="80" class="t-sm">↓ glutamate, ↑ GABA</text>
+            <text x="264" y="80" class="t-sm t-bad">osmotic: edema</text>
+            <text x="10" y="125" class="t-sm t-b">Asterixis, slurred speech, somnolence,</text>
+            <text x="10" y="143" class="t-sm t-b">vomiting, cerebral edema, blurred vision</text>
+          </svg>
+        caption: "الـ NH3 بيسحب الـ α-ketoglutarate يعمله glutamate ثم glutamine. الـ TCA بيقف، الـ GABA بيعلى، والـ glutamine بيشد مية فيعمل cerebral edema."
+        alt: "Ammonia adds to alpha-ketoglutarate to make glutamate, then glutamine. Low alpha-ketoglutarate slows the TCA cycle, glutamate falls and GABA rises, and glutamine causes osmotic cerebral edema. Clinical signs: asterixis, slurred speech, somnolence, vomiting, cerebral edema and blurred vision."
+        page: 80
+        quote: "↑ NH3 causes CNS toxicity, involving: ▘ TCA cycle inhibition (↓ α-ketoglutarate) ▘ ↓ glutamate ▘ ↑ GABAergic tone (↑ GABA) ▘ ↑ glutamine"
+      - kind: match
+        prompt: "وصّل كل علاج بطريقته"
+        pairs:
+          - ["Lactulose", "Acidifies the gut to trap NH4+"]
+          - ["Rifaximin", "Kills ammoniagenic bacteria"]
+          - ["Phenylbutyrate", "Binds glutamine for renal excretion"]
+          - ["Low-protein diet", "Less nitrogen to clear"]
+        why: "كلهم بيقللوا الـ ammonia من طرق مختلفة: الـ lactulose يحبسها، الـ rifaximin يقلل اللي بيعملها، والـ benzoate/phenylbutyrate يطلّعوا الـ nitrogen في البول."
+        page: 80
+        quote: "Benzoate, phenylacetate, or phenylbutyrate react with glycine or glutamine, forming products that are excreted renally."
+      - kind: check
+        question: "A cirrhotic man has asterixis and confusion. How does lactulose lower his ammonia?"
+        options: ["Acidifies the colon, trapping NH4+", "Kills gut bacteria", "Activates CPS I", "Binds glycine for excretion"]
+        answer: 0
+        why:
+          - "صح: الـ NH3 بيتحبس كـ NH4+ ويطلع."
+          - "ده الـ rifaximin."
+          - "الـ lactulose مش بيشتغل على الـ urea cycle."
+          - "ده الـ benzoate."
+        page: 80
+        quote: "Lactulose to acidify GI tract and trap NH + 4 for excretion."
+      - kind: explain
+        title: "OTC deficiency"
+        text: |-
+          - أشهر مرض في الـ urea cycle، و ==X-linked recessive== (الباقي AR).
+          - الـ carbamoyl phosphate بيتراكم ويروح للـ pyrimidine pathway ← ==orotic acid== عالي.
+          - ↓ BUN و hyperammonemia، و ==مفيش megaloblastic anemia== (ده الفرق عن orotic aciduria).
+        page: 81
+        quote: "Excess carbamoyl phosphate is converted to orotic acid (part of the pyrimidine synthesis pathway; vs. carbamoyl phosphate synthetase I deficiency)."
+      - kind: check
+        question: "A newborn boy has hyperammonemia, low BUN and high urine orotic acid; CBC is normal. Which enzyme?"
+        options: ["Ornithine transcarbamylase", "CPS I", "UMP synthase", "Arginase"]
+        answer: 0
+        why:
+          - "صح: OTC، والـ carbamoyl phosphate بيروح orotic acid."
+          - "نقص CPS I مفيهوش orotic acid عالي."
+          - "ده orotic aciduria، وفيه megaloblastic anemia ومفيش ammonia."
+          - "نقص arginase بيعلّي الـ arginine."
+        page: 81
+        quote: "Findings: ↑ orotic acid in blood and urine, ↓ BUN, symptoms of hyperammonemia. No megaloblastic anemia (vs orotic aciduria)."
+      - kind: table
+        title: "كل amino acid بيعمل إيه"
+        columns: ["Amino acid", "Products"]
+        rows:
+          - ["Tryptophan", "Niacin, serotonin, melatonin"]
+          - ["Tyrosine", "Thyroxine, melanin, catecholamines"]
+          - ["Histidine", "Histamine"]
+          - ["Glycine", "Porphyrin, heme"]
+          - ["Glutamate", "GABA, glutathione"]
+          - ["Arginine", "Creatine, urea, nitric oxide"]
+        hide: [[0, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+        page: 81
+        quote: "Histidine Histamine Glycine Porphyrin Heme"
+      - kind: order
+        prompt: "رتّب عمل الـ catecholamines"
+        steps: ["Phenylalanine", "Tyrosine", "L-DOPA", "Dopamine", "Norepinephrine", "Epinephrine"]
+        why: "BH4 للخطوتين الأولانيين، B6 للـ DOPA decarboxylase، vitamin C للـ dopamine β-hydroxylase، و SAM للـ PNMT. الـ carbidopa بيوقف الـ DOPA decarboxylase بره المخ."
+        page: 81
+        quote: "DOPA decarboxylase Dopamine β-hydroxylase Carbidopa"
+      - kind: aside
+        tone: tip
+        text: "التكسير: dopamine ← ==homovanillic acid==. الـ NE والـ epinephrine ← normetanephrine و metanephrine (COMT) ← ==vanillylmandelic acid== (MAO). ودول اللي بنقيسهم في الـ pheochromocytoma."
+        page: 81
+        quote: "Normetanephrine Vanillylmandelic acid Monoamine oxidase"
+      - kind: try
+        items: [bio.L06.076, bio.L06.082, bio.L06.084, bio.L06.086, bio.L06.090]
+    recap:
+      - "Urea cycle: CPS I (rate-limiting، N-acetylglutamate)، أول خطوتين في الـ mitochondria."
+      - "NH3: ↓ α-KG، ↑ GABA، ↑ glutamine ← edema. Lactulose، rifaximin، benzoate."
+      - "OTC: X-linked، ↑ orotic acid، ↓ BUN، مفيش megaloblastic anemia."
+      - "Phe ← Tyr ← DOPA ← dopamine ← NE ← epi. Carbidopa بيوقف الـ DOPA decarboxylase."
+    practice: [bio.L06.074, bio.L06.075, bio.L06.076, bio.L06.077, bio.L06.078, bio.L06.079, bio.L06.080, bio.L06.081, bio.L06.082, bio.L06.083, bio.L06.084, bio.L06.085, bio.L06.086, bio.L06.087, bio.L06.088, bio.L06.089, bio.L06.090]
+  - id: bio.L06.lesson6
+    title: "أمراض الـ amino acids: ريحة ولون وحصوات"
+    hook: "ريحة musty، بول بريحة السكر المحروق، بول بيسودّ في الهوا، وحصوات سداسية. كل علامة بتقولك اسم المرض"
+    minutes: 10
+    pages: [82, 83]
+    topics: [phenylketonuria, maple-syrup-urine-disease, alkaptonuria, homocystinuria, cystinuria, organic-acidemias]
+    goals:
+      - "تعرف الـ PKU وعلاجه وليه الـ aspartame ممنوع"
+      - "تفرّق MSUD و alkaptonuria من العلامة"
+      - "تحفظ أسباب الـ homocystinuria وعلاج كل واحد"
+      - "تفرّق propionic عن methylmalonic acidemia"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "PKU"
+        text: |-
+          - ↓ ==phenylalanine hydroxylase== (أو ↓ BH4، الـ cofactor بتاعه). AR.
+          - الـ tyrosine بيبقى ==essential==، والـ phenyl ketones بتطلع في البول.
+          - Intellectual disability، microcephaly، seizures، جلد فاتح، eczema، و ==musty odor==.
+          - الـ screening بعد 2–3 أيام (عند الولادة طبيعي بفضل enzyme الأم).
+        page: 82
+        quote: "Caused by ↓ phenylalanine hydroxylase (PAH). Tyrosine becomes essential. ↑ phenylalanine → ↑ phenyl ketones in urine."
+      - kind: figure
+        title: "الـ phenylalanine رايح فين"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b6d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="10" y="20" width="110" height="30" rx="6"/><text x="18" y="40" class="t-sm">Phenylalanine</text>
+            <line class="fg-arrow" x1="120" y1="35" x2="220" y2="35" marker-end="url(#b6d)"/>
+            <text x="135" y="28" class="t-sm t-mut">PAH + BH4</text>
+            <rect class="fg-good" x="222" y="20" width="90" height="30" rx="6"/><text x="235" y="40" class="t-sm">Tyrosine</text>
+            <line class="fg-arrow" x1="60" y1="50" x2="60" y2="90" marker-end="url(#b6d)"/>
+            <rect class="fg-bad" x="10" y="92" width="120" height="30" rx="6"/><text x="18" y="112" class="t-sm">Phenyl ketones</text>
+            <text x="150" y="80" class="t-sm t-bad">Block: PKU</text>
+            <text x="150" y="112" class="t-sm">Musty odor, ID, fair skin</text>
+            <text x="10" y="150" class="t-sm t-mut">Aspartame → phenylalanine: avoid</text>
+          </svg>
+        caption: "لما الـ PAH أو الـ BH4 يقل، الـ phenylalanine مش بيبقى tyrosine، فبيتحول لـ phenyl ketones. الـ tyrosine بقى essential، والـ aspartame ممنوع لأنه بيبقى phenylalanine."
+        alt: "Phenylalanine normally becomes tyrosine via phenylalanine hydroxylase with BH4. When blocked in PKU, it becomes phenyl ketones, causing musty odor, intellectual disability and fair skin. Aspartame is converted to phenylalanine and should be avoided."
+        page: 82
+        quote: "Patients with PKU must avoid the artificial sweetener aspartame, which is converted to phenylalanine."
+      - kind: aside
+        tone: trap
+        text: "أم عندها PKU ومش ماشية على الـ diet ← ==phenylalanine embryopathy==: growth restriction، microcephaly، intellectual disability، وعيوب قلب في الجنين، حتى لو الجنين نفسه سليم. بيتمنع بالأكل."
+        page: 82
+        quote: "Phenylalanine embryopathy—↑ phenylalanine levels in pregnant patients with untreated phenylketonuria (PKU) can cause fetal growth restriction, microcephaly, intellectual disability, congenital heart defects."
+      - kind: table
+        title: "MSUD ضد alkaptonuria"
+        columns: ["", "Maple syrup urine disease", "Alkaptonuria"]
+        rows:
+          - ["Enzyme", "Branched-chain α-ketoacid DH (B1)", "Homogentisate oxidase"]
+          - ["Clue", "Urine smells of burnt sugar", "Urine turns black in air"]
+          - ["Course", "Seizures, dystonia, neurologic decline", "Ochronosis, arthralgias; usually benign"]
+          - ["Treatment", "Restrict I, L, V; thiamine", "—"]
+        hide: [[0, 1], [0, 2], [3, 1]]
+        page: 82
+        quote: "Presentation: vomiting, poor feeding, secretions (urine, sweat, ear wax) smell like maple syrup/ burnt sugar."
+      - kind: check
+        question: "A newborn has poor feeding, dystonia and diapers smelling of burnt sugar. Which vitamin may help?"
+        options: ["B1", "B6", "B12", "Biotin", "Folate"]
+        answer: 0
+        why:
+          - "صح: MSUD؛ الـ enzyme محتاج TPP (B1)."
+          - "الـ B6 لنوع من الـ homocystinuria."
+          - "الـ B12 لبعض الـ methylmalonic acidemia."
+          - "الـ biotin للـ propionyl-CoA carboxylase."
+          - "الـ folate للـ MTHFR deficiency."
+        page: 82
+        quote: "Presentation: vomiting, poor feeding, secretions (urine, sweat, ear wax) smell like maple syrup/ burnt sugar."
+      - kind: table
+        title: "Homocystinuria: 4 أسباب، 4 علاجات"
+        columns: ["Defect", "Treatment"]
+        rows:
+          - ["Cystathionine synthase", "↓ methionine, ↑ cysteine, ↑ B6, B12, folate"]
+          - ["Cystathionine synthase that binds PLP poorly", "↑↑ B6, ↑ cysteine"]
+          - ["Methionine synthase", "↑ methionine"]
+          - ["MTHFR", "↑ folate"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+        page: 83
+        quote: "Methionine synthase (homocysteine methyltransferase) deficiency (treatment: ↑ methionine in diet)"
+      - kind: aside
+        tone: exam
+        text: "Homocystinuria شكلها زي Marfan (طويل ورفيع)، بس العدسة بتتخلع ==لتحت وجوه== (Marfan: لفوق وبره)، وفيها ==thrombosis== و intellectual disability."
+        page: 83
+        quote: "In homocystinuria, lens subluxes “down and in” (vs Marfan, “up and fans out”)."
+      - kind: check
+        question: "A tall boy with lens dislocated down and in has DVT; homocysteine and methionine are both high. Diet?"
+        options: ["↓ methionine, ↑ cysteine", "↑ methionine", "↓ phenylalanine", "↓ branched-chain amino acids"]
+        answer: 0
+        why:
+          - "صح: cystathionine synthase deficiency."
+          - "ده لنقص methionine synthase، والـ methionine فيه واطي."
+          - "ده الـ PKU."
+          - "ده الـ MSUD."
+        page: 83
+        quote: "Cystathionine synthase deficiency (treatment: ↓ methionine, ↑ cysteine, ↑ B6, B12, and folate in diet)"
+      - kind: explain
+        title: "Cystinuria"
+        text: |-
+          - Transporter في الـ PCT والأمعاء بايظ لـ ==COLA==: Cystine و Ornithine و Lysine و Arginine.
+          - الـ cystine بيترسب ← ==حصوات سداسية== متكررة.
+          - العلاج: urinary ==alkalinization== (potassium citrate، acetazolamide)، penicillamine، مية كتير، وأكل قليل الـ methionine.
+        page: 83
+        quote: "Excess cystine in the urine can lead to recurrent precipitation of hexagonal cystine stones."
+      - kind: explain
+        title: "Organic acidemias"
+        text: |-
+          - رضيع: رضاعة ضعيفة، ترجيع، hypotonia، و ==high anion gap acidosis==، مع hypoglycemia و hyperammonemia.
+          - **Propionic**: propionyl-CoA carboxylase (biotin) ← ↑ propionyl-CoA، ↓ methylmalonic acid.
+          - **Methylmalonic**: methylmalonyl-CoA mutase أو ==B12== ناقص.
+          - الأكل: قليل في ==VOMIT==: Valine، Odd-chain fatty acids، Methionine، Isoleucine، Threonine.
+        page: 83
+        quote: "Inhibits gluconeogenesis → ↓ fasting blood glucose levels, ↑ ketoacidosis → high anion gap metabolic acidosis ▘ Inhibits urea cycle → hyperammonemia"
+      - kind: try
+        items: [bio.L06.094, bio.L06.098, bio.L06.101, bio.L06.103, bio.L06.106]
+    recap:
+      - "PKU: PAH أو BH4، tyrosine essential، musty، ممنوع aspartame."
+      - "MSUD: branched-chain α-ketoacid DH (B1)، ريحة maple syrup."
+      - "Alkaptonuria: homogentisate oxidase، ochronosis، بول بيسودّ."
+      - "Homocystinuria: العدسة لتحت وجوه، thrombosis؛ 4 أسباب."
+      - "Cystinuria: COLA، حصوات سداسية، alkalinize."
+      - "Propionic و methylmalonic: VOMIT."
+    practice: [bio.L06.091, bio.L06.092, bio.L06.093, bio.L06.094, bio.L06.095, bio.L06.096, bio.L06.097, bio.L06.098, bio.L06.099, bio.L06.100, bio.L06.101, bio.L06.102, bio.L06.103, bio.L06.104, bio.L06.105, bio.L06.106]
+  - id: bio.L06.lesson7
+    title: "الـ glycogen وأمراض تخزينه"
+    hook: "رضيعة بطنها كبيرة وسكرها بيقع بعد 3 ساعات من الرضعة، وشاب بيتقلص من رفع الحديد وبوله أحمر. الاتنين glycogen مش عارف يتكسر"
+    minutes: 10
+    pages: [84, 85]
+    topics: [glycogen-regulation, glycogen, glycogen-storage-diseases]
+    goals:
+      - "تفهم الـ insulin والـ glucagon بيتحكموا في الـ glycogen إزاي"
+      - "ترتّب خطوات تكسير الـ glycogen"
+      - "تحفظ الـ 5 glycogen storage diseases"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "مين بيقول للـ glycogen يتكسر"
+        text: |-
+          - **Glucagon** (الكبد) و **epinephrine** (الكبد والعضلة) ← cAMP ← ==protein kinase A== ← glycogen phosphorylase kinase ← تكسير.
+          - **Insulin** ← protein phosphatase ← ==glycogen synthase== شغال.
+          - في العضلة وقت الانقباض: ==calcium-calmodulin== بيشغّل الـ phosphorylase kinase من غير هرمونات.
+        page: 84
+        quote: "Calcium-calmodulin in muscle during contraction"
+      - kind: explain
+        title: "شكل الـ glycogen"
+        text: |-
+          - الخطوط ==α-(1,4)==، والفروع ==α-(1,6)==.
+          - العضلة بتكسّره لنفسها وقت المجهود. الكبد بيكسّره عشان سكر الدم.
+        page: 84
+        quote: "Hepatocytes Glycogen is stored and undergoes glycogenolysis to maintain blood sugar at appropriate levels."
+      - kind: order
+        prompt: "رتّب تكسير الـ glycogen"
+        steps: ["Glycogen phosphorylase cuts glucose-1-P until 4 units remain", "4-α-D-glucanotransferase moves 3 units to the main chain", "α-1,6-glucosidase frees the last glucose"]
+        why: "الـ phosphorylase بيقف قبل الفرع بـ 4. الـ debranching enzyme بيعمل الشغلانتين: ينقل 3، ويقطع الأخير كـ glucose حر. اللي بيفضل قبل الـ debranching اسمه limit dextrin."
+        page: 84
+        quote: "Glycogen phosphorylase liberates glucose-1-phosphate residues off branched glycogen until 4 glucose units remain on a branch."
+      - kind: check
+        question: "Which molecule is the 2–4 residue branch left after glycogen phosphorylase stops?"
+        options: ["Limit dextrin", "Glucose-1-P", "UDP-glucose", "Maltose"]
+        answer: 0
+        why:
+          - "صح: limit dextrin، وبيتراكم في Cori."
+          - "ده اللي الـ phosphorylase بيطلّعه."
+          - "ده للبناء مش للتكسير."
+          - "الـ maltose مش جزء من الكلام ده."
+        page: 84
+        quote: "Limit dextrin—2-4 residues remaining on a branch after glycogen phosphorylase has shortened it."
+      - kind: table
+        title: "Vice president can’t accept money"
+        columns: [Type, Name, Enzyme]
+        rows:
+          - ["I", "Von Gierke", "Glucose-6-phosphatase"]
+          - ["II", "Pompe", "Lysosomal acid α-1,4-glucosidase"]
+          - ["III", "Cori", "Debranching enzyme"]
+          - ["IV", "Andersen", "Branching enzyme"]
+          - ["V", "McArdle", "Muscle glycogen phosphorylase"]
+        hide: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]]
+        page: 85
+        quote: "Vice president can’t accept money. Types I-V are autosomal recessive."
+      - kind: reveal
+        prompt: "ليه von Gierke فيه lactate و triglycerides و uric acid عاليين؟"
+        answer: "الـ glucose-6-P مش لاقي مخرج كـ glucose، فبيتزنق ويروح للمسارات التانية: ==lactate== و ==triglycerides== و uric acid. والكبد مش بيقدر يظبط السكر لأن الـ gluconeogenesis والـ glycogenolysis الاتنين بيعدّوا على الـ G6Pase."
+        page: 85
+        quote: "Severe fasting hypoglycemia, ↑↑ Glycogen in liver and kidneys, ↑ blood lactate, ↑ triglycerides, ↑ uric acid (Gout), and hepatomegaly, renomegaly."
+      - kind: figure
+        title: "تفرّقهم إزاي"
+        svg: |-
+          <svg viewBox="0 0 360 175" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-bad" x="10" y="10" width="165" height="45" rx="6"/><text x="18" y="28" class="t-sm t-b">I von Gierke</text><text x="18" y="46" class="t-sm">Liver: low sugar, ↑ lactate</text>
+            <rect class="fg-box" x="185" y="10" width="165" height="45" rx="6"/><text x="193" y="28" class="t-sm t-b">III Cori</text><text x="193" y="46" class="t-sm">Milder, normal lactate</text>
+            <rect class="fg-acc" x="10" y="65" width="165" height="45" rx="6"/><text x="18" y="83" class="t-sm t-b">II Pompe</text><text x="18" y="101" class="t-sm">Heart, big tongue, floppy</text>
+            <rect class="fg-box" x="185" y="65" width="165" height="45" rx="6"/><text x="193" y="83" class="t-sm t-b">IV Andersen</text><text x="193" y="101" class="t-sm">HSM, infant cirrhosis</text>
+            <rect class="fg-good" x="10" y="120" width="340" height="45" rx="6"/><text x="18" y="138" class="t-sm t-b">V McArdle (muscle)</text><text x="18" y="156" class="t-sm">Cramps, red urine, second wind; flat lactate, ammonia rises</text>
+          </svg>
+        caption: "I و III في الكبد (Cori أخف ومن غير lactate عالي). II في القلب والعضلات (Pompe trashes the pump). IV كبد وطحال و cirrhosis. V العضلة بس."
+        alt: "Five boxes. Type I von Gierke: liver, low sugar, high lactate. Type III Cori: milder, normal lactate. Type II Pompe: heart, big tongue, floppy. Type IV Andersen: hepatosplenomegaly and infant cirrhosis. Type V McArdle: muscle cramps, red urine, second wind, flat lactate with normal ammonia rise."
+        page: 85
+        quote: "Pompe trashes the pump (1st and 4th letter; heart, liver, and muscle)."
+      - kind: check
+        question: "A 19-year-old gets cramps and red urine with weightlifting; slowing down briefly lets him continue. Which enzyme?"
+        options: ["Muscle glycogen phosphorylase", "Glucose-6-phosphatase", "Acid α-1,4-glucosidase", "Branching enzyme", "Debranching enzyme"]
+        answer: 0
+        why:
+          - "صح: McArdle، second wind و myoglobinuria."
+          - "ده von Gierke، كبد."
+          - "ده Pompe، قلب."
+          - "ده Andersen، كبد."
+          - "ده Cori، كبد."
+        page: 85
+        quote: "Second-wind phenomenon noted during exercise due to ↑ muscular blood flow."
+      - kind: try
+        items: [bio.L06.109, bio.L06.113, bio.L06.118, bio.L06.119, bio.L06.120]
+    recap:
+      - "Glucagon/epi ← cAMP ← PKA ← تكسير. Insulin ← synthase."
+      - "Phosphorylase لحد 4، الـ debranching ينقل 3 ويقطع الأخير."
+      - "I G6Pase، II acid maltase، III debranching، IV branching، V myophosphorylase."
+      - "Von Gierke: ↑ lactate و TG و uric acid. Cori: lactate طبيعي."
+    practice: [bio.L06.107, bio.L06.108, bio.L06.109, bio.L06.110, bio.L06.111, bio.L06.112, bio.L06.113, bio.L06.114, bio.L06.115, bio.L06.116, bio.L06.117, bio.L06.118, bio.L06.119, bio.L06.120]
+  - id: bio.L06.lesson8
+    title: "الـ lysosomal storage diseases"
+    hook: "cherry-red spot في عين طفل: لو الكبد كبير يبقى Niemann-Pick، لو مش كبير يبقى Tay-Sachs"
+    minutes: 9
+    pages: [86, 86]
+    topics: [lysosomal-storage-diseases]
+    goals:
+      - "تحفظ كل مرض بالـ enzyme والمادة المتراكمة"
+      - "تفرّق الأمراض اللي شبه بعض بعلامة واحدة"
+      - "تعرف مين X-linked"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الفكرة"
+        text: |-
+          - Enzyme في الـ lysosome ناقص ← المادة بتتراكم.
+          - Tay-Sachs و Niemann-Pick وبعض أنواع Gaucher أكتر في الـ ==Ashkenazi Jews==.
+          - كلهم AR ماعدا ==Fabry و Hunter== (XR).
+        page: 86
+        quote: "↑ incidence of Tay-Sachs, Niemann-Pick, and some forms of Gaucher disease in Ashkenazi Jews."
+      - kind: table
+        title: "الـ sphingolipidoses"
+        columns: [Disease, Enzyme, Builds up]
+        rows:
+          - ["Tay-Sachs", "Hexosaminidase A", "GM2 ganglioside"]
+          - ["Fabry", "α-galactosidase A", "Ceramide trihexoside"]
+          - ["Metachromatic leukodystrophy", "Arylsulfatase A", "Cerebroside sulfate"]
+          - ["Krabbe", "Galactocerebrosidase", "Galactocerebroside, psychosine"]
+          - ["Gaucher", "Glucocerebrosidase", "Glucocerebroside"]
+          - ["Niemann-Pick", "Sphingomyelinase", "Sphingomyelin"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+        page: 86
+        quote: "Arylsulfatase A. Cerebroside sulfate. AR"
+      - kind: figure
+        title: "Cherry-red spot: افتكر الكبد"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <circle class="fg-thin" cx="60" cy="60" r="40"/>
+            <circle class="fg-dot-bad" cx="60" cy="60" r="10"/>
+            <text x="20" y="125" class="t-sm t-mut">Cherry-red macula</text>
+            <rect class="fg-acc" x="130" y="20" width="220" height="45" rx="6"/>
+            <text x="140" y="38" class="t-sm t-b">Tay-Sachs</text>
+            <text x="140" y="56" class="t-sm">No HSM, onion-skin lysosomes</text>
+            <rect class="fg-bad" x="130" y="75" width="220" height="45" rx="6"/>
+            <text x="140" y="93" class="t-sm t-b">Niemann-Pick</text>
+            <text x="140" y="111" class="t-sm">HSM, foam cells</text>
+          </svg>
+        caption: "الاتنين فيهم neurodegeneration و cherry-red spot. الفرق: Niemann-Pick فيه hepatosplenomegaly و foam cells، و Tay-Sachs مفيهوش (TAy-Sax: hexosaminidase A)."
+        alt: "A cherry-red macula. Tay-Sachs: no hepatosplenomegaly, onion-skin lysosomes. Niemann-Pick: hepatosplenomegaly and foam cells."
+        page: 86
+        quote: "lysosomes with onion skin, no hepatosplenomegaly."
+      - kind: check
+        question: "A 1-year-old Ashkenazi boy is losing milestones, startles to sound, has a cherry-red macula and no organomegaly. Enzyme?"
+        options: ["Hexosaminidase A", "Sphingomyelinase", "Glucocerebrosidase", "Arylsulfatase A"]
+        answer: 0
+        why:
+          - "صح: Tay-Sachs، hyperacusis ومفيش HSM."
+          - "Niemann-Pick فيه HSM."
+          - "Gaucher فيه HSM و bone crises ومفيش cherry-red."
+          - "Metachromatic leukodystrophy = demyelination."
+        page: 86
+        quote: "Progressive neurodegeneration, developmental delay/regression, hyperreflexia, hyperacusis, “cherry- red” spot on macula A"
+      - kind: explain
+        title: "Gaucher و Fabry"
+        text: |-
+          - **Gaucher** (الأشهر): hepatosplenomegaly، pancytopenia، ==bone crises== و AVN للـ femur، وخلايا شكلها ==crumpled tissue paper==. علاجه recombinant glucocerebrosidase.
+          - **Fabry** (XR): بدري: neuropathy و angiokeratomas و hypohidrosis. متأخر: ==renal failure== وقلب.
+        page: 86
+        quote: "Gaucher cells (lipid-laden macrophages resembling crumpled tissue paper C )."
+      - kind: explain
+        title: "Krabbe و metachromatic"
+        text: |-
+          - **Metachromatic leukodystrophy**: demyelination مركزي وطرفي، ataxia و dementia.
+          - **Krabbe**: neuropathy، الـ oligodendrocytes بتموت، optic atrophy، و ==globoid cells==.
+        page: 86
+        quote: "Peripheral neuropathy, destruction of oligodendrocytes, developmental delay, CN II atrophy, globoid cells."
+      - kind: table
+        title: "Hurler ضد Hunter"
+        columns: ["", "Hurler", "Hunter"]
+        rows:
+          - ["Enzyme", "α-L-iduronidase", "Iduronate-2-sulfatase"]
+          - ["Inheritance", "AR", "XR"]
+          - ["Cornea", "Clouded", "Clear"]
+          - ["Behavior", "Developmental delay", "Aggressive"]
+        hide: [[0, 1], [0, 2], [1, 2], [2, 2]]
+        page: 86
+        quote: "Hunters see clearly (no corneal clouding) and aggressively aim for the X (X-linked recessive)."
+      - kind: check
+        question: "A boy with coarse face, hepatosplenomegaly and aggression has clear corneas. Inheritance?"
+        options: ["X-linked recessive", "Autosomal recessive", "Autosomal dominant", "Mitochondrial"]
+        answer: 0
+        why:
+          - "صح: Hunter، الصيادين بيشوفوا كويس وبيصوّبوا على الـ X."
+          - "ده Hurler، والقرنية معتمة."
+          - "مفيش واحد منهم AD."
+          - "مش mitochondrial."
+        page: 86
+        quote: "Hunter syndrome Mild Hurler + aggressive behavior, no corneal clouding."
+      - kind: try
+        items: [bio.L06.123, bio.L06.126, bio.L06.127, bio.L06.128]
+    recap:
+      - "Tay-Sachs: hexosaminidase A، cherry-red، مفيش HSM."
+      - "Niemann-Pick: sphingomyelinase، cherry-red، HSM، foam cells."
+      - "Gaucher: glucocerebrosidase، bone crises، crumpled paper."
+      - "Fabry (XR): α-gal A، neuropathy، angiokeratomas، كلى."
+      - "Hunter (XR): قرنية صافية وعدوانية. Hurler: قرنية معتمة."
+    practice: [bio.L06.121, bio.L06.122, bio.L06.123, bio.L06.124, bio.L06.125, bio.L06.126, bio.L06.127, bio.L06.128]
+  - id: bio.L06.lesson9
+    title: "الدهون والـ ketones والصيام"
+    hook: "طفل جاله نزلة معوية وما أكلش من امبارح: سكره واطي، ومفيش ketones في البول. الجسم مش عارف يحرق الدهون"
+    minutes: 10
+    pages: [87, 89]
+    topics: [fatty-acid-metabolism, ketone-bodies, fasted-vs-fed-lipid, metabolic-fuel-use, fasting-and-starvation]
+    goals:
+      - "تفرّق بين بناء الدهون وحرقها"
+      - "تعرف نقص الـ carnitine والـ MCAD"
+      - "تفهم الـ ketone bodies ومين بيستخدمها"
+      - "تعرف الوقود في كل مرحلة من الصيام"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "بناء ضد حرق"
+        text: |-
+          - **البناء** في الـ cytoplasm: الـ ==citrate== بيطلع من الـ mitochondria ("Sytrate" = synthesis). الكبد والثدي والدهون.
+          - **الحرق**: الـ long-chain fatty acids محتاجة ==carnitine== تدخل الـ mitochondria ("carnitine = carnage").
+        page: 87
+        quote: "Long-chain fatty acid (LCFA) degradation requires carnitine-dependent transport into the mitochondrial matrix."
+      - kind: table
+        title: "مرضين في حرق الدهون"
+        columns: ["", "1° carnitine deficiency", "MCAD deficiency"]
+        rows:
+          - ["Problem", "LCFAs can't enter mitochondria", "Fatty acids not broken to acetyl-CoA"]
+          - ["Sugar and ketones", "Hypoketotic hypoglycemia", "Hypoketotic hypoglycemia"]
+          - ["Clue", "Cardiomyopathy, hypotonia", "↑ acyl carnitines, sudden death"]
+          - ["Advice", "—", "Avoid fasting"]
+        hide: [[2, 1], [2, 2], [3, 2]]
+        page: 87
+        quote: "Medium-chain acyl-CoA dehydrogenase deficiency—↓ ability to break down fatty acids into acetyl-CoA → accumulation of fatty acyl carnitines and dicarboxylic acids in the blood with hypoketotic hypoglycemia."
+      - kind: check
+        question: "A 2-year-old fasted 18 hours and seized. Glucose low, no urine ketones, high acylcarnitines. Advice?"
+        options: ["Avoid fasting", "Avoid fruit", "Lactose-free diet", "Restrict leucine"]
+        answer: 0
+        why:
+          - "صح: MCAD deficiency."
+          - "ده للـ fructose intolerance."
+          - "ده للـ galactosemia."
+          - "ده للـ MSUD."
+        page: 87
+        quote: "Treat by avoiding fasting."
+      - kind: explain
+        title: "الـ ketone bodies"
+        text: |-
+          - الكبد بيعمل acetoacetate و ==β-hydroxybutyrate== للعضلات والمخ. والـ acetone بيطلع في النفس (ريحة فاكهة).
+          - في الجوع والـ DKA، الـ oxaloacetate بيروح للـ gluconeogenesis، فالـ acetyl-CoA بيروح ketones.
+          - الـ urine test بيشوف الـ acetoacetate ==بس==، مش الـ β-hydroxybutyrate.
+          - الـ RBC (مفيهاش mitochondria) والـ ==الكبد== (ناقصه β-ketoacyl-CoA transferase) مش بيستخدموها.
+        page: 88
+        quote: "In prolonged starvation and diabetic ketoacidosis, oxaloacetate is depleted for gluconeogenesis."
+      - kind: table
+        title: "السكر والـ ketones بيقولولك المرض"
+        columns: ["Deficiency", "Ketones", "Glucose"]
+        rows:
+          - ["OTC", "Normal", "Normal"]
+          - ["MCAD", "Low", "Low"]
+          - ["Propionic, methylmalonic", "High", "Low"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+        page: 88
+        quote: "DEFICIENCY OTC (urea cycle) MCAD deficiency Methylmalonic acidemia, propionic acidemia"
+      - kind: aside
+        tone: tip
+        text: "**HMG-CoA lyase** ← ketones. **HMG-CoA reductase** ← cholesterol (ده اللي الـ statins بتوقفه)."
+        page: 88
+        quote: "HMG-CoA lyase for ketone body production. HMG-CoA reductase for cholesterol synthesis."
+      - kind: explain
+        title: "الدهون في الجوع والشبع"
+        text: |-
+          - **صايم**: epinephrine و glucagon ← cAMP ← PKA ← ==hormone-sensitive lipase== ← FFA و glycerol.
+          - **شبعان**: insulin ← ==lipoprotein lipase== (مع apo CII) ← الـ FFA تدخل الخلية وتتخزن.
+        page: 88
+        quote: "Protein kinase A TG cAMP HSL-P ATP FFA Glycerol Epinephrine Glucagon"
+      - kind: figure
+        title: "الوقود مع الوقت"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b6e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <line class="fg-arrow" x1="10" y1="30" x2="350" y2="30" marker-end="url(#b6e)"/>
+            <text x="10" y="20" class="t-sm t-mut">Exercise</text>
+            <text x="10" y="50" class="t-sm">2 s: ATP</text>
+            <text x="90" y="50" class="t-sm">10 s: creatine-P</text>
+            <text x="210" y="50" class="t-sm">1 min+: aerobic</text>
+            <line class="fg-arrow" x1="10" y1="90" x2="350" y2="90" marker-end="url(#b6e)"/>
+            <text x="10" y="80" class="t-sm t-mut">Starvation</text>
+            <text x="10" y="112" class="t-sm">Day 1: glycogen</text>
+            <text x="120" y="112" class="t-sm">Days 1-3: FFA, gluconeo</text>
+            <text x="10" y="135" class="t-sm t-acc">After day 3: ketones feed the brain</text>
+            <text x="10" y="158" class="t-sm t-bad">Then protein breakdown → organ failure</text>
+          </svg>
+        caption: "في المجهود: ATP ثانيتين، creatine phosphate لحد 10 ثواني، وبعدين aerobic. في الجوع: الـ glycogen بيخلص بعد يوم، وبعد اليوم التالت الـ ketones بتأكّل المخ، ولما الدهون تخلص البروتين بيتكسر."
+        alt: "Exercise timeline: stored ATP for 2 seconds, creatine phosphate to 10 seconds, then aerobic metabolism. Starvation timeline: glycogen on day 1, free fatty acids and gluconeogenesis on days 1 to 3, ketone bodies feed the brain after day 3, then protein breakdown and organ failure."
+        page: 89
+        quote: "Glycogen reserves depleted after day 1."
+      - kind: aside
+        tone: tip
+        text: "السعرات: carb و protein ==4==، alcohol ==7==، fat ==9==. عدد الحروف = عدد السعرات (carb، alcohol، fatty acid بالإنجليزي)."
+        page: 89
+        quote: "1g carb/protein = 4 kcal 1g alcohol = 7 kcal 1g fatty acid = 9 kcal (# letters = # kcal)"
+      - kind: check
+        question: "A man on day 10 of a hunger strike. Main fuel for his brain?"
+        options: ["Ketone bodies", "Liver glycogen", "Fatty acids directly", "Muscle protein"]
+        answer: 0
+        why:
+          - "صح: بعد اليوم التالت، الـ ketones."
+          - "الـ glycogen خلص بعد يوم."
+          - "الـ fatty acids مش بتغذي المخ مباشرة."
+          - "البروتين بيتحافظ عليه لحد ما الدهون تخلص."
+        page: 89
+        quote: "Adipose stores (ketone bodies become the main source of energy for the brain)."
+      - kind: try
+        items: [bio.L06.131, bio.L06.136, bio.L06.138, bio.L06.140, bio.L06.143]
+    recap:
+      - "Citrate للبناء، carnitine للحرق."
+      - "Carnitine و MCAD: hypoketotic hypoglycemia؛ MCAD: ابعد عن الصيام."
+      - "Urine test بيشوف acetoacetate بس. الكبد والـ RBC مش بيستخدموا ketones."
+      - "HSL في الصيام، LPL في الشبع."
+      - "Glycogen يوم، بعد اليوم التالت ketones للمخ."
+    practice: [bio.L06.129, bio.L06.130, bio.L06.131, bio.L06.132, bio.L06.133, bio.L06.134, bio.L06.135, bio.L06.136, bio.L06.137, bio.L06.138, bio.L06.139, bio.L06.140, bio.L06.141, bio.L06.142, bio.L06.143, bio.L06.144]
+  - id: bio.L06.lesson10
+    title: "نقل الدهون والـ lipoproteins"
+    hook: "طفل عنده pancreatitis وبلازما لونها لبني، وشاب عنده عقد على وتر أخيل وأبوه جاله MI في الأربعينات. الاتنين lipoproteins بايظة"
+    minutes: 10
+    pages: [90, 92]
+    topics: [lipid-transport, lipid-transport-enzymes, major-apolipoproteins, lipoprotein-functions, abetalipoproteinemia, familial-dyslipidemias]
+    goals:
+      - "تتبع رحلة الدهون من الأكل للكبد"
+      - "تحفظ الـ enzymes والـ apolipoproteins"
+      - "تعرف وظيفة كل lipoprotein"
+      - "تفرّق الـ familial dyslipidemias"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "رحلة الدهون"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b6f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="10" y="18" class="t-sm t-b">Diet (exogenous)</text>
+            <rect class="fg-acc" x="10" y="25" width="95" height="28" rx="6"/><text x="16" y="44" class="t-sm">Chylomicron</text>
+            <line class="fg-arrow" x1="105" y1="39" x2="140" y2="39" marker-end="url(#b6f)"/>
+            <text x="108" y="32" class="t-sm t-mut">LPL</text>
+            <rect class="fg-box" x="142" y="25" width="95" height="28" rx="6"/><text x="148" y="44" class="t-sm">Remnant</text>
+            <line class="fg-arrow" x1="237" y1="39" x2="272" y2="39" marker-end="url(#b6f)"/>
+            <text x="240" y="32" class="t-sm t-mut">apoE</text>
+            <rect class="fg-good" x="274" y="25" width="76" height="28" rx="6"/><text x="290" y="44" class="t-sm">Liver</text>
+            <text x="10" y="88" class="t-sm t-b">Liver (endogenous)</text>
+            <rect class="fg-acc" x="10" y="95" width="70" height="28" rx="6"/><text x="22" y="114" class="t-sm">VLDL</text>
+            <line class="fg-arrow" x1="80" y1="109" x2="110" y2="109" marker-end="url(#b6f)"/>
+            <rect class="fg-box" x="112" y="95" width="60" height="28" rx="6"/><text x="128" y="114" class="t-sm">IDL</text>
+            <line class="fg-arrow" x1="172" y1="109" x2="202" y2="109" marker-end="url(#b6f)"/>
+            <rect class="fg-bad" x="204" y="95" width="60" height="28" rx="6"/><text x="220" y="114" class="t-sm">LDL</text>
+            <line class="fg-arrow" x1="264" y1="109" x2="294" y2="109" marker-end="url(#b6f)"/>
+            <text x="298" y="114" class="t-sm">Cells</text>
+            <text x="10" y="160" class="t-sm t-good">HDL: cholesterol back to liver; lends apo CII and apoE</text>
+          </svg>
+        caption: "الأكل: chylomicron (B48) ← الـ LPL ياخد الـ TG ← الـ remnant يروح الكبد بالـ apoE. الكبد: VLDL (B100) ← IDL ← LDL للخلايا. الـ HDL بيرجّع الـ cholesterol للكبد وبيسلّف apo CII و apoE."
+        alt: "Exogenous path: chylomicrons lose triglycerides to lipoprotein lipase and become remnants taken up by the liver through apoE. Endogenous path: the liver makes VLDL, which becomes IDL and then LDL that delivers cholesterol to cells. HDL returns cholesterol to the liver and lends apo CII and apoE."
+        page: 90
+        quote: "HDL transfers apo CII and apoE Chylomicron apo CII activates LPL"
+      - kind: match
+        prompt: "وصّل كل enzyme بشغلانته"
+        pairs:
+          - ["Lipoprotein lipase", "TG in chylomicrons and VLDL"]
+          - ["Hormone-sensitive lipase", "TG stored in adipocytes"]
+          - ["LCAT", "Esterifies cholesterol for HDL maturation"]
+          - ["PCSK9", "Degrades the LDL receptor"]
+          - ["Hepatic lipase", "TG left in IDL and remnants"]
+        why: "الـ LPL على جدار الأوعية، الـ HSL جوه الدهون في الصيام، الـ LCAT بيكبّر الـ HDL، والـ PCSK9 بيكسّر الـ LDL receptor (فلو وقفناه الـ LDL يقل)."
+        page: 91
+        quote: "Lecithin-cholesterol acyltransferase Catalyzes esterification of 2 ⁄3 of plasma cholesterol (ie, required for HDL maturation)."
+      - kind: table
+        title: "الـ apolipoproteins"
+        columns: [Apo, Function]
+        rows:
+          - ["E", "Remnant uptake (all but LDL)"]
+          - ["AI", "Activates LCAT (HDL only)"]
+          - ["CII", "Cofactor for lipoprotein lipase"]
+          - ["B48", "Chylomicron secretion (gut only)"]
+          - ["B100", "Binds LDL receptor (liver only)"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+        page: 91
+        quote: "CII Lipoprotein lipase cofactor that catalyzes cleavage"
+      - kind: check
+        question: "A particle from the thoracic duct after a fatty meal carries which apolipoprotein unique to gut-made particles?"
+        options: ["B48", "B100", "AI", "E"]
+        answer: 0
+        why:
+          - "صح: B48 على اللي جاي من الأمعاء بس."
+          - "B100 على اللي جاي من الكبد (I hope I live to Be 100)."
+          - "AI على الـ HDL."
+          - "E على كله تقريباً ماعدا LDL."
+        page: 91
+        quote: "B48 Mediates chylomicron secretion into lymphatics Only on particles originating from the intestines"
+      - kind: explain
+        title: "كل lipoprotein بيعمل إيه"
+        text: |-
+          - **Chylomicron**: TG من الأكل للأنسجة. **VLDL**: TG من الكبد. **IDL**: TG و cholesterol للكبد.
+          - **LDL**: cholesterol من الكبد للأنسجة (LDL is ==Lethal==).
+          - **HDL**: الـ ==reverse cholesterol transport== للكبد، والـ alcohol بيزوّده (HDL is Healthy).
+        page: 92
+        quote: "HDL Mediates reverse cholesterol transport from peripheral tissues to liver."
+      - kind: aside
+        tone: exam
+        text: "**Abetalipoproteinemia**: AR، ==MTP== بايظ ← مفيش chylomicrons ولا VLDL ولا LDL. رضيع بـ steatorrhea و failure to thrive، وبعدين ==vitamin E deficiency== (ataxia، retinitis pigmentosa) و acanthocytes. العلاج: قلل الـ long-chain fats وجرعات عالية vitamin E."
+        page: 92
+        quote: "Later manifestations include retinitis pigmentosa, spinocerebellar degeneration due to vitamin E deficiency, progressive ataxia, acanthocytosis."
+      - kind: table
+        title: "Familial dyslipidemias"
+        columns: [Type, Defect, Clue]
+        rows:
+          - ["I (AR)", "LPL or apo CII", "Pancreatitis, creamy layer, no ↑ atherosclerosis"]
+          - ["II (AD)", "LDL receptor or apo B100", "Tendon xanthomas, corneal arcus, early MI"]
+          - ["III (AR)", "ApoE", "Palmar xanthomas"]
+          - ["IV (AD)", "Hepatic VLDL overproduction", "TG > 1000, pancreatitis"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+        page: 92
+        quote: "AD Absent or defective LDL receptors, or defective apo B100"
+      - kind: check
+        question: "A 30-year-old with Achilles xanthomas and corneal arcus; father had MI at 42. LDL 290, TG normal. Defect?"
+        options: ["LDL receptor", "Lipoprotein lipase", "ApoE", "Hepatic VLDL overproduction"]
+        answer: 0
+        why:
+          - "صح: type II familial hypercholesterolemia."
+          - "ده type I، pancreatitis."
+          - "ده type III، palmar xanthomas."
+          - "ده type IV، TG عالية."
+        page: 92
+        quote: "Accelerated atherosclerosis (may have MI before age 20), tendon (Achilles) xanthomas, and corneal arcus."
+      - kind: try
+        items: [bio.L06.147, bio.L06.149, bio.L06.154, bio.L06.156, bio.L06.159]
+    recap:
+      - "Chylomicron (B48) ← LPL ← remnant ← الكبد بالـ apoE."
+      - "VLDL ← IDL ← LDL (B100). HDL بيرجّع الـ cholesterol."
+      - "PCSK9 بيكسّر الـ LDL receptor."
+      - "Abetalipoproteinemia: MTP، vitamin E."
+      - "I: LPL/CII. II: LDL receptor. III: apoE. IV: VLDL."
+    practice: [bio.L06.145, bio.L06.146, bio.L06.147, bio.L06.148, bio.L06.149, bio.L06.150, bio.L06.151, bio.L06.152, bio.L06.153, bio.L06.154, bio.L06.155, bio.L06.156, bio.L06.157, bio.L06.158, bio.L06.159, bio.L06.160]

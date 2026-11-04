@@ -95,6 +95,11 @@ pub fn add_card() -> Element {
     stroke("M5 5h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM12 9v6M9 12h6")
 }
 
+/// His notes: a page with a pencil across its corner.
+pub fn notes() -> Element {
+    stroke("M5 3h10l4 4v5M5 3v18h7M8 8h6M8 12h5M14 21l1-3 5-5 2 2-5 5z")
+}
+
 /// Lesson view toggle: stacked cards (steps).
 pub fn steps() -> Element {
     stroke("M5 8h14v11H5zM7 5h10M9 2.5h6")
