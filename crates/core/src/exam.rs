@@ -613,11 +613,11 @@ mod tests {
 
     #[test]
     fn timing() {
-        assert_eq!(time_limit_ms(40), 48 * 60_000);
+        assert_eq!(time_limit_ms(40), 60 * 60_000);
         assert_eq!(remaining_ms(1, 1_000, 1_000), 90_000);
         // A full 40-question block is Step 1's hour.
         assert_eq!(time_limit_ms(MOCK_SIZE), 3_600_000);
-        assert_eq!(remaining_ms(1, 1_000, 61_000), 12_000);
+        assert_eq!(remaining_ms(1, 1_000, 61_000), 30_000);
         assert_eq!(remaining_ms(1, 1_000, 999_999), 0);
     }
 
