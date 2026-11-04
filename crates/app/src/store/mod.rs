@@ -29,6 +29,8 @@ use steps_core::review::{Grade, Hlc, HlcClock, LoggedReview, Origin, ReviewEvent
 use steps_core::srs::ReviewSettings;
 use steps_core::zone::Zone;
 
+#[cfg(test)]
+pub use backend::use_private_review;
 pub use backend::{LectureProgress, NoteError, Overview, Review, use_provide_review, use_review};
 
 #[derive(Debug)]

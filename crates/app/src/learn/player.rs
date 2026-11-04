@@ -371,6 +371,7 @@ fn Stage(
                         of: seed.clone(),
                         hook: step_hook(&step.body),
                     }
+                    crate::weak::StepMark { of: seed.clone(), page }
                 }
                 crate::notes::NoteChip { anchor: steps_core::note::Anchor::Lesson(seed.clone()), page: step.page }
             }

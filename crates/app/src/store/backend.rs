@@ -359,6 +359,14 @@ impl ReviewBackend {
         out
     }
 
+    /// Items whose last answer was a miss, hidden ones left out
+    /// (`crate::weak`).
+    pub fn weak(&self) -> std::collections::BTreeSet<String> {
+        let mut weak = crate::weak::weak_ids(&self.log);
+        weak.retain(|id| !self.hidden(id));
+        weak
+    }
+
     /// New items started on each of the last `days` study days, oldest
     /// first (the last entry is today).
     pub fn learned_per_day(&self, days: usize, now_ms: i64) -> Vec<u32> {
@@ -503,6 +511,32 @@ pub fn use_provide_review() {
         let mut revision = Signal::new(0);
         backend.borrow_mut().on_change = Some(Box::new(move || *revision.write() += 1));
         spawn_refit();
+        Review { backend, revision }
+    });
+    use_context_provider(|| StudyStoreHandle(review.backend.clone() as Rc<RefCell<dyn StudyStore>>));
+}
+
+/// For tests: [`use_provide_review`] over a store of its own, so answers
+/// logged here never reach the other tests' shared in-memory store.
+#[cfg(test)]
+pub fn use_private_review(answers: &[(&str, steps_core::review::Grade)]) {
+    let answers: Vec<(String, steps_core::review::Grade)> =
+        answers.iter().map(|&(id, g)| (id.to_string(), g)).collect();
+    let review = use_context_provider(move || {
+        let store: &'static super::Store = Box::leak(Box::new(super::Store::open_in_memory().unwrap()));
+        let mut backend = ReviewBackend::new(store, catalog(Library::get()));
+        for (k, (id, grade)) in answers.into_iter().enumerate() {
+            backend.record(steps_core::review::ReviewEvent {
+                item_id: id,
+                grade,
+                origin: steps_core::review::Origin::Study,
+                at_ms: 1_793_610_000_000 + k as i64 * 60_000,
+                took_ms: 5_000,
+            });
+        }
+        let backend = Rc::new(RefCell::new(backend));
+        let mut revision = Signal::new(0);
+        backend.borrow_mut().on_change = Some(Box::new(move || *revision.write() += 1));
         Review { backend, revision }
     });
     use_context_provider(|| StudyStoreHandle(review.backend.clone() as Rc<RefCell<dyn StudyStore>>));

@@ -1,0 +1,19 @@
+/* Weak-fact marks (weak/mod.rs): under a lesson step and on the page
+   sheet. A quiet underline in the theme's accent, never alarm red. */
+.weak-mark {
+  display: inline-flex; align-items: center; min-block-size: var(--target, 48px);
+  padding-block: 0; padding-inline: var(--sp-2); border: 0; background: none; cursor: pointer;
+  color: var(--accent-ink); font: inherit; font-size: 0.875em;
+  text-decoration: underline; text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px; text-underline-offset: 0.3em;
+}
+.weak-mark:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--radius-control, var(--radius)); }
+.bk-weak { display: flex; flex-direction: column; gap: var(--sp-2); margin-block-start: var(--sp-3); }
+.weak-title { margin: 0; font-size: 1em; }
+/* A fact in the list is text, not a link: a bar on its start side marks it. */
+.weak-facts { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: var(--sp-2); }
+.weak-fact { line-height: 1.5; overflow-wrap: anywhere; min-inline-size: 0;
+  border-inline-start: 3px solid var(--accent); padding-inline-start: var(--sp-2); }
+.bk-weak .btn { align-self: flex-start; min-block-size: var(--target, 48px); }
+.weak-toggle { display: flex; align-items: center; gap: var(--sp-2); min-block-size: var(--target, 48px); cursor: pointer; }
+.weak-toggle input { inline-size: 20px; block-size: 20px; margin: 0; flex: none; }

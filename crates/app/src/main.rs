@@ -66,6 +66,7 @@ mod today;
 mod ui;
 mod update;
 mod verify;
+mod weak;
 
 use crate::look::{Css, css};
 use dioxus::prelude::*;

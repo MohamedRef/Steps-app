@@ -111,7 +111,7 @@ impl Section {
     fn matches(self, query: &str) -> bool {
         let keywords = match self {
             Self::Study => {
-                "study review daily limit fsrs sounds vibration onboarding مذاكرة مراجعة حد يومي صوت اهتزاز ترحيب"
+                "study review daily limit fsrs sounds vibration onboarding weak marks مذاكرة مراجعة حد يومي صوت اهتزاز ترحيب علامات"
             }
             Self::Reminders => "notifications permission quiet hours اشعارات تنبيهات اذونات هدوء مواعيد",
             Self::Sync => "google sign in account cloud devices جوجل دخول حساب مزامنة أجهزة",
@@ -293,6 +293,7 @@ fn SectionView(section: Section) -> Element {
             rsx! {
                 crate::today::StudySection {}
                 crate::learn::ViewSection {}
+                crate::weak::WeakSection {}
                 crate::sounds::SoundSection {}
                 crate::onboarding::ReopenCard {}
             }

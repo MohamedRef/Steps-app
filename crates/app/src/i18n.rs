@@ -219,6 +219,24 @@ pub mod book {
     pub const READ_HINT: &str = "الكروت الجديدة بتبدأ من الصفحات اللي قريتها. دوس تاني لو عايز تشيل العلامة.";
 }
 
+/// Weak-fact marks (weak/mod.rs): neutral words, no red counts.
+pub mod weak {
+    use super::count::{CARD, QUESTION, count};
+
+    pub const MARK: &str = "راجعها تاني";
+    pub const WHY: &str = "فيه حاجة من الصفحة دي غلطت فيها آخر مرة. العلامة بتمشي أول ما تجاوبها صح.";
+    pub const SETTING_TITLE: &str = "علامات المراجعة";
+    pub const SETTING_LINE: &str = "علّم في الدروس وصفحات الكتاب الحاجات اللي غلطت فيها آخر مرة";
+    /// "ذاكر الـ 3 كروت دول"
+    pub fn study(n: usize) -> String {
+        format!("ذاكر {} دلوقتي", count(n, &CARD))
+    }
+    /// "وفيه سؤال واحد من الصفحة دي محتاج تبص عليه تاني."
+    pub fn questions(n: usize) -> String {
+        format!("وفيه {} من الصفحة دي محتاج تبص عليه تاني.", count(n, &QUESTION))
+    }
+}
+
 pub mod nav {
     pub const LABEL: &str = "التنقل";
     pub const TODAY: &str = "النهارده";

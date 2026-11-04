@@ -86,10 +86,7 @@ pub struct PageContent {
 /// Collects the page's items from the library, leaving out hidden ones.
 /// `scope` keeps it to one course's book or one lecture's slides.
 pub fn page_content(lib: &Library, page: u32, scope: &Scope, hidden: impl Fn(&str) -> bool) -> PageContent {
-    let in_scope = |id: &str| match scope {
-        Scope::Slides(l) => id == l,
-        Scope::Book(c) => steps_core::program::course_of(id) == c && !lib.program.slides(id),
-    };
+    let in_scope = |id: &str| in_scope(lib, scope, id);
     let lecture = lib
         .index
         .lectures
@@ -114,11 +111,39 @@ pub fn page_content(lib: &Library, page: u32, scope: &Scope, hidden: impl Fn(&st
     out
 }
 
+/// Whether lecture (or item) `id` counts in `scope`.
+fn in_scope(lib: &Library, scope: &Scope, id: &str) -> bool {
+    match scope {
+        Scope::Slides(l) => id == l,
+        Scope::Book(c) => steps_core::program::course_of(id) == c && !lib.program.slides(id),
+    }
+}
+
+/// The page's facts to go over again (`crate::weak`): the cards a
+/// session can play, and how many missed questions or cases cite it.
+pub fn weak_on_page<'a>(
+    lib: &'a Library,
+    page: u32,
+    scope: &Scope,
+    weak: &std::collections::BTreeSet<String>,
+) -> (Vec<&'a steps_core::content::Item>, usize) {
+    let all: Vec<_> = lib
+        .lectures
+        .values()
+        .filter(|l| in_scope(lib, scope, &l.lecture))
+        .flat_map(|l| crate::weak::on_page(lib, weak, &l.lecture, page))
+        .collect();
+    let (facts, others): (Vec<_>, Vec<_>) =
+        all.into_iter().partition(|i| crate::study::PLAYABLE.contains(&i.body.kind()));
+    (facts, others.len())
+}
+
 /// The sheet, drawn once by the shell; empty while no page is open.
 #[component]
 pub fn BookSheet() -> Element {
     let ui = use_context::<Ui>();
     let review = use_review();
+    let weak = crate::weak::use_weak();
     let Some((page, scope, chip_quote, held, hook)) = OPEN.read().clone() else {
         return rsx! {};
     };
@@ -139,6 +164,9 @@ pub fn BookSheet() -> Element {
     // First Aid pages only: a slide number is no page of the book.
     let can_mark = matches!(scope, Scope::Book(_)) && content.lecture.is_some();
     let is_read = review.backend.borrow().pages().all().contains(page);
+    let (weak_facts, weak_questions) =
+        weak.as_ref().map(|w| weak_on_page(lib, page, &scope, w)).unwrap_or_default();
+    let weak_ids: Vec<String> = weak_facts.iter().map(|i| i.id.clone()).collect();
 
     rsx! {
         style { {CSS.text()} }
@@ -190,6 +218,46 @@ pub fn BookSheet() -> Element {
                 }
                 if can_mark {
                     ReadToggle { page, is_read }
+                }
+                if !weak_facts.is_empty() || weak_questions > 0 {
+                    style { {crate::weak::CSS.text()} }
+                    section { class: "bk-weak", aria_labelledby: "bk-weak-title",
+                        h3 { id: "bk-weak-title", class: "weak-title", {crate::i18n::weak::MARK} }
+                        if !weak_facts.is_empty() {
+                            ul { class: "weak-facts",
+                                for item in weak_facts.iter() {
+                                    li { key: "{item.id}", class: "weak-fact",
+                                        bdi { {crate::study::short_text(item)} }
+                                    }
+                                }
+                            }
+                        }
+                        if weak_questions > 0 {
+                            p { class: "muted small", {crate::i18n::weak::questions(weak_questions)} }
+                        }
+                        if !weak_ids.is_empty() {
+                            button {
+                                class: "btn btn-tonal",
+                                onclick: {
+                                    let lecture_id = lecture_id.clone();
+                                    let ids = weak_ids.clone();
+                                    move |_| {
+                                        *crate::study::START.write() = Some(crate::study::Start {
+                                            lectures: lecture_id.clone().map(|l| vec![l]),
+                                            items: Some(ids.clone()),
+                                            minutes: crate::onboarding::session_minutes(),
+                                        });
+                                        close();
+                                        crate::lecture::close_all();
+                                        crate::learn::forget();
+                                        let mut screen = ui.screen;
+                                        screen.set(Screen::Study);
+                                    }
+                                },
+                                {crate::i18n::weak::study(weak_ids.len())}
+                            }
+                        }
+                    }
                 }
                 if matches!(scope, Scope::Book(_)) {
                     crate::notes::PageNotes { page }
