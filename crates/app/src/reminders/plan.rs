@@ -95,6 +95,8 @@ pub struct Inputs<'a> {
     pub times: &'a [u16],
     /// Study days, Saturday first (`PlanSettings::weekdays`).
     pub weekdays: [bool; 7],
+    /// Days off on top of the week's (`PlanSettings::vacations`): no reminder.
+    pub vacations: &'a [steps_core::plan::Vacation],
     /// Reviews due per day, today first (overdue counted today).
     pub due: &'a [u32],
     /// Today's target is already met, so today stays quiet.
@@ -118,7 +120,10 @@ pub fn schedule(i: &Inputs) -> Vec<Scheduled> {
     let mut out = Vec::new();
     for d in 0..HORIZON {
         let day = today.plus(d);
-        if !i.weekdays[day.weekday()] || (d == 0 && i.target_met) {
+        if !i.weekdays[day.weekday()]
+            || i.vacations.iter().any(|v| v.contains(day))
+            || (d == 0 && i.target_met)
+        {
             continue;
         }
         let due = i.due.get(d as usize).copied();
@@ -156,6 +161,7 @@ mod tests {
             here: true,
             times,
             weekdays: ALL,
+            vacations: &[],
             due,
             target_met: false,
             now_ms: NOW,
@@ -204,6 +210,15 @@ mod tests {
         let weekdays = [true, true, true, false, false, true, true];
         let items = schedule(&Inputs { weekdays, ..inputs(&[19 * 60], &[]) });
         assert_eq!(items[0].date, "2026-10-29");
+    }
+
+    #[test]
+    fn vacation_days_are_skipped() {
+        use steps_core::plan::Vacation;
+        let trip =
+            [Vacation { from: Day::parse("2026-10-27").unwrap(), to: Day::parse("2026-10-30").unwrap() }];
+        let items = schedule(&Inputs { vacations: &trip, ..inputs(&[19 * 60], &[]) });
+        assert_eq!(items[0].date, "2026-10-31");
     }
 
     #[test]

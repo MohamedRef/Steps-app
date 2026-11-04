@@ -1,0 +1,518 @@
+schema: steps.content/v1
+lecture: heme.L03
+title: Physiology
+book: { chapter: 10, pages: [416, 419] }
+topics:
+  - { id: hemoglobin-electrophoresis, title: Hemoglobin electrophoresis }
+  - { id: antiglobulin-test, title: Antiglobulin test }
+  - { id: platelet-plug-formation, title: Platelet plug formation (primary hemostasis) }
+  - { id: thrombogenesis, title: Thrombogenesis }
+  - { id: coagulation-and-kinin-pathways, title: Coagulation and kinin pathways }
+  - { id: vitamin-k-dependent-coagulation, title: Vitamin K–dependent coagulation }
+items:
+  # ---------- p416: hemoglobin electrophoresis ----------
+  - id: heme.L03.001
+    kind: order
+    topic: hemoglobin-electrophoresis
+    prompt: Put the hemoglobins in order of how far they migrate toward the anode on gel electrophoresis, farthest first.
+    steps:
+      - HbA
+      - HbF
+      - HbS
+      - HbC
+    src: { page: 416, quote: "HbA migrates the farthest, followed by HbF, HbS, and HbC." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.002
+    kind: card
+    topic: hemoglobin-electrophoresis
+    front: Why do HbS and HbC migrate less far toward the anode than HbA?
+    back: Their missense mutations replace glutamic acid with valine (neutral) in HbS and with lysine in HbC, making them more positively charged than HbA, so they stay closer to the cathode.
+    src: { page: 416, quote: "the missense mutations in HbS and HbC replace glutamic acid with valine (neutral) and lysine , respectively, making HbC and HbS more positively charged than HbA." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.003
+    kind: cloze
+    topic: hemoglobin-electrophoresis
+    text: "Electrophoresis order from anode: \"A {{c1::Fat}} {{c2::Santa}} {{c3::Claus}} can't go far\" (A, F, S, C). HbC is closest to the cathode."
+    src: { page: 416, quote: "A Fat Santa Claus can’t go far. HbC is closest to the Cathode. HbA is closest to the Anode." }
+    status: unverified
+  - id: heme.L03.004
+    kind: table
+    topic: hemoglobin-electrophoresis
+    title: Electrophoresis patterns
+    columns: [Bands, Meaning]
+    rows:
+      - [AA, Normal adult]
+      - [AF, Normal newborn]
+      - [AS, Sickle cell trait]
+      - [SS, Sickle cell disease]
+      - [AC, Hb C trait]
+      - [CC, Hb C disease]
+      - [SC, Hb SC disease]
+    blanks: [[1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 416, quote: "AA Normal adult ↑ AF Normal newborn ↑ AS Sickle cell trait ↑ SS Sickle cell disease ↑ AC Hb C trait ↑ CC Hb C disease" }
+    status: unverified
+  - id: heme.L03.005
+    kind: mcq
+    topic: hemoglobin-electrophoresis
+    stem: >-
+      A 22-year-old African American man has had several episodes of severe bone pain since
+      childhood. Hemoglobin electrophoresis shows two bands: one at the position of HbS and one that
+      migrates even less toward the anode than HbS, with no band at the HbA position. Which amino acid
+      substitution in the β-globin chain produces the slowest band?
+    options:
+      - Glutamic acid replaced by valine
+      - Glutamic acid replaced by lysine
+      - Valine replaced by glutamic acid
+      - Lysine replaced by glutamic acid
+      - Deletion of the γ-globin gene
+    answer: 1
+    why:
+      - "Glutamic acid → valine (neutral) is HbS, the other band."
+      - "Right. HbC has glutamic acid replaced by lysine (positive), so it is the most positive and stays closest to the cathode; with HbS this is Hb SC disease."
+      - "This is the reverse of the HbS mutation."
+      - "This reverses the HbC mutation and would make the chain more negative."
+      - "The γ chain belongs to HbF, which would run between HbA and HbS."
+    src: { page: 416, quote: "replace glutamic acid with valine (neutral) and lysine , respectively" }
+    status: unverified
+  # ---------- p416: antiglobulin test ----------
+  - id: heme.L03.006
+    kind: card
+    topic: antiglobulin-test
+    front: What does the antiglobulin (Coombs) test detect?
+    back: The presence of antibodies against circulating RBCs.
+    src: { page: 416, quote: "Also called Coombs test. Detects the presence of antibodies against circulating RBCs." }
+    status: unverified
+  - id: heme.L03.007
+    kind: table
+    topic: antiglobulin-test
+    title: Direct vs indirect antiglobulin test
+    columns: [Test, What is mixed, Positive means, Used for]
+    rows:
+      - [Direct, Anti-human globulin (Coombs reagent) + the patient's RBCs, The patient's RBCs are coated with anti-RBC Abs, AIHA diagnosis]
+      - [Indirect, "Normal (donor) RBCs + the patient's serum, then Coombs reagent", The patient's serum has anti-RBC Abs, Pretransfusion testing]
+    blanks: [[0, 1], [0, 3], [1, 1], [1, 3]]
+    src: { page: 416, quote: "Direct antiglobulin test—anti-human globulin (Coombs reagent) added to patient’s RBCs. RBCs agglutinate if RBCs are (directly) coated with anti-RBC Abs. Used for AIHA diagnosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.008
+    kind: mcq
+    topic: antiglobulin-test
+    stem: >-
+      A 34-year-old woman with systemic lupus erythematosus has 1 week of fatigue and dark urine.
+      Hemoglobin is 7.8 g/dL, reticulocytes are increased, LDH is high and haptoglobin is low. The
+      smear shows spherocytes. Which test best confirms that her red cells are coated with antibody?
+    options:
+      - Indirect antiglobulin test with donor RBCs
+      - Direct antiglobulin test
+      - Hemoglobin electrophoresis
+      - Osmotic fragility test
+      - Ristocetin assay
+    answer: 1
+    why:
+      - "The indirect test looks for free anti-RBC antibodies in serum, for pretransfusion testing."
+      - "Right. The direct test adds Coombs reagent to the patient's own RBCs; agglutination means the cells are coated with anti-RBC Abs, which diagnoses AIHA."
+      - "Electrophoresis separates hemoglobin variants, not antibodies."
+      - "Osmotic fragility is raised by spherocytes of any cause; it does not show antibody."
+      - "The ristocetin assay tests vWF-GpIb binding of platelets."
+    src: { page: 416, quote: "RBCs agglutinate if RBCs are (directly) coated with anti-RBC Abs. Used for AIHA diagnosis." }
+    status: unverified
+  - id: heme.L03.009
+    kind: mcq
+    topic: antiglobulin-test
+    stem: >-
+      A 45-year-old woman with three prior pregnancies is scheduled for elective surgery. Before
+      crossmatching, the blood bank mixes reagent red cells with her serum and then adds anti-human
+      globulin; the cells agglutinate. What does this result show?
+    options:
+      - Her own red cells are coated with IgG
+      - Her serum contains antibodies against red cell antigens
+      - She has hereditary spherocytosis
+      - She has a platelet adhesion defect
+      - She lacks complement C1-inhibitor
+    answer: 1
+    why:
+      - "That is what a positive direct test shows; here her serum, not her cells, was tested."
+      - "Right. This is the indirect antiglobulin test: normal RBCs added to the patient's serum agglutinate with Coombs reagent if the serum has anti-RBC Abs (eg, from sensitization in pregnancy). It is used for pretransfusion testing."
+      - "Spherocytosis is not detected by antibody testing."
+      - "Platelet adhesion is tested with ristocetin."
+      - "C1-inhibitor deficiency causes hereditary angioedema and is unrelated."
+    src: { page: 416, quote: "Indirect (not direct) antiglobulin test—normal RBCs added to patient’s serum. If serum has anti- RBC Abs, RBCs agglutinate when Coombs reagent is added. Used for pretransfusion testing." }
+    status: unverified
+  # ---------- p417: platelet plug formation ----------
+  - id: heme.L03.010
+    kind: order
+    topic: platelet-plug-formation
+    prompt: Put the steps of platelet plug formation in order.
+    steps:
+      - "Injury: endothelial damage → transient vasoconstriction (neural reflex and endothelin)"
+      - "Exposure: vWF binds to exposed collagen"
+      - "Adhesion: platelets bind vWF via GpIb at the site of injury"
+      - "Activation: ADP binding to P2Y12 induces GpIIb/IIIa expression; platelets release ADP, Ca2+ and TXA2"
+      - "Aggregation: fibrinogen binds GpIIb/IIIa and links platelets"
+    src: { page: 417, quote: "AGGREGATION Fibrinogen binds GpIIb/IIIa receptors and links platelets" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.011
+    kind: card
+    topic: platelet-plug-formation
+    front: Where does the vWF that binds exposed collagen come from?
+    back: Weibel-Palade bodies of endothelial cells and α-granules of platelets.
+    src: { page: 417, quote: "vWF is from Weibel-Palade bodies of endothelial cells and α-granules of platelets" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.012
+    kind: table
+    topic: platelet-plug-formation
+    title: The balance that controls aggregation
+    columns: [Factor, Source, Effect]
+    rows:
+      - ["Anti-aggregation: PGI2 and NO", Endothelial cells, "↑ blood flow, ↓ platelet aggregation"]
+      - ["Pro-aggregation: TXA2", Platelets, "↓ blood flow, ↑ platelet aggregation"]
+    blanks: [[0, 1], [1, 1], [0, 2], [1, 2]]
+    src: { page: 417, quote: "Anti-aggregation factors: PGI2 and NO (released by endothelial cells) ↑ blood flow ↓ platelet aggregation Pro-aggregation factors: TXA2 (released by platelets)" }
+    status: unverified
+  - id: heme.L03.013
+    kind: card
+    topic: platelet-plug-formation
+    front: What is the platelet plug of primary hemostasis like, and what makes it stable?
+    back: A temporary plug that stops bleeding but is unstable and easily dislodged. The coagulation cascade (secondary hemostasis) forms an insoluble fibrin mesh that stabilizes it.
+    src: { page: 417, quote: "Temporary plug stops bleeding; unstable, easily dislodged" }
+    status: unverified
+  - id: heme.L03.014
+    kind: mcq
+    topic: platelet-plug-formation
+    stem: >-
+      A 19-year-old man has had easy bruising and prolonged bleeding after dental extractions since
+      childhood. His platelet count is normal, but his platelets are unusually large on the smear.
+      Platelet aggregation fails with ristocetin. Von Willebrand factor levels and activity are normal.
+      Which step of platelet plug formation is defective?
+    options:
+      - Binding of vWF to exposed collagen
+      - Binding of platelets to vWF via GpIb
+      - ADP binding to the P2Y12 receptor
+      - Fibrinogen binding to GpIIb/IIIa
+      - Thromboxane A2 synthesis by cyclooxygenase
+    answer: 1
+    why:
+      - "vWF levels and activity are normal, so this is not von Willebrand disease."
+      - "Right. A GpIb deficiency (Bernard-Soulier syndrome) blocks adhesion of platelets to vWF; the ristocetin assay fails in Bernard-Soulier syndrome and von Willebrand disease."
+      - "P2Y12 is the target of clopidogrel; the ristocetin assay tests vWF-GpIb binding."
+      - "A GpIIb/IIIa deficiency is Glanzmann thrombasthenia, in which ristocetin agglutination is normal."
+      - "Cyclooxygenase is inhibited by aspirin; it doesn't explain a failed ristocetin assay."
+    src: { page: 417, quote: "Failure of aggregation with ristocetin assay occurs in von Willebrand disease and Bernard-Soulier syndrome." }
+    status: unverified
+  # ---------- p417: thrombogenesis ----------
+  - id: heme.L03.015
+    kind: table
+    topic: thrombogenesis
+    title: Thrombogenesis targets
+    columns: [Target, Drugs that act on it, Deficiency]
+    rows:
+      - [Cyclooxygenase (TXA2 synthesis), Aspirin (irreversible), "—"]
+      - [ADP (P2Y12) receptor, "Clopidogrel, prasugrel, ticagrelor", "—"]
+      - [GpIIb/IIIa, "Eptifibatide, tirofiban", Glanzmann thrombasthenia]
+      - [GpIb, Ristocetin activates vWF to bind GpIb (test), Bernard-Soulier syndrome]
+      - [vWF, Desmopressin releases vWF, von Willebrand disease]
+    blanks: [[0, 1], [1, 1], [2, 1], [2, 2], [3, 2], [4, 2]]
+    src: { page: 417, quote: "Clopidogrel, prasugrel, ticagrelor Eptifibatide, tirofiban Ristocetin Aspirin Desmopressin Deficiency: von Willebrand disease Deficiency: Bernard-Soulier syndrome Deficiency: Glanzmann thrombasthenia" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.016
+    kind: card
+    topic: thrombogenesis
+    front: How does aspirin inhibit platelets?
+    back: It irreversibly inhibits cyclooxygenase, thereby inhibiting TXA2 synthesis.
+    src: { page: 417, quote: "Aspirin irreversibly inhibits cyclooxygenase, thereby inhibiting TXA2 synthesis." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.017
+    kind: card
+    topic: thrombogenesis
+    front: How do clopidogrel, prasugrel and ticagrelor inhibit platelets?
+    back: They block the P2Y12 receptor, inhibiting ADP-induced expression of GpIIb/IIIa.
+    src: { page: 417, quote: "Clopidogrel, prasugrel, and ticagrelor inhibit ADP-induced expression of GpIIb/IIIa by blocking P2Y12 receptor." }
+    status: unverified
+  - id: heme.L03.018
+    kind: card
+    topic: thrombogenesis
+    front: What does desmopressin do in hemostasis?
+    back: It promotes the release of vWF and factor VIII from endothelial cells.
+    src: { page: 417, quote: "Desmopressin promotes the release of vWF and factor VIII from endothelial cells." }
+    status: unverified
+  - id: heme.L03.019
+    kind: cloze
+    topic: thrombogenesis
+    text: "vWF carries and protects factor {{c1::VIII}}: \"volksWagen Factories make gr8 cars.\""
+    src: { page: 417, quote: "vWF carries/protects factor VIII; volksWagen Factories make gr8 cars." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.020
+    kind: mcq
+    topic: thrombogenesis
+    stem: >-
+      A 6-year-old girl has had nosebleeds and gum bleeding since infancy. Her platelet count and
+      platelet size are normal. Platelet aggregation studies show no aggregation with ADP, collagen or
+      thrombin, but normal agglutination with ristocetin. Deficiency of which platelet molecule is most
+      likely?
+    options:
+      - GpIb
+      - von Willebrand factor
+      - GpIIb/IIIa
+      - Cyclooxygenase
+      - Factor VIII
+    answer: 2
+    why:
+      - "GpIb deficiency (Bernard-Soulier) gives failed ristocetin agglutination and large platelets."
+      - "vWF deficiency (von Willebrand disease) also fails the ristocetin assay."
+      - "Right. Without GpIIb/IIIa (Glanzmann thrombasthenia) fibrinogen cannot link platelets, so no agonist causes aggregation, while vWF-GpIb binding with ristocetin is intact."
+      - "Cyclooxygenase loss (as with aspirin) would not block aggregation to every agonist."
+      - "Factor VIII deficiency is hemophilia A, a coagulation (secondary hemostasis) defect with joint bleeds."
+    src: { page: 417, quote: "Eptifibatide and tirofiban inhibit GpIIb/IIIa (fibrinogen receptor) directly." }
+    status: unverified
+  # ---------- p418: coagulation and kinin pathways ----------
+  - id: heme.L03.021
+    kind: card
+    topic: coagulation-and-kinin-pathways
+    front: Which pathways and factors does the PT monitor?
+    back: The extrinsic and common pathways, reflecting factors I, II, V, VII and X.
+    src: { page: 418, quote: "PT monitors extrinsic and common pathway, reflecting activity of factors I, II, V, VII, and X." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.022
+    kind: card
+    topic: coagulation-and-kinin-pathways
+    front: Which pathways and factors does the PTT monitor?
+    back: The intrinsic and common pathways, reflecting all factors except VII and XIII.
+    src: { page: 418, quote: "PTT monitors intrinsic and common pathway, reflecting activity of all factors except VII and XIII." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.023
+    kind: table
+    topic: coagulation-and-kinin-pathways
+    title: Hemophilias
+    columns: [Type, Deficient factor, Inheritance]
+    rows:
+      - [Hemophilia A, Factor VIII, X-linked recessive]
+      - [Hemophilia B, Factor IX, X-linked recessive]
+      - [Hemophilia C, Factor XI, Autosomal recessive]
+    blanks: [[0, 1], [1, 1], [2, 1], [2, 2]]
+    src: { page: 418, quote: "Hemophilia A: deficiency of factor VIII (XR) Hemophilia B: deficiency of factor IX (XR) Hemophilia C: deficiency of factor XI (AR)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.024
+    kind: table
+    topic: coagulation-and-kinin-pathways
+    title: Drugs on the coagulation and fibrinolytic pathways
+    columns: [Class, Examples]
+    rows:
+      - ["Anticoagulants acting on Xa", "Heparin, LMWH (dalteparin, enoxaparin), direct Xa inhibitors (apixaban), fondaparinux"]
+      - ["Anticoagulants acting on thrombin (IIa)", "Heparin, LMWH, direct thrombin inhibitors (argatroban, bivalirudin, dabigatran)"]
+      - [Thrombolytics, "Alteplase, reteplase, tenecteplase"]
+      - [Antifibrinolytics, "Aminocaproic acid, tranexamic acid"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 418, quote: "THROMBOLYTICS: - alteplase, reteplase, tenecteplase ANTIFIBRINOLYTICS: - aminocaproic acid, tranexamic acid" }
+    status: unverified
+  - id: heme.L03.025
+    kind: card
+    topic: coagulation-and-kinin-pathways
+    front: What does bradykinin do, and what activates and inactivates it?
+    back: ↑ vasodilation, ↑ permeability and ↑ pain. Kallikrein activates bradykinin (from HMWK); ACE inactivates it.
+    src: { page: 418, quote: "Note: Kallikrein activates bradykinin ACE inactivates bradykinin" }
+    status: unverified
+  - id: heme.L03.026
+    kind: card
+    topic: coagulation-and-kinin-pathways
+    front: Deficiency of which regulatory protein causes hereditary angioedema?
+    back: C1-inhibitor (previously known as C1-esterase inhibitor), which normally restrains the kinin cascade (kallikrein → bradykinin).
+    src: { page: 418, quote: "C1-inhibitor deficiency (previously known as C1-esterase inhibitor deficiency) hereditary angioedema" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.027
+    kind: card
+    topic: coagulation-and-kinin-pathways
+    front: What do plasmin and the fibrinolytic system produce, and what activates plasminogen?
+    back: tPA converts plasminogen to plasmin, which breaks fibrin into fibrin degradation products (eg, D-dimer).
+    src: { page: 418, quote: "Fibrin degradation products (eg, D-dimer)" }
+    status: unverified
+  - id: heme.L03.028
+    kind: cloze
+    topic: coagulation-and-kinin-pathways
+    text: Factor {{c1::XIIIa}} (fibrin stabilizing factor) cross-links fibrin monomers into the mesh that stabilizes the platelet plug; it needs {{c2::Ca2+}}.
+    src: { page: 418, quote: "Fibrin mesh stabilizes platelet plug" }
+    status: unverified
+  - id: heme.L03.029
+    kind: mcq
+    topic: coagulation-and-kinin-pathways
+    stem: >-
+      A 4-year-old boy has a painful swollen knee after a minor fall, and his maternal uncle had
+      similar joint bleeds. Platelet count and bleeding time are normal. PT is normal and PTT is
+      prolonged; the PTT corrects with normal plasma. Factor IX activity is normal. Deficiency of which
+      factor is most likely?
+    options:
+      - Factor VII
+      - Factor VIII
+      - Factor XI
+      - Factor XIII
+      - von Willebrand factor
+    answer: 1
+    why:
+      - "Factor VII is only in the extrinsic pathway; its deficiency prolongs the PT, not the PTT."
+      - "Right. Hemophilia A is factor VIII deficiency (X-linked recessive, hence the maternal uncle): an intrinsic pathway defect with a prolonged PTT and normal PT."
+      - "Hemophilia C (factor XI) is autosomal recessive and would not follow a maternal-uncle pattern."
+      - "Factor XIII deficiency does not prolong the PT or PTT (the PTT reflects all factors except VII and XIII)."
+      - "von Willebrand disease causes mucosal bleeding and an abnormal platelet function test, not mainly joint bleeds."
+    src: { page: 418, quote: "Hemophilia A: deficiency of factor VIII (XR)" }
+    status: unverified
+  - id: heme.L03.030
+    kind: mcq
+    topic: coagulation-and-kinin-pathways
+    stem: >-
+      A 52-year-old woman develops swelling of the lips and tongue 3 weeks after starting lisinopril for
+      hypertension. There is no urticaria or itching. Accumulation of which mediator best explains her
+      swelling?
+    options:
+      - Histamine
+      - Bradykinin
+      - Thromboxane A2
+      - Leukotriene B4
+      - Plasmin
+    answer: 1
+    why:
+      - "Histamine angioedema comes with urticaria and itching and is not caused by ACE inhibitors."
+      - "Right. ACE inactivates bradykinin; blocking ACE lets bradykinin build up, causing vasodilation and ↑ permeability (angioedema)."
+      - "TXA2 is a platelet pro-aggregation factor."
+      - "LTB4 is a neutrophil chemotactic agent."
+      - "Plasmin breaks down fibrin; it is not the mediator of ACE inhibitor angioedema."
+    src: { page: 418, quote: "Note: Kallikrein activates bradykinin ACE inactivates bradykinin" }
+    status: unverified
+  # ---------- p419: vitamin K-dependent coagulation ----------
+  - id: heme.L03.031
+    kind: card
+    topic: vitamin-k-dependent-coagulation
+    front: Which factors and proteins are vitamin K–dependent, and what happens in vitamin K deficiency?
+    back: Factors II, VII, IX and X, protein C and protein S. Deficiency → ↓ carboxylation and maturation of all of them.
+    src: { page: 419, quote: "Vitamin K deficiency—↓ carboxylation and maturation of factors II, VII, IX, X, protein C, protein S." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.032
+    kind: card
+    topic: vitamin-k-dependent-coagulation
+    front: Which enzyme does warfarin inhibit?
+    back: Vitamin K epoxide reductase, so oxidized (inactive) vitamin K is not recycled to its reduced (active) form for γ-glutamyl carboxylase.
+    src: { page: 419, quote: "Warfarin inhibits vitamin K epoxide reductase." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.033
+    kind: card
+    topic: vitamin-k-dependent-coagulation
+    front: How is warfarin reversed, and how fast does each option act?
+    back: Vitamin K can reverse warfarin's effect on clotting factor synthesis, but it is delayed. FFP or PCC reverses warfarin immediately and can be given with vitamin K in severe bleeding.
+    src: { page: 419, quote: "FFP or PCC administration reverses action of warfarin immediately and can be given with vitamin K in cases of severe bleeding." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.034
+    kind: card
+    topic: vitamin-k-dependent-coagulation
+    front: Why are neonates vitamin K deficient, and how is it prevented?
+    back: Neonates lack enteric bacteria, which produce vitamin K. Early administration of vitamin K overcomes the neonatal deficiency/coagulopathy.
+    src: { page: 419, quote: "Neonates lack enteric baKteria, which produce vitamin K. Early administration of vitamin K overcomes neonatal deficiency/coagulopathy." }
+    status: unverified
+  - id: heme.L03.035
+    kind: cloze
+    topic: vitamin-k-dependent-coagulation
+    text: Factor {{c1::VII}} has the shortest half-life; factor {{c2::II}} has the longest.
+    src: { page: 419, quote: "Factor VII (seven)—shortest half-life. Factor II (two)—longest (too long) half-life." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.036
+    kind: card
+    topic: vitamin-k-dependent-coagulation
+    front: Which factors does antithrombin inhibit, and which are its principal targets?
+    back: Thrombin (IIa) and factors VIIa, IXa, Xa, XIa and XIIa. Principal targets are thrombin and factor Xa. Heparin enhances its activity.
+    src: { page: 419, quote: "Antithrombin inhibits thrombin (factor IIa) and factors VIIa, IXa, Xa, XIa, XIIa. Heparin enhances the activity of antithrombin. Principal targets of antithrombin: thrombin and factor Xa." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.037
+    kind: card
+    topic: vitamin-k-dependent-coagulation
+    front: What does the factor V Leiden mutation produce?
+    back: A factor V resistant to inhibition by activated protein C (which needs protein S and normally inactivates Va and VIIIa).
+    src: { page: 419, quote: "Factor V Leiden mutation produces a factor V resistant to inhibition by activated protein C." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.038
+    kind: card
+    topic: vitamin-k-dependent-coagulation
+    front: Besides neonatal gut sterility, what else can contribute to vitamin K deficiency?
+    back: Suppression of gut flora by broad-spectrum antibiotics.
+    src: { page: 419, quote: "Suppression of gut flora by broad spectrum antibiotiKs can also contribute to deficiency." }
+    status: unverified
+  - id: heme.L03.039
+    kind: mcq
+    topic: vitamin-k-dependent-coagulation
+    stem: >-
+      A 70-year-old man taking warfarin for atrial fibrillation is brought to the emergency department
+      after a fall, with a large intracranial hemorrhage on CT. INR is 6.2. Which treatment reverses
+      the anticoagulant effect most rapidly?
+    options:
+      - Oral vitamin K alone
+      - Prothrombin complex concentrate with intravenous vitamin K
+      - Protamine sulfate
+      - Tranexamic acid alone
+      - Desmopressin
+    answer: 1
+    why:
+      - "Vitamin K reverses warfarin, but the effect is delayed because the liver must make new factors."
+      - "Right. FFP or PCC replaces the missing factors and reverses warfarin immediately; vitamin K is given with it in severe bleeding so the effect lasts."
+      - "Protamine reverses heparin, not warfarin."
+      - "Tranexamic acid is an antifibrinolytic; it does not replace the vitamin K-dependent factors."
+      - "Desmopressin releases vWF and factor VIII, which warfarin does not lower."
+    src: { page: 419, quote: "FFP or PCC administration reverses action of warfarin immediately and can be given with vitamin K in cases of severe bleeding." }
+    status: unverified
+  - id: heme.L03.040
+    kind: mcq
+    topic: vitamin-k-dependent-coagulation
+    stem: >-
+      A 3-week-old boy born at home is brought in with bleeding from the umbilical stump and a bruise on
+      his scalp. He is exclusively breastfed and received no injections after birth. PT and PTT are both
+      prolonged; platelets are normal. Which of the following is the best explanation for his
+      coagulopathy?
+    options:
+      - X-linked deficiency of factor VIII
+      - Absence of enteric bacteria that produce vitamin K
+      - Factor V resistant to activated protein C
+      - Autoantibodies to platelet GpIIb/IIIa
+      - Deficiency of antithrombin
+    answer: 1
+    why:
+      - "Hemophilia A prolongs only the PTT."
+      - "Right. Neonates lack the gut bacteria that make vitamin K, so factors II, VII, IX and X are not carboxylated; early vitamin K prevents this, and he received none."
+      - "Factor V Leiden causes clotting, not bleeding."
+      - "Antiplatelet antibodies would lower the platelet count and not prolong the PT and PTT."
+      - "Antithrombin deficiency causes thrombosis."
+    src: { page: 419, quote: "Neonates lack enteric baKteria, which produce vitamin K. Early administration of vitamin K overcomes neonatal deficiency/coagulopathy." }
+    status: unverified
+  - id: heme.L03.041
+    kind: mcq
+    topic: vitamin-k-dependent-coagulation
+    stem: >-
+      A 28-year-old woman has a deep vein thrombosis 2 months after starting combined oral
+      contraceptives. Her mother had a pulmonary embolism at 40. Testing shows that her factor Va is
+      not inactivated normally in a functional assay. Which mechanism explains her thrombophilia?
+    options:
+      - Factor V resistant to inhibition by activated protein C
+      - Reduced hepatic synthesis of factors II, VII, IX and X
+      - Loss of antithrombin activity against thrombin and Xa
+      - Deficiency of plasminogen activator
+      - Excess release of vWF from Weibel-Palade bodies
+    answer: 0
+    why:
+      - "Right. Factor V Leiden makes a factor V resistant to activated protein C, so Va keeps driving thrombin formation."
+      - "Low vitamin K-dependent factors would cause bleeding, not clotting."
+      - "Antithrombin deficiency is a thrombophilia, but it doesn't make factor Va resistant to inactivation."
+      - "The assay points at factor V inactivation, not fibrinolysis."
+      - "vWF release relates to platelet adhesion, not factor Va inactivation."
+    src: { page: 419, quote: "Factor V Leiden mutation produces a factor V resistant to inhibition by activated protein C." }
+    status: unverified

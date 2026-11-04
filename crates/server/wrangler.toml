@@ -17,11 +17,16 @@ enabled = true
 # One Durable Object per account: devices + sync hub (SQLite storage, the
 # only kind on the Free plan). Steps needs no D1 database.
 [durable_objects]
-bindings = [{ name = "ACCOUNT", class_name = "Account" }]
+# Plus one small object per username for password sign-in (`login.rs`).
+bindings = [{ name = "ACCOUNT", class_name = "Account" }, { name = "LOGIN", class_name = "Login" }]
 
 [[migrations]]
 tag = "v1"
 new_sqlite_classes = ["Account"]
+
+[[migrations]]
+tag = "v2"
+new_sqlite_classes = ["Login"]
 
 # Not secret. Secrets (ALLOWED_EMAILS, TOKEN_SIGNING_KEY) go in with
 # `wrangler secret put`.

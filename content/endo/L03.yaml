@@ -1,0 +1,1176 @@
+schema: steps.content/v1
+lecture: endo.L03
+title: Physiology
+book: { chapter: 8, pages: [332, 341] }
+topics:
+  - { id: hypothalamic-pituitary-hormones, title: Hypothalamic-pituitary hormones }
+  - { id: growth-hormone, title: Growth hormone }
+  - { id: antidiuretic-hormone, title: Antidiuretic hormone }
+  - { id: prolactin, title: Prolactin }
+  - { id: thyroid-hormones, title: Thyroid hormones }
+  - { id: parathyroid-hormone, title: Parathyroid hormone }
+  - { id: calcium-homeostasis, title: Calcium homeostasis }
+  - { id: calcitonin, title: Calcitonin }
+  - { id: glucagon, title: Glucagon }
+  - { id: insulin, title: Insulin }
+  - { id: adrenal-steroids-and-cah, title: Adrenal steroids and congenital adrenal hyperplasias }
+  - { id: cortisol, title: Cortisol }
+  - { id: appetite-regulation, title: Appetite regulation }
+  - { id: signaling-pathways-of-endocrine-hormones, title: Signaling pathways of endocrine hormones }
+  - { id: signaling-pathways-of-steroid-hormones, title: Signaling pathways of steroid hormones }
+items:
+  # ---------- p332: hypothalamic-pituitary hormones ----------
+  - id: endo.L03.001
+    kind: table
+    topic: hypothalamic-pituitary-hormones
+    title: Hypothalamic-pituitary hormones
+    columns: [Hormone, Function, Clinical note]
+    rows:
+      - [ADH, ↑ water permeability of DCT and collecting duct → ↑ water reabsorption, "Alcohol → ↓ ADH → polyuria, dehydration"]
+      - [CRH, "↑ ACTH, ↑ MSH, ↑ β-endorphin", ↓ in chronic glucocorticoid use]
+      - [Prolactin-inhibiting factor (dopamine), "↓ prolactin, ↓ TSH", Dopamine antagonists (antipsychotics) → galactorrhea]
+      - [GHRH, ↑ GH, Analog tesamorelin for HIV-associated lipodystrophy]
+      - [GnRH, "↑ FSH, ↑ LH", "Suppressed by hyperprolactinemia; tonic analog (leuprolide) suppresses the axis, pulsatile → puberty, fertility"]
+      - [Somatostatin, "↓ GH, ↓ TSH", Also called GHIH]
+      - [TRH, "↑ TSH, ↑ prolactin", ↑ TRH in hypothyroidism → galactorrhea]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 332, quote: "CRH ↑ ACTH, ↑ MSH, ↑ β-endorphin ↓ in chronic glucocorticoid use" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.002
+    kind: card
+    topic: hypothalamic-pituitary-hormones
+    front: How does alcohol cause polyuria?
+    back: Alcohol consumption ↓ ADH secretion → polyuria and dehydration.
+    src: { page: 332, quote: "Alcohol consumption → ↓ ADH secretion → polyuria and dehydration" }
+    status: unverified
+  - id: endo.L03.003
+    kind: card
+    topic: hypothalamic-pituitary-hormones
+    front: What is prolactin-inhibiting factor, and why can antipsychotics cause galactorrhea?
+    back: Prolactin-inhibiting factor is dopamine (↓ prolactin, ↓ TSH). Dopamine antagonists such as antipsychotics remove this inhibition → hyperprolactinemia → galactorrhea.
+    src: { page: 332, quote: "Commonly referred to as dopamine Dopamine antagonists (eg, antipsychotics) can cause galactorrhea due to hyperprolactinemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.004
+    kind: card
+    topic: hypothalamic-pituitary-hormones
+    front: Which GHRH analog is used to treat HIV-associated lipodystrophy?
+    back: Tesamorelin.
+    src: { page: 332, quote: "Analog (tesamorelin) used to treat HIV-associated lipodystrophy" }
+    status: unverified
+  - id: endo.L03.005
+    kind: cloze
+    topic: hypothalamic-pituitary-hormones
+    text: A {{c1::tonic}} GnRH analog (eg, leuprolide) suppresses the hypothalamic–pituitary–gonadal axis, whereas {{c2::pulsatile}} GnRH leads to puberty and fertility.
+    src: { page: 332, quote: "Tonic GnRH analog (eg, leuprolide) suppresses hypothalamic–pituitary–gonadal axis. Pulsatile GnRH leads to puberty, fertility" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.006
+    kind: card
+    topic: hypothalamic-pituitary-hormones
+    front: Why does Cushing disease cause hyperpigmentation?
+    back: MSH and ACTH share the same precursor molecule, POMC; ↑ MSH ↑ melanogenesis by melanocytes.
+    src: { page: 332, quote: "Causes hyperpigmentation in Cushing disease, as MSH and ACTH share the same precursor molecule, POMC" }
+    status: unverified
+  - id: endo.L03.007
+    kind: card
+    topic: hypothalamic-pituitary-hormones
+    front: What are the functions of oxytocin?
+    back: Uterine contractions during labor and the milk letdown reflex in response to suckling. It also modulates fear, anxiety, social bonding, mood and depression.
+    src: { page: 332, quote: "Oxytocin Causes uterine contractions during labor. Responsible for milk letdown reflex in response to suckling." }
+    status: unverified
+  - id: endo.L03.008
+    kind: enumerate
+    topic: hypothalamic-pituitary-hormones
+    prompt: Enumerate the effects of a pituitary prolactinoma listed with the hypothalamic hormones (4).
+    points:
+      - Amenorrhea
+      - Osteoporosis
+      - Hypogonadism
+      - Galactorrhea
+    pass: 4
+    hook: "الـ prolactin العالي بيقفل الـ GnRH، فالمبيض يسكت: ما فيش دورة (amenorrhea)، ما فيش estrogen (osteoporosis و hypogonadism)، واللبن ينزل (galactorrhea)."
+    src: { page: 332, quote: "Pituitary prolactinoma → amenorrhea, osteoporosis, hypogonadism, galactorrhea" }
+    status: unverified
+  - id: endo.L03.009
+    kind: card
+    topic: hypothalamic-pituitary-hormones
+    front: Why is breastfeeding a natural contraceptive?
+    back: Breastfeeding → ↑ prolactin → ↓ GnRH → delayed postpartum ovulation.
+    src: { page: 332, quote: "Breastfeeding → ↑ prolactin → ↓ GnRH → delayed postpartum ovulation (natural contraception)" }
+    status: unverified
+  - id: endo.L03.010
+    kind: card
+    topic: hypothalamic-pituitary-hormones
+    front: Why can primary or secondary hypothyroidism cause galactorrhea?
+    back: ↑ TRH stimulates prolactin secretion as well as TSH.
+    src: { page: 332, quote: "↑ TRH (eg, in 1°/2° hypothyroidism) may increase prolactin secretion → galactorrhea" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.011
+    kind: mcq
+    topic: hypothalamic-pituitary-hormones
+    stem: >-
+      A 26-year-old woman with schizophrenia comes to the physician because of a milky discharge
+      from both nipples and no menstrual periods for 4 months. Three months before her periods
+      stopped, she started taking risperidone. A pregnancy test is negative. TSH is normal. Which
+      of the following best explains her symptoms?
+    options:
+      - Loss of dopamine inhibition of lactotrophs
+      - Increased TRH secretion
+      - Increased oxytocin release from the posterior pituitary
+      - Direct stimulation of breast tissue by the drug
+      - Excess pulsatile GnRH secretion
+    answer: 0
+    why:
+      - "Right. Dopamine is prolactin-inhibiting factor; antipsychotics block dopamine receptors → hyperprolactinemia → galactorrhea, and prolactin ↓ GnRH → amenorrhea."
+      - "↑ TRH can raise prolactin in hypothyroidism, but her TSH is normal."
+      - "Oxytocin causes milk letdown with suckling; it does not make milk or stop menses."
+      - "The drug works through dopamine blockade, not on the breast directly."
+      - "Prolactin suppresses GnRH; pulsatile GnRH would restore ovulation, not stop it."
+    src: { page: 332, quote: "Dopamine antagonists (eg, antipsychotics) can cause galactorrhea due to hyperprolactinemia" }
+    status: unverified
+  # ---------- p333: growth hormone ----------
+  - id: endo.L03.012
+    kind: card
+    topic: growth-hormone
+    front: Through which mediator does GH stimulate linear growth and muscle mass, and where is it made?
+    back: IGF-1 (somatomedin C), secreted by the liver.
+    src: { page: 333, quote: "Stimulates linear growth and muscle mass through IGF-1 (somatomedin C) secretion by liver." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.013
+    kind: card
+    topic: growth-hormone
+    front: What is GH's effect on insulin sensitivity?
+    back: GH ↑ insulin resistance (it is diabetogenic).
+    src: { page: 333, quote: "↑ insulin resistance (diabetogenic)." }
+    status: unverified
+  - id: endo.L03.014
+    kind: enumerate
+    topic: growth-hormone
+    prompt: Enumerate the factors that increase GH secretion (5).
+    points:
+      - (Deep) sleep
+      - Hypoglycemia
+      - Stress
+      - Puberty
+      - Exercise
+    pass: 5
+    hook: "الـ GH بيطلع وقت ما الجسم محتاج يبني أو يحمي السكر: نوم عميق، سكر واطي، stress، بلوغ، رياضة."
+    src: { page: 333, quote: "Secretion ↑ during (deep) sleep, hypoglycemia, stress, puberty, exercise." }
+    status: unverified
+  - id: endo.L03.015
+    kind: enumerate
+    topic: growth-hormone
+    prompt: Enumerate the factors that decrease GH secretion (5).
+    points:
+      - Aging
+      - Obesity
+      - Hyperglycemia
+      - Somatostatin
+      - Somatomedin (IGF-1 feedback)
+    pass: 5
+    src: { page: 333, quote: "Secretion ↓ with aging, obesity, hyperglycemia, somatostatin, somatomedin" }
+    status: unverified
+  - id: endo.L03.016
+    kind: card
+    topic: growth-hormone
+    front: What does GH excess cause in adults and in children, and how is it treated?
+    back: Acromegaly in adults, gigantism in children (eg, pituitary adenoma). Treatment is somatostatin analogs (eg, octreotide) or surgery.
+    src: { page: 333, quote: "Excess secretion of GH (eg, pituitary adenoma) may cause acromegaly (adults) or gigantism (children). Treatment: somatostatin analogs (eg, octreotide) or surgery." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.017
+    kind: mcq
+    topic: growth-hormone
+    stem: >-
+      A 44-year-old man comes to the physician because his rings and shoes no longer fit. He has
+      had headaches and excessive sweating for 2 years. Examination shows coarse facial features,
+      a prominent jaw and large hands. Fasting glucose is 138 mg/dL. MRI shows a pituitary
+      macroadenoma. His raised glucose is best explained by which effect of the excess hormone?
+    options:
+      - Increased insulin resistance
+      - Destruction of pancreatic β cells
+      - Increased glucagon secretion from α cells
+      - Increased renal glucose reabsorption by SGLT2
+      - Increased cortisol secretion by the adrenal
+    answer: 0
+    why:
+      - "Right. Excess GH causes acromegaly, and GH ↑ insulin resistance (diabetogenic)."
+      - "Autoimmune β-cell destruction is type 1 DM, not a GH effect."
+      - "The book does not link GH to glucagon release; the diabetogenic effect is insulin resistance."
+      - "SGLT2 handles filtered glucose; GH doesn't act through it."
+      - "Cortisol is also diabetogenic, but an ACTH source isn't suggested here; his tumor makes GH."
+    src: { page: 333, quote: "↑ insulin resistance (diabetogenic)." }
+    status: unverified
+  # ---------- p333: antidiuretic hormone ----------
+  - id: endo.L03.018
+    kind: card
+    topic: antidiuretic-hormone
+    front: Where is ADH synthesized, and where is it stored and secreted?
+    back: Synthesized in the hypothalamus (supraoptic and paraventricular nuclei); stored and secreted by the posterior pituitary.
+    src: { page: 333, quote: "Synthesized in hypothalamus (supraoptic and paraventricular nuclei), stored and secreted by posterior pituitary." }
+    status: unverified
+  - id: endo.L03.019
+    kind: table
+    topic: antidiuretic-hormone
+    title: ADH receptors
+    columns: [Receptor, Regulates]
+    rows:
+      - [V1, Blood pressure]
+      - [V2, Serum osmolality (primary function)]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 333, quote: "Regulates b1ood pressure (V1-receptors) and serum osmolality (V2-receptors)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.020
+    kind: cloze
+    topic: antidiuretic-hormone
+    text: ADH ↓ serum osmolality and ↑ urine osmolality by regulating insertion of {{c1::aquaporin channels}} in the {{c2::principal cells}} of the renal collecting duct.
+    src: { page: 333, quote: "via regulation of aquaporin channel insertion in principal cells of renal collecting duct." }
+    status: unverified
+  - id: endo.L03.021
+    kind: table
+    topic: antidiuretic-hormone
+    title: ADH level in diabetes insipidus
+    columns: [Type, ADH level]
+    rows:
+      - [Central DI, ↓]
+      - [Nephrogenic DI, Normal or ↑]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 333, quote: "ADH level is ↓ in central diabetes insipidus (DI), normal or ↑ in nephrogenic DI." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.022
+    kind: card
+    topic: antidiuretic-hormone
+    front: What are the uses of desmopressin and of vasopressin?
+    back: "Desmopressin (ADH analog): central DI and nocturnal enuresis. Vasopressin: a potent vasopressor that can increase organ perfusion in septic shock."
+    src: { page: 333, quote: "Desmopressin (ADH analog) is a treatment for central DI and nocturnal enuresis." }
+    status: unverified
+  - id: endo.L03.023
+    kind: cloze
+    topic: antidiuretic-hormone
+    text: ADH is regulated mainly by {{c1::plasma osmolality}}, and also by {{c2::hypovolemia}}.
+    src: { page: 333, quote: "Plasma osmolality (1°); hypovolemia." }
+    status: unverified
+  - id: endo.L03.024
+    kind: mcq
+    topic: antidiuretic-hormone
+    stem: >-
+      A 30-year-old man comes to the physician because of excessive thirst and passing large
+      volumes of dilute urine since a motorcycle accident with head trauma 3 weeks ago. Serum
+      sodium is 147 mEq/L; urine osmolality is 110 mOsm/kg. After desmopressin, urine osmolality
+      rises to 480 mOsm/kg. The drug acts on which receptor to correct his urine concentration?
+    options:
+      - V2 receptors on collecting duct principal cells
+      - V1 receptors on vascular smooth muscle
+      - Mineralocorticoid receptors in the collecting duct
+      - Dopamine receptors on lactotrophs
+      - Oxytocin receptors on myoepithelial cells
+    answer: 0
+    why:
+      - "Right. Low ADH after head trauma is central DI. Desmopressin (ADH analog) acts on V2 receptors, inserting aquaporins in collecting duct principal cells."
+      - "V1 receptors regulate blood pressure, not urine concentration."
+      - "Aldosterone receptors handle sodium and potassium, not water permeability."
+      - "Dopamine receptors on lactotrophs control prolactin, not urine."
+      - "Oxytocin acts on breast and uterus; desmopressin works through ADH receptors."
+    src: { page: 333, quote: "Regulates b1ood pressure (V1-receptors) and serum osmolality (V2-receptors)." }
+    status: unverified
+  # ---------- p334: prolactin ----------
+  - id: endo.L03.025
+    kind: card
+    topic: prolactin
+    front: Prolactin is structurally homologous to which hormone?
+    back: Growth hormone. Prolactin is secreted mainly by the anterior pituitary.
+    src: { page: 334, quote: "Secreted mainly by anterior pituitary. Structurally homologous to growth hormone." }
+    status: unverified
+  - id: endo.L03.026
+    kind: card
+    topic: prolactin
+    front: How does prolactin inhibit ovulation and spermatogenesis?
+    back: By inhibiting GnRH synthesis and release.
+    src: { page: 334, quote: "Stimulates milk production in breast; inhibits ovulation in females and spermatogenesis in males by inhibiting GnRH synthesis and release." }
+    status: unverified
+  - id: endo.L03.027
+    kind: table
+    topic: prolactin
+    title: Effects of elevated prolactin (plus infertility)
+    columns: [Sex, Effects]
+    rows:
+      - [Females, "Galactorrhea, amenorrhea, osteoporosis"]
+      - [Males, "Gynecomastia, ↓ libido, impotence"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 334, quote: "Elevated prolactin associated with infertility, plus In females: galactorrhea, amenorrhea, osteoporosis In males: gynecomastia, ↓ libido, impotence" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.028
+    kind: cloze
+    topic: prolactin
+    text: Prolactin secretion is tonically inhibited by dopamine from the {{c1::tuberoinfundibular}} pathway of the hypothalamus; prolactin inhibits its own secretion by {{c2::↑ dopamine}} synthesis and secretion.
+    src: { page: 334, quote: "Prolactin secretion from anterior pituitary is tonically inhibited by dopamine from tuberoinfundibular pathway of hypothalamus." }
+    status: unverified
+  - id: endo.L03.029
+    kind: card
+    topic: prolactin
+    front: Which has the stronger effect on prolactin regulation, dopamine or TRH?
+    back: Dopamine.
+    src: { page: 334, quote: "Dopamine has stronger effect on prolactin regulation than TRH does." }
+    status: unverified
+  - id: endo.L03.030
+    kind: table
+    topic: prolactin
+    title: Drugs that change prolactin
+    columns: [Effect on prolactin, Drugs]
+    rows:
+      - [↓ (used for prolactinoma), "Dopamine agonists: bromocriptine, cabergoline"]
+      - [↑, "Dopamine antagonists (most antipsychotics, metoclopramide); estrogens (OCPs, pregnancy)"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 334, quote: "Dopamine agonists (eg, bromocriptine, cabergoline) inhibit prolactin secretion and can be used in treatment of prolactinoma." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.031
+    kind: mcq
+    topic: prolactin
+    stem: >-
+      A 38-year-old man comes to the physician because of decreased libido and erectile
+      dysfunction for 1 year. He has had headaches and recently bumps into door frames on both
+      sides. Examination shows bilateral breast enlargement and bitemporal visual field loss. Serum
+      prolactin is markedly elevated. Which of the following drugs acts on the receptor that
+      normally restrains this hormone and is the best treatment?
+    options:
+      - Cabergoline
+      - Metoclopramide
+      - Octreotide
+      - Leuprolide
+      - Haloperidol
+    answer: 0
+    why:
+      - "Right. Prolactin is tonically inhibited by dopamine; dopamine agonists (bromocriptine, cabergoline) inhibit prolactin secretion and treat prolactinoma."
+      - "Metoclopramide is a dopamine antagonist and raises prolactin."
+      - "Octreotide (somatostatin analog) treats GH excess, not prolactinoma."
+      - "Leuprolide is a tonic GnRH analog that suppresses the gonadal axis; it does not lower prolactin."
+      - "Haloperidol blocks dopamine receptors and raises prolactin."
+    src: { page: 334, quote: "Dopamine agonists (eg, bromocriptine, cabergoline) inhibit prolactin secretion and can be used in treatment of prolactinoma." }
+    status: unverified
+  # ---------- p335: thyroid hormones ----------
+  - id: endo.L03.032
+    kind: card
+    topic: thyroid-hormones
+    front: Which enzyme converts T4 to T3 in peripheral tissue, what activates it and what inhibits it?
+    back: 5′-deiodinase. Activated by growth hormone; inhibited by glucocorticoids, β-blockers and propylthiouracil (PTU).
+    src: { page: 335, quote: "this pathway is activated by growth hormone and inhibited by glucocorticoids, β-blockers, and propylthiouracil (PTU)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.033
+    kind: card
+    topic: thyroid-hormones
+    front: What is reverse T3, and what increases its production?
+    back: A metabolically inactive byproduct of peripheral T4 conversion. Glucocorticoids increase its production.
+    src: { page: 335, quote: "Reverse T3 (rT3) is a metabolically inactive byproduct of the peripheral conversion of T4 and its production is increased by glucocorticoids." }
+    status: unverified
+  - id: endo.L03.034
+    kind: enumerate
+    topic: thyroid-hormones
+    prompt: Enumerate the functions of thyroid peroxidase (3).
+    points:
+      - Oxidation (of iodide)
+      - Organification of iodine
+      - Coupling of MIT and DIT
+    pass: 3
+    src: { page: 335, quote: "Functions of thyroid peroxidase include oxidation, organification of iodine, and coupling of monoiodotyrosine (MIT) and diiodotyrosine (DIT). Inhibited by PTU and methimazole." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.035
+    kind: cloze
+    topic: thyroid-hormones
+    text: DIT + DIT = {{c1::T4}}. DIT + MIT = {{c2::T3}}. Thyroid peroxidase is inhibited by {{c3::PTU and methimazole}}.
+    src: { page: 335, quote: "Inhibited by PTU and methimazole. DIT + DIT = T4. DIT + MIT = T3." }
+    status: unverified
+  - id: endo.L03.036
+    kind: card
+    topic: thyroid-hormones
+    front: What is the Wolff-Chaikoff effect?
+    back: Protective autoregulation; sudden exposure to excess iodine temporarily turns off thyroid peroxidase → ↓ T3/T4 production.
+    src: { page: 335, quote: "Wolff-Chaikoff effect—protective autoregulation; sudden exposure to excess iodine temporarily turns off thyroid peroxidase → ↓ T3/T4 production." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.037
+    kind: card
+    topic: thyroid-hormones
+    front: Which thyroid hormone binds the nuclear receptor with greater affinity, and which form is active?
+    back: T3 binds with greater affinity than T4. Only free hormone is active.
+    src: { page: 335, quote: "Only free hormone is active. T3 binds nuclear receptor with greater affinity than T4." }
+    status: unverified
+  - id: endo.L03.038
+    kind: enumerate
+    topic: thyroid-hormones
+    prompt: Enumerate the functions of T3 (the 7 B's).
+    points:
+      - Brain maturation
+      - Bone growth (synergism with GH and IGF-1)
+      - β-adrenergic effects (↑ β1 receptors in heart → ↑ CO, HR, SV, contractility)
+      - Basal metabolic rate ↑ (via ↑ Na+/K+-ATPase → ↑ O2 consumption, RR, body temperature)
+      - Blood sugar ↑ (glycogenolysis, gluconeogenesis)
+      - Break down lipids (↑ lipolysis)
+      - Stimulates surfactant synthesis in Babies
+    pass: 7
+    hook: "الكتاب بيقولك 7 B's: Brain و Bone و β-adrenergic و BMR و Blood sugar و Break down lipids و Babies (surfactant)."
+    src: { page: 335, quote: "T3 functions —7 B’s: Brain maturation Bone growth (synergism with GH and IGF-1)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.039
+    kind: card
+    topic: thyroid-hormones
+    front: Why do β-blockers help the symptoms of thyrotoxicosis?
+    back: T3 ↑ β1 receptors in the heart (↑ CO, HR, SV, contractility); β-blockers alleviate these adrenergic symptoms.
+    src: { page: 335, quote: "β-blockers alleviate adrenergic symptoms in thyrotoxicosis" }
+    status: unverified
+  - id: endo.L03.040
+    kind: card
+    topic: thyroid-hormones
+    front: Where does negative feedback by free T3/T4 act?
+    back: On the anterior pituitary (↓ sensitivity to TRH) and the hypothalamus (↓ TRH secretion).
+    src: { page: 335, quote: "Negative feedback primarily by free T3/T4: Anterior pituitary → ↓ sensitivity to TRH Hypothalamus → ↓ TRH secretion" }
+    status: unverified
+  - id: endo.L03.041
+    kind: table
+    topic: thyroid-hormones
+    title: Thyroxine-binding globulin (TBG)
+    columns: [TBG, Causes, Effect]
+    rows:
+      - [↑ TBG, "Pregnancy, OCP use (↑ estrogen)", ↑ total T3/T4]
+      - [↓ TBG, "Steroid use, nephrotic syndrome, cirrhosis", ↓ total T3/T4]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 335, quote: "↑ TBG in pregnancy, OCP use (↑ estrogen → ↑ TBG) → ↑ total T3/T4 ↓ TBG in steroid use, nephrotic syndrome, cirrhosis → ↓ total T3/T4" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.042
+    kind: card
+    topic: thyroid-hormones
+    front: How do T3 and T4 enter cells?
+    back: They are the only lipophilic hormones with charged amino acids, so they need specific transporters (facilitated diffusion).
+    src: { page: 335, quote: "T3 and T4 are the only lipophilic hormones with charged amino acids and require specific transporters to diffuse into the cell (facilitated diffusion)." }
+    status: unverified
+  - id: endo.L03.043
+    kind: mcq
+    topic: thyroid-hormones
+    stem: >-
+      A 29-year-old woman who is 12 weeks pregnant comes for a routine prenatal visit. She feels
+      well. Pulse is 78/min. Serum studies show an increased total T4, a normal free T4 and a normal
+      TSH. Which of the following best explains these findings?
+    options:
+      - Estrogen-induced increase in thyroxine-binding globulin
+      - Thyroid-stimulating immunoglobulin acting on follicular cells
+      - Inhibition of 5′-deiodinase by placental hormones
+      - Excess iodine turning off thyroid peroxidase
+      - Increased reverse T3 production
+    answer: 0
+    why:
+      - "Right. ↑ estrogen in pregnancy ↑ TBG → ↑ total T3/T4; free hormone, the active form, stays normal, so she is euthyroid."
+      - "TSI (Graves disease) would raise free T4 and suppress TSH."
+      - "Less 5′-deiodinase would lower T3, not raise total T4 with normal free T4."
+      - "The Wolff-Chaikoff effect lowers T3/T4 production."
+      - "rT3 is inactive and rises with glucocorticoids; it doesn't explain high total T4."
+    src: { page: 335, quote: "↑ TBG in pregnancy, OCP use (↑ estrogen → ↑ TBG) → ↑ total T3/T4" }
+    status: unverified
+  # ---------- p336: parathyroid hormone ----------
+  - id: endo.L03.044
+    kind: card
+    topic: parathyroid-hormone
+    front: Which cells secrete PTH, and what is its primary function?
+    back: Chief cells of the parathyroid. Its primary function is to ↑ free Ca2+ in the blood.
+    src: { page: 336, quote: "SOURCE Chief cells of parathyroid FUNCTION ↑ free Ca2+ in the blood (1° function)" }
+    status: unverified
+  - id: endo.L03.045
+    kind: enumerate
+    topic: parathyroid-hormone
+    prompt: Enumerate the actions of PTH (5).
+    points:
+      - ↑ Ca2+ and PO4 absorption in the GI system
+      - ↑ Ca2+ and PO4 from bone resorption
+      - ↑ Ca2+ reabsorption from the DCT
+      - ↓ PO4 reabsorption in the PCT
+      - ↑ calcitriol production by activating 1α-hydroxylase in the PCT
+    pass: 5
+    hook: "الـ PTH عايز Ca عالي وبيرمي الـ phosphate: بيسحب من العضم والأمعاء، وبيمسك الـ Ca في الـ DCT، وبيرمي الـ PO4 في الـ PCT، وبيشغّل الـ vitamin D (tri to make D3 in the PCT)."
+    src: { page: 336, quote: "reabsorption from DCT ↓ PO" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.046
+    kind: card
+    topic: parathyroid-hormone
+    front: What are PTH's net effects on serum and urine?
+    back: ↑ serum Ca2+, ↓ serum PO4, ↑ urine PO4, ↑ urine cAMP. PTH = Phosphate-Trashing Hormone.
+    src: { page: 336, quote: "PTH = Phosphate-Trashing Hormone" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.047
+    kind: card
+    topic: parathyroid-hormone
+    front: How does PTH activate osteoclasts?
+    back: PTH ↑ RANK-L secreted by osteoblasts and osteocytes; RANK-L binds RANK on osteoclasts and their precursors → bone resorption. Intermittent PTH release can also stimulate bone formation.
+    src: { page: 336, quote: "secreted by osteoblasts and osteocytes; binds RANK (receptor) on osteoclasts and their precursors to stimulate osteoclasts" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.048
+    kind: card
+    topic: parathyroid-hormone
+    front: What is PTHrP, and in which malignancies is it commonly increased?
+    back: PTH-related peptide; it functions like PTH. Commonly increased in malignancies such as squamous cell carcinoma of the lung and renal cell carcinoma.
+    src: { page: 336, quote: "PTH-related peptide (PTHrP) functions like PTH and is commonly increased in malignancies (eg, squamous cell carcinoma of the lung, renal cell carcinoma)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.049
+    kind: table
+    topic: parathyroid-hormone
+    title: Regulation of PTH secretion
+    columns: [Change, PTH]
+    rows:
+      - [↓ serum Ca2+, ↑]
+      - [↑ serum PO4, ↑]
+      - [↓ serum Mg2+, ↑]
+      - [↓↓ serum Mg2+, ↓]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 336, quote: "Ca2+ is the major regulator of PTH release" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.050
+    kind: card
+    topic: parathyroid-hormone
+    front: What are the common causes of ↓ Mg2+?
+    back: Diarrhea, aminoglycosides, diuretics, alcohol use disorder.
+    src: { page: 336, quote: "Common causes of ↓ Mg2+ include diarrhea, aminoglycosides, diuretics, alcohol use disorder" }
+    status: unverified
+  - id: endo.L03.051
+    kind: mcq
+    topic: parathyroid-hormone
+    stem: >-
+      A 52-year-old man with alcohol use disorder is admitted with vomiting and diarrhea for 5
+      days. He has perioral numbness and muscle cramps. Serum calcium is 6.9 mg/dL and magnesium is
+      0.6 mg/dL (very low). PTH is inappropriately low. Calcium infusion alone fails to correct his
+      calcium. Which of the following best explains the low PTH?
+    options:
+      - Severe hypomagnesemia suppresses PTH secretion
+      - Mild hypomagnesemia stimulates PTH secretion
+      - Hyperphosphatemia suppresses PTH secretion
+      - Calcitonin excess inhibits the parathyroids
+      - PTHrP from an occult tumor suppresses PTH
+    answer: 0
+    why:
+      - "Right. Mild ↓ Mg2+ ↑ PTH, but very low (↓↓) Mg2+ ↓ PTH secretion; he needs magnesium before his calcium will correct."
+      - "Mild hypomagnesemia raises PTH, but his magnesium is severely low and PTH is low."
+      - "↑ PO4 raises PTH, not lowers it."
+      - "Calcitonin is not important in normal Ca2+ homeostasis and would not cause this picture."
+      - "PTHrP raises calcium; he is hypocalcemic."
+    src: { page: 336, quote: "Common causes of ↓ Mg2+ include diarrhea, aminoglycosides, diuretics, alcohol use disorder" }
+    status: unverified
+  # ---------- p337: calcium homeostasis ----------
+  - id: endo.L03.052
+    kind: table
+    topic: calcium-homeostasis
+    title: Forms of plasma Ca2+
+    columns: [Form, Share]
+    rows:
+      - [Ionized/free (active), ~45%]
+      - [Bound to albumin, ~40%]
+      - [Bound to anions, ~15%]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 337, quote: "Plasma Ca2+ exists in three forms: Ionized/free (~45%, active form) Bound to albumin (∼40%) Bound to anions (∼15%)" }
+    status: unverified
+  - id: endo.L03.053
+    kind: card
+    topic: calcium-homeostasis
+    front: Which changes alter PTH secretion through calcium binding, pH or albumin?
+    back: Changes in pH alter PTH secretion; changes in albumin concentration do not. Ionized/free Ca2+ is the primary regulator of PTH.
+    src: { page: 337, quote: "changes in pH alter PTH secretion, whereas changes in albumin concentration do not" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.054
+    kind: order
+    topic: calcium-homeostasis
+    prompt: Put the events of alkalemia-induced hypocalcemia in order.
+    steps:
+      - ↑ pH (less H+)
+      - Albumin binds more Ca2+ (Ca2+ competes with H+ for albumin)
+      - ↓ ionized Ca2+ (cramps, pain, paresthesias, carpopedal spasm)
+      - ↑ PTH
+    src: { page: 337, quote: "↑ pH (less H+ ) → albumin binds more Ca2+ → ↓ ionized Ca2+ (eg, cramps, pain, paresthesias, carpopedal spasm) → ↑ PTH" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.055
+    kind: mcq
+    topic: calcium-homeostasis
+    stem: >-
+      A 22-year-old woman is brought to the emergency department during a panic attack. She is
+      breathing rapidly and complains of tingling around her mouth and in her fingers. Her wrists
+      flex involuntarily. Arterial pH is 7.55 and PaCO2 is 24 mm Hg. Total serum calcium and albumin
+      are normal. Which change most likely accounts for her symptoms?
+    options:
+      - More calcium bound to albumin, lowering ionized calcium
+      - Less calcium bound to albumin, raising ionized calcium
+      - Fall in total serum calcium from urinary loss
+      - Fall in serum albumin
+      - Suppression of PTH secretion
+    answer: 0
+    why:
+      - "Right. Alkalemia means less H+, so albumin binds more Ca2+ → ↓ ionized Ca2+ → paresthesias and carpopedal spasm (and ↑ PTH)."
+      - "Less binding happens in acidemia, which raises ionized calcium."
+      - "Her total calcium is normal; only the free fraction fell."
+      - "Albumin is normal, and changes in albumin don't alter ionized Ca2+ or PTH."
+      - "Low ionized Ca2+ stimulates PTH, not suppresses it."
+    src: { page: 337, quote: "↑ pH (less H+ ) → albumin binds more Ca2+ → ↓ ionized Ca2+ (eg, cramps, pain, paresthesias, carpopedal spasm) → ↑ PTH" }
+    status: unverified
+  # ---------- p337: calcitonin ----------
+  - id: endo.L03.056
+    kind: card
+    topic: calcitonin
+    front: Where is calcitonin made, what does it do, and what stimulates it?
+    back: Parafollicular (C) cells of the thyroid. It ↓ bone resorption, opposing PTH. ↑ serum Ca2+ → ↑ calcitonin. It is not important in normal Ca2+ homeostasis.
+    src: { page: 337, quote: "Parafollicular cells (C cells) of thyroid. Calcitonin opposes actions of PTH. Not important in normal Ca2+ homeostasis" }
+    status: unverified
+  - id: endo.L03.057
+    kind: mcq
+    topic: calcitonin
+    stem: >-
+      A 47-year-old woman undergoes total thyroidectomy for a large multinodular goiter, with all
+      four parathyroid glands preserved. She is started on levothyroxine. Six months later, which
+      of the following is most likely regarding her calcium balance?
+    options:
+      - Normal serum calcium, because calcitonin is not important in normal calcium homeostasis
+      - Hypercalcemia from loss of calcitonin
+      - Hypocalcemia from loss of calcitonin
+      - Increased bone resorption causing osteoporosis
+      - Hyperphosphatemia from loss of calcitonin
+    answer: 0
+    why:
+      - "Right. Removing the thyroid removes the C cells, but calcitonin is not important in normal Ca2+ homeostasis; PTH with preserved parathyroids keeps calcium normal."
+      - "Loss of calcitonin doesn't raise calcium meaningfully."
+      - "Hypocalcemia after thyroidectomy comes from parathyroid injury, which was avoided here."
+      - "Calcitonin ↓ bone resorption, but its loss is not a clinically important cause of bone loss."
+      - "Phosphate is set by PTH and vitamin D, not calcitonin."
+    src: { page: 337, quote: "Calcitonin opposes actions of PTH. Not important in normal Ca2+ homeostasis" }
+    status: unverified
+  # ---------- p337: glucagon ----------
+  - id: endo.L03.058
+    kind: card
+    topic: glucagon
+    front: What does glucagon promote, and when?
+    back: Glycogenolysis, gluconeogenesis, lipolysis and ketogenesis. It raises blood sugar when glucose falls too low (fasting state). It is made by α cells of the pancreas.
+    src: { page: 337, quote: "Promotes glycogenolysis, gluconeogenesis, lipolysis, ketogenesis." }
+    status: unverified
+  - id: endo.L03.059
+    kind: enumerate
+    topic: glucagon
+    prompt: Enumerate what inhibits glucagon secretion (4).
+    points:
+      - Insulin
+      - Amylin
+      - Somatostatin
+      - Hyperglycemia
+    pass: 4
+    src: { page: 337, quote: "Secreted in response to hypoglycemia. Inhibited by insulin, amylin, somatostatin, hyperglycemia." }
+    status: unverified
+  - id: endo.L03.060
+    kind: mcq
+    topic: glucagon
+    stem: >-
+      A 34-year-old man runs a marathon after skipping breakfast. Two hours into the race his blood
+      glucose is 68 mg/dL. A hormone released by peripheral islet cells rises. Which of the
+      following processes does this hormone stimulate?
+    options:
+      - Ketogenesis
+      - Glycogen synthesis
+      - Triglyceride synthesis
+      - Cellular uptake of potassium
+      - GLUT4 insertion in muscle
+    answer: 0
+    why:
+      - "Right. Hypoglycemia triggers glucagon from α cells (islet periphery), which promotes glycogenolysis, gluconeogenesis, lipolysis and ketogenesis."
+      - "Glycogen synthesis is an insulin action."
+      - "Triglyceride synthesis is an insulin action."
+      - "K+ uptake into cells is an insulin action."
+      - "GLUT4 insertion is insulin's mechanism in muscle and fat."
+    src: { page: 337, quote: "Promotes glycogenolysis, gluconeogenesis, lipolysis, ketogenesis." }
+    status: unverified
+  # ---------- p338: insulin ----------
+  - id: endo.L03.061
+    kind: order
+    topic: insulin
+    prompt: Put the steps of insulin synthesis in order.
+    steps:
+      - Preproinsulin is synthesized in the RER of pancreatic β cells
+      - The presignal is cleaved → proinsulin
+      - Proinsulin is stored in secretory granules
+      - Proinsulin is cleaved
+      - Insulin and C-peptide are exocytosed in equal amounts
+    src: { page: 338, quote: "Preproinsulin (synthesized in RER of pancreatic β cells) → cleavage of “presignal” → proinsulin (stored in secretory granules) → cleavage of proinsulin → exocytosis of insulin and C-peptide equally." }
+    status: unverified
+  - id: endo.L03.062
+    kind: card
+    topic: insulin
+    front: How does C-peptide help differentiate factitious hypoglycemia?
+    back: Both insulin and C-peptide are ↑ in endogenous insulin secretion (type 2 DM, insulin secretagogues, insulinoma), whereas exogenous insulin lacks C-peptide.
+    src: { page: 338, quote: "Both insulin and C-peptide are ↑ in endogenous insulin secretion (eg, type 2 DM, insulin secretagogues, insulinoma), whereas exogenous insulin lacks C-peptide (helps differentiate factitious hypoglycemia)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.063
+    kind: card
+    topic: insulin
+    front: Which organs clear insulin?
+    back: Both the liver and the kidneys.
+    src: { page: 338, quote: "Insulin is synthesized in pancreas and cleared by both liver and kidneys." }
+    status: unverified
+  - id: endo.L03.064
+    kind: enumerate
+    topic: insulin
+    prompt: Enumerate the anabolic effects of insulin (8).
+    points:
+      - ↑ glucose transport in skeletal muscle and adipose tissue
+      - ↑ glycogen synthesis and storage
+      - ↑ triglyceride synthesis
+      - ↑ Na+ retention (kidneys)
+      - ↑ protein synthesis (muscles)
+      - ↑ cellular uptake of K+ and amino acids
+      - ↓ glucagon release
+      - ↓ lipolysis in adipose tissue
+    pass: 6
+    src: { page: 338, quote: "Anabolic effects of insulin: ↑ glucose transport in skeletal muscle and adipose tissue ↑ glycogen synthesis and storage" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.065
+    kind: card
+    topic: insulin
+    front: Does insulin cross the placenta, and what happens to the fetus of a mother with diabetes?
+    back: Insulin does not cross the placenta, but glucose does; excess maternal glucose crosses and ↑↑ fetal insulin.
+    src: { page: 338, quote: "Unlike glucose, insulin does not cross placenta. In mothers with diabetes, excess glucose can cross placenta and ↑↑ fetal insulin." }
+    status: unverified
+  - id: endo.L03.066
+    kind: table
+    topic: insulin
+    title: Glucose transporters
+    columns: [Transporter, Insulin-dependent?, Sites]
+    rows:
+      - [GLUT1, No, "RBCs, brain, cornea, placenta"]
+      - [GLUT2 (bidirectional), No, "β islet cells, liver, kidney, GI tract"]
+      - [GLUT3, No, "Brain, placenta"]
+      - [GLUT4, Yes, "Adipose tissue, striated muscle (exercise also ↑ GLUT4)"]
+      - [GLUT5 (fructose), No, "Spermatocytes, GI tract"]
+      - [SGLT1/SGLT2, No, "Kidney, small intestine"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 1], [3, 2], [4, 2], [5, 2]]
+    src: { page: 338, quote: "Insulin-dependent glucose transporters: GLUT4: adipose tissue, striated muscle (exercise can also ↑ GLUT4 expression)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.067
+    kind: card
+    topic: insulin
+    front: What fuels can the brain and RBCs use?
+    back: The brain prefers glucose but may use ketone bodies during starvation. RBCs use only glucose, as they lack mitochondria for aerobic metabolism.
+    src: { page: 338, quote: "Brain prefers glucose, but may use ketone bodies during starvation. RBCs utilize only glucose, as they lack mitochondria for aerobic metabolism." }
+    status: unverified
+  - id: endo.L03.068
+    kind: enumerate
+    topic: insulin
+    prompt: Enumerate the tissues with insulin-independent glucose uptake (BRICK LIPS, 9).
+    points:
+      - Brain
+      - RBCs
+      - Intestine
+      - Cornea
+      - Kidney
+      - Liver
+      - Islet (β) cells
+      - Placenta
+      - Spermatocytes
+    pass: 9
+    hook: "الكتاب بيقولك BRICK LIPS: كل دول بياخدوا السكر من غير ما يستنّوا الـ insulin. الاتنين اللي بيستنّوا: العضل والدهن (GLUT4)."
+    src: { page: 338, quote: "BRICK LIPS (insulin-independent glucose uptake): Brain, RBCs, Intestine, Cornea, Kidney, Liver, Islet (β) cells, Placenta, Spermatocytes." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.069
+    kind: card
+    topic: insulin
+    front: Why is the insulin response greater to oral than to IV glucose?
+    back: Incretins (GLP-1 and GIP), released after meals, ↑ β-cell sensitivity to glucose.
+    src: { page: 338, quote: "↑ insulin response with oral vs IV glucose due to incretins" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.070
+    kind: cloze
+    topic: insulin
+    text: Insulin release is ↓ by {{c1::α2}} and ↑ by {{c2::β2}} stimulation (2 = regulates insulin).
+    src: { page: 338, quote: "Release ↓ by α2, ↑ by β2 stimulation (2 = regulates insulin)." }
+    status: unverified
+  - id: endo.L03.071
+    kind: order
+    topic: insulin
+    prompt: Put the steps of insulin secretion by the β cell in order.
+    steps:
+      - Glucose enters the β cell (GLUT2)
+      - Glucose metabolism ↑ ATP
+      - ATP closes K+ channels (the target of sulfonylureas)
+      - The β-cell membrane depolarizes
+      - Voltage-gated Ca2+ channels open → Ca2+ influx
+      - Insulin exocytosis
+    src: { page: 338, quote: "Glucose enters β cells → ↑ ATP generated from glucose metabolism closes K+ channels (target of sulfonylureas) and depolarizes β cell membrane" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.072
+    kind: mcq
+    topic: insulin
+    stem: >-
+      A 31-year-old nurse is brought to the emergency department after being found confused at
+      work. Her blood glucose is 32 mg/dL. She has no history of diabetes. Serum insulin is markedly
+      elevated, C-peptide is undetectable, and a sulfonylurea screen is negative. Which of the
+      following is the most likely cause of her hypoglycemia?
+    options:
+      - Injection of exogenous insulin
+      - Insulinoma
+      - Sulfonylurea ingestion
+      - Type 2 diabetes mellitus
+      - Glucagon deficiency
+    answer: 0
+    why:
+      - "Right. Exogenous insulin lacks C-peptide, so high insulin with absent C-peptide means factitious hypoglycemia from injected insulin."
+      - "An insulinoma secretes endogenous insulin, so C-peptide would be high too."
+      - "Secretagogues make the β cell release insulin and C-peptide together, and the screen is negative."
+      - "Type 2 DM has ↑ endogenous insulin and C-peptide and doesn't cause this hypoglycemia without drugs."
+      - "Glucagon deficiency wouldn't produce markedly high insulin."
+    src: { page: 338, quote: "whereas exogenous insulin lacks C-peptide (helps differentiate factitious hypoglycemia)." }
+    status: unverified
+  # ---------- p339: adrenal steroids and CAH ----------
+  - id: endo.L03.073
+    kind: card
+    topic: adrenal-steroids-and-cah
+    front: What is the rate-limiting step of adrenal steroid synthesis?
+    back: Cholesterol entry via StAR, the step the figure marks as rate-limiting; cholesterol desmolase then makes pregnenolone.
+    src: { page: 339, quote: "Cholesterol (via StARa) Pregnenolone" }
+    status: unverified
+  - id: endo.L03.074
+    kind: card
+    topic: adrenal-steroids-and-cah
+    front: Which enzymes convert androgens in peripheral tissue, and which drugs block them?
+    back: "Aromatase (androstenedione → estrone, testosterone → estradiol), blocked by anastrozole, letrozole, exemestane. 5α-reductase (testosterone → DHT), blocked by finasteride."
+    src: { page: 339, quote: "Anastrozole, letrozole, exemestane Finasteride Androstenedione Testosterone Dihydrotestosterone" }
+    status: unverified
+  - id: endo.L03.075
+    kind: card
+    topic: adrenal-steroids-and-cah
+    front: Which substance in the adrenal steroid pathway figure blocks conversion of cortisol to cortisone?
+    back: Glycyrrhetinic acid.
+    src: { page: 339, quote: "Glycyrrhetinic acid Cortisol" }
+    status: unverified
+  - id: endo.L03.076
+    kind: table
+    topic: adrenal-steroids-and-cah
+    title: Congenital adrenal hyperplasias
+    columns: [Enzyme deficiency, Mineralocorticoids, "[K+]", BP, Cortisol, Sex hormones, Labs, Presentation]
+    rows:
+      - [17α-hydroxylase, "↓ aldosterone, ↑ 11-deoxycorticosterone", ↓, ↑, ↓, ↓, ↓ androstenedione, "XY: atypical genitalia, undescended testes; XX: lacks 2° sexual development"]
+      - [21-hydroxylase, ↓, ↑, ↓, ↓, ↑, "↑ renin activity, ↑ 17-hydroxyprogesterone", "Most common; infancy (salt wasting) or childhood (precocious puberty); XX: virilization"]
+      - [11β-hydroxylase, "↓ aldosterone, ↑ 11-deoxycorticosterone", ↓, ↑, ↓, ↑, ↓ renin activity, "Infancy (severe hypertension) or childhood (precocious puberty); XX: virilization"]
+    blanks: [[0, 2], [0, 3], [0, 5], [1, 2], [1, 3], [1, 5], [1, 6], [2, 2], [2, 3], [2, 5]]
+    src: { page: 339, quote: "Most common Presents in infancy (salt wasting) or childhood (precocious puberty) XX: virilization" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.077
+    kind: card
+    topic: adrenal-steroids-and-cah
+    front: What do all congenital adrenal enzyme deficiencies share?
+    back: They are autosomal recessive, and most cause bilateral adrenal enlargement (↑ ACTH stimulation) and skin hyperpigmentation (↑ MSH, coproduced with ACTH).
+    src: { page: 339, quote: "All congenital adrenal enzyme deficiencies are autosomal recessive disorders and most are characterized by bilateral adrenal gland enlargement (due to ↑ ACTH stimulation)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.078
+    kind: card
+    topic: adrenal-steroids-and-cah
+    front: What rule links the name of the deficient CAH enzyme to hypertension and virilization?
+    back: If the deficient enzyme starts with 1 (11β-, 17α-), it causes hypertension; if it ends with 1 (21-, 11β-), it causes virilization in females.
+    src: { page: 339, quote: "If deficient enzyme starts with 1, it causes hypertension; if deficient enzyme ends with 1, it causes virilization in females." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.079
+    kind: mcq
+    topic: adrenal-steroids-and-cah
+    stem: >-
+      A 2-week-old girl is brought to the emergency department because of vomiting and poor feeding
+      for 3 days. She is lethargic and dehydrated. Examination shows clitoromegaly and fused labial
+      folds. Serum sodium is 124 mEq/L and potassium is 6.9 mEq/L. Which of the following laboratory
+      findings is most likely?
+    options:
+      - Increased 17-hydroxyprogesterone
+      - Increased 11-deoxycorticosterone
+      - Decreased renin activity
+      - Decreased androstenedione
+      - Decreased ACTH
+    answer: 0
+    why:
+      - "Right. Salt wasting with virilization in an infant girl is 21-hydroxylase deficiency, the most common CAH; 17-hydroxyprogesterone builds up and renin rises."
+      - "↑ 11-deoxycorticosterone is seen in 11β- and 17α-hydroxylase deficiency, which raise BP and lower K+."
+      - "↓ renin is 11β-hydroxylase deficiency (volume expansion from 11-deoxycorticosterone); she is volume depleted."
+      - "↓ androstenedione is 17α-hydroxylase deficiency, with no virilization."
+      - "Low cortisol removes feedback, so ACTH is ↑, enlarging both adrenals."
+    src: { page: 339, quote: "Most common Presents in infancy (salt wasting) or childhood (precocious puberty) XX: virilization" }
+    status: unverified
+  - id: endo.L03.080
+    kind: mcq
+    topic: adrenal-steroids-and-cah
+    stem: >-
+      A 16-year-old girl is evaluated for primary amenorrhea. She has no breast development and
+      sparse pubic hair. Blood pressure is 168/102 mm Hg. Serum potassium is 3.0 mEq/L. Karyotype is
+      46,XX. Deficiency of which enzyme best explains her findings?
+    options:
+      - 17α-hydroxylase
+      - 21-hydroxylase
+      - 11β-hydroxylase
+      - Aromatase
+      - 5α-reductase
+    answer: 0
+    why:
+      - "Right. 17α-hydroxylase deficiency: ↑ 11-deoxycorticosterone → hypertension and ↓ K+; ↓ sex hormones, so an XX patient lacks 2° sexual development."
+      - "21-hydroxylase deficiency causes salt wasting with low BP and virilization."
+      - "11β-hydroxylase deficiency causes hypertension but with virilization (↑ sex hormones)."
+      - "Aromatase is not a CAH enzyme on this table and doesn't cause hypertension with hypokalemia."
+      - "5α-reductase deficiency affects DHT in XY patients, not BP."
+    src: { page: 339, quote: "XX: lacks 2° sexual development" }
+    status: unverified
+  # ---------- p340: cortisol ----------
+  - id: endo.L03.081
+    kind: card
+    topic: cortisol
+    front: Where is cortisol made and what carries it in blood?
+    back: Adrenal zona fasciculata; bound to corticosteroid-binding globulin.
+    src: { page: 340, quote: "Adrenal zona fasciculata. Bound to corticosteroid-binding globulin." }
+    status: unverified
+  - id: endo.L03.082
+    kind: enumerate
+    topic: cortisol
+    prompt: Enumerate the functions of cortisol (A BIG FIB, 7).
+    points:
+      - ↑ Appetite
+      - ↑ Blood pressure
+      - ↑ Insulin resistance (diabetogenic)
+      - ↑ Gluconeogenesis, lipolysis and proteolysis
+      - ↓ Fibroblast activity
+      - ↓ Inflammatory and Immune responses
+      - ↓ Bone formation
+    pass: 7
+    hook: "الكتاب بيقولك Cortisol is A BIG FIB: Appetite و BP و Insulin resistance و Gluconeogenesis، وبعدين بيوطّي Fibroblasts و Inflammation/Immunity و Bone."
+    src: { page: 340, quote: "Cortisol is A BIG FIB." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.083
+    kind: enumerate
+    topic: cortisol
+    prompt: Enumerate how cortisol raises blood pressure (3).
+    points:
+      - Stimulates conversion of norepinephrine → epinephrine
+      - Upregulates α1-receptors on arterioles → ↑ sensitivity to NE and epinephrine (permissive action)
+      - At high concentrations, binds mineralocorticoid (aldosterone) receptors
+    pass: 3
+    src: { page: 340, quote: "Upregulates α1-receptors on arterioles → ↑ sensitivity to norepinephrine and epinephrine (permissive action)" }
+    status: unverified
+  - id: endo.L03.084
+    kind: enumerate
+    topic: cortisol
+    prompt: Enumerate how cortisol ↓ inflammatory and immune responses (5).
+    points:
+      - Inhibits production of leukotrienes and prostaglandins
+      - Inhibits WBC adhesion → neutrophilia
+      - Blocks histamine release from mast cells
+      - Eosinopenia, lymphopenia
+      - Blocks IL-2 production
+    pass: 5
+    src: { page: 340, quote: "Inhibits production of leukotrienes and prostaglandins Inhibits WBC adhesion → neutrophilia Blocks histamine release from mast cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.085
+    kind: card
+    topic: cortisol
+    front: What are the effects of cortisol on fibroblasts?
+    back: ↓ fibroblast activity → poor wound healing, ↓ collagen synthesis, ↑ striae.
+    src: { page: 340, quote: "↓ Fibroblast activity (poor wound healing, ↓ collagen synthesis, ↑ striae)" }
+    status: unverified
+  - id: endo.L03.086
+    kind: card
+    topic: cortisol
+    front: Why can exogenous glucocorticoids reactivate TB and candidiasis?
+    back: They block IL-2 production.
+    src: { page: 340, quote: "Exogenous glucocorticoids can cause reactivation of TB and candidiasis (blocks IL-2 production)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.087
+    kind: card
+    topic: cortisol
+    front: How is cortisol secretion regulated, and what can chronic stress do?
+    back: CRH (hypothalamus) → ACTH (pituitary) → cortisol (zona fasciculata); excess cortisol ↓ CRH, ACTH and cortisol. Chronic stress may cause prolonged cortisol secretion, cortisol resistance, impaired immunocompetency and HPA axis dysregulation.
+    src: { page: 340, quote: "CRH (hypothalamus) stimulates ACTH release (pituitary) → cortisol production in adrenal zona fasciculata. Excess cortisol ↓ CRH, ACTH, and cortisol secretion." }
+    status: unverified
+  - id: endo.L03.088
+    kind: mcq
+    topic: cortisol
+    stem: >-
+      A 58-year-old man has taken prednisone 40 mg daily for 4 months for polymyalgia rheumatica. A
+      complete blood count is obtained at follow-up. Which pattern of white cells is most likely?
+    options:
+      - Neutrophilia, lymphopenia and eosinopenia
+      - Neutropenia, lymphocytosis and eosinophilia
+      - Neutrophilia, lymphocytosis and eosinophilia
+      - Neutropenia with normal lymphocytes
+      - Isolated eosinophilia
+    answer: 0
+    why:
+      - "Right. Cortisol inhibits WBC adhesion (neutrophils stay in the blood → neutrophilia) and causes eosinopenia and lymphopenia."
+      - "This is the opposite of each cortisol effect."
+      - "Cortisol lowers lymphocytes and eosinophils."
+      - "Glucocorticoids raise the neutrophil count."
+      - "Eosinophils fall with glucocorticoids."
+    src: { page: 340, quote: "Inhibits WBC adhesion → neutrophilia Blocks histamine release from mast cells Eosinopenia, lymphopenia" }
+    status: unverified
+  # ---------- p340: appetite regulation ----------
+  - id: endo.L03.089
+    kind: table
+    topic: appetite-regulation
+    title: Appetite hormones
+    columns: [Hormone, Made by, Effect, Acts on]
+    rows:
+      - [Ghrelin, Stomach, "↑ hunger (orexigenic), ↑ GH release", Lateral hypothalamus (hunger center)]
+      - [Leptin, Adipose tissue, Satiety (↓ appetite), Ventromedial hypothalamus (satiety center)]
+      - [Endocannabinoids, "—", ↑ appetite, Hypothalamus and nucleus accumbens]
+    blanks: [[0, 1], [0, 3], [1, 1], [1, 3]]
+    src: { page: 340, quote: "Leptin keeps you thin. Acts on ventromedial area of hypothalamus (satiety center) to ↓ appetite." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.090
+    kind: card
+    topic: appetite-regulation
+    front: What increases ghrelin production?
+    back: Sleep deprivation, fasting, or Prader-Willi syndrome. (Ghrelin makes you ghrow hunghry.)
+    src: { page: 340, quote: "Sleep deprivation, fasting, or Prader-Willi syndrome → ↑ ghrelin production." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.091
+    kind: card
+    topic: appetite-regulation
+    front: What happens to leptin in obesity, in leptin gene mutation, and in sleep deprivation or starvation?
+    back: Obese people have ↑ leptin (more adipose) but are tolerant or resistant to its anorexigenic effect. Leptin gene mutation → severe obesity. Sleep deprivation or starvation → ↓ leptin.
+    src: { page: 340, quote: "Mutation of leptin gene → severe obesity. Obese people have ↑ leptin due to ↑ adipose tissue but are tolerant or resistant to leptin’s anorexigenic effect." }
+    status: unverified
+  - id: endo.L03.092
+    kind: mcq
+    topic: appetite-regulation
+    stem: >-
+      A 3-year-old boy is brought to the physician because of constant hunger and food seeking. He
+      was hypotonic and fed poorly as a newborn. He now has obesity, small hands and feet, and
+      hypogonadism. Genetic testing shows loss of the paternal copy of 15q11-q13. Which hormone is
+      most likely elevated and driving his appetite?
+    options:
+      - Ghrelin
+      - Leptin
+      - Insulin
+      - Cortisol
+      - Somatostatin
+    answer: 0
+    why:
+      - "Right. Prader-Willi syndrome ↑ ghrelin, which stimulates hunger via the lateral hypothalamus."
+      - "Leptin is a satiety hormone; it would reduce appetite."
+      - "Insulin is not the appetite hormone the book links to Prader-Willi."
+      - "Cortisol ↑ appetite, but the book ties Prader-Willi to ghrelin."
+      - "Somatostatin inhibits GH and TSH; it doesn't drive hunger."
+    src: { page: 340, quote: "Sleep deprivation, fasting, or Prader-Willi syndrome → ↑ ghrelin production." }
+    status: unverified
+  # ---------- p341: signaling pathways ----------
+  - id: endo.L03.093
+    kind: table
+    topic: signaling-pathways-of-endocrine-hormones
+    title: Signaling pathways of endocrine hormones
+    columns: [Pathway, Hormones, Mnemonic]
+    rows:
+      - [cAMP, "FSH, LH, ACTH, TSH, CRH, hCG, ADH (V2), MSH, PTH, Calcitonin, Histamine (H2), Glucagon, GHRH", FLAT ChAMPs CHuGG]
+      - [cGMP, "BNP, ANP, EDRF (NO)", BAD GraMPa (vasodilation and diuresis)]
+      - [IP3, "GnRH, Oxytocin, ADH (V1), TRH, Histamine (H1), Angiotensin II, Gastrin", GOAT HAG]
+      - [Intracellular receptor, "Progesterone, Estrogen, Testosterone, Cortisol, Aldosterone, T3/T4, Vitamin D", PET CAT in TV]
+      - [Receptor tyrosine kinase (MAP kinase), "IGF-1, FGF, PDGF, EGF, Insulin", Get Found In the MAP]
+      - [Nonreceptor tyrosine kinase (JAK/STAT), "G-CSF, Erythropoietin, Thrombopoietin, Prolactin, Immunomodulators (IL-2, IL-6, IFN), GH", GET a JAKed PIG]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 341, quote: "FLAT ChAMPs CHuGG cGMP BNP, ANP, EDRF (NO) BAD GraMPa Think vasodilation and diuresis" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.094
+    kind: cloze
+    topic: signaling-pathways-of-endocrine-hormones
+    text: ADH acts via {{c1::cAMP}} at the V2 receptor and via {{c2::IP3}} at the V1 receptor; histamine uses cAMP at {{c3::H2}} and IP3 at H1.
+    src: { page: 341, quote: "ADH (V2- receptor), MSH, PTH, Calcitonin, Histamine (H2-receptor), Glucagon, GHRH" }
+    status: unverified
+  - id: endo.L03.095
+    kind: mcq
+    topic: signaling-pathways-of-endocrine-hormones
+    stem: >-
+      A 64-year-old man with chronic kidney disease has anemia with a hemoglobin of 8.9 g/dL and
+      normal iron studies. He is started on a recombinant hormone given subcutaneously each week.
+      The receptor for this hormone signals through which pathway?
+    options:
+      - JAK/STAT (nonreceptor tyrosine kinase)
+      - Receptor tyrosine kinase (MAP kinase)
+      - cAMP
+      - IP3
+      - Intracellular (nuclear) receptor
+    answer: 0
+    why:
+      - "Right. Erythropoietin uses a nonreceptor tyrosine kinase, the JAK/STAT pathway (GET a JAKed PIG)."
+      - "Receptor tyrosine kinases are for IGF-1, FGF, PDGF, EGF and insulin."
+      - "cAMP is for FLAT ChAMPs CHuGG, such as PTH and glucagon."
+      - "IP3 is for GOAT HAG, such as GnRH and oxytocin."
+      - "Intracellular receptors are for steroids, T3/T4 and vitamin D."
+    src: { page: 341, quote: "G-CSF, Erythropoietin, Thrombopoietin Prolactin, Immunomodulators (eg, cytokines IL-2, IL-6, IFN), GH JAK/STAT pathway" }
+    status: unverified
+  - id: endo.L03.096
+    kind: card
+    topic: signaling-pathways-of-steroid-hormones
+    front: Why do steroid hormones circulate bound to binding globulins?
+    back: They are lipophilic, so specific binding globulins ↑ their solubility.
+    src: { page: 341, quote: "Steroid hormones are lipophilic and therefore must circulate bound to specific binding globulins, which ↑ their solubility." }
+    status: unverified
+  - id: endo.L03.097
+    kind: table
+    topic: signaling-pathways-of-steroid-hormones
+    title: Sex hormone–binding globulin (SHBG)
+    columns: [Change, Who, Result]
+    rows:
+      - [↑ SHBG, Males, ↓ free testosterone → gynecomastia]
+      - [↓ SHBG, Females, ↑ free testosterone → hirsutism]
+    blanks: [[0, 2], [1, 2]]
+    src: { page: 341, quote: "In males, ↑ sex hormone–binding globulin (SHBG) lowers free testosterone → gynecomastia. In females, ↓ SHBG raises free testosterone → hirsutism." }
+    status: unverified
+  - id: endo.L03.098
+    kind: card
+    topic: signaling-pathways-of-steroid-hormones
+    front: What raises SHBG?
+    back: ↑ estrogen (eg, OCPs, pregnancy).
+    src: { page: 341, quote: "↑ estrogen (eg, OCPs, pregnancy) → ↑ SHBG." }
+    status: unverified
+  - id: endo.L03.099
+    kind: mcq
+    topic: signaling-pathways-of-steroid-hormones
+    stem: >-
+      A 24-year-old woman comes to the physician because of increased hair growth on her chin and
+      lower abdomen for 1 year. She has obesity and irregular menses. Total testosterone is at the
+      upper limit of normal, but free testosterone is elevated. A decrease in which of the
+      following best explains the high free testosterone?
+    options:
+      - Sex hormone–binding globulin
+      - Thyroxine-binding globulin
+      - Corticosteroid-binding globulin
+      - Serum albumin
+      - Aromatase activity in the liver
+    answer: 0
+    why:
+      - "Right. In females, ↓ SHBG raises free testosterone → hirsutism."
+      - "TBG carries T3/T4, not testosterone."
+      - "Corticosteroid-binding globulin carries cortisol."
+      - "Albumin binds testosterone weakly; the book names SHBG as the key carrier."
+      - "Less aromatase would raise testosterone overall, not just the free fraction."
+    src: { page: 341, quote: "In females, ↓ SHBG raises free testosterone → hirsutism." }
+    status: unverified
