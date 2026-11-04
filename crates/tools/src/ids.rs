@@ -132,11 +132,79 @@ mod tests {
     fn a_removed_id_fails_until_it_is_retired() {
         let dir = tempfile::tempdir().unwrap();
         let mut base = Registry::new();
-        base.insert("item hb.L01.001".into(), "kind mcq".into());
+        base.insert("item cvs.L04.001".into(), "kind mcq".into());
         let err = check(dir.path(), &base, &Registry::new()).unwrap_err();
         assert!(err.last().unwrap().contains(RETIRED), "{err:?}");
         std::fs::create_dir_all(dir.path().join("content")).unwrap();
-        std::fs::write(dir.path().join(RETIRED), "item hb.L01.001  # merged\n").unwrap();
+        std::fs::write(dir.path().join(RETIRED), "item cvs.L04.001  # merged\n").unwrap();
         assert!(check(dir.path(), &base, &Registry::new()).is_ok());
+    }
+
+    use crate::testkit::{args, commit, content_tree, init_repo, write};
+
+    #[test]
+    fn list_prints_every_id_with_its_parent() {
+        let dir = content_tree();
+        let out = run(dir.path(), &args(&["list"])).unwrap();
+        assert!(out.lines().any(|l| l == "item cvs.L04.003\tkind mcq"), "{out}");
+        assert!(out.lines().any(|l| l == "topic cvs.L04#shock\tlecture cvs.L04"), "{out}");
+        assert!(run(dir.path(), &args(&["purge"])).unwrap_err()[0].starts_with("usage: steps-tools ids"));
+        assert!(run(dir.path(), &args(&["check"])).unwrap_err()[0].contains("--base REF | --base-pack FILE"));
+    }
+
+    #[test]
+    fn check_against_a_published_pack() {
+        let dir = content_tree();
+        let root = dir.path();
+        let pack = root.join("base.pack");
+        std::fs::write(&pack, pack_at(root).unwrap().encode()).unwrap();
+        let p = pack.to_str().unwrap();
+        let out = run(root, &args(&["check", "--base-pack", p])).unwrap();
+        assert!(out.ends_with("checked, no breaking change"), "{out}");
+        // The card cvs.L04.001 disappears from the working tree.
+        let sample = std::fs::read_to_string(root.join("content/cvs/L04.yaml")).unwrap();
+        let start = sample.find("  - id: cvs.L04.001").unwrap();
+        let end = sample.find("  - id: cvs.L04.002").unwrap();
+        write(root, "content/cvs/L04.yaml", &format!("{}{}", &sample[..start], &sample[end..]));
+        let err = run(root, &args(&["check", "--base-pack", p])).unwrap_err();
+        assert!(err[0].starts_with("ids: BREAKING removed: item cvs.L04.001 (kind card)"), "{err:?}");
+        let missing = root.join("none.pack");
+        assert!(run(root, &args(&["check", "--base-pack", missing.to_str().unwrap()])).is_err());
+        std::fs::write(&missing, b"not a pack").unwrap();
+        let err = run(root, &args(&["check", "--base-pack", missing.to_str().unwrap()])).unwrap_err();
+        assert!(err[0].contains("none.pack"), "{err:?}");
+    }
+
+    #[test]
+    fn check_against_a_commit() {
+        let dir = content_tree();
+        let root = dir.path();
+        let base = init_repo(root);
+        // Repurposing an item (same id, another kind) breaks his records.
+        let sample = std::fs::read_to_string(root.join("content/cvs/L04.yaml")).unwrap();
+        write(
+            root,
+            "content/cvs/L04.yaml",
+            &sample.replacen("kind: card", "kind: essay\n    prompt: x\n    outline: [a]", 1),
+        );
+        commit(root, "repurpose");
+        let err = run(root, &args(&["check", "--base", &base])).unwrap_err();
+        assert!(
+            err.iter()
+                .any(|l| l.contains("BREAKING repurposed: item cvs.L04.001 was kind card, now kind essay")),
+            "{err:?}"
+        );
+        // An unknown commit is named.
+        let err = pack_at_rev(root, "no-such-branch").unwrap_err();
+        assert!(err[0].starts_with("git archive no-such-branch"), "{err:?}");
+    }
+
+    #[test]
+    fn an_unreadable_retired_list_is_an_error() {
+        let dir = tempfile::tempdir().unwrap();
+        // A directory where the file should be.
+        std::fs::create_dir_all(dir.path().join(RETIRED)).unwrap();
+        let err = check(dir.path(), &Registry::new(), &Registry::new()).unwrap_err();
+        assert!(err[0].starts_with(RETIRED), "{err:?}");
     }
 }

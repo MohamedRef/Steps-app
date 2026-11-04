@@ -239,20 +239,20 @@ mod tests {
     #[test]
     fn every_course_with_lessons_has_its_own_list() {
         let idx = index();
-        let hb = idx.get("cvs").expect("cardiovascular has abbreviations");
-        let pfo = hb.iter().find(|t| t.entry.term == "PFO").expect("PFO in cardiovascular");
+        let cvs = idx.get("cvs").expect("cardiovascular has abbreviations");
+        let pfo = cvs.iter().find(|t| t.entry.term == "PFO").expect("PFO in cardiovascular");
         assert!(pfo.lessons.iter().all(|id| id.starts_with("cvs.")), "{:?}", pfo.lessons);
         assert!(!pfo.lessons.is_empty());
         // Lists are A–Z and hold each term once.
-        let terms: Vec<String> = hb.iter().map(|t| t.entry.term.to_lowercase()).collect();
+        let terms: Vec<String> = cvs.iter().map(|t| t.entry.term.to_lowercase()).collect();
         let mut sorted = terms.clone();
         sorted.sort();
         assert_eq!(terms, sorted);
         // Each term once (`HBIG` and `HBIg` may both be there).
-        let mut exact: Vec<&str> = hb.iter().map(|t| t.entry.term.as_str()).collect();
+        let mut exact: Vec<&str> = cvs.iter().map(|t| t.entry.term.as_str()).collect();
         exact.sort();
         exact.dedup();
-        assert_eq!(exact.len(), hb.len());
+        assert_eq!(exact.len(), cvs.len());
         // Only courses with lessons have a list, and only real courses.
         let lib = Library::get();
         for course in idx.keys() {
@@ -266,11 +266,11 @@ mod tests {
 
     #[test]
     fn search_finds_the_term_or_its_meaning() {
-        let hb = &index()["cvs"];
-        assert!(search(hb, "pfo").iter().any(|t| t.entry.term == "PFO"));
-        assert!(search(hb, "foramen ovale").iter().any(|t| t.entry.term == "PFO"));
-        assert_eq!(search(hb, "").len(), hb.len());
-        assert!(search(hb, "zzzz-nothing").is_empty());
+        let cvs = &index()["cvs"];
+        assert!(search(cvs, "pfo").iter().any(|t| t.entry.term == "PFO"));
+        assert!(search(cvs, "foramen ovale").iter().any(|t| t.entry.term == "PFO"));
+        assert_eq!(search(cvs, "").len(), cvs.len());
+        assert!(search(cvs, "zzzz-nothing").is_empty());
     }
 
     #[test]
