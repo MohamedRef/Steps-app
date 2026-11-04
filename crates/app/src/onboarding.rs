@@ -200,7 +200,7 @@ fn Questions() -> Element {
                         return false;
                     }
                     let mut s = crate::plan::SETTINGS.write();
-                    s.exam = Some(day);
+                    s.set_exam(day, today);
                     crate::plan::save(&s);
                 }
                 if Some(minutes()) != initial.1.minutes && (initial.1.minutes.is_some() || minutes() != 10) {
