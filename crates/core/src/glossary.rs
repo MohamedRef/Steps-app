@@ -57,12 +57,12 @@ impl Entry {
 }
 
 impl Glossary {
-    /// Adds a course file's entries and plain words to this glossary. A term
-    /// another file already has is left out: course threads write their
-    /// files side by side, and two of them adding the same term must not
-    /// break `main`. The file read first keeps it (`glossary.yaml`, then the
-    /// course files in name order). A term listed twice within one file is
-    /// still caught by `validate::glossary`.
+    /// Adds a course file's entries and plain words to this glossary. Each
+    /// course file keeps every term its lectures use, even one another file
+    /// also has (nothing is removed for being repeated elsewhere); the merged
+    /// glossary holds one entry per term, from the file read first
+    /// (`glossary.yaml`, then the course files in name order). A term listed
+    /// twice within one file is still caught by `validate::glossary`.
     pub fn absorb(&mut self, part: Glossary) {
         let known: std::collections::HashSet<String> =
             self.entries.iter().flat_map(|e| e.spellings()).map(str::to_string).collect();
