@@ -5,14 +5,19 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-  # The platform compiles (Android, web, Worker) run nightly and by hand only,
-  # so a pull request waits on the checks that gate it (Mohamed, 2026-11-04).
-  schedule:
-    - cron: "7 3 * * *"
   workflow_dispatch:
 
+# The platform compiles (Android, web, Worker) and the 90% coverage gate run
+# nightly and by hand in nightly.yml, so a pull request waits only on the
+# checks that gate it (Mohamed, 2026-11-04). They used to be skipped jobs in
+# this file, which cluttered every pull request's run.
+#
+# One run per branch: a newer push cancels the older run, on main too (the
+# newest main holds every earlier merge, so testing it covers them). Many
+# merges in an hour used to stack one full run per commit and starve the
+# pull requests of runners.
 concurrency:
-  group: ci-${{ github.ref }}-${{ github.event_name == 'pull_request' && 'pr' || github.sha }}
+  group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 permissions:
@@ -25,6 +30,9 @@ jobs:
   check:
     name: fmt, clippy, tests, content
     runs-on: ubuntu-24.04
+    # A green run takes about 13 minutes. Without a limit, a hung test holds
+    # a runner for 6 hours.
+    timeout-minutes: 35
     steps:
       - uses: actions/checkout@v5
         with:
@@ -80,107 +88,3 @@ jobs:
       - name: What's new file
         if: github.event_name == 'pull_request'
         run: cargo run -q -p steps-tools -- update changes --gate HEAD^1
-
-  android:
-    name: Android arm64 compiles
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v5
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: aarch64-linux-android
-          components: clippy
-      - uses: Swatinem/rust-cache@v2
-        with:
-          save-if: ${{ github.ref == 'refs/heads/main' }}
-      - name: Clippy for aarch64-linux-android with the runner's NDK
-        run: |
-          BIN="$ANDROID_NDK_LATEST_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin"
-          export CC_aarch64_linux_android="$BIN/aarch64-linux-android28-clang"
-          export AR_aarch64_linux_android="$BIN/llvm-ar"
-          export CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER="$BIN/aarch64-linux-android28-clang"
-          cargo clippy -p steps-app --target aarch64-linux-android --no-default-features --features mobile -- -D warnings
-
-  coverage:
-    name: Test coverage (90% of lines)
-    # Nightly and by hand only (Mohamed, 2026-11-04): it is the slowest job,
-    # and pull requests still run every test in `check`.
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-24.04
-    permissions:
-      contents: read
-      issues: write
-    steps:
-      - uses: actions/checkout@v5
-      - name: System libraries for the desktop WebView
-        run: sudo apt-get update && sudo apt-get install -y libwebkit2gtk-4.1-dev libgtk-3-dev libxdo-dev libsoup-3.0-dev
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          components: llvm-tools-preview
-      - uses: taiki-e/install-action@v2
-        with:
-          tool: cargo-llvm-cov
-      - uses: Swatinem/rust-cache@v2
-        with:
-          key: coverage
-          save-if: ${{ github.ref == 'refs/heads/main' }}
-      # docs/RUN.md § Coverage. Left out: the browser-check fixture exporters
-      # (run by the screens jobs) and platform/, the device glue that only
-      # runs on a Mac, an Android phone or in a browser.
-      - name: Every crate's tests, at least 90% of lines covered
-        run: >-
-          cargo llvm-cov --workspace --summary-only --fail-under-lines 90
-          --ignore-filename-regex '(browser\.rs|browser_fixture\.rs|crates/app/src/platform/)'
-      # Under 90% at night: say so where it is seen, once.
-      - name: Open an issue when coverage drops
-        if: failure() && github.event_name == 'schedule'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          title="Nightly coverage under 90% of lines"
-          if [ -z "$(gh issue list -R "$GITHUB_REPOSITORY" --state open --search "in:title \"$title\"" --json number --jq '.[].number')" ]; then
-            gh issue create -R "$GITHUB_REPOSITORY" --title "$title" \
-              --body "The nightly coverage job failed on ${GITHUB_SHA::7}: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
-          fi
-
-  web:
-    name: Web app compiles (wasm32)
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v5
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: wasm32-unknown-unknown
-          components: clippy
-      - uses: Swatinem/rust-cache@v2
-        with:
-          key: web
-          save-if: ${{ github.ref == 'refs/heads/main' }}
-      # docs/WEB.md: the same app, built for the browser.
-      - run: cargo clippy -p steps-app --target wasm32-unknown-unknown --no-default-features --features web -- -D warnings
-
-  worker:
-    name: Steps Cloud Worker compiles (wasm32)
-    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v5
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: wasm32-unknown-unknown
-          components: clippy
-      - uses: Swatinem/rust-cache@v2
-        with:
-          save-if: ${{ github.ref == 'refs/heads/main' }}
-      - run: cargo clippy -p steps-server --target wasm32-unknown-unknown -- -D warnings
-      - uses: actions/setup-node@v5
-        with:
-          node-version: 22
-      - name: Local Worker test tools
-        run: |
-          cargo install worker-build --version ^0.8 --locked
-          npm install -g wrangler@4
-      - name: Steps Cloud end-to-end (fake Google, two devices)
-        run: node crates/server/tests/e2e.mjs
