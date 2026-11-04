@@ -56,7 +56,7 @@ pub mod count {
     pub const LESSON: Noun =
         Noun { one: "درس واحد", two: "درسين", few: "دروس", many: "درس" };
     pub const COURSE: Noun =
-        Noun { one: "مقرر واحد", two: "مقررين", few: "مقررات", many: "مقرر" };
+        Noun { one: "مادة واحدة", two: "مادتين", few: "مواد", many: "مادة" };
     pub const CARD: Noun =
         Noun { one: "كارت واحد", two: "كارتين", few: "كروت", many: "كارت" };
     pub const STEP: Noun =
@@ -78,10 +78,8 @@ pub mod count {
         Noun {
             one: "يوم مذاكرة واحد", two: "يومين مذاكرة", few: "أيام مذاكرة", many: "يوم مذاكرة"
         };
-    pub const CREDIT_HOUR: Noun =
-        Noun {
-            one: "ساعة معتمدة واحدة", two: "ساعتين معتمدين", few: "ساعات معتمدة", many: "ساعة معتمدة"
-        };
+    pub const PAGE: Noun =
+        Noun { one: "صفحة واحدة", two: "صفحتين", few: "صفحات", many: "صفحة" };
     pub const CALC: Noun =
         Noun { one: "حاسبة واحدة", two: "حاسبتين", few: "حاسبات", many: "حاسبة" };
 
@@ -97,15 +95,6 @@ pub mod count {
         }
     }
 
-    /// A count written elsewhere as text ("7", "7.5"): whole numbers follow
-    /// `count`; a fraction takes the singular ("7.5 ساعة").
-    pub fn count_text(n: &str, noun: &Noun) -> String {
-        match n.parse::<u64>() {
-            Ok(n) => count(n, noun),
-            Err(_) => format!("{n} {}", noun.many),
-        }
-    }
-
     /// The bare noun for a number shown on its own (a big digit with a
     /// label beside it): the plural for 2–10, the singular otherwise.
     pub fn word<N: TryInto<u64>>(n: N, noun: &Noun) -> &'static str {
@@ -118,12 +107,7 @@ pub mod count {
         use super::*;
 
         #[test]
-        fn text_counts_and_bare_words() {
-            assert_eq!(count_text("7", &HOUR), "7 ساعات");
-            assert_eq!(count_text("1", &HOUR), "ساعة");
-            assert_eq!(count_text("2", &HOUR), "ساعتين");
-            assert_eq!(count_text("12", &HOUR), "12 ساعة");
-            assert_eq!(count_text("7.5", &HOUR), "7.5 ساعة");
+        fn bare_words() {
             assert_eq!(word(7, &MINUTE), "دقايق");
             assert_eq!(word(45, &MINUTE), "دقيقة");
             assert_eq!(word(1, &MINUTE), "دقيقة");
@@ -135,34 +119,9 @@ pub mod count {
         #[test]
         fn every_noun_agrees() {
             for noun in [
-                &SECOND,
-                &MINUTE,
-                &HOUR,
-                &DAY,
-                &MONTH,
-                &QUESTION,
-                &LECTURE,
-                &TOPIC,
-                &ITEM,
-                &REVIEW,
-                &NEW_THING,
-                &TIME,
-                &CASE,
-                &FIELD,
-                &LESSON,
-                &COURSE,
-                &CARD,
-                &STEP,
-                &MISTAKE,
-                &ANSWER,
-                &LINE,
-                &THING,
-                &CHANGE,
-                &ROW,
-                &POINT,
-                &STUDY_DAY,
-                &CREDIT_HOUR,
-                &CALC,
+                &SECOND, &MINUTE, &HOUR, &DAY, &MONTH, &QUESTION, &LECTURE, &TOPIC, &ITEM, &REVIEW,
+                &NEW_THING, &TIME, &CASE, &FIELD, &LESSON, &COURSE, &CARD, &STEP, &MISTAKE, &ANSWER, &LINE,
+                &THING, &CHANGE, &ROW, &POINT, &STUDY_DAY, &PAGE, &CALC,
             ] {
                 assert_eq!(count(1, noun), noun.one);
                 assert_eq!(count(2, noun), noun.two);
@@ -415,14 +374,14 @@ pub mod study_settings {
 }
 
 pub mod study {
-    pub const ELSEWHERE_ALL: &str = "اعرض كل المقررات";
+    pub const ELSEWHERE_ALL: &str = "اعرض كل المواد";
 
     pub fn due_elsewhere(n: usize) -> String {
         match n {
-            1 => "فيه كارت واحد مستحق في مقرر تاني.".to_string(),
-            2 => "فيه كارتين مستحقين في مقررات تانية.".to_string(),
-            3..=10 => format!("فيه {n} كروت مستحقة في مقررات تانية."),
-            _ => format!("فيه {n} كارت مستحق في مقررات تانية."),
+            1 => "فيه كارت واحد مستحق في مادة تانية.".to_string(),
+            2 => "فيه كارتين مستحقين في مواد تانية.".to_string(),
+            3..=10 => format!("فيه {n} كروت مستحقة في مواد تانية."),
+            _ => format!("فيه {n} كارت مستحق في مواد تانية."),
         }
     }
     pub const TITLE: &str = "جلسة مذاكرة";
@@ -962,7 +921,6 @@ pub mod case {
     pub const SAVE_FAILED: &str = "ما عرفتش أحفظ الإجابة. إجابتك لسه موجودة؛ جرّب تاني قبل ما تقفل.";
     pub const TAB_CASES: &str = "حالات إكلينيكية";
     pub const TAB_CALC_ITEMS: &str = "تمارين بالأرقام";
-    pub const TAB_CALCULATORS: &str = "الحاسبات";
     pub const EMPTY: &str = "لسه مفيش حالات. هتظهر هنا أول ما محاضراتها تتكتب، ولحد ده الحاسبات شغالة.";
     pub const EMPTY_CALC: &str = "لسه مفيش تمارين بالأرقام. هتظهر هنا مع المحاضرات، ولحد ده جرّب الحاسبات.";
     pub const STEP: &str = "خطوة";
@@ -1362,7 +1320,7 @@ pub mod own {
     pub const NO_LECTURE: &str = "من غير محاضرة";
     pub const PAGE: &str = "صفحة الكتاب";
     pub const SOURCE: &str = "منين";
-    pub const SOURCE_HINT: &str = "مثلاً: محاضرة د. فلان، أو اسم الموقع";
+    pub const SOURCE_HINT: &str = "مثلاً: Pathoma أو UWorld أو اسم الموقع";
     pub const SAVE: &str = "احفظ";
     pub const CANCEL: &str = "إلغاء";
     pub const FAILED: &str = "ما عرفتش أحفظ الكارت:";
@@ -2070,8 +2028,8 @@ pub mod learn {
     pub const LECTURE_PAGE: &str = "صفحة المحاضرة";
     pub const OTHER_LECTURES: &str = "محاضرات تانية";
     pub const COURSE_NO_LESSONS: &str =
-        "دروس المقرر ده لسه بتتكتب. محاضراته تحت، وكل واحدة بتفتح صفحتها بالكروت وصفحات الكتاب.";
-    pub const SEARCH_ALL_COURSES: &str = "دوّر في كل المقررات";
+        "دروس المادة دي لسه بتتكتب. محاضراتها تحت، وكل واحدة بتفتح صفحتها بالكروت وصفحات الكتاب.";
+    pub const SEARCH_ALL_COURSES: &str = "دوّر في كل المواد";
     pub const SHOW_LECTURE: &str = "اعرض دروس المحاضرة دي";
     pub const STATE_CURRENT: &str = "كمّل";
     pub const STATE_NEXT: &str = "الجاي";
@@ -2110,28 +2068,30 @@ pub mod views {
 }
 
 pub mod courses {
-    pub const TITLE: &str = "المقررات";
-    pub const ACTIVE: &str = "الترم ده";
-    pub const MAINTENANCE: &str = "صيانة";
-    pub const ARCHIVED: &str = "أرشيف";
-    pub const LATER: &str = "لسه";
-    pub const ACTIVE_HINT: &str = "اللي بتذاكره دلوقتي.";
-    pub const MAINTENANCE_HINT: &str = "خلص امتحانه. مراجعات خفيفة عشان يفضل حاضر لامتحان آخر الماستر.";
-    pub const ARCHIVED_HINT: &str = "مستخبي من اليوم، بس موجود في المراجع وفي ملف Anki.";
-    pub const LATER_HINT: &str = "ترم جاي. أول ما كتابه يوصل، المحاضرات بتاعته تظهر هنا.";
+    pub const TITLE: &str = "المواد";
+    pub const ACTIVE: &str = "بذاكرها";
+    pub const MAINTENANCE: &str = "مراجعة خفيفة";
+    pub const ARCHIVED: &str = "مستخبية";
+    pub const LATER: &str = "بعدين";
+    pub const ACTIVE_HINT: &str = "بتظهر في اليوم والمراجعة والخطة.";
+    pub const MAINTENANCE_HINT: &str = "خلصت قرايتها. مراجعات خفيفة بس عشان تفضل حاضرة ليوم الامتحان.";
+    pub const ARCHIVED_HINT: &str = "مستخبية من اليوم، بس موجودة في المراجع وفي ملف Anki.";
+    pub const LATER_HINT: &str = "لسه ما بدأتهاش. محاضراتها موجودة أول ما تحب تبدأ.";
     pub const G_GENERAL: &str = "General Principles";
     pub const G_SYSTEMS: &str = "Organ Systems";
-    pub const STATUS: &str = "المقرر ده فين؟";
+    pub const G_GENERAL_HINT: &str = "Section II في الكتاب: الأساسيات اللي بتتسأل جوه كل جهاز.";
+    pub const G_SYSTEMS_HINT: &str = "Section III: كل جهاز لوحده، من الـ anatomy للـ pharmacology.";
+    pub const STATUS: &str = "حالة المادة";
     pub const OPEN_LECTURES: &str = "افتح المحاضرات";
-    pub const NO_CONTENT: &str = "لسه مفيش محاضرات. هتنزل لما المنهج يوصل.";
-    pub const ALL: &str = "كل المقررات";
+    pub const NO_CONTENT: &str = "لسه مفيش محاضرات للمادة دي.";
+    pub const ALL: &str = "كل المواد";
     pub const PICK_TITLE: &str = "تذاكر إيه دلوقتي؟";
-    pub const MAP_LINK: &str = "خريطة المقررات والساعات";
+    pub const MAP_LINK: &str = "خريطة المواد وتقدّمك";
 
     pub fn chip_label(name: &str) -> String {
-        format!("المقرر المعروض: {name}. دوس عشان تبدّل")
+        format!("المادة المعروضة: {name}. دوس عشان تبدّل")
     }
-    use super::count::{CARD, COURSE, CREDIT_HOUR, HOUR, LECTURE, LESSON, count, count_text};
+    use super::count::{CARD, COURSE, LECTURE, LESSON, PAGE, count};
 
     pub fn all_sub(courses: usize) -> String {
         format!("{} مع بعض", count(courses, &COURSE))
@@ -2144,22 +2104,21 @@ pub mod courses {
         format!("{}، الدروس جاية", count(n, &LECTURE))
     }
 
-    /// "42 ساعة معتمدة في 9 مقررات".
-    pub fn hours_line(total: &str, courses: usize) -> String {
-        format!("{} في {}", count_text(total, &CREDIT_HOUR), count(courses, &COURSE))
+    /// "614 صفحة من First Aid في 16 مادة".
+    pub fn pages_line(pages: u32, courses: usize) -> String {
+        format!("{} من First Aid في {}", count(pages, &PAGE), count(courses, &COURSE))
     }
-    pub fn hours_done(h: &str) -> String {
-        format!("{} خلصت امتحانها", count_text(h, &HOUR))
+    /// "بدأت 12 من 40 كارت".
+    pub fn started(seen: usize, total: usize) -> String {
+        format!("بدأت {seen} من {}", count(total, &CARD))
     }
-    /// "7 ساعات بتذاكرها الترم ده".
-    pub fn hours_now(h: &str) -> String {
-        format!("{} بتذاكرها الترم ده", count_text(h, &HOUR))
+    /// The tile's foot: "قلب · ص 284–328".
+    pub fn tile_line(short: &str, from: u32, to: u32) -> String {
+        format!("{short} · ص {from}–{to}")
     }
-    pub fn tile_line(short: &str, hours: &str) -> String {
-        format!("{short} · {hours} س")
-    }
-    pub fn semester(n: u32) -> String {
-        format!("ترم {n}")
+    /// "First Aid ص 284–328 (45 صفحة)".
+    pub fn book_pages(from: u32, to: u32, pages: u32) -> String {
+        format!("First Aid ص {from}–{to} ({})", count(pages, &PAGE))
     }
     pub fn content_line(written: usize, lectures: usize, items: usize, lessons: usize) -> String {
         format!(
@@ -2179,17 +2138,16 @@ pub mod courses {
 mod grammar_tests {
     use super::*;
 
-    /// Mohamed's screenshot read "7 ساعة بتذاكرها" (2026-11-02).
     #[test]
     fn course_map_lines_agree() {
-        assert_eq!(courses::hours_now("7"), "7 ساعات بتذاكرها الترم ده");
-        assert_eq!(courses::hours_now("2"), "ساعتين بتذاكرها الترم ده");
-        assert_eq!(courses::hours_now("12"), "12 ساعة بتذاكرها الترم ده");
-        assert_eq!(courses::hours_done("0"), "0 ساعة خلصت امتحانها");
-        assert_eq!(courses::hours_line("42", 9), "42 ساعة معتمدة في 9 مقررات");
-        assert_eq!(courses::hours_line("6", 2), "6 ساعات معتمدة في مقررين");
-        assert_eq!(courses::all_sub(9), "9 مقررات مع بعض");
-        assert_eq!(courses::all_sub(12), "12 مقرر مع بعض");
+        assert_eq!(courses::pages_line(614, 16), "614 صفحة من First Aid في 16 مادة");
+        assert_eq!(courses::pages_line(2, 2), "صفحتين من First Aid في مادتين");
+        assert_eq!(courses::started(12, 40), "بدأت 12 من 40 كارت");
+        assert_eq!(courses::started(0, 5), "بدأت 0 من 5 كروت");
+        assert_eq!(courses::tile_line("قلب", 284, 328), "قلب · ص 284–328");
+        assert_eq!(courses::book_pages(284, 328, 45), "First Aid ص 284–328 (45 صفحة)");
+        assert_eq!(courses::all_sub(9), "9 مواد مع بعض");
+        assert_eq!(courses::all_sub(12), "12 مادة مع بعض");
         assert_eq!(courses::lessons_done(3, 7), "3 من 7 دروس");
         assert_eq!(courses::lessons_done(3, 30), "3 من 30 درس");
         assert_eq!(courses::lectures_only(5), "5 محاضرات، الدروس جاية");
