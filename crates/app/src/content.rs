@@ -21,9 +21,9 @@ pub const GLOSSARY_PARTS: &[&str] = embedded::GLOSSARY_PARTS;
 
 pub struct Library {
     pub index: Index,
-    /// Written lectures, by id (`hb.L01`).
+    /// Written lectures, by id (`cvs.L04`).
     pub lectures: BTreeMap<String, Lecture>,
-    /// Lesson files, by lecture id (`hb.L01`), in book order.
+    /// Lesson files, by lecture id (`cvs.L04`), in book order.
     pub lessons: BTreeMap<String, LessonFile>,
     /// First Aid's disciplines and systems as courses (`content/program.yaml`).
     pub program: Program,
@@ -135,7 +135,7 @@ impl<T: Send + Sync + 'static> Derived<T> {
     }
 }
 
-/// `hb.L03` → `3`: a lecture's number inside its course. Screens show it
+/// `cvs.L03` → `3`: a lecture's number inside its course. Screens show it
 /// under the course's name, never as a bare code (Mohamed, 2026-10-29: the
 /// course, then the lecture's real title, then its lessons).
 pub fn lecture_no(id: &str) -> String {
@@ -212,10 +212,10 @@ mod tests {
 
     #[test]
     fn lectures_are_named_by_course_number_and_title() {
-        assert_eq!(lecture_no("hb.L01"), "1");
-        assert_eq!(lecture_no("hb.L20"), "20");
-        assert_eq!(lecture_no("res.L03.012"), "3");
-        assert_eq!(lecture_no("res.L03.lesson2#4"), "3");
+        assert_eq!(lecture_no("cvs.L04"), "4");
+        assert_eq!(lecture_no("cvs.L20"), "20");
+        assert_eq!(lecture_no("phs.L03.012"), "3");
+        assert_eq!(lecture_no("phs.L03.lesson2#4"), "3");
         let lib = Library::get();
         let first = &lib.index.lectures[0];
         assert_eq!(lib.title(&first.id), first.title);

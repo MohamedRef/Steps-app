@@ -1,6 +1,6 @@
 //! Lessons, `steps.lesson/v1`: the teaching layer on top of the study items.
 //!
-//! One YAML file per lecture (`content/lessons/hb/L01.yaml`) holds a few
+//! One YAML file per lecture (`content/lessons/cvs/L01.yaml`) holds a few
 //! short lessons. A lesson is a list of steps: explanations in Egyptian
 //! Arabic (medical terms stay English), drawn SVG figures, "why?" reveals,
 //! mnemonics, asides (a tip, an exam trap, a joke), and small interactive
@@ -25,7 +25,7 @@ pub const SCHEMA: &str = "steps.lesson/v1";
 #[serde(deny_unknown_fields)]
 pub struct LessonFile {
     pub schema: String,
-    /// `hb.L01`, the lecture these lessons teach.
+    /// `cvs.L04`, the lecture these lessons teach.
     pub lecture: String,
     pub lessons: Vec<Lesson>,
 }
@@ -33,7 +33,7 @@ pub struct LessonFile {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Lesson {
-    /// `hb.L01.lesson1`. Never reused or renumbered.
+    /// `cvs.L04.lesson1`. Never reused or renumbered.
     pub id: String,
     /// Egyptian Arabic.
     pub title: String,
@@ -484,7 +484,7 @@ pub fn spans(line: &str) -> Vec<Span> {
 }
 
 /// Runs of Latin and non-Latin text. Spaces, digits and punctuation between
-/// two Latin words stay in the Latin run ("Child-Pugh class C"), so a term
+/// two Latin words stay in the Latin run ("Stanford type A"), so a term
 /// is isolated whole; elsewhere they go with the Arabic around them.
 fn script_runs(text: &str) -> Vec<(String, bool)> {
     #[derive(Clone, Copy, PartialEq)]
@@ -507,9 +507,9 @@ fn script_runs(text: &str) -> Vec<(String, bool)> {
     let mut resolved = strong.clone();
     let mixed = strong.contains(&C::Arabic);
     // Each run of neutral chars (spaces, digits, signs) between two strong
-    // chars: between two Latin words it is Latin ("Child-Pugh class C").
+    // chars: between two Latin words it is Latin ("Stanford type A").
     // Right after a Latin word, the numbers, units and closing brackets that
-    // continue it are Latin ("Zone 3", "PaO2 <80", "(MELD)"), but not the
+    // continue it are Latin ("Zone 3", "PaO2 <80", "(LVEF)"), but not the
     // sentence's own punctuation. Right before one, an opening bracket or
     // quote is Latin ("(morphology").
     let mut i = 0;
@@ -1145,7 +1145,7 @@ pub fn svg_problems(svg: &str) -> Vec<String> {
 mod tests {
     #[test]
     fn shown_text_covers_what_the_step_shows_and_svg_words_only() {
-        let svg = r#"<svg viewBox="0 0 10 10"><text x="1" class="t-sm">HVPG &amp; MELD</text></svg>"#;
+        let svg = r#"<svg viewBox="0 0 10 10"><text x="1" class="t-sm">PCWP &amp; LVEF</text></svg>"#;
         let step = Step {
             body: StepBody::Figure {
                 title: Some("Portal pressure".into()),
@@ -1159,7 +1159,7 @@ mod tests {
         };
         let t = step.shown_text();
         assert_eq!(t[0], "Portal pressure");
-        assert!(t[1].contains("HVPG & MELD") && !t[1].contains("viewBox") && !t[1].contains("t-sm"), "{t:?}");
+        assert!(t[1].contains("PCWP & LVEF") && !t[1].contains("viewBox") && !t[1].contains("t-sm"), "{t:?}");
         assert_eq!(t[2], "TIPS lowers it");
         assert!(!t.iter().any(|x| x.contains("not shown")));
     }
@@ -1172,18 +1172,18 @@ mod tests {
 
     #[test]
     fn terms_are_isolated_whole() {
-        assert_eq!(latin_runs("الـ Child-Pugh class C معناها"), ["Child-Pugh class C"]);
+        assert_eq!(latin_runs("الـ Stanford type A معناها"), ["Stanford type A"]);
         assert_eq!(latin_runs("الـ HSCs بتتنشط"), ["HSCs"]);
         assert_eq!(latin_runs("لما PaO2 <80 mmHg يبقى"), ["PaO2 <80 mmHg"]);
         assert_eq!(latin_runs("كله عربي"), Vec::<String>::new());
         assert_eq!(latin_runs("Zone 3"), ["Zone 3"]);
         assert_eq!(latin_runs("الشكل (morphology): كده"), ["(morphology)"]);
         assert_eq!(latin_runs("الـ nodules. وبعدين"), ["nodules"]);
-        assert_eq!(latin_runs("الـ MELD ≥ 21 هنا"), ["MELD ≥ 21"]);
+        assert_eq!(latin_runs("الـ LVEF ≥ 21 هنا"), ["LVEF ≥ 21"]);
         assert_eq!(latin_runs("لازم يتحققوا (all 5 must be fulfilled). تمام"), ["(all 5 must be fulfilled)"]);
         assert_eq!(latin_runs("Low risk (≤ 2%)"), ["Low risk (≤ 2%)"]);
         assert_eq!(latin_runs("Low risk (≤ 2%) يعني"), ["Low risk (≤ 2%)"]);
-        assert_eq!(latin_runs("الـ MELD (يعني"), ["MELD"]);
+        assert_eq!(latin_runs("الـ LVEF (يعني"), ["LVEF"]);
         assert_eq!(latin_runs("طوله حوالي 20 cm تقريبا"), ["20 cm"]);
         assert_eq!(latin_runs("20 cm"), ["20 cm"]);
         assert_eq!(latin_runs("خليه 1.5 ml/kg/h كده"), ["1.5 ml/kg/h"]);

@@ -2,12 +2,12 @@
 //! the fact, and a quote must be that page's own words about it (Mohamed,
 //! 2026-10-29: "the page reference feels random").
 //!
-//! A reference is an item's `src` (`hb.L01.009`) or a lesson step's
-//! `page:`/`quote:` (`hb.L01.lesson4#4`, steps counted from 1).
+//! A reference is an item's `src` (`cvs.L04.009`) or a lesson step's
+//! `page:`/`quote:` (`cvs.L04.lesson4#4`, steps counted from 1).
 //!
 //! The book never goes in git, so the check has two halves:
 //!
-//! - `steps-tools refs [--lecture hb.L01] [--book DIR] [--ocr DIR]… [--checked DIR] [--write]`
+//! - `steps-tools refs [--lecture cvs.L04] [--book DIR] [--ocr DIR]… [--checked DIR] [--write]`
 //!   runs where the book text is (by default /mnt/project-files/steps/courses/<course>/text).
 //!   Every reference carries a quote (Mohamed, 2026-10-29: every chip shows
 //!   the book's line), except a lesson figure showing the book's own figure.
@@ -134,8 +134,6 @@ const STOP: &[&str] = &[
     "patients",
     "patient",
     "disease",
-    "liver",
-    "hepatic",
     "cases",
     "case",
     "include",
@@ -288,7 +286,7 @@ fn page_of(v: &Value) -> Option<u32> {
     v.as_u64().and_then(|p| u32::try_from(p).ok())
 }
 
-/// Every page reference of lecture `num` (`L01`) in `chapter` (`hb`).
+/// Every page reference of lecture `num` (`L01`) in `chapter` (`cvs`).
 pub fn collect(root: &Path, chapter: &str, num: &str) -> Result<Vec<Ref>, String> {
     let mut out = Vec::new();
     let items = root.join("content").join(chapter).join(format!("{num}.yaml"));
@@ -557,11 +555,11 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
             continue;
         }
         // Slide text already holds the OCR of image-only slides.
-        let ocr: &[PathBuf] = if chapter == "hb" { &ocr } else { &[] };
+        let ocr: &[PathBuf] = if chapter == "cvs" { &ocr } else { &[] };
         let pages = book_pages(&source_dir(book_flag, chapter), ocr, num).map_err(|e| vec![e])?;
         let checked_dir = match checked_flag {
             Some(dir) => PathBuf::from(dir),
-            None if chapter == "hb" => PathBuf::from(CHECKED),
+            None if chapter == "cvs" => PathBuf::from(CHECKED),
             None => Path::new(COURSES).join(chapter).join("verdicts"),
         };
         let page_terms: BTreeMap<u32, BTreeSet<String>> = pages.iter().map(|(p, t)| (*p, terms(t))).collect();
@@ -682,77 +680,75 @@ mod tests {
 
     #[test]
     fn squash_ignores_case_punctuation_and_glued_words() {
-        assert_eq!(squash("The precipitating factors include"), squash("The precipitating factorsinclude"));
-        assert_eq!(squash("(28-day) mortality"), "28daymortality");
+        assert_eq!(
+            squash("Equilibration of diastolic pressures"),
+            squash("Equilibration of diastolicpressures")
+        );
+        assert_eq!(squash("(>10 mm Hg) drop"), "10mmhgdrop");
         assert_eq!(quote_hash(None), "-");
         assert_eq!(quote_hash(Some("A b")), quote_hash(Some("a, B")));
-        assert_ne!(quote_hash(Some("zone 1")), quote_hash(Some("zone 3")));
+        assert_ne!(quote_hash(Some("type A")), quote_hash(Some("type B")));
     }
 
     #[test]
     fn o_bullets_do_not_break_a_quote() {
-        let page = "Toxicity:\n    o   Fatigue.\n    o   Fever.\none line";
-        assert!(squash(&drop_o_bullets(page)).contains(&squash("Toxicity:\n  Fatigue.\n  Fever.")));
+        let page = "Findings:\n    o   Hypotension.\n    o   Distant heart sounds.\none line";
+        assert!(
+            squash(&drop_o_bullets(page))
+                .contains(&squash("Findings:\n  Hypotension.\n  Distant heart sounds."))
+        );
         assert!(squash(&drop_o_bullets(page)).contains("oneline"));
     }
 
     #[test]
     fn terms_keep_numbers_and_drop_common_words() {
-        let t = terms("In the liver, APRI > 1.5 means severe fibrosis (zone 3)");
-        assert!(t.contains("apri") && t.contains("1.5") && t.contains("fibrosis") && t.contains("3"));
-        assert!(!t.contains("the") && !t.contains("liver") && !t.contains("in"));
+        let t = terms("In the patients, pulsus paradoxus is a fall > 10 mm Hg (type A)");
+        assert!(t.contains("pulsus") && t.contains("10") && t.contains("paradoxus"));
+        assert!(!t.contains("the") && !t.contains("patients") && !t.contains("in"));
     }
 
     fn r(quote: &str, text: &str) -> Ref {
-        Ref { id: "x".into(), page: 3, quote: Some(quote.into()), text: text.into(), book_figure: false }
+        Ref { id: "x".into(), page: 305, quote: Some(quote.into()), text: text.into(), book_figure: false }
     }
 
     #[test]
     fn a_quote_about_another_fact_does_not_relate() {
-        // Mohamed's screenshot: the zones sort step showing the HSC line.
-        let zones =
-            "Viral hepatitis and hemochromatosis: zone 1. Alcoholism and right heart failure: zone 3.";
-        assert!(!quote_relates(&r(
-            "HSCs become activated, transform into myofibroblasts, and start depositing collagen",
-            zones
-        )));
-        assert!(quote_relates(&r(
-            "in alcoholism and right heart failure, fibrosis is predominantly in zone 3",
-            zones
-        )));
-        assert!(quote_relates(&r("accelerated starvation", "a state of accelerated starvation")));
-        assert!(quote_relates(&r(
-            "do not necessarily preclude transplantation",
-            "مش بيقفلوا الباب للـ transplant"
-        )));
+        let stanford =
+            "Stanford type A: ascending aorta, surgery. Stanford type B: descending only, beta-blockers.";
+        assert!(!quote_relates(&r("Hypertension is the strongest risk factor for dissection", stanford)));
+        assert!(quote_relates(&r("type A involves the ascending aorta; treatment is surgery", stanford)));
+        assert!(quote_relates(&r("diastolic RV collapse", "the echo shows diastolic RV collapse")));
+        assert!(quote_relates(&r("treated with surgery", "النوع A علاجه surgery")));
     }
 
     #[test]
     fn the_lock_catches_changed_pages_and_quotes() {
         let dir = tempfile::tempdir().unwrap();
         let root = dir.path();
-        std::fs::create_dir_all(root.join("content/hb")).unwrap();
-        std::fs::create_dir_all(root.join(LOCKS).join("hb")).unwrap();
+        std::fs::create_dir_all(root.join("content/cvs")).unwrap();
+        std::fs::create_dir_all(root.join(LOCKS).join("cvs")).unwrap();
         let item = |page: u32, quote: &str| {
             format!(
-                "items:\n  - id: hb.L01.001\n    kind: card\n    front: Where is fibrosis in right heart failure?\n    back: Zone 3.\n    src: {{ page: {page}, quote: \"{quote}\" }}\n"
+                "items:\n  - id: cvs.L04.001\n    kind: card\n    front: Which part of the aorta does Stanford type A involve?\n    back: The ascending aorta.\n    src: {{ page: {page}, quote: \"{quote}\" }}\n"
             )
         };
-        let quote = "right heart failure, fibrosis is predominantly in zone 3";
-        std::fs::write(root.join("content/hb/L01.yaml"), item(3, quote)).unwrap();
-        let lecture = vec!["hb.L01".to_string()];
+        let quote = "involves Ascending aorta";
+        std::fs::write(root.join("content/cvs/L04.yaml"), item(305, quote)).unwrap();
+        let lecture = vec!["cvs.L04".to_string()];
         std::fs::write(
-            root.join(LOCKS).join("hb").join("L01.tsv"),
-            format!("# header\nhb.L01.001\t3\t{}\tquote\t\n", quote_hash(Some(quote))),
+            root.join(LOCKS).join("cvs").join("L04.tsv"),
+            format!("# header\ncvs.L04.001\t305\t{}\tquote\t\n", quote_hash(Some(quote))),
         )
         .unwrap();
-        assert!(check_locks(root, &lecture).is_empty());
-
-        std::fs::write(root.join("content/hb/L01.yaml"), item(4, quote)).unwrap();
         let p = check_locks(root, &lecture);
-        assert!(p.iter().any(|p| p.contains("now cites p4, checked at p3")), "{p:#?}");
+        assert!(p.is_empty(), "{p:#?}");
 
-        std::fs::write(root.join("content/hb/L01.yaml"), item(3, "right heart failure in zone 1")).unwrap();
+        std::fs::write(root.join("content/cvs/L04.yaml"), item(306, quote)).unwrap();
+        let p = check_locks(root, &lecture);
+        assert!(p.iter().any(|p| p.contains("now cites p306, checked at p305")), "{p:#?}");
+
+        std::fs::write(root.join("content/cvs/L04.yaml"), item(305, "involves only descending aorta"))
+            .unwrap();
         let p = check_locks(root, &lecture);
         assert!(p.iter().any(|p| p.contains("quote changed")), "{p:#?}");
     }
@@ -762,22 +758,22 @@ mod tests {
         let dir = tempfile::tempdir().unwrap();
         let root = dir.path();
         let book = root.join("book");
-        std::fs::create_dir_all(root.join("content/hb")).unwrap();
+        std::fs::create_dir_all(root.join("content/cvs")).unwrap();
         std::fs::create_dir_all(&book).unwrap();
         std::fs::write(
             root.join("content/index.yaml"),
-            "schema: steps.content/v1\nlectures:\n  - { id: hb.L01, title: Liver Cirrhosis, pages: [1, 2], chunk: 10 }\n",
+            "schema: steps.content/v1\nlectures:\n  - { id: cvs.L04, title: Pathology, pages: [317, 319], chunk: 6 }\n",
         )
         .unwrap();
         std::fs::write(
-            book.join("L01.txt"),
-            "=== book page 1 (PDF page 5) ===\nStellate cells store vitamin A in the space of Disse.\n\
-             === book page 2 (PDF page 6) ===\nIn alcoholism and right heart failure,\nfibrosis is predominantly in zone 3.\n",
+            book.join("L04.txt"),
+            "=== book page 317 (PDF page 339) ===\nBeck triad (hypotension, distended neck veins, distant heart sounds).\n\
+             === book page 319 (PDF page 341) ===\nRheumatic heart disease affects heart valves,\nmitral > aortic >> tricuspid.\n",
         )
         .unwrap();
         let yaml = |page: u32, quote: &str| {
             format!(
-                "items:\n  - id: hb.L01.001\n    kind: card\n    front: Where does fibrosis start in alcoholism and right heart failure?\n    back: Zone 3.\n    src: {{ page: {page}{quote} }}\n  - id: hb.L01.002\n    kind: card\n    front: What do stellate cells store?\n    back: Vitamin A.\n    src: {{ page: 1, quote: \"store vitamin A in the space of Disse\" }}\n"
+                "items:\n  - id: cvs.L04.001\n    kind: card\n    front: Which valve does rheumatic heart disease affect most?\n    back: Mitral.\n    src: {{ page: {page}{quote} }}\n  - id: cvs.L04.002\n    kind: card\n    front: What is Beck triad?\n    back: Hypotension, distended neck veins, distant heart sounds.\n    src: {{ page: 317, quote: \"hypotension, distended neck veins, distant heart sounds\" }}\n"
             )
         };
         let args = |extra: &[&str]| {
@@ -789,42 +785,42 @@ mod tests {
             a.extend(extra.iter().map(|s| s.to_string()));
             a
         };
-        let zone3 = ", quote: \"fibrosis is predominantly in zone 3\"";
-        std::fs::write(root.join("content/hb/L01.yaml"), yaml(2, "")).unwrap();
+        let mitral = ", quote: \"mitral > aortic >> tricuspid\"";
+        std::fs::write(root.join("content/cvs/L04.yaml"), yaml(319, "")).unwrap();
         let p = run(root, &args(&["--write"])).unwrap_err();
-        assert!(p.iter().any(|p| p.contains("hb.L01.001: has no quote")), "{p:#?}");
-        assert!(!root.join(LOCKS).join("hb").join("L01.tsv").exists());
+        assert!(p.iter().any(|p| p.contains("cvs.L04.001: has no quote")), "{p:#?}");
+        assert!(!root.join(LOCKS).join("cvs").join("L04.tsv").exists());
 
-        std::fs::write(root.join("content/hb/L01.yaml"), yaml(1, zone3)).unwrap();
+        std::fs::write(root.join("content/cvs/L04.yaml"), yaml(317, mitral)).unwrap();
         let p = run(root, &args(&["--write"])).unwrap_err();
-        assert!(p.iter().any(|p| p.contains("hb.L01.001: quote is not on p1 (p2)")), "{p:#?}");
+        assert!(p.iter().any(|p| p.contains("cvs.L04.001: quote is not on p317 (p319)")), "{p:#?}");
 
-        std::fs::write(root.join("content/hb/L01.yaml"), yaml(2, zone3)).unwrap();
+        std::fs::write(root.join("content/cvs/L04.yaml"), yaml(319, mitral)).unwrap();
         run(root, &args(&["--write"])).unwrap();
-        let lock = read_lock(&root.join(LOCKS).join("hb").join("L01.tsv")).unwrap();
-        assert_eq!(lock["hb.L01.001"].basis, "quote");
-        assert_eq!(lock["hb.L01.002"].basis, "quote");
-        assert!(check_locks(root, &["hb.L01".into()]).is_empty());
+        let lock = read_lock(&root.join(LOCKS).join("cvs").join("L04.tsv")).unwrap();
+        assert_eq!(lock["cvs.L04.001"].basis, "quote");
+        assert_eq!(lock["cvs.L04.002"].basis, "quote");
+        assert!(check_locks(root, &["cvs.L04".into()]).is_empty());
     }
 
     #[test]
-    fn other_courses_keep_their_own_slides_and_locks() {
+    fn every_course_keeps_its_own_text_and_locks() {
         let root = Path::new("/r");
         assert_eq!(lock_dir(root, "cvs"), Path::new("/r/content/book-refs/cvs"));
-        assert_eq!(lock_dir(root, "res"), Path::new("/r/content/book-refs/res"));
+        assert_eq!(lock_dir(root, "phs"), Path::new("/r/content/book-refs/phs"));
         assert_eq!(source_dir(None, "cvs"), Path::new(COURSES).join("cvs/text"));
-        assert_eq!(source_dir(None, "res"), Path::new(COURSES).join("res/text"));
-        assert_eq!(source_dir(Some("/x"), "res"), Path::new("/x"));
+        assert_eq!(source_dir(None, "phs"), Path::new(COURSES).join("phs/text"));
+        assert_eq!(source_dir(Some("/x"), "phs"), Path::new("/x"));
 
         let dir = tempfile::tempdir().unwrap();
         std::fs::write(
             dir.path().join("L02.txt"),
-            "=== slide 1 ===\nEpidemiology\n\u{c}=== slide 2 ===\nIncidence rate\n",
+            "=== book page 287 ===\nHeart anatomy\n\u{c}=== book page 288 ===\nCardiac output\n",
         )
         .unwrap();
         let pages = book_pages(dir.path(), &[], "L02").unwrap();
         assert_eq!(pages.len(), 2);
-        assert!(pages[&2].contains("Incidence rate"));
-        assert!(!pages[&1].contains("slide 2"));
+        assert!(pages[&288].contains("Cardiac output"));
+        assert!(!pages[&287].contains("book page 288"));
     }
 }

@@ -355,12 +355,12 @@ mod tests {
         assert_eq!(answer, 2);
 
         let card = item("card");
-        let edit = Edit::from([("back".into(), FieldValue::Text("Fibrosis + nodules".into()))]);
+        let edit = Edit::from([("back".into(), FieldValue::Text("Mitral".into()))]);
         assert_eq!(
             apply_edit(&card.body, &edit),
             Body::Card {
-                front: "Anatomical definition of cirrhosis?".into(),
-                back: "Fibrosis + nodules".into()
+                front: "Which valve does rheumatic heart disease affect most often?".into(),
+                back: "Mitral".into()
             }
         );
         // Wrong shapes are ignored rather than breaking the item.
@@ -390,10 +390,10 @@ mod tests {
         e.note = Some("too long".into());
         e.at_ms = 1_793_610_000_000;
         let w = Judgement { at_ms: 1_793_610_000_000, ..judged(&card, Verdict::Wrong, Edit::new()) };
-        let v = Verdicts::from_judgements([("hb.L01.005", &e), ("hb.L01.004", &w)], 1_793_613_600_000);
+        let v = Verdicts::from_judgements([("cvs.L04.005", &e), ("cvs.L04.004", &w)], 1_793_613_600_000);
         let yaml = serde_yaml_ng::to_string(&v).unwrap();
         assert!(yaml.starts_with("schema: steps.verdicts/v1\nexported: 2026-11-02T10:00:00Z\n"), "{yaml}");
-        assert!(yaml.contains("- id: hb.L01.004\n  verdict: wrong\n  at: 2026-11-02T09:00:00Z\n"), "{yaml}");
+        assert!(yaml.contains("- id: cvs.L04.004\n  verdict: wrong\n  at: 2026-11-02T09:00:00Z\n"), "{yaml}");
         assert!(yaml.contains("edit:\n    back: new"), "{yaml}");
         let back: Verdicts = serde_yaml_ng::from_str(&yaml).unwrap();
         assert_eq!(back, v);

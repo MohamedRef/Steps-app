@@ -26,7 +26,7 @@ pub struct Glossary {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Entry {
-    /// The word as written in the content: `SAAG`, `terlipressin`.
+    /// The word as written in the content: `PDA`, `nitroprusside`.
     pub term: String,
     /// Other spellings that show the same entry (`TIPSS`, `UDCA`).
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
@@ -107,7 +107,7 @@ impl Glossary {
 }
 
 /// A spelling that reads as an abbreviation: two or more capital letters
-/// (`HE`, `NITs`, `HBsAg`, `FIB-4`), unlike `terlipressin` or `Child`.
+/// (`MI`, `ARBs`, `HbA1c`, `CHA2DS2-VASc`), unlike `nitroprusside` or `Beck`.
 pub fn looks_like_abbr(word: &str) -> bool {
     word.chars().filter(char::is_ascii_uppercase).count() >= 2
 }
@@ -263,9 +263,9 @@ mod tests {
         serde_yaml_ng::from_str(
             "schema: steps.glossary/v1
 entries:
-  - { term: HE, kind: abbr, text: Hepatic encephalopathy, status: unverified }
-  - { term: UDCA, aliases: [UDC], kind: drug, text: Ursodeoxycholic acid, status: unverified }
-  - { term: terlipressin, kind: drug, text: Vasopressin analogue, status: unverified }
+  - { term: MI, kind: abbr, text: Myocardial infarction, status: unverified }
+  - { term: NTG, aliases: [GTN], kind: drug, text: Nitroglycerin, status: unverified }
+  - { term: nitroprusside, kind: drug, text: Short-acting arteriolar and venous dilator, status: unverified }
   - { term: XYZ, kind: abbr, text: Wrong, status: rejected }",
         )
         .unwrap()
@@ -274,17 +274,17 @@ entries:
     #[test]
     fn abbreviations_match_exactly() {
         let g = g();
-        assert_eq!(g.find("HE").map(|e| e.text.as_str()), Some("Hepatic encephalopathy"));
-        assert_eq!(g.find("(HE),").map(|e| e.term.as_str()), Some("HE"));
-        assert!(g.find("he").is_none());
+        assert_eq!(g.find("MI").map(|e| e.text.as_str()), Some("Myocardial infarction"));
+        assert_eq!(g.find("(MI),").map(|e| e.term.as_str()), Some("MI"));
+        assert!(g.find("mi").is_none());
     }
 
     #[test]
     fn drugs_ignore_case_and_aliases_work() {
         let g = g();
-        assert_eq!(g.find("Terlipressin").map(|e| e.term.as_str()), Some("terlipressin"));
-        assert_eq!(g.find("UDC").map(|e| e.term.as_str()), Some("UDCA"));
-        assert_eq!(g.find("udca").map(|e| e.term.as_str()), Some("UDCA"));
+        assert_eq!(g.find("Nitroprusside").map(|e| e.term.as_str()), Some("nitroprusside"));
+        assert_eq!(g.find("GTN").map(|e| e.term.as_str()), Some("NTG"));
+        assert_eq!(g.find("ntg").map(|e| e.term.as_str()), Some("NTG"));
     }
 
     #[test]
@@ -295,24 +295,36 @@ entries:
     #[test]
     fn peek_table_matches_find() {
         let t = g().peek_table();
-        assert_eq!(t["exact"]["HE"][0], "Hepatic encephalopathy");
-        assert_eq!(t["exact"]["HE"][1], false);
-        assert!(t["lower"].get("he").is_none());
-        assert_eq!(t["lower"]["udc"][0], "Ursodeoxycholic acid");
+        assert_eq!(t["exact"]["MI"][0], "Myocardial infarction");
+        assert_eq!(t["exact"]["MI"][1], false);
+        assert!(t["lower"].get("mi").is_none());
+        assert_eq!(t["lower"]["gtn"][0], "Nitroglycerin");
         assert!(t["exact"].get("XYZ").is_none());
+    }
+
+    #[test]
+    fn a_course_file_adds_its_terms() {
+        let mut base = g();
+        let part: Glossary = serde_yaml_ng::from_str(
+            "schema: steps.glossary/v1\nentries:\n  - { term: PDA, kind: abbr, text: Patent ductus arteriosus, status: unverified }\nplain: [J♥NES]",
+        )
+        .unwrap();
+        base.absorb(part);
+        assert_eq!(base.find("PDA").map(|e| e.text.as_str()), Some("Patent ductus arteriosus"));
+        assert_eq!(base.plain, ["J♥NES"]);
     }
 
     fn lesson_glossary() -> Glossary {
         serde_yaml_ng::from_str(
             "schema: steps.glossary/v1
 entries:
-  - { term: HRS, kind: abbr, text: Hepatorenal syndrome, status: unverified }
-  - { term: AKI, kind: abbr, text: Acute kidney injury, status: unverified }
-  - { term: HRS-AKI, kind: abbr, text: HRS type AKI, status: unverified }
-  - { term: PPI, kind: abbr, text: Proton pump inhibitor, status: unverified }
-  - { term: SLE, kind: abbr, text: Lupus, status: unverified }
-  - { term: UDCA, kind: drug, text: Ursodeoxycholic acid, status: unverified }
-  - { term: terlipressin, kind: drug, text: Vasopressin analogue, status: unverified }
+  - { term: NSTE, kind: abbr, text: Non-ST-elevation, status: unverified }
+  - { term: ACS, kind: abbr, text: Acute coronary syndrome, status: unverified }
+  - { term: NSTE-ACS, kind: abbr, text: Non-ST-elevation acute coronary syndrome, status: unverified }
+  - { term: ARB, kind: abbr, text: Angiotensin II receptor blocker, status: unverified }
+  - { term: SLE, kind: abbr, text: Systemic lupus erythematosus, status: unverified }
+  - { term: NTG, kind: drug, text: Nitroglycerin, status: unverified }
+  - { term: nitroprusside, kind: drug, text: Arteriolar and venous dilator, status: unverified }
 plain: [NOT]",
         )
         .unwrap()
@@ -325,19 +337,23 @@ plain: [NOT]",
     #[test]
     fn abbreviations_in_a_step_come_once_in_order_longest_first() {
         let g = lesson_glossary();
-        let found = g.abbreviations_in(&["Give terlipressin for HRS-AKI, then UDCA.", "AKI and PPIs, وSLE."]);
-        // HRS-AKI swallows HRS and AKI in the first text; AKI shows from the second.
-        assert_eq!(terms(&found), ["HRS-AKI", "UDCA", "AKI", "PPI", "SLE"]);
+        let found =
+            g.abbreviations_in(&["Give nitroprusside for NSTE-ACS, then NTG.", "ACS and ARBs, وSLE."]);
+        // NSTE-ACS swallows NSTE and ACS in the first text; ACS shows from the second.
+        assert_eq!(terms(&found), ["NSTE-ACS", "NTG", "ACS", "ARB", "SLE"]);
         // Drug names written in lower case are not abbreviations.
-        assert!(!terms(&found).contains(&"terlipressin"));
+        assert!(!terms(&found).contains(&"nitroprusside"));
         // Inside a longer word, nothing matches.
-        assert!(g.abbreviations_in(&["HRSX PPIX"]).is_empty());
+        assert!(g.abbreviations_in(&["NSTEX ARBX"]).is_empty());
     }
 
     #[test]
     fn unknown_capitals_are_reported_but_plain_words_are_not() {
         let g = lesson_glossary();
-        assert_eq!(g.unknown_in("Do NOT stop the PPI in ACLF or HRS-AKI; FIB-4 is low."), ["ACLF", "FIB"]);
-        assert!(g.unknown_in("Child-Pugh and mmHg are fine, وSLE too.").is_empty());
+        assert_eq!(
+            g.unknown_in("Do NOT stop the ARB in HCM or NSTE-ACS; TIMI-3 flow is back."),
+            ["HCM", "TIMI"]
+        );
+        assert!(g.unknown_in("Wolff-Parkinson-White and mmHg are fine, وSLE too.").is_empty());
     }
 }

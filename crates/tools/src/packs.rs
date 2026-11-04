@@ -118,15 +118,15 @@ mod tests {
     #[test]
     fn a_broken_lecture_fails_the_check() {
         let dir = tempfile::tempdir().unwrap();
-        std::fs::create_dir_all(dir.path().join("content/hb")).unwrap();
+        std::fs::create_dir_all(dir.path().join("content/cvs")).unwrap();
         std::fs::write(
             dir.path().join("content/index.yaml"),
-            "schema: steps.content/v1\nlectures:\n  - { id: hb.L01, title: Liver Cirrhosis, pages: [1, 22], chunk: 10 }\n",
+            "schema: steps.content/v1\nlectures:\n  - { id: cvs.L04, title: Pathology, pages: [300, 320], chunk: 6 }\n",
         )
         .unwrap();
-        std::fs::write(dir.path().join("content/hb/L01.yaml"), "schema: steps.content/v1\nlecture: [")
+        std::fs::write(dir.path().join("content/cvs/L04.yaml"), "schema: steps.content/v1\nlecture: [")
             .unwrap();
         let problems = run(dir.path(), &["build".into(), "--check".into()]).unwrap_err();
-        assert!(problems[0].contains("L01.yaml"), "{problems:?}");
+        assert!(problems[0].contains("L04.yaml"), "{problems:?}");
     }
 }

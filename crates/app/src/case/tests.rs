@@ -46,7 +46,7 @@ fn options_are_shuffled_per_attempt() {
 
 #[test]
 fn a_step_is_selected_then_checked_once() {
-    let mut r = CaseRun::new("hb.L03.050");
+    let mut r = CaseRun::new("cvs.L03.050");
     // Nothing selected: Check does nothing.
     assert!(!r.check(Some(1)));
     r.select(0);
@@ -70,9 +70,9 @@ fn a_step_is_selected_then_checked_once() {
 
 #[test]
 fn record_keeps_the_case_as_one_review() {
-    record(None, "hb.L03.050", 2, 3, now_ms() - 1500).unwrap();
+    record(None, "cvs.L03.050", 2, 3, now_ms() - 1500).unwrap();
     let sink = EVENTS.lock().unwrap();
-    let e = sink.events.iter().find(|e| e.item_id == "hb.L03.050").unwrap();
+    let e = sink.events.iter().find(|e| e.item_id == "cvs.L03.050").unwrap();
     assert_eq!(e.grade, Grade::Hard);
     assert_eq!(e.origin, Origin::Case);
     assert!(e.took_ms >= 1500);
@@ -117,7 +117,7 @@ fn failed_finish_keeps_the_answer_and_success_records_once() {
     let blocked = Rc::new(Cell::new(true));
     let events = Rc::new(RefCell::new(Vec::new()));
     let store = StudyStoreHandle::new(Fallible { blocked: blocked.clone(), events: events.clone() });
-    let mut run = CaseRun::new("hb.L03.050");
+    let mut run = CaseRun::new("cvs.L03.050");
     run.grade_self(true);
     run.next_logged(2, Some(&store)).unwrap();
     assert_eq!(run.step, 1);

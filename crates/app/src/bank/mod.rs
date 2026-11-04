@@ -232,7 +232,7 @@ pub fn lecture_title(lecture: &str) -> String {
     Library::get().lectures.get(lecture).map_or_else(|| lecture.to_string(), |l| l.title.clone())
 }
 
-/// The index's shorter title (`Hepatitis C virus`, not the chapter's full
+/// The index's shorter title (`Pathology`, not the chapter's full
 /// heading), for chips on a phone; falls back to the lecture's own title.
 pub fn short_lecture_title(lecture: &str) -> String {
     Library::get().title(lecture).to_string()
@@ -511,7 +511,7 @@ mod tests {
     #[test]
     fn an_open_paper_round_trips_through_json() {
         let q =
-            Question { id: "x".into(), lecture: "hb.L01".into(), topic: None, answer: 0, order: vec![1, 0] };
+            Question { id: "x".into(), lecture: "cvs.L04".into(), topic: None, answer: 0, order: vec![1, 0] };
         let mut p = Paper::new(Mode::Mock, vec![q.clone(), q]);
         p.answers[1].chosen = Some(0);
         p.answers[0].flagged = true;
@@ -533,7 +533,7 @@ mod tests {
     #[test]
     fn paper_time_adds_up_per_question() {
         let q =
-            Question { id: "x".into(), lecture: "hb.L01".into(), topic: None, answer: 0, order: vec![0, 1] };
+            Question { id: "x".into(), lecture: "cvs.L04".into(), topic: None, answer: 0, order: vec![0, 1] };
         let mut p = Paper::new(Mode::Timed, vec![q.clone(), q]);
         p.shown_ms = 1_000;
         p.leave(4_000);
@@ -546,7 +546,7 @@ mod tests {
     }
 
     fn question(id: &str) -> Question {
-        Question { id: id.into(), lecture: "hb.L01".into(), topic: None, answer: 1, order: vec![0, 1, 2] }
+        Question { id: id.into(), lecture: "cvs.L04".into(), topic: None, answer: 1, order: vec![0, 1, 2] }
     }
 
     #[test]

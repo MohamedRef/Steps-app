@@ -11,7 +11,7 @@
 //! Note types: Steps Basic (Front, Back, Source, Update, Id) and Steps Cloze
 //! (Text, Extra, Source, Update, Id). MCQ, enumerate, essay and order
 //! items become Basic notes; a case becomes one note per step and a table one
-//! note per blank. Tags: `hb::L01`, `topic::<slug>`, `approved` or
+//! note per blank. Tags: `cvs::L01`, `topic::<slug>`, `approved` or
 //! `unverified`, `draft` for unmerged lectures, and the item's own tags.
 
 use std::collections::{BTreeMap, BTreeSet};
@@ -579,13 +579,15 @@ mod tests {
 
     #[test]
     fn ids_match_the_python_exporter() {
-        // Values from genanki.guid_for and make_apkg.py's mid().
+        // Known answers from genanki.guid_for and make_apkg.py's mid(): the
+        // algorithm is fixed, so these strings must never change.
         assert_eq!(guid_for("hb.L01.001"), "kO@wJGlHO&");
         assert_eq!(guid_for("hb.L01.006#s2"), "HxUBC_F~bH");
+        assert_eq!(guid_for("cvs.L04.001"), "Lz#&&A3Z1k");
         assert_eq!(Model::Basic.id(), 1_650_575_226);
         assert_eq!(Model::Cloze.id(), 3_011_687_230);
-        assert_eq!(stable_id("steps-deck-hb.L01"), 2_720_016_684);
-        assert_eq!(deck_name(&fixture(), None), "Steps::L01 Liver Cirrhosis");
+        assert_eq!(stable_id("steps-deck-cvs.L04"), 556_397_074);
+        assert_eq!(deck_name(&fixture(), None), "Steps::L04 Pathology");
         let program: steps_core::program::Program =
             serde_yaml_ng::from_str(include_str!("../../../content/program.yaml")).unwrap();
         let mut cvs = fixture();
@@ -607,18 +609,18 @@ mod tests {
     #[test]
     fn options_shuffle_per_note_and_keep_the_book_order_when_they_must() {
         let s = |xs: &[&str]| xs.iter().map(|x| x.to_string()).collect::<Vec<_>>();
-        let four = s(&["Propranolol", "Carvedilol", "Band ligation", "TIPS"]);
+        let four = s(&["Penicillin", "Aspirin", "Prednisone", "Pericardiocentesis"]);
         // Same id, same order: a re-import doesn't move the options.
-        assert_eq!(option_order("hb.L04.001", &four), option_order("hb.L04.001", &four));
+        assert_eq!(option_order("cvs.L02.001", &four), option_order("cvs.L02.001", &four));
         // Across notes the key lands on every letter, not always A.
         let keys: BTreeSet<usize> = (1..=40)
-            .map(|n| option_order(&format!("hb.L04.{n:03}"), &four).iter().position(|&i| i == 0).unwrap())
+            .map(|n| option_order(&format!("cvs.L02.{n:03}"), &four).iter().position(|&i| i == 0).unwrap())
             .collect();
         assert_eq!(keys.len(), 4, "{keys:?}");
         // "All of the above" and number ladders keep their sense.
-        assert_eq!(option_order("hb.L01.001", &s(&["a", "b", "c", "All of the above"])), [0, 1, 2, 3]);
-        assert_eq!(option_order("hb.L01.001", &s(&["HPS", "PoPH", "Both", "Neither"])), [0, 1, 2, 3]);
-        assert_eq!(option_order("hb.L01.001", &s(&["Above 30", "Above 10", "Above 20"])), [1, 2, 0]);
+        assert_eq!(option_order("cvs.L04.001", &s(&["a", "b", "c", "All of the above"])), [0, 1, 2, 3]);
+        assert_eq!(option_order("cvs.L04.001", &s(&["HCM", "DCM", "Both", "Neither"])), [0, 1, 2, 3]);
+        assert_eq!(option_order("cvs.L04.001", &s(&["Above 30", "Above 10", "Above 20"])), [1, 2, 0]);
     }
 
     #[test]
@@ -635,56 +637,54 @@ mod tests {
     #[test]
     fn every_kind_becomes_notes() {
         let lec = fixture();
-        let approved = BTreeSet::from(["hb.L01.001".to_string()]);
+        let approved = BTreeSet::from(["cvs.L04.001".to_string()]);
         let opts = Options { approved: Some(&approved), ..Options::default() };
         let deck = build(std::slice::from_ref(&lec), &opts);
         // 7 one-note items + 2 case steps + 3 table blanks.
         assert_eq!(deck.notes.len(), 11);
         assert_eq!(deck.card_count(), 13, "the cloze has three blanks");
-        assert_eq!(deck.notes[0].tags, ["hb::L01", "topic::definition", "approved"]);
-        assert_eq!(
-            deck.notes[1].tags,
-            ["hb::L01", "topic::child-pugh", "unverified", "numbers", "high-yield"]
-        );
+        assert_eq!(deck.notes[0].tags, ["cvs::L04", "topic::valves", "approved", "high-yield"]);
+        assert_eq!(deck.notes[1].tags, ["cvs::L04", "topic::shock", "unverified", "high-yield"]);
         // Options are shuffled per note id (#87); the answer and the why lines follow.
         let mcq = &deck.notes[2];
-        assert!(
-            mcq.fields[0]
-                .ends_with("A. Class A<br>B. Cannot be scored without the INR<br>C. Class C<br>D. Class B")
-        );
-        assert!(mcq.fields[1].starts_with(
-            "<b>D</b><br><div class=\"why\"><b>A</b>: Class A needs 5-6 points; he has 8.</div><div class=\"why\"><b>B</b>: The book&#x27;s table"
+        assert!(mcq.fields[0].ends_with(
+            "A. Vegetation on the tricuspid valve<br>B. Diastolic collapse of the right ventricle<br>\
+             C. Asymmetric septal hypertrophy<br>D. Dilated left ventricle with a low ejection fraction<br>\
+             E. Flail mitral leaflet"
         ));
-        let step2 = deck.notes.iter().find(|n| n.fields[4] == "hb.L01.006#s2").unwrap();
-        assert!(step2.fields[0].contains("PaO2 falls by 6 mmHg on standing.<br><br><b>Step 2:</b>"));
-        assert!(
-            step2.fields[0].ends_with(
-                "A. Liver transplantation<br>B. Long-term oxygen alone<br>C. TIPS<br>D. Carvedilol"
-            )
+        assert!(mcq.fields[1].starts_with(
+            "<b>B</b><br><div class=\"why\"><b>A</b>: Tricuspid vegetations suggest endocarditis"
+        ));
+        assert!(mcq.fields[1].contains("<b>B</b>: Tamponade compresses the heart"));
+        let step2 = deck.notes.iter().find(|n| n.fields[4] == "cvs.L04.006#s2").unwrap();
+        assert!(step2.fields[0].contains("CXR: mediastinal widening.<br><br>CT angiography"));
+        assert!(step2.fields[0].contains("<b>Step 2:</b> What is the treatment?"));
+        assert_eq!(
+            step2.fields[1],
+            "<b>D</b> Stanford type A involves the ascending aorta and is treated with surgery."
         );
-        assert_eq!(step2.fields[1], "<b>A</b> LT improves oxygenation at 1 year. TIPS can worsen shunting.");
-        let blank = deck.notes.iter().find(|n| n.fields[4] == "hb.L01.007#r2c1").unwrap();
-        assert_eq!(blank.fields[0], "Child-Pugh points: <b>Bilirubin (mg/dL)</b> → <b>1 point</b>?");
-        assert_eq!(blank.fields[1], "&lt;2");
+        let blank = deck.notes.iter().find(|n| n.fields[4] == "cvs.L04.007#r1c2").unwrap();
+        assert_eq!(blank.fields[0], "Shock hemodynamics: <b>Cardiogenic</b> → <b>PCWP</b>?");
+        assert_eq!(blank.fields[1], "↑");
         let order = deck.notes.last().unwrap();
-        assert_eq!(order.fields[2], "Liver Cirrhosis · Book p. 16");
+        assert_eq!(order.fields[2], "Pathology · Book p. 317");
         assert_eq!(
             deck.decks.iter().map(|d| d.1.as_str()).collect::<Vec<_>>(),
-            ["Steps", "Steps::L01 Liver Cirrhosis"]
+            ["Steps", "Steps::L04 Pathology"]
         );
     }
 
     #[test]
     fn wrong_items_drop_out_and_edits_replace_the_book_text() {
         let lec = fixture();
-        let wrong = BTreeSet::from(["hb.L01.003".to_string()]);
-        let approved = BTreeSet::from(["hb.L01.001".to_string(), "hb.L01.008".to_string()]);
+        let wrong = BTreeSet::from(["cvs.L04.003".to_string()]);
+        let approved = BTreeSet::from(["cvs.L04.001".to_string(), "cvs.L04.008".to_string()]);
         let mut edited = lec.items[0].clone();
         if let Body::Card { back, .. } = &mut edited.body {
-            *back = "Fibrosis plus nodules.".into();
+            *back = "Mitral.".into();
         }
-        let edits = BTreeMap::from([("hb.L01.001".to_string(), edited)]);
-        let drafts = BTreeSet::from(["hb.L01".to_string()]);
+        let edits = BTreeMap::from([("cvs.L04.001".to_string(), edited)]);
+        let drafts = BTreeSet::from(["cvs.L04".to_string()]);
         let opts = Options {
             approved: Some(&approved),
             wrong: Some(&wrong),
@@ -695,10 +695,10 @@ mod tests {
         let deck = build(&[lec], &opts);
         assert_eq!(deck.skipped, 1);
         assert_eq!(deck.notes.len(), 10);
-        assert_eq!(deck.notes[0].fields[1], "Fibrosis plus nodules.");
+        assert_eq!(deck.notes[0].fields[1], "Mitral.");
         assert!(deck.notes[0].tags.contains(&"unverified".to_string()));
-        let order = deck.notes.iter().find(|n| n.fields[4] == "hb.L01.008").unwrap();
-        assert_eq!(order.tags, ["hb::L01", "topic::management", "approved", "draft"]);
+        let order = deck.notes.iter().find(|n| n.fields[4] == "cvs.L04.008").unwrap();
+        assert_eq!(order.tags, ["cvs::L04", "topic::pericardium", "approved", "draft"]);
     }
 
     #[test]
@@ -725,7 +725,7 @@ notes = db.execute("select count(*) from notes").fetchone()[0]
 cards = db.execute("select count(*) from cards").fetchone()[0]
 orphans = db.execute("select count(*) from cards where nid not in (select id from notes)").fetchone()[0]
 models, decks = map(json.loads, db.execute("select models, decks from col").fetchone())
-fields = db.execute("select flds from notes where guid = 'kO@wJGlHO&'").fetchone()[0].split("\x1f")
+fields = db.execute("select flds from notes where guid = 'Lz#&&A3Z1k'").fetchone()[0].split("\x1f")
 names = sorted(d["name"] for d in decks.values())
 print(notes, cards, orphans, sorted(m["name"] for m in models.values()), names, fields[4])
 "#;
@@ -736,14 +736,14 @@ print(notes, cards, orphans, sorted(m["name"] for m in models.values()), names, 
                     eprintln!("python3 not found ({e}); checking with rusqlite only");
                     let db = Connection::open(&db_path).unwrap();
                     let n: i64 = db.query_row("select count(*) from notes", [], |r| r.get(0)).unwrap();
-                    assert_eq!(n, 12);
+                    assert_eq!(n, 11);
                     return;
                 }
             };
         assert!(out.status.success(), "{}", String::from_utf8_lossy(&out.stderr));
         assert_eq!(
             String::from_utf8_lossy(&out.stdout).trim(),
-            "11 13 0 ['Steps Basic', 'Steps Cloze'] ['Default', 'Steps', 'Steps::L01 Liver Cirrhosis'] hb.L01.001"
+            "11 13 0 ['Steps Basic', 'Steps Cloze'] ['Default', 'Steps', 'Steps::L04 Pathology'] cvs.L04.001"
         );
     }
 }

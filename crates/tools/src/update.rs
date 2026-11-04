@@ -430,7 +430,7 @@ mod tests {
     /// and checks the content asset like a device.
     fn sample_pack(tag: &str) -> Vec<u8> {
         let index: steps_core::content::Index = serde_yaml_ng::from_str(&format!(
-            "schema: steps.content/v1\nlectures:\n  - {{ id: hb.L01, title: {tag}, pages: [1, 2], chunk: 1 }}\n"
+            "schema: steps.content/v1\nlectures:\n  - {{ id: cvs.L04, title: {tag}, pages: [1, 2], chunk: 1 }}\n"
         ))
         .unwrap();
         steps_core::pack::Pack::new(index, Vec::new()).encode()

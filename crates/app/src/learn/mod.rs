@@ -28,7 +28,7 @@ use crate::{Screen, Ui};
 pub(crate) const CSS: Css = css!("src/learn/learn.css");
 
 /// The lesson open in the player; set it, then switch to [`Screen::Learn`].
-/// `STEPS_OPEN_LESSON=hb.L01.lesson1` opens one at launch (previews, screenshots).
+/// `STEPS_OPEN_LESSON=cvs.L04.lesson1` opens one at launch (previews, screenshots).
 pub static OPEN: GlobalSignal<Option<String>> = Signal::global(|| std::env::var("STEPS_OPEN_LESSON").ok());
 
 /// Where the open lesson was opened from: closing it goes back there.
@@ -254,7 +254,7 @@ fn left_off<'a>(lessons: impl IntoIterator<Item = &'a Lesson>) -> Option<&'a Les
     latest(lessons.into_iter().filter_map(|l| part_way(&l.id).map(|(_, ms)| (l, ms))))
 }
 
-/// A lesson id's lecture (`hb.L01.lesson1` → `hb.L01`).
+/// A lesson id's lecture (`cvs.L04.lesson1` → `cvs.L04`).
 fn lecture_of(lesson_id: &str) -> &str {
     lesson_id.rsplit_once('.').map(|(lec, _)| lec).unwrap_or(lesson_id)
 }
@@ -892,7 +892,7 @@ mod list_tests {
         assert_eq!(latest([("a", 5), ("b", 9), ("c", 7)]), Some("b"));
         assert_eq!(latest([("a", 0), ("b", 0)]), Some("a"));
         assert_eq!(latest::<&str>([]), None);
-        assert_eq!(lecture_of("hb.L01.lesson1"), "hb.L01");
+        assert_eq!(lecture_of("cvs.L04.lesson1"), "cvs.L04");
     }
 
     #[test]

@@ -67,7 +67,7 @@ pub const MINUTE_CHOICES: [u32; 4] = [5, 10, 15, 20];
 pub struct Answers {
     /// Minutes a day; the study screen's default session length.
     pub minutes: Option<u32>,
-    /// Lectures he had already studied before Steps (`hb.L01`, ...).
+    /// Lectures he had already studied before Steps (`cvs.L04`, ...).
     pub studied: Vec<String>,
 }
 

@@ -25,7 +25,7 @@ pub struct OwnCard {
     pub id: String,
     pub front: String,
     pub back: String,
-    /// The book lecture it belongs with (`hb.L03`), for tags and filters.
+    /// The book lecture it belongs with (`cvs.L03`), for tags and filters.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub lecture: Option<String>,
     /// Printed book page, when he noted one.
@@ -157,12 +157,12 @@ mod tests {
     #[test]
     fn own_items_are_approved_cards_with_an_own_tag() {
         let mut c = card("own.a", 1);
-        c.lecture = Some("hb.L03".into());
+        c.lecture = Some("cvs.L03".into());
         let item = c.item();
         assert_eq!(item.status, Status::Approved);
         assert_eq!(item.body.kind(), "card");
-        assert_eq!(item.tags, vec!["own".to_string(), "hb.L03".to_string()]);
-        assert!(is_own(&item.id) && !is_own("hb.L01.001"));
+        assert_eq!(item.tags, vec!["own".to_string(), "cvs.L03".to_string()]);
+        assert!(is_own(&item.id) && !is_own("cvs.L04.001"));
     }
 
     #[test]

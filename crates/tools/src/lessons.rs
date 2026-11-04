@@ -87,7 +87,7 @@ pub fn validate_all(
     let mut lessons = 0;
     for (path, file, text) in &files {
         let at = crate::rel(root, path);
-        // content/lessons/hb/L01.yaml teaches hb.L01.
+        // content/lessons/cvs/L01.yaml teaches cvs.L04.
         let chapter = path.parent().and_then(|p| p.file_name()).map(|s| s.to_string_lossy().to_string());
         let stem = path.file_stem().map(|s| s.to_string_lossy().to_string());
         let named = format!("{}.{}", chapter.unwrap_or_default(), stem.unwrap_or_default());

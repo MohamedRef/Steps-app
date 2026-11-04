@@ -274,7 +274,7 @@ mod tests {
         let mut sink = MemorySink::default();
         for (i, grade) in [Grade::Again, Grade::Good].into_iter().enumerate() {
             sink.record(ReviewEvent {
-                item_id: format!("hb.L01.00{i}"),
+                item_id: format!("cvs.L04.00{i}"),
                 grade,
                 origin: Origin::Study,
                 at_ms: i as i64,
@@ -332,7 +332,7 @@ mod tests {
             id: "s24-1-0".into(),
             hlc: Hlc { wall_ms: 1, counter: 0, device: "s24".into() },
             event: ReviewEvent {
-                item_id: "hb.L01.001".into(),
+                item_id: "cvs.L04.001".into(),
                 grade: Grade::Good,
                 origin: Origin::Review,
                 at_ms: 1,
@@ -340,7 +340,7 @@ mod tests {
             },
         };
         let json = serde_json::to_string(&l).unwrap();
-        assert!(json.contains("\"item_id\":\"hb.L01.001\""));
+        assert!(json.contains("\"item_id\":\"cvs.L04.001\""));
         assert_eq!(serde_json::from_str::<LoggedReview>(&json).unwrap(), l);
     }
 }

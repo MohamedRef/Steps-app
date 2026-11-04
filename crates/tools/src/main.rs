@@ -2,11 +2,11 @@
 //!
 //! ```text
 //! steps-tools validate [--root DIR]   check content/ against the rules (docs/CONTENT.md)
-//! steps-tools anki [--lecture hb.L01] [--verdicts FILE] [--out DIR]   Anki deck (docs/ANKI.md)
+//! steps-tools anki [--lecture cvs.L04] [--verdicts FILE] [--out DIR]   Anki deck (docs/ANKI.md)
 //! steps-tools packs build [--out DIR] [--check]   the offline content pack
 //! steps-tools verdicts FILE [--approve]   fix list from the app's ✎/✗ export
 //! steps-tools update <keygen | manifest | sign | verify>   update feeds (docs/RELEASE.md §5)
-//! steps-tools refs [--lecture hb.L01] [--write]   page references against the book (refs.rs)
+//! steps-tools refs [--lecture cvs.L04] [--write]   page references against the book (refs.rs)
 //! ```
 
 use std::collections::BTreeSet;
@@ -277,7 +277,7 @@ fn read_glossary(content: &Path) -> Result<Option<steps_core::glossary::Glossary
     if problems.is_empty() { Ok(Some(g)) } else { Err(problems) }
 }
 
-/// `hb.L01` → `content/hb/L01.yaml`.
+/// `cvs.L04` → `content/cvs/L04.yaml`.
 fn lecture_path(content: &Path, id: &str) -> PathBuf {
     let (chapter, num) = id.split_once('.').unwrap_or((id, ""));
     content.join(chapter).join(format!("{num}.yaml"))
@@ -360,28 +360,28 @@ mod tests {
         let g = read_glossary(content).unwrap().unwrap();
         assert!(validate::glossary(&g, None).iter().any(|p| p.message.contains("listed twice")));
         // A file must be named after a course.
-        std::fs::write(content.join("glossary/hepatology.yaml"), entry("ALT")).unwrap();
+        std::fs::write(content.join("glossary/cardiology.yaml"), entry("BNP")).unwrap();
         let e = read_glossary(content).unwrap_err();
-        assert!(e[0].contains("hepatology.yaml: not a course"), "{e:?}");
+        assert!(e[0].contains("cardiology.yaml: not a course"), "{e:?}");
     }
 
     #[test]
     fn a_tree_with_problems_is_reported() {
         let dir = std::env::temp_dir().join(format!("steps-validate-{}", std::process::id()));
-        let hb = dir.join("content/hb");
-        std::fs::create_dir_all(&hb).unwrap();
+        let cvs = dir.join("content/cvs");
+        std::fs::create_dir_all(&cvs).unwrap();
         std::fs::write(
             dir.join("content/index.yaml"),
-            "schema: steps.content/v1\nlectures:\n  - { id: hb.L01, title: Liver Cirrhosis, pages: [1, 22], chunk: 10 }\n",
+            "schema: steps.content/v1\nlectures:\n  - { id: cvs.L04, title: Pathology, pages: [300, 320], chunk: 6 }\n",
         )
         .unwrap();
         let sample = std::fs::read_to_string(root().join("fixtures/content/sample.yaml")).unwrap();
         std::fs::write(
-            hb.join("L01.yaml"),
-            sample.replace("front: Anatomical", "fornt: x\n    front: Anatomical"),
+            cvs.join("L04.yaml"),
+            sample.replace("front: Which valve", "fornt: x\n    front: Which valve"),
         )
         .unwrap();
-        std::fs::write(hb.join("L99.yaml"), "").unwrap();
+        std::fs::write(cvs.join("L99.yaml"), "").unwrap();
         let problems = validate_all(&dir).unwrap_err();
         assert!(problems.iter().any(|p| p.contains("unknown key `fornt`")), "{problems:#?}");
         assert!(problems.iter().any(|p| p.contains("L99.yaml: not listed")), "{problems:#?}");

@@ -421,10 +421,10 @@ mod tests {
     fn sort() -> StepBody {
         StepBody::Sort {
             prompt: "Sort".into(),
-            bins: vec!["Pre-hepatic".into(), "Hepatic".into()],
+            bins: vec!["Cyanotic".into(), "Acyanotic".into()],
             cards: vec![
-                SortCard { text: "Haemolysis".into(), bin: 0 },
-                SortCard { text: "Hepatitis".into(), bin: 1 },
+                SortCard { text: "Tetralogy of Fallot".into(), bin: 0 },
+                SortCard { text: "Ventricular septal defect".into(), bin: 1 },
             ],
             why: None,
         }
@@ -432,12 +432,12 @@ mod tests {
 
     fn case() -> StepBody {
         StepBody::Case {
-            stem: "A 50-year-old man with ascites.".into(),
+            stem: "A 50-year-old man with chest pain.".into(),
             steps: vec![
                 CaseStep {
                     reveal: None,
                     question: "Next test?".into(),
-                    options: vec!["Paracentesis".into(), "CT".into()],
+                    options: vec!["ECG".into(), "CT".into()],
                     answer: Some(0),
                     why: "".into(),
                 },
@@ -475,7 +475,7 @@ mod tests {
             },
         ];
         Lesson {
-            id: "hb.L01.lesson1".into(),
+            id: "cvs.L04.lesson1".into(),
             title: "t".into(),
             hook: "h".into(),
             minutes: 5,
@@ -674,9 +674,9 @@ mod tests {
         assert!(!quote_held(&check(), StepState::Done, None));
         assert!(!quote_held(&check(), StepState::AnsweredBefore, None));
         let table = StepBody::Table {
-            title: "Child-Pugh".into(),
-            columns: vec!["Variable".into(), "1".into()],
-            rows: vec![vec!["Ascites".into(), "Absent".into()]],
+            title: "Shock".into(),
+            columns: vec!["Type".into(), "CVP".into()],
+            rows: vec![vec!["Hypovolemic".into(), "↓".into()]],
             hide: vec![[0, 1]],
         };
         assert!(quote_held(&table, StepState::Plain, None));

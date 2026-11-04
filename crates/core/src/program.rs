@@ -1,6 +1,6 @@
 //! `content/program.yaml`: the whole of Step 1 as courses (Mohamed's course sheet,
 //! 2026-10-29). A course owns every lecture whose id starts with its id
-//! (`hb.L01` belongs to `hb`), so lecture and item ids never change when a
+//! (`cvs.L04` belongs to `cvs`), so lecture and item ids never change when a
 //! course is added. Packs from before this file have no program; the app then
 //! uses [`Program::fallback`], one course per lecture prefix.
 
@@ -25,7 +25,7 @@ pub struct Program {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Course {
-    /// The lecture id prefix: `hb`, `hem`, `res`.
+    /// The lecture id prefix: `cvs`, `heme`, `phs`.
     pub id: String,
     /// As the sheet spells it: `Hematology`.
     pub title: String,
@@ -103,13 +103,13 @@ impl CourseStatus {
     }
 }
 
-/// The course a lecture, item or lesson id belongs to: `hb.L01.003` → `hb`.
+/// The course a lecture, item or lesson id belongs to: `cvs.L04.003` → `cvs`.
 pub fn course_of(id: &str) -> &str {
     id.split_once('.').map_or(id, |(c, _)| c)
 }
 
-/// The lecture an item, lesson or step id belongs to: `res.L02.019` and
-/// `res.L02.lesson1#3` → `res.L02`.
+/// The lecture an item, lesson or step id belongs to: `phs.L02.019` and
+/// `phs.L02.lesson1#3` → `phs.L02`.
 pub fn lecture_of(id: &str) -> &str {
     let id = id.split('#').next().unwrap_or(id);
     match id.match_indices('.').nth(1) {
@@ -224,27 +224,31 @@ mod tests {
 
     #[test]
     fn ids_belong_to_their_prefix() {
-        assert_eq!(course_of("hb.L01.003"), "hb");
-        assert_eq!(course_of("hem.L02"), "hem");
-        assert_eq!(course_of("hb"), "hb");
-        let p = Program { schema: SCHEMA.into(), title: "MSc".into(), courses: vec![course("hb", 2.0)] };
-        assert_eq!(p.course_for("hb.L07.010").map(|c| c.id.as_str()), Some("hb"));
-        assert!(p.course_for("hem.L01").is_none());
+        assert_eq!(course_of("cvs.L04.003"), "cvs");
+        assert_eq!(course_of("heme.L02"), "heme");
+        assert_eq!(course_of("cvs"), "cvs");
+        let p = Program {
+            schema: SCHEMA.into(),
+            title: "USMLE Step 1".into(),
+            courses: vec![course("cvs", 2.0)],
+        };
+        assert_eq!(p.course_for("cvs.L07.010").map(|c| c.id.as_str()), Some("cvs"));
+        assert!(p.course_for("heme.L01").is_none());
     }
 
     #[test]
     fn lectures_of_items_lessons_and_steps() {
-        assert_eq!(lecture_of("res.L02.019"), "res.L02");
-        assert_eq!(lecture_of("res.L02.lesson1#3"), "res.L02");
-        assert_eq!(lecture_of("hb.L01"), "hb.L01");
-        assert_eq!(lecture_of("hb"), "hb");
+        assert_eq!(lecture_of("phs.L02.019"), "phs.L02");
+        assert_eq!(lecture_of("phs.L02.lesson1#3"), "phs.L02");
+        assert_eq!(lecture_of("cvs.L04"), "cvs.L04");
+        assert_eq!(lecture_of("cvs"), "cvs");
     }
 
     #[test]
     fn fallback_has_one_course_per_prefix() {
-        let p = Program::fallback(&index(&["hb.L01", "hb.L02", "hem.L01"]));
+        let p = Program::fallback(&index(&["cvs.L04", "cvs.L05", "heme.L01"]));
         let ids: Vec<_> = p.courses.iter().map(|c| c.id.as_str()).collect();
-        assert_eq!(ids, ["hb", "hem"]);
+        assert_eq!(ids, ["cvs", "heme"]);
         assert!(p.courses.iter().all(|c| c.status == CourseStatus::Active));
     }
 
@@ -252,16 +256,16 @@ mod tests {
     fn problems_are_reported() {
         let mut p = Program {
             schema: SCHEMA.into(),
-            title: "MSc".into(),
-            courses: vec![course("hb", 2.0), course("hb", 0.3), course("Res", 3.0)],
+            title: "USMLE Step 1".into(),
+            courses: vec![course("cvs", 2.0), course("cvs", 0.3), course("Res", 3.0)],
         };
         p.courses[2].short = " ".into();
-        let probs = p.problems(&index(&["hb.L01", "hem.L01"]));
+        let probs = p.problems(&index(&["cvs.L04", "heme.L01"]));
         assert!(probs.iter().any(|s| s.contains("listed twice")), "{probs:?}");
         assert!(probs.iter().any(|s| s.contains("multiple of 0.5")), "{probs:?}");
         assert!(probs.iter().any(|s| s.contains("lowercase")), "{probs:?}");
         assert!(probs.iter().any(|s| s.contains("short name")), "{probs:?}");
-        assert!(probs.iter().any(|s| s.contains("hem.L01 has no course hem")), "{probs:?}");
+        assert!(probs.iter().any(|s| s.contains("heme.L01 has no course hem")), "{probs:?}");
         assert_eq!(probs.len(), 5, "{probs:?}");
     }
 

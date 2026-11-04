@@ -1249,7 +1249,7 @@ pub mod settings {
     pub const TEXT_LARGE: &str = "كبير";
     pub const TEXT_LARGER: &str = "أكبر";
     pub const TEXT_SAMPLE_AR: &str = "إيه أول علاج لـ";
-    pub const TEXT_SAMPLE_TERM: &str = "variceal bleeding";
+    pub const TEXT_SAMPLE_TERM: &str = "Stanford type A dissection";
 
     pub const DATA_FOLDER: &str = "فولدر البيانات";
     pub const DATA_NOWHERE: &str = "مش معروف على الجهاز ده";

@@ -132,11 +132,11 @@ mod tests {
     fn a_removed_id_fails_until_it_is_retired() {
         let dir = tempfile::tempdir().unwrap();
         let mut base = Registry::new();
-        base.insert("item hb.L01.001".into(), "kind mcq".into());
+        base.insert("item cvs.L04.001".into(), "kind mcq".into());
         let err = check(dir.path(), &base, &Registry::new()).unwrap_err();
         assert!(err.last().unwrap().contains(RETIRED), "{err:?}");
         std::fs::create_dir_all(dir.path().join("content")).unwrap();
-        std::fs::write(dir.path().join(RETIRED), "item hb.L01.001  # merged\n").unwrap();
+        std::fs::write(dir.path().join(RETIRED), "item cvs.L04.001  # merged\n").unwrap();
         assert!(check(dir.path(), &base, &Registry::new()).is_ok());
     }
 }

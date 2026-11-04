@@ -50,5 +50,5 @@ pub fn events(lectures: &[Lecture], now_ms: i64) -> Vec<ReviewEvent> {
 }
 
 pub fn marks() -> BTreeMap<String, Status> {
-    (1..=30).map(|n| (format!("hb.L01.{n:03}"), Status::Approved)).collect()
+    (1..=30).map(|n| (format!("cvs.L04.{n:03}"), Status::Approved)).collect()
 }

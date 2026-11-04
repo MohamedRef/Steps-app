@@ -1,5 +1,5 @@
 //! The content format `steps.content/v1`: one YAML file per lecture
-//! (`content/hb/L01.yaml`). The rules for writing it are in docs/CONTENT.md and
+//! (`content/cvs/L01.yaml`). The rules for writing it are in docs/CONTENT.md and
 //! `docs/CONTENT.md`; [`crate::validate`] enforces them.
 
 use std::collections::BTreeMap;
@@ -13,7 +13,7 @@ pub const SCHEMA: &str = "steps.content/v1";
 #[serde(deny_unknown_fields)]
 pub struct Lecture {
     pub schema: String,
-    /// `hb.L01`: chapter slug, then the lecture number.
+    /// `cvs.L04`: chapter slug, then the lecture number.
     pub lecture: String,
     pub title: String,
     /// The lecturer named in the book.
@@ -44,7 +44,7 @@ pub struct Topic {
 /// fields are in [`Body`].
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Item {
-    /// `hb.L01.001`. Never reused or renumbered.
+    /// `cvs.L04.001`. Never reused or renumbered.
     pub id: String,
     #[serde(flatten)]
     pub body: Body,
@@ -304,14 +304,14 @@ mod tests {
     #[test]
     fn items_round_trip_through_yaml() {
         let yaml = r#"
-id: hb.L01.001
+id: cvs.L04.001
 kind: mcq
-topic: child-pugh
-stem: Child-Pugh class?
-options: [A, B, C, D]
+topic: shock
+stem: Most likely echo finding?
+options: [A, B, C, D, E]
 answer: 1
-why: [too low, "8 points", too high, not needed]
-src: { page: 14 }
+why: [no, "diastolic RV collapse", no, no, no]
+src: { page: 317 }
 status: unverified
 "#;
         let item: Item = serde_yaml_ng::from_str(yaml).unwrap();

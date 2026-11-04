@@ -26,13 +26,13 @@ pub fn run(root: &Path, args: &[String]) -> Res<String> {
     let arg = |i: usize| args.get(i).map(String::as_str);
     match arg(0) {
         Some("next-id") => {
-            let lecture = arg(1).ok_or_else(|| vec!["usage: steps-tools content next-id hb.L01".to_owned()])?;
+            let lecture = arg(1).ok_or_else(|| vec!["usage: steps-tools content next-id cvs.L04".to_owned()])?;
             let (item, lesson) = next_ids(root, lecture)?;
             Ok(format!("next item id: {item}\nnext lesson id: {lesson}"))
         }
         Some("new-item") => match (arg(1), arg(2)) {
             (Some(lecture), Some(kind)) => new_item(root, lecture, kind),
-            _ => Err(vec!["usage: steps-tools content new-item hb.L01 <card|cloze|mcq|enumerate|essay|case|table|order>".into()]),
+            _ => Err(vec!["usage: steps-tools content new-item cvs.L04 <card|cloze|mcq|enumerate|essay|case|table|order>".into()]),
         },
         Some("diff") => {
             let base = base_pack(root, args)?;
@@ -291,8 +291,8 @@ mod tests {
     fn the_repo_has_nothing_unfinished_and_a_template_is_caught() {
         assert_eq!(unfinished(&root()), Vec::<String>::new());
         let dir = tempfile::tempdir().unwrap();
-        std::fs::create_dir_all(dir.path().join("content/hb")).unwrap();
-        std::fs::write(dir.path().join("content/hb/L99.yaml"), format!("x: {TEMPLATE_MARK} y\n")).unwrap();
+        std::fs::create_dir_all(dir.path().join("content/cvs")).unwrap();
+        std::fs::write(dir.path().join("content/cvs/L99.yaml"), format!("x: {TEMPLATE_MARK} y\n")).unwrap();
         assert_eq!(unfinished(dir.path()).len(), 1);
     }
 

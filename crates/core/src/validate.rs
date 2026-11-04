@@ -38,7 +38,7 @@ pub fn lecture(lec: &Lecture, cx: &Context<'_>) -> Vec<Problem> {
         bad(lid, format!("schema is {:?}, expected {:?}", lec.schema, content::SCHEMA));
     }
     if !is_lecture_id(lid) {
-        bad(lid, "lecture id must look like hb.L01".into());
+        bad(lid, "lecture id must look like cvs.L04".into());
     }
     let [first, last] = lec.book.pages;
     if first == 0 || first > last {
@@ -193,7 +193,7 @@ fn body_problems(body: &Body) -> Vec<String> {
     p
 }
 
-/// `hb.L01`: a lowercase chapter slug, `.L`, two digits.
+/// `cvs.L04`: a lowercase chapter slug, `.L`, two digits.
 pub fn is_lecture_id(id: &str) -> bool {
     let Some((chapter, num)) = id.split_once(".L") else {
         return false;
@@ -269,7 +269,7 @@ mod tests {
         serde_yaml_ng::from_str(yaml).unwrap()
     }
 
-    const HEAD: &str = "schema: steps.content/v1\nlecture: hb.L01\ntitle: Liver Cirrhosis\nbook: { chapter: 1, pages: [1, 22] }\n";
+    const HEAD: &str = "schema: steps.content/v1\nlecture: cvs.L04\ntitle: Pathology\nbook: { chapter: 1, pages: [300, 320] }\n";
 
     #[test]
     fn the_sample_fixture_is_clean() {
@@ -285,9 +285,9 @@ mod tests {
     fn catches_the_common_mistakes() {
         let l = lec(&format!(
             "{HEAD}items:
-  - {{ id: hb.L01.001, kind: card, front: a, back: b, src: {{ page: 30 }}, status: unverified }}
-  - {{ id: hb.L01.001, kind: mcq, stem: s, options: [a, b, c], answer: 3, why: [x], src: {{ page: 2 }}, status: approved }}
-  - {{ id: hb.L1.2, kind: cloze, text: 'no blank', src: {{ page: 2 }}, status: unverified }}
+  - {{ id: cvs.L04.001, kind: card, front: a, back: b, src: {{ page: 30 }}, status: unverified }}
+  - {{ id: cvs.L04.001, kind: mcq, stem: s, options: [a, b, c], answer: 3, why: [x], src: {{ page: 302 }}, status: approved }}
+  - {{ id: cvs.L1.2, kind: cloze, text: 'no blank', src: {{ page: 302 }}, status: unverified }}
 "
         ));
         let msgs: Vec<String> = lecture(&l, &Context::default()).iter().map(|p| p.to_string()).collect();
@@ -306,8 +306,8 @@ mod tests {
     fn enumerate_hooks_read_and_must_say_something() {
         let l = lec(&format!(
             "{HEAD}items:
-  - {{ id: hb.L01.001, kind: enumerate, prompt: p, points: [a, b], pass: 2, hook: 'حكاية', src: {{ page: 3 }}, status: unverified }}
-  - {{ id: hb.L01.002, kind: enumerate, prompt: p, points: [a, b], pass: 2, hook: ' ', src: {{ page: 3 }}, status: unverified }}
+  - {{ id: cvs.L04.001, kind: enumerate, prompt: p, points: [a, b], pass: 2, hook: 'حكاية', src: {{ page: 303 }}, status: unverified }}
+  - {{ id: cvs.L04.002, kind: enumerate, prompt: p, points: [a, b], pass: 2, hook: ' ', src: {{ page: 303 }}, status: unverified }}
 "
         ));
         assert!(matches!(&l.items[0].body, Body::Enumerate { hook: Some(h), .. } if h == "حكاية"));
@@ -319,9 +319,9 @@ mod tests {
     #[test]
     fn approved_is_fine_when_mohamed_approved_it() {
         let l = lec(&format!(
-            "{HEAD}items:\n  - {{ id: hb.L01.001, kind: card, front: a, back: b, src: {{ page: 3 }}, status: approved }}\n"
+            "{HEAD}items:\n  - {{ id: cvs.L04.001, kind: card, front: a, back: b, src: {{ page: 303 }}, status: approved }}\n"
         ));
-        let ok: BTreeSet<String> = ["hb.L01.001".to_string()].into();
+        let ok: BTreeSet<String> = ["cvs.L04.001".to_string()].into();
         let cx = Context { approved: Some(&ok), ..Context::default() };
         assert!(lecture(&l, &cx).is_empty());
     }
@@ -329,11 +329,11 @@ mod tests {
     #[test]
     fn unknown_keys_are_flagged_and_long_quotes_are_not() {
         let l = lec(&format!(
-            "{HEAD}items:\n  - {{ id: hb.L01.001, kind: card, front: a, back: b, src: {{ page: 3, quote: '{}' }}, status: unverified }}\n",
+            "{HEAD}items:\n  - {{ id: cvs.L04.001, kind: card, front: a, back: b, src: {{ page: 303, quote: '{}' }}, status: unverified }}\n",
             "word ".repeat(120)
         ));
         let cx = Context {
-            raw_keys: [("hb.L01.001".to_string(), vec!["front".into(), "back".into(), "answer".into()])]
+            raw_keys: [("cvs.L04.001".to_string(), vec!["front".into(), "back".into(), "answer".into()])]
                 .into(),
             ..Context::default()
         };
@@ -345,11 +345,11 @@ mod tests {
 
     #[test]
     fn lecture_ids() {
-        assert!(is_lecture_id("hb.L01"));
+        assert!(is_lecture_id("cvs.L04"));
         assert!(is_lecture_id("gi.L11"));
-        assert!(!is_lecture_id("hb.L1"));
-        assert!(!is_lecture_id("HB.L01"));
-        assert!(!is_lecture_id("hbL01"));
+        assert!(!is_lecture_id("cvs.L1"));
+        assert!(!is_lecture_id("CVS.L01"));
+        assert!(!is_lecture_id("cvsL01"));
     }
 
     #[test]
@@ -357,8 +357,8 @@ mod tests {
         let g: crate::glossary::Glossary = serde_yaml_ng::from_str(
             "schema: steps.glossary/v1
 entries:
-  - { term: HE, kind: abbr, text: Hepatic encephalopathy, status: unverified }
-  - { term: he, kind: drug, text: Duplicate spelling, status: unverified }
+  - { term: MI, kind: abbr, text: Myocardial infarction, status: unverified }
+  - { term: mi, kind: drug, text: Duplicate spelling, status: unverified }
   - { term: two words, kind: drug, text: x, status: approved }",
         )
         .unwrap();

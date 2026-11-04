@@ -357,20 +357,20 @@ mod tests {
         git(root, &["rev-parse", "HEAD"]).unwrap().trim().to_owned()
     }
 
-    const ONE: &str = "- kind: new\n  ar_eg: درس جديد عن الكبد\n  en: A new liver lesson\n";
-    const TWO: &str = "- kind: new\n  ar_eg: درس جديد عن الكبد\n  en: A new liver lesson\n- kind: fixed\n  ar_eg: الصورة بقت أوضح\n";
+    const ONE: &str = "- kind: new\n  ar_eg: درس جديد عن الصمامات\n  en: A new heart valves lesson\n";
+    const TWO: &str = "- kind: new\n  ar_eg: درس جديد عن الصمامات\n  en: A new heart valves lesson\n- kind: fixed\n  ar_eg: الصورة بقت أوضح\n";
 
     #[test]
     fn the_gate_wants_a_new_line() {
         let dir = repo();
         let root = dir.path();
         let step = |files: &[(&str, Option<&str>)]| step(root, files);
-        let base = step(&[("changes/liver.yaml", Some(ONE))]);
+        let base = step(&[("changes/cvs-valves.yaml", Some(ONE))]);
         // A comment or whitespace edit adds nothing.
-        step(&[("changes/liver.yaml", Some(&format!("# note\n{ONE}")))]);
+        step(&[("changes/cvs-valves.yaml", Some(&format!("# note\n{ONE}")))]);
         assert!(gate(root, &base).is_err());
         // An append counts, even when the file is renamed on the way.
-        step(&[("changes/liver.yaml", None), ("changes/hepar.yaml", Some(TWO))]);
+        step(&[("changes/cvs-valves.yaml", None), ("changes/cvs-valves-2.yaml", Some(TWO))]);
         let lines = gate(root, &base).unwrap();
         assert_eq!(lines.iter().map(|c| c.text.ar_eg.as_str()).collect::<Vec<_>>(), ["الصورة بقت أوضح"]);
         assert_eq!(collect(root, Some(&base)).unwrap().len(), 1);
