@@ -17,6 +17,8 @@ Cost: **$0**. Nothing here needs a card on file. There is no D1 database, no R2 
 | `review_events` | append-only (a delete is a tombstone) | every review: item, grade, time |
 | `item_status` | last writer wins (HLC) | your ✓ / ✎ / ✗ content checks |
 | `settings` | last writer wins (HLC) | retention, new items a day and other study settings |
+| `own_cards` | last writer wins (HLC, a delete is a tombstone) | the cards you write yourself |
+| `self_assessments` | last writer wins (HLC, a delete is a tombstone) | your NBME / UWSA / Free 120 scores |
 
 The list lives in `steps_protocol::sync::TABLES`. **A new synced table must be added there**, or the hub rejects its ops as `unknown_table`. A device only sends rows it wrote itself (its own `device_id`), and a clock more than 5 minutes ahead is rejected.
 

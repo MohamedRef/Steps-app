@@ -13,6 +13,7 @@ pub mod import;
 mod install;
 pub mod own;
 mod paths;
+pub mod selfassess;
 pub mod sync;
 
 use std::collections::BTreeMap;
@@ -115,6 +116,18 @@ const MIGRATIONS: &[&str] = &[
     "
     -- Mohamed's own cards (steps_core::own::OwnCard as JSON). Last writer wins.
     CREATE TABLE own_cards (
+        id          TEXT PRIMARY KEY,
+        value       TEXT NOT NULL,
+        account_id  TEXT,
+        device_id   TEXT NOT NULL,
+        hlc_wall    INTEGER NOT NULL,
+        hlc_counter INTEGER NOT NULL,
+        deleted     INTEGER NOT NULL DEFAULT 0
+    ) STRICT;
+",
+    "
+    -- His self-assessment scores (steps_core::selfassess::SelfAssessment as JSON). Last writer wins.
+    CREATE TABLE self_assessments (
         id          TEXT PRIMARY KEY,
         value       TEXT NOT NULL,
         account_id  TEXT,

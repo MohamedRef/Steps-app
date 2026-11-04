@@ -47,6 +47,8 @@ pub const TABLES: &[(&str, SyncKind)] = &[
     ("settings", SyncKind::Lww),
     // Mohamed's own cards, one JSON row each (chunk 21, `steps_core::own`).
     ("own_cards", SyncKind::Lww),
+    // His NBME / UWSA / Free 120 scores, one JSON row each (`steps_core::selfassess`).
+    ("self_assessments", SyncKind::Lww),
 ];
 
 pub fn table_kind(table: &str) -> Option<SyncKind> {

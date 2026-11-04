@@ -21,6 +21,9 @@
   font-weight: 600;
 }
 .tab[aria-selected="true"] { background: var(--accent-soft); color: var(--accent); }
+/* Four tabs on the narrowest phones: they shrink and wrap inside the pill. */
+.tab { min-inline-size: 0; padding-inline: var(--sp-1); overflow-wrap: anywhere; }
+@media (max-width: 420px) { .tab { font-size: var(--fs-sm); } }
 
 .summary { display: flex; flex-wrap: wrap; gap: var(--sp-4); }
 .big { display: flex; flex-direction: column; min-inline-size: 6rem; }
@@ -218,3 +221,35 @@ button.st-activity { gap: var(--sp-2); }
 .st-bar-labels { display: flex; justify-content: space-between; gap: var(--sp-2); }
 .st-bars[data-span="week"] + .st-bar-labels > span { flex: 1; text-align: center; }
 .st-minis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* ---------- self-assessment tab (scores.rs) ---------- */
+.score-chart svg { block-size: auto; aspect-ratio: 320 / 120; }
+.score-svg .band, .key-band { fill: var(--accent-soft); background: var(--accent-soft); }
+.score-svg .ready { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.score-svg .line-nbme { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.score-svg .pt.nbme, .key-nbme { fill: var(--accent); background: var(--accent); }
+.score-svg .pt.practice { fill: var(--glass-solid, var(--surface)); stroke: var(--muted); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.key-practice { background: var(--surface); border: 1.5px solid var(--muted); border-radius: 50%; }
+.key-nbme { border-radius: 50%; }
+.key-ready { block-size: 0; border-block-start: 2px dashed var(--muted); border-radius: 0; }
+.score-verdict-text { font-size: var(--fs-lg); font-weight: 600; margin: 0; }
+.score-verdict-text[data-verdict="Ready"] { color: var(--good); }
+.score-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.score-entry {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-2);
+  padding-block: var(--sp-3);
+  border-block-start: 1px solid var(--line-soft, var(--line));
+}
+.score-title { font-weight: 600; }
+.score-pct { font-variant-numeric: tabular-nums; }
+.score-form { display: flex; flex-direction: column; gap: var(--sp-3); padding-block: var(--sp-3); }
+.score-notes p { margin: 0 0 var(--sp-2); }
+.score-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); }
+.score-head h2 { margin: 0; flex: 1; }
+.score-text { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; flex: 1 1 12rem; }
+.score-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); }
+.score-fields { display: flex; flex-wrap: wrap; gap: var(--sp-3); }
+.score-fields > .score-field { flex: 1 1 9rem; min-inline-size: 0; }
+.score-fields > .score-narrow { flex: 0 1 7rem; }
+.score-field :is(input, select) { inline-size: 100%; }
+.score-form .score-actions > .btn { flex: 1 1 7rem; }
