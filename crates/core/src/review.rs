@@ -343,4 +343,71 @@ mod tests {
         assert!(json.contains("\"item_id\":\"cvs.L04.001\""));
         assert_eq!(serde_json::from_str::<LoggedReview>(&json).unwrap(), l);
     }
+
+    #[test]
+    fn ratings_and_evidence() {
+        assert_eq!(Grade::ALL.map(Grade::rating), [1, 2, 3, 4]);
+        assert_eq!(Grade::parse("perfect"), None);
+        assert!(Origin::Bank.is_evidence() && Origin::Mock.is_evidence());
+        assert!(!Origin::Study.is_evidence() && !Origin::Oral.is_evidence());
+        assert_eq!(HlcClock::new("s24").device(), "s24");
+    }
+
+    #[test]
+    fn only_recall_kinds_are_self_rated() {
+        let lec: crate::content::Lecture =
+            serde_yaml_ng::from_str(include_str!("../../../fixtures/content/sample.yaml")).unwrap();
+        let rated: Vec<&str> =
+            lec.items.iter().filter(|i| self_rated(&i.body)).map(|i| i.id.as_str()).collect();
+        // The enumerate (J♥NES), the essay (aortic dissection) and the case.
+        assert_eq!(rated, ["cvs.L04.004", "cvs.L04.005", "cvs.L04.006"]);
+    }
+
+    /// The least a store must write; everything else falls back to the defaults.
+    #[derive(Default)]
+    struct Bare {
+        events: Vec<ReviewEvent>,
+    }
+
+    impl StudyStore for Bare {
+        fn record(&mut self, event: ReviewEvent) {
+            self.events.push(event);
+        }
+        fn due(&self, _now_ms: i64) -> Vec<String> {
+            self.events.iter().map(|e| e.item_id.clone()).collect()
+        }
+        fn is_new(&self, item_id: &str) -> bool {
+            !self.events.iter().any(|e| e.item_id == item_id)
+        }
+        fn is_hidden(&self, _item_id: &str) -> bool {
+            false
+        }
+        fn next_due_ms(&self, _now_ms: i64) -> Option<i64> {
+            None
+        }
+    }
+
+    #[test]
+    fn store_defaults_record_and_stay_quiet() {
+        let handle = StudyStoreHandle::new(Bare::default());
+        let event = ReviewEvent {
+            item_id: "cvs.L04.002".into(),
+            grade: Grade::Hard,
+            origin: Origin::Study,
+            at_ms: 10,
+            took_ms: 4000,
+        };
+        let mut store = handle.0.borrow_mut();
+        assert_eq!(store.record_logged(event), Ok(None), "recorded, but it can't be taken back");
+        assert!(!store.is_new("cvs.L04.002") && store.is_new("cvs.L04.003"));
+        assert_eq!(store.due(0), ["cvs.L04.002"]);
+        assert!(!store.retract("s24-1-0"));
+        assert_eq!(store.new_left_today(0), usize::MAX);
+        assert_eq!(store.intervals("cvs.L04.002", 0), None);
+        assert!(store.log().is_empty() && store.marks().is_empty() && store.forecast(7, 0).is_empty());
+        let lec: crate::content::Lecture =
+            serde_yaml_ng::from_str(include_str!("../../../fixtures/content/sample.yaml")).unwrap();
+        assert_eq!(store.effective(&lec.items[0]), lec.items[0], "no edit: the item as written");
+        assert!(!store.is_hidden("cvs.L04.001") && store.next_due_ms(0).is_none());
+    }
 }

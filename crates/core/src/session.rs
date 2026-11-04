@@ -551,7 +551,7 @@ pub fn check_typed(expected: &str, typed: &str) -> Match {
     if whole != Match::Wrong {
         return whole;
     }
-    // A list answer ("vitamin A and retinoids", "ALT or AST"): every listed
+    // A list answer ("vitamin A and retinoids", "CK-MB or troponin"): every listed
     // part typed, in any order, is Right; some of an "and" list is Close; any
     // one of an "or" list is as good as that part.
     let (exp_parts, either) = list_parts(expected);
@@ -775,7 +775,7 @@ fn word_hit(want: &str, have: &[String]) -> bool {
 /// counts when at least half of its key words appear somewhere in what was
 /// typed, its most specific word among them ("cardiomyopathy" covers
 /// "Hypertrophic cardiomyopathy"; "pulmonary hypertension" doesn't cover
-/// "Portal hypertension").
+/// "Systemic hypertension").
 pub fn recalled(points: &[String], typed: &str) -> Vec<bool> {
     let have = key_words(typed);
     points
@@ -1000,8 +1000,8 @@ mod tests {
         // British and American spellings are the same answer.
         assert_eq!(check_typed("Hypokalaemia", "hypokalemia"), Match::Right);
         assert_eq!(check_typed("Haemolysis", "hemolysis"), Match::Right);
-        assert_eq!(check_typed("Oesophageal varices", "esophageal varices"), Match::Right);
-        assert_eq!(check_typed("Haemochromatosis", "hemochromatosis"), Match::Right);
+        assert_eq!(check_typed("Oedematous ankles", "edematous ankles"), Match::Right);
+        assert_eq!(check_typed("Ischaemia", "ischemia"), Match::Right);
         assert_eq!(check_typed("Tumour", "tumor"), Match::Right);
         // Shared first letters are not a prefix swap: typos stay close.
         assert_eq!(check_typed("Hemolysis", "hemolisis"), Match::Close);
@@ -1124,18 +1124,17 @@ mod tests {
         assert_eq!(check_typed(e, "retinoids and vitamin A"), Match::Right);
         assert_eq!(check_typed(e, "vitamin A, iron"), Match::Wrong);
         assert_eq!(check_typed(e, "glycogen"), Match::Wrong);
-        assert_eq!(check_typed("ALT or AST", "AST"), Match::Right);
+        assert_eq!(check_typed("CK-MB or troponin", "troponin"), Match::Right);
         assert_eq!(check_typed("hyperkalaemia and acidosis", "hypokalaemia"), Match::Wrong);
     }
 
     #[test]
     fn recall_needs_more_than_a_shared_stem() {
-        let points: Vec<String> = ["Hepatorenal syndrome", "Hepatopulmonary syndrome", "Portal hypertension"]
-            .map(String::from)
-            .to_vec();
-        assert_eq!(recalled(&points, "hepatorenal syndrome\npulmonary hypertension"), [true, false, false]);
-        assert_eq!(recalled(&points, "hepa"), [false, false, false]);
-        assert_eq!(recalled(&points, "HRS, HPS\nportal htn"), [false, false, true]);
+        let points: Vec<String> =
+            ["Cardiac tamponade", "Cardiogenic shock", "Pulmonary hypertension"].map(String::from).to_vec();
+        assert_eq!(recalled(&points, "cardiac tamponade\nsystemic hypertension"), [true, false, false]);
+        assert_eq!(recalled(&points, "card"), [false, false, false]);
+        assert_eq!(recalled(&points, "BCK, CS\npulmonary htn"), [false, false, true]);
     }
 
     #[test]

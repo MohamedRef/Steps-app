@@ -163,4 +163,69 @@ mod tests {
         let keys = raw_step_keys("lessons:\n  - steps:\n      - { kind: check, anwser: 1 }\n");
         assert_eq!(keys, vec![((0, 0), vec!["kind".to_string(), "anwser".to_string()])]);
     }
+
+    use crate::testkit::{content_tree, write};
+
+    const LESSON: &str = "schema: steps.lesson/v1
+lecture: cvs.L04
+lessons:
+  - id: cvs.L04.lesson1
+    title: الـ tamponade
+    hook: ليه الضغط بيقع؟
+    minutes: 5
+    pages: [317, 317]
+    steps:
+      - { kind: explain, text: الـ JVP بيعلى في الـ tamponade, page: 317, quote: distended neck veins }
+      - { kind: reveal, prompt: ليه؟, answer: الـ RA مش بيتملي }
+      - kind: check
+        question: Which sign?
+        options: [Kussmaul sign, Pulsus paradoxus, Osler node]
+        answer: 1
+        anwser: 1
+        why: [no, yes, no]
+    recap: [Beck triad]
+    status: unverified
+";
+
+    #[test]
+    fn lesson_files_are_checked_against_their_lecture_and_the_glossary() {
+        let dir = content_tree();
+        let root = dir.path();
+        write(root, "content/lessons/cvs/L04.yaml", LESSON);
+        // Named after another lecture, and one whose lecture has no content yet.
+        write(root, "content/lessons/cvs/L05.yaml", LESSON);
+        write(root, "content/lessons/cvs/L09.yaml", &LESSON.replace("cvs.L04", "cvs.L09"));
+        write(root, "content/lessons/cvs/notes.txt", "not a lesson");
+        let g: Glossary = serde_yaml_ng::from_str(
+            "schema: steps.glossary/v1\nentries:\n  - { term: JVP, kind: abbr, text: Jugular venous pressure, status: unverified }\n",
+        )
+        .unwrap();
+        let mut problems = Vec::new();
+        let (files, lessons) = validate_all(root, &BTreeSet::new(), Some(&g), &mut problems);
+        assert_eq!((files, lessons), (3, 2), "{problems:#?}");
+        for want in [
+            "content/lessons/cvs/L05.yaml: lecture is cvs.L04, the file name says cvs.L05",
+            "content/lessons/cvs/L09.yaml: its lecture cvs.L09 has no content file yet",
+            "content/lessons/cvs/L04.yaml: cvs.L04.lesson1 step 3: unknown key `anwser` for a check step",
+            "content/lessons/cvs/L04.yaml: cvs.L04.lesson1 step 2: `RA` not in content/glossary.yaml",
+        ] {
+            assert!(problems.iter().any(|p| p.starts_with(want)), "{want}: {problems:#?}");
+        }
+        assert!(!problems.iter().any(|p| p.contains("`JVP`")), "{problems:#?}");
+    }
+
+    #[test]
+    fn a_lesson_file_that_does_not_parse_stops_the_check() {
+        let dir = content_tree();
+        let root = dir.path();
+        write(root, "content/lessons/cvs/L04.yaml", "schema: [");
+        let mut problems = Vec::new();
+        assert_eq!(validate_all(root, &BTreeSet::new(), None, &mut problems), (0, 0));
+        assert_eq!(problems.len(), 1);
+        assert!(problems[0].starts_with("content/lessons/cvs/L04.yaml: "), "{problems:?}");
+        // A directory with a .yaml name can't be read.
+        std::fs::remove_file(root.join("content/lessons/cvs/L04.yaml")).unwrap();
+        std::fs::create_dir_all(root.join("content/lessons/cvs/L04.yaml")).unwrap();
+        assert!(load(root).is_err());
+    }
 }

@@ -483,7 +483,7 @@ mod tests {
             ..mcq("cvs.L04.900", "pericardium", &[], ABCD, 0)
         });
         l01.push(Item { status: Status::Rejected, ..mcq("cvs.L04.901", "pericardium", &[], ABCD, 0) });
-        let l09 = (0..10).map(|i| mcq(&format!("cvs.L09.{i:03}"), "sbp", &[], ABCD, 2)).collect();
+        let l09 = (0..10).map(|i| mcq(&format!("cvs.L09.{i:03}"), "ie", &[], ABCD, 2)).collect();
         vec![lecture("cvs.L04", l01), lecture("cvs.L09", l09)]
     }
 
@@ -584,7 +584,7 @@ mod tests {
     #[test]
     fn options_that_name_others_stay_in_order() {
         let s = |v: &[&str]| v.iter().map(|x| x.to_string()).collect::<Vec<_>>();
-        assert!(shufflable(&s(&["Propranolol", "Carvedilol", "Band ligation", "TIPS"])));
+        assert!(shufflable(&s(&["Metoprolol", "Carvedilol", "Ivabradine", "Digoxin"])));
         assert!(!shufflable(&s(&["a", "b", "c", "All of the above"])));
         assert!(!shufflable(&s(&["a", "b", "Both a and b", "d"])));
         assert!(!shufflable(&s(&["x", "y", "z", "A and C"])));
@@ -634,30 +634,30 @@ mod tests {
 
     #[test]
     fn scoring_counts_blanks_as_wrong() {
-        let qs = [q("1", "cvs.L04", "cp", 1), q("2", "cvs.L04", "mgmt", 0), q("3", "cvs.L09", "sbp", 2)];
+        let qs = [q("1", "cvs.L04", "cp", 1), q("2", "cvs.L04", "mgmt", 0), q("3", "cvs.L09", "ie", 2)];
         let ans = [a(Some(1)), a(None), a(Some(0))];
         let o = score(&qs, &ans, Mode::Mock, 0, 60_000);
         assert_eq!(o.total, Score { right: 1, total: 3 });
         assert_eq!(o.unanswered, 1);
         assert_eq!(o.by_lecture["cvs.L04"], Score { right: 1, total: 2 });
-        assert_eq!(o.by_topic["cvs.L09/sbp"], Score { right: 0, total: 1 });
+        assert_eq!(o.by_topic["cvs.L09/ie"], Score { right: 0, total: 1 });
         assert_eq!(o.total.percent(), 33);
         assert_eq!(Score { right: 1, total: 2 }.percent(), 50);
         assert_eq!(Score::default().percent(), 0);
         let weak = weak_topics(&o, 60, 1);
-        assert_eq!(weak.iter().map(|w| w.0).collect::<Vec<_>>(), ["cvs.L04/mgmt", "cvs.L09/sbp"]);
+        assert_eq!(weak.iter().map(|w| w.0).collect::<Vec<_>>(), ["cvs.L04/mgmt", "cvs.L09/ie"]);
     }
 
     #[test]
     fn a_thin_mock_still_names_topics_to_revise() {
         // One question per topic, mostly wrong: no topic has two answers.
-        let qs = [q("1", "cvs.L04", "cp", 1), q("2", "cvs.L09", "sbp", 0), q("3", "cvs.L13", "aih", 2)];
+        let qs = [q("1", "cvs.L04", "cp", 1), q("2", "cvs.L09", "ie", 0), q("3", "cvs.L13", "rf", 2)];
         let o = score(&qs, &[a(Some(0)), a(Some(0)), a(None)], Mode::Mock, 0, 60_000);
         assert!(weak_topics(&o, 60, 2).is_empty());
         let focus: Vec<_> = focus_topics(&o, 60).into_iter().map(|w| w.0).collect();
-        assert_eq!(focus, ["cvs.L04/cp", "cvs.L13/aih"]);
+        assert_eq!(focus, ["cvs.L04/cp", "cvs.L13/rf"]);
         // With two answers in a topic, the stricter list wins.
-        let qs = [q("1", "cvs.L04", "cp", 1), q("2", "cvs.L04", "cp", 0), q("3", "cvs.L09", "sbp", 2)];
+        let qs = [q("1", "cvs.L04", "cp", 1), q("2", "cvs.L04", "cp", 0), q("3", "cvs.L09", "ie", 2)];
         let o = score(&qs, &[a(Some(0)), a(None), a(Some(0))], Mode::Mock, 0, 60_000);
         assert_eq!(focus_topics(&o, 60).into_iter().map(|w| w.0).collect::<Vec<_>>(), ["cvs.L04/cp"]);
     }

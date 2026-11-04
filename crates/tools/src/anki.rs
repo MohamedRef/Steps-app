@@ -235,7 +235,7 @@ mod tests {
             .unwrap();
         std::fs::write(
             d.join("export.yaml"),
-            "schema: steps.verdicts/v1\nexported: x\nverdicts:\n  - { id: cvs.L04.003, verdict: wrong, at: a }\n  - { id: cvs.L04.001, verdict: edited, at: a, edit: { back: Fibrosis plus nodules. } }\n  - { id: cvs.L04.002, verdict: edited, at: a, edit: { nope: x } }\n  - { id: cvs.L04.004, verdict: wrong, at: b, fingerprint: \"0000000000000000\" }\n",
+            "schema: steps.verdicts/v1\nexported: x\nverdicts:\n  - { id: cvs.L04.003, verdict: wrong, at: a }\n  - { id: cvs.L04.001, verdict: edited, at: a, edit: { back: \"The mitral valve, then the aortic.\" } }\n  - { id: cvs.L04.002, verdict: edited, at: a, edit: { nope: x } }\n  - { id: cvs.L04.004, verdict: wrong, at: b, fingerprint: \"0000000000000000\" }\n",
         )
         .unwrap();
         let args: Vec<String> =
@@ -256,7 +256,7 @@ mod tests {
     fn own_cards_from_an_export_get_their_own_subdeck() {
         let card = |id: &str, deleted: i64| {
             let value = format!(
-                r#"{{"id":"{id}","front":"SAAG?","back":"≥ 1.1","lecture":"cvs.L09","created_ms":1}}"#
+                r#"{{"id":"{id}","front":"BNP in heart failure?","back":"≥ 100 pg/mL","lecture":"cvs.L09","created_ms":1}}"#
             );
             serde_json::json!({"id": id, "value": value, "deleted": deleted})
         };
@@ -273,5 +273,88 @@ mod tests {
         let note = &deck.notes[0];
         assert_eq!(note.tags, ["own::cards", "own", "cvs.L09"]);
         assert_eq!(note.fields[2], "My own cards");
+    }
+
+    use crate::testkit::{args, content_tree, write};
+
+    #[test]
+    fn one_lecture_and_own_cards_from_an_export() {
+        let dir = content_tree();
+        let root = dir.path();
+        let out = root.join("out");
+        let o = out.to_str().unwrap();
+        let report = run(root, &args(&["--merged-only", "--lecture", "cvs.L04", "--out", o])).unwrap();
+        assert!(report.contains("steps-cvs-L04.apkg: 11 notes"), "{report}");
+        assert!(out.join("steps-cvs-L04.apkg").exists());
+        let err = run(root, &args(&["--merged-only", "--lecture", "cvs.L09", "--out", o])).unwrap_err();
+        assert_eq!(err, ["cvs.L09: no such lecture written yet"]);
+
+        // An export with no live own cards is a warning; a file that isn't an export is an error.
+        let export = root.join("export.json");
+        std::fs::write(&export, r#"{"format":"steps-export","tables":{}}"#).unwrap();
+        let e = export.to_str().unwrap();
+        let report = run(root, &args(&["--merged-only", "--own", e, "--out", o])).unwrap();
+        assert!(report.contains("warning: ") && report.contains("no own cards in this export"), "{report}");
+        std::fs::write(&export, r#"{"format":"anki-export"}"#).unwrap();
+        let err = run(root, &args(&["--merged-only", "--own", e, "--out", o])).unwrap_err();
+        assert!(err[0].contains("not a Steps export"), "{err:?}");
+        std::fs::write(&export, "{").unwrap();
+        assert!(own_cards(&export).is_err());
+        assert!(own_cards(&root.join("none.json")).is_err());
+        // With one lecture only, own cards stay out.
+        let card = r#"{\"id\":\"own.a\",\"front\":\"BNP in heart failure?\",\"back\":\"≥ 100 pg/mL\",\"lecture\":\"cvs.L04\",\"created_ms\":1}"#;
+        std::fs::write(
+            &export,
+            format!(r#"{{"format":"steps-export","tables":{{"own_cards":{{"rows":[{{"id":"own.a","value":"{card}","deleted":0}}]}}}}}}"#),
+        )
+        .unwrap();
+        let report =
+            run(root, &args(&["--merged-only", "--own", e, "--lecture", "cvs.L04", "--out", o])).unwrap();
+        assert!(report.contains("11 notes"), "{report}");
+        let report = run(root, &args(&["--merged-only", "--own", e, "--out", o])).unwrap();
+        assert!(report.contains("steps.apkg: 12 notes"), "{report}");
+    }
+
+    #[test]
+    fn approvals_count_only_on_the_text_he_saw() {
+        let dir = content_tree();
+        let root = dir.path();
+        let lec: Lecture = serde_yaml_ng::from_str(crate::testkit::SAMPLE).unwrap();
+        let fp = steps_core::review::verify::fingerprint(&lec.items[0]);
+        write(
+            root,
+            "export.yaml",
+            &format!(
+                "schema: steps.verdicts/v1\nexported: x\nverdicts:\n  - {{ id: cvs.L04.001, verdict: approved, at: a, fingerprint: \"{fp}\" }}\n  - {{ id: cvs.L04.002, verdict: approved, at: a }}\n  - {{ id: cvs.L04.003, verdict: edited, at: a, fingerprint: \"0000000000000000\", edit: {{ answer: 1 }} }}\n  - {{ id: cvs.L04.099, verdict: edited, at: a, edit: {{ back: x }} }}\n"
+            ),
+        );
+        let out = root.join("out");
+        let a = args(&[
+            "--merged-only",
+            "--verdicts",
+            root.join("export.yaml").to_str().unwrap(),
+            "--out",
+            out.to_str().unwrap(),
+        ]);
+        let report = run(root, &a).unwrap();
+        assert!(report.contains("11 notes") && !report.contains("left out"), "{report}");
+        let bad = args(&["--verdicts", root.join("none.yaml").to_str().unwrap()]);
+        assert!(run(root, &bad).is_err());
+        // A drafts folder whose wip lecture says it is another lecture.
+        write(
+            root,
+            "content/index.yaml",
+            &format!(
+                "{}  - {{ id: cvs.L05, title: Pharmacology, pages: [321, 328], chunk: 6 }}\n",
+                crate::testkit::INDEX
+            ),
+        );
+        write(root, "wip/content-wip/cvs/L05.yaml", crate::testkit::SAMPLE);
+        let report = run(
+            root,
+            &args(&["--drafts", root.join("wip").to_str().unwrap(), "--out", out.to_str().unwrap()]),
+        )
+        .unwrap();
+        assert!(report.contains("says it is cvs.L04 (left out)"), "{report}");
     }
 }

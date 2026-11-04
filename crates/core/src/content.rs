@@ -235,7 +235,7 @@ pub enum Status {
 #[serde(deny_unknown_fields)]
 pub struct Update {
     pub text: String,
-    /// The guideline and year, e.g. "Baveno VII, 2021".
+    /// The guideline and year, e.g. "AHA/ACC 2022".
     #[serde(rename = "ref")]
     pub reference: String,
 }
@@ -292,13 +292,30 @@ mod tests {
 
     #[test]
     fn cloze_blanks_parse_numbers_answers_and_hints() {
-        let b = cloze_blanks("PMN {{c1::≥250}} cells/mm³ in {{c2::SBP::infection}}").unwrap();
-        assert_eq!(b, vec![(1, "≥250".into()), (2, "SBP".into())]);
+        let b = cloze_blanks("LDL {{c1::≥190}} mg/dL in {{c2::FH::inherited}}").unwrap();
+        assert_eq!(b, vec![(1, "≥190".into()), (2, "FH".into())]);
         assert_eq!(cloze_blanks("no blanks"), Some(vec![]));
         assert_eq!(cloze_blanks("{{c1::open"), None);
         assert_eq!(cloze_blanks("{{x1::bad}}"), None);
         assert_eq!(cloze_blanks("{{c1::}}"), None);
         assert_eq!(cloze_blanks("stray }}"), None);
+        assert_eq!(cloze_blanks("{{c1::{{c2::nested}}"), None);
+    }
+
+    #[test]
+    fn every_kind_has_its_keys() {
+        let lec: Lecture =
+            serde_yaml_ng::from_str(include_str!("../../../fixtures/content/sample.yaml")).unwrap();
+        for item in &lec.items {
+            let keys = allowed_keys(item.body.kind()).unwrap();
+            // The keys serde writes for the body are exactly the allowed ones in use.
+            let json = serde_json::to_value(item).unwrap();
+            for k in json.as_object().unwrap().keys() {
+                assert!(keys.contains(&k.as_str()) || SHARED_KEYS.contains(&k.as_str()), "{}: {k}", item.id);
+            }
+        }
+        assert_eq!(allowed_keys("table"), Some(&["title", "columns", "rows", "blanks"][..]));
+        assert_eq!(allowed_keys("flashcard"), None);
     }
 
     #[test]

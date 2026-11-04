@@ -410,4 +410,93 @@ mod tests {
         assert_eq!(rfc3339(1_709_164_800_000), "2024-02-29T00:00:00Z");
         assert_eq!(rfc3339(1_798_761_599_000), "2026-12-31T23:59:59Z");
     }
+
+    #[test]
+    fn verdict_names_round_trip() {
+        for v in [Verdict::Approved, Verdict::Edited, Verdict::Wrong] {
+            assert_eq!(Verdict::parse(v.as_str()), Some(v));
+        }
+        assert_eq!(Verdict::parse("maybe"), None);
+    }
+
+    #[test]
+    fn every_kind_offers_its_fields_and_takes_their_edits() {
+        let text = |s: &str| FieldValue::Text(s.to_string());
+        let list = |v: &[&str]| FieldValue::List(v.iter().map(|s| s.to_string()).collect());
+        for it in sample().items {
+            let fields = editable_fields(&it.body);
+            let names: Vec<&str> = fields.iter().map(|(k, _)| *k).collect();
+            let edit: Edit = match it.body.kind() {
+                "card" => Edit::from([("front".into(), text("Most affected valve in RHD?"))]),
+                "cloze" => {
+                    assert_eq!(names, ["text", "extra"]);
+                    Edit::from([
+                        ("text".into(), text("Beck triad: {{c1::hypotension}}, JVD, muffled sounds")),
+                        ("extra".into(), text("  ")),
+                    ])
+                }
+                "mcq" => Edit::from([("stem".into(), text("A stab wound to the chest…"))]),
+                "enumerate" => {
+                    assert_eq!(names, ["prompt", "points"]);
+                    Edit::from([
+                        ("prompt".into(), text("J♥NES criteria")),
+                        ("points".into(), list(&["Joints", "Carditis"])),
+                    ])
+                }
+                "essay" => Edit::from([("prompt".into(), text("Aortic dissection: risk, signs, Stanford."))]),
+                "case" => Edit::from([("stem".into(), text("A 62-year-old man with tearing pain."))]),
+                "table" => Edit::from([("title".into(), text("Shock: CVP, PCWP, CO, SVR"))]),
+                "order" => {
+                    assert_eq!(names, ["prompt", "steps"]);
+                    Edit::from([("steps".into(), list(&["Inspiration", "RV fills", "LV output falls"]))])
+                }
+                k => panic!("a kind the fixture shouldn't have: {k}"),
+            };
+            assert_eq!(names.len(), fields.len());
+            let after = apply_edit(&it.body, &edit);
+            assert_ne!(after, it.body, "{} took its edit", it.id);
+            assert_eq!(edit_problem(&it.body, &edit), None, "{}", it.id);
+            // What changed comes back as the diff.
+            let changed = diff(&it.body, &editable_fields(&after));
+            assert!(!changed.is_empty() || it.body.kind() == "cloze", "{}", it.id);
+            match &after {
+                Body::Cloze { extra, .. } => assert_eq!(*extra, None, "a blank extra is dropped"),
+                Body::Enumerate { points, pass, .. } => {
+                    assert_eq!(points.len(), 2);
+                    assert_eq!(*pass, 2, "the pass mark shrinks to the points left");
+                }
+                Body::Order { steps, .. } => assert_eq!(steps.len(), 3),
+                _ => {}
+            }
+        }
+    }
+
+    #[test]
+    fn each_kind_refuses_an_edit_it_cannot_study() {
+        let text = |s: &str| FieldValue::Text(s.to_string());
+        let list = |v: &[&str]| FieldValue::List(v.iter().map(|s| s.to_string()).collect());
+        let card = item("card");
+        assert_eq!(
+            edit_problem(&card.body, &Edit::from([("back".into(), text(" "))])),
+            Some("الوش والضهر لازم يكون فيهم كلام.")
+        );
+        let mcq = item("mcq");
+        assert_eq!(
+            edit_problem(&mcq.body, &Edit::from([("options".into(), list(&["Tamponade"]))])),
+            Some("كل اختيار في سطر، ومفيش سطر فاضي.")
+        );
+        assert_eq!(
+            edit_problem(&mcq.body, &Edit::from([("why".into(), list(&["Only one why"]))])),
+            Some("لازم سطر شرح لكل اختيار.")
+        );
+        let enumerate = item("enumerate");
+        assert_eq!(
+            edit_problem(&enumerate.body, &Edit::from([("points".into(), list(&["Carditis", ""]))])),
+            Some("كل نقطة في سطر، ومفيش سطر فاضي.")
+        );
+        let order = item("order");
+        assert!(edit_problem(&order.body, &Edit::from([("steps".into(), list(&[]))])).is_some());
+        let essay = item("essay");
+        assert_eq!(edit_problem(&essay.body, &Edit::from([("prompt".into(), text(""))])), None);
+    }
 }
