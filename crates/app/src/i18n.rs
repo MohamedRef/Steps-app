@@ -620,6 +620,13 @@ pub mod bank {
         }
     }
     pub const NOT_FOUND: &str = "السؤال ده اتشال من المحتوى.";
+    pub const BEHIND: &str = "اللي ورا الغلطة";
+    pub const FACT_NEW: &str = "جديد";
+    pub const FACT_DUE: &str = "عليه الدور";
+    pub const FACT_LEARNED: &str = "اتذاكر";
+    pub fn behind_study(n: usize) -> String {
+        format!("ذاكر {} دلوقتي", super::count::count(n, &super::count::CARD))
+    }
 
     pub const RESULT: &str = "النتيجة";
     pub const TOOK: &str = "الوقت";

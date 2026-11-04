@@ -119,6 +119,10 @@ pub fn QuestionView(
             div { class: "q-foot",
                 crate::hover::BookPage { page: item.src.page, quote, of: item.id.clone() }
             }
+            // A miss shows the cards that hold what it tested.
+            if chosen != Some(q.answer) {
+                super::behind::Behind { lecture: lecture.lecture.clone(), item: item.clone() }
+            }
             Report { item_id: q.id.clone() }
             if let Some(u) = &item.update {
                 aside { class: "q-update",
