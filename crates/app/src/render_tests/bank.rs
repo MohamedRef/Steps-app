@@ -5,6 +5,8 @@
 use steps_core::content::{Body, Item};
 use steps_core::review::{Grade, Origin};
 
+use dioxus_html::{EventData, SerializedMouseData};
+
 use super::App;
 use super::kit::{ids_of, item, reviews};
 use crate::Screen;
@@ -26,6 +28,30 @@ fn options(i: &Item) -> (String, String) {
     let Body::Mcq { options, answer, .. } = &i.body else { panic!("{} is not an MCQ", i.id) };
     let wrong = (0..options.len()).find(|&o| o != *answer).unwrap();
     (options[*answer].clone(), options[wrong].clone())
+}
+
+impl App {
+    /// Taps the paper's option carrying `text`: only an option, never a
+    /// glossary term in the stem whose title happens to hold the same words.
+    #[track_caller]
+    fn answer(&mut self, text: &str) -> &mut Self {
+        let in_options = |mut n: usize| loop {
+            if self.page.attr(n, "class").is_some_and(|c| c.split(' ').any(|c| c == "q-options")) {
+                return true;
+            }
+            match self.page.nodes[n].parent {
+                Some(p) => n = p,
+                None => return false,
+            }
+        };
+        let n = self
+            .targets("click", text)
+            .into_iter()
+            .find(|&n| in_options(n) && self.page.text(n).contains(text))
+            .unwrap_or_else(|| panic!("no option {text:?}:\n{}", self.listing("click")));
+        self.fire("click", EventData::Mouse(SerializedMouseData::default()), n);
+        self
+    }
 }
 
 fn mcqs() -> usize {
@@ -107,10 +133,10 @@ fn a_tutor_paper_checks_each_answer_and_sends_it_to_review() {
         let (right, wrong) = options(&q);
         // First question wrong (after changing his mind), the rest right.
         if k == 0 {
-            app.tap(&right);
-            app.tap(&wrong);
+            app.answer(&right);
+            app.answer(&wrong);
         } else {
-            app.tap(&right);
+            app.answer(&right);
         }
         app.assert_lacks(tx::PICK_FIRST);
         assert_eq!(reviews().len(), k, "nothing is saved before Check");
@@ -159,7 +185,7 @@ fn the_result_opens_each_question_and_goes_back_to_the_bank() {
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
     for k in 0..n {
         let (right, _) = options(&shown(&app));
-        app.tap(&right).tap(tx::CHECK);
+        app.answer(&right).tap(tx::CHECK);
         app.tap(if k + 1 == n { tx::FINISH } else { tx::NEXT });
     }
     app.assert_has("100%");
@@ -188,7 +214,7 @@ fn a_timed_paper_flags_moves_and_asks_before_it_goes_in() {
     app.assert_has(&format!("{n} {}", tx::UNANSWERED));
     let first = shown(&app);
     let (right, _) = options(&first);
-    app.tap(&right);
+    app.answer(&right);
     // A timed pick is the answer, with no Check and no explanation yet.
     app.assert_lacks(tx::CHECK);
     app.assert_lacks(tx::RIGHT_PICKED);
@@ -239,7 +265,7 @@ fn a_whole_timed_paper_answered_goes_in_without_asking() {
     let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);
     for k in 0..n {
         let (right, _) = options(&shown(&app));
-        app.tap(&right);
+        app.answer(&right);
         if k + 1 < n {
             app.tap(tx::NEXT);
         }
@@ -255,7 +281,7 @@ fn a_timed_paper_left_waits_with_its_clock_and_can_be_resumed_or_submitted() {
     let n = mcqs();
     let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);
     let (right, _) = options(&shown(&app));
-    app.tap(&right);
+    app.answer(&right);
     app.tap(tx::LEAVE);
     app.assert_has(tx::PAUSED_TITLE);
     app.assert_has(&format!("1/{n}"));
@@ -274,7 +300,7 @@ fn a_timed_paper_left_waits_with_its_clock_and_can_be_resumed_or_submitted() {
 fn a_new_paper_scores_the_one_left_first() {
     let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);
     let (right, _) = options(&shown(&app));
-    app.tap(&right);
+    app.answer(&right);
     app.tap(tx::LEAVE);
     app.tap(tx::START_TIMED);
     // The left paper went in on its own; this one runs.
@@ -308,7 +334,7 @@ fn a_mock_is_scored_and_kept_as_a_mock() {
     });
     assert_eq!(n, mcqs().min(steps_core::exam::MOCK_SIZE));
     let (_, wrong) = options(&shown(&app));
-    app.tap(&wrong);
+    app.answer(&wrong);
     app.tap_nth(tx::SUBMIT, 0);
     app.tap(tx::CONFIRM_SUBMIT);
     app.assert_has(tx::MOCK_TITLE);
@@ -364,7 +390,7 @@ fn a_scope_answered_all_right_says_so_and_widens() {
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
     for k in 0..n {
         let (right, _) = options(&shown(&app));
-        app.tap(&right).tap(tx::CHECK);
+        app.answer(&right).tap(tx::CHECK);
         app.tap(if k + 1 == n { tx::FINISH } else { tx::NEXT });
     }
     app.tap(tx::BACK);
@@ -465,7 +491,7 @@ fn the_report_link_reopens_the_check_after_a_verdict() {
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
     let q = shown(&app);
     let (right, _) = options(&q);
-    app.tap(&right).tap(tx::CHECK);
+    app.answer(&right).tap(tx::CHECK);
     // First time: the ✓ / ✎ / ✗ check; once answered, a quiet report link.
     app.assert_has(vx::QUESTION);
     app.tap(vx::RIGHT);
@@ -484,7 +510,7 @@ fn a_lecture_chip_on_an_answered_question_opens_the_lecture_page() {
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
     let q = shown(&app);
     let (right, _) = options(&q);
-    app.tap(&right).tap(tx::CHECK);
+    app.answer(&right).tap(tx::CHECK);
     app.tap(tx::OPEN_LECTURE);
     let lecture = lecture_of(&q.id);
     assert_eq!(open_lecture(&mut app), Some(lecture.clone()));
@@ -497,7 +523,7 @@ fn a_finished_paper_row_opens_its_lecture() {
     let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);
     for k in 0..n {
         let (right, _) = options(&shown(&app));
-        app.tap(&right);
+        app.answer(&right);
         if k + 1 < n {
             app.tap(tx::NEXT);
         }
@@ -577,7 +603,7 @@ fn a_running_paper_past_its_time_goes_in_on_the_next_tap() {
         }
     });
     let (right, _) = options(&shown(&app));
-    app.tap(&right);
+    app.answer(&right);
     app.assert_has(tx::RESULT);
     assert!(reviews().is_empty(), "the late pick is not taken");
 }
@@ -607,7 +633,7 @@ fn a_full_paper_with_a_flag_asks_and_goes_back_to_it() {
     let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);
     for k in 0..n {
         let (right, _) = options(&shown(&app));
-        app.tap(&right);
+        app.answer(&right);
         if k == 0 {
             app.tap(tx::FLAG);
             // Flag off and on again.
@@ -635,7 +661,7 @@ fn answers_from_before_a_launch_fill_the_last_results() {
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
     for k in 0..n {
         let (right, _) = options(&shown(&app));
-        app.tap(&right).tap(tx::CHECK);
+        app.answer(&right).tap(tx::CHECK);
         app.tap(if k + 1 == n { tx::FINISH } else { tx::NEXT });
     }
     drop(app);
@@ -743,7 +769,7 @@ fn a_new_paper_from_the_result_goes_back_to_the_setup() {
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
     for k in 0..n {
         let (right, _) = options(&shown(&app));
-        app.tap(&right).tap(tx::CHECK);
+        app.answer(&right).tap(tx::CHECK);
         // The next step takes the keyboard once Check is gone.
         app.mount_events();
         app.tap(if k + 1 == n { tx::FINISH } else { tx::NEXT });
@@ -758,7 +784,7 @@ fn a_weak_topic_after_a_paper_opens_the_bank_on_it() {
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
     for k in 0..n {
         let (_, wrong) = options(&shown(&app));
-        app.tap(&wrong).tap(tx::CHECK);
+        app.answer(&wrong).tap(tx::CHECK);
         app.tap(if k + 1 == n { tx::FINISH } else { tx::NEXT });
     }
     app.assert_has(tx::WEAK);

@@ -363,6 +363,24 @@ mod tests {
         let g = read_glossary(content).unwrap().unwrap();
         assert_eq!(g.entries.len(), 2);
         assert!(validate::glossary(&g, None).is_empty(), "{:?}", validate::glossary(&g, None));
+        // A word one course keeps plain and another explains, either way
+        // round: the entry wins and main stays valid.
+        let plain = |w: &str| format!("schema: steps.glossary/v1\nentries: []\nplain: [{w}]\n");
+        std::fs::write(content.join("glossary/mic.yaml"), plain("VSD")).unwrap();
+        std::fs::write(content.join("glossary/resp.yaml"), entry("PEEP")).unwrap();
+        std::fs::write(content.join("glossary/neuro.yaml"), plain("PEEP")).unwrap();
+        let g = read_glossary(content).unwrap().unwrap();
+        assert!(validate::glossary(&g, None).is_empty(), "{:?}", validate::glossary(&g, None));
+        assert!(g.plain.is_empty(), "{:?}", g.plain);
+        assert!(g.find("PEEP").is_some() && g.find("VSD").is_some());
+        // Within one file it is still a mix-up.
+        let both = entry("TRAP") + "plain: [TRAP]\n";
+        std::fs::write(content.join("glossary/heme.yaml"), both).unwrap();
+        let g = read_glossary(content).unwrap().unwrap();
+        assert!(validate::glossary(&g, None).iter().any(|p| p.message.contains("isn't plain")));
+        for f in ["mic", "resp", "neuro", "heme"] {
+            std::fs::remove_file(content.join(format!("glossary/{f}.yaml"))).unwrap();
+        }
         // Twice within one file is still a mistake.
         let twice = entry("GFR") + "  - { term: GFR, kind: abbr, text: y, status: unverified }\n";
         std::fs::write(content.join("glossary/renal.yaml"), twice).unwrap();

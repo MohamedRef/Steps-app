@@ -67,8 +67,16 @@ impl Glossary {
         let known: std::collections::HashSet<String> =
             self.entries.iter().flat_map(|e| e.spellings()).map(str::to_string).collect();
         let words: std::collections::HashSet<String> = self.plain.iter().cloned().collect();
-        self.entries.extend(part.entries.into_iter().filter(|e| !e.spellings().any(|s| known.contains(s))));
-        self.plain.extend(part.plain.into_iter().filter(|w| !words.contains(w)));
+        let added: Vec<Entry> =
+            part.entries.into_iter().filter(|e| !e.spellings().any(|s| known.contains(s))).collect();
+        // A word one course keeps plain and another explains: the entry
+        // wins, so the pointer still explains it. Within one file both
+        // stay, and validation names the mix-up.
+        let spelled: std::collections::HashSet<String> =
+            added.iter().flat_map(|e| e.spellings()).map(str::to_string).collect();
+        self.plain.retain(|w| !spelled.contains(w));
+        self.entries.extend(added);
+        self.plain.extend(part.plain.into_iter().filter(|w| !words.contains(w) && !known.contains(w)));
     }
 
     /// Finds the entry for a word under the pointer. Abbreviations match
