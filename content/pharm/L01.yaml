@@ -1,0 +1,627 @@
+schema: steps.content/v1
+lecture: pharm.L01
+title: Pharmacokinetics and pharmacodynamics
+book: { chapter: 5, pages: [228, 233] }
+topics:
+  - { id: enzyme-kinetics, title: Enzyme kinetics }
+  - { id: pharmacokinetics, title: Pharmacokinetics }
+  - { id: age-related-pharmacokinetics, title: Age-related changes in pharmacokinetics }
+  - { id: drug-metabolism, title: Drug metabolism }
+  - { id: elimination-of-drugs, title: Elimination of drugs }
+  - { id: urine-ph-drug-elimination, title: Urine pH and drug elimination }
+  - { id: dosage-calculations, title: Dosage calculations }
+  - { id: efficacy-vs-potency, title: Efficacy vs potency }
+  - { id: receptor-binding, title: Receptor binding }
+  - { id: therapeutic-index, title: Therapeutic index }
+items:
+  # ---------- p228: enzyme kinetics ----------
+  - id: pharm.L01.001
+    kind: card
+    topic: enzyme-kinetics
+    front: What is Km, and how is it related to the enzyme's affinity for its substrate?
+    back: Km is the substrate concentration at which the enzyme reaches 1/2 Vmax. It is inversely related to affinity (higher Km = lower affinity).
+    src: { page: 228, quote: "Km is the substrate concentration needed for an enzyme to reach a rate of 1/2 Vmax and is inversely related to the affinity of the enzyme for its substrate." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.002
+    kind: cloze
+    topic: enzyme-kinetics
+    text: Vmax is directly proportional to the {{c1::enzyme concentration}}.
+    src: { page: 228, quote: "Vmax is directly proportional to the enzyme concentration." }
+    status: unverified
+  - id: pharm.L01.003
+    kind: card
+    topic: enzyme-kinetics
+    front: Most enzymes give a hyperbolic velocity curve. What does a sigmoidal curve indicate, and what is the book's example?
+    back: Positive cooperativity in substrate binding, eg, aspartate transcarbamoylase.
+    src: { page: 228, quote: "enzymatic reactions that exhibit a sigmoidal curve usually indicate positive cooperativity in substrate binding (eg, aspartate transcarbamoylase)." }
+    status: unverified
+  - id: pharm.L01.004
+    kind: card
+    topic: enzyme-kinetics
+    front: On a Lineweaver-Burk plot, what do the y-intercept and the x-intercept tell you?
+    back: "y-intercept = 1/Vmax: the closer to 0 on the y-axis, the higher the Vmax. x-intercept = −1/Km: the closer to 0 on the x-axis, the higher the Km (and the lower the affinity)."
+    src: { page: 228, quote: "The closer to 0 on the Y-axis, the higher the Vmax. The closer to 0 on the X-axis, the higher the Km. The higher the Km, the lower the affinity." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.005
+    kind: cloze
+    topic: enzyme-kinetics
+    text: On a Lineweaver-Burk plot, reversible {{c1::competitive}} inhibitors cross the uninhibited line, whereas {{c2::noncompetitive}} inhibitors do not. Kompetitive inhibitors increase {{c3::Km}}.
+    src: { page: 228, quote: "Reversible competitive inhibitors cross each other, whereas noncompetitive inhibitors do not. Kompetitive inhibitors increase Km." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.006
+    kind: table
+    topic: enzyme-kinetics
+    title: Effects of enzyme inhibition
+    columns: [Feature, "Competitive, reversible", "Competitive, irreversible", Noncompetitive]
+    rows:
+      - [Resemble substrate, "Yes", "Yes", "No"]
+      - ["Overcome by ↑ [S]", "Yes", "No", "No"]
+      - [Bind site, Active, Active, Allosteric]
+      - [Effect on Vmax, Unchanged, ↓, ↓]
+      - [Effect on Km, ↑, Unchanged, Unchanged]
+      - [Pharmacodynamics, ↓ potency, ↓ efficacy, ↓ efficacy]
+    blanks: [[1, 1], [1, 2], [2, 3], [3, 1], [3, 3], [4, 1], [4, 3], [5, 1], [5, 2], [5, 3]]
+    src: { page: 228, quote: "Resemble substrate Yes Yes No Overcome by ↑ [S] Yes No No Bind site Active Active Allosteric Effect on Vmax Unchanged ↓ ↓ Effect on Km ↑ Unchanged Unchanged Pharmacodynamics ↓ potency ↓ efficacy ↓ efficacy" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.007
+    kind: mcq
+    topic: enzyme-kinetics
+    stem: >-
+      A pharmacology researcher studies a new drug that inhibits an enzyme in vitro. She plots 1/V against
+      1/[S] with and without the drug. With the drug, the line meets the y-axis at a higher point than the
+      uninhibited line, while both lines meet the x-axis at the same point. Adding a large excess of
+      substrate does not restore the reaction rate. Which of the following best describes this inhibitor?
+    options:
+      - It binds an allosteric site and lowers the drug's efficacy at the target
+      - It resembles the substrate and raises the Km
+      - It binds the active site reversibly and lowers potency
+      - It increases the enzyme's affinity for its substrate
+      - It increases Vmax by recruiting more enzyme
+    answer: 0
+    why:
+      - "Right. A higher y-intercept means lower Vmax with the same Km: a noncompetitive inhibitor, which binds an allosteric site, does not resemble the substrate, is not overcome by ↑ [S] and ↓ efficacy."
+      - "A competitive inhibitor raises Km (x-intercept moves toward 0) and leaves Vmax unchanged; here the x-intercept did not move."
+      - "A reversible competitive inhibitor is overcome by excess substrate and its line crosses the uninhibited line; neither happened."
+      - "Affinity is unchanged because Km (the x-intercept) is unchanged."
+      - "Vmax fell: the y-intercept (1/Vmax) went up."
+    src: { page: 228, quote: "Noncompetitive inhibitors Resemble substrate Yes Yes No Overcome by ↑ [S] Yes No No Bind site Active Active Allosteric" }
+    status: unverified
+  # ---------- p229: pharmacokinetics ----------
+  - id: pharm.L01.008
+    kind: card
+    topic: pharmacokinetics
+    front: What is bioavailability (F), and why is oral F usually below 100%?
+    back: The fraction of administered drug reaching the systemic circulation (IV = 100%). Orally it is usually <100% because of incomplete absorption and first-pass metabolism.
+    src: { page: 229, quote: "Fraction of administered drug reaching systemic circulation. For an IV dose, F = 100%. Orally: F typically <100% due to incomplete absorption and first-pass metabolism." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.009
+    kind: cloze
+    topic: pharmacokinetics
+    text: Oral bioavailability is calculated from the area under the curve as F = ({{c1::AUC oral × Dose IV}}) / ({{c2::Dose oral × AUC IV}}) × 100.
+    src: { page: 229, quote: "Can be calculated from the area under the curve in a plot of plasma concentration over time." }
+    status: unverified
+  - id: pharm.L01.010
+    kind: cloze
+    topic: pharmacokinetics
+    text: Volume of distribution Vd = {{c1::amount of drug in the body}} / {{c2::plasma drug concentration}}.
+    src: { page: 229, quote: "Theoretical value that relates drug amount to plasma concentration." }
+    status: unverified
+  - id: pharm.L01.011
+    kind: card
+    topic: pharmacokinetics
+    front: How do liver and kidney disease change Vd, and for which drugs is hemodialysis most effective?
+    back: They increase Vd (↓ protein binding → ↑ Vd). Hemodialysis works best for drugs with a low Vd.
+    src: { page: 229, quote: "Liver and kidney disease increase Vd (↓ protein binding, ↑ Vd). Drugs may be distributed in more than one compartment. Hemodialysis is most effective for drugs with a low Vd." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.012
+    kind: table
+    topic: pharmacokinetics
+    title: Volume of distribution and compartments
+    columns: [Vd, Compartment, Drug types]
+    rows:
+      - [Low, Intravascular, "Large/charged molecules; plasma protein bound"]
+      - [Medium, ECF, Small hydrophilic molecules]
+      - [High, All tissues including fat, "Small lipophilic molecules, especially if bound to tissue protein"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 229, quote: "Low Intravascular Large/charged molecules; plasma protein bound Medium ECF Small hydrophilic molecules High All tissues including fat Small lipophilic molecules, especially if bound to tissue protein" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.013
+    kind: card
+    topic: pharmacokinetics
+    front: Define clearance (CL), give its formula, and name what impairs it.
+    back: "The volume of plasma cleared of drug per unit time. CL = rate of elimination / plasma drug concentration = Vd × Ke (elimination constant). Impaired by defects in cardiac, hepatic or renal function."
+    src: { page: 229, quote: "The volume of plasma cleared of drug per unit time. Clearance may be impaired with defects in cardiac, hepatic, or renal function." }
+    status: unverified
+  - id: pharm.L01.014
+    kind: cloze
+    topic: pharmacokinetics
+    text: In first-order elimination, t1/2 = {{c1::0.7 × Vd / CL}}.
+    src: { page: 229, quote: "t1/2 = 0.7 × Vd CL in first-order elimination" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.015
+    kind: card
+    topic: pharmacokinetics
+    front: What is steady state?
+    back: A dynamic equilibrium in which drug concentration stays constant (rate of elimination = rate of administration).
+    src: { page: 229, quote: "Steady state is a dynamic equilibrium in which drug concentration stays constant (ie, rate of drug elimination = rate of drug administration)." }
+    status: unverified
+  - id: pharm.L01.016
+    kind: cloze
+    topic: pharmacokinetics
+    text: In first-order kinetics, a drug infused at a constant rate takes {{c1::4-5}} half-lives to reach steady state, and {{c2::3.3}} half-lives to reach 90% of it.
+    src: { page: 229, quote: "In first-order kinetics, a drug infused at a constant rate takes 4-5 half-lives to reach steady state. It takes 3.3 half-lives to reach 90% of the steady-state level." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.017
+    kind: table
+    topic: pharmacokinetics
+    title: Drug remaining after each half-life (first-order elimination)
+    columns: ["# of half-lives", "% remaining"]
+    rows:
+      - ["1", "50%"]
+      - ["2", "25%"]
+      - ["3", "12.5%"]
+      - ["4", "6.25%"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 229, quote: "# of half-lives 1 2 3 4 % remaining 50% 25% 12.5% 6.25%" }
+    status: unverified
+  - id: pharm.L01.018
+    kind: mcq
+    topic: pharmacokinetics
+    stem: >-
+      A 19-year-old man is brought to the emergency department after an intentional overdose of a drug
+      that is highly lipophilic and extensively bound to tissue proteins. The toxicology team says that
+      hemodialysis would remove very little of it. Which pharmacokinetic property best explains this?
+    options:
+      - A high volume of distribution
+      - A low volume of distribution
+      - 100% oral bioavailability
+      - Zero-order elimination
+      - A short half-life
+    answer: 0
+    why:
+      - "Right. Small lipophilic, tissue-bound drugs have a high Vd (distributed in all tissues including fat), so little is in the plasma for dialysis to remove."
+      - "Hemodialysis is most effective for drugs with a low Vd, which stay in the plasma."
+      - "Bioavailability is how much reaches the circulation; it does not decide what dialysis can remove."
+      - "Zero-order elimination describes the rate of metabolism (phenytoin, ethanol, aspirin), not dialyzability."
+      - "A short half-life clears the drug faster and does not stop dialysis from working."
+    src: { page: 229, quote: "Hemodialysis is most effective for drugs with a low Vd." }
+    status: unverified
+  # ---------- p229: age-related changes ----------
+  - id: pharm.L01.019
+    kind: card
+    topic: age-related-pharmacokinetics
+    front: Why do older patients often need lower drug doses?
+    back: Aging alters how drugs pass through the body, so standard doses can cause ↑ plasma concentrations; reduced doses prevent toxicity.
+    src: { page: 229, quote: "Aging alters the passage of drugs through the body and standard doses can result in ↑ plasma concentrations. Older patients often require reduced doses to prevent toxicity." }
+    status: unverified
+  - id: pharm.L01.020
+    kind: table
+    topic: age-related-pharmacokinetics
+    title: Age-related changes in pharmacokinetics
+    columns: [Step, Change with aging]
+    rows:
+      - [Absorption, Mostly unaffected]
+      - [Distribution, "↓ total body water (↓ Vd of hydrophilic drugs → ↑ concentration); ↑ total body fat (↑ Vd of lipophilic drugs → ↑ half-life)"]
+      - [Metabolism, "↓ hepatic mass and blood flow → ↓ first-pass metabolism, ↓ hepatic clearance; phase I ↓, phase II relatively preserved"]
+      - [Excretion, "↓ renal mass and blood flow (↓ GFR) → ↓ renal clearance"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 229, quote: "Absorption—mostly unaffected. Distribution—↓ total body water (↓ Vd of hydrophilic drugs → ↑ concentration), ↑ total body fat (↑ Vd of lipophilic drugs → ↑ half-life)." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.021
+    kind: mcq
+    topic: age-related-pharmacokinetics
+    stem: >-
+      An 82-year-old woman is started on diazepam, a lipophilic benzodiazepine, at the usual adult dose for
+      anxiety. Ten days later her daughter brings her in because she is drowsy most of the day and has
+      fallen twice. Renal and liver function tests are normal for her age. Which age-related change most
+      directly explains the drug's prolonged effect?
+    options:
+      - ↑ total body fat, raising the drug's volume of distribution and half-life
+      - ↓ total body water, lowering the drug's volume of distribution
+      - ↓ gastrointestinal absorption of the drug
+      - Loss of phase II conjugation in the liver
+      - ↑ renal clearance
+    answer: 0
+    why:
+      - "Right. Older patients have more body fat, so a lipophilic drug's Vd rises and, since t1/2 = 0.7 × Vd / CL, its half-life lengthens."
+      - "Less body water affects hydrophilic drugs: lower Vd and higher concentration, not a longer half-life of a lipophilic drug."
+      - "Absorption is mostly unaffected by aging."
+      - "Phase I is lost first; phase II is relatively preserved."
+      - "Renal clearance falls with age (↓ GFR)."
+    src: { page: 229, quote: "↑ total body fat (↑ Vd of lipophilic drugs → ↑ half-life)." }
+    status: unverified
+  # ---------- p230: drug metabolism ----------
+  - id: pharm.L01.022
+    kind: card
+    topic: drug-metabolism
+    front: Must phase I and phase II drug metabolism happen in order?
+    back: No. They bioactivate or deactivate substances and do not have to be sequential (phase I can follow phase II, or be a single reaction).
+    src: { page: 230, quote: "These reactions serve to bioactivate or deactivate substances, and do not have to take place sequentially (eg, phase I can follow phase II, or take place as a single reaction)." }
+    status: unverified
+  - id: pharm.L01.023
+    kind: enumerate
+    topic: drug-metabolism
+    prompt: Enumerate the phase I reactions (3), which are predominantly CYP450-dependent.
+    points:
+      - Reduction
+      - Oxidation
+      - Hydrolysis
+    pass: 3
+    hook: "Phase I بتعمل ROH: Reduction و Oxidation و Hydrolysis، وبتطلّع metabolite slightly polar."
+    src: { page: 230, quote: "Reduction Oxidation Hydrolysis" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.024
+    kind: enumerate
+    topic: drug-metabolism
+    prompt: Enumerate the phase II (conjugation) reactions (4).
+    points:
+      - Methylation
+      - Glucuronidation
+      - Acetylation
+      - Sulfation
+    pass: 4
+    hook: "Phase II بتلبّس الدوا GAS-M: Glucuronidation و Acetylation و Sulfation و Methylation."
+    src: { page: 230, quote: "Methylation Glucuronidation Acetylation Sulfation" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.025
+    kind: card
+    topic: drug-metabolism
+    front: What kind of metabolite does phase I make, and what does phase II make?
+    back: "Phase I: a slightly polar metabolite (active or inactive). Phase II: a very polar, hydrophilic metabolite (except the acetylated metabolite)."
+    src: { page: 230, quote: "Very polar, hydrophilic metabolite (except acetylated metabolite) Slightly polar metabolite (active or inactive)" }
+    status: unverified
+  - id: pharm.L01.026
+    kind: card
+    topic: drug-metabolism
+    front: Which metabolic phase do geriatric patients lose first, and why do slow acetylators get more adverse effects from isoniazid?
+    back: Geriatric patients lose phase I first. Slow acetylators metabolize drugs such as isoniazid at a ↓ rate, so they have ↑ adverse effects.
+    src: { page: 230, quote: "Geriatric patients lose phase I first. Patients who are slow acetylators have ↑ adverse effects from certain drugs because of ↓ rate of metabolism (eg, isoniazid)." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.027
+    kind: mcq
+    topic: drug-metabolism
+    stem: >-
+      A 45-year-old man is started on isoniazid for latent tuberculosis. Two months later he has burning and
+      numbness in both feet. His brother had the same problem on the same drug. Testing shows both are slow
+      acetylators. Which metabolic reaction is deficient in these brothers?
+    options:
+      - A phase II conjugation reaction
+      - A phase I CYP450 oxidation
+      - A phase I hydrolysis
+      - A phase I reduction
+      - Renal tubular secretion
+    answer: 0
+    why:
+      - "Right. Acetylation is a phase II reaction; slow acetylators metabolize isoniazid slowly and get more adverse effects."
+      - "CYP450 oxidation is phase I; acetylation is not CYP450-dependent."
+      - "Hydrolysis is a phase I reaction, not acetylation."
+      - "Reduction is a phase I reaction, not acetylation."
+      - "Tubular secretion is excretion, not metabolism."
+    src: { page: 230, quote: "Patients who are slow acetylators have ↑ adverse effects from certain drugs because of ↓ rate of metabolism (eg, isoniazid)." }
+    status: unverified
+  # ---------- p230: elimination ----------
+  - id: pharm.L01.028
+    kind: card
+    topic: elimination-of-drugs
+    front: Describe zero-order elimination and how plasma concentration falls with time.
+    back: A constant amount of drug is eliminated per unit time, regardless of Cp (capacity-limited elimination). Cp falls linearly with time.
+    src: { page: 230, quote: "Rate of elimination is constant regardless of Cp (ie, constant amount of drug eliminated per unit time). Cp ↓ linearly with time." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.029
+    kind: enumerate
+    topic: elimination-of-drugs
+    prompt: Enumerate the drugs with zero-order elimination (3).
+    points:
+      - Phenytoin
+      - Ethanol
+      - Aspirin (at high or toxic concentrations)
+    pass: 3
+    hook: "الكتاب بيقول: A PEA is round, زي الـ 0 بتاع zero-order: Phenytoin و Ethanol و Aspirin."
+    src: { page: 230, quote: "Examples of drugs—Phenytoin, Ethanol, and Aspirin (at high or toxic concentrations → ↑ salicylate saturation → zero-order elimination)." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.030
+    kind: card
+    topic: elimination-of-drugs
+    front: Describe first-order elimination and how plasma concentration falls with time.
+    back: The elimination rate is directly proportional to drug concentration (a constant fraction eliminated per unit time; flow-dependent). Cp falls exponentially. Applies to most drugs.
+    src: { page: 230, quote: "Rate of first-order elimination is directly proportional to the drug concentration (ie, constant fraction of drug eliminated per unit time). Cp ↓ exponentially with time. Applies to most drugs." }
+    status: unverified
+  - id: pharm.L01.031
+    kind: table
+    topic: elimination-of-drugs
+    title: Zero-order vs first-order elimination
+    columns: [Feature, Zero-order, First-order]
+    rows:
+      - [Amount eliminated per unit time, Constant amount, Constant fraction]
+      - [Cp over time, Falls linearly, Falls exponentially]
+      - [Half-life, "Shortens as concentration falls", Constant]
+      - [Type, Capacity-limited, Flow-dependent]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2], [3, 1], [3, 2]]
+    src: { page: 230, quote: "Capacity-limited elimination." }
+    status: unverified
+  - id: pharm.L01.032
+    kind: mcq
+    topic: elimination-of-drugs
+    stem: >-
+      A 24-year-old man with epilepsy is well controlled on phenytoin. His dose is increased slightly after
+      a breakthrough seizure. One week later he has nystagmus, ataxia and slurred speech, and his phenytoin
+      level is far higher than the small dose increase would predict. Which feature of phenytoin explains
+      this?
+    options:
+      - A constant amount of drug is eliminated per unit time once metabolism is saturated
+      - A constant fraction of drug is eliminated per unit time
+      - Its elimination depends on hepatic blood flow
+      - It is trapped in alkaline urine
+      - Its half-life stays the same at every concentration
+    answer: 0
+    why:
+      - "Right. Phenytoin has zero-order (capacity-limited) elimination: a fixed amount is cleared per hour, so a small dose rise above that capacity makes the level climb out of proportion."
+      - "A constant fraction is first-order elimination, where level rises in proportion to dose."
+      - "Flow-dependent elimination is first-order, not phenytoin's saturable kinetics."
+      - "Urine pH trapping applies to weak acids and bases such as phenobarbital and aspirin; it is not the reason here."
+      - "A constant half-life is a feature of first-order elimination."
+    src: { page: 230, quote: "Rate of elimination is constant regardless of Cp (ie, constant amount of drug eliminated per unit time). Cp ↓ linearly with time. Examples of drugs—Phenytoin, Ethanol, and Aspirin" }
+    status: unverified
+  # ---------- p231: urine pH ----------
+  - id: pharm.L01.033
+    kind: card
+    topic: urine-ph-drug-elimination
+    front: How does ionization affect a drug's elimination in urine?
+    back: Ionized species are trapped in urine and cleared quickly; neutral forms can be reabsorbed.
+    src: { page: 231, quote: "Ionized species are trapped in urine and cleared quickly. Neutral forms can be reabsorbed." }
+    status: unverified
+  - id: pharm.L01.034
+    kind: table
+    topic: urine-ph-drug-elimination
+    title: Urine pH and drug elimination
+    columns: [Drug type, Examples, Treat overdose with]
+    rows:
+      - [Weak acids, "Phenobarbital, methotrexate, aspirin (salicylates)", Sodium bicarbonate (alkalinize urine)]
+      - [Weak bases, "TCAs, amphetamines (trapped in acidic environments)", "Ammonium chloride (acidify urine), for severe alkalosis"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 231, quote: "Weak acids Examples: phenobarbital, methotrexate, aspirin (salicylates). Treat overdose with sodium bicarbonate to alkalinize urine." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.035
+    kind: card
+    topic: urine-ph-drug-elimination
+    front: Why is sodium bicarbonate given first in TCA toxicity?
+    back: To overcome the sodium channel-blocking activity of TCAs. It treats the cardiac toxicity but does not speed up drug elimination.
+    src: { page: 231, quote: "TCA toxicity is initially treated with sodium bicarbonate to overcome the sodium channel-blocking activity of TCAs. This treats cardiac toxicity, but does not accelerate drug elimination." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.036
+    kind: card
+    topic: urine-ph-drug-elimination
+    front: What is pKa?
+    back: The pH at which a weak acid or base is 50% ionized and 50% nonionized; it represents the strength of the weak acid or base.
+    src: { page: 231, quote: "pH at which drugs (weak acid or base) are 50% ionized and 50% nonionized. The pKa represents the strength of the weak acid or base." }
+    status: unverified
+  - id: pharm.L01.037
+    kind: mcq
+    topic: urine-ph-drug-elimination
+    stem: >-
+      A 67-year-old man is brought to the emergency department with tinnitus, vomiting and rapid breathing
+      after taking a whole bottle of an over-the-counter analgesic. Arterial blood gas shows a mixed
+      respiratory alkalosis and anion gap metabolic acidosis. Sodium bicarbonate is started. How does this
+      treatment speed up removal of the drug?
+    options:
+      - It ionizes the weak acid in the urine so it is trapped and excreted
+      - It makes the drug neutral so it is reabsorbed less
+      - It blocks the drug's sodium channel effect on the heart
+      - It converts the drug's elimination to zero-order
+      - It acidifies the urine to trap a weak base
+    answer: 0
+    why:
+      - "Right. Aspirin is a weak acid; alkaline urine ionizes it (RCOO−), and the ionized form is trapped in urine and cleared."
+      - "Neutral (nonionized) forms are lipid soluble and are reabsorbed, so making it neutral would slow excretion."
+      - "Bicarbonate's sodium-channel effect is the reason it is used in TCA toxicity, and that does not speed elimination."
+      - "At toxic levels aspirin already shows zero-order elimination because metabolism is saturated; bicarbonate does not cause that."
+      - "Acidifying the urine (ammonium chloride) traps weak bases such as amphetamines, not aspirin."
+    src: { page: 231, quote: "Weak acids Examples: phenobarbital, methotrexate, aspirin (salicylates). Treat overdose with sodium bicarbonate to alkalinize urine." }
+    status: unverified
+  # ---------- p231: dosage calculations ----------
+  - id: pharm.L01.038
+    kind: cloze
+    topic: dosage-calculations
+    text: Loading dose = ({{c1::Cp × Vd}}) / F. Maintenance dose = ({{c2::Cp × CL × τ}}) / F, where τ is the dosage interval.
+    src: { page: 231, quote: "Cp = target plasma concentration τ = dosage interval (time between doses); does not apply for continuous infusions" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.039
+    kind: card
+    topic: dosage-calculations
+    front: In renal or liver disease, what happens to the maintenance dose and to the loading dose?
+    back: The maintenance dose ↓; the loading dose is usually unchanged.
+    src: { page: 231, quote: "In renal or liver disease, maintenance dose ↓ and loading dose is usually unchanged." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.040
+    kind: card
+    topic: dosage-calculations
+    front: What determines the time to reach steady state?
+    back: Primarily the half-life; it is independent of the dose and dosing frequency.
+    src: { page: 231, quote: "Time to steady state depends primarily on t1/2 and is independent of dose and dosing frequency." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.041
+    kind: mcq
+    topic: dosage-calculations
+    stem: >-
+      A 58-year-old man with chronic kidney disease (GFR 25 mL/min) is admitted with a serious infection and
+      needs a renally cleared antibiotic. The pharmacist wants the drug to reach its target level quickly
+      and to avoid accumulation. Which dosing change is most appropriate compared with a patient with
+      normal kidneys?
+    options:
+      - Same loading dose, lower maintenance dose
+      - Lower loading dose, same maintenance dose
+      - Lower loading dose and lower maintenance dose
+      - Higher loading dose, higher maintenance dose
+      - Same doses given more often to reach steady state sooner
+    answer: 0
+    why:
+      - "Right. The loading dose depends on Vd (Cp × Vd / F), which is usually unchanged; the maintenance dose depends on CL (Cp × CL × τ / F), which falls in renal disease."
+      - "Vd, not clearance, sets the loading dose, so it usually stays the same."
+      - "Only the maintenance dose needs cutting; lowering the loading dose delays reaching the target level."
+      - "Higher doses would accumulate with reduced clearance."
+      - "Time to steady state depends on half-life and not on dosing frequency."
+    src: { page: 231, quote: "In renal or liver disease, maintenance dose ↓ and loading dose is usually unchanged." }
+    status: unverified
+  # ---------- p232: efficacy vs potency ----------
+  - id: pharm.L01.042
+    kind: card
+    topic: efficacy-vs-potency
+    front: What is efficacy, and where is it read on a dose-response curve?
+    back: The maximal effect a drug can produce (intrinsic activity), read as the y-value (Emax). It is unrelated to potency. Partial agonists have less efficacy than full agonists.
+    src: { page: 232, quote: "Maximal effect a drug can produce (intrinsic activity). Represented by the y-value (Emax). ↑ y-value = ↑ Emax = ↑ efficacy. Unrelated to potency" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.043
+    kind: card
+    topic: efficacy-vs-potency
+    front: What is potency, and what does a left shift of the dose-response curve mean?
+    back: The amount of drug needed for a given effect, read as the x-value (EC50). Left shift = ↓ EC50 = ↑ potency = less drug needed. Unrelated to efficacy.
+    src: { page: 232, quote: "Amount of drug needed for a given effect. Represented by the x-value (EC50). Left shifting = ↓ EC50 = ↑ potency = ↓ drug needed." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.044
+    kind: mcq
+    topic: efficacy-vs-potency
+    stem: >-
+      Two new analgesics are compared in a phase II trial. Drug A reaches 50% of its maximal pain relief at
+      2 mg, and drug B at 20 mg. At the highest doses tested, drug B relieves pain completely while drug A
+      reaches only 60% relief. Which of the following statements is correct?
+    options:
+      - Drug A is more potent, and drug B is more efficacious
+      - Drug A is more potent and more efficacious
+      - Drug B is more potent, and drug A is more efficacious
+      - The two drugs have equal efficacy
+      - Drug B is a partial agonist
+    answer: 0
+    why:
+      - "Right. A lower EC50 (2 mg) means higher potency; a higher maximal effect (Emax) means higher efficacy. The two properties are unrelated."
+      - "Drug A's Emax is lower (60%), so it is less efficacious."
+      - "Drug B needs 10 times more drug for half effect, so it is less potent."
+      - "Their maximal effects differ (60% vs 100%)."
+      - "Drug B reaches full effect; drug A, with the lower maximal effect, behaves like a partial agonist."
+    src: { page: 232, quote: "Represented by the x-value (EC50). Left shifting = ↓ EC50 = ↑ potency = ↓ drug needed. Unrelated to efficacy (ie, potent drugs can have high or low efficacy)." }
+    status: unverified
+  # ---------- p233: receptor binding ----------
+  - id: pharm.L01.045
+    kind: table
+    topic: receptor-binding
+    title: Receptor binding
+    columns: [Agonist with, Potency, Efficacy, Remarks, Example]
+    rows:
+      - [Competitive antagonist, ↓, No change, Can be overcome by ↑ agonist concentration, "Diazepam + flumazenil on GABA-A receptor"]
+      - [Noncompetitive antagonist, No change, ↓, Cannot be overcome by ↑ agonist concentration, "Norepinephrine + phenoxybenzamine on α-receptors"]
+      - [Partial agonist (alone), Independent, ↓, Acts at same site as full agonist, "Morphine (full) vs buprenorphine (partial) at μ-opioid receptors"]
+      - [Inverse agonist (alone), Independent, Negative, "Binds a constitutively active receptor, reducing its activity", "H1 antihistamines (eg, diphenhydramine)"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 2], [3, 2], [0, 4], [1, 4], [2, 4], [3, 4]]
+    src: { page: 233, quote: "Competitive antagonist ↓ No change Can be overcome by ↑ agonist concentration Diazepam (agonist) + flumazenil (competitive antagonist) on GABAA receptor." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.046
+    kind: card
+    topic: receptor-binding
+    front: What is an inverse agonist, and what is the book's example?
+    back: A drug that binds a constitutively active receptor and reduces its activity (the opposite effect of an agonist), eg, H1 antihistamines such as diphenhydramine.
+    src: { page: 233, quote: "Binds to a constitutively active receptor, thereby reducing its activity; has the opposite effect of an agonist H1 antihistamines (eg, diphenhydramine)" }
+    status: unverified
+  - id: pharm.L01.047
+    kind: mcq
+    topic: receptor-binding
+    stem: >-
+      A 36-year-old man with pheochromocytoma is given phenoxybenzamine before surgery. Dose-response
+      curves of norepinephrine on vascular α-receptors are drawn before and after the drug. Which change in
+      the norepinephrine curve is expected?
+    options:
+      - Lower maximal effect that cannot be restored by more norepinephrine
+      - Right shift with the same maximal effect
+      - Left shift with the same maximal effect
+      - Higher maximal effect
+      - Negative maximal effect
+    answer: 0
+    why:
+      - "Right. Phenoxybenzamine is a noncompetitive antagonist: efficacy ↓, potency unchanged, and it cannot be overcome by ↑ agonist concentration."
+      - "A right shift with the same maximum is a competitive antagonist, like flumazenil with diazepam."
+      - "A left shift means higher potency, which an antagonist does not cause."
+      - "An antagonist cannot raise the agonist's maximal effect."
+      - "A negative effect is what an inverse agonist does alone, not an antagonist with an agonist."
+    src: { page: 233, quote: "Noncompetitive antagonist No change ↓ Cannot be overcome by ↑ agonist concentration Norepinephrine (agonist) + phenoxybenzamine (noncompetitive antagonist) on α-receptors." }
+    status: unverified
+  # ---------- p233: therapeutic index ----------
+  - id: pharm.L01.048
+    kind: cloze
+    topic: therapeutic-index
+    text: Therapeutic index (TI) = {{c1::TD50}} / {{c2::ED50}} (TITE). Safer drugs have a {{c3::higher}} TI.
+    src: { page: 233, quote: "TITE: Therapeutic Index = TD50 / ED50. Safer drugs have ↑ TI" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.049
+    kind: card
+    topic: therapeutic-index
+    front: What is the therapeutic window?
+    back: The range of drug concentrations that can safely and effectively treat disease.
+    src: { page: 233, quote: "Therapeutic window—range of drug concentrations that can safely and effectively treat disease." }
+    status: unverified
+  - id: pharm.L01.050
+    kind: enumerate
+    topic: therapeutic-index
+    prompt: Enumerate the drugs with a low therapeutic index that need frequent monitoring (5).
+    points:
+      - Warfarin
+      - Theophylline
+      - Digoxin
+      - Antiepileptic drugs
+      - Lithium
+    pass: 5
+    hook: "الكتاب بيقول: Warning! These Drugs Are Lethal! = Warfarin و Theophylline و Digoxin و Antiepileptics و Lithium."
+    src: { page: 233, quote: "drugs with ↓ TI require frequent monitoring (eg, warfarin, theophylline, digoxin, antiepileptic drugs, lithium; Warning! These drugs are lethal!)." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.051
+    kind: card
+    topic: therapeutic-index
+    front: In animal studies, what often replaces TD50 when calculating the therapeutic index?
+    back: LD50, the lethal median dose.
+    src: { page: 233, quote: "LD50 (lethal median dose) often replaces TD50 in animal studies." }
+    status: unverified
+  - id: pharm.L01.052
+    kind: mcq
+    topic: therapeutic-index
+    stem: >-
+      A 31-year-old woman with bipolar I disorder has been stable on her medication for a year. She now has
+      coarse tremor, diarrhea and confusion after starting hydrochlorothiazide for hypertension. Her drug
+      level is high. Her psychiatrist explains that her mood stabilizer needs regular blood level checks.
+      Which property of the drug is the reason?
+    options:
+      - A low ratio of median toxic dose to median effective dose
+      - A high volume of distribution
+      - Zero-order elimination
+      - Extensive first-pass metabolism
+      - Inverse agonism at its receptor
+    answer: 0
+    why:
+      - "Right. Lithium has a low therapeutic index (TD50/ED50), like warfarin, theophylline, digoxin and antiepileptics, so its levels need frequent monitoring."
+      - "Vd affects dosing and dialysis, not why levels must be monitored."
+      - "The zero-order drugs in the book are phenytoin, ethanol and aspirin."
+      - "First-pass metabolism lowers oral bioavailability; it is not why lithium is monitored."
+      - "Inverse agonism is the action of H1 antihistamines."
+    src: { page: 233, quote: "drugs with ↓ TI require frequent monitoring (eg, warfarin, theophylline, digoxin, antiepileptic drugs, lithium; Warning! These drugs are lethal!)." }
+    status: unverified
