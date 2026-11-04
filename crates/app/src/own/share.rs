@@ -89,10 +89,10 @@ mod tests {
 
     #[test]
     fn parses_what_share_kt_writes() {
-        let s = parse(r#"{"text":"SAAG ≥ 1.1","subject":null,"app":"com.android.chrome"}"#).unwrap();
+        let s = parse(r#"{"text":"PFO: 25% of people","subject":null,"app":"com.android.chrome"}"#).unwrap();
         assert_eq!(s.source().as_deref(), Some("com.android.chrome"));
-        let s = parse(r#"{"text":"x","subject":" Ascites ","app":"a"}"#).unwrap();
-        assert_eq!(s.source().as_deref(), Some("Ascites"));
+        let s = parse(r#"{"text":"x","subject":" Pathoma ","app":"a"}"#).unwrap();
+        assert_eq!(s.source().as_deref(), Some("Pathoma"));
         assert!(parse(r#"{"text":"  "}"#).is_none());
         assert!(parse("not json").is_none());
     }

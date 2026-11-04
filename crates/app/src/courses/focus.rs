@@ -22,7 +22,7 @@ static FOCUS: GlobalSignal<Option<String>> = Signal::global(load);
 static PICKER: GlobalSignal<bool> = Signal::global(|| std::env::var_os("STEPS_COURSE_SHEET").is_some());
 
 fn load() -> Option<String> {
-    // STEPS_COURSE=hb (or "all"), for previews and screenshots.
+    // STEPS_COURSE=cvs (or "all"), for previews and screenshots.
     let id = std::env::var("STEPS_COURSE")
         .ok()
         .or_else(|| crate::store::shared().setting::<String>(KEY))

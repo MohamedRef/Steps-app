@@ -111,7 +111,7 @@ pub struct TopicStats {
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct LectureStats {
-    /// `hb.L01`.
+    /// `cvs.L04`.
     pub id: String,
     pub title: String,
     pub counts: Counts,
@@ -560,40 +560,40 @@ mod tests {
 
     const LECTURE: &str = r#"
 schema: steps.content/v1
-lecture: hb.L01
-title: Liver Cirrhosis
-book: { chapter: 1, pages: [1, 22] }
+lecture: cvs.L04
+title: Pathology
+book: { chapter: 1, pages: [300, 320] }
 topics:
-  - { id: definition, title: Definition and causes }
-  - { id: child-pugh, title: Child-Pugh and MELD }
+  - { id: valves, title: Valvular heart disease }
+  - { id: shock, title: Shock and tamponade }
 items:
-  - id: hb.L01.001
+  - id: cvs.L04.001
     kind: card
-    topic: definition
-    front: Anatomical definition of cirrhosis?
-    back: Diffuse fibrosis with regenerative nodules.
-    src: { page: 1 }
+    topic: valves
+    front: Which valve does rheumatic heart disease affect most often?
+    back: The mitral valve.
+    src: { page: 319 }
     status: unverified
-  - id: hb.L01.002
+  - id: cvs.L04.002
     kind: mcq
-    topic: child-pugh
-    stem: Which is not part of Child-Pugh?
-    options: [Bilirubin, Albumin, INR, Creatinine]
+    topic: shock
+    stem: Which is not part of Beck triad?
+    options: [Hypotension, Distended neck veins, Distant heart sounds, Bradycardia]
     answer: 3
-    why: [In it, In it, In it, That's MELD]
-    src: { page: 5 }
+    why: [In it, In it, In it, "Tamponade raises the heart rate"]
+    src: { page: 317 }
     status: unverified
-  - id: hb.L01.003
+  - id: cvs.L04.003
     kind: cloze
-    topic: child-pugh
-    text: "Child-Pugh class C starts at {{c1::10}} points."
-    src: { page: 5 }
+    topic: shock
+    text: "Pulsus paradoxus is a fall in systolic BP of more than {{c1::10}} mm Hg on inspiration."
+    src: { page: 317 }
     status: unverified
-  - id: hb.L01.004
+  - id: cvs.L04.004
     kind: card
     front: Rejected one
     back: x
-    src: { page: 6 }
+    src: { page: 318 }
     status: unverified
 "#;
 
@@ -619,19 +619,19 @@ items:
 
     fn marks() -> BTreeMap<String, Status> {
         BTreeMap::from([
-            ("hb.L01.004".to_string(), Status::Rejected),
-            ("hb.L01.001".to_string(), Status::Approved),
+            ("cvs.L04.004".to_string(), Status::Rejected),
+            ("cvs.L04.001".to_string(), Status::Approved),
         ])
     }
 
     #[test]
     fn a_period_counts_its_own_days_only() {
         let events = [
-            ev("hb.L01.001", Grade::Good, 10),
-            ev("hb.L01.001", Grade::Again, 3),
-            ev("hb.L01.001", Grade::Good, 1),
-            ev("hb.L01.002", Grade::Good, 1),
-            ev("hb.L01.004", Grade::Good, 1),
+            ev("cvs.L04.001", Grade::Good, 10),
+            ev("cvs.L04.001", Grade::Again, 3),
+            ev("cvs.L04.001", Grade::Good, 1),
+            ev("cvs.L04.002", Grade::Good, 1),
+            ev("cvs.L04.004", Grade::Good, 1),
         ];
         let week = period(&events, &marks(), clock(), 7, 0);
         assert_eq!(week.days.len(), 7);
@@ -649,11 +649,11 @@ items:
     #[test]
     fn counts_per_lecture_and_topic() {
         let events = [
-            ev("hb.L01.001", Grade::Good, 5),
-            ev("hb.L01.001", Grade::Again, 2),
-            ev("hb.L01.002", Grade::Again, 3),
-            ev("hb.L01.002", Grade::Good, 3),
-            ev("hb.L01.004", Grade::Good, 1),
+            ev("cvs.L04.001", Grade::Good, 5),
+            ev("cvs.L04.001", Grade::Again, 2),
+            ev("cvs.L04.002", Grade::Again, 3),
+            ev("cvs.L04.002", Grade::Good, 3),
+            ev("cvs.L04.004", Grade::Good, 1),
         ];
         let s = lecture_stats(&lectures(), &events, &marks(), clock());
         let l = &s[0];
@@ -673,57 +673,57 @@ items:
 
     #[test]
     fn weak_topics_need_enough_answers() {
-        let mut events = vec![ev("hb.L01.001", Grade::Good, 20)];
+        let mut events = vec![ev("cvs.L04.001", Grade::Good, 20)];
         for d in 1..=4 {
-            events.push(ev("hb.L01.001", Grade::Again, d));
+            events.push(ev("cvs.L04.001", Grade::Again, d));
         }
         let s = lecture_stats(&lectures(), &events, &marks(), clock());
         assert!(weakest_topics(&s, 3).is_empty(), "4 counted answers are too few");
-        events.push(ev("hb.L01.001", Grade::Good, 0));
+        events.push(ev("cvs.L04.001", Grade::Good, 0));
         for d in 1..=6 {
-            events.push(ev("hb.L01.002", Grade::Good, d));
+            events.push(ev("cvs.L04.002", Grade::Good, d));
         }
         let s = lecture_stats(&lectures(), &events, &marks(), clock());
         let weak = weakest_topics(&s, 3);
         assert_eq!(weak.len(), 1, "a topic with no misses isn't weak");
-        assert_eq!(weak[0].topic.as_deref(), Some("definition"));
+        assert_eq!(weak[0].topic.as_deref(), Some("valves"));
         assert!((weak[0].score - 0.8).abs() < 1e-6);
         let ids = topics_session(&lectures(), &weak, &events, &marks());
-        assert_eq!(ids, ["hb.L01.001"]);
+        assert_eq!(ids, ["cvs.L04.001"]);
     }
 
     #[test]
     fn mistakes_log_window_and_recovery() {
         let events = [
-            ev("hb.L01.001", Grade::Again, 20), // too old
-            ev("hb.L01.002", Grade::Again, 3),
-            ev("hb.L01.002", Grade::Again, 2),
-            ev("hb.L01.002", Grade::Good, 1), // one right answer isn't recovery yet
-            ev("hb.L01.003", Grade::Again, 4),
-            ev("hb.L01.003", Grade::Good, 3),
-            ev("hb.L01.003", Grade::Good, 2),  // recovered
-            ev("hb.L01.004", Grade::Again, 1), // rejected
+            ev("cvs.L04.001", Grade::Again, 20), // too old
+            ev("cvs.L04.002", Grade::Again, 3),
+            ev("cvs.L04.002", Grade::Again, 2),
+            ev("cvs.L04.002", Grade::Good, 1), // one right answer isn't recovery yet
+            ev("cvs.L04.003", Grade::Again, 4),
+            ev("cvs.L04.003", Grade::Good, 3),
+            ev("cvs.L04.003", Grade::Good, 2),  // recovered
+            ev("cvs.L04.004", Grade::Again, 1), // rejected
         ];
         let log = mistakes(&lectures(), &events, &marks(), NOW);
         assert_eq!(log.len(), 1);
-        assert_eq!(log[0].topic.as_deref(), Some("child-pugh"));
-        assert_eq!(log[0].title, "Child-Pugh and MELD");
+        assert_eq!(log[0].topic.as_deref(), Some("shock"));
+        assert_eq!(log[0].title, "Shock and tamponade");
         assert_eq!(
             log[0].items,
-            [Mistake { item_id: "hb.L01.002".into(), misses: 2, last_miss_ms: NOW - 2 * DAY_MS }]
+            [Mistake { item_id: "cvs.L04.002".into(), misses: 2, last_miss_ms: NOW - 2 * DAY_MS }]
         );
-        assert_eq!(mistakes_session(&log), ["hb.L01.002"]);
+        assert_eq!(mistakes_session(&log), ["cvs.L04.002"]);
     }
 
     #[test]
     fn rough_forecast_follows_the_ladder() {
         let events = [
-            ev("hb.L01.001", Grade::Good, 2), // first right answer: back after 1 day, overdue
-            ev("hb.L01.002", Grade::Good, 3),
-            ev("hb.L01.002", Grade::Good, 1), // second: back 3 days after
-            ev("hb.L01.003", Grade::Good, 4),
-            ev("hb.L01.003", Grade::Again, 0), // starts over: back tomorrow
-            ev("hb.L01.004", Grade::Good, 1),  // rejected
+            ev("cvs.L04.001", Grade::Good, 2), // first right answer: back after 1 day, overdue
+            ev("cvs.L04.002", Grade::Good, 3),
+            ev("cvs.L04.002", Grade::Good, 1), // second: back 3 days after
+            ev("cvs.L04.003", Grade::Good, 4),
+            ev("cvs.L04.003", Grade::Again, 0), // starts over: back tomorrow
+            ev("cvs.L04.004", Grade::Good, 1),  // rejected
         ];
         let f = rough_forecast(&lectures(), &events, &marks(), clock(), 5);
         assert_eq!(f, [1, 1, 1, 0, 0]);
@@ -732,10 +732,10 @@ items:
     #[test]
     fn first_sightings_per_day() {
         let events = [
-            ev("hb.L01.001", Grade::Good, 3),
-            ev("hb.L01.001", Grade::Good, 1),
-            ev("hb.L01.002", Grade::Again, 1),
-            ev("hb.L01.004", Grade::Good, 1), // rejected
+            ev("cvs.L04.001", Grade::Good, 3),
+            ev("cvs.L04.001", Grade::Good, 1),
+            ev("cvs.L04.002", Grade::Again, 1),
+            ev("cvs.L04.004", Grade::Good, 1), // rejected
         ];
         let today = clock().today();
         let got = first_seen_by_day(&lectures(), &events, &marks(), clock());
@@ -745,11 +745,11 @@ items:
     #[test]
     fn day_start_progress_and_today_so_far() {
         let events = [
-            ev("hb.L01.001", Grade::Good, 2),
-            ev("hb.L01.001", Grade::Good, 0),
-            ev("hb.L01.001", Grade::Again, 0),
-            ev("hb.L01.002", Grade::Good, 0),
-            ev("hb.L01.004", Grade::Good, 0), // rejected
+            ev("cvs.L04.001", Grade::Good, 2),
+            ev("cvs.L04.001", Grade::Good, 0),
+            ev("cvs.L04.001", Grade::Again, 0),
+            ev("cvs.L04.002", Grade::Good, 0),
+            ev("cvs.L04.004", Grade::Good, 0), // rejected
         ];
         let p = progress_at_day_start(&lectures(), &events, &marks(), clock());
         assert_eq!((p[0].total, p[0].seen, p[0].seen_twice), (3, 1, 0), "today's answers don't count yet");

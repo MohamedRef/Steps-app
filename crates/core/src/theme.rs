@@ -44,7 +44,7 @@ pub struct Palette {
     pub accent_ink: &'static str,
     /// A quiet tinted container: notes, flat cards, the lecture header.
     pub soft: &'static str,
-    /// Liver-tissue green: right answers, "ready".
+    /// Calm green: right answers, "ready".
     pub good: &'static str,
     pub good_soft: &'static str,
     pub bad: &'static str,

@@ -60,16 +60,16 @@ mod tests {
 
     #[test]
     fn typed_cells_match_despite_spacing_dashes_and_case() {
-        // Cells from the Child-Pugh table (fixtures/content/sample.yaml).
-        assert!(matches("2.8 – 3.5", "2.8-3.5"));
-        assert!(matches(" stage 1-2 ", "Stage 1-2"));
-        assert!(matches(">= 3", "≥3"));
-        assert!(matches("Mild to moderate.", "Mild to moderate"));
-        assert!(matches("Absent", "Absent (none)"));
-        assert!(matches("SBP", "SBP or HRS"));
-        assert!(!matches("2-3", "2.8-3.5"));
-        assert!(!matches("", "<2"));
-        assert!(!matches("   ", "<2"));
+        // Cells like First Aid's tables (hemodynamics, criteria, grades).
+        assert!(matches("2.5 – 3.5", "2.5-3.5"));
+        assert!(matches(" grade 1-2 ", "Grade 1-2"));
+        assert!(matches(">= 10", "≥10"));
+        assert!(matches("Normal or high.", "Normal or high"));
+        assert!(matches("Mitral", "Mitral (most common)"));
+        assert!(matches("HCM", "HCM or DCM"));
+        assert!(!matches("2-3", "2.5-3.5"));
+        assert!(!matches("", "↓"));
+        assert!(!matches("   ", "↓"));
     }
 
     #[test]
