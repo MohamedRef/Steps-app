@@ -73,7 +73,7 @@ pub fn Today() -> Element {
                         }
                     }
                 }
-                Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0, minutes }
+                Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0 && o.locked == 0, minutes }
                 // Each count opens what it counts.
                 div { class: "stat-tiles",
                     Tile {
@@ -95,6 +95,11 @@ pub fn Today() -> Element {
                             move |_| if fresh.is_empty() { crate::stats::open(ui, crate::stats::Tab::Plan) } else { session(ui, fresh.clone()) }
                         },
                     }
+                }
+                // New items waiting for their First Aid page (A2): one quiet
+                // line, so a 0 above never reads as "nothing written".
+                if o.locked > 0 {
+                    p { class: "muted small td-locked", {tx::locked(o.locked)} }
                 }
                 // The active plan already shows its estimated minutes; without
                 // a plan this stays a quiet link, not another large metric tile.
@@ -309,15 +314,36 @@ fn PlanHero(t: DailyTarget, due: usize, due_minutes: u32) -> Element {
     let minutes = due_minutes + (left * NEW_ITEM_SECS).div_ceil(60);
     let tight = match t.plan.status {
         // Inside the final window the hero already says mocks and weak topics.
-        PlanStatus::Tight { fix, .. } => match fix {
-            TightFix::MoreDays(n) => Some(tx::tight_days(n)),
-            TightFix::HigherCap(cap) => Some(tx::tight_cap(cap)),
-            TightFix::HighYield => Some(tx::TIGHT_HIGH_YIELD.to_string()),
-            TightFix::FinalWindow => None,
-        },
+        PlanStatus::Tight { fix, later_exam, .. } => {
+            let fix = match fix {
+                TightFix::MoreDays(n) => Some(tx::tight_days(n)),
+                TightFix::HigherCap(cap) => Some(tx::tight_cap(cap)),
+                TightFix::HighYield => Some(tx::TIGHT_HIGH_YIELD.to_string()),
+                TightFix::Dedicated => None,
+            };
+            let later = later_exam.map(|d| crate::i18n::plan::later_exam(&crate::plan::long_date(d)));
+            match (fix, later) {
+                (Some(f), Some(l)) => Some(format!("{f} {l}")),
+                (f, l) => f.or(l),
+            }
+        }
         _ => None,
     };
-    let mut ui = use_context::<Ui>();
+    // The phase, today's qbank questions and the next self-assessment.
+    let mut context = vec![crate::plan::phase_label(day.phase).to_string()];
+    if day.qbank > 0 {
+        context.push(crate::i18n::plan::qbank(day.qbank));
+    }
+    if let Some(m) = t.plan.next_milestone().filter(|m| m.day > day.day) {
+        context.push(format!(
+            "{}: {}، {}",
+            crate::i18n::plan::NEXT_MILESTONE,
+            crate::plan::milestone_label(m.kind),
+            crate::plan::short_date(m.day)
+        ));
+    }
+    let context = context.join(" · ");
+    let ui = use_context::<Ui>();
     rsx! {
         div { class: "plan-line",
             button {
@@ -368,14 +394,14 @@ fn PlanHero(t: DailyTarget, due: usize, due_minutes: u32) -> Element {
                         }
                     },
                     Focus::Mock => rsx! {
-                        p { class: "plan-target", {tx::MOCK} }
-                        button {
-                            class: "btn-link",
-                            onclick: move |e: MouseEvent| {
-                                e.stop_propagation();
-                                ui.screen.set(Screen::Bank)
-                            },
-                            {tx::OPEN_BANK}
+                        p { class: "plan-target",
+                            bdi { {tx::milestone_today(day.milestone.map_or("", crate::plan::milestone_label))} }
+                        }
+                    },
+                    Focus::CatchUp => rsx! {
+                        p { class: "plan-target", {tx::CATCH_UP} }
+                        if due > 0 {
+                            p { class: "muted small", {tx::plan_reviews_only(due)} }
                         }
                     },
                     Focus::WeakTopics => rsx! {
@@ -391,9 +417,11 @@ fn PlanHero(t: DailyTarget, due: usize, due_minutes: u32) -> Element {
                 }
             }
         }
+        p { class: "plan-context muted small", "data-phase": "{day.phase:?}", bdi { {context} } }
         if let Some(note) = tight {
             p { class: "note small", {note} }
         }
+        crate::plan::RebalanceCard { t: t.clone() }
     }
 }
 
@@ -423,9 +451,11 @@ fn unseen(store: &dyn StudyStore, o: &Overview, n: usize) -> Vec<String> {
     order
         .into_iter()
         .filter_map(|id| lib.lectures.get(id))
-        .flat_map(|l| &l.items)
-        .filter(|i| crate::study::PLAYABLE.contains(&i.body.kind()))
-        .filter(|i| store.is_new(&i.id) && !store.is_hidden(&i.id))
+        .flat_map(|l| l.items.iter().map(move |i| (l, i)))
+        .filter(|(_, i)| crate::study::PLAYABLE.contains(&i.body.kind()))
+        .filter(|(_, i)| store.is_new(&i.id) && !store.is_hidden(&i.id))
+        .filter(|(l, i)| steps_core::session::page_read(i, l, store.pages_read()))
+        .map(|(_, i)| i)
         .take(n)
         .map(|i| i.id.clone())
         .collect()

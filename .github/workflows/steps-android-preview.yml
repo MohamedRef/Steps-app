@@ -119,6 +119,8 @@ jobs:
           mkdir -p ~/.steps-preview-update
           if [ "$KEEP_KEY" = true ]; then
             [ -n "$SECRET" ] || { echo "::error::secret STEPS_UPDATE_SECRET is missing (scripts/release-secrets.sh)"; exit 1; }
+            grep -q '^[A-Za-z0-9+/]\{43\}=$' crates/app/update-key.pub \
+              || { echo "::error::STEPS_UPDATE_SECRET is set but crates/app/update-key.pub holds no key yet: commit the public key scripts/release-secrets.sh printed (docs/RELEASE.md §2)"; exit 1; }
             cp crates/app/update-key.pub ~/.steps-preview-update/key.pub
             printf %s "$SECRET" > ~/.steps-preview-update/secret
           else
@@ -204,13 +206,23 @@ jobs:
           chmod 600 ~/.steps-preview/*
       - name: Sign
         if: env.CONTENT_ONLY != 'true'
+        env:
+          # The release certificate's public fingerprint (a repo variable set
+          # by scripts/release-secrets.sh): a kept-key build signed with any
+          # other key would never install over Steps, so it stops here.
+          CERT_SHA256: ${{ vars.STEPS_ANDROID_CERT_SHA256 }}
         run: |
           IN=dist/android/release/steps-unsigned.apk
           PASS="$(cat ~/.steps-preview/pass)"
           zipalign -f -p 4 "$IN" /tmp/aligned.apk
           apksigner sign --ks ~/.steps-preview/preview.jks --ks-key-alias "$(cat ~/.steps-preview/alias)" \
             --ks-pass "pass:$PASS" --key-pass "pass:$PASS" --out dist/android/steps-preview.apk /tmp/aligned.apk
-          apksigner verify --print-certs dist/android/steps-preview.apk
+          apksigner verify --print-certs dist/android/steps-preview.apk | tee /tmp/certs.txt
+          if [ "$KEEP_KEY" = true ]; then
+            [ -n "$CERT_SHA256" ] || { echo "::error::repo variable STEPS_ANDROID_CERT_SHA256 is missing (scripts/release-secrets.sh)"; exit 1; }
+            grep -qi "certificate SHA-256 digest: $CERT_SHA256\$" /tmp/certs.txt \
+              || { echo "::error::the APK is not signed with the permanent release key ($CERT_SHA256)"; exit 1; }
+          fi
           # The S24 Ultra and Tab S11 are arm64; dx defaults to the emulator ABI.
           unzip -l dist/android/steps-preview.apk | grep -q 'lib/arm64-v8a/' \
             || { echo "APK has no arm64-v8a library"; unzip -l dist/android/steps-preview.apk; exit 1; }
