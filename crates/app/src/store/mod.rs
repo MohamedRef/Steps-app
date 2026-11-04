@@ -544,7 +544,10 @@ pub fn shared() -> &'static Store {
             Store::open_in_memory().expect("an in-memory database always opens")
         }
     });
-    #[cfg(not(target_arch = "wasm32"))]
+    // Unit tests: each test thread has its own store in memory.
+    #[cfg(test)]
+    return TEST_STORE.with(|s| *s);
+    #[cfg(all(not(target_arch = "wasm32"), not(test)))]
     STORE.get_or_init(|| {
         let opened = paths::data_dir().and_then(|dir| {
             Store::open_marked(&dir.join("steps.db"), paths::install_marker().as_deref())
@@ -560,14 +563,14 @@ pub fn shared() -> &'static Store {
     })
 }
 
+#[cfg_attr(test, allow(dead_code))]
 static STORE: OnceLock<Store> = OnceLock::new();
 static OPEN_ERROR: OnceLock<String> = OnceLock::new();
 
-/// Test-only: the shared store in memory, for fixtures that render screens
-/// reading it (`browser_fixture`). Call before anything opens the store.
 #[cfg(test)]
-pub fn use_memory_store() {
-    let _ = STORE.set(Store::open_in_memory().expect("an in-memory database always opens"));
+thread_local! {
+    static TEST_STORE: &'static Store =
+        Box::leak(Box::new(Store::open_in_memory().expect("an in-memory database always opens")));
 }
 
 /// Why the store fell back to memory, if it did.
@@ -730,9 +733,9 @@ mod tests {
     fn a_write_and_its_outbox_entry_land_together() {
         let s = Store::open_in_memory().unwrap();
         s.conn.lock().unwrap().execute("DROP TABLE sync_outbox", []).unwrap();
-        assert!(s.append_review(ev("hb.L01.001", Grade::Good, 10)).is_err());
+        assert!(s.append_review(ev("cvs.L04.001", Grade::Good, 10)).is_err());
         assert!(s.reviews().unwrap().is_empty(), "the answer rolls back with its outbox entry");
-        assert!(s.set_judgement("hb.L01.001", Some(&judgement(Verdict::Approved))).is_err());
+        assert!(s.set_judgement("cvs.L04.001", Some(&judgement(Verdict::Approved))).is_err());
         assert!(s.judgements().unwrap().is_empty());
     }
 
@@ -777,8 +780,8 @@ mod tests {
         {
             let s = Store::open(&path).unwrap();
             device = s.device();
-            s.append_review(ev("hb.L01.001", Grade::Good, 10)).unwrap();
-            s.append_review(ev("hb.L01.002", Grade::Again, 10)).unwrap();
+            s.append_review(ev("cvs.L04.001", Grade::Good, 10)).unwrap();
+            s.append_review(ev("cvs.L04.002", Grade::Again, 10)).unwrap();
         }
         let s = Store::open(&path).unwrap();
         assert_eq!(s.device(), device);
@@ -790,7 +793,7 @@ mod tests {
         insert_review(&s.conn.lock().unwrap(), &log[0]).unwrap();
         assert_eq!(s.reviews().unwrap().len(), 2);
         // New stamps sort after the stored ones.
-        let next = s.append_review(ev("hb.L01.003", Grade::Good, 0)).unwrap();
+        let next = s.append_review(ev("cvs.L04.003", Grade::Good, 0)).unwrap();
         assert!(next.hlc > log[1].hlc);
         let _ = std::fs::remove_dir_all(dir);
     }
@@ -798,17 +801,17 @@ mod tests {
     #[test]
     fn verdicts_are_last_writer_wins_and_can_be_undone() {
         let s = Store::open_in_memory().unwrap();
-        s.set_judgement("hb.L01.001", Some(&judgement(Verdict::Wrong))).unwrap();
+        s.set_judgement("cvs.L04.001", Some(&judgement(Verdict::Wrong))).unwrap();
         let mut edited = judgement(Verdict::Edited);
         edited.edit.insert("back".into(), FieldValue::Text("mine".into()));
-        s.set_judgement("hb.L01.001", Some(&edited)).unwrap();
-        assert_eq!(s.judgements().unwrap()["hb.L01.001"], edited);
+        s.set_judgement("cvs.L04.001", Some(&edited)).unwrap();
+        assert_eq!(s.judgements().unwrap()["cvs.L04.001"], edited);
         // An older write (a late sync row) loses.
         let old = Hlc { wall_ms: 0, counter: 0, device: "tab".into() };
-        s.put_lww("item_status", "item_id", "hb.L01.001", Some("approved"), "{}", false, &old).unwrap();
-        assert_eq!(s.judgements().unwrap()["hb.L01.001"].verdict, Verdict::Edited);
+        s.put_lww("item_status", "item_id", "cvs.L04.001", Some("approved"), "{}", false, &old).unwrap();
+        assert_eq!(s.judgements().unwrap()["cvs.L04.001"].verdict, Verdict::Edited);
         // Undo leaves a tombstone: unverified again.
-        s.set_judgement("hb.L01.001", None).unwrap();
+        s.set_judgement("cvs.L04.001", None).unwrap();
         assert!(s.judgements().unwrap().is_empty());
     }
 

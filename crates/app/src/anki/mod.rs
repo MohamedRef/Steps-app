@@ -198,8 +198,12 @@ fn save_and_open(bytes: &[u8]) -> Result<String, String> {
 
 #[cfg(not(any(target_os = "android", target_arch = "wasm32")))]
 fn save_and_open(bytes: &[u8]) -> Result<String, String> {
-    let home =
-        std::env::var_os("HOME").or_else(|| std::env::var_os("USERPROFILE")).ok_or("no home folder")?;
+    // Unit tests save into their own scratch folder.
+    let home = if cfg!(test) {
+        crate::prefs::test_dir().into_os_string()
+    } else {
+        std::env::var_os("HOME").or_else(|| std::env::var_os("USERPROFILE")).ok_or("no home folder")?
+    };
     let downloads = std::path::Path::new(&home).join("Downloads");
     let dir = if downloads.is_dir() { downloads } else { std::path::PathBuf::from(home) };
     let path = dir.join(FILE_NAME);
@@ -211,13 +215,57 @@ fn save_and_open(bytes: &[u8]) -> Result<String, String> {
     } else {
         "xdg-open"
     };
-    // Opening is a convenience: the file is saved either way.
-    let _ = std::process::Command::new(opener).arg(&path).spawn();
+    // Opening is a convenience: the file is saved either way. Unit tests
+    // open nothing on the machine running them.
+    if !cfg!(test) {
+        let _ = std::process::Command::new(opener).arg(&path).spawn();
+    }
     Ok(path.display().to_string())
 }
 
 #[cfg(test)]
 mod tests {
+    use std::collections::BTreeMap;
+
+    use steps_core::review::verify::{Edit, Judgement, Verdict, fingerprint};
+
+    use super::*;
+
+    fn judged(item: &Item, verdict: Verdict) -> Judgement {
+        Judgement { verdict, edit: Edit::new(), note: None, fingerprint: fingerprint(item), at_ms: 1 }
+    }
+
+    #[test]
+    fn his_verdicts_shape_the_deck() {
+        let lectures: Vec<_> = super::Library::get().lectures.values().cloned().collect();
+        let items: Vec<&Item> = lectures.iter().flat_map(|l| &l.items).collect();
+        assert!(items.len() >= 4, "the cardiovascular embryology lecture has items");
+        let mut j = BTreeMap::new();
+        j.insert(items[0].id.clone(), judged(items[0], Verdict::Wrong));
+        j.insert(items[1].id.clone(), judged(items[1], Verdict::Edited));
+        j.insert(items[2].id.clone(), judged(items[2], Verdict::Approved));
+        // A verdict on an older wording no longer counts.
+        let mut stale = judged(items[3], Verdict::Approved);
+        stale.fingerprint = "0000".into();
+        j.insert(items[3].id.clone(), stale);
+        let v = verdicts(&lectures, |id| j.get(id));
+        assert_eq!(v.wrong, BTreeSet::from([items[0].id.clone()]));
+        assert_eq!(v.edits.keys().cloned().collect::<Vec<_>>(), [items[1].id.clone()]);
+        assert_eq!(v.approved, BTreeSet::from([items[2].id.clone()]));
+        // The deck leaves the ✗ item out.
+        std::fs::create_dir_all(crate::prefs::test_dir()).unwrap();
+        let (notes, place) = export_now(|id| j.get(id), &BTreeMap::new()).unwrap();
+        let (all, _) = export_now(|_| None, &BTreeMap::new()).unwrap();
+        assert!(notes < all, "{notes} of {all}");
+        assert!(place.ends_with("steps.apkg"));
+    }
+
+    #[test]
+    fn the_yield_lets_the_ui_paint_once() {
+        let rt = tokio::runtime::Builder::new_current_thread().build().unwrap();
+        rt.block_on(futures_yield());
+    }
+
     #[test]
     fn the_embedded_content_exports() {
         let lectures: Vec<_> = super::Library::get().lectures.values().cloned().collect();

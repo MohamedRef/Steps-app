@@ -264,3 +264,17 @@ fn table_label(name: &str) -> String {
         other => other.replace('_', " "),
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn each_table_is_named_for_him_and_a_new_one_reads_plainly() {
+        assert_eq!(table_label("review_events"), tx::T_REVIEWS);
+        assert_eq!(table_label("item_status"), tx::T_CHECKS);
+        assert_eq!(table_label("settings"), tx::T_SETTINGS);
+        assert_eq!(table_label("own_cards"), tx::T_OWN);
+        assert_eq!(table_label("lesson_progress"), "lesson progress");
+    }
+}

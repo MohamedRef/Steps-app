@@ -177,9 +177,30 @@ mod tests {
     #[test]
     fn short_text_hides_cloze_answers() {
         let item: Item = serde_yaml_ng::from_str(
-            "{ id: x.1, kind: cloze, text: 'Class A = {{c1::5-6}} points', src: { page: 1 }, status: unverified }",
+            "{ id: x.1, kind: cloze, text: 'PFO is seen in {{c1::25%}} of people', src: { page: 1 }, status: unverified }",
         )
         .unwrap();
-        assert_eq!(short_text(&item), "Class A = ___ points");
+        assert_eq!(short_text(&item), "PFO is seen in ___ of people");
+    }
+
+    #[test]
+    fn every_kind_has_a_label_and_a_short_line() {
+        let lec: steps_core::content::Lecture =
+            serde_yaml_ng::from_str(include_str!("../../../../fixtures/content/sample.yaml")).unwrap();
+        let mut kinds = std::collections::BTreeSet::new();
+        for item in &lec.items {
+            assert!(!kind_label(&item.body).is_empty());
+            let line = short_text(item);
+            assert!(!line.is_empty() && line.chars().count() <= 89, "{line}");
+            kinds.insert(item.body.kind());
+        }
+        assert!(kinds.contains("case") && kinds.contains("essay") && kinds.contains("mcq"));
+        // A long stem is cut to one line.
+        let long: Item = serde_yaml_ng::from_str(&format!(
+            "{{ id: x.2, kind: card, front: '{}', back: b, src: {{ page: 1 }}, status: unverified }}",
+            "word ".repeat(40)
+        ))
+        .unwrap();
+        assert!(short_text(&long).ends_with('…'));
     }
 }

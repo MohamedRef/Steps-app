@@ -37,9 +37,9 @@ pub struct Hook {
 /// slides numbers them per lecture.
 #[derive(Clone, Debug, PartialEq)]
 pub enum Scope {
-    /// A page of this course's book (`hb`).
+    /// A page of this course's book (`cvs`).
     Book(String),
-    /// A slide of this lecture (`res.L02`).
+    /// A slide of this lecture (`phs.L02`).
     Slides(String),
 }
 static OPEN: GlobalSignal<Option<Open>> = Signal::global(|| None);

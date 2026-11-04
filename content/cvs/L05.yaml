@@ -1,0 +1,1306 @@
+schema: steps.content/v1
+lecture: cvs.L05
+title: Pharmacology
+book: { chapter: 7, pages: [321, 328] }
+topics:
+  - { id: deep-venous-thrombosis, title: Deep venous thrombosis }
+  - { id: hypertension-treatment, title: Hypertension treatment }
+  - { id: nitrates, title: Nitrates }
+  - { id: calcium-channel-blockers, title: Calcium channel blockers }
+  - { id: hydralazine, title: Hydralazine }
+  - { id: hypertensive-emergency, title: Hypertensive emergency }
+  - { id: antianginal-therapy, title: Antianginal therapy }
+  - { id: ranolazine, title: Ranolazine }
+  - { id: sacubitril, title: Sacubitril }
+  - { id: lipid-lowering-agents, title: Lipid-lowering agents }
+  - { id: digoxin, title: Digoxin }
+  - { id: class-i-antiarrhythmics, title: "Antiarrhythmics: sodium channel blockers (class I)" }
+  - { id: class-ii-antiarrhythmics, title: "Antiarrhythmics: β-blockers (class II)" }
+  - { id: class-iii-antiarrhythmics, title: "Antiarrhythmics: potassium channel blockers (class III)" }
+  - { id: class-iv-antiarrhythmics, title: "Antiarrhythmics: calcium channel blockers (class IV)" }
+  - { id: other-antiarrhythmics, title: Other antiarrhythmics }
+  - { id: ivabradine, title: Ivabradine }
+items:
+  # ---------- p321: DVT ----------
+  - id: cvs.L05.001
+    kind: enumerate
+    topic: deep-venous-thrombosis
+    prompt: Enumerate the Virchow triad (SHE) that predisposes to DVT, with examples.
+    points:
+      - Stasis (post-op, long drive/flight)
+      - Hypercoagulability (factor V Leiden, oral contraceptives, pregnancy)
+      - Endothelial damage (exposed collagen triggers the clotting cascade)
+    pass: 3
+    hook: "الكتاب بيقولها SHE: الدم واقف، والدم بيتجلط بسهولة، والحيطة متعورة."
+    src: { page: 321, quote: "Predisposed by Virchow triad (SHE): Stasis (eg, post-op, long drive/flight) Hypercoagulability (eg, defect in coagulation cascade proteins, such as factor V Leiden; oral contraceptive use; pregnancy) Endothelial damage (exposed collagen triggers clotting cascade)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.002
+    kind: card
+    topic: deep-venous-thrombosis
+    front: Which DVTs are most likely to cause PE?
+    back: Proximal veins (femoral, iliac, popliteal). Distal calf DVTs are less likely to embolize and often resolve spontaneously.
+    src: { page: 321, quote: "DVT → PE risk highest in proximal veins (femoral, iliac, popliteal). Distal calf DVT less likely to embolize; often resolve spontaneously." }
+    status: unverified
+  - id: cvs.L05.003
+    kind: card
+    topic: deep-venous-thrombosis
+    front: When is D-dimer useful in suspected DVT, and what is the imaging test of choice?
+    back: D-dimer can rule out DVT when probability is low or moderate (high sensitivity, low specificity). Imaging of choice is compression ultrasound with Doppler.
+    src: { page: 321, quote: "D-dimer test may be used clinically to rule out DVT if disease probability is low or moderate (high sensitivity, low specificity). Imaging test of choice is compression ultrasound with Doppler." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.004
+    kind: card
+    topic: deep-venous-thrombosis
+    front: Which anticoagulants are used for DVT prophylaxis and acute management, and which for long-term prevention?
+    back: Unfractionated heparin or LMWH (eg, enoxaparin) for prophylaxis and acute management; direct anticoagulants (eg, rivaroxaban, apixaban) for treatment and long-term prevention.
+    src: { page: 321, quote: "Use unfractionated heparin or low-molecular weight heparins (eg, enoxaparin) for prophylaxis and acute management. Use direct anticoagulants (eg, rivaroxaban, apixaban) for treatment and long-term prevention." }
+    status: unverified
+  - id: cvs.L05.005
+    kind: mcq
+    topic: deep-venous-thrombosis
+    stem: >-
+      A 31-year-old woman taking combined oral contraceptives has had a swollen, tender left calf for 2 days
+      after a 12-hour flight. Her clinical probability of DVT is moderate. Which of the following is the
+      best use of a D-dimer test in her evaluation?
+    options:
+      - A positive result confirms DVT
+      - A negative result helps rule out DVT
+      - It identifies the location of the clot
+      - It replaces ultrasonography in all patients
+      - It distinguishes proximal from distal DVT
+    answer: 1
+    why:
+      - "D-dimer has low specificity; a positive result doesn't confirm DVT."
+      - "Right. D-dimer is highly sensitive, so a negative result rules out DVT when probability is low or moderate; compression ultrasound with Doppler is the imaging test of choice."
+      - "D-dimer gives no location."
+      - "Ultrasound remains the imaging test of choice."
+      - "Location needs imaging."
+    src: { page: 321, quote: "D-dimer test may be used clinically to rule out DVT if disease probability is low or moderate (high sensitivity, low specificity)." }
+    status: unverified
+  # ---------- p321: hypertension treatment ----------
+  - id: cvs.L05.006
+    kind: table
+    topic: hypertension-treatment
+    title: Hypertension treatment by setting
+    columns: [Setting, Drugs, Notes]
+    rows:
+      - [Primary (essential), "Thiazides, ACE inhibitors, ARBs, Ca2+ channel blockers", ""]
+      - [With heart failure, "ACE inhibitors/ARBs, β-blockers (compensated HF), aldosterone antagonists, diuretics", "β-blockers cautiously in decompensated HF; contraindicated in cardiogenic shock"]
+      - [With diabetes, "ACE inhibitors/ARBs, Ca2+ channel blockers, thiazides, β-blockers", "ACEi/ARBs protect against diabetic nephropathy; β-blockers mask hypoglycemia"]
+      - [With asthma, "ARBs, Ca2+ channel blockers, thiazides, cardioselective β-blockers", "Avoid nonselective β-blockers and ACE inhibitors (cough)"]
+      - [With pregnancy, "Hydralazine, methyldopa, labetalol, nifedipine", "\"Hypertensive moms love nifedipine\""]
+      - [With gout, "ACE inhibitors, Ca2+ channel blockers, ARBs (especially losartan)", Avoid loop and thiazide diuretics]
+      - [With osteoporosis, "Thiazides (± ACEi or ARB)", Thiazides ↑ Ca2+ reabsorption]
+      - [With pheochromocytoma, "Phentolamine, phenoxybenzamine (α-blockade first), then β-blockade", Avoid β-blockade first (unopposed α crisis)]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 321, quote: "Hypertension with pregnancy Hydralazine, methyldopa, labetalol, nifedipine. Hypertensive moms love nifedipine." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.007
+    kind: card
+    topic: hypertension-treatment
+    front: Why avoid ACE inhibitors and nonselective β-blockers in a patient with hypertension and asthma?
+    back: Nonselective β-blockers cause β2-mediated bronchoconstriction; ACE inhibitors cause a cough that can be confused with asthma.
+    src: { page: 321, quote: "Avoid non-selective β-blockers to prevent β2- receptor–induced bronchoconstriction. Avoid ACE inhibitors to prevent confusion between drug- or asthma-related cough." }
+    status: unverified
+  - id: cvs.L05.008
+    kind: card
+    topic: hypertension-treatment
+    front: In pheochromocytoma, which blockade must come first, and why?
+    back: α-blockade first (phentolamine, phenoxybenzamine) before resection and β-blockade; β-blockade first leaves α effects unopposed → hypertensive crisis.
+    src: { page: 321, quote: "Phentolamine, phenoxybenzamine (α-blockade first) prior to resection and β-blockade. Avoid β-blockade first to mitigate unopposed α-mediated hypertensive crisis." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.009
+    kind: mcq
+    topic: hypertension-treatment
+    stem: >-
+      A 58-year-old man with hypertension has had two attacks of a hot, swollen first metatarsophalangeal
+      joint this year. His blood pressure is 152/94 mm Hg on hydrochlorothiazide. Which change is most
+      appropriate?
+    options:
+      - Add furosemide
+      - Replace hydrochlorothiazide with losartan
+      - Increase hydrochlorothiazide
+      - Add propranolol
+      - Add chlorthalidone
+    answer: 1
+    why:
+      - "Loop diuretics also cause gout flares."
+      - "Right. In hypertension with gout, avoid loop and thiazide diuretics; use ACE inhibitors, CCBs or ARBs, especially losartan."
+      - "More thiazide means more gout flares."
+      - "Propranolol isn't the preferred agent here."
+      - "Chlorthalidone is a thiazide-like diuretic and also triggers gout."
+    src: { page: 321, quote: "ACE inhibitors, channel blockers, ARBs (especially losartan). Ca2+ Avoid loop and thiazide diuretics as these can cause gout flares." }
+    status: unverified
+  # ---------- p322: nitrates ----------
+  - id: cvs.L05.010
+    kind: card
+    topic: nitrates
+    front: How do nitrates work, and do they dilate veins or arteries more?
+    back: '↑ NO in vascular smooth muscle → ↑ cGMP → smooth muscle relaxation. Veins >> arteries → ↓ preload. Examples: nitroglycerin, isosorbide dinitrate, isosorbide mononitrate.'
+    src: { page: 322, quote: "Nitrates Nitroglycerin, isosorbide dinitrate, isosorbide mononitrate. MECHANISM Vasodilate by NO in vascular smooth muscle in cGMP and smooth muscle relaxation. Dilate veins >> arteries. preload." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.011
+    kind: card
+    topic: nitrates
+    front: What are the uses and adverse effects of nitrates?
+    back: "Uses: angina, ACS, pulmonary edema. Adverse: reflex tachycardia (treat with β-blockers), methemoglobinemia, hypotension, flushing, headache, \"Monday disease\"."
+    src: { page: 322, quote: "Angina, ACS, pulmonary edema. AdvERSE EFFECTS Reflex tachycardia (treat with β-blockers), methemoglobinemia, hypotension, flushing, headache," }
+    status: unverified
+  - id: cvs.L05.012
+    kind: card
+    topic: nitrates
+    front: What is "Monday disease"?
+    back: In industrial nitrate exposure, tolerance develops over the work week and is lost over the weekend → tachycardia, dizziness and headache on reexposure (Monday).
+    src: { page: 322, quote: "“Monday disease” in industrial nitrate exposure: development of tolerance for the vasodilating action during the work week and loss of tolerance over the weekend tachycardia, dizziness, headache upon reexposure." }
+    status: unverified
+  - id: cvs.L05.013
+    kind: enumerate
+    topic: nitrates
+    prompt: Enumerate the 3 contraindications to nitrates.
+    points:
+      - Right ventricular infarction
+      - Hypertrophic cardiomyopathy
+      - Concurrent PDE-5 inhibitor use
+    pass: 3
+    hook: "التلاتة محتاجين preload: الـ RV infarct، والـ HCM، والـ sildenafil هيوقّع الضغط معاه."
+    src: { page: 322, quote: "Contraindicated in right ventricular infarction, hypertrophic cardiomyopathy, and with concurrent PDE-5 inhibitor use." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.014
+    kind: mcq
+    topic: nitrates
+    stem: >-
+      A 61-year-old man is brought to the emergency department with chest pain that began 30 minutes after
+      sexual activity. He took a drug for erectile dysfunction 2 hours ago. ECG shows ST depression in
+      V4-V6. Which drug should be avoided?
+    options:
+      - Aspirin
+      - Nitroglycerin
+      - Metoprolol
+      - Heparin
+      - Atorvastatin
+    answer: 1
+    why:
+      - "Aspirin is part of ACS treatment."
+      - "Right. Nitrates are contraindicated with concurrent PDE-5 inhibitor use: both raise cGMP and together cause profound hypotension."
+      - "β-blockers are part of ACS treatment."
+      - "Anticoagulation is part of ACS treatment."
+      - "Statins are part of ACS treatment."
+    src: { page: 322, quote: "Contraindicated in right ventricular infarction, hypertrophic cardiomyopathy, and with concurrent PDE-5 inhibitor use." }
+    status: unverified
+  # ---------- p323: CCBs ----------
+  - id: cvs.L05.015
+    kind: card
+    topic: calcium-channel-blockers
+    front: Which calcium channel blockers are dihydropyridines and which are nondihydropyridines, and where does each act?
+    back: "Dihydropyridines (amlodipine, clevidipine, nicardipine, nifedipine, nimodipine): vascular smooth muscle. Nondihydropyridines (diltiazem, verapamil): heart."
+    src: { page: 323, quote: "Amlodipine, clevidipine, nicardipine, nifedipine, nimodipine (dihydropyridines, act on vascular smooth muscle); diltiazem, verapamil (nondihydropyridines, act on heart)." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.016
+    kind: cloze
+    topic: calcium-channel-blockers
+    text: "CCB potency on vascular smooth muscle: {{c1::amlodipine = nifedipine > diltiazem > verapamil}}; on the heart: {{c2::verapamil > diltiazem > amlodipine = nifedipine}}."
+    src: { page: 323, quote: "Vascular smooth muscle—amlodipine = nifedipine > diltiazem > verapamil. Heart—verapamil > diltiazem > amlodipine = nifedipine." }
+    status: unverified
+  - id: cvs.L05.017
+    kind: table
+    topic: calcium-channel-blockers
+    title: Calcium channel blocker uses
+    columns: [Drug, Use]
+    rows:
+      - [Dihydropyridines (except nimodipine), "Hypertension, angina (including vasospastic), Raynaud phenomenon"]
+      - [Nimodipine, Subarachnoid hemorrhage (prevents delayed ischemia)]
+      - ["Nicardipine, clevidipine", Hypertensive urgency or emergency]
+      - [Nondihydropyridines, "Hypertension, angina, rate control in AF/flutter, prevention of nodal arrhythmias"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 323, quote: "Nimodipine: subarachnoid hemorrhage (prevents delayed ischemia). Nicardipine, clevidipine: hypertensive urgency or emergency." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.018
+    kind: card
+    topic: calcium-channel-blockers
+    front: What are the adverse effects of calcium channel blockers?
+    back: "All: gingival hyperplasia. Dihydropyridines: peripheral edema, flushing, dizziness. Nondihydropyridines: cardiac depression, AV block, hyperprolactinemia (verapamil), constipation."
+    src: { page: 323, quote: "Gingival hyperplasia. Dihydropyridine: peripheral edema, flushing, dizziness. Nondihydropyridine: cardiac depression, AV block, hyperprolactinemia (verapamil), constipation." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.019
+    kind: mcq
+    topic: calcium-channel-blockers
+    stem: >-
+      A 47-year-old woman is admitted with a sudden "worst headache of my life." CT shows blood in the
+      basal cisterns, and angiography finds a ruptured berry aneurysm, which is coiled. Which drug is given
+      to prevent delayed cerebral ischemia over the next 3 weeks?
+    options:
+      - Verapamil
+      - Nimodipine
+      - Amlodipine
+      - Nitroprusside
+      - Hydralazine
+    answer: 1
+    why:
+      - "Verapamil acts mainly on the heart."
+      - "Right. Nimodipine is used in subarachnoid hemorrhage to prevent delayed ischemia."
+      - "Amlodipine is used for hypertension and angina."
+      - "Nitroprusside is for hypertensive emergency."
+      - "Hydralazine doesn't prevent vasospasm after SAH."
+    src: { page: 323, quote: "Nimodipine: subarachnoid hemorrhage (prevents delayed ischemia)." }
+    status: unverified
+  # ---------- p323: hydralazine ----------
+  - id: cvs.L05.020
+    kind: card
+    topic: hydralazine
+    front: How does hydralazine work, and what does it dilate?
+    back: ↑ cGMP → smooth muscle relaxation. Arterioles > veins → afterload reduction.
+    src: { page: 323, quote: "↑ cGMP → smooth muscle relaxation. Hydralazine vasodilates arterioles > veins; afterload reduction." }
+    status: unverified
+  - id: cvs.L05.021
+    kind: card
+    topic: hydralazine
+    front: What are the uses and adverse effects of hydralazine?
+    back: "Uses: severe (especially acute) hypertension, HF (with organic nitrate); safe in pregnancy; given with a β-blocker to prevent reflex tachycardia. Adverse: compensatory tachycardia (contraindicated in angina/CAD), fluid retention, headache, angina, drug-induced lupus."
+    src: { page: 323, quote: "Compensatory tachycardia (contraindicated in angina/CAD), fluid retention, headache, angina, drug-induced lupus." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.022
+    kind: mcq
+    topic: hydralazine
+    stem: >-
+      A 55-year-old woman treated for resistant hypertension develops fever, arthralgias and a pleural
+      effusion. Antihistone antibodies are positive and anti-dsDNA is negative. Which antihypertensive is
+      most likely responsible?
+    options:
+      - Amlodipine
+      - Hydralazine
+      - Lisinopril
+      - Metoprolol
+      - Hydrochlorothiazide
+    answer: 1
+    why:
+      - "Amlodipine causes edema and flushing."
+      - "Right. Hydralazine can cause drug-induced lupus (antihistone antibodies)."
+      - "Lisinopril causes cough and angioedema."
+      - "Metoprolol causes bradycardia and fatigue."
+      - "Thiazides cause metabolic adverse effects."
+    src: { page: 323, quote: "Compensatory tachycardia (contraindicated in angina/CAD), fluid retention, headache, angina, drug-induced lupus." }
+    status: unverified
+  # ---------- p323: hypertensive emergency ----------
+  - id: cvs.L05.023
+    kind: card
+    topic: hypertensive-emergency
+    front: Which drugs treat a hypertensive emergency?
+    back: Labetalol, clevidipine, fenoldopam, nicardipine, nitroprusside.
+    src: { page: 323, quote: "Treat with labetalol, clevidipine, fenoldopam, nicardipine, nitroprusside." }
+    status: unverified
+  - id: cvs.L05.024
+    kind: card
+    topic: hypertensive-emergency
+    front: How does nitroprusside work, and what toxicity can it cause?
+    back: A short-acting vasodilator (arteries = veins) through direct release of NO (↑ cGMP). It can cause cyanide toxicity.
+    src: { page: 323, quote: "Short acting vasodilator (arteries = veins); via direct release of NO. Can cause cyanide toxicity (releases cyanide)." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.025
+    kind: card
+    topic: hypertensive-emergency
+    front: What is fenoldopam, and what does it do?
+    back: 'A dopamine D1 receptor agonist → coronary, peripheral, renal and splanchnic vasodilation; ↓ BP and ↑ natriuresis. Also used postoperatively. Adverse effects: hypotension, tachycardia, flushing, headache, nausea.'
+    src: { page: 323, quote: "Dopamine D1 receptor agonist—coronary, peripheral, renal, and splanchnic vasodilation. ↓ BP, ↑ natriuresis." }
+    status: unverified
+  - id: cvs.L05.026
+    kind: mcq
+    topic: hypertensive-emergency
+    stem: >-
+      A 50-year-old man with hypertensive encephalopathy is treated with a continuous infusion of a drug
+      that releases nitric oxide directly. On day 3 he becomes confused, with a lactic acidosis and bright
+      red venous blood. Which toxicity is most likely?
+    options:
+      - Methemoglobinemia
+      - Cyanide toxicity
+      - Hyperkalemia
+      - Drug-induced lupus
+      - Thiocyanate-induced hypothyroidism alone
+    answer: 1
+    why:
+      - "Methemoglobinemia causes chocolate-colored blood and cyanosis, classically with nitrates."
+      - "Right. Nitroprusside releases cyanide; cyanide blocks oxygen use, causing lactic acidosis and highly oxygenated venous blood."
+      - "Hyperkalemia isn't a nitroprusside effect named here."
+      - "Lupus is a hydralazine effect."
+      - "That isn't the acute picture described."
+    src: { page: 323, quote: "Can cause cyanide toxicity (releases cyanide)." }
+    status: unverified
+  # ---------- p323: antianginal therapy ----------
+  - id: cvs.L05.027
+    kind: card
+    topic: antianginal-therapy
+    front: What is the goal of antianginal therapy, and what determines MVO2?
+    back: Reduce myocardial O2 consumption (MVO2) by lowering 1 or more of its determinants, end-diastolic volume, BP, HR and contractility.
+    src: { page: 323, quote: "Goal is reduction of myocardial O2 consumption (MVO2) by 1 or more of the determinants of MVO2: end-diastolic volume, BP, HR, contractility." }
+    status: unverified
+  - id: cvs.L05.028
+    kind: table
+    topic: antianginal-therapy
+    title: Nitrates, β-blockers and both
+    columns: [Component, Nitrates, β-blockers, Nitrates + β-blockers]
+    rows:
+      - [End-diastolic volume, ↓, No effect or ↑, No effect or ↓]
+      - [Blood pressure, ↓, ↓, ↓]
+      - [Contractility, ↑ (reflex), ↓, Little/no effect]
+      - [Heart rate, ↑ (reflex), ↓, No effect or ↓]
+      - [Ejection time, ↓, ↑, Little/no effect]
+      - [MVO2, ↓, ↓, ↓↓]
+    blanks: [[2, 1], [3, 1], [0, 2], [5, 3]]
+    src: { page: 323, quote: "COMPONENT NITRATES β-blOCKERS NITRATES + β-blOCKERS End-diastolic volume Blood pressure Contractility Heart rate Ejection time MVO2" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.029
+    kind: mcq
+    topic: antianginal-therapy
+    stem: >-
+      A 63-year-old man with stable angina uses sublingual nitroglycerin, but each dose gives him a pounding
+      heartbeat. His physician adds metoprolol. Which of the following best explains why the combination is
+      better than either drug alone?
+    options:
+      - Metoprolol increases preload, which nitroglycerin cannot do
+      - Metoprolol blocks the reflex tachycardia and ↑ contractility from nitrates, while nitrates offset the ↑ EDV from β-blockade
+      - Both drugs raise the ejection time
+      - Both drugs raise coronary perfusion pressure
+      - Nitroglycerin blocks the β1 receptor
+    answer: 1
+    why:
+      - "Raising preload would raise O2 demand."
+      - "Right. Nitrates cause reflex ↑ HR and contractility; β-blockers block that. β-blockers can ↑ EDV and ejection time; nitrates offset that. Together MVO2 falls most (↓↓)."
+      - "Nitrates shorten ejection time."
+      - "Both lower BP."
+      - "Nitrates act through NO and cGMP."
+    src: { page: 322, quote: "Reflex tachycardia (treat with β-blockers)" }
+    status: unverified
+  # ---------- p324: ranolazine ----------
+  - id: cvs.L05.030
+    kind: card
+    topic: ranolazine
+    front: How does ranolazine work, and what does it do to HR and BP?
+    back: It inhibits the late phase of the inward Na+ current, which lowers diastolic wall tension and O2 consumption. It does not change heart rate or blood pressure.
+    src: { page: 324, quote: "Inhibits the late phase of inward sodium current thereby reducing diastolic wall tension and oxygen consumption. Does not affect heart rate or blood pressure." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.031
+    kind: cloze
+    topic: ranolazine
+    text: "Ranolazine is used for {{c1::refractory angina}}. Adverse effects: constipation, dizziness, headache, nausea and {{c2::QT prolongation}}."
+    src: { page: 324, quote: "Refractory angina. AdvERSE EFFECTS Constipation, dizziness, headache, nausea, QT prolongation." }
+    status: unverified
+  - id: cvs.L05.032
+    kind: mcq
+    topic: ranolazine
+    stem: >-
+      A 67-year-old man has chest pain on exertion despite maximal doses of a β-blocker and a long-acting nitrate.
+      His blood pressure is 102/64 mm Hg and his pulse is 54/min, so his physician wants a drug that will not lower
+      either further. A new drug relieves his angina without changing his heart rate or blood pressure. Which of
+      the following is the most likely mechanism of the new drug?
+    options:
+      - Inhibition of the late inward sodium current
+      - Blockade of L-type calcium channels
+      - Selective inhibition of the funny current (If) in the SA node
+      - Release of nitric oxide in veins
+      - Blockade of β1 receptors
+    answer: 0
+    why:
+      - "Right. Ranolazine blocks the late Na+ current, lowers diastolic wall tension and O2 use, and leaves HR and BP alone."
+      - "CCBs lower BP, and verapamil and diltiazem lower HR."
+      - "That is ivabradine, which lowers HR."
+      - "Nitrates lower BP."
+      - "He is already on a β-blocker, and more would lower HR and BP."
+    src: { page: 324, quote: "Does not affect heart rate or blood pressure. ClINICAl uSE Refractory angina." }
+    status: unverified
+  # ---------- p324: sacubitril ----------
+  - id: cvs.L05.033
+    kind: card
+    topic: sacubitril
+    front: What does sacubitril inhibit, and which molecules does that preserve?
+    back: Neprilysin. It prevents the breakdown of bradykinin, natriuretic peptides, angiotensin II and substance P, causing vasodilation and ↓ ECF volume.
+    src: { page: 324, quote: "A neprilysin inhibitor; prevents degradation of bradykinin, natriuretic peptides, angiotensin II, and substance P" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.034
+    kind: card
+    topic: sacubitril
+    front: Sacubitril is combined with which drug, for which disease?
+    back: With valsartan (an ARB), to treat HFrEF.
+    src: { page: 324, quote: "Used in combination with valsartan (an ARB) to treat HFrEF." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.035
+    kind: cloze
+    topic: sacubitril
+    text: "Sacubitril/valsartan adverse effects: hypotension, {{c1::hyperkalemia}} (from the ARB), cough, dizziness. It is contraindicated with {{c2::ACE inhibitors}} because of angioedema (both ↑ bradykinin)."
+    src: { page: 324, quote: "contraindicated with ACE inhibitors due to angioedema (both drugs ↑ bradykinin)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.036
+    kind: mcq
+    topic: sacubitril
+    stem: >-
+      A 66-year-old man with heart failure with reduced ejection fraction takes lisinopril, metoprolol and
+      spironolactone. His cardiologist plans to replace lisinopril with a combination of valsartan and a neprilysin
+      inhibitor, and tells him never to take the two together. Which of the following is the main reason?
+    options:
+      - Both drugs raise bradykinin, risking angioedema
+      - Both drugs block the β1 receptor
+      - The combination causes cyanide toxicity
+      - The combination prolongs the QT interval
+      - Neprilysin inhibition destroys angiotensin II
+    answer: 0
+    why:
+      - "Right. ACE inhibitors and neprilysin inhibitors both block bradykinin breakdown, so together they risk angioedema."
+      - "Neither is a β-blocker."
+      - "Cyanide toxicity comes from nitroprusside."
+      - "QT prolongation is not the problem here; ranolazine and class IA/III drugs do that."
+      - "Neprilysin inhibition preserves angiotensin II, which is why it is paired with an ARB."
+    src: { page: 324, quote: "contraindicated with ACE inhibitors due to angioedema (both drugs ↑ bradykinin)" }
+    status: unverified
+  # ---------- p324-325: lipid-lowering agents ----------
+  - id: cvs.L05.037
+    kind: table
+    topic: lipid-lowering-agents
+    title: Effect of lipid-lowering agents on LDL, HDL and triglycerides
+    columns: [Drug, LDL, HDL, Triglycerides]
+    rows:
+      - [Statins, ↓↓↓, ↑, ↓]
+      - [Bile acid resins, ↓↓, ↑ slightly, ↑ slightly]
+      - [Ezetimibe, ↓↓, ↑/—, ↓/—]
+      - [Fibrates, ↓, ↑, ↓↓↓]
+      - [Niacin, ↓↓, ↑↑, ↓]
+      - [PCSK9 inhibitors, ↓↓↓, ↑, ↓]
+      - [Fish oil (omega-3), ↑ slightly, ↑ slightly, ↓ at high doses]
+    blanks: [[0, 1], [1, 3], [3, 3], [4, 2], [5, 1]]
+    src: { page: 324, quote: "LDL Hdl TRIGlYCERIdES MECHANISM AdvERSE EFFECTS Statins" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.038
+    kind: card
+    topic: lipid-lowering-agents
+    front: How do statins lower LDL?
+    back: They inhibit HMG-CoA reductase (HMG-CoA → mevalonate), so ↓ cholesterol synthesis → ↓ intrahepatic cholesterol → ↑ LDL receptor recycling → ↑ LDL catabolism. They ↓ mortality in CAD.
+    src: { page: 324, quote: "Inhibit HMG-CoA reductase → ↓ cholesterol synthesis; ↓ intrahepatic cholesterol → ↑ LDL receptor recycling → ↑ LDL catabolism" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.039
+    kind: cloze
+    topic: lipid-lowering-agents
+    text: "Statin adverse effects: {{c1::hepatotoxicity (↑ LFTs)}} and {{c2::myopathy}}, especially when used with {{c3::fibrates or niacin}}."
+    src: { page: 324, quote: "Hepatotoxicity (↑ LFTs), myopathy (especially when used with fibrates or niacin)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.040
+    kind: card
+    topic: lipid-lowering-agents
+    front: How do bile acid resins (cholestyramine, colesevelam, colestipol) lower LDL?
+    back: They disrupt the enterohepatic circulation of bile acids → the liver converts more cholesterol to bile → ↓ intrahepatic cholesterol → ↑ LDL receptor recycling.
+    src: { page: 324, quote: "Disrupt enterohepatic bile acid circulation → compensatory ↑ conversion of cholesterol to bile → ↓ intrahepatic cholesterol → ↑ LDL receptor recycling" }
+    status: unverified
+  - id: cvs.L05.041
+    kind: cloze
+    topic: lipid-lowering-agents
+    text: "Bile acid resin adverse effects: GI upset and ↓ absorption of {{c1::other drugs and fat-soluble vitamins}}. They raise triglycerides {{c2::slightly}}."
+    src: { page: 324, quote: "GI upset, ↓ absorption of other drugs and fat-soluble vitamins" }
+    status: unverified
+  - id: cvs.L05.042
+    kind: card
+    topic: lipid-lowering-agents
+    front: How does ezetimibe work, and what are its adverse effects?
+    back: It prevents cholesterol absorption at the small intestine brush border. Adverse effects are rare ↑ LFTs and diarrhea.
+    src: { page: 324, quote: "Prevents cholesterol absorption at small intestine brush border" }
+    status: unverified
+  - id: cvs.L05.043
+    kind: card
+    topic: lipid-lowering-agents
+    front: How do fibrates (fenofibrate, gemfibrozil) lower triglycerides and raise HDL?
+    back: They activate PPAR-α, which upregulates LPL (↑ TG clearance) and induces HDL synthesis.
+    src: { page: 325, quote: "Activate PPAR-α → upregulate LPL → ↑ TG clearance" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.044
+    kind: cloze
+    topic: lipid-lowering-agents
+    text: "Fibrate adverse effects: myopathy (↑ risk with {{c1::statins}}) and {{c2::cholesterol gallstones}}, via inhibition of {{c3::cholesterol 7α-hydroxylase}}."
+    src: { page: 325, quote: "Myopathy (↑ risk with statins), cholesterol gallstones (via inhibition of cholesterol 7α-hydroxylase)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.045
+    kind: card
+    topic: lipid-lowering-agents
+    front: How does niacin work?
+    back: It inhibits lipolysis in adipose tissue (hormone-sensitive lipase) and reduces hepatic VLDL synthesis. It raises HDL the most of these drugs (↑↑).
+    src: { page: 325, quote: "Inhibits lipolysis (hormone-sensitive lipase) in adipose tissue; reduces hepatic VLDL synthesis" }
+    status: unverified
+  - id: cvs.L05.046
+    kind: enumerate
+    topic: lipid-lowering-agents
+    prompt: Enumerate the 3 adverse effects of niacin.
+    points:
+      - Flushed face (prostaglandin mediated; ↓ by NSAIDs or long-term use)
+      - Hyperglycemia
+      - Hyperuricemia
+    pass: 3
+    hook: "النياسين بيحمّر الوش، وبيعلّي السكر، وبيعلّي اليوريك: وش أحمر وسكر ونقرس."
+    src: { page: 325, quote: "Flushed face (prostaglandin mediated; ↓ by NSAIDs or long-term use) Hyperglycemia Hyperuricemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.047
+    kind: card
+    topic: lipid-lowering-agents
+    front: How do PCSK9 inhibitors (alirocumab, evolocumab) lower LDL?
+    back: They ↓ LDL receptor degradation → ↑ LDL receptor recycling → ↑ hepatic LDL uptake → ↓ serum LDL. No CYP metabolism, so few drug interactions.
+    src: { page: 325, quote: "↓ LDL receptor degradation → ↑ LDL receptor recycling → ↑ hepatic LDL uptake" }
+    status: unverified
+  - id: cvs.L05.048
+    kind: card
+    topic: lipid-lowering-agents
+    front: How are fish oil (omega-3 fatty acids) believed to lower triglycerides, and what are their adverse effects?
+    back: ↓ FFA delivery to the liver, ↓ TG-synthesizing enzymes, ↓ VLDL production and inhibited ApoB synthesis. Adverse effects are nausea and a fishlike taste.
+    src: { page: 325, quote: "Believed to ↓ FFA delivery to liver, ↓ activity of TG-synthesizing enzymes, ↓ VLDL production, and inhibit synthesis of ApoB Nausea, fishlike taste" }
+    status: unverified
+  - id: cvs.L05.049
+    kind: mcq
+    topic: lipid-lowering-agents
+    stem: >-
+      A 49-year-old woman with triglycerides of 920 mg/dL is started on gemfibrozil. Eight months later she has
+      colicky right upper quadrant pain after fatty meals, and ultrasound shows gallstones. Which of the following
+      actions of the drug best explains this complication?
+    options:
+      - Inhibition of cholesterol 7α-hydroxylase
+      - Inhibition of HMG-CoA reductase
+      - Binding of bile acids in the intestine
+      - Inhibition of hormone-sensitive lipase in fat
+      - Blocking cholesterol absorption at the brush border
+    answer: 0
+    why:
+      - "Right. Fibrates inhibit 7α-hydroxylase, so less cholesterol becomes bile acid and bile becomes supersaturated with cholesterol."
+      - "That is the statin mechanism."
+      - "That is the bile acid resin mechanism."
+      - "That is niacin."
+      - "That is ezetimibe."
+    src: { page: 325, quote: "cholesterol gallstones (via inhibition of cholesterol 7α-hydroxylase)" }
+    status: unverified
+  - id: cvs.L05.050
+    kind: mcq
+    topic: lipid-lowering-agents
+    stem: >-
+      A 45-year-old man with low HDL is started on a drug that inhibits lipolysis in adipose tissue. Half an hour
+      after each dose his face turns red and feels warm. His uric acid is also mildly raised. Which of the following
+      is most likely to reduce the facial symptoms?
+    options:
+      - Taking an NSAID such as aspirin before each dose
+      - Adding a statin
+      - Adding a β-blocker
+      - Taking the drug with grapefruit juice
+      - Switching to a bile acid resin to raise HDL more
+    answer: 0
+    why:
+      - "Right. Niacin flushing is prostaglandin mediated, so NSAIDs reduce it (so does long-term use)."
+      - "A statin does not change prostaglandin flushing and adds myopathy risk with niacin."
+      - "β-blockers do not block prostaglandin flushing."
+      - "Grapefruit is a CYP interaction, not a fix for flushing."
+      - "Resins raise HDL only slightly; niacin raises it the most."
+    src: { page: 325, quote: "Flushed face (prostaglandin mediated; ↓ by NSAIDs or long-term use)" }
+    status: unverified
+  - id: cvs.L05.051
+    kind: mcq
+    topic: lipid-lowering-agents
+    stem: >-
+      A 58-year-old man who cannot tolerate statins takes cholestyramine for high LDL. Over months he notices he
+      cannot see well in dim light, and he bruises easily. Which of the following best explains his symptoms?
+    options:
+      - Reduced absorption of fat-soluble vitamins
+      - Hepatotoxicity with low clotting factor production from the drug
+      - Myopathy
+      - Prostaglandin-mediated vasodilation
+      - Inhibition of hepatic LDL receptor recycling
+    answer: 0
+    why:
+      - "Right. Bile acid resins ↓ absorption of fat-soluble vitamins: low vitamin A gives night blindness and low vitamin K gives bruising."
+      - "Resins are not hepatotoxic; statins raise LFTs."
+      - "Myopathy is a statin and fibrate effect, and does not explain his vision."
+      - "That is niacin flushing."
+      - "Resins ↑ LDL receptor recycling."
+    src: { page: 324, quote: "GI upset, ↓ absorption of other drugs and fat-soluble vitamins" }
+    status: unverified
+  # ---------- p326: digoxin ----------
+  - id: cvs.L05.052
+    kind: card
+    topic: digoxin
+    front: How does digoxin increase contractility and lower heart rate?
+    back: It directly inhibits Na+/K+-ATPase → indirectly inhibits the Na+/Ca2+ exchanger → ↑ intracellular Ca2+ → positive inotropy. It also stimulates the vagus nerve → ↓ HR.
+    src: { page: 326, quote: "Direct inhibition of Na+/K+-ATPase → indirect inhibition of Na+/Ca2+ exchanger" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.053
+    kind: cloze
+    topic: digoxin
+    text: "Digoxin is used in HF (↑ {{c1::contractility}}) and in atrial fibrillation (↓ conduction at the {{c2::AV node}} and depression of the SA node)."
+    src: { page: 326, quote: "HF (↑ contractility); atrial fibrillation (↓ conduction at AV node and depression of SA node)" }
+    status: unverified
+  - id: cvs.L05.054
+    kind: enumerate
+    topic: digoxin
+    prompt: Enumerate the features of digoxin toxicity.
+    points:
+      - Cholinergic effects (nausea, vomiting, diarrhea)
+      - Blurry yellow vision ("van Glow")
+      - Arrhythmias, including atrial tachycardia with AV block
+      - Hyperkalemia (a sign of poor prognosis)
+    pass: 3
+    hook: "مريض الديجوكسين بيرجّع وبيشوف الدنيا صفرا زي لوحات فان جوخ، وقلبه بيلخبط، والبوتاسيوم العالي علامة وحشة."
+    src: { page: 326, quote: "Cholinergic effects (nausea, vomiting, diarrhea), blurry yellow vision" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.055
+    kind: enumerate
+    topic: digoxin
+    prompt: Enumerate the factors that predispose to digoxin toxicity.
+    points:
+      - Renal failure (↓ excretion)
+      - Hypokalemia
+      - Drugs that displace digoxin from tissue-binding sites
+      - Drugs that ↓ its clearance (verapamil, amiodarone, quinidine)
+    pass: 4
+    hook: "كلية بايظة، وبوتاسيوم واطي، وأدوية بتزقه من مكانه أو بتقلل خروجه زي verapamil وamiodarone وquinidine."
+    src: { page: 326, quote: "Factors predisposing to toxicity: renal failure (↓ excretion), hypokalemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.056
+    kind: card
+    topic: digoxin
+    front: Why does hypokalemia predispose to digoxin toxicity?
+    back: Digoxin binds the K+-binding site on Na+/K+-ATPase; with less K+ competing, more digoxin binds (low K+ is permissive).
+    src: { page: 326, quote: "hypokalemia (permissive for digoxin binding at K+-binding site on Na+/K+-ATPase)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.057
+    kind: enumerate
+    topic: digoxin
+    prompt: Enumerate the treatments (antidote) for digoxin toxicity.
+    points:
+      - Slowly normalize K+
+      - Cardiac pacer
+      - Anti-digoxin Fab fragments
+      - Mg2+
+    pass: 3
+    hook: "ظبّط البوتاسيوم بالراحة، وحط pacer، وادّيله الـ Fab، ومتنساش الماغنسيوم."
+    src: { page: 326, quote: "Slowly normalize K+, cardiac pacer, anti-digoxin Fab fragments, Mg2+" }
+    status: unverified
+  - id: cvs.L05.058
+    kind: mcq
+    topic: digoxin
+    stem: >-
+      A 78-year-old woman with heart failure and atrial fibrillation has taken digoxin for years. Two weeks ago
+      verapamil was added for better rate control. She now has nausea, vomiting and yellow-tinged vision, and the
+      ECG shows atrial tachycardia with AV block. Which of the following best explains her new symptoms?
+    options:
+      - Verapamil decreased digoxin clearance
+      - Verapamil increased digoxin excretion
+      - A high potassium level increased digoxin binding to the pump
+      - Digoxin induced its own metabolism
+      - Verapamil blocked the vagal effect of digoxin
+    answer: 0
+    why:
+      - "Right. Verapamil (like amiodarone and quinidine) ↓ digoxin clearance and causes toxicity."
+      - "Higher excretion would lower the digoxin level."
+      - "Low K+, not high, increases digoxin binding."
+      - "Digoxin does not induce its own metabolism."
+      - "Blocking vagal effects would not cause these toxic features."
+    src: { page: 326, quote: "clearance (eg, verapamil, amiodarone, quinidine)" }
+    status: unverified
+  - id: cvs.L05.059
+    kind: mcq
+    topic: digoxin
+    stem: >-
+      A 70-year-old man is brought in after taking an overdose of his digoxin. He is vomiting and has a pulse of
+      38/min with high-grade AV block. Serum potassium is 6.3 mEq/L. Which of the following is the most appropriate
+      specific treatment?
+    options:
+      - Anti-digoxin Fab fragments
+      - Intravenous potassium chloride
+      - Verapamil
+      - Amiodarone
+      - Quinidine
+    answer: 0
+    why:
+      - "Right. Anti-digoxin Fab fragments bind digoxin; K+ is normalized slowly, with a pacer and Mg2+ as needed."
+      - "His potassium is already high, which signals a poor prognosis."
+      - "Verapamil ↓ digoxin clearance and worsens AV block."
+      - "Amiodarone ↓ digoxin clearance."
+      - "Quinidine ↓ digoxin clearance."
+    src: { page: 326, quote: "Slowly normalize K+, cardiac pacer, anti-digoxin Fab fragments, Mg2+" }
+    status: unverified
+  # ---------- p326-327: class I ----------
+  - id: cvs.L05.060
+    kind: card
+    topic: class-i-antiarrhythmics
+    front: What do class I antiarrhythmics do to the action potential, and which cells do they affect most?
+    back: They block Na+ channels, ↓ the slope of phase 0 and slow or block conduction, especially in depolarized cells.
+    src: { page: 326, quote: "Slow or block conduction (especially in depolarized cells). ↓ slope of phase 0 depolarization." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.061
+    kind: card
+    topic: class-i-antiarrhythmics
+    front: Why do class I drugs act more at faster heart rates (state dependence)?
+    back: Faster HR → shorter diastole → Na+ channels spend less time in the resting state, which is when the drug dissociates → less time for the drug to come off.
+    src: { page: 326, quote: "Na+ channels spend less time in resting state (drugs dissociate during this state)" }
+    status: unverified
+  - id: cvs.L05.062
+    kind: cloze
+    topic: class-i-antiarrhythmics
+    text: "Class I state-dependent effects are strongest in {{c1::IC > IA > IB}}, because of relative binding strength (Fast taxi CAB)."
+    src: { page: 326, quote: "Effect most pronounced in IC>IA>IB due to relative binding strength. Fast taxi CAB." }
+    status: unverified
+  - id: cvs.L05.063
+    kind: enumerate
+    topic: class-i-antiarrhythmics
+    prompt: Enumerate the 3 class IA antiarrhythmics.
+    points:
+      - Quinidine
+      - Procainamide
+      - Disopyramide
+    pass: 3
+    hook: "The queen proclaims Diso's pyramid: الملكة (quinidine) بتعلن (procainamide) عن هرم ديزو (disopyramide)."
+    src: { page: 326, quote: "Class IA Quinidine, procainamide, disopyramide." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.064
+    kind: card
+    topic: class-i-antiarrhythmics
+    front: What do class IA drugs do to the ventricular action potential and ECG?
+    back: Moderate Na+ channel block, ↑ AP duration, ↑ effective refractory period (ERP), ↑ QT interval, and some K+ channel block.
+    src: { page: 326, quote: "Moderate Na+ channel blockade. ↑ AP duration, ↑ effective refractory period (ERP) in ventricular action potential, ↑ QT interval, some K+ channel blocking effects." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.065
+    kind: table
+    topic: class-i-antiarrhythmics
+    title: Class IA adverse effects
+    columns: [Drug, Adverse effect]
+    rows:
+      - [Quinidine, "Cinchonism (headache, tinnitus)"]
+      - [Procainamide, Reversible SLE-like syndrome]
+      - [Disopyramide, Heart failure]
+      - [All class IA, "Thrombocytopenia; torsades de pointes (↑ QT)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 326, quote: "Cinchonism (headache, tinnitus with quinidine), reversible SLE-like syndrome (procainamide), HF (disopyramide)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.066
+    kind: cloze
+    topic: class-i-antiarrhythmics
+    text: "Class IA drugs treat both {{c1::atrial and ventricular}} arrhythmias, especially reentrant and ectopic SVT and VT."
+    src: { page: 326, quote: "Both atrial and ventricular arrhythmias, especially reentrant and ectopic SVT and VT." }
+    status: unverified
+  - id: cvs.L05.067
+    kind: enumerate
+    topic: class-i-antiarrhythmics
+    prompt: Enumerate the 2 class IB antiarrhythmics.
+    points:
+      - Lidocaine
+      - Mexiletine
+    pass: 2
+    hook: "I'd Buy Liddy's Mexican tacos: الـ IB هما lidocaine وmexiletine."
+    src: { page: 326, quote: "Class IB Lidocaine, mexiletine." }
+    status: unverified
+  - id: cvs.L05.068
+    kind: card
+    topic: class-i-antiarrhythmics
+    front: What do class IB drugs do to AP duration, and which tissue do they prefer?
+    back: Weak Na+ channel block with ↓ AP duration. They preferentially affect ischemic or depolarized Purkinje and ventricular tissue.
+    src: { page: 326, quote: "↓ AP duration. Preferentially affect ischemic or depolarized Purkinje and ventricular tissue." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.069
+    kind: cloze
+    topic: class-i-antiarrhythmics
+    text: "Class IB is used for acute ventricular arrhythmias (especially {{c1::post-MI}}) and {{c2::digitalis-induced arrhythmias}}. Adverse effects: CNS stimulation or depression, cardiovascular depression."
+    src: { page: 326, quote: "Acute ventricular arrhythmias (especially post MI), digitalis-induced arrhythmias." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.070
+    kind: enumerate
+    topic: class-i-antiarrhythmics
+    prompt: Enumerate the 2 class IC antiarrhythmics.
+    points:
+      - Flecainide
+      - Propafenone
+    pass: 2
+    hook: "Can I have fries, please? الـ IC هما flecainide (fries) وpropafenone (please)."
+    src: { page: 327, quote: "Class IC Flecainide, propafenone." }
+    status: unverified
+  - id: cvs.L05.071
+    kind: card
+    topic: class-i-antiarrhythmics
+    front: Where do class IC drugs prolong the ERP, and what is their effect on AP duration?
+    back: Strong Na+ channel block. They markedly prolong the ERP in the AV node and accessory bypass tracts, with no effect on ERP in Purkinje and ventricular tissue, and minimal effect on AP duration.
+    src: { page: 327, quote: "Strong Na+ channel blockade. Significantly prolongs ERP in AV node and accessory bypass tracts." }
+    status: unverified
+  - id: cvs.L05.072
+    kind: cloze
+    topic: class-i-antiarrhythmics
+    text: "Class IC drugs treat SVTs, including {{c1::atrial fibrillation}}, and VT only as a last resort. They are proarrhythmic and contraindicated in {{c2::structural and ischemic heart disease}}, especially post-MI."
+    src: { page: 327, quote: "IC is Contraindicated in structural and ischemic heart disease." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.073
+    kind: table
+    topic: class-i-antiarrhythmics
+    title: Class I subclasses compared
+    columns: [Class, Na+ channel block, AP duration, Drugs, Main use]
+    rows:
+      - [IA, Moderate, ↑ (↑ QT), "Quinidine, procainamide, disopyramide", "Atrial and ventricular (SVT, VT)"]
+      - [IB, Weak, ↓, "Lidocaine, mexiletine", "Acute ventricular, post-MI; digitalis-induced"]
+      - [IC, Strong, Minimal effect, "Flecainide, propafenone", "SVTs, including AF"]
+    blanks: [[0, 1], [1, 1], [2, 1], [0, 2], [1, 2], [1, 4]]
+    src: { page: 326, quote: "Effect most pronounced in IC>IA>IB due to relative binding strength." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.074
+    kind: mcq
+    topic: class-i-antiarrhythmics
+    stem: >-
+      A 61-year-old man develops sustained ventricular tachycardia 1 day after an anterior MI. He is given an
+      intravenous drug that blocks Na+ channels weakly, shortens the action potential and acts mainly on ischemic
+      ventricular tissue. Which of the following adverse effects is he most at risk of?
+    options:
+      - Seizures or confusion
+      - Tinnitus and headache
+      - A lupus-like syndrome
+      - Pulmonary fibrosis
+      - Gingival hyperplasia
+    answer: 0
+    why:
+      - "Right. The drug is lidocaine (class IB), whose adverse effects include CNS stimulation or depression."
+      - "Cinchonism comes from quinidine."
+      - "The SLE-like syndrome comes from procainamide."
+      - "Pulmonary fibrosis comes from amiodarone."
+      - "Gingival hyperplasia comes from class IV calcium channel blockers."
+    src: { page: 326, quote: "CNS stimulation/depression, cardiovascular depression." }
+    status: unverified
+  - id: cvs.L05.075
+    kind: mcq
+    topic: class-i-antiarrhythmics
+    stem: >-
+      A 44-year-old woman takes an antiarrhythmic for recurrent ventricular tachycardia. After several months she
+      has joint pains, a malar rash and pleuritic chest pain. The symptoms resolve when the drug is stopped.
+      Which of the following drugs was she most likely taking?
+    options:
+      - Quinidine
+      - Procainamide
+      - Lidocaine
+      - Flecainide
+      - Amiodarone
+    answer: 1
+    why:
+      - "Quinidine causes cinchonism (headache, tinnitus)."
+      - "Right. Procainamide causes a reversible SLE-like syndrome."
+      - "Lidocaine causes CNS effects and is given acutely."
+      - "Flecainide is proarrhythmic, not lupus-like."
+      - "Amiodarone causes lung, liver, thyroid and skin effects."
+    src: { page: 326, quote: "reversible SLE-like syndrome (procainamide)" }
+    status: unverified
+  - id: cvs.L05.076
+    kind: mcq
+    topic: class-i-antiarrhythmics
+    stem: >-
+      A 64-year-old man had an MI 3 years ago and now has ischemic cardiomyopathy. He develops paroxysmal atrial
+      fibrillation. Which of the following drugs is contraindicated for his arrhythmia?
+    options:
+      - Amiodarone
+      - Digoxin
+      - Flecainide
+      - Metoprolol
+      - Dofetilide
+    answer: 2
+    why:
+      - "Amiodarone can be used in AF and in structural heart disease."
+      - "Digoxin slows AV conduction in AF and helps HF."
+      - "Right. Class IC drugs are proarrhythmic post-MI and contraindicated in structural and ischemic heart disease."
+      - "β-blockers control rate in AF and are given post-MI."
+      - "Dofetilide (class III) treats AF."
+    src: { page: 327, quote: "Proarrhythmic, especially post-MI (contraindicated). IC is Contraindicated in structural and ischemic heart disease." }
+    status: unverified
+  # ---------- p327: class II ----------
+  - id: cvs.L05.077
+    kind: card
+    topic: class-ii-antiarrhythmics
+    front: How do class II antiarrhythmics (β-blockers) work?
+    back: They ↓ SA and AV nodal activity by ↓ cAMP and ↓ Ca2+ currents, and suppress abnormal pacemakers by ↓ the slope of phase 4.
+    src: { page: 327, quote: "Suppress abnormal pacemakers by ↓ slope of phase 4." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.078
+    kind: cloze
+    topic: class-ii-antiarrhythmics
+    text: "With class II drugs the AV node is particularly sensitive, so ↑ {{c1::PR interval}}. {{c2::Esmolol}} is very short acting."
+    src: { page: 327, quote: "AV node particularly sensitive—↑ PR interval. Esmolol very short acting." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.079
+    kind: cloze
+    topic: class-ii-antiarrhythmics
+    text: "Class II uses: SVT, ventricular rate control in {{c1::atrial fibrillation and flutter}}, and preventing {{c2::ventricular arrhythmia post-MI}}."
+    src: { page: 327, quote: "SVT, ventricular rate control for atrial fibrillation and atrial flutter, prevent ventricular arrhythmia post-MI." }
+    status: unverified
+  - id: cvs.L05.080
+    kind: enumerate
+    topic: class-ii-antiarrhythmics
+    prompt: Enumerate the adverse effects of β-blockers as antiarrhythmics.
+    points:
+      - Impotence
+      - Exacerbation of COPD and asthma
+      - Cardiovascular (bradycardia, AV block, HF)
+      - CNS (sedation, sleep alterations)
+      - May mask the signs of hypoglycemia
+    pass: 4
+    hook: "الـ β-blocker بيقعد على الصدر (ربو)، وبيبطّأ القلب، وبينيّم، وبيضعف، وبيخبي الـ hypoglycemia."
+    src: { page: 327, quote: "Impotence, exacerbation of COPD and asthma, cardiovascular effects (bradycardia, AV block, HF), CNS effects (sedation, sleep alterations). May mask the signs of hypoglycemia." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.081
+    kind: cloze
+    topic: class-ii-antiarrhythmics
+    text: "Metoprolol can cause {{c1::dyslipidemia}}. Propranolol can worsen {{c2::vasospasm in vasospastic angina}}."
+    src: { page: 327, quote: "Metoprolol can cause dyslipidemia. Propranolol can exacerbate vasospasm in vasospastic angina." }
+    status: unverified
+  - id: cvs.L05.082
+    kind: card
+    topic: class-ii-antiarrhythmics
+    front: Why are β-blockers avoided alone in pheochromocytoma?
+    back: They cause unopposed α1-agonism (except carvedilol and labetalol, which also block α). First Aid lists cocaine toxicity too, but calls that concern unsubstantiated.
+    src: { page: 327, quote: "cause unopposed α1-agonism if given alone for pheochromocytoma or for cocaine toxicity (unsubstantiated)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.083
+    kind: enumerate
+    topic: class-ii-antiarrhythmics
+    prompt: Enumerate the treatment of β-blocker overdose (GAS).
+    points:
+      - Glucagon
+      - Atropine
+      - Saline
+    pass: 3
+    hook: "جرعة β-blocker زيادة؟ ادّيله GAS: Glucagon وAtropine وSaline."
+    src: { page: 327, quote: "Treat β-blocker overdose with Glucagon, Atropine, Saline (GAS)." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.084
+    kind: mcq
+    topic: class-ii-antiarrhythmics
+    stem: >-
+      A 34-year-old woman is brought in 2 hours after swallowing a bottle of her propranolol. Her pulse is 36/min
+      and blood pressure 72/40 mm Hg. Intravenous saline and atropine have little effect. Which of the following
+      is the most appropriate next drug?
+    options:
+      - Glucagon
+      - Flumazenil
+      - Naloxone
+      - Anti-digoxin Fab fragments
+      - Esmolol
+    answer: 0
+    why:
+      - "Right. β-blocker overdose is treated with Glucagon, Atropine and Saline (GAS)."
+      - "Flumazenil reverses benzodiazepines."
+      - "Naloxone reverses opioids."
+      - "Fab fragments treat digoxin toxicity."
+      - "Esmolol is another β-blocker and would worsen her."
+    src: { page: 327, quote: "Treat β-blocker overdose with Glucagon, Atropine, Saline (GAS)." }
+    status: unverified
+  - id: cvs.L05.085
+    kind: mcq
+    topic: class-ii-antiarrhythmics
+    stem: >-
+      A 52-year-old man with type 1 diabetes is started on propranolol after a run of SVT. A month later his
+      glucose meter shows readings of 45 mg/dL that he did not notice, without sweating or palpitations. Which of
+      the following best explains this?
+    options:
+      - β-blockers mask the warning signs of hypoglycemia
+      - β-blockers stimulate insulin release
+      - Propranolol causes hepatotoxicity
+      - Propranolol causes unopposed α1-agonism
+      - Propranolol prolongs the QT interval
+    answer: 0
+    why:
+      - "Right. β-blockers may mask the signs of hypoglycemia, such as tremor and palpitations."
+      - "That is not the β-blocker effect listed in First Aid."
+      - "Hepatotoxicity is not a β-blocker effect here."
+      - "Unopposed α1-agonism is a concern in pheochromocytoma, not hypoglycemia."
+      - "QT prolongation is a class IA and III effect."
+    src: { page: 327, quote: "May mask the signs of hypoglycemia." }
+    status: unverified
+  # ---------- p328: class III ----------
+  - id: cvs.L05.086
+    kind: enumerate
+    topic: class-iii-antiarrhythmics
+    prompt: Enumerate the 4 class III antiarrhythmics (AIDS).
+    points:
+      - Amiodarone
+      - Ibutilide
+      - Dofetilide
+      - Sotalol
+    pass: 4
+    hook: "AIDS: Amiodarone وIbutilide وDofetilide وSotalol، كلهم بيطوّلوا الـ QT."
+    src: { page: 328, quote: "Amiodarone, Ibutilide, Dofetilide, Sotalol. AIDS." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.087
+    kind: card
+    topic: class-iii-antiarrhythmics
+    front: What do class III antiarrhythmics (K+ channel blockers) do, and what are they used for?
+    back: ↑ AP duration, ↑ ERP and ↑ QT interval. They treat atrial fibrillation and flutter, and ventricular tachycardia (amiodarone, sotalol).
+    src: { page: 328, quote: "↑ AP duration, ↑ ERP, ↑ QT interval. CLINICAL USE Atrial fibrillation, atrial flutter; ventricular tachycardia (amiodarone, sotalol)." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.088
+    kind: cloze
+    topic: class-iii-antiarrhythmics
+    text: "Sotalol causes {{c1::torsades de pointes}} and excessive β blockade. Ibutilide causes {{c2::torsades de pointes}}."
+    src: { page: 328, quote: "Sotalol—torsades de pointes, excessive β blockade. Ibutilide—torsades de pointes." }
+    status: unverified
+  - id: cvs.L05.089
+    kind: enumerate
+    topic: class-iii-antiarrhythmics
+    prompt: Enumerate the adverse effects of amiodarone.
+    points:
+      - Pulmonary fibrosis
+      - Hepatotoxicity
+      - Hypothyroidism or hyperthyroidism (40% iodine by weight)
+      - Hapten effects (corneal deposits; blue/gray skin deposits with photodermatitis)
+      - Neurologic effects
+      - Constipation
+      - Cardiovascular (bradycardia, heart block, HF)
+    pass: 5
+    hook: "الأميودارون بيلف الجسم كله: الرئة تتليف، والكبد، والغدة يا تقل يا تزيد، والعين والجلد يزرقّوا."
+    src: { page: 328, quote: "Amiodarone—pulmonary fibrosis, hepatotoxicity, hypothyroidism or hyperthyroidism (amiodarone is 40% iodine by weight)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.090
+    kind: cloze
+    topic: class-iii-antiarrhythmics
+    text: "Before and during amiodarone, check {{c1::PFTs, LFTs and TFTs}}."
+    src: { page: 328, quote: "Remember to check PFTs, LFTs, and TFTs when using amiodarone." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.091
+    kind: cloze
+    topic: class-iii-antiarrhythmics
+    text: "Amiodarone is {{c1::lipophilic}} and has class {{c2::I, II, III and IV}} effects."
+    src: { page: 328, quote: "Amiodarone is lipophilic and has class I, II, III, and IV effects." }
+    status: unverified
+  - id: cvs.L05.092
+    kind: mcq
+    topic: class-iii-antiarrhythmics
+    stem: >-
+      A 69-year-old man has taken an antiarrhythmic for recurrent ventricular tachycardia for 18 months. He now
+      has a dry cough, exertional dyspnea and blue-gray discoloration of sun-exposed skin. His TSH is markedly
+      raised. Which property of the drug best explains his thyroid problem?
+    options:
+      - It is 40% iodine by weight
+      - It blocks Na+ channels
+      - It blocks β receptors
+      - It is lipophilic
+      - It acts as a hapten
+    answer: 0
+    why:
+      - "Right. Amiodarone is 40% iodine by weight and can cause hypo- or hyperthyroidism."
+      - "Its class I effect does not affect the thyroid."
+      - "Its class II effect does not cause hypothyroidism."
+      - "Lipophilicity explains its tissue build-up, not the thyroid effect."
+      - "Hapten effects explain the corneal and skin deposits."
+    src: { page: 328, quote: "hypothyroidism or hyperthyroidism (amiodarone is 40% iodine by weight)" }
+    status: unverified
+  - id: cvs.L05.093
+    kind: mcq
+    topic: class-iii-antiarrhythmics
+    stem: >-
+      A 57-year-old woman is started on sotalol for atrial fibrillation. Three days later she faints, and the
+      monitor shows a polymorphic ventricular tachycardia whose QRS axis twists around the baseline. Which of the
+      following actions of the drug most likely caused this rhythm?
+    options:
+      - Blockade of K+ channels, prolonging repolarization
+      - Blockade of L-type Ca2+ channels
+      - Strong blockade of Na+ channels in Purkinje fibers
+      - Inhibition of Na+/K+-ATPase
+      - Selective inhibition of the funny current
+    answer: 0
+    why:
+      - "Right. Class III drugs block K+ channels, ↑ AP duration and QT, and sotalol causes torsades de pointes."
+      - "Class IV drugs slow AV conduction; they do not cause torsades."
+      - "Class IC drugs do not affect ERP in Purkinje tissue."
+      - "That is digoxin."
+      - "That is ivabradine."
+    src: { page: 328, quote: "Sotalol—torsades de pointes, excessive β blockade." }
+    status: unverified
+  # ---------- p328: class IV ----------
+  - id: cvs.L05.094
+    kind: card
+    topic: class-iv-antiarrhythmics
+    front: What do class IV antiarrhythmics (diltiazem, verapamil) do to conduction and the ECG?
+    back: They ↓ conduction velocity, ↑ ERP and ↑ PR interval.
+    src: { page: 328, quote: "Decrease conduction velocity, ↑ ERP, ↑ PR interval." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.095
+    kind: cloze
+    topic: class-iv-antiarrhythmics
+    text: "Class IV drugs are used for {{c1::rate control in atrial fibrillation/flutter}} and prevention of nodal arrhythmias. Adverse effects: constipation, {{c2::gingival hyperplasia}}, flushing, edema, and HF, AV block and sinus node depression."
+    src: { page: 328, quote: "Constipation, gingival hyperplasia, flushing, edema, cardiovascular effects (HF, AV block, sinus node depression)." }
+    status: unverified
+  - id: cvs.L05.096
+    kind: mcq
+    topic: class-iv-antiarrhythmics
+    stem: >-
+      A 72-year-old man takes a drug for rate control of atrial fibrillation. At his dental visit he has swollen,
+      overgrown gums, and he complains of constipation. His ECG shows a PR interval of 240 ms. Which of the
+      following is the most likely mechanism of his drug?
+    options:
+      - Blockade of K+ channels
+      - Blockade of Na+ channels
+      - Blockade of L-type Ca2+ channels
+      - Blockade of β1 receptors
+      - Inhibition of Na+/K+-ATPase
+    answer: 2
+    why:
+      - "Class III drugs prolong the QT, not cause gingival hyperplasia."
+      - "Class I drugs do not cause gingival hyperplasia."
+      - "Right. Verapamil or diltiazem (class IV): ↑ PR, constipation and gingival hyperplasia."
+      - "β-blockers ↑ PR but do not cause gingival hyperplasia."
+      - "Digoxin causes GI upset and yellow vision, not gum overgrowth."
+    src: { page: 328, quote: "Constipation, gingival hyperplasia, flushing, edema" }
+    status: unverified
+  # ---------- p328: other antiarrhythmics ----------
+  - id: cvs.L05.097
+    kind: card
+    topic: other-antiarrhythmics
+    front: How does adenosine slow AV node conduction, and what is it used for?
+    back: It ↑ K+ efflux, hyperpolarizing the cell, and ↓ Ca2+ current, decreasing AV node conduction. It is the drug of choice for diagnosing and terminating certain SVTs, and acts for about 15 seconds.
+    src: { page: 328, quote: "out of cells → hyperpolarizing the cell and ↓ ICa, decreasing AV node conduction. Drug of choice in diagnosing/terminating certain forms of SVT." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.098
+    kind: cloze
+    topic: other-antiarrhythmics
+    text: "The effects of adenosine are blunted by {{c1::theophylline and caffeine}}, both adenosine receptor antagonists."
+    src: { page: 328, quote: "Effects blunted by theophylline and caffeine (both are adenosine receptor antagonists)." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.099
+    kind: enumerate
+    topic: other-antiarrhythmics
+    prompt: Enumerate the adverse effects of adenosine.
+    points:
+      - Flushing
+      - Hypotension
+      - Chest pain
+      - Sense of impending doom
+      - Bronchospasm
+    pass: 4
+    hook: "الأدينوزين ثواني بس، لكن فيها وش أحمر، وضغط واطي، ووجع صدر، وإحساس إنه هيموت، وصدر بيصفّر."
+    src: { page: 328, quote: "Adverse effects include flushing, hypotension, chest pain, sense of impending doom, bronchospasm." }
+    status: unverified
+  - id: cvs.L05.100
+    kind: cloze
+    topic: other-antiarrhythmics
+    text: "Magnesium is effective in {{c1::torsades de pointes}} and {{c2::digoxin toxicity}}."
+    src: { page: 328, quote: "Magnesium Effective in torsades de pointes and digoxin toxicity." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.101
+    kind: mcq
+    topic: other-antiarrhythmics
+    stem: >-
+      A 26-year-old woman has palpitations and a regular narrow-complex tachycardia at 190/min. Vagal maneuvers
+      fail. A rapid intravenous bolus of a drug has no effect, and a larger dose is needed to stop the rhythm. She
+      says she drank 6 cups of strong coffee today. Which of the following best explains why she needed more drug?
+    options:
+      - Caffeine blocks adenosine receptors
+      - Caffeine induces the enzyme that metabolizes the drug
+      - Caffeine opens K+ channels in the AV node
+      - Caffeine inhibits the Na+/K+-ATPase
+      - Caffeine prolongs the QT interval
+    answer: 0
+    why:
+      - "Right. Caffeine and theophylline are adenosine receptor antagonists and blunt its effect."
+      - "Adenosine acts for about 15 seconds; enzyme induction is not the issue."
+      - "Opening K+ channels would add to adenosine's effect."
+      - "That is digoxin's mechanism."
+      - "QT prolongation does not explain resistance to adenosine."
+    src: { page: 328, quote: "Effects blunted by theophylline and caffeine (both are adenosine receptor antagonists)." }
+    status: unverified
+  - id: cvs.L05.102
+    kind: mcq
+    topic: other-antiarrhythmics
+    stem: >-
+      A 60-year-old woman taking dofetilide for atrial fibrillation has recurrent runs of polymorphic ventricular
+      tachycardia with a twisting QRS axis on a long QT background. She has a pulse and is alert. Which of the
+      following is the most appropriate drug?
+    options:
+      - Intravenous magnesium
+      - Amiodarone
+      - Procainamide
+      - Sotalol
+      - Ibutilide
+    answer: 0
+    why:
+      - "Right. Magnesium is effective in torsades de pointes."
+      - "Amiodarone prolongs the QT further."
+      - "Procainamide (class IA) prolongs the QT and causes torsades."
+      - "Sotalol causes torsades."
+      - "Ibutilide causes torsades."
+    src: { page: 328, quote: "Magnesium Effective in torsades de pointes and digoxin toxicity." }
+    status: unverified
+  # ---------- p328: ivabradine ----------
+  - id: cvs.L05.103
+    kind: card
+    topic: ivabradine
+    front: How does ivabradine slow the heart, and what is it used for?
+    back: It selectively inhibits the funny Na+ channels (If), prolonging slow depolarization in phase 4 ("IVabradine" = phase IV). It is used in chronic HFrEF.
+    src: { page: 328, quote: "IVabradine prolongs slow depolarization (phase “IV”) by selectively inhibiting “funny” sodium channels (If)." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.104
+    kind: enumerate
+    topic: ivabradine
+    prompt: Enumerate the 3 adverse effects of ivabradine.
+    points:
+      - Luminous phenomena (visual brightness)
+      - Hypertension
+      - Bradycardia
+    pass: 3
+    hook: "الإيفابرادين بينوّر العين (luminous)، وبيعلّي الضغط، وبيبطّأ القلب."
+    src: { page: 328, quote: "Luminous phenomena/visual brightness, hypertension, bradycardia." }
+    status: unverified
+  - id: cvs.L05.105
+    kind: mcq
+    topic: ivabradine
+    stem: >-
+      A 63-year-old man with chronic heart failure with reduced ejection fraction is on maximal doses of a
+      β-blocker, but his resting sinus rate is still 80/min. A drug is added that lowers his heart rate. Two weeks
+      later he reports seeing bright, shimmering spots of light. Which of the following does the new drug inhibit?
+    options:
+      - The funny current (If) in the SA node
+      - The late inward Na+ current
+      - L-type Ca2+ channels
+      - Delayed rectifier K+ channels
+      - Na+/K+-ATPase
+    answer: 0
+    why:
+      - "Right. Ivabradine inhibits If, slows phase 4, and causes luminous phenomena."
+      - "That is ranolazine, which does not change HR."
+      - "Verapamil and diltiazem are avoided in HFrEF because they cause HF."
+      - "K+ channel blockers prolong the QT."
+      - "Digoxin causes yellow vision, not bright spots."
+    src: { page: 328, quote: "Luminous phenomena/visual brightness, hypertension, bradycardia." }
+    status: unverified
