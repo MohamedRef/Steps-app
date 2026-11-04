@@ -1,0 +1,1051 @@
+schema: steps.lesson/v1
+lecture: mic.L07
+lessons:
+  - id: mic.L07.lesson1
+    title: "خريطة المضادات والـ penicillins"
+    hook: "كل مضاد حيوي ليه هدف واحد في البكتيريا، اعرف الهدف تعرف نص الدوا"
+    minutes: 9
+    pages: [183, 184]
+    topics: [antimicrobial-therapy, penicillin-g-v, aminopenicillins, antistaph-penicillins, piperacillin]
+    goals:
+      - "تحفظ خريطة الأهداف: cell wall، membrane، ribosome، DNA، folate"
+      - "تفهم الـ penicillin بيقتل إزاي وبيتقاوم إزاي"
+      - "تفرّق الـ aminopenicillins والـ antistaph والـ antipseudomonal"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "البكتيريا والأهداف"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="90" y="30" width="180" height="140" rx="40"/>
+            <rect class="fg-acc" x="102" y="42" width="156" height="116" rx="32"/>
+            <text x="8" y="24" class="t-sm t-b">cell wall</text>
+            <text x="8" y="40" class="t-sm t-mut">β-lactams, vanco</text>
+            <text x="272" y="24" class="t-sm t-b">membrane</text>
+            <text x="272" y="40" class="t-sm t-mut">polymyxin ⊝</text>
+            <text x="272" y="56" class="t-sm t-mut">dapto ⊕</text>
+            <text x="130" y="78" class="t-sm">30S / 50S</text>
+            <text x="130" y="96" class="t-sm t-mut">ribosomes</text>
+            <text x="130" y="122" class="t-sm">DNA gyrase</text>
+            <text x="130" y="140" class="t-sm t-mut">FQ, metro</text>
+            <text x="8" y="186" class="t-sm t-b">folate: sulfa, TMP</text>
+            <text x="250" y="186" class="t-sm t-b">RNA pol: rifampin</text>
+          </svg>
+        caption: "الجدار من بره (β-lactams و vancomycin)، الـ membrane (polymyxins للـ ⊝ و daptomycin للـ ⊕)، والريبوسوم، والـ DNA، والـ folate، والـ RNA polymerase."
+        alt: "Bacterial cell map: cell wall synthesis (β-lactams, vancomycin), membrane integrity (polymyxins gram negative, daptomycin gram positive), 30S and 50S ribosomes, DNA gyrase (fluoroquinolones) and DNA integrity (metronidazole), folic acid synthesis (sulfonamides, trimethoprim), mRNA synthesis (rifampin)."
+        page: 183
+        quote: "Daptomycin (gram ⊕) Polymyxins (gram ⊝)"
+      - kind: explain
+        title: "Penicillin G و V"
+        text: |-
+          الـ G بيتاخد IV أو IM، والـ V بالبُق. الاتنين ==prototype β-lactam==.
+
+          الـ penicillin شبه الـ ==D-Ala-D-Ala==، فبيمسك الـ penicillin-binding proteins (الـ transpeptidases) ويوقف الـ cross-linking بتاع الـ peptidoglycan، وكمان بيشغّل الـ autolytic enzymes. الجدار بيضعف والبكتيريا بتنفجر.
+        page: 183
+        quote: "D-Ala-D-Ala structural analog. Bind penicillin-binding proteins (transpeptidases)."
+      - kind: check
+        question: "A child with strep throat gets oral penicillin. Which bacterial protein does the drug bind?"
+        options:
+          - "Transpeptidase (penicillin-binding protein)"
+          - "D-Ala-D-Ala of cell wall precursors"
+          - "DNA gyrase"
+          - "30S ribosomal subunit"
+        answer: 0
+        why:
+          - "صح: الـ penicillin بيمسك الـ PBPs (transpeptidases)."
+          - "الـ D-Ala-D-Ala ده هدف الـ vancomycin. الـ penicillin نفسه شبه الـ D-Ala-D-Ala."
+          - "الـ gyrase بتاع الـ fluoroquinolones."
+          - "الـ 30S بتاع الـ aminoglycosides والـ tetracyclines."
+        page: 183
+        quote: "Bind penicillin-binding proteins (transpeptidases)."
+      - kind: explain
+        title: "بيعالج إيه"
+        text: |-
+          أغلبه للـ ==gram ⊕==: S pneumoniae، S pyogenes، Actinomyces. وكمان gram ⊝ cocci (أهمها N meningitidis) والـ spirochetes (أهمها ==T pallidum==).
+
+          وهو sensitive للـ β-lactamase.
+        page: 183
+        quote: "Mostly used for gram ⊕ organisms (S pneumoniae, S pyogenes, Actinomyces). Also used for gram ⊝ cocci (mainly N meningitidis) and spirochetes (mainly T pallidum)."
+      - kind: aside
+        tone: exam
+        text: "الـ adverse effects: hypersensitivity، ==direct Coombs ⊕ hemolytic anemia==، و drug-induced interstitial nephritis. والمقاومة: β-lactamase بيكسر الحلقة، أو mutations في الـ PBPs."
+        page: 183
+        quote: "Hypersensitivity reactions, direct Coombs ⊕ hemolytic anemia, drug-induced interstitial nephritis."
+      - kind: check
+        question: "A man on high-dose IV penicillin G develops fever, rash and rising creatinine with WBC casts. What is the most likely cause?"
+        options:
+          - "Drug-induced interstitial nephritis"
+          - "Acute tubular necrosis from aminoglycosides"
+          - "Crystalline nephropathy"
+          - "Rhabdomyolysis"
+        answer: 0
+        why:
+          - "صح: الـ penicillin بيعمل drug-induced interstitial nephritis."
+          - "ما خدش aminoglycoside."
+          - "دي بتاعة الـ acyclovir."
+          - "دي بتاعة الـ daptomycin."
+        page: 183
+        quote: "drug-induced interstitial nephritis."
+      - kind: explain
+        title: "Aminopenicillins: amped-up penicillin"
+        text: |-
+          الـ ampicillin والـ amoxicillin: نفس الـ mechanism، بس ==spectrum أوسع==، ولسه penicillinase sensitive، عشان كده بنضيفلهم clavulanic acid.
+
+          والـ amoxicillin الـ oral bioavailability بتاعته أحسن من الـ ampicillin.
+        page: 184
+        quote: "Amoxicillin has greater oral bioavailability than ampicillin."
+      - kind: mnemonic
+        word: "HHEELPSS"
+        parts:
+          - { key: "H", text: "H influenzae" }
+          - { key: "H", text: "H pylori" }
+          - { key: "E", text: "E coli" }
+          - { key: "E", text: "Enterococci" }
+          - { key: "L", text: "Listeria monocytogenes" }
+          - { key: "P", text: "Proteus mirabilis" }
+          - { key: "S", text: "Salmonella" }
+          - { key: "S", text: "Shigella" }
+        hook: "Ampicillin/amoxicillin HHEELPSS kill enterococci."
+        page: 184
+        quote: "Coverage: ampicillin/amoxicillin HHEELPSS kill enterococci."
+      - kind: reveal
+        prompt: "طفل عنده otitis media ما اتحسنش على amoxicillin لوحده. البكتيريا عملت إيه، وإيه الحل؟"
+        answer: "البكتيريا عندها ==penicillinase== (نوع من الـ β-lactamase) بيكسر الـ β-lactam ring. الحل: نضيف ==clavulanic acid== يحمي الـ amoxicillin."
+        page: 184
+        quote: "Penicillinase (a type of β-lactamase) cleaves β-lactam ring."
+      - kind: explain
+        title: "Antistaph: naf for staph"
+        text: |-
+          الـ dicloxacillin والـ nafcillin والـ oxacillin: ==narrow spectrum==، بس penicillinase resistant لأن الـ ==bulky R group== بيمنع الـ β-lactamase يوصل للحلقة.
+
+          للـ S aureus، ما عدا الـ MRSA، لأن الـ MRSA غيّر الـ PBP نفسه.
+        page: 184
+        quote: "penicillinase resistant because bulky R group blocks access of β-lactamase to β-lactam ring."
+      - kind: explain
+        title: "Piperacillin: الـ antipseudomonal"
+        text: |-
+          extended spectrum، بس penicillinase sensitive، فلازم ==مع β-lactamase inhibitor== (piperacillin-tazobactam).
+
+          بيغطي ==Pseudomonas==، gram ⊝ rods، و anaerobes.
+        page: 184
+        quote: "Pseudomonas spp., gram ⊝ rods, anaerobes."
+      - kind: sort
+        prompt: "حط كل دوا في مجموعته"
+        bins: ["Penicillinase sensitive", "Penicillinase resistant"]
+        cards:
+          - { text: "Amoxicillin", bin: 0 }
+          - { text: "Piperacillin", bin: 0 }
+          - { text: "Penicillin G", bin: 0 }
+          - { text: "Nafcillin", bin: 1 }
+          - { text: "Dicloxacillin", bin: 1 }
+          - { text: "Oxacillin", bin: 1 }
+        why: "الـ antistaph بس (diclox، naf، oxa) عندهم الـ bulky R group. الباقي محتاج clavulanate أو tazobactam."
+        page: 184
+        quote: "Penicillinase-resistant penicillins Dicloxacillin, nafcillin, oxacillin."
+      - kind: try
+        items: [mic.L07.004, mic.L07.106, mic.L07.107, mic.L07.108, mic.L07.109]
+    recap:
+      - "Penicillin = D-Ala-D-Ala analog، بيمسك الـ PBPs ويوقف الـ cross-linking."
+      - "Penicillin G/V: gram ⊕، N meningitidis، T pallidum. Coombs ⊕ hemolysis و interstitial nephritis."
+      - "Amoxicillin/ampicillin: HHEELPSS. Naf for staph (مش MRSA). Piperacillin + tazobactam للـ Pseudomonas."
+    practice: [mic.L07.001, mic.L07.002, mic.L07.003, mic.L07.004, mic.L07.005, mic.L07.006, mic.L07.007, mic.L07.008, mic.L07.105, mic.L07.106, mic.L07.107, mic.L07.108, mic.L07.109]
+
+  - id: mic.L07.lesson2
+    title: "Cephalosporins لحد الـ vancomycin"
+    hook: "خمس أجيال، كل جيل بيكسب حاجة ويخسر حاجة، والـ vancomycin واقف لوحده"
+    minutes: 9
+    pages: [185, 186]
+    topics: [cephalosporins, beta-lactamase-inhibitors, carbapenems, aztreonam, vancomycin]
+    goals:
+      - "تعرف كل جيل cephalosporin بيغطي إيه، و LAME اللي ما بيغطوهاش"
+      - "تفهم ليه الـ imipenem مع cilastatin، والـ aztreonam لمين"
+      - "تفهم الـ vancomycin وإزاي الـ Enterococcus بيقاومه"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Cephalosporins"
+        text: |-
+          β-lactams بتوقف الـ cell wall synthesis، بس ==أقل تأثراً بالـ penicillinases==، و bactericidal.
+
+          واللي الأجيال 1-4 ما بتغطيهوش: ==LAME==: Listeria، Atypicals (Chlamydia، Mycoplasma)، MRSA، Enterococci.
+        page: 185
+        quote: "Organisms typically not covered by 1st-4th generation cephalosporins are LAME"
+      - kind: table
+        title: "الأجيال"
+        columns: ["", "Example", "Key coverage"]
+        rows:
+          - ["1st", "Cefazolin", "PEcK + gram ⊕ cocci; surgical prophylaxis"]
+          - ["2nd", "Cefoxitin", "HENS PEcK + gram ⊕ cocci"]
+          - ["3rd", "Ceftriaxone", "Serious gram ⊝; crosses BBB"]
+          - ["4th", "Cefepime", "Gram ⊝ with ↑ Pseudomonas"]
+          - ["5th", "Ceftaroline", "MRSA, E faecalis; no Pseudomonas"]
+        hide: [[0, 2], [2, 2], [3, 2], [4, 2]]
+        page: 185
+        quote: "unlike 1st-4th generation cephalosporins, ceftaroline covers MRSA, and Enterococcus faecalis—does not cover Pseudomonas."
+      - kind: aside
+        tone: tip
+        text: "الـ 3rd generation: ==ceftriaxone== للـ meningitis والـ gonorrhea والـ disseminated Lyme، و ==ceftazidime for pseudomonaz==."
+        page: 185
+        quote: "Ceftriaxone—meningitis, gonorrhea, disseminated Lyme disease. Ceftazidime for pseudomonaz."
+      - kind: explain
+        title: "Adverse effects"
+        text: |-
+          hypersensitivity، autoimmune hemolytic anemia، ==disulfiram-like reaction==، و vitamin K deficiency. والـ cross-reactivity مع حساسية الـ penicillin قليلة.
+
+          وبيزوّد ==nephrotoxicity الـ aminoglycosides==.
+        page: 185
+        quote: "↑ nephrotoxicity of aminoglycosides."
+      - kind: check
+        question: "Which cephalosporin covers MRSA?"
+        options:
+          - "Ceftaroline"
+          - "Cefepime"
+          - "Ceftriaxone"
+          - "Cefazolin"
+        answer: 0
+        why:
+          - "صح: الـ 5th generation بيغطي MRSA و E faecalis، بس مش Pseudomonas."
+          - "الـ cefepime قوي على Pseudomonas، مش MRSA."
+          - "الـ ceftriaxone مش بيغطي MRSA (LAME)."
+          - "الـ cefazolin للـ MSSA قبل العمليات."
+        page: 185
+        quote: "ceftaroline covers MRSA"
+      - kind: mnemonic
+        word: "CAST"
+        parts:
+          - { key: "C", text: "Clavulanic acid" }
+          - { key: "A", text: "Avibactam" }
+          - { key: "S", text: "Sulbactam" }
+          - { key: "T", text: "Tazobactam" }
+        hook: "β-lactamase inhibitors: amoxicillin-clavulanate، ceftazidime-avibactam، ampicillin-sulbactam، piperacillin-tazobactam."
+        page: 185
+        quote: "Include Clavulanic acid, Avibactam, Sulbactam, Tazobactam."
+      - kind: explain
+        title: "Carbapenems"
+        text: |-
+          imipenem و meropenem و ertapenem: broad spectrum و β-lactamase resistant. الـ imipenem ==دايماً مع cilastatin== اللي بيمنع renal dehydropeptidase I: "the kill is lastin' with cilastatin".
+
+          الـ ertapenem ما بيغطيش Pseudomonas. والسمّية: GI، rash، و ==seizures== في الجرعات العالية (الـ meropenem أقل).
+        page: 186
+        quote: "Always administered with cilastatin (inhibitor of renal dehydropeptidase I) to ↓ inactivation of drug in renal tubules."
+      - kind: reveal
+        prompt: "مريض على imipenem جرعة عالية جاله تشنجات، ولسه محتاج carbapenem. تختار إيه؟"
+        answer: "==Meropenem==: الـ seizure risk بتاعه أقل، وكمان stable للـ dehydropeptidase I."
+        page: 186
+        quote: "Meropenem has a ↓ risk of seizures and is stable to dehydropeptidase I."
+      - kind: explain
+        title: "Aztreonam"
+        text: |-
+          monobactam، بيمسك PBP 3. ==gram ⊝ rods بس==، ما لوش دعوة بالـ gram ⊕ ولا الـ anaerobes.
+
+          ==No cross-allergenicity with penicillins==، فهو للي عنده حساسية penicillin، أو renal insufficiency ومش هيستحمل aminoglycosides.
+        page: 186
+        quote: "Prevents peptidoglycan cross-linking by binding to penicillin-binding protein 3. Synergistic with aminoglycosides. No cross-allergenicity with penicillins."
+      - kind: explain
+        title: "Vancomycin"
+        text: |-
+          بيمسك الـ ==D-Ala-D-Ala== نفسه في الـ cell wall precursors (مش الـ PBP). gram ⊕ بس: MRSA، S epidermidis، Enterococcus الحساس، و C difficile (بالبُق).
+
+          السمّية: nephrotoxicity، ototoxicity، thrombophlebitis، والـ ==vancomycin infusion reaction== (flushing، بيتمنع بـ antihistamines وتبطيء الـ infusion)، و DRESS.
+        page: 186
+        quote: "Inhibits cell wall peptidoglycan formation by binding D-Ala-D-Ala portion of cell wall precursors."
+      - kind: reveal
+        prompt: "الـ Enterococcus بقى مقاوم للـ vancomycin. غيّر إيه في نفسه؟"
+        answer: "غيّر الـ ==D-Ala-D-Ala== لـ ==D-Ala-D-Lac==، فالـ vancomycin ما بقاش لاقي حاجة يمسكها. \"If you Lack a D-Ala (dollar), you can't ride the van.\""
+        page: 186
+        quote: "via amino acid modification of D-Ala-D-Ala to D-Ala-D-Lac."
+      - kind: try
+        items: [mic.L07.014, mic.L07.022, mic.L07.110, mic.L07.111, mic.L07.112]
+    recap:
+      - "LAME مش متغطية بالأجيال 1-4. الـ 5th (ceftaroline) بيغطي MRSA، مش Pseudomonas."
+      - "CAST = β-lactamase inhibitors. Imipenem + cilastatin؛ seizures."
+      - "Aztreonam: gram ⊝ rods بس، مافيش cross-allergy. Vancomycin: D-Ala-D-Ala، المقاومة D-Ala-D-Lac."
+    practice: [mic.L07.009, mic.L07.010, mic.L07.011, mic.L07.012, mic.L07.013, mic.L07.014, mic.L07.015, mic.L07.016, mic.L07.017, mic.L07.018, mic.L07.019, mic.L07.020, mic.L07.021, mic.L07.022, mic.L07.110, mic.L07.111, mic.L07.112]
+
+  - id: mic.L07.lesson3
+    title: "الـ protein synthesis inhibitors"
+    hook: "Buy at 30, ccel at 50: نص البيع والشرا في الريبوسوم"
+    minutes: 10
+    pages: [187, 189]
+    topics: [protein-synthesis-inhibitors, aminoglycosides, tetracyclines, tigecycline, chloramphenicol, clindamycin, linezolid, macrolides]
+    goals:
+      - "تحفظ مين على الـ 30S ومين على الـ 50S"
+      - "تعرف سمّية كل واحد، اللي بيتسأل عليها كل سنة"
+      - "تفرّق الـ clindamycin فوق الـ diaphragm عن الـ metronidazole تحته"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "ليه الريبوسوم هدف آمن"
+        text: |-
+          البكتيريا عندها ==70S== (30S + 50S)، والإنسان ==80S==، فالأدوية دي بتضرب البكتيريا بس.
+
+          كلهم bacteriostatic، ما عدا الـ ==aminoglycosides== (bactericidal) والـ linezolid (variable).
+        page: 187
+        quote: "All are bacteriostatic, except aminoglycosides (bactericidal) and linezolid (variable)."
+      - kind: figure
+        title: "30S و 50S"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <ellipse class="fg-acc" cx="120" cy="60" rx="80" ry="38"/>
+            <ellipse class="fg-good" cx="120" cy="128" rx="66" ry="26"/>
+            <text x="98" y="56" class="t-sm t-b">50S</text>
+            <text x="98" y="132" class="t-sm t-b">30S</text>
+            <text x="222" y="30" class="t-sm">Chloramphenicol</text>
+            <text x="222" y="48" class="t-sm">Clindamycin</text>
+            <text x="222" y="66" class="t-sm">Erythromycin</text>
+            <text x="222" y="84" class="t-sm">Linezolid</text>
+            <text x="222" y="122" class="t-sm">Aminoglycosides</text>
+            <text x="222" y="140" class="t-sm">Tetracyclines</text>
+          </svg>
+        caption: "تحت (30S): aminoglycosides و tetracyclines. فوق (50S): chloramphenicol، clindamycin، erythromycin (macrolides)، linezolid."
+        alt: "Bacterial ribosome with the 50S subunit on top and the 30S subunit below. 30S inhibitors are aminoglycosides and tetracyclines; 50S inhibitors are chloramphenicol, clindamycin, erythromycin (macrolides) and linezolid."
+        page: 187
+        quote: "30S inhibitors Aminoglycosides Tetracyclines “Buy at 30, ccel (sell) at 50.” 50S inhibitors Chloramphenicol, Clindamycin Erythromycin (macrolides) Linezolid"
+      - kind: check
+        question: "Which of these drugs binds the 30S subunit?"
+        options:
+          - "Doxycycline"
+          - "Azithromycin"
+          - "Clindamycin"
+          - "Linezolid"
+        answer: 0
+        why:
+          - "صح: الـ tetracyclines والـ aminoglycosides على الـ 30S (Buy at 30)."
+          - "الـ macrolides على الـ 50S."
+          - "الـ clindamycin على الـ 50S."
+          - "الـ linezolid على الـ 50S."
+        page: 187
+        quote: "30S inhibitors Aminoglycosides Tetracyclines"
+      - kind: explain
+        title: "Aminoglycosides: Mean GNATS"
+        text: |-
+          gentamicin، neomycin، amikacin، tobramycin، streptomycin. بيمسكوا الـ 30S ويوقفوا الـ initiation complex، ويعملوا misreading.
+
+          محتاجين ==O2 عشان يدخلوا==، فما بيقتلوش الـ anaerobes. للـ gram ⊝ rods الشديدة، و synergistic مع الـ β-lactams، والـ neomycin للـ bowel surgery.
+        page: 187
+        quote: "Require O2 for uptake; therefore ineffective against anaerobes."
+      - kind: aside
+        tone: trap
+        text: "السمّية: ==nephrotoxicity==، ==neuromuscular blockade== (ممنوع تماماً مع الـ myasthenia gravis)، ototoxicity (خصوصاً مع الـ loop diuretics)، و teratogenicity."
+        page: 187
+        quote: "Nephrotoxicity, neuromuscular blockade (absolute contraindication with myasthenia gravis), ototoxicity (especially with loop diuretics), teratogenicity."
+      - kind: reveal
+        prompt: "مريض عنده heart failure على furosemide واتعالج بـ gentamicin. بعد أسبوع بيشتكي إن سمعه قل. ليه هو بالذات؟"
+        answer: "الـ aminoglycosides بيعملوا ==ototoxicity==، والخطر بيزيد ==مع الـ loop diuretics== زي الـ furosemide."
+        page: 187
+        quote: "ototoxicity (especially with loop diuretics)"
+      - kind: explain
+        title: "Tetracyclines"
+        text: |-
+          بيمسكوا الـ 30S ويمنعوا الـ aminoacyl-tRNA يقعد. بيتجمعوا جوه الخلايا، فممتازين للـ ==Rickettsia و Chlamydia==، وكمان Borrelia، M pneumoniae، acne، والـ doxycycline للـ community-acquired MRSA.
+
+          ما تاخدهمش مع لبن أو antacids أو حديد (الـ divalent cations بتمنع الامتصاص). والـ doxycycline بيطلع في البراز، فينفع في الـ renal failure.
+        page: 188
+        quote: "Drugs’ ability to accumulate intracellularly makes them very effective against Rickettsia and Chlamydia."
+      - kind: check
+        question: "A 7-year-old child should not get tetracycline. Why?"
+        options:
+          - "Teeth discoloration and inhibited bone growth"
+          - "Gray baby syndrome"
+          - "Cartilage damage"
+          - "Ototoxicity"
+        answer: 0
+        why:
+          - "صح: بيصبغ السنان ويوقف نمو العضم، ما عدا الـ doxycycline."
+          - "ده الـ chloramphenicol."
+          - "ده الـ fluoroquinolones."
+          - "ده الـ aminoglycosides."
+        page: 188
+        quote: "discoloration of teeth and inhibition of bone growth in children, photosensitivity."
+      - kind: explain
+        title: "Tigecycline و Chloramphenicol"
+        text: |-
+          **Tigecycline**: من عيلة الـ tetracycline، على الـ 30S، broad spectrum، للـ MRSA والـ VRE. سمّيته nausea و vomiting.
+
+          **Chloramphenicol**: بيوقف الـ peptidyltransferase على الـ 50S. للـ meningitis والـ RMSF، ورخيص. سمّيته anemia، ==aplastic anemia== (مش مرتبطة بالجرعة)، و ==gray baby syndrome== (المبتسرين ما عندهمش UDP-glucuronosyltransferase).
+        page: 188
+        quote: "Anemia (dose dependent), aplastic anemia (dose independent), gray baby syndrome (in premature infants because they lack liver UDP-glucuronosyltransferase)."
+      - kind: explain
+        title: "Clindamycin: فوق الـ diaphragm"
+        text: |-
+          بيوقف الـ translocation على الـ 50S. للـ anaerobes في ==aspiration pneumonia==، lung abscess، والبُق، وكمان invasive group A strep.
+
+          ==فوق الـ diaphragm clindamycin، تحته metronidazole==. وأشهر سمّية: pseudomembranous colitis.
+        page: 188
+        quote: "Treats anaerobic infections above the diaphragm vs metronidazole (anaerobic infections below diaphragm)."
+      - kind: reveal
+        prompt: "مريض عنده lung abscess بعد aspiration، ومريض تاني عنده abscess في البطن بعد ثقب في القولون. الاتنين anaerobes. تدّي كل واحد إيه؟"
+        answer: "اللي في الرئة (==فوق الـ diaphragm==) ياخد ==clindamycin==. واللي في البطن (تحت الـ diaphragm) ياخد ==metronidazole==."
+        page: 188
+        quote: "Treats anaerobic infections above the diaphragm vs metronidazole (anaerobic infections below diaphragm)."
+      - kind: explain
+        title: "Linezolid"
+        text: |-
+          بيمسك الـ 23S rRNA في الـ 50S ويمنع الـ initiation complex. للـ gram ⊕ بما فيهم ==MRSA و VRE==.
+
+          السمّية: myelosuppression (خصوصاً thrombocytopenia)، peripheral neuropathy، و ==serotonin syndrome== لأنه partial MAO inhibitor.
+        page: 189
+        quote: "Myelosuppression (especially thrombocytopenia), peripheral neuropathy, serotonin syndrome (due to partial MAO inhibition)."
+      - kind: mnemonic
+        word: "MACRO"
+        parts:
+          - { key: "M", text: "GI Motility issues" }
+          - { key: "A", text: "Arrhythmia from prolonged QT" }
+          - { key: "C", text: "acute Cholestatic hepatitis" }
+          - { key: "R", text: "Rash" }
+          - { key: "O", text: "eOsinophilia" }
+        hook: "Macrolides (azithro، clarithro، erythro) بيوقفوا الـ translocation (macroslides) على الـ 50S، للـ atypical pneumonia، Chlamydia، و B pertussis."
+        page: 189
+        quote: "MACRO: Gastrointestinal Motility issues, Arrhythmia caused by prolonged QT interval, acute Cholestatic hepatitis, Rash, eOsinophilia."
+      - kind: match
+        prompt: "وصّل الدوا بطريقة المقاومة"
+        pairs:
+          - ["Aminoglycosides", "Acetylation, phosphorylation, adenylation"]
+          - ["Tetracyclines", "Plasmid efflux pumps"]
+          - ["Chloramphenicol", "Plasmid acetyltransferase"]
+          - ["Macrolides", "Methylation of 23S rRNA"]
+          - ["Linezolid", "Point mutation of rRNA"]
+        why: "الـ aminoglycosides بالـ transferases، الـ tetracyclines بالـ pumps، الـ chloramphenicol بالـ acetyltransferase، الـ macrolides بالـ methylation، والـ linezolid بـ point mutation."
+        page: 189
+        quote: "Methylation of 23S rRNA-binding site prevents binding of drug."
+      - kind: try
+        items: [mic.L07.028, mic.L07.036, mic.L07.037, mic.L07.043, mic.L07.115]
+    recap:
+      - "30S: aminoglycosides و tetracyclines. 50S: chloramphenicol، clindamycin، macrolides، linezolid."
+      - "Aminoglycosides: محتاجين O2، nephro/oto/NM blockade. Tetracyclines: Rickettsia و Chlamydia، ممنوع لبن، وسنان الأطفال."
+      - "Chloramphenicol: aplastic و gray baby. Clindamycin فوق الـ diaphragm. Linezolid: thrombocytopenia و serotonin syndrome. MACRO."
+    practice: [mic.L07.023, mic.L07.024, mic.L07.025, mic.L07.026, mic.L07.027, mic.L07.028, mic.L07.029, mic.L07.030, mic.L07.031, mic.L07.032, mic.L07.033, mic.L07.034, mic.L07.035, mic.L07.036, mic.L07.037, mic.L07.038, mic.L07.039, mic.L07.040, mic.L07.041, mic.L07.043, mic.L07.113, mic.L07.114, mic.L07.115, mic.L07.116]
+
+  - id: mic.L07.lesson4
+    title: "Polymyxins، الـ folate، والـ DNA"
+    hook: "دواين بيقفلوا خط إنتاج الـ folate من الناحيتين، وتلاتة بيضربوا الـ DNA والـ membrane"
+    minutes: 9
+    pages: [189, 191]
+    topics: [polymyxins, sulfonamides, dapsone, trimethoprim, fluoroquinolones, daptomycin, metronidazole]
+    goals:
+      - "ترتّب خط الـ folate وتعرف مين بيقفل فين"
+      - "تحفظ سمّية الـ sulfa والـ TMP والـ FQ"
+      - "تعرف الـ daptomycin والـ metronidazole بيستخدموا فين وما بيستخدموش فين"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Polymyxins"
+        text: |-
+          colistin (polymyxin E) و polymyxin B: cation polypeptides بتمسك الـ phospholipids في membrane الـ ==gram ⊝== وتخرمها.
+
+          دول ==salvage therapy== للـ multidrug-resistant gram ⊝، وسمّيتهم nephrotoxicity، neurotoxicity، و respiratory failure.
+        page: 189
+        quote: "Salvage therapy for multidrug-resistant gram ⊝ bacteria (eg, P aeruginosa, E coli, K pneumoniae)."
+      - kind: figure
+        title: "خط الـ folate"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="micL07f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="20" y="24" class="t-sm t-b">PABA + pteridine</text>
+            <line class="fg-arrow" x1="60" y1="32" x2="60" y2="62" marker-end="url(#micL07f)"/>
+            <text x="20" y="80" class="t-sm t-b">Dihydropteroic acid</text>
+            <line class="fg-arrow" x1="60" y1="88" x2="60" y2="112" marker-end="url(#micL07f)"/>
+            <text x="20" y="130" class="t-sm t-b">Dihydrofolic acid</text>
+            <line class="fg-arrow" x1="60" y1="138" x2="60" y2="166" marker-end="url(#micL07f)"/>
+            <text x="20" y="184" class="t-sm t-b">Tetrahydrofolic acid</text>
+            <text x="200" y="44" class="t-sm t-bad">✕ Sulfonamides,</text>
+            <text x="214" y="60" class="t-sm t-bad">dapsone</text>
+            <text x="200" y="146" class="t-sm t-bad">✕ Trimethoprim,</text>
+            <text x="214" y="162" class="t-sm t-bad">pyrimethamine</text>
+          </svg>
+        caption: "الـ sulfonamides والـ dapsone بيقفلوا dihydropteroate synthase فوق، والـ trimethoprim والـ pyrimethamine بيقفلوا dihydrofolate reductase تحت. قفل الاتنين = sequential block."
+        alt: "Folate pathway: PABA plus pteridine to dihydropteroic acid (blocked by sulfonamides and dapsone at dihydropteroate synthase), to dihydrofolic acid, to tetrahydrofolic acid (blocked by trimethoprim and pyrimethamine at dihydrofolate reductase)."
+        page: 190
+        quote: "Sulfonamides, dapsone Trimethoprim, pyrimethamine"
+      - kind: check
+        question: "Which enzyme do sulfonamides inhibit?"
+        options:
+          - "Dihydropteroate synthase"
+          - "Dihydrofolate reductase"
+          - "DNA gyrase"
+          - "Transpeptidase"
+        answer: 0
+        why:
+          - "صح: الـ sulfa والـ dapsone فوق، على dihydropteroate synthase."
+          - "ده الـ trimethoprim والـ pyrimethamine."
+          - "ده الـ fluoroquinolones."
+          - "ده الـ β-lactams."
+        page: 190
+        quote: "Inhibit dihydropteroate synthase, thus inhibiting folate synthesis."
+      - kind: explain
+        title: "Sulfonamides"
+        text: |-
+          بيمنعوا ==dihydropteroate synthase==. bacteriostatic، وبيبقوا bactericidal مع الـ trimethoprim. للـ gram ⊕ و ⊝ و Nocardia، والـ TMP-SMX للـ simple UTI.
+
+          السمّية كتير: Stevens-Johnson، ==hemolysis في G6PD deficiency==، ==kernicterus في الرضع==، nephrotoxicity، agranulocytosis، و optic neuritis.
+        page: 190
+        quote: "Inhibit dihydropteroate synthase, thus inhibiting folate synthesis."
+      - kind: explain
+        title: "Dapsone و Trimethoprim"
+        text: |-
+          **Dapsone**: زي الـ sulfa بس شكله مختلف. للـ ==leprosy== والـ Pneumocystis prophylaxis. وبيعمل hemolysis في G6PD و methemoglobinemia.
+
+          **Trimethoprim**: بيمنع ==dihydrofolate reductase== البكتيري. والسمّية: hyperkalemia، megaloblastic anemia، leukopenia. "TMP Treats Marrow Poorly"، والـ leucovorin بيحمي.
+        page: 190
+        quote: "Inhibits bacterial dihydrofolate reductase."
+      - kind: check
+        question: "A patient on high-dose TMP-SMX develops hyperkalemia. Which drug class acts similarly?"
+        options:
+          - "Potassium-sparing diuretics"
+          - "Loop diuretics"
+          - "Thiazides"
+          - "β-agonists"
+        answer: 0
+        why:
+          - "صح: الـ trimethoprim بيعمل hyperkalemia بنفس طريقة الـ potassium-sparing diuretics."
+          - "الـ loop بيقلّل البوتاسيوم."
+          - "الـ thiazides بيقلّلوا البوتاسيوم."
+          - "الـ β-agonists بيدخّلوا البوتاسيوم الخلايا."
+        page: 190
+        quote: "Hyperkalemia (at high doses; similar mechanism as potassium-sparing diuretics)"
+      - kind: explain
+        title: "Fluoroquinolones"
+        text: |-
+          بيمنعوا ==topoisomerase II (DNA gyrase) و topoisomerase IV==. bactericidal. والـ dairy والـ antacids بيقلّلوا الامتصاص جامد.
+
+          للـ gram ⊝ rods في البول والـ GI (بما فيهم Pseudomonas)، والـ otitis externa، والـ community-acquired pneumonia.
+        page: 191
+        quote: "Inhibit prokaryotic enzymes topoisomerase II (DNA gyrase) and topoisomerase IV."
+      - kind: reveal
+        prompt: "راجل 70 سنة على prednisone أخد ciprofloxacin، وفجأة حس بفرقعة وألم ورا الكعب. إيه اللي حصل؟"
+        answer: "==Tendon rupture== (الـ Achilles). الـ fluoroquinolones بتعمل tendonitis و tendon rupture فوق 60 سنة ومع الـ prednisone (Fluoroquinolones hurt attachments to your bones). وكمان ==ممنوعة تحت 18 سنة وفي الحمل== عشان الغضاريف."
+        page: 191
+        quote: "May cause tendonitis or tendon rupture in people >60 years old and in patients taking prednisone."
+      - kind: explain
+        title: "Daptomycin: Dapto-myo-skin"
+        text: |-
+          lipopeptide بيعمل channels في membrane الـ gram ⊕ cocci. للـ S aureus في الجلد (خصوصاً MRSA)، bacteremia، endocarditis، و VRE.
+
+          وسمّيته ==myopathy و rhabdomyolysis==.
+        page: 191
+        quote: "is used for skin infections but can cause myopathy."
+      - kind: reveal
+        prompt: "الـ daptomycin بيقتل الـ MRSA في الدم والجلد. طب ليه ما بنستخدموش في الـ MRSA pneumonia؟"
+        answer: "لأن الـ ==surfactant== في الرئة بيمسكه ويعطّله (inactivated by surfactant)."
+        page: 191
+        quote: "Not used for pneumonia (avidly binds to and is inactivated by surfactant)."
+      - kind: mnemonic
+        word: "GET GAP"
+        parts:
+          - { key: "G", text: "Giardia" }
+          - { key: "E", text: "Entamoeba" }
+          - { key: "T", text: "Trichomonas" }
+          - { key: "G", text: "Gardnerella vaginalis" }
+          - { key: "A", text: "Anaerobes (Bacteroides, C difficile)" }
+          - { key: "P", text: "H Pylori triple therapy if penicillin allergic" }
+        hook: "GET GAP on the Metro with metronidazole: free radicals بتضرب الـ DNA، تحت الـ diaphragm. ومع الكحول disulfiram-like reaction، وطعم معدني."
+        page: 191
+        quote: "GET GAP on the Metro with metronidazole!"
+      - kind: try
+        items: [mic.L07.049, mic.L07.050, mic.L07.056, mic.L07.057, mic.L07.058]
+    recap:
+      - "Polymyxins: salvage للـ gram ⊝، nephro و neurotoxic."
+      - "Sulfa و dapsone على dihydropteroate synthase، TMP على DHF reductase. G6PD hemolysis، kernicterus، TMP Treats Marrow Poorly."
+      - "FQ: gyrase، tendon rupture، ممنوع للأطفال والحمل. Dapto: مش للـ pneumonia. Metro: GET GAP، disulfiram-like."
+    practice: [mic.L07.042, mic.L07.044, mic.L07.045, mic.L07.046, mic.L07.047, mic.L07.048, mic.L07.049, mic.L07.050, mic.L07.051, mic.L07.052, mic.L07.053, mic.L07.054, mic.L07.055, mic.L07.056, mic.L07.057, mic.L07.058, mic.L07.117, mic.L07.118, mic.L07.119]
+
+  - id: mic.L07.lesson5
+    title: "الـ TB والـ prophylaxis"
+    hook: "RIPE: أربع أدوية للـ TB، وكل واحد ليه سمّية بتتحفظ من اسمه"
+    minutes: 8
+    pages: [192, 193]
+    topics: [antituberculous-drugs, antimycobacterial-therapy, antimicrobial-prophylaxis]
+    goals:
+      - "تعرف mechanism وسمّية كل دوا من RIPE"
+      - "تعرف علاج و prophylaxis الـ TB والـ MAC والـ leprosy"
+      - "تحفظ جدول الـ prophylaxis"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "الـ mycobacterium والأدوية"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="20" y="30" width="200" height="120" rx="50"/>
+            <rect class="fg-acc" x="38" y="48" width="164" height="84" rx="38"/>
+            <text x="70" y="84" class="t-sm">RNA pol</text>
+            <text x="70" y="102" class="t-sm t-mut">intracellular</text>
+            <text x="234" y="40" class="t-sm t-b">Mycolic acid</text>
+            <text x="234" y="56" class="t-sm t-mut">isoniazid</text>
+            <text x="234" y="80" class="t-sm t-b">Arabinogalactan</text>
+            <text x="234" y="96" class="t-sm t-mut">ethambutol</text>
+            <text x="234" y="120" class="t-sm t-b">mRNA</text>
+            <text x="234" y="136" class="t-sm t-mut">rifamycins</text>
+            <text x="234" y="160" class="t-sm t-mut">pyrazinamide ?</text>
+          </svg>
+        caption: "الـ isoniazid على الـ mycolic acid، الـ ethambutol على الـ arabinogalactan، الـ rifamycins على الـ RNA polymerase، والـ pyrazinamide جوه الخلية بـ mechanism مش واضح."
+        alt: "Mycobacterial cell: isoniazid blocks mycolic acid synthesis, ethambutol blocks arabinogalactan synthesis (arabinosyltransferase), rifampin, rifabutin and rifapentine block mRNA synthesis by DNA-dependent RNA polymerase, pyrazinamide acts intracellularly by an unclear mechanism."
+        page: 192
+        quote: "INTRACELLULAR (unclear mechanism) Pyrazinamide ARABINOGALACTAN SYNTHESIS (arabinosyltransferase) Ethambutol"
+      - kind: explain
+        title: "Rifamycins"
+        text: |-
+          rifampin و rifabutin و rifapentine بيمنعوا الـ DNA-dependent RNA polymerase. الـ ==monotherapy بتعمل resistance بسرعة==.
+
+          السمّية: hepatotoxicity بسيطة، ==CYP450 induction==، و ==red-orange== في سوايل الجسم (مش خطر).
+        page: 192
+        quote: "Minor hepatotoxicity, drug interactions (CYP450 induction), red-orange discoloration of body fluids"
+      - kind: reveal
+        prompt: "مريض HIV على protease inhibitor جاله TB. ليه بنختار rifabutin بدل rifampin؟"
+        answer: "لأن الـ rifabutin ==CYP450 induction بتاعه أقل==، فما بيوطّيش مستوى الـ protease inhibitor زي الـ rifampin."
+        page: 192
+        quote: "Rifabutin favored over rifampin in patients with HIV infection due to less CYP450 induction"
+      - kind: explain
+        title: "Isoniazid: INH Injures Neurons and Hepatocytes"
+        text: |-
+          بيمنع الـ mycolic acid synthesis، ومحتاج ==katG== (catalase-peroxidase البكتيري) عشان يتفعّل، والمقاومة بـ mutations في katG.
+
+          السمّية: نقص B6 (==peripheral neuropathy، sideroblastic anemia==)، hepatotoxicity، CYP450 inhibition، و drug-induced lupus. فلازم معاه pyridoxine. والـ overdose بيعمل seizures مش بتستجيب للـ benzodiazepines.
+        page: 192
+        quote: "Vitamin B6 deficiency (peripheral neuropathy, sideroblastic anemia), hepatotoxicity, drug interactions (CYP450 inhibition), drug-induced lupus"
+      - kind: explain
+        title: "Pyrazinamide و Ethambutol"
+        text: |-
+          **Pyrazinamide**: mechanism مش معروف، شغّال أحسن في الـ ==acidic pH== (الـ phagolysosomes). سمّيته hepatotoxicity و ==hyperuricemia==.
+
+          **Ethambutol**: بيمنع arabinosyltransferase. سمّيته optic neuropathy (red-green color blindness)، "==eyethambutol==".
+        page: 192
+        quote: "Optic neuropathy (red-green color blindness or ↓ visual acuity, typically reversible)"
+      - kind: match
+        prompt: "وصّل الدوا بالسمّية"
+        pairs:
+          - ["Rifampin", "Red-orange body fluids"]
+          - ["Isoniazid", "Sideroblastic anemia"]
+          - ["Pyrazinamide", "Hyperuricemia"]
+          - ["Ethambutol", "Red-green color blindness"]
+        why: "Rifampin أحمر برتقالي، INH بيسرق B6، PZA بيرفع الـ uric acid، و eyethambutol للعين."
+        page: 192
+        quote: "Pyrazinamide Mechanism uncertain Hepatotoxicity, hyperuricemia"
+      - kind: table
+        title: "Antimycobacterial therapy"
+        columns: ["", "Prophylaxis", "Treatment"]
+        rows:
+          - ["M tuberculosis", "Rifamycin regimen 3-4 months", "RIPE"]
+          - ["M avium–intracellulare", "Azithromycin, rifabutin", "Azithro or clarithro + ethambutol"]
+          - ["M leprae", "N/A", "Dapsone + rifampin; add clofazimine (lepromatous)"]
+        hide: [[0, 2], [1, 2], [2, 2]]
+        page: 193
+        quote: "M tuberculosis Rifamycin-based regimen for 3-4 months Rifampin, Isoniazid, Pyrazinamide, Ethambutol (RIPE for treatment)"
+      - kind: check
+        question: "A man with HIV has CD4+ 40 cells/mm3. Which drug is used for MAC prophylaxis?"
+        options:
+          - "Azithromycin"
+          - "Isoniazid"
+          - "Dapsone"
+          - "Fluconazole"
+        answer: 0
+        why:
+          - "صح: الـ MAC prophylaxis = azithromycin أو rifabutin."
+          - "الـ isoniazid للـ TB."
+          - "الـ dapsone للـ Pneumocystis أو الـ leprosy."
+          - "الـ fluconazole للـ Cryptococcus."
+        page: 193
+        quote: "M avium–intracellulare Azithromycin, rifabutin"
+      - kind: table
+        title: "Antimicrobial prophylaxis"
+        columns: ["Scenario", "Drug"]
+        rows:
+          - ["Meningococcal exposure", "Ceftriaxone, ciprofloxacin, or rifampin"]
+          - ["Endocarditis risk + dental procedure", "Amoxicillin"]
+          - ["Recurrent UTIs", "TMP-SMX"]
+          - ["Pregnant, GBS carrier", "Intrapartum penicillin G or ampicillin"]
+          - ["Newborn gonococcal conjunctivitis", "Erythromycin ointment"]
+          - ["Postsurgical S aureus", "Cefazolin; vancomycin if MRSA"]
+          - ["Prior rheumatic fever", "Benzathine penicillin G or oral penicillin V"]
+        hide: [[0, 1], [1, 1], [3, 1], [4, 1], [6, 1]]
+        page: 193
+        quote: "Prevention of gonococcal conjunctivitis in newborn Erythromycin ointment on eyes"
+      - kind: aside
+        tone: tip
+        text: "الـ malaria prophylaxis للمسافرين: atovaquone-proguanil، mefloquine، ==doxycycline==، primaquine، أو chloroquine في المناطق اللي الأنواع فيها لسه sensitive."
+        page: 193
+        quote: "Atovaquone-proguanil, mefloquine, doxycycline, primaquine, or chloroquine (for areas with sensitive species)"
+      - kind: try
+        items: [mic.L07.064, mic.L07.065, mic.L07.066, mic.L07.120]
+    recap:
+      - "RIPE: rifampin (RNA pol، CYP induction، أحمر)، INH (katG، B6، كبد)، PZA (acidic pH، uric acid)، ethambutol (عين)."
+      - "MAC: azithro أو rifabutin prophylaxis، والعلاج macrolide + ethambutol. Leprosy: dapsone + rifampin ± clofazimine."
+      - "Prophylaxis: meningococcus = ceftriaxone/cipro/rifampin، endocarditis = amoxicillin، GBS = penicillin G، newborn eyes = erythromycin."
+    practice: [mic.L07.059, mic.L07.060, mic.L07.061, mic.L07.062, mic.L07.063, mic.L07.064, mic.L07.065, mic.L07.066, mic.L07.120]
+
+  - id: mic.L07.lesson6
+    title: "مضادات الفطريات والطفيليات"
+    hook: "الفطر عنده ergosterol بدل الـ cholesterol، ونص الأدوية عايشة على الفرق ده"
+    minutes: 9
+    pages: [194, 195]
+    topics: [amphotericin-b, nystatin, flucytosine, azoles, terbinafine, echinocandins, griseofulvin, antiprotozoal-therapy, anti-mite-louse, chloroquine]
+    goals:
+      - "ترتّب الأدوية على خط الـ ergosterol والجدار"
+      - "تحفظ سمّية الـ amphotericin والـ azoles والـ griseofulvin"
+      - "تعرف علاج الطفيليات والجرب والـ malaria"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "الفطر والأدوية"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="micL07g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="20" y="24" class="t-sm t-b">Squalene</text>
+            <line class="fg-arrow" x1="44" y1="32" x2="44" y2="62" marker-end="url(#micL07g)"/>
+            <text x="20" y="80" class="t-sm t-b">Lanosterol</text>
+            <line class="fg-arrow" x1="44" y1="88" x2="44" y2="118" marker-end="url(#micL07g)"/>
+            <text x="20" y="136" class="t-sm t-b">Ergosterol</text>
+            <text x="110" y="50" class="t-sm t-bad">✕ terbinafine</text>
+            <text x="110" y="106" class="t-sm t-bad">✕ azoles</text>
+            <text x="110" y="140" class="t-sm t-bad">← amphotericin, nystatin</text>
+            <text x="20" y="176" class="t-sm t-b">Cell wall β-glucan</text>
+            <text x="150" y="176" class="t-sm t-bad">✕ echinocandins</text>
+          </svg>
+        caption: "الـ terbinafine بيمنع squalene epoxidase، والـ azoles بيمنعوا تحويل lanosterol لـ ergosterol، والـ amphotericin والـ nystatin بيمسكوا الـ ergosterol، والـ echinocandins بيمنعوا الـ β-glucan."
+        alt: "Fungal sterol pathway: squalene to lanosterol (blocked by terbinafine at squalene epoxidase), lanosterol to ergosterol (blocked by azoles), ergosterol bound by amphotericin B and nystatin, and cell wall β-glucan synthesis blocked by echinocandins."
+        page: 195
+        quote: "Inhibit fungal sterol (ergosterol) synthesis by inhibiting the cytochrome P-450 enzyme that converts lanosterol to ergosterol."
+      - kind: explain
+        title: "Amphotericin B: amphoterrible"
+        text: |-
+          بيمسك الـ ==ergosterol== ويعمل pores. للـ serious systemic mycoses: Cryptococcus، Blastomyces، Coccidioides، Histoplasma، Candida، Mucor.
+
+          السمّية: fever/chills ("shake and bake")، hypotension، ==nephrotoxicity==، arrhythmias، anemia. والـ hydration والـ liposomal بيقلّلوا السمّية.
+        page: 194
+        quote: "Fever/chills (“shake and bake”), hypotension, nephrotoxicity, arrhythmias, anemia, IV phlebitis (“amphoterrible”)."
+      - kind: reveal
+        prompt: "مريض على amphotericin B بقاله أسبوع، والـ potassium والـ magnesium نازلين. ليه، وتعمل إيه؟"
+        answer: "الـ amphotericin بيغيّر ==renal tubule permeability== فبيضيّع K و Mg. لازم ==تعوّضهم==."
+        page: 194
+        quote: "because of altered renal tubule permeability."
+      - kind: explain
+        title: "Nystatin و Flucytosine"
+        text: |-
+          **Nystatin**: زي الـ amphotericin بس ==topical بس== لأنه سام. "swish and swallow" للـ thrush، وللـ diaper rash والـ vaginal candidiasis.
+
+          **Flucytosine**: بيتحوّل لـ ==5-fluorouracil== بالـ cytosine deaminase. مع الـ amphotericin للـ cryptococcal meningitis، وسمّيته myelosuppression.
+        page: 194
+        quote: "“Swish and swallow” for oral candidiasis (thrush); topical for diaper rash or vaginal candidiasis."
+      - kind: check
+        question: "Which antifungal causes gynecomastia by inhibiting testosterone synthesis?"
+        options:
+          - "Ketoconazole"
+          - "Terbinafine"
+          - "Caspofungin"
+          - "Nystatin"
+        answer: 0
+        why:
+          - "صح: الـ azoles بيمنعوا الـ testosterone synthesis، خصوصاً الـ ketoconazole."
+          - "الـ terbinafine سمّيته hepatotoxicity وتغيّر الطعم."
+          - "الـ echinocandins: GI و flushing."
+          - "الـ nystatin topical."
+        page: 195
+        quote: "Testosterone synthesis inhibition (gynecomastia, especially with ketoconazole)"
+      - kind: table
+        title: "مين لإيه"
+        columns: ["Drug", "Use"]
+        rows:
+          - ["Fluconazole", "Cryptococcal suppression in HIV; Candida"]
+          - ["Itraconazole", "Blastomyces, Coccidioides, Histoplasma, Sporothrix"]
+          - ["Voriconazole", "Aspergillus, some Candida"]
+          - ["Terbinafine", "Onychomycosis"]
+          - ["Echinocandins", "Invasive aspergillosis, Candida"]
+          - ["Griseofulvin", "Dermatophytes (tinea)"]
+        hide: [[0, 1], [2, 1], [3, 1], [5, 1]]
+        page: 195
+        quote: "Voriconazole for Aspergillus and some Candida."
+      - kind: explain
+        title: "Griseofulvin"
+        text: |-
+          بيبوّظ الـ microtubules ويوقف الـ mitosis، وبيترسب في الـ ==keratin== (الضوافر). للـ dermatophytes بالبُق.
+
+          سمّيته: ==teratogenic==، carcinogenic، disulfiram-like، وبيرفع الـ cytochrome P-450 فيسرّع كسر الـ warfarin.
+        page: 195
+        quote: "Interferes with microtubule function; disrupts mitosis. Deposits in keratin-containing tissues (eg, nails)."
+      - kind: match
+        prompt: "وصّل الطفيلي بالعلاج"
+        pairs:
+          - ["Toxoplasmosis", "Pyrimethamine-sulfadiazine"]
+          - ["T brucei", "Suramin, melarsoprol"]
+          - ["T cruzi", "Nifurtimox"]
+          - ["Leishmaniasis", "Sodium stibogluconate"]
+          - ["Scabies, lice", "Permethrin, malathion, ivermectin"]
+        why: "Toxo بالـ pyrimethamine، النوم الأفريقي بالـ suramin، Chagas بالـ nifurtimox، الـ leishmania بالـ stibogluconate، والجرب والقمل بالـ permethrin."
+        page: 195
+        quote: "Pyrimethamine-sulfadiazine (toxoplasmosis), suramin and melarsoprol (Trypanosoma brucei), nifurtimox (T cruzi), sodium stibogluconate (leishmaniasis)."
+      - kind: explain
+        title: "Chloroquine"
+        text: |-
+          بيمنع تحويل الـ heme لـ ==hemozoin==، فالـ heme بيتراكم ويسمّم الـ plasmodium.
+
+          لكل الأنواع ==ما عدا P falciparum== (عنده membrane pump بيطلّع الدوا). وسمّيته retinopathy (حسب الجرعة الكلية) و pruritus.
+        page: 195
+        quote: "Treatment of plasmodial species other than P falciparum (due to drug resistance from membrane pump that ↓ intracellular concentration of drug)."
+      - kind: try
+        items: [mic.L07.077, mic.L07.078, mic.L07.121, mic.L07.124, mic.L07.128]
+    recap:
+      - "Amphotericin و nystatin يمسكوا ergosterol، azoles يمنعوا lanosterol ← ergosterol، terbinafine يمنع squalene epoxidase، echinocandins يمنعوا β-glucan."
+      - "Amphotericin: nephrotoxic و shake and bake. Azoles: gynecomastia و P-450. Griseofulvin: keratin، teratogenic، يسرّع الـ warfarin."
+      - "Chloroquine: heme ← hemozoin، مش للـ falciparum، retinopathy. Nifurtimox للـ T cruzi."
+    practice: [mic.L07.067, mic.L07.068, mic.L07.069, mic.L07.070, mic.L07.071, mic.L07.072, mic.L07.073, mic.L07.074, mic.L07.075, mic.L07.076, mic.L07.077, mic.L07.078, mic.L07.121, mic.L07.122, mic.L07.123, mic.L07.124, mic.L07.125, mic.L07.126, mic.L07.127, mic.L07.128]
+
+  - id: mic.L07.lesson7
+    title: "الديدان، الـ flu، والـ herpes"
+    hook: "الـ acyclovir ذكي: ما بيشتغلش غير في الخلية المصابة، وده سر أمانه"
+    minutes: 9
+    pages: [196, 197]
+    topics: [antihelminthic-therapy, neuraminidase-inhibitors, baloxavir, remdesivir, acyclovir, ganciclovir, foscarnet, cidofovir]
+    goals:
+      - "تعرف أدوية الديدان والـ influenza والـ COVID-19"
+      - "تفهم ليه الـ acyclovir آمن ومش بيشتغل على الـ CMV"
+      - "تفرّق الـ ganciclovir والـ foscarnet والـ cidofovir"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Antihelminthic therapy"
+        text: |-
+          pyrantel pamoate، ivermectin، ==mebendazole== (للـ "bendy worms"، بيبوّظ الـ microtubules)، praziquantel (بيرفع نفاذية الـ Ca)، و diethylcarbamazine.
+        page: 196
+        quote: "mebendazole (treats “bendy worms” by disrupting microtubules and cellular motility)"
+      - kind: explain
+        title: "الـ influenza"
+        text: |-
+          **Oseltamivir و zanamivir**: بيمنعوا الـ ==neuraminidase== فالفيروس الجديد ما يعرفش يطلع. للعلاج والوقاية من A و B، وأحسن في أول 48 ساعة.
+
+          **Baloxavir**: بيمنع الـ ==cap snatching== endonuclease بتاع الـ RNA polymerase.
+        page: 196
+        quote: "Inhibit influenza neuraminidase →  ↓ release of progeny virus."
+      - kind: check
+        question: "Which influenza drug blocks cap snatching by the viral RNA polymerase?"
+        options:
+          - "Baloxavir"
+          - "Oseltamivir"
+          - "Zanamivir"
+          - "Remdesivir"
+        answer: 0
+        why:
+          - "صح: الـ baloxavir بيمنع الـ endonuclease اللي بيسرق الـ 5′ cap."
+          - "الـ oseltamivir على الـ neuraminidase."
+          - "الـ zanamivir على الـ neuraminidase."
+          - "الـ remdesivir للـ COVID-19."
+        page: 196
+        quote: "Inhibits the “cap snatching” (transfer of the 5′ cap from cell mRNA onto viral mRNA) endonuclease activity"
+      - kind: aside
+        tone: tip
+        text: "الـ remdesivir: prodrug لـ ==ATP analog==، بيمنع الـ RNA-dependent RNA polymerase وبيهرب من الـ proofreading بتاع الـ ExoN. لـ COVID-19 اللي محتاج مستشفى."
+        page: 196
+        quote: "Prodrug of an ATP analog. The active metabolite inhibits viral RNA-dependent RNA polymerase"
+      - kind: figure
+        title: "الـ acyclovir بيتفعّل إزاي"
+        svg: |-
+          <svg viewBox="0 0 360 184" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="micL07h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="20" y="30" class="t-sm t-b">Acyclovir</text>
+            <line class="fg-arrow" x1="44" y1="38" x2="44" y2="70" marker-end="url(#micL07h)"/>
+            <text x="60" y="58" class="t-sm t-acc">viral thymidine kinase</text>
+            <text x="20" y="88" class="t-sm t-b">Acyclovir monophosphate</text>
+            <line class="fg-arrow" x1="44" y1="96" x2="44" y2="128" marker-end="url(#micL07h)"/>
+            <text x="60" y="116" class="t-sm t-mut">cellular enzymes</text>
+            <text x="20" y="146" class="t-sm t-b">Acyclovir triphosphate</text>
+            <text x="20" y="168" class="t-sm t-bad">✕ viral DNA polymerase</text>
+          </svg>
+        caption: "أول phosphate من الـ thymidine kinase بتاعة الفيروس بس، فالخلية السليمة ما بتفعّلوش. بعدين الخلية تكمّل الـ triphosphate، اللي بيوقف الـ viral DNA polymerase بالـ chain termination."
+        alt: "Acyclovir is monophosphorylated by HSV or VZV thymidine kinase, then converted to the triphosphate by cellular enzymes; the triphosphate inhibits viral DNA polymerase by chain termination."
+        page: 196
+        quote: "Monophosphorylated by HSV/VZV thymidine kinase and not phosphorylated in uninfected cells →  few adverse effects."
+      - kind: reveal
+        prompt: "ليه الـ acyclovir ما بيشتغلش على الـ CMV؟"
+        answer: "لأن الـ CMV ==ما عندوش الـ thymidine kinase== اللي بتعمل أول phosphate. عشان كده الـ CMV بياخد ganciclovir، اللي بيتفعّل بـ CMV viral kinase تانية."
+        page: 196
+        quote: "No activity against CMV because CMV lacks the thymidine kinase necessary to activate guanosine analogs."
+      - kind: explain
+        title: "Acyclovir: الاستخدام والسمّية"
+        text: |-
+          للـ HSV في الجلد والأعضاء التناسلية والـ ==encephalitis==، و prophylaxis. ==ما بيأثرش على الـ latent== HSV و VZV. الـ valacyclovir أحسن بالبُق، والـ famciclovir للـ zoster.
+
+          السمّية: ==crystalline nephropathy== لو المريض مش متروّي. والمقاومة: thymidine kinase متغيرة.
+        page: 196
+        quote: "Obstructive crystalline nephropathy and acute kidney injury if not adequately hydrated."
+      - kind: table
+        title: "أدوية الـ CMV"
+        columns: ["Drug", "Activation", "Key toxicity"]
+        rows:
+          - ["Ganciclovir", "CMV viral kinase", "Myelosuppression"]
+          - ["Foscarnet", "None (pyrophosphate analog)", "Nephrotoxicity, electrolytes → seizures"]
+          - ["Cidofovir", "No viral kinase", "Nephrotoxicity (give probenecid + saline)"]
+        hide: [[0, 2], [1, 1], [2, 2]]
+        page: 197
+        quote: "Does not require any kinase activation. Foscarnet = pyrofosphate analog."
+      - kind: check
+        question: "HSV becomes resistant to acyclovir by mutating its thymidine kinase. Which drug still works?"
+        options:
+          - "Foscarnet"
+          - "Valacyclovir"
+          - "Famciclovir"
+          - "Oseltamivir"
+        answer: 0
+        why:
+          - "صح: الـ foscarnet ما محتاجش أي kinase، فهو للـ acyclovir-resistant HSV."
+          - "الـ valacyclovir prodrug للـ acyclovir، نفس المشكلة."
+          - "الـ famciclovir برضه محتاج الـ thymidine kinase."
+          - "الـ oseltamivir للـ influenza."
+        page: 197
+        quote: "CMV retinitis in immunocompromised patients when ganciclovir fails; acyclovir-resistant HSV."
+      - kind: try
+        items: [mic.L07.089, mic.L07.090, mic.L07.130, mic.L07.131, mic.L07.133]
+    recap:
+      - "Mebendazole = bendy worms. Oseltamivir = neuraminidase. Baloxavir = cap snatching. Remdesivir = ATP analog."
+      - "Acyclovir بيتفعّل بالـ thymidine kinase الفيروسية بس؛ مش للـ CMV ولا الـ latent؛ crystalline nephropathy."
+      - "Ganciclovir: CMV kinase، myelosuppression. Foscarnet: pyrophosphate analog، من غير kinase. Cidofovir: nephrotoxic، مع probenecid."
+    practice: [mic.L07.079, mic.L07.080, mic.L07.081, mic.L07.082, mic.L07.083, mic.L07.084, mic.L07.085, mic.L07.086, mic.L07.087, mic.L07.088, mic.L07.089, mic.L07.090, mic.L07.129, mic.L07.130, mic.L07.131, mic.L07.132, mic.L07.133]
+
+  - id: mic.L07.lesson8
+    title: "التعقيم، الحمل، الـ HIV والـ HCV"
+    hook: "Safe children take really good care: تمن أدوية ممنوعة في الحمل في جملة واحدة"
+    minutes: 10
+    pages: [197, 200]
+    topics: [disinfection, pregnancy-antimicrobials, hiv-therapy, hiv-prophylaxis, hcv-therapy]
+    goals:
+      - "تعرف المطهرات ومين فيهم sporicidal"
+      - "تحفظ الأدوية الممنوعة في الحمل"
+      - "ترتّب أدوية الـ HIV على دورة حياته، وأدوية الـ HCV على بروتيناته"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Disinfection و sterilization"
+        text: |-
+          الـ disinfection بيقلّل الميكروبات لمستوى آمن، والـ ==sterilization== بيقتل كل حاجة حتى الـ spores.
+
+          الـ sporicidal: ==autoclave== (بخار مضغوط >120°C، وممكن ما يقتلش الـ prions)، chlorine، ethylene oxide، و hydrogen peroxide. والـ iodine "may be sporicidal".
+        page: 197
+        quote: "Pressurized steam at >120°C. May not reliably inactivate prions."
+      - kind: sort
+        prompt: "sporicidal ولا لأ؟"
+        bins: ["Sporicidal", "Not sporicidal"]
+        cards:
+          - { text: "Ethylene oxide", bin: 0 }
+          - { text: "Hydrogen peroxide", bin: 0 }
+          - { text: "Chlorine", bin: 0 }
+          - { text: "Alcohols", bin: 1 }
+          - { text: "Chlorhexidine", bin: 1 }
+          - { text: "Quaternary amines", bin: 1 }
+        why: "الـ autoclave والـ chlorine والـ ethylene oxide والـ H2O2 عليهم علامة sporicidal. الكحول والـ chlorhexidine والـ quaternary amines بيضربوا الـ membrane بس."
+        page: 197
+        quote: "Quaternary amines Impair permeability of cell membranes."
+      - kind: mnemonic
+        word: "SAFCTRGC"
+        parts:
+          - { key: "S", text: "Sulfonamides: kernicterus" }
+          - { key: "A", text: "Aminoglycosides: ototoxicity" }
+          - { key: "F", text: "Fluoroquinolones: cartilage damage" }
+          - { key: "C", text: "Clarithromycin: embryotoxic" }
+          - { key: "T", text: "Tetracyclines: teeth, bone" }
+          - { key: "R", text: "Ribavirin: teratogenic" }
+          - { key: "G", text: "Griseofulvin: teratogenic" }
+          - { key: "C", text: "Chloramphenicol: gray baby" }
+        hook: "Safe children take really good care."
+        page: 197
+        quote: "Safe children take really good care."
+      - kind: explain
+        title: "ART"
+        text: |-
+          بيبدأ غالباً وقت التشخيص، وأقوى indication: AIDS-defining illness، CD4+ <500، أو viral load عالي.
+
+          النظام ==3 أدوية==: ==2 NRTIs + integrase inhibitor== غالباً. والـ tenofovir + emtricitabine ينفعوا pre-exposure prophylaxis.
+        page: 198
+        quote: "Regimen consists of 3 drugs to prevent resistance: 2 NRTIs and preferably an integrase inhibitor."
+      - kind: check
+        question: "Which combination can be given as HIV pre-exposure prophylaxis?"
+        options:
+          - "Tenofovir + emtricitabine"
+          - "Zidovudine + efavirenz"
+          - "Ritonavir + darunavir"
+          - "Maraviroc + enfuvirtide"
+        answer: 0
+        why:
+          - "صح: الـ tenofovir + emtricitabine ينفعوا pre-exposure prophylaxis."
+          - "الـ zidovudine للـ prophylaxis العامة وفي الحمل، مش ده."
+          - "دي protease inhibitor مع booster."
+          - "دول entry inhibitors."
+        page: 198
+        quote: "Tenofovir + emtricitabine can be administered as pre-exposure prophylaxis."
+      - kind: figure
+        title: "دورة الـ HIV والأدوية"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="10" y="20" width="160" height="150" rx="20"/>
+            <text x="22" y="44" class="t-sm">Attachment</text>
+            <text x="22" y="66" class="t-sm">Penetration</text>
+            <text x="22" y="92" class="t-sm">Reverse transcription</text>
+            <text x="22" y="118" class="t-sm">DNA integration</text>
+            <text x="22" y="146" class="t-sm">Proteolytic processing</text>
+            <text x="186" y="44" class="t-sm t-bad">✕ maraviroc (CCR5)</text>
+            <text x="186" y="66" class="t-sm t-bad">✕ enfuvirtide (gp41)</text>
+            <text x="186" y="92" class="t-sm t-bad">✕ NRTIs, NNRTIs</text>
+            <text x="186" y="118" class="t-sm t-bad">✕ -tegravir</text>
+            <text x="186" y="146" class="t-sm t-bad">✕ -navir</text>
+          </svg>
+        caption: "Maraviroc بيقفل الـ docking على الـ CCR5، و enfuvirtide بيقفل الـ fusion بالـ gp41، والـ NRTIs والـ NNRTIs على الـ reverse transcriptase، والـ -tegravir على الـ integrase، والـ -navir على الـ protease."
+        alt: "HIV life cycle with drug targets: attachment blocked by maraviroc (CCR5), penetration blocked by enfuvirtide (gp41), reverse transcription blocked by NRTIs and NNRTIs, DNA integration blocked by integrase inhibitors (bictegravir, dolutegravir), proteolytic processing blocked by protease inhibitors (atazanavir, darunavir)."
+        page: 199
+        quote: "Reverse transcription DNA integration Transcription Translation Proteolytic processing"
+      - kind: explain
+        title: "NRTIs و NNRTIs"
+        text: |-
+          **NRTIs** (abacavir، emtricitabine، lamivudine، tenofovir، zidovudine): بيوقفوا الـ DNA chain لأن ==ما عندهمش 3′ OH==، ولازم يتعملهم phosphorylation. السمّية myelosuppression و nephrotoxicity.
+
+          **NNRTIs** (doravirine، efavirenz، rilpivirine): بيمسكوا الـ reverse transcriptase في مكان تاني ومش محتاجين phosphorylation. rash و hepatotoxicity، والـ efavirenz vivid dreams.
+        page: 198
+        quote: "Bind to reverse transcriptase at site different from NRTIs. Do not require phosphorylation to be active or compete with nucleotides."
+      - kind: reveal
+        prompt: "قبل ما تكتب abacavir لمريض HIV، لازم تعمل تحليل إيه؟"
+        answer: "==HLA-B*5701==. لو موجود، الـ abacavir ممنوع عشان خطر الـ ==hypersensitivity==."
+        page: 198
+        quote: "Abacavir contraindicated if patient has HLA-B*5701 mutation due to ↑ risk of hypersensitivity."
+      - kind: explain
+        title: "Integrase و protease و entry"
+        text: |-
+          **Integrase inhibitors** (bictegravir، dolutegravir): ↑ creatine kinase و weight gain.
+
+          **Protease inhibitors** (-navir): كلهم محتاجين boosting بـ ritonavir أو cobicistat. السمّية ==hyperglycemia، dyslipidemia، lipodystrophy==. والـ rifampin بيقلّلهم، فاستعمل rifabutin.
+
+          **Entry**: enfuvirtide على gp41 (fusion)، و maraviroc على CCR5 (docking).
+        page: 198
+        quote: "Hyperglycemia, dyslipidemia, lipodystrophy syndrome, GI intolerance (nausea, diarrhea)."
+      - kind: check
+        question: "A patient on ART develops lipodystrophy and new hyperglycemia. Which drug class is most likely?"
+        options:
+          - "Protease inhibitors"
+          - "NRTIs"
+          - "Integrase inhibitors"
+          - "Fusion inhibitors"
+        answer: 0
+        why:
+          - "صح: الـ -navir بيعملوا hyperglycemia و dyslipidemia و lipodystrophy."
+          - "الـ NRTIs: myelosuppression و nephrotoxicity."
+          - "الـ integrase inhibitors: CK و weight gain."
+          - "الـ enfuvirtide: skin reaction مكان الحقنة."
+        page: 198
+        quote: "Navir (never) tease a protease."
+      - kind: aside
+        tone: exam
+        text: "الـ prophylaxis في الـ HIV: CD4+ <200 = TMP-SMX للـ ==Pneumocystis==، و <100 = TMP-SMX للـ Pneumocystis والـ ==toxoplasmosis== كمان."
+        page: 199
+        quote: "CD4+ <100 cells/mm TMP-SMX Pneumocystis pneumonia and toxoplasmosis"
+      - kind: match
+        prompt: "وصّل دوا الـ HCV بهدفه"
+        pairs:
+          - ["Ledipasvir", "NS5A phosphoprotein"]
+          - ["Sofosbuvir", "NS5B RNA polymerase"]
+          - ["Glecaprevir", "NS3/4A protease"]
+          - ["Ribavirin", "IMP dehydrogenase"]
+        why: "-asvir على NS5A، -buvir على NS5B (polymerase، chain terminator)، -previr على الـ protease، والـ ribavirin بيقلّل الـ guanine nucleotides، وبيعمل hemolytic anemia و severe teratogen."
+        page: 200
+        quote: "Sofosbuvir Inhibits NS5B, an RNA-dependent RNA polymerase acting as a chain terminator"
+      - kind: try
+        items: [mic.L07.101, mic.L07.102, mic.L07.104, mic.L07.135, mic.L07.136]
+    recap:
+      - "Sporicidal: autoclave، chlorine، ethylene oxide، H2O2. الـ autoclave ممكن ما يقتلش الـ prions."
+      - "الحمل: Safe children take really good care."
+      - "ART = 2 NRTIs + integrase inhibitor. Abacavir و HLA-B*5701. PIs: hyperglycemia و lipodystrophy. CD4+ <200 TMP-SMX، <100 كمان toxo."
+      - "HCV: -asvir NS5A، sofosbuvir NS5B، -previr NS3/4A، ribavirin IMP dehydrogenase."
+    practice: [mic.L07.091, mic.L07.092, mic.L07.093, mic.L07.094, mic.L07.095, mic.L07.096, mic.L07.097, mic.L07.098, mic.L07.099, mic.L07.100, mic.L07.101, mic.L07.102, mic.L07.103, mic.L07.104, mic.L07.134, mic.L07.135, mic.L07.136]
