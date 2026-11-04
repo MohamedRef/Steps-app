@@ -50,6 +50,7 @@ static OPEN: GlobalSignal<Option<Open>> = Signal::global(|| None);
 pub fn open(page: u32, of: &str, quote: Option<String>, held: bool, hook: Option<Hook>) {
     document::eval("window.__stepsHover && window.__stepsHover.hide();");
     crate::abbrsheet::close();
+    crate::labs::close();
     *OPEN.write() =
         Some((page, scope(Library::get(), of), quote.filter(|q| !q.trim().is_empty()), held, hook));
 }

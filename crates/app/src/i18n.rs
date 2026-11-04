@@ -1889,6 +1889,18 @@ pub mod views {
     pub const CLOSE_MENU: &str = "اقفل القايمة";
 }
 
+pub mod labs {
+    pub const TITLE: &str = "القيم المعملية";
+    pub const OPEN: &str = "القيم المعملية";
+    pub const OPEN_HINT: &str = "افتح القيم الطبيعية زي ما الامتحان بيعرضها جنب كل سؤال";
+    pub const SEARCH: &str = "دوّر على تحليل…";
+    pub const UNITS: &str = "الوحدات";
+    pub const CONVENTIONAL: &str = "وحدات الكتاب";
+    pub const NO_MATCH: &str = "مفيش تحليل بالاسم ده. جرّب كلمة إنجليزي زي sodium.";
+    pub const SMA12: &str = "من الـ SMA-12";
+    pub const SMA12_NOTE: &str = "* جزء من الـ Biochemical Profile (SMA-12)";
+}
+
 pub mod courses {
     pub const TITLE: &str = "المواد";
     pub const ACTIVE: &str = "بذاكرها";

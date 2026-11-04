@@ -55,6 +55,8 @@ pub fn QuestionView(
                 if let Some(t) = topic {
                     span { class: "chip", bdi { "{t}" } }
                 }
+                // As on the exam screen: the lab values, a tap from any question.
+                crate::labs::LabButton { class: "q-labs" }
             }
             p { class: "q-stem", lang: "en", dir: "ltr", "{stem}" }
             ol { class: "q-options", lang: "en", dir: "ltr",
