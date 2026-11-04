@@ -4,6 +4,7 @@
 
 use std::time::{Duration, Instant};
 
+use steps_core::review::{Grade, Origin, ReviewEvent};
 use steps_protocol::cloud::{DeviceInfo, Platform, Session};
 use steps_protocol::sync::{ClientMsg, RejectReason, Rejected, SeqOp, ServerMsg, SyncErrorCode};
 use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender, unbounded_channel};
@@ -432,7 +433,7 @@ fn a_final_rejection_drops_the_op_and_an_unreadable_one_is_skipped() {
             done: Vec::new(),
             rejected: ops
                 .iter()
-                .map(|o| Rejected { op_id: o.id.clone(), reason: RejectReason::UnknownTable })
+                .map(|o| Rejected { op_id: o.id.clone(), reason: RejectReason::InvalidId })
                 .collect(),
             head_seq: 0,
         })],
@@ -444,6 +445,50 @@ fn a_final_rejection_drops_the_op_and_an_unreadable_one_is_skipped() {
     let mut run = start(&fake, s, Some(session(&me, "acc-1", now() + DAY)), None);
     run.status("emptied", |st| st.sync == SyncState::Live && st.pending == 0);
     assert_eq!(s.outbox_len(), 0);
+}
+
+#[test]
+fn an_older_hub_keeps_unknown_table_ops_without_blocking_the_rest() {
+    let fake = Fake::start();
+    // A hub that doesn't know `settings` yet takes everything else.
+    fake.on_message(|m| match m {
+        ClientMsg::Hello { .. } => vec![Reply::Msg(ServerMsg::CaughtUp { head_seq: 0 })],
+        ClientMsg::Push { batch, ops } => {
+            let (old, known): (Vec<_>, Vec<_>) = ops.iter().partition(|o| o.table == "settings");
+            vec![Reply::Msg(ServerMsg::Ack {
+                batch: *batch,
+                done: known.iter().map(|o| o.id.clone()).collect(),
+                rejected: old
+                    .iter()
+                    .map(|o| Rejected { op_id: o.id.clone(), reason: RejectReason::UnknownTable })
+                    .collect(),
+                head_seq: 0,
+            })]
+        }
+        ClientMsg::Ping => Vec::new(),
+    });
+    let s = store();
+    let me = s.device();
+    s.put_setting("sound", &serde_json::json!({ "on": true })).unwrap();
+    let setting = s.outbox(10).unwrap().last().unwrap().table.clone();
+    assert_eq!(setting, "settings");
+    let mut run = start(&fake, s, Some(session(&me, "acc-1", now() + DAY)), None);
+    run.status("kept", |st| st.sync == SyncState::Live && st.pending == 1);
+    // Not sent again on this connection; other ops still go.
+    s.append_review(ReviewEvent::new("cvs.L04.001", Grade::Good, Origin::Study, 10, 3000)).unwrap();
+    run.send(Command::Kick);
+    run.status("review sent", |st| st.pending == 1);
+    let pushed: Vec<String> = fake
+        .received()
+        .iter()
+        .filter_map(|m| match m {
+            ClientMsg::Push { ops, .. } => Some(ops.iter().map(|o| o.table.clone()).collect::<Vec<_>>()),
+            _ => None,
+        })
+        .flatten()
+        .collect();
+    assert_eq!(pushed.iter().filter(|t| *t == "settings").count(), 1, "{pushed:?}");
+    assert_eq!(s.outbox(10).unwrap()[0].table, "settings", "kept for a newer hub");
 }
 
 // --- Google sign-in ---------------------------------------------------
