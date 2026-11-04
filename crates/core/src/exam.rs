@@ -9,9 +9,10 @@ use serde::{Deserialize, Serialize};
 use crate::content::{Body, Lecture, Status};
 use crate::review::{Grade, Origin, ReviewEvent};
 
-/// About 1.2 minutes per question in timed mode and in mocks.
-pub const MS_PER_QUESTION: u64 = 72_000;
-/// The default mock length.
+/// 90 seconds per question in timed mode and in blocks, as on Step 1
+/// (a one-hour block of up to 40 questions).
+pub const MS_PER_QUESTION: u64 = 90_000;
+/// The default block length: a full Step 1 block.
 pub const MOCK_SIZE: usize = 40;
 
 /// One MCQ from the library, with the lecture it came from.
@@ -613,7 +614,9 @@ mod tests {
     #[test]
     fn timing() {
         assert_eq!(time_limit_ms(40), 48 * 60_000);
-        assert_eq!(remaining_ms(1, 1_000, 1_000), 72_000);
+        assert_eq!(remaining_ms(1, 1_000, 1_000), 90_000);
+        // A full 40-question block is Step 1's hour.
+        assert_eq!(time_limit_ms(MOCK_SIZE), 3_600_000);
         assert_eq!(remaining_ms(1, 1_000, 61_000), 12_000);
         assert_eq!(remaining_ms(1, 1_000, 999_999), 0);
     }

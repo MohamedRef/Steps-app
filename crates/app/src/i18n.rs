@@ -558,13 +558,21 @@ pub mod bank {
     pub const MODE_TUTOR_HINT: &str = "الشرح بعد كل سؤال";
     pub const MODE_TIMED_NAME: &str = "تدريب بالوقت";
     pub const MODE_TIMED_HINT: &str = "الشرح في الآخر";
-    pub const MODE_MOCK_NAME: &str = "امتحان تجريبي";
-    pub const MODE_MOCK_HINT: &str = "من كل المحاضرات";
+    pub const MODE_MOCK_NAME: &str = "بلوك زي الامتحان";
+    pub const MODE_MOCK_HINT: &str = "الأجهزة اللي تختارها";
     pub const SCOPE_ALL: &str = "كل الأسئلة";
     pub const SCOPE_CHOSEN: &str = "النطاق اللي اخترته";
-    pub const MOCK_SCOPE_CHIP: &str = "زي الامتحان";
-    pub const MOCK_SCOPE_NOTE: &str =
-        "الامتحان التجريبي بياخد من كل المحاضرات اللي خلصت، فاختيار المحاضرات والمواضيع مش بيأثر عليه.";
+    pub const MOCK_SCOPE_CHIP: &str = "زي Step 1";
+    pub const MOCK_SCOPE_NOTE: &str = "البلوك بياخد من كل المحاضرات المكتوبة في الأجهزة اللي اخترتها، موزّعة على المحاضرات والمواضيع. الامتحان الحقيقي بلوكات ساعة، كل واحد لحد 40 سؤال.";
+    pub const BLOCK_SYSTEMS: &str = "الأجهزة والمواد";
+    pub const BLOCK_ALL_SYSTEMS: &str = "كل الأجهزة";
+    pub fn block_systems(n: usize) -> String {
+        format!("بلوك من {}", super::count::count(n, &super::count::COURSE))
+    }
+    pub const BLOCK_TIMED: &str = "بالوقت";
+    pub const BLOCK_TIMED_HINT: &str = "90 ثانية للسؤال، والشرح في الآخر";
+    pub const BLOCK_TUTOR: &str = "بشرح";
+    pub const BLOCK_TUTOR_HINT: &str = "من غير وقت، والشرح بعد كل سؤال";
     pub const ALL_LECTURES: &str = "كل المحاضرات";
     pub fn all_of(course: &str) -> String {
         format!("كل محاضرات {course}")
@@ -599,11 +607,11 @@ pub mod bank {
     pub const START_TIMED: &str = "ابدأ بالوقت";
     pub const PRESET_TUTOR: &str = "تختار، وبعدين تصحّح، فيظهر الشرح وصفحة الكتاب، وتعدّي لما تفهم.";
     pub const PRESET_TIMED: &str = "زي الامتحان: الوقت شغّال، تقدر تعلّم على سؤال وترجعله، والشرح كله في الآخر.";
-    pub const MOCK_TITLE: &str = "امتحان تجريبي";
-    pub const START_MOCK: &str = "ابدأ الامتحان";
+    pub const MOCK_TITLE: &str = "نتيجة البلوك";
+    pub const START_MOCK: &str = "ابدأ البلوك";
     pub const HISTORY: &str = "امتحاناتك اللي فاتت";
     pub const MODE_TIMED: &str = "بالوقت";
-    pub const MODE_MOCK: &str = "تجريبي";
+    pub const MODE_MOCK: &str = "بلوك";
 
     pub const QUESTION: &str = "سؤال";
     pub const OF: &str = "من";
