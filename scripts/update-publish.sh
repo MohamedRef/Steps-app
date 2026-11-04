@@ -8,7 +8,7 @@
 # Prepared, not run: only once Mohamed says go. Needs `gh auth login`, the
 # Keychain key from `just update-keygen`, and `just apk` + `just bundle-mac`.
 # Usage: scripts/update-publish.sh "<notes en>" "<notes ar-EG>"
-# Adapted from kabar-app main: scripts/update-publish.sh.
+# Adapted from batna-app main: scripts/update-publish.sh.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

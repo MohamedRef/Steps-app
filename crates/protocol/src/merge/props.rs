@@ -1,7 +1,7 @@
 //! Property tests for the merge rules: a phone and a tablet write to the
 //! same rows, and every replica that sees the same ops, in any order and with
 //! any duplicates, ends in the same state. Tombstones never come back.
-//! Adapted from kabar-app main: crates/core/src/sync/props.rs
+//! Adapted from batna-app main: crates/core/src/sync/props.rs
 
 use std::collections::BTreeMap;
 

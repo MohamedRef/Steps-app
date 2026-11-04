@@ -8,7 +8,7 @@
 //! team ID, and the Keychain then trusts only the exact build that saved an
 //! item. Every new build asked for the login password again, and since the
 //! refresh token rotates every 15 minutes, the prompt kept coming back.
-// adapted from kabar-app main: crates/app/src/cloud/session.rs
+// adapted from batna-app main: crates/app/src/cloud/session.rs
 
 use steps_protocol::cloud::Session;
 

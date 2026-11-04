@@ -1,7 +1,7 @@
 //! Settings › Sync: Google sign-in, the sync state, and the Devices list
 //! with remote sign-out. `use_provide_cloud` starts the engine once (when
 //! this build knows a Steps Cloud URL) and mirrors its events into signals.
-// adapted from kabar-app main: crates/app/src/account.rs and main.rs (use_cloud)
+// adapted from batna-app main: crates/app/src/account.rs and main.rs (use_cloud)
 
 use dioxus::prelude::*;
 use steps_protocol::cloud::{DeviceSummary, Platform};

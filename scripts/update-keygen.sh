@@ -3,7 +3,7 @@
 # half goes into crates/app/update-key.pub (commit it: builds trust it); the
 # secret half goes straight into the macOS Keychain (service "steps-update")
 # and never touches a file. docs/RELEASE.md §5.
-# Adapted from kabar-app main: scripts/update-keygen.sh.
+# Adapted from batna-app main: scripts/update-keygen.sh.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

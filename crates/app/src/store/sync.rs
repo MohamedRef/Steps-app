@@ -7,7 +7,7 @@
 //! The outbox fills whether or not Mohamed is signed in, so signing in later
 //! uploads everything studied before. Rows written before the outbox existed
 //! are queued once, on the first open after the upgrade.
-// adapted from kabar-app main: crates/app/src/store.rs (outbox, apply_remote)
+// adapted from batna-app main: crates/app/src/store.rs (outbox, apply_remote)
 
 use std::collections::BTreeSet;
 
