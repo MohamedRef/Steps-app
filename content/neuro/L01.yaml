@@ -1,0 +1,468 @@
+schema: steps.content/v1
+lecture: neuro.L01
+title: Embryology
+book: { chapter: 12, pages: [500, 502] }
+topics:
+  - { id: neural-development, title: Neural development }
+  - { id: regionalization-of-neural-tube, title: Regionalization of neural tube }
+  - { id: cns-pns-origins, title: Central and peripheral nervous systems origins }
+  - { id: neural-tube-defects, title: Neural tube defects }
+  - { id: brain-malformations, title: Brain malformations }
+  - { id: posterior-fossa-malformations, title: Posterior fossa malformations }
+  - { id: syringomyelia, title: Syringomyelia }
+items:
+  # ---------- p500: neural development ----------
+  - id: neuro.L01.001
+    kind: cloze
+    topic: neural-development
+    text: The {{c1::notochord}} induces ectoderm to form neuroectoderm, which becomes the {{c2::neural plate}}.
+    src: { page: 500, quote: "Notochord (precursor to nucleus pulposus of intervertebral discs) induces ectoderm to form neuroectoderm → neural plate." }
+    status: unverified
+  - id: neuro.L01.002
+    kind: card
+    topic: neural-development
+    front: What does the notochord become in the adult?
+    back: The nucleus pulposus of the intervertebral discs.
+    src: { page: 500, quote: "Notochord (precursor to nucleus pulposus of intervertebral discs)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.003
+    kind: card
+    topic: neural-development
+    front: What two structures does the neural plate give rise to?
+    back: The neural tube and the neural crest cells.
+    src: { page: 500, quote: "Neural plate gives rise to neural tube and neural crest cells." }
+    status: unverified
+  - id: neuro.L01.004
+    kind: table
+    topic: neural-development
+    title: Alar and basal plates of the neural tube
+    columns: [Plate, Position, Function, Induced by]
+    rows:
+      - [Alar plate, Dorsal, Sensory, Bone morphogenetic proteins (BMPs)]
+      - [Basal plate, Ventral, Motor, Sonic hedgehog (SHH)]
+    blanks: [[0, 1], [0, 2], [0, 3], [1, 1], [1, 2], [1, 3]]
+    src: { page: 500, quote: "Alar plate (dorsal): sensory; induced by bone morphogenetic proteins (BMPs)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.005
+    kind: cloze
+    topic: neural-development
+    text: The basal plate is {{c1::ventral}} and {{c2::motor}}, and it is induced by {{c3::sonic hedgehog (SHH)}}.
+    src: { page: 500, quote: "Basal plate (ventral): motor; induced by sonic hedgehog (SHH)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.006
+    kind: card
+    topic: neural-development
+    front: What do homeobox (HOX) genes regulate in the neural tube, and what do their mutations cause?
+    back: "Neural tube segmentation and cranial-caudal differentiation. Mutations → syndactyly (limbs) and hypospadias (urogenital)."
+    src: { page: 500, quote: "Homeobox (HOX) genes regulate neural tube segmentation, cranial-caudal differentiation. Mutations → syndactyly (limbs), hypospadias (urogenital)." }
+    status: unverified
+  - id: neuro.L01.007
+    kind: mcq
+    topic: neural-development
+    stem: >-
+      A research team studies a mouse embryo in which signaling from the notochord to the overlying
+      neural tube is blocked. At birth the pups have normal sensation to pinch in all four limbs but
+      cannot move them, and histology shows that the ventral half of the spinal cord gray matter failed
+      to develop. Loss of which signaling molecule best explains these findings?
+    options:
+      - Bone morphogenetic protein (BMP)
+      - Sonic hedgehog (SHH)
+      - HOX gene products
+      - Left-right dynein
+      - Retinoic acid
+    answer: 1
+    why:
+      - "BMPs induce the dorsal alar plate, which is sensory; sensation here is intact."
+      - "Right. SHH induces the ventral basal plate, which forms the motor neurons; without it the pups cannot move."
+      - "HOX genes regulate segmentation and cranial-caudal identity; their mutations give syndactyly and hypospadias, not loss of the motor plate."
+      - "Left-right dynein sets left-right asymmetry; its defect gives dextrocardia (Kartagener), not a motor plate defect."
+      - "Retinoic acid is not one of the plate inducers; First Aid names BMP for the alar plate and SHH for the basal plate."
+    src: { page: 500, quote: "Basal plate (ventral): motor; induced by sonic hedgehog (SHH)" }
+    status: unverified
+  # ---------- p500: regionalization of neural tube ----------
+  - id: neuro.L01.008
+    kind: order
+    topic: regionalization-of-neural-tube
+    prompt: Put the five secondary brain vesicles in cranial-to-caudal order.
+    steps:
+      - Telencephalon
+      - Diencephalon
+      - Mesencephalon
+      - Metencephalon
+      - Myelencephalon
+    src: { page: 500, quote: "Telencephalon is the 1st part. Diencephalon is the 2nd part. The rest are arranged alphabetically: mesencephalon, metencephalon, myelencephalon." }
+    status: unverified
+  - id: neuro.L01.009
+    kind: table
+    topic: regionalization-of-neural-tube
+    title: Regionalization of the neural tube
+    columns: [Primary vesicle, Secondary vesicle, Adult wall derivatives, Adult cavity]
+    rows:
+      - [Forebrain (prosencephalon), Telencephalon, "Cerebral hemispheres, basal ganglia", Lateral ventricles]
+      - [Forebrain (prosencephalon), Diencephalon, "Thalamus, hypothalamus, retina", Third ventricle]
+      - [Midbrain (mesencephalon), Mesencephalon, Midbrain, Cerebral aqueduct]
+      - [Hindbrain (rhombencephalon), Metencephalon, "Pons, cerebellum", Upper part of fourth ventricle]
+      - [Hindbrain (rhombencephalon), Myelencephalon, Medulla, Lower part of fourth ventricle]
+    blanks: [[0, 2], [0, 3], [1, 2], [1, 3], [2, 3], [3, 2], [3, 3], [4, 2], [4, 3]]
+    src: { page: 500, quote: "Telencephalon Diencephalon Mesencephalon Metencephalon Myelencephalon Cerebral hemispheres Thalamus Hypothalamus Midbrain Pons Cerebellum Medulla Spinal cord" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.010
+    kind: card
+    topic: regionalization-of-neural-tube
+    front: The retina develops from which secondary brain vesicle?
+    back: The diencephalon (with the thalamus and hypothalamus).
+    src: { page: 500, quote: "Telencephalon Diencephalon Mesencephalon Metencephalon Myelencephalon Cerebral hemispheres Thalamus Hypothalamus" }
+    status: unverified
+  - id: neuro.L01.011
+    kind: cloze
+    topic: regionalization-of-neural-tube
+    text: The cavity of the mesencephalon becomes the {{c1::cerebral aqueduct}}; the cavity of the diencephalon becomes the {{c2::third ventricle}}.
+    src: { page: 500, quote: "Lateral ventricle Third ventricle Cerebral aqueduct Upper part of fourth ventricle Lower part of fourth ventricle" }
+    status: unverified
+  - id: neuro.L01.012
+    kind: mcq
+    topic: regionalization-of-neural-tube
+    stem: >-
+      A 6-week-old embryo is examined in an embryology laboratory. The hindbrain has divided into two
+      secondary vesicles. The more rostral of the two will give rise to which adult structures?
+    options:
+      - Medulla
+      - Pons and cerebellum
+      - Thalamus and hypothalamus
+      - Midbrain
+      - Cerebral hemispheres and basal ganglia
+    answer: 1
+    why:
+      - "The medulla comes from the myelencephalon, the more caudal hindbrain vesicle."
+      - "Right. The rostral hindbrain vesicle is the metencephalon, which forms the pons and cerebellum (and the upper fourth ventricle)."
+      - "The thalamus and hypothalamus come from the diencephalon, part of the forebrain."
+      - "The midbrain comes from the mesencephalon, which does not divide."
+      - "The cerebral hemispheres and basal ganglia come from the telencephalon of the forebrain."
+    src: { page: 500, quote: "Telencephalon Diencephalon Mesencephalon Metencephalon Myelencephalon Cerebral hemispheres Thalamus Hypothalamus Midbrain Pons Cerebellum Medulla Spinal cord" }
+    status: unverified
+  # ---------- p500: CNS and PNS origins ----------
+  - id: neuro.L01.013
+    kind: table
+    topic: cns-pns-origins
+    title: Origins of the nervous system's cells
+    columns: [Origin, Cells]
+    rows:
+      - [Neuroepithelia in neural tube, "CNS neurons; CNS glia (astrocytes, oligodendrocytes, ependymal cells)"]
+      - [Neural crest, "PNS neurons (dorsal root ganglia, autonomic ganglia: sympathetic, parasympathetic, enteric); PNS glia (Schwann cells, satellite cells); adrenal medulla"]
+      - [Mesoderm, Microglia (specialized macrophages)]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 500, quote: "Neuroepithelia in neural tube—CNS neurons, CNS glial cells (astrocytes, oligodendrocytes, ependymal cells)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.014
+    kind: card
+    topic: cns-pns-origins
+    front: Which glial cell of the CNS is not derived from the neural tube, and what is its origin?
+    back: Microglia, from mesoderm (they are specialized macrophages).
+    src: { page: 500, quote: "Mesoderm—microglia (specialized macrophages)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.015
+    kind: enumerate
+    topic: cns-pns-origins
+    prompt: Enumerate the neural crest derivatives in the nervous system listed by First Aid (5).
+    points:
+      - Dorsal root ganglia neurons
+      - Autonomic ganglia neurons (sympathetic, parasympathetic, enteric)
+      - Schwann cells
+      - Satellite cells
+      - Adrenal medulla
+    pass: 4
+    hook: "الـ neural crest هو بتاع «بره الـ CNS»: العقد (DRG و autonomic)، واللي بيلفّ عليهم (Schwann و satellite)، وزيادة عليهم الـ adrenal medulla."
+    src: { page: 500, quote: "Neural crest—PNS neurons (dorsal root ganglia, autonomic ganglia [sympathetic, parasympathetic, enteric]), PNS glial cells (Schwann cells, satellite cells), adrenal medulla." }
+    status: unverified
+  - id: neuro.L01.016
+    kind: mcq
+    topic: cns-pns-origins
+    stem: >-
+      A 3-week-old girl born at term has had vomiting and abdominal distension since day 2 and passed
+      meconium only after 48 hours. A rectal suction biopsy shows absent ganglion cells in the submucosal
+      and myenteric plexuses. The cells that failed to reach this segment share their embryologic origin
+      with which of the following?
+    options:
+      - Oligodendrocytes
+      - Microglia
+      - Ependymal cells
+      - Schwann cells
+      - Astrocytes
+    answer: 3
+    why:
+      - "Oligodendrocytes are CNS glia from the neuroepithelium of the neural tube."
+      - "Microglia come from mesoderm (specialized macrophages)."
+      - "Ependymal cells are CNS glia from the neural tube neuroepithelium."
+      - "Right. Enteric ganglion cells are neural crest derivatives, like Schwann cells, satellite cells, dorsal root ganglia and the adrenal medulla."
+      - "Astrocytes are CNS glia from the neural tube neuroepithelium."
+    src: { page: 500, quote: "Neural crest—PNS neurons (dorsal root ganglia, autonomic ganglia [sympathetic, parasympathetic, enteric]), PNS glial cells (Schwann cells, satellite cells), adrenal medulla." }
+    status: unverified
+  # ---------- p501: neural tube defects ----------
+  - id: neuro.L01.017
+    kind: card
+    topic: neural-tube-defects
+    front: What is a neural tube defect, by when should the tube have closed, and what are its associations?
+    back: "Failure of the neural tube to close completely by week 4. Associated with maternal folate deficiency and with teratogens in pregnancy such as valproate and carbamazepine."
+    src: { page: 501, quote: "Failure of the neural tube to close completely by week 4 of development, associated with maternal folate deficiency or exposure to teratogens such as valproate and carbamazepine during pregnancy." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.018
+    kind: cloze
+    topic: neural-tube-defects
+    text: Neural tube defects are diagnosed by ultrasound, maternal serum {{c1::AFP}} and/or amniotic fluid {{c2::AChE}}, which are {{c3::↑}} in open NTDs.
+    src: { page: 501, quote: "Diagnosis: ultrasound, maternal serum AFP and/or amniotic fluid AChE (↑ in open NTDs)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.019
+    kind: table
+    topic: neural-tube-defects
+    title: Spinal dysraphism
+    columns: [Defect, Open or closed, What herniates or is exposed]
+    rows:
+      - [Spina bifida occulta, Closed, "Nothing: failed posterior vertebral arch fusion only; tuft of hair or skin dimple"]
+      - [Meningocele, Open, Meninges (no neural tissue)]
+      - [Myelomeningocele, Open, Meninges and neural tissue (eg cauda equina)]
+      - [Myeloschisis, Open, "Exposed, unfused neural tissue without skin or meningeal covering"]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 2], [3, 2]]
+    src: { page: 501, quote: "Meningocele Open NTD. Meninges (but no neural tissue) herniate through bony defect. Myelomeningocele Open NTD. Meninges and neural tissue (eg, cauda equina) herniate through bony defect." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.020
+    kind: card
+    topic: neural-tube-defects
+    front: Spina bifida occulta is open or closed, where does it usually occur, and what skin sign goes with it?
+    back: Closed NTD (failed posterior vertebral arch fusion, no herniation), usually at lower vertebral levels, with a tuft of hair or skin dimple at the level of the defect.
+    src: { page: 501, quote: "Spina bifida occulta Closed NTD. Failure of posterior vertebral arch fusion, but no herniation. Usually occurs at lower vertebral levels. Associated with tuft of hair or skin dimple at level of defect." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.021
+    kind: card
+    topic: neural-tube-defects
+    front: What is anencephaly, and why does it often present with polyhydramnios?
+    back: "Open NTD: the rostral neuropore fails to close → no forebrain and an open calvarium. Polyhydramnios because fetal swallowing falls without neural control."
+    src: { page: 501, quote: "Anencephaly Open NTD. Failure of rostral neuropore to close → no forebrain, open calvarium. Often presents with polyhydramnios (↓ fetal swallowing due to lack of neural control)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.022
+    kind: mcq
+    topic: neural-tube-defects
+    stem: >-
+      A 26-year-old woman with a seizure disorder treated with valproate throughout pregnancy has a
+      routine scan at 18 weeks. Ultrasound shows a lumbosacral sac that contains nerve roots and is not
+      covered by skin. Which laboratory finding is most likely?
+    options:
+      - Low maternal serum AFP and normal amniotic fluid AChE
+      - High maternal serum AFP and high amniotic fluid AChE
+      - High maternal serum hCG and low estriol
+      - Normal maternal serum AFP and normal amniotic fluid AChE
+      - Low maternal serum AFP and high inhibin A
+    answer: 1
+    why:
+      - "A low AFP is not the pattern of an open NTD; AFP and AChE rise in open defects."
+      - "Right. This is a myelomeningocele, an open NTD (valproate is a teratogen); maternal serum AFP and amniotic fluid AChE are ↑ in open NTDs."
+      - "High hCG and low estriol belong to aneuploidy screening, not neural tube defects."
+      - "Normal markers fit a closed defect such as spina bifida occulta; this sac is open (no skin), so AFP and AChE rise."
+      - "Low AFP with high inhibin A is an aneuploidy pattern, not an open NTD."
+    src: { page: 501, quote: "Diagnosis: ultrasound, maternal serum AFP and/or amniotic fluid AChE (↑ in open NTDs)." }
+    status: unverified
+  # ---------- p501: brain malformations ----------
+  - id: neuro.L01.023
+    kind: card
+    topic: brain-malformations
+    front: What is holoprosencephaly, when does it occur, and which mutation is it associated with?
+    back: Failure of the forebrain (prosencephalon) to divide into 2 cerebral hemispheres; a developmental field defect usually at weeks 3-4. Associated with SHH mutations.
+    src: { page: 501, quote: "Failure of forebrain (prosencephalon) to divide into 2 cerebral hemispheres; developmental field defect usually occurring at weeks 3-4 of development. Associated with SHH mutations." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.024
+    kind: cloze
+    topic: brain-malformations
+    text: Holoprosencephaly may be seen in {{c1::Patau syndrome (trisomy 13)}} and {{c2::fetal alcohol syndrome}}.
+    src: { page: 501, quote: "May be seen in Patau syndrome (trisomy 13), fetal alcohol syndrome." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.025
+    kind: enumerate
+    topic: brain-malformations
+    prompt: Enumerate the midline defects of holoprosencephaly (6).
+    points:
+      - Monoventricle
+      - Fused basal ganglia
+      - Cleft lip/palate
+      - Hypotelorism
+      - Cyclopia
+      - Proboscis
+    pass: 5
+    hook: "المخ ما اتقسمش نصين، فكل حاجة في النص «اتلمّت»: ventricle واحد، basal ganglia ملزوقة، عينين قريبين (hypotelorism) لحد ما يبقوا عين واحدة (cyclopia)، ومناخير proboscis، وشفة مشقوقة."
+    src: { page: 501, quote: "Presents with midline defects: monoventricle A , fused basal ganglia, cleft lip/palate, hypotelorism, cyclopia, proboscis." }
+    status: unverified
+  - id: neuro.L01.026
+    kind: card
+    topic: brain-malformations
+    front: Which endocrine problem is holoprosencephaly at increased risk for?
+    back: Pituitary dysfunction (eg, diabetes insipidus).
+    src: { page: 501, quote: "↑ risk for pituitary dysfunction (eg, diabetes insipidus)." }
+    status: unverified
+  - id: neuro.L01.027
+    kind: card
+    topic: brain-malformations
+    front: What is lissencephaly, and how does it present?
+    back: "Failure of neuronal migration → a smooth brain surface without sulci and gyri. Presents with dysphagia, seizures, microcephaly and facial anomalies."
+    src: { page: 501, quote: "Lissencephaly Failure of neuronal migration → smooth brain surface that lacks sulci and gyri B . Presents with dysphagia, seizures, microcephaly, facial anomalies." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.028
+    kind: mcq
+    topic: brain-malformations
+    stem: >-
+      A newborn boy has microcephaly, a cleft lip and palate, closely set eyes, polydactyly and a scalp
+      defect. Karyotype shows 47,XY,+13. MRI shows a single large ventricle and fused basal ganglia.
+      The brain malformation is most closely associated with a mutation in which gene pathway?
+    options:
+      - Sonic hedgehog (SHH)
+      - Bone morphogenetic protein (BMP)
+      - HOX genes
+      - Left-right dynein
+      - Fibrillin
+    answer: 0
+    why:
+      - "Right. This is holoprosencephaly (failed division of the prosencephalon), seen in Patau syndrome and associated with SHH mutations."
+      - "BMPs induce the dorsal alar plate; the book doesn't link them to holoprosencephaly."
+      - "HOX mutations give syndactyly and hypospadias."
+      - "Left-right dynein defects give dextrocardia (Kartagener syndrome)."
+      - "Fibrillin defects cause Marfan syndrome, not a midline brain defect."
+    src: { page: 501, quote: "Associated with SHH mutations. May be seen in Patau syndrome (trisomy 13), fetal alcohol syndrome." }
+    status: unverified
+  # ---------- p502: posterior fossa malformations ----------
+  - id: neuro.L01.029
+    kind: table
+    topic: posterior-fossa-malformations
+    title: Posterior fossa malformations
+    columns: [Malformation, What is displaced or missing, Presentation, Association]
+    rows:
+      - [Chiari I, Cerebellar tonsils through the foramen magnum (1 structure), "Usually asymptomatic in childhood; adulthood: headaches, cerebellar symptoms", Spinal cord cavitations (eg syringomyelia)]
+      - [Chiari II, "Cerebellum (vermis and tonsils) and medulla through the foramen magnum (2 structures) → noncommunicating hydrocephalus", "Early in life: dysphagia, stridor, apnea, limb weakness", Myelomeningocele (usually lumbosacral)]
+      - [Dandy-Walker, Agenesis of the cerebellar vermis → cystic enlargement of the 4th ventricle filling an enlarged posterior fossa, "", "Noncommunicating hydrocephalus, spina bifida"]
+    blanks: [[0, 1], [0, 3], [1, 1], [1, 3], [2, 1], [2, 3]]
+    src: { page: 502, quote: "Chiari I malformation Downward displacement of cerebellar tonsils (top arrow in A ) through foramen magnum (1 structure)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.030
+    kind: card
+    topic: posterior-fossa-malformations
+    front: "Chiari I: what herniates, when does it present, and with what?"
+    back: "Cerebellar tonsils through the foramen magnum (1 structure). Usually asymptomatic in childhood; manifests in adulthood with headaches and cerebellar symptoms. Associated with syringomyelia."
+    src: { page: 502, quote: "Usually asymptomatic in childhood, manifests in adulthood with headaches and cerebellar symptoms. Associated with spinal cord cavitations (eg, syringomyelia)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.031
+    kind: card
+    topic: posterior-fossa-malformations
+    front: "Chiari II: what herniates, what does it cause, and which neural tube defect goes with it?"
+    back: "Cerebellar vermis and tonsils plus the medulla (2 structures) through the foramen magnum → noncommunicating hydrocephalus. Presents early in life with dysphagia, stridor, apnea and limb weakness. Associated with myelomeningocele (usually lumbosacral)."
+    src: { page: 502, quote: "Chiari II malformation Downward displacement of cerebellum (vermis and tonsils) and medulla (2 structures) through foramen magnum noncommunicating hydrocephalus." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.032
+    kind: card
+    topic: posterior-fossa-malformations
+    front: What is the Dandy-Walker malformation, and what is it associated with?
+    back: Agenesis of the cerebellar vermis → cystic enlargement of the 4th ventricle that fills an enlarged posterior fossa. Associated with noncommunicating hydrocephalus and spina bifida.
+    src: { page: 502, quote: "Agenesis of cerebellar vermis cystic enlargement of 4th ventricle (arrow in B ) that fills the enlarged posterior fossa. Associated with noncommunicating hydrocephalus, spina bifida." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.033
+    kind: mcq
+    topic: posterior-fossa-malformations
+    stem: >-
+      A 2-day-old boy is born with an open lumbosacral sac containing neural tissue. On day 2 he develops
+      inspiratory stridor, episodes of apnea and poor feeding with choking. His head circumference is
+      increasing rapidly. Imaging of the head would most likely show which finding?
+    options:
+      - Cerebellar tonsils alone below the foramen magnum, with a syrinx
+      - Cerebellar vermis, tonsils and medulla below the foramen magnum, with hydrocephalus
+      - Absent cerebellar vermis with a cystic fourth ventricle filling an enlarged posterior fossa
+      - A smooth cortex without sulci or gyri
+      - A single ventricle with fused basal ganglia
+    answer: 1
+    why:
+      - "Tonsils alone describe Chiari I, which is usually silent in childhood and presents in adults."
+      - "Right. Chiari II (2 structures: cerebellum and medulla) goes with lumbosacral myelomeningocele, causes noncommunicating hydrocephalus and presents early with dysphagia, stridor and apnea."
+      - "That is Dandy-Walker: vermis agenesis with a cystic 4th ventricle; it is not the malformation tied to myelomeningocele."
+      - "A smooth brain is lissencephaly (failed neuronal migration)."
+      - "A monoventricle with fused basal ganglia is holoprosencephaly."
+    src: { page: 502, quote: "More severe than Chiari I, usually presents early in life with dysphagia, stridor, apnea, limb weakness. Associated with myelomeningocele (usually lumbosacral)." }
+    status: unverified
+  # ---------- p502: syringomyelia ----------
+  - id: neuro.L01.034
+    kind: card
+    topic: syringomyelia
+    front: What is a syrinx, and which fibers are damaged first in syringomyelia?
+    back: A fluid-filled, gliosis-lined cavity within the spinal cord. Fibers crossing in the anterior white commissure (spinothalamic tract) are damaged first.
+    src: { page: 502, quote: "Fluid-filled, gliosis-lined cavity within spinal cord (yellow arrows in A ). Fibers crossing in anterior white commissure (spinothalamic tract) are damaged first" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.035
+    kind: card
+    topic: syringomyelia
+    front: What is the classic sensory deficit of syringomyelia?
+    back: '"Cape-like" loss of pain and temperature sensation in both upper extremities, with light touch preserved.'
+    src: { page: 502, quote: "“cape-like” loss of pain and temperature sensation in bilateral upper extremities with preserved light touch." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.036
+    kind: cloze
+    topic: syringomyelia
+    text: As a syrinx enlarges it may extend caudally (most often {{c1::C2-T9}}) or ascend toward the brainstem, called {{c2::syringobulbia}}.
+    src: { page: 502, quote: "As lesion enlarges, may extend caudally (most often C2-T9) or ascend toward brainstem (→ syringobulbia)." }
+    status: unverified
+  - id: neuro.L01.037
+    kind: table
+    topic: syringomyelia
+    title: What an expanding syrinx involves
+    columns: [Structure reached, Result]
+    rows:
+      - [Anterior horns, "LMN weakness and atrophy (hands, arms)"]
+      - [Lateral corticospinal tracts, Spasticity or leg involvement]
+      - [Advanced cases, "Scoliosis, Charcot joints, bladder/bowel dysfunction"]
+      - [Medulla, "Dysphagia, respiratory compromise"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 502, quote: "Anterior horns → LMN weakness/atrophy (hands, arms) ▘ Lateral corticospinal tracts → spasticity or leg involvement" }
+    status: unverified
+  - id: neuro.L01.038
+    kind: card
+    topic: syringomyelia
+    front: What is syringomyelia most commonly associated with?
+    back: Chiari I malformation; less often other congenital malformations, trauma, infection or tumor.
+    src: { page: 502, quote: "Most commonly associated with Chiari I malformation (red arrow in A ); less often with other congenital malformations, trauma, infection, or tumor." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L01.039
+    kind: mcq
+    topic: syringomyelia
+    stem: >-
+      A 32-year-old woman has painless burns on both hands from cooking. For a year she has had occipital
+      headaches that worsen with coughing. She cannot feel pinprick or temperature over both shoulders,
+      arms and hands, but light touch, vibration and joint position are intact there. MRI of the cervical
+      cord shows a central fluid-filled cavity. Which structure is damaged first by this lesion?
+    options:
+      - Dorsal columns
+      - Anterior white commissure
+      - Lateral corticospinal tracts
+      - Anterior horns
+      - Dorsal root ganglia
+    answer: 1
+    why:
+      - "The dorsal columns carry light touch, vibration and position, all intact here."
+      - "Right. A central syrinx (here with Chiari I, suggested by cough headache) first damages the spinothalamic fibers crossing in the anterior white commissure: cape-like loss of pain and temperature with light touch spared."
+      - "The lateral corticospinal tracts are involved only as the syrinx expands, giving spasticity or leg involvement."
+      - "Anterior horn damage (LMN weakness and atrophy of the hands) comes as the lesion enlarges, not first."
+      - "Dorsal root ganglia lie outside the cord; their loss would affect all sensory modalities."
+    src: { page: 502, quote: "Fibers crossing in anterior white commissure (spinothalamic tract) are damaged first" }
+    status: unverified

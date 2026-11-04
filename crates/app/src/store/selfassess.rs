@@ -82,7 +82,8 @@ mod tests {
         s.delete_self_assessment("sa.a").unwrap();
         s.delete_self_assessment("sa.missing").unwrap();
         assert_eq!(s.self_assessments().len(), 1);
-        assert_eq!(s.outbox_len(), before + 4);
+        // One op per row: a row written again before it went up keeps its newest op.
+        assert_eq!(s.outbox_len(), before + 2);
     }
 
     #[test]

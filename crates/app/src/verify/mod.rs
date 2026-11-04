@@ -317,7 +317,7 @@ mod tests {
     fn drafts_round_trip_each_shape() {
         for v in [
             FieldValue::Index(2),
-            FieldValue::Text("Child-Pugh B".into()),
+            FieldValue::Text("Stanford type A".into()),
             FieldValue::List(vec!["a".into(), "b".into()]),
         ] {
             assert_eq!(parse_draft(&v, &draft_text(&v)), v);

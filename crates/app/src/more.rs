@@ -30,12 +30,15 @@ pub const ABBREVIATIONS: Tool = Tool {
     icon: icons::abbreviations,
     open: |ui| crate::abbrdict::open(ui, None),
 };
+pub const GO_PAGE: Tool = Tool { label: i18n::gopage::TOOL, icon: icons::book, open: crate::gopage::open };
+pub const NOTES: Tool =
+    Tool { label: i18n::notes::LIST_TITLE, icon: icons::notes, open: crate::notes::open_list };
 pub const ADD_CARD: Tool =
     Tool { label: i18n::refs::ADD_CARD, icon: icons::add_card, open: |_| crate::own::open_new() };
 
 /// The tools the rail and sidebar list under the screens from 600dp (More
 /// holds them on phones).
-pub const TOOLS: [Tool; 4] = [COURSES, REFERENCES, ABBREVIATIONS, ADD_CARD];
+pub const TOOLS: [Tool; 6] = [COURSES, GO_PAGE, REFERENCES, ABBREVIATIONS, NOTES, ADD_CARD];
 
 /// One row in More.
 #[derive(Clone, Copy)]
@@ -69,8 +72,10 @@ const GROUPS: [(&str, &[Row]); 2] = [
         i18n::nav::MORE_TOOLS,
         &[
             Row::Tool(COURSES),
+            Row::Tool(GO_PAGE),
             Row::Tool(REFERENCES),
             Row::Tool(ABBREVIATIONS),
+            Row::Tool(NOTES),
             Row::Tool(ADD_CARD),
             Row::Screen(Screen::Stats),
             Row::Settings,

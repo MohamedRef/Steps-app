@@ -1,6 +1,6 @@
 //! Lesson text: Egyptian Arabic with English terms. `steps_core::lesson`
 //! splits it into paragraphs, bullets, bold and Latin runs; this draws them,
-//! each Latin run isolated left-to-right so "Child-Pugh class C" never flips.
+//! each Latin run isolated left-to-right so "Stanford type A" never flips.
 
 use dioxus::prelude::*;
 use steps_core::lesson::{Block, Span, blocks, spans};
@@ -268,16 +268,16 @@ mod tests {
         let h = html("الـ compensated → الـ first decompensation (بالراحة أو فجأة) → decompensated.");
         assert!(h.contains('←') && !h.contains('→'), "{h}");
         // An English line keeps its own order, full stop and arrows.
-        let h = html("- Bleeding → ceftriaxone, then norfloxacin.");
+        let h = html("- Tamponade → pericardiocentesis, then drainage.");
         assert!(h.contains(r#"<bdi dir="ltr" lang="en">"#) && h.contains("<span>.</span></bdi>"), "{h}");
         assert!(h.contains('→') && !h.contains('\u{200A}'), "{h}");
         // A book sentence inside an Arabic line is one box with its comma;
         // "الـ" stays beside a longer term's box.
         let h = html(
-            "**Ascites is due to the accumulation of endogenous vasodilators**، و **PH acts as a localizing factor** بيوجّه",
+            "**Tamponade is compression of the heart by fluid**، و **diastolic pressures equalize** بيوضّح",
         );
         assert!(h.contains(r#"class="ls-en""#) && h.contains("<span>،</span></bdi>"), "{h}");
-        let h = html("من الـ intravascular compartment pressure للـ تجويف");
+        let h = html("من الـ intrapericardial pressure للـ تجويف");
         assert!(h.contains("ls-en-glued") && h.contains("<span>الـ\u{a0}</span>"), "{h}");
         let h = html("Genome: single-stranded RNA.\n\nتمام كده.");
         assert!(h.contains(r#"<p dir="ltr">"#), "an English paragraph runs left to right: {h}");

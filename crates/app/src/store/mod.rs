@@ -11,7 +11,9 @@ mod backend;
 pub mod export;
 pub mod import;
 mod install;
+pub mod notes;
 pub mod own;
+pub mod pages;
 mod paths;
 pub mod selfassess;
 pub mod sync;
@@ -28,7 +30,7 @@ use steps_core::review::{Grade, Hlc, HlcClock, LoggedReview, Origin, ReviewEvent
 use steps_core::srs::ReviewSettings;
 use steps_core::zone::Zone;
 
-pub use backend::{LectureProgress, Overview, Review, use_provide_review, use_review};
+pub use backend::{LectureProgress, NoteError, Overview, Review, use_provide_review, use_review};
 
 #[derive(Debug)]
 pub enum StoreError {
@@ -116,6 +118,19 @@ const MIGRATIONS: &[&str] = &[
     "
     -- Mohamed's own cards (steps_core::own::OwnCard as JSON). Last writer wins.
     CREATE TABLE own_cards (
+        id          TEXT PRIMARY KEY,
+        value       TEXT NOT NULL,
+        account_id  TEXT,
+        device_id   TEXT NOT NULL,
+        hlc_wall    INTEGER NOT NULL,
+        hlc_counter INTEGER NOT NULL,
+        deleted     INTEGER NOT NULL DEFAULT 0
+    ) STRICT;
+",
+    "
+    -- Mohamed's notes on items, lesson steps and pages
+    -- (steps_core::note::Note as JSON), keyed by Anchor::row_id. Last writer wins.
+    CREATE TABLE notes (
         id          TEXT PRIMARY KEY,
         value       TEXT NOT NULL,
         account_id  TEXT,
@@ -398,6 +413,29 @@ impl Store {
         Ok(())
     }
 
+    /// Where Mohamed is in something (a lesson's step and answers, an open
+    /// paper): synced, so another device, or a new one after a password
+    /// sign-in, opens at the same point. One too big for a sync op stays on
+    /// this device instead, and this device's own copy then wins here.
+    pub fn put_place<T: Serialize>(&self, key: &str, value: &T) -> Result<()> {
+        let json = serde_json::to_string(value)?;
+        // The op wraps the value in a few dozen bytes of its own.
+        if json.len() + 1024 > steps_protocol::sync::MAX_PAYLOAD_BYTES {
+            return self.put_local_setting(key, value);
+        }
+        self.conn
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner)
+            .execute("DELETE FROM meta WHERE key = ?1", [format!("local.{key}")])?;
+        self.put_setting(key, value)
+    }
+
+    /// Reads what [`Store::put_place`] wrote; also finds a place saved
+    /// before places synced (a local setting).
+    pub fn place<T: DeserializeOwned>(&self, key: &str) -> Option<T> {
+        self.local_setting(key).or_else(|| self.setting(key))
+    }
+
     pub fn review_settings(&self) -> ReviewSettings {
         self.setting(REVIEW_SETTINGS_KEY).unwrap_or_default()
     }
@@ -519,7 +557,10 @@ pub fn shared() -> &'static Store {
             Store::open_in_memory().expect("an in-memory database always opens")
         }
     });
-    #[cfg(not(target_arch = "wasm32"))]
+    // Unit tests: each test thread has its own store in memory.
+    #[cfg(test)]
+    return TEST_STORE.with(|s| *s);
+    #[cfg(all(not(target_arch = "wasm32"), not(test)))]
     STORE.get_or_init(|| {
         let opened = paths::data_dir().and_then(|dir| {
             Store::open_marked(&dir.join("steps.db"), paths::install_marker().as_deref())
@@ -535,14 +576,14 @@ pub fn shared() -> &'static Store {
     })
 }
 
+#[cfg_attr(test, allow(dead_code))]
 static STORE: OnceLock<Store> = OnceLock::new();
 static OPEN_ERROR: OnceLock<String> = OnceLock::new();
 
-/// Test-only: the shared store in memory, for fixtures that render screens
-/// reading it (`browser_fixture`). Call before anything opens the store.
 #[cfg(test)]
-pub fn use_memory_store() {
-    let _ = STORE.set(Store::open_in_memory().expect("an in-memory database always opens"));
+thread_local! {
+    static TEST_STORE: &'static Store =
+        Box::leak(Box::new(Store::open_in_memory().expect("an in-memory database always opens")));
 }
 
 /// Why the store fell back to memory, if it did.
@@ -705,9 +746,9 @@ mod tests {
     fn a_write_and_its_outbox_entry_land_together() {
         let s = Store::open_in_memory().unwrap();
         s.conn.lock().unwrap().execute("DROP TABLE sync_outbox", []).unwrap();
-        assert!(s.append_review(ev("hb.L01.001", Grade::Good, 10)).is_err());
+        assert!(s.append_review(ev("cvs.L04.001", Grade::Good, 10)).is_err());
         assert!(s.reviews().unwrap().is_empty(), "the answer rolls back with its outbox entry");
-        assert!(s.set_judgement("hb.L01.001", Some(&judgement(Verdict::Approved))).is_err());
+        assert!(s.set_judgement("cvs.L04.001", Some(&judgement(Verdict::Approved))).is_err());
         assert!(s.judgements().unwrap().is_empty());
     }
 
@@ -752,8 +793,8 @@ mod tests {
         {
             let s = Store::open(&path).unwrap();
             device = s.device();
-            s.append_review(ev("hb.L01.001", Grade::Good, 10)).unwrap();
-            s.append_review(ev("hb.L01.002", Grade::Again, 10)).unwrap();
+            s.append_review(ev("cvs.L04.001", Grade::Good, 10)).unwrap();
+            s.append_review(ev("cvs.L04.002", Grade::Again, 10)).unwrap();
         }
         let s = Store::open(&path).unwrap();
         assert_eq!(s.device(), device);
@@ -765,7 +806,7 @@ mod tests {
         insert_review(&s.conn.lock().unwrap(), &log[0]).unwrap();
         assert_eq!(s.reviews().unwrap().len(), 2);
         // New stamps sort after the stored ones.
-        let next = s.append_review(ev("hb.L01.003", Grade::Good, 0)).unwrap();
+        let next = s.append_review(ev("cvs.L04.003", Grade::Good, 0)).unwrap();
         assert!(next.hlc > log[1].hlc);
         let _ = std::fs::remove_dir_all(dir);
     }
@@ -773,17 +814,17 @@ mod tests {
     #[test]
     fn verdicts_are_last_writer_wins_and_can_be_undone() {
         let s = Store::open_in_memory().unwrap();
-        s.set_judgement("hb.L01.001", Some(&judgement(Verdict::Wrong))).unwrap();
+        s.set_judgement("cvs.L04.001", Some(&judgement(Verdict::Wrong))).unwrap();
         let mut edited = judgement(Verdict::Edited);
         edited.edit.insert("back".into(), FieldValue::Text("mine".into()));
-        s.set_judgement("hb.L01.001", Some(&edited)).unwrap();
-        assert_eq!(s.judgements().unwrap()["hb.L01.001"], edited);
+        s.set_judgement("cvs.L04.001", Some(&edited)).unwrap();
+        assert_eq!(s.judgements().unwrap()["cvs.L04.001"], edited);
         // An older write (a late sync row) loses.
         let old = Hlc { wall_ms: 0, counter: 0, device: "tab".into() };
-        s.put_lww("item_status", "item_id", "hb.L01.001", Some("approved"), "{}", false, &old).unwrap();
-        assert_eq!(s.judgements().unwrap()["hb.L01.001"].verdict, Verdict::Edited);
+        s.put_lww("item_status", "item_id", "cvs.L04.001", Some("approved"), "{}", false, &old).unwrap();
+        assert_eq!(s.judgements().unwrap()["cvs.L04.001"].verdict, Verdict::Edited);
         // Undo leaves a tombstone: unverified again.
-        s.set_judgement("hb.L01.001", None).unwrap();
+        s.set_judgement("cvs.L04.001", None).unwrap();
         assert!(s.judgements().unwrap().is_empty());
     }
 
@@ -794,6 +835,24 @@ mod tests {
         s.put_setting("sound", &2u32).unwrap();
         s.put_setting("sound", &3u32).unwrap();
         assert_eq!(s.setting::<u32>("sound"), Some(3));
+        // Saved on every answer, a lesson's place still sends one op.
+        let before = s.outbox_len();
+        for at in 0..5 {
+            s.put_place("lessonpos.y", &at).unwrap();
+        }
+        assert_eq!(s.outbox_len(), before + 1);
+        assert_eq!(s.outbox(100).unwrap().last().unwrap().payload.as_ref().unwrap()["value"], "4");
+        // A place syncs and replaces this device's old local copy.
+        s.put_local_setting("lessonpos.x", &1).unwrap();
+        s.put_place("lessonpos.x", &2).unwrap();
+        assert_eq!(s.place::<i32>("lessonpos.x"), Some(2));
+        assert_eq!(s.setting::<i32>("lessonpos.x"), Some(2), "synced");
+        assert_eq!(s.local_setting::<i32>("lessonpos.x"), None);
+        // One too big for a sync op stays here, and wins here.
+        let big = "x".repeat(steps_protocol::sync::MAX_PAYLOAD_BYTES);
+        s.put_place("lessonpos.x", &big).unwrap();
+        assert_eq!(s.place::<String>("lessonpos.x").as_deref(), Some(big.as_str()));
+        assert_eq!(s.setting::<i32>("lessonpos.x"), Some(2));
         s.put_local_setting("rings", &true).unwrap();
         assert_eq!(s.local_setting::<bool>("rings"), Some(true));
         assert_eq!(s.setting::<bool>("rings"), None);

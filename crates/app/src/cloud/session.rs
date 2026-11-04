@@ -20,29 +20,80 @@ pub trait SessionVault: Send {
     /// False when the session couldn't be kept for the next launch.
     fn save(&self, session: &Session) -> bool;
     fn clear(&self);
+    /// False for a session kept only until the app or tab closes.
+    fn remembers(&self) -> bool {
+        true
+    }
 }
 
 /// The browser: the site's own storage, which only this origin can read.
+/// A sign-in on someone else's computer (`tab_only`) goes in the tab's
+/// `sessionStorage` instead, which the browser drops with the tab.
 #[cfg(target_arch = "wasm32")]
-pub struct BrowserVault;
+#[derive(Default)]
+pub struct BrowserVault {
+    tab_only: std::sync::atomic::AtomicBool,
+}
+
+#[cfg(target_arch = "wasm32")]
+impl BrowserVault {
+    pub fn tab_only() -> Self {
+        Self { tab_only: true.into() }
+    }
+
+    fn is_tab_only(&self) -> bool {
+        self.tab_only.load(std::sync::atomic::Ordering::Relaxed)
+    }
+}
 
 #[cfg(target_arch = "wasm32")]
 impl SessionVault for BrowserVault {
     fn load(&self) -> Option<Session> {
-        serde_json::from_str(&crate::platform::web::read_pref(BROWSER_KEY)?).ok()
+        use crate::platform::web::{read_pref, read_tab_pref};
+        if let Some(s) = read_pref(BROWSER_KEY).and_then(|j| serde_json::from_str(&j).ok()) {
+            return Some(s);
+        }
+        let s = serde_json::from_str(&read_tab_pref(BROWSER_KEY)?).ok()?;
+        // A reload of a tab signed in for this tab only stays that way.
+        self.tab_only.store(true, std::sync::atomic::Ordering::Relaxed);
+        Some(s)
     }
 
     fn save(&self, session: &Session) -> bool {
-        crate::platform::web::write_pref(BROWSER_KEY, &serde_json::to_string(session).unwrap_or_default())
+        use crate::platform::web::{write_pref, write_tab_pref};
+        let json = serde_json::to_string(session).unwrap_or_default();
+        if self.is_tab_only() {
+            write_pref(BROWSER_KEY, "");
+            write_tab_pref(BROWSER_KEY, &json)
+        } else {
+            write_pref(BROWSER_KEY, &json)
+        }
     }
 
     fn clear(&self) {
         crate::platform::web::write_pref(BROWSER_KEY, "");
+        crate::platform::web::write_tab_pref(BROWSER_KEY, "");
+        // The next sign-in decides afresh.
+        self.tab_only.store(false, std::sync::atomic::Ordering::Relaxed);
+    }
+
+    fn remembers(&self) -> bool {
+        !self.is_tab_only()
     }
 }
 
 #[cfg(target_arch = "wasm32")]
 const BROWSER_KEY: &str = "cloud-session";
+
+/// Where a sign-in on someone else's device keeps its session: this tab
+/// in the browser, memory on the Mac and Android, so it ends when the app
+/// or the tab closes.
+pub fn not_remembered() -> Box<dyn SessionVault> {
+    #[cfg(target_arch = "wasm32")]
+    return Box::new(BrowserVault::tab_only());
+    #[cfg(not(target_arch = "wasm32"))]
+    Box::new(MemoryVault::forgetful())
+}
 
 /// The platform credential store.
 #[cfg(not(target_arch = "wasm32"))]
@@ -185,11 +236,22 @@ fn write_private(path: &std::path::Path, bytes: &[u8]) -> std::io::Result<()> {
     std::fs::rename(&tmp, path)
 }
 
-/// In memory only (tests).
+/// In memory only: tests, and a sign-in on someone else's Mac or phone
+/// (`forgetful`), which ends when the app quits.
 #[derive(Default)]
-pub struct MemoryVault(std::sync::Mutex<Option<Session>>);
+pub struct MemoryVault(std::sync::Mutex<Option<Session>>, bool);
+
+impl MemoryVault {
+    pub fn forgetful() -> Self {
+        Self(Default::default(), true)
+    }
+}
 
 impl SessionVault for MemoryVault {
+    fn remembers(&self) -> bool {
+        !self.1
+    }
+
     fn load(&self) -> Option<Session> {
         self.0.lock().ok()?.clone()
     }
@@ -251,6 +313,11 @@ impl Auth {
             };
         }
         Ok(self.session.access_token.clone())
+    }
+
+    /// False when this session ends with the app or the browser tab.
+    pub fn remembered(&self) -> bool {
+        self.vault.remembers()
     }
 
     /// Forgets the session on this device. Returns the vault for the next sign-in.

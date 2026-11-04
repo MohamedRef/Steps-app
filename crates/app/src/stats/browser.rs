@@ -42,7 +42,6 @@ fn seed() {
 #[test]
 #[ignore = "exports production HTML for the screens browser CI job"]
 fn export_screen_fixtures_scores() {
-    crate::store::use_memory_store();
     let dir = out_dir("scores");
     let mut manifest = Vec::new();
     for state in ["empty", "logged", "form"] {

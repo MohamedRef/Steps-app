@@ -28,6 +28,8 @@ pub mod count {
     pub const HOUR: Noun = Noun { one: "ساعة", two: "ساعتين", few: "ساعات", many: "ساعة" };
     pub const DAY: Noun = Noun { one: "يوم", two: "يومين", few: "أيام", many: "يوم" };
     pub const MONTH: Noun = Noun { one: "شهر", two: "شهرين", few: "شهور", many: "شهر" };
+    pub const WEEK: Noun =
+        Noun { one: "أسبوع", two: "أسبوعين", few: "أسابيع", many: "أسبوع" };
     pub const QUESTION: Noun =
         Noun { one: "سؤال واحد", two: "سؤالين", few: "أسئلة", many: "سؤال" };
     pub const LECTURE: Noun = Noun {
@@ -38,6 +40,9 @@ pub mod count {
     /// Questions and cards together.
     pub const ITEM: Noun = Noun {
         one: "سؤال واحد", two: "سؤالين", few: "أسئلة وكروت", many: "سؤال وكارت"
+    };
+    pub const NOTE: Noun = Noun {
+        one: "ملاحظة واحدة", two: "ملاحظتين", few: "ملاحظات", many: "ملاحظة"
     };
     pub const REVIEW: Noun = Noun {
         one: "مراجعة واحدة", two: "مراجعتين", few: "مراجعات", many: "مراجعة"
@@ -155,6 +160,12 @@ pub mod cite {
     }
 }
 
+/// The web app's boot screen (`platform/web.rs`).
+#[cfg_attr(not(target_arch = "wasm32"), allow(dead_code))]
+pub mod web {
+    pub const NO_CONTENT: &str = "Steps مقدرتش تجيب المحتوى. اتأكد إن النت شغال وافتحها تاني.";
+}
+
 /// A book page's sheet (pagesheet/mod.rs).
 pub mod sheet {
     pub const RESIZE: &str = "اسحب لفوق أو لتحت عشان تكبّرها أو تصغّرها";
@@ -202,6 +213,10 @@ pub mod book {
     pub const CHIP_HINT: &str = "افتح صفحة الكتاب";
     pub const SLIDE_TITLE: &str = "سلايد";
     pub const SLIDE_HINT: &str = "افتح سلايد المحاضرة";
+    /// The page-read switch (A2): new cards from a page start once it's read.
+    pub const MARK_READ: &str = "قريت الصفحة دي";
+    pub const IS_READ: &str = "قريتها ✓";
+    pub const READ_HINT: &str = "الكروت الجديدة بتبدأ من الصفحات اللي قريتها. دوس تاني لو عايز تشيل العلامة.";
 }
 
 pub mod nav {
@@ -222,6 +237,10 @@ pub mod nav {
 pub mod today {
     pub const DUE: &str = "مستحق مراجعة";
     pub const NEW: &str = "جديد متاح";
+    /// "جديد مستني تقرا صفحاته في First Aid: 12 سؤال وكارت" (A2).
+    pub fn locked(n: usize) -> String {
+        format!("جديد مستني تقرا صفحاته في First Aid: {}", super::count::count(n, &super::count::ITEM))
+    }
     /// "3 حالات مستنية مراجعة في شاشة الحالات".
     pub fn due_cases(n: usize) -> String {
         format!("{} مستنية مراجعة في شاشة الحالات", super::count::count(n, &super::count::CASE))
@@ -264,9 +283,12 @@ pub mod today {
     pub const NEW_LEFT_2: &str = "جديد من خطة النهارده. كل جلسة بتقرّبك.";
     pub const NEW_DONE: &str = "خلّصت جديد النهارده. اللي فاضل مراجعة بس.";
     pub const REVISIT: &str = "لفّة تانية على";
-    pub const MOCK: &str = "النهارده يوم امتحان تجريبي.";
-    pub const OPEN_BANK: &str = "افتح بنك الأسئلة";
-    pub const WEAK: &str = "النهارده للمواضيع الضعيفة.";
+    pub const WEAK: &str = "النهارده لبنك الأسئلة والمواضيع الضعيفة.";
+    pub const CATCH_UP: &str = "النهارده يوم لحاق: كمّل اللي فاتك، أو ارتاح لو مفيش.";
+    /// "النهارده: تقييم البداية (NBME). سجّل النتيجة بعده عشان الخطة تتابعك."
+    pub fn milestone_today(name: &str) -> String {
+        format!("النهارده: {name}. سجّل النتيجة بعده عشان تتابع مستواك.")
+    }
     pub const WEAK_START: &str = "ذاكر المواضيع الضعيفة";
     pub const REST: &str = "النهارده راحة في الخطة.";
     pub const REST_DUE: &str = "لو عندك مستحق، جلسة قصيرة تكفي.";
@@ -278,13 +300,13 @@ pub mod today {
             format!("{} زيادة", super::count::count(days, &super::count::STUDY_DAY))
         };
         format!(
-            "الخطة محتاجة {days} في الأسبوع عشان كل الجديد يخلص قبل آخر الأيام. تقدر تعدّلها من تقدّمي ← خطة الامتحان."
+            "الخطة محتاجة {days} في الأسبوع عشان كل الجديد يخلص قبل الفترة المركّزة. تقدر تعدّلها من تقدّمي ← خطة الامتحان."
         )
     }
     pub fn tight_cap(cap: u32) -> String {
         format!("لو علّيت حد المراجعات اليومي لـ {cap}، الخطة تلحق كلها. تقدر تعدّله من تقدّمي ← خطة الامتحان.")
     }
-    pub const TIGHT_HIGH_YIELD: &str = "الوقت مش مكفّي كل الجديد قبل آخر الأيام. ركّز على high-yield الأول.";
+    pub const TIGHT_HIGH_YIELD: &str = "الوقت مش مكفّي كل الجديد قبل الفترة المركّزة. ركّز على high-yield الأول.";
 
     // The 2026-10-29 redesign: a greeting, the session length, one start.
     pub const EYEBROW: &str = "جلسة صغيرة، وفهم ثابت";
@@ -368,6 +390,8 @@ pub mod study_settings {
     pub const NEW_PER_DAY: &str = "أسئلة جديدة في اليوم";
     pub const NEW_FROM_PLAN_1: &str = "عندك ميعاد امتحان، فالخطة هي اللي بتحدد الجديد كل يوم. النهارده:";
     pub const NEW_FROM_PLAN_2: &str = "جديد. تقدر تغيّر أيام المذاكرة وحد المراجعات من تقدّمي ← خطة الامتحان.";
+    pub const PAGE_GATE: &str = "الجديد من الصفحات اللي قريتها بس";
+    pub const PAGE_GATE_NOTE: &str = "كارت جديد مايبدأش غير لما تعلّم صفحته في First Aid إنك قريتها، من صفحة الكتاب أو صفحة المحاضرة. المراجعات مش بتتأثر.";
 }
 
 pub mod study {
@@ -807,7 +831,24 @@ pub mod plan {
     pub fn days_left(n: usize) -> String {
         format!("فاضل {}", super::count::count(n, &super::count::STUDY_DAY))
     }
-    pub const FINAL_FROM: &str = "آخر أيام قبل الامتحان (امتحانات تجريبية ومواضيع ضعيفة، من غير جديد) تبدأ";
+    pub const INTEGRATION_FROM: &str = "مرحلة الربط (لفّة تانية وأسئلة مخلوطة أكتر) تبدأ";
+    pub const DEDICATED_FROM: &str =
+        "الفترة المركّزة (بنك أسئلة ومواضيع ضعيفة وتقييم كل أسبوع، من غير جديد) تبدأ";
+
+    pub const PHASE_SYSTEMS: &str = "مرحلة الأجهزة";
+    pub const PHASE_INTEGRATION: &str = "مرحلة الربط";
+    pub const PHASE_DEDICATED: &str = "الفترة المركّزة";
+    /// "بنك الأسئلة: 20 سؤال".
+    pub fn qbank(n: u32) -> String {
+        format!("بنك الأسئلة: {}", super::count::count(n, &super::count::QUESTION))
+    }
+    pub const BASELINE: &str = "تقييم البداية (NBME)";
+    pub const CHECKPOINT: &str = "تقييم دوري (NBME)";
+    pub const WEEKLY: &str = "تقييم الأسبوع (NBME)";
+    pub const FREE_120: &str = "Free 120";
+    pub const NEXT_MILESTONE: &str = "التقييم الجاي";
+    pub const MILESTONES_TITLE: &str = "التقييمات الذاتية";
+    pub const MILESTONES_NOTE: &str = "نتيجة النهارده بتقولك فين تركّز، مش بتحكم عليك. السكور بيطلع مع الوقت.";
 
     pub const TODAY: &str = "النهارده";
     pub const NEW_ITEMS: &str = "جديد";
@@ -819,23 +860,29 @@ pub mod plan {
 
     pub const FOCUS_LEARN: &str = "جديد ومراجعة";
     pub const FOCUS_REVISIT: &str = "لفّة تانية";
-    pub const FOCUS_MOCK: &str = "امتحان تجريبي";
-    pub const FOCUS_WEAK: &str = "المواضيع الضعيفة";
+    pub const FOCUS_MOCK: &str = "تقييم ذاتي";
+    pub const FOCUS_WEAK: &str = "بنك أسئلة ومواضيع ضعيفة";
+    pub const FOCUS_CATCH_UP: &str = "يوم لحاق";
     pub const FOCUS_REST: &str = "راحة";
 
     pub const ON_TRACK: &str = "الخطة مريحة: كل المحاضرات هتخلص بدري وتلحق تلفّ عليها تاني.";
     pub const SNUG: &str = "الخطة ماشية، بس الجديد هياخد جزء من وقت اللفّة التانية.";
-    pub const TIGHT: &str = "على الخطة دي، فيه أسئلة مش هتلحق قبل آخر 10 أيام:";
+    pub const TIGHT: &str = "على الخطة دي، فيه أسئلة مش هتلحق قبل الفترة المركّزة:";
     pub const TIGHT_ADD: &str = "لو زوّدت أيام مذاكرة في الأسبوع هتلحق كلها. عدد الأيام:";
     pub fn tight_cap(cap: u32) -> String {
         format!("لو علّيت حد المراجعات اليومي لـ {cap} هتلحق كلها.")
     }
     pub const TIGHT_HIGH_YIELD: &str =
         "حتى بأيام أكتر وحد مراجعات أعلى مش هتلحق كلها، فركّز على high-yield الأول.";
-    pub const TIGHT_FINAL: &str =
-        "إنت في آخر الأيام، فالوقت للامتحانات التجريبية والمواضيع الضعيفة. في الجديد، ركّز على high-yield بس.";
+    pub const TIGHT_DEDICATED: &str =
+        "إنت في الفترة المركّزة، فالوقت لبنك الأسئلة والمواضيع الضعيفة. في الجديد، ركّز على high-yield بس.";
+    /// The calm offer to move the exam day, never to cut dedicated short.
+    pub fn later_exam(date: &str) -> String {
+        format!("أو أجّل الامتحان لـ {date} وتفضل الفترة المركّزة كاملة. ده تخطيط، مش فشل.")
+    }
+    pub const MOVE_EXAM: &str = "انقل الامتحان للميعاد ده";
     pub const PICK_DAY_FAR: &str = "اختار يوم في خلال 3 سنين من النهارده.";
-    pub const FINAL_WINDOW: &str = "إنت في آخر الأيام: امتحانات تجريبية ومراجعة المواضيع الضعيفة. مفيش جديد.";
+    pub const DEDICATED: &str = "إنت في الفترة المركّزة: بنك أسئلة ومواضيع ضعيفة وتقييم كل أسبوع. مفيش جديد.";
     pub const EXAM_DONE: &str = "الامتحان عدّى. ربنا يوفقك! لو عندك امتحان تاني، حط ميعاده.";
 
     pub const PROGRESS: &str = "وصلت لفين";
@@ -852,10 +899,47 @@ pub mod plan {
     pub const PACE_LABEL: &str = "اللي شفته لحد النهارده، والخطة لحد الامتحان";
     pub const PACE_KEY_PAST: &str = "اللي فات";
     pub const PACE_KEY_PLAN: &str = "الخطة";
-    pub const PACE_KEY_FINAL: &str = "آخر 10 أيام";
+    pub const PACE_KEY_FINAL: &str = "الفترة المركّزة";
     pub const PACE_DONE_ON: &str = "على الخطة دي، هتكون شفت كل الأسئلة يوم";
-    pub const PACE_NOT_DONE: &str = "على الخطة دي، فيه أسئلة مش هتلحق تتشاف قبل آخر الأيام.";
+    pub const PACE_NOT_DONE: &str = "على الخطة دي، فيه أسئلة مش هتلحق تتشاف قبل الفترة المركّزة.";
     pub const ALL_DAYS: &str = "الخطة كلها لحد الامتحان";
+
+    // Setup: phases, qbank, day loads, catch-up day, vacations.
+    pub const DEDICATED_WEEKS: &str = "الفترة المركّزة قبل الامتحان";
+    /// "6 أسابيع".
+    pub fn weeks(n: u32) -> String {
+        super::count::count(n, &super::count::WEEK)
+    }
+    pub const QBANK_LABEL: &str = "أسئلة بنك الأسئلة في اليوم العادي";
+    pub const QBANK_HINT: &str = "ده في مرحلة الأجهزة. في الربط الضعف، وفي الفترة المركّزة 4 أضعاف.";
+    pub const DAY_LOADS: &str = "حِمل كل يوم";
+    pub const LOADS: [&str; 3] = ["خفيف", "عادي", "تقيل"];
+    pub const CATCH_UP_DAY: &str = "يوم اللحاق (من غير جديد)";
+    pub const NO_CATCH_UP: &str = "مفيش";
+    pub const VACATIONS: &str = "أجازات";
+    pub const ADD_VACATION: &str = "زوّد أجازة";
+    pub const VACATION_FROM: &str = "من";
+    pub const VACATION_TO: &str = "لحد";
+    pub const REMOVE: &str = "شيلها";
+    pub const PICK_VACATION: &str = "اختار أول وآخر يوم في كل أجازة، وأولها قبل آخرها.";
+
+    // Rebalance after missed work: calm, and undoable.
+    /// "فاتك 12 جديد من امبارح. نوزّعهم على الأيام الجاية؟"
+    pub fn missed(n: u32) -> String {
+        format!("فاتك {n} جديد من امبارح. نوزّعهم على الأيام الجاية؟")
+    }
+    pub const SPREAD: &str = "وزّعهم";
+    /// "حطّهم في يوم اللحاق (خميس 12 نوفمبر)".
+    pub fn to_catch_up(day: &str) -> String {
+        format!("حطّهم في يوم اللحاق ({day})")
+    }
+    pub const SPREAD_DONE: &str = "اتوزّعوا على الأيام الجاية.";
+    /// "اتحطّوا في يوم اللحاق، خميس 12 نوفمبر."
+    pub fn moved(day: &str) -> String {
+        format!("اتحطّوا في يوم اللحاق، {day}.")
+    }
+    pub const UNDO: &str = "رجّع";
+    pub const PREVIEW: &str = "الجديد في الأيام الجاية، قبل ← بعد";
 }
 
 pub mod table {
@@ -1048,6 +1132,21 @@ pub mod hover {
     pub const TERMS: &str = "مصطلح في القاموس";
 }
 
+pub mod gopage {
+    pub const TITLE: &str = "روح لصفحة في First Aid";
+    pub const TOOL: &str = "روح لصفحة";
+    pub const HINT: &str = "اكتب رقم الصفحة المطبوع في الكتاب (أو مدى زي 300–305).";
+    pub const PLACEHOLDER: &str = "مثلاً 300";
+    pub const GO: &str = "افتح";
+    pub const INVALID: &str = "اكتب رقم صفحة بس.";
+    pub fn outside(page: u32) -> String {
+        format!("صفحة {page} مش جوه أي محاضرة في Steps (المحاضرات من Section II و III).")
+    }
+    pub fn nearest(page: u32) -> String {
+        format!("افتح أقرب صفحة: {page}")
+    }
+}
+
 pub mod keys {
     pub const TITLE: &str = "اختصارات الكيبورد";
     pub const OPEN: &str = "اعرض الاختصارات";
@@ -1063,6 +1162,7 @@ pub mod keys {
     pub const FLAG: &str = "تعلّم السؤال عشان ترجعله";
     pub const ESC: &str = "تقفل أي حاجة مفتوحة";
     pub const HELP: &str = "القايمة دي";
+    pub const PAGE: &str = "تروح لصفحة في First Aid";
 }
 
 pub mod verify {
@@ -1208,6 +1308,7 @@ pub mod data {
     pub const T_CHECKS: &str = "علاماتك على المحتوى";
     pub const T_SETTINGS: &str = "الإعدادات";
     pub const T_OWN: &str = "كروتك";
+    pub const T_NOTES: &str = "ملاحظاتك";
     pub const T_SCORES: &str = "اختباراتك";
 }
 
@@ -1266,6 +1367,43 @@ pub mod cloud {
     pub const P_OUTDATED: &str = "السيرفر أحدث من النسخة دي. حدّث Steps.";
     pub const P_CLOCK: &str =
         "ساعة الجهاز سابقة الوقت الحقيقي، فالتغييرات الجديدة مستنية. ظبط الساعة على التلقائي وهتتبعت لوحدها.";
+
+    // Username + password (docs/CLOUD.md §4.1).
+    pub const PW_TITLE: &str = "الدخول باسم مستخدم وباسورد";
+    pub const PW_INTRO: &str = "على جهاز مش بتاعك ومن غير جيميلك: ادخل باسم المستخدم والباسورد اللي ظبطتهم من جهازك، وهتلاقي مذاكرتك كلها وآخر حتة وقفت عندها.";
+    pub const USERNAME: &str = "اسم المستخدم";
+    pub const PASSWORD: &str = "الباسورد";
+    pub const NOT_MINE: &str = "الجهاز ده مش بتاعي";
+    pub const NOT_MINE_HINT: &str = "هتخرج لوحدك أول ما تقفل التاب أو التطبيق.";
+    pub const PW_SIGN_IN: &str = "ادخل";
+    pub const PW_CHECKING: &str = "بيدخل…";
+    pub const PW_YOURS: &str = "بتدخل من أي جهاز بـ";
+    pub const PW_HOW: &str = "على أي جهاز: افتح Steps، ومن «المزامنة» اكتب اسم المستخدم والباسورد.";
+    pub const PW_NONE: &str =
+        "اختار اسم مستخدم وباسورد عشان تدخل من أي جهاز من غير جيميل. حسابك هو هو، فكل حاجة بتتزامن.";
+    pub const USERNAME_HINT: &str = "من ٣ لـ ٣٢: حروف إنجليزي صغيرة وأرقام و . _ -";
+    pub const NEW_PASSWORD: &str = "الباسورد الجديد";
+    pub const PASSWORD_HINT: &str = "١٠ حروف على الأقل. جملة قصيرة تفتكرها أحسن من كلمة صعبة.";
+    pub const PASSWORD_AGAIN: &str = "اكتبه تاني";
+    pub const PW_SAVE: &str = "احفظ";
+    pub const PW_SAVING: &str = "بيحفظ…";
+    pub const PW_SAVED: &str = "اتحفظ. تقدر تدخل بيه من أي جهاز دلوقتي.";
+    pub const PW_CHANGE: &str = "غيّر";
+    pub const PW_REMOVE: &str = "اقفل الدخول بالباسورد";
+    pub const CANCEL: &str = "إلغاء";
+    pub const TEMPORARY: &str =
+        "دخول مؤقت: هتخرج لوحدك لما تقفل التاب أو التطبيق. لو خلصت قبلها، دوس «اخرج من الجهاز ده».";
+    pub const P_WRONG_PASSWORD: &str = "اسم المستخدم أو الباسورد مش مظبوط. جرّب تاني.";
+    pub const P_LOCKED: &str = "محاولات غلط كتير. استنى شوية وجرّب تاني.";
+    /// "استنى 5 دقايق": the lock's wait, with the Egyptian number forms.
+    pub fn locked(minutes: u64) -> String {
+        use crate::i18n::count::{MINUTE, count};
+        format!("محاولات غلط كتير، فالدخول بالاسم ده واقف شوية. جرّب تاني بعد {}.", count(minutes, &MINUTE))
+    }
+    pub const P_TAKEN: &str = "اسم المستخدم ده محجوز. اختار اسم تاني.";
+    pub const P_BAD_USERNAME: &str = "اسم المستخدم من ٣ لـ ٣٢: حروف إنجليزي وأرقام و . _ - بس.";
+    pub const P_SHORT_PASSWORD: &str = "الباسورد لازم يبقى ١٠ حروف على الأقل.";
+    pub const P_MISMATCH: &str = "الباسوردين مش زي بعض.";
 }
 
 pub mod settings {
@@ -1319,7 +1457,7 @@ pub mod settings {
     pub const TEXT_LARGE: &str = "كبير";
     pub const TEXT_LARGER: &str = "أكبر";
     pub const TEXT_SAMPLE_AR: &str = "إيه أول علاج لـ";
-    pub const TEXT_SAMPLE_TERM: &str = "variceal bleeding";
+    pub const TEXT_SAMPLE_TERM: &str = "Stanford type A dissection";
 
     pub const DATA_FOLDER: &str = "فولدر البيانات";
     pub const DATA_NOWHERE: &str = "مش معروف على الجهاز ده";
@@ -1602,6 +1740,7 @@ pub mod onboard {
     }
     pub const LATER: &str = "بعد كده";
     pub const CONTINUE: &str = "كمّل";
+    pub const HAVE_ACCOUNT: &str = "بتذاكر على Steps قبل كده؟ ادخل على حسابك";
     pub const WELCOME_TITLE: &str = "مذاكرة تناسب يومك.";
     pub const WELCOME_BODY: &str = "درس قصير، محاولة تفتكر، ومراجعة تثبّت الفهم.";
     pub const WELCOME_NOTE: &str =
@@ -1628,10 +1767,7 @@ pub mod onboard {
     pub fn studied_sub(n: usize) -> String {
         match n {
             0 => "ولا محاضرة لسه".to_string(),
-            1 => "محاضرة واحدة".to_string(),
-            2 => "محاضرتين".to_string(),
-            3..=10 => format!("{n} محاضرات"),
-            n => format!("{n} محاضرة"),
+            n => super::count::count(n, &super::count::LECTURE),
         }
     }
     pub const REMIND_ROW: &str = "التذكير";
@@ -1818,7 +1954,7 @@ pub mod learn {
     pub fn no_match(q: &str) -> String {
         format!("مفيش درس فيه «{q}». جرّب كلمة تانية أو اسم المحاضرة بالإنجليزي.")
     }
-    /// `كبد › المحاضرة 3`: the course, then the lecture's number in it.
+    /// `قلب › المحاضرة 3`: the course, then the lecture's number in it.
     pub fn lecture_n(course: &str, n: &str) -> String {
         format!("{course} › المحاضرة {n}")
     }
@@ -1874,6 +2010,18 @@ pub mod views {
     pub const GROUPED: &str = "قسّمها حسب المحاضرة";
     pub const GROUPED_SHORT: &str = "مقسّمة";
     pub const CLOSE_MENU: &str = "اقفل القايمة";
+}
+
+pub mod labs {
+    pub const TITLE: &str = "القيم المعملية";
+    pub const OPEN: &str = "القيم المعملية";
+    pub const OPEN_HINT: &str = "افتح القيم الطبيعية زي ما الامتحان بيعرضها جنب كل سؤال";
+    pub const SEARCH: &str = "دوّر على تحليل…";
+    pub const UNITS: &str = "الوحدات";
+    pub const CONVENTIONAL: &str = "وحدات الكتاب";
+    pub const NO_MATCH: &str = "مفيش تحليل بالاسم ده. جرّب كلمة إنجليزي زي sodium.";
+    pub const SMA12: &str = "من الـ SMA-12";
+    pub const SMA12_NOTE: &str = "* جزء من الـ Biochemical Profile (SMA-12)";
 }
 
 pub mod courses {
@@ -1984,6 +2132,85 @@ mod grammar_tests {
         assert_eq!(plan::days_left(40), "فاضل 40 يوم مذاكرة");
         assert_eq!(anki::contents(12, 2), "12 محاضرة · سؤالين");
     }
+
+    #[test]
+    fn each_count_takes_the_right_form() {
+        assert_eq!(today::due_cases(2), "حالتين مستنية مراجعة في شاشة الحالات");
+        assert_eq!(today::exam_in(1), "الامتحان بكرة. إنت جاهز أكتر مما فاكر.");
+        assert_eq!(today::exam_in(2), "فاضل يومين على الامتحان");
+        assert!(today::tight_days(1).starts_with("الخطة محتاجة يوم مذاكرة زيادة في الأسبوع"));
+        assert!(today::tight_days(3).starts_with("الخطة محتاجة 3 أيام مذاكرة زيادة في الأسبوع"));
+        assert_eq!(today::headline(0, 5), "5 حاجات جديدة، على قد وقتك.");
+        assert_eq!(today::headline(1, 0), "مراجعة واحدة، وبس.");
+        assert_eq!(today::headline(2, 12), "مراجعتين، و12 حاجة جديدة.");
+        assert_ne!(today::hero_body(0, 3), today::hero_body(3, 0));
+        assert_ne!(today::hero_body(3, 0), today::hero_body(3, 3));
+        assert_eq!(today::plan_reviews_only(7), "7 مراجعات بس");
+        assert_eq!(
+            study_settings::personal(40),
+            format!("{} 40 مراجعة. بيتحدّث كل أسبوع.", study_settings::PERSONAL_1)
+        );
+        assert_eq!(study::due_elsewhere(1), "فيه كارت واحد مستحق في مادة تانية.");
+        assert_eq!(study::due_elsewhere(2), "فيه كارتين مستحقين في مواد تانية.");
+        assert_eq!(study::due_elsewhere(4), "فيه 4 كروت مستحقة في مواد تانية.");
+        assert_eq!(study::due_elsewhere(11), "فيه 11 كارت مستحق في مواد تانية.");
+        assert_eq!(table::mark_each(1), "فاضل خانة واحدة: عرفتها ولا لأ؟");
+        assert_eq!(table::recalled(3, 3), "كل الخانات صح (3 من 3). حلو أوي!");
+        assert_eq!(order::moves_to_fix(1), "الترتيب قريب: نقل خطوة واحدة بس بيظبطه.");
+        assert_eq!(case::steps(5), "5 خطوات");
+        assert_eq!(own::cards(1), "كارت واحد");
+        assert_eq!(cloud::pending(1), "تغيير واحد مستني يترفع");
+        assert_eq!(cloud::pending(5), "5 تغييرات مستنية تترفع");
+        assert_eq!(cloud::pending(103), "103 تغييرات مستنية تترفع");
+        assert_eq!(update::builds_count(1), "نسخة جديدة");
+        assert_eq!(update::builds_count(2), "نسختين جداد");
+        assert_eq!(update::builds_count(4), "4 نسخ جديدة");
+        assert_eq!(update::builds_count(12), "12 نسخة جديدة");
+        assert_eq!(update::content_updates_count(1), "تحديث محتوى");
+        assert_eq!(update::content_updates_count(2), "تحديثين محتوى");
+        assert_eq!(update::content_updates_count(3), "3 تحديثات محتوى");
+        assert_eq!(update::content_updates_count(20), "20 تحديث محتوى");
+        assert_eq!(remind::text(None), remind::text(Some(0)));
+        assert_eq!(remind::text(Some(1)), "عندك مراجعة واحدة النهارده. دقيقة وتخلص.");
+        assert_eq!(remind::text(Some(14)), "عندك 14 مراجعة النهارده. يلا نبدأ بجلسة قصيرة.");
+        assert_eq!(onboard::days_sub(7), "كل أيام الأسبوع");
+        assert_eq!(onboard::days_sub(1), "يوم واحد في الأسبوع");
+        assert_eq!(onboard::days_sub(2), "يومين في الأسبوع");
+        assert_eq!(onboard::days_sub(5), "5 أيام في الأسبوع");
+        assert_eq!(onboard::studied_sub(0), "ولا محاضرة لسه");
+        assert_eq!(onboard::studied_sub(1), "محاضرة واحدة");
+        assert_eq!(onboard::studied_sub(2), "محاضرتين");
+        assert_eq!(onboard::studied_sub(9), "9 محاضرات");
+        assert_eq!(onboard::studied_sub(11), "11 محاضرة");
+        assert_eq!(onboard::studied_sub(103), "103 محاضرات");
+        assert_eq!(recap::exam_in(0), "الامتحان النهارده. بالتوفيق.");
+        assert_eq!(recap::exam_in(30), "فاضل على الامتحان 30 يوم.");
+        assert_eq!(learn::misses(1), "وصّلتهم كلهم، بغلطة واحدة في السكة.");
+        assert_eq!(learn::score_line(5, 5), "ولا غلطة. الدرس ده بقى بتاعك.");
+        assert_eq!(learn::score_line(3, 5), "كويس جدًا. اللي غلطت فيه هيرجعلك في المراجعة.");
+        assert_eq!(learn::score_line(1, 5), "عادي جدًا من أول مرة، ده درس جديد. الكروت هتثبّته.");
+    }
+
+    #[test]
+    fn numbers_and_names_land_where_the_sentence_wants_them() {
+        assert_eq!(cite::slide(4), "سلايد 4");
+        assert_eq!(bank::all_of("قلب"), "كل محاضرات قلب");
+        assert_eq!(bank::checked(true, 'C'), "إجابتك صح.");
+        assert_eq!(bank::checked(false, 'C'), "إجابتك غلط. الإجابة الصح C.");
+        assert_eq!(stats::better(true, 12), "أحسن من الأسبوع اللي فات بـ 12%");
+        assert_eq!(stats::better(false, 3), "أحسن من الشهر اللي فات بـ 3%");
+        assert!(today::tight_cap(150).starts_with("لو علّيت حد المراجعات اليومي لـ 150، الخطة تلحق كلها."));
+        assert_eq!(plan::tight_cap(150), "لو علّيت حد المراجعات اليومي لـ 150 هتلحق كلها.");
+        assert!(order::in_place(3, 5).starts_with("3 من 5 في مكانها."));
+        assert_eq!(order::should_be(2), "مكانها 2");
+        assert_eq!(learn::placed_of(2, 6), "اخترت 2 من 6");
+        assert_eq!(learn::slot(3), "الخطوة رقم 3");
+        assert_eq!(learn::should_be(1), "مكانها رقم 1");
+        assert_eq!(learn::sort_left(4, 9), "فاضل 4 من 9");
+        assert_eq!(learn::in_place(5, 7), "5 من 7 في مكانهم.");
+        assert!(learn::no_match("VSD").starts_with("مفيش درس فيه «VSD»."));
+        assert_eq!(learn::resume_at(3, 8), "هتكمّل من خطوة 3 من 8");
+    }
 }
 
 pub mod refs {
@@ -2019,6 +2246,16 @@ pub mod lecture {
     pub const CASES: &str = "حالة";
     pub const TOPICS: &str = "المواضيع";
     pub const CHECKED: &str = "صحة المحتوى: راجعت";
+    /// "قريت 6 من 21 صفحة" (A2).
+    pub fn read_count(read: u32, all: u32) -> String {
+        format!("قريت {read} من {all} صفحة")
+    }
+    pub const READ_NONE: &str = "لسه ما علّمتش صفحات مقروءة في المحاضرة دي.";
+    pub const READ_ALL: &str = "قريت المحاضرة كلها";
+    pub const UNREAD_ALL: &str = "شيل علامة القراءة";
+    pub const READ_UPTO: &str = "قريت لحد صفحة";
+    pub const READ_UPTO_GO: &str = "علّم";
+    pub const READ_GROUP: &str = "الصفحات اللي قريتها";
 }
 
 /// Shared preference write recovery.
@@ -2026,4 +2263,43 @@ pub mod saving {
     pub const FAILED: &str = "فيه إعدادات ما اتحفظتش. اختياراتك شغالة دلوقتي، بس ممكن تضيع لما تقفل التطبيق.";
     pub const RETRY: &str = "حاول تحفظ تاني";
     pub const TRY_AGAIN: &str = "حاول تاني";
+}
+
+/// His notes on items, lesson steps and pages (notes/mod.rs).
+pub mod notes {
+    pub const CHIP_ADD: &str = "＋ ملاحظة";
+    pub const CHIP_HAS: &str = "ملاحظتك";
+    pub const ADD_HINT: &str = "اكتب ملاحظة";
+    pub const EDIT_HINT: &str = "افتح ملاحظتك";
+    pub const TITLE_NEW: &str = "ملاحظة جديدة";
+    pub const TITLE_EDIT: &str = "ملاحظتك";
+    pub const FIELD: &str = "الملاحظة";
+    pub const HINT: &str = "بالعربي أو بالإنجليزي: اللي عايز تفتكره هنا…";
+    pub const PRIVATE: &str = "ملاحظاتك بتتحفظ على أجهزتك بس، وبتروح معاك في النسخة الاحتياطية وفي Anki.";
+    pub const SAVE: &str = "احفظ";
+    pub const DELETE: &str = "امسحها";
+    pub const CANCEL: &str = "إلغاء";
+    pub const TOO_LONG: &str = "الملاحظة طويلة، خليها 2000 حرف بالكتير. لو محتاج أكتر، اعمل كارت.";
+    pub const FAILED: &str = "ما عرفتش أحفظ الملاحظة، وكلامك لسه هنا:";
+    pub const ON_LESSON: &str = "درس";
+    pub const PAGE_NONE: &str = "مفيش ملاحظات على الصفحة دي لسه.";
+    pub const ADD_PAGE: &str = "اكتب ملاحظة على الصفحة دي";
+    pub const LIST_TITLE: &str = "ملاحظاتك";
+    pub const LIST_EMPTY: &str =
+        "لسه مكتبتش ملاحظات. اضغط «＋ ملاحظة» تحت أي كارت أو سؤال أو خطوة في درس، أو من صفحة الكتاب.";
+    pub const COURSES: &str = "المواد";
+    pub const ALL: &str = "الكل";
+    pub const SEARCH: &str = "دوّر في ملاحظاتك";
+    pub const NO_MATCH: &str = "مفيش ملاحظة فيها الكلام ده.";
+    /// "ملاحظة على ص 284".
+    pub fn on_page(page: u32) -> String {
+        format!("ملاحظة على {}", super::cite::page(page))
+    }
+    /// "ملاحظاتك على ص 284".
+    pub fn on_page_title(page: u32) -> String {
+        format!("ملاحظاتك على {}", super::cite::page(page))
+    }
+    pub fn count(n: usize) -> String {
+        super::count::count(n, &super::count::NOTE)
+    }
 }

@@ -47,6 +47,8 @@ pub const TABLES: &[(&str, SyncKind)] = &[
     ("settings", SyncKind::Lww),
     // Mohamed's own cards, one JSON row each (chunk 21, `steps_core::own`).
     ("own_cards", SyncKind::Lww),
+    // Mohamed's notes on items, lesson steps and pages (`steps_core::note`).
+    ("notes", SyncKind::Lww),
     // His NBME / UWSA / Free 120 scores, one JSON row each (`steps_core::selfassess`).
     ("self_assessments", SyncKind::Lww),
 ];
@@ -204,7 +206,7 @@ mod tests {
         let op = Op {
             id: "op1".into(),
             table: "item_status".into(),
-            row_id: "hb.L01.001".into(),
+            row_id: "cvs.L04.001".into(),
             kind: OpKind::Upsert,
             hlc: Hlc { wall_ms: 5, counter: 0, device: "s24u".into() },
             relay: false,

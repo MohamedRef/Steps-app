@@ -26,14 +26,17 @@ mod dead_ends;
 mod desk;
 mod diag;
 mod fonts;
+mod gopage;
 mod hover;
 mod i18n;
 mod icons;
 mod import;
+mod labs;
 mod learn;
 mod lecture;
 mod look;
 mod more;
+mod notes;
 mod onboarding;
 mod oral;
 mod order;
@@ -46,6 +49,8 @@ mod platform;
 mod prefs;
 mod recap;
 mod reminders;
+#[cfg(test)]
+mod render_tests;
 mod settings;
 mod sheet;
 mod shortcuts;
@@ -106,11 +111,15 @@ impl Screen {
 
     fn from_env() -> Option<Screen> {
         // STEPS_OPEN_SCREEN=study opens that screen at launch (previews and screenshots).
-        let name = std::env::var("STEPS_OPEN_SCREEN").ok()?;
+        Self::named(&std::env::var("STEPS_OPEN_SCREEN").ok()?)
+    }
+
+    /// The screen called `name` (`study`, `Settings`), in any case.
+    fn named(name: &str) -> Option<Screen> {
         [Self::NAV.as_slice(), &[Self::Settings]]
             .concat()
             .into_iter()
-            .find(|s| format!("{s:?}").eq_ignore_ascii_case(&name))
+            .find(|s| format!("{s:?}").eq_ignore_ascii_case(name))
     }
 }
 
@@ -145,11 +154,12 @@ fn main() {
             )
             .launch(App);
     }
-    // The web: the kept database is read before the first screen.
+    // The web: the content pack and the kept database come before the first screen.
     #[cfg(target_arch = "wasm32")]
     wasm_bindgen_futures::spawn_local(async {
-        platform::web::boot().await;
-        dioxus::launch(App);
+        if platform::web::boot().await {
+            dioxus::launch(App);
+        }
     });
     #[cfg(not(any(all(feature = "desktop", not(target_os = "android")), target_arch = "wasm32")))]
     dioxus::launch(App);
@@ -157,9 +167,17 @@ fn main() {
 
 #[component]
 fn App() -> Element {
+    rsx! { AppAt { start: Screen::from_env().unwrap_or(Screen::Today) } }
+}
+
+/// The whole app, opening on `start`. `children` draw last inside the app's
+/// frame, with every context in reach: the screen render tests use them to
+/// open sheets and pages (`render_tests.rs`); the app passes none.
+#[component]
+fn AppAt(start: Screen, children: Element) -> Element {
     persistence::use_provide_saves();
     let ui = use_context_provider(|| Ui {
-        screen: Signal::new(Screen::from_env().unwrap_or(Screen::Today)),
+        screen: Signal::new(start),
         prefs: Signal::new(prefs::DevicePrefs::load()),
         focus: Signal::new(false),
     });
@@ -295,9 +313,14 @@ fn App() -> Element {
             shortcuts::KeysSheet {}
             update::sheet::UpdateSheet {}
             pagesheet::BookSheet {}
+            gopage::GoPage {}
             abbrsheet::AbbrSheet {}
+            labs::LabSheet {}
+            // After the page sheet, which opens it, so it draws on top.
+            notes::NoteSheet {}
             courses::Picker {}
             own::ShareInbox {}
+            {children}
             onboarding::Onboarding {}
         }
     }

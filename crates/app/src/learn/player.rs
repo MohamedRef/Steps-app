@@ -16,14 +16,15 @@ use super::{Mark, VIEW, View, close, mark, next_lesson, save_mark, set_view};
 use crate::i18n::learn as tx;
 use crate::{Screen, Ui};
 
-/// Local (per device) setting: the unfinished attempt (`Attempt`), so the
-/// lesson reopens at the same step with the same responses and score.
+/// Where an unfinished lesson stands (`Attempt`): the step, every answer
+/// and note, and the score, so it reopens exactly there, on this device or
+/// another one (`Store::put_place`, synced).
 pub(super) fn pos_key(id: &str) -> String {
     format!("lessonpos.{id}")
 }
 
 fn save_pos(id: &str, pos: &Attempt) {
-    if let Err(e) = crate::store::shared().put_local_setting(&pos_key(id), pos) {
+    if let Err(e) = crate::store::shared().put_place(&pos_key(id), pos) {
         crate::diag::report!("saving lesson position {id} failed: {e}");
     }
 }
@@ -46,7 +47,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
         if let Some(s) = preview {
             return Attempt { at: s.saturating_sub(1).min(n), ..Attempt::new(n, now) };
         }
-        let saved: Option<Attempt> = crate::store::shared().local_setting(&pos_key(&id));
+        let saved: Option<Attempt> = crate::store::shared().place(&pos_key(&id));
         Attempt::restore(&lesson, saved, mark(&id).map(|m| m.done_ms), now)
     });
     let sigs = use_hook(|| lesson.steps.iter().map(|s| sig(&s.body)).collect::<Vec<_>>());
@@ -332,7 +333,6 @@ fn Stage(
     let can_retry =
         if per_part { before.is_some() && !fresh() } else { checked || (answered_before && !fresh()) };
     let texts = use_hook(|| step.shown_text());
-    let has_abbr = use_hook(|| !crate::abbrsheet::entries(&texts).is_empty());
     rsx! {
         crate::ui::Card { element: crate::ui::CardElement::Article, class: "ls-stage", hidden: !current, "data-kind": step.body.kind(), "data-n": k + 1,
             if try_done {
@@ -360,20 +360,19 @@ fn Stage(
                     span { aria_hidden: "true", "↻" }
                 }
             }
-            // The page chip, with the step's abbreviations beside it.
-            if step.page.is_some() || has_abbr {
-                footer { class: "ls-src",
-                    crate::abbrsheet::AbbrChip { texts: texts.clone() }
-                    if let Some(page) = step.page {
-                        crate::hover::BookPage {
-                            page,
-                            quote: if quote_held { None } else { step.quote.clone() },
-                            held: quote_held && step.quote.is_some(),
-                            of: seed.clone(),
-                            hook: step_hook(&step.body),
-                        }
+            // The page chip, with the step's abbreviations and his note beside it.
+            footer { class: "ls-src",
+                crate::abbrsheet::AbbrChip { texts: texts.clone() }
+                if let Some(page) = step.page {
+                    crate::hover::BookPage {
+                        page,
+                        quote: if quote_held { None } else { step.quote.clone() },
+                        held: quote_held && step.quote.is_some(),
+                        of: seed.clone(),
+                        hook: step_hook(&step.body),
                     }
                 }
+                crate::notes::NoteChip { anchor: steps_core::note::Anchor::Lesson(seed.clone()), page: step.page }
             }
         }
     }

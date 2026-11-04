@@ -1,0 +1,1315 @@
+schema: steps.content/v1
+lecture: cvs.L03
+title: Physiology
+book: { chapter: 7, pages: [288, 299] }
+topics:
+  - { id: cardiac-output-variables, title: Cardiac output variables }
+  - { id: cardiac-output-equations, title: Cardiac output equations }
+  - { id: starling-curves, title: Starling curves }
+  - { id: resistance-pressure-flow, title: "Resistance, pressure, flow" }
+  - { id: cardiac-vascular-function-curves, title: Cardiac and vascular function curves }
+  - { id: pressure-volume-loops-cardiac-cycle, title: Pressure-volume loops and cardiac cycle }
+  - { id: jugular-venous-pressure-tracings, title: Jugular venous pressure tracings }
+  - { id: pressure-volume-loops-valvular-disease, title: Pressure-volume loops and valvular disease }
+  - { id: splitting-of-s2, title: Splitting of S2 }
+  - { id: auscultation-of-the-heart, title: Auscultation of the heart }
+  - { id: heart-murmurs, title: Heart murmurs }
+  - { id: myocardial-action-potential, title: Myocardial action potential }
+  - { id: pacemaker-action-potential, title: Pacemaker action potential }
+  - { id: electrocardiogram, title: Electrocardiogram }
+  - { id: natriuretic-peptides, title: Atrial and B-type natriuretic peptides }
+  - { id: baroreceptors-chemoreceptors, title: Baroreceptors and chemoreceptors }
+  - { id: normal-resting-cardiac-pressures, title: Normal resting cardiac pressures }
+  - { id: autoregulation, title: Autoregulation }
+  - { id: capillary-fluid-exchange, title: Capillary fluid exchange }
+items:
+  # ---------- p288: cardiac output variables ----------
+  - id: cvs.L03.001
+    kind: enumerate
+    topic: cardiac-output-variables
+    prompt: Enumerate the 3 variables that affect stroke volume, with the direction that raises SV.
+    points:
+      - ↑ Contractility (eg, anxiety, exercise)
+      - ↑ Preload (eg, early pregnancy)
+      - ↓ Afterload
+    pass: 3
+    hook: "الكتاب بيقولها SV CAP: Contractility و Afterload و Preload. الـ SV بيعلى لو الـ C والـ P علوا والـ A نزل."
+    src: { page: 288, quote: "Stroke Volume affected by Contractility, Afterload, and Preload. ↑ SV with: ↑ Contractility (eg, anxiety, exercise) ↑ Preload (eg, early pregnancy) ↓ Afterload SV CAP." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.002
+    kind: card
+    topic: cardiac-output-variables
+    front: What is stroke work, and what is it proportional to?
+    back: The work done by the ventricle to eject the stroke volume. SW ∝ SV × MAP.
+    src: { page: 288, quote: "Stroke work (SW) is work done by ventricle to eject SV. SW ∝ SV × MAP" }
+    status: unverified
+  - id: cvs.L03.003
+    kind: order
+    topic: cardiac-output-variables
+    prompt: Put the steps by which β1 stimulation raises Ca2+ storage in the sarcoplasmic reticulum in order.
+    steps:
+      - Catecholamine binds the β1 receptor
+      - Protein kinase A is activated
+      - Phospholamban is phosphorylated
+      - Ca2+ ATPase becomes active
+      - Ca2+ storage in the sarcoplasmic reticulum rises
+    src: { page: 288, quote: "Catecholamine stimulation via β1 receptor: Activated protein kinase A → phospholamban phosphorylation → active Ca2+ ATPase → ↑ Ca2+ storage in sarcoplasmic reticulum (SR)" }
+    status: unverified
+  - id: cvs.L03.004
+    kind: card
+    topic: cardiac-output-variables
+    front: Besides phospholamban, how else does protein kinase A (from β1 stimulation) raise contractility?
+    back: It phosphorylates Ca2+ channels → ↑ Ca2+ entry → ↑ Ca2+-induced Ca2+ release.
+    src: { page: 288, quote: "Activated protein kinase A → Ca2+ channel phosphorylation → ↑ Ca2+ entry → ↑ Ca2+ -induced Ca2+ release" }
+    status: unverified
+  - id: cvs.L03.005
+    kind: order
+    topic: cardiac-output-variables
+    prompt: Put the steps by which digoxin raises contractility in order.
+    steps:
+      - Digoxin blocks the Na+/K+ pump
+      - Intracellular Na+ rises
+      - Na+/Ca2+ exchanger activity falls
+      - Intracellular Ca2+ rises
+    src: { page: 288, quote: "Digoxin (blocks Na+ /K+ pump → ↑ intracellular Na+ → ↓ Na+ /Ca2+ exchanger activity → ↑ intracellular Ca2+ )" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.006
+    kind: enumerate
+    topic: cardiac-output-variables
+    prompt: Enumerate the 5 things that decrease contractility (and SV).
+    points:
+      - β1-blockade (↓ cAMP)
+      - Heart failure with systolic dysfunction
+      - Acidosis
+      - Hypoxia/hypercapnia (↓ Po2/↑ Pco2)
+      - Nondihydropyridine Ca2+ channel blockers
+    pass: 4
+    hook: "القلب بيضعف من 2 أدوية (β-blocker و verapamil/diltiazem)، وقلب تعبان (HF)، وجو وحش حواليه (acidosis و hypoxia/hypercapnia)."
+    src: { page: 288, quote: "Contractility (and SV) ↓ with: β1-blockade (↓ cAMP) Heart failure (HF) with systolic dysfunction Acidosis Hypoxia/hypercapnia (↓ Po2/↑ Pco2) Nondihydropyridine Ca2+ channel blockers" }
+    status: unverified
+  - id: cvs.L03.007
+    kind: card
+    topic: cardiac-output-variables
+    front: What approximates preload, and what does it depend on?
+    back: Ventricular end-diastolic volume (EDV). It depends on venous tone and circulating blood volume, both of which affect venous return.
+    src: { page: 288, quote: "Preload approximated by ventricular end- diastolic volume (EDV); depends on venous tone and circulating blood volume, both of which affect venous return." }
+    status: unverified
+  - id: cvs.L03.008
+    kind: table
+    topic: cardiac-output-variables
+    title: Drugs that lower preload and afterload
+    columns: [Drug, Preload, Afterload]
+    rows:
+      - ["Venous vasodilators (eg, nitroglycerin)", ↓, "-"]
+      - ["Arterial vasodilators (eg, hydralazine)", "-", ↓]
+      - [ACE inhibitors and ARBs, ↓, ↓]
+    blanks: [[0, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 288, quote: "Arterial vasodilators (eg, hydralazine) ↓ afterload. ACE inhibitors and ARBs ↓ both preload and afterload." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.009
+    kind: enumerate
+    topic: cardiac-output-variables
+    prompt: Enumerate the 4 things that increase myocardial O2 demand.
+    points:
+      - ↑ contractility
+      - ↑ afterload (proportional to arterial pressure)
+      - ↑ heart rate
+      - ↑ diameter of ventricle (↑ wall tension)
+    pass: 4
+    hook: "القلب بيصرف أكسجين أكتر لما يشتغل أجمد (contractility)، ضد ضغط أعلى (afterload)، أسرع (HR)، وهو منفوخ (diameter)."
+    src: { page: 288, quote: "Myocardial O2 demand is ↑ by: ↑ contractility ↑ afterload (proportional to arterial pressure) ↑ heart rate ↑ diameter of ventricle (↑ wall tension)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.010
+    kind: card
+    topic: cardiac-output-variables
+    front: Which vessel contains the most deoxygenated blood in the body?
+    back: The coronary sinus.
+    src: { page: 288, quote: "Coronary sinus contains most deoxygenated blood in body." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.011
+    kind: cloze
+    topic: cardiac-output-variables
+    text: "Laplace's law: wall tension = {{c1::pressure × radius}}; wall stress = {{c2::pressure × radius / (2 × wall thickness)}}."
+    src: { page: 288, quote: "Wall tension follows Laplace’s law: Wall tension = pressure × radius Wall stress = pressure × radius 2 × wall thickness" }
+    status: unverified
+  - id: cvs.L03.012
+    kind: card
+    topic: cardiac-output-variables
+    front: What approximates afterload, and how does the LV compensate for chronically raised afterload?
+    back: Mean arterial pressure (MAP). The LV thickens (hypertrophy) to ↓ wall stress; so chronic hypertension (↑ MAP) → LV hypertrophy.
+    src: { page: 288, quote: "LV compensates for ↑ afterload by thickening (hypertrophy) in order to ↓ wall stress." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.013
+    kind: mcq
+    topic: cardiac-output-variables
+    stem: >-
+      A 58-year-old man with atrial fibrillation and heart failure with reduced ejection fraction is
+      started on a drug that increases the force of contraction. The drug binds the extracellular side of
+      a membrane ATPase in cardiac myocytes. Which of the following is the most direct cause of the
+      increased contractility?
+    options:
+      - Increased cAMP from β1-receptor activation
+      - Decreased activity of the Na+/Ca2+ exchanger, raising intracellular Ca2+
+      - Phosphorylation of phospholamban by protein kinase A
+      - Opening of HCN channels in the SA node
+      - Blockade of L-type Ca2+ channels
+    answer: 1
+    why:
+      - "That is how catecholamines (dobutamine) work, through PKA, not through an ATPase."
+      - "Right. Digoxin blocks the Na+/K+ pump → ↑ intracellular Na+ → ↓ Na+/Ca2+ exchanger activity → ↑ intracellular Ca2+ → ↑ contractility."
+      - "Phospholamban phosphorylation follows β1 stimulation and protein kinase A, not pump inhibition."
+      - "HCN channels carry the funny current that sets the SA node rate; they don't change contractile force."
+      - "L-type Ca2+ channel blockade (nondihydropyridines) ↓ contractility."
+    src: { page: 288, quote: "Digoxin (blocks Na+ /K+ pump → ↑ intracellular Na+ → ↓ Na+ /Ca2+ exchanger activity → ↑ intracellular Ca2+ )" }
+    status: unverified
+  - id: cvs.L03.014
+    kind: mcq
+    topic: cardiac-output-variables
+    stem: >-
+      A 62-year-old woman has had poorly controlled hypertension for 20 years. Echocardiography shows
+      concentric thickening of the left ventricular wall with a normal cavity size. Which of the following
+      best explains why the wall thickened?
+    options:
+      - To increase preload and stroke volume
+      - To reduce wall stress against a raised afterload
+      - To increase the radius of the ventricle
+      - To lower myocardial O2 demand by slowing the heart rate
+      - To raise ventricular compliance
+    answer: 1
+    why:
+      - "Hypertrophy doesn't raise preload; it makes the ventricle stiffer and fill less well."
+      - "Right. Afterload is approximated by MAP; per Laplace, wall stress = pressure × radius / (2 × wall thickness), so a thicker wall lowers the stress."
+      - "Concentric hypertrophy doesn't enlarge the radius; a larger radius would raise wall stress."
+      - "Wall thickness doesn't set heart rate."
+      - "A thick wall is less compliant, not more."
+    src: { page: 288, quote: "LV compensates for ↑ afterload by thickening (hypertrophy) in order to ↓ wall stress." }
+    status: unverified
+  # ---------- p289: cardiac output equations ----------
+  - id: cvs.L03.015
+    kind: cloze
+    topic: cardiac-output-equations
+    text: "Stroke volume = {{c1::EDV − ESV}}; ejection fraction = {{c2::SV / EDV}}, normally {{c3::50%-70%}}."
+    src: { page: 289, quote: "Stroke volume SV = EDV − ESV ESV = end-systolic volume." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.016
+    kind: card
+    topic: cardiac-output-equations
+    front: What does ejection fraction index, and how does it behave in systolic vs diastolic HF?
+    back: Ventricular contractility. It is ↓ in systolic HF and usually normal in diastolic HF.
+    src: { page: 289, quote: "EF is an index of ventricular contractility (↓ in systolic HF; usually normal in diastolic HF). Normal EF is 50%-70%." }
+    status: unverified
+  - id: cvs.L03.017
+    kind: card
+    topic: cardiac-output-equations
+    front: "Fick principle: how is cardiac output calculated?"
+    back: CO = rate of O2 consumption / (arterial O2 content − venous O2 content). (Also CO = SV × HR.)
+    src: { page: 289, quote: "Fick principle: CO = rate of O2 consumption (arterial O2 content – venous O2 content)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.018
+    kind: card
+    topic: cardiac-output-equations
+    front: How is cardiac output maintained in early vs late exercise?
+    back: "Early: ↑ HR and ↑ SV. Late: ↑ HR only (SV plateaus)."
+    src: { page: 289, quote: "In early stages of exercise, CO maintained by ↑ HR and ↑ SV. In later stages, CO maintained by ↑ HR only (SV plateaus)." }
+    status: unverified
+  - id: cvs.L03.019
+    kind: card
+    topic: cardiac-output-equations
+    front: Why does a very fast heart rate (eg, ventricular tachycardia) lower cardiac output?
+    back: Diastole is shortened → ↓ diastolic filling time → ↓ SV → ↓ CO.
+    src: { page: 289, quote: "Diastole is shortened with ↑↑ HR (eg, ventricular tachycardia) → ↓ diastolic filling time → ↓ SV → ↓ CO." }
+    status: unverified
+  - id: cvs.L03.020
+    kind: card
+    topic: cardiac-output-equations
+    front: Pulse pressure is directly proportional to what, and inversely proportional to what?
+    back: Directly proportional to stroke volume; inversely proportional to arterial compliance. (PP = SBP − DBP.)
+    src: { page: 289, quote: "PP directly proportional to SV and inversely proportional to arterial compliance." }
+    status: unverified
+  - id: cvs.L03.021
+    kind: table
+    topic: cardiac-output-equations
+    title: Causes of a wide and a narrow pulse pressure
+    columns: [Pulse pressure, Causes]
+    rows:
+      - ["↑ PP", "Aortic regurgitation, aortic stiffening (isolated systolic hypertension in older adults), obstructive sleep apnea (↑ sympathetic tone), high-output state (eg, anemia, hyperthyroidism), exercise (transient)"]
+      - ["↓ PP", "Aortic stenosis, cardiogenic shock, cardiac tamponade, advanced HF"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 289, quote: "↑ PP in aortic regurgitation, aortic stiffening (isolated systolic hypertension in older adults), obstructive sleep apnea (↑ sympathetic tone), high-output state (eg, anemia, hyperthyroidism), exercise (transient). ↓ PP in aortic stenosis, cardiogenic shock, cardiac tamponade, advanced HF." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.022
+    kind: cloze
+    topic: cardiac-output-equations
+    text: "MAP = {{c1::CO × TPR}}; at resting HR, MAP = {{c2::2/3 DBP + 1/3 SBP}} = {{c3::DBP + 1/3 PP}}."
+    src: { page: 289, quote: "MAP = CO × total peripheral resistance (TPR) MAP (at resting HR) = 2/3 DBP + 1/3 SBP = DBP + 1/3 PP." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.023
+    kind: card
+    topic: cardiac-output-equations
+    front: "A patient consumes 250 mL O2/min; arterial O2 content is 20 mL/100 mL and mixed venous O2 content is 15 mL/100 mL. What is the cardiac output (Fick principle)?"
+    back: "CO = 250 mL/min ÷ (5 mL O2 per 100 mL blood) = 250 ÷ 0.05 = 5000 mL/min = 5 L/min."
+    src: { page: 289, quote: "Fick principle: CO = rate of O2 consumption (arterial O2 content – venous O2 content)" }
+    status: unverified
+  - id: cvs.L03.024
+    kind: mcq
+    topic: cardiac-output-equations
+    stem: >-
+      A 34-year-old woman comes to the clinic because of palpitations, heat intolerance and a 6-kg weight
+      loss over 3 months. Her pulse is 112/min and blood pressure is 150/50 mm Hg. She has a fine tremor
+      and a diffusely enlarged, nontender thyroid gland. Which of the following best explains her blood
+      pressure pattern?
+    options:
+      - Decreased arterial compliance from atherosclerosis
+      - A high-output state increasing stroke volume
+      - Reduced stroke volume from impaired filling
+      - Increased total peripheral resistance
+      - Restricted ventricular filling from pericardial fluid
+    answer: 1
+    why:
+      - "Aortic stiffening widens pulse pressure in older adults, not in a 34-year-old with thyrotoxicosis."
+      - "Right. Hyperthyroidism is a high-output state; pulse pressure is directly proportional to SV, so PP widens (150 − 50 = 100 mm Hg)."
+      - "A lower SV narrows pulse pressure."
+      - "High TPR would raise diastolic pressure; hers is low."
+      - "Tamponade narrows pulse pressure."
+    src: { page: 289, quote: "high-output state (eg, anemia, hyperthyroidism), exercise (transient)" }
+    status: unverified
+  # ---------- p289: Starling curves ----------
+  - id: cvs.L03.025
+    kind: card
+    topic: starling-curves
+    front: "Frank-Starling: force of contraction is proportional to what?"
+    back: The end-diastolic length of the cardiac muscle fiber (preload).
+    src: { page: 289, quote: "Force of contraction is proportional to end- diastolic length of cardiac muscle fiber (preload)." }
+    status: unverified
+  - id: cvs.L03.026
+    kind: table
+    topic: starling-curves
+    title: What shifts the Starling curve
+    columns: [Contractility, Causes]
+    rows:
+      - ["↑ (curve up)", "Catecholamines, positive inotropes (eg, dobutamine, milrinone, digoxin)"]
+      - ["↓ (curve down)", "Loss of functional myocardium (eg, MI), β-blockers (acutely), nondihydropyridine Ca2+ channel blockers, HF"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 289, quote: "↓ contractility with loss of functional myocardium (eg, MI), β-blockers (acutely), nondihydropyridine Ca2+ channel blockers, HF." }
+    status: unverified
+  - id: cvs.L03.027
+    kind: mcq
+    topic: starling-curves
+    stem: >-
+      A 67-year-old man in the coronary care unit has cardiogenic shock 2 days after an extensive
+      anterior myocardial infarction. A drug is infused that inhibits phosphodiesterase-3 in cardiac
+      myocytes. On a plot of stroke volume against end-diastolic volume, which change does this drug
+      produce?
+    options:
+      - Movement to the right along the same curve
+      - Movement to the left along the same curve
+      - Shift of the curve upward
+      - Shift of the curve downward
+      - No change in the curve
+    answer: 2
+    why:
+      - "Moving along the same curve is a change in preload, not contractility."
+      - "Moving left along the curve is a fall in preload (eg, nitrates, diuretics)."
+      - "Right. Milrinone is a positive inotrope; ↑ contractility shifts the Starling curve up (more SV at the same EDV)."
+      - "A downward shift is ↓ contractility: the MI itself, β-blockers, nondihydropyridine CCBs."
+      - "An inotrope changes contractility, so the curve moves."
+    src: { page: 289, quote: "↑ contractility with catecholamines, positive inotropes (eg, dobutamine, milrinone, digoxin)." }
+    status: unverified
+  # ---------- p290: resistance, pressure, flow ----------
+  - id: cvs.L03.028
+    kind: cloze
+    topic: resistance-pressure-flow
+    text: "Resistance = driving pressure / flow = {{c1::8η × length / πr4}}, so resistance is proportional to {{c2::1/r4}}."
+    src: { page: 290, quote: "Resistance (R) = driving pressure (ΔP) = 8η (viscosity) × length πr4" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.029
+    kind: card
+    topic: resistance-pressure-flow
+    front: How do resistances add in series and in parallel?
+    back: "Series: RT = R1 + R2 + R3 … Parallel: 1/RT = 1/R1 + 1/R2 + 1/R3 …"
+    src: { page: 290, quote: "Total resistance of vessels in series: RT = R1 + R2 + R3" }
+    status: unverified
+  - id: cvs.L03.030
+    kind: card
+    topic: resistance-pressure-flow
+    front: Which vessels have the highest total cross-sectional area and the lowest flow velocity?
+    back: Capillaries.
+    src: { page: 290, quote: "Capillaries have highest total cross-sectional area and lowest flow velocity." }
+    status: unverified
+  - id: cvs.L03.031
+    kind: card
+    topic: resistance-pressure-flow
+    front: Which vessels account for most of TPR, and which provide most of the blood storage capacity?
+    back: "Arterioles: most of TPR. Veins: most of the storage capacity."
+    src: { page: 290, quote: "Arterioles account for most of TPR. Veins provide most of blood storage capacity." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.032
+    kind: card
+    topic: resistance-pressure-flow
+    front: What does blood viscosity mostly depend on, and when does it rise or fall?
+    back: "Mostly on hematocrit. ↑ in hyperproteinemic states (eg, multiple myeloma) and polycythemia; ↓ in anemia."
+    src: { page: 290, quote: "Viscosity depends mostly on hematocrit. Viscosity ↑ in hyperproteinemic states (eg, multiple myeloma), polycythemia. Viscosity ↓ in anemia." }
+    status: unverified
+  - id: cvs.L03.033
+    kind: mcq
+    topic: resistance-pressure-flow
+    stem: >-
+      A 55-year-old man has claudication of the right calf. Angiography shows that the radius of the
+      right superficial femoral artery is reduced to half of normal over a short segment. If pressure,
+      viscosity and length stay the same, how does the resistance of that segment change?
+    options:
+      - It doubles
+      - It increases 4-fold
+      - It increases 8-fold
+      - It increases 16-fold
+      - It halves
+    answer: 3
+    why:
+      - "That would be true if resistance varied with 1/r."
+      - "That would be true if resistance varied with 1/r²."
+      - "No standard relation gives 8-fold."
+      - "Right. R = 8ηl/πr4, so R ∝ 1/r4: halving r raises R by 2^4 = 16."
+      - "A narrower vessel has more resistance, not less."
+    src: { page: 290, quote: "∝ r4 R ∝ 1/r4" }
+    status: unverified
+  # ---------- p290: cardiac and vascular function curves ----------
+  - id: cvs.L03.034
+    kind: card
+    topic: cardiac-vascular-function-curves
+    front: What does the intersection of the cardiac function curve and the vascular function curve represent?
+    back: The operating point of the heart, where venous return and CO are equal (the circulation is a closed system).
+    src: { page: 290, quote: "Intersection of curves = operating point of heart (ie, venous return and CO are equal, as circulatory system is a closed system)." }
+    status: unverified
+  - id: cvs.L03.035
+    kind: table
+    topic: cardiac-vascular-function-curves
+    title: Cardiac and vascular function curves
+    columns: [Change, Effect, Increased by, Decreased by]
+    rows:
+      - [Inotropy, "Contractility → SV → CO/venous return and RAP", "Catecholamines, dobutamine, digoxin, exercise", "HF with reduced EF, narcotic overdose, sympathetic inhibition"]
+      - [Venous return, "Circulating volume → RAP → SV → CO", "Fluid infusion, sympathetic activity, arteriovenous shunt", "Acute hemorrhage, spinal anesthesia"]
+      - [Total peripheral resistance, "TPR → CO; change in RAP unpredictable", Vasopressors, "Exercise, arteriovenous shunt"]
+    blanks: [[0, 2], [0, 3], [1, 2], [1, 3], [2, 2], [2, 3]]
+    src: { page: 290, quote: "Fluid infusion, sympathetic activity, arteriovenous shunt ⊕ Acute hemorrhage, spinal anesthesia ⊝" }
+    status: unverified
+  - id: cvs.L03.036
+    kind: card
+    topic: cardiac-vascular-function-curves
+    front: Give one reinforcing and one compensatory example of curve changes occurring in tandem.
+    back: "Reinforcing: exercise ↑ inotropy and ↓ TPR to maximize CO. Compensatory: HF ↓ inotropy → fluid retention to ↑ preload to maintain CO."
+    src: { page: 290, quote: "Changes often occur in tandem, and may be reinforcing (eg, exercise ↑ inotropy and ↓ TPR to maximize CO) or compensatory (eg, HF ↓ inotropy → fluid retention to ↑ preload to maintain CO)." }
+    status: unverified
+  - id: cvs.L03.037
+    kind: mcq
+    topic: cardiac-vascular-function-curves
+    stem: >-
+      A 30-year-old woman receives spinal anesthesia for a cesarean delivery. Ten minutes later her blood
+      pressure falls from 120/75 to 85/50 mm Hg. Which of the following best describes the primary change
+      in her circulatory function curves?
+    options:
+      - The cardiac function curve shifts down (↓ inotropy)
+      - The vascular function curve shifts left (↓ venous return and mean systemic pressure)
+      - The vascular function curve rotates clockwise (↑ TPR)
+      - The cardiac function curve shifts up (↑ inotropy)
+      - The vascular function curve shifts right (↑ circulating volume)
+    answer: 1
+    why:
+      - "Spinal anesthesia doesn't primarily depress contractility."
+      - "Right. Spinal anesthesia (like acute hemorrhage) ↓ venous return: the vascular function curve shifts left, lowering RAP, SV and CO."
+      - "Spinal anesthesia causes sympathetic block and vasodilation, not ↑ TPR."
+      - "↑ inotropy follows catecholamines or exercise."
+      - "A right shift follows fluid infusion or sympathetic activity."
+    src: { page: 290, quote: "Acute hemorrhage, spinal anesthesia ⊝" }
+    status: unverified
+  # ---------- p291: pressure-volume loops and cardiac cycle ----------
+  - id: cvs.L03.038
+    kind: table
+    topic: pressure-volume-loops-cardiac-cycle
+    title: Phases of the left ventricle
+    columns: [Phase, Period]
+    rows:
+      - [Isovolumetric contraction, Between mitral valve closing and aortic valve opening; highest O2 consumption]
+      - [Systolic ejection, Between aortic valve opening and closing]
+      - [Isovolumetric relaxation, Between aortic valve closing and mitral valve opening]
+      - [Rapid filling, Just after mitral valve opening]
+      - [Reduced filling, Just before mitral valve closing]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 291, quote: "Isovolumetric contraction—period between mitral valve closing and aortic valve opening; period of highest O2 consumption" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.039
+    kind: card
+    topic: pressure-volume-loops-cardiac-cycle
+    front: Which phase of the cardiac cycle has the highest O2 consumption?
+    back: Isovolumetric contraction (between mitral valve closing and aortic valve opening).
+    src: { page: 291, quote: "Isovolumetric contraction—period between mitral valve closing and aortic valve opening; period of highest O2 consumption" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.040
+    kind: card
+    topic: pressure-volume-loops-cardiac-cycle
+    front: What causes S1 and S2, and where is each loudest?
+    back: "S1: mitral and tricuspid valve closure, loudest at the mitral area. S2: aortic and pulmonary valve closure, loudest at the left upper sternal border."
+    src: { page: 291, quote: "S1—mitral and tricuspid valve closure. Loudest at mitral area. S2—aortic and pulmonary valve closure. Loudest at left upper sternal border." }
+    status: unverified
+  - id: cvs.L03.041
+    kind: table
+    topic: pressure-volume-loops-cardiac-cycle
+    title: S3 vs S4
+    columns: [Feature, S3, S4]
+    rows:
+      - [Timing, Early diastole (rapid ventricular filling), "Late diastole (\"atrial kick\")"]
+      - [Cause, Blood from LA mixing with ↑ ESV, Blood entering a stiffened LV; high atrial pressure]
+      - [Associations, "↑ filling pressures (MR, AR, HF, thyrotoxicosis); dilated ventricles", "Ventricular noncompliance (eg, hypertrophy)"]
+      - [Can be normal in, "Children, young adults, athletes, pregnancy", "Common in older adults; abnormal if palpable"]
+    blanks: [[0, 1], [0, 2], [2, 1], [2, 2]]
+    src: { page: 291, quote: "S4—in late diastole (“atrial kick”). Turbulence caused by blood entering stiffened LV." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.042
+    kind: card
+    topic: pressure-volume-loops-cardiac-cycle
+    front: Where and how are S3 and S4 best heard?
+    back: At the apex with the patient in the left lateral decubitus position.
+    src: { page: 291, quote: "Best heard at apex with patient in left lateral decubitus position." }
+    status: unverified
+  - id: cvs.L03.043
+    kind: table
+    topic: pressure-volume-loops-cardiac-cycle
+    title: Jugular venous pulse
+    columns: [Wave, Cause, Notes]
+    rows:
+      - [a wave, Atrial contraction, "Prominent in AV dissociation (cannon a wave) and ↑ RV end-diastolic pressure; absent in atrial fibrillation"]
+      - [c wave, RV contraction (closed tricuspid valve bulging into atrium), ""]
+      - [x descent, Atrial relaxation and downward displacement of closed tricuspid valve during rapid ejection, Reduced or absent in tricuspid regurgitation and right HF]
+      - [v wave, ↑ RA pressure from ↑ volume against closed tricuspid valve, ""]
+      - [y descent, RA emptying into RV, "Prominent in constrictive pericarditis, absent in cardiac tamponade"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [0, 2], [4, 2]]
+    src: { page: 291, quote: "a wave—atrial contraction. Prominent in AV dissociation (cannon a wave) and ↑ RV end- diastolic pressure from any cause. Absent in atrial fibrillation." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.044
+    kind: mcq
+    topic: pressure-volume-loops-cardiac-cycle
+    stem: >-
+      A 70-year-old woman with long-standing hypertension comes for a routine visit. On auscultation with
+      the bell at the apex while she lies in the left lateral decubitus position, a low-pitched sound is
+      heard just before S1. Echocardiography shows concentric left ventricular hypertrophy with a normal
+      ejection fraction. Which of the following best explains this sound?
+    options:
+      - Rapid filling of a dilated ventricle in early diastole
+      - Atrial contraction pushing blood into a stiff ventricle in late diastole
+      - Closure of the mitral and tricuspid valves
+      - Sudden tensing of the chordae tendineae
+      - Abrupt halt of fused mitral leaflets after opening
+    answer: 1
+    why:
+      - "That is S3, in early diastole, with dilated ventricles and ↑ filling pressures."
+      - "Right. S4 is in late diastole (atrial kick): blood entering a stiffened LV, associated with ventricular noncompliance such as hypertrophy."
+      - "That is S1 itself."
+      - "Chordae tensing is the midsystolic click of mitral valve prolapse."
+      - "That is the opening snap of mitral stenosis, after S2."
+    src: { page: 291, quote: "Associated with ventricular noncompliance (eg, hypertrophy). Considered abnormal if palpable. Common in older adults." }
+    status: unverified
+  - id: cvs.L03.045
+    kind: mcq
+    topic: pressure-volume-loops-cardiac-cycle
+    stem: >-
+      A 74-year-old man is evaluated for dizziness. His pulse is 40/min and regular. Examination of the
+      neck veins shows intermittent very large a waves. ECG shows P waves and QRS complexes occurring
+      independently of each other. What causes these large waves?
+    options:
+      - Right ventricular contraction against a closed tricuspid valve
+      - Atrial contraction against a closed tricuspid valve
+      - Tricuspid regurgitation during systole
+      - Rapid emptying of the right atrium into the ventricle
+      - Atrial fibrillation
+    answer: 1
+    why:
+      - "RV contraction bulging the closed tricuspid valve gives the c wave."
+      - "Right. In AV dissociation (third-degree block) the atrium sometimes contracts while the tricuspid valve is closed: cannon a waves."
+      - "Tricuspid regurgitation gives large cv waves and loss of the x descent."
+      - "RA emptying is the y descent."
+      - "Atrial fibrillation abolishes a waves."
+    src: { page: 291, quote: "Prominent in AV dissociation (cannon a wave)" }
+    status: unverified
+  # ---------- p292: JVP tracings ----------
+  - id: cvs.L03.046
+    kind: table
+    topic: jugular-venous-pressure-tracings
+    title: Abnormal JVP tracings
+    columns: [Condition, JVP change]
+    rows:
+      - [Atrial fibrillation, Absent a waves]
+      - [Tricuspid regurgitation, Absent x descent]
+      - [Constrictive pericarditis, Prominent y wave]
+      - [Cardiac tamponade, Absent y wave]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 292, quote: "Atrial ﬁbrilation (absent a waves) Tricuspid regurgitation (absent x descent)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.047
+    kind: mcq
+    topic: jugular-venous-pressure-tracings
+    stem: >-
+      A 45-year-old man is brought to the emergency department 2 hours after a stab wound to the chest.
+      His blood pressure is 82/60 mm Hg and his pulse is 124/min. His neck veins are distended and heart
+      sounds are muffled. Which jugular venous pressure finding is expected?
+    options:
+      - Cannon a waves
+      - Absent a waves
+      - Prominent y descent
+      - Absent y descent
+      - Absent x descent with large v waves
+    answer: 3
+    why:
+      - "Cannon a waves come with AV dissociation."
+      - "Absent a waves come with atrial fibrillation."
+      - "A prominent y descent is constrictive pericarditis."
+      - "Right. In cardiac tamponade the fluid stops the RA emptying into the RV in diastole, so the y descent is absent."
+      - "That pattern is tricuspid regurgitation."
+    src: { page: 291, quote: "y descent—RA emptying into RV. Prominent in constrictive pericarditis, absent in cardiac tamponade." }
+    status: unverified
+  # ---------- p292: PV loops and valvular disease ----------
+  - id: cvs.L03.048
+    kind: table
+    topic: pressure-volume-loops-valvular-disease
+    title: Pressure-volume loops in valvular disease
+    columns: [Lesion, EDV, ESV, SV, Other]
+    rows:
+      - [Aortic stenosis, "No change (if mild)", ↑, ↓, "↑ LV pressure; hypertrophy → ↑ EDP for a given EDV"]
+      - [Aortic regurgitation, ↑, "", ↑, "No true isovolumetric phase; large pulse pressure; loss of dicrotic notch"]
+      - [Mitral stenosis, ↓, ↓, ↓, "↑ LA pressure; impaired ventricular filling"]
+      - [Mitral regurgitation, ↑, ↓, ↑, "No true isovolumetric phase; tall v wave"]
+    blanks: [[0, 2], [0, 3], [1, 1], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]
+    src: { page: 292, quote: "↑ LV pressure ↑ ESV No change in EDV (if mild) ↓ SV Ventricular hypertrophy → ↓ ventricular compliance → ↑ EDP for given EDV" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.049
+    kind: card
+    topic: pressure-volume-loops-valvular-disease
+    front: Why does mitral regurgitation lower ESV and raise EDV?
+    back: "↓ ESV: ↓ resistance and ↑ regurgitation into the LA during systole. ↑ EDV: ↑ LA volume/pressure from the regurgitation → ↑ ventricular filling. SV ↑ (forward flow plus backflow into the LA)."
+    src: { page: 292, quote: "↓ ESV due to ↓ resistance and ↑ regurgitation into LA during systole ↑ EDV due to ↑ LA volume/pressure from regurgitation → ↑ ventricular filling" }
+    status: unverified
+  - id: cvs.L03.050
+    kind: mcq
+    topic: pressure-volume-loops-valvular-disease
+    stem: >-
+      A 29-year-old man with Marfan syndrome has a pressure-volume loop recorded during cardiac
+      catheterization. Compared with normal, the loop is shifted far to the right, is wider, and has no
+      true isovolumetric phases. The arterial tracing shows no dicrotic notch. Which lesion is most likely?
+    options:
+      - Aortic stenosis
+      - Aortic regurgitation
+      - Mitral stenosis
+      - Hypertrophic cardiomyopathy
+      - Restrictive cardiomyopathy
+    answer: 1
+    why:
+      - "Aortic stenosis raises LV pressure and ESV; EDV is unchanged if mild and the isovolumetric phases remain."
+      - "Right. Aortic regurgitation: ↑ EDV, ↑ SV, no true isovolumetric phase, loss of the dicrotic notch; aortic root dilation in Marfan is a cause."
+      - "Mitral stenosis gives ↓ EDV and ↓ SV: a small loop shifted left."
+      - "HCM doesn't remove the isovolumetric phases or the dicrotic notch."
+      - "Restrictive disease lowers EDV."
+    src: { page: 292, quote: "No true isovolumetric phase ↑ EDV ↑ SV Loss of dicrotic notch" }
+    status: unverified
+  # ---------- p293: splitting of S2 ----------
+  - id: cvs.L03.051
+    kind: order
+    topic: splitting-of-s2
+    prompt: Put the steps of physiologic S2 splitting on inspiration in order.
+    steps:
+      - Drop in intrathoracic pressure
+      - ↑ venous return
+      - ↑ RV filling
+      - ↑ RV stroke volume
+      - ↑ RV ejection time
+      - Delayed closure of the pulmonic valve
+    src: { page: 293, quote: "Inspiration → drop in intrathoracic pressure → ↑ venous return → ↑ RV filling → ↑ RV stroke volume → ↑ RV ejection time → delayed closure of pulmonic valve." }
+    status: unverified
+  - id: cvs.L03.052
+    kind: table
+    topic: splitting-of-s2
+    title: Splitting of S2
+    columns: [Type, Seen in, Mechanism]
+    rows:
+      - [Wide, "Pulmonic stenosis, right bundle branch block", Delayed RV emptying; exaggeration of normal splitting]
+      - [Fixed, ASD, "Left-to-right shunt → ↑ RA and RV volumes → ↑ flow through pulmonic valve, independent of respiration"]
+      - [Paradoxical, "Aortic stenosis, left bundle branch block", "Delayed aortic closure: P2 before A2; split heard on expiration, gone on inspiration"]
+    blanks: [[0, 1], [1, 1], [2, 1], [2, 2]]
+    src: { page: 293, quote: "Fixed splitting Heard in ASD. ASD → left-to-right shunt → ↑ RA and RV volumes → ↑ flow through pulmonic valve → delayed pulmonic valve closure (independent of respiration)." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.053
+    kind: card
+    topic: splitting-of-s2
+    front: In paradoxical splitting of S2, what happens on inspiration and on expiration?
+    back: P2 occurs before A2. On inspiration P2 closes later and moves closer to A2, eliminating the split; on expiration the split can be heard (opposite to physiologic splitting).
+    src: { page: 293, quote: "On inspiration, P2 closes later and moves closer to A2, “paradoxically” eliminating the split. On expiration, the split can be heard (opposite to physiologic splitting)." }
+    status: unverified
+  - id: cvs.L03.054
+    kind: mcq
+    topic: splitting-of-s2
+    stem: >-
+      A 26-year-old woman is evaluated for exertional dyspnea. Auscultation shows a soft systolic ejection
+      murmur at the left upper sternal border and a split S2 that does not change with respiration. Which
+      of the following best explains the split?
+    options:
+      - Delayed closure of the aortic valve from left bundle branch block
+      - Increased flow through the pulmonic valve from a left-to-right atrial shunt
+      - Increased RV stroke volume during inspiration only
+      - Obstruction of the left ventricular outflow tract
+      - Early closure of the pulmonic valve from pulmonary hypertension
+    answer: 1
+    why:
+      - "Delayed aortic closure gives paradoxical splitting, heard on expiration."
+      - "Right. ASD → left-to-right shunt → ↑ RA and RV volumes → ↑ flow through the pulmonic valve → delayed closure independent of respiration: fixed splitting. The ejection murmur is the pulmonic flow murmur."
+      - "That is physiologic splitting, which varies with respiration."
+      - "LV outflow obstruction (aortic stenosis) gives paradoxical splitting."
+      - "Early P2 closure would narrow, not fix, the split."
+    src: { page: 293, quote: "Fixed splitting Heard in ASD. ASD → left-to-right shunt → ↑ RA and RV volumes → ↑ flow through pulmonic valve → delayed pulmonic valve closure (independent of respiration)." }
+    status: unverified
+  # ---------- p294: auscultation of the heart ----------
+  - id: cvs.L03.055
+    kind: table
+    topic: auscultation-of-the-heart
+    title: Where to listen (APT M)
+    columns: [Area, Systolic, Diastolic]
+    rows:
+      - [Aortic, "Aortic stenosis, flow murmur (eg, physiologic murmur), aortic valve sclerosis", ""]
+      - [Pulmonic, "Pulmonic stenosis, atrial septal defect, flow murmur", ""]
+      - [Tricuspid, "Tricuspid regurgitation, ventricular septal defect (holosystolic)", Tricuspid stenosis]
+      - [Mitral (apex), "Mitral regurgitation, mitral valve prolapse", Mitral stenosis]
+      - [Left sternal border, Hypertrophic cardiomyopathy, "Aortic regurgitation, pulmonic regurgitation"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [3, 2], [4, 1], [4, 2]]
+    src: { page: 294, quote: "Systolic murmur Hypertrophic cardiomyopathy Diastolic murmur Aortic regurgitation Pulmonic regurgitation Left sternal border" }
+    status: unverified
+  - id: cvs.L03.056
+    kind: table
+    topic: auscultation-of-the-heart
+    title: Bedside maneuvers and murmurs
+    columns: [Maneuver, Cardiovascular change, Increases, Decreases]
+    rows:
+      - ["Standing, Valsalva (strain)", ↓ preload (↓ LV volume), "MVP (earlier click), HCM", Most murmurs]
+      - [Passive leg raise, ↑ preload (↑ LV volume), Most murmurs, "MVP (later click), HCM"]
+      - [Squatting, "↑ preload, ↑ afterload (↑ LV volume)", Most murmurs, "MVP (later click), HCM"]
+      - [Hand grip, ↑↑ afterload (↑ LV volume), "Most other left-sided murmurs (AR, MR, VSD)", "AS, HCM"]
+      - [Inspiration, "↑ venous return to right heart, ↓ to left heart", Most right-sided murmurs, Most left-sided murmurs (increase with expiration)]
+    blanks: [[0, 2], [0, 3], [1, 3], [3, 2], [3, 3], [4, 2]]
+    src: { page: 294, quote: "Hand grip ↑↑ afterload → ↑ reverse flow across aortic valve (↑ LV volume) Most other left-sided murmurs (AR, MR, VSD) AS (↓ transaortic valve pressure gradient) HCM (↑ LV volume)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.057
+    kind: card
+    topic: auscultation-of-the-heart
+    front: Which two murmurs get louder with standing or Valsalva, and why?
+    back: Mitral valve prolapse (with an earlier midsystolic click) and HCM, because ↓ preload ↓ LV volume. Most other murmurs get softer (↓ flow through the valve).
+    src: { page: 294, quote: "↓ preload (↓ LV volume) MVP (↓ LV volume) with earlier midsystolic click HCM (↓ LV volume) Most murmurs (↓ flow through stenotic or regurgitant valve)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.058
+    kind: mcq
+    topic: auscultation-of-the-heart
+    stem: >-
+      A 17-year-old basketball player collapses briefly during practice. His uncle died suddenly at age
+      30. Examination shows a harsh systolic murmur at the left sternal border that becomes louder when he
+      stands up from a squat and softer when he squeezes a hand grip. Which maneuver change best explains
+      the louder murmur on standing?
+    options:
+      - Increased afterload
+      - Decreased preload and LV volume
+      - Increased venous return to the right heart
+      - Increased LV volume
+      - Increased flow through a stenotic aortic valve
+    answer: 1
+    why:
+      - "↑ afterload (hand grip, squatting) ↑ LV volume and softens the HCM murmur."
+      - "Right. Standing ↓ preload → ↓ LV volume, which worsens the outflow obstruction in HCM and makes the murmur louder."
+      - "Inspiration ↑ venous return to the right heart and makes right-sided murmurs louder."
+      - "↑ LV volume softens the HCM murmur."
+      - "Standing ↓ flow, so an aortic stenosis murmur would soften."
+    src: { page: 294, quote: "Standing, Valsalva (strain phase) ↓ preload (↓ LV volume) MVP (↓ LV volume) with earlier midsystolic click HCM (↓ LV volume)" }
+    status: unverified
+  # ---------- p295: heart murmurs ----------
+  - id: cvs.L03.059
+    kind: card
+    topic: heart-murmurs
+    front: Describe the murmur and pulse of aortic stenosis.
+    back: Crescendo-decrescendo ejection murmur, loudest at the heart base, radiating to the carotids; soft S2 +/– ejection click; "pulsus parvus et tardus" (weak pulses with delayed peak).
+    src: { page: 295, quote: "Crescendo-decrescendo ejection murmur, loudest at heart base, radiates to carotids Soft S2 +/– ejection click “Pulsus parvus et tardus”— weak pulses with delayed peak" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.060
+    kind: enumerate
+    topic: heart-murmurs
+    prompt: Enumerate the 3 symptoms aortic stenosis can lead to (SAD).
+    points:
+      - Syncope
+      - Angina
+      - Dyspnea on exertion
+    pass: 3
+    hook: "الكتاب بيقولها SAD: الـ aortic stenosis بيخلّي المريض حزين."
+    src: { page: 295, quote: "Can lead to Syncope, Angina, Dyspnea on exertion (SAD)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.061
+    kind: card
+    topic: heart-murmurs
+    front: What are the two calcific causes of aortic stenosis and their typical ages?
+    back: Age-related calcification (>60 years old) and early-onset calcification of a bicuspid aortic valve (~50-60 years old).
+    src: { page: 295, quote: "Age-related calcification (>60 years old) Early-onset calcification of bicuspid aortic valve (~50-60 years old)" }
+    status: unverified
+  - id: cvs.L03.062
+    kind: card
+    topic: heart-murmurs
+    front: Describe the murmur of mitral and tricuspid regurgitation and their common causes.
+    back: "Holosystolic, high-pitched \"blowing\" murmur. MR: loudest at apex, radiates to axilla; often ischemic heart disease (post-MI), MVP, LV dilatation, rheumatic fever. TR: loudest at tricuspid area; often RV dilatation, may follow permanent pacemaker placement. Either: infective endocarditis."
+    src: { page: 295, quote: "MR: often due to ischemic heart disease (post-MI), MVP, LV dilatation, rheumatic fever (RF) TR: often due to RV dilatation; may be 2° to permanent pacemaker placement" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.063
+    kind: card
+    topic: heart-murmurs
+    front: Describe the murmur of mitral valve prolapse and what causes the click.
+    back: Late crescendo murmur with a midsystolic click (after the carotid pulse), best heard over the apex, loudest just before S2. The click is sudden tensing of the chordae tendineae as the leaflets prolapse into the LA.
+    src: { page: 295, quote: "MC due to sudden tensing of chordae tendineae as mitral leaflets prolapse into LA (chordae cause crescendo with click)" }
+    status: unverified
+  - id: cvs.L03.064
+    kind: card
+    topic: heart-murmurs
+    front: What can cause mitral valve prolapse, and what does it predispose to?
+    back: Rheumatic fever, chordae rupture, mitral annular disjunction, or myxomatous degeneration (1° or 2° to connective tissue disease). Usually benign, but can predispose to infective endocarditis.
+    src: { page: 295, quote: "Usually benign, but can predispose to infective endocarditis Can be caused by RF, chordae rupture, mitral annular disjunction, or myxomatous degeneration (1° or 2° to connective tissue disease)" }
+    status: unverified
+  - id: cvs.L03.065
+    kind: card
+    topic: heart-murmurs
+    front: Describe the murmur of a VSD, and how does its size affect loudness?
+    back: Holosystolic, harsh-sounding murmur, loudest at the tricuspid area. Larger VSDs have a lower-intensity murmur than smaller VSDs.
+    src: { page: 295, quote: "Holosystolic, harsh-sounding murmur Loudest at tricuspid area Congenital Larger VSDs have lower intensity murmur than smaller VSDs" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.066
+    kind: enumerate
+    topic: heart-murmurs
+    prompt: Enumerate the 4 causes of aortic regurgitation (BEAR).
+    points:
+      - Bicuspid aortic valve
+      - Endocarditis
+      - Aortic root dilation
+      - Rheumatic fever
+    pass: 4
+    hook: "الكتاب بيقولها BEAR: الدب بيرجّع الدم للـ LV."
+    src: { page: 295, quote: "Causes include BEAR: Bicuspid aortic valve, Endocarditis, Aortic root dilation, RF" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.067
+    kind: card
+    topic: heart-murmurs
+    front: Describe the murmur and signs of aortic regurgitation.
+    back: Early diastolic, decrescendo, high-pitched "blowing" murmur, best heard at the base (aortic root dilation) or left sternal border (valvular disease). Wide pulse pressure, pistol shot femoral pulse, pulsing nail bed; hyperdynamic pulse and head bobbing when severe and chronic. Can progress to left HF.
+    src: { page: 295, quote: "Wide pulse pressure, pistol shot femoral pulse, pulsing nail bed Hyperdynamic pulse and head bobbing when severe and chronic Can progress to left HF" }
+    status: unverified
+  - id: cvs.L03.068
+    kind: card
+    topic: heart-murmurs
+    front: Describe the murmur of mitral stenosis, and what predicts its severity?
+    back: An opening snap followed by a delayed rumbling mid-to-late diastolic murmur. A shorter interval between S2 and the opening snap correlates with greater severity.
+    src: { page: 295, quote: "Follows opening snap (OS) Delayed rumbling mid-to-late murmur (↓ interval between S2 and OS correlates with ↑ severity)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.069
+    kind: card
+    topic: heart-murmurs
+    front: What is the main cause of mitral stenosis, and what can chronic MS lead to?
+    back: Late and highly specific sequela of rheumatic fever. Chronic MS → LA dilation and pulmonary congestion, atrial fibrillation, Ortner syndrome, hemoptysis, right HF.
+    src: { page: 295, quote: "Late and highly specific sequelae of RF Chronic MS can result in LA dilation and pulmonary congestion, atrial fibrillation, Ortner syndrome, hemoptysis, right HF" }
+    status: unverified
+  - id: cvs.L03.070
+    kind: card
+    topic: heart-murmurs
+    front: Describe the murmur of a patent ductus arteriosus and its common causes.
+    back: Continuous machinelike murmur, best heard at the left infraclavicular area, loudest at S2. Often due to congenital rubella or prematurity. ("You need a patent for that machine.")
+    src: { page: 295, quote: "Continuous machinelike murmur, best heard at left infraclavicular area Loudest at S2 Often due to congenital rubella or prematurity" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.071
+    kind: mcq
+    topic: heart-murmurs
+    stem: >-
+      A 72-year-old man comes to the clinic because he fainted twice while climbing stairs. He has had
+      chest tightness on exertion for 6 months. Examination shows a crescendo-decrescendo systolic murmur
+      at the right upper sternal border radiating to both carotids, a soft S2, and weak carotid pulses with
+      a delayed upstroke. Which of the following is the most likely cause of his valve disease?
+    options:
+      - Rheumatic fever
+      - Age-related calcification
+      - Myxomatous degeneration
+      - Infective endocarditis
+      - Aortic root dilation
+    answer: 1
+    why:
+      - "Rheumatic disease classically gives mitral stenosis; it is not the typical cause of isolated AS at 72."
+      - "Right. Aortic stenosis (crescendo-decrescendo, radiates to carotids, pulsus parvus et tardus, SAD symptoms) in a patient >60 is from age-related calcification."
+      - "Myxomatous degeneration causes mitral valve prolapse."
+      - "Endocarditis destroys valves and causes regurgitation (MR, TR, AR)."
+      - "Aortic root dilation causes aortic regurgitation."
+    src: { page: 295, quote: "Age-related calcification (>60 years old)" }
+    status: unverified
+  - id: cvs.L03.072
+    kind: mcq
+    topic: heart-murmurs
+    stem: >-
+      A 3-week-old girl born at 29 weeks' gestation has bounding pulses and poor weight gain. Her mother
+      had a rash and fever early in pregnancy. Which murmur is most likely heard?
+    options:
+      - Holosystolic harsh murmur at the tricuspid area
+      - Continuous machinelike murmur at the left infraclavicular area
+      - Early diastolic decrescendo murmur at the left sternal border
+      - Late systolic crescendo murmur with a midsystolic click
+      - Systolic ejection murmur with fixed splitting of S2
+    answer: 1
+    why:
+      - "That is a VSD."
+      - "Right. A PDA gives a continuous machinelike murmur at the left infraclavicular area, loudest at S2; it is often due to prematurity or congenital rubella."
+      - "That is aortic regurgitation."
+      - "That is mitral valve prolapse."
+      - "That is an ASD."
+    src: { page: 295, quote: "Often due to congenital rubella or prematurity" }
+    status: unverified
+  # ---------- p296: myocardial action potential ----------
+  - id: cvs.L03.073
+    kind: table
+    topic: myocardial-action-potential
+    title: Myocardial (ventricular) action potential
+    columns: [Phase, Name, Ion events]
+    rows:
+      - ["0", Rapid upstroke and depolarization, Fast voltage-gated Na+ channels open]
+      - ["1", Initial repolarization, Na+ channels inactivate; transient outward K+ channels begin to open]
+      - ["2", "Plateau (\"platwo\")", Ca2+ influx through voltage-gated Ca2+ channels balances K+ efflux; triggers Ca2+ release from SR]
+      - ["3", Rapid repolarization, K+ efflux through slow delayed-rectifier K+ channels; Ca2+ channels close]
+      - ["4", Resting potential, High K+ permeability through K+ channels]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]]
+    src: { page: 296, quote: "Phase 2 = plateau (“platwo”)—Ca2+ influx through voltage-gated Ca2+ channels balances K+ efflux." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.074
+    kind: enumerate
+    topic: myocardial-action-potential
+    prompt: Enumerate the 3 ways cardiac muscle differs from skeletal muscle.
+    points:
+      - Action potential has a plateau (Ca2+ influx and opposing K+ efflux)
+      - Contraction requires Ca2+ influx from ECF to induce Ca2+ release from SR (Ca2+-induced Ca2+ release)
+      - Myocytes conduct excitation throughout the heart via gap junctions
+    pass: 3
+    hook: "القلب عنده 3 حاجات العضل العادي مالوش: plateau، ومحتاج Ca2+ من برا يشعلل الـ SR، وكله متوصل ببعض بـ gap junctions."
+    src: { page: 296, quote: "In contrast to skeletal muscle, cardiac muscle has the following characteristics: Action potential has a plateau due to Ca2+ influx and opposing K+ efflux." }
+    status: unverified
+  - id: cvs.L03.075
+    kind: mcq
+    topic: myocardial-action-potential
+    stem: >-
+      A researcher records action potentials from isolated ventricular myocytes. Adding a toxin abolishes
+      the plateau and markedly weakens contraction, although the rapid upstroke is preserved. Which
+      channel does the toxin most likely block?
+    options:
+      - Fast voltage-gated Na+ channels
+      - Voltage-gated (L-type) Ca2+ channels
+      - Slow delayed-rectifier K+ channels
+      - HCN channels
+      - Transient outward K+ channels
+    answer: 1
+    why:
+      - "Na+ channels make the phase 0 upstroke, which is preserved."
+      - "Right. Phase 2 is Ca2+ influx through voltage-gated Ca2+ channels balancing K+ efflux; that Ca2+ triggers SR release and contraction."
+      - "Blocking delayed-rectifier K+ channels would prolong repolarization, not abolish the plateau."
+      - "HCN channels give the funny current of pacemaker cells, not ventricular myocytes."
+      - "Transient outward K+ channels shape phase 1."
+    src: { page: 296, quote: "Ca2+ influx triggers Ca2+ release from SR and myocyte contraction (excitation- contraction coupling)." }
+    status: unverified
+  # ---------- p296: pacemaker action potential ----------
+  - id: cvs.L03.076
+    kind: card
+    topic: pacemaker-action-potential
+    front: What causes phase 4 of the pacemaker action potential?
+    back: 'Slow spontaneous diastolic depolarization from If, the "funny current": a slow mixed Na+/K+ inward current through HCN channels. It accounts for the automaticity of the SA and AV nodes.'
+    src: { page: 296, quote: "Phase 4 = slow spontaneous diastolic depolarization due to If (“funny current”). HCN channels are responsible for a slow, mixed Na+ /K+ inward current" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.077
+    kind: card
+    topic: pacemaker-action-potential
+    front: What determines heart rate in the SA node, and how do ACh/adenosine and catecholamines change it?
+    back: The slope of phase 4. ACh/adenosine ↓ the rate of diastolic depolarization and ↓ HR; catecholamines ↑ depolarization and ↑ HR (sympathetic stimulation ↑ the chance HCN channels are open).
+    src: { page: 296, quote: "The slope of phase 4 in the SA node determines HR. ACh/adenosine ↓ the rate of diastolic depolarization and ↓ HR, while catecholamines ↑ depolarization and ↑ HR." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.078
+    kind: card
+    topic: pacemaker-action-potential
+    front: Why is the upstroke (phase 0) of nodal cells carried by Ca2+, and what is the consequence?
+    back: Fast Na+ channels are permanently inactivated by the less negative resting potential, so voltage-gated Ca2+ channels make the upstroke. This gives slow conduction, which the AV node uses to prolong transmission from atria to ventricles.
+    src: { page: 296, quote: "Fast voltage-gated Na+ channels are permanently inactivated due to the less negative resting potential of these cells → slow conduction velocity, used by AV node to prolong transmission from atria to ventricles." }
+    status: unverified
+  - id: cvs.L03.079
+    kind: cloze
+    topic: pacemaker-action-potential
+    text: The pacemaker action potential occurs in the {{c1::SA and AV nodes}}; phases {{c2::1 and 2}} are absent.
+    src: { page: 296, quote: "Occurs in the SA and AV nodes. Phases 1 and 2 are absent." }
+    status: unverified
+  - id: cvs.L03.080
+    kind: mcq
+    topic: pacemaker-action-potential
+    stem: >-
+      A 26-year-old woman with paroxysmal supraventricular tachycardia at 190/min is given an intravenous
+      bolus of a drug that briefly slows her heart and terminates the rhythm. The drug acts on SA and AV
+      nodal cells in the same direction as acetylcholine. Which change in the nodal action potential
+      explains the slowing?
+    options:
+      - Faster phase 0 upstroke through Na+ channels
+      - Decreased slope of phase 4 diastolic depolarization
+      - Prolonged phase 2 plateau
+      - Increased opening of HCN channels
+      - More negative threshold potential
+    answer: 1
+    why:
+      - "Nodal phase 0 is carried by Ca2+; fast Na+ channels are inactivated in these cells."
+      - "Right. Adenosine (like ACh) ↓ the rate of diastolic depolarization (phase 4 slope), which sets HR."
+      - "Nodal cells have no phase 2."
+      - "↑ HCN opening is the sympathetic effect that ↑ HR."
+      - "A threshold closer to the resting potential would speed the rate, and this isn't the mechanism given."
+    src: { page: 296, quote: "ACh/adenosine ↓ the rate of diastolic depolarization and ↓ HR" }
+    status: unverified
+  # ---------- p297: electrocardiogram ----------
+  - id: cvs.L03.081
+    kind: order
+    topic: electrocardiogram
+    prompt: Put the normal cardiac conduction pathway in order.
+    steps:
+      - SA node
+      - Right atrium (internodal tracts) and left atrium (Bachmann bundle)
+      - AV node
+      - Bundle of His
+      - Right and left bundle branches (left anterior and posterior fascicles)
+      - Purkinje fibers
+      - Ventricles
+    src: { page: 297, quote: "Conduction pathway: SA node → right atrium (via internodal tracts) and left atrium (via interatrial bundle/Bachmann bundle) → AV node → bundle of His → right bundle branch and left bundle branch" }
+    status: unverified
+  - id: cvs.L03.082
+    kind: card
+    topic: electrocardiogram
+    front: Where are the SA node and AV node located, and what supplies the AV node?
+    back: "SA node: upper crista terminalis near the SVC. AV node: interatrial septum near the coronary sinus opening; blood supply via the posterior descending artery. Its 100-msec delay allows time for ventricular filling."
+    src: { page: 297, quote: "AV node—located in interatrial septum near coronary sinus opening. Blood supply via PDA. 100-msec delay allows time for ventricular filling." }
+    status: unverified
+  - id: cvs.L03.083
+    kind: cloze
+    topic: electrocardiogram
+    text: "Pacemaker rates: {{c1::SA > atria > AV > bundle of His/Purkinje/ventricles}}. Speed of conduction: {{c2::His-Purkinje > Atria > Ventricles > AV node}} (\"He Parks At Ventura AVenue\")."
+    src: { page: 297, quote: "Pacemaker rates: SA > atria > AV > bundle of His/Purkinje/ventricles. Speed of conduction: His-Purkinje > Atria > Ventricles > AV node. He Parks At Ventura AVenue." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.084
+    kind: table
+    topic: electrocardiogram
+    title: ECG waves and intervals
+    columns: [Component, Meaning, Normal or note]
+    rows:
+      - [P wave, Atrial depolarization, ""]
+      - [PR interval, Start of atrial to start of ventricular depolarization, 120-200 msec]
+      - [QRS complex, Ventricular depolarization, ≤100 msec]
+      - [QT interval, "Ventricular depolarization, contraction, repolarization", ""]
+      - [T wave, Ventricular repolarization, Inversion may indicate ischemia or recent MI]
+      - [J point, Junction between end of QRS and start of ST segment, ""]
+      - [ST segment, "Isoelectric, ventricles depolarized", ""]
+      - [U wave, "Prominent in hypokalemia (hyp\"U\"kalemia), bradycardia", ""]
+    blanks: [[1, 2], [2, 2], [4, 1], [7, 1]]
+    src: { page: 297, quote: "PR interval—time from start of atrial depolarization to start of ventricular depolarization (normally 120-200 msec). QRS complex—ventricular depolarization (normally ≤100 msec)." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.085
+    kind: mcq
+    topic: electrocardiogram
+    stem: >-
+      A 68-year-old woman taking hydrochlorothiazide for hypertension comes to the clinic because of
+      muscle weakness and cramps for 1 week. ECG shows flattened T waves followed by a prominent positive
+      deflection after each T wave. Which of the following laboratory abnormalities is most likely?
+    options:
+      - Hyperkalemia
+      - Hypokalemia
+      - Hypercalcemia
+      - Hyponatremia
+      - Hypermagnesemia
+    answer: 1
+    why:
+      - "Hyperkalemia gives peaked T waves, not U waves."
+      - "Right. A prominent U wave is seen in hypokalemia (hyp\"U\"kalemia); thiazides waste K+."
+      - "Hypercalcemia shortens the QT interval."
+      - "Hyponatremia has no characteristic U wave."
+      - "Hypermagnesemia doesn't produce prominent U waves."
+    src: { page: 297, quote: "U wave—prominent in hypokalemia (think hyp“U”kalemia), bradycardia." }
+    status: unverified
+  # ---------- p297: natriuretic peptides ----------
+  - id: cvs.L03.086
+    kind: card
+    topic: natriuretic-peptides
+    front: What releases ANP, what is its second messenger, and what does it do?
+    back: Atrial myocytes, in response to ↑ blood volume and atrial pressure. Acts via cGMP. Causes vasodilation and ↓ Na+ reabsorption at the collecting tubule; dilates afferent and constricts efferent renal arterioles, promoting diuresis and contributing to "aldosterone escape".
+    src: { page: 297, quote: "Released from atrial myocytes in response to ↑ blood volume and atrial pressure. Acts via cGMP." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.087
+    kind: card
+    topic: natriuretic-peptides
+    front: What releases BNP, how does it compare with ANP, and what is the BNP test used for?
+    back: Ventricular myocytes, in response to ↑ tension. Similar action to ANP with a longer half-life. The BNP test is used to diagnose HF (very good negative predictive value).
+    src: { page: 297, quote: "Released from ventricular myocytes in response to ↑ tension. Similar physiologic action to ANP, with longer half-life. BNP blood test used for diagnosing HF (very good negative predictive value)." }
+    status: unverified
+  - id: cvs.L03.088
+    kind: mcq
+    topic: natriuretic-peptides
+    stem: >-
+      A 52-year-old woman comes to the emergency department with shortness of breath for 3 days. Her chest
+      x-ray is unclear, and her serum B-type natriuretic peptide concentration is very low. Which of the
+      following is the best conclusion?
+    options:
+      - Heart failure is very unlikely as the cause of her dyspnea
+      - She most likely has heart failure with preserved ejection fraction
+      - Her atrial pressure is high
+      - She has hyperaldosteronism without aldosterone escape
+      - She most likely has acute myocardial infarction
+    answer: 0
+    why:
+      - "Right. BNP, released from ventricular myocytes under ↑ tension, has a very good negative predictive value for HF: a low level argues strongly against it."
+      - "HF of either type raises BNP."
+      - "High atrial pressure would raise ANP and usually BNP."
+      - "Natriuretic peptides contribute to aldosterone escape; a low BNP doesn't diagnose hyperaldosteronism."
+      - "BNP isn't the marker for MI."
+    src: { page: 297, quote: "BNP blood test used for diagnosing HF (very good negative predictive value)." }
+    status: unverified
+  # ---------- p298: baroreceptors and chemoreceptors ----------
+  - id: cvs.L03.089
+    kind: card
+    topic: baroreceptors-chemoreceptors
+    front: What stimulates the peripheral chemoreceptors (carotid and aortic bodies)?
+    back: ↑ Pco2, ↓ pH of blood, and ↓ Po2 (<60 mm Hg).
+    src: { page: 298, quote: "Peripheral—carotid and aortic bodies are stimulated by ↑ Pco2, ↓ pH of blood, and ↓ Po2 (<60 mm Hg)." }
+    status: unverified
+  - id: cvs.L03.090
+    kind: card
+    topic: baroreceptors-chemoreceptors
+    front: What stimulates the central chemoreceptors, and what happens to them with chronically raised Pco2?
+    back: Changes in pH and Pco2 of brain interstitial fluid (driven by arterial CO2, since H+ cannot cross the blood-brain barrier); they don't respond to Po2. With chronic ↑ Pco2 (eg, COPD) they become less sensitive → ↑ dependence on peripheral chemoreceptors sensing ↓ O2 to drive respiration.
+    src: { page: 298, quote: "Do not respond to Po2. Central chemoreceptors become less sensitive with chronically ↑ Pco2 (eg, COPD) → ↑ dependence on peripheral chemoreceptors to detect ↓ O2 to drive respiration." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.091
+    kind: card
+    topic: baroreceptors-chemoreceptors
+    front: Which nerves carry the aortic arch and carotid sinus baroreceptors, and where do they go?
+    back: "Aortic arch: CN X. Carotid sinus: CN IX. Both → nucleus tractus solitarius of the medulla."
+    src: { page: 298, quote: "Baroreceptors—via aortic arch (CN X) and carotid sinus (CN IX) → nucleus tractus solitarius of medulla; detect arterial pressure changes." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.092
+    kind: order
+    topic: baroreceptors-chemoreceptors
+    prompt: Put the baroreceptor response to hypotension (eg, hypovolemic shock) in order.
+    steps:
+      - ↓ arterial pressure
+      - ↓ stretch
+      - ↓ afferent baroreceptor firing
+      - ↑ efferent sympathetic and ↓ efferent parasympathetic outflow
+      - ↑ vasoconstriction, ↑ HR, ↑ contractility
+      - ↑ BP
+    src: { page: 298, quote: "↓ arterial pressure → ↓ stretch → ↓ afferent baroreceptor firing → ↑ efferent sympathetic and ↓ efferent parasympathetic outflow → ↑ vasoconstriction, ↑ HR, ↑ contractility → ↑ BP." }
+    status: unverified
+  - id: cvs.L03.093
+    kind: card
+    topic: baroreceptors-chemoreceptors
+    front: What triggers carotid sinus hypersensitivity, what does it cause, and what exaggerates it?
+    back: Carotid massage, shaving, a tight necktie or collar → ↑ carotid sinus pressure → ↑ afferent firing → ↑ AV node refractory period → ↓ HR → ↓ CO, plus peripheral vasodilation → presyncope/syncope. Exaggerated in atherosclerosis, prior neck surgery, older age.
+    src: { page: 298, quote: "Carotid sinus hypersensitivity—elicited by carotid massage, shaving, tight necktie or shirt collar." }
+    status: unverified
+  - id: cvs.L03.094
+    kind: enumerate
+    topic: baroreceptors-chemoreceptors
+    prompt: Enumerate the Cushing reflex triad.
+    points:
+      - Hypertension
+      - Bradycardia
+      - Respiratory depression
+    pass: 3
+    hook: "الضغط جوه الدماغ عالي ← الجسم يعلّي الضغط عشان يوصل دم، والـ baroreceptors تفرمل القلب، والتنفس يقف: ضغط عالي ونبض بطيء ونفس ضعيف."
+    src: { page: 298, quote: "Component of Cushing reflex (triad of hypertension, bradycardia, and respiratory depression)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.095
+    kind: mcq
+    topic: baroreceptors-chemoreceptors
+    stem: >-
+      A 70-year-old man with known carotid atherosclerosis comes to the clinic because he nearly fainted
+      twice this month, each time while shaving his neck. Which of the following mediates the afferent limb
+      of this reflex?
+    options:
+      - Vagus nerve fibers from the aortic arch
+      - Glossopharyngeal nerve fibers from the carotid sinus
+      - Phrenic nerve fibers from the pericardium
+      - Sympathetic fibers from the thoracic spinal cord
+      - Hypoglossal nerve fibers from the carotid body
+    answer: 1
+    why:
+      - "Aortic arch baroreceptors travel in CN X, but shaving presses on the carotid sinus."
+      - "Right. Carotid sinus hypersensitivity: ↑ carotid sinus pressure → ↑ afferent firing via CN IX to the nucleus tractus solitarius → ↑ AV node refractory period, ↓ HR, vasodilation → presyncope."
+      - "The phrenic nerve innervates the pericardium; it isn't a baroreceptor afferent."
+      - "Sympathetic fibers are efferent in this reflex."
+      - "The hypoglossal nerve is motor to the tongue."
+    src: { page: 298, quote: "Baroreceptors—via aortic arch (CN X) and carotid sinus (CN IX) → nucleus tractus solitarius of medulla" }
+    status: unverified
+  # ---------- p298: normal resting cardiac pressures ----------
+  - id: cvs.L03.096
+    kind: card
+    topic: normal-resting-cardiac-pressures
+    front: What does pulmonary capillary wedge pressure estimate, when is it misleading, and how is it measured?
+    back: Left atrial pressure and LV end-diastolic pressure (LVEDP), except in mitral stenosis, where PCWP > LVEDP. Measured via a Swan-Ganz catheter.
+    src: { page: 298, quote: "Pulmonary capillary wedge pressure (PCWP; mm Hg) estimates left atrial pressure and LV end-diastolic pressure (LVEDP), except in mitral stenosis, where PCWP > LVEDP. Measured via Swan-Ganz catheter." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.097
+    kind: mcq
+    topic: normal-resting-cardiac-pressures
+    stem: >-
+      A 41-year-old woman with a history of rheumatic fever undergoes right heart catheterization. Her
+      pulmonary capillary wedge pressure is 24 mm Hg, while a catheter in the left ventricle records an
+      end-diastolic pressure of 8 mm Hg. Which of the following best explains the difference?
+    options:
+      - Aortic regurgitation
+      - Mitral stenosis
+      - Left ventricular hypertrophy
+      - Systolic heart failure
+      - Constrictive pericarditis
+    answer: 1
+    why:
+      - "Aortic regurgitation raises LVEDP."
+      - "Right. PCWP estimates LA pressure and LVEDP, except in mitral stenosis, where the narrowed valve separates them: PCWP > LVEDP."
+      - "LV hypertrophy raises LVEDP, so PCWP and LVEDP rise together."
+      - "Systolic HF raises LVEDP along with PCWP."
+      - "Constriction raises filling pressures in all chambers equally."
+    src: { page: 298, quote: "except in mitral stenosis, where PCWP > LVEDP" }
+    status: unverified
+  # ---------- p299: autoregulation ----------
+  - id: cvs.L03.098
+    kind: table
+    topic: autoregulation
+    title: Factors determining autoregulation
+    columns: [Organ, Factors]
+    rows:
+      - [Lungs, Hypoxia causes vasoconstriction]
+      - [Heart, "Local metabolites (vasodilatory): NO, CO2, ↓ O2"]
+      - [Brain, "Local metabolites (vasodilatory): CO2 (pH)"]
+      - [Kidneys, Myogenic (stretch of afferent arteriole) and tubuloglomerular feedback]
+      - [Skeletal muscle, "Exercise: local metabolites (CHALK: CO2, H+, Adenosine, Lactate, K+); rest: sympathetic tone"]
+      - [Skin, Sympathetic vasoconstriction (temperature control)]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 299, quote: "Lungs Hypoxia causes vasoconstriction Heart Local metabolites (vasodilatory): NO, CO2, ↓ O2 Brain Local metabolites (vasodilatory): CO2 (pH)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.099
+    kind: card
+    topic: autoregulation
+    front: Why is the pulmonary vasculature unique in its response to hypoxia?
+    back: Alveolar hypoxia causes vasoconstriction, so only well-ventilated areas are perfused. In other organs hypoxia causes vasodilation.
+    src: { page: 299, quote: "The pulmonary vasculature is unique in that alveolar hypoxia causes vasoconstriction so that only well-ventilated areas are perfused. In other organs, hypoxia causes vasodilation" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.100
+    kind: mcq
+    topic: autoregulation
+    stem: >-
+      A 64-year-old man with severe COPD lives at home on room air. Right heart catheterization shows
+      pulmonary arterial hypertension. Which local mechanism most directly raised his pulmonary vascular
+      resistance?
+    options:
+      - Vasodilation from local CO2 and adenosine
+      - Vasoconstriction in response to alveolar hypoxia
+      - Myogenic constriction of afferent arterioles
+      - Sympathetic vasoconstriction for temperature control
+      - Tubuloglomerular feedback
+    answer: 1
+    why:
+      - "Metabolite vasodilation is how the heart and skeletal muscle autoregulate."
+      - "Right. In the lungs, alveolar hypoxia causes vasoconstriction (to match perfusion to ventilation); widespread hypoxia constricts the whole bed."
+      - "Myogenic control is renal."
+      - "Sympathetic vasoconstriction for temperature control is the skin."
+      - "Tubuloglomerular feedback is renal."
+    src: { page: 299, quote: "alveolar hypoxia causes vasoconstriction so that only well-ventilated areas are perfused" }
+    status: unverified
+  # ---------- p299: capillary fluid exchange ----------
+  - id: cvs.L03.101
+    kind: table
+    topic: capillary-fluid-exchange
+    title: Starling forces
+    columns: [Force, Effect]
+    rows:
+      - [Pc (capillary hydrostatic pressure), Pushes fluid out of capillary]
+      - [Pi (interstitial hydrostatic pressure), Pushes fluid into capillary]
+      - [πc (plasma oncotic pressure), Pulls fluid into capillary]
+      - [πi (interstitial fluid oncotic pressure), Pulls fluid out of capillary]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 299, quote: "Pc = capillary hydrostatic pressure—pushes fluid out of capillary Pi = interstitial hydrostatic pressure—pushes fluid into capillary" }
+    status: unverified
+  - id: cvs.L03.102
+    kind: cloze
+    topic: capillary-fluid-exchange
+    text: "Net fluid flow Jv = {{c1::Kf [(Pc − Pi) − σ(πc − πi)]}}, where Kf is {{c2::capillary permeability to fluid}} and σ is the {{c3::reflection coefficient}}."
+    src: { page: 299, quote: "Jv = net fluid flow = Kf [(Pc − Pi) − σ(πc − πi)] Kf = capillary permeability to fluid σ = reflection coefficient" }
+    status: unverified
+  - id: cvs.L03.103
+    kind: enumerate
+    topic: capillary-fluid-exchange
+    prompt: Enumerate the 4 common causes of edema, with an example of each.
+    points:
+      - ↑ capillary hydrostatic pressure (↑ Pc; eg, HF)
+      - ↑ capillary permeability (↑ Kf; eg, toxins, infections, burns)
+      - ↑ interstitial fluid oncotic pressure (↑ πi; eg, lymphatic blockage)
+      - ↓ plasma proteins (↓ πc; eg, nephrotic syndrome, liver failure, protein malnutrition)
+    pass: 4
+    hook: "كل force من الـ 4 ليها مرض: الضغط يعلى (HF)، الحيطة تخرّ (burns)، البروتين يتحبس برا (lymphatics)، البروتين يقل جوه (nephrotic)."
+    src: { page: 299, quote: "↑ capillary hydrostatic pressure (↑ Pc; eg, HF) ↑ capillary permeability (↑ Kf; eg, toxins, infections, burns) ↑ interstitial fluid oncotic pressure (↑ πi; eg, lymphatic blockage) ↓ plasma proteins (↓ πc; eg, nephrotic syndrome, liver failure, protein malnutrition)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.104
+    kind: mcq
+    topic: capillary-fluid-exchange
+    stem: >-
+      A 7-year-old boy is brought to the clinic because of puffy eyes in the morning and swollen legs for
+      2 weeks. Urinalysis shows 4+ protein and no blood. Serum albumin is 1.8 g/dL. Which change in Starling
+      forces best explains his edema?
+    options:
+      - ↑ capillary hydrostatic pressure
+      - ↑ capillary permeability
+      - ↑ interstitial fluid oncotic pressure
+      - ↓ plasma oncotic pressure
+      - ↑ interstitial hydrostatic pressure
+    answer: 3
+    why:
+      - "↑ Pc is the mechanism in HF."
+      - "↑ Kf is the mechanism in toxins, infections and burns."
+      - "↑ πi is the mechanism in lymphatic blockage."
+      - "Right. Nephrotic syndrome loses protein in urine → ↓ plasma proteins → ↓ πc, so less fluid is pulled back into the capillary."
+      - "↑ Pi pushes fluid into the capillary; it opposes edema."
+    src: { page: 299, quote: "↓ plasma proteins (↓ πc; eg, nephrotic syndrome, liver failure, protein malnutrition)" }
+    status: unverified

@@ -1,0 +1,454 @@
+schema: steps.lesson/v1
+lecture: msk.L03
+lessons:
+  - id: msk.L03.lesson1
+    title: "الجلد من جوّه: الطبقات والوصلات والمصطلحات"
+    hook: "تعرف الطبقة اللي اتفرقت، تعرف المرض. والـ scleroderma هي البداية"
+    minutes: 9
+    pages: [481, 483]
+    topics: [scleroderma, skin-layers, epithelial-cell-junctions, exocrine-glands, dermatologic-macroscopic-terms, dermatologic-microscopic-terms]
+    goals:
+      - "تفرّق الـ diffuse من الـ limited scleroderma بالأجسام المضادة"
+      - "ترتّب طبقات الـ epidermis وتعرف كل junction بمرضه"
+      - "تعرف مصطلحات الفحص والـ biopsy اللي بتتكرر في الأسئلة"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Scleroderma: جلد مشدود وأوعية مقفولة"
+        text: |-
+          الـ systemic sclerosis تلات حاجات: autoimmunity، و vasculopathy من غير التهاب، و ==collagen deposition== بتليّف. الجلد **منفوخ ومشدود ومن غير تجاعيد**، وأطراف الصوابع فيها حُفر.
+
+          ومش جلد بس: الكلية (==scleroderma renal crisis==، علاجها **ACE inhibitors**)، والرئة (fibrosis و pulmonary hypertension)، والمريء (حركة ضعيفة وحرقان).
+        page: 481
+        quote: "Can involve other systems, eg, renal (scleroderma renal crisis; treat with ACE inhibitors), pulmonary (interstitial fibrosis, pulmonary hypertension), GI (↓ peristalsis and LES tone → dysphagia, heartburn), cardiovascular."
+      - kind: table
+        title: "Diffuse ولا limited"
+        columns: ["", "Diffuse", "Limited"]
+        rows:
+          - ["Skin", "Widespread, rapid", "Fingers and face"]
+          - ["Course", "Rapid, early visceral involvement", "More benign (CREST)"]
+          - ["Antibody", "Anti-Scl-70, anti-RNA polymerase III", "Anti-centromere"]
+        hide: [[2, 1], [2, 2], [0, 2]]
+        page: 481
+        quote: "Diffuse scleroderma—widespread skin involvement, rapid progression, early visceral involvement. Associated with anti-Scl-70 antibody (anti-DNA topoisomerase-I antibody) and anti-RNA polymerase III."
+      - kind: mnemonic
+        word: "CREST"
+        parts:
+          - { key: "C", text: "Calcinosis cutis (and anti-Centromere)" }
+          - { key: "R", text: "Raynaud phenomenon" }
+          - { key: "E", text: "Esophageal dysmotility" }
+          - { key: "S", text: "Sclerodactyly" }
+          - { key: "T", text: "Telangiectasia" }
+        hook: "الـ C بتاعة الـ CREST فيها حرفين: Calcinosis والـ anti-Centromere. افتكر الـ C الزيادة دي وانت بتختار الأجسام المضادة."
+        page: 481
+        quote: "CREST syndrome: Calcinosis cutis C , anti-Centromere antibody, Raynaud phenomenon, Esophageal dysmotility, Sclerodactyly, and Telangiectasia. More benign clinical course."
+      - kind: check
+        question: "A woman with tight skin spreading over her trunk develops sudden severe hypertension and rising creatinine. What is the best treatment?"
+        options:
+          - "ACE inhibitor"
+          - "High-dose glucocorticoids"
+          - "Beta blocker"
+          - "Plasmapheresis"
+        answer: 0
+        why:
+          - "صح: الـ scleroderma renal crisis بتتعالج بالـ ACE inhibitors."
+          - "مش ده علاج الـ renal crisis في الكتاب."
+          - "مش ده علاج الـ renal crisis في الكتاب."
+          - "مش ده علاج الـ renal crisis في الكتاب."
+        page: 481
+        quote: "renal (scleroderma renal crisis; treat with ACE inhibitors)"
+      - kind: order
+        prompt: "رتّب طبقات الـ epidermis من برّه لجوّه (come, let's get sunburned)"
+        steps:
+          - "Stratum corneum"
+          - "Stratum lucidum"
+          - "Stratum granulosum"
+          - "Stratum spinosum"
+          - "Stratum basale"
+        why: "**C**ome **L**et's **G**et **S**un**B**urned: Corneum، Lucidum، Granulosum، Spinosum، Basale. وتحتهم الـ dermis والـ subcutaneous fat."
+        page: 481
+        quote: "Stratum corneum Stratum lucidum Stratum granulosum Stratum spinosum Stratum basale Dermis"
+      - kind: explain
+        title: "الوصلات: كل واحدة ليها مرض"
+        text: |-
+          - **Tight junction** (claudins و occludins): بيمنع المرور بين الخلايا.
+          - **Adherens junction**: فيه ==E-cadherin==، ولما يضيع الورم بيعمل metastasis.
+          - **Desmosome**: بيربط الخلايا ببعض ← لو اتهاجم = pemphigus vulgaris.
+          - **Hemidesmosome**: بيربط الـ basal cells بالـ basement membrane ← لو اتهاجم = ==bullous pemphigoid==.
+          - **Integrins**: بتمسك الـ collagen والـ laminin والـ fibronectin في الـ basement membrane.
+        page: 482
+        quote: "Hemidesmosome E –connects keratin in basal cells to underlying basement membrane. Autoantibodies → bullous pemphigoid."
+      - kind: figure
+        title: "مين بيمسك مين"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-good" x="40" y="20" width="120" height="90" rx="8"/>
+            <rect class="fg-good" x="200" y="20" width="120" height="90" rx="8"/>
+            <text x="70" y="70" class="t-sm t-b">Keratinocyte</text>
+            <text x="230" y="70" class="t-sm t-b">Keratinocyte</text>
+            <line class="fg-arrow-acc" x1="160" y1="55" x2="200" y2="55"/>
+            <text x="138" y="45" class="t-sm t-acc">Desmosome</text>
+            <rect class="fg-bad" x="20" y="130" width="320" height="12" rx="4"/>
+            <text x="110" y="165" class="t-sm t-mut">Basement membrane</text>
+            <line class="fg-arrow-acc" x1="100" y1="110" x2="100" y2="130"/>
+            <text x="20" y="125" class="t-sm t-acc">Hemidesmosome</text>
+          </svg>
+        caption: "الـ desmosome بين خلية وخلية: لو اتضرب الخلايا تتفرق جوّه الـ epidermis (pemphigus vulgaris). الـ hemidesmosome بين الخلية والـ basement membrane: لو اتضرب الـ epidermis كله يتقلع (bullous pemphigoid)."
+        alt: "Two keratinocytes joined by a desmosome; the lower cell anchored to the basement membrane by a hemidesmosome."
+        page: 482
+        quote: "Hemidesmosome E –connects keratin in basal cells to underlying basement membrane. Autoantibodies → bullous pemphigoid."
+      - kind: match
+        prompt: "وصّل نوع الغدة بمثالها"
+        pairs:
+          - ["Merocrine", "Salivary and sweat glands"]
+          - ["Apocrine", "Mammary glands"]
+          - ["Holocrine", "Sebaceous glands"]
+        why: "التلاتة exocrine: بيطلّعوا منتجهم في ducts لبرّه الجسم، عكس الـ endocrine اللي بتفرز hormones. الـ sebaceous هي المثال الـ holocrine."
+        page: 482
+        quote: "Can be merocrine (eg, salivary and sweat glands), apocrine (eg, mammary glands), or holocrine (eg, sebaceous glands)."
+      - kind: explain
+        title: "مصطلحات بالعين"
+        text: |-
+          - **Macule** مسطح أقل من 1 cm (نمش)، و ==patch== مسطح أكبر من 1 cm (vitiligo).
+          - **Papule** بارز أقل من 1 cm، و **plaque** بارز أكبر من 1 cm (psoriasis).
+          - **Erosion**: الـ epidermis راح من غير ما الـ basement membrane يبان (HSV، pemphigus vulgaris). **Ulcer**: الخسارة نزلت للـ dermis.
+        page: 483
+        quote: "Macule Flat lesion with well-circumscribed change in skin color <1 cm Freckle (ephelis), labial macule A Patch Macule >1 cm Vitiligo B"
+      - kind: match
+        prompt: "وصّل المصطلح الميكروسكوبي بمرضه"
+        pairs:
+          - ["Parakeratosis", "Psoriasis"]
+          - ["Hypergranulosis", "Lichen planus"]
+          - ["Acantholysis", "Pemphigus vulgaris"]
+        why: "الـ parakeratosis = الأنوية لسه في الـ stratum corneum (الخلايا بتطلع بسرعة). الـ hypergranulosis = الـ granulosum تخنت. الـ acantholysis = الخلايا سابت بعض."
+        page: 483
+        quote: "Parakeratosis Retention of nuclei in stratum corneum Psoriasis, actinic keratosis Hypergranulosis ↑ thickness of stratum granulosum Lichen planus"
+      - kind: try
+        items: [msk.L03.005, msk.L03.009, msk.L03.013, msk.L03.018, msk.L03.020]
+    recap:
+      - "Diffuse: Scl-70 وأعضاء بدري. Limited/CREST: anti-centromere وأهدى."
+      - "Scleroderma renal crisis: ACE inhibitors."
+      - "Desmosome = pemphigus vulgaris، hemidesmosome = bullous pemphigoid."
+      - "Parakeratosis = psoriasis، hypergranulosis = lichen planus، acantholysis = pemphigus."
+    practice: [msk.L03.001, msk.L03.002, msk.L03.003, msk.L03.004, msk.L03.005, msk.L03.006, msk.L03.007, msk.L03.008, msk.L03.009, msk.L03.010, msk.L03.011, msk.L03.012, msk.L03.013, msk.L03.014, msk.L03.015, msk.L03.016, msk.L03.017, msk.L03.018, msk.L03.019, msk.L03.020]
+  - id: msk.L03.lesson2
+    title: "أمراض الجلد اللي في كل عيادة"
+    hook: "من البهاق لحب الشباب للـ psoriasis: لكل واحد علامة بتفضحه"
+    minutes: 9
+    pages: [484, 486]
+    topics: [pigmented-skin-disorders, seborrheic-dermatitis, common-skin-disorders, vascular-tumors-of-skin]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "اللون: الخلية موجودة ولا لأ؟"
+        text: |-
+          - **Albinism**: الـ melanocytes **عددها طبيعي** بس الـ melanin قليل (==tyrosinase== ضعيف) ← خطر سرطان جلد.
+          - **Vitiligo**: الـ melanocytes **اتدمّرت** (autoimmune) ← بقع بيضا تماماً، ومع أمراض autoimmune تانية.
+          - **Melasma**: hyperpigmentation مكتسب مع الحمل ("mask of pregnancy") أو الـ OCP.
+        page: 484
+        quote: "Normal melanocyte number with ↓ melanin production A due to ↓ tyrosinase activity or defective tyrosine transport. ↑ risk of skin cancer."
+      - kind: reveal
+        prompt: "راجل عنده Parkinson وعلى فروة راسه وحواجبه قشر أصفر دهني. إيه هو، وإيه علاجه؟"
+        answer: "==Seborrheic dermatitis==: plaques حمرا بقشر أصفر دهني في أماكن الغدد الدهنية. مرتبطة بالـ Malassezia، والعلاج antifungal موضعي و glucocorticoids."
+        page: 484
+        quote: "Possibly associated with Malassezia spp. Treatment: topical antifungals and glucocorticoids."
+      - kind: explain
+        title: "حب الشباب والـ rosacea والإكزيما"
+        text: |-
+          - **Acne**: أربع حاجات: hormones، و desquamation غلط، و ==Cutibacterium acnes==، والتهاب. العلاج: retinoids و benzoyl peroxide و antibiotics.
+          - **Rosacea**: papules و pustules على الوش، بس **من غير comedones**.
+          - **Atopic dermatitis**: على الوش في الرضيع، وبعدين على الـ flexural surfaces.
+          - **Allergic contact dermatitis**: type IV من الـ nickel أو poison ivy أو neomycin.
+        page: 485
+        quote: "Inflammatory facial skin disorder characterized by erythematous papules and pustules J , but no comedones."
+      - kind: explain
+        title: "الـ psoriasis تحت الميكروسكوب"
+        text: |-
+          papules و plaques بقشر فضي، خصوصاً على الركب والكوع، والـ **Auspitz sign** نقط دم لما تشيل القشرة.
+
+          جوّه: ==acanthosis== مع parakeratosis (الأنوية لسه في الـ corneum)، و Munro microabscesses. الـ stratum spinosum ↑ والـ stratum granulosum ↓.
+        page: 485
+        quote: "Acanthosis with parakeratotic scaling (nuclei still in stratum corneum), Munro microabscesses. ↑ stratum spinosum, ↓ stratum granulosum."
+      - kind: aside
+        tone: exam
+        text: "الـ seborrheic keratosis شكلها \"stuck on\" وبريئة. بس لو طلع منها ==كتير فجأة== ده **Leser-Trélat sign**: دوّر على سرطان (GI adenocarcinoma)."
+        page: 485
+        quote: "Leser-Trélat sign L —rapid onset of multiple seborrheic keratoses, indicates possible malignancy (eg, GI adenocarcinoma)."
+      - kind: check
+        question: "A wart biopsy shows epidermal hyperplasia with cells that have clear halos around wrinkled nuclei. What causes it?"
+        options:
+          - "Low-risk HPV strains"
+          - "Poxvirus"
+          - "EBV"
+          - "HHV-8"
+          - "Malassezia"
+        answer: 0
+        why:
+          - "صح: الـ verrucae من low-risk HPV، والـ koilocytes هي الخلايا دي."
+          - "الـ poxvirus بيعمل molluscum (umbilicated papules)."
+          - "الـ EBV بيعمل hairy leukoplakia."
+          - "الـ HHV-8 بيعمل Kaposi sarcoma."
+          - "الـ Malassezia مع الـ seborrheic dermatitis والـ tinea versicolor."
+        page: 485
+        quote: "Warts; caused by low-risk HPV strains. Soft, tan-colored, cauliflowerlike papules M. Epidermal hyperplasia, hyperkeratosis, koilocytosis."
+      - kind: table
+        title: "Bacillary angiomatosis ولا Kaposi"
+        columns: ["", "Bacillary angiomatosis", "Kaposi sarcoma"]
+        rows:
+          - ["Cause", "Bartonella", "HHV-8"]
+          - ["Infiltrate", "Neutrophilic", "Lymphocytic"]
+        hide: [[0, 1], [1, 1]]
+        page: 486
+        quote: "Associated with HHV-8 and HIV. Lymphocytic infiltrate, unlike bacillary angiomatosis."
+      - kind: explain
+        title: "باقي أورام الأوعية"
+        text: |-
+          - **Angiosarcoma**: خبيث، مع الإشعاع والـ lymphedema بعد استئصال الثدي (==Stewart-Treves==). وفي الكبد مع الـ vinyl chloride والـ arsenic.
+          - **Glomus tumor**: موجع وتحت الضافر.
+          - **Cherry angioma** ما بيختفيش، و **infantile hemangioma** بيختفي لوحده.
+        page: 486
+        quote: "Associated with radiation therapy and chronic postmastectomy lymphedema. Stewart-Treves syndrome—cutaneous angiosarcoma developing after chronic lymphedema. Hepatic angiosarcoma associated with vinyl chloride and arsenic exposures."
+      - kind: try
+        items: [msk.L03.022, msk.L03.024, msk.L03.035, msk.L03.036, msk.L03.041]
+    recap:
+      - "Albinism: melanocytes موجودة والـ melanin قليل. Vitiligo: الـ melanocytes راحت."
+      - "Rosacea من غير comedones."
+      - "Psoriasis: parakeratosis و Munro microabscesses."
+      - "Leser-Trélat = سرطان GI. Bartonella neutrophils، Kaposi lymphocytes."
+    practice: [msk.L03.021, msk.L03.022, msk.L03.023, msk.L03.024, msk.L03.025, msk.L03.026, msk.L03.027, msk.L03.028, msk.L03.029, msk.L03.030, msk.L03.031, msk.L03.032, msk.L03.033, msk.L03.034, msk.L03.035, msk.L03.036, msk.L03.037, msk.L03.038, msk.L03.039, msk.L03.040, msk.L03.041]
+  - id: msk.L03.lesson3
+    title: "عدوى الجلد: البكتيريا بالعمق، والفطريات بالمكان"
+    hook: "كل ما البكتيريا تنزل لتحت، المرض يبقى أخطر"
+    minutes: 8
+    pages: [487, 488]
+    topics: [skin-infections, cutaneous-mycoses]
+    status: unverified
+    steps:
+      - kind: figure
+        title: "البكتيريا من فوق لتحت"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-good" x="20" y="15" width="320" height="30" rx="4"/>
+            <text x="30" y="35" class="t-sm t-b">Epidermis: impetigo</text>
+            <rect class="fg-good" x="20" y="50" width="320" height="30" rx="4"/>
+            <text x="30" y="70" class="t-sm t-b">Upper dermis: erysipelas</text>
+            <rect class="fg-bad" x="20" y="85" width="320" height="30" rx="4"/>
+            <text x="30" y="105" class="t-sm t-b">Deep dermis and fat: cellulitis</text>
+            <rect class="fg-bad" x="20" y="120" width="320" height="30" rx="4"/>
+            <text x="30" y="140" class="t-sm t-b">Fascia: necrotizing fasciitis</text>
+            <text x="230" y="172" class="t-sm t-mut">deeper = worse</text>
+          </svg>
+        caption: "الـ impetigo على السطح، الـ erysipelas في الـ upper dermis بحدود واضحة، الـ cellulitis أعمق (deeper dermis و subcutaneous)، والـ necrotizing fasciitis في الـ fascia وده طوارئ."
+        alt: "Four skin layers stacked from epidermis to fascia, labelled impetigo, erysipelas, cellulitis and necrotizing fasciitis."
+        page: 487
+        quote: "Infection involving upper dermis and superficial lymphatics, usually from S pyogenes. Presents with well-defined, raised demarcation between infected and normal skin C ."
+      - kind: explain
+        title: "الـ erysipelas والـ fasciitis"
+        text: |-
+          - **Erysipelas**: الـ upper dermis، غالباً ==S pyogenes==، وحافة **بارزة وواضحة** بين الجلد المصاب والسليم.
+          - **Necrotizing fasciitis** ("flesh-eating bacteria"): bullae و necrosis، وفي الـ fascia: إفراز رمادي زي ميّة المواعين وريحة، و**وجع أكتر بكتير من الفحص**.
+        page: 487
+        quote: "Fascia: pale, friable, ischemic fascia; dishwater-gray, malodorous exudate of surrounding tissue; severe pain out of proportion to exam."
+      - kind: check
+        question: "A newborn has fever and peeling skin with a positive Nikolsky sign but no mouth lesions. At which level does the toxin split the skin?"
+        options:
+          - "Stratum granulosum"
+          - "Epidermal-dermal junction"
+          - "Stratum basale"
+          - "Papillary dermis"
+        answer: 0
+        why:
+          - "صح: الـ SSSS بيفرّق في الـ stratum granulosum بس، ومفيش mucosa."
+          - "دي الـ TEN، ومعاها mucosa."
+          - "مش مكان الـ exfoliative toxin."
+          - "أعمق من اللازم."
+        page: 487
+        quote: "Exotoxin destroys keratinocyte attachments in stratum granulosum only (vs toxic epidermal necrolysis, which destroys epidermal-dermal junction). No mucosal involvement."
+      - kind: aside
+        tone: trap
+        text: "التلات حاجات البيضا في البق: ==hairy leukoplakia== (EBV، جنب اللسان، **ما بتتكشطش**)، و thrush (بتتكشط)، و leukoplakia (precancerous)."
+        page: 487
+        quote: "Irregular, white, painless plaques on lateral tongue that cannot be scraped off J . EBV mediated. Occurs in patients living with HIV, organ transplant recipients. Contrast with thrush (scrapable) and leukoplakia (precancerous)."
+      - kind: explain
+        title: "الفطريات: الـ dermatophytes"
+        text: |-
+          Microsporum و Trichophyton و Epidermophyton. على الـ KOH: ==branching septate hyphae==، ومعاهم حكة.
+
+          الاسم بيتغيّر بالمكان: tinea capitis (الراس)، corporis (الجسم، ringworm بنص فاضي، ومن الحيوانات الأليفة)، cruris (الأربية)، pedis (الرجل)، unguium (الضوافر).
+        page: 488
+        quote: "Dermatophytes include Microsporum, Trichophyton, and Epidermophyton. Branching septate hyphae visible on KOH preparation with blue fungal stain A . Associated with pruritus."
+      - kind: reveal
+        prompt: "ليه الـ tinea versicolor بتعمل بقع فاتحة، وبتبان أكتر بعد الشمس؟"
+        answer: "الـ Malassezia بتكسّر الدهون لأحماض بتوقّف الـ ==tyrosinase== ← melanin أقل. فلما الجلد اللي حواليها يسمر في الصيف، البقع تبان أكتر."
+        page: 488
+        quote: "Degradation of lipids produces acids that inhibit tyrosinase (involved in melanin synthesis) → hypopigmentation G"
+      - kind: try
+        items: [msk.L03.048, msk.L03.049, msk.L03.053]
+    recap:
+      - "Erysipelas: حافة واضحة. Cellulitis: أعمق."
+      - "Necrotizing fasciitis: وجع أكتر من الفحص."
+      - "SSSS: الـ granulosum ومن غير mucosa. TEN: الـ junction ومع mucosa."
+      - "Tinea versicolor: أحماض توقّف الـ tyrosinase."
+    practice: [msk.L03.042, msk.L03.043, msk.L03.044, msk.L03.045, msk.L03.046, msk.L03.047, msk.L03.048, msk.L03.049, msk.L03.050, msk.L03.051, msk.L03.052, msk.L03.053]
+  - id: msk.L03.lesson4
+    title: "الفقاقيع والقرح"
+    hook: "الفقاعة الرخوة ولا المشدودة؟ السؤال ده لوحده بيحل نص الأسئلة"
+    minutes: 8
+    pages: [489, 491]
+    topics: [autoimmune-blistering-skin-disorders, other-blistering-skin-disorders, cutaneous-ulcers]
+    status: unverified
+    steps:
+      - kind: table
+        title: "Pemphigus vulgaris ولا bullous pemphigoid"
+        columns: ["", "Pemphigus vulgaris", "Bullous pemphigoid"]
+        rows:
+          - ["Target", "Desmosomes", "Hemidesmosomes"]
+          - ["Bullae", "Flaccid, intraepidermal", "Tense, subepidermal"]
+          - ["Oral mucosa", "Involved", "Spared"]
+          - ["Nikolsky", "Positive", "Negative"]
+          - ["Immunofluorescence", "Reticular", "Linear"]
+        hide: [[1, 1], [2, 2], [4, 1], [4, 2]]
+        page: 489
+        quote: "Flaccid intraepidermal bullae A caused by acantholysis (separation of keratinocytes, “row of tombstones” on H&E stain); oral mucosa is involved. Nikolsky sign ⊕."
+      - kind: aside
+        tone: tip
+        text: "الـ **P**emphigus **V**ulgaris: الخلايا بتسيب بعض جوّه الـ epidermis، فالفقاعة رخوة وبتتقطع بسهولة والبق بيتصاب. الـ ==pemphigoid== أعمق: الـ epidermis كله بيرفع فالفقاعة مشدودة. الاتنين ==type II== hypersensitivity."
+        page: 489
+        quote: "Potentially fatal. Most commonly seen in older adults. Type II hypersensitivity reaction."
+      - kind: check
+        question: "A man with celiac disease has itchy grouped vesicles on his elbows. What does immunofluorescence of his skin show?"
+        options:
+          - "IgA at the tips of dermal papillae"
+          - "Linear IgG at the epidermal-dermal junction"
+          - "Reticular IgG around epidermal cells"
+          - "No immune deposits"
+        answer: 0
+        why:
+          - "صح: الـ dermatitis herpetiformis = IgA في الـ dermal papillae، والعلاج dapsone وأكل من غير gluten."
+          - "ده bullous pemphigoid."
+          - "ده pemphigus vulgaris."
+          - "فيه deposits، وده المفتاح."
+        page: 490
+        quote: "Deposits of IgA at tips of dermal papillae. Associated with celiac disease. Treatment: dapsone, gluten-free diet."
+      - kind: explain
+        title: "من erythema multiforme لـ TEN"
+        text: |-
+          - **Erythema multiforme**: أنواع كتير من الـ lesions، أشهرها ==target lesions==. مع عدوى (HSV، M pneumoniae) أو أدوية (sulfa، phenytoin).
+          - **SJS** و **TEN**: نفس المرض بدرجات، والفرق في مساحة الجلد اللي بتتقشر. السبب غالباً **adverse drug reaction**، ومعاه حرارة والـ mucous membranes. أكتر من 30% من الجلد = TEN، و10-30% = SJS-TEN.
+          - **Epidermolysis bullosa**: وراثي، فقاقيع من الصغر ومع الرضاعة بالببرونة، من mutations في جينات الـ keratin.
+        page: 490
+        quote: "Presents with multiple types of lesions—macules, papules, vesicles, target lesions (look like targets with multiple rings and dusky center showing epithelial disruption) B ."
+      - kind: table
+        title: "القرح الثلاثة"
+        columns: ["", "Venous", "Arterial", "Neuropathic"]
+        rows:
+          - ["Border", "Irregular, shallow, exudative", "Punched-out", "Hyperkeratotic, undermined"]
+          - ["Site", "Gaiter area, over malleoli", "Distal toes, anterior shin", "Bony prominences"]
+          - ["Pain", "Mild to moderate", "Severe", "Absent"]
+        hide: [[0, 2], [2, 2], [2, 3]]
+        page: 491
+        quote: "Irregular border, shallow, exudative A Symmetric with well- defined punched-out appearance B Hyperkeratotic edge with undermined borders C"
+      - kind: reveal
+        prompt: "مدخّن عنده قرحة على طرف صباعه، والجلد بارد وباهت ومفيش شعر ولا نبض. نوعها إيه؟"
+        answer: "==Arterial ulcer==: الدم مش واصل، فالجلد ضامر وبارد ومن غير شعر، والقرحة punched-out وموجعة."
+        page: 491
+        quote: "Arterial insufficiency, cold and pale atrophic skin, hair loss, absent pulses"
+      - kind: try
+        items: [msk.L03.056, msk.L03.061, msk.L03.062, msk.L03.064]
+    recap:
+      - "PV: desmosomes، رخوة، البق، Nikolsky موجب، reticular."
+      - "BP: hemidesmosomes، مشدودة، البق سليم، linear."
+      - "Dermatitis herpetiformis: IgA و celiac و dapsone."
+      - "Arterial: punched-out وموجعة. Neuropathic: مش موجعة."
+    practice: [msk.L03.054, msk.L03.055, msk.L03.056, msk.L03.057, msk.L03.058, msk.L03.059, msk.L03.060, msk.L03.061, msk.L03.062, msk.L03.063, msk.L03.064]
+  - id: msk.L03.lesson5
+    title: "علامات على الجلد، الحروق، والسرطان"
+    hook: "الجلد مراية: أحياناً بيقولك على سكر أو سرطان جوّه. وبعدين الحروق والـ melanoma"
+    minutes: 10
+    pages: [492, 494]
+    topics: [miscellaneous-skin-disorders, estimation-of-body-surface-area, burn-classification, skin-cancer]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الجلد بيقولك على اللي جوّه"
+        text: |-
+          - **Acanthosis nigricans**: جلد غامق ومتخن في الإبط والرقبة ← ==insulin resistance== (سكر، سمنة، PCOS) أو سرطان معدة.
+          - **Erythema nodosum**: عقد موجعة على قصبة الرجل (panniculitis): sarcoidosis، TB، strep، IBD.
+          - **Lichen planus**: الـ 6 P's، و Wickham striae في البق، و sawtooth lymphocytes، ومع ==hepatitis C==.
+        page: 492
+        quote: "Associated with insulin resistance (eg, diabetes, obesity, Cushing syndrome, PCOS), visceral malignancy (eg, gastric adenocarcinoma)."
+      - kind: aside
+        tone: tip
+        text: "UV**B** للـ sunburn (الـ B)، و UV**A** للـ tanning والـ photoaging (الـ A). الاتنين بيعملوا DNA mutations. والـ **pityriasis rosea** بتبدأ بـ herald patch وبعدها بأيام plaques في شكل ==شجرة كريسماس== على الضهر."
+        page: 492
+        quote: "Causes DNA mutations, inducing apoptosis of keratinocytes. UVB is dominant in sunBurn, UVA in tAnning and photoAging."
+      - kind: check
+        question: "A patient has burns covering the entire right arm and the entire front of the trunk. Using the rule of 9's, what percentage of body surface is burned?"
+        options:
+          - "27%"
+          - "18%"
+          - "36%"
+          - "45%"
+        answer: 0
+        why:
+          - "صح: الدراع 9% وقدّام الجسم كله (الصدر والبطن) 18%، فالمجموع 27%."
+          - "دي قدّام الجسم بس من غير الدراع."
+          - "ده لو حسبت الضهر كمان."
+          - "كتير قوي."
+        page: 493
+        quote: "Entire thorax 18% Entire arm (L) 9% Entire arm (R) 9% Entire abdomen 18% Perineum 1%"
+      - kind: table
+        title: "الحرق بعمقه"
+        columns: ["", "Depth", "Look", "Pain"]
+        rows:
+          - ["Superficial", "Epidermis", "Dry blanching redness, no blisters", "Painful"]
+          - ["Superficial partial", "Papillary dermis", "Blisters, blanches", "Painful to temperature and air"]
+          - ["Deep partial", "Reticular dermis", "Blisters, does not blanch", "Pressure only"]
+          - ["Full thickness", "Full-thickness dermis", "White, waxy, leathery", "Painless"]
+        hide: [[1, 3], [2, 2], [2, 3]]
+        page: 493
+        quote: "Deep partial- thickness burn Epidermis and reticular dermis Blisters (easily unroofed), does not blanch with pressure Painless; perception of pressure only"
+      - kind: explain
+        title: "BCC و SCC"
+        text: |-
+          - **BCC**: الأشهر. فوق الشفة العليا. ==pearly== nodules بـ telangiectasias و rolled borders، بيغزو مكانه ونادراً ما ينتشر.
+          - **SCC**: تحت الشفة السفلى. مع الـ immunosuppression والجروح المزمنة (==Marjolin ulcer==) والـ arsenic.
+          - **Actinic keratosis**: قبل السرطان، والخطر على قد الـ dysplasia.
+        page: 494
+        quote: "Basal cell carcinoma (BCC) more common above upper lip. Squamous cell carcinoma (SCC) more common below lower lip. Sun exposure strongly predisposes to skin cancer."
+      - kind: mnemonic
+        word: "ABCDE"
+        parts:
+          - { key: "A", text: "Asymmetry" }
+          - { key: "B", text: "Border irregularity" }
+          - { key: "C", text: "Color variation" }
+          - { key: "D", text: "Diameter > 6 mm" }
+          - { key: "E", text: "Evolution over time" }
+        hook: "أهم حاجة بتتنبأ بالانتشار: العمق (Breslow thickness)، مش العرض."
+        page: 494
+        quote: "Look for the ABCDEs: Asymmetry, Border irregularity, Color variation, Diameter"
+      - kind: check
+        question: "Which feature of a resected melanoma best predicts its risk of metastasis?"
+        options:
+          - "Depth of invasion (Breslow thickness)"
+          - "Diameter of the lesion"
+          - "Number of colors"
+          - "S-100 staining"
+          - "BRAF mutation"
+        answer: 0
+        why:
+          - "صح: الـ Breslow thickness هو اللي بيحدد خطر الـ metastasis."
+          - "الـ diameter جزء من الـ ABCDE للاشتباه بس."
+          - "تعدد الألوان للاشتباه بس."
+          - "الـ S-100 tumor marker للتشخيص."
+          - "الـ BRAF بيوجّه العلاج (vemurafenib)."
+        page: 494
+        quote: "Depth of tumor (Breslow thickness) correlates with risk of metastasis."
+      - kind: try
+        items: [msk.L03.072, msk.L03.076, msk.L03.078, msk.L03.087, msk.L03.088]
+    recap:
+      - "Acanthosis nigricans: insulin resistance أو سرطان معدة."
+      - "Lichen planus مع hepatitis C."
+      - "Rule of 9's: الدراع 9، الرجل 18، قدّام الجسم 18."
+      - "BCC فوق الشفة، SCC تحتها. Melanoma: Breslow و S-100 و BRAF."
+    practice: [msk.L03.065, msk.L03.066, msk.L03.067, msk.L03.068, msk.L03.069, msk.L03.070, msk.L03.071, msk.L03.072, msk.L03.073, msk.L03.074, msk.L03.075, msk.L03.076, msk.L03.077, msk.L03.078, msk.L03.079, msk.L03.080, msk.L03.081, msk.L03.082, msk.L03.083, msk.L03.084, msk.L03.085, msk.L03.086, msk.L03.087, msk.L03.088]

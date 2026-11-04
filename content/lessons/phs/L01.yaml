@@ -1,0 +1,615 @@
+schema: steps.lesson/v1
+lecture: phs.L01
+lessons:
+  - id: phs.L01.lesson1
+    title: "أنهي دراسة دي؟ من الـ case series لحد الـ clinical trial"
+    hook: "أول سطر في أي سؤال biostat: الدراسة بدأت بالمرض ولا بالـ exposure؟"
+    minutes: 9
+    pages: [256, 257]
+    topics: [observational-studies, clinical-therapeutic-trial, off-label-drug-use, bradford-hill-criteria]
+    goals:
+      - "تعرف نوع الدراسة من وصفها، وأنهي measure بتطلعه"
+      - "تفرّق بين intention-to-treat و as-treated و per-protocol"
+      - "تحفظ مراحل الـ clinical trials ومعايير Bradford Hill"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "ابدأ بالسؤال: بدأنا منين؟"
+        text: |-
+          - **Case-control**: بنبدأ بناس ==عندهم المرض== وناس مش عندهم، ونرجع ورا نشوف مين اتعرض. بتطلّع **odds ratio** («Control the case in the OR»).
+          - **Cohort**: بنبدأ بناس ==اتعرضوا== وناس ما اتعرضوش، ونشوف مين جاله المرض بعدين (prospective أو retrospective). بتطلّع **incidence** و **relative risk**.
+          - **Cross-sectional**: صورة دلوقتي للمرض والـ risk factors مع بعض ← **prevalence**، وبتبين association بس مش causality.
+          - **Case series**: وصف مرضى، من غير comparison group، فما تقدرش تقول risk factor.
+        page: 256
+        quote: "Cohort study Compares a group with a given exposure or risk factor to a group without such exposure. Looks to see if exposure or risk factor is associated with later development of disease."
+      - kind: figure
+        title: "الدراسات على خط الزمن"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="ps1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="20" y="20" class="t-sm t-mut">Past</text>
+            <text x="165" y="20" class="t-sm t-mut">Present</text>
+            <text x="300" y="20" class="t-sm t-mut">Future</text>
+            <line class="fg-thin" x1="180" y1="28" x2="180" y2="195"/>
+            <text x="190" y="50" class="t-sm t-b">Cross-sectional</text>
+            <text x="190" y="66" class="t-sm">disease + risk factor now</text>
+            <line class="fg-arrow-acc" x1="175" y1="95" x2="40" y2="95" marker-end="url(#ps1a)"/>
+            <text x="40" y="88" class="t-sm t-b">Case-control: disease → past exposure</text>
+            <line class="fg-arrow-acc" x1="185" y1="135" x2="330" y2="135" marker-end="url(#ps1a)"/>
+            <text x="190" y="128" class="t-sm t-b">Prospective cohort</text>
+            <line class="fg-arrow-acc" x1="40" y1="175" x2="170" y2="175" marker-end="url(#ps1a)"/>
+            <text x="20" y="168" class="t-sm t-b">Retrospective cohort: old records</text>
+          </svg>
+        caption: "الـ case-control بيمشي لورا من المرض للـ exposure. الـ cohort بيمشي من الـ exposure للمرض، يا إما من دلوقتي لقدام (prospective) يا إما من سجلات قديمة (retrospective). والـ cross-sectional لقطة واحدة دلوقتي."
+        alt: "Timeline from past to future. Cross-sectional study at the present; case-control study arrow from present disease back to past exposure; prospective cohort arrow from present to future; retrospective cohort arrow from past records to present."
+        page: 256
+        quote: "Case-control study Retrospectively compares a group of people with disease to a group without disease."
+      - kind: check
+        question: "Researchers follow 5,000 nurses who use hair dye and 5,000 who don't for 20 years and compare rates of lymphoma. Which measure fits?"
+        options:
+          - "Relative risk"
+          - "Odds ratio"
+          - "Prevalence only"
+          - "No measure: there is no comparison group"
+        answer: 0
+        why:
+          - "صح: بدأنا بالـ exposure ومشينا لقدام: cohort ← incidence و RR («Cohort = relative risk»)."
+          - "الـ OR للـ case-control، اللي بيبدأ بالمرض."
+          - "الـ prevalence للـ cross-sectional."
+          - "فيه comparison group: اللي ما استخدموش الصبغة."
+        page: 256
+        quote: "Disease incidence. Relative risk (RR). People who smoke had a higher risk of developing COPD than people who do not. Cohort = relative risk."
+      - kind: explain
+        title: "الوراثة ولا البيئة؟ والمجتمع كله"
+        text: |-
+          - **Twin concordance**: بنقارن التوائم المتطابقة بالمش متطابقة. لو التوأم المتطابق جاله schizophrenia، أخوه فرصته أعلى بكتير ← ==genetic component==.
+          - **Adoption study**: طفل متبنّي فرصته أعلى لو أبوه البيولوجي عنده المرض، مهما كانت صحة اللي ربّوه.
+          - **Ecological study**: بيقارن مجتمعات كاملة (الـ COPD أعلى في المدن الملوثة). بس اللي بيصح على المجتمع مش لازم يصح على الفرد: ده الـ ==ecological fallacy==.
+        page: 256
+        quote: "Ecological study Compares frequency of disease and frequency of risk-related factors across populations. Measures population data not necessarily applicable to individuals (ecological fallacy)."
+      - kind: explain
+        title: "الـ clinical trial وطرق تحليله"
+        text: |-
+          أحسن trial = **randomized و controlled و double-blinded** (لا المريض ولا الباحث عارف مين في أنهي مجموعة). Triple-blind = كمان اللي بيحلل البيانات مش عارف. والـ **crossover** = كل مريض بياخد العلاجين بترتيب عشوائي وبينهم washout، فهو control لنفسه.
+
+          - **Intention-to-treat**: كل واحد بيتحلل في المجموعة اللي اتوزّع عليها ==once randomized, always analyzed==. بيمنع bias، بس ممكن يخفف الأثر الحقيقي.
+          - **As-treated**: حسب العلاج اللي أخده فعلاً ← bias أكتر.
+          - **Per-protocol**: بنشيل اللي ما كمّلوش ← bias أكتر.
+        page: 257
+        quote: "Intention-to-treat analysis—all subjects are analyzed according to their original, randomly assigned treatment. No one is excluded, ie, once randomized, always analyzed."
+      - kind: mnemonic
+        word: "SWIM"
+        parts:
+          - { key: "S", text: "Phase 1: Safety, dose escalation, maximum tolerable dose (small number, open label)" }
+          - { key: "W", text: "Phase 2: does it Work? Efficacy and short-term adverse effects (moderate number)" }
+          - { key: "I", text: "Phase 3: any Improvement? Effectiveness vs standard of care or placebo (large number) → FDA approval" }
+          - { key: "M", text: "Phase 4: stay on the Market? Long-term or rare adverse effects (postmarketing)" }
+        hook: "من الكتاب: Can I SWIM? والـ phase 0 microdosing وغالباً بيتساب"
+        page: 257
+        quote: "Clinical trials occur after preclinical studies and consist of five phases (“Can I SWIM?”)."
+      - kind: check
+        question: "A drug approved 3 years ago is found to cause rare liver failure in 1 in 50,000 users. Which phase detected this?"
+        options:
+          - "Phase 4"
+          - "Phase 1"
+          - "Phase 2"
+          - "Phase 3"
+        answer: 0
+        why:
+          - "صح: الآثار النادرة وطويلة المدى بتبان في الـ postmarketing surveillance (phase 4)."
+          - "Phase 1 بيدوّر على الـ safety والجرعة في عدد صغير جداً."
+          - "Phase 2 efficacy وآثار قصيرة المدى."
+          - "Phase 3 عدد كبير بس قبل الـ approval، وصعب يمسك 1 في 50,000."
+        page: 257
+        quote: "Phase 4 Provides data on long-term or rare adverse effects (can it stay on the Market?)"
+      - kind: aside
+        tone: tip
+        text: "**Off-label**: دوا بيتستخدم في شكل أو فئة أو جرعة الـ FDA ما وافقتش عليها، مثلاً لما مفيش علاج معتمد أو العلاج المعتمد فشل. مثال الكتاب: ==TCAs للـ neuropathic pain==."
+        page: 257
+        quote: "Example: use of tricyclic antidepressants for treating neuropathic/chronic pain."
+      - kind: match
+        prompt: "وصّل معيار Bradford Hill بمعناه"
+        pairs:
+          - ["Temporality", "The cause comes before the effect"]
+          - ["Biological gradient", "More exposure, more effect (dose-response)"]
+          - ["Consistency", "Same finding in different samples"]
+          - ["Plausibility", "A conceivable mechanism exists"]
+          - ["Coherence", "Doesn't conflict with scientific consensus"]
+          - ["Analogy", "Similar to an established cause and effect"]
+        why: "ودول necessary but not sufficient: بيدعموا الـ causality ومش بيثبتوها. والباقي: strength (قوة الـ association)، specificity، و experiment (تجارب حيوانات أو in vitro)."
+        page: 257
+        quote: "Temporality The presumed cause precedes the effect by an expected amount of time. Biological gradient Greater effect observed with greater exposure to the presumed cause (dose-response relationship)."
+      - kind: try
+        items: [phs.L01.001, phs.L01.003, phs.L01.008, phs.L01.009, phs.L01.015]
+    recap:
+      - "Case-control: من المرض للـ exposure ← OR. Cohort: من الـ exposure للمرض ← RR. Cross-sectional ← prevalence."
+      - "Ecological fallacy: بيانات المجتمع مش للفرد."
+      - "Intention-to-treat: once randomized, always analyzed."
+      - "Can I SWIM: Safety، Work، Improvement (← FDA)، Market."
+    practice: [phs.L01.001, phs.L01.002, phs.L01.003, phs.L01.004, phs.L01.005, phs.L01.006, phs.L01.007, phs.L01.008, phs.L01.009, phs.L01.010, phs.L01.011, phs.L01.012, phs.L01.013, phs.L01.014, phs.L01.015, phs.L01.016]
+  - id: phs.L01.lesson2
+    title: "الـ 2 × 2 table: OR و RR و NNT من غير لخبطة"
+    hook: "ارسم الجدول صح مرة واحدة، وكل المعادلات هتطلع لوحدها"
+    minutes: 10
+    pages: [258, 259]
+    topics: [quantifying-risk, demographic-transition, likelihood-ratio, kaplan-meier-curve]
+    goals:
+      - "تحسب OR و RR و AR و ARR و RRR و NNT و NNH"
+      - "تعرف الـ demographic transition من شكل الهرم"
+      - "تستخدم الـ likelihood ratio وتقرا الـ Kaplan-Meier curve"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "الجدول اللي كل حاجة بتطلع منه"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <text x="150" y="20" class="t-sm t-b">Disease +</text>
+            <text x="250" y="20" class="t-sm t-b">Disease −</text>
+            <text x="10" y="65" class="t-sm t-b">Exposed</text>
+            <text x="10" y="125" class="t-sm t-b">Unexposed</text>
+            <rect class="fg-acc" x="130" y="35" width="100" height="55"/>
+            <rect class="fg-box" x="230" y="35" width="100" height="55"/>
+            <rect class="fg-box" x="130" y="90" width="100" height="55"/>
+            <rect class="fg-box" x="230" y="90" width="100" height="55"/>
+            <text x="175" y="68" class="t-lg t-b">a</text>
+            <text x="275" y="68" class="t-lg t-b">b</text>
+            <text x="175" y="123" class="t-lg t-b">c</text>
+            <text x="275" y="123" class="t-lg t-b">d</text>
+            <text x="20" y="170" class="t-sm">OR = ad/bc     RR = [a/(a+b)] / [c/(c+d)]</text>
+          </svg>
+        caption: "الصفوف = exposure، والعواميد = المرض. الـ OR بيضرب القطرين (ad/bc). الـ RR بيقسم الـ risk في المتعرضين (a على صفهم) على الـ risk في اللي ما اتعرضوش (c على صفهم)."
+        alt: "A 2 by 2 table: rows exposed and unexposed, columns disease present and absent, cells a, b, c, d. Below: OR = ad/bc and RR = [a/(a+b)]/[c/(c+d)]."
+        page: 258
+        quote: "Definitions and formulas are based on the classic 2 × 2 or contingency table."
+      - kind: explain
+        title: "OR و RR"
+        text: |-
+          - **OR** (للـ case-control): odds الـ exposure في الـ cases (a/c) ÷ odds الـ exposure في الـ controls (b/d) = ==ad/bc==. OR = 1 يبقى مفيش فرق.
+          - **RR** (للـ cohort): risk المرض في المتعرضين ÷ risk المرض في اللي ما اتعرضوش. RR > 1 ← الـ exposure بيزود المرض، و RR < 1 ← بيقلله.
+          - لو المرض ==نادر== (low prevalence)، الـ OR تقريباً = الـ RR.
+        page: 258
+        quote: "For rare diseases (low prevalence), OR approximates RR."
+      - kind: check
+        question: "5 of 10 people exposed to radiation and 1 of 10 unexposed people get cancer. What is the relative risk?"
+        options:
+          - "5"
+          - "4"
+          - "0.5"
+          - "9"
+        answer: 0
+        why:
+          - "صح: (5/10) ÷ (1/10) = 0.5 ÷ 0.1 = 5. ده مثال الكتاب."
+          - "4 هو الفرق بين العددين، مش النسبة."
+          - "0.5 هو الـ risk في المتعرضين بس."
+          - "9 ده الـ OR: (5 × 9)/(5 × 1)، والسؤال عن RR."
+        page: 258
+        quote: "If 5/10 people exposed to radiation are diagnosed with cancer, and 1/10 people not exposed to radiation are diagnosed with cancer, the RR is 5"
+      - kind: explain
+        title: "الفرق والنسبة: AR و ARR و RRR"
+        text: |-
+          - **AR (attributable risk)**: ==الفرق== في الـ risk بين المتعرضين واللي ما اتعرضوش. مثال: lung cancer 21% في المدخنين و 1% في غيرهم ← AR = 20%.
+          - **ARR**: الفرق في الـ risk بين الـ control والـ treatment. مثال: flu في 8% مع الـ placebo و 2% مع اللقاح ← ARR = 6%.
+          - **RRR** = 1 – RR: النسبة اللي العلاج شالها. في نفس المثال RR = 2/8 = 0.25، فـ ==RRR = 0.75==.
+        page: 258
+        quote: "If 2% of patients who receive a flu shot develop the flu, while 8% of unvaccinated patients develop the flu, then RR = 2/8 = 0.25, and RRR = 0.75."
+      - kind: explain
+        title: "NNT و NNH"
+        text: |-
+          - **NNT = 1/ARR**: كام مريض لازم يتعالجوا عشان واحد يستفيد. ==أقل = علاج أحسن==.
+          - **NNH = 1/AR**: كام واحد لازم يتعرض عشان واحد يتأذي. أعلى = exposure أأمن.
+
+          في مثال اللقاح: ARR = 0.06 ← NNT = 1/0.06 ≈ 17.
+        page: 258
+        quote: "Number needed to treat Number of patients who need to be treated for 1 patient to benefit. Lower number = better treatment. NNT = 1/ARR"
+      - kind: check
+        question: "A drug lowers stroke risk from 5% to 3%. What is the NNT?"
+        options:
+          - "50"
+          - "2"
+          - "40"
+          - "0.6"
+        answer: 0
+        why:
+          - "صح: ARR = 5% – 3% = 2% = 0.02، و NNT = 1/0.02 = 50."
+          - "2 هو الـ ARR بالمية، مش الـ NNT."
+          - "40% هو الـ RRR (0.02/0.05)."
+          - "0.6 هو الـ RR (3/5)."
+        page: 258
+        quote: "NNT = 1/ARR"
+      - kind: aside
+        tone: tip
+        text: "معدلات تانية: **case fatality rate** = الوفيات ÷ الحالات (4 من 10 حالات meningitis ماتوا ← 40%). **Mortality rate** = وفيات لكل 1000 في السنة. **Attack rate** = اللي تعبوا ÷ كل اللي اتعرضوا (60 من 80 ← 75%)."
+        page: 259
+        quote: "Proportion of exposed people who become ill. If 80 people in a town are exposed and 60 people become ill, attack rate is 75%."
+      - kind: table
+        title: "الـ demographic transition"
+        columns: ["", "Wide base", "Column", "Narrow base"]
+        rows:
+          - ["Birth rate", "↑↑", "↓", "↓↓"]
+          - ["Mortality rate", "↑", "↓", "↓"]
+          - ["Life expectancy", "Short", "Long", "Long"]
+          - ["Population", "Growing", "Stable", "Declining"]
+        hide: [[3, 1], [3, 2], [3, 3]]
+        page: 259
+        quote: "Birth rate ↑↑ ↓ ↓↓ Mortality rate ↑ ↓ ↓ Life expectancy Short Long Long Population Growing Stable Declining"
+      - kind: explain
+        title: "الـ likelihood ratio"
+        text: |-
+          - **LR+** = sensitivity ÷ (1 – specificity): الإيجابي الحقيقي ÷ الإيجابي الكداب.
+          - **LR–** = (1 – sensitivity) ÷ specificity.
+          - ==LR+ > 10== ← test specific جداً. ==LR– < 0.1== ← test sensitive جداً.
+
+          والحسبة: **pretest odds × LR = posttest odds**، وبعدين posttest probability = posttest odds ÷ (posttest odds + 1). خلي بالك: بنضرب الـ **odds** مش الـ probability.
+        page: 259
+        quote: "Pretest odds × LR = posttest odds. Posttest probability = posttest odds / (posttest odds + 1)."
+      - kind: reveal
+        prompt: "الـ Kaplan-Meier curve بيرسم إيه، وبنقارن منحنيين بإيه؟"
+        answer: "بيرسم ==survival probability== (محور y) مع الوقت (محور x)، لأي حدث (غالباً الوفاة). Survival = 1 – event probability. والـ P value للفرق بالـ **log rank test** أو **Cox regression**."
+        page: 259
+        quote: "Survival probability = 1 – (event probability). P value for the survival difference can be calculated using log rank test or Cox regression."
+      - kind: try
+        items: [phs.L01.017, phs.L01.020, phs.L01.025, phs.L01.027, phs.L01.028]
+    recap:
+      - "OR = ad/bc (case-control). RR = risk exposed ÷ risk unexposed (cohort). مرض نادر ← OR ≈ RR."
+      - "AR و ARR فروق؛ RRR = 1 – RR. NNT = 1/ARR، NNH = 1/AR."
+      - "LR+ > 10 specific، LR– < 0.1 sensitive. Pretest odds × LR = posttest odds."
+      - "Kaplan-Meier ← log rank أو Cox."
+    practice: [phs.L01.017, phs.L01.018, phs.L01.019, phs.L01.020, phs.L01.021, phs.L01.022, phs.L01.023, phs.L01.024, phs.L01.025, phs.L01.026, phs.L01.027, phs.L01.028, phs.L01.029, phs.L01.030, phs.L01.031]
+  - id: phs.L01.lesson3
+    title: "Sensitivity و specificity و PPV: التحليل اللي بيتسأل كل امتحان"
+    hook: "SN-N-OUT و SP-P-IN، وليه الـ PPV بيتغيّر لما تغيّر المكان مش الـ test"
+    minutes: 10
+    pages: [260, 261]
+    topics: [hazard-ratio, evaluation-of-diagnostic-tests, roc-curve, precision-vs-accuracy]
+    goals:
+      - "تقرا الـ hazard ratio"
+      - "تحسب sensitivity و specificity و PPV و NPV، وتعرف أثر الـ prevalence والـ cutoff"
+      - "تقرا الـ ROC curve وتفرّق بين precision و accuracy"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ hazard ratio"
+        text: |-
+          بيقارن الحدث (وفاة، relapse) بيحصل قد إيه في مجموعة مقابل التانية على مدار الوقت:
+          - **HR = 1**: مفيش فرق. **HR > 1**: الحدث أكتر في مجموعة العلاج/الـ exposure. **HR < 1**: أقل (==protective==).
+
+          على الـ Kaplan-Meier: المنحنى ==الأشد ميلاً== = hazard أعلى، والمسافة بين المنحنيين بتعكس حجم الـ HR.
+        page: 260
+        quote: "HR = 1—no difference between groups. HR > 1—event occurs more frequently in the treatment/exposure group. HR < 1—event occurs less frequently in the treatment/exposure group (protective effect)."
+      - kind: explain
+        title: "الأربع خانات"
+        text: |-
+          - **Sensitivity** = TP/(TP + FN): من العيانين، كام الـ test مسكهم. عالية ← FN قليل ← ==SN-N-OUT==: لو sensitive وطلع negative، المرض اتشال. بنستخدمه في الـ **screening**.
+          - **Specificity** = TN/(TN + FP): من السليمين، كام طلعوا negative. عالية ← FP قليل ← ==SP-P-IN==: لو specific وطلع positive، المرض اتأكد. بنستخدمه للـ **confirmation**.
+          - **PPV** = TP/(TP + FP): لو الـ test positive، احتمال إنه عيان فعلاً.
+          - **NPV** = TN/(TN + FN): لو negative، احتمال إنه سليم فعلاً.
+        page: 260
+        quote: "SN-N-OUT = highly SeNsitive test, when Negative, rules OUT disease High sensitivity test used for screening"
+      - kind: reveal
+        prompt: "نفس الـ test، بنستخدمه مرة في عيادة متخصصة (المرض منتشر) ومرة في screening للناس كلها (المرض نادر). إيه اللي هيتغيّر؟"
+        answer: "الـ sensitivity والـ specificity ==ثابتين== (خواص الـ test). اللي بيتغيّر الـ **PPV** والـ **NPV**: prevalence أعلى ← ==PPV أعلى== و NPV أقل. فالـ positive في العيادة المتخصصة يصدّق أكتر من الـ positive في الـ screening."
+        page: 260
+        quote: "Sensitivity and specificity are fixed properties of a test. PPV and NPV vary depending on disease prevalence in population being tested."
+      - kind: check
+        question: "A test is positive in 90 of 100 people with a disease and in 50 of 900 people without it. What is its specificity?"
+        options:
+          - "About 94%"
+          - "90%"
+          - "About 64%"
+          - "About 99%"
+        answer: 0
+        why:
+          - "صح: TN = 900 – 50 = 850، specificity = 850/900 ≈ 94%."
+          - "90% هي الـ sensitivity (90/100)."
+          - "64% هي الـ PPV تقريباً: 90/(90 + 50)."
+          - "99% هي الـ NPV تقريباً: 850/(850 + 10)."
+        page: 260
+        quote: "Specificity (true- negative rate) Proportion of all people without disease who test negative"
+      - kind: figure
+        title: "الـ cutoff بيحرّك كل حاجة"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="10" y1="150" x2="350" y2="150"/>
+            <path class="fg-arrow" d="M20 150 C 70 150, 90 40, 140 40 C 190 40, 210 150, 260 150" fill="none" stroke-width="3"/>
+            <path class="fg-arrow-bad" d="M100 150 C 150 150, 170 40, 220 40 C 270 40, 290 150, 340 150" fill="none" stroke-width="3"/>
+            <text x="90" y="32" class="t-sm">Disease absent</text>
+            <text x="215" y="32" class="t-sm t-bad">Disease present</text>
+            <line class="fg-thin" x1="120" y1="20" x2="120" y2="165"/>
+            <line class="fg-thin" x1="180" y1="20" x2="180" y2="165"/>
+            <line class="fg-thin" x1="240" y1="20" x2="240" y2="165"/>
+            <text x="116" y="176" class="t-sm t-b">A</text>
+            <text x="176" y="176" class="t-sm t-b">B</text>
+            <text x="236" y="176" class="t-sm t-b">C</text>
+          </svg>
+        caption: "الـ cutoff عند A = 100% sensitivity (مفيش FN، بس FP كتير). عند C = 100% specificity (مفيش FP، بس FN كتير). B حل وسط. نزّل الـ cutoff ← sensitivity و NPV يعلوا. علّيه ← specificity و PPV يعلوا."
+        alt: "Two overlapping bell curves of test values, disease absent on the left and disease present on the right, with three cutoff lines: A at 100% sensitivity, B a compromise, C at 100% specificity."
+        page: 260
+        quote: "A = 100% sensitivity cutoff value B = practical compromise between speciﬁcity and sensitivity C = 100% speciﬁcity cutoff value"
+      - kind: check
+        question: "Raising the cutoff for a positive PSA test (from B toward C) will:"
+        options:
+          - "Increase specificity and PPV, decrease sensitivity and NPV"
+          - "Increase sensitivity and NPV"
+          - "Increase all four"
+          - "Change only PPV"
+        answer: 0
+        why:
+          - "صح: cutoff أعلى ← FP أقل و FN أكتر ← specificity و PPV ↑، و sensitivity و NPV ↓."
+          - "ده اللي بيحصل لما تنزّل الـ cutoff."
+          - "الـ sensitivity والـ specificity بيتحركوا عكس بعض."
+          - "الأربعة بيتغيروا مع الـ cutoff."
+        page: 260
+        quote: "Raising the cutoff value: ↑ Sensitivity ↑ NPV Speciﬁcity PPV"
+      - kind: explain
+        title: "الـ ROC curve"
+        text: |-
+          بيرسم الـ **TP rate** (sensitivity) مقابل الـ **FP rate** (1 – specificity) لكل cutoff ممكن.
+
+          الـ test الأحسن ==AUC أعلى== ومنحناه قريب من الركن الشمال فوق. AUC = 1 مثالي، و AUC = 0.5 يبقى زي رمي العملة (no predictive value).
+        page: 261
+        quote: "Plots the true-positive rate (sensitivity) against the false-positive rate (1 – specificity). The better performing test will have a higher area under the curve (AUC), with the curve closer to the upper left corner."
+      - kind: aside
+        tone: analogy
+        text: "**Precision** زي رامي سهام كل سهامه جنب بعض، حتى لو بعيد عن النص: مفيش ==random error==، و SD صغير و power أعلى. **Accuracy** إن سهامه حوالين النص: مفيش ==systematic error== (bias). ممكن تبقى precise من غير ما تبقى accurate."
+        page: 261
+        quote: "Precision (reliability) The consistency and reproducibility of a test. The absence of random variation in a test. Random error ↓ precision in a test."
+      - kind: try
+        items: [phs.L01.032, phs.L01.036, phs.L01.037, phs.L01.039, phs.L01.044]
+    recap:
+      - "HR > 1 الحدث أكتر، < 1 protective. المنحنى الأشد ميلاً = hazard أعلى."
+      - "SN-N-OUT للـ screening، SP-P-IN للتأكيد."
+      - "Sensitivity و specificity ثابتين؛ PPV بيعلى مع الـ prevalence و NPV بيقل."
+      - "Cutoff أقل ← sensitivity و NPV ↑. ROC: AUC أعلى أحسن، 0.5 مالوش قيمة."
+      - "Precision ضد random error، accuracy ضد systematic error."
+    practice: [phs.L01.032, phs.L01.033, phs.L01.034, phs.L01.035, phs.L01.036, phs.L01.037, phs.L01.038, phs.L01.039, phs.L01.040, phs.L01.041, phs.L01.042, phs.L01.043, phs.L01.044, phs.L01.045]
+  - id: phs.L01.lesson4
+    title: "Incidence و prevalence، والـ bias اللي بيبوّظ الدراسات"
+    hook: "دوا بيطوّل عمر المريض من غير ما يشفيه بيزوّد الـ prevalence. ليه؟"
+    minutes: 10
+    pages: [262, 264]
+    topics: [incidence-vs-prevalence, bias-and-study-errors, confounding-vs-effect-modification]
+    goals:
+      - "تفرّق بين incidence و prevalence وتعرف إيه اللي بيغيّرهم"
+      - "تعرف كل نوع bias وإزاي نقلله"
+      - "تفرّق بين confounding و effect modification"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الحوض والحنفية"
+        text: |-
+          - **Incidence** = الحالات ==الجديدة== في فترة ÷ الناس اللي عندهم risk.
+          - **Prevalence** = ==كل الحالات الموجودة== في لحظة ÷ كل الناس.
+
+          والعلاقة: **prevalence ≈ incidence × duration**. المرض المزمن (diabetes) الـ prevalence أكبر بكتير من الـ incidence، والمرض القصير (البرد) تقريباً زي بعض. والـ prevalence تقريباً = الـ pretest probability، فكل ما تعلى ← PPV ↑ و NPV ↓.
+        page: 262
+        quote: "Prevalence = incidence × duration of the disease. Prevalence > incidence for chronic diseases, due to large # of existing cases (eg, diabetes)."
+      - kind: figure
+        title: "الحوض"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="ps1b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <path class="fg-acc" d="M110 60 L250 60 L235 150 L125 150 Z"/>
+            <text x="145" y="110" class="t-sm t-b">Prevalence</text>
+            <line class="fg-arrow-acc" x1="180" y1="10" x2="180" y2="55" marker-end="url(#ps1b)"/>
+            <text x="190" y="30" class="t-sm">Incidence (new cases)</text>
+            <line class="fg-arrow-acc" x1="125" y1="150" x2="60" y2="170" marker-end="url(#ps1b)"/>
+            <text x="10" y="160" class="t-sm">Cure</text>
+            <line class="fg-arrow-acc" x1="235" y1="150" x2="300" y2="170" marker-end="url(#ps1b)"/>
+            <text x="298" y="160" class="t-sm">Mortality</text>
+          </svg>
+        caption: "الـ incidence هي الحنفية اللي بتصب حالات جديدة، والـ prevalence هي الحوض. الحوض بيفضى بالشفا أو الوفاة. علاج بيطوّل العمر من غير شفا بيقفل المصرف، فالحوض يتملي (prevalence ↑) والحنفية زي ما هي."
+        alt: "A basin labelled prevalence filled from above by incidence (new cases) and drained by cure and mortality."
+        page: 262
+        quote: "Incidence looks at new cases (incidents)."
+      - kind: sort
+        prompt: "الموقف ده بيغيّر الـ incidence، ولا الـ prevalence بس؟"
+        bins: ["Prevalence only", "Both incidence and prevalence"]
+        cards:
+          - { text: "↑ survival time", bin: 0 }
+          - { text: "↑ mortality rate", bin: 0 }
+          - { text: "Faster recovery", bin: 0 }
+          - { text: "New effective treatment", bin: 0 }
+          - { text: "Extensive vaccination", bin: 1 }
+          - { text: "↓ risk factors", bin: 1 }
+          - { text: "↑ diagnostic sensitivity", bin: 1 }
+        why: "أي حاجة بتمنع حالات جديدة (vaccine، risk factors أقل) بتقلل الاتنين. أي حاجة بتغيّر مدة المرض بس (survival، mortality، recovery، علاج) بتغيّر الـ prevalence بس. والـ test الأحسن بيلاقي حالات أكتر فالاتنين يعلوا."
+        page: 262
+        quote: "SITUATION INCIDENCE PREVALENCE ↑ survival time — ↑ ↑ mortality rate — ↓ Faster recovery time — ↓"
+      - kind: explain
+        title: "الـ bias في كل مرحلة"
+        text: |-
+          **وإحنا بنجمع الناس**: **selection bias** (عينة مش ممثلة؛ غالباً sampling bias): convenience sampling، و ==Berkson bias== (الحالات من المستشفى أعيى ومختلفين)، و attrition bias (اللي ضاعوا من الـ follow-up مختلفين). العلاج: **randomization** واختيار comparison group صح.
+
+          **وإحنا بنعمل الدراسة**: **recall bias** (اللي عنده المرض بيفتكر الـ exposure أكتر؛ نستخدم السجلات)، **measurement bias** (جهاز ضغط بايظ، **Hawthorne effect**: الناس بتتغير لما تعرف إنها متراقبة)، **procedure bias**، و **observer-expectancy** (Pygmalion). العلاج: ==blinding== و placebo.
+        page: 263
+        quote: "Berkson bias—cases and/ or controls selected from hospitals (bedside bias) are less healthy and have different exposures"
+      - kind: explain
+        title: "bias في التفسير: lead-time و length-time"
+        text: |-
+          - **Lead-time bias**: الـ screening بيكتشف المرض ==بدري==، فيبان إن المريض عاش أكتر بعد التشخيص، بس المرض مشي نفس المشوار. الحل: نقيس back-end survival.
+          - **Length-time bias**: الـ screening بيمسك الأمراض ==البطيئة== أكتر (لأنها قاعدة مدة أطول من غير أعراض)، أما السريعة بتبان بأعراض قبل الـ screening. الحل: RCT بين screening ولا لأ.
+        page: 263
+        quote: "Lead-time bias Early detection interpreted as ↑ survival, but the disease course has not changed"
+      - kind: check
+        question: "Mothers of babies with birth defects report more medication use in pregnancy than mothers of healthy babies, though pharmacy records show no difference. Which bias?"
+        options:
+          - "Recall bias"
+          - "Berkson bias"
+          - "Lead-time bias"
+          - "Hawthorne effect"
+        answer: 0
+        why:
+          - "صح: الإحساس بالمرض بيغيّر التذكّر، وده شائع في الدراسات الـ retrospective؛ والحل السجلات."
+          - "الـ Berkson bias اختيار الحالات من المستشفى."
+          - "الـ lead-time بيخص الـ screening والـ survival."
+          - "الـ Hawthorne الناس بتتغير عشان متراقبة."
+        page: 263
+        quote: "Recall bias Awareness of disorder alters recall by subjects; common in retrospective studies"
+      - kind: explain
+        title: "Confounding ولا effect modification؟"
+        text: |-
+          الاختبار هو ==stratification== (نقسم حسب العامل التالت):
+
+          - **Confounding**: العامل مرتبط بالـ exposure وبالنتيجة. القهوة شكلها مرتبطة بالـ lung cancer، بس السبب الحقيقي التدخين (اللي بيشربوا قهوة بيدخنوا أكتر). بعد التقسيم ==الـ association تختفي==. نقلله بالـ matching والـ crossover والـ regression.
+          - **Effect modification**: الـ association ==حقيقية== بس بتختلف حسب المجموعة: الـ OCPs والـ DVT قوية جداً في المدخنات ومفيش في غير المدخنات. نتعامل معاه بالـ stratified analysis.
+        page: 264
+        quote: "Coffee appears to be linked to lung cancer, but smoking is the true cause, as coffee drinkers tend to smoke more"
+      - kind: check
+        question: "An association between a drug and kidney injury is strong in diabetics but absent in nondiabetics. Diabetes is:"
+        options:
+          - "An effect modifier"
+          - "A confounder"
+          - "A source of selection bias"
+          - "Lead-time bias"
+        answer: 0
+        why:
+          - "صح: الـ association حقيقية وبتختلف بين المجموعتين، ده effect modification."
+          - "في الـ confounding الـ association بتختفي في كل المجموعات بعد التقسيم."
+          - "الـ selection bias عينة مش ممثلة."
+          - "الـ lead-time بيخص الـ screening."
+        page: 264
+        quote: "Effect modification Exposure leads to different outcomes in subgroups stratified by factor True association exists"
+      - kind: try
+        items: [phs.L01.047, phs.L01.048, phs.L01.050, phs.L01.051, phs.L01.053]
+    recap:
+      - "Prevalence ≈ incidence × duration. Survival ↑ ← prevalence ↑ بس. Vaccine ← الاتنين ↓."
+      - "Selection (Berkson، attrition) ← randomization. Recall ← السجلات. Measurement (Hawthorne)، procedure، observer-expectancy ← blinding."
+      - "Lead-time: اكتشاف بدري شكله survival أطول. Length-time: الـ screening بيمسك البطيء."
+      - "Confounding: الـ association تختفي بعد التقسيم. Effect modification: حقيقية وبتختلف."
+    practice: [phs.L01.046, phs.L01.047, phs.L01.048, phs.L01.049, phs.L01.050, phs.L01.051, phs.L01.052, phs.L01.053, phs.L01.054]
+  - id: phs.L01.lesson5
+    title: "التوزيع والـ P value والأخطاء والـ CI: الإحصاء بتاع الامتحان"
+    hook: "الولد اللي بيصرخ ذيب مرتين بيشرح الـ type I والـ type II في قصة واحدة"
+    minutes: 10
+    pages: [265, 267]
+    topics: [statistical-distribution, statistical-hypothesis-testing, testing-errors, statistical-vs-clinical-significance, confidence-interval, meta-analysis, common-statistical-tests]
+    goals:
+      - "تعرف mean و median و mode و SD و SE والـ skew"
+      - "تفهم الـ P value والـ type I و II والـ power"
+      - "تقرا الـ CI وتختار الـ statistical test الصح"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Mean و median و mode"
+        text: |-
+          - **Mean**: المتوسط، ==أكتر واحد بيتأثر بالـ outliers==.
+          - **Median**: القيمة اللي في النص بعد الترتيب.
+          - **Mode**: الأكتر تكراراً، أقل واحد بيتأثر.
+
+          في الـ **normal distribution** الـ mean = median = mode، و 68% و 95% و 99.7% جوه ±1 و ±2 و ±3 SD. في الـ skewed data الـ ==median أحسن==. والـ **SE = SD/√n**، فبيقل لما العينة تكبر.
+        page: 265
+        quote: "Mode = most common value. Least affected by outliers."
+      - kind: figure
+        title: "الـ skew: الـ mean بيجري ورا الديل"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="10" y1="130" x2="170" y2="130"/>
+            <line class="fg-ink" x1="190" y1="130" x2="350" y2="130"/>
+            <path class="fg-arrow-acc" d="M15 130 C 30 130, 40 30, 60 30 C 90 30, 110 120, 165 128" fill="none" stroke-width="3"/>
+            <path class="fg-arrow-acc" d="M195 128 C 250 120, 270 30, 300 30 C 320 30, 330 130, 345 130" fill="none" stroke-width="3"/>
+            <text x="20" y="150" class="t-sm t-b">Positive skew</text>
+            <text x="20" y="20" class="t-sm">mode &lt; median &lt; mean</text>
+            <text x="200" y="150" class="t-sm t-b">Negative skew</text>
+            <text x="200" y="20" class="t-sm">mean &lt; median &lt; mode</text>
+            <line class="fg-thin" x1="60" y1="30" x2="60" y2="130"/>
+            <line class="fg-thin" x1="80" y1="45" x2="80" y2="130"/>
+            <line class="fg-thin" x1="100" y1="80" x2="100" y2="130"/>
+            <line class="fg-thin" x1="300" y1="30" x2="300" y2="130"/>
+            <line class="fg-thin" x1="280" y1="45" x2="280" y2="130"/>
+            <line class="fg-thin" x1="260" y1="80" x2="260" y2="130"/>
+          </svg>
+        caption: "في الـ positive skew الديل يمين، فالـ mean بيتسحب يمين (mean > median > mode). في الـ negative skew الديل شمال (mean < median < mode). والـ bimodal معناه غالباً مجموعتين مختلفتين، زي fast و slow acetylators."
+        alt: "Two skewed curves. Positive skew with a long right tail: mode, then median, then mean toward the tail. Negative skew with a long left tail: mean, then median, then mode."
+        page: 265
+        quote: "Positive skew Typically, mean > median > mode. Asymmetry with longer tail on right; mean falls closer to tail."
+      - kind: explain
+        title: "H0 و الـ P value"
+        text: |-
+          - **H0** (null): ==مفيش فرق==. **H1**: فيه فرق أو association.
+          - **P value**: احتمال تطلع نتيجة متطرفة كده أو أكتر ==لو H0 صح==. غالباً الحد 0.05.
+
+          لو P < α بنرفض H0. وعمرك ما بتـ "prove" الـ H1، إنت بس بترفض الـ H0 لأنه بعيد الاحتمال.
+        page: 265
+        quote: "P value Probability of obtaining test results at least as extreme as those observed in the sample, assuming that H0 is correct."
+      - kind: aside
+        tone: analogy
+        text: "قصة الكتاب: **أول مرة** الولد صرخ «ذيب!» والبلد صدّقت ومكانش فيه ذيب ← ==type I== (false positive، α). **تاني مرة** البلد ما صدّقتش وكان فيه ذيب فعلاً ← ==type II== (false negative، β)."
+        page: 266
+        quote: "1st time boy cries wolf, the town believes there is a wolf, but there is not (false positive)."
+      - kind: explain
+        title: "الـ power"
+        text: |-
+          **Power = 1 – β** = احتمال ترفض H0 لما يكون غلط فعلاً. بتزوده بـ:
+          - ==sample size أكبر== («There is power in numbers»)
+          - effect size متوقع أكبر
+          - قياس أدق (precision)
+          - α أعلى
+
+          وعموماً لما الـ type I يزيد، الـ type II يقل.
+        page: 266
+        quote: "↑ power and ↓ β by: ↑ sample size ↑ expected effect size ↑ precision of measurement ↑ α level (↑ statistical significance level)."
+      - kind: check
+        question: "A trial of 20 patients finds no significant difference, but the drug truly works. What happened, and what would most help?"
+        options:
+          - "Type II error; increase the sample size"
+          - "Type I error; lower α"
+          - "Type I error; increase the sample size"
+          - "No error; the drug doesn't work"
+        answer: 0
+        why:
+          - "صح: ما رفضناش H0 وهو غلط ← type II، والعينة الصغيرة power قليل."
+          - "الـ type I إنك تلاقي فرق مش موجود."
+          - "مفيش فرق اتلقى، فمش type I."
+          - "السؤال بيقول الدوا بيشتغل فعلاً."
+        page: 266
+        quote: "If you ↑ sample size, you ↑ power. There is power in numbers."
+      - kind: aside
+        tone: trap
+        text: "==Statistical significance ≠ clinical significance==. دراسة كبيرة ممكن تلاقي إن الدوا بينزّل السكر 1 mg/dL بـ P صغير جداً، بس ده ممكن ما يفرقش مع المريض."
+        page: 266
+        quote: "eg, a study might show a statistical significance of lowered blood sugar levels by 1 mg/dL correlated with better outcomes, but this may not be clinically as important."
+      - kind: explain
+        title: "الـ CI"
+        text: |-
+          الـ **95% CI** = المدى اللي الـ mean الحقيقي متوقع يكون فيه = x̄ ± 1.96 × SE (و 2.58 للـ 99%). بيضيق لما العينة تكبر.
+
+          النتيجة **significant** لو:
+          - الـ CI للفرق بين متوسطين ==ما فيهوش 0==.
+          - الـ CI للـ OR أو RR ==ما فيهوش 1==.
+          - الـ CIs بتاعة المجموعتين ما بيتداخلوش.
+        page: 267
+        quote: "H0 is rejected (and results are significant) when: 95% CI for mean difference excludes 0 95% CI OR or RR excludes 1 CIs between two groups do not overlap"
+      - kind: check
+        question: "An odds ratio is 2.5 with a 95% CI of 0.8–6.1. Interpretation?"
+        options:
+          - "Not significant, because the CI includes 1"
+          - "Significant, because the OR is above 1"
+          - "Significant, because the CI excludes 0"
+          - "The exposure is protective"
+        answer: 0
+        why:
+          - "صح: للـ OR أو RR، لو الـ CI فيه 1 يبقى مش significant."
+          - "الـ point estimate لوحده مش كفاية."
+          - "قاعدة الـ 0 للفرق بين متوسطين، مش للـ ratio."
+          - "الـ protective محتاج OR < 1 والـ CI كله تحت 1."
+        page: 267
+        quote: "95% CI OR or RR includes 1"
+      - kind: match
+        prompt: "وصّل كل test باستخدامه"
+        pairs:
+          - ["t-test", "Means of 2 groups"]
+          - ["ANOVA", "Means of 3 or more groups"]
+          - ["Chi-square", "Proportions of categorical outcomes"]
+          - ["Fisher's exact test", "2 proportions, small sample"]
+        why: "من الكتاب: «Tea is meant for 2»، و ANOVA = ANalysis Of VAriance، و chi-square «chi-tegorical». والـ **meta-analysis** بيجمع دراسات كتير فبيزود الـ power والـ generalizability، بس محدود بجودة الدراسات والـ selection bias."
+        page: 267
+        quote: "t-test Checks differences between means of 2 groups. Tea is meant for 2."
+      - kind: try
+        items: [phs.L01.057, phs.L01.058, phs.L01.062, phs.L01.063, phs.L01.069]
+    recap:
+      - "الـ mean بيتأثر بالـ outliers؛ في الـ skew استخدم الـ median. SE = SD/√n."
+      - "P value = احتمال النتيجة لو H0 صح."
+      - "Type I = false positive (α)، type II = false negative (β). Power = 1 – β ويزيد بالعدد."
+      - "CI للـ ratio فيه 1، أو للفرق فيه 0 ← مش significant."
+      - "t-test لـ 2 means، ANOVA لـ 3+، chi-square للنسب، Fisher للعينات الصغيرة."
+    practice: [phs.L01.055, phs.L01.056, phs.L01.057, phs.L01.058, phs.L01.059, phs.L01.060, phs.L01.061, phs.L01.062, phs.L01.063, phs.L01.064, phs.L01.065, phs.L01.066, phs.L01.067, phs.L01.068, phs.L01.069, phs.L01.070, phs.L01.071, phs.L01.072, phs.L01.073, phs.L01.074]

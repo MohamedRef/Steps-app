@@ -1,0 +1,913 @@
+schema: steps.lesson/v1
+lecture: msk.L02
+lessons:
+  - id: msk.L02.lesson1
+    title: "خلايا العضم وإصابات كل يوم"
+    hook: "الـ osteoblast بيبني والـ osteoclast بيهد، والـ RANKL هو المفتاح. وبعدها جولة على الإصابات اللي هتشوفها في أي عيادة"
+    minutes: 10
+    pages: [462, 465]
+    topics: [cell-biology-of-bone, overuse-injuries-of-the-elbow, clavicle-fractures, wrist-and-hand-injuries, psoas-abscess, common-knee-conditions, common-musculoskeletal-conditions]
+    goals:
+      - "تفهم الـ RANK-RANKL-OPG وإزاي الـ PTH والـ estrogen بيأثروا"
+      - "تعرف الـ carpal tunnel وليه الـ thenar حسه سليم"
+      - "تعرف الـ compartment syndrome وعلاماته المتأخرة"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "البنّا والهدّام"
+        text: |-
+          - **Osteoblast**: البنّا. بيفرز collagen ويعمل mineralization بالـ ==ALP==. جاي من الـ mesenchymal stem cells. نقيس شغله بالـ bone ALP والـ osteocalcin.
+          - **Osteoclast**: الهدّام. بيفرز H+ و collagenases. جاي من اندماج خلايا الـ monocyte/macrophage.
+
+          والاتنين بيكلّموا بعض: الـ osteoblast بيطلّع **RANKL** يشغّل الـ RANK على الـ osteoclast. والـ ==OPG== طُعم بيمسك الـ RANKL فيوقف الهدم.
+        page: 462
+        quote: "RANK receptors on osteoclasts are stimulated by RANKL (RANK ligand, expressed on osteoblasts). OPG (osteoprotegerin, a RANKL decoy receptor) binds RANKL to prevent RANK-RANKL interaction"
+      - kind: figure
+        title: "RANKL بيشغّل، OPG بيطفّي"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="msk2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-good" x="15" y="55" width="100" height="50" rx="10"/>
+            <text x="30" y="85" class="t-sm t-b">Osteoblast</text>
+            <line class="fg-arrow-acc" x1="115" y1="80" x2="225" y2="80" marker-end="url(#msk2a)"/>
+            <text x="140" y="72" class="t-sm t-acc">RANKL → RANK</text>
+            <rect class="fg-bad" x="230" y="55" width="115" height="50" rx="10"/>
+            <text x="245" y="85" class="t-sm t-b">Osteoclast</text>
+            <circle class="fg-dot-bad" cx="170" cy="125" r="8"/>
+            <text x="150" y="150" class="t-sm t-bad">OPG traps RANKL</text>
+            <text x="20" y="30" class="t-sm t-mut">builds bone (ALP)</text>
+            <text x="235" y="30" class="t-sm t-mut">resorbs bone (H+)</text>
+          </svg>
+        caption: "الـ osteoblast بيطلّع RANKL يشغّل الـ osteoclast. الـ OPG بيمسك الـ RANKL قبل ما يوصل، فالهدم يقل. والـ denosumab بيعمل نفس شغلانة الـ OPG."
+        alt: "An osteoblast sends RANKL to RANK on an osteoclast, activating bone resorption; OPG traps RANKL in between and blocks it."
+        page: 462
+        quote: "RANK receptors on osteoclasts are stimulated by RANKL (RANK ligand, expressed on osteoblasts)."
+      - kind: reveal
+        prompt: "الـ PTH هو هرمون رفع الكالسيوم من العضم. إزاي بيبقى دوا للـ osteoporosis (teriparatide)؟"
+        answer: "المهم **النمط**: الـ PTH بجرعات قليلة **متقطعة** ← anabolic (بيبني). الـ PTH العالي **على طول** (1° hyperparathyroidism) ← catabolic ← ==osteitis fibrosa cystica==."
+        page: 462
+        quote: "At low, intermittent levels, exerts anabolic effects (building bone) on osteoblasts and osteoclasts (indirect). Chronically ↑ PTH levels (1° hyperparathyroidism) cause catabolic effects (osteitis fibrosa cystica)."
+      - kind: explain
+        title: "الـ carpal tunnel: الإبهام بيضمر والحس سليم"
+        text: |-
+          الـ median بيتزنق بين الـ transverse carpal ligament والـ carpal bones ← تنميل ووجع في توزيعه، والـ ==thenar بيضمر==.
+
+          بس الحس على الـ thenar نفسه **سليم**، لأن الـ palmar cutaneous branch بيدخل الإيد من **فوق** النفق.
+
+          **الفحص**: Tinel (خبطة على الرسغ) و Phalen (ثني الرسغ 90°). **مع إيه؟** حمل، RA، hypothyroidism، سكر، acromegaly، و amyloidosis من الغسيل الكلوي.
+        page: 463
+        quote: "Thenar eminence atrophies but sensation spared, because palmar cutaneous branch enters hand external to carpal tunnel."
+      - kind: check
+        question: "Which condition is NOT listed by First Aid as associated with carpal tunnel syndrome?"
+        options:
+          - "Hyperthyroidism"
+          - "Pregnancy"
+          - "Acromegaly"
+          - "Dialysis-related amyloidosis"
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول hypothyroidism، مش hyperthyroidism."
+          - "الحمل موجود (edema)."
+          - "الـ acromegaly موجود."
+          - "الـ amyloidosis من الغسيل موجود."
+        page: 463
+        quote: "Associated with pregnancy (due to edema), rheumatoid arthritis, hypothyroidism, diabetes, acromegaly, dialysis-related amyloidosis"
+      - kind: aside
+        tone: exam
+        text: "إصابات سريعة: الـ **clavicle** بيتكسر عند ملتقى الـ middle والـ lateral third (الكتف يقع). الـ ==boxer's fracture== = الـ 5th metacarpal neck (خبط في حيطة). **golfer's** = medial epicondyle (flexion)، **tennis** = lateral epicondyle (extension، backhand)."
+        page: 463
+        quote: "Most commonly the 5th metacarpal A (“boxer’s fracture”). Typically occurs in young males due to direct trauma (eg, punching a wall)."
+      - kind: explain
+        title: "الركبة: الثالوث التعيس والـ bursae"
+        text: |-
+          - **Unhappy triad**: قوة من برّه والرجل ثابتة في الأرض ← ACL و MCL و medial meniscus. بس الكتاب بينبّه: الـ ==lateral meniscus أكتر== مع الـ ACL والـ MCL.
+          - **Prepatellar bursitis**: قدّام الرضفة من الركوع الكتير ("housemaid's knee").
+          - **Baker cyst**: ورا الركبة في الـ gastrocnemius-semimembranosus bursa، متوصّل بالـ synovial space، مع OA أو RA.
+        page: 464
+        quote: "However, lateral meniscus involvement is more common than medial meniscus involvement in conjunction with ACL and MCL injury."
+      - kind: order
+        prompt: "رتّب سلسلة الـ compartment syndrome"
+        steps:
+          - "↑ pressure in a fascial compartment"
+          - "Venous outflow obstruction, arteriolar collapse"
+          - "Anoxia, necrosis"
+          - "Rhabdomyolysis"
+          - "Acute tubular necrosis"
+        why: "الضغط بيقفل الوريد الأول (ضغطه واطي)، وبعدين الشرايين الصغيرة، والعضلة تموت وتطلّع myoglobin يبوّظ الكلية. الـ CK العالي والـ motor deficit علامات **متأخرة**: يعني الضرر خلاص حصل."
+        page: 465
+        quote: "↑ pressure within fascial compartment of a limb → venous outflow obstruction and arteriolar collapse → anoxia, necrosis, rhabdomyolysis → acute tubular necrosis."
+      - kind: aside
+        tone: trap
+        text: "النبض **موجود** ما ينفيش الـ compartment syndrome. أهم علامة بدرية: ==ألم مع الـ passive stretch== وعضلة مشدودة. الـ 5 P's: pain، pallor، paresthesia، pulselessness، paralysis."
+        page: 465
+        quote: "Presents with severe pain and tense, swollen compartments with passive stretch of muscles in the affected compartment."
+      - kind: match
+        prompt: "وصّل كل حالة بأهم حاجة فيها"
+        pairs:
+          - ["de Quervain tenosynovitis", "Finkelstein test, new mothers"]
+          - ["Dupuytren contracture", "Ring and little finger palmar fascia"]
+          - ["Ganglion cyst", "Transilluminates, dorsal wrist"]
+          - ["Plantar fasciitis", "Heel pain with first morning steps"]
+          - ["Psoas abscess", "Pain on hip extension, S aureus"]
+        why: "كل واحدة ليها علامة واحدة بتفضحها، والسؤال غالباً بيحطها في الـ stem."
+        page: 465
+        quote: "Mucin-filled swelling overlying joint or tendon sheath, most commonly at dorsal side of wrist. Transilluminates with shining light (tumors lack transillumination)."
+      - kind: try
+        items: [msk.L02.003, msk.L02.012, msk.L02.014, msk.L02.020, msk.L02.029]
+    recap:
+      - "RANKL من الـ osteoblast يشغّل الـ osteoclast؛ OPG بيمسكه."
+      - "PTH متقطع يبني، مستمر يهد. الـ estrogen بيحمي العضم."
+      - "Carpal tunnel: الـ thenar يضمر والحس عليه سليم."
+      - "Compartment: ألم مع الـ passive stretch بدري؛ CK و motor deficit متأخر."
+    practice: [msk.L02.001, msk.L02.002, msk.L02.003, msk.L02.004, msk.L02.005, msk.L02.006, msk.L02.007, msk.L02.008, msk.L02.009, msk.L02.010, msk.L02.011, msk.L02.012, msk.L02.013, msk.L02.014, msk.L02.015, msk.L02.016, msk.L02.017, msk.L02.018, msk.L02.019, msk.L02.020, msk.L02.021, msk.L02.022, msk.L02.023, msk.L02.024, msk.L02.025, msk.L02.026, msk.L02.027, msk.L02.028, msk.L02.029, msk.L02.030, msk.L02.031, msk.L02.032, msk.L02.033, msk.L02.034, msk.L02.035]
+  - id: msk.L02.lesson2
+    title: "عضم الأطفال: كل سن وليه مرضه"
+    hook: "طفل بيعرج؟ سنّه ووزنه لوحدهم بيقولولك التشخيص"
+    minutes: 8
+    pages: [466, 467]
+    topics: [childhood-musculoskeletal-conditions, common-pediatric-fractures, achondroplasia]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "رتّبهم بالسن"
+        text: |-
+          - **مولود**: ==DDH==. الـ acetabulum ما اتكوّنش صح (breech). Ortolani و Barlow ("clunk")، والتأكيد بالـ **ultrasound** لأن الغضروف لسه ما بقاش عضم لحد 4-6 شهور.
+          - **أقل من 5 سنين**: nursemaid's elbow. حد شد الطفل من إيده.
+          - **5-7 سنين، ولد**: ==Legg-Calvé-Perthes==: AVN للـ femoral head من غير سبب، وأول x-ray ممكن يبقى سليم.
+          - **مراهق تخين**: SCFE: الـ epiphysis بتتزحلق زي بولة آيس كريم من على البسكوتة.
+          - **مراهق رياضي**: Osgood-Schlatter (tibial tuberosity). **بنت رياضية**: patellofemoral.
+        page: 466
+        quote: "Classically presents in an obese young adolescent with hip/knee pain and altered gait. Increased axial force on femoral head → epiphysis displaces relative to femoral neck (like a scoop of ice cream slipping off a cone)."
+      - kind: aside
+        tone: trap
+        text: "الـ SCFE ممكن ييجي بـ ==وجع في الركبة== بس. مراهق تخين بيشتكي من ركبته والركبة سليمة في الكشف؟ افحص الـ hip."
+        page: 466
+        quote: "Classically presents in an obese young adolescent with hip/knee pain and altered gait."
+      - kind: check
+        question: "A 6-year-old boy has a limp and mild hip pain for 2 months. Initial hip x-ray is normal. Most likely?"
+        options:
+          - "Legg-Calvé-Perthes disease"
+          - "Slipped capital femoral epiphysis"
+          - "Developmental dysplasia of the hip"
+          - "Osgood-Schlatter disease"
+        answer: 0
+        why:
+          - "صح: 5-7 سنين، ولد (4:1)، بداية بطيئة، والـ x-ray الأول ممكن يبقى طبيعي."
+          - "الـ SCFE في مراهق تخين، والـ x-ray بيشخّصه."
+          - "الـ DDH في المواليد."
+          - "Osgood-Schlatter وجع قدّام الركبة في مراهق."
+        page: 466
+        quote: "Idiopathic avascular necrosis of femoral head. Commonly presents between 5-7 years with insidious onset of hip pain that may cause child to limp. More common in males (4:1 ratio). Initial x-ray often normal."
+      - kind: reveal
+        prompt: "ليه الـ Osgood-Schlatter بيحصل بعد الـ growth spurt بالذات؟"
+        answer: "الـ patellar tendon بيشد على الـ **secondary ossification center** بتاع الـ tibial tuberosity، وده لسه طري. مع الجري والنط الكتير الشد بيتكرر ← ==chronic avulsion== (traction apophysitis)."
+        page: 466
+        quote: "Overuse injury caused by repetitive strain and chronic avulsion of the secondary ossification center of the tibial tuberosity. Occurs in adolescents after growth spurt."
+      - kind: figure
+        title: "Greenstick ولا torus"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <text x="30" y="20" class="t-sm t-b">Greenstick (bending)</text>
+            <path class="fg-box" d="M60 35 Q 90 90 60 150 L 85 150 Q 115 90 85 35 Z"/>
+            <line class="fg-arrow-bad" x1="108" y1="80" x2="98" y2="92" stroke-width="3"/>
+            <text x="115" y="88" class="t-sm t-bad">breaks: tension side</text>
+            <text x="10" y="100" class="t-sm t-good">intact</text>
+            <text x="210" y="20" class="t-sm t-b">Torus (axial)</text>
+            <rect class="fg-box" x="240" y="35" width="25" height="115" rx="6"/>
+            <path class="fg-bad" d="M240 90 L 232 95 L 240 100 Z"/>
+            <path class="fg-bad" d="M265 90 L 273 95 L 265 100 Z"/>
+            <text x="280" y="98" class="t-sm t-bad">cortex buckles</text>
+            <text x="280" y="112" class="t-sm t-mut">(compression)</text>
+          </svg>
+        caption: "الـ greenstick: عضمة اتثنت زي فرع أخضر، اتكسرت من ناحية الشد وفضلت سليمة من ناحية الضغط. الـ torus: ضغط على طول العضمة، فالقشرة بتنبعج من ناحية الضغط."
+        alt: "Left: a bent bone broken on the convex tension side with the concave side intact (greenstick). Right: a straight bone with the cortex bulging outward from axial compression (torus fracture)."
+        page: 467
+        quote: "Incomplete fracture extending partway through width of bone A following bending stress; bone fails on tension side; compression side intact (compare to torus fracture)."
+      - kind: explain
+        title: "Achondroplasia: الـ receptor شغال زيادة"
+        text: |-
+          الغريبة: الـ mutation في ==FGFR3== بتخليه **شغال على طول** (gain of function)، وده بيـ **وقّف** انقسام الـ chondrocytes. فالـ endochondral ossification يقف ← أطراف قصيرة. الـ membranous سليم ← راس كبيرة بالنسبة للأطراف.
+
+          **الوراثة**: autosomal dominant، بس أكتر من 85% sporadic، ومع ==كبر سن الأب==. الـ homozygous بيموت. وده أشهر سبب للـ short-limbed dwarfism.
+        page: 467
+        quote: "Constitutive activation of fibroblast growth factor receptor (FGFR3) actually inhibits chondrocyte proliferation. >85% of mutations occur sporadically; autosomal dominant with full penetrance (homozygosity is lethal). Associated with ↑ paternal age."
+      - kind: check
+        question: "Two parents of average height have a child with achondroplasia. What best explains it?"
+        options:
+          - "A new (sporadic) mutation, more likely with older paternal age"
+          - "Both parents are heterozygous carriers"
+          - "Incomplete penetrance in one parent"
+          - "Maternal mitochondrial inheritance"
+        answer: 0
+        why:
+          - "صح: أكتر من 85% sporadic، ومرتبطة بكبر سن الأب."
+          - "لو الاتنين heterozygous كانوا هيبقوا قصيرين؛ ده autosomal dominant."
+          - "الـ penetrance كاملة."
+          - "مش mitochondrial."
+        page: 467
+        quote: ">85% of mutations occur sporadically; autosomal dominant with full penetrance (homozygosity is lethal). Associated with ↑ paternal age."
+      - kind: try
+        items: [msk.L02.036, msk.L02.037, msk.L02.039, msk.L02.040, msk.L02.045]
+    recap:
+      - "مولود: DDH (ultrasound). أقل من 5: nursemaid's. 5-7: Perthes. مراهق تخين: SCFE."
+      - "Osgood-Schlatter = traction على الـ tibial tuberosity بعد الـ growth spurt."
+      - "Greenstick: تثني وتنكسر من ناحية الشد. Torus: تنبعج من ناحية الضغط."
+      - "Achondroplasia: FGFR3 شغال زيادة ← chondrocytes تقف؛ sporadic مع كبر سن الأب."
+    practice: [msk.L02.036, msk.L02.037, msk.L02.038, msk.L02.039, msk.L02.040, msk.L02.041, msk.L02.042, msk.L02.043, msk.L02.044, msk.L02.045, msk.L02.046, msk.L02.047]
+  - id: msk.L02.lesson3
+    title: "أمراض العضم الأيضية: اقرا التحاليل"
+    hook: "4 أرقام (Ca، PO4، ALP، PTH) بيفرّقوا بين 7 أمراض. افهم المنطق ومش هتحفظ الجدول"
+    minutes: 10
+    pages: [467, 469]
+    topics: [osteoporosis, osteopetrosis, osteomalacia-rickets, osteitis-deformans, avascular-necrosis-of-bone, lab-values-in-bone-disorders]
+    goals:
+      - "تفرّق بين osteoporosis و osteopetrosis و osteomalacia و Paget"
+      - "تقرا جدول التحاليل بالمنطق"
+      - "تعرف أسباب الـ AVN بـ CASTS Bend LEGS"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Osteoporosis: عضم قليل بس سليم"
+        text: |-
+          العضم (trabecular و cortical) ==كميته قليلة== بس الـ mineralization سليم، فالتحاليل كلها **طبيعية**.
+
+          السبب الأشهر: هدم زيادة (osteoclasts أكتر وأنشط) مع قلة الـ estrogen والسن والتدخين. أو 2°: steroids و alcohol و anticonvulsants و anticoagulants و thyroid replacement و PPIs، أو hyperparathyroidism و hyperthyroidism و myeloma و malabsorption و anorexia، ووزن قليل، وحتى السفر للفضاء.
+
+          **التشخيص**: DEXA بـ ==T-score ≤ −2.5== أو fragility fracture في الـ hip أو الـ vertebra.
+        page: 467
+        quote: "Diagnosed by bone mineral density measurement by DEXA (dual-energy x-ray absorptiometry) at the lumbar spine, total hip, and femoral neck, with a T-score of ≤ −2.5 or by a fragility fracture"
+      - kind: explain
+        title: "Osteopetrosis: الهدّام عطلان"
+        text: |-
+          العكس بالظبط: الـ osteoclast ==مش قادر يعمل حمض== (mutation في الـ carbonic anhydrase II)، فالعضم ما بيتهدّش ← عضم تخين وكثيف بس **هش**.
+
+          العضم الزيادة بيملا الـ marrow ← **pancytopenia** و extramedullary hematopoiesis، وبيضيّق الفتحات ← cranial nerve palsies. الـ x-ray: "stone bone".
+
+          والعلاج الشافي: ==bone marrow transplant==، لأن الـ osteoclast أصله monocyte.
+        page: 468
+        quote: "Bone marrow transplant is potentially curative as osteoclasts are derived from monocytes."
+      - kind: reveal
+        prompt: "في نقص فيتامين D: ليه الـ PO4 بيقل، مع إن فيتامين D بيمتص الاتنين Ca و PO4؟"
+        answer: "فيتامين D يقل ← Ca يقل ← الـ ==PTH يعلى== يعوّض. والـ PTH بيرمي الـ phosphate في البول ← PO4 يقل أكتر. والـ osteoblasts بتشتغل زيادة ← ALP يعلى."
+        page: 468
+        quote: "↓ vitamin D → ↓ serum Ca2+ → ↑ PTH secretion → ↓ serum PO 3− 4 . Hyperactivity of osteoblasts → ↑ ALP."
+      - kind: explain
+        title: "Paget: هدم وبناء من غير نظام"
+        text: |-
+          **Osteitis deformans**: في مكان معيّن، osteoclasts نشيطة وبعدها osteoblasts بتبني بسرعة عضم ==وحش== (mosaic من woven و lamellar).
+
+          التحاليل: Ca و PO4 و PTH **طبيعيين**، و ==ALP عالي== لوحده.
+
+          المضاعفات: chalk-stick fractures، high-output heart failure (AV shunts)، **osteosarcoma**، البرنيطة بتضيق (الجمجمة بتتخن)، والسمع بيقل. المراحل: lytic ← mixed ← sclerotic. العلاج: bisphosphonates.
+        page: 468
+        quote: "Serum Ca2+ , phosphorus, and PTH levels are normal. ↑ ALP. Mosaic pattern of woven and lamellar bone (osteocytes within lacunae in chaotic juxtapositions); long bone chalk-stick fractures."
+      - kind: aside
+        tone: joke
+        text: "مريض Paget بيقولك: «يا دكتور الطاقية بقت ضيقة» (hat size زاد من skull thickening). ما تقولوش يغيّر الطاقية؛ اطلب ==ALP==."
+        page: 468
+        quote: "Hat size can be increased due to skull thickening A ; hearing loss is common due to skull deformity."
+      - kind: table
+        title: "جدول التحاليل"
+        columns: ["Disorder", "Ca2+", "PO4", "ALP", "PTH"]
+        rows:
+          - ["Osteoporosis", "—", "—", "—", "—"]
+          - ["Paget disease", "—", "—", "↑", "—"]
+          - ["1° hyperparathyroidism", "↑", "↓", "↑", "↑"]
+          - ["2° hyperparathyroidism (CKD)", "↓", "↑", "↑", "↑"]
+          - ["Osteomalacia/rickets", "↓", "↓", "↑", "↑"]
+          - ["Hypervitaminosis D", "↑", "↑", "—", "↓"]
+        hide: [[2, 2], [3, 1], [3, 2], [4, 2], [5, 2], [5, 4]]
+        page: 469
+        quote: "Paget disease of bone — — ↑ — Abnormal “mosaic” bone architecture"
+      - kind: aside
+        tone: tip
+        text: "حيلة الجدول: الـ **PTH** بيرمي الـ phosphate، فلما يكون هو السبب (1°) Ca ↑ و PO4 ↓. في الـ CKD الكلية مش قادرة ترمي الـ phosphate، فـ ==PO4 ↑== و Ca ↓. وفي زيادة فيتامين D (sarcoidosis) الاتنين ↑ والـ PTH مكتوم."
+        page: 469
+        quote: "Hypervitaminosis D ↑ ↑ — ↓ Caused by oversupplementation or granulomatous disease (eg, sarcoidosis)"
+      - kind: check
+        question: "A patient on dialysis has low Ca2+, high PO4, high ALP and high PTH. Which disorder?"
+        options:
+          - "Secondary hyperparathyroidism"
+          - "Primary hyperparathyroidism"
+          - "Hypervitaminosis D"
+          - "Paget disease"
+        answer: 0
+        why:
+          - "صح: الـ CKD ← PO4 ما بيخرجش وفيتامين D النشط يقل ← Ca يقل ← PTH يعلى يعوّض."
+          - "الـ primary: Ca ↑ و PO4 ↓."
+          - "زيادة فيتامين D: Ca ↑ و PTH ↓."
+          - "Paget: ALP بس العالي."
+        page: 469
+        quote: "Secondary hyperparathyroidism ↓ ↑ ↑ ↑ 3− CKD (↓ PO4 Often as compensation for"
+      - kind: mnemonic
+        word: "CASTS"
+        parts:
+          - { key: "C", text: "glucoCorticoids" }
+          - { key: "A", text: "chronic Alcohol overuse" }
+          - { key: "S", text: "Sickle cell disease" }
+          - { key: "T", text: "Trauma" }
+          - { key: "S", text: "SLE" }
+        hook: "والباقي: Bend (decompression)، و LEGS: LEgg-Calvé-Perthes و Gaucher و SCFE. والمكان الأشهر: الـ femoral head، لأنه watershed على الـ medial circumflex femoral artery."
+        page: 469
+        quote: "Causes include glucoCorticoids, chronic Alcohol overuse, Sickle cell disease, Trauma, SLE, “the Bends” (caisson/decompression disease), LEgg- Calvé-Perthes disease (idiopathic), Gaucher disease, Slipped capital femoral epiphysis— CASTS Bend LEGS."
+      - kind: check
+        question: "A diver develops hip pain weeks after a fast ascent. Which artery's territory is most likely infarcted?"
+        options:
+          - "Medial circumflex femoral artery"
+          - "Lateral circumflex femoral artery"
+          - "Superior gluteal artery"
+          - "Popliteal artery"
+        answer: 0
+        why:
+          - "صح: الـ Bends من أسباب الـ AVN، والـ femoral head watershed على الـ medial circumflex."
+          - "الـ lateral circumflex مش الإمداد الأساسي للراس."
+          - "الـ superior gluteal بيغذّي العضلات."
+          - "الـ popliteal ورا الركبة."
+        page: 469
+        quote: "Most common site is femoral head (watershed area) A (due to insufficiency of medial circumflex femoral artery)."
+      - kind: try
+        items: [msk.L02.048, msk.L02.056, msk.L02.061, msk.L02.068, msk.L02.070]
+    recap:
+      - "Osteoporosis: عضم قليل، تحاليل طبيعية، T-score ≤ −2.5."
+      - "Osteopetrosis: osteoclast عطلان (CA II)؛ pancytopenia؛ BMT بيشفي."
+      - "Osteomalacia: Ca ↓ و PO4 ↓ و ALP ↑ و PTH ↑. Paget: ALP ↑ لوحده."
+      - "AVN: CASTS Bend LEGS، الـ femoral head (medial circumflex)."
+    practice: [msk.L02.048, msk.L02.049, msk.L02.050, msk.L02.051, msk.L02.052, msk.L02.053, msk.L02.054, msk.L02.055, msk.L02.056, msk.L02.057, msk.L02.058, msk.L02.059, msk.L02.060, msk.L02.061, msk.L02.062, msk.L02.063, msk.L02.064, msk.L02.065, msk.L02.066, msk.L02.067, msk.L02.068, msk.L02.069, msk.L02.070, msk.L02.071, msk.L02.072, msk.L02.073]
+  - id: msk.L02.lesson4
+    title: "أورام العضم: المكان بيقول الاسم"
+    hook: "epiphysis ولا metaphysis ولا diaphysis؟ اعرف المكان والسن، وهتعرف الورم قبل ما تشوف الـ biopsy"
+    minutes: 9
+    pages: [470, 471]
+    topics: [primary-bone-tumors]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "القاعدة الأول"
+        text: |-
+          - الـ ==metastasis أكتر== من أورام العضم الأولية.
+          - الحميد بيخلص بـ -oma، واللي بيبدأ بـ c أو o أكتر في الولاد.
+          - الخبيث غالباً بيخلص بـ -sarcoma.
+        page: 470
+        quote: "Metastatic disease is more common than bone tumors. Benign bone tumors end with -oma, those that start with a c and o are more common in boys. Malignant tumors usually have the ending “-sarcoma”."
+      - kind: figure
+        title: "خريطة الورم على العضمة"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="40" y="15" width="60" height="35" rx="14"/>
+            <rect class="fg-box" x="48" y="50" width="44" height="35" rx="4"/>
+            <rect class="fg-box" x="55" y="85" width="30" height="100" rx="4"/>
+            <line class="fg-thin" x1="40" y1="50" x2="100" y2="50"/>
+            <text x="110" y="30" class="t-sm t-b">Epiphysis</text>
+            <text x="110" y="44" class="t-sm t-mut">giant cell tumor, chondroblastoma</text>
+            <text x="110" y="68" class="t-sm t-b">Metaphysis</text>
+            <text x="110" y="82" class="t-sm t-mut">osteosarcoma, osteochondroma</text>
+            <text x="110" y="130" class="t-sm t-b">Diaphysis</text>
+            <text x="110" y="144" class="t-sm t-mut">Ewing sarcoma</text>
+            <text x="20" y="196" class="t-sm t-mut">physis = line between epiphysis and metaphysis</text>
+          </svg>
+        caption: "الـ epiphysis (الطرف): giant cell tumor (بعد قفل الـ plate) و chondroblastoma (قبله). الـ metaphysis: osteosarcoma و osteochondroma. الـ diaphysis (الجسم): Ewing."
+        alt: "A long bone with three labelled regions: epiphysis with giant cell tumor and chondroblastoma, metaphysis with osteosarcoma and osteochondroma, diaphysis with Ewing sarcoma."
+        page: 471
+        quote: "Diaphysis Round cell lesions Ewing sarcoma Myeloma Fibrous dysplasia Simple bone cyst Osteochondroma Physis Giant cell tumor Osteosarcoma Metaphysis Epiphysis"
+      - kind: explain
+        title: "الحميد"
+        text: |-
+          - **Osteochondroma**: ==أشهر ورم حميد==. نتوء عضمي من الـ growth plate، متوصّل بالـ marrow، عليه طاقية cartilage، وبيشاور **بعيد عن المفصل**. EXT1/EXT2 ← multiple exostoses. نادراً ← chondrosarcoma.
+          - **Osteoma**: عضم الوش، مع Gardner syndrome.
+          - **Osteoid osteoma** (<1.5 cm، cortex): وجع **بالليل** من الـ prostaglandins ← بيروح بالـ ==NSAIDs==. **Osteoblastoma** (>2 cm، vertebrae): الـ NSAIDs ما بتنفعش.
+          - **Giant cell tumor** (20-40، ستات): epiphysis، "soap bubble"، الخلايا بتطلّع RANKL ← "osteoclastoma".
+        page: 470
+        quote: "Classically presents as bone pain (worse at night) caused by prostaglandins; thus relieved by NSAIDs (vs osteoblastoma)."
+      - kind: check
+        question: "A 30-year-old woman has a lytic 'soap bubble' lesion in the distal femoral epiphysis. What do the tumor cells express?"
+        options:
+          - "RANKL"
+          - "EWS-FLI1"
+          - "EXT1 mutation"
+          - "Prostaglandins causing night pain"
+        answer: 0
+        why:
+          - "صح: giant cell tumor، الخلايا الـ mononuclear بتطلّع RANKL فتجمّع osteoclastlike giant cells."
+          - "ده Ewing (diaphysis، طفل)."
+          - "ده osteochondroma."
+          - "ده osteoid osteoma، ورم صغير في الـ cortex."
+        page: 470
+        quote: "Locally aggressive benign tumor neoplastic mononuclear cells that express RANKL and reactive multinucleated giant (osteoclastlike) cells; “osteoclastoma”. “Soap bubble” appearance on x-ray C ."
+      - kind: explain
+        title: "Osteosarcoma"
+        text: |-
+          20% من أورام العضم الأولية. ==قمتين==: مراهقين (ولاد <20)، وكبار في السن (غالباً بعد Paget أو radiation أو bone infarcts). الـ familial retinoblastoma و Li-Fraumeni بيزوّدوا الخطر بدري.
+
+          المكان: metaphysis، حوالين الركبة. خلايا بتعمل osteoid. الـ x-ray: ==Codman triangle== (الـ periosteum مرفوع) أو sunburst، والكتاب بيقولها: osteocod بيعوم في الشمس.
+        page: 471
+        quote: "Codman triangle D (from elevation of periosteum) or sunburst pattern on x-ray E (think of an osteocod [bone fish] swimming in the sun)."
+      - kind: explain
+        title: "Ewing والـ chondrosarcoma"
+        text: |-
+          - **Ewing**: ولد أبيض <15، **diaphysis** (femur) والحوض. small blue cells شبه الـ lymphocytes، فبنفرّقه بالـ ==t(11;22)== (EWS-FLI1). "Onion skin". عدواني وبيعمل metastasis بدري، بس بيستجيب للـ chemo. 11 + 22 = 33، رقم فانلة Patrick Ewing.
+          - **Chondrosarcoma**: كبار >50، medulla الحوض والـ proximal femur والـ humerus.
+        page: 471
+        quote: "11 + 22 = 33 (Patrick Ewing’s jersey number)."
+      - kind: sort
+        prompt: "حط كل ورم في مكانه"
+        bins: ["Epiphysis", "Metaphysis", "Diaphysis"]
+        cards:
+          - { text: "Giant cell tumor", bin: 0 }
+          - { text: "Chondroblastoma", bin: 0 }
+          - { text: "Osteosarcoma", bin: 1 }
+          - { text: "Osteochondroma", bin: 1 }
+          - { text: "Ewing sarcoma", bin: 2 }
+        why: "الاتنين اللي في الطرف: giant cell (بعد ما الـ plate تقفل) و chondroblastoma (قبلها، وبيعدّي الـ physis). الـ metaphysis للأورام اللي بتطلع من الـ growth zone. والـ Ewing في الجسم."
+        page: 470
+        quote: "Epiphysis of long bones before skeletal maturation (often in knee region)."
+      - kind: check
+        question: "A 13-year-old boy has a femoral diaphysis lesion with onion-skin periosteal reaction and small round blue cells. Which test confirms it?"
+        options:
+          - "t(11;22)"
+          - "RB1 sequencing"
+          - "Serum ALP"
+          - "Bone marrow biopsy for plasma cells"
+        answer: 0
+        why:
+          - "صح: Ewing، والـ t(11;22) بيفرّقه عن الـ lymphoma والـ chronic osteomyelitis."
+          - "RB1 بيزوّد خطر الـ osteosarcoma، وده metaphysis."
+          - "الـ ALP مش تشخيصي."
+          - "الـ plasma cells للـ myeloma."
+        page: 471
+        quote: "Differentiate from conditions with similar morphology (eg, lymphoma, chronic osteomyelitis) by testing for t(11;22) (fusion protein EWS-FLI1)."
+      - kind: try
+        items: [msk.L02.075, msk.L02.077, msk.L02.078, msk.L02.081, msk.L02.083]
+    recap:
+      - "Metastasis أكتر. الحميد -oma، الخبيث -sarcoma."
+      - "Osteochondroma أشهر حميد؛ osteoid osteoma يروح بالـ NSAIDs؛ giant cell = epiphysis و soap bubble و RANKL."
+      - "Osteosarcoma: metaphysis، قمتين، Codman/sunburst، Paget و RB و Li-Fraumeni."
+      - "Ewing: diaphysis، onion skin، t(11;22)."
+    practice: [msk.L02.074, msk.L02.075, msk.L02.076, msk.L02.077, msk.L02.078, msk.L02.079, msk.L02.080, msk.L02.081, msk.L02.082, msk.L02.083, msk.L02.084, msk.L02.085, msk.L02.086, msk.L02.087]
+  - id: msk.L02.lesson5
+    title: "OA و RA و البلورات"
+    hook: "التيبّس الصبح ساعة ولا 10 دقايق؟ إبرة ولا معيّن؟ أصفر ولا أزرق؟ كل سؤال منهم بيقفل تشخيص"
+    minutes: 10
+    pages: [472, 473]
+    topics: [osteoarthritis-vs-rheumatoid-arthritis, gout, calcium-pyrophosphate-deposition-disease]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "OA: بِلى، RA: هجوم"
+        text: |-
+          - **OA**: الضغط الميكانيكي بيبوّظ الغضروف، والإصلاح ضعيف. وجع في الـ weight-bearing joints **بعد** المجهود ويهدا بالراحة، مش متماثل، ومفيش أعراض عامة.
+          - **RA**: autoimmune. الـ ==pannus== (granulation tissue) بياكل الغضروف والعضم. ==morning stiffness أكتر من ساعة== ويتحسن بالحركة، متماثل، ومعاه حمى وتعب ونزول وزن.
+        page: 472
+        quote: "Pain in weight-bearing joints after use, improving with rest. Asymmetric involvement. No systemic symptoms. Pain, swelling, and morning stiffness lasting >1 hour, improving with use. Symmetric involvement."
+      - kind: figure
+        title: "صوابع OA وصوابع RA"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <text x="30" y="20" class="t-sm t-b">Osteoarthritis</text>
+            <rect class="fg-box" x="50" y="30" width="22" height="120" rx="8"/>
+            <circle class="fg-dot-bad" cx="61" cy="55" r="9"/>
+            <circle class="fg-dot-acc" cx="61" cy="90" r="9"/>
+            <text x="80" y="58" class="t-sm">DIP: Heberden</text>
+            <text x="80" y="93" class="t-sm">PIP: Bouchard</text>
+            <text x="210" y="20" class="t-sm t-b">Rheumatoid arthritis</text>
+            <rect class="fg-box" x="230" y="30" width="22" height="120" rx="8"/>
+            <circle class="fg-dot-acc" cx="241" cy="90" r="9"/>
+            <circle class="fg-dot-acc" cx="241" cy="130" r="9"/>
+            <text x="260" y="58" class="t-sm t-mut">DIP spared</text>
+            <text x="260" y="93" class="t-sm">PIP</text>
+            <text x="260" y="133" class="t-sm">MCP, wrist</text>
+          </svg>
+        caption: "الـ OA بيمسك الـ DIP (Heberden) والـ PIP (Bouchard) والـ 1st CMC. الـ RA بيمسك الـ MCP والـ PIP والرسغ، وبيسيب الـ DIP."
+        alt: "Two fingers. Osteoarthritis finger with nodes at the DIP (Heberden) and PIP (Bouchard). Rheumatoid finger with the DIP spared and the PIP, MCP and wrist involved."
+        page: 472
+        quote: "Development of Heberden nodes D (at DIP) and Bouchard nodes E (at PIP), and 1st CMC."
+      - kind: aside
+        tone: tip
+        text: "الـ RA: HLA-DR4 («4-walled rheum»، الكتاب). الـ **RF** (IgM ضد الـ Fc بتاع IgG) موجب في 80%، والـ ==anti-CCP أكتر specific==."
+        page: 472
+        quote: "Female, HLA-DR4 (4-walled “rheum”), HLA- DRB1, smoking. ⊕ rheumatoid factor (IgM antibody that targets IgG Fc; in 80%), anti- cyclic citrullinated peptide antibody (more specific)."
+      - kind: explain
+        title: "الـ RA برّه المفصل"
+        text: |-
+          - **Felty**: RA + neutropenia + splenomegaly (SANTA).
+          - **Caplan**: rheumatoid nodules في الرئة + pneumoconiosis.
+          - والباقي: cervical subluxation، nodules (fibrinoid necrosis و palisading histiocytes)، ILD، pleuritis، pericarditis، anemia of chronic disease، ==AA amyloidosis==، Sjögren، scleritis، carpal tunnel. والالتهاب المزمن بيزوّد خطر الـ aortic stenosis.
+        page: 472
+        quote: "AA amyloidosis, Sjögren syndrome, scleritis, carpal tunnel syndrome."
+      - kind: check
+        question: "A woman with long-standing RA has splenomegaly and recurrent infections with a low neutrophil count. Name?"
+        options:
+          - "Felty syndrome"
+          - "Caplan syndrome"
+          - "Sjögren syndrome"
+          - "AA amyloidosis"
+        answer: 0
+        why:
+          - "صح: RA + neutropenia + splenomegaly = Felty."
+          - "Caplan = nodules في الرئة مع pneumoconiosis."
+          - "Sjögren = عين وبق ناشفين."
+          - "الـ amyloidosis بيعمل proteinuria، مش neutropenia."
+        page: 472
+        quote: "neutropenia + splenomegaly (Felty syndrome: SANTA—Splenomegaly, Anemia, Neutropenia, Thrombocytopenia, Arthritis [Rheumatoid])"
+      - kind: explain
+        title: "Gout: الكلية مش بترمي"
+        text: |-
+          Monoarthritis من بلورات ==monosodium urate==. أقوى risk factor: الـ hyperuricemia:
+
+          - **Underexcretion (90%)**: غالباً idiopathic، والـ renal failure والـ ==thiazides== بيزوّدوه.
+          - **Overproduction (10%)**: Lesch-Nyhan، PRPP زيادة، tumor lysis.
+          - **الاتنين**: alcohol و von Gierke.
+
+          الكلاسيك: إصبع القدم الكبير (**podagra**) بعد عزومة لحمة وسمك وبيرة. والـ tophi في الودن والكوع والـ Achilles.
+        page: 473
+        quote: "Underexcretion of uric acid (90% of patients)—largely idiopathic, potentiated by renal failure; can be exacerbated by certain medications (eg, thiazide diuretics)."
+      - kind: reveal
+        prompt: "ليه الكحول بيعمل نوبة gout؟"
+        answer: "الكحول ← ==lactate يعلى== ← الكلية بتعيد امتصاص الـ uric acid ← hyperuricemia. (والكحول كمان بيزوّد الإنتاج، فهو mechanism مشترك.)"
+        page: 473
+        quote: "alcohol consumption (↑ blood lactate from metabolism → ↑ resorption of uric acid → hyperuricemia)."
+      - kind: table
+        title: "Gout ولا CPPD"
+        columns: ["", "Gout", "CPPD"]
+        rows:
+          - ["Crystal", "Monosodium urate, needle-shaped", "Calcium pyrophosphate, rhomboid"]
+          - ["Birefringence", "Negative: yellow parallel, blue perpendicular", "Weakly positive: blue parallel"]
+          - ["Classic joint", "MTP of big toe (podagra)", "Knee"]
+          - ["X-ray", "Tophi", "Chondrocalcinosis"]
+          - ["Prophylaxis", "Allopurinol, probenecid", "Colchicine"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2], [4, 2]]
+        page: 473
+        quote: "Crystals are rhomboid and weakly ⊕ birefringent under polarized light (blue when parallel to light) A ."
+      - kind: aside
+        tone: trap
+        text: "مستوى الـ uric acid في الدم ممكن يبقى ==طبيعي== وقت النوبة، فما ينفيش الـ gout. والـ CPPD: «the blue P's» (blue when Parallel، Positive، Pyrophosphate، Pseudogout)، ومعاه hemochromatosis و hyperparathyroidism."
+        page: 473
+        quote: "The blue P’s of CPPD—blue (when parallel), positive birefringence, calcium pyrophosphate, pseudogout."
+      - kind: check
+        question: "Joint fluid shows needle-shaped crystals that are yellow when parallel to the polarizer. Which drug is NOT for the acute attack?"
+        options:
+          - "Allopurinol"
+          - "Indomethacin"
+          - "Colchicine"
+          - "Glucocorticoids"
+        answer: 0
+        why:
+          - "صح: الـ allopurinol للوقاية (chronic)، مش للنوبة."
+          - "الـ indomethacin (NSAID) للنوبة."
+          - "الـ colchicine للنوبة."
+          - "الـ glucocorticoids للنوبة."
+        page: 473
+        quote: "Acute: NSAIDs (eg, indomethacin), glucocorticoids, colchicine. Chronic (preventive): allopurinol, probenecid."
+      - kind: try
+        items: [msk.L02.088, msk.L02.089, msk.L02.098, msk.L02.099, msk.L02.104]
+    recap:
+      - "OA: بعد المجهود، DIP و PIP، osteophytes. RA: تيبّس >ساعة، MCP و PIP، erosions، anti-CCP."
+      - "Felty = RA + neutropenia + splenomegaly. Caplan = nodules + pneumoconiosis."
+      - "Gout: 90% underexcretion (thiazides)، إبرة negative (أصفر parallel)."
+      - "CPPD: معيّن positive (أزرق parallel)، الركبة، chondrocalcinosis، colchicine للوقاية."
+    practice: [msk.L02.088, msk.L02.089, msk.L02.090, msk.L02.091, msk.L02.092, msk.L02.093, msk.L02.094, msk.L02.095, msk.L02.096, msk.L02.097, msk.L02.098, msk.L02.099, msk.L02.100, msk.L02.101, msk.L02.102, msk.L02.103, msk.L02.104, msk.L02.105]
+  - id: msk.L02.lesson6
+    title: "مفاصل ملتهبة: عدوى، نشفان، و HLA-B27"
+    hook: "مفصل واحد سخن، ولا ضهر بيتيبّس الصبح ويتحسن بالرياضة؟ كل واحد ليه عيلة"
+    minutes: 9
+    pages: [474, 475]
+    topics: [systemic-juvenile-idiopathic-arthritis, sjogren-syndrome, septic-arthritis, osteomyelitis, seronegative-spondyloarthritis]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Systemic JIA و Sjögren"
+        text: |-
+          - **Systemic JIA** (<16 سنة): حمى ==بتنط كل يوم== وتنزل، وطفح لونه salmon-pink، وarthritis. ومعاه anterior uveitis.
+          - **Sjögren**: الـ lymphocytes بتاكل الغدد الدمعية واللعابية، في ستات 40-60. عين ناشفة (gritty)، بق ناشف، dyspareunia، الـ parotid منفوخة، وANA و RF و ==SS-A (Ro) و SS-B (La)==. والتأكيد: labial salivary gland biopsy.
+        page: 474
+        quote: "Autoimmune disorder characterized by destruction of exocrine glands (especially lacrimal and salivary) by lymphocytic infiltrates. Predominantly affects females 40-60 years old."
+      - kind: aside
+        tone: exam
+        text: "ست عندها Sjögren من سنين والـ parotid بدأت تكبر بالراحة وناشفة؟ فكّر في ==MALT lymphoma==. وكمان خطر طفل بـ neonatal lupus، وتسوّس سنان."
+        page: 474
+        quote: "Complications: dental caries; mucosa-associated lymphoid tissue (MALT) lymphoma (may present as parotid enlargement); ↑ risk of giving birth to baby with neonatal lupus."
+      - kind: explain
+        title: "Septic arthritis و osteomyelitis"
+        text: |-
+          **Septic arthritis**: S aureus و Strep و ==N gonorrhoeae== (شباب sexually active). مفصل واحد، الـ fluid صديد (WBC >50,000). العلاج: antibiotics و aspiration و drainage بسرعة قبل ما المفصل يبوظ.
+
+          الـ **disseminated gonococcal**: يا إما مفصل صديد (الركبة)، يا إما ==triad==: polyarthralgia و tenosynovitis (الإيد) و dermatitis (pustules).
+
+          **Osteomyelitis**: في الأطفال hematogenous في الـ **metaphysis**، وفي الكبار من جرح أو عملية.
+        page: 474
+        quote: "Disseminated gonococcal infection—STI that presents as either purulent arthritis (eg, knee) or triad of polyarthralgia, tenosynovitis (eg, hand), dermatitis (eg, pustules, vesiculopustules)."
+      - kind: match
+        prompt: "وصّل كل حالة بالـ organism بتاع الـ osteomyelitis"
+        pairs:
+          - ["Most cases overall", "S aureus"]
+          - ["Prosthetic joint", "S epidermidis"]
+          - ["Sickle cell anemia", "Salmonella"]
+          - ["Nail through a sneaker", "P aeruginosa"]
+        why: "الـ S aureus هو الأكتر في كل حاجة. الـ prosthesis بتحب الـ S epidermidis (biofilm). الـ sickle cell: Salmonella. والـ plantar puncture: Pseudomonas."
+        page: 474
+        quote: "S aureus most common (overall), S epidermidis (prosthetics), Salmonella (sickle cell anemia), P aeruginosa (plantar puncture wounds)."
+      - kind: explain
+        title: "Seronegative spondyloarthritis: PAIR"
+        text: |-
+          مفيش RF، وفي ==HLA-B27== (MHC class I). كلهم ممكن يعملوا: inflammatory back pain (تيبّس الصبح ويتحسن بالرياضة)، enthesitis (Achilles)، dactylitis ("sausage fingers")، و uveitis.
+
+          - **P**soriatic: مع الصدفية والضوافر، asymmetric، ==pencil-in-cup== في الـ DIP.
+          - **A**nkylosing spondylitis: الـ spine والـ SI متماثلين، bamboo spine، uveitis، **aortic regurgitation**، رجالة 20-40.
+          - **I**BD: Crohn و UC.
+          - **R**eactive: can't see و can't pee و can't bend my knee.
+        page: 475
+        quote: "Arthritis without rheumatoid factor (no anti-IgG antibody). Strong association with HLA-B27 (MHC class I serotype)."
+      - kind: reveal
+        prompt: "ليه مريض ankylosing spondylitis ممكن يعمل restrictive lung disease؟"
+        answer: "الـ ==costovertebral و costosternal joints== بتلتحم ← القفص الصدري يتصلّب وما يتمددش ← الرئة ما تعرفش تتنفخ كويس."
+        page: 475
+        quote: "Costovertebral and costosternal ankylosis may cause restrictive lung disease."
+      - kind: aside
+        tone: tip
+        text: "الـ reactive arthritis بعد: ==She Caught Students Cheating Yesterday== (Shigella و Campylobacter و Salmonella و Chlamydia و Yersinia). ومعاه keratoderma blennorrhagica على الكفوف والرجلين."
+        page: 475
+        quote: "Associated with infections by Shigella, Campylobacter, Salmonella, Chlamydia, Yersinia. “She Caught Students Cheating Yesterday and overreacted.”"
+      - kind: check
+        question: "A 25-year-old man has back pain that is worse in the morning and better with exercise, plus a painful red eye. Which cardiac lesion can he develop?"
+        options:
+          - "Aortic regurgitation"
+          - "Mitral valve prolapse"
+          - "Libman-Sacks endocarditis"
+          - "Tricuspid regurgitation"
+        answer: 0
+        why:
+          - "صح: ankylosing spondylitis (uveitis) ← aortic regurgitation."
+          - "الـ MVP مش من مضاعفات الكتاب هنا."
+          - "Libman-Sacks في الـ SLE."
+          - "الـ tricuspid مش مرتبط."
+        page: 475
+        quote: "Symmetric involvement of spine and sacroiliac joints → ankylosis (joint fusion), uveitis, aortic regurgitation."
+      - kind: check
+        question: "A young man develops arthritis, conjunctivitis and urethritis 3 weeks after diarrhea. Which statement is true?"
+        options:
+          - "It is a seronegative spondyloarthritis linked to HLA-B27"
+          - "The joint fluid will grow the diarrheal organism"
+          - "Rheumatoid factor will be positive"
+          - "Crystals will be seen in the joint fluid"
+        answer: 0
+        why:
+          - "صح: reactive arthritis من عيلة الـ seronegative، مع HLA-B27."
+          - "المفصل sterile؛ ده رد فعل مناعي."
+          - "هو seronegative بالتعريف."
+          - "البلورات للـ gout والـ CPPD."
+        page: 475
+        quote: "Reactive arthritis Classic triad: ▘ Conjunctivitis (can’t see) ▘ Urethritis (can’t pee) ▘ Arthritis (can’t bend my knee)."
+      - kind: try
+        items: [msk.L02.109, msk.L02.112, msk.L02.115, msk.L02.119, msk.L02.122]
+    recap:
+      - "Systemic JIA: حمى بتنط وطفح salmon-pink و uveitis."
+      - "Sjögren: SS-A و SS-B؛ خطر MALT lymphoma و neonatal lupus."
+      - "Septic: S aureus و gonococcus؛ DGI = polyarthralgia و tenosynovitis و pustules."
+      - "PAIR + HLA-B27؛ AS ← bamboo spine و aortic regurgitation."
+    practice: [msk.L02.106, msk.L02.107, msk.L02.108, msk.L02.109, msk.L02.110, msk.L02.111, msk.L02.112, msk.L02.113, msk.L02.114, msk.L02.115, msk.L02.116, msk.L02.117, msk.L02.118, msk.L02.119, msk.L02.120, msk.L02.121, msk.L02.122, msk.L02.123, msk.L02.124]
+  - id: msk.L02.lesson7
+    title: "الـ lupus والعضلات اللي بتوجع"
+    hook: "RASH OR PAIN بتلم الـ lupus كله. وبعدها: العضلة بتوجع ولا ضعيفة؟ الـ CK بيفرّق"
+    minutes: 10
+    pages: [476, 477]
+    topics: [systemic-lupus-erythematosus, mixed-connective-tissue-disease, antiphospholipid-syndrome, muscle-wasting, polymyalgia-rheumatica, fibromyalgia, polymyositis-dermatomyositis, myositis-ossificans, igg4-related-disease]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "SLE: immune complexes في كل حتة"
+        text: |-
+          الضرر أساساً **type III** (immune complexes)، وأقل type II. ونقص الـ ==early complement== (C1q و C4 و C2) بيخلّي الـ immune complexes ما تتنضفش.
+
+          الكلاسيك: ست في سن الإنجاب، طفح على الوش ==بيسيب الـ nasolabial folds==، ووجع مفاصل، وحمى.
+        page: 476
+        quote: "Associated with deficiency of early complement proteins (eg, C1q, C4, C2) → ↓ clearance of immune complexes."
+      - kind: mnemonic
+        word: "RASHORPAIN"
+        parts:
+          - { key: "R", text: "Rash (malar or discoid)" }
+          - { key: "A", text: "Arthritis (nonerosive)" }
+          - { key: "S", text: "Serositis (pleuritis, pericarditis)" }
+          - { key: "H", text: "Hematologic disorders (cytopenias)" }
+          - { key: "O", text: "Oral/nasopharyngeal ulcers (usually painless)" }
+          - { key: "R", text: "Renal disease" }
+          - { key: "P", text: "Photosensitivity" }
+          - { key: "A", text: "Antinuclear antibodies" }
+          - { key: "I", text: "Immunologic disorder (anti-dsDNA, anti-Sm, antiphospholipid)" }
+          - { key: "N", text: "Neurologic disorders (seizures, psychosis)" }
+        hook: "الكتاب: RASH OR PAIN، والـ arthritis في الـ lupus nonerosive، عكس الـ RA."
+        page: 476
+        quote: "Rash (malar A or discoid B ) Arthritis (nonerosive) Serositis (eg, pleuritis, pericarditis) Hematologic disorders (eg, cytopenias) Oral/nasopharyngeal ulcers (usually painless) Renal disease Photosensitivity Antinuclear antibodies"
+      - kind: aside
+        tone: trap
+        text: "أشهر سبب **وفاة** في الـ SLE مش الكلى: ده ==cardiovascular disease==. والكلى أشهر نوع فيها diffuse proliferative. والقلب: Libman-Sacks Endocarditis (LSE in SLE)."
+        page: 476
+        quote: "Common causes of death in SLE: renal disease, infections, cardiovascular disease (most common cause of death)."
+      - kind: reveal
+        prompt: "ست عندها anti-SSA وحامل. الطفل ممكن يتولد بإيه، وليه؟"
+        answer: "==Neonatal lupus==: الـ anti-SSA (IgG) بيعدّي الـ placenta ← congenital heart block، وطفح حوالين العين، و transaminitis، و cytopenias عند الولادة."
+        page: 476
+        quote: "In an anti-SSA ⊕ pregnant patient, ↑ risk of newborn developing neonatal lupus → congenital heart block, periorbital/diffuse rash, transaminitis, and cytopenias at birth."
+      - kind: explain
+        title: "MCTD و antiphospholipid"
+        text: |-
+          - **MCTD**: شوية SLE على شوية systemic sclerosis على شوية polymyositis، مع ==anti-U1 RNP== (speckled ANA).
+          - **Antiphospholipid**: جلطات (شرايين أو أوردة) أو إجهاض متكرر + lupus anticoagulant أو anticardiolipin أو anti-β2 glycoprotein I. العلاج: anticoagulation.
+
+          فخّين: الـ anticardiolipin بيعمل ==false-positive VDRL==، والـ lupus anticoagulant بيطوّل الـ PTT ومش بيتصلّح لما تضيف plasma طبيعي.
+        page: 476
+        quote: "Anticardiolipin antibodies can cause false- positive VDRL/RPR. Lupus anticoagulant can cause prolonged PTT that is not corrected by the addition of normal platelet-free plasma."
+      - kind: check
+        question: "A woman has a prolonged PTT that does not correct with mixing, and she has had a DVT. What does she have?"
+        options:
+          - "Antiphospholipid syndrome (lupus anticoagulant)"
+          - "Hemophilia A"
+          - "Vitamin K deficiency"
+          - "Von Willebrand disease"
+        answer: 0
+        why:
+          - "صح: الـ lupus anticoagulant بيطوّل الـ PTT في الأنبوبة، بس في الجسم بيعمل جلطات."
+          - "الـ hemophilia بيتصلّح بالـ mixing وبتنزف."
+          - "نقص فيتامين K بيطوّل الـ PT أساساً وبيتصلّح."
+          - "الـ vWD نزيف، مش جلطات."
+        page: 476
+        quote: "Lupus anticoagulant can cause prolonged PTT that is not corrected by the addition of normal platelet-free plasma."
+      - kind: table
+        title: "العضلة: وجع ولا ضعف؟"
+        columns: ["", "Polymyalgia rheumatica", "Fibromyalgia", "Polymyositis/dermatomyositis"]
+        rows:
+          - ["Who", "Females >50", "Females 20-50", "Proximal weakness, shoulders"]
+          - ["Weakness", "No", "No", "Yes"]
+          - ["ESR/CRP", "↑", "Normal", "—"]
+          - ["CK", "Normal", "—", "↑"]
+          - ["Treatment / link", "Low-dose steroids; giant cell arteritis", "Exercise, TCAs, SNRIs", "Anti-Jo-1; dermato: malignancy"]
+        hide: [[2, 1], [2, 2], [3, 1], [3, 3]]
+        page: 477
+        quote: "Findings ↑ ESR, ↑ CRP, normal CK. tREatmEnt Rapid response to low-dose glucocorticoids."
+      - kind: explain
+        title: "Poly ولا dermato"
+        text: |-
+          الاتنين: ضعف proximal متماثل، ANA و ↑ CK، والـ specific: ==anti-Jo-1== و anti-SRP و anti-Mi-2.
+
+          - **Polymyositis**: endomysial، **CD8+**.
+          - **Dermatomyositis**: perimysial، **CD4+**، ومعاه الجلد: Gottron papules، heliotrope على الجفون، shawl and face rash، mechanic's hands. والأهم: خطر ==occult malignancy==.
+
+          حيلة: الـ **D**ermato = CD4 (الرقم الزوجي)، والـ Poly = CD8.
+        page: 477
+        quote: "Progressive symmetric proximal muscle weakness, characterized by endomysial inflammation with CD8+ T cells. Most often involves shoulders."
+      - kind: aside
+        tone: tip
+        text: "حاجتين صغيرين: **myositis ossificans** = عضم في العضلة بعد خبطة، eggshell calcification، حميد بس شبه الـ sarcoma. **IgG4-related** = تليف و lymphoplasmacytic infiltrate في أعضاء كتير: الغدد اللعابية، Riedel thyroiditis، autoimmune pancreatitis، aortitis، و ==retroperitoneal fibrosis==."
+        page: 477
+        quote: "Heterotopic ossification involving skeletal muscle (eg, quadriceps). Associated with blunt muscle trauma. Presents as painful soft tissue mass. Imaging: eggshell calcification."
+      - kind: check
+        question: "A 55-year-old woman has proximal weakness, a heliotrope rash and Gottron papules. Which is the most important next step after diagnosis?"
+        options:
+          - "Search for an occult malignancy"
+          - "Start low-dose prednisone and stop"
+          - "Temporal artery biopsy"
+          - "Test HLA-B27"
+        answer: 0
+        why:
+          - "صح: الـ dermatomyositis بيزوّد خطر الـ occult malignancy."
+          - "الجرعة القليلة للـ PMR."
+          - "الـ biopsy للـ giant cell arteritis."
+          - "الـ HLA-B27 للـ spondyloarthritis."
+        page: 477
+        quote: "↑ risk of occult malignancy. Perimysial inflammation and atrophy with CD4+ T cells."
+      - kind: try
+        items: [msk.L02.125, msk.L02.127, msk.L02.135, msk.L02.140, msk.L02.145]
+    recap:
+      - "SLE: type III، نقص C1q و C4 و C2؛ RASH OR PAIN؛ أشهر وفاة cardiovascular."
+      - "MCTD = anti-U1 RNP. APS: جلطات وإجهاض؛ false VDRL؛ PTT ما بيتصلّحش."
+      - "PMR: وجع من غير ضعف، ESR عالي، CK طبيعي. Fibromyalgia: كل حاجة طبيعية."
+      - "Poly = CD8 endomysial؛ dermato = CD4 perimysial + جلد + malignancy."
+    practice: [msk.L02.125, msk.L02.126, msk.L02.127, msk.L02.128, msk.L02.129, msk.L02.130, msk.L02.131, msk.L02.132, msk.L02.133, msk.L02.134, msk.L02.135, msk.L02.136, msk.L02.137, msk.L02.138, msk.L02.139, msk.L02.140, msk.L02.141, msk.L02.142, msk.L02.143, msk.L02.144, msk.L02.145, msk.L02.146, msk.L02.147, msk.L02.148, msk.L02.149, msk.L02.150]
+  - id: msk.L02.lesson8
+    title: "الـ vasculitis بالحجم، والـ NMJ، و Raynaud"
+    hook: "رتّب الـ vasculitis من الأوعية الكبيرة للصغيرة، وكل واحد هيلاقي مكانه لوحده"
+    minutes: 10
+    pages: [478, 480]
+    topics: [vasculitides, neuromuscular-junction-diseases, raynaud-phenomenon]
+    status: unverified
+    steps:
+      - kind: figure
+        title: "الـ vasculitis بالحجم"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <circle class="fg-acc" cx="45" cy="55" r="32"/>
+            <text x="20" y="110" class="t-sm t-b">Large</text>
+            <text x="90" y="35" class="t-sm">Giant cell (temporal) arteritis</text>
+            <text x="90" y="52" class="t-sm">Takayasu arteritis</text>
+            <circle class="fg-acc" cx="45" cy="140" r="18"/>
+            <text x="15" y="175" class="t-sm t-b">Medium</text>
+            <text x="90" y="80" class="t-sm">Kawasaki, polyarteritis nodosa</text>
+            <text x="90" y="97" class="t-sm t-mut">Buerger (small/medium)</text>
+            <circle class="fg-acc" cx="45" cy="190" r="6"/>
+            <text x="90" y="125" class="t-sm t-b">Small, ANCA</text>
+            <text x="90" y="141" class="t-sm">MPA, EGPA (p-ANCA); GPA (c-ANCA)</text>
+            <text x="90" y="165" class="t-sm t-b">Small, immune complex</text>
+            <text x="90" y="181" class="t-sm">IgA vasculitis, cryoglobulinemia, anti-C1q</text>
+          </svg>
+        caption: "الكبيرة: giant cell و Takayasu (الاتنين granulomatous). المتوسطة: Kawasaki و PAN. الصغيرة: يا ANCA (MPA و EGPA و GPA)، يا immune complex (IgA و cryoglobulinemia و anti-C1q)."
+        alt: "Three circles for large, medium and small vessels. Large: giant cell arteritis, Takayasu. Medium: Kawasaki, polyarteritis nodosa, Buerger. Small ANCA: microscopic polyangiitis, EGPA, GPA. Small immune complex: IgA vasculitis, cryoglobulinemia, anti-C1q vasculitis."
+        page: 478
+        quote: "Inflammation and necrosis of blood vessels; either idiopathic or immune mediated (type III hypersensitivity)."
+      - kind: explain
+        title: "الأوعية الكبيرة: ست فوق الخمسين، ولا آسيوية تحت الأربعين؟"
+        text: |-
+          - **Giant cell (temporal)**: ستات >50. صداع ناحية واحدة، ==jaw claudication==، والخطر الكبير **العمى**. مع الـ PMR. ESR عالي جداً. العلاج: high-dose steroids **قبل** الـ biopsy.
+          - **Takayasu**: آسيويات <40. ==Pulseless disease==: نبض الدراع ضعيف. بيمسك الـ aortic arch والأوعية الكبيرة.
+        page: 478
+        quote: "Unilateral headache, jaw claudication, temporal artery tenderness, blindness risk (due to anterior ischemic optic neuropathy)."
+      - kind: explain
+        title: "الأوعية المتوسطة"
+        text: |-
+          - **Kawasaki**: أطفال آسيويين <4. ==CRASH and burn==: Conjunctivitis و Rash و Adenopathy و Strawberry tongue و Hand-foot changes و حمى ≥5 أيام. المضاعفة: **coronary aneurysm**. العلاج: IVIG و aspirin.
+          - **PAN**: رجالة، 30% hepatitis B. بيمسك الكلى والأحشاء و==بيسيب الرئة==. fibrinoid necrosis، و"string of pearls". PAN affects the SKIN: Skin و Kidneys و Intestines و Nerves.
+          - **Buerger**: مدخّن شديد <40، claudication و gangrene. العلاج الوحيد: يبطّل سجاير.
+        page: 478
+        quote: "Involves renal and visceral vessels, spares lungs; transmural inflammation with fibrinoid necrosis."
+      - kind: check
+        question: "A man with hepatitis B has abdominal pain, hypertension and mononeuritis, with a normal chest x-ray. Angiography shows microaneurysms. Diagnosis?"
+        options:
+          - "Polyarteritis nodosa"
+          - "Granulomatosis with polyangiitis"
+          - "Microscopic polyangiitis"
+          - "Takayasu arteritis"
+        answer: 0
+        why:
+          - "صح: PAN، الكلى والأحشاء والأعصاب، وبيسيب الرئة، و hepatitis B."
+          - "الـ GPA بيمسك الرئة والأنف."
+          - "الـ MPA بيمسك الرئة."
+          - "Takayasu في ستات صغيرين، الـ aortic arch."
+        page: 478
+        quote: "Middle-aged males; 30% with hepatitis B seropositivity."
+      - kind: explain
+        title: "الأوعية الصغيرة"
+        text: |-
+          **ANCA**:
+          - **MPA**: رئة وكلى وجلد، pauci-immune GN، ==p-ANCA (MPO)==.
+          - **EGPA** (Churg-Strauss): asthma و eosinophilia و vasculitis، و neuropathy، و ↑ IgE.
+          - **GPA**: الأنف والجيوب (septum perforation)، الرئة (hemoptysis)، الكلى (RPGN). ==c-ANCA (PR3)==.
+
+          **Immune complex**:
+          - **IgA vasculitis** (HSP): أشهر vasculitis في الأطفال بعد URI. Hinge pain و stomach pain (intussusception) و purpura على المقعدة والرجلين.
+          - **Mixed cryoglobulinemia**: HCV؛ purpura و ضعف و arthralgia.
+          - **Anti-C1q**: مع SLE.
+        page: 479
+        quote: "Classic triad: Hinge pain (arthralgias), stomach pain (abdominal pain associated with intussusception), palpable purpura on buttocks/legs J ."
+      - kind: aside
+        tone: tip
+        text: "**Behçet**: قرح في البق وفي الأعضاء التناسلية تتكرر، uveitis، و erythema nodosum، عند ناس من تركيا وشرق المتوسط (يعني عندنا). مع ==HLA-B51==، وبيتحرك بعد HSV أو parvovirus."
+        page: 479
+        quote: "Recurrent oral and genital ulcers, uveitis, erythema nodosum. Triggered by HSV or parvovirus. Flares last 1-4 weeks. Associated with HLA-B51."
+      - kind: check
+        question: "A man has chronic sinusitis, nasal septum perforation, hemoptysis and RPGN. Which antibody?"
+        options:
+          - "c-ANCA (PR3)"
+          - "p-ANCA (MPO)"
+          - "Anti-GBM"
+          - "Anti-C1q"
+        answer: 0
+        why:
+          - "صح: GPA = أنف ورئة وكلى، c-ANCA."
+          - "p-ANCA للـ MPA والـ EGPA."
+          - "الـ anti-GBM مفيهوش أنف."
+          - "الـ anti-C1q مع الـ SLE."
+        page: 479
+        quote: "c-ANCA I (PR3-ANCA). Treatment: glucocorticoids combined with rituximab, cyclophosphamide."
+      - kind: table
+        title: "Myasthenia ولا Lambert-Eaton"
+        columns: ["", "Myasthenia gravis", "Lambert-Eaton"]
+        rows:
+          - ["Antibody", "Postsynaptic ACh receptor", "Presynaptic Ca2+ channel"]
+          - ["With use", "Worsens", "Improves"]
+          - ["Reflexes", "Spared", "Hyporeflexia"]
+          - ["Associated with", "Thymoma, thymic hyperplasia", "Small cell lung cancer"]
+          - ["AChE inhibitor", "Reverses (pyridostigmine)", "Minimal effect"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2], [3, 2]]
+        page: 480
+        quote: "Autoantibodies to postsynaptic ACh receptor Autoantibodies to presynaptic Ca2+ channel → ↓ ACh release; L comes before M"
+      - kind: reveal
+        prompt: "ليه الـ Lambert-Eaton بيتحسن مع الاستعمال، والـ myasthenia بيسوء؟"
+        answer: "في الـ **Lambert-Eaton** المشكلة إن Ca2+ قليل بيدخل الـ terminal؛ مع الانقباض المتكرر الـ Ca2+ ==بيتراكم== فيطلع ACh أكتر. في الـ **myasthenia** الـ receptors قليلة، ومع التكرار الـ ACh اللي بينزل بيقل، فالضعف يزيد. والكتاب: «L comes before M»: الـ Lambert presynaptic قبل الـ Myasthenia postsynaptic."
+        page: 480
+        quote: "Autoantibodies to presynaptic Ca2+ channel → ↓ ACh release; L comes before M"
+      - kind: explain
+        title: "Raynaud: أبيض، أزرق، أحمر"
+        text: |-
+          Vasospasm في الـ arterioles مع البرد أو التوتر: ==أبيض== (ischemia) ← **أزرق** (hypoxia) ← **أحمر** (reperfusion).
+
+          - **Raynaud disease**: 1° (idiopathic).
+          - **Raynaud syndrome**: 2° لـ MCTD أو SLE أو CREST، ومعاه digital ulcers.
+
+          العلاج: ==calcium channel blockers==.
+        page: 480
+        quote: "↓ blood flow to skin due to arteriolar (small vessel) vasospasm in response to cold or stress: color change from white (ischemia) to blue (hypoxia) to red (reperfusion)."
+      - kind: try
+        items: [msk.L02.151, msk.L02.153, msk.L02.157, msk.L02.160, msk.L02.169]
+    recap:
+      - "كبيرة: GCA (ستات >50، عمى، steroids قبل الـ biopsy) و Takayasu (pulseless)."
+      - "متوسطة: Kawasaki (CRASH، coronary aneurysm، IVIG و aspirin) و PAN (hep B، بيسيب الرئة)."
+      - "صغيرة: GPA c-ANCA؛ MPA و EGPA p-ANCA؛ IgA vasculitis أشهر واحدة في الأطفال."
+      - "MG: postsynaptic، بيسوء، thymoma. LEMS: presynaptic، بيتحسن، small cell. Raynaud: CCBs."
+    practice: [msk.L02.151, msk.L02.152, msk.L02.153, msk.L02.154, msk.L02.155, msk.L02.156, msk.L02.157, msk.L02.158, msk.L02.159, msk.L02.160, msk.L02.161, msk.L02.162, msk.L02.163, msk.L02.164, msk.L02.165, msk.L02.166, msk.L02.167, msk.L02.168, msk.L02.169, msk.L02.170, msk.L02.171, msk.L02.172, msk.L02.173, msk.L02.174]

@@ -161,8 +161,25 @@ pub fn DiagnosticsCard() -> Element {
 mod tests {
     use super::*;
 
+    /// The two tests that read the ring back don't run side by side.
+    static RING: Mutex<()> = Mutex::new(());
+
+    #[test]
+    fn a_panic_leaves_its_message_in_the_report() {
+        let _ring = RING.lock().unwrap_or_else(|e| e.into_inner());
+        install_panic_hook();
+        let joined = std::thread::spawn(|| panic!("the valve card has no answer")).join();
+        assert!(joined.is_err());
+        assert!(
+            lines().iter().any(|l| l.contains("panic: ") && l.contains("the valve card has no answer")),
+            "{:?}",
+            lines()
+        );
+    }
+
     #[test]
     fn keeps_the_last_lines() {
+        let _ring = RING.lock().unwrap_or_else(|e| e.into_inner());
         for i in 0..KEEP + 5 {
             report!("line {i}");
         }

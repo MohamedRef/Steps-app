@@ -23,7 +23,7 @@ use crate::{Screen, Ui};
 pub(crate) const CSS: Css = css!("src/lecture/lecture.css");
 
 /// The open pages (last on top) and the screen they opened over. A page is a
-/// lecture id or [`REFERENCES`]. `STEPS_OPEN_LECTURE=hb.L01` (or
+/// lecture id or [`REFERENCES`]. `STEPS_OPEN_LECTURE=cvs.L04` (or
 /// `references`) opens one at launch over the first screen (previews,
 /// screenshots).
 static OPEN: GlobalSignal<Option<(Vec<String>, Screen)>> = Signal::global(|| None);
@@ -142,6 +142,9 @@ pub fn LecturePage(id: String) -> Element {
     if id == crate::abbrdict::PAGE {
         return rsx! { crate::abbrdict::Dictionary {} };
     }
+    if id == crate::notes::PAGE {
+        return rsx! { crate::notes::NotesList {} };
+    }
     let ui = use_context::<Ui>();
     let lib = Library::get();
     let review = use_review();
@@ -227,6 +230,9 @@ pub fn LecturePage(id: String) -> Element {
                     p { class: "muted small",
                         "{seen} {tx::OF} {total} {tx::STARTED}"
                         if due_n > 0 { " · " span { class: "lec-due", "{due_n} {tx::DUE}" } }
+                    }
+                    if !lib.program.slides(&id) {
+                        PagesRead { first, last }
                     }
                     // When reviews are due, give them the one primary action.
                     // A full-lecture study session is still available.
@@ -333,6 +339,69 @@ pub fn LecturePage(id: String) -> Element {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+/// What of the lecture's First Aid pages is read, and the ways to mark
+/// them (A2): the whole lecture, or every page up to one.
+#[component]
+fn PagesRead(first: u32, last: u32) -> Element {
+    let review = use_review();
+    let read = review.backend.borrow().pages().all().within(first, last);
+    let n: u32 = read.iter().map(|[a, b]| b - a + 1).sum();
+    let all = last - first + 1;
+    let mut upto = use_signal(|| read.last().map_or(first, |r| r[1]));
+    let backend = review.backend.clone();
+    let mark = move |a: u32, b: u32, on: bool| {
+        let backend = backend.clone();
+        move |_| {
+            backend.borrow_mut().set_pages_read(Library::get(), a, b, on);
+        }
+    };
+    rsx! {
+        div { class: "lec-read", role: "group", aria_label: tx::READ_GROUP,
+            p { class: "small",
+                if n == 0 {
+                    span { class: "muted", {tx::READ_NONE} }
+                } else {
+                    {tx::read_count(n, all)}
+                    " · "
+                    bdi { dir: "ltr", class: "num-ltr", {steps_core::pages::label(&read)} }
+                }
+            }
+            div { class: "lec-read-actions",
+                if n < all {
+                    button { class: "btn btn-ghost", onclick: mark(first, last, true), {tx::READ_ALL} }
+                } else {
+                    button { class: "btn btn-ghost", onclick: mark(first, last, false), {tx::UNREAD_ALL} }
+                }
+                label { class: "lec-read-upto",
+                    span { {tx::READ_UPTO} }
+                    input {
+                        r#type: "number",
+                        inputmode: "numeric",
+                        min: "{first}",
+                        max: "{last}",
+                        value: "{upto}",
+                        oninput: move |e| {
+                            if let Ok(v) = e.value().trim().parse::<u32>() {
+                                upto.set(v.clamp(first, last));
+                            }
+                        },
+                    }
+                }
+                button {
+                    class: "btn btn-tonal",
+                    onclick: {
+                        let backend = review.backend.clone();
+                        move |_| {
+                            backend.borrow_mut().set_pages_read(Library::get(), first, upto(), true);
+                        }
+                    },
+                    {tx::READ_UPTO_GO}
                 }
             }
         }

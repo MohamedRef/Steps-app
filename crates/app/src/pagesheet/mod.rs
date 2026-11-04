@@ -37,9 +37,9 @@ pub struct Hook {
 /// slides numbers them per lecture.
 #[derive(Clone, Debug, PartialEq)]
 pub enum Scope {
-    /// A page of this course's book (`hb`).
+    /// A page of this course's book (`cvs`).
     Book(String),
-    /// A slide of this lecture (`res.L02`).
+    /// A slide of this lecture (`phs.L02`).
     Slides(String),
 }
 static OPEN: GlobalSignal<Option<Open>> = Signal::global(|| None);
@@ -50,6 +50,8 @@ static OPEN: GlobalSignal<Option<Open>> = Signal::global(|| None);
 pub fn open(page: u32, of: &str, quote: Option<String>, held: bool, hook: Option<Hook>) {
     document::eval("window.__stepsHover && window.__stepsHover.hide();");
     crate::abbrsheet::close();
+    crate::labs::close();
+    crate::gopage::close();
     *OPEN.write() =
         Some((page, scope(Library::get(), of), quote.filter(|q| !q.trim().is_empty()), held, hook));
 }
@@ -134,6 +136,9 @@ pub fn BookSheet() -> Element {
     let playable = content.playable.clone();
     let n = playable.len();
     let lecture_id = content.lecture.clone();
+    // First Aid pages only: a slide number is no page of the book.
+    let can_mark = matches!(scope, Scope::Book(_)) && content.lecture.is_some();
+    let is_read = review.backend.borrow().pages().all().contains(page);
 
     rsx! {
         style { {CSS.text()} }
@@ -183,6 +188,12 @@ pub fn BookSheet() -> Element {
                 } else {
                     p { class: "muted", {tx::NOTHING_YET} }
                 }
+                if can_mark {
+                    ReadToggle { page, is_read }
+                }
+                if matches!(scope, Scope::Book(_)) {
+                    crate::notes::PageNotes { page }
+                }
             }
             div { class: "bk-foot",
                 if n > 0 {
@@ -216,6 +227,25 @@ pub fn BookSheet() -> Element {
                         {tx::OPEN_LECTURE}
                     }
                 }
+            }
+        }
+    }
+}
+
+/// "قريت الصفحة دي": marks the page read so its new cards can start (A2).
+#[component]
+fn ReadToggle(page: u32, is_read: bool) -> Element {
+    let review = use_review();
+    rsx! {
+        div { class: "bk-read",
+            button {
+                class: if is_read { "btn btn-tonal" } else { "btn btn-ghost" },
+                "aria-pressed": is_read,
+                title: tx::READ_HINT,
+                onclick: move |_| {
+                    review.backend.borrow_mut().set_pages_read(Library::get(), page, page, !is_read);
+                },
+                {if is_read { tx::IS_READ } else { tx::MARK_READ }}
             }
         }
     }

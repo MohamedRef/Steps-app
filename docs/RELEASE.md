@@ -8,7 +8,7 @@ paid developer accounts. Everything here costs $0.
 No release yet. The first **alpha** will be `1.0.0-alpha.1`, when Mohamed
 says go. Releases are built and published by the **Release** workflow
 (`.github/workflows/release.yml`, run by hand; §4). The CI *preview* APKs
-(§3) keep coming on every merge.
+(§3) come once a night when `main` moved, or when Mohamed runs the workflow by hand.
 
 Steps has its own keys, its own feed and its own package (`app.steps`).
 It never shares a key, a feed or a client with Batna or Kabar.
@@ -106,7 +106,7 @@ Keychain password still match, and prints the certificate's SHA-256.
 | Signed release APK | `just apk` | `dist/android/steps.apk` (arm64, not debuggable, R8, versionCode from the version) |
 | Install on a device | `just devices`, then `just install-android <serial>` | Installs over the previous Steps signed with the same key |
 | Mac app | `just bundle-mac` | `dist/mac/Steps.app`, signed "Steps Code Signing" once that exists |
-| CI preview APK | Every push to `main` (`.github/workflows/steps-android-preview.yml`) | `steps-preview.apk` on the `steps-preview` prerelease, signed with the permanent release keys, so it installs over a release build and the other way round. Until the keys exist, main only proves the APK builds and publishes nothing. It updates itself from its feed once Settings › Updates picks preview (§5). |
+| CI preview APK | Nightly at 03:00 Cairo time, only when `main` moved since the build on the feed, or by hand: Actions › Android preview APK › Run workflow (`.github/workflows/steps-android-preview.yml`; Mohamed, 2026-11-04). Pull requests touching the Android glue build it as a check and publish nothing. | `steps-preview.apk` on the `steps-preview` prerelease, signed with the permanent release keys, so it installs over a release build and the other way round. Until the keys exist, main only proves the APK builds and publishes nothing. It updates itself from its feed once Settings › Updates picks preview (§5). |
 
 Preview and release APKs carry the same keys, so either installs over the
 other and keeps the data.
@@ -162,7 +162,7 @@ public release needs no token and costs nothing.
 
 | Channel | Release tag | Who follows it |
 |---|---|---|
-| Preview | `steps-preview` | Every push to `main`, signed with the release keys, for whoever picks it in Settings › Updates. |
+| Preview | `steps-preview` | The nightly (or hand-started) build of `main`, signed with the release keys, for whoever picks it in Settings › Updates. |
 | Alpha | `steps-alpha` | Every build by default (Mohamed, 2026-11-04), from the first alpha on. |
 | Beta / Stable | `steps-beta`, `steps-stable` | Later. A beta also reaches alpha followers; a release reaches everyone. |
 
@@ -324,7 +324,7 @@ or not reachable), with when it last looked. Then two per-device choices:
 | Choice | Options |
 |---|---|
 | How it updates | **لوحده** (automatic, the default): downloads on Wi-Fi only and installs at a calm moment. **قولّي الأول** (tell me first): says so, and downloads and installs on a tap. **لأ** (off): only on "دوّر على تحديث". |
-| Channel | Preview, alpha, beta or stable, on any build (every build starts on alpha, Mohamed 2026-11-04; all are signed with the same permanent keys, so switching never needs a reinstall). Preview brings every merge; on the Mac it brings content only (no Mac preview build). Going back from preview to alpha offers the next alpha version. |
+| Channel | Preview, alpha, beta or stable, on any build (every build starts on alpha, Mohamed 2026-11-04; all are signed with the same permanent keys, so switching never needs a reinstall). Preview brings the nightly build of `main`; on the Mac it brings content only (no Mac preview build). Going back from preview to alpha offers the next alpha version. |
 
 When something is ready, a card above the current screen says so, with the
 first two lines of what's new (below) and "إيه الجديد؟". "بعدين" hides it

@@ -14,6 +14,7 @@ use steps_core::review::verify::{self, Check, Edit, Judgement, Verdict, Verdicts
 use steps_core::review::{LoggedReview, ReviewEvent, StudyStore, StudyStoreHandle};
 use steps_core::srs::{self, CardState, ReviewSettings, Scheduler};
 
+use super::pages::{self, Pages};
 use super::{Store, now_ms};
 use crate::content::Library;
 use crate::study::PLAYABLE;
@@ -48,6 +49,10 @@ pub struct ReviewBackend {
     log: Vec<LoggedReview>,
     states: BTreeMap<String, CardState>,
     judgements: BTreeMap<String, Judgement>,
+    /// First Aid pages read and the page gate (`store::pages`).
+    pages: Pages,
+    /// His notes (`steps_core::note`), re-read with everything else.
+    notes: Vec<steps_core::note::Note>,
     /// Bumps the screens' revision signal after every write.
     on_change: Option<Box<dyn FnMut()>>,
 }
@@ -74,8 +79,11 @@ pub struct Overview {
     pub due_minutes: u32,
     /// New items he can still start today (the daily cap and what's written).
     pub new_today: usize,
-    /// New items written and not started yet, ignoring the cap.
+    /// New items written and not started yet, ignoring the cap (and only
+    /// from pages read, with the page gate on).
     pub unseen: usize,
+    /// New items waiting for their First Aid page to be read.
+    pub locked: usize,
     pub due_tomorrow: u32,
     /// Items he has checked (✓ or ✎), and items he has seen at all.
     pub checked: usize,
@@ -102,6 +110,8 @@ impl ReviewBackend {
             log: Vec::new(),
             states: BTreeMap::new(),
             judgements: BTreeMap::new(),
+            pages: Pages::default(),
+            notes: Vec::new(),
             on_change: None,
         };
         b.reload();
@@ -114,7 +124,9 @@ impl ReviewBackend {
         self.scheduler = Scheduler::from_settings(&self.settings, super::zone());
         self.log = self.store.reviews().unwrap_or_default();
         self.judgements = self.store.judgements().unwrap_or_default();
+        self.pages = Pages::load(self.store);
         self.refresh_own();
+        self.notes = self.store.notes();
         self.replay();
     }
 
@@ -149,6 +161,35 @@ impl ReviewBackend {
     pub fn delete_own(&mut self, id: &str) -> super::Result<()> {
         self.store.delete_own_card(id)?;
         self.refresh_own();
+        self.changed();
+        Ok(())
+    }
+
+    /// Every note he has written.
+    pub fn notes(&self) -> &[steps_core::note::Note] {
+        &self.notes
+    }
+
+    /// The note on `anchor`, if any.
+    pub fn note(&self, anchor: &steps_core::note::Anchor) -> Option<&steps_core::note::Note> {
+        self.notes.iter().find(|n| &n.anchor == anchor)
+    }
+
+    /// Saves what he typed on `anchor`: empty text deletes the note.
+    pub fn save_note(
+        &mut self,
+        anchor: steps_core::note::Anchor,
+        text: &str,
+        page: Option<u32>,
+    ) -> std::result::Result<(), NoteError> {
+        use steps_core::note::{Save, save};
+        let existing = self.note(&anchor).cloned();
+        match save(anchor.clone(), text, page, existing.as_ref(), now_ms()).map_err(NoteError::Check)? {
+            Save::Put(n) => self.store.put_note(&n),
+            Save::Delete => self.store.delete_note(&anchor),
+        }
+        .map_err(NoteError::Store)?;
+        self.notes = self.store.notes();
         self.changed();
         Ok(())
     }
@@ -223,6 +264,50 @@ impl ReviewBackend {
         self.judgements.remove(item_id);
         self.changed();
         true
+    }
+
+    pub fn pages(&self) -> &Pages {
+        &self.pages
+    }
+
+    /// Marks First Aid's printed pages `first..=last` read or unread. False
+    /// when a course's pages weren't saved (reported to the log).
+    pub fn set_pages_read(&mut self, lib: &Library, first: u32, last: u32, read: bool) -> bool {
+        let mut ok = true;
+        for (course, read_pages) in self.pages.set(lib, first, last, read) {
+            let what = format!("pages read in {course}");
+            if let Err(e) = self.store.put_setting(&format!("{}{course}", pages::KEY), &read_pages) {
+                super::write_failed(&what, &e);
+                ok = false;
+                continue;
+            }
+            super::write_recovered(&what);
+            self.pages = self.pages.with_course(&course, read_pages);
+        }
+        self.changed();
+        ok
+    }
+
+    /// The switch in Settings › Study: new items only from pages read.
+    pub fn set_page_gate(&mut self, on: bool) -> bool {
+        if let Err(e) = self.store.put_setting(pages::GATE_KEY, &on) {
+            super::write_failed("the page gate", &e);
+            return false;
+        }
+        super::write_recovered("the page gate");
+        self.pages = self.pages.with_gate(on);
+        self.changed();
+        true
+    }
+
+    /// Whether a new item may start now: the page gate lets it through.
+    fn startable(&self, lib: &Library, entry: &Entry) -> bool {
+        let Some(read) = self.pages.gate() else { return true };
+        steps_core::own::is_own(&entry.item.id)
+            || lib
+                .lectures
+                .get(&entry.lecture)
+                .is_none_or(|l| steps_core::pages::unlocks(&entry.item, &l.book, read))
     }
 
     /// False when the settings weren't saved (reported to the log).
@@ -326,8 +411,13 @@ impl ReviewBackend {
             .map(|e| seconds_for(&e.item.body))
             .sum::<u32>()
             .div_ceil(60);
-        let unseen =
-            self.catalog.keys().filter(|id| !self.states.contains_key(*id) && !self.hidden(id)).count();
+        let (unseen, locked) =
+            self.catalog.iter().filter(|(id, _)| !self.states.contains_key(*id) && !self.hidden(id)).fold(
+                (0, 0),
+                |(open, shut), (_, e)| {
+                    if self.startable(lib, e) { (open + 1, shut) } else { (open, shut + 1) }
+                },
+            );
         let tomorrow = self.scheduler.day.day_start_ms(self.scheduler.day.day(now_ms) + 1);
         let due_tomorrow = self
             .states
@@ -362,12 +452,20 @@ impl ReviewBackend {
             due_minutes,
             new_today: self.new_left_today(now_ms).min(unseen),
             unseen,
+            locked,
             due_tomorrow,
             checked,
             seen: self.states.keys().filter(|id| self.catalog.contains_key(*id)).count(),
             lectures,
         }
     }
+}
+
+/// Why a note didn't save.
+#[derive(Debug)]
+pub enum NoteError {
+    Check(steps_core::note::Problem),
+    Store(super::StoreError),
 }
 
 /// The review state in context, with a revision the screens subscribe to.
