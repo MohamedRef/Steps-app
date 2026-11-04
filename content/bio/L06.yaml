@@ -82,9 +82,10 @@ items:
     kind: mcq
     topic: enzyme-terminology
     stem: >-
-      A 3-year-old boy has a metabolic disorder in which a vitamin B12–dependent enzyme fails to move a
-      functional group from one position to another within the same molecule, converting a branched
-      CoA ester into a straight-chain TCA intermediate. Which class of enzyme is defective?
+      A 3-month-old girl is brought to the emergency department with poor feeding, vomiting and
+      hypotonia. Labs show a high anion gap metabolic acidosis, low blood glucose and hyperammonemia.
+      Urine methylmalonic acid is markedly elevated, and her serum vitamin B12 level is normal. The
+      deficient enzyme belongs to which enzyme class?
     options:
       - Carboxylase
       - Kinase
@@ -93,11 +94,11 @@ items:
       - Phosphorylase
     answer: 2
     why:
-      - "Carboxylases transfer carboxyl groups with biotin, like propionyl-CoA carboxylase one step earlier."
-      - "Kinases transfer a phosphate from ATP."
-      - "Right. A mutase relocates a functional group within a molecule, eg, B12-dependent methylmalonyl-CoA mutase."
-      - "Synthases build molecules without using ATP."
-      - "Phosphorylases add inorganic phosphate."
+      - "Propionyl-CoA carboxylase (a biotin carboxylase) is deficient in propionic acidemia, where methylmalonic acid is low, not high."
+      - "Kinases transfer a phosphate from ATP; none sits on the propionyl-CoA → succinyl-CoA path."
+      - "Right. Methylmalonic acidemia with normal B12 points to methylmalonyl-CoA mutase, a mutase: it relocates a functional group within a molecule (B12-dependent)."
+      - "Synthases build molecules without using ATP; none is missing here."
+      - "Phosphorylases add inorganic phosphate, as glycogen phosphorylase does."
     src: { page: 71, quote: "Mutase Relocates a functional group within a molecule (eg, vitamin B12–dependent methylmalonyl-CoA mutase)." }
     status: unverified
   # ---------- p71: rate-determining enzymes ----------
@@ -218,22 +219,22 @@ items:
     kind: mcq
     topic: metabolic-compartmentation
     stem: >-
-      A toxin is found to selectively destroy the mitochondrial matrix enzymes of hepatocytes in a
-      research animal, leaving the cytosol intact. Which pathway in the liver would continue entirely
-      unaffected?
+      A 52-year-old man with a high LDL cholesterol level and a family history of early myocardial
+      infarction starts a drug that inhibits the rate-determining enzyme of cholesterol synthesis. The
+      pathway this drug targets takes place in the same cell compartment as which other pathway?
     options:
       - Ketogenesis
       - Heme synthesis
-      - HMP shunt
+      - Fatty acid synthesis
       - Urea cycle
-      - Gluconeogenesis from pyruvate
+      - Fatty acid β-oxidation
     answer: 2
     why:
       - "Ketogenesis is mitochondrial."
-      - "Heme synthesis uses both compartments."
-      - "Right. The HMP shunt, like glycolysis and fatty acid synthesis, is entirely cytoplasmic."
-      - "The urea cycle starts in the mitochondria."
-      - "Gluconeogenesis starts with mitochondrial pyruvate carboxylase."
+      - "Heme synthesis uses both the mitochondria and the cytoplasm."
+      - "Right. Cholesterol synthesis (on the SER) runs in the cytoplasm, like glycolysis, the HMP shunt and fatty acid synthesis."
+      - "The urea cycle uses both compartments."
+      - "β-oxidation is mitochondrial."
     src: { page: 72, quote: "Cytoplasm Glycolysis, HMP shunt, and synthesis of cholesterol (SER), proteins (ribosomes, RER), fatty acids, and nucleotides." }
     status: unverified
   # ---------- p72: summary of pathways ----------
@@ -255,22 +256,24 @@ items:
     kind: mcq
     topic: summary-of-pathways
     stem: >-
-      A 2-year-old boy with a defect in propionyl-CoA metabolism is admitted with vomiting. Which dietary
-      substances feed into propionyl-CoA and should be limited?
+      A 5-day-old boy is brought to the emergency department with poor feeding, vomiting, hypotonia
+      and lethargy. Labs show a high anion gap metabolic acidosis, ketonuria, low blood glucose and
+      hyperammonemia. Propionyl-CoA metabolites are elevated, methylmalonic acid is low and his vitamin
+      B12 level is normal. Which dietary substances should be limited?
     options:
       - Even-chain fatty acids and leucine
       - Odd-chain fatty acids, isoleucine, valine, methionine and threonine
-      - Lactose and fructose
-      - Lysine and leucine only
-      - Glycine and serine
+      - Galactose and lactose
+      - Lysine and leucine
+      - Phenylalanine and aspartame
     answer: 1
     why:
       - "Even-chain fatty acids give only acetyl-CoA, and leucine is purely ketogenic."
-      - "Right. Odd-chain fatty acids, isoleucine, valine, methionine, threonine (and pyrimidines) feed propionyl-CoA → methylmalonyl-CoA → succinyl-CoA."
-      - "These sugars enter glycolysis."
-      - "Lysine and leucine are the purely ketogenic amino acids."
-      - "These don't feed propionyl-CoA."
-    src: { page: 72, quote: "Odd-chain fatty acids, isoleucine, valine, methionine, threonine, pyrimidines" }
+      - "Right. Propionic acidemia (propionyl-CoA carboxylase deficiency): odd-chain fatty acids, isoleucine, valine, methionine, threonine (and pyrimidines) feed propionyl-CoA, so a low-protein diet limits them (VOMIT)."
+      - "Galactose and lactose are excluded in classic galactosemia."
+      - "Lysine and leucine are the purely ketogenic amino acids; they don't feed propionyl-CoA."
+      - "Phenylalanine and aspartame are restricted in PKU."
+    src: { page: 83, quote: "Treatment: low-protein diet limited in substances that metabolize into propionyl- CoA: Valine, Odd-chain fatty acids, Methionine, Isoleucine, Threonine (VOMIT)." }
     status: unverified
   # ---------- p73: activated carriers ----------
   - id: bio.L06.016
@@ -534,11 +537,30 @@ items:
   - id: bio.L06.033
     kind: card
     topic: pdh-complex-deficiency
-    front: "Pyruvate dehydrogenase complex deficiency: inheritance, findings and treatment?"
-    back: "X-linked. Pyruvate builds up and is shunted to lactate (LDH) and alanine (ALT): neurologic defects, lactic acidosis and ↑ serum alanine from infancy. Treat with ↑ ketogenic nutrients (high fat, ↑ lysine and leucine), B1 and lipoic acid."
+    front: "Pyruvate dehydrogenase complex deficiency: how is it inherited, and where does the pyruvate go?"
+    back: "X-linked. Pyruvate builds up and is shunted to lactate (via LDH) and alanine (via ALT)."
     src: { page: 75, quote: "Causes a buildup of pyruvate that gets shunted to lactate (via LDH) and alanine (via ALT). X-linked." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L06.161
+    kind: enumerate
+    topic: pdh-complex-deficiency
+    prompt: Enumerate the findings of pyruvate dehydrogenase complex deficiency.
+    points:
+      - Neurologic defects
+      - Lactic acidosis
+      - ↑ serum alanine (starting in infancy)
+    pass: 3
+    src: { page: 75, quote: "FINDINGS Neurologic defects, lactic acidosis, ↑ serum alanine starting in infancy." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.162
+    kind: card
+    topic: pdh-complex-deficiency
+    front: How is pyruvate dehydrogenase complex deficiency treated?
+    back: "↑ intake of ketogenic nutrients (eg, high fat, ↑ lysine and leucine), plus B1 and lipoic acid."
+    src: { page: 75, quote: "TREATMENT ↑ intake of ketogenic nutrients (eg, high fat content or ↑ lysine and leucine), B1 and lipoic acid." }
+    status: unverified
   - id: bio.L06.034
     kind: mcq
     topic: pdh-complex-deficiency
@@ -588,18 +610,20 @@ items:
     kind: mcq
     topic: pyruvate-metabolism
     stem: >-
-      In a study of red blood cells, a tracer shows that nearly all glucose is turned into lactate, which
-      the liver then uses to make new glucose. Why must RBCs use this route?
+      A 6-year-old boy has had jaundice, pallor and splenomegaly since infancy. His smear shows hemolysis
+      without spherocytes, and an RBC enzyme assay shows low activity of the last enzyme of glycolysis.
+      His other tissues work normally. Which feature of red blood cells explains why the defect hits
+      them hardest?
     options:
       - They lack hexokinase
       - They lack mitochondria, so pyruvate can't enter the TCA cycle
-      - Lactate dehydrogenase needs biotin
+      - Their lactate dehydrogenase needs biotin
       - Their glycolysis makes no NADH
       - They store glucose as glycogen
     answer: 1
     why:
       - "RBCs do use hexokinase."
-      - "Right. RBCs lack mitochondria, so LDH (B3) turning pyruvate into lactate is their major pathway; the liver recycles it in the Cori cycle."
+      - "Right. RBCs lack mitochondria, so anaerobic glycolysis ending in LDH (B3) is their major pathway and their only ATP source; a glycolytic block starves them."
       - "LDH uses NAD (B3), not biotin."
       - "Glycolysis makes NADH, which LDH re-oxidizes."
       - "RBCs don't store glycogen."
@@ -661,6 +685,13 @@ items:
     src: { page: 76, quote: "NADH electrons are transferred to complex I. FADH2 electrons are transferred to complex II (at a lower energy level than NADH)." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L06.172
+    kind: card
+    topic: electron-transport-chain
+    front: How can the cell drive energetically unfavorable reactions with ATP?
+    back: By coupling them to ATP hydrolysis.
+    src: { page: 76, quote: "ATP hydrolysis can be coupled to energetically unfavorable reactions." }
+    status: unverified
   - id: bio.L06.042
     kind: card
     topic: electron-transport-chain
@@ -901,10 +932,10 @@ items:
     columns: ["", Galactokinase deficiency, Classic galactosemia]
     rows:
       - [Enzyme, Galactokinase (AR), Galactose-1-phosphate uridyltransferase (AR)]
-      - [Presentation, "Mild: galactosemia, galactosuria, infantile cataracts", "Failure to thrive, jaundice, hepatomegaly, cataracts, intellectual disability"]
-      - [Extra risk, "Failure to track objects or social smile", E coli sepsis in neonates]
-      - [Treatment, Exclude galactose and lactose, Exclude galactose and lactose]
-    blanks: [[0, 1], [0, 2], [1, 2], [2, 2]]
+      - [Presentation, "Mild: galactosemia, galactosuria, infantile cataracts; may present as failure to track objects or develop social smile", "Failure to thrive, jaundice, hepatomegaly, cataracts, intellectual disability"]
+      - [Extra risk, "—", E coli sepsis in neonates]
+      - [Treatment, "—", Exclude galactose and lactose]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 2], [3, 2]]
     src: { page: 78, quote: "Symptoms start when infant is fed formula or breast milk → failure to thrive, jaundice, hepatomegaly, infantile cataracts (galactitol deposition in eye lens), intellectual disability." }
     status: unverified
     tags: [high-yield]
@@ -1033,6 +1064,13 @@ items:
     src: { page: 79, quote: "Essential PVT TIM HaLL: Phenylalanine, Valine, Tryptophan, Threonine, Isoleucine, Methionine, Histidine, Leucine, Lysine." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L06.171
+    kind: card
+    topic: amino-acids
+    front: Which stereoisomer of amino acids is found in proteins?
+    back: Only L-amino acids.
+    src: { page: 79, quote: "Only L-amino acids are found in proteins." }
+    status: unverified
   - id: bio.L06.070
     kind: table
     topic: amino-acids
@@ -1314,6 +1352,14 @@ items:
     src: { page: 81, quote: "Epinephrine Metanephrine Normetanephrine Vanillylmandelic acid" }
     status: unverified
     tags: [high-yield]
+  - id: bio.L06.168
+    kind: card
+    topic: catecholamine-synthesis
+    front: What is the book's mnemonic for the order of catecholamine synthesis?
+    back: "Pure true Love does not exist: Phenylalanine → Tyrosine → L-DOPA → Dopamine → Norepinephrine → Epinephrine."
+    src: { page: 81, quote: "Pure true Love does not exist." }
+    status: unverified
+    tags: [high-yield]
   - id: bio.L06.089
     kind: card
     topic: catecholamine-synthesis
@@ -1347,11 +1393,39 @@ items:
   - id: bio.L06.091
     kind: card
     topic: phenylketonuria
-    front: What causes phenylketonuria and what are its findings?
-    back: ↓ phenylalanine hydroxylase (or ↓ BH4, its cofactor), AR. Tyrosine becomes essential, and phenyl ketones appear in urine. Intellectual disability, microcephaly, seizures, hypopigmented skin, eczema, musty body odor.
+    front: What causes phenylketonuria, and what happens to tyrosine?
+    back: "↓ phenylalanine hydroxylase (PAH), or ↓ BH4, its cofactor; autosomal recessive. Tyrosine becomes essential, and ↑ phenylalanine → ↑ phenyl ketones in urine."
+    src: { page: 82, quote: "Caused by ↓ phenylalanine hydroxylase (PAH). Tyrosine becomes essential. ↑ phenylalanine → ↑ phenyl ketones in urine." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.163
+    kind: enumerate
+    topic: phenylketonuria
+    prompt: Enumerate the findings of untreated phenylketonuria.
+    points:
+      - Intellectual disability
+      - Microcephaly
+      - Seizures
+      - Hypopigmented skin
+      - Eczema
+      - Musty body odor
+    pass: 5
     src: { page: 82, quote: "Findings: intellectual disability, microcephaly, seizures, hypopigmented skin, eczema, musty body odor." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L06.164
+    kind: cloze
+    topic: phenylketonuria
+    text: "The phenyl ketones in PKU are {{c1::phenylacetate}}, {{c2::phenyllactate}} and {{c3::phenylpyruvate}}."
+    src: { page: 82, quote: "Phenyl ketones—phenylacetate, phenyllactate, and phenylpyruvate." }
+    status: unverified
+  - id: bio.L06.165
+    kind: card
+    topic: phenylketonuria
+    front: Why does tetrahydrobiopterin (BH4) deficiency raise phenylalanine, and what is its outlook untreated?
+    back: BH4 is the essential cofactor of phenylalanine hydroxylase. Severity varies; untreated patients typically die in infancy.
+    src: { page: 82, quote: "Tetrahydrobiopterin (BH4) deficiency—BH4 essential cofactor for PAH. BH4 deficiency → ↑ phenylalanine. Varying degrees of clinical severity. Untreated patients typically die in infancy." }
+    status: unverified
   - id: bio.L06.092
     kind: card
     topic: phenylketonuria
@@ -1397,6 +1471,13 @@ items:
     front: What causes maple syrup urine disease, and how is it treated?
     back: "AR ↓ branched-chain α-ketoacid dehydrogenase (needs B1) → isoleucine, leucine and valine aren't degraded → ↑ α-ketoacids, especially leucine's. Treat by restricting isoleucine, leucine and valine, plus thiamine."
     src: { page: 82, quote: "Blocked degradation of branched amino acids (isoleucine, leucine, valine) due to ↓ branched- chain α-ketoacid dehydrogenase (B1)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.166
+    kind: cloze
+    topic: maple-syrup-urine-disease
+    text: "Maple syrup urine disease blocks degradation of the branched amino acids {{c1::isoleucine}}, {{c1::leucine}} and {{c1::valine}}; the enzyme needs vitamin {{c2::B1}}. Book mnemonic: I love Vermont maple syrup from maple trees (with B1ranches)."
+    src: { page: 82, quote: "I love Vermont maple syrup from maple trees (with B1ranches)." }
     status: unverified
     tags: [high-yield]
   - id: bio.L06.096
@@ -1473,6 +1554,14 @@ items:
     front: What are the findings of homocystinuria (HOMOCYstinuria)?
     back: ↑↑ Homocysteine in urine, Osteoporosis, Marfanoid habitus, Ocular changes (lens subluxes down and in), Cardiovascular effects (thrombosis, atherosclerosis → stroke, MI), kYphosis, intellectual disability, hypopigmented skin.
     src: { page: 83, quote: "HOMOCYstinuria: ↑↑ Homocysteine in urine, Osteoporosis, Marfanoid habitus, Ocular changes (downward and inward lens subluxation), Cardiovascular effects (thrombosis and atherosclerosis → stroke and MI), kYphosis, intellectual disability, hypopigmented skin." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.167
+    kind: card
+    topic: homocystinuria
+    front: Which way does the lens sublux in homocystinuria, and how does that differ from Marfan syndrome?
+    back: Homocystinuria, "down and in"; Marfan syndrome, "up and fans out".
+    src: { page: 83, quote: "In homocystinuria, lens subluxes “down and in” (vs Marfan, “up and fans out”)." }
     status: unverified
     tags: [high-yield]
   - id: bio.L06.101
@@ -1667,7 +1756,7 @@ items:
     columns: [Type, Deficient enzyme, Key findings]
     rows:
       - [I von Gierke, Glucose-6-phosphatase, "Severe fasting hypoglycemia, ↑ lactate, ↑ TG, ↑ uric acid, hepatomegaly, renomegaly"]
-      - [II Pompe, "Lysosomal acid α-1,4-glucosidase (acid maltase)", "Cardiomyopathy, hypotonia, big tongue, early death"]
+      - [II Pompe, "Lysosomal acid α-1,4-glucosidase (acid maltase)", "Cardiomyopathy, hypotonia, exercise intolerance, big tongue, early death"]
       - [III Cori, Debranching enzymes, "Like von Gierke but milder, normal lactate"]
       - [IV Andersen, Branching enzyme, "Hepatosplenomegaly, failure to thrive, infantile cirrhosis"]
       - [V McArdle, Skeletal muscle glycogen phosphorylase, "Cramps, myoglobinuria with exercise, second wind"]
@@ -1675,6 +1764,27 @@ items:
     src: { page: 85, quote: "Vice president can’t accept money. Types I-V are autosomal recessive. Andersen: Branching. Cori: Debranching. (ABCD)" }
     status: unverified
     tags: [high-yield]
+  - id: bio.L06.173
+    kind: card
+    topic: glycogen-storage-diseases
+    front: Which stain identifies glycogen and helps diagnose glycogen storage diseases?
+    back: Periodic acid–Schiff (PAS) stain.
+    src: { page: 85, quote: "Periodic acid–Schiff stain identifies glycogen and is useful in identifying these diseases." }
+    status: unverified
+  - id: bio.L06.174
+    kind: card
+    topic: glycogen-storage-diseases
+    front: Besides cramps and myoglobinuria, which cardiac problem can McArdle disease cause, and why?
+    back: Arrhythmia, from electrolyte abnormalities.
+    src: { page: 85, quote: "myoglobinuria (red urine) with strenuous exercise, and arrhythmia from electrolyte abnormalities." }
+    status: unverified
+  - id: bio.L06.175
+    kind: card
+    topic: glycogen-storage-diseases
+    front: "Andersen disease (type IV): when can the neuromuscular form present, and when does hypoglycemia appear?"
+    back: The neuromuscular form can present at any age; hypoglycemia occurs late in the disease.
+    src: { page: 85, quote: "Neuromuscular form can present at any age. Hypoglycemia occurs late in the disease." }
+    status: unverified
   - id: bio.L06.115
     kind: card
     topic: glycogen-storage-diseases
@@ -1779,7 +1889,7 @@ items:
       - [Metachromatic leukodystrophy, Arylsulfatase A, Cerebroside sulfate, AR]
       - [Krabbe, Galactocerebrosidase, "Galactocerebroside, psychosine", AR]
       - [Gaucher, Glucocerebrosidase (β-glucosidase), Glucocerebroside, AR]
-      - [Niemann-Pick, Sphingomyelinase, "Sphingomyelin, cholesterol", AR]
+      - [Niemann-Pick, "Sphingomyelinase (No man, don't Pick the sphinx)", "Sphingomyelin, cholesterol", AR]
     blanks: [[0, 1], [1, 1], [1, 3], [2, 1], [3, 1], [4, 1], [5, 1]]
     src: { page: 86, quote: "Hexosaminidase A (“TAy-Sax”). GM2 ganglioside. AR" }
     status: unverified
@@ -1791,11 +1901,58 @@ items:
     columns: ["", Hurler, Hunter]
     rows:
       - [Enzyme, α-L-iduronidase, Iduronate-2-sulfatase]
+      - [Accumulates, "Heparan sulfate, dermatan sulfate", "Heparan sulfate, dermatan sulfate"]
       - [Inheritance, AR, XR]
       - [Cornea, Clouded, Clear]
       - [Other, "Developmental delay, hirsutism, skeletal anomalies, airway obstruction, hepatosplenomegaly", Mild Hurler + aggressive behavior]
-    blanks: [[0, 1], [0, 2], [1, 2], [2, 2]]
+    blanks: [[0, 1], [0, 2], [1, 1], [2, 2], [3, 2]]
     src: { page: 86, quote: "Hunter syndrome Mild Hurler + aggressive behavior, no corneal clouding." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.176
+    kind: enumerate
+    topic: lysosomal-storage-diseases
+    prompt: Enumerate the findings of Tay-Sachs disease.
+    points:
+      - Progressive neurodegeneration
+      - Developmental delay/regression
+      - Hyperreflexia
+      - Hyperacusis
+      - Cherry-red spot on the macula
+      - Lysosomes with onion skin
+      - No hepatosplenomegaly
+    pass: 6
+    src: { page: 86, quote: "Progressive neurodegeneration, developmental delay/regression, hyperreflexia, hyperacusis, “cherry- red” spot on macula" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.177
+    kind: enumerate
+    topic: lysosomal-storage-diseases
+    prompt: Enumerate the findings of Krabbe disease.
+    points:
+      - Peripheral neuropathy
+      - Destruction of oligodendrocytes
+      - Developmental delay
+      - CN II atrophy
+      - Globoid cells
+    pass: 4
+    src: { page: 86, quote: "Peripheral neuropathy, destruction of oligodendrocytes, developmental delay, CN II atrophy, globoid cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.178
+    kind: card
+    topic: lysosomal-storage-diseases
+    front: What are the findings of metachromatic leukodystrophy?
+    back: Central and peripheral demyelination, with ataxia and dementia.
+    src: { page: 86, quote: "Central and peripheral demyelination with ataxia, dementia." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.179
+    kind: card
+    topic: lysosomal-storage-diseases
+    front: Which lysosomal storage diseases have ↑ incidence in Ashkenazi Jews?
+    back: Tay-Sachs, Niemann-Pick, and some forms of Gaucher disease.
+    src: { page: 86, quote: "↑ incidence of Tay-Sachs, Niemann-Pick, and some forms of Gaucher disease in Ashkenazi Jews." }
     status: unverified
     tags: [high-yield]
   - id: bio.L06.123
@@ -1942,6 +2099,14 @@ items:
     front: What are the ketone bodies, and which one does the urine test miss?
     back: Acetone (ketone), acetoacetate and β-hydroxybutyrate (ketoacids). Breath smells fruity (acetone). The urine test detects acetoacetate but not β-hydroxybutyrate.
     src: { page: 88, quote: "Urine test for ketones can detect acetoacetate, but not β-hydroxybutyrate." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.180
+    kind: card
+    topic: ketone-bodies
+    front: In prolonged starvation and diabetic ketoacidosis, why does acetyl-CoA turn into ketone bodies?
+    back: Oxaloacetate is depleted for gluconeogenesis, so acetyl-CoA can't enter the TCA cycle and goes to ketogenesis.
+    src: { page: 88, quote: "In prolonged starvation and diabetic ketoacidosis, oxaloacetate is depleted for gluconeogenesis." }
     status: unverified
     tags: [high-yield]
   - id: bio.L06.133
@@ -2126,24 +2291,26 @@ items:
     status: unverified
   - id: bio.L06.147
     kind: mcq
-    topic: lipid-transport
+    topic: familial-dyslipidemias
     stem: >-
-      In a patient after a fatty meal, VLDL from the liver loses triglycerides in the capillaries and
-      becomes IDL. How does IDL deliver its remaining triglycerides and cholesterol to the liver?
+      A 48-year-old man has yellow-orange creases in his palms and tuberous nodules on his elbows. He
+      had a myocardial infarction last year. Fasting plasma shows ↑ chylomicron and VLDL remnants and
+      ↑ triglycerides; his parents are unaffected. Loss of which apolipoprotein function explains the
+      buildup of these particles?
     options:
-      - Via apo B48
-      - Via apoE
-      - Via apo AI
-      - Via the HDL receptor only
-      - Via apo CII
+      - B48, chylomicron secretion into lymphatics
+      - E, remnant uptake by the liver
+      - AI, activation of LCAT
+      - B100, binding of the LDL receptor
+      - CII, activation of lipoprotein lipase
     answer: 1
     why:
-      - "B48 is on chylomicrons from the intestine."
-      - "Right. IDL delivers TGs and cholesterol to the liver via apoE."
-      - "Apo AI activates LCAT on HDL."
-      - "That isn't the IDL route shown."
-      - "Apo CII activates lipoprotein lipase."
-    src: { page: 90, quote: "IDL delivers TGs and cholesterol to the liver via apoE" }
+      - "B48 deficiency (as in abetalipoproteinemia) stops chylomicrons forming, so remnants would be absent."
+      - "Right. Type III dysbetalipoproteinemia (AR, defective apoE: type thrEE): apoE mediates remnant uptake, so chylomicron and VLDL remnants pile up; palmar and tuberoeruptive xanthomas, premature atherosclerosis."
+      - "AI on HDL activates LCAT; it doesn't clear remnants."
+      - "Defective B100 or LDL receptors cause type II: ↑ LDL, tendon xanthomas."
+      - "ApoCII deficiency (type I) leaves whole chylomicrons uncleaved: pancreatitis and eruptive xanthomas, no ↑ atherosclerosis."
+    src: { page: 92, quote: "Premature atherosclerosis, tuberoeruptive and palmar xanthomas." }
     status: unverified
   # ---------- p91: key enzymes in lipid transport ----------
   - id: bio.L06.148
@@ -2206,8 +2373,10 @@ items:
     kind: mcq
     topic: major-apolipoproteins
     stem: >-
-      A lipoprotein particle is isolated from the thoracic duct after a fatty meal. Which apolipoprotein
-      is unique to particles of this origin and needed for their secretion?
+      A 10-month-old boy has failure to thrive and pale, bulky, foul-smelling stools. His smear shows
+      acanthocytes, and plasma triglycerides and cholesterol are very low. An intestinal biopsy shows
+      enterocytes filled with lipid. Which apolipoprotein normally lets these cells secrete dietary fat
+      into the lymphatics?
     options:
       - B100
       - B48
@@ -2216,11 +2385,11 @@ items:
       - CII
     answer: 1
     why:
-      - "B100 is only on particles from the liver."
-      - "Right. B48 mediates chylomicron secretion into lymphatics and is only on particles from the intestine."
+      - "B100 is only on particles from the liver (VLDL, IDL, LDL) and binds the LDL receptor."
+      - "Right. Abetalipoproteinemia: no apo B48– (or B100–) containing lipoproteins. B48 mediates chylomicron secretion into lymphatics and is only on particles from the intestine."
       - "AI is on HDL and activates LCAT."
-      - "ApoE is on most lipoproteins and mediates remnant uptake."
-      - "CII is acquired from HDL and activates LPL."
+      - "ApoE mediates remnant uptake, after secretion."
+      - "CII is a lipoprotein lipase cofactor, acting in the circulation."
     src: { page: 91, quote: "B48 Mediates chylomicron secretion into lymphatics Only on particles originating from the intestines" }
     status: unverified
   # ---------- p92: lipoprotein functions ----------
@@ -2239,6 +2408,19 @@ items:
     src: { page: 92, quote: "LDL Delivers hepatic cholesterol to peripheral tissues. Formed by hepatic lipase modification of IDL in the liver and peripheral tissue." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L06.181
+    kind: card
+    topic: lipoprotein-functions
+    front: Which apolipoproteins does HDL hold in reserve, and why?
+    back: apoC and apoE, which are needed for chylomicron and VLDL metabolism.
+    src: { page: 92, quote: "Acts as a repository for apoC and apoE (which are needed for chylomicron and VLDL metabolism)." }
+    status: unverified
+  - id: bio.L06.182
+    kind: cloze
+    topic: lipoprotein-functions
+    text: "Book mnemonic: LDL is {{c1::Lethal}}; HDL is {{c2::Healthy}}."
+    src: { page: 92, quote: "LDL is Lethal." }
+    status: unverified
   - id: bio.L06.153
     kind: card
     topic: lipoprotein-functions
@@ -2271,11 +2453,33 @@ items:
   - id: bio.L06.155
     kind: card
     topic: abetalipoproteinemia
-    front: What is abetalipoproteinemia?
-    back: "AR mutation in microsomal transfer protein (MTP) → no chylomicrons, VLDL or LDL (no apo B48/B100 lipoproteins). Infants: severe fat malabsorption, steatorrhea, failure to thrive. Later: retinitis pigmentosa, spinocerebellar degeneration (vitamin E deficiency), ataxia, acanthocytosis. Biopsy: lipid-laden enterocytes."
+    front: What is the genetic defect in abetalipoproteinemia, and which lipoproteins are missing?
+    back: "Autosomal recessive mutation in the gene for microsomal transfer protein (MTP) → chylomicrons, VLDL and LDL are absent (no apo B48– or apo B100–containing lipoproteins)."
     src: { page: 92, quote: "Autosomal recessive. Mutation in gene that encodes microsomal transfer protein (MTP). Chylomicrons, VLDL, LDL absent." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L06.169
+    kind: enumerate
+    topic: abetalipoproteinemia
+    prompt: "Enumerate the findings of abetalipoproteinemia (infancy, later, and biopsy)."
+    points:
+      - Severe fat malabsorption, steatorrhea, failure to thrive (infants)
+      - Retinitis pigmentosa
+      - Spinocerebellar degeneration from vitamin E deficiency
+      - Progressive ataxia
+      - Acanthocytosis
+      - Lipid-laden enterocytes on intestinal biopsy
+    pass: 5
+    src: { page: 92, quote: "Affected infants present with severe fat malabsorption, steatorrhea, failure to thrive. Later manifestations include retinitis pigmentosa, spinocerebellar degeneration due to vitamin E deficiency, progressive ataxia, acanthocytosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.170
+    kind: card
+    topic: abetalipoproteinemia
+    front: How is abetalipoproteinemia treated?
+    back: Restrict long-chain fatty acids and give large doses of oral vitamin E.
+    src: { page: 92, quote: "Treatment: restriction of long-chain fatty acids, large doses of oral vitamin E." }
+    status: unverified
   - id: bio.L06.156
     kind: mcq
     topic: abetalipoproteinemia
