@@ -108,11 +108,15 @@ impl Screen {
 
     fn from_env() -> Option<Screen> {
         // STEPS_OPEN_SCREEN=study opens that screen at launch (previews and screenshots).
-        let name = std::env::var("STEPS_OPEN_SCREEN").ok()?;
+        Self::named(&std::env::var("STEPS_OPEN_SCREEN").ok()?)
+    }
+
+    /// The screen called `name` (`study`, `Settings`), in any case.
+    fn named(name: &str) -> Option<Screen> {
         [Self::NAV.as_slice(), &[Self::Settings]]
             .concat()
             .into_iter()
-            .find(|s| format!("{s:?}").eq_ignore_ascii_case(&name))
+            .find(|s| format!("{s:?}").eq_ignore_ascii_case(name))
     }
 }
 

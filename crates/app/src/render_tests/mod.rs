@@ -9,21 +9,27 @@
 
 mod bank;
 mod cases;
+mod cloud;
 mod crawl;
+mod data;
 mod dom;
 mod kit;
 mod learn;
 mod lecture;
 mod nav;
+mod onboarding;
 mod oral;
 mod own;
 mod plan;
 mod screens;
+mod settings;
 mod sheets;
 mod stats;
 mod study;
 mod today;
+mod update;
 mod verify;
+mod views;
 
 use std::time::Duration;
 

@@ -40,7 +40,7 @@ pub fn menu_bar() -> Menu {
     let about = AboutMetadata {
         name: Some("Steps".into()),
         version: Some(env!("CARGO_PKG_VERSION").into()),
-        comments: Some("Internal medicine study, one short session at a time.".into()),
+        comments: Some("USMLE Step 1 study, one short session at a time.".into()),
         ..Default::default()
     };
     // On macOS the first submenu is the app menu, titled with the app's name.

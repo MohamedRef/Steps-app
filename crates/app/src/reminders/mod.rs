@@ -78,7 +78,7 @@ pub fn use_local_reminders() {
         let prefs = PREFS.read().clone();
         let here = *HERE.read();
         let weekdays = crate::plan::SETTINGS.read().weekdays;
-        if !native::local() {
+        if !local() {
             return;
         }
         let now = now_ms();
@@ -105,6 +105,33 @@ pub fn use_local_reminders() {
     });
 }
 
+#[cfg(test)]
+thread_local! {
+    /// Screen tests stand in for a phone: this device arms reminders, with
+    /// (notifications allowed, battery unrestricted) as Android would say.
+    pub static TEST_PHONE: std::cell::Cell<Option<(Option<bool>, Option<bool>)>> =
+        const { std::cell::Cell::new(None) };
+}
+
+fn test_phone() -> Option<(Option<bool>, Option<bool>)> {
+    #[cfg(test)]
+    return TEST_PHONE.with(std::cell::Cell::get);
+    #[cfg(not(test))]
+    None
+}
+
+fn local() -> bool {
+    test_phone().is_some() || native::local()
+}
+
+fn enabled() -> Option<bool> {
+    test_phone().map_or_else(native::enabled, |p| p.0)
+}
+
+fn battery_unrestricted() -> Option<bool> {
+    test_phone().map_or_else(native::battery_unrestricted, |p| p.1)
+}
+
 pub(crate) fn hhmm(t: u16) -> String {
     format!("{:02}:{:02}", t / 60, t % 60)
 }
@@ -124,23 +151,23 @@ pub fn RemindSection() -> Element {
     let here = HERE();
     // Android: re-read when the sheet re-renders (e.g. after he returns from
     // its settings). The Mac answers later, so it is polled while open.
-    let mut mac_allowed = use_signal(native::enabled);
+    let mut mac_allowed = use_signal(enabled);
     use_future(move || async move {
         if cfg!(target_os = "macos") {
             loop {
                 crate::platform::time::sleep(std::time::Duration::from_secs(1)).await;
-                let now = native::enabled();
+                let now = enabled();
                 if *mac_allowed.peek() != now {
                     mac_allowed.set(now);
                 }
             }
         }
     });
-    let allowed = if cfg!(target_os = "macos") { mac_allowed() } else { native::enabled() };
-    let unrestricted = native::battery_unrestricted();
+    let allowed = if cfg!(target_os = "macos") { mac_allowed() } else { enabled() };
+    let unrestricted = battery_unrestricted();
     let on_off = |on: bool| if on { tx::ON } else { tx::OFF };
 
-    if !native::local() {
+    if !local() {
         return rsx! {
             crate::ui::Card {
                 h2 { {tx::SECTION} }

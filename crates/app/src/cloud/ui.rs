@@ -27,6 +27,55 @@ impl Cloud {
     }
 }
 
+#[cfg(test)]
+impl Cloud {
+    /// Screen tests: the commands the screen sends arrive here, as the
+    /// engine would get them.
+    pub fn listen_for_tests(&self) -> tokio::sync::mpsc::UnboundedReceiver<Command> {
+        let (tx, rx) = tokio::sync::mpsc::unbounded_channel();
+        let mut commands = self.commands;
+        commands.set(Some(tx));
+        rx
+    }
+
+    /// Screen tests: a stand-in engine. The screen's commands come out of
+    /// the receiver; events sent in reach the screen as the engine's would.
+    pub fn engine_for_tests(
+        &self,
+    ) -> (tokio::sync::mpsc::UnboundedReceiver<Command>, UnboundedSender<Event>) {
+        let (commands, rx) = tokio::sync::mpsc::unbounded_channel();
+        let (events_tx, events) = tokio::sync::mpsc::unbounded_channel();
+        follow(*self, super::CloudHandle { commands, events }, consume_context());
+        (rx, events_tx)
+    }
+}
+
+/// Sends the screen's commands to the sync engine and mirrors its events
+/// into the signals the screens read.
+fn follow(cloud: Cloud, mut handle: super::CloudHandle, review: crate::store::Review) {
+    let mut commands = cloud.commands;
+    commands.set(Some(handle.commands.clone()));
+    spawn(async move {
+        let (mut status, mut devices, mut signing_in) = (cloud.status, cloud.devices, cloud.signing_in);
+        while let Some(event) = handle.events.recv().await {
+            match event {
+                Event::Status(s) => {
+                    if *status.peek() != s {
+                        status.set(s);
+                    }
+                }
+                Event::Devices(d) => devices.set(Some(d)),
+                Event::SigningIn(on) => signing_in.set(on),
+                Event::Changed(_) => {
+                    // Another device answered, judged or changed a setting.
+                    let _ = crate::store::shared().observe_stored();
+                    review.backend.borrow_mut().reload_and_notify();
+                }
+            }
+        }
+    });
+}
+
 /// Provides [`Cloud`] and, when this build knows a server, starts sync.
 /// Call once in `App`, after `store::use_provide_review`.
 pub fn use_provide_cloud() {
@@ -43,9 +92,9 @@ pub fn use_provide_cloud() {
         let Some(config) = super::CloudConfig::from_env() else { return };
         let device = super::device_info(device_id);
         #[cfg(target_arch = "wasm32")]
-        let mut handle = super::start(config, device);
+        let handle = super::start(config, device);
         #[cfg(not(target_arch = "wasm32"))]
-        let mut handle = {
+        let handle = {
             // An in-memory store (the data folder couldn't be opened) has nothing to sync.
             let Some(path) = store.path.clone() else { return };
             #[cfg(target_os = "macos")]
@@ -63,28 +112,7 @@ pub fn use_provide_cloud() {
                 }
             }
         };
-        let mut commands = cloud.commands;
-        commands.set(Some(handle.commands.clone()));
-        let review = review.clone();
-        spawn(async move {
-            let (mut status, mut devices, mut signing_in) = (cloud.status, cloud.devices, cloud.signing_in);
-            while let Some(event) = handle.events.recv().await {
-                match event {
-                    Event::Status(s) => {
-                        if *status.peek() != s {
-                            status.set(s);
-                        }
-                    }
-                    Event::Devices(d) => devices.set(Some(d)),
-                    Event::SigningIn(on) => signing_in.set(on),
-                    Event::Changed(_) => {
-                        // Another device answered, judged or changed a setting.
-                        let _ = crate::store::shared().observe_stored();
-                        review.backend.borrow_mut().reload_and_notify();
-                    }
-                }
-            }
-        });
+        follow(cloud, handle, review.clone());
     });
     // Back in front (Android hands a backgrounded app no network): a sign-in
     // Google approved meanwhile finishes now, and the outbox goes up.
