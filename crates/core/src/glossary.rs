@@ -28,7 +28,7 @@ pub struct Glossary {
 pub struct Entry {
     /// The word as written in the content: `PDA`, `nitroprusside`.
     pub term: String,
-    /// Other spellings that show the same entry (`TIPSS`, `UDCA`).
+    /// Other spellings that show the same entry (`ToF`, `NTG`).
     #[serde(default, skip_serializing_if = "Vec::is_empty")]
     pub aliases: Vec<String>,
     pub kind: Kind,
@@ -45,7 +45,7 @@ pub enum Kind {
 }
 
 impl Entry {
-    /// The id used in `content/approved.txt`: `glossary.SAAG`.
+    /// The id used in `content/approved.txt`: `glossary.PDA`.
     pub fn id(&self) -> String {
         format!("glossary.{}", self.term)
     }
@@ -119,7 +119,7 @@ fn word_char(c: char) -> bool {
 }
 
 /// Looks abbreviations up fast: every abbreviation spelling (and drug
-/// spellings written like one, `UDCA`) by exact case, plus the `plain:`
+/// spellings written like one, `NTG`) by exact case, plus the `plain:`
 /// words. Build it once with [`Glossary::finder`] and reuse it for many
 /// texts (a course's lessons, the validator).
 pub struct Finder<'a> {
@@ -170,7 +170,7 @@ impl<'a> Finder<'a> {
     }
 
     /// Where the abbreviations stand in `text`: (start, end, entry), the
-    /// longest hyphen-joined spelling first (`HRS-AKI` over `HRS`).
+    /// longest hyphen-joined spelling first (`NSTEMI` over `STEMI`).
     fn matches(&self, text: &str) -> Vec<(usize, usize, &'a Entry)> {
         let mut out = Vec::new();
         for run in hyphen_runs(text) {
@@ -240,8 +240,8 @@ impl Glossary {
 
     /// The abbreviations written in `texts`, each once, in the order they
     /// first appear: what a lesson step's "اختصارات" chip lists. A longer
-    /// spelling wins over the shorter ones inside it (`HRS-AKI` over `HRS`).
-    /// Drug names count only when written like an abbreviation (`UDCA`).
+    /// spelling wins over the shorter ones inside it (`NSTEMI` over `STEMI`).
+    /// Drug names count only when written like an abbreviation (`NTG`).
     pub fn abbreviations_in<S: AsRef<str>>(&self, texts: &[S]) -> Vec<&Entry> {
         self.finder().abbreviations_in(texts)
     }

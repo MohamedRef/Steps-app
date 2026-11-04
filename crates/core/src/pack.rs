@@ -353,4 +353,70 @@ mod tests {
         bad.extend([1, 2, 3]);
         assert!(matches!(Pack::decode(&bad), Err(PackError::Inflate(_))));
     }
+
+    #[test]
+    fn the_look_travels_with_the_pack() {
+        let look: BTreeMap<String, String> =
+            [("src/style.css".to_string(), ":root { --ink: #222; }".to_string())].into();
+        let pack = Pack::new(index(), vec![sample()]).with_look(look.clone());
+        assert_eq!(Pack::decode(&pack.encode()).unwrap().look, look);
+    }
+
+    #[test]
+    fn index_lesson_and_topic_problems_are_named() {
+        let mut idx = index();
+        idx.schema = "steps.content/v0".into();
+        idx.lectures[1].id = "CVS-5".into();
+        let lesson = |lecture: &str, id: &str, topic: &str| -> LessonFile {
+            serde_json::from_value(serde_json::json!({
+                "schema": "steps.lesson/v0",
+                "lecture": lecture,
+                "lessons": [{
+                    "id": id, "title": "الـ tamponade", "hook": "h", "minutes": 5, "pages": [317, 317],
+                    "topics": [topic],
+                    "steps": [{ "kind": "try", "items": ["cvs.L04.042"] }],
+                    "recap": [], "status": "unverified"
+                }]
+            }))
+            .unwrap()
+        };
+        let pack = Pack::new(idx, vec![sample()]).with_lessons(vec![
+            lesson("cvs.L04", "cvs.L05.lesson1", "murmurs"),
+            lesson("cvs.L07", "cvs.L07.lesson1", "shock"),
+        ]);
+        // Lessons follow the index order, then the lecture id.
+        assert_eq!(
+            pack.lessons.iter().map(|l| l.lecture.as_str()).collect::<Vec<_>>(),
+            ["cvs.L04", "cvs.L07"]
+        );
+        let p = pack.problems();
+        for want in [
+            "index: schema is \"steps.content/v0\", expected \"steps.content/v1\"",
+            "index: lecture id \"CVS-5\" must look like cvs.L04",
+            "cvs.L04 lessons: schema is \"steps.lesson/v0\", expected \"steps.lesson/v1\"",
+            "cvs.L07 lessons: the lecture isn't listed in the index",
+            "cvs.L05.lesson1: lesson id isn't under its lecture cvs.L04",
+            "cvs.L05.lesson1: item cvs.L04.042 isn't in lecture cvs.L04",
+            "cvs.L05.lesson1: topic murmurs isn't in lecture cvs.L04",
+        ] {
+            assert!(p.iter().any(|m| m == want), "{want}: {p:#?}");
+        }
+        // A lecture with no items in the pack: its lessons' references aren't checked.
+        assert!(!p.iter().any(|m| m.starts_with("cvs.L07.lesson1: item")), "{p:#?}");
+    }
+
+    #[test]
+    fn program_problems_are_prefixed() {
+        let program: Program =
+            serde_yaml_ng::from_str(include_str!("../../../content/program.yaml")).unwrap();
+        assert_eq!(
+            Pack::new(index(), vec![sample()]).with_program(program.clone()).problems(),
+            Vec::<String>::new()
+        );
+        // A lecture whose course the program doesn't have.
+        let mut idx = index();
+        idx.lectures[1].id = "zz.L01".into();
+        let p = Pack::new(idx, vec![sample()]).with_program(program).problems();
+        assert_eq!(p, ["program: lecture zz.L01 has no course zz in content/program.yaml"]);
+    }
 }

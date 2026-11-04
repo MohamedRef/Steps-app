@@ -395,8 +395,8 @@ mod tests {
 
     fn check() -> StepBody {
         StepBody::Check {
-            question: "Which marker best shows synthetic function?".into(),
-            options: vec!["ALT".into(), "INR".into(), "GGT".into()],
+            question: "Which marker is most specific for myocardial injury?".into(),
+            options: vec!["CK-MB".into(), "Troponin I".into(), "LDH".into()],
             answer: 1,
             why: vec!["".into(), "".into(), "".into()],
         }
@@ -404,8 +404,8 @@ mod tests {
 
     fn order() -> StepBody {
         StepBody::Order {
-            prompt: "Fibrosis".into(),
-            steps: vec!["Chronic injury".into(), "HSC activation".into(), "Collagen deposition".into()],
+            prompt: "Atherosclerosis".into(),
+            steps: vec!["Endothelial injury".into(), "Foam cell formation".into(), "Fibrous plaque".into()],
             why: None,
         }
     }
@@ -413,7 +413,10 @@ mod tests {
     fn matching() -> StepBody {
         StepBody::Match {
             prompt: "Match".into(),
-            pairs: vec![["HAV".into(), "faecal-oral".into()], ["HBV".into(), "blood".into()]],
+            pairs: vec![
+                ["Coxsackie B".into(), "Myocarditis".into()],
+                ["S. aureus".into(), "Acute endocarditis".into()],
+            ],
             why: None,
         }
     }
@@ -443,7 +446,7 @@ mod tests {
                 },
                 CaseStep {
                     reveal: None,
-                    question: "SAAG?".into(),
+                    question: "Troponin?".into(),
                     options: vec![],
                     answer: None,
                     why: "".into(),
@@ -603,7 +606,7 @@ mod tests {
         a.answer(1, false);
         let mut edited = l.clone();
         if let StepBody::Check { options, .. } = &mut edited.steps[1].body {
-            options[0] = "AST".into();
+            options[0] = "Myoglobin".into();
         }
         let b = reopen(&edited, &a);
         assert_eq!(b.drafts[1].draft, Draft::None);

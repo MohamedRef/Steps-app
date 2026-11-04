@@ -287,12 +287,66 @@ verdicts:
         let lec: steps_core::content::Lecture =
             serde_yaml_ng::from_str(include_str!("../../../fixtures/content/sample.yaml")).unwrap();
         let card = &lec.items[0];
-        let edit = BTreeMap::from([("back".to_string(), FieldValue::Text("Fibrosis plus nodules.".into()))]);
+        let edit = BTreeMap::from([(
+            "back".to_string(),
+            FieldValue::Text("The mitral valve, then the aortic.".into()),
+        )]);
         let fixed = apply_edit(card, &edit).unwrap();
         assert!(
-            matches!(&fixed.body, steps_core::content::Body::Card { back, .. } if back == "Fibrosis plus nodules.")
+            matches!(&fixed.body, steps_core::content::Body::Card { back, .. } if back == "The mitral valve, then the aortic.")
         );
         let bad = BTreeMap::from([("answer".to_string(), FieldValue::Text("x".into()))]);
         assert!(apply_edit(&lec.items[2], &bad).unwrap_err().contains("doesn't fit a mcq"));
+    }
+
+    #[test]
+    fn a_clean_export_has_nothing_to_fix_and_bad_files_are_named() {
+        let dir = tree();
+        let root = dir.path();
+        let file = root.join("clean.yaml");
+        std::fs::write(&file, "schema: steps.verdicts/v1\nexported: ''\nverdicts: []\n").unwrap();
+        let out = run(root, &[file.display().to_string()]).unwrap();
+        assert_eq!(
+            out,
+            "No ✎ or ✗ items: nothing to fix.\n0 ✓ approved (add them to content/approved.txt with --approve)"
+        );
+        std::fs::write(&file, "schema: steps.verdicts/v0\nexported: x\nverdicts: []\n").unwrap();
+        let err = run(root, &[file.display().to_string()]).unwrap_err();
+        assert!(err[0].ends_with("expected \"steps.verdicts/v1\""), "{err:?}");
+        assert_eq!(
+            run(root, &["--approve".to_string()]).unwrap_err(),
+            ["usage: steps-tools verdicts FILE [--approve]"]
+        );
+    }
+
+    #[test]
+    fn an_edit_may_not_touch_ids_or_status() {
+        let lec: steps_core::content::Lecture =
+            serde_yaml_ng::from_str(include_str!("../../../fixtures/content/sample.yaml")).unwrap();
+        let card = &lec.items[0];
+        for key in ["id", "kind", "status"] {
+            let edit = BTreeMap::from([(key.to_string(), FieldValue::Text("x".into()))]);
+            let e = apply_edit(card, &edit).unwrap_err();
+            assert_eq!(e, format!("cvs.L04.001: the edit changes `{key}`, which only the YAML may change"));
+        }
+        // A field of the right name but the wrong shape doesn't fit.
+        let edit = BTreeMap::from([("front".to_string(), FieldValue::List(vec!["a".into()]))]);
+        assert!(apply_edit(card, &edit).unwrap_err().contains("the edit doesn't fit a card"));
+        // The topic may move.
+        let edit = BTreeMap::from([("topic".to_string(), FieldValue::Text("rheumatic".into()))]);
+        assert_eq!(apply_edit(card, &edit).unwrap().topic.as_deref(), Some("rheumatic"));
+    }
+
+    #[test]
+    fn approving_twice_adds_nothing() {
+        let dir = tree();
+        let root = dir.path();
+        let file = root.join("export.yaml").display().to_string();
+        let first = run(root, &[file.clone(), "--approve".into()]).unwrap();
+        assert!(first.ends_with("content/approved.txt: 1 new approval(s) of 1 ✓"), "{first}");
+        let again = run(root, &[file, "--approve".into()]).unwrap();
+        assert!(again.ends_with("content/approved.txt: 0 new approval(s) of 1 ✓"), "{again}");
+        let text = std::fs::read_to_string(root.join("content/approved.txt")).unwrap();
+        assert_eq!(text, "# header\ncvs.L04.009\ncvs.L04.001\n");
     }
 }

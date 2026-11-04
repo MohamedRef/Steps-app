@@ -188,14 +188,14 @@ mod tests {
     #[test]
     fn shared_text_becomes_a_draft() {
         let (d, trimmed) = draft_from_shared(
-            "\n  SAAG ≥ 1.1 g/dL\nmeans portal hypertension.\n",
+            "\n  BNP ≥ 100 pg/mL\nsuggests heart failure.\n",
             Some("Chrome"),
             "own.x".into(),
             5,
         );
         assert!(!trimmed);
-        assert_eq!(d.front, "SAAG ≥ 1.1 g/dL");
-        assert_eq!(d.back, "SAAG ≥ 1.1 g/dL\nmeans portal hypertension.");
+        assert_eq!(d.front, "BNP ≥ 100 pg/mL");
+        assert_eq!(d.back, "BNP ≥ 100 pg/mL\nsuggests heart failure.");
         assert_eq!(d.source.as_deref(), Some("Chrome"));
         // One line only: no front to suggest.
         assert_eq!(draft_from_shared("one line", None, "own.y".into(), 5).0.front, "");

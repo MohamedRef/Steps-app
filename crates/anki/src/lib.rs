@@ -120,7 +120,7 @@ impl Deck {
 /// number in it and its real title (Mohamed, 2026-10-29), so decks nest the
 /// way the app lists them. Anki keeps cards it already has in their old
 /// deck on import (`Steps::L03 …` from before), so the import note says how
-/// to move them. Without a program: `Steps::L03 Portal hypertension`.
+/// to move them. Without a program: `Steps::L04 Pathology`.
 pub fn deck_name(lec: &Lecture, program: Option<&steps_core::program::Program>) -> String {
     if lec.lecture == steps_core::own::LECTURE {
         return format!("Steps::{}", steps_core::own::TITLE);
