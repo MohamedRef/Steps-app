@@ -1,0 +1,732 @@
+schema: steps.content/v1
+lecture: path.L01
+title: Cellular injury
+book: { chapter: 4, pages: [202, 208] }
+topics:
+  - { id: cellular-adaptations, title: Cellular adaptations }
+  - { id: cell-injury, title: Cell injury }
+  - { id: ferroptosis, title: Ferroptosis }
+  - { id: apoptosis, title: Apoptosis }
+  - { id: necrosis, title: Necrosis }
+  - { id: ischemia, title: Ischemia }
+  - { id: types-of-infarcts, title: Types of infarcts }
+  - { id: free-radical-injury, title: Free radical injury }
+  - { id: ionizing-radiation-toxicity, title: Ionizing radiation toxicity }
+  - { id: types-of-calcification, title: Types of calcification }
+  - { id: psammoma-bodies, title: Psammoma bodies }
+  - { id: amyloidosis, title: Amyloidosis }
+items:
+  # ---------- p202: cellular adaptations ----------
+  - id: path.L01.001
+    kind: card
+    topic: cellular-adaptations
+    front: What are cellular adaptations, and what happens if the stress is excessive or persistent?
+    back: Reversible changes that can be physiologic (e.g., uterine enlargement in pregnancy) or pathologic (e.g., myocardial hypertrophy from systemic hypertension). Excessive or persistent stress can progress to cell injury (e.g., significant LV hypertrophy → myocardial injury → HF).
+    src: { page: 202, quote: "Reversible changes that can be physiologic (eg, uterine enlargement during pregnancy) or pathologic (eg, myocardial hypertrophy 2° to systemic hypertension). If stress is excessive or persistent, adaptations can progress to cell injury" }
+    status: unverified
+  - id: path.L01.002
+    kind: table
+    topic: cellular-adaptations
+    title: Cellular adaptations
+    columns: [Adaptation, What changes, Example]
+    rows:
+      - ["Hypertrophy", "↑ Structural proteins and organelles → ↑ cell size", "Cardiac hypertrophy"]
+      - ["Hyperplasia", "Controlled proliferation of stem and differentiated cells → ↑ cell number", "Benign prostatic hyperplasia; pathologic: endometrial hyperplasia"]
+      - ["Atrophy", "↓ Tissue mass from ↓ cell size and/or number", "Disuse, denervation, loss of blood supply, loss of hormones, poor nutrition"]
+      - ["Metaplasia", "Stem cell reprogramming → one cell type replaced by another that suits the new stressor", "Barrett esophagus; squamous metaplasia of airway with smoking"]
+      - ["Dysplasia", "Disordered, precancerous epithelial growth; not a true adaptation", "Usually preceded by persistent metaplasia or pathologic hyperplasia"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 202, quote: "Hypertrophy ↑ structural proteins and organelles → ↑ in size of cells. Example: cardiac hypertrophy. Hyperplasia Controlled proliferation of stem cells and differentiated cells → ↑ in number of cells (eg, benign prostatic hyperplasia)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.003
+    kind: card
+    topic: cellular-adaptations
+    front: By what mechanisms do cells shrink in atrophy?
+    back: ↑ Cytoskeleton degradation via the ubiquitin-proteasome pathway and autophagy (programmed digestion of damaged or misfolded proteins), and ↓ protein synthesis. Cell number falls by apoptosis.
+    src: { page: 202, quote: "↓ in tissue mass due to ↓ in size (↑ cytoskeleton degradation via ubiquitin-proteasome pathway and autophagy [programmed digestion of damaged/misfolded intracellular proteins]; ↓ protein synthesis) and/or number of cells (apoptosis)." }
+    status: unverified
+  - id: path.L01.004
+    kind: table
+    topic: cellular-adaptations
+    title: Two classic epithelial metaplasias
+    columns: [Exposure, From, To, Purpose]
+    rows:
+      - ["Esophagus to gastric acid (Barrett esophagus)", "Nonkeratinized stratified squamous", "Intestinal-type columnar", "Acid resistance"]
+      - ["Airway to tobacco smoke", "Pseudostratified ciliated columnar", "Stratified squamous", "Protection"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 202, quote: "Esophageal exposure to gastric acid: nonkeratinized stratified squamous → intestinal-type columnar epithelium (acid resistance), called Barrett esophagus. The opposite occurs upon airway exposure to tobacco smoke: pseudostratified ciliated columnar → stratified squamous epithelium (protection)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.005
+    kind: card
+    topic: cellular-adaptations
+    front: Can metaplasia occur in connective tissue? Give the book's example.
+    back: Yes, e.g., myositis ossificans, the formation of bone within muscle after trauma.
+    src: { page: 202, quote: "Metaplasia of connective tissue can also occur (eg, myositis ossificans, the formation of bone within muscle after trauma)." }
+    status: unverified
+  - id: path.L01.006
+    kind: enumerate
+    topic: cellular-adaptations
+    prompt: Enumerate the histologic features of dysplasia (3).
+    points:
+      - Loss of uniformity of cell size and shape (pleomorphism)
+      - Loss of tissue orientation
+      - "Nuclear changes (↑ nuclear:cytoplasmic ratio, clumped chromatin)"
+    pass: 3
+    src: { page: 202, quote: "Characterized by loss of uniformity of cell size and shape (pleomorphism); loss of tissue orientation; nuclear changes (eg, ↑ nuclear:cytoplasmic ratio and clumped chromatin)." }
+    status: unverified
+  - id: path.L01.007
+    kind: card
+    topic: cellular-adaptations
+    front: Which dysplasias may regress, and which progress?
+    back: Mild and moderate dysplasias (not involving the full epithelial thickness) may regress when the cause is removed. Severe dysplasia often becomes irreversible and progresses to carcinoma in situ.
+    src: { page: 202, quote: "Mild and moderate dysplasias (ie, do not involve entire thickness of epithelium) may regress with alleviation of inciting cause. Severe dysplasia often becomes irreversible and progresses to carcinoma in situ." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.008
+    kind: mcq
+    topic: cellular-adaptations
+    stem: >-
+      A 56-year-old man has had heartburn most days for 15 years and takes antacids only occasionally.
+      Upper endoscopy shows salmon-colored mucosa extending 4 cm above the gastroesophageal junction.
+      Biopsy shows goblet cells within columnar epithelium, with no nuclear atypia. Which change has
+      occurred, and to what may it progress if the acid exposure persists?
+    options:
+      - Hyperplasia progressing to squamous cell carcinoma
+      - Metaplasia progressing through dysplasia to adenocarcinoma
+      - Dysplasia that will always regress with treatment
+      - Atrophy progressing to leiomyoma
+      - Hypertrophy progressing to achalasia
+    answer: 1
+    why:
+      - "This is a change in cell type, not number, and Barrett esophagus leads to adenocarcinoma, not squamous carcinoma."
+      - "Right. Barrett esophagus is metaplasia (squamous → intestinal-type columnar). With persistent insult it may progress to dysplasia and esophageal adenocarcinoma."
+      - "There is no atypia yet, so this isn't dysplasia; and severe dysplasia often doesn't regress."
+      - "Atrophy is a loss of mass, not a change in cell type."
+      - "Hypertrophy is an increase in cell size."
+    src: { page: 202, quote: "May progress to dysplasia → malignant transformation with persistent insult (eg, Barrett esophagus → esophageal adenocarcinoma)." }
+    status: unverified
+  # ---------- p203: cell injury ----------
+  - id: path.L01.009
+    kind: enumerate
+    topic: cell-injury
+    prompt: Enumerate the features of reversible cell injury (6).
+    points:
+      - "↓ ATP → ↓ Ca2+ and Na+/K+-ATPase pump activity → cellular swelling (earliest morphologic change)"
+      - Ribosomal/polysomal detachment → ↓ protein synthesis
+      - Plasma membrane changes (blebbing)
+      - Nuclear changes (chromatin clumping)
+      - Rapid loss of function (myocardium noncontractile after 1-2 minutes of ischemia)
+      - Myelin figures (aggregated peroxidized lipids)
+    pass: 5
+    src: { page: 203, quote: "Ribosomal/polysomal detachment → ↓ protein synthesis Plasma membrane changes (eg, blebbing) Nuclear changes (eg, chromatin clumping) Rapid loss of function (eg, myocardial cells are noncontractile after 1-2 minutes of ischemia) Myelin figures (aggregation of peroxidized lipids)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.010
+    kind: card
+    topic: cell-injury
+    front: What is the earliest morphologic manifestation of cell injury, and why does it happen?
+    back: Cellular swelling (cytosol, mitochondria, ER/Golgi). ↓ ATP → ↓ activity of the Ca2+ and Na+/K+-ATPase pumps, so water follows the retained ions.
+    src: { page: 203, quote: "cellular swelling (cytosol, mitochondria, endoplasmic reticulum/Golgi), which is the earliest morphologic manifestation" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.011
+    kind: enumerate
+    topic: cell-injury
+    prompt: Enumerate the features of irreversible cell injury (5).
+    points:
+      - "Plasma membrane breakdown → cytosolic enzymes (e.g., troponin) leak out; Ca2+ influx → degradative enzymes activated"
+      - Mitochondrial damage → loss of electron transport chain → ↓ ATP
+      - Rupture of lysosomes → autolysis
+      - Nuclear degradation (pyknosis → karyorrhexis → karyolysis)
+      - Amorphous densities/inclusions in mitochondria
+    pass: 5
+    src: { page: 203, quote: "Breakdown of plasma membrane → cytosolic enzymes (eg, troponin) leak outside of cell, influx of Ca2+ → activation of degradative enzymes" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.012
+    kind: order
+    topic: cell-injury
+    prompt: Put the stages of nuclear degradation in irreversible injury in order.
+    steps:
+      - Pyknosis (nuclear condensation)
+      - Karyorrhexis (fragmentation by endonuclease-mediated cleavage)
+      - Karyolysis (nuclear dissolution)
+    src: { page: 203, quote: "Nuclear degradation: pyknosis (nuclear condensation) → karyorrhexis (nuclear fragmentation caused by endonuclease-mediated cleavage) → karyolysis (nuclear dissolution)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.013
+    kind: mcq
+    topic: cell-injury
+    stem: >-
+      A 61-year-old man is brought to the emergency department 6 hours after the onset of crushing chest
+      pain. ECG shows ST elevation in leads V1-V4, and serum troponin I is markedly elevated. Which
+      cellular event best explains the appearance of troponin in his serum?
+    options:
+      - Cellular swelling from failure of the Na+/K+-ATPase
+      - Detachment of ribosomes from the endoplasmic reticulum
+      - Breakdown of the plasma membrane
+      - Formation of myelin figures
+      - Chromatin clumping
+    answer: 2
+    why:
+      - "Swelling is the earliest, reversible change; the membrane is still intact."
+      - "Ribosomal detachment lowers protein synthesis but is reversible."
+      - "Right. Plasma membrane breakdown is a feature of irreversible injury, letting cytosolic enzymes such as troponin leak out."
+      - "Myelin figures are aggregated peroxidized lipids seen in reversible injury."
+      - "Chromatin clumping is a reversible nuclear change."
+    src: { page: 203, quote: "Breakdown of plasma membrane → cytosolic enzymes (eg, troponin) leak outside of cell" }
+    status: unverified
+  # ---------- p203: ferroptosis ----------
+  - id: path.L01.014
+    kind: card
+    topic: ferroptosis
+    front: What is ferroptosis, and what does it do to mitochondria?
+    back: Iron-dependent cell death from lipid peroxidation → accumulation of lethal lipid species. Mitochondria shrink with loss of cristae and rupture of the outer membrane.
+    src: { page: 203, quote: "Lipid peroxidation → accumulation of lethal lipid species → iron-dependent cell death. Results in shrinkage of mitochondria with loss of cristae and mitochondrial outer membrane rupture." }
+    status: unverified
+  - id: path.L01.015
+    kind: card
+    topic: ferroptosis
+    front: In which diseases is ferroptosis involved, and what may prevent it?
+    back: "MASLD/MASH, ischemia-reperfusion injury, neurodegeneration (and possible use in cancer therapy). May be prevented by iron chelators (deferiprone, deferoxamine) and small lipophilic antioxidants (ferrostatin, liproxstatin)."
+    src: { page: 203, quote: "Involved in the pathogenesis of several disease states (eg, MASLD/MASH, ischemia–reperfusion injury, neurodegeneration), with potential therapeutic applications (eg, cancer therapy). May be preventable through the use of iron chelators (eg, deferiprone, deferoxamine)" }
+    status: unverified
+  - id: path.L01.016
+    kind: mcq
+    topic: ferroptosis
+    stem: >-
+      In an experimental model of hepatic ischemia-reperfusion injury, hepatocytes die with marked lipid
+      peroxidation. Electron microscopy shows shrunken mitochondria with loss of cristae and ruptured
+      outer membranes. Cell death is prevented by pretreatment with deferoxamine. Which form of cell
+      death is this?
+    options:
+      - Apoptosis through the intrinsic pathway
+      - Ferroptosis
+      - Coagulative necrosis
+      - Apoptosis through the Fas pathway
+      - Liquefactive necrosis
+    answer: 1
+    why:
+      - "Intrinsic apoptosis works through cytochrome C release and caspases, not iron-dependent lipid peroxidation."
+      - "Right. Ferroptosis is iron-dependent death from lipid peroxidation, with shrunken mitochondria lacking cristae; iron chelators such as deferoxamine may prevent it."
+      - "Coagulative necrosis preserves cell outlines and isn't prevented by iron chelation."
+      - "Fas-mediated (extrinsic) apoptosis needs death receptor ligation."
+      - "Liquefactive necrosis is enzymatic digestion by neutrophils (abscess) or brain infarct."
+    src: { page: 203, quote: "May be preventable through the use of iron chelators (eg, deferiprone, deferoxamine) and small lipophilic antioxidants (eg, ferrostatin, liproxstatin)." }
+    status: unverified
+  # ---------- p204: apoptosis ----------
+  - id: path.L01.017
+    kind: card
+    topic: apoptosis
+    front: What is apoptosis, and how does it look under the microscope?
+    back: ATP-dependent programmed cell death. Intrinsic, extrinsic and perforin/granzyme B pathways activate caspases → cell shrinkage, chromatin condensation, membrane blebbing, apoptotic bodies that are phagocytosed. Deeply eosinophilic cytoplasm, basophilic nucleus, pyknosis, karyorrhexis; the membrane stays intact without significant inflammation.
+    src: { page: 204, quote: "Characterized by deeply eosinophilic cytoplasm and basophilic nucleus, pyknosis, and karyorrhexis. Cell membrane typically remains intact without significant inflammation (unlike necrosis)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.018
+    kind: cloze
+    topic: apoptosis
+    text: "{{c1::DNA laddering}} (fragments in multiples of {{c2::180}} bp) is a sensitive indicator of apoptosis."
+    src: { page: 204, quote: "DNA laddering (fragments in multiples of 180 bp) is a sensitive indicator of apoptosis." }
+    status: unverified
+  - id: path.L01.019
+    kind: card
+    topic: apoptosis
+    front: When does the intrinsic (mitochondrial) pathway of apoptosis occur?
+    back: In tissue remodeling in embryogenesis; when a regulating factor is withdrawn from a proliferating population (e.g., ↓ IL-2 after an immune reaction → apoptosis of effector cells); and after injurious stimuli (radiation, toxins, hypoxia).
+    src: { page: 204, quote: "Involved in tissue remodeling in embryogenesis. Occurs when a regulating factor is withdrawn from a proliferating cell population (eg, ↓ IL-2 after a completed immunologic reaction → apoptosis of proliferating effector cells)." }
+    status: unverified
+  - id: path.L01.020
+    kind: table
+    topic: apoptosis
+    title: Bcl-2 family proteins
+    columns: [Group, Proteins, Action]
+    rows:
+      - ["Proapoptotic (\"Bad for survival\")", "Bax, Bak", "Form pores in the outer mitochondrial membrane → cytochrome C released → caspases activated"]
+      - ["Antiapoptotic (\"Be clever, live\")", "Bcl-2, Bcl-xL", "Keep the mitochondrial membrane impermeable → no cytochrome C release"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 204, quote: "Bax and Bak are proapoptotic (Bad for survival), while Bcl-2 and Bcl-xL are antiapoptotic (Be clever, live)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.021
+    kind: card
+    topic: apoptosis
+    front: How does Bcl-2 overexpression cause cancer, and in which lymphoma is it classic?
+    back: Bcl-2 overexpression → ↓ caspase activation → tumorigenesis; classic in follicular lymphoma, t(14;18).
+    src: { page: 204, quote: "Bcl-2 overexpression (eg, follicular lymphoma t[14;18]) → ↓ caspase activation → tumorigenesis." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.022
+    kind: card
+    topic: apoptosis
+    front: What ligands trigger the extrinsic (death receptor) pathway, and where is Fas-FasL essential?
+    back: FasL binding Fas (CD95), or TNF-α binding its receptor. Fas-FasL interaction is necessary in thymic medullary negative selection.
+    src: { page: 204, quote: "Ligand receptor interactions: FasL binding to Fas (CD95) or TNF-α binding to its receptor. Fas-FasL interaction is necessary in thymic medullary negative selection." }
+    status: unverified
+  - id: path.L01.023
+    kind: card
+    topic: apoptosis
+    front: What causes autoimmune lymphoproliferative syndrome, and how does it present?
+    back: Defective Fas-FasL interaction → failure of clonal deletion → ↑ self-reacting lymphocytes. Lymphadenopathy, hepatosplenomegaly, autoimmune cytopenias.
+    src: { page: 204, quote: "Autoimmune lymphoproliferative syndrome—caused by defective Fas-FasL interaction → failure of clonal deletion → ↑ numbers of self-reacting lymphocytes. Presents with lymphadenopathy, hepatosplenomegaly, autoimmune cytopenias." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.024
+    kind: card
+    topic: apoptosis
+    front: How does the perforin/granzyme B pathway work?
+    back: Cytotoxic T cells and NK cells release granules; perforin forms a pore through which granzyme B enters the target cell (and activates caspases).
+    src: { page: 204, quote: "Release of granules containing perforin and granzyme B by immune cells (cytotoxic T-cell and natural killer cell) → perforin forms a pore for granzyme B to enter the target cell." }
+    status: unverified
+  - id: path.L01.025
+    kind: mcq
+    topic: apoptosis
+    stem: >-
+      A 58-year-old woman has painless, waxing and waning lymphadenopathy in the neck and groin for
+      a year. Lymph node biopsy shows effacement by closely packed follicles of small cleaved cells.
+      Cytogenetics shows t(14;18). The overexpressed protein in her tumor cells acts by which
+      mechanism?
+    options:
+      - Forming pores in the outer mitochondrial membrane
+      - Keeping the mitochondrial membrane impermeable to cytochrome C
+      - Binding Fas on target cells
+      - Forming a pore for granzyme B
+      - Cleaving DNA into 180-bp fragments
+    answer: 1
+    why:
+      - "Pore formation is what proapoptotic Bax and Bak do."
+      - "Right. t(14;18) in follicular lymphoma overexpresses Bcl-2, which keeps the mitochondrial membrane impermeable, preventing cytochrome C release and caspase activation."
+      - "FasL binding Fas triggers the extrinsic pathway; Bcl-2 doesn't do this."
+      - "Perforin forms the pore for granzyme B."
+      - "DNA laddering is a result of apoptosis, which Bcl-2 prevents."
+    src: { page: 204, quote: "Bcl-2 keeps the mitochondrial membrane impermeable, thereby preventing cytochrome C release. Bcl-2 overexpression (eg, follicular lymphoma t[14;18]) → ↓ caspase activation → tumorigenesis." }
+    status: unverified
+  # ---------- p205: necrosis ----------
+  - id: path.L01.026
+    kind: card
+    topic: necrosis
+    front: How does necrosis differ from apoptosis in mechanism and consequence?
+    back: Necrosis follows exogenous injury → plasma membrane damage → intracellular contents leak → enzymatic degradation and protein denaturation → local inflammatory reaction (apoptosis has an intact membrane and no inflammation).
+    src: { page: 205, quote: "Exogenous injury → plasma membrane damage → intracellular components leak → cell undergoes enzymatic degradation and protein denaturation → local inflammatory reaction (unlike apoptosis)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.027
+    kind: table
+    topic: necrosis
+    title: Types of necrosis
+    columns: [Type, Seen in, Mechanism, Histology]
+    rows:
+      - ["Coagulative", "Ischemia/infarcts in most tissues (except brain)", "Injury denatures enzymes → proteolysis blocked", "Cell outlines preserved, nuclei disappear; ↑ eosinophilia"]
+      - ["Liquefactive", "Bacterial abscesses, CNS infarcts", "Neutrophils release lysosomal enzymes that digest tissue", "Early: debris and macrophages; late: cystic spaces, cavitation (CNS)"]
+      - ["Caseous", "TB, systemic fungi (Histoplasma), Nocardia", "Macrophages wall off the organism → granular debris", "Fragmented cells and debris in a granuloma; cheeselike gross"]
+      - ["Fat", "Enzymatic: acute pancreatitis; nonenzymatic: trauma (breast)", "Lipase frees fatty acids that bind calcium → saponification", "Dead fat cell outlines without nuclei; saponified fat dark blue on H&E"]
+      - ["Fibrinoid", "Immune (polyarteritis nodosa) and nonimmune (hypertensive emergency, preeclampsia) vascular reactions", "Immune complexes (type III) and/or plasma protein (fibrin) leakage", "Eosinophilic proteinaceous layer in vessel walls"]
+      - ["Gangrenous", "Distal extremity and GI tract after chronic ischemia", "Dry: ischemia; wet: superinfection", "Dry: coagulative; wet: liquefactive on coagulative"]
+    blanks: [[0, 1], [0, 3], [1, 1], [1, 2], [2, 1], [3, 2], [4, 1], [5, 3]]
+    src: { page: 205, quote: "Coagulative Ischemia/infarcts in most tissues (except brain) Ischemia or infarction; injury denatures enzymes → proteolysis blocked Preserved cellular architecture (cell outlines seen), but nuclei disappear" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.028
+    kind: cloze
+    topic: necrosis
+    text: "Infarcts in most tissues cause {{c1::coagulative}} necrosis, but brain infarcts cause {{c2::liquefactive}} necrosis."
+    src: { page: 205, quote: "Liquefactive Bacterial abscesses, CNS infarcts Neutrophils release lysosomal enzymes that digest the tissue" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.029
+    kind: mcq
+    topic: necrosis
+    stem: >-
+      A 48-year-old man is admitted with severe epigastric pain radiating to the back after a weekend of
+      heavy drinking. Serum lipase is 12 times the upper limit of normal. He dies of multiorgan failure.
+      At autopsy, the peripancreatic fat shows chalky-white areas. Microscopy of these areas would most
+      likely show which of the following?
+    options:
+      - Preserved cell outlines with absent nuclei and intense eosinophilia
+      - Outlines of dead fat cells without nuclei and dark-blue calcium deposits
+      - Granulomas with central cheeselike debris
+      - An eosinophilic layer of fibrin in arteriolar walls
+      - Cystic cavities with macrophages
+    answer: 1
+    why:
+      - "That is coagulative necrosis of an infarct."
+      - "Right. Enzymatic fat necrosis: lipase frees fatty acids that bind calcium (saponification, chalky white); dead fat cell outlines without nuclei and dark-blue saponified fat on H&E."
+      - "That is caseous necrosis (TB, fungi)."
+      - "That is fibrinoid necrosis."
+      - "That is late liquefactive necrosis, as in a brain infarct."
+    src: { page: 205, quote: "Damaged pancreatic cells release lipase, which breaks down triglycerides; liberated fatty acids bind calcium → saponification (chalky- white appearance) Outlines of dead fat cells without peripheral nuclei; saponification of fat (combined with Ca2+ ) appears dark blue on H&E stain" }
+    status: unverified
+  # ---------- p206: ischemia ----------
+  - id: path.L01.030
+    kind: card
+    topic: ischemia
+    front: What is ischemia, and what are its mechanisms?
+    back: Inadequate blood supply to meet demand. Mechanisms include ↓ arterial perfusion (atherosclerosis), ↓ venous drainage (testicular torsion, Budd-Chiari syndrome) and shock.
+    src: { page: 206, quote: "Inadequate blood supply to meet demand. Mechanisms include ↓ arterial perfusion (eg, atherosclerosis), ↓ venous drainage (eg, testicular torsion, Budd-Chiari syndrome), shock." }
+    status: unverified
+  - id: path.L01.031
+    kind: table
+    topic: ischemia
+    title: Regions most vulnerable to hypoxia/ischemia
+    columns: [Organ, Susceptible region]
+    rows:
+      - ["Brain", "ACA/MCA/PCA boundary areas (watershed)"]
+      - ["Heart", "Subendocardium of LV"]
+      - ["Kidney", "Straight segment of proximal tubule and thick ascending limb (medulla)"]
+      - ["Liver", "Area around central vein (zone III)"]
+      - ["Colon", "Splenic flexure (Griffith point) and rectosigmoid junction (Sudeck point), both watershed"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 206, quote: "Brain ACA/MCA/PCA boundary areasa,b Heart Subendocardium of LV (yellow lines in A outline a subendocardial infarction) Kidney Straight segment of proximal tubule (medulla) Thick ascending limb (medulla) Liver Area around central vein (zone III)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.032
+    kind: card
+    topic: ischemia
+    front: What are watershed areas, and why are they vulnerable?
+    back: Border zones supplied by the most distal branches of 2 arteries with limited collateral vascularity, so they are susceptible to ischemia from hypoperfusion.
+    src: { page: 206, quote: "Watershed areas (border zones) receive blood supply from most distal branches of 2 arteries with limited collateral vascularity. These areas are susceptible to ischemia from hypoperfusion." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.033
+    kind: cloze
+    topic: ischemia
+    text: "The neurons most vulnerable to hypoxic-ischemic injury are {{c1::Purkinje cells}} of the cerebellum and {{c2::pyramidal cells}} of the hippocampus and neocortex (layers 3, 5, 6)."
+    src: { page: 206, quote: "Neurons most vulnerable to hypoxic-ischemic insults include Purkinje cells of the cerebellum and pyramidal cells of the hippocampus and neocortex (layers 3, 5, 6)." }
+    status: unverified
+  - id: path.L01.034
+    kind: mcq
+    topic: ischemia
+    stem: >-
+      A 70-year-old man has a cardiac arrest and is resuscitated after 12 minutes. He survives but has
+      lasting problems forming new memories. Which cells were most likely injured to cause this deficit?
+    options:
+      - Purkinje cells of the cerebellum
+      - Pyramidal cells of the hippocampus
+      - Oligodendrocytes of the corpus callosum
+      - Ependymal cells of the lateral ventricles
+      - Astrocytes of the basal ganglia
+    answer: 1
+    why:
+      - "Purkinje cells are also vulnerable, but their loss gives ataxia, not amnesia."
+      - "Right. Pyramidal cells of the hippocampus are among the neurons most vulnerable to hypoxic-ischemic injury, and the hippocampus forms new memories."
+      - "Oligodendrocytes aren't listed among the most vulnerable cells and don't explain amnesia."
+      - "Ependymal cells line the ventricles and aren't the vulnerable population."
+      - "Astrocytes are relatively resistant."
+    src: { page: 206, quote: "Neurons most vulnerable to hypoxic-ischemic insults include Purkinje cells of the cerebellum and pyramidal cells of the hippocampus and neocortex (layers 3, 5, 6)." }
+    status: unverified
+  # ---------- p206: types of infarcts ----------
+  - id: path.L01.035
+    kind: table
+    topic: types-of-infarcts
+    title: Red vs pale infarcts
+    columns: [Type, Occurs in, Examples]
+    rows:
+      - ["Red", "Venous occlusion, tissues with multiple blood supplies, reperfusion (reperfusion injury from free radicals)", "Liver, lung, intestine, testes; after angioplasty"]
+      - ["Pale", "Solid organs with a single (end-arterial) blood supply", "Heart, kidney"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 206, quote: "Occurs in venous occlusion and tissues with multiple blood supplies (eg, liver, lung A , intestine, testes), and with reperfusion (eg, after angioplasty). Reperfusion injury is due to damage by free radicals." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.036
+    kind: mcq
+    topic: types-of-infarcts
+    stem: >-
+      A 34-year-old woman develops sudden pleuritic chest pain and hemoptysis 10 days after a cesarean
+      delivery. CT angiography shows a filling defect in a segmental pulmonary artery with a wedge-shaped
+      peripheral opacity. If the affected lung tissue were examined, which appearance would be expected,
+      and why?
+    options:
+      - Pale infarct, because the lung has an end-arterial supply
+      - Red infarct, because the lung has a dual blood supply
+      - Liquefactive necrosis, because the lung is like the brain
+      - Caseous necrosis, because of granulomas
+      - No infarct, because the lung is immune privileged
+    answer: 1
+    why:
+      - "End-arterial organs (heart, kidney) get pale infarcts; the lung does not."
+      - "Right. Red infarcts occur in tissues with multiple blood supplies such as the lung, where blood still seeps into the dead tissue."
+      - "Liquefactive necrosis of infarcts is a feature of the CNS."
+      - "Caseous necrosis is for TB and systemic fungi."
+      - "The lung is not immune privileged, and infarcts aren't immune events."
+    src: { page: 206, quote: "Red infarct Occurs in venous occlusion and tissues with multiple blood supplies (eg, liver, lung A , intestine, testes)" }
+    status: unverified
+  # ---------- p206: free radical injury ----------
+  - id: path.L01.037
+    kind: card
+    topic: free-radical-injury
+    front: How do free radicals damage cells?
+    back: Membrane lipid peroxidation, protein modification and DNA breakage.
+    src: { page: 206, quote: "Free radicals damage cells via membrane lipid peroxidation, protein modification, DNA breakage." }
+    status: unverified
+  - id: path.L01.038
+    kind: enumerate
+    topic: free-radical-injury
+    prompt: Enumerate the sources that initiate free radical injury (6).
+    points:
+      - Radiation exposure (e.g., cancer therapy)
+      - Metabolism of drugs (phase I)
+      - Redox reactions
+      - Nitric oxide (e.g., inflammation)
+      - Transition metals (iron, copper via the Fenton reaction)
+      - WBC (neutrophil, macrophage) oxidative burst
+    pass: 5
+    src: { page: 206, quote: "Initiated via radiation exposure (eg, cancer therapy), metabolism of drugs (phase I), redox reactions, nitric oxide (eg, inflammation), transition metals (eg, iron, copper; form free radicals via Fenton reaction), WBC (eg, neutrophils, macrophages) oxidative burst." }
+    status: unverified
+  - id: path.L01.039
+    kind: enumerate
+    topic: free-radical-injury
+    prompt: Enumerate the ways free radicals are eliminated (4).
+    points:
+      - Scavenging enzymes (catalase, superoxide dismutase, glutathione peroxidase)
+      - Spontaneous decay
+      - Antioxidants (vitamins A, C, E)
+      - Metal carrier proteins (transferrin, ceruloplasmin)
+    pass: 4
+    src: { page: 206, quote: "Free radicals can be eliminated by scavenging enzymes (eg, catalase, superoxide dismutase, glutathione peroxidase), spontaneous decay, antioxidants (eg, vitamins A, C, E), and certain metal carrier proteins (eg, transferrin, ceruloplasmin)." }
+    status: unverified
+  - id: path.L01.040
+    kind: table
+    topic: free-radical-injury
+    title: Examples of free radical injury
+    columns: [Category, Examples]
+    rows:
+      - ["Oxygen toxicity", "Retinopathy of prematurity, bronchopulmonary dysplasia, reperfusion injury after thrombolysis"]
+      - ["Drug/chemical toxicity", "Acetaminophen overdose (hepatotoxicity); carbon tetrachloride → CCl3 radical by P-450 → fatty liver, centrilobular necrosis"]
+      - ["Metal storage diseases", "Hemochromatosis (iron), Wilson disease (copper)"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 206, quote: "Oxygen toxicity: retinopathy of prematurity (abnormal vascularization), bronchopulmonary dysplasia, reperfusion injury after thrombolytic therapy" }
+    status: unverified
+  - id: path.L01.041
+    kind: mcq
+    topic: free-radical-injury
+    stem: >-
+      A 42-year-old dry-cleaning worker is found unconscious after a solvent spill in a closed room.
+      Over the next 3 days his aminotransferases rise above 3000 U/L. A liver biopsy shows fatty change
+      and necrosis around the central veins. The toxic metabolite that injured his hepatocytes was formed
+      by which enzyme system?
+    options:
+      - Xanthine oxidase
+      - Cytochrome P-450
+      - NADPH oxidase of neutrophils
+      - Myeloperoxidase
+      - Glutathione peroxidase
+    answer: 1
+    why:
+      - "Xanthine oxidase isn't the book's path for carbon tetrachloride."
+      - "Right. Carbon tetrachloride is converted by cytochrome P-450 into the CCl3 free radical → fatty liver (↓ apolipoprotein synthesis) and centrilobular necrosis."
+      - "Neutrophil NADPH oxidase makes free radicals in the respiratory burst, not from solvents."
+      - "Myeloperoxidase makes HOCl in neutrophils."
+      - "Glutathione peroxidase removes free radicals."
+    src: { page: 206, quote: "carbon tetrachloride (converted by cytochrome P-450 into CCl3 free radical → fatty liver [cell injury → ↓ apolipoprotein synthesis → fatty change], centrilobular necrosis)" }
+    status: unverified
+  # ---------- p207: ionizing radiation ----------
+  - id: path.L01.042
+    kind: card
+    topic: ionizing-radiation-toxicity
+    front: How does ionizing radiation damage cells, and what are the complications of significant doses?
+    back: DNA damage (e.g., double strand breaks) and cell damage, directly and indirectly through free radicals. Complications include localized inflammation and fibrosis, and neoplasia (e.g., leukemia, thyroid cancer).
+    src: { page: 207, quote: "Ionizing radiation causes DNA (eg, double strand breaks) and cellular damage both directly and indirectly through the production of free radicals." }
+    status: unverified
+  - id: path.L01.043
+    kind: card
+    topic: ionizing-radiation-toxicity
+    front: What is acute radiation syndrome?
+    back: After sudden whole-body exposure to high doses → nausea, vomiting, diarrhea, hair loss, erythema, cytopenias, headache, altered mental status.
+    src: { page: 207, quote: "Acute radiation syndrome—develops after sudden whole-body exposure to high doses of ionizing radiation → nausea, vomiting, diarrhea, hair loss, erythema, cytopenias, headache, altered mental status." }
+    status: unverified
+  - id: path.L01.044
+    kind: card
+    topic: ionizing-radiation-toxicity
+    front: Which cells are most susceptible to radiation, and why does radiotherapy hit cancer cells harder?
+    back: Stem cells of rapidly regenerating tissues (skin, bone marrow, GI tract, gonads). Cancer cells have dysfunctional DNA repair and high replicative rates.
+    src: { page: 207, quote: "Stem cells of rapidly regenerating tissues (eg, skin, bone marrow, GI tract, gonads) are the most susceptible to radiation injury. Radiotherapy damages cancer cells more than healthy cells because cancer cells have dysfunctional DNA repair mechanisms in addition to high replicative rates." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.045
+    kind: card
+    topic: ionizing-radiation-toxicity
+    front: How do acute and chronic radiation dermatitis differ?
+    back: "Acute: erythema, peeling, pain, pruritus. Chronic: atrophy, pigmentation changes, telangiectasia, and fibrosis due to ↑ TGF-β."
+    src: { page: 207, quote: "Radiation dermatitis—acute presents with erythema, peeling, pain, and pruritis. Chronic presents with atrophy, pigmentation changes, telangiectasia, and fibrosis due to ↑ TGF-β." }
+    status: unverified
+  - id: path.L01.046
+    kind: mcq
+    topic: ionizing-radiation-toxicity
+    stem: >-
+      A 63-year-old woman had radiotherapy for breast cancer 4 years ago. The skin over the treated area
+      is now thin, with mottled pigmentation, fine dilated vessels and a firm, tight texture. Increased
+      activity of which mediator best explains the firmness of the skin?
+    options:
+      - TNF-α
+      - TGF-β
+      - IL-8
+      - Histamine
+      - IL-4
+    answer: 1
+    why:
+      - "TNF-α drives acute inflammation and cachexia."
+      - "Right. Chronic radiation dermatitis shows atrophy, pigment change, telangiectasia and fibrosis due to ↑ TGF-β."
+      - "IL-8 recruits neutrophils in acute inflammation."
+      - "Histamine causes acute vasodilation and itch."
+      - "IL-4 drives Th2 and IgE responses."
+    src: { page: 207, quote: "Chronic presents with atrophy, pigmentation changes, telangiectasia, and fibrosis due to ↑ TGF-β." }
+    status: unverified
+  # ---------- p207: types of calcification ----------
+  - id: path.L01.047
+    kind: table
+    topic: types-of-calcification
+    title: Dystrophic vs metastatic calcification
+    columns: [Feature, Dystrophic, Metastatic]
+    rows:
+      - ["Ca2+ deposition", "In abnormal (diseased) tissues", "In normal tissues"]
+      - ["Extent", "Localized (e.g., calcific aortic stenosis)", "Widespread (diffuse)"]
+      - ["Associated conditions", "TB and granulomatous infections, chronic abscesses, fat necrosis, infarcts, thrombi, congenital infections, psammoma bodies, CREST, atherosclerotic plaques", "Interstitial tissues of kidney, lung, gastric mucosa (lose acid fast; ↑ pH favors deposition)"]
+      - ["Etiology", "2° to injury or necrosis", "2° to hyperphosphatemia (CKD) or hypercalcemia (1° hyperparathyroidism, sarcoidosis, hypervitaminosis D)"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [3, 1], [3, 2]]
+    src: { page: 207, quote: "In abnormal (diseased) tissues In normal tissues eXTeNT Tends to be localized (eg, calcific aortic stenosis) Widespread (ie, diffuse, metastatic)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.048
+    kind: card
+    topic: types-of-calcification
+    front: Why does metastatic calcification favor the kidney, lung and gastric mucosa, and what renal complication can follow?
+    back: These tissues lose acid quickly, and ↑ pH favors Ca2+ deposition. Nephrocalcinosis of collecting ducts may lead to nephrogenic diabetes insipidus and renal failure.
+    src: { page: 207, quote: "Predominantly in interstitial tissues of kidney, lung, and gastric mucosa (these tissues lose acid quickly; ↑ pH favors Ca2+ deposition) Nephrocalcinosis of collecting ducts may lead to nephrogenic diabetes insipidus and renal failure" }
+    status: unverified
+  - id: path.L01.049
+    kind: mcq
+    topic: types-of-calcification
+    stem: >-
+      A 72-year-old man has exertional syncope and a harsh crescendo-decrescendo systolic murmur at the
+      right upper sternal border. Echocardiography shows a heavily calcified trileaflet aortic valve.
+      Serum calcium and phosphate are normal. Which statement best describes the calcification in his
+      valve?
+    options:
+      - Metastatic, caused by hypercalcemia
+      - Dystrophic, deposited in damaged tissue with normal serum calcium
+      - Metastatic, favored by the high pH of the valve
+      - Dystrophic, caused by hyperphosphatemia
+      - Psammomatous, from a papillary tumor
+    answer: 1
+    why:
+      - "Metastatic calcification needs high calcium or phosphate and affects normal tissue."
+      - "Right. Calcific aortic stenosis is the book's example of localized dystrophic calcification in abnormal tissue, 2° to injury, with normal serum calcium."
+      - "The high-pH tissues of metastatic calcification are kidney, lung and gastric mucosa."
+      - "Hyperphosphatemia causes metastatic, not dystrophic, calcification."
+      - "Psammoma bodies are laminated calcifications in certain tumors."
+    src: { page: 207, quote: "In abnormal (diseased) tissues In normal tissues eXTeNT Tends to be localized (eg, calcific aortic stenosis)" }
+    status: unverified
+  # ---------- p207: psammoma bodies ----------
+  - id: path.L01.050
+    kind: enumerate
+    topic: psammoma-bodies
+    prompt: Enumerate the tumors that contain psammoma bodies (the book's PSaMMoMa).
+    points:
+      - Papillary carcinoma of thyroid and kidney
+      - Somatostatinoma
+      - Meningioma
+      - Mesothelioma
+      - Ovarian serous papillary cystadenocarcinoma
+      - Milk (prolactinoma)
+    pass: 6
+    hook: "الكتاب: PSaMMoMa Bodies: Papillary، Somatostatinoma، Meningioma، Mesothelioma، Ovarian serous، Milk (prolactinoma)."
+    src: { page: 207, quote: "Papillary carcinoma of thyroid gland and kidney Somatostatinoma Meningioma Mesothelioma Ovarian serous papillary cystadenocarcinoma Milk (prolactinoma)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.051
+    kind: card
+    topic: psammoma-bodies
+    front: What are psammoma bodies, and how do they stain?
+    back: Concentrically laminated calcified spherules; Ca2+ deposits stain basophilic within the tissue.
+    src: { page: 207, quote: "Concentrically laminated calcified spherules A . PSoMMOMa Bodies." }
+    status: unverified
+  - id: path.L01.052
+    kind: mcq
+    topic: psammoma-bodies
+    stem: >-
+      A 35-year-old woman has a painless, firm thyroid nodule. Fine-needle aspiration shows cells with
+      optically clear, "ground-glass" nuclei and nuclear grooves, together with concentrically laminated
+      basophilic calcified spherules. Which other tumor typically shows these spherules?
+    options:
+      - Follicular carcinoma of the thyroid
+      - Meningioma
+      - Small cell carcinoma of the lung
+      - Hepatocellular carcinoma
+      - Glioblastoma
+    answer: 1
+    why:
+      - "Follicular thyroid carcinoma is not on the psammoma list; papillary is."
+      - "Right. These are psammoma bodies of papillary thyroid carcinoma; meningioma is also on the PSaMMoMa list."
+      - "Small cell carcinoma doesn't typically form psammoma bodies."
+      - "Hepatocellular carcinoma isn't on the list."
+      - "Glioblastoma isn't on the list."
+    src: { page: 207, quote: "Usually seen in certain types of tumors: Papillary carcinoma of thyroid gland and kidney Somatostatinoma Meningioma Mesothelioma" }
+    status: unverified
+  # ---------- p208: amyloidosis ----------
+  - id: path.L01.053
+    kind: card
+    topic: amyloidosis
+    front: What is amyloid, and how is it visualized?
+    back: Extracellular protein in an abnormal fibrillar (β-pleated sheet) form → cell injury and apoptosis. Congo red stain (red/orange in nonpolarized light, apple-green birefringence in polarized light); amorphous pink on H&E.
+    src: { page: 208, quote: "Amyloid deposits are visualized by Congo red stain (red/orange on nonpolarized light A , apple-green birefringence on polarized light B ), and H&E stain (amorphous pink)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.054
+    kind: table
+    topic: amyloidosis
+    title: Organ manifestations of amyloidosis
+    columns: [System, Manifestation]
+    rows:
+      - ["Renal", "Nephrotic syndrome"]
+      - ["Cardiac", "Restrictive cardiomyopathy"]
+      - ["GI", "Hepatosplenomegaly"]
+      - ["Neurologic", "Dementia, peripheral neuropathy"]
+      - ["Musculoskeletal", "Muscle enlargement (macroglossia), carpal tunnel syndrome"]
+      - ["Skin", "Waxy thickening, easy bruising"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 208, quote: "Renal—nephrotic syndrome. Cardiac—restrictive cardiomyopathy. GI—hepatosplenomegaly. Neurologic—dementia, peripheral neuropathy. Musculoskeletal—muscle enlargement (eg, macroglossia), carpal tunnel syndrome. Skin—waxy thickening, easy bruising." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.055
+    kind: table
+    topic: amyloidosis
+    title: Common types of amyloidosis
+    columns: [Type, Fibril protein, Notes]
+    rows:
+      - ["Primary (systemic)", "AL (Ig light chains)", "Plasma cell dyscrasias (multiple myeloma)"]
+      - ["Secondary (systemic)", "AA (serum amyloid A)", "Chronic inflammation (RA, IBD, familial Mediterranean fever, protracted infection)"]
+      - ["Transthyretin (systemic)", "Transthyretin", "Wild-type: aging, mainly heart. Hereditary (mutated): familial amyloid polyneuropathy and/or cardiomyopathy"]
+      - ["Dialysis-related (systemic)", "β2-microglobulin", "ESRD on long-term dialysis"]
+      - ["Alzheimer disease (localized)", "β-amyloid", "Cleaved from amyloid precursor protein"]
+      - ["Isolated atrial (localized)", "ANP", "Common with aging; ↑ risk of atrial fibrillation"]
+      - ["Type 2 diabetes (localized)", "Islet amyloid polypeptide", "Amylin deposited in pancreatic islets"]
+      - ["Medullary thyroid cancer (localized)", "Calcitonin", "Secreted from tumor cells"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 208, quote: "Primary amyloidosis AL (from Ig Light chains) Seen in plasma cell dyscrasias (eg, multiple myeloma) Secondary amyloidosis AA (serum Amyloid A)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L01.056
+    kind: mcq
+    topic: amyloidosis
+    stem: >-
+      A 52-year-old woman with long-standing, poorly controlled rheumatoid arthritis develops leg edema.
+      Urine protein is 6 g/24 h. A renal biopsy shows amorphous pink glomerular deposits that show
+      apple-green birefringence with Congo red under polarized light. The deposited fibril protein is
+      derived from which precursor?
+    options:
+      - Immunoglobulin light chains
+      - Serum amyloid A
+      - Transthyretin
+      - β2-microglobulin
+      - Calcitonin
+    answer: 1
+    why:
+      - "AL amyloid from light chains is seen in plasma cell dyscrasias."
+      - "Right. Secondary (AA) amyloidosis from serum amyloid A occurs in chronic inflammatory conditions such as rheumatoid arthritis, and the kidney gives nephrotic syndrome."
+      - "Transthyretin amyloid affects the heart with aging or nerves in hereditary forms."
+      - "β2-microglobulin amyloid is seen with long-term dialysis."
+      - "Calcitonin amyloid is localized to medullary thyroid cancer."
+    src: { page: 208, quote: "Secondary amyloidosis AA (serum Amyloid A) Seen in chronic inﬂammatory conditions, (eg, rheumatoid arthritis, IBD, familial Mediterranean fever, protracted infection)" }
+    status: unverified
