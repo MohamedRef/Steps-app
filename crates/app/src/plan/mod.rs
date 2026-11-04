@@ -197,6 +197,9 @@ pub fn Planner(data: Rc<StudyData>) -> Element {
     let target = try_consume_context::<crate::store::Review>().and_then(|r| target_now(&*r.backend.borrow()));
     rsx! {
         StatusCard { p: p.clone(), exam: settings.exam }
+        if let Some(later) = not_ready_later(&settings, data.clock.today(), &crate::store::shared().self_assessments()) {
+            NotReadyCard { later }
+        }
         if let Some(t) = target {
             RebalanceCard { t }
         }
@@ -491,6 +494,36 @@ fn StatusCard(p: Plan, exam: Option<Day>) -> Element {
                     {tx::MOVE_EXAM}
                 }
             }
+        }
+    }
+}
+
+/// The later exam day to offer when the last NBME forms say "not yet" close
+/// to dedicated (`selfassess::readiness`, `plan::later_exam_if_not_ready`).
+fn not_ready_later(
+    settings: &PlanSettings,
+    today: Day,
+    entries: &[steps_core::selfassess::SelfAssessment],
+) -> Option<Day> {
+    use steps_core::selfassess::{Readiness, readiness, readiness_points};
+    (readiness(&readiness_points(entries)) == Readiness::NotYet)
+        .then(|| plan::later_exam_if_not_ready(settings, today))
+        .flatten()
+}
+
+/// A calm offer to move the exam when the scores aren't there yet. The
+/// whole card moves it (the button's click bubbles up).
+#[component]
+fn NotReadyCard(later: Day) -> Element {
+    rsx! {
+        crate::ui::Card { class: "card-action plan-not-ready",
+            onclick: move |_| {
+                let mut s = SETTINGS.write();
+                s.exam = Some(later);
+                save(&s);
+            },
+            p { {tx::not_ready(&long_date(later))} }
+            button { class: "btn btn-secondary", {tx::MOVE_EXAM} }
         }
     }
 }
@@ -969,6 +1002,35 @@ mod tests {
         assert_eq!(later.new_goal(), morning.new_goal(), "today's share doesn't shrink as he works");
         assert_eq!(later.done, stats::DayDone { new: 2, reviews: 1 });
         assert_eq!(later.new_left(), morning.new_goal().saturating_sub(2));
+    }
+
+    #[test]
+    fn low_nbme_scores_near_dedicated_offer_a_later_exam() {
+        use steps_core::selfassess::{Kind, SelfAssessment};
+        let exam = Day::parse("2027-09-15").unwrap();
+        let settings = PlanSettings { exam: Some(exam), ..PlanSettings::default() };
+        let entry = |id: &str, day: &str, kind: Kind, percent: u8| SelfAssessment {
+            id: id.into(),
+            kind,
+            form: None,
+            day: Day::parse(day).unwrap(),
+            percent,
+            pass_probability: None,
+            note: None,
+            created_ms: 0,
+        };
+        let low = [entry("a", "2027-07-20", Kind::Nbme, 58), entry("b", "2027-07-27", Kind::Nbme, 57)];
+        let near = Day::parse("2027-07-28").unwrap();
+        assert_eq!(not_ready_later(&settings, near, &low), Some(exam.plus(28)));
+        assert_eq!(
+            not_ready_later(&settings, Day::parse("2027-03-01").unwrap(), &low),
+            None,
+            "too early to judge"
+        );
+        let ready = [entry("a", "2027-07-20", Kind::Nbme, 70), entry("b", "2027-07-27", Kind::Nbme, 72)];
+        assert_eq!(not_ready_later(&settings, near, &ready), None);
+        let uwsa = [entry("a", "2027-07-20", Kind::Uwsa, 50), entry("b", "2027-07-27", Kind::Uwsa, 50)];
+        assert_eq!(not_ready_later(&settings, near, &uwsa), None, "only NBME counts");
     }
 
     #[test]
