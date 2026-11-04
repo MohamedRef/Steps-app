@@ -8,6 +8,11 @@
 //!   saving and says so, so two tabs never overwrite each other's work.
 //! - **Device prefs** live in `localStorage` (`prefs/storage.rs`).
 //! - **Exports** are browser downloads.
+//! - **The content pack** is its own file, `content.pack`, which
+//!   `index.html` starts fetching while the wasm downloads; `boot` waits for
+//!   it. A service worker (`web/sw.js`) keeps every file of the newest build,
+//!   so the app opens from the device and a new deploy arrives in the
+//!   background, ready for the next open.
 
 use std::cell::{Cell, RefCell};
 use std::time::Duration;
@@ -46,6 +51,15 @@ export async function idb_put(key, bytes) {
     tx.onerror = () => fail(tx.error);
     tx.onabort = () => fail(tx.error);
   });
+}
+export function content_pack() {
+  return globalThis.stepsPack ?? Promise.reject(new Error("content.pack wasn't requested"));
+}
+export function boot_failed(msg) {
+  const img = document.querySelector('#boot img');
+  if (img) img.style.animation = "none";
+  const p = document.getElementById("boot-msg");
+  if (p) p.textContent = msg;
 }
 export function persist() {
   if (navigator.storage && navigator.storage.persist) navigator.storage.persist();
@@ -86,6 +100,9 @@ extern "C" {
     async fn idb_get(key: &str) -> Result<JsValue, JsValue>;
     #[wasm_bindgen(catch)]
     async fn idb_put(key: &str, bytes: &[u8]) -> Result<JsValue, JsValue>;
+    #[wasm_bindgen(catch, js_name = content_pack)]
+    async fn js_content_pack() -> Result<JsValue, JsValue>;
+    fn boot_failed(msg: &str);
     fn persist();
     #[wasm_bindgen(js_name = download)]
     fn js_download(name: &str, mime: &str, bytes: &[u8]);
@@ -106,6 +123,10 @@ const DB_KEY: &str = "steps.db";
 /// Which tab owns the database (`localStorage`).
 const OWNER_KEY: &str = "steps:tab";
 
+/// The content pack `boot` fetched, kept for the app's life (the library
+/// borrows it and reloads from it).
+static PACK: std::sync::OnceLock<&'static [u8]> = std::sync::OnceLock::new();
+
 thread_local! {
     static SNAPSHOT: RefCell<Option<Vec<u8>>> = const { RefCell::new(None) };
     static SAVING: Cell<bool> = const { Cell::new(true) };
@@ -114,10 +135,24 @@ thread_local! {
     static TAB: RefCell<String> = const { RefCell::new(String::new()) };
 }
 
-/// Before the app starts: reads the kept database and claims this tab.
-/// A browser that can't read IndexedDB starts empty and doesn't save, so
-/// it never overwrites what it couldn't read.
-pub async fn boot() {
+/// Before the app starts: waits for the content pack, reads the kept
+/// database and claims this tab. Without the pack nothing can show, so it
+/// says why on the boot screen and returns false. A browser that can't read
+/// IndexedDB starts empty and doesn't save, so it never overwrites what it
+/// couldn't read.
+pub async fn boot() -> bool {
+    match js_content_pack().await {
+        Ok(v) => {
+            let bytes: &'static [u8] = Box::leak(js_sys::Uint8Array::new(&v).to_vec().into_boxed_slice());
+            let _ = PACK.set(bytes);
+        }
+        Err(e) => {
+            let why =
+                e.as_string().or_else(|| js_sys::Error::from(e).message().as_string()).unwrap_or_default();
+            boot_failed(&format!("{} ({why})", crate::i18n::web::NO_CONTENT));
+            return false;
+        }
+    }
     persist();
     // Google's answer to a sign-in comes back in the address (`cloud::oauth`).
     crate::cloud::oauth::catch_redirect();
@@ -132,6 +167,12 @@ pub async fn boot() {
             crate::store::write_failed("browser storage", &format!("{e:?}"));
         }
     }
+    true
+}
+
+/// The content pack `boot` fetched.
+pub fn content_pack() -> &'static [u8] {
+    PACK.get().copied().unwrap_or_default()
 }
 
 /// The database bytes `boot` found (empty for a first visit). Once.

@@ -155,6 +155,12 @@ pub mod cite {
     }
 }
 
+/// The web app's boot screen (`platform/web.rs`).
+#[cfg_attr(not(target_arch = "wasm32"), allow(dead_code))]
+pub mod web {
+    pub const NO_CONTENT: &str = "Steps مقدرتش تجيب المحتوى. اتأكد إن النت شغال وافتحها تاني.";
+}
+
 /// A book page's sheet (pagesheet/mod.rs).
 pub mod sheet {
     pub const RESIZE: &str = "اسحب لفوق أو لتحت عشان تكبّرها أو تصغّرها";

@@ -29,6 +29,14 @@ lto = "thin"
 codegen-units = 1
 strip = true
 
+# The web app (scripts/web/build.sh): smallest code, as Kabar's web build does
+# (adapted from kabar-app main: Cargo.toml). `strip` stays off for wasm-bindgen.
+[profile.web-release]
+inherits = "release"
+opt-level = "z"
+lto = "fat"
+strip = false
+
 # dx uses these for Android / desktop bundles.
 [profile.android-dev]
 inherits = "dev"
