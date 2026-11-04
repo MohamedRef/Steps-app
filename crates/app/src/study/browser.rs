@@ -40,7 +40,6 @@ fn root(case: Case) -> Element {
 #[test]
 #[ignore = "exports production HTML for the screens browser CI job"]
 fn export_screen_fixtures_study() {
-    crate::store::use_memory_store();
     let dir = out_dir("study");
     let mut cases = vec![("setup".to_string(), Case { phase: "setup", item: None, reopened: false })];
     for kind in item::PLAYABLE {

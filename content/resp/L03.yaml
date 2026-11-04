@@ -1,0 +1,996 @@
+schema: steps.content/v1
+lecture: resp.L03
+title: Physiology
+book: { chapter: 16, pages: [682, 689] }
+topics:
+  - { id: lung-volumes-and-capacities, title: Lung volumes and capacities }
+  - { id: work-of-breathing, title: Work of breathing }
+  - { id: physiologic-dead-space, title: Determination of physiologic dead space }
+  - { id: ventilation, title: Ventilation }
+  - { id: lung-and-chest-wall-properties, title: Lung and chest wall properties }
+  - { id: pulmonary-circulation, title: Pulmonary circulation }
+  - { id: pulmonary-vascular-resistance, title: Pulmonary vascular resistance }
+  - { id: ventilation-perfusion-mismatch, title: Ventilation/perfusion mismatch }
+  - { id: alveolar-gas-equation, title: Alveolar gas equation }
+  - { id: carbon-dioxide-transport, title: Carbon dioxide transport }
+  - { id: hypoxia-and-hypoxemia, title: Hypoxia and hypoxemia }
+  - { id: hemoglobin, title: Hemoglobin }
+  - { id: oxygen-content-of-blood, title: Oxygen content of blood }
+  - { id: oxyhemoglobin-dissociation-curve, title: Oxyhemoglobin dissociation curve }
+  - { id: response-to-high-altitude, title: Response to high altitude }
+  - { id: response-to-exercise, title: Response to exercise }
+  - { id: methemoglobin, title: Methemoglobin }
+  - { id: cyanide-vs-carbon-monoxide-poisoning, title: Cyanide vs carbon monoxide poisoning }
+items:
+  # ---------- p682: lung volumes and capacities ----------
+  - id: resp.L03.001
+    kind: table
+    topic: lung-volumes-and-capacities
+    title: The four lung volumes
+    columns: [Volume, Definition]
+    rows:
+      - [Inspiratory reserve volume (IRV), Air that can still be breathed in after normal inspiration]
+      - [Tidal volume (VT), "Air moved into the lung with each quiet inspiration; 6–8 mL/kg, typically ~500 mL"]
+      - [Expiratory reserve volume (ERV), Air that can still be breathed out after normal expiration]
+      - [Residual volume (RV), "Air in the lung after maximal expiration; cannot be measured by spirometry"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 682, quote: "Air in lung after maximal expiration; RV and any lung capacity that includes RV cannot be measured by spirometry" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.002
+    kind: table
+    topic: lung-volumes-and-capacities
+    title: The four lung capacities
+    columns: [Capacity, Sum, Meaning]
+    rows:
+      - [Inspiratory capacity (IC), IRV + VT, Air that can be breathed in after normal exhalation]
+      - [Functional residual capacity (FRC), RV + ERV, "Gas in the lungs after normal expiration; chest wall outward pull balances lung inward collapse"]
+      - [Vital capacity (VC), IRV + VT + ERV, Maximum volume expired after a maximal inspiration]
+      - [Total lung capacity (TLC), IRV + VT + ERV + RV = VC + RV, Gas in the lungs after a maximal inspiration]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 682, quote: "Volume of gas in lungs after normal expiration; outward pulling force of chest wall is balanced with inward collapsing force of lungs" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.003
+    kind: cloze
+    topic: lung-volumes-and-capacities
+    text: "There are {{c1::4}} volumes and {{c2::4}} capacities; a capacity is a sum of {{c3::≥2}} physiologic volumes."
+    src: { page: 682, quote: "There are 4 volumes and 4 capacities. Note: a capacity is a sum of ≥2 physiologic volumes." }
+    status: unverified
+  - id: resp.L03.004
+    kind: mcq
+    topic: lung-volumes-and-capacities
+    stem: >-
+      A 45-year-old woman has spirometry before lung surgery. The report lists the volume she can exhale after a
+      maximal inspiration, but the surgeon also wants her functional residual capacity, which spirometry cannot give.
+      Why can't spirometry measure FRC?
+    options:
+      - FRC includes the residual volume
+      - FRC includes the inspiratory reserve volume
+      - FRC equals the tidal volume
+      - FRC depends on surfactant
+      - FRC is measured only during exercise
+    answer: 0
+    why:
+      - "Right. FRC = RV + ERV, and RV and any capacity that includes RV cannot be measured by spirometry."
+      - "FRC does not include IRV; that is the inspiratory capacity and vital capacity."
+      - "FRC is RV + ERV, not VT."
+      - "Surfactant affects compliance; it is not why spirometry fails."
+      - "FRC is the resting volume after a normal expiration."
+    src: { page: 682, quote: "RV and any lung capacity that includes RV cannot be measured by spirometry" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p682: work of breathing ----------
+  - id: resp.L03.005
+    kind: card
+    topic: work-of-breathing
+    front: What is the work of breathing, and what two kinds of work make it up?
+    back: The energy (O2) used by the respiratory muscles to produce the needed ventilation. It is flow-resistive plus elastic work (work = pressure × volume), overcoming airway resistance and elastic recoil.
+    src: { page: 682, quote: "Combination of flow-resistive and elastic work (ie, work = force × distance = pressure × volume)—needed to overcome both elastic recoil and airway resistance." }
+    status: unverified
+  - id: resp.L03.006
+    kind: table
+    topic: work-of-breathing
+    title: How patients minimize work of breathing
+    columns: [Disease type, Extra work against, Breathing pattern]
+    rows:
+      - [Restrictive, Elastic recoil, ↑ RR and ↓ VT]
+      - [Obstructive, Airway resistance, ↓ RR and ↑ VT]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 682, quote: "↑ in restrictive diseases (↑ work to overcome elastic recoil resistance achieved with ↑ RR and ↓ VT) and obstructive diseases (↑ work to overcome airway resistance achieved with ↓ RR and ↑ VT)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.007
+    kind: mcq
+    topic: work-of-breathing
+    stem: >-
+      A 62-year-old man with idiopathic pulmonary fibrosis has stiff lungs. To minimize his work of breathing, which
+      breathing pattern does he adopt?
+    options:
+      - Slow, deep breaths
+      - Rapid, shallow breaths
+      - Normal rate with large tidal volumes
+      - Pursed-lip prolonged expiration with slow rate
+      - Breath holding at total lung capacity
+    answer: 1
+    why:
+      - "Slow, deep breathing (↓ RR, ↑ VT) is the obstructive strategy against airway resistance."
+      - "Right. In restrictive disease the extra work is against elastic recoil, so patients use ↑ RR and ↓ VT."
+      - "Large tidal volumes increase elastic work in stiff lungs."
+      - "Slow rate fits obstructive disease."
+      - "Holding at TLC maximizes elastic work."
+    src: { page: 682, quote: "↑ in restrictive diseases (↑ work to overcome elastic recoil resistance achieved with ↑ RR and ↓ VT)" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p682: physiologic dead space ----------
+  - id: resp.L03.008
+    kind: card
+    topic: physiologic-dead-space
+    front: Give the equation for physiologic dead space.
+    back: "VD = VT × (PaCO2 − PECO2)/PaCO2, where PaCO2 is arterial PCO2 and PECO2 is expired air PCO2."
+    src: { page: 682, quote: "PaCO2 = arterial PCO2 . PECO2 = expired air PCO2 ." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.009
+    kind: card
+    topic: physiologic-dead-space
+    front: What makes up physiologic dead space, and where in a healthy lung is alveolar dead space largest?
+    back: Anatomic dead space of the conducting airways plus alveolar dead space; the apex of a healthy lung contributes most alveolar dead space.
+    src: { page: 682, quote: "anatomic dead space of conducting airways plus alveolar dead space; apex of healthy lung is largest contributor of alveolar dead space." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.010
+    kind: cloze
+    topic: physiologic-dead-space
+    text: "Physiologic dead space ≈ anatomic dead space in normal lungs, but may be {{c1::greater}} in lung diseases with {{c2::ventilation/perfusion mismatch}}."
+    src: { page: 682, quote: "May be greater than anatomic dead space in lung diseases with ventilation/ perfusion mismatch." }
+    status: unverified
+  - id: resp.L03.011
+    kind: mcq
+    topic: physiologic-dead-space
+    stem: >-
+      A ventilated patient has a tidal volume of 500 mL, arterial PCO2 of 40 mm Hg and mixed expired PCO2 of 30 mm Hg.
+      What is the physiologic dead space?
+    options:
+      - 75 mL
+      - 125 mL
+      - 150 mL
+      - 375 mL
+      - 500 mL
+    answer: 1
+    why:
+      - "That would need (PaCO2 − PECO2)/PaCO2 of 0.15."
+      - "Right. VD = VT × (PaCO2 − PECO2)/PaCO2 = 500 × (40 − 30)/40 = 125 mL."
+      - "150 mL is the typical normal VD quoted on p683, not this calculation."
+      - "375 mL is VT − VD, the part of the breath that does exchange gas."
+      - "That is the whole tidal volume."
+    src: { page: 682, quote: "VD = volume of inspired air that does not take part in gas exchange." }
+    status: unverified
+  # ---------- p683: ventilation ----------
+  - id: resp.L03.012
+    kind: table
+    topic: ventilation
+    title: Minute vs alveolar ventilation
+    columns: [Term, Meaning, Equation]
+    rows:
+      - [Minute ventilation (VE), Total gas entering and leaving the lungs per minute, VE = VT × RR]
+      - [Alveolar ventilation (VA), Gas reaching the alveoli each minute, VA = (VT − VD) × RR]
+    blanks: [[0, 2], [1, 2]]
+    src: { page: 683, quote: "Total volume of gas that reaches alveoli each minute. VA = (VT − VD) × RR" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.013
+    kind: cloze
+    topic: ventilation
+    text: "Normal values: RR = {{c1::12-20}} breaths/min, VT = {{c2::500}} mL/breath, VD = {{c3::150}} mL/breath."
+    src: { page: 683, quote: "RR = 12-20 breaths/min ▘ VT = 500 mL/breath ▘ VD = 150 mL/breath" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.014
+    kind: mcq
+    topic: ventilation
+    stem: >-
+      Two patients each have a minute ventilation of 6 L/min and a dead space of 150 mL. Patient A breathes 12 times a
+      minute with a tidal volume of 500 mL; patient B breathes 30 times a minute with 200 mL. What is patient B's
+      alveolar ventilation?
+    options:
+      - 6.0 L/min
+      - 4.2 L/min
+      - 3.0 L/min
+      - 1.5 L/min
+      - 0.6 L/min
+    answer: 3
+    why:
+      - "That is minute ventilation, which includes dead space."
+      - "4.2 L/min is patient A: (500 − 150) × 12."
+      - "That would need VT − VD of 100 mL."
+      - "Right. VA = (VT − VD) × RR = (200 − 150) × 30 = 1.5 L/min; rapid shallow breathing wastes ventilation on dead space."
+      - "That is far too low for these numbers."
+    src: { page: 683, quote: "VA = (VT − VD) × RR" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p683: lung and chest wall properties ----------
+  - id: resp.L03.015
+    kind: card
+    topic: lung-and-chest-wall-properties
+    front: What is hysteresis in the lung?
+    back: The difference between the pressure of inhalation (volume increasing) and exhalation (volume decreasing); inflation follows a different curve because surface tension must be overcome during inflation.
+    src: { page: 683, quote: "Hysteresis—difference between pressure of inhalation (volume increasing) and pressure of exhalation (volume decreasing)." }
+    status: unverified
+  - id: resp.L03.016
+    kind: card
+    topic: lung-and-chest-wall-properties
+    front: What is elastic recoil, and what is true of the pressures at FRC?
+    back: Lungs tend to collapse inward and the chest wall to spring outward. At FRC, airway and alveolar pressures are atmospheric (zero), intrapleural pressure is negative (preventing atelectasis), the opposing pulls balance, and PVR is at a minimum.
+    src: { page: 683, quote: "At FRC, airway and alveolar pressures equal atmospheric pressure (PB; called zero), and intrapleural pressure is negative (preventing atelectasis)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.017
+    kind: card
+    topic: lung-and-chest-wall-properties
+    front: Define compliance and name what raises it.
+    back: Change in lung volume per change in pressure (ΔV/ΔP); inversely proportional to wall stiffness and increased by surfactant.
+    src: { page: 683, quote: "Change in lung volume for a change in pressure (ΔV/ΔP). Inversely proportional to wall stiffness and increased by surfactant." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.018
+    kind: table
+    topic: lung-and-chest-wall-properties
+    title: Compliance changes
+    columns: [Compliance, Meaning, Examples]
+    rows:
+      - [↑, Lung easier to fill, "Emphysema, older adults"]
+      - [↓, Lung more difficult to fill, "Pulmonary fibrosis, pneumonia, ARDS, pulmonary edema"]
+    blanks: [[0, 2], [1, 2]]
+    src: { page: 683, quote: "↑ compliance = lung easier to fill (eg, emphysema, older adults) ▘ ↓ compliance = lung more difficult to fill (eg, pulmonary fibrosis, pneumonia, ARDS, pulmonary edema)" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.019
+    kind: mcq
+    topic: lung-and-chest-wall-properties
+    stem: >-
+      A healthy 25-year-old man breathes quietly. At the end of a normal expiration, before the next breath, which
+      statement is true?
+    options:
+      - Intrapleural pressure is zero
+      - Alveolar pressure is negative
+      - Lung inward pull is balanced by chest wall outward pull
+      - Pulmonary vascular resistance is at its maximum
+      - Lung volume equals residual volume
+    answer: 2
+    why:
+      - "Intrapleural pressure stays negative at FRC, which prevents atelectasis."
+      - "At FRC alveolar pressure is atmospheric (zero)."
+      - "Right. At FRC the inward pull of the lung balances the outward pull of the chest wall; system pressure is atmospheric."
+      - "PVR is at a minimum at FRC."
+      - "End of normal expiration is FRC (RV + ERV), not RV."
+    src: { page: 683, quote: "The inward pull of the lung is balanced by the outward pull of the chest wall. System pressure is atmospheric. Pulmonary vascular resistance (PVR) is at a minimum." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p684: pulmonary circulation ----------
+  - id: resp.L03.020
+    kind: card
+    topic: pulmonary-circulation
+    front: How does the pulmonary circulation respond to low alveolar PO2, and how does this differ from the systemic circulation?
+    back: ↓ PAO2 causes hypoxic vasoconstriction, shifting blood from poorly to well-ventilated regions. In the systemic circulation, ↓ tissue PO2 causes vasodilation.
+    src: { page: 684, quote: "causes hypoxic vasoconstriction that shifts blood away from poorly ventilated regions of lung to well-ventilated regions of lung" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.021
+    kind: table
+    topic: pulmonary-circulation
+    title: Perfusion-limited vs diffusion-limited gas exchange
+    columns: [Type, Gases, Key point]
+    rows:
+      - [Perfusion limited, "O2 (normal health), CO2, N2O", Gas equilibrates early along the capillary; exchange ↑ only if blood flow ↑]
+      - [Diffusion limited, "O2 (emphysema, fibrosis), CO", Gas does not equilibrate by the end of the capillary]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 684, quote: "Gas equilibrates early along the length of the capillary. Exchange can be ↑ only if blood flow ↑." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.022
+    kind: card
+    topic: pulmonary-circulation
+    front: Why do diffusion-limiting diseases such as pulmonary fibrosis cause hypoxia before hypercapnia?
+    back: O2 diffuses slowly while CO2 diffuses very rapidly across the alveolar membrane.
+    src: { page: 684, quote: "Disease states that lead to diffusion limitation (eg, pulmonary fibrosis) are more likely to cause early hypoxia than hypercapnia." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.023
+    kind: cloze
+    topic: pulmonary-circulation
+    text: "Chronic hypoxic vasoconstriction may lead to {{c1::pulmonary hypertension}} +/– {{c2::cor pulmonale}}."
+    src: { page: 684, quote: "Chronic hypoxic vasoconstriction may lead to pulmonary hypertension +/– cor pulmonale." }
+    status: unverified
+  - id: resp.L03.024
+    kind: card
+    topic: pulmonary-circulation
+    front: Give Fick's law of diffusion and how emphysema and fibrosis change it.
+    back: "J = A × Dk × (P1 − P2)/Δx (A = area, Δx = wall thickness, Dk = diffusion coefficient). Emphysema ↓ A; pulmonary fibrosis ↑ Δx."
+    src: { page: 684, quote: "A ↓ in emphysema. ▘ Δx ↑ in pulmonary fibrosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.025
+    kind: card
+    topic: pulmonary-circulation
+    front: What does DLCO measure?
+    back: The extent to which CO passes from the air sacs of the lungs into the blood.
+    src: { page: 684, quote: "DLCO is the extent to which CO passes from air sacs of lungs into blood." }
+    status: unverified
+  - id: resp.L03.026
+    kind: mcq
+    topic: pulmonary-circulation
+    stem: >-
+      A 58-year-old woman with idiopathic pulmonary fibrosis has an O2 saturation of 88% but a normal PaCO2. Which
+      property of gas exchange best explains the isolated hypoxemia?
+    options:
+      - CO2 is perfusion limited and O2 never is
+      - O2 diffuses slowly, while CO2 diffuses very rapidly
+      - Fibrosis increases the alveolar surface area
+      - Hypoxic vasodilation in fibrotic regions
+      - CO2 binds hemoglobin with higher affinity than O2
+    answer: 1
+    why:
+      - "O2 is perfusion limited in health but becomes diffusion limited in fibrosis."
+      - "Right. Fibrosis thickens the wall (↑ Δx); O2 diffuses slowly while CO2 diffuses rapidly, so hypoxia comes before hypercapnia."
+      - "Fibrosis increases wall thickness; emphysema decreases area."
+      - "The pulmonary response to hypoxia is vasoconstriction."
+      - "First Aid gives diffusion speed as the reason, not hemoglobin affinity."
+    src: { page: 684, quote: "O2 diffuses slowly, while CO2 diffuses very rapidly across the alveolar membrane." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p684: pulmonary vascular resistance ----------
+  - id: resp.L03.027
+    kind: card
+    topic: pulmonary-vascular-resistance
+    front: Give the formula for pulmonary vascular resistance.
+    back: "PVR = (Ppulm artery − PL atrium)/Q̇, where PL atrium ≈ pulmonary artery occlusion (wedge) pressure and Q̇ = cardiac output."
+    src: { page: 684, quote: "PL atrium ≈ pulmonary artery occlusion pressure (also called pulmonary capillary wedge pressure)" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.028
+    kind: cloze
+    topic: pulmonary-vascular-resistance
+    text: "Resistance R = 8ηl/πr⁴, so resistance is inversely proportional to the {{c1::fourth power of the radius}}; η is blood {{c2::viscosity}}."
+    src: { page: 684, quote: "η = viscosity of blood (“stickiness”) l = vessel length r = vessel radius" }
+    status: unverified
+  - id: resp.L03.029
+    kind: mcq
+    topic: pulmonary-vascular-resistance
+    stem: >-
+      A patient has a mean pulmonary artery pressure of 25 mm Hg, a pulmonary capillary wedge pressure of 10 mm Hg and
+      a cardiac output of 5 L/min. What is the pulmonary vascular resistance?
+    options:
+      - 2 mm Hg·min/L
+      - 3 mm Hg·min/L
+      - 5 mm Hg·min/L
+      - 7 mm Hg·min/L
+      - 15 mm Hg·min/L
+    answer: 1
+    why:
+      - "That would need a pressure gradient of 10 mm Hg."
+      - "Right. PVR = (Ppulm artery − PL atrium)/Q̇ = (25 − 10)/5 = 3; the wedge pressure stands in for left atrial pressure."
+      - "That divides the PA pressure alone by output."
+      - "That adds the pressures instead of subtracting them."
+      - "15 mm Hg is the gradient; it still needs dividing by Q̇."
+    src: { page: 684, quote: "PL atrium ≈ pulmonary artery occlusion pressure (also called pulmonary capillary wedge pressure)" }
+    status: unverified
+  # ---------- p685: V/Q mismatch ----------
+  - id: resp.L03.030
+    kind: table
+    topic: ventilation-perfusion-mismatch
+    title: V/Q at the apex and base
+    columns: [Site, V/Q, Meaning]
+    rows:
+      - [Apex, "3", Wasted ventilation]
+      - [Base, "0.6", Wasted perfusion]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 685, quote: "at apex of lung = 3 (wasted ventilation) ▘ at base of lung = 0.6 (wasted perfusion)" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.031
+    kind: card
+    topic: ventilation-perfusion-mismatch
+    front: How do ventilation and perfusion compare between apex and base, and what happens in exercise?
+    back: Both ventilation and perfusion are greater at the base. With exercise (↑ cardiac output), apical capillaries dilate and V/Q approaches 1.
+    src: { page: 685, quote: "Both ventilation and perfusion are greater at the base of the lung than at the apex of the lung. With exercise (↑ cardiac output), there is vasodilation of apical capillaries → ratio approaches 1." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.032
+    kind: card
+    topic: ventilation-perfusion-mismatch
+    front: Why does TB favor the lung apex?
+    back: Organisms that thrive in high O2, such as TB, flourish in the apex (high V/Q).
+    src: { page: 685, quote: "Certain organisms that thrive in high O2 (eg, TB) flourish in the apex." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.033
+    kind: table
+    topic: ventilation-perfusion-mismatch
+    title: The two extremes of V/Q
+    columns: [V/Q, Problem, Response to 100% O2, Example]
+    rows:
+      - ["0", "Airway obstruction (shunt)", Does not improve PaO2, Foreign body aspiration]
+      - ["∞", "Blood flow obstruction (physiologic dead space)", Improves PaO2 (if dead space < 100%), Pulmonary embolus]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 685, quote: "In shunt, 100% O2 does not improve PaO2 (eg, foreign body aspiration)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.034
+    kind: table
+    topic: ventilation-perfusion-mismatch
+    title: West lung zones
+    columns: [Zone, Pressure order]
+    rows:
+      - [Zone 1, PA ≥ Pa > Pv]
+      - [Zone 2, Pa > PA > Pv]
+      - [Zone 3, Pa > Pv > PA]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 685, quote: "Zone 1 PA ≥ Pa > Pv" }
+    status: unverified
+  - id: resp.L03.035
+    kind: mcq
+    topic: ventilation-perfusion-mismatch
+    stem: >-
+      A 3-year-old boy inhales a peanut that completely blocks his right main bronchus. His saturation is 84% and does
+      not rise on 100% O2 by face mask. What is the V/Q of the obstructed lung?
+    options:
+      - "0, a shunt"
+      - "Infinite, dead space"
+      - "1, matched"
+      - "3, like the normal apex"
+      - "0.6, like the normal base"
+    answer: 0
+    why:
+      - "Right. Airway obstruction gives V/Q = 0 (shunt); blood passes unventilated alveoli, so 100% O2 does not improve PaO2."
+      - "Infinite V/Q is blood flow obstruction (eg, pulmonary embolus), where 100% O2 does help."
+      - "A blocked bronchus cannot have matched ventilation."
+      - "V/Q of 3 is the normal apex (wasted ventilation)."
+      - "0.6 is the normal base, not complete obstruction."
+    src: { page: 685, quote: "= 0 = “oirway” obstruction (shunt). In shunt, 100% O2 does not improve PaO2 (eg, foreign body aspiration)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p685: alveolar gas equation ----------
+  - id: resp.L03.036
+    kind: card
+    topic: alveolar-gas-equation
+    front: Give the alveolar gas equation and its sea-level room-air form.
+    back: "PAO2 = PIO2 − PaCO2/RQ; at sea level on room air, PAO2 ≈ 150 − PaCO2/0.8. RQ = CO2 produced/O2 consumed."
+    src: { page: 685, quote: "RQ = respiratory quotient = CO2 produced/ O2 consumed" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.037
+    kind: cloze
+    topic: alveolar-gas-equation
+    text: "A-a gradient = PAO2 − PaO2. Normal is estimated as ({{c1::age/4}}) + 4, so under 40 years it should be < {{c2::14}}."
+    src: { page: 685, quote: "Normal A-a gradient estimated as (age/4) + 4 (eg, for a person <40 years old, gradient should be <14)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.038
+    kind: mcq
+    topic: alveolar-gas-equation
+    stem: >-
+      A 32-year-old woman at sea level on room air has PaCO2 40 mm Hg and PaO2 70 mm Hg. Using RQ 0.8 and PIO2 150 mm
+      Hg, what is her A-a gradient, and is it normal?
+    options:
+      - 10 mm Hg, normal
+      - 30 mm Hg, increased
+      - 50 mm Hg, increased
+      - 80 mm Hg, increased
+      - 100 mm Hg, normal
+    answer: 1
+    why:
+      - "That would need PaO2 90 mm Hg."
+      - "Right. PAO2 = 150 − 40/0.8 = 100; A-a = 100 − 70 = 30, above the normal (32/4) + 4 = 12."
+      - "That miscalculates PAO2 as 120."
+      - "That subtracts PaCO2 from PaO2 rather than using PAO2."
+      - "100 mm Hg is the PAO2, not the gradient."
+    src: { page: 685, quote: "A-a gradient = PAO2 – PaO2 ." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p686: CO2 transport ----------
+  - id: resp.L03.039
+    kind: table
+    topic: carbon-dioxide-transport
+    title: How CO2 is carried in blood
+    columns: [Form, Share]
+    rows:
+      - [HCO3− (made in RBCs by carbonic anhydrase; carried in plasma), "90%"]
+      - [Carbamino compounds (plasma proteins and globin N-terminus → HbCO2), "5%"]
+      - [Dissolved in plasma, "5%"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 686, quote: "Small percentage of CO2 (5%) can be dissolved into plasma itself" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.040
+    kind: card
+    topic: carbon-dioxide-transport
+    front: What is the Haldane effect?
+    back: In the lungs, Hb oxygenation promotes dissociation of H+, shifting equilibrium toward CO2 production, so CO2 is released from RBCs.
+    src: { page: 686, quote: "In the lungs, Hb oxygenation promotes dissociation of H+ → equilibrium shifts towards CO2 production → CO2 is released from RBCs (Haldane effect)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.041
+    kind: mcq
+    topic: carbon-dioxide-transport
+    stem: >-
+      Blood leaving a contracting muscle carries a large CO2 load to the lungs. In which form is most of this CO2
+      carried?
+    options:
+      - Dissolved in plasma
+      - Bound to plasma proteins as carbamino compounds
+      - As bicarbonate in plasma
+      - As carboxyhemoglobin
+      - Bound to the heme iron
+    answer: 2
+    why:
+      - "Only about 5% is dissolved."
+      - "Carbamino compounds (with plasma proteins and globin) carry about 5%."
+      - "Right. About 90% is converted to HCO3− in RBCs by carbonic anhydrase and carried in the plasma."
+      - "Carboxyhemoglobin is CO bound to Hb, not CO2."
+      - "CO2 binds the N-terminus of globin, not the heme iron."
+    src: { page: 686, quote: "carried in the plasma to the lungs (and released via the carbonic anhydrase reaction)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p686: hypoxia and hypoxemia ----------
+  - id: resp.L03.042
+    kind: enumerate
+    topic: hypoxia-and-hypoxemia
+    prompt: Enumerate the common causes of hypoxia (↓ O2 delivery to tissues) (5).
+    points:
+      - ↓ Cardiac output
+      - Hypoxemia (↓ PaO2)
+      - Ischemia
+      - Anemia
+      - CO/cyanide poisoning
+    pass: 4
+    src: { page: 686, quote: "Commonly due to ↓ cardiac output, hypoxemia (insufficient oxygenation of blood with ↓ PaO2 ), ischemia, anemia, CO/cyanide poisoning." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.043
+    kind: table
+    topic: hypoxia-and-hypoxemia
+    title: Causes of hypoxemia by A-a gradient
+    columns: [Cause, A-a gradient, Example]
+    rows:
+      - [↓ Inspired O2 tension (PIO2), Normal, High altitude (↓ PB)]
+      - [Hypoventilation (↑ PaCO2), Normal, "Opiate overdose, obesity hypoventilation, neuromuscular weakness"]
+      - [Diffusion limitation, Increased, Fibrosis]
+      - [V/Q mismatch, Increased, "Pulmonary edema, pulmonary embolism"]
+      - [Right-to-left shunt, Increased, "Intracardiac shunt; perfusion of nonventilated alveoli in ARDS"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 686, quote: "CNS depression from opiate overdose, obesity hypoventilation syndrome, neuromuscular weakness" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.044
+    kind: card
+    topic: hypoxia-and-hypoxemia
+    front: What is a right-to-left shunt, and what are its two kinds?
+    back: The extreme of V/Q mismatch, in which deoxygenated blood bypasses alveolar oxygenation and enters the systemic circulation. Anatomic (eg, intracardiac shunt) or physiologic (eg, perfusion of nonventilated alveoli in ARDS).
+    src: { page: 686, quote: "Deoxygenated blood bypasses alveolar oxygenation and enters systemic circulation. Can be anatomic (eg, intracardiac shunt) or physiologic (eg, perfusion of nonventilated alveoli in ARDS)" }
+    status: unverified
+  - id: resp.L03.045
+    kind: mcq
+    topic: hypoxia-and-hypoxemia
+    stem: >-
+      A 24-year-old man is found somnolent after a heroin overdose. Respiratory rate is 5/min. ABG on room air: PaO2 55
+      mm Hg, PaCO2 70 mm Hg. Which pattern fits his hypoxemia?
+    options:
+      - Hypoventilation with a normal A-a gradient
+      - Diffusion limitation with an increased A-a gradient
+      - Right-to-left shunt with an increased A-a gradient
+      - V/Q mismatch from pulmonary embolism
+      - Low inspired O2 tension from altitude
+    answer: 0
+    why:
+      - "Right. Opiate CNS depression causes hypoventilation; PAO2 = 150 − 70/0.8 ≈ 62, so A-a ≈ 7, normal."
+      - "Diffusion limitation (fibrosis) raises the A-a gradient and spares CO2."
+      - "A shunt raises the A-a gradient and is not explained by a slow rate."
+      - "PE causes a high-V/Q mismatch with an increased gradient."
+      - "He is not at altitude."
+    src: { page: 686, quote: "CNS depression from opiate overdose, obesity hypoventilation syndrome, neuromuscular weakness" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p687: hemoglobin ----------
+  - id: resp.L03.046
+    kind: card
+    topic: hemoglobin
+    front: What is the structure of adult hemoglobin, and what is positive cooperativity?
+    back: Four subunits (2 α, 2 β), each binding one O2. As an allosteric protein, oxygenated Hb has high O2 affinity (300×) and deoxygenated Hb has low affinity, which promotes O2 unloading.
+    src: { page: 687, quote: "Normal adult hemoglobin (Hb) is composed of 4 polypeptide subunits (2 α and 2 β) that each bind one O2 molecule." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.047
+    kind: card
+    topic: hemoglobin
+    front: How does myoglobin differ from hemoglobin?
+    back: A single polypeptide chain with one heme; higher O2 affinity than Hb; no positive cooperativity, so its curve is not sigmoidal. Essential for full oxygenation of aerobically active muscle.
+    src: { page: 687, quote: "Myoglobin is composed of a single polypeptide chain associated with one heme moiety. Higher affinity for oxygen than Hb." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.048
+    kind: mcq
+    topic: hemoglobin
+    stem: >-
+      A biochemistry lab compares two O2-binding proteins. Protein X has a sigmoidal binding curve; protein Y has a
+      hyperbolic curve and binds O2 more tightly at all PO2 values. Protein Y is found mainly in which tissue?
+    options:
+      - Red blood cells
+      - Aerobically active skeletal muscle
+      - Alveolar type II cells
+      - Hepatocytes storing iron
+      - Plasma
+    answer: 1
+    why:
+      - "RBCs carry hemoglobin, the sigmoidal protein X."
+      - "Right. Myoglobin is monomeric, has higher O2 affinity and no cooperativity, and is essential for full oxygenation of aerobically active muscle."
+      - "Type II pneumocytes make surfactant."
+      - "Iron storage is not an O2 binding curve."
+      - "Plasma has dissolved O2 only."
+    src: { page: 687, quote: "Essential for full oxygenation of aerobically active muscle." }
+    status: unverified
+  # ---------- p687: oxygen content ----------
+  - id: resp.L03.049
+    kind: card
+    topic: oxygen-content-of-blood
+    front: Give the O2 content equation.
+    back: "O2 content = (1.34 × Hb × SaO2) + (0.003 × PaO2): O2 bound to Hb plus O2 dissolved in plasma."
+    src: { page: 687, quote: "0.003 = solubility constant of O2 ; PaO2 = partial pressure of O2 in arterial blood." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.050
+    kind: cloze
+    topic: oxygen-content-of-blood
+    text: "1 g Hb binds {{c1::1.34}} mL O2; normal Hb is {{c2::15}} g/dL; O2 binding capacity ≈ {{c3::20}} mL O2/dL of blood."
+    src: { page: 687, quote: "Normally 1 g Hb can bind 1.34 mL O2 ; normal Hb amount in blood is 15 g/dL. O2 binding (carrying) capacity ≈ 20 mL O2 /dL of blood." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.051
+    kind: card
+    topic: oxygen-content-of-blood
+    front: What happens to O2 content, saturation and PaO2 when Hb falls, and how is O2 delivery calculated?
+    back: O2 content falls, but O2 saturation and PaO2 are unchanged. O2 delivery = cardiac output × O2 content.
+    src: { page: 687, quote: "With ↓ Hb there is ↓ O2 content of arterial blood, but no change in O2 saturation and Pao2 ." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.052
+    kind: table
+    topic: oxygen-content-of-blood
+    title: Hb, SaO2, PaO2 and O2 content in common states
+    columns: [State, Hb, SaO2, PaO2, Total O2 content]
+    rows:
+      - [CO poisoning, Normal, ↓ (CO competes with O2), Normal, ↓]
+      - [Anemia, ↓, Normal, Normal, ↓]
+      - [Polycythemia, ↑, Normal, Normal, ↑]
+      - [Methemoglobinemia, Normal, ↓ (Fe3+ poor at binding O2), Normal, ↓]
+      - [Cyanide toxicity, Normal, Normal, Normal, Normal]
+    blanks: [[0, 2], [1, 1], [2, 4], [3, 2], [4, 4]]
+    src: { page: 687, quote: "Anemia ↓ Normal Normal ↓ Polycythemia ↑ Normal Normal ↑" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.053
+    kind: mcq
+    topic: oxygen-content-of-blood
+    stem: >-
+      A 40-year-old woman with heavy menstrual bleeding has Hb 7.5 g/dL. She is fatigued and short of breath on stairs.
+      Which set of arterial findings is expected?
+    options:
+      - "SaO2 ↓, PaO2 ↓, O2 content ↓"
+      - "SaO2 normal, PaO2 normal, O2 content ↓"
+      - "SaO2 ↓, PaO2 normal, O2 content ↓"
+      - "SaO2 normal, PaO2 ↓, O2 content normal"
+      - "SaO2 normal, PaO2 normal, O2 content normal"
+    answer: 1
+    why:
+      - "Low PaO2 would point to a lung problem, not anemia."
+      - "Right. With ↓ Hb, O2 content falls but saturation and PaO2 stay normal."
+      - "Low saturation with normal PaO2 is CO poisoning or methemoglobinemia."
+      - "Anemia does not lower PaO2 and does lower content."
+      - "That is the cyanide pattern."
+    src: { page: 687, quote: "With ↓ Hb there is ↓ O2 content of arterial blood, but no change in O2 saturation and Pao2 ." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p687: oxyhemoglobin dissociation curve ----------
+  - id: resp.L03.054
+    kind: enumerate
+    topic: oxyhemoglobin-dissociation-curve
+    prompt: Enumerate the physiologic causes of a right shift of the oxyhemoglobin dissociation curve (5).
+    points:
+      - Exercise
+      - ↓ pH
+      - ↑ Temperature/fever
+      - Hypoxia (↑ 2,3-BPG)
+      - ↑ H+ and ↑ CO2 from tissue metabolism (Bohr effect)
+    pass: 4
+    src: { page: 687, quote: "Physiologically occurs with ↑ O2 needs: exercise, ↓ pH, ↑ temperature/fever, hypoxia (↑ 2,3-BPG)" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.055
+    kind: enumerate
+    topic: oxyhemoglobin-dissociation-curve
+    prompt: Enumerate the causes of a left shift of the oxyhemoglobin dissociation curve, physiologic and pathologic (6).
+    points:
+      - ↓ Temperature
+      - ↑ pH
+      - Gestation (fetal Hb)
+      - ↑ CO
+      - ↑ MetHb
+      - Genetic mutation (↓ 2,3-BPG)
+    pass: 5
+    hook: "الـ left is lower: الـ O2 بيتمسك ومش بينزل للأنسجة."
+    src: { page: 687, quote: "Pathologically occurs with ↑ CO, ↑ MetHb, genetic mutation (↓ 2,3-BPG)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.056
+    kind: card
+    topic: oxyhemoglobin-dissociation-curve
+    front: Why does fetal Hb have a higher O2 affinity than maternal Hb?
+    back: Fetal Hb has ↓ affinity for 2,3-BPG, so it binds O2 more tightly, driving O2 across the placenta to the fetus (a left shift).
+    src: { page: 687, quote: "fetal Hb has ↓ affinity for 2,3-BPG and thus higher O2 affinity and binding than maternal Hb, driving O2 across placenta to fetus" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.057
+    kind: cloze
+    topic: oxyhemoglobin-dissociation-curve
+    text: "The ODC is sigmoidal because of {{c1::positive cooperativity}}: tetrameric Hb binds 4 O2 with higher affinity for each subsequent O2. A right shift means {{c2::↑}} P50."
+    src: { page: 687, quote: "ODC has sigmoidal shape due to positive cooperativity (ie, tetrameric Hb molecule can bind 4 O2 molecules and has higher affinity for each subsequent O2 molecule bound)." }
+    status: unverified
+  - id: resp.L03.058
+    kind: mcq
+    topic: oxyhemoglobin-dissociation-curve
+    stem: >-
+      A 28-year-old runner finishes a marathon on a hot day. In the capillaries of her quadriceps, lactate and CO2 are
+      high and temperature is raised. Compared with resting conditions, which change occurs?
+    options:
+      - Left shift of the ODC with ↓ P50
+      - Right shift of the ODC with ↑ O2 unloading
+      - No shift, because PaO2 is normal
+      - Left shift from ↓ 2,3-BPG
+      - Right shift with ↑ Hb affinity for O2
+    answer: 1
+    why:
+      - "A left shift occurs with ↓ O2 needs, ↑ pH or cold."
+      - "Right. Exercise, ↓ pH, ↑ temperature and ↑ CO2 (Bohr effect) shift the curve right: ↓ affinity, ↑ unloading at the tissue."
+      - "The curve shifts with tissue conditions even when PaO2 is normal."
+      - "2,3-BPG is not decreased in exercise."
+      - "A right shift means ↓ affinity, not ↑."
+    src: { page: 687, quote: "Right shift in ODC reflects ↓ Hb affinity for O2 → ↑ O2 unloading at tissue." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p688: high altitude ----------
+  - id: resp.L03.059
+    kind: card
+    topic: response-to-high-altitude
+    front: Trace the acute chain from high altitude to altitude sickness.
+    back: "Constant FIO2 but ↓ PB → ↓ PIO2 → ↓ PaO2 → ↑ ventilation → ↓ PaCO2 → respiratory alkalosis → altitude sickness (headache, nausea, fatigue, lightheadedness, sleep disturbance)."
+    src: { page: 688, quote: "respiratory alkalosis → altitude sickness (headaches, nausea, fatigue, lightheadedness, sleep disturbance)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.060
+    kind: enumerate
+    topic: response-to-high-altitude
+    prompt: Enumerate the chronic adaptations to high altitude (6).
+    points:
+      - Chronic ↑ in ventilation
+      - ↑ Erythropoietin (kidneys) → ↑ Hct and Hb
+      - ↑ 2,3-BPG → right shift of ODC → ↑ O2 release
+      - Cellular changes (↑ mitochondria)
+      - ↑ Renal HCO3− excretion to compensate for respiratory alkalosis (can add acetazolamide)
+      - Chronic hypoxic pulmonary vasoconstriction → pulmonary hypertension, RVH
+    pass: 5
+    src: { page: 688, quote: "Chronic hypoxic pulmonary vasoconstriction → ↑ pulmonary vascular resistance → pulmonary hypertension, right ventricular hypertrophy (RVH)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.061
+    kind: mcq
+    topic: response-to-high-altitude
+    stem: >-
+      A 30-year-old man moves from Cairo to a mining town at 4500 m. After several months, which finding is most
+      likely?
+    options:
+      - Decreased 2,3-BPG with a left-shifted ODC
+      - Increased renal bicarbonate excretion
+      - Decreased erythropoietin
+      - Decreased pulmonary vascular resistance
+      - Decreased number of mitochondria
+    answer: 1
+    why:
+      - "2,3-BPG rises at altitude and shifts the curve right."
+      - "Right. The kidneys excrete more HCO3− to compensate for the chronic respiratory alkalosis (acetazolamide can augment this)."
+      - "Chronic hypoxemia raises EPO, Hct and Hb."
+      - "Chronic hypoxic vasoconstriction raises PVR."
+      - "Mitochondria increase."
+    src: { page: 688, quote: "to compensate for respiratory alkalosis (can augment with acetazolamide)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p688: exercise ----------
+  - id: resp.L03.062
+    kind: card
+    topic: response-to-exercise
+    front: How do PaO2, PaCO2 and venous gases change during exercise?
+    back: PaO2 and PaCO2 are maintained by homeostatic mechanisms; venous PO2 falls (↑ O2 consumption) and venous PCO2 rises (↑ CO2 production).
+    src: { page: 688, quote: "PaO2 and PaCO2 are maintained by homeostatic mechanisms." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.063
+    kind: card
+    topic: response-to-exercise
+    front: What happens to V/Q distribution and the ODC during exercise?
+    back: ↑ HR and SV → ↑ Q̇ → ↑ pulmonary blood flow → V/Q from base to apex becomes more uniform. ↑ CO2 and ↓ pH at tissues shift the ODC right → more O2 offloading.
+    src: { page: 688, quote: "↑ cellular respiration → ↑ CO2 production and ↓ pH at tissues → right shift of ODC → tissue offloading of more O2" }
+    status: unverified
+  - id: resp.L03.064
+    kind: mcq
+    topic: response-to-exercise
+    stem: >-
+      During a maximal treadmill test, a healthy 22-year-old has arterial and mixed venous blood sampled. Compared with
+      rest, which value is most likely unchanged?
+    options:
+      - Venous PO2
+      - Venous PCO2
+      - Arterial PaCO2
+      - Cardiac output
+      - Arteriovenous O2 difference
+    answer: 2
+    why:
+      - "Venous PO2 falls because of ↑ O2 consumption."
+      - "Venous PCO2 rises because of ↑ CO2 production."
+      - "Right. PaO2 and PaCO2 are maintained by homeostatic mechanisms during exercise."
+      - "HR and SV rise, so Q̇ rises."
+      - "The arteriovenous O2 difference widens with ↑ O2 consumption."
+    src: { page: 688, quote: "PaO2 and PaCO2 are maintained by homeostatic mechanisms." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p688: methemoglobin ----------
+  - id: resp.L03.065
+    kind: card
+    topic: methemoglobin
+    front: What is methemoglobin, and how does it cause tissue hypoxia?
+    back: Hb whose iron is oxidized from ferrous (Fe2+, "just the 2 of us") to ferric (Fe3+). Fe3+ has reduced O2 affinity (↓ saturation and content) and also makes the remaining Fe2+ hold O2 tightly (left shift); it has ↑ affinity for cyanide.
+    src: { page: 688, quote: "Oxidized form of Hb (ferric, Fe3+ ) has reduced O2 affinity → tissue hypoxia from ↓ O2 saturation and ↓ O2 content." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.066
+    kind: enumerate
+    topic: methemoglobin
+    prompt: Enumerate the causes of methemoglobinemia listed in First Aid (3).
+    points:
+      - Dapsone
+      - Local anesthetics (eg, benzocaine)
+      - Nitrites (eg, diet or polluted water)
+    pass: 3
+    src: { page: 688, quote: "Dapsone, local anesthetics (eg, benzocaine), and nitrites (eg, from dietary intake or polluted water sources) cause poisoning by oxidizing Fe2+ to Fe3+ ." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.067
+    kind: cloze
+    topic: methemoglobin
+    text: "Methemoglobinemia presents with cyanosis that {{c1::does not improve with supplemental O2}} and {{c2::chocolate}}-colored blood; treat with {{c3::methylene blue}} and vitamin C."
+    src: { page: 688, quote: "may present with cyanosis (does not improve with supplemental O2 ) and chocolate- colored blood." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.068
+    kind: mcq
+    topic: methemoglobin
+    stem: >-
+      A 55-year-old man has a benzocaine spray before an upper endoscopy. Minutes later he is cyanotic; pulse oximetry
+      stays low on 100% O2, PaO2 is 210 mm Hg, and his blood looks chocolate-brown. Which is the best treatment?
+    options:
+      - Hydroxocobalamin
+      - Hyperbaric oxygen
+      - Methylene blue
+      - Sodium nitrite
+      - Naloxone
+    answer: 2
+    why:
+      - "Hydroxocobalamin is for cyanide poisoning."
+      - "Hyperbaric O2 is for severe CO poisoning; extra O2 does not fix Fe3+."
+      - "Right. Benzocaine oxidizes Fe2+ to Fe3+ (methemoglobin); treat with methylene blue (and vitamin C)."
+      - "Nitrites create methemoglobin and would worsen this."
+      - "Naloxone reverses opioids."
+    src: { page: 688, quote: "Methemoglobinemia can be treated with methylene blue and vitamin C." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p689: cyanide vs CO ----------
+  - id: resp.L03.069
+    kind: card
+    topic: cyanide-vs-carbon-monoxide-poisoning
+    front: What do cyanide and CO poisoning share mechanistically?
+    back: Both inhibit complex IV of the ETC (cytochrome c oxidase) → hypoxia that does not fully correct with supplemental O2, and ↑ anaerobic metabolism.
+    src: { page: 689, quote: "Both inhibit aerobic metabolism via inhibition of complex IV of ETC (cytochrome c oxidase) → hypoxia that does not fully correct with supplemental O2 and ↑ anaerobic metabolism." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.070
+    kind: table
+    topic: cyanide-vs-carbon-monoxide-poisoning
+    title: Cyanide vs carbon monoxide
+    columns: [Feature, Cyanide, Carbon monoxide]
+    rows:
+      - [Exposure, "Synthetic product combustion, amygdalin (apricot seeds), ingestion, fires, nitroprusside", "Tobacco smoke, furnaces, space heaters, fires, motor exhaust"]
+      - [Presentation, "Headache, dyspnea, seizure, coma; cherry red skin and retinal venules; bitter almond breath", "Headache, vomiting, confusion, visual disturbance, coma; cherry-red skin with bullae; multiple victims"]
+      - [Labs, "Normal PaO2; ↑ lactate → anion gap metabolic acidosis", "Normal PaO2; ↑ CO-Hb on co-oximetry; bilateral globus pallidus lesions"]
+      - [ODC, "Normal curve; binds cytochrome a3", "Left shift; binds Hb with >200× O2 affinity"]
+      - [Treatment, "Decontamination; hydroxocobalamin, nitrites, sodium thiosulfate (100% O2 ineffective)", "100% O2; hyperbaric O2 if severe"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2], [3, 1], [3, 2], [4, 1], [4, 2]]
+    src: { page: 689, quote: "Normal Pao2 . ↑ lactate → anion gap metabolic acidosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.071
+    kind: enumerate
+    topic: cyanide-vs-carbon-monoxide-poisoning
+    prompt: Enumerate the antidotes that remove cyanide, with how each works (3).
+    points:
+      - Hydroxocobalamin (binds cyanide → cyanocobalamin → renal excretion)
+      - Nitrites (oxidize Hb → methemoglobin → binds cyanide → cyanomethemoglobin)
+      - Sodium thiosulfate (↑ conversion to thiocyanate → renal excretion)
+    pass: 3
+    src: { page: 689, quote: "Hydroxocobalamin (binds cyanide → cyanocobalamin → renal excretion)" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.072
+    kind: cloze
+    topic: cyanide-vs-carbon-monoxide-poisoning
+    text: "CO-Hb half-life is ~{{c1::300}} mins, falling to ~{{c2::80}} mins on 100% O2 and ~{{c3::20}} mins in a hyperbaric O2 chamber."
+    src: { page: 689, quote: "CO-Hb half-life is ~300 mins → ↓ to ~80 mins on 100% O2 → ↓ to ~20 mins in a hyperbaric O2 chamber." }
+    status: unverified
+  - id: resp.L03.073
+    kind: card
+    topic: cyanide-vs-carbon-monoxide-poisoning
+    front: How do you treat suspected combined CO and cyanide poisoning (eg, a fire victim)?
+    back: Give hydroxocobalamin or sodium thiosulfate; avoid nitrates/nitrites so methemoglobin does not rise.
+    src: { page: 689, quote: "If concurrent CO and cyanide poisoning are suspected (eg, in victims of a fire), give hydroxocobalamin or sodium thiosulfate. Avoid nitrates to prevent ↑ methemoglobin." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.074
+    kind: card
+    topic: cyanide-vs-carbon-monoxide-poisoning
+    front: Why does pulse oximetry miss CO poisoning?
+    back: Carboxyhemoglobin cannot be distinguished on pulse oximetry; it needs co-oximetry.
+    src: { page: 689, quote: "↑ carboxyhemoglobin (CO-Hb) on co-oximetry (cannot be distinguished with pulse oximetry)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.075
+    kind: mcq
+    topic: cyanide-vs-carbon-monoxide-poisoning
+    stem: >-
+      In winter, a mother and her two children are brought in with headache, vomiting and confusion. They used a
+      charcoal heater in a closed room. Pulse oximetry reads 98%. Which MRI finding is classically associated?
+    options:
+      - Bilateral globus pallidus lesions
+      - Mammillary body atrophy
+      - Caudate atrophy
+      - Periventricular white matter plaques
+      - Bilateral temporal lobe hemorrhages
+    answer: 0
+    why:
+      - "Right. CO poisoning (multiple victims, heater) is classically associated with bilateral globus pallidus lesions; pulse oximetry cannot detect CO-Hb."
+      - "Mammillary body atrophy suggests Wernicke-Korsakoff."
+      - "Caudate atrophy suggests Huntington disease."
+      - "Periventricular plaques suggest multiple sclerosis."
+      - "Temporal hemorrhages suggest HSV encephalitis."
+    src: { page: 689, quote: "Classically associated with bilateral globus pallidus lesions on MRI A (although, rarely, these lesions can be seen with cyanide toxicity)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.076
+    kind: mcq
+    topic: cyanide-vs-carbon-monoxide-poisoning
+    stem: >-
+      A 60-year-old man in a hypertensive emergency receives a prolonged nitroprusside infusion. He becomes confused
+      with flushed skin. ABG shows normal PaO2 and an anion gap metabolic acidosis with high lactate. Which mechanism
+      explains his acidosis?
+    options:
+      - CO binding hemoglobin with 200× the affinity of O2
+      - Inhibition of cytochrome c oxidase in complex IV
+      - Oxidation of Fe2+ to Fe3+ in hemoglobin
+      - Hypoventilation with CO2 retention
+      - Right shift of the ODC from ↑ 2,3-BPG
+    answer: 1
+    why:
+      - "That is CO poisoning; nitroprusside releases cyanide."
+      - "Right. Nitroprusside can cause cyanide toxicity; cyanide binds cytochrome a3 in complex IV, so O2 cannot be used → ↑ lactate and anion gap acidosis."
+      - "That is methemoglobinemia, which gives chocolate blood and low saturation."
+      - "PaO2 is normal and the acidosis is metabolic."
+      - "Cyanide leaves the curve normal."
+    src: { page: 689, quote: "Risk of cyanide toxicity with use of nitroprusside in hypertensive emergencies." }
+    status: unverified
+    tags: [high-yield]

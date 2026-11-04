@@ -25,7 +25,7 @@ pub struct OwnCard {
     pub id: String,
     pub front: String,
     pub back: String,
-    /// The book lecture it belongs with (`hb.L03`), for tags and filters.
+    /// The book lecture it belongs with (`cvs.L03`), for tags and filters.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub lecture: Option<String>,
     /// Printed book page, when he noted one.
@@ -157,12 +157,12 @@ mod tests {
     #[test]
     fn own_items_are_approved_cards_with_an_own_tag() {
         let mut c = card("own.a", 1);
-        c.lecture = Some("hb.L03".into());
+        c.lecture = Some("cvs.L03".into());
         let item = c.item();
         assert_eq!(item.status, Status::Approved);
         assert_eq!(item.body.kind(), "card");
-        assert_eq!(item.tags, vec!["own".to_string(), "hb.L03".to_string()]);
-        assert!(is_own(&item.id) && !is_own("hb.L01.001"));
+        assert_eq!(item.tags, vec!["own".to_string(), "cvs.L03".to_string()]);
+        assert!(is_own(&item.id) && !is_own("cvs.L04.001"));
     }
 
     #[test]
@@ -188,14 +188,14 @@ mod tests {
     #[test]
     fn shared_text_becomes_a_draft() {
         let (d, trimmed) = draft_from_shared(
-            "\n  SAAG ≥ 1.1 g/dL\nmeans portal hypertension.\n",
+            "\n  BNP ≥ 100 pg/mL\nsuggests heart failure.\n",
             Some("Chrome"),
             "own.x".into(),
             5,
         );
         assert!(!trimmed);
-        assert_eq!(d.front, "SAAG ≥ 1.1 g/dL");
-        assert_eq!(d.back, "SAAG ≥ 1.1 g/dL\nmeans portal hypertension.");
+        assert_eq!(d.front, "BNP ≥ 100 pg/mL");
+        assert_eq!(d.back, "BNP ≥ 100 pg/mL\nsuggests heart failure.");
         assert_eq!(d.source.as_deref(), Some("Chrome"));
         // One line only: no front to suggest.
         assert_eq!(draft_from_shared("one line", None, "own.y".into(), 5).0.front, "");

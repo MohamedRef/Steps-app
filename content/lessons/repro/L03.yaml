@@ -1,0 +1,530 @@
+schema: steps.lesson/v1
+lecture: repro.L03
+lessons:
+  - id: repro.L03.lesson1
+    title: "الحيوان المنوي والبويضة والـ estrogen"
+    hook: "البويضة نايمة من وانت جنين لحد ما تتبوّض. اعرف هي واقفة فين، والـ estrogen بيعمل إيه"
+    minutes: 9
+    pages: [647, 649]
+    topics: [spermatogenesis, estrogen, oogenesis, ovulation]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Spermatogenesis"
+        text: |-
+          بتبدأ ==في البلوغ== من الـ spermatogonia، جوه الـ seminiferous tubules، وبتاخد **شهرين**.
+
+          الـ spermatids بتعمل **spermiogenesis**: ترمي الـ cytoplasm وتلبس ==acrosomal cap== وتطلّع ديل، فتبقى spermatozoa.
+
+          الكتاب بيقولها: «Gonium» is going to be a sperm، و «zoon» is «zooming» to egg.
+        page: 647
+        quote: "Spermatogenesis Begins at puberty with spermatogonia. Full development takes 2 months. Occurs in seminiferous tubules. Produces spermatids that undergo spermiogenesis (loss of cytoplasmic contents, gain of acrosomal cap) to form mature spermatozoa."
+      - kind: figure
+        title: "N و C في كل خطوة"
+        svg: |-
+          <svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rp3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="5" y="30" width="62" height="44" rx="6"/>
+            <text x="10" y="48" class="t-sm">gonium</text>
+            <text x="10" y="66" class="t-sm t-b">2N 2C</text>
+            <rect class="fg-acc" x="80" y="30" width="62" height="44" rx="6"/>
+            <text x="85" y="48" class="t-sm">1° cyte</text>
+            <text x="85" y="66" class="t-sm t-b">2N 4C</text>
+            <rect class="fg-good" x="155" y="30" width="62" height="44" rx="6"/>
+            <text x="160" y="48" class="t-sm">2° cyte</text>
+            <text x="160" y="66" class="t-sm t-b">1N 2C</text>
+            <rect class="fg-good" x="230" y="30" width="62" height="44" rx="6"/>
+            <text x="235" y="48" class="t-sm">spermatid</text>
+            <text x="235" y="66" class="t-sm t-b">1N 1C</text>
+            <line class="fg-arrow" x1="67" y1="52" x2="78" y2="52" marker-end="url(#rp3a)"/>
+            <line class="fg-arrow" x1="142" y1="52" x2="153" y2="52" marker-end="url(#rp3a)"/>
+            <line class="fg-arrow" x1="217" y1="52" x2="228" y2="52" marker-end="url(#rp3a)"/>
+            <text x="60" y="100" class="t-sm t-mut">replication</text>
+            <text x="135" y="100" class="t-sm t-mut">meiosis I</text>
+            <text x="215" y="100" class="t-sm t-mut">meiosis II</text>
+            <text x="300" y="56" class="t-sm">→ sperm</text>
+          </svg>
+        caption: "الـ replication بيضاعف الـ C (4C). الـ meiosis I بيقسم الـ chromosomes فيبقى haploid (1N 2C). الـ meiosis II بيقسم الـ chromatids (1N 1C). ونفس الأرقام بالظبط في البويضة."
+        alt: "Spermatogonium 2N 2C, then primary spermatocyte 2N 4C after replication, secondary spermatocyte 1N 2C after meiosis I, and spermatid 1N 1C after meiosis II."
+        page: 647
+        quote: "Spermatogonium Diploid (2N, 2C) 1° spermatocyte Diploid (2N, 4C) 2° spermatocyte Haploid (1N, 2C) Spermatid Haploid (1N, 1C)"
+      - kind: aside
+        tone: trap
+        text: "الاتنين infertile، بس لسبب مختلف: في ==Kartagener== الديل مش بيتحرك (ciliary dyskinesia). في ==cystic fibrosis== الديل سليم، بس الـ vas deferens مش موجود."
+        page: 647
+        quote: "Tail mobility impaired in ciliary dyskinesia/ Kartagener syndrome → infertility. Tail mobility normal in cystic fibrosis (in CF, absent vas deferens → infertility)."
+      - kind: explain
+        title: "البويضة: وقفتين"
+        text: |-
+          الـ 1° oocytes بتبدأ الـ meiosis I ==وانتي لسه جنين==، وبتقف:
+
+          - **Meiosis I** واقف في ==prophase I== (one) لسنين، لحد الـ ovulation.
+          - **Meiosis II** واقف في **metaphase II** (two) لحد الـ fertilization.
+
+          ولو مفيش fertilization في يوم، الـ 2° oocyte بيموت.
+        page: 649
+        quote: "Meiosis I is arrested in prophase I (one) for years until ovulation (1° oocytes). Meiosis II is arrested in metaphase II (two) until fertilization (2° oocytes)."
+      - kind: check
+        question: "An ovulated oocyte has extruded its first polar body. Where is it arrested, and what releases it?"
+        options:
+          - "Metaphase II, released by fertilization"
+          - "Prophase I, released by ovulation"
+          - "Metaphase I, released by the LH surge"
+          - "Prophase II, released by implantation"
+        answer: 0
+        why:
+          - "صح: الـ 2° oocyte واقف في metaphase II (two) لحد الـ fertilization."
+          - "Prophase I ده الـ 1° oocyte، وبيخلص قبل الـ ovulation على طول."
+          - "Metaphase I مش نقطة وقوف في الكتاب."
+          - "الـ implantation بعد الـ fertilization بأيام."
+        page: 649
+        quote: "Meiosis II is arrested in metaphase II (two) until fertilization (2° oocytes)."
+      - kind: explain
+        title: "الـ estrogen: 3 أنواع"
+        text: |-
+          - **Estradiol** من الـ ovary (اتنين ovaries = estra==di==ol). ==الأقوى==.
+          - **Estrone** من الـ adipose بالـ aromatization.
+          - **Estriol** من الـ placenta. الأضعف.
+
+          الترتيب: estradiol > estrone > estriol. وفي الحمل الـ estriol بيعلى ==1000 مرة==، وده مؤشر على إن الجنين كويس.
+        page: 648
+        quote: "Ovary (estradiol), placenta (estriol), adipose tissue (estrone via aromatization). Potency: estradiol > estrone > estriol. Estradiol is produced from 2 ovaries."
+      - kind: figure
+        title: "الـ two-cell model"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rp3b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="10" y="40" width="150" height="100" rx="10"/>
+            <text x="50" y="30" class="t-sm t-b">Theca cell</text>
+            <text x="20" y="62" class="t-sm t-acc">LH →</text>
+            <text x="20" y="85" class="t-sm">Cholesterol</text>
+            <text x="20" y="105" class="t-sm t-mut">desmolase ↓</text>
+            <text x="20" y="125" class="t-sm">Androstenedione</text>
+            <rect class="fg-good" x="200" y="40" width="150" height="100" rx="10"/>
+            <text x="235" y="30" class="t-sm t-b">Granulosa cell</text>
+            <text x="210" y="62" class="t-sm t-good">FSH →</text>
+            <text x="210" y="85" class="t-sm">Androstenedione</text>
+            <text x="210" y="105" class="t-sm t-mut">aromatase ↓</text>
+            <text x="210" y="125" class="t-sm t-b">Estradiol</text>
+            <line class="fg-arrow" x1="150" y1="122" x2="205" y2="82" marker-end="url(#rp3b)"/>
+          </svg>
+        caption: "الـ theca (بالـ LH) بتعمل الـ androgen، والـ granulosa (بالـ FSH) بتحوله estrogen بالـ aromatase. نفس الفكرة في الخصية: Leydig ≈ theca، و Sertoli ≈ granulosa."
+        alt: "Theca cell under LH converts cholesterol to androstenedione by desmolase; androstenedione moves to the granulosa cell, where FSH-induced aromatase makes estradiol."
+        page: 648
+        quote: "Granulosa cell Theca cell LH LHR FSHR cAMP cAMP Cholesterol Cholesterol Androstenedione Androstenedione Estrone Aromatase Desmolase Estrogen FSH Estradiol"
+      - kind: explain
+        title: "الـ estrogen بيعمل إيه"
+        text: |-
+          - بيبني: الـ genitalia، الصدر، توزيع الدهن، الـ follicle، والـ ==endometrial proliferation==، وبيزوّد excitability الـ myometrium.
+          - بيزوّد receptors بتاعته وبتاعة الـ LH والـ progesterone.
+          - بيقفل الـ FSH والـ LH (feedback)، **وبعدين** يعمل ==LH surge==.
+          - بيزوّد إفراز الـ prolactin بس بيقلل تأثيره على الصدر.
+          - بيزوّد الـ SHBG والـ transport proteins، و HDL يعلى و LDL يقل.
+
+          والـ receptors بتاعته في الـ **cytoplasm**، ولما يمسكها تدخل الـ nucleus.
+        page: 648
+        quote: "Upregulation of estrogen, LH, and progesterone receptors; feedback inhibition of FSH and LH, then LH surge; stimulation of prolactin secretion, ↓ prolactin action on breasts. ↑ transport proteins, SHBG; ↑ HDL; ↓ LDL."
+      - kind: reveal
+        prompt: "الـ estrogen بيقفل الـ LH. طب إزاي هو نفسه اللي بيعمل الـ LH surge؟"
+        answer: "لما الـ estrogen يوصل لمستوى **عالي** في نص الدورة، الـ feedback بيتقلب ==positive== لفترة قصيرة، فالـ LH يطلع فجأة (surge) ← الـ follicle ينفجر ← ovulation."
+        page: 649
+        quote: "Estrogen normally inhibits LH release, but high estrogen at midcycle transiently stimulates LH release → LH surge → ovulation."
+      - kind: aside
+        tone: exam
+        text: "بنت عندها ألم خفيف في جنب واحد في ==نص الدورة== بالظبط، مع شوية free fluid؟ ده **mittelschmerz** («middle hurts»): دم بسيط من الـ follicle بيهيّج الـ peritoneum. ممكن يتلخبط مع الـ appendicitis."
+        page: 649
+        quote: "Mittelschmerz (“middle hurts”)—pain with ovulation. Associated with peritoneal irritation from normal bleeding upon follicular rupture. Typically unilateral and mild, but can mimic acute appendicitis."
+      - kind: try
+        items: [repro.L03.003, repro.L03.004, repro.L03.006, repro.L03.015, repro.L03.018]
+    recap:
+      - "Spermatogenesis من البلوغ، شهرين، والـ spermiogenesis بيعمل acrosome وديل."
+      - "Kartagener ديل واقف. CF مفيش vas deferens."
+      - "البويضة واقفة prophase I لحد الـ ovulation، و metaphase II لحد الـ fertilization."
+      - "Estradiol (ovary) > estrone (adipose) > estriol (placenta). Theca بالـ LH، granulosa بالـ FSH والـ aromatase."
+      - "Estrogen عالي في نص الدورة ← LH surge ← ovulation."
+    practice: [repro.L03.001, repro.L03.002, repro.L03.003, repro.L03.004, repro.L03.005, repro.L03.006, repro.L03.007, repro.L03.008, repro.L03.009, repro.L03.010, repro.L03.011, repro.L03.012, repro.L03.013, repro.L03.014, repro.L03.015, repro.L03.016, repro.L03.017, repro.L03.018, repro.L03.019, repro.L03.020]
+  - id: repro.L03.lesson2
+    title: "الدورة الشهرية والنزيف والحمل من أوله"
+    hook: "ليه الدورة بتتأخر بس الـ ovulation دايماً قبلها بـ 14 يوم؟ ومن إمتى اختبار الحمل يطلع موجب؟"
+    minutes: 8
+    pages: [650, 651]
+    topics: [menstrual-cycle, abnormal-uterine-bleeding, pregnancy]
+    status: unverified
+    steps:
+      - kind: figure
+        title: "الدورة في 28 يوم"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="20" y1="150" x2="340" y2="150"/>
+            <line class="fg-thin" x1="180" y1="20" x2="180" y2="150"/>
+            <text x="15" y="168" class="t-sm">day 0</text>
+            <text x="165" y="168" class="t-sm">day 14</text>
+            <text x="315" y="168" class="t-sm">day 28</text>
+            <text x="150" y="16" class="t-sm t-b">ovulation</text>
+            <path class="fg-arrow-acc" d="M20 130 C 100 125, 140 60, 170 45 C 185 70, 230 110, 340 130" fill="none" stroke-width="2"/>
+            <text x="70" y="110" class="t-sm t-acc">estrogen</text>
+            <path class="fg-arrow-bad" d="M20 140 C 160 140, 175 140, 178 30 C 182 140, 200 140, 340 140" fill="none" stroke-width="2"/>
+            <text x="195" y="45" class="t-sm t-bad">LH surge</text>
+            <path class="fg-arrow" d="M180 140 C 220 140, 240 70, 270 70 C 300 70, 320 130, 340 138" fill="none" stroke-width="2"/>
+            <text x="250" y="62" class="t-sm">progesterone</text>
+            <text x="40" y="82" class="t-sm t-mut">follicular / proliferative</text>
+            <text x="200" y="100" class="t-sm t-mut">luteal / secretory</text>
+          </svg>
+        caption: "قبل الـ ovulation الـ estrogen بيعلى ويبني البطانة. في النص الـ LH بيعمل surge. بعدها الـ corpus luteum بيعمل progesterone يجهّز البطانة للـ implantation، ولمدة ثابتة 14 يوم."
+        alt: "A 28-day timeline with ovulation at day 14. Estrogen rises before ovulation, LH spikes at midcycle, and progesterone rises in the second half. The first half is follicular and proliferative; the second is luteal and secretory."
+        page: 650
+        quote: "Follicular phase—follicular development; late stages are stimulated by FSH; can fluctuate in length. Luteal phase—corpus luteum formation from follicular remnants; stimulated by LH; lasts a fixed 14 days."
+      - kind: table
+        title: "الـ ovary والـ uterus مع بعض"
+        columns: ["", "Before ovulation", "After ovulation"]
+        rows:
+          - ["Ovary", "Follicular phase (FSH), variable length", "Luteal phase (LH), fixed 14 days"]
+          - ["Uterus", "Proliferative (estrogen): straight, narrow glands", "Secretory (progesterone): tortuous, dilated glands"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2]]
+        page: 650
+        quote: "Proliferative phase—endometrial development; stimulated by estrogen. Straight, narrow endometrial glands. Secretory phase—endometrial preparation for implantation; stimulated by progesterone. Tortuous, dilated endometrial glands."
+      - kind: check
+        question: "A woman's cycles vary from 26 to 34 days. Which phase varies?"
+        options:
+          - "The follicular phase"
+          - "The luteal phase"
+          - "Both equally"
+          - "Only menses"
+        answer: 0
+        why:
+          - "صح: الـ follicular بيتغير، والـ luteal ثابت 14 يوم، فالـ ovulation دايماً قبل الدورة الجاية بـ 14 يوم."
+          - "الـ luteal ثابت عشان الـ corpus luteum عمره محدود."
+          - "الكتاب بيقول الـ luteal ثابت."
+          - "أيام الـ menses قليلة وجزء من الـ follicular phase."
+        page: 650
+        quote: "Follicular phase—follicular development; late stages are stimulated by FSH; can fluctuate in length."
+      - kind: mnemonic
+        word: "PALMCOEIN"
+        parts:
+          - { key: "P", text: "Polyp" }
+          - { key: "A", text: "Adenomyosis" }
+          - { key: "L", text: "Leiomyoma" }
+          - { key: "M", text: "Malignancy/hyperplasia" }
+          - { key: "C", text: "Coagulopathy" }
+          - { key: "O", text: "Ovulatory" }
+          - { key: "E", text: "Endometrial" }
+          - { key: "I", text: "Iatrogenic" }
+          - { key: "N", text: "Not yet classified" }
+        hook: "PALM structural (تشوفها في الـ ultrasound)، و COEIN nonstructural"
+        page: 651
+        quote: "Causes (PALM-COEIN): ▪ Structural: Polyp, Adenomyosis, Leiomyoma, Malignancy/hyperplasia ▪ Nonstructural: Coagulopathy, Ovulatory, Endometrial, Iatrogenic, Not yet classified"
+      - kind: aside
+        tone: trap
+        text: "كلمات زي menorrhagia و metrorrhagia و polymenorrhea و oligomenorrhea و dysfunctional uterine bleeding ==مش مستخدمة دلوقتي==. الاسم الصح abnormal uterine bleeding، يعني أي خروج عن الطبيعي في الكمية أو المدة أو التكرار أو الانتظام، أو نزيف بين الدورتين."
+        page: 651
+        quote: "Terms such as dysfunctional uterine bleeding, menorrhagia, metrorrhagia, polymenorrhea, and oligomenorrhea are no longer recommended."
+      - kind: explain
+        title: "الحمل من أول يوم"
+        text: |-
+          - الـ **fertilization** غالباً في الـ ==ampulla== (أعلى الـ fallopian tube)، في خلال يوم من الـ ovulation.
+          - الـ **implantation** بعد ==6 أيام==.
+          - الـ syncytiotrophoblast يطلّع **hCG**: يبان في الدم بعد **أسبوع** من الـ fertilization، وفي اختبار البيت بعد **أسبوعين**.
+        page: 651
+        quote: "Fertilization (conception) most commonly occurs in upper end of fallopian tube (the ampulla). Occurs within 1 day of ovulation. Implantation in the uterine wall occurs 6 days after fertilization."
+      - kind: explain
+        title: "أعمار وأرقام"
+        text: |-
+          - **Embryonic age**: من الـ fertilization، بنستخدمه في الـ embryology.
+          - **Gestational age**: من ==أول يوم في آخر دورة==، وده اللي بنستخدمه في العيادة. (فهو أكبر من الـ embryonic بأسبوعين تقريباً.)
+          - **Gravida**: عدد مرات الحمل.
+          - **Para**: عدد مرات الحمل اللي وصلت ==20 أسبوع أو أكتر== (التوأم يتحسب مرة).
+        page: 651
+        quote: "Embryonic/developmental age—time since fertilization. Used in embryology. Gestational age—time since first day of last menstrual period. Used clinically."
+      - kind: check
+        question: "A pregnant woman had a miscarriage at 9 weeks, twins at 34 weeks and a term baby. What is her gravida/para?"
+        options:
+          - "G4 P2"
+          - "G4 P3"
+          - "G3 P2"
+          - "G5 P3"
+        answer: 0
+        why:
+          - "صح: 4 حمل (منهم الحالي)، و 2 وصلوا 20 أسبوع (التوأم حمل واحد)."
+          - "الـ para بيعد الحمل مش الأطفال."
+          - "الحمل الحالي بيتحسب في الـ gravida."
+          - "الـ gravida بيعد الحمل مش الأجنة."
+        page: 651
+        quote: "Gravidity (“gravida”)—number of pregnancies. Parity (“para”)—number of pregnancies reaching ≥20 weeks of gestation."
+      - kind: try
+        items: [repro.L03.021, repro.L03.026, repro.L03.029, repro.L03.030, repro.L03.031]
+    recap:
+      - "Follicular (FSH، proliferative، estrogen) بيتغير. Luteal (LH، secretory، progesterone) ثابت 14 يوم."
+      - "AUB = PALM (structural) + COEIN (nonstructural)."
+      - "Fertilization في الـ ampulla في خلال يوم، implantation بعد 6 أيام، hCG في الدم بعد أسبوع وفي البول بعد أسبوعين."
+      - "Gestational age من آخر دورة. Para = حمل وصل ≥20 أسبوع."
+    practice: [repro.L03.021, repro.L03.022, repro.L03.023, repro.L03.024, repro.L03.025, repro.L03.026, repro.L03.027, repro.L03.028, repro.L03.029, repro.L03.030, repro.L03.031, repro.L03.033]
+  - id: repro.L03.lesson3
+    title: "هرمونات الحمل، تغيّرات الجسم، والطفل بعد الولادة"
+    hook: "ليه الحامل عندها سكر في البول و creatinine واطي وده طبيعي؟ وليه اللبن ما بينزلش غير بعد الولادة؟"
+    minutes: 10
+    pages: [651, 653]
+    topics: [pregnancy, physiologic-changes-in-pregnancy, placental-hormones, apgar-score, neonatal-birth-weight, lactation]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ hCG"
+        text: |-
+          بيتعمل في الـ syncytiotrophoblast، وبيحافظ على الـ ==corpus luteum== عشان يعمل progesterone في الـ 1st trimester، لحد ما الـ placenta تستلم (~10-12 أسبوع).
+
+          بيشارك الـ TSH والـ LH والـ FSH في الـ **α-subunit** (والـ β خاص بيه)، فهو ==TSH-like==: T4 و T3 يعلوا والـ TSH يقل.
+
+          بيوصل لأعلى مستوى في **8-10 أسابيع** (الهرمون الوحيد اللي بيقل بعد كده). عالي في التوائم وفي الـ hyperemesis gravidarum، وواطي في الـ ectopic أو الحمل اللي بيفشل.
+        page: 652
+        quote: "Shares α-subunit with TSH/LH/FSH; β unique; TSH-like → ↑ T4/↑ T3, ↓ TSH peaks ~8-10 weeks; ↑ with multiple gestations, ↓ with ectopic/failing pregnancy; ↑ levels associated with hyperemesis gravidarum."
+      - kind: explain
+        title: "الـ hPL: الجنين بياخد السكر الأول"
+        text: |-
+          الـ **human placental lactogen** شبه الـ GH والـ PRL. بيعمل ==insulin resistance== و lipolysis عند الأم، فيفضل glucose و FFA أكتر للجنين. البنكرياس بتاع الأم يعوّض ويطلّع insulin أكتر.
+
+          لو الـ β-cells ==مش قادرة تعوّض== يبقى **GDM**. والـ hPL بيكبر مع حجم الـ placenta (أعلى في التوائم)، وبيساعد الصدر يكبر مع الـ estrogen والـ progesterone.
+        page: 652
+        quote: "GH/PRL-like; ↑ maternal Lipolysis/insulin resistance → ↑ glucose/FFA delivery to fetus → ↑ maternal insulin secretion; predisposes to GDM when β-cell reserve limited."
+      - kind: explain
+        title: "الـ progesterone: حارس الحمل"
+        text: |-
+          الـ corpus luteum بيعمله أول **10 أسابيع**، وبعدين الـ placenta.
+
+          - بيحافظ على الـ endometrium (decidualization).
+          - بيهدّي الـ myometrium فيمنع الانقباضات (==pregnancy protector==).
+          - بيتقّل الـ cervical mucus، وبيعلّي الحرارة.
+          - مستواه العالي ==بيمنع اللبن== قبل الولادة، فاللبن ينزل لما يقع بعدها.
+        page: 652
+        quote: "Maintains endometrium/decidualization; ↓ myometrial excitability → prevents contractions (pregnancy protector). Thickens cervical mucus; ↑ body temperature High levels inhibit lactation antepartum → milk produced postpartum when ↓ progesterone."
+      - kind: check
+        question: "At 9 weeks, a woman with twins has severe vomiting, a raised free T4 and suppressed TSH, without goiter. Why?"
+        options:
+          - "hCG acting TSH-like"
+          - "Graves disease"
+          - "Estrogen raising TBG"
+          - "hPL causing insulin resistance"
+        answer: 0
+        why:
+          - "صح: الـ hCG بيشارك الـ α-subunit مع الـ TSH، وعالي في التوائم وفي 8-10 أسابيع، ومرتبط بالـ hyperemesis."
+          - "مفيش goiter ولا عين، والصورة ماشية مع الـ hCG."
+          - "الـ TBG بيعلّي الـ total T4 مش الـ free، وما بيقفلش الـ TSH."
+          - "الـ hPL للسكر والدهون."
+        page: 652
+        quote: "Shares α-subunit with TSH/LH/FSH; β unique; TSH-like → ↑ T4/↑ T3, ↓ TSH"
+      - kind: explain
+        title: "تغيّرات طبيعية ما تتخضّش منها"
+        text: |-
+          - **Renal**: الـ GFR يعلى، فالـ BUN والـ ==creatinine يقلّوا==. glucosuria و proteinuria خفيفة، و hydronephrosis أوضح على اليمين.
+          - **CVS**: الـ CO يعلى، الـ HR يعلى آخر الحمل، و edema.
+          - **Resp**: ==mild respiratory alkalosis==.
+          - **Heme**: anemia dilutional (البلازما بتزيد أكتر من الـ RBCs)، و ==hypercoagulable==، ومحتاجة micronutrients أكتر.
+          - **Endocrine**: insulin resistance، pituitary أكبر، و TBG و CBG و SHBG يعلوا.
+          - **GI**: constipation و GERD و gallstones. **Skin**: melasma و linea nigra و striae و palmar erythema و varicose veins. **MSK**: lordosis و joint laxity.
+        page: 651
+        quote: "Renal ↑ GFR (↓ BUN and ↓ creatinine) Mild glucosuria, proteinuria Hydronephrosis and hydroureter (more prominent on the right)"
+      - kind: sort
+        prompt: "ده طبيعي في الحمل ولا لأ؟"
+        bins: ["Normal in pregnancy", "Not expected"]
+        cards:
+          - { text: "↓ creatinine", bin: 0 }
+          - { text: "Mild respiratory alkalosis", bin: 0 }
+          - { text: "Hypercoagulable state", bin: 0 }
+          - { text: "↑ TBG", bin: 0 }
+          - { text: "↓ GFR", bin: 1 }
+          - { text: "Respiratory acidosis", bin: 1 }
+          - { text: "Right hydronephrosis", bin: 0 }
+        why: "الـ GFR بيعلى مش بيقل، والتنفس بيزيد فالـ CO2 يقل (alkalosis مش acidosis)."
+        page: 651
+        quote: "Mild respiratory alkalosis Respiratory"
+      - kind: table
+        title: "الـ Apgar"
+        columns: ["Sign", "2", "1", "0"]
+        rows:
+          - ["Appearance", "Pink", "Extremities blue", "Pale or blue"]
+          - ["Pulse", "≥100", "<100", "None"]
+          - ["Grimace", "Cries and pulls away", "Grimace or weak cry", "No response"]
+          - ["Activity", "Active movement", "Arms, legs flexed", "None"]
+          - ["Respiration", "Strong cry", "Slow, irregular", "None"]
+        hide: [[1, 1], [1, 2], [3, 2], [4, 2]]
+        page: 652
+        quote: "Appearance Pink Extremities blue Pale or blue Pulse ≥ 100 bpm < 100 bpm No pulse"
+      - kind: explain
+        title: "Apgar ووزن الطفل"
+        text: |-
+          الـ **Apgar** من 10، بيتعمل عند ==1 و 5 دقايق==. لو فضل واطي بعد كده، احتمال long-term neurologic damage يزيد.
+
+          - **Low birth weight** < 2500 g: من الـ prematurity أو الـ FGR، ومعاه ==SIDS== و morbidity أكتر.
+          - **Macrosomia** > 4000 g: وراثي، أو الأم سمينة أو عندها diabetes، وخطره ==shoulder dystocia==.
+        page: 652
+        quote: "Assessment of newborn vital signs following delivery via a 10-point scale evaluated at 1 minute and 5 minutes."
+      - kind: explain
+        title: "اللبن"
+        text: |-
+          بعد ما الـ placenta تخرج، الـ estrogen والـ progesterone يقعوا فجأة ← الـ ==prolactin يتحرّر== ← اللبن يبدأ. والرضاعة نفسها لازمة عشان يستمر: الأعصاب ← oxytocin و prolactin.
+
+          - **Prolactin**: يعمل اللبن ويحافظ عليه، ويقلل الـ reproductive function.
+          - **Oxytocin**: ==milk letdown==، وكمان انقباض الرحم.
+
+          لبن الأم فيه immunoglobulins (أغلبها **IgA**) و macrophages و lymphocytes، بيقلل العدوى، و asthma و allergies و diabetes و obesity. الرضيع على لبن الأم بس يحتاج ==vitamin D== (± iron). وللأم: أقل breast و ovarian cancer.
+        page: 653
+        quote: "After parturition and delivery of placenta, rapid ↓ in estrogen and progesterone disinhibits prolactin → initiation of lactation. Suckling is required to maintain milk production and ejection, since ↑ nerve stimulation → ↑ oxytocin and prolactin."
+      - kind: check
+        question: "A 4-month-old exclusively breastfed baby gets no supplements. What should be added?"
+        options:
+          - "Vitamin D"
+          - "Vitamin A"
+          - "Fluoride"
+          - "Nothing; breast milk is complete"
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول الرضيع على لبن الأم بس ياخد vitamin D (± iron)."
+          - "Vitamin A مش الـ supplement الروتيني في الكتاب."
+          - "Fluoride مش مذكور هنا."
+          - "لبن الأم مثالي بس ناقصه vitamin D."
+        page: 653
+        quote: "Exclusively breastfed infants should get vitamin D"
+      - kind: try
+        items: [repro.L03.034, repro.L03.038, repro.L03.041, repro.L03.044, repro.L03.049]
+    recap:
+      - "hCG يحافظ على الـ corpus luteum، TSH-like، أعلى في 8-10 أسابيع وفي التوائم."
+      - "hPL ← insulin resistance ← GDM لو الـ β-cells ضعيفة."
+      - "Progesterone يمسك الحمل ويمنع اللبن لحد الولادة."
+      - "طبيعي: GFR عالي و creatinine واطي، respiratory alkalosis، dilutional anemia، hypercoagulable."
+      - "Apgar عند 1 و 5 دقايق. <2500 g ← SIDS، >4000 g ← shoulder dystocia."
+      - "Prolactin يعمل اللبن، oxytocin ينزّله. Vitamin D للرضيع."
+    practice: [repro.L03.032, repro.L03.034, repro.L03.035, repro.L03.036, repro.L03.037, repro.L03.038, repro.L03.039, repro.L03.040, repro.L03.041, repro.L03.042, repro.L03.043, repro.L03.044, repro.L03.045, repro.L03.046, repro.L03.047, repro.L03.048, repro.L03.049, repro.L03.050, repro.L03.051, repro.L03.052, repro.L03.053]
+  - id: repro.L03.lesson4
+    title: "سن اليأس، الـ androgens، والبلوغ بدري أو متأخر"
+    hook: "الـ FSH العالي بيقولك المبيض خلص. والـ GnRH بيشتغل بالـ pulses، ولو خليته مستمر يقفل كل حاجة"
+    minutes: 10
+    pages: [653, 654]
+    topics: [menopause, androgens, tanner-stages, precocious-puberty, delayed-puberty, gnrh-pulsatility]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Menopause"
+        text: |-
+          التشخيص: ==12 شهر من غير دورة==. السبب: الـ follicles بتخلص مع السن، فالـ estrogen يقل. متوسط السن **51** (أبدر في المدخنين)، وقبلها 4-5 سنين دورات مش منتظمة.
+
+          بعدها مصدر الـ estrogen (estrone) هو تحويل الـ androgens في الأطراف، والـ androgens العالية ممكن تعمل hirsutism.
+        page: 653
+        quote: "Diagnosed by amenorrhea for 12 months. ↓ estrogen production due to age-linked decline in number of ovarian follicles. Average age at onset is 51 years (earlier in people who smoke tobacco)."
+      - kind: reveal
+        prompt: "إيه الـ lab اللي specific لسن اليأس، وليه؟"
+        answer: "**↑↑ FSH**. الـ estrogen وقع، فالـ negative feedback على الـ FSH راح. (والـ LH بيعلى من غير surge، والـ GnRH بيعلى.)"
+        page: 653
+        quote: "↑↑ FSH is specific for menopause (loss of negative feedback on FSH due to ↓ estrogen)."
+      - kind: mnemonic
+        word: "HAVOCS"
+        parts:
+          - { key: "H", text: "Hot flashes (most common)" }
+          - { key: "A", text: "Atrophy of the" }
+          - { key: "V", text: "Vagina" }
+          - { key: "O", text: "Osteoporosis (↑ osteoclast activity)" }
+          - { key: "C", text: "Coronary artery disease" }
+          - { key: "S", text: "Sleep disturbances" }
+        hook: "سن اليأس بيعمل havoc"
+        page: 653
+        quote: "Causes HAVOCS: Hot flashes (most common), Atrophy of the Vagina, Osteoporosis (↑ osteoclast activity), Coronary artery disease, Sleep disturbances."
+      - kind: aside
+        tone: exam
+        text: "الـ HRT بيعالج الأعراض، بس معاه خطر breast و endometrial cancer و CVD و stroke و thromboembolism. ولو سن اليأس جه ==قبل 40== يبقى ovarian insufficiency (premature ovarian failure)، ممكن بعد chemotherapy أو radiation."
+        page: 653
+        quote: "Menopause before age 40 suggests ovarian insufficiency (premature ovarian failure); may occur in females who have received chemotherapy and/or radiation therapy."
+      - kind: explain
+        title: "الـ androgens"
+        text: |-
+          - من الخصية: **DHT** و **testosterone**. من الـ adrenal: **DHEA** و **androstenedione**.
+          - القوة: ==DHT > testosterone > androstenedione > DHEA==.
+
+          **Testosterone**: الـ internal genitalia (epididymis و vas و seminal vesicles، ماعدا الـ prostate)، الـ growth spurt (penis، عضلات، RBCs، sperm)، الصوت، الـ libido، وبيقفل الـ epiphyses **عن طريق الـ estrogen** اللي بيتحول منه.
+
+          **DHT**: بدري الـ penis والـ scrotum والـ prostate؛ متأخر ==prostate growth== والصلع (androgenetic alopecia) والـ sebaceous glands. بيتعمل بالـ **5α-reductase**، والـ **finasteride** بيمنعه.
+        page: 653
+        quote: "Potency: DHT > testosterone > androstenedione > DHEA."
+      - kind: case
+        stem: "A 24-year-old bodybuilder has back acne, tender breast enlargement and irritability."
+        steps:
+          - reveal: "Hematocrit 56%. Both testes are small and soft."
+            question: "Why are his testes small?"
+            options: ["Exogenous testosterone suppresses the HPG axis", "Direct testosterone toxicity", "DHT causes testicular fibrosis", "Varicocele"]
+            answer: 0
+            why: "Exogenous testosterone → HPG axis inhibition → ↓ intratesticular testosterone → ↓ testicular size, ↓ sperm count, azoospermia."
+          - question: "Why does he have gynecomastia?"
+            options: ["Aromatase turns the extra androgen into estrogen", "Prolactin excess", "hCG from a tumor", "Low testosterone"]
+            answer: 0
+            why: "In males, androgens are converted to estrogens by aromatase, mainly in adipose tissue and testes."
+        page: 653
+        quote: "small testes (exogenous testosterone → hypothalamic- pituitary-gonadal axis inhibition → ↓ intratesticular testosterone → ↓ testicular size, ↓ sperm count, azoospermia)"
+      - kind: explain
+        title: "الـ Tanner"
+        text: |-
+          كل حاجة (genitalia و pubic hair و breast) ==بتتقيّم لوحدها==. أول علامة: ==breast bud== في البنت، و **testicular enlargement** في الولد.
+
+          - **II** (~8-11.5): الشعر يبدأ، الخصية تكبر، breast bud.
+          - **III** (~11.5-13): الشعر يتقّل، الـ penis يطول، الصدر يكبر.
+          - **IV** (~13-15): شعر على الـ pubis من غير الفخذ، الـ penis يتخن، و mound on mound.
+          - **V** (>15): الشعر يوصل الفخذ، حجم الكبار، والـ areola تتفرد.
+        page: 654
+        quote: "Earliest detectable secondary sexual characteristic is breast bud development in females, testicular enlargement in males."
+      - kind: explain
+        title: "بدري ولا متأخر؟"
+        text: |-
+          **Precocious**: قبل ==8 سنين للبنت و 9 للولد==. الهرمونات بتطوّل بسرعة بس تقفل الـ epiphyses بدري ← قِصَر في الآخر.
+          - **Central** (GnRH عالي): غالباً idiopathic، أو CNS tumor.
+          - **Peripheral** (GnRH-independent): CAH، granulosa cell tumor، Leydig cell tumor، McCune-Albright، أو هرمونات من برّه.
+
+          **Delayed**: مفيش علامات لحد ==13 للبنت و 14 للولد==.
+          - **Hypergonadotropic** (المشكلة في الـ gonad): Klinefelter، Turner، chemo أو radiation أو infection.
+          - **Hypogonadotropic** (المشكلة فوق): constitutional delay («late blooming»)، Kallmann، CNS lesions.
+        page: 654
+        quote: "Absence of 2° sexual characteristics by age 13 years in females and 14 years in males."
+      - kind: check
+        question: "A 6-year-old girl has breasts and vaginal bleeding, very high estradiol, and LH/FSH that don't rise with GnRH. An ovarian mass is seen. Diagnosis?"
+        options:
+          - "Granulosa cell tumor (peripheral)"
+          - "Idiopathic central precocious puberty"
+          - "Kallmann syndrome"
+          - "CNS tumor"
+        answer: 0
+        why:
+          - "صح: LH و FSH مقفولين = peripheral، والـ granulosa cell tumor بيعمل estrogen."
+          - "الـ central بيبقى فيه LH و FSH عالي."
+          - "Kallmann بيأخّر البلوغ."
+          - "الـ CNS tumor بيعمل central."
+        page: 654
+        quote: "Peripheral precocious puberty (GnRH-independent; ↑ sex hormone production or exposure to exogenous sex steroids): congenital adrenal hyperplasia, estrogen-secreting ovarian tumor (eg, granulosa cell tumor)"
+      - kind: explain
+        title: "الـ GnRH لازم pulses"
+        text: |-
+          الـ pituitary محتاجة GnRH ==بيتقطّع== عشان تعمل LH و FSH.
+
+          - **Pulses سريعة** ← LH. **Pulses بطيئة** ← FSH.
+          - **مستمر** ← الـ GnRHR يتعب (desensitization) ← ==LH و FSH يقعوا==. وده اللي بنستغله في علاج الـ prostate cancer.
+
+          الـ pulses تقل أو تختفي في: Kallmann، functional hypothalamic amenorrhea، مرض شديد أو سوء تغذية، hyperprolactinemia. وتزيد في **PCOS** (فالـ LH عالي).
+        page: 654
+        quote: "Pulsatile GnRH required for pituitary function → LH/FSH pulses. High-frequency pulses → ↑ LH; low-frequency pulses → ↑ FSH. Continuous GnRH → GnRHR desensitization → ↓ LH/↓ FSH."
+      - kind: check
+        question: "Why does continuous leuprolide lower testosterone in prostate cancer?"
+        options:
+          - "Continuous GnRH desensitizes the GnRH receptor, lowering LH and FSH"
+          - "It blocks 5α-reductase"
+          - "It blocks the androgen receptor"
+          - "Fast pulses raise FSH only"
+        answer: 0
+        why:
+          - "صح: GnRH مستمر ← desensitization ← LH و FSH يقعوا ← testosterone يقع."
+          - "الـ 5α-reductase بيمنعه finasteride، وده بيقلل DHT."
+          - "ده شغل الـ antiandrogens."
+          - "الـ pulses السريعة بتعلّي LH، والبطيئة FSH."
+        page: 654
+        quote: "Continuous GnRH → GnRHR desensitization → ↓ LH/↓ FSH."
+      - kind: try
+        items: [repro.L03.055, repro.L03.057, repro.L03.061, repro.L03.072, repro.L03.077]
+    recap:
+      - "Menopause: 12 شهر، سن 51، ↑↑ FSH، HAVOCS. قبل 40 = ovarian insufficiency."
+      - "DHT > testosterone > androstenedione > DHEA. Finasteride يمنع 5α-reductase."
+      - "Steroids: خصية صغيرة (HPG مقفول)، gynecomastia (aromatase)، erythrocytosis."
+      - "Precocious < 8/9، delayed > 13/14. Hyper ← المشكلة في الـ gonad، hypo ← فوق."
+      - "Pulses سريعة LH، بطيئة FSH، مستمر يقفل الاتنين. PCOS pulses زيادة."
+    practice: [repro.L03.054, repro.L03.055, repro.L03.056, repro.L03.057, repro.L03.058, repro.L03.059, repro.L03.060, repro.L03.061, repro.L03.062, repro.L03.063, repro.L03.064, repro.L03.065, repro.L03.066, repro.L03.067, repro.L03.068, repro.L03.069, repro.L03.070, repro.L03.071, repro.L03.072, repro.L03.073, repro.L03.074, repro.L03.075, repro.L03.076, repro.L03.077, repro.L03.078, repro.L03.079]

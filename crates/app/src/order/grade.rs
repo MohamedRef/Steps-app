@@ -98,8 +98,8 @@ mod tests {
     #[test]
     fn shuffle_is_stable_complete_and_never_solved() {
         for n in 0..9 {
-            let a = shuffled(n, "hb.L01.008");
-            assert_eq!(a, shuffled(n, "hb.L01.008"));
+            let a = shuffled(n, "cvs.L04.008");
+            assert_eq!(a, shuffled(n, "cvs.L04.008"));
             let mut sorted = a.clone();
             sorted.sort_unstable();
             assert_eq!(sorted, (0..n).collect::<Vec<_>>());
@@ -107,7 +107,7 @@ mod tests {
                 assert!(!misplaced(&a).is_empty(), "n={n} starts solved: {a:?}");
             }
         }
-        assert_ne!(shuffled(6, "hb.L01.008"), shuffled(6, "hb.L03.040"));
+        assert_ne!(shuffled(6, "cvs.L04.008"), shuffled(6, "cvs.L03.040"));
     }
 
     #[test]
@@ -115,7 +115,7 @@ mod tests {
         // Many seeds and sizes: at most a third of the steps at their own number.
         for n in 2..10 {
             for k in 0..200 {
-                let a = shuffled(n, &format!("hb.L{k:02}.{n:03}"));
+                let a = shuffled(n, &format!("cvs.L{k:02}.{n:03}"));
                 let fixed = a.iter().enumerate().filter(|&(p, &s)| p == s).count();
                 assert!(fixed * 3 <= n, "n={n} seed {k}: {fixed} in place in {a:?}");
             }

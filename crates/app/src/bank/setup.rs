@@ -738,7 +738,6 @@ mod block_tests {
     }
 
     fn render_block(tutor: bool) -> String {
-        crate::store::use_memory_store();
         let mut dom = VirtualDom::new_with_props(BlockSetup, BlockSetupProps { tutor });
         dom.rebuild_in_place();
         dioxus::ssr::render(&dom)

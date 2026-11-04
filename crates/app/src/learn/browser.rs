@@ -44,7 +44,6 @@ fn root(case: Case) -> Element {
 #[test]
 #[ignore = "exports production HTML for the screens browser CI job"]
 fn export_screen_fixtures_learn() {
-    crate::store::use_memory_store();
     let dir = out_dir("learn");
     let mut kinds = std::collections::BTreeSet::new();
     let mut manifest = Vec::new();

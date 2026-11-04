@@ -111,15 +111,15 @@ mod tests {
     fn a_step_lists_its_abbreviations_once_in_reading_order() {
         // SPEC §24-style step: Arabic prose around English terms.
         let found = entries(&texts(&[
-            "الـ HRS-AKI بيحصل في الـ cirrhosis مع ascites.",
-            "قيس الـ SBP والـ MAP، وراجع الـ HRS-AKI تاني.",
+            "الـ PFO بيفضل مفتوح لما الـ foramen ovale ما يقفلش.",
+            "قيس الـ MAP، وفرّق بين الـ ASD والـ PFO تاني.",
         ]));
         let terms: Vec<&str> = found.iter().map(|e| e.term.as_str()).collect();
-        assert_eq!(terms, ["HRS-AKI", "SBP", "MAP"]);
+        assert_eq!(terms, ["PFO", "MAP", "ASD"]);
     }
 
     #[test]
     fn plain_text_has_no_chip() {
-        assert!(entries(&texts(&["Ascites is fluid in the peritoneal cavity."])).is_empty());
+        assert!(entries(&texts(&["Tamponade is fluid around the heart."])).is_empty());
     }
 }
