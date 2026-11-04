@@ -38,7 +38,6 @@ use crate::i18n::count::{DAY, HOUR, ITEM, MINUTE, REVIEW, count};
 use crate::i18n::study as tx;
 use crate::look::{Css, css};
 use backend::now_ms;
-
 use planning::{plan, plan_items};
 
 pub(crate) const STUDY_CSS: Css = css!("assets/study.css");

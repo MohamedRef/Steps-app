@@ -34,6 +34,9 @@ One file, `/mnt/project-files/steps/anki/steps.apkg`, holds every written lectur
 - Settings › نسخة احتياطية من كل حاجة writes `steps-export-YYYY-MM-DD.json` (every review, check and setting) to `~/Downloads` on the Mac. On the phone and tablet it is written to the app's folder, then the system "Save to" dialog offers Downloads or Drive. Settings › استرجع نسخة merges such a file back (nothing is deleted; the newer row wins). On Android its button opens the system file picker, so a copy on Drive restores a new phone without any cloud.
 - Settings also sets the desired retention (85, 90 or 95%) and new items a day (15, 30, 45 or 60). After 400 reviews the schedule is fitted to your own memory, and it is refitted once a week.
 
+## UWorld QIDs and B&B videos per lecture
+Each lecture lists its Boards and Beyond videos with their UWorld question IDs to paste into a custom test. `scripts/qbank-sync.sh` refreshes them from the public doc in one command, and a weekly GitHub workflow opens a PR when they change (close and reopen it to run CI). Details in [QBANK.md](QBANK.md).
+
 ## Sync between your devices (Steps Cloud)
 Steps works fully offline. To keep the Mac, phone and tablet in step, deploy Steps's own free Cloudflare Worker once and sign in under Settings › المزامنة; the steps are in [CLOUD.md](CLOUD.md). The cloud URL and Google client come from `.env` (copy `.env.example`), which `just` loads at build time. Without them, the Sync section says sync isn't set up and nothing leaves the device.
 

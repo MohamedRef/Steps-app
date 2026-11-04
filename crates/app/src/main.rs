@@ -18,6 +18,7 @@ mod bank;
 #[cfg(test)]
 mod browser_fixture;
 mod case;
+mod catchup;
 mod cloud;
 mod content;
 mod courses;
@@ -48,6 +49,7 @@ mod persistence;
 mod plan;
 mod platform;
 mod prefs;
+mod qbank;
 mod recap;
 mod reminders;
 #[cfg(test)]
@@ -66,6 +68,7 @@ mod today;
 mod ui;
 mod update;
 mod verify;
+mod weak;
 
 use crate::look::{Css, css};
 use dioxus::prelude::*;

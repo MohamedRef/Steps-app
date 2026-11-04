@@ -123,6 +123,10 @@ pub fn QuestionView(
                     page: (item.src.page > 0).then_some(item.src.page),
                 }
             }
+            // A miss shows the cards that hold what it tested.
+            if chosen != Some(q.answer) {
+                super::behind::Behind { lecture: lecture.lecture.clone(), item: item.clone() }
+            }
             Report { item_id: q.id.clone() }
             if let Some(u) = &item.update {
                 aside { class: "q-update",

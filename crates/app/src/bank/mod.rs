@@ -3,6 +3,7 @@
 //! (the review at the end), and sit timed mock exams scored per lecture and
 //! topic. Picking, timing and scoring live in `steps_core::exam`.
 
+mod behind;
 mod player;
 mod question;
 mod result;

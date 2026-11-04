@@ -1,0 +1,55 @@
+# Weekly: refresh the UWorld QIDs per lecture from the public B&B ↔ UWorld doc
+# (docs/QBANK.md). Opens a pull request when the numbers changed; never pushes
+# to main and never merges. A B&B video the map doesn't cover fails the run
+# with its name instead of opening a broken PR.
+name: QBank sync
+
+on:
+  schedule:
+    - cron: "17 5 * * 1" # Mondays 05:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: qbank-sync
+  cancel-in-progress: false
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: qbank-sync
+      - name: Refresh content/qbank/uworld.yaml
+        run: scripts/qbank-sync.sh
+      - name: Check the content
+        run: cargo run -q -p steps-tools -- validate
+      - name: Open a pull request when it changed
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if git diff --quiet -- content/qbank/uworld.yaml; then
+            echo "No change in the doc."
+            exit 0
+          fi
+          day="$(date -u +%Y-%m-%d)"
+          branch="qbank/sync-$day"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898299+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          printf -- '- kind: improved\n  ar_eg: "أرقام أسئلة UWorld وفيديوهات B&B لكل محاضرة اتحدّثت من المصدر"\n  en: "UWorld question IDs and B&B videos per lecture refreshed from the source"\n' > "changes/qbank-sync-$day.yaml"
+          git add content/qbank/uworld.yaml "changes/qbank-sync-$day.yaml"
+          git commit -m "Refresh UWorld QIDs per lecture ($day)"
+          git push -u origin "$branch"
+          gh pr create --base main --head "$branch" \
+            --title "Refresh UWorld QIDs per lecture ($day)" \
+            --body "Weekly refresh from the public B&B ↔ UWorld doc (docs/QBANK.md). Numbers only. Review the diff and merge by hand. A PR opened by this workflow doesn't start CI on its own: close and reopen it to run CI."

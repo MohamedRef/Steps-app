@@ -19,14 +19,27 @@ pub(super) fn plan(
     let all = lectures.iter().flat_map(|l| l.items.iter());
     let seen: HashSet<String> = all.clone().filter(|i| !s.is_new(&i.id)).map(|i| i.id.clone()).collect();
     let hidden: HashSet<String> = all.filter(|i| s.is_hidden(&i.id)).map(|i| i.id.clone()).collect();
+    // A running catch-up plan (catchup.rs) cuts today's reviews to its
+    // share and may pause new items.
+    let (due, max_new) = match dioxus::prelude::try_consume_context::<crate::store::Review>() {
+        Some(r) => {
+            let b = r.backend.borrow();
+            let today = b.study_day(now);
+            (
+                crate::catchup::share_of(today, b.answers_today(now), s.due(now)),
+                crate::catchup::new_left(today, crate::plan::new_left_today(&*s, now)),
+            )
+        }
+        None => (s.due(now), crate::plan::new_left_today(&*s, now)),
+    };
     compose(&Inputs {
         lectures,
         topics,
         kinds: PLAYABLE,
-        due: &s.due(now),
+        due: &due,
         seen: &seen,
         hidden: &hidden,
-        max_new: crate::plan::new_left_today(&*s, now),
+        max_new,
         budget_secs: minutes * 60,
         pages: s.pages_read(),
     })

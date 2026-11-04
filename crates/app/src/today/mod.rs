@@ -36,6 +36,8 @@ pub fn Today() -> Element {
     // With an exam day, the plan sets today's new items (#99).
     let target = crate::plan::target_now(&*review.backend.borrow());
     let new_today = target.as_ref().map_or(o.new_today, |t| (t.new_left() as usize).min(o.unseen));
+    // A catch-up plan that pauses new items (catchup.rs).
+    let new_today = crate::catchup::new_left(review.backend.borrow().study_day(store::now_ms()), new_today);
     let mut ui = use_context::<Ui>();
     let settings = use_context::<crate::settings::SettingsNav>();
     let ready = o.due + new_today > 0;
@@ -74,6 +76,7 @@ pub fn Today() -> Element {
                     }
                 }
                 Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0 && o.locked == 0, minutes }
+                crate::catchup::CatchUpCard { due: o.due, due_minutes: o.due_minutes }
                 // Each count opens what it counts.
                 div { class: "stat-tiles",
                     Tile {

@@ -9,9 +9,12 @@
 /// changes (and re-renders) when its value really did.
 pub fn reload() {
     crate::plan::reload();
+    crate::catchup::reload();
     crate::sounds::reload();
     crate::reminders::reload();
     crate::bank::reload_history();
     crate::learn::reload();
+    crate::weak::reload();
+    crate::qbank::reload();
     crate::courses::reload();
 }

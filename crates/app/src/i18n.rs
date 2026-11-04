@@ -219,6 +219,59 @@ pub mod book {
     pub const READ_HINT: &str = "الكروت الجديدة بتبدأ من الصفحات اللي قريتها. دوس تاني لو عايز تشيل العلامة.";
 }
 
+/// Weak-fact marks (weak/mod.rs): neutral words, no red counts.
+pub mod weak {
+    use super::count::{CARD, QUESTION, count};
+
+    pub const MARK: &str = "راجعها تاني";
+    pub const WHY: &str = "فيه حاجة من الصفحة دي غلطت فيها آخر مرة. العلامة بتمشي أول ما تجاوبها صح.";
+    pub const SETTING_TITLE: &str = "علامات المراجعة";
+    pub const SETTING_LINE: &str = "علّم في الدروس وصفحات الكتاب الحاجات اللي غلطت فيها آخر مرة";
+    /// "ذاكر الـ 3 كروت دول"
+    pub fn study(n: usize) -> String {
+        format!("ذاكر {} دلوقتي", count(n, &CARD))
+    }
+    /// "وفيه سؤال واحد من الصفحة دي محتاج تبص عليه تاني."
+    pub fn questions(n: usize) -> String {
+        format!("وفيه {} من الصفحة دي محتاج تبص عليه تاني.", count(n, &QUESTION))
+    }
+}
+
+/// B&B videos and UWorld QIDs per lecture (qbank/mod.rs).
+pub mod qbank {
+    use super::count::{QUESTION, count};
+
+    pub const TITLE: &str = "فيديوهات B&B وأسئلة UWorld";
+    pub const HOW: &str =
+        "انسخ الأرقام والزقها في UWorld › Create Test › Custom Test. علّم على الفيديو لما تخلصه.";
+    pub const DONE: &str = "خلصته";
+    pub const COPIED: &str = "اتنسخ ✓";
+    pub const NONE: &str = "أسئلته تحت فيديو تاني";
+    pub const FIND: &str = "دوّر برقم سؤال UWorld";
+    pub const PAGE_TITLE: &str = "رقم سؤال UWorld";
+    pub const PLACEHOLDER: &str = "مثلاً 1707";
+    pub const FOUND: &str = "السؤال ده من";
+    pub const FROM_VIDEO: &str = "فيديو B&B:";
+    pub const OPEN_LECTURE: &str = "افتح المحاضرة";
+    pub const RETIRED: &str = "UWorld شالت السؤال ده.";
+    pub const NOT_FOUND: &str = "الرقم ده مش في القايمة. مش كل أسئلة UWorld فيها.";
+    pub const SOURCE: &str =
+        "الأرقام من ملف عام بيربط فيديوهات B&B بأسئلة UWorld (حوالي 86% من البنك)، وبتتحدث كل أسبوع.";
+    /// "12 فيديو · 85 سؤال"
+    pub fn summary(videos: usize, qids: usize) -> String {
+        format!("{videos} فيديو · {}", count(qids, &QUESTION))
+    }
+    pub fn copy(n: usize) -> String {
+        format!("انسخ {n}")
+    }
+    pub fn copy_left(n: usize) -> String {
+        format!("انسخ كل اللي فاضل ({})", count(n, &QUESTION))
+    }
+    pub fn page_sub(n: usize) -> String {
+        format!("اكتب رقم سؤال غلطت فيه، وأقولك هو من أنهي محاضرة. فيه {n} رقم.")
+    }
+}
+
 pub mod nav {
     pub const LABEL: &str = "التنقل";
     pub const TODAY: &str = "النهارده";
@@ -653,6 +706,13 @@ pub mod bank {
         }
     }
     pub const NOT_FOUND: &str = "السؤال ده اتشال من المحتوى.";
+    pub const BEHIND: &str = "اللي ورا الغلطة";
+    pub const FACT_NEW: &str = "جديد";
+    pub const FACT_DUE: &str = "عليه الدور";
+    pub const FACT_LEARNED: &str = "اتذاكر";
+    pub fn behind_study(n: usize) -> String {
+        format!("ذاكر {} دلوقتي", super::count::count(n, &super::count::CARD))
+    }
 
     pub const RESULT: &str = "النتيجة";
     pub const TOOK: &str = "الوقت";
@@ -1180,6 +1240,38 @@ pub mod gopage {
     }
     pub fn nearest(page: u32) -> String {
         format!("افتح أقرب صفحة: {page}")
+    }
+}
+
+pub mod catchup {
+    use super::count::{REVIEW, count};
+
+    pub const OFFER_TITLE: &str = "نلحق المراجعات على كام يوم؟";
+    pub const RUNNING_TITLE: &str = "خطة اللحاق شغالة";
+    pub const DAYS_LABEL: &str = "نوزّعها على";
+    pub const PAUSE_NEW: &str = "وقّف الجديد لحد ما نلحق";
+    pub const START: &str = "يلا نبدأ";
+    pub const STOP: &str = "وقّف الخطة";
+    pub const TODAY_DONE: &str = "خلصت نصيب النهارده. اللي فاضل مستنيك بكرة.";
+    pub const NEW_PAUSED: &str = "الجديد واقف لحد ما الخطة تخلص.";
+    /// "اتجمّع 120 مراجعة، حوالي 45 دقيقة. عادي، بيحصل."
+    pub fn offer_line(due: usize, minutes: u32) -> String {
+        format!(
+            "اتجمّع عندك {}، حوالي {minutes} دقيقة. عادي، بيحصل، ونقسمهم على كام يوم.",
+            count(due, &REVIEW)
+        )
+    }
+    pub fn days(n: u32) -> String {
+        format!("{n} أيام")
+    }
+    pub fn per_day(minutes: u32) -> String {
+        format!("يعني حوالي {minutes} دقيقة مراجعة في اليوم، الأقدم الأول.")
+    }
+    pub fn running_line(day: i64, days: u32) -> String {
+        format!("اليوم {day} من {days}.")
+    }
+    pub fn today_left(left: usize, minutes: u32) -> String {
+        format!("فاضل النهارده {}، حوالي {minutes} دقيقة.", count(left, &REVIEW))
     }
 }
 

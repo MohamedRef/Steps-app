@@ -7,6 +7,7 @@
 //! steps-tools verdicts FILE [--approve]   fix list from the app's ✎/✗ export
 //! steps-tools update <keygen | manifest | sign | verify>   update feeds (docs/RELEASE.md §5)
 //! steps-tools refs [--lecture cvs.L04] [--write]   page references against the book (refs.rs)
+//! steps-tools qbank sync --from EXPORT.txt [--check]   UWorld QIDs per lecture (docs/QBANK.md)
 //! ```
 
 use std::collections::BTreeSet;
@@ -22,6 +23,7 @@ mod content;
 mod ids;
 mod lessons;
 mod packs;
+mod qbank;
 mod refs;
 #[cfg(test)]
 mod testkit;
@@ -58,6 +60,7 @@ fn main() -> ExitCode {
         Some("refs") => report(refs::run(&root, &args[1..])),
         Some("ids") => report(ids::run(&root, &args[1..])),
         Some("content") => report(content::run(&root, &args[1..])),
+        Some("qbank") => report(qbank::run(&root, &args[1..])),
         _ => usage(),
     }
 }
@@ -84,7 +87,7 @@ fn flag<'a>(args: &'a [String], name: &str) -> Option<&'a str> {
 
 fn usage() -> ExitCode {
     eprintln!(
-        "usage: steps-tools <validate | anki | packs build | verdicts FILE | update … | refs | ids <list | check --base REF> | content <next-id | new-item | diff | preflight>> [--root DIR] (see the top of crates/tools/src/main.rs)"
+        "usage: steps-tools <validate | anki | packs build | verdicts FILE | update … | refs | ids <list | check --base REF> | content <next-id | new-item | diff | preflight> | qbank sync --from FILE> [--root DIR] (see the top of crates/tools/src/main.rs)"
     );
     ExitCode::from(2)
 }
@@ -194,10 +197,9 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     }
     // Lecture files that the index doesn't list.
     if let Ok(dirs) = std::fs::read_dir(&content) {
-        for dir in dirs
-            .flatten()
-            .filter(|d| d.path().is_dir() && d.file_name() != "lessons" && d.file_name() != "glossary")
-        {
+        for dir in dirs.flatten().filter(|d| {
+            d.path().is_dir() && !["lessons", "glossary", "qbank"].iter().any(|n| d.file_name() == *n)
+        }) {
             let chapter = dir.file_name().to_string_lossy().to_string();
             for f in std::fs::read_dir(dir.path()).into_iter().flatten().flatten() {
                 let name = f.file_name().to_string_lossy().to_string();
@@ -227,6 +229,9 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     }
     // Lessons (docs/LESSONS.md), with every abbreviation in the glossary.
     let (_, lessons) = lessons::validate_all(root, &approved, glossary.as_ref(), &mut problems);
+    // UWorld QIDs per lecture (docs/QBANK.md).
+    let lecture_ids: BTreeSet<&str> = index.lectures.iter().map(|l| l.id.as_str()).collect();
+    problems.extend(qbank::problems(root, &lecture_ids, &known_sources));
     // Nothing left from a template (`steps-tools content new-item`).
     problems.extend(content::unfinished(root));
     // Page references checked against the book (refs.rs).
