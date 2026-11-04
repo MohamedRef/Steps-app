@@ -177,19 +177,22 @@ items:
     kind: mcq
     topic: tumor-grade-vs-stage
     stem: >-
-      Two patients have colon adenocarcinoma. Patient 1 has a poorly differentiated tumor confined
-      to the submucosa with no nodal spread. Patient 2 has a well-differentiated tumor with liver
-      metastases. Which statement about their prognosis is most accurate?
+      Two patients are seen in the same oncology clinic. A 58-year-old woman had a positive fecal
+      immunochemical test on screening; colonoscopy finds a 2-cm sigmoid adenocarcinoma, and the
+      resection shows a poorly differentiated tumor confined to the submucosa with 0 of 18 lymph
+      nodes involved. A 63-year-old man has fatigue and iron deficiency anemia; colonoscopy finds a
+      cecal adenocarcinoma that is well differentiated, and CT shows three liver metastases. Which
+      statement about their prognosis is most accurate?
     options:
-      - Patient 1 has the worse prognosis because grade determines survival
-      - Patient 2 has the worse prognosis because stage determines survival
+      - The woman has the worse prognosis because grade determines survival
+      - The man has the worse prognosis because stage determines survival
       - They have the same prognosis because both are adenocarcinomas
-      - Prognosis depends only on tumor size
+      - Prognosis depends mainly on tumor size
       - Nodal status matters more than distant metastasis
     answer: 1
     why:
-      - "Grade (differentiation) has less prognostic value than stage."
-      - "Right. Stage has more prognostic value than grade: a high-stage, low-grade tumor is usually worse than a low-stage, high-grade one. Distant metastasis (M) matters most."
+      - "Her high grade (poor differentiation) has less prognostic value than stage, and her tumor is low stage."
+      - "Right. Stage has more prognostic value than grade: a high-stage, low-grade tumor is usually worse than a low-stage, high-grade one. His distant metastasis (M) matters most."
       - "Histologic type alone doesn't set prognosis."
       - "Size (T) is the least important TNM component."
       - "In TNM, M > N > T."
@@ -268,8 +271,11 @@ items:
     kind: mcq
     topic: hallmarks-of-cancer
     stem: >-
-      A tumor biopsy shows cancer cells that continue to divide for hundreds of generations in
-      culture without their chromosome ends shortening. Which change most likely explains this?
+      A 61-year-old man has a sigmoid colon adenocarcinoma resected. In the research laboratory,
+      cells from his tumor keep dividing through hundreds of passages in culture, whereas
+      fibroblasts from his own skin stop dividing and age after a limited number of divisions.
+      Unlike the fibroblasts, the tumor cells' chromosome ends do not shorten with each division.
+      Which change in the tumor cells most likely explains this?
     options:
       - Loss of E-cadherin
       - Reactivation of telomerase
@@ -308,22 +314,24 @@ items:
     kind: mcq
     topic: immune-checkpoint-interactions
     stem: >-
-      A 66-year-old man with metastatic melanoma starts nivolumab. Which interaction does the drug
-      block to restore his antitumor T-cell response?
+      A 66-year-old man with melanoma metastatic to the lungs and liver starts nivolumab. After 3
+      months his metastases have shrunk on CT, but he now has 8 watery stools a day and abdominal
+      cramps. Stool studies are negative, and colonoscopy shows diffuse colitis with dense T-cell
+      infiltrates. Blocking which interaction best explains both the tumor response and the colitis?
     options:
       - CTLA-4 binding to B7
-      - PD-1 on T cells binding PD-L1 on tumor cells
+      - PD-1 on T cells binding PD-L1
       - CD28 binding to B7
       - TCR binding to MHC I
       - VEGF binding to its receptor
     answer: 1
     why:
-      - "CTLA-4 is blocked by ipilimumab."
-      - "Right. Nivolumab is an anti-PD-1 antibody; PD-1–PD-L1 binding causes T-cell exhaustion."
-      - "CD28–B7 is the costimulatory signal the drugs aim to restore, not block."
-      - "TCR–MHC I is the antigen signal T cells need."
-      - "Anti-VEGF drugs target angiogenesis, not checkpoints."
-    src: { page: 218, quote: "Inhibited by antibodies against PD-1 (eg, cemiplimab, nivolumab, pembrolizumab) or PD-L1 (eg, atezolizumab, durvalumab, avelumab)." }
+      - "CTLA-4 is blocked by ipilimumab, not nivolumab."
+      - "Right. Nivolumab is an anti-PD-1 antibody. PD-1–PD-L1 binding normally causes T-cell exhaustion; releasing that brake restores the T-cell attack on the tumor and can also turn T cells against normal tissue such as the colon."
+      - "CD28–B7 is the costimulatory signal that checkpoint blockade preserves, not blocks."
+      - "TCR–MHC I is the antigen signal T cells need to attack."
+      - "Anti-VEGF drugs target angiogenesis, not T-cell checkpoints."
+    src: { page: 218, quote: "Interaction between PD-1 (on T cells) and PD-L1/2 (on tumor cells or immune cells in tumor microenvironment) → T-cell dysfunction (exhaustion). Inhibited by antibodies against PD-1 (eg, cemiplimab, nivolumab, pembrolizumab)" }
     status: unverified
   # ---------- p218: epidemiology ----------
   - id: path.L03.024
@@ -350,8 +358,10 @@ items:
     kind: mcq
     topic: cancer-epidemiology
     stem: >-
-      A public health student asks which cancer kills the most women in the United States, although
-      it is not the one diagnosed most often in women. Which cancer is it?
+      A 54-year-old woman in the United States comes for her annual visit. She has smoked a pack of
+      cigarettes a day for 30 years, had a normal screening mammogram last year and has no family
+      history of cancer. She asks which cancer she is most likely to die from, since her friends
+      talk mostly about breast cancer. Which cancer causes the most cancer deaths in women?
     options:
       - Breast cancer
       - Lung cancer
@@ -360,8 +370,8 @@ items:
       - Pancreatic cancer
     answer: 1
     why:
-      - "Breast cancer is the most common in women, but second in mortality."
-      - "Right. In women, lung cancer is first in mortality and second in incidence."
+      - "Breast cancer is the most common cancer in women, but second in mortality."
+      - "Right. In women, lung cancer is first in mortality (second in incidence), and her smoking raises that risk further."
       - "Colorectal cancer is third in both lists."
       - "Ovarian cancer isn't in the top three."
       - "Pancreatic cancer isn't in the top three in the book's table."
@@ -541,6 +551,7 @@ items:
     blanks: [[0, 2], [2, 2], [3, 1], [4, 1], [5, 1], [6, 2]]
     src: { page: 220, quote: "NF2 Merlin (schwannomin) protein NeuroFibromatosis type 2" }
     status: unverified
+    tags: [high-yield]
   - id: path.L03.040
     kind: enumerate
     topic: tumor-suppressor-genes
@@ -635,6 +646,7 @@ items:
     blanks: [[0, 2], [1, 2], [3, 2]]
     src: { page: 221, quote: "Asbestos Old roofing material, shipyard workers Lung Bronchogenic carcinoma > mesothelioma" }
     status: unverified
+    tags: [high-yield]
   - id: path.L03.046
     kind: enumerate
     topic: carcinogens
@@ -651,6 +663,7 @@ items:
     pass: 6
     src: { page: 221, quote: "Tobacco smoke Bladder Transitional cell carcinoma Cervix Squamous cell carcinoma Esophagus Squamous cell carcinoma/ adenocarcinoma Kidney Renal cell carcinoma Larynx Squamous cell carcinoma" }
     status: unverified
+    tags: [high-yield]
   - id: path.L03.047
     kind: mcq
     topic: carcinogens
@@ -728,18 +741,18 @@ items:
     title: Serum tumor markers
     columns: [Marker, Main associations]
     rows:
-      - ["Alkaline phosphatase", "Bone or liver metastases, Paget disease of bone, seminoma (PLAP)"]
+      - ["Alkaline phosphatase", "Bone or liver metastases, Paget disease of bone, seminoma (PLAP); exclude a hepatic source with LFTs and GGT"]
       - ["α-fetoprotein", "HCC, yolk sac tumor, mixed germ cell tumor, ataxia-telangiectasia, neural tube defects"]
       - ["hCG", "Hydatidiform mole, choriocarcinoma, testicular cancer, mixed germ cell tumor"]
       - ["CA15-3/CA27-29", "Breast cancer"]
       - ["CA 19-9", "Pancreatic adenocarcinoma"]
       - ["CA 125", "Epithelial ovarian cancer"]
-      - ["Calcitonin", "Medullary thyroid carcinoma (alone, MEN2A, MEN2B)"]
-      - ["CEA", "Colorectal and pancreatic cancers; very nonspecific"]
+      - ["Calcitonin", "Medullary thyroid carcinoma (alone, MEN2A, MEN2B); the book's mnemonic: Calci2nin"]
+      - ["CEA", "Colorectal and pancreatic cancers; minor: gastric, breast, medullary thyroid; very nonspecific"]
       - ["Chromogranin", "Neuroendocrine tumors"]
       - ["LDH", "Testicular germ cell tumors, dysgerminoma; tumor burden"]
       - ["Neuron-specific enolase", "Small cell lung cancer, carcinoid, neuroblastoma"]
-      - ["PSA", "Prostate cancer; also ↑ in BPH and prostatitis"]
+      - ["PSA", "Prostate cancer; monitors recurrence/response, uncertain risk/benefit for screening; also ↑ in BPH and prostatitis"]
     blanks: [[1, 1], [2, 1], [4, 1], [5, 1], [6, 1], [10, 1]]
     src: { page: 222, quote: "CA 19-9 Pancreatic adenocarcinoma. CA 125 Epithelial ovarian cancer." }
     status: unverified
@@ -828,11 +841,12 @@ items:
       - ["Desmin", "Muscle", "Rhabdomyosarcoma"]
       - ["GFAP", "Neuroglia", "Astrocytoma, glioblastoma"]
       - ["Neurofilament", "Neurons", "Neuroblastoma"]
+      - ["PSA", "Prostatic epithelium", "Prostate cancer"]
       - ["PECAM-1/CD31", "Endothelial cells", "Angiosarcoma"]
       - ["S-100", "Neural crest cells", "Melanoma, schwannoma, Langerhans cell histiocytosis"]
       - ["TRAP", "Tartrate-resistant acid phosphatase", "Hairy cell leukemia"]
       - ["Vimentin", "Mesenchymal tissue", "Sarcoma; also endometrial, renal cell carcinoma, meningioma"]
-    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [5, 1], [6, 2], [7, 2]]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [5, 1], [6, 1], [7, 2], [8, 2]]
     src: { page: 223, quote: "S-100 Neural crest cells Melanoma, schwannoma, Langerhans cell histiocytosis" }
     status: unverified
     tags: [high-yield]
@@ -942,6 +956,7 @@ items:
     hook: "الكتاب: Paraneoplastic rise to High hematocrit levels = Pheochromocytoma، RCC، HCC، Hemangioblastoma، Leiomyoma."
     src: { page: 224, quote: "Paraneoplastic rise to High hematocrit levels Pheochromocytoma, renal cell carcinoma, HCC, hemangioblastoma, leiomyoma" }
     status: unverified
+    tags: [high-yield]
   - id: path.L03.065
     kind: table
     topic: paraneoplastic-syndromes
@@ -1024,3 +1039,62 @@ items:
       - "PTH is suppressed, so this is not primary hyperparathyroidism."
     src: { page: 224, quote: "Hypercalcemia PTHrP SCa2+ mous cell carcinomas of lung, head, and neck" }
     status: unverified
+  # ---------- critic round 2026-11-04: coverage additions ----------
+  - id: path.L03.069
+    kind: order
+    topic: hallmarks-of-cancer
+    prompt: Put the steps of metastasis in order.
+    steps:
+      - Tumor cells or emboli spread via lymphatics or blood
+      - Adhesion to endothelium
+      - Extravasation and homing
+    src: { page: 217, quote: "Tumor cells or emboli spread via lymphatics or blood → adhesion to endothelium → extravasation and homing." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.070
+    kind: cloze
+    topic: tumor-grade-vs-stage
+    text: "Depth of {{c1::invasion}} correlates with the risk of {{c2::metastasis}}."
+    src: { page: 216, quote: "Depth of invasion correlates to risk of metastasis." }
+    status: unverified
+  - id: path.L03.071
+    kind: cloze
+    topic: tumor-grade-vs-stage
+    text: "Stage is based on {{c1::clinical (c)}} or {{c2::pathologic (p)}} findings."
+    src: { page: 216, quote: "Based on clinical (c) or pathologic (p) findings." }
+    status: unverified
+  - id: path.L03.072
+    kind: cloze
+    topic: cancer-epidemiology
+    text: "In the United States, cancer is the {{c1::2nd}} leading cause of death; {{c2::heart disease}} is 1st."
+    src: { page: 218, quote: "Cancer is the 2nd leading cause of death in the United States (heart disease is 1st)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.073
+    kind: card
+    topic: cancer-epidemiology
+    front: How has lung cancer incidence changed in males and in females?
+    back: It has fallen in males but has not changed significantly in females.
+    src: { page: 218, quote: "Lung cancer incidence has ↓ in males, but has not changed significantly in females." }
+    status: unverified
+  - id: path.L03.074
+    kind: card
+    topic: serum-tumor-markers
+    front: Alkaline phosphatase is raised in a patient with suspected bone metastases. How is a hepatic source excluded?
+    back: By checking LFTs and the GGT level.
+    src: { page: 222, quote: "Exclude hepatic origin by checking LFTs and GGT levels." }
+    status: unverified
+  - id: path.L03.075
+    kind: cloze
+    topic: serum-tumor-markers
+    text: "Besides colorectal and pancreatic cancers, CEA has minor associations with {{c1::gastric}}, {{c2::breast}} and {{c3::medullary thyroid}} carcinomas."
+    src: { page: 222, quote: "Minor associations: gastric, breast, and medullary thyroid carcinomas." }
+    status: unverified
+  - id: path.L03.076
+    kind: card
+    topic: serum-tumor-markers
+    front: What is PSA used for, what is its limitation in screening, and what else raises it?
+    back: Monitoring prostate cancer recurrence and response to treatment. Its risk/benefit for screening is uncertain, and it also rises in BPH and prostatitis.
+    src: { page: 222, quote: "Prostate-Specific Antigen—monitor recurrence/ response; uncertain risk/benefit for screening. Also ↑ in BPH/prostatitis." }
+    status: unverified
+    tags: [high-yield]
