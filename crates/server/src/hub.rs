@@ -654,7 +654,7 @@ mod tests {
             kind: OpKind::Append,
             hlc: Hlc { wall_ms: NOW_I, counter: 0, device: "tab".into() },
             relay: false,
-            payload: Some(json!({ "item_id": "hb.L01.001", "took_ms": 0.5 })),
+            payload: Some(json!({ "item_id": "cvs.L04.001", "took_ms": 0.5 })),
         };
         let erase = Op { id: "s2".into(), kind: OpKind::Delete, payload: None, ..stroke.clone() };
         let out = send(&hub, &mut tab, &ClientMsg::Push { batch: 1, ops: vec![stroke, erase] });
