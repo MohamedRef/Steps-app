@@ -1,0 +1,294 @@
+schema: steps.lesson/v1
+lecture: resp.L05
+lessons:
+  - id: resp.L05.lesson1
+    title: "أدوية البرد والحساسية والربو"
+    hook: "الربو ليه سكتين: التهاب و parasympathetic tone، وكل دوا بيقفل باب من الاتنين"
+    minutes: 9
+    pages: [704, 705]
+    topics: [pseudoephedrine-phenylephrine, h1-blockers, dextromethorphan, asthma-drugs]
+    goals:
+      - "تعرف الـ decongestants بتشتغل إزاي وليه ما ينفعش تتاخد أكتر من 4-6 أيام"
+      - "تفرّق بين الجيل الأول والتاني من الـ H1-blockers"
+      - "تحط كل دوا ربو على مكانه في السكتين: التهاب و bronchoconstriction"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "بخاخة الأنف المسدودة"
+        text: |-
+          الـ **pseudoephedrine** والـ **phenylephrine** بيشغّلوا الـ ==α-adrenergic receptors== في الـ nasal mucosa، فيحصل vasoconstriction موضعي، فالـ hyperemia والـ edema يقلّوا. وكمان بيفتحوا الـ eustachian tubes المسدودة.
+
+          بس خلّي بالك: ممكن يعملوا hypertension، ولو اتاخدوا ==أكتر من 4-6 أيام== يحصل rebound congestion (الـ ==rhinitis medicamentosa==) و tachyphylaxis. والـ pseudoephedrine كمان بيعمل CNS stimulation و anxiety.
+        page: 704
+        quote: "Hypertension. Rebound congestion (rhinitis medicamentosa) if used more than 4-6 days."
+      - kind: table
+        title: "H1-blockers: first vs second generation"
+        columns: ["", "First generation", "Second generation"]
+        rows:
+          - ["Examples", "Diphenhydramine, dimenhydrinate, chlorpheniramine, doxylamine", "Loratadine, fexofenadine, desloratadine, cetirizine"]
+          - ["Name clue", "-en/-ine, -en/-ate", "-adine"]
+          - ["Use", "Allergy, motion sickness, vomiting in pregnancy, sleep aid", "Allergy"]
+          - ["Adverse effects", "Sedation, antimuscarinic, anti-α-adrenergic", "Similar, less sedation (less CNS entry)"]
+        hide: [[2, 1], [3, 1], [3, 2]]
+        page: 704
+        quote: "Allergy, motion sickness, vomiting in pregnancy, sleep aid."
+      - kind: explain
+        title: "الـ antihistamines"
+        text: |-
+          الـ H1-blockers هي الـ antihistamines، وهي reversible inhibitors للـ H1 receptors، وبالظبط هي ==inverse agonists==.
+
+          الجيل الأول بيدخل الـ CNS، فبيعمل sedation (عشان كده بيتباع كـ sleep aid)، وكمان antimuscarinic و anti-α-adrenergic. الجيل التاني بيدخل الـ CNS أقل، فالـ ==sedation أقل==.
+        page: 704
+        quote: "Also called antihistamines. Reversible inhibitors of H histamine receptors (inverse agonists)."
+      - kind: check
+        question: "An older man on diphenhydramine has urinary retention and dry mouth. Which drug property causes this?"
+        options:
+          - "Antimuscarinic effect"
+          - "α-adrenergic agonism"
+          - "NMDA antagonism"
+          - "Inverse agonism at H2 receptors"
+        answer: 0
+        why:
+          - "صح: الجيل الأول antimuscarinic، والـ urinary retention والـ dry mouth من الـ antimuscarinic."
+          - "هو anti-α-adrenergic، مش agonist."
+          - "الـ NMDA antagonism ده الـ dextromethorphan."
+          - "هو بيشتغل على الـ H1، مش الـ H2."
+        page: 704
+        quote: "Sedation, antimuscarinic, anti-α-adrenergic."
+      - kind: explain
+        title: "شراب الكحة: dextromethorphan"
+        text: |-
+          الـ **dextromethorphan** antitussive، وهو ==NMDA glutamate receptor antagonist==، فبجرعات عالية بيعمل dissociative و hallucinogenic effects زي الـ ketamine.
+
+          وهو synthetic codeine analog، فلو اتاخد زيادة يعمل mild opioid effect، والـ ==naloxone== بيتدّي في الـ overdose. ولو اتاخد مع serotonergic agents تانية ممكن يعمل ==serotonin syndrome==. وممكن يتجمع مع الـ bupropion كـ fast-acting antidepressant.
+        page: 704
+        quote: "Synthetic codeine analog  mild opioid effect when used in excess. Naloxone can be given for overdose."
+      - kind: figure
+        title: "سكتين الربو، وكل دوا فين"
+        svg: |-
+          <svg viewBox="0 0 360 250" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="pL5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="90" y="18" class="t-sm t-b" text-anchor="middle">Inflammation</text>
+            <text x="270" y="18" class="t-sm t-b" text-anchor="middle">Bronchial tone</text>
+            <rect class="fg-box" x="20" y="30" width="140" height="28" rx="6"/>
+            <text x="90" y="48" class="t-sm" text-anchor="middle">IgE + mast cell</text>
+            <line class="fg-arrow" x1="90" y1="58" x2="90" y2="84" marker-end="url(#pL5a)"/>
+            <rect class="fg-box" x="20" y="86" width="140" height="28" rx="6"/>
+            <text x="90" y="104" class="t-sm" text-anchor="middle">Leukotrienes, IL-5</text>
+            <line class="fg-arrow" x1="90" y1="114" x2="90" y2="140" marker-end="url(#pL5a)"/>
+            <rect class="fg-bad" x="20" y="142" width="140" height="28" rx="6"/>
+            <text x="90" y="160" class="t-sm" text-anchor="middle">Airway inflammation</text>
+            <text x="20" y="190" class="t-sm t-acc">Omalizumab, cromolyn</text>
+            <text x="20" y="206" class="t-sm t-acc">Montelukast, zileuton</text>
+            <text x="20" y="222" class="t-sm t-acc">Glucocorticoids</text>
+            <text x="20" y="238" class="t-sm t-acc">Anti-IL-5 biologics</text>
+            <rect class="fg-box" x="200" y="30" width="140" height="28" rx="6"/>
+            <text x="270" y="48" class="t-sm" text-anchor="middle">ACh (muscarinic)</text>
+            <line class="fg-arrow" x1="270" y1="58" x2="270" y2="84" marker-end="url(#pL5a)"/>
+            <rect class="fg-bad" x="200" y="86" width="140" height="28" rx="6"/>
+            <text x="270" y="104" class="t-sm" text-anchor="middle">Bronchoconstriction</text>
+            <rect class="fg-good" x="200" y="142" width="140" height="28" rx="6"/>
+            <text x="270" y="160" class="t-sm" text-anchor="middle">cAMP up: dilation</text>
+            <text x="200" y="190" class="t-sm t-acc">Tiotropium, ipratropium</text>
+            <text x="200" y="206" class="t-sm t-acc">β2-agonists</text>
+            <text x="200" y="222" class="t-sm t-acc">Theophylline</text>
+            <text x="200" y="238" class="t-sm t-acc">Roflumilast</text>
+          </svg>
+        alt: "Two columns. Left, the inflammatory pathway: IgE and mast cells lead to leukotrienes and IL-5 and then airway inflammation, blocked by omalizumab, cromolyn, montelukast, zileuton, glucocorticoids and anti-IL-5 biologics. Right, bronchial tone: acetylcholine causes bronchoconstriction, blocked by tiotropium and ipratropium, while β2-agonists, theophylline and roflumilast raise cAMP and dilate the bronchi."
+        caption: "الشمال سكة الالتهاب، واليمين سكة الـ tone. أي دوا ربو بيقفل حاجة في واحدة منهم."
+        page: 704
+        quote: "Bronchoconstriction is mediated by (1) inflammatory processes and (2) parasympathetic tone; therapy is directed at these 2 pathways."
+      - kind: explain
+        title: "الـ bronchodilators"
+        text: |-
+          - **β2-agonists**: الـ albuterol (short-acting) ==للأعراض الحادة==، والـ salmeterol والـ formoterol long-acting. بيرخّوا الـ bronchial smooth muscle، وممكن يعملوا tremor و arrhythmia.
+          - **Muscarinic antagonists**: الـ tiotropium (long acting) والـ ipratropium بيعملوا competitive block للـ muscarinic receptors، فيمنعوا الـ bronchoconstriction. وبيستخدموا في الـ COPD كمان.
+          - **Theophylline**: بيمنع الـ phosphodiesterase فالـ cAMP يزيد، وبيعمل block للـ adenosine. بس ==narrow therapeutic index== (cardiotoxicity و neurotoxicity) وبيتكسّر بالـ ==cytochrome P-450==.
+        page: 704
+        quote: "Limited use due to narrow therapeutic index (cardiotoxicity, neurotoxicity); metabolized by cytochrome P-450."
+      - kind: explain
+        title: "أدوية الالتهاب"
+        text: |-
+          - **Glucocorticoids** (fluticasone، budesonide): بيمنعوا تقريباً كل الـ cytokines عن طريق إنهم يعطّلوا الـ ==NF-κB==. دول ==1st-line في الـ chronic asthma==، ولازم spacer أو مضمضة بعدهم عشان الـ oral thrush.
+          - **Montelukast، zafirlukast**: block للـ CysLT1 receptors، وحلوين قوي في الـ aspirin-induced والـ exercise-induced asthma.
+          - **Zileuton**: 5-lipoxygenase inhibitor، فالـ leukotrienes تقل من الـ arachidonic acid، بس ==hepatotoxic==.
+        page: 704
+        quote: "1st-line therapy for chronic asthma. Use a spacer or rinse mouth after use to prevent oral thrush."
+      - kind: check
+        question: "Which asthma drug inhibits 5-lipoxygenase and needs liver monitoring?"
+        options:
+          - "Zileuton"
+          - "Montelukast"
+          - "Theophylline"
+          - "Cromolyn"
+        answer: 0
+        why:
+          - "صح: الـ zileuton بيمنع الـ 5-lipoxygenase، وهو hepatotoxic."
+          - "الـ montelukast بيعمل block للـ CysLT1 receptor، مش للإنزيم."
+          - "الـ theophylline بيمنع الـ phosphodiesterase."
+          - "الـ cromolyn بيمنع الـ mast cell degranulation."
+        page: 704
+        quote: "Zileuton—5-lipoxygenase inhibitor.  conversion of arachidonic acid to leukotrienes. Hepatotoxic."
+      - kind: explain
+        title: "الـ biologics والباقي"
+        text: |-
+          - **Omalizumab** (anti-IgE): بيمسك الـ unbound serum IgE ويمنعه يركب على الـ FcεRI. للـ allergic asthma مع IgE عالي ومش بيستجيب للـ inhaled glucocorticoids والـ long-acting β2-agonists.
+          - **Mepolizumab، reslizumab** على الـ IL-5، والـ **benralizumab** على الـ IL-5 receptor α، فبيمنعوا الـ eosinophils. للـ ==severe eosinophilic asthma==. والـ **dupilumab** على الـ IL-4 receptor α.
+          - **Roflumilast** (PDE-4 inhibitor): cAMP يزيد، للـ ==COPD== عشان يقلل الـ exacerbations. و**cromolyn** بيمنع الـ mast cell degranulation، ونادراً ما بيستخدم.
+        page: 705
+        quote: "Prevent eosinophil differentiation, maturation, activation, and survival mediated by IL-5 stimulation."
+      - kind: sort
+        prompt: "حط كل دوا تحت السكة اللي بيشتغل عليها"
+        bins: ["Inflammation", "Bronchial tone"]
+        cards:
+          - { text: "Fluticasone", bin: 0 }
+          - { text: "Montelukast", bin: 0 }
+          - { text: "Mepolizumab", bin: 0 }
+          - { text: "Tiotropium", bin: 1 }
+          - { text: "Albuterol", bin: 1 }
+          - { text: "Theophylline", bin: 1 }
+        why: "الـ glucocorticoids والـ antileukotrienes والـ anti-IL-5 بيقللوا الالتهاب، والـ muscarinic antagonists والـ β2-agonists والـ theophylline بيفتحوا الشعب."
+        page: 704
+        quote: "therapy is directed at these 2 pathways."
+      - kind: try
+        items: [resp.L05.003, resp.L05.009, resp.L05.019, resp.L05.020, resp.L05.021]
+    recap:
+      - "Decongestants = α-agonists؛ أكتر من 4-6 أيام ← rhinitis medicamentosa."
+      - "H1 الجيل الأول: sedation و antimuscarinic و anti-α؛ التاني (-adine) sedation أقل."
+      - "Dextromethorphan: NMDA antagonist، naloxone للـ overdose، serotonin syndrome."
+      - "الربو سكتين: التهاب (steroids، antileukotrienes، omalizumab، anti-IL-5) و tone (β2، muscarinic antagonists، theophylline)."
+      - "Theophylline: narrow index و P-450. Zileuton: hepatotoxic. Roflumilast: COPD."
+    practice: [resp.L05.001, resp.L05.002, resp.L05.003, resp.L05.004, resp.L05.005, resp.L05.006, resp.L05.007, resp.L05.008, resp.L05.009, resp.L05.010, resp.L05.011, resp.L05.012, resp.L05.013, resp.L05.014, resp.L05.015, resp.L05.016, resp.L05.017, resp.L05.018, resp.L05.019, resp.L05.020, resp.L05.021]
+  - id: resp.L05.lesson2
+    title: "الـ COPD والـ pneumococcal vaccine وأدوية الـ pulmonary hypertension"
+    hook: "الـ pulmonary hypertension ليها تلات سكك: endothelin و NO و prostacyclin، ولكل سكة دوا"
+    minutes: 7
+    pages: [706, 706]
+    topics: [triple-therapy-copd, pcv20-vaccine, pulmonary-hypertension-drugs, sotatercept]
+    goals:
+      - "تعرف مكوّنات الـ triple therapy في الـ COPD"
+      - "تفهم ليه الـ conjugate vaccine بيقلل الـ colonization"
+      - "تربط كل دوا pulmonary hypertension بسكته وبالـ adverse effect بتاعه"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ triple therapy في الـ COPD"
+        text: |-
+          لو مريض الـ COPD عنده dyspnea مستمرة أو exacerbations، بنجمع تلات أدوية inhaled:
+          - **Inhaled corticosteroid**: يقلل الـ airway inflammation.
+          - **Long-acting β2-agonist**: bronchodilation.
+          - **Long-acting muscarinic** (زي الـ tiotropium): يقلل الـ bronchoconstriction والـ mucus.
+
+          الآليات بتكمّل بعض، فالـ ==FEV1 يزيد== والـ ==exacerbations تقل==. (الكتاب في الصفحة دي كاتب "agonists" للـ muscarinic، بس الـ class هو الـ antagonist زي ما هو في صفحة 704.)
+        page: 706
+        quote: "for treatment of COPD with persistent dyspnea or exacerbations."
+      - kind: explain
+        title: "الـ PCV20"
+        text: |-
+          الـ **PCV20** هو 20-valent pneumococcal ==conjugate== vaccine. الـ conjugation بتخلّي الرد ==T-cell–dependent IgG response==، وده بيقلل الـ nasopharyngeal colonization.
+
+          وبيضيف serotypes أكتر من الـ PCV13/15، فالحماية من الـ lobar pneumonia أوسع. افتكر: «Plenty CoVered in 20».
+        page: 706
+        quote: "20-valent pneumococcal conjugate vaccine: T-cell–dependent IgG response"
+      - kind: check
+        question: "Why does the PCV20 vaccine reduce nasopharyngeal colonization?"
+        options:
+          - "It gives a T-cell–dependent IgG response"
+          - "It gives a T-cell–independent IgM response"
+          - "It transfers ready-made antibodies"
+          - "It activates cytotoxic T cells"
+        answer: 0
+        why:
+          - "صح: الـ conjugate بيعمل T-cell–dependent IgG response فالـ colonization تقل."
+          - "ده رد الـ polysaccharide لوحده."
+          - "التطعيم active، مش passive."
+          - "الحماية هنا بالـ antibodies."
+        page: 706
+        quote: "T-cell–dependent IgG response   nasopharyngeal colonization"
+      - kind: figure
+        title: "تلات سكك في الـ pulmonary artery"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="pL5b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="60" y="18" class="t-sm t-b" text-anchor="middle">Endothelin</text>
+            <text x="180" y="18" class="t-sm t-b" text-anchor="middle">Nitric oxide</text>
+            <text x="300" y="18" class="t-sm t-b" text-anchor="middle">Prostacyclin</text>
+            <rect class="fg-box" x="10" y="30" width="100" height="28" rx="6"/>
+            <text x="60" y="48" class="t-sm" text-anchor="middle">Endothelin-1</text>
+            <rect class="fg-box" x="130" y="30" width="100" height="28" rx="6"/>
+            <text x="180" y="48" class="t-sm" text-anchor="middle">NO</text>
+            <rect class="fg-box" x="250" y="30" width="100" height="28" rx="6"/>
+            <text x="300" y="48" class="t-sm" text-anchor="middle">Prostacyclin</text>
+            <line class="fg-arrow" x1="60" y1="58" x2="60" y2="98" marker-end="url(#pL5b)"/>
+            <line class="fg-arrow" x1="180" y1="58" x2="180" y2="98" marker-end="url(#pL5b)"/>
+            <line class="fg-arrow" x1="300" y1="58" x2="300" y2="98" marker-end="url(#pL5b)"/>
+            <rect class="fg-bad" x="10" y="100" width="100" height="28" rx="6"/>
+            <text x="60" y="118" class="t-sm" text-anchor="middle">Constriction</text>
+            <rect class="fg-good" x="130" y="100" width="100" height="28" rx="6"/>
+            <text x="180" y="118" class="t-sm" text-anchor="middle">cGMP: dilation</text>
+            <rect class="fg-good" x="250" y="100" width="100" height="28" rx="6"/>
+            <text x="300" y="118" class="t-sm" text-anchor="middle">cAMP: dilation</text>
+            <text x="60" y="152" class="t-sm t-acc" text-anchor="middle">Bosentan</text>
+            <text x="60" y="168" class="t-sm t-mut" text-anchor="middle">blocks receptor</text>
+            <text x="180" y="152" class="t-sm t-acc" text-anchor="middle">Sildenafil</text>
+            <text x="180" y="168" class="t-sm t-mut" text-anchor="middle">PDE-5 off, cGMP up</text>
+            <text x="300" y="152" class="t-sm t-acc" text-anchor="middle">Epoprostenol</text>
+            <text x="300" y="168" class="t-sm t-mut" text-anchor="middle">mimics it</text>
+            <text x="60" y="196" class="t-sm t-bad" text-anchor="middle">monitor LFTs</text>
+            <text x="180" y="196" class="t-sm t-bad" text-anchor="middle">no nitrates</text>
+            <text x="300" y="196" class="t-sm t-bad" text-anchor="middle">flushing, jaw pain</text>
+          </svg>
+        alt: "Three columns. Endothelin-1 causes constriction and bosentan blocks its receptor (monitor liver tests). Nitric oxide dilates through cGMP and sildenafil inhibits PDE-5 to raise cGMP (no nitrates). Prostacyclin dilates through cAMP and epoprostenol mimics it (flushing, jaw pain)."
+        caption: "سكة بنقفلها (endothelin)، وسكتين بنقوّيهم (NO و prostacyclin)."
+        page: 706
+        quote: "Competitively antagonize endothelin-1 receptors   pulmonary vascular resistance."
+      - kind: explain
+        title: "كل دوا وتحذيره"
+        text: |-
+          - **Endothelin receptor antagonists** (==bosentan==): competitive antagonism للـ endothelin-1 receptors، فالـ pulmonary vascular resistance تقل. بس ==hepatotoxic==، فبنتابع الـ LFTs.
+          - **PDE-5 inhibitors** (sildenafil): الـ cGMP يزيد، فالـ vasodilation بتاع الـ NO يطوّل. بيستخدم كمان في الـ erectile dysfunction، وممنوع مع الـ ==nitroglycerin أو أي nitrates== عشان الـ severe hypotension.
+          - **Prostacyclin analogs** (epoprostenol، iloprost): vasodilation مباشر في الـ pulmonary والـ systemic، وبيمنعوا الـ platelet aggregation. الـ adverse effects: flushing و jaw pain.
+        page: 706
+        quote: "Contraindicated when taking nitroglycerin or other nitrates (due to risk of severe hypotension)."
+      - kind: check
+        question: "A man on sildenafil for pulmonary hypertension takes nitroglycerin for chest pain. What is the main risk?"
+        options:
+          - "Severe hypotension"
+          - "Hepatotoxicity"
+          - "Jaw pain and flushing"
+          - "Thrombocytopenia"
+        answer: 0
+        why:
+          - "صح: الـ PDE-5 inhibitor مع الـ nitrates بيعملوا severe hypotension."
+          - "الـ hepatotoxicity دي الـ bosentan."
+          - "الـ jaw pain والـ flushing دول الـ prostacyclin analogs."
+          - "الـ thrombocytopenia دي الـ sotatercept."
+        page: 706
+        quote: "Contraindicated when taking nitroglycerin or other nitrates (due to risk of severe hypotension)."
+      - kind: explain
+        title: "الـ sotatercept"
+        text: |-
+          الـ **sotatercept** fusion protein: activin receptor متركّب على الـ Fc portion بتاع الـ IgG. بيمسك الـ TGF-β molecules (الـ activins والـ growth differentiation factors)، فالـ ==pulmonary arteriolar remodeling يقل==. بيستخدم في الـ PAH (group 1).
+
+          الـ adverse effects: Hb يزيد، و==thrombocytopenia== مع خطر نزيف (زي الـ epistaxis)، فبنتابع الـ Hb والـ platelets. وكمان telangiectasia و hypertension و headache و rash، وهو ==teratogenic== فلازم contraception.
+        page: 706
+        quote: "Treatment for PAH (group 1 pulmonary hypertension)."
+      - kind: sort
+        prompt: "حط كل adverse effect أو تحذير تحت الدوا بتاعه"
+        bins: ["Bosentan", "Sildenafil", "Sotatercept"]
+        cards:
+          - { text: "Monitor LFTs", bin: 0 }
+          - { text: "Avoid nitrates", bin: 1 }
+          - { text: "Epistaxis", bin: 2 }
+          - { text: "Contraception required", bin: 2 }
+        why: "الـ bosentan hepatotoxic، والـ sildenafil مع الـ nitrates يعمل hypotension، والـ sotatercept بيعمل thrombocytopenia وهو teratogenic."
+        page: 706
+        quote: "Hepatotoxic (monitor LFTs). Example: bosentan."
+      - kind: try
+        items: [resp.L05.023, resp.L05.025, resp.L05.027, resp.L05.028, resp.L05.031]
+    recap:
+      - "COPD triple therapy: ICS + LABA + long-acting muscarinic ← FEV1 يزيد و exacerbations تقل."
+      - "PCV20 conjugate: T-cell–dependent IgG ← colonization تقل."
+      - "Bosentan: endothelin antagonist، LFTs. Sildenafil: cGMP، ممنوع مع nitrates. Epoprostenol: flushing و jaw pain."
+      - "Sotatercept: يمسك الـ TGF-β family، Hb يزيد، thrombocytopenia، teratogenic."
+    practice: [resp.L05.022, resp.L05.023, resp.L05.024, resp.L05.025, resp.L05.026, resp.L05.027, resp.L05.028, resp.L05.029, resp.L05.030, resp.L05.031]
