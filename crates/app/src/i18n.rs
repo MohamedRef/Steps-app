@@ -202,6 +202,10 @@ pub mod book {
     pub const CHIP_HINT: &str = "افتح صفحة الكتاب";
     pub const SLIDE_TITLE: &str = "سلايد";
     pub const SLIDE_HINT: &str = "افتح سلايد المحاضرة";
+    /// The page-read switch (A2): new cards from a page start once it's read.
+    pub const MARK_READ: &str = "قريت الصفحة دي";
+    pub const IS_READ: &str = "قريتها ✓";
+    pub const READ_HINT: &str = "الكروت الجديدة بتبدأ من الصفحات اللي قريتها. دوس تاني لو عايز تشيل العلامة.";
 }
 
 pub mod nav {
@@ -222,6 +226,10 @@ pub mod nav {
 pub mod today {
     pub const DUE: &str = "مستحق مراجعة";
     pub const NEW: &str = "جديد متاح";
+    /// "جديد مستني تقرا صفحاته في First Aid: 12 سؤال وكارت" (A2).
+    pub fn locked(n: usize) -> String {
+        format!("جديد مستني تقرا صفحاته في First Aid: {}", super::count::count(n, &super::count::ITEM))
+    }
     /// "3 حالات مستنية مراجعة في شاشة الحالات".
     pub fn due_cases(n: usize) -> String {
         format!("{} مستنية مراجعة في شاشة الحالات", super::count::count(n, &super::count::CASE))
@@ -368,6 +376,8 @@ pub mod study_settings {
     pub const NEW_PER_DAY: &str = "أسئلة جديدة في اليوم";
     pub const NEW_FROM_PLAN_1: &str = "عندك ميعاد امتحان، فالخطة هي اللي بتحدد الجديد كل يوم. النهارده:";
     pub const NEW_FROM_PLAN_2: &str = "جديد. تقدر تغيّر أيام المذاكرة وحد المراجعات من تقدّمي ← خطة الامتحان.";
+    pub const PAGE_GATE: &str = "الجديد من الصفحات اللي قريتها بس";
+    pub const PAGE_GATE_NOTE: &str = "كارت جديد مايبدأش غير لما تعلّم صفحته في First Aid إنك قريتها، من صفحة الكتاب أو صفحة المحاضرة. المراجعات مش بتتأثر.";
 }
 
 pub mod study {
@@ -1957,6 +1967,16 @@ pub mod lecture {
     pub const CASES: &str = "حالة";
     pub const TOPICS: &str = "المواضيع";
     pub const CHECKED: &str = "صحة المحتوى: راجعت";
+    /// "قريت 6 من 21 صفحة" (A2).
+    pub fn read_count(read: u32, all: u32) -> String {
+        format!("قريت {read} من {all} صفحة")
+    }
+    pub const READ_NONE: &str = "لسه ما علّمتش صفحات مقروءة في المحاضرة دي.";
+    pub const READ_ALL: &str = "قريت المحاضرة كلها";
+    pub const UNREAD_ALL: &str = "شيل علامة القراءة";
+    pub const READ_UPTO: &str = "قريت لحد صفحة";
+    pub const READ_UPTO_GO: &str = "علّم";
+    pub const READ_GROUP: &str = "الصفحات اللي قريتها";
 }
 
 /// Shared preference write recovery.

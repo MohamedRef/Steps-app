@@ -73,7 +73,7 @@ pub fn Today() -> Element {
                         }
                     }
                 }
-                Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0, minutes }
+                Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0 && o.locked == 0, minutes }
                 // Each count opens what it counts.
                 div { class: "stat-tiles",
                     Tile {
@@ -95,6 +95,11 @@ pub fn Today() -> Element {
                             move |_| if fresh.is_empty() { crate::stats::open(ui, crate::stats::Tab::Plan) } else { session(ui, fresh.clone()) }
                         },
                     }
+                }
+                // New items waiting for their First Aid page (A2): one quiet
+                // line, so a 0 above never reads as "nothing written".
+                if o.locked > 0 {
+                    p { class: "muted small td-locked", {tx::locked(o.locked)} }
                 }
                 // The active plan already shows its estimated minutes; without
                 // a plan this stays a quiet link, not another large metric tile.
@@ -423,9 +428,11 @@ fn unseen(store: &dyn StudyStore, o: &Overview, n: usize) -> Vec<String> {
     order
         .into_iter()
         .filter_map(|id| lib.lectures.get(id))
-        .flat_map(|l| &l.items)
-        .filter(|i| crate::study::PLAYABLE.contains(&i.body.kind()))
-        .filter(|i| store.is_new(&i.id) && !store.is_hidden(&i.id))
+        .flat_map(|l| l.items.iter().map(move |i| (l, i)))
+        .filter(|(_, i)| crate::study::PLAYABLE.contains(&i.body.kind()))
+        .filter(|(_, i)| store.is_new(&i.id) && !store.is_hidden(&i.id))
+        .filter(|(l, i)| steps_core::session::page_read(i, l, store.pages_read()))
+        .map(|(_, i)| i)
         .take(n)
         .map(|i| i.id.clone())
         .collect()

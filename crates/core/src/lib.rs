@@ -9,6 +9,7 @@ pub mod layout;
 pub mod lesson;
 pub mod own;
 pub mod pack;
+pub mod pages;
 pub mod plan;
 pub mod program;
 pub mod quote;
