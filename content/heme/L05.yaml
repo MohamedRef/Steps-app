@@ -48,6 +48,7 @@ items:
     back: An oncologic emergency triggered by massive tumor cell lysis, seen most often with lymphomas and leukemias. Usually caused by starting treatment, but it can occur spontaneously with fast-growing cancers.
     src: { page: 440, quote: "Oncologic emergency triggered by massive tumor cell lysis, seen most often with lymphomas/leukemias. Usually caused by treatment initiation, but can occur spontaneously with fast-growing cancers." }
     status: unverified
+    tags: [high-yield]
   - id: heme.L05.003
     kind: cloze
     topic: tumor-lysis-syndrome
@@ -102,10 +103,25 @@ items:
   - id: heme.L05.008
     kind: card
     topic: heparin
-    front: What are the clinical uses of heparin, and how is it monitored?
-    back: Immediate anticoagulation for PE, acute coronary syndrome, MI and DVT. Used during pregnancy (does not cross the placenta; LMWH such as enoxaparin preferred). Monitor PTT.
-    src: { page: 440, quote: "Immediate anticoagulation for pulmonary embolism (PE), acute coronary syndrome, MI, deep venous thrombosis (DVT). Used during pregnancy (does not cross placenta" }
+    front: What are the clinical uses of heparin?
+    back: Immediate anticoagulation for pulmonary embolism, acute coronary syndrome, MI and DVT.
+    src: { page: 440, quote: "Immediate anticoagulation for pulmonary embolism (PE), acute coronary syndrome, MI, deep venous thrombosis (DVT)." }
     status: unverified
+  - id: heme.L05.106
+    kind: card
+    topic: heparin
+    front: Can heparin be used in pregnancy, and which form is preferred?
+    back: Yes, because it does not cross the placenta; low-molecular-weight heparin (eg, enoxaparin) is preferred.
+    src: { page: 440, quote: "Used during pregnancy (does not cross placenta; low-molecular-weight heparin [eg, enoxaparin] preferred)." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.107
+    kind: cloze
+    topic: heparin
+    text: Heparin therapy is monitored with the {{c1::PTT}}.
+    src: { page: 440, quote: "Monitor PTT." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L05.009
     kind: enumerate
     topic: heparin
@@ -154,6 +170,7 @@ items:
     back: Unfractionated heparin, because low-molecular-weight heparins undergo renal clearance and should be used with caution.
     src: { page: 440, quote: "Unfractionated heparin used in patients with renal insufficiency (low-molecular-weight heparins should be used with caution because they undergo renal clearance)." }
     status: unverified
+    tags: [high-yield]
   - id: heme.L05.014
     kind: mcq
     topic: heparin
@@ -202,10 +219,25 @@ items:
   - id: heme.L05.018
     kind: card
     topic: warfarin
-    front: What are the clinical uses of warfarin, and why is it avoided in pregnancy?
-    back: Chronic anticoagulation (VTE prophylaxis, stroke prevention in atrial fibrillation, systemic embolism prophylaxis with LVADs or mechanical heart valves). Not used in pregnancy because warfarin, unlike heparin, crosses the placenta.
-    src: { page: 441, quote: "Not used in pregnant patients (because warfarin, unlike heparin, crosses placenta). Monitor PT/INR." }
+    front: What are the clinical uses of warfarin?
+    back: "Long-term (chronic) anticoagulation: preventing venous thromboembolism, preventing stroke in atrial fibrillation, and preventing systemic embolism in patients with LVADs or mechanical heart valves."
+    src: { page: 441, quote: "Chronic anticoagulation (eg, venous thromboembolism prophylaxis, stroke prevention in atrial fibrillation, and systemic embolism prophylaxis in patients with LVADs or mechanical heart valves)." }
     status: unverified
+  - id: heme.L05.108
+    kind: card
+    topic: warfarin
+    front: Why is warfarin not used in pregnancy?
+    back: Unlike heparin, warfarin crosses the placenta.
+    src: { page: 441, quote: "Not used in pregnant patients (because warfarin, unlike heparin, crosses placenta)." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.109
+    kind: cloze
+    topic: warfarin
+    text: Warfarin therapy is monitored with the {{c1::PT/INR}}.
+    src: { page: 441, quote: "Monitor PT/INR." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L05.019
     kind: enumerate
     topic: warfarin
@@ -223,8 +255,16 @@ items:
     kind: card
     topic: warfarin
     front: Why does warfarin cause an initial hypercoagulable state?
-    back: Protein C has a shorter half-life than factors II and X, so existing protein C is depleted before existing factors II and X (and before warfarin cuts their production) → hypercoagulation. Skin/tissue necrosis in the first few days of large doses is thought to come from small vessel microthrombosis.
+    back: Protein C has a shorter half-life than factors II and X, so the existing protein C runs out before the existing factors II and X do (and before warfarin can cut their production) → hypercoagulation.
     src: { page: 441, quote: "Initial risk of hypercoagulation: protein C has shorter half-life than factors II and X. Existing protein C depletes before existing factors II and X deplete" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.110
+    kind: card
+    topic: warfarin
+    front: What is thought to cause the skin/tissue necrosis in the first few days of large warfarin doses?
+    back: Small vessel microthrombosis.
+    src: { page: 441, quote: "Skin/tissue necrosis within first few days of large doses believed to be due to small vessel microthrombosis." }
     status: unverified
     tags: [high-yield]
   - id: heme.L05.021
@@ -546,21 +586,24 @@ items:
     kind: mcq
     topic: cancer-therapy-cell-cycle
     stem: >-
-      In a study of cultured tumor cells, a drug kills cells only while they are in mitosis; cells
-      arrested in G0 or S phase are spared. Which of the following drugs fits this pattern?
+      A 4-year-old boy with acute lymphoblastic leukemia is in the second week of induction
+      chemotherapy with weekly intravenous vincristine, glucocorticoids and asparaginase. He now has
+      tingling feet, absent ankle reflexes and severe constipation. His blood counts are only mildly
+      reduced. In which phase of the cell cycle does the drug most likely causing these effects kill
+      tumor cells?
     options:
-      - Cisplatin
-      - Methotrexate
-      - Vincristine
-      - Busulfan
-      - Dactinomycin
-    answer: 2
+      - G0 (it acts regardless of phase)
+      - G1
+      - S
+      - G2
+      - M
+    answer: 4
     why:
-      - "Platinum compounds are cell cycle nonspecific."
-      - "Methotrexate, an antimetabolite, acts in S phase."
-      - "Right. Microtubule inhibitors (vinca alkaloids and taxanes) are M-phase specific."
-      - "Alkylating agents such as busulfan are cell cycle nonspecific."
-      - "Dactinomycin is cell cycle nonspecific."
+      - "Cell cycle–independent drugs include alkylating agents, platinum compounds, dactinomycin, bleomycin and anthracyclines, not vinca alkaloids."
+      - "G1 is where Rb and p53 control the restriction point; vincristine does not act there."
+      - "S phase is where antimetabolites (methotrexate, 5-FU, cytarabine, hydroxyurea, thiopurines) act."
+      - "Topoisomerase inhibitors cause arrest in S and G2; vincristine is not one."
+      - "Right. Vincristine (neuropathy and constipation, 'crisps the nerves') is a vinca alkaloid; it blocks microtubule polymerization and the mitotic spindle, so it acts in M phase."
     src: { page: 443, quote: "Microtubule inhibitors Taxanes Vinca alkaloids" }
     status: unverified
   # ---------- p443: Cancer therapy—targets ----------
@@ -716,9 +759,16 @@ items:
   - id: heme.L05.057
     kind: card
     topic: antimetabolites
-    front: What are the uses and adverse effects of thiopurines (azathioprine, 6-MP)?
-    back: "Uses: rheumatoid arthritis, IBD, SLE, ALL, steroid-refractory disease, preventing organ rejection, weaning from glucocorticoids. Adverse: myelosuppression, GI and liver toxicity."
-    src: { page: 444, quote: "Rheumatoid arthritis, IBD, SLE, ALL; steroid-refractory disease Prevention of organ rejection Weaning from glucocorticoids Myelosuppression; GI, liver toxicity" }
+    front: What are the clinical uses of thiopurines (azathioprine, 6-MP)?
+    back: Rheumatoid arthritis, IBD, SLE, ALL and steroid-refractory disease; preventing organ rejection; weaning patients off glucocorticoids.
+    src: { page: 444, quote: "Rheumatoid arthritis, IBD, SLE, ALL; steroid-refractory disease Prevention of organ rejection Weaning from glucocorticoids" }
+    status: unverified
+  - id: heme.L05.111
+    kind: card
+    topic: antimetabolites
+    front: What are the adverse effects of thiopurines (azathioprine, 6-MP)?
+    back: Myelosuppression, plus GI and liver toxicity.
+    src: { page: 444, quote: "Myelosuppression; GI, liver toxicity" }
     status: unverified
   - id: heme.L05.058
     kind: cloze
@@ -751,18 +801,46 @@ items:
   - id: heme.L05.062
     kind: card
     topic: antimetabolites
-    front: What are the uses and adverse effects of 5-fluorouracil, and which drug is its prodrug?
-    back: "Uses: colon and pancreatic cancer; topical for actinic keratosis and basal cell carcinoma. Adverse: myelosuppression, palmar-plantar erythrodysesthesia (hand-foot syndrome). Capecitabine is a prodrug."
+    front: What are the clinical uses of 5-fluorouracil?
+    back: Colon and pancreatic cancer; used topically for actinic keratosis and basal cell carcinoma.
+    src: { page: 444, quote: "Colon cancer, pancreatic cancer, actinic keratosis, basal cell carcinoma (topical)" }
+    status: unverified
+  - id: heme.L05.112
+    kind: card
+    topic: antimetabolites
+    front: What are the adverse effects of 5-fluorouracil?
+    back: Myelosuppression and palmar-plantar erythrodysesthesia (hand-foot syndrome).
     src: { page: 444, quote: "Myelosuppression, palmar- plantar erythrodysesthesia (hand-foot syndrome)" }
+    status: unverified
+  - id: heme.L05.113
+    kind: cloze
+    topic: antimetabolites
+    text: "{{c1::Capecitabine}} is a prodrug of 5-fluorouracil."
+    src: { page: 444, quote: "Capecitabine is a prodrug" }
     status: unverified
   - id: heme.L05.063
     kind: card
     topic: antimetabolites
-    front: What is the mechanism, uses and toxicity of hydroxyurea?
-    back: "Inhibits ribonucleotide reductase → ↓ DNA synthesis. Used for myeloproliferative disorders (CML, polycythemia vera) and sickle cell disease (↑ HbF). Adverse: severe myelosuppression, megaloblastic anemia."
-    src: { page: 444, quote: "Inhibits ribonucleotide reductase → ↓ DNA synthesis Myeloproliferative disorders (eg, CML, polycythemia vera), sickle cell disease (↑ HbF)" }
+    front: What is the mechanism of hydroxyurea?
+    back: It inhibits ribonucleotide reductase → ↓ DNA synthesis.
+    src: { page: 444, quote: "Inhibits ribonucleotide reductase → ↓ DNA synthesis" }
     status: unverified
     tags: [high-yield]
+  - id: heme.L05.114
+    kind: card
+    topic: antimetabolites
+    front: What are the clinical uses of hydroxyurea?
+    back: Myeloproliferative disorders (eg, CML, polycythemia vera) and sickle cell disease, where it raises HbF.
+    src: { page: 444, quote: "Myeloproliferative disorders (eg, CML, polycythemia vera), sickle cell disease (↑ HbF)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.115
+    kind: card
+    topic: antimetabolites
+    front: What are the adverse effects of hydroxyurea?
+    back: Severe myelosuppression and megaloblastic anemia.
+    src: { page: 444, quote: "Severe myelosuppression, megaloblastic anemia" }
+    status: unverified
   - id: heme.L05.064
     kind: cloze
     topic: antimetabolites
@@ -898,9 +976,23 @@ items:
   - id: heme.L05.074
     kind: card
     topic: platinum-compounds
-    front: Name the platinum compounds, their mechanism and clinical uses.
-    back: "Cisplatin, carboplatin, oxaliplatin. Cross-link DNA; cell cycle nonspecific. Used for solid tumors (testicular, bladder, ovarian, GI, lung) and lymphomas."
-    src: { page: 445, quote: "Cisplatin, carboplatin, oxaliplatin. MECHANISM Cross-link DNA. Cell cycle nonspecific." }
+    front: Name the platinum compounds.
+    back: Cisplatin, carboplatin and oxaliplatin.
+    src: { page: 445, quote: "Platinum compounds Cisplatin, carboplatin, oxaliplatin." }
+    status: unverified
+  - id: heme.L05.116
+    kind: card
+    topic: platinum-compounds
+    front: How do platinum compounds work, and are they cell cycle specific?
+    back: They cross-link DNA, and they are cell cycle nonspecific.
+    src: { page: 445, quote: "Cross-link DNA. Cell cycle nonspecific." }
+    status: unverified
+  - id: heme.L05.117
+    kind: card
+    topic: platinum-compounds
+    front: What are the clinical uses of platinum compounds?
+    back: Solid tumors (eg, testicular, bladder, ovarian, GI, lung) and lymphomas.
+    src: { page: 445, quote: "Solid tumors (eg, testicular, bladder, ovarian, GI, lung), lymphomas." }
     status: unverified
   - id: heme.L05.075
     kind: cloze
@@ -1035,10 +1127,23 @@ items:
   - id: heme.L05.085
     kind: card
     topic: tamoxifen
-    front: What are the clinical uses and adverse effects of tamoxifen?
-    back: "Uses: prevention and treatment of breast cancer; preventing gynecomastia in patients on prostate cancer therapy. Adverse: hot flashes, ↑ thromboembolic events (DVT, PE), endometrial cancer, uterine sarcoma."
+    front: What are the clinical uses of tamoxifen?
+    back: Preventing and treating breast cancer, and preventing gynecomastia in patients on prostate cancer therapy.
+    src: { page: 446, quote: "Prevention and treatment of breast cancer, prevention of gynecomastia in patients undergoing prostate cancer therapy." }
+    status: unverified
+  - id: heme.L05.118
+    kind: enumerate
+    topic: tamoxifen
+    prompt: Enumerate the adverse effects of tamoxifen (4).
+    points:
+      - Hot flashes
+      - ↑ risk of thromboembolic events (eg, DVT, PE)
+      - Endometrial cancer
+      - Uterine sarcoma
+    pass: 4
     src: { page: 446, quote: "Hot flashes, ↑ risk of thromboembolic events (eg, DVT, PE), endometrial cancer, uterine sarcoma." }
     status: unverified
+    tags: [high-yield]
   - id: heme.L05.086
     kind: mcq
     topic: tamoxifen
@@ -1083,7 +1188,7 @@ items:
       - ["Pembrolizumab, nivolumab, cemiplimab", PD-1, "Various tumors (NSCLC, RCC, melanoma, urothelial carcinoma)", ↑ Autoimmunity]
       - ["Atezolizumab, durvalumab, avelumab", PD-L1, "Various tumors (NSCLC, RCC, melanoma, urothelial carcinoma)", ↑ Autoimmunity]
       - [Ipilimumab, CTLA-4, "Various tumors (NSCLC, RCC, melanoma, urothelial carcinoma)", ↑ Autoimmunity]
-    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    blanks: [[0, 1], [0, 2], [0, 3], [1, 1], [1, 3], [2, 1], [2, 2], [3, 1], [3, 3], [4, 1], [4, 2], [4, 3], [5, 1], [5, 3], [6, 1], [7, 1]]
     src: { page: 446, quote: "Alemtuzumab CD52 Chronic lymphocytic leukemia (CLL), multiple sclerosis." }
     status: unverified
     tags: [high-yield]
@@ -1098,8 +1203,28 @@ items:
     kind: card
     topic: anticancer-monoclonal-antibodies
     front: When can cetuximab or panitumumab be used in colorectal cancer?
-    back: In metastatic CRC with wild-type RAS (they target EGFR). Also used for head and neck cancer. Adverse effects are rash, elevated LFTs and diarrhea.
-    src: { page: 446, quote: "Cetuximab, panitumumab EGFR Metastatic CRC (wild-type RAS), head and neck cancer Rash, elevated LFTs, diarrhea" }
+    back: Only in metastatic CRC whose RAS is wild type.
+    src: { page: 446, quote: "Metastatic CRC (wild-type RAS)" }
+    status: unverified
+  - id: heme.L05.119
+    kind: cloze
+    topic: anticancer-monoclonal-antibodies
+    text: Cetuximab and panitumumab are monoclonal antibodies against {{c1::EGFR}}.
+    src: { page: 446, quote: "Cetuximab, panitumumab EGFR" }
+    status: unverified
+  - id: heme.L05.120
+    kind: card
+    topic: anticancer-monoclonal-antibodies
+    front: Besides metastatic colorectal cancer, which cancer are cetuximab and panitumumab used for?
+    back: Head and neck cancer.
+    src: { page: 446, quote: "head and neck cancer" }
+    status: unverified
+  - id: heme.L05.121
+    kind: card
+    topic: anticancer-monoclonal-antibodies
+    front: What are the adverse effects of cetuximab and panitumumab?
+    back: Rash, elevated LFTs and diarrhea.
+    src: { page: 446, quote: "Rash, elevated LFTs, diarrhea" }
     status: unverified
   - id: heme.L05.091
     kind: card
@@ -1175,7 +1300,7 @@ items:
       - ["Vemurafenib, encorafenib, dabrafenib", BRAF, Melanoma (often with MEK inhibitors such as trametinib), "Rash, fatigue, nausea, diarrhea"]
       - [Palbociclib, Cyclin-dependent kinase 4/6 (arrest at G1-S → apoptosis), Breast cancer, "Myelosuppression, pneumonitis"]
       - [Olaparib, Poly(ADP-ribose) polymerase (↓ DNA repair), "Breast, ovarian, pancreatic, and prostate cancers", "Myelosuppression, edema, diarrhea"]
-    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2], [2, 3], [3, 1], [3, 2], [4, 1], [4, 2], [4, 3], [5, 1], [5, 2], [6, 1], [6, 2], [7, 1], [7, 2]]
     src: { page: 447, quote: "Imatinib, dasatinib, nilotinib BCR-ABL (also other tyrosine kinases [eg, c-KIT]) CML, ALL, GISTs" }
     status: unverified
     tags: [high-yield]
@@ -1232,7 +1357,7 @@ items:
       - ["Aprepitant, fosaprepitant", NK1 receptor antagonists, Delayed nausea and vomiting (>24 hr)]
       - ["Filgrastim, sargramostim", Recombinant G(M)-CSF, Neutropenia]
       - [Epoetin alfa, Recombinant erythropoietin, Anemia]
-    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 2], [3, 1], [3, 2], [4, 1], [7, 1], [7, 2]]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 2], [3, 1], [3, 2], [4, 1], [7, 1], [7, 2], [8, 1], [8, 2], [9, 1], [9, 2]]
     src: { page: 447, quote: "Amifostine Free radical scavenger Nephrotoxicity from platinum compounds Dexrazoxane Iron chelator Cardiotoxicity from anthracyclines" }
     status: unverified
     tags: [high-yield]

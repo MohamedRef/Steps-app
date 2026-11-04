@@ -21,9 +21,24 @@ items:
   - id: gi.L05.001
     kind: card
     topic: pancreatic-adenocarcinoma
-    front: Where does pancreatic adenocarcinoma arise, and what is its prognosis?
-    back: From the pancreatic ducts; very aggressive, often metastatic at presentation, average survival about 1 year after diagnosis.
+    front: "From which structures does pancreatic adenocarcinoma arise?"
+    back: "From the pancreatic ducts; it is a very aggressive tumor."
     src: { page: 405, quote: "Very aggressive tumor arising from pancreatic ducts" }
+    status: unverified
+  - id: gi.L05.068
+    kind: card
+    topic: pancreatic-adenocarcinoma
+    front: "What is the prognosis of pancreatic adenocarcinoma?"
+    back: "It is often metastatic at presentation, with an average survival of about 1 year after diagnosis."
+    src: { page: 405, quote: "often metastatic at presentation, with average survival ~1 year after diagnosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L05.069
+    kind: card
+    topic: pancreatic-adenocarcinoma
+    front: "What does the histology of pancreatic adenocarcinoma show?"
+    back: "A disorganized glandular structure with cellular infiltration."
+    src: { page: 405, quote: "disorganized glandular structure with cellular infiltration" }
     status: unverified
   - id: gi.L05.002
     kind: cloze
@@ -46,6 +61,7 @@ items:
     back: A KRAS-activating mutation.
     src: { page: 405, quote: "Most common genomic abnormality is KRAS- activating mutation." }
     status: unverified
+    tags: [high-yield]
   - id: gi.L05.005
     kind: enumerate
     topic: pancreatic-adenocarcinoma
@@ -167,6 +183,42 @@ items:
     src: { page: 405, quote: "Gq Gs H2 blockers ECL cells G cells cAMP" }
     status: unverified
 
+  - id: gi.L05.070
+    kind: card
+    topic: acid-suppression-therapy
+    front: "In the book's acid-suppression figure, how do somatostatin and the vagus (via GRP) act on G cells?"
+    back: "Somatostatin inhibits G cells; the vagus nerve stimulates them through gastrin-releasing peptide (GRP)."
+    src: { page: 405, quote: "Vagus nerve Gastric parietal cell Lumen Carbonic anhydrase Gq Gs H2 blockers ECL cells G cells cAMP Sucralfate, bismuth GRP" }
+    status: unverified
+  - id: gi.L05.071
+    kind: card
+    topic: acid-suppression-therapy
+    front: "Which enzyme in the parietal cell makes the H+ secreted into the lumen and the HCO3- released into the blood?"
+    back: "Carbonic anhydrase (CO2 + H2O → H2CO3 → H+ + HCO3-)."
+    src: { page: 405, quote: "Gastric parietal cell Lumen Carbonic anhydrase" }
+    status: unverified
+  - id: gi.L05.072
+    kind: mcq
+    topic: acid-suppression-therapy
+    stem: >-
+      A 45-year-old man with a gastrinoma has recurrent duodenal and jejunal ulcers. His serum gastrin is
+      markedly elevated. He is to start a drug that suppresses gastric acid no matter whether gastrin,
+      histamine or acetylcholine is driving the parietal cell. Which target does this drug act on?
+    options:
+      - "H+/K+-ATPase of the parietal cell"
+      - "Histamine H2 receptor"
+      - "Muscarinic M3 receptor"
+      - "CCKB (gastrin) receptor"
+      - "Prostaglandin receptor"
+    answer: 0
+    why:
+      - "Right. Gastrin (CCKB), histamine (H2) and ACh (M3) signals all converge on the H+/K+-ATPase; PPIs block it irreversibly and are used in Zollinger-Ellison syndrome."
+      - "H2-blockers block only the histamine signal, so gastrin and ACh still drive secretion."
+      - "Blocking M3 (eg, atropine) stops only the vagal ACh signal."
+      - "The CCKB receptor carries only the gastrin signal."
+      - "Prostaglandins (misoprostol) reduce acid through the Gi pathway; they do not block the final common step."
+    src: { page: 406, quote: "Peptic ulcer, gastritis, esophageal reflux, Zollinger-Ellison syndrome, component of therapy for H pylori, stress ulcer prophylaxis." }
+    status: unverified
   # ---------- H2-blockers (p406) ----------
   - id: gi.L05.014
     kind: card
@@ -180,6 +232,12 @@ items:
     topic: h2-blockers
     text: H2-blockers cause a {{c1::reversible}} block of histamine H2 receptors → ↓ H+ secretion by {{c2::parietal cells}}.
     src: { page: 406, quote: "Reversible block of histamine H2 -receptors → ↓ H+ secretion by parietal cells." }
+    status: unverified
+  - id: gi.L05.073
+    kind: cloze
+    topic: h2-blockers
+    text: "First Aid's mnemonic: take H2 blockers {{c1::before you dine}}; think \"table for {{c2::2}}\" to remember H2."
+    src: { page: 406, quote: "Take H blockers before you dine. Think “table for 2” to remember H ." }
     status: unverified
   - id: gi.L05.016
     kind: card
@@ -312,10 +370,18 @@ items:
   - id: gi.L05.026
     kind: card
     topic: antacids
-    front: How can antacids change the effects of other drugs, and which electrolyte problem do all antacids cause?
-    back: They alter gastric and urinary pH or delay gastric emptying, changing absorption, bioavailability or urinary excretion of other drugs. All can cause hypokalemia.
-    src: { page: 406, quote: "Can affect absorption, bioavailability, or urinary excretion of other drugs by altering gastric and urinary pH or by delaying gastric emptying. All can cause hypokalemia." }
+    front: "How can antacids change the effects of other drugs?"
+    back: "They alter gastric and urinary pH or delay gastric emptying, changing the absorption, bioavailability or urinary excretion of other drugs."
+    src: { page: 406, quote: "Can affect absorption, bioavailability, or urinary excretion of other drugs by altering gastric and urinary pH or by delaying gastric emptying." }
     status: unverified
+  - id: gi.L05.074
+    kind: card
+    topic: antacids
+    front: "Which electrolyte problem can all antacids cause?"
+    back: "Hypokalemia."
+    src: { page: 406, quote: "All can cause hypokalemia." }
+    status: unverified
+    tags: [high-yield]
   - id: gi.L05.027
     kind: enumerate
     topic: antacids
@@ -327,7 +393,7 @@ items:
       - Proximal muscle weakness
       - Seizures
     pass: 4
-    hook: "Aluminimum amount of feces: الـ aluminum بيقلّل البراز، يعني إمساك"
+    hook: "CHOPS: Constipation (Aluminimum amount of feces، تحشيشة الكتاب: الـ aluminum بيقلّل البراز)، Hypophosphatemia، Osteodystrophy، Proximal muscle weakness، Seizures."
     src: { page: 406, quote: "Aluminum hydroxide Constipation, Hypophosphatemia, Osteodystrophy, Proximal muscle weakness, Seizures" }
     status: unverified
     tags: [high-yield]
@@ -386,23 +452,23 @@ items:
     stem: >-
       A 45-year-old woman with peptic ulcer disease has been chewing large amounts of calcium carbonate
       tablets and drinking milk for weeks. She now has confusion, polyuria and constipation. Serum calcium
-      is 13.4 mg/dL, bicarbonate is 34 mEq/L and creatinine is 1.9 mg/dL. Which is the most likely diagnosis?
+      is 13.4 mg/dL, bicarbonate is 34 mEq/L and creatinine is 1.9 mg/dL. She is also about to start
+      tetracycline for acne. Which other effect of her antacid is most relevant?
     options:
-      - Milk-alkali syndrome
-      - Primary hyperparathyroidism
-      - Zollinger-Ellison syndrome
-      - Hypermagnesemia
-      - Vitamin D deficiency
+      - "It chelates tetracycline and decreases its effectiveness"
+      - "It causes hypophosphatemia and osteodystrophy"
+      - "It causes diarrhea and hyporeflexia"
+      - "It inhibits cytochrome P-450 and raises tetracycline levels"
+      - "It irreversibly inhibits the parietal cell H+/K+-ATPase"
     answer: 0
     why:
-      - "Right. Calcium carbonate can cause hypercalcemia (milk-alkali syndrome): hypercalcemia, metabolic alkalosis and acute kidney injury."
-      - "Primary hyperparathyroidism causes hypercalcemia but not this alkalosis tied to antacid intake; PTH would be suppressed here."
-      - "Zollinger-Ellison causes refractory ulcers and diarrhea, not hypercalcemia with alkalosis (unless MEN1 with hyperparathyroidism, not suggested here)."
-      - "Hypermagnesemia comes from magnesium antacids and causes hyporeflexia and hypotension."
-      - "Vitamin D deficiency lowers calcium."
-    src: { page: 406, quote: "Calcium carbonate Hypercalcemia (milk-alkali syndrome), rebound acid ↑" }
+      - "Right. Calcium carbonate causes hypercalcemia (milk-alkali syndrome) and rebound acid ↑, and it can chelate and ↓ the effectiveness of other drugs such as tetracycline."
+      - "Hypophosphatemia and osteodystrophy are adverse effects of aluminum hydroxide (CHOPS)."
+      - "Diarrhea and hyporeflexia are adverse effects of magnesium hydroxide."
+      - "Potent P-450 inhibition is a cimetidine effect, not an antacid one."
+      - "Irreversible H+/K+-ATPase inhibition is how PPIs work; antacids neutralize acid already secreted."
+    src: { page: 406, quote: "Calcium carbonate Hypercalcemia (milk-alkali syndrome), rebound acid ↑ Can chelate and ↓ effectiveness of other drugs (eg, tetracycline)" }
     status: unverified
-
   # ---------- Bismuth, sucralfate (p406) ----------
   - id: gi.L05.033
     kind: card
@@ -426,6 +492,29 @@ items:
     src: { page: 406, quote: "↑ ulcer healing, travelers’ diarrhea (bismuth). Bismuth also used in quadruple therapy for H pylori." }
     status: unverified
 
+  - id: gi.L05.075
+    kind: mcq
+    topic: bismuth-sucralfate
+    stem: >-
+      A 52-year-old man with an endoscopically confirmed duodenal ulcer is prescribed sucralfate. A week
+      later another physician adds high-dose omeprazole for his reflux. At follow-up endoscopy 8 weeks
+      later the ulcer has barely healed, although he has taken both drugs exactly as prescribed. Which best
+      explains the poor response to sucralfate?
+    options:
+      - "Sucralfate needs an acidic environment to work"
+      - "Omeprazole induces the metabolism of sucralfate"
+      - "Sucralfate chelates omeprazole"
+      - "Omeprazole blocks sucralfate absorption into the blood"
+      - "Sucralfate acts only on gastric, not duodenal, ulcers"
+    answer: 0
+    why:
+      - "Right. Sucralfate (like bismuth) binds the ulcer base for physical protection, but it requires an acidic environment, so it is not given with PPIs or H2-blockers."
+      - "There is no such interaction; the problem is the loss of the acid sucralfate needs."
+      - "Chelation of other drugs (eg, tetracycline) is a calcium carbonate effect."
+      - "Sucralfate works locally by binding the ulcer base, not after absorption."
+      - "Sucralfate binds the ulcer base and ↑ healing of peptic ulcers, including duodenal ones."
+    src: { page: 406, quote: "Sucralfate requires acidic environment, not given with PPIs/H2 blockers." }
+    status: unverified
   # ---------- Misoprostol (p406) ----------
   - id: gi.L05.036
     kind: card
@@ -519,12 +608,11 @@ items:
       - "Right. Octreotide, the somatostatin analog, is used for acute variceal bleeds; it inhibits CCK, so the gallbladder empties poorly and stones form."
       - "Hyperprolactinemia comes from D2 antagonists such as metoclopramide."
       - "Hypomagnesemia is a PPI effect."
-      - "QT prolongation is a named effect of ondansetron, not octreotide in the book."
+      - "QT interval prolongation is the book's named effect of ondansetron; octreotide's named risk is cholelithiasis."
       - "Reversible oligospermia is an effect of sulfasalazine."
     src: { page: 407, quote: "Nausea, cramps, steatorrhea. ↑ risk of cholelithiasis due to CCK inhibition." }
     status: unverified
     tags: [high-yield]
-
   # ---------- Sulfasalazine (p407) ----------
   - id: gi.L05.044
     kind: cloze
@@ -536,10 +624,18 @@ items:
   - id: gi.L05.045
     kind: card
     topic: sulfasalazine
-    front: What are the clinical uses and adverse effects of sulfasalazine?
-    back: "Uses: ulcerative colitis, Crohn disease (colitis component). Adverse effects: malaise, nausea, sulfonamide toxicity, reversible oligospermia."
+    front: "What are the clinical uses of sulfasalazine?"
+    back: "Ulcerative colitis and Crohn disease (colitis component)."
     src: { page: 407, quote: "Ulcerative colitis, Crohn disease (colitis component)." }
     status: unverified
+  - id: gi.L05.076
+    kind: card
+    topic: sulfasalazine
+    front: "What are the adverse effects of sulfasalazine?"
+    back: "Malaise, nausea, sulfonamide toxicity and reversible oligospermia."
+    src: { page: 407, quote: "Malaise, nausea, sulfonamide toxicity, reversible oligospermia." }
+    status: unverified
+    tags: [high-yield]
   - id: gi.L05.046
     kind: mcq
     topic: sulfasalazine
@@ -575,11 +671,39 @@ items:
   - id: gi.L05.048
     kind: card
     topic: loperamide-diphenoxylate
-    front: What are the use and adverse effects of loperamide and diphenoxylate?
-    back: "Use: diarrhea. Adverse effects: constipation, nausea."
+    front: "What is the clinical use of loperamide and diphenoxylate?"
+    back: "Diarrhea."
+    src: { page: 407, quote: "CLINICAL USe Diarrhea." }
+    status: unverified
+  - id: gi.L05.077
+    kind: card
+    topic: loperamide-diphenoxylate
+    front: "What are the adverse effects of loperamide and diphenoxylate?"
+    back: "Constipation and nausea."
     src: { page: 407, quote: "Constipation, nausea." }
     status: unverified
-
+  - id: gi.L05.078
+    kind: mcq
+    topic: loperamide-diphenoxylate
+    stem: >-
+      A 30-year-old woman develops acute watery, nonbloody diarrhea while on vacation. She has no fever. She
+      buys an over-the-counter drug that acts on the same receptor as morphine and slows gut motility, yet
+      it is sold freely. Which property best explains its low addictive potential?
+    options:
+      - "Poor penetration into the central nervous system"
+      - "Antagonism of 5-HT3 receptors on vagal afferents"
+      - "Antagonism of NK1 (substance P) receptors"
+      - "Antagonism of D2 receptors in the area postrema"
+      - "Activation of guanylate cyclase-C in the intestine"
+    answer: 0
+    why:
+      - "Right. Loperamide and diphenoxylate are μ-opioid agonists that ↓ gut motility; poor CNS penetration gives them low addictive potential. Adverse effects are constipation and nausea."
+      - "5-HT3 antagonism is ondansetron, an antiemetic."
+      - "NK1 antagonism is aprepitant, used for chemotherapy-induced nausea."
+      - "D2 antagonism is metoclopramide or prochlorperazine, antiemetics."
+      - "Guanylate cyclase-C agonists (linaclotide) ↑ intestinal secretion and treat constipation."
+    src: { page: 407, quote: "Agonists at μ-opioid receptors → ↓ gut motility. Poor CNS penetration (low addictive potential)." }
+    status: unverified
   # ---------- Antiemetics (p407) ----------
   - id: gi.L05.049
     kind: card
@@ -678,6 +802,13 @@ items:
     src: { page: 407, quote: "Inhibits gastric and pancreatic lipase → ↓ breakdown and absorption of dietary fats." }
     status: unverified
     tags: [high-yield]
+  - id: gi.L05.079
+    kind: card
+    topic: orlistat
+    front: "When is orlistat taken?"
+    back: "With fat-containing meals."
+    src: { page: 407, quote: "Taken with fat-containing meals." }
+    status: unverified
   - id: gi.L05.057
     kind: card
     topic: orlistat
@@ -744,9 +875,16 @@ items:
   - id: gi.L05.062
     kind: card
     topic: anticonstipation-drugs
-    front: What are the mechanisms of bisacodyl/senna and of docusate?
-    back: "Bisacodyl, senna (stimulant): enteric nerve stimulation → colonic contraction. Docusate (emollient): a surfactant that ↓ stool surface tension so water enters the stool."
-    src: { page: 408, quote: "Bisacodyl, senna Enteric nerve stimulation → colonic contraction Diarrhea Emollient laxatives Docusate Surfactants that ↓ stool surface tension, promoting water entry into stool" }
+    front: "What is the mechanism of the stimulant laxatives bisacodyl and senna?"
+    back: "Enteric nerve stimulation → colonic contraction."
+    src: { page: 408, quote: "Bisacodyl, senna Enteric nerve stimulation → colonic contraction" }
+    status: unverified
+  - id: gi.L05.080
+    kind: card
+    topic: anticonstipation-drugs
+    front: "What is the mechanism of the emollient laxative docusate?"
+    back: "A surfactant that ↓ stool surface tension, so water enters the stool."
+    src: { page: 408, quote: "Docusate Surfactants that ↓ stool surface tension, promoting water entry into stool" }
     status: unverified
   - id: gi.L05.063
     kind: card
@@ -764,9 +902,16 @@ items:
   - id: gi.L05.065
     kind: card
     topic: anticonstipation-drugs
-    front: What are the mechanisms of prucalopride and tenapanor?
-    back: "Prucalopride: 5-HT4 agonism → enteric nerve stimulation → ↑ peristalsis and secretion. Tenapanor: inhibits the Na+/H+ exchanger (NHE3) → ↓ Na+ absorption → ↑ water secretion in the lumen."
+    front: "What is the mechanism of prucalopride?"
+    back: "5-HT4 agonism → enteric nerve stimulation → ↑ peristalsis and intestinal secretion."
     src: { page: 408, quote: "agonism → enteric nerve stimulation → ↑ peristalsis, intestinal secretion" }
+    status: unverified
+  - id: gi.L05.081
+    kind: card
+    topic: anticonstipation-drugs
+    front: "What is the mechanism of tenapanor?"
+    back: "It inhibits the Na+/H+ exchanger (NHE3) → ↓ Na+ absorption → ↑ water secretion into the lumen."
+    src: { page: 408, quote: "Inhibits Na+ /H+ exchanger → ↓ Na+ absorption → ↑ H2 O secretion in lumen" }
     status: unverified
   - id: gi.L05.066
     kind: mcq
