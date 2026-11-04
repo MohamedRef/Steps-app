@@ -161,3 +161,40 @@ fn another_screen_can_open_a_tab() {
     tab(&mut app, tx::TAB_PROGRESS);
     app.assert_has(tx::SUMMARY);
 }
+
+/// Misses he was sure of, with reasons: a card three days ago (due for a
+/// retest), an MCQ yesterday (too soon), both with a reason.
+fn sure_misses() {
+    use steps_core::review::{Confidence, ErrorReason};
+    let lecture = &Library::get().lectures[&ready()];
+    let card = lecture.items.iter().find(|i| crate::study::is_playable(&i.id)).expect("a card");
+    let review = consume_context::<crate::store::Review>();
+    let now = crate::store::now_ms();
+    let miss = |item: &str, days_ago: i64, reason: ErrorReason| ReviewEvent {
+        confidence: Some(Confidence::Sure),
+        reason: Some(reason),
+        ..ReviewEvent::new(item, Grade::Again, Origin::Study, now - days_ago * DAY_MS - 3_600_000, 8_000)
+    };
+    review.backend.borrow_mut().record(miss(&card.id, 3, ErrorReason::Misread));
+    if let Some(mcq) = lecture.items.iter().find(|i| i.body.kind() == "mcq") {
+        review.backend.borrow_mut().record(miss(&mcq.id, 1, ErrorReason::Knowledge));
+    }
+}
+
+#[test]
+fn sure_misses_lead_the_log_and_come_back_for_a_retest() {
+    use crate::i18n::metacog as mc;
+    let mut app = App::with(Screen::Stats, sure_misses);
+    tab(&mut app, tx::TAB_MISTAKES);
+    app.assert_has(mc::WAS_SURE);
+    app.assert_has(mc::BY_REASON);
+    app.assert_has(mc::MISREAD);
+    // One reason narrows the log; the chip again (or "all") widens it.
+    app.tap(mc::MISREAD);
+    app.assert_has(mc::MISREAD);
+    app.tap(mc::ALL_REASONS);
+    // The card missed three days ago is due for one more try.
+    app.assert_has(mc::RETEST_TITLE);
+    app.tap(mc::RETEST_START);
+    assert_eq!(screen(&app), "Study");
+}
