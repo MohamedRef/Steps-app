@@ -1,0 +1,45 @@
+name: Lesson and study browser regression
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: screens-browser-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  screens:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          shared-key: settings-browser
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      - name: Render the production lesson player and study screen
+        env:
+          APP_BROWSER_FIXTURES: ${{ github.workspace }}/target/screen-fixtures
+        run: cargo test -p steps-app --no-default-features --locked export_screen_fixtures -- --ignored
+      - name: Install the pinned test browser
+        run: |
+          npm install --prefix "$RUNNER_TEMP/browser-tools" --no-audit --no-fund playwright@1.62.1
+          "$RUNNER_TEMP/browser-tools/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Layout, RTL, touch targets, names and Back targets
+        run: NODE_PATH="$RUNNER_TEMP/browser-tools/node_modules" node crates/app/tests/screens-browser.cjs target/screen-fixtures target/screen-results
+      - name: Browser reports and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screens-browser-results
+          path: target/screen-results
+          if-no-files-found: ignore
+          retention-days: 14

@@ -1,0 +1,227 @@
+schema: steps.lesson/v1
+lecture: cvs.L01
+lessons:
+  - id: cvs.L01.lesson1
+    title: "القلب بيتبني إزاي، وليه العيوب الخلقية بتطلع كده؟"
+    hook: "لو فهمت مين بيبني إيه، نص أسئلة الـ congenital heart disease هتحلها من غير حفظ"
+    minutes: 9
+    pages: [284, 285]
+    topics: [heart-morphogenesis, heart-embryology]
+    goals:
+      - "تعرف القلب بيلف إمتى وليه، وإيه علاقة ده بـ Kartagener"
+      - "تربط كل خلية في الجنين بالعيب اللي بيطلع لو اتلخبطت"
+      - "تفرّق بين PFO و ASD و VSD و AVSD"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "أول عضو بيشتغل"
+        text: |-
+          القلب هو ==أول عضو بيشتغل== في الجنين: بيدق لوحده من **الأسبوع 4-5**. وده منطقي: الجنين بيكبر بسرعة، ومش هينفع يعتمد على الـ diffusion بس.
+
+          في الأسبوع الرابع الأنبوبة الأولية بتاعة القلب بتعمل **looping** (بتلف حوالين نفسها)، وده اللي بيحدد الشمال من اليمين في القلب.
+        page: 284
+        quote: "First functional organ in vertebrate embryos; beats spontaneously by 4-5 weeks of development."
+      - kind: reveal
+        prompt: "لو البروتين اللي بيوجّه اللفة دي باظ، تتوقع إيه يحصل للقلب؟ وفي أنهي syndrome؟"
+        answer: "اللفة تمشي في الاتجاه الغلط ← **dextrocardia**. البروتين هو **left-right dynein**، وده نفس الـ dynein اللي في الـ cilia، فعشان كده بيجي مع **Kartagener syndrome** (sinusitis و bronchiectasis و infertility)."
+        page: 284
+        quote: "Defect in left-right dynein (involved in left-right asymmetry) can lead to dextrocardia, as seen in Kartagener syndrome."
+      - kind: explain
+        title: "الـ neural crest بيقسم الأنبوبة اللي طالعة"
+        text: |-
+          الأنبوبة اللي طالعة من القلب (outflow tract) لازم تتقسم لاتنين: **ascending aorta** و **pulmonary trunk**.
+
+          اللي بيعمل كده خلايا الـ ==neural crest==: بتهاجر وتعمل ridges بتلف حوالين بعض (spiral) وتلزق في بعض، فيطلع **aorticopulmonary septum**.
+
+          لو الهجرة دي فشلت، الـ septum يطلع غلط، ويبقى عندنا عيوب الـ ==conotruncal==.
+        page: 284
+        quote: "Neural crest cell migrations → truncal and bulbar ridges that spiral and fuse to form aorticopulmonary septum → ascending aorta and pulmonary trunk."
+      - kind: mnemonic
+        word: "TTT"
+        parts:
+          - { key: "T", text: "Transposition of great arteries (TGA): الـ septum ما لفّش خالص" }
+          - { key: "T", text: "Tetralogy of Fallot" }
+          - { key: "T", text: "Truncus arteriosus (persistent): الـ septum ما اتكوّنش أصلاً" }
+        hook: "الـ neural crest لو ما هاجرش، بيسيبلك 3 Ts في الـ outflow tract"
+        page: 284
+        quote: "Conotruncal abnormalities associated with failure of neural crest cells to migrate: Transposition of great arteries (TGA). Tetralogy of Fallot. Persistent truncus arteriosus."
+      - kind: figure
+        title: "الـ atria بتتقفل إزاي"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="cvs1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="20" width="160" height="120" rx="10"/>
+            <text x="50" y="40" class="t-sm t-mut">RA</text>
+            <text x="120" y="40" class="t-sm t-mut">LA</text>
+            <line class="fg-ink" x1="100" y1="20" x2="100" y2="95" stroke-width="3"/>
+            <text x="104" y="60" class="t-sm">septum primum</text>
+            <line class="fg-thin" x1="80" y1="20" x2="80" y2="70" stroke-width="3"/>
+            <text x="14" y="110" class="t-sm">septum secundum</text>
+            <path class="fg-arrow-acc" d="M40 85 C 70 100, 95 105, 140 90" marker-end="url(#cvs1a)"/>
+            <text x="30" y="132" class="t-sm t-acc">foramen ovale: RA → LA</text>
+            <rect class="fg-good" x="200" y="20" width="150" height="120" rx="10"/>
+            <text x="212" y="45" class="t-sm t-b">After birth</text>
+            <text x="212" y="70" class="t-sm">↑ LA pressure</text>
+            <text x="212" y="90" class="t-sm">primum pushed onto secundum</text>
+            <text x="212" y="110" class="t-sm">→ fossa ovalis</text>
+          </svg>
+        caption: "قبل الولادة الدم بيعدّي من الـ RA للـ LA من الـ foramen ovale. بعد أول نفس الـ LA pressure بيعلى فيزق الـ septum primum (الباب) على الـ septum secundum (الحلق) ويقفله."
+        alt: "Two panels. Left: the atria with septum primum and septum secundum and an arrow from right atrium to left atrium through the foramen ovale. Right: after birth, higher left atrial pressure pushes septum primum against septum secundum, forming the fossa ovalis."
+        page: 284
+        quote: "Septum primum closes against septum secundum, sealing the foramen ovale soon after birth because of ↑ LA pressure and ↓ RA pressure."
+      - kind: aside
+        tone: analogy
+        text: "تخيّل الـ septum primum **باب** والـ septum secundum **حلق الباب**. في الجنين الدم بيزق الباب من اليمين للشمال ويعدّي. أول ما الطفل يتنفس، الضغط في الشمال يعلى فيقفل الباب على الحلق. لو الباب ما اتلحمش في الحلق بعد كده، يبقى ده ==PFO==."
+        page: 284
+        quote: "Patent foramen ovale—failure of septum primum and septum secundum to fuse after birth; seen in 25% of population."
+      - kind: explain
+        title: "PFO: موجود عند ربع الناس"
+        text: |-
+          الـ **PFO** موجود عند **25%** من الناس، ومعظمهم مش حاسين بحاجة.
+
+          المشكلة الوحيدة المهمة: ==paradoxical embolus==. جلطة من رجل المريض (DVT) المفروض تروح الرئة، بس لو الضغط في الـ RA علي (كحة، Valsalva) تعدّي من الـ PFO للـ LA وتطلع على المخ ← stroke عند واحد صغير في السن. والـ ASD ممكن يعمل نفس الحكاية.
+        page: 284
+        quote: "Can lead to paradoxical emboli (venous thromboemboli entering the systemic arterial circulation through right-to-left shunt) as can occur in atrial septal defect (ASD)."
+      - kind: check
+        question: "A 35-year-old woman has a stroke 10 days after a long flight and a painful swollen calf. Bubble study shows right-to-left flow across the atrial septum. Failure of what?"
+        options:
+          - "Fusion of septum primum with septum secundum after birth"
+          - "Neural crest cell migration"
+          - "Fusion of the endocardial cushions"
+          - "Cardiac looping"
+        answer: 0
+        why:
+          - "صح: الـ septa ما اتلحموش ← PFO ← الجلطة عدّت paradoxical embolus."
+          - "الـ neural crest بيعمل conotruncal defects (TGA وغيره) بتبان من الولادة."
+          - "الـ endocardial cushions لو ما اتلحموش يبقى AVSD، وده مع Down syndrome."
+          - "الـ looping لو باظ يبقى dextrocardia."
+        page: 284
+        quote: "Patent foramen ovale—failure of septum primum and septum secundum to fuse after birth"
+      - kind: explain
+        title: "الـ ventricles والـ endocardial cushions"
+        text: |-
+          الـ **muscular septum** بيطلع من تحت، ويفضل فوقه فتحة (interventricular foramen). اللي بيقفلها هو الـ ==membranous septum==، وده بيتعمل من الـ aorticopulmonary septum وهو بيلف ويلزق في الـ muscular septum.
+
+          عشان الحتة دي آخر حاجة بتتقفل، فهي أكتر مكان بيفضل مفتوح: الـ **VSD** هو ==أشهر عيب خلقي في القلب==، وغالباً في الـ membranous septum.
+
+          والـ **endocardial cushions** في النص بتفصل الـ atria عن الـ ventricles وبتشارك في الاتنين. لو ما اتلحمتش يبقى **AVSD**.
+        page: 285
+        quote: "Ventricular septal defect—most common congenital cardiac anomaly, usually occurs in membranous septum."
+      - kind: table
+        title: "AVSD: الكامل والجزئي"
+        columns: ["Type", "What is open", "VSD?"]
+        rows:
+          - ["Complete", "Common AV valve + ASD + VSD", "Yes"]
+          - ["Partial", "Primum ASD + cleft mitral valve → mitral regurgitation", "No"]
+        hide: [[0, 1], [1, 1]]
+        page: 285
+        quote: "Complete: common AV valve with ASD and VSD. Partial: primum ASD with cleft mitral valve → mitral regurgitation; no VSD. Associated with Down syndrome."
+      - kind: aside
+        tone: exam
+        text: "طفل عنده **Down syndrome** وفي السؤال عيب في القلب؟ أول حاجة تفكر فيها ==AVSD== (endocardial cushion defect)."
+        page: 285
+        quote: "Associated with Down syndrome."
+      - kind: match
+        prompt: "وصّل كل تركيب في الجنين باللي بيطلع منه"
+        pairs:
+          - ["Left horn of sinus venosus", "Coronary sinus"]
+          - ["Right horn of sinus venosus", "Smooth part of RA (sinus venarum)"]
+          - ["Bulbus cordis", "Smooth outflow parts of LV and RV"]
+          - ["Primitive ventricle", "Trabeculated parts of LV and RV"]
+          - ["Truncus arteriosus", "Ascending aorta and pulmonary trunk"]
+        why: "قاعدة تريّحك: الحتت الـ **smooth** جاية من أوعية (sinus venosus، pulmonary vein، bulbus cordis)، والحتت الـ **trabeculated** جاية من الـ primitive atrium والـ primitive ventricle."
+        page: 285
+        quote: "Left horn of sinus venosus Coronary sinus Primitive pulmonary vein Smooth part of LA Primitive atrium Trabeculated part of LA and RA"
+      - kind: try
+        items: [cvs.L01.003, cvs.L01.004, cvs.L01.008, cvs.L01.011, cvs.L01.014]
+    recap:
+      - "القلب بيدق من أسبوع 4-5، والـ looping في أسبوع 4 (dynein باظ ← dextrocardia، Kartagener)."
+      - "الـ neural crest بيقسم الـ outflow tract؛ لو فشل يبقى TGA أو Tetralogy أو Truncus."
+      - "PFO عند 25%، وخطره paradoxical embolus."
+      - "VSD أشهر عيب، في الـ membranous septum. AVSD مع Down."
+    practice: [cvs.L01.001, cvs.L01.002, cvs.L01.003, cvs.L01.004, cvs.L01.005, cvs.L01.006, cvs.L01.007, cvs.L01.008, cvs.L01.009, cvs.L01.010, cvs.L01.011, cvs.L01.012, cvs.L01.013, cvs.L01.014, cvs.L01.015, cvs.L01.016]
+  - id: cvs.L01.lesson2
+    title: "الدورة الدموية في الجنين: 3 تحويلات وبعدين أول نفس"
+    hook: "الجنين ما بيتنفسش وكبده لسه مش شغال، فالدم بيعمل 3 تحويلات. افهمهم مرة وهتحل أي سؤال PDA"
+    minutes: 7
+    pages: [286, 286]
+    topics: [fetal-circulation, fetal-postnatal-derivatives]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "ليه التحويلات؟"
+        text: |-
+          الجنين بياخد الأكسجين من الـ **placenta**، مش من الرئة. فالرئة مقفولة والـ ==pulmonary resistance عالي==، والكبد مش محتاج كل الدم.
+
+          فالدم الحلو اللي جاي من الـ umbilical vein بيعمل ==3 تحويلات== عشان يوصل للمخ والجسم بسرعة.
+        page: 286
+        quote: "deoxygenated blood from SVC → RA → RV → main pulmonary artery → ductus arteriosus → descending aorta; shunt is due to ↑ fetal pulmonary artery resistance."
+      - kind: order
+        prompt: "رتّب طريق الدم الحلو من الـ placenta لحد الـ LA"
+        steps:
+          - "Umbilical vein"
+          - "Ductus venosus (bypasses the liver)"
+          - "IVC"
+          - "Foramen ovale"
+          - "Left atrium"
+        why: "الـ ductus venosus بيعدّي الكبد، وبعدين معظم دم الـ IVC بيروح من الـ foramen ovale على الـ LA على طول."
+        page: 286
+        quote: "Umbilical vein → ductus venosus → IVC (bypassing hepatic circulation). Most of the highly oxygenated blood from IVC → foramen ovale → LA."
+      - kind: reveal
+        prompt: "والدم الوحش اللي جاي من الـ SVC بيروح فين، وليه ما بيدخلش الرئة؟"
+        answer: "SVC ← RA ← RV ← pulmonary artery، وبعدين بيهرب من الـ **ductus arteriosus** على الـ descending aorta، لأن الـ pulmonary resistance في الجنين عالي فالدم بيختار الطريق الأسهل."
+        page: 286
+        quote: "Deoxygenated blood from SVC → RA → RV → main pulmonary artery → ductus arteriosus → descending aorta; shunt is due to ↑ fetal pulmonary artery resistance."
+      - kind: explain
+        title: "أول نفس بيقلب كل حاجة"
+        text: |-
+          - الطفل يتنفس ← الـ pulmonary resistance يقع ← الـ LA pressure يعلى عن الـ RA ← الـ **foramen ovale** يتقفل (ويبقى fossa ovalis).
+          - الـ O2 يعلى (من النفس) والـ ==prostaglandins تقل== (لأن الـ placenta خرجت) ← الـ **ductus arteriosus** يتقفل.
+        page: 286
+        quote: "At birth, infant takes a breath → ↓ resistance in pulmonary vasculature → ↑ LA pressure vs RA pressure → foramen ovale closes (now called fossa ovalis)"
+      - kind: aside
+        tone: tip
+        text: "المفتاح: الـ ==prostaglandins بتفتح== الـ ductus. فـ NSAIDs (indomethacin، ibuprofen) أو acetaminophen بتقفله، والـ PGE1 و PGE2 بيفتحوه. الكتاب بيقولها: «Endomethacin» ends the PDA، و PGE «kEEp» it open."
+        page: 286
+        quote: "NSAIDs (eg, indomethacin, ibuprofen) or acetaminophen help close the patent ductus arteriosus (PDA)"
+      - kind: check
+        question: "A cyanotic newborn with transposition of the great arteries needs the ductus kept open until surgery. Which drug?"
+        options:
+          - "Indomethacin"
+          - "Prostaglandin E1 (alprostadil)"
+          - "Ibuprofen"
+          - "Acetaminophen"
+        answer: 1
+        why:
+          - "Indomethacin بيقفل الـ ductus: عكس اللي محتاجينه."
+          - "صح: PGE1 بيـ kEEp الـ PDA open فالدم يختلط لحد العملية."
+          - "Ibuprofen برضه NSAID بيقفل الـ ductus."
+          - "Acetaminophen بيساعد يقفل الـ PDA."
+        page: 286
+        quote: "Prostaglandins E1 and E2 kEEp PDA open"
+      - kind: table
+        title: "كل تحويلة بتبقى إيه بعد الولادة"
+        columns: ["Fetal structure", "Postnatal derivative"]
+        rows:
+          - ["Ductus arteriosus", "Ligamentum arteriosum"]
+          - ["Ductus venosus", "Ligamentum venosum"]
+          - ["Foramen ovale", "Fossa ovalis"]
+          - ["Umbilical vein", "Ligamentum teres hepatis"]
+          - ["Umbilical arteries", "Medial umbilical ligaments"]
+          - ["Allantois → urachus", "Median umbilical ligament"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+        page: 286
+        quote: "Ductus arteriosus Ligamentum arteriosum Near the left recurrent laryngeal nerve Ductus venosus Ligamentum venosum Foramen ovale Fossa ovalis"
+      - kind: aside
+        tone: trap
+        text: "**medial** ولا **median**؟ الـ umbilical arteries اتنين، فبيبقوا ligaments اتنين على الجنبين (==medial==). الـ urachus واحد في النص بالظبط (median)."
+        page: 286
+        quote: "Allantois → urachus Median umbilical ligament Urachus is part of allantois between bladder and umbilicus Umbilical arteries Medial umbilical ligaments"
+      - kind: try
+        items: [cvs.L01.019, cvs.L01.021, cvs.L01.022, cvs.L01.018]
+    recap:
+      - "3 تحويلات: ductus venosus (يعدّي الكبد)، foramen ovale و ductus arteriosus (يعدّوا الرئة)."
+      - "أول نفس ← LA pressure يعلى ← foramen ovale يتقفل."
+      - "O2 يعلى و prostaglandins تقل ← ductus arteriosus يتقفل."
+      - "NSAIDs/acetaminophen بيقفلوا الـ PDA، و PGE1/PGE2 بيفتحوه."
+    practice: [cvs.L01.017, cvs.L01.018, cvs.L01.019, cvs.L01.020, cvs.L01.021, cvs.L01.022, cvs.L01.023]

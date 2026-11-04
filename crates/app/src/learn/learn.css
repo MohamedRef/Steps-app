@@ -1,0 +1,785 @@
+/* Learn: the lesson list and the lesson player. Theme tokens only (Day,
+   Night and true black alike); logical properties only (RTL). */
+
+/* ---------- shared bits ---------- */
+/* A button's label as one inline run: .btn is a flex box, and each text or
+   bdi child would otherwise become its own column. */
+.ls-btn-label { display: inline; min-inline-size: 0; overflow-wrap: anywhere; }
+/* A long unbroken term ("chemo/thiopurines/irradiation") breaks rather than
+   widening the card past the screen. */
+.ls-stage, .ls-summary { min-inline-size: 0; overflow-wrap: anywhere; }
+.ls-nowrap { white-space: nowrap; }
+.ls-kicker {
+  display: inline-block;
+  align-self: flex-start;
+  inline-size: fit-content;
+  margin: 0 0 var(--sp-2);
+  padding: 2px var(--sp-3);
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+.ls-h { font-size: var(--fs-lg); margin: 0 0 var(--sp-3); line-height: 1.4; }
+.ls-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; }
+.ls-verdict {
+  font-weight: 700;
+  margin-block: var(--sp-2) 0;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-control, var(--radius));
+  background: var(--soft, var(--accent-soft));
+  color: var(--text);
+}
+.ls-verdict.good { color: var(--good); background: var(--good-soft); }
+.ls-verdict.bad { color: var(--bad); background: var(--bad-soft); }
+.ls-pop { animation: ls-pop var(--dur) var(--ease); }
+@keyframes ls-pop { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+@keyframes ls-shake {
+  0%, 100% { transform: none; }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ls-pop, .ls-stage, [data-state="wrong"], .ls-nav * { animation: none !important; }
+}
+
+/* ---------- text ---------- */
+.ls-rich { display: flex; flex-direction: column; gap: var(--sp-3); font-size: 1.05rem; line-height: 1.95; }
+.ls-rich p { margin: 0; }
+.ls-rich ul, .ls-rich ol { margin: 0; padding-inline-start: 1.4rem; display: grid; gap: var(--sp-2); }
+.ls-rich li::marker { color: var(--accent); }
+/* **bold** is a term, set in weight only; ==key== is one of the step's few
+   key terms and gets the marker (docs/LESSONS.md). */
+.ls-rich strong, .ls-mn-hook strong { font-weight: 700; }
+/* Every lesson text, Line ones too (options, cards, cells, recap): never
+   the browser's yellow, which is unreadable at night (#321). */
+mark {
+  color: inherit;
+  font-weight: 700;
+  background: linear-gradient(transparent 55%, var(--accent-soft) 55%);
+  padding-inline: 2px;
+  border-radius: 2px;
+}
+.ls-rich bdi { font-size: 0.97em; }
+/* An English run inside Arabic is one LTR box (learn/text.rs `runs`): split
+   over lines as plain inline text, its halves land on opposite sides of the
+   Arabic between them. A box takes its one-line width when that fits and
+   wraps like an English paragraph only when it is wider than the line, so a
+   short term ("vitamin A and") stays whole and nothing spills sideways. */
+.ls-nw, .ls-en { display: inline-block; max-inline-size: 100%; }
+/* Its "الـ" stays beside it; the box leaves the article room on the line. */
+.ls-en-glued { white-space: nowrap; }
+.ls-en-glued > bdi { white-space: normal; max-inline-size: calc(100% - 3em); }
+
+/* ---------- the list (2026-10-29 redesign) ----------
+   A page head, search, the picked lecture (header + lesson rows), then the
+   other lectures as cards that pick one. */
+/* The search box is the shared .search (parts.css); this adds the clear button. */
+.ls-search input::-webkit-search-cancel-button { display: none; }
+/* Room for the clear button at the end (the start padding is parts.css's). */
+.search.ls-search input[type="search"] { padding-inline-end: 2.75rem; }
+.ls-search-clear {
+  position: absolute;
+  inset-inline-end: var(--sp-1);
+  inline-size: var(--tap);
+  block-size: var(--tap);
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--muted);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.ls-search-clear:focus-visible { outline: 2px solid var(--accent); }
+
+/* The picked lecture's header: a soft card, its whole face opens the next lesson. */
+.ls-lec { gap: var(--sp-1); background: var(--accent-soft); }
+.ls-lec h2 { margin: 0; font-family: var(--font-latin); font-size: var(--fs-xl); font-weight: 700; line-height: 1.4; }
+.ls-lec-meta { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--muted); }
+.ls-lec-page { display: inline-flex; align-items: center; gap: var(--sp-2); font-size: var(--fs-sm); font-weight: 600; min-block-size: var(--tap); }
+.ls-lec-sub { color: var(--muted); }
+.ls-lec-caption { display: flex; justify-content: space-between; color: var(--muted); }
+.ls-lec-go { margin-block-start: var(--sp-2); gap: var(--sp-2); justify-content: center; }
+.ls-lec-go .icon { flex: none; inline-size: 1.1rem; block-size: 1.1rem; }
+@media (max-width: 599px) { .ls-lec-go { inline-size: 100%; } }
+/* The step the Continue button reopens at, under it. */
+.ls-lec-at { color: var(--muted); }
+@media (min-width: 600px) { .ls-lec-go { align-self: start; } }
+
+/* The shared .progress line, spaced and on a tinted card. */
+.ls-meter { display: block; margin-block: var(--sp-1); }
+.ls-meter > .progress-fill { display: block; }
+.ls-lec .ls-meter { background: color-mix(in srgb, var(--muted) 18%, transparent); }
+
+/* Lesson rows (the shared .coll layouts): number (a tick when done), title
+   and hook, state in words. Natural height: the screen is a flex column, and a clipped list would
+   otherwise shrink to nothing. */
+.ls-rows, .ls-lec, .ls-others, .ls-group, .ls-search, .ls-resume { flex-shrink: 0; margin: 0; }
+/* A lecture with a lesson part-way says so in its subline. */
+.ls-started { color: var(--accent); font-weight: 600; }
+.ls-search { flex: none; }
+/* A lesson's state word takes its tone. */
+.ls-state { font-weight: 700; }
+.ls-item[data-state="done"] .ls-state { color: var(--good); }
+.ls-item[data-state="current"] .ls-state, .ls-item[data-state="next"] .ls-state { color: var(--accent); }
+
+.ls-sec { margin: var(--sp-2) 0 0; font-size: var(--fs-md); font-weight: 600; }
+
+/* Search results: a lecture heading that opens its page, then its rows. */
+.ls-group { display: flex; flex-direction: column; gap: var(--sp-2); }
+.ls-group-head { display: flex; align-items: center; gap: var(--sp-3); font-size: var(--fs-md); }
+.ls-group-head .num { flex: none; padding-inline: var(--sp-2); border-radius: 10px; background: var(--accent-soft); color: var(--accent); font-family: var(--font-latin); font-size: var(--fs-sm); }
+.ls-group-head bdi { flex: 1; min-width: 0; }
+
+/* The lecture page's lessons (lecture/mod.rs): the shared .coll layouts;
+   its meta line keeps each part whole. */
+.ls-card-meta { color: var(--muted); font-size: var(--fs-sm); }
+.chip.ls-done { background: var(--good-soft); color: var(--good); border-color: transparent; font-weight: 700; }
+
+/* Today's card: the lesson to go on with. */
+button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap: var(--sp-1); text-align: start; }
+.ls-now-top { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
+.ls-now-where { display: inline-flex; align-items: center; gap: var(--sp-2); }
+.ls-now-title { font-size: var(--fs-lg); line-height: 1.5; margin-block-start: var(--sp-1); }
+.ls-now-hook { line-height: 1.7; }
+
+/* "Explain it to me" under a study item */
+.ls-explain { font-size: var(--fs-sm); }
+
+/* Every control inside a lesson step keeps the shared 48dp target: the
+   book-page chip under a step, Reveal and "reveal all", a Try card's
+   "show answer" and "explain it" (screens-browser.cjs). */
+.ls-stage :is(.btn, .btn-link, .ls-explain) { min-block-size: var(--target); }
+.ls-stage button.tap-chip { display: inline-flex; align-items: center; min-block-size: var(--target); }
+
+/* ---------- the player ---------- */
+.ls-player {
+  max-inline-size: 48rem;
+  margin-inline: auto;
+  inline-size: 100%;
+  /* Fills the screen so the footer sits at the bottom on every step. */
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.ls-bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding-block: var(--sp-2);
+  background: var(--bg);
+}
+.ls-summary h1:focus { outline: none; }
+.ls-close {
+  flex: none;
+  inline-size: var(--target);
+  block-size: var(--target);
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.ls-segs { flex: 1; display: flex; gap: 3px; align-items: center; }
+.ls-seg {
+  flex: 1;
+  block-size: 6px;
+  border-radius: var(--radius-pill);
+  background: var(--line);
+  transition: background var(--dur) var(--ease);
+}
+.ls-seg[data-q="yes"] { block-size: 9px; }
+.ls-seg[data-state="done"] { background: var(--accent); }
+.ls-seg[data-state="now"] { background: var(--accent); opacity: 0.55; }
+.ls-count { flex: none; font-variant-numeric: tabular-nums; }
+/* Name the lesson and keep its English lecture label separate. */
+.ls-context { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; }
+.ls-context-title { margin: 0; font-size: var(--fs-lg); font-weight: 700; line-height: 1.5; overflow-wrap: anywhere; }
+.ls-context-lecture { margin: 0; overflow-wrap: anywhere; }
+.ls-stage {
+  gap: var(--sp-3);
+  min-block-size: 14rem;
+  animation: ls-in 240ms var(--ease);
+}
+.ls-stage[hidden] { display: none; }
+/* Sideways drags anywhere on the lesson turn the page (swipe.js); up and
+   down still scroll. */
+.ls-player { touch-action: pan-y pinch-zoom; }
+/* The next step enters from the left: in a right-to-left app, forward
+   moves leftward, so new content arrives from the left (the mirror of an
+   English carousel, where the next slide comes from the right). Back
+   brings the earlier step in from the right. */
+@keyframes ls-in { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
+@keyframes ls-in-back { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+.ls-player[data-dir="back"] .ls-stage { animation-name: ls-in-back; }
+
+/* Focus: a lesson takes the whole phone screen. The app bar and the tab
+   bar step aside (× closes the lesson); wider windows keep their rail. */
+.app:has(.ls-player) > .topbar { display: none; }
+@media (max-width: 599px) {
+  .app:has(.ls-player) > .nav { display: none; }
+  .app:has(.ls-player) > .content {
+    padding-block: env(safe-area-inset-top, 0px) 0;
+  }
+}
+.ls-view {
+  flex: none;
+  inline-size: var(--target);
+  block-size: var(--target);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+}
+.ls-view:hover { color: var(--accent); border-color: var(--accent); }
+.ls-view .icon { inline-size: 20px; block-size: 20px; }
+
+/* A swipe that can't turn the page yet points at Skip or Check. */
+.ls-nav.ls-nudge .ls-skip, .ls-nav.ls-nudge [data-nav="check"] { animation: ls-shake 360ms var(--ease) 2; }
+
+/* ---------- Pages: the lesson as a book ---------- */
+.ls-player[data-view="pages"] .ls-stage {
+  /* One page fills the screen between the bar and the arrows. */
+  min-block-size: calc(100dvh - 10.5rem);
+  padding: var(--sp-6) var(--sp-4) var(--sp-4);
+  /* The spine is at the start edge: the right, in a right-to-left book. */
+  border-start-start-radius: 6px;
+  border-end-start-radius: 6px;
+  border-start-end-radius: 16px;
+  border-end-end-radius: 16px;
+  box-shadow:
+    inset -14px 0 18px -16px rgb(0 0 0 / 0.35),
+    0 1px 0 var(--line),
+    0 3px 0 -1px var(--surface),
+    0 4px 0 -1px var(--line),
+    0 6px 0 -2px var(--surface),
+    0 7px 0 -2px var(--line);
+  transform-origin: 100% 50%;
+  animation: ls-turn 380ms cubic-bezier(.2, .7, .2, 1);
+}
+.ls-player[data-view="pages"][data-dir="back"] .ls-stage { animation-name: ls-turn-back; transform-origin: 0% 50%; }
+@keyframes ls-turn {
+  from { opacity: 0.2; transform: perspective(1400px) rotateY(-75deg); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes ls-turn-back {
+  from { opacity: 0.2; transform: perspective(1400px) rotateY(75deg); }
+  to { opacity: 1; transform: none; }
+}
+/* The page number at the foot of the page, like the book's. */
+.ls-player[data-view="pages"] .ls-stage::after {
+  content: "— " attr(data-n) " —";
+  margin-block-start: auto;
+  align-self: center;
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+}
+.ls-player[data-view="pages"] .ls-nav { justify-content: space-between; }
+.ls-player[data-view="pages"] .ls-nav .ls-next { flex: 0 1 auto; margin-inline-start: 0; }
+.ls-page-of { font-variant-numeric: tabular-nums; }
+.ls-arrow {
+  flex: none;
+  inline-size: 52px;
+  block-size: 52px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.ls-arrow .icon { inline-size: 24px; block-size: 24px; }
+.ls-arrow:active:not(:disabled) { transform: scale(0.94); }
+.ls-arrow:disabled { opacity: 0.35; cursor: default; }
+.ls-arrow-next { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.ls-src { display: flex; flex-wrap: wrap; gap: var(--sp-2); justify-content: flex-start; border-block-start: 1px dashed var(--line); padding-block-start: var(--sp-2); }
+.ls-src .abbr-n { margin-inline-start: 0.4em; font-variant-numeric: tabular-nums; opacity: 0.8; }
+.ls-nav {
+  position: sticky;
+  bottom: 0;
+  margin-block-start: auto;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding-block: var(--sp-2) calc(var(--sp-2) + env(safe-area-inset-bottom, 0px));
+  background: var(--bg);
+}
+.ls-nav { flex-wrap: wrap; }
+/* Use the shared 48dp minimum even when compact --tap is smaller. */
+.ls-nav :is(.btn, .btn-link), .ls-summary-actions button { min-block-size: max(var(--target), var(--tap)); }
+.ls-nav .btn-lg { min-block-size: max(var(--target), var(--tap-lg)); }
+.ls-nav .ls-next { margin-inline-start: auto; min-inline-size: 8rem; }
+/* Read to screen readers only (what the step needs while Continue is off). */
+.ls-sr-only {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.ls-retry { align-self: flex-start; font-size: 1.35rem; min-inline-size: max(var(--target), var(--tap)); min-block-size: max(var(--target), var(--tap)); }
+.ls-before { display: flex; flex-direction: column; gap: var(--sp-2); }
+.ls-before > p { margin: 0; }
+.ls-key-line { font-weight: 700; }
+.ls-key-item:not(:last-child)::after { content: "، "; }
+@media (max-width: 599px) { .ls-nav .ls-next { flex: 1; } }
+
+/* figure */
+.ls-figure { margin: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
+.ls-svg {
+  display: block;
+  inline-size: 100%;
+  padding: var(--sp-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  cursor: zoom-in;
+  overflow: hidden;
+}
+.ls-svg .ls-fig-svg svg, .ls-svg svg { display: block; inline-size: 100%; block-size: auto; max-block-size: 70vh; }
+.ls-svg { position: relative; }
+.ls-photo { padding: 0; overflow: hidden; }
+.ls-photo img { display: block; inline-size: 100%; block-size: auto; max-block-size: 70vh; object-fit: contain; }
+/* A small corner badge: tap for full screen. */
+.ls-zoom-hint {
+  position: absolute;
+  inset-block-end: 4px;
+  inset-inline-end: 4px;
+  inline-size: 22px;
+  block-size: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  /* See-through, so it hides as little of the figure's corner as it can. */
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+/* The full-screen figure viewer (viewer.js zooms it). */
+.ls-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  padding-block: env(safe-area-inset-top, 0px) env(safe-area-inset-bottom, 0px);
+  outline: none;
+  animation: ls-pop var(--dur) var(--ease);
+}
+.ls-viewer-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+}
+.ls-viewer-title { flex: 1; min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ls-viewer-zoom { display: flex; gap: var(--sp-2); margin-inline-start: auto; }
+.ls-viewer-zoom .ls-arrow { inline-size: var(--target); block-size: var(--target); font-size: 1.1rem; font-weight: 700; }
+.ls-viewer-scroll {
+  flex: 1;
+  min-block-size: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  touch-action: pan-x pan-y;
+  display: flex;
+}
+.ls-viewer-inner { inline-size: 100%; flex: none; margin: auto; padding: var(--sp-2); box-sizing: border-box; }
+.ls-viewer-inner img, .ls-viewer-inner svg { display: block; inline-size: 100%; block-size: auto; }
+.ls-viewer-hint { text-align: center; padding: var(--sp-2); margin: 0; }
+.ls-figure figcaption { color: var(--muted); display: flex; flex-direction: column; gap: var(--sp-1); }
+.ls-credit { margin: 0; }
+.ls-figure figcaption .ls-rich { font-size: var(--fs-sm); }
+
+/* Classes figure authors use (docs/LESSONS.md): theme colours only. */
+.ls-fig-svg svg text { fill: var(--text); font-family: var(--font-latin); font-size: 13px; }
+.ls-fig-svg svg .t-sm { font-size: 11px; }
+.ls-fig-svg svg .t-lg { font-size: 16px; }
+.ls-fig-svg svg .t-b { font-weight: 700; }
+.ls-fig-svg svg .t-mut { fill: var(--muted); }
+.ls-fig-svg svg .t-acc { fill: var(--accent); }
+.ls-fig-svg svg .t-good { fill: var(--good); }
+.ls-fig-svg svg .t-bad { fill: var(--bad); }
+.ls-fig-svg svg .t-ar { font-family: var(--font); direction: rtl; }
+.ls-fig-svg svg .fg-box { fill: var(--glass-solid, var(--surface)); stroke: var(--line); }
+.ls-fig-svg svg .fg-box:not([stroke-width]) { stroke-width: 1.5; }
+.ls-fig-svg svg .fg-ink { fill: none; stroke: var(--text); stroke-linecap: round; stroke-linejoin: round; }
+.ls-fig-svg svg .fg-ink:not([stroke-width]) { stroke-width: 1.8; }
+.ls-fig-svg svg .fg-thin { fill: none; stroke: var(--muted); stroke-dasharray: 4 3; }
+.ls-fig-svg svg .fg-thin:not([stroke-width]) { stroke-width: 1.2; }
+.ls-fig-svg svg .fg-acc { fill: var(--accent-soft); stroke: var(--accent); }
+.ls-fig-svg svg .fg-acc:not([stroke-width]) { stroke-width: 1.8; }
+.ls-fig-svg svg .fg-good { fill: var(--good-soft); stroke: var(--good); }
+.ls-fig-svg svg .fg-good:not([stroke-width]) { stroke-width: 1.8; }
+.ls-fig-svg svg .fg-bad { fill: var(--bad-soft); stroke: var(--bad); }
+.ls-fig-svg svg .fg-bad:not([stroke-width]) { stroke-width: 1.8; }
+.ls-fig-svg svg .fg-dot-acc { fill: var(--accent); stroke: none; }
+.ls-fig-svg svg .fg-dot-bad { fill: var(--bad); stroke: none; }
+.ls-fig-svg svg .fg-dot-good { fill: var(--good); stroke: none; }
+.ls-fig-svg svg .fg-arrow { fill: none; stroke: var(--text); }
+.ls-fig-svg svg .fg-arrow:not([stroke-width]) { stroke-width: 1.8; }
+.ls-fig-svg svg .fg-arrow-acc { fill: none; stroke: var(--accent); }
+.ls-fig-svg svg .fg-arrow-acc:not([stroke-width]) { stroke-width: 2.2; }
+.ls-fig-svg svg .fg-arrow-bad { fill: none; stroke: var(--bad); }
+.ls-fig-svg svg .fg-arrow-bad:not([stroke-width]) { stroke-width: 2.2; }
+.ls-fig-svg svg .fg-head { fill: var(--text); }
+.ls-fig-svg svg .fg-head-acc { fill: var(--accent); }
+.ls-fig-svg svg .fg-head-bad { fill: var(--bad); }
+
+/* reveal */
+.ls-reveal, .ls-check, .ls-order, .ls-match, .ls-sort, .ls-case, .ls-try, .ls-try-done, .ls-table, .ls-mnemonic {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.ls-reveal > *, .ls-check > *, .ls-mnemonic > * { margin: 0; }
+.ls-q { font-size: 1.25rem; font-weight: 600; line-height: 1.6; }
+.ls-q .ls-rich { font-size: inherit; }
+.ls-answer {
+  border-inline-start: 4px solid var(--good);
+  background: var(--good-soft);
+  border-radius: var(--radius);
+  padding: var(--sp-3) var(--sp-4);
+}
+.ls-reveal .btn { align-self: start; }
+
+/* mnemonic */
+.ls-mn-letters { display: flex; flex-wrap: wrap; gap: var(--sp-2); justify-content: center; }
+.ls-mn-key {
+  min-inline-size: 3rem;
+  block-size: 3.2rem;
+  padding-inline: var(--sp-2);
+  border-radius: 12px;
+  border: 2px solid var(--accent);
+  background: var(--surface);
+  color: var(--accent);
+  font-family: var(--font-latin);
+  font-size: 1.5rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.ls-mn-key[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); transform: translateY(-2px); }
+.ls-mn-word { text-align: center; font-family: var(--font-latin); letter-spacing: 0.3em; color: var(--muted); font-weight: 700; }
+.ls-mn-lines { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.ls-mn-lines li { display: flex; gap: var(--sp-3); align-items: baseline; padding: 4px var(--sp-2); border-radius: 8px; }
+.ls-mn-lines li[data-open="yes"] { background: var(--accent-soft); }
+.ls-mn-k { flex: none; inline-size: 2.4rem; font-weight: 800; color: var(--accent); font-family: var(--font-latin); }
+.ls-mn-hook { border-block-start: 1px dashed var(--line); padding-block-start: var(--sp-2); }
+.ls-mnemonic .btn-link { align-self: center; }
+
+/* asides */
+.ls-aside {
+  border-radius: var(--radius);
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--line);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+.ls-aside > p { margin: 0; }
+.ls-aside-label { font-weight: 800; }
+.ls-aside[data-tone="tip"] { background: var(--good-soft); border-color: transparent; }
+.ls-aside[data-tone="tip"] .ls-aside-label { color: var(--good); }
+.ls-aside[data-tone="exam"] { background: var(--accent-soft); border-color: transparent; }
+.ls-aside[data-tone="exam"] .ls-aside-label { color: var(--accent); }
+.ls-aside[data-tone="trap"] { background: var(--bad-soft); border-color: transparent; }
+.ls-aside[data-tone="trap"] .ls-aside-label { color: var(--bad); }
+.ls-aside[data-tone="analogy"] { border-style: dashed; border-color: var(--accent); }
+.ls-aside[data-tone="joke"] { border: 2px dotted var(--accent); background: var(--surface); }
+.ls-aside[data-tone="joke"] .ls-rich { font-style: normal; }
+.ls-aside[data-tone="update"] { border-inline-start: 4px solid var(--accent); }
+
+/* check + case options */
+.ls-options { display: flex; flex-direction: column; gap: var(--sp-2); }
+.ls-option-wrap { display: flex; flex-direction: column; gap: 2px; }
+/* Choices are parts.css `button.answer`; here only what a lesson adds. */
+.ls-options .answer:disabled:not([data-state]) { opacity: 0.6; }
+.ls-options .answer[data-state="wrong"] { animation: ls-shake 260ms; }
+.ls-why { margin: 0; padding-inline: var(--sp-3); color: var(--muted); }
+/* The explanation after a check: a tinted card, never the left-bar box a
+   case stem or scenario uses (Mohamed, 2026-11-01). */
+.ls-why-box {
+  border-radius: var(--radius);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--accent-soft);
+  border: 1px solid var(--line-soft, var(--line));
+}
+.ls-why-box .ls-rich { font-size: var(--fs-md); }
+
+/* tiles: order, match, sort */
+.ls-pool { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.ls-tile {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-block-size: var(--target);
+  padding: var(--sp-2) var(--sp-3);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-control, 13px);
+  background: var(--surface);
+  text-align: start;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.ls-tile, .ls-chiplet, .ls-chiplet-done { overflow-wrap: anywhere; }
+:is(.ls-tile, .ls-chiplet, .ls-chiplet-done) .ls-nw { white-space: normal; }
+.ls-tile:hover:not(:disabled) { border-color: var(--accent); }
+.ls-tile[data-state="picked"] { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 0 0 2px var(--accent-soft); }
+.ls-tile[data-state="right"], li[data-state="right"] > .ls-tile { border-color: var(--good); background: var(--good-soft); }
+.ls-tile[data-state="wrong"], li[data-state="wrong"] > .ls-tile { border-color: var(--bad); background: var(--bad-soft); animation: ls-shake 260ms; }
+.ls-tile:disabled { cursor: default; }
+/* order: numbered slots that fill from the pool */
+.ls-order-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
+.ls-order-count { color: var(--muted); font-variant-numeric: tabular-nums; }
+.ls-undo { min-block-size: var(--target); }
+.ls-undo:disabled { opacity: 0.4; text-decoration: none; cursor: default; }
+.ls-slots li[data-state="empty"] .ls-slot { min-block-size: 40px; }
+.ls-slots { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
+.ls-slots li { display: flex; flex-direction: column; gap: 2px; }
+.ls-slot {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  inline-size: 100%;
+  min-block-size: 48px;
+  padding: var(--sp-2) var(--sp-3);
+  border: 1.5px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  text-align: start;
+}
+button.ls-slot { cursor: pointer; touch-action: manipulation; }
+button.ls-slot:hover { border-color: var(--accent); }
+.ls-slots li[data-state="empty"] .ls-slot { border-style: dashed; background: transparent; }
+.ls-slots li[data-state="empty"] .ls-num { background: var(--line); color: var(--muted); }
+.ls-slots li[data-state="right"] .ls-slot { border-color: var(--good); background: var(--good-soft); }
+.ls-slots li[data-state="wrong"] .ls-slot { border-color: var(--bad); background: var(--bad-soft); }
+.ls-slot-text { flex: 1; min-inline-size: 0; overflow-wrap: anywhere; }
+.ls-x, .ls-mark { flex: none; color: var(--muted); font-size: 1.1em; line-height: 1; }
+.ls-slots li[data-state="right"] .ls-mark { color: var(--good); }
+.ls-slots li[data-state="wrong"] .ls-mark { color: var(--bad); }
+.ls-num {
+  flex: none;
+  inline-size: 1.6rem;
+  block-size: 1.6rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+}
+.ls-should { color: var(--bad); padding-inline: var(--sp-2); }
+.ls-key { margin: 0; padding-inline-start: 1.4rem; color: var(--muted); }
+.ls-match-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--sp-3); }
+.ls-match-col .ls-tile { overflow-wrap: anywhere; hyphens: auto; }
+.ls-match-col { display: flex; flex-direction: column; gap: var(--sp-2); }
+.ls-match-col .ls-tile { inline-size: 100%; }
+/* sort: bins share a row while each keeps ~13rem (two or three on a
+   tablet), and stack as full-width rows on a phone. Flex, not a grid, so
+   an odd bin out stretches instead of leaving an empty cell. */
+.ls-sort-bar { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-2); }
+.ls-sort-bar > p { margin: 0; }
+.ls-sort-bar > .ls-order-count { flex: none; white-space: nowrap; }
+.ls-bins { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.ls-bin {
+  flex: 1 1 13rem;
+  min-inline-size: 0;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  padding: var(--sp-1) var(--sp-2) var(--sp-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+  min-block-size: 5.5rem;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+.ls-bin[data-armed="yes"] { border-color: var(--accent); background: var(--accent-soft); cursor: pointer; }
+.ls-bin[data-armed="yes"]:active { transform: var(--press, scale(0.98)); }
+.ls-bin-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2);
+  inline-size: 100%;
+  border: 0;
+  background: none;
+  color: var(--text);
+  font: inherit;
+  font-weight: 800;
+  padding: var(--sp-1);
+  min-block-size: var(--target);
+  cursor: pointer;
+  text-align: start;
+}
+.ls-bin-head:disabled { cursor: default; }
+/* A long bin name wraps inside its box instead of spilling out of it. */
+.ls-bin-name { flex: 1; min-inline-size: 0; overflow-wrap: anywhere; }
+.ls-bin-name .ls-nw { white-space: normal; }
+.ls-bin-count {
+  flex: none;
+  min-inline-size: 1.6rem;
+  block-size: 1.6rem;
+  padding-inline: 6px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--line);
+  color: var(--muted);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.ls-bin[data-armed="yes"] .ls-bin-count { background: var(--accent); color: var(--on-accent); }
+.ls-bin-empty { margin: 0; flex: 1; display: grid; place-items: center; color: var(--muted); padding-block: var(--sp-1); }
+.ls-bin[data-armed="yes"] .ls-bin-empty { color: var(--accent); font-weight: 700; }
+/* Drag and drop (sortdrag.js): the lifted card follows the pointer, its
+   place stays as a faint outline, and the bin under it lights up. */
+.ls-sort :is(.ls-tile, .ls-chiplet) { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+.ls-sort [data-dragging="yes"] { opacity: 0.35; }
+.ls-ghost {
+  position: fixed;
+  z-index: 60;
+  margin: 0;
+  pointer-events: none;
+  transform: scale(1.05) rotate(-1.5deg);
+  box-shadow: 0 10px 28px rgb(0 0 0 / 0.35);
+  border-color: var(--accent) !important;
+  background: var(--surface) !important;
+  color: var(--text);
+  box-sizing: border-box;
+  direction: ltr;
+}
+.ls-sort[data-drag="yes"] .ls-bin { border-color: var(--accent); }
+.ls-bin[data-over="yes"] { border-style: solid; border-color: var(--accent); background: var(--accent-soft); transform: scale(1.02); }
+.ls-pool[data-over="yes"] { outline: 2px dashed var(--accent); outline-offset: 4px; border-radius: var(--radius); }
+.ls-bin-cards { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+.ls-bin-cards li { display: flex; flex-direction: column; max-inline-size: 100%; }
+.ls-chiplet, .ls-chiplet-done {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-1);
+  max-inline-size: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  padding: 4px var(--sp-2);
+  text-align: start;
+  font-size: var(--fs-sm);
+  color: var(--text);
+}
+.ls-chiplet { cursor: pointer; min-block-size: var(--target); }
+.ls-bin-cards li[data-state="right"] .ls-chiplet-done { border-color: var(--good); background: var(--good-soft); }
+.ls-bin-cards li[data-state="wrong"] .ls-chiplet-done { border-color: var(--bad); background: var(--bad-soft); }
+.ls-sort > .btn, .ls-order .btn, .ls-case .btn { align-self: start; }
+
+/* mini case */
+/* The stem and every later scenario ("Six months later…") share one box. */
+.ls-case-stem, .ls-case-step > .ls-case-reveal {
+  background: var(--bg);
+  border-radius: var(--radius);
+  padding: var(--sp-3);
+  border-inline-start: 4px solid var(--accent);
+}
+.ls-case-step { display: flex; flex-direction: column; gap: var(--sp-2); padding-block-start: var(--sp-2); border-block-start: 1px dashed var(--line); }
+.ls-case-step > p { margin: 0; }
+
+/* table */
+.ls-table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
+.ls-table table { border-collapse: collapse; inline-size: 100%; font-size: var(--fs-sm); }
+.ls-table th, .ls-table td { padding: var(--sp-2) var(--sp-3); border-block-end: 1px solid var(--line); text-align: start; vertical-align: top; }
+.ls-table thead th { background: var(--accent-soft); color: var(--accent); }
+.ls-table tbody th { font-weight: 700; background: var(--bg); }
+.ls-table td[data-opened="yes"] { background: var(--good-soft); }
+/* Ranges and cut-offs stay whole; the table scrolls inside its card and
+   the row label stays in view. */
+.ls-table [data-short="yes"] { white-space: nowrap; }
+.ls-table tbody th { position: sticky; inset-inline-start: 0; z-index: 1; overflow-wrap: anywhere; min-inline-size: 6rem; }
+.ls-cell-hidden {
+  inline-size: 100%;
+  min-block-size: var(--target);
+  border: 1.5px dashed var(--accent);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--accent);
+  font-weight: 800;
+  cursor: pointer;
+}
+.ls-table .btn-link { align-self: start; }
+
+/* try */
+.ls-try .st-item { box-shadow: none; }
+
+/* summary */
+.ls-summary { text-align: center; align-items: center; gap: var(--sp-2); max-inline-size: 40rem; margin-inline: auto; }
+.ls-summary h1, .ls-summary h2, .ls-summary p { margin: 0; }
+.ls-confetti { font-size: 3rem; line-height: 1.2; animation: ls-bounce 700ms var(--ease); }
+@keyframes ls-bounce { 0% { transform: scale(0.4); } 60% { transform: scale(1.15); } 100% { transform: none; } }
+.ls-score { font-size: var(--fs-xl); }
+.ls-score strong { color: var(--good); font-variant-numeric: tabular-nums; }
+.ls-recap {
+  text-align: start;
+  inline-size: 100%;
+  margin: 0;
+  padding: var(--sp-3) var(--sp-3) var(--sp-3) var(--sp-3);
+  padding-inline-start: 2rem;
+  background: var(--bg);
+  border-radius: var(--radius);
+  display: grid;
+  gap: var(--sp-1);
+}
+.ls-recap li::marker { content: "✓  "; color: var(--good); }
+.ls-summary-actions { display: flex; flex-direction: column; gap: var(--sp-2); inline-size: 100%; align-items: stretch; margin-block-start: var(--sp-2); }
+.ls-summary-actions button.primary { align-self: stretch; }
+@media (prefers-reduced-motion: reduce) { .ls-confetti, .ls-mn-key { animation: none; transition: none; } }
+/* Unwritten lectures open the lecture's page: a dashed card, quiet text. */
+.coll[data-layout="cards"] button.ls-soon { background: none; border-style: dashed; }
+button.ls-soon .coll-title { color: var(--muted); }
+
+/* Glossy · Material You on the list: appearance.css draws the shared
+   parts (cards, rows, search); these are the list's own. */
+.app[data-appearance="glossy"] .ls-lec-go { border-radius: var(--radius-pill); }
+
+/* ---------- Glossy · Material You (lesson player) ----------
+   Tonal, rounded tiles and slots; solid fills keep every state readable. */
+.app[data-appearance="glossy"] :is(.ls-tile, .ls-slot, .ls-chiplet, .ls-chiplet-done) {
+  border-radius: var(--radius-card);
+  box-shadow: var(--glass-hi);
+}
+.app[data-appearance="glossy"] .ls-slots li[data-state="filled"] .ls-slot {
+  background: var(--soft, var(--accent-soft));
+  border-color: var(--accent);
+}
+.app[data-appearance="glossy"] .ls-verdict { border-radius: var(--radius-card); }
+.app[data-appearance="glossy"] .ls-bin { border-radius: var(--radius-card); }
+
+/* Follow reduced-motion preferences for the step indicator as well. */
+@media (prefers-reduced-motion: reduce) {
+  .ls-seg { transition: none; }
+}
+.ls-tools { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-block: var(--sp-2) 0; }
+.ls-tools .abd-open { min-block-size: var(--target, 48px); }

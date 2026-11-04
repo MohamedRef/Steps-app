@@ -1,0 +1,420 @@
+/* Shared parts of the 2026-10 redesign (docs/DESIGN.md lists them). Every
+   screen builds from these instead of its own copy; feature stylesheets add
+   layout only. Colours from tokens only (steps_core::theme), logical
+   properties only. Calm is what this file draws; appearance.css adds Glossy
+   on top through the same classes. */
+
+:root {
+  /* The design's names for the brand roles, for code ported from it:
+     its --primary is our --accent, its --accent our --accent-soft. */
+  --primary: var(--accent);
+  --on-primary: var(--on-accent);
+  --good-bg: var(--good-soft);
+  --bad-bg: var(--bad-soft);
+  --gold-bg: var(--gold-soft);
+  --radius-control: 13px;
+  --radius-sheet: 24px;
+  /* At least 48dp to touch, whatever the drawn size. */
+  --target: 48px;
+}
+
+/* ---------- buttons ----------
+   .btn-primary: one main action per screen, solid brand. .btn-tonal: the
+   second action. .btn-secondary: outlined. .btn-ghost: a quiet text way
+   out. .icon-button: round, icon only, with an aria-label. */
+.btn-primary { color: var(--on-accent); }
+.btn-block { inline-size: 100%; }
+.btn-primary:disabled { background: var(--surface-2); border-color: var(--line); color: var(--muted); opacity: 1; }
+.icon-button { position: relative; }
+/* The touch area reaches 48dp even when the circle is drawn smaller. */
+.icon-button::after { content: ""; position: absolute; inset: min(0px, calc((100% - var(--target)) / 2)); }
+
+/* ---------- headings ----------
+   .page-head: the screen's title (h1, about 22px) with an optional
+   .page-sub line and a .page-eyebrow above. .section-head: an h2 with an
+   optional action at its end (a button.btn-ghost that opens the list). */
+.page-head { display: flex; flex-direction: column; gap: 2px; }
+.page-head h1 { font-size: var(--fs-xl); font-weight: 600; line-height: 1.45; }
+.page-eyebrow, .page-sub { color: var(--muted); font-size: var(--fs-sm); }
+.section-head { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); min-block-size: var(--tap); }
+.section-head h2 { font-size: var(--fs-md); font-weight: 700; }
+.section-head .btn-ghost { min-block-size: var(--tap); padding-inline: var(--sp-2); font-size: var(--fs-sm); }
+
+/* ---------- status chips ----------
+   span.chip with data-tone: accent (current), good (done), bad (needs
+   work), gold (a supporting note). The word says the state; the tone only
+   supports it. */
+.chip[data-tone="accent"] { background: var(--accent-soft); border-color: transparent; color: var(--accent-ink); font-weight: 600; }
+.chip[data-tone="good"] { background: var(--good-soft); border-color: transparent; color: var(--good); font-weight: 600; }
+.chip[data-tone="bad"] { background: var(--bad-soft); border-color: transparent; color: var(--bad); font-weight: 600; }
+.chip[data-tone="gold"] { background: var(--gold-soft); border-color: transparent; color: var(--gold); font-weight: 600; }
+
+/* ---------- cards ----------
+   .card: a surface with a hairline. .card-flat: a quiet tinted card.
+   .hero: the one recommended next step, brand-filled; it is always a
+   card-action (or a button) and its button is .btn-on-hero. */
+.card-flat { background: var(--soft); border-color: transparent; }
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--on-accent);
+  border-radius: calc(var(--radius-card) + 3px);
+  padding: var(--sp-4) var(--sp-4) var(--sp-4);
+  gap: var(--sp-2);
+}
+.hero :is(.muted, .page-sub, .hero-meta) { color: inherit; opacity: 0.86; }
+.hero h2, .hero h3 { font-size: var(--fs-xl); font-weight: 600; line-height: 1.45; }
+.hero-meta { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); font-size: var(--fs-sm); }
+.hero .chip { background: color-mix(in srgb, var(--on-accent) 14%, transparent); border-color: transparent; color: inherit; }
+.btn-on-hero { background: var(--surface); border-color: var(--surface); color: var(--accent); font-weight: 700; min-block-size: var(--tap-lg); }
+.hero > * { position: relative; }
+/* Faint rings in the corner: decoration only, no image. */
+.hero::before {
+  content: ""; position: absolute; inline-size: 9rem; block-size: 9rem; border-radius: 50%;
+  inset-block-start: -2.5rem; inset-inline-end: -4.5rem; border: 1px solid currentColor; opacity: 0.08;
+  box-shadow: 0 0 0 1.4rem currentColor, 0 0 0 2.8rem currentColor; pointer-events: none;
+}
+
+/* ---------- stat tiles ----------
+   A row of small counts; each is a button.tap that opens what it counts
+   (no dead tiles). The number reads LTR. */
+.stat-tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(6.5rem, 1fr)); gap: var(--sp-2); }
+.stat-tile {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  min-block-size: 5rem; padding: var(--sp-2); text-align: center;
+  background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius-card); box-shadow: var(--card-shadow);
+}
+.stat-num { font-size: var(--fs-xl); font-weight: 700; font-family: var(--font-latin); direction: ltr; unicode-bidi: isolate; font-variant-numeric: tabular-nums; }
+.stat-label { font-size: var(--fs-sm); color: var(--muted); line-height: 1.4; }
+
+/* ---------- rows ----------
+   Activity rows are button.tap.tap-row inside ul.tap-list (main.css).
+   .row-icon: the tinted round icon at a row's start. */
+.row-icon {
+  flex: none; display: grid; place-items: center; inline-size: 2.25rem; block-size: 2.25rem;
+  border-radius: var(--radius-control); background: var(--accent-soft); color: var(--accent-ink);
+}
+.row-icon svg { inline-size: 1.25rem; block-size: 1.25rem; }
+
+/* ---------- notes ----------
+   .note: supporting text in a soft box. data-tone gold for a guideline
+   update or a mnemonic, good/bad for feedback text. */
+.note[data-tone="gold"] { background: var(--gold-soft); color: var(--text); border-inline-start: 3px solid var(--gold); }
+.note[data-tone="good"] { background: var(--good-soft); color: var(--text); border-inline-start: 3px solid var(--good); }
+.note[data-tone="bad"] { background: var(--bad-soft); color: var(--text); border-inline-start: 3px solid var(--bad); }
+
+/* ---------- empty state ----------
+   What is empty, why, and the one way forward (a real button). */
+.empty { display: flex; flex-direction: column; align-items: center; gap: var(--sp-2); padding: var(--sp-6) var(--sp-4); text-align: center; }
+.empty-icon { display: grid; place-items: center; inline-size: 3rem; block-size: 3rem; border-radius: 50%; background: var(--soft); color: var(--accent); }
+.empty h2 { font-size: var(--fs-md); }
+.empty p { color: var(--muted); font-size: var(--fs-sm); max-inline-size: 30rem; }
+
+/* ---------- answer choices ----------
+   button.answer with data-state: (none) unanswered, "selected" (draft),
+   "correct", "wrong" (picked and wrong), "missed" (the right one, not
+   picked). After checking the buttons are disabled but keep their state
+   colours. .answer-mark holds the ✓/✗ word or icon, so the state never
+   depends on colour alone. */
+.answer {
+  display: flex; align-items: center; gap: var(--sp-3);
+  inline-size: 100%; min-block-size: var(--target); padding: var(--sp-3) var(--sp-4);
+  border: 1.5px solid var(--line); border-radius: var(--radius-control);
+  background: var(--surface); color: var(--text); text-align: start; cursor: pointer;
+}
+.answer:disabled { cursor: default; }
+.answer-key { flex: none; display: grid; place-items: center; inline-size: 1.75rem; block-size: 1.75rem; border-radius: 50%; border: 1.5px solid var(--line); font-family: var(--font-latin); font-size: var(--fs-sm); font-weight: 700; }
+.answer-text { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.answer-mark { flex: none; font-size: var(--fs-sm); font-weight: 700; }
+.answer[data-state="selected"] { background: var(--accent-soft); border-color: var(--accent); }
+.answer[data-state="selected"] .answer-key { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.answer[data-state="correct"], .answer[data-state="missed"] { background: var(--good-soft); border-color: var(--good); }
+.answer[data-state="correct"] :is(.answer-key, .answer-mark), .answer[data-state="missed"] .answer-mark { color: var(--good); border-color: var(--good); }
+.answer[data-state="missed"] { border-style: dashed; }
+.answer[data-state="wrong"] { background: var(--bad-soft); border-color: var(--bad); }
+.answer[data-state="wrong"] :is(.answer-key, .answer-mark) { color: var(--bad); border-color: var(--bad); }
+@media (hover: hover) { .answer:not(:disabled):not([data-state]):hover { border-color: var(--accent); } }
+.answer:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- counts and progress ----------
+   .num-ltr: any "3 / 12", percentage or count inside Arabic text. Without
+   it, "2 / 5" reads as "5 / 2".
+   .progress: a thin bar (role="progressbar" with aria-valuenow on it),
+   its fill's inline-size set inline. */
+.num-ltr { font-family: var(--font-latin); direction: ltr; unicode-bidi: isolate; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.progress { block-size: 6px; border-radius: var(--radius-pill); background: var(--surface-2); overflow: hidden; }
+.progress-fill { block-size: 100%; border-radius: inherit; background: var(--accent); transition: inline-size var(--dur) var(--ease); }
+.progress[data-tone="good"] .progress-fill { background: var(--good); }
+
+/* ---------- review rating row ----------
+   Four equal buttons (Again, Hard, Good, Easy), each with the real
+   interval under its name (.rating-when). It keeps its place; content
+   checks (approve, edit, flag) never sit in this row. */
+.rating-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--sp-2); }
+.rating {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0;
+  min-block-size: calc(var(--target) + 0.5rem); padding: var(--sp-1);
+  border: 1px solid var(--line); border-radius: var(--radius-control);
+  background: var(--surface); color: var(--text); font-weight: 700; cursor: pointer; line-height: 1.35;
+}
+.rating-when { font-family: var(--font-latin); font-size: 0.75rem; font-weight: 500; color: var(--muted); direction: ltr; unicode-bidi: isolate; }
+.rating[data-grade="again"] { color: var(--bad); }
+.rating[data-grade="good"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.rating[data-grade="good"] .rating-when { color: inherit; opacity: 0.85; }
+.rating:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------- bounded sheet ----------
+   div.sheet-backdrop (a button-less scrim, tap closes) + div.sheet
+   role="dialog". A bottom sheet on phones; a centred box of at most 430px
+   from 600px. Long content scrolls inside; it never grows across the
+   window. */
+.sheet-backdrop { position: fixed; inset: 0; z-index: 30; background: rgb(0 0 0 / 0.32); }
+.sheet {
+  position: fixed; z-index: 31;
+  inset-inline: 0; inset-block-end: 0;
+  max-block-size: 88dvh; overflow-y: auto; overscroll-behavior: contain;
+  display: flex; flex-direction: column; gap: var(--sp-3);
+  padding: var(--sp-4) var(--sp-4) calc(var(--sp-4) + env(safe-area-inset-bottom, 0px));
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--line-soft, var(--line)); border-radius: var(--radius-sheet) var(--radius-sheet) 0 0;
+  box-shadow: 0 -8px 30px rgb(0 0 0 / 0.16);
+}
+.sheet-head { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
+.sheet-head h2 { font-size: var(--fs-lg); }
+@media (min-width: 600px) {
+  .sheet {
+    inset: 50% auto auto 50%; transform: translate(-50%, -50%);
+    inline-size: min(430px, calc(100vw - 2 * var(--sp-6)));
+    max-block-size: min(80dvh, 44rem);
+    border-radius: var(--radius-sheet);
+  }
+}
+
+/* ---------- fields ----------
+   label.field: the label text in a span, then the input. .field-hint
+   under it; .field-error (role="alert") when it is wrong. The typed text
+   stays in the input on an error. .search: an input with a magnifier. */
+.field { display: flex; flex-direction: column; gap: var(--sp-1); }
+.field > span:first-child { font-weight: 600; font-size: var(--fs-sm); }
+.field-hint { color: var(--muted); font-size: var(--fs-sm); }
+.field-error { color: var(--bad); font-size: var(--fs-sm); font-weight: 600; }
+:is(.field, .search) :is(input:not([type="checkbox"]):not([type="radio"]), textarea, select) {
+  inline-size: 100%; min-block-size: var(--target); padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--line); border-radius: var(--radius-control);
+  background-color: var(--surface); color: var(--text); font: inherit;
+}
+/* Room for the select's caret (see "select" below). */
+:is(.field, .search) select:not([multiple]):not([size]) { padding-inline-end: 2.5rem; }
+:is(.field, .search) :is(input, textarea, select):focus-visible { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+.field[data-invalid="true"] :is(input, textarea, select) { border-color: var(--bad); }
+.search { position: relative; display: flex; align-items: center; }
+.search :is(input:not([type="checkbox"]):not([type="radio"])) { padding-inline-start: 2.5rem; border-radius: var(--radius-pill); background: var(--surface-2); border-color: transparent; }
+.search > svg { position: absolute; inset-inline-start: var(--sp-3); inline-size: 1.25rem; block-size: 1.25rem; color: var(--muted); pointer-events: none; }
+
+/* ---------- select ----------
+   Every one-line select draws its own caret at the inline end, a little in
+   from the edge, instead of the platform arrow that sits on the border
+   and ignores RTL. A rule that styles a select sets background-color,
+   never the background shorthand (it would wipe the caret), and leaves
+   2.5rem of end padding. --caret recolours it. */
+select:not([multiple]):not([size]) {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-inline-end: 2.5rem;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--caret, var(--muted)) 50%),
+    linear-gradient(135deg, var(--caret, var(--muted)) 50%, transparent 50%);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+  /* The app is RTL, so the inline end is the left. */
+  background-position: left 1rem center, left calc(1rem + 5px) center;
+}
+select:not([multiple]):not([size]):dir(ltr) {
+  background-position: right calc(1rem + 5px) center, right 1rem center;
+}
+/* Forced colours drop background images: give the platform arrow back. */
+@media (forced-colors: active) {
+  select:not([multiple]):not([size]) { -webkit-appearance: auto; appearance: auto; background-image: none; }
+}
+
+/* ---------- switch ----------
+   input[type="checkbox"][role="switch"], inside a label that names it. */
+input[type="checkbox"][role="switch"] {
+  position: relative; inline-size: 2.75rem; block-size: 1.6rem; flex: none;
+  border: 0; border-radius: var(--radius-pill); background: var(--line);
+  display: inline-block; cursor: pointer;
+  transition: background-color var(--dur) var(--ease);
+}
+input[type="checkbox"][role="switch"]::after {
+  content: ""; position: absolute; inset-block-start: 0.2rem; inset-inline-start: 0.2rem;
+  inline-size: 1.2rem; block-size: 1.2rem; margin: 0; border: 0; border-radius: 50%;
+  background: var(--surface); box-shadow: 0 1px 3px rgb(0 0 0 / 0.25); transform: none;
+  transition: inset-inline-start var(--dur) var(--ease);
+}
+input[type="checkbox"][role="switch"]:checked { background: var(--accent); }
+input[type="checkbox"][role="switch"]:checked::after { inset-inline-start: calc(100% - 1.4rem); background: var(--on-accent); }
+
+/* ---------- natural height ----------
+   Screens scroll in main.content, a flex column: no child may shrink
+   until its heading or button is cut off. */
+.content > *, .content-rev > * { flex-shrink: 0; }
+
+/* ---------- list screens: view switcher and collections ----------
+   div.view-bar (parts::ViewBar): the order menu and three layout buttons.
+   ul.coll[data-layout=cards|list|compact] > li > button.coll-btn holding
+   .coll-lead (a .coll-badge), .coll-main (.coll-title, .coll-sub,
+   .coll-extra), .coll-end and .chev. Same markup in every layout:
+   compact hides .coll-sub and .coll-extra and shows .coll-when-compact;
+   cards stack everything in a grid tile. h3.coll-group heads a group. */
+.view-bar { display: flex; align-items: center; justify-content: flex-end; gap: var(--sp-2); flex-wrap: wrap; flex-shrink: 0; }
+.view-bar:has(.view-sort) { justify-content: space-between; }
+.section-head .view-bar { flex: none; }
+.view-seg { display: inline-flex; gap: 2px; padding: 3px; border-radius: 999px; background: var(--surface-2, var(--soft)); }
+.view-seg > button {
+  position: relative; display: grid; place-items: center; inline-size: 2.6rem; block-size: 2.25rem;
+  border: 0; border-radius: 999px; background: none; color: var(--muted); cursor: pointer; padding: 0;
+}
+.view-seg > button::after { content: ""; position: absolute; inset-block: min(0px, calc((100% - var(--target)) / 2)); inset-inline: 0; }
+.view-seg > button .icon { inline-size: 1.15rem; block-size: 1.15rem; }
+.view-seg > button[aria-checked="true"] { background: var(--surface); color: var(--accent); box-shadow: 0 1px 2px color-mix(in srgb, var(--text) 14%, transparent); }
+.view-seg > button:focus-visible, .view-sort-btn:focus-visible, .view-menu-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.view-sort { position: relative; }
+.view-sort-btn {
+  display: inline-flex; align-items: center; gap: 6px; min-block-size: 2.4rem; padding-inline: var(--sp-3);
+  border: 1px solid var(--line-soft, var(--line)); border-radius: 999px; background: var(--surface);
+  color: var(--text); font: inherit; font-size: var(--fs-sm); cursor: pointer;
+}
+.view-sort-btn .icon { inline-size: 1.05rem; block-size: 1.05rem; color: var(--muted); }
+.view-sort-more { color: var(--muted); }
+.view-scrim { position: fixed; inset: 0; z-index: 40; background: transparent; border: 0; padding: 0; cursor: default; }
+.view-menu {
+  position: absolute; z-index: 41; inset-block-start: calc(100% + 6px); inset-inline-start: 0;
+  min-inline-size: 13rem; display: flex; flex-direction: column; padding: 4px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-control);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--text) 18%, transparent);
+}
+.view-menu-item {
+  display: flex; align-items: center; gap: var(--sp-2); min-block-size: var(--target); padding-inline: var(--sp-2) var(--sp-3);
+  border: 0; border-radius: 10px; background: none; color: var(--text); font: inherit; text-align: start; cursor: pointer;
+}
+.view-menu-item[aria-checked="true"] { color: var(--accent); font-weight: 600; }
+.view-menu-sep { border-block-start: 1px solid var(--line-soft, var(--line)); border-start-start-radius: 0; border-start-end-radius: 0; }
+.view-tick { inline-size: 1.2rem; display: grid; place-items: center; }
+.view-tick .icon { inline-size: 1.1rem; block-size: 1.1rem; }
+@media (hover: hover) and (pointer: fine) {
+  .view-menu-item:hover, .view-seg > button:not([aria-checked="true"]):hover { background: var(--accent-soft); }
+}
+
+.coll { list-style: none; margin: 0; padding: 0; flex-shrink: 0; }
+.coll-group { margin: var(--sp-2) 0 0; font-size: var(--fs-sm); font-weight: 700; color: var(--muted); }
+button.coll-btn {
+  inline-size: 100%; display: flex; align-items: center; gap: var(--sp-3); min-block-size: var(--row, 48px);
+  padding: var(--sp-3) var(--card-pad); border: 0; border-radius: 0; background: none; color: inherit;
+  font: inherit; text-align: start; cursor: pointer;
+}
+button.coll-btn:not(:disabled):active { transform: var(--press, scale(0.98)); }
+button.coll-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.coll-lead { flex: none; display: flex; align-items: center; }
+.coll-badge {
+  min-inline-size: 2.4rem; block-size: 2.4rem; padding-inline: var(--sp-2); display: grid; place-items: center;
+  border-radius: 12px; background: var(--accent-soft); color: var(--accent);
+  font-family: var(--font-latin); font-size: var(--fs-sm); font-weight: 700;
+}
+.coll-badge .icon { inline-size: 1.2rem; block-size: 1.2rem; }
+.coll-badge[data-tone="quiet"] { background: var(--surface-2, var(--bg)); color: var(--muted); }
+.coll-badge[data-tone="good"] { background: var(--good-soft); color: var(--good); }
+.coll-badge[data-tone="strong"] { background: var(--accent); color: var(--on-accent); }
+.coll-main { flex: 1; min-inline-size: 0; display: flex; flex-direction: column; gap: 2px; }
+.coll-title { font-weight: 600; line-height: 1.45; overflow-wrap: anywhere; }
+.coll-title:is(bdi[dir="ltr"]) { font-family: var(--font-latin); text-align: start; }
+.coll-sub { color: var(--muted); font-size: var(--fs-sm); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.coll-extra { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-1) var(--sp-2); }
+.coll-extra > .progress { flex: 1 1 100%; }
+.coll-end { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; color: var(--muted); font-size: var(--fs-sm); text-align: end; }
+.coll-when-compact { display: none; }
+
+/* List and compact: rows in one surface with hairlines. */
+.coll:is([data-layout="list"], [data-layout="compact"]) {
+  background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius-card); box-shadow: var(--card-shadow); overflow: hidden;
+}
+.coll:is([data-layout="list"], [data-layout="compact"]) > li + li { border-block-start: 1px solid var(--line-soft, var(--line)); }
+@media (hover: hover) and (pointer: fine) {
+  .coll:is([data-layout="list"], [data-layout="compact"]) button.coll-btn:hover { background: var(--accent-soft); }
+}
+.coll[data-layout="compact"] button.coll-btn { min-block-size: var(--target); padding-block: var(--sp-2); gap: var(--sp-2); }
+.coll[data-layout="compact"] :is(.coll-sub, .coll-extra, .coll-when-roomy) { display: none; }
+.coll[data-layout="compact"] .coll-when-compact { display: inline; }
+.coll[data-layout="compact"] .coll-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.coll[data-layout="compact"] .coll-badge { min-inline-size: 2rem; block-size: 2rem; border-radius: 10px; }
+.coll[data-layout="compact"] .coll-end { flex-direction: row; align-items: center; gap: var(--sp-2); }
+
+/* Cards: tiles in a grid, two across on a phone, more when there is room. */
+.coll[data-layout="cards"] { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--sp-2); }
+@media (min-width: 840px) { .coll[data-layout="cards"] { grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); } }
+.coll[data-layout="cards"] > li { display: flex; min-inline-size: 0; }
+.coll[data-layout="cards"] button.coll-btn {
+  position: relative; flex-direction: column; align-items: stretch; gap: var(--sp-2); padding: var(--card-pad);
+  background: var(--surface); border: 1px solid var(--card-border); border-radius: var(--radius-card); box-shadow: var(--card-shadow);
+}
+.coll[data-layout="cards"] .coll-lead { padding-inline-end: var(--sp-4); }
+.coll[data-layout="cards"] .coll-main { flex: 1; }
+/* The progress line sits at the foot of every card in a row. */
+.coll[data-layout="cards"] .coll-extra { margin-block-start: auto; padding-block-start: var(--sp-1); }
+.coll[data-layout="cards"] .coll-end { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--sp-1) var(--sp-2); text-align: start; }
+.coll[data-layout="cards"] .chev { position: absolute; inset-block-start: calc(var(--card-pad) + 1rem); inset-inline-end: var(--card-pad); }
+@media (hover: hover) and (pointer: fine) { .coll[data-layout="cards"] button.coll-btn:hover { border-color: var(--accent); } }
+
+/* A course's heading over its lectures (parts::CourseHead). */
+.course-head { margin: var(--sp-3) 0 var(--sp-1); font-size: var(--fs-md); font-weight: 700; }
+.course-head:first-child { margin-block-start: 0; }
+.course-head-btn { display: flex; align-items: baseline; gap: var(--sp-2); inline-size: 100%; }
+.course-head-short { color: var(--accent); }
+.course-head-title { flex: 1; min-width: 0; color: var(--muted); font-size: var(--fs-sm); font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.course-label { color: var(--accent); margin-block: var(--sp-2) 0; }
+
+/* Shared ActionRow: navigation and grouped settings use one DOM shape. */
+.card.grouped { padding: 0; gap: 0; overflow: clip; }
+.grouped > * + * { border-block-start: 1px solid var(--line-soft, var(--line)); }
+button.activity-row {
+  display: flex; align-items: center; gap: var(--sp-3); inline-size: 100%;
+  min-block-size: var(--row); padding-block: var(--sp-3); padding-inline: var(--card-pad);
+  border: 0; border-radius: 0; background: transparent; color: inherit;
+  text-align: start; font: inherit; cursor: pointer;
+}
+button.activity-row:focus-visible { outline-offset: -3px; }
+.row-copy { flex: 1; min-inline-size: 0; display: flex; flex-direction: column; }
+.row-copy strong { font-weight: 600; }
+.row-copy small { color: var(--muted); font-size: var(--fs-sm); overflow-wrap: anywhere; }
+.row-end { flex: none; display: flex; align-items: center; }
+
+.row-title { font-family: inherit; }
+
+/* Shared preference failure surface, visible only while a save is pending. */
+.save-notice {
+  display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-3);
+  padding: var(--sp-3); margin-block-end: var(--sp-3);
+  border: 1px solid var(--line); border-radius: var(--radius-control); background: var(--surface);
+}
+.save-notice p { flex: 1 1 16rem; margin: 0; overflow-wrap: anywhere; }
+.save-retry { flex: 0 0 auto; }
+.settings-window > .save-notice { margin: var(--sp-3); }
+
+/* A book quote (pagesheet::Quote): the page's own words with no length cap,
+   tables drawn as tables (Mohamed, 2026-11-02). English, so it runs ltr. */
+.bk-q { display: flex; flex-direction: column; gap: var(--sp-2); font-family: var(--font-latin); text-align: start; }
+.bk-q p { margin: 0; }
+.bk-q-para { font-size: 1.02rem; line-height: 1.6; }
+.bk-q-title { font-weight: 700; }
+.bk-q-scroll { overflow-x: auto; }
+.bk-q-table { border-collapse: collapse; inline-size: 100%; font-size: 0.92rem; line-height: 1.45; }
+.bk-q-table th, .bk-q-table td { border: 1px solid var(--line); padding: 5px 8px; text-align: start; vertical-align: top; }
+.bk-q-table thead th { background: var(--surface-2, var(--soft)); font-weight: 700; }
+.bk-q-table.grouped th { font-weight: 700; inline-size: 34%; background: var(--surface-2, var(--soft)); }
+.bk-q-table td.solo { font-weight: 600; }
+.bk-q-table td.d1 { padding-inline-start: 1.4em; }
+.bk-q-table td.d2, .bk-q-table td.d3 { padding-inline-start: 2.4em; }
+.bk-q-list { margin: 0; padding-inline-start: 1.2em; line-height: 1.55; }
+.bk-q-list li.d1 { margin-inline-start: 1.2em; }
+.bk-q-list li.d2, .bk-q-list li.d3 { margin-inline-start: 2.4em; }

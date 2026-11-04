@@ -1,0 +1,47 @@
+/* His own cards: the list (on Study and References) and the form, which is
+   the shared .sheet (parts.css) with its fields. Layout only. */
+.own-head { display: flex; align-items: center; gap: var(--sp-2); }
+.own-head h2 { margin: 0; flex: 1; }
+.own-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); }
+.own-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.own-list li {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-2);
+  padding-block: var(--sp-3);
+  border-block-start: 1px solid var(--line-soft, var(--line));
+}
+.own-text { display: flex; flex-direction: column; min-inline-size: 0; flex: 1 1 16rem; }
+.own-front { font-family: var(--font-latin); overflow-wrap: anywhere; }
+
+/* Over any screen and the More sheet. */
+.own-backdrop { z-index: 50; }
+.own-sheet { z-index: 51; }
+.own-sheet h2 { margin: 0; }
+.own-sheet p { margin: 0; }
+.own-waiting { padding: var(--sp-2) var(--sp-3); border-radius: var(--radius); background: var(--accent-soft); color: var(--accent-ink); }
+.own-field textarea[lang="en"] { font-family: var(--font-latin); }
+.own-field textarea { resize: vertical; }
+.own-label { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-2); }
+.own-count { font-weight: 400; font-size: var(--fs-sm); color: var(--muted); font-variant-numeric: tabular-nums; }
+.own-field[data-invalid="true"] :is(textarea, input) { background: var(--bad-soft); }
+.own-row { display: flex; gap: var(--sp-3); }
+.own-row > .own-field { flex: 1; min-inline-size: 0; }
+.own-row .own-page { flex: 0 0 7rem; }
+
+/* How the card will look in a session. */
+.own-preview { border: 1px solid var(--line-soft, var(--line)); border-radius: var(--radius-card, var(--radius)); background: var(--soft); }
+.own-preview > summary { cursor: pointer; font-weight: 600; min-block-size: var(--tap); display: flex; align-items: center;
+  padding-inline: var(--sp-3); }
+.own-preview[open] > summary { border-block-end: 1px solid var(--line-soft, var(--line)); }
+.own-preview > p { padding: 0 var(--sp-3) var(--sp-3); }
+.own-preview-card { display: flex; flex-direction: column; gap: var(--sp-2); margin: var(--sp-3); padding: var(--sp-3);
+  background: var(--surface); border-radius: var(--radius-control, var(--radius)); }
+.own-preview-card hr { inline-size: 100%; border: 0; border-block-start: 1px dashed var(--line); margin: 0; }
+.own-preview-front { font-family: var(--font-latin); font-weight: 600; font-size: var(--fs-lg); overflow-wrap: anywhere; white-space: pre-wrap; }
+.own-preview-back { font-family: var(--font-latin); overflow-wrap: anywhere; white-space: pre-wrap; }
+
+/* The actions stay in reach at the sheet's foot, above the keyboard. */
+.own-sheet > .own-actions { position: sticky; inset-block-end: calc(-1 * var(--sp-4)); background: var(--surface);
+  padding-block: var(--sp-2) var(--sp-3); margin-block-end: calc(-1 * var(--sp-4)); }
+.own-sheet > .own-actions > .btn { flex: 1 1 8rem; }
+/* From 600dp the shared sheet is 430px; the form wants a little more room. */
+@media (min-width: 600px) { .own-sheet { inline-size: min(34rem, calc(100vw - 2 * var(--sp-6))); } }

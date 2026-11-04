@@ -1,0 +1,24 @@
+/* A book page's sheet (pagesheet/mod.rs): the resizable info sheet
+   (sheet.rs, assets/sheet.css). Layout only. */
+.bk-head { display: grid; grid-template-columns: auto 1fr; gap: var(--sp-3); align-items: center; }
+.bk-head h2 { margin: 0; line-height: 1.25; }
+.bk-head p { margin: 0; }
+.bk-page { inline-size: 2.6rem; block-size: 2.6rem; border-radius: var(--radius-control, 12px); display: grid; place-items: center;
+  font-weight: 700; background: var(--accent-soft); color: var(--accent-ink); font-variant-numeric: tabular-nums; }
+.bk-body { display: flex; flex-direction: column; gap: var(--sp-3); }
+.bk-quote { margin: 0; padding: var(--sp-3); border-radius: var(--radius-control, var(--radius)); background: var(--soft);
+  border-inline-start: 3px solid var(--accent); }
+/* The تحشيشة under a quote, its letters in a small table (Mohamed, 2026-11-02). */
+.bk-hook { padding: var(--sp-3); border-radius: var(--radius-control, var(--radius)); background: var(--gold-soft);
+  display: flex; flex-direction: column; gap: var(--sp-2); }
+.bk-hook p { margin: 0; }
+.bk-hook-label { font-size: var(--fs-sm); font-weight: 700; color: var(--gold); }
+.bk-hook-text { line-height: 1.7; }
+.bk-hook-text p { margin: 0; }
+.bk-hook-parts { border-collapse: collapse; inline-size: 100%; font-family: var(--font-latin); font-size: 0.78rem; line-height: 1.4; }
+.bk-hook-parts th, .bk-hook-parts td { border: 1px solid var(--line); padding: 3px 6px; text-align: start; vertical-align: top; }
+.bk-hook-parts th { inline-size: 1.8rem; text-align: center; font-weight: 800; color: var(--gold); }
+.bk-made { margin: 0; }
+.bk-counts { font-weight: 600; }
+.bk-foot { display: flex; flex-direction: column; gap: var(--sp-2); }
+.bk-foot .btn { inline-size: 100%; min-block-size: var(--target, 48px); }

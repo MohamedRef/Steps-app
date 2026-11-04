@@ -1,0 +1,434 @@
+/* Steps: the palette of the subject. Bile ochre for the accent, liver-tissue
+   green for "ready / right", on a faint green-grey paper. Logical properties
+   only, so the Arabic UI mirrors without extra rules. No image assets.
+   Layout by window width: bottom bar under 600px, side rail from 600px,
+   a wider reading column from 840px. */
+
+/* Colour tokens (--bg, --surface, --text, --muted, --line, --accent[-soft],
+   --good[-soft], --bad[-soft]) come from steps_core::theme, per the theme
+   picked in Settings › Look. */
+:root {
+  --font: "IBM Plex Sans Arabic", "Noto Sans Arabic", "Segoe UI", "Roboto", system-ui, sans-serif;
+  --font-latin: "Plus Jakarta Sans", "Segoe UI", "Roboto", system-ui, sans-serif;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.2rem;
+  --fs-xl: 1.44rem;
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-6: 1.5rem;
+  --radius: 12px;
+  --radius-card: 18px;
+  --card-pad: var(--sp-4);
+  --card-shadow: none;
+  --radius-pill: 999px;
+  /* Control heights in rem, so Settings › Look › text size scales them with
+     the text. --tap: buttons and toggles; --tap-lg: main actions; --row:
+     two-line list rows. */
+  --tap: 2.75rem;
+  --tap-lg: 3rem;
+  --row: 3.5rem;
+  --lh: 1.7;
+  --nav-h: 64px;
+  --rail-w: 88px;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dur: 180ms;
+}
+/* Phones (compact): one notch denser. A 384dp-wide S24 showed big type,
+   1rem padding nested two deep and 44-56px rows, so the type, spacing and
+   control scales each step down here. Touch targets stay at 40px or more. */
+@media (max-width: 599.98px) {
+  :root {
+    --fs-sm: 0.8125rem;
+    --fs-md: 0.9375rem;
+    --fs-lg: 1.0625rem;
+    --fs-xl: 1.25rem;
+    --sp-3: 0.625rem;
+    --sp-4: 0.75rem;
+    --sp-6: 1.125rem;
+    --tap: 2.5rem;
+    --tap-lg: 2.75rem;
+    --row: 3rem;
+    --lh: 1.5;
+    --nav-h: 56px;
+  }
+}
+
+* { box-sizing: border-box; }
+/* The window never scrolls: `main.content` does, so the top bar, the bottom
+   bar and the sidebar stay put (UX #102). */
+html, body { margin: 0; height: 100%; overflow: hidden; background: var(--bg); }
+/* Dioxus mounts the app in #main, which has no height of its own. */
+#main { height: 100%; }
+
+.app {
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg);
+  color: var(--text);
+  --card-border: var(--line-soft, var(--line));
+  font-family: var(--font);
+  font-size: var(--fs-md);
+  line-height: var(--lh);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas: "top" "content" "nav";
+}
+
+bdi { font-family: var(--font-latin); }
+/* WebKitGTK ignores the dir attribute's isolation on bdi: "1–22" showed as
+   "22–1" (B5). Say it in CSS so every bdi dir="ltr" reads left to right. */
+bdi[dir="ltr"] { direction: ltr; unicode-bidi: isolate; }
+/* Date, time and number fields read left to right inside the Arabic form:
+   otherwise WebKit lays 19:00 out as "PM 00:07" (UX #101). */
+input[type="date"], input[type="time"], input[type="datetime-local"], input[type="number"] {
+  direction: ltr;
+  unicode-bidi: isolate;
+  text-align: end;
+}
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* Checkboxes drawn from the theme: native boxes stay white in Night on some
+   engines (WKWebView), whatever color-scheme says. --check sets the fill. */
+input[type="checkbox"] {
+  appearance: none; -webkit-appearance: none; margin: 0; flex: none;
+  inline-size: 1.25rem; block-size: 1.25rem; display: inline-grid; place-content: center;
+  border: 2px solid var(--muted); border-radius: 5px; background: var(--surface); cursor: pointer;
+}
+input[type="checkbox"]:checked { background: var(--check, var(--accent)); border-color: var(--check, var(--accent)); }
+input[type="checkbox"]:checked::after {
+  content: ""; inline-size: 0.35em; block-size: 0.65em; margin-block-start: -0.15em;
+  border: solid var(--glass-solid, var(--surface)); border-width: 0 2px 2px 0; transform: rotate(45deg);
+}
+input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
+
+/* ---------- top bar ---------- */
+.topbar {
+  grid-area: top;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding-block: calc(var(--sp-2) + env(safe-area-inset-top, 0px)) var(--sp-2);
+  padding-inline: var(--sp-4);
+  border-block-end: 1px solid var(--line);
+  background: var(--surface);
+}
+.brand { display: flex; align-items: baseline; gap: var(--sp-2); min-width: 0; }
+.brand-name { font-weight: 700; font-size: var(--fs-lg); color: var(--accent); }
+.brand-tag { color: var(--muted); font-size: var(--fs-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.icon-button {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius-pill);
+  min-width: var(--tap);
+  min-height: var(--tap);
+  cursor: pointer;
+}
+.icon-button { display: inline-grid; place-items: center; }
+.icon-button .label { display: none; }
+
+/* ---------- buttons: the one set every screen uses (UX #107) ----------
+   .btn plus a role: -primary (the one main action), -secondary, -ghost (a
+   quiet way out, such as "later"), -tonal (a soft second action, in
+   shape.css), -good (a "got it" grade), -danger (a delete). -lg is the
+   taller study-session size. .btn-link is a text button. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-block-size: var(--tap);
+  padding-inline: var(--sp-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--text);
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+}
+.btn-primary { background: var(--accent); border-color: var(--accent); color: var(--glass-solid, var(--surface)); font-weight: 700; }
+.btn-secondary { background: var(--surface); border-color: var(--line); }
+/* A file input dressed as a button: the label is the button, the input is hidden. */
+.file-pick { position: relative; cursor: pointer; }
+.file-pick input[type="file"] { position: absolute; inline-size: 1px; block-size: 1px; opacity: 0; overflow: hidden; pointer-events: none; }
+.file-pick:focus-within { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn-ghost { background: transparent; border-color: transparent; color: var(--accent); }
+.btn-good { background: var(--good-soft); border-color: transparent; color: var(--good); }
+/* A step that removes something. */
+.btn-danger { border-color: var(--bad); color: var(--bad); }
+.btn-lg { min-block-size: var(--tap-lg); padding-inline: var(--sp-6); }
+.btn[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); }
+.btn:disabled { opacity: 0.45; cursor: default; }
+@media (hover: hover) {
+  .btn-secondary:not(:disabled):hover, .btn-ghost:not(:disabled):hover { background: var(--accent-soft); }
+  .btn-primary:not(:disabled):hover { filter: brightness(1.08); }
+}
+.btn-link {
+  min-block-size: var(--tap);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  text-decoration: underline;
+  text-align: start;
+  cursor: pointer;
+}
+:is(.btn, .btn-link, .icon-button):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* The file picker's own button matches .btn-secondary. */
+input[type="file"]::file-selector-button {
+  min-block-size: var(--tap);
+  margin-inline-end: var(--sp-2);
+  padding-inline: var(--sp-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.row { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+
+/* ---------- segmented control: the one radio row every screen uses (UX #160)
+   Equal segments that fill the row and never wrap, one pill outside and
+   square dividers inside. A segment may hold a .seg-hint second line. */
+.segmented {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+  background: var(--surface);
+}
+.segmented > button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-block-size: var(--tap);
+  min-inline-size: 0;
+  padding: var(--sp-1) var(--sp-2);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.segmented > button + button { border-inline-start: 1px solid var(--line); }
+.segmented > button[aria-checked="true"] { background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+.segmented > button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.segmented:has(.seg-hint) { border-radius: var(--radius); }
+.segmented:has(.seg-hint) > button { min-block-size: var(--tap-lg); }
+.seg-hint { font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+
+/* ---------- navigation: bottom bar (compact) ---------- */
+.nav {
+  grid-area: nav;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  border-block-start: 1px solid var(--line);
+  background: var(--surface);
+  padding-block-end: env(safe-area-inset-bottom, 0px);
+  /* Above positioned content inside screens (main comes later in the DOM). */
+  position: relative;
+  z-index: 10;
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-height: var(--nav-h);
+  border: 0;
+  background: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+.nav-item .glyph { display: grid; place-items: center; block-size: 1.75rem; }
+.nav-item[aria-current="page"] { color: var(--accent); font-weight: 700; }
+
+/* ---------- side rail (medium and expanded) ---------- */
+/* Tablets (Tab S11: 753dp portrait, 1205dp landscape) and the Mac: no top
+   bar. The name heads the rail and Settings sits at its foot, so every
+   screen gets the full height of the window. */
+@media (min-width: 600px) {
+  .app {
+    grid-template-columns: var(--rail-w) 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "nav content";
+  }
+  .topbar { display: none; }
+  .nav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    padding-block: calc(var(--sp-3) + env(safe-area-inset-top, 0px)) var(--sp-3);
+    border-block-start: 0;
+    border-inline-end: 1px solid var(--line);
+    overflow-y: auto;
+  }
+  .nav-item { min-height: var(--row); justify-content: center; }
+}
+
+/* ---------- content ---------- */
+.content {
+  grid-area: content;
+  /* The one scroll container (see html, body). */
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-block: var(--sp-4) var(--sp-6);
+  padding-inline: max(var(--sp-4), env(safe-area-inset-left, 0px));
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  min-width: 0;
+  /* A field or card scrolled into view (keyboard focus, the Android
+     keyboard) stops clear of a screen's sticky bar instead of under it. */
+  scroll-padding-block: var(--sp-6) calc(var(--tap-lg) + var(--sp-6));
+}
+/* Redrawn when a content update switches in (main.rs); adds no box. */
+.content-rev { display: contents; }
+@media (min-width: 840px) {
+  /* A reading column (60rem, 80rem on dashboards: desk.css) at the start
+     side; the padding, not a max-width, keeps it there so the scrollbar
+     stays at the window's edge. */
+  .content { padding-inline: var(--sp-6) max(var(--sp-6), calc(100% - var(--content-max, 60rem) - var(--sp-6))); }
+}
+
+h1 { font-size: var(--fs-xl); margin: 0; line-height: 1.35; }
+h2 { font-size: var(--fs-lg); margin: 0; }
+p { margin: 0; }
+.muted { color: var(--muted); }
+.small { font-size: var(--fs-sm); }
+.note { background: var(--accent-soft); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4); font-size: var(--fs-sm); }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+  padding: var(--card-pad);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.soon h2 { color: var(--muted); font-weight: 500; }
+
+.chip {
+  display: inline-block;
+  padding: 0 var(--sp-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  white-space: nowrap;
+}
+/* A card with one job (today's lesson, the oral round) opens on a tap
+   anywhere; its button stays the visible, focusable target, and its click
+   bubbles up to the card's own onclick. Adapted from kabar-app main. */
+.card-action { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+@media (hover: hover) and (pointer: fine) { .card-action:hover { border-color: var(--accent); } }
+@media (prefers-reduced-motion: no-preference) {
+  .card-action { transition: transform 120ms ease; }
+  .card-action:active { transform: scale(0.99); }
+}
+/* A chip that opens something (a book page's "ص 14"): a real button that
+   keeps the chip look, with the accent edge and press of other tappables. */
+button.tap-chip { cursor: pointer; min-block-size: 1.75rem; line-height: 1.6; color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); -webkit-tap-highlight-color: transparent; }
+button.tap-chip:active { transform: var(--press, scale(0.97)); }
+@media (hover: hover) and (pointer: fine) { button.tap-chip:hover { border-color: var(--accent); } }
+.chip.ready { background: var(--good-soft); border-color: transparent; color: var(--good); font-weight: 600; }
+
+/* ---------- Today: the lecture list ---------- */
+.lectures { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
+.lecture {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--sp-3);
+  min-width: 0;
+}
+.lecture .num {
+  flex: none;
+  inline-size: 2.25rem;
+  block-size: 2.25rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.lecture-main { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+.lecture-title { font-weight: 600; overflow-wrap: anywhere; }
+.lecture[data-ready="no"] .lecture-title { color: var(--muted); }
+/* Phones: the status chip drops under the title, so a long English title
+   gets the whole row instead of one word per line. */
+@media (max-width: 599.98px) {
+  .lecture { display: grid; grid-template-columns: auto 1fr auto; column-gap: var(--sp-3); row-gap: var(--sp-1); }
+  .lecture .chip { grid-column: 2; justify-self: start; }
+  .lecture .chev { grid-column: 3; grid-row: 1; }
+}
+/* Two across in tablet portrait, the chip under the title; from 840px the
+   library is a column of its own beside today's plan (desk.css). */
+@media (min-width: 600px) and (max-width: 839.98px) {
+  .lectures { grid-template-columns: 1fr 1fr; }
+  .lecture { flex-wrap: wrap; align-content: start; }
+  .lecture-main { flex: 1 1 8rem; }
+  .lecture .chip { margin-inline-start: calc(2.25rem + var(--sp-3)); }
+}
+
+/* ---------- tappable cards, tiles and rows ----------
+   Anything that shows a thing opens it: a lecture row its page, a count its
+   session, a summary its stats. Such an element is a real <button> with
+   .tap: it keeps the look of what it wraps (put the card or row class next
+   to it) and adds press feedback, a hover edge and the focus ring. */
+.tap {
+  font: inherit;
+  color: inherit;
+  /* Not the button's centring: an English title in an Arabic row lines up
+     as it does outside a button. */
+  text-align: inherit;
+  inline-size: 100%;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--dur) var(--ease), border-color var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+/* Rows and text-like taps have no frame of their own. */
+button.tap:is(.tap-row, .tap-plain) { background: none; border: 0; padding: 0; border-radius: 0; }
+.tap:not(:disabled):active { transform: var(--press, scale(0.98)); }
+@media (hover: hover) {
+  .tap:not(:disabled):hover { border-color: var(--accent); }
+}
+.tap:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tap:disabled { cursor: default; }
+/* A forward chevron at a row's end (points left in Arabic). */
+.chev { flex: none; inline-size: 0.5rem; block-size: 0.5rem; border-block-start: 2px solid var(--muted); border-inline-end: 2px solid var(--muted); transform: rotate(45deg); opacity: 0.7; }
+[dir="rtl"] .chev { transform: rotate(-45deg); }
+/* A list of tappable rows: one rounded block split by hairlines. */
+.tap-list { list-style: none; margin: 0; padding: 0; background: var(--surface); border: 1px solid var(--line-soft, var(--line)); border-radius: var(--radius-lg, var(--radius)); overflow: hidden; }
+.tap-list > li + li { border-block-start: 1px solid var(--line-soft, var(--line)); }
+button.tap.tap-row { display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-3) var(--sp-4); min-block-size: var(--row, 48px); }
+.tap-row-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+@media (hover: hover) { button.tap.tap-row:not(:disabled):hover { background: var(--accent-soft); } }
+.tap-row:focus-visible { outline-offset: -2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

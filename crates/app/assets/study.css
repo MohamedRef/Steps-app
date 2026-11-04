@@ -1,0 +1,207 @@
+/* Study session player (chunk 2). Classes start with st-. Logical
+   properties only; the item column widens on tablets but stays readable. */
+
+.st { display: flex; flex-direction: column; gap: var(--sp-4); inline-size: 100%; max-inline-size: 46rem; margin-inline: auto; }
+
+/* ---------- setup ---------- */
+.st-setup h2 { font-size: var(--fs-md); margin-block-start: var(--sp-2); }
+.st-chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.st-chip {
+  display: inline-flex; align-items: center; gap: var(--sp-2);
+  min-block-size: max(var(--target), var(--tap)); padding-inline: var(--sp-3);
+  border: 1px solid var(--line); border-radius: var(--radius-pill);
+  background: var(--surface); cursor: pointer; text-align: start;
+}
+.st-chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); }
+.st-section-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-2); }
+/* min(): one column on a narrow phone at the larger text sizes, never wider
+   than the screen. */
+.st-lectures { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(15rem, 100%), 1fr)); }
+.st-lectures .st-chip { border-radius: var(--radius); padding-block: var(--sp-1); line-height: 1.4; }
+.st-chip-num { color: var(--accent); font-weight: 700; font-variant-numeric: tabular-nums; }
+.st-preview { color: var(--muted); }
+.st-start { align-self: stretch; }
+.st-setup .st-start + .st-section-head, .st-setup .note + .st-section-head { margin-block-start: var(--sp-3); }
+@media (min-width: 600px) { .st-start { align-self: flex-start; min-inline-size: 16rem; } }
+.st-setup .tab-cols { gap: var(--sp-3); }
+.st-setup .segmented > button { min-block-size: max(var(--target), var(--tap)); }
+.st-setup .tab-main, .st-setup .tab-aside { gap: var(--sp-2); }
+/* Tablet landscape and the Mac: setup uses the full width, the picker
+   beside the time and Start (desk.css .tab-cols). */
+@media (min-width: 840px) {
+  .st:has(> .st-setup) { max-inline-size: none; }
+  .st-setup .tab-cols { gap: var(--sp-6); }
+  .st-setup-go .st-start { align-self: stretch; }
+  .st-setup-pick { padding-inline-start: var(--sp-6); border-inline-start: 1px solid var(--line); }
+}
+
+/* ---------- buttons (the shared .btn set is in main.css) ---------- */
+.st-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+@media (max-width: 599px) { .st-actions > * { flex: 1 1 100%; } }
+
+/* ---------- progress ---------- */
+.st-progress {
+  /* Stays in view while a long item scrolls (#234). Pinned to the very top
+     of `main.content`, reaching up through its top padding like the mock's
+     .run-sticky, so no scrolled text peeks out above it. */
+  position: sticky;
+  inset-block-start: calc(-1 * var(--sp-4));
+  margin-block-start: calc(-1 * var(--sp-4));
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding-block: var(--sp-4) var(--sp-2);
+  background: var(--bg);
+}
+.st-progress > span, .st-progress > button { white-space: nowrap; }
+/* Every study control is 48dp to touch, even where compact --tap is 40px. */
+.st :is(.btn, .btn-link) { min-block-size: max(var(--target), var(--tap)); }
+.st .btn-lg { min-block-size: max(var(--target), var(--tap-lg)); }
+.st-undo-note { margin: 0; }
+.st-undo-note[data-failed="yes"] { color: var(--bad); }
+.st-bar { flex: 1; }
+
+/* ---------- item ---------- */
+.st-item { gap: var(--sp-3); }
+/* Read to screen readers only (the item's heading). */
+.st-sr-only { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0; }
+.st-item-head { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.st-badge[data-badge="new"] { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+.st-badge[data-badge="retry"] { background: var(--bad-soft); color: var(--bad); border-color: transparent; }
+.st-unverified { border-style: dashed; }
+.st-where { margin-block-start: calc(-1 * var(--sp-1)); }
+.st-body { display: flex; flex-direction: column; gap: var(--sp-3); }
+/* The clinical question leads (~20px, the reference's question card);
+   lecture and topic stay small above it. */
+.st-prompt { font-size: 1.25rem; font-weight: 600; font-family: var(--font-latin); line-height: 1.5; white-space: pre-line; }
+.st-answer {
+  font-family: var(--font-latin); white-space: pre-line; line-height: 1.6;
+  background: var(--accent-soft); color: var(--text);
+  border-inline-start: 3px solid var(--accent); border-radius: var(--radius-control);
+  padding: var(--sp-3) var(--sp-4);
+}
+.st-body > .btn-primary { align-self: stretch; }
+.st-item-foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-3); border-block-start: 1px solid var(--line); padding-block-start: var(--sp-2); font-size: var(--fs-sm); color: var(--muted); }
+.st-page { font-weight: 600; }
+/* "Explain it to me" in the foot: an accent text link with a 48dp target,
+   not a grey native button. */
+.st-link {
+  display: inline-flex; align-items: center; min-block-size: var(--target);
+  padding: 0 var(--sp-1); border: 0; background: none; font: inherit;
+  color: var(--accent); text-align: start; cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+@media (hover: hover) and (pointer: fine) { .st-link:hover { text-decoration: underline; } }
+.st-item-foot button.tap-chip { display: inline-flex; align-items: center; min-block-size: var(--target); }
+.st-quote summary, .st-mine summary { cursor: pointer; }
+.st-quote q { font-family: var(--font-latin); font-style: italic; }
+.st-update { background: var(--accent-soft); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-1); }
+.st-update summary { cursor: pointer; }
+.st-update p[lang="en"] { font-family: var(--font-latin); }
+
+/* ---------- cloze ---------- */
+.st-cloze { line-height: 2.4; }
+.st-blank {
+  font: inherit; font-size: var(--fs-md); min-block-size: var(--target);
+  padding-inline: var(--sp-2); margin-inline: 2px;
+  border: 0; border-block-end: 2px solid var(--accent); border-radius: 6px 6px 0 0;
+  background: var(--accent-soft); color: var(--text); max-inline-size: 100%;
+}
+.st-filled { border-radius: 6px; padding-inline: var(--sp-1); }
+.st-filled[data-match="right"] { background: var(--good-soft); color: var(--good); }
+.st-filled[data-match="close"] { background: var(--accent-soft); color: var(--accent); }
+.st-filled[data-match="wrong"] { background: var(--bad-soft); color: var(--bad); }
+.st-typed { opacity: 0.75; }
+.st-verdict { font-weight: 600; }
+.st-verdict[data-match="right"] { color: var(--good); }
+.st-verdict[data-match="close"] { color: var(--accent); }
+.st-verdict[data-match="wrong"] { color: var(--bad); }
+
+/* ---------- enumerate and essay ---------- */
+.st-recall {
+  font: inherit; font-family: var(--font-latin); inline-size: 100%;
+  padding: var(--sp-3); border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--bg); color: var(--text); resize: vertical;
+}
+.st-points, .st-outline { margin: 0; padding-inline-start: var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-1); font-family: var(--font-latin); }
+/* The تحشيشة under an open list: the lesson joke box, in study colours. */
+.st-hook {
+  border: 2px dotted var(--accent); border-radius: var(--radius);
+  background: var(--surface); padding: var(--sp-3) var(--sp-4);
+  display: flex; flex-direction: column; gap: var(--sp-1);
+}
+.st-hook > p { margin: 0; white-space: pre-line; }
+.st-hook-label { font-weight: 800; color: var(--accent); }
+.st-points, .st-outline { list-style: none; padding-inline-start: 0; }
+.st-outline > li { display: flex; flex-direction: column; }
+.st-point { display: flex; align-items: center; gap: var(--sp-3); min-block-size: max(var(--target), var(--tap)); cursor: pointer; }
+.st-point input { inline-size: 22px; block-size: 22px; --check: var(--good); flex: none; }
+.st-outline ul { margin: 0 0 var(--sp-2); padding-inline-start: calc(22px + var(--sp-3) + var(--sp-4)); color: var(--muted); font-size: var(--fs-sm); }
+.st-compare { display: grid; gap: var(--sp-3); }
+.st-compare h3 { font-size: var(--fs-md); margin: 0 0 var(--sp-1); }
+.st-mine-col { background: var(--bg); border-radius: var(--radius); padding: var(--sp-3); }
+.st-pre { white-space: pre-line; font-family: var(--font-latin); }
+@media (min-width: 840px) { .st-compare:has(.st-mine-col) { grid-template-columns: 1fr 2fr; } }
+
+/* ---------- grades ----------
+   "افتكرتها قد إيه؟": the shared .rating-row (parts.css) under its title.
+   The suggestion a kind computes gets a thicker ring; Good keeps its
+   filled brand look. */
+.st-grades { display: flex; flex-direction: column; gap: var(--sp-2); margin-block-start: var(--sp-2); }
+.st-grade-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--sp-2); margin: 0; }
+.st-grades .rating[data-suggested="yes"] { box-shadow: 0 0 0 2px currentColor; }
+.st-grades .rating[data-grade="good"][data-suggested="yes"] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent); }
+.st-grades .rating:disabled { opacity: 0.6; cursor: default; }
+/* Recommendation must also read as text, including in high-contrast mode. */
+.rating-suggested { font-size: var(--fs-sm); font-weight: 600; line-height: 1.2; }
+/* The content check above stays visibly apart from the rating row. */
+.verify + .st-grades { margin-block-start: var(--sp-4); }
+/* Tablets and the Mac: the item card fills the screen, so the grade row
+   sits at the foot of the window on every item, in the same place for the
+   thumb, the S Pen and the eye, however short the question is. */
+@media (min-width: 600px) {
+  .content[data-screen="Study"] > .st:has(> .st-item) { flex: 1 0 auto; }
+  .st > .st-item { flex: 1 0 auto; }
+  .st-item > .st-body { flex: 1 0 auto; }
+  .st-body > .desk-footer { margin-block-start: auto; }
+}
+@media (max-width: 839.98px) {
+  /* Thumb reach on the phone and the tablet in portrait: long items keep
+     the grades at the bottom of the screen. */
+  .st-grades {
+    position: sticky; inset-block-end: 0; z-index: 2;
+    background: var(--surface); padding-block: var(--sp-2);
+    border-block-start: 1px solid var(--line-soft);
+  }
+}
+
+/* ---------- summary ---------- */
+.st-summary h1:focus { outline: none; }
+.st-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-2); margin: 0; }
+.st-stats div { background: var(--bg); border-radius: var(--radius); padding: var(--sp-3); text-align: center; }
+.st-stats dt { color: var(--muted); font-size: var(--fs-sm); }
+.st-stats dd { margin: 0; font-size: var(--fs-xl); font-weight: 700; font-variant-numeric: tabular-nums; }
+.st-shaky { margin: 0; padding-inline-start: var(--sp-4); font-family: var(--font-latin); display: flex; flex-direction: column; gap: var(--sp-1); }
+.st-next { background: var(--good-soft); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4); }
+
+/* ---------- tablet and Mac: two panes (crate::desk::Panes) ---------- */
+@media (min-width: 840px) {
+  /* Every item card keeps one width, so it doesn't jump between a cloze and
+     a two-pane card; one-column items keep their text to a reading column
+     inside it, with the grade row still across the card. */
+  .st:has(> .st-item) { max-inline-size: 72rem; }
+  .st-body:not(:has(> .desk-split)) > :not(.st-grades, .desk-footer) { max-inline-size: 46rem; }
+  .st-item .desk-side .st-grades { position: static; }
+}
+
+/* ---------- Glossy ----------
+   The pinned progress row is a small floating surface: a light blur over
+   the gradient instead of a solid band. Solid when transparency is reduced. */
+.app[data-appearance="glossy"] .st-progress {
+  background: color-mix(in srgb, var(--bg) 82%, transparent);
+  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+}
+.app[data-appearance="glossy"] .st-answer { border-radius: 18px; }
+@media (prefers-reduced-transparency: reduce) {
+  .app[data-appearance="glossy"] .st-progress { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
+}

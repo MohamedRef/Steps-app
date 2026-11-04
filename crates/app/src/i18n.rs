@@ -1,0 +1,2262 @@
+//! UI text, in Egyptian Arabic. One module per feature: a feature chunk adds
+//! its own `pub mod <feature>` block and touches nothing else here.
+//! Medical terms stay in English (wrap them in `bdi` in the markup).
+
+pub mod app {
+    pub const NAME: &str = "Steps";
+    pub const TAGLINE: &str = "مذاكرة USMLE Step 1، جلسة قصيرة كل مرة";
+}
+
+/// Counted nouns in Egyptian Arabic, so no screen writes "5 ساعة" or
+/// "1 أيام": `count(1, &HOUR)` is "ساعة", 2 is "ساعتين", 3–10 take the
+/// plural ("5 ساعات") and 11 and up the singular ("11 ساعة"). Digits are
+/// always 0–9.
+pub mod count {
+    /// The forms of one noun: alone for 1, the dual for 2, the plural for
+    /// 3–10, and the singular that follows 0 and 11 up.
+    pub struct Noun {
+        pub one: &'static str,
+        pub two: &'static str,
+        pub few: &'static str,
+        pub many: &'static str,
+    }
+
+    pub const SECOND: Noun =
+        Noun { one: "ثانية", two: "ثانيتين", few: "ثواني", many: "ثانية" };
+    pub const MINUTE: Noun =
+        Noun { one: "دقيقة", two: "دقيقتين", few: "دقايق", many: "دقيقة" };
+    pub const HOUR: Noun = Noun { one: "ساعة", two: "ساعتين", few: "ساعات", many: "ساعة" };
+    pub const DAY: Noun = Noun { one: "يوم", two: "يومين", few: "أيام", many: "يوم" };
+    pub const MONTH: Noun = Noun { one: "شهر", two: "شهرين", few: "شهور", many: "شهر" };
+    pub const QUESTION: Noun =
+        Noun { one: "سؤال واحد", two: "سؤالين", few: "أسئلة", many: "سؤال" };
+    pub const LECTURE: Noun = Noun {
+        one: "محاضرة واحدة", two: "محاضرتين", few: "محاضرات", many: "محاضرة"
+    };
+    pub const TOPIC: Noun =
+        Noun { one: "موضوع واحد", two: "موضوعين", few: "مواضيع", many: "موضوع" };
+    /// Questions and cards together.
+    pub const ITEM: Noun = Noun {
+        one: "سؤال واحد", two: "سؤالين", few: "أسئلة وكروت", many: "سؤال وكارت"
+    };
+    pub const REVIEW: Noun = Noun {
+        one: "مراجعة واحدة", two: "مراجعتين", few: "مراجعات", many: "مراجعة"
+    };
+    pub const NEW_THING: Noun =
+        Noun {
+            one: "حاجة جديدة", two: "حاجتين جداد", few: "حاجات جديدة", many: "حاجة جديدة"
+        };
+    pub const TIME: Noun = Noun { one: "مرة", two: "مرتين", few: "مرات", many: "مرة" };
+    /// Cases and calc items together.
+    pub const CASE: Noun =
+        Noun { one: "حالة واحدة", two: "حالتين", few: "حالات", many: "حالة" };
+
+    pub const FIELD: Noun =
+        Noun { one: "خانة واحدة", two: "خانتين", few: "خانات", many: "خانة" };
+    pub const LESSON: Noun =
+        Noun { one: "درس واحد", two: "درسين", few: "دروس", many: "درس" };
+    pub const COURSE: Noun =
+        Noun { one: "مقرر واحد", two: "مقررين", few: "مقررات", many: "مقرر" };
+    pub const CARD: Noun =
+        Noun { one: "كارت واحد", two: "كارتين", few: "كروت", many: "كارت" };
+    pub const STEP: Noun =
+        Noun { one: "خطوة واحدة", two: "خطوتين", few: "خطوات", many: "خطوة" };
+    pub const MISTAKE: Noun =
+        Noun { one: "غلطة واحدة", two: "غلطتين", few: "غلطات", many: "غلطة" };
+    pub const ANSWER: Noun =
+        Noun { one: "إجابة واحدة", two: "إجابتين", few: "إجابات", many: "إجابة" };
+    pub const LINE: Noun =
+        Noun { one: "سطر واحد", two: "سطرين", few: "سطور", many: "سطر" };
+    pub const THING: Noun =
+        Noun { one: "حاجة واحدة", two: "حاجتين", few: "حاجات", many: "حاجة" };
+    pub const CHANGE: Noun =
+        Noun { one: "تغيير واحد", two: "تغييرين", few: "تغييرات", many: "تغيير" };
+    pub const ROW: Noun = Noun { one: "صف واحد", two: "صفين", few: "صفوف", many: "صف" };
+    pub const POINT: Noun =
+        Noun { one: "نقطة واحدة", two: "نقطتين", few: "نقط", many: "نقطة" };
+    pub const STUDY_DAY: Noun =
+        Noun {
+            one: "يوم مذاكرة واحد", two: "يومين مذاكرة", few: "أيام مذاكرة", many: "يوم مذاكرة"
+        };
+    pub const CREDIT_HOUR: Noun =
+        Noun {
+            one: "ساعة معتمدة واحدة", two: "ساعتين معتمدين", few: "ساعات معتمدة", many: "ساعة معتمدة"
+        };
+    pub const CALC: Noun =
+        Noun { one: "حاسبة واحدة", two: "حاسبتين", few: "حاسبات", many: "حاسبة" };
+
+    /// Any integer type; a negative number counts as 0.
+    pub fn count<N: TryInto<u64>>(n: N, noun: &Noun) -> String {
+        let n: u64 = n.try_into().unwrap_or(0);
+        let rest = n % 100;
+        match n {
+            1 => noun.one.to_string(),
+            2 => noun.two.to_string(),
+            _ if (3..=10).contains(&rest) => format!("{n} {}", noun.few),
+            _ => format!("{n} {}", noun.many),
+        }
+    }
+
+    /// A count written elsewhere as text ("7", "7.5"): whole numbers follow
+    /// `count`; a fraction takes the singular ("7.5 ساعة").
+    pub fn count_text(n: &str, noun: &Noun) -> String {
+        match n.parse::<u64>() {
+            Ok(n) => count(n, noun),
+            Err(_) => format!("{n} {}", noun.many),
+        }
+    }
+
+    /// The bare noun for a number shown on its own (a big digit with a
+    /// label beside it): the plural for 2–10, the singular otherwise.
+    pub fn word<N: TryInto<u64>>(n: N, noun: &Noun) -> &'static str {
+        let n: u64 = n.try_into().unwrap_or(0);
+        if (2..=10).contains(&(n % 100)) && n != 0 { noun.few } else { noun.many }
+    }
+
+    #[cfg(test)]
+    mod tests {
+        use super::*;
+
+        #[test]
+        fn text_counts_and_bare_words() {
+            assert_eq!(count_text("7", &HOUR), "7 ساعات");
+            assert_eq!(count_text("1", &HOUR), "ساعة");
+            assert_eq!(count_text("2", &HOUR), "ساعتين");
+            assert_eq!(count_text("12", &HOUR), "12 ساعة");
+            assert_eq!(count_text("7.5", &HOUR), "7.5 ساعة");
+            assert_eq!(word(7, &MINUTE), "دقايق");
+            assert_eq!(word(45, &MINUTE), "دقيقة");
+            assert_eq!(word(1, &MINUTE), "دقيقة");
+            assert_eq!(word(0, &MINUTE), "دقيقة");
+        }
+
+        /// Every noun keeps the digit-free forms for 1 and 2 and the digit
+        /// for the rest, so no line reads "7 ساعة" or "2 أيام".
+        #[test]
+        fn every_noun_agrees() {
+            for noun in [
+                &SECOND,
+                &MINUTE,
+                &HOUR,
+                &DAY,
+                &MONTH,
+                &QUESTION,
+                &LECTURE,
+                &TOPIC,
+                &ITEM,
+                &REVIEW,
+                &NEW_THING,
+                &TIME,
+                &CASE,
+                &FIELD,
+                &LESSON,
+                &COURSE,
+                &CARD,
+                &STEP,
+                &MISTAKE,
+                &ANSWER,
+                &LINE,
+                &THING,
+                &CHANGE,
+                &ROW,
+                &POINT,
+                &STUDY_DAY,
+                &CREDIT_HOUR,
+                &CALC,
+            ] {
+                assert_eq!(count(1, noun), noun.one);
+                assert_eq!(count(2, noun), noun.two);
+                assert_eq!(count(7, noun), format!("7 {}", noun.few));
+                assert_eq!(count(11, noun), format!("11 {}", noun.many));
+                assert_eq!(count(0, noun), format!("0 {}", noun.many));
+            }
+        }
+
+        #[test]
+        fn egyptian_number_agreement() {
+            assert_eq!(count(1, &HOUR), "ساعة");
+            assert_eq!(count(2, &HOUR), "ساعتين");
+            assert_eq!(count(5, &HOUR), "5 ساعات");
+            assert_eq!(count(10, &DAY), "10 أيام");
+            assert_eq!(count(11, &HOUR), "11 ساعة");
+            assert_eq!(count(0, &QUESTION), "0 سؤال");
+            assert_eq!(count(103, &DAY), "103 أيام");
+            assert_eq!(count(120, &DAY), "120 يوم");
+            assert_eq!(count(1, &QUESTION), "سؤال واحد");
+        }
+    }
+}
+
+/// How every screen cites the book and names a lecture.
+pub mod cite {
+    /// "ص 179".
+    pub fn page(page: u32) -> String {
+        format!("ص {page}")
+    }
+    /// "سلايد 25": a lecture's slide (courses taught from slides).
+    pub fn slide(n: u32) -> String {
+        format!("سلايد {n}")
+    }
+}
+
+/// A book page's sheet (pagesheet/mod.rs).
+pub mod sheet {
+    pub const RESIZE: &str = "اسحب لفوق أو لتحت عشان تكبّرها أو تصغّرها";
+    pub const CLOSE: &str = "اقفل";
+}
+
+/// A lesson step's abbreviations chip and sheet (abbrsheet/mod.rs).
+pub mod abbr {
+    pub const CHIP: &str = "اختصارات";
+    pub const CHIP_HINT: &str = "اعرف معنى الاختصارات اللي في الخطوة دي";
+    pub const TITLE: &str = "الاختصارات في الخطوة دي";
+    pub const UNVERIFIED: &str = "المعاني دي لسه ما اتراجعتش.";
+    /// The abbreviations dictionary (abbrdict/mod.rs).
+    pub const DICT_TITLE: &str = "قاموس الاختصارات";
+    pub const DICT_OPEN: &str = "القاموس كله";
+    pub const DICT_COURSES: &str = "المادة";
+    pub const DICT_SEARCH: &str = "دوّر على اختصار أو معناه";
+    pub const DICT_NO_MATCH: &str = "مفيش اختصار بالكلام ده في المادة دي.";
+    pub const DICT_EMPTY: &str = "لسه مفيش دروس فيها اختصارات.";
+    pub const ABBR: super::count::Noun =
+        super::count::Noun {
+            one: "اختصار واحد", two: "اختصارين", few: "اختصارات", many: "اختصار"
+        };
+
+    pub fn count(n: usize) -> String {
+        super::count::count(n, &ABBR)
+    }
+
+    /// "في درسين": the lessons that use a term.
+    pub fn count_lessons(n: usize) -> String {
+        format!("موجود في {}:", super::count::count(n, &super::count::LESSON))
+    }
+}
+
+pub mod book {
+    pub const TITLE: &str = "صفحة الكتاب";
+    pub const NO_LECTURE: &str = "الصفحة دي برّه المحاضرات اللي في Steps.";
+    pub const QUOTE_HELD: &str = "كلام الكتاب هيظهر هنا بعد ما تجاوب، عشان مايكشفش الإجابة.";
+    /// Above the تحشيشة shown under a quote.
+    pub const HOOK: &str = "تحشيشة";
+    pub const MADE: &str = "اللي في Steps من الصفحة دي:";
+    pub const NOTHING_YET: &str = "لسه مفيش كروت أو أسئلة من الصفحة دي.";
+    pub const STUDY: &str = "ذاكر الصفحة دي";
+    pub const OPEN_LECTURE: &str = "افتح المحاضرة";
+    pub const CHIP_HINT: &str = "افتح صفحة الكتاب";
+    pub const SLIDE_TITLE: &str = "سلايد";
+    pub const SLIDE_HINT: &str = "افتح سلايد المحاضرة";
+}
+
+pub mod nav {
+    pub const LABEL: &str = "التنقل";
+    pub const TODAY: &str = "النهارده";
+    pub const LEARN: &str = "الدروس";
+    pub const STUDY: &str = "المراجعة";
+    pub const BANK: &str = "الأسئلة";
+    pub const CASES: &str = "حالات";
+    pub const ORAL: &str = "شفوي";
+    pub const STATS: &str = "تقدّمي";
+    pub const SETTINGS: &str = "الإعدادات";
+    pub const MORE: &str = "المزيد";
+    pub const MORE_PRACTICE: &str = "درّب طريقة تفكيرك";
+    pub const MORE_TOOLS: &str = "مراجعك وأدواتك";
+}
+
+pub mod today {
+    pub const DUE: &str = "مستحق مراجعة";
+    pub const NEW: &str = "جديد متاح";
+    /// "3 حالات مستنية مراجعة في شاشة الحالات".
+    pub fn due_cases(n: usize) -> String {
+        format!("{} مستنية مراجعة في شاشة الحالات", super::count::count(n, &super::count::CASE))
+    }
+    pub const ALL_DONE: &str = "خلّصت المستحق النهارده. شغل حلو.";
+    pub const NEW_CAP_REACHED: &str = "وخلّصت الجديد اللي محدّده لليوم";
+    pub const TOMORROW: &str = "بكرة:";
+    pub const NOTHING_WRITTEN: &str = "المحتوى لسه بيتكتب. أول ما محاضرة تجهز هتلاقيها هنا.";
+    pub const STORE_FAILED: &str = "مش قادر أفتح قاعدة البيانات، فالمراجعات مش هتتحفظ بعد ما تقفل التطبيق:";
+    pub const WRITE_FAILED: &str = "في اختيار ما اتحفظش على الجهاز، جرّبه تاني:";
+    pub const IN_PROGRESS: &str = "محاضرات شغّال فيها";
+    pub const OF: &str = "من";
+    pub const STARTED: &str = "بدأتهم";
+    pub const DUE_CHIP: &str = "مستحق";
+    pub const LIBRARY: &str = "المحاضرات";
+    pub const READY: &str = "جاهزة";
+    pub const WRITING: &str = "بتتكتب";
+    pub const PAGES: &str = "صفحات";
+    pub const UNVERIFIED_NOTE: &str = "كل المحتوى لسه ما اتراجعش. أول ما تشوف أي سؤال، علّم عليه صح أو غلط.";
+    pub const UNVERIFIED_HINT: &str = "علاماتك بتتبعت من الإعدادات › البيانات";
+    pub const DUE_HINT: &str = "ابدأ مراجعة المستحق";
+    pub const NEW_HINT: &str = "ابدأ جلسة على الجديد";
+    pub const FORECAST_HINT: &str = "شوف الخطة والأيام الجاية";
+    pub const CHECKED_HINT: &str = "علاماتك وتصديرها في الإعدادات";
+    pub const PLAN_HINT: &str = "افتح خطة المذاكرة";
+
+    // The exam plan on Today (#99).
+    pub fn exam_in(days: i32) -> String {
+        match days {
+            1 => "الامتحان بكرة. إنت جاهز أكتر مما فاكر.".to_string(),
+            2 => "فاضل يومين على الامتحان".to_string(),
+            n => format!("فاضل {} على الامتحان", super::count::count(n, &super::count::DAY)),
+        }
+    }
+    pub const PLAN_TODAY: &str = "خطة النهارده:";
+    pub const PLAN_NEW: &str = "جديد";
+    pub const ABOUT: &str = "حوالي";
+    pub const RING_LABEL: &str = "اللي خلّصته من خطة النهارده";
+    pub const NEW_LEFT_1: &str = "فاضل";
+    pub const NEW_LEFT_2: &str = "جديد من خطة النهارده. كل جلسة بتقرّبك.";
+    pub const NEW_DONE: &str = "خلّصت جديد النهارده. اللي فاضل مراجعة بس.";
+    pub const REVISIT: &str = "لفّة تانية على";
+    pub const MOCK: &str = "النهارده يوم امتحان تجريبي.";
+    pub const OPEN_BANK: &str = "افتح بنك الأسئلة";
+    pub const WEAK: &str = "النهارده للمواضيع الضعيفة.";
+    pub const WEAK_START: &str = "ذاكر المواضيع الضعيفة";
+    pub const REST: &str = "النهارده راحة في الخطة.";
+    pub const REST_DUE: &str = "لو عندك مستحق، جلسة قصيرة تكفي.";
+    pub const AHEAD: &str = "اسبق الخطة بشوية جديد";
+    pub fn tight_days(days: u32) -> String {
+        let days = if days == 1 {
+            "يوم مذاكرة زيادة".to_string()
+        } else {
+            format!("{} زيادة", super::count::count(days, &super::count::STUDY_DAY))
+        };
+        format!(
+            "الخطة محتاجة {days} في الأسبوع عشان كل الجديد يخلص قبل آخر الأيام. تقدر تعدّلها من تقدّمي ← خطة الامتحان."
+        )
+    }
+    pub fn tight_cap(cap: u32) -> String {
+        format!("لو علّيت حد المراجعات اليومي لـ {cap}، الخطة تلحق كلها. تقدر تعدّله من تقدّمي ← خطة الامتحان.")
+    }
+    pub const TIGHT_HIGH_YIELD: &str = "الوقت مش مكفّي كل الجديد قبل آخر الأيام. ركّز على high-yield الأول.";
+
+    // The 2026-10-29 redesign: a greeting, the session length, one start.
+    pub const EYEBROW: &str = "جلسة صغيرة، وفهم ثابت";
+    pub const READY_Q: &str = "جاهز لجلسة هادية؟";
+    pub const DONE_Q: &str = "خلّصت النهارده. عاش!";
+    pub const TIME_Q: &str = "معاك قد إيه؟";
+    pub const TIME_HINT: &str = "طول الجلسة. بيتحفظ كاختيارك العادي.";
+    /// "5 د" on a session-length chip.
+    pub fn minutes_short(m: u32) -> String {
+        format!("{m} د")
+    }
+    pub const HERO_KICKER: &str = "المراجعة المستحقة";
+    pub const HERO_KICKER_NEW: &str = "خطوة جديدة";
+    pub const HERO_KICKER_PLAN: &str = "خطة النهارده";
+    /// The hero's headline from the real counts.
+    pub fn headline(due: usize, new: usize) -> String {
+        use super::count::{NEW_THING, REVIEW, count};
+        match (due, new) {
+            (0, n) => format!("{}، على قد وقتك.", count(n, &NEW_THING)),
+            (d, 0) => format!("{}، وبس.", count(d, &REVIEW)),
+            (d, n) => format!("{}، و{}.", count(d, &REVIEW), count(n, &NEW_THING)),
+        }
+    }
+    pub fn hero_body(due: usize, new: usize) -> String {
+        match (due, new) {
+            (0, _) => "مفيش مستحق. نبدأ بالجديد على قد الوقت اللي اخترته.".to_string(),
+            (_, 0) => "نبدأ بالأضعف، والجلسة بتقف لما وقتك يخلص.".to_string(),
+            _ => "نبدأ باللي محتاج تثبيت، وبعده الجديد على قد وقتك.".to_string(),
+        }
+    }
+    /// "ابدأ الجلسة · 10 دقايق".
+    pub fn start_session(minutes: u32) -> String {
+        format!("ابدأ الجلسة · {}", super::count::count(minutes, &super::count::MINUTE))
+    }
+    /// The label beside the big minutes digit: "دقايق" or "دقيقة" to match it.
+    pub fn minutes_all(n: u32) -> String {
+        format!("{} للكل تقريبًا", super::count::word(n, &super::count::MINUTE))
+    }
+    /// "حوالي 45 دقيقة للكل تقريبًا", read aloud.
+    pub fn minutes_all_label(n: u32) -> String {
+        format!("{} للكل تقريبًا", super::count::count(n, &super::count::MINUTE))
+    }
+    /// "3 جديد + 12 مراجعة" on today's plan line.
+    pub fn plan_line(new: u32, due: usize) -> String {
+        format!("{new} {PLAN_NEW} + {}", super::count::count(due, &super::count::REVIEW))
+    }
+    pub fn plan_reviews_only(due: usize) -> String {
+        format!("{} بس", super::count::count(due, &super::count::REVIEW))
+    }
+    pub const MINUTES_HINT: &str = "شوف الحمل في الأيام الجاية";
+    pub const OPEN_NEXT_LESSON: &str = "افتح الدرس الجاي";
+    pub const CONTINUE_HEAD: &str = "كمّل من مكانك";
+    pub const ALL_LESSONS: &str = "كل الدروس";
+    pub const MORE_HEAD: &str = "حاجات تانية تفيدك";
+    pub const QUICK_BANK: &str = "تدريب أسئلة سريع";
+    pub const CHECKED_ROW: &str = "مراجعة صحة المحتوى";
+    pub fn checked_sub(n: usize) -> String {
+        format!("راجعت صحة {} لحد دلوقتي", super::count::count(n, &super::count::ITEM))
+    }
+}
+
+pub mod study_settings {
+    pub const STORE_MEMORY: &str =
+        "مذاكرتك مش بتتحفظ: قاعدة البيانات ما اتفتحتش، فاللي بتذاكره هيروح لما تقفل التطبيق.";
+    pub const SECTION: &str = "المراجعة";
+    pub const SECTION_SUB: &str = "نسبة التذكّر والجديد كل يوم";
+    pub const RETENTION: &str = "نسبة التذكّر المطلوبة";
+    pub const R85: &str = "أخف";
+    pub const R90: &str = "متوازن";
+    pub const R95: &str = "قبل الامتحان";
+    pub const PERSONAL_1: &str = "الجدول متظبط على مذاكرتك أنت، من";
+    /// "الجدول متظبط على مذاكرتك أنت، من 520 مراجعة. …"
+    pub fn personal(n: u32) -> String {
+        format!("{PERSONAL_1} {}. بيتحدّث كل أسبوع.", super::count::count(n, &super::count::REVIEW))
+    }
+    pub fn default_params(need: usize, so_far: usize) -> String {
+        use super::count::{REVIEW, count};
+        format!("{DEFAULT_PARAMS_1} {}. لحد دلوقتي: {so_far}.", count(need, &REVIEW))
+    }
+    pub const DEFAULT_PARAMS_1: &str = "الجدول هيتظبط على مذاكرتك لما توصل";
+    pub const NEW_PER_DAY: &str = "أسئلة جديدة في اليوم";
+    pub const NEW_FROM_PLAN_1: &str = "عندك ميعاد امتحان، فالخطة هي اللي بتحدد الجديد كل يوم. النهارده:";
+    pub const NEW_FROM_PLAN_2: &str = "جديد. تقدر تغيّر أيام المذاكرة وحد المراجعات من تقدّمي ← خطة الامتحان.";
+}
+
+pub mod study {
+    pub const ELSEWHERE_ALL: &str = "اعرض كل المقررات";
+
+    pub fn due_elsewhere(n: usize) -> String {
+        match n {
+            1 => "فيه كارت واحد مستحق في مقرر تاني.".to_string(),
+            2 => "فيه كارتين مستحقين في مقررات تانية.".to_string(),
+            3..=10 => format!("فيه {n} كروت مستحقة في مقررات تانية."),
+            _ => format!("فيه {n} كارت مستحق في مقررات تانية."),
+        }
+    }
+    pub const TITLE: &str = "جلسة مذاكرة";
+    pub const EMPTY_LIBRARY: &str = "لسه مفيش محاضرة جاهزة للمذاكرة هنا. أول ما محاضرة تتكتب هتلاقيها في القايمة، ولحد ده ما يحصل تقدر تذاكر من Anki.";
+    pub const LECTURES: &str = "المحاضرات";
+    pub const PICK_ALL: &str = "اختار الكل";
+    pub const CLEAR_ALL: &str = "امسح الاختيار";
+    pub const TOPICS: &str = "المواضيع";
+    pub const TIME: &str = "الوقت";
+    pub const NEW: &str = "جديد";
+    pub const ABOUT: &str = "حوالي";
+    pub const START: &str = "يلا نبدأ";
+    pub const NOTHING_NOW: &str =
+        "مفيش حاجة عليها الدور في اللي اخترته دلوقتي. جرّب محاضرة تانية أو ارجع بعدين.";
+    pub const END: &str = "إنهاء الجلسة";
+    pub const PENDING_TITLE: &str = "عندك جلسة شغّالة";
+    pub const PENDING_BODY: &str = "تحب تضيف الأسئلة دي بعد اللي فاضل في جلستك، ولا تبدأ جلسة جديدة بيها؟";
+    pub const PENDING_ADD: &str = "ضيفهم بعد جلستي";
+    pub const PENDING_REPLACE: &str = "ابدأ جلسة جديدة";
+    pub const PENDING_KEEP: &str = "لا، كمّل جلستي";
+    pub const OF: &str = "من";
+
+    pub const BADGE_NEW: &str = "جديد";
+    pub const BADGE_REVIEW: &str = "مراجعة";
+    pub const BADGE_RETRY: &str = "تاني مرة";
+    pub const UNVERIFIED: &str = "لسه ما اتراجعش";
+    pub const UNVERIFIED_HINT: &str = "اتكتب من الكتاب ولسه إنت ما أكدتوش.";
+    pub const KIND_CARD: &str = "كارت";
+    pub const KIND_CLOZE: &str = "كمّل الفراغ";
+    pub const KIND_ENUMERATE: &str = "عدّد";
+    pub const KIND_ESSAY: &str = "مقالي";
+    pub const KIND_MCQ: &str = "اختيار";
+    pub const KIND_CASE: &str = "حالة";
+    pub const KIND_TABLE: &str = "جدول";
+    pub const KIND_ORDER: &str = "رتّب";
+    pub const KIND_CALC: &str = "حساب";
+    pub const BOOK_QUOTE: &str = "من الكتاب";
+    pub const UPDATE_TITLE: &str = "تحديث عن الكتاب";
+    pub const UPDATE_AFTER: &str = "افتحه بعد ما تجاوب";
+    pub const UPDATE_BOOK_WINS: &str = "في الامتحان، إجابة الكتاب هي اللي بتتحسب.";
+    pub const NOT_HERE_YET: &str = "النوع ده من الأسئلة ليه شاشة لسه بتتبني.";
+    pub const SKIP: &str = "عدّي";
+
+    pub const THINK_FIRST: &str = "جاوب في دماغك الأول، وبعدين اكشف.";
+    pub const REVEAL: &str = "اكشف الإجابة";
+    pub const BLANK: &str = "الفراغ";
+    pub const CHECK: &str = "صحّح";
+    pub const REVEAL_BLANKS: &str = "مش فاكر، وريني";
+    pub const CLOZE_TIP: &str = "الأرقام بتتصحح من غير الوحدات والمسافات.";
+    pub const CLOZE_RIGHT: &str = "مظبوط.";
+    pub const CLOZE_CLOSE: &str = "قريب جدًا. بص على الإجابة كاملة.";
+    pub const CLOZE_WRONG: &str = "الإجابة الصح مكتوبة فوق. هترجعلك تاني قريب.";
+
+    pub const ENUM_GOAL_A: &str = "فيه";
+    pub const ENUM_GOAL_C: &str = "منهم تعدّي.";
+    /// "فيه 8 نقط، ولو افتكرت 5 منهم تعدّي."
+    pub fn enum_goal(total: usize, pass: usize) -> String {
+        let total = super::count::count(total, &super::count::POINT);
+        format!("{ENUM_GOAL_A} {total}، ولو افتكرت {pass} {ENUM_GOAL_C}")
+    }
+    pub const ENUM_PLACEHOLDER: &str = "اكتب اللي فاكره، أو قوله لنفسك بصوت عالي (اختياري)";
+    pub const SHOW_POINTS: &str = "خلصت، وريني النقط";
+    pub const TICK_WHAT_YOU_GOT: &str = "علّم على اللي افتكرته.";
+    pub const PRE_TICKED: &str = "علّمت لك على اللي لقيته في كلامك، وغيّر براحتك.";
+    pub const ENUM_PASS: &str = "عدّيت.";
+    pub const ENUM_SHORT_A: &str = "فاضلك";
+    pub const ENUM_SHORT_B: &str = "عشان تعدّي.";
+    pub const WHAT_I_WROTE: &str = "اللي كتبته";
+    /// The memory hook under an enumerate list once its points are open.
+    pub const ENUM_HOOK: &str = "تحشيشة تحفّظها";
+
+    pub const ESSAY_HOW: &str = "اكتب العناوين بس، كل عنوان في سطر، زي ما هتكتبهم في الامتحان.";
+    pub const ESSAY_PLACEHOLDER: &str = "Definition\nPathogenesis\nClinical picture\n…";
+    pub const COMPARE: &str = "قارن بالإجابة النموذجية";
+    pub const MODEL_OUTLINE: &str = "الإجابة النموذجية";
+    pub const TICK_HEADINGS: &str = "علّم على العناوين اللي جت في بالك.";
+    pub const HEADINGS_GOT: &str = "العناوين اللي جبتها:";
+
+    pub const GRADE_LABEL: &str = "افتكرتها قد إيه؟";
+    pub const GRADE_HINT: &str = "قيّم اللي افتكرته، مش صعوبة السؤال. ده اللي بيحدد إمتى يرجعلك.";
+    pub const UNDO: &str = "↶ تراجع";
+    pub const UNDO_HINT: &str = "رجّع آخر تقييم";
+    pub const UNDONE: &str = "رجّعت تقييمك، وكأنك ما قيّمتش. جاوب وقيّم من جديد.";
+    pub const UNDO_FAILED: &str = "ما عرفتش أرجّع التقييم. جرّب تاني بعد شوية.";
+    pub const SAVE_FAILED: &str = "ما عرفتش أحفظ تقييمك، فلسه على نفس السؤال وإجابتك زي ما هي. قيّم تاني.";
+    pub const UNDO_LAST: &str = "↶ رجّع آخر تقييم";
+    pub const SUGGESTED: &str = "اقتراحي متعلّم عليه، والقرار ليك.";
+    pub const SUGGESTED_SHORT: &str = "مقترح";
+    pub const AGAIN: &str = "تاني";
+    pub const HARD: &str = "صعب";
+    pub const GOOD: &str = "تمام";
+    pub const EASY: &str = "سهل";
+
+    pub const SUMMARY_TITLE: &str = "خلصت الجلسة، برافو عليك";
+    pub const SUMMARY_EMPTY: &str = "الجلسة خلصت";
+    pub const SUM_ITEMS: &str = "سؤال";
+    pub const SUM_RIGHT: &str = "صح من أول مرة";
+    pub const SUM_NEW: &str = "جديد";
+    pub const SUM_ALL_SOLID: &str = "كله كان ثابت. المراجعة الجاية هتيجي بعد فترة أطول.";
+    pub const SUM_BACK_SOON: &str = "هيرجعولك قريب";
+    pub const NEXT_SESSION: &str = "الجلسة الجاية:";
+    pub const NEXT_TOMORROW: &str = "ارجع بكرة لجلسة قصيرة، وهتلاقي المراجعات مستنياك.";
+    pub const ANOTHER: &str = "جلسة كمان";
+    pub const NOW: &str = "دلوقتي";
+    pub const AFTER: &str = "بعد";
+    pub const TOMORROW: &str = "بكرة";
+}
+
+pub mod anki {
+    pub const TITLE: &str = "ذاكر في Anki";
+    pub const BUTTON: &str = "صدّر لـ Anki";
+    pub const WORKING: &str = "بجهّز الملف…";
+    pub const DONE: &str = "الملف جاهز";
+    pub const SAVED_IN: &str = "اتحفظ في";
+    pub const FAILED: &str = "معرفتش أكمّل التصدير:";
+    /// "12 محاضرة · 340 سؤال وكارت".
+    pub fn contents(lectures: usize, items: usize) -> String {
+        use super::count::{ITEM, LECTURE, count};
+        format!("{} · {}", count(lectures, &LECTURE), count(items, &ITEM))
+    }
+    /// "الملف جاهز (340 كارت)."
+    pub fn done(notes: usize) -> String {
+        format!("{DONE} ({}).", super::count::count(notes, &super::count::CARD))
+    }
+}
+
+pub mod bank {
+    pub const PRACTISE_TOPIC: &str = "اتمرّن على الموضوع ده";
+    pub const OPEN_LECTURE: &str = "افتح المحاضرة";
+    pub const TITLE: &str = "بنك الأسئلة";
+    pub const MODE_LABEL: &str = "طريقة الحل";
+    pub const MODE_TUTOR_NAME: &str = "تدريب بشرح";
+    pub const MODE_TUTOR_HINT: &str = "الشرح بعد كل سؤال";
+    pub const MODE_TIMED_NAME: &str = "تدريب بالوقت";
+    pub const MODE_TIMED_HINT: &str = "الشرح في الآخر";
+    pub const MODE_MOCK_NAME: &str = "امتحان تجريبي";
+    pub const MODE_MOCK_HINT: &str = "من كل المحاضرات";
+    pub const SCOPE_ALL: &str = "كل الأسئلة";
+    pub const SCOPE_CHOSEN: &str = "النطاق اللي اخترته";
+    pub const MOCK_SCOPE_CHIP: &str = "زي الامتحان";
+    pub const MOCK_SCOPE_NOTE: &str =
+        "الامتحان التجريبي بياخد من كل المحاضرات اللي خلصت، فاختيار المحاضرات والمواضيع مش بيأثر عليه.";
+    pub const ALL_LECTURES: &str = "كل المحاضرات";
+    pub fn all_of(course: &str) -> String {
+        format!("كل محاضرات {course}")
+    }
+    pub const CUSTOMISE: &str = "خصّص المحاضرات والمواضيع";
+    pub const CUSTOMISE_CLOSE: &str = "اقفل التخصيص";
+    pub const RESET_SCOPE: &str = "رجّع النطاق لكل الأسئلة";
+    pub const SCOPE_NOW: &str = "النطاق دلوقتي:";
+    pub const POOL_OF: &str = "من";
+    pub const ABOUT: &str = "حوالي";
+    pub const EMPTY_ALL_RIGHT: &str =
+        "جاوبت كل أسئلة النطاق ده صح آخر مرة. شغل حلو! شيل «الغلط واللي ما اتشافش بس» لو عايز تعيدها.";
+    pub const EMPTY_TAGS: &str = "مفيش أسئلة من النوع اللي اخترته في المحاضرات والمواضيع دي.";
+    pub const EMPTY_TOPICS: &str = "المواضيع اللي اخترتها لسه مالهاش أسئلة اختيار من متعدد.";
+    pub const WIDEN_ALL_RIGHT: &str = "هات كل أسئلة النطاق";
+    pub const WIDEN_TAGS: &str = "شيل نوع السؤال";
+    pub const WIDEN_ALL: &str = "رجّع لكل الأسئلة";
+    pub const EMPTY_TITLE: &str = "لسه مفيش أسئلة اختيار من متعدد";
+    pub const EMPTY_BODY: &str = "أول ما محاضرة فيها أسئلة MCQ تخلص، هتلاقيها هنا على طول.";
+    pub const LECTURES: &str = "المحاضرات";
+    pub const TOPICS: &str = "المواضيع";
+    pub const PICK_LECTURE_FOR_TOPICS: &str = "اختار محاضرة أو أكتر عشان تظهر مواضيعها.";
+    pub const TAGS: &str = "نوع السؤال";
+    pub const TAG_HIGH_YIELD: &str = "مهم جدًا";
+    pub const TAG_BOOK: &str = "أسئلة الكتاب";
+    pub const TAG_NUMBERS: &str = "أرقام";
+    pub const ONLY_WRONG: &str = "الغلط واللي ما اتشافش بس";
+    pub const ALL: &str = "الكل";
+    pub const COUNT: &str = "عدد الأسئلة";
+    pub const NONE_MATCH: &str = "مفيش أسئلة بالاختيارات دي.";
+    pub const START_TUTOR: &str = "ابدأ التدريب";
+    pub const START_TIMED: &str = "ابدأ بالوقت";
+    pub const PRESET_TUTOR: &str = "تختار، وبعدين تصحّح، فيظهر الشرح وصفحة الكتاب، وتعدّي لما تفهم.";
+    pub const PRESET_TIMED: &str = "زي الامتحان: الوقت شغّال، تقدر تعلّم على سؤال وترجعله، والشرح كله في الآخر.";
+    pub const MOCK_TITLE: &str = "امتحان تجريبي";
+    pub const START_MOCK: &str = "ابدأ الامتحان";
+    pub const HISTORY: &str = "امتحاناتك اللي فاتت";
+    pub const MODE_TIMED: &str = "بالوقت";
+    pub const MODE_MOCK: &str = "تجريبي";
+
+    pub const QUESTION: &str = "سؤال";
+    pub const OF: &str = "من";
+    pub const NEXT: &str = "التالي";
+    pub const PREV: &str = "السابق";
+    pub const CHECK: &str = "صحّح الإجابة";
+    pub const PICK_FIRST: &str = "اختار إجابتك الأول، وبعدين صحّحها.";
+    pub const FLAG: &str = "علّم للمراجعة";
+    pub const FLAGGED: &str = "متعلّم";
+    pub const SUBMIT: &str = "سلّم";
+    pub const FINISH: &str = "خلّص";
+    pub const LEAVE: &str = "اخرج";
+    pub const LEFT_ABOUT: &str = "فاضل حوالي";
+    pub const UNANSWERED: &str = "من غير إجابة";
+    pub const UPDATE: &str = "تحديث من الإرشادات الحالية";
+    pub const UPDATE_NOTE: &str = "إجابة الامتحان هي إجابة الكتاب.";
+    pub const RIGHT: &str = "صح";
+    pub const YOUR_ANSWER: &str = "إجابتك";
+    pub const RIGHT_PICKED: &str = "إجابتك صح";
+    pub const RIGHT_ANSWER: &str = "دي الإجابة الصح";
+    pub const WRONG: &str = "غلط";
+    pub const ANSWERED: &str = "متجاوب";
+    pub const NOW_HERE: &str = "إنت هنا";
+    /// Read out once a tutor answer is checked (the Check button is gone).
+    pub fn checked(right: bool, letter: char) -> String {
+        if right {
+            "إجابتك صح.".to_string()
+        } else {
+            format!("إجابتك غلط. الإجابة الصح {letter}.")
+        }
+    }
+    pub const NOT_FOUND: &str = "السؤال ده اتشال من المحتوى.";
+
+    pub const RESULT: &str = "النتيجة";
+    pub const TOOK: &str = "الوقت";
+    pub const BY_LECTURE: &str = "حسب المحاضرة";
+    pub const BY_TOPIC: &str = "حسب الموضوع";
+    pub const WEAK: &str = "ابدأ مراجعتك بدول";
+    pub const ALL_STRONG: &str = "مفيش موضوع تحت 60٪. شغل حلو.";
+    pub const REVIEW: &str = "راجع الأسئلة";
+    pub const SHOW_ALL: &str = "الكل";
+    pub const SHOW_WRONG: &str = "الغلط";
+    pub const SHOW_FLAGGED: &str = "المتعلّم عليها";
+    pub const RETRY_WRONG: &str = "جاوب الغلط تاني بالشرح";
+    pub const BACK: &str = "رجوع للبنك";
+    pub const NEW_PAPER: &str = "حل ورقة جديدة";
+    pub const SENT_TO_REVIEW: &str = "الأسئلة اللي غلطت فيها هترجعلك في المراجعة قريب.";
+    pub const REPORT: &str = "بلّغ عن مشكلة في السؤال ده";
+    pub const CLOSE: &str = "اقفل";
+    pub const LEAVE_TIMED_HINT: &str = "الامتحان هيستناك، والوقت شغّال";
+    pub const PAUSED_TITLE: &str = "عندك امتحان لسه مفتوح";
+    pub const PAUSED_BODY: &str = "جاوبت";
+    pub const PAUSED_LEFT: &str = "والوقت اللي فاضل حوالي";
+    pub const PAUSED_OVER: &str = "وقته خلص، فهيتسلّم زي ما هو.";
+    pub const RESUME: &str = "كمّل";
+    pub const SUBMIT_NOW: &str = "سلّمه دلوقتي";
+    pub const CONFIRM_TITLE: &str = "تسلّم دلوقتي؟";
+    pub const CONFIRM_BLANK_A: &str = "لسه";
+    pub const CONFIRM_BLANK_B: &str = "سؤال من غير إجابة، والفاضي مالوش درجة.";
+    pub const CONFIRM_FLAGGED: &str = "متعلّم عليهم كنت عايز ترجعلهم.";
+    pub const CONFIRM_BACK_TO: &str = "ارجع للسؤال";
+    pub const CONFIRM_BACK: &str = "ارجع للامتحان";
+    pub const CONFIRM_SUBMIT: &str = "سلّم كده";
+
+    /// A question count the Egyptian way: سؤال واحد, سؤالين, 3–10 أسئلة,
+    /// 11 and up سؤال.
+    pub fn questions(n: usize) -> String {
+        super::count::count(n, &super::count::QUESTION)
+    }
+}
+
+pub mod stats {
+    pub const TAB_PROGRESS: &str = "تقدّمي";
+    pub const TAB_MISTAKES: &str = "الغلطات";
+    pub const TAB_PLAN: &str = "خطة الامتحان";
+    pub const TABS_LABEL: &str = "أقسام التقدّم";
+
+    pub const SUMMARY: &str = "لحد النهارده";
+    pub const SEEN: &str = "شفتها";
+    pub const SEEN_TWICE: &str = "شفتها مرتين";
+    pub const APPROVED: &str = "وافقت عليها";
+    pub const OF: &str = "من";
+    pub const NOTHING_YET: &str = "لسه ما ذاكرتش حاجة هنا. أول جلسة هتملا الأرقام دي.";
+
+    pub const COL_SEEN: &str = "اتشافت";
+    pub const COL_RETENTION: &str = "بتفتكر";
+    pub const COL_MCQ: &str = "MCQ صح";
+    pub const COL_APPROVED: &str = "متراجعة";
+    pub const NO_DATA: &str = "—";
+    pub const TOPICS: &str = "المواضيع";
+    pub const UNTAGGED: &str = "من غير موضوع";
+
+    pub const WEAK_TITLE: &str = "أضعف 3 مواضيع دلوقتي";
+    pub const WEAK_EMPTY: &str = "لسه بدري نحكم. بعد كام مراجعة هنعرف إيه اللي محتاج شغل زيادة.";
+    pub const WEAK_START: &str = "ذاكر دول";
+
+    pub const MISTAKES_TITLE: &str = "اللي غلطت فيه آخر 14 يوم";
+    pub const MISTAKES_EMPTY: &str = "مفيش غلطات مفتوحة. كمّل كده.";
+    pub const MISTAKES_START: &str = "جلسة من الغلطات";
+    pub const MISSED: &str = "غلطت";
+
+    pub const SESSION_COUNT: &str = "في الجلسة";
+    pub const STUDY_HINT: &str = "افتح المراجعة";
+    pub const APPROVED_HINT: &str = "علاماتك وتصديرها في الإعدادات";
+    pub const TOPIC_HINT: &str = "ذاكر الموضوع ده لوحده";
+    pub const OPEN_LECTURE: &str = "افتح المحاضرة";
+    pub const MISTAKE_HINT: &str = "جرّب السؤال ده تاني";
+    pub const MISTAKES_TOPIC_HINT: &str = "جرّب أخطاء الموضوع ده";
+    pub const DEMO: &str = "أرقام تجريبية للعرض بس، مش مذاكرتك.";
+
+    // The 2026-10-29 redesign: a period switch with retention, activity and a next step.
+    pub const HEAD: &str = "تقدّم له معنى";
+    pub const PERIOD_LABEL: &str = "الفترة";
+    pub const WEEK: &str = "الأسبوع ده";
+    pub const MONTH: &str = "الشهر ده";
+    pub const RECALL: &str = "تذكّر المعلومات";
+    pub const RECALL_SUB: &str = "من الأسئلة اللي رجعتلك بعد يوم أو أكتر.";
+    pub const RECALL_NONE: &str = "لسه مفيش أسئلة رجعتلك تاني في الفترة دي.";
+    pub const RECALL_HINT: &str = "شوف اللي غلطت فيه";
+    pub fn better(week: bool, pts: u32) -> String {
+        format!("أحسن من {} بـ {pts}%", if week { "الأسبوع اللي فات" } else { "الشهر اللي فات" })
+    }
+    pub fn worse(week: bool, pts: u32) -> String {
+        format!("أقل من {} بـ {pts}%، عادي يحصل", if week { "الأسبوع اللي فات" } else { "الشهر اللي فات" })
+    }
+    pub fn same(week: bool) -> String {
+        format!("زي {} تقريبًا", if week { "الأسبوع اللي فات" } else { "الشهر اللي فات" })
+    }
+    pub const ACTIVITY: &str = "جلساتك على مدار الفترة";
+    pub const ACTIVITY_UNIT: &str = "دقيقة / يوم";
+    pub const ACTIVITY_HINT: &str = "افتح خطة الامتحان والأيام الجاية";
+    pub const ACTIVITY_EMPTY: &str = "مفيش مذاكرة متسجّلة في الفترة دي لسه.";
+    pub const DAYS_STUDIED: &str = "أيام ذاكرت فيهم";
+    pub const MINUTES: &str = "دقيقة تركيز";
+    pub const ANSWERS: &str = "سؤال وكارت جاوبتهم";
+    pub const MONTH_START: &str = "من 30 يوم";
+    pub const TODAY: &str = "النهارده";
+    pub fn day_bar(minutes: u32, answers: u32) -> String {
+        use super::count::{ANSWER, MINUTE, count};
+        format!("{}، {}", count(minutes, &MINUTE), count(answers, &ANSWER))
+    }
+    pub const NEXT_STEP: &str = "خطوة تفيدك دلوقتي";
+}
+
+pub mod plan {
+    pub const START_HINT: &str = "ابدأ جلسة النهارده";
+    pub const PROGRESS_HINT: &str = "افتح التقدّم بالتفصيل";
+    pub const DAY_HINT: &str = "افتح محاضرة اليوم ده";
+    pub const SETUP_TITLE: &str = "امتحانك إمتى؟";
+    pub const EXAM_DAY: &str = "يوم الامتحان";
+    pub const DAYS_LABEL: &str = "أيام المذاكرة في الأسبوع";
+    pub const CAP_LABEL: &str = "أقصى عدد مراجعات في اليوم";
+    pub const SAVE: &str = "اعمل الخطة";
+    pub const EDIT: &str = "عدّل الخطة";
+    pub const CANCEL: &str = "إلغاء";
+    pub const PICK_DAY: &str = "اختار يوم بعد النهارده.";
+    pub const PICK_WEEKDAY: &str = "اختار يوم واحد على الأقل.";
+    pub const WEEKDAYS: [&str; 7] = ["السبت", "الحد", "الاتنين", "التلات", "الأربع", "الخميس", "الجمعة"];
+    pub const WEEKDAYS_SHORT: [&str; 7] = ["سبت", "حد", "اتنين", "تلات", "أربع", "خميس", "جمعة"];
+    pub const MONTHS: [&str; 12] = [
+        "يناير",
+        "فبراير",
+        "مارس",
+        "أبريل",
+        "مايو",
+        "يونيو",
+        "يوليو",
+        "أغسطس",
+        "سبتمبر",
+        "أكتوبر",
+        "نوفمبر",
+        "ديسمبر",
+    ];
+
+    pub const EXAM_ON: &str = "الامتحان";
+    /// "فاضل 40 يوم مذاكرة".
+    pub fn days_left(n: usize) -> String {
+        format!("فاضل {}", super::count::count(n, &super::count::STUDY_DAY))
+    }
+    pub const FINAL_FROM: &str = "آخر أيام قبل الامتحان (امتحانات تجريبية ومواضيع ضعيفة، من غير جديد) تبدأ";
+
+    pub const TODAY: &str = "النهارده";
+    pub const NEW_ITEMS: &str = "جديد";
+    pub const REVIEWS: &str = "مراجعة تقريبًا";
+    pub const APPROX: &str = "تقريبًا";
+    pub const FROM: &str = "من";
+    pub const REVISIT: &str = "لفّة تانية على";
+    pub const REST_TODAY: &str = "النهارده راحة. المذاكرة الجاية:";
+
+    pub const FOCUS_LEARN: &str = "جديد ومراجعة";
+    pub const FOCUS_REVISIT: &str = "لفّة تانية";
+    pub const FOCUS_MOCK: &str = "امتحان تجريبي";
+    pub const FOCUS_WEAK: &str = "المواضيع الضعيفة";
+    pub const FOCUS_REST: &str = "راحة";
+
+    pub const ON_TRACK: &str = "الخطة مريحة: كل المحاضرات هتخلص بدري وتلحق تلفّ عليها تاني.";
+    pub const SNUG: &str = "الخطة ماشية، بس الجديد هياخد جزء من وقت اللفّة التانية.";
+    pub const TIGHT: &str = "على الخطة دي، فيه أسئلة مش هتلحق قبل آخر 10 أيام:";
+    pub const TIGHT_ADD: &str = "لو زوّدت أيام مذاكرة في الأسبوع هتلحق كلها. عدد الأيام:";
+    pub fn tight_cap(cap: u32) -> String {
+        format!("لو علّيت حد المراجعات اليومي لـ {cap} هتلحق كلها.")
+    }
+    pub const TIGHT_HIGH_YIELD: &str =
+        "حتى بأيام أكتر وحد مراجعات أعلى مش هتلحق كلها، فركّز على high-yield الأول.";
+    pub const TIGHT_FINAL: &str =
+        "إنت في آخر الأيام، فالوقت للامتحانات التجريبية والمواضيع الضعيفة. في الجديد، ركّز على high-yield بس.";
+    pub const PICK_DAY_FAR: &str = "اختار يوم في خلال 3 سنين من النهارده.";
+    pub const FINAL_WINDOW: &str = "إنت في آخر الأيام: امتحانات تجريبية ومراجعة المواضيع الضعيفة. مفيش جديد.";
+    pub const EXAM_DONE: &str = "الامتحان عدّى. ربنا يوفقك! لو عندك امتحان تاني، حط ميعاده.";
+
+    pub const PROGRESS: &str = "وصلت لفين";
+    pub const FIRST_PASS: &str = "اللفّة الأولى";
+    pub const SECOND_PASS: &str = "اللفّة التانية";
+    pub const WEEK: &str = "الأيام الجاية";
+    pub const LOAD_TITLE: &str = "الحِمل في الأسبوعين الجايين";
+    pub const LOAD_LABEL: &str = "مراجعات وجديد متوقعين كل يوم، النهارده على اليمين";
+    pub const LOAD_PEAK: &str = "أتقل يوم";
+    pub const LOAD_KEY_REVIEWS: &str = "مراجعة";
+    pub const LOAD_KEY_NEW: &str = "جديد";
+    pub const LOAD_KEY_CAP: &str = "الحد اليومي";
+    pub const PACE_TITLE: &str = "السرعة لحد الامتحان";
+    pub const PACE_LABEL: &str = "اللي شفته لحد النهارده، والخطة لحد الامتحان";
+    pub const PACE_KEY_PAST: &str = "اللي فات";
+    pub const PACE_KEY_PLAN: &str = "الخطة";
+    pub const PACE_KEY_FINAL: &str = "آخر 10 أيام";
+    pub const PACE_DONE_ON: &str = "على الخطة دي، هتكون شفت كل الأسئلة يوم";
+    pub const PACE_NOT_DONE: &str = "على الخطة دي، فيه أسئلة مش هتلحق تتشاف قبل آخر الأيام.";
+    pub const ALL_DAYS: &str = "الخطة كلها لحد الامتحان";
+}
+
+pub mod table {
+    pub const HINT_TAP: &str = "دوس على كل ؟ تشوف الإجابة، وبعدين علّم: عرفتها ✓ ولا لأ ✗.";
+    pub const HINT_TYPE: &str = "اكتب كل خانة فاضية، وبعدين دوس صحّح.";
+    pub const REVEAL_CELL: &str = "اكشف الخانة";
+    pub const TYPE_CELL: &str = "اكتب الخانة";
+    pub const REVEAL_ALL: &str = "اكشف الكل";
+    pub const CHECK_TYPED: &str = "صحّح";
+    pub const TYPING_ON: &str = "عايز أكتب";
+    pub const TYPING_OFF: &str = "من غير كتابة";
+    pub const KNEW_IT: &str = "عرفتها";
+    pub const MISSED_IT: &str = "ماعرفتهاش";
+    pub const MARK_RIGHT: &str = "اعتبرها صح";
+    pub const MARK_WRONG: &str = "اعتبرها غلط";
+
+    pub fn mark_each(left: usize) -> String {
+        if left == 1 {
+            "فاضل خانة واحدة: عرفتها ولا لأ؟".to_string()
+        } else {
+            format!("فاضل {}: علّم على كل واحدة عرفتها ولا لأ.", super::count::count(left, &super::count::FIELD))
+        }
+    }
+
+    pub fn recalled(right: usize, total: usize) -> String {
+        if right == total {
+            format!("كل الخانات صح ({total} من {total}). حلو أوي!")
+        } else {
+            format!("افتكرت {right} من {}.", super::count::count(total, &super::count::FIELD))
+        }
+    }
+}
+
+pub mod order {
+    pub const HINT: &str =
+        "دوس على الخطوات بالترتيب. تقدر ترجّع خطوة بالدوس عليها، أو تحركها بالأسهم أو بالسحب.";
+    pub const PLACED: &str = "ترتيبك";
+    pub const YOUR_ORDER: &str = "ترتيبك";
+    pub const POOL: &str = "الخطوات";
+    pub const NEXT_SLOT: &str = "الخطوة الجاية هنا";
+    pub const CORRECT_ORDER: &str = "الترتيب في الكتاب";
+    pub const CHECK: &str = "صحّح";
+    pub const CLEAR: &str = "ابدأ من الأول";
+    pub const SEND_BACK: &str = "رجّعها للخطوات";
+    pub const MOVE_UP: &str = "حركها لفوق";
+    pub const MOVE_DOWN: &str = "حركها لتحت";
+    pub const IN_PLACE: &str = "في مكانها";
+    pub const ALL_IN_PLACE: &str = "كل الخطوات في مكانها. ترتيب ممتاز!";
+
+    pub fn in_place(right: usize, total: usize) -> String {
+        format!("{right} من {total} في مكانها. الخطوات المعلّمة بالأحمر محتاجة نظرة تانية.")
+    }
+
+    pub fn should_be(position: usize) -> String {
+        format!("مكانها {position}")
+    }
+
+    /// When one early slip pushes many steps off their numbers.
+    pub fn moves_to_fix(moves: usize) -> String {
+        if moves == 1 {
+            "الترتيب قريب: نقل خطوة واحدة بس بيظبطه.".to_string()
+        } else {
+            format!("الترتيب قريب: نقل {} بس بيظبطه.", super::count::count(moves, &super::count::STEP))
+        }
+    }
+}
+
+pub mod oral {
+    pub const MISSED_HINT: &str = "راجع السؤال ده في المراجعة";
+    pub const TITLE: &str = "امتحان شفوي";
+    pub const LECTURE: &str = "المحاضرة";
+    pub const ALL_LECTURES: &str = "كل المحاضرات الجاهزة";
+    pub const SIZE: &str = "عدد الأسئلة";
+    pub const THINK: &str = "وقت التفكير";
+    pub const VOICE: &str = "اقرا الأسئلة بصوت عالي";
+    pub const RATE: &str = "سرعة الصوت";
+    pub const RATES: [&str; 3] = ["أبطأ", "عادي", "أسرع"];
+    pub const AUTO: &str = "كمّل لوحدك بعد الإجابة";
+    pub const AUTO_HINT: &str =
+        "لو ما ضغطتش على تقييم في 8 ثواني، يعدّي للسؤال اللي بعده من غير ما يسجّل حاجة.";
+    pub const AVAILABLE: &str = "ينفع يتسألوا شفوي:";
+    pub const START: &str = "ابدأ";
+    pub const EMPTY: &str = "لسه مفيش محاضرات جاهزة فيها أسئلة شفوي. أول ما محاضرة تخلص هتلاقيها هنا.";
+    pub const NO_VOICE: &str = "مفيش صوت إنجليزي شغّال على الجهاز ده، فالأسئلة هتظهر مكتوبة بس. على أندرويد: الإعدادات ← تحويل النص إلى كلام ← نزّل صوت English.";
+
+    pub const HONEST: &str = "مفيش تسجيل لصوتك ولا تصحيح آلي: انت اللي بتقارن إجابتك بنقاط الكتاب وتقيّم نفسك.";
+    pub const PAUSED: &str = "المؤقت واقف";
+    pub const PAUSE_TIMER: &str = "وقّف المؤقت";
+    pub const RESUME_TIMER: &str = "كمّل المؤقت";
+    pub const RESTART_TIMER: &str = "عيد من الأول";
+    pub const NOTES: &str = "اكتب نقاط إجابتك (اختياري)";
+    pub const NOTES_HINT: &str = "ابدأ بالمراحل الرئيسية…";
+    pub const YOUR_NOTES: &str = "نقاطك";
+    pub const TICK_HINT: &str = "علّم على النقط اللي قلتها.";
+    pub const SAID: &str = "قلت";
+    pub const ENOUGH: &str = "كفاية للنجاح";
+    pub const LISTEN: &str = "اسمع السؤال";
+    pub const THINKING: &str = "فكّر وجاوب بصوتك";
+    pub const WHAT_ELSE: &str = "وإيه كمان؟";
+    pub const ANSWER: &str = "الإجابة";
+    pub const FOLLOW_UP: &str = "سؤال الممتحن بعد الكارت";
+    pub const AGAIN_BADGE: &str = "تاني مرة";
+    pub const PASS: &str = "كفاية تذكر";
+    pub const OF: &str = "من";
+    pub const LEFT: &str = "فاضل";
+    pub const SHOW: &str = "اعرض الإجابة";
+    pub const REPEAT: &str = "عيد السؤال";
+    pub const AGAIN: &str = "تاني";
+    pub const AGAIN_HINT: &str = "هيرجعلك بعد 3 أسئلة";
+    pub const GOOD: &str = "تمام";
+    pub const GOOD_HINT: &str = "جاوبت صح";
+    pub const END: &str = "إنهاء";
+    /// The Android notification channel for oral mode in the background.
+    pub const CHANNEL: &str = "المذاكرة الشفوي";
+    pub const CHANNEL_HINT: &str = "التحكم في الشفوي وهو شغّال في الخلفية";
+
+    pub const DONE: &str = "خلصت الجلسة";
+    pub const DONE_GOOD: &str = "تمام";
+    pub const DONE_AGAIN: &str = "تاني";
+    pub const DONE_HEARD: &str = "سمعتها بس";
+    pub const MISSED: &str = "الأسئلة اللي محتاجة مراجعة";
+    pub const NONE_MISSED: &str = "ولا سؤال وقع منك. شغل حلو!";
+    pub const ANOTHER: &str = "جلسة كمان";
+    pub const BACK: &str = "رجوع للإعدادات";
+}
+
+pub mod case {
+    pub const SAVE_FAILED: &str = "ما عرفتش أحفظ الإجابة. إجابتك لسه موجودة؛ جرّب تاني قبل ما تقفل.";
+    pub const TAB_CASES: &str = "حالات إكلينيكية";
+    pub const TAB_CALC_ITEMS: &str = "تمارين بالأرقام";
+    pub const TAB_CALCULATORS: &str = "الحاسبات";
+    pub const EMPTY: &str = "لسه مفيش حالات. هتظهر هنا أول ما محاضراتها تتكتب، ولحد ده الحاسبات شغالة.";
+    pub const EMPTY_CALC: &str = "لسه مفيش تمارين بالأرقام. هتظهر هنا مع المحاضرات، ولحد ده جرّب الحاسبات.";
+    pub const STEP: &str = "خطوة";
+    /// "5 خطوات", "خطوتين".
+    pub fn steps(n: usize) -> String {
+        super::count::count(n, &super::count::STEP)
+    }
+    pub const NEW_DATA: &str = "بيانات جديدة";
+    pub const STEPS_LABEL: &str = "خطوات الحالة";
+    pub const NOW: &str = "دلوقتي";
+    pub const KNOWN: &str = "المعطيات لحد دلوقتي";
+    pub const CHECK: &str = "صحّح";
+    pub const PICK_FIRST: &str = "اختار قرارك الأول، وبعدين صحّحه.";
+    pub const RECAP: &str = "مراجعة تفكيرك";
+    pub const YOURS: &str = "إجابتك:";
+    pub const MARK_RIGHT: &str = "الصح";
+    pub const MARK_YOURS: &str = "اختيارك";
+    pub const RIGHT: &str = "صح، برافو.";
+    pub const WRONG: &str = "مش دي. الإجابة الصح متعلّمة.";
+    pub const CORRECT_WAS: &str = "الصح:";
+    pub const SHOW_ANSWER: &str = "ورّيني الإجابة";
+    pub const GOT_IT: &str = "جاوبتها صح";
+    pub const MISSED: &str = "فاتتني";
+    pub const NEXT: &str = "الخطوة اللي بعدها";
+    pub const FINISH: &str = "خلّص الحالة";
+    pub const SCORE: &str = "خطوات صح";
+    pub const ALL_RIGHT: &str = "كل الخطوات صح. الحالة دي هترجعلك بعد مدة أطول.";
+    pub const SOME_RIGHT: &str = "حلو. بص على الخطوات اللي فاتتك، والحالة هترجعلك قريب في المراجعة.";
+    pub const FEW_RIGHT: &str = "ولا يهمك، الحالات دي بتتعلم بالتكرار. هترجعلك بكرة.";
+    pub const AGAIN: &str = "عيدها";
+    pub const BACK: &str = "رجوع للقائمة";
+    pub const UNVERIFIED: &str = "لسه ما اتراجعش";
+    pub const UPDATE: &str = "تحديث عن الكتاب";
+    pub const DUE: &str = "مستحقة مراجعة";
+}
+
+pub mod calc {
+    pub const TITLE: &str = "الحاسبات";
+    /// "فاضل 3 خانات"
+    pub fn left(n: usize) -> String {
+        format!("فاضل {}", super::count::count(n, &super::count::FIELD))
+    }
+    pub const PICK: &str = "اختار حاسبة";
+    pub const FILL: &str = "املا البيانات وهتطلع النتيجة هنا.";
+    pub const MISSING: &str = "ناقص";
+    pub const INVALID: &str = "راجع القيمة دي";
+    pub const OPTIONAL: &str = "اختياري";
+    pub const YES: &str = "أيوه";
+    pub const NO: &str = "لأ";
+    pub const RESULT: &str = "النتيجة";
+    /// Over the interpretation under the result bar.
+    pub const MEANS: &str = "يعني إيه";
+    pub const BREAKDOWN: &str = "التفاصيل";
+    pub const SOURCE: &str = "المصدر";
+    /// Over the next steps for a result (`calc::guide`).
+    pub const NEXT_STEP: &str = "الخطوة الجاية";
+    /// Over the differential diagnosis for a result (`calc::guide`).
+    pub const DD: &str = "التشخيص التفريقي";
+    pub const RESET: &str = "امسح";
+    pub const BACK: &str = "كل الحاسبات";
+    pub const AREA_LIVER: &str = "الكبد";
+    pub const AREA_ASCITES: &str = "الاستسقاء";
+    pub const AREA_TUMOUR: &str = "الأورام";
+    pub const AREA_ACUTE: &str = "الفشل الكبدي الحاد";
+    pub const AREA_PANCREAS: &str = "البنكرياس";
+    pub const AREA_GI: &str = "الجهاز الهضمي";
+    pub const AREA_RENAL: &str = "الكلى والأملاح";
+    pub const AREA_ELDERLY: &str = "المسنين";
+    pub const AREA_RHEUM: &str = "الروماتيزم";
+    pub const AREA_DIABETES: &str = "السكر";
+    pub const AREA_BLOOD: &str = "الدم";
+    pub const AREA_RESEARCH: &str = "الريسيرش";
+    // The `calc` item: compute it, then interpret it.
+    pub const YOUR_RESULT: &str = "حسبتها كام؟";
+    pub const YOUR_RESULT_HINT: &str = "اكتب الرقم أو المرحلة، أو سيبها فاضية واستخدم الحاسبة.";
+    pub const CHECK: &str = "اتأكد";
+    pub const USE_CALC: &str = "احسبها بالحاسبة";
+    pub const MATCH: &str = "مظبوط.";
+    pub const NO_MATCH: &str = "مش مظبوط. شوف الحساب تحت.";
+    pub const MEANING: &str = "يعني إيه النتيجة دي؟";
+    pub const MEANING_HINT: &str = "قولها لنفسك الأول، وبعدين افتح التفسير.";
+    pub const SHOW_MEANING: &str = "ورّيني التفسير";
+
+    /// The Arabic hint under a calculator field (core keeps the English one).
+    pub fn hint(calc: &str, field: &str) -> Option<&'static str> {
+        Some(match (calc, field) {
+            ("child_pugh", "pt_prolonged_s") => "دي طريقة الكتاب. سيبها فاضية لو هتستخدم الـ INR.",
+            ("child_pugh", "inr") => "بيتحسب بس لو خانة الـ PT فاضية.",
+            ("apri", "ast_uln_u_l") => "غالبًا 40 U/L.",
+            ("maddrey", "pt_control_s") => "غالبًا 12–13 ثانية.",
+            ("glasgow_ah", "urea_mmol_l") => "اليوريا بالـ mg/dL ÷ 6 = mmol/L.",
+            ("ascitic_pmn", "pmn_per_mm3") => "عدد كرات الدم البيضا الكلي × نسبة النيوتروفيل.",
+            ("bisap", "bun_mg_dl") => "اليوريا ÷ 2.14.",
+            ("atlanta_2012", "organ_failure") => {
+                "صدمة (SBP أقل من 90 أو MAP أقل من 70)، PaO2 أقل من 60 أو جهاز تنفّس، كرياتينين فوق 2 بعد السوايل أو غسيل، نزيف أكتر من 500 مل في اليوم، نبض فوق 90."
+            }
+            ("glasgow_blatchford", "bun_mg_dl") => "اليوريا ÷ 2.14.",
+            ("oakland", "hb_g_dl") => "جدول الكتاب بالـ g/L: ‏7 g/dL = 70 g/L.",
+            ("kyoto_gastritis", "diffuse_redness") => {
+                "الكتاب بيدرّجها بشفافية الـ collecting venules في الـ body."
+            }
+            ("osmolal_gap", "bun_mg_dl") => "اليوريا ÷ 2.14.",
+            ("acr_eular_2010_ra", "large_joints") => "الكتف والكوع والحوض والركبة والكاحل.",
+            ("acr_eular_2010_ra", "small_joints") => {
+                "الـ MCP والـ PIP والـ MTP من ٢ لـ ٥ والـ IP بتاع الإبهام والرسغ."
+            }
+            ("caspar", "inflammatory_disease") => "شرط الدخول: CASPAR بتتطبّق عليه بس.",
+            ("asas_axial_spa", "back_pain_3_months_onset_45") => {
+                "شرط الدخول (ASAS 2009)؛ الكتاب ص295 بيقول بدأ قبل 40–45."
+            }
+            ("asas_axial_spa", "sacroiliitis_imaging") => {
+                "التهاب نشط على الـ MRI، أو أشعة grade 2 في الناحيتين أو 3–4 في ناحية."
+            }
+            ("asas_axial_spa", "ibp") => {
+                "بدأ قبل 45، بالتدريج، أكتر من 3 شهور، بالليل، بيتحسن بالحركة مش بالراحة."
+            }
+            ("asas_peripheral_spa", "preceding_infection") => {
+                "التهاب مجرى البول أو عنق الرحم أو إسهال قبل المفاصل."
+            }
+            ("modified_new_york", "si_grade_right") => "الأشعة: 0 طبيعي، 1 مشكوك، 2 بسيط، 3 متوسط، 4 التحام.",
+            ("sle_acr_1997", "renal") => "بروتين في البول أكتر من 0.5 جم/يوم، أو خلايا أو casts.",
+            ("sle_acr_1997", "neurological") => "تشنجات أو ذهان.",
+            ("sle_acr_1997", "haematological") => "أنيميا انحلالية، أو نقص كرات بيضا أو ليمفاوية أو صفايح.",
+            ("sle_acr_1997", "immunological") => "Anti-dsDNA أو anti-Sm أو anticardiolipin.",
+            ("sle_eular_acr_2019", "ana_1_80") => "شرط الدخول.",
+            ("sle_eular_acr_2019", "antiphospholipid") => {
+                "Anticardiolipin IgG أكتر من 40، أو anti-β2GP1 IgG أكتر من 40، أو lupus anticoagulant."
+            }
+            ("effective_osmolality", "urea_mmol_l") => "للأوزمولاليتي الكلية. اليوريا بالـ mg/dL ÷ 6.",
+            ("dka_severity", "bhb_mmol_l") => "سيبها فاضية لو معاك شريط بول بس، وعلّم الخانة اللي تحت.",
+            ("feurea", "urine_urea_mg_dl") => "يوريا أو BUN، بس بنفس وحدة البلازما.",
+            ("bun_creatinine", "bun_mg_dl") => "اليوريا ÷ 2.14.",
+            ("kdigo_ckd", "acr_mg_g") => "في جدول الكتاب: 3 mg/mmol = 30 mg/g.",
+            ("aa_gradient", "fio2") => "هوا الغرفة = 0.21.",
+            ("plasmic", "platelets_10e9_l") => "30 × 10⁹/L = 30,000/µL.",
+            ("plasmic", "hemolysis") => {
+                "الريتيكيولوسايت فوق 2.5%، أو الهابتوجلوبين مش ظاهر، أو الـ indirect bilirubin فوق 2 mg/dL."
+            }
+            ("anion_gap", "albumin_g_dl") => "بيصحح الـ gap لو الألبومين واطي.",
+            ("ranson", "bun_rise_mg_dl") => "زيادة اليوريا ÷ 2.14.",
+            ("relative_risk", "a") => "معرّض وعنده المرض (أو case)",
+            ("relative_risk", "b") => "معرّض ومعندوش المرض (أو control)",
+            ("relative_risk", "c") => "مش معرّض وعنده المرض (أو case)",
+            ("relative_risk", "d") => "مش معرّض ومعندوش المرض (أو control)",
+            ("odds_ratio", "a") => "معرّض وعنده المرض (أو case)",
+            ("odds_ratio", "b") => "معرّض ومعندوش المرض (أو control)",
+            ("odds_ratio", "c") => "مش معرّض وعنده المرض (أو case)",
+            ("odds_ratio", "d") => "مش معرّض ومعندوش المرض (أو control)",
+            ("diagnostic_accuracy", "tp") => "التحليل + والمرض +",
+            ("diagnostic_accuracy", "fp") => "التحليل + والمرض −",
+            ("diagnostic_accuracy", "fn") => "التحليل − والمرض +",
+            ("diagnostic_accuracy", "tn") => "التحليل − والمرض −",
+            ("rpi", "rbc_10e12_l") => "بس عشان العدد المطلق للـ reticulocytes.",
+            ("binet_cll", "areas") => {
+                "غدد الرقبة والإبط والأُربية (كل منطقة بواحدة حتى لو الناحيتين)، والطحال، والكبد."
+            }
+            ("ipi_nhl", "ecog_2_plus") => "2 = بيقوم ويتحرك أكتر من نص اليوم بس مش قادر يشتغل.",
+            ("who_pmf", "clonal") => "ماركرز تانية: ASXL1 وEZH2 وTET2 وIDH1/IDH2 وSRSF2 وSF3B1.",
+            ("sar", "primary_cases") => "بيتشالوا من اللي ممكن يتعدوا.",
+            ("lawton_iadl", "food_preparation" | "housekeeping" | "laundry") => {
+                "للستات بس (من 8)، الراجل بيتحسب من 5."
+            }
+            ("clinical_frailty", "level") => "في الخرف، درجة الهشاشة بتمشي مع درجة الخرف.",
+            ("sarc_f", "falls") => "الكتاب كاتب «أقل من 3» = 1. في الأصل من 1 لـ 3 وقعات = 1.",
+            ("abi", "dp_mm_hg") => "ضغط الكاحل بالدوبلر، وبيتاخد الأعلى من الاتنين.",
+            ("abi", "brachial_right_mm_hg") => "بيتاخد الأعلى من الدراعين.",
+            _ => return None,
+        })
+    }
+
+    // The picker (calc/picker.rs): search, area filter, favourites, recents.
+    pub const SEARCH: &str = "دوّر على حاسبة…";
+    pub const SEARCH_LABEL: &str = "دوّر على حاسبة";
+    pub const ALL_AREAS: &str = "كل الأقسام";
+    pub const AREA_FILTER: &str = "القسم";
+    pub const FAVOURITES: &str = "المفضلة";
+    pub const RECENT: &str = "آخر ما فتحت";
+    pub const RESULTS: &str = "النتايج";
+    pub const NOTHING_FOUND: &str = "مفيش حاسبة بالاسم ده.";
+    pub const CLEAR_SEARCH: &str = "امسح البحث";
+    pub const PIN: &str = "ثبّتها في المفضلة";
+    pub const UNPIN: &str = "شيلها من المفضلة";
+    pub const PINNED: &str = "في المفضلة";
+    /// "44 حاسبة"
+    pub fn count(n: usize) -> String {
+        super::count::count(n, &super::count::CALC)
+    }
+
+    /// One line under a calculator's name: what it is for. Every calculator
+    /// has one (test `every_calculator_has_a_blurb`).
+    pub fn blurb(calc: &str) -> Option<&'static str> {
+        Some(match calc {
+            "child_pugh" => "شدة تليّف الكبد (A وB وC) والتوقّع",
+            "meld" => "خطورة السيروزس خلال 3 شهور وأولوية زرع الكبد",
+            "meld_na" => "الـ MELD ومعاه الصوديوم: أدق في أولوية الزرع",
+            "albi" => "وظيفة الكبد في الـ HCC من الألبومين والبيليروبين",
+            "fib4" => "التليّف من غير بيوبسي: السن والإنزيمات والصفايح",
+            "apri" => "التليّف من غير بيوبسي: الـ AST والصفايح",
+            "fli" => "الكبد الدهني من الدهون الثلاثية والوزن والوسط والـ GGT",
+            "baveno_vi" => "مين في السيروزس المعوّضة يستغنى عن منظار الدوالي",
+            "r_ratio" => "نوع أذية الكبد من الدوا: خلوي ولا ركودي ولا مختلط",
+            "maddrey" => "شدة الـ alcoholic hepatitis ومين ياخد ستيرويد",
+            "glasgow_ah" => "التوقّع في الـ alcoholic hepatitis وفايدة الستيرويد",
+            "saag" => "سبب الاستسقاء: من الـ portal hypertension ولا لأ",
+            "ascitic_pmn" => "تشخيص الـ SBP من عدد الـ PMN في سائل البطن",
+            "sos_criteria" => "تشخيص الـ SOS (VOD) بعد زرع النخاع",
+            "cha2ds2_vasc" => "خطر الجلطات في الـ AF: وقف المسيّل قبل المنظار والـ bridging",
+            "bclc" => "مرحلة الـ HCC والعلاج المناسب ليها",
+            "milan" => "الـ HCC ينفع معاه زرع كبد ولا لأ",
+            "okuda" => "مرحلة الـ HCC من حجم الورم ووظيفة الكبد",
+            "page_b" => "خطر الـ HCC في فيروس B: مين يتعمله مسح",
+            "kings_college" => "مين محتاج زرع كبد في الفشل الكبدي الحاد",
+            "clichy" => "معايير الزرع في الفشل الكبدي الحاد بالـ factor V والوعي",
+            "ranson" => "شدة التهاب البنكرياس الحاد عند الدخول وبعد 48 ساعة",
+            "bisap" => "خطورة التهاب البنكرياس الحاد في أول 24 ساعة",
+            "ctsi" => "شدة التهاب البنكرياس من الأشعة المقطعية والـ necrosis",
+            "atlanta_2012" => "شدة التهاب البنكرياس من فشل الأعضاء والمضاعفات",
+            "glasgow_blatchford" => "نزيف الجهاز الهضمي العلوي: مين محتاج تدخل ومين يروّح",
+            "shock_index" => "النبض ÷ الضغط: النزيف مستقر ولا لأ",
+            "oakland" => "نزيف الجهاز الهضمي السفلي: مين يروّح بأمان ومين يتحجز",
+            "uc_activity" => "شدة الـ ulcerative colitis: خفيفة ولا متوسطة ولا شديدة",
+            "kyoto_gastritis" => "المنظار بيقول إيه عن الـ H. pylori وخطر سرطان المعدة",
+            "rome4_ibs" => "تشخيص الـ IBS بمعايير Rome IV ونوعه",
+            "anion_gap" => "سبب الـ metabolic acidosis: الـ gap عالي ولا طبيعي",
+            "delta_ratio" => "فيه اضطراب تاني مع الـ high anion gap acidosis؟",
+            "expected_compensation" => "التعويض المتوقّع: الاضطراب لوحده ولا مخلوط؟",
+            "osmolal_gap" => "فيه مادة سامة زي الميثانول أو الإيثيلين جلايكول؟",
+            "kdigo_aki" => "مرحلة الـ AKI من الكرياتينين وكمية البول",
+            "fena" => "الـ AKI قبل الكلى (prerenal) ولا من الكلى نفسها (ATN)",
+            "feurea" => "زي الـ FENa، بس بينفع والعيان على مدرّات",
+            "bun_creatinine" => "نسبة الـ BUN للكرياتينين: prerenal ولا ATN؟",
+            "ckd_epi_2021" => "الـ eGFR بمعادلة CKD-EPI 2021 من الكرياتينين والسن",
+            "kdigo_ckd" => "مرحلة الـ CKD بالـ G والـ A ولون الخطر والمتابعة",
+            "aa_gradient" => "نقص الأكسجين من الرئة نفسها ولا من قلة التهوية؟",
+            "free_water_deficit" => "نقص الميه في الـ hypernatraemia وحجم المحلول المطلوب",
+            "plasmic" => "احتمال إن الـ TMA تكون TTP قبل نتيجة الـ ADAMTS13",
+            "cockcroft_gault" => "تصفية الكرياتينين لظبط جرعات الدوا، خصوصًا في المسنين",
+            "katz_adl" => "الأنشطة اليومية الأساسية: مستقل ولا محتاج مساعدة؟",
+            "lawton_iadl" => "الأنشطة الأعلى زي الفلوس والأدوية والمواصلات",
+            "gds15" => "فحص اكتئاب المسنين: 15 سؤال أيوه ولا لأ",
+            "mna_sf" => "فحص سوء التغذية في المسنين من 14 نقطة",
+            "clinical_frailty" => "درجة الهشاشة من 1 لـ 9 بوصف الكتاب",
+            "cam" => "تشخيص الـ delirium بأربع علامات",
+            "sarc_f" => "فحص ضعف وضمور العضلات (sarcopenia)",
+            "mmse" => "فحص الذاكرة والإدراك من 30 درجة",
+            "abi" => "ضغط الكاحل على ضغط الدراع: فيه PAD؟",
+            "acr_eular_2010_ra" => "تشخيص الـ rheumatoid arthritis: 6 من 10 أو أكتر",
+            "caspar" => "تشخيص الـ psoriatic arthritis: 3 نقط أو أكتر",
+            "asas_axial_spa" => "الـ axial SpA بالأشعة أو بالـ HLA-B27، حتى قبل ما تبان في الأشعة",
+            "asas_peripheral_spa" => "الـ SpA في المفاصل الطرفية: arthritis أو enthesitis أو dactylitis",
+            "modified_new_york" => "تشخيص الـ ankylosing spondylitis بالأشعة والكشف",
+            "sle_acr_1997" => "تشخيص الذئبة الحمراء: 4 من 11 أو أكتر",
+            "sle_eular_acr_2019" => "تشخيص الذئبة بالنقط: ANA وبعدين 10 نقط أو أكتر",
+            "gpa_2022" => "تصنيف الـ GPA (Wegener) بالنقط: 5 أو أكتر",
+            "mpa_2022" => "تصنيف الـ microscopic polyangiitis بالنقط: 5 أو أكتر",
+            "corrected_sodium" => "الصوديوم الحقيقي لما السكر عالي",
+            "effective_osmolality" => "أوزمولاليتي الدم لتشخيص الـ HHS",
+            "dka_severity" => "هل هي DKA؟ وشدتها قد إيه ومكان العلاج",
+            "premixed_insulin" => "أول جرعة إنسولين premixed: التلتين الصبح والتلت بالليل",
+            "bmi" => "مؤشر كتلة الجسم وإمتى نفحص أو ندّي دوا أو نفكر في جراحة",
+            "ipss_mf" => "التوقّع في الـ primary myelofibrosis",
+            "rpi" => "النخاع بيعوّض الأنيميا ولا لأ: نقص إنتاج ولا تكسير ونزيف",
+            "rai_cll" => "مرحلة الـ CLL (من 0 لـ IV) بالغدد والطحال والهيموجلوبين والصفايح",
+            "binet_cll" => "مرحلة الـ CLL (A وB وC) بعدد المناطق والهيموجلوبين والصفايح",
+            "ann_arbor" => "مرحلة الليمفوما من I لـ IV، وA أو B حسب الأعراض",
+            "ipi_nhl" => "التوقّع في الـ non-Hodgkin lymphoma من 0 لـ 5",
+            "who_pv" => "تشخيص الـ polycythaemia vera بمعايير الـ WHO",
+            "who_et" => "تشخيص الـ essential thrombocythaemia بمعايير الـ WHO",
+            "who_pmf" => "تشخيص الـ primary myelofibrosis بمعايير الـ WHO",
+            "incidence" => "معدل الحالات الجديدة في فترة معيّنة",
+            "prevalence" => "نسبة كل الحالات الموجودة في وقت معيّن",
+            "prevalence_id" => "العلاقة بين الانتشار والحدوث ومدة المرض",
+            "attack_rate" => "نسبة اللي عيّوا في وباء أو تفشّي",
+            "sar" => "نسبة العدوى بين المخالطين بعد أول حالة",
+            "cfr" => "نسبة الوفيات بين المصابين بالمرض",
+            "pmr" => "نسبة الوفيات بسبب معيّن من كل الوفيات",
+            "imr" => "وفيات الأطفال تحت سنة لكل 1000 مولود حي",
+            "nmr" => "وفيات أول 28 يوم لكل 1000 مولود حي",
+            "relative_risk" => "الخطر في المعرّضين قصاد غير المعرّضين (cohort)",
+            "odds_ratio" => "قوة العلاقة في دراسة الـ case-control",
+            "attributable_risk" => "الزيادة في الخطر اللي سببها التعرّض",
+            "nnt" => "تعالج كام واحد عشان واحد يستفيد (أو يتأذى)",
+            "diagnostic_accuracy" => "الحساسية والنوعية والـ PPV والـ NPV من جدول 2×2",
+            "z_score" => "القيمة بعيدة عن المتوسط بكام انحراف معياري",
+            _ => return None,
+        })
+    }
+}
+
+pub mod desk {
+    pub const TABLET: &str = "التابلت والقلم";
+    pub const TABLET_SUB: &str = "القايمة الجانبية ولمحة القلم";
+    pub const MAC: &str = "الماك والكيبورد";
+    pub const MAC_SUB: &str = "القايمة الجانبية ولمحة الماوس والاختصارات";
+    pub const NAV_STYLE: &str = "القايمة الجانبية في الشاشة العريضة";
+    pub const NAV_LABELS: &str = "أيقونات وأسامي";
+    pub const NAV_SLIM: &str = "أيقونات بس";
+    // The pane labels are read by desk::Panes / ListDetail, which feature
+    // screens opt into one by one.
+    #[allow(dead_code)]
+    pub const SIDE_WAITING: &str = "الشرح وصفحة الكتاب هيظهروا هنا أول ما تجاوب.";
+    #[allow(dead_code)]
+    pub const SIDE_LABEL: &str = "الشرح";
+    #[allow(dead_code)]
+    pub const LIST_LABEL: &str = "القايمة";
+}
+
+pub mod hover {
+    pub const TITLE: &str = "اللمحة";
+    pub const PEN: &str = "لمحة بقلم S Pen";
+    pub const PEN_NOTE: &str = "قرّب القلم من اختصار أو اسم دوا من غير ما تلمس الشاشة، هيظهرلك معناه.";
+    pub const MOUSE: &str = "لمحة بالماوس";
+    pub const MOUSE_NOTE: &str =
+        "سيب الماوس ثانية على الكلمة، أو على رقم صفحة الكتاب، أو على اختيار بعد ما تجاوب.";
+    pub const UNVERIFIED: &str = "لسه ما اتراجعش";
+    pub const TERMS: &str = "مصطلح في القاموس";
+}
+
+pub mod keys {
+    pub const TITLE: &str = "اختصارات الكيبورد";
+    pub const OPEN: &str = "اعرض الاختصارات";
+    pub const CLOSE: &str = "اقفل";
+    pub const NOTE: &str = "بتشتغل على كيبورد التابلت والماك. على الماك استخدم ⌘ بدل Ctrl.";
+    pub const SCREENS: &str = "تروح لشاشة";
+    pub const SETTINGS: &str = "الإعدادات";
+    pub const REVEAL: &str = "تكشف الإجابة";
+    pub const RATE: &str = "تقيّم نفسك (من نسيت لسهل)";
+    pub const OPTIONS: &str = "تختار إجابة في سؤال الاختيارات";
+    pub const NEXT: &str = "اللي بعده";
+    pub const MOVE: &str = "السؤال اللي بعده أو اللي قبله في الامتحان";
+    pub const FLAG: &str = "تعلّم السؤال عشان ترجعله";
+    pub const ESC: &str = "تقفل أي حاجة مفتوحة";
+    pub const HELP: &str = "القايمة دي";
+}
+
+pub mod verify {
+    pub const GROUP: &str = "مراجعة صحة المحتوى";
+    pub const QUESTION: &str = "المحتوى ده مظبوط؟";
+    pub const RIGHT: &str = "✓ صح";
+    pub const EDIT: &str = "✎ عدّل";
+    pub const WRONG: &str = "✗ غلط";
+    pub const UNDO: &str = "رجوع";
+    pub const CANCEL: &str = "إلغاء";
+    pub const SAVE: &str = "احفظ تعديلي";
+    pub const SAVED_APPROVED: &str = "✓ اتسجّل إنه صح، ومش هيسألك عليه تاني.";
+    pub const SAVED_EDITED: &str = "✎ اتسجّل تعديلك، وهتذاكره بكلامك من هنا ورايح.";
+    pub const SAVED_WRONG: &str = "✗ اتشال من المراجعة لحد ما يتصلّح.";
+    pub const NOT_SAVED: &str = "ما اتحفظش، واختيارك لسه زي ما هو. اضغط «حاول تاني».";
+    pub const WRONG_NOTE: &str = "إيه الغلط؟ (اختياري)";
+    pub const WRONG_PLACEHOLDER: &str = "مثلاً: الكتاب صفحة 14 بيقول 7–9 نقط";
+    pub const WRONG_CONFIRM: &str = "شيله من المراجعة";
+    pub const EDIT_NOTE: &str = "ملاحظة للي هيصلّح المحتوى (اختياري)";
+    pub const NOTHING_CHANGED: &str = "ما غيّرتش حاجة لسه. عدّل حقل أو اكتب ملاحظة.";
+    pub const F_FRONT: &str = "الوش";
+    pub const F_BACK: &str = "الضهر";
+    pub const F_TEXT: &str = "النص بالفراغات";
+    pub const F_EXTRA: &str = "معلومة زيادة";
+    pub const F_STEM: &str = "السؤال";
+    pub const F_OPTIONS: &str = "الاختيارات، كل واحد في سطر";
+    pub const F_ANSWER: &str = "الإجابة الصح";
+    pub const F_WHY: &str = "الشرح، سطر لكل اختيار بنفس الترتيب";
+    pub const F_PROMPT: &str = "السؤال";
+    pub const F_POINTS: &str = "النقط، كل نقطة في سطر";
+    pub const F_STEPS: &str = "الخطوات بالترتيب، كل خطوة في سطر";
+    pub const F_TITLE: &str = "العنوان";
+    pub const F_QUESTION: &str = "المطلوب";
+    pub const F_EXPECT: &str = "النتيجة";
+    pub const F_INTERPRET: &str = "التفسير";
+    pub const EXPORT_TITLE: &str = "صدّر مراجعاتك للمحتوى";
+    pub const EXPORT_BUTTON: &str = "صدّر الملف";
+    pub const EXPORT_SAVED: &str = "اتحفظ في:";
+    pub const EXPORT_SHOW: &str = "اعرض النص (تقدر تنسخه)";
+    pub const EXPORT_FAILED: &str = "ما عرفتش أحفظ الملف:";
+}
+
+pub mod own {
+    pub const TITLE: &str = "كروتك";
+    pub const NEW: &str = "＋ كارت جديد";
+    pub fn cards(n: usize) -> String {
+        super::count::count(n, &super::count::CARD)
+    }
+    pub const NONE_YET: &str = "لسه مفيش كروت.";
+    pub const EDIT: &str = "عدّل";
+    pub const DELETE: &str = "امسح";
+    pub const DELETE_SURE: &str = "أمسحه من كل أجهزتك؟";
+    pub const DELETE_YES: &str = "أيوه امسحه";
+    pub const STUDY_THEM: &str = "ذاكر كروتك بس";
+    pub const FORM_NEW: &str = "كارت جديد";
+    pub const FORM_EDIT: &str = "عدّل الكارت";
+    pub const FORM_SHARED: &str = "كارت من نص شيّرته";
+    pub const SHARED_HINT: &str = "النص اتحط في الضهر. اكتب السؤال في الوش.";
+    pub const SHARED_TRIMMED: &str = "النص كان أطول من 3000 حرف، فآخره اتشال. لو محتاجه، اعمل منه كارت تاني.";
+    pub const SHARE_WAITING: &str = "في نص تاني شيّرته مستني، هيفتح أول ما تخلّص الكارت ده.";
+    pub const FRONT: &str = "الوش (السؤال)";
+    pub const BACK: &str = "الضهر (الإجابة)";
+    pub const LECTURE: &str = "المحاضرة";
+    pub const NO_LECTURE: &str = "من غير محاضرة";
+    pub const PAGE: &str = "صفحة الكتاب";
+    pub const SOURCE: &str = "منين";
+    pub const SOURCE_HINT: &str = "مثلاً: محاضرة د. فلان، أو اسم الموقع";
+    pub const SAVE: &str = "احفظ";
+    pub const CANCEL: &str = "إلغاء";
+    pub const FAILED: &str = "ما عرفتش أحفظ الكارت:";
+    pub const DELETE_FAILED: &str = "ما عرفتش أمسح الكارت، ولسه موجود:";
+    pub const E_FRONT: &str = "اكتب السؤال في الوش.";
+    pub const E_BACK: &str = "اكتب الإجابة في الضهر.";
+    pub const E_FRONT_LONG: &str = "الوش طويل، خليه سؤال قصير (600 حرف بالكتير).";
+    pub const E_BACK_LONG: &str = "الضهر طويل، قسّمه على كذا كارت (3000 حرف بالكتير).";
+    pub const E_SOURCE_LONG: &str = "«منين» طويلة، خليها اسم قصير (200 حرف بالكتير).";
+    pub const FROM: &str = "من";
+    pub const FRONT_HINT: &str = "سؤال واحد يختبر فكرة واحدة…";
+    pub const BACK_HINT: &str = "الإجابة الأساسية، وبعدها شرح قصير لو محتاج…";
+    pub const PREVIEW: &str = "عاين الكارت";
+}
+
+pub mod data {
+    pub const EXPORT_TITLE: &str = "نسخة احتياطية من كل حاجة";
+    pub const EXPORT_BUTTON: &str = "احفظ نسخة";
+    pub const EXPORT_SAVED_1: &str = "اتحفظت";
+    /// "اتحفظت 1200 حاجة في:".
+    pub fn export_saved(rows: u64) -> String {
+        format!("{EXPORT_SAVED_1} {} في:", super::count::count(rows, &super::count::THING))
+    }
+    /// "ادمج 12 تغيير".
+    pub fn import_apply(n: usize) -> String {
+        format!("{IMPORT_APPLY_1} {}", super::count::count(n, &super::count::CHANGE))
+    }
+    /// "تمام، اتدمج 12 تغيير. الجدول اتحدّث."
+    pub fn import_done(n: usize) -> String {
+        format!("{IMPORT_DONE_1} {}. الجدول اتحدّث.", super::count::count(n, &super::count::CHANGE))
+    }
+    /// "بس فيه 3 صفوف ما اتدمجوش (…)".
+    pub fn import_partial(n: usize) -> String {
+        let rest = IMPORT_PARTIAL_2.trim_start_matches("صف ");
+        format!("{IMPORT_PARTIAL_1} {} {rest}", super::count::count(n, &super::count::ROW))
+    }
+    pub const EXPORT_ANDROID_HINT: &str =
+        "تلاقيه من تطبيق الملفات أو من الكمبيوتر بالكابل، في Android/data/app.steps/files.";
+    pub const EXPORT_FAILED: &str = "ما عرفتش أحفظ النسخة:";
+    pub const EXPORT_SAVE_TO: &str = "احفظها في Downloads أو Drive";
+    pub const EXPORT_SAVING: &str = "اختار مكان النسخة…";
+    pub const EXPORT_SAVED_AS: &str = "اتحفظت برّه التطبيق باسم";
+    pub const EXPORT_SAVED_OUT: &str = "اتحفظت في المكان اللي اخترته.";
+    pub const EXPORT_SAVE_CANCELLED: &str = "ما اخترتش مكان، النسخة لسه في فولدر التطبيق.";
+    pub const EXPORT_SAVE_FAILED: &str = "ما عرفتش أنقلها، النسخة لسه في فولدر التطبيق.";
+    pub const IMPORT_TITLE: &str = "استرجع نسخة";
+    pub const IMPORT_FOUND: &str = "نسخ لقيتها على الجهاز:";
+    pub const IMPORT_PICK: &str = "أو اختار ملف";
+    pub const IMPORT_PICK_FIRST: &str = "اختار ملف النسخة";
+    pub const IMPORT_PICKING: &str = "اختار الملف…";
+    pub const IMPORT_PICK_FAILED: &str = "ما عرفتش أفتح اختيار الملفات";
+    pub const IMPORT_COPY_FAILED: &str =
+        "ما عرفتش أفتح الملف ده، أو هو أكبر من نسخة Steps. اختار ملف steps-export.";
+    pub const IMPORT_TOO_BIG: &str = "الملف ده كبير أوي على إنه نسخة من Steps. اختار ملف steps-export.";
+    pub const IMPORT_PASTE: &str = "أو الزق النص";
+    pub const IMPORT_PASTED: &str = "نص ملزوق";
+    pub const IMPORT_READ: &str = "اقرا النص";
+    pub const IMPORT_FILE: &str = "الملف:";
+    pub const IMPORT_FROM: &str = "من جهاز";
+    pub const IMPORT_AT: &str = "اتعمل";
+    pub const IMPORT_NOTHING: &str = "كل اللي في النسخة دي موجود هنا بالفعل.";
+    pub const IMPORT_SAFE: &str = "الجديد هيتضاف، والأحدث هيحل محل القديم. مفيش حاجة هتتمسح.";
+    pub const IMPORT_APPLY_1: &str = "ادمج";
+    pub const IMPORT_CANCEL: &str = "إلغاء";
+    pub const IMPORT_BACK: &str = "رجوع";
+    pub const IMPORT_AGAIN: &str = "استرجع نسخة تانية";
+    pub const IMPORT_DONE_1: &str = "تمام، اتدمج";
+    pub const IMPORT_FAILED: &str = "ما عرفتش أقرا النسخة دي:";
+    pub const IMPORT_PARTIAL_1: &str = "بس فيه";
+    pub const IMPORT_PARTIAL_2: &str = "صف ما اتدمجوش (ناقصهم بيانات أو من نسخة أحدث من Steps). الباقي اتحفظ، وتقدر تجرب تاني بعد ما تحدّث التطبيق.";
+    pub const COL_WHAT: &str = "إيه";
+    pub const COL_IN_FILE: &str = "في الملف";
+    pub const COL_NEW: &str = "جديد";
+    pub const COL_NEWER: &str = "أحدث";
+    pub const T_REVIEWS: &str = "المراجعات";
+    pub const T_CHECKS: &str = "علاماتك على المحتوى";
+    pub const T_SETTINGS: &str = "الإعدادات";
+    pub const T_OWN: &str = "كروتك";
+}
+
+pub mod cloud {
+    pub const SECTION: &str = "المزامنة";
+    pub const SECTION_SUB: &str = "حسابك وأجهزتك";
+    pub const TITLE: &str = "المزامنة بين أجهزتك";
+    pub const NOT_CONFIGURED: &str = "المزامنة لسه ما اتفعّلتش في النسخة دي. مذاكرتك محفوظة على الجهاز، وتقدر تنقلها بنسخة احتياطية من «بياناتك».";
+    pub const SIGN_IN: &str = "سجّل دخول بجوجل";
+    pub const SIGNING_IN: &str = "كمّل تسجيل الدخول في المتصفح، وبعدين ارجع هنا.";
+    /// The browser page after Google sends him back (HTML).
+    pub const BROWSER_DONE: &str = "<h1>✓</h1><p>تمام، ارجع لـ Steps.</p>";
+    pub const BROWSER_CANCELLED: &str = "<p>ما اتسجلتش. ارجع لـ Steps وجرّب تاني.</p>";
+    /// The browser page's button back to the app (Android).
+    pub const BROWSER_BACK: &str = "ارجع لـ Steps";
+    /// Google said yes; Steps is finishing with the server.
+    pub const FINISHING: &str = "بيكمّل تسجيل الدخول…";
+    /// "من" in "من 3 دقايق".
+    pub const AGO: &str = "من";
+    pub const SIGNED_IN_AS: &str = "داخل بـ";
+    pub const SIGN_OUT: &str = "اخرج من الجهاز ده";
+    pub const CONNECTING: &str = "بيتصل";
+    pub const CATCHING_UP: &str = "بيجيب اللي فاتك";
+    pub const LIVE: &str = "متزامن";
+    pub const OFFLINE: &str = "مش متصل، هيحاول تاني لوحده";
+    pub const STOPPED: &str = "واقف";
+    pub const PENDING: &str = "تغيير مستني يترفع";
+    /// "3 تغييرات مستنية تترفع".
+    pub fn pending(n: u64) -> String {
+        match n {
+            1 => "تغيير واحد مستني يترفع".to_string(),
+            2 => "تغييرين مستنيين يترفعوا".to_string(),
+            _ if (3..=10).contains(&(n % 100)) => format!("{n} تغييرات مستنية تترفع"),
+            _ => format!("{n} {PENDING}"),
+        }
+    }
+    pub const LAST: &str = "آخر مزامنة";
+    pub const JUST_NOW: &str = "دلوقتي";
+    pub const DEVICES: &str = "أجهزتك";
+    pub const REFRESH: &str = "حدّث";
+    pub const THIS_DEVICE: &str = "الجهاز ده";
+    pub const DEVICE_OUT: &str = "خرج";
+    pub const NEVER_SYNCED: &str = "لسه ما اتزامنش";
+    pub const SIGN_OUT_DEVICE: &str = "خرّجه";
+    pub const LOADING: &str = "بيحمّل…";
+
+    pub const P_NOT_CONFIGURED: &str = "تسجيل الدخول لسه ما اتظبطش في النسخة دي.";
+    pub const P_NOT_ALLOWED: &str = "الحساب ده مش مسموح له. ادخل بالجيميل اللي متسجل في السيرفر.";
+    pub const P_CANCELLED: &str = "تسجيل الدخول اتلغى.";
+    pub const P_FAILED: &str = "تسجيل الدخول ما نجحش. جرّب تاني.";
+    pub const P_REMOTE: &str = "الجهاز ده اتخرّج من جهاز تاني. سجّل دخول تاني وقت ما تحب.";
+    pub const P_NETWORK: &str = "مش قادر يوصل للسيرفر دلوقتي. هيحاول تاني لوحده، ومذاكرتك محفوظة على الجهاز.";
+    pub const P_SIGN_IN_WAITING: &str = "جوجل وافقت، بس النت مش واصل لـ Steps دلوقتي. هيكمّل الدخول لوحده أول ما النت يرجع، أو دوس «جرّب دلوقتي».";
+    pub const TRY_NOW: &str = "جرّب دلوقتي";
+    pub const P_SERVER: &str = "السيرفر فيه مشكلة دلوقتي. هيحاول تاني لوحده.";
+    pub const P_OUTDATED: &str = "السيرفر أحدث من النسخة دي. حدّث Steps.";
+    pub const P_CLOCK: &str =
+        "ساعة الجهاز سابقة الوقت الحقيقي، فالتغييرات الجديدة مستنية. ظبط الساعة على التلقائي وهتتبعت لوحدها.";
+}
+
+pub mod settings {
+    pub const TITLE: &str = "الإعدادات";
+    pub const CLOSE: &str = "اقفل";
+    pub const BACK: &str = "رجوع";
+    pub const SECTIONS: &str = "أقسام الإعدادات";
+    pub const SEARCH: &str = "دوّر في الإعدادات";
+    pub const NO_RESULTS: &str = "مفيش قسم مناسب. جرّب كلمة تانية زي الخط أو التذكيرات.";
+    pub const CLEAR_SEARCH: &str = "امسح البحث";
+    pub const GROUP_STUDY: &str = "المذاكرة والتذكير";
+    pub const GROUP_DEVICE: &str = "الشكل والجهاز";
+    pub const GROUP_DATA: &str = "الحساب والبيانات";
+    pub const THIS_DEVICE: &str = "للجهاز ده بس";
+
+    pub const LOOK: &str = "الشكل";
+    pub const LOOK_SUB: &str = "الألوان، نمط الواجهة وحجمها";
+    pub const DATA: &str = "بياناتك";
+    pub const DATA_SUB: &str = "فين بتتحفظ، والتصدير";
+    pub const ABOUT: &str = "عن Steps";
+    pub const ABOUT_SUB: &str = "النسخة والمحتوى";
+
+    pub const THEME: &str = "الألوان";
+    pub const THEME_SYSTEM: &str = "زي الجهاز";
+    pub const THEME_SYSTEM_SUB: &str = "فاتح بالنهار، وغامق لما الجهاز يبقى غامق";
+    pub const THEME_PAPER: &str = "ورق";
+    pub const THEME_PAPER_SUB: &str = "فاتح وهادي";
+    pub const THEME_NIGHT: &str = "ليل";
+    pub const THEME_NIGHT_SUB: &str = "غامق";
+    pub const THEME_SYSTEM_BLACK: &str = "زي الجهاز، وبالليل أسود";
+    pub const THEME_SYSTEM_BLACK_SUB: &str = "فاتح بالنهار، وأسود خالص لما الجهاز يبقى غامق";
+    pub const THEME_BLACK: &str = "أسود AMOLED";
+    pub const THEME_BLACK_SUB: &str = "أسود خالص، فبكسلات شاشة الأموليد بتطفي: أريح للعين بالليل وبتوفّر بطارية";
+    pub const THEME_SHIFT: &str = "نبطشية";
+    pub const THEME_SHIFT_SUB: &str = "غامق ودافي من غير ضوء أزرق، للمذاكرة متأخر قبل النوم";
+
+    pub const APPEARANCE: &str = "نمط الواجهة";
+    pub const APPEARANCE_CALM: &str = "هادئ";
+    pub const APPEARANCE_CALM_SUB: &str = "أسطح سادة وهادية، من غير لمعة";
+    pub const APPEARANCE_GLOSSY: &str = "Glossy · Material You";
+    pub const APPEARANCE_GLOSSY_SUB: &str =
+        "أسطح ملونة فيها لمعة خفيفة وأزرار مدوّرة. ألوانها من ألوان Steps، مش من خلفية الموبايل";
+    pub const APPEARANCE_LIQUID_GLASS: &str = "Liquid Glass · iOS";
+    pub const APPEARANCE_LIQUID_GLASS_SUB: &str =
+        "خلفية وكروت زجاجية ناعمة وشريط تنقّل مطفي، مع الحفاظ على وضوح أسئلة المذاكرة";
+
+    pub const TEXT_SIZE: &str = "حجم الواجهة";
+    pub const TEXT_SMALLER: &str = "أصغر";
+    pub const TEXT_SMALL: &str = "صغير";
+    pub const TEXT_NORMAL: &str = "عادي";
+    pub const TEXT_LARGE: &str = "كبير";
+    pub const TEXT_LARGER: &str = "أكبر";
+    pub const TEXT_SAMPLE_AR: &str = "إيه أول علاج لـ";
+    pub const TEXT_SAMPLE_TERM: &str = "variceal bleeding";
+
+    pub const DATA_FOLDER: &str = "فولدر البيانات";
+    pub const DATA_NOWHERE: &str = "مش معروف على الجهاز ده";
+    pub const DATA_IN_BROWSER: &str =
+        "في المتصفح ده (IndexedDB). مسح بيانات الموقع بيمسحها، فخد نسخة احتياطية من فوق من وقت للتاني.";
+    pub const DATA_GROUP_BACKUP: &str = "احفظ ورجّع";
+    pub const DATA_GROUP_EXPORT: &str = "صدّر لبرّه";
+    pub const DATA_GROUP_DEVICE: &str = "على الجهاز ده";
+
+    pub const VERSION: &str = "النسخة";
+    pub const CONTENT: &str = "المحتوى";
+    pub const LECTURES_WRITTEN: &str = "المحاضرات المكتوبة:";
+    pub const SOURCE: &str = "المصدر";
+    pub const BOOK: &str =
+        "Internal Medicine Postgraduate Lectures, Alexandria Faculty of Medicine (2025), part 1";
+
+    pub const DIAG: &str = "اللي حصل من مشاكل";
+    pub const DIAG_EMPTY: &str = "مفيش مشاكل لحد دلوقتي.";
+    pub fn diag_lines(n: usize) -> String {
+        super::count::count(n, &super::count::LINE)
+    }
+    pub const DIAG_REFRESH: &str = "حدّث";
+    pub const DIAG_COPY: &str = "انسخ";
+    pub const DIAG_COPIED: &str = "اتنسخ";
+}
+
+pub mod update {
+    // Settings › Updates (crates/app/src/update/view.rs).
+    pub const SECTION: &str = "التحديثات";
+    pub const SECTION_SUB: &str = "نسخة جديدة ومحتوى جديد";
+    pub const BUILD: &str = "بناء";
+    /// "بناء 40 · محتوى 45" in the "what's new" sheet.
+    pub const CONTENT_SHORT: &str = "محتوى";
+
+    // Why updates are off here.
+    pub const OFF_DEV: &str =
+        "دي نسخة تطوير، فمش بتدوّر على تحديثات. النسخ اللي على الموبايل والتابلت والماك هي اللي بتتحدّث.";
+    pub const OFF_KEY: &str = "التحديثات لسه مش شغالة: مفتاح التوقيع لسه ما اتعملش. أول نسخة ألفا هتيجي بيه.";
+    pub const OFF_PLATFORM: &str = "مفيش تحديثات منشورة للجهاز ده.";
+    pub const OFF_BUNDLE: &str = "Steps شغال من فولدر البناء، مش من Steps.app، فمش هيتحدّث لوحده.";
+
+    // Where things stand.
+    pub const CHECKING: &str = "بيدوّر على تحديث…";
+    pub const CHECK_NOW: &str = "دوّر على تحديث";
+    pub const UP_TO_DATE: &str = "معاك آخر نسخة";
+    pub const NOT_FOR_DEVICE: &str = "فيه نسخة أحدث، بس لسه مش منشورة للجهاز ده.";
+    pub const AVAILABLE: &str = "فيه نسخة جديدة";
+    pub const DOWNLOAD: &str = "نزّلها";
+    pub const DOWNLOADING: &str = "بينزّل";
+    pub const READY: &str = "النسخة الجديدة جاهزة";
+    pub const INSTALL_NOW: &str = "ثبّتها";
+    pub const INSTALL_RESTART: &str = "ثبّتها وافتح تاني";
+    pub const INSTALLING: &str = "بيثبّت…";
+    pub const INSTALLING_ANDROID: &str = "أندرويد ممكن يسألك توافق. مذاكرتك محفوظة ومش هتضيع.";
+    pub const NEEDS_PERMISSION: &str = "أندرويد محتاج إذن \"تثبيت تطبيقات غير معروفة\" لـ Steps";
+    pub const OPEN_PERMISSION: &str = "افتح الإذن";
+    pub const TRY_AGAIN: &str = "جرّب تاني";
+    pub const INSTALLED: &str = "اتثبّتت";
+    pub const RESTART_NOW: &str = "افتح Steps تاني";
+    pub const NEXT_LAUNCH: &str = "النسخة الجديدة هتشتغل أول ما تفتح Steps تاني.";
+    pub const FAILED_NETWORK: &str = "مقدرش يوصل للتحديثات. هيجرّب تاني بعدين.";
+    pub const FAILED_VERIFY: &str = "التحديث ما عداش من الفحص، فما اتثبّتش. مفيش حاجة اتغيّرت.";
+    pub const FAILED_INSTALL: &str = "التثبيت ما كملش. النسخة اللي معاك شغالة زي ما هي.";
+    pub const TOO_NEW: &str = "التحديث ده محتاج نسخة أحدث من Steps. ثبّتها بإيدك مرة واحدة.";
+    pub const KEY_CHANGED: &str = "مفتاح نسخ التجربة اتغيّر، فالنسخة الجديدة مش هتتركّب فوق دي.";
+    /// What to do about it, once, without losing anything.
+    pub const KEY_CHANGED_STEPS: [&str; 4] = [
+        "احفظ نسخة من الإعدادات › بياناتك، واختار «احفظها في Downloads أو Drive».",
+        "امسح Steps من الموبايل.",
+        "نزّل آخر نسخة تجربة من الزرار ده وركّبها.",
+        "افتحها واسترجع النسخة من الإعدادات › بياناتك.",
+    ];
+    pub const GET_PREVIEW: &str = "نزّل آخر نسخة تجربة";
+    pub const LATER: &str = "بعدين";
+    pub const WHATS_NEW: &str = "الجديد";
+
+    // Settings › Updates: what is on this device, and one check for both.
+    pub const GROUP_HAVE: &str = "اللي على جهازك";
+    pub const ROW_APP: &str = "التطبيق";
+    pub const ROW_CONTENT: &str = "الدروس والأسئلة والشكل";
+    /// Before "من يومين": when the content in use was published.
+    pub const CONTENT_PUBLISHED: &str = "اتنشر";
+    pub const GROUP_CHECK: &str = "البحث عن تحديث";
+    pub const LAST_CHECK: &str = "آخر مرة دوّرنا";
+    /// The Settings list's Updates line.
+    pub const SUMMARY_CONTENT_WAITING: &str = "دروس جديدة نزلت وهتفتح لوحدها";
+    pub const SUMMARY_FAILED: &str = "آخر بحث ما وصلش، هيجرّب تاني";
+    pub const NEVER_CHECKED: &str = "لسه ما دوّرناش على الجهاز ده";
+    /// The two halves of a check's result.
+    pub const RESULT_APP: &str = "التطبيق";
+    pub const RESULT_CONTENT: &str = "الدروس والأسئلة";
+    pub const CONTENT_CURRENT: &str = "معاك آخر محتوى";
+    pub const CONTENT_NEW: &str = "فيه محتوى جديد نزل، وهيفتح لوحده أول ما تخلّص اللي بتذاكره";
+    pub const CONTENT_FAILED: &str = "مقدرش يجيب المحتوى الجديد دلوقتي، هيجرّب تاني بعدين";
+
+    // Mode and channel.
+    pub const MODE: &str = "إزاي يتحدّث";
+    pub const MODE_AUTO: &str = "لوحده";
+    pub const MODE_AUTO_SUB: &str = "ينزّل على الواي فاي ويثبّت في وقت هادي، عمره ما يقطع مذاكرة.";
+    pub const MODE_NOTIFY: &str = "قولّي الأول";
+    pub const MODE_NOTIFY_SUB: &str = "يقولك إن فيه نسخة جديدة، وإنت تختار امتى.";
+    pub const MODE_OFF: &str = "لأ";
+    pub const MODE_OFF_SUB: &str = "بس لما تدوس \"دوّر على تحديث\".";
+    pub const CHANNEL: &str = "القناة";
+    pub const ALPHA: &str = "ألفا";
+    pub const BETA: &str = "بيتا";
+    pub const STABLE: &str = "ثابتة";
+    pub const PREVIEW: &str = "تجربة";
+    pub const PREVIEW_CHANNEL_NOTE: &str = "نسخة التجربة بتنزل مع كل تعديل، فممكن تلاقي فيها حاجة لسه مش مظبوطة. على الماك هيوصلك منها المحتوى بس. ترجع للألفا وقت ما تحب.";
+    pub const MB: &str = "ميجا";
+
+    // The notifications Android shows around an install.
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const DONE_TITLE: &str = "Steps اتحدّث";
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const DONE_BODY: &str = "افتحه وكمّل من مكانك.";
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const READY_TITLE: &str = "تحديث Steps جاهز: دوس عشان تثبّته";
+    /// The Android channel those two notifications go to.
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const INSTALL_CHANNEL: &str = "تحديثات Steps";
+    #[cfg_attr(not(target_os = "android"), allow(dead_code))]
+    pub const INSTALL_CHANNEL_SUB: &str = "تحديث جاهز يتثبّت، و Steps اتحدّث";
+    // The "new version" notification, and its switch.
+    pub const NOTICE_AVAILABLE: &str = "نزلت نسخة جديدة من Steps";
+    pub const NOTICE_READY: &str = "نسخة Steps الجديدة جاهزة تتثبّت";
+    pub const NOTICE_INSTALLED: &str = "نسخة Steps الجديدة اتحطّت";
+    pub const NOTICE_TAP_AVAILABLE: &str = "دوس تشوف الجديد وتنزّلها.";
+    pub const NOTICE_TAP_READY: &str = "اتنزّلت واتفحصت. دوس عشان تثبّتها.";
+    pub const NOTICE_CHANNEL: &str = "نسخ Steps الجديدة";
+    pub const NOTICE_CHANNEL_SUB: &str = "نسخة جديدة نزلت، وإيه الجديد فيها";
+    pub const NOTIFY: &str = "ابعتلي إشعار أول ما تنزل نسخة جديدة";
+    /// "وحاجتين كمان", "و5 حاجات كمان".
+    pub fn notice_more(n: usize) -> String {
+        format!("و{} كمان", super::count::count(n, &super::count::THING))
+    }
+
+    // The "what's new" sheet (crates/app/src/update/sheet.rs).
+    pub const WHATS_NEW_ASK: &str = "إيه الجديد؟";
+    pub const HISTORY: &str = "سجل التغييرات";
+    pub const HISTORY_EMPTY: &str = "لسه مفيش تغييرات متسجّلة. هتظهر هنا مع أول تحديث.";
+    pub const UPDATED_TITLE: &str = "Steps اتحدّثت";
+    /// A content-only update: the app itself didn't change (#336).
+    pub const CONTENT_UPDATED_TITLE: &str = "تحديث محتوى";
+    /// The quiet card on Today after a content-only update.
+    pub const CONTENT_NOTE: &str = "الدروس اتحدّثت";
+    pub const KIND_NEW: &str = "جديد";
+    pub const KIND_IMPROVED: &str = "اتحسّن";
+    pub const KIND_FIXED: &str = "اتصلّح";
+    pub const BADGE_LATEST: &str = "الأحدث";
+    pub const BADGE_INSTALLED: &str = "اللي معاك";
+    /// The content-only update in use, next to the app build he runs (#349).
+    pub const BADGE_CONTENT_IN_USE: &str = "المحتوى اللي معاك";
+    pub const BADGE_NEW: &str = "جديد عليك";
+    /// A content-only update: lectures, lessons or the look, no install.
+    pub const BADGE_CONTENT: &str = "تحديث محتوى";
+    pub const TODAY: &str = "النهارده";
+    pub const YESTERDAY: &str = "امبارح";
+    pub const TWO_DAYS_AGO: &str = "من يومين";
+    pub const DAYS_AGO: &str = "من {n} أيام";
+    pub const SHOW_ALL: &str = "اعرض الكل ({n})";
+    pub const SHOW_LESS: &str = "اعرض أقل";
+    pub const EARLIER: &str = "نسخ قبل كده";
+    pub const SHOW_OLDER: &str = "اعرض الأقدم";
+    pub const CLOSE: &str = "اقفل";
+    pub const GOT_IT: &str = "تمام";
+    pub const NO_DETAILS: &str = "النسخة دي مفيهاش تفاصيل مكتوبة.";
+    pub const MONTHS: [&str; 12] = [
+        "يناير",
+        "فبراير",
+        "مارس",
+        "أبريل",
+        "مايو",
+        "يونيو",
+        "يوليو",
+        "أغسطس",
+        "سبتمبر",
+        "أكتوبر",
+        "نوفمبر",
+        "ديسمبر",
+    ];
+
+    /// "3 new builds", with Arabic's dual and plural.
+    pub fn builds_count(n: usize) -> String {
+        match n {
+            1 => "نسخة جديدة".to_owned(),
+            2 => "نسختين جداد".to_owned(),
+            3..=10 => format!("{n} نسخ جديدة"),
+            _ => format!("{n} نسخة جديدة"),
+        }
+    }
+
+    /// The same count for content-only updates: no new app came (#349).
+    pub fn content_updates_count(n: usize) -> String {
+        match n {
+            1 => "تحديث محتوى".to_owned(),
+            2 => "تحديثين محتوى".to_owned(),
+            3..=10 => format!("{n} تحديثات محتوى"),
+            _ => format!("{n} تحديث محتوى"),
+        }
+    }
+}
+
+pub mod sound {
+    pub const TITLE: &str = "الأصوات والاهتزاز";
+    pub const SOUNDS: &str = "الأصوات";
+    pub const ON: &str = "شغّالة";
+    pub const OFF: &str = "مقفولة";
+    pub const RIGHT: &str = "صوت الإجابة الصح";
+    pub const END: &str = "نغمة آخر الجلسة";
+    pub const VARIATION: &str = "صوت";
+    pub const VIBRATE: &str = "الاهتزاز";
+}
+
+pub mod remind {
+    pub const TITLE: &str = "Steps";
+    pub const SECTION: &str = "التذكير";
+    pub const SECTION_SUB: &str = "تذكير هادي بمراجعة اليوم";
+    /// Android's notification channel, as Settings › Notifications lists it.
+    pub const CHANNEL: &str = "تذكير المذاكرة";
+    pub const CHANNEL_ABOUT: &str = "تذكير هادي بمراجعة اليوم";
+    pub const PHONE_ONLY: &str =
+        "التذكير بيرن من تطبيق Steps المتثبّت على الموبايل أو الماك، مش من نسخة التطوير.";
+    pub const MAC_HINT: &str =
+        "على الماك الإشعار بيظهر حتى لو Steps مقفولة. لو ما ظهرش، اسمح لـ Steps من إعدادات النظام › الإشعارات.";
+    pub const DAILY: &str = "تذكير المذاكرة اليومي";
+    pub const ON: &str = "شغّال";
+    pub const OFF: &str = "مقفول";
+    pub const TIMES: &str = "المواعيد";
+    pub const TIME: &str = "معاد التذكير";
+    pub const ADD: &str = "زوّد معاد";
+    pub const REMOVE: &str = "شيل";
+    pub const HERE: &str = "يرن على الجهاز ده";
+    pub const BLOCKED: &str = "الإشعارات مقفولة لـ Steps، فالتذكير مش هيظهر.";
+    pub const ALLOW: &str = "اسمح بالإشعارات";
+    pub const OPEN_NOTIFICATIONS: &str = "افتح إعدادات الإشعارات";
+    pub const BATTERY: &str =
+        "لو التذكير ما رنّش، خلّي البطارية لـ Steps «من غير قيود» عشان الموبايل ما ينيّمهاش.";
+    pub const OPEN_APP: &str = "افتح إعدادات التطبيق";
+
+    /// The reminder line, with the reviews due that day when known.
+    pub fn text(due: Option<u32>) -> String {
+        match due {
+            Some(0) | None => "وقت جلسة قصيرة. كارت واحد أحسن من مفيش.".into(),
+            Some(1) => "عندك مراجعة واحدة النهارده. دقيقة وتخلص.".into(),
+            Some(n) => format!(
+                "عندك {} النهارده. يلا نبدأ بجلسة قصيرة.",
+                super::count::count(n, &super::count::REVIEW)
+            ),
+        }
+    }
+}
+
+pub mod onboard {
+    pub const TITLE: &str = "أهلاً في Steps";
+    pub const BACK: &str = "رجوع";
+    pub const PICK_FUTURE: &str = "اختار يوم بعد النهارده.";
+    pub const PICK_FAR: &str = "اختار يوم في خلال 3 سنين من النهارده.";
+    pub const DAYS_TITLE: &str = "بتذاكر أنهي أيام في الأسبوع؟";
+    pub const DAYS_BODY: &str = "الخطة والتذكير هيمشوا على الأيام دي بس. أيام الراحة راحة.";
+    pub const PICK_A_DAY: &str = "اختار يوم واحد على الأقل.";
+    pub const MINUTES_TITLE: &str = "قد إيه في اليوم؟";
+    pub const STUDIED_TITLE: &str = "ذاكرت أنهي محاضرات قبل كده؟";
+    pub const STUDIED_BODY: &str = "علّم اللي قريته قبل كده. لو مفيش، كمّل عادي.";
+    pub const ALL: &str = "كلهم";
+    pub const NONE: &str = "ولا واحدة";
+    pub const UP_TO_HERE: &str = "لحد هنا";
+    pub const REMIND_TITLE: &str = "أفكّرك إمتى؟";
+    pub const REMIND_BODY: &str = "إشعار هادي فيه عدد المراجعات المستنياك. بيرن على الموبايل بس.";
+    pub const ADD_TIME: &str = "زوّد معاد";
+    pub const REMOVE: &str = "شيل";
+    pub const NO_REMINDERS: &str = "من غير تذكير. تقدر تشغّله بعدين من الإعدادات.";
+    pub const THEME_TITLE: &str = "تحب الألوان إزاي؟";
+    pub const THEME_BODY: &str = "«نبطشية» غامق ودافي، للمذاكرة بالليل.";
+    pub const REOPEN_TITLE: &str = "أسئلة البداية";
+    pub const REOPEN: &str = "افتحها تاني";
+
+    // The 2026-10-29 redesign: three quick screens, details optional.
+    pub fn progress(n: usize, of: usize) -> String {
+        format!("البداية · {n} من {of}")
+    }
+    pub const LATER: &str = "بعد كده";
+    pub const CONTINUE: &str = "كمّل";
+    pub const WELCOME_TITLE: &str = "مذاكرة تناسب يومك.";
+    pub const WELCOME_BODY: &str = "درس قصير، محاولة تفتكر، ومراجعة تثبّت الفهم.";
+    pub const WELCOME_NOTE: &str =
+        "الفهم والتذكّر وتدريب الأسئلة، كل واحد له مكانه. والكتاب هو المرجع في الامتحان.";
+    pub const TIME_TITLE: &str = "خلّي البداية على قد وقتك.";
+    pub const TIME_BODY: &str = "كل جلسة صغيرة وتخلص. تقدر تغيّر ده بعدين.";
+    pub const EXAM_OPTIONAL: &str = "يوم الامتحان (لو تعرفه)";
+    pub const EXAM_HINT: &str = "بيوزّع المحاضرات والمراجعة على الأيام اللي فاضلة.";
+    pub const READY_TITLE: &str = "كده جاهز تبدأ.";
+    pub const READY_BODY: &str = "اختياراتك تتعدّل في أي وقت. ودي حاجات اختيارية لو حابب تظبطها دلوقتي:";
+    pub const START_LESSON: &str = "ابدأ أول درس";
+    pub const START_TODAY: &str = "افتح النهارده";
+    pub const DETAIL_DONE: &str = "تمام";
+    pub const DAYS_ROW: &str = "أيام المذاكرة";
+    pub fn days_sub(n: usize) -> String {
+        match n {
+            7 => "كل أيام الأسبوع".to_string(),
+            1 => "يوم واحد في الأسبوع".to_string(),
+            2 => "يومين في الأسبوع".to_string(),
+            n => format!("{n} أيام في الأسبوع"),
+        }
+    }
+    pub const STUDIED_ROW: &str = "اللي ذاكرته قبل كده";
+    pub fn studied_sub(n: usize) -> String {
+        match n {
+            0 => "ولا محاضرة لسه".to_string(),
+            1 => "محاضرة واحدة".to_string(),
+            2 => "محاضرتين".to_string(),
+            3..=10 => format!("{n} محاضرات"),
+            n => format!("{n} محاضرة"),
+        }
+    }
+    pub const REMIND_ROW: &str = "التذكير";
+    pub const REMIND_OFF: &str = "من غير تذكير";
+    pub const THEME_ROW: &str = "الألوان";
+}
+
+pub mod recap {
+    pub const OPEN_PROGRESS: &str = "افتح تقدّمي";
+    /// Between list items and clauses.
+    pub const COMMA: &str = "، ";
+    use super::count::{DAY, NEW_THING, QUESTION, REVIEW, count};
+
+    pub const DONE_REST: &str = "مراجعة النهارده خلصت، استريح.";
+    pub const WEEK_TITLE: &str = "آخر 7 أيام";
+    pub const WEEK_RETENTION: &str = "بتفتكر صح:";
+    pub const WEEK_WEAK: &str = "يستاهلوا رجوع:";
+
+    /// "النهارده جاوبت 12 سؤال".
+    pub fn answered(n: usize) -> String {
+        format!("النهارده جاوبت {}", count(n, &QUESTION))
+    }
+
+    /// "واتعلمت حاجتين جداد".
+    pub fn learned(n: u32) -> String {
+        format!("واتعلمت {}", count(n, &NEW_THING))
+    }
+
+    pub fn done_rest(tomorrow: u32) -> String {
+        match tomorrow {
+            0 => DONE_REST.to_string(),
+            n => format!("{DONE_REST} بكرة عندك {}.", count(n, &REVIEW)),
+        }
+    }
+
+    pub fn left(n: usize) -> String {
+        format!("فاضل {} لو عندك وقت، ولو لأ بكرة موجودة.", count(n, &REVIEW))
+    }
+
+    /// "اتعلمت 10 حاجات جديدة في 3 أيام."
+    pub fn week_learned(learned: u32, days: usize) -> String {
+        format!("اتعلمت {} في {}.", count(learned, &NEW_THING), count(days, &DAY))
+    }
+
+    pub fn exam_in(days: i32) -> String {
+        match days {
+            ..=0 => "الامتحان النهارده. بالتوفيق.".to_string(),
+            n => format!("فاضل على الامتحان {}.", count(n, &DAY)),
+        }
+    }
+}
+
+pub mod learn {
+    pub const NONE_YET: &str = "الدروس لسه بتتكتب. أول ما درس يجهز هتلاقيه هنا.";
+    pub const OF: &str = "من";
+    pub const START_FIRST: &str = "ابدأ أول درس";
+    pub const CONTINUE: &str = "كمّل";
+    pub const ALL_LESSONS_DONE: &str = "خلّصت كل الدروس المكتوبة. عاش!";
+    pub const UNVERIFIED_NOTE: &str =
+        "الدروس لسه ما اتراجعتش: الكتاب هو المرجع، ولو لقيت حاجة مش مظبوطة قولّي.";
+    pub const WRITING: &str = "بتتكتب";
+    pub const PAGES: &str = "صفحات";
+    pub const NEW: &str = "جديد";
+    pub const EXPLAIN: &str = "اشرحهولي";
+    pub const EXPLAIN_HINT: &str = "افتح الدرس اللي بيشرح السؤال ده";
+    pub const OPEN_LECTURE: &str = "افتح المحاضرة";
+
+    pub const CLOSE: &str = "اقفل الدرس";
+    pub const PROGRESS_LABEL: &str = "موضعك في الدرس";
+    pub const NAV_REQUIRED: &str = "كمّل المطلوب في الخطوة دي أو اختار «عدّي الخطوة دي» عشان تكمل.";
+    pub const VIEW_TITLE: &str = "شكل الدرس";
+    pub const VIEW_STEPS: &str = "خطوات";
+    pub const VIEW_STEPS_HINT: &str = "زرار «كمّل» كبير تحت";
+    pub const VIEW_PAGES: &str = "صفحات";
+    pub const VIEW_PAGES_HINT: &str = "زي الكتاب، بتقلب الصفحة";
+    pub const TO_PAGES: &str = "اعرض الدرس صفحات زي الكتاب";
+    pub const TO_STEPS: &str = "اعرض الدرس خطوات";
+    pub const PAGE_OF: &str = "صفحة";
+    pub const OF_N: &str = "من";
+    pub const BACK: &str = "رجوع";
+    pub const NEXT: &str = "كمّل";
+    pub const FINISH: &str = "خلّصت";
+    pub const SKIP: &str = "عدّي الخطوة دي";
+
+    pub const THINK: &str = "فكّر الأول";
+    pub const THINK_HINT: &str = "قول الإجابة في دماغك، وبعدين اكشف.";
+    pub const REVEAL: &str = "اكشف";
+    pub const SHOW_ALL: &str = "اكشف الكل";
+    pub const MNEMONIC: &str = "احفظها كده";
+    pub const ZOOM_IN: &str = "كبّر الرسمة";
+    pub const ZOOM_OUT: &str = "صغّر الرسمة";
+    pub const ZOOM_FIT: &str = "على قد الشاشة";
+    pub const ZOOM_CLOSE: &str = "اقفل الصورة";
+    pub const ZOOM_HINT: &str = "قرّب بصباعين أو بالزراير، ودوس مرتين علشان تكبّر أو ترجع.";
+    pub const TIP: &str = "نصيحة";
+    pub const EXAM: &str = "الممتحن بيحب دي";
+    pub const TRAP: &str = "خلّي بالك";
+    pub const ANALOGY: &str = "تخيّل كده";
+    pub const JOKE: &str = "تحشيشة";
+    pub const UPDATE: &str = "تحديث من الجايدلاين";
+    pub const BOOK_WINS: &str = "في الامتحان اكتب إجابة الكتاب.";
+
+    pub const CHECK: &str = "سؤال سريع";
+    pub const ORDER: &str = "رتّب";
+    pub const UNDO: &str = "تراجع";
+    pub const REMOVE: &str = "شيل";
+    pub const MARK_MINE_RIGHT: &str = "✓ اختيارك";
+    pub const MARK_MINE_WRONG: &str = "✗ اختيارك";
+    pub const MARK_RIGHT: &str = "✓ الصح";
+    pub const KEY: &str = "الإجابة الصح";
+    pub const RETRY: &str = "حاول تاني";
+    pub const MATCH: &str = "وصّل";
+    pub const MATCH_HINT: &str = "اختار من الشمال، وبعدين اللي يناسبه من اليمين.";
+    pub const SORT: &str = "صنّف";
+    pub const SORT_HINT: &str = "اسحب كل كارت لخانته، أو دوس عليه وبعدين على الخانة.";
+    pub const SORT_PICKED: &str = "تمام، دلوقتي دوس على الخانة اللي تناسبه.";
+    pub const SORT_DROP: &str = "حطّه هنا";
+    pub const SORT_EMPTY: &str = "لسه فاضية";
+    pub const CASE: &str = "حالة صغيرة";
+    pub const CASE_NEXT: &str = "اللي بعده";
+    pub const CASE_SHOW: &str = "اكشف";
+    pub const TABLE_HINT: &str = "فيه خانات مستخبية: فكّر فيها ودوس علشان تتأكد.";
+    pub const CHECK_IT: &str = "صحّح";
+    pub const RIGHT: &str = "صح كده! 👏";
+    pub const NOT_QUITE: &str = "قريب، بس مش دي.";
+
+    pub const TRY: &str = "جرّب بنفسك";
+    pub const TRY_OF: &str = "كارت";
+    pub const TRY_DONE: &str = "تمام كده ✓";
+
+    pub const DONE_TITLE: &str = "خلّصت الدرس";
+    pub const FIRST_TRY: &str = "صح من أول مرة";
+    pub const RECAP: &str = "الخلاصة";
+    pub const PRACTICE: &str = "راجع كروت الدرس";
+    pub const NEXT_LESSON: &str = "الدرس الجاي";
+    pub const BACK_TO_LIST: &str = "رجوع للدروس";
+
+    pub fn placed_of(k: usize, n: usize) -> String {
+        format!("اخترت {k} من {n}")
+    }
+
+    pub fn slot(n: usize) -> String {
+        format!("الخطوة رقم {n}")
+    }
+
+    pub fn should_be(n: usize) -> String {
+        format!("مكانها رقم {n}")
+    }
+
+    pub fn sort_left(left: usize, n: usize) -> String {
+        format!("فاضل {left} من {n}")
+    }
+
+    pub fn in_place(right: usize, n: usize) -> String {
+        format!("{right} من {n} في مكانهم.")
+    }
+
+    pub fn misses(n: usize) -> String {
+        if n == 1 {
+            "وصّلتهم كلهم، بغلطة واحدة في السكة.".into()
+        } else {
+            match super::count::count(n, &super::count::MISTAKE) {
+                m if n == 2 => format!("وصّلتهم كلهم، ب{m} في السكة."),
+                m => format!("وصّلتهم كلهم، بـ {m} في السكة."),
+            }
+        }
+    }
+
+    pub fn score_line(right: u32, asked: u32) -> &'static str {
+        if right == asked {
+            "ولا غلطة. الدرس ده بقى بتاعك."
+        } else if right * 2 >= asked {
+            "كويس جدًا. اللي غلطت فيه هيرجعلك في المراجعة."
+        } else {
+            "عادي جدًا من أول مرة، ده درس جديد. الكروت هتثبّته."
+        }
+    }
+
+    // The 2026-10-29 redesign of the list.
+    pub const HEAD: &str = "دروس قصيرة، وفهم أعمق";
+    pub const SEARCH: &str = "محاضرة، موضوع، أو كلمة…";
+    pub const SEARCH_LABEL: &str = "دوّر في الدروس";
+    pub const CLEAR_SEARCH: &str = "امسح البحث";
+    pub fn no_match(q: &str) -> String {
+        format!("مفيش درس فيه «{q}». جرّب كلمة تانية أو اسم المحاضرة بالإنجليزي.")
+    }
+    /// `كبد › المحاضرة 3`: the course, then the lecture's number in it.
+    pub fn lecture_n(course: &str, n: &str) -> String {
+        format!("{course} › المحاضرة {n}")
+    }
+    pub fn lessons_n(n: usize) -> String {
+        match n {
+            1 => "درس واحد".to_string(),
+            2 => "درسين".to_string(),
+            3..=10 => format!("{n} دروس"),
+            _ => format!("{n} درس"),
+        }
+    }
+    /// "2 من 5 خلّصتهم".
+    pub fn done_of(done: usize, total: usize) -> String {
+        format!("{done} من {total} خلّصتهم")
+    }
+    pub const LECTURE_PAGE: &str = "صفحة المحاضرة";
+    pub const OTHER_LECTURES: &str = "محاضرات تانية";
+    pub const COURSE_NO_LESSONS: &str =
+        "دروس المقرر ده لسه بتتكتب. محاضراته تحت، وكل واحدة بتفتح صفحتها بالكروت وصفحات الكتاب.";
+    pub const SEARCH_ALL_COURSES: &str = "دوّر في كل المقررات";
+    pub const SHOW_LECTURE: &str = "اعرض دروس المحاضرة دي";
+    pub const STATE_CURRENT: &str = "كمّل";
+    pub const STATE_NEXT: &str = "الجاي";
+    pub const STATE_NEW: &str = "جديد";
+    pub const STATE_DONE: &str = "خلّصته";
+    /// "خطوة 3 من 9".
+    pub fn step_of(at: usize, n: usize) -> String {
+        format!("خطوة {at} من {n}")
+    }
+    pub const NOW_KICKER: &str = "الدرس الحالي";
+    pub const NEXT_KICKER: &str = "الدرس الجاي";
+    /// The Lessons list's card back to the lesson left part-way.
+    pub const LEFT_OFF_KICKER: &str = "كمّل من حيث وقفت";
+    /// After a lecture's lesson counts, when one of them is part-way.
+    pub const LESSON_STARTED: &str = "فيه درس بدأته";
+    /// Under the picked lecture's Continue button: "هتكمّل من خطوة 4 من 9".
+    pub fn resume_at(at: usize, n: usize) -> String {
+        format!("هتكمّل من خطوة {at} من {n}")
+    }
+}
+
+/// The view switcher on list screens (parts::ViewBar).
+pub mod views {
+    pub const LAYOUT_TITLE: &str = "طريقة العرض";
+    pub const CARDS: &str = "كروت";
+    pub const LIST: &str = "قايمة";
+    pub const COMPACT: &str = "قايمة مضغوطة";
+    pub const SORT_TITLE: &str = "رتّب حسب";
+    pub const SORT_BOOK: &str = "ترتيب الكتاب";
+    pub const SORT_LEFT: &str = "اللي فاضل الأول";
+    pub const SORT_NAME: &str = "بالاسم";
+    pub const SORT_DUE: &str = "المستحق الأول";
+    pub const GROUPED: &str = "قسّمها حسب المحاضرة";
+    pub const GROUPED_SHORT: &str = "مقسّمة";
+    pub const CLOSE_MENU: &str = "اقفل القايمة";
+}
+
+pub mod courses {
+    pub const TITLE: &str = "المقررات";
+    pub const ACTIVE: &str = "الترم ده";
+    pub const MAINTENANCE: &str = "صيانة";
+    pub const ARCHIVED: &str = "أرشيف";
+    pub const LATER: &str = "لسه";
+    pub const ACTIVE_HINT: &str = "اللي بتذاكره دلوقتي.";
+    pub const MAINTENANCE_HINT: &str = "خلص امتحانه. مراجعات خفيفة عشان يفضل حاضر لامتحان آخر الماستر.";
+    pub const ARCHIVED_HINT: &str = "مستخبي من اليوم، بس موجود في المراجع وفي ملف Anki.";
+    pub const LATER_HINT: &str = "ترم جاي. أول ما كتابه يوصل، المحاضرات بتاعته تظهر هنا.";
+    pub const G_GENERAL: &str = "General Principles";
+    pub const G_SYSTEMS: &str = "Organ Systems";
+    pub const STATUS: &str = "المقرر ده فين؟";
+    pub const OPEN_LECTURES: &str = "افتح المحاضرات";
+    pub const NO_CONTENT: &str = "لسه مفيش محاضرات. هتنزل لما المنهج يوصل.";
+    pub const ALL: &str = "كل المقررات";
+    pub const PICK_TITLE: &str = "تذاكر إيه دلوقتي؟";
+    pub const MAP_LINK: &str = "خريطة المقررات والساعات";
+
+    pub fn chip_label(name: &str) -> String {
+        format!("المقرر المعروض: {name}. دوس عشان تبدّل")
+    }
+    use super::count::{CARD, COURSE, CREDIT_HOUR, HOUR, LECTURE, LESSON, count, count_text};
+
+    pub fn all_sub(courses: usize) -> String {
+        format!("{} مع بعض", count(courses, &COURSE))
+    }
+    /// "3 من 12 درس", "1 من درسين".
+    pub fn lessons_done(done: usize, all: usize) -> String {
+        format!("{done} من {}", count(all, &LESSON))
+    }
+    pub fn lectures_only(n: usize) -> String {
+        format!("{}، الدروس جاية", count(n, &LECTURE))
+    }
+
+    /// "42 ساعة معتمدة في 9 مقررات".
+    pub fn hours_line(total: &str, courses: usize) -> String {
+        format!("{} في {}", count_text(total, &CREDIT_HOUR), count(courses, &COURSE))
+    }
+    pub fn hours_done(h: &str) -> String {
+        format!("{} خلصت امتحانها", count_text(h, &HOUR))
+    }
+    /// "7 ساعات بتذاكرها الترم ده".
+    pub fn hours_now(h: &str) -> String {
+        format!("{} بتذاكرها الترم ده", count_text(h, &HOUR))
+    }
+    pub fn tile_line(short: &str, hours: &str) -> String {
+        format!("{short} · {hours} س")
+    }
+    pub fn semester(n: u32) -> String {
+        format!("ترم {n}")
+    }
+    pub fn content_line(written: usize, lectures: usize, items: usize, lessons: usize) -> String {
+        format!(
+            "{} · {} · {}",
+            ready_lectures(written, lectures),
+            count(items, &CARD),
+            count(lessons, &LESSON)
+        )
+    }
+    /// "مكتوب 3 من 12 محاضرة".
+    pub fn ready_lectures(written: usize, total: usize) -> String {
+        format!("مكتوب {written} من {}", count(total, &LECTURE))
+    }
+}
+
+#[cfg(test)]
+mod grammar_tests {
+    use super::*;
+
+    /// Mohamed's screenshot read "7 ساعة بتذاكرها" (2026-11-02).
+    #[test]
+    fn course_map_lines_agree() {
+        assert_eq!(courses::hours_now("7"), "7 ساعات بتذاكرها الترم ده");
+        assert_eq!(courses::hours_now("2"), "ساعتين بتذاكرها الترم ده");
+        assert_eq!(courses::hours_now("12"), "12 ساعة بتذاكرها الترم ده");
+        assert_eq!(courses::hours_done("0"), "0 ساعة خلصت امتحانها");
+        assert_eq!(courses::hours_line("42", 9), "42 ساعة معتمدة في 9 مقررات");
+        assert_eq!(courses::hours_line("6", 2), "6 ساعات معتمدة في مقررين");
+        assert_eq!(courses::all_sub(9), "9 مقررات مع بعض");
+        assert_eq!(courses::all_sub(12), "12 مقرر مع بعض");
+        assert_eq!(courses::lessons_done(3, 7), "3 من 7 دروس");
+        assert_eq!(courses::lessons_done(3, 30), "3 من 30 درس");
+        assert_eq!(courses::lectures_only(5), "5 محاضرات، الدروس جاية");
+        assert_eq!(courses::ready_lectures(1, 2), "مكتوب 1 من محاضرتين");
+        assert_eq!(courses::content_line(3, 4, 120, 6), "مكتوب 3 من 4 محاضرات · 120 كارت · 6 دروس");
+    }
+
+    #[test]
+    fn other_counted_lines_agree() {
+        assert_eq!(today::exam_in(5), "فاضل 5 أيام على الامتحان");
+        assert_eq!(today::exam_in(40), "فاضل 40 يوم على الامتحان");
+        assert_eq!(today::plan_line(3, 4), "3 جديد + 4 مراجعات");
+        assert_eq!(stats::day_bar(5, 2), "5 دقايق، إجابتين");
+        assert_eq!(table::mark_each(2), "فاضل خانتين: علّم على كل واحدة عرفتها ولا لأ.");
+        assert_eq!(table::recalled(1, 12), "افتكرت 1 من 12 خانة.");
+        assert_eq!(order::moves_to_fix(2), "الترتيب قريب: نقل خطوتين بس بيظبطه.");
+        assert_eq!(learn::misses(2), "وصّلتهم كلهم، بغلطتين في السكة.");
+        assert_eq!(learn::misses(4), "وصّلتهم كلهم، بـ 4 غلطات في السكة.");
+        assert_eq!(update::notice_more(1), "وحاجة واحدة كمان");
+        assert_eq!(update::notice_more(4), "و4 حاجات كمان");
+        assert_eq!(cloud::pending(2), "تغييرين مستنيين يترفعوا");
+        assert_eq!(cloud::pending(14), "14 تغيير مستني يترفع");
+        assert_eq!(data::import_partial(3).split(" (").next().unwrap(), "بس فيه 3 صفوف ما اتدمجوش");
+        assert_eq!(study::enum_goal(8, 5), "فيه 8 نقط، ولو افتكرت 5 منهم تعدّي.");
+        assert_eq!(plan::days_left(40), "فاضل 40 يوم مذاكرة");
+        assert_eq!(anki::contents(12, 2), "12 محاضرة · سؤالين");
+    }
+}
+
+pub mod refs {
+    pub const TITLE: &str = "مراجعك";
+    pub const ADD_CARD: &str = "كارت جديد";
+    pub const SEARCH: &str = "دوّر في المحاضرات";
+    pub const SEARCH_HINT: &str = "دوّر على محاضرة أو موضوع…";
+    pub const LECTURES: &str = "المحاضرات";
+    pub const NO_MATCH: &str = "مفيش محاضرة أو موضوع بالاسم ده. جرّب كلمة إنجليزي من العنوان.";
+    pub const CHECKED: &str = "راجعت صحته";
+    pub const CHECKED_HINT: &str = "اللي علّمت عليه ✓ صح وإنت بتذاكر، من كل اللي في المحاضرة.";
+    pub const WRITING: &str = "لسه بتتكتب";
+    pub const STATUS: &str = "حالة المادة";
+    pub const STATUS_BODY: &str = "إنك تخلّص درس أو تجاوب صح مش معناه إن المحتوى اتراجع. صحة المحتوى بتتحسب بس من ✓ اللي إنت بتديها للكارت وإنت بتذاكر، والباقي فاضل unverified لحد ما تراجعه.";
+    pub const CHECKED_ALL: &str = "راجعت صحته في كل المحاضرات:";
+}
+
+pub mod lecture {
+    pub const BACK: &str = "رجوع";
+    pub const KICKER: &str = "المحاضرة";
+    pub const PAGES: &str = "صفحات";
+    pub const SLIDES: &str = "سلايدز";
+    pub const PROGRESS: &str = "اللي بدأته من المحاضرة";
+    pub const OF: &str = "من";
+    pub const STARTED: &str = "بدأتهم";
+    pub const DUE: &str = "مستحق";
+    pub const STUDY: &str = "ذاكر المحاضرة دي";
+    pub const REVIEW_DUE: &str = "راجع المستحق";
+    pub const WRITING: &str = "المحاضرة دي لسه بتتكتب. أول ما تجهز هتلاقي أسئلتها هنا.";
+    pub const LESSONS: &str = "الدروس";
+    pub const PRACTICE: &str = "اتمرّن";
+    pub const MCQS: &str = "سؤال اختيارات في البنك";
+    pub const CASES: &str = "حالة";
+    pub const TOPICS: &str = "المواضيع";
+    pub const CHECKED: &str = "صحة المحتوى: راجعت";
+}
+
+/// Shared preference write recovery.
+pub mod saving {
+    pub const FAILED: &str = "فيه إعدادات ما اتحفظتش. اختياراتك شغالة دلوقتي، بس ممكن تضيع لما تقفل التطبيق.";
+    pub const RETRY: &str = "حاول تحفظ تاني";
+    pub const TRY_AGAIN: &str = "حاول تاني";
+}

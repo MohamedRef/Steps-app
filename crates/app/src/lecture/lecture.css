@@ -1,0 +1,36 @@
+/* A lecture's page. Rows and tiles use the shared .tap look (main.css). */
+.lec-page { display: flex; flex-direction: column; gap: var(--sp-3); }
+.lec-top { display: flex; align-items: center; gap: var(--sp-2); }
+.lec-back span { font-size: var(--fs-lg); line-height: 1; }
+.lec-hero { gap: var(--sp-3); }
+.lec-head { display: flex; align-items: center; gap: var(--sp-3); min-width: 0; }
+.lec-head h1 { font-size: var(--fs-lg); }
+.lec-head .num {
+  flex: none;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.lec-due { color: var(--accent); font-weight: 600; }
+.lec-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+@media (max-width: 599.98px) { .lec-actions > .btn { flex: 1 1 10rem; } }
+.lec-section { display: flex; flex-direction: column; gap: var(--sp-2); }
+.lec-ways { display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: var(--sp-2); }
+.lec-way {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-3);
+  background: var(--surface);
+  border: 1px solid var(--line-soft, var(--line));
+  border-radius: var(--radius);
+}
+.lec-way-n { font-size: var(--fs-lg); font-weight: 700; font-variant-numeric: tabular-nums; color: var(--accent); }
+.lec-check { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-1); margin: 0; }

@@ -1,0 +1,276 @@
+/* Question bank and mock exams. Logical properties only; the medical text
+   (stem, options, why) is LTR inside the RTL app. */
+
+.bank { display: flex; flex-direction: column; gap: var(--sp-4); }
+.bank h2.label { font-size: var(--fs-sm); color: var(--muted); font-weight: 600; margin-block-start: var(--sp-2); }
+
+.chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+/* Lecture and topic titles can be longer than a phone is wide: let them wrap
+   inside the chip instead of running off the card. */
+.bank .chip { white-space: normal; overflow-wrap: anywhere; max-inline-size: 100%; text-align: start; line-height: 1.35; }
+.bank .chip.toggle { display: inline-flex; align-items: center; gap: var(--sp-2); }
+/* At most two lines; the full title is the chip's tooltip. */
+.chip-label { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; min-inline-size: 0; }
+.chip.toggle {
+  cursor: pointer;
+  min-block-size: var(--target);
+  padding-block: var(--sp-1);
+  padding-inline: var(--sp-3);
+  font-size: var(--fs-sm);
+  background: var(--surface);
+}
+.chip.toggle[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--text); font-weight: 600; }
+.chip .count { flex: none; color: var(--muted); font-variant-numeric: tabular-nums; }
+.chip.weak { background: var(--bad-soft); border-color: transparent; color: var(--text); }
+.chip.page { font-variant-numeric: tabular-nums; }
+
+
+.start-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-block-start: var(--sp-2); }
+
+
+/* ---------- setup ---------- */
+/* Cards keep their natural height in the scrolling column. */
+.bank-setup { display: flex; flex-direction: column; gap: var(--sp-4); }
+.bank-setup > * { flex-shrink: 0; }
+.bank-modes > button { padding-block: var(--sp-2); }
+.bank-preset { gap: var(--sp-3); padding: var(--sp-4); }
+.bank-preset > .chip { align-self: flex-start; }
+.bank-scope-tap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sp-1);
+  inline-size: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+.bank-scope { display: block; font-size: var(--fs-xl); font-weight: 700; line-height: 1.3; overflow-wrap: anywhere; }
+bdi.bank-scope { font-family: var(--font-latin); }
+@media (hover: hover) { .bank-scope-tap:hover .bank-scope { color: var(--accent); } }
+.bank-scope-tap:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: var(--radius); }
+.bank-count { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); flex-wrap: wrap; }
+.bank-sum { background: var(--soft); border-radius: var(--radius-control); padding: var(--sp-3) var(--sp-4); }
+.bank-sum strong { font-weight: 700; }
+.bank-go { inline-size: 100%; }
+.bank-customise { align-self: stretch; }
+.bank-customise[aria-expanded="true"] { border-color: var(--accent); color: var(--accent); }
+.bank-advanced { gap: var(--sp-2); }
+.bank-reset { align-self: flex-start; }
+.bank-empty { display: flex; flex-direction: column; gap: var(--sp-2); align-items: flex-start; }
+.bank-scope-note { color: var(--text); }
+
+/* ---------- history ---------- */
+.history { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
+.history-paper > summary { display: flex; align-items: center; gap: var(--sp-2); cursor: pointer; list-style: none; min-block-size: var(--row, 44px); }
+.history-paper > summary::-webkit-details-marker { display: none; }
+.history-paper > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: var(--radius-sm, 6px); }
+.history-paper[open] > summary { margin-block-end: var(--sp-2); }
+.history .grow { flex: 1; }
+.history .score, .history .pct { font-variant-numeric: tabular-nums; }
+.history .pct { font-weight: 700; min-inline-size: 3.5rem; text-align: end; }
+
+/* ---------- player ---------- */
+/* One column that may shrink below its content, so the navigator scrolls
+   inside the card instead of widening the page under 840px. */
+.bank-run { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); }
+.run-main { display: flex; flex-direction: column; gap: var(--sp-3); min-width: 0; }
+/* Pinned to the very top of `main.content`: it reaches up through the
+   scroller's top padding so nothing shows above it. */
+.run-sticky {
+  position: sticky;
+  inset-block-start: calc(-1 * var(--sp-4));
+  margin-block-start: calc(-1 * var(--sp-4));
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding-block: var(--sp-4) var(--sp-2);
+  background: var(--bg);
+}
+.run-head { display: flex; align-items: center; gap: var(--sp-3); }
+.run-head .run-count { font-weight: 600; font-size: var(--fs-sm); color: var(--muted); flex: none; }
+.run-leave { flex: none; inline-size: var(--target); block-size: var(--target); border: 0; border-radius: 50%; background: transparent; color: var(--text); font-size: 1.1rem; cursor: pointer; }
+@media (hover: hover) { .run-leave:hover { background: var(--accent-soft); } }
+.run-progress { flex: 1; }
+.run-sub { display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
+/* The next step sits at the foot of the scroller, above the nav bar, and
+   the last option can always scroll clear of it. */
+.run-foot {
+  position: sticky;
+  inset-block-end: calc(-1 * var(--sp-4));
+  margin-block-end: calc(-1 * var(--sp-4));
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding-block: var(--sp-3) var(--sp-4);
+  background: var(--bg);
+  border-block-start: 1px solid var(--line);
+}
+.run-hint { text-align: center; }
+.run-main-action { inline-size: 100%; }
+.run-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); justify-content: flex-end; }
+.run-actions .btn-primary { min-inline-size: 8rem; }
+
+.timer { block-size: 6px; border-radius: var(--radius-pill); background: var(--line); overflow: hidden; }
+.timer-fill {
+  block-size: 100%;
+  inline-size: 100%;
+  background: var(--accent);
+  animation-name: bank-drain;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes bank-drain { from { inline-size: 100%; } to { inline-size: 0%; } }
+
+.run-side { display: flex; flex-direction: column; gap: var(--sp-3); min-inline-size: 0; }
+.navigator { display: flex; gap: var(--sp-1); overflow-x: auto; padding: 3px; max-inline-size: 100%; scroll-padding-inline: var(--sp-4); }
+.nav-cell {
+  position: relative;
+  flex: none;
+  inline-size: var(--target);
+  block-size: var(--target);
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  cursor: pointer;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-latin);
+}
+.nav-cell[data-done="yes"] { background: var(--accent-soft); border-color: transparent; }
+.nav-cell[data-flag="yes"] { box-shadow: inset 0 -3px 0 var(--accent); }
+/* Flagged is a glyph as well as the bar, so it shows without colour. */
+.nav-flag { position: absolute; inset-block-start: 1px; inset-inline-end: 3px; font-size: 0.625rem; line-height: 1; color: var(--accent); }
+.nav-cell[aria-current="true"] { outline: 2px solid var(--accent); outline-offset: 1px; font-weight: 700; }
+
+@media (min-width: 840px) {
+  .bank-run[data-mode="timed"] { grid-template-columns: minmax(0, 1fr) 15rem; align-items: start; }
+  .run-side { position: sticky; inset-block-start: var(--sp-4); }
+  .navigator { flex-wrap: wrap; overflow: visible; }
+}
+
+/* ---------- one question ---------- */
+.q { gap: var(--sp-3); }
+/* The lecture and topic are a quiet line; the clinical stem leads. */
+.q-meta { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-2); min-inline-size: 0; }
+.q-meta .chip { font-size: 0.75rem; line-height: 1.7; inline-size: fit-content; max-inline-size: 100%; }
+/* The lecture chip opens the lecture: a full 48dp to touch. */
+.q-meta .chip.tap {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: var(--target);
+}
+.q-stem, .q-text, .q-why { overflow-wrap: anywhere; }
+.q-stem { font-family: var(--font-latin); font-size: calc(var(--fs-lg) * 1.12); font-weight: 600; line-height: 1.5; text-align: start; }
+.q-options { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); font-family: var(--font-latin); }
+/* The letters in the explanation list. */
+.q-letter {
+  flex: none;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--surface-2);
+  font-weight: 700;
+  font-family: var(--font-latin);
+}
+.q-text { flex: 1; }
+/* Options are the shared button.answer (assets/parts.css); only the
+   English face is set here. */
+.q-option { font-family: var(--font-latin); }
+.q-option .answer-mark { font-family: var(--font); }
+.q-why { margin: var(--sp-1) 0 0; padding-inline-start: calc(1.9rem + var(--sp-3) * 2); font-size: var(--fs-sm); color: var(--muted); line-height: 1.5; }
+.q-foot { display: flex; gap: var(--sp-2); }
+.q-update { background: var(--accent-soft); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-1); }
+
+/* ---------- result ---------- */
+.big-score { display: flex; align-items: baseline; gap: var(--sp-3); }
+.big-score .pct { font-size: 2.6rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+.score-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
+.score-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 5rem 3.5rem;
+  align-items: center;
+  gap: var(--sp-3);
+  min-block-size: var(--target);
+  padding-block: var(--sp-1);
+}
+@media (hover: hover) { .score-row:hover .score-label { color: var(--accent); } }
+.score-label { overflow-wrap: anywhere; font-size: var(--fs-sm); }
+.score-bar { block-size: 8px; border-radius: var(--radius-pill); background: var(--line); overflow: hidden; }
+.score-fill { block-size: 100%; background: var(--good); }
+.score-num { font-variant-numeric: tabular-nums; text-align: end; font-size: var(--fs-sm); }
+@media (min-width: 840px) { .score-row { grid-template-columns: minmax(0, 1fr) 10rem 4rem; } }
+
+.review-list { display: flex; flex-direction: column; gap: var(--sp-2); }
+.review-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  cursor: pointer;
+  min-block-size: var(--target);
+  padding-inline: var(--sp-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-align: start;
+  inline-size: 100%;
+}
+.review-item[aria-current="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.review-item .mark { font-weight: 700; }
+.review-item[data-right="yes"] .mark { color: var(--good); }
+.review-item[data-right="no"] .mark { color: var(--bad); }
+.review-item .stem-peek { flex: 1; min-width: 0; color: var(--muted); font-size: var(--fs-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--font-latin); text-align: start; }
+.review-detail { display: flex; flex-direction: column; gap: var(--sp-3); }
+.review-detail-head { display: flex; align-items: center; gap: var(--sp-3); }
+.review-detail-head .run-count { font-weight: 700; flex: 1; }
+.bank-close {
+  min-block-size: var(--target);
+  padding-inline: var(--sp-3);
+}
+.report {
+  align-self: flex-start;
+  min-block-size: var(--target);
+}
+/* Read to screen readers only: states that are drawn as glyphs or colour. */
+.bank-sr {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+/* In the review's detail pane the question and its explanation stack. */
+.desk-detail .desk-split { display: flex; flex-direction: column; }
+
+/* ---------- desk: explanation pane (≥840px) ---------- */
+.q-explain { gap: var(--sp-3); }
+.q-why-list { display: none; list-style: none; margin: 0; padding: 0; flex-direction: column; gap: var(--sp-2); font-family: var(--font-latin); font-size: var(--fs-sm); line-height: 1.5; }
+.q-why-list li { display: flex; gap: var(--sp-2); align-items: flex-start; color: var(--muted); }
+.q-why-list .q-letter { inline-size: 1.5rem; block-size: 1.5rem; font-size: 0.75rem; }
+.q-why-mark { flex: none; font-family: var(--font); font-weight: 700; }
+.q-why-list li[data-state="right"] .q-why-mark { color: var(--good); }
+.q-why-list li[data-state="wrong"] .q-why-mark { color: var(--bad); }
+.q-why-list li[data-state="right"] { color: var(--text); }
+.q-why-list li[data-state="right"] .q-letter { background: var(--good); color: var(--glass-solid, var(--surface)); }
+.q-why-list li[data-state="wrong"] .q-letter { background: var(--bad); color: var(--glass-solid, var(--surface)); }
+@media (min-width: 840px) {
+  .q-why-list { display: flex; }
+  .desk-split .q-why { display: none; }
+}
+
+/* ---------- submit confirm (the shared .sheet) ---------- */
+.sheet.bank-confirm .start-row .btn { flex: 1 1 10rem; }
+
+/* A running paper fills the screen, so its footer sits at the bottom even
+   under a short question. */
+.bank:has(> .bank-run) { min-block-size: 100%; }
+.bank-run { flex: 1 0 auto; }
+.run-foot { margin-block-start: auto; }
+/* Without past papers there is no side column: the setup keeps a reading
+   measure instead of stretching. */
+.bank-cols:not(.tab-cols) > .tab-main { max-inline-size: 44rem; }

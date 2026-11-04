@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Merged into crates/app/AndroidManifest.xml's app by the manifest merger. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Oral mode with the screen off (OralService): a foreground media
+         service, and a partial wake lock so the think timer keeps running.
+         Media-session notifications don't need POST_NOTIFICATIONS. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- A light tap with answer feedback (app.steps.Haptics; Settings › Study
+         can turn it off). -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <!-- Updates over the air (UpdateInstaller, chunk 22): Steps installs its
+         own signed, hash-checked APK with PackageInstaller. Android still
+         asks once for "Install unknown apps". -->
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <!-- Android 13+: daily study reminders are notifications (Reminders.kt). -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Re-arms the local reminder schedule after a reboot (Reminders.kt). -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <application>
+        <!-- Share-to-Steps: text from any app, plus "Steps" in the text-selection
+             menu, becomes a draft of Mohamed's own card (Share.kt). Invisible;
+             it hands the text over and opens Steps. -->
+        <activity
+            android:name="app.steps.ShareActivity"
+            android:exported="true"
+            android:label="Steps"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.PROCESS_TEXT" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+        </activity>
+        <!-- Google sign-in: the browser page's "back to Steps" link
+             (app.steps://signed-in, SignInReturn.kt). Invisible; it brings
+             Steps to the front, where sign-in finishes. -->
+        <activity
+            android:name="app.steps.SignInReturnActivity"
+            android:exported="true"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="app.steps" android:host="signed-in" />
+            </intent-filter>
+        </activity>
+        <service
+            android:name="app.steps.OralService"
+            android:exported="false"
+            android:foregroundServiceType="mediaPlayback" />
+        <!-- Settings › Updates: the installer's verdict on a self-update
+             (explicit PendingIntent), and "Steps was updated" afterwards. -->
+        <receiver
+            android:name="app.steps.UpdateInstallReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+        <!-- Posts a planned reminder; re-arms the schedule after a reboot, an
+             update or a clock or time-zone change. Not exported: these
+             system broadcasts still reach it. -->
+        <receiver android:name="app.steps.ReminderReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.TIME_SET" />
+            </intent-filter>
+        </receiver>
+        <!-- Settings › Your data: the system "Save to" dialog for an export and
+             the file picker for a restore (Documents.kt). Invisible; it stays
+             alive under the system dialog to get the result. -->
+        <activity
+            android:name="app.steps.DocumentActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize|keyboardHidden"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <!-- "A new Steps is out" (UpdateNotice.kt): the periodic background
+             check, kept across reboots by RECEIVE_BOOT_COMPLETED, and the
+             invisible activity a tap on its notification goes through. -->
+        <service
+            android:name="app.steps.UpdateCheckJob"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <activity
+            android:name="app.steps.UpdateTapActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:noHistory="true"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+    </application>
+</manifest>

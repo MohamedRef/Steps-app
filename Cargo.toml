@@ -1,0 +1,41 @@
+[workspace]
+resolver = "3"
+members = ["crates/core", "crates/protocol", "crates/anki", "crates/app", "crates/server", "crates/tools"]
+
+[workspace.package]
+version = "1.0.0-alpha.1"
+edition = "2024"
+rust-version = "1.90"
+license = "LicenseRef-Private"
+publish = false
+
+[workspace.dependencies]
+steps-core = { path = "crates/core" }
+steps-anki = { path = "crates/anki" }
+steps-protocol = { path = "crates/protocol" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml_ng = "0.10"
+thiserror = "2"
+
+[workspace.lints.rust]
+unsafe_code = "deny"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
+
+# dx uses these for Android / desktop bundles.
+[profile.android-dev]
+inherits = "dev"
+
+[profile.server-dev]
+inherits = "dev"
+
+[profile.wasm-dev]
+inherits = "dev"
+opt-level = 1

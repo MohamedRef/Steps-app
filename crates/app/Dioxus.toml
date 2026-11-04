@@ -1,0 +1,17 @@
+[application]
+name = "Steps"
+# Our own manifest: dx then ignores [android.raw] and permissions here, so
+# queries, permissions and intent filters go in that file.
+android_manifest = "AndroidManifest.xml"
+
+[bundle]
+identifier = "app.steps"
+publisher = "Steps"
+short_description = "Internal medicine study, one short session at a time."
+# App icon (Steps.app); drawn in assets/src/icon/*.svg and exported by
+# scripts/assets/export_icons.py. One 1024 px master on purpose: dx 0.7 builds
+# every .icns size from the first PNG listed, so a small one would blur.
+icon = ["../../assets/export/macos/Steps.iconset/icon_512x512@2x.png"]
+
+[android]
+min_sdk = 28

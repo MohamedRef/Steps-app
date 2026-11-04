@@ -1,0 +1,34 @@
+# Steps Cloud on the Cloudflare Workers Free plan. Its own Worker, its own
+# Durable Object storage and its own secrets: nothing is shared with Kabar
+# Cloud. See docs/CLOUD.md.
+name = "steps-cloud"
+main = "build/index.js"
+compatibility_date = "2026-10-01"
+workers_dev = true
+# Steps's Cloudflare account (not a secret), so deploys need only the API token.
+account_id = "1175d52eeec515162f1dad1b5b76ddd3"
+
+[build]
+command = "CARGO_PROFILE_RELEASE_STRIP=false worker-build --release"
+
+[observability]
+enabled = true
+
+# One Durable Object per account: devices + sync hub (SQLite storage, the
+# only kind on the Free plan). Steps needs no D1 database.
+[durable_objects]
+bindings = [{ name = "ACCOUNT", class_name = "Account" }]
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Account"]
+
+# Not secret. Secrets (ALLOWED_EMAILS, TOKEN_SIGNING_KEY) go in with
+# `wrangler secret put`.
+[vars]
+# Steps's own Google OAuth client id(s), comma-separated.
+GOOGLE_CLIENT_IDS = "1001052243528-3d8bmf0efprgdvov9f663fm8u63kblck.apps.googleusercontent.com,1001052243528-f6b44kj27r95v7qc49vkslfv7v4oau9l.apps.googleusercontent.com"
+# The web app's address(es): only its pages may call the API from a browser
+# (CORS), and only its sync socket may bring the token in the query.
+WEB_ORIGINS = "https://steps-web.hamorefaat85.workers.dev"
+

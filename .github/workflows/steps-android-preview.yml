@@ -1,0 +1,343 @@
+name: Android preview APK
+
+# Builds an installable arm64 APK for trying Steps on the phone and tablet
+# without the Mac, and the signed update feed that lets an installed preview
+# update itself (docs/RELEASE.md §3 and §5). Adapted from kabar-app main:
+# .github/workflows/android-preview.yml; it also folds in chunk 20's
+# android-apk.yml (scripts/android-check-apk.sh runs on every build).
+#
+# Since the first alpha (Mohamed, 2026-11-02) pushes to main are signed with
+# the *release* keys (repo secrets from scripts/release-secrets.sh): the APK
+# with the release keystore and the feed with the release update key. So a
+# release build can follow the preview channel when he picks it in
+# Settings › Updates, and a preview build can go back to alpha, without
+# reinstalling. Builds before this used a CI-cached preview key and need one
+# reinstall.
+#
+# Pull-request runs never see the secrets: they sign with one-off keys
+# (enough to prove the APK builds, signs and passes the checks) and get a
+# read-only token. Only the separate `publish` job can write.
+#
+# Self-updates: the APK is built for the `preview` channel (its default; the
+# learner can switch to alpha in Settings), and the release carries a signed update.json naming the APK and the content pack, so an
+# installed preview updates itself (and its lectures) after every merge.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/steps-android-preview.yml
+      - android/**
+      - crates/app/AndroidManifest.xml
+      - crates/app/Dioxus.toml
+      - crates/app/Cargo.toml
+      - crates/app/src/platform/**
+      - crates/app/src/update/**
+      - scripts/android-check-apk.sh
+      - scripts/android-release-apk.sh
+  workflow_dispatch:
+
+# A pull request's newer push cancels its older run. On main, runs queue
+# instead, so a run is never cancelled halfway through publishing (which would
+# leave the feed missing until the next merge). Only one run waits at a time.
+concurrency:
+  group: steps-android-preview-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+permissions:
+  contents: read
+
+jobs:
+  apk:
+    name: Build preview APK
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      # A PR's own copy of this workflow runs here, so it must not reach the keys.
+      KEEP_KEY: ${{ github.event_name != 'pull_request' }}
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+          # "What's new" reads the changes/ files merged since the build on the feed.
+          fetch-depth: 0
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-linux-android
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: steps-android-preview
+          save-if: ${{ github.ref == 'refs/heads/main' }}
+      # Content-only: when everything merged since the build on the feed is
+      # lectures (any course), the program, lessons, changes/ notes, docs or stylesheets, the feed keeps
+      # that APK and only the content pack (which carries the stylesheets,
+      # crates/app/src/look.rs) is new. Devices then switch over in the
+      # background with nothing to install. Any other file, a new version or
+      # a new key means a full build.
+      - name: Content-only update?
+        if: env.KEEP_KEY == 'true'
+        run: |
+          curl -fsSL --retry 3 -o /tmp/live-update.json \
+            "https://github.com/$GITHUB_REPOSITORY/releases/download/steps-preview/update.json" || exit 0
+          jq -e '.assets[] | select(.platform == "android-arm64")' /tmp/live-update.json >/dev/null || exit 0
+          prev="$(jq -r '.commit // empty' /tmp/live-update.json)"
+          version="$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)"
+          if [ -z "$prev" ] || [ "$(jq -r .version /tmp/live-update.json)" != "$version" ] \
+            || ! git merge-base --is-ancestor "$prev" HEAD; then
+            exit 0
+          fi
+          if ! python3 scripts/content_impact.py --base "$prev" --head HEAD --check-content-only; then
+            echo "App changes since $prev: a full build."
+            exit 0
+          fi
+          echo "Only content or stylesheets changed since $prev: the feed keeps its APK."
+          echo "CONTENT_ONLY=true" >> "$GITHUB_ENV"
+
+      - uses: actions/setup-java@v5
+        if: env.CONTENT_ONLY != 'true'
+        with:
+          distribution: temurin
+          java-version: "17"
+      - uses: cargo-bins/cargo-binstall@8a2045612414e945291083f820cd50b4d8fc2218 # v1.26.0
+        if: env.CONTENT_ONLY != 'true'
+      - name: Install dx 0.7.10
+        if: env.CONTENT_ONLY != 'true'
+        run: cargo binstall -y --force dioxus-cli@0.7.10
+
+      # The update key comes first: its public half is built into the app.
+      # Pushes use the release key; pull requests a one-off key.
+      - name: Update key
+        env:
+          SECRET: ${{ env.KEEP_KEY == 'true' && secrets.STEPS_UPDATE_SECRET || '' }}
+        run: |
+          mkdir -p ~/.steps-preview-update
+          if [ "$KEEP_KEY" = true ]; then
+            [ -n "$SECRET" ] || { echo "::error::secret STEPS_UPDATE_SECRET is missing (scripts/release-secrets.sh)"; exit 1; }
+            cp crates/app/update-key.pub ~/.steps-preview-update/key.pub
+            printf %s "$SECRET" > ~/.steps-preview-update/secret
+          else
+            cargo run -q -p steps-tools -- update keygen --public-out ~/.steps-preview-update/key.pub \
+              > ~/.steps-preview-update/secret
+          fi
+          chmod 600 ~/.steps-preview-update/secret
+      - name: Preview build identity
+        run: |
+          {
+            echo "STEPS_UPDATE_CHANNEL=preview"
+            echo "STEPS_UPDATE_KEY=$(grep -v '^#' ~/.steps-preview-update/key.pub | head -1)"
+            echo "STEPS_BUILD=${{ github.run_number }}"
+            echo "STEPS_COMMIT=${GITHUB_SHA::7}"
+          } >> "$GITHUB_ENV"
+
+      - name: Android environment
+        if: env.CONTENT_ONLY != 'true'
+        run: |
+          echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> "$GITHUB_ENV"
+          echo "ANDROID_NDK_HOME=$ANDROID_NDK_LATEST_HOME" >> "$GITHUB_ENV"
+          BT="$(ls -d "$ANDROID_SDK_ROOT"/build-tools/* | sort -V | tail -1)"
+          echo "$BT" >> "$GITHUB_PATH"
+
+      - name: Content pack (built in and on the feed)
+        # Built before the APK so the APK knows the digest of the content it
+        # has built in (STEPS_BUILTIN_CONTENT): a phone that installs it
+        # doesn't download that same content again from this feed. Content
+        # reaches the phone without an install, so the same checks as CI
+        # (schema, sources, approvals) run before the pack is built (#332).
+        run: |
+          cargo run -q -p steps-tools -- validate
+          cargo run -q -p steps-tools -- packs build --out dist/packs
+          echo "STEPS_BUILTIN_CONTENT=$(sha256sum dist/packs/steps-content.pack | cut -d' ' -f1)" >> "$GITHUB_ENV"
+
+      - name: Build APK
+        if: env.CONTENT_ONLY != 'true'
+        working-directory: crates/app
+        # Steps Cloud and Google sign-in are built in (crates/app/src/cloud/mod.rs).
+        # The URL and client id are public (the id is in wrangler.toml too), so
+        # they default to Steps's own; repo variables override them. The client
+        # secret is a repo secret (docs/CLOUD.md §3.5).
+        # Push builds only: a PR's copy of this workflow gets empty values, and the
+        # app then hides sign-in. Never echo these.
+        env:
+          STEPS_CLOUD_URL: ${{ env.KEEP_KEY == 'true' && (vars.STEPS_CLOUD_URL || 'https://steps-cloud.hamorefaat85.workers.dev') || '' }}
+          STEPS_GOOGLE_CLIENT_ID: ${{ env.KEEP_KEY == 'true' && (vars.STEPS_GOOGLE_CLIENT_ID || '1001052243528-3d8bmf0efprgdvov9f663fm8u63kblck.apps.googleusercontent.com') || '' }}
+          STEPS_GOOGLE_CLIENT_SECRET: ${{ env.KEEP_KEY == 'true' && secrets.STEPS_GOOGLE_CLIENT_SECRET || '' }}
+        run: |
+          dx bundle --platform android --release --package-types apk \
+            --target aarch64-linux-android --no-default-features --features mobile \
+            --out-dir ../../dist/android/raw
+
+      - name: Rebuild as a release APK (not debuggable, R8, versionCode)
+        if: env.CONTENT_ONLY != 'true'
+        run: |
+          APK="$(scripts/android-release-apk.sh)"
+          mkdir -p dist/android/release && cp "$APK" dist/android/release/steps-unsigned.apk
+
+      - name: Check the APK (Kotlin glue and its permissions)
+        if: env.CONTENT_ONLY != 'true'
+        run: scripts/android-check-apk.sh dist/android/release/steps-unsigned.apk
+
+      - name: Signing key
+        if: env.CONTENT_ONLY != 'true'
+        env:
+          KEYSTORE_B64: ${{ env.KEEP_KEY == 'true' && secrets.STEPS_ANDROID_KEYSTORE || '' }}
+          KEYSTORE_PASS: ${{ env.KEEP_KEY == 'true' && secrets.STEPS_ANDROID_KEYSTORE_PASSWORD || '' }}
+        run: |
+          mkdir -p ~/.steps-preview
+          if [ "$KEEP_KEY" = true ]; then
+            [ -n "$KEYSTORE_B64" ] || { echo "::error::secret STEPS_ANDROID_KEYSTORE is missing (scripts/release-secrets.sh)"; exit 1; }
+            printf %s "$KEYSTORE_B64" | base64 -d > ~/.steps-preview/preview.jks
+            printf %s "$KEYSTORE_PASS" > ~/.steps-preview/pass
+            echo steps > ~/.steps-preview/alias
+          else
+            openssl rand -hex 24 > ~/.steps-preview/pass
+            keytool -genkeypair -keystore ~/.steps-preview/preview.jks -alias preview \
+              -keyalg RSA -keysize 4096 -validity 3650 -dname "CN=Steps PR check" \
+              -storepass "$(cat ~/.steps-preview/pass)" -keypass "$(cat ~/.steps-preview/pass)"
+            echo preview > ~/.steps-preview/alias
+          fi
+          chmod 600 ~/.steps-preview/*
+      - name: Sign
+        if: env.CONTENT_ONLY != 'true'
+        run: |
+          IN=dist/android/release/steps-unsigned.apk
+          PASS="$(cat ~/.steps-preview/pass)"
+          zipalign -f -p 4 "$IN" /tmp/aligned.apk
+          apksigner sign --ks ~/.steps-preview/preview.jks --ks-key-alias "$(cat ~/.steps-preview/alias)" \
+            --ks-pass "pass:$PASS" --key-pass "pass:$PASS" --out dist/android/steps-preview.apk /tmp/aligned.apk
+          apksigner verify --print-certs dist/android/steps-preview.apk
+          # The S24 Ultra and Tab S11 are arm64; dx defaults to the emulator ABI.
+          unzip -l dist/android/steps-preview.apk | grep -q 'lib/arm64-v8a/' \
+            || { echo "APK has no arm64-v8a library"; unzip -l dist/android/steps-preview.apk; exit 1; }
+          ls -lh dist/android/steps-preview.apk
+
+      - name: Signed update feed (APK, content pack, update.json + signature)
+        run: |
+          VERSION="$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)"
+          # What's new: the changes/*.yaml files (or, without one, the pull
+          # request titles) merged since the build the feed carries now, on
+          # top of that feed's history. The app shows them before installing,
+          # in the "new version" notification, and once after the update.
+          curl -fsSL --retry 3 -o /tmp/previous-update.json \
+            "https://github.com/$GITHUB_REPOSITORY/releases/download/steps-preview/update.json" \
+            || rm -f /tmp/previous-update.json
+          # His records point at content ids: the new pack must keep every
+          # id of the pack devices have now (docs/CONTENT-IDS.md), and the
+          # job summary says what changed for them.
+          live="$(jq -r '.assets[] | select(.platform == "content") | .file' /tmp/previous-update.json 2>/dev/null || true)"
+          if [ -n "$live" ] && curl -fsSL --retry 3 -o "/tmp/$live" \
+              "https://github.com/$GITHUB_REPOSITORY/releases/download/steps-preview/$live"; then
+            cargo run -q -p steps-tools -- ids check --base-pack "/tmp/$live"
+            { echo '### Content compared with the live preview feed'
+              cargo run -q -p steps-tools -- content diff --base-pack "/tmp/$live" \
+                --head-pack dist/packs/steps-content.pack; } >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ "${CONTENT_ONLY:-}" = true ]; then
+            app=(--carry android-arm64)
+            # The carried APK stays on the release, so it isn't in dist/update.
+            carried=(--carried android-arm64)
+          else
+            app=(--asset android-arm64=dist/android/steps-preview.apk)
+            carried=()
+          fi
+          cargo run -q -p steps-tools -- update manifest --channel preview --version "$VERSION" \
+            --build "$STEPS_BUILD" --commit "$STEPS_COMMIT" \
+            --previous /tmp/previous-update.json --changes "${app[@]}" \
+            --asset content=dist/packs/steps-content.pack --out dist/update
+          STEPS_UPDATE_SECRET="$(cat ~/.steps-preview-update/secret)" \
+            cargo run -q -p steps-tools -- update sign dist/update --public-key ~/.steps-preview-update/key.pub
+          cargo run -q -p steps-tools -- update verify dist/update --public-key ~/.steps-preview-update/key.pub "${carried[@]}"
+          # Always there, so the artifact keeps its dist/ layout without an APK.
+          echo "${CONTENT_ONLY:-false}" > dist/content-only
+          ls -l dist/update
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: steps-preview-apk
+          # A content-only run has no APK; dist/content-only keeps the layout.
+          path: |
+            dist/content-only
+            dist/android/steps-preview.apk
+            dist/update/
+          retention-days: 14
+
+  publish:
+    name: Publish the steps-preview release
+    needs: apk
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: steps-preview-apk
+          path: dist
+      - name: Publish as the "steps-preview" prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          TAG: steps-preview
+        run: |
+          # Publish only when this commit is newer than the one the release
+          # carries, so a run that finishes after a newer one never rolls the
+          # release back. Before the first publish the tag doesn't exist: gh
+          # then exits non-zero but still prints the 404 body on stdout, so
+          # only a successful call that returns a commit SHA counts.
+          if ! published="$(gh api "repos/$GH_REPO/git/refs/tags/$TAG" --jq .object.sha 2>/dev/null)" \
+            || ! [[ "$published" =~ ^[0-9a-f]{40}$ ]]; then
+            published=""
+          fi
+          if [ -n "$published" ]; then
+            status="$(gh api "repos/$GH_REPO/compare/$published...$GITHUB_SHA" --jq .status)"
+            if [ "$status" != "ahead" ]; then
+              echo "The release already carries ${published::7} ($status); nothing to publish."
+              exit 0
+            fi
+          fi
+          # Never publish a lower versionCode than the live feed: installed
+          # previews would never update again, and Android refuses the
+          # downgrade unless the app (and its data) is uninstalled.
+          new_code="$(jq -r '.assets[] | select(.platform == "android-arm64") | .version_code' dist/update/update.json)"
+          if live="$(gh release download "$TAG" -p update.json -O - 2>/dev/null)"; then
+            old_code="$(jq -r '.assets[] | select(.platform == "android-arm64") | .version_code // 0' <<<"$live")"
+            if [[ "$old_code" =~ ^[0-9]+$ && "$new_code" =~ ^[0-9]+$ ]] && (( new_code < old_code )); then
+              echo "::error::versionCode $new_code is below the published preview's $old_code. Raise version in Cargo.toml (docs/RELEASE.md §1)."
+              exit 1
+            fi
+          fi
+          NOTES="Preview build of ${GITHUB_SHA::7}, signed with the release key, so it installs over the alpha and back. Install: download steps-preview.apk on the phone or tablet and allow installs from your browser. Releases are the steps-v* alphas."
+          # The release stays in place and only its tag and files change, so
+          # the download link and the update feed never 404.
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh api -X PATCH "repos/$GH_REPO/git/refs/tags/$TAG" -f sha="$GITHUB_SHA" -F force=true >/dev/null
+            gh release edit "$TAG" --notes "$NOTES"
+          else
+            gh release create "$TAG" --prerelease --latest=false --target "$GITHUB_SHA" \
+              --title "Steps preview (Android)" --notes "$NOTES"
+          fi
+          # The APK under its usual name for people, plus the signed feed for
+          # the app. The files go up before update.json and its signature, so
+          # the feed never names a file that isn't there yet.
+          files=()
+          for f in dist/update/*; do
+            case "$(basename "$f")" in update.json|update.json.sig) ;; *) files+=("$f") ;; esac
+          done
+          # A content-only feed carries the APK already on the release.
+          if [ -f dist/android/steps-preview.apk ]; then
+            files+=(dist/android/steps-preview.apk)
+          fi
+          gh release upload "$TAG" "${files[@]}" --clobber
+          gh release upload "$TAG" dist/update/update.json.sig dist/update/update.json --clobber
+          # Feed files carry the build number, so nothing a live update.json
+          # names is ever overwritten. Keep the files this feed and the one
+          # before name (a device may have just read it; a content-only feed
+          # names an older APK) and drop the rest so the release doesn't grow
+          # without end.
+          keep="$( { jq -r '.assets[].file' dist/update/update.json; jq -r '.assets[].file' <<<"${live:-}" 2>/dev/null; } | sort -u)"
+          gh api "repos/$GH_REPO/releases/tags/$TAG" --jq '.assets[] | select(.name | test("-b[0-9]+-")) | "\(.id) \(.name)"' \
+            | while read -r id name; do
+                grep -qxF "$name" <<<"$keep" || gh api -X DELETE "repos/$GH_REPO/releases/assets/$id"
+              done

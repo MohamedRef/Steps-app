@@ -1,0 +1,174 @@
+/* Oral mode. Big targets so it works while walking: the rating buttons fill
+   the bottom of a phone screen. Question and answer sit side by side from
+   840px (Tab S11, Mac). Logical properties only. */
+
+.oral-setup { gap: var(--sp-3); }
+.oral-field { display: flex; flex-direction: column; gap: var(--sp-1); }
+.oral-field select,
+.oral-field input[type="range"] { inline-size: 100%; min-block-size: var(--tap); font: inherit; }
+.oral-field select {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  /* background-color, not the shorthand: it keeps the drawn caret (parts.css). */
+  background-color: var(--surface);
+  color: var(--text);
+  padding-inline: var(--sp-3) 2.5rem;
+}
+.oral-field input[type="range"] { accent-color: var(--accent); }
+.oral-check { display: flex; align-items: center; gap: var(--sp-2); min-block-size: var(--tap); cursor: pointer; }
+.oral-check input { inline-size: 1.25rem; block-size: 1.25rem; accent-color: var(--accent); }
+
+
+.oral-start {
+  min-block-size: var(--row);
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--glass-solid, var(--surface));
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  cursor: pointer;
+}
+.oral-start:disabled { opacity: 0.5; cursor: default; }
+
+/* ---------- running ---------- */
+.oral-run { display: flex; flex-direction: column; gap: var(--sp-3); outline: none; min-block-size: 100%; }
+.oral-top { display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
+.oral-end {
+  margin-inline-start: auto;
+  min-block-size: var(--tap);
+  padding-inline: var(--sp-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  cursor: pointer;
+}
+.chip.accent { background: var(--accent-soft); border-color: transparent; color: var(--accent); font-weight: 600; }
+
+.en { text-align: start; font-family: var(--font-latin); }
+.oral-question .en { display: flex; flex-direction: column; gap: var(--sp-2); }
+.oral-question .en p { color: var(--muted); }
+.oral-question .en p.oral-ask { color: var(--text); font-size: var(--fs-lg); font-weight: 600; }
+.oral-answer ul:not(.oral-points) { margin: 0; padding-inline-start: 1.25rem; display: flex; flex-direction: column; gap: var(--sp-1); }
+.oral-answer { border-color: var(--good); }
+.oral-answer h2 { color: var(--good); }
+
+.oral-timer { display: flex; flex-direction: column; align-items: center; gap: var(--sp-2); padding-block: var(--sp-4); }
+.oral-status { color: var(--muted); font-size: var(--fs-lg); }
+.oral-ring {
+  --p: 100;
+  inline-size: 8rem;
+  block-size: 8rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(var(--accent) calc(var(--p) * 1%), var(--line) 0);
+  transition: background var(--dur) var(--ease);
+}
+.oral-ring span {
+  inline-size: 6.5rem;
+  block-size: 6.5rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--bg);
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-latin);
+}
+
+/* The rating buttons: half the width each, tall, at the bottom on phones. */
+.oral-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3);
+  margin-block-start: auto;
+  position: sticky;
+  inset-block-end: var(--sp-2);
+}
+.oral-big {
+  min-block-size: 96px;
+  border: 0;
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 0.08);
+}
+.oral-big .big-label { font-size: var(--fs-xl); font-weight: 700; }
+.oral-big .big-hint { font-size: var(--fs-sm); opacity: 0.85; }
+.oral-big.again { background: var(--bad-soft); color: var(--bad); }
+.oral-big.good { background: var(--good-soft); color: var(--good); }
+.oral-big.show { background: var(--accent); color: var(--glass-solid, var(--surface)); }
+.oral-small {
+  min-block-size: 96px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: var(--fs-lg);
+  cursor: pointer;
+}
+
+/* ---------- summary ---------- */
+.oral-tally { display: flex; gap: var(--sp-4); margin: 0; flex-wrap: wrap; }
+.oral-tally div { display: flex; flex-direction: column; align-items: center; min-inline-size: 5rem; }
+.oral-tally dt { color: var(--muted); font-size: var(--fs-sm); }
+.oral-tally dd { margin: 0; font-size: var(--fs-xl); font-weight: 700; font-variant-numeric: tabular-nums; }
+.oral-missed { margin: 0; padding-inline-start: 1.25rem; display: flex; flex-direction: column; gap: var(--sp-2); }
+.oral-question .chip { align-self: flex-start; }
+
+/* ---------- redesign: progress, timer controls, rubric ---------- */
+.oral-progress { flex: 1 1 8rem; }
+.oral-question .en p.oral-ask { font-size: calc(var(--fs-lg) * 1.12); line-height: 1.45; }
+.oral-timer-controls { justify-content: center; }
+.oral-timer[data-paused="yes"] .oral-ring { opacity: 0.55; }
+.oral-notes { display: flex; flex-direction: column; gap: var(--sp-2); }
+.oral-notes > summary { cursor: pointer; min-block-size: var(--tap); display: flex; align-items: center; color: var(--accent); font-weight: 600; }
+.oral-notes textarea {
+  inline-size: 100%;
+  font: inherit;
+  font-family: var(--font-latin);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: var(--sp-3);
+  resize: vertical;
+}
+.oral-points { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
+.oral-point {
+  inline-size: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+  min-block-size: var(--tap);
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-latin);
+  text-align: start;
+  cursor: pointer;
+}
+.oral-point[aria-pressed="true"] { border-color: var(--good); background: var(--good-soft); }
+.oral-point:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.oral-tick {
+  flex: none;
+  inline-size: 1.25rem;
+  block-size: 1.25rem;
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  font-size: 0.8rem;
+  color: var(--glass-solid, var(--surface));
+}
+.oral-point[aria-pressed="true"] .oral-tick { background: var(--good); border-color: var(--good); }
+.oral-said[data-enough="yes"] { color: var(--good); font-weight: 600; }
+.oral-your-notes { border-block-start: 1px solid var(--line); padding-block-start: var(--sp-2); white-space: pre-wrap; }
+.oral-big.good[data-suggest="yes"] { outline: 2px solid var(--good); outline-offset: 2px; }

@@ -1,0 +1,102 @@
+/* Cases, number vignettes and calculators (chunk 5). Logical properties only. */
+
+.tabs { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+.tabs button {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: var(--radius-pill);
+  padding: var(--sp-1) var(--sp-4);
+  min-height: var(--tap);
+  cursor: pointer;
+}
+.tabs button[aria-selected="true"] { background: var(--accent-soft); border-color: transparent; color: var(--accent); font-weight: 700; }
+
+.row { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.update { border-inline-start: 3px solid var(--accent); padding-inline-start: var(--sp-2); }
+
+/* ---------- lists ---------- */
+/* A lecture's group (grouped view): its head, then its list. */
+.case-group { display: flex; flex-direction: column; gap: var(--sp-2); flex-shrink: 0; }
+/* The shared .coll layouts (parts.css); a case's stem reads as text, not a title. */
+.case-row .coll-title { font-weight: 500; }
+.coll[data-layout="cards"] .case-row .coll-title { display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
+.coll[data-layout="list"] .case-row .coll-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.coll[data-layout="cards"] .case-row .coll-main { padding-inline-end: var(--sp-4); }
+.coll[data-layout="cards"].case-list { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 600px) { .coll[data-layout="cards"].case-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .coll[data-layout="cards"].case-list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+/* ---------- players ---------- */
+.player { display: flex; flex-direction: column; gap: var(--sp-3); }
+.player-meta { display: flex; align-items: center; gap: var(--sp-3); flex-wrap: wrap; }
+.case-grid { display: grid; gap: var(--sp-3); align-items: start; }
+@media (min-width: 840px) {
+  .case-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .case-data { position: sticky; inset-block-start: var(--sp-4); }
+}
+.case-stem { display: block; font-weight: 600; }
+.case-reveal { border-block-start: 1px solid var(--line); padding-block-start: var(--sp-2); display: flex; flex-direction: column; }
+.case-reveal.new { background: var(--accent-soft); border-radius: var(--radius); border: 0; padding: var(--sp-2) var(--sp-3); }
+.case-question { display: block; font-family: var(--font-latin); font-weight: 600; font-size: calc(var(--fs-lg) * 1.08); line-height: 1.5; }
+.case-stem { font-family: var(--font-latin); line-height: 1.6; }
+
+/* ---------- stepper ---------- */
+.case-stepper { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.case-stepper-step, .case-stepper-later {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  min-block-size: var(--tap);
+  min-inline-size: var(--tap);
+  justify-content: center;
+  padding-inline: var(--sp-3);
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-sm);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--text);
+}
+.case-stepper-step { cursor: pointer; }
+.case-stepper-step[data-state="now"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 700; }
+.case-stepper-step[data-state="ok"] { border-color: var(--good); color: var(--good); }
+.case-stepper-step[data-state="miss"] { border-color: var(--bad); color: var(--bad); }
+.case-stepper-later { color: var(--muted); border-color: transparent; background: none; }
+.case-stepper-step:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.case-history { scroll-margin-block-start: var(--sp-4); }
+.case-step { scroll-margin-block-start: var(--sp-4); }
+.case-hint { text-align: center; }
+.case-check { inline-size: 100%; }
+
+.options { display: grid; gap: var(--sp-2); }
+/* Options are the shared button.answer (assets/parts.css). */
+.case-option { font-family: var(--font-latin); }
+.case-option .answer-mark { font-family: var(--font); }
+.case-option.dim { opacity: 0.6; }
+/* Phone: once answered, keep only the picked and the right option so the
+   feedback fits on screen. */
+@media (max-width: 599px) { .case-step .case-option.dim { display: none; } }
+.case-feedback { display: flex; flex-direction: column; gap: var(--sp-3); scroll-margin-block-end: calc(var(--nav-h) + var(--sp-3)); }
+.case-history { display: flex; flex-direction: column; gap: var(--sp-2); }
+.case-done { display: flex; flex-direction: column; gap: 2px; padding-inline-start: var(--sp-2); border-inline-start: 3px solid var(--line); }
+.case-done p { margin: 0; }
+.case-done .case-done-q { display: block; color: var(--muted); }
+.case-done.ok { border-inline-start-color: var(--good); }
+.case-done.miss { border-inline-start-color: var(--bad); }
+.case-done.ok span { color: var(--good); }
+.case-done.miss span { color: var(--bad); }
+.verdict { font-weight: 700; }
+.verdict.good { color: var(--good); }
+.verdict.bad { color: var(--bad); }
+.case-why { display: flex; flex-direction: column; gap: var(--sp-1); background: var(--bg); border-radius: var(--radius); padding: var(--sp-3); }
+.case-score { font-size: var(--fs-xl); font-weight: 700; color: var(--accent); }
+.case-steps-done { margin: 0; padding-inline-start: var(--sp-4); display: grid; gap: var(--sp-3); text-align: start; }
+.case-steps-done li { display: flex; flex-direction: column; gap: 2px; }
+.case-steps-done p { margin: 0; }
+.case-done-q { font-weight: 600; }
+.case-steps-done .ok .case-done-q span { color: var(--good); }
+.case-steps-done .miss .case-done-q span { color: var(--bad); }
+
+/* Chips (book page, unverified) keep their own width inside column boxes. */
+.player :not(.player-meta) > .chip { align-self: flex-start; inline-size: fit-content; }
+/* The recap's English lines read left to right in the Latin face. */
+.case-steps-done [dir="ltr"] { text-align: start; font-family: var(--font-latin); }

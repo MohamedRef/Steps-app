@@ -1,0 +1,9 @@
+# The Steps web app as a static-assets Worker (no script): the same Cloudflare
+# account and token as Steps Cloud, free plan. Deployed by
+# .github/workflows/web-deploy.yml from target/web/steps (scripts/web/build.sh).
+name = "steps-web"
+compatibility_date = "2026-10-01"
+
+[assets]
+directory = "../target/web/steps"
+not_found_handling = "single-page-application"

@@ -1,0 +1,60 @@
+name: Mac
+
+# The Mac-only code (the .app swap for updates, the Mac menu, the Keychain
+# session) never compiles on Linux, so this job builds it on a macOS runner.
+# Mohamed (2026-10-29): the Mac build runs once, not per PR or per merge:
+# nightly and by hand (Actions > Mac > Run workflow). Hosted macOS runners
+# are slow and sometimes unavailable for most of an hour. A real Mac break
+# still shows up within a day. Not a required check.
+on:
+  schedule:
+    - cron: "17 2 * * *"
+  workflow_dispatch:
+
+# A started run finishes; a waiting one is replaced by the newest.
+concurrency:
+  group: mac-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  macos:
+    # adapted from kabar-app main: .github/workflows/ci.yml (macos)
+    timeout-minutes: 45
+    name: Mac app compiles
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          # dx strips the release binary with rust-objcopy, which needs
+          # libLLVM from llvm-tools.
+          components: clippy, llvm-tools
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: macos
+      - run: cargo clippy -p steps-app --all-targets -- -D warnings
+      - run: cargo test -p steps-app
+      # Built from source: the prebuilt macOS dx links Homebrew's OpenSSL at
+      # the Intel path, which Apple-silicon runners don't have.
+      - name: Install dx 0.7.10
+        run: |
+          if ! dx --version 2>/dev/null | grep -q '0.7.10'; then
+            cargo install dioxus-cli --version 0.7.10 --locked
+          fi
+      - name: Bundle Steps.app
+        run: |
+          cd crates/app
+          if ! dx bundle --platform macos --release --package-types macos --out-dir ../../dist/mac > ../../dx-bundle.log 2>&1; then
+            grep -iE 'error|failed|panick|not found|no such' ../../dx-bundle.log | grep -v ' INFO Compiled' | tail -n 9 | sed 's/^/::error::/'
+            exit 1
+          fi
+          tail -n 5 ../../dx-bundle.log
+          app="$(find ../../dist/mac -maxdepth 3 -name '*.app' -print -quit)"
+          test -n "$app"
+          plutil -lint "$app/Contents/Info.plist"

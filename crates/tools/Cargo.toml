@@ -1,0 +1,25 @@
+[package]
+name = "steps-tools"
+description = "Steps's content tools: validate, anki, packs, verdicts."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+steps-core.workspace = true
+serde.workspace = true
+serde_yaml_ng.workspace = true
+serde_json.workspace = true
+steps-anki.workspace = true
+# Update feeds (update.rs): hashes, signing and a fresh key.
+sha2 = "0.10"
+ed25519-dalek = "2"
+base64 = "0.22"
+getrandom = "0.3"
+
+[dev-dependencies]
+tempfile = "3"
+
+[lints]
+workspace = true

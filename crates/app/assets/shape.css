@@ -1,0 +1,223 @@
+/* Shape and surface language, after the calm grouped look of Morphe Manager
+   (ideas only; no code or assets taken). Size and shape live here; colours
+   come from steps_core::theme and layout from 600px from main.css, nav.css
+   and desk.css. Hairlines rather than shadows, so cards still show on the
+   true-black theme where --bg and --surface are both #000. */
+
+:root {
+  --radius-lg: var(--radius-card);
+  --radius-sm: 8px;
+  /* A fainter hairline for dividers inside a card. */
+  --line-soft: color-mix(in srgb, var(--line) 55%, transparent);
+  /* A raised step off --surface; the theme defines it, this is a fallback. */
+  --raised: var(--surface-2, color-mix(in srgb, var(--surface) 88%, var(--text)));
+  --press: scale(0.98);
+}
+
+/* Card surfaces are owned by main.css and the --card-* tokens. */
+.card > h2:first-child, .card > h1:first-child { line-height: 1.3; }
+.note { border-radius: var(--radius); }
+
+/* ---------- buttons ---------- */
+/* The shared .btn set is in main.css; this gives it the calmer surface. */
+.btn, .icon-button { transition: transform var(--dur) var(--ease), background-color var(--dur) var(--ease); }
+.btn:not(:disabled):active, .icon-button:active { transform: var(--press); }
+.btn-secondary { border-color: var(--line-soft); background: var(--raised); }
+/* Tonal: a soft accent pill for the second most important action. */
+.btn-tonal { background: var(--accent-soft); border-color: transparent; color: var(--accent); }
+
+/* Round icon buttons in headers: a filled circle, no ring. */
+.icon-button {
+  border-color: transparent;
+  background: var(--raised);
+}
+.icon-button:hover { background: var(--accent-soft); }
+
+/* ---------- chips and badges ----------
+   Status badges are spans; chips that are buttons (filters) keep their size. */
+span.chip {
+  font-size: max(0.75rem, 11px);
+  line-height: 1.6;
+  padding-inline: var(--sp-2);
+  border-color: var(--line-soft);
+  background: var(--raised);
+}
+span.chip.ready { font-weight: 700; }
+button.chip { border-color: var(--line-soft); }
+
+/* ---------- top bar: blends into the page ----------
+   Morphe's header: a bold title on the start side and round 40dp icon
+   buttons with a faint translucent fill on the end side, both centred on
+   one row. The row is at least one button tall, so the title and the gear
+   share a centre line instead of the gear riding above the text. */
+.topbar {
+  background: var(--bg);
+  border-block-end-color: transparent;
+  align-items: center;
+  min-block-size: calc(2.5rem + 2 * var(--sp-2));
+  padding-inline: var(--sp-4) var(--sp-3);
+}
+.topbar .brand { align-items: baseline; align-self: center; line-height: 1.25; }
+/* Arabic letters sit low in their line box; a small lift puts their
+   visual middle on the button's centre line. */
+.topbar .brand { padding-block-end: 0.2rem; }
+.brand-name { letter-spacing: 0.01em; }
+@media (max-width: 599.98px) {
+  .topbar .brand-name { font-size: var(--fs-xl); }
+}
+.topbar .icon-button {
+  flex: none;
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+  border: 1px solid var(--line-soft);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--text) 7%, transparent);
+  color: var(--text);
+}
+.topbar .icon-button svg { inline-size: 1.5rem; block-size: 1.5rem; }
+.topbar .icon-button:hover, .topbar .icon-button:active { background: var(--accent-soft); color: var(--accent); }
+
+/* ---------- grouped choice rows (single column) ----------
+   One rounded block of rows split by thin dividers, a radio dot on the
+   start side, instead of a stack of separately bordered boxes. */
+@media (max-width: 839.98px) {
+  .choice-list {
+    gap: 0;
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .choice-list > .choice {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .choice-list > .choice + .choice { border-block-start: 1px solid var(--line-soft); }
+  .choice-list > .choice[aria-checked="true"] { background: var(--accent-soft); box-shadow: none; }
+  .card .choice-list { background: transparent; }
+}
+.choice[role="radio"]::before {
+  content: "";
+  flex: none;
+  inline-size: 1.125rem;
+  block-size: 1.125rem;
+  border-radius: 50%;
+  border: 2px solid var(--muted);
+  box-sizing: border-box;
+}
+.choice[role="radio"][aria-checked="true"]::before {
+  border-color: var(--accent);
+  background: radial-gradient(circle, var(--accent) 0 40%, transparent 45%);
+}
+
+/* ---------- segmented controls ---------- */
+.segmented { border-color: var(--line-soft); }
+.segmented > button + button { border-inline-start-color: var(--line-soft); }
+
+/* ---------- phones ---------- */
+@media (max-width: 599.98px) {
+  /* Floating pill bar: inset from the edges, a soft pill behind the active
+     icon. Phones show four or five tabs plus More (more.rs). */
+  .nav {
+    margin-inline: var(--sp-3);
+    margin-block-end: calc(var(--sp-2) + env(safe-area-inset-bottom, 0px));
+    padding-block: var(--sp-1);
+    padding-inline: var(--sp-1);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-pill);
+    background: var(--raised);
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.12);
+    /* One column per visible tab, whatever their number; minmax(0, 1fr): a
+       long label shrinks into its tab instead of widening the bar past a
+       360px screen (#152). */
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(0, 1fr);
+    min-inline-size: 0;
+  }
+  /* The one column never grows past the window for a wide child. */
+  .app { background: var(--bg); grid-template-columns: minmax(0, 1fr); }
+  .nav-item { min-inline-size: 0; }
+  .nav-item .label { max-inline-size: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .nav-item {
+    min-height: calc(var(--nav-h) - var(--sp-2));
+    justify-content: center;
+    font-size: max(0.6875rem, 11px);
+    border-radius: var(--radius-pill);
+  }
+  .nav-item .glyph {
+    inline-size: min(3rem, 100%);
+    block-size: 1.75rem;
+    border-radius: var(--radius-pill);
+    transition: background-color var(--dur) var(--ease);
+  }
+  .nav-item[aria-current="page"] .glyph { background: var(--accent-soft); }
+
+  /* Today's lecture list: one grouped block instead of a stack of cards. */
+  .lectures {
+    gap: 0;
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+  }
+  .lectures > li > .lecture { border: 0; border-radius: 0; background: transparent; }
+  .lectures > li + li { border-block-start: 1px solid var(--line-soft); }
+  /* A row inside the block tints when pressed rather than shrinking. */
+  .lectures .lecture.tap:active { transform: none; background: var(--accent-soft); }
+  .lecture .num { inline-size: 2rem; block-size: 2rem; font-size: var(--fs-sm); }
+}
+
+/* ---------- More (more.rs) ----------
+   Phones: Cases, Oral and Progress leave the bar for a bounded sheet that
+   rises above it, in two groups, with Settings at the end; the bar keeps
+   Today, Lessons, Review, Questions and More. From 600dp the rail and the
+   sidebar have room for every screen, so More and its sheet hide. */
+.nav-more, .more-sheet, .more-backdrop { display: none; }
+@media (max-width: 599.98px) {
+  .nav-extra { display: none; }
+  .nav-more { display: flex; }
+  .more-backdrop { display: block; position: fixed; inset: 0; z-index: 20; background: rgb(0 0 0 / 0.25); }
+  .more-sheet {
+    display: flex; flex-direction: column; gap: var(--sp-2);
+    position: fixed; z-index: 21;
+    inset-inline: var(--sp-3);
+    inset-block-end: calc(var(--nav-h) + var(--sp-4) + env(safe-area-inset-bottom, 0px));
+    max-block-size: calc(100dvh - var(--nav-h) - 4rem - env(safe-area-inset-bottom, 0px) - env(safe-area-inset-top, 0px));
+    overflow-y: auto; overscroll-behavior: contain;
+    padding: var(--sp-2);
+    border: 1px solid var(--line-soft);
+    border-radius: var(--radius-sheet, var(--radius-lg));
+    background: var(--raised);
+    box-shadow: 0 12px 32px rgb(0 0 0 / 0.18);
+    animation: more-rise var(--dur) var(--ease);
+  }
+  .more-group { display: flex; flex-direction: column; }
+  .more-group-title { margin: 0; padding: var(--sp-1) var(--sp-3); font-size: var(--fs-sm); font-weight: 600; color: var(--muted); }
+  .more-group + .more-group { padding-block-start: var(--sp-2); border-block-start: 1px solid var(--line-soft); }
+  .more-row {
+    display: flex; align-items: center; gap: var(--sp-3);
+    min-block-size: var(--target, 48px);
+    padding-inline: var(--sp-2) var(--sp-3);
+    border: 0; border-radius: var(--radius-control, var(--radius));
+    background: transparent; text-align: start; cursor: pointer;
+    font-weight: 600;
+  }
+  .more-row .label { flex: 1; min-width: 0; }
+  .more-row .row-icon { inline-size: 2rem; block-size: 2rem; }
+  .more-row[aria-current="page"] { background: var(--accent-soft); color: var(--accent-ink); }
+  .more-close { align-self: stretch; }
+  .nav-more[aria-expanded="true"] .glyph { background: var(--accent-soft); }
+
+  /* Focused study (parts::use_focus_mode): the task gets the screen; its
+     own close or finish button is the way out. */
+  .app[data-focus="true"] { grid-template-rows: 0 1fr 0; }
+  .app[data-focus="true"] :is(.nav, .topbar) { display: none; }
+  .app[data-focus="true"] .content { padding-block-start: calc(var(--sp-2) + env(safe-area-inset-top, 0px)); padding-block-end: calc(var(--sp-6) + env(safe-area-inset-bottom, 0px)); }
+}
+@keyframes more-rise { from { opacity: 0; transform: translateY(8px); } }

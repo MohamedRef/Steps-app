@@ -1,0 +1,24 @@
+/* The abbreviations dictionary (abbrdict/mod.rs), a page on the lecture
+   stack. Layout only; colours are theme tokens. */
+.abd-head { display: flex; align-items: flex-start; gap: var(--sp-2); }
+.abd-head .page-head { flex: 1; min-inline-size: 0; }
+.abd-courses { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-block: var(--sp-3); }
+.abd-courses .abd-course { display: inline-flex; align-items: center; min-block-size: var(--target, 48px); }
+.abd-head .lec-back { min-inline-size: var(--target, 48px); min-block-size: var(--target, 48px); }
+.abd-letter { margin-block-start: var(--sp-4); }
+.abd-l { position: sticky; inset-block-start: 0; z-index: 1; margin: 0 0 var(--sp-2); padding-block: var(--sp-1);
+  background: var(--bg); font-size: var(--fs-lg, 1.1rem); color: var(--accent-ink); }
+.abd-item { scroll-margin-block-start: 3rem; border-radius: var(--radius-control, var(--radius)); background: var(--soft); margin-block-end: var(--sp-2); }
+.abd-sum { display: grid; grid-template-columns: minmax(0, max-content) minmax(0, 1fr); gap: var(--sp-3); align-items: baseline;
+  padding: var(--sp-2) var(--sp-3); min-block-size: var(--target, 48px); cursor: pointer; list-style: none; }
+.abd-sum::-webkit-details-marker { display: none; }
+.abd-term { font-weight: 700; color: var(--accent-ink); min-inline-size: 0; overflow-wrap: anywhere; }
+.abd-text { line-height: 1.5; min-inline-size: 0; overflow-wrap: anywhere; }
+.abd-uses { padding: 0 var(--sp-3) var(--sp-3); }
+.abd-uses p { margin: 0 0 var(--sp-2); }
+.abd-lessons { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-1); }
+.abd-lesson { inline-size: 100%; min-block-size: var(--target, 48px); display: flex; flex-direction: column; align-items: flex-start;
+  gap: 2px; padding: var(--sp-2) var(--sp-3); border-radius: var(--radius-control, var(--radius)); background: var(--surface, var(--bg));
+  border: 1px solid var(--line); text-align: start; }
+.abd-lesson-title { font-weight: 600; }
+.abd-note { margin-block-start: var(--sp-4); }

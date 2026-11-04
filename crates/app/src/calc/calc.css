@@ -1,0 +1,307 @@
+/* Calculators (calc/mod.rs) and the `calc` study item (calc/item.rs).
+   Colours from tokens only; logical properties only. */
+
+/* ---------- the screen: list and open calculator (calc/picker.rs) ---------- */
+/* Rows like MDCalc's: search and area filter on top, then full-width rows
+   (.coll list markup from parts.css) with the name and one Arabic line. */
+.calcs { display: grid; gap: var(--sp-4); align-items: start; }
+.calcs > * { min-inline-size: 0; }
+.calc-list { display: flex; flex-direction: column; gap: var(--sp-3); }
+/* The search stays in reach while the list scrolls under it. */
+.calc-tools {
+  position: sticky;
+  inset-block-start: calc(-1 * var(--sp-4));
+  z-index: 3;
+  display: flex;
+  gap: var(--sp-2);
+  align-items: center;
+  margin-block: calc(-1 * var(--sp-2)) 0;
+  padding-block: var(--sp-2);
+  /* Clear over the glossy wash at rest, and still readable over rows. */
+  background: color-mix(in srgb, var(--bg) 65%, transparent);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.calc-search { flex: 1; min-inline-size: 0; }
+.calc-search input { inline-size: 100%; min-block-size: var(--target, var(--tap-lg)); }
+.calc-area {
+  flex: none;
+  max-inline-size: 42%;
+  min-block-size: var(--target, var(--tap-lg));
+  /* The caret (parts.css) sits in the end padding, clear of the edge. */
+  padding-inline: var(--sp-4) 2.5rem;
+  font: inherit;
+  font-size: var(--fs-sm);
+  color: var(--text);
+  background-color: var(--surface);
+  border: 1px solid var(--line-soft, var(--line));
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+.calc-area[data-set="true"] {
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  background-color: var(--accent-soft);
+  font-weight: 600;
+  --caret: var(--accent-ink);
+}
+.calc-area:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.calc-sec { display: flex; flex-direction: column; gap: var(--sp-1); }
+.calc-sec-head { display: flex; align-items: baseline; gap: var(--sp-2); margin: 0; font-size: var(--fs-sm); font-weight: 700; color: var(--muted); }
+.calc-sec-n { font-weight: 500; font-variant-numeric: tabular-nums; }
+.calc-empty { display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-1); padding-block: var(--sp-3); }
+/* A row: the button that opens it, then its star. */
+.calc-li { display: flex; align-items: stretch; }
+.calc-row { flex: 1; min-inline-size: 0; }
+.calc-row .coll-title { font-family: var(--font-latin); }
+.calc-row-area { color: var(--accent-ink); font-weight: 600; }
+.calc-pin {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-1);
+  min-inline-size: var(--target, 48px);
+  min-block-size: var(--target, 48px);
+  padding: 0 var(--sp-2);
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.calc-pin[aria-pressed="true"] { color: var(--accent); }
+.calc-pin:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: var(--radius-control, var(--radius)); }
+.calc-pin:active { transform: var(--press, scale(0.94)); }
+@media (hover: hover) and (pointer: fine) { .calc-pin:hover { color: var(--accent); } }
+.calc-pin-wide {
+  border: 1px solid var(--line-soft, var(--line));
+  border-radius: var(--radius-pill);
+  padding-inline: var(--sp-3);
+  font-size: var(--fs-sm);
+  color: var(--text);
+}
+.calc-pin-wide .icon { inline-size: 1.15rem; block-size: 1.15rem; }
+.calc-pin-wide[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-ink); }
+.calc-pin-wide[aria-pressed="true"] .icon { color: var(--accent); }
+.calc-open { display: flex; flex-direction: column; gap: var(--sp-3); }
+.calc-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); flex-wrap: wrap; }
+.calc-crumb { display: none; }
+.calc-back { min-block-size: var(--target, 48px); }
+/* Compact and medium: the list and the open calculator take turns. */
+.calcs[data-open="yes"] .calc-list { display: none; }
+.calcs[data-open="no"] .calc-pane { display: none; }
+/* Expanded: list and calculator side by side; the list keeps its own
+   scroll so the open calculator stays in view, and the row on show is
+   marked. */
+@media (min-width: 840px) {
+  .content:has(.calcs) { --content-max: 80rem; }
+  .calcs { grid-template-columns: minmax(17rem, 23rem) minmax(0, 1fr); gap: var(--sp-6); }
+  .calcs[data-open="yes"] .calc-list, .calcs[data-open="no"] .calc-pane { display: flex; }
+  .calc-list {
+    position: sticky;
+    inset-block-start: 0;
+    max-block-size: calc(100dvh - 7rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-inline-end: var(--sp-1);
+  }
+  .calc-list .calc-tools { inset-block-start: 0; margin-block-start: 0; }
+  .calc-pane { display: flex; flex-direction: column; }
+  .calc-back { display: none; }
+  .calc-crumb { display: inline; font-weight: 600; }
+  .calc-li[data-shown="true"] { background: var(--accent-soft); }
+  .calc-li[data-shown="true"] .coll-title { color: var(--accent-ink); }
+}
+
+/* ---------- the form (CalcForm) ----------
+   Like MDCalc: the name and what it is for, then one row per input with
+   its name on the start side and the control on the end side (stacked
+   when narrow), options as buttons, the unit inside the number box, and
+   the result in a bar that stays at the foot of the screen while the
+   fields run below it. The form lays itself out by its own width, so it
+   reads the same in the pane, on a phone and inside a study item. */
+.calc-form {
+  container: calcform / inline-size;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  inline-size: 100%;
+  max-inline-size: 52rem;
+}
+.calc-fields { display: flex; flex-direction: column; gap: var(--sp-2); }
+.calc-title { display: flex; flex-direction: column; gap: var(--sp-1); padding-block-end: var(--sp-2); }
+.calc-title h1 { margin: 0; font-family: var(--font-latin); font-size: var(--fs-xl, 1.375rem); font-weight: 700; line-height: 1.25; }
+.calc-intro { margin: 0; line-height: 1.6; }
+.calc-inputs { display: flex; flex-direction: column; }
+.field.calc-field {
+  display: grid;
+  gap: var(--sp-2);
+  padding-block: var(--sp-3);
+  border-block-start: 1px solid var(--line-soft, var(--line));
+}
+.calc-field-head { display: flex; flex-direction: column; gap: 2px; min-inline-size: 0; }
+.calc-label { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-1) var(--sp-2); font-weight: 600; }
+.calc-label > bdi { font-family: var(--font-latin); }
+.calc-hint { margin: 0; line-height: 1.5; }
+.calc-control { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; }
+@container calcform (min-width: 34rem) {
+  .field.calc-field { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); column-gap: var(--sp-4); align-items: start; }
+  /* The name lines up with the first line of buttons or the box. */
+  .calc-field-head { padding-block-start: var(--sp-2); }
+}
+
+/* Options: buttons, pressed = chosen. A pair (yes / no, man / woman)
+   shares a line; three or more, or long ones (data-stack), stack one per
+   line, start-aligned, as on MDCalc. */
+.calc-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 7rem), 1fr)); gap: 6px; }
+.calc-options[data-stack="true"] { grid-template-columns: minmax(0, 1fr); }
+.calc-opt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 0;
+  min-block-size: var(--target, 48px);
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--line-soft, var(--line));
+  border-radius: var(--radius-control, var(--radius));
+  background-color: var(--surface-2);
+  color: var(--text);
+  font: inherit;
+  line-height: 1.35;
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.calc-options[data-stack="true"] .calc-opt { justify-content: flex-start; text-align: start; }
+.calc-opt bdi { font-family: var(--font-latin); }
+.calc-opt[aria-pressed="true"] { background-color: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 600; }
+.calc-opt:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.calc-opt:active { transform: var(--press, scale(0.98)); }
+@media (hover: hover) and (pointer: fine) { .calc-opt:not([aria-pressed="true"]):hover { border-color: var(--accent); } }
+
+/* A number: one box with the unit at its end (the box is LTR, so the
+   unit follows the number as it is read). The box draws the border and
+   focus ring; the input inside is bare. */
+.calc-num {
+  display: flex;
+  align-items: stretch;
+  min-block-size: var(--target, 48px);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-control, var(--radius));
+  background-color: var(--surface);
+  overflow: hidden;
+}
+.calc-num:focus-within { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+.field.calc-field .calc-num > input[type="number"] {
+  flex: 1;
+  min-inline-size: 0;
+  inline-size: auto;
+  min-block-size: 0;
+  padding: var(--sp-2) var(--sp-3);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  font-family: var(--font-latin);
+  font-size: 1.0625rem;
+  font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+.field.calc-field .calc-num > input[type="number"]:focus-visible { outline: none; }
+.calc-num > input::-webkit-inner-spin-button,
+.calc-num > input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+.calc-unit {
+  flex: none;
+  display: flex;
+  align-items: center;
+  padding-inline: var(--sp-3);
+  border-inline-start: 1px solid var(--line-soft, var(--line));
+  background-color: var(--surface-2);
+  color: var(--muted);
+  font-family: var(--font-latin);
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+}
+.calc-field[data-invalid="true"] .calc-num { border-color: var(--bad); background-color: var(--bad-soft); }
+.calc-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: var(--sp-2); padding-block-start: var(--sp-2); border-block-start: 1px solid var(--line-soft, var(--line)); }
+
+/* The item's own answer box (calc/item.rs) matches the fields; the
+   number box above overrides this for its bare input. */
+.calc-item input {
+  font: inherit; font-family: var(--font-latin); color: var(--text); background: var(--surface);
+  border: 1px solid var(--line); border-radius: var(--radius-control, var(--radius));
+  padding: var(--sp-2) var(--sp-3); min-block-size: var(--target, var(--tap-lg)); inline-size: 100%; box-sizing: border-box;
+}
+.calc-item input:focus-visible { outline: 2px solid var(--accent); outline-offset: 0; border-color: var(--accent); }
+
+/* ---------- the result bar ----------
+   Waiting: what is left to fill. Ready: the number and its band, in the
+   brand colour. Solid in every appearance, since rows scroll under it. */
+.calc-bar-result {
+  position: sticky;
+  inset-block-end: var(--sp-2);
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--sp-1) var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card, var(--radius-lg, var(--radius)));
+  background-color: var(--glass-solid-2, var(--surface-2));
+  box-shadow: 0 10px 28px -14px color-mix(in srgb, var(--text) 45%, transparent);
+}
+.calc-bar-result[data-state="ready"] { background-color: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.calc-bar-label { font-size: var(--fs-sm); font-weight: 700; }
+.calc-bar-result[data-state="ready"] .calc-bar-label { opacity: 0.85; }
+.calc-bar-result .calc-display { color: inherit; font-size: 1.75rem; }
+/* The band hugs the number; an LTR bdi would otherwise align its text to
+   the far (left) end of a growing box. */
+.calc-bar-band { flex: 0 1 auto; min-inline-size: 0; font-family: var(--font-latin); font-weight: 600; line-height: 1.4; }
+.calc-bar-wait { font-weight: 600; font-variant-numeric: tabular-nums; }
+.calc-bar-next { flex-basis: 100%; font-size: var(--fs-sm); color: var(--muted); }
+
+/* ---------- the result card ----------
+   On its own (a study item) it carries the number; under the bar it is
+   the interpretation (.calc-explain). */
+.calc-result { display: flex; flex-direction: column; gap: var(--sp-2); border-color: var(--accent); }
+.calc-result.calc-explain { border-color: var(--card-border, var(--line)); }
+.calc-result > p { margin: 0; }
+.calc-result-head { margin: 0; font-size: var(--fs-md); }
+.calc-headline { display: flex; align-items: baseline; gap: var(--sp-2) var(--sp-3); flex-wrap: wrap; }
+.calc-display {
+  font-family: var(--font-latin);
+  font-size: 2rem;
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+.calc-band { font-family: var(--font-latin); }
+.calc-meaning { display: block; font-family: var(--font-latin); line-height: 1.6; }
+.calc-parts summary { cursor: pointer; font-weight: 600; min-block-size: var(--tap); display: flex; align-items: center; }
+.calc-parts ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.calc-parts li { display: flex; justify-content: space-between; gap: var(--sp-3); padding-block: 2px; border-block-end: 1px dashed var(--line); }
+.calc-points { font-family: var(--font-latin); font-variant-numeric: tabular-nums; }
+.calc-note { display: block; color: var(--muted); font-family: var(--font-latin); }
+/* Next steps and the differential for the result (calc::guide). */
+.calc-guide { display: flex; flex-direction: column; gap: var(--sp-1); }
+.calc-guide ul { margin: 0; padding-inline-start: 1.2em; display: grid; gap: 2px; text-align: start; }
+.calc-guide li { font-family: var(--font-latin); line-height: 1.5; }
+.calc-source { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-1) var(--sp-2); margin: 0; }
+
+/* Glossy: the item's result sits on a tonal container; text stays solid. */
+.app[data-appearance="glossy"] .calc-result:not(.calc-explain) {
+  background: linear-gradient(150deg, color-mix(in srgb, var(--accent-soft) 70%, var(--surface)), var(--surface));
+}
+/* Liquid glass: options and the number box get the glass rim; chosen
+   options and the bar stay solid. */
+.app[data-appearance="liquid-glass"] :is(.calc-opt:not([aria-pressed="true"]), .calc-num) {
+  border-color: var(--glass-rim);
+  box-shadow: var(--glass-hi);
+}

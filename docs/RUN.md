@@ -1,0 +1,41 @@
+# Run Steps
+
+## Mac (desktop)
+1. Install Rust (`curl https://sh.rustup.rs -sSf | sh`) and `just` (`brew install just`).
+2. Clone the repo: `git clone https://github.com/MohamedRef/Steps-app && cd Steps-app` (Steps's code is on `main`).
+3. `just run` opens the app. `STEPS_WINDOW_SIZE=412x900 just run` previews the phone layout. `STEPS_OPEN_SCREEN=study just run` opens a screen directly. `STEPS_OPEN_LECTURE=hb.L01 just run` opens that lecture's page over the first screen. `STEPS_OPEN_LECTURE=references` opens the References list instead. `STEPS_OPEN_SCREEN=cases STEPS_OPEN_CALC=child_pugh just run` opens a calculator (any id from `docs/CALCULATORS.md`; `list` opens the calculators list). `STEPS_COURSE=git just run` puts one course in view on Lessons, Review and Questions (`all` for every course), and `STEPS_COURSE_SHEET=1` opens the course sheet at launch. `STEPS_OPEN_SETTINGS=look just run` opens Settings on a section (`study`, `reminders`, `sync`, `look`, `tablet`, `mac`, `data`, `updates`, `about`; empty for the list). Theme and interface size (`text_size`) are kept per device in `device-prefs.txt` in the data folder (Settings › Your data shows where).
+   - Progress screen previews: `STEPS_OPEN_SCREEN=stats STEPS_STATS_TAB=plan STEPS_PLAN_EXAM=2027-01-20 STEPS_STATS_DEMO=1 just run` opens the exam planner with a preset exam day and demo numbers (labelled as demo on screen). `STEPS_STATS_TAB` is `progress`, `mistakes` or `plan`.
+
+## S24 Ultra and Tab S11 (Android)
+1. One-time setup: install the Dioxus CLI 0.7.10 (`cargo install dioxus-cli --version 0.7.10 --locked`), Java 17, and Android Studio's SDK plus NDK r27c. Then run `rustup target add aarch64-linux-android`.
+2. Turn on USB debugging on the phone or tablet (Settings › About phone › Software information › tap Build number 7 times, then Developer options › USB debugging), and connect it with a cable.
+3. `just android` builds and installs a debug build. The app id is `app.steps`, so it sits next to Kabar without touching it.
+
+### Kotlin glue (`android/`)
+`android/` at the repo root is a small Gradle library module with the Kotlin that Rust calls through JNI (screen-off oral mode, vibration and study reminders; export and updates later). Nothing to configure: the `#[manganis::ffi("../../android")]` marker in `crates/app/src/platform/background.rs` makes `dx` 0.7.10 copy the folder into its generated Gradle project, add it as an app dependency, and merge `android/src/main/AndroidManifest.xml` (permissions and receivers the glue needs) into the app's manifest.
+
+Study reminders on the Mac come from UNUserNotificationCenter and only work from the bundled Steps.app (`cargo run` / `just run` has no bundle, so Settings › Reminders says reminders need the installed app). macOS asks for permission the first time the Mac is chosen as the device that rings.
+
+`scripts/android-check-apk.sh <apk>` fails if the Kotlin classes or their permissions are missing from an APK; CI runs it on every change to `android/`. When you add a Kotlin class that Rust looks up by name, add it to `CLASSES` in that script. `adb logcat` shows Kotlin errors on the device.
+
+The Mac build (clippy, tests and `dx bundle`) runs in `.github/workflows/mac.yml` nightly and by hand (Actions › Mac › Run workflow), never on pull requests or merges (Mohamed, 2026-10-29): hosted Mac runners are slow and sometimes unavailable for most of an hour. No PR waits for it. Running `just check` plus `just bundle-mac` on the Mac checks the same things.
+
+Release builds (`just apk`, `just install-android`, `just bundle-mac`), their one-time keys, the CI preview APK and updates over the air are described in [RELEASE.md](RELEASE.md). The alpha is out: install `steps-<version>.apk` and `Steps-<version>-mac.zip` from the `steps-v<version>` release on GitHub (RELEASE.md §4; the Mac app needs `xattr -dr com.apple.quarantine /Applications/Steps.app` once), and it updates itself from the `steps-alpha` feed. The CI preview APK on the `steps-preview` prerelease still follows every merge. Each update says what changed (from `changes/*.yaml`, RELEASE.md §5): before installing, once after, and in Settings › التحديثات › سجل التغييرات.
+
+## Web (any browser)
+The same app, compiled to WebAssembly (the Crafting Apps way: one Rust codebase for every platform). It is deployed by `.github/workflows/web-deploy.yml` on every merge to `main` that touches the app or the content, at `https://steps-web.hamorefaat85.workers.dev` (open it, then “Add to Home Screen” or “Install app” if you like). Your progress is kept in that browser (IndexedDB), so take a backup (Settings › بياناتك) now and then. Sync with Steps Cloud works in the browser too (Settings › المزامنة) once the Google Web client is set up ([WEB.md](WEB.md) § Sync). Locally: `cargo install wasm-bindgen-cli@<the version in Cargo.lock> --locked` once, then `just web` and open http://localhost:8080. Details in [WEB.md](WEB.md).
+
+## Study in Anki now
+One file, `/mnt/project-files/steps/anki/steps.apkg`, holds every written lecture as a subdeck of `Steps`. Open it with AnkiDroid on the phone or tablet, or with Anki on the Mac. Importing a newer `steps.apkg` updates the cards in place and keeps your progress. `just anki` builds it into `dist/anki/`; details in [ANKI.md](ANKI.md).
+
+## Your data and your content checks
+- Reviews, your ✓ / ✎ / ✗ checks and review settings live in one SQLite file on each device: `~/Library/Application Support/app.Steps.Steps/steps.db` on the Mac, and the app's private storage on Android. Settings › مذاكرتك shows the exact path. `STEPS_DATA_DIR=/some/folder just run` uses a separate profile (handy for previews).
+- Settings › صدّر مراجعاتك للمحتوى writes `steps-verdicts-YYYY-MM-DD.yaml` (format `steps.verdicts/v1`) to `~/Downloads` on the Mac, or to `Android/data/app.steps/files` on the phone and tablet (open it with the Files app or over USB). The same text is shown on screen, so you can copy it. Send it in the chat: `steps-tools` turns it into a fix list per lecture and adds your ✓ to `content/approved.txt`.
+- Settings › نسخة احتياطية من كل حاجة writes `steps-export-YYYY-MM-DD.json` (every review, check and setting) to `~/Downloads` on the Mac. On the phone and tablet it is written to the app's folder, then the system "Save to" dialog offers Downloads or Drive. Settings › استرجع نسخة merges such a file back (nothing is deleted; the newer row wins). On Android its button opens the system file picker, so a copy on Drive restores a new phone without any cloud.
+- Settings also sets the desired retention (85, 90 or 95%) and new items a day (15, 30, 45 or 60). After 400 reviews the schedule is fitted to your own memory, and it is refitted once a week.
+
+## Sync between your devices (Steps Cloud)
+Steps works fully offline. To keep the Mac, phone and tablet in step, deploy Steps's own free Cloudflare Worker once and sign in under Settings › المزامنة; the steps are in [CLOUD.md](CLOUD.md). The cloud URL and Google client come from `.env` (copy `.env.example`), which `just` loads at build time. Without them, the Sync section says sync isn't set up and nothing leaves the device.
+
+## Your own cards
+Study › كروتك holds cards you write yourself: «＋ كارت جديد» opens a short form (front, back, and optionally the lecture, book page and where it came from). On the phone and tablet, select text in any app and pick «Steps» from the menu, or share text to Steps: it opens the same form with the text on the back, ready for you to write the question. Your cards study like the book's, as their own deck («ذاكر كروتك بس», or the ✎ chip with the lectures), skip the ✓ / ✎ / ✗ check, sync with Steps Cloud, and go into Anki with `--own` ([ANKI.md](ANKI.md)).

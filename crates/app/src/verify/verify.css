@@ -1,0 +1,52 @@
+/* Verify-while-study ("مراجعة صحة المحتوى"): its own dashed box above
+   the grade buttons, titled, so checking the content never reads as part
+   of rating his memory. */
+.verify {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-control);
+  background: var(--soft);
+}
+.verify-head { flex-basis: 100%; display: flex; flex-direction: column; gap: 2px; margin: 0; }
+.verify-head strong { font-size: var(--fs-sm); }
+.verify-q { color: var(--muted); font-size: var(--fs-sm); }
+.verify-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.verify-btn {
+  min-height: var(--target);
+  padding-inline: var(--sp-4);
+  border-radius: var(--radius-control);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  cursor: pointer;
+}
+.verify-btn.ok { border-color: var(--good); color: var(--good); }
+.verify-btn.bad { border-color: var(--bad); color: var(--bad); }
+.verify-btn.edit { border-color: var(--accent); color: var(--accent); }
+.verify-btn.plain { color: var(--muted); }
+.verify-saved { flex: 1; font-size: var(--fs-sm); }
+.verify-saved[data-verdict="approved"] { color: var(--good); }
+.verify-saved[data-verdict="wrong"] { color: var(--bad); }
+.verify .write-failed { flex-basis: 100%; margin: 0; }
+.verify-undo { border: 0; background: none; color: var(--accent); text-decoration: underline; cursor: pointer; min-height: var(--target); }
+.verify-editor, .verify-field { display: flex; flex-direction: column; gap: var(--sp-2); inline-size: 100%; }
+.verify-field > span { font-size: var(--fs-sm); font-weight: 600; }
+.verify-field textarea, .verify-field select {
+  font: inherit;
+  inline-size: 100%;
+  padding: var(--sp-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  /* background-color, not the shorthand: it keeps the drawn caret (parts.css). */
+  background-color: var(--surface);
+  color: var(--text);
+}
+.verify-field select { padding-inline-end: 2.5rem; }
+.verify-field textarea[dir="ltr"] { font-family: var(--font-latin); }
+.verify-error { color: var(--bad); font-size: var(--fs-sm); }
+/* Glossy: the check is a tonal pill group, still solid and readable. */
+.app[data-appearance="glossy"] .verify { border-radius: 18px; }
+.app[data-appearance="glossy"] .verify-btn { border-radius: var(--radius-pill); }

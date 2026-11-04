@@ -1,0 +1,96 @@
+/* The info sheet (crates/app/src/sheet.rs, gestures in sheet.js; adapted
+   from kabar-app main: crates/app/assets/sheet.css). A raised layer in its
+   own colour (--sheet, a tinted surface tested per theme) with an accent
+   hairline and a long shadow, so it never reads as one more card on the
+   page. Docked at the bottom on every width, a phone-width card from
+   600dp. Its height is --sheet-f of the window: at most, until he sizes
+   it, then exactly. No scrim: the page under it stays usable, and it floats over the page
+   without moving it. */
+.bsheet {
+  --sheet-f: 0.56;
+  position: fixed;
+  z-index: 41;
+  inset-inline: 0;
+  inset-block-end: 0;
+  margin: 0 auto;
+  inline-size: 100%;
+  max-inline-size: 40rem;
+  max-block-size: calc(var(--sheet-f) * 100dvh);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  background: var(--sheet);
+  color: var(--text);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+  border-block-end: 0;
+  border-start-start-radius: var(--radius-sheet);
+  border-start-end-radius: var(--radius-sheet);
+  box-shadow: 0 -10px 36px rgb(0 0 0 / 0.3), 0 -2px 8px rgb(0 0 0 / 0.12);
+}
+/* Once he has sized it (sheet.js), it keeps that height. */
+.bsheet.sized { block-size: calc(var(--sheet-f) * 100dvh); }
+@media (min-width: 600px) {
+  .bsheet { max-inline-size: min(28rem, calc(100% - 2 * var(--sp-6))); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .bsheet { animation: bsheet-in 220ms cubic-bezier(0.2, 0, 0, 1) both; }
+  .bsheet.settling { transition: max-block-size 240ms cubic-bezier(0.2, 0, 0, 1), block-size 240ms cubic-bezier(0.2, 0, 0, 1); }
+  .bsheet.closing { transition: transform 170ms ease-in, opacity 170ms ease-in; transform: translateY(100%); opacity: 0.6; }
+}
+.bsheet.closing { pointer-events: none; }
+@keyframes bsheet-in { from { transform: translateY(100%); } to { transform: none; } }
+
+/* The handle: a full-width strip with the bar in the accent colour. The
+   heading row under it drags too, so there is a big target. */
+.bsheet-grip {
+  flex: none;
+  display: grid;
+  place-items: center;
+  block-size: 1.75rem;
+  cursor: ns-resize;
+  touch-action: none;
+  -webkit-user-select: none;
+  user-select: none;
+  border-start-start-radius: inherit;
+  border-start-end-radius: inherit;
+}
+.bsheet-bar {
+  inline-size: 2.75rem;
+  block-size: 0.3rem;
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--accent) 60%, transparent);
+  transition: inline-size 120ms ease, background-color 120ms ease;
+}
+.bsheet-grip:hover .bsheet-bar,
+.bsheet.dragging .bsheet-bar { inline-size: 3.5rem; background: var(--accent); }
+.bsheet-grip:focus-visible { outline: none; }
+.bsheet-grip:focus-visible .bsheet-bar { outline: 2px solid var(--accent); outline-offset: 3px; }
+.bsheet.dragging, .bsheet.dragging * { cursor: ns-resize; -webkit-user-select: none; user-select: none; }
+
+.bsheet-head {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding-inline: var(--sp-4) var(--sp-2);
+  padding-block-end: var(--sp-2);
+  touch-action: none;
+  cursor: ns-resize;
+}
+.bsheet-title { flex: 1; min-inline-size: 0; }
+.bsheet-close { flex: none; cursor: pointer; background: color-mix(in srgb, var(--text) 9%, transparent); }
+
+.bsheet-body {
+  flex: 0 1 auto;
+  min-block-size: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding-inline: var(--sp-4);
+  padding-block: var(--sp-1) calc(var(--sp-4) + env(safe-area-inset-bottom, 0px));
+}
+.bsheet-body > * { flex-shrink: 0; }
+/* Tinted boxes inside (a quote, a note) stay boxes on the tinted sheet. */
+.bsheet :is(.note, blockquote, figure) { background: color-mix(in srgb, var(--surface) 55%, var(--sheet)); }

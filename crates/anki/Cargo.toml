@@ -1,0 +1,23 @@
+[package]
+name = "steps-anki"
+description = "Anki decks (.apkg) from Steps content, for steps-tools and the app."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+steps-core.workspace = true
+serde_json.workspace = true
+# The .apkg is a zipped SQLite collection; ids are SHA-1/SHA-256 based.
+rusqlite = { version = "0.41", features = ["bundled", "serialize"] }
+sha1 = "0.10"
+sha2 = "0.10"
+zip = { version = "4", default-features = false, features = ["deflate"] }
+
+[dev-dependencies]
+serde_yaml_ng.workspace = true
+tempfile = "3"
+
+[lints]
+workspace = true

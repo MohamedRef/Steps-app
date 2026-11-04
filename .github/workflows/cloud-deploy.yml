@@ -1,0 +1,107 @@
+name: Deploy Steps Cloud
+
+# Deploys the Steps Cloud Worker (crates/server) from GitHub, so no Mac or
+# wrangler login is needed (docs/CLOUD.md §3.3). Runs by hand (Actions › Deploy
+# Steps Cloud › Run workflow) and on every push to main that touches the hub,
+# so the hub is always at least as new as the apps built from main.
+#
+# Needs two repo secrets: CLOUDFLARE_API_TOKEN (the "Edit Cloudflare Workers"
+# template) and STEPS_ALLOWED_EMAILS (the Gmail allowed to sign in). Without
+# the token the run says so and stops green. The token signing key is made
+# here once, piped straight into the Worker's secrets, and never printed or
+# stored anywhere else.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - crates/server/**
+      - crates/protocol/**
+      - .github/workflows/cloud-deploy.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cloud-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy the Worker
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Check the Cloudflare token
+        id: ready
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::notice::No CLOUDFLARE_API_TOKEN secret yet; nothing deployed (docs/CLOUD.md §3.3)."
+            echo "go=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "go=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/checkout@v5
+        if: steps.ready.outputs.go == 'true'
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@stable
+        if: steps.ready.outputs.go == 'true'
+        with:
+          targets: wasm32-unknown-unknown
+      - uses: Swatinem/rust-cache@v2
+        if: steps.ready.outputs.go == 'true'
+        with:
+          key: steps-cloud-deploy
+      - uses: cargo-bins/cargo-binstall@8a2045612414e945291083f820cd50b4d8fc2218 # v1.26.0
+        if: steps.ready.outputs.go == 'true'
+      - name: Install worker-build and wrangler
+        if: steps.ready.outputs.go == 'true'
+        run: |
+          cargo binstall -y --force worker-build@0.8
+          npm install -g wrangler@4
+
+      - name: Deploy
+        if: steps.ready.outputs.go == 'true'
+        working-directory: crates/server
+        run: |
+          # Without pipefail, tee's success would hide a failed deploy (#283).
+          set -o pipefail
+          wrangler deploy 2>&1 | tee deploy.log
+          url="$(grep -oE 'https://[a-z0-9.-]+\.workers\.dev' deploy.log | head -1 || true)"
+          rm -f deploy.log
+          {
+            echo "### Steps Cloud is deployed"
+            if [ -n "$url" ]; then
+              echo "Worker URL: \`$url\`"
+              echo
+              echo "Put it in the repo variable \`STEPS_CLOUD_URL\` (docs/CLOUD.md §3.5)."
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      # Once per Worker: these stay in Cloudflare across deploys.
+      - name: Token signing key (first deploy only)
+        if: steps.ready.outputs.go == 'true'
+        working-directory: crates/server
+        run: |
+          if wrangler secret list | grep -q TOKEN_SIGNING_KEY; then
+            echo "already set"
+          else
+            openssl rand -base64 32 | tr -d '\n' | wrangler secret put TOKEN_SIGNING_KEY >/dev/null
+            echo "set"
+          fi
+      - name: Sign-in allowlist
+        if: steps.ready.outputs.go == 'true'
+        working-directory: crates/server
+        env:
+          ALLOWED: ${{ secrets.STEPS_ALLOWED_EMAILS }}
+        run: |
+          if [ -z "$ALLOWED" ]; then
+            echo "::warning::No STEPS_ALLOWED_EMAILS secret: nobody can sign in until it is set and this runs again."
+          else
+            printf '%s' "$ALLOWED" | wrangler secret put ALLOWED_EMAILS >/dev/null
+            echo "set"
+          fi

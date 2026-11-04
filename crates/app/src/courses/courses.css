@@ -1,0 +1,112 @@
+/* The MSc map (courses/map.rs): the hours ring, then course tiles grouped
+   by status. Layout only; colours from tokens. */
+.courses { display: flex; flex-direction: column; gap: var(--sp-4); }
+.cm-hours { flex-direction: row; align-items: center; gap: var(--sp-4); }
+.cm-ring { flex: none; }
+.cm-ring circle { fill: none; stroke-width: 12; stroke-linecap: round; }
+.cm-ring-track { stroke: var(--line); }
+.cm-ring-now { stroke: var(--accent-soft); }
+.cm-ring-done { stroke: var(--accent); }
+.cm-ring-num { fill: var(--text); font-family: var(--font-latin); font-size: 17px; font-variant-numeric: tabular-nums; }
+.cm-hours-text { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; }
+.cm-big { font-weight: 600; font-size: var(--fs-md); }
+.cm-key { display: inline-block; inline-size: 0.7rem; block-size: 0.7rem; border-radius: 50%; margin-inline-end: var(--sp-2); vertical-align: middle; }
+.cm-key-done { background: var(--accent); }
+.cm-key-now { background: var(--accent-soft); border: 1px solid var(--accent); }
+.cm-group { display: flex; flex-direction: column; gap: var(--sp-2); }
+.cm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr)); gap: var(--sp-2); }
+.cm-cell { display: contents; }
+.cm-cell[data-open="true"] .cm-detail { grid-column: 1 / -1; }
+.cm-tile { position: relative; gap: var(--sp-2); min-block-size: 5.5rem; padding-block-start: var(--sp-4); }
+.cm-cell[data-open="true"] .cm-tile { border-color: var(--accent); }
+.cm-bar { position: absolute; inset-block-start: 0; inset-inline: var(--sp-3); block-size: 3px; border-radius: 0 0 3px 3px; background: var(--cm-c, var(--accent)); }
+.cm-tile[data-group="general"] { --cm-c: var(--accent); }
+.cm-tile[data-group="systems"] { --cm-c: var(--good); }
+.cm-tile[data-group="basic"] { --cm-c: var(--muted); }
+.cm-name { font-weight: 600; font-size: var(--fs-sm); line-height: 1.4; overflow-wrap: anywhere; }
+.cm-coverage { margin-block-start: var(--sp-1); line-height: 1.5; }
+.cm-tile:focus-visible { outline-offset: 2px; }
+.cm-meta { display: flex; justify-content: space-between; align-items: center; gap: var(--sp-2); margin-block-start: auto; }
+.cm-meta > .small { min-inline-size: 0; white-space: nowrap; }
+.cm-dots { flex: none; display: inline-flex; gap: 3px; color: var(--cm-c, var(--accent)); }
+.cm-dots i { display: block; inline-size: 0.55rem; block-size: 0.55rem; border-radius: 2px; background: currentColor; }
+.cm-dots i.half { inline-size: 0.3rem; }
+.cm-detail h3 { margin: 0; }
+.cm-open { align-self: flex-start; }
+
+/* The course in view (courses/focus.rs): a pill at the top of Lessons,
+   Review and Questions, and the sheet it opens. */
+.cf-chip {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  max-inline-size: 100%;
+  min-block-size: max(var(--target), 2.5rem);
+  padding-block: var(--sp-1);
+  padding-inline: var(--sp-3) var(--sp-2);
+  margin-block-end: var(--sp-2);
+  border-radius: var(--radius-pill);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.cf-chip[data-all="true"] { background: var(--surface); border-color: var(--line); color: var(--text); }
+.cf-chip[aria-expanded="true"] { border-color: var(--accent); }
+.cf-chip-icon { display: inline-flex; color: var(--accent); }
+.cf-chip-icon svg { inline-size: 1.15rem; block-size: 1.15rem; }
+.cf-chip-name { white-space: nowrap; }
+.cf-chip-title { min-inline-size: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; font-size: var(--fs-sm); opacity: 0.75; }
+.cf-chip-caret { flex: none; display: inline-flex; opacity: 0.8; }
+.cf-chip-caret svg { inline-size: 1rem; block-size: 1rem; }
+@media (hover: hover) and (pointer: fine) { .cf-chip:hover { border-color: var(--accent); } }
+@media (prefers-reduced-motion: no-preference) {
+  .cf-chip { transition: transform 120ms ease; }
+  .cf-chip:active { transform: scale(0.97); }
+}
+/* A page head that carries the chip keeps it above the title. */
+.page-head > .cf-chip { margin-block-end: var(--sp-2); }
+
+.cf-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-1); }
+.cf-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  inline-size: 100%;
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-control);
+  border: 1px solid transparent;
+  background: none;
+  color: var(--text);
+  text-align: start;
+}
+@media (hover: hover) { .cf-row:hover { background: color-mix(in srgb, var(--accent-soft) 55%, transparent); } }
+.cf-row[aria-checked="true"] { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 40%, transparent); }
+.cf-badge {
+  flex: none;
+  display: grid;
+  place-items: center;
+  inline-size: 2.4rem;
+  block-size: 2.4rem;
+  border-radius: 0.8rem;
+  font-weight: 700;
+  font-size: var(--fs-md);
+  color: var(--cf-c, var(--accent));
+  background: color-mix(in srgb, var(--cf-c, var(--accent)) 16%, transparent);
+}
+.cf-badge svg { inline-size: 1.25rem; block-size: 1.25rem; }
+.cf-badge[data-group="general"] { --cf-c: var(--accent); }
+.cf-badge[data-group="systems"] { --cf-c: var(--good); }
+.cf-badge[data-group="basic"] { --cf-c: var(--muted); }
+.cf-main { flex: 1; min-inline-size: 0; display: flex; flex-direction: column; gap: 2px; }
+.cf-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cf-end { flex: none; display: flex; flex-direction: column; align-items: flex-end; gap: 2px; color: var(--muted); }
+.cf-tick { flex: none; display: inline-flex; color: var(--accent); visibility: hidden; }
+.cf-tick svg { inline-size: 1.15rem; block-size: 1.15rem; }
+.cf-row[aria-checked="true"] .cf-tick { visibility: visible; }
+.cf-map { margin-block-start: var(--sp-3); align-self: center; display: inline-flex; align-items: center; gap: var(--sp-2); }
+.cf-map svg { inline-size: 1.1rem; block-size: 1.1rem; }
