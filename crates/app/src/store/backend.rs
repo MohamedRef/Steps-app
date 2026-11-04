@@ -19,7 +19,7 @@ use crate::content::Library;
 use crate::study::PLAYABLE;
 
 /// Kinds the Cases screen plays, so they come back there when due (#242).
-pub const CASE_KINDS: &[&str] = &["case", "calc"];
+pub const CASE_KINDS: &[&str] = &["case"];
 
 /// One study item with the lecture it belongs to.
 #[derive(Clone, Debug)]
@@ -59,7 +59,7 @@ pub fn seconds_for(body: &Body) -> u32 {
         Body::Mcq { .. } => 45,
         Body::Enumerate { .. } | Body::Order { .. } => 60,
         Body::Table { .. } => 90,
-        Body::Essay { .. } | Body::Calc { .. } => 120,
+        Body::Essay { .. } => 120,
         Body::Case { .. } => 180,
     }
 }
@@ -69,7 +69,7 @@ pub fn seconds_for(body: &Body) -> u32 {
 pub struct Overview {
     /// Due items a study session plays (`study::PLAYABLE`).
     pub due: usize,
-    /// Due cases and calc items, which the Cases screen plays (#242).
+    /// Due cases, which the Cases screen plays (#242).
     pub due_cases: Vec<String>,
     pub due_minutes: u32,
     /// New items he can still start today (the daily cap and what's written).

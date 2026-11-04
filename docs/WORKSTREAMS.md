@@ -1,6 +1,6 @@
 # Workstreams
 
-Each workstream is one project thread. A content workstream writes only its own courses (`content/<course>/`, `content/lessons/<course>/`, `content/book-refs/<course>/`) and appends glossary entries, so they never conflict. `chunk` in `content/index.yaml` names the workstream of each lecture.
+Each workstream is one project thread. A content workstream writes only its own courses (`content/<course>/`, `content/lessons/<course>/`, `content/book-refs/<course>/`, `content/glossary/<course>.yaml`), so they never conflict. `chunk` in `content/index.yaml` names the workstream of each lecture.
 
 | Chunk | Workstream | Courses (First Aid pages) |
 |---|---|---|

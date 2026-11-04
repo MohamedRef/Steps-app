@@ -120,21 +120,21 @@ fn a_content_switch_rebuilds_the_catalog_and_keeps_his_cards() {
 #[test]
 fn due_cases_go_to_the_cases_screen_and_mcqs_never_fall_due() {
     let mut b = backend();
-    // A card, a case, a calc item and an MCQ, all missed (#242).
-    for id in ["hb.L01.001", "hb.L01.006", "hb.L01.009", "hb.L01.003"] {
+    // A card, a case and an MCQ, all missed (#242).
+    for id in ["hb.L01.001", "hb.L01.006", "hb.L01.003"] {
         answer(&mut b, id, Grade::Again, T0);
     }
     let later = T0 + 6 * 3_600_000;
     let lib = Library::get();
     let o = b.overview(lib, later);
     assert_eq!(o.due, 1, "only the card plays in a session");
-    assert_eq!(o.due_cases, vec!["hb.L01.006".to_string(), "hb.L01.009".to_string()]);
+    assert_eq!(o.due_cases, vec!["hb.L01.006".to_string()]);
     assert_eq!(b.session_due(later), vec!["hb.L01.001".to_string()]);
-    // The Cases screen and oral still see the case and calc item.
+    // The Cases screen and oral still see the case.
     let mut all = b.due(later);
     all.sort();
-    assert_eq!(all, ["hb.L01.001", "hb.L01.006", "hb.L01.009"]);
-    assert_eq!(b.due_forecast(1, later), vec![3]);
+    assert_eq!(all, ["hb.L01.001", "hb.L01.006"]);
+    assert_eq!(b.due_forecast(1, later), vec![2]);
 }
 
 #[test]

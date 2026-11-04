@@ -165,10 +165,10 @@ impl CloudStatus {
 }
 
 /// The web app's own Google client id ("Steps web", public, not a secret;
-/// docs/WEB.md). `STEPS_WEB_GOOGLE_CLIENT_ID` overrides it.
+/// docs/WEB.md). None until Steps' own Google project exists;
+/// `STEPS_WEB_GOOGLE_CLIENT_ID` sets it at build time.
 #[cfg(target_arch = "wasm32")]
-const WEB_GOOGLE_CLIENT_ID: Option<&str> =
-    Some("1001052243528-f6b44kj27r95v7qc49vkslfv7v4oau9l.apps.googleusercontent.com");
+const WEB_GOOGLE_CLIENT_ID: Option<&str> = None;
 
 pub struct CloudHandle {
     pub commands: UnboundedSender<Command>,

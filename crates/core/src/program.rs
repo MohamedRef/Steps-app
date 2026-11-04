@@ -1,4 +1,4 @@
-//! `content/program.yaml`: the whole MSc as courses (Mohamed's course sheet,
+//! `content/program.yaml`: the whole of Step 1 as courses (Mohamed's course sheet,
 //! 2026-10-29). A course owns every lecture whose id starts with its id
 //! (`hb.L01` belongs to `hb`), so lecture and item ids never change when a
 //! course is added. Packs from before this file have no program; the app then
@@ -16,7 +16,7 @@ pub const SCHEMA: &str = "steps.program/v1";
 #[serde(deny_unknown_fields)]
 pub struct Program {
     pub schema: String,
-    /// `MSc General Internal Medicine`.
+    /// `USMLE Step 1`.
     pub title: String,
     /// In the order of Mohamed's sheet.
     pub courses: Vec<Course>,
@@ -31,10 +31,10 @@ pub struct Course {
     pub title: String,
     /// A short Egyptian Arabic name for chips: `دم`.
     pub short: String,
-    /// Credit hours (0.5 steps).
+    /// A rough study estimate in hours (0.5 steps), not credit hours.
     pub hours: f32,
     pub group: Group,
-    /// The semester he takes it in, when known.
+    /// An optional study block (kept for older program files; Steps leaves it unset).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub semester: Option<u32>,
     /// The default; Mohamed can change it in the app.
