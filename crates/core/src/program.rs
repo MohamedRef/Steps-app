@@ -283,7 +283,7 @@ mod tests {
         let p: Program = serde_yaml_ng::from_str(include_str!("../../../content/program.yaml")).unwrap();
         let i: Index = serde_yaml_ng::from_str(include_str!("../../../content/index.yaml")).unwrap();
         assert_eq!(p.problems(&i), Vec::<String>::new());
-        assert_eq!(p.courses.len(), 16);
+        assert_eq!(p.courses.len(), 17);
         assert!(p.courses.iter().all(|c| c.status == CourseStatus::Active));
         assert_eq!(p.courses.iter().filter(|c| c.group == Group::General).count(), 6);
         assert!(!p.slides("cvs.L04.019"));

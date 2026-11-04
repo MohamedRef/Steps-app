@@ -8,9 +8,11 @@ on:
 permissions:
   contents: read
 
+# One run per branch: a newer push cancels the older run, on main too (the
+# newest main holds every earlier merge).
 concurrency:
   group: screens-browser-${{ github.ref }}
-  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+  cancel-in-progress: true
 
 jobs:
   screens:
@@ -22,6 +24,9 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           shared-key: settings-browser
+          # Only main saves: pull-request caches can't be read by other
+          # branches and evicted main's from the 10 GB store.
+          save-if: ${{ github.ref == 'refs/heads/main' }}
       - uses: actions/setup-node@v5
         with:
           node-version: 22

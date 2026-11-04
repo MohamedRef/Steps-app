@@ -20,6 +20,8 @@ pub fn GradeRow(item_id: String, suggested: Option<Grade>, on_grade: EventHandle
     let pressed = move || done() == Some(*super::SAVE_FAILS.read());
     // The answer is out: let the frame show the book quote.
     let revealed = try_use_context::<super::item::Revealed>();
+    // In the study player: a reason chip rates it "تاني" and says why.
+    let tagging = try_use_context::<super::item::Tagging>().is_some_and(|t| t.0);
     use_effect(move || {
         if let Some(super::item::Revealed(mut r)) = revealed {
             r.set(true);
@@ -60,6 +62,20 @@ pub fn GradeRow(item_id: String, suggested: Option<Grade>, on_grade: EventHandle
                             span { class: "rating-when", {interval_label(days)} }
                         }
                     }
+                }
+            }
+            if tagging {
+                crate::metacog::ReasonPicker {
+                    value: None,
+                    label: crate::i18n::metacog::REASON_LABEL_AGAIN,
+                    disabled: pressed(),
+                    on_pick: move |r| {
+                        if !pressed() {
+                            done.set(Some(*super::SAVE_FAILS.peek()));
+                            super::TAGS.write().reason = Some(r);
+                            on_grade.call(Grade::Again);
+                        }
+                    },
                 }
             }
         }

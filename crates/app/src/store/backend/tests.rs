@@ -33,6 +33,8 @@ fn an_answer_that_isnt_saved_says_so_and_changes_nothing() {
             origin: Origin::Study,
             at_ms: T0 + 60_000,
             took_ms: 4000,
+            confidence: None,
+            reason: None,
         },
     );
     assert!(got.is_err());
@@ -51,6 +53,8 @@ fn rating_again_after_a_failed_save_clears_todays_note() {
         origin: Origin::Study,
         at_ms: T0,
         took_ms: 4000,
+        confidence: None,
+        reason: None,
     };
     b.store.conn.lock().unwrap().execute("DROP TABLE sync_outbox", []).unwrap();
     assert!(StudyStore::record_logged(&mut b, event()).is_err());
@@ -71,10 +75,7 @@ fn rating_again_after_a_failed_save_clears_todays_note() {
 }
 
 fn answer(b: &mut ReviewBackend, id: &str, grade: Grade, at_ms: i64) {
-    StudyStore::record(
-        b,
-        ReviewEvent { item_id: id.into(), grade, origin: Origin::Study, at_ms, took_ms: 5000 },
-    );
+    StudyStore::record(b, ReviewEvent::new(id, grade, Origin::Study, at_ms, 5000));
 }
 
 #[test]
@@ -164,6 +165,8 @@ fn undo_retracts_the_answer_and_restores_the_schedule() {
             origin: Origin::Study,
             at_ms: T0 + 60_000,
             took_ms: 4000,
+            confidence: None,
+            reason: None,
         },
     )
     .unwrap()
@@ -194,6 +197,8 @@ fn undo_retracts_the_answer_and_restores_the_schedule() {
             origin: Origin::Study,
             at_ms: T0,
             took_ms: 4000,
+            confidence: None,
+            reason: None,
         },
     )
     .unwrap()
