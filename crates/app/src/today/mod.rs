@@ -276,17 +276,15 @@ fn unseen_ids(review: &crate::store::Review, unseen: usize) -> Vec<String> {
     self::unseen(&*b, &o, AHEAD_ITEMS.min(unseen))
 }
 
-/// Cases and calc items that fell due: they play on the Cases screen, not
+/// Cases that fell due: they play on the Cases screen, not
 /// in a session, so Today points there with how many are waiting (#242).
 #[component]
 fn DueCases(ids: Vec<String>) -> Element {
     let ui = use_context::<Ui>();
-    let calc_only =
-        ids.iter().all(|id| crate::case::find_item(id).is_some_and(|(_, i)| i.body.kind() == "calc"));
     rsx! {
         button {
             class: "btn-link due-cases",
-            onclick: move |_| crate::case::open_due(ui, calc_only),
+            onclick: move |_| crate::case::open_due(ui),
             {tx::due_cases(ids.len())}
         }
     }

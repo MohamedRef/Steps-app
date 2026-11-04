@@ -51,7 +51,7 @@ def classify(path: str) -> str:
         or ("/" not in path and path.endswith(".md"))
     ):
         return "metadata"
-    # content/glossary.yaml is embedded separately in the app and cannot be
+    # content/glossary.yaml and content/glossary/ are embedded separately in the app and cannot be
     # published as a downloadable content-only update.
     return "app"
 
