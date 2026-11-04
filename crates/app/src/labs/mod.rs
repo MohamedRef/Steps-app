@@ -105,6 +105,7 @@ pub fn open() {
     document::eval("window.__stepsHover && window.__stepsHover.hide();");
     crate::pagesheet::close();
     crate::abbrsheet::close();
+    crate::gopage::close();
     *OPEN.write() = true;
 }
 

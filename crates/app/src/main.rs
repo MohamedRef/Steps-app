@@ -26,6 +26,7 @@ mod dead_ends;
 mod desk;
 mod diag;
 mod fonts;
+mod gopage;
 mod hover;
 mod i18n;
 mod icons;
@@ -297,6 +298,7 @@ fn App() -> Element {
             shortcuts::KeysSheet {}
             update::sheet::UpdateSheet {}
             pagesheet::BookSheet {}
+            gopage::GoPage {}
             abbrsheet::AbbrSheet {}
             labs::LabSheet {}
             courses::Picker {}
