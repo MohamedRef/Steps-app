@@ -1,0 +1,635 @@
+schema: steps.content/v1
+lecture: phs.L02
+title: Ethics
+book: { chapter: 6, pages: [268, 270] }
+topics:
+  - { id: pearson-correlation, title: Pearson correlation coefficient }
+  - { id: core-ethical-principles, title: Core ethical principles }
+  - { id: decision-making-capacity, title: Decision-making capacity }
+  - { id: informed-consent, title: Informed consent }
+  - { id: consent-for-minors, title: Consent for minors }
+  - { id: advance-directives, title: Advance directives }
+  - { id: ventilator-life-support, title: Ventilator-assisted life support }
+  - { id: surrogate-decision-maker, title: Surrogate decision-maker }
+  - { id: confidentiality, title: Confidentiality }
+  - { id: accepting-gifts, title: Accepting gifts from patients }
+items:
+  # ---------- p268: Pearson correlation coefficient ----------
+  - id: phs.L02.001
+    kind: cloze
+    topic: pearson-correlation
+    text: "The Pearson correlation coefficient (r) measures {{c1::linear}} correlation between two variables and always lies between {{c2::−1 and +1}}; the closer |r| is to 1, the {{c3::stronger}} the correlation."
+    src: { page: 268, quote: "A measure of the linear correlation between two variables. r is always between −1 and +1." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.002
+    kind: card
+    topic: pearson-correlation
+    front: What does a negative Pearson r mean?
+    back: Negative correlation (as one variable ↑, the other ↓).
+    src: { page: 268, quote: "Negative r value → negative correlation (as one variable ↑, the other variable ↓)." }
+    status: unverified
+  - id: phs.L02.003
+    kind: cloze
+    topic: pearson-correlation
+    text: "The coefficient of determination = {{c1::r²}}: the proportion of variance in one variable that can be explained by variance in the other."
+    src: { page: 268, quote: "Coefficient of determination = r2 (proportion of variance in one variable that can be explained by variance in the other variable)." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.004
+    kind: card
+    topic: pearson-correlation
+    front: Does a strong correlation (r close to ±1) prove causation?
+    back: No. Correlation does not necessarily imply causation.
+    src: { page: 268, quote: "Correlation does not necessarily imply causation." }
+    status: unverified
+  - id: phs.L02.005
+    kind: card
+    topic: pearson-correlation
+    front: Which shows a stronger correlation, r = −0.8 or r = +0.4?
+    back: r = −0.8 (strong negative); r = +0.4 is a weak positive correlation. Strength depends on the absolute value.
+    src: { page: 268, quote: "r = –0.8 Strong negative correlation r = –0.4 Weak negative correlation" }
+    status: unverified
+  - id: phs.L02.006
+    kind: mcq
+    topic: pearson-correlation
+    stem: >-
+      A study of 300 adults finds that daily minutes of exercise and resting heart rate have a Pearson
+      correlation coefficient of r = −0.7. Which of the following is the best interpretation of this
+      result?
+    options:
+      - About 49% of the variance in resting heart rate is explained by variance in exercise time
+      - Exercise causes a 70% fall in resting heart rate
+      - There is a weak positive linear correlation
+      - 70% of the variance in heart rate is explained by exercise time
+      - The two variables are not related because r is negative
+    answer: 0
+    why:
+      - "Right. The coefficient of determination is r² = 0.49, the proportion of variance in one variable explained by the other."
+      - "Correlation does not necessarily imply causation, and r is not a percentage change."
+      - "A negative r means a negative correlation, and |0.7| is fairly strong."
+      - "The proportion of variance explained is r², not r."
+      - "A negative r is a negative correlation (one ↑, the other ↓), not no correlation; r = 0 is no correlation."
+    src: { page: 268, quote: "Coefficient of determination = r2 (proportion of variance in one variable that can be explained by variance in the other variable)." }
+    status: unverified
+  # ---------- p268: core ethical principles ----------
+  - id: phs.L02.007
+    kind: table
+    topic: core-ethical-principles
+    title: Core ethical principles
+    columns: [Principle, Meaning]
+    rows:
+      - [Autonomy, "Respect patients as individuals (truth-telling, confidentiality), create the conditions for autonomous choice (informed consent), honor their preference to accept or refuse care"]
+      - [Beneficence, "\"Do good\": a special (fiduciary) duty to act in the patient's best interest"]
+      - [Nonmaleficence, "\"Do no harm\": balanced against beneficence; if benefits outweigh risks the patient may make an informed decision to proceed"]
+      - [Justice, "Treat persons fairly and equitably, which does not always mean equally (eg, triage)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 268, quote: "Nonmaleficence “Do no harm.” Must be balanced against beneficence" }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.008
+    kind: card
+    topic: core-ethical-principles
+    front: With what can beneficence conflict, and which traditionally wins?
+    back: With autonomy (an informed patient has the right to decide) or with what is best for society (eg, mandatory TB treatment). Traditionally, patient interest supersedes.
+    src: { page: 268, quote: "May conflict with autonomy (an informed patient has the right to decide) or what is best for society (eg, mandatory TB treatment). Traditionally, patient interest supersedes." }
+    status: unverified
+  - id: phs.L02.009
+    kind: cloze
+    topic: core-ethical-principles
+    text: "Principle of {{c1::double effect}}: in end-of-life care, facilitating {{c2::comfort}} is prioritized over potential side effects (eg, respiratory depression with opioids)."
+    src: { page: 268, quote: "Principle of double effect—facilitating comfort is prioritized over potential side effects (eg, respiratory depression with opioid use) for patients receiving end-of-life care." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.010
+    kind: card
+    topic: core-ethical-principles
+    front: Which ethical principle does triage illustrate?
+    back: Justice. Treating fairly and equitably does not always mean equally.
+    src: { page: 268, quote: "Justice To treat persons fairly and equitably. This does not always imply equally (eg, triage)." }
+    status: unverified
+  - id: phs.L02.011
+    kind: mcq
+    topic: core-ethical-principles
+    stem: >-
+      A 78-year-old woman with metastatic pancreatic cancer is receiving hospice care. She has severe
+      pain despite her current dose of morphine. Her daughter worries that a higher dose may slow her
+      breathing. Increasing the morphine dose to relieve her pain is best supported by which of the
+      following?
+    options:
+      - Principle of double effect
+      - Justice
+      - Therapeutic privilege
+      - Nonmaleficence alone, which forbids any risk of respiratory depression
+      - Duty to protect
+    answer: 0
+    why:
+      - "Right. In end-of-life care, facilitating comfort is prioritized over potential side effects such as opioid respiratory depression."
+      - "Justice is treating persons fairly and equitably (eg, triage), not weighing comfort against side effects."
+      - "Therapeutic privilege is an exception to informed consent: withholding information whose disclosure would severely harm the patient."
+      - "Nonmaleficence is balanced against beneficence; it does not forbid every treatment with risk."
+      - "Duty to protect is an exception to confidentiality to protect a potential victim."
+    src: { page: 268, quote: "Principle of double effect—facilitating comfort is prioritized over potential side effects (eg, respiratory depression with opioid use) for patients receiving end-of-life care." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p268: decision-making capacity ----------
+  - id: phs.L02.012
+    kind: table
+    topic: decision-making-capacity
+    title: Capacity vs competency
+    columns: [Feature, Capacity, Competency]
+    rows:
+      - [Determined by, A physician, A judge]
+      - [Scope, "A specific healthcare-related decision (eg, to refuse medical care)", "Legal: eg, legally unable to make any healthcare-related decision"]
+    blanks: [[0, 1], [0, 2], [1, 1]]
+    src: { page: 268, quote: "Capacity is determined by a physician for a specific healthcare-related decision (eg, to refuse medical care). Competency is determined by a judge" }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.013
+    kind: enumerate
+    topic: decision-making-capacity
+    prompt: Enumerate the four major components of decision-making (capacity).
+    points:
+      - Understanding (what do you know about your condition or the proposed treatment?)
+      - Appreciation (what does your condition mean to you?)
+      - Reasoning (how are you weighing your options?)
+      - Expressing a choice (what would you like to do?)
+    pass: 4
+    hook: "فهم، وإحساس إن الكلام ده يخصه، ووزن، واختيار: Understanding ثم Appreciation ثم Reasoning ثم Expressing a choice."
+    src: { page: 268, quote: "Four major components of decision-making: Understanding (what do you know about your condition/proposed procedure/ treatment?) Appreciation" }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.014
+    kind: card
+    topic: decision-making-capacity
+    front: Do intellectual disabilities or mental illnesses exclude decision-making capacity?
+    back: No, unless the patient's condition presently impairs their ability to make healthcare decisions.
+    src: { page: 268, quote: "Intellectual disabilities and mental illnesses are not exclusion criteria unless the patient’s condition presently impairs their ability to make healthcare decisions." }
+    status: unverified
+  - id: phs.L02.015
+    kind: card
+    topic: decision-making-capacity
+    front: Can a decision made with capacity be revoked because the patient later loses capacity?
+    back: No. Decisions made with capacity cannot be revoked simply because the patient later loses capacity.
+    src: { page: 268, quote: "Note that decisions made with capacity cannot be revoked simply if the patient later loses capacity." }
+    status: unverified
+  - id: phs.L02.016
+    kind: mcq
+    topic: decision-making-capacity
+    stem: >-
+      A 45-year-old man with schizophrenia, stable on medication, is admitted with a foot infection and
+      refuses a recommended amputation. He correctly describes his infection, says it means he could
+      lose his life, compares the risks of surgery with antibiotics alone, and clearly states that he
+      wants antibiotics only. His sister says he cannot decide because of his mental illness. Which of
+      the following is the most appropriate statement?
+    options:
+      - He has decision-making capacity for this decision, so his refusal should be respected
+      - His schizophrenia alone means he lacks capacity
+      - A judge must determine his capacity before he can refuse
+      - His sister should make the decision as his surrogate
+      - He must be found legally competent by a psychiatrist before refusing
+    answer: 0
+    why:
+      - "Right. He shows understanding, appreciation, reasoning and expresses a choice; mental illness does not exclude capacity unless it presently impairs decision-making."
+      - "Mental illness is not an exclusion criterion unless it presently impairs the ability to decide."
+      - "Capacity is determined by a physician for a specific decision; a judge determines competency."
+      - "A surrogate decides only when the patient loses decision-making capacity."
+      - "Competency is a legal determination made by a judge, and capacity is what this decision needs."
+    src: { page: 268, quote: "Intellectual disabilities and mental illnesses are not exclusion criteria unless the patient’s condition presently impairs their ability to make healthcare decisions." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p269: informed consent ----------
+  - id: phs.L02.017
+    kind: enumerate
+    topic: informed-consent
+    prompt: Enumerate what the informed consent process requires (4).
+    points:
+      - "Disclosure: discussion of pertinent information, including risks and benefits"
+      - "Understanding: ability to comprehend"
+      - "Capacity: ability to reason and make one's own decisions"
+      - "Voluntariness: freedom from coercion and manipulation"
+    pass: 4
+    hook: "قول له (Disclosure)، اتأكد إنه فهم (Understanding)، وإنه قادر يقرر (Capacity)، ومن غير ضغط (Voluntariness)."
+    src: { page: 269, quote: "Disclosure: discussion of pertinent information, including risks/benefits Understanding: ability to comprehend Capacity: ability to reason and make one’s own decisions" }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.018
+    kind: card
+    topic: informed-consent
+    front: Which alternative must always be included when discussing a proposed treatment for informed consent?
+    back: No treatment, along with the risks and benefits of the proposed treatment and other alternatives.
+    src: { page: 269, quote: "understanding of their diagnosis and the risks/ benefits of proposed treatment and alternative options, including no treatment." }
+    status: unverified
+  - id: phs.L02.019
+    kind: card
+    topic: informed-consent
+    front: How can a patient revoke written consent?
+    back: At any time, even orally; patients must be told they have this right.
+    src: { page: 269, quote: "Patients must be informed of their right to revoke written consent at any time, even orally." }
+    status: unverified
+  - id: phs.L02.020
+    kind: enumerate
+    topic: informed-consent
+    prompt: Enumerate the exceptions to informed consent ("WIPE it away") (4).
+    points:
+      - "Waiver: the patient explicitly relinquishes the right of informed consent"
+      - "Legally Incompetent: the patient lacks decision-making capacity (obtain consent from a legal surrogate)"
+      - "Therapeutic Privilege: withholding information when disclosure would severely harm the patient or undermine informed decision-making capacity"
+      - "Emergency situation: implied consent may apply"
+    pass: 4
+    hook: "WIPE it away: Waiver و Incompetent و Privilege و Emergency."
+    src: { page: 269, quote: "Exceptions to informed consent (WIPE it away): Waiver—patient explicitly relinquishes the right of informed consent" }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.021
+    kind: cloze
+    topic: informed-consent
+    text: "{{c1::Therapeutic privilege}}: withholding information when disclosure would severely harm the patient or undermine informed decision-making capacity."
+    src: { page: 269, quote: "Therapeutic Privilege—withholding information when disclosure would severely harm the patient or undermine informed decision-making capacity" }
+    status: unverified
+  - id: phs.L02.022
+    kind: mcq
+    topic: informed-consent
+    stem: >-
+      A 30-year-old man is brought to the emergency department unconscious after a motorcycle crash.
+      He has a ruptured spleen and is hypotensive. No family members can be reached, and there is no
+      record of his wishes. Which of the following best justifies proceeding with emergency
+      splenectomy?
+    options:
+      - Implied consent in an emergency
+      - Therapeutic privilege
+      - Waiver of informed consent
+      - Consent from a court-appointed guardian
+      - Principle of double effect
+    answer: 0
+    why:
+      - "Right. In an emergency situation, implied consent may apply (the E of WIPE)."
+      - "Therapeutic privilege is withholding information whose disclosure would severely harm the patient."
+      - "A waiver is a patient explicitly giving up the right; this patient cannot speak."
+      - "There is no time to seek a guardian in a life-threatening emergency."
+      - "Double effect prioritizes comfort over side effects in end-of-life care."
+    src: { page: 269, quote: "Emergency situation—implied consent may apply" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p269: consent for minors ----------
+  - id: phs.L02.023
+    kind: card
+    topic: consent-for-minors
+    front: Who is generally a minor, and when is parental consent not needed for their treatment?
+    back: Any person <18 years old. Exceptions to parental consent include emergency treatment (eg, blood transfusions) or a legally emancipated minor (eg, married, self-supporting, or in the military).
+    src: { page: 269, quote: "exceptions exist for emergency treatment (eg, blood transfusions) or if minor is legally emancipated (eg, married, self-supporting, or in the military)." }
+    status: unverified
+  - id: phs.L02.024
+    kind: enumerate
+    topic: consent-for-minors
+    prompt: Enumerate the situations in which parental consent is usually not required for a minor ("Sex, drugs, and rock and roll") (3).
+    points:
+      - "Sex: contraception, STIs, prenatal care (usually not abortion)"
+      - "Drugs: substance use disorder treatment"
+      - "Rock and roll: emergency or trauma"
+    pass: 3
+    hook: "Sex و Drugs و Rock and roll: منع الحمل والأمراض الجنسية والحمل (مش الإجهاض)، علاج الإدمان، والطوارئ."
+    src: { page: 269, quote: "Sex (contraception, STIs, prenatal care— usually not abortion) Drugs (substance use disorder treatment) Rock and roll (emergency/trauma)" }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.025
+    kind: cloze
+    topic: consent-for-minors
+    text: "Even when a minor's consent is not legally required, the physician should seek the minor's {{c1::assent}} (agreement of someone unable to legally consent)."
+    src: { page: 269, quote: "Physician should seek a minor’s assent (agreement of someone unable to legally consent) even if their consent is not required." }
+    status: unverified
+  - id: phs.L02.026
+    kind: mcq
+    topic: consent-for-minors
+    stem: >-
+      A 16-year-old girl comes to the clinic alone asking for oral contraception. She is sexually
+      active with one partner and lives with her parents. She asks that her parents not be told. Which
+      of the following is the most appropriate next step?
+    options:
+      - Provide contraception and encourage her to communicate with her parents
+      - Require written parental consent before prescribing
+      - Refuse because she is under 18 years old
+      - Call her parents, because minors cannot keep health information confidential
+      - Ask a judge to declare her emancipated
+    answer: 0
+    why:
+      - "Right. Contraception is a situation (sex) in which parental consent is usually not required; physicians should still encourage healthy minor-guardian communication."
+      - "Parental consent is usually not required for contraception."
+      - "Being under 18 does not bar contraception care without parental consent."
+      - "Her care falls under the exception, so the parents need not be involved without her agreement."
+      - "Emancipation (married, self-supporting, military) is not needed for contraception."
+    src: { page: 269, quote: "Physicians should always encourage healthy minor-guardian communication." }
+    status: unverified
+  # ---------- p269: advance directives ----------
+  - id: phs.L02.027
+    kind: table
+    topic: advance-directives
+    title: Advance directives
+    columns: [Type, Key point]
+    rows:
+      - [Oral advance directive, "Prior oral statements guide care; more valid if the patient was informed, the directive was specific, the patient made a choice and repeated it over time to multiple people"]
+      - [Written advance directive, "Specific interventions the patient will accept or reject in a critical or life-threatening illness; a living will is an example"]
+      - [Medical power of attorney, "Patient designates an agent to decide if capacity is lost; revocable while capacity is intact; more flexible than a living will"]
+      - [Do not resuscitate order, "Prohibits CPR only; other life-sustaining measures may still be considered (intubation, feeding tube, chemotherapy)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 269, quote: "Patient designates an agent to make medical decisions in the event that the patient loses decision- making capacity." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.028
+    kind: enumerate
+    topic: advance-directives
+    prompt: Enumerate what makes an oral advance directive more valid (4).
+    points:
+      - The patient was informed
+      - The directive was specific
+      - The patient made a choice
+      - The decision was repeated over time to multiple people
+    pass: 4
+    hook: "كلام قديم يتاخد بيه لو كان عارف، ومحدد، واختار، وكرره لكذا حد على مدة."
+    src: { page: 269, quote: "If patient was informed, directive was specific, patient made a choice, and decision was repeated over time to multiple people, then the oral directive is more valid." }
+    status: unverified
+  - id: phs.L02.029
+    kind: card
+    topic: advance-directives
+    front: What does a DNR order prohibit, and what may the patient still consider?
+    back: It prohibits CPR. The patient may still consider other life-sustaining measures (eg, intubation, feeding tube, chemotherapy).
+    src: { page: 269, quote: "DNR order prohibits cardiopulmonary resuscitation (CPR). Patient may still consider other life- sustaining measures (eg, intubation, feeding tube, chemotherapy)." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.030
+    kind: card
+    topic: advance-directives
+    front: What is a living will?
+    back: An example of a written advance directive, delineating specific interventions the patient anticipates accepting or rejecting during a critical or life-threatening illness.
+    src: { page: 269, quote: "Delineates specific healthcare interventions that patient anticipates accepting or rejecting during treatment for a critical or life-threatening illness. A living will is an example." }
+    status: unverified
+  - id: phs.L02.031
+    kind: mcq
+    topic: advance-directives
+    stem: >-
+      A 70-year-old man with COPD has a DNR order in his chart. He is admitted with pneumonia and
+      worsening hypoxemia, is alert, and the team discusses noninvasive measures and possible
+      intubation. Which of the following best describes the effect of his DNR order?
+    options:
+      - It prohibits CPR, but he may still consider intubation and other life-sustaining measures
+      - It prohibits all life-sustaining treatment including antibiotics
+      - It prohibits intubation but allows CPR
+      - It transfers decisions to his medical power of attorney
+      - It is void once he is admitted to the hospital
+    answer: 0
+    why:
+      - "Right. A DNR order prohibits cardiopulmonary resuscitation; other life-sustaining measures such as intubation may still be considered."
+      - "A DNR order covers CPR only, not every treatment."
+      - "This reverses the order: CPR is what it prohibits."
+      - "A medical power of attorney acts only when the patient loses decision-making capacity; he is alert."
+      - "Nothing in the order lapses on admission."
+    src: { page: 269, quote: "DNR order prohibits cardiopulmonary resuscitation (CPR). Patient may still consider other life- sustaining measures (eg, intubation, feeding tube, chemotherapy)." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.032
+    kind: mcq
+    topic: advance-directives
+    stem: >-
+      A 62-year-old woman with early Alzheimer disease names her son as her agent to make medical
+      decisions if she can no longer make them. Six months later, while still able to understand and
+      weigh her options, she decides she wants her daughter instead. Which of the following is correct?
+    options:
+      - She can revoke the medical power of attorney because her capacity is intact
+      - The designation cannot be changed once signed
+      - Only a judge can change a medical power of attorney
+      - Her son keeps the role because he was named first
+      - She must first write a living will
+    answer: 0
+    why:
+      - "Right. A medical power of attorney can be revoked by the patient if decision-making capacity is intact."
+      - "It is revocable while she keeps capacity."
+      - "No court is needed; the patient revokes it herself."
+      - "Order of naming does not bind her while she has capacity."
+      - "A living will is a separate written directive; a medical power of attorney is more flexible and stands alone."
+    src: { page: 269, quote: "Can be revoked by patient if decision-making capacity is intact. More flexible than a living will." }
+    status: unverified
+  # ---------- p270: ventilator-assisted life support ----------
+  - id: phs.L02.033
+    kind: card
+    topic: ventilator-life-support
+    front: If surrogates indicate the patient would not have wanted ventilator life support, what is done?
+    back: Withhold or withdraw life support, regardless of what the surrogate prefers.
+    src: { page: 270, quote: "If surrogates indicate patient would not have wanted to receive life support with ventilation → withhold or withdraw life support regardless of what the surrogate prefers." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.034
+    kind: card
+    topic: ventilator-life-support
+    front: Who should be involved when the decision is made to withhold or withdraw life support?
+    back: Palliative care, chaplain services and the primary care physician, in discussions with the family, with emotional support.
+    src: { page: 270, quote: "involve palliative care, chaplain services, and the primary care physician in medical discussions with the family and provide emotional support." }
+    status: unverified
+  - id: phs.L02.035
+    kind: cloze
+    topic: ventilator-life-support
+    text: "Surrogate discussions about continuing or withdrawing ventilatory support focus on both the {{c1::prognosis}} of the condition and the {{c2::believed wishes of the patient}}."
+    src: { page: 270, quote: "focusing on both the prognosis of the condition and the believed wishes of the patient." }
+    status: unverified
+  - id: phs.L02.036
+    kind: mcq
+    topic: ventilator-life-support
+    stem: >-
+      A 74-year-old man has been on a ventilator for 2 weeks after a massive stroke and has no advance
+      directive. His wife says he told her many times he would never want to be kept alive on
+      machines, but she wants him kept on the ventilator because she is not ready to lose him. Which
+      of the following is the most appropriate next step?
+    options:
+      - Withdraw ventilatory support and involve palliative care and chaplain services
+      - Continue ventilation because the surrogate prefers it
+      - Ask a judge to decide
+      - Continue ventilation until the adult children agree
+      - Perform a tracheostomy for long-term ventilation
+    answer: 0
+    why:
+      - "Right. If surrogates indicate the patient would not have wanted ventilator life support, withhold or withdraw it regardless of the surrogate's preference, with palliative care and support for the family."
+      - "The surrogate reports the patient's wishes; their own preference does not override them."
+      - "The patient's wishes are known through his surrogate; no court is needed."
+      - "The spouse is first in surrogate priority, and the decision follows the patient's wishes."
+      - "This prolongs the support the patient would not have wanted."
+    src: { page: 270, quote: "If surrogates indicate patient would not have wanted to receive life support with ventilation → withhold or withdraw life support regardless of what the surrogate prefers." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p270: surrogate decision-maker ----------
+  - id: phs.L02.037
+    kind: order
+    topic: surrogate-decision-maker
+    prompt: Order the surrogate decision-makers by priority, highest first ("the spouse chips in").
+    steps:
+      - Spouse
+      - Adult children
+      - Parents
+      - Adult siblings
+      - Other relatives
+    src: { page: 270, quote: "Priority of surrogates: spouse → adult children → parents → adult siblings → other relatives (the spouse chips in)." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.038
+    kind: card
+    topic: surrogate-decision-maker
+    front: What standard does a surrogate use when deciding for a patient without capacity or an advance directive?
+    back: What the patient would have done (the surrogate must know the patient).
+    src: { page: 270, quote: "individuals (surrogates) who know the patient must determine what the patient would have done." }
+    status: unverified
+  - id: phs.L02.039
+    kind: mcq
+    topic: surrogate-decision-maker
+    stem: >-
+      A 58-year-old man is unconscious in the intensive care unit after a cardiac arrest and has no
+      advance directive. His wife, his 30-year-old daughter, his mother and his brother are all
+      present and disagree about further treatment. Who should make medical decisions on his behalf?
+    options:
+      - His wife
+      - His daughter
+      - His mother
+      - His brother
+      - The attending physician
+    answer: 0
+    why:
+      - "Right. Surrogate priority: spouse → adult children → parents → adult siblings → other relatives."
+      - "Adult children come after the spouse."
+      - "Parents come after the spouse and adult children."
+      - "Adult siblings come after spouse, adult children and parents."
+      - "Surrogates who know the patient decide what the patient would have done; the physician is not the surrogate."
+    src: { page: 270, quote: "Priority of surrogates: spouse → adult children → parents → adult siblings → other relatives (the spouse chips in)." }
+    status: unverified
+  # ---------- p270: confidentiality ----------
+  - id: phs.L02.040
+    kind: card
+    topic: confidentiality
+    front: Can a patient waive the right to confidentiality?
+    back: Yes, voluntarily (eg, an insurance company request).
+    src: { page: 270, quote: "The patient may voluntarily waive the right to confidentiality (eg, insurance company request)." }
+    status: unverified
+  - id: phs.L02.041
+    kind: card
+    topic: confidentiality
+    front: If a patient is incapacitated or the situation is emergent, what guides disclosure to family and friends?
+    back: The physician's professional judgment of the patient's best interest.
+    src: { page: 270, quote: "disclosing information to family and friends should be guided by professional judgment of patient’s best interest." }
+    status: unverified
+  - id: phs.L02.042
+    kind: enumerate
+    topic: confidentiality
+    prompt: Enumerate the general principles for an exception to confidentiality (3).
+    points:
+      - Potential physical harm to self or others is serious and imminent
+      - Alternative means to warn or protect those at risk is not possible
+      - Steps can be taken to prevent harm
+    pass: 3
+    hook: "خطر جامد وقريب، ومفيش طريقة تانية، وفيه حاجة نقدر نعملها تمنعه."
+    src: { page: 270, quote: "Potential physical harm to self or others is serious and imminent Alternative means to warn or protect those at risk is not possible Steps can be taken to prevent harm" }
+    status: unverified
+  - id: phs.L02.043
+    kind: enumerate
+    topic: confidentiality
+    prompt: Enumerate the examples of exceptions to patient confidentiality ("The physician's good judgment SAVED the day") (5).
+    points:
+      - Active Suicidal or homicidal ideation
+      - Abuse (children, older adults, and/or prisoners)
+      - "Duty to protect a potential Victim from harm (state-specific laws)"
+      - Epilepsy and other impaired automobile drivers
+      - "Reportable Diseases (eg, STIs, hepatitis, food poisoning)"
+    pass: 5
+    hook: "SAVED: Suicidal/homicidal، Abuse، Victim، Epilepsy، Diseases."
+    src: { page: 270, quote: "Patients with active Suicidal/homicidal ideation Abuse (children, older adults, and/or prisoners)" }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.044
+    kind: card
+    topic: confidentiality
+    front: For reportable diseases, whom do physicians warn, and what may dangerous communicable diseases require?
+    back: Public officials, who then notify people at risk. Dangerous communicable diseases such as TB or Ebola may require involuntary treatment.
+    src: { page: 270, quote: "physicians may have a duty to warn public officials, who will then notify people at risk. Dangerous communicable diseases, such as TB or Ebola, may require involuntary treatment." }
+    status: unverified
+  - id: phs.L02.045
+    kind: mcq
+    topic: confidentiality
+    stem: >-
+      A 34-year-old man in outpatient therapy tells his psychiatrist that he has bought a gun and plans
+      to shoot his former business partner tomorrow. He gives the partner's name and address. Which of
+      the following is the most appropriate action?
+    options:
+      - Break confidentiality to protect the potential victim
+      - Keep the information confidential because it was disclosed in therapy
+      - Wait until the next session to see whether the plan persists
+      - Ask the patient for written consent before telling anyone
+      - Tell only the patient's family
+    answer: 0
+    why:
+      - "Right. Homicidal ideation with serious, imminent harm is an exception to confidentiality (SAVED: Suicidal/homicidal ideation, duty to protect the Victim)."
+      - "Confidentiality yields when physical harm to others is serious and imminent."
+      - "The harm is imminent; waiting removes the chance to prevent it."
+      - "No consent is needed for this exception."
+      - "Telling family does not protect the person at risk."
+    src: { page: 270, quote: "Duty to protect—state-specific laws that sometimes allow physician to inform or somehow protect potential Victim from harm" }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.046
+    kind: mcq
+    topic: confidentiality
+    stem: >-
+      A 28-year-old woman who drives a school bus has a first generalized tonic-clonic seizure and is
+      diagnosed with epilepsy. She asks the physician not to tell anyone because she would lose her
+      job. In states that require it, which of the following is the most appropriate action?
+    options:
+      - Report her as an impaired driver according to state law
+      - Keep the diagnosis confidential in all circumstances
+      - Tell her employer directly without telling her
+      - Report her only if she has a second seizure
+      - Tell her family so they can stop her from driving
+    answer: 0
+    why:
+      - "Right. Patients with epilepsy and other impaired automobile drivers are an exception to confidentiality (the E of SAVED); many of these exceptions are state specific."
+      - "Confidentiality has exceptions when harm to others is serious."
+      - "Reporting follows the law and is discussed with the patient, not done behind her back to her employer."
+      - "The exception applies to the diagnosis she has now."
+      - "Family disclosure is for incapacitated or emergent situations and does not protect the public."
+    src: { page: 270, quote: "Patients with Epilepsy and other impaired automobile drivers" }
+    status: unverified
+  # ---------- p270: accepting gifts from patients ----------
+  - id: phs.L02.047
+    kind: enumerate
+    topic: accepting-gifts
+    prompt: Enumerate the gifts from patients a physician should not accept (3).
+    points:
+      - Gifts that are inappropriately large or valuable
+      - Gifts that could detrimentally affect patient care
+      - Gifts that may cause emotional or financial stress for the patient
+    pass: 3
+    hook: "الهدية تترفض لو كبيرة أوي، أو هتأثر على العلاج، أو هتتعب المريض نفسياً أو مادياً."
+    src: { page: 270, quote: "Physicians should not accept gifts that are inappropriately large or valuable." }
+    status: unverified
+  - id: phs.L02.048
+    kind: card
+    topic: accepting-gifts
+    front: How should a physician decline a gift that breaks the guidelines?
+    back: Thank the patient for offering a kind gift, politely indicate that it must be declined, and emphasize that this does not influence the physician-patient relationship in any way.
+    src: { page: 270, quote: "the best practice is to thank the patient for offering a kind gift, but politely indicate that it must be declined." }
+    status: unverified
+  - id: phs.L02.049
+    kind: mcq
+    topic: accepting-gifts
+    stem: >-
+      An 80-year-old widow on a fixed pension, whose diabetes you have managed for years, offers you
+      an expensive gold watch to thank you for your care. Which of the following is the most
+      appropriate response?
+    options:
+      - Thank her for the kind gift, politely decline it, and reassure her that your care will not change
+      - Accept it, because refusing would harm the relationship
+      - Accept it and donate it to charity without telling her
+      - Accept it only if she promises not to tell other patients
+      - Transfer her care to another physician
+    answer: 0
+    why:
+      - "Right. The gift is inappropriately large and may cause her financial stress, so thank her, decline politely, and stress that the relationship is unaffected."
+      - "Inappropriately large or valuable gifts should not be accepted."
+      - "Accepting it still violates the guidelines."
+      - "Secrecy does not make an inappropriate gift acceptable."
+      - "Declining the gift does not affect the physician-patient relationship."
+    src: { page: 270, quote: "Gifts that may cause emotional or financial stress for the patient should not be accepted." }
+    status: unverified
