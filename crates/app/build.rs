@@ -101,10 +101,12 @@ fn main() {
         .filter(|p| p.extension().is_some_and(|e| e == "yaml"))
         .collect();
     parts.sort();
-    let mut glossary_parts = String::from("pub const GLOSSARY_PARTS: &[&str] = &[\n");
+    // (course, file): a course's own meaning of a term wins in its lessons.
+    let mut glossary_parts = String::from("pub const GLOSSARY_PARTS: &[(&str, &str)] = &[\n");
     for p in &parts {
         println!("cargo:rerun-if-changed={}", p.display());
-        glossary_parts.push_str(&format!("    include_str!({:?}),\n", p.display().to_string()));
+        let course = p.file_stem().map(|s| s.to_string_lossy().to_string()).unwrap_or_default();
+        glossary_parts.push_str(&format!("    ({course:?}, include_str!({:?})),\n", p.display().to_string()));
     }
     glossary_parts.push_str("];\n");
     // The web app fetches the pack as its own file (scripts/web/build.sh copies

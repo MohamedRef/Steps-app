@@ -32,8 +32,9 @@ fn root(case: Case) -> Element {
         *VIEW.write() = case.view;
         if case.abbr {
             let texts = lesson.steps[case.at].shown_text();
-            let terms = crate::abbrsheet::entries(&texts).iter().map(|e| e.term.clone()).collect();
-            *crate::abbrsheet::OPEN.write() = Some(terms);
+            let course = case.lesson.split('.').next().unwrap_or_default().to_string();
+            let terms = crate::abbrsheet::entries(&course, &texts).iter().map(|e| e.term.clone()).collect();
+            *crate::abbrsheet::OPEN.write() = Some((course, terms));
         }
     });
     rsx! {
