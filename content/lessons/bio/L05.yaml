@@ -1,0 +1,584 @@
+schema: steps.lesson/v1
+lecture: bio.L05
+lessons:
+  - id: bio.L05.lesson1
+    title: "الفيتامينات من فوق، وفيتامين A"
+    hook: "قبل ما تحفظ كل فيتامين لوحده: مين بيدوب في الدهون ومين في المية، ومين بيتخزن سنين"
+    minutes: 9
+    pages: [63, 64]
+    topics: [williams-syndrome, essential-fatty-acids, fat-soluble-vitamins, water-soluble-vitamins, dietary-supplementation, vitamin-a]
+    goals:
+      - "تعرف Williams syndrome من أول سطر في الـ vignette"
+      - "تفرّق بين الفيتامينات اللي بتدوب في الدهون واللي بتدوب في المية"
+      - "تحفظ وظيفة فيتامين A ونقصه وزيادته"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Williams: طفل اجتماعي زيادة عن اللزوم"
+        text: |-
+          - **Microdeletion** في الـ long arm بتاع ==chromosome 7==، وفيها جين الـ elastin.
+          - وش "elfin"، intellectual disability، بس ==verbal skills كويسة== وودود جداً مع الغرب.
+          - **Hypercalcemia**، ومشاكل قلب: ==supravalvular aortic stenosis== و pulmonary و renal artery stenosis (الـ elastin ناقص في جدار الشرايين).
+        page: 63
+        quote: "Congenital microdeletion of long arm of chromosome 7 (deleted region includes elastin gene)."
+      - kind: explain
+        title: "Essential fatty acids"
+        text: |-
+          - الجسم مش بيعرف يعملها، فلازم من الأكل (مكسرات، زيوت نباتية، سمك).
+          - **Linoleic (omega-6)** ← ==arachidonic acid== ← prostaglandins و leukotrienes.
+          - **Linolenic (omega-3)**: بيحمي القلب ويقلل الدهون.
+          - أما الـ ==trans fats== (الأكل السريع) فبتعلّي LDL وتوطّي HDL.
+        page: 63
+        quote: "Linoleic acid (omega-6) is metabolized to arachidonic acid, which serves as the precursor to leukotrienes and prostaglandins."
+      - kind: check
+        question: "A 6-year-old with an elfin face is very friendly with strangers and talks fluently. Serum calcium is high. Which murmur cause is most likely?"
+        options: ["Supravalvular aortic stenosis", "Coarctation of the aorta", "Tetralogy of Fallot", "Mitral valve prolapse", "Bicuspid aortic valve"]
+        answer: 0
+        why:
+          - "صح: Williams، الـ elastin ناقص فيضيق الأورطي فوق الصمام."
+          - "الـ coarctation مع Turner."
+          - "الـ tetralogy مع 22q11 (DiGeorge)."
+          - "الـ MVP مع Marfan و Ehlers-Danlos."
+          - "الـ bicuspid valve مع Turner برضه."
+        page: 63
+        quote: "cardiovascular problems (eg, supravalvular aortic stenosis, pulmonary artery stenosis, renal artery stenosis)"
+      - kind: sort
+        prompt: "حط كل فيتامين في مكانه"
+        bins: ["Fat soluble", "Water soluble"]
+        cards:
+          - { text: "A", bin: 0 }
+          - { text: "D", bin: 0 }
+          - { text: "E", bin: 0 }
+          - { text: "K", bin: 0 }
+          - { text: "B12", bin: 1 }
+          - { text: "Folate", bin: 1 }
+          - { text: "C", bin: 1 }
+        why: "الـ fat soluble هم A و D و E و K بس. الباقي (كل الـ B و C) بيدوب في المية."
+        page: 63
+        quote: "Vitamins: fat soluble A, D, E, K."
+      - kind: explain
+        title: "ليه الفرق ده مهم"
+        text: |-
+          - **Fat soluble**: امتصاصها محتاج ==bile== و pancreatic enzymes و ileum سليم. فأي ==steatorrhea== (CF، celiac، mineral oil) ← نقص A و D و E و K.
+          - وبتتخزن في الدهون، فالـ toxicity فيها أكتر.
+          - **Water soluble**: بتتغسل بسرعة، ماعدا ==B12== (في الكبد 3–4 سنين) و B9 (3–4 شهور).
+          - نقص الـ B عموماً: dermatitis و glossitis و diarrhea.
+        page: 63
+        quote: "Wash out easily from body except B12 and B9. B12 stored in liver for ~3-4 years. B9 stored in liver for ~3-4 months."
+      - kind: table
+        title: "مين محتاج supplement"
+        columns: ["Diet", "Supplement"]
+        rows:
+          - ["Vegan", "B12, iron, B2, often D"]
+          - ["Raw egg whites", "B7 (avidin binds biotin)"]
+          - ["Untreated corn", "B3"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+        page: 63
+        quote: "High egg white (raw) Vitamin B7 (avidin in egg whites binds biotin and prevents absorption) Untreated corn Vitamin B3"
+      - kind: explain
+        title: "فيتامين A: العين والجلد والـ epithelium"
+        text: |-
+          - جزء من الـ visual pigment (==retinal==)، و antioxidant.
+          - لازم عشان الـ epithelium يتخصص (mucus-secreting cells)، فبيمنع ==squamous metaplasia==.
+          - كعلاج: **isotretinoin** للـ cystic acne، و ==all-trans retinoic acid== للـ APL، ومفيد في الـ measles عند الناقصين.
+        page: 64
+        quote: "Use all-trans retinoic acid to treat acute promyelocytic leukemia."
+      - kind: figure
+        title: "فيتامين A: نقص وزيادة"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <text x="20" y="20" class="t-sm t-b">Deficiency</text>
+            <rect class="fg-bad" x="20" y="30" width="150" height="24" rx="5"/><text x="30" y="47" class="t-sm">Night blindness</text>
+            <rect class="fg-bad" x="20" y="60" width="150" height="24" rx="5"/><text x="30" y="77" class="t-sm">Bitot spots, xerophthalmia</text>
+            <rect class="fg-bad" x="20" y="90" width="150" height="24" rx="5"/><text x="30" y="107" class="t-sm">Keratomalacia</text>
+            <rect class="fg-bad" x="20" y="120" width="150" height="24" rx="5"/><text x="30" y="137" class="t-sm">Immunosuppression</text>
+            <text x="190" y="20" class="t-sm t-b">Excess</text>
+            <rect class="fg-acc" x="190" y="30" width="150" height="24" rx="5"/><text x="200" y="47" class="t-sm">Acute: ↑ ICP, vomiting</text>
+            <rect class="fg-acc" x="190" y="60" width="150" height="24" rx="5"/><text x="200" y="77" class="t-sm">Chronic: alopecia, liver</text>
+            <rect class="fg-acc" x="190" y="90" width="150" height="24" rx="5"/><text x="200" y="107" class="t-sm">Pseudotumor cerebri</text>
+            <rect class="fg-ink" x="190" y="120" width="150" height="24" rx="5"/><text x="200" y="137" class="t-sm t-bad">Teratogen</text>
+          </svg>
+        caption: "النقص بيبوّظ العين والـ epithelium. الزيادة بتعلّي الضغط جوه الدماغ وبتأذي الكبد، وأخطر حاجة إنه teratogen."
+        alt: "Two columns. Vitamin A deficiency: night blindness, Bitot spots and xerophthalmia, keratomalacia, immunosuppression. Vitamin A excess: acute raised intracranial pressure and vomiting, chronic alopecia and liver toxicity, idiopathic intracranial hypertension, teratogenicity."
+        page: 64
+        quote: "Night blindness (nyctalopia); dry, scaly skin (xerosis cutis); dry eyes (xerophthalmia); conjunctival squamous metaplasia"
+      - kind: aside
+        tone: exam
+        text: "**Isotretinoin** مشتق من فيتامين A و ==teratogen== (cleft palate وعيوب قلب، لأنه بيلخبط الـ homeobox genes). عشان كده لازم pregnancy test سلبي و ==وسيلتين لمنع الحمل== قبل ما يتكتب."
+        page: 64
+        quote: "a ⊝ pregnancy test and two forms of contraception are required before isotretinoin (vitamin A derivative) is prescribed."
+      - kind: check
+        question: "A 17-year-old on oral therapy for severe nodular acne has headaches and blurred vision; fundoscopy shows papilledema. Which is most likely also present?"
+        options: ["Alopecia and dry, scaly skin", "Bitot spots", "Cheilosis", "Perifollicular hemorrhages", "Casal necklace"]
+        answer: 0
+        why:
+          - "صح: vitamin A toxicity (isotretinoin): idiopathic intracranial hypertension مع alopecia وجلد ناشف."
+          - "الـ Bitot spots في النقص مش الزيادة."
+          - "الـ cheilosis نقص B2."
+          - "دي scurvy (نقص C)."
+          - "الـ Casal necklace في الـ pellagra (نقص B3)."
+        page: 64
+        quote: "Chronic toxicity—alopecia, dry skin (eg, scaliness), hepatic toxicity and enlargement, arthralgias, and idiopathic intracranial hypertension."
+      - kind: try
+        items: [bio.L05.002, bio.L05.007, bio.L05.013, bio.L05.019]
+    recap:
+      - "Williams: deletion في 7q (elastin)، hypercalcemia، supravalvular AS، ودود جداً."
+      - "A و D و E و K بيدوبوا في الدهون؛ steatorrhea بتنقصهم."
+      - "B12 بيتخزن سنين، B9 شهور."
+      - "فيتامين A: نقصه night blindness و Bitot spots؛ زيادته ↑ ICP و teratogen."
+    practice: [bio.L05.001, bio.L05.002, bio.L05.003, bio.L05.004, bio.L05.005, bio.L05.006, bio.L05.007, bio.L05.008, bio.L05.009, bio.L05.010, bio.L05.011, bio.L05.012, bio.L05.013, bio.L05.014, bio.L05.015, bio.L05.016, bio.L05.017, bio.L05.018, bio.L05.019]
+  - id: bio.L05.lesson2
+    title: "B1 و B2 و B3 و B5: فيتامينات الطاقة"
+    hook: "مدمن كحول جه بـ hypoglycemia، لو اديته glucose الأول ممكن تعمله Wernicke. ليه؟"
+    minutes: 10
+    pages: [64, 65]
+    topics: [vitamin-b1, vitamin-b2, vitamin-b3, vitamin-b5]
+    goals:
+      - "تحفظ الـ 4 enzymes اللي محتاجة thiamine"
+      - "تفرّق بين Wernicke و Korsakoff و beriberi"
+      - "تعرف الـ pellagra وأسبابها، ونقص B2 و B5"
+    status: unverified
+    steps:
+      - kind: mnemonic
+        word: "BAPT"
+        parts:
+          - { key: "B", text: "Branched-chain ketoacid dehydrogenase" }
+          - { key: "A", text: "α-Ketoglutarate dehydrogenase (TCA)" }
+          - { key: "P", text: "Pyruvate dehydrogenase" }
+          - { key: "T", text: "Transketolase (HMP shunt)" }
+        hook: "الكتاب بيقولها Be APT. كلهم بيستخدموا ==TPP== (thiamine pyrophosphate). أول 3 dehydrogenases، والأخير في الـ HMP shunt."
+        page: 64
+        quote: "In thiamine pyrophosphate (TPP), a cofactor for several dehydrogenase enzyme reactions (Be APT):"
+      - kind: reveal
+        prompt: "ليه بندي thiamine قبل الـ dextrose في مدمن الكحول؟"
+        answer: "من غير B1، الـ pyruvate dehydrogenase واقف، فالـ glucose مش بيتحرق وبيزوّد الضغط على المسار الواقف ← ==ATP بيخلص أكتر==. الأنسجة اللي بتاكل oxygen كتير (المخ والقلب) بتتأذي الأول، فالـ glucose لوحده ممكن يفجّر Wernicke."
+        page: 64
+        quote: "Impaired glucose breakdown → ATP depletion worsened by glucose infusion; highly aerobic tissues (eg, brain, heart) are affected first."
+      - kind: table
+        title: "أمراض نقص B1"
+        columns: ["Disorder", "Picture"]
+        rows:
+          - ["Wernicke encephalopathy", "Confusion, ophthalmoplegia/nystagmus, ataxia; reversible"]
+          - ["Korsakoff syndrome", "Confabulation, permanent memory loss"]
+          - ["Dry beriberi", "Symmetric polyneuropathy, muscle wasting"]
+          - ["Wet beriberi", "High-output heart failure (vasodilation)"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+        page: 64
+        quote: "Wet beriberi High-output cardiac failure (due to systemic vasodilation)."
+      - kind: aside
+        tone: tip
+        text: "الـ Wernicke-Korsakoff بيأذي الـ ==mammillary bodies== و medial dorsal nucleus of thalamus. والتشخيص: الـ RBC transketolase activity ==بتعلى== بعد ما تدي B1."
+        page: 64
+        quote: "Diagnosis made by ↑ in RBC transketolase activity following vitamin B1 administration."
+      - kind: check
+        question: "A man with chronic alcohol use is confused, ataxic and has nystagmus. He is given IV dextrose alone and worsens. Which enzyme's cofactor is lacking?"
+        options: ["Pyruvate dehydrogenase", "Pyruvate carboxylase", "Methylmalonyl-CoA mutase", "Glycogen phosphorylase", "Succinate dehydrogenase"]
+        answer: 0
+        why:
+          - "صح: الـ PDH محتاج TPP (B1)، والـ glucose وقّع الـ ATP أكتر."
+          - "الـ pyruvate carboxylase محتاج biotin (B7)."
+          - "ده محتاج B12."
+          - "ده محتاج PLP (B6)."
+          - "ده محتاج FAD (B2)."
+        page: 64
+        quote: "In patients with chronic alcohol overuse or malnutrition, give thiamine before dextrose to ↓ risk of precipitating Wernicke encephalopathy."
+      - kind: explain
+        title: "B2 (riboflavin): الـ 2 C's"
+        text: |-
+          - جزء من ==FAD و FMN==، بيشتغلوا في الـ redox (زي succinate dehydrogenase في الـ TCA).
+          - النقص: ==Cheilosis== (شفايف ملتهبة ومشققة عند الأركان) و ==Corneal vascularization==، ولسان "magenta".
+        page: 65
+        quote: "Cheilosis A (inflammation of lips, scaling and fissures at the corners of the mouth), “magenta” tongue, corneal vascularization."
+      - kind: explain
+        title: "B3 (niacin): الـ 3 D's"
+        text: |-
+          - جزء من ==NAD+ و NADP+==، وبيتعمل من ==tryptophan== (والتحويل محتاج B2 و B6).
+          - النقص الشديد = **pellagra**: ==Diarrhea و Dementia و Dermatitis== (Casal necklace حوالين الرقبة، وتصبغ في الأماكن اللي بتشوف الشمس).
+          - أسبابه غير الأكل: **Hartnup** (transporter الـ tryptophan بايظ)، **carcinoid** (الـ tryptophan بيروح serotonin)، و **isoniazid** (بينقص B6).
+        page: 65
+        quote: "Symptoms of B3 deficiency (pellagra) (the 3 D’s): diarrhea, dementia (also hallucinations), dermatitis"
+      - kind: figure
+        title: "الـ tryptophan بيروح فين"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="130" y="10" width="100" height="26" rx="6"/><text x="145" y="28" class="t-sm t-b">Tryptophan</text>
+            <line class="fg-arrow" x1="160" y1="36" x2="80" y2="80" marker-end="url(#b5a)"/>
+            <line class="fg-arrow" x1="200" y1="36" x2="280" y2="80" marker-end="url(#b5a)"/>
+            <rect class="fg-good" x="20" y="82" width="120" height="26" rx="6"/><text x="30" y="100" class="t-sm">Niacin → NAD+</text>
+            <text x="20" y="128" class="t-sm t-mut">needs B2 and B6</text>
+            <rect class="fg-bad" x="220" y="82" width="120" height="26" rx="6"/><text x="235" y="100" class="t-sm">Serotonin</text>
+            <text x="220" y="128" class="t-sm t-mut">carcinoid steals it</text>
+            <text x="20" y="152" class="t-sm t-bad">Hartnup: tryptophan not absorbed</text>
+          </svg>
+        caption: "أي حاجة تقلل الـ tryptophan المتاح (Hartnup) أو تسحبه لـ serotonin (carcinoid) أو تنقص B6 (isoniazid) ← niacin أقل ← pellagra."
+        alt: "Tryptophan branches to niacin and NAD+ (needs B2 and B6) or to serotonin (carcinoid tumor diverts it). Hartnup disease stops tryptophan absorption."
+        page: 65
+        quote: "malignant carcinoid syndrome (↑ tryptophan metabolism → ↑ serotonin synthesis), and isoniazid (↓ vitamin B6)."
+      - kind: check
+        question: "A child has a photosensitive rash and diarrhea. Urine shows neutral aminoaciduria. What is the defect?"
+        options: ["Neutral amino acid transporter in kidney and gut", "Cystine and dibasic amino acid transporter", "Tyrosinase", "Phenylalanine hydroxylase", "Homogentisate oxidase"]
+        answer: 0
+        why:
+          - "صح: Hartnup (AR)، tryptophan مش بيتمتص ← niacin قليل ← pellagra."
+          - "ده cystinuria (حصوات)."
+          - "ده albinism."
+          - "ده PKU."
+          - "ده alkaptonuria."
+        page: 65
+        quote: "Deficiency of neutral amino acid (eg, tryptophan) transporters in proximal renal tubular cells and on enterocytes → neutral aminoaciduria"
+      - kind: explain
+        title: "زيادة B3، و B5"
+        text: |-
+          - Niacin بيتستخدم للـ dyslipidemia (↓ VLDL، ↑ HDL). أعراضه الجانبية: ==flushing== (prostaglandin مش histamine، فالـ aspirin قبله بيمنعه)، hyperglycemia، و hyperuricemia (Podagra).
+          - **B5 (pantothenic acid)**: جزء من ==CoA== و fatty acid synthase. نقصه: dermatitis و alopecia و adrenal insufficiency و "burning feet".
+        page: 65
+        quote: "Facial flushing (induced by prostaglandin, not histamine; can avoid by taking aspirin before niacin), pruritus, hyperglycemia, hyperuricemia."
+      - kind: try
+        items: [bio.L05.024, bio.L05.027, bio.L05.033, bio.L05.035]
+    recap:
+      - "B1 = TPP لـ 4 enzymes (BeAPT). thiamine قبل الـ glucose."
+      - "Wernicke: confusion و ophthalmoplegia و ataxia. Korsakoff: confabulation دايم."
+      - "B2: الـ 2 C's (cheilosis، corneal vascularization)."
+      - "B3: الـ 3 D's؛ Hartnup و carcinoid و isoniazid. الـ flushing يتمنع بالـ aspirin."
+      - "B5 = CoA؛ burning feet."
+    practice: [bio.L05.020, bio.L05.021, bio.L05.022, bio.L05.023, bio.L05.024, bio.L05.025, bio.L05.026, bio.L05.027, bio.L05.028, bio.L05.029, bio.L05.030, bio.L05.031, bio.L05.032, bio.L05.033, bio.L05.034, bio.L05.035]
+  - id: bio.L05.lesson3
+    title: "B6 و B7 و B9 و B12"
+    hook: "اتنين عندهم megaloblastic anemia، واحد بس عنده تنميل. الفرق في رقم واحد في التحليل"
+    minutes: 10
+    pages: [66, 67]
+    topics: [vitamin-b6, vitamin-b7, vitamin-b9, vitamin-b12]
+    goals:
+      - "تعرف شغل الـ PLP ونقص B6"
+      - "تحفظ الـ 3 carboxylases اللي محتاجة biotin"
+      - "تفرّق بين نقص B9 و B12 بالأعراض والتحاليل"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "B6 (pyridoxine): بتاع الـ transamination"
+        text: |-
+          - بيتحول لـ ==PLP==: cofactor للـ transamination (ALT و AST)، الـ decarboxylation، و glycogen phosphorylase.
+          - لازم لعمل heme و niacin و histamine و الـ neurotransmitters (serotonin، dopamine، NE، GABA).
+          - النقص: convulsions، peripheral neuropathy، و ==sideroblastic anemia== (الـ heme مش بيتعمل). بيحصل مع ==isoniazid== و الـ oral contraceptives.
+        page: 66
+        quote: "Convulsions, hyperirritability, peripheral neuropathy (deficiency inducible by isoniazid and oral contraceptives), sideroblastic anemia"
+      - kind: table
+        title: "Biotin بيضيف كربونة واحدة"
+        columns: ["Enzyme", "Reaction", "Pathway"]
+        rows:
+          - ["Pyruvate carboxylase", "Pyruvate → oxaloacetate", "Gluconeogenesis"]
+          - ["Acetyl-CoA carboxylase", "Acetyl-CoA → malonyl-CoA", "Fatty acid synthesis"]
+          - ["Propionyl-CoA carboxylase", "Propionyl-CoA → methylmalonyl-CoA", "Odd-chain and branched-chain breakdown"]
+        hide: [[0, 1], [1, 2], [2, 1]]
+        page: 66
+        quote: "Cofactor for carboxylation enzymes (which add a 1-carbon group):"
+      - kind: aside
+        tone: tip
+        text: "نقص B7 نادر: dermatitis و enteritis و alopecia. بييجي من antibiotics لمدة طويلة أو بيض ني كتير: الـ ==avidin== في بياض البيض بيمسك الـ biotin."
+        page: 66
+        quote: "Caused by long-term antibiotic use or excessive ingestion of raw egg whites."
+      - kind: check
+        question: "A bodybuilder drinks a dozen raw egg whites daily and develops alopecia and dermatitis. Which conversion is impaired?"
+        options: ["Pyruvate to oxaloacetate", "Pyruvate to acetyl-CoA", "Methylmalonyl-CoA to succinyl-CoA", "Homocysteine to methionine", "Dopamine to norepinephrine"]
+        answer: 0
+        why:
+          - "صح: pyruvate carboxylase محتاج biotin."
+          - "ده PDH، محتاج B1."
+          - "ده محتاج B12."
+          - "ده محتاج B12 و folate."
+          - "ده محتاج vitamin C."
+        page: 66
+        quote: "Pyruvate carboxylase (gluconeogenesis): pyruvate (3C) → oxaloacetate (4C)"
+      - kind: explain
+        title: "B9 (folate)"
+        text: |-
+          - بيتحول لـ ==THF== اللي بيشيل الـ 1-carbon، ولازم لعمل الـ bases بتاعة DNA و RNA.
+          - بيتمتص في الـ jejunum، ومخزونه صغير (شهور).
+          - النقص: megaloblastic anemia و hypersegmented PMNs و glossitis، و ==مفيش أعراض أعصاب==.
+          - بيحصل مع الكحول والحمل والأدوية (==phenytoin و trimethoprim و methotrexate==).
+          - Folic acid قبل الحمل بشهر وطول الحمل ← ↓ neural tube defects.
+        page: 66
+        quote: "Macrocytic, megaloblastic anemia; hypersegmented polymorphonuclear cells (PMNs); glossitis; no neurologic symptoms (as opposed to vitamin B12 deficiency)."
+      - kind: figure
+        title: "الـ B12 بيشتغل في مكانين"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b5b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="20" y="20" class="t-sm t-b">Methionine synthase</text>
+            <rect class="fg-bad" x="20" y="30" width="110" height="26" rx="6"/><text x="30" y="48" class="t-sm">Homocysteine</text>
+            <line class="fg-arrow" x1="130" y1="43" x2="190" y2="43" marker-end="url(#b5b)"/>
+            <text x="140" y="36" class="t-sm t-acc">B12 + folate</text>
+            <rect class="fg-good" x="192" y="30" width="100" height="26" rx="6"/><text x="202" y="48" class="t-sm">Methionine</text>
+            <text x="20" y="95" class="t-sm t-b">Methylmalonyl-CoA mutase</text>
+            <rect class="fg-bad" x="20" y="105" width="130" height="26" rx="6"/><text x="26" y="123" class="t-sm">Methylmalonyl-CoA</text>
+            <line class="fg-arrow" x1="150" y1="118" x2="200" y2="118" marker-end="url(#b5b)"/>
+            <text x="158" y="111" class="t-sm t-acc">B12</text>
+            <rect class="fg-good" x="202" y="105" width="110" height="26" rx="6"/><text x="210" y="123" class="t-sm">Succinyl-CoA</text>
+            <text x="20" y="158" class="t-sm t-mut">B9 low: ↑ homocysteine only. B12 low: both ↑</text>
+          </svg>
+        caption: "الـ folate بيشتغل في المسار الأول بس. الـ B12 في الاتنين، فنقصه بيعلّي الـ homocysteine والـ methylmalonic acid، والـ MMA ده اللي بيفرّق."
+        alt: "Two reactions. Methionine synthase turns homocysteine into methionine using B12 and folate. Methylmalonyl-CoA mutase turns methylmalonyl-CoA into succinyl-CoA using B12 only. Folate deficiency raises homocysteine only; B12 deficiency raises both homocysteine and methylmalonic acid."
+        page: 67
+        quote: "Cofactor for methionine synthase (transfers CH3 groups as methylcobalamin) and methylmalonyl-CoA mutase."
+      - kind: explain
+        title: "B12: الأعصاب هي الفرق"
+        text: |-
+          - موجود في المنتجات الحيوانية بس (البكتيريا بتعمله بعد مكان الامتصاص)، ومخزونه سنين في الكبد.
+          - النقص: megaloblastic anemia + ==subacute combined degeneration== (dorsal columns و lateral corticospinal و spinocerebellar) من myelin بايظ.
+          - الأسباب: ==pernicious anemia== (مفيش intrinsic factor)، gastric bypass، شيل الـ terminal ileum (Crohn)، Diphyllobothrium latum، ==metformin==، و الـ vegan.
+        page: 67
+        quote: "lack of intrinsic factor (eg, pernicious anemia, gastric bypass surgery), absence of terminal ileum (surgical resection, eg, for Crohn disease), certain drugs (eg, metformin), or insufficient intake (eg, veganism)."
+      - kind: aside
+        tone: trap
+        text: "لو اديت ==folate== لواحد عنده نقص B12، الـ anemia هتتحسن بس الأعصاب ==هتفضل تبوظ==. عشان كده لازم تتأكد من الـ B12 قبل ما تدي folate."
+        page: 67
+        quote: "B9 (folate) supplementation can mask the hematologic symptoms of B12 deficiency, but not the neurologic symptoms."
+      - kind: check
+        question: "A 60-year-old on long-term metformin has macrocytic anemia and loss of vibration sense in both feet. Which lab pattern fits?"
+        options: ["↑ Homocysteine, ↑ methylmalonic acid", "↑ Homocysteine, normal methylmalonic acid", "Normal homocysteine, ↑ methylmalonic acid", "Both normal", "↓ Homocysteine, ↑ methylmalonic acid"]
+        answer: 0
+        why:
+          - "صح: نقص B12 بيعلّي الاتنين."
+          - "ده نقص folate."
+          - "الـ B12 بيقف في المسارين مش واحد."
+          - "النقص لازم يغيّر التحاليل."
+          - "الـ homocysteine بيعلى مش بيقل."
+        page: 67
+        quote: "Associated with ↑ serum homocysteine and methylmalonic acid levels, along with 2° folate deficiency."
+      - kind: try
+        items: [bio.L05.038, bio.L05.041, bio.L05.045, bio.L05.050]
+    recap:
+      - "B6 = PLP؛ isoniazid ← convulsions و neuropathy و sideroblastic anemia."
+      - "Biotin: pyruvate و acetyl-CoA و propionyl-CoA carboxylases؛ avidin في البيض الني."
+      - "B9: megaloblastic من غير أعصاب، ↑ homocysteine بس."
+      - "B12: megaloblastic + subacute combined degeneration، ↑ homocysteine و ↑ MMA."
+    practice: [bio.L05.036, bio.L05.037, bio.L05.038, bio.L05.039, bio.L05.040, bio.L05.041, bio.L05.042, bio.L05.043, bio.L05.044, bio.L05.045, bio.L05.046, bio.L05.047, bio.L05.048, bio.L05.049, bio.L05.050]
+  - id: bio.L05.lesson4
+    title: "C و D و E و K، والزنك، وسوء التغذية"
+    hook: "لثة بتنزف، رجل مقوّسة، طفل بطنه منفوخة: كل واحد فيهم ناقصه حاجة مختلفة"
+    minutes: 10
+    pages: [67, 69]
+    topics: [vitamin-c, vitamin-d, vitamin-e, vitamin-k, zinc, protein-energy-malnutrition]
+    goals:
+      - "تربط الـ scurvy بالـ collagen hydroxylation"
+      - "تعرف تنشيط فيتامين D ونقصه وزيادته"
+      - "تفرّق نقص E عن B12، ونقص K في المولود"
+      - "تفرّق kwashiorkor عن marasmus"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "فيتامين C"
+        text: |-
+          - Antioxidant، وبيحوّل الحديد لـ ==Fe2+== فيساعد امتصاصه (وبيعالج الـ methemoglobinemia).
+          - لازم لـ ==hydroxylation الـ proline و lysine== في الـ collagen، ولـ dopamine β-hydroxylase.
+          - النقص = **scurvy**: لثة منفوخة، كدمات، perifollicular hemorrhages، و "corkscrew" hair (tea and toast diet).
+          - الزيادة: calcium oxalate stones، وبيزوّد الحديد في الـ hemochromatosis.
+        page: 67
+        quote: "Vitamin C deficiency causes sCurvy due to a Collagen hydroCylation defect."
+      - kind: figure
+        title: "تنشيط فيتامين D"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b5c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="20" width="90" height="40" rx="6"/><text x="20" y="38" class="t-sm">Skin (sun): D3</text><text x="20" y="53" class="t-sm">Diet: D2, D3</text>
+            <line class="fg-arrow" x1="100" y1="40" x2="135" y2="40" marker-end="url(#b5c)"/>
+            <rect class="fg-acc" x="137" y="20" width="90" height="40" rx="6"/><text x="147" y="38" class="t-sm t-b">Liver</text><text x="147" y="53" class="t-sm">25-OH D3</text>
+            <line class="fg-arrow" x1="227" y1="40" x2="262" y2="40" marker-end="url(#b5c)"/>
+            <rect class="fg-good" x="264" y="20" width="90" height="40" rx="6"/><text x="274" y="38" class="t-sm t-b">Kidney</text><text x="274" y="53" class="t-sm">1,25-(OH)2 D3</text>
+            <text x="150" y="85" class="t-sm t-mut">storage form</text>
+            <text x="196" y="85" class="t-sm t-mut">1α-hydroxylase ↑ by PTH</text>
+            <text x="20" y="120" class="t-sm">Active form: ↑ gut Ca2+ and PO4 absorption</text>
+            <text x="20" y="145" class="t-sm t-bad">Granulomas: macrophages make 1,25 → hypercalcemia</text>
+          </svg>
+        caption: "الجلد والأكل بيدّوا D، الكبد يعمل 25-OH (المخزن)، والكلية تعمل الشكل النشط بالـ 1α-hydroxylase. الـ PTH وقلة الكالسيوم والفوسفات بيعلّوه."
+        alt: "Vitamin D from skin and diet goes to the liver, which makes 25-hydroxy D3, the storage form, then to the kidney, which makes 1,25-dihydroxy D3 by 1-alpha-hydroxylase, raised by PTH. The active form raises gut calcium and phosphate absorption. Granulomas make it too and cause hypercalcemia."
+        page: 68
+        quote: "Both converted to 25-OH D3 (storage form) in liver and to the active form 1,25-(OH)2 D3 (calcitriol) in kidney."
+      - kind: explain
+        title: "نقص D وزيادته"
+        text: |-
+          - النقص: ==rickets== في الأطفال (genu varum)، و osteomalacia في الكبار، و hypocalcemic tetany.
+          - أسبابه: malabsorption، قلة الشمس، CKD، الكبد. البشرة الغامقة والـ prematurity بيزوّدوه.
+          - الرضيع على ==الرضاعة الطبيعية== ياخد D بالبق.
+          - الزيادة: hypercalcemia و hypercalciuria. شوفها في الـ ==granulomatous diseases== (sarcoidosis).
+        page: 68
+        quote: "Seen in granulomatous diseases (↑ activation of vitamin D by epithelioid macrophages)."
+      - kind: check
+        question: "A 40-year-old with bilateral hilar lymphadenopathy and noncaseating granulomas has hypercalcemia. What is the mechanism?"
+        options: ["Macrophage 1α-hydroxylase activates vitamin D", "PTHrP secretion", "Excess hepatic 25-hydroxylation", "Bone metastasis", "Primary hyperparathyroidism"]
+        answer: 0
+        why:
+          - "صح: الـ epithelioid macrophages بتنشّط فيتامين D."
+          - "الـ PTHrP مع squamous cell carcinoma."
+          - "الـ 25-hydroxylation مش متحكم فيه هنا."
+          - "مفيش دليل على metastasis."
+          - "الـ sarcoidosis مش بيعلّي الـ PTH، ده بيقل."
+        page: 68
+        quote: "Hypercalcemia, hypercalciuria, loss of appetite, stupor."
+      - kind: explain
+        title: "فيتامين E: شبه B12 من غير الدم"
+        text: |-
+          - Antioxidant بيحمي غشا الـ RBC والأعصاب.
+          - النقص: ==hemolytic anemia== و acanthocytosis، و demyelination في الـ posterior columns و spinocerebellar tract (زي ==Friedreich ataxia==).
+          - الفرق عن B12: ==مفيش megaloblastic anemia== ولا hypersegmented neutrophils ولا ↑ MMA.
+          - الجرعات العالية بتزوّد مفعول الـ warfarin.
+        page: 68
+        quote: "Neurologic presentation may appear similar to vitamin B12 deficiency, but without megaloblastic anemia, hypersegmented neutrophils, or ↑ serum methylmalonic acid levels."
+      - kind: explain
+        title: "فيتامين K: الـ Koagulation"
+        text: |-
+          - Cofactor للـ ==γ-carboxylation== بتاع factors ==II و VII و IX و X== و proteins C و S. الـ warfarin بيوقفه.
+          - المولود أمعاؤه sterile، ومفيش K في لبن الأم ← ↑ PT و ↑ aPTT و ==bleeding time طبيعي==. عشان كده حقنة K عند الولادة.
+          - في الكبار: antibiotics لمدة طويلة أو مرض كبد.
+        page: 69
+        quote: "Neonatal hemorrhage with ↑ PT and ↑ aPTT but normal bleeding time (neonates have sterile intestines and are unable to synthesize vitamin K)."
+      - kind: check
+        question: "A 5-day-old born at home with no postnatal care has bleeding from the umbilical stump. PT and aPTT are prolonged; platelets and bleeding time are normal. What was missed?"
+        options: ["Vitamin K injection at birth", "Oral vitamin D", "Iron supplementation", "Vitamin B12", "Factor VIII screening"]
+        answer: 0
+        why:
+          - "صح: hemorrhagic disease of the newborn، يتمنع بحقنة K."
+          - "الـ D مش بيأثر على التجلط."
+          - "الحديد مش ليه علاقة بالـ PT."
+          - "الـ B12 بيعمل anemia مش نزيف."
+          - "نقص VIII بيطوّل الـ aPTT بس، مش الـ PT."
+        page: 69
+        quote: "Neonates are given vitamin K injection at birth to prevent hemorrhagic disease of the newborn."
+      - kind: explain
+        title: "الزنك"
+        text: |-
+          - لازم لأكتر من 100 enzyme، وللـ ==zinc fingers== (transcription factors).
+          - النقص: جروح بطيئة، مناعة ضعيفة، male hypogonadism، شعر قليل، وفقد الطعم والشم (==dysgeusia و anosmia==).
+          - **Acrodermatitis enteropathica**: عيب خلقي في امتصاص الزنك: شعر بيقع، إسهال، و rash حوالين الفتحات وأطراف الصوابع.
+        page: 69
+        quote: "Associated with acrodermatitis enteropathica A —congenital defect in intestinal zinc absorption manifesting with triad of hair loss, diarrhea, and inflammatory skin rash"
+      - kind: table
+        title: "Kwashiorkor ضد marasmus"
+        columns: ["", "Kwashiorkor", "Marasmus"]
+        rows:
+          - ["Missing", "Protein", "Calories"]
+          - ["Edema", "Yes (↓ albumin)", "No"]
+          - ["Key sign", "Swollen belly, fatty liver", "Muscle wasting"]
+        hide: [[0, 1], [0, 2], [1, 2], [2, 1]]
+        page: 69
+        quote: "Malnutrition not causing edema. Diet is deficient in calories but no nutrients are entirely absent."
+      - kind: mnemonic
+        word: "MEALS"
+        parts:
+          - { key: "M", text: "Malnutrition" }
+          - { key: "E", text: "Edema" }
+          - { key: "A", text: "Anemia" }
+          - { key: "L", text: "Liver (fatty)" }
+          - { key: "S", text: "Skin lesions" }
+        hook: "الـ kwashiorkor جاي من وجبات (MEALS) ناقصة protein. الكبد دهني لأن الـ apolipoproteins مش بتتعمل."
+        page: 69
+        quote: "Kwashiorkor results from protein- deficient MEALS: Malnutrition Edema Anemia Liver (fatty) Skin lesions"
+      - kind: try
+        items: [bio.L05.054, bio.L05.059, bio.L05.063, bio.L05.066, bio.L05.071]
+    recap:
+      - "C: collagen hydroxylation؛ scurvy؛ بيساعد امتصاص الحديد."
+      - "D: كبد ← 25-OH، كلية ← 1,25؛ rickets و osteomalacia؛ granulomas ← hypercalcemia."
+      - "E: hemolysis + أعصاب زي B12 من غير megaloblastic."
+      - "K: II و VII و IX و X و C و S؛ حقنة للمولود."
+      - "Zinc: dysgeusia، hypogonadism، acrodermatitis enteropathica."
+      - "Kwashiorkor: protein، edema (MEALS). Marasmus: calories، wasting."
+    practice: [bio.L05.051, bio.L05.052, bio.L05.053, bio.L05.054, bio.L05.055, bio.L05.056, bio.L05.057, bio.L05.058, bio.L05.059, bio.L05.060, bio.L05.061, bio.L05.062, bio.L05.063, bio.L05.064, bio.L05.065, bio.L05.066, bio.L05.067, bio.L05.068, bio.L05.069, bio.L05.070, bio.L05.071]
+  - id: bio.L05.lesson5
+    title: "الكحول بيعمل إيه في الكبد"
+    hook: "مدمن كحول صايم: سكره واطي، الـ lactate عالي، والكبد دهني. كل ده من رقم واحد: NADH/NAD+"
+    minutes: 8
+    pages: [70, 70]
+    topics: [ethanol-metabolism]
+    goals:
+      - "ترتّب خطوات تكسير الإيثانول ومكان كل دوا"
+      - "تفهم ليه الـ NADH العالي بيعمل hypoglycemia و lactic acidosis و fatty liver"
+    status: unverified
+    steps:
+      - kind: order
+        prompt: "رتّب تكسير الإيثانول"
+        steps: ["Ethanol", "Acetaldehyde (alcohol dehydrogenase)", "Acetate (acetaldehyde dehydrogenase)", "Acetyl-CoA"]
+        why: "الـ alcohol dehydrogenase في الـ cytosol، والـ acetaldehyde dehydrogenase في الـ mitochondria. كل خطوة بتحوّل NAD+ لـ NADH."
+        page: 70
+        quote: "Alcohol dehydrogenase Acetaldehyde dehydrogenase"
+      - kind: explain
+        title: "دوايين على نفس الخط"
+        text: |-
+          - **Fomepizole**: competitive inhibitor للـ ==alcohol dehydrogenase== ← العلاج المفضل لتسمم الـ methanol و ethylene glycol. (والإيثانول نفسه ينفع، لأن الـ enzyme بيحبه أكتر.)
+          - **Disulfiram**: بيوقف ==acetaldehyde dehydrogenase== ← acetaldehyde يتراكم ← أعراض hangover ← المريض يبطّل يشرب.
+        page: 70
+        quote: "Disulfiram—blocks acetaldehyde dehydrogenase → ↑ acetaldehyde → ↑ hangover symptoms → discouraging drinking."
+      - kind: check
+        question: "A man drank antifreeze 2 hours ago and has a high anion gap acidosis. Which drug acts on the same enzyme as the first step of ethanol metabolism?"
+        options: ["Fomepizole", "Disulfiram", "Metronidazole", "Naltrexone", "Acamprosate"]
+        answer: 0
+        why:
+          - "صح: بيوقف الـ alcohol dehydrogenase فالـ ethylene glycol مش بيتحول لمواد سامة."
+          - "ده بيوقف الخطوة التانية (acetaldehyde dehydrogenase)."
+          - "بيعمل disulfiram-like reaction بس مش العلاج."
+          - "ده opioid antagonist لتقليل الرغبة."
+          - "ده NMDA modulator للـ craving."
+        page: 70
+        quote: "Fomepizole—competitive inhibitor of alcohol dehydrogenase; preferred antidote for overdoses of methanol or ethylene glycol."
+      - kind: aside
+        tone: tip
+        text: "الـ ==NAD+ هو الـ limiting reagent==، فالـ alcohol dehydrogenase شغال ==zero-order==: كمية ثابتة في الساعة مهما شربت. والستات بيتأثروا أكتر: gastric alcohol dehydrogenase أقل، جسم أصغر، ومية أقل."
+        page: 70
+        quote: "NAD+ is the limiting reagent. Alcohol dehydrogenase operates via zero-order kinetics."
+      - kind: figure
+        title: "NADH كتير، فكل حاجة بتتقلب"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b5d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-bad" x="125" y="8" width="110" height="28" rx="6"/><text x="135" y="27" class="t-sm t-b">↑ NADH/NAD+</text>
+            <line class="fg-arrow-bad" x1="140" y1="36" x2="70" y2="62" marker-end="url(#b5d)"/>
+            <line class="fg-arrow-bad" x1="165" y1="36" x2="140" y2="100" marker-end="url(#b5d)"/>
+            <line class="fg-arrow-bad" x1="195" y1="36" x2="220" y2="100" marker-end="url(#b5d)"/>
+            <line class="fg-arrow-bad" x1="220" y1="36" x2="290" y2="62" marker-end="url(#b5d)"/>
+            <rect class="fg-box" x="5" y="64" width="130" height="30" rx="6"/><text x="12" y="83" class="t-sm">Pyruvate → lactate</text>
+            <rect class="fg-box" x="230" y="64" width="125" height="30" rx="6"/><text x="237" y="83" class="t-sm">OAA → malate</text>
+            <rect class="fg-box" x="60" y="102" width="120" height="30" rx="6"/><text x="66" y="121" class="t-sm">DHAP → glycerol-3-P</text>
+            <rect class="fg-box" x="190" y="102" width="120" height="30" rx="6"/><text x="196" y="121" class="t-sm">Acetyl-CoA → ketones</text>
+            <text x="5" y="160" class="t-sm t-bad">Lactic acidosis</text>
+            <text x="222" y="160" class="t-sm t-bad">Fasting hypoglycemia</text>
+            <text x="80" y="175" class="t-sm t-bad">Fatty liver</text>
+            <text x="200" y="175" class="t-sm t-bad">Ketoacidosis</text>
+          </svg>
+        caption: "الـ NADH الزيادة بيدفع كل تفاعل ناحية الشكل المختزل: pyruvate يبقى lactate، والـ OAA يبقى malate (فالـ gluconeogenesis تقف)، والـ DHAP يبقى glycerol-3-P (دهون)، والـ acetyl-CoA يروح ketones بدل الـ TCA."
+        alt: "A raised NADH to NAD+ ratio pushes pyruvate to lactate (lactic acidosis), oxaloacetate to malate (fasting hypoglycemia), DHAP to glycerol-3-phosphate (fatty liver), and acetyl-CoA to ketones (ketoacidosis)."
+        page: 70
+        quote: "Ethanol metabolism ↑ NADH/ NAD+ ratio in liver, causing:"
+      - kind: match
+        prompt: "وصّل كل نتيجة بسببها"
+        pairs:
+          - ["Lactic acidosis", "Pyruvate → lactate"]
+          - ["Fasting hypoglycemia", "OAA → malate"]
+          - ["Ketoacidosis", "Acetyl-CoA diverted from the TCA"]
+          - ["Hepatosteatosis", "DHAP → glycerol-3-P"]
+        why: "كل واحدة فيهم تفاعل بيستخدم NADH، فلما الـ NADH يزيد بيمشي في الاتجاه ده."
+        page: 70
+        quote: "Fasting hypoglycemia— ↓ gluconeogenesis due to ↑ conversion of OAA to malate"
+      - kind: reveal
+        prompt: "ليه مدمن الكحول اللي ماكلش من يومين سكره بيوطى؟"
+        answer: "المخزون (glycogen) خلص، فهو معتمد على الـ gluconeogenesis. بس الـ NADH العالي بيحوّل الـ ==OAA لـ malate== والـ pyruvate لـ lactate، فمفيش مادة خام تعمل glucose."
+        page: 70
+        quote: "Lactic acidosis—↑ pyruvate conversion to lactate"
+      - kind: check
+        question: "A man with chronic heavy drinking has an enlarged, fatty liver. Which change most directly supplies the glycerol backbone for the triglycerides?"
+        options: ["↑ DHAP conversion to glycerol-3-phosphate", "↑ Oxaloacetate conversion to malate", "↑ Pyruvate conversion to lactate", "↑ β-oxidation of fatty acids", "↓ Acetaldehyde dehydrogenase activity"]
+        answer: 0
+        why:
+          - "صح: الـ glycerol-3-P بيتجمع مع الـ fatty acids يعمل triglycerides."
+          - "ده سبب الـ hypoglycemia."
+          - "ده سبب الـ lactic acidosis."
+          - "الـ NADH العالي بيقلل الـ β-oxidation مش يزوّدها."
+          - "ده مفعول الـ disulfiram."
+        page: 70
+        quote: "Hepatosteatosis— ↑ conversion of DHAP to glycerol-3-P"
+      - kind: try
+        items: [bio.L05.072, bio.L05.075, bio.L05.078, bio.L05.079]
+    recap:
+      - "Ethanol ← acetaldehyde ← acetate؛ fomepizole على الخطوة الأولى، disulfiram على التانية."
+      - "NAD+ هو الـ limiting reagent؛ zero-order."
+      - "↑ NADH: lactic acidosis، fasting hypoglycemia، ketoacidosis، fatty liver."
+    practice: [bio.L05.072, bio.L05.073, bio.L05.074, bio.L05.075, bio.L05.076, bio.L05.077, bio.L05.078, bio.L05.079]

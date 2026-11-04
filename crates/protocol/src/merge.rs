@@ -76,6 +76,9 @@ pub fn validate(op: &Op, max_payload_bytes: usize) -> Result<SyncKind, RejectRea
 }
 
 #[cfg(test)]
+mod props;
+
+#[cfg(test)]
 mod tests {
     use serde_json::json;
 
@@ -85,7 +88,7 @@ mod tests {
         Op {
             id: format!("{device}-{wall_ms}"),
             table: table.into(),
-            row_id: "hb.L01.001".into(),
+            row_id: "cvs.L04.001".into(),
             kind,
             hlc: Hlc { wall_ms, counter: 0, device: device.into() },
             relay: false,

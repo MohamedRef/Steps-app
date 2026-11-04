@@ -67,7 +67,7 @@ pub const MINUTE_CHOICES: [u32; 4] = [5, 10, 15, 20];
 pub struct Answers {
     /// Minutes a day; the study screen's default session length.
     pub minutes: Option<u32>,
-    /// Lectures he had already studied before Steps (`hb.L01`, ...).
+    /// Lectures he had already studied before Steps (`cvs.L04`, ...).
     pub studied: Vec<String>,
 }
 
@@ -123,6 +123,12 @@ fn close() {
     *OPEN.write() = false;
 }
 
+/// Screen tests: this device has seen the first-run questions.
+#[cfg(test)]
+pub fn mark_done_for_tests() {
+    shared().put_local_setting(SEEN, &true).unwrap();
+}
+
 /// Opens the questions again (Settings › Study).
 pub fn reopen() {
     *OPEN.write() = true;
@@ -156,6 +162,7 @@ pub fn Onboarding() -> Element {
 #[component]
 fn Questions() -> Element {
     let mut ui = use_context::<Ui>();
+    let settings = use_context::<crate::settings::SettingsNav>();
     // STEPS_ONBOARD=3 opens on that screen (previews and screenshots).
     let mut step = use_signal(|| {
         let n = std::env::var("STEPS_ONBOARD").ok().and_then(|v| v.parse::<usize>().ok()).unwrap_or(1);
@@ -248,6 +255,17 @@ fn Questions() -> Element {
             h1 { {tx::WELCOME_TITLE} }
             p { class: "muted", {tx::WELCOME_BODY} }
             p { class: "note", {tx::WELCOME_NOTE} }
+            // A new device of his: sign in and his plan and lessons sync
+            // down instead of being asked again (Settings › Sync).
+            p {
+                button { class: "btn btn-secondary",
+                    onclick: move |_| {
+                        close();
+                        settings.show(Some(crate::settings::Section::Sync));
+                    },
+                    {tx::HAVE_ACCOUNT}
+                }
+            }
         },
         Step::Time => rsx! {
             h1 { {tx::TIME_TITLE} }

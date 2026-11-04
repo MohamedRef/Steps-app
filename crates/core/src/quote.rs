@@ -3,12 +3,12 @@
 //! and a table is drawn as a table (Mohamed, 2026-11-02). The quote stays
 //! one YAML string, so the layout lives in plain-text conventions:
 //!
-//! - `Table 2: Child-Pugh classification` (or `Box`/`Figure`) on its own
+//! - `Table 2: Shock hemodynamics` (or `Box`/`Figure`) on its own
 //!   line is the table's title.
-//! - Lines starting with `|` are grid rows (`| Ascites | Absent | Severe |`);
+//! - Lines starting with `|` are grid rows (`| Hypovolemic | ↓ | ↑ |`);
 //!   the first is the header, and a `|---|` line is skipped.
 //! - Other lines of a multi-line quote are list rows; two leading spaces per
-//!   level nest them (`Metabolic disease:` then `  Hemochromatosis`).
+//!   level nest them (`Risk factors:` then `  Hypertension`).
 //! - A one-line quote is a paragraph.
 
 /// One piece of a quote, in order.
@@ -122,40 +122,37 @@ mod tests {
     #[test]
     fn one_line_is_a_paragraph() {
         assert_eq!(
-            parse("Hepatic fibrosis follows hepatocellular necrosis."),
-            vec![Block::Para("Hepatic fibrosis follows hepatocellular necrosis.".into())]
+            parse("Rheumatic heart disease affects the mitral valve most."),
+            vec![Block::Para("Rheumatic heart disease affects the mitral valve most.".into())]
         );
         assert!(parse("  ").is_empty());
     }
 
     #[test]
     fn grouped_table_nests_and_marks_groups() {
-        let q = "Table 1: Causes of liver cirrhosis\nAlcohol\nMetabolic disease:\n  Hemochromatosis (iron overload)\n  Galactosemia\nSyphilis (tertiary)";
+        let q = "Table 1: Causes of aortic dissection\nHypertension\nConnective tissue disorders:\n  Marfan syndrome (fibrillin)\n  Ehlers-Danlos syndrome\nBicuspid aortic valve";
         let b = parse(q);
-        assert_eq!(b[0], Block::Title("Table 1: Causes of liver cirrhosis".into()));
+        assert_eq!(b[0], Block::Title("Table 1: Causes of aortic dissection".into()));
         let Block::List(rows) = &b[1] else { panic!("{b:?}") };
         let shape: Vec<(usize, bool)> = rows.iter().map(|r| (r.depth, r.group)).collect();
         assert_eq!(shape, [(0, false), (0, true), (1, false), (1, false), (0, false)]);
-        assert_eq!(rows[2].text, "Hemochromatosis (iron overload)");
+        assert_eq!(rows[2].text, "Marfan syndrome (fibrillin)");
     }
 
     #[test]
     fn grid_has_head_and_skips_the_rule() {
-        let q = "Table 2: Child-Pugh classification\n| Variable | 1 | 2 | 3 |\n|---|---|---|---|\n| Ascites | Absent | Mild to moderate | Severe |";
+        let q = "Table 2: Shock hemodynamics\n| Type | CVP | PCWP | CO |\n|---|---|---|---|\n| Cardiogenic | ↑ | ↑ | ↓ |";
         let b = parse(q);
         assert_eq!(b.len(), 2);
         let Block::Grid { head, rows } = &b[1] else { panic!("{b:?}") };
-        assert_eq!(head, &["Variable", "1", "2", "3"]);
-        assert_eq!(rows, &[vec!["Ascites", "Absent", "Mild to moderate", "Severe"]]);
-        assert_eq!(
-            plain(q),
-            "Table 2: Child-Pugh classification\nVariable · 1 · 2 · 3\nAscites · Absent · Mild to moderate · Severe"
-        );
+        assert_eq!(head, &["Type", "CVP", "PCWP", "CO"]);
+        assert_eq!(rows, &[vec!["Cardiogenic", "↑", "↑", "↓"]]);
+        assert_eq!(plain(q), "Table 2: Shock hemodynamics\nType · CVP · PCWP · CO\nCardiogenic · ↑ · ↑ · ↓");
     }
 
     #[test]
     fn a_sentence_naming_a_table_is_not_a_title() {
-        let b = parse("Causes are summarized in Table 1.\nAlcohol");
+        let b = parse("Causes are summarized in Table 1.\nHypertension");
         assert!(matches!(&b[0], Block::List(r) if r.len() == 2));
     }
 }

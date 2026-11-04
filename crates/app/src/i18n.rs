@@ -157,6 +157,12 @@ pub mod cite {
     }
 }
 
+/// The web app's boot screen (`platform/web.rs`).
+#[cfg_attr(not(target_arch = "wasm32"), allow(dead_code))]
+pub mod web {
+    pub const NO_CONTENT: &str = "Steps مقدرتش تجيب المحتوى. اتأكد إن النت شغال وافتحها تاني.";
+}
+
 /// A book page's sheet (pagesheet/mod.rs).
 pub mod sheet {
     pub const RESIZE: &str = "اسحب لفوق أو لتحت عشان تكبّرها أو تصغّرها";
@@ -1062,6 +1068,21 @@ pub mod hover {
     pub const TERMS: &str = "مصطلح في القاموس";
 }
 
+pub mod gopage {
+    pub const TITLE: &str = "روح لصفحة في First Aid";
+    pub const TOOL: &str = "روح لصفحة";
+    pub const HINT: &str = "اكتب رقم الصفحة المطبوع في الكتاب (أو مدى زي 300–305).";
+    pub const PLACEHOLDER: &str = "مثلاً 300";
+    pub const GO: &str = "افتح";
+    pub const INVALID: &str = "اكتب رقم صفحة بس.";
+    pub fn outside(page: u32) -> String {
+        format!("صفحة {page} مش جوه أي محاضرة في Steps (المحاضرات من Section II و III).")
+    }
+    pub fn nearest(page: u32) -> String {
+        format!("افتح أقرب صفحة: {page}")
+    }
+}
+
 pub mod keys {
     pub const TITLE: &str = "اختصارات الكيبورد";
     pub const OPEN: &str = "اعرض الاختصارات";
@@ -1077,6 +1098,7 @@ pub mod keys {
     pub const FLAG: &str = "تعلّم السؤال عشان ترجعله";
     pub const ESC: &str = "تقفل أي حاجة مفتوحة";
     pub const HELP: &str = "القايمة دي";
+    pub const PAGE: &str = "تروح لصفحة في First Aid";
 }
 
 pub mod verify {
@@ -1279,6 +1301,43 @@ pub mod cloud {
     pub const P_OUTDATED: &str = "السيرفر أحدث من النسخة دي. حدّث Steps.";
     pub const P_CLOCK: &str =
         "ساعة الجهاز سابقة الوقت الحقيقي، فالتغييرات الجديدة مستنية. ظبط الساعة على التلقائي وهتتبعت لوحدها.";
+
+    // Username + password (docs/CLOUD.md §4.1).
+    pub const PW_TITLE: &str = "الدخول باسم مستخدم وباسورد";
+    pub const PW_INTRO: &str = "على جهاز مش بتاعك ومن غير جيميلك: ادخل باسم المستخدم والباسورد اللي ظبطتهم من جهازك، وهتلاقي مذاكرتك كلها وآخر حتة وقفت عندها.";
+    pub const USERNAME: &str = "اسم المستخدم";
+    pub const PASSWORD: &str = "الباسورد";
+    pub const NOT_MINE: &str = "الجهاز ده مش بتاعي";
+    pub const NOT_MINE_HINT: &str = "هتخرج لوحدك أول ما تقفل التاب أو التطبيق.";
+    pub const PW_SIGN_IN: &str = "ادخل";
+    pub const PW_CHECKING: &str = "بيدخل…";
+    pub const PW_YOURS: &str = "بتدخل من أي جهاز بـ";
+    pub const PW_HOW: &str = "على أي جهاز: افتح Steps، ومن «المزامنة» اكتب اسم المستخدم والباسورد.";
+    pub const PW_NONE: &str =
+        "اختار اسم مستخدم وباسورد عشان تدخل من أي جهاز من غير جيميل. حسابك هو هو، فكل حاجة بتتزامن.";
+    pub const USERNAME_HINT: &str = "من ٣ لـ ٣٢: حروف إنجليزي صغيرة وأرقام و . _ -";
+    pub const NEW_PASSWORD: &str = "الباسورد الجديد";
+    pub const PASSWORD_HINT: &str = "١٠ حروف على الأقل. جملة قصيرة تفتكرها أحسن من كلمة صعبة.";
+    pub const PASSWORD_AGAIN: &str = "اكتبه تاني";
+    pub const PW_SAVE: &str = "احفظ";
+    pub const PW_SAVING: &str = "بيحفظ…";
+    pub const PW_SAVED: &str = "اتحفظ. تقدر تدخل بيه من أي جهاز دلوقتي.";
+    pub const PW_CHANGE: &str = "غيّر";
+    pub const PW_REMOVE: &str = "اقفل الدخول بالباسورد";
+    pub const CANCEL: &str = "إلغاء";
+    pub const TEMPORARY: &str =
+        "دخول مؤقت: هتخرج لوحدك لما تقفل التاب أو التطبيق. لو خلصت قبلها، دوس «اخرج من الجهاز ده».";
+    pub const P_WRONG_PASSWORD: &str = "اسم المستخدم أو الباسورد مش مظبوط. جرّب تاني.";
+    pub const P_LOCKED: &str = "محاولات غلط كتير. استنى شوية وجرّب تاني.";
+    /// "استنى 5 دقايق": the lock's wait, with the Egyptian number forms.
+    pub fn locked(minutes: u64) -> String {
+        use crate::i18n::count::{MINUTE, count};
+        format!("محاولات غلط كتير، فالدخول بالاسم ده واقف شوية. جرّب تاني بعد {}.", count(minutes, &MINUTE))
+    }
+    pub const P_TAKEN: &str = "اسم المستخدم ده محجوز. اختار اسم تاني.";
+    pub const P_BAD_USERNAME: &str = "اسم المستخدم من ٣ لـ ٣٢: حروف إنجليزي وأرقام و . _ - بس.";
+    pub const P_SHORT_PASSWORD: &str = "الباسورد لازم يبقى ١٠ حروف على الأقل.";
+    pub const P_MISMATCH: &str = "الباسوردين مش زي بعض.";
 }
 
 pub mod settings {
@@ -1332,7 +1391,7 @@ pub mod settings {
     pub const TEXT_LARGE: &str = "كبير";
     pub const TEXT_LARGER: &str = "أكبر";
     pub const TEXT_SAMPLE_AR: &str = "إيه أول علاج لـ";
-    pub const TEXT_SAMPLE_TERM: &str = "variceal bleeding";
+    pub const TEXT_SAMPLE_TERM: &str = "Stanford type A dissection";
 
     pub const DATA_FOLDER: &str = "فولدر البيانات";
     pub const DATA_NOWHERE: &str = "مش معروف على الجهاز ده";
@@ -1615,6 +1674,7 @@ pub mod onboard {
     }
     pub const LATER: &str = "بعد كده";
     pub const CONTINUE: &str = "كمّل";
+    pub const HAVE_ACCOUNT: &str = "بتذاكر على Steps قبل كده؟ ادخل على حسابك";
     pub const WELCOME_TITLE: &str = "مذاكرة تناسب يومك.";
     pub const WELCOME_BODY: &str = "درس قصير، محاولة تفتكر، ومراجعة تثبّت الفهم.";
     pub const WELCOME_NOTE: &str =
@@ -1641,10 +1701,7 @@ pub mod onboard {
     pub fn studied_sub(n: usize) -> String {
         match n {
             0 => "ولا محاضرة لسه".to_string(),
-            1 => "محاضرة واحدة".to_string(),
-            2 => "محاضرتين".to_string(),
-            3..=10 => format!("{n} محاضرات"),
-            n => format!("{n} محاضرة"),
+            n => super::count::count(n, &super::count::LECTURE),
         }
     }
     pub const REMIND_ROW: &str = "التذكير";
@@ -1831,7 +1888,7 @@ pub mod learn {
     pub fn no_match(q: &str) -> String {
         format!("مفيش درس فيه «{q}». جرّب كلمة تانية أو اسم المحاضرة بالإنجليزي.")
     }
-    /// `كبد › المحاضرة 3`: the course, then the lecture's number in it.
+    /// `قلب › المحاضرة 3`: the course, then the lecture's number in it.
     pub fn lecture_n(course: &str, n: &str) -> String {
         format!("{course} › المحاضرة {n}")
     }
@@ -2008,6 +2065,85 @@ mod grammar_tests {
         assert_eq!(study::enum_goal(8, 5), "فيه 8 نقط، ولو افتكرت 5 منهم تعدّي.");
         assert_eq!(plan::days_left(40), "فاضل 40 يوم مذاكرة");
         assert_eq!(anki::contents(12, 2), "12 محاضرة · سؤالين");
+    }
+
+    #[test]
+    fn each_count_takes_the_right_form() {
+        assert_eq!(today::due_cases(2), "حالتين مستنية مراجعة في شاشة الحالات");
+        assert_eq!(today::exam_in(1), "الامتحان بكرة. إنت جاهز أكتر مما فاكر.");
+        assert_eq!(today::exam_in(2), "فاضل يومين على الامتحان");
+        assert!(today::tight_days(1).starts_with("الخطة محتاجة يوم مذاكرة زيادة في الأسبوع"));
+        assert!(today::tight_days(3).starts_with("الخطة محتاجة 3 أيام مذاكرة زيادة في الأسبوع"));
+        assert_eq!(today::headline(0, 5), "5 حاجات جديدة، على قد وقتك.");
+        assert_eq!(today::headline(1, 0), "مراجعة واحدة، وبس.");
+        assert_eq!(today::headline(2, 12), "مراجعتين، و12 حاجة جديدة.");
+        assert_ne!(today::hero_body(0, 3), today::hero_body(3, 0));
+        assert_ne!(today::hero_body(3, 0), today::hero_body(3, 3));
+        assert_eq!(today::plan_reviews_only(7), "7 مراجعات بس");
+        assert_eq!(
+            study_settings::personal(40),
+            format!("{} 40 مراجعة. بيتحدّث كل أسبوع.", study_settings::PERSONAL_1)
+        );
+        assert_eq!(study::due_elsewhere(1), "فيه كارت واحد مستحق في مادة تانية.");
+        assert_eq!(study::due_elsewhere(2), "فيه كارتين مستحقين في مواد تانية.");
+        assert_eq!(study::due_elsewhere(4), "فيه 4 كروت مستحقة في مواد تانية.");
+        assert_eq!(study::due_elsewhere(11), "فيه 11 كارت مستحق في مواد تانية.");
+        assert_eq!(table::mark_each(1), "فاضل خانة واحدة: عرفتها ولا لأ؟");
+        assert_eq!(table::recalled(3, 3), "كل الخانات صح (3 من 3). حلو أوي!");
+        assert_eq!(order::moves_to_fix(1), "الترتيب قريب: نقل خطوة واحدة بس بيظبطه.");
+        assert_eq!(case::steps(5), "5 خطوات");
+        assert_eq!(own::cards(1), "كارت واحد");
+        assert_eq!(cloud::pending(1), "تغيير واحد مستني يترفع");
+        assert_eq!(cloud::pending(5), "5 تغييرات مستنية تترفع");
+        assert_eq!(cloud::pending(103), "103 تغييرات مستنية تترفع");
+        assert_eq!(update::builds_count(1), "نسخة جديدة");
+        assert_eq!(update::builds_count(2), "نسختين جداد");
+        assert_eq!(update::builds_count(4), "4 نسخ جديدة");
+        assert_eq!(update::builds_count(12), "12 نسخة جديدة");
+        assert_eq!(update::content_updates_count(1), "تحديث محتوى");
+        assert_eq!(update::content_updates_count(2), "تحديثين محتوى");
+        assert_eq!(update::content_updates_count(3), "3 تحديثات محتوى");
+        assert_eq!(update::content_updates_count(20), "20 تحديث محتوى");
+        assert_eq!(remind::text(None), remind::text(Some(0)));
+        assert_eq!(remind::text(Some(1)), "عندك مراجعة واحدة النهارده. دقيقة وتخلص.");
+        assert_eq!(remind::text(Some(14)), "عندك 14 مراجعة النهارده. يلا نبدأ بجلسة قصيرة.");
+        assert_eq!(onboard::days_sub(7), "كل أيام الأسبوع");
+        assert_eq!(onboard::days_sub(1), "يوم واحد في الأسبوع");
+        assert_eq!(onboard::days_sub(2), "يومين في الأسبوع");
+        assert_eq!(onboard::days_sub(5), "5 أيام في الأسبوع");
+        assert_eq!(onboard::studied_sub(0), "ولا محاضرة لسه");
+        assert_eq!(onboard::studied_sub(1), "محاضرة واحدة");
+        assert_eq!(onboard::studied_sub(2), "محاضرتين");
+        assert_eq!(onboard::studied_sub(9), "9 محاضرات");
+        assert_eq!(onboard::studied_sub(11), "11 محاضرة");
+        assert_eq!(onboard::studied_sub(103), "103 محاضرات");
+        assert_eq!(recap::exam_in(0), "الامتحان النهارده. بالتوفيق.");
+        assert_eq!(recap::exam_in(30), "فاضل على الامتحان 30 يوم.");
+        assert_eq!(learn::misses(1), "وصّلتهم كلهم، بغلطة واحدة في السكة.");
+        assert_eq!(learn::score_line(5, 5), "ولا غلطة. الدرس ده بقى بتاعك.");
+        assert_eq!(learn::score_line(3, 5), "كويس جدًا. اللي غلطت فيه هيرجعلك في المراجعة.");
+        assert_eq!(learn::score_line(1, 5), "عادي جدًا من أول مرة، ده درس جديد. الكروت هتثبّته.");
+    }
+
+    #[test]
+    fn numbers_and_names_land_where_the_sentence_wants_them() {
+        assert_eq!(cite::slide(4), "سلايد 4");
+        assert_eq!(bank::all_of("قلب"), "كل محاضرات قلب");
+        assert_eq!(bank::checked(true, 'C'), "إجابتك صح.");
+        assert_eq!(bank::checked(false, 'C'), "إجابتك غلط. الإجابة الصح C.");
+        assert_eq!(stats::better(true, 12), "أحسن من الأسبوع اللي فات بـ 12%");
+        assert_eq!(stats::better(false, 3), "أحسن من الشهر اللي فات بـ 3%");
+        assert!(today::tight_cap(150).starts_with("لو علّيت حد المراجعات اليومي لـ 150، الخطة تلحق كلها."));
+        assert_eq!(plan::tight_cap(150), "لو علّيت حد المراجعات اليومي لـ 150 هتلحق كلها.");
+        assert!(order::in_place(3, 5).starts_with("3 من 5 في مكانها."));
+        assert_eq!(order::should_be(2), "مكانها 2");
+        assert_eq!(learn::placed_of(2, 6), "اخترت 2 من 6");
+        assert_eq!(learn::slot(3), "الخطوة رقم 3");
+        assert_eq!(learn::should_be(1), "مكانها رقم 1");
+        assert_eq!(learn::sort_left(4, 9), "فاضل 4 من 9");
+        assert_eq!(learn::in_place(5, 7), "5 من 7 في مكانهم.");
+        assert!(learn::no_match("VSD").starts_with("مفيش درس فيه «VSD»."));
+        assert_eq!(learn::resume_at(3, 8), "هتكمّل من خطوة 3 من 8");
     }
 }
 

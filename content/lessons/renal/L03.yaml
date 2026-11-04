@@ -1,0 +1,812 @@
+schema: steps.lesson/v1
+lecture: renal.L03
+lessons:
+  - id: renal.L03.lesson1
+    title: "المية فين في الجسم، والكلية بتفلتر إزاي"
+    hook: "60-40-20، وفلتر بيصد الـ albumin بالشحنة، وكلمة واحدة اسمها clearance هتحل نص مسائل الكلية"
+    minutes: 9
+    pages: [599, 600]
+    topics: [course-of-ureters, fluid-compartments, glomerular-filtration-barrier, renal-clearance, glomerular-filtration-rate]
+    goals:
+      - "تعرف مسار الـ ureter وفين بيتعوّر في العمليات"
+      - "تحفظ 60-40-20 وتعرف كل compartment بيتقاس بإيه"
+      - "تفهم الـ clearance وتقارنه بالـ GFR"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ ureter: المية تحت الكوبري"
+        text: |-
+          الـ ureter بيطلع من الـ renal pelvis وينزل **retroperitoneal**:
+          - **تحت** الـ gonadal arteries
+          - **فوق** الـ common iliac artery
+          - **تحت** الـ uterine artery (في الست) أو الـ vas deferens (في الراجل)
+
+          والكتاب بيقولها: ==Water (ureters) flows over the iliacs and under the bridge==. عشان كده في عمليات الرحم، لما الجراح يربط الـ uterine أو ovarian vessels، ممكن يمسك الـ ureter معاهم ← انسداد أو تسريب.
+        page: 599
+        quote: "Course of ureter A : arises from renal pelvis, travels under gonadal arteries → over common iliac artery → under uterine artery/vas deferens (retroperitoneal). Gynecologic procedures (eg, ligation of uterine or ovarian vessels) may damage ureter → ureteral obstruction or leak."
+      - kind: aside
+        tone: exam
+        text: "الحصوة بتقف في ==3 أماكن ضيقة==: الـ ureteropelvic junction، والـ pelvic inlet (وهو بيعدّي فوق الـ iliac)، والـ ureterovesical junction. وانقباض الـ bladder بيضغط الحتة اللي جوه الحيطة من الـ ureter، وده اللي بيمنع الـ reflux."
+        page: 599
+        quote: "Bladder contraction compresses the intramural ureter, preventing urine reflux. 3 common points of ureteral obstruction: ureteropelvic junction, pelvic inlet, ureterovesical junction."
+      - kind: explain
+        title: "60-40-20"
+        text: |-
+          من وزن الجسم:
+          - **60%** مية (total body water)
+          - **40%** جوه الخلايا (ICF): غالباً **K+** و Mg2+ و organic phosphates زي ATP. والكتاب بيقول ==HIKIN’: HI K+ INtracellularly==.
+          - **20%** برّه الخلايا (ECF): غالباً **Na+** و Cl– و HCO3– و albumin.
+
+          والـ ECF نفسه: 75% interstitial و 25% plasma. يعني الـ ICF ثلثين المية، والـ ECF ثلث.
+        page: 599
+        quote: "60–40–20 rule (% of body weight for average person): ▘ 60% total body water ▘ 40% ICF, mainly composed of K+ , Mg2+ , organic phosphates (eg, ATP) ▘ 20% ECF, mainly composed of Na+ , Cl– ,"
+      - kind: reveal
+        prompt: "لو عايز تقيس الـ plasma volume لوحده، والـ ECF كله، تحقن إيه في كل مرة؟ وليه؟"
+        answer: |-
+          - **Plasma volume**: ==radiolabeled albumin==، لأن الـ albumin كبير ومش بيخرج من الأوعية.
+          - **ECF**: ==inulin أو mannitol==، لأنهم بيعدّوا الـ capillaries بس مش بيدخلوا الخلايا.
+
+          وافتكر: plasma volume = TBV × (1 – Hct)، والـ serum osmolality الطبيعي 275-295 mOsm/kg.
+        page: 599
+        quote: "Plasma volume can be measured by radiolabeling albumin."
+      - kind: explain
+        title: "الفلتر: بالحجم وبالشحنة"
+        text: |-
+          الـ **glomerular filtration barrier** بيفلتر الـ plasma على أساس ==الحجم والشحنة==، وفيه 3 طبقات:
+          - **Fenestrated capillary endothelium**: بيمنع خلايا الدم (حجم).
+          - **GBM**: فيه type IV collagen و heparan sulfate.
+          - **Podocyte foot processes** وبينهم الـ **slit diaphragms**: الـ SD بيمنع الجزيئات الأصغر زي البروتينات.
+
+          و**الشحنة**: الفلتر فيه glycoproteins ==سالبة== بتطرد أي حاجة سالبة، وأهمها الـ **albumin**. لو الشحنة دي راحت، الـ albumin يعدّي.
+        page: 599
+        quote: "Charge barrier—glomerular filtration barrier contains ⊝ charged glycoproteins that prevent entry of ⊝ charged molecules (eg, albumin). Size barrier—fenestrated capillary endothelium (prevents entry of blood cells); SD (prevents entry of smaller molecules, eg, proteins). Podocyte FPs interpose with GBM—both charge and size barrier."
+      - kind: figure
+        title: "الـ 3 طبقات"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="20" class="t-sm t-b">Blood (capillary lumen)</text>
+            <rect class="fg-acc" x="10" y="30" width="340" height="24" rx="4"/>
+            <text x="20" y="47" class="t-sm">Fenestrated endothelium: stops blood cells</text>
+            <rect class="fg-box" x="10" y="60" width="340" height="28" rx="4"/>
+            <text x="20" y="79" class="t-sm">GBM: type IV collagen, heparan sulfate (⊝)</text>
+            <rect class="fg-good" x="10" y="94" width="160" height="24" rx="4"/>
+            <rect class="fg-good" x="190" y="94" width="160" height="24" rx="4"/>
+            <text x="20" y="111" class="t-sm">podocyte foot process</text>
+            <text x="200" y="111" class="t-sm">podocyte foot process</text>
+            <text x="150" y="134" class="t-sm t-acc">slit diaphragm: stops proteins</text>
+            <text x="10" y="160" class="t-sm t-b">Bowman space (filtrate)</text>
+          </svg>
+        caption: "الدم فوق والـ filtrate تحت. الشبابيك بتمنع الخلايا، والـ slit diaphragm بيمنع البروتين، والشحنة السالبة في الفلتر كله بتطرد الـ albumin."
+        alt: "Layers from blood to Bowman space: fenestrated endothelium, glomerular basement membrane with type IV collagen and negatively charged heparan sulfate, podocyte foot processes with slit diaphragms between them."
+        page: 599
+        quote: "Composed of ▘ Fenestrated capillary endothelium ▘ Glomerular basement membrane (GBM) with type IV collagen chains and heparan sulfate ▘ Visceral epithelial layer consisting of podocyte foot processes (FPs) A and the specialized junctions between them, slit diaphragms (SDs)"
+      - kind: check
+        question: "A child has heavy albuminuria with no hematuria and a normal light-microscopy biopsy. Loss of what best explains albumin crossing the barrier?"
+        options:
+          - "The negative charge of the barrier"
+          - "The endothelial fenestrations"
+          - "Type IV collagen strength"
+          - "The parietal layer of Bowman capsule"
+        answer: 0
+        why:
+          - "صح: الـ albumin سالب، والفلتر بيطرده بشحنته السالبة. الشحنة راحت ← الـ albumin عدّى."
+          - "الـ fenestrations بتمنع خلايا الدم، ومفيش hematuria."
+          - "مشكلة الـ collagen بتعمل hematuria."
+          - "الـ parietal layer مش جزء من الفلتر."
+        page: 599
+        quote: "Charge barrier—glomerular filtration barrier contains ⊝ charged glycoproteins that prevent entry of ⊝ charged molecules (eg, albumin)."
+      - kind: explain
+        title: "Clearance: كام ml plasma اتنضفوا في الدقيقة"
+        text: |-
+          الـ ==clearance== هو حجم الـ plasma اللي اتشال منه المادة دي خالص في البول في وحدة الزمن: **Cx = (Ux × V) / Px**.
+
+          قارنه بالـ GFR:
+          - **Cx < GFR**: المادة بتترجع (reabsorption)، أو مش بتتفلتر بحرية.
+          - **Cx > GFR**: المادة بتتفرز (secretion).
+          - **Cx = GFR**: لا بتترجع ولا بتتفرز.
+        page: 600
+        quote: "volume of plasma from which the substance is completely cleared in the urine per unit time."
+      - kind: explain
+        title: "الـ GFR: inulin والـ creatinine"
+        text: |-
+          الـ ==inulin== بيتفلتر بحرية، ولا بيترجع ولا بيتفرز، فالـ clearance بتاعه = الـ GFR بالظبط. والـ GFR الطبيعي حوالي **100 mL/min**.
+
+          الـ **creatinine** بيدّيك رقم قريب، بس ==بيزوّد الـ GFR شوية== لأن الـ proximal tubule بيفرز منه شوية زيادة.
+
+          والـ GFR نفسه = Kf [(PGC – PBS) – (πGC – πBS)]، والـ πBS عادة صفر (مفيش بروتين في Bowman space).
+        page: 600
+        quote: "Inulin clearance can be used to calculate GFR because it is freely filtered and is neither reabsorbed nor secreted."
+      - kind: check
+        question: "A drug's clearance is 250 mL/min while inulin clearance is 100 mL/min. How does the kidney handle the drug?"
+        options:
+          - "Filtered plus net tubular secretion"
+          - "Filtered plus net reabsorption"
+          - "Filtered only"
+          - "Not freely filtered"
+        answer: 0
+        why:
+          - "صح: الـ clearance أكبر من الـ GFR، يعني فيه حاجة اتفرزت فوق اللي اتفلتر."
+          - "الـ reabsorption بيخلي الـ clearance أقل من الـ GFR."
+          - "لو اتفلتر بس، الـ clearance = GFR زي الـ inulin."
+          - "لو مش بيتفلتر بحرية، الـ clearance يقل."
+        page: 600
+        quote: "> GFR: net tubular secretion of X."
+      - kind: try
+        items: [renal.L03.002, renal.L03.006, renal.L03.015, renal.L03.019, renal.L03.025]
+    recap:
+      - "الـ ureter فوق الـ iliacs وتحت الكوبري (uterine artery أو vas deferens)."
+      - "60-40-20؛ الـ K+ جوه والـ Na+ برّه. albumin للـ plasma، inulin/mannitol للـ ECF."
+      - "الفلتر بالحجم (fenestrations و SD) وبالشحنة السالبة (يصد الـ albumin)."
+      - "Inulin clearance = GFR. الـ creatinine بيزوّده شوية لأنه بيتفرز."
+    practice: [renal.L03.001, renal.L03.002, renal.L03.003, renal.L03.004, renal.L03.005, renal.L03.006, renal.L03.007, renal.L03.008, renal.L03.009, renal.L03.010, renal.L03.011, renal.L03.012, renal.L03.013, renal.L03.014, renal.L03.015, renal.L03.016, renal.L03.017, renal.L03.018, renal.L03.019, renal.L03.020, renal.L03.021, renal.L03.022, renal.L03.023, renal.L03.024, renal.L03.025, renal.L03.026]
+  - id: renal.L03.lesson2
+    title: "الـ afferent والـ efferent: حنفيتين بيتحكموا في الـ GFR"
+    hook: "افهم الحنفيتين، وجدول الـ glomerular dynamics كله هيطلع لوحده"
+    minutes: 10
+    pages: [600, 602]
+    topics: [renal-blood-flow-autoregulation, effective-renal-plasma-flow, filtration, reabsorption-and-secretion-rate, glucose-clearance]
+    goals:
+      - "تفرّق بين الـ myogenic والـ tubuloglomerular feedback"
+      - "تحسب RPF و RBF و FF"
+      - "تعرف NSAIDs و ACE inhibitors بيعملوا إيه في الحنفيتين"
+      - "تفهم منحنى الـ glucose والـ splay"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الكلية بتحمي نفسها: autoregulation"
+        text: |-
+          الكلية عايزة الـ RBF والـ GFR ثابتين مهما الضغط اتهز. فيه طريقتين، والاتنين بيقفلوا ==الـ afferent arteriole==:
+          - **Myogenic**: الضغط يعلى ← الـ afferent يتمط ← العضلة نفسها تنقبض ← RBF يقل.
+          - **Tubuloglomerular feedback**: ملح كتير (NaCl) يوصل للـ ==macula densa== ← إشارة paracrine ← الـ afferent يقفل ← RBF يقل. ولو الملح قليل يحصل العكس.
+        page: 600
+        quote: "Myogenic: ↑ arterial pressure → stretch of afferent arteriole→ mechanical activation of vascular smooth muscle → vasoconstriction of afferent arteriole → ↓ RBF."
+      - kind: explain
+        title: "الـ PAH: مادة الكلية بتشيلها كلها"
+        text: |-
+          الـ ==PAH== بيتفلتر حوالي 20% منه، والـ 80% الباقيين بيتفرزوا في الـ PT، يعني تقريباً **100% بيخرج** من أول لفة. فالـ PAH clearance = الـ plasma اللي دخل الكلية = **eRPF**، وهو بيقلل الـ RPF الحقيقي شوية.
+
+          ومن الـ plasma للدم: **RBF = RPF / (1 − Hct)**، والكلية بتاخد **20%-25% من الـ cardiac output**.
+        page: 600
+        quote: "Effective renal plasma flow (eRPF) can be estimated using para-aminohippuric acid (PAH) clearance. Between filtration and secretion, there is nearly complete excretion of all PAH that enters the kidney."
+      - kind: reveal
+        prompt: "الـ PAH clearance طلع 600 mL/min والـ Hct 40%. الـ RBF كام؟"
+        answer: "RBF = 600 / (1 − 0.4) = 600 / 0.6 = ==1000 mL/min==."
+        page: 600
+        quote: "Renal blood flow (RBF) = RPF/(1 − Hct). Usually 20%-25% of cardiac output."
+      - kind: explain
+        title: "الـ filtration fraction"
+        text: |-
+          **FF = GFR / RPF**، والطبيعي ==20%==: يعني من كل 100 ml plasma داخلين الـ glomerulus، 20 بيتفلتروا.
+
+          و**filtered load** = GFR × تركيز المادة في الـ plasma.
+        page: 601
+        quote: "Filtration fraction (FF) = GFR/RPF. Normal FF = 20%. Filtered load (mg/min) = GFR (mL/min) × plasma concentration (mg/mL)."
+      - kind: figure
+        title: "الحنفيتين"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rL3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <line class="fg-arrow" x1="10" y1="80" x2="125" y2="80" marker-end="url(#rL3a)" stroke-width="6"/>
+            <text x="15" y="65" class="t-sm t-b">Afferent</text>
+            <text x="15" y="105" class="t-sm t-good">PG dilate</text>
+            <text x="15" y="122" class="t-sm t-bad">NSAIDs → constrict</text>
+            <circle class="fg-acc" cx="180" cy="80" r="45"/>
+            <text x="150" y="84" class="t-sm t-b">Glomerulus</text>
+            <line class="fg-arrow" x1="225" y1="80" x2="350" y2="80" marker-end="url(#rL3a)" stroke-width="3"/>
+            <text x="240" y="65" class="t-sm t-b">Efferent</text>
+            <text x="240" y="105" class="t-sm t-bad">AT II constricts</text>
+            <text x="240" y="122" class="t-sm t-good">ACEi → dilate</text>
+            <text x="90" y="160" class="t-sm t-mut">pressure in the glomerulus = GFR</text>
+          </svg>
+        caption: "الـ glomerulus بين حنفيتين. الـ prostaglandins بتفتح اللي داخلة (afferent)، والـ angiotensin II بيقفل اللي خارجة (efferent). الاتنين بيحافظوا على الضغط جوه."
+        alt: "Afferent arteriole into the glomerulus and efferent arteriole out. Prostaglandins dilate the afferent, NSAIDs constrict it; angiotensin II constricts the efferent, ACE inhibitors dilate it."
+        page: 601
+        quote: "Prostaglandins Dilate Afferent arteriole (PDA). Angiotensin II Constricts Efferent arteriole (ACE)."
+      - kind: explain
+        title: "PDA و ACE"
+        text: |-
+          الكتاب بيدّيك كلمتين:
+          - ==PDA==: **P**rostaglandins **D**ilate **A**fferent ← RPF و GFR يعلوا مع بعض، فالـ FF ثابت.
+          - ==ACE==: **A**ngiotensin II **C**onstricts **E**fferent ← RPF يقل والـ GFR يعلى ← FF يعلى.
+
+          عشان كده ==NSAIDs + ACE inhibitors مع بعض خطر==: الحنفية الداخلة اتقفلت والخارجة اتفتحت، فالضغط جوه الـ glomerulus يقع والـ GFR يقع.
+        page: 601
+        quote: "Prostaglandins Dilate Afferent arteriole (PDA). Angiotensin II Constricts Efferent arteriole (ACE). RPF is best estimated with PAH clearance. NSAIDs and ACE inhibitors should not be given together → constriction of afferent and dilation of efferent arterioles."
+      - kind: table
+        title: "Changes in glomerular dynamics"
+        columns: ["Change", "GFR", "RPF", "FF"]
+        rows:
+          - ["Afferent constriction", "↓", "↓", "—"]
+          - ["Efferent constriction", "↑", "↓", "↑"]
+          - ["↑ plasma protein", "↓", "—", "↓"]
+          - ["↓ plasma protein", "↑", "—", "↑"]
+          - ["Ureter constriction", "↓", "—", "↓"]
+          - ["Dehydration", "↓", "↓↓", "↑"]
+        hide: [[1, 1], [1, 3], [2, 1], [4, 1], [5, 2], [5, 3]]
+        page: 601
+        quote: "Changes in glomerular dynamics GFR RPF FF (GFR/RPF) Afferent arteriole constriction ↓ ↓ — Efferent arteriole constriction ↑ ↓ ↑"
+      - kind: aside
+        tone: tip
+        text: "متحفظش الجدول، افهمه: الـ **plasma protein** بيشد المية جوه الـ capillary (πGC)، فلو زاد الـ GFR يقل. و**ureter مسدود** يرفع الضغط في Bowman space (PBS) فالـ GFR يقل. والـ RPF في الاتنين ثابت لأن الأوعية ما اتلمستش."
+        page: 601
+        quote: "Net filtration pressure = (PGC + πBS ) – (PBS + πGC )"
+      - kind: check
+        question: "A man on lisinopril takes ibuprofen for a week and his creatinine doubles. What happened to his arterioles?"
+        options:
+          - "Afferent constriction and efferent dilation"
+          - "Afferent dilation and efferent constriction"
+          - "Both dilated"
+          - "Both constricted"
+        answer: 0
+        why:
+          - "صح: الـ NSAID شال الـ prostaglandins فالـ afferent قفل، والـ ACE inhibitor شال الـ AT II فالـ efferent اتفتح."
+          - "ده العكس، وكان هيرفع الـ GFR."
+          - "لو الاتنين اتفتحوا الـ RPF يعلى من غير وقعة GFR كبيرة."
+          - "قفل الـ efferent كان هيحافظ على الـ GFR شوية."
+        page: 601
+        quote: "NSAIDs and ACE inhibitors should not be given together → constriction of afferent and dilation of efferent arterioles."
+      - kind: explain
+        title: "Reabsorption ولا secretion؟ احسبها"
+        text: |-
+          - **Filtered load** = GFR × Px
+          - **Excretion** = V × Ux
+          - لو اللي خرج ==أقل== من اللي اتفلتر: reabsorption = filtered − excreted.
+          - لو اللي خرج ==أكتر==: secretion = excreted − filtered.
+
+          ونفس الفكرة في الـ **FENa**: Na+ اللي خرج على Na+ اللي اتفلتر = (UNa × PCr) / (UCr × PNa).
+        page: 602
+        quote: "Filtered load = GFR × Px . Excretion rate = V × Ux . Reabsorption rate = filtered – excreted. Secretion rate = excreted – filtered."
+      - kind: explain
+        title: "الـ glucose: لحد 200 والكلية بتلحق"
+        text: |-
+          في المستوى الطبيعي (60-120 mg/dL) كل الـ glucose بيترجع في الـ **PCT** بالـ Na+/glucose cotransport.
+
+          - عند حوالي ==200 mg/dL== في البلازما يبدأ الـ glucosuria (**threshold**).
+          - عند حوالي **375 mg/min** كل الـ transporters مليانة (**Tm**).
+          - بين الاتنين المنحنى بيلف بالراحة (==splay==)، لأن الـ nephrons مش زي بعض: كل واحد له Tm مختلف.
+
+          و**SGLT2 inhibitors** (الـ -flozins) بيعملوا glucosuria تحت 200. والـ glucosuria علامة مهمة للـ diabetes.
+        page: 602
+        quote: "In adults, at plasma glucose of ∼200 mg/dL, glucosuria begins (threshold). At rate of ∼375 mg/min, all transporters are fully saturated"
+      - kind: check
+        question: "A pregnant woman at 26 weeks has glucosuria with a normal fasting glucose and a normal glucose challenge. Why?"
+        options:
+          - "↑ GFR, so more glucose is filtered and the threshold is reached at lower plasma glucose"
+          - "Gestational diabetes"
+          - "Fanconi syndrome"
+          - "↓ renal plasma flow"
+        answer: 0
+        why:
+          - "صح: الحمل بيرفع الـ GFR، فالـ glucose المفلتر يزيد ويعدّي الـ threshold وهو طبيعي في الدم."
+          - "تحاليل السكر طبيعية."
+          - "الـ Fanconi بيضيع amino acids و phosphate و HCO3– كمان."
+          - "الحمل بيرفع الـ flow مش بيقلله."
+        page: 602
+        quote: "Normal pregnancy is associated with ↑ GFR. With ↑ filtration of all substances, including glucose, the glucose threshold occurs at lower plasma glucose concentrations → glucosuria at normal plasma glucose levels."
+      - kind: try
+        items: [renal.L03.028, renal.L03.031, renal.L03.037, renal.L03.040, renal.L03.049]
+    recap:
+      - "Autoregulation: myogenic و tubuloglomerular، الاتنين بيقفلوا الـ afferent."
+      - "PAH clearance = eRPF؛ RBF = RPF/(1 − Hct)؛ FF = GFR/RPF = 20%."
+      - "PDA: prostaglandins تفتح الـ afferent. ACE: AT II يقفل الـ efferent. NSAIDs + ACEi ← GFR يقع."
+      - "Glucose: threshold ~200 mg/dL، Tm ~375 mg/min، والـ splay من اختلاف الـ nephrons."
+    practice: [renal.L03.027, renal.L03.028, renal.L03.029, renal.L03.030, renal.L03.031, renal.L03.032, renal.L03.033, renal.L03.034, renal.L03.035, renal.L03.036, renal.L03.037, renal.L03.038, renal.L03.039, renal.L03.040, renal.L03.041, renal.L03.042, renal.L03.043, renal.L03.044, renal.L03.045, renal.L03.046, renal.L03.047, renal.L03.048, renal.L03.049, renal.L03.050, renal.L03.051, renal.L03.052, renal.L03.053]
+  - id: renal.L03.lesson3
+    title: "رحلة على الـ nephron: كل حتة بتعمل إيه"
+    hook: "لو عرفت كل segment بيشيل إيه، هتعرف كل diuretic وكل syndrome من غير حفظ"
+    minutes: 9
+    pages: [603, 603]
+    topics: [nephron-transport-physiology]
+    goals:
+      - "تعرف الـ PCT بيرجّع إيه وقد إيه"
+      - "تفهم ليه الـ thick ascending limb بيرجّع Mg2+ و Ca2+"
+      - "تعرف الـ aldosterone والـ ADH بيشتغلوا إزاي في الـ collecting tubule"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ PCT: الشغيل"
+        text: |-
+          الـ **early PCT** عنده brush border، وبيرجّع ==كل الـ glucose والـ amino acids==، ومعظم الـ HCO3– و Na+ و Cl– و PO43– و K+ والمية والـ uric acid. والرجوع ده **isotonic** (ملح ومية بنفس النسبة). وبيرجّع **65%-80%** من الـ Na+ والمية.
+
+          وكمان بيعمل **NH3** ويفرزه، وده اللي بيخلي الكلية تقدر تطلّع H+ أكتر.
+
+          والهرمونات هنا:
+          - **PTH** بيمنع الـ Na+/PO43– cotransport ← الـ phosphate يخرج في البول.
+          - **AT II** بيشغّل الـ Na+/H+ exchange ← Na+ ومية و HCO3– يرجعوا (وده سبب الـ ==contraction alkalosis==).
+        page: 603
+        quote: "PTH—inhibits Na+/PO 3– 4 cotransport → ↑ PO 3– 4 excretion. AT II—stimulates Na+/H+ exchange → ↑ Na+, H2O, and HCO −"
+      - kind: explain
+        title: "الـ loop: نازل مية، طالع ملح"
+        text: |-
+          - **Thin descending limb**: بيرجّع ==مية بس== (مش بيعدّي Na+)، لأن الـ medulla حواليه مالحة. فالبول يبقى **hypertonic**. ده الـ concentrating segment.
+          - **Thick ascending limb**: بيرجّع Na+ و K+ و Cl– (بالـ Na+/K+/2Cl–)، و==مش بيعدّي مية==، فالبول بيخف وهو طالع. بيرجّع **10%-20%** من الـ Na+.
+        page: 603
+        quote: "Thin descending loop of Henle—passively reabsorbs H2O via medullary hypertonicity (impermeable to Na+). Concentrating segment. Makes urine hypertonic."
+      - kind: reveal
+        prompt: "الـ thick ascending limb مفيهوش transporter للـ Mg2+ ولا للـ Ca2+. أمال بيرجّعهم إزاي؟"
+        answer: "الـ K+ اللي دخل بيرجع يهرب للـ lumen (**K+ backleak**)، فالـ lumen يبقى ==⊕ موجب==. الشحنة الموجبة دي بتزق الـ Mg2+ والـ Ca2+ (موجبين) **بين الخلايا** (paracellular) للدم. عشان كده الـ loop diuretics لما توقف الـ transporter، الشحنة دي تروح والـ Mg2+ والـ Ca2+ يضيعوا في البول."
+        page: 603
+        quote: "Indirectly induces paracellular reabsorption of Mg2+ and Ca2+ through ⊕ lumen potential generated by K+ backleak. Impermeable to H2O. Makes urine less concentrated as it ascends."
+      - kind: explain
+        title: "الـ early DCT: أخف بول"
+        text: |-
+          بيرجّع Na+ و Cl– (ده مكان الـ **thiazides**)، و==مش بيعدّي مية==، فالبول بيبقى **fully dilute (hypotonic)**. بيرجّع **5%-10%** من الـ Na+.
+
+          والـ **PTH** هنا بيزوّد الـ Ca2+/Na+ exchange ← ==Ca2+ يرجع==.
+        page: 603
+        quote: "Early DCT—reabsorbs Na+, Cl−. Impermeable to H2O. Makes urine fully dilute (hypotonic). PTH—↑ Ca2+/Na+ exchange → ↑ Ca2+ reabsorption. 5%-10% Na+ reabsorbed."
+      - kind: explain
+        title: "الـ collecting tubule: الضبط النهائي"
+        text: |-
+          بيرجّع Na+ قصاد إنه يفرز K+ و H+، والـ **aldosterone** هو اللي بيتحكم (على الـ mineralocorticoid receptor ← mRNA ← بروتين جديد):
+          - في الـ **principal cells**: ↑ ENaC و ↑ Na+/K+ pump و ↑ K+ conductance ← الـ Na+ يدخل والـ lumen يبقى ==سالب== ← الـ K+ يخرج.
+          - في الـ **α-intercalated cells**: الـ lumen السالب ← ↑ H+ ATPase ← H+ يخرج ← ↑ HCO3–/Cl– exchanger.
+
+          والـ **ADH** على الـ ==V2 receptor== ← aquaporins تتركّب على الناحية الـ apical ← مية ترجع. والـ urea بيرجع في الـ **medullary** collecting duct بس. الـ segment ده بيرجّع **3%-5%** من الـ Na+.
+        page: 603
+        quote: "Aldosterone—acts on mineralocorticoid receptor → mRNA → protein synthesis. In principal cells: ↑ apical K+ conductance, ↑ Na+/K+ pump, ↑ epithelial Na+ channel (ENaC) activity → lumen negativity → K+ secretion."
+      - kind: figure
+        title: "الـ nephron ومكان كل diuretic"
+        svg: |-
+          <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="10" y="15" width="110" height="60" rx="8"/>
+            <text x="18" y="35" class="t-sm t-b">PCT 65-80%</text>
+            <text x="18" y="52" class="t-sm">acetazolamide</text>
+            <text x="18" y="68" class="t-sm">SGLT-2 inhibitors</text>
+            <rect class="fg-box" x="10" y="90" width="110" height="50" rx="8"/>
+            <text x="18" y="110" class="t-sm t-b">Thin descending</text>
+            <text x="18" y="128" class="t-sm">H2O only</text>
+            <rect class="fg-good" x="130" y="90" width="110" height="50" rx="8"/>
+            <text x="138" y="110" class="t-sm t-b">TAL 10-20%</text>
+            <text x="138" y="128" class="t-sm">loop diuretics</text>
+            <rect class="fg-acc" x="130" y="15" width="110" height="60" rx="8"/>
+            <text x="138" y="35" class="t-sm t-b">Early DCT 5-10%</text>
+            <text x="138" y="55" class="t-sm">thiazides</text>
+            <rect class="fg-bad" x="250" y="15" width="100" height="125" rx="8"/>
+            <text x="258" y="35" class="t-sm t-b">Collecting</text>
+            <text x="258" y="52" class="t-sm t-b">tubule 3-5%</text>
+            <text x="258" y="74" class="t-sm">amiloride</text>
+            <text x="258" y="91" class="t-sm">triamterene</text>
+            <text x="258" y="108" class="t-sm">spironolactone</text>
+            <text x="258" y="125" class="t-sm">eplerenone</text>
+            <text x="10" y="170" class="t-sm t-mut">% = share of filtered Na+ reabsorbed</text>
+            <text x="10" y="195" class="t-sm t-mut">water-impermeable: TAL and early DCT</text>
+          </svg>
+        caption: "كل segment والنسبة اللي بيرجّعها من الـ Na+، والـ diuretic اللي بيشتغل عليه. الـ PCT بيشيل الحمل الأكبر، والـ collecting tubule بيضبط في الآخر."
+        alt: "Nephron segments with sodium reabsorption share and the diuretics acting there: PCT 65-80% acetazolamide and SGLT-2 inhibitors; thin descending limb water only; thick ascending limb 10-20% loop diuretics; early DCT 5-10% thiazides; collecting tubule 3-5% amiloride, triamterene, spironolactone, eplerenone."
+        page: 603
+        quote: "Amiloride Triamterene Spironolactone Eplerenone"
+      - kind: match
+        prompt: "وصّل كل segment باللي بيعمله"
+        pairs:
+          - ["Early PCT", "Reabsorbs all glucose and amino acids"]
+          - ["Thin descending limb", "Water only; makes urine hypertonic"]
+          - ["Thick ascending limb", "⊕ lumen drives Mg2+ and Ca2+"]
+          - ["Early DCT", "Makes urine fully dilute"]
+          - ["Collecting tubule", "ADH inserts aquaporins via V2"]
+        why: "الـ PCT الشغيل، الـ descending بياخد مية، الـ ascending بياخد ملح ويعمل شحنة، الـ DCT بيخفف للآخر، والـ collecting بيضبط بالهرمونات."
+        page: 603
+        quote: "ADH—acts at V2 receptor → insertion of aquaporin H2O channels on apical side."
+      - kind: check
+        question: "A woman on furosemide for months has low serum magnesium. Why?"
+        options:
+          - "The lumen-positive potential that drives paracellular Mg2+ is lost"
+          - "Na+/Cl– cotransport in the DCT is blocked"
+          - "ENaC is blocked"
+          - "Carbonic anhydrase is inhibited"
+        answer: 0
+        why:
+          - "صح: الـ loop diuretic بيوقف الـ Na+/K+/2Cl–، فمفيش K+ backleak ولا شحنة موجبة تزق الـ Mg2+."
+          - "ده مكان الـ thiazide."
+          - "الـ ENaC blockers في الـ collecting tubule ومش بيضيعوا Mg2+."
+          - "الـ acetazolamide في الـ PCT."
+        page: 603
+        quote: "Indirectly induces paracellular reabsorption of Mg2+ and Ca2+ through ⊕ lumen potential generated by K+ backleak."
+      - kind: try
+        items: [renal.L03.054, renal.L03.057, renal.L03.059, renal.L03.062, renal.L03.066]
+    recap:
+      - "PCT: كل الـ glucose والـ amino acids، 65-80% Na+، isotonic؛ PTH يطلّع الـ phosphate، AT II يرجّع HCO3–."
+      - "Descending: مية بس. Thick ascending: ملح بس، و⊕ lumen يرجّع Mg2+ و Ca2+."
+      - "Early DCT: بول dilute، PTH يرجّع Ca2+."
+      - "Collecting: aldosterone (Na+ جوه، K+ و H+ برّه)، ADH على V2 ← aquaporins."
+    practice: [renal.L03.054, renal.L03.055, renal.L03.056, renal.L03.057, renal.L03.058, renal.L03.059, renal.L03.060, renal.L03.061, renal.L03.062, renal.L03.063, renal.L03.064, renal.L03.065, renal.L03.066, renal.L03.067]
+  - id: renal.L03.lesson4
+    title: "Fanconi's BaGeLS: كل عيب في الـ tubule شبه دوا"
+    hook: "كل syndrome هنا هو segment بايظ. اعرف الـ segment، تعرف الصورة كلها"
+    minutes: 9
+    pages: [604, 605]
+    topics: [renal-tubular-defects, features-of-renal-disorders, relative-concentrations-along-proximal-tubule]
+    goals:
+      - "ترتب الـ syndromes على الـ nephron"
+      - "تفرق Bartter عن Gitelman، و Liddle عن SAME"
+      - "تقرأ جدول renin و aldosterone وتعرف التشخيص"
+    status: unverified
+    steps:
+      - kind: mnemonic
+        word: "BGLS"
+        parts:
+          - { key: "B", text: "Bartter: thick ascending loop" }
+          - { key: "G", text: "Gitelman: DCT" }
+          - { key: "L", text: "Liddle: collecting tubule" }
+          - { key: "S", text: "SAME (syndrome of apparent mineralocorticoid excess): collecting tubule" }
+        hook: "والكتاب بيقولها كاملة: Fanconi's BaGeLS. الـ Fanconi الأول في الـ PCT، وبعدين BaGeLS على الترتيب لحد الآخر."
+        page: 604
+        quote: "Renal tubular defects Order: Fanconi’s BaGeLS"
+      - kind: explain
+        title: "Fanconi: الـ PCT كله وقع"
+        text: |-
+          عيب ==عام== في الـ PCT ← كل اللي الـ PCT بيرجّعه يضيع في البول: amino acids و glucose و HCO3– و PO43–.
+
+          فالمريض عنده: **metabolic acidosis** (proximal RTA)، و **hypophosphatemia**، و **hypokalemia**. ومن الـ hypophosphatemia: ==growth restriction و rickets==. والـ volume depletion شائع.
+
+          الأسباب: وراثية (Wilson، tyrosinemia، glycogen storage disease)، ischemia، **multiple myeloma**، أدوية (**ifosfamide**، **cisplatin**، **tenofovir**)، و lead poisoning.
+        page: 604
+        quote: "Hereditary defects (eg, Wilson disease, tyrosinemia, glycogen storage disease), ischemia, multiple myeloma, drugs (eg, ifosfamide, cisplatin, tenofovir, lead poisoning"
+      - kind: explain
+        title: "Bartter و Gitelman: الـ diuretic اللي جوه الجسم"
+        text: |-
+          الاتنين **autosomal recessive**، والاتنين metabolic alkalosis و hypokalemia و hypochloremia، والضغط ==طبيعي==.
+
+          - **Bartter**: الـ Na+/K+/2Cl– في الـ thick ascending loop بايظ ← شبه ==loop diuretic== مزمن ← **hypercalciuria** (لأن شحنة الـ lumen الموجبة راحت).
+          - **Gitelman**: الـ NaCl في الـ DCT بايظ ← شبه ==thiazide== مزمن ← **hypomagnesemia**، والـ urine Ca2+ قليل. وأخف من Bartter.
+        page: 604
+        quote: "Bartter syndrome Reabsorption defect in thick ascending loop of Henle (affects Na+ /K+ /2Cl– cotransporter) Metabolic alkalosis, hypochloremia, hypokalemia, hypercalciuria Autosomal recessive Presents similarly to chronic loop diuretic use"
+      - kind: aside
+        tone: trap
+        text: "الفرق بين Bartter و Gitelman في سؤال واحد: ==الـ urine calcium==. عالي ← Bartter (زي الـ loop). واطي مع Mg2+ واطي ← Gitelman (زي الـ thiazide)."
+        page: 605
+        quote: "Gitelman syndrome — — ↑ ↑ ↓ ↓"
+      - kind: explain
+        title: "Liddle و SAME: aldosterone من غير aldosterone"
+        text: |-
+          الاتنين: **hypertension** و hypokalemia و metabolic alkalosis، بس الـ ==aldosterone واطي==.
+
+          - **Liddle** (autosomal dominant): gain of function ← الـ Na+ channel مش بيتكسر ← Na+ يرجع زيادة في الـ collecting tubules. شبه hyperaldosteronism والـ aldosterone تقريباً صفر. العلاج: ==amiloride== (بيقفل الـ channel نفسه).
+          - **SAME** (autosomal recessive): الـ cortisol يقدر يشغّل الـ mineralocorticoid receptor، والـ **11β-HSD** هو اللي بيحوّله لـ cortisone عشان ما يعملش كده. لو الإنزيم ناقص (وراثي، أو من **licorice** اللي فيه glycyrrhetinic acid) ← الـ cortisol يشتغل aldosterone. العلاج: K+-sparing diuretics، أو corticosteroids (تقلل الـ cortisol الداخلي).
+        page: 604
+        quote: "Can acquire disorder from glycyrrhetinic acid (present in licorice), which blocks activity of 11β-hydroxysteroid dehydrogenase"
+      - kind: check
+        question: "A teenager with severe hypertension, hypokalemia, and very low renin and aldosterone doesn't respond to spironolactone. Best drug?"
+        options:
+          - "Amiloride"
+          - "Eplerenone"
+          - "Hydrochlorothiazide"
+          - "Dexamethasone"
+        answer: 0
+        why:
+          - "صح: Liddle، الـ channel نفسه شغال زيادة، فلازم تقفله بالـ amiloride."
+          - "الـ eplerenone زي الـ spironolactone، بيقفل الـ receptor اللي مش هو المشكلة."
+          - "الـ thiazide هيزوّد الـ hypokalemia."
+          - "الـ steroids لـ SAME مش Liddle."
+        page: 604
+        quote: "Presents similarly to hyperaldosteronism, but aldosterone is nearly undetectable Treatment: amiloride"
+      - kind: table
+        title: "Features of renal disorders"
+        columns: ["Condition", "BP", "Renin", "Aldosterone"]
+        rows:
+          - ["Bartter / Gitelman", "—", "↑", "↑"]
+          - ["Renin-secreting tumor", "↑", "↑", "↑"]
+          - ["Primary hyperaldosteronism", "↑", "↓", "↑"]
+          - ["Liddle / SAME", "↑", "↓", "↓"]
+        hide: [[1, 2], [2, 2], [2, 3], [3, 2], [3, 3]]
+        page: 605
+        quote: "Primary hyperaldosteronism ↑ ↓ ↑"
+      - kind: aside
+        tone: tip
+        text: "اقرا الـ renin الأول: ==renin عالي== يبقى الكلية حاسة إنها ناشفة (Bartter/Gitelman) أو فيه tumor بيعمله. ==renin واطي مع ضغط عالي== يبقى في حاجة تانية شغالة لوحدها: aldosterone عالي ← primary hyperaldosteronism؛ aldosterone واطي ← Liddle أو SAME."
+        page: 605
+        quote: "Renin-secreting tumor ↑ ↑ ↑"
+      - kind: explain
+        title: "[TF/P] على طول الـ PT"
+        text: |-
+          الـ [TF/P] = تركيز المادة في الـ tubular fluid على تركيزها في الـ plasma:
+          - **> 1**: المادة بترجع أبطأ من المية، أو بتتفرز. أعلاهم ==PAH== (بيتفرز)، وبعده creatinine و inulin و urea و Cl–.
+          - **= 1**: المادة والمية بيرجعوا بنفس السرعة: Na+ والـ osmolarity (و K+ تقريباً).
+          - **< 1**: المادة بترجع أسرع من المية: HCO3– و amino acids و ==glucose== (أقلهم).
+
+          الـ inulin تركيزه بيعلى (مش كميته) لأن المية بتمشي وهو قاعد. والـ Cl– بيرجع أبطأ من الـ Na+ في الأول، فتركيزه بيعلى وبعدين يثبت.
+        page: 605
+        quote: "Tubular inulin ↑ in concentration (but not amount) along the PT as a result of water reabsorption."
+      - kind: try
+        items: [renal.L03.068, renal.L03.069, renal.L03.072, renal.L03.074, renal.L03.078]
+    recap:
+      - "Fanconi's BaGeLS: PCT، thick ascending، DCT، collecting."
+      - "Bartter = loop (hypercalciuria). Gitelman = thiazide (hypomagnesemia، Ca2+ واطي في البول)."
+      - "Liddle (AD، amiloride) و SAME (11β-HSD، licorice): hypertension و aldosterone واطي."
+      - "[TF/P]: PAH أعلى واحد، glucose أقل واحد، Na+ ثابت عند 1."
+    practice: [renal.L03.068, renal.L03.069, renal.L03.070, renal.L03.071, renal.L03.072, renal.L03.073, renal.L03.074, renal.L03.075, renal.L03.076, renal.L03.077, renal.L03.078, renal.L03.079, renal.L03.080, renal.L03.081, renal.L03.082, renal.L03.083, renal.L03.084]
+  - id: renal.L03.lesson5
+    title: "الكلية كغدة: renin و EPO و vitamin D والهرمونات"
+    hook: "الـ RAAS هو أهم دايرة في الكلى. افهمها مرة، والـ JGA والـ ACE inhibitors والـ β-blockers هيقعدوا في مكانهم"
+    minutes: 10
+    pages: [606, 608]
+    topics: [renin-angiotensin-aldosterone-system, juxtaglomerular-apparatus, kidney-endocrine-paracrine-functions, hormones-acting-on-kidney, potassium-shifts]
+    goals:
+      - "تعرف الـ 3 حاجات اللي بتطلّع renin"
+      - "تعرف الـ AT II بيعمل إيه في الجسم والكلية"
+      - "تعرف مين بيطلّع EPO و vitamin D والـ prostaglandins و dopamine"
+      - "تعرف إيه بيدخّل الـ K+ الخلايا وإيه بيطلّعه"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "مين بيطلّع الـ renin؟"
+        text: |-
+          الـ **JG cells** بتطلّع renin في 3 حالات:
+          - ==↓ renal perfusion pressure== (بتحسه في الـ afferent arteriole)
+          - ↑ renal sympathetic discharge (**β1**)
+          - ↓ NaCl واصل للـ **macula densa**
+
+          والـ renin بيحوّل angiotensinogen لـ angiotensin I، والـ **ACE** بيحوّله لـ angiotensin II. والـ ACE موجود في أنسجة كتير، بس أغلب التحويل في ==الرئة== (من الـ endothelial cells هناك). والـ ACE كمان بيكسر الـ **bradykinin**.
+        page: 606
+        quote: "Catalyzes conversion of angiotensin I to angiotensin II. Located in many tissues but conversion occurs most extensively in the lung. Produced by vascular endothelial cells in the lung."
+      - kind: figure
+        title: "الـ RAAS"
+        svg: |-
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rL3b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="10" width="150" height="54" rx="8"/>
+            <text x="18" y="28" class="t-sm">↓ BP (afferent)</text>
+            <text x="18" y="43" class="t-sm">↑ sympathetic (β1)</text>
+            <text x="18" y="58" class="t-sm">↓ NaCl (macula densa)</text>
+            <line class="fg-arrow" x1="160" y1="37" x2="195" y2="37" marker-end="url(#rL3b)"/>
+            <rect class="fg-acc" x="200" y="20" width="150" height="34" rx="8"/>
+            <text x="210" y="42" class="t-sm t-b">Renin (JG cells)</text>
+            <text x="10" y="90" class="t-sm">Angiotensinogen → angiotensin I</text>
+            <text x="10" y="110" class="t-sm">→ (ACE, lung) → angiotensin II</text>
+            <text x="240" y="90" class="t-sm t-mut">ACE also breaks</text>
+            <text x="240" y="106" class="t-sm t-mut">bradykinin</text>
+            <rect class="fg-good" x="10" y="125" width="340" height="95" rx="8"/>
+            <text x="20" y="145" class="t-sm">vasoconstriction → ↑ BP</text>
+            <text x="20" y="162" class="t-sm">efferent constriction → ↑ FF, keeps GFR</text>
+            <text x="20" y="179" class="t-sm">PCT Na+/H+ → Na+, HCO3–, H2O back</text>
+            <text x="20" y="196" class="t-sm">aldosterone, ADH, thirst</text>
+            <text x="20" y="213" class="t-sm t-mut">limits reflex bradycardia</text>
+          </svg>
+        caption: "3 إشارات بتطلّع الـ renin، والـ AT II بيرد بكل الطرق اللي ترجّع الضغط والحجم: يقفل الأوعية، يحافظ على الـ GFR، يرجّع ملح ومية، ويطلّع aldosterone و ADH ويعطّشك."
+        alt: "Renin release triggers (low renal perfusion, beta-1 sympathetic tone, low NaCl at macula densa), renin to angiotensin I, ACE in the lung to angiotensin II, and its effects: vasoconstriction, efferent constriction raising filtration fraction, proximal sodium-hydrogen exchange, aldosterone, ADH, thirst."
+        page: 606
+        quote: "Secreted by JG cells in response to ↓ renal perfusion pressure (detected in afferent arteriole)"
+      - kind: check
+        question: "A man on lisinopril gets a dry cough and lip swelling. Which substance built up?"
+        options:
+          - "Bradykinin"
+          - "Angiotensin II"
+          - "Aldosterone"
+          - "Renin"
+        answer: 0
+        why:
+          - "صح: الـ ACE بيكسر الـ bradykinin؛ لما اتقفل، الـ bradykinin اتراكم ← كحة و angioedema."
+          - "الـ AT II بيقل مع الـ ACE inhibitor."
+          - "الـ aldosterone بيقل كمان."
+          - "الـ renin بيعلى بس مش هو سبب الكحة."
+        page: 606
+        quote: "Bradykinin breakdown"
+      - kind: explain
+        title: "ANP و BNP و ADH و aldosterone"
+        text: |-
+          - **ANP** (من الـ atria) و **BNP** (من الـ ventricles): بيطلعوا لما ==الحجم يزيد==. بيفتحوا الـ afferent (عن طريق cGMP) ← ↑ GFR، ويقللوا الـ renin، ويعملوا natriuresis. يعني عكس الـ RAAS.
+          - **ADH**: أساساً بيظبط ==الـ osmolality==، وبيرد كمان على نقص الحجم. بيرجّع مية في الـ collecting ducts، و urea في الـ medullary ducts عشان الـ gradient.
+          - **Aldosterone**: أساساً بيظبط ==حجم الـ ECF والـ Na+==، ويطلع في الـ hypovolemia، ويرد على الـ hyperkalemia بإنه يطلّع K+.
+
+          والـ PTH بيطلع لما الـ Ca2+ يقل أو الـ PO43– يعلى أو الـ 1,25-(OH)2 D3 يقل: يرجّع Ca2+ في الـ DCT، ويطلّع PO43– من الـ PCT، ويزوّد الـ vitamin D.
+        page: 606
+        quote: "Primarily regulates serum osmolality; also responds to low blood volume states. Stimulates reabsorption of water in collecting ducts."
+      - kind: explain
+        title: "الـ JGA: 3 خلايا بيتكلموا"
+        text: |-
+          الـ **juxtaglomerular apparatus** = **mesangial cells** + **JG cells** (smooth muscle متعدّل في الـ afferent) + **macula densa** (حسّاس الـ NaCl في الـ DCT). والـ JG والـ macula densa بيتكلموا بـ ==gap junctions==.
+
+          الـ macula densa تحس NaCl قليل ← renin ← الـ efferent يقفل ← ↑ GFR.
+
+          والـ JGA بيحمي الـ GFR على المدى القصير بالـ autoregulation، وعلى المدى الطويل بالـ RAAS. و==β-blockers== بتنزّل الضغط بإنها تقلل الـ CO وتقفل الـ β1 على الـ JGA ← renin يقل.
+        page: 607
+        quote: "Consists of mesangial cells, JG cells (modified smooth muscle of afferent arteriole), and the macula densa (NaCl sensor located at the DCT)."
+      - kind: table
+        title: "الكلية كغدة"
+        columns: ["Product", "Made by / when", "Does"]
+        rows:
+          - ["Erythropoietin", "Peritubular interstitial cells, in hypoxia", "↑ RBC production; given in CKD anemia (risk: hypertension)"]
+          - ["Calcitriol", "PCT 1α-hydroxylase (↑ by PTH)", "↑ gut Ca2+ absorption"]
+          - ["Prostaglandins", "Paracrine", "Dilate afferent → ↑ RBF"]
+          - ["Dopamine", "PT cells", "Natriuresis; low dose ↑ RBF, high dose vasoconstricts"]
+        hide: [[0, 1], [1, 1], [2, 2], [3, 2]]
+        page: 607
+        quote: "Released by interstitial cells in peritubular capillary bed in response to hypoxia. Stimulates RBC proliferation in bone marrow. Administered for anemia secondary to chronic kidney disease. Adverse effect: ↑ risk of hypertension in some individuals."
+      - kind: aside
+        tone: exam
+        text: "الـ ==NSAIDs== بتقفل الـ prostaglandins اللي بتحمي الكلية ← الـ afferent يقفل ← الـ GFR يقع. في مريض الـ flow عنده قليل أصلاً (dehydration، heart failure، cirrhosis) ده ممكن يعمل **AKI**."
+        page: 607
+        quote: "NSAIDs block renal-protective prostaglandin synthesis → constriction of afferent arteriole and ↓ GFR; this may result in acute kidney injury in low renal blood flow states."
+      - kind: sort
+        prompt: "الحاجات دي بتدخّل الـ K+ الخلايا ولا بتطلّعه؟"
+        bins: ["K+ into cells", "K+ out of cells"]
+        cards:
+          - { text: "Insulin", bin: 0 }
+          - { text: "β-agonists", bin: 0 }
+          - { text: "Alkalosis", bin: 0 }
+          - { text: "Digoxin", bin: 1 }
+          - { text: "Acidosis", bin: 1 }
+          - { text: "Hyperosmolality", bin: 1 }
+          - { text: "Cell lysis", bin: 1 }
+          - { text: "Succinylcholine", bin: 1 }
+          - { text: "β-blocker", bin: 1 }
+        why: "الـ Na+/K+-ATPase بيدخّل الـ K+، والـ insulin والـ β-agonists بيشغّلوه، والـ digoxin بيقفله. في الـ acidosis الـ H+ يدخل والـ K+ يخرج (والعكس في الـ alkalosis). والـ hyperosmolality بتسحب مية برّه والـ K+ يمشي معاها (solute drag)."
+        page: 608
+        quote: "Shifts K+ out of cell Alkalosis β-agonists Insulin Shifts K+ into cell Succinylcholine Cell lysis Digoxin β-blocker Hypoinsulinemia Acidosis"
+      - kind: check
+        question: "A patient in DKA has K+ 5.9 mEq/L. Insulin is started. What happens to serum K+ over hours?"
+        options:
+          - "Falls, as insulin moves K+ into cells"
+          - "Rises, as insulin moves K+ out"
+          - "Falls, from more renal secretion"
+          - "Stays the same"
+        answer: 0
+        why:
+          - "صح: الـ insulin بيدخّل الـ K+. والـ K+ كان عالي من نقص الـ insulin والـ acidosis والـ hyperosmolality."
+          - "الـ insulin بيدخّل مش بيطلّع."
+          - "الوقعة السريعة shift مش كلية."
+          - "الـ serum K+ هيتحرك مع الـ shift."
+        page: 608
+        quote: "Insulin Shifts K+ into cell"
+      - kind: try
+        items: [renal.L03.085, renal.L03.090, renal.L03.095, renal.L03.097, renal.L03.108]
+    recap:
+      - "Renin: ↓ perfusion، ↑ β1، ↓ NaCl للـ macula densa. ACE في الرئة وبيكسر bradykinin."
+      - "AT II: يقفل الأوعية والـ efferent، يرجّع Na+ و HCO3–، aldosterone و ADH و thirst."
+      - "ANP/BNP عكس الـ RAAS. ADH للـ osmolality، aldosterone للحجم والـ K+."
+      - "EPO من peritubular interstitial cells؛ calcitriol من الـ PCT؛ NSAIDs + low flow ← AKI."
+      - "Insulin و β-agonists و alkalosis يدخّلوا الـ K+."
+    practice: [renal.L03.085, renal.L03.086, renal.L03.087, renal.L03.088, renal.L03.089, renal.L03.090, renal.L03.091, renal.L03.092, renal.L03.093, renal.L03.094, renal.L03.095, renal.L03.096, renal.L03.097, renal.L03.098, renal.L03.099, renal.L03.100, renal.L03.101, renal.L03.102, renal.L03.103, renal.L03.104, renal.L03.105, renal.L03.106, renal.L03.107, renal.L03.108, renal.L03.109, renal.L03.110]
+  - id: renal.L03.lesson6
+    title: "الأملاح والـ acid-base خطوة بخطوة"
+    hook: "سؤال الـ ABG في الامتحان ليه خطوات ثابتة. امشي وراها وهتوصل كل مرة"
+    minutes: 10
+    pages: [609, 611]
+    topics: [electrolyte-disturbances, acid-base-physiology, acidosis-and-alkalosis, renal-tubular-acidosis]
+    goals:
+      - "تعرف أعراض نقص وزيادة كل ملح"
+      - "تحل ABG: pH ثم PCO2 و HCO3– ثم الـ anion gap"
+      - "تفرّق بين RTA 1 و 2 و 4"
+    status: unverified
+    steps:
+      - kind: table
+        title: "Electrolyte disturbances"
+        columns: ["Electrolyte", "Low", "High"]
+        rows:
+          - ["Potassium", "U waves, flat T waves, arrhythmias, cramps, weakness", "Wide QRS, peaked T waves, arrhythmias, weakness"]
+          - ["Calcium", "Tetany, seizures, QT prolongation, Chvostek, Trousseau", "Stones, bones, groans, thrones, psychiatric overtones"]
+          - ["Magnesium", "Tetany, torsades, hypokalemia, hypocalcemia", "↓ DTRs, lethargy, bradycardia, hypotension, cardiac arrest"]
+          - ["Phosphate", "Bone loss, osteomalacia, rickets", "Renal stones, metastatic calcifications, hypocalcemia"]
+        hide: [[0, 1], [0, 2], [1, 2], [2, 1]]
+        page: 609
+        quote: "Potassium U waves and flattened T waves on ECG, arrhythmias, muscle cramps, spasm, weakness Wide QRS and peaked T waves on ECG, arrhythmias, muscle weakness"
+      - kind: aside
+        tone: trap
+        text: "مريض عنده hypokalemia و hypocalcemia مش بيتصلحوا مهما تدّيله؟ فكّر في ==الـ magnesium==. الـ hypomagnesemia بتعمل hypokalemia و hypocalcemia (لما Mg2+ أقل من 1.0 mEq/L) و torsades."
+        page: 609
+        quote: "Magnesium Tetany, torsades de pointes, hypokalemia, hypocalcemia (when [Mg2+ ] <1.0 mEq/L)"
+      - kind: explain
+        title: "مين اتغيّر الأول؟"
+        text: |-
+          القاعدة: ==metabolic== بيغيّر الـ **HCO3–**، و==respiratory== بيغيّر الـ **PCO2**.
+
+          والتعويض دايماً في **نفس الاتجاه**:
+          - Metabolic acidosis (HCO3– ↓) ← hyperventilation فوراً ← PCO2 ↓.
+          - Metabolic alkalosis (HCO3– ↑) ← hypoventilation ← PCO2 ↑.
+          - Respiratory acidosis (PCO2 ↑) ← الكلية ترجّع HCO3– أكتر (بياخد وقت).
+          - Respiratory alkalosis (PCO2 ↓) ← الكلية ترجّع HCO3– أقل.
+
+          والـ pH = 6.1 + log [HCO3–] / (0.03 × PCO2).
+        page: 609
+        quote: "Metabolic acid-base disorders cause HCO – 3 alterations. Respiratory acid-base disorders cause PCO2 alterations."
+      - kind: explain
+        title: "Winters: الرئة عوّضت صح؟"
+        text: |-
+          في الـ metabolic acidosis، الـ PCO2 المتوقع = ==1.5 × HCO3– + 8 ± 2==.
+          - الـ PCO2 الفعلي **أعلى** من المتوقع ← فيه كمان respiratory acidosis (الرئة مش ملاحقة).
+          - **أقل** ← فيه كمان respiratory alkalosis.
+        page: 609
+        quote: "If measured Pco2 > predicted Pco2 → concomitant respiratory acidosis; if measured Pco2 < predicted Pco2 → concomitant respiratory alkalosis"
+      - kind: check
+        question: "DKA with pneumonia: pH 7.08, PCO2 38 mm Hg, HCO3– 11 mEq/L. What else is going on?"
+        options:
+          - "A concomitant respiratory acidosis"
+          - "Appropriate compensation"
+          - "A concomitant respiratory alkalosis"
+          - "Primary respiratory acidosis only"
+        answer: 0
+        why:
+          - "صح: المتوقع 1.5 × 11 + 8 = 24.5 ± 2. الفعلي 38 أعلى بكتير، يعني الرئة تعبانة ومش بتطلّع CO2 كفاية."
+          - "التعويض الصح كان هيبقى PCO2 حوالي 24."
+          - "الـ respiratory alkalosis محتاج PCO2 أقل من 22."
+          - "الـ HCO3– الواطي والـ ketones بيقولوا المشكلة الأساسية metabolic."
+        page: 609
+        quote: "If measured Pco2 > predicted Pco2 → concomitant respiratory acidosis"
+      - kind: order
+        prompt: "رتّب خطوات حل الـ acidemia"
+        steps:
+          - "Check arterial pH (< 7.35)"
+          - "PCO2 > 44 (respiratory) or HCO3– < 20 (metabolic)?"
+          - "If metabolic, calculate the anion gap: Na+ – (Cl– + HCO3–)"
+          - "> 12: GOLDMARK. 8–12: SHARDS"
+        why: "دايماً ابدأ بالـ pH، وبعدين اعرف مين الأصل، وبعدين الـ anion gap لو metabolic."
+        page: 610
+        quote: "Check arterial pH pH < 7.35 pH > 7.45 Pco2 > 44 mm Hg HCO3 – < 20 mEq/L HCO3 – > 28 mEq/L Acidemia Alkalemia"
+      - kind: mnemonic
+        word: "GOLDMARK"
+        parts:
+          - { key: "G", text: "Glycols (ethylene glycol, propylene glycol)" }
+          - { key: "O", text: "Oxoproline (chronic acetaminophen use)" }
+          - { key: "L", text: "L-lactate (lactic acidosis)" }
+          - { key: "D", text: "D-lactate (exogenous lactic acid)" }
+          - { key: "M", text: "Methanol (and other alcohols)" }
+          - { key: "A", text: "Aspirin (late effect)" }
+          - { key: "R", text: "Renal failure" }
+          - { key: "K", text: "Ketones (diabetic, alcoholic, starvation)" }
+        hook: "دي الـ anion gap العالي (> 12). والـ normal gap (8–12) هو SHARDS: Spironolactone، Hyperchloremia/hyperalimentation، Addison و acetazolamide، RTA، Diarrhea، Saline infusion."
+        page: 610
+        quote: "GOLDMARK: Glycols (ethylene glycol, propylene glycol) Oxoproline (chronic acetaminophen use) L-lactate (lactic acidosis) D-lactate (exogenous lactic acid) Methanol (and other alcohols) Aspirin (late effect) Renal failure Ketones (diabetic, alcoholic, starvation)"
+      - kind: explain
+        title: "الـ respiratory والـ alkalosis"
+        text: |-
+          - **Respiratory acidosis** (hypoventilation): airway obstruction، lung disease حاد أو مزمن، opioids و sedatives، ضعف عضلات التنفس.
+          - **Respiratory alkalosis** (hyperventilation): anxiety، hypoxemia (زي الأماكن العالية)، salicylates (في الأول)، tumor، pulmonary embolism، pregnancy.
+          - **Metabolic alkalosis**: شوف ==urine Cl–==:
+            - **< 20** ← saline-responsive: vomiting، diuretics اتاخدت من فترة، antacids.
+            - **> 20** ← saline-resistant: hyperaldosteronism، Bartter، Gitelman، diuretics لسه بياخدها.
+        page: 610
+        quote: "Check urine Cl– > 20 mEq/L < 20 mEq/L Saline-responsive Vomiting Recent loop/ thiazide diuretics Antacids"
+      - kind: check
+        question: "A toddler drank antifreeze: pH 7.18, HCO3– 9, Na+ 140, Cl– 104. Diagnosis?"
+        options:
+          - "Anion gap metabolic acidosis from a glycol"
+          - "Normal gap acidosis from RTA"
+          - "Respiratory acidosis"
+          - "Metabolic alkalosis"
+        answer: 0
+        why:
+          - "صح: الـ gap = 140 − (104 + 9) = 27، أكبر من 12. والـ antifreeze هو ethylene glycol (الـ G في GOLDMARK)."
+          - "الـ RTA gap طبيعي."
+          - "الـ HCO3– واطي، فالمشكلة metabolic."
+          - "الـ pH واطي."
+        page: 610
+        quote: "Glycols (ethylene glycol, propylene glycol)"
+      - kind: table
+        title: "Renal tubular acidosis"
+        columns: ["", "Type 1 (distal)", "Type 2 (proximal)", "Type 4 (hyperkalemic)"]
+        rows:
+          - ["Defect", "α-intercalated can't secrete H+", "PCT can't reabsorb HCO3–", "↓ aldosterone or resistance → ↓ NH4+"]
+          - ["Urine pH", "> 5.5", "< 5.5 once HCO3– is low", "Variable"]
+          - ["Serum K+", "↓", "↓", "↑"]
+          - ["Causes", "Amphotericin B, analgesics, anomalies, autoimmune", "Fanconi, myeloma, CA inhibitors", "Diabetic hyporeninism, ACEi, ARB, NSAIDs, heparin, TMP-SMX"]
+        hide: [[0, 1], [0, 2], [1, 1], [2, 3], [3, 1]]
+        page: 611
+        quote: "Hypoaldosteronism or aldosterone resistance; hyperkalemia → ↓ NH3 synthesis in PCT"
+      - kind: aside
+        tone: tip
+        text: "الأرقام بتساعدك: type ==1== ← H(1)+، الـ α-intercalated مش بتطلّع H+. type ==2== ← bi(2)carbonate، الـ PCT مش بيرجّع HCO3–. والـ distal بيعمل **calcium phosphate stones** (بول قلوي وعظم بيتكسر عشان يعمل buffer)، والـ proximal مع Fanconi بيعمل **hypophosphatemic rickets**."
+        page: 611
+        quote: "↑ risk for calcium phosphate kidney stones (due to ↑ urine pH and ↑ bone turnover related to buffering)"
+      - kind: check
+        question: "A diabetic man with CKD has K+ 6.1, a normal anion gap acidosis, and low renin and aldosterone. Which RTA?"
+        options:
+          - "Type 4"
+          - "Type 1"
+          - "Type 2"
+          - "Not an RTA: ketoacidosis"
+        answer: 0
+        why:
+          - "صح: diabetic hyporeninism ← aldosterone قليل ← hyperkalemia ← NH3 أقل ← حمض أقل بيخرج."
+          - "الـ type 1 الـ K+ فيه واطي."
+          - "الـ type 2 الـ K+ واطي برضه."
+          - "الـ ketoacidosis gap عالي، وهنا طبيعي."
+        page: 611
+        quote: "↓ aldosterone production (eg, diabetic hyporeninism, ACE inhibitors, ARB, NSAIDs, heparin, cyclosporine, adrenal insufficiency)"
+      - kind: try
+        items: [renal.L03.111, renal.L03.114, renal.L03.120, renal.L03.125, renal.L03.128]
+    recap:
+      - "Mg2+ واطي ← hypokalemia و hypocalcemia مش بيتصلحوا، و torsades."
+      - "Metabolic يغيّر HCO3–، respiratory يغيّر PCO2، والتعويض في نفس الاتجاه. Winters = 1.5 × HCO3– + 8 ± 2."
+      - "Gap > 12: GOLDMARK. Gap 8–12: SHARDS. Alkalosis: urine Cl– < 20 saline-responsive."
+      - "RTA 1: H+ ما بيخرجش، urine pH > 5.5، Ca phosphate stones. RTA 2: HCO3– بيضيع. RTA 4: K+ عالي."
+    practice: [renal.L03.111, renal.L03.112, renal.L03.113, renal.L03.114, renal.L03.115, renal.L03.116, renal.L03.117, renal.L03.118, renal.L03.119, renal.L03.120, renal.L03.121, renal.L03.122, renal.L03.123, renal.L03.124, renal.L03.125, renal.L03.126, renal.L03.127, renal.L03.128, renal.L03.129, renal.L03.130, renal.L03.131, renal.L03.132, renal.L03.133, renal.L03.134]

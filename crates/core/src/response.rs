@@ -21,7 +21,7 @@ use crate::lesson::{Lesson, StepBody};
 /// `answers`, `skipped` and `tries`).
 pub const VERSION: u32 = 2;
 
-/// A lesson attempt part-way through (the local setting `lessonpos.<id>`).
+/// A lesson attempt part-way through (the synced setting `lessonpos.<id>`, written through the app's `Store::put_place`).
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct Attempt {
     #[serde(default)]
@@ -395,8 +395,8 @@ mod tests {
 
     fn check() -> StepBody {
         StepBody::Check {
-            question: "Which marker best shows synthetic function?".into(),
-            options: vec!["ALT".into(), "INR".into(), "GGT".into()],
+            question: "Which marker is most specific for myocardial injury?".into(),
+            options: vec!["CK-MB".into(), "Troponin I".into(), "LDH".into()],
             answer: 1,
             why: vec!["".into(), "".into(), "".into()],
         }
@@ -404,8 +404,8 @@ mod tests {
 
     fn order() -> StepBody {
         StepBody::Order {
-            prompt: "Fibrosis".into(),
-            steps: vec!["Chronic injury".into(), "HSC activation".into(), "Collagen deposition".into()],
+            prompt: "Atherosclerosis".into(),
+            steps: vec!["Endothelial injury".into(), "Foam cell formation".into(), "Fibrous plaque".into()],
             why: None,
         }
     }
@@ -413,7 +413,10 @@ mod tests {
     fn matching() -> StepBody {
         StepBody::Match {
             prompt: "Match".into(),
-            pairs: vec![["HAV".into(), "faecal-oral".into()], ["HBV".into(), "blood".into()]],
+            pairs: vec![
+                ["Coxsackie B".into(), "Myocarditis".into()],
+                ["S. aureus".into(), "Acute endocarditis".into()],
+            ],
             why: None,
         }
     }
@@ -421,10 +424,10 @@ mod tests {
     fn sort() -> StepBody {
         StepBody::Sort {
             prompt: "Sort".into(),
-            bins: vec!["Pre-hepatic".into(), "Hepatic".into()],
+            bins: vec!["Cyanotic".into(), "Acyanotic".into()],
             cards: vec![
-                SortCard { text: "Haemolysis".into(), bin: 0 },
-                SortCard { text: "Hepatitis".into(), bin: 1 },
+                SortCard { text: "Tetralogy of Fallot".into(), bin: 0 },
+                SortCard { text: "Ventricular septal defect".into(), bin: 1 },
             ],
             why: None,
         }
@@ -432,18 +435,18 @@ mod tests {
 
     fn case() -> StepBody {
         StepBody::Case {
-            stem: "A 50-year-old man with ascites.".into(),
+            stem: "A 50-year-old man with chest pain.".into(),
             steps: vec![
                 CaseStep {
                     reveal: None,
                     question: "Next test?".into(),
-                    options: vec!["Paracentesis".into(), "CT".into()],
+                    options: vec!["ECG".into(), "CT".into()],
                     answer: Some(0),
                     why: "".into(),
                 },
                 CaseStep {
                     reveal: None,
-                    question: "SAAG?".into(),
+                    question: "Troponin?".into(),
                     options: vec![],
                     answer: None,
                     why: "".into(),
@@ -475,7 +478,7 @@ mod tests {
             },
         ];
         Lesson {
-            id: "hb.L01.lesson1".into(),
+            id: "cvs.L04.lesson1".into(),
             title: "t".into(),
             hook: "h".into(),
             minutes: 5,
@@ -603,7 +606,7 @@ mod tests {
         a.answer(1, false);
         let mut edited = l.clone();
         if let StepBody::Check { options, .. } = &mut edited.steps[1].body {
-            options[0] = "AST".into();
+            options[0] = "Myoglobin".into();
         }
         let b = reopen(&edited, &a);
         assert_eq!(b.drafts[1].draft, Draft::None);
@@ -674,9 +677,9 @@ mod tests {
         assert!(!quote_held(&check(), StepState::Done, None));
         assert!(!quote_held(&check(), StepState::AnsweredBefore, None));
         let table = StepBody::Table {
-            title: "Child-Pugh".into(),
-            columns: vec!["Variable".into(), "1".into()],
-            rows: vec![vec!["Ascites".into(), "Absent".into()]],
+            title: "Shock".into(),
+            columns: vec!["Type".into(), "CVP".into()],
+            rows: vec![vec!["Hypovolemic".into(), "↓".into()]],
             hide: vec![[0, 1]],
         };
         assert!(quote_held(&table, StepState::Plain, None));

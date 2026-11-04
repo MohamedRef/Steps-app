@@ -1,0 +1,994 @@
+schema: steps.lesson/v1
+lecture: mic.L05
+lessons:
+  - id: mic.L05.lesson1
+    title: "الفيروس من جوه: الشكل والجينات"
+    hook: "لو عرفت الـ genome والـ envelope، هتعرف نص الأسئلة من غير ما تحفظ أمراض"
+    minutes: 8
+    pages: [159, 160]
+    topics: [viral-structure, viral-genetics, viral-genomes, viral-envelopes]
+    goals:
+      - "تفرّق recombination و reassortment و complementation و phenotypic mixing"
+      - "تعرف ليه بعض الـ nucleic acids معدية لوحدها"
+      - "تحفظ استثناءات الـ DNA والـ RNA viruses بالتحشيشات"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "تلات أشكال"
+        text: |-
+          الفيروس capsid جواه nucleic acid، وساعات عليه **envelope** (lipid bilayer):
+
+          - naked مع icosahedral capsid.
+          - enveloped مع icosahedral capsid.
+          - enveloped مع ==helical capsid==.
+        page: 159
+        quote: "Naked (nonenveloped) virus with icosahedral capsid Enveloped virus with icosahedral capsid Enveloped virus with helical capsid"
+      - kind: table
+        title: "أربع طرق الفيروسات بتتبادل بيها"
+        columns: ["", "What happens", "Example"]
+        rows:
+          - ["Recombination", "Crossing over between homologous regions", "-"]
+          - ["Reassortment", "Segmented genomes swap segments", "2009 H1N1; antigenic shift"]
+          - ["Complementation", "One virus makes a protein the other lacks", "HDV uses HBsAg from HBV"]
+          - ["Phenotypic mixing", "Genome A in coat B for one generation", "Coat B sets tropism"]
+        hide: [[1, 1], [2, 2], [3, 1]]
+        page: 159
+        quote: "Reassortment When viruses with segmented genomes (eg, influenza virus) exchange genetic material."
+      - kind: reveal
+        prompt: "في الـ phenotypic mixing، الفيروس الهجين (genome A جوه coat B) هيصيب أنهي خلايا؟ وولاده هيبقى شكلهم إيه؟"
+        answer: "هيصيب حسب ==coat B== (هو اللي بيحدد الـ tropism). بس ولاده هيبقى عليهم ==coat A==، لأن الـ genetic material بتاعه A، والتغيير ده مش بيتورث."
+        page: 159
+        quote: "Type B protein coat determines the tropism (infectivity) of the hybrid virus. Progeny from subsequent infection of a cell by progeny 1 will have a type A coat that is encoded by its type A genetic material."
+      - kind: explain
+        title: "ليه شوية nucleic acids معدية لوحدها؟"
+        text: |-
+          - **⊕ ssRNA** زي الـ mRNA، الخلية تترجمه على طول ← ==معدي==.
+          - **dsDNA** أغلبه معدي (ما عدا الـ pox والـ HBV).
+          - **⊝ ssRNA و dsRNA** ← ==مش معديين لوحدهم== لأن الخلية ما عندهاش الـ polymerase اللي يقلبهم. عشان كده الـ virion بتاع الـ ⊝ ssRNA شايل معاه RNA-dependent RNA polymerase.
+        page: 160
+        quote: "Virions of ⊝ strand ssRNA viruses carry RNA-dependent RNA polymerases to transcribe ⊝ strand to ⊕."
+      - kind: explain
+        title: "استثناءات الـ DNA والـ RNA"
+        text: |-
+          - كل الـ DNA viruses **ds** ما عدا ==Parvoviridae== (ss): "Part of a virus".
+          - كلهم **linear** ما عدا papilloma و polyoma و hepadna (circular).
+          - كل الـ RNA viruses **ss** ما عدا ==Reoviridae== (dsRNA): "Repeato-virus".
+        page: 160
+        quote: "All have ssRNA genomes except Reoviridae (dsRNA)."
+      - kind: aside
+        tone: tip
+        text: |-
+          تحشيشات الكتاب:
+          - ⊕: ==While at a retro toga party, I drank flavored Corona and ate hippie California pickles== (retro، toga، flavi، corona، hepe، calici، picorna).
+          - ⊝: Always bring polymerase or fail replication (arena، bunya، paramyxo، orthomyxo، filo، rhabdo).
+          - Segmented: **BOAR** (Bunya، Orthomyxo، Arena، Reo).
+        page: 160
+        quote: "While at a retro toga party, I drank flavored Corona and ate hippie California pickles."
+      - kind: check
+        question: "Purified genomic RNA of which virus would be infectious if injected into a cell?"
+        options:
+          - "Poliovirus"
+          - "Influenza virus"
+          - "Rabies virus"
+          - "Rotavirus"
+        answer: 0
+        why:
+          - "صح: الـ polio picornavirus، ⊕ ssRNA، بيتترجم على طول."
+          - "الـ influenza ⊝ ssRNA، محتاج الـ polymerase بتاعه."
+          - "الـ rabies ⊝ ssRNA."
+          - "الـ rotavirus dsRNA، مش معدي لوحده."
+        page: 160
+        quote: "Naked nucleic acids of most dsDNA viruses (except poxviruses and HBV) and ⊕ strand ssRNA viruses are infectious."
+      - kind: figure
+        title: "الـ envelope جاي منين"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-ink" x="10" y="10" width="200" height="140" rx="16" fill="none"/>
+            <circle class="fg-box" cx="80" cy="80" r="38"/>
+            <text x="52" y="84" class="t-sm">nucleus</text>
+            <circle class="fg-acc" cx="140" cy="60" r="8"/>
+            <line class="fg-arrow" x1="120" y1="70" x2="133" y2="64"/>
+            <circle class="fg-good" cx="225" cy="105" r="10"/>
+            <line class="fg-arrow" x1="210" y1="105" x2="215" y2="105"/>
+            <text x="222" y="40" class="t-sm t-b">herpes:</text>
+            <text x="222" y="56" class="t-sm">nuclear membrane</text>
+            <text x="222" y="132" class="t-sm t-b">most others:</text>
+            <text x="222" y="148" class="t-sm">plasma membrane</text>
+          </svg>
+        caption: "أغلب الفيروسات بتاخد الـ envelope وهي طالعة من الـ plasma membrane. الـ herpesviruses بتاخده من الـ nuclear membrane."
+        alt: "A cell with a nucleus. A herpesvirus particle buds from the nuclear membrane; most other enveloped viruses bud from the plasma membrane on their way out."
+        page: 160
+        quote: "Exceptions include herpesviruses, which acquire envelopes from nuclear membrane."
+      - kind: explain
+        title: "الـ DNA viruses اللي ليها envelope"
+        text: |-
+          تلاتة بس: ==herpes و hepadna و pox==. "have helpful protection". وأي DNA virus تاني (adeno، papilloma، polyoma، parvo) naked.
+        page: 160
+        quote: "Enveloped DNA viruses (herpesvirus, hepadnavirus, poxvirus) have helpful protection."
+      - kind: try
+        items: [mic.L05.002, mic.L05.006, mic.L05.009, mic.L05.011, mic.L05.013]
+    recap:
+      - "Reassortment = segmented = shift. Complementation = HDV مع HBV. Phenotypic mixing = coat مؤقت."
+      - "⊕ ssRNA و أغلب الـ dsDNA معديين لوحدهم؛ ⊝ و dsRNA لأ."
+      - "Parvo ss، Reo ds، papilloma/polyoma/hepadna circular. Segmented = BOAR."
+      - "Herpes بياخد الـ envelope من النواة. Enveloped DNA = herpes، hepadna، pox."
+    practice: [mic.L05.001, mic.L05.002, mic.L05.003, mic.L05.004, mic.L05.005, mic.L05.006, mic.L05.007, mic.L05.008, mic.L05.009, mic.L05.010, mic.L05.011, mic.L05.012, mic.L05.013]
+  - id: mic.L05.lesson2
+    title: "الـ DNA viruses"
+    hook: "سبع عائلات بس، وكل واحدة ليها مرض أو اتنين بيتسألوا كل سنة"
+    minutes: 8
+    pages: [161, 161]
+    topics: [dna-viruses]
+    goals:
+      - "تعرف الاستثناءات: pox برّه النواة، parvo ss"
+      - "تعرف أمراض adeno و HPV و JC/BK و B19"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "القاعدة"
+        text: |-
+          كل الـ DNA viruses ==icosahedral== وبيتكاثروا ==في النواة==، ما عدا الـ poxvirus اللي بيتكاثر في الـ cytoplasm: "Pox is out of the box (nucleus)".
+        page: 161
+        quote: "All are icosahedral and replicate in the nucleus (except poxvirus)."
+      - kind: explain
+        title: "Pox و Hepadna"
+        text: |-
+          - **Poxvirus**: أكبر DNA virus. Smallpox اتمسح من العالم بالـ live attenuated vaccine. Cowpox (milkmaid blisters). و **molluscum contagiosum**: papule بلون الجلد في نصها ==umbilication==، والـ keratinocytes فيها molluscum bodies.
+          - **Hepadnavirus (HBV)**: partially ds و circular، وهو ==مش retrovirus بس عنده reverse transcriptase==.
+        page: 161
+        quote: "Molluscum contagiosum—flesh-colored papule with central umbilication; keratinocytes contain molluscum bodies"
+      - kind: explain
+        title: "Adenovirus"
+        text: |-
+          naked و ds و linear. بيعمل:
+          - febrile pharyngitis
+          - ==acute hemorrhagic cystitis==
+          - pneumonia
+          - conjunctivitis (==pink eye==)
+          - gastroenteritis
+          - myocarditis
+        page: 161
+        quote: "Febrile pharyngitis B —sore throat Acute hemorrhagic cystitis Pneumonia Conjunctivitis—“pink eye” Gastroenteritis Myocarditis"
+      - kind: explain
+        title: "HPV و Polyoma"
+        text: |-
+          - **HPV**: warts (==1، 2، 6، 11==) و cancer (==16، 18==): cervical، anal، penile، oropharyngeal.
+          - **JC virus**: PML في الـ immunocompromised. "Junky Cerebrum".
+          - **BK virus**: في الـ transplant، بيضرب الكلية. "Bad Kidney".
+        page: 161
+        quote: "serotypes 1, 2, 6, 11 associated with warts; serotypes 16, 18 associated with cancer"
+      - kind: check
+        question: "A kidney transplant recipient has rising creatinine, and biopsy shows viral inclusions in tubular cells. Which virus?"
+        options:
+          - "BK virus"
+          - "JC virus"
+          - "Adenovirus"
+          - "Parvovirus B19"
+        answer: 0
+        why:
+          - "صح: BK = Bad Kidney في الـ transplant."
+          - "الـ JC بيعمل PML في المخ."
+          - "الـ adeno بيعمل hemorrhagic cystitis، مش ده الـ classic في الكلية المزروعة."
+          - "الـ B19 بيضرب الـ RBC precursors."
+        page: 161
+        quote: "BK virus—transplant patients, commonly targets kidney"
+      - kind: explain
+        title: "Parvovirus B19: أصغر DNA virus"
+        text: |-
+          ss و linear (parvus = small). بيصيب ==RBC precursors== والـ endothelial cells ← تكسير RBCs:
+
+          - أطفال: ==slapped cheek== (erythema infectiosum، fifth disease).
+          - sickle cell: ==aplastic crisis==.
+          - جنين: hydrops fetalis وموت.
+          - كبار: pure RBC aplasia وأعراض شبه الـ rheumatoid arthritis.
+        page: 161
+        quote: "B19 virus—aplastic crises in sickle cell disease, “slapped cheek” rash in children (erythema infectiosum, or fifth disease)"
+      - kind: figure
+        title: "الـ DNA viruses على خريطة"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="18" class="t-sm t-b">enveloped</text>
+            <rect class="fg-acc" x="10" y="26" width="100" height="26" rx="6"/>
+            <text x="18" y="44" class="t-sm">Herpes</text>
+            <rect class="fg-acc" x="120" y="26" width="100" height="26" rx="6"/>
+            <text x="128" y="44" class="t-sm">Hepadna ○</text>
+            <rect class="fg-acc" x="230" y="26" width="100" height="26" rx="6"/>
+            <text x="238" y="44" class="t-sm">Pox (cyto)</text>
+            <text x="10" y="80" class="t-sm t-b">naked</text>
+            <rect class="fg-box" x="10" y="88" width="100" height="26" rx="6"/>
+            <text x="18" y="106" class="t-sm">Adeno</text>
+            <rect class="fg-box" x="120" y="88" width="100" height="26" rx="6"/>
+            <text x="128" y="106" class="t-sm">Papilloma ○</text>
+            <rect class="fg-box" x="230" y="88" width="100" height="26" rx="6"/>
+            <text x="238" y="106" class="t-sm">Polyoma ○</text>
+            <rect class="fg-good" x="10" y="122" width="100" height="26" rx="6"/>
+            <text x="18" y="140" class="t-sm">Parvo (ss)</text>
+            <text x="120" y="162" class="t-sm t-mut">○ = circular</text>
+          </svg>
+        caption: "تلاتة enveloped (herpes، hepadna، pox) وأربعة naked. الـ circular: hepadna و papilloma و polyoma. الـ pox في الـ cytoplasm، والـ parvo ss."
+        alt: "DNA virus families. Enveloped: herpes, hepadna (circular), pox (replicates in cytoplasm). Naked: adeno, papilloma (circular), polyoma (circular), parvo (single stranded)."
+        page: 161
+        quote: "VIRAL FAMILY ENVELOPE DNA STRUCTURE MEDICAL IMPORTANCE Herpesviruses Yes DS and linear"
+      - kind: check
+        question: "A pregnant teacher is exposed to a child with a slapped cheek rash. Which fetal complication is the concern?"
+        options:
+          - "Hydrops fetalis"
+          - "Cataracts and PDA"
+          - "Microcephaly with subcortical calcifications"
+          - "Chorioretinitis and hydrocephalus"
+        answer: 0
+        why:
+          - "صح: B19 بيكسر الـ RBCs في الجنين ← hydrops fetalis."
+          - "ده congenital rubella."
+          - "ده congenital Zika."
+          - "ده congenital Toxo."
+        page: 161
+        quote: "RBC destruction →  hydrops fetalis and death in fetus"
+      - kind: try
+        items: [mic.L05.014, mic.L05.016, mic.L05.018, mic.L05.020, mic.L05.022]
+    recap:
+      - "كلهم في النواة ما عدا pox. Parvo أصغرهم و ss، و pox أكبرهم."
+      - "HBV مش retrovirus بس عنده reverse transcriptase."
+      - "Adeno: pharyngitis، hemorrhagic cystitis، pink eye. HPV 6/11 warts، 16/18 cancer."
+      - "JC = Junky Cerebrum (PML)، BK = Bad Kidney. B19: slapped cheek، aplastic crisis، hydrops."
+    practice: [mic.L05.014, mic.L05.015, mic.L05.016, mic.L05.017, mic.L05.018, mic.L05.019, mic.L05.020, mic.L05.021, mic.L05.022, mic.L05.023]
+
+  - id: mic.L05.lesson3
+    title: "الـ Herpesviruses"
+    hook: "تمن فيروسات بتستخبى جوه جسمك للأبد، وكل واحد عارف مكانه"
+    minutes: 10
+    pages: [162, 163]
+    topics: [herpesviruses, hsv-identification, viral-receptors]
+    goals:
+      - "تعرف مكان الـ latency لكل herpesvirus"
+      - "تشخّص الـ mono وتعرف أورام الـ EBV"
+      - "تعرف CMV و roseola و HHV-8، وطرق تشخيص الـ HSV، والـ receptors"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "HSV-1 و HSV-2"
+        text: |-
+          **HSV-1** (لعاب وإفرازات): gingivostomatitis، keratoconjunctivitis، cold sores، herpetic whitlow، ==temporal lobe encephalitis==، esophagitis، erythema multiforme. كامن في الـ ==trigeminal ganglia==.
+
+          **HSV-2** (جنسي وولادة): herpes genitalis و neonatal herpes، والـ viral meningitis أكتر معاه. كامن في الـ ==sacral ganglia==.
+        page: 162
+        quote: "Herpes genitalis, neonatal herpes C Most commonly latent in sacral ganglia"
+      - kind: aside
+        tone: exam
+        text: "الـ HSV-1 هو ==أشهر سبب للـ sporadic encephalitis==: altered mental status و seizures و aphasia. والكتاب بيقول إن الاتنين ممكن يصيبوا الأعضاء التناسلية وغيرها."
+        page: 162
+        quote: "Most common cause of sporadic encephalitis, can present as altered mental status, seizures, and/or aphasia"
+      - kind: explain
+        title: "VZV (HHV-3)"
+        text: |-
+          chickenpox وبعدين shingles، وممكن encephalitis و pneumonia. أشهر مضاعفة للـ shingles: ==post-herpetic neuralgia==.
+
+          كامن في الـ dorsal root أو trigeminal ganglia، ولو مسك فرع ==CN V1== ← herpes zoster ophthalmicus.
+        page: 162
+        quote: "Most common complication of shingles is post- herpetic neuralgia"
+      - kind: explain
+        title: "EBV (HHV-4): kissing disease"
+        text: |-
+          **Mono**: fever، hepatosplenomegaly، pharyngitis، و lymphadenopathy (خصوصاً ==posterior cervical==). ممنوع contact sports لحد ما يخف بسبب خطر ==splenic rupture==.
+
+          بيدخل الـ B cells من ==CD21==: "Must be 21 to drink Beer in a Barr".
+        page: 162
+        quote: "Infects B cells through CD21, “Must be 21 to drink Beer in a Barr”"
+      - kind: reveal
+        prompt: "مراهق عنده التهاب حلق اتعالج بـ amoxicillin على إنه strep، وطلعله rash في جسمه كله. إيه اللي حصل، والـ atypical lymphocytes في الـ smear إيه؟"
+        answer: "ده mono من الـ EBV، والـ ==amoxicillin بيعمل maculopapular rash== فيه. والـ atypical lymphocytes ==مش B cells مصابة==، دي cytotoxic T cells بتتفاعل. والـ Monospot ⊕ (heterophile antibodies بتلزّق RBCs الخروف أو الحصان)."
+        page: 162
+        quote: "Use of amoxicillin (eg, for presumed strep pharyngitis) can cause maculopapular rash"
+      - kind: explain
+        title: "أورام الـ EBV"
+        text: |-
+          - lymphomas، زي ==endemic Burkitt lymphoma==.
+          - ==nasopharyngeal carcinoma== (خصوصاً كبار آسيويين).
+          - lymphoproliferative disease في الـ transplant.
+        page: 162
+        quote: "Associated with lymphomas (eg, endemic Burkitt lymphoma), nasopharyngeal carcinoma (especially Asian adults), lymphoproliferative disease in transplant patients"
+      - kind: explain
+        title: "CMV (HHV-5)"
+        text: |-
+          بيتنقل بكل طريقة: congenital، نقل دم، جنسي، لعاب، بول، transplant.
+
+          - السليم: mono بس ==Monospot ⊝==.
+          - الـ immunocompromised: pneumonia (transplant)، esophagitis، colitis، و ==AIDS retinitis== ("sightomegalovirus").
+          - الخلايا فيها ==owl eye== intranuclear inclusions، وكامن في الـ mononuclear cells.
+        page: 162
+        quote: "Infected cells have characteristic “owl eye” intranuclear inclusions H Latent in mononuclear cells"
+      - kind: check
+        question: "A 19-year-old with mononucleosis-like illness has a negative Monospot test. Which virus is likely?"
+        options:
+          - "Cytomegalovirus"
+          - "Epstein-Barr virus"
+          - "HHV-8"
+          - "HSV-2"
+        answer: 0
+        why:
+          - "صح: الـ CMV بيعمل mono بـ Monospot ⊝ في السليم."
+          - "الـ EBV Monospot ⊕."
+          - "الـ HHV-8 بيعمل Kaposi sarcoma."
+          - "الـ HSV-2 بيعمل herpes genitalis."
+        page: 162
+        quote: "Mononucleosis (⊝ Monospot) in immunocompetent patients"
+      - kind: explain
+        title: "HHV-6/7 و HHV-8"
+        text: |-
+          - **HHV-6** (و 7 أقل): ==roseola infantum==، حرارة عالية كام يوم ممكن تعمل تشنجات، وبعدها rash يبدأ من الجذع. تحت سنتين. "fever first, Rosy (rash) later".
+          - **HHV-8** (جنسي): ==Kaposi sarcoma==، ورم من الـ endothelial cells، plaques بنفسجية، في الـ HIV والـ transplant.
+        page: 162
+        quote: "Kaposi sarcoma (neoplasm of endothelial cells). Seen in HIV/AIDS and transplant patients."
+      - kind: figure
+        title: "الـ latency"
+        svg: |-
+          <svg viewBox="0 0 360 176" xmlns="http://www.w3.org/2000/svg">
+            <circle class="fg-box" cx="70" cy="40" r="28"/>
+            <text x="55" y="45" class="t-sm">head</text>
+            <rect class="fg-box" x="55" y="70" width="30" height="80" rx="8"/>
+            <circle class="fg-acc" cx="95" cy="48" r="6"/>
+            <circle class="fg-good" cx="70" cy="142" r="6"/>
+            <circle class="fg-bad" cx="92" cy="100" r="6"/>
+            <text x="130" y="40" class="t-sm">trigeminal: HSV-1 (VZV)</text>
+            <text x="130" y="104" class="t-sm">dorsal root: VZV</text>
+            <text x="130" y="146" class="t-sm">sacral: HSV-2</text>
+            <text x="130" y="166" class="t-sm t-mut">CMV: mononuclear cells</text>
+          </svg>
+        caption: "الـ HSV-1 في الـ trigeminal، الـ HSV-2 في الـ sacral، الـ VZV في الـ dorsal root أو الـ trigeminal، والـ CMV في الـ mononuclear cells."
+        alt: "Body outline with ganglia marked. Trigeminal ganglion holds latent HSV-1 and sometimes VZV, dorsal root ganglia hold VZV, sacral ganglia hold HSV-2, and CMV is latent in mononuclear cells."
+        page: 162
+        quote: "Latent in dorsal root or trigeminal ganglia; CN V1 branch involvement can cause herpes zoster ophthalmicus"
+      - kind: explain
+        title: "تشخيص الـ HSV"
+        text: |-
+          - ==PCR of skin lesions== هو الـ test of choice، و CSF PCR للـ encephalitis.
+          - الـ **Tzanck test** (قديم): multinucleated giant cells في HSV-1 و HSV-2 و VZV.
+          - ==Cowdry A== inclusions (intranuclear eosinophilic) في نفس التلاتة.
+        page: 163
+        quote: "Intranuclear eosinophilic Cowdry A inclusions also seen with HSV-1, HSV-2, VZV."
+      - kind: match
+        prompt: "وصّل الفيروس بالـ receptor"
+        pairs:
+          - ["EBV", "CD21"]
+          - ["Parvovirus B19", "P antigen on RBCs"]
+          - ["Rabies", "Nicotinic AChR"]
+          - ["Rhinovirus", "ICAM-1"]
+          - ["SARS-CoV-2", "ACE2"]
+        why: "Beer in a Barr عند 21، الـ B19 بيمسك P antigen، الـ rabies بيمسك الـ AChR ويطلع على الأعصاب، I CAMe to see the rhino، والـ spike بيمسك ACE2."
+        page: 163
+        quote: "Rhinovirus ICAM-1 (I CAMe to see the rhino)"
+      - kind: try
+        items: [mic.L05.030, mic.L05.031, mic.L05.036, mic.L05.039, mic.L05.041]
+    recap:
+      - "HSV-1 trigeminal و encephalitis؛ HSV-2 sacral و meningitis؛ VZV dorsal root و post-herpetic neuralgia."
+      - "EBV: CD21، posterior cervical nodes، splenic rupture، amoxicillin rash، atypical = T cells، Burkitt و nasopharyngeal."
+      - "CMV: Monospot ⊝، retinitis، owl eye. HHV-6: roseola. HHV-8: Kaposi."
+      - "HSV: PCR، Tzanck قديم، Cowdry A. Receptors: CD21، P antigen، AChR، ICAM-1، ACE2، CD4/CCR5/CXCR4."
+    practice: [mic.L05.024, mic.L05.025, mic.L05.026, mic.L05.027, mic.L05.028, mic.L05.029, mic.L05.030, mic.L05.031, mic.L05.032, mic.L05.033, mic.L05.034, mic.L05.035, mic.L05.036, mic.L05.037, mic.L05.038, mic.L05.039, mic.L05.040, mic.L05.041]
+  - id: mic.L05.lesson4
+    title: "الـ RNA viruses: الخريطة الكبيرة"
+    hook: "كلهم في الـ cytoplasm إلا اتنين، والجدول ده بيتسأل منه حتة كل امتحان"
+    minutes: 9
+    pages: [164, 165]
+    topics: [rna-viruses, picornavirus, rhinovirus, rotavirus]
+    goals:
+      - "تعرف الاستثناءات (retro و flu في النواة)"
+      - "تربط كل عائلة بأمراضها"
+      - "تفهم الـ picorna والـ rhino والـ rota"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "القاعدة والاستثناء"
+        text: |-
+          كل الـ RNA viruses بتتكاثر في الـ ==cytoplasm==، ما عدا الـ ==retrovirus والـ influenza== (في النواة).
+
+          "Retro flu is outta cyt (sight)".
+        page: 164
+        quote: "All replicate in the cytoplasm (except retrovirus and influenza virus)."
+      - kind: explain
+        title: "الـ naked RNA viruses"
+        text: |-
+          أربعة بس من غير envelope:
+          - **Reo** (ds، segmented): ==rotavirus==.
+          - **Picorna**: polio، echo، rhino، coxsackie، HAV (==PERCH==).
+          - **Hepe**: HEV.
+          - **Calici**: ==norovirus==.
+
+          والباقي كله enveloped.
+        page: 164
+        quote: "Caliciviruses No SS ⊕ linear Norovirus—viral gastroenteritis"
+      - kind: explain
+        title: "الـ ⊕ enveloped"
+        text: |-
+          - **Flavi**: HCV، yellow fever، dengue، ==West Nile== (meningoencephalitis و asymmetric flaccid paralysis)، Zika.
+          - **Toga CREW**: Chikungunya، Rubella (كان toga، دلوقتي matonavirus)، Eastern و Western equine encephalitis.
+          - **Retro**: reverse transcriptase؛ HTLV (T-cell leukemia) و HIV.
+          - **Corona**: common cold، SARS، COVID-19، MERS.
+        page: 164
+        quote: "West Nile virusa —meningoencephalitis, acute asymmetric flaccid paralysis"
+      - kind: explain
+        title: "الـ ⊝ enveloped"
+        text: |-
+          - **Orthomyxo** (segmented): influenza.
+          - **Paramyxo** (==PaRaMyxovirus==): Parainfluenza (croup)، RSV، Measles، Mumps.
+          - **Rhabdo**: rabies. **Filo**: Ebola و Marburg.
+          - **Arena** (segmented، circular): LCMV و Lassa (من القوارض).
+          - **Bunya** (segmented): California encephalitis، Rift Valley، Crimean-Congo، و ==hantavirus==.
+          - **Delta**: HDV "Defective"، محتاج HBV.
+        page: 164
+        quote: "PaRaMyxovirus: Parainfluenza—croup RSV—bronchiolitis in babies Measles, Mumps"
+      - kind: check
+        question: "Which RNA virus replicates in the nucleus?"
+        options:
+          - "Influenza virus"
+          - "Rabies virus"
+          - "Poliovirus"
+          - "Measles virus"
+        answer: 0
+        why:
+          - "صح: retro و flu بس في النواة."
+          - "الـ rabies في الـ cytoplasm."
+          - "الـ polio في الـ cytoplasm."
+          - "الـ measles في الـ cytoplasm."
+        page: 164
+        quote: "“Retro flu is outta cyt (sight).”"
+      - kind: explain
+        title: "Picornavirus: pico = صغير"
+        text: |-
+          الـ RNA بيتترجم لـ ==polypeptide واحد كبير== وبعدين proteases بتاعة الفيروس تقطّعه.
+
+          الـ polio والـ echo والـ coxsackie ==enteroviruses== وبيعملوا aseptic meningitis. والـ coxsackie كمان: herpangina، hand-foot-and-mouth، myocarditis، pericarditis.
+        page: 165
+        quote: "RNA is translated into 1 large polypeptide that is cleaved by virus-encoded proteases into functional viral proteins."
+      - kind: reveal
+        prompt: "الـ rhinovirus picornavirus زي الـ polio والـ coxsackie، طب ليه ما بيعملش إسهال؟"
+        answer: |-
+          لأنه ==acid labile==، الحمض في المعدة بيدمّره، فما بيوصلش الأمعاء. عشان كده بيفضل في الأنف (common cold)، وعنده أكتر من 100 serotype. "Rhino has a runny nose".
+        page: 165
+        quote: "Acid labile—destroyed by stomach acid; therefore, does not infect the GI tract (unlike the other picornaviruses)."
+      - kind: explain
+        title: "Rotavirus: right out the anus"
+        text: |-
+          reovirus، segmented dsRNA. ==أهم سبب لإسهال الأطفال في العالم==، وفي أمريكا في الشتا في الحضانات.
+
+          الآلية: ==villous destruction== مع atrophy ← ↓ امتصاص Na+ وفقد K+.
+        page: 165
+        quote: "Villous destruction with atrophy leads to ↓ absorption of Na+ and loss of K+"
+      - kind: figure
+        title: "الـ RNA viruses حسب الـ envelope والـ strand"
+        svg: |-
+          <svg viewBox="0 0 360 182" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="18" class="t-sm t-b">naked</text>
+            <text x="10" y="36" class="t-sm">Reo (ds) · Picorna · Hepe · Calici</text>
+            <text x="10" y="66" class="t-sm t-b">enveloped ⊕</text>
+            <text x="10" y="84" class="t-sm">Flavi · Toga · Retro · Corona</text>
+            <text x="10" y="114" class="t-sm t-b">enveloped ⊝</text>
+            <text x="10" y="132" class="t-sm">Orthomyxo · Paramyxo · Rhabdo</text>
+            <text x="10" y="150" class="t-sm">Filo · Arena · Bunya · Delta</text>
+            <text x="10" y="170" class="t-sm t-mut">segmented: BOAR</text>
+          </svg>
+        caption: "أربعة naked (reo، picorna، hepe، calici). الـ enveloped ⊕: flavi، toga، retro، corona. الـ enveloped ⊝: الباقي."
+        alt: "RNA virus families grouped. Naked: Reoviruses (double stranded, multisegmented), picorna, hepe, calici. Enveloped positive sense: flavi, toga, retro, corona. Enveloped negative sense: orthomyxo, paramyxo, rhabdo, filo, arena, bunya, delta. Segmented: bunya, orthomyxo, arena, reo."
+        page: 164
+        quote: "Reoviruses No DS linear Multisegmented"
+      - kind: check
+        question: "Which infant should not receive the rotavirus vaccine?"
+        options:
+          - "An infant with a history of intussusception"
+          - "An infant born premature at 35 weeks"
+          - "An infant attending day care"
+          - "An infant with an egg allergy"
+        answer: 0
+        why:
+          - "صح: الـ intussusception (والـ SCID) هما الاستثناء، لأن الـ intussusception adverse effect نادر للـ vaccine."
+          - "الـ prematurity مش موانع في الكتاب."
+          - "الحضانة سبب زيادة للتطعيم."
+          - "الـ egg allergy مش موانع للـ rotavirus vaccine."
+        page: 165
+        quote: "CDC recommends routine vaccination of all infants except those with a history of intussusception (rare adverse effect of rotavirus vaccination) or SCID."
+      - kind: try
+        items: [mic.L05.042, mic.L05.043, mic.L05.049, mic.L05.053, mic.L05.055]
+    recap:
+      - "كلهم في الـ cytoplasm ما عدا retro و flu."
+      - "Naked: reo، picorna (PERCH)، hepe، calici (noro). الباقي enveloped."
+      - "Flavi: HCV، yellow، dengue، West Nile، Zika. Toga CREW. Paramyxo: PaRaMyxo. Bunya: hanta."
+      - "Rhino acid labile. Rota: villous destruction، vaccine إلا intussusception و SCID."
+    practice: [mic.L05.042, mic.L05.043, mic.L05.044, mic.L05.045, mic.L05.046, mic.L05.047, mic.L05.048, mic.L05.049, mic.L05.050, mic.L05.051, mic.L05.052, mic.L05.053, mic.L05.054, mic.L05.055, mic.L05.056]
+
+  - id: mic.L05.lesson5
+    title: "الإنفلونزا وفيروسات الأطفال"
+    hook: "flu، croup، حصبة، حصبة ألماني، نكاف: كل واحد ليه علامة لو شفتها تعرفه"
+    minutes: 10
+    pages: [166, 167]
+    topics: [influenza, antigenic-shift-drift, rubella, paramyxoviruses, croup, measles, mumps]
+    goals:
+      - "تفهم الـ HA والـ NA والـ shift والـ drift"
+      - "تفرّق الـ rubella من الـ measles وتعرف congenital rubella"
+      - "تعرف الـ F protein والـ croup والـ mumps"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Influenza"
+        text: |-
+          orthomyxovirus: enveloped، ⊝ ssRNA، segmented. عليه:
+          - **Hemagglutinin**: بيمسك ==sialic acid== ويدخّل الفيروس ("lets the virus in").
+          - **Neuraminidase**: بيطلّع الـ virions الجديدة ("Neuraminidaways").
+
+          العلاج supportive، و ±==oseltamivir أو zanamivir== (neuraminidase inhibitors).
+        page: 166
+        quote: "Treatment: supportive +/– neuraminidase inhibitor (eg, oseltamivir, zanamivir)."
+      - kind: aside
+        tone: trap
+        text: "المريض اللي خف من الإنفلونزا ورجع تعب تاني بحرارة وبلغم صديدي: فكّر في ==bacterial superinfection==، وأشهرهم S aureus و S pneumoniae و H influenzae."
+        page: 166
+        quote: "Patients at risk for fatal bacterial superinfection, most commonly S aureus, S pneumoniae, and H influenzae."
+      - kind: table
+        title: "Shift ولا drift؟"
+        columns: ["", "Shift", "Drift"]
+        rows:
+          - ["Mechanism", "2 segmented viruses in 1 cell reassort", "Random mutation in HA or NA"]
+          - ["Change", "Dramatically different virus", "Minor change"]
+          - ["Outcome", "Pandemics", "Seasonal epidemics"]
+        hide: [[0, 1], [0, 2], [2, 1], [2, 2]]
+        page: 166
+        quote: "Random mutation in hemagglutinin (HA) or neuraminidase (NA) genes →  minor changes in HA or NA protein (drift) occur frequently →  local seasonal outbreaks (epidemics)."
+      - kind: explain
+        title: "التطعيم"
+        text: |-
+          بيتغيّر كل سنة لأن الفيروس بيتغيّر بسرعة. الـ ==killed vaccine== هو الأكتر استخداماً.
+
+          والـ live attenuated بيتاخد في الأنف: mutant ==temperature-sensitive== بيتكاثر في الأنف (البارد) بس مش في الرئة.
+        page: 166
+        quote: "Killed viral vaccine is most frequently used."
+      - kind: explain
+        title: "Rubella (German 3-day measles)"
+        text: |-
+          matonavirus. في الأطفال خفيف: fever، ==postauricular lymphadenopathy==، arthralgias، و rash ناعم يبدأ من الوش وينزل.
+
+          بس في الحمل خطير (TORCH): ==sensorineural deafness، cataracts، PDA==، وممكن blueberry muffin من الـ extramedullary hematopoiesis في الجلد.
+        page: 166
+        quote: "Fever, postauricular and other lymphadenopathy, arthralgias, and fine, maculopapular rash that starts on face and spreads centrifugally to involve trunk and extremities"
+      - kind: explain
+        title: "Paramyxoviruses والـ F protein"
+        text: |-
+          parainfluenza، mumps، measles، RSV، و human metapneumovirus. كلهم ممكن يعملوا bronchiolitis أو pneumonia في الرُضّع.
+
+          كلهم عليهم ==F (fusion) protein== بيلزّق خلايا الـ respiratory epithelium في بعض ← multinucleated cells. و ==palivizumab== (antibody ضد الـ F) بيحمي الـ preemies من RSV pneumonia.
+        page: 166
+        quote: "Palivizumab for paramyxovirus (RSV) prophylaxis in preemies."
+      - kind: explain
+        title: "Croup"
+        text: "parainfluenza (عليه HA و NA زي الـ flu). كحة زي ==seal== و inspiratory stridor. الـ trachea والـ subglottis بيضيقوا ← ==steeple sign== على الـ x-ray."
+        page: 167
+        quote: "Narrowing of upper trachea and subglottis leads to characteristic steeple sign on x-ray"
+      - kind: explain
+        title: "Measles (rubeola)"
+        text: |-
+          prodrome: fever مع الـ 3 C's (cough، coryza، conjunctivitis)، وبعدين ==Koplik spots== (نقط حمرا نصها أزرق أبيض في الـ buccal mucosa)، وبعد يوم أو اتنين rash يبدأ من الراس وينزل.
+
+          وفي الـ lymph nodes: ==Warthin-Finkeldey== giant cells.
+        page: 167
+        quote: "then eventually Koplik spots (bright red spots with blue-white center on buccal mucosa A ), followed 1-2 days later by a maculopapular rash that starts at the head/neck and spreads downward."
+      - kind: check
+        question: "Which intervention reduces measles mortality in malnourished children?"
+        options:
+          - "Vitamin A"
+          - "Palivizumab"
+          - "Oseltamivir"
+          - "Vitamin D"
+        answer: 0
+        why:
+          - "صح: الـ vitamin A بيقلل الـ morbidity والـ mortality، خصوصاً في سوء التغذية."
+          - "الـ palivizumab للـ RSV في الـ preemies."
+          - "الـ oseltamivir للـ influenza."
+          - "مش مذكور للحصبة."
+        page: 167
+        quote: "Vitamin A supplementation can reduce morbidity and mortality from measles, particularly in malnourished children."
+      - kind: explain
+        title: "مضاعفات الحصبة"
+        text: |-
+          - ==SSPE==: تغيّر شخصية، dementia، autonomic dysfunction، وموت، بعد ==سنين==.
+          - encephalitis (1:1000) بعد الـ rash بكام يوم.
+          - giant cell pneumonia (في الـ immunosuppressed).
+          - ADEM.
+
+          و ==pneumonia أشهر سبب وفاة== من الحصبة في الأطفال.
+        page: 167
+        quote: "Pneumonia is the most common cause of measles-associated death in children."
+      - kind: mnemonic
+        word: "POMP"
+        parts:
+          - { key: "P", text: "Parotitis" }
+          - { key: "O", text: "Orchitis" }
+          - { key: "M", text: "aseptic Meningitis" }
+          - { key: "P", text: "Pancreatitis" }
+        hook: "Mumps makes your parotid glands and testes as big as POM-Poms. وممكن يعمل sterility بعد البلوغ."
+        page: 167
+        quote: "Symptoms: Parotitis A , Orchitis (inflammation of testes), aseptic Meningitis, and Pancreatitis."
+      - kind: try
+        items: [mic.L05.057, mic.L05.060, mic.L05.062, mic.L05.071, mic.L05.075]
+    recap:
+      - "Flu: HA يدخل، NA يطلّع، oseltamivir. Superinfection بـ S aureus. Shift = reassortment = pandemic، drift = mutation = epidemic."
+      - "Rubella: postauricular nodes؛ congenital: deafness، cataracts، PDA، blueberry muffin."
+      - "Paramyxo: F protein، palivizumab. Croup: steeple sign."
+      - "Measles: 4 C's، Koplik، SSPE، vitamin A. Mumps: POM-Poms."
+    practice: [mic.L05.057, mic.L05.058, mic.L05.059, mic.L05.060, mic.L05.061, mic.L05.062, mic.L05.063, mic.L05.064, mic.L05.065, mic.L05.066, mic.L05.067, mic.L05.068, mic.L05.069, mic.L05.070, mic.L05.071, mic.L05.072, mic.L05.073, mic.L05.074, mic.L05.075, mic.L05.076, mic.L05.077]
+  - id: mic.L05.lesson6
+    title: "ناموس وخفافيش وكورونا"
+    hook: "الـ Aedes لوحده بيشيل 4 فيروسات، والـ rabies بيطلع على الأعصاب لفوق"
+    minutes: 9
+    pages: [168, 169]
+    topics: [aedes-arboviruses, yellow-fever, zika, rabies, ebola, sars-cov-2]
+    goals:
+      - "تفرّق الـ chikungunya من الـ dengue"
+      - "تعرف yellow fever و Zika"
+      - "تعرف الـ rabies والـ Ebola والـ SARS-CoV-2"
+    status: unverified
+    steps:
+      - kind: table
+        title: "Chikungunya ولا dengue؟"
+        columns: ["", "Chikungunya", "Dengue"]
+        rows:
+          - ["Family", "Alphavirus/togavirus", "Flavivirus"]
+          - ["Clue", "Polyarthritis, joint swelling", "Retro-orbital pain, myalgias"]
+          - ["Severe form", "Rarely bleeds", "Hemorrhagic fever, shock syndrome"]
+          - ["Vaccine", "None", "Live recombinant"]
+        hide: [[1, 1], [1, 2], [2, 2]]
+        page: 168
+        quote: "Dengue fever: fever, rash, headache, myalgias, arthralgias, retro-orbital pain, neutropenia."
+      - kind: reveal
+        prompt: "ليه الـ dengue المرة التانية ممكن تبقى أخطر من الأولى؟"
+        answer: "لو اتعديت بـ ==serotype مختلف==، الـ antibodies القديمة بتساعد الفيروس يدخل الخلايا بدل ما تحميك: ==antibody-dependent enhancement==. والنتيجة dengue hemorrhagic fever (نزيف و plasma leakage) وممكن dengue shock syndrome."
+        page: 168
+        quote: "Most common if infected with a different serotype after initial infection due to antibody- dependent enhancement of disease."
+      - kind: explain
+        title: "Yellow fever"
+        text: |-
+          flavivirus من الـ Aedes، والـ reservoir قرود أو بني آدمين. flavi = أصفر.
+
+          high fever، ==black vomitus==، jaundice، hemorrhage، backache. وفي الـ liver biopsy: ==Councilman bodies==. وفيه live attenuated vaccine للمسافرين.
+        page: 168
+        quote: "Symptoms: high fever, black vomitus, jaundice, hemorrhage, backache."
+      - kind: explain
+        title: "Zika"
+        text: |-
+          flavivirus من الـ Aedes، وكمان sexual و vertical. في الكبار: conjunctivitis و حرارة خفيفة و rash بيحك، وممكن ==Guillain-Barré==.
+
+          في الحمل: congenital Zika: ==microcephaly==، ocular anomalies، motor abnormalities، والأشعة فيها ventriculomegaly و subcortical calcifications.
+        page: 168
+        quote: "May be complicated by Guillain-Barré syndrome."
+      - kind: check
+        question: "A newborn has microcephaly and subcortical calcifications. The mother had an itchy rash and red eyes in Brazil. Which virus?"
+        options:
+          - "Zika virus"
+          - "Rubella virus"
+          - "Dengue virus"
+          - "Yellow fever virus"
+        answer: 0
+        why:
+          - "صح: congenital Zika syndrome."
+          - "الـ rubella: deafness، cataracts، PDA."
+          - "الـ dengue مش بيعمل الصورة دي."
+          - "الـ yellow fever بيعمل jaundice و black vomitus."
+        page: 168
+        quote: "brain imaging shows ventriculomegaly, subcortical calcifications A . Clinical features in the affected newborn include ▘ Microcephaly"
+      - kind: explain
+        title: "Rabies"
+        text: |-
+          فيروس شكله ==رصاصة==. بيمسك الـ ACh receptors ويطلع ==retrograde== على الـ axons (بالـ dynein) لحد الـ CNS، فالـ incubation طويلة.
+
+          المرض: fever ← agitation، photophobia، hydrophobia، hypersalivation ← paralysis و coma وموت. والـ ==Negri bodies== في الـ Purkinje cells والـ hippocampus.
+        page: 169
+        quote: "Progression of disease: fever, malaise →  agitation, photophobia, hydrophobia, hypersalivation →  paralysis, coma →  death."
+      - kind: figure
+        title: "الـ rabies طالع على العصب"
+        svg: |-
+          <svg viewBox="0 0 360 120" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="micL05r" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="40" width="60" height="40" rx="8"/>
+            <text x="18" y="64" class="t-sm">bite</text>
+            <line class="fg-ink" x1="70" y1="60" x2="280" y2="60" stroke-width="4"/>
+            <line class="fg-arrow-acc" x1="90" y1="40" x2="250" y2="40" marker-end="url(#micL05r)"/>
+            <text x="110" y="30" class="t-sm t-mut">retrograde, dynein</text>
+            <circle class="fg-acc" cx="305" cy="60" r="26"/>
+            <text x="290" y="64" class="t-sm">CNS</text>
+            <text x="90" y="100" class="t-sm">AChR → axon → brain</text>
+          </svg>
+        caption: "بعد العضة، الفيروس بيمسك الـ AChR ويطلع على الـ axon لورا بالـ dynein لحد المخ. عشان كده الـ incubation أسابيع لشهور."
+        alt: "Rabies virus enters at a bite, binds acetylcholine receptors, and travels retrograde up the nerve axon by dynein motors to the central nervous system."
+        page: 169
+        quote: "Travels to the CNS by migrating in a retrograde fashion (via dynein motors) up nerve axons after binding to ACh receptors."
+      - kind: explain
+        title: "الوقاية بعد التعرّض"
+        text: |-
+          نضّف الجرح، وادّي ==killed vaccine + rabies immunoglobulin== (passive-active immunity).
+
+          وفي أمريكا الـ ==bat، raccoon، skunk== أكتر من الكلاب، وممكن aerosol في كهوف الخفافيش.
+        page: 169
+        quote: "Infection more commonly from bat, raccoon, and skunk bites than from dog bites in the United States"
+      - kind: explain
+        title: "Ebola"
+        text: |-
+          filovirus. بعد incubation لحد ==21 يوم==: أعراض زي الإنفلونزا فجأة، إسهال وترجيع، حرارة عالية، myalgia، وممكن DIC ونزيف و shock.
+
+          RT-PCR في أول 48 ساعة. العدوى بالـ ==body fluids== والـ fomites (حتى الجثث) والخفافيش والقرود، وكتير في المستشفيات. الوقاية: تطعيم المخالطين، عزل، و barrier practices.
+        page: 169
+        quote: "Transmission requires direct contact with bodily fluids, fomites (including dead bodies), infected bats or primates (apes/monkeys); high incidence of healthcare-associated infection."
+      - kind: explain
+        title: "SARS-CoV-2"
+        text: |-
+          ⊕ ssRNA، بيتنقل بالـ droplets والـ aerosols والـ fomites. من الأعراض المميزة: ==anosmia و dysgeusia==.
+
+          بيدخل بالـ ==spike protein على ACE2== (الرئة والأمعاء والقلب والكلى). والمضاعفات: pneumonia و hypercoagulability (DVT و PE و stroke) و myocardial injury.
+
+          التشخيص NAAT، أو antigen test أسرع بس أقل sensitivity. والـ vaccines (mRNA و viral vector) بتعرض الـ spike.
+        page: 169
+        quote: "Host cell entry occurs by attachment of viral spike protein to ACE2 receptor on cell membranes"
+      - kind: try
+        items: [mic.L05.078, mic.L05.079, mic.L05.082, mic.L05.085, mic.L05.093]
+    recap:
+      - "Chikungunya: polyarthritis. Dengue: retro-orbital pain، ADE مع serotype تاني، hemorrhagic fever."
+      - "Yellow fever: black vomitus، Councilman bodies. Zika: GBS و microcephaly."
+      - "Rabies: bullet، Negri bodies، retrograde على الأعصاب، PEP = vaccine + immunoglobulin."
+      - "Ebola: 21 يوم، DIC، body fluids. SARS-CoV-2: spike على ACE2."
+    practice: [mic.L05.078, mic.L05.079, mic.L05.080, mic.L05.081, mic.L05.082, mic.L05.083, mic.L05.084, mic.L05.085, mic.L05.086, mic.L05.087, mic.L05.088, mic.L05.089, mic.L05.090, mic.L05.091, mic.L05.092, mic.L05.093]
+  - id: mic.L05.lesson7
+    title: "الـ Hepatitis viruses"
+    hook: "خمس حروف، والفرق بينهم في طريق العدوى والـ carrier والـ serology"
+    minutes: 10
+    pages: [170, 171]
+    topics: [hepatitis-viruses, hepatitis-extrahepatic, hepatitis-serology]
+    goals:
+      - "تقارن A و B و C و D و E"
+      - "تقرا الـ HBV serology"
+      - "تعرف الـ extrahepatic manifestations للـ B والـ C"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الحروف المتحركة في الأمعاء"
+        text: |-
+          كلهم: fever، jaundice، ↑ ALT و AST.
+
+          الـ ==HAV و HEV naked== (من غير envelope)، فالأمعاء ما بتدمرهمش، وبيتنقلوا fecal-oral: ==the vowels hit your bowels==.
+        page: 170
+        quote: "NAkEd viruses (HAV and HEV) lack an envelope and are not destroyed by the gut: the vowels hit your bowels."
+      - kind: table
+        title: "المقارنة"
+        columns: ["", "Spread", "Carrier / chronic", "HCC"]
+        rows:
+          - ["HAV", "Fecal-oral", "No carrier", "No"]
+          - ["HBV", "Blood, Bedroom, Birthing", "Carrier common", "Yes"]
+          - ["HCV", "Mainly blood (IDU)", "Most become chronic", "Yes"]
+          - ["HDV", "Parenteral, sexual, perinatal", "Needs HBV", "Yes"]
+          - ["HEV", "Waterborne", "No carrier; deadly in pregnancy", "No"]
+        hide: [[0, 1], [1, 1], [2, 2], [4, 2], [0, 3], [4, 3]]
+        page: 170
+        quote: "Parenteral (Blood), sexual (Bedroom), perinatal (Birthing)"
+      - kind: explain
+        title: "ليه الـ HCV بيفضل؟"
+        text: "الـ HCV ما عندوش ==3′-5′ exonuclease==، يعني مافيش proofreading، فالـ envelope proteins بتتغيّر طول الوقت، والـ antibodies ==دايماً متأخرة== عن الـ strains الجديدة. عشان كده أغلب المرضى بيبقوا chronic."
+        page: 170
+        quote: "Host antibody production lags behind production of new mutant strains of HCV."
+      - kind: explain
+        title: "HDV: superinfection ولا coinfection؟"
+        text: |-
+          الـ HDV defective، محتاج الـ ==HBsAg== من الـ HBV عشان يدخل الخلايا.
+
+          - **Coinfection** (الاتنين مع بعض): incubation طويلة.
+          - **Superinfection** (الـ D على B موجود): incubation قصيرة و ==prognosis أسوأ==.
+        page: 170
+        quote: "Defective virus, Depends on HBV HBsAg coat for entry into hepatocytes"
+      - kind: explain
+        title: "الـ biopsy"
+        text: |-
+          - **HAV**: hepatocyte swelling و ==Councilman bodies==.
+          - **HBV**: ==ground glass== من تراكم الـ surface antigen، والـ cytotoxic T cells هي اللي بتعمل الضرر.
+          - **HCV**: lymphoid aggregates مع macrovesicular steatosis.
+          - **HEV**: patchy necrosis.
+        page: 170
+        quote: "Lymphoid aggregates with focal areas of macrovesicular steatosis"
+      - kind: check
+        question: "A pregnant woman develops fulminant hepatitis after an outbreak from contaminated water in Asia. Which virus?"
+        options:
+          - "HEV"
+          - "HAV"
+          - "HBV"
+          - "HDV"
+        answer: 0
+        why:
+          - "صح: Fulminant hepatitis in Expectant patients، waterborne، epidemic في آسيا."
+          - "الـ HAV fecal-oral بس مش ده الـ classic في الحمل."
+          - "الـ HBV بالدم والجنس."
+          - "الـ HDV محتاج HBV."
+        page: 170
+        quote: "Fulminant hepatitis in Expectant (pregnant) patients"
+      - kind: table
+        title: "برّه الكبد"
+        columns: ["", "Hepatitis B", "Hepatitis C"]
+        rows:
+          - ["Renal", "Membranous > MPGN", "MPGN > membranous"]
+          - ["Vascular", "Polyarteritis nodosa", "Leukocytoclastic vasculitis"]
+          - ["Blood", "Aplastic anemia", "Mixed cryoglobulinemia, B-cell NHL, ITP"]
+          - ["Skin, endocrine", "-", "Porphyria cutanea tarda, lichen planus, diabetes, hypothyroidism"]
+        hide: [[0, 1], [0, 2], [1, 1], [2, 2]]
+        page: 171
+        quote: "Polyarteritis nodosa Leukocytoclastic vasculitis"
+      - kind: explain
+        title: "الـ markers"
+        text: |-
+          - ==HBsAg== ← فيه infection.
+          - ==Anti-HBs== ← مناعة (تطعيم أو شفا).
+          - **Anti-HBc**: IgM = حاد، IgG = قديم أو chronic.
+          - ==HBeAg== ← replication نشط، عدوى عالية، prognosis أسوأ. وanti-HBe ← عدوى قليلة.
+        page: 171
+        quote: "Anti-HBs Antibody to HBsAg; indicates immunity to hepatitis B due to vaccination or recovery from infection."
+      - kind: figure
+        title: "الـ HBV مع الوقت"
+        svg: |-
+          <svg viewBox="0 0 360 176" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="20" y1="140" x2="345" y2="140"/>
+            <path class="fg-acc" d="M30,140 C70,40 120,40 160,140" fill="none" stroke-width="3"/>
+            <text x="70" y="40" class="t-sm">HBsAg</text>
+            <path class="fg-bad" d="M90,140 C120,60 230,60 340,95" fill="none" stroke-width="3"/>
+            <text x="230" y="58" class="t-sm">anti-HBc</text>
+            <path class="fg-good" d="M200,140 C240,90 290,80 340,75" fill="none" stroke-width="3"/>
+            <text x="270" y="100" class="t-sm">anti-HBs</text>
+            <rect class="fg-box" x="160" y="142" width="40" height="10"/>
+            <text x="150" y="166" class="t-sm t-mut">window</text>
+            <text x="30" y="166" class="t-sm t-mut">acute</text>
+            <text x="270" y="166" class="t-sm t-mut">recovery</text>
+          </svg>
+        caption: "الـ HBsAg بيطلع الأول وبينزل، والـ anti-HBs بيطلع متأخر. الفترة اللي بينهم هي الـ window، وفيها الـ IgM anti-HBc بس."
+        alt: "Hepatitis B serology over months. HBsAg rises and falls during acute infection. Anti-HBc rises and stays. Anti-HBs appears later in recovery. Between HBsAg falling and anti-HBs rising is the window period, when only anti-HBc is detectable."
+        page: 171
+        quote: "IgM anti-HBc may be the sole ⊕ marker of infection during window period."
+      - kind: check
+        question: "HBsAg ⊝, anti-HBs ⊝, IgM anti-HBc ⊕. What does this mean?"
+        options:
+          - "Window period of acute infection"
+          - "Immunized by vaccine"
+          - "Chronic infection with high infectivity"
+          - "Recovered long ago"
+        answer: 0
+        why:
+          - "صح: الـ IgM anti-HBc لوحده = window."
+          - "التطعيم: anti-HBs بس."
+          - "الـ chronic فيه HBsAg ⊕."
+          - "الشفا القديم: anti-HBs و IgG anti-HBc."
+        page: 171
+        quote: "IgM = acute/recent infection; IgG = prior exposure or chronic infection."
+      - kind: try
+        items: [mic.L05.094, mic.L05.097, mic.L05.102, mic.L05.103, mic.L05.107]
+    recap:
+      - "A و E naked، fecal-oral، مافيش carrier. E قاتل في الحمل."
+      - "B: Blood، Bedroom، Birthing، ground glass. C: مافيش proofreading، chronic، steatosis. D محتاج HBsAg؛ superinfection أسوأ."
+      - "B: membranous و PAN. C: MPGN و cryoglobulinemia."
+      - "HBsAg infection، anti-HBs immunity، IgM anti-HBc acute و window، HBeAg replication."
+    practice: [mic.L05.094, mic.L05.095, mic.L05.096, mic.L05.097, mic.L05.098, mic.L05.099, mic.L05.100, mic.L05.101, mic.L05.102, mic.L05.103, mic.L05.104, mic.L05.105, mic.L05.106, mic.L05.107, mic.L05.108]
+  - id: mic.L05.lesson8
+    title: "HIV: الفيروس والتشخيص والعدوى الانتهازية"
+    hook: "رقم الـ CD4 بيقولك أنهي عدوى تستنى"
+    minutes: 10
+    pages: [172, 173]
+    topics: [hiv, hiv-diagnosis, hiv-diseases]
+    goals:
+      - "تعرف جينات الـ HIV والـ coreceptors"
+      - "ترتب خطوات التشخيص وتعرف تعريف الـ AIDS"
+      - "تربط العدوى الانتهازية بحد الـ CD4+"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "شكل الـ HIV"
+        text: |-
+          genome ==diploid== (نسختين RNA). وفيه 3 structural genes:
+          - **env**: gp160 بيتقطع لـ ==gp120== (يمسك الـ CD4) و ==gp41== (fusion و entry).
+          - **gag**: p24 (capsid) و p17 (matrix).
+          - **pol**: Reverse transcriptase، Integrase، Protease: RIP "Pol" (Paul).
+        page: 172
+        quote: "gp41 (forty-one)—fusion and entry."
+      - kind: explain
+        title: "الـ coreceptors"
+        text: |-
+          مع الـ CD4، الفيروس محتاج coreceptor:
+          - ==CCR5== على الـ macrophages (بدري).
+          - ==CXCR4== على الـ T cells (متأخر).
+
+          واللي عنده CCR5 mutation homozygous ← ==مناعة==، و heterozygous ← المرض أبطأ.
+        page: 172
+        quote: "Virus binds CD4 as well as a coreceptor, either CCR5 on macrophages (early infection) or CXCR4 on T cells (late infection)."
+      - kind: order
+        prompt: "رتّب خطوات تشخيص الـ HIV"
+        steps:
+          - "HIV-1/2 Ag/Ab combination immunoassay (p24 + antibodies)"
+          - "If positive: HIV-1/HIV-2 antibody differentiation immunoassay"
+          - "If differentiation is negative or indeterminate: HIV-1 NAT"
+        why: "الـ screening الأول بالـ Ag/Ab، ولو ⊕ نأكد بالـ differentiation assay، ولو مش واضح (ممكن acute HIV) نعمل NAT."
+        page: 172
+        quote: "A positive screening test is followed by a confirmatory HIV-1/2 differentiation immunoassay."
+      - kind: explain
+        title: "حدود الـ tests"
+        text: |-
+          - الـ Ag/Ab ممكن ==يفوّت أول أسبوعين==، فهنا الـ ==NAAT== (qualitative) هو اللي يلقط الـ viremia.
+          - الـ viral load (quantitative) لمتابعة العلاج والعدوى.
+          - الـ Western blot خلاص ==مش recommended==.
+          - الرضيع: ما ينفعش Ag/Ab بسبب antibodies الأم ← viral load.
+        page: 172
+        quote: "Western blot tests are no longer recommended by the CDC for confirmatory testing."
+      - kind: explain
+        title: "تعريف الـ AIDS"
+        text: "==CD4+ ≤200== cells/mm3 (الطبيعي 500-1500)، أو HIV ⊕ مع ==AIDS-defining condition== زي الـ Pneumocystis pneumonia."
+        page: 172
+        quote: "AIDS diagnosis: ≤200 CD4+ cells/mm3"
+      - kind: check
+        question: "Which test is used to diagnose HIV in a 2-month-old born to a mother with HIV?"
+        options:
+          - "HIV viral load"
+          - "HIV-1/2 Ag/Ab immunoassay"
+          - "Western blot"
+          - "CD4+ count"
+        answer: 0
+        why:
+          - "صح: الـ viral load، لأن antibodies الأم بتبوّظ الـ Ag/Ab."
+          - "الـ antibodies اللي هيلاقيها ممكن تكون من الأم."
+          - "مش recommended."
+          - "الـ CD4 مش تشخيص."
+        page: 172
+        quote: "HIV-1/2 Ag/Ab testing is not recommended in babies with suspected HIV due to maternally transferred antibody. Use HIV viral load instead."
+      - kind: table
+        title: "العدوى حسب الـ CD4+"
+        columns: ["CD4+", "Think of"]
+        rows:
+          - ["<500", "Oral thrush, oral hairy leukoplakia, localized Kaposi, HPV cancer, TB reactivation"]
+          - ["<200", "Histoplasma, HIV dementia/nephropathy, PML, disseminated Kaposi, Pneumocystis"]
+          - ["<100", "Bartonella, Candida esophagitis, CMV, Cryptococcus, Cryptosporidium, EBV lymphoma, MAC"]
+          - ["<50", "Toxoplasma"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+        page: 173
+        quote: "Toxoplasma gondii Brain abscesses Multiple ring-enhancing lesions on MRI"
+      - kind: explain
+        title: "أبيض في البق"
+        text: |-
+          - **Oral thrush** (Candida): ==بيتكشط==، و pseudohyphae.
+          - **Oral hairy leukoplakia** (EBV): ==ما بيتكشطش==، على جنب اللسان.
+        page: 173
+        quote: "Candidaalbicans Oral thrush Scrapable white plaque, pseudohyphae on microscopy"
+      - kind: explain
+        title: "CMV تحت 100: CREEP"
+        text: |-
+          ==Colitis، Retinitis، Esophagitis، Encephalitis، Pneumonitis==.
+
+          - الـ endoscopy: linear ulcers. الـ fundoscopy: cotton-wool spots.
+          - الـ biopsy: owl eye inclusions.
+        page: 173
+        quote: "Colitis, Retinitis, Esophagitis, Encephalitis, Pneumonitis (CREEP)"
+      - kind: explain
+        title: "ring lesions في المخ"
+        text: |-
+          - **Toxoplasma** (أكتر تحت 50): ==multiple== ring-enhancing lesions.
+          - **CNS lymphoma** (EBV، تحت 100): ring enhancing بس ممكن تبقى ==solitary==.
+          - **PML** (JC، تحت 200): ==nonenhancing== demyelination.
+        page: 173
+        quote: "JC virus (reactivation) Progressive multifocal leukoencephalopathy Nonenhancing areas of demyelination on MRI"
+      - kind: check
+        question: "A patient with HIV has red-purple papules on the skin; biopsy shows neutrophilic inflammation, not spindle cells. Which organism?"
+        options:
+          - "Bartonella"
+          - "HHV-8"
+          - "Mycobacterium avium complex"
+          - "Cryptococcus"
+        answer: 0
+        why:
+          - "صح: bacillary angiomatosis، biopsy فيها neutrophils."
+          - "الـ Kaposi فيه perivascular spindle cells."
+          - "الـ MAC بيعمل أعراض عامة أو lymphadenitis."
+          - "الـ Crypto بيعمل meningitis."
+        page: 173
+        quote: "Bartonella spp Bacillary angiomatosis Multiple red to purple papules or nodules Biopsy with neutrophilic inflammation"
+      - kind: try
+        items: [mic.L05.109, mic.L05.111, mic.L05.115, mic.L05.119, mic.L05.121]
+    recap:
+      - "env: gp120 يمسك و gp41 يدخل. gag: p24 و p17. pol: RIP."
+      - "CCR5 بدري، CXCR4 متأخر. CCR5 homozygous = مناعة."
+      - "Ag/Ab ← differentiation ← NAT. الرضيع: viral load. AIDS: CD4 ≤200 أو AIDS-defining."
+      - "<500 thrush و leukoplakia؛ <200 PCP و PML؛ <100 CMV CREEP و Crypto و lymphoma؛ <50 Toxo."
+    practice: [mic.L05.109, mic.L05.110, mic.L05.111, mic.L05.112, mic.L05.113, mic.L05.114, mic.L05.115, mic.L05.116, mic.L05.117, mic.L05.118, mic.L05.119, mic.L05.120, mic.L05.121, mic.L05.122, mic.L05.123, mic.L05.124, mic.L05.125, mic.L05.126]

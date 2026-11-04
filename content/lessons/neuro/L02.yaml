@@ -1,0 +1,1066 @@
+schema: steps.lesson/v1
+lecture: neuro.L02
+lessons:
+  - id: neuro.L02.lesson1
+    title: "الـ neuron وأصحابه: مين بيعمل إيه"
+    hook: "كل خلية في الجهاز العصبي ليها شغلانة واحدة واضحة، ولو عرفتها هتعرف المرض اللي بيضربها"
+    minutes: 10
+    pages: [503, 505]
+    topics: [cells-of-the-nervous-system, cns-glial-cells, pns-glial-cells, neuron-action-potential, sensory-receptors, peripheral-nerve, neuronal-response-to-axonal-injury]
+    goals:
+      - "تفرّق الـ glial cells وتربط كل واحدة بمرضها"
+      - "تفهم الـ action potential بالبوابات"
+      - "تعرف كل receptor بيحس بإيه"
+      - "تعرف إيه اللي بيحصل لما الـ axon يتقطع"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ neuron و Nissl"
+        text: |-
+          الـ neuron خلية **permanent**: dendrites بتستقبل، cell body، و axon بيبعت.
+
+          صبغة ==Nissl== بتصبغ الـ **RER**، والـ RER موجود في الـ cell body والـ dendrites بس، **مش في الـ axon**. فالـ axon ما بيبانش على Nissl.
+
+          الـ markers: **neurofilament protein** و **synaptophysin**.
+        page: 503
+        quote: "Dendrites and cell bodies can be seen on Nissl staining (stains rough endoplasmic reticulum [RER]; not present in axons). Markers: neurofilament protein, synaptophysin."
+      - kind: explain
+        title: "الـ myelin بيخلّي الإشارة تنطّ"
+        text: |-
+          الـ myelin عازل كهربا ملفوف طبقات حوالين الـ axon. الإشارة بتنطّ من **node of Ranvier** للي بعدها (==saltatory conduction==)، والـ nodes دي مليانة **Na+ channels**. النتيجة: ↑ conduction velocity.
+        page: 503
+        quote: "→ ↑ conduction velocity of transmitted signals via saltatory conduction of action potentials at nodes of Ranvier (↑↑ Na+ channel density)."
+      - kind: table
+        title: "الـ glial cells"
+        columns: ["Cell", "Job", "Clue / disease"]
+        rows:
+          - ["Astrocyte", "Support, repair, removes excess neurotransmitter, BBB, glycogen", "GFAP ⊕; most abundant; reactive gliosis"]
+          - ["Oligodendrocyte", "Myelinates ~30 CNS axons (incl. CN II)", "Fried egg; MS, leukodystrophies, PML"]
+          - ["Ependymal", "Lines ventricles; cilia move CSF, microvilli absorb", "Choroid plexus makes CSF"]
+          - ["Microglia", "CNS phagocyte; releases NO, glutamate", "HIV: multinucleated giant cells"]
+          - ["Schwann", "Myelinates 1 PNS axon (CN III-XII)", "S100 ⊕; Guillain-Barré"]
+          - ["Satellite", "Surrounds cell bodies in ganglia", "Like astrocytes"]
+        hide: [[0, 2], [1, 2], [4, 2]]
+        page: 503
+        quote: "Schwann cells Myelinate axons in PNS (including CN III-XII). S100 ⊕. Each myelinates a single axon (“Schwone”). Injured in Guillain-Barré syndrome."
+      - kind: aside
+        tone: tip
+        text: "حيلتين من الكتاب: ==oleggodendrocytes== (شكلها بيضة مقلية، fried egg)، و **Schwone** (الـ Schwann بيلف على axon واحد بس، one). والـ CN II مش عصب طرفي حقيقي، ده امتداد للمخ، فبيتلف بـ oligodendrocytes، عشان كده الـ MS بيعمل optic neuritis."
+        page: 503
+        quote: "Oligodendrocytes Myelinate axons in CNS (including CN II). “Fried egg” appearance histologically (“oleggodendrocytes”)."
+      - kind: check
+        question: "A patient with ascending weakness after a diarrheal illness has demyelination of peripheral nerves. The injured cells are positive for which marker?"
+        options:
+          - "S100"
+          - "GFAP"
+          - "Synaptophysin"
+          - "Neurofilament protein"
+        answer: 0
+        why:
+          - "صح: Guillain-Barré بيضرب الـ Schwann cells، وهي S100 ⊕."
+          - "GFAP بتاع الـ astrocytes في الـ CNS."
+          - "Synaptophysin marker للـ neuron نفسه."
+          - "Neurofilament برضه marker للـ neuron."
+        page: 503
+        quote: "Schwann cells Myelinate axons in PNS (including CN III-XII). S100 ⊕."
+      - kind: figure
+        title: "الـ action potential بالبوابات"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-thin" x1="30" y1="140" x2="350" y2="140"/>
+            <text x="2" y="144" class="t-sm t-mut">-70</text>
+            <line class="fg-thin" x1="30" y1="40" x2="350" y2="40"/>
+            <text x="2" y="44" class="t-sm t-mut">+40</text>
+            <path class="fg-arrow-acc" d="M30 140 L90 140 C 110 140, 115 40, 130 40 C 145 40, 160 160, 190 160 C 220 160, 240 140, 350 140"/>
+            <circle class="fg-dot-acc" cx="70" cy="140" r="9"/>
+            <text x="66" y="144" class="t-sm" fill="var(--surface)">1</text>
+            <circle class="fg-dot-good" cx="112" cy="90" r="9"/>
+            <text x="108" y="94" class="t-sm" fill="var(--surface)">2</text>
+            <circle class="fg-dot-bad" cx="150" cy="90" r="9"/>
+            <text x="146" y="94" class="t-sm" fill="var(--surface)">3</text>
+            <circle class="fg-dot-acc" cx="190" cy="172" r="9"/>
+            <text x="186" y="176" class="t-sm" fill="var(--surface)">4</text>
+            <text x="210" y="62" class="t-sm">1 rest: K+ leak, gates shut</text>
+            <text x="210" y="80" class="t-sm t-good">2 Na+ activation gate opens</text>
+            <text x="210" y="98" class="t-sm t-bad">3 Na+ inactivation shuts;</text>
+            <text x="222" y="114" class="t-sm t-bad">K+ gate opens</text>
+            <text x="210" y="190" class="t-sm">4 slow K+ gates: undershoot</text>
+          </svg>
+        caption: "1 في الراحة الغشا بيعدّي K+ أكتر من Na+. 2 بوابة الـ Na+ activation تفتح فالـ Na+ يدخل. 3 عند القمة بوابة الـ inactivation تقفل والـ K+ يخرج. 4 بوابات الـ K+ بطيئة تقفل فيحصل hyperpolarization، والـ Na+/K+ pump يرجّع الأيونات."
+        alt: "Action potential curve from about -70 to +40 mV and back with an undershoot. Numbered points: 1 resting with K+ leak, 2 Na+ activation gate opens on the upstroke, 3 Na+ inactivation gate closes at the peak and K+ gate opens, 4 slow K+ gates cause hyperpolarization."
+        page: 504
+        quote: "Membrane depolarization: Na+ activation gate opens → Na+ flows inward."
+      - kind: reveal
+        prompt: "ليه بيحصل undershoot (hyperpolarization) بعد كل action potential؟"
+        answer: "لأن بوابات الـ **K+ activation** بطيئة تقفل، فالـ K+ يفضل خارج شوية زيادة عن اللزوم ← الغشا ينزل تحت الـ resting لحظة."
+        page: 504
+        quote: "Membrane hyperpolarization: K+ activation gates are slow to close → excess K+ efflux and brief period of hyperpolarization."
+      - kind: match
+        prompt: "وصّل كل receptor باللي بيحس بيه"
+        pairs:
+          - ["Free nerve endings", "Pain, temperature"]
+          - ["Meissner corpuscles", "Light touch, low-frequency vibration"]
+          - ["Pacinian corpuscles", "High-frequency vibration, pressure"]
+          - ["Merkel discs", "Sustained pressure, texture, shape"]
+          - ["Ruffini corpuscles", "Stretch, joint angle"]
+        why: "Pacinian = **p**ressure cooker (ضغط واهتزاز سريع). الـ Meissner و Pacinian بيـ adapt بسرعة (بيحسوا بالتغيير)، والـ Merkel و Ruffini بيـ adapt ببطء (بيحسوا بالحاجة الثابتة). والـ free nerve endings: Aδ سريعة (A Delta plane is fast) و C بطيئة (taxC is slow)."
+        page: 504
+        quote: "Pacinian corpuscles Large, myelinated fibers; adapt quickly Deep skin layers, ligaments, joints High-frequency vibration, pressure (pressure cooker)"
+      - kind: explain
+        title: "أغلفة العصب الطرفي"
+        text: |-
+          - **Endoneurium** (endo = جوه): حوالين كل fiber لوحدها. ممكن يتأثر في Guillain-Barré.
+          - ==Perineurium== (peri = حوالين): حوالين الـ fascicle، وده الـ **blood-nerve barrier**.
+          - **Epineurium** (epi = بره): حوالين العصب كله والأوعية.
+        page: 505
+        quote: "Perineurium (blood-nerve permeability barrier)—surrounds a fascicle of nerve fibers. Epineurium—dense connective tissue that surrounds entire nerve (fascicles and blood vessels)."
+      - kind: explain
+        title: "لما الـ axon يتقطع"
+        text: |-
+          3 حاجات بتحصل في نفس الوقت:
+          - **Chromatolysis** في الـ cell body: الـ Nissl بيتفرّق، الخلية تنفخ، والـ nucleus يروح على الجنب. ده لأن الخلية بتشتغل ==↑ protein synthesis== عشان تصلّح.
+          - **Axonal retraction** في الجزء القريب: بيطلّع براعم تدوّر على neurons. في الـ PNS الـ Schwann cells بتعمل له «سكة» يمشي فيها.
+          - ==Wallerian degeneration== في الجزء البعيد: الـ axon والـ myelin يتفككوا والـ macrophages تنضّف. في الـ CNS الـ myelin debris والـ gliosis بيمنعوا الرجوع.
+        page: 505
+        quote: "Wallerian degeneration—distal axon segment and associated myelin sheath disintegrates with macrophages removing debris. In CNS, persistence of myelin debris and reactive gliosis prevent axonal regeneration."
+      - kind: check
+        question: "Ten days after a median nerve is cut, what do its motor neuron cell bodies show?"
+        options:
+          - "Swelling, dispersed Nissl substance, peripheral nucleus"
+          - "Shrunken red neurons with pyknosis"
+          - "Lewy bodies"
+          - "Myelin breakdown cleared by macrophages"
+        answer: 0
+        why:
+          - "صح: chromatolysis، الخلية بتصنع بروتين عشان تصلّح."
+          - "ده شكل الـ ischemic injury، مش رد الفعل على قطع الـ axon."
+          - "Lewy bodies في Parkinson."
+          - "ده Wallerian degeneration، بيحصل في الـ distal axon مش في الـ cell body."
+        page: 505
+        quote: "Accompanied by round cellular swelling and displacement of nucleus to periphery."
+      - kind: try
+        items: [neuro.L02.014, neuro.L02.017, neuro.L02.021, neuro.L02.027, neuro.L02.031]
+    recap:
+      - "Nissl = RER: في الـ cell body والـ dendrites، مش الـ axon."
+      - "Astrocyte GFAP، oligodendrocyte fried egg و ~30 axon (MS)، Schwann S100 وواحد (GBS)."
+      - "Na+ activation يفتح ← Na+ inactivation يقفل و K+ يفتح ← K+ بطيء ← undershoot."
+      - "Pacinian = اهتزاز سريع وضغط؛ Meissner = لمس خفيف."
+      - "Perineurium = blood-nerve barrier."
+      - "Chromatolysis في الـ cell body، Wallerian في الـ distal axon."
+    practice: [neuro.L02.001, neuro.L02.002, neuro.L02.003, neuro.L02.004, neuro.L02.005, neuro.L02.006, neuro.L02.007, neuro.L02.008, neuro.L02.009, neuro.L02.010, neuro.L02.011, neuro.L02.012, neuro.L02.013, neuro.L02.014, neuro.L02.015, neuro.L02.016, neuro.L02.017, neuro.L02.018, neuro.L02.019, neuro.L02.020, neuro.L02.021, neuro.L02.022, neuro.L02.023, neuro.L02.024, neuro.L02.025, neuro.L02.026, neuro.L02.027, neuro.L02.028, neuro.L02.029, neuro.L02.030, neuro.L02.031, neuro.L02.032]
+  - id: neuro.L02.lesson2
+    title: "الكيميا والأغشية والبوابات: neurotransmitters و BBB والترجيع"
+    hook: "ليه مريض الكيماوي بياخد ondansetron ومريض دوار البحر بياخد antihistamine؟ الإجابة في 5 receptors"
+    minutes: 9
+    pages: [505, 506]
+    topics: [neurotransmitter-changes-with-disease, meninges, blood-brain-barrier, vomiting-center]
+    goals:
+      - "تعرف كل neurotransmitter بيتعمل فين"
+      - "تحفظ تغيّرات الـ neurotransmitters في كل مرض بمنطق"
+      - "ترتّب الـ meninges والمسافات"
+      - "تختار الـ antiemetic الصح لكل سبب"
+    status: unverified
+    steps:
+      - kind: table
+        title: "كل neurotransmitter بيتعمل فين"
+        columns: ["Neurotransmitter", "Made in"]
+        rows:
+          - ["Acetylcholine", "Basal nucleus of Meynert (forebrain)"]
+          - ["Dopamine", "Ventral tegmentum, SNc (midbrain)"]
+          - ["GABA", "Widespread (cortex, cerebellum, basal ganglia)"]
+          - ["Histamine", "Tuberomammillary nucleus (posterior hypothalamus)"]
+          - ["Norepinephrine", "Locus ceruleus (pons)"]
+          - ["Serotonin", "Raphe nuclei (brainstem)"]
+        hide: [[0, 1], [1, 1], [4, 1], [5, 1]]
+        page: 505
+        quote: "Histamine Tuberomammillary nucleus (posterior hypothalamus)"
+      - kind: explain
+        title: "التغيّرات في الأمراض بمنطق"
+        text: |-
+          - **Alzheimer**: ==↓ ACh== (عشان كده العلاج acetylcholinesterase inhibitors) و ↓ histamine.
+          - **Parkinson**: ==↓ dopamine== (الـ SNc مات) و ↓ serotonin، والـ ACh يبان ↑ نسبياً (عشان كده الـ antimuscarinics بتفيد في الرعشة).
+          - **Huntington**: ↑ dopamine و ↑ histamine، و ↓ ACh و ↓ GABA (الـ striatum بيموت).
+          - **Schizophrenia**: ↑ dopamine و ↑ histamine.
+          - **Depression**: ↓ dopamine و NE و serotonin.
+          - **Anxiety**: ↑ NE، و ↓ GABA و ↓ serotonin.
+        page: 505
+        quote: "Acetylcholine Basal nucleus of Meynert (forebrain)"
+      - kind: sort
+        prompt: "حط كل تغيير في المرض بتاعه"
+        bins: ["Parkinson", "Huntington", "Alzheimer"]
+        cards:
+          - { text: "↓ dopamine, ↑ ACh", bin: 0 }
+          - { text: "↓ serotonin with ↓ dopamine", bin: 0 }
+          - { text: "↓ GABA, ↑ dopamine", bin: 1 }
+          - { text: "↓ ACh with ↓ GABA", bin: 1 }
+          - { text: "↓ ACh, ↓ histamine", bin: 2 }
+        why: "Parkinson و Huntington عكس بعض في الـ dopamine (حركة قليلة × حركة زيادة). والـ ↓ ACh موجود في Alzheimer و Huntington، بس Huntington معاه ↓ GABA."
+        page: 505
+        quote: "Dopamine Ventral tegmentum, SNc (midbrain)"
+      - kind: figure
+        title: "الـ meninges من بره لجوه"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-ink" x="10" y="10" width="340" height="26" rx="4"/>
+            <text x="20" y="28" class="t-sm t-b">Skull</text>
+            <rect class="fg-thin" x="10" y="38" width="340" height="18"/>
+            <text x="20" y="51" class="t-sm t-bad">Epidural space (potential): middle meningeal a.</text>
+            <rect class="fg-acc" x="10" y="58" width="340" height="22"/>
+            <text x="20" y="74" class="t-sm">Dura mater</text>
+            <rect class="fg-box" x="10" y="82" width="340" height="18"/>
+            <text x="20" y="95" class="t-sm">Arachnoid mater</text>
+            <rect class="fg-good" x="10" y="102" width="340" height="30"/>
+            <text x="20" y="121" class="t-sm t-good">Subarachnoid space: CSF</text>
+            <rect class="fg-box" x="10" y="134" width="340" height="12"/>
+            <text x="20" y="144" class="t-sm">Pia mater</text>
+            <rect class="fg-box" x="10" y="148" width="340" height="44" rx="4"/>
+            <text x="20" y="174" class="t-sm t-b">Brain</text>
+          </svg>
+        caption: "من بره لجوه: skull ← epidural space (مكان نزيف الـ middle meningeal artery) ← dura ← arachnoid ← subarachnoid space (فيه الـ CSF) ← pia اللي لازقة في المخ."
+        alt: "Layered diagram from top to bottom: skull, epidural potential space with middle meningeal artery, dura mater, arachnoid mater, subarachnoid space containing CSF, pia mater, brain."
+        page: 506
+        quote: "Epidural space—potential space between dura mater and skull/vertebral column containing fat and blood vessels. Site of blood collection associated with middle meningeal artery injury."
+      - kind: explain
+        title: "الـ BBB: 4 حراس"
+        text: |-
+          الـ BBB بيمنع البكتيريا والأدوية توصل للـ CNS. بيتعمل من 4:
+          - **tight junctions** بين endothelium من غير fenestrations
+          - **basement membrane**
+          - **pericytes**
+          - ==astrocyte foot processes==
+
+          الـ glucose والـ amino acids بيعدّوا ببطء بـ carriers، والحاجات الـ ==lipid-soluble== بتعدّي بسرعة بالـ diffusion.
+        page: 506
+        quote: "Tight junctions between nonfenestrated capillary endothelial cells ▘ Basement membrane ▘ Pericytes ▘ Astrocyte foot processes"
+      - kind: explain
+        title: "أماكن من غير BBB، بقصد"
+        text: |-
+          الـ **circumventricular organs** فيها capillaries fenestrated عشان المخ «يحس» بالدم أو يرمي فيه هرمونات:
+          - ==area postrema==: الترجيع بعد الكيماوي.
+          - **OVLT**: osmoreceptors.
+          - **neurohypophysis**: إفراز ADH.
+
+          ولو الـ BBB باظ (stroke) ← **vasogenic edema**. والـ mannitol ممكن يفتحه فيدخّل أدوية أكتر.
+        page: 506
+        quote: "(eg, area postrema—vomiting after chemotherapy; OVLT [organum vasculosum of the lamina terminalis]—osmoreceptors) or neurosecretory products to enter circulation (eg, neurohypophysis—ADH release)."
+      - kind: explain
+        title: "مركز الترجيع"
+        text: |-
+          الـ ==NTS== في الـ medulla هو المنسّق. بيجيله كلام من 4: الـ **CTZ** (جوه الـ area postrema، «puke»-strema)، والـ GI tract عن طريق الـ vagus، والـ vestibular system، والـ CNS.
+
+          وبيستقبل من 5 receptors: **H1، M1، NK-1، D2، 5-HT3**.
+        page: 506
+        quote: "Coordinated by NTS in the medulla, which receives information from the chemoreceptor trigger zone (CTZ, located within area postrema (pronounce “puke”-strema) at the base of the 4th ventricle), GI tract (via vagus nerve), vestibular system, and CNS."
+      - kind: reveal
+        prompt: "ليه دوار البحر بيتعالج بـ H1 و M1 blockers، والكيماوي بـ 5-HT3 و D2 و NK-1؟"
+        answer: "لأن دوار الحركة جاي من الـ **vestibular system**، وده بيكلّم المركز بـ H1 و M1. أما الكيماوي فبيضرب الـ **CTZ** (من غير BBB) والـ GI tract، ودول بيشتغلوا بـ ==D2 و 5-HT3 و NK-1==. والـ H1 antagonists كمان بتعالج hyperemesis gravidarum."
+        page: 506
+        quote: "5-HT3 , D2 , and NK-1 antagonists treat chemotherapy-induced vomiting. ▘ H1 and M1 antagonists treat motion sickness; H1 antagonists treat hyperemesis gravidarum."
+      - kind: check
+        question: "A woman wants something for nausea on a boat trip. Block which receptors?"
+        options:
+          - "H1 and M1"
+          - "5-HT3 and NK-1"
+          - "D2 and 5-HT3"
+          - "NK-1 only"
+        answer: 0
+        why:
+          - "صح: motion sickness = H1 و M1 antagonists."
+          - "دول للكيماوي."
+          - "دول للكيماوي برضه."
+          - "الـ NK-1 للكيماوي."
+        page: 506
+        quote: "H1 and M1 antagonists treat motion sickness; H1 antagonists treat hyperemesis gravidarum."
+      - kind: try
+        items: [neuro.L02.033, neuro.L02.034, neuro.L02.040, neuro.L02.042, neuro.L02.047]
+    recap:
+      - "ACh: Meynert. DA: VTA و SNc. NE: locus ceruleus. 5-HT: raphe. Histamine: tuberomammillary."
+      - "Parkinson ↓ DA؛ Huntington ↑ DA و ↓ GABA/ACh؛ Alzheimer ↓ ACh."
+      - "Epidural = بين الـ dura والعظم (middle meningeal)؛ الـ CSF في الـ subarachnoid."
+      - "BBB = tight junctions + basement membrane + pericytes + astrocyte feet."
+      - "Area postrema و OVLT و neurohypophysis من غير BBB."
+      - "كيماوي: 5-HT3 و D2 و NK-1. دوار حركة: H1 و M1."
+    practice: [neuro.L02.033, neuro.L02.034, neuro.L02.035, neuro.L02.036, neuro.L02.037, neuro.L02.038, neuro.L02.039, neuro.L02.040, neuro.L02.041, neuro.L02.042, neuro.L02.043, neuro.L02.044, neuro.L02.045, neuro.L02.046, neuro.L02.047, neuro.L02.048]
+  - id: neuro.L02.lesson3
+    title: "النوم، والـ hypothalamus، والـ thalamus"
+    hook: "BATS Drink Blood و TAN HATS و SAD POX: 3 حيل تشيل صفحتين"
+    minutes: 10
+    pages: [507, 508]
+    topics: [sleep-physiology, rem-sleep-behavior-disorder, factors-affecting-sleep-architecture, hypothalamus, thalamus]
+    goals:
+      - "ترتّب مراحل النوم وموجاتها وإيه اللي بيحصل في كل واحدة"
+      - "تعرف إيه اللي بيغيّر شكل النوم"
+      - "تربط كل nucleus في الـ hypothalamus بشغلته"
+      - "تعرف كل nucleus في الـ thalamus بيوصّل إيه لفين"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الساعة البيولوجية"
+        text: |-
+          النوم 4-6 دورات كل واحدة حوالي ==90 دقيقة==، والـ REM بيطول كل ما الليل يعدّي.
+
+          المتحكم: الـ **suprachiasmatic nucleus**. الضلمة ← الـ nucleus ده يهدى ← NE من الـ superior cervical ganglion يزيد ← ==melatonin== من الـ pineal gland يزيد.
+        page: 507
+        quote: "Sleep occurs in 4-6 cycles per night, each lasting ~90 mins and consisting of 2 main stages"
+      - kind: table
+        title: "مراحل النوم"
+        columns: ["Stage", "EEG", "What happens"]
+        rows:
+          - ["Awake", "Beta (eyes open), alpha (eyes closed)", "Alert"]
+          - ["N1 (5%)", "Theta", "Light sleep"]
+          - ["N2 (45%)", "Sleep spindles, K complexes", "Bruxism"]
+          - ["N3 (25%)", "Delta", "Bedwetting, sleepwalking, night terrors"]
+          - ["REM (25%)", "Beta", "Dreams, nightmares, tumescence; atonia except diaphragm and eye muscles"]
+        hide: [[1, 1], [2, 1], [3, 1], [2, 2], [3, 2], [4, 2]]
+        page: 507
+        quote: "Stage N3 (25%) Deepest NREM sleep (slow-wave sleep); delta waves (lowest frequency, highest amplitude). When bedwetting, sleepwalking, and night terrors occur (wee and flee in N3)."
+      - kind: mnemonic
+        word: "BATSDB"
+        parts:
+          - { key: "B", text: "Beta: awake, eyes open" }
+          - { key: "A", text: "Alpha: awake, eyes closed" }
+          - { key: "T", text: "Theta: N1" }
+          - { key: "S", text: "Spindles (and K complexes): N2" }
+          - { key: "D", text: "Delta: N3" }
+          - { key: "B", text: "Beta again: REM" }
+        hook: "At night, BATS Drink Blood (حيلة الكتاب)"
+        page: 507
+        quote: "EEG waveforms: Beta, Alpha, Theta, Sleep spindle, Delta, Beta. At night, BATS Drink Blood."
+      - kind: aside
+        tone: tip
+        text: "حيل الكتاب: «**twoth** grinding in N2» (bruxism)، و ==wee and flee in N3== (التبول وال sleepwalking والـ night terrors)، و «**REM**ember dreams». والـ REM فيه EEG شبه الصاحي (beta) بس الجسم مشلول، ما عدا الـ diaphragm (عشان تتنفس) وعضلات العين (rapid eye movement)."
+        page: 507
+        quote: "REM sleep (25%) Loss of muscle tone (atonia) except in diaphragm and extraocular muscles"
+      - kind: explain
+        title: "لما الـ atonia تروح، وحاجات بتغيّر النوم"
+        text: |-
+          **REM sleep behavior disorder**: الـ atonia بتروح فالمريض يمثّل حلمه (غالباً بعنف) ويتكلم. أشهر حاجة معاه: ==Lewy body dementia و Parkinson==.
+
+          - Alcohol و benzodiazepines و barbiturates: ↓ N3 و ↓ REM (عشان كده الـ benzos بتفيد في الـ sleepwalking والـ night terrors).
+          - السن: ↓ N3 و REM، والنوم بياخد وقت أطول، وصحيان بدري.
+          - ==Depression==: ↓ N3، ↑ REM، ↓ REM latency، صحيان متكرر وبدري (terminal insomnia).
+          - Narcolepsy: ↓ REM latency.
+        page: 507
+        quote: "Loss of atonia leading to dream enactment (often violent) and vocalization. Most commonly associated with Lewy body dementia and Parkinson disease."
+      - kind: check
+        question: "A 6-year-old wakes screaming 1 hour after sleep onset, inconsolable, with no memory next morning. Which stage?"
+        options:
+          - "N3"
+          - "N2"
+          - "REM"
+          - "N1"
+        answer: 0
+        why:
+          - "صح: night terrors في N3 (wee and flee)."
+          - "N2 بتاع الـ bruxism."
+          - "الـ REM فيه nightmares وبتتفكّر."
+          - "N1 نوم خفيف theta."
+        page: 507
+        quote: "When bedwetting, sleepwalking, and night terrors occur (wee and flee in N3)."
+      - kind: explain
+        title: "الـ hypothalamus: TAN HATS"
+        text: |-
+          بيحافظ على الـ homeostasis: **T**hirst، **A**denohypophysis، **N**eurohypophysis، **H**unger، **A**utonomic، **T**emperature، **S**exual urges.
+
+          وبياخد معلومات من أماكن من غير BBB: الـ **OVLT** (osmolarity) والـ **area postrema** (emetics).
+        page: 508
+        quote: "Inputs (areas not protected by blood-brain barrier): OVLT (senses change in osmolarity), area postrema (found in dorsal medulla, responds to emetics)."
+      - kind: table
+        title: "الـ hypothalamic nuclei"
+        columns: ["Nucleus", "Job", "Trick"]
+        rows:
+          - ["Lateral", "Hunger (ghrelin +, leptin −)", "Injury makes you lean"]
+          - ["Ventromedial", "Satiety (leptin +)", "Injury makes you very massive"]
+          - ["Anterior", "Cooling, parasympathetic", "A/C"]
+          - ["Posterior", "Heating, sympathetic", "Hot pot"]
+          - ["Suprachiasmatic", "Circadian rhythm", "Sun-Censing Nucleus"]
+          - ["Supraoptic / paraventricular", "ADH / oxytocin", "SAD POX"]
+          - ["Preoptic", "Thermoregulation, sex; GnRH", "Kallmann if neurons fail to migrate"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [5, 1]]
+        page: 508
+        quote: "Lateral nucleus Hunger. Stimulated by ghrelin, inhibited by leptin. Lateral injury makes you lean."
+      - kind: case
+        stem: "A 9-year-old boy has headaches, bitemporal field loss and has gained 12 kg in 6 months from constant eating. MRI: calcified suprasellar mass."
+        steps:
+          - question: "Which nucleus is destroyed?"
+            options: ["Ventromedial", "Lateral", "Suprachiasmatic", "Anterior"]
+            answer: 0
+            why: "الـ ventromedial = satiety؛ لو اتدمر (craniopharyngioma) ← hyperphagia. الـ lateral لو اتدمر ← anorexia."
+          - question: "If the tumor also destroys the supraoptic nucleus, what follows?"
+            options: ["Central diabetes insipidus", "Hyperthermia", "Kallmann syndrome", "Loss of circadian rhythm"]
+            answer: 0
+            why: "الـ supraoptic بيعمل ADH (SAD POX)، ولو اتدمر ← central DI."
+        page: 508
+        quote: "Ventromedial nucleus Satiety. Stimulated by leptin. Ventromedial injury makes you very massive. Destruction (eg, craniopharyngioma) → hyperphagia."
+      - kind: figure
+        title: "الـ thalamus: محطة ترحيل"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="130" y="10" width="100" height="190" rx="14"/>
+            <text x="150" y="30" class="t-sm t-b">Thalamus</text>
+            <text x="150" y="58" class="t-sm">VPL</text>
+            <text x="150" y="92" class="t-sm">VPM</text>
+            <text x="150" y="126" class="t-sm">LGN</text>
+            <text x="150" y="160" class="t-sm">Med. genic.</text>
+            <text x="150" y="190" class="t-sm">VA / VL</text>
+            <text x="4" y="58" class="t-sm">Body touch, pain</text>
+            <text x="4" y="92" class="t-sm">Face, taste</text>
+            <text x="4" y="126" class="t-sm">CN II, optic tract</text>
+            <text x="4" y="160" class="t-sm">Inferior colliculus</text>
+            <text x="4" y="190" class="t-sm">Basal ganglia, cbm</text>
+            <text x="250" y="58" class="t-sm">Parietal S1</text>
+            <text x="250" y="92" class="t-sm">Parietal S1</text>
+            <text x="250" y="126" class="t-sm">Occipital V1</text>
+            <text x="250" y="160" class="t-sm">Temporal A1</text>
+            <text x="250" y="190" class="t-sm">Frontal motor</text>
+          </svg>
+        caption: "كل الإحساس الطالع بيعدّي على الـ thalamus ما عدا الشم. VPL للجسم، VPM للوش والطعم (Very Pretty Makeup on the face)، LGN للنظر (Lateral = light)، الـ medial geniculate للسمع (Medial = music)، و VA/VL للحركة."
+        alt: "Diagram of the thalamus with five nuclei. VPL relays body sensation to the parietal somatosensory cortex; VPM relays face sensation and taste to the same cortex; LGN relays vision to the occipital visual cortex; the medial geniculate nucleus relays hearing to the temporal auditory cortex; VA and VL relay basal ganglia and cerebellar input to frontal motor cortices."
+        page: 508
+        quote: "Major relay for all ascending sensory information except olfaction."
+      - kind: check
+        question: "A lacunar infarct causes left face numbness and loss of taste on the left tongue, with normal limbs. Which nucleus?"
+        options:
+          - "VPM"
+          - "VPL"
+          - "LGN"
+          - "Medial geniculate nucleus"
+        answer: 0
+        why:
+          - "صح: الـ VPM بياخد الـ trigeminal والطعم."
+          - "الـ VPL للجسم، والأطراف سليمة."
+          - "الـ LGN للنظر."
+          - "الـ medial geniculate للسمع."
+        page: 508
+        quote: "Ventral postero- medial nucleus Trigeminal and gustatory pathway Face sensation, taste"
+      - kind: try
+        items: [neuro.L02.051, neuro.L02.057, neuro.L02.062, neuro.L02.064, neuro.L02.069]
+    recap:
+      - "Suprachiasmatic nucleus ← ضلمة ← NE ← melatonin."
+      - "Beta ← Alpha ← Theta (N1) ← Spindles (N2) ← Delta (N3) ← Beta (REM)."
+      - "N3: wee and flee. REM: أحلام و atonia ما عدا الـ diaphragm والعين."
+      - "RBD ← Parkinson و Lewy body. Depression ← ↑ REM و ↓ REM latency."
+      - "Lateral = جوع، ventromedial = شبع، anterior = تبريد، posterior = تسخين، SAD POX."
+      - "Thalamus بيوصّل كل حاجة ما عدا الشم؛ VPM = وش وطعم."
+    practice: [neuro.L02.049, neuro.L02.050, neuro.L02.051, neuro.L02.052, neuro.L02.053, neuro.L02.054, neuro.L02.055, neuro.L02.056, neuro.L02.057, neuro.L02.058, neuro.L02.059, neuro.L02.060, neuro.L02.061, neuro.L02.062, neuro.L02.063, neuro.L02.064, neuro.L02.065, neuro.L02.066, neuro.L02.067, neuro.L02.068, neuro.L02.069, neuro.L02.070, neuro.L02.071]
+  - id: neuro.L02.lesson4
+    title: "الحركة: limbic و dopamine و cerebellum و basal ganglia"
+    hook: "ليه الـ haloperidol بيعمل لبن في الصدر ورعشة؟ وليه Parkinson عكس Huntington بالظبط؟"
+    minutes: 10
+    pages: [509, 511]
+    topics: [limbic-system, dopaminergic-pathways, cerebellum, basal-ganglia]
+    goals:
+      - "تعرف مكونات الـ limbic system"
+      - "تربط كل dopamine pathway بأعراضه ومضاعفات الـ antipsychotics"
+      - "تفرّق الـ medial من الـ lateral cerebellum"
+      - "ترسم الـ direct والـ indirect pathway وتطلّع منها Parkinson و Huntington"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ limbic system: الـ 5 F's"
+        text: |-
+          مجموعة تراكيب مسؤولة عن العواطف، الذاكرة طويلة المدى، الشم، السلوك، والـ ANS.
+
+          مكوناته: ==hippocampus==، amygdalae، **mammillary bodies**، anterior thalamic nuclei، cingulate gyrus، entorhinal cortex.
+
+          وشغلته بالمختصر: feeding و fleeing و fighting و feeling و sex: ==the famous 5 F's==.
+        page: 509
+        quote: "Consists of hippocampus (red arrows in A ), amygdalae, mammillary bodies, anterior thalamic nuclei, cingulate gyrus (yellow arrows in A ), entorhinal cortex. Responsible for feeding, fleeing, fighting, feeling, and sex."
+      - kind: figure
+        title: "الـ 4 dopamine pathways"
+        svg: |-
+          <svg viewBox="0 0 380 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="nL02b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker><marker id="nL02c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="8" y="80" width="80" height="34" rx="8"/>
+            <text x="14" y="102" class="t-sm t-b">VTA</text>
+            <rect class="fg-bad" x="8" y="140" width="80" height="34" rx="8"/>
+            <text x="14" y="162" class="t-sm t-b">S. nigra</text>
+            <rect class="fg-good" x="8" y="20" width="80" height="34" rx="8"/>
+            <text x="14" y="42" class="t-sm t-b">Hypothal.</text>
+            <line class="fg-arrow-acc" x1="90" y1="88" x2="200" y2="62" marker-end="url(#nL02b)"/>
+            <text x="204" y="60" class="t-sm">Prefrontal: mesocortical</text>
+            <text x="204" y="74" class="t-sm t-mut">↓ = negative symptoms</text>
+            <line class="fg-arrow-acc" x1="90" y1="104" x2="200" y2="108" marker-end="url(#nL02b)"/>
+            <text x="204" y="106" class="t-sm">N. accumbens: mesolimbic</text>
+            <text x="204" y="120" class="t-sm t-mut">↑ = positive symptoms</text>
+            <line class="fg-arrow-bad" x1="90" y1="157" x2="200" y2="157" marker-end="url(#nL02c)"/>
+            <text x="204" y="153" class="t-sm">Dorsal striatum: nigrostriatal</text>
+            <text x="204" y="167" class="t-sm t-mut">↓ = extrapyramidal</text>
+            <line class="fg-arrow-acc" x1="90" y1="37" x2="110" y2="37" marker-end="url(#nL02b)"/>
+            <text x="114" y="16" class="t-sm">Pituitary: tuberoinfundibular</text>
+            <text x="114" y="30" class="t-sm t-mut">↓ = ↑ prolactin</text>
+          </svg>
+        caption: "من الـ VTA طريقين: للـ prefrontal (mesocortical، قلته = negative symptoms) وللـ nucleus accumbens (mesolimbic، زيادته = positive symptoms). من الـ substantia nigra للـ striatum (nigrostriatal، قلته = extrapyramidal). ومن الـ hypothalamus للـ pituitary (tuberoinfundibular، قلته = ↑ prolactin)."
+        alt: "Diagram of four dopamine pathways. From the ventral tegmental area to prefrontal cortex (mesocortical, decreased activity gives negative symptoms) and to nucleus accumbens (mesolimbic, increased activity gives positive symptoms). From substantia nigra to dorsal striatum (nigrostriatal, decreased activity gives extrapyramidal symptoms). From hypothalamus to pituitary (tuberoinfundibular, decreased activity raises prolactin)."
+        page: 509
+        quote: "Mesolimbic Ventral tegmental area → nucleus accumbens ↑ activity → positive symptoms 1° therapeutic target of antipsychotics"
+      - kind: reveal
+        prompt: "الـ antipsychotic بيقفل الـ D2 في كل حتة. توقّع: إيه اللي هيتحسن وإيه الأعراض الجانبية؟"
+        answer: "الـ **mesolimbic** هو الهدف ← الـ positive symptoms (hallucinations) تتحسن. بس نفس الدوا بيقفل الـ **nigrostriatal** ← extrapyramidal symptoms، والـ **tuberoinfundibular** ← ↑ prolactin (galactorrhea، amenorrhea). والـ **mesocortical** (negative symptoms) الدوا تأثيره عليه محدود."
+        page: 509
+        quote: "Tuberoinfundibular Hypothalamus → pituitary Regulation of prolactin secretion"
+      - kind: check
+        question: "A woman on haloperidol for 3 months now has galactorrhea and amenorrhea. Which pathway?"
+        options:
+          - "Tuberoinfundibular"
+          - "Nigrostriatal"
+          - "Mesolimbic"
+          - "Mesocortical"
+        answer: 0
+        why:
+          - "صح: الـ dopamine بيمنع الـ prolactin، فلما يتقفل ← ↑ prolactin."
+          - "الـ nigrostriatal بيعمل extrapyramidal symptoms."
+          - "الـ mesolimbic هو اللي اتعالج (الهلاوس راحت)."
+          - "الـ mesocortical مرتبط بالـ negative symptoms."
+        page: 509
+        quote: "Tuberoinfundibular Hypothalamus → pituitary Regulation of prolactin secretion"
+      - kind: explain
+        title: "الـ cerebellum: نفس الناحية"
+        text: |-
+          بيظبط الحركة والتوازن. بياخد proprioception من نفس الناحية عن طريق الـ **inferior cerebellar peduncle**.
+
+          - ==Medial== (vermis): العضلات الـ axial والـ proximal، على الناحيتين ← المشية والجذع.
+          - ==Lateral== (hemispheres): العضلات الـ distal على **نفس الناحية** + التخطيط للحركة.
+
+          الـ deep nuclei من بره لجوه: dentate و emboliform و globose و fastigial: «**d**on't **e**at **g**reasy **f**oods».
+        page: 510
+        quote: "Lateral cerebellum (paravermis and lateral hemisphere) controls distal limb musculature ipsilaterally (lateral structures) and motor planning."
+      - kind: aside
+        tone: exam
+        text: "ورم في الـ **right** cerebellar hemisphere ← intention tremor و dysmetria في الإيد **اليمين** (ipsilateral). ورم في الـ ==vermis== ← المريض مش قادر يقعد أو يمشي ثابت (truncal ataxia) والإيدين ممكن تبقى كويسة. الاختبارات: rapid alternating movements، finger-to-nose، heel-to-shin، gait، intention tremor."
+        page: 510
+        quote: "Tests: rapid alternating movements (pronation/ supination), finger-to-nose, heel-to-shin, gait, look for intention tremor."
+      - kind: figure
+        title: "الـ direct والـ indirect pathway"
+        svg: |-
+          <svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="nL02d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker><marker id="nL02e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="130" y="6" width="100" height="28" rx="6"/>
+            <text x="150" y="25" class="t-sm t-b">Cortex</text>
+            <rect class="fg-box" x="130" y="58" width="100" height="28" rx="6"/>
+            <text x="150" y="77" class="t-sm t-b">Striatum</text>
+            <line class="fg-arrow-acc" x1="180" y1="34" x2="180" y2="56" marker-end="url(#nL02d)"/>
+            <rect class="fg-box" x="260" y="110" width="90" height="28" rx="6"/>
+            <text x="285" y="129" class="t-sm t-b">GPe</text>
+            <rect class="fg-box" x="260" y="160" width="90" height="28" rx="6"/>
+            <text x="285" y="179" class="t-sm t-b">STN</text>
+            <rect class="fg-box" x="130" y="160" width="100" height="28" rx="6"/>
+            <text x="165" y="179" class="t-sm t-b">GPi</text>
+            <rect class="fg-box" x="130" y="208" width="100" height="28" rx="6"/>
+            <text x="150" y="227" class="t-sm t-b">Thalamus</text>
+            <line class="fg-arrow-bad" x1="170" y1="86" x2="170" y2="158" marker-end="url(#nL02e)"/>
+            <text x="96" y="125" class="t-sm t-acc">direct</text>
+            <line class="fg-arrow-bad" x1="225" y1="86" x2="290" y2="108" marker-end="url(#nL02e)"/>
+            <line class="fg-arrow-bad" x1="305" y1="138" x2="305" y2="158" marker-end="url(#nL02e)"/>
+            <line class="fg-arrow-acc" x1="260" y1="174" x2="232" y2="174" marker-end="url(#nL02d)"/>
+            <text x="290" y="100" class="t-sm t-acc">indirect</text>
+            <line class="fg-arrow-bad" x1="180" y1="188" x2="180" y2="206" marker-end="url(#nL02e)"/>
+            <rect class="fg-good" x="8" y="58" width="96" height="44" rx="8"/>
+            <text x="14" y="76" class="t-sm t-b">SNc dopamine</text>
+            <text x="14" y="94" class="t-sm">D1 + / D2 −</text>
+            <line class="fg-arrow-acc" x1="104" y1="74" x2="128" y2="72" marker-end="url(#nL02d)"/>
+            <text x="8" y="140" class="t-sm t-acc">blue = excites</text>
+            <text x="8" y="156" class="t-sm t-bad">red = inhibits</text>
+          </svg>
+        caption: "الـ GPi هو «الفرامل» على الـ thalamus. الـ direct pathway بيكبس على الفرامل نفسها (striatum يمنع الـ GPi) ← الـ thalamus يتحرر ← حركة. الـ indirect بيشيل الفرامل من على الـ STN، والـ STN يشغّل الـ GPi ← الـ thalamus يتمنع ← حركة أقل. والـ dopamine بيشغّل الـ direct (D1) ويهدّي الـ indirect (D2): الاتنين معناهم حركة أكتر."
+        alt: "Basal ganglia circuit. Cortex excites striatum. Direct path: striatum inhibits GPi, which inhibits thalamus. Indirect path: striatum inhibits GPe, which inhibits STN; STN excites GPi. SNc dopamine excites the direct path via D1 and inhibits the indirect path via D2. Blue arrows excite, red arrows inhibit."
+        page: 511
+        quote: "Direct (excitatory) pathway: cortex (via glutamate) excites striatum → striatum (via GABA) inhibits GPi (↓ GABA) → thalamus disinhibited (activated) → ↑ cortical activation → ↑ motion."
+      - kind: order
+        prompt: "رتّب الـ indirect pathway"
+        steps:
+          - "Cortex excites the striatum"
+          - "Striatum inhibits the GPe"
+          - "STN is disinhibited"
+          - "STN excites the GPi"
+          - "Thalamus is inhibited"
+        why: "عدّ الـ inhibitions: الـ striatum يمنع الـ GPe، فالـ STN يتحرر ويشغّل الـ GPi، والـ GPi يمنع الـ thalamus ← حركة أقل."
+        page: 511
+        quote: "Indirect (inhibitory) pathway: cortex (via glutamate) excites striatum → striatum (via GABA) inhibits GPe → STN disinhibited → STN (via glutamate) excites GPi (↑ GABA) → thalamus inhibited → ↓ motion."
+      - kind: table
+        title: "Parkinson عكس Huntington"
+        columns: ["", "Parkinson", "Huntington"]
+        rows:
+          - ["Dopamine", "↓", "↑"]
+          - ["Direct pathway", "↓", "↑"]
+          - ["Indirect pathway", "↑", "↓"]
+          - ["Motion", "↓", "↑"]
+        hide: [[1, 1], [2, 1], [1, 2], [2, 2], [3, 1], [3, 2]]
+        page: 511
+        quote: "↓ dopamine (eg, Parkinson disease) → ↓ direct + ↑ indirect → ↓ motion ▘ ↑ dopamine (eg, Huntington) → ↑ direct + ↓ indirect → ↑ motion"
+      - kind: check
+        question: "Loss of SNc neurons in Parkinson disease has which net effect?"
+        options:
+          - "↓ direct, ↑ indirect, ↓ motion"
+          - "↑ direct, ↓ indirect, ↑ motion"
+          - "↓ both pathways equally"
+          - "↑ D1 stimulation"
+        answer: 0
+        why:
+          - "صح: من غير dopamine، الـ D1 مايشغّلش الـ direct والـ D2 ما يهدّيش الـ indirect."
+          - "ده نمط ↑ dopamine زي Huntington."
+          - "الاتنين بيتحركوا عكس بعض، مش زي بعض."
+          - "الـ D1 بيقل لما الـ dopamine يقل."
+        page: 511
+        quote: "↓ dopamine (eg, Parkinson disease) → ↓ direct + ↑ indirect → ↓ motion"
+      - kind: try
+        items: [neuro.L02.072, neuro.L02.075, neuro.L02.079, neuro.L02.080, neuro.L02.084]
+    recap:
+      - "Limbic: hippocampus و amygdala و mammillary bodies و cingulate؛ الـ 5 F's."
+      - "Mesolimbic ↑ = positive، mesocortical ↓ = negative، nigrostriatal ↓ = EPS، tuberoinfundibular ↓ = ↑ prolactin."
+      - "Cerebellum ipsilateral؛ vermis = axial على الناحيتين، hemisphere = distal نفس الناحية."
+      - "Deep nuclei: dentate و emboliform و globose و fastigial."
+      - "Dopamine: D1 يشغّل الـ direct، D2 يهدّي الـ indirect ← حركة."
+    practice: [neuro.L02.072, neuro.L02.073, neuro.L02.074, neuro.L02.075, neuro.L02.076, neuro.L02.077, neuro.L02.078, neuro.L02.079, neuro.L02.080, neuro.L02.081, neuro.L02.082, neuro.L02.083, neuro.L02.084, neuro.L02.085, neuro.L02.086, neuro.L02.087]
+  - id: neuro.L02.lesson5
+    title: "الدم والـ CSF في المخ: من الـ cortex للـ sinuses"
+    hook: "عارف ليه الـ hyperventilation بينزّل ضغط المخ؟ وليه الـ cardiac arrest بيعمل «man in a barrel»؟"
+    minutes: 10
+    pages: [512, 515]
+    topics: [cerebral-cortex-regions, cerebral-perfusion, homunculus, cerebral-arteries-cortical-distribution, watershed-zones, circle-of-willis, dural-venous-sinuses, ventricular-system]
+    goals:
+      - "تعرف أماكن الـ cortex المهمة"
+      - "تفهم الـ perfusion بالمعادلة والـ Pco2"
+      - "تربط كل artery بجزء من الـ homunculus"
+      - "تمشي مع الـ CSF من الـ ventricle للـ sinus"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "خريطة الـ cortex"
+        text: |-
+          - **Frontal**: prefrontal cortex، frontal eye field، premotor، primary motor، و ==Broca area==.
+          - **Parietal**: primary somatosensory و somatosensory association cortex.
+          - **Temporal**: primary auditory cortex و ==Wernicke area==.
+          - **Occipital**: primary visual cortex.
+
+          والـ **arcuate fasciculus** هو الكابل اللي بيوصّل Wernicke بـ Broca.
+        page: 512
+        quote: "Arcuate fasciculus Primary auditory cortex Primary visual cortex Wernicke area Central sulcus"
+      - kind: explain
+        title: "الـ perfusion: الـ Pco2 هو المتحكم"
+        text: |-
+          الـ autoregulation قوي، والمحرك الأساسي هو ==Pco2==: Pco2 يعلى ← الأوعية توسع ← دم أكتر. (لحد Pco2 حوالي 90 mm Hg.)
+
+          الـ Po2 ما بيأثرش غير في الـ hypoxia الشديدة (Po2 أقل من 50 mm Hg)، زي الـ mountain sickness: hypoxia ← vasodilation ← دم أكتر ← cerebral edema.
+
+          والـ perfusion pressure = ==MAP − intracranial pressure==. لو وصل صفر ← مفيش perfusion ← coma أو brain death.
+        page: 512
+        quote: "CPP = MAP – ICP. If CPP = 0, there is no cerebral perfusion coma or brain death (absent brainstem reflexes, apnea)."
+      - kind: reveal
+        prompt: "مريض stroke ضغط مخه بيعلى ومفيش حاجة نفعت. ليه الـ hyperventilation بيفيد فوراً؟"
+        answer: "Hyperventilation ← ↓ Pco2 ← الأوعية تنقبض (vasoconstriction) ← دم أقل في المخ ← الحجم يقل ← ==↓ intracranial pressure==. بيستخدم في الـ cerebral edema الحادة اللي ما استجابتش لحاجة تانية."
+        page: 512
+        quote: "Therapeutic hyperventilation → ↓ Pco2 → vasoconstriction → ↓ cerebral blood flow → ↓ ICP."
+      - kind: aside
+        tone: exam
+        text: "**Cushing reflex** = hypertension + ==bradycardia== + respiratory depression، كرد فعل على ↑ intracranial pressure. لو شفت الضغط عالي والنبض واطي في مريض راسه بتوجعه وبيغيب، فكّر فيها."
+        page: 512
+        quote: "Cushing reflex—triad of hypertension, bradycardia, and respiratory depression in response to ↑ ICP."
+      - kind: figure
+        title: "مين بيغذّي إيه على الـ homunculus"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <path class="fg-box" d="M10 190 C 10 30, 230 30, 230 190 Z"/>
+            <line class="fg-thin" x1="120" y1="56" x2="120" y2="190"/>
+            <rect class="fg-acc" x="100" y="58" width="40" height="70" rx="6"/>
+            <text x="104" y="84" class="t-sm t-b">Leg</text>
+            <text x="104" y="100" class="t-sm t-b">foot</text>
+            <path class="fg-good" d="M30 120 C 45 85, 80 66, 98 62 L 98 120 Z"/>
+            <text x="46" y="108" class="t-sm t-b">Arm</text>
+            <path class="fg-good" d="M18 170 L 30 124 L 98 124 L 98 140 Z"/>
+            <text x="38" y="140" class="t-sm t-b">Face</text>
+            <text x="244" y="70" class="t-sm t-acc">Anterior cerebral:</text>
+            <text x="244" y="84" class="t-sm t-acc">medial surface</text>
+            <text x="244" y="124" class="t-sm t-good">Middle cerebral:</text>
+            <text x="244" y="138" class="t-sm t-good">lateral surface</text>
+            <text x="244" y="176" class="t-sm t-mut">Posterior cerebral:</text>
+            <text x="244" y="190" class="t-sm t-mut">occipital</text>
+          </svg>
+        caption: "الرجل والقدم على الوش الـ medial من النص (بين الـ hemispheres) وده بتاع الـ anterior cerebral artery. الدراع والإيد والوش على الوش الـ lateral، وده بتاع الـ middle cerebral. والـ posterior cerebral للسطح الخلفي والسفلي (النظر)."
+        alt: "Coronal sketch of one hemisphere. The leg and foot area on the medial surface is shaded for the anterior cerebral artery. Arm, hand and face areas on the lateral surface are shaded for the middle cerebral artery. Posterior cerebral artery noted for occipital surface."
+        page: 513
+        quote: "Anterior cerebral artery (supplies anteromedial surface) Middle cerebral artery (supplies lateral surface) Posterior cerebral artery (supplies posterior and inferior surfaces)"
+      - kind: check
+        question: "Sudden weakness and numbness of the right leg only. Which artery?"
+        options:
+          - "Left anterior cerebral"
+          - "Left middle cerebral"
+          - "Right anterior cerebral"
+          - "Left posterior cerebral"
+        answer: 0
+        why:
+          - "صح: منطقة الرجل medial، بتاعة الـ anterior cerebral، في الناحية العكسية."
+          - "الـ middle cerebral للوش والدراع."
+          - "الإحساس والحركة متعاكسين: رجل يمين = مخ شمال."
+          - "الـ posterior cerebral للنظر."
+        page: 513
+        quote: "Anterior cerebral artery (supplies anteromedial surface)"
+      - kind: explain
+        title: "الـ watershed: آخر الحنفية"
+        text: |-
+          الـ border zones بين territory شريانين هي آخر حتة بيوصلها الدم، فلما الضغط يقع كله (cardiac arrest، shock) هي اللي بتموت الأول:
+          - بين الـ anterior والـ middle cerebral ← ضعف الـ proximal في الدراعين والرجلين سليمة: ==man-in-a-barrel==.
+          - بين الـ posterior والـ middle cerebral ← مشاكل نظر «عالية المستوى».
+
+          وكمان أماكن شائعة للـ brain metastases.
+        page: 513
+        quote: "ACA-MCA watershed infarct—proximal upper extremity weakness sparing the lower extremities (“man-in-a-barrel syndrome”). ▘ PCA-MCA watershed infarct—higher-order visual dysfunction."
+      - kind: explain
+        title: "الـ circle of Willis والـ sinuses"
+        text: |-
+          الـ **circle of Willis** بيربط الـ anterior circulation (ICA و middle و anterior cerebral) بالـ posterior (vertebral ← basilar ← posterior cerebral)، فلو شريان اتسد الدم يلف من الناحية التانية.
+
+          الـ ==dural venous sinuses==: قنوات بين طبقتين الـ dura، بتصرّف الـ cerebral veins، وبتستقبل الـ CSF من الـ arachnoid granulations (أساساً في الـ **superior sagittal sinus**)، وبتصبّ في الـ internal jugular vein.
+        page: 514
+        quote: "Large venous channels A that run through the periosteal and meningeal layers of the dura mater. Drain blood from cerebral veins (arrow) and receive CSF from arachnoid granulations. Empty into internal jugular vein."
+      - kind: aside
+        tone: exam
+        text: "ست حامل أو بتاخد ==OCP== أو عندها factor V Leiden، وجالها صداع بيزيد، seizure، و papilledema؟ فكّر في **venous sinus thrombosis**. ممكن تعمل venous hemorrhage كمان."
+        page: 514
+        quote: "papilledema, focal neurologic deficits). May lead to venous hemorrhage. Associated with hypercoagulable states (eg, pregnancy, OCP use, factor V Leiden)."
+      - kind: order
+        prompt: "رتّب طريق الـ CSF"
+        steps:
+          - "Lateral ventricle"
+          - "Foramina of Monro"
+          - "Third ventricle"
+          - "Cerebral aqueduct of Sylvius"
+          - "Fourth ventricle"
+          - "Foramina of Luschka and Magendie"
+          - "Subarachnoid space"
+        why: "الـ choroid plexus بيعمل الـ CSF في الـ ventricles، وبعد الـ subarachnoid space بيتشرب في الـ arachnoid granulations للـ dural sinuses. Luschka = **L**ateral، Magendie = **M**edial."
+        page: 515
+        quote: "travels from lateral ventricle ➊  3rd ventricle ➌ via interventricular foramina of Monro ➋  4th ventricle ➎ via cerebral aqueduct of Sylvius ➍  subarachnoid space via the foramina of Luschka (lateral) and Magendie (medial) ➏."
+      - kind: check
+        question: "An infant has dilated lateral and third ventricles but a normal fourth ventricle. Where is the block?"
+        options:
+          - "Cerebral aqueduct"
+          - "Foramina of Monro"
+          - "Foramina of Luschka and Magendie"
+          - "Arachnoid granulations"
+        answer: 0
+        why:
+          - "صح: الـ aqueduct بين التالت والرابع، فكل اللي قبله ينفخ."
+          - "لو الـ Monro اتسد، الـ lateral بس هي اللي تنفخ."
+          - "لو اتسد هنا، الرابع كمان هينفخ."
+          - "لو الامتصاص باظ، كل الـ ventricles تنفخ."
+        page: 515
+        quote: "4th ventricle ➎ via cerebral aqueduct of Sylvius ➍  subarachnoid space"
+      - kind: try
+        items: [neuro.L02.092, neuro.L02.095, neuro.L02.100, neuro.L02.103, neuro.L02.115]
+    recap:
+      - "Broca في الـ frontal، Wernicke في الـ temporal، والـ arcuate fasciculus بينهم."
+      - "Pco2 هو المتحكم؛ الـ Po2 بس لو أقل من 50."
+      - "Perfusion pressure = MAP − intracranial pressure. Cushing = HTN + bradycardia + تنفس قليل."
+      - "Hyperventilation ← ↓ Pco2 ← vasoconstriction ← ↓ ضغط المخ."
+      - "Anterior cerebral = رجل، middle = وش ودراع، posterior = نظر. Man-in-a-barrel = anterior/middle watershed."
+      - "Lateral ← Monro ← third ← aqueduct ← fourth ← Luschka/Magendie."
+    practice: [neuro.L02.088, neuro.L02.089, neuro.L02.090, neuro.L02.091, neuro.L02.092, neuro.L02.093, neuro.L02.094, neuro.L02.095, neuro.L02.096, neuro.L02.097, neuro.L02.098, neuro.L02.099, neuro.L02.100, neuro.L02.101, neuro.L02.102, neuro.L02.103, neuro.L02.104, neuro.L02.105, neuro.L02.106, neuro.L02.107, neuro.L02.108, neuro.L02.109, neuro.L02.110, neuro.L02.111, neuro.L02.112, neuro.L02.113, neuro.L02.114, neuro.L02.115, neuro.L02.116]
+  - id: neuro.L02.lesson6
+    title: "الـ brainstem والـ cranial nerves"
+    hook: "12 عصب في 4 + 4 + 4، وكل عصب ليه فتحة وreflex: صفحات بتتسأل كل سنة"
+    minutes: 10
+    pages: [515, 520]
+    topics: [brainstem-ventral-view, brainstem-dorsal-view, cranial-nerve-nuclei, vagal-nuclei, brainstem-cross-sections, cranial-nerves-and-vessel-pathways, cranial-nerves, cranial-nerve-reflexes, mastication-muscles]
+    goals:
+      - "تعرف كل عصب طالع من أنهي مستوى"
+      - "تفرّق الـ vagal nuclei"
+      - "تربط كل عصب بفتحته في الجمجمة"
+      - "تحل أي reflex بالـ afferent والـ efferent"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "4 + 4 + 4"
+        text: |-
+          - فوق الـ pons (من الـ midbrain وفوقه): ==I، II، III، IV==.
+          - من الـ pons: **V، VI، VII، VIII**.
+          - من الـ medulla: **IX، X، XI، XII**.
+          - الـ nuclei الـ medial (motor): ==III، IV، VI، XII== = «factors of 12, except 1 and 2».
+
+          والـ CN IV هو الوحيد اللي بيطلع من **الضهر** ويعدّي للناحية التانية على طول.
+        page: 515
+        quote: "4 CN exit above pons (I, II, III, IV). 4 CN exit the pons (V, VI, VII, VIII). 4 CN exit the medulla (IX, X, XI, XII). 4 CN nuclei are medial (III, IV, VI, XII). “Factors of 12, except 1 and 2.”"
+      - kind: explain
+        title: "الـ nuclei: sensory بره و motor جوه"
+        text: |-
+          الـ nuclei في الـ tegmentum. زي الحبل الشوكي بالظبط: الـ ==lateral = sensory (alar plate)== والـ **medial = motor (basal plate)**، وبينهم الـ sulcus limitans.
+
+          وفوق الـ brainstem من ورا: الـ **pineal gland** (melatonin)، الـ **superior colliculi** (نظر)، والـ **inferior colliculi** (سمع): eyes above ears.
+        page: 516
+        quote: "Lateral nuclei = sensory (alar plate). —Sulcus limitans— Medial nuclei = motor (basal plate)."
+      - kind: explain
+        title: "3 مقاطع لازم تعرفها"
+        text: |-
+          الكتاب بيرسم 3 مقاطع، وكل واحد ليه علامة:
+          - **Midbrain**: الـ cerebral aqueduct، الـ superior colliculus، الـ ==CN III nucleus== وأليافه، الـ red nucleus، الـ substantia nigra، والـ cerebral peduncle.
+          - **Pons**: الـ fourth ventricle، الـ ==locus ceruleus==، الـ superior و middle cerebellar peduncles، الـ MLF، والـ corticospinal tracts، و CN V.
+          - **Medulla**: الـ CN XII nucleus، الـ dorsal motor nucleus، الـ NTS، الـ nucleus ambiguus، الـ inferior olivary nucleus، والـ pyramid.
+        page: 517
+        quote: "Pons Medial lemniscus Locus ceruleus Superior cerebellar peduncle Fourth ventricle Medial longitudinal fasciculus Middle cerebellar peduncle Corticospinal and corticobulbar tracts CN V"
+      - kind: table
+        title: "الـ vagal nuclei"
+        columns: ["Nucleus", "Does", "Nerves"]
+        rows:
+          - ["Nucleus tractus solitarius", "Visceral sensory: taste, baroreceptors, gut distention", "VII, IX, X"]
+          - ["Nucleus ambiguus", "Motor to pharynx, larynx, upper esophagus; parasympathetic to heart", "IX, X"]
+          - ["Dorsal motor nucleus", "Parasympathetic to lungs, upper GI, heart (minor)", "X"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+        page: 516
+        quote: "Nucleus ambiguus Motor innervation of pharynx, larynx, upper esophagus (eg, swallowing, palate elevation), and parasympathetic fibers to the heart IX, X"
+      - kind: aside
+        tone: tip
+        text: "«ambiguus» = بتاع الـ ==swallowing== والصوت: لو اتضرب (lateral medullary infarct) المريض صوته يبحّ ومش قادر يبلع."
+        page: 516
+        quote: "Nucleus ambiguus Motor innervation of pharynx, larynx, upper esophagus (eg, swallowing, palate elevation), and parasympathetic fibers to the heart IX, X"
+      - kind: match
+        prompt: "وصّل كل فتحة باللي بيعدّي منها"
+        pairs:
+          - ["Superior orbital fissure", "CN III, IV, V1, VI"]
+          - ["Foramen rotundum", "CN V2"]
+          - ["Foramen ovale", "CN V3"]
+          - ["Foramen spinosum", "Middle meningeal artery"]
+          - ["Jugular foramen", "CN IX, X, XI"]
+          - ["Internal auditory meatus", "CN VII, VIII"]
+        why: "الـ trigeminal بيطلع بالترتيب: V1 من الـ superior orbital fissure، V2 من الـ **r**otundum، V3 من الـ **o**vale. والـ optic canal فيه CN II والـ ophthalmic artery، والـ hypoglossal canal فيه XII، والـ foramen magnum فيه الـ spinal root of XI والـ vertebral arteries."
+        page: 518
+        quote: "Optic canal Superior orbital fissure Foramen rotundum Foramen ovale Foramen spinosum Internal auditory meatus Jugular foramen Foramen magnum Cribriform plate"
+      - kind: mnemonic
+        word: "SSMMBMBSBBMM"
+        parts:
+          - { key: "S", text: "Some: I olfactory, sensory (no thalamic relay)" }
+          - { key: "S", text: "Say: II optic, sensory" }
+          - { key: "M", text: "Marry: III oculomotor, motor" }
+          - { key: "M", text: "Money: IV trochlear, motor" }
+          - { key: "B", text: "But: V trigeminal, both" }
+          - { key: "M", text: "My: VI abducens, motor" }
+          - { key: "B", text: "Brother: VII facial, both" }
+          - { key: "S", text: "Says: VIII vestibulocochlear, sensory" }
+          - { key: "B", text: "Big: IX glossopharyngeal, both" }
+          - { key: "B", text: "Brains: X vagus, both" }
+          - { key: "M", text: "Matter: XI accessory, motor" }
+          - { key: "M", text: "Most: XII hypoglossal, motor" }
+        hook: "Some Say Marry Money But My Brother Says Big Brains Matter Most: أول حرف = Sensory أو Motor أو Both"
+        page: 519
+        quote: "Olfactory I Smell (only CN without thalamic relay to cortex) Sensory Some Optic II Sight Sensory Say"
+      - kind: explain
+        title: "اللسان والغدد والودن"
+        text: |-
+          - اللسان قدّام (2/3): الطعم ==VII== (chorda tympani)، والإحساس **V**. ورا (1/3): الطعم والإحساس **IX**. والـ supraglottic: **X**.
+          - الـ parotid: **IX**. الـ submandibular والـ sublingual: ==VII== («CN seven»).
+          - الصوت العالي: الـ **stapedius** (VII) والـ **tensor tympani** (V).
+          - الـ carotid body والـ sinus: **IX**؛ الـ aortic arch: **X**.
+        page: 519
+        quote: "Glossopharyngeal IX Taste and sensation from posterior 1/3 of tongue, swallowing, salivation (parotid gland)"
+      - kind: table
+        title: "الـ reflexes: مين بيحس ومين بيرد"
+        columns: ["Reflex", "Afferent", "Efferent"]
+        rows:
+          - ["Pupillary", "II", "III"]
+          - ["Accommodation", "II", "III"]
+          - ["Corneal", "V1", "VII (both sides)"]
+          - ["Lacrimation", "V1", "VII"]
+          - ["Jaw jerk", "V3", "V3"]
+          - ["Gag", "IX", "X"]
+          - ["Cough", "X", "X"]
+          - ["Vestibulo-ocular", "VIII", "III, VI"]
+        hide: [[2, 1], [2, 2], [5, 1], [5, 2], [7, 1], [7, 2]]
+        page: 519
+        quote: "Accommodation II III Vestibulo-ocular VIII III, VI Corneal V1 ophthalmic (nasociliary branch) Bilateral VII (temporal and zygomatic branches—orbicularis oculi)"
+      - kind: case
+        stem: "A man has a right facial nerve palsy after surgery. A cotton wisp touches his right cornea."
+        steps:
+          - question: "What happens?"
+            options: ["Only the left eye blinks", "Neither eye blinks", "Both blink", "Only the right eye blinks"]
+            answer: 0
+            why: "الـ afferent (V1 يمين) شغال، والـ efferent VII على الناحيتين؛ اليمين مشلول فالشمال بس يرمش."
+          - question: "Now the cotton touches his left cornea. What happens?"
+            options: ["Only the left eye blinks", "Neither eye blinks", "Both blink", "Only the right eye blinks"]
+            answer: 0
+            why: "نفس الحكاية: الإحساس وصل من الشمال، والرد على الناحيتين، بس الـ VII اليمين بايظ، فالشمال بس."
+        page: 519
+        quote: "Corneal V1 ophthalmic (nasociliary branch) Bilateral VII (temporal and zygomatic branches—orbicularis oculi)"
+      - kind: explain
+        title: "عضلات المضغ"
+        text: |-
+          3 بيقفلوا البُق: **masseter**، **temporalis**، **medial pterygoid** («my teeth munch»).
+
+          واحدة بتفتح وتطلّع الفك لقدّام: ==lateral pterygoid==. وكلهم من **CN V3**.
+        page: 520
+        quote: "3 muscles close jaw: masseter, temporalis, medial pterygoid (my teeth munch). Lateral pterygoids lower (open) and protrude jaw. All are innervated by mandibular branch of trigeminal nerve (CN V3 )."
+      - kind: check
+        question: "A schwannoma through the foramen ovale makes the jaw deviate on opening. Which muscle is weak?"
+        options:
+          - "Lateral pterygoid"
+          - "Masseter"
+          - "Temporalis"
+          - "Medial pterygoid"
+        answer: 0
+        why:
+          - "صح: الـ lateral pterygoid هو اللي بيفتح، ولو ناحية ضعفت الفك يميل ناحيتها."
+          - "الـ masseter بيقفل."
+          - "الـ temporalis بيقفل."
+          - "الـ medial pterygoid بيقفل."
+        page: 520
+        quote: "Lateral pterygoids lower (open) and protrude jaw."
+      - kind: try
+        items: [neuro.L02.117, neuro.L02.126, neuro.L02.131, neuro.L02.134, neuro.L02.140]
+    recap:
+      - "I-IV فوق الـ pons، V-VIII الـ pons، IX-XII الـ medulla؛ medial nuclei III و IV و VI و XII."
+      - "Lateral nuclei sensory، medial motor."
+      - "NTS = visceral sensory؛ ambiguus = بلع وصوت؛ dorsal motor = parasympathetic."
+      - "V1 superior orbital fissure، V2 rotundum، V3 ovale؛ IX و X و XI jugular foramen."
+      - "Corneal: V1 ← VII الاتنين؛ gag: IX ← X."
+      - "3 بيقفلوا البُق، الـ lateral pterygoid بيفتح، كلهم V3."
+    practice: [neuro.L02.117, neuro.L02.118, neuro.L02.119, neuro.L02.120, neuro.L02.121, neuro.L02.122, neuro.L02.123, neuro.L02.124, neuro.L02.125, neuro.L02.126, neuro.L02.127, neuro.L02.128, neuro.L02.129, neuro.L02.130, neuro.L02.131, neuro.L02.132, neuro.L02.133, neuro.L02.134, neuro.L02.135, neuro.L02.136, neuro.L02.137, neuro.L02.138, neuro.L02.139, neuro.L02.140, neuro.L02.141, neuro.L02.142, neuro.L02.143, neuro.L02.144]
+  - id: neuro.L02.lesson7
+    title: "الحبل الشوكي: الأعصاب، الـ tracts، والـ reflexes"
+    hook: "ليه الـ LP بيتعمل تحت L3؟ وليه الـ hemisection بتشيل الإحساس من ناحيتين مختلفتين؟"
+    minutes: 10
+    pages: [520, 523]
+    topics: [spinal-nerves, spinal-cord-lower-extent, conus-medullaris-and-cauda-equina-syndrome, spinal-cord-levels-and-tracts, spinal-tract-anatomy, clinical-reflexes, primitive-reflexes, landmark-dermatomes]
+    goals:
+      - "تعرف كل عصب بيطلع فين"
+      - "تعرف الحبل بيخلص فين وتعمل LP بأمان"
+      - "تمشي كل tract وتعرف بيعدّي فين"
+      - "تحفظ الـ reflexes والـ dermatomes بحيل الكتاب"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "31 زوج"
+        text: |-
+          ==8 cervical==، 12 thoracic، 5 lumbar، 5 sacral، 1 coccygeal.
+
+          الـ C1-C7 بتطلع **فوق** الـ vertebra بتاعتها. الـ C8 بيطلع تحت C7 وفوق T1. ومن بعدها كله بيطلع **تحت** الـ vertebra (L2 تحت L2).
+        page: 520
+        quote: "C8 spinal nerve exits below C7 and above T1. All other nerves exit below (eg, L2 exits below the 2nd lumbar vertebra)."
+      - kind: reveal
+        prompt: "الحبل بيخلص عند L1-L2 والـ CSF ممتد لحد S2. يبقى الـ LP نعمله فين وليه؟"
+        answer: "بين ==L3-L4 أو L4-L5==: تحت آخر الحبل، فالإبرة تقابل الـ cauda equina (جذور بتتزق بعيد عن الإبرة) مش الحبل نفسه، وفي نفس الوقت لسه جوه الـ CSF. «To keep the cord alive, keep the spinal needle between L3 and L5»."
+        page: 520
+        quote: "In adults, spinal cord ends at lower border of L1-L2 vertebrae. Subarachnoid space (which contains the CSF) extends to lower border of S2 vertebra."
+      - kind: order
+        prompt: "رتّب الطبقات اللي الإبرة بتعدّيها"
+        steps:
+          - "Skin, fascia and fat"
+          - "Supraspinous ligament"
+          - "Interspinous ligament"
+          - "Ligamentum flavum"
+          - "Epidural space"
+          - "Dura mater"
+          - "Arachnoid mater"
+          - "Subarachnoid space"
+        why: "الـ epidural anesthesia بتقف في الـ epidural space بعد الـ ligamentum flavum، والـ LP بتكمّل لحد الـ subarachnoid space اللي فيها الـ CSF."
+        page: 520
+        quote: "Skin Fascia and fat Supraspinous ligament Interspinous ligament Ligamentum flavum Epidural space (epidural anesthesia needle stops here)"
+      - kind: table
+        title: "Conus medullaris ولا cauda equina؟"
+        columns: ["", "Conus medullaris", "Cauda equina"]
+        rows:
+          - ["Compressed", "End of the spinal cord", "Lumbosacral roots"]
+          - ["Weakness", "Symmetric", "Asymmetric"]
+          - ["Signs", "UMN (spastic)", "LMN (flaccid)"]
+          - ["Both", "Back pain, saddle anesthesia, bladder/bowel dysfunction", "Back pain, saddle anesthesia, bladder/bowel dysfunction"]
+        hide: [[1, 1], [1, 2], [2, 1], [2, 2]]
+        page: 520
+        quote: "symmetric with upper motor neuron (UMN) signs (eg, spastic) in conus medullaris syndrome, asymmetric with LMN signs (eg, flaccid) in cauda equina syndrome."
+      - kind: aside
+        tone: analogy
+        text: "الـ **conus** = آخر الحبل نفسه (neurons مركزية) ← ==UMN== و symmetric. الـ **cauda equina** = «ديل الحصان»، جذور طرفية متفرقة ← ==LMN== و asymmetric لأن الضغط بيمسك جذور من ناحية أكتر من التانية."
+        page: 520
+        quote: "symmetric with upper motor neuron (UMN) signs (eg, spastic) in conus medullaris syndrome, asymmetric with LMN signs (eg, flaccid) in cauda equina syndrome."
+      - kind: figure
+        title: "الـ 3 tracts: مين بيعدّي فين"
+        svg: |-
+          <svg viewBox="0 0 360 236" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="10" y="10" width="340" height="40" rx="6"/>
+            <text x="18" y="34" class="t-sm t-b">Cortex</text>
+            <rect class="fg-box" x="10" y="70" width="340" height="40" rx="6"/>
+            <text x="18" y="94" class="t-sm t-b">Medulla</text>
+            <rect class="fg-box" x="10" y="130" width="340" height="40" rx="6"/>
+            <text x="18" y="154" class="t-sm t-b">Spinal cord</text>
+            <line class="fg-thin" x1="180" y1="10" x2="180" y2="200"/>
+            <path class="fg-arrow-bad" d="M150 200 L150 150 L210 140 L210 30"/>
+            <circle class="fg-dot-bad" cx="150" cy="150" r="4"/>
+            <text x="10" y="214" class="t-sm t-bad">Spinothalamic: crosses in cord</text>
+            <path class="fg-arrow-acc" d="M120 200 L120 90 L240 80 L240 30"/>
+            <circle class="fg-dot-acc" cx="120" cy="90" r="4"/>
+            <text x="10" y="228" class="t-sm t-acc">Dorsal column: crosses in medulla</text>
+            <path class="fg-arrow-good" d="M300 30 L300 75 L270 85 L270 200" stroke="var(--good)" fill="none" stroke-width="2.2"/>
+            <text x="276" y="214" class="t-sm t-good">Cortico-</text>
+            <text x="276" y="228" class="t-sm t-good">spinal</text>
+            <text x="282" y="64" class="t-sm t-good">crosses at</text>
+            <text x="304" y="100" class="t-sm t-good">pyramids</text>
+          </svg>
+        caption: "الطالعين (spinothalamic والـ dorsal column) بيعملوا synapse وبعدين يعدّوا: الـ spinothalamic بيعدّي في الحبل نفسه (anterior white commissure)، والـ dorsal column بيطلع على نفس الناحية ويعدّي في الـ medulla. النازل (corticospinal) بيعدّي الأول في الـ pyramidal decussation وبعدين يعمل synapse في الـ anterior horn."
+        alt: "Three levels: cortex, medulla, spinal cord, with a midline. The spinothalamic tract enters the cord and crosses within the cord. The dorsal column ascends on the same side and crosses in the medulla. The corticospinal tract descends from cortex and crosses at the pyramids in the medulla, then descends on the opposite side."
+        page: 522
+        quote: "Spinothalamic tract and dorsal column (ascending tracts) synapse then cross. Corticospinal tract (descending tract) crosses then synapses."
+      - kind: explain
+        title: "ترتيب الألياف"
+        text: |-
+          - في الـ lateral corticospinal والـ spinothalamic: ==الرجلين بره== (lateral).
+          - في الـ dorsal columns: زيك وانت واقف وإيديك جنبك: «==arms outside, legs inside==». الـ **gracilis** (medial، رجلين، تحت T6) والـ **cuneatus** (lateral، إيدين، فوق T6): grass on the ground, clouds in the sky.
+        page: 521
+        quote: "Legs (lumbosacral) are lateral in lateral corticospinal, spinothalamic tracts. Dorsal columns are organized as you are, with hands at sides. “Arms outside, legs inside.”"
+      - kind: check
+        question: "A right hemisection of the cord at T10. Below the lesion, what is lost?"
+        options:
+          - "Right vibration and right strength; left pain and temperature"
+          - "Left vibration; right pain and temperature"
+          - "Pain and temperature on both sides"
+          - "Vibration on both sides"
+        answer: 0
+        why:
+          - "صح: الـ dorsal column والـ corticospinal على نفس الناحية تحت الـ medulla، والـ spinothalamic عدّى في الحبل."
+          - "ده عكس الناحيتين."
+          - "الـ hemisection بتشيل الألم من الناحية العكسية بس."
+          - "الـ vibration بتروح من نفس الناحية بس."
+        page: 522
+        quote: "Spinothalamic tract and dorsal column (ascending tracts) synapse then cross. Corticospinal tract (descending tract) crosses then synapses."
+      - kind: mnemonic
+        word: "1234"
+        parts:
+          - { key: "1", text: "S1, S2: Achilles, buckle my shoe" }
+          - { key: "2", text: "L2-L4 (mostly 3, 4): patellar, kick the door" }
+          - { key: "3", text: "C5, C6: biceps and brachioradialis, pick up sticks" }
+          - { key: "4", text: "C6-C8 (mostly 7, 8): triceps, lay them straight" }
+        hook: "Reflexes are counted up in order: 1, 2 buckle my shoe؛ 3, 4 kick the door؛ 5, 6 pick up sticks؛ 7, 8 lay them straight. وزيادة: cremasteric L1, L2، و anal wink S3, S4."
+        page: 523
+        quote: "Achilles reflex = S1, S2 (“buckle my shoe”) Patellar reflex = L2-L4 (“kick the door”) Biceps reflex = C5, C6 Brachioradialis reflex = C6 (“pick up sticks”)"
+      - kind: explain
+        title: "الـ primitive reflexes"
+        text: |-
+          موجودة في الرضيع وبتختفي في السنة الأولى لأن الـ ==frontal lobe== بيكبر ويمنعها. لو رجعت في الكبير ← lesion في الـ frontal lobe.
+
+          Moro (فتح وضم الدراعين لما يتخض)، rooting، sucking، palmar، plantar، و Galant.
+
+          والـ plantar لو موجود في كبير = ==Babinski sign== ← ممكن UMN lesion.
+        page: 523
+        quote: "Primitive CNS reflexes present in healthy infants which disappear within 1st year of life due to inhibition from developing frontal lobe. Absent in neurologically intact adult. May reemerge in adults with frontal lobe lesions → loss of inhibition."
+      - kind: match
+        prompt: "وصّل كل dermatome بعلامته"
+        pairs:
+          - ["C6", "Thumb"]
+          - ["T4", "Nipple"]
+          - ["T10", "Umbilicus"]
+          - ["L4", "Kneecap"]
+          - ["L5", "Dorsum of foot"]
+          - ["S1", "Lateral foot"]
+        why: "حيل الكتاب: thumbs up على الإيد الشمال شكلها 6، T4 at the teat pore، T10 belly butten (ومكان ألم الـ appendicitis في الأول)، down on ALL 4's، can't walk on heeL5، و T7 = 7 حروف في xiphoid."
+        page: 523
+        quote: "T4 At the nipple (T4 at the teat pore) T7 At the xiphoid process (7 letters in xiphoid) T10 At the umbilicus (belly butten)"
+      - kind: aside
+        tone: exam
+        text: "ألم المرارة أو الـ diaphragm بيروح للكتف اليمين عن طريق الـ ==phrenic nerve== (C3, 4, 5 keeps the diaphragm alive)."
+        page: 523
+        quote: "gallbladder pain referred to the right shoulder via phrenic nerve (C3, 4, 5 keeps the diaphragm alive)"
+      - kind: try
+        items: [neuro.L02.146, neuro.L02.150, neuro.L02.153, neuro.L02.159, neuro.L02.163]
+    recap:
+      - "C1-C7 فوق الـ vertebra، C8 بين C7 و T1، والباقي تحت."
+      - "الحبل لحد L1-L2، الـ CSF لحد S2، الـ LP في L3-L5."
+      - "Conus: UMN symmetric؛ cauda equina: LMN asymmetric."
+      - "Spinothalamic بيعدّي في الحبل؛ dorsal column في الـ medulla؛ corticospinal في الـ pyramids."
+      - "S1-2، L3-4، C5-6، C7-8."
+      - "Primitive reflex في كبير = frontal lobe lesion؛ Babinski = UMN."
+    practice: [neuro.L02.145, neuro.L02.146, neuro.L02.147, neuro.L02.148, neuro.L02.149, neuro.L02.150, neuro.L02.151, neuro.L02.152, neuro.L02.153, neuro.L02.154, neuro.L02.155, neuro.L02.156, neuro.L02.157, neuro.L02.158, neuro.L02.159, neuro.L02.160, neuro.L02.161, neuro.L02.162, neuro.L02.163, neuro.L02.164, neuro.L02.165, neuro.L02.166, neuro.L02.167, neuro.L02.168, neuro.L02.169, neuro.L02.170, neuro.L02.171, neuro.L02.172, neuro.L02.173]

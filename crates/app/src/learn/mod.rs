@@ -28,7 +28,7 @@ use crate::{Screen, Ui};
 pub(crate) const CSS: Css = css!("src/learn/learn.css");
 
 /// The lesson open in the player; set it, then switch to [`Screen::Learn`].
-/// `STEPS_OPEN_LESSON=hb.L01.lesson1` opens one at launch (previews, screenshots).
+/// `STEPS_OPEN_LESSON=cvs.L04.lesson1` opens one at launch (previews, screenshots).
 pub static OPEN: GlobalSignal<Option<String>> = Signal::global(|| std::env::var("STEPS_OPEN_LESSON").ok());
 
 /// Where the open lesson was opened from: closing it goes back there.
@@ -200,7 +200,7 @@ pub fn Learn() -> Element {
         style { {CSS.text()} }
         match open.and_then(|id| Library::get().lesson(&id).map(|(lec, l)| (lec, l.clone()))) {
             Some((lecture, lesson)) => rsx! {
-                player::Player { key: "{lesson.id}", lesson, lecture_title: Library::get().title(&lecture.lecture).to_string() }
+                player::Player { lesson, lecture_title: Library::get().title(&lecture.lecture).to_string() }
             },
             None => rsx! { LessonList {} },
         }
@@ -213,7 +213,7 @@ static SHOWN: GlobalSignal<Option<String>> = Signal::global(|| None);
 /// What the search box holds, kept when a lesson opens and closes.
 static QUERY: GlobalSignal<String> = Signal::global(String::new);
 
-/// Where an unfinished lesson stands on this device: the step it reopens at
+/// Where an unfinished lesson stands (on any of his devices): the step it reopens at
 /// (0-based), read from the player's saved position (`player.rs`).
 pub fn resume_step(id: &str) -> Option<usize> {
     part_way(id).map(|(at, _)| at)
@@ -232,7 +232,7 @@ fn part_way(id: &str) -> Option<(usize, i64)> {
         return None;
     }
     crate::store::shared()
-        .local_setting::<At>(&format!("lessonpos.{id}"))
+        .place::<At>(&format!("lessonpos.{id}"))
         .filter(|p| p.at > 0)
         .map(|p| (p.at, p.started_ms))
 }
@@ -254,7 +254,7 @@ fn left_off<'a>(lessons: impl IntoIterator<Item = &'a Lesson>) -> Option<&'a Les
     latest(lessons.into_iter().filter_map(|l| part_way(&l.id).map(|(_, ms)| (l, ms))))
 }
 
-/// A lesson id's lecture (`hb.L01.lesson1` → `hb.L01`).
+/// A lesson id's lecture (`cvs.L04.lesson1` → `cvs.L04`).
 fn lecture_of(lesson_id: &str) -> &str {
     lesson_id.rsplit_once('.').map(|(lec, _)| lec).unwrap_or(lesson_id)
 }
@@ -851,6 +851,16 @@ pub fn ExplainLink(item_id: String) -> Element {
     }
 }
 
+/// Screen tests: the player on a lesson built by the test, not one of the
+/// bundled lessons (so every step kind can be played).
+#[cfg(test)]
+pub(crate) fn test_player(lesson: Lesson) -> Element {
+    rsx! {
+        style { {CSS.text()} }
+        player::Player { lesson, lecture_title: "Cardiovascular › Embryology".to_string() }
+    }
+}
+
 #[cfg(test)]
 mod list_tests {
     use super::*;
@@ -892,7 +902,7 @@ mod list_tests {
         assert_eq!(latest([("a", 5), ("b", 9), ("c", 7)]), Some("b"));
         assert_eq!(latest([("a", 0), ("b", 0)]), Some("a"));
         assert_eq!(latest::<&str>([]), None);
-        assert_eq!(lecture_of("hb.L01.lesson1"), "hb.L01");
+        assert_eq!(lecture_of("cvs.L04.lesson1"), "cvs.L04");
     }
 
     #[test]
@@ -907,6 +917,36 @@ mod list_tests {
             .unwrap();
         assert!(list.contains("resume.filter(|l| lecture_of(&l.id) != shown)"));
         assert!(list.contains(".or(resume_lecture)"));
+    }
+
+    #[test]
+    fn an_item_no_lesson_practises_is_taught_by_the_lesson_on_its_topic() {
+        let lib = Library::get();
+        for (lec, file) in &lib.lessons {
+            let Some(lecture) = lib.lectures.get(lec) else { continue };
+            for item in &lecture.items {
+                let Some(l) = lesson_for_item(&item.id) else { continue };
+                let practised = l.practice.contains(&item.id)
+                    || l.steps.iter().any(|s| matches!(&s.body, steps_core::lesson::StepBody::Try { items } if items.contains(&item.id)));
+                if !practised {
+                    // Found by topic: the lesson covers the item's topic.
+                    let topic = item.topic.as_deref().expect("matched by its topic");
+                    assert!(l.topics.iter().any(|t| t == topic), "{} -> {}", item.id, l.id);
+                }
+                assert!(file.lessons.iter().any(|x| x.id == l.id));
+            }
+        }
+        assert!(lesson_for_item("nolecture").is_none());
+        // An item of a lecture with no lessons has none.
+        if let Some(item) = lib
+            .lectures
+            .iter()
+            .find(|(id, _)| !lib.lessons.contains_key(*id))
+            .and_then(|(_, l)| l.items.first())
+        {
+            assert!(lesson_for_item(&item.id).is_none(), "{}", item.id);
+        }
+        assert!(lesson_for_item("cvs.L01.zzz-no-such-item").is_none());
     }
 
     #[test]
