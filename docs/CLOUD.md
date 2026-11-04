@@ -14,7 +14,7 @@ Cost: **$0**. Nothing here needs a card on file. There is no D1 database, no R2 
 
 | Table | Rule | What it holds |
 |---|---|---|
-| `review_events` | append-only (a delete is a tombstone) | every review: item, grade, time |
+| `review_events` | append-only (a delete is a tombstone) | every review: item, grade, time, and the optional confidence (sure / unsure / guess) and error reason |
 | `item_status` | last writer wins (HLC) | your ✓ / ✎ / ✗ content checks |
 | `settings` | last writer wins (HLC) | retention, new items a day and other study settings; lesson marks; where each unfinished lesson stands (`lessonpos.<id>`: step, answers, notes, score) |
 

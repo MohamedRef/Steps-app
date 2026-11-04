@@ -1,0 +1,363 @@
+schema: steps.lesson/v1
+lecture: renal.L05
+lessons:
+  - id: renal.L05.lesson1
+    title: "الـ diuretics: كل دوا له محطة في الـ nephron"
+    hook: "لو عرفت الدوا بيشتغل فين، هتعرف لوحدك هو بيعمل إيه في الـ K+ والـ Ca2+ والـ pH"
+    minutes: 9
+    pages: [625, 626]
+    topics: [diuretics-site-of-action, diuretics-electrolyte-excretion, mannitol, acetazolamide, loop-diuretics, ethacrynic-acid]
+    goals:
+      - "تحط كل diuretic في مكانه على الـ nephron"
+      - "تفهم ليه الـ loops والـ thiazides بيعملوا alkalosis، والـ acetazolamide والـ K+-sparing بيعملوا acidosis"
+      - "تحفظ الـ adverse effects بتاعة الـ mannitol والـ acetazolamide والـ loops"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "خمس محطات على الـ nephron"
+        svg: |-
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rL5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <circle class="fg-box" cx="40" cy="40" r="22"/>
+            <text x="22" y="44" class="t-sm">Glom.</text>
+            <path class="fg-arrow" d="M62,40 L120,40 L120,190" fill="none"/>
+            <path class="fg-arrow" d="M150,190 L150,60 L220,60" fill="none"/>
+            <path class="fg-arrow" d="M220,60 L300,60 L300,200" fill="none" marker-end="url(#rL5a)"/>
+            <rect class="fg-acc" x="70" y="12" width="60" height="22" rx="6"/>
+            <text x="76" y="27" class="t-sm t-b">1 2 PCT</text>
+            <text x="10" y="120" class="t-sm">1 Mannitol</text>
+            <text x="10" y="138" class="t-sm">2 Acetazolamide</text>
+            <rect class="fg-acc" x="156" y="120" width="40" height="22" rx="6"/>
+            <text x="162" y="135" class="t-sm t-b">3 TAL</text>
+            <text x="156" y="160" class="t-sm">3 Loops</text>
+            <rect class="fg-acc" x="200" y="68" width="70" height="22" rx="6"/>
+            <text x="206" y="83" class="t-sm t-b">4 early DCT</text>
+            <text x="200" y="106" class="t-sm">4 Thiazides</text>
+            <rect class="fg-acc" x="306" y="120" width="44" height="22" rx="6"/>
+            <text x="312" y="135" class="t-sm t-b">5 CD</text>
+            <text x="240" y="220" class="t-sm">5 K+-sparing</text>
+          </svg>
+        alt: "Nephron sketch: mannitol and acetazolamide at the proximal tubule, loops at the thick ascending limb, thiazides at the early distal tubule, K+-sparing drugs at the collecting duct."
+        caption: "الترتيب من فوق لتحت: 1 mannitol، 2 acetazolamide، 3 loops، 4 thiazides، 5 K+-sparing."
+        page: 625
+        quote: "Mannitol Acetazolamide Loop diuretics Thiazide diuretics K+ -sparing diuretics"
+      - kind: explain
+        title: "ليه المكان مهم؟"
+        text: |-
+          كل دوا بيقفل باب في حتة معينة، والـ Na+ اللي ما اتمصّش هناك بيوصل للـ collecting duct.
+
+          - الـ **loops** بتقفل الـ ==Na+/K+/2Cl−== في الـ TAL، وده نفس المكان اللي الـ Ca2+ والـ Mg2+ بيتمصّوا فيه، فيضيعوا معاه.
+          - الـ **thiazides** في الـ early DCT بالعكس: ==↓ Ca2+ excretion==.
+          - أي Na+ زيادة يوصل للـ collecting duct بيتبدّل بـ K+ و H+، فالـ loops والـ thiazides بيضيّعوا K+، والـ ==K+-sparing== بيمسكوه.
+        page: 625
+        quote: "Loop diuretics ↑↑ ↓ ↑↑ ↑↑ ↑↑ ↑↑ ↑ Thiazide diuretics ↑ ↓ ↑↑ ↑ ↓↓ —/↑ ↑"
+      - kind: table
+        title: "Diuretics: effects on urinary excretion"
+        columns: ["Class", "K+", "Ca2+", "Blood pH"]
+        rows:
+          - ["Carbonic anhydrase inhibitors", "↑↑", "—", "↓ acidemia"]
+          - ["Loop diuretics", "↑↑", "↑↑", "↑ alkalemia"]
+          - ["Thiazide diuretics", "↑↑", "↓↓", "↑ alkalemia"]
+          - ["K+-sparing diuretics", "↓", "↓/—", "↓ acidemia"]
+        hide: [[1, 2], [2, 2], [3, 1]]
+        page: 625
+        quote: "Carbonic anhydrase inhibitors ↑ ↑↑ ↑↑ —/↑ — — ↓"
+      - kind: check
+        question: "A woman on a diuretic for osteoporosis-friendly blood pressure control has low urinary calcium. Which class?"
+        options:
+          - "Thiazide diuretic"
+          - "Loop diuretic"
+          - "Carbonic anhydrase inhibitor"
+          - "Osmotic diuretic"
+        answer: 0
+        why:
+          - "صح: الـ thiazides بتقلل الـ Ca2+ excretion (↓↓ في الجدول)."
+          - "الـ loops بتضيّع Ca2+: «Loops lose Ca2+»."
+          - "الـ acetazolamide مالوش أثر على الـ Ca2+ في الجدول."
+          - "الـ mannitol مش في الجدول أصلاً."
+        page: 625
+        quote: "Thiazide diuretics ↑ ↓ ↑↑ ↑ ↓↓ —/↑ ↑"
+      - kind: explain
+        title: "الـ pH: مين يحمّض ومين يقلّوي؟"
+        text: |-
+          **Acidemia** (↓ pH):
+          - الـ **acetazolamide**: ↓ HCO3− reabsorption، فالـ bicarbonate بيخرج في البول.
+          - الـ **K+-sparing**: الـ aldosterone blockade بيمنع إفراز الـ K+ والـ H+، والـ hyperkalemia بتدخّل K+ للخلايا وتطلّع H+ برّه.
+
+          **Alkalemia** (↑ pH) مع الـ loops والـ thiazides، بتلات طرق:
+          - ==contraction alkalosis==: الحجم يقل ← ↑ AT II ← ↑ Na+/H+ في الـ PCT ← ↑ HCO3− reabsorption.
+          - الـ K+ بيضيع، فالـ K+ يطلع من الخلايا والـ H+ يدخلها.
+          - لما الـ K+ يبقى واطي، الـ collecting tubule بيبدّل H+ بدل K+ قصاد الـ Na+ ← ==paradoxical aciduria==.
+        page: 625
+        quote: "↑ (alkalemia): loop diuretics and thiazides cause alkalemia through several mechanisms"
+      - kind: aside
+        tone: trap
+        text: "الـ «paradoxical aciduria» فخ: المريض عنده metabolic alkalosis بس بوله acidic. السبب إن الـ K+ واطي، فالـ collecting tubule بيطلّع H+ بداله."
+        page: 625
+        quote: "In low K+ state, H+ (rather than K+ ) is exchanged for Na+ in cortical collecting tubule → alkalosis and “paradoxical aciduria”"
+      - kind: explain
+        title: "Mannitol: بيشد المية"
+        text: |-
+          الـ mannitol ==osmotic diuretic==: بيعلّي الـ serum osmolality، فالمية تطلع من الـ interstitium للأوعية، ويزيد البول، ويقل ضغط المخ والعين.
+
+          - **الاستخدام**: drug overdose، ==↑ intracranial / intraocular pressure==، وزيادة الـ diuresis.
+          - **الأضرار**: dehydration، hypo- أو hypernatremia، و pulmonary edema.
+          - **ممنوع** في الـ ==anuria== والـ HF: المية اللي شدّها للأوعية مش هتعرف تخرج.
+        page: 626
+        quote: "Osmotic diuretic. ↑ serum osmolality → fluid shift from interstitium to intravascular space → ↑ urine flow, ↓ intracranial/intraocular pressure."
+      - kind: explain
+        title: "Acetazolamide: «Acid»azolamide"
+        text: |-
+          ==Carbonic anhydrase inhibitor== في الـ PCT: NaHCO3 diuresis محدودة لوحدها، والـ HCO3− في الجسم يقل، والبول يبقى alkaline.
+
+          - **الاستخدام**: glaucoma، metabolic alkalosis، ==altitude sickness== (بيعادل الـ respiratory alkalosis)، و idiopathic intracranial hypertension (pseudotumor cerebri).
+          - **الأضرار**: ==type 2 RTA== (proximal)، paresthesias، NH3 toxicity، sulfa allergy، hypokalemia، وحصوات calcium phosphate (مش بتدوب في pH عالي).
+        page: 626
+        quote: "Proximal renal tubular acidosis (type 2 RTA), paresthesias, NH3 toxicity, sulfa allergy, hypokalemia. Promotes calcium phosphate stones (insoluble at high urine pH)."
+      - kind: check
+        question: "A climber taking a drug to prevent altitude sickness develops tingling fingers and a kidney stone. Which stone type?"
+        options:
+          - "Calcium phosphate"
+          - "Uric acid"
+          - "Cystine"
+          - "Calcium oxalate from hypercalciuria due to loops"
+        answer: 0
+        why:
+          - "صح: الـ acetazolamide بيقلوي البول، والـ calcium phosphate مش بيدوب في pH عالي."
+          - "الـ uric acid بيترسّب في البول الـ acidic، مش الـ alkaline."
+          - "الـ cystine مرض وراثي في الـ transporter، مش من دوا."
+          - "الحالة دي acetazolamide مش loop."
+        page: 626
+        quote: "Promotes calcium phosphate stones (insoluble at high urine pH)."
+      - kind: explain
+        title: "Loop diuretics: أقوى واحد"
+        text: |-
+          **Furosemide، bumetanide، torsemide**: sulfonamides بتقفل الـ ==Na+/K+/2Cl−== في الـ TAL، فالـ medulla تفقد الـ hypertonicity ومينفعش البول يتركّز.
+
+          - بتشتغل مع ==↑ PGE== (بيوسّع الـ afferent)، فالـ **NSAIDs** بتضعّفها.
+          - ↑ Ca2+ excretion: «Loops lose Ca2+».
+          - **الاستخدام**: edema (HF، cirrhosis، nephrotic، pulmonary edema)، hypertension، و ==hypercalcemia==.
+        page: 626
+        quote: "Associated with ↑ PGE (vasodilatory effect on afferent arteriole); inhibited by NSAIDs."
+      - kind: mnemonic
+        word: "OHHDAANG"
+        parts:
+          - { key: "O", text: "Ototoxicity" }
+          - { key: "H", text: "Hypokalemia" }
+          - { key: "H", text: "Hypomagnesemia" }
+          - { key: "D", text: "Dehydration" }
+          - { key: "A", text: "Allergy (sulfa)" }
+          - { key: "A", text: "metabolic Alkalosis" }
+          - { key: "N", text: "Nephritis (interstitial)" }
+          - { key: "G", text: "Gout" }
+        hook: "الكتاب بيكتبها OHH DAANG!: زي ما تكون اتخضّيت من كمية الـ adverse effects."
+        page: 626
+        quote: "Ototoxicity, Hypokalemia, Hypomagnesemia, Dehydration, Allergy (sulfa), metabolic Alkalosis, Nephritis (interstitial), Gout. OHH DAANG!"
+      - kind: aside
+        tone: exam
+        text: "عنده sulfa allergy ومحتاج loop؟ ==ethacrynic acid==: nonsulfonamide بيقفل نفس الـ cotransporter، بس ==أكتر ototoxic==. «Loop earrings hurt your ears.»"
+        page: 626
+        quote: "Similar to furosemide, but more ototoxic. Loop earrings hurt your ears."
+      - kind: check
+        question: "A patient with sulfa allergy gets ethacrynic acid for edema. What should you warn about most?"
+        options:
+          - "Hearing loss"
+          - "Hyperkalemia"
+          - "Gynecomastia"
+          - "Hypercalcemia"
+        answer: 0
+        why:
+          - "صح: الـ ethacrynic acid أكتر ototoxic من الـ furosemide."
+          - "الـ loops بتعمل hypokalemia."
+          - "الـ gynecomastia من الـ spironolactone."
+          - "الـ loops بتضيّع Ca2+، والـ hypercalcemia من الـ thiazides."
+        page: 626
+        quote: "Similar to furosemide, but more ototoxic."
+      - kind: try
+        items: [renal.L05.003, renal.L05.010, renal.L05.019, renal.L05.025]
+    recap:
+      - "الترتيب: mannitol و acetazolamide في الـ PCT، loops في الـ TAL، thiazides في الـ early DCT، K+-sparing في الـ collecting tubule."
+      - "Loops و thiazides: K+ يضيع و alkalosis (contraction، shift، paradoxical aciduria)."
+      - "Acetazolamide و K+-sparing: acidosis."
+      - "Mannitol ممنوع في anuria و HF. Acetazolamide: type 2 RTA وحصوة calcium phosphate."
+      - "Loops: OHH DAANG!، NSAIDs بتضعّفها، loops lose Ca2+. Sulfa allergy ← ethacrynic acid (أكتر ototoxic)."
+    practice: [renal.L05.001, renal.L05.002, renal.L05.003, renal.L05.004, renal.L05.005, renal.L05.006, renal.L05.007, renal.L05.008, renal.L05.009, renal.L05.010, renal.L05.011, renal.L05.012, renal.L05.013, renal.L05.014, renal.L05.015, renal.L05.016, renal.L05.017, renal.L05.018, renal.L05.019, renal.L05.020, renal.L05.021, renal.L05.022, renal.L05.023, renal.L05.024, renal.L05.025, renal.L05.026, renal.L05.027, renal.L05.028, renal.L05.029]
+  - id: renal.L05.lesson2
+    title: "الـ thiazides والـ K+-sparing وأدوية الـ RAAS"
+    hook: "ليه الـ thiazide بيعمل gout، والـ spironolactone بيكبّر الصدر، والـ ACE inhibitor بيعمل كحة؟"
+    minutes: 9
+    pages: [627, 628]
+    topics: [thiazide-diuretics, potassium-sparing-diuretics, ace-inhibitors, angiotensin-ii-receptor-blockers, aliskiren]
+    goals:
+      - "تحفظ استخدامات وأضرار الـ thiazides (Hypergluc)"
+      - "تفرّق بين نوعين الـ K+-sparing (Keep your SEAT)"
+      - "تحط الـ aliskiren والـ ACE inhibitors والـ ARBs كل واحد على خطوته في الـ RAAS"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Thiazides: بيمسكوا الكالسيوم"
+        text: |-
+          **Hydrochlorothiazide، chlorthalidone، metolazone**: بيقفلوا الـ NaCl reabsorption في الـ ==early DCT==، فالـ nephron يفقد قدرته على تخفيف البول، و ==↓ Ca2+ excretion==.
+
+          **الاستخدام**: hypertension، HF، ==idiopathic hypercalciuria==، nephrogenic diabetes insipidus، osteoporosis، ومع الـ loops في الـ refractory volume overload.
+        page: 627
+        quote: "Inhibit NaCl reabsorption in early DCT → ↓ diluting capacity of nephron. ↓ Ca2+ excretion."
+      - kind: mnemonic
+        word: "GLUC"
+        parts:
+          - { key: "G", text: "hyperGlycemia" }
+          - { key: "L", text: "hyperLipidemia" }
+          - { key: "U", text: "hyperUricemia" }
+          - { key: "C", text: "hyperCalcemia" }
+        hook: "Hyper-GLUC. وزوّد عليهم hypokalemic metabolic alkalosis، hyponatremia، و sulfa allergy."
+        page: 627
+        quote: "Hypokalemic metabolic alkalosis, hyponatremia, hyperglycemia, hyperlipidemia, hyperuricemia, hypercalcemia. Sulfa allergy. Hypergluc."
+      - kind: check
+        question: "A man on hydrochlorothiazide develops a hot, swollen big toe. Which thiazide effect explains it?"
+        options:
+          - "Hyperuricemia"
+          - "Hypercalciuria"
+          - "Hyperkalemia"
+          - "Metabolic acidosis"
+        answer: 0
+        why:
+          - "صح: الـ U في Hypergluc، والـ uric acid العالي بيعمل gout."
+          - "الـ thiazides بتقلل الـ Ca2+ في البول."
+          - "الـ thiazides بتعمل hypokalemia."
+          - "الـ thiazides بتعمل alkalosis."
+        page: 627
+        quote: "hyperglycemia, hyperlipidemia, hyperuricemia, hypercalcemia"
+      - kind: mnemonic
+        word: "SEAT"
+        parts:
+          - { key: "S", text: "Spironolactone" }
+          - { key: "E", text: "Eplerenone" }
+          - { key: "A", text: "Amiloride" }
+          - { key: "T", text: "Triamterene" }
+        hook: "Keep your SEAT: الـ K+ يفضل قاعد في مكانه."
+        page: 627
+        quote: "Spironolactone, Eplerenone, Amiloride, Triamterene. Keep your SEAT."
+      - kind: sort
+        prompt: "حط كل دوا تحت الـ mechanism بتاعه"
+        bins: ["Aldosterone receptor antagonist", "Na+ channel blocker"]
+        cards:
+          - { text: "Spironolactone", bin: 0 }
+          - { text: "Eplerenone", bin: 0 }
+          - { text: "Amiloride", bin: 1 }
+          - { text: "Triamterene", bin: 1 }
+        why: "الاتنين بيشتغلوا في نفس الحتة (cortical collecting tubule): الـ S و E بينافسوا الـ aldosterone على الـ receptor، والـ A و T بيقفلوا الـ Na+ channels."
+        page: 627
+        quote: "Spironolactone and eplerenone are competitive aldosterone receptor antagonists in cortical collecting tubule. Triamterene and amiloride block Na+ channels at the same part of the tubule."
+      - kind: explain
+        title: "K+-sparing: استخدامات وأضرار"
+        text: |-
+          **الاستخدام**: hyperaldosteronism، HF، ==hepatic ascites== (spironolactone)، nephrogenic DI (amiloride)، و antiandrogen (spironolactone).
+
+          **الأضرار**:
+          - ==hyperkalemia== (ممكن تعمل arrhythmias).
+          - endocrine مع الـ spironolactone: ==gynecomastia== و antiandrogen effects.
+          - metabolic acidosis.
+        page: 627
+        quote: "Hyperkalemia (can lead to arrhythmias), endocrine effects with spironolactone (eg, gynecomastia, antiandrogen effects), metabolic acidosis."
+      - kind: check
+        question: "A cirrhotic man on a diuretic for ascites has K+ 6.1 mEq/L and breast tenderness. Which drug?"
+        options:
+          - "Spironolactone"
+          - "Amiloride"
+          - "Furosemide"
+          - "Hydrochlorothiazide"
+        answer: 0
+        why:
+          - "صح: hepatic ascites + hyperkalemia + gynecomastia = spironolactone."
+          - "الـ amiloride بيعمل hyperkalemia بس مالوش endocrine effects."
+          - "الـ furosemide بيعمل hypokalemia."
+          - "الـ thiazide بيعمل hypokalemia."
+        page: 627
+        quote: "Hyperaldosteronism, HF, hepatic ascites (spironolactone), nephrogenic DI (amiloride), antiandrogen (spironolactone)."
+      - kind: figure
+        title: "تلات أدوية على تلات خطوات"
+        svg: |-
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rL5b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="14" width="150" height="28" rx="6"/>
+            <text x="20" y="33" class="t-sm">Angiotensinogen</text>
+            <line class="fg-arrow" x1="85" y1="42" x2="85" y2="72" marker-end="url(#rL5b)"/>
+            <text x="95" y="62" class="t-sm">renin</text>
+            <rect class="fg-bad" x="200" y="46" width="150" height="26" rx="6"/>
+            <text x="210" y="64" class="t-sm t-b">Aliskiren</text>
+            <rect class="fg-box" x="10" y="76" width="150" height="28" rx="6"/>
+            <text x="20" y="95" class="t-sm">Angiotensin I</text>
+            <line class="fg-arrow" x1="85" y1="104" x2="85" y2="134" marker-end="url(#rL5b)"/>
+            <text x="95" y="124" class="t-sm">ACE</text>
+            <rect class="fg-bad" x="200" y="108" width="150" height="26" rx="6"/>
+            <text x="210" y="126" class="t-sm t-b">ACE inhibitors</text>
+            <rect class="fg-box" x="10" y="138" width="150" height="28" rx="6"/>
+            <text x="20" y="157" class="t-sm">Angiotensin II</text>
+            <line class="fg-arrow" x1="85" y1="166" x2="85" y2="190" marker-end="url(#rL5b)"/>
+            <rect class="fg-box" x="10" y="194" width="150" height="28" rx="6"/>
+            <text x="20" y="213" class="t-sm">AT1 receptor</text>
+            <rect class="fg-bad" x="200" y="180" width="150" height="26" rx="6"/>
+            <text x="210" y="198" class="t-sm t-b">ARBs</text>
+            <text x="200" y="160" class="t-sm t-mut">ACE also breaks</text>
+            <text x="200" y="174" class="t-sm t-mut">bradykinin</text>
+          </svg>
+        alt: "RAAS ladder: aliskiren blocks renin, ACE inhibitors block ACE, ARBs block the AT1 receptor."
+        caption: "الـ aliskiren فوق، والـ ACE inhibitors في النص، والـ ARBs تحت عند الـ receptor."
+        page: 628
+        quote: "Direct renin inhibitor, blocks conversion of angiotensinogen to angiotensin I. Aliskiren kills renin."
+      - kind: explain
+        title: "ACE inhibitors: الـ efferent يرتاح"
+        text: |-
+          **Captopril، enalapril، lisinopril، ramipril**: ↓ AT II، فالـ efferent arteriole ما بيتقفلش ← ==↓ GFR==. والـ renin يعلى لأن الـ negative feedback راح. والـ ACE كان بيكسر الـ ==bradykinin==، فدلوقتي بيتراكم.
+
+          **الاستخدام**: hypertension، HF (==↓ mortality==)، proteinuria، diabetic nephropathy، ويمنع الـ remodeling. في الـ CKD بيقلل الضغط جوه الـ glomerulus فيبطّأ تخانة الـ GBM.
+        page: 628
+        quote: "Inhibit ACE → ↓ AT II → ↓ GFR by preventing constriction of efferent arterioles. ↑ renin due to loss of negative feedback."
+      - kind: mnemonic
+        word: "CATCHH"
+        parts:
+          - { key: "C", text: "Cough (dry, nonproductive)" }
+          - { key: "A", text: "Angioedema" }
+          - { key: "T", text: "Teratogen (fetal renal malformations)" }
+          - { key: "C", text: "↑ Creatinine (↓ GFR)" }
+          - { key: "H", text: "Hyperkalemia" }
+          - { key: "H", text: "Hypotension" }
+        hook: "Captopril's CATCHH. والكحة والـ angioedema الاتنين من الـ bradykinin."
+        page: 628
+        quote: "Cough (dry, nonproductive), Angioedema (both due to ↑ bradykinin; contraindicated in C1 esterase inhibitor deficiency), Teratogen (fetal renal malformations), ↑ Creatinine (↓ GFR), Hyperkalemia, and Hypotension."
+      - kind: aside
+        tone: trap
+        text: "الـ ACE inhibitor ممنوع في ==C1 esterase inhibitor deficiency== (angioedema)، وبحذر في الـ ==bilateral renal artery stenosis==: الكليتين عايشين على الـ AT II، فالـ GFR يقع أكتر ← renal failure."
+        page: 628
+        quote: "Used with caution in bilateral renal artery stenosis because ACE inhibitors will further ↓ GFR → renal failure."
+      - kind: explain
+        title: "ARBs و aliskiren"
+        text: |-
+          - **ARBs** (losartan، candesartan، valsartan): بيقفلوا الـ AT II على الـ ==AT1 receptor==. نفس شغل الـ ACE inhibitors بس ==مش بيعلّوا الـ bradykinin==، فدول البديل لما المريض يعمل كحة أو angioedema. الأضرار: hyperkalemia، ↓ GFR، hypotension، teratogen.
+          - **Aliskiren**: ==direct renin inhibitor== (Aliskiren kills renin). للـ hypertension. الأضرار: hyperkalemia، ↓ GFR، hypotension، angioedema. ممنوع في الحمل، ونسبياً مع ACE inhibitors أو ARBs.
+        page: 628
+        quote: "Selectively block binding of angiotensin II to AT1 receptor. Effects similar to ACE inhibitors, but ARBs do not increase bradykinin."
+      - kind: check
+        question: "A diabetic woman stopped lisinopril because of cough. Why does losartan avoid it?"
+        options:
+          - "It does not increase bradykinin"
+          - "It blocks renin directly"
+          - "It lowers potassium"
+          - "It constricts the efferent arteriole"
+        answer: 0
+        why:
+          - "صح: الـ ARBs بتقفل الـ receptor ومش بتلمس الـ ACE، فالـ bradykinin ما بيتراكمش."
+          - "ده الـ aliskiren."
+          - "الـ ARBs بتعمل hyperkalemia."
+          - "الـ ARBs بتمنع الـ AT II يقفل الـ efferent، زي الـ ACE inhibitors."
+        page: 628
+        quote: "Effects similar to ACE inhibitors, but ARBs do not increase bradykinin."
+      - kind: try
+        items: [renal.L05.034, renal.L05.040, renal.L05.049, renal.L05.053, renal.L05.056]
+    recap:
+      - "Thiazides في الـ early DCT: ↓ Ca2+ excretion، Hypergluc، وبيعالجوا hypercalciuria و nephrogenic DI و osteoporosis."
+      - "Keep your SEAT: S و E ضد الـ aldosterone، A و T بيقفلوا الـ Na+ channels. الكل hyperkalemia و acidosis."
+      - "Spironolactone: hepatic ascites و gynecomastia."
+      - "ACE inhibitors: CATCHH، الـ bradykinin، بحذر في الـ bilateral RAS."
+      - "ARBs: نفس الشغل من غير bradykinin. Aliskiren kills renin، مش مع ACE inhibitors أو ARBs."
+    practice: [renal.L05.030, renal.L05.031, renal.L05.032, renal.L05.033, renal.L05.034, renal.L05.035, renal.L05.036, renal.L05.037, renal.L05.038, renal.L05.039, renal.L05.040, renal.L05.041, renal.L05.042, renal.L05.043, renal.L05.044, renal.L05.045, renal.L05.046, renal.L05.047, renal.L05.048, renal.L05.049, renal.L05.050, renal.L05.051, renal.L05.052, renal.L05.053, renal.L05.054, renal.L05.055, renal.L05.056, renal.L05.057]

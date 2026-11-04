@@ -1,0 +1,116 @@
+schema: steps.lesson/v1
+lecture: path.L04
+lessons:
+  - id: path.L04.lesson1
+    title: "الجسم وهو بيكبر: إيه الطبيعي وإيه المرض"
+    hook: "جدّك الـ RV عنده عالي والـ TLC زي ما هو، والـ vaccine الجديد مش ماسك معاه. ده طبيعي؟"
+    minutes: 7
+    pages: [225, 226]
+    topics: [normal-aging, lipofuscin]
+    goals:
+      - "تعرف التغييرات الطبيعية للسن في كل جهاز"
+      - "تفهم ليه المناعة بتضعف قدام الـ antigens الجديدة بس"
+      - "تعرف الـ lipofuscin بيتكوّن إزاي"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "السن مش مرض، بس بيفتح الباب"
+        text: |-
+          الـ normal aging = تراجع ==تدريجي== في وظيفة الأعضاء ← ↑ susceptibility للأمراض.
+
+          وراه 3 أنواع تغييرات: **genetic** (telomere shortening)، **epigenetic** (DNA methylation)، و **metabolic** (mitochondrial dysfunction).
+        page: 225
+        quote: "Time-dependent progressive decline in organ function resulting in ↑ susceptibility to disease. Associated with genetic (eg, telomere shortening), epigenetic (eg, DNA methylation), and metabolic (eg, mitochondrial dysfunction) alterations."
+      - kind: explain
+        title: "القلب والرئة"
+        text: |-
+          **القلب**: الشرايين أنشف (↓ compliance)، الـ aorta أوسع، الـ LV cavity أصغر والـ septum بقى ==sigmoid== (hypertrophy)، الـ LA أكبر، calcification في الـ aortic والـ mitral valves، و ↓ maximum heart rate.
+
+          **الرئة**: الـ elastic recoil بيقل فالـ ==lung compliance بيزيد==، والـ chest wall بيبقى أنشف. ↓ FEV1 و FVC، ↑ RV، والـ ==TLC زي ما هو==. ↑ A-a gradient، والـ response للـ hypoxia والـ hypercapnia أضعف، والكحة أضعف.
+        page: 225
+        quote: "↑ lung compliance (↓ elastic recoil), ↓ chest wall compliance (↑ stiffness), ↓ respiratory muscle strength; ↓ FEV1, ↓ FVC, ↑ RV (TLC is unchanged)"
+      - kind: figure
+        title: "الرئة الكبيرة في السن"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <text x="40" y="18" class="t-sm t-b">Young</text>
+            <text x="230" y="18" class="t-sm t-b">Older</text>
+            <rect class="fg-ink" x="30" y="28" width="80" height="140"/>
+            <rect class="fg-acc" x="30" y="128" width="80" height="40"/>
+            <text x="44" y="152" class="t-sm t-acc">RV</text>
+            <text x="44" y="80" class="t-sm">VC</text>
+            <rect class="fg-ink" x="220" y="28" width="80" height="140"/>
+            <rect class="fg-acc" x="220" y="98" width="80" height="70"/>
+            <text x="234" y="138" class="t-sm t-acc">RV ↑</text>
+            <text x="234" y="66" class="t-sm">FVC ↓</text>
+            <text x="124" y="100" class="t-sm t-mut">TLC same</text>
+            <path class="fg-thin" d="M110 28 L 220 28"/>
+            <path class="fg-thin" d="M110 168 L 220 168"/>
+          </svg>
+        caption: "الـ TLC (العمود كله) زي ما هو، بس الـ RV كبر على حساب الـ FVC، لأن الرئة فقدت الـ elastic recoil."
+        alt: "Two lung volume bars of equal height (unchanged total lung capacity): in the older person the residual volume portion is larger and the vital capacity smaller."
+        page: 225
+        quote: "↓ FEV1, ↓ FVC, ↑ RV (TLC is unchanged)"
+      - kind: check
+        question: "Which is expected in the lungs of a healthy 85-year-old?"
+        options:
+          - "↑ RV with unchanged TLC"
+          - "↓ Lung compliance"
+          - "↑ Chest wall compliance"
+          - "↓ A-a gradient"
+        answer: 0
+        why:
+          - "صح: الـ RV بيزيد والـ TLC مبيتغيرش."
+          - "الـ lung compliance بيزيد مع السن لأن الـ elastic recoil بيقل."
+          - "الـ chest wall بيبقى أنشف (↓ compliance)."
+          - "الـ A-a gradient بيزيد."
+      - kind: reveal
+        prompt: "راجل عنده 80 سنة الـ tetanus booster اشتغل معاه كويس، بس الـ vaccine الجديد ضعيف. ليه الفرق؟"
+        answer: "الـ thymus بيضمر (==thymic involution==) ← naïve T cells أقل (وبشكل غير مباشر naïve B cells). بس الـ ==memory cells محفوظة==، فالـ booster بيشغّل memory موجودة، والـ antigen الجديد محتاج naïve cells مش موجودة كفاية."
+        page: 225
+        quote: "thymic involution → ↓ production of naïve T cells (and, indirectly, naïve B cells), while memory B and T cells are preserved. Net effect = diminished response to novel antigens (eg, pathogens, vaccines)."
+      - kind: table
+        title: "باقي الأجهزة"
+        columns: ["System", "Change"]
+        rows:
+          - ["GI", "↓ LES tone, ↓ gastric protection, ↓ colonic motility"]
+          - ["Marrow", "↓ Mass, ↑ fat; weaker response to blood loss"]
+          - ["Musculoskeletal", "Sarcopenia, osteopenia, thin cartilage"]
+          - ["Brain", "↓ Volume and blood flow; function preserved"]
+          - ["Senses", "Presbyopia, presbycusis, ↓ smell and taste"]
+          - ["Kidney", "↓ GFR, ↓ RBF, ↓ hormonal function"]
+        hide: [[0, 1], [2, 1], [4, 1], [5, 1]]
+        page: 225
+        quote: "Musculoskeletal ↓ skeletal muscle mass (sarcopenia), ↓ bone mass (osteopenia), joint cartilage thinning."
+      - kind: explain
+        title: "الجلد"
+        text: |-
+          Atrophy، والـ dermal-epidermal junction بيبقى مفرود، و ↓ collagen و elastin (تجاعيد و senile purpura).
+
+          - ↓ **sweat glands** ← ==heat stroke==.
+          - ↓ **sebaceous glands** ← xerosis cutis (جلد ناشف).
+          - **Intrinsic** (السن): الـ dermal fibroblasts بتبني أقل.
+          - **Extrinsic** (الشمس، UVA): الـ collagen والـ elastin بيتكسروا ويتراكموا = ==solar elastosis==.
+        page: 225
+        quote: "↓ sweat glands (heat stroke), ↓ sebaceous glands (xerosis cutis)."
+      - kind: aside
+        tone: exam
+        text: "الـ reproductive: عند الرجالة testicular atrophy وتضخم الـ prostate، والـ libido بيقل أقل من الستات. عند الستات vulvovaginal atrophy والـ ==pH بيعلى== بسبب ↓ estrogen بعد الـ menopause."
+        page: 225
+        quote: "Females—vulvovaginal atrophy; vaginal shortening, thinning, dryness, ↑ pH. Due to ↓ estrogen from exhaustion of ovarian follicles (menopause)."
+      - kind: explain
+        title: "الـ lipofuscin: بقايا الشغل"
+        text: |-
+          pigment ==أصفر بني== "wear and tear" مع السن الطبيعي. مكوّن من polymers من lipids و phospholipids لازقة في protein، وممكن ييجي من ==lipid peroxidation== لأغشية الخلية.
+
+          في الـ autopsy بتلاقيه في القلب والـ colon والكبد والكلية والعين.
+        page: 225
+        quote: "A yellow-brown, “wear and tear” pigment A associated with normal aging. Composed of polymers of lipids and phospholipids complexed with protein."
+      - kind: try
+        items: [path.L04.002, path.L04.003, path.L04.006, path.L04.008, path.L04.012]
+    recap:
+      - "الرئة: ↑ compliance، ↑ RV، الـ TLC ثابت، ↑ A-a gradient."
+      - "المناعة: thymic involution ← ↓ naïve cells، والـ memory محفوظة."
+      - "الجلد: ↓ sweat glands ← heat stroke، و UVA ← solar elastosis."
+      - "Lipofuscin = wear and tear، من lipid peroxidation."
+    practice: [path.L04.001, path.L04.002, path.L04.003, path.L04.004, path.L04.005, path.L04.006, path.L04.007, path.L04.008, path.L04.009, path.L04.010, path.L04.011, path.L04.012, path.L04.013]

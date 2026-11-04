@@ -26,7 +26,7 @@ use web_time::Instant;
 
 use dioxus::prelude::*;
 use steps_core::content::{Item, Lecture};
-use steps_core::review::{Grade, Origin, ReviewEvent};
+use steps_core::review::{Confidence, ErrorReason, Grade, Origin, ReviewEvent};
 use steps_core::session::Session;
 
 pub(crate) use backend::use_store;
@@ -128,6 +128,26 @@ static UNDO_NOTE: GlobalSignal<Option<&'static str>> = Signal::global(|| None);
 /// Ratings that couldn't be saved so far. The rating row lets him rate again
 /// once this moves past the count it was pressed at.
 pub(crate) static SAVE_FAILS: GlobalSignal<u32> = Signal::global(|| 0);
+
+/// The optional taps on the item on screen (`crate::metacog`): his
+/// confidence before the answer came out, and the reason a reason chip
+/// rated it "تاني" with. Cleared when an item opens and once its rating is saved.
+#[derive(Debug, Clone, Copy, Default, PartialEq)]
+pub(crate) struct Tags {
+    pub confidence: Option<Confidence>,
+    pub reason: Option<ErrorReason>,
+}
+
+pub(crate) static TAGS: GlobalSignal<Tags> = Signal::global(Tags::default);
+
+/// The answer to log: the grade plus the taps, a reason only on "تاني".
+fn tagged_event(item_id: String, grade: Grade, at_ms: i64, took_ms: u32, tags: Tags) -> ReviewEvent {
+    ReviewEvent {
+        confidence: tags.confidence,
+        reason: tags.reason.filter(|_| grade == Grade::Again),
+        ..ReviewEvent::new(item_id, grade, Origin::Study, at_ms, took_ms)
+    }
+}
 
 #[derive(Clone, Copy, PartialEq)]
 enum Phase {
@@ -330,13 +350,9 @@ pub fn Study() -> Element {
                     let item_id = p.item_id.clone();
                     let on_grade = move |grade: Grade| {
                         let took = started().elapsed().as_millis().min(u32::MAX as u128) as u32;
-                        let event = match store.0.borrow_mut().record_logged(ReviewEvent {
-                            item_id: item_id.clone(),
-                            grade,
-                            origin: Origin::Study,
-                            at_ms: now_ms(),
-                            took_ms: took,
-                        }) {
+                        let tags = *TAGS.peek();
+                        let answer = tagged_event(item_id.clone(), grade, now_ms(), took, tags);
+                        let event = match store.0.borrow_mut().record_logged(answer) {
                             Ok(event) => event,
                             // Not saved: stay on this item with his answer on
                             // screen, say so, and let him rate again.
@@ -346,6 +362,7 @@ pub fn Study() -> Element {
                                 return;
                             }
                         };
+                        *TAGS.write() = Tags::default();
                         let hidden = |id: &str| store.0.borrow().is_hidden(id);
                         session.write().grade_logged(grade, event, hidden);
                         undo_note.set(None);
@@ -427,6 +444,7 @@ pub fn Study() -> Element {
                                 fresh: p.fresh,
                                 retry,
                                 reopened,
+                                tagging: true,
                                 on_grade,
                             }
                         }
@@ -469,6 +487,24 @@ pub fn Study() -> Element {
 
 #[cfg(test)]
 mod tests;
+
+#[cfg(test)]
+mod tag_tests {
+    use super::*;
+
+    #[test]
+    fn a_reason_goes_only_on_again() {
+        let tags = Tags { confidence: Some(Confidence::Sure), reason: Some(ErrorReason::Knowledge) };
+        let again = tagged_event("x.1".into(), Grade::Again, 1, 2, tags);
+        assert_eq!((again.confidence, again.reason), (Some(Confidence::Sure), Some(ErrorReason::Knowledge)));
+        let good = tagged_event("x.1".into(), Grade::Good, 1, 2, tags);
+        assert_eq!((good.confidence, good.reason), (Some(Confidence::Sure), None));
+        assert_eq!(
+            tagged_event("x.1".into(), Grade::Hard, 1, 2, Tags::default()),
+            ReviewEvent::new("x.1", Grade::Hard, Origin::Study, 1, 2)
+        );
+    }
+}
 
 /// Asked when "study this" arrives during a session: his session, its
 /// retries and its summary stay unless he says otherwise.

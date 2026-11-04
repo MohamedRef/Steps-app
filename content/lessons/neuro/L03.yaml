@@ -1,0 +1,1238 @@
+schema: steps.lesson/v1
+lecture: neuro.L03
+lessons:
+  - id: neuro.L03.lesson1
+    title: "مكان الإصابة بيقول العَرَض: الـ lesions والـ posturing والـ stroke"
+    hook: "لو عرفت كل حتة في المخ بتعمل إيه، هتعرف مكان الإصابة من أول سطر في الـ vignette"
+    minutes: 9
+    pages: [524, 525]
+    topics: [common-brain-lesions, abnormal-motor-posturing, ischemic-brain-disease, ischemic-stroke, transient-ischemic-attack, cerebral-edema]
+    goals:
+      - "تربط كل منطقة في المخ بالعَرَض اللي بيطلع لما تتضرب"
+      - "تفرّق decorticate عن decerebrate بمستوى الـ red nucleus"
+      - "ترتّب اللي بيحصل في الخلايا بعد الـ stroke يوم بيوم"
+      - "تفرّق الـ cytotoxic عن الـ vasogenic edema"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ frontal lobe والعينين"
+        text: |-
+          الـ **prefrontal cortex** هو «الفرامل» بتاعة الشخصية: لو اتضرب يطلع ==frontal lobe syndrome==: disinhibition، أكل كتير، impulsivity، فقدان الـ empathy، وضعف الـ executive function. ده اللي بتشوفه في **frontotemporal dementia**.
+
+          العينين ليهم قاعدتين عكس بعض:
+          - **Frontal eye fields** (زي MCA stroke): العينين ==تبص ناحية الإصابة==، يعني بعيد عن الناحية المشلولة.
+          - **PPRF** في الـ pons: العينين تبص بعيد عن الإصابة، يعني ناحية الناحية المشلولة.
+        page: 524
+        quote: "Frontal eye fields Eyes look toward brain lesion (ie, away from side of hemiplegia). Seen in MCA stroke."
+      - kind: check
+        question: "A man with a large left MCA stroke has right hemiplegia. Which way do his eyes deviate?"
+        options:
+          - "To the left, toward the lesion"
+          - "To the right, toward the hemiplegia"
+          - "Upward"
+          - "They stay midline"
+        answer: 0
+        why:
+          - "صح: الـ frontal eye field الشمال مات، فالـ FEF اليمين يزق العينين ناحية الشمال (ناحية الإصابة)."
+          - "ده نمط الـ PPRF في الـ pons، مش الـ cortex."
+          - "مشكلة البص لفوق بتاعة الـ dorsal midbrain (Parinaud)."
+          - "الـ FEF السليم بيزق العينين ناحية واحدة."
+        page: 524
+        quote: "Frontal eye fields Eyes look toward brain lesion (ie, away from side of hemiplegia). Seen in MCA stroke."
+      - kind: table
+        title: "إصابات في الناحيتين (bilateral)"
+        columns: ["Structure", "Syndrome", "Classic cause"]
+        rows:
+          - ["Mammillary bodies", "Wernicke-Korsakoff", "Thiamine deficiency"]
+          - ["Amygdala", "Klüver-Bucy: hyperphagia, hypersexuality, hyperorality", "HSV-1 encephalitis"]
+          - ["Hippocampus", "Anterograde amnesia", "Alzheimer disease"]
+        hide: [[0, 1], [1, 2], [2, 1]]
+        page: 524
+        quote: "Amygdala Bilateral lesions → Klüver-Bucy syndrome—disinhibition (eg, hyperphagia, hypersexuality, hyperorality). Seen in HSV-1 encephalitis."
+      - kind: explain
+        title: "الـ parietal والـ cerebellum"
+        text: |-
+          - **Dominant parietal**: ==Gerstmann==: مش عارف يكتب ولا يحسب ولا يعدّ صوابعه ولا يفرّق يمين من شمال.
+          - **Nondominant parietal**: **hemispatial neglect**، بياكل نص الطبق ويسيب النص التاني.
+
+          الـ cerebellum بيشتغل على **نفس الناحية** (ipsilateral)، والمريض بيقع ناحية الإصابة:
+          - الـ **hemisphere** على الجنب فبيضرب الأطراف: intention tremor و limb ataxia.
+          - الـ **vermis** في النص فبيضرب الجسم نفسه: ==truncal ataxia== (مشية «drunken sailor») مع الكحول المزمن.
+        page: 524
+        quote: "Cerebellar hemisphere Intention tremor, limb ataxia, loss of balance; damage to cerebellum → ipsilateral deficits; fall toward side of lesion."
+      - kind: figure
+        title: "Decorticate × Decerebrate"
+        svg: |-
+          <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="nL03a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+            <rect class="fg-box" x="20" y="14" width="150" height="34" rx="8"/>
+            <text x="58" y="36" class="t-sm t-b">Cerebral cortex</text>
+            <rect class="fg-acc" x="20" y="88" width="150" height="34" rx="8"/>
+            <text x="64" y="110" class="t-sm t-b">Red nucleus</text>
+            <rect class="fg-box" x="20" y="162" width="150" height="34" rx="8"/>
+            <text x="48" y="184" class="t-sm t-b">Vestibular nucleus</text>
+            <line class="fg-arrow" x1="95" y1="48" x2="95" y2="86" marker-end="url(#nL03a)"/>
+            <line class="fg-arrow" x1="95" y1="122" x2="95" y2="160" marker-end="url(#nL03a)"/>
+            <line class="fg-thin" x1="170" y1="105" x2="200" y2="105"/>
+            <text x="204" y="102" class="t-sm">Rubrospinal:</text>
+            <text x="204" y="117" class="t-sm t-acc">arm flexors</text>
+            <line class="fg-thin" x1="170" y1="179" x2="200" y2="179"/>
+            <text x="204" y="176" class="t-sm">Vestibulospinal:</text>
+            <text x="204" y="191" class="t-sm t-acc">extensors</text>
+            <line class="fg-bad" x1="10" y1="68" x2="340" y2="68" stroke-dasharray="6 4"/>
+            <text x="204" y="62" class="t-sm t-bad">cut here: decorticate</text>
+            <line class="fg-bad" x1="10" y1="142" x2="340" y2="142" stroke-dasharray="6 4"/>
+            <text x="204" y="137" class="t-sm t-bad">cut here: decerebrate</text>
+          </svg>
+        caption: "لو القطع فوق الـ red nucleus، الـ rubrospinal لسه شغال فالدراعات تنثني على الصدر (decorticate، «hands near the cor»). لو القطع تحت الـ red nucleus، مافيش غير الـ vestibulospinal فكل الأطراف تتفرد (decerebrate)، وده أوحش في الـ prognosis."
+        alt: "Vertical chain of three boxes: cerebral cortex, red nucleus, vestibular nucleus. The red nucleus sends the rubrospinal tract to arm flexors and the vestibular nucleus sends the vestibulospinal tract to extensors. A dashed line above the red nucleus marks the decorticate lesion; a dashed line below it marks the decerebrate lesion."
+        page: 524
+        quote: "Above red nucleus (often cerebral cortex) Between red and vestibular nuclei (brainstem)"
+      - kind: check
+        question: "After a pontine hemorrhage, a comatose patient extends both arms and legs to pain. Which tract still drives this posture?"
+        options:
+          - "Vestibulospinal tract only"
+          - "Rubrospinal and vestibulospinal tracts"
+          - "Lateral corticospinal tract"
+          - "Spinothalamic tract"
+        answer: 0
+        why:
+          - "صح: decerebrate، الإصابة تحت الـ red nucleus فمافضلش غير الـ vestibulospinal (extensors)."
+          - "الاتنين مع بعض = decorticate (فوق الـ red nucleus)."
+          - "الـ corticospinal اتقطع فوق."
+          - "الـ spinothalamic إحساس مش حركة."
+        page: 524
+        quote: "Rubrospinal and vestibulospinal tracts Vestibulospinal tract"
+      - kind: explain
+        title: "5 دقايق بس"
+        text: |-
+          الـ neuron بيموت موت نهائي بعد ==5 دقايق hypoxia==. أكتر حتت حساسة: **hippocampus (CA1)**، الـ neocortex، الـ **Purkinje cells** في الـ cerebellum، والـ watershed areas («vulnerable hippos need pure water»).
+
+          التصوير: **CT من غير صبغة الأول** عشان تستبعد النزيف قبل الـ tPA. الـ CT بيشوف الـ ischemia بعد 6-24 ساعة، أما الـ ==diffusion-weighted MRI== بيشوفها في 3-30 دقيقة.
+        page: 525
+        quote: "Irreversible neuronal injury begins after 5 minutes of hypoxia. Most vulnerable: hippocampus (CA1 region), neocortex, cerebellum (Purkinje cells), watershed areas"
+      - kind: order
+        prompt: "رتّب اللي بيبان تحت الميكروسكوب بعد الـ ischemic stroke"
+        steps:
+          - "12-24 hr: red neurons (eosinophilic cytoplasm, pyknotic nuclei)"
+          - "24-72 hr: necrosis and neutrophils"
+          - "3-5 days: macrophages (microglia)"
+          - "1-2 weeks: reactive gliosis and vascular proliferation"
+          - "Over 2 weeks: glial scar"
+        why: "نفس ترتيب أي التهاب: الخلية تموت (حمرا)، الـ neutrophils تيجي، الـ macrophages تنضّف، الـ astrocytes تبني، وفي الآخر ندبة. في المخ النهاية liquefactive necrosis مش fibrosis."
+        page: 525
+        quote: "Eosinophilic cytoplasm + pyknotic nuclei (red neurons) Necrosis + neutrophils Macrophages (microglia) Reactive gliosis (astrocytes) + vascular proliferation Glial scar"
+      - kind: explain
+        title: "3 أنواع ischemic stroke والعلاج"
+        text: |-
+          - **Thrombotic**: جلطة في مكانها فوق plaque مفتوحة، غالباً في الـ MCA.
+          - **Embolic**: جاية من بعيد، وممكن تضرب أكتر من منطقة: atrial fibrillation، carotid stenosis، DVT مع patent foramen ovale، endocarditis.
+          - **Hypoxic**: ضغط واطي عام (عمليات القلب) فبيضرب الـ **watershed**.
+
+          العلاج: ==tPA لو في خلال 3-4.5 ساعة== ومافيش نزيف، و/أو **thrombectomy** لو شريان كبير مسدود. والوقاية: aspirin أو clopidogrel، والضغط والسكر والدهون، ووقف السجاير.
+
+          الـ **TIA**: عَرَض عصبي بيروح (غالباً أقل من 15 دقيقة) و**MRI سليم**؛ ممكن يجي كـ amaurosis fugax من emboli الـ carotid.
+        page: 525
+        quote: "Treatment: tPA (if within 3-4.5 hr of onset and no hemorrhage/risk of hemorrhage) and/or thrombectomy (if large artery occlusion)."
+      - kind: check
+        question: "A 70-year-old woman has right arm and face weakness that began 2 hours ago. What must be done before giving tPA?"
+        options:
+          - "Noncontrast head CT to exclude hemorrhage"
+          - "Diffusion-weighted MRI to confirm infarction"
+          - "Lumbar puncture"
+          - "Wait 6 hours for CT changes to appear"
+        answer: 0
+        why:
+          - "صح: الـ CT من غير صبغة بيستبعد النزيف، وده الشرط قبل الـ tPA."
+          - "الـ MRI أحسن في كشف الـ ischemia بدري، بس مش شرط قبل العلاج."
+          - "الـ LP مالهوش دور هنا."
+          - "الاستنا هيضيّع نافذة الـ 3-4.5 ساعة."
+        page: 525
+        quote: "Stroke imaging: noncontrast CT to exclude hemorrhage (before tPA can be given)."
+      - kind: sort
+        prompt: "حط كل سبب في نوع الـ edema بتاعه"
+        bins: ["Cytotoxic (inside cells)", "Vasogenic (outside cells)"]
+        cards:
+          - { text: "Early ischemia", bin: 0 }
+          - { text: "Hyperammonemia", bin: 0 }
+          - { text: "SIADH", bin: 0 }
+          - { text: "Tumor", bin: 1 }
+          - { text: "Late ischemia", bin: 1 }
+          - { text: "Trauma, hemorrhage, inflammation", bin: 1 }
+        why: "الـ cytotoxic = الـ Na+/K+ pump وقف فالـ Na+ والمية يدخلوا الخلية. الـ vasogenic = الـ BBB اتخرم فالمية تطلع بره الأوعية. الـ ischemia بتبدأ cytotoxic وبعدين تبقى vasogenic."
+        page: 525
+        quote: "Cytotoxic edema—intracellular fluid accumulation due to osmotic shift (eg, Na+ /K+ -ATPase dysfunction → ↑ intracellular Na+ ). Caused by ischemia (early), hyperammonemia, SIADH."
+      - kind: try
+        items: [neuro.L03.007, neuro.L03.013, neuro.L03.018, neuro.L03.022]
+    recap:
+      - "FEF: العينين تبص ناحية الإصابة. PPRF: بعيد عنها."
+      - "Bilateral: mammillary = Wernicke-Korsakoff، amygdala = Klüver-Bucy، hippocampus = anterograde amnesia."
+      - "Cerebellum ipsilateral: hemisphere = أطراف، vermis = جسم."
+      - "فوق الـ red nucleus = decorticate، تحته = decerebrate (أوحش)."
+      - "Red neurons ← neutrophils ← macrophages ← gliosis ← scar."
+      - "CT الأول، tPA في 3-4.5 ساعة."
+    practice: [neuro.L03.001, neuro.L03.002, neuro.L03.003, neuro.L03.004, neuro.L03.005, neuro.L03.006, neuro.L03.007, neuro.L03.008, neuro.L03.009, neuro.L03.010, neuro.L03.011, neuro.L03.012, neuro.L03.013, neuro.L03.014, neuro.L03.015, neuro.L03.016, neuro.L03.017, neuro.L03.018, neuro.L03.019, neuro.L03.020, neuro.L03.021, neuro.L03.022]
+  - id: neuro.L03.lesson2
+    title: "كل شريان وليه عَرَض: خريطة الـ strokes"
+    hook: "الـ vignette بتقولك العَرَض، وإنت تقول اسم الشريان: لعبة بتتكرر في كل امتحان"
+    minutes: 10
+    pages: [526, 527]
+    topics: [effects-of-strokes, neonatal-intraventricular-hemorrhage, extracranial-injuries]
+    goals:
+      - "تفرّق الـ ACA والـ MCA والـ lenticulostriate بالأعراض"
+      - "تعرف علامات الـ PCA والـ basilar"
+      - "تفرّق AICA عن PICA عن ASA في جذع المخ"
+      - "تفرّق إصابات راس المولود"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ anterior circulation"
+        text: |-
+          افتكر الـ homunculus: الرجل في النص (جوه الـ fissure)، والوش والإيد على الجنب.
+          - **ACA**: بيغذّي النص ← ==شلل وفقدان إحساس في الرجل== المقابلة + urinary incontinence.
+          - **MCA**: بيغذّي الجنب ← شلل الوش (النص التحتاني) والدراع المقابل. لو في الناحية الـ **dominant** ← aphasia (Wernicke في الـ temporal، Broca في الـ frontal). لو الـ **nondominant** ← hemineglect.
+          - **Lenticulostriate**: الـ internal capsule ← ==pure motor stroke== من غير أي علامة cortical (لا aphasia ولا neglect)، وده مكان الـ **lacunar infarcts** من الضغط العالي (lipohyalinosis).
+        page: 526
+        quote: "Contralateral paralysis and sensory loss—lower limb, urinary incontinence."
+      - kind: check
+        question: "A woman suddenly develops weakness and numbness of the left leg with urinary incontinence; her arm and face are normal. Which artery is occluded?"
+        options:
+          - "Right anterior cerebral artery"
+          - "Right middle cerebral artery"
+          - "Left anterior cerebral artery"
+          - "Right lenticulostriate artery"
+        answer: 0
+        why:
+          - "صح: رجل بس + incontinence = ACA، والناحية المقابلة للأعراض (اليمين)."
+          - "الـ MCA بيضرب الوش والدراع أكتر من الرجل."
+          - "الإصابة دايماً عكس الأعراض: رجل شمال = مخ يمين."
+          - "الـ lenticulostriate بيعمل شلل الوش والدراع والرجل مع بعض (internal capsule)."
+        page: 526
+        quote: "Contralateral paralysis and sensory loss—lower limb, urinary incontinence."
+      - kind: explain
+        title: "الـ PCA والـ basilar"
+        text: |-
+          - **PCA** بيغذّي الـ occipital ← ==hemianopia مع macular sparing== (الـ macula ليها دم من الـ MCA كمان). لو الـ dominant ووصل للـ splenium ← **alexia without agraphia** (يكتب بس مش قادر يقرا اللي كتبه). لو الـ nondominant ← **prosopagnosia** (مايعرفش الوشوش).
+          - **Weber syndrome**: فروع الـ PCA للـ midbrain ← CN III palsy في نفس الناحية + hemiplegia في الناحية التانية.
+          - **Basilar**: ==locked-in syndrome==: شلل الأربع أطراف والوش، بس الوعي سليم (الـ RAS سليم)، والعينين بتتحرك لفوق وتحت بس (بيرمش ويبص لفوق).
+        page: 526
+        quote: "Contralateral hemianopia with macular sparing; alexia without agraphia (dominant hemisphere, extending to splenium of corpus callosum); prosopagnosia"
+      - kind: figure
+        title: "جذع المخ: الجنب × النص"
+        svg: |-
+          <svg viewBox="0 0 380 220" xmlns="http://www.w3.org/2000/svg">
+            <ellipse class="fg-box" cx="120" cy="110" rx="100" ry="80"/>
+            <rect class="fg-acc" x="100" y="40" width="40" height="140" rx="10"/>
+            <ellipse class="fg-bad" cx="50" cy="110" rx="28" ry="50"/>
+            <ellipse class="fg-bad" cx="190" cy="110" rx="28" ry="50"/>
+            <text x="102" y="22" class="t-sm t-b t-acc">Medial</text>
+            <text x="104" y="104" class="t-sm">CST</text>
+            <text x="104" y="120" class="t-sm">ML</text>
+            <text x="104" y="136" class="t-sm">XII</text>
+            <text x="2" y="40" class="t-sm t-b t-bad">Lateral</text>
+            <text x="34" y="106" class="t-sm">V, VIII</text>
+            <text x="34" y="122" class="t-sm">STT</text>
+            <text x="240" y="40" class="t-sm t-b">Lateral = PICA or AICA</text>
+            <text x="240" y="58" class="t-sm">vertigo, Horner,</text>
+            <text x="240" y="74" class="t-sm">ataxia, crossed</text>
+            <text x="240" y="90" class="t-sm">pain/temp loss</text>
+            <text x="240" y="120" class="t-sm t-b">PICA adds:</text>
+            <text x="240" y="136" class="t-sm">hoarse, dysphagia</text>
+            <text x="240" y="160" class="t-sm t-b">AICA adds:</text>
+            <text x="240" y="176" class="t-sm">facial palsy, deaf</text>
+            <text x="240" y="204" class="t-sm t-b t-acc">Medial = ASA</text>
+          </svg>
+        caption: "النص (ASA): الـ corticospinal (شلل عكسي)، الـ medial lemniscus (proprioception عكسي)، والـ XII (اللسان يميل ناحية الإصابة). الجنب (PICA أو AICA): vertigo، Horner، ataxia، والإحساس بالألم والحرارة يروح من الوش في نفس الناحية والجسم في الناحية التانية. الفرق بين الاتنين: PICA = nucleus ambiguus (صوت وبلع)، AICA = facial nucleus وودن."
+        alt: "Cross-section of the brainstem. A medial strip labeled corticospinal tract, medial lemniscus and hypoglossal nerve is supplied by the anterior spinal artery. Lateral zones containing CN V and VIII nuclei and the spinothalamic tract are supplied by PICA or AICA. Side notes: lateral lesions cause vertigo, Horner syndrome, ataxia and crossed pain and temperature loss; PICA adds hoarseness and dysphagia; AICA adds facial palsy and deafness."
+        page: 527
+        quote: "Nucleus ambiguus effects are specific to PICA lesions D ."
+      - kind: table
+        title: "AICA × PICA"
+        columns: ["", "AICA (lateral pontine)", "PICA (lateral medullary, Wallenberg)"]
+        rows:
+          - ["Specific nucleus", "Facial nerve nuclei", "Nucleus ambiguus (CN IX, X)"]
+          - ["Specific signs", "LMN facial palsy, ↓ lacrimation, ↓ salivation, ↓ taste", "Dysphagia, hoarseness, ↓ gag reflex, hiccups"]
+          - ["Ear", "Ipsilateral sensorineural deafness (labyrinthine artery)", "Spared"]
+          - ["Shared", "Vertigo, nystagmus, Horner, ataxia, crossed pain/temp loss", "Same"]
+        hide: [[0, 1], [0, 2], [1, 2], [2, 1]]
+        page: 526
+        quote: "Facial nerve nuclei effects are specific to AICA lesions."
+      - kind: check
+        question: "A man has vertigo, hoarseness, difficulty swallowing, a left Horner syndrome, and loss of pain sensation on the left face and right body. Which artery is occluded?"
+        options:
+          - "Left posterior inferior cerebellar artery"
+          - "Left anterior inferior cerebellar artery"
+          - "Left anterior spinal artery"
+          - "Basilar artery"
+        answer: 0
+        why:
+          - "صح: Wallenberg، والبحة والبلع (nucleus ambiguus) خاصين بالـ PICA. «Don't pick a lame horse that can't eat»."
+          - "الـ AICA بيعمل facial palsy وصمم بدل البحة."
+          - "الـ ASA بيعمل شلل ولسان مايل، مش Horner."
+          - "الـ basilar بيعمل locked-in."
+        page: 527
+        quote: "“Don’t pick a (PICA) lame (lateral medullary syndrome) horse (hoarseness) that can’t eat (dysphagia).”"
+      - kind: explain
+        title: "الـ medial medullary"
+        text: |-
+          الـ **ASA** بيغذّي النص، و ==«Ants love M&M's»==: **A**SA ← **M**edial **M**edullary.
+
+          3 حاجات: شلل الدراع والرجل في الناحية التانية (corticospinal)، ↓ proprioception في الناحية التانية (medial lemniscus)، واللسان ==يميل ناحية الإصابة== (hypoglossal).
+        page: 527
+        quote: "Ipsilateral hypoglossal dysfunction (tongue deviates ipsilaterally)."
+      - kind: explain
+        title: "نزيف جوه البطينات عند المبتسر"
+        text: |-
+          الـ **germinal matrix** طبقة مليانة أوعية رفيعة جنب البطينات. في المبتسر وناقص الوزن: الـ glial support ضعيف والـ **autoregulation** للضغط مش شغالة، فالأوعية تفرقع والدم يدخل البطينات.
+
+          الشكل: تغيّر في الوعي، ==fontanelle منفوخة==، hypotension، تشنجات، coma.
+        page: 527
+        quote: "Originates in germinal matrix, a highly vascularized layer within the subventricular zone."
+      - kind: sort
+        prompt: "حط كل وصف في إصابة راس المولود بتاعته"
+        bins: ["Caput succedaneum", "Subgaleal hemorrhage", "Cephalohematoma"]
+        cards:
+          - { text: "Edema above periosteum, crosses sutures", bin: 0 }
+          - { text: "Prolonged engagement in the birth canal, resolves alone", bin: 0 }
+          - { text: "Emissary veins torn, can cause shock", bin: 1 }
+          - { text: "Diffuse fluctuant swelling spreading back and sideways", bin: 1 }
+          - { text: "Under periosteum, stops at sutures", bin: 2 }
+          - { text: "Firm swelling, may cause indirect hyperbilirubinemia", bin: 2 }
+        why: "الترتيب من بره لجوه: caput فوق الـ periosteum (ميّة، بريئة)، subgaleal بين الـ periosteum والـ galea (دم كتير وخطر)، و cephalohematoma تحت الـ periosteum فبيقف عند الـ sutures."
+        page: 527
+        quote: "Blood accumulation between skull and periosteum; does not cross suture lines."
+      - kind: check
+        question: "A newborn delivered by vacuum has a boggy scalp swelling that grows over hours, falling hemoglobin and tachycardia. Where is the blood?"
+        options:
+          - "Between periosteum and galeal aponeurosis"
+          - "Between skull and periosteum"
+          - "Above the periosteum as edema"
+          - "In the germinal matrix"
+        answer: 0
+        why:
+          - "صح: subgaleal hemorrhage، مساحة كبيرة ممكن تاخد دم كتير لحد shock."
+          - "ده cephalohematoma، بيقف عند الـ sutures ومش بيعمل shock."
+          - "ده caput، ميّة مش دم."
+          - "ده نزيف جوه المخ عند المبتسر."
+        page: 527
+        quote: "blood accumulation between periosteum and galeal aponeurosis"
+      - kind: try
+        items: [neuro.L03.033, neuro.L03.034, neuro.L03.036, neuro.L03.038]
+    recap:
+      - "ACA = رجل + incontinence، MCA = وش ودراع + aphasia أو neglect، lenticulostriate = pure motor."
+      - "PCA = hemianopia مع macular sparing؛ basilar = locked-in."
+      - "AICA = facial nucleus وودن؛ PICA = nucleus ambiguus (بحة وبلع)."
+      - "ASA = medial medullary: Ants love M&M's."
+      - "Caput فوق الـ periosteum، subgaleal بين، cephalohematoma تحت."
+    practice: [neuro.L03.023, neuro.L03.024, neuro.L03.025, neuro.L03.026, neuro.L03.027, neuro.L03.028, neuro.L03.029, neuro.L03.030, neuro.L03.031, neuro.L03.032, neuro.L03.033, neuro.L03.034, neuro.L03.035, neuro.L03.036, neuro.L03.037, neuro.L03.038]
+  - id: neuro.L03.lesson3
+    title: "النزيف جوه الدماغ: شكله على الـ CT بيقول مصدره"
+    hook: "عدسة ولّا هلال؟ سؤال واحد على الـ CT بيفرّق بين شريان ووريد"
+    minutes: 10
+    pages: [528, 530]
+    topics: [epidural-hematoma, subdural-hematoma, subarachnoid-hemorrhage, intraparenchymal-hemorrhage, thalamic-pain-syndrome, phantom-limb-pain, diffuse-axonal-injury, aphasia, aneurysms, fever-vs-heat-stroke]
+    goals:
+      - "تفرّق الـ epidural عن الـ subdural بالمصدر والشكل"
+      - "تعرف مضاعفات الـ subarachnoid hemorrhage وعلاجها"
+      - "تحدد نوع الـ aphasia من الكلام والفهم والتكرار"
+      - "تربط مكان الـ aneurysm بالعَرَض"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "عدسة × هلال"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <circle class="fg-box" cx="90" cy="100" r="72"/>
+            <line class="fg-thin" x1="90" y1="100" x2="54" y2="38" stroke-dasharray="4 4"/>
+            <line class="fg-thin" x1="90" y1="100" x2="54" y2="162" stroke-dasharray="4 4"/>
+            <path class="fg-bad" d="M54 38 A72 72 0 0 0 54 162 Q98 100 54 38 Z"/>
+            <text x="58" y="190" class="t-sm t-b">Epidural</text>
+            <circle class="fg-box" cx="270" cy="100" r="72"/>
+            <line class="fg-thin" x1="270" y1="100" x2="234" y2="38" stroke-dasharray="4 4"/>
+            <line class="fg-thin" x1="270" y1="100" x2="234" y2="162" stroke-dasharray="4 4"/>
+            <path class="fg-bad" d="M282.5 29.1 A72 72 0 1 0 282.5 170.9 A71 71 0 1 1 282.5 29.1 Z"/>
+            <text x="236" y="190" class="t-sm t-b">Subdural</text>
+            <text x="2" y="16" class="t-sm t-mut">dashed = sutures</text>
+            <text x="96" y="92" class="t-sm">artery:</text>
+            <text x="96" y="108" class="t-sm">stops at</text>
+            <text x="96" y="124" class="t-sm">sutures</text>
+            <text x="276" y="92" class="t-sm">veins:</text>
+            <text x="276" y="108" class="t-sm">crosses</text>
+            <text x="276" y="124" class="t-sm">sutures</text>
+          </svg>
+        caption: "الـ epidural: الـ middle meningeal artery بيضخ دم بضغط شرياني بين العضمة والـ dura، والـ dura لازقة في الـ sutures، فالدم يتكوّر زي العدسة (biconvex) وما يعدّيش الـ suture. الـ subdural: الـ bridging veins بتنزف تحت الـ dura، فالدم يفرش زي الهلال ويعدّي الـ sutures."
+        alt: "Two skull outlines side by side, each with a dashed suture line. On the left, an epidural hematoma is drawn as a lens-shaped collection against the skull that stops at the suture, labeled artery. On the right, a subdural hematoma is drawn as a crescent along the inner skull that crosses the suture, labeled veins."
+        page: 528
+        quote: "CT shows biconvex (lentiform), hyperdense blood collection B not crossing suture lines."
+      - kind: explain
+        title: "الـ epidural والـ lucid interval"
+        text: |-
+          ضربة على الـ **pterion** (أرق حتة في جنب الجمجمة) ← كسر ← قطع الـ ==middle meningeal artery== (فرع من الـ maxillary).
+
+          المريض يغمى عليه لحظة، يفوق ويبقى كويس (==lucid interval==)، وبعدين يقع فجأة لأن الدم الشرياني بيكبر بسرعة ← transtentorial herniation و CN III palsy.
+        page: 528
+        quote: "Might present with transient loss of consciousness → recovery (“lucid interval”) → rapid deterioration due to hematoma expansion."
+      - kind: explain
+        title: "الـ subdural: حاد ولّا مزمن"
+        text: |-
+          المصدر: ==bridging veins==.
+          - **حاد**: ضربة قوية، والدم على الـ CT أبيض (hyperdense).
+          - **مزمن**: ضربة بسيطة عند واحد كبير في السن أو بيشرب كحول، لأن الـ **atrophy** بتشد الأوردة. الدم قديم فبيبان غامق (hypodense).
+
+          وبيحصل كمان في الـ **shaken baby**.
+        page: 528
+        quote: "Rupture of bridging veins."
+      - kind: check
+        question: "An 80-year-old man on no anticoagulants has 3 weeks of confusion after bumping his head on a cabinet. CT shows a dark crescent over the left hemisphere crossing suture lines. What bled?"
+        options:
+          - "Bridging veins"
+          - "Middle meningeal artery"
+          - "Charcot-Bouchard microaneurysm"
+          - "Saccular aneurysm"
+        answer: 0
+        why:
+          - "صح: chronic subdural، هلال غامق عند كبير السن مع atrophy."
+          - "الشرياني = epidural: عدسة بيضا ما تعدّيش الـ sutures وتدهور سريع."
+          - "دي بتنزف جوه المخ نفسه (putamen) مع الضغط العالي."
+          - "الـ berry aneurysm بيعمل subarachnoid hemorrhage مع worst headache."
+        page: 528
+        quote: "Crescent-shaped hemorrhage (red arrows in C and D ) that crosses suture lines."
+      - kind: explain
+        title: "الـ subarachnoid: أسوأ صداع في حياتي"
+        text: |-
+          السبب: trauma أو انفجار **aneurysm** (berry) أو AVM. الصداع فجائي «==worst headache of my life==»، والـ LP دموي أو أصفر (**xanthochromia**).
+
+          الخطر بعدين: ==vasospasm== بين يوم 3 و 10 من تكسير الدم ← ischemic infarct، و **nimodipine** بيحسّن النتيجة. وكمان ↑ خطر الـ hydrocephalus.
+
+          الـ **intraparenchymal**: أغلبه من الضغط العالي (Charcot-Bouchard في الـ putamen)، وعند الكبار lobar ومتكرر ← **amyloid angiopathy**.
+        page: 528
+        quote: "Vasospasm can occur due to blood breakdown or rebleed 3-10 days after hemorrhage → ischemic infarct; nimodipine may improve neurologic outcome."
+      - kind: table
+        title: "Aneurysm فين، وبيعمل إيه"
+        columns: ["Site", "Effect"]
+        rows:
+          - ["ACom (most common saccular site)", "Compression: bitemporal hemianopia; rupture: ACA ischemia (contralateral leg)"]
+          - ["MCA", "Rupture: contralateral arm and lower face weakness"]
+          - ["PCom", "Compression of CN III: blown pupil, ptosis, down and out eye"]
+          - ["Charcot-Bouchard", "Small vessels (lenticulostriate), hypertension; not visible on angiography"]
+        hide: [[0, 1], [2, 1], [3, 1]]
+        page: 530
+        quote: "PCom—compression → ipsilateral CN III palsy → mydriasis (“blown pupil”); may also see ptosis, “down and out” eye."
+      - kind: check
+        question: "A woman has a sudden dilated right pupil with ptosis and an eye that rests down and out, plus a new headache. Where is the aneurysm?"
+        options:
+          - "Right posterior communicating artery"
+          - "Anterior communicating artery"
+          - "Right middle cerebral artery"
+          - "Basilar tip"
+        answer: 0
+        why:
+          - "صح: الـ PCom جنب الـ CN III، والألياف الـ parasympathetic بره العصب فالـ pupil يتأثر الأول."
+          - "الـ ACom بيضغط على الـ chiasm (bitemporal hemianopia)."
+          - "الـ MCA بيعمل شلل دراع ووش لما ينفجر."
+          - "مش أشهر سبب لـ CN III palsy معزول بـ pupil."
+        page: 530
+        quote: "PCom—compression → ipsilateral CN III palsy → mydriasis (“blown pupil”); may also see ptosis, “down and out” eye."
+      - kind: table
+        title: "الـ aphasia: كلام وفهم وتكرار"
+        columns: ["Type", "Area", "Fluent?", "Comprehension"]
+        rows:
+          - ["Broca", "Inferior frontal gyrus", "No", "Intact"]
+          - ["Wernicke", "Superior temporal gyrus", "Yes (word salad)", "Impaired"]
+          - ["Conduction", "Arcuate fasciculus", "Yes", "Intact; repetition impaired"]
+          - ["Global", "Broca + Wernicke", "No", "Impaired"]
+        hide: [[0, 2], [1, 3], [2, 1], [3, 3]]
+        page: 529
+        quote: "Wernicke area in superior temporal gyrus of temporal lobe. Fluent speech with impaired language comprehension."
+      - kind: aside
+        tone: tip
+        text: "==Broca = broken boca== (boca = بُق بالإسباني): بيفهم ومتضايق إنه مش عارف يطلّع الكلام. **Wernicke** = word salad: بيتكلم كتير ومن غير معنى ومش حاسس. وما تخلطش الـ aphasia (لغة) بالـ **dysarthria** (عضلات الكلام)."
+        page: 529
+        quote: "Broca = broken boca (boca = mouth in Spanish)."
+      - kind: explain
+        title: "ألم من غير سبب ظاهر، وصدمة الـ white matter"
+        text: |-
+          - **Thalamic pain syndrome**: بعد infarct في الـ VPL (lacunar أو PCA)، أيام لسنين بعدين يجي ألم وحرقان وallodynia في الناحية التانية.
+          - **Phantom limb pain**: ألم في طرف متقطع، من ==reorganization في الـ 1° somatosensory cortex==.
+          - **Diffuse axonal injury**: تسارع وتباطؤ سريع (حادثة عربية) ← shearing للـ white matter ← coma، والـ MRI فيه نقط نزيف كتير.
+        page: 529
+        quote: "Traumatic shearing of white matter tracts during rapid acceleration and/or deceleration of the brain"
+      - kind: sort
+        prompt: "Fever ولّا heat stroke؟"
+        bins: ["Fever", "Heat stroke"]
+        cards:
+          - { text: "Cytokines from infection", bin: 0 }
+          - { text: "Usually under 40°C", bin: 0 }
+          - { text: "Febrile seizure", bin: 0 }
+          - { text: "Cannot dissipate heat after exertion", bin: 1 }
+          - { text: "Rhabdomyolysis, AKI, DIC", bin: 1 }
+          - { text: "Rapid external cooling", bin: 1 }
+        why: "الـ fever = الـ hypothalamus رفع الـ set point بنفسه، فالـ antipyretics بتشتغل. الـ heat stroke = الجسم مش قادر يطلّع الحرارة، فالـ set point سليم والـ acetaminophen مالوش لازمة: لازم تبرّد من بره."
+        page: 530
+        quote: "Rapid external cooling, rehydration and electrolyte correction"
+      - kind: try
+        items: [neuro.L03.041, neuro.L03.047, neuro.L03.059, neuro.L03.064, neuro.L03.066]
+    recap:
+      - "Epidural: middle meningeal artery، pterion، lucid interval، عدسة ما تعدّيش الـ sutures."
+      - "Subdural: bridging veins، هلال يعدّي الـ sutures، مزمن عند الكبار."
+      - "SAH: worst headache، xanthochromia، vasospasm يوم 3-10 ← nimodipine."
+      - "Broca بيفهم ومش بيتكلم، Wernicke بيتكلم ومش بيفهم، conduction مش بيكرر."
+      - "PCom aneurysm ← CN III palsy بـ blown pupil."
+    practice: [neuro.L03.001, neuro.L03.002, neuro.L03.003, neuro.L03.004, neuro.L03.005, neuro.L03.006, neuro.L03.007, neuro.L03.008, neuro.L03.009, neuro.L03.010, neuro.L03.011, neuro.L03.012, neuro.L03.013, neuro.L03.014, neuro.L03.015, neuro.L03.016, neuro.L03.017, neuro.L03.018, neuro.L03.019, neuro.L03.020, neuro.L03.021, neuro.L03.022]
+  - id: neuro.L03.lesson4
+    title: "تشنجات وصداع وحركات غريبة"
+    hook: "الـ vignette بتوصف حركة أو صداع في سطرين، وإنت لازم تسمّيه وتعالجه"
+    minutes: 10
+    pages: [531, 533]
+    topics: [seizures, focal-seizures, generalized-seizures, headaches, trigeminal-neuralgia, dyskinesias, restless-legs-syndrome]
+    goals:
+      - "تقسّم الـ seizures على الوعي والانتشار"
+      - "تفرّق tension و migraine و cluster وعلاج كل واحد"
+      - "تحدد مكان الإصابة من نوع الحركة"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ seizure على 3 مراحل"
+        text: |-
+          تفريغ كهربا متزامن وسريع. المراحل: **aura** (ريحة أو طعم غريب)، **ictal**، وبعدين **postictal** (رجوع تدريجي).
+
+          الـ **focal** بيبدأ من حتة واحدة، أغلبها ==medial temporal lobe==:
+          - **focal aware**: الوعي سليم.
+          - **focal impaired awareness**: الوعي متأثر مع automatisms (لعق الشفايف، لعب في الهدوم).
+
+          الـ **status epilepticus**: تشنج ==5 دقايق أو أكتر== أو تشنجات ورا بعض من غير ما يفوق.
+        page: 531
+        quote: "Convulsive status epilepticus—continuous (≥5 min) or recurring seizures without interictal return to baseline consciousness that may result in brain injury."
+      - kind: figure
+        title: "شجرة الـ seizures"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="nL03b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+            <rect class="fg-acc" x="20" y="10" width="120" height="30" rx="8"/>
+            <text x="42" y="30" class="t-sm t-b">Focal (one area)</text>
+            <rect class="fg-acc" x="200" y="10" width="140" height="30" rx="8"/>
+            <text x="214" y="30" class="t-sm t-b">Generalized (diffuse)</text>
+            <line class="fg-arrow" x1="50" y1="40" x2="40" y2="66" marker-end="url(#nL03b)"/>
+            <line class="fg-arrow" x1="110" y1="40" x2="120" y2="66" marker-end="url(#nL03b)"/>
+            <text x="4" y="82" class="t-sm">Aware</text>
+            <text x="90" y="82" class="t-sm">Impaired</text>
+            <text x="90" y="96" class="t-sm t-mut">automatisms</text>
+            <line class="fg-arrow" x1="110" y1="104" x2="200" y2="120" marker-end="url(#nL03b)"/>
+            <text x="120" y="128" class="t-sm t-mut">2° generalized</text>
+            <text x="210" y="70" class="t-sm"><tspan class="t-b">Absence</tspan>: 3 Hz, stare</text>
+            <text x="210" y="96" class="t-sm"><tspan class="t-b">Myoclonic</tspan>: jerks</text>
+            <text x="210" y="122" class="t-sm"><tspan class="t-b">Tonic-clonic</tspan>: postictal</text>
+            <text x="210" y="148" class="t-sm"><tspan class="t-b">Tonic</tspan>: stiffening</text>
+            <text x="210" y="174" class="t-sm"><tspan class="t-b">Atonic</tspan>: drop</text>
+          </svg>
+        caption: "الـ focal يا إما الوعي سليم يا إما متأثر، وممكن ينتشر ويبقى 2° generalized. الـ generalized من الأول: absence (بصّة فاضية 10 ثواني و 3 Hz spike-and-wave، من غير postictal)، myoclonic (نفضات والوعي سليم)، tonic-clonic (تخشب ونفض و postictal confusion وعض لسان)، tonic، و atonic (يقع زي الإغماء)."
+        alt: "Seizure classification tree. Focal seizures split into aware and impaired awareness with automatisms, and can spread to secondary generalized. Generalized seizures list absence with 3 Hz discharges and staring, myoclonic jerks, tonic-clonic with postictal confusion, tonic stiffening, and atonic drop attacks."
+        page: 531
+        quote: "Absence (petit mal)—3 Hz spike and-wave discharges on EEG; short (usually 10 seconds), frequent episodes of blank stare, possible automatisms; no postictal confusion."
+      - kind: check
+        question: "A 7-year-old girl has dozens of 10-second staring spells a day; she resumes her sentence afterward and the spells can be provoked by hyperventilation. What does the EEG show?"
+        options:
+          - "3 Hz spike-and-wave discharges"
+          - "Focal temporal spikes"
+          - "Periodic sharp waves"
+          - "Normal EEG during events"
+        answer: 0
+        why:
+          - "صح: absence seizure."
+          - "الـ temporal focus بيعمل focal impaired awareness مع postictal."
+          - "الـ periodic sharp waves بتاعة Creutzfeldt-Jakob."
+          - "الـ EEG الطبيعي أثناء النوبة بيشاور على psychogenic nonepileptic events."
+        page: 531
+        quote: "Can be triggered by hyperventilation"
+      - kind: explain
+        title: "مين بيتشنج من إيه"
+        text: |-
+          الأسباب حسب السن:
+          - أقل من 18: genetic، congenital، metabolic، infection (حتى الـ febrile)، trauma.
+          - 18-65: trauma، infection، ==tumor==، stroke.
+          - أكبر من 65: ==stroke== الأول، وبعده neurodegenerative و tumor.
+
+          والـ **psychogenic nonepileptic events**: نوبة طويلة من غير postictal ولا عض لسان، مع ==video EEG طبيعي==.
+
+          ملحوظة: الـ febrile seizures مش epilepsy.
+        page: 531
+        quote: "Adults >65: stroke, neurodegenerative disease, tumor, trauma, metabolic, infection"
+      - kind: table
+        title: "3 صداعات أساسية"
+        columns: ["", "Tension-type", "Migraine", "Cluster"]
+        rows:
+          - ["Side", "Bilateral", "Unilateral", "Unilateral periorbital"]
+          - ["Duration", ">30 min, constant", "4-72 hr", "15 min-3 hr, repetitive"]
+          - ["Clue", "Bandlike, no nausea", "Pulsating, nausea, photophobia, aura", "Lacrimation, rhinorrhea, Horner; males"]
+          - ["Acute", "Analgesics, NSAIDs", "NSAIDs, triptans, antiemetics", "Sumatriptan, 100% oxygen"]
+          - ["Prevention", "Amitriptyline", "β-blockers, topiramate, valproate, anti-CGRP", "Verapamil"]
+        hide: [[2, 3], [3, 3], [4, 3], [0, 2]]
+        page: 532
+        quote: "Excruciating periorbital pain with autonomic symptoms (eg, lacrimation, rhinorrhea, conjunctival injection)."
+      - kind: mnemonic
+        word: "POUND"
+        parts:
+          - { key: "P", text: "Pulsatile" }
+          - { key: "O", text: "One-day duration" }
+          - { key: "U", text: "Unilateral" }
+          - { key: "N", text: "Nausea" }
+          - { key: "D", text: "Disabling" }
+        hook: "الـ migraine بتخبط في راسك زي الشاكوش: POUND. والسبب تهيّج الـ CN V والأوعية (substance P و CGRP)."
+        page: 532
+        quote: "POUND–Pulsatile, One-day duration, Unilateral, Nausea, Disabling."
+      - kind: check
+        question: "A 35-year-old man wakes nightly for 3 weeks with 45 minutes of stabbing pain behind his right eye, a runny right nostril and a droopy right eyelid. What prevents these attacks?"
+        options:
+          - "Verapamil"
+          - "Sumatriptan"
+          - "Carbamazepine"
+          - "Amitriptyline"
+        answer: 0
+        why:
+          - "صح: cluster headache، والوقاية verapamil."
+          - "Sumatriptan و الأكسجين 100% علاج النوبة، مش وقاية."
+          - "Carbamazepine لـ trigeminal neuralgia (ثواني، مع لمس الوش)."
+          - "Amitriptyline وقاية tension و migraine."
+        page: 532
+        quote: "Acute: sumatriptan, 100% O2 . Prophylaxis: verapamil."
+      - kind: explain
+        title: "Trigeminal neuralgia"
+        text: |-
+          نوبات ألم زي ==الكهربا== لـ **ثواني** في V2 أو V3، بتيجي مع لمس الوش أو المضغ أو الكلام. السبب غالباً **vascular loop** بيضغط على جذر الـ CN V.
+
+          العلاج: ==carbamazepine== أو oxcarbazepine.
+        page: 532
+        quote: "Most cases are due to compression of CN V root by an aberrant vascular loop."
+      - kind: match
+        prompt: "وصّل كل حركة بمكان الإصابة أو السبب"
+        pairs:
+          - ["Hemiballismus", "Contralateral subthalamic nucleus"]
+          - ["Resting pill-rolling tremor", "Substantia nigra"]
+          - ["Intention tremor", "Cerebellum"]
+          - ["Chorea, athetosis", "Basal ganglia (Huntington)"]
+          - ["Asterixis", "Hepatic encephalopathy"]
+        why: "half-of-body going ballistic = STN في الناحية التانية. الـ resting tremor بيروح مع الحركة (park your car = at rest)، والـ intention tremor بيزيد كل ما يقرب من الهدف (cerebellum)."
+        page: 533
+        quote: "Caused by lesion to contralateral subthalamic nucleus (eg, due to lacunar stroke)"
+      - kind: explain
+        title: "Essential tremor و restless legs"
+        text: |-
+          - **Essential tremor**: رعشة سريعة لما يمد إيده، بتزيد مع القلق، ==وبتقل مع الكحول== (فكتير بيعالجوا نفسهم بالشرب). غالباً في العيلة. العلاج: **propranolol** أو primidone.
+          - **Dystonia**: انقباض مستمر (writer's cramp، torticollis، blepharospasm) ← botulinum toxin.
+          - **Restless legs**: إحساس مزعج بالليل ورغبة يحرك رجليه، بيرتاح بالمشي. افتكر ==iron deficiency== و CKD والسكر. العلاج: gabapentinoids أو dopamine agonists.
+        page: 533
+        quote: "Patients often self-medicate with alcohol, which ↓ tremor amplitude"
+      - kind: check
+        question: "A 62-year-old woman with CKD has crawling sensations in her legs every evening that force her to walk around. Which test should be checked first?"
+        options:
+          - "Serum ferritin"
+          - "Serum ceruloplasmin"
+          - "Brain MRI for basal ganglia lesions"
+          - "Thyroid antibodies"
+        answer: 0
+        why:
+          - "صح: restless legs مرتبطة بنقص الحديد، و CKD و DM."
+          - "Ceruloplasmin لـ Wilson disease."
+          - "الـ restless legs مالهاش lesion في الـ MRI."
+          - "مش من الأسباب اللي الكتاب ذكرها."
+        page: 533
+        quote: "Usually idiopathic (often with genetic predisposition), but may be associated with iron deficiency, CKD, diabetes mellitus (especially with neuropathy)."
+      - kind: try
+        items: [neuro.L03.074, neuro.L03.076, neuro.L03.080, neuro.L03.082, neuro.L03.085]
+    recap:
+      - "Status epilepticus = 5 دقايق أو أكتر."
+      - "Absence: 3 Hz، بصّة 10 ثواني، من غير postictal، hyperventilation."
+      - "Migraine = POUND؛ cluster = حوالين العين مع دموع وزكام، verapamil للوقاية."
+      - "Trigeminal neuralgia = كهربا لثواني ← carbamazepine."
+      - "Hemiballismus = STN المقابل؛ essential tremor بيقل بالكحول ← propranolol."
+    practice: [neuro.L03.023, neuro.L03.024, neuro.L03.025, neuro.L03.026, neuro.L03.027, neuro.L03.028, neuro.L03.029, neuro.L03.030, neuro.L03.031, neuro.L03.032, neuro.L03.033, neuro.L03.034, neuro.L03.035, neuro.L03.036, neuro.L03.037, neuro.L03.038]
+  - id: neuro.L03.lesson5
+    title: "الأمراض اللي بتاكل المخ بالراحة، والبطينات اللي بتكبر"
+    hook: "رعشة ولّا رقص ولّا نسيان؟ وكل واحد وراه بروتين متلخبط باسمه"
+    minutes: 10
+    pages: [534, 536]
+    topics: [neurodegenerative-movement-disorders, dementia, idiopathic-intracranial-hypertension, hydrocephalus]
+    goals:
+      - "تعرف TRAP بتاعة Parkinson والـ Lewy bodies"
+      - "تفهم Huntington بالـ CAG والـ striatum"
+      - "تفرّق أنواع الـ dementia بالبروتين والشكل"
+      - "تفرّق الـ hydrocephalus بأنواعه عن الـ ex vacuo"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Parkinson: body TRAP"
+        text: |-
+          الـ dopaminergic neurons في الـ ==substantia nigra pars compacta== بتموت (فتبان باهتة)، وجواها **Lewy bodies** من α-synuclein («Parkinsynuclein»).
+
+          الأعراض بعد الـ 60 (**TRAP**): **T**remor وقت الراحة (pill-rolling)، **R**igidity (cogwheel)، **A**kinesia (مشية قصيرة وخط صغير)، و **P**ostural instability. الـ dementia متأخرة.
+
+          الـ **PSP**: TRAP + ==vertical gaze palsy== + hummingbird sign على الـ MRI.
+        page: 534
+        quote: "Affected neurons contain Lewy bodies: intracellular eosinophilic inclusions composed of α-synuclein B . Think “Parkinsynuclein.”"
+      - kind: explain
+        title: "Huntington: CAG على chromosome 4"
+        text: |-
+          **Autosomal dominant**: تكرار ==CAG== في جين الـ huntingtin على **chromosome 4**، والنتيجة toxic gain of function. التكرار بيزيد مع الأجيال (**anticipation**).
+
+          الـ GABAergic neurons في الـ **striatum** بتموت: الـ caudate والـ putamen يضمروا والبطينات تكبر (ex vacuo). الكيميا: ↑ dopamine، ↓ GABA، ↓ ACh. والموت من الـ NMDA و ==glutamate excitotoxicity==.
+
+          الشكل بين 30 و 50: chorea، athetosis، عدوانية، اكتئاب، dementia.
+        page: 534
+        quote: "Autosomal dominant trinucleotide (CAG)n repeat expansion in huntingtin (HTT) gene on chromosome 4 (4 letters)"
+      - kind: check
+        question: "A 42-year-old man has 2 years of jerky, dance-like movements and irritability; his father had the same at an older age. Which change is seen in his brain?"
+        options:
+          - "Atrophy of the caudate and putamen"
+          - "Depigmented substantia nigra"
+          - "Atrophy of both hippocampi"
+          - "Midbrain atrophy with a hummingbird sign"
+        answer: 0
+        why:
+          - "صح: Huntington، الـ striatum بيضمر والبطينات تكبر. وبدأ بدري عن أبوه = anticipation."
+          - "ده Parkinson."
+          - "ده Alzheimer."
+          - "ده PSP."
+        page: 534
+        quote: "Atrophy of caudate and putamen with ex vacuo ventriculomegaly."
+      - kind: explain
+        title: "Alzheimer: plaques بره و tangles جوه"
+        text: |-
+          أشهر سبب للـ dementia في الكبار، وأكبر عامل خطر **السن**. الـ **Down syndrome** بيجيله بدري لأن الـ ==APP على chromosome 21==.
+
+          - **ApoE-4** بيزوّد الخطر و **ApoE-2** بيحمي («protwoctive»). APP و presenilin-1 و 2 = الأنواع العيلية.
+          - **Senile plaques**: Aβ بره الخلية (من تكسير الـ APP)، ممكن تعمل amyloid angiopathy ونزيف.
+          - **Neurofibrillary tangles**: tau جوه الخلية، و ==عددهم بيمشي مع شدة الـ dementia==.
+
+          وقبل ما تقول dementia، دوّر على الأسباب اللي بتتعالج: depression، hypothyroidism، B12، neurosyphilis، و NPH.
+        page: 534
+        quote: "Neurofibrillary tangles B : intracellular, hyperphosphorylated tau protein = insoluble cytoskeletal elements; number of tangles correlates with degree of dementia."
+      - kind: table
+        title: "أنواع الـ dementia"
+        columns: ["Type", "Clue", "Inclusion or finding"]
+        rows:
+          - ["Alzheimer", "Memory first, hippocampal atrophy", "Aβ plaques, tau tangles"]
+          - ["Frontotemporal", "Early personality change or aphasia", "Round tau Pick bodies or TDP-43"]
+          - ["Lewy body", "Fluctuations, visual hallucinations, REM behavior disorder, parkinsonism within 1 yr", "α-synuclein in cortex"]
+          - ["Vascular", "Step-wise decline", "Multiple infarcts on imaging"]
+          - ["Creutzfeldt-Jakob", "Rapid (weeks), startle myoclonus", "Spongiform cortex, 14-3-3 in CSF"]
+          - ["HIV-associated", "Subcortical, gait and mood", "Microglial nodules, giant cells"]
+        hide: [[1, 2], [2, 2], [3, 2], [4, 2]]
+        page: 535
+        quote: "Inclusions of hyperphosphorylated tau (round Pick bodies C ) or ubiquitinated TDP-43."
+      - kind: aside
+        tone: tip
+        text: "الـ dementia مع rigidity: لو الـ cognitive والـ motor جم ==في خلال سنة من بعض== = **DLB**. لو الحركة سبقت بأكتر من سنة = **Parkinson disease dementia**."
+        page: 535
+        quote: "cognitive and motor symptoms ≤1 yr apart → DLB (if >1 yr, = Parkinson disease dementia)."
+      - kind: check
+        question: "A 66-year-old man's memory and behavior collapse over 6 weeks; any loud noise makes his limbs jerk. EEG shows periodic sharp waves. What causes this disease?"
+        options:
+          - "Protease-resistant β-pleated prion protein"
+          - "Hyperphosphorylated tau in round inclusions"
+          - "Multiple small infarcts"
+          - "JC virus in oligodendrocytes"
+        answer: 0
+        why:
+          - "صح: Creutzfeldt-Jakob، PrPc يتحول لـ PrPsc، والقشرة تبقى spongiform من غير التهاب."
+          - "ده frontotemporal dementia، أبطأ بكتير."
+          - "ده vascular dementia، step-wise."
+          - "ده PML في الـ white matter عند الـ immunosuppressed."
+        page: 535
+        quote: "Rapidly progressive (weeks to months) dementia with myoclonus (“startle myoclonus”) and ataxia."
+      - kind: figure
+        title: "الـ CSF بيتسد فين؟"
+        svg: |-
+          <svg viewBox="0 0 372 210" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="nL03c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+            <rect class="fg-acc" x="10" y="20" width="90" height="34" rx="8"/>
+            <text x="18" y="41" class="t-sm t-b">Lateral vent.</text>
+            <rect class="fg-acc" x="10" y="88" width="90" height="34" rx="8"/>
+            <text x="22" y="109" class="t-sm t-b">3rd vent.</text>
+            <rect class="fg-acc" x="10" y="156" width="90" height="34" rx="8"/>
+            <text x="22" y="177" class="t-sm t-b">4th vent.</text>
+            <line class="fg-arrow" x1="55" y1="54" x2="55" y2="86" marker-end="url(#nL03c)"/>
+            <line class="fg-arrow" x1="55" y1="122" x2="55" y2="154" marker-end="url(#nL03c)"/>
+            <text x="64" y="74" class="t-sm t-mut">Monro</text>
+            <text x="64" y="142" class="t-sm t-mut">aqueduct</text>
+            <line class="fg-arrow" x1="100" y1="173" x2="196" y2="173" marker-end="url(#nL03c)"/>
+            <rect class="fg-box" x="200" y="156" width="150" height="34" rx="8"/>
+            <text x="212" y="177" class="t-sm t-b">Subarachnoid space</text>
+            <line class="fg-arrow" x1="275" y1="156" x2="275" y2="58" marker-end="url(#nL03c)"/>
+            <rect class="fg-box" x="200" y="20" width="150" height="34" rx="8"/>
+            <text x="206" y="41" class="t-sm t-b">Arachnoid granulations</text>
+            <text x="118" y="96" class="t-sm t-bad t-b">Block inside:</text>
+            <text x="118" y="112" class="t-sm t-bad">noncommunicating</text>
+            <text x="284" y="100" class="t-sm t-bad t-b">Poor</text>
+            <text x="284" y="116" class="t-sm t-bad t-b">absorption:</text>
+            <text x="284" y="132" class="t-sm t-bad">communicating</text>
+          </svg>
+        caption: "الـ CSF ماشي من الـ lateral للـ 3rd (foramen of Monro) للـ 4th (aqueduct)، وبعدين الـ subarachnoid space ويتمص في الـ arachnoid granulations. لو السدة جوه البطينات (colloid cyst، aqueduct stenosis، tumor) = noncommunicating، واللي قبل السدة بس هو اللي يكبر. لو الامتصاص بايظ (ندبة بعد meningitis) = communicating، وكل البطينات تكبر."
+        alt: "Flow diagram of CSF. Lateral ventricle to third ventricle through the foramen of Monro, to the fourth ventricle through the aqueduct, then to the subarachnoid space and up to the arachnoid granulations. A block inside the ventricles is labeled noncommunicating hydrocephalus; poor absorption at the granulations is labeled communicating hydrocephalus."
+        page: 536
+        quote: "Ventricles “upstream” of the obstruction are dilated."
+      - kind: explain
+        title: "NPH والـ pseudotumor"
+        text: |-
+          - **Normal pressure hydrocephalus**: راجل كبير، البطينات بتكبر وتشد ألياف الـ ==corona radiata== ← «wobbly, wacky, and wet»: magnetic gait، تخريف، و incontinence. بيتحسن بسحب CSF (LP أو shunt).
+          - **Ex vacuo**: البطينات كبيرة عشان المخ ==ضمر== (Alzheimer، Huntington)، والضغط طبيعي ومافيش الـ triad.
+          - **Idiopathic intracranial hypertension**: ↑ ICP مع ==MRI و CSF طبيعيين== (ممكن empty sella): صداع و papilledema، ونادراً CN VI palsy.
+        page: 536
+        quote: "Expansion of ventricles A distorts the fibers of the corona radiata → triad of gait apraxia (magnetic gait), cognitive dysfunction, and urinary incontinence."
+      - kind: check
+        question: "A 75-year-old woman has a magnetic gait, forgetfulness and urinary incontinence; CT shows large ventricles without widened sulci. What most likely improves her symptoms?"
+        options:
+          - "Removing CSF by lumbar puncture or shunt"
+          - "Donepezil"
+          - "Levodopa"
+          - "Acetazolamide for raised ICP"
+        answer: 0
+        why:
+          - "صح: NPH، وسحب الـ CSF بيحسّن المشية."
+          - "Donepezil لـ Alzheimer، والـ triad دي مش Alzheimer."
+          - "Levodopa لـ Parkinson، ومافيش رعشة."
+          - "الـ ICP في NPH مش عالي غير على فترات."
+        page: 536
+        quote: "Treatment: CSF drainage via LP or shunt placement."
+      - kind: try
+        items: [neuro.L03.093, neuro.L03.102, neuro.L03.103, neuro.L03.108, neuro.L03.114]
+    recap:
+      - "Parkinson = TRAP + Lewy bodies (α-synuclein) في الـ SNc."
+      - "Huntington = CAG على chromosome 4، الـ striatum يضمر، anticipation."
+      - "Alzheimer: plaques (Aβ) بره، tangles (tau) جوه وعددها = الشدة؛ APP على 21."
+      - "DLB = hallucinations وحركة في خلال سنة؛ CJD = سريع مع startle myoclonus."
+      - "Noncommunicating = سدة جوه؛ communicating = امتصاص؛ NPH = wobbly, wacky, wet."
+    practice: [neuro.L03.001, neuro.L03.002, neuro.L03.003, neuro.L03.004, neuro.L03.005, neuro.L03.006, neuro.L03.007, neuro.L03.008, neuro.L03.009, neuro.L03.010, neuro.L03.011, neuro.L03.012, neuro.L03.013, neuro.L03.014, neuro.L03.015, neuro.L03.016, neuro.L03.017, neuro.L03.018, neuro.L03.019, neuro.L03.020, neuro.L03.021, neuro.L03.022]
+  - id: neuro.L03.lesson6
+    title: "الـ myelin لما يتضرب، والأمراض اللي بتبان على الجلد"
+    hook: "ست شابة مش شايفة بعين واحدة، وطفل عنده بقع على جلده وتشنجات: الاتنين مرض في الـ nervous system"
+    minutes: 10
+    pages: [537, 539]
+    topics: [multiple-sclerosis, other-demyelinating-disorders, neurocutaneous-disorders]
+    goals:
+      - "تعرف شكل الـ MS وتشخيصه وعلاجه"
+      - "تفرّق الـ demyelination المركزي عن الطرفي"
+      - "تحفظ الـ neurocutaneous disorders بالجين والكروموسوم"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "MS: لطشات في أماكن وأوقات مختلفة"
+        text: |-
+          مرض **autoimmune** بيضرب الـ myelin في الـ CNS (الـ oligodendrocytes)، غالباً ستات بين 20 و 40، وأكتر كل ما تبعد عن خط الاستوا.
+
+          الشكل في 4 أماكن:
+          - العين: ==optic neuritis== (فقدان نظر بعين واحدة مع ألم و RAPD).
+          - جذع المخ والـ cerebellum: diplopia، ataxia، scanning speech، intention tremor، و **INO** (غالباً في الناحيتين).
+          - الـ pyramidal: ضعف و spasticity.
+          - الحبل الشوكي: **Lhermitte sign** (كهربا مع ثني الرقبة)، neurogenic bladder.
+
+          بيزيد مع الحر (**Uhthoff**)، وأغلب الحالات relapsing-remitting.
+        page: 537
+        quote: "Symptoms may be exacerbated by stressors (eg, heat [Uhthoff phenomenon], exercise, or infection). Relapsing and remitting is most common clinical course."
+      - kind: explain
+        title: "التشخيص والعلاج"
+        text: |-
+          - الـ CSF: ↑ IgG و myelin basic protein، و ==oligoclonal bands==.
+          - الـ **MRI هو الـ gold standard**: plaques حوالين البطينات، متفرقة في المكان والزمان.
+
+          العلاج:
+          - الوقاية من النوبات: β-interferon، glatiramer، natalizumab، ofatumumab.
+          - النوبة الحادة: ==IV steroids==.
+          - الأعراض: المثانة بـ antimuscarinics، الـ spasticity بـ **baclofen**، والألم بـ TCAs.
+        page: 537
+        quote: "MRI is gold standard. Periventricular plaques A (areas of oligodendrocyte loss and reactive gliosis)."
+      - kind: check
+        question: "A 30-year-old woman with known MS has a new episode of leg weakness that began 3 days ago. What is the best treatment for this flare?"
+        options:
+          - "IV steroids"
+          - "Natalizumab started today to treat the flare"
+          - "Baclofen"
+          - "Plasma exchange as first line"
+        answer: 0
+        why:
+          - "صح: النوبة الحادة بتتعالج بـ IV steroids."
+          - "الـ natalizumab disease-modifying، بيقلل النوبات الجاية مش بيعالج اللي حاصلة."
+          - "الـ baclofen للـ spasticity بس."
+          - "مش ده الخط الأول في الكتاب للـ MS."
+        page: 537
+        quote: "Treat acute flares with IV steroids."
+      - kind: explain
+        title: "الصوديوم: بالراحة في الاتجاهين"
+        text: |-
+          تصحيح ==hyponatremia بسرعة== ← **osmotic demyelination** في الـ pons: شلل، dysarthria، dysphagia، diplopia، وقلة وعي.
+
+          والعكس، تنزيل الـ hypernatremia بسرعة ← cerebral edema و herniation.
+        page: 538
+        quote: "“From low to high, your pons will die” (osmotic demyelination syndrome)"
+      - kind: table
+        title: "Demyelination مركزي × طرفي"
+        columns: ["", "Multiple sclerosis", "Guillain-Barré (AIDP)"]
+        rows:
+          - ["Myelin cell attacked", "Oligodendrocyte (CNS)", "Schwann cell (PNS)"]
+          - ["Weakness", "Relapsing, UMN signs", "Symmetric, ascending, areflexia"]
+          - ["CSF", "Oligoclonal bands, ↑ IgG", "↑ protein, normal cells"]
+          - ["Treatment", "IV steroids for flares", "Plasma exchange or IVIG; no steroids"]
+        hide: [[0, 2], [2, 2], [3, 2]]
+        page: 538
+        quote: "Disease modifying treatment: plasma exchange or IV immunoglobulins. No role for steroids."
+      - kind: check
+        question: "Two weeks after a diarrheal illness, a man has weakness rising from his feet to his hips, absent reflexes and bilateral facial weakness. What is the most important early concern?"
+        options:
+          - "Respiratory failure"
+          - "Seizures"
+          - "Visual loss"
+          - "Dementia"
+        answer: 0
+        why:
+          - "صح: GBS، ودعم التنفس أهم حاجة لحد ما يخف، ومعظمهم بيرجعوا كويسين."
+          - "الـ GBS طرفي، مالوش دعوة بالـ cortex."
+          - "ده optic neuritis في MS."
+          - "مش جزء من الـ GBS."
+        page: 538
+        quote: "Respiratory support is critical until recovery."
+      - kind: explain
+        title: "باقي الـ demyelination"
+        text: |-
+          - **Charcot-Marie-Tooth**: وراثي AD، رجل عالية القوس (pes cavus)، hammer toe، foot drop، وإحساس ضعيف. الأشهر **CMT1A** من ==PMP22 duplication== («Can't Move Toes»).
+          - **PML**: الـ ==JC virus== يصحى في الـ immunosuppressed (AIDS، transplant، natalizumab) ويقتل الـ oligodendrocytes في الـ parietal والـ occipital.
+          - **Critical illness myopathy و polyneuropathy**: مريض العناية مش عارف يفطم من الـ ventilator.
+        page: 538
+        quote: "Most common type, CMT1A, is caused by PMP22 gene duplication (Can’t Move Toes)."
+      - kind: table
+        title: "الـ neurocutaneous: الجين والكروموسوم"
+        columns: ["Disorder", "Gene, chromosome", "Key features"]
+        rows:
+          - ["Sturge-Weber", "GNAQ, somatic mosaic (not inherited)", "Port-wine stain V1/V2, leptomeningeal angioma, glaucoma"]
+          - ["Tuberous sclerosis", "TSC1 (9), TSC2 (16)", "Ash-leaf spots, angiofibromas, rhabdomyoma, angiomyolipoma, seizures"]
+          - ["NF1", "NF1, chromosome 17", "Café-au-lait, Lisch nodules, neurofibromas, optic glioma, pheochromocytoma"]
+          - ["NF2", "NF2 (merlin), chromosome 22", "Bilateral vestibular schwannomas, juvenile cataracts"]
+          - ["von Hippel-Lindau", "VHL, chromosome 3p", "Hemangioblastomas, bilateral RCC, pheochromocytoma"]
+        hide: [[1, 1], [2, 1], [3, 1], [4, 1]]
+        page: 539
+        quote: "AD. Mutation in NF2 tumor suppressor gene (merlin) on chromosome 22."
+      - kind: aside
+        tone: tip
+        text: "حيل الكتاب للأرقام: «==von Recklinghausen==» فيها 17 حرف = chromosome 17. **NF2** = ودنين وعينين (schwannoma في الناحيتين و cataract). **VHL** و **RCC** 3 حروف = chromosome 3. والـ **TSC2** = «twoberin» على chromosome 16."
+        page: 539
+        quote: "17 letters in “von Recklinghausen.”"
+      - kind: check
+        question: "A 9-year-old boy has seizures, hypopigmented oval macules on his trunk and small red papules over his nose and cheeks. Which tumor is he at risk of?"
+        options:
+          - "Subependymal giant cell astrocytoma"
+          - "Bilateral vestibular schwannoma"
+          - "Optic glioma with Lisch nodules"
+          - "Cerebellar hemangioblastoma"
+        answer: 0
+        why:
+          - "صح: tuberous sclerosis (ash-leaf spots و angiofibromas)، و ↑ subependymal giant cell astrocytoma."
+          - "ده NF2."
+          - "ده NF1."
+          - "ده von Hippel-Lindau."
+        page: 539
+        quote: "↑ incidence of subependymal giant cell astrocytomas and ungual fibromas."
+      - kind: try
+        items: [neuro.L03.121, neuro.L03.122, neuro.L03.127, neuro.L03.130, neuro.L03.146]
+    recap:
+      - "MS: ستات شابات، optic neuritis و INO، oligoclonal bands، MRI، IV steroids للنوبة."
+      - "Low to high, pons will die."
+      - "GBS: Schwann cells، ascending، albuminocytologic dissociation، IVIG أو plasma exchange، مافيش steroids."
+      - "CMT1A = PMP22؛ PML = JC virus (natalizumab)."
+      - "NF1 = 17، NF2 = 22، VHL = 3، TSC = 9 و 16، Sturge-Weber = GNAQ."
+    practice: [neuro.L03.023, neuro.L03.024, neuro.L03.025, neuro.L03.026, neuro.L03.027, neuro.L03.028, neuro.L03.029, neuro.L03.030, neuro.L03.031, neuro.L03.032, neuro.L03.033, neuro.L03.034, neuro.L03.035, neuro.L03.036, neuro.L03.037, neuro.L03.038]
+  - id: neuro.L03.lesson7
+    title: "أورام المخ والـ herniation: كل ورم ليه سن ومكان وشكل"
+    hook: "السن والمكان لوحدهم بيضيّقوا الاختيارات لورمين، والـ histology بتحسم"
+    minutes: 10
+    pages: [540, 543]
+    topics: [adult-primary-brain-tumors, childhood-primary-brain-tumors, herniation-syndromes]
+    goals:
+      - "تفرّق أورام الكبار بالمكان والـ histology"
+      - "تفرّق أورام الأطفال: posterior fossa × supratentorial"
+      - "تعرف كل نوع herniation وعلامته"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الكبار: فوق الـ tentorium"
+        text: |-
+          - **Glioblastoma**: الأشهر والأخبث (~سنة). في الـ hemispheres وممكن يعدّي الـ corpus callosum (==butterfly glioma==). GFAP ⊕، والخلايا متراصة حوالين الـ necrosis (**pseudopalisading**). EGFR amplification.
+          - **Oligodendroglioma**: بطيء، في الـ frontal، فيه calcification. ==Fried egg== و chicken-wire capillaries.
+          - **Meningioma**: ستات أكتر، **extra-axial** مع dural tail، whorls و ==psammoma bodies==.
+        page: 540
+        quote: "Can cross corpus callosum (“butterfly glioma” A ). Associated with EGFR amplification."
+      - kind: check
+        question: "A well-circumscribed mass attached to the dura over the convexity is removed from a 55-year-old woman. Which feature is expected?"
+        options:
+          - "Psammoma bodies in whorled spindle cells"
+          - "Pseudopalisading necrosis"
+          - "Fried egg cells"
+          - "Rosenthal fibers"
+        answer: 0
+        why:
+          - "صح: meningioma، من الـ arachnoid cells."
+          - "ده glioblastoma، جوه المخ مش لازق في الـ dura."
+          - "ده oligodendroglioma."
+          - "ده pilocytic astrocytoma عند الأطفال."
+        page: 540
+        quote: "Arachnoid cell origin. Spindle cells concentrically arranged in a whorled pattern; psammoma bodies (laminated calcifications, arrow in F )."
+      - kind: explain
+        title: "الكبار: تحت وجنب"
+        text: |-
+          - **Hemangioblastoma**: غالباً في الـ ==cerebellum==، ومع retinal angiomas = von Hippel-Lindau. ممكن يعمل **erythropoietin** ← polycythemia.
+          - **Schwannoma**: عند الـ ==cerebellopontine angle== على الـ CN VIII (صمم، طنين، مشية مش ثابتة)، S-100 ⊕، وفي الناحيتين = NF2.
+          - **Pituitary adenoma**: الأشهر **prolactinoma** (galactorrhea و amenorrhea عند الستات، ↓ libido عند الرجالة) ← dopamine agonists (cabergoline). ولو كبير يضغط الـ chiasm ← bitemporal hemianopia.
+        page: 540
+        quote: "Hemangioblastoma Most often cerebellar G . Associated with von Hippel-Lindau syndrome when found with retinal angiomas."
+      - kind: table
+        title: "أورام الأطفال"
+        columns: ["Tumor", "Where", "Histology"]
+        rows:
+          - ["Pilocytic astrocytoma (most common, benign)", "Cerebellum, cyst + mural nodule", "Rosenthal fibers, GFAP ⊕"]
+          - ["Medulloblastoma (most common malignant)", "Cerebellar vermis, drop metastases", "Homer-Wright rosettes, synaptophysin ⊕"]
+          - ["Ependymoma", "4th ventricle", "Perivascular pseudorosettes"]
+          - ["Craniopharyngioma", "Suprasellar, calcified", "Ghost cells, motor oil fluid"]
+          - ["Pineal tumor", "Pineal gland", "Like seminoma"]
+        hide: [[0, 2], [1, 2], [2, 2], [3, 2]]
+        page: 542
+        quote: "Astrocyte origin, GFAP ⊕. Bipolar neoplastic cells with hairlike projections. Associated with microcysts and Rosenthal fibers (eosinophilic, corkscrew fibers B )."
+      - kind: check
+        question: "A 12-year-old boy cannot look up and his pupils constrict to near objects but not to light; MRI shows hydrocephalus from aqueduct compression. Where is the tumor?"
+        options:
+          - "Pineal gland"
+          - "Cerebellar vermis"
+          - "Pituitary stalk"
+          - "Cerebellopontine angle"
+        answer: 0
+        why:
+          - "صح: Parinaud syndrome من ضغط الـ dorsal midbrain، والـ pineal tumor بيسد الـ aqueduct."
+          - "الـ medulloblastoma بيعمل truncal ataxia ويسد الـ 4th ventricle."
+          - "الـ craniopharyngioma بيعمل bitemporal hemianopia."
+          - "الـ schwannoma بيعمل صمم وطنين."
+        page: 542
+        quote: "Parinaud syndrome (compression of dorsal midbrain)— triad of upward gaze palsy, convergence- retraction nystagmus, and light-near dissociation."
+      - kind: figure
+        title: "أنواع الـ herniation"
+        svg: |-
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="nL03d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+            <ellipse class="fg-box" cx="130" cy="95" rx="115" ry="80"/>
+            <line class="fg-ink" x1="130" y1="15" x2="130" y2="100"/>
+            <text x="136" y="30" class="t-sm t-mut">falx</text>
+            <path class="fg-ink" d="M30 130 Q130 105 230 130" fill="none"/>
+            <text x="190" y="150" class="t-sm t-mut">tentorium</text>
+            <rect class="fg-box" x="112" y="140" width="36" height="60" rx="8"/>
+            <text x="118" y="222" class="t-sm t-mut">brainstem</text>
+            <line class="fg-bad" x1="70" y1="70" x2="124" y2="92" marker-end="url(#nL03d)"/>
+            <circle class="fg-dot-bad" cx="70" cy="70" r="9"/>
+            <text x="66" y="74" class="t-sm" fill="var(--surface)">1</text>
+            <line class="fg-bad" x1="70" y1="118" x2="108" y2="146" marker-end="url(#nL03d)"/>
+            <circle class="fg-dot-bad" cx="62" cy="112" r="9"/>
+            <text x="58" y="116" class="t-sm" fill="var(--surface)">2</text>
+            <line class="fg-bad" x1="130" y1="112" x2="130" y2="136" marker-end="url(#nL03d)"/>
+            <circle class="fg-dot-bad" cx="150" cy="114" r="9"/>
+            <text x="146" y="118" class="t-sm" fill="var(--surface)">3</text>
+            <circle class="fg-dot-bad" cx="170" cy="196" r="9"/>
+            <text x="166" y="200" class="t-sm" fill="var(--surface)">4</text>
+            <text x="254" y="40" class="t-sm"><tspan class="t-b">1 Cingulate</tspan></text>
+            <text x="254" y="56" class="t-sm">under falx: ACA</text>
+            <text x="254" y="84" class="t-sm"><tspan class="t-b">2 Uncal</tspan></text>
+            <text x="254" y="100" class="t-sm">CN III, peduncle</text>
+            <text x="254" y="128" class="t-sm"><tspan class="t-b">3 Central</tspan></text>
+            <text x="254" y="144" class="t-sm">Duret bleeds</text>
+            <text x="254" y="172" class="t-sm"><tspan class="t-b">4 Tonsillar</tspan></text>
+            <text x="254" y="188" class="t-sm">foramen magnum</text>
+          </svg>
+        caption: "1 الـ cingulate gyrus يزحف تحت الـ falx ويضغط الـ ACA (ضعف رجل في الناحية التانية). 2 الـ uncus يعدّي حافة الـ tentorium: pupil منفوخة في نفس الناحية (CN III) و hemiparesis في الناحية التانية. 3 الـ central: جذع المخ ينزل والفروع الـ paramedian للـ basilar تتقطع (Duret). 4 الـ tonsils تنزل في الـ foramen magnum وتضغط الـ medulla: coma وموت."
+        alt: "Coronal sketch of the brain with the falx in the midline, the tentorium across the lower part and the brainstem below. Numbered arrows: 1 cingulate gyrus under the falx compressing the anterior cerebral artery; 2 uncus over the tentorial edge compressing CN III and the cerebral peduncle; 3 central downward herniation causing Duret hemorrhages; 4 cerebellar tonsils into the foramen magnum."
+        page: 543
+        quote: "Caudal displacement of brainstem rupture of paramedian basilar artery branches Duret hemorrhages. Usually fatal."
+      - kind: explain
+        title: "Kernohan: الشلل في الناحية الغلط"
+        text: |-
+          في الـ uncal herniation العادي: ==pupil منفوخة في نفس الناحية== و hemiparesis في الناحية التانية.
+
+          بس أحياناً الـ uncus يزق الـ midbrain كله لحد ما الـ **peduncle التاني** يتكبس في حافة الـ tentorium (**Kernohan notch**) ← hemiparesis في ==نفس ناحية الإصابة==. ده «false localizing sign»: الشلل بيكدب، بس الـ pupil بتقول الحقيقة.
+        page: 543
+        quote: "Kernohan phenomenon—paradoxical ipsilateral hemiparesis from contralateral peduncle compression (Kernohan notch),"
+      - kind: check
+        question: "A man with a right temporal hematoma develops a dilated, fixed right pupil. Which nerve is compressed, and why does the pupil go first?"
+        options:
+          - "Right CN III; its parasympathetic fibers run on the outside of the nerve"
+          - "Left CN III; fibers cross in the midbrain"
+          - "Right CN VI; it has the longest course"
+          - "Right optic nerve; the swinging light test fails"
+        answer: 0
+        why:
+          - "صح: الـ uncus بيضغط الـ CN III من بره، والألياف الـ parasympathetic اللي بتقفل الـ pupil على السطح."
+          - "الـ CN III بيطلع في نفس الناحية ومش بيعدّي."
+          - "الـ CN VI ممكن يتأثر مع ↑ ICP بس مش بيعمل pupil منفوخة."
+          - "مشكلة الـ optic nerve بتعمل RAPD مش dilated fixed pupil."
+        page: 543
+        quote: "Early herniation ipsilateral blown pupil (unilateral CN III compression), contralateral hemiparesis."
+      - kind: try
+        items: [neuro.L03.158, neuro.L03.159, neuro.L03.169, neuro.L03.170, neuro.L03.176]
+    recap:
+      - "Glioblastoma = butterfly، pseudopalisading، GFAP؛ oligo = fried egg؛ meningioma = dural tail و psammoma."
+      - "Hemangioblastoma = cerebellum + VHL + EPO؛ schwannoma = CP angle، S-100."
+      - "الأطفال: pilocytic (Rosenthal)، medulloblastoma (Homer-Wright، drop mets)، ependymoma (4th ventricle)، craniopharyngioma (calcified، motor oil)."
+      - "Uncal = pupil نفس الناحية + شلل عكسي؛ Kernohan = شلل نفس الناحية."
+    practice: [neuro.L03.001, neuro.L03.002, neuro.L03.003, neuro.L03.004, neuro.L03.005, neuro.L03.006, neuro.L03.007, neuro.L03.008, neuro.L03.009, neuro.L03.010, neuro.L03.011, neuro.L03.012, neuro.L03.013, neuro.L03.014, neuro.L03.015, neuro.L03.016, neuro.L03.017, neuro.L03.018, neuro.L03.019, neuro.L03.020, neuro.L03.021, neuro.L03.022]
+  - id: neuro.L03.lesson8
+    title: "الحبل الشوكي والأعصاب: ارسم المقطع تعرف المرض"
+    hook: "كل مرض في الحبل الشوكي بياكل جزء معين من المقطع، فارسمه وإنت هتعرف الأعراض لوحدك"
+    minutes: 10
+    pages: [543, 546]
+    topics: [motor-neuron-signs, spinal-cord-lesions, brown-sequard-syndrome, friedreich-ataxia, cerebral-palsy, common-cranial-nerve-lesions, facial-nerve-lesions]
+    goals:
+      - "تفرّق علامات الـ UMN والـ LMN"
+      - "تربط كل مرض بالجزء اللي بياكله من الحبل الشوكي"
+      - "تحل أي Brown-Séquard"
+      - "تفرّق شلل الوش المركزي عن الطرفي"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "UMN × LMN"
+        text: |-
+          - **LMN** = ==كل حاجة بتنزل==: العضلة تضمر، الـ tone والـ reflexes تقل، الصباع لتحت، ومعاها **fasciculations** (رفرفة).
+          - **UMN** = ==كل حاجة بتطلع==: الـ tone والـ reflexes تزيد، الصباع لفوق (Babinski)، و clasp-knife spasticity.
+
+          الـ Babinski طبيعي عند الرضّع.
+        page: 543
+        quote: "Fasciculations = muscle twitching Positive Babinski is normal in infants"
+      - kind: figure
+        title: "كل مرض بياكل حتة"
+        svg: |-
+          <svg viewBox="0 0 370 230" xmlns="http://www.w3.org/2000/svg">
+            <ellipse class="fg-box" cx="110" cy="118" rx="100" ry="80"/>
+            <path class="fg-acc" d="M104 104 L80 52 L90 50 L110 96 L130 50 L140 52 L116 104 L152 146 L140 172 L116 138 L104 138 L80 172 L68 146 Z"/>
+            <rect class="fg-good" x="98" y="42" width="24" height="46" rx="6"/>
+            <text x="64" y="30" class="t-sm t-b t-good">dorsal columns</text>
+            <ellipse class="fg-bad" cx="46" cy="104" rx="20" ry="16"/>
+            <text x="34" y="108" class="t-sm">CST</text>
+            <ellipse class="fg-box" cx="26" cy="146" rx="13" ry="18"/>
+            <text x="16" y="150" class="t-sm">cb</text>
+            <ellipse class="fg-box" cx="56" cy="180" rx="20" ry="11"/>
+            <text x="44" y="184" class="t-sm">STT</text>
+            <circle class="fg-dot-bad" cx="140" cy="158" r="7"/>
+            <text x="120" y="218" class="t-sm">anterior horn</text>
+            <line class="fg-thin" x1="140" y1="166" x2="150" y2="206"/>
+            <text x="234" y="22" class="t-sm t-b">Polio, spinal</text>
+            <text x="234" y="36" class="t-sm t-b">muscular atrophy:</text>
+            <text x="234" y="52" class="t-sm">anterior horn only</text>
+            <text x="234" y="78" class="t-sm t-b">ALS:</text>
+            <text x="234" y="94" class="t-sm">CST + anterior horn</text>
+            <text x="234" y="120" class="t-sm t-b">Tabes dorsalis:</text>
+            <text x="234" y="136" class="t-sm">dorsal col. + roots</text>
+            <text x="234" y="162" class="t-sm t-b">B12 deficiency:</text>
+            <text x="234" y="178" class="t-sm">dorsal + CST + cb</text>
+            <text x="234" y="204" class="t-sm t-b">ASA occlusion:</text>
+            <text x="234" y="220" class="t-sm">all but dorsal col.</text>
+          </svg>
+        caption: "الـ dorsal columns (vibration و proprioception)، الـ CST = lateral corticospinal (حركة، UMN)، الـ cb = spinocerebellar، الـ STT = spinothalamic (ألم وحرارة)، والـ anterior horn = LMN. polio و spinal muscular atrophy بياكلوا الـ anterior horn بس. ALS بياكل الـ CST والـ anterior horn. tabes بياكل الـ dorsal columns والـ roots. B12 بياكل الـ dorsal columns والـ CST والـ spinocerebellar. والـ ASA بيموّت كل حاجة ما عدا الـ dorsal columns."
+        alt: "Cross-section of the spinal cord with the gray matter butterfly in the center. Labeled regions: dorsal columns at the back, lateral corticospinal tract, spinocerebellar tract and spinothalamic tract on the side, and the anterior horn. A side list maps diseases to regions: polio and spinal muscular atrophy to the anterior horn only, ALS to the lateral corticospinal tract and anterior horn, tabes dorsalis to the dorsal columns and roots, B12 deficiency to the dorsal columns, lateral corticospinal and spinocerebellar tracts, and anterior spinal artery occlusion to everything except the dorsal columns."
+        page: 544
+        quote: "Spinal cord infarction sparing dorsal horns and dorsal columns."
+      - kind: check
+        question: "A 60-year-old man has spastic legs with brisk reflexes, plus wasting and fasciculations of his hands and tongue. Sensation is normal. Which structures degenerate?"
+        options:
+          - "Corticospinal tracts and anterior horn cells"
+          - "Dorsal columns and dorsal roots"
+          - "Anterior horn cells only"
+          - "Dorsal columns, corticospinal and spinocerebellar tracts"
+        answer: 0
+        why:
+          - "صح: ALS، UMN و LMN مع بعض والإحساس سليم."
+          - "ده tabes dorsalis (إحساس وataxia)."
+          - "ده polio أو SMA، LMN بس."
+          - "ده subacute combined degeneration، فيه إحساس بايظ."
+        page: 544
+        quote: "Combined UMN (corticospinal/corticobulbar) and LMN (brainstem/spinal cord) degeneration."
+      - kind: explain
+        title: "Polio و SMA و ALS"
+        text: |-
+          - **Polio**: fecal-oral ← الـ anterior horn: ضعف LMN ==مش متماثل== مع أعراض meningitis.
+          - **Spinal muscular atrophy**: جين SMN1 (AR) ← floppy baby و tongue fasciculations، ضعف ==متماثل==.
+          - **ALS**: UMN + LMN من غير إحساس ولا مثانة. الوراثي SOD1. العلاج **riluzole** («riLouzole») و edaravone.
+        page: 544
+        quote: "LMN signs only (symmetric weakness). “Floppy baby” with marked hypotonia (flaccid paralysis) and tongue fasciculations."
+      - kind: table
+        title: "Brown-Séquard: نص حبل شوكي"
+        columns: ["Tract", "Side", "Loss below the lesion"]
+        rows:
+          - ["Corticospinal", "Ipsilateral", "UMN weakness"]
+          - ["Dorsal columns", "Ipsilateral", "Vibration, proprioception, fine touch"]
+          - ["Spinothalamic", "Contralateral", "Pain, temperature, crude touch"]
+          - ["At the level", "Ipsilateral", "All sensation lost, LMN signs"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+        page: 545
+        quote: "Dorsal columns—ipsilateral loss of proprioception, vibration, and fine (2-point discrimination) touch below lesion level."
+      - kind: aside
+        tone: tip
+        text: "الحيلة: الـ ==spinothalamic بيعدّي على طول== (في نفس المستوى) فهو الوحيد اللي بيتأثر في الناحية التانية. الـ corticospinal والـ dorsal columns بيعدّوا فوق في الـ medulla، فبيتأثروا في نفس الناحية. ولو الإصابة فوق T1 ← Horner في نفس الناحية."
+        page: 545
+        quote: "Oculosympathetic pathway (if lesion occurs above T1)—ipsilateral Horner syndrome."
+      - kind: explain
+        title: "Friedreich و cerebral palsy"
+        text: |-
+          - **Friedreich ataxia**: AR، تكرار ==GAA== في الـ frataxin (chromosome 9) ← الـ mitochondria. بياكل الـ lateral corticospinal والـ spinocerebellar والـ dorsal columns والـ DRG: ataxia و areflexia مع Babinski، pes cavus، kyphoscoliosis، DM، و ==hypertrophic cardiomyopathy== (سبب الوفاة).
+          - **Cerebral palsy**: إصابة ثابتة (مش بتزيد) لمخ الجنين أو الرضيع، أكبر خطر **prematurity** و low birth weight، ومعاها periventricular leukomalacia. الوقاية: magnesium sulfate قبل الولادة.
+        page: 545
+        quote: "Autosomal recessive trinucleotide repeat disorder (GAA)n on chromosome 9 in gene that encodes frataxin (iron-binding protein)."
+      - kind: check
+        question: "A man stabbed on the left at T8 has which pattern below the lesion?"
+        options:
+          - "Left leg weak with ↓ vibration; right leg ↓ pain and temperature"
+          - "Right leg weak with ↓ vibration; left leg ↓ pain and temperature"
+          - "Both legs weak with preserved vibration"
+          - "Left leg ↓ pain only"
+        answer: 0
+        why:
+          - "صح: الحركة والـ vibration نفس الناحية، والألم والحرارة الناحية التانية."
+          - "ده العكس بالظبط."
+          - "ده ASA occlusion."
+          - "الـ spinothalamic بيعدّي، فالألم يروح في الناحية التانية."
+        page: 545
+        quote: "Spinothalamic tract—contralateral loss of pain, temperature, and crude (nondiscriminative) touch below lesion level."
+      - kind: sort
+        prompt: "الحاجة بتميل ناحية الإصابة ولّا بعيد عنها؟"
+        bins: ["Toward the lesion", "Away from the lesion"]
+        cards:
+          - { text: "Jaw (CN V motor)", bin: 0 }
+          - { text: "Tongue (CN XII LMN)", bin: 0 }
+          - { text: "Uvula (CN X)", bin: 1 }
+          - { text: "Tongue (CN XII UMN)", bin: 1 }
+        why: "الفك واللسان (LMN) بيتزقوا من الناحية السليمة فيميلوا ناحية الضعيفة («lick your wounds»). الـ uvula بتتشد من الناحية السليمة فتروح بعيد عن الإصابة. والـ UMN للسان بيعدّي فيبقى العكس."
+        page: 546
+        quote: "Uvula deviates away from side of lesion. Weak side collapses and uvula points away."
+      - kind: explain
+        title: "شلل الوش: الجبهة بتفرّق"
+        text: |-
+          النص اللي فوق من الوش واخد UMN من ==الناحيتين==، فلو الـ cortex اتضرب (stroke) الجبهة **بتتحرك** والنص التحتاني بس اللي في الناحية التانية يقع.
+
+          لو الـ **LMN** (الـ nucleus أو العصب نفسه) ← ==الوش كله== في نفس الناحية مع الجبهة، ومعاه مشكلة في قفل العين، hyperacusis، وطعم الثلثين الأماميين.
+
+          أشهر سبب **Bell palsy** (HSV) ← glucocorticoids ± acyclovir. وافتكر Lyme، Ramsay Hunt (zoster: شلل + ألم ودن + فقاقيع)، sarcoidosis، parotid tumor، و DM.
+        page: 546
+        quote: "Bell palsy is the most common cause of peripheral facial palsy A . Usually develops after HSV reactivation."
+      - kind: check
+        question: "After a left MCA stroke, which facial finding is expected?"
+        options:
+          - "Weak right lower face; right forehead moves normally"
+          - "Weak entire left face including forehead"
+          - "Weak entire right face including forehead"
+          - "Hyperacusis on the left"
+        answer: 0
+        why:
+          - "صح: UMN، الناحية التانية والجبهة سليمة لأنها واخدة من الناحيتين."
+          - "ده LMN في الناحية الشمال (Bell palsy مثلاً)."
+          - "الجبهة مش بتتأثر في الـ UMN."
+          - "الـ hyperacusis علامة LMN (stapedius)."
+        page: 546
+        quote: "Spared, due to bilateral UMN innervation Affected"
+      - kind: try
+        items: [neuro.L03.191, neuro.L03.192, neuro.L03.194, neuro.L03.198, neuro.L03.207]
+    recap:
+      - "LMN = كل حاجة بتنزل + fasciculations؛ UMN = كل حاجة بتطلع + Babinski."
+      - "Polio و spinal muscular atrophy = anterior horn؛ ALS = UMN + LMN؛ tabes = dorsal columns؛ B12 = dorsal columns + CST + spinocerebellar؛ ASA = كله ما عدا الـ dorsal columns."
+      - "Brown-Séquard: الألم والحرارة بس في الناحية التانية."
+      - "Friedreich = GAA، frataxin، الموت من HCM."
+      - "الجبهة سليمة = UMN؛ الجبهة واقعة = LMN (Bell)."
+    practice: [neuro.L03.023, neuro.L03.024, neuro.L03.025, neuro.L03.026, neuro.L03.027, neuro.L03.028, neuro.L03.029, neuro.L03.030, neuro.L03.031, neuro.L03.032, neuro.L03.033, neuro.L03.034, neuro.L03.035, neuro.L03.036, neuro.L03.037, neuro.L03.038]
