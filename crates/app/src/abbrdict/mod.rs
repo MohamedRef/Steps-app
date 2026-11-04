@@ -35,11 +35,13 @@ pub struct Term {
 pub fn index() -> &'static BTreeMap<String, Vec<Term>> {
     static INDEX: Derived<BTreeMap<String, Vec<Term>>> = Derived::new();
     INDEX.get(|lib| {
-        let finder = crate::hover::glossary().finder();
         let mut by_course: BTreeMap<String, Vec<Term>> = BTreeMap::new();
+        // Each course reads its own meaning of a term, as its lessons show it (#318).
+        let mut finders = BTreeMap::new();
         for (lecture, lesson) in lib.all_lessons() {
-            let course = steps_core::program::course_of(lecture).to_string();
-            let terms = by_course.entry(course).or_default();
+            let course = steps_core::program::course_of(lecture);
+            let finder = finders.entry(course).or_insert_with(|| crate::hover::glossary_for(course).finder());
+            let terms = by_course.entry(course.to_string()).or_default();
             let texts: Vec<String> = lesson.steps.iter().flat_map(|s| s.shown_text()).collect();
             for e in finder.abbreviations_in(&texts) {
                 match terms.iter_mut().find(|t| std::ptr::eq(t.entry, e)) {
@@ -132,7 +134,7 @@ pub fn Dictionary() -> Element {
     rsx! {
         style { {crate::lecture::CSS.text()} }
         style { {CSS.text()} }
-        div { class: "lec-page abd",
+        div { class: "lec-page abd", "data-course": "{course}",
             div { class: "abd-head",
                 button {
                     class: "icon-button lec-back",

@@ -406,6 +406,8 @@ fn Runner() -> Element {
     // The course and the lecture, not a bare "L02": a mixed session can
     // come from any course (UX #300).
     let lecture = crate::content::Library::get().crumb(&p.lecture);
+    // hover.js reads this course's glossary first (#318).
+    let course = steps_core::program::course_of(&p.item_id).to_string();
 
     rsx! {
         div {
@@ -442,7 +444,7 @@ fn Runner() -> Element {
             }
             crate::desk::Panes {
                 primary: rsx! {
-                    crate::ui::Card { class: "oral-question",
+                    crate::ui::Card { class: "oral-question", "data-course": "{course}",
                         h2 { class: "muted small", {tx::LISTEN} }
                         div { class: "en", dir: "ltr", lang: "en",
                             for (i, line) in p.question.iter().enumerate() {
@@ -502,7 +504,7 @@ fn Runner() -> Element {
                     }
                 },
                 secondary: revealed.then(|| rsx! {
-                    crate::ui::Card { class: "oral-answer",
+                    crate::ui::Card { class: "oral-answer", "data-course": "{course}",
                         h2 { class: "small", {tx::ANSWER} }
                         p { class: "muted small", {tx::TICK_HINT} }
                         // The model answer as a checklist he ticks against

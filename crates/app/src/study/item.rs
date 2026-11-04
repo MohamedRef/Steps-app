@@ -61,6 +61,8 @@ pub fn ItemView(
     };
     rsx! {
         crate::ui::Card { element: crate::ui::CardElement::Article, class: "st-item", "data-kind": item.body.kind(),
+            // hover.js reads this course's glossary first (#318).
+            "data-course": steps_core::program::course_of(&item.id),
             // Screen readers only: a heading to jump to for each item; the
             // chips below show the same on screen.
             h1 { class: "st-sr-only", "{kind_label(&item.body)} · {lecture_title}" }

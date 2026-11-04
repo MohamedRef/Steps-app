@@ -84,13 +84,44 @@ fn set_table(g: &Glossary) {
     ));
 }
 
+/// Each course's own meanings, where they differ from the shared table:
+/// `{ course: { exact: {...}, lower: {...} } }`. hover.js reads these first
+/// for a word inside an element marked `data-course` (an item in review, a
+/// question, a case, an oral prompt), so a repro card shows `ER` as estrogen
+/// receptor wherever it is studied (#318, #271).
+pub fn course_overrides() -> serde_json::Value {
+    let shared = glossary().peek_table();
+    let mut out = serde_json::Map::new();
+    for (course, _) in crate::content::GLOSSARY_PARTS {
+        let own = glossary_for(course).peek_table();
+        let mut diff = serde_json::Map::new();
+        for key in ["exact", "lower"] {
+            let base = shared.get(key).and_then(|v| v.as_object());
+            let mut m = serde_json::Map::new();
+            for (term, v) in own.get(key).and_then(|v| v.as_object()).into_iter().flatten() {
+                if base.and_then(|b| b.get(term)) != Some(v) {
+                    m.insert(term.clone(), v.clone());
+                }
+            }
+            if !m.is_empty() {
+                diff.insert(key.to_string(), m.into());
+            }
+        }
+        if !diff.is_empty() {
+            out.insert(course.to_string(), diff.into());
+        }
+    }
+    out.into()
+}
+
 /// Installs the hover script once and gives it the glossary.
 pub fn use_hover() {
     use_hook(|| {
         let table = glossary().peek_table();
         document::eval(&format!(
-            "{HOVER_JS}\nwindow.__stepsHover.setGlossary({table}, {note:?});",
-            note = tx::UNVERIFIED
+            "{HOVER_JS}\nwindow.__stepsHover.setGlossary({table}, {note:?});\nwindow.__stepsHover.setCourses({courses});",
+            note = tx::UNVERIFIED,
+            courses = course_overrides()
         ));
     });
 }
@@ -157,5 +188,14 @@ mod tests {
         assert!(std::ptr::eq(glossary_for("repro"), glossary_for("repro")));
         // An unknown course reads the shared glossary.
         assert!(std::ptr::eq(glossary_for("nope"), glossary()));
+    }
+
+    #[test]
+    fn hover_gets_each_course_its_own_meanings() {
+        let o = course_overrides();
+        let er = &o["repro"]["exact"]["ER"][0];
+        assert!(er.as_str().is_some_and(|t| t.starts_with("Estrogen receptor")), "{er}");
+        // Only what differs from the shared table is sent.
+        assert!(o["repro"]["exact"].get("SAAG").is_none());
     }
 }
