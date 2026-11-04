@@ -17,6 +17,7 @@ static TEXT: GlobalSignal<String> = Signal::global(String::new);
 
 pub fn open(_ui: crate::Ui) {
     crate::pagesheet::close();
+    crate::labs::close();
     *TEXT.write() = String::new();
     *OPEN.write() = true;
 }
