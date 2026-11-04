@@ -5,14 +5,13 @@ Tab S11 and the Mac. A release is a signed APK sideloaded onto both Galaxy
 devices, plus a Steps.app built on the Mac. There are no store listings and no
 paid developer accounts. Everything here costs $0.
 
-The first **alpha** (`1.0.0-alpha.1`) was cut on 2026-11-02, when Mohamed
-said go. Releases are built and published by the **Release** workflow
+No release yet. The first **alpha** will be `1.0.0-alpha.1`, when Mohamed
+says go. Releases are built and published by the **Release** workflow
 (`.github/workflows/release.yml`, run by hand; §4). The CI *preview* APKs
 (§3) keep coming on every merge.
 
-Adapted from Kabar's `docs/RELEASE.md` on `main`. Steps has its own keys,
-its own feed and its own package (`app.steps`). It never shares anything
-with Kabar.
+Steps has its own keys, its own feed and its own package (`app.steps`).
+It never shares a key, a feed or a client with Batna or Kabar.
 
 ## 1. Stages
 
@@ -27,13 +26,19 @@ derived from it (`scripts/android-release-apk.sh`). An alpha always sorts
 before its beta, and a beta before the release, so each stage installs over
 the previous one and keeps your data.
 
-Until the first alpha, the version stays `0.1.1-alpha.0` (versionCode
-101100). A version with no pre-release counts as a final release (stage
-999); early previews shipped as `0.1.0` (100999), so the pre-alpha version
-must sort above that, and the first alpha is `0.1.1-alpha.1` or later
-(`1.0.0-alpha.1` is fine too). The versionCode may never go down: the
-preview workflow refuses to publish a build below the live feed's. Only move to a bare version
-(`1.0.0`) for a real stable release.
+Until the first alpha, the version stays `1.0.0-alpha.0` (versionCode
+10000100). The first alpha is `1.0.0-alpha.1` (10000101), then
+`1.0.0-alpha.2`…, `1.0.0-beta.1` (10000501)…, and `1.0.0` (10000999). Every
+step sorts above the one before, and every build is signed with the same
+permanent keys (§2), so each installs over the last and keeps the data: no
+uninstall between alpha, beta and stable. The versionCode may never go
+down: the preview workflow refuses to publish a build below the live
+feed's. Only move to a bare version (`1.0.0`) for a real stable release.
+
+**The keys are permanent** (Mohamed, 2026-11-04). They are made once, before
+the first alpha, by `scripts/release-secrets.sh` (§4), and never replaced:
+the Android keystore decides which APKs install over Steps, and the update
+key decides which feeds it trusts. Back them up the day they are made.
 
 ## 2. One-time setup on the Mac
 
@@ -52,10 +57,10 @@ preview workflow refuses to publish a build below the live feed's. Only move to 
 | Signed release APK | `just apk` | `dist/android/steps.apk` (arm64, not debuggable, R8, versionCode from the version) |
 | Install on a device | `just devices`, then `just install-android <serial>` | Installs over the previous Steps signed with the same key |
 | Mac app | `just bundle-mac` | `dist/mac/Steps.app`, signed "Steps Code Signing" once that exists |
-| CI preview APK | Every push to `main` (`.github/workflows/steps-android-preview.yml`) | `steps-preview.apk` on the `steps-preview` prerelease. Signed with a throwaway preview key kept in the Actions cache (never Kabar's, never the release key). A run on Mondays and Thursdays keeps the keys from expiring, and a run fails rather than silently making new keys once previews are out. If it ever says a key is missing, the only way on is Actions › Android preview APK › Run workflow with **new_keys** ticked, then uninstall the old preview once. It updates itself from the same release (§5). |
+| CI preview APK | Every push to `main` (`.github/workflows/steps-android-preview.yml`) | `steps-preview.apk` on the `steps-preview` prerelease, signed with the permanent release keys, so it installs over a release build and the other way round. Until the keys exist, main only proves the APK builds and publishes nothing. It updates itself from its feed once Settings › Updates picks preview (§5). |
 
-A preview APK and a release APK carry different keys. Uninstall one before
-installing the other, or keep only the release build.
+Preview and release APKs carry the same keys, so either installs over the
+other and keeps the data.
 
 ## 4. Release day (only once Mohamed says go)
 
@@ -78,8 +83,8 @@ installing the other, or keep only the release build.
      for installing by hand;
    - the channel feed(s) (`steps-alpha`, …): the signed `update.json`
      that installed release builds read (§5).
-4. The first time only, install by hand: uninstall any *preview* build
-   (different key), install the APK on both Galaxy devices, and on the Mac
+4. The first time only, install by hand: install the APK on both Galaxy
+   devices (over any preview build: same keys), and on the Mac
    move Steps.app to Applications and run
    `xattr -dr com.apple.quarantine /Applications/Steps.app` once (it is
    self-signed). Every later release reaches them over the air.
@@ -102,8 +107,8 @@ cheap backup.
 
 ## 5. Updates over the air
 
-Adapted from Kabar's design (`docs/RELEASE.md` §5 on Kabar-app `main`), with Steps's
-own key, its own feeds and one extra asset: the content pack.
+Steps has its own key, its own feeds, and one asset besides the builds: the
+content pack.
 
 ### The feed
 
@@ -112,8 +117,8 @@ public release needs no token and costs nothing.
 
 | Channel | Release tag | Who follows it |
 |---|---|---|
-| Preview | `steps-preview` | Every push to `main`. Signed with the release keys since 2026-11-02, so any build can pick it in Settings › Updates and go back to alpha later. |
-| Alpha | `steps-alpha` | Release builds, from the first alpha on. |
+| Preview | `steps-preview` | Every push to `main`, signed with the release keys, for whoever picks it in Settings › Updates. |
+| Alpha | `steps-alpha` | Every build by default (Mohamed, 2026-11-04), from the first alpha on. |
 | Beta / Stable | `steps-beta`, `steps-stable` | Later. A beta also reaches alpha followers; a release reaches everyone. |
 
 A feed holds `update.json`, `update.json.sig` (Ed25519 over the exact bytes),
@@ -189,13 +194,13 @@ Pull-request CI writes the same classification and affected paths to the
 GitHub Actions job summary; `just content-impact-test` tests the rules.
 The preview publisher uses `scripts/content_impact.py --check-content-only`
 instead of its own separate path filter. Any unknown path, including
-`content/glossary.yaml` (which is compiled into the app), forces a full
+`content/glossary.yaml` and `content/glossary/` (compiled into the app), forces a full
 build. Content-only eligibility never bypasses validation, signing, or feed
 verification. Changing these rules requires adjusting the classifier tests.
 
 **Content-only feeds.** When everything merged since the build on the
 preview feed is under `content/index.yaml`, `content/program.yaml`, a course
-folder such as `content/hb/`, `content/lessons/`,
+folder such as `content/cvs/`, `content/lessons/`,
 `changes/`, `docs/`, a top-level `.md` or a `crates/app/**/*.css` file, CI
 builds no APK: `steps-tools update manifest --carry android-arm64` keeps the
 feed's APK entry as it is (same file, its own `build`), and only the pack is

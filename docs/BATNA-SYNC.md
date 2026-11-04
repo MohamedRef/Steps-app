@@ -2,7 +2,7 @@
 
 Steps shares Batna's engine and UI. Batna's app, UI and tool improvements are ported to Steps so the work is never done twice; Batna's content (`content/`) and changelog (`changes/`) never are.
 
-**Last Batna commit ported: `c7927f5` (Batna main, 2026-11-04).**
+**Last Batna commit ported: `0b6e07e` (Batna main, 2026-11-04).** Skipped since `c7927f5`: #620 (calculators, removed in Steps) and Batna's content quotes (#610, #617, #618).
 
 How to port (the core thread does this):
 
@@ -16,4 +16,4 @@ git apply --reject --whitespace=nowarn /tmp/port.patch   # then fix any *.rej by
 
 Then run `just check`, fix tests that expect Batna's courses (`hb`, `res`…), add a `changes/` line for anything Mohamed can see, update the commit above, and open a PR titled "Port Batna main up to <sha>".
 
-Watch for: Batna-only features (its MSc calculators, course wording such as credit hours and semesters), which Steps may adapt rather than copy, and anything signed or keyed (update keys, Worker names, Google client), which Steps never shares with Batna.
+Watch for: Batna-only features (MSc calculators, course wording such as credit hours and semesters), which Steps leaves out (its calculators were removed on 2026-11-04), and anything signed or keyed (update keys, Worker names, Google client), which Steps never shares with Batna.

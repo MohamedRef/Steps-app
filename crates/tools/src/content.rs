@@ -32,7 +32,7 @@ pub fn run(root: &Path, args: &[String]) -> Res<String> {
         }
         Some("new-item") => match (arg(1), arg(2)) {
             (Some(lecture), Some(kind)) => new_item(root, lecture, kind),
-            _ => Err(vec!["usage: steps-tools content new-item hb.L01 <card|cloze|mcq|enumerate|essay|case|table|order|calc>".into()]),
+            _ => Err(vec!["usage: steps-tools content new-item hb.L01 <card|cloze|mcq|enumerate|essay|case|table|order>".into()]),
         },
         Some("diff") => {
             let base = base_pack(root, args)?;
@@ -131,7 +131,7 @@ pub fn new_item(root: &Path, lecture: &str, kind: &str) -> Res<String> {
 
 /// Prefixes every string the author writes with the marker.
 fn mark(v: &mut serde_json::Value, key: &str) {
-    const KEEP: &[&str] = &["id", "kind", "topic", "status", "tags", "calc", "ref"];
+    const KEEP: &[&str] = &["id", "kind", "topic", "status", "tags", "ref"];
     match v {
         serde_json::Value::String(s) if !KEEP.contains(&key) => *s = format!("{TEMPLATE_MARK} {s}"),
         serde_json::Value::Array(a) => a.iter_mut().for_each(|x| mark(x, key)),
