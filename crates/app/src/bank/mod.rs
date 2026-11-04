@@ -16,7 +16,7 @@ use serde::{Deserialize, Serialize};
 use steps_core::content::Body;
 use steps_core::content::{Item, Lecture};
 use steps_core::exam::{self, Answer, History, Mode, Outcome, Question};
-use steps_core::review::{Grade, Origin, ReviewEvent, StudyStoreHandle};
+use steps_core::review::{Confidence, ErrorReason, Grade, Origin, ReviewEvent, StudyStoreHandle};
 
 use crate::content::Library;
 use crate::look::{Css, css};
@@ -37,6 +37,19 @@ pub struct Paper {
     /// checked. Checking sends it to review; moving on clears it.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub draft: Option<usize>,
+    /// Tutor mode: the review event the last checked question was logged
+    /// under, so a reason picked after it can replace it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub logged: Option<Logged>,
+}
+
+/// A tutor answer already in the review log.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct Logged {
+    /// The question's index in the paper.
+    pub at: usize,
+    pub event_id: String,
+    pub at_ms: i64,
 }
 
 impl Paper {
@@ -50,6 +63,7 @@ impl Paper {
             started_ms: now,
             shown_ms: now,
             draft: None,
+            logged: None,
         }
     }
 
@@ -78,6 +92,34 @@ impl Paper {
         a.chosen = Some(option);
         a.took_ms = u32::try_from(now.saturating_sub(self.shown_ms).max(0)).unwrap_or(u32::MAX);
         Some((self.questions[at].clone(), a.clone()))
+    }
+
+    /// How sure he is of the current question, before it is checked (tutor)
+    /// or while the paper runs (timed). Never once the answer is out.
+    fn set_confidence(&mut self, confidence: Option<Confidence>) {
+        let at = self.at;
+        if self.mode == Mode::Tutor && self.answers[at].chosen.is_some() {
+            return;
+        }
+        self.answers[at].confidence = confidence;
+    }
+
+    /// Tutor mode: why he missed the current, checked question (a second tap
+    /// on the same reason takes it back). Returns the answer to log in place
+    /// of the one logged at check, with the event it replaces; `None` when
+    /// there is nothing to change.
+    fn set_reason(&mut self, reason: ErrorReason) -> Option<(ReviewEvent, Option<Logged>)> {
+        let at = self.at;
+        let q = &self.questions[at];
+        let a = &mut self.answers[at];
+        if self.mode != Mode::Tutor || a.chosen.is_none() || a.correct(q) {
+            return None;
+        }
+        a.reason = crate::metacog::toggled(a.reason, reason);
+        let old = self.logged.take().filter(|l| l.at == at);
+        let at_ms = old.as_ref().map_or(self.shown_ms, |l| l.at_ms);
+        let event = exam::review_event(q, a, Mode::Tutor, at_ms)?;
+        Some((event, old))
     }
 
     /// Add the time on the current question before moving off it.
@@ -191,6 +233,12 @@ fn record(event: ReviewEvent) {
     if let Some(store) = try_consume_context::<StudyStoreHandle>() {
         store.0.borrow_mut().record(event);
     }
+}
+
+/// [`record`], keeping the id the answer was logged under.
+fn record_logged(event: ReviewEvent) -> Option<String> {
+    let store = try_consume_context::<StudyStoreHandle>()?;
+    store.0.borrow_mut().record_logged(event).ok().flatten()
 }
 
 /// After a sync or restore (see `crate::synced`): take the finished papers
@@ -355,14 +403,53 @@ pub fn choose(option: usize) {
 pub fn check() {
     let now = now_ms();
     let sent = match &mut *PHASE.write() {
-        Phase::Running(p) => p.check(now),
+        Phase::Running(p) => p.check(now).map(|qa| (p.at, qa)),
         _ => None,
     };
-    if let Some((q, a)) = sent {
+    if let Some((at, (q, a))) = sent {
         if let Some(e) = exam::review_event(&q, &a, Mode::Tutor, now) {
-            record(e);
+            let id = record_logged(e);
+            if let (Some(event_id), Phase::Running(p)) = (id, &mut *PHASE.write()) {
+                p.logged = Some(Logged { at, event_id, at_ms: now });
+            }
         }
         HISTORY.write().record(std::slice::from_ref(&q), std::slice::from_ref(&a));
+    }
+}
+
+/// Confidence on the current question (see [`Paper::set_confidence`]).
+pub fn set_confidence(confidence: Option<Confidence>) {
+    if let Phase::Running(p) = &mut *PHASE.write() {
+        p.set_confidence(confidence);
+    }
+    keep_open();
+}
+
+/// Tutor mode: why he missed the checked question. The answer was logged
+/// at check; the log is append-only, so the logged event is taken back (as
+/// Undo does) and the same answer is logged again with its reason, at the
+/// time it was first given.
+pub fn set_reason(reason: ErrorReason) {
+    let change = match &mut *PHASE.write() {
+        Phase::Running(p) => p.set_reason(reason).map(|c| (p.at, c)),
+        _ => None,
+    };
+    let Some((at, (event, old))) = change else { return };
+    // Only an answer that can be taken back is replaced, so it is never logged twice.
+    let Some(old) = old else { return };
+    let Some(store) = try_consume_context::<StudyStoreHandle>() else { return };
+    let gone = store.0.borrow_mut().retract(&old.event_id);
+    let logged = if gone {
+        store.0.borrow_mut().record_logged(event).ok().flatten().map(|event_id| Logged {
+            at,
+            event_id,
+            at_ms: old.at_ms,
+        })
+    } else {
+        Some(old)
+    };
+    if let Phase::Running(p) = &mut *PHASE.write() {
+        p.logged = logged;
     }
 }
 
@@ -592,6 +679,45 @@ mod tests {
         p.pick(2);
         assert_eq!((p.draft, p.answers[0].chosen), (None, Some(2)));
         assert_eq!(p.check(1), None, "timed papers are never checked one by one");
+    }
+
+    #[test]
+    fn confidence_goes_on_the_answer_until_it_is_checked() {
+        let mut p = Paper::new(Mode::Tutor, vec![question("a")]);
+        p.set_confidence(Some(Confidence::Sure));
+        p.pick(0);
+        let (_, a) = p.check(5).unwrap();
+        assert_eq!(a.confidence, Some(Confidence::Sure));
+        // Once the answer is out, it stays what he said before.
+        p.set_confidence(Some(Confidence::Guess));
+        assert_eq!(p.answers[0].confidence, Some(Confidence::Sure));
+        // A timed paper takes it while it runs.
+        let mut t = Paper::new(Mode::Mock, vec![question("a")]);
+        t.pick(2);
+        t.set_confidence(Some(Confidence::Unsure));
+        assert_eq!(t.answers[0].confidence, Some(Confidence::Unsure));
+    }
+
+    #[test]
+    fn a_reason_replaces_the_logged_answer_at_its_first_time() {
+        let mut p = Paper::new(Mode::Tutor, vec![question("a"), question("b")]);
+        p.pick(0);
+        p.check(5).unwrap();
+        p.logged = Some(Logged { at: 0, event_id: "e1".into(), at_ms: 5 });
+        let (event, old) = p.set_reason(ErrorReason::Misread).unwrap();
+        assert_eq!((event.grade, event.reason, event.at_ms), (Grade::Again, Some(ErrorReason::Misread), 5));
+        assert_eq!(old.map(|l| l.event_id).as_deref(), Some("e1"));
+        // The same chip again takes the reason back.
+        p.logged = Some(Logged { at: 0, event_id: "e2".into(), at_ms: 5 });
+        let (event, _) = p.set_reason(ErrorReason::Misread).unwrap();
+        assert_eq!(event.reason, None);
+        assert_eq!(p.answers[0].reason, None);
+        // No reason on a right answer, or before checking.
+        p.at = 1;
+        assert!(p.set_reason(ErrorReason::Timing).is_none());
+        p.pick(1);
+        p.check(9).unwrap();
+        assert!(p.set_reason(ErrorReason::Timing).is_none());
     }
 
     #[test]

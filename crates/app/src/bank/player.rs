@@ -5,7 +5,9 @@ use dioxus::prelude::*;
 use steps_core::exam::{self, Mode};
 
 use super::question::QuestionView;
-use super::{PHASE, Phase, check, choose, finish, go, leave, minutes, now_ms, toggle_flag};
+use super::{
+    PHASE, Phase, check, choose, finish, go, leave, minutes, now_ms, set_confidence, set_reason, toggle_flag,
+};
 use crate::i18n::bank as tx;
 use crate::i18n::count::{MINUTE, count};
 
@@ -103,6 +105,19 @@ pub fn Player() -> Element {
                     chosen: selected,
                     reveal: checked,
                     onchoose: if checked { None } else { Some(EventHandler::new(choose)) },
+                }
+                // Optional taps (crate::metacog): how sure he is while the
+                // answer is still his, and why he missed it once it's out.
+                if !checked {
+                    crate::metacog::ConfidencePicker {
+                        value: a.confidence,
+                        on_pick: set_confidence,
+                    }
+                } else if !a.correct(&q) {
+                    crate::metacog::ReasonPicker {
+                        value: a.reason,
+                        on_pick: set_reason,
+                    }
                 }
                 // The one next step stays at the foot of the screen.
                 div { class: "run-foot",
