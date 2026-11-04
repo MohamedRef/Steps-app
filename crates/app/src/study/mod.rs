@@ -31,14 +31,13 @@ use steps_core::session::Session;
 
 pub(crate) use backend::use_store;
 pub use backend::{StudyStore, StudyStoreHandle};
-pub use item::{ItemView, PLAYABLE};
+pub use item::{ItemView, PLAYABLE, short_text};
 
 use crate::content::{Derived, Library};
 use crate::i18n::count::{DAY, HOUR, ITEM, MINUTE, REVIEW, count};
 use crate::i18n::study as tx;
 use crate::look::{Css, css};
 use backend::now_ms;
-pub use item::short_text;
 use planning::{plan, plan_items};
 
 pub(crate) const STUDY_CSS: Css = css!("assets/study.css");

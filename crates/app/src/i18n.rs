@@ -41,6 +41,9 @@ pub mod count {
     pub const ITEM: Noun = Noun {
         one: "سؤال واحد", two: "سؤالين", few: "أسئلة وكروت", many: "سؤال وكارت"
     };
+    pub const NOTE: Noun = Noun {
+        one: "ملاحظة واحدة", two: "ملاحظتين", few: "ملاحظات", many: "ملاحظة"
+    };
     pub const REVIEW: Noun = Noun {
         one: "مراجعة واحدة", two: "مراجعتين", few: "مراجعات", many: "مراجعة"
     };
@@ -1251,6 +1254,7 @@ pub mod data {
     pub const T_CHECKS: &str = "علاماتك على المحتوى";
     pub const T_SETTINGS: &str = "الإعدادات";
     pub const T_OWN: &str = "كروتك";
+    pub const T_NOTES: &str = "ملاحظاتك";
 }
 
 pub mod cloud {
@@ -2204,4 +2208,43 @@ pub mod saving {
     pub const FAILED: &str = "فيه إعدادات ما اتحفظتش. اختياراتك شغالة دلوقتي، بس ممكن تضيع لما تقفل التطبيق.";
     pub const RETRY: &str = "حاول تحفظ تاني";
     pub const TRY_AGAIN: &str = "حاول تاني";
+}
+
+/// His notes on items, lesson steps and pages (notes/mod.rs).
+pub mod notes {
+    pub const CHIP_ADD: &str = "＋ ملاحظة";
+    pub const CHIP_HAS: &str = "ملاحظتك";
+    pub const ADD_HINT: &str = "اكتب ملاحظة";
+    pub const EDIT_HINT: &str = "افتح ملاحظتك";
+    pub const TITLE_NEW: &str = "ملاحظة جديدة";
+    pub const TITLE_EDIT: &str = "ملاحظتك";
+    pub const FIELD: &str = "الملاحظة";
+    pub const HINT: &str = "بالعربي أو بالإنجليزي: اللي عايز تفتكره هنا…";
+    pub const PRIVATE: &str = "ملاحظاتك بتتحفظ على أجهزتك بس، وبتروح معاك في النسخة الاحتياطية وفي Anki.";
+    pub const SAVE: &str = "احفظ";
+    pub const DELETE: &str = "امسحها";
+    pub const CANCEL: &str = "إلغاء";
+    pub const TOO_LONG: &str = "الملاحظة طويلة، خليها 2000 حرف بالكتير. لو محتاج أكتر، اعمل كارت.";
+    pub const FAILED: &str = "ما عرفتش أحفظ الملاحظة، وكلامك لسه هنا:";
+    pub const ON_LESSON: &str = "درس";
+    pub const PAGE_NONE: &str = "مفيش ملاحظات على الصفحة دي لسه.";
+    pub const ADD_PAGE: &str = "اكتب ملاحظة على الصفحة دي";
+    pub const LIST_TITLE: &str = "ملاحظاتك";
+    pub const LIST_EMPTY: &str =
+        "لسه مكتبتش ملاحظات. اضغط «＋ ملاحظة» تحت أي كارت أو سؤال أو خطوة في درس، أو من صفحة الكتاب.";
+    pub const COURSES: &str = "المواد";
+    pub const ALL: &str = "الكل";
+    pub const SEARCH: &str = "دوّر في ملاحظاتك";
+    pub const NO_MATCH: &str = "مفيش ملاحظة فيها الكلام ده.";
+    /// "ملاحظة على ص 284".
+    pub fn on_page(page: u32) -> String {
+        format!("ملاحظة على {}", super::cite::page(page))
+    }
+    /// "ملاحظاتك على ص 284".
+    pub fn on_page_title(page: u32) -> String {
+        format!("ملاحظاتك على {}", super::cite::page(page))
+    }
+    pub fn count(n: usize) -> String {
+        super::count::count(n, &super::count::NOTE)
+    }
 }

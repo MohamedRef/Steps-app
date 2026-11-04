@@ -118,6 +118,10 @@ pub fn QuestionView(
             }
             div { class: "q-foot",
                 crate::hover::BookPage { page: item.src.page, quote, of: item.id.clone() }
+                crate::notes::NoteChip {
+                    anchor: steps_core::note::Anchor::Item(item.id.clone()),
+                    page: (item.src.page > 0).then_some(item.src.page),
+                }
             }
             // A miss shows the cards that hold what it tested.
             if chosen != Some(q.answer) {

@@ -36,6 +36,7 @@ mod learn;
 mod lecture;
 mod look;
 mod more;
+mod notes;
 mod onboarding;
 mod oral;
 mod order;
@@ -315,6 +316,8 @@ fn AppAt(start: Screen, children: Element) -> Element {
             gopage::GoPage {}
             abbrsheet::AbbrSheet {}
             labs::LabSheet {}
+            // After the page sheet, which opens it, so it draws on top.
+            notes::NoteSheet {}
             courses::Picker {}
             own::ShareInbox {}
             {children}
