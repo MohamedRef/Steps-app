@@ -516,6 +516,8 @@ mod tests {
     fn store_defaults_record_and_stay_quiet() {
         let handle = StudyStoreHandle::new(Bare::default());
         let event = ReviewEvent {
+            confidence: None,
+            reason: None,
             item_id: "cvs.L04.002".into(),
             grade: Grade::Hard,
             origin: Origin::Study,
