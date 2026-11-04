@@ -724,6 +724,56 @@ mod block_tests {
         assert!(order.windows(2).all(|w| w[0] < w[1]));
     }
 
+    #[component]
+    fn BlockSetup(tutor: bool) -> Element {
+        use_hook(|| {
+            *RESTORED.write() = true;
+            *MODE.write() = Mode::Mock;
+            *BLOCK_TUTOR.write() = tutor;
+            BLOCK_COURSES.write().clear();
+        });
+        rsx! {
+            crate::browser_fixture::Shell { screen: crate::Screen::Bank, focus: false, Setup {} }
+        }
+    }
+
+    fn render_block(tutor: bool) -> String {
+        crate::store::use_memory_store();
+        let mut dom = VirtualDom::new_with_props(BlockSetup, BlockSetupProps { tutor });
+        dom.rebuild_in_place();
+        dioxus::ssr::render(&dom)
+    }
+
+    #[test]
+    fn the_block_card_offers_systems_sizes_and_both_modes() {
+        let html = render_block(false);
+        for needle in [
+            tx::MODE_MOCK_NAME,
+            tx::BLOCK_SYSTEMS,
+            tx::BLOCK_ALL_SYSTEMS,
+            tx::BLOCK_TIMED_HINT,
+            tx::BLOCK_TUTOR,
+            tx::START_MOCK,
+        ] {
+            assert!(html.contains(needle), "missing {needle}");
+        }
+        // The written lectures' courses are offered as chips, in Arabic.
+        let lib = Library::get();
+        let pool = exam::mcqs(lib.lectures.values());
+        for (_, _, short, _) in block_courses(&pool) {
+            assert!(html.contains(&short), "missing chip {short}");
+        }
+        for n in MOCK_COUNTS {
+            assert!(html.contains(&format!(">{n}<")), "missing size {n}");
+        }
+        // Timed blocks show their clock; tutor blocks have none.
+        let timed_minutes = minutes(exam::time_limit_ms(MOCK_SIZE.min(pool.len())));
+        let clock = counted(timed_minutes, &MINUTE);
+        assert!(html.contains(&clock), "missing {clock}");
+        let tutor = render_block(true);
+        assert!(!tutor.contains(&clock), "a tutor block shows no clock");
+    }
+
     #[test]
     fn a_setup_saved_before_blocks_still_loads() {
         let old = r#"{"mode":"mock","filter":{"lectures":[],"topics":[],"tags":[],"only":"all"},"count":20,"mock_count":100}"#;
