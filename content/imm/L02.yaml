@@ -104,7 +104,7 @@ items:
     kind: card
     topic: immune-privilege
     front: What is immune privilege, which organs have it, and why does it matter for transplants?
-    back: Organs and tissues (e.g., eye, brain, placenta, testes) where chemical or physical mechanisms limit immune responses to foreign antigens, to avoid damage from inflammation. Allograft rejection at these sites is less likely.
+    back: Sites such as the eye, brain, placenta and testes use chemical or physical barriers to damp immune responses to foreign antigens, because inflammation there would do harm. Grafts placed in these sites are rejected less often.
     src: { page: 97, quote: "Organs (eg, eye, brain, placenta, testes) and tissues where chemical or physical mechanisms limit immune responses to foreign antigens to avoid damage that would occur from inflammatory sequelae. Allograft rejection at these sites is less likely." }
     status: unverified
   - id: imm.L02.009
@@ -343,10 +343,12 @@ items:
     kind: mcq
     topic: natural-killer-cells
     stem: >-
-      A researcher studies a human cell line infected with a herpesvirus that downregulates MHC I on the
-      host cell surface. The infected cells escape killing by virus-specific CD8+ T cells. However, the
-      cells are still killed by a population of large granular lymphocytes that express CD16 and CD56 and
-      need no prior sensitization. What triggers these effector cells to kill?
+      A 52-year-old man who received a kidney transplant 3 months ago presents with fever, fatigue and
+      diarrhea. Colon biopsy shows cytomegalovirus-infected cells with intranuclear inclusions. The
+      virus downregulates MHC I on the infected cells, so virus-specific CD8+ T cells do not recognize
+      them. Over the next weeks the infection is controlled; the biopsy shows large granular lymphocytes
+      that express CD16 and CD56 and needed no prior sensitization killing the infected cells. What
+      triggers these effector cells to kill?
     options:
       - Recognition of viral peptide on MHC II
       - Loss of an inhibitory signal from MHC I
@@ -471,22 +473,24 @@ items:
     kind: mcq
     topic: positive-selection
     stem: >-
-      In a mouse model, double-positive CD4+ CD8+ thymocytes are studied in the thymic cortex. Thymocytes
-      whose T-cell receptors cannot bind any self-peptide-MHC complex on cortical epithelial cells are
-      tracked. What is the most likely fate of these cells?
+      A 7-month-old boy of consanguineous parents has had recurrent pneumonia, chronic diarrhea and oral
+      thrush since 3 months of age. Flow cytometry shows very few CD4+ T cells with normal CD8+ T-cell
+      counts, and serum immunoglobulins are low. His cells express no MHC II because of a transcription
+      factor mutation. In his thymus, double-positive thymocytes that would recognize self-peptide on
+      MHC II receive no survival signal. In which site does this failed step normally happen?
     options:
-      - They receive a survival signal and become CD8+ cells
-      - They do not receive a survival signal and die
-      - They become regulatory T cells in the medulla
-      - They leave to the paracortex of lymph nodes
-      - They undergo class switching
-    answer: 1
+      - Thymic cortex
+      - Thymic medulla
+      - Bone marrow
+      - Paracortex of lymph nodes
+      - Germinal centers of lymph node follicles
+    answer: 0
     why:
-      - "Only thymocytes whose TCRs recognize self-peptide-MHC get the survival signal."
-      - "Right. Positive selection in the cortex keeps only T cells that recognize self-MHC; cells that cannot get no survival signal."
-      - "Becoming a Treg is a fate of cells that bind self antigens with high affinity in the medulla (negative selection)."
-      - "Cells that fail selection do not reach the periphery."
-      - "Class switching is a B-cell process."
+      - "Right. This is positive selection, in the thymic cortex: double-positive thymocytes whose TCRs recognize self-peptide-MHC get a survival signal. With no MHC II, none become CD4+ cells (bare lymphocyte syndrome type II)."
+      - "The medulla is where negative selection removes T cells that bind self-peptides too strongly; it is not the survival signal."
+      - "T-cell precursors come from the bone marrow, but selection happens in the thymus."
+      - "The paracortex of lymph nodes houses mature T cells after they leave the thymus."
+      - "Germinal centers are B-cell sites (somatic hypermutation, class switching)."
     src: { page: 100, quote: "Double positive thymocytes expressing TCRs that recognize self-peptide MHC complexes receive a survival signal." }
     status: unverified
   - id: imm.L02.037
@@ -547,10 +551,12 @@ items:
     kind: mcq
     topic: macrophage-lymphocyte-interaction
     stem: >-
-      A 40-year-old man with Crohn disease is started on a drug that blocks a cytokine. Six months
-      later he develops fever, night sweats and a cavitary upper lobe lesion with acid-fast bacilli.
-      Investigators find that his macrophages ingest the mycobacteria but fail to kill them. Loss of
-      which Th1 product most directly explains the failed killing?
+      A 6-month-old boy has had fever, weight loss and enlarged axillary lymph nodes for 2 months. He
+      received the BCG vaccine at birth. Lymph node and bone marrow biopsies show macrophages filled
+      with acid-fast bacilli. His T and B cell counts and immunoglobulins are normal; testing finds an
+      autosomal recessive IL-12 receptor deficiency with a weak Th1 response. His macrophages ingest
+      the mycobacteria but fail to kill them. Loss of which Th1 product most directly explains the
+      failed killing?
     options:
       - IL-4
       - IFN-γ
@@ -560,7 +566,7 @@ items:
     answer: 1
     why:
       - "IL-4 is a Th2 cytokine that drives IgE; it inhibits Th1."
-      - "Right. Th1 cells secrete IFN-γ, which enhances the ability of macrophages to kill the microbes they ingest."
+      - "Right. IL-12 receptor deficiency weakens the Th1 response, so ↓ IFN-γ; Th1 cells secrete IFN-γ, which enhances the ability of macrophages to kill the microbes they ingest."
       - "IL-17 from Th17 recruits neutrophils."
       - "TGF-β is anti-inflammatory (Tregs)."
       - "IL-5 activates eosinophils (Th2)."
@@ -609,7 +615,7 @@ items:
     kind: card
     topic: regulatory-t-cells
     front: What is the function of regulatory T cells?
-    back: They help maintain specific immune tolerance by suppressing CD4+ and CD8+ T-cell effector functions.
+    back: They keep immune tolerance to specific antigens by holding back the effector actions of CD4+ and CD8+ T cells.
     src: { page: 100, quote: "Help maintain specific immune tolerance by suppressing CD4+ and CD8+ T-cell effector functions." }
     status: unverified
   - id: imm.L02.046
@@ -723,7 +729,7 @@ items:
     kind: card
     topic: peripheral-tolerance
     front: What is peripheral tolerance, and what happens when it is lost?
-    back: Suppression or inactivation of self-reactive T and B cells outside the thymus and bone marrow, preserving self-tolerance. Its loss → autoimmunity.
+    back: "Self-tolerance kept up after the cells leave the thymus and bone marrow: self-reactive T and B cells out in the periphery are suppressed or switched off. When it fails, autoimmunity follows."
     src: { page: 101, quote: "Suppression/inactivation of self-reactive T/B cells (outside thymus/bone marrow) → preserves self- tolerance; loss → autoimmunity." }
     status: unverified
   - id: imm.L02.055
@@ -772,10 +778,12 @@ items:
     kind: mcq
     topic: anergy
     stem: >-
-      In an experiment, naïve CD4+ T cells are cultured with epithelial cells that express MHC II loaded
-      with a peptide the T cells recognize. The epithelial cells express no B7 (CD80/86). A week later
-      the same T cells are exposed to professional antigen-presenting cells carrying the same peptide
-      and B7, but they do not proliferate. Which best describes the state of these T cells?
+      A 45-year-old woman receives a kidney transplant for diabetic nephropathy. Her maintenance regimen
+      includes a fusion protein that binds B7 (CD80/86) on antigen-presenting cells and blocks its
+      interaction with CD28. Her donor-reactive T cells recognize donor peptide-MHC complexes, but they
+      receive no costimulatory signal. Months later, biopsy shows no rejection, and her T cells that
+      recognize donor antigen do not proliferate even when the antigen is presented again. Which best
+      describes the state of these donor-reactive T cells?
     options:
       - Anergy
       - Negative selection
