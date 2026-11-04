@@ -1,5 +1,6 @@
 //! Keyboard shortcuts for tablet keyboards and the Mac (PARITY.md §6.5):
-//! Ctrl/⌘ + 1–7 for the screens, Ctrl/⌘ + , for Settings, and on study
+//! Ctrl/⌘ + 1–7 for the screens, Ctrl/⌘ + , for Settings, Ctrl/⌘ + G for a
+//! First Aid page, and on study
 //! screens Space to reveal, 1–4 to rate, A–E for MCQ options, Enter for next,
 //! ← / → between questions of a timed paper, F to flag, Esc to close, ? for
 //! the list.
@@ -31,6 +32,7 @@ window.__stepsKeys = (e) => {
   if (mod && !e.altKey && !e.shiftKey) {
     if (/^Digit[1-7]$/.test(e.code)) { e.preventDefault(); dioxus.send("go:" + e.code.slice(5)); return; }
     if (e.code === "Comma") { e.preventDefault(); dioxus.send("go:settings"); return; }
+    if (e.code === "KeyG") { e.preventDefault(); dioxus.send("page"); return; }
     return;
   }
   if (e.altKey || mod) return;
@@ -68,11 +70,13 @@ enum Command {
     Go(Screen),
     Settings,
     Help,
+    Page,
 }
 
 fn parse(msg: &str) -> Option<Command> {
     match msg {
         "help" => Some(Command::Help),
+        "page" => Some(Command::Page),
         "go:settings" => Some(Command::Settings),
         _ => {
             let n: usize = msg.strip_prefix("go:")?.parse().ok()?;
@@ -98,6 +102,10 @@ pub fn use_shortcuts() {
                     open_sheet(false);
                     settings.show(None);
                 }
+                Some(Command::Page) => {
+                    open_sheet(false);
+                    crate::gopage::open(ui);
+                }
                 Some(Command::Help) => {
                     let open = !*SHEET_OPEN.peek();
                     open_sheet(open);
@@ -116,9 +124,10 @@ pub fn KeysSheet() -> Element {
         return rsx! {};
     }
     let screens = format!("{} … {}", nav::TODAY, nav::STATS);
-    let rows: [(&[&str], String); 11] = [
+    let rows: [(&[&str], String); 12] = [
         (&["Ctrl", "1–7"], format!("{} ({screens})", tx::SCREENS)),
         (&["Ctrl", ","], tx::SETTINGS.into()),
+        (&["Ctrl", "G"], tx::PAGE.into()),
         (&["Space"], tx::REVEAL.into()),
         (&["1", "2", "3", "4"], tx::RATE.into()),
         (&["A", "B", "C", "D", "E"], tx::OPTIONS.into()),

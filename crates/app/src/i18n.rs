@@ -1068,6 +1068,21 @@ pub mod hover {
     pub const TERMS: &str = "مصطلح في القاموس";
 }
 
+pub mod gopage {
+    pub const TITLE: &str = "روح لصفحة في First Aid";
+    pub const TOOL: &str = "روح لصفحة";
+    pub const HINT: &str = "اكتب رقم الصفحة المطبوع في الكتاب (أو مدى زي 300–305).";
+    pub const PLACEHOLDER: &str = "مثلاً 300";
+    pub const GO: &str = "افتح";
+    pub const INVALID: &str = "اكتب رقم صفحة بس.";
+    pub fn outside(page: u32) -> String {
+        format!("صفحة {page} مش جوه أي محاضرة في Steps (المحاضرات من Section II و III).")
+    }
+    pub fn nearest(page: u32) -> String {
+        format!("افتح أقرب صفحة: {page}")
+    }
+}
+
 pub mod keys {
     pub const TITLE: &str = "اختصارات الكيبورد";
     pub const OPEN: &str = "اعرض الاختصارات";
@@ -1083,6 +1098,7 @@ pub mod keys {
     pub const FLAG: &str = "تعلّم السؤال عشان ترجعله";
     pub const ESC: &str = "تقفل أي حاجة مفتوحة";
     pub const HELP: &str = "القايمة دي";
+    pub const PAGE: &str = "تروح لصفحة في First Aid";
 }
 
 pub mod verify {
