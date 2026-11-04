@@ -80,6 +80,11 @@ pub fn abbreviations() -> Element {
     stroke("M4 11l3-7 3 7M5.3 8h3.4M14 4h6l-6 7h6M4 15h16M7 20h10")
 }
 
+/// The UWorld QID lookup: a hash sign.
+pub fn uworld() -> Element {
+    stroke("M9 3L7 21M17 3l-2 18M4 8.5h16M3 15.5h16")
+}
+
 /// The course map: a graduation cap.
 pub fn courses() -> Element {
     stroke("M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5M22 9v6")

@@ -13,6 +13,7 @@ pub mod pack;
 pub mod pages;
 pub mod plan;
 pub mod program;
+pub mod qbank;
 pub mod quote;
 pub mod response;
 pub mod review;

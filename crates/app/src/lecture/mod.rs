@@ -145,6 +145,9 @@ pub fn LecturePage(id: String) -> Element {
     if id == crate::notes::PAGE {
         return rsx! { crate::notes::NotesList {} };
     }
+    if id == crate::qbank::PAGE {
+        return rsx! { crate::qbank::LookupPage {} };
+    }
     let ui = use_context::<Ui>();
     let lib = Library::get();
     let review = use_review();
@@ -297,6 +300,8 @@ pub fn LecturePage(id: String) -> Element {
                     }
                 }
             }
+
+            crate::qbank::LectureSection { lecture: id.clone() }
 
             if let Some(s) = stats.filter(|s| !s.topics.is_empty()) {
                 section { class: "lec-section",

@@ -15,5 +15,6 @@ pub fn reload() {
     crate::bank::reload_history();
     crate::learn::reload();
     crate::weak::reload();
+    crate::qbank::reload();
     crate::courses::reload();
 }

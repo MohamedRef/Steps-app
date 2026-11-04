@@ -25,8 +25,9 @@ fn main() {
 
     let mut files = Vec::new();
     for dir in std::fs::read_dir(&content).expect("content/ exists").flatten() {
-        // content/glossary/ holds the per-course glossaries, not lectures.
-        if !dir.path().is_dir() || dir.file_name() == "glossary" {
+        // content/glossary/ holds the per-course glossaries and
+        // content/qbank/ the UWorld QIDs (docs/QBANK.md), not lectures.
+        if !dir.path().is_dir() || dir.file_name() == "glossary" || dir.file_name() == "qbank" {
             continue;
         }
         println!("cargo:rerun-if-changed={}", dir.path().display());

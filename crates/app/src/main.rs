@@ -48,6 +48,7 @@ mod persistence;
 mod plan;
 mod platform;
 mod prefs;
+mod qbank;
 mod recap;
 mod reminders;
 #[cfg(test)]
