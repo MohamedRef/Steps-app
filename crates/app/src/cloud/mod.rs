@@ -11,6 +11,8 @@ pub mod api;
 pub mod engine;
 // The Mac and Android sign in through a loopback listener; the web app
 // leaves the page for Google and comes back (docs/WEB.md).
+#[cfg(test)]
+mod fake;
 #[cfg(not(target_arch = "wasm32"))]
 pub mod oauth;
 #[cfg(target_arch = "wasm32")]
@@ -18,6 +20,8 @@ pub mod oauth;
 pub mod oauth;
 pub mod session;
 mod socket;
+#[cfg(test)]
+mod tests;
 mod ui;
 
 use std::collections::BTreeSet;
@@ -273,6 +277,10 @@ fn device_model() -> Option<String> {
     None
 }
 
+/// What `open_url` was asked to open (tests).
+#[cfg(test)]
+pub static OPENED: std::sync::Mutex<Vec<String>> = std::sync::Mutex::new(Vec::new());
+
 /// Opens `url` in the default browser (Google sign-in).
 pub fn open_url(url: &str) -> Result<(), String> {
     #[cfg(target_os = "android")]
@@ -284,10 +292,11 @@ pub fn open_url(url: &str) -> Result<(), String> {
         let window = web_sys::window().ok_or("no window")?;
         window.open_with_url_and_target(url, "_blank").map(drop).map_err(|e| format!("{e:?}"))
     }
-    // Unit tests open nothing on the machine running them.
+    // Unit tests open nothing on the machine running them: the address is
+    // only noted, so a test can play the browser.
     #[cfg(test)]
     {
-        let _ = url;
+        OPENED.lock().unwrap_or_else(std::sync::PoisonError::into_inner).push(url.to_owned());
         Ok(())
     }
     #[cfg(not(any(target_os = "android", target_arch = "wasm32", test)))]

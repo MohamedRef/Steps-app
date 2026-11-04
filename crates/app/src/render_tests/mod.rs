@@ -9,7 +9,9 @@
 
 mod crawl;
 mod dom;
+mod onboarding;
 mod screens;
+mod update;
 
 use std::time::Duration;
 

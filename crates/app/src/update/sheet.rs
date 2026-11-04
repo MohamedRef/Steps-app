@@ -435,7 +435,7 @@ pub fn UpdateSheet() -> Element {
                 ol { class: "us-timeline",
                     for (i, (is_earlier, b)) in shown.into_iter().enumerate() {
                         if Some(i) == first_earlier {
-                            li { key: "{i}-earlier", class: "us-divider", role: "rheumatic", "{tx::EARLIER}" }
+                            li { key: "{i}-earlier", class: "us-divider", role: "separator", "{tx::EARLIER}" }
                         }
                         {
                             let key = b.key();

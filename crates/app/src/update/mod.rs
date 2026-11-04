@@ -165,6 +165,11 @@ pub fn init() {
 }
 
 pub fn get() -> Option<&'static Updater> {
+    // Screen tests give each test thread an updater of its own.
+    #[cfg(test)]
+    if let Some(u) = testing::TEST_UPDATER.with(std::cell::Cell::get) {
+        return Some(u);
+    }
     STARTED.get().and(UPDATER.get())
 }
 
@@ -554,5 +559,7 @@ fn write_json(dir: &Path, name: &str, value: &impl Serialize) -> Result<(), Stri
     fs::rename(&tmp, dir.join(name)).map_err(|e| e.to_string())
 }
 
+#[cfg(test)]
+pub(crate) mod testing;
 #[cfg(test)]
 mod tests;
