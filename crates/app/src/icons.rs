@@ -80,7 +80,7 @@ pub fn abbreviations() -> Element {
     stroke("M4 11l3-7 3 7M5.3 8h3.4M14 4h6l-6 7h6M4 15h16M7 20h10")
 }
 
-/// The MSc map: a graduation cap.
+/// The course map: a graduation cap.
 pub fn courses() -> Element {
     stroke("M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5M22 9v6")
 }
@@ -93,13 +93,6 @@ pub fn caret_down() -> Element {
 /// A new card: a card with a plus.
 pub fn add_card() -> Element {
     stroke("M5 5h14a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zM12 9v6M9 12h6")
-}
-
-/// The calculators: a calculator.
-pub fn calculator() -> Element {
-    stroke(
-        "M7 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM9 7h6M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01",
-    )
 }
 
 /// Lesson view toggle: stacked cards (steps).
@@ -165,24 +158,6 @@ pub fn layout_compact() -> Element {
 /// The order of a list: an arrow down beside shorter and shorter lines.
 pub fn sort() -> Element {
     stroke("M7 4.5v15M4 16.5l3 3 3-3M13 6.5h7M13 11.5h5M13 16.5h3")
-}
-
-/// A favourite (the calculators' ☆): a star, filled once pinned.
-pub fn star(filled: bool) -> Element {
-    rsx! {
-        svg {
-            class: "icon",
-            width: "22",
-            height: "22",
-            view_box: "0 0 24 24",
-            fill: if filled { "currentColor" } else { "none" },
-            stroke: "currentColor",
-            stroke_width: "1.8",
-            stroke_linejoin: "round",
-            "aria-hidden": "true",
-            path { d: "M12 3.5l2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9z" }
-        }
-    }
 }
 
 /// A tick, for a finished lesson.
