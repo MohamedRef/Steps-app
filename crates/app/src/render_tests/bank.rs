@@ -541,6 +541,10 @@ fn a_finished_paper_row_opens_its_lecture() {
 
 /// A timed paper on every MCQ, started `ago_ms` before now, as the app keeps
 /// one it was killed in.
+/// Longer than any paper's time, whatever the bank holds (a paper's time
+/// grows with its questions: a whole bank of 1000 is over a day).
+const LONG_AGO_MS: i64 = 365 * 86_400_000;
+
 fn open_paper(ago_ms: i64) -> crate::bank::Paper {
     use steps_core::exam::{Answer, Mode, Question};
     let questions: Vec<Question> = ids_of("mcq")
@@ -583,7 +587,7 @@ fn a_timed_paper_the_app_was_killed_in_comes_back_as_the_left_one() {
 
 #[test]
 fn a_left_paper_past_its_time_goes_in_as_it_stands() {
-    let paper = open_paper(24 * 3_600_000);
+    let paper = open_paper(LONG_AGO_MS);
     crate::store::shared().put_local_setting("bank.open_paper", &Some(paper)).unwrap();
     let mut app = App::open(Screen::Bank);
     app.assert_has(tx::PAUSED_OVER);
@@ -599,7 +603,7 @@ fn a_running_paper_past_its_time_goes_in_on_the_next_tap() {
     // The clock ran out while he looked away.
     app.run(|| {
         if let crate::bank::Phase::Running(p) = &mut *crate::bank::PHASE.write() {
-            p.started_ms -= 24 * 3_600_000;
+            p.started_ms -= LONG_AGO_MS;
         }
     });
     let (right, _) = options(&shown(&app));
@@ -613,7 +617,7 @@ fn a_move_past_the_time_hands_the_paper_in() {
     let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);
     app.run(|| {
         if let crate::bank::Phase::Running(p) = &mut *crate::bank::PHASE.write() {
-            p.started_ms -= 24 * 3_600_000;
+            p.started_ms -= LONG_AGO_MS;
         }
     });
     app.tap(tx::NEXT);
