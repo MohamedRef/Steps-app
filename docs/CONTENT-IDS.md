@@ -4,8 +4,8 @@ Steps stores his history against ids written in the content:
 
 | Record | Points at |
 |---|---|
-| Review events and item states (`review_events`, `item_status`) | item id (`hb.L01.001`) |
-| Lesson progress | lesson id (`hb.L01.lesson1`) |
+| Review events and item states (`review_events`, `item_status`) | item id (`cvs.L01.001`) |
+| Lesson progress | lesson id (`cvs.L01.lesson1`) |
 | Planner, Today, course switcher | lecture id, topic id, course id |
 | Verdicts and approvals (`content/approved.txt`) | item id |
 

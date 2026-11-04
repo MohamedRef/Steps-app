@@ -45,7 +45,7 @@ pub enum Scope {
 static OPEN: GlobalSignal<Option<Open>> = Signal::global(|| None);
 
 /// Opens the sheet for page `page` cited by `of` (an item, lesson step or
-/// lecture id; empty for the hepatology book). A course that cites slides
+/// lecture id; empty for the primary book). A course that cites slides
 /// numbers them per lecture, so the sheet stays in `of`'s lecture.
 pub fn open(page: u32, of: &str, quote: Option<String>, held: bool, hook: Option<Hook>) {
     document::eval("window.__stepsHover && window.__stepsHover.hide();");
@@ -54,7 +54,7 @@ pub fn open(page: u32, of: &str, quote: Option<String>, held: bool, hook: Option
         Some((page, scope(Library::get(), of), quote.filter(|q| !q.trim().is_empty()), held, hook));
 }
 
-/// Where `of`'s page numbers count; empty `of` is the hepatology book.
+/// Where `of`'s page numbers count; empty `of` is the primary book.
 pub fn scope(lib: &Library, of: &str) -> Scope {
     use steps_core::program::{course_of, lecture_of};
     if of.is_empty() {

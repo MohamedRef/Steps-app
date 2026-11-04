@@ -6,20 +6,19 @@ name: Android preview APK
 # .github/workflows/android-preview.yml; it also folds in chunk 20's
 # android-apk.yml (scripts/android-check-apk.sh runs on every build).
 #
-# Since the first alpha (Mohamed, 2026-11-02) pushes to main are signed with
-# the *release* keys (repo secrets from scripts/release-secrets.sh): the APK
-# with the release keystore and the feed with the release update key. So a
-# release build can follow the preview channel when he picks it in
-# Settings › Updates, and a preview build can go back to alpha, without
-# reinstalling. Builds before this used a CI-cached preview key and need one
-# reinstall.
+# Pushes to main are signed with the permanent *release* keys (repo secrets
+# from scripts/release-secrets.sh): the APK with the release keystore and the
+# feed with the release update key. So every build, preview or release, can
+# move between the preview, alpha, beta and stable channels in
+# Settings › Updates without reinstalling. Until those secrets exist, main
+# builds with one-off keys and publishes nothing.
 #
 # Pull-request runs never see the secrets: they sign with one-off keys
 # (enough to prove the APK builds, signs and passes the checks) and get a
 # read-only token. Only the separate `publish` job can write.
 #
-# Self-updates: the APK is built for the `preview` channel (its default; the
-# learner can switch to alpha in Settings), and the release carries a signed update.json naming the APK and the content pack, so an
+# Self-updates: the APK follows alpha by default (Settings can pick preview),
+# and the release carries a signed update.json naming the APK and the content pack, so an
 # installed preview updates itself (and its lectures) after every merge.
 
 on:
@@ -55,8 +54,13 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     env:
-      # A PR's own copy of this workflow runs here, so it must not reach the keys.
-      KEEP_KEY: ${{ github.event_name != 'pull_request' }}
+      # A PR's own copy of this workflow runs here, so it must not reach the
+      # keys. Until the permanent release keys exist (scripts/release-secrets.sh,
+      # once, before the first alpha), main builds like a PR too: it proves the
+      # APK builds and signs, and nothing is published.
+      KEEP_KEY: ${{ github.event_name != 'pull_request' && secrets.STEPS_UPDATE_SECRET != '' }}
+    outputs:
+      keep: ${{ env.KEEP_KEY }}
     steps:
       - uses: actions/checkout@v5
         with:
@@ -161,7 +165,7 @@ jobs:
         # app then hides sign-in. Never echo these.
         env:
           STEPS_CLOUD_URL: ${{ env.KEEP_KEY == 'true' && (vars.STEPS_CLOUD_URL || 'https://steps-cloud.hamorefaat85.workers.dev') || '' }}
-          STEPS_GOOGLE_CLIENT_ID: ${{ env.KEEP_KEY == 'true' && (vars.STEPS_GOOGLE_CLIENT_ID || '1001052243528-3d8bmf0efprgdvov9f663fm8u63kblck.apps.googleusercontent.com') || '' }}
+          STEPS_GOOGLE_CLIENT_ID: ${{ env.KEEP_KEY == 'true' && vars.STEPS_GOOGLE_CLIENT_ID || '' }}
           STEPS_GOOGLE_CLIENT_SECRET: ${{ env.KEEP_KEY == 'true' && secrets.STEPS_GOOGLE_CLIENT_SECRET || '' }}
         run: |
           dx bundle --platform android --release --package-types apk \
@@ -265,7 +269,7 @@ jobs:
   publish:
     name: Publish the steps-preview release
     needs: apk
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' && needs.apk.outputs.keep == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
