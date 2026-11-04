@@ -76,8 +76,10 @@ jobs:
           HAVE_KEYSTORE: ${{ secrets.STEPS_ANDROID_KEYSTORE != '' && secrets.STEPS_ANDROID_KEYSTORE_PASSWORD != '' }}
           HAVE_MAC: ${{ secrets.STEPS_MAC_CERT_P12 != '' && secrets.STEPS_MAC_CERT_PASSWORD != '' }}
           HAVE_GOOGLE: ${{ secrets.STEPS_GOOGLE_CLIENT_SECRET != '' }}
+          CERT_SHA256: ${{ vars.STEPS_ANDROID_CERT_SHA256 }}
         run: |
           ok=true
+          [[ "$CERT_SHA256" =~ ^[0-9a-f]{64}$ ]] || { echo "::error::repo variable STEPS_ANDROID_CERT_SHA256 is missing (scripts/release-secrets.sh)"; ok=false; }
           grep -q '^[A-Za-z0-9+/]\{43\}=$' crates/app/update-key.pub \
             || { echo "::error::crates/app/update-key.pub holds no key: run scripts/release-secrets.sh on the Mac and commit it"; ok=false; }
           [ "$HAVE_UPDATE" = true ] || { echo "::error::secret STEPS_UPDATE_SECRET is missing (scripts/release-secrets.sh)"; ok=false; }
@@ -148,6 +150,9 @@ jobs:
         env:
           KEYSTORE_B64: ${{ secrets.STEPS_ANDROID_KEYSTORE }}
           PASS: ${{ secrets.STEPS_ANDROID_KEYSTORE_PASSWORD }}
+          # Public fingerprint of the permanent release certificate (repo
+          # variable from scripts/release-secrets.sh).
+          CERT_SHA256: ${{ vars.STEPS_ANDROID_CERT_SHA256 }}
         run: |
           ks="$RUNNER_TEMP/steps-release.jks"
           printf %s "$KEYSTORE_B64" | base64 -d > "$ks"
@@ -155,7 +160,10 @@ jobs:
           apksigner sign --ks "$ks" --ks-key-alias steps --ks-pass env:PASS --key-pass env:PASS \
             --out dist/android/steps.apk "$RUNNER_TEMP/aligned.apk"
           rm -f "$ks"
-          apksigner verify --print-certs dist/android/steps.apk
+          apksigner verify --print-certs dist/android/steps.apk | tee "$RUNNER_TEMP/certs.txt"
+          [ -n "$CERT_SHA256" ] || { echo "::error::repo variable STEPS_ANDROID_CERT_SHA256 is missing (scripts/release-secrets.sh)"; exit 1; }
+          grep -qi "certificate SHA-256 digest: $CERT_SHA256\$" "$RUNNER_TEMP/certs.txt" \
+            || { echo "::error::the APK is not signed with the permanent release key ($CERT_SHA256)"; exit 1; }
           unzip -l dist/android/steps.apk | grep -q 'lib/arm64-v8a/' \
             || { echo "APK has no arm64-v8a library"; exit 1; }
           ls -lh dist/android/steps.apk
@@ -298,7 +306,7 @@ jobs:
             gh release create "$tag" --prerelease --target "$GITHUB_SHA" --title "Steps $V" --notes "$(cat <<NOTES
           Steps $V, built by the Release workflow (run ${{ github.run_number }}, ${GITHUB_SHA::7}).
 
-          - Android (S24 Ultra, Tab S11): install steps-$V.apk. It is signed with the release key, so uninstall a *preview* build first (export your data from Settings first, or let sync bring it back). From now on it updates itself from the $CHANNELS feed.
+          - Android (S24 Ultra, Tab S11): install steps-$V.apk. It is signed with the same permanent release key as the preview builds, so it installs over any Steps already there and keeps your data. From now on it updates itself from the $CHANNELS feed; Settings › Updates switches to preview, beta or stable without reinstalling.
           - Mac: unzip Steps-$V-mac.zip, move Steps.app to Applications, then once: \`xattr -dr com.apple.quarantine /Applications/Steps.app\` (it is self-signed). Later versions install themselves.
           NOTES
           )"
