@@ -116,6 +116,26 @@
 }
 .weekday[aria-pressed="true"] { background: var(--good-soft); border-color: transparent; color: var(--good); font-weight: 700; }
 .error { color: var(--bad); font-weight: 600; }
+.field select, .day-load select {
+  font: inherit;
+  color: inherit;
+  min-height: var(--tap);
+  padding-inline: var(--sp-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+  max-inline-size: 16rem;
+}
+.day-loads { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: var(--sp-2); }
+.day-loads > legend { grid-column: 1 / -1; }
+.day-load { display: flex; flex-direction: column; gap: var(--sp-1); }
+.vacations { gap: var(--sp-2); }
+.vacation { display: flex; flex-wrap: wrap; align-items: end; gap: var(--sp-2); }
+.vacation label { display: flex; flex-direction: column; gap: var(--sp-1); }
+.plan-phase { font-weight: 700; color: var(--accent); margin: 0; }
+.plan-preview > summary { cursor: pointer; color: var(--accent); padding-block: var(--sp-2); }
+.plan-day[data-focus="CatchUp"] .plan-focus { color: var(--muted); }
+.plan-day[data-milestone] .plan-focus { color: var(--accent); }
 
 .plan-days { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-1); }
 .plan-day {

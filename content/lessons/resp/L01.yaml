@@ -1,0 +1,191 @@
+schema: steps.lesson/v1
+lecture: resp.L01
+lessons:
+  - id: resp.L01.lesson1
+    title: "الرئة بتتبني إزاي، وليه البيبي البدري بيتعب"
+    hook: "خمس مراحل، وخلية واحدة (type II) هي اللي بتنقذ البيبي من إن الـ alveoli تقفل"
+    minutes: 9
+    pages: [678, 679]
+    topics: [lung-development, choanal-atresia, pulmonary-hypoplasia, bronchogenic-cysts, club-cells, alveolar-cell-types, neonatal-respiratory-distress-syndrome]
+    goals:
+      - "ترتّب مراحل تطوّر الرئة وتعرف إمتى التنفس بقى ممكن"
+      - "تفرّق بين خلايا الـ alveolus والـ club cells"
+      - "تفهم الـ neonatal RDS: السبب، الـ risk factors، العلاج، ومضاعفات الـ O2"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "البداية: lung bud في الأسبوع 4"
+        text: |-
+          الرئة بتبدأ ==lung bud== من الطرف البعيد للـ respiratory diverticulum في ==الأسبوع 4==، وبعدين بتعدّي على 5 مراحل.
+
+          الكتاب بيحفّظها بجملة: «**E**very **p**ulmonologist **c**an **s**ee **a**lveoli» = Embryonic، Pseudoglandular، Canalicular، Saccular، Alveolar.
+        page: 678
+        quote: "Occurs in five stages. Begins with the formation of lung bud from distal end of respiratory diverticulum during week 4 of development. Every pulmonologist can see alveoli."
+      - kind: figure
+        title: "المراحل على خط الزمن"
+        svg: |-
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="pL1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <line class="fg-arrow" x1="10" y1="200" x2="350" y2="200" marker-end="url(#pL1a)"/>
+            <text x="10" y="220" class="t-sm t-mut">wk 4</text>
+            <text x="150" y="220" class="t-sm t-mut">wk 20</text>
+            <text x="200" y="220" class="t-sm t-mut">wk 25</text>
+            <text x="290" y="220" class="t-sm t-mut">birth</text>
+            <rect class="fg-box" x="10" y="14" width="40" height="24" rx="5"/>
+            <text x="14" y="30" class="t-sm">Emb.</text>
+            <rect class="fg-box" x="20" y="48" width="130" height="24" rx="5"/>
+            <text x="26" y="64" class="t-sm">Pseudoglandular</text>
+            <rect class="fg-acc" x="120" y="82" width="100" height="24" rx="5"/>
+            <text x="126" y="98" class="t-sm t-b">Canalicular</text>
+            <rect class="fg-box" x="190" y="116" width="120" height="24" rx="5"/>
+            <text x="196" y="132" class="t-sm">Saccular</text>
+            <rect class="fg-good" x="280" y="150" width="70" height="24" rx="5"/>
+            <text x="286" y="166" class="t-sm">Alveolar</text>
+            <line class="fg-arrow" x1="160" y1="196" x2="160" y2="112" marker-end="url(#pL1a)"/>
+            <text x="60" y="140" class="t-sm t-acc">pneumocytes</text>
+            <line class="fg-arrow" x1="210" y1="196" x2="210" y2="146" marker-end="url(#pL1a)"/>
+            <text x="216" y="186" class="t-sm t-good">can breathe</text>
+          </svg>
+        alt: "Timeline of the five stages of lung development: embryonic from week 4, pseudoglandular, canalicular with pneumocytes at week 20 and respiration possible at week 25, saccular, and alveolar from week 36 into childhood."
+        caption: "الـ canalicular (16–25) هي المرحلة الفاصلة: pneumocytes من الأسبوع 20، والتنفس ممكن من الأسبوع 25."
+        page: 678
+        quote: "Pneumocytes develop starting at week 20 (surfactant synthesis). Respiration capable at week 25."
+      - kind: table
+        title: "Stages of lung development"
+        columns: ["Stage", "Weeks", "What forms"]
+        rows:
+          - ["Embryonic", "4–7", "Lung bud → trachea → mainstem → lobar → segmental bronchi"]
+          - ["Pseudoglandular", "5–17", "Terminal bronchioles; breathing impossible"]
+          - ["Canalicular", "16–25", "Respiratory bronchioles, alveolar ducts; breathing at 25"]
+          - ["Saccular", "24–38", "Terminal sacs, 1° septae"]
+          - ["Alveolar", "36–childhood", "Adult alveoli, 2° septation"]
+        hide: [[1, 2], [2, 2], [3, 2]]
+        page: 678
+        quote: "Endodermal tubules → terminal bronchioles. Surrounded by modest capillary network. Respiration impossible, incompatible with life."
+      - kind: aside
+        tone: exam
+        text: "الغلطات في المرحلة الـ ==embryonic== (الـ bud نفسه): tracheoesophageal fistula، tracheal atresia أو stenosis، و pulmonary agenesis. وجوه الرحم الـ «تنفس» شفط وطرد للـ amniotic fluid، فالـ ==pulmonary vascular resistance== عالية لحد الولادة، وبعدها الهوا يدخل والـ resistance تقع."
+        page: 678
+        quote: "Errors at this stage can lead to tracheoesophageal fistula, tracheal atresia/ stenosis and pulmonary agenesis."
+      - kind: check
+        question: "A neonate born at 22 weeks cannot exchange gas. Which stage is the lung in, and when does breathing become possible?"
+        options:
+          - "Canalicular; at week 25"
+          - "Pseudoglandular; at week 17"
+          - "Saccular; at week 38"
+          - "Alveolar; at birth"
+        answer: 0
+        why:
+          - "صح: 16–25 = canalicular، والـ pneumocytes بتبدأ من 20 والتنفس ممكن من 25."
+          - "الـ pseudoglandular بتخلص على 17 والتنفس فيها مستحيل."
+          - "الـ saccular بتبدأ من 24."
+          - "الـ alveolar من 36 لحد الطفولة."
+        page: 678
+        quote: "Pneumocytes develop starting at week 20 (surfactant synthesis). Respiration capable at week 25."
+      - kind: explain
+        title: "Choanal atresia: بيزرق وهو بيرضع"
+        text: |-
+          فتحة الأنف الخلفية مقفولة. غالباً ناحية واحدة، ومعاها عيوب في عظم الـ midface.
+
+          لو الناحيتين ده ==emergency==: البيبي بيتنفس من مناخيره بس، فلما يرضع (بقه مشغول) يزرق، ولما ==يعيّط== (بقه مفتوح) يتحسّن. التشخيص: الـ ==nasogastric tube== مش بيعدّي بعد الـ pharynx، والتأكيد بالـ CT.
+        page: 678
+        quote: "cyanosis that worsens during feeding and improves with crying. Diagnosed by failure to pass nasogastric tube (beyond the pharynx) and confirmed with CT scan."
+      - kind: mnemonic
+        word: "CHARGE"
+        parts:
+          - { key: "C", text: "Coloboma of eye" }
+          - { key: "H", text: "Heart defects" }
+          - { key: "A", text: "Atresia of choanae" }
+          - { key: "R", text: "Restricted growth and development" }
+          - { key: "G", text: "Genitourinary defects" }
+          - { key: "E", text: "Ear defects" }
+        hook: "الـ choanal atresia غالباً جزء من syndrome، وأشهرها CHARGE."
+        page: 678
+        quote: "Coloboma of eye ▘ Heart defects ▘ Atresia of choanae ▘ Restricted growth and development ▘ Genitourinary defects ▘ Ear defects"
+      - kind: match
+        prompt: "وصّل كل malformation بسببها أو علامتها"
+        pairs:
+          - ["Pulmonary hypoplasia", "Left diaphragmatic hernia or Potter sequence"]
+          - ["Bronchogenic cyst", "Abnormal foregut budding; round fluid-filled density"]
+          - ["Choanal atresia", "NG tube can't pass the pharynx"]
+          - ["Tracheoesophageal fistula", "Error of the embryonic stage"]
+        why: "الـ hypoplasia رئة مش متكوّنة كويس لأن حاجة ضاغطة أو مفيش amniotic fluid؛ الـ cyst حتة منفصلة من الـ foregut ممكن تتعب وتعمل infections."
+        page: 679
+        quote: "Associated with congenital diaphragmatic hernia (usually left-sided), bilateral renal agenesis (Potter sequence)."
+      - kind: explain
+        title: "خلايا الرئة"
+        text: |-
+          - **Club cells** في الـ bronchioles: بيكسروا ==toxins (P-450)==، ويفرزوا مادة شبه الـ surfactant، و stem cells للـ bronchiolar epithelium.
+          - **Type I pneumocytes**: squamous، بتغطي ==97%== من الـ alveolus، رفيعة عشان الغاز يعدّي.
+          - **Type II pneumocytes**: cuboidal، stem cells للنوعين، ==بتفرز الـ surfactant== من الـ lamellar bodies، وبتتكاثر لما الرئة تتأذي.
+          - **Alveolar macrophages** (dust cells): بتبلع أي حاجة غريبة. الـ hemosiderin-laden منهم في الـ pulmonary edema أو الـ alveolar hemorrhage.
+          - والـ **pores of Kohn** فتحات بين الـ alveoli بيعدّي منها هوا ومية وبكتيريا (في الـ pneumonia).
+        page: 679
+        quote: "Serve as stem cell precursors for 2 cell types (type I and type II pneumocytes); proliferate during lung damage."
+      - kind: explain
+        title: "الـ surfactant وقانون Laplace"
+        text: |-
+          ==Collapsing pressure = 2 × surface tension / radius==. يعني لما الـ alveolus يصغر في الـ expiration، الضغط اللي بيقفّله يزيد.
+
+          الـ surfactant بيقلل الـ surface tension، فيقلل الـ collapse والـ recoil ويزوّد الـ ==compliance==. أغلبه **DPPC** (lecithin). بيبدأ ~20 أسبوع ويكمل ~35 أسبوع، والـ ==glucocorticoids== مهمة لتصنيعه.
+        page: 679
+        quote: "Surfactant—↓ alveolar surface tension, ↓ alveolar collapse, ↓ lung recoil, and ↑ compliance."
+      - kind: check
+        question: "Which statement about surfactant is correct?"
+        options:
+          - "It increases lung compliance"
+          - "It increases alveolar surface tension"
+          - "It is made by type I pneumocytes"
+          - "It reaches mature levels by week 25"
+        answer: 0
+        why:
+          - "صح: ↓ surface tension و ↓ collapse و ↓ recoil و ↑ compliance."
+          - "بالعكس، بيقللها."
+          - "بتفرزه الـ type II من الـ lamellar bodies."
+          - "بيوصل للمستوى الناضج ~35 أسبوع."
+        page: 679
+        quote: "Synthesis begins ~20 weeks of gestation and achieves mature levels ~35 weeks of gestation."
+      - kind: explain
+        title: "Neonatal RDS"
+        text: |-
+          ==Surfactant deficiency== ← ↑ surface tension ← الـ alveoli تقفل ← «ground-glass» على الـ CXR.
+
+          - **Risk factors**: prematurity، ==diabetes في الحمل== (↑ fetal insulin)، و C-section (↓ fetal glucocorticoids لأن الولادة أقل stress).
+          - **العلاج**: glucocorticoids للأم قبل الولادة، و surfactant للبيبي.
+          - **الكشف**: L/S ratio في الـ amniotic fluid: ≥ 2 كويس، ==< 1.5== يتوقع NRDS. وكمان lamellar body count و foam stability و surfactant-albumin ratio.
+        page: 679
+        quote: "Risk factors: prematurity, diabetes during pregnancy (due to ↑ fetal insulin), C-section delivery (↓ release of fetal glucocorticoids; less stressful than vaginal delivery)."
+      - kind: mnemonic
+        word: "RIB"
+        parts:
+          - { key: "R", text: "Retinopathy of prematurity" }
+          - { key: "I", text: "Intraventricular hemorrhage" }
+          - { key: "B", text: "Bronchopulmonary dysplasia" }
+        hook: "الـ O2 نفسه بيأذي البيبي البدري. ولو الـ O2 tension فضل واطي ← خطر PDA."
+        page: 679
+        quote: "Therapeutic supplemental O2 → Retinopathy of prematurity, Intraventricular hemorrhage, Bronchopulmonary dysplasia (RIB)."
+      - kind: check
+        question: "A planned C-section at 36 weeks is followed by neonatal RDS. Why does C-section raise the risk?"
+        options:
+          - "Less fetal glucocorticoid release"
+          - "Higher fetal insulin"
+          - "Too much supplemental O2"
+          - "Damage to type I pneumocytes"
+        answer: 0
+        why:
+          - "صح: الـ C-section أقل stress من الولادة الطبيعي، فالـ fetal glucocorticoids أقل."
+          - "الـ insulin العالي هو سبب الـ diabetes في الحمل."
+          - "الـ O2 مضاعفة للعلاج، مش سبب للـ RDS."
+          - "المشكلة في الـ surfactant من الـ type II."
+        page: 679
+        quote: "C-section delivery (↓ release of fetal glucocorticoids; less stressful than vaginal delivery)."
+      - kind: try
+        items: [resp.L01.007, resp.L01.011, resp.L01.026, resp.L01.033]
+    recap:
+      - "Every pulmonologist can see alveoli: embryonic، pseudoglandular، canalicular، saccular، alveolar."
+      - "Pneumocytes من الأسبوع 20، والتنفس ممكن من 25."
+      - "Choanal atresia: يزرق وهو بيرضع ويتحسن لما يعيّط؛ CHARGE."
+      - "Hypoplasia: diaphragmatic hernia أو Potter. Bronchogenic cyst: foregut budding."
+      - "Type II = surfactant + stem cells. Surfactant: DPPC، 20→35 أسبوع، glucocorticoids."
+      - "NRDS: prematurity، diabetes، C-section. O2 ← RIB، والـ O2 الواطي ← PDA."
+    practice: [resp.L01.001, resp.L01.002, resp.L01.003, resp.L01.004, resp.L01.005, resp.L01.006, resp.L01.007, resp.L01.008, resp.L01.009, resp.L01.010, resp.L01.011, resp.L01.012, resp.L01.013, resp.L01.014, resp.L01.015, resp.L01.016, resp.L01.017, resp.L01.018, resp.L01.019, resp.L01.020, resp.L01.021, resp.L01.022, resp.L01.023, resp.L01.024, resp.L01.025, resp.L01.026, resp.L01.027, resp.L01.028, resp.L01.029, resp.L01.030, resp.L01.031, resp.L01.032, resp.L01.033, resp.L01.034]
