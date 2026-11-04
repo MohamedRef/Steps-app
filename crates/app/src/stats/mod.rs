@@ -2,10 +2,13 @@
 //! weakest topics, the mistakes log, and the exam planner's tab.
 //! The numbers come from `steps_core::stats`; this module only draws them.
 
+#[cfg(test)]
+mod browser;
 pub mod charts;
 mod demo;
 mod mistakes;
 mod period;
+mod scores;
 
 use std::collections::BTreeMap;
 
@@ -84,6 +87,7 @@ pub enum Tab {
     Progress,
     Mistakes,
     Plan,
+    Scores,
 }
 
 impl Tab {
@@ -92,6 +96,7 @@ impl Tab {
         match std::env::var("STEPS_STATS_TAB").ok()?.as_str() {
             "mistakes" => Some(Tab::Mistakes),
             "plan" => Some(Tab::Plan),
+            "scores" => Some(Tab::Scores),
             _ => None,
         }
     }
@@ -121,8 +126,12 @@ pub fn Stats() -> Element {
     let review = crate::store::use_review();
     let data = std::rc::Rc::new(StudyData::load(&*review.backend.borrow()));
     let current = *tab.read();
-    let tabs =
-        [(Tab::Progress, tx::TAB_PROGRESS), (Tab::Mistakes, tx::TAB_MISTAKES), (Tab::Plan, tx::TAB_PLAN)];
+    let tabs = [
+        (Tab::Progress, tx::TAB_PROGRESS),
+        (Tab::Mistakes, tx::TAB_MISTAKES),
+        (Tab::Plan, tx::TAB_PLAN),
+        (Tab::Scores, crate::i18n::scores::TAB),
+    ];
     rsx! {
         style { {STATS_CSS.text()} }
         header { class: "page-head",
@@ -147,6 +156,7 @@ pub fn Stats() -> Element {
             Tab::Progress => rsx! { Progress { data: data.clone() } },
             Tab::Mistakes => rsx! { mistakes::Mistakes { data: data.clone() } },
             Tab::Plan => rsx! { Planner { data: data.clone() } },
+            Tab::Scores => rsx! { scores::Scores { data: data.clone() } },
         }
     }
 }

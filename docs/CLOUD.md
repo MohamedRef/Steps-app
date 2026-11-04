@@ -17,6 +17,8 @@ Cost: **$0**. Nothing here needs a card on file. There is no D1 database, no R2 
 | `review_events` | append-only (a delete is a tombstone) | every review: item, grade, time, and the optional confidence (sure / unsure / guess) and error reason |
 | `item_status` | last writer wins (HLC) | your ✓ / ✎ / ✗ content checks |
 | `settings` | last writer wins (HLC) | retention, new items a day and other study settings; lesson marks; where each unfinished lesson stands (`lessonpos.<id>`: step, answers, notes, score) |
+| `own_cards` | last writer wins (HLC, a delete is a tombstone) | the cards you write yourself |
+| `self_assessments` | last writer wins (HLC, a delete is a tombstone) | your NBME / UWSA / Free 120 scores |
 
 Places (`Store::put_place`) sync too, so a new device opens a lesson at the step you left; a place too big for one op stays on its device. A row written again before it went up keeps only its newest op in the outbox, so a lesson's place costs one op per push however many answers. The open timed bank paper stays on its device on purpose: two devices restoring the same paper could count its answers twice.
 
