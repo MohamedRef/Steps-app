@@ -76,7 +76,7 @@ pub fn preview(item: &Item) -> String {
     let text = match &item.body {
         Body::Card { front, .. } => front.clone(),
         Body::Cloze { text, .. } => hide_clozes(text),
-        Body::Mcq { stem, .. } | Body::Case { stem, .. } | Body::Calc { stem, .. } => stem.clone(),
+        Body::Mcq { stem, .. } | Body::Case { stem, .. } => stem.clone(),
         Body::Enumerate { prompt, .. } | Body::Essay { prompt, .. } | Body::Order { prompt, .. } => {
             prompt.clone()
         }
