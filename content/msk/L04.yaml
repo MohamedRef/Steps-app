@@ -32,7 +32,7 @@ items:
     kind: card
     topic: arachidonic-acid-pathways
     front: Where do glucocorticoids act in the arachidonic acid pathway?
-    back: "They inhibit phospholipase A2 (upstream of both the COX and lipoxygenase arms), via NF-κB/IκB, so they ↓ prostaglandins, thromboxane and leukotrienes."
+    back: "At two points: they inhibit phospholipase A2 (upstream of both the COX and lipoxygenase arms, so ↓ prostaglandins, thromboxane and leukotrienes), and they act on NF-κB/IκB on the COX-2 branch."
     src: { page: 495, quote: "Glucocorticoids (corticosteroids) ANTI-INFLAMMATORY AGENTS MEMBRANE PHOSPHOLIPIDS Phospholipase A2" }
     status: unverified
   - id: msk.L04.003
@@ -44,12 +44,19 @@ items:
       - [LTB4, ↑ neutrophil chemotaxis]
       - ["LTC4, LTD4, LTE4", ↑ bronchial tone]
       - [PGI2, "↓ platelet aggregation, ↓ vascular tone"]
+      - [PGE1, ↓ vascular tone]
       - [TXA2, "↑ platelet aggregation, ↑ vascular tone"]
       - ["PGE2, PGF2α", ↑ uterine tone]
-    blanks: [[0, 1], [2, 1], [3, 1]]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1]]
     src: { page: 495, quote: "is a vasodilator and platelet aggregation inhibitor." }
     status: unverified
     tags: [high-yield]
+  - id: msk.L04.050
+    kind: cloze
+    topic: arachidonic-acid-pathways
+    text: "{{c1::PGE1}} (the prostanoid that alprostadil mimics) ↓ vascular tone."
+    src: { page: 495, quote: "LTC4 LTD4 LTE4 PGI2 PGE1 TXA2" }
+    status: unverified
   - id: msk.L04.004
     kind: cloze
     topic: arachidonic-acid-pathways
@@ -241,6 +248,12 @@ items:
     back: "It selectively and reversibly inhibits COX-2 (inflammatory cells, vascular endothelium) and spares COX-1, which maintains gastric mucosa and is needed for platelet TXA2."
     src: { page: 496, quote: "Thus, does not have the corrosive effects of other NSAIDs on the GI lining. Spares platelet function as" }
     status: unverified
+  - id: msk.L04.055
+    kind: cloze
+    topic: celecoxib
+    text: "Celecoxib reversibly and selectively inhibits {{c1::COX-2}} (First Aid: \"Selecoxib\")."
+    src: { page: 496, quote: "Reversibly and selectively inhibits the cyclooxygenase (COX) isoform 2 (“Selecoxib”)" }
+    status: unverified
   - id: msk.L04.020
     kind: card
     topic: celecoxib
@@ -280,6 +293,21 @@ items:
     src: { page: 496, quote: "Antipyretic, analgesic, anti-inflammatory. Indomethacin is used to close a PDA." }
     status: unverified
     tags: [high-yield]
+  - id: msk.L04.051
+    kind: enumerate
+    topic: nonsteroidal-anti-inflammatory-drugs
+    prompt: Enumerate the NSAIDs First Aid lists (7).
+    points:
+      - Ibuprofen
+      - Naproxen
+      - Indomethacin
+      - Ketorolac
+      - Diclofenac
+      - Meloxicam
+      - Piroxicam
+    pass: 5
+    src: { page: 496, quote: "Ibuprofen, naproxen, indomethacin, ketorolac, diclofenac, meloxicam, piroxicam." }
+    status: unverified
   - id: msk.L04.023
     kind: enumerate
     topic: nonsteroidal-anti-inflammatory-drugs
@@ -474,6 +502,47 @@ items:
     back: "It also inhibits secretion of penicillin. It can precipitate uric acid calculi or lead to sulfa allergy."
     src: { page: 497, quote: "Probenecid Inhibits reabsorption of uric acid in proximal convoluted tubule (also inhibits secretion of penicillin). Can precipitate uric acid calculi or lead to sulfa allergy." }
     status: unverified
+  - id: msk.L04.052
+    kind: table
+    topic: gout-drugs
+    title: Drugs that change renal urate handling
+    columns: [Step, ↓ by]
+    rows:
+      - [Tubular secretion of urate, "Diuretics, low-dose salicylates"]
+      - [Tubular reabsorption of urate, "Probenecid, high-dose salicylates"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 497, quote: "Tubular secretion Diuretics, low-dose salicylates" }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.053
+    kind: mcq
+    topic: gout-drugs
+    stem: >-
+      A 62-year-old man takes aspirin 81 mg daily after a myocardial infarction. He has had two attacks of
+      acute gout this year, and his serum uric acid has risen since the aspirin was started. How does
+      low-dose aspirin most likely raise his uric acid?
+    options:
+      - It ↓ tubular secretion of urate
+      - It ↓ tubular reabsorption of urate
+      - It inhibits xanthine oxidase
+      - It ↑ conversion of xanthine to urate by activating xanthine oxidase
+      - It inhibits uricase
+    answer: 0
+    why:
+      - "Right. Diuretics and low-dose salicylates ↓ tubular secretion of urate, so less is excreted."
+      - "↓ reabsorption ↑ urate excretion; that is probenecid and high-dose salicylates."
+      - "Xanthine oxidase inhibitors (allopurinol, febuxostat) lower uric acid."
+      - "Salicylates do not act on xanthine oxidase."
+      - "Uricase converts uric acid to allantoin; pegloticase is a recombinant uricase used to lower uric acid."
+    src: { page: 497, quote: "Use salicylates with caution (may decrease uric acid excretion, particularly at low doses)." }
+    status: unverified
+  - id: msk.L04.054
+    kind: card
+    topic: gout-drugs
+    front: What are First Aid's memory aids for febuxostat and for allopurinol's role?
+    back: "\"Febu-xo-stat makes Xanthine Oxidase static.\" \"All painful flares are preventable\" (allopurinol prevents flares)."
+    src: { page: 497, quote: "Febuxostat Inhibits xanthine oxidase. Think, “febu-xo-stat makes Xanthine Oxidase static.”" }
+    status: unverified
   - id: msk.L04.038
     kind: enumerate
     topic: gout-drugs
@@ -483,7 +552,7 @@ items:
       - Glucocorticoids
       - Colchicine
     pass: 3
-    hook: "الهجمة الحادة: طفّي الالتهاب (NSAID أو steroid) أو امنع الـ neutrophils (colchicine). وما تبدأش allopurinol وقت الهجمة."
+    hook: "الهجمة الحادة: طفّي الالتهاب (NSAID أو steroid) أو امنع الـ neutrophils (colchicine)."
     src: { page: 497, quote: "Acute gout drugs NSAIDs Any NSAID." }
     status: unverified
   - id: msk.L04.039
@@ -565,6 +634,12 @@ items:
     src: { page: 498, quote: "Predisposition to infection, including reactivation of latent TB, since TNF is important in granuloma formation and stabilization. Can also lead to drug-induced lupus." }
     status: unverified
     tags: [high-yield]
+  - id: msk.L04.056
+    kind: cloze
+    topic: tnf-alpha-inhibitors
+    text: "{{c1::Etanercept}} intercepts TNF: it is a decoy receptor for TNF-α fused to IgG1 Fc."
+    src: { page: 498, quote: "Etanercept intercepts TNF." }
+    status: unverified
   - id: msk.L04.045
     kind: mcq
     topic: tnf-alpha-inhibitors
