@@ -2,6 +2,7 @@
 //! database connection. It drives [`SyncClient`] and reports to the UI.
 // adapted from kabar-app main: crates/app/src/cloud/engine.rs
 
+use std::collections::HashSet;
 use std::time::Duration;
 
 use steps_protocol::client::{Backoff, Effect, Phase, SyncClient};
@@ -90,6 +91,10 @@ pub struct Engine {
     problem: Option<Problem>,
     /// Pushes wait until then (the clock was ahead); pulls go on.
     hold_pushes_until: Option<Instant>,
+    /// Tables the hub answered `unknown_table` for (it is older than this
+    /// app). Their ops stay in the outbox and are skipped until the next
+    /// connection, which tries them again.
+    hub_lacks: HashSet<String>,
     pending_sign_in: Option<PendingSignIn>,
     /// The usual vault, set aside while a sign-in on someone else's device
     /// keeps its session in a forgetful one; back after sign-out.
@@ -134,6 +139,7 @@ impl Engine {
             force_refresh: false,
             problem: None,
             hold_pushes_until: None,
+            hub_lacks: HashSet::new(),
             pending_sign_in,
             spare_vault: None,
             login: LoginStatus::default(),
@@ -544,6 +550,8 @@ impl Engine {
             Ok(ws) => {
                 self.ws = Some(ws);
                 self.problem = None;
+                // The hub may have been updated since: offer those ops again.
+                self.hub_lacks.clear();
                 let effects = self.client.on_open();
                 self.run_effects(effects).await;
             }
@@ -649,6 +657,11 @@ impl Engine {
                     self.problem = Some(Problem::ClockOff);
                     self.hold_pushes_until = Some(Instant::now() + CLOCK_RETRY);
                 }
+                Effect::HubBehind { kept } => {
+                    let tables = self.store.outbox_tables(kept.iter().map(String::as_str));
+                    crate::diag::report!("hub lacks {tables:?}: {} ops wait for an update", kept.len());
+                    self.hub_lacks.extend(tables);
+                }
                 Effect::Reconnect { reason } => {
                     crate::diag::report!("sync reconnects: {reason}");
                     if let Some(ws) = self.ws.take() {
@@ -682,7 +695,7 @@ impl Engine {
         if self.ws.is_none() || self.hold_pushes_until.is_some_and(|t| Instant::now() < t) {
             return;
         }
-        let outbox = match self.store.outbox(MAX_OPS_PER_PUSH) {
+        let outbox = match self.store.outbox_skipping(MAX_OPS_PER_PUSH, &self.hub_lacks) {
             Ok(o) => o,
             Err(e) => {
                 crate::diag::report!("reading outbox: {e}");
