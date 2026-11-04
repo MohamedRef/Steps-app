@@ -5,6 +5,11 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  # The platform compiles (Android, web, Worker) run nightly and by hand only,
+  # so a pull request waits on the checks that gate it (Mohamed, 2026-11-04).
+  schedule:
+    - cron: "7 3 * * *"
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}-${{ github.event_name == 'pull_request' && 'pr' || github.sha }}
@@ -78,6 +83,7 @@ jobs:
 
   android:
     name: Android arm64 compiles
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
@@ -98,6 +104,7 @@ jobs:
 
   web:
     name: Web app compiles (wasm32)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
@@ -114,6 +121,7 @@ jobs:
 
   worker:
     name: Steps Cloud Worker compiles (wasm32)
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
