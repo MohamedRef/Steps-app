@@ -115,7 +115,8 @@ fn prefs_round_trip_and_default_to_automatic_alpha() {
     // follow the preview feed and a preview build may go back to alpha.
     assert_eq!(release.channel(Some(Channel::Preview)), Channel::Preview);
     let preview = BuildInfo { preview: true, ..release };
-    assert_eq!(preview.channel(None), Channel::Preview);
+    // Every build follows alpha unless Settings picks another channel.
+    assert_eq!(preview.channel(None), Channel::Alpha);
     assert_eq!(preview.channel(Some(Channel::Alpha)), Channel::Alpha);
 }
 
