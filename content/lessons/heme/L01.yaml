@@ -1,0 +1,284 @@
+schema: steps.lesson/v1
+lecture: heme.L01
+lessons:
+  - id: heme.L01.lesson1
+    title: "الجنين بيعمل دم فين، وليه الـ HbF بيسرق الأكسجين من أمه؟"
+    hook: "4 أماكن و3 أنواع hemoglobin: افهم الترتيب مرة وهتلاقيه منطقي"
+    minutes: 8
+    pages: [410, 410]
+    topics: [fetal-erythropoiesis, hemoglobin-development]
+    goals:
+      - "ترتّب أماكن الـ erythropoiesis في الجنين بالأسابيع"
+      - "تعرف سلاسل الـ HbF والـ HbA1 والـ HbA2"
+      - "تفهم ليه الـ HbF عنده affinity أعلى للأكسجين"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الدم بيتعمل فين في الجنين؟"
+        text: |-
+          الجنين محتاج كرات دم حمرا من بدري جداً، بس الـ bone marrow لسه ما اتبناش. فالشغلانة بتتنقل من مكان لمكان:
+
+          - **Yolk sac**: من 3 لـ 8 أسابيع
+          - **Liver**: من 6 أسابيع لحد الولادة
+          - **Spleen**: من 10 لـ 28 أسبوع
+          - **Bone marrow**: من 18 أسبوع لحد ما تكبر
+
+          لاحظ إن الفترات ==متداخلة==: كل مكان بيستلم قبل ما اللي قبله يسلّم، عشان الإنتاج ما يقفش ولا يوم.
+        page: 410
+        quote: "Fetal erythropoiesis occurs in: Yolk sac (3-8 weeks) Liver (6 weeks-birth) Spleen (10-28 weeks) Bone marrow (18 weeks to adult)"
+      - kind: mnemonic
+        word: "YLSB"
+        parts:
+          - { key: "Y", text: "Young = Yolk sac (3-8 weeks)" }
+          - { key: "L", text: "Liver = Liver (6 weeks-birth)" }
+          - { key: "S", text: "Synthesizes = Spleen (10-28 weeks)" }
+          - { key: "B", text: "Blood = Bone marrow (18 weeks to adult)" }
+        hook: "جملة الكتاب نفسها: Young Liver Synthesizes Blood"
+        page: 410
+        quote: "Young liver synthesizes blood."
+      - kind: figure
+        title: "مين شغال إمتى"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="20" y1="140" x2="350" y2="140"/>
+            <text x="20" y="158" class="t-sm t-mut">0</text>
+            <text x="95" y="158" class="t-sm t-mut">10</text>
+            <text x="170" y="158" class="t-sm t-mut">20</text>
+            <text x="245" y="158" class="t-sm t-mut">30</text>
+            <text x="312" y="158" class="t-sm t-mut">birth</text>
+            <rect class="fg-acc" x="42" y="20" width="47" height="22" rx="5"/>
+            <text x="46" y="36" class="t-sm">Yolk sac 3-8</text>
+            <rect class="fg-good" x="65" y="50" width="275" height="22" rx="5"/>
+            <text x="150" y="66" class="t-sm">Liver: 6 weeks → birth</text>
+            <rect class="fg-box" x="95" y="80" width="135" height="22" rx="5"/>
+            <text x="110" y="96" class="t-sm">Spleen 10-28</text>
+            <rect class="fg-ink" x="155" y="110" width="195" height="22" rx="5"/>
+            <text x="190" y="126" class="t-sm t-b">Bone marrow 18 → adult</text>
+          </svg>
+        caption: "الأرقام بالأسابيع. الـ liver هو الشغّال الأساسي في معظم الحمل، والـ bone marrow بيبدأ في الأسبوع 18 ويكمل طول العمر."
+        alt: "Timeline in weeks from 0 to birth. Yolk sac bar from 3 to 8 weeks, liver bar from 6 weeks to birth, spleen bar from 10 to 28 weeks, bone marrow bar from 18 weeks onward."
+        page: 410
+        quote: "Yolk sac (3-8 weeks) Liver (6 weeks-birth) Spleen (10-28 weeks) Bone marrow (18 weeks to adult)"
+      - kind: check
+        question: "A fetus is at 24 weeks of development. Which sites are making red cells at this time?"
+        options:
+          - "Liver, spleen and bone marrow"
+          - "Yolk sac and liver"
+          - "Bone marrow only"
+          - "Yolk sac, liver and spleen"
+        answer: 0
+        why:
+          - "صح: الـ liver (6 لحد الولادة) والـ spleen (10-28) والـ bone marrow (من 18) كلهم شغالين في الأسبوع 24."
+          - "الـ yolk sac بيبطّل في الأسبوع 8."
+          - "الـ bone marrow شغال، بس الـ liver والـ spleen لسه شغالين معاه."
+          - "الـ yolk sac خلص من بدري (3-8 أسابيع)."
+        page: 410
+        quote: "Liver (6 weeks-birth) Spleen (10-28 weeks) Bone marrow (18 weeks to adult)"
+      - kind: explain
+        title: "السلاسل بتتغير"
+        text: |-
+          الـ hemoglobin أربع سلاسل globin. اللي بيتغير مع العمر هو نوع السلاسل:
+
+          - **Embryonic**: سلاسل ζ و ε
+          - **HbF** (fetal) = ==α2γ2==
+          - **HbA1** (adult) = ==α2β2==
+          - **HbA2** = α2δ2: نوع adult موجود بكميات قليلة
+
+          الـ α موجودة في كل الأنواع بعد الـ embryo. اللي بيتبدل هو الشريك: γ في الجنين، و β بعد الولادة.
+        page: 410
+        quote: "Embryonic globins: ζ and ε. Fetal hemoglobin (HbF) = α γ 2 2 . Adult hemoglobin (HbA1 ) = α2 β2"
+      - kind: aside
+        tone: tip
+        text: "جملة الكتاب: **Alpha always; gamma goes, becomes beta**. الـ α ثابتة، والـ γ بتمشي ويحل مكانها الـ β."
+        page: 410
+        quote: "From fetal to adult hemoglobin: Alpha always; gamma goes, becomes beta."
+      - kind: reveal
+        prompt: "الجنين بياخد الأكسجين من دم أمه عن طريق الـ placenta. ضغط الأكسجين هناك واطي. إزاي دم الجنين بيقدر يشد الأكسجين من الـ hemoglobin بتاع الأم؟"
+        answer: "الـ **HbF** بيمسك الـ **2,3-BPG** بـ affinity أقل. والـ 2,3-BPG هو اللي بيخلي الـ hemoglobin يسيب الأكسجين. فالـ HbF بيفضل ماسك الأكسجين أكتر (affinity أعلى، الـ curve متزحلق للشمال)، فبيسحبه من الـ HbA1 والـ HbA2 بتوع الأم."
+        page: 410
+        quote: "HbF has higher affinity for O2 because it binds to 2,3-BPG with relatively lower affinity, allowing HbF to capture O2 from maternal hemoglobin (HbA1 and HbA2 ) across the placenta."
+      - kind: aside
+        tone: analogy
+        text: "الـ 2,3-BPG زي حد بيزق الأكسجين بره الـ hemoglobin. الـ hemoglobin بتاع الأم بيسمع كلامه، والـ HbF ==ودنه تقيلة== شوية، فبيفضل ماسك الأكسجين. وفي شد الحبل على الأكسجين في الـ placenta، الجنين بيكسب."
+        page: 410
+        quote: "binds to 2,3-BPG with relatively lower affinity"
+      - kind: check
+        question: "Why does fetal hemoglobin take up O2 from maternal blood across the placenta?"
+        options:
+          - "It binds 2,3-BPG with lower affinity, so its O2 affinity is higher"
+          - "It binds 2,3-BPG with higher affinity, so its O2 affinity is higher"
+          - "It contains β chains that bind O2 more tightly"
+          - "Fetal blood has a higher PO2 than maternal blood"
+        answer: 0
+        why:
+          - "صح: 2,3-BPG أقل على الـ HbF ← بيمسك الأكسجين أكتر."
+          - "بالعكس: الـ 2,3-BPG بيقلّل الـ O2 affinity، فلو اتمسك أكتر كان الـ affinity هيقل."
+          - "الـ HbF ما فيهوش β أصلاً: هو α2γ2."
+          - "الأكسجين بيروح للجنين بسبب الـ affinity الأعلى، مش لأن الـ PO2 عنده أعلى."
+        page: 410
+        quote: "HbF has higher affinity for O2 because it binds to 2,3-BPG with relatively lower affinity"
+      - kind: try
+        items: [heme.L01.001, heme.L01.002, heme.L01.006, heme.L01.007, heme.L01.008]
+    recap:
+      - "Young Liver Synthesizes Blood: yolk sac (3-8)، liver (6 لحد الولادة)، spleen (10-28)، bone marrow (من 18)."
+      - "Embryonic ζ و ε؛ HbF = α2γ2؛ HbA1 = α2β2؛ HbA2 = α2δ2."
+      - "الـ HbF بيمسك الـ 2,3-BPG أقل ← O2 affinity أعلى ← بيشد الأكسجين من أمه."
+    practice: [heme.L01.001, heme.L01.002, heme.L01.003, heme.L01.004, heme.L01.005, heme.L01.006, heme.L01.007, heme.L01.008, heme.L01.009]
+  - id: heme.L01.lesson2
+    title: "فصايل الدم والحمل: مين بيهاجم مين؟"
+    hook: "سؤال الـ Rh والـ ABO في الحمل بيتحل بسؤال واحد: الـ antibody ده IgG ولا IgM؟"
+    minutes: 9
+    pages: [411, 411]
+    topics: [blood-groups, hemolytic-disease-of-the-fetus-and-newborn]
+    goals:
+      - "تعرف الـ antigens والـ antibodies في كل فصيلة، ومين ياخد من مين"
+      - "تفرّق بين ABO و Rh hemolytic disease في الآلية والصورة والعلاج"
+      - "تعرف إمتى بنستخدم الـ anti-D IgG"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ antigen على الكرة، والـ antibody في البلازما"
+        text: |-
+          القاعدة بسيطة: ==اللي عندك على الكرات، ما عندكش ضده في البلازما==.
+
+          - فصيلة **A**: عليها A، وفي البلازما IgM anti-B
+          - فصيلة **B**: عليها B، وفي البلازما IgM anti-A
+          - فصيلة **AB**: عليها A و B، ومفيش antibodies
+          - فصيلة **O**: مفيش عليها حاجة، وفي البلازما anti-A و anti-B من نوع ==IgG و IgM==
+        page: 411
+        quote: "Group antigens on RBC surface A B A & B NONE"
+      - kind: table
+        title: "مين ياخد من مين (RBCs)"
+        columns: ["Type", "Can receive", "Can donate to"]
+        rows:
+          - ["A", "A, O", "A, AB"]
+          - ["B", "B, O", "B, AB"]
+          - ["AB", "AB, A, B, O", "AB"]
+          - ["O", "O", "A, B, AB, O"]
+          - ["Rh⊕", "Rh⊕, Rh⊖", "Rh⊕"]
+          - ["Rh⊖", "Rh⊖", "Rh⊕, Rh⊖"]
+        hide: [[0, 1], [2, 1], [3, 2], [5, 1]]
+        page: 411
+        quote: "Compatible RBC types to receive A, O B, O AB, A, B, O O Rh⊕ , Rh⊖"
+      - kind: reveal
+        prompt: "ليه الـ AB بياخد من الكل، والـ O بيدّي للكل؟"
+        answer: "اللي بيأذي في نقل الدم هو الـ antibodies اللي في بلازما **المستقبل** لما تقابل antigen على كرات **المتبرع**. الـ AB ما عندوش antibodies خالص ← ياخد أي كرات. والـ O كراته ما عليهاش A ولا B ← محدش هيهاجمها."
+        page: 411
+        quote: "Compatible RBC types to donate to A, AB B, AB AB A, B, AB, O"
+      - kind: explain
+        title: "والـ Rh؟"
+        text: |-
+          الـ **Rh⊕** عنده الـ Rh (D) antigen على الكرات. الـ **Rh⊖** ما عندوش، و==ما عندوش anti-D== كمان، إلا لو اتعرّض قبل كده لكرات Rh⊕ (sensitized). ساعتها بيعمل **anti-D IgG**.
+
+          وده فرق مهم عن الـ ABO: الـ anti-A والـ anti-B موجودين من غير ما تتعرض لحاجة، لكن الـ anti-D محتاج تعرّض الأول.
+        page: 411
+        quote: "Rh (D) NONE Antibodies in plasma IgM Anti-B IgM Anti-A NONE IgG, IgM Anti-A Anti-B NONE NONE (UNLESS SENSITIZED) → Anti-D IgG"
+      - kind: check
+        question: "A group A, Rh⊖ patient needs red cells. Which unit can this patient receive?"
+        options:
+          - "O, Rh⊖"
+          - "O, Rh⊕"
+          - "AB, Rh⊖"
+          - "B, Rh⊖"
+        answer: 0
+        why:
+          - "صح: الـ A ياخد A أو O، والـ Rh⊖ ياخد Rh⊖ بس."
+          - "الـ Rh⊖ ما ياخدش Rh⊕، عشان ما يتعملوش sensitization ويعمل anti-D."
+          - "كرات الـ AB عليها B، والـ anti-B اللي عنده هيهاجمها."
+          - "الـ anti-B اللي في بلازمته هيكسّر كرات الـ B."
+        page: 411
+        quote: "Compatible RBC types to receive A, O B, O AB, A, B, O O Rh⊕ , Rh⊖"
+      - kind: explain
+        title: "Hemolytic disease of the fetus and newborn"
+        text: |-
+          اسمها كمان **erythroblastosis fetalis**: antibodies من الأم تعدّي الـ placenta وتكسّر كرات الجنين.
+
+          المفتاح: ==بس الـ IgG هو اللي بيعدّي الـ placenta==، الـ IgM لأ. عشان كده:
+
+          - الـ **ABO** disease بتيجي من أم فصيلة **O**، لأنها الوحيدة اللي عندها anti-A و anti-B من نوع IgG.
+          - الـ **Rh** disease بتيجي من أم **Rh⊖** اتعمل عندها anti-D IgG.
+
+          ومعظمها من الـ Rh والـ ABO، بس فصايل صغيرة زي **Kell** ممكن تعمل نفس المرض.
+        page: 411
+        quote: "Also called erythroblastosis fetalis. Most commonly involves the antigens of the major blood groups (eg, Rh and ABO), but minor blood group incompatibilities (eg, Kell) can also result in disease, ranging from mild to severe."
+      - kind: figure
+        title: "Rh disease: الحمل الأول بيجهّز، والتاني بيدفع التمن"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="heme1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker><marker id="heme1b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="15" width="160" height="140" rx="10"/>
+            <text x="22" y="36" class="t-sm t-b">1st pregnancy</text>
+            <text x="22" y="58" class="t-sm">Rh⊖ mother, Rh⊕ fetus</text>
+            <text x="22" y="80" class="t-sm">fetal blood at delivery</text>
+            <path class="fg-arrow-acc" d="M60 88 L60 108" marker-end="url(#heme1a)"/>
+            <text x="22" y="126" class="t-sm t-acc">mother makes anti-D IgG</text>
+            <text x="22" y="146" class="t-sm t-mut">baby usually fine</text>
+            <rect class="fg-bad" x="190" y="15" width="160" height="140" rx="10"/>
+            <text x="202" y="36" class="t-sm t-b">Next Rh⊕ fetus</text>
+            <text x="202" y="58" class="t-sm">anti-D IgG crosses</text>
+            <text x="202" y="78" class="t-sm">the placenta</text>
+            <path class="fg-arrow-bad" d="M240 86 L240 106" marker-end="url(#heme1b)"/>
+            <text x="202" y="124" class="t-sm t-bad">fetal hemolysis</text>
+            <text x="202" y="144" class="t-sm t-bad">hydrops fetalis</text>
+          </svg>
+        caption: "في الحمل الأول الأم بتتعرّض لدم الجنين (غالباً وقت الولادة) فتعمل anti-D IgG. في الحمل اللي بعده الـ IgG ده بيعدّي ويكسّر كرات الجنين الـ Rh⊕."
+        alt: "Two panels. First pregnancy: an Rh negative mother is exposed to Rh positive fetal blood at delivery and makes anti-D IgG; the baby is usually fine. Next Rh positive fetus: anti-D IgG crosses the placenta, causing fetal hemolysis and hydrops fetalis."
+        page: 411
+        quote: "First pregnancy: patient exposed to fetal blood (often during delivery) → formation of maternal anti-D IgG. Subsequent pregnancies: anti-D IgG crosses placenta → attacks fetal and newborn RBCs → hemolysis."
+      - kind: table
+        title: "ABO ولا Rh؟"
+        columns: ["", "ABO", "Rh"]
+        rows:
+          - ["Mother / fetus", "Type O / type A or B", "Rh⊖ / Rh⊕"]
+          - ["Antibody", "Preexisting anti-A/anti-B IgG", "Anti-D IgG after exposure"]
+          - ["Firstborn?", "Yes, can occur", "Usually spared"]
+          - ["Picture", "Mild jaundice within 24 hours", "Hydrops fetalis, jaundice, kernicterus"]
+          - ["Management", "Phototherapy or exchange transfusion", "Prevent with anti-D IgG"]
+        hide: [[0, 1], [0, 2], [3, 1], [3, 2]]
+        page: 411
+        quote: "Mild jaundice in the neonate within 24 hours of birth. Unlike Rh hemolytic disease, can occur in firstborn babies and is usually less severe. Hydrops fetalis, jaundice shortly after birth, kernicterus."
+      - kind: aside
+        tone: exam
+        text: "طفل **أول** حمل عنده **صفرا خفيفة في أول 24 ساعة**، والأم **O**؟ ده ==ABO hemolytic disease==. علاجه phototherapy (أو exchange transfusion)."
+        page: 411
+        quote: "Mild jaundice in the neonate within 24 hours of birth. Unlike Rh hemolytic disease, can occur in firstborn babies"
+      - kind: explain
+        title: "الـ anti-D IgG: نسبق الأم قبل ما تتعلم"
+        text: |-
+          بنحقن الأم الـ Rh⊖ بـ **anti-D IgG** جاهز. الـ antibody ده بيمسك كرات الجنين الـ Rh⊕ اللي عدّت لها قبل ما الـ immune system بتاعها ياخد باله، ف==ما تعملش anti-D بتاعها==.
+
+          بنديه في:
+          - الـ **third trimester** وأول فترة بعد الولادة
+          - **ectopic pregnancy**، **miscarriage**، **abdominal trauma**، و**antepartum hemorrhage**
+
+          كل ده لو الجنين Rh⊕، لأن دي كلها لحظات دم الجنين ممكن يقابل فيها دم الأم.
+        page: 411
+        quote: "Prevent by administration of anti-D IgG to Rh ⊖ pregnant patients during third trimester and early postpartum period as well as in cases of ectopic pregnancy, miscarriage, abdominal trauma, and antepartum hemorrhage (if fetus Rh ⊕). Prevents maternal anti-D IgG production."
+      - kind: case
+        stem: "A 29-year-old Rh⊖ woman in her first pregnancy (Rh⊕ partner) is in a car crash at 30 weeks and hits her abdomen on the steering wheel. She and the fetus are stable."
+        steps:
+          - question: "What should she receive now?"
+            options:
+              - "Anti-D IgG"
+              - "Nothing until delivery"
+              - "Phototherapy"
+              - "Exchange transfusion"
+            answer: 0
+            why: "الـ abdominal trauma ممكن يعدّي دم الجنين لأمه، فبندي anti-D IgG دلوقتي (لو الجنين Rh⊕) عشان ما تعملش anti-D. Phototherapy و exchange transfusion علاج للمولود مش للأم."
+          - question: "What does the injection prevent?"
+            options:
+              - "Maternal anti-D IgG production"
+              - "Fetal anti-D IgM production"
+              - "Maternal anti-A IgG crossing the placenta"
+            answer: 0
+            why: "هو بيمنع الأم إنها تعمل anti-D IgG بتاعها، فالحمل ده واللي بعده يبقوا في أمان. الجنين مش هو اللي بيعمل الـ antibodies، والـ anti-A ده موضوع ABO."
+        page: 411
+        quote: "abdominal trauma, and antepartum hemorrhage (if fetus Rh ⊕). Prevents maternal anti-D IgG production."
+      - kind: try
+        items: [heme.L01.010, heme.L01.011, heme.L01.017, heme.L01.018, heme.L01.019]
+    recap:
+      - "اللي على كراتك ما عندكش ضده: A عنده anti-B، B عنده anti-A، O عنده الاتنين (IgG و IgM)، AB ما عندوش."
+      - "AB ياخد من الكل، O يدّي للكل. Rh⊖ ياخد Rh⊖ بس."
+      - "بس الـ IgG بيعدّي الـ placenta: ABO من أم O (حتى أول طفل، صفرا خفيفة)، Rh من أم Rh⊖ اتعرّضت قبل كده (hydrops)."
+      - "Anti-D IgG في الـ third trimester وبعد الولادة ومع أي نزيف أو trauma أو ectopic أو miscarriage."
+    practice: [heme.L01.010, heme.L01.011, heme.L01.012, heme.L01.013, heme.L01.014, heme.L01.015, heme.L01.016, heme.L01.017, heme.L01.018, heme.L01.019, heme.L01.020, heme.L01.021, heme.L01.022]
