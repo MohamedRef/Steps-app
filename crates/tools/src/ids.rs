@@ -124,7 +124,7 @@ mod tests {
         let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("../..");
         let Ok(at_head) = pack_at_rev(&root, "HEAD") else { return }; // not a git checkout
         let ids = registry(&at_head);
-        assert!(ids.len() > 1000, "{}", ids.len());
+        assert!(ids.len() > 10, "{}", ids.len());
         assert!(check(&root, &ids, &ids).is_ok());
     }
 

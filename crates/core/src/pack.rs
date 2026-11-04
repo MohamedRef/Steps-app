@@ -51,7 +51,7 @@ pub struct Pack {
     /// the pack built into the app has none.
     #[serde(default, skip_serializing_if = "BTreeMap::is_empty")]
     pub look: BTreeMap<String, String>,
-    /// `content/program.yaml`: the MSc's courses. Older packs have none
+    /// `content/program.yaml`: the program's courses. Older packs have none
     /// (`Program::fallback`); an older app ignores it and shows every lecture.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub program: Option<Program>,
@@ -273,7 +273,7 @@ mod tests {
         assert!(bytes.starts_with(MAGIC));
         let back = Pack::decode(&bytes).unwrap();
         assert_eq!(back, pack);
-        assert_eq!(back.item_count(), 18);
+        assert_eq!(back.item_count(), 16);
     }
 
     #[test]

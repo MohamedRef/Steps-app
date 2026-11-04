@@ -1,5 +1,6 @@
-//! The MSc's courses (`content/program.yaml`, Mohamed's course sheet of
-//! 2026-10-29): each course's status, and the MSc map (More › المقررات).
+//! First Aid's disciplines and organ systems as courses
+//! (`content/program.yaml`): each course's status, and the map
+//! (More › المواد).
 //!
 //! A course's status starts as the program says and Mohamed changes it on
 //! the map. Each course is its own synced setting, `course.<id>`, so two
@@ -72,6 +73,10 @@ pub struct Summary {
     pub written: usize,
     pub items: usize,
     pub lessons: usize,
+    /// First Aid's printed pages: the first and last of its lectures, and
+    /// how many pages they cover.
+    pub pages: Option<[u32; 2]>,
+    pub page_count: u32,
 }
 
 /// Every course of the program, with `status` (usually [`status`]).
@@ -80,14 +85,14 @@ pub fn summaries(lib: &Library, status: impl Fn(&Course) -> CourseStatus) -> Vec
         .courses
         .iter()
         .map(|c| {
-            let ids: Vec<&str> = lib
-                .index
-                .lectures
-                .iter()
-                .map(|e| e.id.as_str())
-                .filter(|id| steps_core::program::course_of(id) == c.id)
-                .collect();
+            let entries: Vec<_> =
+                lib.index.lectures.iter().filter(|e| steps_core::program::course_of(&e.id) == c.id).collect();
+            let ids: Vec<&str> = entries.iter().map(|e| e.id.as_str()).collect();
+            let pages = entries.iter().map(|e| e.pages).reduce(|a, b| [a[0].min(b[0]), a[1].max(b[1])]);
+            let page_count = entries.iter().map(|e| e.pages[1].saturating_sub(e.pages[0]) + 1).sum();
             Summary {
+                pages,
+                page_count,
                 status: status(c),
                 lectures: ids.len(),
                 written: ids.iter().filter(|id| lib.lectures.contains_key(**id)).count(),
@@ -99,63 +104,28 @@ pub fn summaries(lib: &Library, status: impl Fn(&Course) -> CourseStatus) -> Vec
         .collect()
 }
 
-/// Credit hours (done, now, all): done = after its exam (maintenance or
-/// archived), now = active.
-pub fn hours(all: &[Summary]) -> (f32, f32, f32) {
-    let sum = |f: &dyn Fn(CourseStatus) -> bool| {
-        all.iter().filter(|s| f(s.status)).map(|s| s.course.hours).sum::<f32>()
-    };
-    (
-        sum(&|s| matches!(s, CourseStatus::Maintenance | CourseStatus::Archived)),
-        sum(&|s| s == CourseStatus::Active),
-        sum(&|_| true),
-    )
+/// Cards started per course id, from the review overview's lectures.
+pub fn started(lectures: &[crate::store::LectureProgress]) -> BTreeMap<String, usize> {
+    let mut out = BTreeMap::new();
+    for l in lectures {
+        *out.entry(steps_core::program::course_of(&l.id).to_string()).or_default() += l.seen;
+    }
+    out
 }
 
-/// `2.5` → `2.5`, `2.0` → `2`.
-pub fn fmt_hours(h: f32) -> String {
-    // An empty sum is -0.0.
-    let h = h + 0.0;
-    if h.fract() == 0.0 { format!("{h:.0}") } else { format!("{h:.1}") }
+/// A whole percent, 0 when there is nothing to count.
+pub fn percent(part: usize, all: usize) -> u32 {
+    (part * 100).checked_div(all).unwrap_or(0) as u32
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-    use steps_core::program::Group;
-
-    fn summary(id: &str, hours: f32, status: CourseStatus) -> Summary {
-        Summary {
-            course: Course {
-                id: id.into(),
-                title: id.into(),
-                short: id.into(),
-                hours,
-                group: Group::Systems,
-                semester: None,
-                status,
-                source: Default::default(),
-            },
-            status,
-            lectures: 0,
-            written: 0,
-            items: 0,
-            lessons: 0,
-        }
-    }
-
     #[test]
-    fn hours_split_by_status() {
-        let all = [
-            summary("a", 2.0, CourseStatus::Maintenance),
-            summary("b", 3.0, CourseStatus::Active),
-            summary("c", 0.5, CourseStatus::Later),
-            summary("d", 1.0, CourseStatus::Archived),
-        ];
-        assert_eq!(hours(&all), (3.0, 3.0, 6.5));
-        assert_eq!(fmt_hours(2.0), "2");
-        assert_eq!(fmt_hours(0.5), "0.5");
-        assert_eq!(fmt_hours(std::iter::empty::<f32>().sum()), "0");
+    fn percent_rounds_down_and_survives_empty_courses() {
+        assert_eq!(percent(0, 0), 0);
+        assert_eq!(percent(1, 3), 33);
+        assert_eq!(percent(5, 5), 100);
     }
 
     #[test]
@@ -166,6 +136,9 @@ mod tests {
         let cvs = all.iter().find(|s| s.course.id == "cvs").unwrap();
         assert_eq!(cvs.lectures, 5);
         assert!(cvs.items > 0 && cvs.lessons > 0);
+        // Cardiovascular is First Aid's printed pages 284–328.
+        assert_eq!(cvs.pages, Some([284, 328]));
+        assert_eq!(cvs.page_count, 45);
         // Every lecture belongs to a course on the map.
         assert_eq!(all.iter().map(|s| s.lectures).sum::<usize>(), lib.index.lectures.len());
     }
