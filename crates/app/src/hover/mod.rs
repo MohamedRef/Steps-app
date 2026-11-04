@@ -18,23 +18,70 @@ const GLOSSARY_YAML: &str = include_str!("../../../../content/glossary.yaml");
 /// (CI's `steps-tools validate` fails on it first).
 pub fn glossary() -> &'static Glossary {
     static G: OnceLock<Glossary> = OnceLock::new();
-    G.get_or_init(|| {
-        let mut g = serde_yaml_ng::from_str(GLOSSARY_YAML).unwrap_or(Glossary {
-            schema: String::new(),
-            entries: Vec::new(),
-            plain: Vec::new(),
-        });
-        for part in crate::content::GLOSSARY_PARTS {
-            if let Ok(p) = serde_yaml_ng::from_str::<Glossary>(part) {
-                g.absorb(p);
+    G.get_or_init(|| merged(None))
+}
+
+/// The glossary as a course's lessons read it: a term the course's own file
+/// explains keeps that meaning (`ER` is estrogen receptor in repro), and
+/// every other term comes from the shared file and the other courses (#271,
+/// #314). Built the first time a course asks and kept.
+pub fn glossary_for(course: &str) -> &'static Glossary {
+    static BY_COURSE: OnceLock<std::sync::Mutex<std::collections::HashMap<String, &'static Glossary>>> =
+        OnceLock::new();
+    if !crate::content::GLOSSARY_PARTS.iter().any(|(c, _)| *c == course) {
+        return glossary();
+    }
+    let mut map = BY_COURSE.get_or_init(Default::default).lock().unwrap_or_else(|e| e.into_inner());
+    map.entry(course.to_string()).or_insert_with(|| Box::leak(Box::new(merged(Some(course)))))
+}
+
+/// `course`'s file first (when given), then `content/glossary.yaml`, then
+/// the other course files in name order; the first file to explain a term
+/// gives its meaning ([`Glossary::absorb`]).
+fn merged(course: Option<&str>) -> Glossary {
+    let parse = |yaml: &str| serde_yaml_ng::from_str::<Glossary>(yaml).ok();
+    let empty = || Glossary { schema: String::new(), entries: Vec::new(), plain: Vec::new() };
+    let parts = crate::content::GLOSSARY_PARTS;
+    let own = course.and_then(|c| parts.iter().find(|(name, _)| *name == c));
+    let mut g = match own {
+        Some((_, yaml)) => {
+            let mut g = parse(yaml).unwrap_or_else(empty);
+            if let Some(shared) = parse(GLOSSARY_YAML) {
+                g.absorb(shared);
             }
+            g
         }
-        g
-    })
+        None => parse(GLOSSARY_YAML).unwrap_or_else(empty),
+    };
+    for (name, yaml) in parts {
+        if Some(*name) == course {
+            continue;
+        }
+        if let Some(p) = parse(yaml) {
+            g.absorb(p);
+        }
+    }
+    g
 }
 
 pub fn term_count() -> usize {
     glossary().entries.len()
+}
+
+/// While a course's lesson is open, the hover peeks use that course's
+/// meanings; the shared table comes back when it closes.
+pub fn use_course_hover(course: &str) {
+    let course = course.to_string();
+    use_hook(move || set_table(glossary_for(&course)));
+    use_drop(|| set_table(glossary()));
+}
+
+fn set_table(g: &Glossary) {
+    document::eval(&format!(
+        "window.__stepsHover && window.__stepsHover.setGlossary({}, {:?});",
+        g.peek_table(),
+        tx::UNVERIFIED
+    ));
 }
 
 /// Installs the hover script once and gives it the glossary.
@@ -97,5 +144,18 @@ mod tests {
         assert!(glossary().find("SAAG").is_some());
         // From content/glossary/cvs.yaml.
         assert!(glossary().find("PFO").is_some());
+    }
+
+    #[test]
+    fn a_course_reads_its_own_meaning_first() {
+        let shared = glossary().find("ER").unwrap().text.clone();
+        assert!(shared.starts_with("Endoplasmic"), "{shared}");
+        let repro = glossary_for("repro").find("ER").unwrap();
+        assert!(repro.text.starts_with("Estrogen receptor"), "{}", repro.text);
+        // Terms only other files explain are still there, and the cache holds.
+        assert!(glossary_for("repro").find("PFO").is_some());
+        assert!(std::ptr::eq(glossary_for("repro"), glossary_for("repro")));
+        // An unknown course reads the shared glossary.
+        assert!(std::ptr::eq(glossary_for("nope"), glossary()));
     }
 }

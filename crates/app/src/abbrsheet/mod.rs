@@ -9,25 +9,27 @@ use dioxus::prelude::*;
 use steps_core::content::Status;
 use steps_core::glossary::Entry;
 
-use crate::hover::glossary;
+use crate::hover::glossary_for;
 use crate::i18n::abbr as tx;
 use crate::look::{Css, css};
 
 const CSS: Css = css!("src/abbrsheet/abbrsheet.css");
 
-/// The terms of the open sheet, in the order the step shows them.
-pub(crate) static OPEN: GlobalSignal<Option<Vec<String>>> = Signal::global(|| None);
+/// The open sheet: the lesson's course, and its terms in the order the
+/// step shows them.
+pub(crate) static OPEN: GlobalSignal<Option<(String, Vec<String>)>> = Signal::global(|| None);
 
-/// The abbreviations in a step's texts, from the bundled glossary.
-pub fn entries(texts: &[String]) -> Vec<&'static Entry> {
-    glossary().abbreviations_in(texts)
+/// The abbreviations in a step's texts, with the meanings `course`'s lessons
+/// use ([`crate::hover::glossary_for`]).
+pub fn entries(course: &str, texts: &[String]) -> Vec<&'static Entry> {
+    glossary_for(course).abbreviations_in(texts)
 }
 
-pub fn open(terms: Vec<String>) {
+pub fn open(course: String, terms: Vec<String>) {
     document::eval("window.__stepsHover && window.__stepsHover.hide();");
     crate::pagesheet::close();
     crate::labs::close();
-    *OPEN.write() = Some(terms);
+    *OPEN.write() = Some((course, terms));
 }
 
 pub fn close() {
@@ -36,8 +38,8 @@ pub fn close() {
 
 /// The chip; nothing when the step has no abbreviation.
 #[component]
-pub fn AbbrChip(texts: Vec<String>) -> Element {
-    let terms: Vec<String> = entries(&texts).iter().map(|e| e.term.clone()).collect();
+pub fn AbbrChip(course: String, texts: Vec<String>) -> Element {
+    let terms: Vec<String> = entries(&course, &texts).iter().map(|e| e.term.clone()).collect();
     if terms.is_empty() {
         return rsx! {};
     }
@@ -49,7 +51,7 @@ pub fn AbbrChip(texts: Vec<String>) -> Element {
             aria_haspopup: "dialog",
             onclick: move |e| {
                 e.stop_propagation();
-                open(terms.clone());
+                open(course.clone(), terms.clone());
             },
             {tx::CHIP}
             span { class: "abbr-n", "{n}" }
@@ -61,10 +63,10 @@ pub fn AbbrChip(texts: Vec<String>) -> Element {
 #[component]
 pub fn AbbrSheet() -> Element {
     let ui = use_context::<crate::Ui>();
-    let Some(terms) = OPEN.read().clone() else {
+    let Some((course, terms)) = OPEN.read().clone() else {
         return rsx! {};
     };
-    let g = glossary();
+    let g = glossary_for(&course);
     let shown: Vec<&Entry> = terms.iter().filter_map(|t| g.entries.iter().find(|e| &e.term == t)).collect();
     let unverified = shown.iter().any(|e| e.status != Status::Approved);
     rsx! {
@@ -110,16 +112,19 @@ mod tests {
     #[test]
     fn a_step_lists_its_abbreviations_once_in_reading_order() {
         // SPEC §24-style step: Arabic prose around English terms.
-        let found = entries(&texts(&[
-            "الـ PFO بيفضل مفتوح لما الـ foramen ovale ما يقفلش.",
-            "قيس الـ MAP، وفرّق بين الـ ASD والـ PFO تاني.",
-        ]));
+        let found = entries(
+            "cvs",
+            &texts(&[
+                "الـ PFO بيفضل مفتوح لما الـ foramen ovale ما يقفلش.",
+                "قيس الـ MAP، وفرّق بين الـ ASD والـ PFO تاني.",
+            ]),
+        );
         let terms: Vec<&str> = found.iter().map(|e| e.term.as_str()).collect();
         assert_eq!(terms, ["PFO", "MAP", "ASD"]);
     }
 
     #[test]
     fn plain_text_has_no_chip() {
-        assert!(entries(&texts(&["Tamponade is fluid around the heart."])).is_empty());
+        assert!(entries("cvs", &texts(&["Tamponade is fluid around the heart."])).is_empty());
     }
 }

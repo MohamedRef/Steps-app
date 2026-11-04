@@ -37,6 +37,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
     let ui = use_context::<Ui>();
     // The lesson gets the whole phone screen; × (data-back) is the way out.
     crate::parts::use_focus_mode(true);
+    crate::hover::use_course_hover(lesson.id.split('.').next().unwrap_or_default());
     let n = lesson.steps.len();
     let id = lesson.id.clone();
     // The saved attempt, restored before any step decides Check or Continue.
@@ -183,6 +184,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     k,
                     current: k == i,
                     step: st.clone(),
+                    course: lesson.id.split('.').next().unwrap_or_default().to_string(),
                     seed: format!("{}#{}", lesson.id, k),
                     before: before[k],
                     quote_held: attempt.read().quote_held(&lesson, k),
@@ -310,6 +312,8 @@ fn Stage(
     k: usize,
     current: bool,
     step: Step,
+    /// The lesson's course (`cvs`), for its own glossary meanings.
+    course: String,
     seed: String,
     /// Answered before its response was saved: Some(right) (Try steps: done).
     before: Option<bool>,
@@ -362,7 +366,7 @@ fn Stage(
             }
             // The page chip, with the step's abbreviations and his note beside it.
             footer { class: "ls-src",
-                crate::abbrsheet::AbbrChip { texts: texts.clone() }
+                crate::abbrsheet::AbbrChip { course: course.clone(), texts: texts.clone() }
                 if let Some(page) = step.page {
                     crate::hover::BookPage {
                         page,
