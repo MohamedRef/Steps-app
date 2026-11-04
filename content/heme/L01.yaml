@@ -1,0 +1,286 @@
+schema: steps.content/v1
+lecture: heme.L01
+title: Embryology
+book: { chapter: 10, pages: [410, 411] }
+topics:
+  - { id: fetal-erythropoiesis, title: Fetal erythropoiesis }
+  - { id: hemoglobin-development, title: Hemoglobin development }
+  - { id: blood-groups, title: Blood groups }
+  - { id: hemolytic-disease-of-the-fetus-and-newborn, title: Hemolytic disease of the fetus and newborn }
+items:
+  # ---------- p410: fetal erythropoiesis ----------
+  - id: heme.L01.001
+    kind: table
+    topic: fetal-erythropoiesis
+    title: Sites of fetal erythropoiesis
+    columns: [Site, Time]
+    rows:
+      - [Yolk sac, 3-8 weeks]
+      - [Liver, 6 weeks-birth]
+      - [Spleen, 10-28 weeks]
+      - [Bone marrow, 18 weeks to adult]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 410, quote: "Fetal erythropoiesis occurs in: Yolk sac (3-8 weeks) Liver (6 weeks-birth) Spleen (10-28 weeks) Bone marrow (18 weeks to adult)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L01.002
+    kind: enumerate
+    topic: fetal-erythropoiesis
+    prompt: Enumerate the sites of fetal erythropoiesis, in the order they start (4).
+    points:
+      - Yolk sac
+      - Liver
+      - Spleen
+      - Bone marrow
+    pass: 4
+    hook: "الكتاب بيقولها: Young Liver Synthesizes Blood = Yolk sac، Liver، Spleen، Bone marrow."
+    src: { page: 410, quote: "Young liver synthesizes blood." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L01.003
+    kind: cloze
+    topic: fetal-erythropoiesis
+    text: The {{c1::liver}} makes red cells from {{c2::6 weeks}} until birth; the bone marrow takes over from {{c3::18 weeks}} into adult life.
+    src: { page: 410, quote: "Liver (6 weeks-birth) Spleen (10-28 weeks) Bone marrow (18 weeks to adult)" }
+    status: unverified
+  - id: heme.L01.004
+    kind: mcq
+    topic: fetal-erythropoiesis
+    stem: >-
+      A 26-year-old woman at 7 weeks' gestation by dates undergoes a first-trimester ultrasound. The
+      embryo has a heartbeat, and a small round structure is seen next to it. Her obstetrician explains
+      that until about 8 weeks this structure is where the embryo's red blood cells are being made,
+      and that another organ has just started to take over. Which organ is the main site of red cell
+      production from 6 weeks of development until birth?
+    options:
+      - Bone marrow
+      - Spleen
+      - Liver
+      - Thymus
+      - Yolk sac
+    answer: 2
+    why:
+      - "The bone marrow starts at 18 weeks and is the site from then into adult life, but it is not the main site through mid-gestation."
+      - "The spleen contributes only from 10 to 28 weeks."
+      - "Right. The liver makes red cells from 6 weeks until birth (Young Liver Synthesizes Blood)."
+      - "The thymus is not a site of fetal erythropoiesis."
+      - "The yolk sac is the first site, from 3 to 8 weeks; the structure on the scan is the yolk sac, which is about to hand over."
+    src: { page: 410, quote: "Yolk sac (3-8 weeks) Liver (6 weeks-birth)" }
+    status: unverified
+  # ---------- p410: hemoglobin development ----------
+  - id: heme.L01.005
+    kind: card
+    topic: hemoglobin-development
+    front: Which globin chains are the embryonic globins?
+    back: ζ (zeta) and ε (epsilon).
+    src: { page: 410, quote: "Embryonic globins: ζ and ε." }
+    status: unverified
+  - id: heme.L01.006
+    kind: table
+    topic: hemoglobin-development
+    title: Hemoglobins and their chains
+    columns: [Hemoglobin, Chains, Note]
+    rows:
+      - [Fetal hemoglobin (HbF), α2γ2, Higher O2 affinity]
+      - [Adult hemoglobin (HbA1), α2β2, The main adult form]
+      - [HbA2, α2δ2, Adult form present in small amounts]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 410, quote: "Fetal hemoglobin (HbF) = α γ 2 2 . Adult hemoglobin (HbA1 ) = α2 β2" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L01.007
+    kind: card
+    topic: hemoglobin-development
+    front: Why does fetal hemoglobin (HbF) have a higher affinity for O2 than adult hemoglobin, and why does it matter?
+    back: HbF binds 2,3-BPG with relatively lower affinity, so it holds O2 more tightly. This lets HbF take O2 from maternal hemoglobin (HbA1 and HbA2) across the placenta.
+    src: { page: 410, quote: "HbF has higher affinity for O2 because it binds to 2,3-BPG with relatively lower affinity, allowing HbF to capture O2 from maternal hemoglobin" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L01.008
+    kind: cloze
+    topic: hemoglobin-development
+    text: "From fetal to adult hemoglobin: {{c1::alpha}} always; {{c2::gamma}} goes, becomes {{c3::beta}}."
+    src: { page: 410, quote: "From fetal to adult hemoglobin: Alpha always; gamma goes, becomes beta." }
+    status: unverified
+  - id: heme.L01.009
+    kind: mcq
+    topic: hemoglobin-development
+    stem: >-
+      A physiology student compares oxygen dissociation curves of blood from a term newborn's umbilical
+      cord and from the mother. The curve of the cord blood is shifted to the left: at a PO2 of 27 mm Hg
+      the cord hemoglobin is far more saturated than the maternal hemoglobin. Which property of the
+      newborn's main hemoglobin best explains this difference?
+    options:
+      - It contains two β chains that cooperate more strongly
+      - It binds 2,3-bisphosphoglycerate with lower affinity
+      - It binds carbon dioxide more avidly
+      - Its heme iron is in the ferric (Fe3+) state
+      - It is made of four identical γ chains
+    answer: 1
+    why:
+      - "HbF is α2γ2; it has no β chains."
+      - "Right. HbF binds 2,3-BPG less well, so less 2,3-BPG pulls O2 off it: higher O2 affinity, left-shifted curve, and O2 moves from maternal to fetal blood across the placenta."
+      - "CO2 binding is not the reason the book gives for HbF's higher O2 affinity."
+      - "Ferric (Fe3+) iron is methemoglobin, which cannot bind O2 at all."
+      - "Four γ chains is not HbF; HbF has two α and two γ chains."
+    src: { page: 410, quote: "HbF has higher affinity for O2 because it binds to 2,3-BPG with relatively lower affinity" }
+    status: unverified
+  # ---------- p411: blood groups ----------
+  - id: heme.L01.010
+    kind: table
+    topic: blood-groups
+    title: ABO classification
+    columns: [RBC type, Antigens on RBC, Antibodies in plasma, Can receive, Can donate to]
+    rows:
+      - [A, A, IgM anti-B, "A, O", "A, AB"]
+      - [B, B, IgM anti-A, "B, O", "B, AB"]
+      - [AB, A and B, None, "AB, A, B, O", AB]
+      - [O, None, "IgG and IgM anti-A and anti-B", O, "A, B, AB, O"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [2, 3], [3, 4]]
+    src: { page: 411, quote: "Compatible RBC types to receive A, O B, O AB, A, B, O O" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L01.011
+    kind: card
+    topic: blood-groups
+    front: Which blood group has both IgG and IgM anti-A and anti-B antibodies in plasma?
+    back: Group O (no A or B antigen on its RBCs). Because its antibodies include IgG, which crosses the placenta, a type O pregnant patient can cause ABO hemolytic disease.
+    src: { page: 411, quote: "IgG, IgM Anti-A Anti-B" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L01.012
+    kind: cloze
+    topic: blood-groups
+    text: Type {{c1::AB}} has no ABO antibodies and can receive RBCs of every ABO type; type {{c2::O}} can donate RBCs to every ABO type.
+    src: { page: 411, quote: "Compatible RBC types to receive A, O B, O AB, A, B, O O" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L01.013
+    kind: card
+    topic: blood-groups
+    front: Does an Rh⊖ person have anti-D antibodies?
+    back: No, not unless sensitized. After sensitization (exposure to Rh⊕ RBCs) they make anti-D IgG.
+    src: { page: 411, quote: "NONE NONE (UNLESS SENSITIZED) → Anti-D IgG" }
+    status: unverified
+  - id: heme.L01.014
+    kind: cloze
+    topic: blood-groups
+    text: An Rh⊕ person can receive RBCs that are {{c1::Rh⊕ or Rh⊖}}; an Rh⊖ person can receive only {{c2::Rh⊖}} RBCs.
+    src: { page: 411, quote: "Compatible RBC types to receive A, O B, O AB, A, B, O O Rh⊕ , Rh⊖" }
+    status: unverified
+  - id: heme.L01.015
+    kind: mcq
+    topic: blood-groups
+    stem: >-
+      A 45-year-old man with blood group B, Rh⊕ is bleeding from a duodenal ulcer and needs packed red
+      cells. The blood bank has no group B units left. Which red cell units can he safely receive?
+    options:
+      - Group A, Rh⊕
+      - Group AB, Rh⊖
+      - Group O, Rh⊖
+      - Group AB, Rh⊕
+      - Group A, Rh⊖
+    answer: 2
+    why:
+      - "His plasma has IgM anti-A, which would lyse group A cells."
+      - "AB cells carry the A antigen, which his anti-A attacks."
+      - "Right. A group B patient can receive B or O cells, and an Rh⊕ patient can receive Rh⊕ or Rh⊖ cells; O Rh⊖ cells carry no A, B or D antigen."
+      - "AB cells carry the A antigen; his anti-A would attack them."
+      - "Group A cells are attacked by his anti-A, whatever their Rh type."
+    src: { page: 411, quote: "Compatible RBC types to receive A, O B, O AB, A, B, O O Rh⊕ , Rh⊖" }
+    status: unverified
+  # ---------- p411: hemolytic disease of the fetus and newborn ----------
+  - id: heme.L01.016
+    kind: card
+    topic: hemolytic-disease-of-the-fetus-and-newborn
+    front: What is hemolytic disease of the fetus and newborn also called, and which antigens does it most commonly involve?
+    back: Erythroblastosis fetalis. Most commonly the major blood groups (Rh and ABO), but minor blood group incompatibilities (eg, Kell) can also cause disease, from mild to severe.
+    src: { page: 411, quote: "Also called erythroblastosis fetalis. Most commonly involves the antigens of the major blood groups (eg, Rh and ABO), but minor blood group incompatibilities (eg, Kell) can also result in disease" }
+    status: unverified
+  - id: heme.L01.017
+    kind: table
+    topic: hemolytic-disease-of-the-fetus-and-newborn
+    title: ABO vs Rh hemolytic disease
+    columns: [Feature, ABO hemolytic disease, Rh hemolytic disease]
+    rows:
+      - [Interaction, Type O pregnant patient; type A or B fetus, Rh⊖ pregnant patient; Rh⊕ fetus]
+      - [Mechanism, "Preexisting maternal anti-A and/or anti-B IgG cross the placenta → attack fetal and newborn RBCs → hemolysis", "First pregnancy: exposure to fetal blood (often at delivery) → maternal anti-D IgG. Subsequent pregnancies: anti-D IgG crosses the placenta → hemolysis"]
+      - [Presentation, "Mild jaundice within 24 hours of birth; can occur in firstborns; usually less severe", "Hydrops fetalis, jaundice shortly after birth, kernicterus"]
+      - [Treatment/prevention, Phototherapy or exchange transfusion, Anti-D IgG to Rh⊖ pregnant patients in the third trimester and early postpartum]
+    blanks: [[0, 1], [0, 2], [2, 1], [2, 2]]
+    src: { page: 411, quote: "INTERACTION Type O pregnant patient; type A or B fetus. Rh ⊖ pregnant patient; Rh ⊕ fetus." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L01.018
+    kind: card
+    topic: hemolytic-disease-of-the-fetus-and-newborn
+    front: Why can ABO hemolytic disease affect a firstborn baby, while Rh hemolytic disease usually does not?
+    back: In ABO disease the type O mother already has anti-A/anti-B IgG, which crosses the placenta. In Rh disease the mother must first be exposed to fetal Rh⊕ blood (often at delivery) to make anti-D IgG, which then attacks the RBCs of later Rh⊕ fetuses.
+    src: { page: 411, quote: "Unlike Rh hemolytic disease, can occur in firstborn babies and is usually less severe." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L01.019
+    kind: enumerate
+    topic: hemolytic-disease-of-the-fetus-and-newborn
+    prompt: Besides the third trimester and early postpartum, enumerate the situations in which an Rh⊖ pregnant patient gets anti-D IgG (if the fetus is Rh⊕) (4).
+    points:
+      - Ectopic pregnancy
+      - Miscarriage
+      - Abdominal trauma
+      - Antepartum hemorrhage
+    pass: 4
+    hook: "أي حاجة ممكن تخلّي دم الجنين يقابل دم الأم: ectopic، miscarriage، trauma، bleeding."
+    src: { page: 411, quote: "as well as in cases of ectopic pregnancy, miscarriage, abdominal trauma, and antepartum hemorrhage (if fetus Rh ⊕)" }
+    status: unverified
+  - id: heme.L01.020
+    kind: card
+    topic: hemolytic-disease-of-the-fetus-and-newborn
+    front: How does giving anti-D IgG to an Rh⊖ pregnant patient prevent Rh hemolytic disease?
+    back: It prevents the mother from producing her own anti-D IgG against the fetal Rh⊕ RBCs.
+    src: { page: 411, quote: "Prevents maternal anti-D IgG production." }
+    status: unverified
+  - id: heme.L01.021
+    kind: mcq
+    topic: hemolytic-disease-of-the-fetus-and-newborn
+    stem: >-
+      A 30-year-old woman, gravida 2 para 1, is Rh⊖. Her first child, born 3 years ago in another
+      country, was Rh⊕; she did not receive any injection during or after that pregnancy. At 28 weeks
+      of the current pregnancy, ultrasound shows fetal ascites, pleural effusions and skin edema.
+      Which of the following best explains the fetal findings?
+    options:
+      - Maternal IgM anti-D crossing the placenta
+      - Maternal IgG anti-D made after exposure to fetal blood at her first delivery
+      - Preexisting maternal IgG anti-A crossing the placenta
+      - Fetal antibodies against maternal red cells
+      - Maternal IgG anti-B made during the current pregnancy
+    answer: 1
+    why:
+      - "IgM does not cross the placenta; the antibody in Rh disease is anti-D IgG."
+      - "Right. Exposure to the first baby's Rh⊕ blood (often at delivery) made her form anti-D IgG; in this pregnancy it crosses the placenta, hemolyzes fetal RBCs and causes hydrops fetalis."
+      - "Preexisting anti-A IgG is the ABO mechanism (type O mother), which gives mild neonatal jaundice, not hydrops."
+      - "The antibodies are the mother's, attacking the fetal RBCs."
+      - "ABO antibodies are preexisting, not made during pregnancy, and ABO disease is usually mild."
+    src: { page: 411, quote: "First pregnancy: patient exposed to fetal blood (often during delivery) → formation of maternal anti-D IgG." }
+    status: unverified
+  - id: heme.L01.022
+    kind: mcq
+    topic: hemolytic-disease-of-the-fetus-and-newborn
+    stem: >-
+      A firstborn boy develops mild jaundice 18 hours after an uncomplicated term delivery. His blood
+      type is A, Rh⊕. His mother is type O, Rh⊕. Hemoglobin is mildly decreased and the reticulocyte
+      count is increased. Which of the following is the most appropriate treatment?
+    options:
+      - Anti-D immune globulin to the mother
+      - Phototherapy
+      - Oral iron
+      - Splenectomy
+      - No treatment until a second pregnancy
+    answer: 1
+    why:
+      - "Anti-D IgG prevents Rh disease in an Rh⊖ mother; this mother is Rh⊕ and the problem is ABO."
+      - "Right. ABO hemolytic disease (type O mother, type A fetus) can hit a firstborn with mild jaundice within 24 hours; it is treated with phototherapy, or exchange transfusion if severe."
+      - "This is hemolysis from maternal antibodies, not iron deficiency."
+      - "Splenectomy has no role in neonatal ABO hemolytic disease."
+      - "The jaundiced baby needs treatment now; ABO disease does not wait for a second pregnancy."
+    src: { page: 411, quote: "Mild jaundice in the neonate within 24 hours of birth." }
+    status: unverified
