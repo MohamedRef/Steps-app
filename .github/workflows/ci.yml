@@ -104,7 +104,13 @@ jobs:
 
   coverage:
     name: Test coverage (90% of lines)
+    # Nightly and by hand only (Mohamed, 2026-11-04): it is the slowest job,
+    # and pull requests still run every test in `check`.
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+      issues: write
     steps:
       - uses: actions/checkout@v5
       - name: System libraries for the desktop WebView
@@ -126,6 +132,17 @@ jobs:
         run: >-
           cargo llvm-cov --workspace --summary-only --fail-under-lines 90
           --ignore-filename-regex '(browser\.rs|browser_fixture\.rs|crates/app/src/platform/)'
+      # Under 90% at night: say so where it is seen, once.
+      - name: Open an issue when coverage drops
+        if: failure() && github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Nightly coverage under 90% of lines"
+          if [ -z "$(gh issue list -R "$GITHUB_REPOSITORY" --state open --search "in:title \"$title\"" --json number --jq '.[].number')" ]; then
+            gh issue create -R "$GITHUB_REPOSITORY" --title "$title" \
+              --body "The nightly coverage job failed on ${GITHUB_SHA::7}: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+          fi
 
   web:
     name: Web app compiles (wasm32)

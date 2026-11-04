@@ -191,6 +191,9 @@ pub fn BookSheet() -> Element {
                 if can_mark {
                     ReadToggle { page, is_read }
                 }
+                if matches!(scope, Scope::Book(_)) {
+                    crate::notes::PageNotes { page }
+                }
             }
             div { class: "bk-foot",
                 if n > 0 {

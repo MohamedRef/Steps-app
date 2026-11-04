@@ -1,0 +1,755 @@
+schema: steps.lesson/v1
+lecture: renal.L04
+lessons:
+  - id: renal.L04.lesson1
+    title: "البول بيحكي: الـ casts، وnephritic ولا nephrotic"
+    hook: "الـ cast هو صورة للـ tubule اللي اتعمل فيه. اعرف الـ cast، تعرف المكان"
+    minutes: 8
+    pages: [612, 613]
+    topics: [casts-in-urine, nomenclature-of-glomerular-disorders, glomerular-diseases]
+    goals:
+      - "تربط كل cast بالمرض بتاعه"
+      - "تفهم أسماء الـ glomerular diseases (focal و diffuse و membranous)"
+      - "تفرّق nephritic عن nephrotic من الآلية"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "ليه الـ cast مهم؟"
+        text: |-
+          الـ cast بيتعمل جوه الـ tubule، من بروتين اسمه ==Tamm-Horsfall mucoprotein== (uromodulin) اللي الـ tubular cells بتفرزه (وشغلته الأصلية إنه يمنع الـ UTI). أي خلايا بتتحبس فيه بتاخد شكل الـ tubule.
+
+          فلو لقيت cast، يبقى الـ hematuria أو الـ pyuria ==جاية من الكلية نفسها== (glomerulus أو tubule). أما bladder cancer والـ stones فبيعملوا hematuria من غير casts، والـ cystitis بيعمل pyuria من غير casts.
+        page: 612
+        quote: "Presence of casts indicates that hematuria/pyuria is of glomerular or renal tubular origin. Bladder cancer, kidney stones → hematuria, no casts. Acute cystitis → pyuria, no casts. All casts contain a matrix composed primarily of Tamm-Horsfall mucoprotein (uromodulin), secreted by renal tubular cells to prevent UTIs."
+      - kind: match
+        prompt: "وصّل كل cast بالمرض بتاعه"
+        pairs:
+          - ["RBC casts", "Glomerulonephritis, hypertensive emergency"]
+          - ["WBC casts", "Acute pyelonephritis, interstitial inflammation"]
+          - ["Muddy brown granular casts", "Acute tubular necrosis"]
+          - ["Fatty casts (Maltese cross)", "Nephrotic syndrome"]
+          - ["Waxy casts", "End-stage or chronic kidney disease"]
+          - ["Hyaline casts", "Nonspecific: dehydration, exercise, diuretics"]
+        why: "الـ RBC بتعدّي من glomerulus ملتهب، والـ WBC من interstitium ملتهب، والخلايا الميتة بتعمل granular في الـ ATN، والدهون في الـ nephrotic، والـ waxy في كلية قديمة تعبانة."
+        page: 612
+        quote: "RBC casts A Glomerulonephritis, hypertensive emergency. WBC casts Tubulointerstitial inflammation, acute pyelonephritis, transplant rejection. Granular casts B Acute tubular necrosis (ATN)."
+      - kind: explain
+        title: "الأسامي بتقولك إيه"
+        text: |-
+          - **Focal**: أقل من 50% من الـ glomeruli. **Diffuse**: أكتر من 50%.
+          - **Proliferative**: الـ glomeruli مليانة خلايا (hypercellular).
+          - **Membranous**: الـ GBM تخين.
+          - **Primary**: مرض الكلية نفسها (زي minimal change). **Secondary**: مرض في الجسم وصل للـ glomeruli (زي SLE و diabetic nephropathy).
+        page: 612
+        quote: "Focal <50% of glomeruli are involved Focal segmental glomerulosclerosis Diffuse >50% of glomeruli are involved Diffuse proliferative glomerulonephritis"
+      - kind: figure
+        title: "Nephritic ولا nephrotic"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-bad" x="10" y="10" width="165" height="180" rx="10"/>
+            <text x="20" y="32" class="t-sm t-b">Nephritic</text>
+            <text x="20" y="55" class="t-sm">inflammation</text>
+            <text x="20" y="72" class="t-sm">→ GBM damage</text>
+            <text x="20" y="95" class="t-sm">hematuria, RBC casts</text>
+            <text x="20" y="112" class="t-sm">↓ GFR, oliguria</text>
+            <text x="20" y="129" class="t-sm">azotemia</text>
+            <text x="20" y="146" class="t-sm">hypertension</text>
+            <text x="20" y="168" class="t-sm t-mut">protein &lt; 3.5 g/day</text>
+            <rect class="fg-acc" x="185" y="10" width="165" height="180" rx="10"/>
+            <text x="195" y="32" class="t-sm t-b">Nephrotic</text>
+            <text x="195" y="55" class="t-sm">podocyte damage</text>
+            <text x="195" y="72" class="t-sm">→ charge barrier lost</text>
+            <text x="195" y="95" class="t-sm">protein &gt; 3.5 g/day</text>
+            <text x="195" y="112" class="t-sm">edema, ↓ albumin</text>
+            <text x="195" y="129" class="t-sm">↑ cholesterol</text>
+            <text x="195" y="146" class="t-sm">fatty casts</text>
+            <text x="195" y="168" class="t-sm t-mut">clots, infections</text>
+          </svg>
+        caption: "الـ nephritic «التهاب» بيخرّم الـ GBM فالـ RBCs تعدّي. الـ nephrotic «تسريب» من الـ podocytes فالبروتين يعدّي."
+        alt: "Two columns comparing nephritic syndrome (inflammation, GBM damage, hematuria, RBC casts, low GFR, oliguria, azotemia, hypertension, proteinuria under 3.5 g/day) and nephrotic syndrome (podocyte damage, loss of charge barrier, proteinuria over 3.5 g/day, edema, hypoalbuminemia, hypercholesterolemia, fatty casts, clots and infections)."
+        page: 613
+        quote: "Podocyte damage → impaired charge barrier → proteinuria Massive proteinuria (>3.5 g/day) with edema, hypoalbuminemia"
+      - kind: reveal
+        prompt: "ليه مريض الـ nephrotic بيعمل جلطات وبيلقط infections بسهولة؟"
+        answer: |-
+          لأنه بيخسر بروتينات مهمة في البول:
+          - ==Antithrombin== (مانع التجلط الطبيعي) ← hypercoagulable، زي **renal vein thrombosis**.
+          - ==IgGs== ← مناعة أقل، وكمان الـ edema بيضعف الجلد والأنسجة.
+
+          والـ albumin الواطي بيخلي الكبد يشتغل زيادة فيطلع **cholesterol** عالي.
+        page: 613
+        quote: "Associated with hypercoagulable state (eg, renal vein thrombosis) due to antithrombin loss in urine and ↑ risk of infection (loss of IgGs in urine and soft tissue compromise by edema)"
+      - kind: sort
+        prompt: "حط كل مرض في مكانه"
+        bins: ["Nephritic", "Nephrotic"]
+        cards:
+          - { text: "Infection-associated GN", bin: 0 }
+          - { text: "Goodpasture syndrome", bin: 0 }
+          - { text: "IgA nephropathy", bin: 0 }
+          - { text: "Alport syndrome", bin: 0 }
+          - { text: "Minimal change disease", bin: 1 }
+          - { text: "FSGS", bin: 1 }
+          - { text: "Membranous nephropathy", bin: 1 }
+          - { text: "Amyloidosis", bin: 1 }
+          - { text: "Diabetic glomerulonephropathy", bin: 1 }
+        why: "والـ DPGN والـ MPGN ممكن يعملوا الاتنين مع بعض (nephritic-nephrotic)، لأن الضرر في الـ GBM شديد لدرجة إن الـ RBCs والبروتين يعدّوا."
+        page: 613
+        quote: "Can occur with any form of nephritic syndrome, but is most common with: ▘ Diffuse proliferative glomerulonephritis ▘ Membranoproliferative glomerulonephritis"
+      - kind: check
+        question: "A man with 6 g/day proteinuria develops sudden flank pain and a renal vein clot. Urinary loss of what?"
+        options:
+          - "Antithrombin"
+          - "Fibrinogen"
+          - "Factor VIII"
+          - "von Willebrand factor"
+        answer: 0
+        why:
+          - "صح: الـ antithrombin بيضيع في البول ← hypercoagulable."
+          - "الـ fibrinogen كبير ومش بيضيع، ولو ضاع هيعمل نزيف."
+          - "الـ factor VIII كبير، وضياعه يعمل نزيف."
+          - "الـ vWF كبير جداً."
+        page: 613
+        quote: "Associated with hypercoagulable state (eg, renal vein thrombosis) due to antithrombin loss in urine"
+      - kind: try
+        items: [renal.L04.001, renal.L04.003, renal.L04.007, renal.L04.010]
+    recap:
+      - "Casts = المصدر من الكلية. RBC ← GN، WBC ← pyelonephritis، muddy brown ← ATN، fatty ← nephrotic، waxy ← CKD."
+      - "Focal < 50%، diffuse > 50%، proliferative = خلايا كتير، membranous = GBM تخين."
+      - "Nephritic: التهاب، دم، ضغط، GFR يقل. Nephrotic: podocytes، بروتين > 3.5 g، edema، cholesterol."
+      - "Nephrotic: antithrombin يضيع ← جلطات؛ IgG يضيع ← infections."
+    practice: [renal.L04.001, renal.L04.002, renal.L04.003, renal.L04.004, renal.L04.005, renal.L04.006, renal.L04.007, renal.L04.008, renal.L04.009, renal.L04.010, renal.L04.011, renal.L04.012]
+  - id: renal.L04.lesson2
+    title: "الـ nephritic syndromes: كل واحد له بصمة على الميكروسكوب"
+    hook: "سؤال الـ biopsy في الامتحان بيدّيك صورة واحدة: humps، crescents، linear، wire loops، basket-weave. كل صورة لها مرض"
+    minutes: 10
+    pages: [614, 615]
+    topics: [nephritic-syndrome]
+    goals:
+      - "تعرف الـ timing بين الـ infection-related GN والـ IgA nephropathy"
+      - "تقرأ الـ IF في الـ RPGN: linear، negative، granular"
+      - "تعرف Alport و MPGN"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Infection-related GN: بعد الالتهاب بأسابيع"
+        text: |-
+          ده ==type III hypersensitivity==: immune complexes بتترسّب وتاكل الـ complement (consumptive **hypocomplementemia**).
+
+          - في الأطفال: ==2-4 أسابيع بعد== strep pharyngitis أو skin infection (group A).
+          - في الكبار: الـ **Staphylococcus** سبب إضافي.
+
+          - **LM**: glomeruli كبيرة ومليانة خلايا.
+          - **IF**: granular («starry sky»، «lumpy-bumpy») من IgG و IgM و C3.
+          - **EM**: ==subepithelial humps==.
+        page: 614
+        quote: "Type III hypersensitivity reaction with consumptive hypocomplementemia Children: seen ~2-4 weeks after group A streptococcal pharyngitis or skin infection Adults: Staphylococcus is additional causative agent"
+      - kind: explain
+        title: "IgA nephropathy: في نفس وقت الالتهاب"
+        text: |-
+          الـ **IgA** بيتفرز من الأغشية المخاطية، فلما يحصل infection في الصدر أو الـ GI، الـ IgA يعلى ==في نفس الوقت== ويترسّب في الـ **mesangium**.
+
+          - LM: mesangial proliferation. IF و EM: IgA immune complexes في الـ mesangium.
+          - وهو نفسه الكلية بتاعة ==IgA vasculitis==.
+        page: 614
+        quote: "Occurs concurrently with respiratory or GI tract infections (IgA is secreted by mucosal linings) Renal pathology of IgA vasculitis Mesangial proliferation IgA-based IC deposits in mesangium"
+      - kind: aside
+        tone: trap
+        text: "أهم سؤال: ==الهيماتوريا جت إمتى؟== بعد الـ sore throat بـ 2-4 أسابيع ← infection-related GN. في نفس أيام الـ sore throat ← IgA nephropathy."
+        page: 614
+        quote: "Occurs concurrently with respiratory or GI tract infections"
+      - kind: check
+        question: "A boy has cola-colored urine 3 weeks after impetigo. Which EM finding?"
+        options:
+          - "Subepithelial immune complex humps"
+          - "Mesangial IgA deposits"
+          - "Basket-weave GBM"
+          - "Foot process effacement only"
+        answer: 0
+        why:
+          - "صح: infection-related GN بعد strep جلد بـ 3 أسابيع ← subepithelial humps."
+          - "الـ IgA بيجي مع الـ infection مش بعدها بأسابيع."
+          - "الـ basket-weave ده Alport."
+          - "الـ effacement لوحده ده minimal change."
+        page: 614
+        quote: "Subepithelial IC humps"
+      - kind: explain
+        title: "RPGN: crescents وتشخيص بالـ IF"
+        text: |-
+          **Rapidly progressive (crescentic) GN** بيمشي بسرعة والـ prognosis وحش. الـ ==crescents== من fibrin وبروتينات (C3b) و parietal cells و monocytes و macrophages.
+
+          والتشخيص من الـ **IF**:
+          - **Linear** ← ==Goodpasture== (type II HSR): antibodies ضد الـ GBM والـ alveolar basement membrane ← hematuria و hemoptysis.
+          - **Negative (pauci-immune)** ← granulomatosis with polyangiitis (PR3-ANCA/c-ANCA)، eosinophilic GPA، microscopic polyangiitis (MPO-ANCA/p-ANCA).
+          - **Granular** ← PSGN أو DPGN.
+        page: 614
+        quote: "Linear IF due to antibodies to GBM and alveolar basement membrane: Goodpasture syndrome hematuria/ hemoptysis"
+      - kind: figure
+        title: "الـ IF في الـ RPGN"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="10" y="10" width="105" height="130" rx="10"/>
+            <text x="20" y="32" class="t-sm t-b">Linear</text>
+            <path class="fg-ink" d="M25 60 C 45 45, 75 75, 100 55" stroke-width="3" fill="none"/>
+            <text x="20" y="100" class="t-sm">anti-GBM</text>
+            <text x="20" y="118" class="t-sm">Goodpasture</text>
+            <rect class="fg-box" x="127" y="10" width="105" height="130" rx="10"/>
+            <text x="137" y="32" class="t-sm t-b">Negative</text>
+            <text x="137" y="65" class="t-sm t-mut">no deposits</text>
+            <text x="137" y="100" class="t-sm">pauci-immune</text>
+            <text x="137" y="118" class="t-sm">ANCA</text>
+            <rect class="fg-good" x="244" y="10" width="105" height="130" rx="10"/>
+            <text x="254" y="32" class="t-sm t-b">Granular</text>
+            <circle class="fg-dot-good" cx="265" cy="58" r="4"/><circle class="fg-dot-good" cx="285" cy="66" r="4"/><circle class="fg-dot-good" cx="305" cy="55" r="4"/><circle class="fg-dot-good" cx="325" cy="64" r="4"/>
+            <text x="254" y="100" class="t-sm">immune</text>
+            <text x="254" y="118" class="t-sm">complexes</text>
+          </svg>
+        caption: "Linear: الـ antibody لازق على الـ GBM نفسه بطوله (Goodpasture). Negative: مفيش رواسب، والـ ANCA هو السبب. Granular: كتل immune complexes (PSGN أو DPGN)."
+        alt: "Three immunofluorescence patterns in crescentic glomerulonephritis: a continuous linear line (anti-GBM, Goodpasture), no staining (pauci-immune, ANCA), and granular dots (immune complexes)."
+        page: 614
+        quote: "Negative IF/Pauci immune (no IgC3 deposition): granulomatosis with polyangiitis—PR3 ANCA/c-ANCA, eosinophilic granulomatosis with polyangiitis, or Microscopic polyangiitis—MPO ANCA/p-ANCA"
+      - kind: explain
+        title: "DPGN: wire lupus"
+        text: |-
+          **Diffuse proliferative GN** غالباً من ==SLE== (افتكر «wire lupus»): الـ capillaries شكلها ==wire loops== على الـ LM، والـ IF granular، والـ EM فيه subendothelial IgG immune complexes ومعاهم C3.
+
+          والـ DPGN والـ MPGN كتير بيطلعوا nephritic و nephrotic مع بعض.
+        page: 614
+        quote: "Often due to SLE (think “wire lupus”); DPGN and MPGN often present as nephritic and nephrotic syndromes concurrently “Wire looping” of capillaries D"
+      - kind: explain
+        title: "Alport و MPGN"
+        text: |-
+          **Alport syndrome**: mutation في ==type IV collagen== (غالباً X-linked dominant). الـ GBM بيترقق ويتخن ويتشق، والـ EM شكله ==basket-weave==، والـ IF negative. ومعاه مشاكل عين (retinopathy، anterior lenticonus) و sensorineural hearing loss: «can't see, can't pee, can't hear a bee».
+
+          **MPGN**: الـ GBM بيتشق فيبان ==tram-track== على H&E و PAS. نوعين:
+          - **Immune complex**: ممكن secondary لـ HBV أو HCV أو autoimmune. IgG و C3 granular، و subendothelial deposits.
+          - **Complement-mediated**: الـ alternative pathway شغال على طول (زي dense deposit disease). C3 أو C4 granular، و intramembranous و/أو subendothelial.
+        page: 615
+        quote: "Type IV collagen mutation → GBM alterations; mostly X-linked dominant; eye problems (eg, retinopathy, anterior lenticonus), glomerulonephritis, sensorineural hearing loss (“can’t see, can’t pee, can’t hear a bee”)"
+      - kind: match
+        prompt: "وصّل الصورة بالمرض"
+        pairs:
+          - ["Subepithelial humps", "Infection-related GN"]
+          - ["Mesangial IgA", "IgA nephropathy"]
+          - ["Linear IF", "Goodpasture syndrome"]
+          - ["Wire loops", "Lupus DPGN"]
+          - ["Basket-weave GBM", "Alport syndrome"]
+          - ["Tram-track GBM", "MPGN"]
+        why: "كل مرض له علامة: humps للـ strep، mesangium للـ IgA، linear للـ anti-GBM، wire للـ lupus، basket للـ collagen، tram-track للـ MPGN."
+        page: 615
+        quote: "May demonstrate mesangial ingrowth; GBM splitting “tram- track” on H&E and PAS E stains"
+      - kind: check
+        question: "A young man has hemoptysis and RBC casts; biopsy shows crescents. Which IF pattern points to anti-GBM disease?"
+        options:
+          - "Linear IgG along the GBM"
+          - "Granular lumpy-bumpy"
+          - "Negative"
+          - "Mesangial IgA"
+        answer: 0
+        why:
+          - "صح: Goodpasture، antibodies على الـ GBM والـ alveolar membrane ← linear."
+          - "الـ granular ده immune complexes (PSGN أو DPGN)."
+          - "الـ negative ده pauci-immune ANCA، وده برضه بيعمل رئة وكلية، بس السؤال عن anti-GBM."
+          - "الـ IgA مفيهوش hemoptysis."
+        page: 614
+        quote: "Linear IF due to antibodies to GBM and alveolar basement membrane: Goodpasture syndrome hematuria/ hemoptysis"
+      - kind: try
+        items: [renal.L04.013, renal.L04.014, renal.L04.016, renal.L04.018]
+    recap:
+      - "Infection-related GN: 2-4 أسابيع بعد strep، ↓ complement، subepithelial humps."
+      - "IgA nephropathy: مع الالتهاب نفسه، mesangial IgA."
+      - "RPGN: crescents. Linear = Goodpasture، negative = ANCA، granular = PSGN/DPGN."
+      - "DPGN = wire lupus. Alport = type IV collagen، basket-weave، عين وودن. MPGN = tram-track."
+    practice: [renal.L04.013, renal.L04.014, renal.L04.015, renal.L04.016, renal.L04.017, renal.L04.018, renal.L04.019, renal.L04.020, renal.L04.021, renal.L04.022]
+  - id: renal.L04.lesson3
+    title: "الـ nephrotic syndromes، والحصوات"
+    hook: "طفل ورمان بعد دور برد؟ minimal change. راجل diabetic؟ Kimmelstiel-Wilson. وبعدين الحصوات: كل نوع له شكل كريستال"
+    minutes: 10
+    pages: [616, 617]
+    topics: [nephrotic-syndrome, kidney-stones]
+    goals:
+      - "تعرف الـ 5 nephrotic diseases وبصمة كل واحد"
+      - "تعرف كل حصوة بتتكوّن في pH إيه وشكل كريستالها وعلاجها"
+    status: unverified
+    steps:
+      - kind: table
+        title: "Nephrotic syndromes"
+        columns: ["Disease", "Clue", "Key finding"]
+        rows:
+          - ["Minimal change disease", "Children; after infection, immunization, immune stimulus (4 Is)", "Normal LM; effacement of foot processes on EM"]
+          - ["FSGS", "HIV, sickle cell, obesity; more common in Black people", "Segmental sclerosis and hyalinosis"]
+          - ["Membranous nephropathy", "Anti-PLA2 receptor; NSAIDs, penicillamine, gold; HBV, HCV, syphilis; SLE; solid tumors", "Spike and dome subepithelial deposits"]
+          - ["Amyloidosis", "AL, AA, prolonged dialysis", "Congo red apple-green birefringence"]
+          - ["Diabetic glomerulonephropathy", "Most common cause of ESRD in the US", "Kimmelstiel-Wilson nodules"]
+        hide: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]]
+        page: 616
+        quote: "Often 1° (idiopathic), triggered by recent infection, immunization, immune stimulus (4 Is); rarely 2° to lymphoma (eg, cytokine-mediated damage). More common in children."
+      - kind: explain
+        title: "Minimal change و FSGS: الـ podocyte نفسه"
+        text: |-
+          الاتنين الضرر فيهم في الـ ==podocyte==، والـ EM فيه **effacement of foot processes**.
+
+          - **Minimal change**: الـ LM ==طبيعي== (ممكن تشوف lipid في الـ PT cells)، والـ IF negative. أشهر في الأطفال، وبيجي بعد infection أو تطعيم (4 Is)، ونادراً مع lymphoma.
+          - **FSGS**: sclerosis في جزء من بعض الـ glomeruli، ممكن primary أو secondary (HIV، sickle cell، obesity)، وممكن يوصل لـ CKD. أشهر في الـ Black people.
+        page: 616
+        quote: "Can be 1° (idiopathic) or 2° (eg, HIV infection, sickle cell disease, obesity, or congenital malformations); may progress to CKD. More common in Black people."
+      - kind: explain
+        title: "Membranous و amyloid"
+        text: |-
+          **Membranous nephropathy**: الـ GBM والـ capillaries تخان، والـ IF granular، والـ EM ==spike and dome== (subepithelial). الـ primary فيه antibodies ضد ==phospholipase A2 receptor==. والـ secondary من أدوية أو infections أو SLE أو tumors. وخطر الجلطات فيه عالي (DVT و renal vein thrombosis).
+
+          **Amyloidosis**: الكلية أكتر عضو بيتأثر. الـ ==Congo red== بيدّي **apple-green birefringence** تحت الـ polarized light، والـ amyloid في الـ mesangium.
+        page: 616
+        quote: "Congo red stain shows apple-green birefringence (polarized light) due to amyloid deposition in the mesangium"
+      - kind: order
+        prompt: "رتّب إزاي السكر بيبوّظ الـ glomerulus"
+        steps:
+          - "Hyperglycemia"
+          - "Nonenzymatic glycation of tissue proteins"
+          - "Mesangial expansion"
+          - "GBM thickening and ↑ permeability"
+        why: "وفي نفس الوقت فيه hyperfiltration (ضغط عالي جوه الـ glomerulus و ↑ GFR) بيعمل hypertrophy وبعدين glomerulosclerosis. عشان كده الـ ACE inhibitors والـ ARBs بيحموا الكلية: بيفتحوا الـ efferent ويقللوا الضغط."
+        page: 616
+        quote: "Hyperglycemia → nonenzymatic glycation of tissue proteins → mesangial expansion → GBM thickening and ↑ permeability."
+      - kind: aside
+        tone: exam
+        text: "الـ diabetic nephropathy هي ==أشهر سبب لـ ESRD في أمريكا==. اكتشفها بدري بالـ **albuminuria** (urine albumin-to-creatinine ratio)، وعلامتها على الـ LM الـ ==Kimmelstiel-Wilson== nodules (eosinophilic nodular glomerulosclerosis)."
+        page: 616
+        quote: "Look for albuminuria with ↑ urine albumin-to-creatinine ratio. ACE inhibitors and ARBs are renoprotective."
+      - kind: check
+        question: "A 4-year-old has edema and heavy proteinuria 10 days after a cold. What would EM show?"
+        options:
+          - "Effacement of podocyte foot processes"
+          - "Spike and dome deposits"
+          - "Subendothelial wire loops"
+          - "Amyloid fibrils"
+        answer: 0
+        why:
+          - "صح: minimal change في طفل بعد infection: LM طبيعي و effacement على الـ EM."
+          - "الـ spike and dome ده membranous، في الكبار."
+          - "الـ wire loops ده lupus."
+          - "الـ amyloid محتاج مرض مزمن قبله."
+        page: 616
+        quote: "Normal glomeruli (lipid may be seen in PT cells) ⊝ Effacement of podocyte foot processes A"
+      - kind: explain
+        title: "الحصوات: القواعد العامة"
+        text: |-
+          الحصوة اللي سادة بتعمل ==ألم colicky من الجنب للـ groin==، و flank tenderness في ناحية، و hematuria. وممكن تعمل hydronephrosis و pyelonephritis و AKI. والعلاج والوقاية: **اشرب مية كتير**.
+
+          - **Calcium** (80%): oxalate أكتر من phosphate.
+          - **Struvite**: 15%. **Uric acid**: حوالي 5%.
+          - Radiolucent: «==I can't c (see) u (you)==»: cystine و uric acid.
+        page: 617
+        quote: "Obstructed stone presents with unilateral flank tenderness, colicky pain radiating to groin, hematuria. Treat and prevent by encouraging fluid intake. Radiolucent stones: I can’t c (see) u (you) (cystine and uric acid)."
+      - kind: table
+        title: "كل حصوة وكريستالها"
+        columns: ["Stone", "pH", "Crystal", "Treatment"]
+        rows:
+          - ["Calcium oxalate", "hypocitraturia", "Envelope or dumbbell", "Thiazides, citrate, low-sodium diet"]
+          - ["Calcium phosphate", "↑", "Wedge-shaped prism", "Low-sodium diet, thiazides"]
+          - ["Struvite", "↑", "Coffin lid", "Treat infection, remove stone"]
+          - ["Uric acid", "↓", "Rhomboid or rosettes", "Alkalinize urine, allopurinol"]
+          - ["Cystine", "↓", "Hexagonal", "Low sodium, alkalinize, chelators"]
+        hide: [[0, 2], [2, 2], [3, 2], [4, 2], [1, 1], [3, 1]]
+        page: 617
+        quote: "Uric acid ↓ pH Radiolucent Visible Rhomboid D or rosettes"
+      - kind: reveal
+        prompt: "ليه الـ Proteus بيعمل حصوة staghorn ضخمة؟"
+        answer: "الـ Proteus (ومعاه S saprophyticus و Klebsiella) فيه ==urease== بيكسّر الـ urea لـ **ammonia** ← البول يبقى قلوي ← الـ ammonium magnesium phosphate (**struvite**) يترسّب بسرعة ويملا الـ calyces كلها (staghorn). العلاج: تخلص من الـ infection وتشيل الحصوة جراحياً."
+        page: 617
+        quote: "Caused by infection with urease ⊕ bugs (eg, Proteus mirabilis, Staphylococcus saprophyticus, Klebsiella) that hydrolyze urea to ammonia → urine alkalinization. Commonly form staghorn calculi C ."
+      - kind: aside
+        tone: tip
+        text: "الـ **cystinuria**: autosomal recessive، الـ transporter في الـ PCT اللي بيرجّع ==COLA== باظ: Cystine، Ornithine، Lysine، Arginine. الكريستال ==hexagonal== («Sixtine» ليها 6 جوانب)، والـ sodium cyanide nitroprusside test ⊕."
+        page: 617
+        quote: "Transporter defect also results in poor reabsorption of Ornithine, Lysine, Arginine (COLA)."
+      - kind: check
+        question: "A patient with gout and leukemia on chemotherapy has a radiolucent stone and acidic urine. Treatment?"
+        options:
+          - "Alkalinize the urine and give allopurinol"
+          - "Thiazides and citrate"
+          - "Eradicate the infection"
+          - "Acidify the urine"
+        answer: 0
+        why:
+          - "صح: uric acid stone (↑ cell turnover، pH واطي، radiolucent) ← قلوي البول و allopurinol."
+          - "دول لحصوة الـ calcium oxalate."
+          - "ده للـ struvite."
+          - "التحميض هيزوّد الـ uric acid stones."
+        page: 617
+        quote: "Strong association with hyperuricemia (eg, gout). Often seen in diseases with ↑ cell turnover (eg, leukemia). Treatment: alkalinization of urine, allopurinol."
+      - kind: try
+        items: [renal.L04.023, renal.L04.025, renal.L04.028, renal.L04.033, renal.L04.037]
+    recap:
+      - "Minimal change: أطفال، 4 Is، LM طبيعي. FSGS: HIV و sickle و obesity."
+      - "Membranous: anti-PLA2R، spike and dome، جلطات. Amyloid: apple-green. Diabetic: Kimmelstiel-Wilson، ACEi/ARB."
+      - "Calcium 80% (oxalate envelope). Struvite: urease، coffin lid، staghorn. Uric acid: pH واطي، rhomboid. Cystine: COLA، hexagonal."
+      - "Radiolucent: I can't see you (cystine و uric acid)."
+    practice: [renal.L04.023, renal.L04.024, renal.L04.025, renal.L04.026, renal.L04.027, renal.L04.028, renal.L04.029, renal.L04.030, renal.L04.031, renal.L04.032, renal.L04.033, renal.L04.034, renal.L04.035, renal.L04.036, renal.L04.037, renal.L04.038, renal.L04.039]
+  - id: renal.L04.lesson4
+    title: "انسداد، تسريب، وعدوى"
+    hook: "hydronephrosis، والأنواع الـ 3 للـ incontinence، و cystitis ضد pyelonephritis: كله سؤال «المكان فين؟»"
+    minutes: 9
+    pages: [618, 619]
+    topics: [hydronephrosis, urinary-incontinence, acute-cystitis, pyelonephritis]
+    goals:
+      - "تعرف إمتى الـ hydronephrosis يرفع الـ creatinine"
+      - "تفرّق stress و urgency و overflow وتعرف علاج كل واحد"
+      - "تفرّق cystitis عن pyelonephritis وتعرف الـ labs"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Hydronephrosis"
+        text: |-
+          تمدد الـ renal pelvis و/أو الـ calyces، ==فوق== مكان المشكلة. غالباً من انسداد: stones، BPH شديد، انسداد خلقي، cervical cancer متقدم، إصابة في الـ ureter. وكمان retroperitoneal fibrosis و vesicoureteral reflux.
+
+          الـ creatinine ==بيعلى بس== لو الانسداد في الناحيتين، أو المريض عنده كلية واحدة واتسدت. ومع الوقت الضغط بيضغط الـ cortex والـ medulla وممكن يعمل atrophy.
+        page: 618
+        quote: "Dilation occurs proximal to site of pathology. Serum creatinine becomes elevated if obstruction is bilateral or if patient has an obstructed solitary kidney. Leads to compression and possible atrophy of renal cortex and medulla."
+      - kind: table
+        title: "Urinary incontinence"
+        columns: ["", "Stress", "Urgency", "Overflow"]
+        rows:
+          - ["Mechanism", "Outlet incompetence → leak with ↑ abdominal pressure", "Detrusor overactivity → sudden urge", "Incomplete emptying → leak when overfilled, ↑ postvoid residual"]
+          - ["Associations", "Obesity, pregnancy, vaginal delivery, prostate surgery", "UTI, stones, tumors, pelvic radiation", "BPH, neurogenic bladder, anticholinergics, polyuria"]
+          - ["Treatment", "Kegel, weight loss, pessaries", "Bladder training, oxybutynin, mirabegron, botulinum toxin", "Catheterization, relieve obstruction (α-blockers)"]
+        hide: [[0, 1], [0, 2], [0, 3], [2, 1], [2, 2], [2, 3]]
+        page: 618
+        quote: "Detrusor overactivity → leak with urge to void immediately"
+      - kind: aside
+        tone: analogy
+        text: "الـ bladder زي ==خزان بحنفية==: stress = الحنفية سايبة فتنقّط لما تكح أو تشيل حاجة. urgency = الخزان نفسه بيتقلص لوحده فجأة. overflow = الخزان مش بيفضى، فيتملي لحد ما يفيض. و**mixed** = stress و urgency مع بعض."
+        page: 618
+        quote: "Mixed incontinence has features of both stress and urgency incontinence."
+      - kind: check
+        question: "A diabetic man with neuropathy dribbles constantly and has a postvoid residual of 450 mL. Management?"
+        options:
+          - "Catheterization"
+          - "Oxybutynin"
+          - "Mirabegron"
+          - "Pessary"
+        answer: 0
+        why:
+          - "صح: overflow من detrusor ضعيف ← فضّي الـ bladder بالـ catheter."
+          - "الـ antimuscarinic هيزوّد الاحتباس؛ ده للـ urgency."
+          - "الـ β3-agonist بيرخّي الـ detrusor، برضه للـ urgency."
+          - "الـ pessary للـ stress في الستات."
+        page: 618
+        quote: "Incomplete emptying (detrusor underactivity or outlet obstruction) → leak with overfilling, ↑ postvoid residual on catheterization or ultrasound"
+      - kind: explain
+        title: "Acute cystitis: الـ bladder بس"
+        text: |-
+          suprapubic pain و dysuria و frequency و urgency، ومن غير fever عالي أو رعشة (==مفيش systemic signs==).
+
+          الأسباب: **E coli** (الأشهر)، **S saprophyticus** (ستات صغيرين نشيطين جنسياً، والـ E coli برضه أشهر فيهم)، Klebsiella، **Proteus** (ريحة نشادر)، Enterococcus.
+
+          الـ labs:
+          - **Leukocyte esterase ⊕**: فيه WBCs.
+          - **Nitrites ⊕**: Enterobacteriaceae.
+          - ==Sterile pyuria== (pyuria والـ culture سلبي): فكّر في urethritis من **N gonorrhoeae** أو **C trachomatis**.
+
+          العلاج: antibiotics (TMP-SMX، nitrofurantoin).
+        page: 619
+        quote: "Labs: ⊕ leukocyte esterase. ⊕ nitrites (indicates presence of Enterobacteriaceae). Sterile pyuria (pyuria with ⊝ urine cultures) could suggest urethritis by Neisseria gonorrhoeae or Chlamydia trachomatis."
+      - kind: explain
+        title: "Pyelonephritis: العدوى طلعت للكلية"
+        text: |-
+          **Acute**: neutrophils في الـ interstitium (الـ cortex، والـ glomeruli والأوعية سليمين نسبياً). fever و flank pain (==CVA tenderness==) و nausea و رعشة، و WBCs في البول ± ==WBC casts==. الـ CT: striated parenchymal enhancement.
+
+          عوامل الخطر: catheter، انسداد، reflux، diabetes، و**الحمل** (الـ progesterone بيرخّي الـ ureter، والرحم بيضغط).
+
+          المضاعفات: chronic pyelonephritis، renal papillary necrosis، perinephric abscess (ممكن يوصل للـ psoas)، urosepsis.
+
+          **Chronic**: من عدوى بتتكرر (غالباً reflux أو حصوات): ندبات خشنة مش متساوية فوق calyces مفلطحة، و ==thyroidization of kidney== (casts شبه الـ thyroid).
+        page: 619
+        quote: "Coarse, asymmetric corticomedullary scarring, blunted calyces. Tubules can contain eosinophilic casts resembling thyroid tissue B (thyroidization of kidney)."
+      - kind: check
+        question: "A young woman has dysuria with pyuria, nitrite-negative urine, and no growth on culture. Most likely organism?"
+        options:
+          - "Chlamydia trachomatis"
+          - "E coli"
+          - "Proteus mirabilis"
+          - "Klebsiella"
+        answer: 0
+        why:
+          - "صح: sterile pyuria ← urethritis من Chlamydia أو gonorrhea (مش بيطلعوا في الـ culture العادي)."
+          - "الـ E coli هيطلع في الـ culture."
+          - "الـ Proteus هيطلع، وريحته نشادر."
+          - "الـ Klebsiella هيطلع في الـ culture."
+        page: 619
+        quote: "Sterile pyuria (pyuria with ⊝ urine cultures) could suggest urethritis by Neisseria gonorrhoeae or Chlamydia trachomatis."
+      - kind: try
+        items: [renal.L04.041, renal.L04.043, renal.L04.048, renal.L04.050, renal.L04.053]
+    recap:
+      - "Hydronephrosis فوق الانسداد؛ الـ creatinine يعلى لو الناحيتين أو كلية واحدة."
+      - "Stress: Kegel. Urgency: oxybutynin أو mirabegron. Overflow: catheter."
+      - "Cystitis: مفيش fever. Nitrites = Enterobacteriaceae. Sterile pyuria = Chlamydia أو gonorrhea."
+      - "Pyelonephritis: fever و CVA و WBC casts. Chronic: ندبات و thyroidization."
+    practice: [renal.L04.040, renal.L04.041, renal.L04.042, renal.L04.043, renal.L04.044, renal.L04.045, renal.L04.046, renal.L04.047, renal.L04.048, renal.L04.049, renal.L04.050, renal.L04.051, renal.L04.052, renal.L04.053, renal.L04.054]
+  - id: renal.L04.lesson5
+    title: "الكلية بتفشل: AKI و ATN والـ CKD"
+    hook: "الـ FENa والـ BUN/Cr هيقولولك الكلية نفسها تعبانة ولا ناشفة بس. وبعدين MAD HUNGER لما الفشل يطوّل"
+    minutes: 10
+    pages: [620, 622]
+    topics: [acute-kidney-injury, acute-interstitial-nephritis, acute-tubular-necrosis, diffuse-cortical-necrosis, renal-papillary-necrosis, consequences-of-renal-failure, renal-osteodystrophy]
+    goals:
+      - "تفرّق prerenal عن intrinsic من أرقام البول"
+      - "تعرف مراحل الـ ATN وأسبابه"
+      - "تحفظ DRAINS و SAAD papa و MAD HUNGER"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Prerenal: الكلية سليمة بس عطشانة"
+        text: |-
+          في الـ **prerenal** (hypovolemia، ↓ CO، heart failure، liver failure) الـ RBF يقل ← GFR يقل، بس ==الـ tubules شغالة كويس== فبتمسك Na+ ومية و urea. فالبول:
+          - **Osmolality > 500** (مركّز)
+          - **Urine Na+ < 20**، **FENa < 1%**
+          - **BUN/Cr > 20** (الـ urea بيترجع)
+
+          في الـ **intrinsic** (زي ATN) الـ tubules نفسها ميتة ومش قادرة تمسك حاجة: osmolality < 350، Na+ > 40، FENa > 2%، BUN/Cr < 15.
+
+          وفي الـ **postrenal** (stones، BPH، tumor) الانسداد لازم يبقى في الناحيتين، والأرقام بتتغير.
+        page: 620
+        quote: "↓ RBF → ↓ GFR → ↑ reabsorption of Na+ /H2 O and urea"
+      - kind: table
+        title: "AKI بالأرقام"
+        columns: ["", "Prerenal", "Intrinsic"]
+        rows:
+          - ["Urine osmolality", "> 500", "< 350"]
+          - ["Urine Na+", "< 20", "> 40"]
+          - ["FENa", "< 1%", "> 2%"]
+          - ["BUN/Cr", "> 20", "< 15"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2], [3, 1], [3, 2]]
+        page: 620
+        quote: "URINE OSMOLALITY (mOsm/kg) >500 <350 Varies"
+      - kind: mnemonic
+        word: "AEIOU"
+        parts:
+          - { key: "A", text: "Acidosis" }
+          - { key: "E", text: "Electrolyte abnormalities (eg, hyperkalemia)" }
+          - { key: "I", text: "Intoxication (eg, lithium)" }
+          - { key: "O", text: "Overload (fluid)" }
+          - { key: "U", text: "Uremia" }
+        hook: "إمتى الـ AKI يحتاج dialysis؟ الحروف المتحركة الإنجليزي بالترتيب."
+        page: 620
+        quote: "Indications for dialysis in AKI: Acidosis, Electrolyte abnormalities (eg, hyperkalemia), Intoxication (eg, lithium), Overload (fluid), Uremia (AEIOU)."
+      - kind: explain
+        title: "AIN: حساسية من دوا"
+        text: |-
+          **Acute interstitial nephritis**: الدوا بيشتغل ==hapten== ويعمل hypersensitivity في الـ interstitium. pyuria (==eosinophils== كلاسيكياً) و azotemia، وممكن fever و rash و hematuria و CVA tenderness، أو ولا حاجة.
+
+          الأدوية: «to your **DRAINS**»: **D**iuretics، **R**ifampin، **A**ntibiotics (penicillins و cephalosporins)، **I** = Proton pump **I**nhibitors، NSAIDs، **S**ulfa. وأقل: infections (Mycoplasma)، أو Sjögren و SLE و sarcoidosis.
+        page: 620
+        quote: "Remember the causes of inflammation to your DRAINS: ▘ Diuretics ▘ Rifampin ▘ Antibiotics (penicillins and cephalosporins) ▘ Proton pump Inhibitors ▘ NSAIDs ▘ Sulfa drugs"
+      - kind: explain
+        title: "ATN: 3 مراحل"
+        text: |-
+          ==أشهر سبب لـ intrinsic AKI في المستشفى==. علامته **muddy brown granular casts**، و ↑ FENa. كتير بيخف لوحده بس ممكن يموّت، خصوصاً في الـ oliguric phase.
+
+          1. **Inciting event**
+          2. **Maintenance** (oliguric، 1-3 أسابيع): ==hyperkalemia== و metabolic acidosis و uremia.
+          3. **Recovery** (polyuric): الـ BUN والـ creatinine ينزلوا، بس الـ tubules لسه بتضيّع أملاح ← ==hypokalemia==.
+
+          النوعين:
+          - **Ischemic** (↓ RBF): الخلايا الميتة بتقع في الـ lumen؛ الـ PT والـ thick ascending limb أكتر ناس بيتأذوا.
+          - **Nephrotoxic**: aminoglycosides، radiocontrast، lead، cisplatin، ethylene glycol، uric acid (tumor lysis)، myoglobin (rhabdomyolysis)، hemoglobin. الـ PTs أكتر حاجة.
+        page: 621
+        quote: "Recovery phase—polyuric; BUN and serum creatinine fall; risk of hypokalemia and renal wasting of other electrolytes and minerals"
+      - kind: check
+        question: "Two weeks into post-op ATN, urine output jumps to 4 L/day while creatinine falls. Main risk now?"
+        options:
+          - "Hypokalemia"
+          - "Hyperkalemia"
+          - "Metabolic alkalosis"
+          - "Hypernatremia"
+        answer: 0
+        why:
+          - "صح: الـ recovery phase polyuric، والـ tubules بتضيّع K+."
+          - "الـ hyperkalemia في الـ maintenance (oliguric)."
+          - "الـ ATN بيعمل acidosis مش alkalosis."
+          - "مش دي المشكلة المذكورة."
+        page: 621
+        quote: "Recovery phase—polyuric; BUN and serum creatinine fall; risk of hypokalemia and renal wasting of other electrolytes and minerals"
+      - kind: explain
+        title: "نوعين necrosis تانيين"
+        text: |-
+          - **Diffuse cortical necrosis**: infarction للـ cortex في الكليتين، غالباً من vasospasm + ==DIC==. بيجي مع كوارث الولادة (زي placental abruption) والـ septic shock.
+          - **Renal papillary necrosis**: الـ papillae بتموت وتقع ← gross hematuria. مرتبطة بـ «==SAAD papa==»: **S**ickle cell disease أو trait، **A**cute pyelonephritis، **A**nalgesics (NSAIDs)، **D**iabetes.
+        page: 621
+        quote: "Associated with: ▘ Sickle cell disease or trait ▘ Acute pyelonephritis ▘ Analgesics (eg, NSAIDs) ▘ Diabetes mellitus SAAD papa with papillary necrosis."
+      - kind: mnemonic
+        word: "MADHUNGER"
+        parts:
+          - { key: "M", text: "Metabolic" }
+          - { key: "A", text: "Acidosis" }
+          - { key: "D", text: "Dyslipidemia (especially ↑ triglycerides)" }
+          - { key: "H", text: "High potassium" }
+          - { key: "U", text: "Uremia" }
+          - { key: "N", text: "Na+/H2O retention (HF, pulmonary edema, hypertension)" }
+          - { key: "G", text: "Growth retardation and developmental delay" }
+          - { key: "E", text: "Erythropoietin deficiency (anemia)" }
+          - { key: "R", text: "Renal osteodystrophy" }
+        hook: "الكتاب بيكتبها MAD HUNGER: الكلية لما تفشل بتبقى «جعانة ومجنونة»."
+        page: 621
+        quote: "Consequences (MAD HUNGER): ▘ Metabolic Acidosis ▘ Dyslipidemia (especially ↑ triglycerides) ▘ High potassium ▘ Uremia"
+      - kind: explain
+        title: "Uremia و FGF23 والعظم"
+        text: |-
+          - **Uremia** (urea عالي): «==Ure-PEAN==»: **P**ericarditis، **E**ncephalopathy (مع asterixis)، **A**norexia، **N**ausea.
+          - في أول الـ CKD الـ phosphate بيفضل طبيعي لأن **FGF23** بيعلى ويطلّع الـ phosphate في البول («FGF23 fights f(ph)osphate»).
+          - ومع الوقت: **renal osteodystrophy**: Ca2+ واطي، phosphate عالي، والكلية مش بتعمل 1,25-(OH)2 D3 ← ==2° hyperparathyroidism== ← ولو ما اتعالجش ← 3°. الـ phosphate بيلزق في الـ Ca2+ ويترسّب، والـ vitamin D القليل بيقلل امتصاص الـ Ca2+. والنتيجة **subperiosteal thinning** في العظم.
+        page: 622
+        quote: "Hypocalcemia, hyperphosphatemia, and failure of vitamin D hydroxylation associated with chronic kidney disease → 2° hyperparathyroidism → 3° hyperparathyroidism (if 2° poorly managed)."
+      - kind: check
+        question: "A patient with untreated ESRD has positional chest pain, a friction rub and asterixis. Cause of the chest pain?"
+        options:
+          - "Uremic pericarditis"
+          - "Myocardial infarction"
+          - "Pulmonary embolism"
+          - "Aortic dissection"
+        answer: 0
+        why:
+          - "صح: Ure-PEAN: pericarditis و encephalopathy (asterixis)."
+          - "الـ MI ما بيتحسنش لما يميل لقدام، وما يفسرش الـ asterixis."
+          - "مفيش سبب للجلطة هنا."
+          - "الـ dissection ألمه بيشق للضهر."
+        page: 621
+        quote: "Uremia—syndrome resulting from high serum urea. Can present with Pericarditis, Encephalopathy (seen with asterixis), Anorexia, Nausea"
+      - kind: try
+        items: [renal.L04.055, renal.L04.056, renal.L04.059, renal.L04.063, renal.L04.070]
+    recap:
+      - "Prerenal: FENa < 1%، BUN/Cr > 20، بول مركّز. Intrinsic: FENa > 2%."
+      - "Dialysis: AEIOU. AIN: DRAINS، eosinophils."
+      - "ATN: muddy brown casts؛ oliguric ← K+ عالي، polyuric ← K+ واطي."
+      - "Cortical necrosis: abruption و DIC. Papillary necrosis: SAAD papa."
+      - "MAD HUNGER؛ uremia = Ure-PEAN؛ FGF23 يطلّع الـ phosphate؛ osteodystrophy ← 2° hyperparathyroidism."
+    practice: [renal.L04.055, renal.L04.056, renal.L04.057, renal.L04.058, renal.L04.059, renal.L04.060, renal.L04.061, renal.L04.062, renal.L04.063, renal.L04.064, renal.L04.065, renal.L04.066, renal.L04.067, renal.L04.068, renal.L04.069, renal.L04.070, renal.L04.071, renal.L04.072, renal.L04.073, renal.L04.074, renal.L04.075, renal.L04.076, renal.L04.077]
+  - id: renal.L04.lesson6
+    title: "الأكياس، الشرايين، والأورام"
+    hook: "ADPKD بـ berry aneurysm، RAS اللي بيتعب مع الـ ACE inhibitor، و RCC اللي بيعمل كل الهرمونات"
+    minutes: 10
+    pages: [622, 624]
+    topics: [renal-cyst-disorders, renovascular-disease, renal-cell-carcinoma, renal-oncocytoma, nephroblastoma, urothelial-carcinoma-of-the-bladder, squamous-cell-carcinoma-of-the-bladder]
+    goals:
+      - "تفرّق ADPKD عن ARPKD عن ADTKD"
+      - "تفرّق atherosclerosis عن fibromuscular dysplasia في الـ RAS"
+      - "تعرف كل ورم: RCC و oncocytoma و Wilms و bladder"
+    status: unverified
+    steps:
+      - kind: table
+        title: "Renal cyst disorders"
+        columns: ["", "ADPKD", "ARPKD"]
+        rows:
+          - ["Gene", "PKD1 (85%, chr 16) or PKD2 (15%, chr 4): polycystin", "PKHD1: fibrocystin"]
+          - ["Kidneys", "Many cysts in cortex and medulla, bilateral enlargement", "Cystic dilation of collecting ducts"]
+          - ["Presents", "Flank pain, hematuria, hypertension, infection; renal failure in ~50%", "Infancy or prenatal ultrasound; Potter sequence if severe"]
+          - ["Associations", "Berry aneurysms, MVP, hepatic cysts, diverticulosis", "Congenital hepatic fibrosis → portal hypertension"]
+        hide: [[0, 1], [0, 2], [3, 1], [3, 2]]
+        page: 622
+        quote: "Mutation in genes encoding polycystin protein: PKD1 (85% of cases, chromosome 16) or PKD2 (15% of cases, chromosome 4)."
+      - kind: explain
+        title: "أكياس تانية"
+        text: |-
+          - الـ hypertension في الـ ADPKD من ==↑ renin==، والعلاج لو جه hypertension أو proteinuria: **ACE inhibitors أو ARBs**.
+          - **ADTKD** (medullary cystic kidney disease): fibrosis في الـ tubulointerstitium وفشل كلوي بيزيد، والكلية ==مش بتعرف تركّز البول==. الأكياس عادة مش باينة، والكلى ==أصغر== على الـ ultrasound. الـ prognosis وحش.
+          - **Simple cyst**: مليان ultrafiltrate (anechoic)، شائع جداً وبيتلاقي صدفة. **Complex cyst** (septated، enhancing، فيه solid): لازم follow-up أو استئصال لأنه ممكن RCC.
+        page: 622
+        quote: "Causes tubulointerstitial fibrosis and progressive renal insufficiency with inability to concentrate urine. Medullary cysts usually not visualized; smaller kidneys on ultrasound. Poor prognosis."
+      - kind: explain
+        title: "Renal artery stenosis"
+        text: |-
+          الـ RAS ← ↓ perfusion ← ↑ renin ← ↑ angiotensin ← hypertension. وده ==أشهر سبب لـ 2° hypertension في الكبار==.
+
+          - **Atherosclerosis**: الـ ==proximal 1/3==، راجل كبير بيدخّن.
+          - **Fibromuscular dysplasia**: الـ ==distal 2/3== أو الفروع، ست صغيرة أو في نص العمر.
+
+          لو ناحية واحدة: الكلية المصابة بتضمر (حجم مختلف)، والـ renal vein renin عالي من المصابة وواطي من السليمة. لو الناحيتين: الـ creatinine ممكن يعلى فجأة مع ACE inhibitor أو ARB أو renin inhibitor، لأن الكلية كانت عايشة على الـ AT II اللي بيقفل الـ efferent.
+
+          بيظهر بـ hypertension صعب، أو flash pulmonary edema، أو bruit في البطن أو الجنب.
+        page: 623
+        quote: "For bilateral RAS, patients can have a sudden rise in creatinine after starting an ACE inhibitor, ARB, or renin inhibitor, due to their interference on RAAS-mediated renal perfusion."
+      - kind: check
+        question: "A 29-year-old woman has refractory hypertension and a bruit; angiography shows a beaded distal renal artery. Diagnosis?"
+        options:
+          - "Fibromuscular dysplasia"
+          - "Atherosclerotic RAS"
+          - "Primary hyperaldosteronism"
+          - "Coarctation of the aorta"
+        answer: 0
+        why:
+          - "صح: ست صغيرة والإصابة في الـ distal 2/3 ← fibromuscular dysplasia."
+          - "الـ atherosclerosis في الـ proximal 1/3 عند راجل كبير مدخّن."
+          - "مفيش lesion في الشريان في الـ hyperaldosteronism."
+          - "الـ coarctation فرق ضغط بين الإيد والرجل."
+        page: 623
+        quote: "Fibromuscular dysplasia: distal 2/3 of renal artery or segmental branches, usually young or middle-aged females"
+      - kind: explain
+        title: "Renal cell carcinoma"
+        text: |-
+          ==أشهر ورم primary في الكلية==، أكتر في الرجالة 50-70، ويزيد مع التدخين والسمنة. طالع من الـ **PCT**: clear cells مليانة lipids و carbohydrate، ولونه golden-yellow.
+
+          - الـ triad: flank pain و palpable mass و hematuria.
+          - بيدخل الـ renal vein (لو شمال ممكن يعمل varicocele) ← IVC ← lung و bone و liver.
+          - Paraneoplastic «==PEAR==»: PTHrP، **E**ctopic EPO (polycythemia)، ACTH، **R**enin.
+          - الـ clear cell: deletion في ==chromosome 3== (VHL). الكتاب: RCC 3 حروف = chromosome 3 = VHL 3 حروف.
+          - العلاج: جراحة أو ablation لو محلي؛ immunotherapy أو targeted لو انتشر. مقاوم للـ radiation والـ chemo.
+        page: 623
+        quote: "Clear cell (most common subtype) associated with gene deletion on chromosome 3 (sporadic, or inherited as von Hippel-Lindau syndrome). RCC = 3 letters = chromosome 3 = associated with VHL (also 3 letters)."
+      - kind: explain
+        title: "Oncocytoma و Wilms"
+        text: |-
+          **Renal oncocytoma**: ورم ==benign== من الـ collecting ducts، محدد كويس وفيه central scar. خلايا eosinophilic كبيرة مليانة mitochondria ومن غير perinuclear clearing (بعكس الـ chromophobe RCC). بيتشال عادة عشان نتأكد إنه مش RCC.
+
+          **Nephroblastoma (Wilms)**: أشهر ورم كلية في الأطفال (2-4 سنين)، فيه embryonic glomerular structures. كتلة كبيرة في جنب واحد ± hematuria و hypertension. ==WT1 أو WT2 على chromosome 11== («W11ms»). Syndromes:
+          - **WAGR**: Wilms، Aniridia، Genitourinary، Range of developmental delays (WT1 deletion).
+          - **Denys-Drash**: Wilms، Diffuse mesangial sclerosis، Dysgenesis of gonads (WT1 mutation).
+          - **Beckwith-Wiedemann**: Wilms، organomegaly، macroglossia، hemihyperplasia، omphalocele (WT2).
+        page: 624
+        quote: "Can be associated with loss-of-function mutations of tumor suppressor genes WT1 or WT2 on chromosome 11 (W11ms tumor)."
+      - kind: explain
+        title: "أورام الـ bladder"
+        text: |-
+          الاتنين بيظهروا بـ ==painless hematuria (no casts)==.
+
+          - **Urothelial (transitional cell) carcinoma**: أشهر ورم في الجهاز البولي كله (calyces و pelvis و ureters و bladder). مشاكل في الـ «Pee **SAC**»: tobacco **S**moking، **A**romatic amines (الصبغات)، **C**yclophosphamide.
+          - **Squamous cell carcinoma**: تهيج مزمن ← squamous metaplasia ← dysplasia ← carcinoma. الـ ==4 S's==: **S**chistosoma haematobium (الشرق الأوسط)، chronic cystitis («systitis»)، **s**moking، **s**tones.
+        page: 624
+        quote: "Risk factors include 4 S’s: Schistosoma haematobium infection (Middle East), chronic cystitis (“systitis”), smoking, chronic nephrolithiasis (stones). Presents with painless hematuria (no casts)."
+      - kind: aside
+        tone: exam
+        text: "فلاح من الدلتا كان بيعوم في الترع وهو صغير وعنده hematuria من غير ألم؟ ده ==Schistosoma haematobium== ← squamous cell carcinoma of the bladder. السؤال ده بيحبه امتحان Step 1 وإحنا عارفينه أكتر من أي حد."
+        page: 624
+        quote: "Schistosoma haematobium infection (Middle East)"
+      - kind: match
+        prompt: "وصّل كل ورم بعلامته"
+        pairs:
+          - ["Renal cell carcinoma", "Chromosome 3, VHL, PEAR"]
+          - ["Renal oncocytoma", "Central scar, mitochondria-packed cells"]
+          - ["Wilms tumor", "WT1/WT2 on chromosome 11"]
+          - ["Urothelial carcinoma", "Smoking, aromatic amines, cyclophosphamide"]
+          - ["Squamous cell carcinoma of bladder", "Schistosoma haematobium"]
+        why: "RCC = 3، Wilms = 11، oncocytoma benign بـ scar، والـ bladder: SAC للـ urothelial و 4 S's للـ squamous."
+        page: 623
+        quote: "Associated with paraneoplastic syndromes, eg, PTHrP, Ectopic EPO, ACTH, Renin (“PEAR”-aneoplastic)."
+      - kind: check
+        question: "A smoker with a left renal mass into the renal vein has a hemoglobin of 18.9 g/dL. What is the tumor making?"
+        options:
+          - "Erythropoietin"
+          - "Renin"
+          - "PTHrP"
+          - "ACTH"
+        answer: 0
+        why:
+          - "صح: RCC بيعمل ectopic EPO ← polycythemia (الـ E في PEAR)."
+          - "الـ renin بيعمل hypertension."
+          - "الـ PTHrP بيعمل hypercalcemia."
+          - "الـ ACTH بيعمل Cushing."
+        page: 623
+        quote: "Associated with paraneoplastic syndromes, eg, PTHrP, Ectopic EPO, ACTH, Renin (“PEAR”-aneoplastic)."
+      - kind: try
+        items: [renal.L04.078, renal.L04.087, renal.L04.094, renal.L04.101, renal.L04.106]
+    recap:
+      - "ADPKD: PKD1 chr 16، berry aneurysm و MVP و liver cysts و diverticulosis. ARPKD: fibrocystin، hepatic fibrosis."
+      - "RAS: atherosclerosis proximal (راجل مدخّن) ضد FMD distal (ست صغيرة). الناحيتين + ACEi ← creatinine يعلى."
+      - "RCC: PCT، clear cells، chr 3 و VHL، PEAR، varicocele شمال."
+      - "Wilms: chr 11، WAGR و Denys-Drash و Beckwith-Wiedemann. Bladder: Pee SAC و 4 S's."
+    practice: [renal.L04.078, renal.L04.079, renal.L04.080, renal.L04.081, renal.L04.082, renal.L04.083, renal.L04.084, renal.L04.085, renal.L04.086, renal.L04.087, renal.L04.088, renal.L04.089, renal.L04.090, renal.L04.091, renal.L04.092, renal.L04.093, renal.L04.094, renal.L04.095, renal.L04.096, renal.L04.097, renal.L04.098, renal.L04.099, renal.L04.100, renal.L04.101, renal.L04.102, renal.L04.103, renal.L04.104, renal.L04.105, renal.L04.106, renal.L04.107, renal.L04.108]
