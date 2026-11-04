@@ -122,6 +122,12 @@ items:
     src: { page: 682, quote: "↑ in restrictive diseases (↑ work to overcome elastic recoil resistance achieved with ↑ RR and ↓ VT)" }
     status: unverified
     tags: [high-yield]
+  - id: resp.L03.077
+    kind: cloze
+    topic: work-of-breathing
+    text: "Work of breathing is minimized by optimizing {{c1::respiratory rate (RR)}} and {{c2::tidal volume (VT)}}."
+    src: { page: 682, quote: "Minimized by optimizing respiratory rate (RR) and VT." }
+    status: unverified
   # ---------- p682: physiologic dead space ----------
   - id: resp.L03.008
     kind: card
@@ -149,8 +155,8 @@ items:
     kind: mcq
     topic: physiologic-dead-space
     stem: >-
-      A ventilated patient has a tidal volume of 500 mL, arterial PCO2 of 40 mm Hg and mixed expired PCO2 of 30 mm Hg.
-      What is the physiologic dead space?
+      A 67-year-old man with COPD is intubated in the ICU for an acute exacerbation. On the ventilator his tidal volume
+      is 500 mL, arterial PCO2 is 40 mm Hg and mixed expired PCO2 is 30 mm Hg. What is his physiologic dead space?
     options:
       - 75 mL
       - 125 mL
@@ -190,9 +196,9 @@ items:
     kind: mcq
     topic: ventilation
     stem: >-
-      Two patients each have a minute ventilation of 6 L/min and a dead space of 150 mL. Patient A breathes 12 times a
-      minute with a tidal volume of 500 mL; patient B breathes 30 times a minute with 200 mL. What is patient B's
-      alveolar ventilation?
+      A 72-year-old man is admitted with three fractured ribs after a fall. Because of pain he breathes rapidly and
+      shallowly, 30 times a minute with a tidal volume of 200 mL, so his minute ventilation is 6 L/min, the same as at
+      rest (12 breaths of 500 mL). His dead space is 150 mL. What is his alveolar ventilation now?
     options:
       - 6.0 L/min
       - 4.2 L/min
@@ -202,7 +208,7 @@ items:
     answer: 3
     why:
       - "That is minute ventilation, which includes dead space."
-      - "4.2 L/min is patient A: (500 − 150) × 12."
+      - "4.2 L/min was his alveolar ventilation at rest: (500 − 150) × 12."
       - "That would need VT − VD of 100 mL."
       - "Right. VA = (VT − VD) × RR = (200 − 150) × 30 = 1.5 L/min; rapid shallow breathing wastes ventilation on dead space."
       - "That is far too low for these numbers."
@@ -339,6 +345,13 @@ items:
     src: { page: 684, quote: "O2 diffuses slowly, while CO2 diffuses very rapidly across the alveolar membrane." }
     status: unverified
     tags: [high-yield]
+  - id: resp.L03.078
+    kind: card
+    topic: pulmonary-circulation
+    front: Normally, what are the resistance and compliance of the pulmonary circulation?
+    back: Low resistance and high compliance.
+    src: { page: 684, quote: "Normally a low-resistance, high-compliance system." }
+    status: unverified
   # ---------- p684: pulmonary vascular resistance ----------
   - id: resp.L03.027
     kind: card
@@ -358,8 +371,9 @@ items:
     kind: mcq
     topic: pulmonary-vascular-resistance
     stem: >-
-      A patient has a mean pulmonary artery pressure of 25 mm Hg, a pulmonary capillary wedge pressure of 10 mm Hg and
-      a cardiac output of 5 L/min. What is the pulmonary vascular resistance?
+      A 55-year-old woman with progressive exertional dyspnea has a right heart catheterization. Mean pulmonary artery
+      pressure is 25 mm Hg, pulmonary capillary wedge pressure is 10 mm Hg and cardiac output is 5 L/min. What is her
+      pulmonary vascular resistance?
     options:
       - 2 mm Hg·min/L
       - 3 mm Hg·min/L
@@ -514,8 +528,8 @@ items:
     kind: mcq
     topic: carbon-dioxide-transport
     stem: >-
-      Blood leaving a contracting muscle carries a large CO2 load to the lungs. In which form is most of this CO2
-      carried?
+      A 22-year-old man runs a 400-m sprint and arrives at the finish breathing hard. Venous blood draining his leg
+      muscles carries a large CO2 load back to the lungs. In which form is most of this CO2 carried?
     options:
       - Dissolved in plasma
       - Bound to plasma proteins as carbamino compounds
@@ -612,22 +626,30 @@ items:
     kind: mcq
     topic: hemoglobin
     stem: >-
-      A biochemistry lab compares two O2-binding proteins. Protein X has a sigmoidal binding curve; protein Y has a
-      hyperbolic curve and binds O2 more tightly at all PO2 values. Protein Y is found mainly in which tissue?
+      A 24-year-old man develops severe muscle pain and dark red-brown urine after an extreme endurance workout. His
+      urine contains the monomeric O2-binding protein released from his injured skeletal muscle. Compared with
+      hemoglobin, how does this protein bind O2?
     options:
-      - Red blood cells
-      - Aerobically active skeletal muscle
-      - Alveolar type II cells
-      - Hepatocytes storing iron
-      - Plasma
-    answer: 1
+      - Hyperbolic curve with higher O2 affinity than Hb
+      - Sigmoidal curve with lower O2 affinity than Hb
+      - Sigmoidal curve with higher O2 affinity than Hb
+      - Hyperbolic curve with lower O2 affinity than Hb
+      - Sigmoidal curve shifted right by 2,3-BPG
+    answer: 0
     why:
-      - "RBCs carry hemoglobin, the sigmoidal protein X."
-      - "Right. Myoglobin is monomeric, has higher O2 affinity and no cooperativity, and is essential for full oxygenation of aerobically active muscle."
-      - "Type II pneumocytes make surfactant."
-      - "Iron storage is not an O2 binding curve."
-      - "Plasma has dissolved O2 only."
-    src: { page: 687, quote: "Essential for full oxygenation of aerobically active muscle." }
+      - "Right. Myoglobin is a single polypeptide chain with one heme, so it shows no positive cooperativity (no sigmoid) and has a higher O2 affinity than Hb; it is essential for full oxygenation of aerobically active muscle."
+      - "The sigmoidal curve belongs to hemoglobin, whose four subunits bind O2 cooperatively."
+      - "A sigmoidal curve needs cooperativity between subunits; monomeric myoglobin has none."
+      - "Myoglobin's affinity for O2 is higher than Hb's, not lower."
+      - "2,3-BPG shifts hemoglobin's curve; myoglobin's curve is hyperbolic."
+    src: { page: 687, quote: "Higher affinity for oxygen than Hb." }
+    status: unverified
+  - id: resp.L03.079
+    kind: card
+    topic: hemoglobin
+    front: Which part of hemoglobin acts as a buffer for H+ ions and CO2?
+    back: The protein component of Hb.
+    src: { page: 687, quote: "The protein component of Hb acts as buffer for H+ ions and CO2 ." }
     status: unverified
   # ---------- p687: oxygen content ----------
   - id: resp.L03.049
@@ -845,11 +867,39 @@ items:
   - id: resp.L03.065
     kind: card
     topic: methemoglobin
-    front: What is methemoglobin, and how does it cause tissue hypoxia?
-    back: Hb whose iron is oxidized from ferrous (Fe2+, "just the 2 of us") to ferric (Fe3+). Fe3+ has reduced O2 affinity (↓ saturation and content) and also makes the remaining Fe2+ hold O2 tightly (left shift); it has ↑ affinity for cyanide.
+    front: What is methemoglobin?
+    back: The oxidized form of Hb, whose iron is ferric (Fe3+) instead of the normal reduced ferrous (Fe2+, "just the 2 of us") state.
     src: { page: 688, quote: "Oxidized form of Hb (ferric, Fe3+ ) has reduced O2 affinity → tissue hypoxia from ↓ O2 saturation and ↓ O2 content." }
     status: unverified
     tags: [high-yield]
+  - id: resp.L03.080
+    kind: card
+    topic: methemoglobin
+    front: How does the ferric (Fe3+) iron of methemoglobin itself cause tissue hypoxia?
+    back: Fe3+ has reduced O2 affinity → ↓ O2 saturation and ↓ O2 content.
+    src: { page: 688, quote: "Oxidized form of Hb (ferric, Fe3+ ) has reduced O2 affinity → tissue hypoxia from ↓ O2 saturation and ↓ O2 content." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.081
+    kind: card
+    topic: methemoglobin
+    front: In methemoglobin, how does Fe3+ change the O2 affinity of the remaining Fe2+, and what does that do to the ODC?
+    back: It increases their O2 affinity, so O2 is held tightly and less is released to tissue (leftward shift in the ODC).
+    src: { page: 688, quote: "Fe3+ also increases O2 affinity of remaining Fe2+ (→ O2 held tightly, less released to tissue [leftward shift in ODC])" }
+    status: unverified
+  - id: resp.L03.082
+    kind: card
+    topic: methemoglobin
+    front: How does methemoglobin's affinity for cyanide compare with normal Hb?
+    back: Methemoglobin (Fe3+) has ↑ affinity for cyanide.
+    src: { page: 688, quote: "and has ↑ affinity for cyanide." }
+    status: unverified
+  - id: resp.L03.083
+    kind: cloze
+    topic: methemoglobin
+    text: "Typical methemoglobin concentrations are {{c1::1%-2%}}; methemoglobinemia occurs at higher levels."
+    src: { page: 688, quote: "While typical concentrations are 1%-2%, methemoglobinemia will occur at higher levels" }
+    status: unverified
   - id: resp.L03.066
     kind: enumerate
     topic: methemoglobin
@@ -906,10 +956,10 @@ items:
     title: Cyanide vs carbon monoxide
     columns: [Feature, Cyanide, Carbon monoxide]
     rows:
-      - [Exposure, "Synthetic product combustion, amygdalin (apricot seeds), ingestion, fires, nitroprusside", "Tobacco smoke, furnaces, space heaters, fires, motor exhaust"]
+      - [Exposure, "Synthetic product combustion, amygdalin (apricot seeds), cyanide ingestion (eg, suicide attempts), fires, nitroprusside", "Tobacco smoke, furnaces, space heaters, fires, motor exhaust"]
       - [Presentation, "Headache, dyspnea, seizure, coma; cherry red skin and retinal venules; bitter almond breath", "Headache, vomiting, confusion, visual disturbance, coma; cherry-red skin with bullae; multiple victims"]
       - [Labs, "Normal PaO2; ↑ lactate → anion gap metabolic acidosis", "Normal PaO2; ↑ CO-Hb on co-oximetry; bilateral globus pallidus lesions"]
-      - [ODC, "Normal curve; binds cytochrome a3", "Left shift; binds Hb with >200× O2 affinity"]
+      - [ODC, "Normal curve; binds cytochrome a3; O2 saturation may appear normal initially", "Left shift; binds Hb with >200× O2 affinity"]
       - [Treatment, "Decontamination; hydroxocobalamin, nitrites, sodium thiosulfate (100% O2 ineffective)", "100% O2; hyperbaric O2 if severe"]
     blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2], [3, 1], [3, 2], [4, 1], [4, 2]]
     src: { page: 689, quote: "Normal Pao2 . ↑ lactate → anion gap metabolic acidosis." }
@@ -994,3 +1044,32 @@ items:
     src: { page: 689, quote: "Risk of cyanide toxicity with use of nitroprusside in hypertensive emergencies." }
     status: unverified
     tags: [high-yield]
+  - id: resp.L03.084
+    kind: card
+    topic: cyanide-vs-carbon-monoxide-poisoning
+    front: Why can carbon monoxide poisoning go unnoticed by the people exposed to it?
+    back: CO is odorless, tasteless, colorless and non-irritating.
+    src: { page: 689, quote: "Odorless, tasteless, colorless, non-irritating." }
+    status: unverified
+  - id: resp.L03.085
+    kind: card
+    topic: cyanide-vs-carbon-monoxide-poisoning
+    front: What is the leading worldwide cause of death by poisoning?
+    back: Carbon monoxide.
+    src: { page: 689, quote: "Leading worldwide cause of death by poisoning." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.086
+    kind: card
+    topic: cyanide-vs-carbon-monoxide-poisoning
+    front: In cyanide poisoning, what may the O2 saturation show at first?
+    back: It may appear normal initially (the ODC is normal; O2 is ample but cannot be used).
+    src: { page: 689, quote: "O2 saturation may appear normal initially." }
+    status: unverified
+  - id: resp.L03.087
+    kind: card
+    topic: cyanide-vs-carbon-monoxide-poisoning
+    front: Besides fires and synthetic product combustion, which deliberate exposure is a source of cyanide poisoning?
+    back: Cyanide ingestion, eg, in suicide attempts.
+    src: { page: 689, quote: "cyanide ingestion (eg, in suicide attempts)" }
+    status: unverified

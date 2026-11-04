@@ -73,10 +73,10 @@ items:
     rows:
       - [Lamotrigine, "Rash; SJS, DRESS"]
       - [Levetiracetam, "Neuropsychiatric effects (eg, psychosis)"]
-      - [Topiramate, "Weight loss, paresthesia; kidney stones, angle-closure glaucoma"]
+      - [Topiramate, "Mood disturbance (eg, depression), weight loss, paresthesia; kidney stones, angle-closure glaucoma"]
       - ["Gabapentin, pregabalin", "Sedation, ataxia, weight gain"]
       - [Ethosuximide, "Sedation, dizziness, vomiting"]
-    blanks: [[0, 1], [1, 1], [2, 1]]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1]]
     src: { page: 560, quote: "Kidney stones, angle-closure glaucoma" }
     status: unverified
     tags: [high-yield]
@@ -176,9 +176,9 @@ items:
     answer: 0
     why:
       - "Right. Barbiturates induce CYP-450 (and ALA synthase demand) and can precipitate an attack of acute porphyria, so they are contraindicated in porphyria."
-      - "Zolpidem is not the classic porphyria trigger named in the book."
+      - "Zolpidem is a nonbenzodiazepine hypnotic; First Aid lists porphyria as a contraindication only for barbiturates."
       - "Ramelteon is a melatonin agonist without this risk."
-      - "Lorazepam is not the contraindicated class here."
+      - "Benzodiazepines such as lorazepam are not contraindicated in porphyria; barbiturates are."
       - "Suvorexant is an orexin antagonist."
     src: { page: 561, quote: "Contraindicated in porphyria." }
     status: unverified
@@ -204,6 +204,12 @@ items:
     src: { page: 562, quote: "Alprazolam, Triazolam, Oxazepam, and Midazolam are short acting → higher addictive potential)." }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L06.069
+    kind: cloze
+    topic: benzodiazepines
+    text: "Most benzodiazepines have {{c1::long half-lives}} and {{c2::active metabolites}}; the exceptions are the short-acting ATOM drugs."
+    src: { page: 562, quote: "Most have long half-lives and active metabolites (exceptions [ATOM]: Alprazolam," }
+    status: unverified
   - id: neuro.L06.014
     kind: card
     topic: benzodiazepines
@@ -270,6 +276,21 @@ items:
     back: "Ataxia, headaches, confusion, and complex sleep-related behaviors (sleepwalking). Only modest next-day psychomotor depression and few amnestic effects; short duration (rapid liver metabolism); reversed by flumazenil; ↓ dependency and sleep-cycle disturbance vs benzodiazepines."
     src: { page: 562, quote: "Associated with complex sleep-related behaviors (eg, sleepwalking)" }
     status: unverified
+    tags: [high-yield]
+  - id: neuro.L06.070
+    kind: card
+    topic: insomnia-therapy
+    front: "Suvorexant: mechanism, adverse effects, contraindications, and dependency risk?"
+    back: "Orexin (hypocretin) receptor antagonist. CNS depression (somnolence), headache, abnormal sleep-related activities. Contraindicated in narcolepsy and with strong CYP3A4 inhibitors; not recommended in liver disease. Limited risk of dependency."
+    src: { page: 562, quote: "Not recommended in patients with liver disease Limited risk of dependency" }
+    status: unverified
+  - id: neuro.L06.071
+    kind: card
+    topic: insomnia-therapy
+    front: "Ramelteon: mechanism, adverse effects, and dependency risk?"
+    back: "Melatonin receptor agonist (MT1 and MT2 in the suprachiasmatic nucleus). Dizziness, nausea, fatigue, headache. No known risk of dependency."
+    src: { page: 562, quote: "Ramelteon Melatonin receptor agonist: binds MT1 and MT2 in suprachiasmatic nucleus Dizziness, nausea, fatigue, headache No known risk of dependency" }
+    status: unverified
   - id: neuro.L06.020
     kind: mcq
     topic: insomnia-therapy
@@ -299,6 +320,18 @@ items:
     src: { page: 562, quote: "agonists. Inhibit trigeminal nerve activation, prevent vasoactive peptide release, induce vasoconstriction." }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L06.072
+    kind: enumerate
+    topic: triptans
+    prompt: Enumerate the adverse effects of triptans (3).
+    points:
+      - Coronary vasospasm (contraindicated in CAD or vasospastic angina)
+      - Mild paresthesia
+      - Serotonin syndrome (with other 5-HT agonists)
+    pass: 3
+    src: { page: 562, quote: "Coronary vasospasm (contraindicated in patients with CAD or vasospastic angina), mild paresthesia, serotonin syndrome (in combination with other 5-HT agonists)." }
+    status: unverified
+    tags: [high-yield]
   - id: neuro.L06.022
     kind: mcq
     topic: triptans
@@ -321,6 +354,29 @@ items:
       - "Prochlorperazine is an antiemetic used in migraine."
     src: { page: 562, quote: "Coronary vasospasm (contraindicated in patients with CAD or vasospastic angina), mild paresthesia, serotonin syndrome (in combination with other 5-HT agonists)." }
     status: unverified
+  - id: neuro.L06.073
+    kind: mcq
+    topic: triptans
+    stem: >-
+      A 34-year-old woman with migraine takes several doses of sumatriptan over one day for a severe
+      attack. She also takes another serotonin (5-HT) agonist. That evening she is agitated and
+      diaphoretic, with a temperature of 38.6°C, tachycardia, hyperreflexia and inducible clonus.
+      Which adverse effect of her migraine drug best explains this?
+    options:
+      - Serotonin syndrome
+      - Coronary vasospasm
+      - Malignant hyperthermia
+      - Mild paresthesia
+      - Neuroleptic malignant syndrome
+    answer: 0
+    why:
+      - "Right. Triptans (5-HT1B/1D agonists) can cause serotonin syndrome when combined with other 5-HT agonists: agitation, hyperthermia, autonomic instability, hyperreflexia and clonus."
+      - "Coronary vasospasm causes chest pain, not hyperreflexia and clonus."
+      - "Malignant hyperthermia follows inhaled anesthetics or succinylcholine."
+      - "Paresthesia is mild tingling, not a febrile syndrome."
+      - "Neuroleptic malignant syndrome follows antipsychotics and causes rigidity, not hyperreflexia and clonus."
+    src: { page: 562, quote: "serotonin syndrome (in combination with other 5-HT agonists)." }
+    status: unverified
   # ---------- p563-564: Parkinson and neurodegenerative therapy ----------
   - id: neuro.L06.023
     kind: card
@@ -339,12 +395,19 @@ items:
       - [Dopamine agonists, "Pramipexole, ropinirole (non-ergot); bromocriptine (ergot)", "Impulse control disorder, hallucinations, postural hypotension, sleepiness"]
       - [↑ dopamine availability, Amantadine, "↑ release, ↓ reuptake; for levodopa dyskinesias; livedo reticularis, edema"]
       - [↑ L-DOPA availability, "Carbidopa (DOPA decarboxylase inhibitor); entacapone, tolcapone (COMT)", Act peripherally before the BBB]
-      - [Prevent dopamine breakdown, "Selegiline, rasagiline (MAO-B); tolcapone (central COMT)", Help on-off fluctuations]
+      - [Prevent dopamine breakdown, "Selegiline, rasagiline (MAO-B); tolcapone (central COMT)", "Act centrally; selegiline and rasagiline help on-off fluctuations"]
       - [Curb cholinergic activity, "Benztropine, trihexyphenidyl", "Improve tremor and rigidity, not bradykinesia"]
     blanks: [[0, 1], [1, 1], [3, 1], [4, 1]]
     src: { page: 563, quote: "Benztropine, trihexyphenidyl (Antimuscarinic; improves tremor and rigidity but has little effect on bradykinesia in Parkinson disease)." }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L06.074
+    kind: card
+    topic: parkinson-disease-therapy
+    front: "Parkinson drugs: why is bromocriptine rarely used, and what is amantadine's toxicity?"
+    back: "Bromocriptine (an ergot) is rarely used due to toxicity. Amantadine toxicity: peripheral edema, livedo reticularis, ataxia."
+    src: { page: 563, quote: "Ergot—bromocriptine; rarely used due to toxicity." }
+    status: unverified
   - id: neuro.L06.025
     kind: card
     topic: parkinson-disease-therapy
@@ -404,6 +467,7 @@ items:
     back: "Nausea, hallucinations, postural hypotension. With progressive disease: «on» periods with better mobility alternate with «off» periods when the patient responds poorly or the dose wears off."
     src: { page: 564, quote: "Nausea, hallucinations, postural hypotension." }
     status: unverified
+    tags: [high-yield]
   - id: neuro.L06.031
     kind: table
     topic: neurodegenerative-disease-therapy
@@ -418,6 +482,22 @@ items:
     src: { page: 564, quote: "Inhibit vesicular monoamine transporter (VMAT) → ↓ dopamine vesicle packaging and release" }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L06.075
+    kind: card
+    topic: neurodegenerative-disease-therapy
+    front: "Memantine: mechanism, use, and adverse effects?"
+    back: "NMDA receptor antagonist; helps prevent excitotoxicity (mediated by Ca2+). Used for moderate to advanced dementia. Adverse effects: dizziness, confusion, hallucinations."
+    src: { page: 564, quote: "Adverse effects: dizziness, confusion, hallucinations" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L06.076
+    kind: card
+    topic: neurodegenerative-disease-therapy
+    front: Which drug treats ALS, how does it work, and what is First Aid's memory aid?
+    back: "Riluzole: ↓ neuron glutamate excitotoxicity, ↑ survival. \"Treat Lou Gehrig disease with riLouzole.\""
+    src: { page: 564, quote: "Riluzole ↓ neuron glutamate excitotoxicity ↑ survival Treat Lou Gehrig disease with riLouzole" }
+    status: unverified
+    tags: [high-yield]
   - id: neuro.L06.032
     kind: card
     topic: neurodegenerative-disease-therapy
@@ -425,6 +505,7 @@ items:
     back: "Nausea, dizziness, insomnia; contraindicated with cardiac conduction abnormalities. «Dona Riva forgot the gala» (donepezil, rivastigmine, galantamine)."
     src: { page: 564, quote: "Adverse effects: nausea, dizziness, insomnia; contraindicated in patients with cardiac conduction abnormalities" }
     status: unverified
+    tags: [high-yield]
   - id: neuro.L06.033
     kind: mcq
     topic: neurodegenerative-disease-therapy
@@ -459,12 +540,21 @@ items:
     blanks: [[0, 1], [1, 1]]
     src: { page: 565, quote: "Amides—bupivacaine, lidocaine, mepivacaine, prilocaine, ropivacaine (amides have 2 i’s in name)." }
     status: unverified
+    tags: [high-yield]
   - id: neuro.L06.035
     kind: card
     topic: local-anesthetics
     front: How do local anesthetics work?
     back: "They bind the inner portion of voltage-gated Na+ channels and block nerve conduction, best in rapidly firing neurons. Tertiary amines cross the membrane uncharged, then bind the channel in the charged form."
     src: { page: 565, quote: "3° amine local anesthetics penetrate membrane in uncharged form, then bind to ion channels as charged form." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L06.077
+    kind: card
+    topic: local-anesthetics
+    front: What are local anesthetics used for, and what do you give a patient allergic to esters?
+    back: Minor surgical procedures and spinal anesthesia. If allergic to esters, give amides.
+    src: { page: 565, quote: "Minor surgical procedures, spinal anesthesia. If allergic to esters, give amides." }
     status: unverified
     tags: [high-yield]
   - id: neuro.L06.036
@@ -486,6 +576,7 @@ items:
       - Pressure
     src: { page: 565, quote: "Order of loss: (1) pain, (2) temperature, (3) touch, (4) pressure." }
     status: unverified
+    tags: [high-yield]
   - id: neuro.L06.038
     kind: table
     topic: local-anesthetics
@@ -515,7 +606,7 @@ items:
     answer: 0
     why:
       - "Right. Local anesthetics are weak bases; in acidic infected tissue more is ionized and cannot penetrate the membrane."
-      - "This is not the mechanism the book gives."
+      - "Infection does not change the channels; the problem is the acidic pH, which keeps the weak-base anesthetic charged."
       - "Amides are metabolized in the liver, but the abscess does not change that."
       - "Inflammation causes vasodilation, not vasoconstriction."
       - "Esters, not amides, are hydrolyzed (by plasma esterases)."
@@ -529,6 +620,12 @@ items:
     src: { page: 565, quote: "Drugs with ↓ solubility in blood (eg, nitrous oxide [N2 O]) = rapid induction and recovery times." }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L06.078
+    kind: cloze
+    topic: general-anesthetics
+    text: "CNS drugs must be {{c1::lipid soluble}} (to cross the BBB) or be {{c2::actively transported}}; the mechanism of inhaled anesthetics is {{c3::unknown}}."
+    src: { page: 565, quote: "CNS drugs must be lipid soluble (cross the BBB) or be actively transported." }
+    status: unverified
   - id: neuro.L06.041
     kind: card
     topic: general-anesthetics
@@ -594,6 +691,12 @@ items:
     src: { page: 566, quote: "Reversal of blockade—sugammadex or cholinesterase inhibitors (eg, neostigmine)." }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L06.079
+    kind: cloze
+    topic: neuromuscular-blocking-drugs
+    text: "Neuromuscular blocking drugs are selective for {{c1::Nm}} nicotinic receptors at the neuromuscular junction, not autonomic {{c2::Nn}} receptors."
+    src: { page: 566, quote: "Selective for Nm nicotinic receptors at neuromuscular junction but not autonomic Nn receptors." }
+    status: unverified
   - id: neuro.L06.047
     kind: mcq
     topic: neuromuscular-blocking-drugs
@@ -635,6 +738,7 @@ items:
       - "Hypercapnia, tachycardia, rigidity, rhabdomyolysis, hyperthermia"
     src: { page: 566, quote: "↑↑ Ca2+ release from sarcoplasmic reticulum → sustained muscle contraction → hypercapnia, tachycardia, masseter/generalized muscle rigidity, rhabdomyolysis, hyperthermia." }
     status: unverified
+    tags: [high-yield]
   - id: neuro.L06.050
     kind: mcq
     topic: malignant-hyperthermia
@@ -707,6 +811,18 @@ items:
     front: What are the clinical uses of opioids?
     back: "Moderate to severe or refractory pain, diarrhea (loperamide, diphenoxylate), acute pulmonary edema, maintenance for opiate use disorder (methadone, buprenorphine + naloxone), neonatal abstinence syndrome (methadone, morphine)."
     src: { page: 567, quote: "Moderate to severe or refractory pain, diarrhea (loperamide, diphenoxylate), acute pulmonary edema," }
+    status: unverified
+  - id: neuro.L06.080
+    kind: cloze
+    topic: opioid-analgesics
+    text: "Besides pain and diarrhea, opioids are used in acute {{c1::pulmonary edema}} and {{c2::neonatal abstinence syndrome}} (methadone, morphine)."
+    src: { page: 567, quote: "acute pulmonary edema, maintenance programs for opiate use disorder (methadone, buprenorphine + naloxone), neonatal abstinence syndrome (methadone, morphine)." }
+    status: unverified
+  - id: neuro.L06.081
+    kind: cloze
+    topic: opioid-analgesics
+    text: "Meperidine is a {{c1::short-acting}} full opioid agonist that causes {{c2::mydriasis}} instead of miosis."
+    src: { page: 567, quote: "Full agonist: morphine, meperidine (short acting), methadone" }
     status: unverified
   - id: neuro.L06.056
     kind: card
@@ -841,6 +957,26 @@ items:
     src: { page: 568, quote: "Darkens color of iris (browning), eyelash growth" }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L06.082
+    kind: card
+    topic: glaucoma-therapy
+    front: What is First Aid's mnemonic for the glaucoma drug classes?
+    back: "\"βαD humor may not be politically correct\": the classes β-blockers, α-agonists, diuretics (acetazolamide), cholinomimetics and prostaglandins."
+    src: { page: 568, quote: "“βαD humor may not be politically correct.”" }
+    status: unverified
+  - id: neuro.L06.083
+    kind: enumerate
+    topic: glaucoma-therapy
+    prompt: Enumerate the local adverse effects of α-agonist glaucoma drops (5).
+    points:
+      - Blurry vision
+      - Ocular hyperemia
+      - Foreign body sensation
+      - Ocular allergic reactions
+      - Ocular pruritus
+    pass: 4
+    src: { page: 568, quote: "Blurry vision, ocular hyperemia, foreign body sensation, ocular allergic reactions, ocular pruritus" }
+    status: unverified
   - id: neuro.L06.065
     kind: card
     topic: glaucoma-therapy
@@ -853,21 +989,22 @@ items:
     kind: mcq
     topic: glaucoma-therapy
     stem: >-
-      A 63-year-old man with open-angle glaucoma and severe COPD needs a drop that lowers intraocular pressure without
-      changing his pupil and without risk to his airways. Which drug works by inhibiting an enzyme in the ciliary body?
+      A 63-year-old man with open-angle glaucoma and severe COPD needs a medication that lowers
+      intraocular pressure without changing his pupil and without risk to his airways. He is started
+      on acetazolamide. How does this drug lower his intraocular pressure?
     options:
-      - Acetazolamide
-      - Timolol
-      - Pilocarpine
-      - Latanoprost
-      - Epinephrine
+      - "Inhibits carbonic anhydrase, ↓ aqueous humor synthesis"
+      - "Blocks β receptors, ↓ aqueous humor synthesis"
+      - "Contracts the ciliary muscle, ↑ trabecular outflow"
+      - "Prostaglandin agonism, ↑ uveoscleral outflow"
+      - "α1-mediated vasoconstriction, ↓ aqueous humor synthesis"
     answer: 0
     why:
       - "Right. Acetazolamide inhibits carbonic anhydrase, ↓ aqueous synthesis, with no pupillary or vision changes."
-      - "Timolol is a nonselective β-blocker; it can be absorbed and worsen bronchospasm, and it is a receptor blocker, not an enzyme inhibitor."
-      - "Pilocarpine is an M3 agonist causing miosis."
-      - "Latanoprost is a prostaglandin agonist, not an enzyme inhibitor."
-      - "Epinephrine is an α1 agonist causing mydriasis."
+      - "That is timolol, a β-blocker that can be absorbed and worsen bronchospasm."
+      - "That is pilocarpine (M3 agonist), which causes miosis."
+      - "That is latanoprost or bimatoprost."
+      - "That is epinephrine, which causes mydriasis."
     src: { page: 568, quote: "Acetazolamide ↓ aqueous humor synthesis via inhibition of carbonic anhydrase No pupillary or vision changes" }
     status: unverified
   - id: neuro.L06.067
@@ -909,7 +1046,7 @@ items:
       - "Right. Baclofen (GABA-B agonist acting on the back, the spinal cord) may cause sedation."
       - "Malignant hyperthermia is treated by dantrolene, not caused by baclofen."
       - "TCA-like anticholinergic effects go with cyclobenzaprine."
-      - "This is not the warning the book gives for baclofen."
+      - "First Aid's warning for baclofen is sedation; hepatotoxicity is not listed for it."
       - "Central α2 agonists (tizanidine) tend to lower blood pressure."
     src: { page: 567, quote: "Acts on the back (spinal cord) May cause sedation" }
     status: unverified
