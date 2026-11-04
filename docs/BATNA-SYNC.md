@@ -2,7 +2,7 @@
 
 Steps shares Batna's engine and UI. Batna's app, UI and tool improvements are ported to Steps so the work is never done twice; Batna's content (`content/`) and changelog (`changes/`) never are.
 
-**Last Batna commit ported: `c7927f5` (Batna main, 2026-11-04).**
+**Last Batna commit ported: `0b6e07e` (Batna main, 2026-11-04).** Skipped since `c7927f5`: #620 (calculators, removed in Steps) and Batna's content quotes (#610, #617, #618).
 
 How to port (the core thread does this):
 
