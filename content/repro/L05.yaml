@@ -1,0 +1,510 @@
+schema: steps.content/v1
+lecture: repro.L05
+title: Pharmacology
+book: { chapter: 15, pages: [673, 676] }
+topics:
+  - { id: control-of-reproductive-hormones, title: Control of reproductive hormones }
+  - { id: gnrh-analogs, title: GnRH analogs }
+  - { id: degarelix, title: Degarelix }
+  - { id: ethinyl-estradiol, title: Ethinyl estradiol }
+  - { id: serms, title: Selective estrogen receptor modulators }
+  - { id: aromatase-inhibitors, title: Aromatase inhibitors }
+  - { id: progestins, title: Progestins }
+  - { id: antiprogestins, title: Antiprogestins }
+  - { id: contraception, title: Contraception }
+  - { id: tocolytics, title: Tocolytics }
+  - { id: danazol, title: Danazol }
+  - { id: testosterone, title: "Testosterone, methyltestosterone" }
+  - { id: anabolic-steroids, title: Anabolic (androgenic) steroids }
+  - { id: antiandrogens, title: Antiandrogens }
+  - { id: tamsulosin, title: Tamsulosin }
+  - { id: minoxidil, title: Minoxidil }
+items:
+  # ---------- p673: control of reproductive hormones ----------
+  - id: repro.L05.001
+    kind: table
+    topic: control-of-reproductive-hormones
+    title: Where reproductive drugs act
+    columns: [Step, Drugs]
+    rows:
+      - [GnRH receptor (pituitary), "Leuprolide, goserelin (continuous), degarelix"]
+      - [Hypothalamic estrogen receptor, Clomiphene]
+      - ["CYP450c17 (17α-hydroxylase/17,20-lyase)", "Abiraterone, ketoconazole, spironolactone"]
+      - [5α-reductase, Finasteride]
+      - [Aromatase, "Anastrozole, letrozole, exemestane"]
+      - [Androgen receptor, "Flutamide, bicalutamide, spironolactone"]
+      - [Estrogen receptor (breast), "Tamoxifen, raloxifene"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 673, quote: "Anastrozole Letrozole Exemestane Ketoconazole Danazol Tamoxifen Raloxifene Finasteride Flutamide Bicalutamide Spironolactone" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p673: GnRH analogs ----------
+  - id: repro.L05.002
+    kind: card
+    topic: gnrh-analogs
+    front: How do GnRH analogs (leuprolide, goserelin) act when given in pulses versus continuously?
+    back: Pulsatile, they are GnRH agonists (used for infertility). Continuous, they first act as agonists (tumor flare), then downregulate pituitary GnRH receptors → ↓ FSH and LH → ↓ estrogen or testosterone.
+    src: { page: 673, quote: "When used in continuous fashion, first transiently act as GnRH agonists (tumor flare), but subsequently act as GnRH antagonists (downregulate GnRH receptor in pituitary → ↓ FSH and ↓ LH → ↓ estrogen in females and ↓ testosterone in males)." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.003
+    kind: enumerate
+    topic: gnrh-analogs
+    prompt: Enumerate the clinical uses of GnRH analogs.
+    points:
+      - Uterine fibroids
+      - Endometriosis
+      - Precocious puberty
+      - Prostate cancer
+      - Infertility (pulsatile)
+    pass: 4
+    hook: "كل حاجة عايز تطفي فيها الـ sex hormones (fibroids و endometriosis و بلوغ بدري و prostate cancer) تديه مستمر. والحالة الوحيدة اللي عايز تشغّلها فيها (infertility) تديه pulses."
+    src: { page: 673, quote: "Uterine fibroids, endometriosis, precocious puberty, prostate cancer, infertility. Pulsatile for pregnancy, continuous for cancer." }
+    status: unverified
+  - id: repro.L05.004
+    kind: cloze
+    topic: gnrh-analogs
+    text: "GnRH analogs: {{c1::pulsatile}} for pregnancy, {{c2::continuous}} for cancer. Adverse effects: hypogonadism, ↓ libido, erectile dysfunction, nausea, vomiting."
+    src: { page: 673, quote: "Pulsatile for pregnancy, continuous for cancer. ADVERSE EFFECTS Hypogonadism, ↓ libido, erectile dysfunction, nausea, vomiting." }
+    status: unverified
+  - id: repro.L05.005
+    kind: mcq
+    topic: gnrh-analogs
+    stem: >-
+      A 70-year-old man with metastatic prostate cancer to the spine starts leuprolide. Ten days
+      later he has worse back pain and new leg weakness. Which explains this?
+    options:
+      - Leuprolide causes hepatotoxicity
+      - Transient agonist effect ↑ LH and testosterone at the start
+      - Leuprolide blocks the androgen receptor too weakly
+      - Leuprolide stimulates prolactin release
+      - Downregulation of GnRH receptors ↑ estrogen
+    answer: 1
+    why:
+      - "Liver toxicity doesn't explain bone pain."
+      - "Right. Continuous GnRH analogs first act as agonists (tumor flare), raising testosterone before receptors downregulate; an antiandrogen or degarelix avoids this."
+      - "Leuprolide doesn't act at the receptor at all."
+      - "Prolactin isn't involved."
+      - "Downregulation lowers sex hormones."
+    src: { page: 673, quote: "first transiently act as GnRH agonists (tumor flare)" }
+    status: unverified
+  # ---------- p674: degarelix ----------
+  - id: repro.L05.006
+    kind: card
+    topic: degarelix
+    front: How does degarelix differ from leuprolide, and what are its adverse effects?
+    back: Degarelix is a GnRH antagonist with no start-up flare, used for prostate cancer. Adverse effects are hot flashes and liver toxicity.
+    src: { page: 674, quote: "MECHANISM GnRH antagonist. No start-up flare. CLINICAL USE Prostate cancer. ADVERSE EFFECTS Hot flashes, liver toxicity." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p674: ethinyl estradiol ----------
+  - id: repro.L05.007
+    kind: card
+    topic: ethinyl-estradiol
+    front: What are the uses of ethinyl estradiol?
+    back: Hypogonadism or ovarian failure, contraception (with progestins), and HRT in postmenopausal females (used <5 years to lower adverse effects).
+    src: { page: 674, quote: "Hypogonadism or ovarian failure, contraception (combined with progestins), HRT in postmenopausal females (use for <5 years to lower risk of adverse effects)." }
+    status: unverified
+  - id: repro.L05.008
+    kind: card
+    topic: ethinyl-estradiol
+    front: What are the adverse effects of ethinyl estradiol?
+    back: ↑ endometrial cancer (when given without progesterone), postmenopausal bleeding, hepatic adenoma, breast tenderness, ↑ thrombi.
+    src: { page: 674, quote: "↑ risk of endometrial cancer (when given without progesterone), bleeding in postmenopausal patients, hepatic adenoma, breast tenderness, ↑ risk of thrombi." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.009
+    kind: enumerate
+    topic: ethinyl-estradiol
+    prompt: Enumerate the contraindications to estrogen (ethinyl estradiol).
+    points:
+      - Age >35 years with tobacco smoking
+      - ↑ cardiovascular risk (history of VTE, coronary artery disease, stroke)
+      - Migraine (especially with aura)
+      - Breast cancer
+      - Liver disease
+    pass: 4
+    hook: "الـ estrogen بيجلّط وبيأكّل الكبد وبيغذّي سرطان الصدر: يبقى ممنوع للي عندها جلطات أو قلب أو migraine بـ aura، والمدخنة فوق 35، وسرطان الصدر، والكبد."
+    src: { page: 674, quote: "Contraindications—people >35 years old who smoke tobacco (↑ risk of cardiovascular events), patients with ↑ risk of cardiovascular disease (including history of venous thromboembolism, coronary artery disease, stroke), migraine (especially with aura), breast cancer, liver disease." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.010
+    kind: mcq
+    topic: ethinyl-estradiol
+    stem: >-
+      A 38-year-old woman who smokes a pack a day and has migraine with visual aura asks for oral
+      contraception. Which is the most appropriate choice?
+    options:
+      - Combined ethinyl estradiol and progestin pill
+      - Progestin-only method
+      - Ethinyl estradiol alone
+      - Combined vaginal ring
+      - Combined transdermal patch
+    answer: 1
+    why:
+      - "Estrogen is contraindicated in smokers >35 and in migraine with aura."
+      - "Right. Progestins are preferred when estrogen is contraindicated (DVT, migraine with aura, smoker >35)."
+      - "Unopposed estrogen is also contraindicated, and ↑ endometrial cancer."
+      - "The ring still contains estrogen."
+      - "The patch still contains estrogen."
+    src: { page: 674, quote: "preferred if estrogen contraindcated (DVT, migraine with aura, smoker >35 years old)." }
+    status: unverified
+  # ---------- p674: SERMs ----------
+  - id: repro.L05.011
+    kind: table
+    topic: serms
+    title: Selective estrogen receptor modulators
+    columns: [Drug, Action, Use, Key risk]
+    rows:
+      - [Clomiphene, Antagonist at hypothalamus → ↑ LH and FSH, Anovulatory infertility (PCOS), "Multiple pregnancies, ovarian enlargement, visual disturbances"]
+      - [Tamoxifen, "Antagonist at breast; partial agonist at uterus, bone", ER/PR ⊕ breast cancer; prevent gynecomastia, "Thromboembolism, endometrial hyperplasia or cancer"]
+      - [Raloxifene, "Antagonist at breast, uterus; agonist at bone", Postmenopausal osteoporosis, "Thromboembolism, but no ↑ endometrial cancer"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 3], [2, 1], [2, 2]]
+    src: { page: 674, quote: "Antagonist at breast, uterus; agonist at bone; hot flashes, ↑ risk of thromboembolic events (especially with tobacco smoking), but no increased risk of endometrial cancer (vs tamoxifen, so you can “relax”); used primarily to treat postmenopausal osteoporosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.012
+    kind: card
+    topic: serms
+    front: How does clomiphene induce ovulation?
+    back: It antagonizes estrogen receptors in the hypothalamus, preventing normal feedback inhibition, so LH and FSH release ↑ and ovulation is stimulated.
+    src: { page: 674, quote: "Antagonist at estrogen receptors in hypothalamus. Prevents normal feedback inhibition and ↑ release of LH and FSH from pituitary, which stimulates ovulation." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.013
+    kind: mcq
+    topic: serms
+    stem: >-
+      A 55-year-old woman has taken a drug for 4 years after surgery for an ER-positive breast cancer.
+      She now has postmenopausal vaginal bleeding, and the endometrial stripe is thickened. Which
+      property of her drug explains this?
+    options:
+      - Antagonist at the hypothalamic estrogen receptor
+      - Partial agonist at the uterine estrogen receptor
+      - Inhibition of aromatase in fat
+      - Antagonist at the uterine estrogen receptor
+      - Agonist at progesterone receptors
+    answer: 1
+    why:
+      - "That is clomiphene."
+      - "Right. Tamoxifen is an antagonist at breast but a partial agonist at uterus and bone, so it ↑ endometrial hyperplasia and cancer."
+      - "Aromatase inhibitors lower estrogen, so they don't stimulate the endometrium."
+      - "That is raloxifene, which doesn't ↑ endometrial cancer."
+      - "Progestins protect the endometrium."
+    src: { page: 674, quote: "Antagonist at breast, partial agonist at uterus, bone. Hot flashes, ↑ risk of thromboembolic events (especially with tobacco smoking), and endometrial hyperplasia and/or cancer." }
+    status: unverified
+  - id: repro.L05.014
+    kind: mcq
+    topic: serms
+    stem: >-
+      A 28-year-old woman with irregular periods, hirsutism and polycystic ovaries wants to conceive.
+      She is started on a drug that blocks estrogen feedback at the hypothalamus. Which adverse
+      effect should she be warned about?
+    options:
+      - Osteoporosis
+      - Multiple simultaneous pregnancies
+      - Hypokalemia
+      - Gynecomastia
+      - Hepatic adenoma
+    answer: 1
+    why:
+      - "Bone loss isn't a clomiphene effect."
+      - "Right. Clomiphene ↑ LH and FSH, stimulating ovulation; it may cause hot flashes, ovarian enlargement, multiple pregnancies and visual disturbances."
+      - "Hypokalemia is abiraterone."
+      - "Not in a woman on clomiphene."
+      - "That is estrogen."
+    src: { page: 674, quote: "Used to treat infertility due to anovulation (eg, PCOS). May cause hot flashes, ovarian enlargement, multiple simultaneous pregnancies, visual disturbances." }
+    status: unverified
+  # ---------- p674: aromatase inhibitors ----------
+  - id: repro.L05.015
+    kind: card
+    topic: aromatase-inhibitors
+    front: How do anastrozole, letrozole and exemestane work, and what are they used for?
+    back: They inhibit peripheral conversion of androgens to estrogen. Used for ER ⊕ breast cancer in postmenopausal females; letrozole can also treat anovulatory infertility (PCOS).
+    src: { page: 674, quote: "Inhibit peripheral conversion of androgens to estrogen. CLINICAL USE ER ⊕ breast cancer in postmenopausal females. Letrozole can be used to treat infertility from anovulation (eg, PCOS)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p674: progestins ----------
+  - id: repro.L05.016
+    kind: card
+    topic: progestins
+    front: How do progestins act on the endometrium and cervix, and what are they used for?
+    back: They bind progesterone receptors, ↓ growth and ↑ vascularization of the endometrium, and thicken cervical mucus. Used for contraception (pill, IUD, implant, depot), endometrial cancer and abnormal uterine bleeding.
+    src: { page: 674, quote: "Bind progesterone receptors, ↓ growth and ↑ vascularization of endometrium, thicken cervical mucus." }
+    status: unverified
+  - id: repro.L05.017
+    kind: card
+    topic: progestins
+    front: What does withdrawal bleeding after a progestin challenge exclude?
+    back: Anatomic defects (eg, Asherman syndrome) and chronic anovulation without estrogen.
+    src: { page: 674, quote: "Progestin challenge: presence of bleeding upon withdrawal of progestins excludes anatomic defects (eg, Asherman syndrome) and chronic anovulation without estrogen." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.018
+    kind: cloze
+    topic: progestins
+    text: "Compared with combined pills, progestins are safe in {{c1::breastfeeding}} and preferred if estrogen is contraindicated ({{c2::DVT, migraine with aura, smoker >35}})."
+    src: { page: 674, quote: "As compared to combined oral contraceptives, progestins are safe in breastfeeding; preferred if estrogen contraindcated (DVT, migraine with aura, smoker >35 years old)." }
+    status: unverified
+  # ---------- p675: antiprogestins ----------
+  - id: repro.L05.019
+    kind: card
+    topic: antiprogestins
+    front: What are mifepristone and ulipristal, and what is each used for?
+    back: Competitive inhibitors at progesterone receptors. Mifepristone (with misoprostol) terminates pregnancy; ulipristal is emergency contraception.
+    src: { page: 675, quote: "Competitive inhibitors of progestins at progesterone receptors. CLINICAL USE Termination of pregnancy (mifepristone with misoprostol); emergency contraception (ulipristal)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p675: contraception ----------
+  - id: repro.L05.020
+    kind: card
+    topic: contraception
+    front: How do hormonal contraceptives prevent ovulation, and what else do progestins do?
+    back: ↓ GnRH → ↓ LH and FSH → no estrogen surge → no LH surge. Progestins also thicken cervical mucus (↓ sperm entry) and thin the endometrium (less suitable for implantation).
+    src: { page: 675, quote: "Prevent ovulation by ↓ GnRH → ↓ LH/FSH → no estrogen surge → no LH surge" }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.021
+    kind: table
+    topic: contraception
+    title: Nonhormonal and surgical contraception
+    columns: [Method, Mechanism, Note]
+    rows:
+      - [Copper IUD, "Local inflammation toxic to sperm and ova, preventing fertilization and implantation", "Hormone free; ↑ abnormal uterine bleeding; not with active STI or heavy bleeding"]
+      - [Vasectomy, No sperm in ejaculate, Irreversible]
+      - [Tubal ligation, Sperm cannot reach ova, Irreversible]
+    blanks: [[0, 1], [0, 2], [1, 1], [2, 1]]
+    src: { page: 675, quote: "Copper IUD causes local inflammation that is toxic to sperm and ova preventing fertilization and implantation" }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.022
+    kind: mcq
+    topic: contraception
+    stem: >-
+      A 30-year-old woman with a history of deep venous thrombosis wants long-term, hormone-free
+      contraception. She has regular, light periods and no current infection. Which method fits, and
+      how does it work?
+    options:
+      - Combined pill; ↓ GnRH
+      - Copper IUD; local inflammation toxic to sperm and ova
+      - Vaginal ring; prevents the LH surge
+      - Ulipristal; blocks progesterone receptors
+      - Clomiphene; blocks hypothalamic estrogen receptors
+    answer: 1
+    why:
+      - "The combined pill contains estrogen, contraindicated after DVT, and isn't hormone free."
+      - "Right. The copper IUD is hormone free; its local inflammation is toxic to sperm and ova. It is avoided with active STI or heavy menstrual bleeding."
+      - "The ring contains estrogen."
+      - "Ulipristal is emergency contraception, not long term."
+      - "Clomiphene induces ovulation."
+    src: { page: 675, quote: "insertion contraindicated in patients with active STI and heavy menstrual bleeding" }
+    status: unverified
+  # ---------- p675: tocolytics ----------
+  - id: repro.L05.023
+    kind: enumerate
+    topic: tocolytics
+    prompt: Enumerate the tocolytics and their action.
+    points:
+      - Terbutaline (β2-agonist)
+      - Indomethacin (NSAID)
+      - Nifedipine (Ca2+ channel blocker)
+    pass: 3
+    hook: "الكتاب بيقولها: Keep baby in the TIN. يعني Terbutaline و Indomethacin و Nifedipine."
+    src: { page: 675, quote: "Medications that relax the uterus; include Terbutaline (β2 -agonist action), Indomethacin (NSAID), Nifedipine (Ca2+ channel blocker)." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.024
+    kind: mcq
+    topic: tocolytics
+    stem: >-
+      A woman at 30 weeks of gestation has regular painful contractions and cervical change. She is
+      given a drug to relax the uterus. What is the main goal of this therapy?
+    options:
+      - To carry the pregnancy to term
+      - To allow time for glucocorticoids or transfer to an obstetric center
+      - To prevent neonatal infection
+      - To treat preeclampsia
+      - To speed cervical ripening
+    answer: 1
+    why:
+      - "Tocolytics only ↓ contraction frequency for a while."
+      - "Right. Tocolytics (terbutaline, indomethacin, nifedipine) buy time for glucocorticoids (fetal lung maturity) or transfer to an obstetric center."
+      - "That needs antibiotics, not tocolytics."
+      - "Nifedipine treats hypertension, but that isn't the goal here."
+      - "Tocolytics do the opposite."
+    src: { page: 675, quote: "Used to ↓ contraction frequency in preterm labor and allow time for administration of glucocorticoids (to promote fetal lung maturity) or transfer to appropriate medical center with obstetrical care." }
+    status: unverified
+  # ---------- p675: danazol ----------
+  - id: repro.L05.025
+    kind: card
+    topic: danazol
+    front: What is danazol, what is it used for, and what are its adverse effects?
+    back: A synthetic androgen, partial agonist at androgen receptors. Used for endometriosis and hereditary angioedema. Adverse effects are weight gain, edema, acne, hirsutism, masculinization, ↓ HDL, hepatotoxicity and idiopathic intracranial hypertension.
+    src: { page: 675, quote: "Synthetic androgen that acts as partial agonist at androgen receptors. CLINICAL USE Endometriosis, hereditary angioedema." }
+    status: unverified
+  # ---------- p675: testosterone ----------
+  - id: repro.L05.026
+    kind: card
+    topic: testosterone
+    front: What are the uses and adverse effects of testosterone and methyltestosterone?
+    back: Used for hypogonadism and to promote 2° sex characteristics. Adverse effects are virilization in females, testicular atrophy in males, premature epiphyseal closure, acne, ↑ erythrocytosis, ↑ LDL and ↓ HDL.
+    src: { page: 675, quote: "Virilization in females; testicular atrophy in males. Premature closure of epiphyseal plates. Risk of acne, ↑ erythrocytosis, ↑ LDL, ↓ HDL." }
+    status: unverified
+  # ---------- p676: anabolic steroids ----------
+  - id: repro.L05.027
+    kind: card
+    topic: anabolic-steroids
+    front: Why do anabolic steroids cause small testes and infertility?
+    back: Negative feedback → ↓ GnRH → ↓ LH and FSH → ↓ intratesticular testosterone and spermatogenesis → azoospermia. Recovery is slow after stopping.
+    src: { page: 676, quote: "Chronic use → ↓ GnRH → ↓ LH/FSH → ↓ intratesticular T → azoospermia, infertility. Recovery slow post-discontinuation." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.028
+    kind: enumerate
+    topic: anabolic-steroids
+    prompt: Enumerate the adverse effects of anabolic steroids.
+    points:
+      - Hepatotoxicity (↑ AST/ALT, cholestasis, hepatic adenoma)
+      - Polycythemia (↑ EPO)
+      - Psychiatric (aggression, mania, withdrawal depression)
+      - ↑ LDL, ↓ HDL → ↑ atherosclerosis and MI
+      - "Males: testicular atrophy, infertility, gynecomastia, acne"
+      - "Females: virilization, ↓ breast size, acne, alopecia"
+    pass: 5
+    hook: "من فوق لتحت: المخ (roid rage)، القلب (LDL)، الدم (polycythemia)، الكبد (adenoma)، والـ gonads (خصية صغيرة عند الراجل، واسترجال عند الست)."
+    src: { page: 676, quote: "Hepatotoxicity (↑ AST/ALT, cholestasis, hepatic adenoma), polycythemia (↑ EPO). Psychiatric: aggression (“roid rage”), mania, withdrawal depression; mood swings common. Cardiovascular: ↑ LDL, ↓ HDL → ↑ atherosclerosis/MI risk." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.029
+    kind: card
+    topic: anabolic-steroids
+    front: Why do most anabolic steroids cause gynecomastia, but stanozolol doesn't?
+    back: Most are aromatized → ↑ estradiol. Stanozolol has a fused A ring, so no aromatization can occur.
+    src: { page: 676, quote: "(not a side effect with stanozolol use due to fusion of A ring, no aromatization can occur)." }
+    status: unverified
+  - id: repro.L05.030
+    kind: mcq
+    topic: anabolic-steroids
+    stem: >-
+      A 26-year-old competitive bodybuilder is evaluated for 1 year of infertility. He is very
+      muscular, with acne, small testes and tender breast tissue. Hematocrit is 55%. Which hormone
+      pattern is expected?
+    options:
+      - ↑ LH, ↑ FSH, ↓ intratesticular testosterone
+      - ↓ LH, ↓ FSH, ↓ intratesticular testosterone
+      - ↑ LH, normal FSH, ↑ testosterone
+      - Normal LH and FSH, ↓ DHT
+      - ↓ LH, ↑ FSH, ↓ inhibin
+    answer: 1
+    why:
+      - "That is primary testicular failure, like Klinefelter."
+      - "Right. Exogenous androgen feeds back → ↓ GnRH → ↓ LH/FSH → ↓ intratesticular testosterone → azoospermia; aromatization gives gynecomastia."
+      - "That is androgen insensitivity."
+      - "That is 5α-reductase deficiency."
+      - "This pattern isn't from steroid use."
+    src: { page: 676, quote: "Suspect usage in young male with infertility + high muscle mass + small testes + gynecomastia" }
+    status: unverified
+  - id: repro.L05.031
+    kind: card
+    topic: anabolic-steroids
+    front: Do anabolic steroids improve aerobic capacity?
+    back: No. They ↑ lean mass, strength and recovery, with no true ↑ aerobic capacity.
+    src: { page: 676, quote: "↑ lean mass, strength, recovery; no true ↑ aerobic capacity." }
+    status: unverified
+  # ---------- p676: antiandrogens ----------
+  - id: repro.L05.032
+    kind: table
+    topic: antiandrogens
+    title: Antiandrogens
+    columns: [Drug, Mechanism, Use, Adverse effect]
+    rows:
+      - [Abiraterone, "17α-hydroxylase/17,20-lyase inhibitor", Prostate cancer, "Hypertension, hypokalemia (↑ mineralocorticoids)"]
+      - [Finasteride, 5α-reductase inhibitor (↓ DHT), "BPH, androgenetic alopecia", "Gynecomastia, sexual dysfunction"]
+      - [Flutamide and bicalutamide, Competitive androgen receptor inhibitors, Prostate cancer, "Gynecomastia, sexual dysfunction"]
+      - [Ketoconazole, "17α-hydroxylase/17,20-lyase inhibitor", Prostate cancer, Gynecomastia]
+      - [Spironolactone, Androgen receptor and 17α-hydroxylase inhibitor, PCOS, Amenorrhea]
+    blanks: [[0, 3], [1, 1], [1, 2], [2, 1], [4, 2]]
+    src: { page: 676, quote: "Finasteride 5α-reductase inhibitor (↓ conversion of testosterone to DHT) BPH, androgenetic alopecia Gynecomastia, sexual dysfunction" }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.033
+    kind: mcq
+    topic: antiandrogens
+    stem: >-
+      A 74-year-old man with castration-resistant prostate cancer starts a new drug that blocks
+      17α-hydroxylase. Three weeks later his blood pressure is 162/96 and serum potassium is 3.0
+      mEq/L. Why?
+    options:
+      - Direct toxicity to the renal tubule
+      - ↑ mineralocorticoids from blocked steroid synthesis
+      - Androgen receptor blockade in the kidney
+      - ↓ DHT in the adrenal
+      - Activation of the GnRH receptor
+    answer: 1
+    why:
+      - "It isn't a tubular toxin."
+      - "Right. Abiraterone inhibits 17α-hydroxylase/17,20-lyase, so precursors shift to mineralocorticoids → hypertension and hypokalemia."
+      - "That is flutamide, which causes gynecomastia."
+      - "DHT isn't made in the adrenal this way, and it doesn't cause hypokalemia."
+      - "That is leuprolide."
+    src: { page: 676, quote: "Abiraterone 17α-hydroxylase/17,20-lyase inhibitor (↓ steroid synthesis) Prostate cancer Hypertension, hypokalemia (↑ mineralocorticoids)" }
+    status: unverified
+  - id: repro.L05.034
+    kind: mcq
+    topic: antiandrogens
+    stem: >-
+      A 34-year-old man is bothered by thinning hair on the vertex. He starts a drug that blocks
+      conversion of testosterone to its more potent form. Which adverse effect is most likely?
+    options:
+      - Hypokalemia
+      - Sexual dysfunction
+      - Hypertension
+      - Tumor flare
+      - Visual disturbances
+    answer: 1
+    why:
+      - "That is abiraterone."
+      - "Right. Finasteride (5α-reductase inhibitor) treats androgenetic alopecia and BPH and can cause gynecomastia and sexual dysfunction."
+      - "Also abiraterone."
+      - "That is leuprolide at the start."
+      - "That is clomiphene."
+    src: { page: 676, quote: "BPH, androgenetic alopecia Gynecomastia, sexual dysfunction" }
+    status: unverified
+  # ---------- p676: tamsulosin ----------
+  - id: repro.L05.035
+    kind: card
+    topic: tamsulosin
+    front: Why does tamsulosin improve urine flow with little effect on blood pressure?
+    back: It is an α1-antagonist selective for α1A/D receptors in the prostate (vs vascular α1B), so it ↓ prostatic smooth muscle tone → ↑ urine flow. Used for BPH.
+    src: { page: 676, quote: "α1 -antagonist selective for α1A/D receptors in prostate (vs vascular α1B receptors) → ↓ smooth muscle tone → ↑ urine flow." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.036
+    kind: mcq
+    topic: tamsulosin
+    stem: >-
+      A 68-year-old man with BPH had dizziness when standing on a nonselective α1-blocker. He is
+      switched to a drug selective for prostatic receptors. Which receptor does it target?
+    options:
+      - α1A/D
+      - α1B
+      - α2
+      - β2
+      - Muscarinic M3
+    answer: 0
+    why:
+      - "Right. Tamsulosin is selective for α1A/D in the prostate, sparing vascular α1B receptors."
+      - "α1B is the vascular receptor that tamsulosin spares."
+      - "α2 isn't the target."
+      - "β2 agonists like terbutaline relax the uterus."
+      - "M3 blockers can worsen retention."
+    src: { page: 676, quote: "α1 -antagonist selective for α1A/D receptors in prostate (vs vascular α1B receptors)" }
+    status: unverified
+  # ---------- p676: minoxidil ----------
+  - id: repro.L05.037
+    kind: card
+    topic: minoxidil
+    front: What is minoxidil's mechanism, and what is it used for?
+    back: A direct arteriolar vasodilator, used for androgenetic alopecia and severe refractory hypertension.
+    src: { page: 676, quote: "Direct arteriolar vasodilator. CLINICAL USE Androgenetic alopecia, severe refractory hypertension." }
+    status: unverified

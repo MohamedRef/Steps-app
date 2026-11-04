@@ -1,0 +1,588 @@
+schema: steps.lesson/v1
+lecture: path.L03
+lessons:
+  - id: path.L03.lesson1
+    title: "من dysplasia لـ metastasis، وإزاي بنسمّي الورم"
+    hook: "الـ basement membrane هو الخط الأحمر. وليه ورم well differentiated ممكن يبقى أخطر من ورم anaplastic؟"
+    minutes: 8
+    pages: [215, 216]
+    topics: [neoplastic-progression, tumor-nomenclature, tumor-grade-vs-stage]
+    goals:
+      - "ترتّب مراحل الـ neoplastic progression وتعرف الفرق بين الـ in situ والـ invasive"
+      - "تسمّي الورم الـ benign والـ malignant من نوع الخلية"
+      - "تفرّق بين الـ hamartoma والـ choristoma"
+      - "تفرّق بين الـ grade والـ stage وتعرف أنهي أهم"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "إيه هو الـ neoplasm"
+        text: |-
+          الـ neoplasia تكاثر ==مش متحكّم فيه==، وغالباً **monoclonal**، وممكن يبقى benign أو malignant.
+
+          أي ورم فيه حاجتين: الـ **parenchyma** (الخلايا الورمية نفسها) والـ **stroma** (مش ورمي: أوعية دموية و connective tissue بتسنده).
+        page: 215
+        quote: "Uncontrolled, often monoclonal proliferation of cells. Can be benign or malignant. Any neoplastic growth has two components: parenchyma (neoplastic cells) and supporting stroma"
+      - kind: figure
+        title: "الخط الأحمر: الـ basement membrane"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-good" x="6" y="20" width="62" height="60" rx="4"/>
+            <rect class="fg-acc" x="76" y="20" width="62" height="60" rx="4"/>
+            <rect class="fg-bad" x="146" y="20" width="62" height="60" rx="4"/>
+            <rect class="fg-bad" x="216" y="20" width="62" height="60" rx="4"/>
+            <rect class="fg-bad" x="286" y="20" width="68" height="60" rx="4"/>
+            <path class="fg-arrow" d="M6 84 L 354 84" stroke-width="3"/>
+            <text x="8" y="100" class="t-sm t-mut">Basement membrane</text>
+            <circle class="fg-dot-bad" cx="246" cy="112" r="6"/>
+            <circle class="fg-dot-bad" cx="262" cy="104" r="5"/>
+            <circle class="fg-dot-bad" cx="320" cy="140" r="6"/>
+            <rect class="fg-thin" x="296" y="128" width="54" height="24" rx="10"/>
+            <text x="300" y="164" class="t-sm">vessel</text>
+            <text x="10" y="14" class="t-sm">Normal</text>
+            <text x="78" y="14" class="t-sm">Dysplasia</text>
+            <text x="150" y="14" class="t-sm">In situ</text>
+            <text x="220" y="14" class="t-sm">Invasive</text>
+            <text x="290" y="14" class="t-sm">Metastasis</text>
+          </svg>
+        caption: "الـ dysplasia ممكن ترجع. الـ carcinoma in situ واخدة السُمك كله بس الـ basement membrane سليم. الـ invasive عدّت الـ membrane، والـ metastasis وصلت لعضو بعيد عن طريق الـ lymphatics أو الدم."
+        alt: "Five epithelial panels above a basement membrane line: normal, dysplasia, carcinoma in situ (full thickness but above the membrane), invasive carcinoma with cells below the membrane, and metastasis with cells entering a vessel."
+        page: 215
+        quote: "Irreversible severe dysplasia that involves the entire thickness of epithelium but does not penetrate the intact basement membrane."
+      - kind: explain
+        title: "الـ invasion بتحصل إزاي"
+        text: |-
+          الخلايا بتكسر الـ basement membrane بالـ **collagenases والـ hydrolases** (==metalloproteinases==)، وبتفقد التلازق ببعض لما الـ ==E-cadherin== يتعطّل.
+
+          وبعدها **metastasis**: انتشار لعضو بعيد عن طريق الـ lymphatics أو الدم.
+        page: 215
+        quote: "Invasive carcinoma Cells have invaded basement membrane using collagenases and hydrolases (metalloproteinases). Cell-cell contacts lost by inactivation of E-cadherin."
+      - kind: check
+        question: "A cervical biopsy shows atypical cells through the full thickness of the epithelium with an intact basement membrane. What is this?"
+        options:
+          - "Carcinoma in situ"
+          - "Mild dysplasia"
+          - "Invasive carcinoma"
+          - "Metaplasia"
+        answer: 0
+        why:
+          - "صح: severe dysplasia في السُمك كله من غير ما تعدّي الـ basement membrane."
+          - "الـ mild dysplasia مش بتاخد السُمك كله."
+          - "الـ invasive لازم تعدّي الـ basement membrane."
+          - "الـ metaplasia تبديل نوع خلية بنوع من غير atypia."
+      - kind: explain
+        title: "الأسماء"
+        text: |-
+          - **Carcinoma** = أصله ==epithelial==، و **sarcoma** = أصله ==mesenchymal==، والاتنين غالباً malignant.
+          - الـ **benign**: well differentiated، حدوده واضحة، mitoses قليلة، مفيش metastases ولا necrosis.
+          - الـ **malignant**: ممكن poorly differentiated، نموه عشوائي، بيغزو ويعمل metastasis، و ↓ apoptosis.
+        page: 216
+        quote: "Carcinoma implies epithelial origin, whereas sarcoma denotes mesenchymal origin. Both terms generally imply malignancy."
+      - kind: table
+        title: "حسب نوع الخلية"
+        columns: ["Cell", "Benign", "Malignant"]
+        rows:
+          - ["Epithelium", "Adenoma, papilloma", "Adenocarcinoma, papillary carcinoma"]
+          - ["Blood vessels", "Hemangioma", "Angiosarcoma"]
+          - ["Smooth muscle", "Leiomyoma", "Leiomyosarcoma"]
+          - ["Striated muscle", "Rhabdomyoma", "Rhabdomyosarcoma"]
+          - ["Fat", "Lipoma", "Liposarcoma"]
+          - ["Melanocyte", "Nevus/mole", "Melanoma"]
+        hide: [[1, 2], [2, 1], [3, 2], [5, 2]]
+        page: 216
+        quote: "Smooth muscle Leiomyoma Leiomyosarcoma"
+      - kind: reveal
+        prompt: "الـ Peutz-Jeghers polyp والـ gastric tissue في الـ Meckel diverticulum الاتنين مش neoplasms. إيه الفرق بينهم؟"
+        answer: "الـ **hamartoma** (Peutz-Jeghers): أنسجة ==في مكانها الطبيعي== بس متلخبطة وزيادة. الـ **choristoma** (Meckel): نسيج ==طبيعي في مكان غريب==، معدة في الـ ileum."
+        page: 216
+        quote: "hamartoma (disorganized overgrowth of tissues in their native location, eg, Peutz-Jeghers polyps) and choristoma (normal tissue in a foreign location, eg, gastric tissue located in distal ileum in Meckel diverticulum)"
+      - kind: explain
+        title: "Grade ولا stage"
+        text: |-
+          - **Grade**: شكل الخلية تحت الميكروسكوب، شبه النسيج الأصلي قد إيه والـ mitoses. من low (well differentiated) لـ high (anaplastic).
+          - **Stage**: الورم ==انتشر قد إيه==. بالـ TNM: T = حجم الورم وغزوه، N = الـ lymph nodes، M = distant metastasis، والأهمية **M > N > T**.
+
+          الـ **stage** أهم في الـ prognosis: ورم high stage و low grade غالباً أوحش من low stage و high grade. ==Stage = survival==.
+        page: 216
+        quote: "Stage generally has more prognostic value than grade (eg, a high-stage yet low-grade tumor is usually worse than a low-stage yet high-grade tumor). Stage (spread) determines survival."
+      - kind: try
+        items: [path.L03.002, path.L03.003, path.L03.008, path.L03.009, path.L03.012]
+    recap:
+      - "Dysplasia ← in situ (الـ membrane سليم) ← invasive (metalloproteinases، ↓ E-cadherin) ← metastasis."
+      - "Carcinoma = epithelial، sarcoma = mesenchymal."
+      - "Hamartoma = مكانه بس متلخبط. Choristoma = نسيج طبيعي في مكان غريب."
+      - "Stage أهم من grade، و M > N > T."
+    practice: [path.L03.001, path.L03.002, path.L03.003, path.L03.004, path.L03.005, path.L03.006, path.L03.007, path.L03.008, path.L03.009, path.L03.010, path.L03.011, path.L03.012, path.L03.013]
+  - id: path.L03.lesson2
+    title: "الخلية الورمية بتغش إزاي: الـ hallmarks والـ checkpoints"
+    hook: "إزاي الورم بيعيش للأبد، بياكل glucose من غير oxygen، وبيستخبّى من الـ T cells؟ ودوا زي nivolumab بيكشفه إزاي؟"
+    minutes: 9
+    pages: [217, 218]
+    topics: [hallmarks-of-cancer, immune-checkpoint-interactions, cancer-epidemiology]
+    goals:
+      - "تعرف الـ hallmarks of cancer والـ mechanism بتاع كل واحد"
+      - "تشرح الـ PD-1 والـ CTLA-4 والأدوية اللي بتمنعهم"
+      - "تعرف أكتر الأورام انتشاراً وموتاً"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "نمو من غير إذن"
+        text: |-
+          الـ cancer سببه ==DNA mutations== (معظمها مكتسبة) بتأثر على النمو والـ DNA repair والـ survival.
+
+          **Growth signal self-sufficiency** بتيجي من mutations في:
+          - proto-oncogenes ← growth factors أكتر ← **autocrine loop** (↑ PDGF في أورام المخ)
+          - growth factor receptors ← signaling شغال على طول (HER2 في الـ breast cancer)
+          - signaling molecules (RAS)، transcription factors (MYC)، cell cycle regulators (cyclins، CDKs)
+        page: 217
+        quote: "Proto-oncogenes → ↑ growth factors → autocrine loop (eg, ↑ PDGF in brain tumors) Growth factor receptors → constitutive signaling (eg, HER2 in breast cancer)"
+      - kind: table
+        title: "باقي الـ hallmarks"
+        columns: ["Hallmark", "How"]
+        rows:
+          - ["Anti-growth signal insensitivity", "Tumor suppressors (Rb); E-cadherin loss → no contact inhibition (NF2)"]
+          - ["Evasion of apoptosis", "TP53; BCL2 → follicular B-cell lymphoma"]
+          - ["Limitless replication", "Telomerase reactivated → telomeres kept"]
+          - ["Sustained angiogenesis", "↑ VEGF or ↓ inhibitors"]
+          - ["Warburg effect", "Glycolysis even with oxygen → ↑ lactate"]
+        hide: [[1, 1], [2, 1], [3, 1], [4, 1]]
+        page: 217
+        quote: "Reactivation of telomerase → maintenance and lengthening of telomeres → prevention of chromosome shortening and cell aging."
+      - kind: reveal
+        prompt: "الـ glycolysis بتطلّع ATP أقل بكتير من الـ oxidative phosphorylation. ليه الخلية الورمية بتختارها حتى والـ oxygen موجود؟"
+        answer: "عشان مش محتاجة ATP بس، محتاجة ==مواد خام==. الـ aerobic glycolysis بتدّي intermediates لبناء الـ nucleotides والـ lipids والـ amino acids، والخلية اللي بتتقسم بسرعة محتاجة تبني خلايا جديدة. والنتيجة ↑ **lactate**. والـ enzymes المتغيّرة: pyruvate kinase M2 و LDH-A."
+        page: 217
+        quote: "Aerobic glycolysis supplies rapidly dividing cancer cells with biosynthetic intermediates for nucleotide, lipid, and amino acid synthesis, resulting in ↑ lactate production."
+      - kind: explain
+        title: "الاستخبا من المناعة"
+        text: |-
+          المناعة بتعرف تقتل الخلايا الورمية، فالورم لازم يهرب:
+          - ↓ **MHC class I** ← الـ cytotoxic T cells ==مش شايفاه==.
+          - يطلّع **TGF-β** ويجيب **regulatory T cells** يهدّوا المناعة.
+          - يزوّد الـ **immune checkpoint molecules**.
+        page: 217
+        quote: "↓ MHC class I expression by tumor cells → cytotoxic T cells are unable to recognize tumor cells."
+      - kind: figure
+        title: "فرامل الـ T cell"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="6" y="20" width="90" height="160" rx="10"/>
+            <text x="30" y="40" class="t-sm t-b">APC</text>
+            <rect class="fg-acc" x="134" y="20" width="92" height="160" rx="10"/>
+            <text x="156" y="40" class="t-sm t-acc">T cell</text>
+            <rect class="fg-bad" x="264" y="20" width="90" height="160" rx="10"/>
+            <text x="280" y="40" class="t-sm t-bad">Tumor cell</text>
+            <text x="16" y="74" class="t-sm">B7</text>
+            <text x="140" y="68" class="t-sm t-good">CD28 (go)</text>
+            <text x="140" y="90" class="t-sm t-bad">CTLA-4 (stop)</text>
+            <path class="fg-arrow" d="M40 70 L 136 66"/>
+            <path class="fg-arrow-bad" d="M40 74 L 136 88"/>
+            <text x="140" y="140" class="t-sm t-bad">PD-1 (stop)</text>
+            <text x="272" y="140" class="t-sm">PD-L1</text>
+            <path class="fg-arrow-bad" d="M270 136 L 210 136"/>
+            <text x="16" y="116" class="t-sm t-mut">Ipilimumab</text>
+            <text x="16" y="130" class="t-sm t-mut">blocks CTLA-4</text>
+            <text x="148" y="170" class="t-sm t-mut">Nivolumab</text>
+            <text x="268" y="170" class="t-sm t-mut">Atezolizumab</text>
+          </svg>
+        caption: "الـ CTLA-4 بيخطف الـ B7 من الـ CD28 فالـ T cell مياخدش الـ costimulation، والـ PD-L1 على الورم بيمسك الـ PD-1 فالـ T cell يتعب (exhaustion). الأدوية بتشيل الفرامل دي."
+        alt: "An APC, a T cell and a tumor cell: B7 on the APC binds CD28 (activating) or CTLA-4 (inhibitory, blocked by ipilimumab); PD-L1 on the tumor binds PD-1 on the T cell (blocked by nivolumab or atezolizumab)."
+        page: 218
+        quote: "CTLA-4 on T cells outcompetes CD28 for B7 on APCs → loss of T-cell costimulatory signal. Inhibited by antibodies against CTLA-4 (eg, ipilimumab)."
+      - kind: sort
+        prompt: "كل دوا بيمنع أنهي checkpoint؟"
+        bins: ["PD-1", "PD-L1", "CTLA-4"]
+        cards:
+          - { text: "Nivolumab", bin: 0 }
+          - { text: "Pembrolizumab", bin: 0 }
+          - { text: "Cemiplimab", bin: 0 }
+          - { text: "Atezolizumab", bin: 1 }
+          - { text: "Durvalumab", bin: 1 }
+          - { text: "Avelumab", bin: 1 }
+          - { text: "Ipilimumab", bin: 2 }
+        why: "الـ PD-1: cemiplimab و nivolumab و pembrolizumab. الـ PD-L1: atezolizumab و durvalumab و avelumab. الـ CTLA-4: ipilimumab."
+        page: 218
+        quote: "Inhibited by antibodies against PD-1 (eg, cemiplimab, nivolumab, pembrolizumab) or PD-L1 (eg, atezolizumab, durvalumab, avelumab)."
+      - kind: explain
+        title: "الأرقام"
+        text: |-
+          أكتر cancer هو الـ **skin** (basal > squamous >> melanoma)، ومش داخل في الجدول.
+
+          - **رجالة**: الأكتر prostate، والأكتر موتاً ==lung==.
+          - **ستات**: الأكتر breast، والأكتر موتاً ==lung==.
+          - **أطفال**: leukemia > CNS > neuroblastoma في الاتنين.
+
+          والـ cancer تاني سبب للوفاة في أمريكا بعد أمراض القلب.
+        page: 218
+        quote: "Skin cancer (basal > squamous >> melanoma) is the most common cancer (not included below)."
+      - kind: check
+        question: "Which cancer causes the most deaths in both men and women?"
+        options:
+          - "Lung"
+          - "Prostate"
+          - "Breast"
+          - "Colorectal"
+        answer: 0
+        why:
+          - "صح: الـ lung رقم 1 في الموت عند الرجالة والستات."
+          - "الـ prostate الأكتر حدوثاً عند الرجالة، وتاني في الموت."
+          - "الـ breast الأكتر حدوثاً عند الستات، وتاني في الموت."
+          - "الـ colorectal تالت في الاتنين."
+      - kind: try
+        items: [path.L03.015, path.L03.016, path.L03.017, path.L03.021, path.L03.024]
+    recap:
+      - "الـ hallmarks: growth signals، تجاهل الـ anti-growth، هروب من الـ apoptosis، telomerase، VEGF، Warburg، هروب من المناعة، invasion."
+      - "Warburg = glycolysis مع وجود الـ oxygen عشان المواد الخام، و ↑ lactate."
+      - "CTLA-4 يخطف الـ B7 من الـ CD28 (ipilimumab). PD-1/PD-L1 = exhaustion (nivolumab، atezolizumab)."
+      - "Lung = الأكتر موتاً في الرجالة والستات."
+    practice: [path.L03.014, path.L03.015, path.L03.016, path.L03.017, path.L03.018, path.L03.019, path.L03.020, path.L03.021, path.L03.022, path.L03.023, path.L03.024, path.L03.025, path.L03.026]
+  - id: path.L03.lesson3
+    title: "الورم بيروح فين، وجيناته: oncogenes و tumor suppressors"
+    hook: "ليه الـ prostate بيعمل bone metastases بيضا والـ kidney بيعمل خروم؟ وليه طفل الـ retinoblastoma بيتابع للـ osteosarcoma؟"
+    minutes: 10
+    pages: [219, 220]
+    topics: [common-metastases, oncogenes, tumor-suppressor-genes]
+    goals:
+      - "تعرف طرق الانتشار وأشهر مصادر الـ metastasis لكل عضو"
+      - "تفرّق بين الـ oncogene (one hit) والـ tumor suppressor (two hits)"
+      - "تربط أهم الجينات بأورامها"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "CLaSH"
+        text: |-
+          معظم الـ **C**arcinomas بتنتشر بالـ **L**ymphatics، ومعظم الـ **S**arcomas بالدم (**H**ematogenous).
+
+          الاستثناء: 4 carcinomas بيمشوا في ==الدم==: follicular thyroid carcinoma و choriocarcinoma و renal cell carcinoma و hepatocellular carcinoma.
+
+          في العضم والكبد والرئة والمخ، الـ ==metastasis أكتر== من الـ primary، وبتبان lesions كتير، والـ primary غالباً واحدة.
+        page: 219
+        quote: "Most Carcinomas spread via Lymphatics; most Sarcomas spread Hematogenously (CLaSH). However, four carcinomas route hematogenously: follicular thyroid carcinoma, choriocarcinoma, renal cell carcinoma, and hepatocellular carcinoma."
+      - kind: table
+        title: "جاي منين"
+        columns: ["Site", "From", "Note"]
+        rows:
+          - ["Bone", "Prostate, breast >> lung > kidney, colon", "Axial skeleton"]
+          - ["Liver", "Colon > breast >> pancreas, lung, prostate", "Scattered"]
+          - ["Lung", "Colon, breast >> kidney, prostate", "Both lungs"]
+          - ["Brain", "Lung > breast >> melanoma > colon, prostate", "Gray-white junction"]
+        hide: [[0, 1], [1, 1], [3, 1], [3, 2]]
+        page: 219
+        quote: "Lung > breast >> melanoma > colon, prostate Usually seen at gray-white matter junction"
+      - kind: sort
+        prompt: "شكل الـ bone metastasis"
+        bins: ["Blastic", "Mixed", "Lytic"]
+        cards:
+          - { text: "Prostate", bin: 0 }
+          - { text: "Small cell lung cancer", bin: 0 }
+          - { text: "Breast", bin: 1 }
+          - { text: "Kidney", bin: 2 }
+          - { text: "Colon", bin: 2 }
+          - { text: "Non-small cell lung cancer", bin: 2 }
+        why: "الـ prostate والـ small cell blastic، الـ breast mixed، والـ kidney والـ colon والـ NSCLC lytic."
+        page: 219
+        quote: "Blastic (eg, prostate, small cell lung cancer) Mixed (eg, breast) Lytic (eg, kidney, colon, non-small cell lung cancer)"
+      - kind: explain
+        title: "Oncogene: ضربة واحدة كفاية"
+        text: |-
+          الـ **oncogene** بييجي من ==gain of function== في proto-oncogene طبيعي، و**allele واحد** كفاية.
+
+          الـ **tumor suppressor** بيعمل مرض بالـ ==loss of function==، ولازم **الاتنين alleles** يروحوا: **Knudson 2-hit hypothesis**.
+        page: 220
+        quote: "Gain of function mutation converts proto-oncogene (normal gene) to oncogene → ↑ cancer risk. Requires damage to only one allele of a proto-oncogene."
+      - kind: table
+        title: "أهم الـ oncogenes"
+        columns: ["Gene", "Product", "Tumor"]
+        rows:
+          - ["HER2 (ERBB2)", "Receptor tyrosine kinase", "Breast, gastric"]
+          - ["RET", "Receptor tyrosine kinase", "MEN2A/2B, medullary thyroid, pheochromocytoma"]
+          - ["BCR-ABL", "Non-receptor tyrosine kinase", "CML, ALL"]
+          - ["JAK2", "Non-receptor tyrosine kinase", "Myeloproliferative neoplasms"]
+          - ["BRAF", "Serine/threonine kinase", "Melanoma, hairy cell leukemia, papillary thyroid"]
+          - ["c-KIT", "CD117", "GIST, mastocytosis"]
+          - ["MYCC / MYCN", "Transcription factors", "Burkitt / neuroblastoma"]
+          - ["KRAS", "RAS GTPase", "Pancreatic, colorectal, lung, endometrial"]
+        hide: [[1, 2], [2, 2], [4, 2], [5, 2], [6, 2]]
+        page: 220
+        quote: "MYCC (c-myc) Transcription factor Burkitt lymphoma MYCN (N-myc) Transcription factor Neuroblastoma"
+      - kind: aside
+        tone: tip
+        text: "حيل الكتاب في الأسماء: **RE**ceptor **T**yrosine kinase = RET، و Cyto**KI**ne receptor = c-KIT، و B-**C**ell **L**ymphoma = BCL-2."
+        page: 220
+        quote: "RET REceptor Tyrosine kinase MEN2A and 2B, medullary and papillary thyroid carcinoma, pheochromocytoma"
+      - kind: check
+        question: "How many alleles must be hit to turn a proto-oncogene into a cancer-causing oncogene?"
+        options:
+          - "One"
+          - "Two"
+          - "Both, plus a tumor suppressor"
+          - "None; it needs a virus"
+        answer: 0
+        why:
+          - "صح: الـ oncogene gain of function، و allele واحد كفاية."
+          - "اتنين ده للـ tumor suppressor (Knudson)."
+          - "الكتاب مش بيشترط tumor suppressor جنبه."
+          - "الـ oncogene ممكن يتعمل بـ mutation من غير فيروس."
+      - kind: table
+        title: "أهم الـ tumor suppressors"
+        columns: ["Gene", "Product", "Condition"]
+        rows:
+          - ["APC", "β-catenin/WNT brake", "Colorectal cancer (FAP)"]
+          - ["RB1", "Inhibits E2F; G1 → S block", "Retinoblastoma, osteosarcoma"]
+          - ["TP53", "p53 → p21; G1 → S block", "Most cancers; Li-Fraumeni"]
+          - ["BRCA1/2", "BRCA proteins", "Breast, ovarian, prostate, pancreatic"]
+          - ["VHL", "Inhibits HIF-1α", "von Hippel-Lindau"]
+          - ["NF1 / NF2", "Neurofibromin / merlin", "Neurofibromatosis 1 / 2"]
+          - ["PTEN", "PI3K/AKT brake", "Prostate, breast, endometrial"]
+          - ["WT1", "Urogenital transcription factor", "Wilms tumor"]
+        hide: [[0, 1], [1, 1], [2, 1], [4, 1], [6, 2]]
+        page: 220
+        quote: "RB1 Inhibits E2F; blocks G1 → S phase Retinoblastoma, osteosarcoma (Bone cancer)"
+      - kind: mnemonic
+        word: "SBLA"
+        parts:
+          - { key: "S", text: "Sarcoma" }
+          - { key: "B", text: "Breast/Brain" }
+          - { key: "L", text: "Lung/Leukemia" }
+          - { key: "A", text: "Adrenal gland" }
+        hook: "الكتاب: Li-Fraumeni (TP53): أورام كتير في سن صغير."
+        page: 220
+        quote: "Li-Fraumeni (SBLA) syndrome (multiple malignancies at early age; Sarcoma, Breast/Brain, Lung/Leukemia, Adrenal gland)"
+      - kind: reveal
+        prompt: "طفلة عندها retinoblastoma في العينين الاتنين وأبوها كان عنده نفس الحكاية. ليه هي معرّضة للـ osteosarcoma بعدين؟"
+        answer: "هي ورثت hit واحد في الـ **RB1** في ==كل خلايا جسمها==، فأي خلية تاخد الـ hit التاني تبقى ورم. والكتاب بيربط الـ RB1 بالـ retinoblastoma والـ ==osteosarcoma== (bone cancer)."
+        page: 220
+        quote: "Loss of function → ↑ cancer risk; both (two) alleles of a tumor suppressor gene must be lost for expression of disease (the Knudson 2-hit hypothesis)."
+      - kind: try
+        items: [path.L03.027, path.L03.028, path.L03.033, path.L03.038, path.L03.040]
+    recap:
+      - "CLaSH، والـ 4 carcinomas اللي بتمشي في الدم: follicular thyroid، choriocarcinoma، RCC، HCC."
+      - "Bone: prostate و breast. Brain: lung أولاً. Prostate = blastic، kidney و colon = lytic."
+      - "Oncogene = one hit. Tumor suppressor = two hits (Knudson)."
+      - "RB1 و TP53 بيوقفوا G1 ← S. VHL بيكبح HIF-1α. Li-Fraumeni = SBLA."
+    practice: [path.L03.027, path.L03.028, path.L03.029, path.L03.030, path.L03.031, path.L03.032, path.L03.033, path.L03.034, path.L03.035, path.L03.036, path.L03.037, path.L03.038, path.L03.039, path.L03.040, path.L03.041, path.L03.042, path.L03.043]
+  - id: path.L03.lesson4
+    title: "اللي بيعمل cancer، واللي بيدلّ عليه في الدم"
+    hook: "عامل في مزرعة عنب، عامل PVC، وولد عام في النيل. كل واحد فيهم بيجيله cancer مختلف."
+    minutes: 8
+    pages: [221, 222]
+    topics: [carcinogens, oncogenic-microbes, serum-tumor-markers]
+    goals:
+      - "تربط أهم الـ carcinogens بالعضو والـ cancer"
+      - "تعرف الـ oncogenic microbes وأورامها"
+      - "تعرف الـ tumor markers وإمتى تستخدمها وإمتى لأ"
+    status: unverified
+    steps:
+      - kind: table
+        title: "الـ carcinogens"
+        columns: ["Toxin", "Exposure", "Cancer"]
+        rows:
+          - ["Aflatoxins", "Stored grains and nuts", "HCC"]
+          - ["Aromatic amines", "Textile dyes, tobacco", "Bladder transitional cell"]
+          - ["Arsenic", "Vineyard herbicides, smelting", "Hepatic angiosarcoma, lung, skin SCC"]
+          - ["Asbestos", "Old roofing, shipyards", "Bronchogenic carcinoma > mesothelioma"]
+          - ["Nitrosamines", "Smoked foods", "Gastric (intestinal type)"]
+          - ["Radon", "Basements (uranium decay)", "Lung (2nd to tobacco)"]
+          - ["Vinyl chloride", "PVC pipes", "Hepatic angiosarcoma"]
+        hide: [[0, 2], [1, 2], [3, 2], [4, 2], [6, 2]]
+        page: 221
+        quote: "Vinyl chloride Used to make PVC pipes LiVer Hepatic angiosarcoma"
+      - kind: reveal
+        prompt: "الـ asbestos مشهور بالـ mesothelioma. بس أنهي cancer أكتر عند الناس اللي اتعرّضوا له؟"
+        answer: "الـ ==bronchogenic carcinoma== أكتر من الـ mesothelioma. الـ mesothelioma أكتر **تخصصاً** للـ asbestos، بس مش الأكتر حدوثاً."
+        page: 221
+        quote: "Asbestos Old roofing material, shipyard workers Lung Bronchogenic carcinoma > mesothelioma"
+      - kind: explain
+        title: "الدخان بيوصل لكل حتة"
+        text: |-
+          الـ **tobacco smoke** بيعمل cancer في: bladder (transitional cell)، cervix، esophagus، kidney (RCC)، larynx، lung (==squamous و small cell==)، oropharynx، و pancreas.
+
+          والـ **ethanol**: esophagus (squamous)، liver (HCC)، و breast. والـ **ionizing radiation**: leukemia و papillary thyroid carcinoma.
+        page: 221
+        quote: "Lung Squamous cell and small cell carcinoma Oropharynx Squamous cell carcinoma Pancreas Pancreatic adenocarcinoma"
+      - kind: table
+        title: "الميكروبات"
+        columns: ["Microbe", "Cancer"]
+        rows:
+          - ["EBV", "Burkitt, Hodgkin, nasopharyngeal, 1° CNS lymphoma"]
+          - ["HBV, HCV", "HCC"]
+          - ["HHV-8", "Kaposi sarcoma"]
+          - ["HPV 16, 18", "Cervical, anal/penile, head and neck"]
+          - ["H pylori", "Gastric adenocarcinoma, MALT lymphoma"]
+          - ["HTLV-1", "Adult T-cell leukemia/lymphoma"]
+          - ["Clonorchis sinensis", "Cholangiocarcinoma"]
+          - ["Schistosoma haematobium", "Squamous cell bladder cancer"]
+        hide: [[0, 1], [2, 1], [4, 1], [6, 1], [7, 1]]
+        page: 222
+        quote: "Liver fluke (Clonorchis sinensis) Cholangiocarcinoma Schistosoma haematobium Squamous cell bladder cancer"
+      - kind: check
+        question: "A man who swam in canals as a child and had years of hematuria now has a bladder tumor. What type is most likely?"
+        options:
+          - "Squamous cell carcinoma"
+          - "Transitional cell carcinoma"
+          - "Adenocarcinoma"
+          - "Small cell carcinoma"
+        answer: 0
+        why:
+          - "صح: الـ Schistosoma haematobium بيعمل squamous cell bladder cancer."
+          - "الـ transitional cell مع الـ aromatic amines والدخان."
+          - "الكتاب مش بيربط الـ Schistosoma بالـ adenocarcinoma."
+          - "الـ small cell بتاع الرئة."
+      - kind: explain
+        title: "الـ tumor markers: للمتابعة مش للتشخيص"
+        text: |-
+          الـ tumor markers ==مش أداة أساسية== للتشخيص أو الـ screening. بنستخدمها نتابع الـ **recurrence** والـ **response** للعلاج، والتشخيص الأكيد بالـ ==biopsy==. وفيه markers بتعلى في حاجات مش ورمية.
+        page: 222
+        quote: "Tumor markers should not be used as the 1° tool for cancer diagnosis or screening. They may be used to monitor tumor recurrence and response to therapy, but definitive diagnosis is made via biopsy."
+      - kind: table
+        title: "أهم الـ markers"
+        columns: ["Marker", "Tumor"]
+        rows:
+          - ["α-fetoprotein", "HCC, yolk sac tumor"]
+          - ["hCG", "Hydatidiform mole, choriocarcinoma, testicular"]
+          - ["CA 19-9", "Pancreatic adenocarcinoma"]
+          - ["CA 125", "Epithelial ovarian cancer"]
+          - ["CA15-3/CA27-29", "Breast cancer"]
+          - ["Calcitonin", "Medullary thyroid carcinoma"]
+          - ["CEA", "Colorectal, pancreatic (very nonspecific)"]
+          - ["Neuron-specific enolase", "Small cell lung, carcinoid, neuroblastoma"]
+          - ["PSA", "Prostate (also BPH, prostatitis)"]
+        hide: [[0, 1], [2, 1], [3, 1], [5, 1], [7, 1]]
+        page: 222
+        quote: "CA 19-9 Pancreatic adenocarcinoma. CA 125 Epithelial ovarian cancer."
+      - kind: aside
+        tone: exam
+        text: "الـ AFP في الحمل: ==عالي== = neural tube أو abdominal wall defects، و ==واطي== = Down syndrome. وحيلة الكتاب: Calci**2**nin = medullary thyroid (ومعاه MEN2A و MEN2B)."
+        page: 222
+        quote: "High levels associated with neural tube and abdominal wall defects, low levels associated with Down syndrome."
+      - kind: try
+        items: [path.L03.044, path.L03.046, path.L03.048, path.L03.050, path.L03.051]
+    recap:
+      - "Arsenic و vinyl chloride ← hepatic angiosarcoma. Aflatoxin ← HCC. Nitrosamines ← gastric."
+      - "Asbestos: bronchogenic أكتر من mesothelioma. Radon تاني سبب للـ lung cancer."
+      - "Schistosoma haematobium ← squamous bladder. Clonorchis ← cholangiocarcinoma. HTLV-1 ← adult T-cell leukemia."
+      - "الـ markers للمتابعة، والتشخيص بالـ biopsy. CA 19-9 pancreas، CA 125 ovary."
+    practice: [path.L03.044, path.L03.045, path.L03.046, path.L03.047, path.L03.048, path.L03.049, path.L03.050, path.L03.051, path.L03.052, path.L03.053, path.L03.054]
+  - id: path.L03.lesson5
+    title: "نعرف الورم منين، وإزاي بيعمل أعراض بعيد عنه"
+    hook: "metastasis في الكبد من غير pigment: S-100 هيكشف إنه melanoma. ومدخّن عضلاته بتقوى لما يحرّكها."
+    minutes: 9
+    pages: [223, 224]
+    topics: [cancer-testing, immunohistochemical-stains, p-glycoprotein, paraneoplastic-syndromes]
+    goals:
+      - "تعرف الـ cancer tests الحديثة وكل واحد بيتوقّع إيه"
+      - "تربط كل immunohistochemical stain بالخلية والأورام"
+      - "تعرف الـ P-glycoprotein ودوره في الـ resistance"
+      - "تربط الـ paraneoplastic syndromes بأورامها"
+    status: unverified
+    steps:
+      - kind: table
+        title: "الـ cancer tests"
+        columns: ["Test", "Use"]
+        rows:
+          - ["Tumor mutational burden", "May predict response to checkpoint inhibitors"]
+          - ["Microsatellite instability", "Mismatch repair deficit (Lynch); colorectal, endometrial"]
+          - ["PD-L1 expression", "Anti-PD-L1 / anti-PD-1 therapy"]
+          - ["Homologous recombination deficiency", "PARP inhibitors (breast, ovarian)"]
+          - ["Liquid biopsy", "ctDNA, ctRNA, CTCs: profiling, monitoring, surveillance"]
+        hide: [[1, 1], [3, 1], [4, 1]]
+        page: 223
+        quote: "Identifies cancer types with genetic abnormalities and genomic instability (eg, breast, ovarian) that may respond to certain treatments (eg, PARP inhibitors)."
+      - kind: explain
+        title: "الـ stains: الورم ده أصله إيه"
+        text: |-
+          الـ immunohistochemical stains بتحدد ==الـ primary site== للـ metastasis، وبتصنّف الأورام الصعبة.
+
+          - **Cytokeratin**: epithelial. **Desmin**: muscle. **Vimentin**: mesenchymal.
+          - **Chromogranin و synaptophysin**: neuroendocrine (small cell، carcinoid، neuroblastoma).
+          - **GFAP**: neuroglia (astrocytoma، glioblastoma). **Neurofilament**: neurons.
+          - **S-100**: ==neural crest== (melanoma، schwannoma، Langerhans cell histiocytosis).
+          - **PECAM-1/CD31**: endothelium (angiosarcoma). **TRAP**: hairy cell leukemia. **PSA**: prostate.
+        page: 223
+        quote: "Determine primary site of origin for metastatic tumors and characterize tumors that are difficult to classify."
+      - kind: sort
+        prompt: "أنهي stain للورم ده؟"
+        bins: ["S-100", "Desmin", "GFAP", "Chromogranin"]
+        cards:
+          - { text: "Melanoma", bin: 0 }
+          - { text: "Schwannoma", bin: 0 }
+          - { text: "Rhabdomyosarcoma", bin: 1 }
+          - { text: "Glioblastoma", bin: 2 }
+          - { text: "Astrocytoma", bin: 2 }
+          - { text: "Small cell lung carcinoma", bin: 3 }
+          - { text: "Carcinoid tumor", bin: 3 }
+        why: "الـ S-100 للـ neural crest، الـ desmin للعضل، الـ GFAP للـ glia، والـ chromogranin للـ neuroendocrine."
+        page: 223
+        quote: "S-100 Neural crest cells Melanoma, schwannoma, Langerhans cell histiocytosis"
+      - kind: reveal
+        prompt: "الورم استجاب للـ chemotherapy في الأول وبعد كام cycle بطّل. إيه أحد الأسباب اللي الكتاب بيقولها؟"
+        answer: "الـ ==P-glycoprotein== (MDR1): pump بيشتغل بالـ ATP، وبعض الخلايا الورمية بتعمله عشان ==تطلّع== الـ toxins برّه، ومنها أدوية الـ chemotherapy. فالـ response بيقل مع الوقت."
+        page: 223
+        quote: "ATP-dependent efflux pump, also called multidrug resistance protein 1 (MDR1). Expressed in some cancer cells to pump out toxins, including chemotherapeutic agents"
+      - kind: explain
+        title: "الـ paraneoplastic: أعراض بعيد عن الورم"
+        text: |-
+          **جلد وعضم**: dermatomyositis (adenocarcinomas، خصوصاً ovarian)، acanthosis nigricans (gastric adenocarcinoma)، sign of **Leser-Trélat** = seborrheic keratoses كتير فجأة (GI adenocarcinomas)، و hypertrophic osteoarthropathy = clubbing (adenocarcinoma of the lung).
+
+          **Endocrine**:
+          - Hypercalcemia بالـ ==PTHrP== من الـ squamous cell carcinomas (lung، head and neck) وغيرهم، أو بالـ 1,25-(OH)2 vitamin D3 في الـ lymphoma.
+          - Cushing (↑ ACTH) و SIADH (↑ ADH) من الـ ==small cell lung cancer==.
+        page: 224
+        quote: "Abnormal proliferation of skin and bone at distal extremities → clubbing, arthralgia, joint effusions, periostosis of tubular bones Adenocarcinoma of the lung"
+      - kind: explain
+        title: "الدم والأعصاب"
+        text: |-
+          **الدم**:
+          - Polycythemia (↑ EPO): pheochromocytoma و RCC و HCC و hemangioblastoma و leiomyoma.
+          - **Thymoma**: pure red cell aplasia و Good syndrome (hypogammaglobulinemia).
+          - Trousseau (migratory thrombophlebitis) و nonbacterial thrombotic endocarditis: adenocarcinomas، خصوصاً ==pancreatic==.
+
+          **الأعصاب**:
+          - Anti-NMDA receptor encephalitis: ==ovarian teratoma==.
+          - Opsoclonus-myoclonus ("dancing eyes, dancing feet"): neuroblastoma في الأطفال، و SCLC في الكبار.
+          - Cerebellar degeneration: anti-Hu (SCLC)، anti-Yo (gynecologic و breast)، anti-Tr (Hodgkin).
+          - Lambert-Eaton: presynaptic Ca2+ channels (SCLC). Myasthenia gravis: postsynaptic ACh receptors (thymoma).
+        page: 224
+        quote: "Antibodies against antigens in Purkinje cells Small cell lung cancer (anti-Hu), gynecologic and breast cancers (anti-Yo), and Hodgkin lymphoma (anti-Tr)"
+      - kind: mnemonic
+        word: "PRHHL"
+        parts:
+          - { key: "P", text: "Pheochromocytoma" }
+          - { key: "R", text: "Renal cell carcinoma" }
+          - { key: "H", text: "HCC" }
+          - { key: "H", text: "Hemangioblastoma" }
+          - { key: "L", text: "Leiomyoma" }
+        hook: "الكتاب: Paraneoplastic Rise to High Hematocrit Levels، كلهم بيطلّعوا ↑ erythropoietin."
+        page: 224
+        quote: "Paraneoplastic rise to High hematocrit levels Pheochromocytoma, renal cell carcinoma, HCC, hemangioblastoma, leiomyoma"
+      - kind: match
+        prompt: "وصّل الـ syndrome بالورم"
+        pairs:
+          - ["Lambert-Eaton", "Small cell lung cancer"]
+          - ["Myasthenia gravis", "Thymoma"]
+          - ["Anti-NMDA receptor encephalitis", "Ovarian teratoma"]
+          - ["Trousseau syndrome", "Pancreatic adenocarcinoma"]
+          - ["Hypertrophic osteoarthropathy", "Lung adenocarcinoma"]
+        why: "الـ SCLC عنده Lambert-Eaton و ACTH و ADH و anti-Hu. الـ thymoma عنده myasthenia و red cell aplasia و Good syndrome."
+        page: 224
+        quote: "Myasthenia gravis Antibodies against postsynaptic ACh receptors at NMJ Thymoma"
+      - kind: check
+        question: "A smoker with a central lung mass has proximal weakness that improves with repeated effort. What do his antibodies target?"
+        options:
+          - "Presynaptic P/Q-type calcium channels"
+          - "Postsynaptic acetylcholine receptors"
+          - "NMDA receptors"
+          - "Purkinje cell antigens"
+        answer: 0
+        why:
+          - "صح: Lambert-Eaton، والقوة بتتحسن مع الحركة، ومرتبط بالـ SCLC."
+          - "الـ postsynaptic ACh receptors في الـ myasthenia gravis (thymoma)، والضعف بيزيد مع الحركة."
+          - "الـ NMDA مع الـ ovarian teratoma."
+          - "الـ Purkinje antibodies بتعمل cerebellar degeneration (ataxia)."
+      - kind: try
+        items: [path.L03.057, path.L03.060, path.L03.062, path.L03.063, path.L03.065]
+    recap:
+      - "MSI = Lynch. HRD = PARP inhibitors. PD-L1 و TMB = checkpoint inhibitors."
+      - "S-100 = neural crest (melanoma)، desmin = muscle، GFAP = glia، chromogranin = neuroendocrine، TRAP = hairy cell."
+      - "P-glycoprotein (MDR1) بيطلّع الـ chemotherapy برّه."
+      - "SCLC: ACTH و ADH و Lambert-Eaton و anti-Hu. Squamous: PTHrP. Thymoma: myasthenia و red cell aplasia."
+    practice: [path.L03.055, path.L03.056, path.L03.057, path.L03.058, path.L03.059, path.L03.060, path.L03.061, path.L03.062, path.L03.063, path.L03.064, path.L03.065, path.L03.066, path.L03.067, path.L03.068]
