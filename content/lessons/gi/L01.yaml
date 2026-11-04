@@ -1,0 +1,290 @@
+schema: steps.lesson/v1
+lecture: gi.L01
+lessons:
+  - id: gi.L01.lesson1
+    title: "اللسان والأنبوبة الهضمية: مين بيبني إيه"
+    hook: "الـ arches بتشرح أعصاب اللسان، ولفّة الـ midgut بتشرح نص أسئلة الـ embryology"
+    minutes: 9
+    pages: [364, 365]
+    topics: [tongue-development, normal-gi-embryology, ventral-wall-defects, congenital-umbilical-hernia]
+    goals:
+      - "تعرف كل جزء من اللسان جاي من أنهي arch، وأعصابه بالترتيب"
+      - "تقسم الـ gut لـ foregut و midgut و hindgut وتعرف الـ midgut بيلف إزاي"
+      - "تفرّق بين gastroschisis و omphalocele من أول نظرة"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "اللسان حتتين من arches مختلفة"
+        text: |-
+          اللسان مش حتة واحدة: الـ **anterior 2/3** جايين من الـ ==pharyngeal arches 1 و 2==، والـ **posterior 1/3** جاي من الـ ==arches 3 و 4==.
+
+          وكل arch معاه العصب بتاعه، فالأعصاب بتمشي ورا الأصل:
+          - **Anterior 2/3**: الإحساس من **CN V3**، والطعم من **CN VII**.
+          - **Posterior 1/3**: الإحساس والطعم غالباً من **CN IX**، وآخر حتة خالص ورا من **CN X**.
+        page: 364
+        quote: "Portions of 1st and 2nd pharyngeal arches form anterior 2/3 of tongue (sensations via CN V3, taste via CN VII). 3rd and 4th pharyngeal arches form posterior 1/3 of tongue (sensation and taste mainly via CN IX, extreme posterior via CN X)."
+      - kind: figure
+        title: "خريطة أعصاب اللسان"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <path class="fg-box" d="M180 190 C 90 190, 60 120, 70 60 C 80 20, 280 20, 290 60 C 300 120, 270 190, 180 190 Z"/>
+            <line class="fg-ink" x1="75" y1="80" x2="285" y2="80" stroke-width="2"/>
+            <rect class="fg-acc" x="120" y="28" width="120" height="44" rx="8"/>
+            <text x="180" y="45" class="t-sm t-b" text-anchor="middle">Posterior 1/3: arches 3-4</text>
+            <text x="180" y="63" class="t-sm" text-anchor="middle">sensation + taste: CN IX</text>
+            <text x="180" y="18" class="t-sm t-mut" text-anchor="middle">extreme posterior: CN X</text>
+            <rect class="fg-good" x="110" y="100" width="140" height="60" rx="8"/>
+            <text x="180" y="118" class="t-sm t-b" text-anchor="middle">Anterior 2/3: arches 1-2</text>
+            <text x="180" y="136" class="t-sm" text-anchor="middle">sensation: CN V3</text>
+            <text x="180" y="152" class="t-sm" text-anchor="middle">taste: CN VII</text>
+            <text x="300" y="84" class="t-sm t-mut">sulcus</text>
+          </svg>
+        caption: "الخط في النص بيقسم اللسان: قدّام arches 1 و 2 (V3 للإحساس و VII للطعم)، وورا arches 3 و 4 (IX للاتنين، و X في آخر حتة)."
+        alt: "Outline of the tongue divided by a line. Front two thirds from arches 1 and 2: sensation CN V3, taste CN VII. Back third from arches 3 and 4: sensation and taste CN IX; extreme posterior CN X."
+        page: 364
+        quote: "3rd and 4th pharyngeal arches form posterior 1/3 of tongue (sensation and taste mainly via CN IX, extreme posterior via CN X)."
+      - kind: explain
+        title: "الحركة: كله XII ما عدا واحدة"
+        text: |-
+          عضلات اللسان كلها بتاخد الحركة من **CN XII**:
+          - **hyoglossus**: بيرجّع اللسان لورا ولتحت.
+          - **genioglossus**: بيطلّع اللسان لبرّه.
+          - **styloglossus**: بيرفع جوانب اللسان يعمل مجرى للبلع.
+
+          الاستثناء الوحيد: ==palatoglossus== بياخد من **CN X**، وهو اللي بيرفع اللسان من ورا وإنت بتبلع.
+        page: 364
+        quote: "Motor innervation is via CN XII to hyoglossus (retracts and depresses tongue), genioglossus (protrudes tongue), and styloglossus (draws sides of tongue upward to create a trough for swallowing). Motor innervation is via CN X to palatoglossus (elevates posterior tongue during swallowing)."
+      - kind: aside
+        tone: tip
+        text: "الكتاب بيقولك: **The genie comes out of the lamp in style** (genioglossus بيطلّعه برّه، والـ glossus التلاتة بتوع XII)، و **CN 10 innervates palatenglossus**: الـ ten في الاسم بتفكرك إنه CN X."
+        page: 364
+        quote: "The genie comes out of the lamp in style. CN 10 innervates palatenglossus."
+      - kind: check
+        question: "Which nerve carries taste from the anterior 2/3 of the tongue?"
+        options:
+          - "CN VII"
+          - "CN V3"
+          - "CN IX"
+          - "CN XII"
+        answer: 0
+        why:
+          - "صح: الطعم قدّام VII، والإحساس قدّام V3."
+          - "الـ V3 بتاع الإحساس العادي (لمس ووجع) قدّام، مش الطعم."
+          - "الـ IX بتاع الـ posterior 1/3 (إحساس وطعم)."
+          - "الـ XII حركة بس."
+        page: 364
+        quote: "Portions of 1st and 2nd pharyngeal arches form anterior 2/3 of tongue (sensations via CN V3, taste via CN VII)."
+      - kind: explain
+        title: "الأنبوبة الهضمية تلات حتت"
+        text: |-
+          كل حتة ليها شريانها، وده اللي هيفيدك في الـ anatomy بعدين:
+          - **Foregut**: من الـ esophagus لحد الـ duodenum عند ==ampulla of Vater== (مكان دخول الـ pancreatic duct والـ common bile duct). شريانها الـ celiac trunk.
+          - **Midgut**: من الـ lower duodenum لحد **أول 2/3 من الـ transverse colon**. شريانها الـ SMA.
+          - **Hindgut**: من آخر 1/3 من الـ transverse colon لحد الـ anal canal **فوق الـ pectinate line**. شريانها الـ inferior mesenteric artery.
+        page: 364
+        quote: "Midgut—lower duodenum to proximal 2/3 of transverse colon."
+      - kind: explain
+        title: "المعدة بتلف، فالـ vagus بيتشقلب"
+        text: |-
+          في الأسبوع **4-6** المعدة بتلف ==90° clockwise==. اللي كان على الشمال يروح قدّام، واللي على اليمين يروح ورا.
+
+          عشان كده الـ **left vagus** بيبقى anterior والـ **right vagus** بيبقى posterior. افتكرها: **L**eft قدّام و **R**ight ورا، زي ما تلف المعدة ربع لفة مع عقارب الساعة.
+        page: 364
+        quote: "4th-6th week of development—stomach rotates 90° clockwise. Left vagus becomes anteriorly positioned, and right vagus becomes posteriorly positioned."
+      - kind: order
+        prompt: "رتّب رحلة الـ midgut"
+        steps:
+          - "Week 6: physiologic herniation through the umbilical ring"
+          - "The midgut stays connected to the yolk sac by the vitelline duct"
+          - "~90° counterclockwise rotation around the SMA while outside"
+          - "Week 10: returns to the abdomen, rotating the remaining ~180°"
+        why: "البطن صغيرة على الـ midgut اللي بيطول بسرعة، فيطلع يقعد برّه في الـ umbilical cord، ويلف حوالين الـ SMA كمحور: 270° counterclockwise على مرحلتين."
+        page: 364
+        quote: "10th week of development—returns to abdominal cavity rotating around superior mesenteric artery (SMA), 270° counterclockwise (~90° before 10th week, remaining ~180° in 10th week when contents retract back into abdominal cavity)."
+      - kind: explain
+        title: "الجدار لو ما اتقفلش"
+        text: |-
+          جدار البطن بيتقفل من 3 اتجاهات زي الشنطة، وكل اتجاه لو فشل ليه عيبه:
+          - **rostral fold** (من فوق): sternal defects زي **ectopia cordis**.
+          - **lateral folds** (من الجناب): **omphalocele** و **gastroschisis**.
+          - **caudal fold** (من تحت): **bladder exstrophy**.
+
+          وكمان الـ gastroschisis ممكن تيجي من إن الـ midgut ==ما رجعش جوه== بعد الـ physiologic herniation.
+        page: 365
+        quote: "Developmental defects due to failure of rostral fold closure (eg, sternal defects [ectopia cordis]), lateral fold closure (eg, omphalocele, gastroschisis), caudal fold closure (eg, bladder exstrophy), or failure of midgut to reenter abdominal cavity following physiological herniation (gastroschisis)."
+      - kind: table
+        title: "Gastroschisis ولا omphalocele؟"
+        columns: ["", "Gastroschisis", "Omphalocele"]
+        rows:
+          - ["Where", "Paraumbilical, right-sided defect", "Through the umbilical ring, midline"]
+          - ["Covered?", "Not covered by peritoneum or amnion", "Covered by peritoneum and amnion (shiny sac)"]
+          - ["Associations", "Not commonly chromosomal; good prognosis", "Trisomies 13 and 18, Beckwith-Wiedemann; cardiac, GU, neural tube"]
+        hide: [[1, 1], [1, 2], [2, 2]]
+        page: 365
+        quote: "Not covered by peritoneum or amnion A ; right sided/paraumbilical"
+      - kind: aside
+        tone: analogy
+        text: "الـ ==omphalocele== زي الهدية المتغلفة: في كيس لامع، وجوّه الكيس غالباً «مفاجآت» تانية (trisomies وعيوب قلب). الـ **gastroschisis** أمعاء عريانة جنب السرة، بس الطفل غالباً سليم من غير كده والـ prognosis كويس."
+        page: 365
+        quote: "Associated with congenital anomalies (eg, trisomies 13 and 18, Beckwith-Wiedemann syndrome) and other structural abnormalities (eg, cardiac, GU, neural tube)"
+      - kind: explain
+        title: "الـ umbilical hernia: الحلقة اتأخرت تقفل"
+        text: |-
+          هنا الـ midgut رجع عادي، بس ==الـ umbilical ring اتأخر يقفل==، فتفضل فتحة. الفرق المهم: متغطية **بجلد**.
+
+          بتطلع لما الضغط في البطن يعلى (العياط)، وغالباً بترجع بسهولة. ممكن تيجي مع **Down syndrome** و **congenital hypothyroidism**، والصغيرة غالباً بتقفل لوحدها.
+        page: 365
+        quote: "Delay of umbilical ring to close spontaneously following physiological herniation of midgut → patent umbilical orifice. Covered by skin C . Often reducible, but protrudes with ↑ intra"
+      - kind: check
+        question: "A newborn has a midline abdominal wall defect with bowel inside a thin shiny membrane. Which test is most important next?"
+        options:
+          - "Karyotype and echocardiography"
+          - "No tests: the prognosis is excellent and it is isolated"
+          - "Sweat chloride test"
+          - "Abdominal ultrasound of the pylorus"
+        answer: 0
+        why:
+          - "صح: كيس لامع في النص يبقى omphalocele، ودي بتيجي مع trisomies 13 و 18 وعيوب قلب، فدوّر عليهم."
+          - "ده وصف الـ gastroschisis (مش متغطية، prognosis كويس)."
+          - "الـ cystic fibrosis بتيجي مع الـ jejunal/ileal atresia."
+          - "الـ pylorus ملوش علاقة بعيوب الجدار."
+        page: 365
+        quote: "Covered by peritoneum and amnion B (light gray shiny sac); midline, membrane covered"
+      - kind: try
+        items: [gi.L01.001, gi.L01.004, gi.L01.007, gi.L01.010, gi.L01.013]
+    recap:
+      - "Anterior 2/3 من arches 1-2 (V3 إحساس، VII طعم)، و posterior 1/3 من 3-4 (IX، و X ورا خالص)."
+      - "كل العضلات XII ما عدا palatoglossus (X)."
+      - "المعدة 90° clockwise ← left vagus قدّام. الـ midgut 270° counterclockwise حوالين الـ SMA (أسبوع 6 برّه، 10 جوّه)."
+      - "Omphalocele متغطية وفي النص ومع trisomies؛ gastroschisis عريانة يمين السرة وكويسة."
+    practice: [gi.L01.001, gi.L01.002, gi.L01.003, gi.L01.004, gi.L01.005, gi.L01.006, gi.L01.007, gi.L01.008, gi.L01.009, gi.L01.010, gi.L01.011, gi.L01.012, gi.L01.013, gi.L01.014, gi.L01.015, gi.L01.016, gi.L01.017, gi.L01.018]
+  - id: gi.L01.lesson2
+    title: "المولود اللي بيرجّع: أنهي انسداد؟"
+    hook: "لون القيء وسن الطفل وصورة الأشعة بيقولولك المكان بالظبط"
+    minutes: 8
+    pages: [366, 366]
+    topics: [tracheoesophageal-anomalies, hypertrophic-pyloric-stenosis, intestinal-atresia]
+    goals:
+      - "تعرف أنواع الـ TEF من الأشعة"
+      - "تشرح ليه الـ pyloric stenosis بتعمل metabolic alkalosis"
+      - "تفرّق بين double bubble و triple bubble وأسبابهم"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ EA مع distal TEF: الأشهر"
+        text: |-
+          أشهر نوع (**85%**) هو ==esophageal atresia مع distal TEF==: المريء مقفول من فوق، والحتة اللي تحت متوصلة بالـ trachea.
+
+          ركّز في القصة من الأول:
+          - **في الرحم**: الجنين مش قادر يبلع السائل ← **polyhydramnios**.
+          - **أول رضعة**: الطفل بيريّل ويتخنق ويرجّع، ويزرق من الـ **laryngospasm** (الحنجرة بتقفل عشان ما يحصلش aspiration).
+          - **الاختبار**: الـ nasogastric tube ==مش بيعدّي== للمعدة.
+        page: 366
+        quote: "Esophageal atresia (EA) with distal tracheoesophageal fistula (TEF) is the most common (85%) and often presents as polyhydramnios in utero (due to inability of fetus to swallow amniotic fluid). Neonates drool, choke, and vomit with first feeding."
+      - kind: figure
+        title: "التلات أنواع والمعدة على الأشعة"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <text x="60" y="16" class="t-sm t-b" text-anchor="middle">EA + distal TEF</text>
+            <text x="180" y="16" class="t-sm t-b" text-anchor="middle">Pure EA</text>
+            <text x="300" y="16" class="t-sm t-b" text-anchor="middle">H-type TEF</text>
+            <rect class="fg-box" x="20" y="25" width="16" height="140" rx="6"/>
+            <rect class="fg-acc" x="70" y="25" width="16" height="45" rx="6"/>
+            <rect class="fg-acc" x="70" y="95" width="16" height="45" rx="6"/>
+            <line class="fg-ink" x1="36" y1="90" x2="70" y2="105" stroke-width="3"/>
+            <ellipse class="fg-good" cx="80" cy="162" rx="26" ry="14"/>
+            <text x="60" y="186" class="t-sm t-good" text-anchor="middle">big gastric bubble</text>
+            <rect class="fg-box" x="140" y="25" width="16" height="140" rx="6"/>
+            <rect class="fg-acc" x="190" y="25" width="16" height="45" rx="6"/>
+            <rect class="fg-acc" x="190" y="110" width="16" height="30" rx="6"/>
+            <ellipse class="fg-thin" cx="200" cy="162" rx="26" ry="14"/>
+            <text x="180" y="186" class="t-sm t-bad" text-anchor="middle">gasless abdomen</text>
+            <rect class="fg-box" x="260" y="25" width="16" height="140" rx="6"/>
+            <rect class="fg-acc" x="310" y="25" width="16" height="115" rx="6"/>
+            <line class="fg-ink" x1="276" y1="70" x2="310" y2="70" stroke-width="3"/>
+            <ellipse class="fg-box" cx="320" cy="162" rx="26" ry="14"/>
+            <text x="300" y="186" class="t-sm t-mut" text-anchor="middle">fistula like an H</text>
+          </svg>
+        caption: "الأنبوبة الرمادي الـ trachea والملونة المريء. لو في fistula تحت، الهوا بيعدّي من الـ trachea للمعدة فتطلع gastric bubble كبيرة. الـ pure EA مفيش طريق للهوا فالبطن من غير غاز."
+        alt: "Three panels. Esophageal atresia with distal fistula: blind upper esophagus, lower esophagus joined to the trachea, large gastric bubble. Pure esophageal atresia: two blind ends, gasless abdomen. H-type: continuous esophagus with a cross fistula to the trachea like the letter H."
+        page: 366
+        quote: "TEFs allow excess air to enter stomach (visible on CXR as a prominent gastric bubble)."
+      - kind: reveal
+        prompt: "مولود ما بيبلعش، والأنبوبة مش بتعدّي، والأشعة بطنه من غير أي غاز. أنهي نوع؟ وليه؟"
+        answer: "==Pure EA==. مفيش fistula بين الـ trachea والجزء اللي تحت، فالهوا مالوش طريق يوصل المعدة ← **gasless abdomen**. لو في distal TEF كانت المعدة هتبقى مليانة هوا."
+        page: 366
+        quote: "In H-type, the fistula resembles the letter H. In pure EA, CXR shows gasless abdomen."
+      - kind: aside
+        tone: exam
+        text: "أي TEF في السؤال؟ دوّر على باقي ==VATER/VACTERL== (vertebral و anal و cardiac و renal و limb). السؤال غالباً بيسألك على العيب المصاحب، مش على التشخيص."
+        page: 366
+        quote: "Associated with VATER/VACTERL defects."
+      - kind: explain
+        title: "Pyloric stenosis: الولد البكري اللي بيرجّع بقوة"
+        text: |-
+          ==أشهر سبب لـ gastric outlet obstruction== في الرضع. عضلة الـ pylorus بتتضخم (hypertrophy و hyperplasia)، فتحس بـ **olive** في الـ epigastrium وتشوف موجات peristalsis.
+
+          القيء **projectile** و **nonbilious** (الانسداد قبل الـ ampulla، فمفيش صفرا)، في سن **2-6 أسابيع**.
+
+          أكتر في الـ **firstborn males**، ومرتبط بالـ **macrolides** (erythromycin).
+        page: 366
+        quote: "Most common cause of gastric outlet obstruction in infants. Palpable olive-shaped mass (due to hypertrophy and hyperplasia of pyloric sphincter muscle) in epigastric region, visible peristaltic waves, and postprandial nonbilious projectile vomiting at ∼2-6 weeks old."
+      - kind: reveal
+        prompt: "ليه القيء هنا بيعمل hypokalemic hypochloremic metabolic alkalosis؟"
+        answer: |-
+          - الطفل بيرجّع **HCl** ← بيخسر Cl⁻ و H⁺، والـ HCO3⁻ اللي اتعمل مع الحمض بيفضل في الدم ← ==alkalosis==.
+          - الـ **volume contraction** بيشغّل الـ aldosterone ← الكلية تمسك Na⁺ وترمي K⁺ و H⁺ ← **hypokalemia** وتزيد الـ alkalosis.
+        page: 366
+        quote: "Results in hypokalemic hypochloremic metabolic alkalosis (2° to vomiting of gastric acid and subsequent volume contraction)."
+      - kind: check
+        question: "A 3-week-old firstborn boy has projectile nonbilious vomiting and an epigastric olive. What is the diagnostic test and treatment?"
+        options:
+          - "Ultrasound showing a thickened, elongated pylorus; pyloromyotomy"
+          - "X-ray showing a double bubble; duodenoduodenostomy"
+          - "Failure to pass a nasogastric tube; fistula repair"
+          - "Sweat chloride test; pancreatic enzymes"
+        answer: 0
+        why:
+          - "صح: الـ ultrasound بيبين pylorus سميك وطويل، والعلاج pyloromyotomy."
+          - "الـ double bubble ده duodenal atresia، والقيء فيه bilious من أول يوم."
+          - "الأنبوبة اللي مش بتعدّي دي TEF، من أول رضعة."
+          - "الـ sweat test للـ cystic fibrosis."
+        page: 366
+        quote: "Diagnosis: thickened and elongated pylorus on ultrasound. Treatment: surgical incision of pyloric muscles (pyloromyotomy)."
+      - kind: explain
+        title: "Intestinal atresia: قيء أخضر من أول يومين"
+        text: |-
+          هنا الانسداد ==بعد الـ ampulla== غالباً، فالقيء **bilious** ومعاه انتفاخ في أول **1-2 يوم**.
+
+          نوعين بآليتين مختلفتين خالص:
+          - **Duodenal atresia**: الـ lumen كان solid cord و==ما اتفتحش تاني== (failure to recanalize). الأشعة **double bubble**، ومع **Down syndrome**.
+          - **Jejunal و ileal atresia**: مش مشكلة فتح، دي **ischemia**: الـ mesenteric vessels (غالباً SMA) بتتقطع ← الأمعاء بتموت وتتشفط ← تبقى متقطعة. الأشعة **triple bubble** و gasless colon.
+        page: 366
+        quote: "Duodenal atresia—failure to recanalize lumen from solid cord stage. X-ray A shows “double bubble” (dilated stomach, proximal duodenum). Associated with Down syndrome."
+      - kind: sort
+        prompt: "وزّع كل حاجة على نوع الـ atresia بتاعها"
+        bins: ["Duodenal atresia", "Jejunal/ileal atresia"]
+        cards:
+          - { text: "Double bubble", bin: 0 }
+          - { text: "Down syndrome", bin: 0 }
+          - { text: "Failure to recanalize the lumen", bin: 0 }
+          - { text: "Triple bubble and gasless colon", bin: 1 }
+          - { text: "Cystic fibrosis and gastroschisis", bin: 1 }
+          - { text: "Maternal smoking or cocaine", bin: 1 }
+          - { text: "Disrupted SMA branches", bin: 1 }
+        why: "الـ jejunal/ileal atresia كلها حكاية دم: الـ cocaine والتدخين بيعملوا vasoconstriction، والـ gastroschisis بتخنق الأوعية. الـ duodenal مشكلة فتح، ومع Down."
+        page: 366
+        quote: "Associated with cystic fibrosis and gastroschisis. May be caused by maternal tobacco smoking or use of vasoconstrictive drugs (eg, cocaine) during pregnancy."
+      - kind: aside
+        tone: trap
+        text: "متتلخبطش بين **bilious** و **nonbilious**: الـ pyloric stenosis الانسداد قبل الـ ampulla فالقيء من غير صفرا وفي سن 2-6 أسابيع، لكن الـ ==intestinal atresia== قيء أخضر من أول 1-2 يوم."
+        page: 366
+        quote: "Presents with bilious vomiting and abdominal distension within first 1-2 days of life."
+      - kind: try
+        items: [gi.L01.019, gi.L01.021, gi.L01.026, gi.L01.030, gi.L01.032]
+    recap:
+      - "EA + distal TEF الأشهر (85%): polyhydramnios، أول رضعة، الأنبوبة مش بتعدّي، gastric bubble؛ دوّر على VACTERL."
+      - "Pure EA ← gasless abdomen."
+      - "Pyloric stenosis: firstborn male، 2-6 أسابيع، nonbilious projectile، olive، macrolides، hypokalemic hypochloremic alkalosis، pyloromyotomy."
+      - "Duodenal atresia: مش اتفتح، double bubble، Down. Jejunal/ileal: ischemia، triple bubble، CF و cocaine."
+    practice: [gi.L01.019, gi.L01.020, gi.L01.021, gi.L01.022, gi.L01.023, gi.L01.024, gi.L01.025, gi.L01.026, gi.L01.027, gi.L01.028, gi.L01.029, gi.L01.030, gi.L01.031, gi.L01.032, gi.L01.033]
