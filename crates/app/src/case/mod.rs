@@ -77,7 +77,7 @@ fn items_in_library(kind: &str) -> Vec<(&'static str, &'static Item)> {
         .filter_map(|e| lib.lectures.get(&e.id))
         .flat_map(|l| l.items.iter().map(move |i| (lib.title(&l.lecture), i)));
     #[cfg(test)]
-    let all = all.chain(tests::extra());
+    let all = all.filter(|_| !tests::bundled_hidden()).chain(tests::extra());
     all.filter(|(_, i)| i.body.kind() == kind && i.status != Status::Rejected).collect()
 }
 

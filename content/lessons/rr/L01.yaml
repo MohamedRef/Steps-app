@@ -1,0 +1,1181 @@
+schema: steps.lesson/v1
+lecture: rr.L01
+lessons:
+  - id: rr.L01.lesson1
+    title: "الـ Rapid Review: الآلية ورا كل مرض (Biochemistry)"
+    hook: "جدول واحد فيه سبب كل مرض. لو فهمت السهم، مش هتحتاج تحفظ السطر"
+    minutes: 9
+    pages: [707, 709]
+    topics: [biochemistry]
+    goals:
+      - "تعرف الجداول دي معمولة لإيه وتستخدمها إزاي قبل الامتحان"
+      - "تفهم ليه Becker أخف من Duchenne، وليه Prader-Willi عكس Angelman"
+      - "تفرّق بين hereditary fructose intolerance و essential fructosuria، وتفهم الـ sorbitol في الـ DM"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الجدول ده بتاع إيه؟"
+        text: |-
+          آخر جزء في First Aid اسمه **Rapid Review**: جداول بتلم أهم الأمراض مع ==الآلية== (mechanism) والعلامات والـ associations.
+
+          أول جدول هو **Pathophysiology of important diseases**: عمود فيه المرض (Condition)، وعمود فيه السلسلة اللي بتوصّل للمرض (Mechanism)، وعمود **Page** بيرجّعك للصفحة اللي فيها الشرح الكامل.
+
+          الـ Step 1 بيحب يسأل **خطوة بعد التشخيص**: عرفت إنه Lesch-Nyhan؟ طب الـ enzyme إيه وإيه اللي بيعلى؟ الجدول ده هو الخطوة دي بالظبط.
+        page: 707
+        quote: "The following tables represent a collection of high-yield information about diseases and their pathophysiological mechanisms, clinical findings, and key associations."
+      - kind: aside
+        tone: tip
+        text: "اقرا كل سطر كـ **سلسلة أسهم**: سبب ← خلل ← نتيجة. الجداول دي بتلم الـ high-yield diseases مع الـ pathophysiological mechanisms والـ clinical findings والـ key associations. لو حفظت أول حلقة (الـ gene أو الـ enzyme) وفهمت ليه كل سهم بيجيب اللي بعده، السطر كله هيفضل في دماغك."
+        page: 707
+        quote: "The following tables represent a collection of high-yield information about diseases and their pathophysiological mechanisms"
+      - kind: explain
+        title: "الـ dystrophin: الـ reading frame هو الفرق"
+        text: |-
+          - **Duchenne**: ==frameshift== أو nonsense mutation ← الـ dystrophin بيضيع خالص، وده البروتين اللي بيربط العضلة بالـ ECM ← myonecrosis.
+          - **Becker**: deletion من غير frameshift ← بروتين ==partially functional== ← المرض أخف.
+
+          الـ trinucleotide repeats كمان هنا: **Myotonic dystrophy** = CTG في الـ DMPK ← myotonia، و **Fragile X** = CGG في الـ FMR1 ← hypermethylation ← الـ expression بيقل.
+        page: 708
+        quote: "Non-frameshift deletion of dystrophin gene → partially functional protein → less severe than Duchenne"
+      - kind: reveal
+        prompt: "ليه الـ deletion اللي ما بيعملش frameshift بيدي مرض أخف، مع إنه بيشيل حتة من الـ gene؟"
+        answer: "الـ ribosome بيقرا الـ codons تلاتة تلاتة. الـ frameshift بيبوّظ كل القراية بعده، فالبروتين يضيع. لكن الـ deletion اللي مضروب في 3 بيشيل كام amino acid بس والباقي يتقري صح، فيطلع **dystrophin أقصر بس شغال جزئياً** ← Becker."
+        page: 708
+        quote: "Dystrophin gene frameshift or nonsense mutations → loss of anchoring protein to ECM (dystrophin) → myonecrosis"
+      - kind: table
+        title: "Imprinting على chromosome 15"
+        columns: ["Syndrome", "Uniparental disomy", "Allele lost"]
+        rows:
+          - ["Prader-Willi", "Maternal (25%)", "Paternal allele"]
+          - ["Angelman", "Paternal (5%)", "UBE3A on maternal chromosome"]
+        hide: [[0, 2], [1, 2]]
+        page: 708
+        quote: "Imprinting or maternal uniparental disomy (25%) → deletion or mutated expression of paternal allele on chromosome 15"
+      - kind: aside
+        tone: tip
+        text: "الـ disomy دايماً من **عكس** الأب أو الأم اللي نسخته ضاعت: لو الاتنين جايين من الأم (maternal disomy) يبقى نسخة الأب مش موجودة ← ==Prader-Willi==. لو الاتنين من الأب ← نسخة الأم (UBE3A) ضاعت ← Angelman."
+        page: 708
+        quote: "Imprinting or paternal uniparental disomy (5%) → deletion or mutated expression of UBE3A on maternal chromosome 15"
+      - kind: explain
+        title: "الـ collagen: 4 أمراض في سطور ورا بعض"
+        text: |-
+          - **Osteogenesis imperfecta**: COL1A1 و COL1A2 ← type 1 collagen ما يعرفش يعمل ==triple helix==.
+          - **Ehlers-Danlos**: collagen synthesis غلط ← جلد بيتمط، مفاصل hypermobile، كدمات بسهولة.
+          - **Menkes**: ATP7A بايظ ← النحاس ما بيتمتصش ← الـ ==lysyl oxidase== (محتاج copper) يقل ← cross-linking يقل.
+          - **Marfan**: FBN1 على chromosome 15 ← fibrillin-1 بايظ ← aortic root dilation و aneurysm و dissection.
+        page: 708
+        quote: "Defective ATP7A protein → impaired copper absorption and transport → ↓ lysyl oxidase activity → ↓ collagen cross-linking"
+      - kind: check
+        question: "A 3-month-old boy has sparse, brittle, kinky hair, hypotonia and seizures. Serum copper is low. Which enzyme's reduced activity explains his weak connective tissue?"
+        options:
+          - "Lysyl oxidase"
+          - "HGPRT"
+          - "Aldolase B"
+          - "Fructokinase"
+        answer: 0
+        why:
+          - "صح: ATP7A بايظ ← copper قليل ← lysyl oxidase (بيحتاج copper) يقل ← collagen cross-linking يقل."
+          - "HGPRT ده Lesch-Nyhan: purine salvage و uric acid، مالوش دعوة بالـ collagen."
+          - "Aldolase B ده hereditary fructose intolerance."
+          - "Fructokinase ده essential fructosuria، مرض benign."
+        page: 708
+        quote: "Menkes disease Defective ATP7A protein → impaired copper absorption and transport"
+      - kind: explain
+        title: "الفيتامينات والـ metabolism"
+        text: |-
+          - **Wernicke**: thiamine ناقص ← الجلوكوز ما بيتكسرش ← ATP يخلص. لو اديت ==glucose== قبل الـ thiamine، الخلية تحاول تحرق أكتر وهي مش قادرة فالـ ATP يقع أكتر.
+          - **Pellagra في carcinoid**: الورم بيسحب الـ tryptophan يعمل serotonin، والـ B3 أصلاً بيتعمل من tryptophan ← B3 deficiency.
+          - **Kwashiorkor**: بروتين قليل ← oncotic pressure يقل (edema) و apolipoprotein يقل (fatty liver).
+          - **Bitot spots**: vitamin A ناقص ← squamous metaplasia في الـ conjunctiva ← keratin.
+          - **Aspirin**: بيخرّم الـ inner mitochondrial membrane ← الـ proton gradient يضيع (==uncoupling==) ← الطاقة تطلع حرارة.
+        page: 708
+        quote: "Tryptophan is diverted towards serotonin synthesis by tumor → B3 deficiency"
+      - kind: figure
+        title: "الـ fructose: enzyme ناقص ولا enzyme تاني شغال؟"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rr1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="130" y="10" width="100" height="30" rx="8"/>
+            <text x="157" y="30" class="t-sm t-b">Fructose</text>
+            <line class="fg-arrow" x1="150" y1="40" x2="80" y2="80" marker-end="url(#rr1a)"/>
+            <text x="40" y="60" class="t-sm">fructokinase</text>
+            <line class="fg-arrow" x1="210" y1="40" x2="280" y2="80" marker-end="url(#rr1a)"/>
+            <text x="250" y="60" class="t-sm">hexokinase</text>
+            <rect class="fg-bad" x="10" y="82" width="150" height="30" rx="8"/>
+            <text x="20" y="102" class="t-sm">Fructose-1-phosphate</text>
+            <rect class="fg-good" x="210" y="82" width="140" height="30" rx="8"/>
+            <text x="218" y="102" class="t-sm">Fructose-6-phosphate</text>
+            <text x="20" y="132" class="t-sm t-bad">Aldolase B missing:</text>
+            <text x="20" y="150" class="t-sm t-bad">F-1-P traps phosphate</text>
+            <text x="20" y="168" class="t-sm t-bad">→ no glycogenolysis or</text>
+            <text x="20" y="184" class="t-sm t-bad">gluconeogenesis</text>
+            <text x="212" y="132" class="t-sm t-good">Fructokinase missing:</text>
+            <text x="212" y="150" class="t-sm t-good">fructose rises, goes</text>
+            <text x="212" y="168" class="t-sm t-good">the hexokinase way</text>
+            <text x="212" y="184" class="t-sm t-good">→ benign</text>
+          </svg>
+        caption: "لو الـ aldolase B ناقص، الـ fructose-1-phosphate بيتراكم ويحبس الـ phosphate، فالكبد ما يقدرش يطلع جلوكوز ← hypoglycemia. لو الـ fructokinase هو اللي ناقص، الـ hexokinase بياخد الـ fructose طريق تاني ومافيش مشكلة."
+        alt: "Fructose at the top with two arrows. Left: fructokinase makes fructose-1-phosphate, which accumulates when aldolase B is missing and traps phosphate, stopping glycogenolysis and gluconeogenesis. Right: hexokinase makes fructose-6-phosphate, the benign route in essential fructosuria."
+        page: 708
+        quote: "Aldolase B deficiency → Fructose-1-phosphate accumulation → ↓ available phosphate → inhibition of glycogenolysis and gluconeogenesis"
+      - kind: explain
+        title: "الـ galactose والـ sorbitol"
+        text: |-
+          - **Essential fructosuria**: fructokinase ناقص ← الـ hexokinase بيحوّل الـ fructose لـ fructose-6-phosphate.
+          - **Classic galactosemia**: galactose-1-phosphate uridyltransferase ناقص ← مواد سامة بتتراكم (galactitol في العدسة ← cataracts).
+          - **Galactokinase deficiency**: الـ galactose يعلى والـ aldose reductase يحوله galactitol.
+          - **DM**: الجلوكوز الزيادة ← sorbitol (aldose reductase). العدسة والـ retina والكلية والـ Schwann cells ==ما عندهاش sorbitol dehydrogenase== ← الـ sorbitol يتحبس جوه الخلية ← osmotic damage.
+        page: 709
+        quote: "Excess glucose → sorbitol (via aldose reductase) and sorbitol → fructose (via sorbitol dehydrogenase); lens, retina, kidney, and Schwann cells lack sorbitol dehydrogenase"
+      - kind: check
+        question: "A 55-year-old man with poorly controlled diabetes has burning feet and cataracts. Why does sorbitol accumulate in his Schwann cells and lens?"
+        options:
+          - "These cells lack sorbitol dehydrogenase"
+          - "These cells lack aldose reductase"
+          - "These cells lack galactokinase"
+          - "These cells lack hexokinase"
+        answer: 0
+        why:
+          - "صح: aldose reductase بيعمل sorbitol، ومافيش sorbitol dehydrogenase يكمّله لـ fructose ← يتحبس ← osmotic damage."
+          - "لو مافيش aldose reductase ما كانش هيتعمل sorbitol أصلاً."
+          - "Galactokinase مالوش دعوة بالجلوكوز."
+          - "Hexokinase موجود ومش هو اللي بيعمل الـ sorbitol."
+        page: 709
+        quote: "Excess glucose → sorbitol (via aldose reductase) and sorbitol → fructose (via sorbitol dehydrogenase)"
+      - kind: try
+        items: [rr.L01.011, rr.L01.006, rr.L01.017, rr.L01.020, rr.L01.025]
+    recap:
+      - "الجدول = سلسلة أسهم: gene أو enzyme ← خلل ← مرض. عمود Page بيرجعك للشرح."
+      - "Duchenne = frameshift؛ Becker = من غير frameshift فأخف."
+      - "Maternal disomy ← Prader-Willi؛ paternal disomy ← Angelman."
+      - "Aldolase B ناقص ← phosphate محبوس ← hypoglycemia. Fructokinase ناقص ← benign."
+      - "Lens و retina والكلية و Schwann cells ما عندهاش sorbitol dehydrogenase."
+    practice: [rr.L01.001, rr.L01.002, rr.L01.003, rr.L01.004, rr.L01.005, rr.L01.006, rr.L01.007, rr.L01.008, rr.L01.009, rr.L01.010, rr.L01.011, rr.L01.012, rr.L01.013, rr.L01.014, rr.L01.015, rr.L01.016, rr.L01.017, rr.L01.018, rr.L01.019, rr.L01.020, rr.L01.021, rr.L01.022, rr.L01.023, rr.L01.024, rr.L01.025]
+
+  - id: rr.L01.lesson2
+    title: "المناعة: complement و hypersensitivity و immunodeficiency"
+    hook: "كل immunodeficiency بتقولك هي ناقصها إيه من نوع العدوى اللي بتجيلها"
+    minutes: 9
+    pages: [709, 709]
+    topics: [immunology]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ complement: 3 أمراض من نفس المكان"
+        text: |-
+          - **Terminal complement deficiency** (C5–C9): الـ ==MAC== ما بيتكونش. الـ MAC هو اللي بيخرّم البكتيريا اللي غشاها رفيع زي **Neisseria** ← bacteremia بتتكرر.
+          - **Hereditary angioedema**: C1 inhibitor ناقص ← الـ kallikrein شغال من غير فرامل ← ==bradykinin== يعلى ← تورم.
+          - **PNH**: PIGA mutation ← الـ GPI anchors قليلة، فـ DAF/CD55 و MIRL/CD59 (اللي بيحموا الـ RBC من الـ complement) ما بيتثبتوش ← intravascular hemolysis ← haptoglobin يقل.
+        page: 709
+        quote: "PIGA gene mutation → ↓ GPI anchors for complement inhibitors (DAF/ CD55, MIRL/CD59) → complement-mediated intravascular hemolysis → ↓ haptoglobin"
+      - kind: reveal
+        prompt: "ليه الـ haptoglobin بيقل في الـ PNH؟"
+        answer: "الـ hemolysis هنا **intravascular**: الـ RBC بتنفجر جوه الأوعية فالـ hemoglobin يطلع حر في البلازما، والـ haptoglobin بيمسكه ويتشال معاه ← مستواه يقع."
+        page: 709
+        quote: "complement-mediated intravascular hemolysis → ↓ haptoglobin"
+      - kind: figure
+        title: "الـ hypersensitivity: 4 أنواع"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="10" y="10" width="165" height="85" rx="8"/>
+            <text x="20" y="30" class="t-b">Type I</text>
+            <text x="20" y="50" class="t-sm">IgE on mast cells</text>
+            <text x="20" y="68" class="t-sm">→ histamine, tryptase,</text>
+            <text x="20" y="86" class="t-sm">leukotrienes (minutes)</text>
+            <rect class="fg-bad" x="185" y="10" width="165" height="85" rx="8"/>
+            <text x="195" y="30" class="t-b">Type II</text>
+            <text x="195" y="50" class="t-sm">Antibody on cell surface</text>
+            <text x="195" y="68" class="t-sm">or ECM → destruction,</text>
+            <text x="195" y="86" class="t-sm">dysfunction</text>
+            <rect class="fg-good" x="10" y="105" width="165" height="85" rx="8"/>
+            <text x="20" y="125" class="t-b">Type III</text>
+            <text x="20" y="145" class="t-sm">Immune complexes</text>
+            <text x="20" y="163" class="t-sm">→ complement →</text>
+            <text x="20" y="181" class="t-sm">neutrophils, enzymes</text>
+            <rect class="fg-box" x="185" y="105" width="165" height="85" rx="8"/>
+            <text x="195" y="125" class="t-b">Type IV</text>
+            <text x="195" y="145" class="t-sm">T cells, no antibody</text>
+            <text x="195" y="163" class="t-sm">CD4+ → cytokines</text>
+            <text x="195" y="181" class="t-sm">CD8+ → kill cells</text>
+          </svg>
+        caption: "الـ 3 الأوائل فيهم antibodies: IgE على الـ mast cell، أو antibody على سطح الخلية، أو immune complex بيترسب. الرابع بس هو اللي T cells من غير antibodies."
+        alt: "Four boxes. Type I: IgE on mast cells releases histamine, tryptase and leukotrienes within minutes. Type II: antibody binds a cell surface or ECM antigen. Type III: immune complexes activate complement, neutrophils release enzymes. Type IV: T cells without antibody; CD4+ release cytokines, CD8+ kill cells."
+        page: 709
+        quote: "Type III hypersensitivity Antigen-antibody complexes activate complement → attract neutrophils → release of lysosomal enzymes"
+      - kind: explain
+        title: "الـ Type I ليه مرحلتين؟"
+        text: |-
+          في **الدقايق الأولى**: الـ antigen بيربط الـ IgE اللي على الـ mast cell ← degranulation ← histamine و tryptase و leukotrienes.
+
+          بعد **ساعات**: الـ mast cells بتفرز chemokines تنده خلايا التهاب تانية ← ==late phase== من inflammation و tissue damage. وده سبب إن الأعراض ممكن ترجع بعد ما تهدى.
+        page: 709
+        quote: "Late (hours): mast cells secrete chemokines (attract inflammatory cells and other mediators) → inflammation, tissue damage"
+      - kind: sort
+        prompt: "حط كل حالة تحت نوع الـ hypersensitivity بتاعها (حسب الجدول)"
+        bins: ["Type II", "Type IV"]
+        cards:
+          - { text: "Acute hemolytic transfusion reaction", bin: 0 }
+          - { text: "Graft-versus-host disease", bin: 1 }
+          - { text: "Rheumatic fever", bin: 0 }
+          - { text: "Allergic contact dermatitis", bin: 1 }
+          - { text: "Pemphigus vulgaris", bin: 0 }
+        why: "الـ Type II فيه antibody على antigen على الخلية (ABO على الـ RBC، M protein، desmoglein). الـ GVHD والـ contact dermatitis T cells من غير antibody (Type IV)."
+        page: 709
+        quote: "Acute hemolytic transfusion reaction Type II hypersensitivity reaction against donor RBCs (usually ABO antigens)"
+      - kind: explain
+        title: "الـ immunodeficiencies: كل واحد ناقصه حاجة"
+        text: |-
+          - **Bruton (X-linked)**: BTK بايظ ← الـ B cells ما بتنضجش ← مافيش B cells في الدم و ==كل الـ Ig قليلة==.
+          - **DiGeorge**: 22q11 microdeletion ← الـ pouches 3 و 4 ما بتتكونش ← مافيش thymus ولا parathyroid.
+          - **Hyper-IgM**: CD40L على الـ Th cells بايظ ← ==class switching== ما بيحصلش ← IgM بس.
+          - **LAD type 1**: LFA-1 integrin (CD18) ← الـ phagocytes مش عارفة تطلع من الأوعية.
+          - **Chédiak-Higashi**: LYST ← microtubules بايظة ← الـ phagosome ما يلتحمش بالـ lysosome.
+        page: 709
+        quote: "Hyper-IgM syndrome Defective CD40L on Th cells → class switching defect"
+      - kind: explain
+        title: "الـ CGD: ليه الـ catalase ⊕ بالذات؟"
+        text: |-
+          في الـ **CGD** الـ NADPH oxidase بايظ ← مافيش ROS ولا respiratory burst في الـ neutrophils.
+
+          بس الـ neutrophil لسه يقدر يستعمل الـ hydrogen peroxide اللي **البكتيريا نفسها** بتعمله، ويحوله بالـ myeloperoxidase system لمواد بتقتل. البكتيريا ==catalase ⊕== (S aureus، Serratia، B cepacia) بتكسر الـ peroxide بتاعها قبل ما الخلية تستعمله ← هي دي اللي بتعدي.
+        page: 709
+        quote: "Catalase ⊕ organisms degrade H2O2 before it can be converted to microbicidal products by the myeloperoxidase system"
+      - kind: check
+        question: "A 2-year-old boy has had recurrent S aureus abscesses and Serratia pneumonia. Which defect is most likely?"
+        options:
+          - "NADPH oxidase"
+          - "CD40L"
+          - "LFA-1 integrin (CD18)"
+          - "BTK"
+          - "C5–C9"
+        answer: 0
+        why:
+          - "صح: CGD ← مافيش respiratory burst، فالـ catalase ⊕ organisms بتعدي."
+          - "Hyper-IgM: مشكلة class switching، مش catalase ⊕ بالذات."
+          - "LAD: الـ phagocytes ما بتوصلش، والعدوى من غير صديد."
+          - "Bruton: عدوى بكتيريا encapsulated مع مافيش B cells."
+          - "Terminal complement: Neisseria بتتكرر."
+        page: 709
+        quote: "NADPH oxidase defect → ↓ ROS, ↓ respiratory burst in neutrophils → ↑ susceptibility to catalase ⊕ organisms"
+      - kind: aside
+        tone: exam
+        text: "**Candida** في الـ immunodeficiency: لو الـ granulocytes قليلة ← ==systemic== Candida. لو الـ T cells قليلة ← Candida local (mucocutaneous). والـ **GVHD** = Type IV: HLA mismatch ← الـ T cells بتاعة المتبرع بتهاجم الجسم."
+        page: 709
+        quote: "granulocytes (systemic), ↓ T cells (local)"
+      - kind: try
+        items: [rr.L01.026, rr.L01.027, rr.L01.035, rr.L01.040, rr.L01.043]
+    recap:
+      - "C5–C9 ← Neisseria. C1 inhibitor ← bradykinin. PIGA ← CD55/CD59 ← hemolysis."
+      - "Types I–III فيهم antibodies؛ Type IV بس T cells."
+      - "BTK ← مافيش B cells. CD40L ← مافيش class switching. CD18 ← الـ phagocytes ما بتهاجرش."
+      - "CGD = NADPH oxidase ← catalase ⊕ organisms."
+    practice: [rr.L01.026, rr.L01.027, rr.L01.028, rr.L01.029, rr.L01.030, rr.L01.031, rr.L01.032, rr.L01.033, rr.L01.034, rr.L01.035, rr.L01.036, rr.L01.037, rr.L01.038, rr.L01.039, rr.L01.040, rr.L01.041, rr.L01.042, rr.L01.043]
+
+  - id: rr.L01.lesson3
+    title: "الميكروبات بتأذي إزاي؟ toxins و virulence و الـ cancer"
+    hook: "toxin واحد بيقطع الـ SNARE يعمل شلل مرتخي، وتاني بيقطعه يعمل تشنج. الفرق في مكانه"
+    minutes: 9
+    pages: [710, 710]
+    topics: [microbiology, pathology]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "نفس المقص، نتيجة عكسية"
+        text: |-
+          الاتنين **proteases** بتقطع الـ ==SNARE== (البروتين اللي بيخلي الـ vesicle تلزق في الغشاء وتفرّغ الـ neurotransmitter):
+
+          - **Botulism**: بيقطع الـ SNARE عند الـ NMJ ← ACh مش بيطلع ← ==شلل مرتخي==.
+          - **Tetanus**: tetanospasmin بيقطع الـ SNARE في الـ **Renshaw cells** ← GABA و glycine (الفرامل) مش بيطلعوا ← الـ motor neurons شغالة من غير فرامل ← تشنج.
+        page: 710
+        quote: "Tetanospasmin cleaves SNARE → inhibition of release of inhibitory neurotransmitters (GABA and glycine) from Renshaw cells"
+      - kind: figure
+        title: "botulinum ولا tetanospasmin؟"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rr3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="10" width="160" height="150" rx="10"/>
+            <text x="20" y="32" class="t-b">Botulinum toxin</text>
+            <text x="20" y="55" class="t-sm">Site: NMJ</text>
+            <text x="20" y="75" class="t-sm">Cleaves SNARE</text>
+            <line class="fg-arrow-bad" x1="40" y1="85" x2="40" y2="105" marker-end="url(#rr3a)"/>
+            <text x="20" y="122" class="t-sm t-bad">↓ ACh release</text>
+            <text x="20" y="145" class="t-sm t-bad t-b">Flaccid paralysis</text>
+            <rect class="fg-box" x="190" y="10" width="160" height="150" rx="10"/>
+            <text x="200" y="32" class="t-b">Tetanospasmin</text>
+            <text x="200" y="55" class="t-sm">Site: Renshaw cells</text>
+            <text x="200" y="75" class="t-sm">Cleaves SNARE</text>
+            <line class="fg-arrow-bad" x1="220" y1="85" x2="220" y2="105" marker-end="url(#rr3a)"/>
+            <text x="200" y="122" class="t-sm t-bad">↓ GABA, glycine</text>
+            <text x="200" y="145" class="t-sm t-bad t-b">Spastic paralysis</text>
+          </svg>
+        caption: "نفس الآلية (قطع الـ SNARE)، بس مكان الشغل بيحدد النتيجة: عند الـ NMJ ← مافيش ACh ← ارتخاء. في الـ Renshaw cells ← مافيش فرامل ← تشنج."
+        alt: "Two columns. Botulinum toxin cleaves SNARE at the neuromuscular junction, decreasing ACh release and causing flaccid paralysis. Tetanospasmin cleaves SNARE in Renshaw cells, decreasing GABA and glycine release and causing spastic paralysis."
+        page: 710
+        quote: "Botulism Toxin (protease) cleaves SNARE → ↓ neurotransmitter (ACh) release at NMJ"
+      - kind: explain
+        title: "toxins تانية في نفس الصفحة"
+        text: |-
+          - **HUS**: Shiga/Shiga-like toxins بتعطّل الـ ==60S ribosome== ← cytokines تعلى.
+          - **Diphtheria**: ADP-ribosylation للـ ==EF-2== ← protein synthesis يقف.
+          - **Gas gangrene**: alpha toxin بيكسر الـ phospholipids ← myonecrosis و crepitus.
+          - **C difficile**: toxins A و B بيأذوا الـ enterocytes ← watery diarrhea.
+          - **TSS و scarlet fever**: TSST-1 و erythrogenic exotoxin A بيربطوا الـ TCR بالـ MHC II **برا** مكان الـ antigen (superantigen) ← IL-1 و IL-2 و IFN-γ و TNF-α تعلى جداً.
+          - **Gram ⊝ shock و DIC**: lipid A بتاع الـ LPS ← macrophages (TLR4/CD14) و complement و tissue factor.
+        page: 710
+        quote: "TSST-1 and erythrogenic exotoxin A cross-link β region of TCR to MHC class II on APCs outside of antigen binding site"
+      - kind: check
+        question: "A 30-year-old woman develops fever, hypotension and a diffuse red rash while using a tampon. How does the toxin cause such a massive cytokine release?"
+        options:
+          - "It links the TCR β region to MHC class II outside the antigen-binding site"
+          - "It ADP-ribosylates EF-2"
+          - "It inactivates the 60S ribosome"
+          - "It degrades phospholipids"
+        answer: 0
+        why:
+          - "صح: TSST-1 superantigen بيشغّل T cells كتير مرة واحدة ← IL-1 و IL-2 و IFN-γ و TNF-α."
+          - "ده diphtheria toxin."
+          - "ده Shiga toxin (HUS)."
+          - "ده alpha toxin (gas gangrene)."
+        page: 710
+        quote: "TSST-1 and erythrogenic exotoxin A cross-link β region of TCR to MHC class II on APCs outside of antigen binding site"
+      - kind: explain
+        title: "الـ virulence: البكتيريا بتلزق وتستخبى إزاي"
+        text: |-
+          - **Biofilm**: S epidermidis على الأجهزة الصناعية، و S sanguinis بيعمل dextrans ← fibrin-platelet aggregates على الصمامات البايظة.
+          - **M tuberculosis**: cord factor بيشغّل الـ macrophages (granuloma) و TNF-α، والـ sulfatides بتمنع الـ phagolysosomal fusion.
+          - **Leprosy**: ==Th1== ← tuberculoid خفيف؛ ==Th2== ← lepromatous ممكن يموّت.
+          - **E coli**: fimbriae (P pili) ← cystitis و pyelonephritis؛ K capsule ← pneumonia و neonatal meningitis.
+          - **N gonorrhoeae**: antigenic variation في الـ pilus ← مافيش vaccine.
+          - **Chlamydiae**: الـ peptidoglycan ناقص (muramic acid قليل) ← الـ β-lactams ما بتشتغلش.
+        page: 710
+        quote: "Cord factor activates macrophages (promoting granuloma formation), induces release of TNF-α; sulfatides (surface glycolipids) inhibit phagolysosomal fusion"
+      - kind: match
+        prompt: "وصّل كل حاجة بالآلية بتاعتها"
+        pairs:
+          - ["Influenza pandemic", "RNA segment reassortment (antigenic shift)"]
+          - ["Influenza epidemic", "Hemagglutinin/neuraminidase mutations (antigenic drift)"]
+          - ["Rabies reaching the CNS", "Retrograde transport by dynein"]
+          - ["Early HIV infection", "CD4 with CCR5 on macrophages"]
+          - ["Late HIV infection", "CD4 with CXCR4 on T cells"]
+        why: "**shift** = تغيير كبير (genes كاملة بتتبادل) ← pandemic. **drift** = mutations صغيرة ← epidemics كل سنة."
+        page: 710
+        quote: "Influenza pandemics RNA segment reassortment → antigenic shift"
+      - kind: explain
+        title: "الـ granuloma والـ cancer"
+        text: |-
+          **Granuloma**: الـ macrophage بيقدّم الـ antigen للـ CD4+ ويفرز ==IL-12== ← CD4+ يبقى Th1 ← IFN-γ ← الـ macrophage يتشغّل أكتر. دايرة بتقوّي نفسها.
+
+          **الـ cancer**:
+          - تكرار من غير حدود: ==telomerase== بيرجع يشتغل ← الـ telomeres ما بتقصرش.
+          - الغزو: E-cadherin يقل ← الخلايا تفك من بعض ← metalloproteinases تكسر الـ basement membrane والـ ECM ← تلزق في laminin و fibronectin ← تتحرك ← تنتشر في الأوعية.
+        page: 710
+        quote: "Macrophages present antigens to CD4+ and secrete IL-12 → CD4+ differentiation into Th1 → IFN-γ secretion → macrophage activation"
+      - kind: reveal
+        prompt: "ليه الـ E-cadherin لازم يقل الأول قبل أي حاجة في الغزو؟"
+        answer: "الـ E-cadherin هو اللي ماسك الخلايا في بعض (intercellular junctions). طول ما الخلية ماسكة في جيرانها مش هتعرف تمشي، فأول خطوة إنها ==تفك==، وبعدها تكسر الـ basement membrane وتمشي."
+        page: 710
+        quote: "E-cadherin function → ↓ intercellular junctions → basement membrane and ECM degradation by metalloproteinases"
+      - kind: try
+        items: [rr.L01.045, rr.L01.049, rr.L01.054, rr.L01.062, rr.L01.066]
+    recap:
+      - "Botulinum: SNARE عند الـ NMJ ← ارتخاء. Tetanospasmin: SNARE في Renshaw ← تشنج."
+      - "Diphtheria = EF-2. Shiga = 60S. TSST-1 = superantigen."
+      - "Tuberculoid = Th1 خفيف؛ lepromatous = Th2 خطير."
+      - "Shift = reassortment = pandemic؛ drift = mutations = epidemic."
+      - "Granuloma: IL-12 ← Th1 ← IFN-γ. Cancer: telomerase، و E-cadherin يقل عشان يغزو."
+    practice: [rr.L01.044, rr.L01.045, rr.L01.046, rr.L01.047, rr.L01.048, rr.L01.049, rr.L01.050, rr.L01.051, rr.L01.052, rr.L01.053, rr.L01.054, rr.L01.055, rr.L01.056, rr.L01.057, rr.L01.058, rr.L01.059, rr.L01.060, rr.L01.061, rr.L01.062, rr.L01.063, rr.L01.064, rr.L01.065, rr.L01.066, rr.L01.067, rr.L01.068, rr.L01.069]
+
+  - id: rr.L01.lesson4
+    title: "القلب: من الـ septum للـ shock"
+    hook: "بعد الـ MI، اليوم اللي المريض فيه بيقولك إيه اللي اتقطع"
+    minutes: 9
+    pages: [711, 711]
+    topics: [cardiovascular]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ aorticopulmonary septum: اتعمل؟ لفّ؟"
+        text: |-
+          - ما اتكوّنش خالص ← ==persistent truncus arteriosus==.
+          - اتكوّن بس ما لفّش (spiral) ← ==D-transposition== of great arteries.
+
+          **Tet spells**: البكا أو السخونية أو المجهود ← الـ RV outflow obstruction يزيد ← دم أكتر يعدي right-to-left من الـ VSD ← الطفل يزرق.
+
+          **Eisenmenger**: left-to-right shunt ما اتصلحش ← دم كتير للرئة ← الأوعية تتغير ← pulmonary hypertension ← RVH ← الـ shunt يقلب right-to-left.
+        page: 711
+        quote: "Uncorrected left-to-right shunt → ↑ pulmonary blood flow → remodeling of vasculature → pulmonary hypertension → RVH → right-to-left shunting"
+      - kind: order
+        prompt: "رتّب خطوات الـ atherosclerosis"
+        steps:
+          - "Endothelial cell dysfunction"
+          - "Macrophage and LDL accumulation"
+          - "Foam cell formation"
+          - "Fatty streaks"
+          - "Smooth muscle cell migration, ECM deposition"
+          - "Fibrous plaque"
+          - "Complex atheromas"
+        why: "البطانة لازم تتأذى الأول عشان الـ LDL والـ macrophages يدخلوا. الـ macrophage اللي يبلع LDL يبقى foam cell، ودول يعملوا fatty streak، وبعدها العضلات الملسا تيجي تغطيها فتبقى plaque."
+        page: 711
+        quote: "Endothelial cell dysfunction → macrophage and LDL accumulation → foam cell formation → fatty streaks → smooth muscle cell migration, ECM deposition → fibrous plaque → complex atheromas"
+      - kind: explain
+        title: "الـ MI وموت المريض بعده"
+        text: |-
+          الـ **MI**: plaque في الـ coronary بتتفتح ← thrombosis حاد. الـ **NSTEMI** = subendocardial، والـ **STEMI** = ==transmural==.
+
+          - أول **24 ساعة**: الموت غالباً من ==ventricular arrhythmia==.
+          - من **3 لـ 14 يوم**: الـ macrophages بتنضّف العضلة الميتة فالحيطة تبقى طرية ← ruptures.
+        page: 711
+        quote: "Macrophage-mediated ruptures: papillary muscle (2–7 days), interventricular septum (3–5 days), free wall (5–14 days)"
+      - kind: figure
+        title: "post-MI ruptures على خط الزمن"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="20" y1="140" x2="340" y2="140"/>
+            <text x="16" y="160" class="t-sm t-mut">0</text>
+            <text x="58" y="160" class="t-sm t-mut">2</text>
+            <text x="78" y="160" class="t-sm t-mut">3</text>
+            <text x="118" y="160" class="t-sm t-mut">5</text>
+            <text x="158" y="160" class="t-sm t-mut">7</text>
+            <text x="296" y="160" class="t-sm t-mut">14 days</text>
+            <rect class="fg-bad" x="20" y="20" width="20" height="110" rx="4"/>
+            <text x="44" y="32" class="t-sm t-bad">0–24 h: ventricular arrhythmia</text>
+            <rect class="fg-acc" x="60" y="50" width="100" height="22" rx="4"/>
+            <text x="166" y="66" class="t-sm">Papillary muscle (2–7)</text>
+            <rect class="fg-acc" x="80" y="78" width="40" height="22" rx="4"/>
+            <text x="166" y="94" class="t-sm">IV septum (3–5)</text>
+            <rect class="fg-acc" x="120" y="106" width="200" height="22" rx="4"/>
+            <text x="166" y="122" class="t-sm">Free wall (5–14)</text>
+          </svg>
+        caption: "أول يوم: arrhythmia. بعدها الـ macrophages بتلين الحيطة: الـ papillary muscle من يوم 2 لـ 7، الـ septum من 3 لـ 5، والـ free wall من 5 لـ 14."
+        alt: "Timeline from day 0 to 14 after MI. Ventricular arrhythmia in the first 24 hours. Bars for papillary muscle rupture days 2 to 7, interventricular septum rupture days 3 to 5, and free wall rupture days 5 to 14."
+        page: 711
+        quote: "Death within 0-24 hours post-MI Ventricular arrhythmia"
+      - kind: check
+        question: "Four days after an MI, a 60-year-old man suddenly develops acute pulmonary edema and a new holosystolic murmur at the apex. What most likely happened?"
+        options:
+          - "Papillary muscle rupture"
+          - "Free wall rupture"
+          - "Ventricular arrhythmia"
+          - "New plaque rupture"
+        answer: 0
+        why:
+          - "صح: يوم 2–7 ← papillary muscle ← mitral regurgitation حادة."
+          - "الـ free wall بيتقطع من يوم 5 لـ 14، وبيعمل tamponade مش murmur."
+          - "الـ arrhythmia هي موت أول 24 ساعة."
+          - "مش هيعمل murmur جديد بالشكل ده."
+        page: 711
+        quote: "Macrophage-mediated ruptures: papillary muscle (2–7 days)"
+      - kind: explain
+        title: "WPW و HOCM"
+        text: |-
+          **WPW**: مسار إضافي من الـ atria للـ ventricle بيعدّي الـ AV node ← الـ ventricle يبدأ يـ depolarize بدري ← ==delta wave==. ولو عمل reentrant circuit ← SVT.
+
+          **HOCM**: mutation في بروتين الـ sarcomere ← asymmetric septal hypertrophy (sarcomeres in parallel)؛ الموت من arrhythmia. والـ syncope والـ dyspnea من الـ outflow obstruction: الـ septum التخين مع ==systolic anterior motion== للـ mitral valve.
+        page: 711
+        quote: "Asymmetric septal hypertrophy, systolic anterior motion of mitral valve → outflow obstruction"
+      - kind: table
+        title: "أنواع الـ shock"
+        columns: ["Shock", "Mechanism"]
+        rows:
+          - ["Hypovolemic", "↓ preload → ↓ SV → ↓ CO"]
+          - ["Cardiogenic", "↓ CO from left heart dysfunction"]
+          - ["Obstructive", "↓ CO from blockage outside the heart"]
+          - ["Distributive", "↓ systemic vascular resistance (afterload)"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+        page: 711
+        quote: "Obstructive shock ↓ CO due to blockage of vessels/structures outside the heart"
+      - kind: aside
+        tone: analogy
+        text: "الـ shock زي مضخة مية: يا إما **المية خلصت** (hypovolemic)، يا **المضخة بايظة** (cardiogenic)، يا **الماسورة مسدودة** برا المضخة (obstructive)، يا **المواسير وسعت** فالضغط وقع (==distributive==)."
+        page: 711
+        quote: "Distributive shock ↓ SVR (afterload)"
+      - kind: explain
+        title: "الباقي في الصفحة"
+        text: |-
+          - **Thoracic aortic aneurysm**: cystic medial degeneration؛ مرتبط بالـ ==3° syphilis==.
+          - **Rheumatic fever**: antibodies ضد الـ M protein بتهاجم أنسجة الجسم (cross-react) ← Type II.
+          - **DVT**: ==Virchow triad== (stasis و hypercoagulability و endothelial damage) ← جلطة في وريد عميق.
+        page: 711
+        quote: "Stasis, hypercoagulability, endothelial damage (Virchow triad) → blood clot within deep vein"
+      - kind: try
+        items: [rr.L01.071, rr.L01.073, rr.L01.080, rr.L01.084, rr.L01.088]
+    recap:
+      - "Septum ما اتكوّنش ← truncus؛ ما لفّش ← D-TGA."
+      - "Eisenmenger: L→R ← pulmonary HTN ← RVH ← R→L."
+      - "أول 24 ساعة arrhythmia؛ 3–14 يوم ruptures بالـ macrophages."
+      - "HOCM: septum + systolic anterior motion ← obstruction. WPW: accessory pathway ← delta wave."
+      - "Distributive = ↓ systemic vascular resistance؛ الباقي ↓ CO."
+    practice: [rr.L01.070, rr.L01.071, rr.L01.072, rr.L01.073, rr.L01.074, rr.L01.075, rr.L01.076, rr.L01.077, rr.L01.078, rr.L01.079, rr.L01.080, rr.L01.081, rr.L01.082, rr.L01.083, rr.L01.084, rr.L01.085, rr.L01.086, rr.L01.087, rr.L01.088, rr.L01.089, rr.L01.090]
+
+  - id: rr.L01.lesson5
+    title: "الغدد والجهاز الهضمي: hormone زيادة أو أنبوبة اتسدت"
+    hook: "الـ SIADH بيحبس مية، فإزاي الصوديوم بيطلع في البول؟"
+    minutes: 10
+    pages: [711, 712]
+    topics: [endocrine, gastrointestinal]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ CAH والـ SIADH"
+        text: |-
+          **أشهر CAH**: ==21-hydroxylase== ناقص ← mineralocorticoids و cortisol يقلوا، والـ precursors تتحول sex hormones ← تعلى، والـ 17-hydroxyprogesterone يعلى.
+
+          **SIADH**: ADH عالي ← مية تتحبس. الجسم يحس إن الـ volume زاد ← aldosterone يقل و ANP و BNP يعلوا ← ==صوديوم يطلع في البول== ← الـ hyponatremia تفضل euvolemic.
+        page: 711
+        quote: "ADH → water retention → ↓ aldosterone, ↑ ANP, ↑ BNP → ↑ urinary Na"
+      - kind: reveal
+        prompt: "ليه الـ hyperthyroidism بيعمل heat intolerance؟ وليه الـ hypothyroidism بيعمل myxedema؟"
+        answer: "الـ thyroid hormone بيزوّد الـ **Na⁺/K⁺-ATPase** ← الـ basal metabolic rate يعلى ← حرارة أكتر (calorigenesis) ووزن ينزل. في الـ hypothyroidism الـ **GAGs** بتتراكم في الـ interstitium وتشد مية (osmotic pressure) ← myxedema."
+        page: 711
+        quote: "ATPase → ↑ basal metabolic rate → ↑ calorigenesis"
+      - kind: explain
+        title: "الـ parathyroid والـ diabetes"
+        text: |-
+          - **1° hyperparathyroidism**: adenoma أو hyperplasia ← PTH عالي.
+          - **2° hyperparathyroidism**: Ca قليل و/أو PO4 عالي ← الغدة تكبر ← PTH و ALP يعلوا.
+          - **DKA**: insulin مش موجود ← lipolysis ← free fatty acids تتأكسد ← ==ketogenesis==.
+          - **HHS**: السكر عالي جداً ← osmolality عالية و osmotic diuresis.
+          - **Vascular disease في الـ DM**: nonenzymatic glycation، hyaline arteriosclerosis في الصغيرة، atherosclerosis في الكبيرة.
+          - **Zollinger-Ellison**: gastrinoma ← ulcers في الـ duodenum/jejunum و malabsorption.
+        page: 712
+        quote: "insulin or ↑ insulin requirement → ↑ lipolysis → ↑ free fatty acid oxidation → ↑ ketogenesis"
+      - kind: explain
+        title: "الأنبوبة: atresia و SMA syndrome و achalasia"
+        text: |-
+          - **Duodenal atresia**: الـ ==recanalization== فشل (الـ duodenum بيتسد في الجنين وبيرجع يتفتح).
+          - **Jejunal/ileal atresia**: الأوعية (غالباً SMA) اتقطعت ← ischemic necrosis للأمعاء.
+          - **SMA syndrome**: الدهن حوالين الـ SMA قل ← الزاوية تضيق ← الجزء التالت من الـ duodenum يتزنق بين الـ SMA والـ aorta.
+          - **Achalasia**: الـ inhibitory neurons في الـ myenteric plexus بتموت ← الـ LES ==ما بيرتخيش==.
+          - **Hirschsprung**: RET loss of function ← الـ neural crest ما هاجرش ← مافيش ganglion cells في الـ distal colon.
+          - **Meckel**: الـ vitelline duct ما اتقفلش.
+        page: 712
+        quote: "Degeneration of inhibitory neurons in myenteric plexus of esophageal wall → failure of LES relaxation"
+      - kind: check
+        question: "A 1-day-old with Down syndrome has bilious vomiting; x-ray shows a double bubble. What is the embryologic mechanism?"
+        options:
+          - "Failure of recanalization"
+          - "Disruption of mesenteric vessels"
+          - "Failure of neural crest migration"
+          - "Persistence of the vitelline duct"
+        answer: 0
+        why:
+          - "صح: duodenal atresia = recanalization failure."
+          - "ده jejunal/ileal atresia."
+          - "ده Hirschsprung."
+          - "ده Meckel diverticulum."
+        page: 712
+        quote: "Duodenal atresia Recanalization failure"
+      - kind: explain
+        title: "الـ mucosa والالتهاب"
+        text: |-
+          - **Barrett**: GERD مزمن ← الـ squamous يتحول ==intestinal epithelium== (columnar فيه goblet cells).
+          - **NSAID gastritis**: PGE2 يقل ← حماية الـ mucosa تقل.
+          - **Celiac**: autoimmune ضد الـ gliadin (القمح) ← malabsorption في الـ distal duodenum و proximal jejunum ← steatorrhea.
+          - **Crohn fistulas**: لأن الالتهاب ==transmural== (بياخد الحيطة كلها).
+        page: 712
+        quote: "Chronic GERD → metaplasia of nonkeratinized stratified squamous epithelium to intestinal epithelium (nonciliated columnar with goblet cells)"
+      - kind: figure
+        title: "Adenoma-carcinoma sequence"
+        svg: |-
+          <svg viewBox="0 0 360 130" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rr5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-good" x="5" y="20" width="70" height="40" rx="8"/>
+            <text x="14" y="45" class="t-sm">Normal</text>
+            <line class="fg-arrow-acc" x1="75" y1="40" x2="100" y2="40" marker-end="url(#rr5a)"/>
+            <rect class="fg-acc" x="100" y="20" width="75" height="40" rx="8"/>
+            <text x="108" y="38" class="t-sm t-b">Loss of APC</text>
+            <text x="108" y="54" class="t-sm">↓ adhesion</text>
+            <line class="fg-arrow-acc" x1="175" y1="40" x2="195" y2="40" marker-end="url(#rr5a)"/>
+            <rect class="fg-acc" x="195" y="20" width="75" height="40" rx="8"/>
+            <text x="203" y="38" class="t-sm t-b">KRAS</text>
+            <text x="203" y="54" class="t-sm">signaling</text>
+            <line class="fg-arrow-acc" x1="270" y1="40" x2="285" y2="40" marker-end="url(#rr5a)"/>
+            <rect class="fg-bad" x="285" y="20" width="70" height="40" rx="8"/>
+            <text x="292" y="38" class="t-sm t-b">TP53, DCC</text>
+            <text x="292" y="54" class="t-sm">lost</text>
+            <text x="100" y="90" class="t-sm t-mut">↑ proliferation</text>
+            <text x="195" y="90" class="t-sm t-mut">unregulated</text>
+            <text x="285" y="90" class="t-sm t-mut">carcinoma</text>
+          </svg>
+        caption: "الترتيب مهم: APC الأول (الخلايا تفك وتتكاثر)، بعدين KRAS (signaling من غير ضابط)، وفي الآخر tumor suppressors زي TP53 و DCC بتضيع."
+        alt: "Sequence of four boxes: normal mucosa, loss of APC with decreased adhesion and increased proliferation, KRAS mutation with unregulated signaling, then loss of TP53 and DCC leading to carcinoma."
+        page: 712
+        quote: "Loss of APC (↓ intercellular adhesion, ↑ proliferation) → KRAS mutation (unregulated intracellular signaling) → loss of tumor suppressor genes (TP53, DCC)"
+      - kind: explain
+        title: "الكبد والمرارة"
+        text: |-
+          - **Cirrhosis fibrosis**: الـ ==stellate cells== هي اللي بتعمل الـ ECM.
+          - **Reye**: الـ aspirin بيعطّل الـ β-oxidation (inhibition reversible لـ mitochondrial enzymes).
+          - **Hepatic encephalopathy**: portosystemic shunts ← الـ NH3 ما بيتكسرش.
+          - **α1-antitrypsin**: في الكبد بروتين misfolded بيتكدس في الـ ER ← cirrhosis؛ في الرئة الـ elastase من غير فرامل ← panacinar emphysema.
+          - **Wilson**: ATP7B (chromosome 13) ← النحاس ما يدخلش الـ ceruloplasmin وما يطلعش في الصفرا.
+          - **Hemochromatosis**: HFE (chromosome 6) ← ==hepcidin يقل== ← امتصاص الحديد يزيد ← ferritin و iron و transferrin saturation يعلوا و TIBC يقل.
+          - **Gallstone ileus**: fistula ← الحصوة تنزل الأمعاء وتقف عند الـ ileocecal valve (أضيق نقطة).
+          - **Cholangitis**: انسداد ← stasis ← بكتيريا. **Pancreatitis**: الـ enzymes بتهضم البنكرياس نفسه.
+        page: 712
+        quote: "HFE mutation on chromosome 6 → ↓ hepcidin production, ↑ intestinal absorption → iron overload"
+      - kind: aside
+        tone: trap
+        text: "**ATP7A** ولا **ATP7B**؟ الـ A (Menkes) = النحاس ما بيتمتصش ← نحاس ==قليل==. الـ B (Wilson) = النحاس ما بيطلعش ← نحاس ==كتير== في الأنسجة والبول، و ceruloplasmin قليل."
+        page: 712
+        quote: "Mutated hepatocyte copper-transporting ATPase (ATP7B on chromosome 13) → ↓ copper incorporation into apoceruloplasmin, ↓ biliary excretion"
+      - kind: try
+        items: [rr.L01.091, rr.L01.092, rr.L01.103, rr.L01.113, rr.L01.120]
+    recap:
+      - "21-hydroxylase: ↓ mineralocorticoids و cortisol، ↑ sex hormones و 17-OH progesterone."
+      - "SIADH: مية محبوسة ← ↓ aldosterone و ↑ ANP/BNP ← Na في البول."
+      - "Duodenal atresia = recanalization؛ jejunal = أوعية؛ Hirschsprung = neural crest."
+      - "APC ← KRAS ← TP53/DCC."
+      - "Wilson = ATP7B، chromosome 13. Hemochromatosis = HFE ← hepcidin يقل."
+    practice: [rr.L01.091, rr.L01.092, rr.L01.093, rr.L01.094, rr.L01.095, rr.L01.096, rr.L01.097, rr.L01.098, rr.L01.099, rr.L01.100, rr.L01.101, rr.L01.102, rr.L01.103, rr.L01.104, rr.L01.105, rr.L01.106, rr.L01.107, rr.L01.108, rr.L01.109, rr.L01.110, rr.L01.111, rr.L01.112, rr.L01.113, rr.L01.114, rr.L01.115, rr.L01.116, rr.L01.117, rr.L01.118, rr.L01.119, rr.L01.120, rr.L01.121, rr.L01.122, rr.L01.123]
+
+  - id: rr.L01.lesson6
+    title: "الدم: RBCs بتتكسر وصفايح بتلزق أو ما بتلزقش"
+    hook: "كل مرض صفايح هنا ناقصه حاجة واحدة: GpIb ولا GpIIb/IIIa ولا ADAMTS13؟"
+    minutes: 8
+    pages: [713, 713]
+    topics: [hematology-oncology]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ anemias"
+        text: |-
+          - **Rh disease of the newborn**: أم Rh ⊝ تعمل anti-D IgG ضد RBCs الجنين Rh ⊕.
+          - **Lead**: بيعطّل ==ferrochelatase== و ALA dehydratase ← heme يقل و protoporphyrin يعلى في الـ RBC.
+          - **Anemia of chronic disease**: الالتهاب ← ==hepcidin يعلى== ← الحديد يتحبس في الـ macrophages والامتصاص يقل.
+          - **G6PD**: NADPH يقل ← reduced glutathione يقل ← الـ RBC ما تستحملش الـ oxidant stress.
+          - **Sickle cell**: valine مكان glutamic acid في الـ β chain؛ الـ O2 القليل والارتفاع والـ acidosis بيخلوا الـ HbS يعمل polymers.
+        page: 713
+        quote: "Inflammation → ↑ hepcidin → ↓ release of iron from macrophages, ↓ iron absorption from gut"
+      - kind: reveal
+        prompt: "الـ hepcidin عالي في الـ anemia of chronic disease وقليل في الـ hemochromatosis. ليه ده منطقي؟"
+        answer: "الـ hepcidin هو **قفل الحديد**: بيمنع الامتصاص وبيحبس الحديد في الـ macrophages. في الالتهاب الجسم بيقفل (عشان يحرم البكتيريا من الحديد) ← anemia. في الـ hemochromatosis القفل مش موجود ← الحديد يدخل من غير حساب ← overload."
+        page: 713
+        quote: "Anemia of chronic disease Inflammation → ↑ hepcidin"
+      - kind: figure
+        title: "الصفايح: مين ناقص فين؟"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-ink" x="10" y="150" width="340" height="14" rx="3"/>
+            <text x="130" y="176" class="t-sm t-mut">Damaged vessel wall</text>
+            <circle class="fg-dot-acc" cx="80" cy="140" r="6"/>
+            <text x="20" y="128" class="t-sm">vWF</text>
+            <ellipse class="fg-acc" cx="80" cy="105" rx="40" ry="18"/>
+            <text x="58" y="110" class="t-sm">Platelet</text>
+            <ellipse class="fg-acc" cx="190" cy="105" rx="40" ry="18"/>
+            <text x="168" y="110" class="t-sm">Platelet</text>
+            <line class="fg-arrow-bad" x1="80" y1="123" x2="80" y2="134"/>
+            <text x="10" y="60" class="t-sm t-bad t-b">GpIb ↓: Bernard-Soulier</text>
+            <text x="10" y="76" class="t-sm t-bad">(adhesion to vWF)</text>
+            <line class="fg-arrow-bad" x1="120" y1="105" x2="150" y2="105"/>
+            <text x="170" y="40" class="t-sm t-bad t-b">GpIIb/IIIa ↓: Glanzmann</text>
+            <text x="170" y="56" class="t-sm t-bad">(platelet-platelet aggregation)</text>
+            <text x="245" y="100" class="t-sm t-b">ADAMTS13 ↓: TTP</text>
+            <text x="245" y="116" class="t-sm">large vWF multimers</text>
+            <text x="245" y="132" class="t-sm">→ microthrombi</text>
+          </svg>
+        caption: "الـ GpIb بيلزّق الصفيحة في الـ vWF على الحيطة (Bernard-Soulier لو ناقص). الـ GpIIb/IIIa بيلزّق الصفايح في بعض (Glanzmann). والـ ADAMTS13 بيقطّع الـ vWF الكبير؛ لو ناقص ← الصفايح تلزق زيادة ← TTP."
+        alt: "A damaged vessel wall with vWF and two platelets. GpIb links platelet to vWF, deficient in Bernard-Soulier. GpIIb/IIIa links platelet to platelet, deficient in Glanzmann. ADAMTS13 deficiency leaves large vWF multimers, causing microthrombi in TTP."
+        page: 713
+        quote: "Bernard-Soulier syndrome ↓ GpIb → ↓ platelet-to-vWF adhesion"
+      - kind: explain
+        title: "vWD و Factor V Leiden"
+        text: |-
+          - **von Willebrand disease**: vWF قليل ← الصفايح ما تلزقش في الـ vWF، وممكن ==PTT يطول== لأن الـ vWF بيحمي factor VIII.
+          - **Factor V Leiden**: point mutation (Arg506Gln) ← الـ factor V ما يتكسرش بالـ ==protein C== ← hypercoagulable.
+        page: 713
+        quote: "vWF → ↓ platelet-to-vWF adhesion, possibly ↑ PTT (vWF protects factor VIII)"
+      - kind: check
+        question: "A 12-year-old girl has heavy menstrual bleeding and nosebleeds. Platelet count is normal; PTT is mildly prolonged. Why is the PTT prolonged?"
+        options:
+          - "vWF normally protects factor VIII"
+          - "GpIIb/IIIa is deficient"
+          - "Factor V resists protein C"
+          - "ADAMTS13 is deficient"
+        answer: 0
+        why:
+          - "صح: vWD ← vWF قليل ← factor VIII مش محمي فيتكسر ← PTT يطول."
+          - "Glanzmann ما بيطوّلش الـ PTT؛ المشكلة في الـ aggregation."
+          - "Factor V Leiden بيعمل جلطات مش نزيف."
+          - "TTP بيعمل microthrombi والصفايح بتقل."
+        page: 713
+        quote: "possibly ↑ PTT (vWF protects factor VIII)"
+      - kind: table
+        title: "HIT: النوعين"
+        columns: ["", "Type 1", "Type 2"]
+        rows:
+          - ["Timing", "Within 2 days", "5–10 days"]
+          - ["Mechanism", "Mild, transient drop", "IgG against heparin–PF4 complex"]
+          - ["Result", "Not clinically significant", "Thrombosis and ↓↓ platelets"]
+        hide: [[1, 2], [2, 2]]
+        page: 713
+        quote: "Type 2: Heparin administration (5–10 days) → IgG antibodies against heparin-bound platelet factor 4 complex"
+      - kind: explain
+        title: "الـ warfarin skin necrosis"
+        text: |-
+          الـ warfarin بيوقّف factors كتير، بس الـ ==protein C== (anticoagulant) **نص عمره أقصر** فبيقع الأول. في الأيام الأولى الـ procoagulant factors لسه موجودة والـ protein C راح ← فترة hypercoagulable ← microthrombi ← الجلد يموت.
+        page: 713
+        quote: "Warfarin administration → rapid ↓ in protein C levels due to its shorter half-life"
+      - kind: aside
+        tone: exam
+        text: "**HIT type 2** مش نزيف رغم إن الصفايح قليلة: الـ complex ==بيشغّل الصفايح== ← جلطات. لو مريض على heparin من أسبوع والصفايح وقعت وطلعله DVT، فكّر فيه."
+        page: 713
+        quote: "complex binds and activates platelets → thrombosis"
+      - kind: try
+        items: [rr.L01.125, rr.L01.127, rr.L01.129, rr.L01.131, rr.L01.136]
+    recap:
+      - "Lead: ferrochelatase و ALA dehydratase. ACD: hepcidin عالي."
+      - "G6PD: NADPH قليل ← glutathione قليل."
+      - "GpIb ← Bernard-Soulier؛ GpIIb/IIIa ← Glanzmann؛ ADAMTS13 ← TTP."
+      - "vWD ممكن يطوّل الـ PTT. Factor V Leiden يقاوم protein C."
+      - "HIT 2 = IgG ضد heparin–PF4 ← جلطات. Warfarin ← protein C يقع الأول."
+    practice: [rr.L01.124, rr.L01.125, rr.L01.126, rr.L01.127, rr.L01.128, rr.L01.129, rr.L01.130, rr.L01.131, rr.L01.132, rr.L01.133, rr.L01.134, rr.L01.135, rr.L01.136]
+
+  - id: rr.L01.lesson7
+    title: "الأعصاب الطرفية والعظم والمناعة الذاتية والجلد"
+    hook: "إصابة واحدة في الكورة أو حقنة في المكان الغلط، والعلامة بتقولك أنهي عصب"
+    minutes: 10
+    pages: [713, 715]
+    topics: [musculoskeletal]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "أعصاب الدراع"
+        text: |-
+          - **Axillary**: كسر الـ surgical neck أو anterior dislocation ← deltoid مفلطح والدراع جنبه وإحساس الكتف يقل.
+          - **Radial** (Saturday night palsy): ضغط الـ axilla (العكاكيز) أو كسر midshaft humerus ← ==wrist drop==.
+          - **Median**: supracondylar fracture (proximal) ← hand of benediction؛ و distal = carpal tunnel.
+          - **Ulnar**: medial epicondyle (proximal) ← radial deviation؛ hook of hamate (distal) ← ==ulnar claw==.
+        page: 713
+        quote: "Axilla compression (use of crutches), midshaft humerus fracture, repetitive pronation/supination of forearm → wrist drop, ↓ grip strength"
+      - kind: match
+        prompt: "وصّل كل إصابة بالجذور أو العصب"
+        pairs:
+          - ["Erb palsy (waiter's tip)", "C5-C6 roots"]
+          - ["Klumpke palsy (claw hand)", "C8-T1 roots"]
+          - ["Winged scapula after mastectomy", "Long thoracic nerve"]
+          - ["Foot drop after fibular neck fracture", "Common peroneal nerve"]
+          - ["Perineal numbness after long cycling", "Pudendal nerve"]
+        why: "Erb = رقبة الطفل بتتشد وقت الولادة (فوق). Klumpke = الدراع بيتشد لفوق (تحت: C8-T1)."
+        page: 714
+        quote: "Traction/tear of C8-T1 roots on infant’s arm during delivery, or on trying to grab a branch in adults"
+      - kind: explain
+        title: "الـ Trendelenburg sign: ليه الناحية التانية؟"
+        text: |-
+          الـ **superior gluteal nerve** ممكن يتأذي من حقنة IM في الـ gluteal region ← الـ abductors (gluteus medius و minimus) تضعف.
+
+          لما تقف على رجل واحدة، الـ abductors **بتاعة الرجل اللي واقف عليها** هي اللي بتشيل الحوض. لو ضعيفة ← الحوض يقع من ==الناحية التانية==. فالـ lesion **contralateral** للناحية اللي بتقع.
+        page: 714
+        quote: "Iatrogenic injury during IM injection in gluteal region → Trendelenburg sign: lesion contralateral to side of hip that drops due to abductor weakness"
+      - kind: explain
+        title: "العضم: بيتبني ولا بيتهد؟"
+        text: |-
+          - **Achondroplasia**: FGFR3 ==شغال على طول== ← chondrocytes ما تتكاثرش ← endochondral ossification يفشل ← أطراف قصيرة.
+          - **Osteoporosis**: osteoclasts أكتر ← bone mass أقل (estrogen قليل، السن، steroids).
+          - **Osteopetrosis**: carbonic anhydrase II ← الـ osteoclasts مش قادرة تعمل حمض ← العضم ما يتهدش ← عضم كثيف بس بيتكسر، و pancytopenia لأن مكان النخاع ضاق.
+          - **Paget**: osteoclasts وبعدين osteoblasts ← عضم كتير بس ==رديء==.
+          - **SCFE**: مراهق تخين، الضغط على رأس الـ femur ← الـ epiphysis تتزحلق. **Nursemaid's elbow**: شدة مفاجئة ← رأس الـ radius يطلع من الـ annular ligament.
+        page: 714
+        quote: "Carbonic anhydrase II mutations → ↓ ability of osteoclasts to generate acidic environment → ↓ bone resorption"
+      - kind: check
+        question: "A 6-year-old has frequent fractures, anemia and recurrent infections. X-ray shows diffusely dense bones. Why the pancytopenia?"
+        options:
+          - "Dense bone reduces marrow space"
+          - "Autoimmune destruction of marrow"
+          - "Excess osteoclast activity"
+          - "Copper deficiency"
+        answer: 0
+        why:
+          - "صح: osteopetrosis ← العضم ما يتهدش ← المكان اللي فيه النخاع يضيق ← pancytopenia."
+          - "مافيش autoimmunity في الجدول للحالة دي."
+          - "العكس: الـ osteoclasts مش قادرة تشتغل."
+          - "ده Menkes، مالوش دعوة بالعضم الكثيف."
+        page: 714
+        quote: "dense bones prone to fracture, pancytopenia (↓ marrow space)"
+      - kind: table
+        title: "MG ولا LEMS؟"
+        columns: ["", "Myasthenia gravis", "Lambert-Eaton"]
+        rows:
+          - ["Autoantibody target", "Postsynaptic nicotinic ACh receptors", "Presynaptic calcium channels"]
+          - ["Effect", "ACh can't act on the muscle", "↓ ACh release"]
+        hide: [[0, 1], [0, 2]]
+        page: 714
+        quote: "Autoantibodies to presynaptic calcium channels → ↓ ACh release"
+      - kind: explain
+        title: "المفاصل والمناعة الذاتية"
+        text: |-
+          - **OA**: تآكل ميكانيكي للـ cartilage ← osteophytes. **RA**: autoimmune ← ==pannus== ← cartilage وعضم يتآكل.
+          - **Sjögren**: lymphocytes بتدمر الـ exocrine glands.
+          - **SLE**: أساساً ==Type III== (الـ immune complexes ما بتتشالش)، بس الـ hematologic manifestations ==Type II==.
+          - **GCA**: العمى من انسداد الـ ophthalmic artery.
+        page: 714
+        quote: "Predominantly a type III hypersensitivity reaction with ↓ clearance of immune complexes; hematologic manifestations are a type II hypersensitivity reaction"
+      - kind: explain
+        title: "الجلد"
+        text: |-
+          - **Albinism**: melanocytes عددها طبيعي بس الـ melanin قليل. **Vitiligo**: الـ melanocytes نفسها بتتدمر (autoimmune).
+          - **Atopic dermatitis**: barrier بايظ (filaggrin FLG)، immune dysregulation، microbiome متغير.
+          - **Allergic contact dermatitis**: Type IV.
+          - **Pemphigus vulgaris**: IgG ضد ==desmoglein 1 و 3== (desmosomes) ← الخلايا تفك من بعض فوق الـ basale ← Nikolsky ⊕.
+          - **Bullous pemphigoid**: IgG ضد ==hemidesmosomes== ← الـ epidermis تفك من الـ dermis ← Nikolsky ⊝.
+        page: 715
+        quote: "IgG autoantibodies form against desmoglein 1 and 3 in desmosomes → separation of keratinocytes in stratum spinosum from stratum basale"
+      - kind: aside
+        tone: tip
+        text: "**desmo**some بيمسك الخلايا في **بعض** ← لو اتفك، الجلد يقشر بسهولة لما تحك عليه (Nikolsky ⊕). **hemi**desmosome نص مسمار بيمسك الطبقة في **الأرضية** ← الفقاعة تحت الـ epidermis كلها، تخينة ومش بتتقشر (Nikolsky ⊝)."
+        page: 715
+        quote: "IgG autoantibodies against hemidesmosomes → separation of epidermis from dermis; Nikolsky sign ⊝"
+      - kind: try
+        items: [rr.L01.138, rr.L01.145, rr.L01.152, rr.L01.160, rr.L01.165]
+    recap:
+      - "Radial ← wrist drop؛ ulnar distal ← claw؛ axillary ← deltoid مفلطح."
+      - "Erb = C5-C6؛ Klumpke = C8-T1؛ long thoracic ← winged scapula."
+      - "Trendelenburg: الـ lesion عكس الناحية اللي بتقع."
+      - "Osteopetrosis = carbonic anhydrase II ← عضم كثيف و pancytopenia."
+      - "MG = postsynaptic؛ LEMS = presynaptic Ca channels."
+      - "Pemphigus = desmoglein، Nikolsky ⊕؛ pemphigoid = hemidesmosomes، Nikolsky ⊝."
+    practice: [rr.L01.137, rr.L01.138, rr.L01.139, rr.L01.140, rr.L01.141, rr.L01.142, rr.L01.143, rr.L01.144, rr.L01.145, rr.L01.146, rr.L01.147, rr.L01.148, rr.L01.149, rr.L01.150, rr.L01.151, rr.L01.152, rr.L01.153, rr.L01.154, rr.L01.155, rr.L01.156, rr.L01.157, rr.L01.158, rr.L01.159, rr.L01.160, rr.L01.161, rr.L01.162, rr.L01.163, rr.L01.164, rr.L01.165, rr.L01.166]
+
+  - id: rr.L01.lesson8
+    title: "المخ: التكوين والـ strokes والنزيف والـ dementia"
+    hook: "كل شريان بيقفل بيسيب توقيع: اعرف التوقيع تعرف الشريان"
+    minutes: 10
+    pages: [715, 716]
+    topics: [neurology]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ neural tube والمخ وهو بيتكوّن"
+        text: |-
+          - **Caudal neuropore** ما اتقفلش بأسبوع 4 ← spina bifida occulta و meningocele و myelomeningocele و myeloschisis.
+          - **Rostral neuropore** ما اتقفلش ← ==anencephaly== (مافيش forebrain والجمجمة مفتوحة).
+          - **Holoprosencephaly**: الـ forebrain ما اتقسمش لـ 2 hemispheres (أسبوع 3–4)، مع SHH mutations.
+          - **Lissencephaly**: الـ neurons ما هاجرتش ← مخ أملس من غير gyri.
+          - **Chiari I**: الـ tonsils بس نازلة. **Chiari II**: الـ vermis والـ tonsils والـ medulla.
+          - **Dandy-Walker**: مافيش vermis ← الـ 4th ventricle يبقى cyst كبير.
+          - **Syringomyelia**: cavity في الحبل بتقطع الألياف ==اللي بتعدي== ← cape-like loss للـ pain والـ temperature.
+        page: 715
+        quote: "Fluid-filled, gliosis-lined cavity within spinal cord; damages crossing spinothalamic tract fibers → cape-like loss of pain and temperature"
+      - kind: reveal
+        prompt: "ليه الـ syrinx بيضيّع الـ pain والـ temperature بس، ومن غير الـ touch؟"
+        answer: "ألياف الـ pain والـ temperature (spinothalamic) بتعدّي الناحية التانية **قدام الـ central canal** في نفس مستوى دخولها، فالـ cavity اللي في النص بتقطعها. الـ dorsal columns (touch و vibration) بتطلع في نفس الناحية ومش بتعدي من النص."
+        page: 715
+        quote: "damages crossing spinothalamic tract fibers"
+      - kind: explain
+        title: "القشرة: dominant ولا nondominant؟"
+        text: |-
+          - **Dominant parietal** ← ==Gerstmann==: agraphia و acalculia و finger agnosia و left-right disorientation.
+          - **Nondominant parietal** ← hemispatial neglect للناحية التانية.
+          - **Bilateral amygdala** (HSV-1) ← Klüver-Bucy: hyperphagia و hypersexuality و hyperorality.
+          - **Dorsal midbrain** (pineal tumor) ← Parinaud: upward gaze palsy و light-near dissociation.
+          - **Aphasia**: Wernicke (superior temporal) receptive؛ Broca (inferior frontal) expressive؛ ==conduction== = arcuate fasciculus؛ global = الاتنين.
+        page: 715
+        quote: "Lesion in the dominant parietal cortex → agraphia, acalculia, finger agnosia, left-right disorientation"
+      - kind: figure
+        title: "شرايين الـ brainstem والـ syndrome بتاع كل واحد"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="120" y="10" width="120" height="55" rx="10"/>
+            <text x="160" y="42" class="t-b">Pons</text>
+            <rect class="fg-box" x="135" y="70" width="90" height="110" rx="10"/>
+            <text x="155" y="130" class="t-b">Medulla</text>
+            <line class="fg-ink" x1="180" y1="10" x2="180" y2="65" stroke-width="3"/>
+            <text x="10" y="22" class="t-sm t-b">Basilar</text>
+            <text x="10" y="38" class="t-sm">→ locked-in</text>
+            <text x="250" y="30" class="t-sm t-b">AICA</text>
+            <text x="250" y="46" class="t-sm">→ lateral pontine</text>
+            <text x="250" y="110" class="t-sm t-b">PICA</text>
+            <text x="250" y="126" class="t-sm">→ lateral medullary</text>
+            <text x="250" y="142" class="t-sm">(Wallenberg)</text>
+            <text x="10" y="120" class="t-sm t-b">Anterior spinal</text>
+            <text x="10" y="136" class="t-sm">→ medial medullary</text>
+          </svg>
+        caption: "الـ basilar في النص فوق ← locked-in. الـ AICA على جنب الـ pons، والـ PICA على جنب الـ medulla. والـ anterior spinal في نص الـ medulla من قدام ← medial medullary."
+        alt: "Sketch of the pons above the medulla. Basilar artery in the midline of the pons causes locked-in syndrome. AICA supplies the lateral pons (lateral pontine syndrome). PICA supplies the lateral medulla (Wallenberg syndrome). The anterior spinal artery supplies the medial medulla (medial medullary syndrome)."
+        page: 715
+        quote: "Lateral pontine syndrome Stroke of the anterior inferior cerebellar artery"
+      - kind: check
+        question: "A 58-year-old man is fully awake but can only blink and move his eyes up and down after a stroke. Which artery?"
+        options:
+          - "Basilar artery"
+          - "Posterior inferior cerebellar artery"
+          - "Anterior spinal artery"
+          - "Middle meningeal artery"
+        answer: 0
+        why:
+          - "صح: locked-in = basilar؛ الحركة الأفقية بتضيع والرأسية بتفضل."
+          - "PICA ← Wallenberg."
+          - "Anterior spinal ← medial medullary."
+          - "ده شريان الـ epidural hematoma."
+        page: 715
+        quote: "Stroke of the basilar artery; loss of horizontal, but not vertical, eye movements"
+      - kind: table
+        title: "النزيف جوه الجمجمة"
+        columns: ["Bleed", "Source"]
+        rows:
+          - ["Epidural", "Middle meningeal artery (skull fracture at pterion)"]
+          - ["Subdural", "Bridging veins"]
+          - ["Subarachnoid", "Trauma, aneurysm (saccular), AVM"]
+          - ["Neonatal intraventricular", "Germinal matrix in premature infants"]
+        hide: [[0, 1], [1, 1], [3, 1]]
+        page: 715
+        quote: "Rupture of middle meningeal artery, often 2° to skull fracture involving the pterion"
+      - kind: explain
+        title: "الـ dementias والحركة"
+        text: |-
+          - **Parkinson**: الـ dopaminergic neurons في الـ ==substantia nigra pars compacta== بتموت.
+          - **Huntington**: CAG في الـ HTT (chromosome 4) ← caudate و putamen يضمروا؛ dopamine يعلى و GABA و ACh يقلوا.
+          - **Alzheimer**: β-amyloid plaques و tau tangles ← ACh يقل في الـ nucleus basalis of Meynert.
+          - **Pick (FTD)**: frontotemporal ← executive function و الـ inhibition يقلوا.
+          - **Vascular**: infarcts متعددة. **HIV**: atrophy في الـ gray matter.
+        page: 716
+        quote: "Trinucleotide (CAG) repeat expansion in huntingtin (HTT) gene on chromosome 4 → toxic gain of function → atrophy of caudate and putamen"
+      - kind: explain
+        title: "الـ hydrocephalus بأنواعه"
+        text: |-
+          - **Communicating**: الـ arachnoid granulations مش بتمتص ← ICP يعلى.
+          - **Noncommunicating**: سدة جوه الـ ventricles (aqueductal stenosis، colloid cyst عند الـ foramen of Monro، tumor).
+          - **Normal pressure hydrocephalus**: الـ ventricles بتوسع وتشد ألياف الـ ==corona radiata== ← wobbly و wacky و wet.
+          - **Ex vacuo**: المخ ضمر ← الـ CSF شكله أكتر في الصورة (من غير ضغط عالي).
+          - **IIH**: ICP عالي مع dural venous sinus stenosis ← papilledema.
+        page: 716
+        quote: "expansion of ventricles distorts the fibers of the corona radiata"
+      - kind: aside
+        tone: trap
+        text: "الـ **ex vacuo** مش hydrocephalus حقيقي: الـ ventricles كبيرة لأن ==المخ صغر==، مش لأن الـ CSF محبوس. فمافيش papilledema."
+        page: 716
+        quote: "brain tissue and neuronal atrophy → appearance of ↑ CSF on imaging"
+      - kind: try
+        items: [rr.L01.168, rr.L01.174, rr.L01.183, rr.L01.187, rr.L01.205]
+    recap:
+      - "Caudal neuropore ← spina bifida؛ rostral ← anencephaly."
+      - "Syrinx ← الألياف اللي بتعدي ← cape-like pain/temp loss."
+      - "Basilar ← locked-in؛ AICA ← lateral pontine؛ PICA ← Wallenberg؛ anterior spinal ← medial medullary."
+      - "Epidural = middle meningeal؛ subdural = bridging veins."
+      - "Normal pressure hydrocephalus = corona radiata ← wobbly و wacky و wet."
+    practice: [rr.L01.167, rr.L01.168, rr.L01.169, rr.L01.170, rr.L01.171, rr.L01.172, rr.L01.173, rr.L01.174, rr.L01.175, rr.L01.176, rr.L01.177, rr.L01.178, rr.L01.179, rr.L01.180, rr.L01.181, rr.L01.182, rr.L01.183, rr.L01.184, rr.L01.185, rr.L01.186, rr.L01.187, rr.L01.188, rr.L01.189, rr.L01.190, rr.L01.191, rr.L01.192, rr.L01.193, rr.L01.194, rr.L01.195, rr.L01.196, rr.L01.197, rr.L01.198, rr.L01.199, rr.L01.200, rr.L01.201, rr.L01.202, rr.L01.203, rr.L01.204, rr.L01.205, rr.L01.206, rr.L01.207, rr.L01.208]
+
+  - id: rr.L01.lesson9
+    title: "الـ myelin والـ motor neurons والودن والعين"
+    hook: "مين اللي بيعمل الـ myelin؟ اعرفه وانت تعرف المرض central ولا peripheral"
+    minutes: 10
+    pages: [717, 718]
+    topics: [neurology]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ demyelination: central ولا peripheral؟"
+        text: |-
+          - **ODS**: تصحيح الـ hyponatremia بسرعة (أو shifts تانية زي الجلوكوز) ← demyelination كبير في الـ ==pons==.
+          - **AIDP (Guillain-Barré)**: الـ ==Schwann cells== بتتدمر autoimmune، غالباً molecular mimicry بعد تطعيم أو stress.
+          - **Charcot-Marie-Tooth**: بروتينات الأعصاب الطرفية أو الـ myelin بايظة.
+          - **PML**: الـ JC virus بيصحى ← الـ ==oligodendrocytes== بتتدمر ← CNS demyelination.
+        page: 717
+        quote: "Destruction of oligodendrocytes 2° to reactivation of latent JC virus infection"
+      - kind: sort
+        prompt: "الخلية اللي بتتأذي: oligodendrocytes (CNS) ولا Schwann cells (PNS)؟"
+        bins: ["CNS myelin", "Peripheral nerve"]
+        cards:
+          - { text: "Progressive multifocal leukoencephalopathy", bin: 0 }
+          - { text: "Acute inflammatory demyelinating polyneuropathy", bin: 1 }
+          - { text: "Osmotic demyelination syndrome", bin: 0 }
+          - { text: "Charcot-Marie-Tooth disease", bin: 1 }
+        why: "الـ oligodendrocytes بتعمل myelin الـ CNS (PML، ODS في الـ pons). الـ Schwann cells بتعمل myelin الأعصاب الطرفية (AIDP، CMT)."
+        page: 717
+        quote: "Autoimmune destruction of Schwann cells via inflammation and"
+      - kind: explain
+        title: "الـ motor neurons والـ cord"
+        text: |-
+          - **Polio**: من الـ oropharynx للأمعاء للدم للـ CNS ← الـ anterior horn بيموت (==LMN==).
+          - **SMA**: SMN1 ← snRNP assembly بايظ ← LMN apoptosis.
+          - **ALS**: ==UMN و LMN== مع بعض؛ الـ familial مع SOD1.
+          - **Tabes dorsalis** (3° syphilis): dorsal columns و roots ← proprioception تضيع ← sensory ataxia.
+          - **Friedreich**: GAA على chromosome 9 في الـ frataxin ← mitochondria ← tracts كتير تضمر.
+          - **Sturge-Weber**: GNAQ mosaicism ← neural crest ← leptomeningeal angioma و episcleral hemangioma. **Pituitary adenoma**: نوع خلية واحد، غالباً lactotrophs.
+        page: 717
+        quote: "Combined UMN and LMN degeneration; familial form associated with"
+      - kind: check
+        question: "A 55-year-old man has weak, wasted hands with fasciculations, plus brisk reflexes and upgoing toes. Sensation is normal. What is degenerating?"
+        options:
+          - "Both upper and lower motor neurons"
+          - "Dorsal columns and roots"
+          - "Anterior horns only, from SMN1 mutation"
+          - "Schwann cells"
+        answer: 0
+        why:
+          - "صح: ALS ← UMN (reflexes عالية و Babinski) و LMN (ضمور و fasciculations) مع بعض."
+          - "ده tabes dorsalis، والإحساس هنا سليم."
+          - "SMA بيبقى LMN بس، ومن الصغر."
+          - "AIDP بيبقى ضعف مع reflexes قليلة."
+        page: 717
+        quote: "Combined UMN and LMN degeneration"
+      - kind: explain
+        title: "الودن"
+        text: |-
+          - **Noise**: الـ stereociliated cells في الـ organ of Corti ← ==high frequency== تضيع الأول.
+          - **Presbycusis**: السن ← hair cells في قاعدة الـ cochlea ← sensorineural ثنائي.
+          - **Cholesteatoma**: keratinized squamous epithelium في الودن الوسطى؛ 1° من retraction pocket و 2° من perforation.
+          - **Ménière**: ==endolymph== زيادة ← vertigo و hearing loss و tinnitus وإحساس امتلاء.
+        page: 717
+        quote: "Damage to stereociliated cells in organ of Corti"
+      - kind: figure
+        title: "الصورة بتقع فين؟"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <ellipse class="fg-box" cx="120" cy="45" rx="70" ry="30"/>
+            <line class="fg-ink" x1="190" y1="20" x2="190" y2="70" stroke-width="3"/>
+            <circle class="fg-dot-bad" cx="165" cy="45" r="5"/>
+            <text x="210" y="40" class="t-sm t-b">Myopia</text>
+            <text x="210" y="56" class="t-sm">eye too long → focus</text>
+            <text x="210" y="72" class="t-sm">in front of retina</text>
+            <ellipse class="fg-box" cx="110" cy="125" rx="55" ry="30"/>
+            <line class="fg-ink" x1="165" y1="100" x2="165" y2="150" stroke-width="3"/>
+            <circle class="fg-dot-bad" cx="185" cy="125" r="5"/>
+            <text x="210" y="120" class="t-sm t-b">Hyperopia</text>
+            <text x="210" y="136" class="t-sm">eye too short → focus</text>
+            <text x="210" y="152" class="t-sm">behind retina</text>
+          </svg>
+        caption: "الخط التخين هو الـ retina والنقطة الحمرا مكان الـ focus. العين الطويلة (myopia) الصورة تقع قبل الـ retina، والقصيرة (hyperopia) تقع وراها."
+        alt: "Two eye outlines. Top: a long eye with the focal point in front of the retina, labelled myopia. Bottom: a short eye with the focal point behind the retina, labelled hyperopia."
+        page: 717
+        quote: "Eye too long for refractive power of cornea and lens"
+      - kind: explain
+        title: "الـ glaucoma والـ retina"
+        text: |-
+          - **Glaucoma**: optic neuropathy ← النظر يضيع من الأطراف للنص، غالباً مع IOP عالي.
+          - **Open-angle**: مقاومة في الـ trabecular meshwork.
+          - **Angle-closure**: الزاوية ضيقة ← الـ aqueous مش بيعدي من الـ pupil ← الضغط ورا يعلى ← الـ iris يتزق لقدام ويقفل الـ drainage.
+          - **Diabetic retinopathy**: permeability وانسداد ← microaneurysms و hemorrhages (nonproliferative)؛ hypoxia ← ==neovascularization== (proliferative).
+          - **Retinal artery occlusion**: embolism غالباً (carotid > قلب). **Vein**: central = 1° thrombosis، branch = عند الـ arteriovenous crossings.
+          - **Retinal detachment**: الـ retina تفك من الـ RPE ← تفقد دم الـ choroid.
+        page: 718
+        quote: "resistance to aqueous humor drainage through trabecular"
+      - kind: explain
+        title: "الـ pupil والـ Horner"
+        text: |-
+          - **Papilledema**: ICP عالي ← الـ axoplasmic flow في الـ optic nerve يقف ← disc يتورم (غالباً الاتنين).
+          - **Marcus Gunn (RAPD)**: lesion في الـ ==afferent limb== (retina أو optic nerve) من ناحية واحدة.
+          - **Horner**: neuron 1 (pontine hemorrhage، Wallenberg، cord فوق T1)؛ neuron 2 (==Pancoast== على الـ stellate ganglion)؛ neuron 3 (carotid dissection).
+          - **Cavernous sinus**: pituitary tumor، carotid-cavernous fistula، أو thrombosis من عدوى (الـ dural sinuses ما فيهاش valves).
+        page: 718
+        quote: "Lesions along sympathetic chain: 1st neuron (pontine hemorrhage, lateral"
+      - kind: try
+        items: [rr.L01.209, rr.L01.212, rr.L01.217, rr.L01.224, rr.L01.240]
+    recap:
+      - "Oligodendrocytes ← PML و ODS؛ Schwann cells ← AIDP."
+      - "ALS = UMN + LMN؛ polio و SMA = LMN."
+      - "Noise ← high frequency الأول؛ Ménière ← endolymph زيادة."
+      - "Myopia = عين طويلة؛ hyperopia = قصيرة."
+      - "Horner: Wallenberg (1)، Pancoast (2)، carotid dissection (3)."
+    practice: [rr.L01.209, rr.L01.210, rr.L01.211, rr.L01.212, rr.L01.213, rr.L01.214, rr.L01.215, rr.L01.216, rr.L01.217, rr.L01.218, rr.L01.219, rr.L01.220, rr.L01.221, rr.L01.222, rr.L01.223, rr.L01.224, rr.L01.225, rr.L01.226, rr.L01.227, rr.L01.228, rr.L01.229, rr.L01.230, rr.L01.231, rr.L01.232, rr.L01.233, rr.L01.234, rr.L01.235, rr.L01.236, rr.L01.237, rr.L01.238, rr.L01.239, rr.L01.240, rr.L01.241]
+
+  - id: rr.L01.lesson10
+    title: "الكلية والـ reproductive والرئة: آخر صفحتين"
+    hook: "الـ RTA بأنواعها التلاتة بتتفهم من سؤال واحد: الحمض بيقف فين؟"
+    minutes: 10
+    pages: [718, 719]
+    topics: [psychiatry, renal, reproductive, respiratory]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Psychiatry: سطرين"
+        text: |-
+          - **Delirium**: غالباً ==ثانوي== لمرض (عدوى، trauma، electrolytes، احتباس بول) أو دوا (زي الـ anticholinergics).
+          - **Schizophrenia**: dopaminergic activity متغير، serotonergic أعلى، dendritic branching أقل.
+        page: 718
+        quote: "Usually 2° to illness (eg, CNS disease, infection, trauma, substance use"
+      - kind: figure
+        title: "الـ RTA: الخلل فين في الـ nephron؟"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <path class="fg-ink" d="M20 40 H150 Q170 40 170 60 V110 Q170 130 190 130 H340" fill="none" stroke-width="3"/>
+            <text x="30" y="30" class="t-sm t-b">PCT</text>
+            <text x="250" y="120" class="t-sm t-b">Distal / collecting</text>
+            <rect class="fg-acc" x="20" y="55" width="130" height="50" rx="8"/>
+            <text x="28" y="74" class="t-sm t-b">Type 2 (proximal)</text>
+            <text x="28" y="92" class="t-sm">HCO3- not reabsorbed</text>
+            <rect class="fg-bad" x="190" y="20" width="160" height="40" rx="8"/>
+            <text x="198" y="37" class="t-sm t-b">Type 1 (distal)</text>
+            <text x="198" y="53" class="t-sm">α-intercalated: no H+</text>
+            <rect class="fg-good" x="190" y="140" width="160" height="28" rx="8"/>
+            <text x="198" y="159" class="t-sm">Type 4: ↓ aldosterone → ↑ K+</text>
+          </svg>
+        caption: "Type 2 في الـ PCT: الـ bicarbonate بيضيع في البول. Type 1 في الـ distal: الـ α-intercalated cells مش قادرة تطلع H+. Type 4: الـ aldosterone قليل ← K+ يعلى ← الـ NH3 يقل ← الـ NH4+ ما يطلعش."
+        alt: "A nephron tube from the proximal tubule to the collecting duct. Type 2 RTA at the proximal tubule: bicarbonate is not reabsorbed. Type 1 RTA at the distal nephron: alpha-intercalated cells cannot secrete hydrogen ions. Type 4: low aldosterone raises potassium."
+        page: 718
+        quote: "Defective PCT HCO3"
+      - kind: reveal
+        prompt: "ليه الـ hyperkalemia في الـ type 4 بتعمل acidosis؟"
+        answer: "الـ K+ العالي بيقلل تصنيع الـ **NH3** في الـ PCT. والـ NH3 هو اللي بيمسك الـ H+ ويطلعه كـ **NH4+** في البول. NH3 أقل ← NH4+ أقل ← الحمض يفضل جوه ← metabolic acidosis."
+        page: 718
+        quote: "NH3 synthesis in PCT NH4+ excretion metabolic acidosis"
+      - kind: explain
+        title: "Nephritic ولا nephrotic؟"
+        text: |-
+          - **Nephritic**: التهاب في الـ glomerulus ← الـ GBM يتأذى ← ==dysmorphic RBCs== و hematuria؛ الـ GFR يقل ← oliguria و azotemia و renin يعلى.
+          - **Nephrotic**: الـ podocytes ← الـ ==charge barrier== يضيع ← proteinuria؛ الـ albumin يقل ← الكبد يعمل lipids أكتر؛ antithrombin يضيع ← جلطات؛ IgG يضيع ← عدوى.
+          - **Nephritic-nephrotic**: GBM damage شديد ← الاتنين.
+          - **Infection-related GN**: Type III مع complement قليل. **Alport**: type IV collagen (X-linked dominant) ← الـ GBM يتقسم.
+        page: 719
+        quote: "Podocyte damage  impaired charge barrier  proteinuria"
+      - kind: check
+        question: "A 6-year-old with nephrotic syndrome develops a renal vein thrombosis. Which loss explains it?"
+        options:
+          - "Antithrombin lost in the urine"
+          - "IgG lost in the urine"
+          - "Dysmorphic RBCs in the urine"
+          - "Increased renin release"
+        answer: 0
+        why:
+          - "صح: الـ antithrombin بيضيع في البول ← hypercoagulability."
+          - "الـ IgG loss بيعمل infections، مش جلطات."
+          - "ده nephritic، ومالوش دعوة بالجلطة."
+          - "الـ renin في الـ nephritic مع ↓ GFR."
+        page: 719
+        quote: "antithrombin loss  hypercoagulability"
+      - kind: table
+        title: "الـ incontinence والـ azotemia"
+        columns: ["Condition", "Mechanism"]
+        rows:
+          - ["Stress incontinence", "Outlet incompetence → leak with ↑ intra-abdominal pressure"]
+          - ["Urgency incontinence", "Detrusor overactivity"]
+          - ["Overflow incontinence", "Incomplete emptying → leak with overfilling"]
+          - ["Prerenal azotemia", "↓ RBF → ↓ GFR → ↑ Na⁺/H2O and urea reabsorption"]
+          - ["Intrinsic renal failure", "Patchy necrosis → tubule debris, backflow → ↓ GFR"]
+          - ["Postrenal azotemia", "Bilateral outflow obstruction"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+        page: 719
+        quote: "Detrusor overactivity  leak with urge to void immediately"
+      - kind: explain
+        title: "الـ reproductive"
+        text: |-
+          - **Adnexal torsion**: الوريد والـ lymph يتقفلوا الأول والشريان لسه بيضخ ← edema ← الشريان يتقفل ← necrosis.
+          - **Preeclampsia**: الـ spiral arteries مش طبيعية ← endothelial dysfunction ← HTN جديد مع proteinuria.
+          - **Supine hypotensive**: الرحم بيضغط على الـ aorta والـ IVC وهي نايمة على ضهرها.
+          - **PCOS**: insulin resistance ← ==LH:FSH يعلى== و androgens تعلى ← follicles ما تنفجرش ← anovulation.
+          - **Functional hypothalamic amenorrhea**: أكل قليل أو مجهود أو stress ← الـ GnRH pulses تتلخبط ← LH و FSH و estrogen يقلوا.
+          - **Varicocele**: ضغط وريدي ← الـ pampiniform plexus يوسع ← bag of worms.
+        page: 719
+        quote: "Abnormal placental spiral arteries  endothelial dysfunction"
+      - kind: explain
+        title: "الرئة"
+        text: |-
+          - **Methemoglobin**: Fe3+ (dapsone، local anesthetics، nitrites) ← الـ O2 ما يتربطش، بس الـ ==cyanide== affinity يعلى ← tissue hypoxia.
+          - **Sarcoidosis**: الـ macrophages في الـ granulomas فيها ==1α-hydroxylase== ← vitamin D يتفعّل ← Ca يعلى.
+          - **ARDS**: alveolar injury ← endothelial damage ← سايل غني بالبروتين ← hyaline membranes و noncardiogenic edema ← compliance يقل و V/Q mismatch.
+          - **Sleep apnea**: obstructive (مجهود ضد سدة)، central (CNS، CHF، opioids)، والـ obesity hypoventilation ← PaCO2 عالي وهو صاحي.
+        page: 719
+        quote: "hydroxylase activity in macrophages  vitamin D activation"
+      - kind: aside
+        tone: tip
+        text: "الـ **methemoglobin** بيتستخدم علاج: الـ nitrites بتعمل methemoglobin عمداً عشان يشفط الـ cyanide، لأن الـ Fe3+ ==بيحب الـ cyanide==. نفس السطر في الجدول بيشرح الاتنين."
+        page: 719
+        quote: "but  cyanide affinity  tissue hypoxia"
+      - kind: try
+        items: [rr.L01.245, rr.L01.250, rr.L01.257, rr.L01.263, rr.L01.268]
+    recap:
+      - "Type 1 RTA: α-intercalated ما بتطلعش H+؛ type 2: HCO3- بيضيع؛ type 4: K+ عالي ← NH4+ قليل."
+      - "Nephritic = GBM ← RBCs؛ nephrotic = podocytes ← protein، والـ antithrombin يضيع ← جلطات."
+      - "PCOS: LH:FSH عالي؛ FHA: LH و FSH و estrogen قليلين."
+      - "Sarcoid: 1α-hydroxylase في الـ macrophages. Methemoglobin: Fe3+ ← O2 أقل و cyanide أكتر."
+    practice: [rr.L01.242, rr.L01.243, rr.L01.244, rr.L01.245, rr.L01.246, rr.L01.247, rr.L01.248, rr.L01.249, rr.L01.250, rr.L01.251, rr.L01.252, rr.L01.253, rr.L01.254, rr.L01.255, rr.L01.256, rr.L01.257, rr.L01.258, rr.L01.259, rr.L01.260, rr.L01.261, rr.L01.262, rr.L01.263, rr.L01.264, rr.L01.265, rr.L01.266, rr.L01.267, rr.L01.268, rr.L01.269, rr.L01.270, rr.L01.271, rr.L01.272]
