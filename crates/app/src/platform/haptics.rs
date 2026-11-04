@@ -1,7 +1,7 @@
 //! A light tap of vibration with answer feedback, through `app.steps.Haptics`
 //! (android/). It follows the phone's own touch-feedback setting. Nothing on
 //! the Mac.
-// Adapted from kabar-app main: crates/app/src/platform/android.rs (vibrate).
+// Adapted from batna-app main: crates/app/src/platform/android.rs (vibrate).
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Haptic {

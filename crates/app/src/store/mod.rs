@@ -5,7 +5,7 @@
 //! Every synced table carries `account_id`, `device_id`, an HLC and a
 //! tombstone, so sync can be added without a schema change. Review events
 //! are append-only; verdicts and settings are last-writer-wins by HLC.
-// adapted from kabar-app main: crates/app/src/store.rs
+// adapted from batna-app main: crates/app/src/store.rs
 
 mod backend;
 pub mod export;

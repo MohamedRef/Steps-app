@@ -22,8 +22,8 @@ import java.time.LocalTime
 import java.time.ZoneId
 
 /**
- * Steps's daily study reminders, adapted from kabar-app main:
- * android/src/main/kotlin/app/kabar/Reminders.kt. Rust plans the next few
+ * Steps's daily study reminders, adapted from batna-app main:
+ * android/src/main/kotlin/…/Reminders.kt. Rust plans the next few
  * (`crates/app/src/reminders/plan.rs`) and hands them over as JSON; each
  * becomes an inexact [AlarmManager] alarm (no exact-alarm permission) that
  * [ReminderReceiver] posts. Offline, no server.

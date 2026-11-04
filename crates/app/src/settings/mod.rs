@@ -5,7 +5,7 @@
 //! `ALL`, with a title, summary and id) and one line in `SectionView`, and
 //! keeps the rows in its own module. Sections with nothing in them yet are
 //! simply not listed.
-// adapted from kabar-app main: crates/app/src/settings/mod.rs
+// adapted from batna-app main: crates/app/src/settings/mod.rs
 
 #[cfg(test)]
 mod browser;

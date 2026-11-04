@@ -24,8 +24,8 @@
 //! job (`app.steps.UpdateCheckJob`) that runs [`background_check`] even while
 //! Steps is closed.
 //!
-//! Adapted from kabar-app main: crates/app/src/update/mod.rs. Changes for
-//! Steps: `STEPS_*` build variables, the content pack (in place of Kabar's
+//! Adapted from batna-app main: crates/app/src/update/mod.rs. Changes for
+//! Steps: `STEPS_*` build variables, the content pack (in place of Batna's
 //! offline packs), and one language.
 
 mod recovery;
@@ -397,7 +397,7 @@ fn reject(dir: &Path, sha256: &str) {
 
 /// A pack that failed this build's checks. Unlike a rejection (it stopped
 /// Steps starting) it is tied to the app build, so an app update that can
-/// read it tries again. Adapted from kabar-app main:
+/// read it tries again. Adapted from batna-app main:
 /// `crates/app/src/update/content.rs`.
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 struct Unreadable {

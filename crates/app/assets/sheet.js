@@ -1,5 +1,5 @@
 // Steps info sheet gestures (crates/app/src/sheet.rs). Adapted from
-// kabar-app main: crates/app/assets/sheet.js (PR #453).
+// batna-app main: crates/app/assets/sheet.js.
 //   handle : drag freely; let go near a stop (peek / half / near full) and
 //            it settles there; fling up or down to the next stop; drag or
 //            fling below the peek to close. Double-tap toggles half ↔ full.

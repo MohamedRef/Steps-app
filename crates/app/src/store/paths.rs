@@ -1,5 +1,5 @@
 //! Where Steps keeps its database and writes exports.
-// adapted from kabar-app main: crates/app/src/platform/mod.rs (no JNI here:
+// adapted from batna-app main: crates/app/src/platform/mod.rs (no JNI here:
 // Android paths come from the package name)
 
 use std::path::PathBuf;

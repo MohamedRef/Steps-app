@@ -1,4 +1,4 @@
-// adapted from kabar-app main: crates/app/src/persistence/
+// adapted from batna-app main: crates/app/src/persistence/
 //! Observable preference save failures. Retry only idempotent preference
 //! writes; never enqueue append-only study events. Capture owned desired
 //! values and long-lived storage handles, not component-local signals.

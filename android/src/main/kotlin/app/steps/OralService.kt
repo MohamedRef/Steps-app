@@ -25,7 +25,7 @@ import android.os.PowerManager
  * The service never calls into Rust: buttons leave an action in [OralBridge],
  * which Rust polls.
  *
- * Adapted from kabar-app main: android/src/main/kotlin/app/kabar/PlaybackService.kt
+ * Adapted from batna-app main: android/src/main/kotlin/…/PlaybackService.kt
  * (no MediaPlayer: the speech comes from TextToSpeech, driven from Rust).
  */
 class OralService : Service() {

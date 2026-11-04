@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # zipalign + apksigner with the release key from ~/.steps and the Keychain.
-# Adapted from kabar-app main: scripts/android-sign.sh.
+# Adapted from batna-app main: scripts/android-sign.sh.
 set -euo pipefail
 IN="$1"; OUT="$2"; KEYSTORE="$3"; ALIAS="$4"
 

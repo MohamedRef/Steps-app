@@ -15,7 +15,7 @@
 //! 600px it is a centred dialog. Morphe's filled pills: blue for new, amber
 //! for fixes, green for improvements.
 //!
-//! Adapted from kabar-app main: `crates/app/src/update/sheet.rs` (one
+//! Adapted from batna-app main: `crates/app/src/update/sheet.rs` (one
 //! language, Steps's colours and buttons).
 
 use dioxus::prelude::*;

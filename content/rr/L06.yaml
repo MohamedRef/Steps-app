@@ -83,7 +83,7 @@ items:
       - question: "What is its half-life?"
         options: ["2 hours", "4 hours", "5.7 hours", "28 hours"]
         answer: 1
-        why: "t½ = 0.7 × Vd / CL = 0.7 × 40 / 7 = 4 hours. 5.7 hours forgets the 0.7; 28 hours multiplies Vd by CL."
+        why: "t½ = 0.7 × Vd / CL = 0.7 × 40 / 7 = 4 hours. 5.7 hours forgets the 0.7; 28 hours (0.7 × 40) forgets to divide by CL."
       - reveal: "The target plasma concentration is 10 mg/L, the dosage interval is 8 hours and the oral bioavailability is 0.8."
         question: "What maintenance dose is given every 8 hours?"
         options: ["70 mg", "448 mg", "560 mg", "700 mg"]
@@ -268,8 +268,10 @@ items:
     kind: mcq
     topic: public-health
     stem: >-
-      A screening test is moved from a general clinic to a specialist clinic where the disease is three times
-      as common. The test itself and its cut-off are unchanged. Which value will rise in the specialist clinic?
+      A 52-year-old woman is referred to a specialist breast clinic after a palpable lump is found. The clinic
+      screens her with the same test, at the same cut-off, that her primary care clinic uses, and the result is
+      positive. In the specialist clinic the disease is three times as common as in primary care. Compared with
+      the same positive result in primary care, which value is higher for her result here?
     options:
       - "Sensitivity"
       - "Specificity"
@@ -281,7 +283,7 @@ items:
       - "Sensitivity, TP / (TP + FN), is a property of the test and does not change with prevalence."
       - "Specificity, TN / (TN + FP), is a property of the test and does not change with prevalence."
       - "Right. PPV = TP / (TP + FP) is proportional to prevalence: more diseased people make a positive result more often a true positive."
-      - "NPV is proportional to 1/prevalence, so it falls when the disease is more common."
+      - "NPV varies inversely with prevalence, so it falls when the disease is more common."
       - "Likelihood ratios are built from sensitivity and specificity only, so they do not change."
     src: { page: 744, quote: "PPV = TP / (TP + FP); PPV is proportional to prevalence" }
     status: unverified
@@ -450,7 +452,7 @@ items:
       - "Right. RPI = 6 × (22.5 / 45) / 2 = 1.5. An RPI under 2 means the marrow is not responding enough to correct the anemia."
       - "3 corrects for the hematocrit but forgets to divide by the maturation time."
       - "6 is the raw reticulocyte count, which overstates production in anemia."
-      - "12 multiplies by the maturation time instead of dividing."
+      - "12 skips the hematocrit correction and multiplies by the maturation time instead of dividing."
       - "0.75 divides by the maturation time twice."
     src: { page: 745, quote: "RPI = % reticulocytes × Hct / maturation time" }
     status: unverified
@@ -600,14 +602,14 @@ items:
       - "70 mm Hg"
       - "100 mm Hg"
       - "110 mm Hg"
-      - "130 mm Hg"
+      - "250 mm Hg"
     answer: 0
     why:
       - "Right. PAO2 ≈ 150 − PaCO2 / 0.8 = 150 − 100 = 50 mm Hg. Hypoventilation lets CO2 build up in the alveoli and leaves less room for O2."
       - "70 mm Hg subtracts 80 without dividing by the respiratory quotient."
       - "100 mm Hg is the normal alveolar PO2 with a PaCO2 of 40 mm Hg."
       - "110 mm Hg would need a PaCO2 of 32 mm Hg, hyperventilation."
-      - "130 mm Hg adds instead of subtracting the CO2 term."
+      - "250 mm Hg adds the CO2 term (150 + 100) instead of subtracting it."
     src: { page: 745, quote: "PAo2 = PIo2 – Paco2 = 150 mm Hga – Paco2 / 0.8 RQ" }
     status: unverified
   - id: rr.L06.056

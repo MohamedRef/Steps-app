@@ -32,7 +32,7 @@ import kotlin.concurrent.thread
  *
  * Rust starts it through [install] and polls [state] (crates/app/src/platform/install.rs).
  *
- * Adapted from kabar-app main: android/src/main/kotlin/app/kabar/UpdateInstaller.kt.
+ * Adapted from batna-app main: android/src/main/kotlin/…/UpdateInstaller.kt.
  */
 object UpdateInstaller {
     const val IDLE = 0

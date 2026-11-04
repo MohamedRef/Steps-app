@@ -1,5 +1,5 @@
 //! Layout by window width, never by device name (Material window classes).
-// adapted from kabar-app main: crates/core/src/layout.rs
+// adapted from batna-app main: crates/core/src/layout.rs
 
 /// Compact under 600dp (the S24 Ultra upright), medium under 840dp, expanded
 /// from 840dp (the Tab S11, the Mac window).
