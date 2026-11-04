@@ -101,7 +101,7 @@ Existing tests live beside the owning facade in a child `tests.rs` module.
 
 The current command-specific checkpoint is [558](https://github.com/MohamedRef/Steps-app/pull/558); see
 [UI-PROGRESS.md](UI-PROGRESS.md) for the verification index and remaining audit.
-CaseRun::next_logged saves the completed event before advancing, and case::record returns the fallible StudyStore result. The calculator only sets its verdict after a successful write. Failed commands retain their answer and stay manually retryable; completed cases do not record twice.
+CaseRun::next_logged saves the completed event before advancing, and case::record returns the fallible StudyStore result. Failed commands retain their answer and stay manually retryable; completed cases do not record twice.
 These workflows do not enqueue append-only review events in preference recovery.
 
 ## Remaining work, in priority order
