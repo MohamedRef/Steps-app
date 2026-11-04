@@ -33,7 +33,7 @@ pub fn estimate_secs(body: &Body) -> u32 {
 pub struct Inputs<'a> {
     /// The lectures to study from, in book order.
     pub lectures: &'a [&'a Lecture],
-    /// Only these topics (`hb.L01/definition`); empty means every topic.
+    /// Only these topics (`cvs.L04/valves`); empty means every topic.
     pub topics: &'a HashSet<String>,
     /// Item kinds the player can show (`card`, `cloze`, …).
     pub kinds: &'a [&'a str],
@@ -58,7 +58,7 @@ pub struct Inputs<'a> {
 pub struct Planned {
     pub item_id: String,
     pub lecture: String,
-    /// `hb.L01/definition`, or the lecture id when the item has no topic.
+    /// `cvs.L04/valves`, or the lecture id when the item has no topic.
     pub topic: String,
     pub est_secs: u32,
     /// First time ever seen.
@@ -565,7 +565,7 @@ pub fn check_typed(expected: &str, typed: &str) -> Match {
     if whole != Match::Wrong {
         return whole;
     }
-    // A list answer ("vitamin A and retinoids", "ALT or AST"): every listed
+    // A list answer ("vitamin A and retinoids", "CK-MB or troponin"): every listed
     // part typed, in any order, is Right; some of an "and" list is Close; any
     // one of an "or" list is as good as that part.
     let (exp_parts, either) = list_parts(expected);
@@ -773,8 +773,8 @@ const GENERIC: &[&str] = &[
 ];
 
 /// A typed word covers a wanted one when they match, or share a stem that
-/// is most of the wanted word ("bleed" for "bleeding", not "hepa" for
-/// "hepatorenal").
+/// is most of the wanted word ("regurg" for "regurgitation", not "card" for
+/// "cardiomyopathy").
 fn word_hit(want: &str, have: &[String]) -> bool {
     let want_len = want.chars().count();
     have.iter().any(|h| {
@@ -788,8 +788,8 @@ fn word_hit(want: &str, have: &[String]) -> bool {
 /// Which points a free-typed recall already covers, to pre-tick them. A point
 /// counts when at least half of its key words appear somewhere in what was
 /// typed, its most specific word among them ("cardiomyopathy" covers
-/// "Cirrhotic cardiomyopathy"; "pulmonary hypertension" doesn't cover
-/// "Portal hypertension").
+/// "Hypertrophic cardiomyopathy"; "pulmonary hypertension" doesn't cover
+/// "Systemic hypertension").
 pub fn recalled(points: &[String], typed: &str) -> Vec<bool> {
     let have = key_words(typed);
     points
@@ -854,44 +854,42 @@ mod tests {
     #[test]
     fn new_items_follow_book_order_and_only_playable_kinds() {
         let plan = compose_with(&sample(), &[], &[], 600);
-        assert_eq!(ids(&plan), ["hb.L01.001", "hb.L01.002", "hb.L01.004", "hb.L01.005"]);
+        assert_eq!(ids(&plan), ["cvs.L04.001", "cvs.L04.002", "cvs.L04.004", "cvs.L04.005"]);
         assert!(plan.iter().all(|p| p.fresh));
     }
 
     #[test]
     fn due_reviews_come_first() {
-        let plan = compose_with(&sample(), &["hb.L01.005", "hb.L01.002"], &["hb.L01.002", "hb.L01.005"], 600);
-        assert_eq!(&ids(&plan)[..2], ["hb.L01.005", "hb.L01.002"]);
+        let plan =
+            compose_with(&sample(), &["cvs.L04.005", "cvs.L04.002"], &["cvs.L04.002", "cvs.L04.005"], 600);
+        assert_eq!(&ids(&plan)[..2], ["cvs.L04.005", "cvs.L04.002"]);
         assert!(!plan[0].fresh && !plan[1].fresh);
-        assert_eq!(&ids(&plan)[2..], ["hb.L01.001", "hb.L01.004"]);
+        assert_eq!(&ids(&plan)[2..], ["cvs.L04.001", "cvs.L04.004"]);
     }
 
     #[test]
     fn due_reviews_interleave_topics() {
         let mut lecture = sample();
-        // Two more child-pugh clozes, so three of the same topic are due together.
+        // Two more shock clozes, so three of the same topic are due together.
         for n in ["101", "102"] {
             let mut extra = lecture.items[1].clone();
-            extra.id = format!("hb.L01.{n}");
+            extra.id = format!("cvs.L04.{n}");
             lecture.items.push(extra);
         }
-        let due = ["hb.L01.002", "hb.L01.101", "hb.L01.102", "hb.L01.001"];
+        let due = ["cvs.L04.002", "cvs.L04.101", "cvs.L04.102", "cvs.L04.001"];
         let plan = compose_with(&lecture, &due, &due, 600);
         let topics: Vec<&str> = plan.iter().take(4).map(|p| p.topic.as_str()).collect();
-        assert_eq!(
-            topics,
-            ["hb.L01/child-pugh", "hb.L01/definition", "hb.L01/child-pugh", "hb.L01/child-pugh"]
-        );
+        assert_eq!(topics, ["cvs.L04/shock", "cvs.L04/valves", "cvs.L04/shock", "cvs.L04/shock"]);
     }
 
     #[test]
     fn new_items_are_blocked_by_topic() {
         let mut lecture = sample();
         let mut late = lecture.items[0].clone();
-        late.id = "hb.L01.200".into();
-        lecture.items.push(late); // a "definition" card at the end of the file
+        late.id = "cvs.L04.200".into();
+        lecture.items.push(late); // a "valves" card at the end of the file
         let plan = compose_with(&lecture, &[], &[], 6000);
-        assert_eq!(&ids(&plan)[..2], ["hb.L01.001", "hb.L01.200"]);
+        assert_eq!(&ids(&plan)[..2], ["cvs.L04.001", "cvs.L04.200"]);
     }
 
     #[test]
@@ -899,7 +897,7 @@ mod tests {
         let plan = compose_with(&sample(), &[], &[], 70);
         let total: u32 = plan.iter().map(|p| p.est_secs).sum();
         assert!(total <= 70, "{total}");
-        assert_eq!(ids(&plan), ["hb.L01.001", "hb.L01.002"]);
+        assert_eq!(ids(&plan), ["cvs.L04.001", "cvs.L04.002"]);
         let tiny = compose_with(&sample(), &[], &[], 1);
         assert_eq!(tiny.len(), 1);
     }
@@ -908,7 +906,7 @@ mod tests {
     fn daily_new_cap_holds_back_new_items_not_reviews() {
         let lecture = sample();
         let lectures = [&lecture];
-        let due = vec!["hb.L01.004".to_string()];
+        let due = vec!["cvs.L04.004".to_string()];
         let seen: HashSet<String> = due.iter().cloned().collect();
         let empty = HashSet::new();
         let plan = compose(&Inputs {
@@ -922,7 +920,7 @@ mod tests {
             budget_secs: 600,
             pages: None,
         });
-        assert_eq!(ids(&plan), ["hb.L01.004", "hb.L01.001"]);
+        assert_eq!(ids(&plan), ["cvs.L04.004", "cvs.L04.001"]);
     }
 
     #[test]
@@ -931,7 +929,7 @@ mod tests {
         // Another source's item cites its own page: it waits for any read
         // page of the lecture instead.
         let mut pathoma = lecture.items[0].clone();
-        pathoma.id = "hb.L01.300".into();
+        pathoma.id = "cvs.L04.300".into();
         pathoma.src.book = Some("pathoma".into());
         pathoma.src.page = 99;
         lecture.items.push(pathoma);
@@ -940,8 +938,8 @@ mod tests {
         own.src.page = 500;
         lecture.items.push(own.clone());
         let lectures = [&lecture];
-        // 004 (page 8, unread) is due: reviews are never gated.
-        let due = vec!["hb.L01.004".to_string()];
+        // 004 (page 319, read or not) is due: reviews are never gated.
+        let due = vec!["cvs.L04.004".to_string()];
         let seen: HashSet<String> = due.iter().cloned().collect();
         let empty = HashSet::new();
         let run = |pages: &PagesRead| {
@@ -958,14 +956,14 @@ mod tests {
             });
             ids(&plan).into_iter().map(str::to_string).collect::<Vec<_>>()
         };
-        let mut read = PagesRead::from(vec![[1, 1], [19, 19]]);
+        let mut read = PagesRead::from(vec![[319, 319], [305, 305]]);
         // The two copies of 001 share its topic, so they come together.
-        assert_eq!(run(&read), ["hb.L01.004", "hb.L01.001", "hb.L01.300", own.id.as_str(), "hb.L01.005"]);
-        // Reading page 14 unlocks the cloze on it.
-        read.mark(14, 14);
-        assert!(run(&read).contains(&"hb.L01.002".to_string()));
+        assert_eq!(run(&read), ["cvs.L04.004", "cvs.L04.001", "cvs.L04.300", own.id.as_str(), "cvs.L04.005"]);
+        // Reading page 317 unlocks the cloze on it.
+        read.mark(317, 317);
+        assert!(run(&read).contains(&"cvs.L04.002".to_string()));
         // Nothing read: only the review and his own card.
-        assert_eq!(run(&PagesRead::default()), ["hb.L01.004", own.id.as_str()]);
+        assert_eq!(run(&PagesRead::default()), ["cvs.L04.004", own.id.as_str()]);
     }
 
     #[test]
@@ -973,8 +971,8 @@ mod tests {
         let mut lecture = sample();
         lecture.items[0].status = Status::Rejected;
         let lectures = [&lecture];
-        let topics: HashSet<String> = ["hb.L01/child-pugh".to_string(), "hb.L01/presentation".into()].into();
-        let hidden: HashSet<String> = ["hb.L01.004".to_string()].into();
+        let topics: HashSet<String> = ["cvs.L04/shock".to_string(), "cvs.L04/rheumatic".into()].into();
+        let hidden: HashSet<String> = ["cvs.L04.004".to_string()].into();
         let empty = HashSet::new();
         let plan = compose(&Inputs {
             lectures: &lectures,
@@ -987,7 +985,7 @@ mod tests {
             budget_secs: 600,
             pages: None,
         });
-        assert_eq!(ids(&plan), ["hb.L01.002"]);
+        assert_eq!(ids(&plan), ["cvs.L04.002"]);
     }
 
     #[test]
@@ -995,14 +993,14 @@ mod tests {
         let plan = compose_with(&sample(), &[], &[], 600);
         let mut s = Session::new(plan);
         // He marks 001 ✗ and grades it Again; 002 arrives ✗ by sync.
-        let hidden = |id: &str| matches!(id, "hb.L01.001" | "hb.L01.002");
+        let hidden = |id: &str| matches!(id, "cvs.L04.001" | "cvs.L04.002");
         s.grade_unless(Grade::Again, hidden);
-        assert_ne!(s.current().unwrap().item_id, "hb.L01.002");
+        assert_ne!(s.current().unwrap().item_id, "cvs.L04.002");
         while !s.is_done() {
             assert!(!hidden(&s.current().unwrap().item_id));
             s.grade_unless(Grade::Good, hidden);
         }
-        assert_eq!(s.outcomes.iter().filter(|o| o.item_id == "hb.L01.001").count(), 1);
+        assert_eq!(s.outcomes.iter().filter(|o| o.item_id == "cvs.L04.001").count(), 1);
     }
 
     #[test]
@@ -1013,7 +1011,7 @@ mod tests {
         s.grade(Grade::Good);
         s.grade(Grade::Hard);
         s.grade(Grade::Easy);
-        assert_eq!(s.current().unwrap().item_id, "hb.L01.001");
+        assert_eq!(s.current().unwrap().item_id, "cvs.L04.001");
         assert!(s.is_retry());
         s.grade(Grade::Again); // no second retry
         assert!(s.is_done());
@@ -1021,7 +1019,7 @@ mod tests {
         assert_eq!(sum.items, 4);
         assert_eq!(sum.right, 2);
         assert_eq!(sum.fresh, 4);
-        assert_eq!(sum.shaky, ["hb.L01.001", "hb.L01.004"]);
+        assert_eq!(sum.shaky, ["cvs.L04.001", "cvs.L04.004"]);
     }
 
     #[test]
@@ -1040,30 +1038,30 @@ mod tests {
 
     #[test]
     fn typed_words_allow_case_and_small_typos() {
-        assert_eq!(check_typed("SBP", "sbp"), Match::Right);
-        assert_eq!(check_typed("Hepatopulmonary syndrome", "hepatopulmonary-syndrome"), Match::Right);
-        assert_eq!(check_typed("Terlipressin", "terlipresin"), Match::Close);
-        assert_eq!(check_typed("TIPS", "TIPSS"), Match::Wrong);
-        assert_eq!(check_typed("Propranolol", "Carvedilol"), Match::Wrong);
+        assert_eq!(check_typed("HOCM", "hocm"), Match::Right);
+        assert_eq!(check_typed("Eisenmenger syndrome", "eisenmenger-syndrome"), Match::Right);
+        assert_eq!(check_typed("Nitroprusside", "nitroprusid"), Match::Close);
+        assert_eq!(check_typed("PDA", "PDAS"), Match::Wrong);
+        assert_eq!(check_typed("Metoprolol", "Carvedilol"), Match::Wrong);
     }
 
     #[test]
     fn opposite_prefixes_are_wrong_not_typos() {
         assert_eq!(check_typed("Hypokalaemia", "hyperkalaemia"), Match::Wrong);
         assert_eq!(check_typed("Hypothyroidism", "hyperthyroidism"), Match::Wrong);
-        assert_eq!(check_typed("Intrahepatic", "extrahepatic"), Match::Wrong);
-        assert_eq!(check_typed("Intrahepatic", "interhepatic"), Match::Wrong);
+        assert_eq!(check_typed("Intracellular", "extracellular"), Match::Wrong);
+        assert_eq!(check_typed("Intracellular", "intercellular"), Match::Wrong);
         assert_eq!(check_typed("Bradycardia", "tachycardia"), Match::Wrong);
         assert_eq!(check_typed("Microcytic", "macrocytic"), Match::Wrong);
         assert_eq!(check_typed("Afferent", "efferent"), Match::Wrong);
-        assert_eq!(check_typed("Prehepatic", "posthepatic"), Match::Wrong);
+        assert_eq!(check_typed("Preload", "postload"), Match::Wrong);
         assert_eq!(check_typed("Primary hypoaldosteronism", "primary hyperaldosteronism"), Match::Wrong);
         assert_eq!(check_typed("Abduction", "adduction"), Match::Wrong);
         // British and American spellings are the same answer.
         assert_eq!(check_typed("Hypokalaemia", "hypokalemia"), Match::Right);
         assert_eq!(check_typed("Haemolysis", "hemolysis"), Match::Right);
-        assert_eq!(check_typed("Oesophageal varices", "esophageal varices"), Match::Right);
-        assert_eq!(check_typed("Haemochromatosis", "hemochromatosis"), Match::Right);
+        assert_eq!(check_typed("Oedematous ankles", "edematous ankles"), Match::Right);
+        assert_eq!(check_typed("Ischaemia", "ischemia"), Match::Right);
         assert_eq!(check_typed("Tumour", "tumor"), Match::Right);
         // Shared first letters are not a prefix swap: typos stay close.
         assert_eq!(check_typed("Hemolysis", "hemolisis"), Match::Close);
@@ -1186,18 +1184,17 @@ mod tests {
         assert_eq!(check_typed(e, "retinoids and vitamin A"), Match::Right);
         assert_eq!(check_typed(e, "vitamin A, iron"), Match::Wrong);
         assert_eq!(check_typed(e, "glycogen"), Match::Wrong);
-        assert_eq!(check_typed("ALT or AST", "AST"), Match::Right);
+        assert_eq!(check_typed("CK-MB or troponin", "troponin"), Match::Right);
         assert_eq!(check_typed("hyperkalaemia and acidosis", "hypokalaemia"), Match::Wrong);
     }
 
     #[test]
     fn recall_needs_more_than_a_shared_stem() {
-        let points: Vec<String> = ["Hepatorenal syndrome", "Hepatopulmonary syndrome", "Portal hypertension"]
-            .map(String::from)
-            .to_vec();
-        assert_eq!(recalled(&points, "hepatorenal syndrome\npulmonary hypertension"), [true, false, false]);
-        assert_eq!(recalled(&points, "hepa"), [false, false, false]);
-        assert_eq!(recalled(&points, "HRS, HPS\nportal htn"), [false, false, true]);
+        let points: Vec<String> =
+            ["Cardiac tamponade", "Cardiogenic shock", "Pulmonary hypertension"].map(String::from).to_vec();
+        assert_eq!(recalled(&points, "cardiac tamponade\nsystemic hypertension"), [true, false, false]);
+        assert_eq!(recalled(&points, "card"), [false, false, false]);
+        assert_eq!(recalled(&points, "BCK, CS\npulmonary htn"), [false, false, true]);
     }
 
     #[test]
@@ -1209,14 +1206,20 @@ mod tests {
 
     #[test]
     fn free_recall_pre_ticks_matching_points() {
-        let points: Vec<String> =
-            ["Recurrent variceal bleeding", "Recurrent HE", "Refractory ascites", "SBP", "HRS-AKI", "ACLF"]
-                .map(String::from)
-                .to_vec();
-        let typed = "variceal bleed again\nrefractory ascites\nsbp\nhrs aki";
+        let points: Vec<String> = [
+            "Migratory polyarthritis",
+            "Pancarditis",
+            "Subcutaneous nodules",
+            "Erythema marginatum",
+            "Sydenham chorea",
+            "ASO titer",
+        ]
+        .map(String::from)
+        .to_vec();
+        let typed = "polyarthritis migratory\nsubcutaneous nodules\nerythema marginatum\nsydenham chorea";
         assert_eq!(recalled(&points, typed), [true, false, true, true, true, false]);
         assert_eq!(recalled(&points, ""), [false; 6]);
-        let headings = ["Cirrhotic cardiomyopathy".to_string(), "Portopulmonary hypertension".into()];
+        let headings = ["Hypertrophic cardiomyopathy".to_string(), "Pulmonary hypertension".into()];
         assert_eq!(recalled(&headings, "cardiomyopathy"), [true, false]);
     }
 
@@ -1226,7 +1229,7 @@ mod tests {
         let Body::Essay { outline, .. } = &lecture.items[4].body else { panic!() };
         let s = outline_sections(outline);
         assert_eq!(s.len(), 4);
-        assert_eq!(s[0].0, "Hyperdynamic circulatory syndrome");
+        assert_eq!(s[0].0, "Risk factors");
         assert_eq!(s[3].1.len(), 3);
     }
 }

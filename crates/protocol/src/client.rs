@@ -221,7 +221,7 @@ mod tests {
         Op {
             id: id.into(),
             table: "item_status".into(),
-            row_id: "hb.L01.001".into(),
+            row_id: "cvs.L04.001".into(),
             kind: OpKind::Upsert,
             hlc: Hlc { wall_ms: 1, counter: 0, device: "s24u".into() },
             relay: false,

@@ -126,7 +126,7 @@ pub fn speakable(text: &str) -> String {
 /// Which items go into a session.
 #[derive(Clone, Debug, PartialEq)]
 pub struct Pick {
-    /// One lecture (`hb.L01`), or every written lecture.
+    /// One lecture (`cvs.L04`), or every written lecture.
     pub lecture: Option<String>,
     /// Questions in the session (Agains come on top).
     pub size: usize,
@@ -316,7 +316,7 @@ mod tests {
         let kinds: Vec<_> = pool([&lecture], None).iter().map(|p| p.kind).collect();
         assert!(kinds.contains(&"card") && kinds.contains(&"enumerate") && kinds.contains(&"essay"));
         assert!(kinds.iter().all(|k| ["card", "enumerate", "essay", "case"].contains(k)));
-        assert!(pool([&lecture], Some("hb.L02")).is_empty());
+        assert!(pool([&lecture], Some("cvs.L05")).is_empty());
     }
 
     #[test]
@@ -324,8 +324,8 @@ mod tests {
         let lecture = sample();
         let p = pool([&lecture], None).into_iter().find(|p| p.kind == "enumerate").unwrap();
         assert!(p.what_else);
-        assert_eq!(p.pass, Some((5, 7)));
-        assert!(p.spoken_answer().starts_with("Recurrent variceal bleeding. Recurrent HE"));
+        assert_eq!(p.pass, Some((4, 5)));
+        assert!(p.spoken_answer().starts_with("Migratory polyarthritis. Pancarditis"));
     }
 
     #[test]
@@ -334,7 +334,7 @@ mod tests {
         let p = pool([&lecture], None).into_iter().find(|p| p.kind == "essay").unwrap();
         assert_eq!(
             p.answer[0],
-            "Hyperdynamic circulatory syndrome: Features; Cause (systemic vasodilatation via PSS)"
+            "Risk factors: Hypertension (strongest); Bicuspid aortic valve; Marfan syndrome"
         );
     }
 
@@ -349,15 +349,18 @@ mod tests {
 
     #[test]
     fn symbols_are_spelled_out() {
-        assert_eq!(speakable("MELD ≥15 → transplant"), "MELD at least 15 then transplant");
-        assert_eq!(speakable("SAAG ≥ 1.1 g/dL, ~80%"), "SAAG at least 1.1 g/dL, about 80 percent");
+        assert_eq!(
+            speakable("Pulsus paradoxus >10 mm Hg → tamponade"),
+            "Pulsus paradoxus more than 10 mm Hg then tamponade"
+        );
+        assert_eq!(speakable("EF ≥ 50%, ~80%"), "EF at least 50 percent, about 80 percent");
     }
 
     fn card(id: &str, topic: &str) -> Prompt {
         Prompt {
             item_id: id.into(),
             kind: "card",
-            lecture: "hb.L01".into(),
+            lecture: "cvs.L04".into(),
             topic: Some(topic.into()),
             page: 1,
             quote: None,
@@ -415,9 +418,9 @@ mod tests {
 
     #[test]
     fn every_third_card_leads_into_its_topics_essay() {
-        let mut essay = card("essay", "portal");
+        let mut essay = card("essay", "septation");
         essay.kind = "essay";
-        let mut pool: Vec<_> = (0..5).map(|i| card(&format!("c{i}"), "portal")).collect();
+        let mut pool: Vec<_> = (0..5).map(|i| card(&format!("c{i}"), "septation")).collect();
         pool.push(essay);
         // Find a seed that puts the essay last, so only the follow-up can pull it forward.
         let seed = (0..200)

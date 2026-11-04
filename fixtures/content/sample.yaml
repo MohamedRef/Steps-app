@@ -1,105 +1,114 @@
-# One item of every kind, from Lecture 1 (Liver Cirrhosis). Used by tests and
-# as the worked example in docs/CONTENT.md. Not study content: the real
-# lecture lives in content/hb/L01.yaml.
+# One item of every kind, written like Cardiovascular › Pathology (First Aid
+# 2026, printed pages 300–320). Used by tests and as the worked example in
+# docs/CONTENT.md. Not study content: the real lecture lives in
+# content/cvs/L04.yaml.
 schema: steps.content/v1
-lecture: hb.L01
-title: Liver Cirrhosis
-author: Dr. Mohamed Bakosh
-book: { chapter: 1, pages: [1, 22] }
+lecture: cvs.L04
+title: Pathology
+book: { chapter: 1, pages: [300, 320] }
 topics:
-  - { id: definition, title: Definition and causes }
-  - { id: presentation, title: Clinical presentation }
-  - { id: child-pugh, title: Child-Pugh and MELD }
-  - { id: management, title: Management }
-  - { id: cardiopulmonary, title: Cardiopulmonary complications }
+  - { id: valves, title: Valvular heart disease }
+  - { id: rheumatic, title: Rheumatic fever }
+  - { id: shock, title: Shock and tamponade }
+  - { id: dissection, title: Aortic dissection }
+  - { id: pericardium, title: Pericardial disease }
 items:
-  - id: hb.L01.001
+  - id: cvs.L04.001
     kind: card
-    topic: definition
-    front: Anatomical definition of cirrhosis?
-    back: A diffuse process with fibrosis and regenerative nodules that disrupts the normal architecture of the liver.
-    src: { page: 1, quote: "diffuse process with fibrosis and regenerative nodule formation" }
+    topic: valves
+    front: Which valve does rheumatic heart disease affect most often?
+    back: The mitral valve (mitral > aortic >> tricuspid; the high-pressure valves are affected most).
+    src: { page: 319, quote: "mitral > aortic >> tricuspid" }
     status: unverified
-  - id: hb.L01.002
+    tags: [high-yield]
+  - id: cvs.L04.002
     kind: cloze
-    topic: child-pugh
-    text: "Child-Pugh class A = {{c1::5-6}} points, B = {{c2::7-9}}, C = {{c3::10-15}}."
-    src: { page: 14 }
+    topic: shock
+    text: "Beck triad of cardiac tamponade: {{c1::hypotension}}, {{c2::distended neck veins}} and {{c3::distant heart sounds}}."
+    src: { page: 317 }
     status: unverified
-    tags: [numbers, high-yield]
-  - id: hb.L01.003
+    tags: [high-yield]
+  - id: cvs.L04.003
     kind: mcq
-    topic: child-pugh
+    topic: shock
     stem: >-
-      A 58-year-old man with HCV cirrhosis has no encephalopathy, mild ascites, bilirubin 2.5 mg/dL,
-      albumin 3.0 g/dL and PT prolonged by 3 seconds. What is his Child-Pugh class?
-    options: [Class A, Class B, Class C, Cannot be scored without the INR]
-    answer: 1
+      A 45-year-old man is brought to the emergency department after a stab wound to the chest.
+      His blood pressure is 80/50 mm Hg, his neck veins are distended and his heart sounds are distant.
+      Systolic blood pressure falls by 15 mm Hg on inspiration. Which of the following is the most likely
+      finding on echocardiography?
+    options:
+      - Diastolic collapse of the right ventricle
+      - Dilated left ventricle with a low ejection fraction
+      - Asymmetric septal hypertrophy
+      - Flail mitral leaflet
+      - Vegetation on the tricuspid valve
+    answer: 0
     why:
-      - Class A needs 5-6 points; he has 8.
-      - "8 points: encephalopathy 1, ascites 2, bilirubin 2, albumin 2, PT 1."
-      - Class C needs 10 points or more.
-      - The book's table scores PT as seconds prolonged, so the INR is not needed.
-    src: { page: 14 }
+      - Tamponade compresses the heart; the echo shows systolic RA collapse, diastolic RV collapse and IVC plethora.
+      - A dilated, poorly contracting LV is dilated cardiomyopathy, which does not give Beck triad after trauma.
+      - Asymmetric septal hypertrophy is hypertrophic cardiomyopathy.
+      - A flail leaflet gives acute mitral regurgitation and pulmonary edema, not distended neck veins with distant sounds.
+      - Tricuspid vegetations suggest endocarditis in people who inject drugs.
+    src: { page: 317 }
     status: unverified
-  - id: hb.L01.004
+    tags: [high-yield]
+  - id: cvs.L04.004
     kind: enumerate
-    topic: presentation
-    prompt: Enumerate the events that define further decompensation.
-    points: [Recurrent variceal bleeding, Recurrent HE, Refractory ascites, SBP, HRS-AKI, Bacterial infections, ACLF]
-    pass: 5
-    hook: "نفس العفاريت بس «تاني وعِنِد»: نزيف تاني، HE تاني، استسقاء عنيد، وبعدين عدوى (SBP وغيرها)، والكلية تقع، والآخر ACLF."
-    src: { page: 8 }
+    topic: rheumatic
+    prompt: List the major (J♥NES) criteria of rheumatic fever.
+    points: [Migratory polyarthritis, Pancarditis, Subcutaneous nodules, Erythema marginatum, Sydenham chorea]
+    pass: 4
+    hook: "J♥NES: المفاصل (Joint)، القلب (♥)، العقد تحت الجلد (Nodules)، الطفح (Erythema)، والرقص (Sydenham)."
+    src: { page: 319 }
     status: unverified
-  - id: hb.L01.005
+  - id: cvs.L04.005
     kind: essay
-    topic: cardiopulmonary
-    prompt: Discuss the cardiopulmonary complications of cirrhosis.
+    topic: dissection
+    prompt: Describe aortic dissection.
     outline:
-      - Hyperdynamic circulatory syndrome: [Features, Cause (systemic vasodilatation via PSS)]
-      - Cirrhotic cardiomyopathy: [Definition, Silent at rest, Echo diagnosis]
-      - Portopulmonary hypertension: [Definition, Pathogenesis, Treatment]
-      - Hepatopulmonary syndrome: [Diagnostic triad, Platypnea and orthodeoxia, LT is the only effective therapy]
-    src: { page: 19 }
+      - Risk factors: [Hypertension (strongest), Bicuspid aortic valve, Marfan syndrome]
+      - Presentation: [Tearing chest pain radiating to the back, Unequal BP in the arms, Mediastinal widening on CXR]
+      - Stanford classification: [Type A involves the ascending aorta and needs surgery, Type B is distal to the left subclavian and gets β-blockers then vasodilators]
+      - Complications: [Acute aortic regurgitation, Cardiac tamponade, Organ ischemia]
+    src: { page: 305 }
     status: unverified
-    tags: [book-question]
-  - id: hb.L01.006
+  - id: cvs.L04.006
     kind: case
-    topic: cardiopulmonary
-    stem: A 50-year-old woman with cirrhosis complains of breathlessness that is worse when she sits up.
+    topic: dissection
+    stem: A 62-year-old man with long-standing hypertension has sudden tearing chest pain that radiates to his back.
     steps:
-      - reveal: "Room-air ABG: PaO2 72 mmHg, A-a gradient 22 mmHg. PaO2 falls by 6 mmHg on standing."
+      - reveal: "BP 170/100 mm Hg in the right arm and 130/80 mm Hg in the left. CXR: mediastinal widening."
         question: What is the most likely diagnosis?
-        options: [Portopulmonary hypertension, Hepatopulmonary syndrome, Hepatic hydrothorax, Cirrhotic cardiomyopathy]
+        options: [Acute MI, Aortic dissection, Pulmonary embolism, Acute pericarditis, Tension pneumothorax]
         answer: 1
-        why: Platypnea and orthodeoxia with an A-a gradient above 15 mmHg point to HPS.
-      - question: What is the only effective treatment?
-        options: [TIPS, Long-term oxygen alone, Liver transplantation, Carvedilol]
-        answer: 2
-        why: LT improves oxygenation at 1 year. TIPS can worsen shunting.
-    src: { page: 21 }
+        why: Tearing pain to the back with unequal arm pressures and a wide mediastinum point to dissection.
+      - reveal: CT angiography shows a flap in the ascending aorta.
+        question: What is the treatment?
+        options: [β-blockers alone, Surgery, Thrombolysis, Pericardiocentesis, Observation]
+        answer: 1
+        why: Stanford type A involves the ascending aorta and is treated with surgery.
+    src: { page: 305 }
     status: unverified
-  - id: hb.L01.007
+  - id: cvs.L04.007
     kind: table
-    topic: child-pugh
-    title: Child-Pugh points
-    columns: [Variable, "1 point", "2 points", "3 points"]
+    topic: shock
+    title: Shock hemodynamics
+    columns: [Type, CVP, PCWP, CO, SVR]
     rows:
-      - [Encephalopathy, None, Stage 1-2, Stage 3-4]
-      - [Ascites, Absent, Mild to moderate, Severe]
-      - ["Bilirubin (mg/dL)", "<2", "2-3", ">3"]
-      - ["Albumin (g/dL)", ">3.5", "2.8-3.5", "<2.8"]
-      - ["PT (seconds prolonged)", "<4", "4-6", ">6"]
-    blanks: [[2, 1], [3, 2], [4, 3]]
-    src: { page: 14 }
+      - [Hypovolemic, ↓, ↓, ↓, ↑]
+      - [Cardiogenic, ↑, ↑, ↓, ↑]
+      - [Distributive, ↓, ↓, ↑, ↓]
+    blanks: [[0, 4], [1, 2], [2, 3]]
+    src: { page: 317 }
     status: unverified
-  - id: hb.L01.008
+  - id: cvs.L04.008
     kind: order
-    topic: management
-    prompt: Order the steps for coagulopathy in a cirrhotic with variceal bleeding, per the lecture.
+    topic: pericardium
+    prompt: "Pulsus paradoxus, from inspiration to the fall in systolic BP."
     steps:
-      - PH-lowering agents
-      - Local endoscopic hemostasis
-      - Correct coagulopathy only if bleeding is still not controlled
-    src: { page: 16 }
+      - Inspiration raises venous return
+      - More RV filling
+      - The septum bows toward the LV
+      - Less LV ejection and a fall in systolic BP
+    src: { page: 317 }
     status: unverified
