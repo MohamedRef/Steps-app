@@ -262,6 +262,9 @@ mod tests {
             .flat_map(|dir| dir.flatten())
             .filter(|f| f.path().extension().is_some_and(|e| e == "yaml"))
             .count();
-        assert_eq!(lib.lectures.len(), written, "every lecture file made it into the pack");
+        // Tests hide the index's last lecture so it reads as unwritten (load).
+        let hidden = lib.index.lectures.last().is_some_and(|e| !lib.lectures.contains_key(&e.id));
+        assert!(hidden, "the last lecture plays the unwritten one");
+        assert_eq!(lib.lectures.len() + 1, written, "every lecture file made it into the pack");
     }
 }
