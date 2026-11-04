@@ -76,6 +76,9 @@ pub fn validate(op: &Op, max_payload_bytes: usize) -> Result<SyncKind, RejectRea
 }
 
 #[cfg(test)]
+mod props;
+
+#[cfg(test)]
 mod tests {
     use serde_json::json;
 

@@ -1,0 +1,542 @@
+schema: steps.lesson/v1
+lecture: mic.L04
+lessons:
+  - id: mic.L04.lesson1
+    title: "Protozoa الأمعاء والمخ"
+    hook: "مية ملوثة، لحمة نيّة، قطة في البيت، وحمام سباحة دافي: كل واحدة ليها بروتوزوا"
+    minutes: 9
+    pages: [152, 153]
+    topics: [protozoa-gi, protozoa-cns]
+    goals:
+      - "تفرّق Giardia و Entamoeba و Cryptosporidium من شكل الإسهال والـ stool"
+      - "تعرف الـ Toxoplasma في الشخص السليم وفي الـ AIDS وفي الجنين"
+      - "تعرف Naegleria و Trypanosoma brucei وعلاجهم"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "تلاتة في المية"
+        text: |-
+          التلاتة دول بيتنقلوا بـ ==cysts (أو oocysts) في المية==، بس كل واحد إسهاله شكل:
+
+          - **Giardia**: إسهال ==fatty==، ريحته وحشة، من غير دم، ومعاه bloating و flatulence. غالباً campers و hikers.
+          - **Entamoeba histolytica**: إسهال ==بدم== (dysentery) و liver abscess.
+          - **Cryptosporidium**: إسهال مية خفيف في السليم، وشديد في الـ AIDS.
+        page: 152
+        quote: "Giardiasis—bloating, flatulence, foul-smelling, nonbloody, fatty diarrhea (often seen in campers/hikers)"
+      - kind: aside
+        tone: tip
+        text: "تحشيشة الكتاب: ==fat-rich Ghirardelli chocolates== for fatty stools of Giardia. وللـ Entamoeba: ==Entamoeba Eats Erythrocytes==، يعني الـ trophozoite جواه RBCs."
+        page: 152
+        quote: "think fat-rich Ghirardelli chocolates for fatty stools of Giardia"
+      - kind: explain
+        title: "Entamoeba: من القولون للكبد"
+        text: |-
+          - في القولون: ==flask-shaped ulcers== في الـ biopsy.
+          - في الكبد: abscess فيه exudate شكله ==anchovy paste==، مع ألم RUQ.
+          - في الـ stool: trophozoites بلعت RBCs، أو cysts فيها لحد 4 nuclei.
+
+          العلاج: **metronidazole**، و **paromomycin** للي شايل cysts من غير أعراض.
+        page: 152
+        quote: "liver abscess (“anchovy paste” exudate), RUQ pain; histology of colon biopsy shows flask-shaped ulcers"
+      - kind: table
+        title: "التشخيص والعلاج"
+        columns: ["", "Diagnosis", "Treatment"]
+        rows:
+          - ["Giardia", "Multinucleated trophozoites or cysts, antigen, PCR", "Tinidazole, nitazoxanide, or metronidazole"]
+          - ["Entamoeba", "Trophozoites with RBCs, cysts with up to 4 nuclei", "Metronidazole; paromomycin for cyst passers"]
+          - ["Cryptosporidium", "Oocysts on acid-fast stain", "Prevention (filtering); nitazoxanide"]
+        hide: [[0, 2], [1, 2], [2, 1]]
+        page: 152
+        quote: "Oocysts on acid-fast stain F , antigen detection, PCR Prevention (eg, filtering); nitazoxa- nide (severe disease and/or immuno- compromised)"
+      - kind: check
+        question: "A hiker has 2 weeks of greasy, foul-smelling, nonbloody diarrhea with bloating after drinking stream water. Which organism?"
+        options:
+          - "Giardia lamblia"
+          - "Entamoeba histolytica"
+          - "Cryptosporidium"
+          - "Trichomonas vaginalis"
+        answer: 0
+        why:
+          - "صح: fatty، foul-smelling، nonbloody، وفي campers و hikers."
+          - "الـ Entamoeba إسهالها بدم."
+          - "الـ Cryptosporidium إسهاله مية، وشديد في الـ AIDS."
+          - "الـ Trichomonas بيعمل vaginitis مش إسهال."
+        page: 152
+        quote: "nonbloody, fatty diarrhea (often seen in campers/hikers)"
+      - kind: explain
+        title: "Toxoplasma: تلات صور"
+        text: |-
+          - **السليم**: أعراض زي الـ mono، بس ==heterophile antibody test ⊝==.
+          - **الـ AIDS** (reactivation): brain abscesses، غالباً ==multiple ring-enhancing lesions== على الـ MRI.
+          - **Congenital**: chorioretinitis و hydrocephalus و intracranial calcifications.
+
+          بيتنقل بالـ cysts في اللحمة (الأشهر)، والـ oocysts في براز القطط، وبيعدي الـ placenta.
+        page: 153
+        quote: "Reactivation in AIDS →  brain abscesses usually seen as multiple ring-enhancing lesions on MRI"
+      - kind: figure
+        title: "دورة الـ Toxoplasma"
+        svg: |-
+          <svg viewBox="0 0 360 192" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="micL04a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="20" width="90" height="30" rx="6"/>
+            <text x="20" y="40" class="t-sm">cysts in meat</text>
+            <rect class="fg-box" x="10" y="70" width="90" height="30" rx="6"/>
+            <text x="18" y="90" class="t-sm">cat feces</text>
+            <line class="fg-arrow" x1="100" y1="35" x2="140" y2="60" marker-end="url(#micL04a)"/>
+            <line class="fg-arrow" x1="100" y1="85" x2="140" y2="68" marker-end="url(#micL04a)"/>
+            <rect class="fg-acc" x="145" y="48" width="70" height="30" rx="6"/>
+            <text x="158" y="68" class="t-sm t-b">human</text>
+            <line class="fg-arrow" x1="215" y1="56" x2="250" y2="30" marker-end="url(#micL04a)"/>
+            <line class="fg-arrow" x1="215" y1="64" x2="250" y2="75" marker-end="url(#micL04a)"/>
+            <line class="fg-arrow" x1="215" y1="72" x2="250" y2="122" marker-end="url(#micL04a)"/>
+            <text x="254" y="30" class="t-sm">healthy:</text>
+            <text x="254" y="45" class="t-sm t-mut">mono-like</text>
+            <text x="254" y="80" class="t-sm">AIDS:</text>
+            <text x="254" y="95" class="t-sm t-mut">ring lesions</text>
+            <text x="254" y="128" class="t-sm">fetus:</text>
+            <text x="254" y="143" class="t-sm t-mut">chorioretinitis,</text>
+            <text x="254" y="158" class="t-sm t-mut">hydrocephalus,</text>
+            <text x="254" y="173" class="t-sm t-mut">calcifications</text>
+          </svg>
+        caption: "العدوى من اللحمة أو براز القطط. السليم بياخد mono-like، الـ AIDS بيعمل ring-enhancing lesions، والجنين بياخد الـ triad."
+        alt: "Toxoplasma: cysts in meat and oocysts in cat feces infect a human. A healthy host gets a mononucleosis-like illness, a patient with AIDS gets ring-enhancing brain lesions, and a fetus gets chorioretinitis, hydrocephalus and intracranial calcifications."
+        page: 153
+        quote: "Cysts in meat (most common); oocysts in cat feces; crosses placenta (pregnant patients should avoid cats)"
+      - kind: explain
+        title: "علاج الـ Toxo والوقاية"
+        text: |-
+          - العلاج: ==sulfadiazine + pyrimethamine==.
+          - الوقاية في الـ HIV: **TMP-SMX** لما الـ ==CD4+ تحت 100==. (قارن بالـ PCP اللي حده 200.)
+          - التشخيص: serology، biopsy (tachyzoite)، و PCR للـ amniotic fluid لو شاكّين في الجنين.
+        page: 153
+        quote: "Sulfadiazine + pyrimethamine Prophylaxis with TMP-SMX when CD4+ cell count <100 cells/mm3"
+      - kind: reveal
+        prompt: "ولد عام في بحيرة دافية في الصيف، وبعد كام يوم جاله meningoencephalitis سريع جداً، والـ CSF فيه amoebas. وصل للمخ إزاي؟"
+        answer: "ده ==Naegleria fowleri==. دخل من الأنف ومشي على الـ ==olfactory nerve== عن طريق الـ cribriform plate. والمرض rapidly fatal، والـ amphotericin B نفع مع قليلين بس."
+        page: 153
+        quote: "Swimming in warm freshwater; enters CNS through olfactory nerve via cribriform plate"
+      - kind: explain
+        title: "Trypanosoma brucei: مرض النوم الأفريقي"
+        text: |-
+          من عضة ==tsetse fly== اللي بتوجع. بيعمل lymph nodes كبيرة، و ==recurring fever== بسبب الـ antigenic variation، وبعدين somnolence و coma. والتشخيص trypomastigote في الـ blood smear.
+
+          العلاج: **suramin** للدم، و **melarsoprol** لو دخل الـ CNS. "I sure am mellow when I'm sleeping".
+        page: 153
+        quote: "African sleeping sickness— enlarged lymph nodes, recurring fever (due to antigenic variation), somnolence, coma"
+      - kind: check
+        question: "A patient with HIV has a CD4+ count of 80 cells/mm3 and a positive Toxoplasma IgG. Which drug is used to prevent reactivation?"
+        options:
+          - "TMP-SMX"
+          - "Sulfadiazine + pyrimethamine"
+          - "Fluconazole"
+          - "Azithromycin alone"
+        answer: 0
+        why:
+          - "صح: الـ prophylaxis بالـ TMP-SMX لما الـ CD4+ تنزل تحت 100."
+          - "ده العلاج لما المرض يحصل، مش الوقاية."
+          - "الـ fluconazole للفطريات."
+          - "مش هو الـ prophylaxis بتاع الـ Toxo في الكتاب."
+        page: 153
+        quote: "Prophylaxis with TMP-SMX when CD4+ cell count <100 cells/mm3"
+      - kind: try
+        items: [mic.L04.001, mic.L04.004, mic.L04.008, mic.L04.013, mic.L04.018]
+    recap:
+      - "Giardia: fatty، campers. Entamoeba: دم، flask ulcers، anchovy paste، metronidazole + paromomycin. Crypto: acid-fast oocysts، AIDS."
+      - "Toxo: لحمة وقطط؛ ring lesions في الـ AIDS؛ triad في الجنين؛ sulfadiazine + pyrimethamine؛ TMP-SMX تحت 100."
+      - "Naegleria: مية دافية، cribriform plate. T brucei: tsetse، antigenic variation، suramin أو melarsoprol."
+    practice: [mic.L04.001, mic.L04.002, mic.L04.003, mic.L04.004, mic.L04.005, mic.L04.006, mic.L04.007, mic.L04.008, mic.L04.009, mic.L04.010, mic.L04.011, mic.L04.012, mic.L04.013, mic.L04.014, mic.L04.015, mic.L04.016, mic.L04.017, mic.L04.018, mic.L04.019]
+  - id: mic.L04.lesson2
+    title: "Protozoa الدم والأحشاء والـ STI"
+    hook: "ناموسة، قرادة، بقة بتبوس، وذبابة رمل: كل حشرة ومرضها"
+    minutes: 9
+    pages: [154, 155]
+    topics: [protozoa-hematologic, protozoa-others]
+    goals:
+      - "تفرّق أنواع الـ Plasmodium وتختار العلاج"
+      - "تعرف الـ Babesia والـ asplenia"
+      - "تعرف Chagas و Leishmania و Trichomonas"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Malaria"
+        text: |-
+          من الـ ==Anopheles mosquito==. بيعمل cyclic fevers و headache و anemia و splenomegaly، و hypoglycemia لو شديد.
+
+          التشخيص: ==peripheral blood smear==، وبيحدد النوع كمان.
+        page: 154
+        quote: "Malaria—cyclic fevers, headache, anemia, splenomegaly; hypoglycemia in severe disease Anopheles mosquito"
+      - kind: table
+        title: "الأنواع"
+        columns: ["", "Fever", "Smear", "Special"]
+        rows:
+          - ["P malariae", "72 hr (quartan)", "Ring in RBC", "-"]
+          - ["P vivax/ovale", "48 hr (tertian)", "Schüffner stippling", "Hypnozoite in liver"]
+          - ["P falciparum", "Severe, irregular", "Headphone ring, crescent gametocytes", "Occludes capillaries"]
+        hide: [[0, 1], [1, 1], [1, 3], [2, 2], [2, 3]]
+        page: 154
+        quote: "P vivax/ovale 48-hr fever cycle (tertian); dormant form (hypnozoite) in liver"
+      - kind: explain
+        title: "ليه الـ falciparum بيقتل"
+        text: |-
+          الـ RBCs المصابة بتسد الـ ==capillaries== في المخ (==cerebral malaria==)، والكلى، والرئة. والحمى مش منتظمة.
+
+          وفي الـ smear: ring شكله ==headphone== و gametocytes شكلها هلال.
+        page: 154
+        quote: "parasitized RBCs may occlude capillaries in brain (cerebral malaria), kidneys, lungs"
+      - kind: explain
+        title: "العلاج"
+        text: |-
+          - sensitive ← ==chloroquine==.
+          - resistant ← mefloquine أو doxycycline أو atovaquone/proguanil.
+          - life threatening ← IV quinine أو artesunate.
+          - vivax/ovale ← زوّد ==primaquine== للـ hypnozoites.
+
+          وقبل الـ primaquine أو الـ quinine: اعمل test للـ ==G6PD deficiency==.
+        page: 154
+        quote: "If life threatening, use intravenous quinine or artesunate (test for G6PD deficiency)"
+      - kind: check
+        question: "A traveler had P ovale malaria treated with chloroquine. Which drug prevents relapse?"
+        options:
+          - "Primaquine"
+          - "Mefloquine"
+          - "Artesunate"
+          - "Atovaquone + azithromycin"
+        answer: 0
+        why:
+          - "صح: الـ primaquine بيضرب الـ hypnozoites في الكبد، بعد test الـ G6PD."
+          - "الـ mefloquine للـ chloroquine-resistant."
+          - "الـ artesunate للـ life threatening."
+          - "ده علاج الـ Babesia."
+        page: 154
+        quote: "Add primaquine to target hypnozoites"
+      - kind: explain
+        title: "Babesia"
+        text: |-
+          نفس قرادة الـ ==Ixodes== اللي بتنقل Lyme و Anaplasma. بتعمل fever و hemolytic anemia، في شمال شرق أمريكا.
+
+          الـ smear: ring form أو ==Maltese cross==. والـ ==asplenia== بتخلّي المرض شديد لأن الطحال هو اللي بينضّف الـ RBCs المصابة.
+
+          العلاج: atovaquone + azithromycin.
+        page: 154
+        quote: "asplenia ↑ risk of severe disease due to inability to clear infected RBCs"
+      - kind: explain
+        title: "Chagas: T cruzi causes big problems"
+        text: |-
+          الـ ==kissing bug== (triatomine) بيعض ويعمل براز جنب البق أو العين، والبراز يدخل الجرح.
+
+          - **Acute**: ورم حوالين عين واحدة (==Romaña sign==).
+          - **Chronic**: dilated cardiomyopathy مع apical atrophy، و megacolon، و megaesophagus. كله "big".
+
+          في South America. العلاج benznidazole أو nifurtimox.
+        page: 155
+        quote: "Triatomine insect (kissing bug) bites and defecates around the mouth or eyes →  fecal transmission into bite site or mucosa"
+      - kind: figure
+        title: "الحشرة والطفيل"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="10" y="10" width="160" height="28" rx="6"/>
+            <text x="20" y="29" class="t-sm">Anopheles mosquito</text>
+            <text x="185" y="29" class="t-sm">→ Plasmodium</text>
+            <rect class="fg-box" x="10" y="44" width="160" height="28" rx="6"/>
+            <text x="20" y="63" class="t-sm">Ixodes tick</text>
+            <text x="185" y="63" class="t-sm">→ Babesia</text>
+            <rect class="fg-box" x="10" y="78" width="160" height="28" rx="6"/>
+            <text x="20" y="97" class="t-sm">Tsetse fly</text>
+            <text x="185" y="97" class="t-sm">→ T brucei</text>
+            <rect class="fg-box" x="10" y="112" width="160" height="28" rx="6"/>
+            <text x="20" y="131" class="t-sm">Kissing bug / sandfly</text>
+            <text x="185" y="131" class="t-sm">→ T cruzi / Leishmania</text>
+          </svg>
+        caption: "كل vector وطفيله: الناموسة للملاريا، القرادة للـ Babesia، الـ tsetse للـ T brucei، الـ kissing bug للـ T cruzi، والـ sandfly للـ Leishmania."
+        alt: "Vectors and protozoa: Anopheles mosquito carries Plasmodium, Ixodes tick carries Babesia, tsetse fly carries Trypanosoma brucei, kissing bug carries Trypanosoma cruzi, and sandfly carries Leishmania."
+        page: 155
+        quote: "Sandfly Macrophages containing amastigotes"
+      - kind: explain
+        title: "Leishmania"
+        text: |-
+          من الـ ==sandfly==. نوعين:
+
+          - **Visceral (kala-azar)**: spiking fevers، hepatosplenomegaly، pancytopenia.
+          - **Cutaneous**: skin ulcers.
+
+          التشخيص: ==macrophages فيها amastigotes==. العلاج amphotericin B أو sodium stibogluconate.
+        page: 155
+        quote: "Visceral leishmaniasis (kala-azar)—spiking fevers, hepatosplenomegaly, pancytopenia"
+      - kind: explain
+        title: "Trichomonas vaginalis"
+        text: |-
+          vaginitis بإفرازات ==خضرا== ريحتها وحشة، مع حكة وحرقان. وعنق الرحم فيه نقط نزيف (==strawberry cervix==)، والـ wet mount فيه trophozoites بتتحرك.
+
+          ==sexual بس==، لأنه ما بيعملش cysts فما يعيشش برّه الإنسان. وما تلخبطوش مع الـ Gardnerella (bacterial vaginosis).
+
+          العلاج: metronidazole للمريضة **والـ partner**، وافحص باقي الـ STIs.
+        page: 155
+        quote: "Sexual (cannot exist outside human because it cannot form cysts)"
+      - kind: check
+        question: "A man from Brazil has heart failure from a dilated cardiomyopathy with apical thinning and a megacolon. How was he infected?"
+        options:
+          - "Feces of a triatomine bug rubbed into a bite"
+          - "The bite of a sandfly"
+          - "The bite of a tsetse fly"
+          - "Eating undercooked pork"
+        answer: 0
+        why:
+          - "صح: Chagas، والـ kissing bug بيعمل براز جنب العضة."
+          - "الـ sandfly للـ Leishmania."
+          - "الـ tsetse للـ sleeping sickness."
+          - "الخنزير للـ Taenia و Trichinella."
+        page: 155
+        quote: "fecal transmission into bite site or mucosa"
+      - kind: try
+        items: [mic.L04.021, mic.L04.024, mic.L04.027, mic.L04.028, mic.L04.034]
+    recap:
+      - "Malaria: Anopheles، smear. malariae 72 hr، vivax/ovale 48 hr + hypnozoite (primaquine)، falciparum يسد الـ capillaries."
+      - "Babesia: Ixodes، Maltese cross، أسوأ مع الـ asplenia، atovaquone + azithromycin."
+      - "Chagas: kissing bug، Romaña، cardiomyopathy و mega-organs، benznidazole."
+      - "Leishmania: sandfly، amastigotes في الـ macrophages. Trich: strawberry cervix، metronidazole للاتنين."
+    practice: [mic.L04.020, mic.L04.021, mic.L04.022, mic.L04.023, mic.L04.024, mic.L04.025, mic.L04.026, mic.L04.027, mic.L04.028, mic.L04.029, mic.L04.030, mic.L04.031, mic.L04.032, mic.L04.033, mic.L04.034, mic.L04.035, mic.L04.036]
+  - id: mic.L04.lesson3
+    title: "الـ Nematodes: الديدان الأسطوانية"
+    hook: "اسأل الأول: الدودة دخلت من البق، من الرجل، ولا من عضة؟"
+    minutes: 9
+    pages: [155, 156]
+    topics: [nematode-routes, nematodes]
+    goals:
+      - "تقسم الـ nematodes حسب طريقة الدخول"
+      - "تعرف المرض المميز لكل دودة"
+      - "تختار بين bendazoles و ivermectin و diethylcarbamazine"
+    status: unverified
+    steps:
+      - kind: mnemonic
+        word: "EATTT"
+        parts:
+          - { key: "E", text: "Enterobius" }
+          - { key: "A", text: "Ascaris" }
+          - { key: "T", text: "Toxocara" }
+          - { key: "T", text: "Trichinella" }
+          - { key: "T", text: "Trichuris" }
+        hook: "You'll get sick if you EATTT these! (الكتاب)"
+        page: 155
+        quote: "Ingested—Enterobius, Ascaris, Toxocara, Trichinella, Trichuris"
+      - kind: explain
+        title: "من الجلد ومن العضة"
+        text: |-
+          - **من الجلد** (==SANd==): Strongyloides، Ancylostoma، Necator. بيدخلوا من الرجل الحافية.
+          - **من العضة** (==Lay LOW==): Loa loa، Onchocerca volvulus، Wuchereria bancrofti.
+        page: 155
+        quote: "Cutaneous—Strongyloides, Ancylostoma, Necator Bites—Loa loa, Onchocerca volvulus, Wuchereria bancrofti"
+      - kind: explain
+        title: "Enterobius و Ascaris"
+        text: |-
+          - **Enterobius (pinworm)**: حكة في الشرج ==بالليل==، أكتر في الأطفال 5-10 سنين. التشخيص بالـ ==tape test==.
+          - **Ascaris (giant roundworm)**: ممكن يسد الـ ileocecal valve أو القنوات المرارية أو يثقب الأمعاء. ولما الـ larvae تعدي على الـ alveoli ← ==Löeffler syndrome== (pulmonary eosinophilia). البيض knobby-coated.
+        page: 156
+        quote: "Migration of larvae to alveoli →  Löeffler syndrome (pulmonary eosinophilia)."
+      - kind: explain
+        title: "Strongyloides والـ hyperinfection"
+        text: |-
+          الـ larvae في التراب بتخترق الجلد. أعراض GI (duodenitis)، ورئة (dry cough، hemoptysis)، وجلد (pruritus). وفي الـ stool: ==rhabditiform larvae==.
+
+          الخطر: في الـ immunocompromised (زي اللي بياخد steroids) بيحصل ==hyperinfection syndrome== من autoinfection سريعة.
+
+          العلاج: **ivermectin** أو bendazoles.
+        page: 156
+        quote: "Larvae in soil penetrate skin; rhabditiform larvae seen in feces under microscope. Ivermectin or bendazoles."
+      - kind: explain
+        title: "Hookworms: Ancylostoma و Necator"
+        text: |-
+          بيدخلوا من الرجل الحافية على البحر أو التراب، ويعملوا ==cutaneous larva migrans==: rash بيحك وشكله متعرّج.
+
+          وفي الأمعاء بيمصوا الدم من الجدار ← ==microcytic anemia==.
+        page: 156
+        quote: "Cutaneous larva migrans—pruritic, serpiginous rash C . Larvae penetrate skin from walking barefoot on contaminated beach/soil."
+      - kind: check
+        question: "A patient on high-dose steroids develops sepsis, cough and diarrhea, and stool shows rhabditiform larvae. Which drug?"
+        options:
+          - "Ivermectin"
+          - "Praziquantel"
+          - "Diethylcarbamazine"
+          - "Metronidazole"
+        answer: 0
+        why:
+          - "صح: Strongyloides hyperinfection، والعلاج ivermectin أو bendazoles."
+          - "الـ praziquantel للـ flukes والـ tapeworms."
+          - "الـ diethylcarbamazine للـ Loa loa والـ filariasis."
+          - "الـ metronidazole للـ protozoa."
+        page: 156
+        quote: "Hyperinfection syndrome can be caused by accelerated autoinfection in the immunocompromised."
+      - kind: explain
+        title: "Trichinella و Trichuris و Toxocara"
+        text: |-
+          - **Trichinella**: من اللحمة الني (خصوصاً الخنزير). الـ larvae بتعمل cysts في الـ ==striated muscle== ← myositis، و fever و periorbital edema و myalgia.
+          - **Trichuris (whipworm)**: غالباً من غير أعراض، أو إسهال و anemia و ==rectal prolapse== في الأطفال.
+          - **Toxocara canis**: ==visceral larva migrans== في الكبد والعين والمخ والقلب.
+        page: 156
+        quote: "Trichinosis—fever, vomiting, nausea, periorbital edema, myalgia. Undercooked meat (especially pork)"
+      - kind: figure
+        title: "الـ filariae: عضة ← مكان"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="20" class="t-sm t-b">vector</text>
+            <text x="130" y="20" class="t-sm t-b">worm</text>
+            <text x="240" y="20" class="t-sm t-b">where</text>
+            <rect class="fg-box" x="5" y="30" width="345" height="34" rx="6"/>
+            <text x="12" y="52" class="t-sm">black fly</text>
+            <text x="130" y="52" class="t-sm">Onchocerca</text>
+            <text x="240" y="52" class="t-sm">skin, eye</text>
+            <rect class="fg-box" x="5" y="70" width="345" height="34" rx="6"/>
+            <text x="12" y="92" class="t-sm">deer/horse fly</text>
+            <text x="130" y="92" class="t-sm">Loa loa</text>
+            <text x="240" y="92" class="t-sm">conjunctiva</text>
+            <rect class="fg-box" x="5" y="110" width="345" height="34" rx="6"/>
+            <text x="12" y="132" class="t-sm">mosquito</text>
+            <text x="130" y="132" class="t-sm">Wuchereria</text>
+            <text x="240" y="132" class="t-sm">lymph nodes</text>
+          </svg>
+        caption: "الـ black fly ← Onchocerca (river blindness)، الـ deer fly ← Loa loa (دودة في الملتحمة)، والناموسة ← Wuchereria (elephantiasis)."
+        alt: "Three rows. Female black fly transmits Onchocerca to skin and eye. Deer, horse or mango fly transmits Loa loa to skin and conjunctiva. Female mosquito transmits Wuchereria to lymph nodes."
+        page: 156
+        quote: "Loa loa Swelling in skin, worm in conjunctiva. Deer fly, horse fly, mango fly. Diethylcarbamazine."
+      - kind: explain
+        title: "الـ tissue nematodes"
+        text: |-
+          - **Onchocerca**: black skin nodules و ==river blindness==. العلاج ivermectin.
+          - **Loa loa**: swelling في الجلد، ودودة في الـ conjunctiva. ==Diethylcarbamazine==.
+          - **Wuchereria، Brugia**: lymphatic filariasis (==elephantiasis==)، والأعراض بتبدأ بعد 9 شهور لسنة. Diethylcarbamazine.
+        page: 156
+        quote: "Wuchereria bancrofti, Brugia malayi Lymphatic filariasis (elephantiasis)— worms invade lymph nodes →  inflammation →  lymphedema E ; symptom onset after 9 mo-1 yr."
+      - kind: match
+        prompt: "وصّل الدودة بالعلامة"
+        pairs:
+          - ["Enterobius", "Night-time anal itching, tape test"]
+          - ["Ascaris", "Löeffler syndrome, ileocecal obstruction"]
+          - ["Ancylostoma", "Microcytic anemia, serpiginous rash"]
+          - ["Trichinella", "Periorbital edema and myalgia after pork"]
+          - ["Trichuris", "Rectal prolapse in a child"]
+        why: "الـ pinworm بالليل، الـ Ascaris يعدي على الرئة ويسد، الـ hookworm يمص دم، الـ Trichinella في العضل، والـ whipworm يعمل prolapse."
+        page: 156
+        quote: "Often asymptomatic; loose stools, anemia, rectal prolapse in children."
+      - kind: try
+        items: [mic.L04.037, mic.L04.038, mic.L04.039, mic.L04.050, mic.L04.053]
+    recap:
+      - "EATTT بالبق، SANd من الرجل، Lay LOW بالعضة."
+      - "Enterobius: tape test. Ascaris: Löeffler وانسداد. Strongyloides: hyperinfection، ivermectin. Hookworm: microcytic anemia."
+      - "Trichinella: عضل وخنزير. Trichuris: rectal prolapse. Toxocara: visceral larva migrans."
+      - "Onchocerca: ivermectin. Loa loa و Wuchereria: diethylcarbamazine."
+    practice: [mic.L04.037, mic.L04.038, mic.L04.039, mic.L04.040, mic.L04.041, mic.L04.042, mic.L04.043, mic.L04.044, mic.L04.045, mic.L04.046, mic.L04.047, mic.L04.048, mic.L04.049, mic.L04.050, mic.L04.051, mic.L04.052, mic.L04.053]
+  - id: mic.L04.lesson4
+    title: "Tapeworms و flukes و ectoparasites"
+    hook: "سمك، خنزير، كلاب، وحلزون في الترعة: والـ praziquantel بيحل أغلبهم"
+    minutes: 9
+    pages: [157, 158]
+    topics: [cestodes, trematodes, ectoparasites, parasite-hints]
+    goals:
+      - "تفرّق الـ Taenia اللي من اللحمة من اللي من البيض"
+      - "تعرف Diphyllobothrium و Echinococcus و Schistosoma و Clonorchis"
+      - "تعالج الـ scabies والقمل والبق"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Taenia solium: لحمة ولا بيض؟"
+        text: |-
+          - تاكل ==larvae== في لحمة خنزير مش مستوية ← tapeworm في الأمعاء. Praziquantel.
+          - تاكل ==eggs== في أكل متلوث ببراز بني آدم ← cysticercosis و ==neurocysticercosis== (cysts في المخ و seizures). Praziquantel، و albendazole للـ neurocysticercosis.
+        page: 157
+        quote: "Ingestion of eggs in food contaminated with human feces Praziquantel; albendazole for neurocysticercosis"
+      - kind: explain
+        title: "Diphyllobothrium و Echinococcus"
+        text: |-
+          - **Diphyllobothrium latum** ("DiphylloB12 latum"): من السمك الني (fresh water)، بينافس على الـ ==B12== ← megaloblastic anemia. Praziquantel أو niclosamide.
+          - **Echinococcus granulosus**: بيض في أكل متلوث ببراز ==الكلاب==، والخروف intermediate host. يعمل hydatid cysts (==eggshell calcification==) في الكبد والرئة، ولو اتفتحت ← anaphylaxis. Albendazole، والجراحة للمعقدة.
+        page: 157
+        quote: "Vitamin B12 deficiency (“DiphylloB12 latum”; tapeworm competes for B12 in intestine) →  megaloblastic anemia"
+      - kind: reveal
+        prompt: "ليه بنحذر جداً قبل ما نبزل hydatid cyst بإبرة؟"
+        answer: "لأن ==cyst rupture can cause anaphylaxis==. السائل اللي جوه antigenic جداً، ولو نزل في الدم أو البريتون ممكن يعمل صدمة."
+        page: 157
+        quote: "cyst rupture can cause anaphylaxis"
+      - kind: check
+        question: "A man who eats raw lake fish has a macrocytic anemia with hypersegmented neutrophils. Which worm?"
+        options:
+          - "Diphyllobothrium latum"
+          - "Clonorchis sinensis"
+          - "Ancylostoma duodenale"
+          - "Taenia solium"
+        answer: 0
+        why:
+          - "صح: بينافس على الـ B12 ← megaloblastic anemia."
+          - "الـ Clonorchis من السمك كمان، بس بيعمل مرض صفراوي."
+          - "الـ hookworm بيعمل microcytic anemia."
+          - "الـ Taenia من الخنزير."
+        page: 157
+        quote: "Ingestion of larvae in raw freshwater fish"
+      - kind: explain
+        title: "Schistosoma: الحلزون والترعة"
+        text: |-
+          الـ snails هي الـ intermediate host، والـ cercariae بتخترق جلد اللي بيعوم أو يستحمى في مية عذبة ملوثة.
+
+          - **S mansoni** (lateral spine) و **S japonicum**: الكبد والطحال، fibrosis، ==portal hypertension==، وإسهال و iron deficiency.
+          - **S haematobium** (==terminal spine==): hematuria من غير ألم و ==squamous cell carcinoma== of the bladder، و pulmonary hypertension.
+
+          العلاج: praziquantel.
+        page: 157
+        quote: "Snails are intermediate host; cercariae penetrate skin of humans in contact with contaminated fresh water (eg, swimming or bathing)"
+      - kind: figure
+        title: "البيضة بتقولك النوع"
+        svg: |-
+          <svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg">
+            <ellipse class="fg-acc" cx="80" cy="60" rx="45" ry="25"/>
+            <path class="fg-ink" d="M95,36 L110,12" fill="none" stroke-width="4"/>
+            <text x="30" y="110" class="t-sm t-b">S mansoni</text>
+            <text x="30" y="126" class="t-sm t-mut">lateral spine → liver</text>
+            <ellipse class="fg-good" cx="250" cy="60" rx="45" ry="25"/>
+            <path class="fg-ink" d="M295,60 L322,60" fill="none" stroke-width="4"/>
+            <text x="200" y="110" class="t-sm t-b">S haematobium</text>
+            <text x="200" y="126" class="t-sm t-mut">terminal spine → bladder</text>
+          </svg>
+        caption: "الشوكة على الجنب = S mansoni (الكبد و portal hypertension). الشوكة في الطرف = S haematobium (المثانة و SCC)."
+        alt: "Two schistosome eggs. Left, S mansoni egg with a lateral spine, linked to liver disease. Right, S haematobium egg with a terminal spine, linked to bladder disease."
+        page: 157
+        quote: "Chronic infection with S haematobium (egg with terminal spine B ) can lead to squamous cell carcinoma of the bladder (painless hematuria)"
+      - kind: explain
+        title: "Clonorchis sinensis"
+        text: "من السمك المش مستوي. بيعمل التهاب في القنوات المرارية ← ==pigmented gallstones==، ومرتبط بالـ ==cholangiocarcinoma==. العلاج praziquantel."
+        page: 157
+        quote: "Biliary tract inflammation →  pigmented gallstones Associated with cholangiocarcinoma"
+      - kind: explain
+        title: "Scabies"
+        text: |-
+          الـ mite بيحفر في الـ ==stratum corneum==: حكة ==بالليل== و burrows متعرّجة بين الصوابع. في الأطفال والأماكن الزحمة (سجون، دور مسنين)، بالـ skin-to-skin غالباً.
+
+          العلاج: permethrin cream أو oral ivermectin، واغسل الهدوم والملايات، وعالج المخالطين.
+        page: 158
+        quote: "Common in children, crowded populations (jails, nursing homes); transmission through skin-to-skin contact (most common) or via fomites."
+      - kind: explain
+        title: "القمل والبق"
+        text: |-
+          **القمل** بيمص دم ويعمل حكة شديدة: الراس والرقبة، الوسط والإبط، أو العانة. وقمل الجسم بينقل ==R prowazekii== (epidemic typhus)، و B recurrentis (relapsing fever)، و ==B quintana== (trench fever). العلاج pyrethroids أو malathion أو ivermectin lotion، ومشط للـ nits. والطفل يكمّل مدرسته عادي.
+
+          **البق (Cimex)**: عضات من غير ألم، papules فيها نقطة نزيف في النص، على شكل خط أو مجموعة لما تصحى. بتخف لوحدها في أسبوع، والمهم نتخلص من البق.
+        page: 158
+        quote: "Body lice can transmit Rickettsia prowazekii (epidemic typhus), Borrelia recurrentis (relapsing fever), Bartonella quintana (trench fever)."
+      - kind: sort
+        prompt: "رتّب كل علامة تحت الطفيل بتاعها"
+        bins: ["Schistosoma haematobium", "Clonorchis sinensis", "Echinococcus granulosus"]
+        cards:
+          - { text: "Painless hematuria", bin: 0 }
+          - { text: "Squamous cell bladder cancer", bin: 0 }
+          - { text: "Pigmented gallstones", bin: 1 }
+          - { text: "Cholangiocarcinoma", bin: 1 }
+          - { text: "Hydatid liver cyst", bin: 2 }
+          - { text: "Exposure to infected dogs", bin: 2 }
+        why: "الـ haematobium في المثانة، الـ Clonorchis في القنوات المرارية، والـ Echinococcus من الكلاب في الكبد."
+        page: 158
+        quote: "Biliary tract disease, cholangiocarcinoma Clonorchis sinensis"
+      - kind: try
+        items: [mic.L04.055, mic.L04.058, mic.L04.064, mic.L04.071, mic.L04.072]
+    recap:
+      - "T solium: larvae في الخنزير ← دودة؛ eggs في براز آدمي ← neurocysticercosis (albendazole)."
+      - "Diphyllobothrium: سمك ← B12. Echinococcus: كلاب وخرفان ← hydatid cyst، anaphylaxis لو اتفتح."
+      - "Schisto: حلزون ومية عذبة؛ mansoni ← portal HTN؛ haematobium ← bladder SCC. Clonorchis ← cholangiocarcinoma. Praziquantel."
+      - "Scabies: permethrin ومخالطين. قمل الجسم: typhus و trench fever. البق: يخف في أسبوع."
+    practice: [mic.L04.054, mic.L04.055, mic.L04.056, mic.L04.057, mic.L04.058, mic.L04.059, mic.L04.060, mic.L04.061, mic.L04.062, mic.L04.063, mic.L04.064, mic.L04.065, mic.L04.066, mic.L04.067, mic.L04.068, mic.L04.069, mic.L04.070, mic.L04.071, mic.L04.072]

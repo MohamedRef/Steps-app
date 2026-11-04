@@ -132,6 +132,53 @@ assert.equal((await a.next("revoked")).type, "revoked");
 assert.equal((await a.closed).code, 4001);
 const blocked = await api("POST", "/v1/auth/refresh", { body: { refresh_token: phone.json.refresh_token } });
 assert.equal(blocked.status, 401);
+// Username + password: set from the signed-in tablet, then a borrowed
+// computer without Google joins the same account and gets everything.
+const tabletToken = refreshed.json.access_token;
+const key = randomBytes(32).toString("base64url");
+const wrongKey = randomBytes(32).toString("base64url");
+assert.deepEqual((await api("GET", "/v1/login", { token: tabletToken })).json, { username: null });
+const set = await api("POST", "/v1/login", { token: tabletToken, body: { username: " Mo.Refaat ", password_key: key } });
+assert.equal(set.status, 200, JSON.stringify(set.json));
+assert.deepEqual(set.json, { username: "mo.refaat" });
+assert.deepEqual((await api("GET", "/v1/login", { token: tabletToken })).json, { username: "mo.refaat" });
+assert.equal((await api("POST", "/v1/login", { body: { username: "x", password_key: key } })).status, 401);
+const borrowed = { device_id: "library-pc", name: "Library PC", model: null, platform: "web" };
+const passwordSignIn = (username, password_key) =>
+  api("POST", "/v1/auth/password", { body: { username, password_key, device: borrowed } });
+const wrong = await passwordSignIn("mo.refaat", wrongKey);
+assert.equal(wrong.status, 401);
+assert.equal(wrong.json.code, "wrong_password");
+assert.equal((await passwordSignIn("nobody.here", key)).json.code, "wrong_password");
+const pc = await passwordSignIn("MO.REFAAT", key);
+assert.equal(pc.status, 200, JSON.stringify(pc.json));
+assert.equal(pc.json.account_id, tablet.json.account_id, "the same account as Google");
+assert.equal(pc.json.email, EMAIL);
+const c = new Socket(pc.json.access_token);
+await c.open;
+c.send({ type: "hello", protocol: 1, last_seq: 0 });
+const restored = await c.next("ops");
+assert.ok(restored.ops.some((o) => o.row_id === op.row_id), "a new device gets what the others wrote");
+await c.next("caught_up");
+c.ws.close();
+const pcRefresh = await api("POST", "/v1/auth/refresh", { body: { refresh_token: pc.json.refresh_token } });
+assert.equal(pcRefresh.status, 200);
+// Five wrong passwords lock the username, even for the right one.
+for (let i = 1; i < 5; i++) assert.equal((await passwordSignIn("mo.refaat", wrongKey)).status, 401);
+const locked = await passwordSignIn("mo.refaat", wrongKey);
+assert.equal(locked.status, 429);
+assert.equal(locked.json.code, "too_many_tries");
+assert.ok(locked.json.retry_after_ms > 0 && locked.json.retry_after_ms <= 60_000, JSON.stringify(locked.json));
+assert.equal((await passwordSignIn("mo.refaat", key)).status, 429);
+// A new password (from a signed-in device) lifts the lock; a new username frees the old one.
+const key2 = randomBytes(32).toString("base64url");
+const renamed = await api("POST", "/v1/login", { token: tabletToken, body: { username: "dr.mo", password_key: key2 } });
+assert.deepEqual(renamed.json, { username: "dr.mo" });
+assert.equal((await passwordSignIn("mo.refaat", key)).json.code, "wrong_password");
+assert.equal((await passwordSignIn("dr.mo", key2)).status, 200);
+const removed = await api("DELETE", "/v1/login", { token: tabletToken });
+assert.deepEqual(removed.json, { username: null });
+assert.equal((await passwordSignIn("dr.mo", key2)).status, 401);
 b.ws.close();
-console.log("Steps Cloud e2e: sign-in, refresh, sync, devices and revoke passed");
+console.log("Steps Cloud e2e: sign-in, password sign-in, refresh, sync, devices and revoke passed");
 process.exit(0);

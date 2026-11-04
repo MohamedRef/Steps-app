@@ -3,6 +3,7 @@
 
 mod account;
 mod do_sql;
+mod login;
 
 use std::cell::{Cell, RefCell};
 
@@ -12,7 +13,10 @@ use serde::Serialize;
 use serde::de::DeserializeOwned;
 use serde_json::json;
 use steps_protocol::PROTOCOL_VERSION;
-use steps_protocol::cloud::{ApiError, ErrorCode, GoogleSignIn, RefreshRequest, Session};
+use steps_protocol::cloud::{
+    ApiError, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, RefreshRequest, Session, SetPassword,
+    normalize_username, valid_username,
+};
 use wasm_bindgen::JsValue;
 use worker::{
     Context, Date, Env, Fetch, Headers, Method, Request, RequestInit, Response, Result, Stub, console_error,
@@ -21,7 +25,11 @@ use worker::{
 
 use crate::config::Config;
 use crate::google::{self, Jwks};
-use crate::internal::{DEVICE_HEADER, Expiry, Refresh, Register, Revoke};
+use crate::internal::{
+    AccountLoginState, DEVICE_HEADER, Expiry, LoginCheck, LoginClear, LoginName, LoginSet, Refresh, Register,
+    Revoke,
+};
+use crate::login::{self as pw, Checked};
 use crate::tokens::{self, AccessClaims, TokenKey};
 
 pub(crate) fn now_ms() -> u64 {
@@ -35,7 +43,12 @@ pub(crate) fn random_hex(n: usize) -> std::result::Result<String, getrandom::Err
 }
 
 pub(crate) fn api_error(code: ErrorCode, message: impl Into<String>) -> Result<Response> {
-    Ok(Response::from_json(&ApiError { code, message: message.into() })?.with_status(status_for(code)))
+    error_response(ApiError { code, message: message.into(), retry_after_ms: None })
+}
+
+fn error_response(e: ApiError) -> Result<Response> {
+    let status = status_for(e.code);
+    Ok(Response::from_json(&e)?.with_status(status))
 }
 
 fn status_for(code: ErrorCode) -> u16 {
@@ -44,6 +57,9 @@ fn status_for(code: ErrorCode) -> u16 {
         ErrorCode::Unauthorized | ErrorCode::DeviceRevoked => 401,
         ErrorCode::NotAllowed => 403,
         ErrorCode::NotFound => 404,
+        ErrorCode::WrongPassword => 401,
+        ErrorCode::UsernameTaken => 409,
+        ErrorCode::TooManyTries => 429,
         ErrorCode::Internal | ErrorCode::Other => 500,
     }
 }
@@ -264,6 +280,140 @@ async fn refresh_session(mut req: Request, env: &Env, cfg: &Config) -> Result<Re
     session_response(&key, &parsed.account_id, parsed.device, fresh, expiry).await
 }
 
+/// A username's own Durable Object (`crate::login`).
+async fn call_login(env: &Env, username: &str, path: &str, payload: &impl Serialize) -> Result<Response> {
+    let headers = Headers::new();
+    headers.set("content-type", "application/json")?;
+    let mut init = RequestInit::new();
+    init.with_method(Method::Post)
+        .with_headers(headers)
+        .with_body(Some(JsValue::from_str(&serde_json::to_string(payload)?)));
+    let req = Request::new_with_init(&format!("https://login{path}"), &init)?;
+    env.durable_object("LOGIN")?
+        .id_from_name(&format!("u:{username}"))?
+        .get_stub()?
+        .fetch_with_request(req)
+        .await
+}
+
+/// `POST /v1/auth/password`: the same account as Google, on a device without it.
+async fn sign_in_password(mut req: Request, env: &Env, cfg: &Config) -> Result<Response> {
+    let key = match cfg.auth_ready() {
+        Ok(k) => k.clone(),
+        Err(e) => return api_error(ErrorCode::Internal, format!("server not set up: {e}")),
+    };
+    let sign_in: PasswordSignIn = match body(&mut req).await {
+        Ok(b) => b,
+        Err(r) => return r,
+    };
+    if !tokens::valid_device_id(&sign_in.device.device_id) {
+        return api_error(ErrorCode::InvalidRequest, "device_id must be [A-Za-z0-9_-]{1,64}");
+    }
+    let username = normalize_username(&sign_in.username);
+    if !valid_username(&username) || pw::parse_key(&sign_in.password_key).is_none() {
+        return api_error(ErrorCode::WrongPassword, "username or password is wrong");
+    }
+    let check = LoginCheck { key: sign_in.password_key };
+    let mut resp = call_login(env, &username, "/check", &check).await?;
+    if resp.status_code() != 200 {
+        return Ok(resp);
+    }
+    let (account_id, email) = match resp.json::<Checked>().await? {
+        Checked::Ok { account_id, email } => (account_id, email),
+        Checked::Wrong => return api_error(ErrorCode::WrongPassword, "username or password is wrong"),
+        Checked::Locked { retry_after_ms } => {
+            return error_response(ApiError {
+                code: ErrorCode::TooManyTries,
+                message: "too many wrong passwords for this username".into(),
+                retry_after_ms: Some(retry_after_ms),
+            });
+        }
+    };
+    if !cfg.email_allowed(&email) {
+        return api_error(ErrorCode::NotAllowed, "this account is no longer on Steps's allowlist");
+    }
+    let device = sign_in.device.device_id.clone();
+    let refresh = tokens::new_refresh(&account_id, &device, tokens::random_bytes().map_err(js_err)?);
+    let register = Register { info: sign_in.device, email, refresh_hash: refresh.hash.clone() };
+    let mut resp = call_do(env, &account_id, Method::Post, "/register", None, Some(&register)).await?;
+    if resp.status_code() != 200 {
+        return Ok(resp);
+    }
+    let expiry: Expiry = resp.json().await?;
+    session_response(&key, &account_id, device, refresh, expiry).await
+}
+
+/// The account's username now, and the caller's email; or the error answer.
+async fn login_state(
+    env: &Env,
+    claims: &AccessClaims,
+) -> Result<std::result::Result<AccountLoginState, Response>> {
+    let mut resp = call_do(env, &claims.sub, Method::Get, "/login", Some(&claims.dev), None::<&()>).await?;
+    if resp.status_code() != 200 {
+        return Ok(Err(resp));
+    }
+    Ok(Ok(resp.json().await?))
+}
+
+/// `GET`, `POST` and `DELETE /v1/login`: the username and password of the
+/// signed-in account.
+async fn manage_login(
+    mut req: Request,
+    env: &Env,
+    claims: &AccessClaims,
+    method: Method,
+) -> Result<Response> {
+    let state = match login_state(env, claims).await? {
+        Ok(s) => s,
+        Err(resp) => return Ok(resp),
+    };
+    let username = match method {
+        Method::Get => state.username,
+        Method::Post => {
+            let set: SetPassword = match body(&mut req).await {
+                Ok(b) => b,
+                Err(r) => return r,
+            };
+            let username = normalize_username(&set.username);
+            if !valid_username(&username) {
+                return api_error(ErrorCode::InvalidRequest, "username must be 3-32 of a-z 0-9 . _ -");
+            }
+            let Some(key) = pw::parse_key(&set.password_key) else {
+                return api_error(ErrorCode::InvalidRequest, "password_key must be 32 bytes, base64url");
+            };
+            let salt = random_hex(16).map_err(js_err)?;
+            let put = LoginSet {
+                account_id: claims.sub.clone(),
+                email: state.email,
+                verifier: pw::verifier(&salt, &key),
+                salt,
+            };
+            let resp = call_login(env, &username, "/set", &put).await?;
+            if resp.status_code() != 200 {
+                return Ok(resp);
+            }
+            if let Some(old) = state.username.filter(|old| *old != username) {
+                call_login(env, &old, "/clear", &LoginClear { account_id: claims.sub.clone() }).await?;
+            }
+            Some(username)
+        }
+        _ => {
+            if let Some(old) = &state.username {
+                call_login(env, old, "/clear", &LoginClear { account_id: claims.sub.clone() }).await?;
+            }
+            None
+        }
+    };
+    if method != Method::Get {
+        let name = LoginName { username: username.clone() };
+        let resp = call_do(env, &claims.sub, Method::Post, "/login", Some(&claims.dev), Some(&name)).await?;
+        if resp.status_code() != 200 {
+            return Ok(resp);
+        }
+    }
+    Response::from_json(&PasswordLogin { username })
+}
+
 fn js_err(e: impl std::fmt::Display) -> worker::Error {
     worker::Error::RustError(e.to_string())
 }
@@ -301,6 +451,7 @@ async fn route(req: Request, env: &Env, cfg: &Config, method: Method, path: &str
         }
         (Method::Post, "/v1/auth/google") => sign_in_google(req, env, cfg).await,
         (Method::Post, "/v1/auth/refresh") => refresh_session(req, env, cfg).await,
+        (Method::Post, "/v1/auth/password") => sign_in_password(req, env, cfg).await,
         _ => {
             let Some(key) = cfg.token_key.clone() else {
                 return api_error(ErrorCode::Internal, "server not set up: TOKEN_SIGNING_KEY is not set");
@@ -333,6 +484,9 @@ async fn route(req: Request, env: &Env, cfg: &Config, method: Method, path: &str
                     let revoke = Revoke { device: id.to_owned() };
                     // The hub checks the caller is still signed in (#259).
                     call_do(env, &claims.sub, Method::Post, "/revoke", Some(&claims.dev), Some(&revoke)).await
+                }
+                (m @ (Method::Get | Method::Post | Method::Delete), "/v1/login") => {
+                    manage_login(req, env, &claims, m).await
                 }
                 (Method::Post, "/v1/auth/signout") => {
                     let revoke = Revoke { device: claims.dev.clone() };
