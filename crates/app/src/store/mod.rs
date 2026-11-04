@@ -11,6 +11,7 @@ mod backend;
 pub mod export;
 pub mod import;
 mod install;
+pub mod notes;
 pub mod own;
 pub mod pages;
 mod paths;
@@ -28,7 +29,7 @@ use steps_core::review::{Grade, Hlc, HlcClock, LoggedReview, Origin, ReviewEvent
 use steps_core::srs::ReviewSettings;
 use steps_core::zone::Zone;
 
-pub use backend::{LectureProgress, Overview, Review, use_provide_review, use_review};
+pub use backend::{LectureProgress, NoteError, Overview, Review, use_provide_review, use_review};
 
 #[derive(Debug)]
 pub enum StoreError {
@@ -116,6 +117,19 @@ const MIGRATIONS: &[&str] = &[
     "
     -- Mohamed's own cards (steps_core::own::OwnCard as JSON). Last writer wins.
     CREATE TABLE own_cards (
+        id          TEXT PRIMARY KEY,
+        value       TEXT NOT NULL,
+        account_id  TEXT,
+        device_id   TEXT NOT NULL,
+        hlc_wall    INTEGER NOT NULL,
+        hlc_counter INTEGER NOT NULL,
+        deleted     INTEGER NOT NULL DEFAULT 0
+    ) STRICT;
+",
+    "
+    -- Mohamed's notes on items, lesson steps and pages
+    -- (steps_core::note::Note as JSON), keyed by Anchor::row_id. Last writer wins.
+    CREATE TABLE notes (
         id          TEXT PRIMARY KEY,
         value       TEXT NOT NULL,
         account_id  TEXT,

@@ -1,0 +1,2368 @@
+schema: steps.content/v1
+lecture: bio.L06
+title: Metabolism
+book: { chapter: 1, pages: [71, 92] }
+topics:
+  - { id: enzyme-terminology, title: Enzyme terminology }
+  - { id: rate-determining-enzymes, title: Rate-determining enzymes of metabolic processes }
+  - { id: metabolic-compartmentation, title: Metabolic compartmentation }
+  - { id: summary-of-pathways, title: Summary of pathways }
+  - { id: activated-carriers, title: Activated carriers }
+  - { id: universal-electron-acceptors, title: Universal electron acceptors }
+  - { id: hexokinase-vs-glucokinase, title: Hexokinase vs glucokinase }
+  - { id: glycolysis-regulation, title: "Glycolysis regulation, key enzymes" }
+  - { id: fructose-2-6-bisphosphate, title: "Regulation by fructose-2,6-bisphosphate" }
+  - { id: pyruvate-dehydrogenase-complex, title: Pyruvate dehydrogenase complex }
+  - { id: pdh-complex-deficiency, title: Pyruvate dehydrogenase complex deficiency }
+  - { id: pyruvate-metabolism, title: Pyruvate metabolism }
+  - { id: tca-cycle, title: TCA cycle }
+  - { id: electron-transport-chain, title: Electron transport chain and oxidative phosphorylation }
+  - { id: gluconeogenesis, title: "Gluconeogenesis, irreversible enzymes" }
+  - { id: pentose-phosphate-pathway, title: Pentose phosphate pathway }
+  - { id: g6pd-deficiency, title: Glucose-6-phosphate dehydrogenase deficiency }
+  - { id: fructose-disorders, title: Disorders of fructose metabolism }
+  - { id: galactose-disorders, title: Disorders of galactose metabolism }
+  - { id: sorbitol, title: Sorbitol }
+  - { id: lactase-deficiency, title: Lactase deficiency }
+  - { id: amino-acids, title: Amino acids }
+  - { id: urea-cycle, title: Urea cycle }
+  - { id: ammonia-transport, title: Transport of ammonia by alanine }
+  - { id: hyperammonemia, title: Hyperammonemia }
+  - { id: otc-deficiency, title: Ornithine transcarbamylase deficiency }
+  - { id: amino-acid-derivatives, title: Amino acid derivatives }
+  - { id: catecholamine-synthesis, title: Catecholamine synthesis and tyrosine catabolism }
+  - { id: phenylketonuria, title: Phenylketonuria }
+  - { id: maple-syrup-urine-disease, title: Maple syrup urine disease }
+  - { id: alkaptonuria, title: Alkaptonuria }
+  - { id: homocystinuria, title: Homocystinuria }
+  - { id: cystinuria, title: Cystinuria }
+  - { id: organic-acidemias, title: Organic acidemias }
+  - { id: glycogen-regulation, title: Glycogen regulation by insulin and glucagon/epinephrine }
+  - { id: glycogen, title: Glycogen }
+  - { id: glycogen-storage-diseases, title: Glycogen storage diseases }
+  - { id: lysosomal-storage-diseases, title: Lysosomal storage diseases }
+  - { id: fatty-acid-metabolism, title: Fatty acid metabolism }
+  - { id: ketone-bodies, title: Ketone bodies }
+  - { id: fasted-vs-fed-lipid, title: Fasted vs fed state (lipid metabolism) }
+  - { id: metabolic-fuel-use, title: Metabolic fuel use }
+  - { id: fasting-and-starvation, title: Fasting and starvation }
+  - { id: lipid-transport, title: Lipid transport }
+  - { id: lipid-transport-enzymes, title: Key enzymes in lipid transport }
+  - { id: major-apolipoproteins, title: Major apolipoproteins }
+  - { id: lipoprotein-functions, title: Lipoprotein functions }
+  - { id: abetalipoproteinemia, title: Abetalipoproteinemia }
+  - { id: familial-dyslipidemias, title: Familial dyslipidemias }
+items:
+  # ---------- p71: enzyme terminology ----------
+  - id: bio.L06.001
+    kind: table
+    topic: enzyme-terminology
+    title: Enzyme descriptors
+    columns: [Enzyme type, What it does, Example]
+    rows:
+      - [Kinase, Transfers a phosphate from a high-energy molecule (usually ATP), Phosphofructokinase]
+      - [Phosphorylase, Adds inorganic phosphate without using ATP, Glycogen phosphorylase]
+      - [Phosphatase, Removes a phosphate group, "Fructose-1,6-bisphosphatase 1"]
+      - [Dehydrogenase, Catalyzes oxidation-reduction, Pyruvate dehydrogenase]
+      - [Hydroxylase, Adds a hydroxyl group (−OH), Tyrosine hydroxylase]
+      - [Carboxylase, Transfers carboxyl groups with the help of biotin, Pyruvate carboxylase]
+      - [Mutase, Relocates a functional group within a molecule, Methylmalonyl-CoA mutase]
+      - [Synthase, Synthesis without ATP as the energy source, Glycogen synthase]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 71, quote: "Phosphorylase Adds inorganic phosphate onto substrate without using ATP (eg, glycogen phosphorylase)." }
+    status: unverified
+  - id: bio.L06.002
+    kind: card
+    topic: enzyme-terminology
+    front: Kinase vs phosphorylase vs phosphatase?
+    back: Kinase transfers a phosphate from a high-energy molecule (usually ATP). Phosphorylase adds inorganic phosphate without using ATP. Phosphatase removes a phosphate group.
+    src: { page: 71, quote: "Kinase Catalyzes transfer of a phosphate group from a high-energy molecule (usually ATP) to a substrate (eg, phosphofructokinase)." }
+    status: unverified
+  - id: bio.L06.003
+    kind: mcq
+    topic: enzyme-terminology
+    stem: >-
+      A 3-year-old boy has a metabolic disorder in which a vitamin B12–dependent enzyme fails to move a
+      functional group from one position to another within the same molecule, converting a branched
+      CoA ester into a straight-chain TCA intermediate. Which class of enzyme is defective?
+    options:
+      - Carboxylase
+      - Kinase
+      - Mutase
+      - Synthase
+      - Phosphorylase
+    answer: 2
+    why:
+      - "Carboxylases transfer carboxyl groups with biotin, like propionyl-CoA carboxylase one step earlier."
+      - "Kinases transfer a phosphate from ATP."
+      - "Right. A mutase relocates a functional group within a molecule, eg, B12-dependent methylmalonyl-CoA mutase."
+      - "Synthases build molecules without using ATP."
+      - "Phosphorylases add inorganic phosphate."
+    src: { page: 71, quote: "Mutase Relocates a functional group within a molecule (eg, vitamin B12–dependent methylmalonyl-CoA mutase)." }
+    status: unverified
+  # ---------- p71: rate-determining enzymes ----------
+  - id: bio.L06.004
+    kind: table
+    topic: rate-determining-enzymes
+    title: Rate-determining enzymes (carbohydrate)
+    columns: [Process, Enzyme, Regulators]
+    rows:
+      - [Glycolysis, Phosphofructokinase-1, "⊕ AMP, fructose-2,6-BP; ⊝ ATP, citrate"]
+      - [Gluconeogenesis, "Fructose-1,6-bisphosphatase 1", "⊝ AMP, fructose-2,6-BP"]
+      - [TCA cycle, Isocitrate dehydrogenase, "⊕ ADP; ⊝ ATP, NADH"]
+      - [Glycogenesis, Glycogen synthase, "⊕ G6P, insulin, cortisol; ⊝ epinephrine, glucagon"]
+      - [Glycogenolysis, Glycogen phosphorylase, "⊕ epinephrine, glucagon, AMP; ⊝ G6P, insulin, ATP"]
+      - [HMP shunt, G6PD, "⊕ NADP+; ⊝ NADPH"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 71, quote: "Glycolysis Phosphofructokinase-1 (PFK-1) AMP ⊕, fructose-2,6-bisphosphate ⊕ ATP ⊝, citrate ⊝" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.005
+    kind: table
+    topic: rate-determining-enzymes
+    title: Rate-determining enzymes (nitrogen and lipid)
+    columns: [Process, Enzyme, Regulators]
+    rows:
+      - [De novo pyrimidine synthesis, Carbamoyl phosphate synthetase II, "⊕ ATP, PRPP; ⊝ UTP"]
+      - [De novo purine synthesis, PRPP amidotransferase, "⊕ PRPP; ⊝ AMP, IMP, GMP"]
+      - [Urea cycle, Carbamoyl phosphate synthetase I, ⊕ N-acetylglutamate]
+      - [Fatty acid synthesis, Acetyl-CoA carboxylase, "⊕ insulin, citrate; ⊝ glucagon, palmitoyl-CoA"]
+      - [Fatty acid oxidation, Carnitine acyltransferase I, ⊝ malonyl-CoA]
+      - [Ketogenesis, HMG-CoA synthase, "—"]
+      - [Cholesterol synthesis, HMG-CoA reductase, "⊕ insulin, thyroxine, estrogen; ⊝ glucagon, cholesterol"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 71, quote: "Urea cycle Carbamoyl phosphate synthetase I N-acetylglutamate ⊕" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.006
+    kind: cloze
+    topic: rate-determining-enzymes
+    text: "Fatty acid oxidation is rate-limited by {{c1::carnitine acyltransferase I}}, which is inhibited by {{c2::malonyl-CoA}}; ketogenesis by {{c3::HMG-CoA synthase}}."
+    src: { page: 71, quote: "Fatty acid oxidation Carnitine acyltransferase I Malonyl-CoA ⊝ Ketogenesis HMG-CoA synthase" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.007
+    kind: card
+    topic: rate-determining-enzymes
+    front: What activates the rate-limiting enzyme of the urea cycle?
+    back: N-acetylglutamate activates carbamoyl phosphate synthetase I.
+    src: { page: 71, quote: "Urea cycle Carbamoyl phosphate synthetase I N-acetylglutamate ⊕" }
+    status: unverified
+  - id: bio.L06.008
+    kind: mcq
+    topic: rate-determining-enzymes
+    stem: >-
+      A 30-year-old man has just eaten a large carbohydrate-rich meal. Insulin is high and citrate is
+      accumulating in the cytosol of his hepatocytes. The product of the enzyme that citrate activates
+      will then directly inhibit which enzyme?
+    options:
+      - Carnitine acyltransferase I
+      - HMG-CoA reductase
+      - Glycogen phosphorylase
+      - Isocitrate dehydrogenase
+      - Phosphofructokinase-1
+    answer: 0
+    why:
+      - "Right. Citrate and insulin activate acetyl-CoA carboxylase; its product malonyl-CoA inhibits carnitine acyltransferase I, so new fatty acids aren't oxidized."
+      - "HMG-CoA reductase is inhibited by glucagon and cholesterol."
+      - "Glycogen phosphorylase is inhibited by insulin, G6P and ATP, not malonyl-CoA."
+      - "Isocitrate dehydrogenase is inhibited by ATP and NADH."
+      - "Citrate inhibits PFK-1 directly, but that isn't the product of the enzyme it activates."
+    src: { page: 71, quote: "Fatty acid synthesis Acetyl-CoA carboxylase (ACC) Insulin ⊕, citrate ⊕ Glucagon ⊝, palmitoyl-CoA ⊝ Fatty acid oxidation Carnitine acyltransferase I Malonyl-CoA ⊝" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.009
+    kind: mcq
+    topic: rate-determining-enzymes
+    stem: >-
+      A 25-year-old woman is running a marathon. In her skeletal muscle, AMP rises as ATP is consumed.
+      Which enzyme is directly activated by AMP to speed up glucose breakdown?
+    options:
+      - Fructose-1,6-bisphosphatase 1
+      - Glycogen synthase
+      - Phosphofructokinase-1
+      - HMG-CoA reductase
+      - Glucose-6-phosphate dehydrogenase
+    answer: 2
+    why:
+      - "AMP inhibits fructose-1,6-bisphosphatase 1, the gluconeogenic enzyme."
+      - "Glycogen synthase is activated by G6P, insulin and cortisol."
+      - "Right. AMP and fructose-2,6-bisphosphate activate PFK-1, the rate-limiting step of glycolysis (AMP also activates glycogen phosphorylase)."
+      - "HMG-CoA reductase controls cholesterol synthesis."
+      - "G6PD is controlled by NADP+/NADPH."
+    src: { page: 71, quote: "Glycolysis Phosphofructokinase-1 (PFK-1) AMP ⊕, fructose-2,6-bisphosphate ⊕" }
+    status: unverified
+  # ---------- p72: metabolic compartmentation ----------
+  - id: bio.L06.010
+    kind: table
+    topic: metabolic-compartmentation
+    title: Where pathways happen
+    columns: [Site, Pathways]
+    rows:
+      - [Mitochondria, "β-oxidation, acetyl-CoA production, TCA cycle, oxidative phosphorylation, ketogenesis"]
+      - [Cytoplasm, "Glycolysis, HMP shunt, synthesis of cholesterol, proteins, fatty acids and nucleotides"]
+      - [Both, "Heme synthesis, urea cycle, gluconeogenesis"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 72, quote: "Mitochondria Fatty acid oxidation (β-oxidation), acetyl-CoA production, TCA cycle, oxidative phosphorylation, ketogenesis." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.011
+    kind: card
+    topic: metabolic-compartmentation
+    front: Which pathways happen in both the mitochondria and the cytoplasm?
+    back: Heme synthesis, urea cycle and gluconeogenesis ("Hugs take two").
+    src: { page: 72, quote: "Both Heme synthesis, urea cycle, gluconeogenesis. Hugs take two (both)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.012
+    kind: mcq
+    topic: metabolic-compartmentation
+    stem: >-
+      A toxin is found to selectively destroy the mitochondrial matrix enzymes of hepatocytes in a
+      research animal, leaving the cytosol intact. Which pathway in the liver would continue entirely
+      unaffected?
+    options:
+      - Ketogenesis
+      - Heme synthesis
+      - HMP shunt
+      - Urea cycle
+      - Gluconeogenesis from pyruvate
+    answer: 2
+    why:
+      - "Ketogenesis is mitochondrial."
+      - "Heme synthesis uses both compartments."
+      - "Right. The HMP shunt, like glycolysis and fatty acid synthesis, is entirely cytoplasmic."
+      - "The urea cycle starts in the mitochondria."
+      - "Gluconeogenesis starts with mitochondrial pyruvate carboxylase."
+    src: { page: 72, quote: "Cytoplasm Glycolysis, HMP shunt, and synthesis of cholesterol (SER), proteins (ribosomes, RER), fatty acids, and nucleotides." }
+    status: unverified
+  # ---------- p72: summary of pathways ----------
+  - id: bio.L06.013
+    kind: card
+    topic: summary-of-pathways
+    front: In the summary of pathways, which enzymes need thiamine (TPP) and which need biotin?
+    back: "TPP: pyruvate dehydrogenase, α-ketoglutarate dehydrogenase and transketolase. Biotin: pyruvate carboxylase, acetyl-CoA carboxylase and propionyl-CoA carboxylase."
+    src: { page: 72, quote: "Requires thiamine cofactor (TPP) Requires biotin cofactor" }
+    status: unverified
+  - id: bio.L06.014
+    kind: card
+    topic: summary-of-pathways
+    front: Which enzyme defects in the pathway map give von Gierke disease, essential fructosuria and severe galactosemia?
+    back: "Glucose-6-phosphatase (von Gierke), fructokinase (essential fructosuria), galactose-1-phosphate uridyltransferase (severe galactosemia). Aldolase B gives fructose intolerance; galactokinase gives mild galactosemia."
+    src: { page: 72, quote: "Fructokinase (essential fructosuria) Aldolase B (fructose intolerance)" }
+    status: unverified
+  - id: bio.L06.015
+    kind: mcq
+    topic: summary-of-pathways
+    stem: >-
+      A 2-year-old boy with a defect in propionyl-CoA metabolism is admitted with vomiting. Which dietary
+      substances feed into propionyl-CoA and should be limited?
+    options:
+      - Even-chain fatty acids and leucine
+      - Odd-chain fatty acids, isoleucine, valine, methionine and threonine
+      - Lactose and fructose
+      - Lysine and leucine only
+      - Glycine and serine
+    answer: 1
+    why:
+      - "Even-chain fatty acids give only acetyl-CoA, and leucine is purely ketogenic."
+      - "Right. Odd-chain fatty acids, isoleucine, valine, methionine, threonine (and pyrimidines) feed propionyl-CoA → methylmalonyl-CoA → succinyl-CoA."
+      - "These sugars enter glycolysis."
+      - "Lysine and leucine are the purely ketogenic amino acids."
+      - "These don't feed propionyl-CoA."
+    src: { page: 72, quote: "Odd-chain fatty acids, isoleucine, valine, methionine, threonine, pyrimidines" }
+    status: unverified
+  # ---------- p73: activated carriers ----------
+  - id: bio.L06.016
+    kind: table
+    topic: activated-carriers
+    title: Activated carriers
+    columns: [Carrier, Carries]
+    rows:
+      - [ATP, Phosphoryl groups]
+      - ["NADH, NADPH, FADH2", Electrons]
+      - ["CoA, lipoamide", Acyl groups]
+      - [Biotin, CO2]
+      - [Tetrahydrofolates, 1-carbon units]
+      - [SAM, CH3 groups]
+      - [TPP, Aldehydes]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 73, quote: "S-adenosylmethionine (SAM) CH3 groups TPP Aldehydes" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.017
+    kind: mcq
+    topic: activated-carriers
+    stem: >-
+      A 50-year-old woman with Parkinson disease takes a drug whose levels fall when catechol-O-methyltransferase
+      transfers a methyl group to it. Which activated carrier donates that methyl group?
+    options:
+      - Biotin
+      - Tetrahydrofolate
+      - S-adenosylmethionine
+      - Thiamine pyrophosphate
+      - Coenzyme A
+    answer: 2
+    why:
+      - "Biotin carries CO2."
+      - "Tetrahydrofolates carry 1-carbon units for nucleotide synthesis, not the direct methyl donor here."
+      - "Right. SAM carries activated CH3 groups for methyltransferases such as COMT."
+      - "TPP carries aldehydes."
+      - "CoA carries acyl groups."
+    src: { page: 73, quote: "S-adenosylmethionine (SAM) CH3 groups" }
+    status: unverified
+  # ---------- p73: universal electron acceptors ----------
+  - id: bio.L06.018
+    kind: card
+    topic: universal-electron-acceptors
+    front: NAD+ vs NADPH, which is used in catabolism and which in anabolism?
+    back: NAD+ is used in catabolic processes to carry reducing equivalents away as NADH. NADPH supplies reducing equivalents for anabolic processes (eg, steroid and fatty acid synthesis); it is made by the HMP shunt.
+    src: { page: 73, quote: "NAD+ is generally used in catabolic processes to carry reducing equivalents away as NADH. NADPH is used in anabolic processes (eg, steroid and fatty acid synthesis) as a supply of reducing equivalents." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.019
+    kind: enumerate
+    topic: universal-electron-acceptors
+    prompt: Enumerate the uses of NADPH.
+    points:
+      - Anabolic processes
+      - Respiratory burst
+      - Cytochrome P-450 system
+      - Glutathione reductase
+    pass: 4
+    hook: "الـ NADPH بيبني (anabolic)، وبيقتل البكتيريا (respiratory burst)، وبيكسّر الأدوية (P-450)، وبيحمي الـ RBC (glutathione)."
+    src: { page: 73, quote: "NADPH is used in: ▘ Anabolic processes ▘ Respiratory burst ▘ Cytochrome P-450 system ▘ Glutathione reductase" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.020
+    kind: mcq
+    topic: universal-electron-acceptors
+    stem: >-
+      A 4-year-old boy has recurrent Staphylococcus aureus and Aspergillus infections. Neutrophils fail to
+      generate superoxide. The enzyme that is defective in his neutrophils uses an electron donor that
+      is produced mainly by which pathway?
+    options:
+      - Glycolysis
+      - TCA cycle
+      - HMP shunt
+      - β-oxidation
+      - Urea cycle
+    answer: 2
+    why:
+      - "Glycolysis yields NADH, not NADPH."
+      - "The TCA cycle yields NADH and FADH2."
+      - "Right. NADPH oxidase (defective in chronic granulomatous disease) uses NADPH for the respiratory burst; NADPH is a product of the HMP shunt."
+      - "β-oxidation yields NADH and FADH2."
+      - "The urea cycle disposes of nitrogen."
+    src: { page: 73, quote: "NADPH is a product of the HMP shunt." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p73: hexokinase vs glucokinase ----------
+  - id: bio.L06.021
+    kind: table
+    topic: hexokinase-vs-glucokinase
+    title: Hexokinase vs glucokinase
+    columns: ["", Hexokinase, Glucokinase]
+    rows:
+      - [Location, "Most tissues, except liver and pancreatic β cells", "Liver, β cells of pancreas"]
+      - [Km, Lower (↑ affinity), Higher (↓ affinity)]
+      - [Vmax, Lower (↓ capacity), Higher (↑ capacity)]
+      - [Induced by insulin, "No", "Yes"]
+      - [Feedback inhibition by, Glucose-6-phosphate, Fructose-6-phosphate]
+    blanks: [[0, 2], [1, 1], [1, 2], [2, 2], [3, 2], [4, 1], [4, 2]]
+    src: { page: 73, quote: "Km Lower (↑ affinity) Higher (↓ affinity) Vmax Lower (↓ capacity) Higher (↑ capacity) Induced by insulin No Yes" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.022
+    kind: card
+    topic: hexokinase-vs-glucokinase
+    front: Why does hexokinase keep working in tissues when glucose is low, while glucokinase works at high glucose?
+    back: Hexokinase has a low Km (high affinity), so it sequesters glucose in tissues even at low concentrations. Glucokinase (liver, β cells) has a high Km and high Vmax, so at high glucose it helps store glucose in the liver.
+    src: { page: 73, quote: "Hexokinase sequesters glucose in tissues, where it is used even when glucose concentrations are low. At high glucose concentrations, glucokinase helps to store glucose in liver." }
+    status: unverified
+  - id: bio.L06.023
+    kind: mcq
+    topic: hexokinase-vs-glucokinase
+    stem: >-
+      A 19-year-old lean woman has mild fasting hyperglycemia (fasting glucose 120 mg/dL) found on
+      routine testing. Her father and grandmother have the same mild, stable hyperglycemia, and no one
+      needed insulin. Islet autoantibodies are negative. Which enzyme's deficiency best explains this?
+    options:
+      - Hexokinase
+      - Glucokinase
+      - Glucose-6-phosphatase
+      - Phosphofructokinase-1
+      - Pyruvate kinase
+    answer: 1
+    why:
+      - "Hexokinase deficiency isn't a described cause of MODY."
+      - "Right. Glucokinase deficiency means ↑↑ glucose is needed to activate β-cell glucose sensing, so insulin release is impaired: a cause of MODY and gestational diabetes."
+      - "That is von Gierke disease, with fasting hypoglycemia."
+      - "PFK-1 deficiency affects muscle glycolysis."
+      - "Pyruvate kinase deficiency causes hemolytic anemia."
+    src: { page: 73, quote: "Glucokinase deficiency (→ ↑↑ glucose needed for activation → impaired insulin release [vs. diabetes mellitus]) is a cause of maturity onset diabetes of the young (MODY) and gestational diabetes." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p74: glycolysis regulation ----------
+  - id: bio.L06.024
+    kind: card
+    topic: glycolysis-regulation
+    front: What is the net equation of glycolysis, and where does it happen?
+    back: "In the cytoplasm: glucose + 2 Pi + 2 ADP + 2 NAD+ → 2 pyruvate + 2 ATP + 2 NADH + 2 H+ + 2 H2O."
+    src: { page: 74, quote: "Net glycolysis (cytoplasm): Glucose + 2 Pi + 2 ADP + 2 NAD+ → 2 pyruvate + 2 ATP + 2 NADH + 2 H+ + 2 H2O." }
+    status: unverified
+  - id: bio.L06.025
+    kind: table
+    topic: glycolysis-regulation
+    title: Key glycolytic enzymes
+    columns: [Enzyme, ATP, Regulation]
+    rows:
+      - [Hexokinase/glucokinase, Uses ATP, "⊝ G6P (hexokinase), ⊝ F6P (glucokinase)"]
+      - [Phosphofructokinase-1 (rate-limiting), Uses ATP, "⊕ AMP, fructose-2,6-BP; ⊝ ATP, citrate"]
+      - [Phosphoglycerate kinase, Makes ATP, "—"]
+      - [Pyruvate kinase, Makes ATP, "⊕ fructose-1,6-BP; ⊝ ATP, alanine, glucagon, epinephrine"]
+    blanks: [[0, 2], [1, 2], [3, 2]]
+    src: { page: 74, quote: "Fructose-1,6-bisphosphate ⊕. ATP ⊝, alanine ⊝, glucagon ⊝, epinephrine ⊝." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.026
+    kind: mcq
+    topic: glycolysis-regulation
+    stem: >-
+      During a prolonged fast, a 40-year-old man's liver shifts from glycolysis to gluconeogenesis.
+      Glucagon is high, and alanine released from muscle reaches the liver. Which glycolytic enzyme is
+      inhibited by both of these signals?
+    options:
+      - Hexokinase
+      - Phosphoglycerate kinase
+      - Pyruvate kinase
+      - Glucokinase
+      - Triose phosphate isomerase
+    answer: 2
+    why:
+      - "Hexokinase is inhibited by glucose-6-phosphate."
+      - "Phosphoglycerate kinase isn't a regulated step."
+      - "Right. Pyruvate kinase is inhibited by ATP, alanine, glucagon and epinephrine, and activated by fructose-1,6-bisphosphate."
+      - "Glucokinase is inhibited by fructose-6-phosphate."
+      - "Triose phosphate isomerase isn't regulated this way."
+    src: { page: 74, quote: "Fructose-1,6-bisphosphate ⊕. ATP ⊝, alanine ⊝, glucagon ⊝, epinephrine ⊝." }
+    status: unverified
+  # ---------- p74: fructose-2,6-bisphosphate ----------
+  - id: bio.L06.027
+    kind: card
+    topic: fructose-2-6-bisphosphate
+    front: How do fasting and feeding control fructose-2,6-bisphosphate?
+    back: "PFK-2 and FBPase-2 are one bifunctional enzyme. Fasting: ↑ glucagon → ↑ cAMP → ↑ protein kinase A → ↑ FBPase-2, ↓ PFK-2 → less glycolysis, more gluconeogenesis. Fed: ↑ insulin → ↑ PFK-2 → more glycolysis. FaBian the Peasant (FBP) works hard when starving; Prince FredericK (PFK) works only when fed."
+    src: { page: 74, quote: "Fasting state: ↑ glucagon → ↑ cAMP → ↑ protein kinase A → ↑ FBPase-2, ↓ PFK-2, less glycolysis, more gluconeogenesis." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.028
+    kind: mcq
+    topic: fructose-2-6-bisphosphate
+    stem: >-
+      A 22-year-old woman has not eaten for 18 hours. In her hepatocytes, protein kinase A phosphorylates
+      the bifunctional enzyme that makes and breaks fructose-2,6-bisphosphate. What is the result?
+    options:
+      - ↑ PFK-2 activity and ↑ glycolysis
+      - ↑ FBPase-2 activity and ↑ gluconeogenesis
+      - ↑ fructose-2,6-bisphosphate and ↑ PFK-1 activity
+      - ↓ cAMP and ↓ gluconeogenesis
+      - No change; the enzyme isn't regulated by phosphorylation
+    answer: 1
+    why:
+      - "That is the fed state with insulin."
+      - "Right. Phosphorylation by protein kinase A turns on FBPase-2 and turns off PFK-2, so fructose-2,6-BP falls: less glycolysis, more gluconeogenesis."
+      - "Fructose-2,6-BP falls in fasting, removing the push on PFK-1."
+      - "Glucagon raises cAMP."
+      - "The book states its function is reversed by protein kinase A phosphorylation."
+    src: { page: 74, quote: "Fructose bisphosphatase-2 (FBPase-2) and phosphofructokinase-2 (PFK-2) are the same bifunctional enzyme whose function is reversed by phosphorylation by protein kinase A." }
+    status: unverified
+  # ---------- p74: pyruvate dehydrogenase complex ----------
+  - id: bio.L06.029
+    kind: enumerate
+    topic: pyruvate-dehydrogenase-complex
+    prompt: Enumerate the 5 cofactors of the pyruvate dehydrogenase complex.
+    points:
+      - Thiamine pyrophosphate (B1)
+      - Lipoic acid
+      - CoA (B5, pantothenic acid)
+      - FAD (B2, riboflavin)
+      - NAD+ (B3, niacin)
+    pass: 5
+    hook: "The lovely coenzymes for nerds: T (TPP)، L (lipoic)، C (CoA)، F (FAD)، N (NAD+)."
+    src: { page: 74, quote: "Contains 3 enzymes requiring 5 cofactors: 1. Thiamine pyrophosphate (B1) 2. Lipoic acid 3. CoA (B5, pantothenic acid) 4. FAD (B2, riboflavin) 5. NAD+ (B3, niacin)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.030
+    kind: card
+    topic: pyruvate-dehydrogenase-complex
+    front: What reaction does the pyruvate dehydrogenase complex catalyze, and what activates it?
+    back: "Pyruvate + NAD+ + CoA → acetyl-CoA + CO2 + NADH, in the mitochondria. Activated by ↑ NAD+/NADH, ↑ ADP and ↑ Ca2+; active in the fed state."
+    src: { page: 74, quote: "Reaction: pyruvate + NAD+ + CoA → acetyl- CoA + CO2 + NADH." }
+    status: unverified
+  - id: bio.L06.031
+    kind: card
+    topic: pyruvate-dehydrogenase-complex
+    front: Which complex is similar to pyruvate dehydrogenase?
+    back: α-ketoglutarate dehydrogenase (α-ketoglutarate → succinyl-CoA in the TCA cycle), with the same cofactors.
+    src: { page: 74, quote: "The complex is similar to the α-ketoglutarate dehydrogenase complex (same cofactors, similar substrate and action), which converts α-ketoglutarate → succinyl-CoA (TCA cycle)." }
+    status: unverified
+  - id: bio.L06.032
+    kind: mcq
+    topic: pyruvate-dehydrogenase-complex
+    stem: >-
+      A 45-year-old man who works with old pesticides has vomiting, rice-water diarrhea and a garlic odor
+      on his breath. ECG shows a prolonged QT interval, and his skin has hyperpigmented patches. Which
+      cofactor of pyruvate dehydrogenase is the toxin's target?
+    options:
+      - Thiamine pyrophosphate
+      - Lipoic acid
+      - FAD
+      - Coenzyme A
+      - NAD+
+    answer: 1
+    why:
+      - "TPP is lost in thiamine deficiency, not arsenic poisoning."
+      - "Right. Arsenic inhibits lipoic acid: pigmentary skin changes and skin cancer, vomiting and diarrhea, QT prolongation and garlic breath."
+      - "FAD isn't arsenic's target."
+      - "CoA isn't arsenic's target."
+      - "NAD+ isn't arsenic's target."
+    src: { page: 74, quote: "Arsenic inhibits lipoic acid. Arsenic poisoning clinical findings: imagine a vampire (pigmentary skin changes, skin cancer), vomiting and having diarrhea, running away from a cutie (QT prolongation) with garlic breath." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p75: PDH complex deficiency ----------
+  - id: bio.L06.033
+    kind: card
+    topic: pdh-complex-deficiency
+    front: "Pyruvate dehydrogenase complex deficiency: inheritance, findings and treatment?"
+    back: "X-linked. Pyruvate builds up and is shunted to lactate (LDH) and alanine (ALT): neurologic defects, lactic acidosis and ↑ serum alanine from infancy. Treat with ↑ ketogenic nutrients (high fat, ↑ lysine and leucine), B1 and lipoic acid."
+    src: { page: 75, quote: "Causes a buildup of pyruvate that gets shunted to lactate (via LDH) and alanine (via ALT). X-linked." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.034
+    kind: mcq
+    topic: pdh-complex-deficiency
+    stem: >-
+      A 6-month-old boy has hypotonia, developmental delay and seizures. Serum lactate and alanine are
+      high, and his lactate rises further after a carbohydrate-rich feed. Which diet change is most
+      appropriate?
+    options:
+      - High-carbohydrate diet
+      - Diet high in fat with ↑ lysine and leucine
+      - Diet low in phenylalanine
+      - Restriction of isoleucine, leucine and valine
+      - Avoid fructose and sucrose
+    answer: 1
+    why:
+      - "More carbohydrate makes more pyruvate, which turns into lactate."
+      - "Right. In PDH complex deficiency, ketogenic nutrients (high fat, the purely ketogenic lysine and leucine) bypass pyruvate; also give B1 and lipoic acid."
+      - "That treats PKU."
+      - "That treats maple syrup urine disease."
+      - "That treats hereditary fructose intolerance."
+    src: { page: 75, quote: "↑ intake of ketogenic nutrients (eg, high fat content or ↑ lysine and leucine), B1 and lipoic acid." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p75: pyruvate metabolism ----------
+  - id: bio.L06.035
+    kind: table
+    topic: pyruvate-metabolism
+    title: Fates of pyruvate
+    columns: [Enzyme, Cofactor, Product and role]
+    rows:
+      - [Alanine aminotransferase, B6, Alanine carries amino groups from muscle to liver]
+      - [Pyruvate carboxylase, B7, Oxaloacetate refills the TCA cycle or makes glucose]
+      - [Pyruvate dehydrogenase, "B1, B2, B3, B5, lipoic acid", "Acetyl-CoA, glycolysis → TCA cycle"]
+      - [Lactate dehydrogenase, B3, "Lactate, end of anaerobic glycolysis"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 75, quote: "Pyruvate carboxylase (B7): oxaloacetate can replenish TCA cycle or be used in gluconeogenesis" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.036
+    kind: card
+    topic: pyruvate-metabolism
+    front: Which tissues rely mainly on anaerobic glycolysis (pyruvate → lactate)?
+    back: RBCs, WBCs, kidney medulla, lens, cornea, and Sertoli cells in the testes.
+    src: { page: 75, quote: "end of anaerobic glycolysis (major pathway in RBCs, WBCs, kidney medulla, lens, cornea, and Sertoli cells in testes)" }
+    status: unverified
+  - id: bio.L06.037
+    kind: mcq
+    topic: pyruvate-metabolism
+    stem: >-
+      In a study of red blood cells, a tracer shows that nearly all glucose is turned into lactate, which
+      the liver then uses to make new glucose. Why must RBCs use this route?
+    options:
+      - They lack hexokinase
+      - They lack mitochondria, so pyruvate can't enter the TCA cycle
+      - Lactate dehydrogenase needs biotin
+      - Their glycolysis makes no NADH
+      - They store glucose as glycogen
+    answer: 1
+    why:
+      - "RBCs do use hexokinase."
+      - "Right. RBCs lack mitochondria, so LDH (B3) turning pyruvate into lactate is their major pathway; the liver recycles it in the Cori cycle."
+      - "LDH uses NAD (B3), not biotin."
+      - "Glycolysis makes NADH, which LDH re-oxidizes."
+      - "RBCs don't store glycogen."
+    src: { page: 75, quote: "Lactic acid dehydrogenase (B3): end of anaerobic glycolysis (major pathway in RBCs, WBCs, kidney medulla, lens, cornea, and Sertoli cells in testes)" }
+    status: unverified
+  # ---------- p75: TCA cycle ----------
+  - id: bio.L06.038
+    kind: order
+    topic: tca-cycle
+    prompt: Put the TCA cycle intermediates in order, starting from acetyl-CoA + oxaloacetate.
+    steps:
+      - Citrate
+      - Isocitrate
+      - α-Ketoglutarate
+      - Succinyl-CoA
+      - Succinate
+      - Fumarate
+      - Malate
+      - Oxaloacetate
+    src: { page: 75, quote: "Citrate is Krebs’ starting substrate for making oxaloacetate." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.039
+    kind: card
+    topic: tca-cycle
+    front: What does one turn of the TCA cycle produce per acetyl-CoA?
+    back: 3 NADH, 1 FADH2, 2 CO2 and 1 GTP = 10 ATP per acetyl-CoA (double everything per glucose). Pyruvate → acetyl-CoA adds 1 NADH and 1 CO2.
+    src: { page: 75, quote: "The TCA cycle produces 3 NADH, 1 FADH2, 2 CO2, 1 GTP per acetyl-CoA = 10 ATP/ acetyl-CoA (2× everything per glucose)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.040
+    kind: mcq
+    topic: tca-cycle
+    stem: >-
+      A 38-year-old man with chronic alcohol use and thiamine deficiency has impaired conversion of
+      α-ketoglutarate to succinyl-CoA. Which other set of cofactors does this enzyme complex share with
+      pyruvate dehydrogenase?
+    options:
+      - Biotin and ATP
+      - B1, B2, B3, B5 and lipoic acid
+      - B6 and B12
+      - Folate and SAM
+      - Vitamin C and iron
+    answer: 1
+    why:
+      - "Biotin and ATP are pyruvate carboxylase's needs."
+      - "Right. α-ketoglutarate dehydrogenase needs the same cofactors as the PDH complex: B1, B2, B3, B5 and lipoic acid."
+      - "B12 is for methylmalonyl-CoA mutase; B6 for transamination."
+      - "Folate and SAM carry 1-carbon and methyl groups."
+      - "Vitamin C is for hydroxylation."
+    src: { page: 75, quote: "α-ketoglutarate dehydrogenase complex requires the same cofactors as the pyruvate dehydrogenase complex (vitamins B1, B2, B3, B5, lipoic acid)." }
+    status: unverified
+  # ---------- p76: electron transport chain ----------
+  - id: bio.L06.041
+    kind: card
+    topic: electron-transport-chain
+    front: Where do NADH and FADH2 electrons enter the electron transport chain, and how much ATP does each make?
+    back: NADH → complex I (2.5 ATP). FADH2 → complex II, at a lower energy level (1.5 ATP). Oxygen is the final electron acceptor.
+    src: { page: 76, quote: "NADH electrons are transferred to complex I. FADH2 electrons are transferred to complex II (at a lower energy level than NADH)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.042
+    kind: card
+    topic: electron-transport-chain
+    front: How much ATP does one glucose make aerobically vs anaerobically?
+    back: 32 net ATP via the malate-aspartate shuttle (heart, liver), 30 via the glycerol-3-phosphate shuttle (muscle). Anaerobic glycolysis gives only 2 net ATP.
+    src: { page: 76, quote: "Aerobic metabolism of one glucose molecule produces 32 net ATP via malate-aspartate shuttle (heart and liver), 30 net ATP via glycerol-3-phosphate shuttle (muscle)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.043
+    kind: card
+    topic: electron-transport-chain
+    front: What do uncoupling proteins do?
+    back: They ↑ inner mitochondrial membrane permeability → ↓ proton gradient → heat. ATP synthesis stops, but electron transport continues. Found in brown fat; aspirin overdose also uncouples (hyperthermia).
+    src: { page: 76, quote: "Uncoupling proteins (found in brown fat, which has more mitochondria than white fat) produce heat by ↑ inner mitochondrial membrane permeability → ↓ proton gradient. ATP synthesis stops, but electron transport continues." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.044
+    kind: card
+    topic: electron-transport-chain
+    front: Which electron transport inhibitors act at complex IV?
+    back: Cyanide and carbon monoxide.
+    src: { page: 76, quote: "Complex III Complex IV Cyanide, CO" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.045
+    kind: mcq
+    topic: electron-transport-chain
+    stem: >-
+      A 16-year-old girl took a large overdose of aspirin. She has tinnitus, tachypnea and a temperature
+      of 39.8 °C. How does the drug cause her fever?
+    options:
+      - It blocks complex IV, stopping electron flow
+      - It makes the inner mitochondrial membrane leaky to protons, so energy is lost as heat
+      - It inhibits ATP synthase directly while the gradient stays high
+      - It activates pyrogen release from macrophages
+      - It inhibits the malate-aspartate shuttle
+    answer: 1
+    why:
+      - "That is cyanide or CO; electron transport stops entirely."
+      - "Right. Aspirin overdose uncouples oxidative phosphorylation: the proton gradient dissipates, electron transport continues, ATP synthesis stops and heat is made."
+      - "With direct ATP synthase block, the gradient builds and electron flow slows; no heat."
+      - "Salicylates are antipyretic in normal doses."
+      - "The shuttles only move NADH electrons into mitochondria."
+    src: { page: 76, quote: "Aspirin overdose can also cause uncoupling of oxidative phosphorylation resulting in hyperthermia." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p76: gluconeogenesis ----------
+  - id: bio.L06.046
+    kind: table
+    topic: gluconeogenesis
+    title: Irreversible enzymes of gluconeogenesis
+    columns: [Enzyme, Site, Reaction and needs]
+    rows:
+      - [Pyruvate carboxylase, Mitochondria, "Pyruvate → oxaloacetate; biotin, ATP; ⊕ acetyl-CoA"]
+      - [PEP carboxykinase, Cytosol, "Oxaloacetate → PEP; GTP"]
+      - ["Fructose-1,6-bisphosphatase 1", Cytosol, "F-1,6-BP → F-6-P; ⊕ citrate, ⊝ AMP, fructose-2,6-BP"]
+      - [Glucose-6-phosphatase, ER, Glucose-6-P → glucose]
+    blanks: [[0, 1], [0, 2], [1, 2], [3, 1]]
+    src: { page: 76, quote: "Pyruvate carboxylase In mitochondria. Pyruvate → oxaloacetate. Requires biotin, ATP. Activated by acetyl-CoA." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.047
+    kind: card
+    topic: gluconeogenesis
+    front: Why can't muscle contribute glucose to the blood by gluconeogenesis?
+    back: Muscle lacks glucose-6-phosphatase. Gluconeogenesis happens mainly in the liver (also kidney and intestinal epithelium).
+    src: { page: 76, quote: "(Muscle cannot participate in gluconeogenesis because it lacks glucose-6-phosphatase)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.048
+    kind: card
+    topic: gluconeogenesis
+    front: Can fatty acids make new glucose?
+    back: Only odd-chain fatty acids, which yield propionyl-CoA → succinyl-CoA → gluconeogenesis. Even-chain fatty acids give only acetyl-CoA and can't make glucose ("It's odd for fatty acids to make glucose").
+    src: { page: 76, quote: "Even-chain fatty acids cannot produce new glucose, since they yield only acetyl- CoA equivalents." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.049
+    kind: mcq
+    topic: gluconeogenesis
+    stem: >-
+      A 30-year-old man has fasted for 20 hours. β-Oxidation of fatty acids in his liver raises
+      mitochondrial acetyl-CoA. Which gluconeogenic enzyme does acetyl-CoA directly activate?
+    options:
+      - PEP carboxykinase
+      - Pyruvate carboxylase
+      - Fructose-1,6-bisphosphatase 1
+      - Glucose-6-phosphatase
+      - Pyruvate dehydrogenase
+    answer: 1
+    why:
+      - "PEP carboxykinase needs GTP; acetyl-CoA isn't its activator."
+      - "Right. Pyruvate carboxylase (mitochondria; biotin, ATP) is activated by acetyl-CoA, so fat oxidation pushes pyruvate toward glucose."
+      - "FBPase-1 is activated by citrate."
+      - "Glucose-6-phosphatase isn't described as activated by acetyl-CoA."
+      - "Pyruvate dehydrogenase isn't gluconeogenic, and it is inactive in fasting."
+    src: { page: 76, quote: "Pyruvate carboxylase In mitochondria. Pyruvate → oxaloacetate. Requires biotin, ATP. Activated by acetyl-CoA." }
+    status: unverified
+  # ---------- p77: pentose phosphate pathway ----------
+  - id: bio.L06.050
+    kind: card
+    topic: pentose-phosphate-pathway
+    front: What does the HMP shunt (pentose phosphate pathway) make, and where is it most active?
+    back: "NADPH (for glutathione reduction in RBCs and fatty acid and cholesterol synthesis) and ribose for nucleotides. Cytoplasm; no ATP used or made. Most active in lactating mammary glands, liver, adrenal cortex and RBCs."
+    src: { page: 77, quote: "Sites of highest activity: lactating mammary glands, liver, adrenal cortex (sites of fatty acid or steroid synthesis), RBCs." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.051
+    kind: table
+    topic: pentose-phosphate-pathway
+    title: Two phases of the HMP shunt
+    columns: [Phase, Reversible?, Key enzyme, Product]
+    rows:
+      - [Oxidative, Irreversible, Glucose-6-P dehydrogenase, NADPH + CO2 + ribulose-5-P]
+      - [Nonoxidative, Reversible, "Transketolase (B1), phosphopentose isomerase", Ribose-5-P and glycolytic intermediates]
+    blanks: [[0, 1], [0, 2], [1, 2]]
+    src: { page: 77, quote: "Two distinct phases (oxidative and nonoxidative), both of which occur in the cytoplasm. No ATP is used or produced." }
+    status: unverified
+  - id: bio.L06.052
+    kind: mcq
+    topic: pentose-phosphate-pathway
+    stem: >-
+      A malnourished 50-year-old man with chronic alcohol use is being evaluated for thiamine deficiency.
+      Which enzyme of the nonoxidative HMP shunt is measured in his red cells before and after giving B1?
+    options:
+      - Glucose-6-phosphate dehydrogenase
+      - Transketolase
+      - Phosphopentose isomerase
+      - Pyruvate kinase
+      - Glutathione reductase
+    answer: 1
+    why:
+      - "G6PD is the oxidative-phase enzyme and needs NADP+, not B1."
+      - "Right. Transketolase in the nonoxidative, reversible phase needs B1 (TPP); its RBC activity rises after giving B1 in deficiency."
+      - "Phosphopentose isomerase doesn't need B1."
+      - "Pyruvate kinase is glycolytic."
+      - "Glutathione reductase uses NADPH."
+    src: { page: 77, quote: "Transketolase, B₁" }
+    status: unverified
+  # ---------- p77: G6PD deficiency ----------
+  - id: bio.L06.053
+    kind: card
+    topic: g6pd-deficiency
+    front: Why does G6PD deficiency cause hemolysis?
+    back: ↓ NADPH in RBCs → glutathione can't be kept reduced → poor defense against oxidants (fava beans, sulfonamides, nitrofurantoin, primaquine) and infection (most common trigger) → hemolytic anemia.
+    src: { page: 77, quote: "↓ NADPH in RBCs leads to hemolytic anemia due to poor RBC defense against oxidizing agents (eg, fava beans, sulfonamides, nitrofurantoin, primaquine)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.054
+    kind: card
+    topic: g6pd-deficiency
+    front: What are Heinz bodies and bite cells?
+    back: Heinz bodies are denatured globin chains precipitated by oxidative stress. Bite cells form when splenic macrophages remove Heinz bodies ("Bite into some Heinz ketchup").
+    src: { page: 77, quote: "Heinz bodies—denatured globin chains precipitate within RBCs due to oxidative stress. Bite cells—result from the phagocytic removal of Heinz bodies by splenic macrophages." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.055
+    kind: cloze
+    topic: g6pd-deficiency
+    text: G6PD deficiency is {{c1::X-linked recessive}}, the most common human {{c2::enzyme deficiency}}, and more prevalent in populations from {{c3::malaria}}-endemic regions.
+    src: { page: 77, quote: "X-linked recessive disorder; most common human enzyme deficiency; more prevalent among descendants of populations in malaria- endemic regions" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.056
+    kind: mcq
+    topic: g6pd-deficiency
+    stem: >-
+      A 24-year-old man from Nigeria is started on primaquine for Plasmodium vivax malaria. Three days
+      later he has dark urine and jaundice. Smear shows red cells with chunks missing from their edges.
+      Which molecule's regeneration is impaired in his red cells?
+    options:
+      - Reduced glutathione
+      - ATP
+      - 2,3-bisphosphoglycerate
+      - NADH
+      - Spectrin
+    answer: 0
+    why:
+      - "Right. G6PD deficiency → ↓ NADPH → glutathione reductase can't regenerate reduced glutathione (GSH) to detoxify peroxides; bite cells come from splenic removal of Heinz bodies."
+      - "↓ ATP is pyruvate kinase deficiency (no oxidant trigger)."
+      - "2,3-BPG changes O2 affinity; it isn't the defense against oxidants."
+      - "NADH comes from glycolysis; the HMP shunt makes NADPH."
+      - "Spectrin defects are hereditary spherocytosis."
+    src: { page: 77, quote: "NADPH is necessary to keep glutathione reduced, which in turn detoxifies free radicals and peroxides." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p78: fructose disorders ----------
+  - id: bio.L06.057
+    kind: table
+    topic: fructose-disorders
+    title: Disorders of fructose metabolism
+    columns: ["", Essential fructosuria, Hereditary fructose intolerance]
+    rows:
+      - [Enzyme, Fructokinase (AR), Aldolase B (AR)]
+      - [Mechanism, "Fructose not trapped in cells; hexokinase takes over", "Fructose-1-P builds up → ↓ phosphate → glycogenolysis and gluconeogenesis blocked"]
+      - [Presentation, "Benign; fructose in blood and urine", "Hypoglycemia, jaundice, cirrhosis, vomiting after fruit, juice or honey"]
+      - [Treatment, None needed, "↓ fructose, sucrose and sorbitol"]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 2], [3, 2]]
+    src: { page: 78, quote: "Fructose-1-phosphate accumulates → ↓ available phosphate → inhibition of glycogenolysis and gluconeogenesis." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.058
+    kind: card
+    topic: fructose-disorders
+    front: Why is the urine dipstick negative in fructose and galactose disorders even though sugar is in the urine?
+    back: The dipstick tests for glucose only. A reducing sugar test detects them (a nonspecific test for inborn errors of carbohydrate metabolism).
+    src: { page: 78, quote: "Urine dipstick will be ⊝ (tests for glucose only); reducing sugar can be detected in the urine (nonspecific test for inborn errors of carbohydrate metabolism)." }
+    status: unverified
+  - id: bio.L06.059
+    kind: mcq
+    topic: fructose-disorders
+    stem: >-
+      A 7-month-old boy was well on breast milk. Since starting pureed fruit and juice, he has had
+      vomiting, lethargy and jaundice, and the liver is enlarged. Glucose is 35 mg/dL after a fruit meal.
+      Urine dipstick is negative for glucose, but a reducing-sugar test is positive. What accumulates in
+      his liver?
+    options:
+      - Galactitol
+      - Fructose-1-phosphate
+      - Glucose-6-phosphate
+      - Sorbitol
+      - Glycogen with short outer branches
+    answer: 1
+    why:
+      - "Galactitol builds up in galactosemia, which would show from the first milk feeds."
+      - "Right. Aldolase B deficiency (hereditary fructose intolerance): fructose-1-P traps phosphate, blocking glycogenolysis and gluconeogenesis → hypoglycemia after fruit, juice or honey."
+      - "G6P builds up in von Gierke disease, with hypoglycemia on fasting, not after fruit."
+      - "Sorbitol builds up in lens and nerves in diabetes."
+      - "That is Cori disease (limit dextrin)."
+    src: { page: 78, quote: "Hypoglycemia, jaundice, cirrhosis, vomiting. Symptoms only present following consumption of fruit, juice, or honey." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p78: galactose disorders ----------
+  - id: bio.L06.060
+    kind: table
+    topic: galactose-disorders
+    title: Disorders of galactose metabolism
+    columns: ["", Galactokinase deficiency, Classic galactosemia]
+    rows:
+      - [Enzyme, Galactokinase (AR), Galactose-1-phosphate uridyltransferase (AR)]
+      - [Presentation, "Mild: galactosemia, galactosuria, infantile cataracts", "Failure to thrive, jaundice, hepatomegaly, cataracts, intellectual disability"]
+      - [Extra risk, "Failure to track objects or social smile", E coli sepsis in neonates]
+      - [Treatment, Exclude galactose and lactose, Exclude galactose and lactose]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 2]]
+    src: { page: 78, quote: "Symptoms start when infant is fed formula or breast milk → failure to thrive, jaundice, hepatomegaly, infantile cataracts (galactitol deposition in eye lens), intellectual disability." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.061
+    kind: card
+    topic: galactose-disorders
+    front: What causes the cataracts in galactose disorders?
+    back: Galactose is converted by aldose reductase to galactitol, which deposits in the lens.
+    src: { page: 78, quote: "infantile cataracts (galactitol deposition in eye lens)" }
+    status: unverified
+  - id: bio.L06.062
+    kind: mcq
+    topic: galactose-disorders
+    stem: >-
+      A 10-day-old girl fed breast milk has poor feeding, vomiting, jaundice and hepatomegaly. Bilateral
+      oil-drop cataracts are seen. Blood culture grows Escherichia coli. Which enzyme is deficient?
+    options:
+      - Galactokinase
+      - Galactose-1-phosphate uridyltransferase
+      - Aldolase B
+      - Fructokinase
+      - Lactase
+    answer: 1
+    why:
+      - "Galactokinase deficiency is mild: cataracts without liver failure or sepsis."
+      - "Right. Classic galactosemia: toxic galactitol and galactose-1-P; failure to thrive, jaundice, hepatomegaly, cataracts, and a risk of E coli sepsis."
+      - "Aldolase B deficiency presents only after fruit, juice or honey."
+      - "Fructokinase deficiency is benign."
+      - "Lactase deficiency causes diarrhea and bloating, not liver disease."
+    src: { page: 78, quote: "Can predispose neonates to E coli sepsis." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p79: sorbitol ----------
+  - id: bio.L06.063
+    kind: card
+    topic: sorbitol
+    front: Why does sorbitol cause damage in diabetes, and which tissues are at risk?
+    back: Aldose reductase turns glucose into sorbitol; tissues with too little sorbitol dehydrogenase can't turn it into fructose, so sorbitol builds up → osmotic damage (cataracts, retinopathy, peripheral neuropathy). Lens has mainly aldose reductase; retina, kidneys and Schwann cells have only aldose reductase (LARKS).
+    src: { page: 79, quote: "Lens has primarily Aldose reductase. Retina, Kidneys, and Schwann cells have only aldose reductase (LARKS)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.064
+    kind: card
+    topic: sorbitol
+    front: Which tissues have both aldose reductase and sorbitol dehydrogenase?
+    back: Liver, ovaries and seminal vesicles (they lose sorbitol).
+    src: { page: 79, quote: "Liver, ovaries, and seminal vesicles have both enzymes (they lose sorbitol)." }
+    status: unverified
+  - id: bio.L06.065
+    kind: mcq
+    topic: sorbitol
+    stem: >-
+      A 58-year-old man with poorly controlled type 2 diabetes for 15 years has numbness in a stocking
+      distribution and early cataracts. Osmotic injury in his Schwann cells is due to the lack of which
+      enzyme?
+    options:
+      - Aldose reductase
+      - Sorbitol dehydrogenase
+      - Hexokinase
+      - Galactokinase
+      - Glucose-6-phosphatase
+    answer: 1
+    why:
+      - "Aldose reductase is present; it makes the sorbitol."
+      - "Right. Schwann cells have only aldose reductase, so sorbitol can't be converted to fructose and builds up, drawing in water."
+      - "Hexokinase traps glucose but doesn't make an osmotic alcohol."
+      - "Galactokinase deficiency gives galactitol cataracts in infants."
+      - "Glucose-6-phosphatase is a liver gluconeogenic enzyme."
+    src: { page: 79, quote: "tissues with an insufficient amount/activity of this enzyme are at risk of intracellular sorbitol accumulation, causing osmotic damage (eg, cataracts, retinopathy, and peripheral neuropathy seen with chronic hyperglycemia in diabetes)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p79: lactase deficiency ----------
+  - id: bio.L06.066
+    kind: card
+    topic: lactase-deficiency
+    front: What are the types of lactase deficiency?
+    back: "Primary: age-dependent decline after childhood (common in Asian, African, Native American descent). Secondary: loss of brush border (eg, rotavirus gastroenteritis, autoimmune disease). Congenital: rare gene defect."
+    src: { page: 79, quote: "Primary: age-dependent decline after childhood (absence of lactase-persistent allele), common in people of Asian, African, or Native American descent." }
+    status: unverified
+  - id: bio.L06.067
+    kind: card
+    topic: lactase-deficiency
+    front: Which tests support lactose intolerance?
+    back: Stool ↓ pH, and ↑ breath hydrogen on the lactose hydrogen breath test (colonic bacteria ferment undigested lactose). Biopsy shows normal mucosa in hereditary lactose intolerance.
+    src: { page: 79, quote: "Stool demonstrates ↓ pH and breath shows ↑ hydrogen content with lactose hydrogen breath test" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.068
+    kind: mcq
+    topic: lactase-deficiency
+    stem: >-
+      A 20-year-old Nigerian student in the US has bloating, cramps, flatulence and watery diarrhea after
+      drinking milkshakes. Symptoms clear when he avoids dairy. Which finding is expected?
+    options:
+      - ↑ stool pH
+      - ↑ breath hydrogen after a lactose load
+      - Villous atrophy on biopsy
+      - Positive urine dipstick for glucose
+      - Fat globules in stool
+    answer: 1
+    why:
+      - "Bacterial fermentation acidifies stool, so pH falls."
+      - "Right. Primary lactase deficiency: colonic bacteria ferment undigested lactose → H2 in breath, gas and osmotic diarrhea."
+      - "Biopsy is normal in hereditary lactose intolerance; villous atrophy suggests celiac disease."
+      - "Lactose isn't absorbed, so glucose isn't spilled into urine."
+      - "Fat malabsorption isn't part of lactose intolerance."
+    src: { page: 79, quote: "Bloating, cramps, flatulence (all due to fermentation of lactose by colonic bacteria → gas), and osmotic diarrhea (undigested lactose)." }
+    status: unverified
+  # ---------- p79: amino acids ----------
+  - id: bio.L06.069
+    kind: enumerate
+    topic: amino-acids
+    prompt: Enumerate the essential amino acids (PVT TIM HaLL).
+    points:
+      - Phenylalanine
+      - Valine
+      - Tryptophan
+      - Threonine
+      - Isoleucine
+      - Methionine
+      - Histidine
+      - Leucine
+      - Lysine
+    pass: 8
+    hook: "PVT TIM HaLL: عسكري (PVT) اسمه تيم في الصالة (Hall)."
+    src: { page: 79, quote: "Essential PVT TIM HaLL: Phenylalanine, Valine, Tryptophan, Threonine, Isoleucine, Methionine, Histidine, Leucine, Lysine." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.070
+    kind: table
+    topic: amino-acids
+    title: Glucogenic vs ketogenic amino acids
+    columns: [Group, Amino acids]
+    rows:
+      - [Glucogenic, "Methionine, histidine, valine"]
+      - [Glucogenic and ketogenic, "Isoleucine, phenylalanine, threonine, tryptophan"]
+      - [Purely ketogenic, "Leucine, lysine"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 79, quote: "Ketogenic: leucine, lysine. The only purely ketogenic amino acids." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.071
+    kind: card
+    topic: amino-acids
+    front: Which amino acids are acidic and which are basic?
+    back: Acidic (negative at body pH) are aspartic acid and glutamic acid. Basic are histidine, lysine and arginine; arginine is the most basic, and histidine has no charge at body pH.
+    src: { page: 79, quote: "Basic Histidine, lysine, arginine. Arginine is most basic. Histidine has no charge at body pH." }
+    status: unverified
+  - id: bio.L06.072
+    kind: card
+    topic: amino-acids
+    front: Which amino acids are ↑ in histones, and which are needed during growth?
+    back: Arginine and lysine are ↑ in histones (positive, binding negative DNA). Arginine and histidine are required during periods of growth.
+    src: { page: 79, quote: "Arginine and histidine are required during periods of growth. Arginine and lysine are ↑ in histones which bind negatively charged DNA." }
+    status: unverified
+  - id: bio.L06.073
+    kind: mcq
+    topic: amino-acids
+    stem: >-
+      A 30-year-old woman follows a very low-carbohydrate diet. Her liver converts amino acids into
+      ketone bodies. Which pair of amino acids can only be converted to ketone bodies and never to new
+      glucose?
+    options:
+      - Methionine and valine
+      - Leucine and lysine
+      - Phenylalanine and tryptophan
+      - Aspartate and glutamate
+      - Histidine and arginine
+    answer: 1
+    why:
+      - "Methionine and valine are glucogenic."
+      - "Right. Leucine and lysine are the only purely ketogenic amino acids."
+      - "These are both glucogenic and ketogenic."
+      - "Aspartate and glutamate are the acidic amino acids."
+      - "Histidine and arginine are basic, and needed during growth."
+    src: { page: 79, quote: "Ketogenic: leucine, lysine. The only purely ketogenic amino acids." }
+    status: unverified
+  # ---------- p80: urea cycle ----------
+  - id: bio.L06.074
+    kind: order
+    topic: urea-cycle
+    prompt: Put the urea cycle in order (Ordinarily, Careless Crappers Are Also Frivolous About Urination).
+    steps:
+      - Ornithine
+      - Carbamoyl phosphate
+      - Citrulline
+      - Aspartate
+      - Argininosuccinate
+      - Fumarate
+      - Arginine
+      - Urea
+    src: { page: 80, quote: "Ordinarily, Careless Crappers Are Also Frivolous About Urination." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.075
+    kind: card
+    topic: urea-cycle
+    front: What is the rate-limiting step of the urea cycle and where does it happen?
+    back: Carbamoyl phosphate synthetase I, in the mitochondria (HCO3− + NH3 → carbamoyl phosphate, 2 ATP), allosterically activated by N-acetylglutamate. The rest of the cycle is cytoplasmic (liver), and urea goes to the kidney.
+    src: { page: 80, quote: "Excess nitrogen is converted to urea and excreted by the kidneys." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.076
+    kind: mcq
+    topic: urea-cycle
+    stem: >-
+      A 3-day-old boy becomes lethargic and vomits after starting feeds. Ammonia is 400 µmol/L. Orotic
+      acid in urine is normal, and citrulline is very low. Testing shows his N-acetylglutamate synthesis
+      is absent. Which enzyme is functionally inactive?
+    options:
+      - Ornithine transcarbamylase
+      - Carbamoyl phosphate synthetase I
+      - Argininosuccinate lyase
+      - Arginase
+      - Carbamoyl phosphate synthetase II
+    answer: 1
+    why:
+      - "OTC deficiency would raise orotic acid."
+      - "Right. N-acetylglutamate is the allosteric activator of CPS I, the urea cycle's rate-limiting enzyme; without it, carbamoyl phosphate isn't made, so orotic acid stays normal."
+      - "This would raise citrulline and argininosuccinate."
+      - "Arginase deficiency raises arginine."
+      - "CPS II is the cytosolic pyrimidine enzyme; it isn't controlled by N-acetylglutamate."
+    src: { page: 80, quote: "N-acetylglutamate Carbamoyl phosphate synthetase I*" }
+    status: unverified
+  # ---------- p80: ammonia transport ----------
+  - id: bio.L06.077
+    kind: card
+    topic: ammonia-transport
+    front: How does muscle send ammonia to the liver (Cahill cycle)?
+    back: In muscle, amino acids pass NH3 to α-ketoglutarate → glutamate → onto pyruvate as alanine. In the liver, alanine gives back pyruvate (→ glucose) and glutamate (→ urea). The glucose returns to muscle.
+    src: { page: 80, quote: "Transport of ammonia by alanine" }
+    status: unverified
+  - id: bio.L06.078
+    kind: mcq
+    topic: ammonia-transport
+    stem: >-
+      During a long run, a 30-year-old woman's leg muscles break down amino acids. Which molecule
+      carries most of the resulting nitrogen to her liver while also supplying a carbon skeleton for
+      gluconeogenesis?
+    options:
+      - Lactate
+      - Alanine
+      - Urea
+      - Ketone bodies
+      - Free ammonia
+    answer: 1
+    why:
+      - "Lactate carries carbon in the Cori cycle but no nitrogen."
+      - "Right. In the Cahill cycle, muscle transfers NH3 onto pyruvate to make alanine; the liver uses the pyruvate for glucose and the nitrogen for urea."
+      - "Urea is made in the liver, not muscle."
+      - "Ketone bodies carry no nitrogen."
+      - "Free ammonia is toxic and isn't the carrier."
+    src: { page: 80, quote: "Transport of ammonia by alanine" }
+    status: unverified
+  # ---------- p80: hyperammonemia ----------
+  - id: bio.L06.079
+    kind: card
+    topic: hyperammonemia
+    front: How does hyperammonemia present?
+    back: Flapping tremor (asterixis), slurred speech, somnolence, vomiting, cerebral edema and blurred vision. It can be acquired (liver disease) or hereditary (urea cycle enzyme deficiencies).
+    src: { page: 80, quote: "Presents with flapping tremor (asterixis), slurring of speech, somnolence, vomiting, cerebral edema, blurring of vision." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.080
+    kind: enumerate
+    topic: hyperammonemia
+    prompt: Enumerate how ↑ NH3 causes CNS toxicity.
+    points:
+      - TCA cycle inhibition (↓ α-ketoglutarate)
+      - ↓ glutamate
+      - ↑ GABAergic tone (↑ GABA)
+      - ↑ glutamine
+      - Cerebral edema (glutamine-induced osmotic shifts)
+    pass: 4
+    hook: "الـ NH3 بيسرق الـ α-ketoglutarate يعمله glutamate، وبعدين glutamine. فالـ TCA يقف، والـ glutamine يشد مية للمخ."
+    src: { page: 80, quote: "↑ NH3 causes CNS toxicity, involving: ▘ TCA cycle inhibition (↓ α-ketoglutarate) ▘ ↓ glutamate ▘ ↑ GABAergic tone (↑ GABA) ▘ ↑ glutamine ▘ Cerebral edema (glutamine induced osmotic shifts)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.081
+    kind: table
+    topic: hyperammonemia
+    title: Lowering ammonia
+    columns: [Treatment, How it works]
+    rows:
+      - [Low-protein diet, Less nitrogen to clear]
+      - [Lactulose, Acidifies the gut to trap NH4+ for excretion]
+      - [Rifaximin, ↓ ammoniagenic bacteria]
+      - ["Benzoate, phenylacetate, phenylbutyrate", React with glycine or glutamine to form products excreted in urine]
+    blanks: [[1, 1], [2, 1], [3, 1]]
+    src: { page: 80, quote: "Lactulose to acidify GI tract and trap NH + 4 for excretion." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.082
+    kind: mcq
+    topic: hyperammonemia
+    stem: >-
+      A 55-year-old man with alcohol-related cirrhosis is confused and has a flapping tremor of the
+      outstretched hands. Serum ammonia is high. He is started on a nonabsorbable disaccharide. How does
+      this drug lower ammonia?
+    options:
+      - It kills ammonia-producing gut bacteria
+      - It acidifies the colon so NH3 is trapped as NH4+ and excreted
+      - It conjugates glycine for renal excretion
+      - It activates carbamoyl phosphate synthetase I
+      - It blocks glutamine synthesis in the brain
+    answer: 1
+    why:
+      - "That is rifaximin."
+      - "Right. Lactulose acidifies the GI tract, trapping NH4+ for excretion."
+      - "That is benzoate or phenylbutyrate."
+      - "Lactulose doesn't act on urea cycle enzymes."
+      - "Lactulose acts in the gut, not the brain."
+    src: { page: 80, quote: "Lactulose to acidify GI tract and trap NH + 4 for excretion." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p81: OTC deficiency ----------
+  - id: bio.L06.083
+    kind: card
+    topic: otc-deficiency
+    front: What is ornithine transcarbamylase deficiency, and why does orotic acid rise?
+    back: The most common urea cycle disorder, X-linked recessive (others are AR). Excess carbamoyl phosphate is shunted into pyrimidine synthesis → orotic acid. Findings are ↑ orotic acid in blood and urine, ↓ BUN, hyperammonemia, and no megaloblastic anemia.
+    src: { page: 81, quote: "Most common urea cycle disorder. X-linked recessive (vs other urea cycle enzyme deficiencies, which are autosomal recessive)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.084
+    kind: mcq
+    topic: otc-deficiency
+    stem: >-
+      A 4-day-old boy has vomiting, lethargy and tachypnea. Ammonia is markedly ↑, BUN is low, and urine
+      orotic acid is high. CBC is normal. A maternal uncle died in the newborn period. Which enzyme is
+      deficient?
+    options:
+      - Carbamoyl phosphate synthetase I
+      - Ornithine transcarbamylase
+      - UMP synthase
+      - Argininosuccinate synthetase
+      - Arginase
+    answer: 1
+    why:
+      - "CPS I deficiency gives hyperammonemia without ↑ orotic acid (no carbamoyl phosphate)."
+      - "Right. OTC deficiency (X-linked, so a maternal uncle): carbamoyl phosphate spills into orotic acid; hyperammonemia, ↓ BUN, no megaloblastic anemia."
+      - "UMP synthase deficiency (orotic aciduria) has megaloblastic anemia and no hyperammonemia."
+      - "This is AR and gives ↑ citrulline."
+      - "Arginase deficiency gives spastic diplegia and ↑ arginine."
+    src: { page: 81, quote: "Findings: ↑ orotic acid in blood and urine, ↓ BUN, symptoms of hyperammonemia. No megaloblastic anemia (vs orotic aciduria)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p81: amino acid derivatives ----------
+  - id: bio.L06.085
+    kind: table
+    topic: amino-acid-derivatives
+    title: What amino acids become
+    columns: [Amino acid, Products]
+    rows:
+      - [Tryptophan, "Niacin (NAD+/NADP+), serotonin → melatonin"]
+      - [Phenylalanine, "Tyrosine → thyroxine, melanin, dopa → dopamine → NE → epinephrine"]
+      - [Histidine, Histamine]
+      - [Glycine, Porphyrin → heme]
+      - [Glutamate, "GABA, glutathione"]
+      - [Arginine, "Creatine, urea, nitric oxide"]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 81, quote: "Amino acid derivatives Tryptophan Niacin NAD+ /NADP+ Serotonin Melatonin" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.086
+    kind: mcq
+    topic: amino-acid-derivatives
+    stem: >-
+      A 45-year-old man with a metastatic carcinoid tumor has flushing and diarrhea and now develops a
+      scaly rash on sun-exposed skin with confusion. His tumor is diverting which amino acid away from
+      the synthesis of NAD+?
+    options:
+      - Tyrosine
+      - Tryptophan
+      - Histidine
+      - Glycine
+      - Arginine
+    answer: 1
+    why:
+      - "Tyrosine makes catecholamines, thyroxine and melanin."
+      - "Right. Tryptophan makes both serotonin and niacin (NAD+/NADP+); a carcinoid tumor uses it for serotonin, causing pellagra."
+      - "Histidine makes histamine."
+      - "Glycine makes porphyrin and heme."
+      - "Arginine makes creatine, urea and nitric oxide."
+    src: { page: 81, quote: "Amino acid derivatives Tryptophan Niacin NAD+ /NADP+ Serotonin Melatonin" }
+    status: unverified
+  # ---------- p81: catecholamine synthesis ----------
+  - id: bio.L06.087
+    kind: order
+    topic: catecholamine-synthesis
+    prompt: Put catecholamine synthesis in order.
+    steps:
+      - Phenylalanine (phenylalanine hydroxylase, BH4)
+      - Tyrosine (tyrosine hydroxylase, BH4)
+      - L-DOPA (DOPA decarboxylase, B6)
+      - Dopamine (dopamine β-hydroxylase, vitamin C)
+      - Norepinephrine (PNMT, SAM; needs cortisol)
+      - Epinephrine
+    src: { page: 81, quote: "Phenylethanolamine-N- methyltransferase" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.088
+    kind: card
+    topic: catecholamine-synthesis
+    front: What are the breakdown products of dopamine, norepinephrine and epinephrine?
+    back: Dopamine → homovanillic acid. Norepinephrine → normetanephrine; epinephrine → metanephrine (COMT); both → vanillylmandelic acid (MAO).
+    src: { page: 81, quote: "Epinephrine Metanephrine Normetanephrine Vanillylmandelic acid" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.089
+    kind: card
+    topic: catecholamine-synthesis
+    front: Which enzyme defects in tyrosine metabolism cause phenylketonuria, albinism and alkaptonuria?
+    back: Phenylalanine hydroxylase (PKU), tyrosinase (albinism, no melanin), homogentisate oxidase (alkaptonuria).
+    src: { page: 81, quote: "Phenylalanine hydroxylase Phenylketonuria Tyrosinase Tyrosine hydroxylase Melanin Cortisol Albinism" }
+    status: unverified
+  - id: bio.L06.090
+    kind: mcq
+    topic: catecholamine-synthesis
+    stem: >-
+      A 60-year-old man with Parkinson disease takes L-DOPA with a second drug that blocks the conversion
+      of L-DOPA to dopamine outside the brain. Which enzyme does the second drug inhibit, and which
+      cofactor does that enzyme use?
+    options:
+      - Tyrosine hydroxylase; BH4
+      - DOPA decarboxylase; B6
+      - Dopamine β-hydroxylase; vitamin C
+      - Catechol-O-methyltransferase; SAM
+      - Monoamine oxidase; FAD
+    answer: 1
+    why:
+      - "Tyrosine hydroxylase makes L-DOPA, upstream of the drug's target."
+      - "Right. Carbidopa inhibits peripheral DOPA decarboxylase, a B6 (PLP) enzyme."
+      - "Dopamine β-hydroxylase makes NE from dopamine."
+      - "COMT inhibitors (entacapone) are another add-on, but they don't block dopamine formation."
+      - "MAO-B inhibitors slow dopamine breakdown."
+    src: { page: 81, quote: "DOPA decarboxylase Dopamine β-hydroxylase Carbidopa" }
+    status: unverified
+  # ---------- p82: phenylketonuria ----------
+  - id: bio.L06.091
+    kind: card
+    topic: phenylketonuria
+    front: What causes phenylketonuria and what are its findings?
+    back: ↓ phenylalanine hydroxylase (or ↓ BH4, its cofactor), AR. Tyrosine becomes essential, and phenyl ketones appear in urine. Intellectual disability, microcephaly, seizures, hypopigmented skin, eczema, musty body odor.
+    src: { page: 82, quote: "Findings: intellectual disability, microcephaly, seizures, hypopigmented skin, eczema, musty body odor." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.092
+    kind: card
+    topic: phenylketonuria
+    front: How is PKU treated, and what must patients avoid?
+    back: ↓ phenylalanine and ↑ tyrosine in the diet, plus tetrahydrobiopterin. Avoid aspartame, which is converted to phenylalanine.
+    src: { page: 82, quote: "Patients with PKU must avoid the artificial sweetener aspartame, which is converted to phenylalanine." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.093
+    kind: card
+    topic: phenylketonuria
+    front: Why is PKU screened 2–3 days after birth, and what is phenylalanine embryopathy?
+    back: Levels are normal at birth because the maternal enzyme protected the fetus. Embryopathy is ↑ phenylalanine in a pregnant patient with untreated PKU → fetal growth restriction, microcephaly, intellectual disability, congenital heart defects; preventable by diet.
+    src: { page: 82, quote: "Screening occurs 2-3 days after birth (normal at birth because of maternal enzyme during fetal life)." }
+    status: unverified
+  - id: bio.L06.094
+    kind: mcq
+    topic: phenylketonuria
+    stem: >-
+      A 9-month-old girl who emigrated from a country without newborn screening has developmental delay,
+      seizures, eczema, fair hair and skin, and a musty odor. Which amino acid has become essential for
+      her?
+    options:
+      - Phenylalanine
+      - Tyrosine
+      - Tryptophan
+      - Cysteine
+      - Leucine
+    answer: 1
+    why:
+      - "Phenylalanine is already essential and is the one she must restrict."
+      - "Right. In PKU, phenylalanine can't become tyrosine, so tyrosine becomes essential; ↓ phenylalanine and ↑ tyrosine in the diet."
+      - "Tryptophan is always essential; it isn't affected here."
+      - "Cysteine becomes essential in homocystinuria (cystathionine synthase deficiency)."
+      - "Leucine is restricted in maple syrup urine disease."
+    src: { page: 82, quote: "Caused by ↓ phenylalanine hydroxylase (PAH). Tyrosine becomes essential." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p82: maple syrup urine disease ----------
+  - id: bio.L06.095
+    kind: card
+    topic: maple-syrup-urine-disease
+    front: What causes maple syrup urine disease, and how is it treated?
+    back: "AR ↓ branched-chain α-ketoacid dehydrogenase (needs B1) → isoleucine, leucine and valine aren't degraded → ↑ α-ketoacids, especially leucine's. Treat by restricting isoleucine, leucine and valine, plus thiamine."
+    src: { page: 82, quote: "Blocked degradation of branched amino acids (isoleucine, leucine, valine) due to ↓ branched- chain α-ketoacid dehydrogenase (B1)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.096
+    kind: mcq
+    topic: maple-syrup-urine-disease
+    stem: >-
+      A 6-day-old boy of consanguineous parents has poor feeding, vomiting and increasing lethargy, then
+      develops dystonia and seizures. His diapers smell of burnt sugar. Supplementing which vitamin may
+      help some patients with this disorder?
+    options:
+      - B1
+      - B6
+      - B12
+      - Biotin
+      - Folate
+    answer: 0
+    why:
+      - "Right. Maple syrup urine disease: ↓ branched-chain α-ketoacid dehydrogenase, a B1 (TPP) enzyme; restrict isoleucine, leucine and valine and give thiamine."
+      - "B6 helps one form of homocystinuria."
+      - "B12 helps some methylmalonic acidemias."
+      - "Biotin is the cofactor of propionyl-CoA carboxylase."
+      - "Folate helps MTHFR deficiency."
+    src: { page: 82, quote: "Treatment: restriction of isoleucine, leucine, valine in diet, and thiamine supplementation." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p82: alkaptonuria ----------
+  - id: bio.L06.097
+    kind: card
+    topic: alkaptonuria
+    front: What causes alkaptonuria, and what are its findings?
+    back: AR deficiency of homogentisate oxidase (tyrosine → fumarate pathway) → homogentisic acid builds up. Bluish-black connective tissue, ear cartilage and sclerae (ochronosis), urine that turns black on standing in air, and arthralgias. Usually benign.
+    src: { page: 82, quote: "Findings: bluish-black connective tissue, ear cartilage, and sclerae (ochronosis A ); urine turns black on prolonged exposure to air." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.098
+    kind: mcq
+    topic: alkaptonuria
+    stem: >-
+      A 45-year-old man has back and knee pain. His ear cartilage and sclerae have a slate-blue color,
+      and his urine darkens when left standing. Which substance builds up?
+    options:
+      - Phenylpyruvate
+      - Homogentisic acid
+      - Homocysteine
+      - Branched-chain α-ketoacids
+      - Cystine
+    answer: 1
+    why:
+      - "Phenylpyruvate is a phenyl ketone of PKU."
+      - "Right. Alkaptonuria: homogentisate oxidase deficiency → homogentisic acid deposits (ochronosis) and is toxic to cartilage."
+      - "Homocysteine builds up in homocystinuria."
+      - "These build up in maple syrup urine disease."
+      - "Cystine stones are cystinuria."
+    src: { page: 82, quote: "May have debilitating arthralgias (homogentisic acid toxic to cartilage)." }
+    status: unverified
+  # ---------- p83: homocystinuria ----------
+  - id: bio.L06.099
+    kind: table
+    topic: homocystinuria
+    title: Causes of homocystinuria (all AR) and treatment
+    columns: [Defect, Treatment]
+    rows:
+      - [Cystathionine synthase deficiency, "↓ methionine, ↑ cysteine, ↑ B6, B12, folate"]
+      - [↓ affinity of cystathionine synthase for PLP, "↑↑ B6, ↑ cysteine"]
+      - [Methionine synthase deficiency, ↑ methionine]
+      - [MTHFR deficiency, ↑ folate]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 83, quote: "Methylenetetrahydrofolate reductase (MTHFR) deficiency (treatment: ↑ folate in diet)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.100
+    kind: card
+    topic: homocystinuria
+    front: What are the findings of homocystinuria (HOMOCYstinuria)?
+    back: ↑↑ Homocysteine in urine, Osteoporosis, Marfanoid habitus, Ocular changes (lens subluxes down and in), Cardiovascular effects (thrombosis, atherosclerosis → stroke, MI), kYphosis, intellectual disability, hypopigmented skin.
+    src: { page: 83, quote: "HOMOCYstinuria: ↑↑ Homocysteine in urine, Osteoporosis, Marfanoid habitus, Ocular changes (downward and inward lens subluxation), Cardiovascular effects (thrombosis and atherosclerosis → stroke and MI), kYphosis, intellectual disability, hypopigmented skin." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.101
+    kind: mcq
+    topic: homocystinuria
+    stem: >-
+      A 14-year-old tall, thin boy with long fingers has mild intellectual disability and had a deep vein
+      thrombosis. His lenses are dislocated downward and inward. Plasma homocysteine and methionine are
+      both high. Which dietary change is part of treatment?
+    options:
+      - ↑ methionine
+      - ↓ methionine and ↑ cysteine
+      - ↓ phenylalanine
+      - ↓ branched-chain amino acids
+      - ↑ fructose
+    answer: 1
+    why:
+      - "↑ methionine treats methionine synthase deficiency, where methionine is low."
+      - "Right. High homocysteine and methionine point to cystathionine synthase deficiency: ↓ methionine, ↑ cysteine (now essential), and ↑ B6, B12 and folate."
+      - "That treats PKU."
+      - "That treats maple syrup urine disease."
+      - "Fructose has no role."
+    src: { page: 83, quote: "Cystathionine synthase deficiency (treatment: ↓ methionine, ↑ cysteine, ↑ B6, B12, and folate in diet)" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p83: cystinuria ----------
+  - id: bio.L06.102
+    kind: card
+    topic: cystinuria
+    front: What is cystinuria?
+    back: AR (1:7000) defect of the renal PCT and intestinal transporter for Cystine, Ornithine, Lysine and Arginine (COLA). Excess cystine forms recurrent hexagonal stones. Detected with the sodium cyanide-nitroprusside test.
+    src: { page: 83, quote: "Hereditary defect of renal PCT and intestinal amino acid transporter that prevents reabsorption of Cystine, Ornithine, Lysine, and Arginine (COLA)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.103
+    kind: mcq
+    topic: cystinuria
+    stem: >-
+      A 22-year-old man has his third kidney stone in 2 years. Urine microscopy shows hexagonal crystals,
+      and a urinary cyanide-nitroprusside test is positive. Besides hydration, which treatment raises the
+      solubility of his stones?
+    options:
+      - Urine acidification with ammonium chloride
+      - Urine alkalinization with potassium citrate
+      - Allopurinol
+      - High-methionine diet
+      - Thiazide diuretic for hypercalciuria
+    answer: 1
+    why:
+      - "Acidic urine makes cystine less soluble."
+      - "Right. Cystinuria (COLA transporter): urinary alkalinization (potassium citrate, acetazolamide) and chelators like penicillamine raise cystine solubility."
+      - "Allopurinol is for uric acid stones."
+      - "Diet should be low in methionine (cystine's source)."
+      - "Thiazides help calcium stones."
+    src: { page: 83, quote: "Treatment: urinary alkalinization (eg, potassium citrate, acetazolamide) and chelating agents (eg, penicillamine) ↑ solubility of cystine stones; good hydration; diet low in methionine." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p83: organic acidemias ----------
+  - id: bio.L06.104
+    kind: card
+    topic: organic-acidemias
+    front: How do organic acidemias present, and why?
+    back: "In infancy: poor feeding, vomiting, hypotonia, high anion gap metabolic acidosis, hepatomegaly, seizures. Organic acids inhibit gluconeogenesis (↓ fasting glucose, ↑ ketoacidosis) and the urea cycle (hyperammonemia)."
+    src: { page: 83, quote: "Most commonly present in infancy with poor feeding, vomiting, hypotonia, high anion gap metabolic acidosis, hepatomegaly, seizures." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.105
+    kind: table
+    topic: organic-acidemias
+    title: Propionic vs methylmalonic acidemia
+    columns: ["", Propionic acidemia, Methylmalonic acidemia]
+    rows:
+      - [Deficiency, Propionyl-CoA carboxylase (biotin), Methylmalonyl-CoA mutase or vitamin B12]
+      - [Builds up, "↑ propionyl-CoA, ↓ methylmalonic acid", ↑ methylmalonic acid]
+      - [Diet, "Low protein; limit Valine, Odd-chain fatty acids, Methionine, Isoleucine, Threonine (VOMIT)", Same precursors]
+    blanks: [[0, 1], [0, 2], [2, 1]]
+    src: { page: 83, quote: "Deficiency of propionyl-CoA carboxylase → ↑ propionyl-CoA, ↓ methylmalonic acid." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.106
+    kind: mcq
+    topic: organic-acidemias
+    stem: >-
+      A 5-day-old girl has vomiting, hypotonia and lethargy. Labs show anion gap metabolic acidosis,
+      ketonuria, glucose 40 mg/dL and ammonia 250 µmol/L. Propionyl-CoA is ↑ and methylmalonic acid is
+      low. Which dietary component should be limited?
+    options:
+      - Lactose
+      - Valine, odd-chain fatty acids, methionine, isoleucine and threonine
+      - Leucine and lysine only
+      - Phenylalanine
+      - Fructose and sucrose
+    answer: 1
+    why:
+      - "Lactose restriction is for galactosemia."
+      - "Right. Propionic acidemia (propionyl-CoA carboxylase): low-protein diet limiting the VOMIT precursors of propionyl-CoA."
+      - "Leucine and lysine are purely ketogenic and don't feed propionyl-CoA."
+      - "That is PKU."
+      - "That is hereditary fructose intolerance."
+    src: { page: 83, quote: "Treatment: low-protein diet limited in substances that metabolize into propionyl- CoA: Valine, Odd-chain fatty acids, Methionine, Isoleucine, Threonine (VOMIT)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p84: glycogen regulation ----------
+  - id: bio.L06.107
+    kind: card
+    topic: glycogen-regulation
+    front: How do glucagon and epinephrine switch the liver from glycogen storage to breakdown?
+    back: Their receptors raise cAMP (adenylate cyclase) → protein kinase A → activates glycogen phosphorylase kinase → glycogen phosphorylase on, glycogen synthase off. Insulin (tyrosine kinase receptor) activates protein phosphatase, doing the opposite.
+    src: { page: 84, quote: "Glycogen regulation by insulin and glucagon/epinephrine" }
+    status: unverified
+  - id: bio.L06.108
+    kind: card
+    topic: glycogen-regulation
+    front: What activates glycogen breakdown in contracting muscle without glucagon?
+    back: Calcium-calmodulin activates glycogen phosphorylase kinase during contraction. (Muscle has no glucagon receptor; epinephrine works in both liver and muscle.)
+    src: { page: 84, quote: "Calcium-calmodulin in muscle during contraction" }
+    status: unverified
+  - id: bio.L06.109
+    kind: mcq
+    topic: glycogen-regulation
+    stem: >-
+      A 25-year-old man skips breakfast. In his hepatocytes, glucagon binds its receptor. Which enzyme is
+      phosphorylated and made more active as a direct result of protein kinase A?
+    options:
+      - Glycogen synthase
+      - Glycogen phosphorylase kinase
+      - Protein phosphatase
+      - Glucokinase
+      - Phosphofructokinase-2
+    answer: 1
+    why:
+      - "Protein kinase A phosphorylates glycogen synthase too, but that inactivates it."
+      - "Right. ↑ cAMP → protein kinase A → glycogen phosphorylase kinase → glycogen phosphorylase, releasing glucose-1-P."
+      - "Protein phosphatase is activated by insulin."
+      - "Glucokinase is induced by insulin."
+      - "Protein kinase A turns PFK-2 off and FBPase-2 on."
+    src: { page: 84, quote: "Glycogen phosphorylase kinase Calcium-calmodulin" }
+    status: unverified
+  # ---------- p84: glycogen ----------
+  - id: bio.L06.110
+    kind: card
+    topic: glycogen
+    front: What bonds hold glycogen, and how is glycogen used in muscle vs liver?
+    back: Branches are α-(1,6) bonds; linear linkages are α-(1,4). Muscle breaks glycogen to glucose-1-P → glucose-6-P for its own use during exercise. Liver breaks it down to keep blood sugar normal.
+    src: { page: 84, quote: "Glycogen Branches have α-(1,6) bonds; linear linkages have α-(1,4) bonds." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.111
+    kind: order
+    topic: glycogen
+    prompt: Put the steps of glycogen breakdown in order.
+    steps:
+      - Glycogen phosphorylase releases glucose-1-P until 4 units remain on a branch
+      - 4-α-D-glucanotransferase moves 3 of the 4 units to a linear chain
+      - α-1,6-glucosidase cleaves the last residue as free glucose
+    src: { page: 84, quote: "Then 4-α-D-glucanotransferase (debranching enzyme ) moves 3 of the 4 glucose units from the branch to the linear linkage." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.112
+    kind: cloze
+    topic: glycogen
+    text: "{{c1::Limit dextrin}} is the 2–4 residues left on a branch after glycogen phosphorylase shortens it. A small amount of glycogen is degraded in lysosomes by {{c2::α-1,4-glucosidase (acid maltase)}}."
+    src: { page: 84, quote: "Limit dextrin—2-4 residues remaining on a branch after glycogen phosphorylase has shortened it." }
+    status: unverified
+  - id: bio.L06.113
+    kind: mcq
+    topic: glycogen
+    stem: >-
+      Liver biopsy from a 2-year-old shows glycogen with abnormally short outer chains and many residual
+      branch points; free glucose release from branch points is absent. Glycogen phosphorylase works
+      normally. Which bond can't be cleaved?
+    options:
+      - α-(1,4) bonds of linear chains
+      - α-(1,6) bonds at branch points
+      - β-(1,4) bonds
+      - Phosphoester bond of glucose-6-P
+      - Glycosidic bond of lactose
+    answer: 1
+    why:
+      - "Glycogen phosphorylase cleaves α-(1,4) bonds, and it works."
+      - "Right. α-1,6-glucosidase (debranching enzyme) cleaves the α-(1,6) branch bond, freeing glucose; without it limit dextrin builds up (Cori disease)."
+      - "Glycogen has no β-(1,4) bonds."
+      - "That is glucose-6-phosphatase (von Gierke)."
+      - "That is lactase."
+    src: { page: 84, quote: "Then α-1,6-glucosidase (debranching enzyme ) cleaves off the last residue, liberating a free glucose." }
+    status: unverified
+  # ---------- p85: glycogen storage diseases ----------
+  - id: bio.L06.114
+    kind: table
+    topic: glycogen-storage-diseases
+    title: Glycogen storage diseases
+    columns: [Type, Deficient enzyme, Key findings]
+    rows:
+      - [I von Gierke, Glucose-6-phosphatase, "Severe fasting hypoglycemia, ↑ lactate, ↑ TG, ↑ uric acid, hepatomegaly, renomegaly"]
+      - [II Pompe, "Lysosomal acid α-1,4-glucosidase (acid maltase)", "Cardiomyopathy, hypotonia, big tongue, early death"]
+      - [III Cori, Debranching enzymes, "Like von Gierke but milder, normal lactate"]
+      - [IV Andersen, Branching enzyme, "Hepatosplenomegaly, failure to thrive, infantile cirrhosis"]
+      - [V McArdle, Skeletal muscle glycogen phosphorylase, "Cramps, myoglobinuria with exercise, second wind"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 85, quote: "Vice president can’t accept money. Types I-V are autosomal recessive. Andersen: Branching. Cori: Debranching. (ABCD)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.115
+    kind: card
+    topic: glycogen-storage-diseases
+    front: How is von Gierke disease treated?
+    back: Frequent oral glucose or cornstarch, and avoiding fructose and galactose. Both gluconeogenesis and glycogenolysis are impaired.
+    src: { page: 85, quote: "Treatment: frequent oral glucose/cornstarch; avoidance of fructose and galactose." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.116
+    kind: card
+    topic: glycogen-storage-diseases
+    front: How does Cori disease differ from von Gierke disease?
+    back: Milder symptoms and normal blood lactate, because gluconeogenesis is intact. Limit dextrin–like structures build up in the cytosol (hepatomegaly, cirrhosis, hepatic adenomas); may cause cardiomyopathy.
+    src: { page: 85, quote: "Similar to von Gierke disease, but milder symptoms and normal blood lactate levels." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.117
+    kind: card
+    topic: glycogen-storage-diseases
+    front: What is the exercise test finding in McArdle disease?
+    back: A flat venous lactate curve with a normal rise in ammonia during exercise. Blood glucose is typically unaffected; second-wind phenomenon from ↑ muscle blood flow.
+    src: { page: 85, quote: "Characterized by a flat venous lactate curve with normal rise in ammonia levels during exercise." }
+    status: unverified
+  - id: bio.L06.118
+    kind: mcq
+    topic: glycogen-storage-diseases
+    stem: >-
+      A 4-month-old girl has a doll-like face, hepatomegaly and renomegaly. She becomes hypoglycemic
+      and seizes 3 hours after feeds. Labs show ↑ lactate, ↑ triglycerides and ↑ uric acid. Glucagon
+      does not raise her glucose. Which enzyme is deficient?
+    options:
+      - Glucose-6-phosphatase
+      - Lysosomal acid α-1,4-glucosidase
+      - Debranching enzyme
+      - Branching enzyme
+      - Muscle glycogen phosphorylase
+    answer: 0
+    why:
+      - "Right. Von Gierke disease (type I): G6P can't become glucose, so fasting hypoglycemia, and G6P spills into lactate, TG and uric acid."
+      - "Pompe disease shows cardiomyopathy and hypotonia."
+      - "Cori disease is milder with normal lactate."
+      - "Andersen disease shows cirrhosis and failure to thrive."
+      - "McArdle disease affects muscle only."
+    src: { page: 85, quote: "Severe fasting hypoglycemia, ↑↑ Glycogen in liver and kidneys, ↑ blood lactate, ↑ triglycerides, ↑ uric acid (Gout), and hepatomegaly, renomegaly." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.119
+    kind: mcq
+    topic: glycogen-storage-diseases
+    stem: >-
+      A 5-month-old boy has poor feeding, floppy limbs and a large tongue. Chest x-ray shows massive
+      cardiomegaly, and ECG shows short PR with giant QRS complexes. Where is the deficient enzyme
+      normally found?
+    options:
+      - Cytosol of hepatocytes
+      - Lysosomes
+      - Endoplasmic reticulum
+      - Mitochondrial matrix
+      - Skeletal muscle sarcoplasm only
+    answer: 1
+    why:
+      - "Cytosolic enzymes are missing in Cori, Andersen and McArdle diseases."
+      - "Right. Pompe disease (type II): lysosomal acid α-1,4-glucosidase (acid maltase); cardiomyopathy, hypotonia, big tongue (Pompe trashes the pump)."
+      - "Glucose-6-phosphatase sits in the ER (von Gierke)."
+      - "No glycogen enzyme is mitochondrial."
+      - "Muscle glycogen phosphorylase is McArdle disease."
+    src: { page: 85, quote: "Cardiomyopathy, hypotonia, exercise intolerance, enlarged tongue, and systemic findings lead to early death." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.120
+    kind: mcq
+    topic: glycogen-storage-diseases
+    stem: >-
+      A 19-year-old man gets painful cramps within minutes of weightlifting and passes red urine afterward.
+      If he slows down briefly and continues, the cramps ease. Blood glucose is normal. What does a
+      forearm exercise test show?
+    options:
+      - Normal rise in lactate and ammonia
+      - Flat lactate curve with a normal rise in ammonia
+      - Exaggerated rise in lactate
+      - Flat ammonia curve with a normal rise in lactate
+      - Hypoglycemia during exercise
+    answer: 1
+    why:
+      - "That is normal."
+      - "Right. McArdle disease (myophosphorylase deficiency): muscle can't break down glycogen, so lactate doesn't rise, while ammonia rises normally."
+      - "Lactate can't rise without glycogenolysis."
+      - "Ammonia rises normally in McArdle; the block is in glycogen breakdown, so lactate is what stays flat."
+      - "Blood glucose is typically unaffected."
+    src: { page: 85, quote: "Characterized by a flat venous lactate curve with normal rise in ammonia levels during exercise." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p86: lysosomal storage diseases ----------
+  - id: bio.L06.121
+    kind: table
+    topic: lysosomal-storage-diseases
+    title: Sphingolipidoses
+    columns: [Disease, Deficient enzyme, Accumulates, Inheritance]
+    rows:
+      - [Tay-Sachs, Hexosaminidase A, GM2 ganglioside, AR]
+      - [Fabry, α-galactosidase A, Ceramide trihexoside, XR]
+      - [Metachromatic leukodystrophy, Arylsulfatase A, Cerebroside sulfate, AR]
+      - [Krabbe, Galactocerebrosidase, "Galactocerebroside, psychosine", AR]
+      - [Gaucher, Glucocerebrosidase (β-glucosidase), Glucocerebroside, AR]
+      - [Niemann-Pick, Sphingomyelinase, "Sphingomyelin, cholesterol", AR]
+    blanks: [[0, 1], [1, 1], [1, 3], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 86, quote: "Hexosaminidase A (“TAy-Sax”). GM2 ganglioside. AR" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.122
+    kind: table
+    topic: lysosomal-storage-diseases
+    title: Mucopolysaccharidoses
+    columns: ["", Hurler, Hunter]
+    rows:
+      - [Enzyme, α-L-iduronidase, Iduronate-2-sulfatase]
+      - [Inheritance, AR, XR]
+      - [Cornea, Clouded, Clear]
+      - [Other, "Developmental delay, hirsutism, skeletal anomalies, airway obstruction, hepatosplenomegaly", Mild Hurler + aggressive behavior]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 2]]
+    src: { page: 86, quote: "Hunter syndrome Mild Hurler + aggressive behavior, no corneal clouding." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.123
+    kind: card
+    topic: lysosomal-storage-diseases
+    front: "Tay-Sachs vs Niemann-Pick, both with a cherry-red macula: how do you tell them apart?"
+    back: Tay-Sachs has no hepatosplenomegaly (hexosaminidase A; onion-skin lysosomes, hyperacusis). Niemann-Pick has hepatosplenomegaly and foam cells (sphingomyelinase).
+    src: { page: 86, quote: "Progressive neurodegeneration, hepatosplenomegaly (vs Tay-Sachs disease), foam cells (lipid-laden macrophages) D , “cherry-red” spot on macula A ." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.124
+    kind: card
+    topic: lysosomal-storage-diseases
+    front: What are the early and late findings of Fabry disease, and its treatment?
+    back: "Early: episodic peripheral neuropathy, angiokeratomas, hypohidrosis. Late: progressive renal failure and cardiovascular disease. XR α-galactosidase A deficiency; treat with recombinant α-galactosidase."
+    src: { page: 86, quote: "Early: triad of episodic peripheral neuropathy, angiokeratomas B , hypohidrosis. Late: progressive renal failure, cardiovascular disease." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.125
+    kind: card
+    topic: lysosomal-storage-diseases
+    front: What are the findings of Gaucher disease?
+    back: The most common lysosomal storage disease. Hepatosplenomegaly, pancytopenia, osteoporosis, avascular necrosis of the femur, bone crises, and Gaucher cells (macrophages like crumpled tissue paper). Treat with recombinant glucocerebrosidase.
+    src: { page: 86, quote: "Hepatosplenomegaly, pancytopenia, osteoporosis, avascular necrosis of femur, bone crises, Gaucher cells (lipid-laden macrophages resembling crumpled tissue paper C )." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.126
+    kind: mcq
+    topic: lysosomal-storage-diseases
+    stem: >-
+      A 35-year-old Ashkenazi Jewish woman has fatigue, easy bruising and bone pain. Her spleen is
+      massively enlarged, and CBC shows pancytopenia. MRI shows avascular necrosis of the femoral head.
+      Marrow shows macrophages with a crumpled tissue-paper look. Which enzyme is deficient?
+    options:
+      - Hexosaminidase A
+      - Sphingomyelinase
+      - Glucocerebrosidase
+      - Arylsulfatase A
+      - α-galactosidase A
+    answer: 2
+    why:
+      - "Tay-Sachs is neurodegenerative without organomegaly."
+      - "Niemann-Pick has foam cells and neurodegeneration."
+      - "Right. Gaucher disease: glucocerebrosidase (β-glucosidase) deficiency; Gaucher cells, pancytopenia, bone crises and AVN; treat with recombinant enzyme."
+      - "Metachromatic leukodystrophy gives demyelination."
+      - "Fabry gives neuropathy, angiokeratomas and renal failure."
+    src: { page: 86, quote: "Glucocerebrosidase (β-glucosidase); treat with recombinant glucocerebrosidase." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.127
+    kind: mcq
+    topic: lysosomal-storage-diseases
+    stem: >-
+      A 15-year-old boy has burning pain in his hands and feet after exercise, reduced sweating, and dark
+      red papules around his umbilicus. Urinalysis shows proteinuria. What substrate accumulates?
+    options:
+      - GM2 ganglioside
+      - Ceramide trihexoside
+      - Cerebroside sulfate
+      - Heparan sulfate
+      - Glucocerebroside
+    answer: 1
+    why:
+      - "That is Tay-Sachs."
+      - "Right. Fabry disease (XR α-galactosidase A): neuropathy, angiokeratomas and hypohidrosis early, then renal and cardiac disease."
+      - "That is metachromatic leukodystrophy."
+      - "That is Hurler or Hunter syndrome."
+      - "That is Gaucher disease."
+    src: { page: 86, quote: "α-galactosidase A; treat with recombinant α-galactosidase. Ceramide trihexoside (globotriaosylce- ramide). XR" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.128
+    kind: mcq
+    topic: lysosomal-storage-diseases
+    stem: >-
+      A 4-year-old boy has coarse facies, stiff joints, hepatosplenomegaly and very aggressive behavior.
+      His corneas are clear. His maternal cousin has the same disease. Which enzyme is deficient?
+    options:
+      - α-L-iduronidase
+      - Iduronate-2-sulfatase
+      - Hexosaminidase A
+      - Galactocerebrosidase
+      - Sphingomyelinase
+    answer: 1
+    why:
+      - "Hurler syndrome (AR) has clouded corneas."
+      - "Right. Hunter syndrome: XR iduronate-2-sulfatase deficiency, mild Hurler + aggression, no corneal clouding (Hunters see clearly and aim for the X)."
+      - "Tay-Sachs has no organomegaly."
+      - "Krabbe gives neuropathy and globoid cells."
+      - "Niemann-Pick has neurodegeneration and foam cells."
+    src: { page: 86, quote: "Hunters see clearly (no corneal clouding) and aggressively aim for the X (X-linked recessive)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p87: fatty acid metabolism ----------
+  - id: bio.L06.129
+    kind: card
+    topic: fatty-acid-metabolism
+    front: How do fatty acid synthesis and degradation differ in where they start?
+    back: Synthesis needs citrate shuttled from mitochondria to cytosol ("Sytrate" = synthesis), mainly in liver, lactating mammary glands and adipose. Long-chain fatty acid degradation needs carnitine-dependent transport into the mitochondrial matrix ("carnitine = carnage of fatty acids").
+    src: { page: 87, quote: "Fatty acid synthesis requires transport of citrate from mitochondria to cytosol. Predominantly occurs in liver, lactating mammary glands, and adipose tissue." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.130
+    kind: table
+    topic: fatty-acid-metabolism
+    title: Fatty acid oxidation defects
+    columns: ["", Systemic 1° carnitine deficiency, MCAD deficiency]
+    rows:
+      - [Defect, No cellular uptake of carnitine → LCFAs can't enter mitochondria, ↓ breakdown of fatty acids into acetyl-CoA]
+      - [Labs, Hypoketotic hypoglycemia, "Hypoketotic hypoglycemia, ↑ acyl carnitines and dicarboxylic acids"]
+      - [Clinical, "Weakness, hypotonia, dilated cardiomyopathy", "Vomiting, lethargy, seizures, coma, liver dysfunction, sudden death"]
+      - [Treatment, "—", Avoid fasting]
+    blanks: [[0, 1], [0, 2], [2, 1], [3, 2]]
+    src: { page: 87, quote: "Systemic 1° carnitine deficiency—no cellular uptake of carnitine → no transport of LCFAs into mitochondria → toxic accumulation of LCFAs in the cytosol." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.131
+    kind: mcq
+    topic: fatty-acid-metabolism
+    stem: >-
+      A 2-year-old boy had a gastroenteritis and ate little for 18 hours. He is now lethargic and has a
+      seizure. Glucose is 30 mg/dL, urine ketones are negative, and ammonia is mildly ↑. Plasma
+      acylcarnitines and urine dicarboxylic acids are high. What is the key long-term advice?
+    options:
+      - Avoid fruit and honey
+      - Avoid fasting
+      - Restrict branched-chain amino acids
+      - Lactose-free diet
+      - High-protein diet
+    answer: 1
+    why:
+      - "That is hereditary fructose intolerance."
+      - "Right. MCAD deficiency: hypoketotic hypoglycemia with fatty acyl carnitines and dicarboxylic acids; can cause sudden death; treat by avoiding fasting."
+      - "That is maple syrup urine disease."
+      - "That is galactosemia."
+      - "Protein won't fix a fasting fat-oxidation defect."
+    src: { page: 87, quote: "Can lead to sudden death in infants or children. Treat by avoiding fasting." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p88: ketone bodies ----------
+  - id: bio.L06.132
+    kind: card
+    topic: ketone-bodies
+    front: What are the ketone bodies, and which one does the urine test miss?
+    back: Acetone (ketone), acetoacetate and β-hydroxybutyrate (ketoacids). Breath smells fruity (acetone). The urine test detects acetoacetate but not β-hydroxybutyrate.
+    src: { page: 88, quote: "Urine test for ketones can detect acetoacetate, but not β-hydroxybutyrate." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.133
+    kind: card
+    topic: ketone-bodies
+    front: Which cells can't use ketone bodies, and why?
+    back: RBCs (no mitochondria; they use only glucose) and liver cells (they lack β-ketoacyl-CoA transferase).
+    src: { page: 88, quote: "RBCs cannot utilize ketone bodies; they strictly use glucose. Liver cells lack β ketoacyl-CoA transferase → cannot use ketone bodies as fuel." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.134
+    kind: card
+    topic: ketone-bodies
+    front: HMG-CoA lyase vs HMG-CoA reductase?
+    back: HMG-CoA lyase makes ketone bodies. HMG-CoA reductase makes cholesterol.
+    src: { page: 88, quote: "HMG-CoA lyase for ketone body production. HMG-CoA reductase for cholesterol synthesis." }
+    status: unverified
+  - id: bio.L06.135
+    kind: table
+    topic: ketone-bodies
+    title: Ketones and glucose in inborn errors
+    columns: [Deficiency, Ketones, Glucose]
+    rows:
+      - [OTC (urea cycle), Normal, Normal]
+      - [MCAD deficiency, ↓ (hypoketosis), ↓]
+      - ["Methylmalonic, propionic acidemia", ↑ (ketosis), ↓]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 88, quote: "DEFICIENCY OTC (urea cycle) MCAD deficiency Methylmalonic acidemia, propionic acidemia" }
+    status: unverified
+  - id: bio.L06.136
+    kind: mcq
+    topic: ketone-bodies
+    stem: >-
+      A 20-year-old woman with type 1 diabetes has abdominal pain and Kussmaul breathing. Her serum
+      anion gap is 24, but the urine dipstick shows only trace ketones. Why might the dipstick understate
+      her ketosis?
+    options:
+      - The dipstick detects β-hydroxybutyrate but not acetoacetate
+      - The dipstick detects acetoacetate but not β-hydroxybutyrate, the main ketone in DKA
+      - Ketones are not filtered by the kidney
+      - Acetone is the only ketone the dipstick detects
+      - Her liver is using the ketone bodies
+    answer: 1
+    why:
+      - "It is the other way round."
+      - "Right. The urine test detects acetoacetate but not β-hydroxybutyrate, which predominates when NADH is high."
+      - "Ketones are filtered and appear in urine."
+      - "The test reads acetoacetate."
+      - "Liver cells lack β-ketoacyl-CoA transferase and can't use ketones."
+    src: { page: 88, quote: "Urine test for ketones can detect acetoacetate, but not β-hydroxybutyrate." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p88: fasted vs fed lipid ----------
+  - id: bio.L06.137
+    kind: card
+    topic: fasted-vs-fed-lipid
+    front: How do fasted and fed adipocytes handle triglycerides?
+    back: "Fasted: epinephrine and glucagon → cAMP → protein kinase A → hormone-sensitive lipase → TG broken into FFA and glycerol. Fed: insulin → lipoprotein lipase (with apo CII) frees FFA from circulating TG, and glucose → DHAP → glycerol-3-P to store new TG."
+    src: { page: 88, quote: "Adipocyte (fasted) Adipocyte (fed)" }
+    status: unverified
+  - id: bio.L06.138
+    kind: mcq
+    topic: fasted-vs-fed-lipid
+    stem: >-
+      A 28-year-old man is fasting for religious reasons. By late afternoon, glucagon and epinephrine are
+      high. Which enzyme in his adipocytes is activated by protein kinase A to release free fatty acids?
+    options:
+      - Lipoprotein lipase
+      - Hormone-sensitive lipase
+      - Pancreatic lipase
+      - Hepatic lipase
+      - Acetyl-CoA carboxylase
+    answer: 1
+    why:
+      - "LPL works on circulating chylomicrons and VLDL in the fed state."
+      - "Right. Glucagon and epinephrine → cAMP → protein kinase A → hormone-sensitive lipase, breaking stored TG into FFA and glycerol."
+      - "Pancreatic lipase digests dietary fat in the gut."
+      - "Hepatic lipase degrades TG in IDL and chylomicron remnants."
+      - "ACC makes fatty acids and is inhibited by glucagon."
+    src: { page: 91, quote: "Hormone-sensitive lipase Degrades TGs stored in adipocytes. Promotes gluconeogenesis by releasing glycerol." }
+    status: unverified
+  # ---------- p89: metabolic fuel use ----------
+  - id: bio.L06.139
+    kind: card
+    topic: metabolic-fuel-use
+    front: How many kcal per gram do carbohydrate, protein, alcohol and fat give?
+    back: Carbohydrate and protein 4 kcal, alcohol 7 kcal, fatty acid 9 kcal (number of letters = number of kcal).
+    src: { page: 89, quote: "1g carb/protein = 4 kcal 1g alcohol = 7 kcal 1g fatty acid = 9 kcal (# letters = # kcal)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.140
+    kind: mcq
+    topic: metabolic-fuel-use
+    stem: >-
+      A sprinter runs a 10-second 100-m race. After the first 2 seconds, when stored ATP is exhausted,
+      which energy source mainly keeps his muscles going for the rest of the race?
+    options:
+      - Creatine phosphate
+      - Fatty acid oxidation
+      - Ketone bodies
+      - Muscle protein breakdown
+      - Liver gluconeogenesis
+    answer: 0
+    why:
+      - "Right. Stored ATP lasts about 2 seconds; creatine phosphate supplies energy up to about 10 seconds, then anaerobic and aerobic metabolism take over."
+      - "Fat oxidation powers long, aerobic exercise."
+      - "Ketones fuel the brain in starvation."
+      - "Protein is a fuel of late starvation."
+      - "Gluconeogenesis is far too slow for a sprint."
+    src: { page: 89, quote: "Stored ATP 1 min 2 hr Creatine phosphate" }
+    status: unverified
+  # ---------- p89: fasting and starvation ----------
+  - id: bio.L06.141
+    kind: table
+    topic: fasting-and-starvation
+    title: Fuel by state
+    columns: [State, Main source]
+    rows:
+      - [Fed, "Glycolysis, aerobic respiration; insulin stores TG and glycogen"]
+      - [Fasting (between meals), "Hepatic glycogenolysis (major); gluconeogenesis, FFA (minor)"]
+      - [Starvation days 1–3, "Glycogenolysis (gone after day 1), FFA, gluconeogenesis from lactate, alanine, glycerol, propionyl-CoA"]
+      - [Starvation after day 3, "Adipose stores; ketone bodies fuel the brain; then protein breakdown → death"]
+    blanks: [[1, 1], [2, 1], [3, 1]]
+    src: { page: 89, quote: "Fasting (between meals) Hepatic glycogenolysis (major); hepatic gluconeogenesis, adipose release of FFA (minor)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.142
+    kind: card
+    topic: fasting-and-starvation
+    front: What are the body's priorities in fasting and starvation?
+    back: Supply enough glucose to the brain and RBCs, and preserve protein. Survival time depends on the amount of excess stores.
+    src: { page: 89, quote: "Priorities are to supply sufficient glucose to the brain and RBCs and to preserve protein." }
+    status: unverified
+  - id: bio.L06.143
+    kind: mcq
+    topic: fasting-and-starvation
+    stem: >-
+      A 40-year-old man on a hunger strike has eaten nothing for 10 days. His brain now gets most of its
+      energy from which fuel?
+    options:
+      - Glucose from liver glycogen
+      - Ketone bodies
+      - Free fatty acids directly
+      - Muscle protein amino acids directly
+      - Lactate
+    answer: 1
+    why:
+      - "Glycogen is used up after day 1."
+      - "Right. After day 3 of starvation, adipose stores make ketone bodies, which become the brain's main fuel; protein breakdown accelerates only after fat is gone."
+      - "Fatty acids don't serve the brain directly."
+      - "Protein is preserved until fat is depleted."
+      - "Lactate is a gluconeogenic substrate, not the brain's main fuel."
+    src: { page: 89, quote: "Adipose stores (ketone bodies become the main source of energy for the brain)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.144
+    kind: card
+    topic: fasting-and-starvation
+    front: Which part of a triglyceride can feed gluconeogenesis in starvation?
+    back: Glycerol, and propionyl-CoA from odd-chain fatty acids, the only fatty acid component that contributes.
+    src: { page: 89, quote: "and from adipose tissue glycerol and propionyl- CoA (from odd-chain FFA—the only triacylglycerol component that contributes to gluconeogenesis)" }
+    status: unverified
+  # ---------- p90: lipid transport ----------
+  - id: bio.L06.145
+    kind: order
+    topic: lipid-transport
+    prompt: Put the path of dietary fat in order.
+    steps:
+      - Micelles absorbed by intestinal cells
+      - Chylomicrons (apo B48) enter lymphatics
+      - HDL transfers apo CII and apoE to chylomicrons
+      - Apo CII activates lipoprotein lipase; TG to tissues
+      - Chylomicron remnants taken up by the liver via apoE
+    src: { page: 90, quote: "Chylomicron enters lymphatics HDL transfers apo CII and apoE Chylomicron apo CII activates LPL" }
+    status: unverified
+  - id: bio.L06.146
+    kind: card
+    topic: lipid-transport
+    front: Which step of lipid transport is impaired in familial dyslipidemia types I, II and IV?
+    back: "Type I: lipoprotein lipase activation by apo CII. Type II: LDL endocytosis. Type IV: the liver overproduces VLDL."
+    src: { page: 90, quote: "Chylomicron apo CII activates LPL (impaired in type I familial dyslipidemia) Liver releases VLDL (overproduction in type IV familial dyslipidemia)" }
+    status: unverified
+  - id: bio.L06.147
+    kind: mcq
+    topic: lipid-transport
+    stem: >-
+      In a patient after a fatty meal, VLDL from the liver loses triglycerides in the capillaries and
+      becomes IDL. How does IDL deliver its remaining triglycerides and cholesterol to the liver?
+    options:
+      - Via apo B48
+      - Via apoE
+      - Via apo AI
+      - Via the HDL receptor only
+      - Via apo CII
+    answer: 1
+    why:
+      - "B48 is on chylomicrons from the intestine."
+      - "Right. IDL delivers TGs and cholesterol to the liver via apoE."
+      - "Apo AI activates LCAT on HDL."
+      - "That isn't the IDL route shown."
+      - "Apo CII activates lipoprotein lipase."
+    src: { page: 90, quote: "IDL delivers TGs and cholesterol to the liver via apoE" }
+    status: unverified
+  # ---------- p91: key enzymes in lipid transport ----------
+  - id: bio.L06.148
+    kind: table
+    topic: lipid-transport-enzymes
+    title: Key enzymes in lipid transport
+    columns: [Enzyme, Action]
+    rows:
+      - [Cholesteryl ester transfer protein, Moves cholesteryl esters to other lipoproteins]
+      - [Hepatic lipase, Degrades TGs left in IDL and chylomicron remnants]
+      - [Hormone-sensitive lipase, Degrades TGs stored in adipocytes]
+      - [LCAT, Esterifies 2/3 of plasma cholesterol (HDL maturation)]
+      - [Lipoprotein lipase, Degrades TGs in circulating chylomicrons and VLDL]
+      - [Pancreatic lipase, Degrades dietary TGs in the small intestine]
+      - [PCSK9, Degrades the LDL receptor → ↑ serum LDL]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 91, quote: "Lipoprotein lipase Degrades TGs in circulating chylomicrons and VLDL. Pancreatic lipase Degrades dietary TGs in small intestine." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.149
+    kind: mcq
+    topic: lipid-transport-enzymes
+    stem: >-
+      A 52-year-old man with familial hypercholesterolemia still has high LDL on a maximal statin dose.
+      He starts a monoclonal antibody that lowers LDL by letting more LDL receptors recycle to the cell
+      surface. Which protein does it block?
+    options:
+      - HMG-CoA reductase
+      - PCSK9
+      - Cholesteryl ester transfer protein
+      - Lipoprotein lipase
+      - LCAT
+    answer: 1
+    why:
+      - "Statins block HMG-CoA reductase; he is already on one."
+      - "Right. PCSK9 degrades the LDL receptor; inhibiting it ↑ LDL receptor recycling → ↓ serum LDL."
+      - "CETP moves cholesteryl esters between lipoproteins."
+      - "LPL clears TG from chylomicrons and VLDL."
+      - "LCAT esterifies cholesterol for HDL maturation."
+    src: { page: 91, quote: "PCSK9 Degrades LDL receptor → ↑ serum LDL. Inhibition → ↑ LDL receptor recycling → ↓ serum LDL." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p91: major apolipoproteins ----------
+  - id: bio.L06.150
+    kind: table
+    topic: major-apolipoproteins
+    title: Major apolipoproteins
+    columns: [Apolipoprotein, Function, Found on]
+    rows:
+      - [E, Mediates remnant uptake, Everything except LDL]
+      - [AI, Activates LCAT, HDL only]
+      - [CII, Lipoprotein lipase cofactor, "Chylomicron, VLDL, IDL, HDL"]
+      - [B48, Chylomicron secretion into lymphatics, Intestinal particles (chylomicron and remnant)]
+      - [B100, Binds LDL receptor, "Liver particles (VLDL, IDL, LDL)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 91, quote: "B100 Binds LDL receptor Only on particles originating from the liver (I hope I live to Be 100)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.151
+    kind: mcq
+    topic: major-apolipoproteins
+    stem: >-
+      A lipoprotein particle is isolated from the thoracic duct after a fatty meal. Which apolipoprotein
+      is unique to particles of this origin and needed for their secretion?
+    options:
+      - B100
+      - B48
+      - AI
+      - E
+      - CII
+    answer: 1
+    why:
+      - "B100 is only on particles from the liver."
+      - "Right. B48 mediates chylomicron secretion into lymphatics and is only on particles from the intestine."
+      - "AI is on HDL and activates LCAT."
+      - "ApoE is on most lipoproteins and mediates remnant uptake."
+      - "CII is acquired from HDL and activates LPL."
+    src: { page: 91, quote: "B48 Mediates chylomicron secretion into lymphatics Only on particles originating from the intestines" }
+    status: unverified
+  # ---------- p92: lipoprotein functions ----------
+  - id: bio.L06.152
+    kind: table
+    topic: lipoprotein-functions
+    title: Lipoprotein functions
+    columns: [Lipoprotein, Function, Source]
+    rows:
+      - [Chylomicron, "Dietary TG to tissues; remnants carry cholesterol to liver", Intestinal epithelial cells]
+      - [VLDL, Hepatic TG to peripheral tissue, Liver]
+      - [IDL, TG and cholesterol to liver, From VLDL]
+      - [LDL, Hepatic cholesterol to peripheral tissue, From IDL (hepatic lipase)]
+      - [HDL, "Reverse cholesterol transport; stores apoC and apoE", Liver and intestine]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 92, quote: "LDL Delivers hepatic cholesterol to peripheral tissues. Formed by hepatic lipase modification of IDL in the liver and peripheral tissue." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.153
+    kind: card
+    topic: lipoprotein-functions
+    front: What is cholesterol needed for, and which lipoproteins carry the most?
+    back: Cell membrane integrity and making bile acids, steroids and vitamin D. LDL and HDL carry the most cholesterol.
+    src: { page: 92, quote: "LDL and HDL carry the most cholesterol. Cholesterol is needed to maintain cell membrane integrity and synthesize bile acids, steroids, and vitamin D." }
+    status: unverified
+  - id: bio.L06.154
+    kind: mcq
+    topic: lipoprotein-functions
+    stem: >-
+      A 60-year-old woman asks which of her lipoproteins carries cholesterol from her arteries back to her
+      liver. Its synthesis is increased by moderate alcohol intake. Which one is it?
+    options:
+      - Chylomicron
+      - VLDL
+      - IDL
+      - LDL
+      - HDL
+    answer: 4
+    why:
+      - "Chylomicrons carry dietary TG from the gut."
+      - "VLDL carries hepatic TG out to tissues."
+      - "IDL carries TG and cholesterol to the liver, but from VLDL, not from tissues."
+      - "LDL carries cholesterol out to tissues."
+      - "Right. HDL mediates reverse cholesterol transport and is raised by alcohol (HDL is Healthy)."
+    src: { page: 92, quote: "HDL Mediates reverse cholesterol transport from peripheral tissues to liver." }
+    status: unverified
+  # ---------- p92: abetalipoproteinemia ----------
+  - id: bio.L06.155
+    kind: card
+    topic: abetalipoproteinemia
+    front: What is abetalipoproteinemia?
+    back: "AR mutation in microsomal transfer protein (MTP) → no chylomicrons, VLDL or LDL (no apo B48/B100 lipoproteins). Infants: severe fat malabsorption, steatorrhea, failure to thrive. Later: retinitis pigmentosa, spinocerebellar degeneration (vitamin E deficiency), ataxia, acanthocytosis. Biopsy: lipid-laden enterocytes."
+    src: { page: 92, quote: "Autosomal recessive. Mutation in gene that encodes microsomal transfer protein (MTP). Chylomicrons, VLDL, LDL absent." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.156
+    kind: mcq
+    topic: abetalipoproteinemia
+    stem: >-
+      A 3-year-old boy has had foul, greasy stools and poor weight gain since infancy, and now has an
+      unsteady gait. Smear shows red cells with irregular spiky projections. Serum cholesterol and
+      triglycerides are very low. Which treatment is part of management?
+    options:
+      - Large doses of oral vitamin E
+      - Pancreatic enzyme replacement
+      - Gluten-free diet
+      - High long-chain fat diet
+      - Statin therapy
+    answer: 0
+    why:
+      - "Right. Abetalipoproteinemia (MTP): no apo B lipoproteins, so fat-soluble vitamin E isn't carried → spinocerebellar degeneration; restrict long-chain fatty acids and give large doses of vitamin E."
+      - "Pancreatic function is normal; the defect is packaging in enterocytes."
+      - "Celiac disease doesn't give near-absent lipoproteins."
+      - "Long-chain fatty acids should be restricted."
+      - "His cholesterol is already very low."
+    src: { page: 92, quote: "Treatment: restriction of long-chain fatty acids, large doses of oral vitamin E." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p92: familial dyslipidemias ----------
+  - id: bio.L06.157
+    kind: table
+    topic: familial-dyslipidemias
+    title: Familial dyslipidemias
+    columns: [Type, Inheritance, Defect, ↑ in blood, Clinical]
+    rows:
+      - [I hyperchylomicronemia, AR, LPL or apo CII deficiency, "Chylomicrons, TG, cholesterol", "Pancreatitis, HSM, eruptive xanthomas; no ↑ atherosclerosis"]
+      - [II hypercholesterolemia, AD, Absent or defective LDL receptor or apo B100, "LDL, cholesterol (IIb: + VLDL)", "Early atherosclerosis, tendon xanthomas, corneal arcus"]
+      - [III dysbetalipoproteinemia, AR, ApoE, "Chylomicron and VLDL remnants, TG", "Premature atherosclerosis, tuberoeruptive and palmar xanthomas"]
+      - [IV hypertriglyceridemia, AD, Hepatic VLDL overproduction, "VLDL, TG", "Acute pancreatitis; insulin resistance"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2]]
+    src: { page: 92, quote: "AR ApoE (defective in type thrEE) Chylomicrons and VLDL remnants, TG Premature atherosclerosis, tuberoeruptive and palmar xanthomas." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.158
+    kind: card
+    topic: familial-dyslipidemias
+    front: How high is cholesterol in heterozygous vs homozygous familial hypercholesterolemia?
+    back: Heterozygotes (1:500) ≈300 mg/dL; homozygotes (very rare) ≥700 mg/dL, with MI possibly before age 20.
+    src: { page: 92, quote: "Heterozygotes (1:500) have cholesterol ≈300 mg/dL; homozygotes (very rare) have cholesterol ≥700 mg/dL." }
+    status: unverified
+  - id: bio.L06.159
+    kind: mcq
+    topic: familial-dyslipidemias
+    stem: >-
+      An 8-year-old boy has recurrent episodes of severe abdominal pain with high lipase. He has crops of
+      yellow papules on his buttocks and an enlarged liver and spleen. His fasting plasma, left in the
+      fridge overnight, shows a creamy top layer. What is the defect?
+    options:
+      - Absent LDL receptors
+      - Lipoprotein lipase or apo CII deficiency
+      - Defective apoE
+      - Hepatic overproduction of VLDL
+      - Microsomal transfer protein mutation
+    answer: 1
+    why:
+      - "Type II gives tendon xanthomas and early MI, not pancreatitis in childhood."
+      - "Right. Type I hyperchylomicronemia (AR): LPL or apo CII deficiency; pancreatitis, hepatosplenomegaly, eruptive xanthomas, creamy supernatant, no ↑ atherosclerosis."
+      - "Type III gives palmar xanthomas and atherosclerosis."
+      - "Type IV is AD and related to insulin resistance in adults."
+      - "MTP mutation is abetalipoproteinemia, with absent lipoproteins."
+    src: { page: 92, quote: "Pancreatitis, hepatosplenomegaly, and eruptive/pruritic xanthomas (no ↑ risk for atherosclerosis). Creamy layer in supernatant." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.160
+    kind: mcq
+    topic: familial-dyslipidemias
+    stem: >-
+      A 30-year-old man has nodules on his Achilles tendons and a white ring around both corneas. His
+      father had an MI at 42. LDL is 290 mg/dL with normal triglycerides. What is the most likely defect?
+    options:
+      - Lipoprotein lipase deficiency
+      - Absent or defective LDL receptors
+      - ApoE defect
+      - Hepatic overproduction of VLDL
+      - PCSK9 loss of function
+    answer: 1
+    why:
+      - "That is type I, with chylomicrons and pancreatitis."
+      - "Right. Type II familial hypercholesterolemia (AD): defective LDL receptors or apo B100; tendon xanthomas, corneal arcus, early atherosclerosis."
+      - "Type III gives palmar xanthomas and remnant buildup."
+      - "Type IV raises VLDL and TG."
+      - "Loss of PCSK9 function would lower LDL."
+    src: { page: 92, quote: "Accelerated atherosclerosis (may have MI before age 20), tendon (Achilles) xanthomas, and corneal arcus." }
+    status: unverified
+    tags: [high-yield]

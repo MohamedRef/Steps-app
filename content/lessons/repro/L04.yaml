@@ -1,0 +1,768 @@
+schema: steps.lesson/v1
+lecture: repro.L04
+lessons:
+  - id: repro.L04.lesson1
+    title: "الكروموسومات والهرمونات: مين ولد ومين بنت"
+    hook: "ولد طويل وخصيته صغيرة، وبنت قصيرة ومفيش دورة. ومع اتنين أرقام بس (testosterone و LH) تعرف التشخيص"
+    minutes: 9
+    pages: [655, 656]
+    topics: [sex-chromosome-disorders, other-dsd, diagnosing-disorders, aromatase-deficiency, androgen-insensitivity, 5a-reductase-deficiency, kallmann-syndrome]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Klinefelter (47,XXY)"
+        text: |-
+          ولد ==طويل== بنِسَب eunuchoid (الـ epiphysis بتقفل متأخر)، خصية **صغيرة وناشفة**، azoospermia، gynecomastia، وشعر بتوزيع أنثوي.
+
+          عنده X زيادة متقفّل، يعني ==Barr body== موجود. ومن أشهر أسباب الـ hypogonadism في الـ infertility workup.
+        page: 655
+        quote: "Small, firm testes; infertility (azoospermia); tall stature with eunuchoid proportions (delayed epiphyseal closure → ↑ long bone length); gynecomastia A ; female hair distribution."
+      - kind: reveal
+        prompt: "في Klinefelter، ليه الـ FSH عالي، وليه الـ LH عالي كمان؟"
+        answer: "اتنين أعطال منفصلين. الـ seminiferous tubules مش متكوّنة ← ==↓ inhibin B== ← الـ FSH يعلى. والـ Leydig cells شغلها بايظ ← ↓ testosterone ← الـ **LH** يعلى."
+        page: 655
+        quote: "Dysgenesis of seminiferous tubules → ↓ inhibin B → ↑ FSH. Abnormal Leydig cell function → ↓ testosterone → ↑ LH."
+      - kind: explain
+        title: "Turner (45,XO)"
+        text: |-
+          ==أشهر سبب للـ 1° amenorrhea==. مفيش Barr body. الكتاب بيقولها: «menopause before menarche»: الـ ovary streak، فالـ estrogen واطي، فالـ LH والـ FSH عاليين.
+
+          الشكل: قصيرة، رقبة webbed، صدر عريض، **bicuspid aortic valve** و **coarctation**، horseshoe kidney، و 4th metacarpal قصير.
+        page: 655
+        quote: "Most common cause of 1° amenorrhea. No Barr body. B Menopause before menarche. ↓ estrogen leads to ↑ LH, FSH."
+      - kind: check
+        question: "A 16-year-old girl has never menstruated. She is short, with a broad chest and a weaker femoral than brachial pulse. Which finding fits?"
+        options:
+          - "↑ FSH and LH with no Barr body"
+          - "↓ FSH and LH with anosmia"
+          - "Normal FSH with an absent uterus"
+          - "↑ testosterone with a 46,XY karyotype"
+        answer: 0
+        why:
+          - "صح: Turner، الـ ovary streak فالـ estrogen واطي والـ gonadotropins عالية، ومفيش Barr body."
+          - "ده Kallmann: GnRH واطي ومعاه anosmia."
+          - "ده Müllerian agenesis: الـ ovary شغال."
+          - "ده androgen insensitivity."
+        page: 655
+        quote: "coarctation of the aorta (femoral < brachial pulse)"
+      - kind: aside
+        tone: exam
+        text: "**47,XYY**: شكله عادي وطويل جداً، والخصوبة **طبيعية**. ممكن acne شديد و learning disability. وفي Turner، الـ ==45,X/46,XY== mosaic عنده ↑ risk لـ gonadoblastoma."
+        page: 655
+        quote: "Double Y males 47,XYY. Phenotypically normal (usually undiagnosed), very tall. Normal fertility."
+      - kind: table
+        title: "اتنين أرقام والتشخيص"
+        columns: ["Testosterone", "LH", "Diagnosis"]
+        rows:
+          - ["↑", "↑", "Androgen insensitivity"]
+          - ["↑", "↓", "Testosterone-secreting tumor or exogenous steroids"]
+          - ["↓", "↑", "Hypergonadotropic (1°) hypogonadism"]
+          - ["↓", "↓", "Hypogonadotropic (2°) hypogonadism"]
+        hide: [[0, 2], [1, 2], [2, 2], [3, 2]]
+        page: 656
+        quote: "Testosterone LH Diagnosis ↑ ↑ Androgen insensitivity syndrome ↑ ↓ Testosterone-secreting tumor, exogenous androgenic steroids ↓ ↑ Hypergonadotropic (1°) hypogonadism ↓ ↓ Hypogonadotropic (2°) hypogonadism"
+      - kind: figure
+        title: "الهرمون اتعمل، بس حد ما سمعش"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rp4a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="20" width="100" height="36" rx="6"/>
+            <text x="20" y="43" class="t-sm t-b">Testosterone</text>
+            <rect class="fg-acc" x="130" y="20" width="90" height="36" rx="6"/>
+            <text x="148" y="43" class="t-sm t-b">DHT</text>
+            <rect class="fg-good" x="250" y="20" width="100" height="36" rx="6"/>
+            <text x="262" y="43" class="t-sm t-b">Estrogen</text>
+            <line class="fg-arrow" x1="110" y1="38" x2="128" y2="38" marker-end="url(#rp4a)"/>
+            <text x="100" y="75" class="t-sm t-mut">5α-reductase</text>
+            <path class="fg-arrow" d="M60,56 C60,110 300,110 300,58" fill="none" marker-end="url(#rp4a)"/>
+            <text x="150" y="122" class="t-sm t-mut">aromatase</text>
+            <text x="10" y="148" class="t-sm">receptor ✗ → AIS</text>
+            <text x="130" y="148" class="t-sm">5α ✗ → atypical till puberty</text>
+            <text x="354" y="166" text-anchor="end" class="t-sm">aromatase ✗ → virilization</text>
+          </svg>
+        caption: "تلات أعطال في نفس السكة: الـ receptor نفسه بايظ (androgen insensitivity)، الـ 5α-reductase مش شغال (مفيش DHT)، أو الـ aromatase مش شغال (مفيش estrogen فالـ androgen يتراكم)."
+        alt: "Testosterone converts to DHT by 5α-reductase and to estrogen by aromatase; a receptor defect gives androgen insensitivity, a 5α-reductase defect gives atypical genitalia until puberty, and an aromatase defect gives virilization."
+        page: 656
+        quote: "Inability to convert testosterone to DHT."
+      - kind: explain
+        title: "Androgen insensitivity و 5α-reductase"
+        text: |-
+          - **AIS (46,XY)**: الـ receptor بايظ. شكلها بنت بصدر، شعر قليل، vagina قصيرة، و ==مفيش uterus== لأن الخصية بتعمل anti-Müllerian hormone. الخصية بتتشال (malignancy).
+          - **5α-reductase deficiency**: مفيش DHT، فالـ genitalia برّه atypical ==لحد البلوغ==، وبعدين الـ testosterone العالي يعمل masculinization.
+        page: 656
+        quote: "Defect in androgen receptor resulting in female-appearing genetic male (46,XY DSD); breast development and female external genitalia with scant axillary and pubic hair, rudimentary vagina; uterus and fallopian tubes absent due to persistence of anti-Müllerian hormone from testes."
+      - kind: aside
+        tone: trap
+        text: "**Aromatase deficiency**: الـ DHEA من الـ adrenal بتاع الجنين مش بيتحول estrogen في الـ placenta، فبيبقى testosterone. ==الأم كمان== بيطلعلها acne و hirsutism، لأن الـ androgens بتعدّي الـ placenta."
+        page: 656
+        quote: "virilization of both female infant (atypical genitalia) and mother (acne, hirsutism; fetal androgens can cross placenta)"
+      - kind: check
+        question: "A 17-year-old boy has delayed puberty and can't smell coffee. Which levels are expected?"
+        options:
+          - "↓ GnRH, ↓ FSH, ↓ LH, ↓ testosterone"
+          - "↑ FSH and LH, ↓ testosterone"
+          - "↑ testosterone and ↑ LH"
+          - "Normal LH with ↓ DHT"
+        answer: 0
+        why:
+          - "صح: Kallmann. الـ neurons ما هاجرتش، فالـ olfactory bulb ما اتكوّنش والـ GnRH قليل، فكل حاجة تحته واطية."
+          - "ده primary hypogonadism زي Klinefelter."
+          - "ده androgen insensitivity."
+          - "ده 5α-reductase deficiency."
+        page: 656
+        quote: "Defective migration of neurons and subsequent failure of olfactory bulbs to develop → ↓ synthesis of GnRH in the hypothalamus; hyposmia/anosmia; ↓ GnRH, FSH, LH, testosterone."
+      - kind: try
+        items: [repro.L04.010, repro.L04.011, repro.L04.017, repro.L04.022, repro.L04.026]
+    recap:
+      - "Klinefelter: XXY، Barr body، ↓ inhibin ← ↑ FSH، و ↓ testosterone ← ↑ LH."
+      - "Turner: أشهر سبب 1° amenorrhea، مفيش Barr body، coarctation و bicuspid valve."
+      - "Testosterone و LH: الاتنين عاليين = AIS، الاتنين واطيين = 2° hypogonadism."
+      - "AIS مفيش uterus (AMH)، 5α-reductase atypical لحد البلوغ، aromatase الأم كمان بتسترجل."
+      - "Kallmann: مفيش شم، GnRH وكل اللي تحته واطي."
+    practice: [repro.L04.001, repro.L04.002, repro.L04.003, repro.L04.004, repro.L04.005, repro.L04.006, repro.L04.007, repro.L04.008, repro.L04.009, repro.L04.010, repro.L04.011, repro.L04.012, repro.L04.013, repro.L04.014, repro.L04.015, repro.L04.016, repro.L04.017, repro.L04.018, repro.L04.019, repro.L04.020, repro.L04.021, repro.L04.022, repro.L04.023, repro.L04.024, repro.L04.025, repro.L04.026]
+  - id: repro.L04.lesson2
+    title: "المشيمة والنزيف في الحمل"
+    hook: "نزيف من غير ألم ولا نزيف بألم؟ ومشيمة مش راضية تنزل؟ كل واحدة ليها قصة"
+    minutes: 8
+    pages: [657, 658]
+    topics: [placental-disorders, uterine-rupture, postpartum-hemorrhage, ectopic-pregnancy]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Placenta accreta spectrum"
+        text: |-
+          الـ trophoblast دخل في جدار الرحم أكتر من اللازم. السبب الأهم: ==ندبة قديمة== (C-section)، لأن الـ decidua ما اتكوّنتش كويس مكان الندبة.
+
+          الصورة: بعد الولادة المشيمة **مش راضية تنفصل**، ولما تحاول تشيلها بإيدك: نزيف شديد، وبتطلع حتت. العلاج ==hysterectomy==.
+        page: 657
+        quote: "Risk factors: prior C-section or other uterine surgery (areas of uterine scarring impair normal decidualization), placenta previa, ↑ maternal age, multiparity."
+      - kind: figure
+        title: "دخلت لحد فين"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-good" x="10" y="20" width="340" height="24" rx="4"/>
+            <text x="20" y="37" class="t-sm">Decidua basalis</text>
+            <rect class="fg-acc" x="10" y="44" width="340" height="66"/>
+            <text x="20" y="80" class="t-sm">Myometrium</text>
+            <rect class="fg-box" x="10" y="110" width="340" height="18" rx="4"/>
+            <text x="20" y="123" class="t-sm">Serosa</text>
+            <line class="fg-arrow" x1="150" y1="10" x2="150" y2="46"/>
+            <text x="120" y="150" class="t-sm t-b">accreta</text>
+            <line class="fg-arrow" x1="220" y1="10" x2="220" y2="80"/>
+            <text x="200" y="150" class="t-sm t-b">increta</text>
+            <line class="fg-arrow" x1="300" y1="10" x2="300" y2="135"/>
+            <text x="275" y="150" class="t-sm t-b">percreta</text>
+          </svg>
+        caption: "Accreta لزقت في الـ myometrium من غير ما تدخله (الأشهر). Increta دخلت جزء. Percreta خرمت لحد الـ serosa، وممكن توصل للمثانة."
+        alt: "Layers of decidua basalis, myometrium and serosa, with accreta reaching the myometrium, increta partly invading it, and percreta perforating through to the serosa."
+        page: 657
+        quote: "Placenta accreta—attaches to myometrium (instead of overlying decidua basalis) without invading it. Most common type. ▪ Placenta increta—partially invades into myometrium. ▪ Placenta percreta—completely invades (“perforates”) through myometrium and serosa"
+      - kind: table
+        title: "نزيف التلت الأخير"
+        columns: ["Condition", "Bleeding", "Key point"]
+        rows:
+          - ["Placenta previa", "Painless", "Placenta over the internal os"]
+          - ["Placental abruption", "Painful", "Separation before delivery; DIC from tissue factor"]
+          - ["Vasa previa", "Painless, with fetal distress", "Fetal vessels over the os"]
+        hide: [[0, 1], [1, 1], [1, 2], [2, 2]]
+        page: 657
+        quote: "Placenta previa Attachment of placenta over internal cervical os (a “preview” of the placenta is visible through cervix). Risk factors: prior C-section, multiparity. Presents with painless vaginal bleeding in third trimester."
+      - kind: check
+        question: "A woman at 34 weeks with cocaine use has sudden painful bleeding and a rigid, tender uterus. Her platelets drop and fibrinogen falls. Why?"
+        options:
+          - "Tissue factor released from the injured placenta"
+          - "Placenta over the internal os"
+          - "Antibodies against platelets"
+          - "Atony of the uterus"
+        answer: 0
+        why:
+          - "صح: placental abruption. المشيمة المجروحة بتطلّع tissue factor فيحصل DIC."
+          - "Previa نزيفها من غير ألم."
+          - "مفيش سبب مناعي هنا."
+          - "الـ atony بعد الولادة، مش قبلها."
+        page: 657
+        quote: "can lead to maternal hypovolemic shock (due to hemorrhage) and DIC (due to release of tissue factor from injured placenta), fetal distress (eg, hypoxia)."
+      - kind: explain
+        title: "Uterine rupture"
+        text: |-
+          الجدار كله اتقطع، وغالباً في ==ولادة بعد C-section==. نزيف **بألم**، الـ fetal heart يبطّأ، تحس أجزاء الجنين بسهولة من البطن، والـ station بيروح (الجنين طلع لفوق).
+        page: 658
+        quote: "Presents with painful vaginal bleeding, fetal heart rate abnormalities (eg, bradycardia), easily palpable fetal parts, loss of fetal station."
+      - kind: mnemonic
+        word: "TTTT"
+        parts:
+          - { key: "T", text: "Tone: uterine atony, soft boggy uterus (most common)" }
+          - { key: "T", text: "Trauma: lacerations, incisions, uterine rupture" }
+          - { key: "T", text: "Tissue: retained products of conception" }
+          - { key: "T", text: "Thrombin: coagulopathy" }
+        hook: "الـ postpartum hemorrhage أكبر سبب لوفاة الأمهات في العالم، وأسبابه 4 T's. أولها وأشهرها الرحم الطري اللي مش بينقبض."
+        page: 658
+        quote: "Etiology (4 T’s): Tone (uterine atony → soft, boggy uterus; most common), Trauma (eg, lacerations, incisions, uterine rupture), Tissue (retained products of conception), Thrombin (coagulopathy)."
+      - kind: reveal
+        prompt: "لو النزيف ما وقفش، بيربطوا الـ internal iliac أو الـ uterine arteries. إزاي الست تفضل تقدر تحمل بعدها؟"
+        answer: "الـ ==ovarian arteries== بتعمل collateral circulation للرحم، فالرحم بيعيش. العلاج الأول: uterine massage و **oxytocin**."
+        page: 658
+        quote: "Treatment: uterine massage, oxytocin. If refractory, surgical ligation of uterine or internal iliac arteries (fertility is preserved since ovarian arteries provide collateral circulation)."
+      - kind: explain
+        title: "Ectopic pregnancy"
+        text: |-
+          الحمل زرع برّه الرحم، أغلبه في ==ampulla== الـ fallopian tube. أكبر risk factor: الأنبوبة متبهدلة من قبل (**PID** أو جراحة)، أو ectopic قديم، أو IUD، أو IVF.
+
+          شك فيه: amenorrhea، والـ hCG بيعلى ==أبطأ من المتوقع==. أكّد بالـ ultrasound. العلاج methotrexate أو جراحة.
+        page: 658
+        quote: "Suspect in patients with history of amenorrhea, lower-than- expected rise in hCG based on dates. Confirm with ultrasound, which may show extraovarian adnexal mass. Treatment: methotrexate, surgery."
+      - kind: check
+        question: "Which history most raises the risk of a tubal ectopic pregnancy?"
+        options:
+          - "Prior salpingitis from pelvic inflammatory disease"
+          - "Three previous vaginal deliveries"
+          - "Use of combined oral contraceptives"
+          - "Breastfeeding for 1 year"
+        answer: 0
+        why:
+          - "صح: الندبة في الأنبوبة من الـ PID بتعطّل البويضة وهي ماشية."
+          - "الولادات الطبيعية مش risk factor في الكتاب."
+          - "الـ OCPs مش في القايمة."
+          - "الرضاعة مش risk factor."
+        page: 658
+        quote: "Risk factors: tubal pathologies (eg, scarring from salpingitis [PID] or surgery), previous ectopic pregnancy, IUD, IVF."
+      - kind: try
+        items: [repro.L04.034, repro.L04.035, repro.L04.037, repro.L04.041, repro.L04.045]
+    recap:
+      - "Accreta (ندبة C-section): المشيمة مش بتنفصل، نزيف شديد، hysterectomy."
+      - "Previa من غير ألم، abruption بألم و DIC، rupture بألم وأجزاء الجنين تتحس."
+      - "PPH: 4 T's، أشهرها Tone. Massage و oxytocin. الـ ovarian arteries بتحمي الخصوبة."
+      - "Ectopic: ampulla، PID، hCG بطيء، methotrexate."
+    practice: [repro.L04.027, repro.L04.028, repro.L04.029, repro.L04.030, repro.L04.031, repro.L04.032, repro.L04.033, repro.L04.034, repro.L04.035, repro.L04.036, repro.L04.037, repro.L04.038, repro.L04.039, repro.L04.040, repro.L04.041, repro.L04.042, repro.L04.043, repro.L04.044, repro.L04.045]
+  - id: repro.L04.lesson3
+    title: "الـ mole والضغط في الحمل"
+    hook: "رحم أكبر من الشهور، hCG في السما، وضغط عالي قبل أسبوع 20؟ ده مش حمل عادي"
+    minutes: 8
+    pages: [659, 661]
+    topics: [hydatidiform-mole, choriocarcinoma, hypertension-in-pregnancy, supine-hypotensive-syndrome]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Hydatidiform mole"
+        text: |-
+          الـ chorionic villi وارمة cysts، والـ trophoblast بيكبر لوحده. الصورة: نزيف، ترجيع، ==رحم أكبر من المفروض==، وضغط في الحوض.
+
+          والـ hCG العالي جداً بيعمل: **hyperthyroidism**، theca lutein cysts، hyperemesis، و ==preeclampsia قبل أسبوع 20==.
+        page: 659
+        quote: "Associated with hCG-mediated sequelae: hyperthyroidism, theca lutein cysts, hyperemesis gravidarum, early preeclampsia (before 20 weeks of gestation)."
+      - kind: figure
+        title: "Complete ولا partial"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="10" y="15" width="160" height="120" rx="10"/>
+            <text x="45" y="38" class="t-b">Complete</text>
+            <circle class="fg-box" cx="50" cy="75" r="18"/>
+            <text x="38" y="80" class="t-sm t-mut">empty</text>
+            <text x="80" y="70" class="t-sm">+ 1 sperm</text>
+            <text x="80" y="88" class="t-sm">(duplicates)</text>
+            <text x="25" y="122" class="t-sm t-b">46,XX · no fetus</text>
+            <rect class="fg-good" x="190" y="15" width="160" height="120" rx="10"/>
+            <text x="235" y="38" class="t-b">Partial</text>
+            <circle class="fg-box" cx="230" cy="75" r="18"/>
+            <text x="222" y="80" class="t-sm">egg</text>
+            <text x="260" y="70" class="t-sm">+ 2 sperm</text>
+            <text x="205" y="122" class="t-sm t-b">69,XXY · fetal parts</text>
+          </svg>
+        caption: "الـ complete: بويضة فاضية + sperm واحد بيضاعف نفسه، فكل الـ DNA من الأب و 46,XX. الـ partial: بويضة عادية + 2 sperm، فـ triploid (69) وفيه أجزاء جنين."
+        alt: "A complete mole forms from an enucleated egg and one sperm that duplicates, giving 46,XX with no fetus; a partial mole forms from an egg and two sperm, giving a 69 triploid karyotype with fetal parts."
+        page: 659
+        quote: "Most commonly enucleated egg + single sperm (subsequently duplicates paternal DNA)"
+      - kind: check
+        question: "A molar pregnancy has a 46,XX karyotype and no fetal tissue. Where did its chromosomes come from?"
+        options:
+          - "All from the father"
+          - "All from the mother"
+          - "Half from each parent"
+          - "Two sets from the father and one from the mother"
+        answer: 0
+        why:
+          - "صح: complete mole، بويضة من غير nucleus و sperm بيضاعف DNA الأب."
+          - "مفيش أي DNA من الأم."
+          - "ده الحمل العادي."
+          - "ده الـ partial mole (69)."
+        page: 659
+        quote: "KARYOTYPE 46,XX (most common); 46,XY 69,XXX; 69,XXY; 69,XYY COMPONENTS Most commonly enucleated egg + single sperm (subsequently duplicates paternal DNA) 2 sperm + 1 egg"
+      - kind: explain
+        title: "Choriocarcinoma"
+        text: |-
+          سرطان trophoblast (cyto و syncytio) ==من غير villi==. غالباً بعد حمل مش طبيعي (mole أو abortion).
+
+          بينتشر في الدم للرئة: «==cannonball==» metastases، فتلاقي dyspnea و hemoptysis. العلاج **methotrexate**.
+        page: 660
+        quote: "Presents with abnormal uterine bleeding, hCG-mediated sequelae, dyspnea, hemoptysis. Hematogenous spread to lungs → “cannonball” metastases B . Treatment: methotrexate."
+      - kind: table
+        title: "الضغط في الحمل"
+        columns: ["Type", "Definition", "Clue"]
+        rows:
+          - ["Gestational hypertension", ">140/90 after 20 weeks", "No proteinuria or end-organ damage"]
+          - ["Preeclampsia", "Hypertension with proteinuria or end-organ damage after 20 weeks", "Abnormal spiral arteries"]
+          - ["Eclampsia", "Preeclampsia with seizures", "Death by stroke, hemorrhage, ARDS"]
+          - ["HELLP", "Hemolysis, elevated liver enzymes, low platelets", "Schistocytes; may lack hypertension"]
+        hide: [[0, 2], [1, 2], [2, 1], [3, 2]]
+        page: 660
+        quote: "BP >140/90 mm Hg after 20 weeks of gestation. No preexisting hypertension. No proteinuria or end-organ damage. Hypertension prior to 20 weeks of gestation suggests chronic hypertension."
+      - kind: reveal
+        prompt: "إيه اللي بيبوّظ الدنيا في الـ preeclampsia من الأول؟"
+        answer: "الـ ==spiral arteries== في المشيمة ما اتعدلتش ← endothelial dysfunction و vasoconstriction و ischemia. ولو بدأت **قبل أسبوع 20**، فكّر في mole."
+        page: 660
+        quote: "(onset of preeclampsia <20 weeks of gestation may suggest molar pregnancy). Caused by abnormal placental spiral arteries → endothelial dysfunction, vasoconstriction, ischemia."
+      - kind: aside
+        tone: tip
+        text: "الأدوية: «==Hypertensive moms love nifedipine==»: **H**ydralazine، **α-m**ethyldopa، **l**abetalol، **n**ifedipine. والولادة في أسبوع 37 لـ 39."
+        page: 660
+        quote: "Treatment: antihypertensives (Hydralazine, α-methyldopa, labetalol, nifedipine), deliver at 37-39 weeks. Hypertensive moms love nifedipine."
+      - kind: check
+        question: "A woman at 34 weeks has right upper quadrant pain. BP is 128/80. Her smear shows schistocytes, platelets are low and liver enzymes are high. What is the treatment?"
+        options:
+          - "Immediate delivery"
+          - "Magnesium and wait until 39 weeks"
+          - "Methotrexate"
+          - "Platelet transfusion only"
+        answer: 0
+        why:
+          - "صح: HELLP، وممكن يجي من غير ضغط عالي. العلاج إنها تولد فوراً."
+          - "الاستنى خطر: ممكن hepatic hematoma يتقطع و DIC."
+          - "Methotrexate للـ ectopic والـ choriocarcinoma."
+          - "ده مش بيعالج السبب."
+        page: 660
+        quote: "Low Platelets. May occur in the absence of hypertension and proteinuria. Blood smear shows schistocytes. Can lead to hepatic subcapsular hematomas (rupture → severe hypotension) and DIC (due to release of tissue factor from injured placenta). Treatment: immediate delivery."
+      - kind: aside
+        tone: exam
+        text: "حامل بعد ==أسبوع 20== نامت على ضهرها فدايخة وضغطها وقع؟ الرحم ضاغط على الـ aorta والـ IVC (aortocaval compression). الحل: تنام على ==جنبها الشمال== (left lateral decubitus)."
+        page: 661
+        quote: "Also called aortocaval compression syndrome. Seen at >20 weeks of gestation. Supine position → compression of abdominal aorta and IVC by gravid uterus → ↓ placental perfusion (can lead to pregnancy loss) and ↓ venous return (hypotension). Relieved by left lateral decubitus position."
+      - kind: try
+        items: [repro.L04.050, repro.L04.053, repro.L04.060, repro.L04.062]
+    recap:
+      - "Mole: رحم كبير، hCG عالي (thyroid و theca lutein و preeclampsia بدري). Complete = 46,XX من الأب."
+      - "Choriocarcinoma: مفيش villi، cannonball في الرئة، methotrexate."
+      - "Preeclampsia: spiral arteries. قبل 20 أسبوع = mole. HELLP = ولادة فوراً."
+      - "Hypertensive moms love nifedipine. Supine hypotension: نامي على الشمال."
+    practice: [repro.L04.046, repro.L04.047, repro.L04.048, repro.L04.049, repro.L04.050, repro.L04.051, repro.L04.052, repro.L04.053, repro.L04.054, repro.L04.055, repro.L04.056, repro.L04.057, repro.L04.058, repro.L04.059, repro.L04.060, repro.L04.061, repro.L04.062]
+  - id: repro.L04.lesson4
+    title: "الـ vulva والـ cervix والـ ovulation اللي مش بتحصل"
+    hook: "ليه الـ PCOS بيعلّي risk الـ endometrial cancer؟ وليه الـ HPV بيعمل سرطان؟ بروتينين بس"
+    minutes: 9
+    pages: [661, 663]
+    topics: [gynecologic-tumor-epidemiology, vulvar-pathology, imperforate-hymen, vaginal-tumors, anovulatory-infertility, polycystic-ovary-syndrome, primary-ovarian-insufficiency, functional-hypothalamic-amenorrhea, cervical-pathology, primary-dysmenorrhea, ovarian-cysts]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "مين أكتر ومين أخطر"
+        text: |-
+          في أمريكا: ==endometrial > ovarian > cervical==. بس الـ cervical أكتر في العالم، لأن مفيش screening ولا HPV vaccine.
+
+          الـ prognosis عكس السن: cervical أحسن (أصغر من 45)، endometrial في النص (55)، و ==ovarian الأسوأ== (فوق 65). الكتاب: «CEOs often go from best to worst as they get older».
+        page: 661
+        quote: "Incidence (US)—endometrial > ovarian > cervical; cervical cancer is more common worldwide due to lack of screening or HPV vaccination."
+      - kind: aside
+        tone: trap
+        text: "**Lichen sclerosus**: plaques بيضا زي البورسلين، وممكن تلف حوالين الـ anus على شكل ==8==. Benign، بس risk بسيط لـ SCC. أما **Paget disease** في الـ vulva فـ carcinoma in situ، ونادراً تحتها سرطان، عكس Paget في الصدر."
+        page: 661
+        quote: "Intraepithelial adenocarcinoma. Carcinoma in situ, low risk of underlying carcinoma (vs Paget disease of the breast, which is always associated with underlying carcinoma). Presents with pruritus, erythema, crusting, ulcers D ."
+      - kind: check
+        question: "A 14-year-old girl has never menstruated. She has normal breasts and monthly lower abdominal pain. A bluish bulging membrane is seen at the introitus. What is the diagnosis?"
+        options:
+          - "Imperforate hymen with hematocolpos"
+          - "Müllerian agenesis"
+          - "Turner syndrome"
+          - "Sarcoma botryoides"
+        answer: 0
+        why:
+          - "صح: الـ hymen ما اتفتحش، فدم الدورة اتحبس في الـ vagina (hematocolpos)."
+          - "في Müllerian agenesis مفيش uterus يعمل دورة، فمفيش ألم كل شهر."
+          - "Turner مفيش صدر طبيعي."
+          - "Sarcoma botryoides في بنات أصغر من 4، كتلة زي العنب."
+        page: 662
+        quote: "If untreated, leads to 1° amenorrhea, cyclic abdominal pain, hematocolpos (accumulation of menstrual blood in vagina → bulging and bluish hymenal membrane)."
+      - kind: explain
+        title: "PCOS"
+        text: |-
+          ==↑ LH:FSH== ← الـ theca بتعمل androgens كتير ← الـ follicles ما بتنضجش ← cysts و anovulation. أشهر سبب للـ anovulatory infertility.
+
+          التشخيص باتنين من تلاتة: ovaries فيها cysts، oligo أو anovulation، و hyperandrogenism (hirsutism و acne). ومعاها obesity و insulin resistance و acanthosis nigricans.
+        page: 662
+        quote: "Unknown cause; associated with dysregulation of ovarian steroidogenesis. ↑ LH:FSH, ↑ androgens (eg, testosterone) from theca interna cells, ↓ rate of follicular maturation → unruptured follicles (cysts) + anovulation."
+      - kind: reveal
+        prompt: "مفيش ovulation، يبقى مفيش corpus luteum. وده يعمل إيه في الـ endometrium؟"
+        answer: "مفيش progesterone يوقف الـ estrogen، فالـ endometrium ==unopposed estrogen== ← hyperplasia ← ↑ endometrial cancer. عشان كده الـ **OCPs** بتحمي، والتخسيس بيقلل الـ estrone اللي بيتعمل في الدهن."
+        page: 662
+        quote: "Associated with obesity, insulin resistance, acanthosis nigricans. ↑ risk of endometrial cancer 2° to unopposed estrogen from repeated anovulatory cycles."
+      - kind: table
+        title: "Amenorrhea: الهرمونات بتقول فين المشكلة"
+        columns: ["Condition", "Mechanism", "FSH and LH"]
+        rows:
+          - ["Primary ovarian insufficiency", "Premature follicle atresia (Turner, fragile X premutation, autoimmune)", "↑"]
+          - ["Functional hypothalamic amenorrhea", "Stress, exercise, low calories → ↓ pulsatile GnRH (↓ leptin, ↑ cortisol)", "↓"]
+        hide: [[0, 2], [1, 1], [1, 2]]
+        page: 663
+        quote: "Severe caloric restriction, ↑ energy expenditure, and/or stress → functional disruption of pulsatile GnRH secretion → ↓ LH, FSH, estrogen. Pathogenesis includes ↓ leptin (due to ↓ fat) and ↑ cortisol (stress, excessive exercise)."
+      - kind: figure
+        title: "الـ HPV بيشيل الفرامل"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="10" y="20" width="90" height="40" rx="6"/>
+            <text x="22" y="45" class="t-b">HPV 16/18</text>
+            <rect class="fg-box" x="140" y="10" width="70" height="30" rx="6"/>
+            <text x="160" y="30" class="t-sm t-b">E6</text>
+            <rect class="fg-box" x="140" y="50" width="70" height="30" rx="6"/>
+            <text x="160" y="70" class="t-sm t-b">E7</text>
+            <rect class="fg-good" x="250" y="10" width="100" height="30" rx="6"/>
+            <text x="265" y="30" class="t-sm">TP53 ✗</text>
+            <rect class="fg-good" x="250" y="50" width="100" height="30" rx="6"/>
+            <text x="265" y="70" class="t-sm">pRb ✗</text>
+            <line class="fg-arrow" x1="100" y1="35" x2="138" y2="25"/>
+            <line class="fg-arrow" x1="100" y1="45" x2="138" y2="65"/>
+            <line class="fg-arrow" x1="210" y1="25" x2="248" y2="25"/>
+            <line class="fg-arrow" x1="210" y1="65" x2="248" y2="65"/>
+            <text x="20" y="115" class="t-sm t-mut">6 before 7; P before R</text>
+            <text x="20" y="138" class="t-sm">koilocytes · transformation zone · CIN 1 → 3</text>
+          </svg>
+        caption: "الـ E6 بيوقّف الـ TP53، والـ E7 بيوقّف الـ pRb. الترتيب سهل: 6 قبل 7، و P قبل R. والـ dysplasia بتبدأ في الـ transformation zone."
+        alt: "HPV 16 and 18 make E6, which inhibits TP53, and E7, which inhibits pRb; dysplasia starts at the transformation zone with koilocytes and is graded CIN 1 to 3."
+        page: 663
+        quote: "Associated with HPV-16 and HPV-18, which produce both the E6 gene product (inhibits TP53) and E7 gene product (inhibits pRb) (6 before 7; P before R)."
+      - kind: explain
+        title: "Cervical cancer"
+        text: |-
+          غالباً **SCC**. الـ Pap smear بيمسك الـ dysplasia قبل ما تبقى سرطان، والتشخيص بالـ colposcopy والـ biopsy.
+
+          ولو انتشر للجنب: يقفل الـ ==ureters== ← hydronephrosis ← renal failure.
+        page: 663
+        quote: "Often squamous cell carcinoma. Pap smear can detect cervical dysplasia before it progresses to invasive carcinoma. Diagnose via colposcopy and biopsy. Lateral invasion can block ureters → hydronephrosis → renal failure."
+      - kind: check
+        question: "A 17-year-old has crampy pain with each period, starting on the first day. Exam and ultrasound are normal. Which mediator causes the pain?"
+        options:
+          - "Prostaglandins"
+          - "Histamine"
+          - "Bradykinin from endometriosis"
+          - "Excess progesterone"
+        answer: 0
+        why:
+          - "صح: primary dysmenorrhea. الرحم بينقبض عشان يقلل النزيف فيعمل ischemia، والـ prostaglandins هي اللي ورا ده. العلاج NSAIDs."
+          - "الـ histamine مش في الكتاب هنا."
+          - "الفحص طبيعي، يعني primary مش secondary."
+          - "الـ progesterone مش هو السبب."
+        page: 663
+        quote: "Painful menses, caused by uterine contractions to ↓ blood loss → ischemic pain. Mediated by prostaglandins. Treatment: NSAIDs, acetaminophen, hormonal contraceptives."
+      - kind: aside
+        tone: exam
+        text: "**Follicular cyst** أشهر كتلة في الـ ovary في البنات الصغيرين (follicle ما انفجرش). **Theca lutein cyst** ==bilateral== من الـ hCG الكتير، يعني فكّر في mole أو choriocarcinoma."
+        page: 663
+        quote: "Theca lutein cyst Also called hyperreactio luteinalis. Caused by hCG overstimulation. Often bilateral/multiple. Associated with gestational trophoblastic disease (eg, hydatidiform mole, choriocarcinoma)."
+      - kind: try
+        items: [repro.L04.072, repro.L04.080, repro.L04.085, repro.L04.091, repro.L04.096]
+    recap:
+      - "US: endometrial > ovarian > cervical. Prognosis: cervical أحسن، ovarian أسوأ."
+      - "Lichen sclerosus أبيض و 8، Paget vulva نادر تحته سرطان، sarcoma botryoides تحت 4 سنين."
+      - "PCOS: ↑ LH:FSH، androgens، unopposed estrogen ← endometrial cancer. OCPs تحمي."
+      - "POI: FSH عالي. Hypothalamic amenorrhea: GnRH واطي (leptin واطي و cortisol عالي)."
+      - "HPV: E6 ← TP53، E7 ← pRb. Dysmenorrhea: prostaglandins و NSAIDs."
+    practice: [repro.L04.063, repro.L04.064, repro.L04.065, repro.L04.066, repro.L04.067, repro.L04.068, repro.L04.069, repro.L04.070, repro.L04.071, repro.L04.072, repro.L04.073, repro.L04.074, repro.L04.075, repro.L04.076, repro.L04.077, repro.L04.078, repro.L04.079, repro.L04.080, repro.L04.081, repro.L04.082, repro.L04.083, repro.L04.084, repro.L04.085, repro.L04.086, repro.L04.087, repro.L04.088, repro.L04.089, repro.L04.090, repro.L04.091, repro.L04.092, repro.L04.093, repro.L04.094, repro.L04.095, repro.L04.096]
+  - id: repro.L04.lesson5
+    title: "أورام الـ ovary والرحم والصدر"
+    hook: "كل ورم ليه علامة: fried egg، Call-Exner، single file، peau d'orange. اعرف العلامة تعرف الورم"
+    minutes: 10
+    pages: [664, 668]
+    topics: [ovarian-tumors, uterine-conditions, benign-breast-diseases, gynecomastia, breast-cancer]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "أورام الـ ovary: منين بتيجي"
+        text: |-
+          أشهر adnexal mass بعد ==55 سنة==. بتيجي بانتفاخ في البطن أو انسداد أو pleural effusion.
+
+          الـ risk بيعلى مع كل ==ovulation زيادة== (menarche بدري، menopause متأخر، مفيش ولادة)، و BRCA و Lynch. وبيقل مع الحمل والرضاعة والـ OCPs. والـ **CA 125** للمتابعة، مش للـ screening.
+        page: 664
+        quote: "Risk ↑ with advanced age, ↑ number of lifetime ovulations (early menarche, late menopause, nulliparity), endometriosis, genetic predisposition (eg, BRCA1/BRCA2 mutations, Lynch syndrome). Risk ↓ with previous pregnancy, history of breastfeeding, OCPs, tubal ligation."
+      - kind: table
+        title: "علامة كل ورم"
+        columns: ["Tumor", "Clue", "Marker or link"]
+        rows:
+          - ["Serous cystadenoma", "Most common ovarian neoplasm; fallopian tube–like epithelium", "Benign"]
+          - ["Dysgerminoma", "Fried egg cells; adolescents", "↑ hCG, ↑ LDH"]
+          - ["Struma ovarii", "Teratoma with thyroid tissue", "Hyperthyroidism"]
+          - ["Granulosa cell tumor", "Call-Exner bodies", "↑ inhibin"]
+          - ["Fibroma", "Spindle fibroblasts", "Meigs: ascites, pleural effusion"]
+        hide: [[1, 2], [2, 2], [3, 1], [3, 2], [4, 2]]
+        page: 664
+        quote: "Dysgerminoma Malignant. Most common in adolescents. Equivalent to male seminoma but rarer. Sheets of uniform “fried egg” cells D . Tumor markers: ↑ hCG, ↑ LDH."
+      - kind: check
+        question: "A 60-year-old woman has postmenopausal bleeding and an ovarian mass. Biopsy shows granulosa cells around pink fluid, like small follicles. Which serum marker is high?"
+        options:
+          - "Inhibin"
+          - "AFP"
+          - "CA 125 only"
+          - "PLAP"
+        answer: 0
+        why:
+          - "صح: granulosa cell tumor، فيه Call-Exner bodies و inhibin عالي. وبيعمل estrogen فالـ endometrium ينزف. «Give Granny a Call»."
+          - "الـ AFP للـ yolk sac tumor."
+          - "الـ CA 125 للأورام الـ epithelial."
+          - "الـ PLAP للـ seminoma."
+        page: 665
+        quote: "Histology shows Call-Exner bodies (granulosa cells arranged haphazardly around collections of eosinophilic fluid, resembling primordial follicles; arrow in F ). Tumor marker: ↑ inhibin. “Give Granny a Call.”"
+      - kind: explain
+        title: "الرحم"
+        text: |-
+          - **Adenomyosis**: endometrium جوه الـ myometrium ← رحم ==globular وطري وبيوجع==، ونزيف و dysmenorrhea.
+          - **Endometriosis**: endometrium برّه الرحم: «powder burn» على الـ peritoneum و «==chocolate cyst==» في الـ ovary.
+          - **Leiomyoma** (fibroid): أشهر ورم في النسا، أكتر في السود.
+          - **Endometrial hyperplasia و carcinoma**: estrogen من غير progesterone (obesity، PCOS، tamoxifen)، وبينزف بعد الـ menopause.
+        page: 666
+        quote: "Abnormal endometrial gland proliferation. Usually caused by excess estrogen unopposed by progesterone. Associated with obesity, chronic anovulation (eg, PCOS), nulliparity, HRT, tamoxifen."
+      - kind: aside
+        tone: trap
+        text: "**Asherman syndrome**: بعد D&C الـ basal layer اتجرح فعمل ==fibrous bands== جوه الرحم. الدورة تقل، infertility، وإجهاض متكرر. و **endometritis** بعد الولادة: أكبر risk factor الـ C-section."
+        page: 666
+        quote: "Fibrous bands/tissue within endometrial cavity. Caused by damage to basal layer of endometrium, usually after dilation and curettage. Presents with abnormal uterine bleeding (↓ menses), infertility, recurrent pregnancy loss, dysmenorrhea."
+      - kind: explain
+        title: "الصدر: الحاجات الحميدة"
+        text: |-
+          - **Fibrocystic changes**: 20 لـ 50 سنة، ألم وكتل قبل الدورة في الناحيتين.
+          - **Fibroadenoma**: أقل من 35، صغير و ==بيتحرك==.
+          - **Intraductal papilloma**: تحت الـ areola، ==أشهر سبب لإفراز الحلمة== (دم أو serous).
+          - **Lactational mastitis**: S aureus من شقوق الحلمة. Antibiotics و ==تكمّل رضاعة==.
+
+          وفي الرجالة: **gynecomastia** = estrogen أكتر من الـ androgen (cirrhosis، Klinefelter، spironolactone).
+        page: 667
+        quote: "Lactational mastitis—occurs during breastfeeding, ↑ risk of bacterial infection through cracks in nipple. S aureus is most common pathogen. Treat with antibiotics and continue breastfeeding."
+      - kind: check
+        question: "A 52-year-old man with cirrhosis on spironolactone has tender breast enlargement. What is the shared mechanism?"
+        options:
+          - "↑ estrogen relative to androgen activity"
+          - "↑ prolactin from a pituitary adenoma"
+          - "↑ growth hormone"
+          - "↓ estrogen"
+        answer: 0
+        why:
+          - "صح: الـ cirrhosis والـ spironolactone الاتنين بيميّلوا الميزان ناحية الـ estrogen."
+          - "مفيش دليل على ورم."
+          - "الـ GH مش سبب في الكتاب."
+          - "العكس."
+        page: 667
+        quote: "Breast enlargement in males due to ↑ estrogen compared with androgen activity. Physiologic in newborn, pubertal, and older males, but may persist after puberty. Other causes include cirrhosis, hypogonadism (eg, Klinefelter syndrome), testicular tumors, drugs (eg, spironolactone)."
+      - kind: explain
+        title: "Breast cancer"
+        text: |-
+          غالباً بعد الـ menopause، كتلة ==ناشفة== في الـ upper outer quadrant. لو ثبتت في الـ Cooper ligaments: الحلمة تنسحب والجلد يتنقّر.
+
+          الـ risk = estrogen أكتر ولمدة أطول، مع السن و BRCA. وفي الرجالة BRCA2 و Klinefelter. وأهم prognostic factor في الأول: ==axillary lymph nodes==.
+        page: 668
+        quote: "Invasive cancer can become fixed to pectoral muscles, deep fascia, Cooper ligaments, and overlying skin → nipple retraction/skin dimpling."
+      - kind: figure
+        title: "الـ E-cadherin والـ single file"
+        svg: |-
+          <svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="10" y="15" width="160" height="110" rx="10"/>
+            <text x="40" y="35" class="t-sm t-b">Invasive ductal</text>
+            <circle class="fg-box" cx="60" cy="75" r="22"/>
+            <circle class="fg-box" cx="120" cy="80" r="18"/>
+            <text x="30" y="118" class="t-sm">ducts in desmoplasia</text>
+            <rect class="fg-good" x="190" y="15" width="160" height="110" rx="10"/>
+            <text x="215" y="35" class="t-sm t-b">Invasive lobular</text>
+            <circle class="fg-box" cx="210" cy="70" r="7"/>
+            <circle class="fg-box" cx="230" cy="70" r="7"/>
+            <circle class="fg-box" cx="250" cy="70" r="7"/>
+            <circle class="fg-box" cx="270" cy="70" r="7"/>
+            <circle class="fg-box" cx="290" cy="70" r="7"/>
+            <circle class="fg-box" cx="310" cy="70" r="7"/>
+            <text x="205" y="118" class="t-sm">↓ E-cadherin · single file</text>
+          </svg>
+        caption: "الـ ductal بيعمل ducts صغيرة في stroma ناشف (rock-hard)، وهو الأشهر. الـ lobular فقد الـ E-cadherin فالخلايا مش لازقة في بعض، فتمشي في صف واحد، وغالباً في الناحيتين."
+        alt: "Invasive ductal carcinoma forms small ducts in desmoplastic stroma; invasive lobular carcinoma has lost E-cadherin and its cells line up in single file."
+        page: 668
+        quote: "↓ E-cadherin expression → orderly row of cells (“single file” D ) and no duct formation. Often lacks desmoplastic response."
+      - kind: check
+        question: "A woman has a painful, warm, red breast with peau d'orange and no mass. Antibiotics fail. What explains the skin?"
+        options:
+          - "Tumor in the dermal lymphatics"
+          - "S aureus in the ducts"
+          - "DCIS spreading to the nipple"
+          - "Fat necrosis"
+        answer: 0
+        why:
+          - "صح: inflammatory breast cancer. الـ prognosis وحش، وبيتلخبط مع الـ mastitis."
+          - "الـ mastitis كانت هتتحسن على الـ antibiotics."
+          - "ده Paget: eczema على الحلمة بس."
+          - "الـ fat necrosis كتلة بعد خبطة."
+        page: 668
+        quote: "Dermal lymphatic space invasion → breast pain with warm, swollen, erythematous skin around exaggerated hair follicles (peau d’orange) E . Poor prognosis (50% survival at 5 years)."
+      - kind: aside
+        tone: exam
+        text: "**DCIS** بيبان بدري كـ ==microcalcifications== على الـ mammogram. **LCIS** مفيش mass ولا calcifications، وبيعلّي الـ risk في ==الصدرين==، مش نفس الصدر بس زي الـ DCIS."
+        page: 668
+        quote: "↓ E-cadherin expression. No mass or calcifications → incidental biopsy finding. ↑ risk of cancer in either breast (vs DCIS, same breast and quadrant)."
+      - kind: try
+        items: [repro.L04.106, repro.L04.114, repro.L04.119, repro.L04.132, repro.L04.133]
+    recap:
+      - "Ovary: كل ovulation زيادة ↑ risk. CA 125 للمتابعة. Dysgerminoma fried egg، granulosa Call-Exner و inhibin، fibroma Meigs."
+      - "Adenomyosis رحم globular، endometriosis chocolate cyst، Asherman بعد D&C."
+      - "Papilloma أشهر سبب إفراز الحلمة. Mastitis: S aureus وكمّلي رضاعة."
+      - "Breast cancer: upper outer، axillary nodes أهم prognosis. Lobular ↓ E-cadherin single file."
+      - "Inflammatory = dermal lymphatics و peau d'orange. Paget = DCIS تحت الحلمة."
+    practice: [repro.L04.097, repro.L04.098, repro.L04.099, repro.L04.100, repro.L04.101, repro.L04.102, repro.L04.103, repro.L04.104, repro.L04.105, repro.L04.106, repro.L04.107, repro.L04.108, repro.L04.109, repro.L04.110, repro.L04.111, repro.L04.112, repro.L04.113, repro.L04.114, repro.L04.115, repro.L04.116, repro.L04.117, repro.L04.118, repro.L04.119, repro.L04.120, repro.L04.121, repro.L04.122, repro.L04.123, repro.L04.124, repro.L04.125, repro.L04.126, repro.L04.127, repro.L04.128, repro.L04.129, repro.L04.130, repro.L04.131, repro.L04.132, repro.L04.133]
+  - id: repro.L04.lesson6
+    title: "الخصية والبروستاتا"
+    hook: "خصية بتوجع فجأة، خصية بتنور، وخصية تقيلة من غير وجع. كل واحدة ليها كلمة سر"
+    minutes: 10
+    pages: [669, 672]
+    topics: [penile-pathology, cryptorchidism, testicular-torsion, varicocele, extragonadal-germ-cell-tumors, benign-scrotal-lesions, testicular-tumors, epididymitis-orchitis, benign-prostatic-hyperplasia, prostatitis, prostatic-adenocarcinoma]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ penis"
+        text: |-
+          - **Peyronie**: plaque ليفي في الـ tunica albuginea ← انحناء. غير الـ penile fracture (الـ tunica اتقطعت).
+          - **Ischemic priapism**: انتصاب بيوجع ==أكتر من 4 ساعات==. في الـ sickle cell، الـ RBCs بتسد الـ venous drainage. طوارئ: aspiration و phenylephrine.
+          - **SCC**: مع عدم الختان و HPV-16.
+        page: 669
+        quote: "Painful sustained erection lasting >4 hours. Associated with sickle cell disease (sickled RBCs block venous drainage of corpus cavernosum vascular channels), medications (eg, sildenafil, trazodone)."
+      - kind: reveal
+        prompt: "في الـ cryptorchidism، ليه الخصوبة بتقل بس الـ testosterone ممكن يفضل طبيعي؟"
+        answer: "الـ sperm محتاجة حرارة ==أقل من 37°C==، فالـ spermatogenesis يبوظ. أما الـ Leydig cells فمش بتتأثر بالحرارة. والـ testosterone يقل بس لو الاتنين ما نزلوش. والـ risk بتاع الـ ==germ cell tumors== بيعلى، فالـ orchiopexy قبل سنتين."
+        page: 669
+        quote: "Impaired spermatogenesis (since sperm develop best at temperatures <37°C) → subfertility. Can have normal testosterone levels (Leydig cells are mostly unaffected by temperature). Associated with ↑ risk of germ cell tumors."
+      - kind: figure
+        title: "الخصية بتوجع ولا بتنور"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="5" y="10" width="112" height="150" rx="10"/>
+            <text x="20" y="32" class="t-sm t-b">Torsion</text>
+            <text x="12" y="58" class="t-sm">high-riding</text>
+            <text x="12" y="78" class="t-sm">horizontal</text>
+            <text x="12" y="98" class="t-sm">no cremasteric</text>
+            <text x="12" y="118" class="t-sm t-b">⊝ Prehn</text>
+            <text x="12" y="145" class="t-sm t-mut">bell clapper</text>
+            <rect class="fg-good" x="124" y="10" width="112" height="150" rx="10"/>
+            <text x="134" y="32" class="t-sm t-b">Epididymitis</text>
+            <text x="131" y="58" class="t-sm">posterior pain</text>
+            <text x="131" y="78" class="t-sm">reflex present</text>
+            <text x="131" y="118" class="t-sm t-b">⊕ Prehn</text>
+            <text x="131" y="145" class="t-sm t-mut">chlamydia · E coli</text>
+            <rect class="fg-box" x="243" y="10" width="112" height="150" rx="10"/>
+            <text x="253" y="32" class="t-sm t-b">Varicocele</text>
+            <text x="250" y="58" class="t-sm">bag of worms</text>
+            <text x="250" y="78" class="t-sm">↑ with Valsalva</text>
+            <text x="250" y="98" class="t-sm">left side</text>
+            <text x="250" y="118" class="t-sm t-b">no light</text>
+            <text x="250" y="145" class="t-sm t-mut">pampiniform</text>
+          </svg>
+        caption: "الـ Prehn sign: ترفع الصفن والوجع يهدى؟ ده epididymitis (⊕). ما بيهداش؟ torsion (⊝). والـ varicocele مش بيوجع غالباً وما بينورش."
+        alt: "Torsion has a high-riding horizontal testis, no cremasteric reflex and a negative Prehn sign; epididymitis has posterior pain, a present reflex and a positive Prehn sign; varicocele is a bag of worms on the left that grows with Valsalva and does not transilluminate."
+        page: 669
+        quote: "Characterized by acute, severe pain, high-riding testis, and absent cremasteric reflex. ⊝ Prehn sign."
+      - kind: check
+        question: "A 15-year-old has sudden severe scrotal pain. The testis is high and horizontal, and the cremasteric reflex is absent. What is the plan?"
+        options:
+          - "Orchiopexy within 6 hours, on both sides"
+          - "Antibiotics and scrotal support"
+          - "Ultrasound in 2 days"
+          - "Radical orchiectomy for tumor"
+        answer: 0
+        why:
+          - "صح: torsion. الجراحة في خلال 6 ساعات، والناحيتين لأن التانية ممكن تلف بعدين."
+          - "ده علاج الـ epididymitis."
+          - "التأخير بيموّت الخصية."
+          - "الأورام مش بتوجع فجأة كده."
+        page: 669
+        quote: "Orchiopexy, when performed, should be bilateral because the contralateral testis is at risk for subsequent torsion."
+      - kind: aside
+        tone: trap
+        text: "الـ varicocele غالباً ==شمال==، لأن الـ left gonadal vein بيصب في الـ left renal vein. لو لقيته ==يمين== فجأة، فكّر في حاجة سادّة الـ IVC، زي RCC داخل الـ right renal vein."
+        page: 669
+        quote: "Most often on left side because of ↑ resistance to flow from left gonadal vein drainage into left renal vein. Right-sided varicocele may indicate IVC obstruction (eg, from RCC invading right renal vein)."
+      - kind: explain
+        title: "اللي بينوّر واللي برّه الخصية"
+        text: |-
+          الكتل اللي ==بتنوّر== (transilluminate) حميدة:
+          - **Hydrocele**: سائل في الـ tunica vaginalis. في الرضيع من الـ processus vaginalis اللي ما اتقفلش، وغالباً بيروح في سنة.
+          - **Spermatocele**: cyst من الـ epididymis، nodule جنب الخصية.
+
+          والـ germ cell tumors اللي برّه الـ gonad بتطلع في ==الخط اللي في النص==: retroperitoneum و mediastinum و pineal. وفي الأطفال sacrococcygeal teratoma.
+        page: 670
+        quote: "Congenital (communicating)—due to incomplete obliteration of processus vaginalis. Common cause of scrotal swelling in infants. Most resolve spontaneously within 1 year."
+      - kind: table
+        title: "أورام الخصية والـ markers"
+        columns: ["Tumor", "Clue", "Marker"]
+        rows:
+          - ["Seminoma", "Painless, homogenous; fried egg; radiosensitive", "↑ PLAP"]
+          - ["Yolk sac", "Children <3 years; Schiller-Duval bodies", "↑↑ AFP"]
+          - ["Choriocarcinoma", "Lungs and brain; gynecomastia, hyperthyroidism", "↑↑ hCG"]
+          - ["Embryonal", "Painful, hemorrhagic; usually mixed", "↑ hCG"]
+          - ["Leydig cell", "Reinke crystals; golden brown", "Androgens or estrogens"]
+          - ["Testicular lymphoma", "Males >60; often bilateral; diffuse large B-cell", "–"]
+        hide: [[0, 2], [1, 2], [2, 2], [4, 1], [5, 1]]
+        page: 671
+        quote: "Schiller-Duval bodies resemble primitive glomeruli. ↑ AFP is highly characteristic. Most common testicular tumor in children <3 years old."
+      - kind: aside
+        tone: tip
+        text: "ورم الخصية ==ما بيتعملوش biopsy== (ممكن يزرع في الصفن)، بيتشال بـ radical orchiectomy. والـ germ cell tumors هي ==95%== من أورام الخصية، و risk factors بتاعتها cryptorchidism و Klinefelter."
+        page: 670
+        quote: "Do not transilluminate. Usually not biopsied (risk of seeding scrotum), removed via radical orchiectomy."
+      - kind: check
+        question: "Why can a testicular choriocarcinoma cause tremor and weight loss?"
+        options:
+          - "hCG shares its α subunit with TSH and stimulates the thyroid"
+          - "It secretes thyroxine"
+          - "It spreads to the thyroid"
+          - "It makes estrogen"
+        answer: 0
+        why:
+          - "صح: الـ hCG والـ TSH ليهم نفس الـ α subunit، والـ hCG العالي جداً بيشغّل الـ thyroid."
+          - "مش بيعمل thyroxine."
+          - "بينتشر للرئة والمخ."
+          - "الـ estrogen يعمل gynecomastia، مش hyperthyroidism."
+        page: 671
+        quote: "May produce gynecomastia, symptoms of hyperthyroidism (hCG and TSH share an identical α subunit and a similar β subunit, which determines their hormonal function)."
+      - kind: explain
+        title: "BPH"
+        text: |-
+          فوق 50، الـ ==transition zone== بيكبر (hyperplasia) ويضغط الـ urethra. مش premalignant. Nocturia وصعوبة في البداية والنهاية.
+
+          الـ PSA الكلي عالي، بس الـ ==free PSA نسبته عالية==. العلاج: **α1-blockers** (tamsulosin) ترخّي العضلة، **finasteride**، tadalafil، أو TURP.
+        page: 672
+        quote: "Characterized by smooth, elastic, firm nodular enlargement (hyperplasia not hypertrophy) of transition zone, which compress the urethra into a vertical slit. Not premalignant."
+      - kind: explain
+        title: "Prostate cancer"
+        text: |-
+          بيطلع من الـ ==peripheral zone== (الـ posterior lobe)، فبيتحس في الـ rectal exam. التشخيص: PSA عالي ثم biopsy. والـ Gleason grade على شكل الغدد.
+
+          الـ free PSA نسبته ==واطية==. وفي الآخر: bone metastases **osteoblastic** (ألم ضهر و ALP عالي)، وبتوصل للعمود الفقري عن طريق الـ ==Batson venous plexus==.
+        page: 672
+        quote: "Osteoblastic metastases in bone may develop in late stages, as indicated by lower back pain and ↑ serum ALP and PSA. Metastasis to the spine often occurs via Batson (vertebral) venous plexus."
+      - kind: check
+        question: "Two men have the same high total PSA. One has a high free PSA fraction, the other a low one. Which is more likely cancer?"
+        options:
+          - "The one with the low free PSA fraction"
+          - "The one with the high free PSA fraction"
+          - "Both equally"
+          - "Neither, as PSA rises only in prostatitis"
+        answer: 0
+        why:
+          - "صح: الـ adenocarcinoma ↑ total PSA و ↓ free fraction."
+          - "ده شكل الـ BPH."
+          - "النسبة بتفرّق بينهم."
+          - "الـ PSA بيعلى في BPH وفي السرطان."
+        page: 672
+        quote: "Prostatic acid phosphatase (PAP) and PSA are useful tumor markers (↑ total PSA, with ↓ fraction of free PSA)."
+      - kind: aside
+        tone: exam
+        text: "**Prostatitis**: dysuria و frequency وألم في الضهر، والبروستاتا ==سخنة وبتوجع==. راجل كبير؟ E coli. شاب؟ فكّر في chlamydia و gonorrhea، زي الـ epididymitis بالظبط."
+        page: 672
+        quote: "Acute bacterial prostatitis—in older males most common bacterium is E coli; in young males consider C trachomatis, N gonorrhoeae."
+      - kind: try
+        items: [repro.L04.144, repro.L04.157, repro.L04.162, repro.L04.166, repro.L04.171]
+    recap:
+      - "Priapism أكتر من 4 ساعات: sickle cell، طوارئ. Peyronie plaque في الـ tunica albuginea."
+      - "Cryptorchidism: sperm يقل، testosterone غالباً طبيعي، ↑ germ cell tumor، orchiopexy قبل سنتين."
+      - "Torsion ⊝ Prehn ومفيش cremasteric، 6 ساعات وناحيتين. Epididymitis ⊕ Prehn."
+      - "Varicocele شمال (left renal vein)، يمين = IVC مسدود. Hydrocele و spermatocele بينوّروا."
+      - "Seminoma PLAP، yolk sac AFP، chorio hCG (thyroid). مفيش biopsy."
+      - "BPH transition zone و free PSA عالي. Cancer peripheral zone، free PSA واطي، osteoblastic و Batson."
+    practice: [repro.L04.134, repro.L04.135, repro.L04.136, repro.L04.137, repro.L04.138, repro.L04.139, repro.L04.140, repro.L04.141, repro.L04.142, repro.L04.143, repro.L04.144, repro.L04.145, repro.L04.146, repro.L04.147, repro.L04.148, repro.L04.149, repro.L04.150, repro.L04.151, repro.L04.152, repro.L04.153, repro.L04.154, repro.L04.155, repro.L04.156, repro.L04.157, repro.L04.158, repro.L04.159, repro.L04.160, repro.L04.161, repro.L04.162, repro.L04.163, repro.L04.164, repro.L04.165, repro.L04.166, repro.L04.167, repro.L04.168, repro.L04.169, repro.L04.170, repro.L04.171]
