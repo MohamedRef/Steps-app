@@ -5,6 +5,7 @@ book: { chapter: 7, pages: [321, 328] }
 topics:
   - { id: deep-venous-thrombosis, title: Deep venous thrombosis }
   - { id: hypertension-treatment, title: Hypertension treatment }
+  - { id: cardiovascular-agents-molecular-targets, title: Cardiovascular agents and molecular targets }
   - { id: nitrates, title: Nitrates }
   - { id: calcium-channel-blockers, title: Calcium channel blockers }
   - { id: hydralazine, title: Hydralazine }
@@ -87,7 +88,7 @@ items:
     columns: [Setting, Drugs, Notes]
     rows:
       - [Primary (essential), "Thiazides, ACE inhibitors, ARBs, Ca2+ channel blockers", ""]
-      - [With heart failure, "ACE inhibitors/ARBs, β-blockers (compensated HF), aldosterone antagonists, diuretics", "β-blockers cautiously in decompensated HF; contraindicated in cardiogenic shock"]
+      - [With heart failure, "ACE inhibitors/ARBs, β-blockers (compensated HF), aldosterone antagonists, diuretics", "Aldosterone antagonists: mortality benefit. Diuretics: improve symptoms and reduce hospitalization. β-blockers cautiously in decompensated HF; contraindicated in cardiogenic shock"]
       - [With diabetes, "ACE inhibitors/ARBs, Ca2+ channel blockers, thiazides, β-blockers", "ACEi/ARBs protect against diabetic nephropathy; β-blockers mask hypoglycemia"]
       - [With asthma, "ARBs, Ca2+ channel blockers, thiazides, cardioselective β-blockers", "Avoid nonselective β-blockers and ACE inhibitors (cough)"]
       - [With pregnancy, "Hydralazine, methyldopa, labetalol, nifedipine", "\"Hypertensive moms love nifedipine\""]
@@ -134,6 +135,72 @@ items:
       - "Propranolol isn't the preferred agent here."
       - "Chlorthalidone is a thiazide-like diuretic and also triggers gout."
     src: { page: 321, quote: "ACE inhibitors, channel blockers, ARBs (especially losartan). Ca2+ Avoid loop and thiazide diuretics as these can cause gout flares." }
+    status: unverified
+  # ---------- p322: cardiovascular agents and molecular targets (figure) ----------
+  - id: cvs.L05.106
+    kind: table
+    topic: cardiovascular-agents-molecular-targets
+    title: Vascular smooth muscle G-protein agonists (p322 figure)
+    columns: [G protein, Agonists, Effect on the smooth muscle cell]
+    rows:
+      - [Gq, "Epi/NE (α1), endothelin-1, angiotensin II, vasopressin", "IP3 → Ca2+ release from the sarcoplasmic reticulum → contraction"]
+      - [Gs, "Epi (β2), prostaglandins, prostacyclin, fenoldopam (D1), adenosine", "Adenylate cyclase → cAMP → relaxation"]
+      - [Gi, "Epi/NE (α2)", "Inhibits adenylate cyclase → ↓ cAMP"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 322, quote: "Epi/NE (α1 ) Endothelin-1 Angiotensin-II Vasopressin Gq AGONISTS Epi (β2 ) Prostaglandins Prostacyclin Fenoldopam (D1 ) Adenosine Gs AGONISTS" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.107
+    kind: card
+    topic: cardiovascular-agents-molecular-targets
+    front: Which enzymes do milrinone and sildenafil inhibit, and which second messenger does each one spare from breakdown?
+    back: "Milrinone: PDE-3, so cAMP is not broken down to AMP. Sildenafil: PDE-5, so cGMP is not broken down to GMP."
+    src: { page: 322, quote: "Milrinone PDE-3 INHIBITOR Sildenafil PDE-5 INHIBITOR" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.108
+    kind: cloze
+    topic: cardiovascular-agents-molecular-targets
+    text: "The natriuretic peptides {{c1::ANP and BNP}} act on the natriuretic peptide receptor, a {{c2::guanylate cyclase}}, so ↑ cGMP relaxes vascular smooth muscle."
+    src: { page: 322, quote: "Natriuretic peptide receptor Milrinone PDE-3 INHIBITOR Sildenafil PDE-5 INHIBITOR ANP BNP NATRIURETIC PEPTIDE AGONISTS" }
+    status: unverified
+  - id: cvs.L05.109
+    kind: enumerate
+    topic: cardiovascular-agents-molecular-targets
+    prompt: Enumerate the signals the p322 figure shows acting on the endothelial cell to make NO synthase release NO.
+    points:
+      - Acetylcholine
+      - α2-agonists
+      - Bradykinin
+      - Cytokines
+      - Histamine
+      - Serotonin
+      - Shear stress
+    pass: 5
+    src: { page: 322, quote: "L-arginine NO NO synthase Acetylcholine α2 -agonists Bradykinin Cytokines Histamine Serotonin Shear stress" }
+    status: unverified
+  - id: cvs.L05.110
+    kind: mcq
+    topic: cardiovascular-agents-molecular-targets
+    stem: >-
+      A 64-year-old man with ischemic cardiomyopathy is admitted with cool extremities, hypotension and
+      worsening dyspnea. His cardiac index is low despite diuresis, so an IV inotrope and vasodilator is
+      started that does not act on adrenergic receptors. Which of the following is the drug's most direct
+      molecular effect?
+    options:
+      - Inhibition of PDE-3, which raises cAMP
+      - Inhibition of PDE-5, which raises cGMP
+      - Stimulation of the natriuretic peptide receptor
+      - Blockade of L-type voltage-gated Ca2+ channels
+      - Stimulation of Gq-coupled receptors
+    answer: 0
+    why:
+      - "Right. Milrinone inhibits PDE-3, so cAMP is not broken down: more contractility in the heart and relaxation of vascular smooth muscle."
+      - "Sildenafil is the PDE-5 inhibitor; it is not an inotrope."
+      - "ANP and BNP act there; they relax vessels but do not raise contractility."
+      - "L-type channel blockade lowers contractility, the opposite of what this patient needs."
+      - "Gq agonists (eg, angiotensin II, vasopressin) contract vascular smooth muscle."
+    src: { page: 322, quote: "Milrinone PDE-3 INHIBITOR Sildenafil PDE-5 INHIBITOR" }
     status: unverified
   # ---------- p322: nitrates ----------
   - id: cvs.L05.010
@@ -325,14 +392,14 @@ items:
       - Cyanide toxicity
       - Hyperkalemia
       - Drug-induced lupus
-      - Thiocyanate-induced hypothyroidism alone
+      - Rebound hypertension
     answer: 1
     why:
       - "Methemoglobinemia causes chocolate-colored blood and cyanosis, classically with nitrates."
       - "Right. Nitroprusside releases cyanide; cyanide blocks oxygen use, causing lactic acidosis and highly oxygenated venous blood."
       - "Hyperkalemia isn't a nitroprusside effect named here."
       - "Lupus is a hydralazine effect."
-      - "That isn't the acute picture described."
+      - "Rebound hypertension follows abrupt withdrawal of drugs such as clonidine; it gives no lactic acidosis or bright red venous blood."
     src: { page: 323, quote: "Can cause cyanide toxicity (releases cyanide)." }
     status: unverified
   # ---------- p323: antianginal therapy ----------
@@ -367,11 +434,11 @@ items:
       heartbeat. His physician adds metoprolol. Which of the following best explains why the combination is
       better than either drug alone?
     options:
-      - Metoprolol increases preload, which nitroglycerin cannot do
-      - Metoprolol blocks the reflex tachycardia and ↑ contractility from nitrates, while nitrates offset the ↑ EDV from β-blockade
-      - Both drugs raise the ejection time
-      - Both drugs raise coronary perfusion pressure
-      - Nitroglycerin blocks the β1 receptor
+      - Metoprolol raises preload, which offsets nitrate venodilation
+      - Each drug blocks the other's unwanted compensatory effects
+      - Both drugs lengthen the ventricular ejection time
+      - Both drugs raise the coronary perfusion pressure
+      - Nitroglycerin directly blocks the cardiac β1 receptor
     answer: 1
     why:
       - "Raising preload would raise O2 demand."
@@ -379,7 +446,14 @@ items:
       - "Nitrates shorten ejection time."
       - "Both lower BP."
       - "Nitrates act through NO and cGMP."
-    src: { page: 322, quote: "Reflex tachycardia (treat with β-blockers)" }
+    src: { page: 323, quote: "COMPONENT NITRATES β-blOCKERS NITRATES + β-blOCKERS End-diastolic volume Blood pressure Contractility Heart rate Ejection time MVO2" }
+    status: unverified
+  - id: cvs.L05.111
+    kind: card
+    topic: antianginal-therapy
+    front: In antianginal therapy, which calcium channel blockers act like β-blockers?
+    back: The nondihydropyridines (verapamil, diltiazem) are similar to β-blockers in effect.
+    src: { page: 323, quote: "Nondihydropyridine calcium channel blockers (verapamil, diltiazem) are similar to β-blockers in effect." }
     status: unverified
   # ---------- p324: ranolazine ----------
   - id: cvs.L05.030
@@ -983,6 +1057,20 @@ items:
     src: { page: 327, quote: "cause unopposed α1-agonism if given alone for pheochromocytoma or for cocaine toxicity (unsubstantiated)" }
     status: unverified
     tags: [high-yield]
+  - id: cvs.L05.112
+    kind: enumerate
+    topic: class-ii-antiarrhythmics
+    prompt: Enumerate the 6 class II antiarrhythmics (β-blockers) First Aid lists.
+    points:
+      - Metoprolol
+      - Propranolol
+      - Esmolol (very short acting)
+      - Atenolol
+      - Timolol
+      - Carvedilol
+    pass: 5
+    src: { page: 327, quote: "Metoprolol, propranolol, esmolol, atenolol, timolol, carvedilol." }
+    status: unverified
   - id: cvs.L05.083
     kind: enumerate
     topic: class-ii-antiarrhythmics
@@ -1023,7 +1111,7 @@ items:
     topic: class-ii-antiarrhythmics
     stem: >-
       A 52-year-old man with type 1 diabetes is started on propranolol after a run of SVT. A month later his
-      glucose meter shows readings of 45 mg/dL that he did not notice, without sweating or palpitations. Which of
+      glucose meter shows readings of 45 mg/dL. He felt no tremor or palpitations, although he did notice sweating. Which of
       the following best explains this?
     options:
       - β-blockers mask the warning signs of hypoglycemia
@@ -1034,7 +1122,7 @@ items:
     answer: 0
     why:
       - "Right. β-blockers may mask the signs of hypoglycemia, such as tremor and palpitations."
-      - "That is not the β-blocker effect listed in First Aid."
+      - "β-blockade does not stimulate insulin release, so it does not explain the low glucose; the point is that the adrenergic warning signs are blunted. Sweating is sympathetic cholinergic, so it stays."
       - "Hepatotoxicity is not a β-blocker effect here."
       - "Unopposed α1-agonism is a concern in pheochromocytoma, not hypoglycemia."
       - "QT prolongation is a class IA and III effect."
