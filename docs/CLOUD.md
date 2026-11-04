@@ -4,7 +4,7 @@ Steps Cloud is a small Rust Cloudflare Worker (`crates/server`) on the **Workers
 
 It does three things:
 
-1. **Sign-in**: checks your Google ID token against an allowlist (your Gmail only) and issues Steps tokens: a 15-minute access token and a 60-day refresh token that rotates on every use.
+1. **Sign-in**: with Google, or with a username and password on a device that doesn't have your Gmail (§4.1). Google ID tokens are checked against an allowlist (your Gmail only). Either way Steps issues its own tokens: a 15-minute access token and a 60-day refresh token that rotates on every use.
 2. **Devices**: lists every signed-in device with its last sync, and signs one out remotely (its socket closes at once).
 3. **Live sync**: one Durable Object per account is the WebSocket hub (hibernation, so idle sockets cost nothing). It keeps the op log; your reviews and settings arrive on the other devices within seconds.
 
@@ -16,7 +16,9 @@ Cost: **$0**. Nothing here needs a card on file. There is no D1 database, no R2 
 |---|---|---|
 | `review_events` | append-only (a delete is a tombstone) | every review: item, grade, time, and the optional confidence (sure / unsure / guess) and error reason |
 | `item_status` | last writer wins (HLC) | your ✓ / ✎ / ✗ content checks |
-| `settings` | last writer wins (HLC) | retention, new items a day and other study settings |
+| `settings` | last writer wins (HLC) | retention, new items a day and other study settings; lesson marks; where each unfinished lesson stands (`lessonpos.<id>`: step, answers, notes, score) |
+
+Places (`Store::put_place`) sync too, so a new device opens a lesson at the step you left; a place too big for one op stays on its device. A row written again before it went up keeps only its newest op in the outbox, so a lesson's place costs one op per push however many answers. The open timed bank paper stays on its device on purpose: two devices restoring the same paper could count its answers twice.
 
 The list lives in `steps_protocol::sync::TABLES`. **A new synced table must be added there**, or the hub rejects its ops as `unknown_table`. A device only sends rows it wrote itself (its own `device_id`), and a clock more than 5 minutes ahead is rejected.
 
@@ -25,6 +27,7 @@ The list lives in `steps_protocol::sync::TABLES`. **A new synced table must be a
 | Piece | Where |
 |---|---|
 | Worker routes | `crates/server/src/wasm/mod.rs` |
+| Durable Object `Login`, one per username (password sign-in) | `crates/server/src/wasm/login.rs`, `src/login.rs` |
 | Durable Object `Account` (devices + op log in DO SQLite) | `crates/server/src/wasm/account.rs`, `src/account.rs`, `src/devices.rs` |
 | Sync hub logic (tested natively against SQLite) | `crates/server/src/hub.rs` |
 | Tokens, Google ID-token check | `crates/server/src/tokens.rs`, `src/google.rs` |
@@ -96,6 +99,10 @@ All JSON. Authenticated routes take `Authorization: Bearer <access_token>`. Erro
 |---|---|
 | `GET /v1/health` | `{ name, protocol }` |
 | `POST /v1/auth/google` | `{ id_token, device }` → `Session` |
+| `POST /v1/auth/password` | `{ username, password_key, device }` → `Session` (§4.1) |
+| `GET /v1/login` | `{ username }` (or `null`) for this account |
+| `POST /v1/login` | `{ username, password_key }`: set or change; → `{ username }` |
+| `DELETE /v1/login` | turn password sign-in off; → `{ username: null }` |
 | `POST /v1/auth/refresh` | `{ refresh_token }` → new `Session` (the old refresh token stops working) |
 | `POST /v1/auth/signout` | signs this device out |
 | `GET /v1/devices` | `{ devices: [DeviceSummary] }` |
@@ -103,6 +110,18 @@ All JSON. Authenticated routes take `Authorization: Bearer <access_token>`. Erro
 | `GET /v1/sync` | WebSocket; messages in `crates/protocol/src/sync.rs` |
 
 Sync in one paragraph: the device sends `hello { last_seq }`, gets the missing ops in pages and `caught_up`, then pushes its outbox as `push { batch, ops ≤ 50 }` and gets an `ack` listing what can leave the outbox. Other devices' ops arrive as `ops` the moment they're stored. Merging is idempotent, so reading the log again never doubles a review.
+
+### 4.1 Username and password
+
+For a borrowed laptop or a library computer, where your Gmail isn't. Set a username and password once from a signed-in device (Settings › المزامنة › «الدخول باسم مستخدم وباسورد»); then on any device, signed out, type them in the same screen. It is the same account as Google, so everything syncs down, including where each lesson stands. Tick «الجهاز ده مش بتاعي» on someone else's device: the session then lives only in that browser tab (`sessionStorage`) or, in the Mac and Android apps, in memory, and ends when it closes. Sign out there when you're done, or from your phone's «أجهزتك».
+
+How the password is kept safe:
+
+- **It never leaves the device.** The app stretches it with Argon2id (19 MiB, 2 passes, 1 lane; salt `steps-login-v1:<username>`; `steps_protocol::cloud::PASSWORD_PARAMS`) and sends only the 32-byte result. The Worker's 10 ms CPU budget can't run a slow hash; the device can (about a quarter of a second). Changing these parameters changes every key, so they are pinned by a test.
+- **The server keeps no key.** The username's `Login` object stores a random salt and `SHA-256(salt, key)`, compared in constant time. A copy of its storage still costs the full Argon2id work per guess.
+- **Wrong passwords lock the username**: 5 in a row lock it for a minute, each further one doubles the lock, up to an hour (about 24 guesses a day at most). A wrong password and an unknown username get the same answer (`wrong_password`); a lock answers `too_many_tries` with `retry_after_ms`. Setting a new password lifts a lock.
+- Usernames are 3–32 of `a-z 0-9 . _ -`, matched case-insensitively. Passwords are at least 10 characters.
+- The allowlist still applies: the username carries the Google account's email, checked on every sign-in and refresh.
 
 ## 5. Local development
 

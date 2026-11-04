@@ -1,5 +1,7 @@
-# Cloudflare Pages: never indexed; the wasm and its loader are revalidated
-# on every visit, so a deploy reaches the browser on the next reload.
+# Cloudflare: never indexed. The wasm, its loader, the content pack and the
+# service worker are revalidated whenever fetched; the service worker
+# (web/sw.js) keeps the newest build on the device, so opening the app
+# doesn't wait for the network.
 /*
   X-Robots-Tag: noindex, nofollow
   X-Content-Type-Options: nosniff
@@ -8,4 +10,7 @@
   Content-Type: application/wasm
   Cache-Control: no-cache
 /*.js
+  Cache-Control: no-cache
+/content.pack
+  Content-Type: application/octet-stream
   Cache-Control: no-cache

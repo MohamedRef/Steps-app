@@ -204,6 +204,14 @@ impl<'a, S: Sql> Devices<'a, S> {
         Ok(!rows.is_empty())
     }
 
+    /// The email a device signed in with, while it is signed in.
+    pub fn email(&self, device: &str) -> Result<Option<String>, SqlError> {
+        let rows = self
+            .db
+            .exec("SELECT email FROM devices WHERE device_id = ? AND revoked_ms IS NULL", &[device.into()])?;
+        Ok(rows.into_iter().next().and_then(|r| r.into_iter().next()).and_then(Value::into_string))
+    }
+
     /// Notes activity; `synced` when ops moved in either direction.
     pub fn touch(&self, device: &str, now_ms: u64, synced: bool) -> Result<(), SqlError> {
         let id: Value = device.into();
@@ -282,6 +290,8 @@ mod tests {
         assert_eq!(d.refresh(id("s24u"), "h1", "h3", NOW + 40), Err(RefreshError::Revoked));
         assert!(d.list(id("tab")).unwrap()[0].revoked);
         assert!(!d.revoke(id("ghost"), NOW).unwrap());
+        assert_eq!(d.email("s24u").unwrap(), None, "signed out");
+        assert_eq!(d.email("tab").unwrap().as_deref(), Some("me@example.com"));
 
         // Signing in again on the phone brings it back.
         d.register(&info("s24u", "Galaxy S24 Ultra", Platform::Android), "me@example.com", "h4", NOW + 50)

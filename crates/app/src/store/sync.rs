@@ -92,6 +92,17 @@ pub(super) fn enqueue(
     }
     let Some(row) = row_json(conn, table, key_col, key)? else { return Ok(()) };
     let Some(op) = op_for(table, key_col, key, row, device) else { return Ok(()) };
+    // A row written again before it went up (a lesson's place, saved on
+    // every answer) needs only its newest version: the older ops still
+    // waiting carry nothing the newest doesn't, so they go.
+    if table_kind(table) == Some(SyncKind::Lww) {
+        conn.execute(
+            "DELETE FROM sync_outbox
+             WHERE json_extract(op, '$.table') = ?1 AND json_extract(op, '$.row_id') = ?2
+               AND json_extract(op, '$.kind') = 'upsert' AND json_extract(op, '$.relay') IS NULL",
+            params![table, op.row_id],
+        )?;
+    }
     conn.execute(
         "INSERT OR IGNORE INTO sync_outbox (op_id, op) VALUES (?1, ?2)",
         params![op.id, serde_json::to_string(&op).unwrap_or_default()],
