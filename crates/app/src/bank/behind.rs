@@ -146,7 +146,6 @@ mod tests {
 
     #[test]
     fn a_missed_question_lists_its_cards_and_offers_a_session() {
-        crate::store::use_memory_store();
         let lib = Library::get();
         let lec = &lib.lectures["cvs.L01"];
         let mcq = lec.items.iter().find(|i| i.id == "cvs.L01.009").unwrap();
