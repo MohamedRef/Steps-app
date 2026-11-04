@@ -200,22 +200,27 @@ fn a_roomy_plan_is_on_track() {
 
 /// Every item seen once, yesterday.
 fn all_seen() {
-    use steps_core::review::StudyStore;
     let review = consume_context::<crate::store::Review>();
     let now = crate::store::now_ms();
+    // Straight into the store, then one reload: recording each of the
+    // 7000-odd items through the backend replays the whole log every time,
+    // which made this test take minutes once the book was written.
     for l in crate::content::Library::get().lectures.values() {
         for i in &l.items {
-            review.backend.borrow_mut().record(steps_core::review::ReviewEvent {
-                confidence: None,
-                reason: None,
-                item_id: i.id.clone(),
-                grade: steps_core::review::Grade::Good,
-                origin: steps_core::review::Origin::Study,
-                at_ms: now - 86_400_000,
-                took_ms: 5000,
-            });
+            crate::store::shared()
+                .append_review(steps_core::review::ReviewEvent {
+                    confidence: None,
+                    reason: None,
+                    item_id: i.id.clone(),
+                    grade: steps_core::review::Grade::Good,
+                    origin: steps_core::review::Origin::Study,
+                    at_ms: now - 86_400_000,
+                    took_ms: 5000,
+                })
+                .expect("a review is stored");
         }
     }
+    review.backend.borrow_mut().reload_and_notify();
     *crate::plan::SETTINGS.write() =
         PlanSettings { exam: Some(today().plus(3)), weekdays: [true; 7], ..PlanSettings::default() };
 }
