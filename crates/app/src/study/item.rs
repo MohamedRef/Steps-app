@@ -133,7 +133,6 @@ fn kind_label(body: &Body) -> &'static str {
         Body::Case { .. } => tx::KIND_CASE,
         Body::Table { .. } => tx::KIND_TABLE,
         Body::Order { .. } => tx::KIND_ORDER,
-        Body::Calc { .. } => tx::KIND_CALC,
     }
 }
 
@@ -155,7 +154,7 @@ pub fn short_text(item: &Item) -> String {
             out.push_str(rest);
             out
         }
-        Body::Mcq { stem, .. } | Body::Case { stem, .. } | Body::Calc { stem, .. } => stem.clone(),
+        Body::Mcq { stem, .. } | Body::Case { stem, .. } => stem.clone(),
         Body::Enumerate { prompt, .. } | Body::Essay { prompt, .. } | Body::Order { prompt, .. } => {
             prompt.clone()
         }
