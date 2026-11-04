@@ -1,0 +1,655 @@
+schema: steps.content/v1
+lecture: msk.L04
+title: Pharmacology
+book: { chapter: 11, pages: [495, 498] }
+topics:
+  - { id: arachidonic-acid-pathways, title: Arachidonic acid pathways }
+  - { id: acetaminophen, title: Acetaminophen }
+  - { id: aspirin, title: Aspirin }
+  - { id: celecoxib, title: Celecoxib }
+  - { id: nonsteroidal-anti-inflammatory-drugs, title: Nonsteroidal anti-inflammatory drugs }
+  - { id: leflunomide, title: Leflunomide }
+  - { id: bisphosphonates, title: Bisphosphonates }
+  - { id: recombinant-parathyroid-hormone, title: Recombinant parathyroid hormone }
+  - { id: gout-drugs, title: Gout drugs }
+  - { id: tnf-alpha-inhibitors, title: TNF-α inhibitors }
+  - { id: psoriasis-biologics, title: Psoriasis biologics }
+  - { id: imiquimod, title: Imiquimod }
+items:
+  # ---------- Arachidonic acid pathways (p495) ----------
+  - id: msk.L04.001
+    kind: order
+    topic: arachidonic-acid-pathways
+    prompt: Put the start of the eicosanoid pathway in order.
+    steps:
+      - Membrane phospholipids
+      - Phospholipase A2
+      - Arachidonic acid
+      - "Cyclooxygenase (COX-1, COX-2) or 5-lipoxygenase"
+    src: { page: 495, quote: "MEMBRANE PHOSPHOLIPIDS Phospholipase A2 COX-2 COX-1" }
+    status: unverified
+  - id: msk.L04.002
+    kind: card
+    topic: arachidonic-acid-pathways
+    front: Where do glucocorticoids act in the arachidonic acid pathway?
+    back: "They inhibit phospholipase A2 (upstream of both the COX and lipoxygenase arms), via NF-κB/IκB, so they ↓ prostaglandins, thromboxane and leukotrienes."
+    src: { page: 495, quote: "Glucocorticoids (corticosteroids) ANTI-INFLAMMATORY AGENTS MEMBRANE PHOSPHOLIPIDS Phospholipase A2" }
+    status: unverified
+  - id: msk.L04.003
+    kind: table
+    topic: arachidonic-acid-pathways
+    title: Eicosanoids and their effects
+    columns: [Eicosanoid, Effect]
+    rows:
+      - [LTB4, ↑ neutrophil chemotaxis]
+      - ["LTC4, LTD4, LTE4", ↑ bronchial tone]
+      - [PGI2, "↓ platelet aggregation, ↓ vascular tone"]
+      - [TXA2, "↑ platelet aggregation, ↑ vascular tone"]
+      - ["PGE2, PGF2α", ↑ uterine tone]
+    blanks: [[0, 1], [2, 1], [3, 1]]
+    src: { page: 495, quote: "is a vasodilator and platelet aggregation inhibitor." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.004
+    kind: cloze
+    topic: arachidonic-acid-pathways
+    text: "{{c1::LTB4}} is a neutrophil chemotactic agent (neutrophils arrive \"B4\" others)."
+    src: { page: 495, quote: "is a neutrophil chemotactic agent. PGI2" }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.005
+    kind: cloze
+    topic: arachidonic-acid-pathways
+    text: "{{c1::PGI2}} (prostacyclin) is a vasodilator and platelet aggregation inhibitor (Platelet-Gathering Inhibitor)."
+    src: { page: 495, quote: "is a vasodilator and platelet aggregation inhibitor. Neutrophils arrive “B4” others. Platelet-Gathering Inhibitor." }
+    status: unverified
+  - id: msk.L04.006
+    kind: card
+    topic: arachidonic-acid-pathways
+    front: Which drugs act on the leukotriene arm, and how?
+    back: "Zileuton blocks leukotriene synthesis (5-lipoxygenase). Montelukast and zafirlukast are leukotriene receptor antagonists."
+    src: { page: 495, quote: "Zileuton LEUKOTRIENE SYNTHESIS (5-lipoxygenase) Montelukast Zafirlukast LEUKOTRIENE RECEPTOR ANTAGONISTS" }
+    status: unverified
+  - id: msk.L04.007
+    kind: card
+    topic: arachidonic-acid-pathways
+    front: Name the prostanoid analog drugs shown in the pathway and what they mimic.
+    back: "Epoprostenol = PGI2. Alprostadil = PGE1. Dinoprostone = PGE2. Carboprost = PGF2α."
+    src: { page: 495, quote: "Dinoprostone Epoprostenol Carboprost Alprostadil" }
+    status: unverified
+  - id: msk.L04.008
+    kind: mcq
+    topic: arachidonic-acid-pathways
+    stem: >-
+      A 24-year-old woman with asthma still has nighttime symptoms despite an inhaled glucocorticoid.
+      Her physician adds an oral drug that directly inhibits 5-lipoxygenase. Which mediators will this
+      drug decrease most directly?
+    options:
+      - Leukotrienes
+      - Thromboxane A2
+      - Prostacyclin
+      - Prostaglandin E2
+      - Arachidonic acid
+    answer: 0
+    why:
+      - "Right. Zileuton inhibits 5-lipoxygenase, so leukotriene synthesis (LTB4, LTC4, LTD4, LTE4) falls."
+      - "TXA2 comes from the COX arm, not 5-lipoxygenase."
+      - "Prostacyclin (PGI2) comes from the COX arm."
+      - "PGE2 comes from the COX arm."
+      - "Arachidonic acid is made upstream by phospholipase A2; blocking 5-lipoxygenase does not lower it."
+    src: { page: 495, quote: "Zileuton LEUKOTRIENE SYNTHESIS (5-lipoxygenase)" }
+    status: unverified
+  # ---------- Acetaminophen (p495) ----------
+  - id: msk.L04.009
+    kind: card
+    topic: acetaminophen
+    front: How does acetaminophen work, and what can it not do?
+    back: "Reversibly inhibits cyclooxygenase, mostly in the CNS; inactivated peripherally. Antipyretic and analgesic, but not anti-inflammatory."
+    src: { page: 495, quote: "Reversibly inhibits cyclooxygenase, mostly in CNS. Inactivated peripherally." }
+    status: unverified
+  - id: msk.L04.010
+    kind: card
+    topic: acetaminophen
+    front: Why is acetaminophen used instead of aspirin in children with viral infections?
+    back: To avoid Reye syndrome.
+    src: { page: 495, quote: "Used instead of aspirin to avoid Reye syndrome in children with viral infection." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.011
+    kind: card
+    topic: acetaminophen
+    front: How does acetaminophen overdose damage the liver, and what is the antidote?
+    back: "Hepatic necrosis: the metabolite NAPQI depletes glutathione and forms toxic byproducts in the liver. N-acetylcysteine is the antidote; it regenerates glutathione."
+    src: { page: 495, quote: "Overdose produces hepatic necrosis; acetaminophen metabolite (NAPQI) depletes glutathione and forms toxic tissue byproducts in liver. N-acetylcysteine is antidote—regenerates glutathione." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.012
+    kind: mcq
+    topic: acetaminophen
+    stem: >-
+      A 19-year-old woman is brought to the emergency department 6 hours after taking a large number of
+      over-the-counter pain tablets. She has nausea but is otherwise well. Two days later her ALT is
+      above 5000 U/L. Which treatment works by the mechanism that best counters the toxic metabolite?
+    options:
+      - N-acetylcysteine, which regenerates glutathione
+      - Sodium bicarbonate, which alkalinizes the urine
+      - Fomepizole, which inhibits alcohol dehydrogenase
+      - Naloxone, which blocks opioid receptors
+      - Activated charcoal, which binds NAPQI in the liver
+    answer: 0
+    why:
+      - "Right. NAPQI depletes glutathione; N-acetylcysteine regenerates it."
+      - "Bicarbonate is the overdose treatment for aspirin, not acetaminophen."
+      - "Fomepizole is for methanol or ethylene glycol."
+      - "Naloxone reverses opioids."
+      - "Charcoal binds drug in the gut; it does not act on NAPQI in the liver."
+    src: { page: 495, quote: "N-acetylcysteine is antidote—regenerates glutathione." }
+    status: unverified
+  # ---------- Aspirin (p496) ----------
+  - id: msk.L04.013
+    kind: card
+    topic: aspirin
+    front: How does aspirin's mechanism differ from other NSAIDs, and what does it do to bleeding tests?
+    back: "It irreversibly inhibits COX-1 and COX-2 by covalent acetylation → ↓ TXA2 and prostaglandins. Bleeding time ↑, no effect on PT or PTT; the effect lasts until new platelets are made."
+    src: { page: 496, quote: "bleeding time. No effect on PT, PTT. Effect lasts until new platelets are produced." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.014
+    kind: table
+    topic: aspirin
+    title: Aspirin effect by dose
+    columns: [Dose, Effect]
+    rows:
+      - ["Low (<300 mg/day)", ↓ platelet aggregation]
+      - ["Intermediate (300-2400 mg/day)", Antipyretic and analgesic]
+      - ["High (2400-4000 mg/day)", Anti-inflammatory]
+    blanks: [[0, 1], [2, 1]]
+    src: { page: 496, quote: "(<300 mg/day): ↓ platelet aggregation. Intermediate dose (300-2400 mg/day)" }
+    status: unverified
+  - id: msk.L04.015
+    kind: enumerate
+    topic: aspirin
+    prompt: Enumerate the adverse effects of aspirin (6).
+    points:
+      - Gastric ulceration
+      - Tinnitus (CN VIII)
+      - "Allergic reactions (asthma, nasal polyps)"
+      - "Chronic use: acute kidney injury, interstitial nephritis"
+      - GI bleeding
+      - Reye syndrome in children with viral infection
+    pass: 5
+    hook: "الأسبرين بيوجع المعدة، بيصفّر في الودن، بيخنق اللي عنده ربو وزوائد في المناخير، بيتعب الكلية، بينزّف، وبيعمل Reye للعيال."
+    src: { page: 496, quote: "Gastric ulceration, tinnitus (CN VIII), allergic reactions (especially in patients with asthma or nasal polyps). Chronic use can lead to acute kidney injury, interstitial nephritis, GI bleeding." }
+    status: unverified
+  - id: msk.L04.016
+    kind: card
+    topic: aspirin
+    front: What acid-base pattern does aspirin toxicity cause, and how is overdose treated?
+    back: "Respiratory alkalosis early, then mixed metabolic acidosis-respiratory alkalosis. Treatment: NaHCO3."
+    src: { page: 496, quote: "Toxic doses cause respiratory alkalosis early, but transitions to mixed metabolic acidosis-respiratory alkalosis. Overdose treatment: NaHCO3" }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.017
+    kind: mcq
+    topic: aspirin
+    stem: >-
+      A 70-year-old man takes a daily low-dose tablet after a myocardial infarction. Before dental
+      surgery, his PT and PTT are normal, but his bleeding time is prolonged. Which is the mechanism of
+      his drug?
+    options:
+      - Irreversible acetylation of cyclooxygenase
+      - Reversible inhibition of cyclooxygenase
+      - Blockade of the platelet ADP (P2Y12) receptor
+      - Inhibition of vitamin K epoxide reductase
+      - Inhibition of phospholipase A2
+    answer: 0
+    why:
+      - "Right. Aspirin irreversibly acetylates COX, ↓ TXA2; bleeding time ↑ with normal PT and PTT until new platelets are made."
+      - "Reversible COX inhibition describes other NSAIDs, not aspirin."
+      - "That is clopidogrel-type drugs, not in this section."
+      - "That is warfarin, which raises the PT."
+      - "That is the site of glucocorticoids."
+    src: { page: 496, quote: "bleeding time. No effect on PT, PTT. Effect lasts until new platelets are produced." }
+    status: unverified
+  - id: msk.L04.018
+    kind: mcq
+    topic: aspirin
+    stem: >-
+      A 45-year-old woman is brought in after taking a whole bottle of an old pain reliever. She has
+      ringing in her ears, vomiting and rapid breathing. Arterial blood gas shows a low PCO2 and a low
+      bicarbonate. Which treatment is indicated for this overdose?
+    options:
+      - Sodium bicarbonate
+      - N-acetylcysteine
+      - Flumazenil
+      - Protamine sulfate
+      - Deferoxamine
+    answer: 0
+    why:
+      - "Right. Salicylate toxicity: tinnitus, respiratory alkalosis then mixed metabolic acidosis; treat with NaHCO3."
+      - "N-acetylcysteine is the acetaminophen antidote."
+      - "Flumazenil reverses benzodiazepines."
+      - "Protamine reverses heparin."
+      - "Deferoxamine treats iron overdose."
+    src: { page: 496, quote: "Toxic doses cause respiratory alkalosis early, but transitions to mixed metabolic acidosis-respiratory alkalosis. Overdose treatment: NaHCO3" }
+    status: unverified
+  # ---------- Celecoxib (p496) ----------
+  - id: msk.L04.019
+    kind: card
+    topic: celecoxib
+    front: Why does celecoxib spare the stomach and platelets?
+    back: "It selectively and reversibly inhibits COX-2 (inflammatory cells, vascular endothelium) and spares COX-1, which maintains gastric mucosa and is needed for platelet TXA2."
+    src: { page: 496, quote: "Thus, does not have the corrosive effects of other NSAIDs on the GI lining. Spares platelet function as" }
+    status: unverified
+  - id: msk.L04.020
+    kind: card
+    topic: celecoxib
+    front: What are celecoxib's uses and adverse effects?
+    back: "Uses: rheumatoid arthritis, osteoarthritis. Adverse effects: ↑ risk of thrombosis, sulfa allergy."
+    src: { page: 496, quote: "CLINICAL USE Rheumatoid arthritis, osteoarthritis. ADVERSE EFFECTS ↑ risk of thrombosis, sulfa allergy." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.021
+    kind: mcq
+    topic: celecoxib
+    stem: >-
+      A 66-year-old woman with osteoarthritis and a history of peptic ulcer is switched to an
+      anti-inflammatory drug that selectively inhibits one cyclooxygenase isoform. A year later she has
+      a myocardial infarction. Which mechanism best explains this adverse effect?
+    options:
+      - Prostacyclin is reduced while platelet thromboxane A2 is spared
+      - Thromboxane A2 synthesis is irreversibly blocked
+      - Leukotriene synthesis is increased
+      - Gastric prostaglandins are depleted
+      - Phospholipase A2 is activated
+    answer: 0
+    why:
+      - "Right. Celecoxib blocks COX-2 (endothelial PGI2) but spares COX-1, so platelet TXA2 continues: ↑ risk of thrombosis."
+      - "TXA2 depends on COX-1, which celecoxib spares."
+      - "This is not the book's mechanism."
+      - "COX-1 is spared, so gastric protection is kept; that is the drug's advantage."
+      - "Celecoxib does not act on phospholipase A2."
+    src: { page: 496, quote: "TXA2 production is dependent on COX-1. CLINICAL USE Rheumatoid arthritis, osteoarthritis. ADVERSE EFFECTS ↑ risk of thrombosis, sulfa allergy." }
+    status: unverified
+  # ---------- NSAIDs (p496) ----------
+  - id: msk.L04.022
+    kind: card
+    topic: nonsteroidal-anti-inflammatory-drugs
+    front: How do NSAIDs work, and which NSAID closes a PDA?
+    back: "They reversibly inhibit COX-1 and COX-2, blocking prostaglandin synthesis. Antipyretic, analgesic, anti-inflammatory. Indomethacin closes a PDA."
+    src: { page: 496, quote: "Antipyretic, analgesic, anti-inflammatory. Indomethacin is used to close a PDA." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.023
+    kind: enumerate
+    topic: nonsteroidal-anti-inflammatory-drugs
+    prompt: Enumerate the adverse effects of NSAIDs (4).
+    points:
+      - Interstitial nephritis
+      - Gastric ulcer
+      - Renal ischemia
+      - Aplastic anemia
+    pass: 4
+    hook: "الـ prostaglandins بتحمي المعدة وبتوسّع الـ afferent arteriole. شيلها: المعدة تتقرّح والكلية تجوع."
+    src: { page: 496, quote: "Interstitial nephritis, gastric ulcer (prostaglandins protect gastric mucosa), renal ischemia (prostaglandins vasodilate afferent arteriole), aplastic anemia." }
+    status: unverified
+  - id: msk.L04.024
+    kind: mcq
+    topic: nonsteroidal-anti-inflammatory-drugs
+    stem: >-
+      A 72-year-old woman with heart failure takes high doses of ibuprofen for knee pain. Her serum
+      creatinine rises from 1.0 to 2.1 mg/dL over 2 weeks, with no rash or eosinophiluria. Which
+      mechanism best explains the kidney injury?
+    options:
+      - Loss of prostaglandin-mediated afferent arteriole vasodilation
+      - Constriction of the efferent arteriole by angiotensin II
+      - Crystal precipitation in the tubules
+      - Immune complex deposition in the glomeruli
+      - Direct tubular toxicity from the drug's metabolite
+    answer: 0
+    why:
+      - "Right. Prostaglandins vasodilate the afferent arteriole; blocking them causes renal ischemia."
+      - "NSAIDs do not act on the efferent arteriole; ACE inhibitors relax it."
+      - "Crystals fit acyclovir or methotrexate, not NSAIDs."
+      - "This is not an NSAID effect in the book."
+      - "The book's mechanism is loss of afferent vasodilation."
+    src: { page: 496, quote: "renal ischemia (prostaglandins vasodilate afferent arteriole)" }
+    status: unverified
+  # ---------- Leflunomide (p496) ----------
+  - id: msk.L04.025
+    kind: card
+    topic: leflunomide
+    front: What is leflunomide's mechanism and use?
+    back: "Reversibly inhibits dihydroorotate dehydrogenase → no pyrimidine synthesis → T-cell proliferation suppressed. Used in rheumatoid arthritis and psoriatic arthritis."
+    src: { page: 496, quote: "Reversibly inhibits dihydroorotate dehydrogenase, preventing pyrimidine synthesis. Suppresses T-cell proliferation." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.026
+    kind: card
+    topic: leflunomide
+    front: What are leflunomide's adverse effects?
+    back: "Diarrhea, hypertension, hepatotoxicity, teratogenicity."
+    src: { page: 496, quote: "Diarrhea, hypertension, hepatotoxicity, teratogenicity." }
+    status: unverified
+  - id: msk.L04.027
+    kind: mcq
+    topic: leflunomide
+    stem: >-
+      A 40-year-old woman with rheumatoid arthritis starts a disease-modifying drug. A month later she
+      has diarrhea, her blood pressure has risen and her ALT is mildly raised. She is told to avoid
+      pregnancy. Which enzyme does her drug inhibit?
+    options:
+      - Dihydroorotate dehydrogenase
+      - Dihydrofolate reductase
+      - Xanthine oxidase
+      - Calcineurin
+      - Inosine monophosphate dehydrogenase
+    answer: 0
+    why:
+      - "Right. Leflunomide inhibits dihydroorotate dehydrogenase (pyrimidine synthesis); diarrhea, hypertension, hepatotoxicity and teratogenicity."
+      - "That is methotrexate."
+      - "That is allopurinol and febuxostat."
+      - "That is cyclosporine and tacrolimus."
+      - "That is mycophenolate."
+    src: { page: 496, quote: "Reversibly inhibits dihydroorotate dehydrogenase, preventing pyrimidine synthesis." }
+    status: unverified
+  # ---------- Bisphosphonates (p496) ----------
+  - id: msk.L04.028
+    kind: card
+    topic: bisphosphonates
+    front: How do bisphosphonates work? Name four.
+    back: "Pyrophosphate analogs that bind hydroxyapatite in bone, inhibiting osteoclasts and promoting their apoptosis. Alendronate, ibandronate, risedronate, zoledronate."
+    src: { page: 496, quote: "Pyrophosphate analogs; bind hydroxyapatite in bone, inhibiting osteoclast activity and promoting osteoclast apoptosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.029
+    kind: enumerate
+    topic: bisphosphonates
+    prompt: Enumerate the clinical uses of bisphosphonates (5).
+    points:
+      - Osteoporosis
+      - Hypercalcemia
+      - Paget disease of bone
+      - Metastatic bone disease
+      - Osteogenesis imperfecta
+    pass: 4
+    hook: "أي حاجة الـ osteoclast فيها شغّال زيادة أو العضم ضعيف."
+    src: { page: 496, quote: "Osteoporosis, hypercalcemia, Paget disease of bone, metastatic bone disease, osteogenesis imperfecta." }
+    status: unverified
+  - id: msk.L04.030
+    kind: card
+    topic: bisphosphonates
+    front: What are the adverse effects of bisphosphonates?
+    back: "Gastroesophageal irritation; rarely osteonecrosis of the jaw and femoral stress fractures. Consider a \"drug holiday\" if low risk."
+    src: { page: 496, quote: "Gastroesophageal irritation and, in rare instances, osteonecrosis of the jaw and femoral stress fractures." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.031
+    kind: mcq
+    topic: bisphosphonates
+    stem: >-
+      A 68-year-old woman has taken a weekly oral drug for osteoporosis for 7 years. After a tooth
+      extraction, the socket fails to heal and exposed bone is seen in her mandible. Which is the
+      mechanism of her osteoporosis drug?
+    options:
+      - Binds hydroxyapatite and inhibits osteoclasts
+      - Pulsatile stimulation of osteoblasts via the PTH receptor
+      - Monoclonal antibody against RANKL
+      - Selective estrogen receptor modulation in bone
+      - Increases intestinal calcium absorption
+    answer: 0
+    why:
+      - "Right. Bisphosphonates bind hydroxyapatite and inhibit osteoclasts; rare osteonecrosis of the jaw."
+      - "That is teriparatide, which is not linked to jaw necrosis in the book."
+      - "Denosumab is not in this section of the book."
+      - "SERMs are not in this section."
+      - "That is vitamin D, not the drug described."
+    src: { page: 496, quote: "Gastroesophageal irritation and, in rare instances, osteonecrosis of the jaw and femoral stress fractures." }
+    status: unverified
+  # ---------- Recombinant PTH (p497) ----------
+  - id: msk.L04.032
+    kind: card
+    topic: recombinant-parathyroid-hormone
+    front: How do teriparatide and abaloparatide work, and how do they differ from bisphosphonates?
+    back: "Recombinant PTH analogs that ↑ osteoblastic activity when given in a pulsatile way. Used for osteoporosis; they cause ↑ bone growth compared with antiresorptive therapies."
+    src: { page: 497, quote: "Recombinant PTH analog. ↑ osteoblastic activity when administered in pulsatile fashion." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.033
+    kind: card
+    topic: recombinant-parathyroid-hormone
+    front: What are the adverse effects of recombinant PTH?
+    back: "Dizziness, tachycardia, transient hypercalcemia, muscle spasms."
+    src: { page: 497, quote: "Dizziness, tachycardia, transient hypercalcemia, muscle spasms." }
+    status: unverified
+  - id: msk.L04.034
+    kind: mcq
+    topic: recombinant-parathyroid-hormone
+    stem: >-
+      A 72-year-old woman with severe osteoporosis starts a daily subcutaneous injection that builds
+      new bone rather than only slowing resorption. A week later her serum calcium is slightly raised.
+      Why does this drug build bone?
+    options:
+      - It is a PTH analog given in a pulsatile way, which ↑ osteoblast activity
+      - It is a pyrophosphate analog that kills osteoclasts
+      - It blocks calcium excretion in the distal tubule
+      - It is a continuous PTH infusion that activates osteoclasts
+      - It inhibits xanthine oxidase in bone
+    answer: 0
+    why:
+      - "Right. Teriparatide: intermittent PTH is anabolic on osteoblasts; transient hypercalcemia can occur."
+      - "That is a bisphosphonate, which is antiresorptive."
+      - "That is a thiazide effect."
+      - "Continuous high PTH is catabolic; the pulsatile pattern is what builds bone."
+      - "Xanthine oxidase is the target of gout drugs."
+    src: { page: 497, quote: "Recombinant PTH analog. ↑ osteoblastic activity when administered in pulsatile fashion." }
+    status: unverified
+  # ---------- Gout drugs (p497) ----------
+  - id: msk.L04.035
+    kind: table
+    topic: gout-drugs
+    title: Chronic (preventive) gout drugs
+    columns: [Drug, Mechanism]
+    rows:
+      - [Allopurinol, Competitive inhibitor of xanthine oxidase]
+      - [Febuxostat, Inhibits xanthine oxidase]
+      - [Pegloticase, "Recombinant uricase: uric acid → allantoin"]
+      - [Probenecid, Inhibits uric acid reabsorption in the PCT]
+    blanks: [[0, 1], [2, 1], [3, 1]]
+    src: { page: 497, quote: "Pegloticase Recombinant uricase catalyzing uric acid to allantoin (a more water-soluble product)." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.036
+    kind: card
+    topic: gout-drugs
+    front: What drug interaction does allopurinol have, and what else is it used for?
+    back: "It ↑ concentrations of azathioprine and 6-MP (both metabolized by xanthine oxidase). Also used in lymphoma and leukemia to prevent tumor lysis–associated urate nephropathy."
+    src: { page: 497, quote: "Also used in lymphoma and leukemia to prevent tumor lysis–associated urate nephropathy." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.037
+    kind: card
+    topic: gout-drugs
+    front: What are probenecid's other effects?
+    back: "It also inhibits secretion of penicillin. It can precipitate uric acid calculi or lead to sulfa allergy."
+    src: { page: 497, quote: "Probenecid Inhibits reabsorption of uric acid in proximal convoluted tubule (also inhibits secretion of penicillin). Can precipitate uric acid calculi or lead to sulfa allergy." }
+    status: unverified
+  - id: msk.L04.038
+    kind: enumerate
+    topic: gout-drugs
+    prompt: Enumerate the acute gout drugs (3).
+    points:
+      - NSAIDs
+      - Glucocorticoids
+      - Colchicine
+    pass: 3
+    hook: "الهجمة الحادة: طفّي الالتهاب (NSAID أو steroid) أو امنع الـ neutrophils (colchicine). وما تبدأش allopurinol وقت الهجمة."
+    src: { page: 497, quote: "Acute gout drugs NSAIDs Any NSAID." }
+    status: unverified
+  - id: msk.L04.039
+    kind: card
+    topic: gout-drugs
+    front: How does colchicine work, and what are its adverse effects?
+    back: "Binds and stabilizes tubulin → inhibits microtubule polymerization → impaired neutrophil chemotaxis and degranulation. Acute and prophylactic use. GI and neuromyopathic adverse effects; can also cause myelosuppression and nephrotoxicity."
+    src: { page: 497, quote: "Colchicine Binds and stabilizes tubulin to inhibit microtubule polymerization, impairing neutrophil chemotaxis and degranulation." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.040
+    kind: cloze
+    topic: gout-drugs
+    text: "In acute gout, use {{c1::salicylates}} with caution, because they may decrease uric acid excretion, particularly at low doses."
+    src: { page: 497, quote: "Use salicylates with caution (may decrease uric acid excretion, particularly at low doses)." }
+    status: unverified
+  - id: msk.L04.041
+    kind: mcq
+    topic: gout-drugs
+    stem: >-
+      A 58-year-old man with recurrent gout attacks is started on daily allopurinol. He also takes
+      azathioprine after a kidney transplant. Two weeks later he has severe leukopenia. Which
+      mechanism best explains this?
+    options:
+      - Xanthine oxidase inhibition raises azathioprine and 6-MP levels
+      - Allopurinol directly suppresses the bone marrow
+      - Allopurinol induces hepatic CYP450 enzymes
+      - Uric acid crystals infiltrate the bone marrow
+      - Allopurinol inhibits dihydroorotate dehydrogenase
+    answer: 0
+    why:
+      - "Right. Azathioprine and 6-MP are broken down by xanthine oxidase; allopurinol raises their levels → myelosuppression."
+      - "The book's mechanism is the drug interaction."
+      - "Allopurinol is not a CYP450 inducer in the book."
+      - "This does not happen."
+      - "That is leflunomide."
+    src: { page: 497, quote: "↑ concentrations of xanthine oxidase active metabolites, azathioprine, and 6-MP." }
+    status: unverified
+  - id: msk.L04.042
+    kind: mcq
+    topic: gout-drugs
+    stem: >-
+      A 50-year-old man wakes with a hot, swollen, exquisitely painful big toe. Joint fluid shows
+      negatively birefringent needle-shaped crystals. He is given a drug that binds tubulin. Which
+      effect underlies its benefit?
+    options:
+      - Impaired neutrophil chemotaxis and degranulation
+      - Reduced urate production
+      - Increased renal uric acid excretion
+      - Conversion of uric acid to allantoin
+      - Inhibition of prostaglandin synthesis
+    answer: 0
+    why:
+      - "Right. Colchicine stabilizes tubulin, blocks microtubules, and impairs neutrophil chemotaxis and degranulation."
+      - "That is allopurinol or febuxostat."
+      - "That is probenecid."
+      - "That is pegloticase."
+      - "That is NSAIDs."
+    src: { page: 497, quote: "Colchicine Binds and stabilizes tubulin to inhibit microtubule polymerization, impairing neutrophil chemotaxis and degranulation." }
+    status: unverified
+  # ---------- TNF-α inhibitors (p498) ----------
+  - id: msk.L04.043
+    kind: table
+    topic: tnf-alpha-inhibitors
+    title: TNF-α inhibitors
+    columns: [Drug, Mechanism, Clinical use]
+    rows:
+      - [Etanercept, "Fusion protein: decoy receptor for TNF-α + IgG1 Fc", "RA, psoriasis, ankylosing spondylitis"]
+      - ["Adalimumab, infliximab", Anti-TNF-α monoclonal antibody, "IBD, RA, ankylosing spondylitis, psoriasis"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 498, quote: "Etanercept Fusion protein (decoy receptor for TNF-α + IgG1 Fc), produced by recombinant DNA." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.044
+    kind: card
+    topic: tnf-alpha-inhibitors
+    front: What are the adverse effects of TNF-α inhibitors, and why?
+    back: "Predisposition to infection, including reactivation of latent TB, since TNF is important in granuloma formation and stabilization. They can also cause drug-induced lupus."
+    src: { page: 498, quote: "Predisposition to infection, including reactivation of latent TB, since TNF is important in granuloma formation and stabilization. Can also lead to drug-induced lupus." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.045
+    kind: mcq
+    topic: tnf-alpha-inhibitors
+    stem: >-
+      A 34-year-old man with ankylosing spondylitis has a much better back after 6 months of a
+      fortnightly injected monoclonal antibody. He now has fever, night sweats, weight loss and a
+      cavitary upper-lobe lesion. Which cytokine did his drug block?
+    options:
+      - TNF-α
+      - IL-17
+      - IL-12/IL-23
+      - IL-2
+      - IL-6
+    answer: 0
+    why:
+      - "Right. Anti-TNF-α antibodies (adalimumab, infliximab) reactivate latent TB, since TNF holds granulomas together."
+      - "IL-17 blockers treat psoriasis in this section; TB reactivation is the book's TNF-α warning."
+      - "Ustekinumab targets IL-12/IL-23 for psoriasis."
+      - "Not one of this section's drugs."
+      - "Not one of this section's drugs."
+    src: { page: 498, quote: "including reactivation of latent TB, since TNF is important in granuloma formation and stabilization." }
+    status: unverified
+  # ---------- Psoriasis biologics (p498) ----------
+  - id: msk.L04.046
+    kind: table
+    topic: psoriasis-biologics
+    title: Psoriasis biologics and their targets
+    columns: [Drug, Target]
+    rows:
+      - [Ustekinumab, IL-12/IL-23]
+      - ["Ixekizumab, secukinumab", IL-17]
+      - [Brodalumab, IL-17 receptor]
+      - ["Guselkumab, risankizumab, tildrakizumab", IL-23]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 498, quote: "Psoriasis biologics DRUG TARGET Ustekinumab IL-12/IL-23 Ixekizumab Secukinumab IL-17 Brodalumab IL-17 receptor" }
+    status: unverified
+  - id: msk.L04.047
+    kind: mcq
+    topic: psoriasis-biologics
+    stem: >-
+      A 38-year-old woman with extensive plaque psoriasis is started on a monoclonal antibody that binds
+      the receptor for a cytokine rather than the cytokine itself. Which drug is it?
+    options:
+      - Brodalumab
+      - Secukinumab
+      - Ustekinumab
+      - Guselkumab
+      - Etanercept
+    answer: 0
+    why:
+      - "Right. Brodalumab targets the IL-17 receptor."
+      - "Secukinumab targets IL-17 itself."
+      - "Ustekinumab targets IL-12/IL-23."
+      - "Guselkumab targets IL-23."
+      - "Etanercept is a TNF-α decoy receptor, not an antibody against a receptor."
+    src: { page: 498, quote: "Brodalumab IL-17 receptor" }
+    status: unverified
+  # ---------- Imiquimod (p498) ----------
+  - id: msk.L04.048
+    kind: card
+    topic: imiquimod
+    front: How does imiquimod work, and what is it used for?
+    back: "Binds TLR-7 on macrophages, monocytes and dendritic cells to activate them → a topical antitumor immune response modifier. Used for anogenital warts and actinic keratosis; causes itching, burning pain and rashes at the site."
+    src: { page: 498, quote: "Binds toll-like receptor 7 (TLR-7) of macrophages, monocytes, and dendritic cells to activate them" }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.049
+    kind: mcq
+    topic: imiquimod
+    stem: >-
+      A 65-year-old man has several rough, red, scaly papules on his sun-exposed scalp. He is given a
+      cream that activates his own macrophages and dendritic cells against the lesions. Which receptor
+      does the cream bind?
+    options:
+      - Toll-like receptor 7
+      - Toll-like receptor 4
+      - IL-17 receptor
+      - TNF-α receptor
+      - Retinoic acid receptor
+    answer: 0
+    why:
+      - "Right. Imiquimod binds TLR-7 and is used for actinic keratosis and anogenital warts."
+      - "TLR-4 binds LPS; not imiquimod's target."
+      - "That is brodalumab."
+      - "That is the target of TNF-α inhibitors' ligand."
+      - "Retinoids are not this drug."
+    src: { page: 498, quote: "Binds toll-like receptor 7 (TLR-7) of macrophages, monocytes, and dendritic cells to activate them" }
+    status: unverified

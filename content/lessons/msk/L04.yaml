@@ -1,0 +1,231 @@
+schema: steps.lesson/v1
+lecture: msk.L04
+lessons:
+  - id: msk.L04.lesson1
+    title: "شجرة الـ arachidonic acid ومسكنات الوجع"
+    hook: "ارسم الشجرة مرة، وكل مسكن هتعرف هو بيقص أنهي فرع وإيه اللي بيحصل بعدها"
+    minutes: 10
+    pages: [495, 496]
+    topics: [arachidonic-acid-pathways, acetaminophen, aspirin, celecoxib, nonsteroidal-anti-inflammatory-drugs, leflunomide, bisphosphonates]
+    goals:
+      - "ترسم الـ COX والـ lipoxygenase وتعرف كل eicosanoid بيعمل إيه"
+      - "تفرّق الأسبرين عن باقي الـ NSAIDs والـ celecoxib والـ acetaminophen"
+      - "تعرف السميات وترياقها"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "الشجرة"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="msk4a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-good" x="110" y="10" width="140" height="30" rx="6"/>
+            <text x="120" y="30" class="t-sm t-b">Membrane phospholipids</text>
+            <text x="255" y="55" class="t-sm t-bad">✕ glucocorticoids</text>
+            <line class="fg-arrow-acc" x1="180" y1="40" x2="180" y2="70" marker-end="url(#msk4a)"/>
+            <text x="190" y="62" class="t-sm t-mut">PLA2</text>
+            <rect class="fg-good" x="120" y="72" width="120" height="28" rx="6"/>
+            <text x="130" y="91" class="t-sm t-b">Arachidonic acid</text>
+            <line class="fg-arrow-acc" x1="150" y1="100" x2="80" y2="135" marker-end="url(#msk4a)"/>
+            <line class="fg-arrow-acc" x1="210" y1="100" x2="280" y2="135" marker-end="url(#msk4a)"/>
+            <text x="20" y="125" class="t-sm t-bad">✕ NSAIDs</text>
+            <text x="270" y="125" class="t-sm t-bad">✕ zileuton</text>
+            <rect class="fg-bad" x="10" y="138" width="150" height="50" rx="6"/>
+            <text x="20" y="158" class="t-sm t-b">COX: PGI2, TXA2</text>
+            <text x="20" y="178" class="t-sm t-b">PGE2, PGF2α</text>
+            <rect class="fg-bad" x="200" y="138" width="150" height="50" rx="6"/>
+            <text x="210" y="158" class="t-sm t-b">5-LOX: LTB4</text>
+            <text x="210" y="178" class="t-sm t-b">LTC4, LTD4, LTE4</text>
+          </svg>
+        caption: "الـ glucocorticoids بتقفل فوق خالص (phospholipase A2)، فبتوقف الفرعين. الـ NSAIDs بتقفل الـ COX. والـ zileuton بيقفل الـ 5-lipoxygenase، والـ montelukast بيقفل مستقبل الـ leukotriene."
+        alt: "Membrane phospholipids are cut by phospholipase A2 into arachidonic acid, which splits into the COX arm (prostaglandins, thromboxane, prostacyclin) and the 5-lipoxygenase arm (leukotrienes), with the drug blocking points marked."
+        page: 495
+        quote: "Glucocorticoids (corticosteroids) ANTI-INFLAMMATORY AGENTS MEMBRANE PHOSPHOLIPIDS Phospholipase A2"
+      - kind: explain
+        title: "كل eicosanoid وشغلانته"
+        text: |-
+          - **LTB4**: بينادي الـ neutrophils (==neutrophils arrive "B4" others==).
+          - **LTC4, LTD4, LTE4**: بيضيّقوا الشعب.
+          - **PGI2**: بيوسّع ويمنع تجمع الصفايح (**P**latelet-**G**athering **I**nhibitor).
+          - **TXA2**: عكسه بالظبط: بيجمّع الصفايح ويضيّق.
+          - **PGE2 و PGF2α**: بيقلّصوا الرحم.
+        page: 495
+        quote: "is a neutrophil chemotactic agent. PGI2 is a vasodilator and platelet aggregation inhibitor."
+      - kind: check
+        question: "Which eicosanoid both increases platelet aggregation and increases vascular tone?"
+        options:
+          - "TXA2"
+          - "PGI2"
+          - "LTB4"
+          - "PGE2"
+        answer: 0
+        why:
+          - "صح: الـ TXA2 بيجمّع الصفايح ويضيّق الأوعية."
+          - "الـ PGI2 العكس: بيوسّع ويمنع التجمع."
+          - "الـ LTB4 بينادي الـ neutrophils."
+          - "الـ PGE2 بيقلّص الرحم."
+        page: 495
+        quote: "↑ platelet aggregation ↑ vascular tone"
+      - kind: explain
+        title: "Acetaminophen: يسكّن ومش بيطفّي الالتهاب"
+        text: |-
+          بيقفل الـ COX **في الـ CNS بس**، وبيتكسر برّه. علشان كده بيخفّض الحرارة ويسكّن، بس ==مش anti-inflammatory==. وبيتدّى للأطفال بدل الأسبرين علشان الـ Reye syndrome.
+
+          الجرعة الزيادة: الـ ==NAPQI== بيخلّص الـ glutathione ← الكبد يموت. والترياق **N-acetylcysteine** بيرجّع الـ glutathione.
+        page: 495
+        quote: "Overdose produces hepatic necrosis; acetaminophen metabolite (NAPQI) depletes glutathione and forms toxic tissue byproducts in liver. N-acetylcysteine is antidote—regenerates glutathione."
+      - kind: explain
+        title: "الأسبرين: القفل اللي ما بيتفتحش"
+        text: |-
+          الأسبرين بيعمل ==acetylation== للـ COX-1 والـ COX-2 **للأبد**. الصفيحة ملهاش نواة فمش هتعمل COX جديد، فالأثر بيفضل لحد ما صفايح جديدة تتعمل.
+
+          النتيجة: الـ bleeding time ↑، والـ PT والـ PTT **طبيعيين**.
+
+          والجرعة بتغيّر الشغل: قليلة (<300 mg) ضد الصفايح، متوسطة تسكين وحرارة، عالية ضد الالتهاب.
+        page: 496
+        quote: "bleeding time. No effect on PT, PTT. Effect lasts until new platelets are produced."
+      - kind: reveal
+        prompt: "واحد بلع علبة أسبرين: ودنه بتصفّر وبيتنفس بسرعة. الـ blood gas هيبقى إيه، وتعالجه بإيه؟"
+        answer: "في الأول ==respiratory alkalosis==، وبعدين mixed metabolic acidosis مع respiratory alkalosis. العلاج **NaHCO3**."
+        page: 496
+        quote: "Toxic doses cause respiratory alkalosis early, but transitions to mixed metabolic acidosis-respiratory alkalosis. Overdose treatment: NaHCO3"
+      - kind: table
+        title: "مين بيقفل إيه"
+        columns: ["Drug", "COX", "Reversible?", "Key adverse effect"]
+        rows:
+          - ["Aspirin", "COX-1 and COX-2", "Irreversible", "Reye syndrome, tinnitus, gastric ulcer"]
+          - ["Other NSAIDs", "COX-1 and COX-2", "Reversible", "Interstitial nephritis, renal ischemia"]
+          - ["Celecoxib", "COX-2 only", "Reversible", "Thrombosis, sulfa allergy"]
+          - ["Acetaminophen", "COX, mostly in CNS", "Reversible", "Hepatic necrosis"]
+        hide: [[0, 2], [2, 1], [2, 3], [3, 3]]
+        page: 496
+        quote: "Reversibly and selectively inhibits the cyclooxygenase (COX) isoform 2 (“Selecoxib”), which is found in inflammatory cells and vascular endothelium and mediates inflammation and pain"
+      - kind: aside
+        tone: trap
+        text: "الـ celecoxib بيحمي المعدة والصفايح لأنه سايب الـ COX-1. بس ده نفسه سبب خطره: بيقلل الـ PGI2 من الـ endothelium والـ TXA2 لسه شغال ← ==↑ risk of thrombosis==."
+        page: 496
+        quote: "ADVERSE EFFECTS ↑ risk of thrombosis, sulfa allergy."
+      - kind: explain
+        title: "الـ NSAIDs والكلية"
+        text: |-
+          الـ prostaglandins بتحمي الـ gastric mucosa وبتوسّع الـ ==afferent arteriole==. اقفلها: gastric ulcer، و renal ischemia، و interstitial nephritis، ونادراً aplastic anemia.
+
+          والـ **indomethacin** بيقفل الـ PDA.
+        page: 496
+        quote: "Interstitial nephritis, gastric ulcer (prostaglandins protect gastric mucosa), renal ischemia (prostaglandins vasodilate afferent arteriole), aplastic anemia."
+      - kind: match
+        prompt: "وصّل الدوا بطريقة شغله"
+        pairs:
+          - ["Leflunomide", "Dihydroorotate dehydrogenase (pyrimidines)"]
+          - ["Bisphosphonates", "Bind hydroxyapatite, inhibit osteoclasts"]
+          - ["N-acetylcysteine", "Regenerates glutathione"]
+          - ["Zileuton", "5-lipoxygenase"]
+        why: "الـ leflunomide بيوقّف الـ T cells من غير pyrimidines (RA و psoriatic arthritis). والـ bisphosphonates قاعدة على العضم وبتقتل الـ osteoclast، ونادراً osteonecrosis of the jaw."
+        page: 496
+        quote: "Pyrophosphate analogs; bind hydroxyapatite in bone, inhibiting osteoclast activity and promoting osteoclast apoptosis."
+      - kind: try
+        items: [msk.L04.008, msk.L04.012, msk.L04.017, msk.L04.021, msk.L04.024]
+    recap:
+      - "الـ glucocorticoids فوق (PLA2)، الـ NSAIDs على الـ COX، الـ zileuton على الـ 5-LOX."
+      - "LTB4 = neutrophils. PGI2 ضد الصفايح، TXA2 معاها."
+      - "أسبرين: irreversible، bleeding time ↑ و PT/PTT طبيعي، الجرعة الزيادة NaHCO3."
+      - "Acetaminophen: NAPQI و N-acetylcysteine. Celecoxib: thrombosis."
+    practice: [msk.L04.001, msk.L04.002, msk.L04.003, msk.L04.004, msk.L04.005, msk.L04.006, msk.L04.007, msk.L04.008, msk.L04.009, msk.L04.010, msk.L04.011, msk.L04.012, msk.L04.013, msk.L04.014, msk.L04.015, msk.L04.016, msk.L04.017, msk.L04.018, msk.L04.019, msk.L04.020, msk.L04.021, msk.L04.022, msk.L04.023, msk.L04.024, msk.L04.025, msk.L04.026, msk.L04.027, msk.L04.028, msk.L04.029, msk.L04.030, msk.L04.031]
+  - id: msk.L04.lesson2
+    title: "النقرس والـ biologics"
+    hook: "الهجمة الحادة ليها أدوية، والوقاية ليها أدوية تانية خالص. ومعاهم الأدوية اللي بتمسك الـ cytokines"
+    minutes: 8
+    pages: [497, 498]
+    topics: [recombinant-parathyroid-hormone, gout-drugs, tnf-alpha-inhibitors, psoriasis-biologics, imiquimod]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Teriparatide: يبني مش بس يوقّف الهدم"
+        text: |-
+          الـ teriparatide والـ abaloparatide = ==PTH analogs==. لما تتدّى **متقطعة** بتشغّل الـ osteoblasts، فبتبني عضم أكتر من الـ antiresorptive (زي الـ bisphosphonates).
+
+          آثار جانبية: دوخة، tachycardia، و transient hypercalcemia، وتقلصات.
+        page: 497
+        quote: "Recombinant PTH analog. ↑ osteoblastic activity when administered in pulsatile fashion."
+      - kind: figure
+        title: "طريق الـ urate وفين كل دوا"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="msk4b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="10" y="30" class="t-sm t-b">Hypoxanthine</text>
+            <line class="fg-arrow-acc" x1="95" y1="25" x2="135" y2="25" marker-end="url(#msk4b)"/>
+            <text x="140" y="30" class="t-sm t-b">Xanthine</text>
+            <line class="fg-arrow-acc" x1="200" y1="25" x2="240" y2="25" marker-end="url(#msk4b)"/>
+            <text x="245" y="30" class="t-sm t-b">Uric acid</text>
+            <text x="60" y="55" class="t-sm t-bad">✕ allopurinol, febuxostat (xanthine oxidase)</text>
+            <line class="fg-arrow-acc" x1="275" y1="40" x2="275" y2="95" marker-end="url(#msk4b)"/>
+            <text x="285" y="75" class="t-sm t-acc">pegloticase</text>
+            <text x="250" y="112" class="t-sm t-b">Allantoin</text>
+            <rect class="fg-good" x="10" y="125" width="200" height="35" rx="6"/>
+            <text x="20" y="147" class="t-sm t-b">PCT: probenecid ✕ reabsorption</text>
+          </svg>
+        caption: "الـ allopurinol والـ febuxostat بيقفلوا الـ xanthine oxidase فيقل الـ urate. الـ pegloticase بيحوّل الـ uric acid لـ allantoin بيدوب أسهل. والـ probenecid بيمنع الكلية تمتص الـ uric acid تاني."
+        alt: "Hypoxanthine to xanthine to uric acid via xanthine oxidase, blocked by allopurinol and febuxostat; pegloticase converts uric acid to allantoin; probenecid blocks reabsorption in the proximal tubule."
+        page: 497
+        quote: "Pegloticase Recombinant uricase catalyzing uric acid to allantoin (a more water-soluble product)."
+      - kind: aside
+        tone: trap
+        text: "الـ ==allopurinol== بيرفع مستوى الـ azathioprine والـ 6-MP، لأنهم بيتكسروا بالـ xanthine oxidase. مريض زرع على azathioprine وبدأ allopurinol؟ استنى الـ myelosuppression."
+        page: 497
+        quote: "↑ concentrations of xanthine oxidase active metabolites, azathioprine, and 6-MP."
+      - kind: sort
+        prompt: "حط كل دوا في مكانه"
+        bins: ["Acute flare", "Chronic prevention"]
+        cards:
+          - { text: "Colchicine", bin: 0 }
+          - { text: "Any NSAID", bin: 0 }
+          - { text: "Glucocorticoids", bin: 0 }
+          - { text: "Allopurinol", bin: 1 }
+          - { text: "Febuxostat", bin: 1 }
+          - { text: "Probenecid", bin: 1 }
+          - { text: "Pegloticase", bin: 1 }
+        why: "الحاد بيطفّي الالتهاب. الوقاية بتقلل الـ urate. والـ colchicine في الاتنين (acute and prophylactic). وخلي بالك من الـ salicylates في الهجمة: الجرعة القليلة بتقلل إخراج الـ uric acid."
+        page: 497
+        quote: "Acute and prophylactic value. GI, neuromyopathic adverse effects. Can also cause myelosuppression, nephrotoxicity."
+      - kind: check
+        question: "How does colchicine relieve an acute gout flare?"
+        options:
+          - "Stabilizes tubulin, impairing neutrophil chemotaxis and degranulation"
+          - "Inhibits xanthine oxidase"
+          - "Converts uric acid to allantoin"
+          - "Blocks uric acid reabsorption in the PCT"
+        answer: 0
+        why:
+          - "صح: بيمنع الـ microtubules فالـ neutrophils ما تعرفش توصل وتفرّغ."
+          - "ده allopurinol و febuxostat."
+          - "ده pegloticase."
+          - "ده probenecid."
+        page: 497
+        quote: "Colchicine Binds and stabilizes tubulin to inhibit microtubule polymerization, impairing neutrophil chemotaxis and degranulation."
+      - kind: explain
+        title: "الـ TNF-α inhibitors والسل"
+        text: |-
+          - **Etanercept**: fusion protein، طُعم للـ TNF-α (==Etanercept intercepts TNF==).
+          - **Adalimumab و infliximab**: monoclonal antibodies ضد الـ TNF-α، ومنهم للـ IBD كمان.
+
+          الـ TNF هو اللي ماسك الـ granuloma. شيله ← ==latent TB== تصحى. وممكن drug-induced lupus.
+        page: 498
+        quote: "Predisposition to infection, including reactivation of latent TB, since TNF is important in granuloma formation and stabilization. Can also lead to drug-induced lupus."
+      - kind: match
+        prompt: "وصّل دوا الـ psoriasis بهدفه"
+        pairs:
+          - ["Ustekinumab", "IL-12/IL-23"]
+          - ["Secukinumab", "IL-17"]
+          - ["Brodalumab", "IL-17 receptor"]
+          - ["Guselkumab", "IL-23"]
+          - ["Imiquimod", "TLR-7"]
+        why: "الـ brodalumab الوحيد اللي بيمسك المستقبل مش الـ cytokine. والـ imiquimod كريم بيشغّل المناعة نفسها (TLR-7) للـ warts والـ actinic keratosis."
+        page: 498
+        quote: "Ustekinumab IL-12/IL-23 Ixekizumab Secukinumab IL-17 Brodalumab IL-17 receptor"
+      - kind: try
+        items: [msk.L04.034, msk.L04.041, msk.L04.042, msk.L04.045, msk.L04.049]
+    recap:
+      - "Teriparatide متقطع بيبني عضم."
+      - "Allopurinol/febuxostat: xanthine oxidase. Allopurinol بيرفع azathioprine و 6-MP."
+      - "Colchicine: tubulin و neutrophils."
+      - "Anti-TNF: خطر reactivation للـ TB. Brodalumab على مستقبل الـ IL-17."
+    practice: [msk.L04.032, msk.L04.033, msk.L04.034, msk.L04.035, msk.L04.036, msk.L04.037, msk.L04.038, msk.L04.039, msk.L04.040, msk.L04.041, msk.L04.042, msk.L04.043, msk.L04.044, msk.L04.045, msk.L04.046, msk.L04.047, msk.L04.048, msk.L04.049]
