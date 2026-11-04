@@ -160,12 +160,19 @@ pub fn lookup(id: &str) -> Option<(&'static Lecture, Item)> {
 /// (`courses::focus`) as Mohamed should see them: his ✎ edits applied, his
 /// ✗ items left out.
 pub fn study_lectures() -> Vec<Lecture> {
+    study_lectures_where(crate::courses::focus::shows)
+}
+
+/// The MCQs of every written lecture that `keep` accepts (by lecture id),
+/// as [`study_lectures`] gives them. A block picks its own systems, so it
+/// looks past the course in view.
+pub fn study_lectures_where(keep: impl Fn(&str) -> bool) -> Vec<Lecture> {
     let store = try_consume_context::<StudyStoreHandle>();
     let store = store.as_ref().map(|s| s.0.borrow());
     Library::get()
         .lectures
         .values()
-        .filter(|l| crate::courses::focus::shows(&l.lecture))
+        .filter(|l| keep(&l.lecture))
         .map(|l| Lecture {
             items: l
                 .items

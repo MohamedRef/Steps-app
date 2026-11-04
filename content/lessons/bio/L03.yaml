@@ -1,0 +1,217 @@
+schema: steps.lesson/v1
+lecture: bio.L03
+lessons:
+  - id: bio.L03.lesson1
+    title: "الـ elastin، و Marfan ضد homocystinuria"
+    hook: "اتنين طوال وصوابعهم طويلة: واحد الـ lens بتاعه طالع لفوق، والتاني نازل لتحت. مين مين؟"
+    minutes: 7
+    pages: [50, 50]
+    topics: [elastin]
+    goals:
+      - "تعرف الـ elastin بيتعمل ويتكسر إزاي"
+      - "تفرّق بين Marfan و homocystinuria في 4 نقط"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ elastin: الأستك"
+        text: |-
+          بروتين بيتمط ويرجع: في الـ skin والـ lungs والـ large arteries والـ vocal cords والـ ligamenta flava.
+
+          فيه proline و glycine و lysine ==من غير hydroxylation== (عكس الكولاجين). الـ tropoelastin بيتبني على سقالة من ==fibrillin==، والـ lysyl oxidase بيعمل الـ cross-links بره الخلية.
+        page: 50
+        quote: "Rich in nonhydroxylated proline, glycine, and lysine residues, vs the hydroxylated residues of collagen."
+      - kind: reveal
+        prompt: "الـ elastase بيكسّر الـ elastin، والـ α1-antitrypsin بيمسكه. لو الـ α1-antitrypsin ناقص؟"
+        answer: "الـ elastase يشتغل من غير فرامل ← يكسّر الـ elastin في الرئة ← ==COPD==."
+        page: 50
+        quote: "α1-Antitrypsin deficiency results in unopposed elastase activity, which can cause COPD."
+      - kind: explain
+        title: "Marfan: الـ fibrillin بايظ"
+        text: |-
+          **FBN1** على chromosome ==15== (fifteen) ← fibrillin-1 بايظ (وهو كمان بيحبس الـ TGF-β). AD.
+
+          - هيكل: طويل، أطراف طويلة، pectus، مفاصل hypermobile، arachnodactyly.
+          - قلب: cystic medial necrosis، **aortic root aneurysm/dissection** (==أشهر سبب وفاة==)، MVP.
+          - رئة: spontaneous pneumothorax.
+        page: 50
+        quote: "aortic root aneurysm rupture or dissection (most common cause of death); mitral valve prolapse; ↑ risk of spontaneous pneumothorax."
+      - kind: figure
+        title: "الـ lens: لفوق ولا لتحت؟"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker><marker id="b3b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <circle class="fg-box" cx="80" cy="80" r="50"/>
+            <ellipse class="fg-acc" cx="100" cy="60" rx="22" ry="14"/>
+            <line class="fg-arrow-acc" x1="80" y1="80" x2="110" y2="50" marker-end="url(#b3a)"/>
+            <text x="30" y="145" class="t-sm t-acc">Marfan: up/temporal</text>
+            <circle class="fg-box" cx="270" cy="80" r="50"/>
+            <ellipse class="fg-bad" cx="250" cy="100" rx="22" ry="14"/>
+            <line class="fg-arrow-bad" x1="270" y1="80" x2="245" y2="108" marker-end="url(#b3b)"/>
+            <text x="200" y="145" class="t-sm t-bad">Homocystinuria: down/nasal</text>
+          </svg>
+        caption: "في Marfan الـ lens بيطلع لفوق وبره (Marfan fans out). في الـ homocystinuria بينزل لتحت وجوه."
+        alt: "Two eyes. Left, Marfan syndrome: the lens is displaced upward and temporally. Right, homocystinuria: the lens is displaced downward and nasally."
+        page: 50
+        quote: "LENS DISLOCATION Upward/temporal (Marfan fans out) Downward/nasal"
+      - kind: table
+        title: "Marfan ضد homocystinuria"
+        columns: ["", "Marfan", "Homocystinuria"]
+        rows:
+          - ["Inheritance", "AD", "AR"]
+          - ["Intellect", "Normal", "Decreased"]
+          - ["Vascular", "Aortic root dilatation", "Thrombosis"]
+          - ["Lens", "Up/temporal", "Down/nasal"]
+        hide: [[0, 2], [1, 2], [2, 1], [2, 2], [3, 2]]
+        page: 50
+        quote: "INHERITANCE Autosomal dominant Autosomal recessive INTELLECT Normal Decreased VASCULAR COMPLICATIONS Aortic root dilatation Thrombosis"
+      - kind: aside
+        tone: tip
+        text: "الـ homocystinuria سببها الأشهر ==cystathionine-β-synthase deficiency==، وشكلها زي Marfan بالظبط بس بشرة فاتحة (fair complexion). لو لقيت ذكاء أقل أو جلطة: homocystinuria."
+        page: 50
+        quote: "Homocystinuria—most commonly due to cystathionine‐β‐synthase deficiency leading to homocysteine buildup."
+      - kind: check
+        question: "A tall boy with arachnodactyly has a DVT and learning difficulties. Most likely?"
+        options: ["Homocystinuria", "Marfan syndrome", "Ehlers-Danlos syndrome", "α1-antitrypsin deficiency"]
+        answer: 0
+        why:
+          - "صح: الجلطة و الذكاء الأقل بيفرقوها عن Marfan."
+          - "Marfan الذكاء طبيعي والمشكلة الوعائية aortic root dilatation."
+          - "EDS جلد بيتمط ومفاصل hypermobile، مش thrombosis و learning difficulties."
+          - "ده COPD من الـ elastase."
+        page: 50
+        quote: "INHERITANCE Autosomal dominant Autosomal recessive INTELLECT Normal Decreased VASCULAR COMPLICATIONS Aortic root dilatation Thrombosis"
+      - kind: try
+        items: [bio.L03.004, bio.L03.005, bio.L03.006, bio.L03.009]
+    recap:
+      - "Elastin: non-hydroxylated، fibrillin scaffold، lysyl oxidase. Elastase ← α1-antitrypsin."
+      - "Marfan: FBN1 على 15، AD، dissection أشهر سبب وفاة، lens لفوق."
+      - "Homocystinuria: CBS، AR، ذكاء أقل، thrombosis، lens لتحت."
+    practice: [bio.L03.001, bio.L03.002, bio.L03.003, bio.L03.004, bio.L03.005, bio.L03.006, bio.L03.007, bio.L03.008, bio.L03.009, bio.L03.010, bio.L03.011]
+  - id: bio.L03.lesson2
+    title: "تقنيات المعمل: كل سؤال وتقنيته"
+    hook: "السؤال دايماً: عايز تشوف DNA ولا RNA ولا بروتين ولا خلية ولا كروموسوم؟"
+    minutes: 10
+    pages: [50, 53]
+    topics: [pcr, crispr-cas9, blotting, flow-cytometry, microarrays, elisa, karyotyping, molecular-cloning]
+    goals:
+      - "ترتب خطوات الـ PCR"
+      - "تفرّق بين الـ blots بـ SNoW DRoP"
+      - "تختار التقنية الصح لكل سؤال"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "PCR: آلة تصوير للـ DNA"
+        text: |-
+          بتكبّر حتة DNA معينة. محتاج: template و primers و ==heat-stable== DNA polymerase و dNTPs.
+          - **Denaturation**: سخّن ← الـ strands تنفصل.
+          - **Annealing**: برّد ← الـ primers تمسك في المكان المطلوب.
+          - **Elongation**: سخّن تاني ← الـ polymerase يبني.
+
+          وتعيد لحد ما الـ DNA يكفي. استخدامات الكتاب: ==neonatal HIV== و herpes encephalitis.
+        page: 50
+        quote: "Denaturation—DNA template, DNA primers, a heat-stable DNA polymerase, and deoxynucleotide triphosphates (dNTPs) are heated to separate the DNA strands."
+      - kind: explain
+        title: "CRISPR/Cas9: مقص بـ GPS"
+        text: |-
+          - **gRNA**: الـ GPS، مكمّل للـ DNA اللي عايزه.
+          - **Cas9**: المقص (endonuclease).
+
+          بعد القص: لو سبت الخلية تلزق بـ ==NHEJ== ← frameshift (knock-out). لو اديتها donor DNA و ==HDR== ← تعديل (knock-in)، زي تصليح الـ sickle cell.
+        page: 51
+        quote: "Consists of a guide RNA (gRNA), which is complementary to a target DNA sequence, and an endonuclease (Cas9), which makes a single- or double-strand break at the target site."
+      - kind: mnemonic
+        word: "SNOW"
+        parts:
+          - { key: "S", text: "Southern = DNA (مقاس الـ sequences، CGG في fragile X)" }
+          - { key: "N", text: "Northern = RNA (مستوى ومقاس الـ mRNA، splicing errors)" }
+          - { key: "O", text: "O = ولا حاجة (مفيش blot للـ O)" }
+          - { key: "W", text: "Western = Protein (antibody)" }
+        hook: "الكتاب: SNoW DRoP. الحروف الكبيرة في الكلمتين بتتقابل: S-D و N-R و W-P"
+        page: 51
+        quote: "SNoW DRoP: Southern = DNA Northern = RNA Western = Protein"
+      - kind: explain
+        title: "والـ Southwestern؟"
+        text: "بيجمع الاتنين: ==بروتين== على الـ membrane و probe من ==dsDNA==. بيدوّر على البروتينات اللي بتمسك في الـ DNA، زي الـ transcription factors."
+        page: 51
+        quote: "Combines Southern and Western blots. Protein is probed with labeled dsDNA. Detects DNA- binding proteins (eg, transcription factors)."
+      - kind: check
+        question: "You want to know if a transcript has a splicing error. Which blot?"
+        options: ["Northern", "Southern", "Western", "Southwestern"]
+        answer: 0
+        why:
+          - "صح: الـ Northern بيشغّل RNA فيشوف مقاس الـ mRNA وأخطاء الـ splicing."
+          - "الـ Southern بيشوف الـ DNA، والـ intron لسه موجود فيه أصلاً."
+          - "الـ Western بيشوف البروتين."
+          - "الـ Southwestern بيدوّر على DNA-binding proteins."
+        page: 51
+        quote: "Useful for studying mRNA levels and size, which are reflective of gene expression. Detects splicing errors."
+      - kind: explain
+        title: "Flow cytometry و ELISA و microarrays"
+        text: |-
+          - **Flow cytometry**: ==خلية خلية==: antibodies بـ fluorescent dye والـ laser يقرا. الحجم والـ granularity والبروتينات. للـ leukemia، PNH، fetal RBCs في دم الأم، و ==CD4+ count== في HIV.
+          - **ELISA**: antibody مربوط بـ enzyme يدّي لون. Direct = antigen، indirect = antibody. للـ screening (HIV)، وأقل specific من الـ Western.
+          - **Microarrays**: تقارن transcription آلاف الجينات بين عينتين RNA، ومع الـ DNA تلاقي SNPs و CNVs.
+        page: 52
+        quote: "Can have high sensitivity and specificity, but is less specific than Western blot. Often used to screen for HIV infection."
+      - kind: figure
+        title: "قراية الـ flow plot"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="60" y1="20" x2="60" y2="170"/>
+            <line class="fg-ink" x1="60" y1="170" x2="300" y2="170"/>
+            <line class="fg-thin" x1="180" y1="20" x2="180" y2="170"/>
+            <line class="fg-thin" x1="60" y1="95" x2="300" y2="95"/>
+            <text x="20" y="100" class="t-sm">CD3</text>
+            <text x="165" y="192" class="t-sm">CD8</text>
+            <text x="70" y="55" class="t-sm">CD3+ CD8−</text>
+            <text x="190" y="55" class="t-sm t-good">CD3+ CD8+</text>
+            <text x="70" y="140" class="t-sm t-mut">CD3− CD8−</text>
+            <text x="190" y="140" class="t-sm t-bad">empty</text>
+            <circle class="fg-dot-acc" cx="100" cy="70" r="4"/><circle class="fg-dot-acc" cx="115" cy="62" r="4"/><circle class="fg-dot-acc" cx="90" cy="78" r="4"/>
+            <circle class="fg-dot-good" cx="230" cy="70" r="4"/><circle class="fg-dot-good" cx="250" cy="62" r="4"/>
+            <circle class="fg-dot-acc" cx="100" cy="150" r="4"/><circle class="fg-dot-acc" cx="120" cy="155" r="4"/>
+          </svg>
+        caption: "كل نقطة خلية. الـ quadrant اللي تحت على اليمين (CD8+ و CD3−) فاضي، عشان كل خلية عليها CD8 عليها CD3 كمان."
+        alt: "Flow cytometry scatter plot with CD8 on the x-axis and CD3 on the y-axis split into four quadrants; the lower right quadrant, CD8 positive and CD3 negative, is empty."
+        page: 52
+        quote: "In this example, right lower quadrant is empty because all CD8-expressing cells also express CD3."
+      - kind: explain
+        title: "الكروموسومات"
+        text: |-
+          - **Karyotyping**: ==colchicine== يكسّر الـ spindle ← الخلايا تقف في **metaphase** ← Giemsa ونرتب. من الدم أو الـ marrow أو الـ amniotic fluid أو الـ placenta. للـ trisomies والـ sex chromosome disorders.
+          - **Spectral karyotyping**: كل كروموسوم بلون ← translocations و duplications و microdeletions.
+          - **FISH**: probe على جين معين ← مكانه بالظبط.
+
+          و **molecular cloning**: DNA بشري جوه بكتيريا ← insulin و growth hormone.
+        page: 53
+        quote: "Colchicine is added to cultured cells to disrupt the assembly of mitotic spindles and arrest cells at metaphase of mitosis."
+      - kind: match
+        prompt: "وصّل كل سؤال بالتقنية"
+        pairs:
+          - ["Is this newborn infected with HIV?", "PCR"]
+          - ["How many CD4+ cells does he have?", "Flow cytometry"]
+          - ["How many CGG repeats in FMR1?", "Southern blot"]
+          - ["Is the fetus trisomic?", "Karyotyping"]
+          - ["Make human insulin in bacteria", "Molecular cloning"]
+        why: "الطفل عنده antibodies من أمه، فلازم نشوف الفيروس نفسه بالـ PCR. العدد في الخلايا = flow. مقاس DNA = Southern. عدد الكروموسومات = karyotype."
+        page: 51
+        quote: "Useful to identify size of specific sequences (eg, determination of heterozygosity [as seen in image], # of CGG repeats in FMR1 to diagnose fragile X syndrome)."
+      - kind: check
+        question: "An indirect ELISA detects:"
+        options: ["An antibody in the patient's blood", "An antigen in the patient's blood", "Viral RNA", "A DNA-binding protein"]
+        answer: 0
+        why:
+          - "صح: الـ indirect بيدوّر على الـ antibody باستخدام secondary antibody عليه enzyme."
+          - "ده الـ direct ELISA."
+          - "ده PCR."
+          - "ده Southwestern blot."
+        page: 52
+        quote: "Immunologic test used to detect the presence of either a specific antigen (in direct ELISA) or antibody (in indirect ELISA) in a patient’s blood sample."
+      - kind: try
+        items: [bio.L03.013, bio.L03.019, bio.L03.029, bio.L03.034, bio.L03.016]
+    recap:
+      - "PCR: denature ← anneal ← elongate. Neonatal HIV."
+      - "CRISPR: gRNA + Cas9. NHEJ knock-out، HDR knock-in."
+      - "SNoW DRoP. Southwestern = DNA-binding proteins."
+      - "Flow = خلية خلية (CD4+). ELISA screening. Karyotype بالـ colchicine في metaphase."
+    practice: [bio.L03.012, bio.L03.013, bio.L03.014, bio.L03.015, bio.L03.016, bio.L03.017, bio.L03.018, bio.L03.019, bio.L03.020, bio.L03.021, bio.L03.022, bio.L03.023, bio.L03.024, bio.L03.025, bio.L03.026, bio.L03.027, bio.L03.028, bio.L03.029, bio.L03.030, bio.L03.031, bio.L03.032, bio.L03.033, bio.L03.034, bio.L03.035, bio.L03.036, bio.L03.037, bio.L03.038]
