@@ -53,6 +53,9 @@ bdi.bank-scope { font-family: var(--font-latin); }
 @media (hover: hover) { .bank-scope-tap:hover .bank-scope { color: var(--accent); } }
 .bank-scope-tap:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: var(--radius); }
 .bank-count { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); flex-wrap: wrap; }
+.bank-systems { display: flex; flex-direction: column; gap: var(--sp-2); }
+.bank-systems .course-label { margin: 0; }
+.bank-block-mode > button { padding-block: var(--sp-2); }
 .bank-sum { background: var(--soft); border-radius: var(--radius-control); padding: var(--sp-3) var(--sp-4); }
 .bank-sum strong { font-weight: 700; }
 .bank-go { inline-size: 100%; }
@@ -274,3 +277,5 @@ bdi.bank-scope { font-family: var(--font-latin); }
 /* Without past papers there is no side column: the setup keeps a reading
    measure instead of stretching. */
 .bank-cols:not(.tab-cols) > .tab-main { max-inline-size: 44rem; }
+/* The lab values button (labs/mod.rs) closes the question's chip row. */
+.q-meta .q-labs { margin-inline-start: auto; min-block-size: 0; padding: 0 var(--sp-2); font-size: 0.8rem; }

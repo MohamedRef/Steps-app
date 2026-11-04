@@ -1,0 +1,80 @@
+# First Aid for the USMLE Step 1 2026, "Selected USMLE Laboratory Values"
+# (front matter, printed pages xviii–xix; PDF pages 20–21). Reference data
+# the exam shows beside every question; the app opens it from any question
+# (crates/app/src/labs). Units as the book prints them.
+# `sma12: true` marks the book's asterisk: part of the Biochemical Profile (SMA-12).
+# `sub: true` indents a row under the row above it.
+# A range with two lines (male / female) is a list.
+schema: steps.labs/v1
+src: { book: fa2026, pages: "xviii–xix" }
+status: unverified
+sections:
+  - title: Blood, Plasma, Serum
+    rows:
+      - { test: "Alanine aminotransferase (ALT, GPT at 30°C)", range: ["10–40 U/L"], si: ["10–40 U/L"], sma12: true }
+      - { test: "Alkaline phosphatase", range: ["25–100 U/L"], si: ["25–100 U/L"], sma12: true }
+      - { test: "Amylase, serum", range: ["25–125 U/L"], si: ["25–125 U/L"] }
+      - { test: "Aspartate aminotransferase (AST, GOT at 30°C)", range: ["12–38 U/L"], si: ["12–38 U/L"], sma12: true }
+      - { test: "Bilirubin, serum (adult)" }
+      - { test: "Total", range: ["0.1–1.0 mg/dL"], si: ["2–17 µmol/L"], sub: true }
+      - { test: "Direct", range: ["0.0–0.3 mg/dL"], si: ["0–5 µmol/L"], sub: true }
+      - { test: "Calcium, serum (total)", range: ["8.4–10.2 mg/dL"], si: ["2.1–2.6 mmol/L"], sma12: true }
+      - { test: "Cholesterol, serum (total)", range: ["Recommended: < 200 mg/dL"], si: ["< 5.2 mmol/L"], sma12: true }
+      - { test: "Creatinine, serum (total)", range: ["0.6–1.2 mg/dL"], si: ["53–106 µmol/L"], sma12: true }
+      - { test: "Electrolytes, serum" }
+      - { test: "Sodium (Na⁺)", range: ["136–146 mEq/L"], si: ["136–146 mmol/L"], sub: true }
+      - { test: "Chloride (Cl⁻)", range: ["95–105 mEq/L"], si: ["95–105 mmol/L"], sub: true }
+      - { test: "Potassium (K⁺)", range: ["3.5–5.0 mEq/L"], si: ["3.5–5.0 mmol/L"], sub: true, sma12: true }
+      - { test: "Bicarbonate (HCO₃⁻)", range: ["22–28 mEq/L"], si: ["22–28 mmol/L"], sub: true }
+      - { test: "Magnesium (Mg²⁺)", range: ["1.5–2 mEq/L"], si: ["0.75–1.0 mmol/L"], sub: true }
+      - { test: "Gases, arterial blood (room air)" }
+      - { test: "PO₂", range: ["75–105 mm Hg"], si: ["10.0–14.0 kPa"], sub: true }
+      - { test: "PCO₂", range: ["33–45 mm Hg"], si: ["4.4–5.9 kPa"], sub: true }
+      - { test: "pH", range: ["7.35–7.45"], si: ["[H⁺] 36–44 nmol/L"], sub: true }
+      - { test: "Glucose, serum", range: ["Fasting: 70–100 mg/dL"], si: ["3.8–6.1 mmol/L"], sma12: true }
+      - { test: "Growth hormone − arginine stimulation", range: ["Fasting: < 5 ng/mL", "Provocative stimuli: > 7 ng/mL"], si: ["< 5 µg/L", "> 7 µg/L"] }
+      - { test: "Osmolality, serum", range: ["275–295 mOsmol/kg H₂O"], si: ["275–295 mOsmol/kg H₂O"] }
+      - { test: "Phosphorus (inorganic), serum", range: ["3.0–4.5 mg/dL"], si: ["1.0–1.5 mmol/L"], sma12: true }
+      - { test: "Prolactin, serum (hPRL)", range: ["Male: < 17 ng/mL", "Female: < 25 ng/mL"], si: ["< 17 µg/L", "< 25 µg/L"] }
+      - { test: "Proteins, serum", sma12: true }
+      - { test: "Total (recumbent)", range: ["6.0–7.8 g/dL"], si: ["60–78 g/L"], sub: true }
+      - { test: "Albumin", range: ["3.5–5.5 g/dL"], si: ["35–55 g/L"], sub: true }
+      - { test: "Globulins", range: ["2.3–3.5 g/dL"], si: ["23–35 g/L"], sub: true }
+      - { test: "Thyroid-stimulating hormone, serum or plasma", range: ["0.4–4.0 µU/mL"], si: ["0.4–4.0 mIU/L"] }
+      - { test: "Urea nitrogen, serum (BUN)", range: ["7–22 mg/dL"], si: ["2.5–8.0 mmol/L"], sma12: true }
+      - { test: "Uric acid, serum", range: ["3.0–8.2 mg/dL"], si: ["0.18–0.48 mmol/L"], sma12: true }
+  - title: Cerebrospinal Fluid
+    rows:
+      - { test: "Cell count", range: ["0–5/mm³"], si: ["0–5 × 10⁶/L"] }
+      - { test: "Glucose", range: ["40–70 mg/dL"], si: ["2.2–3.9 mmol/L"] }
+      - { test: "Proteins, total", range: ["< 40 mg/dL"], si: ["< 0.40 g/L"] }
+  - title: Hematologic
+    rows:
+      - { test: "Erythrocyte count", range: ["Male: 4.3–5.9 million/mm³", "Female: 3.5–5.5 million/mm³"], si: ["4.3–5.9 × 10¹²/L", "3.5–5.5 × 10¹²/L"] }
+      - { test: "Erythrocyte sedimentation rate (Westergren)", range: ["Male: 0–15 mm/hr", "Female: 0–20 mm/hr"], si: ["0–15 mm/hr", "0–20 mm/hr"] }
+      - { test: "Hematocrit", range: ["Male: 41–53%", "Female: 36–46%"], si: ["0.41–0.53", "0.36–0.46"] }
+      - { test: "Hemoglobin, blood", range: ["Male: 13.5–17.5 g/dL", "Female: 12.0–16.0 g/dL"], si: ["135–175 g/L", "120–160 g/L"] }
+      - { test: "Hemoglobin, plasma", range: ["< 4 mg/dL"], si: ["< 0.62 µmol/L"] }
+      - { test: "Leukocyte count and differential" }
+      - { test: "Leukocyte count", range: ["4,500–11,000/mm³"], si: ["4.5–11.0 × 10⁹/L"], sub: true }
+      - { test: "Segmented neutrophils", range: ["54–62%"], si: ["0.54–0.62"], sub: true }
+      - { test: "Band forms", range: ["3–5%"], si: ["0.03–0.05"], sub: true }
+      - { test: "Eosinophils", range: ["1–3%"], si: ["0.01–0.03"], sub: true }
+      - { test: "Basophils", range: ["0–0.75%"], si: ["0–0.0075"], sub: true }
+      - { test: "Lymphocytes", range: ["25–33%"], si: ["0.25–0.33"], sub: true }
+      - { test: "Monocytes", range: ["3–7%"], si: ["0.03–0.07"], sub: true }
+      - { test: "Mean corpuscular hemoglobin (MCH)", range: ["25–35 pg/cell"], si: ["0.39–0.54 fmol/cell"] }
+      - { test: "Mean corpuscular hemoglobin concentration (MCHC)", range: ["31%–36% Hb/cell"], si: ["4.8–5.6 mmol Hb/L"] }
+      - { test: "Mean corpuscular volume (MCV)", range: ["80–100 µm³"], si: ["80–100 fL"] }
+      - { test: "Partial thromboplastin time (activated)", range: ["25–40 sec"], si: ["25–40 sec"] }
+      - { test: "Platelet count", range: ["150,000–400,000/mm³"], si: ["150–400 × 10⁹/L"] }
+      - { test: "Prothrombin time", range: ["11–15 sec"], si: ["11–15 sec"] }
+      - { test: "Reticulocyte count", range: ["0.5–1.5% of RBCs"], si: ["0.005–0.015"] }
+  - title: Urine
+    rows:
+      - { test: "Creatinine clearance", range: ["Male: 97–137 mL/min", "Female: 88–128 mL/min"], si: ["97–137 mL/min", "88–128 mL/min"] }
+      - { test: "Osmolality", range: ["50–1200 mOsmol/kg H₂O"], si: ["50–1200 mOsmol/kg H₂O"] }
+      - { test: "Proteins, total", range: ["< 150 mg/24 hr"], si: ["< 0.15 g/24 hr"] }
+  - title: Other
+    rows:
+      - { test: "Body mass index", range: ["Adult: 19–25 kg/m²"], si: ["19–25 kg/m²"] }
