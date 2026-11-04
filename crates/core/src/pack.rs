@@ -285,7 +285,7 @@ mod tests {
         let pack = pack.with_program(program.clone());
         let back = Pack::decode(&pack.encode()).unwrap();
         assert_eq!(back.program.as_ref(), Some(&program));
-        assert_eq!(back.program_or_fallback().courses.len(), 16);
+        assert_eq!(back.program_or_fallback().courses.len(), 17);
     }
 
     #[test]

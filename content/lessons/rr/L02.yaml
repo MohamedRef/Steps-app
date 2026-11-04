@@ -1,0 +1,511 @@
+schema: steps.lesson/v1
+lecture: rr.L02
+lessons:
+  - id: rr.L02.lesson1
+    title: "الكلاسيكيات من الجينات والفيتامينات: الصورة بتقولك التشخيص"
+    hook: "كل صف في الجدول ده سؤال vignette متلخص في سطر: اتعلم تقرا العلامة وانت هتجاوب قبل ما تخلص الـ stem"
+    minutes: 9
+    pages: [720, 721]
+    topics: [biochemistry]
+    goals:
+      - "تفهم ليه كل مجموعة أعراض بتشاور على عيب واحد في بروتين أو إنزيم أو فيتامين"
+      - "تفرّق بين الأمراض اللي شبه بعض: Marfan و homocystinuria، Duchenne و Becker، الـ trisomies"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الجدول ده بيشتغل إزاي"
+        text: |-
+          جدول ==Classic presentations== في آخر First Aid هو ملخص لأشهر الصور اللي الامتحان بيحطها في الـ vignette. العمود الأول هو اللي هتقراه في السؤال، والتاني هو التشخيص، والتالت رقم الصفحة اللي فيها الشرح الكامل.
+
+          السر إنك ما تحفظش السطر كجملة: افهم **ليه** العرض ده بييجي من العيب ده. ساعتها لو السؤال غيّر الكلام شوية هتعرفه برضه.
+
+          مثال: أول سطر في الجدول «boy with gout, self-mutilation, intellectual disability» إجابته **Lesch-Nyhan syndrome**.
+
+          - كل كارت في المحاضرة دي آخره «First Aid p. …»: دي الصفحة اللي ترجعلها لو نسيت.
+        page: 720
+        quote: "Boy with gout, self-mutilation, intellectual disability"
+      - kind: explain
+        title: "ولد عنده gout وبيأذي نفسه"
+        text: |-
+          ==Lesch-Nyhan==: نقص **HGPRT**، والإنزيم ده هو اللي بيعمل salvage للـ purines. لو مش شغال، الـ purines بتتكسر بدل ما تتعاد، فالـ uric acid يعلى ← **gout** في طفل.
+
+          ولأنه **X-linked recessive** فالمريض ولد. والمخ بيتأثر: intellectual disability و ==self-mutilation== (بيعض شفايفه وصوابعه).
+        page: 720
+        quote: "Boy with gout, self-mutilation, intellectual disability Lesch-Nyhan syndrome (HGPRT deficiency, X-linked recessive)"
+      - kind: table
+        title: "الكولاجين والـ fibrillin: مين بيعمل إيه"
+        columns: ["الصورة", "التشخيص", "العيب"]
+        rows:
+          - ["Blue sclerae, fractures, dental problems, hearing loss", "Osteogenesis imperfecta", "Type I collagen"]
+          - ["Stretchy skin, loose joints, easy bleeding", "Ehlers-Danlos", "Type V (type III in vascular type)"]
+          - ["Long fingers, lens up and out, aortic dissection", "Marfan", "Fibrillin-1"]
+          - ["Long fingers, pectus, lens down and in", "Homocystinuria", "Cystathionine synthase"]
+        hide: [[1, 1], [2, 2], [3, 1]]
+        page: 720
+        quote: "Arachnodactyly, lens dislocation (upward and temporal), aortic dissection, hyperflexible joints Marfan syndrome (defective fibrillin-1)"
+      - kind: aside
+        tone: trap
+        text: "الاتنين صوابعهم طويلة ورفيعة، والفرق في **اتجاه العدسة**: Marfan العدسة بتطلع ==لفوق ولبرّه== (upward and temporal)، و homocystinuria بتنزل ==لتحت ولجوّه== (downward and nasal). افتكرها كده: Marfan «بيبص لفوق» عشان طويل."
+        page: 720
+        quote: "Arachnodactyly, lens dislocation (upward and temporal)"
+      - kind: check
+        question: "A tall 15-year-old has long fingers, pectus deformity and lenses displaced downward and nasally. Which is the diagnosis?"
+        options: ["Homocystinuria", "Marfan syndrome", "Ehlers-Danlos syndrome", "Osteogenesis imperfecta"]
+        answer: 0
+        why:
+          - "صح: أصابع طويلة + pectus + عدسة لتحت ولجوّه = homocystinuria (نقص cystathionine synthase)."
+          - "Marfan العدسة فيه بتطلع لفوق ولبرّه، مش لتحت."
+          - "Ehlers-Danlos جلد مطاط ومفاصل سايبة ونزيف، مش lens dislocation."
+          - "OI عظم بيتكسر وsclera زرقا."
+        page: 720
+        quote: "Arachnodactyly, pectus deformity, lens dislocation (downward and nasal)"
+      - kind: explain
+        title: "العضلات: Duchenne و Becker"
+        text: |-
+          الاتنين في جين ==dystrophin== والاتنين **X-linked** (يعني ولاد).
+
+          - **Duchenne**: ==frameshift== ← البروتين بيبوظ خالص ← أشد. الطفل بيسند على رجليه بإيديه عشان يقوم من القعدة (**Gowers sign**)، والسمانة كبيرة بس دي دهون مش عضل (**pseudohypertrophy**)، والـ creatine kinase عالي.
+          - **Becker**: deletions ==non-frameshift== ← بروتين أقصر بس شغال شوية ← ضعف أبطأ وأخف.
+        page: 720
+        quote: "Child uses arms to stand up from squat Duchenne muscular dystrophy (Gowers sign)"
+      - kind: figure
+        title: "الـ trisomies التلاتة"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="8" y="10" width="108" height="140" rx="10"/>
+            <text x="20" y="32" class="t-b">Down (21)</text>
+            <text x="20" y="56" class="t-sm">single palmar crease</text>
+            <text x="20" y="74" class="t-sm">flat face</text>
+            <text x="20" y="92" class="t-sm">epicanthal folds</text>
+            <text x="20" y="110" class="t-sm">heart disease</text>
+            <text x="20" y="128" class="t-sm">intellectual disability</text>
+            <rect class="fg-good" x="126" y="10" width="108" height="140" rx="10"/>
+            <text x="138" y="32" class="t-b">Edwards (18)</text>
+            <text x="138" y="56" class="t-sm">microcephaly</text>
+            <text x="138" y="74" class="t-sm">rocker-bottom feet</text>
+            <text x="138" y="92" class="t-sm">clenched hands</text>
+            <text x="138" y="110" class="t-sm">heart defect</text>
+            <rect class="fg-bad" x="244" y="10" width="108" height="140" rx="10"/>
+            <text x="256" y="32" class="t-b">Patau (13)</text>
+            <text x="256" y="56" class="t-sm">cleft lip/palate</text>
+            <text x="256" y="74" class="t-sm">holoprosencephaly</text>
+            <text x="256" y="92" class="t-sm">polydactyly</text>
+            <text x="256" y="110" class="t-sm">cutis aplasia</text>
+          </svg>
+        caption: "Down بوشه المميز، Edwards بإيده المقفولة ورجله الـ rocker-bottom، و Patau بعيوب الخط النص (شفة، مخ) وصوابع زيادة."
+        alt: "Three boxes: Down syndrome (trisomy 21) with single palmar crease, flat face, epicanthal folds, heart disease, intellectual disability; Edwards syndrome (trisomy 18) with microcephaly, rocker-bottom feet, clenched hands, heart defect; Patau syndrome (trisomy 13) with cleft lip or palate, holoprosencephaly, polydactyly, cutis aplasia."
+        page: 720
+        quote: "Infant with microcephaly, rocker-bottom feet, clenched hands, structural heart defect"
+      - kind: explain
+        title: "الفيتامينات: كل نقص ليه بصمته"
+        text: |-
+          - **B1 (thiamine)**: الإنزيمات اللي بتحرق الـ glucose وقفت ← المخ (==Wernicke==: confusion و ophthalmoplegia و ataxia) والقلب (**wet beriberi**: dilated cardiomyopathy) في الـ alcohol use والـ malnutrition.
+          - **B3 (niacin)**: ==pellagra== = الـ 3 Ds: dermatitis و dementia و diarrhea.
+          - **B5**: «burning feet» و dermatitis و enteritis و alopecia.
+          - **B12**: megaloblastic anemia + **subacute combined degeneration** (الأعصاب كمان، مش الدم بس).
+          - **C**: الكولاجين ما بيتعملهوش hydroxylation ← لثة وارمة بتنزف، جروح ما بتلمّش، petechiae و corkscrew hairs (==scurvy==).
+        page: 720
+        quote: "Dermatitis, dementia, diarrhea"
+      - kind: reveal
+        prompt: "طفل رجليه مقوسة وعضمه بيوجعه وعضلاته ضعيفة. وفي الكبير نفس النقص بيعمل إيه؟"
+        answer: "نقص **vitamin D**: في الطفل **rickets** (bowlegs)، وفي الكبير **osteomalacia**. الأسباب: شمس قليلة أو chronic kidney disease (الكلية مش بتعمل الـ 1α-hydroxylation)."
+        page: 721
+        quote: "Bowlegs (children), bone pain, and muscle weakness"
+      - kind: explain
+        title: "الـ metabolic diseases"
+        text: |-
+          - **PKU**: musty body odor و جلد فاتح (الـ tyrosine قليل فالـ melanin قليل) و eczema و intellectual disability.
+          - **Alkaptonuria**: الـ homogentisate بيتراكم ← غضروف الودن والـ sclera لونهم أزرق-أسود، ألم مفاصل شديد، والبول ==بيسود لو اتساب في الهوا==.
+          - **Cori / von Gierke**: رضيع عنده hypoglycemia و hepatomegaly (و cardiomyopathy).
+          - **McArdle**: العضلة مش قادرة تكسر الـ glycogen ← ألم و cramps مع المجهود و myoglobinuria.
+          - **Cherry-red spot**: Tay-Sachs (من غير hepatosplenomegaly) أو Niemann-Pick (معاها)، أو central retinal artery occlusion.
+          - **Gaucher**: hepatosplenomegaly و pancytopenia و bone crises و avascular necrosis في رأس الفخدة.
+          - **Achilles xanthoma + corneal arcus**: ==familial hypercholesterolemia==.
+        page: 721
+        quote: "“Cherry-red spot” on macula"
+      - kind: check
+        question: "A 4-month-old has a cherry-red spot on the macula, progressive weakness and no hepatosplenomegaly. Which is the most likely diagnosis?"
+        options: ["Tay-Sachs disease", "Niemann-Pick disease", "Gaucher disease", "Central retinal artery occlusion", "Phenylketonuria"]
+        answer: 0
+        why:
+          - "صح: cherry-red spot من غير hepatosplenomegaly = Tay-Sachs."
+          - "Niemann-Pick فيه cherry-red spot بس معاه hepatosplenomegaly."
+          - "Gaucher فيه hepatosplenomegaly و bone crises، من غير cherry-red spot."
+          - "CRAO بتعمل cherry-red spot بس في كبير بفقدان نظر مفاجئ، مش رضيع."
+          - "PKU ريحة musty وجلد فاتح، مفيش cherry-red spot."
+        page: 721
+        quote: "“Cherry-red spot” on macula"
+      - kind: try
+        items: [rr.L02.005, rr.L02.006, rr.L02.010, rr.L02.018, rr.L02.028]
+    recap:
+      - "Marfan العدسة لفوق ولبرّه، homocystinuria لتحت ولجوّه"
+      - "Duchenne frameshift (أشد)، Becker non-frameshift (أخف)"
+      - "Cherry-red spot: Tay-Sachs من غير كبد وطحال، Niemann-Pick معاهم"
+    practice: [rr.L02.001, rr.L02.002, rr.L02.003, rr.L02.004, rr.L02.005, rr.L02.006, rr.L02.007, rr.L02.008, rr.L02.009, rr.L02.010, rr.L02.011, rr.L02.012, rr.L02.013, rr.L02.014, rr.L02.015, rr.L02.016, rr.L02.017, rr.L02.018, rr.L02.019, rr.L02.020, rr.L02.021, rr.L02.022, rr.L02.023, rr.L02.024, rr.L02.025, rr.L02.026, rr.L02.027, rr.L02.028, rr.L02.029, rr.L02.030, rr.L02.031]
+
+  - id: rr.L02.lesson2
+    title: "المناعة والميكروبات: العلامة اللي بتفضح الميكروب"
+    hook: "سرّة اتأخرت تقع؟ بلغم شبه الجيلي؟ eschar أسود في مريض DKA؟ كل واحدة دي إجابة جاهزة"
+    minutes: 9
+    pages: [721, 722]
+    topics: [immunology, microbiology]
+    goals:
+      - "تربط كل immunodeficiency بالخلية أو الجزيء اللي ناقص"
+      - "تعرف الميكروب من علامة واحدة مميزة"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ immunodeficiencies: اسأل نفسك مين ناقص"
+        text: |-
+          - **Bruton**: ولد، infections متكررة، ==مفيش mature B cells== (عيب في BTK، X-linked).
+          - **Selective IgA deficiency**: ==anaphylaxis بعد نقل دم== (المريض عنده antibodies ضد الـ IgA اللي في دم المتبرع)، مع atopy و infections في الـ airway والـ GI و autoimmune disease.
+          - **Hyper-IgE (Job)**: cold abscesses (مش ملتهبة)، eczema، IgE عالي و eosinophilia: عيب في الـ neutrophil chemotaxis (STAT3).
+          - **LAD type 1**: الـ neutrophils مش قادرة تمسك في الـ endothelium وتخرج ← ==السرة بتتأخر تقع (> 30 يوم)== و infections من غير pus.
+          - **CGD**: الـ NADPH oxidase بايظ ← infections و granulomas بالـ catalase-positive organisms.
+        page: 721
+        quote: "Late separation (> 30 days) of umbilical cord, no pus, recurrent skin and mucosal bacterial infections"
+      - kind: reveal
+        prompt: "ليه في CGD الميكروبات الـ catalase-positive بالذات هي اللي بتعمل مشكلة؟"
+        answer: "الـ phagocyte في CGD مش بيعمل superoxide بنفسه، فبيعتمد على الـ H2O2 اللي الميكروب نفسه بيطلعه. الميكروب الـ catalase-positive بيكسر الـ H2O2 بتاعه، فمبيسيبش للخلية أي سلاح. عشان كده infections و granulomas بالـ catalase-positive organisms."
+        page: 721
+        quote: "Recurrent infections and granulomas with catalase ⊕ organisms"
+      - kind: match
+        prompt: "وصّل الصورة بالتشخيص"
+        pairs:
+          - ["Anaphylaxis after blood transfusion", "Selective IgA deficiency"]
+          - ["Cord separates after 30 days, no pus", "Leukocyte adhesion deficiency"]
+          - ["Cold abscesses, eczema, high IgE", "Hyper-IgE (Job) syndrome"]
+          - ["Boy with no mature B cells", "Bruton agammaglobulinemia"]
+        page: 721
+        quote: "Anaphylaxis following blood transfusion, atopy, airway/GI infections, autoimmune disease Selective IgA deficiency"
+      - kind: explain
+        title: "بكتيريا ليها توقيع"
+        text: |-
+          - **Toxic shock (Staph)**: fever و vomiting و diarrhea و rash بيقشّر بعد ==tampon أو nasal packing== اتساب كتير.
+          - **Strawberry tongue**: scarlet fever (rash زي الصنفرة) أو Kawasaki (lymph nodes و حرارة 5 أيام).
+          - **S gallolyticus** (S bovis زمان): endocarditis ← دوّر على ==colon cancer==.
+          - **C difficile**: ألم بطن و diarrhea و leukocytosis بعد antibiotics.
+          - **Infant botulism**: رضيع أكل ==عسل== ← descending flaccid paralysis (floppy baby).
+          - **Diphtheria**: pseudomembrane رمادي في الزور و bull neck.
+          - **Pott disease**: back pain و fever و night sweats = TB في العمود الفقري.
+        page: 721
+        quote: "Descending flaccid paralysis in newborn after honey ingestion"
+      - kind: explain
+        title: "ص 722: من meningococcus لـ measles"
+        text: |-
+          - **Waterhouse-Friderichsen**: نزيف في الـ adrenals الاتنين + adrenal insufficiency حاد = meningococcemia.
+          - **Klebsiella**: بلغم ==currant jelly== في مريض alcohol أو diabetes.
+          - **Jarisch-Herxheimer**: حرارة ورعشة بعد علاج الزهري، بسبب antigens البكتيريا اللي اتحررت مرة واحدة.
+          - **Syphilis**: chancre مش بيوجع (1°)، condylomata lata (2°)، Argyll Robertson pupil (3°: بيعمل accommodation بس مش بيستجيب للنور). والـ ulcer اللي بيوجع وفيه exudate = chancroid (H ducreyi).
+          - **Pasteurella**: عضة كلب أو قطة. **Mycoplasma**: walking pneumonia والأشعة أوحش من المريض.
+          - **Rash على الكفوف والقدمين**: Coxsackie A أو RMSF أو secondary syphilis.
+        page: 722
+        quote: "Rash on palms and soles"
+      - kind: figure
+        title: "Genital ulcer: بيوجع ولا لأ؟"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rrL02a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="120" y="8" width="120" height="34" rx="8"/>
+            <text x="133" y="30" class="t-b">Genital ulcer</text>
+            <line class="fg-arrow" x1="160" y1="42" x2="80" y2="70" marker-end="url(#rrL02a)"/>
+            <line class="fg-arrow" x1="200" y1="42" x2="280" y2="70" marker-end="url(#rrL02a)"/>
+            <rect class="fg-good" x="10" y="72" width="160" height="70" rx="8"/>
+            <text x="20" y="94" class="t-b">Painless, indurated</text>
+            <text x="20" y="114" class="t-sm">chancre: 1° syphilis</text>
+            <text x="20" y="132" class="t-sm">Treponema pallidum</text>
+            <rect class="fg-bad" x="190" y="72" width="160" height="70" rx="8"/>
+            <text x="200" y="94" class="t-b">Painful, exudate</text>
+            <text x="200" y="114" class="t-sm">chancroid</text>
+            <text x="200" y="132" class="t-sm">Haemophilus ducreyi</text>
+          </svg>
+        caption: "السؤال الأول في أي genital ulcer: بيوجع؟ لو لأ وجامد = chancre (syphilis). لو بيوجع وفيه إفرازات = chancroid. افتكرها: «You do cry with ducreyi»."
+        alt: "Flow chart: genital ulcer splits into painless indurated chancre of primary syphilis (Treponema pallidum) and painful ulcer with exudate, chancroid (Haemophilus ducreyi)."
+        page: 722
+        quote: "Ulcerated genital lesion Nonpainful, indurated: chancre (1° syphilis, Treponema pallidum) Painful, with exudate: chancroid (Haemophilus ducreyi)"
+      - kind: explain
+        title: "فطريات وطفيليات وفيروسات"
+        text: |-
+          - **Mucor / Rhizopus**: ==eschar أسود على الوش== في مريض DKA أو neutropenia.
+          - **Congenital toxoplasmosis**: chorioretinitis و hydrocephalus و intracranial calcifications، وأحياناً blueberry muffin rash.
+          - **Hookworm**: rash ملفوف بيهرش بعد المشي حافي، وبعدين microcytic anemia (الدودة بتمص دم من الأمعاء).
+          - **Parvovirus B19**: طفل سخن وبعدين خدوده حمرا زي ما اتضرب على وشه (slapped cheeks) والـ rash ينتشر.
+          - **Measles**: fever و cough و conjunctivitis و coryza، و ==Koplik spots== (نقط حمرا بوسطها أبيض مزرق في الخد من جوه).
+        page: 722
+        quote: "Black eschar on face of patient with diabetic ketoacidosis and/or neutropenia"
+      - kind: check
+        question: "A 7-year-old has fever, cough, conjunctivitis and runny nose. Small red spots with blue-white centers are seen on the buccal mucosa, and a rash then spreads from the face down. Which is the diagnosis?"
+        options: ["Measles (rubeola)", "Erythema infectiosum", "Scarlet fever", "Kawasaki disease", "Rocky Mountain spotted fever"]
+        answer: 0
+        why:
+          - "صح: الـ 3 Cs (cough, coryza, conjunctivitis) + Koplik spots = measles."
+          - "Parvovirus B19 بيبدأ بـ slapped cheeks، من غير Koplik spots."
+          - "Scarlet fever: strawberry tongue و rash زي الصنفرة."
+          - "Kawasaki: حرارة ≥ 5 أيام و lymph nodes و تغيرات في الإيد والرجل."
+          - "RMSF: rash بيبدأ من الرسغ والكعب ويطلع على الكفوف."
+        page: 722
+        quote: "Fever, cough, conjunctivitis, coryza, diffuse rash, Koplik spots"
+      - kind: try
+        items: [rr.L02.036, rr.L02.037, rr.L02.043, rr.L02.047, rr.L02.056]
+    recap:
+      - "Anaphylaxis بعد نقل دم = selective IgA deficiency"
+      - "سرة اتأخرت + مفيش pus = LAD"
+      - "Eschar أسود في DKA = Mucor/Rhizopus"
+    practice: [rr.L02.032, rr.L02.033, rr.L02.034, rr.L02.035, rr.L02.036, rr.L02.037, rr.L02.038, rr.L02.039, rr.L02.040, rr.L02.041, rr.L02.042, rr.L02.043, rr.L02.044, rr.L02.045, rr.L02.046, rr.L02.047, rr.L02.048, rr.L02.049, rr.L02.050, rr.L02.051, rr.L02.052, rr.L02.053, rr.L02.054, rr.L02.055, rr.L02.056, rr.L02.057, rr.L02.058, rr.L02.059, rr.L02.060, rr.L02.061]
+
+  - id: rr.L02.lesson3
+    title: "القلب والغدد والجهاز الهضمي والدم: علامات بأسماء"
+    hook: "Beck و Osler و Janeway و Chvostek و Courvoisier: أسماء كتير، بس كل اسم وراه آلية بسيطة"
+    minutes: 10
+    pages: [722, 724]
+    topics: [cardiovascular, endocrine, gastrointestinal, hematology-oncology]
+    goals:
+      - "تعرف الـ murmurs الكلاسيكية والـ signs بتاعة الـ endocarditis"
+      - "تفرّق بين MEN1 و MEN2A و MEN2B"
+      - "تقرا علامات الـ GI والدم من سطر واحد"
+    status: unverified
+    steps:
+      - kind: table
+        title: "الـ murmurs اللي في الجدول"
+        columns: ["الصورة", "التشخيص"]
+        rows:
+          - ["Crescendo-decrescendo systolic murmur, pulsus parvus et tardus, syncope, angina", "Aortic stenosis"]
+          - ["Bounding pulses, wide pulse pressure, early decrescendo diastolic murmur, head bobbing", "Aortic regurgitation"]
+          - ["Continuous machinelike murmur", "Patent ductus arteriosus"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+        page: 722
+        quote: "Systolic ejection murmur (crescendo-decrescendo), “pulsus parvus et tardus,” syncope, angina, dyspnea on exertion Aortic stenosis"
+      - kind: aside
+        tone: exam
+        text: "الـ PDA: ==indomethacin بيقفله==، و ==PGE1 و PGE2 analogs بيخلوه مفتوح== (وده مهم لو الطفل عنده عيب محتاج الـ ductus عشان يعيش). الـ prostaglandins هي اللي بتفتحه، فالـ NSAID اللي بيمنعها بيقفله."
+        page: 722
+        quote: "Continuous “machinelike” murmur PDA (close with indomethacin; keep open with PGE1 and PGE2 analogs)"
+      - kind: explain
+        title: "ألم الصدر وبعد الـ MI"
+        text: |-
+          - ألم مع المجهود = **angina**: stable مع مجهود متوسط، unstable مع مجهود بسيط أو وهو مرتاح.
+          - ST depression: لو ==troponin سلبي== angina، لو موجب **NSTEMI**.
+          - أسابيع لشهور بعد MI: ألم صدر و friction rub أو effusion و حرارة = **postcardiac injury syndrome** (pericarditis autoimmune).
+          - **Beck triad** = ==tamponade==: صوت القلب بعيد، أوردة الرقبة منفوخة، hypotension. القلب متحاصر بسائل، فمش قادر يتملي.
+        page: 722
+        quote: "Chest pain with ST depressions on ECG Angina (⊝ troponins) or NSTEMI (⊕ troponins)"
+      - kind: figure
+        title: "علامات الـ endocarditis"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-bad" x="8" y="10" width="168" height="62" rx="8"/>
+            <text x="18" y="32" class="t-b">Osler nodes</text>
+            <text x="18" y="50" class="t-sm">painful, raised, finger/toe pads</text>
+            <text x="18" y="66" class="t-sm">immune complexes</text>
+            <rect class="fg-good" x="184" y="10" width="168" height="62" rx="8"/>
+            <text x="194" y="32" class="t-b">Janeway lesions</text>
+            <text x="194" y="50" class="t-sm">painless, palms and soles</text>
+            <text x="194" y="66" class="t-sm">septic emboli</text>
+            <rect class="fg-box" x="8" y="80" width="168" height="62" rx="8"/>
+            <text x="18" y="102" class="t-b">Splinter hemorrhages</text>
+            <text x="18" y="120" class="t-sm">under the fingernails</text>
+            <rect class="fg-box" x="184" y="80" width="168" height="62" rx="8"/>
+            <text x="194" y="102" class="t-b">Roth spots</text>
+            <text x="194" y="120" class="t-sm">retinal bleeds, pale centers</text>
+          </svg>
+        caption: "Osler بيوجع (O = Ouch) لأنه immune complexes بتعمل التهاب. Janeway مش بيوجع لأنه septic emboli صغيرة."
+        alt: "Four boxes of infective endocarditis signs: Osler nodes (painful raised lesions on finger and toe pads, immune complexes), Janeway lesions (painless lesions on palms and soles, septic emboli), splinter hemorrhages under the nails, and Roth spots (retinal hemorrhages with pale centers)."
+        page: 723
+        quote: "Painful, raised red/purple lesions on pads of fingers/toes Osler nodes (immune complex deposition in infective endocarditis)"
+      - kind: explain
+        title: "الغدد"
+        text: |-
+          - **Sheehan**: بعد ولادة فيها نزيف شديد، الـ pituitary اتعمله infarction ← مفيش لبن، مفيش دورة، cold intolerance.
+          - **Hyper / hypothyroid**: حر وخسارة وزن و tremor و reflexes سريعة، قصاد برد وزيادة وزن و reflexes بطيئة.
+          - **Chvostek** (تخبط على الـ facial nerve فالوش يرعش) و **Trousseau** (تنفخ الـ BP cuff فالإيد تتقلص) = ==hypocalcemia==.
+          - **Kussmaul**: نفس عميق وسريع في DKA عشان يطلّع CO2 ويعوّض الـ acidosis.
+          - **Addison**: ==hyperpigmentation== (ACTH و MSH عاليين) و orthostatic hypotension. ومريض على steroids جاله shock = **adrenal crisis**.
+          - **Carcinoid syndrome**: flushing و diarrhea و wheeze و murmur في الناحية اليمين، والـ 5-HIAA في البول. معناه إنه انتشر (للكبد مثلاً).
+        page: 723
+        quote: "Facial muscle spasm upon tapping Chvostek sign (hypocalcemia)"
+      - kind: mnemonic
+        word: "PPP"
+        parts:
+          - { key: "P", text: "Pancreas (MEN1)" }
+          - { key: "P", text: "Pituitary (MEN1)" }
+          - { key: "P", text: "Parathyroid (MEN1)" }
+        hook: "MEN1 = 3 Ps. MEN2A = medullary thyroid + pheo + parathyroid. MEN2B = medullary thyroid + pheo + mucosal neuromas + marfanoid. الاتنين 2 من RET."
+        page: 723
+        quote: "Pancreatic, pituitary, parathyroid tumors MEN1"
+      - kind: check
+        question: "A woman has medullary thyroid carcinoma, a pheochromocytoma and hypercalcemia from parathyroid hyperplasia. Which gene is mutated?"
+        options: ["RET", "MEN1", "VHL", "NF1"]
+        answer: 0
+        why:
+          - "صح: medullary thyroid + pheo + parathyroid hyperplasia = MEN2A، autosomal dominant RET."
+          - "MEN1 هو الـ 3 Ps (pancreas و pituitary و parathyroid)، مفيش medullary thyroid."
+          - "VHL: renal cell carcinomas و hemangioblastomas و pheo."
+          - "NF1: café-au-lait و neurofibromas و Lisch nodules."
+        page: 723
+        quote: "Medullary thyroid carcinoma, parathyroid hyperplasia, pheochromocytoma MEN2A (autosomal dominant RET mutation)"
+      - kind: explain
+        title: "الجهاز الهضمي"
+        text: |-
+          - **Courvoisier**: صفرا + ==مرارة كبيرة مش بتوجع== = انسداد تحت في الـ CBD من cancer رأس البنكرياس.
+          - **Mallory-Weiss**: دم في الترجيع بعد ترجيع جامد (alcohol، bulimia): شرخ مش كامل في المريء.
+          - **Plummer-Vinson**: dysphagia (webs) و glossitis و iron deficiency anemia، وممكن يقلب squamous cell carcinoma.
+          - Hematemesis أو melena = upper GI bleed. Hematochezia = lower.
+          - **Whipple**: مفاصل وقلب وأعصاب و diarrhea.
+          - **Rovsing** (تضغط الشمال يوجع اليمين) و **McBurney** = appendicitis.
+          - **Peutz-Jeghers**: polyps hamartomatous + بقع غامقة على الشفايف. **Gardner**: آلاف الـ polyps + osteomas + أسنان زيادة.
+          - **Crigler-Najjar I**: صفرا شديدة و kernicterus في المولود. **Kayser-Fleischer rings** = Wilson.
+          - الـ 6 Fs = ==gallstones==: female و fat و fertile و forty و fair و feeds (TPN) و fasting.
+        page: 724
+        quote: "Female, fat (obese), fertile (multiparity), forty, fair, feeds (TPN), fasting (rapid weight loss)"
+      - kind: sort
+        prompt: "حط كل صورة في مكانها"
+        bins: ["Hemolysis", "Platelets / marrow"]
+        cards:
+          - { text: "Red urine in the morning, venous thrombosis", bin: 0 }
+          - { text: "Painful blue fingers with cold, hemolytic anemia", bin: 0 }
+          - { text: "Petechiae, mucosal bleeding, ↑ bleeding time", bin: 1 }
+          - { text: "Short stature, thumb defects, aplastic anemia", bin: 1 }
+        why: "PNH و cold AIHA الاتنين hemolysis. الـ petechiae مع bleeding time طويل = platelet disorder، و Fanconi anemia = فشل نخاع (aplastic anemia) مع عيوب خلقية."
+        page: 724
+        quote: "Red/pink urine in the morning, pancytopenia, venous thrombosis"
+      - kind: explain
+        title: "الدم والأورام"
+        text: |-
+          - **Burton line**: خط أزرق على اللثة = lead poisoning.
+          - **Fanconi anemia**: قصر و café-au-lait و عيوب في الإبهام والـ radius و aplastic anemia، وأورام ولوكيميا أكتر (غالباً AML): عيب في إصلاح الـ DNA crosslinks.
+          - **PNH**: بول أحمر الصبح و pancytopenia و ==venous thrombosis==.
+          - **Cold AIHA**: صوابع زرقا بتوجع مع hemolysis (Mycoplasma، mono، CLL).
+          - **B symptoms**: حرارة خفيفة و night sweats و نزول وزن = malignancy.
+          - **Mycosis fungoides**: patches ← plaques ← tumors = cutaneous T-cell lymphoma.
+        page: 724
+        quote: "Bluish line on gingiva Burton line (lead poisoning)"
+      - kind: try
+        items: [rr.L02.064, rr.L02.068, rr.L02.069, rr.L02.086, rr.L02.090]
+    recap:
+      - "Beck triad = tamponade"
+      - "Osler بيوجع، Janeway لأ"
+      - "Courvoisier = cancer رأس البنكرياس"
+      - "MEN2A و MEN2B الاتنين RET"
+    practice: [rr.L02.062, rr.L02.063, rr.L02.064, rr.L02.065, rr.L02.066, rr.L02.067, rr.L02.068, rr.L02.069, rr.L02.070, rr.L02.071, rr.L02.072, rr.L02.073, rr.L02.074, rr.L02.075, rr.L02.076, rr.L02.077, rr.L02.078, rr.L02.079, rr.L02.080, rr.L02.081, rr.L02.082, rr.L02.083, rr.L02.084, rr.L02.085, rr.L02.086, rr.L02.087, rr.L02.088, rr.L02.089, rr.L02.090, rr.L02.091, rr.L02.092, rr.L02.093, rr.L02.094, rr.L02.095, rr.L02.096, rr.L02.097, rr.L02.098, rr.L02.099, rr.L02.100, rr.L02.101, rr.L02.102, rr.L02.103, rr.L02.104, rr.L02.105, rr.L02.106, rr.L02.107, rr.L02.108, rr.L02.109, rr.L02.110, rr.L02.111]
+
+  - id: rr.L02.lesson4
+    title: "العضم والأعصاب والكلى والتناسلي والصدر"
+    hook: "Lucid interval، worst headache of my life، waiter's tip: جمل لو قريتها في السؤال يبقى خلصت"
+    minutes: 10
+    pages: [724, 726]
+    topics: [musculoskeletal, neurology, psychiatry, renal, reproductive, respiratory]
+    goals:
+      - "تقرا أشهر صور العضم والروماتيزم من سطر"
+      - "تحدد مكان الـ lesion في الجهاز العصبي من العلامات"
+      - "تخلص آخر صفحة في الجدول: كلى وتناسلي وصدر"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "العضم والمفاصل"
+        text: |-
+          - **Erb palsy**: مولود بعد ولادة صعبة، دراعه في وضع ==waiter's tip== (superior trunk C5-C6).
+          - **Anterior drawer** موجب: الـ tibia بتتزحلق لقدام = ACL.
+          - **Paget disease of bone**: osteoblasts و osteoclasts شغالين أكتر ← عضم mosaic و chalk-stick fractures وجمجمة تخينة و hearing loss.
+          - **Osteoarthritis**: كبير في السن، مفاصل صوابع جامدة بتوجع مع الحركة (Bouchard على PIP، Heberden على DIP).
+          - **Gout**: صباع رجل كبير وارم فجأة و tophi.
+          - **Sjögren**: عيون وبق ناشفين و parotid كبيرة. **Reactive arthritis**: urethritis و conjunctivitis و arthritis (HLA-B27). **SLE**: butterfly rash في ست في سن الإنجاب.
+          - **Kawasaki**: حرارة ≥ 5 أيام و coronary aneurysms، والعلاج ==IVIG و aspirin==.
+        page: 724
+        quote: "Neonate with arm in “waiter’s tip” position following difficult birth"
+      - kind: explain
+        title: "الجلد والأوعية"
+        text: |-
+          - **IgA vasculitis (HSP)**: طفل، palpable purpura على المؤخرة والرجلين، ألم مفاصل وبطن و hematuria.
+          - **Raynaud**: صوابع بتبقى أبيض ← أزرق ← أحمر مع البرد أو التوتر (vasospasm).
+          - **Kaposi sarcoma**: nodules بنفسجي في مريض AIDS = HHV-8.
+          - **Lichen planus**: الـ 6 Ps (pruritic و purple و polygonal و planar papules و plaques).
+        page: 725
+        quote: "Painful fingers/toes changing color from white to blue to red with cold or stress Raynaud phenomenon (vasospasm in extremities)"
+      - kind: figure
+        title: "فين الـ lesion؟"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="8" y="8" width="168" height="74" rx="8"/>
+            <text x="18" y="28" class="t-b">Cerebellum</text>
+            <text x="18" y="46" class="t-sm">intention tremor, ataxia</text>
+            <text x="18" y="64" class="t-sm">falls toward the lesion</text>
+            <rect class="fg-good" x="184" y="8" width="168" height="74" rx="8"/>
+            <text x="194" y="28" class="t-b">Basal ganglia</text>
+            <text x="194" y="46" class="t-sm">resting tremor</text>
+            <text x="194" y="64" class="t-sm">athetosis, chorea</text>
+            <rect class="fg-bad" x="8" y="90" width="168" height="74" rx="8"/>
+            <text x="18" y="110" class="t-b">UMN</text>
+            <text x="18" y="128" class="t-sm">hyperreflexia, hypertonia</text>
+            <text x="18" y="146" class="t-sm">Babinski sign</text>
+            <rect class="fg-box" x="184" y="90" width="168" height="74" rx="8"/>
+            <text x="194" y="110" class="t-b">LMN</text>
+            <text x="194" y="128" class="t-sm">hyporeflexia, hypotonia</text>
+            <text x="194" y="146" class="t-sm">atrophy, fasciculations</text>
+          </svg>
+        caption: "الرعشة وانت بتتحرك (intention) = cerebellum، والرعشة وانت مرتاح (resting) = basal ganglia. الـ UMN بيشيل الفرامل من الـ reflexes فتعلى، والـ LMN بيقطع السلك نفسه فالعضلة تضمر وترفرف."
+        alt: "Four boxes: cerebellar lesion (intention tremor, ataxia, falls toward the lesion), basal ganglia lesion (resting tremor, athetosis, chorea), upper motor neuron lesion (hyperreflexia, hypertonia, Babinski sign), lower motor neuron lesion (hyporeflexia, hypotonia, atrophy, fasciculations)."
+        page: 725
+        quote: "Hyperreflexia, hypertonia, ⊕ Babinski sign"
+      - kind: explain
+        title: "نزيف ومخ"
+        text: |-
+          - **Lucid interval** بعد خبطة = ==epidural hematoma==: الـ middle meningeal artery (فرع من الـ maxillary)، شكله lentiform ومش بيعدّي الـ sutures.
+          - **«Worst headache of my life»** = subarachnoid hemorrhage.
+          - **Wallenberg (PICA)**: dysphagia و hoarseness و gag reflex ضعيف و nystagmus و Horner في نفس الناحية.
+          - **Klüver-Bucy**: hyperphagia و hypersexuality و hyperorality: الـ amygdala الاتنين (HSV-1).
+          - **Parkinson**: resting tremor و rigidity و akinesia و postural instability (substantia nigra). **Huntington**: chorea و dementia و caudate degeneration (CAG repeats).
+          - **NPH**: ==wet، wobbly، wacky== (incontinence و gait apraxia و dementia).
+          - **MS**: nystagmus و intention tremor و optic neuritis و scanning speech و INO في الناحيتين، relapsing-remitting.
+          - **Guillain-Barré**: ضعف بيطلع من تحت لفوق بعد infection في الـ GI أو الـ upper respiratory.
+        page: 725
+        quote: "Urinary incontinence, gait apraxia, cognitive dysfunction"
+      - kind: check
+        question: "A 30-year-old woman has had two episodes of blurred vision in one eye and now has scanning speech and an intention tremor. On lateral gaze, neither eye adducts and the abducting eye shows nystagmus. Which is the most likely diagnosis?"
+        options: ["Multiple sclerosis", "Guillain-Barré syndrome", "Friedreich ataxia", "Lateral medullary syndrome", "Huntington disease"]
+        answer: 0
+        why:
+          - "صح: relapsing-remitting + optic neuritis + scanning speech + intention tremor + bilateral INO = MS."
+          - "Guillain-Barré ضعف صاعد و hyporeflexia بعد infection، مش optic neuritis."
+          - "Friedreich بيبدأ في الطفولة مع hammer toes و cardiomyopathy."
+          - "Wallenberg مفاجئ (stroke) و dysphagia و Horner."
+          - "Huntington chorea و dementia."
+        page: 725
+        quote: "Relapsing and remitting nystagmus, intention tremor, optic neuritis, scanning speech, bilateral internuclear ophthalmoplegia"
+      - kind: explain
+        title: "الـ neurocutaneous والأعصاب الدماغية"
+        text: |-
+          - **NF1**: café-au-lait و Lisch nodules و neurofibromas و pheo و optic gliomas. **NF2**: ==vestibular schwannomas في الناحيتين==.
+          - **Port-wine stain** على الوش = nevus flammeus (مع Sturge-Weber).
+          - **VHL** (3p): renal cell carcinomas في الناحيتين و hemangioblastomas و pheo.
+          - **Friedreich ataxia**: مشية مترنحة و hammer toes و diabetes و hypertrophic cardiomyopathy.
+          - **وش مايل بالجبهة** = LMN facial palsy. الـ UMN بيسيب الجبهة لأن ليها innervation من الناحيتين.
+          - **Ménière**: vertigo بنوبات و tinnitus و sensorineural hearing loss (endolymph زيادة).
+          - **Horner**: ptosis و miosis و anhidrosis. **INO**: MLF lesion.
+        page: 725
+        quote: "Bilateral vestibular schwannomas Neurofibromatosis type II"
+      - kind: reveal
+        prompt: "ست كبيرة بعد عملية: مرة صاحية ومرة نايمة، ومش مركزة. ده dementia؟"
+        answer: "لأ، ده **delirium**: بداية حادة، بيتحسن، الوعي بيروح ويجي (waxing and waning)، والـ attention والـ arousal قليلين. وغالباً سببه حاجة تانية (infection، أدوية...)، فدوّر على السبب."
+        page: 726
+        quote: "Acute onset, reversible “waxing and waning” level of consciousness"
+      - kind: explain
+        title: "الكلى والتناسلي والصدر"
+        text: |-
+          - **Fanconi syndrome**: الـ PCT مش بيعمل reabsorption ← polyuria و RTA type II و hypophosphatemic rickets.
+          - **Nephrotic**: edema و proteinuria > 3.5 g/day و hypoalbuminemia و hypercholesterolemia (podocytes).
+          - **Alport**: nephritis وراثي + hearing loss + anterior lenticonus = ==type IV collagen==.
+          - **Beckwith-Wiedemann**: Wilms و macroglossia و organomegaly و omphalocele (WT2).
+          - **Turner**: streak ovaries و coarctation وغيرها و horseshoe kidney و cystic hygroma و webbed neck.
+          - **Meigs**: ovarian fibroma + ascites + pleural effusion. **Paget of the breast**: rash على الحلمة = cancer تحتها. **Peyronie**: plaques في الـ tunica albuginea ← انحناء.
+          - **Chronic bronchitis**: hypoxemia و polycythemia و hypercapnia. **Emphysema**: pink و dyspnea و hyperventilation.
+          - **Sarcoidosis**: bilateral hilar adenopathy و uveitis و مفاصل وجلد = ==noncaseating granulomas==.
+        page: 726
+        quote: "Bilateral hilar adenopathy, uveitis, arthropathy, skin changes"
+      - kind: try
+        items: [rr.L02.112, rr.L02.131, rr.L02.135, rr.L02.154, rr.L02.164]
+    recap:
+      - "Lucid interval = epidural (middle meningeal)"
+      - "Intention tremor = cerebellum، resting = basal ganglia"
+      - "الجبهة متأثرة = LMN facial palsy"
+      - "Alport = type IV collagen"
+    practice: [rr.L02.112, rr.L02.113, rr.L02.114, rr.L02.115, rr.L02.116, rr.L02.117, rr.L02.118, rr.L02.119, rr.L02.120, rr.L02.121, rr.L02.122, rr.L02.123, rr.L02.124, rr.L02.125, rr.L02.126, rr.L02.127, rr.L02.128, rr.L02.129, rr.L02.130, rr.L02.131, rr.L02.132, rr.L02.133, rr.L02.134, rr.L02.135, rr.L02.136, rr.L02.137, rr.L02.138, rr.L02.139, rr.L02.140, rr.L02.141, rr.L02.142, rr.L02.143, rr.L02.144, rr.L02.145, rr.L02.146, rr.L02.147, rr.L02.148, rr.L02.149, rr.L02.150, rr.L02.151, rr.L02.152, rr.L02.153, rr.L02.154, rr.L02.155, rr.L02.156, rr.L02.157, rr.L02.158, rr.L02.159, rr.L02.160, rr.L02.161, rr.L02.162, rr.L02.163, rr.L02.164, rr.L02.165]
