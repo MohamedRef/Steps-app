@@ -196,3 +196,73 @@ fn a_new_answer_kicks_the_outbox() {
     app.run(move || *revision.write() += 1);
     assert!(sent().contains(&"Kick".to_owned()));
 }
+
+thread_local! {
+    static ENGINE: RefCell<Option<(UnboundedReceiver<Command>, tokio::sync::mpsc::UnboundedSender<crate::cloud::Event>)>> =
+        const { RefCell::new(None) };
+    static SHOWN: std::cell::Cell<Option<Cloud>> = const { std::cell::Cell::new(None) };
+}
+
+fn stand_in_engine() {
+    let cloud = consume_context::<Cloud>();
+    SHOWN.with(|c| c.set(Some(cloud)));
+    let pair = cloud.engine_for_tests();
+    ENGINE.with(|e| *e.borrow_mut() = Some(pair));
+}
+
+/// The engine says `event`; the screen hears it on its next turn.
+fn engine_says(app: &mut App, event: crate::cloud::Event) {
+    ENGINE.with(|e| e.borrow().as_ref().unwrap().1.send(event).unwrap());
+    app.wait(30);
+}
+
+fn engine_got() -> Vec<String> {
+    ENGINE.with(|e| {
+        let mut e = e.borrow_mut();
+        let rx = &mut e.as_mut().unwrap().0;
+        std::iter::from_fn(|| rx.try_recv().ok()).map(|c| format!("{c:?}")).collect()
+    })
+}
+
+#[test]
+fn what_the_sync_engine_reports_reaches_the_screen() {
+    use crate::cloud::Event;
+    let mut app = App::with(Screen::Today, stand_in_engine);
+    app.tap(Screen::Settings.label());
+    app.tap(tx::SECTION);
+    engine_got();
+    let live = CloudStatus { email: Some("mohamed@example.com".into()), ..status(SyncState::Live) };
+    engine_says(&mut app, Event::Status(live.clone()));
+    app.assert_has(tx::LIVE);
+    app.assert_has("mohamed@example.com");
+    // The same status again changes nothing.
+    engine_says(&mut app, Event::Status(live));
+    app.assert_has(tx::LIVE);
+    let signing_in = |app: &mut App| app.run(|| *SHOWN.with(std::cell::Cell::get).unwrap().signing_in.peek());
+    engine_says(&mut app, Event::SigningIn(true));
+    assert!(signing_in(&mut app));
+    engine_says(&mut app, Event::SigningIn(false));
+    assert!(!signing_in(&mut app));
+    engine_says(
+        &mut app,
+        Event::Devices(Ok(vec![
+            device("d-mac", "Mohamed’s MacBook Air", Platform::Macos, true, false, None),
+            device("d-tab", "SM-X730", Platform::Android, false, false, None),
+        ])),
+    );
+    app.assert_has("SM-X730");
+    // The screen's buttons reach the engine.
+    app.tap(tx::REFRESH);
+    assert!(engine_got().contains(&"LoadDevices".to_owned()));
+    // The tablet switched sounds off: a sync brings it, and the screens follow.
+    crate::store::shared()
+        .put_setting(
+            "sound",
+            &crate::sounds::SoundPrefs { on: false, ..crate::sounds::SoundPrefs::default() },
+        )
+        .unwrap();
+    engine_says(&mut app, Event::Changed(["settings".to_owned()].into()));
+    assert!(!app.run(|| crate::sounds::PREFS.peek().on));
+    // The reload counts as a change: the outbox is kicked.
+    assert!(engine_got().contains(&"Kick".to_owned()));
+}

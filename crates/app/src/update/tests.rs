@@ -925,3 +925,308 @@ fn the_feed_pack_of_the_running_build_is_not_downloaded() {
     assert!(!built_in(Some(&"cd".repeat(32)), false, &sha), "other content");
     assert!(!built_in(None, false, &sha), "a local build doesn't know its digest");
 }
+
+/// Puts `bytes` in place as the pack in use, as build 0.1.0+`build`.
+fn put_pack(dir: &Path, bytes: &[u8], build: u64, sha256: &str) {
+    fs::create_dir_all(dir).unwrap();
+    fs::write(dir.join(PACK_FILE), bytes).unwrap();
+    let meta = PackInfo {
+        version: "0.1.0".into(),
+        build,
+        sha256: sha256.into(),
+        published_at: None,
+        ui_build: Some(40),
+    };
+    write_json(dir, PACK_INFO, &meta).unwrap();
+}
+
+fn plain_pack(css: &str) -> Vec<u8> {
+    Pack::new(crate::content::Library::get().index.clone(), Vec::new())
+        .with_look(BTreeMap::from([("assets/main.css".to_owned(), css.to_owned())]))
+        .encode()
+}
+
+#[test]
+fn only_a_sound_pack_that_ran_is_kept_as_the_last_good_one() {
+    let tmp = tempfile::tempdir().unwrap();
+    let dir = tmp.path();
+    let app = build("0.1.0", 40, true);
+    let good = |dir: &Path| {
+        fs::read_dir(dir).unwrap().flatten().any(|e| {
+            let n = e.file_name().to_string_lossy().into_owned();
+            n.starts_with("content.good.") && n.ends_with(".pack")
+        })
+    };
+    assert!(recovery::good_file(dir, "not a digest").is_none());
+    assert!(recovery::good_file(dir, &"g".repeat(64)).is_none());
+
+    // Never opened since it came: nothing to vouch for.
+    let pack = plain_pack(".a {}");
+    put_pack(dir, &pack, 41, &sha256_hex(&pack));
+    recovery::save_settled(dir, &app).unwrap();
+    assert!(!good(dir));
+    // Opened, but no pack is in use for this build.
+    fs::write(dir.join(PACK_STARTS), "1").unwrap();
+    recovery::save_settled(dir, &build("0.1.0", 50, true)).unwrap();
+    assert!(!good(dir));
+    // One that stopped Steps before is never vouched for.
+    reject(dir, &sha256_hex(&pack));
+    recovery::save_settled(dir, &app).unwrap();
+    assert!(!good(dir));
+    fs::remove_file(dir.join(PACK_REJECTED)).unwrap();
+
+    // A digest that can't name a file, a missing file, changed bytes.
+    put_pack(dir, &pack, 41, "xyz");
+    assert_eq!(recovery::save_settled(dir, &app).unwrap_err(), "invalid content digest");
+    put_pack(dir, &pack, 41, &sha256_hex(&pack));
+    fs::remove_file(dir.join(PACK_FILE)).unwrap();
+    assert!(recovery::save_settled(dir, &app).is_err());
+    put_pack(dir, b"other bytes", 41, &sha256_hex(&pack));
+    assert!(recovery::save_settled(dir, &app).unwrap_err().contains("not intact"));
+    // Bytes that aren't a pack, a pack with problems, a stylesheet that
+    // reaches out.
+    put_pack(dir, b"not a pack", 41, &sha256_hex(b"not a pack"));
+    assert!(recovery::save_settled(dir, &app).is_err());
+    let lecture = crate::content::Library::get().lectures.values().next().cloned().unwrap();
+    let twice =
+        Pack::new(crate::content::Library::get().index.clone(), vec![lecture.clone(), lecture]).encode();
+    put_pack(dir, &twice, 41, &sha256_hex(&twice));
+    assert!(recovery::save_settled(dir, &app).unwrap_err().contains("isn't sound"));
+    let reaching = plain_pack("@import 'https://x.example/a.css';");
+    put_pack(dir, &reaching, 41, &sha256_hex(&reaching));
+    assert!(recovery::save_settled(dir, &app).unwrap_err().contains("isn't allowed"));
+    assert!(!good(dir));
+
+    // A sound one is kept; the next one replaces it, and the first file goes.
+    put_pack(dir, &pack, 41, &sha256_hex(&pack));
+    recovery::save_settled(dir, &app).unwrap();
+    let first = recovery::good_file(dir, &sha256_hex(&pack)).unwrap();
+    assert!(first.exists());
+    // Settling the same one again keeps the file it already has.
+    recovery::save_settled(dir, &app).unwrap();
+    assert!(first.exists());
+    let next = plain_pack(".b {}");
+    put_pack(dir, &next, 42, &sha256_hex(&next));
+    recovery::save_settled(dir, &app).unwrap();
+    assert!(!first.exists(), "one backup only");
+    assert!(recovery::good_file(dir, &sha256_hex(&next)).unwrap().exists());
+}
+
+#[test]
+fn a_last_good_pack_is_restored_only_while_it_is_intact_and_safe() {
+    let tmp = tempfile::tempdir().unwrap();
+    let dir = tmp.path();
+    let app = build("0.1.0", 40, true);
+    let pack = plain_pack(".a {}");
+    let sha = sha256_hex(&pack);
+    put_pack(dir, &pack, 41, &sha);
+    fs::write(dir.join(PACK_STARTS), "1").unwrap();
+    recovery::save_settled(dir, &app).unwrap();
+    let file = recovery::good_file(dir, &sha).unwrap();
+
+    // Restored for this very build: the look stays, and it is in place again.
+    fs::remove_file(dir.join(PACK_FILE)).unwrap();
+    let restored = recovery::restore_last_good(dir, &app).unwrap();
+    assert_eq!(restored.look.get("assets/main.css").map(String::as_str), Some(".a {}"));
+    assert_eq!(fs::read(dir.join(PACK_FILE)).unwrap(), pack);
+    // For a later build of the same version (the stylesheet styles build
+    // 40's screens), only the content comes back.
+    let later = build("0.1.0", 41, true);
+    assert!(recovery::restore_last_good(dir, &later).unwrap().look.is_empty());
+    // It can't be put back in place: this session still gets it.
+    fs::remove_file(dir.join(PACK_FILE)).unwrap();
+    fs::create_dir_all(dir.join(PACK_FILE).join("inside")).unwrap();
+    assert!(recovery::restore_last_good(dir, &app).is_some());
+    fs::remove_dir_all(dir.join(PACK_FILE)).unwrap();
+    // Rejected since: not restored.
+    reject(dir, &sha);
+    assert!(recovery::restore_last_good(dir, &app).is_none());
+    fs::remove_file(dir.join(PACK_REJECTED)).unwrap();
+
+    // The backup's bytes changed under it.
+    fs::write(&file, b"changed").unwrap();
+    assert!(recovery::restore_last_good(dir, &app).is_none());
+    // A backup with problems, or one whose stylesheet reaches out, is
+    // never restored (as if an older build had kept it).
+    let pointer = |bytes: &[u8]| {
+        let sha = sha256_hex(bytes);
+        fs::write(recovery::good_file(dir, &sha).unwrap(), bytes).unwrap();
+        let meta = PackInfo {
+            version: "0.1.0".into(),
+            build: 41,
+            sha256: sha,
+            published_at: None,
+            ui_build: Some(40),
+        };
+        write_json(dir, "content.good.json", &meta).unwrap();
+    };
+    let lecture = crate::content::Library::get().lectures.values().next().cloned().unwrap();
+    pointer(
+        &Pack::new(crate::content::Library::get().index.clone(), vec![lecture.clone(), lecture]).encode(),
+    );
+    assert!(recovery::restore_last_good(dir, &app).is_none());
+    pointer(&plain_pack("@import 'https://x.example/a.css';"));
+    assert!(recovery::restore_last_good(dir, &app).is_none());
+    pointer(b"not a pack");
+    assert!(recovery::restore_last_good(dir, &app).is_none());
+}
+
+#[test]
+fn a_calm_run_resets_the_crash_guard() {
+    let dir = crate::prefs::data_dir().unwrap().join("updates");
+    fs::create_dir_all(&dir).unwrap();
+    fs::write(dir.join(PACK_STARTS), "2").unwrap();
+    // No pack in use: nothing to keep, and the count starts again.
+    pack_settled();
+    assert!(!dir.join(PACK_STARTS).exists());
+    // A broken one in use: it isn't kept, and the count still starts again.
+    let info = BuildInfo::from_env();
+    fs::write(dir.join(PACK_FILE), b"broken").unwrap();
+    let meta = PackInfo {
+        version: info.version.to_string(),
+        build: info.build,
+        sha256: sha256_hex(b"something else"),
+        published_at: None,
+        ui_build: Some(info.build),
+    };
+    write_json(&dir, PACK_INFO, &meta).unwrap();
+    fs::write(dir.join(PACK_STARTS), "1").unwrap();
+    pack_settled();
+    assert!(!dir.join(PACK_STARTS).exists());
+    assert!(!dir.join("content.good.json").exists());
+}
+
+#[test]
+fn an_updater_switched_off_or_with_nothing_to_do_stays_still() {
+    // A build without a signing key can't verify anything: off.
+    let data = tempfile::tempdir().unwrap();
+    let info = BuildInfo { key: None, ..build("0.1.0", 42, true) };
+    let u: &'static Updater = Box::leak(Box::new(Updater::new(
+        data.path().join("updates"),
+        info,
+        Some(UpdatePlatform::AndroidArm64),
+        None,
+        None,
+    )));
+    assert_eq!(u.status().off, Some(Off::NoKey));
+    // With no override the feed is the channel's own release folder.
+    let feed = u.feed_url();
+    assert!(u.status().channel.feed_url().starts_with(&feed) && !feed.ends_with(MANIFEST_FILE), "{feed}");
+    // Off: a check does nothing.
+    u.check(false);
+    assert_eq!(u.status().phase, Phase::Idle);
+    assert_eq!(u.status().prefs.last_check_ms, None);
+
+    // Updates switched off in Settings: the background step never checks.
+    let feed = fixture_feed();
+    let (u, _data) = updater(&serve(feed.path().to_path_buf()), build("0.1.0", 40, true));
+    u.set_mode(Mode::Off);
+    u.tick();
+    assert_eq!(u.status().phase, Phase::Idle);
+    assert_eq!(u.status().prefs.last_check_ms, None);
+    // Picking the channel already followed changes nothing.
+    u.set_status_for_tests(|s| s.phase = Phase::NotForThisDevice);
+    u.set_channel(u.status().channel);
+    assert_eq!(u.status().phase, Phase::NotForThisDevice);
+    // Nothing ready: install does nothing.
+    u.install();
+    assert_eq!(u.status().phase, Phase::NotForThisDevice);
+    // "Ready" but the file is gone: it says so, and the offer stays.
+    u.set_status_for_tests(|s| s.phase = Phase::Ready(offer("0.1.0", 42)));
+    u.install();
+    assert!(matches!(u.status().phase, Phase::Failed { offer: Some(_), .. }), "{:?}", u.status().phase);
+}
+
+#[test]
+fn a_feed_with_nothing_for_this_device_says_so() {
+    let feed = fixture_feed();
+    let url = serve(feed.path().to_path_buf());
+    let data = tempfile::tempdir().unwrap();
+    let dir = data.path().join("updates");
+    fs::create_dir_all(&dir).unwrap();
+    let prefs = Prefs { channel: Some(Channel::Preview), ..Prefs::default() };
+    fs::write(dir.join("prefs.json"), serde_json::to_vec(&prefs).unwrap()).unwrap();
+    let u: &'static Updater = Box::leak(Box::new(Updater::new(
+        dir,
+        build("0.1.0", 40, true),
+        Some(UpdatePlatform::MacosX86_64),
+        Some(url),
+        None,
+    )));
+    u.check(false);
+    assert_eq!(u.status().phase, Phase::NotForThisDevice);
+}
+
+#[test]
+fn a_pack_in_use_that_is_gone_unreadable_or_unsafe_is_dropped() {
+    let tmp = tempfile::tempdir().unwrap();
+    let dir = tmp.path();
+    let app = build("0.1.0", 40, true);
+    let meta = |sha: String| PackInfo {
+        version: "0.1.0".into(),
+        build: 41,
+        sha256: sha,
+        published_at: None,
+        ui_build: Some(40),
+    };
+    // Its file is gone.
+    write_json(dir, PACK_INFO, &meta(sha256_hex(b"gone"))).unwrap();
+    assert!(installed_pack_in(dir, &app).is_none());
+    assert!(is_rejected(dir, &sha256_hex(b"gone")));
+    // Bytes that don't open.
+    put_pack(dir, b"not a pack", 41, &sha256_hex(b"not a pack"));
+    assert!(installed_pack_in(dir, &app).is_none());
+    assert!(!dir.join(PACK_FILE).exists());
+    // A stylesheet for this very build that reaches out.
+    let reaching = plain_pack("@import 'https://x.example/a.css';");
+    put_pack(dir, &reaching, 41, &sha256_hex(&reaching));
+    assert!(installed_pack_in(dir, &app).is_none());
+    assert!(is_rejected(dir, &sha256_hex(&reaching)));
+    // For another build its stylesheets are left out anyway, so it opens.
+    let _ = fs::remove_file(dir.join(PACK_STARTS));
+    put_pack(dir, &reaching, 41, &sha256_hex(&reaching));
+    fs::remove_file(dir.join(PACK_REJECTED)).unwrap();
+    let other = build("0.1.0", 41, true);
+    assert!(installed_pack_in(dir, &other).unwrap().look.is_empty());
+}
+
+#[test]
+fn the_unreadable_list_keeps_the_last_sixteen_once_each() {
+    let tmp = tempfile::tempdir().unwrap();
+    let dir = tmp.path();
+    let app = build("0.1.0", 40, true);
+    for i in 0..18u8 {
+        mark_unreadable(dir, &app, &sha256_hex(&[i]));
+    }
+    mark_unreadable(dir, &app, &sha256_hex(&[17]).to_ascii_uppercase());
+    let list = unreadable(dir);
+    assert_eq!(list.len(), 16);
+    assert!(!is_unreadable(dir, &app, &sha256_hex(&[0])), "the oldest went");
+    assert!(is_unreadable(dir, &app, &sha256_hex(&[17])));
+    // A later app build starts a fresh list.
+    let later = build("0.1.0", 41, true);
+    assert!(!is_unreadable(dir, &later, &sha256_hex(&[17])));
+    mark_unreadable(dir, &later, &sha256_hex(&[1]));
+    assert_eq!(unreadable(dir).len(), 1);
+    // A folder that can't be written: it is only reported.
+    let file = dir.join("a-file");
+    fs::write(&file, b"").unwrap();
+    mark_unreadable(&file, &app, &sha256_hex(&[2]));
+    assert!(!is_unreadable(&file, &app, &sha256_hex(&[2])));
+}
+
+#[test]
+fn the_background_job_of_a_development_build_never_checks() {
+    // The job's own updater (no UI running in this process): a debug build
+    // is switched off, so nothing is fetched and nothing is announced.
+    let data = tempfile::tempdir().unwrap();
+    assert_eq!(background_check(data.path(), false, true), None);
+    assert_eq!(background_check(data.path(), true, false), None);
+    background_shown(data.path(), "0.1.0+42:ready");
+    let u = job_updater(data.path());
+    assert_eq!(u.status().off, Some(Off::DevBuild));
+    assert_eq!(u.status().prefs.notified.as_deref(), Some("0.1.0+42:ready"));
+    assert_eq!(u.status().prefs.last_check_ms, None);
+    // The UI of this process never sees it: only `init` makes it the app's.
+    assert!(get().is_none());
+}

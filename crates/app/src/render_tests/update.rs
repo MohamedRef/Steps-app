@@ -466,6 +466,8 @@ fn the_offer_sheet_lists_what_is_coming_and_moves_it_forward() {
     app.settle();
     assert!(app.html().contains("us-go"));
     app.tap_nth(tx::DOWNLOAD, 0);
+    // The feed is out of reach: the download it started fails.
+    until(&mut app, u, "the failed download", |s| matches!(s.phase, Phase::Failed { .. }));
     // An offer without changelog lines shows the feed's notes instead.
     u.set_status_for_tests(|s| s.phase = Phase::Installing(offer(42, Vec::new())));
     app.settle();
@@ -494,4 +496,24 @@ fn a_notification_tap_opens_the_offer_or_the_changelog() {
     app.settle();
     app.run(move || nav.open_offer());
     assert!(app.html().contains("us-go"), "the offer, with its button");
+}
+
+#[test]
+fn content_that_came_while_open_is_switched_to_between_sessions() {
+    let u = install(&dead_feed(), "0.1.0", 40, notify());
+    let mut app = App::open(Screen::Study);
+    u.pack_waiting_for_tests(43);
+    let rev = app.run(|| *dioxus::prelude::ReadableExt::peek(&crate::content::REV));
+    // Mid-session it waits.
+    app.wait(2300);
+    assert!(u.status().content_waiting, "never mid-session");
+    // Between sessions it switches, and the screens are drawn again.
+    app.tap(Screen::Today.label());
+    let end = Instant::now() + Duration::from_secs(10);
+    while u.status().content_waiting {
+        assert!(Instant::now() < end, "never switched");
+        app.wait(50);
+    }
+    assert_eq!(u.status().content_build, 43);
+    assert!(app.run(|| *dioxus::prelude::ReadableExt::peek(&crate::content::REV)) > rev);
 }

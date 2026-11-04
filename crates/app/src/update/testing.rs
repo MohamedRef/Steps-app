@@ -104,6 +104,22 @@ impl Updater {
         self.tx.send_modify(f);
     }
 
+    /// A content pack (build `build`) has come and waits to be switched to.
+    pub fn pack_waiting_for_tests(&self, build: u64) {
+        let bytes = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+        fs::create_dir_all(&self.dir).unwrap();
+        fs::write(self.dir.join(PACK_FILE), &bytes).unwrap();
+        let meta = PackInfo {
+            version: self.info.version.to_string(),
+            build,
+            sha256: sha256_hex(&bytes),
+            published_at: None,
+            ui_build: Some(self.info.build),
+        };
+        write_json(&self.dir, PACK_INFO, &meta).unwrap();
+        self.tx.send_modify(|s| s.content_waiting = true);
+    }
+
     /// The folder the updater keeps its files in.
     pub fn dir_for_tests(&self) -> &Path {
         &self.dir

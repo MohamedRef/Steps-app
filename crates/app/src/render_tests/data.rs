@@ -155,3 +155,39 @@ fn the_anki_deck_is_built_from_the_app_and_saved() {
     assert!(std::fs::read(&path).unwrap().starts_with(b"PK"), "an .apkg is a zip");
     app.assert_has(&path.display().to_string());
 }
+
+/// Picks `path` in the "Choose file" input, as the WebView does.
+fn choose_file(app: &mut App, path: &std::path::Path) {
+    use dioxus_html::{EventData, SerializedFileData, SerializedFormData, SerializedFormObject};
+    let file = SerializedFileData { path: path.to_path_buf(), ..SerializedFileData::empty() };
+    let data = SerializedFormData::new(
+        String::new(),
+        vec![SerializedFormObject { key: "file".into(), text: None, file: Some(file) }],
+    );
+    let n = app.target("change", "", 0);
+    app.fire("change", EventData::Form(data), n);
+}
+
+#[test]
+fn a_backup_chosen_from_disk_is_read_and_an_unreadable_one_says_why() {
+    let mut app = open_data();
+    let dir = tempfile::tempdir().unwrap();
+    let path = dir.path().join("tablet.json");
+    std::fs::write(&path, tablet_backup()).unwrap();
+    choose_file(&mut app, &path);
+    wait_for(&mut app, tx::IMPORT_SAFE);
+    app.assert_has("tablet.json");
+    app.tap(tx::IMPORT_CANCEL);
+    // The dialog closed with nothing picked: nothing happens.
+    let n = app.target("change", "", 0);
+    app.fire(
+        "change",
+        dioxus_html::EventData::Form(dioxus_html::SerializedFormData::new(String::new(), Vec::new())),
+        n,
+    );
+    app.assert_has(tx::IMPORT_READ);
+    app.assert_lacks(tx::IMPORT_FAILED);
+    // Gone before it could be read.
+    choose_file(&mut app, &dir.path().join("gone.json"));
+    wait_for(&mut app, tx::IMPORT_FAILED);
+}

@@ -15,6 +15,7 @@ mod onboarding;
 mod screens;
 mod settings;
 mod update;
+mod views;
 
 use std::time::Duration;
 

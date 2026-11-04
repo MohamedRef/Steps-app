@@ -363,6 +363,34 @@ fn a_hub_error_reconnects_and_a_dropped_socket_comes_back() {
 }
 
 #[test]
+fn a_binary_frame_is_ignored_and_a_cut_connection_comes_back() {
+    let fake = Fake::start();
+    let mut hellos = 0;
+    fake.on_message(move |m| {
+        if !matches!(m, ClientMsg::Hello { .. }) {
+            return Vec::new();
+        }
+        hellos += 1;
+        match hellos {
+            1 => vec![Reply::Binary, Reply::Msg(ServerMsg::CaughtUp { head_seq: 3 }), Reply::Cut],
+            _ => vec![Reply::Msg(ServerMsg::CaughtUp { head_seq: 4 })],
+        }
+    });
+    let s = store();
+    let me = s.device();
+    let mut run = start(&fake, s, Some(session(&me, "acc-1", now() + DAY)), None);
+    run.status("live", |st| st.sync == SyncState::Live);
+    // Cut off without a goodbye: it connects again and carries on.
+    let deadline = std::time::Instant::now() + Duration::from_secs(10);
+    while s.last_seq() < 4 {
+        assert!(std::time::Instant::now() < deadline, "never came back");
+        run.pump();
+        std::thread::sleep(Duration::from_millis(20));
+    }
+    assert_eq!(fake.sockets().len(), 2);
+}
+
+#[test]
 fn a_clock_ahead_keeps_changes_in_the_outbox_and_says_so() {
     let fake = Fake::start();
     fake.on_message(|m| match m {

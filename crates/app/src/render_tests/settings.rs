@@ -181,3 +181,17 @@ fn the_data_section_says_where_data_lives() {
     app.assert_has(crate::i18n::study_settings::STORE_MEMORY);
     app.assert_has(tx::DIAG);
 }
+
+#[test]
+fn a_launch_can_name_its_screen_and_settings_opens_over_today() {
+    assert_eq!(Screen::named("study"), Some(Screen::Study));
+    assert_eq!(Screen::named("SETTINGS"), Some(Screen::Settings));
+    assert_eq!(Screen::named("nowhere"), None);
+    // Settings is a sheet: what's under it is Today.
+    let app = App::open(Screen::Settings);
+    app.assert_has(crate::i18n::today::DUE);
+    // The rail's own Settings button opens the sheet.
+    let mut app = App::open(Screen::Today);
+    app.tap("nav-item nav-foot");
+    assert!(app.can_tap("settings-backdrop"));
+}

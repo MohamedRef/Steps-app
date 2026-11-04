@@ -87,25 +87,30 @@ pub fn use_shortcuts() {
     use_future(move || async move {
         let mut eval = document::eval(KEYS_JS);
         while let Ok(msg) = eval.recv::<String>().await {
-            match parse(&msg) {
-                Some(Command::Go(screen)) => {
-                    open_sheet(false);
-                    settings.close();
-                    let mut s = ui.screen;
-                    s.set(screen);
-                }
-                Some(Command::Settings) => {
-                    open_sheet(false);
-                    settings.show(None);
-                }
-                Some(Command::Help) => {
-                    let open = !*SHEET_OPEN.peek();
-                    open_sheet(open);
-                }
-                None => {}
-            }
+            follow(&msg, ui, settings);
         }
     });
+}
+
+/// Does what one message from the key script asks.
+fn follow(msg: &str, ui: Ui, settings: SettingsNav) {
+    match parse(msg) {
+        Some(Command::Go(screen)) => {
+            open_sheet(false);
+            settings.close();
+            let mut s = ui.screen;
+            s.set(screen);
+        }
+        Some(Command::Settings) => {
+            open_sheet(false);
+            settings.show(None);
+        }
+        Some(Command::Help) => {
+            let open = !*SHEET_OPEN.peek();
+            open_sheet(open);
+        }
+        None => {}
+    }
 }
 
 /// The shortcut list: `?`, Help › Keyboard Shortcuts on the Mac, or the
@@ -172,6 +177,35 @@ pub fn KeysSheet() -> Element {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    thread_local! {
+        static NAV: std::cell::Cell<Option<(Ui, SettingsNav)>> = const { std::cell::Cell::new(None) };
+    }
+
+    fn keep() {
+        NAV.with(|n| n.set(Some((consume_context(), consume_context()))));
+    }
+
+    #[test]
+    fn keys_go_to_screens_settings_and_the_list() {
+        let mut app = crate::render_tests::App::with(Screen::Today, keep);
+        let (ui, settings) = NAV.with(std::cell::Cell::get).unwrap();
+        app.run(move || follow("help", ui, settings));
+        app.assert_has(tx::REVEAL);
+        app.assert_has("Ctrl");
+        app.tap(tx::CLOSE);
+        app.assert_lacks(tx::REVEAL);
+        app.run(move || follow("help", ui, settings));
+        app.tap("keys-backdrop");
+        app.assert_lacks(tx::REVEAL);
+        app.run(move || follow("go:settings", ui, settings));
+        assert!(app.can_tap("settings-backdrop"));
+        app.run(move || follow("go:3", ui, settings));
+        assert!(!app.can_tap("settings-backdrop"));
+        assert!(app.html().contains(r#"data-screen="Study""#));
+        app.run(move || follow("nothing", ui, settings));
+        assert!(app.html().contains(r#"data-screen="Study""#));
+    }
 
     #[test]
     fn messages_map_to_screens() {

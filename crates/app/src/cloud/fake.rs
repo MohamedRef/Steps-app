@@ -20,6 +20,10 @@ pub enum Reply {
     Raw(String),
     /// Closes the socket with this code.
     Close(u16),
+    /// A binary frame, which the sync protocol never uses.
+    Binary,
+    /// Drops the connection with no closing handshake.
+    Cut,
 }
 
 type Handler = Box<dyn FnMut(&ClientMsg) -> Vec<Reply> + Send>;
@@ -41,9 +45,12 @@ pub struct Log {
     pub ws: Vec<ClientMsg>,
 }
 
+/// Canned replies by route, the last one sticking.
+type Routes = Mutex<HashMap<String, VecDeque<(u16, String)>>>;
+
 pub struct Fake {
     pub url: String,
-    routes: Arc<Mutex<HashMap<String, VecDeque<(u16, String)>>>>,
+    routes: Arc<Routes>,
     refuse: Arc<Mutex<VecDeque<u16>>>,
     handler: Arc<Mutex<Handler>>,
     pub log: Arc<Mutex<Log>>,
@@ -106,7 +113,7 @@ impl Fake {
 
 fn serve(
     stream: TcpStream,
-    routes: &Mutex<HashMap<String, VecDeque<(u16, String)>>>,
+    routes: &Routes,
     refuse: &Mutex<VecDeque<u16>>,
     handler: &Mutex<Handler>,
     log: &Mutex<Log>,
@@ -131,7 +138,7 @@ fn serve(
     }
 }
 
-fn http(stream: TcpStream, routes: &Mutex<HashMap<String, VecDeque<(u16, String)>>>, log: &Mutex<Log>) {
+fn http(stream: TcpStream, routes: &Routes, log: &Mutex<Log>) {
     let mut reader = BufReader::new(stream);
     let mut first = String::new();
     if reader.read_line(&mut first).is_err() {
@@ -173,6 +180,7 @@ fn http(stream: TcpStream, routes: &Mutex<HashMap<String, VecDeque<(u16, String)
     );
 }
 
+#[allow(clippy::result_large_err)] // tungstenite's handshake callback type
 fn socket(mut stream: TcpStream, refuse: &Mutex<VecDeque<u16>>, handler: &Mutex<Handler>, log: &Mutex<Log>) {
     if let Some(status) = refuse.lock().unwrap().pop_front() {
         // Read the request off first, so the client sees the answer.
@@ -204,6 +212,11 @@ fn socket(mut stream: TcpStream, refuse: &Mutex<VecDeque<u16>>, handler: &Mutex<
             let sent = match r {
                 Reply::Msg(m) => ws.send(Message::Text(serde_json::to_string(&m).unwrap().into())),
                 Reply::Raw(t) => ws.send(Message::Text(t.into())),
+                Reply::Binary => ws.send(Message::Binary(vec![1, 2, 3].into())),
+                Reply::Cut => {
+                    let _ = ws.flush();
+                    return;
+                }
                 Reply::Close(code) => {
                     let frame = tungstenite::protocol::CloseFrame { code: code.into(), reason: "".into() };
                     let _ = ws.close(Some(frame));
