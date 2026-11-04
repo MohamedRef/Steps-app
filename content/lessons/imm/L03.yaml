@@ -1,0 +1,1007 @@
+schema: steps.lesson/v1
+lecture: imm.L03
+lessons:
+  - id: imm.L03.lesson1
+    title: "الـ antibody: إيد بتمسك وديل بيشاور"
+    hook: "افهم الـ Fab والـ Fc مرة، وكل isotype هيبقى له شخصية تفتكرها"
+    minutes: 9
+    pages: [102, 103]
+    topics: [antibody-structure-and-function, immunoglobulin-isotypes, antigen-type-and-memory]
+    goals:
+      - "تعرف مين بيمسك الـ antigen ومين بيشغّل الـ complement"
+      - "تفهم الـ diversity بتيجي منين قبل وبعد الـ antigen"
+      - "تميّز الـ 5 isotypes من وصف واحد"
+      - "تفهم ليه الـ polysaccharide vaccines ضعيفة"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "شكل الـ Y"
+        text: |-
+          الـ antibody شكله **Y**: سلسلتين heavy وسلسلتين light.
+
+          - الـ ==Fab== (الدراعين): فيه heavy و light، وهو اللي بيمسك الـ antigen، وبيحدد الـ **idiotype** (مكان المسك).
+          - الـ ==Fc== (الرجل): heavy بس، وهو اللي بيكلّم باقي المناعة. الـ Fc بتاع **IgM و IgG** بيشغّل الـ complement.
+          - الـ **hinge** في النص بيدّي مرونة، فالدراعين يمسكوا epitopes كتير في نفس الوقت.
+        page: 102
+        quote: "Fab fragment consisting of light (L) and heavy (H) chains recognizes antigens. Fc region of IgM and IgG fixes complement. Heavy chain contributes to Fc and Fab regions. Light chain contributes only to Fab region."
+      - kind: figure
+        title: "Fab و Fc"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="180" y1="110" x2="110" y2="30" stroke-width="10"/>
+            <line class="fg-ink" x1="180" y1="110" x2="250" y2="30" stroke-width="10"/>
+            <line class="fg-thin" x1="160" y1="110" x2="95" y2="40" stroke-width="6"/>
+            <line class="fg-thin" x1="200" y1="110" x2="265" y2="40" stroke-width="6"/>
+            <line class="fg-ink" x1="180" y1="110" x2="180" y2="195" stroke-width="12"/>
+            <circle class="fg-dot-acc" cx="105" cy="25" r="8"/>
+            <circle class="fg-dot-acc" cx="255" cy="25" r="8"/>
+            <text x="20" y="30" class="t-sm t-acc">antigen site</text>
+            <text x="20" y="80" class="t-sm t-b">Fab: H + L chains</text>
+            <text x="190" y="118" class="t-sm">hinge</text>
+            <text x="192" y="160" class="t-sm t-b">Fc: H chains only</text>
+            <text x="192" y="178" class="t-sm">complement and</text>
+            <text x="192" y="194" class="t-sm">macrophage binding</text>
+            <text x="276" y="72" class="t-sm t-mut">light chain</text>
+            <text x="276" y="88" class="t-sm t-mut">(dashed)</text>
+          </svg>
+        caption: "الدراعين (Fab) فيهم heavy و light وفي آخرهم مكان مسك الـ antigen. الرجل (Fc) heavy بس، وعليها مكان الـ complement وبتلزق في الـ macrophages."
+        alt: "A Y-shaped antibody: two Fab arms made of heavy and light chains with antigen-binding sites at the tips, a hinge in the middle, and an Fc stem made of heavy chains only that binds complement and macrophages."
+        page: 102
+        quote: "Fab: Fragment, antigen binding Determines idiotype: antigen binding site. Hinge region: provides flexibility between Fab arms, allowing simultaneous binding to multiple epitopes"
+      - kind: mnemonic
+        word: "CCCCC"
+        parts:
+          - { key: "C", text: "Constant" }
+          - { key: "C", text: "Carboxy terminal" }
+          - { key: "C", text: "Complement binding" }
+          - { key: "C", text: "Carbohydrate side chains" }
+          - { key: "C", text: "Confers isotype (IgM, IgD, etc.)" }
+        hook: "الكتاب: الـ Fc فيه 5 C's"
+        page: 102
+        quote: "Fc (5 C’s): Constant Carboxy terminal Complement binding Carbohydrate side chains Confers (determines) isotype (IgM, IgD, etc)"
+      - kind: explain
+        title: "الـ diversity بتيجي منين؟"
+        text: |-
+          **قبل الـ antigen** (antigen independent):
+          - ==RAG1 و RAG2== بيعملوا random recombination للـ VJ (light) والـ V(D)J (heavy).
+          - الـ **TdT** بيزوّد nucleotides عشوائية في المفاصل.
+          - أي heavy ممكن يتجوز أي light.
+
+          **بعد الـ antigen** (antigen dependent):
+          - **Somatic hypermutation و affinity maturation** في الـ variable region.
+          - **Isotype switching** في الـ constant region.
+        page: 102
+        quote: "Random recombination of VJ (light-chain) or V(D)J (heavy-chain) genes by RAG1 and RAG2 2. Random addition of nucleotides to DNA during recombination by terminal deoxynucleotidyl transferase (TdT)"
+      - kind: check
+        question: "Which process happens only after antigen exposure?"
+        options:
+          - "Somatic hypermutation"
+          - "RAG-mediated V(D)J recombination"
+          - "TdT nucleotide addition"
+          - "Random heavy–light chain pairing"
+        answer: 0
+        why:
+          - "صح: الـ somatic hypermutation والـ isotype switching بيحصلوا بعد ما الـ B cell تقابل الـ antigen."
+          - "الـ V(D)J بيحصل أثناء تطوّر الخلية، قبل أي antigen."
+          - "الـ TdT برضه antigen independent."
+          - "الـ pairing العشوائي قبل الـ antigen."
+        page: 102
+        quote: "Generation of antibody specificity (antigen dependent) 4. Somatic hypermutation and affinity maturation (variable region) 5. Isotype switching (constant region)"
+      - kind: explain
+        title: "الـ antibody بيعمل إيه؟"
+        text: |-
+          3 شغلانات:
+          - **Neutralization**: بيمنع الـ bacteria تلزق.
+          - **Opsonization**: بيعلّم الجرثومة عشان الـ phagocyte ياكلها.
+          - **Complement activation**: يشغّل الـ complement ← C3b (opsonization) و MAC (lysis).
+
+          و**IgMom و IgDad** على الـ naïve B cell، وبعد الـ switch (بالـ cytokines و ==CD40L==) يطلع plasma cells تعمل IgA أو IgG أو IgE: «mature as they **AGE**».
+        page: 103
+        quote: "Mature, naïve B cells prior to activation express IgM and IgD on their surfaces. They may differentiate in germinal centers of lymph nodes by isotype switching (gene rearrangement; induced by cytokines and CD40L) into plasma cells that secrete IgA, IgG, or IgE."
+      - kind: table
+        title: "شخصية كل isotype"
+        columns: ["Isotype", "Signature"]
+        rows:
+          - ["IgG", "Most abundant in serum; 2° response; only one to cross placenta; warm AIHA"]
+          - ["IgA", "Mucosa; dimer + J chain + secretory component; most produced overall; breast milk"]
+          - ["IgM", "First made; pentamer (avid binding); fixes complement; cold AIHA"]
+          - ["IgD", "On naïve B cells; low serum level"]
+          - ["IgE", "Mast cells and basophils; type I; parasites via eosinophils"]
+        hide: [[0, 1], [1, 1], [2, 1], [4, 1]]
+        page: 103
+        quote: "Main antibody in 2° response to an antigen. Most abundant isotype in serum. Fixes complement, opsonizes bacteria, neutralizes bacterial toxins and viruses. Only isotype that crosses the placenta"
+      - kind: aside
+        tone: tip
+        text: "حيل الكتاب: «==IgG Greets the Growing fetus==» (الوحيد اللي بيعدّي الـ placenta)، و warm AIHA = IgG لأن «warm weather is **G**ood!». والـ cold AIHA بالـ IgM."
+        page: 103
+        quote: "Only isotype that crosses the placenta (provides infants with passive immunity that starts to wane after birth). “IgG Greets the Growing fetus.” Associated with warm autoimmune hemolytic anemia (“warm weather is Good!”)."
+      - kind: reveal
+        prompt: "الـ IgA هو أكتر antibody الجسم بيعمله، بس مستواه في الدم أقل من IgG. إزاي؟"
+        answer: "لأن معظمه بيتبعت **برّه**: في الـ tears والـ saliva والـ mucus واللبن. بيعدّي الـ epithelium بالـ ==transcytosis== وياخد معاه الـ **secretory component** اللي بيحمي الـ Fc من الـ proteases في الأمعاء. وده اللي بيحمي من **Giardia**."
+        page: 103
+        quote: "Most produced antibody overall, but has lower serum concentrations. Released into secretions (tears, saliva, mucus) and breast milk. Picks up secretory component from epithelial cells, which protects the Fc portion from luminal proteases."
+      - kind: explain
+        title: "Affinity و avidity"
+        text: |-
+          - **Affinity**: قوة مسكة ==واحدة== بين antibody و antigen.
+          - **Avidity**: القوة الكلية من ==مسكات كتير== في جزيء multivalent. الـ hinge والـ heavy chain domains بيزوّدوها.
+
+          عشان كده الـ IgM pentamer (10 أدرع) مسكته قوية حتى لو الـ affinity لسه ضعيفة في أول الـ response.
+        page: 103
+        quote: "Affinity refers to the strength of a single antibody–antigen interaction. Avidity (enhanced by the hinge region and heavy chain domains) describes the overall binding strength resulting from multiple antibody–antigen interactions in a multivalent molecule."
+      - kind: explain
+        title: "Thymus-independent و thymus-dependent"
+        text: |-
+          - **Thymus-independent**: antigen ==من غير peptide== (زي الـ LPS أو الـ capsular polysaccharide). مينفعش يتعرض على MHC للـ T cells، فمفيش help ← ضعيف، ومفيش memory كويسة، والـ vaccines محتاجة boosters و adjuvants (زي PPSV23).
+          - **Thymus-dependent**: فيه **protein** (زي diphtheria toxoid). الـ B cell بتلمس الـ Th مباشرة ← class switching و ==memory==.
+        page: 103
+        quote: "Antigens containing a protein component (eg, diphtheria toxoid). Class switching and immunologic memory occur as a result of direct contact of B cells with Th cells."
+      - kind: check
+        question: "Why does a pure capsular polysaccharide vaccine give weak memory?"
+        options:
+          - "It cannot be presented by MHC to T cells"
+          - "It is destroyed by IgA"
+          - "It is a live organism"
+          - "It binds only to IgE"
+        answer: 0
+        why:
+          - "صح: من غير peptide مفيش MHC presentation، فمفيش T-cell help للـ class switch والـ memory."
+          - "الـ IgA مالوش دعوة بضعف الـ vaccine."
+          - "PPSV23 مش live."
+          - "مالوش علاقة بالـ IgE."
+        page: 103
+        quote: "Antigens lacking a peptide component (eg, lipopolysaccharides from gram ⊝ bacteria); cannot be presented by MHC to T cells. Weakly immunogenic"
+      - kind: try
+        items: [imm.L03.003, imm.L03.004, imm.L03.010, imm.L03.011, imm.L03.017]
+    recap:
+      - "Fab يمسك (H + L)، Fc يشاور (H بس؛ IgM و IgG بيشغّلوا complement)."
+      - "قبل الـ antigen: RAG1/2 و TdT والـ pairing. بعده: hypermutation و switching."
+      - "IgG بيعدّي الـ placenta، IgA في الـ mucosa، IgM أول واحد pentamer، IgE للـ mast cells."
+      - "Polysaccharide = thymus-independent = ضعيف ومن غير memory."
+    practice: [imm.L03.001, imm.L03.002, imm.L03.003, imm.L03.004, imm.L03.005, imm.L03.006, imm.L03.007, imm.L03.008, imm.L03.009, imm.L03.010, imm.L03.011, imm.L03.012, imm.L03.013, imm.L03.014, imm.L03.015, imm.L03.016, imm.L03.017, imm.L03.018]
+  - id: imm.L03.lesson2
+    title: "الـ complement: 3 بوابات وطريق واحد"
+    hook: "ليه نقص C5-C9 بيجيب Neisseria بالذات؟ وليه نقص C1-C4 بيجيب lupus؟"
+    minutes: 9
+    pages: [104, 105]
+    topics: [complement, complement-disorders, complement-pathway-testing]
+    goals:
+      - "تعرف الـ 3 pathways ومين بيشغّل كل واحد"
+      - "تحفظ وظيفة كل component"
+      - "تفرّق بين hereditary angioedema و PNH"
+      - "تقرا الـ CH50 والـ AH50"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "3 بوابات"
+        text: |-
+          الـ complement بروتينات بيعملها ==الكبد==، شغالة في الـ innate immunity والالتهاب. 3 طرق يشتغل بيهم:
+
+          - **Classic**: بالـ ==IgG أو IgM== («General Motors makes classic cars»).
+          - **Alternative**: بمنتجات الـ bacteria مباشرة.
+          - **Lectin**: بالـ mannose أو سكريات تانية على سطح الميكروب.
+
+          التلاتة بيوصلوا لـ C3 convertase ثم C5 convertase ثم الـ MAC.
+        page: 104
+        quote: "Classic—IgG or IgM mediated. Alternative—bacterial products. Lectin—mannose or other sugars on microbe surface. General Motors makes classic cars."
+      - kind: figure
+        title: "كله بيوصل لـ C3"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="imm3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="10" width="100" height="30" rx="6"/><text x="18" y="30" class="t-sm">Classic: IgG/IgM</text>
+            <rect class="fg-box" x="10" y="50" width="100" height="30" rx="6"/><text x="18" y="70" class="t-sm">Lectin: mannose</text>
+            <rect class="fg-box" x="10" y="90" width="100" height="30" rx="6"/><text x="18" y="110" class="t-sm">Alternative</text>
+            <path class="fg-arrow-acc" d="M110 25 L 150 60" marker-end="url(#imm3a)"/>
+            <path class="fg-arrow-acc" d="M110 65 L 150 65" marker-end="url(#imm3a)"/>
+            <path class="fg-arrow-acc" d="M110 105 L 150 72" marker-end="url(#imm3a)"/>
+            <rect class="fg-acc" x="152" y="48" width="70" height="34" rx="6"/><text x="162" y="70" class="t-b">C3</text>
+            <path class="fg-arrow-acc" d="M222 58 L 255 30" marker-end="url(#imm3a)"/>
+            <text x="258" y="28" class="t-sm">C3b: opsonin</text>
+            <path class="fg-arrow-acc" d="M222 72 L 255 100" marker-end="url(#imm3a)"/>
+            <rect class="fg-acc" x="257" y="88" width="50" height="28" rx="6"/><text x="270" y="107" class="t-b">C5</text>
+            <path class="fg-arrow-acc" d="M282 116 L 282 150" marker-end="url(#imm3a)"/>
+            <rect class="fg-good" x="230" y="152" width="120" height="34" rx="6"/><text x="238" y="173" class="t-sm t-b">C5b-9 MAC: lysis</text>
+            <text x="20" y="160" class="t-sm">C3a, C4a, C5a: anaphylaxis</text>
+            <text x="20" y="180" class="t-sm">C5a: neutrophil chemotaxis</text>
+          </svg>
+        caption: "الـ 3 بوابات بتتقابل عند C3. الـ C3b بيعمل opsonization، والطريق بيكمّل لـ C5 لحد الـ MAC اللي بيخرم الجرثومة. الحتت الصغيرة (C3a و C4a و C5a) بتعمل anaphylaxis، و C5a بيجيب الـ neutrophils."
+        alt: "The classic, lectin and alternative pathways converge on C3. C3b acts as an opsonin; the cascade continues to C5 and the C5b-9 membrane attack complex for lysis. C3a, C4a and C5a cause anaphylaxis and C5a attracts neutrophils."
+        page: 104
+        quote: "C3b—opsonization. C3a, C4a, C5a—anaphylaxis. C5a—neutrophil chemotaxis. C5b-9 (MAC)—cytolysis."
+      - kind: aside
+        tone: tip
+        text: "الـ **MAC** مهم بالذات ضد ==Neisseria==. الكتاب: «Get “Neis” (nice) Big MACs from 5-9 pm» = C5-C9. والـ opsonins الأساسية اتنين: **C3b و IgG**، و C3b كمان بينضّف الـ immune complexes."
+        page: 104
+        quote: "MAC complex is important for neutralizing Neisseria species. Deficiency results in recurrent infection. Get “Neis” (nice) Big MACs from 5-9 pm."
+      - kind: explain
+        title: "مين بيحمي خلاياك؟"
+        text: |-
+          الـ complement مش بيفرّق كويس، فخلاياك محتاجة فرامل:
+
+          - ==DAF (CD55)== على سطح الخلايا زي الـ RBCs.
+          - ==C1 inhibitor== في البلازما.
+
+          لو أي فرملة منهم راحت، المرض بيبان على طول.
+        page: 104
+        quote: "Inhibitors—decay-accelerating factor (DAF, also called CD55) and C1 inhibitor (formerly called C1 esterase inhibitor) help prevent complement activation on self cells (eg, RBCs)."
+      - kind: reveal
+        prompt: "فكّر: ليه نقص الـ early complement (C1-C4) بيعلّي خطر الـ SLE، بينما نقص الـ late (C5-C9) بيجيب Neisseria؟"
+        answer: "الـ early components بيعملوا **C3b**، والـ C3b بيـ clear الـ immune complexes. لو مش موجود، الـ complexes بتتراكم ← ==SLE== (الكتاب: SLEarly)، وكمان pyogenic sinus و respiratory infections. أما الـ late فهم الـ **MAC**، ومن غيره ==Neisseria bacteremia== متكررة."
+        page: 105
+        quote: "↑ risk of severe, recurrent pyogenic sinus and respiratory tract infections. C3b used in clearance of antigen-antibody complexes → ↑ risk of SLE (think SLEarly)."
+      - kind: explain
+        title: "Hereditary angioedema"
+        text: |-
+          نقص **C1 inhibitor** ← الـ kallikrein يشتغل من غير فرامل ← ==↑ bradykinin== ← تورم في الوش والشفايف والأمعاء.
+
+          - علامته في التحاليل: ==↓ C4== (لأن C1 بيستهلكه طول الوقت).
+          - **ACE inhibitors ممنوعة** لأنها برضه بتعلّي الـ bradykinin.
+          - العلاج: **ecallantide** (kallikrein inhibitor) و **icatibant** (bradykinin B2 receptor antagonist).
+        page: 105
+        quote: "Causes hereditary angioedema due to unregulated activation of kallikrein → ↑ bradykinin. Characterized by ↓ C4 levels. ACE inhibitors are contraindicated (also ↑ bradykinin)."
+      - kind: check
+        question: "A woman with recurrent nonpitting swelling of the face has low C4. Which drug class must she avoid?"
+        options:
+          - "ACE inhibitors"
+          - "Antihistamines"
+          - "β-blockers"
+          - "Statins"
+        answer: 0
+        why:
+          - "صح: الـ ACE inhibitors بتعلّي الـ bradykinin زي المرض نفسه."
+          - "الـ antihistamines مش بتفيد بس مش ممنوعة."
+          - "مالهاش علاقة بالـ bradykinin في الكتاب."
+          - "مالهاش علاقة."
+        page: 105
+        quote: "ACE inhibitors are contraindicated (also ↑ bradykinin)."
+      - kind: explain
+        title: "PNH: الـ RBCs من غير فرامل"
+        text: |-
+          **Acquired PIGA mutation** ← ↓ ==GPI anchors== ← الـ CD55 (DAF) والـ CD59 (MIRL) مش لاقيين حاجة يتعلقوا فيها على سطح الـ RBC.
+
+          - من غير **CD59** ← الـ MAC يتكوّن براحته ← ==intravascular hemolysis== (الأساسي).
+          - من غير **CD55** ← C3b كتير ← extravascular hemolysis (أقل).
+
+          النتيجة: ↓ haptoglobin، hemoglobinuria، hemosiderinuria (بول غامق، غالباً الصبح).
+        page: 105
+        quote: "Loss of CD59 → uninhibited MAC formation → intravascular hemolysis (major) Loss of CD55 → ↑ C3b opsonization → extravascular hemolysis (minor; RBC clearance by reticuloendothelial system)"
+      - kind: aside
+        tone: exam
+        text: "الـ triad: hemolytic anemia + pancytopenia + ==atypical venous thrombosis== (Budd-Chiari، portal، cerebral، dermal). والعلاج **eculizumab** (anti-C5) بيوقف الـ intravascular بس؛ الـ proximal inhibitors (anti-C3، لسه investigational) ممكن تقلّل الـ extravascular."
+        page: 105
+        quote: "Triad of hemolytic anemia, pancytopenia, atypical venous thrombosis (eg, Budd-Chiari, portal, cerebral, dermal)."
+      - kind: table
+        title: "CAT: تقرا الـ complement إزاي"
+        columns: ["Test", "Pathway", "Low in"]
+        rows:
+          - ["CH50", "Classical (C1, C2, C4)", "SLE, immune complex disease, C2/C4 deficiency"]
+          - ["AH50", "Alternative (factor D, B, properdin)", "Properdin, factor D/B deficiency, Neisseria"]
+          - ["Both low", "Terminal (C3, C5-C9)", "C5-C9 defect or consumption (sepsis, autoimmunity)"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+        page: 105
+        quote: "CH50 = Classical, AH50 = Alternative, Together = Terminal (CAT)."
+      - kind: check
+        question: "CH50 is low and AH50 is normal. Which deficiency fits?"
+        options:
+          - "C2"
+          - "Properdin"
+          - "C8"
+          - "Factor B"
+        answer: 0
+        why:
+          - "صح: C2 في الـ classical بس، فالـ CH50 بس اللي يقع."
+          - "الـ properdin في الـ alternative، فالـ AH50 هو اللي يقع."
+          - "C8 terminal، فالاتنين يقعوا."
+          - "Factor B في الـ alternative."
+        page: 105
+        quote: "CH50 tests classical pathway (C1, C2, C4); ↓ in SLE, immune complex diseases, C2/C4 deficiency."
+      - kind: try
+        items: [imm.L03.020, imm.L03.021, imm.L03.026, imm.L03.029, imm.L03.036]
+    recap:
+      - "Classic = IgG/IgM، alternative = bacterial products، lectin = mannose."
+      - "C3b opsonin، C3a/C4a/C5a anaphylaxis، C5a chemotaxis، C5b-9 lysis."
+      - "C1-C4 ناقص ← pyogenic + SLE؛ C5-C9 ناقص ← Neisseria."
+      - "C1 inhibitor ناقص ← bradykinin و ↓ C4؛ PNH ← CD55/CD59 و eculizumab."
+    practice: [imm.L03.019, imm.L03.020, imm.L03.021, imm.L03.022, imm.L03.023, imm.L03.024, imm.L03.025, imm.L03.026, imm.L03.027, imm.L03.028, imm.L03.029, imm.L03.030, imm.L03.031, imm.L03.032, imm.L03.033, imm.L03.034, imm.L03.035, imm.L03.036, imm.L03.037]
+  - id: imm.L03.lesson3
+    title: "الـ cytokines والـ respiratory burst والـ interferons"
+    hook: "Hot T-bone stEAK هتحفظك أول 6 interleukins في دقيقة"
+    minutes: 10
+    pages: [106, 107]
+    topics: [important-cytokines, respiratory-burst, type-i-interferons]
+    goals:
+      - "تعرف cytokines الـ macrophage والـ T cells"
+      - "تفهم سلسلة الـ respiratory burst وليه CGD بيجيب catalase ⊕"
+      - "تعرف الـ interferons بتحمي إزاي واستخداماتها"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ macrophage بيصرّخ الأول"
+        text: |-
+          الترتيب: ==acute (IL-1 و IL-6 و TNF-α)، وبعدين recruit (IL-8 و IL-12)==.
+
+          - **IL-1**: fever و acute inflammation، يشغّل الـ endothelium (adhesion molecules)، ويجيب WBCs. اسمه كمان osteoclast-activating factor.
+          - **IL-6**: fever و acute-phase proteins.
+          - **TNF-α**: يشغّل الـ endothelium، WBC recruitment، vascular leak، و ==cachexia== في الـ cancer، و**بيحافظ على الـ granuloma في TB**.
+          - **IL-8**: أكبر chemotactic للـ neutrophils («clean up on aisle 8»).
+          - **IL-12**: يعمل Th1، يشغّل NK، ويساعد الـ granuloma في TB.
+        page: 106
+        quote: "Tumor necrosis factor-α Activates endothelium. Causes WBC recruitment, vascular leak. Causes cachexia in malignancy. Maintains granulomas in TB."
+      - kind: mnemonic
+        word: "HTBEAK"
+        parts:
+          - { key: "H", text: "Hot: IL-1 = fever" }
+          - { key: "T", text: "T: IL-2 stimulates T cells" }
+          - { key: "B", text: "Bone: IL-3 stimulates bone marrow" }
+          - { key: "E", text: "E: IL-4 stimulates IgE" }
+          - { key: "A", text: "A: IL-5 stimulates IgA" }
+          - { key: "K", text: "aKute: IL-6 stimulates acute-phase proteins" }
+        hook: "الكتاب: Hot T-bone stEAK، من IL-1 لـ IL-6 بالترتيب"
+        page: 106
+        quote: "“Hot T-bone stEAK”: IL-1: fever (hot). IL-2: stimulates T cells. IL-3: stimulates bone marrow. IL-4: stimulates IgE production. IL-5: stimulates IgA production. IL-6: stimulates aKute-phase protein production."
+      - kind: check
+        question: "A patient on a TNF-α inhibitor develops reactivation tuberculosis. Which TNF-α action was lost?"
+        options:
+          - "Maintaining granulomas"
+          - "Chemotaxis of neutrophils"
+          - "Class switching to IgE"
+          - "Growth of bone marrow stem cells"
+        answer: 0
+        why:
+          - "صح: الـ TNF-α بيحافظ على الـ granuloma اللي حابس الـ TB."
+          - "ده IL-8."
+          - "ده IL-4 و IL-13."
+          - "ده IL-3."
+        page: 106
+        quote: "Maintains granulomas in TB."
+      - kind: table
+        title: "Cytokines الـ T cells"
+        columns: ["Cytokine", "Key action"]
+        rows:
+          - ["IL-2", "Growth of helper, cytotoxic, regulatory T cells and NK cells"]
+          - ["IL-3", "Bone marrow stem cells (like GM-CSF)"]
+          - ["IFN-γ", "Macrophages kill; ↑ MHC; IgG switch; inhibits Th2; granulomas"]
+          - ["IL-4", "Th2; B cells; switch to IgE and IgG (2 BEG 4 help)"]
+          - ["IL-5", "B cells; switch to IgA; Eosinophils (5 BAEs)"]
+          - ["IL-10", "Attenuates inflammation; ↓ MHC II and Th1 cytokines"]
+          - ["IL-13", "IgE production (thirtEEn)"]
+        hide: [[0, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+        page: 106
+        quote: "Interleukin-5 Promotes growth and differentiation of B cells. Enhances class switching to IgA. Stimulates growth and differentiation of Eosinophils. I have 5 BAEs."
+      - kind: aside
+        tone: trap
+        text: "الـ **IFN-γ** مش بس من Th1، ==الـ NK cells كمان بتطلّعه== (رد على antigen أو IL-12 من الـ macrophages). وبيعلّي الـ MHC على كل الخلايا، وبيوقف الـ Th2. وعلى العكس الـ **IL-10** (من Th2 و Tregs) والـ TGF-β بيهدّوا الـ response."
+        page: 106
+        quote: "Secreted by NK cells and T cells in response to antigen or IL-12 from macrophages; stimulates macrophages to kill phagocytosed pathogens. Inhibits differentiation of Th2 cells."
+      - kind: explain
+        title: "الـ respiratory burst"
+        text: |-
+          الـ neutrophil بيقتل الجرثومة اللي بلعها بـ ==ROS==. الـ NADPH oxidase بياخد O2 ويبدأ السلسلة. الكتاب: «**NO S**afe **M**icrobe»:
+
+          1. **NADPH Oxidase**: O2 ← superoxide.
+          2. **Superoxide dismutase**: superoxide ← H2O2.
+          3. **Myeloperoxidase**: H2O2 + Cl⁻ ← HOCl (bleach). والـ MPO فيه pigment أزرق-أخضر هو اللي بيلوّن البلغم.
+
+          والـ **G6PD** بيعمل NADPH من الـ HMP shunt اللي بيشغّل الـ oxidase ويعادل الـ ROS كمان.
+        page: 107
+        quote: "Myeloperoxidase contains a blue-green, heme-containing pigment that gives sputum its color. NO Safe Microbe (NADPH Oxidase Superoxide dismutase Myeloperoxidase)."
+      - kind: figure
+        title: "السلسلة جوه الـ phagolysosome"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="imm3b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker><marker id="imm3c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="10" y="40" class="t-b">O2</text>
+            <path class="fg-arrow-acc" d="M35 35 L 90 35" marker-end="url(#imm3b)"/>
+            <text x="30" y="22" class="t-sm t-acc">NADPH oxidase</text>
+            <text x="95" y="40" class="t-b">O2•−</text>
+            <path class="fg-arrow-acc" d="M135 35 L 190 35" marker-end="url(#imm3b)"/>
+            <text x="130" y="22" class="t-sm t-acc">SOD</text>
+            <text x="195" y="40" class="t-b">H2O2</text>
+            <path class="fg-arrow-acc" d="M240 35 L 295 35" marker-end="url(#imm3b)"/>
+            <text x="245" y="22" class="t-sm t-acc">MPO + Cl−</text>
+            <text x="300" y="40" class="t-b">HOCl</text>
+            <rect class="fg-bad" x="10" y="70" width="340" height="66" rx="8"/>
+            <text x="20" y="92" class="t-sm t-b">CGD: no NADPH oxidase</text>
+            <text x="20" y="110" class="t-sm">uses microbe's own H2O2, unless the microbe</text>
+            <path class="fg-arrow-bad" d="M280 105 L 280 50" marker-end="url(#imm3c)"/>
+            <text x="20" y="128" class="t-sm">has catalase (S aureus, Aspergillus)</text>
+          </svg>
+        caption: "في الـ CGD الخطوة الأولى بايظة. الـ neutrophil بيحاول يستلف الـ H2O2 اللي الجرثومة نفسها بتعمله، بس لو الجرثومة catalase ⊕ بتكسّره قبل ما يوصله."
+        alt: "Respiratory burst chain: oxygen to superoxide by NADPH oxidase, to hydrogen peroxide by superoxide dismutase, to hypochlorite by myeloperoxidase with chloride. Below: in CGD the first step is missing, so the neutrophil relies on the microbe's own hydrogen peroxide, which catalase-positive organisms destroy."
+        page: 107
+        quote: "Phagocytes of patients with CGD can utilize generated by invading organisms and convert it to ROS. Patients are at risk for infection by catalase ⊕ species (eg, S aureus, Aspergillus)"
+      - kind: check
+        question: "Why are CGD patients spared from catalase-negative organisms?"
+        options:
+          - "Their phagocytes can use the microbe's own H2O2 to make ROS"
+          - "They have extra myeloperoxidase"
+          - "Their B cells make more IgG"
+          - "Catalase-negative organisms lack a capsule"
+        answer: 0
+        why:
+          - "صح: الجرثومة الـ catalase ⊝ بتسيب الـ H2O2 بتاعها، فالـ neutrophil يحوّله ROS."
+          - "الـ MPO محتاج H2O2 أصلاً."
+          - "مالهاش دعوة بالـ antibodies."
+          - "الـ capsule مش هي الفيصل هنا."
+        page: 107
+        quote: "Phagocytes of patients with CGD can utilize generated by invading organisms and convert it to ROS."
+      - kind: explain
+        title: "الـ type I interferons: إنذار للجيران"
+        text: |-
+          الـ **IFN-α و IFN-β** جزء من الـ innate. الخلية اللي اتصابت بفيروس (RNA أو DNA) بتطلّعهم ينبّهوا الخلايا اللي جنبها:
+
+          - ==↓ protein synthesis== عشان الفيروس ما يعرفش يتكاثر.
+          - ==↑ MHC== عشان الخلايا المصابة تتشاف.
+
+          وكمان بيشغّلوا الـ antitumor immunity.
+        page: 107
+        quote: "Cells infected with a virus synthesize these glycoproteins, which act on local cells, priming them for viral defense by downregulating protein synthesis to resist potential viral replication and by upregulating MHC expression to facilitate recognition of infected cells."
+      - kind: aside
+        tone: exam
+        text: "بيستخدموهم في: chronic HBV، Kaposi sarcoma، ==hairy cell leukemia==، condyloma acuminatum، RCC، melanoma، و ==multiple sclerosis==. والـ side effects: flulike، **depression**، neutropenia، myopathy، و autoimmunity."
+        page: 107
+        quote: "Chronic HBV, Kaposi sarcoma, hairy cell leukemia, condyloma acuminatum, renal cell carcinoma, malignant melanoma, multiple sclerosis."
+      - kind: try
+        items: [imm.L03.038, imm.L03.040, imm.L03.041, imm.L03.046, imm.L03.051]
+    recap:
+      - "Acute: IL-1 و IL-6 و TNF-α؛ recruit: IL-8 (neutrophils) و IL-12 (Th1)."
+      - "TNF-α بيحافظ على الـ granuloma، فالـ anti-TNF ممكن يصحّي TB."
+      - "NO Safe Microbe: NADPH oxidase ← SOD ← MPO. CGD ← catalase ⊕."
+      - "IFN-α/β: ↓ protein synthesis و ↑ MHC؛ side effects أهمها depression و neutropenia."
+    practice: [imm.L03.038, imm.L03.039, imm.L03.040, imm.L03.041, imm.L03.042, imm.L03.043, imm.L03.044, imm.L03.045, imm.L03.046, imm.L03.047, imm.L03.048, imm.L03.049, imm.L03.050, imm.L03.051, imm.L03.052, imm.L03.053, imm.L03.054]
+  - id: imm.L03.lesson4
+    title: "الـ CD markers والـ vaccines"
+    hook: "إمتى تدّي antibodies جاهزة، وإمتى تدّي vaccine، وإمتى الاتنين؟"
+    minutes: 9
+    pages: [108, 109]
+    topics: [cell-surface-proteins, passive-vs-active-immunity, vaccination]
+    goals:
+      - "تحفظ أهم الـ CD markers لكل خلية"
+      - "تفرّق بين passive و active immunity"
+      - "تعرف أنواع الـ vaccines والـ live منها ممنوع إمتى"
+    status: unverified
+    steps:
+      - kind: table
+        title: "بطاقات الخلايا"
+        columns: ["Cell", "Markers"]
+        rows:
+          - ["All T cells", "TCR, CD3, CD28"]
+          - ["Helper T", "CD4, CD40L, CXCR4/CCR5 (HIV)"]
+          - ["Regulatory T", "CD4, CD25"]
+          - ["B cells", "Ig, CD19, CD20, CD21 (EBV), CD40, MHC II, B7"]
+          - ["NK cells", "CD16 (Fc of IgG), CD56"]
+          - ["Macrophages", "CD14 (LPS), CD40, CCR5, MHC II, B7, Fc and C3b receptors"]
+          - ["Stem cells", "CD34"]
+        hide: [[1, 1], [3, 1], [4, 1], [6, 1]]
+        page: 108
+        quote: "T cells TCR (binds antigen-MHC complex), CD3 (associated with TCR for signal transduction), CD28 (binds B7 on APC) Helper T cells CD4, CD40L, CXCR4/CCR5 (coreceptors for HIV)"
+      - kind: aside
+        tone: tip
+        text: "الـ EBV بيدخل الـ B cells من ==CD21==. الكتاب: «Must be 21 to drink at a Barr». والـ HIV بيدخل الـ helper T من الـ CD4 مع الـ coreceptors **CXCR4/CCR5**، والـ CCR5 كمان على الـ macrophages."
+        page: 108
+        quote: "CD21 (receptor for Epstein-Barr virus), CD40, MHC II, B7 (CD80/86) Must be 21 to drink at a Barr"
+      - kind: check
+        question: "Which marker identifies hematopoietic stem cells?"
+        options:
+          - "CD34"
+          - "CD14"
+          - "CD56"
+          - "CD19"
+        answer: 0
+        why:
+          - "صح: CD34 = hematopoietic stem cells."
+          - "CD14 على الـ macrophages، receptor للـ PAMPs."
+          - "CD56 marker للـ NK cells."
+          - "CD19 على الـ B cells."
+        page: 108
+        quote: "Hematopoietic stem cells CD34"
+      - kind: explain
+        title: "Passive و active"
+        text: |-
+          - **Passive**: بتاخد ==antibodies جاهزة==. سريعة بس قصيرة (half-life حوالي **3 أسابيع**). أمثلة: IgA في لبن الأم، IgG بيعدّي الـ placenta، antitoxin، humanized monoclonal antibodies، و IVIG.
+          - **Active**: جسمك يقابل الـ antigen ويعمل بنفسه. بطيئة بس فيها ==memory==. أمثلة: العدوى الطبيعية، الـ vaccines، الـ toxoids.
+
+          في **hepatitis B و rabies** بنديهم الاتنين مع بعض: passive تحمي دلوقتي، و active تحمي بعدين.
+        page: 108
+        quote: "Short span of antibodies (half-life = 3 weeks) Long-lasting protection (memory) EXAMPLES IgA in breast milk, maternal IgG crossing placenta, antitoxin, humanized monoclonal antibody"
+      - kind: explain
+        title: "الـ live attenuated"
+        text: |-
+          ميكروب اتضعّف بس لسه بيتكاثر شوية في الجسم ← بيعمل ==cellular و humoral==، ومناعة قوية غالباً مدى الحياة.
+
+          العيب: ممكن يرجع virulent، فهو ==ممنوع في الحمل والـ immunodeficiency==. استثناء: MMR و varicella ممكن تتدّي للـ HIV لو الـ CD4+ ≥200 بعد استشارة متخصص.
+        page: 109
+        quote: "Pros: induces cellular and humoral responses. Induces strong, often lifelong immunity. Cons: may revert to virulent form. Contraindicated in pregnancy and patients with immunodeficiency."
+      - kind: mnemonic
+        word: "ATPVSBYIMR"
+        parts:
+          - { key: "A", text: "Adenovirus (military recruits)" }
+          - { key: "T", text: "Typhoid (Ty21a, oral)" }
+          - { key: "P", text: "Polio (Sabin)" }
+          - { key: "V", text: "Varicella" }
+          - { key: "S", text: "Smallpox" }
+          - { key: "B", text: "BCG" }
+          - { key: "Y", text: "Yellow fever" }
+          - { key: "I", text: "Influenza (intranasal)" }
+          - { key: "M", text: "MMR" }
+          - { key: "R", text: "Rotavirus" }
+        hook: "الكتاب: Attention Teachers! Please Vaccinate Small, Beautiful Young Infants with MMR Routinely!"
+        page: 109
+        quote: "Adenovirus (nonattenuated, given to military recruits), typhoid (Ty21a, oral), polio (Sabin), varicella (chickenpox), smallpox, BCG, yellow fever, influenza (intranasal), MMR, rotavirus."
+      - kind: explain
+        title: "الباقي"
+        text: |-
+          - **Killed/inactivated**: آمن، بس ==humoral بس تقريباً== ومحتاج boosters. «**A TRIP** could **K**ill you»: hep A، Typhoid (Vi IM)، Rabies، Influenza (IM)، Polio (Sal**K**).
+          - **Subunit/recombinant/polysaccharide/conjugate**: antigens محددة ← side effects أقل، بس غالي وأضعف. HBV (HBsAg)، HPV، aP، N meningitidis، S pneumoniae، Hib، zoster.
+          - **Toxoid**: toxin مدمّر بس الـ receptor site سليم: tetanus و diphtheria. محتاج boosters.
+          - **mRNA**: lipid nanoparticle بتوصّل mRNA. فعال جداً، cellular و humoral، و ==آمن في الحمل==. نادراً myocarditis في الشباب الذكور. SARS-CoV-2، RSV، CMV، melanoma.
+        page: 109
+        quote: "Hepatitis A, Typhoid (Vi polysaccharide, intramuscular), Rabies, Influenza (intramuscular), Polio (SalK). A TRIP could Kill you."
+      - kind: reveal
+        prompt: "الـ PPSV23 polysaccharide ضعيف في الأطفال. إزاي الـ conjugate vaccine بيحل المشكلة؟"
+        answer: "الـ polysaccharide لوحده **T-cell independent** (مفيش peptide يتعرض على MHC). لما تلزقه في ==carrier protein==، الـ B cell بتبلع الاتنين وتعرض الـ protein على MHC II للـ Th، فتاخد help ← class switching و memory. يعني بقى **T-cell dependent**."
+        page: 109
+        quote: "PPSV23 polysaccharide primarily T-cell–independent response; a polysaccharide conjugated to a carrier protein; produces a T-cell– dependent response"
+      - kind: sort
+        prompt: "حط كل vaccine في نوعه"
+        bins: ["Live attenuated", "Killed", "Toxoid"]
+        cards:
+          - { text: "MMR", bin: 0 }
+          - { text: "Polio (Sabin)", bin: 0 }
+          - { text: "Polio (Salk)", bin: 1 }
+          - { text: "Rabies", bin: 1 }
+          - { text: "Hepatitis A", bin: 1 }
+          - { text: "Yellow fever", bin: 0 }
+          - { text: "Tetanus", bin: 2 }
+          - { text: "Diphtheria", bin: 2 }
+        why: "Sabin = live (oral)، SalK = Killed. والـ toxoids هما tetanus و diphtheria."
+        page: 109
+        quote: "Clostridium tetani, Corynebacterium diphtheriae."
+      - kind: check
+        question: "A pregnant woman needs vaccination. Which vaccine type is contraindicated?"
+        options:
+          - "Live attenuated"
+          - "Killed"
+          - "Toxoid"
+          - "mRNA"
+        answer: 0
+        why:
+          - "صح: الـ live ممكن يرجع virulent، فممنوع في الحمل."
+          - "الـ killed آمن."
+          - "الـ toxoid ما بيعملش مرض."
+          - "الكتاب بيقول الـ mRNA safe in pregnancy."
+        page: 109
+        quote: "Contraindicated in pregnancy and patients with immunodeficiency."
+      - kind: try
+        items: [imm.L03.055, imm.L03.059, imm.L03.062, imm.L03.063, imm.L03.065]
+    recap:
+      - "CD21 = EBV؛ CD4 + CXCR4/CCR5 = HIV؛ CD14 = LPS؛ CD34 = stem cells؛ CD16/CD56 = NK."
+      - "Passive سريع وقصير (3 أسابيع)؛ active بطيء بـ memory؛ الاتنين في HBV و rabies."
+      - "Live = قوي بس ممنوع في الحمل والـ immunodeficiency."
+      - "Conjugate بيقلب الـ polysaccharide لـ T-cell dependent."
+    practice: [imm.L03.055, imm.L03.056, imm.L03.057, imm.L03.058, imm.L03.059, imm.L03.060, imm.L03.061, imm.L03.062, imm.L03.063, imm.L03.064, imm.L03.065, imm.L03.066, imm.L03.067, imm.L03.068, imm.L03.069, imm.L03.070]
+  - id: imm.L03.lesson5
+    title: "الـ hypersensitivity: 4 طرق المناعة تأذيك بيها"
+    hook: "سؤال واحد بيفرّق الـ 4 أنواع: مين المتهم، antibody ولا T cell؟ وإمتى؟"
+    minutes: 10
+    pages: [110, 112]
+    topics: [hypersensitivity-types, blood-transfusion-reactions]
+    goals:
+      - "تفرّق بين الـ 4 types بالـ mechanism والتوقيت"
+      - "تحفظ أمثلة كل type"
+      - "تفرّق بين transfusion reactions بالحمّى والتوقيت والـ BNP"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الصورة الكبيرة"
+        text: |-
+          - **Type I**: anaphylactic و atopic (IgE).
+          - **Type II**: antibody على سطح الخلية.
+          - **Type III**: immune complexes.
+          - **Type IV**: cell-mediated (T cells).
+
+          ==التلاتة الأولانيين antibody-mediated==، والرابع T cells بس.
+        page: 110
+        quote: "Four types: Anaphylactic and atopic (type I), antibody-mediated (type II), immune complex (type III), cell-mediated (type IV). Types I, II, and III are all antibody-mediated."
+      - kind: explain
+        title: "Type I: First و Fast"
+        text: |-
+          - **Immediate (دقايق)**: الـ allergen يربط IgE جاهز على mast cells ← degranulation ← ==histamine==، و **tryptase** (علامة إن الـ mast cell اشتغلت)، و leukotrienes.
+          - **Late (ساعات)**: chemokines تجيب eosinophils ← inflammation و tissue damage.
+
+          التشخيص: skin test أو ELISA للـ allergen-specific IgE. أمثلة: anaphylaxis (أكل، دوا، نحلة)، allergic asthma.
+        page: 110
+        quote: "Immediate (minutes): antigen crosslinks preformed IgE on presensitized mast cells → immediate degranulation → release of histamine (a vasoactive amine), tryptase (marker of mast cell activation), and leukotrienes."
+      - kind: explain
+        title: "Type II: الـ antibody على الخلية نفسها"
+        text: |-
+          3 نتايج:
+          - **Cellular destruction**: الـ antibody يغطي الخلية ← phagocytosis أو complement، أو NK تقتلها بالـ ADCC. أمثلة: AIHA، ITP، transfusion reactions، hemolytic disease of the newborn.
+          - **Inflammation**: complement و Fc receptors. أمثلة: ==Goodpasture==، rheumatic fever، hyperacute rejection.
+          - **Cellular dysfunction**: الـ antibody يقعد على receptor يقفله أو يشغّله. أمثلة: myasthenia gravis، ==Graves==، pemphigus vulgaris.
+
+          **Direct Coombs**: antibodies لازقة على الـ RBC. **Indirect**: antibodies سايبة في الـ serum.
+        page: 110
+        quote: "Cellular dysfunction—antibodies bind to cell-surface receptors → abnormal blockade or activation of downstream process."
+      - kind: explain
+        title: "Type III: 3 حاجات لازقة في بعض"
+        text: |-
+          antigen + antibody (غالباً IgG) + complement ← الـ complement يجيب ==neutrophils== ← lysosomal enzymes تأذي الـ endothelium ← vasculitis وأعراض systemic.
+
+          أمثلة: SLE، reactive arthritis، PAN، poststreptococcal GN، IgA vasculitis.
+
+          - **Serum sickness**: النموذج الأصلي. بعد ==1-2 أسبوع== من بروتين غريب (أو دوا hapten زي penicillin و monoclonal antibodies، أو hepatitis B): fever، urticaria، arthralgia، proteinuria، lymphadenopathy، و ↓ C3 و C4.
+          - **Arthus reaction**: local. حقن antigen في الجلد عند حد عنده IgG ← edema و fibrinoid necrosis (زي رد فعل قوي على booster).
+        page: 111
+        quote: "Serum sickness—the prototypic immune complex disease. Antibodies to foreign proteins are produced and 1-2 weeks later, antibody- antigen complexes form and deposit in tissues → complement activation → inflammation and tissue damage (↓ serum C3, C4)."
+      - kind: check
+        question: "Ten days after a new monoclonal antibody, a patient has fever, urticaria, arthralgia and low C3. Which type?"
+        options:
+          - "Type III"
+          - "Type I"
+          - "Type II"
+          - "Type IV"
+        answer: 0
+        why:
+          - "صح: serum sickness، immune complexes بعد 1-2 أسبوع مع ↓ C3 و C4."
+          - "Type I في دقايق."
+          - "Type II بيستهدف خلية أو receptor معين."
+          - "Type IV T cells من غير complement."
+        page: 111
+        quote: "Fever, urticaria, arthralgia, proteinuria, lymphadenopathy occur 1-2 weeks after antigen exposure."
+      - kind: explain
+        title: "Type IV: الأخير والمتأخر"
+        text: |-
+          T cells بس، ==من غير antibodies==، بطريقتين:
+          1. **CD8+** يقتل الخلية مباشرة.
+          2. **CD4+** يتعرف على الـ antigen ويطلّع cytokines تعمل التهاب.
+
+          أمثلة: contact dermatitis (poison ivy، nickel)، drug reactions (AGEP، SJS، TEN، DRESS)، GVHD. اختبارات: PPD، patch test، Candida skin test.
+        page: 111
+        quote: "Two mechanisms, each involving T cells: 1. Direct cell cytotoxicity: CD8+ cytotoxic T cells kill targeted cells. 2. Inflammatory reaction: effector CD4+ T cells recognize antigen and release inflammation-inducing cytokines"
+      - kind: figure
+        title: "الـ 4 types في لقطة"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="10" y="10" width="165" height="85" rx="8"/>
+            <text x="20" y="30" class="t-b">Type I</text>
+            <text x="20" y="50" class="t-sm">IgE on mast cell</text>
+            <text x="20" y="68" class="t-sm">minutes: histamine</text>
+            <text x="20" y="86" class="t-sm t-mut">anaphylaxis, asthma</text>
+            <rect class="fg-acc" x="185" y="10" width="165" height="85" rx="8"/>
+            <text x="195" y="30" class="t-b">Type II</text>
+            <text x="195" y="50" class="t-sm">IgG/IgM on a cell</text>
+            <text x="195" y="68" class="t-sm">destroy, inflame, block</text>
+            <text x="195" y="86" class="t-sm t-mut">AIHA, Goodpasture, MG</text>
+            <rect class="fg-acc" x="10" y="105" width="165" height="85" rx="8"/>
+            <text x="20" y="125" class="t-b">Type III</text>
+            <text x="20" y="145" class="t-sm">Ag-Ab-complement</text>
+            <text x="20" y="163" class="t-sm">neutrophils, ↓ C3</text>
+            <text x="20" y="181" class="t-sm t-mut">SLE, PSGN, serum sickness</text>
+            <rect class="fg-good" x="185" y="105" width="165" height="85" rx="8"/>
+            <text x="195" y="125" class="t-b">Type IV</text>
+            <text x="195" y="145" class="t-sm">T cells, no antibody</text>
+            <text x="195" y="163" class="t-sm">48-72 h, delayed</text>
+            <text x="195" y="181" class="t-sm t-mut">PPD, contact, GVHD</text>
+          </svg>
+        caption: "التلاتة الأولانيين antibodies (أزرق)، والرابع T cells بس (أخضر). اسأل نفسك: الـ antibody لازق فين؟ على mast cell (I)، على خلية (II)، ولا في complex عايم (III)؟"
+        alt: "Four boxes. Type I: IgE on mast cells, minutes, histamine; anaphylaxis and asthma. Type II: IgG or IgM on a cell, destroy, inflame or block; AIHA, Goodpasture, myasthenia gravis. Type III: antigen-antibody-complement complexes, neutrophils, low C3; SLE, poststreptococcal GN, serum sickness. Type IV: T cells without antibody, delayed; PPD, contact dermatitis, GVHD."
+        page: 111
+        quote: "4T’s: T cells, Transplant rejections, TB skin tests, Touching (contact dermatitis). Fourth (type) and last (delayed)."
+      - kind: sort
+        prompt: "حط كل مرض في نوعه"
+        bins: ["Type II", "Type III", "Type IV"]
+        cards:
+          - { text: "Graves disease", bin: 0 }
+          - { text: "Pemphigus vulgaris", bin: 0 }
+          - { text: "Rheumatic fever", bin: 0 }
+          - { text: "Polyarteritis nodosa", bin: 1 }
+          - { text: "Poststreptococcal glomerulonephritis", bin: 1 }
+          - { text: "Nickel contact dermatitis", bin: 2 }
+          - { text: "Graft-versus-host disease", bin: 2 }
+        why: "الـ antibody على receptor أو خلية = II. complex عايم بيترسب = III. T cells = IV."
+        page: 110
+        quote: "Examples: Goodpasture syndrome Rheumatic fever Hyperacute transplant rejection Examples: Myasthenia gravis Graves disease Pemphigus vulgaris"
+      - kind: table
+        title: "Transfusion reactions"
+        columns: ["Reaction", "Onset", "Key clue"]
+        rows:
+          - ["Acute hemolytic", "Minutes to 24 hr", "Host anti-ABO vs donor RBCs; hypotension, flank pain, hemoglobinuria, DIC"]
+          - ["Febrile nonhemolytic", "<4 hr", "Donor WBC cytokines; diagnosis of exclusion"]
+          - ["TRALI", "<6 hr", "Donor antileukocyte antibody; noncardiogenic edema; normal BNP"]
+          - ["Allergic", "During or <4 hr", "Host IgE vs donor plasma proteins (incl. IgA); urticaria"]
+          - ["TACO", "6-12 hr", "Volume overload; hypertension, JVD, S3, ↑ BNP"]
+        hide: [[0, 2], [2, 2], [3, 2], [4, 2]]
+        page: 112
+        quote: "Donor anti-HLA or antineutrophil antibodies → neutrophil activation → noncardiogenic pulmonary edema No Symptom onset <6 hr Dyspnea, acute hypoxemia, bilateral infiltrates +/– mild fever, normal BNP, normal cardiac function"
+      - kind: aside
+        tone: trap
+        text: "TRALI ولا TACO؟ الاتنين pulmonary edema بعد نقل دم. الفرق: الـ ==TRALI antibodies من المتبرع== بتشغّل neutrophils المريض (noncardiogenic، ==BNP طبيعي==، ممكن حمّى خفيفة). الـ TACO مياه زيادة (cardiogenic، hypertension، JVD، S3، BNP عالي)."
+        page: 112
+        quote: "Volume overload → ↑ hydrostatic pressure → cardiogenic pulmonary edema No Symptom onset 6-12 hr after transfusion Dyspnea, pulmonary edema, JVD, hypertension, S3 gallop, ↑ BNP"
+      - kind: check
+        question: "Minutes into a transfusion a patient has fever, flank pain, hypotension and red urine. Mechanism?"
+        options:
+          - "Host anti-ABO antibodies against donor RBCs"
+          - "Donor antileukocyte antibodies"
+          - "Host IgE against donor plasma proteins"
+          - "Volume overload"
+        answer: 0
+        why:
+          - "صح: acute hemolytic reaction، type II، complement-mediated intravascular hemolysis."
+          - "ده TRALI، بيعمل lung injury."
+          - "ده allergic، urticaria من غير hemolysis."
+          - "ده TACO."
+        page: 112
+        quote: "Type II hypersensitivity (anti-ABO antibodies) → complement-mediated intravascular hemolysis Yes Symptom onset within minutes to 24 hr Hypotension, flank pain, hemoglobinuria, DIC"
+      - kind: try
+        items: [imm.L03.071, imm.L03.074, imm.L03.076, imm.L03.080, imm.L03.083]
+    recap:
+      - "I = IgE على mast cells في دقايق؛ II = antibody على خلية؛ III = complexes و ↓ C3؛ IV = T cells متأخر."
+      - "Serum sickness: 1-2 أسبوع بعد بروتين غريب أو دوا hapten."
+      - "Direct Coombs = على الـ RBC؛ indirect = في الـ serum."
+      - "TRALI = antibodies المتبرع و BNP طبيعي؛ TACO = مياه زيادة و BNP عالي."
+    practice: [imm.L03.071, imm.L03.072, imm.L03.073, imm.L03.074, imm.L03.075, imm.L03.076, imm.L03.077, imm.L03.078, imm.L03.079, imm.L03.080, imm.L03.081, imm.L03.082, imm.L03.083, imm.L03.084, imm.L03.085, imm.L03.086]
+  - id: imm.L03.lesson6
+    title: "الـ autoantibodies ونقص الـ B والـ T"
+    hook: "جدول الـ autoantibodies من أكتر الحاجات اللي بتتسأل؛ وكل immunodeficiency ليها بصمة"
+    minutes: 10
+    pages: [113, 114]
+    topics: [autoantibodies, immunodeficiencies]
+    goals:
+      - "تربط أهم الـ autoantibodies بأمراضها"
+      - "تميّز Bruton و IgA deficiency و CVID"
+      - "تحفظ DiGeorge و Job syndrome و IL-12R deficiency"
+    status: unverified
+    steps:
+      - kind: table
+        title: "الـ autoantibodies اللي لازم تعرفها"
+        columns: ["Autoantibody", "Disease"]
+        rows:
+          - ["Anti-dsDNA, anti-Smith", "SLE"]
+          - ["Antihistone", "Drug-induced lupus"]
+          - ["Anti-U1 RNP", "Mixed connective tissue disease"]
+          - ["Anti-CCP, rheumatoid factor", "Rheumatoid arthritis"]
+          - ["Anti-Ro/SSA, anti-La/SSB", "Sjögren syndrome"]
+          - ["Anti-Scl-70", "Diffuse scleroderma"]
+          - ["Anticentromere", "Limited scleroderma (CREST)"]
+          - ["Anti-Jo-1, anti-SRP, anti-Mi-2", "Polymyositis, dermatomyositis"]
+        hide: [[0, 1], [1, 1], [2, 1], [5, 1], [6, 1], [7, 1]]
+        page: 113
+        quote: "Anti-dsDNA, anti-Smith SLE Antihistone Drug-induced lupus Anti-U1 RNP (ribonucleoprotein) Mixed connective tissue disease"
+      - kind: explain
+        title: "الـ organ-specific"
+        text: |-
+          - **Antimitochondrial**: 1° biliary cholangitis. **Anti-smooth muscle و anti-LKM1**: autoimmune hepatitis.
+          - ==p-ANCA (MPO)==: microscopic polyangiitis، EGPA، UC، PSC. ==c-ANCA (PR3)==: granulomatosis with polyangiitis.
+          - **Anti-PLA2R**: 1° membranous nephropathy. **Anti-GBM**: Goodpasture.
+          - **Anti-TSH receptor**: Graves. **Antithyroglobulin و anti-TPO**: Hashimoto.
+          - **IgA anti-endomysial و anti-tTG و deamidated gliadin**: celiac. **Anti-GAD**: type 1 DM. **Antiparietal و anti-intrinsic factor**: pernicious anemia.
+        page: 113
+        quote: "PR3-ANCA/cytoplasmic ANCA (c-ANCA) Granulomatosis with polyangiitis Anti-phospholipase A2 receptor 1° membranous nephropathy"
+      - kind: aside
+        tone: trap
+        text: "الجلد: ==Anti-hemidesmosome = bullous pemphigoid== (الـ hemidesmosome بيربط البشرة بالـ basement membrane، فالفقاعة تحت البشرة وبتبقى tense). **Anti-desmoglein = pemphigus vulgaris** (الـ desmosome بين الخلايا، فالفقاعة جوه البشرة وبتتفرقع بسهولة)."
+        page: 113
+        quote: "Anti-hemidesmosome Bullous pemphigoid Anti-desmoglein (anti-desmosome) Pemphigus vulgaris"
+      - kind: check
+        question: "A woman with Raynaud phenomenon, calcinosis and telangiectasias has which antibody?"
+        options:
+          - "Anticentromere"
+          - "Anti-Scl-70"
+          - "Anti-Jo-1"
+          - "Anti-U1 RNP"
+        answer: 0
+        why:
+          - "صح: ده CREST، limited scleroderma، anticentromere."
+          - "Anti-Scl-70 بتاع الـ diffuse scleroderma."
+          - "Anti-Jo-1 بتاع polymyositis و dermatomyositis."
+          - "Anti-U1 RNP بتاع MCTD."
+        page: 113
+        quote: "Anticentromere Limited scleroderma (CREST syndrome)"
+      - kind: explain
+        title: "B-cell disorders"
+        text: |-
+          - **Bruton (X-linked) agammaglobulinemia**: ==BTK== بايظ ← الـ B cells ما بتكبرش. ولاد، العدوى (bacterial و enteroviral) تبدأ ==بعد 6 شهور== لما الـ maternal IgG يخلص. مفيش B cells، كل الـ Ig واطي، والـ lymph nodes والـ tonsils تقريباً مش موجودة. الـ live vaccines ممنوعة.
+          - **Selective IgA deficiency**: ==أشهر primary immunodeficiency==. أغلبهم Asymptomatic؛ ممكن Airway و GI infections، Autoimmune (celiac)، Atopy، و Anaphylaxis للـ IgA في الدم. ↑ giardiasis، و false-negative celiac test.
+          - **CVID**: عيب في الـ B-cell differentiation، غالباً بيتشخص بعد البلوغ. ↓ plasma cells و Ig، و ↑ autoimmune و bronchiectasis و lymphoma.
+        page: 114
+        quote: "Most common 1° immunodeficiency May also arise 2° to certain viral infections or medications Majority Asymptomatic Can see Airway and GI infections, Autoimmune disease (eg, celiac disease), Atopy, Anaphylaxis to IgA in blood products"
+      - kind: reveal
+        prompt: "مريض عنده selective IgA deficiency اتنقله دم. ليه ممكن يعمل anaphylaxis؟"
+        answer: "جسمه ما شافش IgA قبل كده، فبيعتبره بروتين غريب ويعمل ==anti-IgA (IgE)==. أول ما يتنقله دم فيه IgA، الـ IgE يربط على الـ mast cells ← anaphylaxis. عشان كده بيحتاجوا blood products من غير IgA."
+        page: 114
+        quote: "Anaphylaxis to IgA in blood products"
+      - kind: explain
+        title: "T-cell disorders"
+        text: |-
+          - **DiGeorge (thymic aplasia)**: ==22q11 microdeletion== ← الـ 3rd و 4th pharyngeal pouches ما اتكونوش ← مفيش thymus ولا parathyroids. ↓ T cells، ↓ PTH، ↓ Ca، ومفيش thymic shadow.
+          - **IL-12 receptor deficiency** (AR): ↓ Th1 و ↓ IFN-γ ← ==disseminated mycobacteria== و fungi، ممكن بعد الـ BCG. أشهر سبب لـ MSMD.
+          - **Hyper-IgE (Job) syndrome** (AD): **STAT3** ← ↓ Th17 ← الـ neutrophils ما بتتجمعش ← abscesses باردة.
+          - **Chronic mucocutaneous candidiasis**: T cells مش قادرة على Candida؛ الشكل الكلاسيكي من **AIRE**.
+        page: 114
+        quote: "22q11 microdeletion; failure to develop 3rd and 4th pharyngeal pouches → absent thymus and parathyroids"
+      - kind: mnemonic
+        word: "CATCH"
+        parts:
+          - { key: "C", text: "Cardiac defects (conotruncal: tetralogy, truncus)" }
+          - { key: "A", text: "Abnormal facies" }
+          - { key: "T", text: "Thymic hypoplasia → viral/fungal infections" }
+          - { key: "C", text: "Cleft palate" }
+          - { key: "H", text: "Hypocalcemia (parathyroid aplasia) → tetany" }
+        hook: "الكتاب: CATCH-22، والـ 22 هو 22q11"
+        page: 114
+        quote: "CATCH-22: Cardiac defects (conotruncal abnormalities [eg, tetralogy of Fallot, truncus arteriosus]), Abnormal facies, Thymic hypoplasia → T-cell deficiency (recurrent viral/ fungal infections), Cleft palate, Hypocalcemia 2° to parathyroid aplasia → tetany"
+      - kind: figure
+        title: "Job: ABCDEF"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="imm3d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-bad" x="10" y="15" width="80" height="34" rx="6"/><text x="20" y="37" class="t-b">STAT3</text>
+            <path class="fg-arrow-bad" d="M90 32 L 125 32" marker-end="url(#imm3d)"/>
+            <rect class="fg-bad" x="127" y="15" width="80" height="34" rx="6"/><text x="137" y="37" class="t-b">↓ Th17</text>
+            <path class="fg-arrow-bad" d="M207 32 L 242 32" marker-end="url(#imm3d)"/>
+            <rect class="fg-bad" x="244" y="15" width="106" height="34" rx="6"/><text x="250" y="37" class="t-sm t-b">no neutrophils</text>
+            <text x="20" y="75" class="t-sm"><tspan class="t-b">A</tspan>: cold staph abscesses</text>
+            <text x="20" y="95" class="t-sm"><tspan class="t-b">B</tspan>: retained baby teeth</text>
+            <text x="20" y="115" class="t-sm"><tspan class="t-b">C</tspan>: coarse facies</text>
+            <text x="190" y="75" class="t-sm"><tspan class="t-b">D</tspan>: dermatologic (eczema)</text>
+            <text x="190" y="95" class="t-sm"><tspan class="t-b">E</tspan>: ↑ IgE, eosinophils</text>
+            <text x="190" y="115" class="t-sm"><tspan class="t-b">F</tspan>: fractures</text>
+          </svg>
+        caption: "الـ STAT3 بايظ ← مفيش Th17 ← الـ IL-17 ما بيجيبش neutrophils ← abscesses «باردة» من غير التهاب. الكتاب: Learn the ABCDEF's to get a Job STAT!"
+        alt: "STAT3 mutation leads to fewer Th17 cells and no neutrophil recruitment. Features listed A to F: cold staph abscesses, retained baby teeth, coarse facies, dermatologic problems, raised IgE and eosinophils, fractures."
+        page: 114
+        quote: "Cold (noninflamed) staphylococcal Abscesses, retained Baby teeth, Coarse facies, Dermatologic problems (eczema), ↑ IgE, bone Fractures from minor trauma"
+      - kind: check
+        question: "An infant develops disseminated mycobacterial infection after BCG vaccination. IFN-γ is low. Which defect?"
+        options:
+          - "IL-12 receptor deficiency"
+          - "BTK deficiency"
+          - "Selective IgA deficiency"
+          - "C1 inhibitor deficiency"
+        answer: 0
+        why:
+          - "صح: من غير IL-12 receptor مفيش Th1 ولا IFN-γ، فالـ macrophages ما تقدرش على الـ mycobacteria."
+          - "BTK = Bruton، bacterial و enteroviral."
+          - "IgA deficiency غالباً asymptomatic."
+          - "C1 inhibitor = angioedema."
+        page: 114
+        quote: "Disseminated mycobacterial and fungal infections; may present after administration of BCG vaccine"
+      - kind: try
+        items: [imm.L03.087, imm.L03.088, imm.L03.091, imm.L03.094, imm.L03.095]
+    recap:
+      - "Anti-dsDNA/Smith = SLE؛ antihistone = drug-induced؛ anticentromere = CREST؛ c-ANCA = GPA."
+      - "Bruton = BTK، ولد بعد 6 شهور، مفيش B cells. IgA deficiency = الأشهر، anaphylaxis للدم."
+      - "DiGeorge = 22q11 و CATCH-22؛ IL-12R = mycobacteria؛ Job = STAT3 و ABCDEF."
+    practice: [imm.L03.087, imm.L03.088, imm.L03.089, imm.L03.090, imm.L03.091, imm.L03.092, imm.L03.093, imm.L03.094, imm.L03.095, imm.L03.096, imm.L03.101, imm.L03.102]
+  - id: imm.L03.lesson7
+    title: "SCID وأخواتها، الـ phagocytes، والـ transplant"
+    hook: "WATER و PLAIN و granny's cats: 3 جمل بيحلّوا نص أسئلة الـ immunodeficiency"
+    minutes: 10
+    pages: [115, 117]
+    topics: [immunodeficiencies, infections-in-immunodeficiency, transplant-rejection]
+    goals:
+      - "تميّز SCID و ataxia-telangiectasia و hyper-IgM و Wiskott-Aldrich"
+      - "تفرّق بين LAD و Chédiak-Higashi و CGD"
+      - "تعرف كل نقص بيجيب أنهي ميكروب"
+      - "تفرّق بين أنواع الـ rejection و GVHD"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "B و T مع بعض"
+        text: |-
+          - **SCID**: أشهر سبب ==IL-2R gamma chain (X-linked)==، وكمان ADA deficiency (AR) و RAG (VDJ defect). failure to thrive، إسهال، thrush، وعدوى من كل نوع. الـ screening بالـ ↓ **TRECs**. مفيش thymic shadow ولا germinal centers ولا T cells.
+          - **Ataxia-telangiectasia**: ==ATM== ← الخلية مش بتحس بالـ DNA damage. ataxia + telangiectasias + IgA deficiency، و ↑↑ حساسية للـ radiation، و ↑ AFP، و ↑ lymphoma و leukemia.
+          - **Hyper-IgM**: ==CD40L بايظ== ← مفيش class switching. IgM طبيعي أو عالي و IgG و IgA و IgE واطيين جداً. Pneumocystis و Cryptosporidium و CMV.
+        page: 115
+        quote: "Several types including defective IL-2R gamma chain (most common, X-linked recessive); adenosine deaminase deficiency (autosomal recessive); RAG mutation → VDJ recombination defect"
+      - kind: reveal
+        prompt: "ليه بنقلّل الـ x-rays لمريض الـ ataxia-telangiectasia؟"
+        answer: "الـ **ATM** هو اللي بيحس بالـ DNA damage ويوقف الـ cell cycle عشان تتصلّح. من غيره الخلية تكمّل وهي مكسورة ← mutations تتراكم. والـ radiation بتكسر الـ DNA، فالمريض ==↑↑ sensitivity to radiation== و ↑ lymphoma و leukemia."
+        page: 115
+        quote: "Defects in ATM gene → failure to detect DNA damage → failure to halt progression of cell cycle → mutations accumulate; autosomal recessive"
+      - kind: aside
+        tone: exam
+        text: "**Wiskott-Aldrich**: ==WATER== = Wiskott-Aldrich: Thrombocytopenia، Eczema، Recurrent pyogenic infections. الـ WAS mutation بتمنع الـ actin يتنظّم، فالـ platelets ==قليلة وصغيرة==. X-linked recessive. ↑ IgE و IgA، و ↑ autoimmunity و malignancy."
+        page: 115
+        quote: "WATER: Wiskott-Aldrich: Thrombocytopenia, Eczema, Recurrent (pyogenic) infections ↑ risk of autoimmune disease and malignancy"
+      - kind: check
+        question: "A boy has eczema, recurrent otitis and petechiae. Platelets are few and small. Inheritance?"
+        options:
+          - "X-linked recessive"
+          - "Autosomal dominant"
+          - "Autosomal recessive"
+          - "Mitochondrial"
+        answer: 0
+        why:
+          - "صح: Wiskott-Aldrich، X-linked recessive."
+          - "AD ده Job syndrome."
+          - "AR زي ataxia-telangiectasia و Chédiak-Higashi و LAD."
+          - "مش mitochondrial."
+        page: 115
+        quote: "WAS mutation; leukocytes and platelets unable to reorganize actin cytoskeleton → defective antigen presentation; X-linked recessive"
+      - kind: explain
+        title: "الـ phagocytes"
+        text: |-
+          - **LAD type 1**: ==CD18 (LFA-1 integrin)== بايظ ← الـ neutrophils ما تعرفش تطلع من الـ vessel. ==الحبل السري يتأخر >30 يوم==، مفيش pus، neutrophils عالية في الدم ومش موجودة في مكان العدوى.
+          - **Chédiak-Higashi**: **LYST** ← الـ phagosome ما يندمجش مع الـ lysosome. ==Giant granules==. PLAIN: Progressive neurodegeneration، Lymphohistiocytosis، Albinism جزئي، Infections، Neuropathy.
+          - **CGD**: NADPH oxidase ← ↓ ROS. catalase ⊕ («granny's cats keep her positive»)، granulomas. **DHR test** مش طبيعي (↓ green fluorescence).
+        page: 115
+        quote: "Late separation (>30 days) of umbilical cord, absent pus, dysfunctional neutrophils → recurrent skin and mucosal bacterial infections ↑ neutrophils in blood Absence of neutrophils at infection sites → impaired wound healing"
+      - kind: figure
+        title: "الـ neutrophil بيقع فين؟"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="imm3e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="20" width="95" height="50" rx="8"/><text x="20" y="42" class="t-sm t-b">1. Leave vessel</text><text x="20" y="60" class="t-sm">CD18 integrin</text>
+            <path class="fg-arrow-acc" d="M105 45 L 130 45" marker-end="url(#imm3e)"/>
+            <rect class="fg-box" x="132" y="20" width="95" height="50" rx="8"/><text x="140" y="42" class="t-sm t-b">2. Fuse lysosome</text><text x="140" y="60" class="t-sm">LYST</text>
+            <path class="fg-arrow-acc" d="M227 45 L 252 45" marker-end="url(#imm3e)"/>
+            <rect class="fg-box" x="254" y="20" width="96" height="50" rx="8"/><text x="262" y="42" class="t-sm t-b">3. Kill (ROS)</text><text x="262" y="60" class="t-sm">NADPH oxidase</text>
+            <rect class="fg-bad" x="10" y="95" width="95" height="60" rx="8"/><text x="20" y="117" class="t-sm t-b">LAD</text><text x="20" y="135" class="t-sm">no pus, late cord</text>
+            <rect class="fg-bad" x="132" y="95" width="95" height="60" rx="8"/><text x="140" y="117" class="t-sm t-b">Chédiak-Higashi</text><text x="140" y="135" class="t-sm">giant granules</text>
+            <rect class="fg-bad" x="254" y="95" width="96" height="60" rx="8"/><text x="262" y="117" class="t-sm t-b">CGD</text><text x="262" y="135" class="t-sm">catalase ⊕</text>
+          </svg>
+        caption: "الـ neutrophil لازم يطلع من الـ vessel، وبعدين يدمج الـ lysosome مع اللي بلعه، وبعدين يقتل بالـ ROS. كل مرض بيكسر خطوة."
+        alt: "Three steps of neutrophil function with the disease that breaks each: leaving the vessel needs CD18 integrin (leukocyte adhesion deficiency: no pus, late cord separation); fusing the lysosome needs LYST (Chédiak-Higashi: giant granules); killing with ROS needs NADPH oxidase (CGD: catalase-positive infections)."
+        page: 115
+        quote: "Defect of NADPH oxidase → ↓ reactive oxygen species (eg, superoxide) and ↓ respiratory burst in neutrophils; X-linked form most common"
+      - kind: explain
+        title: "كل نقص وميكروباته"
+        text: |-
+          القاعدة: ==↓ B cells ← bacteria==، و ==↓ T cells ← fungi و viruses==.
+
+          - **↓ T**: sepsis، CMV، EBV، JC، VZV، Candida (local)، PCP، Cryptococcus.
+          - **↓ B**: encapsulated (Please SHINE my SKiS)، enteroviral encephalitis، polio، giardiasis.
+          - **↓ granulocytes**: Staph، Burkholderia، Pseudomonas، Nocardia، Serratia (Some Bacteria Produce No Serious granules)، و Candida systemic، Aspergillus، Mucor.
+          - **↓ complement**: encapsulated (early)، Neisseria (late).
+        page: 116
+        quote: "Note: B-cell deficiencies tend to produce recurrent bacterial infections, whereas T-cell deficiencies produce more fungal and viral infections."
+      - kind: match
+        prompt: "وصّل النقص بالميكروب"
+        pairs:
+          - ["↓ T cells", "Pneumocystis (PCP)"]
+          - ["↓ B cells", "Enteroviral encephalitis"]
+          - ["↓ Granulocytes", "Aspergillus"]
+          - ["↓ Late complement (C5-C9)", "Neisseria"]
+        why: "الـ T للـ fungi والفيروسات (PCP، Cryptococcus، CMV)، الـ B للـ encapsulated والـ enteroviruses، الـ granulocytes للـ Aspergillus و Staph، والـ MAC للـ Neisseria."
+        page: 116
+        quote: "Fungi/parasites Candida (local), PCP, Cryptococcus GI giardiasis (no IgA) Candida (systemic), Aspergillus, Mucor N/A"
+      - kind: explain
+        title: "الـ transplant rejection"
+        text: |-
+          - **Hyperacute** (==دقايق==): antibodies موجودة قبل كده عند المستقبل (type II) ← complement ← thrombosis في الـ graft. لازم يتشال.
+          - **Acute** (أسابيع لشهور): **cellular** = CD8+ و CD4+ ضد الـ donor MHC (type IV)، أو **humoral** = antibodies اتعملت بعد الزرع (C4d). vasculitis و lymphocytic infiltrate. بيترد بالـ immunosuppressants.
+          - **Chronic** (شهور لسنين): CD4+ بتشوف donor peptides على APCs المستقبل (II و IV) ← ==arteriosclerosis== و fibrosis. أمثلة: chronic allograft nephropathy، bronchiolitis obliterans، accelerated atherosclerosis، vanishing bile duct syndrome.
+        page: 117
+        quote: "Dominated by arteriosclerosis C Recipient T cells react and secrete cytokines → proliferation of vascular smooth muscle, parenchymal atrophy, interstitial fibrosis"
+      - kind: aside
+        tone: trap
+        text: "**GVHD** هو العكس: ==T cells المتبرع بتهاجم المستقبل== (type IV). rash و jaundice و diarrhea و hepatosplenomegaly، غالباً بعد bone marrow أو liver (فيهم lymphocytes كتير). في الـ leukemia ممكن يفيد (graft-versus-tumor). وعشان نمنعه في الـ immunocompromised بنعمل ==irradiation للدم== قبل النقل."
+        page: 117
+        quote: "Usually in bone marrow and liver transplants (rich in lymphocytes) Potentially beneficial in bone marrow transplant for leukemia (graft-versus- tumor effect)"
+      - kind: check
+        question: "Five years after a heart transplant, a patient has diffuse narrowing of the coronary arteries. Which rejection?"
+        options:
+          - "Chronic"
+          - "Hyperacute"
+          - "Acute cellular"
+          - "Graft-versus-host disease"
+        answer: 0
+        why:
+          - "صح: chronic rejection بيعمل arteriosclerosis، وفي القلب accelerated atherosclerosis."
+          - "Hyperacute في دقايق."
+          - "Acute في أسابيع لشهور."
+          - "GVHD بيهاجم المستقبل مش الـ graft."
+        page: 117
+        quote: "Organ-specific examples: Chronic allograft nephropathy Bronchiolitis obliterans Accelerated atherosclerosis (heart) Vanishing bile duct syndrome"
+      - kind: try
+        items: [imm.L03.097, imm.L03.098, imm.L03.104, imm.L03.107, imm.L03.109]
+    recap:
+      - "SCID = IL-2Rγ أشهر، و TRECs للـ screening؛ AT = ATM و radiation؛ hyper-IgM = CD40L؛ WAS = WATER."
+      - "LAD = CD18 و الحبل متأخر؛ Chédiak-Higashi = LYST و giant granules؛ CGD = catalase ⊕ و DHR."
+      - "B ← bacteria، T ← fungi و viruses، granulocytes ← Aspergillus، MAC ← Neisseria."
+      - "Hyperacute دقايق (antibodies)، acute أسابيع (T cells)، chronic سنين (arteriosclerosis)، GVHD = المتبرع ضد المستقبل."
+    practice: [imm.L03.097, imm.L03.098, imm.L03.099, imm.L03.100, imm.L03.103, imm.L03.104, imm.L03.105, imm.L03.106, imm.L03.107, imm.L03.108, imm.L03.109, imm.L03.110, imm.L03.111, imm.L03.112, imm.L03.113]

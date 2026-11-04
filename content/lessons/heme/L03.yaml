@@ -1,0 +1,389 @@
+schema: steps.lesson/v1
+lecture: heme.L03
+lessons:
+  - id: heme.L03.lesson1
+    title: "الـ electrophoresis والـ Coombs: اختبارين بتشوف بيهم الدم"
+    hook: "A Fat Santa Claus can't go far: جملة واحدة تحل كل سؤال electrophoresis"
+    minutes: 8
+    pages: [416, 416]
+    topics: [hemoglobin-electrophoresis, antiglobulin-test]
+    goals:
+      - "تفهم ليه الـ HbS والـ HbC بيمشوا أقل من الـ HbA"
+      - "تقرا أي pattern: AS و SS و SC و AF"
+      - "تفرّق بين الـ direct والـ indirect Coombs وإمتى تستخدم كل واحد"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ hemoglobin بيجري ناحية الموجب"
+        text: |-
+          في الـ gel electrophoresis الـ hemoglobin بيمشي من الـ **cathode** (السالب) ناحية الـ **anode** (الموجب). فاللي شحنته ==أكتر سالب== بيجري أبعد.
+
+          الترتيب من الأبعد للأقرب: **HbA** ثم **HbF** ثم **HbS** ثم **HbC**.
+        page: 416
+        quote: "During gel electrophoresis, hemoglobin migrates from the negatively charged cathode to the positively charged anode. HbA migrates the farthest, followed by HbF, HbS, and HbC."
+      - kind: reveal
+        prompt: "الـ HbS والـ HbC الاتنين mutations في الـ β chain. ليه الاتنين بيمشوا أبطأ من الـ HbA، وليه الـ HbC أبطأ من الـ HbS؟"
+        answer: "الاتنين بيشيلوا **glutamic acid** (سالب). في الـ HbS بيحط مكانه **valine** (متعادل)، فالـ hemoglobin خسر شحنة سالبة. في الـ HbC بيحط **lysine** (موجب)، فخسر سالبة وكسب موجبة. فالـ HbC ==أكتر موجب== من الكل وبيفضل جنب الـ cathode."
+        page: 416
+        quote: "This is because the missense mutations in HbS and HbC replace glutamic acid with valine (neutral) and lysine , respectively, making HbC and HbS more positively charged than HbA."
+      - kind: figure
+        title: "الـ gel"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="16" class="t-sm t-b">Cathode (−)</text>
+            <text x="270" y="16" class="t-sm t-b">Anode (+)</text>
+            <text x="64" y="34" class="t-sm t-mut">C</text>
+            <text x="134" y="34" class="t-sm t-mut">S</text>
+            <text x="204" y="34" class="t-sm t-mut">F</text>
+            <text x="274" y="34" class="t-sm t-mut">A</text>
+            <line class="fg-thin" x1="20" y1="40" x2="20" y2="185"/>
+            <text x="6" y="182" class="t-sm t-mut">origin</text>
+            <text x="300" y="55" class="t-sm">AA</text>
+            <rect class="fg-dot-acc" x="265" y="46" width="24" height="8"/>
+            <text x="300" y="80" class="t-sm">AS</text>
+            <rect class="fg-dot-acc" x="265" y="71" width="24" height="8"/>
+            <rect class="fg-dot-acc" x="125" y="71" width="24" height="8"/>
+            <text x="300" y="105" class="t-sm">SS</text>
+            <rect class="fg-dot-acc" x="125" y="96" width="24" height="8"/>
+            <text x="300" y="130" class="t-sm">SC</text>
+            <rect class="fg-dot-acc" x="125" y="121" width="24" height="8"/>
+            <rect class="fg-dot-acc" x="55" y="121" width="24" height="8"/>
+            <text x="300" y="155" class="t-sm">AF</text>
+            <rect class="fg-dot-acc" x="265" y="146" width="24" height="8"/>
+            <rect class="fg-dot-acc" x="195" y="146" width="24" height="8"/>
+          </svg>
+        caption: "كل سطر مريض. AA طبيعي، AS sickle cell trait، SS sickle cell disease، SC Hb SC disease، و AF مولود طبيعي. الـ C أقرب واحد للـ cathode."
+        alt: "Gel electrophoresis lanes from cathode on the left to anode on the right, with band positions C, S, F and A. AA has one band at A; AS has bands at A and S; SS at S; SC at S and C; AF at A and F."
+        page: 416
+        quote: "AA Normal adult ↑ AF Normal newborn ↑ AS Sickle cell trait ↑ SS Sickle cell disease ↑ AC Hb C trait ↑ CC Hb C disease"
+      - kind: mnemonic
+        word: "AFSC"
+        parts:
+          - { key: "A", text: "A: HbA، أبعد واحد (جنب الـ Anode)" }
+          - { key: "F", text: "Fat: HbF" }
+          - { key: "S", text: "Santa: HbS" }
+          - { key: "C", text: "Claus: HbC، أقرب واحد للـ Cathode" }
+        hook: "جملة الكتاب: A Fat Santa Claus can't go far"
+        page: 416
+        quote: "A Fat Santa Claus can’t go far. HbC is closest to the Cathode. HbA is closest to the Anode."
+      - kind: check
+        question: "An electrophoresis shows bands at the HbS and HbC positions and none at HbA. What is the diagnosis?"
+        options:
+          - "Hb SC disease"
+          - "Sickle cell trait"
+          - "Hb C trait"
+          - "Normal newborn"
+        answer: 0
+        why:
+          - "صح: باند S وباند C ومفيش A = Hb SC disease."
+          - "الـ trait (AS) فيه باند A."
+          - "الـ Hb C trait هو AC، فيه باند A."
+          - "المولود الطبيعي AF."
+        page: 416
+        quote: "Hb SC disease"
+      - kind: explain
+        title: "Coombs: فيه antibody على الكرات ولا لأ؟"
+        text: |-
+          الـ **antiglobulin (Coombs) test** بيدوّر على ==antibodies ضد الـ RBCs==. الـ Coombs reagent هو anti-human globulin: antibody بيمسك أي antibody بشري، فيربط الكرات في بعض (agglutination) لو عليها antibodies.
+
+          - **Direct**: نحط الـ reagent على ==كرات المريض==. لو اتلزقت يبقى كراته متغطية بـ antibodies. ده لتشخيص الـ **AIHA**.
+          - **Indirect**: نحط كرات طبيعية (donor) على ==serum المريض==، وبعدين الـ reagent. لو اتلزقت يبقى الـ serum فيه antibodies حرة. ده للـ **pretransfusion testing**.
+        page: 416
+        quote: "Direct antiglobulin test—anti-human globulin (Coombs reagent) added to patient’s RBCs. RBCs agglutinate if RBCs are (directly) coated with anti-RBC Abs. Used for AIHA diagnosis."
+      - kind: aside
+        tone: tip
+        text: "عشان ما تتلخبطش: **Direct** = ==الكرات نفسها== (السؤال: هل المريض عنده AIHA؟). **Indirect** = ==الـ serum== (السؤال: هل المستقبل هيهاجم كرات المتبرع؟)."
+        page: 416
+        quote: "Indirect (not direct) antiglobulin test—normal RBCs added to patient’s serum. If serum has anti- RBC Abs, RBCs agglutinate when Coombs reagent is added. Used for pretransfusion testing."
+      - kind: check
+        question: "Before a transfusion, the lab mixes donor red cells with the recipient's serum and adds Coombs reagent. Which test is this?"
+        options:
+          - "Indirect antiglobulin test"
+          - "Direct antiglobulin test"
+          - "Hemoglobin electrophoresis"
+          - "Ristocetin assay"
+        answer: 0
+        why:
+          - "صح: كرات طبيعية + serum المريض = indirect، وده للـ pretransfusion testing."
+          - "الـ direct بيستخدم كرات المريض نفسه، ولتشخيص الـ AIHA."
+          - "الـ electrophoresis بيفصل أنواع الـ hemoglobin."
+          - "الـ ristocetin بيختبر الـ vWF والـ GpIb."
+        page: 416
+        quote: "If serum has anti- RBC Abs, RBCs agglutinate when Coombs reagent is added. Used for pretransfusion testing."
+      - kind: try
+        items: [heme.L03.001, heme.L03.002, heme.L03.004, heme.L03.007]
+    recap:
+      - "الـ hemoglobin بيجري للـ anode: A ثم F ثم S ثم C (A Fat Santa Claus)."
+      - "HbS: glutamic acid ← valine. HbC: glutamic acid ← lysine، فهو الأقرب للـ cathode."
+      - "Direct Coombs = كرات المريض (AIHA). Indirect = serum المريض (قبل نقل الدم)."
+    practice: [heme.L03.001, heme.L03.002, heme.L03.003, heme.L03.004, heme.L03.005, heme.L03.006, heme.L03.007, heme.L03.008, heme.L03.009]
+  - id: heme.L03.lesson2
+    title: "الـ platelet plug: خمس خطوات وكل دوا بيضرب واحدة"
+    hook: "Injury ثم Exposure ثم Adhesion ثم Activation ثم Aggregation: لو حفظتهم، كل antiplatelet ومرض نزيف هيقعد في مكانه"
+    minutes: 9
+    pages: [417, 417]
+    topics: [platelet-plug-formation, thrombogenesis]
+    goals:
+      - "ترتب خطوات الـ primary hemostasis"
+      - "تحط كل دوا (aspirin، clopidogrel، eptifibatide) على خطوته"
+      - "تفرّق بين von Willebrand و Bernard-Soulier و Glanzmann"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "خمس خطوات"
+        text: |-
+          1. **Injury**: الـ endothelium يتجرح ← vasoconstriction مؤقت (neural reflex و **endothelin**).
+          2. **Exposure**: الـ ==vWF== يمسك في الـ collagen اللي اتكشف. الـ vWF جاي من الـ **Weibel-Palade bodies** في الـ endothelium ومن الـ α-granules في الـ platelets.
+          3. **Adhesion**: الـ platelet يمسك الـ vWF بالـ ==GpIb==، في مكان الجرح بس، ويغيّر شكله.
+          4. **Activation**: الـ platelet يطلّع ADP و Ca2+ و TXA2. الـ ADP يمسك الـ **P2Y12** ← الـ GpIIb/IIIa يظهر على السطح.
+          5. **Aggregation**: الـ **fibrinogen** يمسك الـ GpIIb/IIIa ويربط الـ platelets في بعض.
+        page: 417
+        quote: "ADP binding to P2Y12 receptor induces GpIIb/IIIa expression at platelet surface → rapid irreversible platelet aggregation"
+      - kind: order
+        prompt: "رتّب خطوات الـ platelet plug"
+        steps:
+          - "Injury"
+          - "Exposure"
+          - "Adhesion"
+          - "Activation"
+          - "Aggregation"
+        why: "الجرح الأول، وبعدين الـ vWF يمسك الـ collagen المكشوف، فالـ platelet يلزق فيه بالـ GpIb، يتنشط ويطلّع ADP و TXA2، وفي الآخر الـ fibrinogen يربطهم بالـ GpIIb/IIIa."
+        page: 417
+        quote: "Thrombogenesis INJURY EXPOSURE ADHESION ACTIVATION AGGREGATION"
+      - kind: figure
+        title: "مين بيضرب فين"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="10" y="160" width="340" height="30" rx="6"/>
+            <text x="110" y="180" class="t-sm">Subendothelial collagen</text>
+            <rect class="fg-acc" x="20" y="120" width="70" height="26" rx="6"/>
+            <text x="40" y="138" class="t-sm t-b">vWF</text>
+            <rect class="fg-ink" x="20" y="80" width="70" height="26" rx="6"/>
+            <text x="37" y="98" class="t-sm t-b">GpIb</text>
+            <rect class="fg-good" x="110" y="40" width="130" height="80" rx="30"/>
+            <text x="150" y="85" class="t-sm t-b">Platelet</text>
+            <text x="120" y="30" class="t-sm">COX → TXA2</text>
+            <text x="120" y="135" class="t-sm">P2Y12 (ADP)</text>
+            <rect class="fg-ink" x="260" y="60" width="90" height="26" rx="6"/>
+            <text x="266" y="78" class="t-sm t-b">GpIIb/IIIa</text>
+            <text x="262" y="104" class="t-sm">+ fibrinogen</text>
+            <text x="100" y="12" class="t-sm t-bad">Aspirin</text>
+            <text x="200" y="150" class="t-sm t-bad">Clopidogrel</text>
+            <text x="262" y="40" class="t-sm t-bad">Eptifibatide</text>
+            <text x="10" y="70" class="t-sm t-mut">Bernard-Soulier</text>
+            <text x="10" y="114" class="t-sm t-mut">von Willebrand</text>
+            <text x="262" y="124" class="t-sm t-mut">Glanzmann</text>
+          </svg>
+        caption: "بالأحمر: الدوا اللي بيضرب كل حلقة. بالرمادي: المرض اللي بيطلع لو الحلقة دي ناقصة."
+        alt: "Diagram of a platelet attached to subendothelial collagen through vWF and GpIb. On the platelet: cyclooxygenase making TXA2, blocked by aspirin; the P2Y12 ADP receptor, blocked by clopidogrel; and GpIIb/IIIa binding fibrinogen, blocked by eptifibatide. Deficiencies are labelled: Bernard-Soulier at GpIb, von Willebrand at vWF, Glanzmann at GpIIb/IIIa."
+        page: 417
+        quote: "Clopidogrel, prasugrel, ticagrelor Eptifibatide, tirofiban Ristocetin Aspirin Desmopressin Deficiency: von Willebrand disease Deficiency: Bernard-Soulier syndrome Deficiency: Glanzmann thrombasthenia"
+      - kind: explain
+        title: "الميزان"
+        text: |-
+          الـ endothelium السليم بيطلّع **PGI2** و **NO**: يزوّدوا الـ blood flow ويقلّلوا الـ aggregation (==anti-aggregation==).
+
+          الـ platelet نفسه بيطلّع **TXA2**: يقلّل الـ flow ويزوّد الـ aggregation (==pro-aggregation==).
+
+          الـ plug نفسه ==مؤقت وضعيف== وسهل يتشال؛ اللي بيثبّته هو الـ fibrin mesh من الـ coagulation cascade (secondary hemostasis).
+        page: 417
+        quote: "Anti-aggregation factors: PGI2 and NO (released by endothelial cells) ↑ blood flow ↓ platelet aggregation Pro-aggregation factors: TXA2 (released by platelets) ↓ blood flow ↑ platelet aggregation"
+      - kind: table
+        title: "الأدوية على الخطوات"
+        columns: ["Drug", "Mechanism"]
+        rows:
+          - ["Aspirin", "Irreversibly inhibits cyclooxygenase → ↓ TXA2"]
+          - ["Clopidogrel, prasugrel, ticagrelor", "Block P2Y12 → ↓ ADP-induced GpIIb/IIIa expression"]
+          - ["Eptifibatide, tirofiban", "Inhibit GpIIb/IIIa directly"]
+          - ["Desmopressin", "Releases vWF and factor VIII from endothelial cells"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+        page: 417
+        quote: "Aspirin irreversibly inhibits cyclooxygenase, thereby inhibiting TXA2 synthesis. Clopidogrel, prasugrel, and ticagrelor inhibit ADP-induced expression of GpIIb/IIIa by blocking P2Y12 receptor. Eptifibatide and tirofiban inhibit GpIIb/IIIa (fibrinogen receptor) directly."
+      - kind: explain
+        title: "الـ ristocetin: اختبار الحلقة الأولى"
+        text: |-
+          الـ **ristocetin** بينشّط الـ vWF عشان يمسك الـ GpIb. فلو حطيته والـ platelets ما اتجمعتش، يبقى الحلقة دي بايظة:
+
+          - ==von Willebrand disease== (الـ vWF ناقص)
+          - ==Bernard-Soulier syndrome== (الـ GpIb ناقص)
+
+          أما الـ **Glanzmann thrombasthenia** (الـ GpIIb/IIIa ناقص) فالـ ristocetin بيبقى طبيعي، لأن الـ vWF والـ GpIb سليمين.
+        page: 417
+        quote: "Ristocetin activates vWF to bind GpIb. Failure of aggregation with ristocetin assay occurs in von Willebrand disease and Bernard-Soulier syndrome."
+      - kind: aside
+        tone: tip
+        text: "الـ vWF بيشيل ويحمي الـ **factor VIII**، فلو الـ vWF قليل الـ VIII بيقل معاه. والـ desmopressin بيطلّع الاتنين. جملة الكتاب: ==volksWagen Factories make gr8 cars==."
+        page: 417
+        quote: "vWF carries/protects factor VIII; volksWagen Factories make gr8 cars."
+      - kind: check
+        question: "A patient's platelets fail to aggregate with ristocetin; vWF levels are normal. Which molecule is most likely deficient?"
+        options:
+          - "GpIb"
+          - "GpIIb/IIIa"
+          - "Cyclooxygenase"
+          - "P2Y12 receptor"
+        answer: 0
+        why:
+          - "صح: الـ ristocetin بيختبر vWF مع GpIb. الـ vWF سليم، يبقى الـ GpIb ناقص (Bernard-Soulier)."
+          - "نقص الـ GpIIb/IIIa (Glanzmann) الـ ristocetin معاه طبيعي."
+          - "الـ COX (aspirin) مالوش دعوة بالـ ristocetin."
+          - "الـ P2Y12 (clopidogrel) برضه مالوش دعوة بالـ ristocetin."
+        page: 417
+        quote: "Failure of aggregation with ristocetin assay occurs in von Willebrand disease and Bernard-Soulier syndrome."
+      - kind: try
+        items: [heme.L03.010, heme.L03.011, heme.L03.015, heme.L03.016, heme.L03.019]
+    recap:
+      - "Injury ثم Exposure (vWF على collagen) ثم Adhesion (GpIb) ثم Activation (ADP على P2Y12، TXA2) ثم Aggregation (fibrinogen على GpIIb/IIIa)."
+      - "PGI2 و NO ضد الـ aggregation؛ TXA2 معاها."
+      - "Aspirin ← COX؛ clopidogrel ← P2Y12؛ eptifibatide ← GpIIb/IIIa؛ desmopressin يطلّع vWF و VIII."
+      - "Ristocetin فاشل = vWD أو Bernard-Soulier. Glanzmann = GpIIb/IIIa."
+    practice: [heme.L03.010, heme.L03.011, heme.L03.012, heme.L03.013, heme.L03.014, heme.L03.015, heme.L03.016, heme.L03.017, heme.L03.018, heme.L03.019, heme.L03.020]
+  - id: heme.L03.lesson3
+    title: "الـ coagulation cascade و vitamin K: من غير ما تتوه في الأرقام"
+    hook: "PT للـ extrinsic، PTT للـ intrinsic، والـ warfarin بيضرب vitamin K. الباقي تفاصيل بتتبني على ده"
+    minutes: 10
+    pages: [418, 419]
+    topics: [coagulation-and-kinin-pathways, vitamin-k-dependent-coagulation]
+    goals:
+      - "تعرف الـ PT والـ PTT بيقيسوا أنهي factors"
+      - "تعرف الـ hemophilias والـ bradykinin والـ C1-inhibitor"
+      - "تفهم vitamin K والـ warfarin والـ antithrombin والـ factor V Leiden"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "طريقين وبعدين طريق واحد"
+        text: |-
+          - **Extrinsic** (tissue factor): tissue factor + **VII** ← VIIa.
+          - **Intrinsic** (contact activation): **XII** ← XI ← IX (مع VIII).
+          - **Common**: الاتنين بيوصلوا لـ **X** ← مع V يحوّلوا prothrombin (**II**) لـ thrombin ← thrombin يحوّل fibrinogen (**I**) لـ fibrin ← **XIIIa** يثبّت الـ fibrin mesh على الـ platelet plug.
+
+          ولقياسهم:
+          - ==PT== = extrinsic + common: factors I و II و V و VII و X
+          - ==PTT== = intrinsic + common: كل الـ factors ما عدا VII و XIII
+        page: 418
+        quote: "PT monitors extrinsic and common pathway, reflecting activity of factors I, II, V, VII, and X. PTT monitors intrinsic and common pathway, reflecting activity of all factors except VII and XIII."
+      - kind: figure
+        title: "الـ cascade مبسّط"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="heme3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="10" y="10" width="150" height="70" rx="8"/>
+            <text x="20" y="28" class="t-sm t-b">Intrinsic (PTT)</text>
+            <text x="20" y="48" class="t-sm">XII → XI → IX</text>
+            <text x="20" y="68" class="t-sm">IXa + VIIIa</text>
+            <rect class="fg-good" x="200" y="10" width="150" height="70" rx="8"/>
+            <text x="210" y="28" class="t-sm t-b">Extrinsic (PT)</text>
+            <text x="210" y="48" class="t-sm">Tissue factor</text>
+            <text x="210" y="68" class="t-sm">VII → VIIa</text>
+            <path class="fg-arrow" d="M85 80 L160 110" marker-end="url(#heme3a)"/>
+            <path class="fg-arrow" d="M275 80 L200 110" marker-end="url(#heme3a)"/>
+            <rect class="fg-ink" x="90" y="112" width="180" height="90" rx="8"/>
+            <text x="100" y="130" class="t-sm t-b">Common (PT and PTT)</text>
+            <text x="100" y="150" class="t-sm">X → Xa (+ Va)</text>
+            <text x="100" y="168" class="t-sm">II (prothrombin) → IIa</text>
+            <text x="100" y="186" class="t-sm">I (fibrinogen) → fibrin</text>
+            <text x="100" y="200" class="t-sm t-mut">XIIIa stabilizes the mesh</text>
+          </svg>
+        caption: "الـ PTT بيقيس الشمال والنص، والـ PT بيقيس اليمين والنص. الـ VII بس في الـ PT، والـ XIII مش في الاتنين."
+        alt: "Simplified coagulation cascade. Intrinsic pathway measured by PTT: XII to XI to IX, with IXa and VIIIa. Extrinsic pathway measured by PT: tissue factor and VII to VIIa. Both feed the common pathway measured by both tests: X to Xa with Va, prothrombin to thrombin, fibrinogen to fibrin, with XIIIa stabilizing the mesh."
+        page: 418
+        quote: "PT monitors extrinsic and common pathway"
+      - kind: check
+        question: "A patient has a prolonged PT with a normal PTT. Deficiency of which factor fits best?"
+        options:
+          - "Factor VII"
+          - "Factor VIII"
+          - "Factor IX"
+          - "Factor XIII"
+        answer: 0
+        why:
+          - "صح: الـ VII هو الوحيد اللي في الـ PT بس (extrinsic)."
+          - "الـ VIII في الـ intrinsic: يطوّل الـ PTT."
+          - "الـ IX في الـ intrinsic: يطوّل الـ PTT."
+          - "الـ XIII مش في الـ PT ولا الـ PTT."
+        page: 418
+        quote: "PTT monitors intrinsic and common pathway, reflecting activity of all factors except VII and XIII."
+      - kind: table
+        title: "الـ hemophilias"
+        columns: ["Type", "Factor", "Inheritance"]
+        rows:
+          - ["A", "VIII", "XR"]
+          - ["B", "IX", "XR"]
+          - ["C", "XI", "AR"]
+        hide: [[0, 1], [1, 1], [2, 1], [2, 2]]
+        page: 418
+        quote: "Hemophilia A: deficiency of factor VIII (XR) Hemophilia B: deficiency of factor IX (XR) Hemophilia C: deficiency of factor XI (AR)"
+      - kind: explain
+        title: "الـ kinin cascade: نفس البداية، نتيجة تانية"
+        text: |-
+          الـ **kallikrein** (من نفس الـ contact activation) بيحوّل الـ HMWK لـ ==bradykinin==: vasodilation و permeability و pain.
+
+          - الـ **ACE** بيكسّر الـ bradykinin. فالـ ACE inhibitor بيخليه يتراكم ← angioedema.
+          - الـ **C1-inhibitor** (اسمه القديم C1-esterase inhibitor) بيفرمل الـ kallikrein. لو ناقص ← ==hereditary angioedema==.
+        page: 418
+        quote: "C1-inhibitor deficiency (previously known as C1-esterase inhibitor deficiency) hereditary angioedema"
+      - kind: explain
+        title: "الأدوية على الـ cascade"
+        text: |-
+          - على الـ **Xa**: heparin، LMWH (dalteparin، enoxaparin)، direct Xa inhibitors (apixaban)، fondaparinux
+          - على الـ **thrombin**: heparin، LMWH، direct thrombin inhibitors (argatroban، bivalirudin، dabigatran)
+          - **Thrombolytics** (زي الـ tPA): alteplase، reteplase، tenecteplase: بيحوّلوا plasminogen لـ ==plasmin== يكسّر الـ fibrin ← fibrin degradation products (زي **D-dimer**)
+          - **Antifibrinolytics**: aminocaproic acid، tranexamic acid
+        page: 418
+        quote: "THROMBOLYTICS: - alteplase, reteplase, tenecteplase ANTIFIBRINOLYTICS: - aminocaproic acid, tranexamic acid Fibrin degradation products (eg, D-dimer)"
+      - kind: explain
+        title: "Vitamin K: بيكمّل تصنيع الـ factors"
+        text: |-
+          الـ liver بيعمل factors **II و VII و IX و X** وكمان **protein C و S** ناقصين. الـ **γ-glutamyl carboxylase** بيكمّلهم (carboxylation)، ومحتاج ==vitamin K المختزل (active)==.
+
+          بعد الشغل ده الـ vitamin K بيتأكسد، والـ **epoxide reductase** بيرجّعه active تاني. والـ ==warfarin بيضرب الـ epoxide reductase==، فالـ vitamin K ما يرجعش، والـ factors تطلع ناقصة.
+        page: 419
+        quote: "Vitamin K deficiency—↓ carboxylation and maturation of factors II, VII, IX, X, protein C, protein S. Warfarin inhibits vitamin K epoxide reductase."
+      - kind: reveal
+        prompt: "مريض واخد warfarin وجاله نزيف خطير. ليه الـ vitamin K لوحده مش كفاية، وإيه اللي بيشتغل على طول؟"
+        answer: "الـ vitamin K بيصلّح التصنيع، بس الكبد محتاج وقت يعمل factors جديدة ==(delayed)==. الـ **FFP** أو الـ **PCC** فيهم الـ factors جاهزة، فبيعكسوا الـ warfarin ==immediately==، وبنديهم مع الـ vitamin K في النزيف الشديد."
+        page: 419
+        quote: "Vitamin K administration can potentially reverse inhibitory effect of warfarin on clotting factor synthesis (delayed). FFP or PCC administration reverses action of warfarin immediately and can be given with vitamin K in cases of severe bleeding."
+      - kind: aside
+        tone: exam
+        text: "المولود ما عندوش بكتيريا في الأمعاء تعمل vitamin K (الكتاب بيكتبها ==baKteria==)، فبندّيله vitamin K بدري. والـ broad-spectrum antibiotiKs بتعمل نفس الحكاية في الكبار."
+        page: 419
+        quote: "Neonates lack enteric baKteria, which produce vitamin K. Early administration of vitamin K overcomes neonatal deficiency/coagulopathy. Suppression of gut flora by broad spectrum antibiotiKs can also contribute to deficiency."
+      - kind: aside
+        tone: tip
+        text: "Factor **VII** (seven) ==أقصر half-life==، و factor **II** (two) أطول half-life («too long»). عشان كده أول ما تبدأ warfarin الـ VII هو أول واحد يقع، فالـ PT يطوّل الأول."
+        page: 419
+        quote: "Factor VII (seven)—shortest half-life. Factor II (two)—longest (too long) half-life."
+      - kind: explain
+        title: "الفرامل: antithrombin و protein C"
+        text: |-
+          - **Antithrombin** بيوقف thrombin (IIa) و VIIa و IXa و Xa و XIa و XIIa، وأهم هدفين ==thrombin و Xa==. والـ **heparin** بيقوّي شغله.
+          - **Activated protein C** (محتاج **protein S**) بيوقف Va و VIIIa.
+          - **Factor V Leiden**: factor V ==مش بيسمع كلام الـ activated protein C==، فالتجلط يزيد.
+          - والـ **tPA** بيستخدم كـ thrombolytic.
+        page: 419
+        quote: "Antithrombin inhibits thrombin (factor IIa) and factors VIIa, IXa, Xa, XIa, XIIa. Heparin enhances the activity of antithrombin. Principal targets of antithrombin: thrombin and factor Xa. Factor V Leiden mutation produces a factor V resistant to inhibition by activated protein C."
+      - kind: check
+        question: "Which enzyme does warfarin inhibit?"
+        options:
+          - "Vitamin K epoxide reductase"
+          - "γ-glutamyl carboxylase"
+          - "Antithrombin"
+          - "Cyclooxygenase"
+        answer: 0
+        why:
+          - "صح: الـ epoxide reductase اللي بيرجّع الـ vitamin K active."
+          - "الـ carboxylase بيستخدم الـ vitamin K، بس الـ warfarin مش بيضربه مباشرة."
+          - "الـ antithrombin مش enzyme الـ warfarin؛ الـ heparin هو اللي بيقوّيه."
+          - "الـ COX هدف الـ aspirin."
+        page: 419
+        quote: "Warfarin inhibits vitamin K epoxide reductase."
+      - kind: try
+        items: [heme.L03.021, heme.L03.022, heme.L03.023, heme.L03.031, heme.L03.036]
+    recap:
+      - "PT = I، II، V، VII، X. PTT = الكل ما عدا VII و XIII."
+      - "Hemophilia A (VIII، XR)، B (IX، XR)، C (XI، AR)."
+      - "Bradykinin: kallikrein يعمله، ACE يكسّره؛ نقص C1-inhibitor = hereditary angioedema."
+      - "Vitamin K: II، VII، IX، X، C، S. Warfarin ← epoxide reductase. FFP/PCC فوري، vitamin K متأخر."
+      - "Antithrombin أهم أهدافه thrombin و Xa؛ factor V Leiden مقاوم للـ activated protein C."
+    practice: [heme.L03.021, heme.L03.022, heme.L03.023, heme.L03.024, heme.L03.025, heme.L03.026, heme.L03.027, heme.L03.028, heme.L03.029, heme.L03.030, heme.L03.031, heme.L03.032, heme.L03.033, heme.L03.034, heme.L03.035, heme.L03.036, heme.L03.037, heme.L03.038, heme.L03.039, heme.L03.040, heme.L03.041]
