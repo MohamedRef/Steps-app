@@ -146,11 +146,12 @@ fn main() {
             )
             .launch(App);
     }
-    // The web: the kept database is read before the first screen.
+    // The web: the content pack and the kept database come before the first screen.
     #[cfg(target_arch = "wasm32")]
     wasm_bindgen_futures::spawn_local(async {
-        platform::web::boot().await;
-        dioxus::launch(App);
+        if platform::web::boot().await {
+            dioxus::launch(App);
+        }
     });
     #[cfg(not(any(all(feature = "desktop", not(target_os = "android")), target_arch = "wasm32")))]
     dioxus::launch(App);

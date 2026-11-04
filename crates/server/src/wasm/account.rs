@@ -14,7 +14,8 @@ use super::do_sql::DoSql;
 use super::{api_error, now_ms, random_hex};
 use crate::devices::{Devices, RefreshError};
 use crate::hub::{Conn, Hub};
-use crate::internal::{DEVICE_HEADER, Expiry, Refresh, Register, Revoke};
+use crate::internal::{AccountLoginState, DEVICE_HEADER, Expiry, LoginName, Refresh, Register, Revoke};
+use crate::login::AccountLogin;
 
 /// Close code sent to a signed-out device.
 const CLOSE_REVOKED: u16 = 4001;
@@ -139,6 +140,25 @@ impl DurableObject for Account {
                 }
                 let list = devices.list(&current).map_err(sql_err)?;
                 Response::from_json(&DeviceList { devices: list })
+            }
+            // Username + password (`crate::login`): only a signed-in device
+            // may read or change it.
+            (Method::Get, "/login") => {
+                let caller = Self::device_header(&req)?;
+                let Some(email) = devices.email(&caller).map_err(sql_err)? else {
+                    return api_error(ErrorCode::DeviceRevoked, "this device was signed out");
+                };
+                let username = AccountLogin::open(&db).username().map_err(sql_err)?;
+                Response::from_json(&AccountLoginState { email, username })
+            }
+            (Method::Post, "/login") => {
+                let caller = Self::device_header(&req)?;
+                if !devices.is_active(&caller).map_err(sql_err)? {
+                    return api_error(ErrorCode::DeviceRevoked, "this device was signed out");
+                }
+                let body: LoginName = req.json().await?;
+                AccountLogin::open(&db).set_username(body.username.as_deref()).map_err(sql_err)?;
+                Response::empty()
             }
             (Method::Post, "/revoke") => {
                 let caller = Self::device_header(&req)?;
