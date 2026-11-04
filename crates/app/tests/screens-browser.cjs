@@ -72,7 +72,7 @@ function measure([floor, known]) {
   const offscreen = controls.filter(el => {
     const r = el.getBoundingClientRect();
     // Inside a sideways scroller (a wide table) is reachable by scrolling.
-    if (el.closest('.ls-table-scroll, .table-scroll, [data-scroll-x]')) return false;
+    if (el.closest('.ls-table-scroll, .table-scroll, .tb-scroll, [data-scroll-x]')) return false;
     return r.left < -1 || r.right > innerWidth + 1;
   });
   return {

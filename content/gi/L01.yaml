@@ -1,0 +1,401 @@
+schema: steps.content/v1
+lecture: gi.L01
+title: Embryology
+book: { chapter: 9, pages: [364, 366] }
+topics:
+  - { id: tongue-development, title: Tongue development }
+  - { id: normal-gi-embryology, title: Normal gastrointestinal embryology }
+  - { id: ventral-wall-defects, title: Ventral wall defects }
+  - { id: congenital-umbilical-hernia, title: Congenital umbilical hernia }
+  - { id: tracheoesophageal-anomalies, title: Tracheoesophageal anomalies }
+  - { id: hypertrophic-pyloric-stenosis, title: Hypertrophic pyloric stenosis }
+  - { id: intestinal-atresia, title: Intestinal atresia }
+items:
+  # ---------- p364: tongue development ----------
+  - id: gi.L01.001
+    kind: card
+    topic: tongue-development
+    front: Which pharyngeal arches form the anterior 2/3 of the tongue, and which nerves carry its sensation and taste?
+    back: "Arches 1 and 2. Sensation: CN V3. Taste: CN VII."
+    src: { page: 364, quote: "Portions of 1st and 2nd pharyngeal arches form anterior 2/3 of tongue (sensations via CN V3, taste via CN VII)." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.002
+    kind: card
+    topic: tongue-development
+    front: Which pharyngeal arches form the posterior 1/3 of the tongue, and which nerves carry its sensation and taste?
+    back: Arches 3 and 4. Sensation and taste mainly via CN IX; the extreme posterior part via CN X.
+    src: { page: 364, quote: "3rd and 4th pharyngeal arches form posterior 1/3 of tongue (sensation and taste mainly via CN IX, extreme posterior via CN X)." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.003
+    kind: table
+    topic: tongue-development
+    title: Tongue muscles and their motor nerves
+    columns: [Muscle, Action, Motor nerve]
+    rows:
+      - [Hyoglossus, Retracts and depresses the tongue, CN XII]
+      - [Genioglossus, Protrudes the tongue, CN XII]
+      - [Styloglossus, Draws the sides of the tongue upward (a trough for swallowing), CN XII]
+      - [Palatoglossus, Elevates the posterior tongue during swallowing, CN X]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [3, 2]]
+    src: { page: 364, quote: "Motor innervation is via CN XII to hyoglossus (retracts and depresses tongue), genioglossus (protrudes tongue), and styloglossus (draws sides of tongue upward to create a trough for swallowing)." }
+    status: unverified
+  - id: gi.L01.004
+    kind: card
+    topic: tongue-development
+    front: Which tongue muscle is the only one not supplied by CN XII, and what supplies it?
+    back: Palatoglossus, supplied by CN X ("CN 10 innervates palatenglossus", the book's mnemonic).
+    src: { page: 364, quote: "Motor innervation is via CN X to palatoglossus (elevates posterior tongue during swallowing)." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.005
+    kind: cloze
+    topic: tongue-development
+    text: "Tongue nerves by function: taste is CN {{c1::VII, IX, X}} (via the nucleus tractus solitarius); pain is CN {{c2::V3, IX, X}}; motor is CN {{c3::X, XII}}."
+    src: { page: 364, quote: "Taste—CN VII, IX, X (nucleus tractus solitarius [NTS]). Pain—CN V3, IX, X. Motor—CN X, XII." }
+    status: unverified
+  - id: gi.L01.006
+    kind: mcq
+    topic: tongue-development
+    stem: >-
+      A 45-year-old man is evaluated 2 days after a carotid endarterectomy on the left side. He has
+      slurred speech. When asked to stick out his tongue, it deviates to the left. Taste and general
+      sensation of the tongue are intact. Weakness of which muscle best explains the deviation?
+    options:
+      - Left genioglossus
+      - Right genioglossus
+      - Left palatoglossus
+      - Left styloglossus
+      - Right hyoglossus
+    answer: 0
+    why:
+      - "Right. Genioglossus (CN XII) protrudes the tongue; when the left one is weak, the healthy right genioglossus pushes the tongue toward the weak left side."
+      - "A weak right genioglossus would let the left side push the tongue to the right."
+      - "Palatoglossus (CN X) elevates the posterior tongue during swallowing; it does not protrude the tongue."
+      - "Styloglossus draws the sides of the tongue upward to make a trough for swallowing, not protrusion."
+      - "Hyoglossus retracts and depresses the tongue; it does not explain deviation on protrusion."
+    src: { page: 364, quote: "genioglossus (protrudes tongue)" }
+    status: unverified
+  # ---------- p364: normal GI embryology ----------
+  - id: gi.L01.007
+    kind: table
+    topic: normal-gi-embryology
+    title: The three parts of the primitive gut
+    columns: [Part, From, To]
+    rows:
+      - [Foregut, Esophagus, "Duodenum at the level of the pancreatic duct and common bile duct insertion (ampulla of Vater)"]
+      - [Midgut, Lower duodenum, Proximal 2/3 of transverse colon]
+      - [Hindgut, Distal 1/3 of transverse colon, Anal canal above the pectinate line]
+    blanks: [[0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 364, quote: "Foregut—esophagus to duodenum at level of pancreatic duct and common bile duct insertion (ampulla of Vater)." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.008
+    kind: card
+    topic: normal-gi-embryology
+    front: How does the stomach rotate in development, and where do the two vagus nerves end up?
+    back: In the 4th-6th week the stomach rotates 90° clockwise, so the left vagus becomes anterior and the right vagus becomes posterior.
+    src: { page: 364, quote: "4th-6th week of development—stomach rotates 90° clockwise. Left vagus becomes anteriorly positioned, and right vagus becomes posteriorly positioned." }
+    status: unverified
+  - id: gi.L01.009
+    kind: cloze
+    topic: normal-gi-embryology
+    text: In week {{c1::6}} the midgut herniates physiologically through the {{c2::umbilical ring}}; the yolk sac and midgut are connected by the {{c3::vitelline (omphalomesenteric)}} duct.
+    src: { page: 364, quote: "6th week of development—physiologic herniation of midgut through the umbilical ring. Yolk sac and midgut are connected via the vitelline (omphalomesenteric) duct." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.010
+    kind: cloze
+    topic: normal-gi-embryology
+    text: In week {{c1::10}} the midgut returns to the abdominal cavity, rotating {{c2::270° counterclockwise}} around the {{c3::superior mesenteric artery}} (~90° before week 10, the remaining ~180° in week 10).
+    src: { page: 364, quote: "10th week of development—returns to abdominal cavity rotating around superior mesenteric artery (SMA), 270° counterclockwise" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.011
+    kind: mcq
+    topic: normal-gi-embryology
+    stem: >-
+      A 58-year-old man undergoes a truncal vagotomy for a bleeding duodenal ulcer. At the
+      gastroesophageal junction, the surgeon divides one vagal trunk on the anterior surface of the
+      esophagus and another on its posterior surface. Which developmental event explains why the
+      anterior trunk comes from the left vagus nerve?
+    options:
+      - 90° clockwise rotation of the stomach in weeks 4-6
+      - 270° counterclockwise rotation of the midgut around the SMA
+      - Physiologic herniation of the midgut through the umbilical ring
+      - Fusion of the ventral and dorsal pancreatic buds
+      - Recanalization of the duodenal lumen
+    answer: 0
+    why:
+      - "Right. The stomach rotates 90° clockwise in weeks 4-6, carrying the left vagus to the front and the right vagus to the back."
+      - "Midgut rotation around the SMA positions the small bowel and colon; it does not move the foregut vagal trunks."
+      - "Physiologic herniation (week 6) involves the midgut, not the esophagus or stomach."
+      - "Pancreatic bud fusion forms the pancreatic head and main duct; it does not position the vagus nerves."
+      - "Recanalization opens the duodenal lumen; its failure gives duodenal atresia."
+    src: { page: 364, quote: "Left vagus becomes anteriorly positioned, and right vagus becomes posteriorly positioned." }
+    status: unverified
+  # ---------- p365: ventral wall defects ----------
+  - id: gi.L01.012
+    kind: enumerate
+    topic: ventral-wall-defects
+    prompt: Enumerate the failures that cause ventral wall defects, with an example of each (4).
+    points:
+      - Rostral fold closure (eg, sternal defects [ectopia cordis])
+      - Lateral fold closure (eg, omphalocele, gastroschisis)
+      - Caudal fold closure (eg, bladder exstrophy)
+      - Failure of the midgut to reenter the abdominal cavity after physiologic herniation (gastroschisis)
+    pass: 3
+    hook: "اقفل الجدار من فوق (القلب برّه) ومن الجنب (البطن برّه) ومن تحت (المثانة برّه)، ولو الـ midgut ما رجعش يبقى gastroschisis."
+    src: { page: 365, quote: "Developmental defects due to failure of rostral fold closure (eg, sternal defects [ectopia cordis]), lateral fold closure (eg, omphalocele, gastroschisis), caudal fold closure (eg, bladder exstrophy)" }
+    status: unverified
+  - id: gi.L01.013
+    kind: table
+    topic: ventral-wall-defects
+    title: Gastroschisis vs omphalocele
+    columns: ["", Gastroschisis, Omphalocele]
+    rows:
+      - [Presentation, Paraumbilical herniation through an abdominal wall defect, Herniation through the umbilical ring]
+      - [Coverage, "Not covered by peritoneum or amnion; right-sided/paraumbilical", "Covered by peritoneum and amnion (light gray shiny sac); midline"]
+      - [Associations, "Not commonly with chromosomal abnormalities; good prognosis", "Congenital anomalies (trisomies 13 and 18, Beckwith-Wiedemann) and structural defects (cardiac, GU, neural tube)"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 365, quote: "Not covered by peritoneum or amnion A ; right sided/paraumbilical" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.014
+    kind: card
+    topic: ventral-wall-defects
+    front: Which ventral wall defect is covered by a shiny sac of peritoneum and amnion, and which syndromes come with it?
+    back: Omphalocele (midline, through the umbilical ring). Associated with trisomies 13 and 18, Beckwith-Wiedemann syndrome, and cardiac, GU and neural tube defects.
+    src: { page: 365, quote: "Covered by peritoneum and amnion B (light gray shiny sac); midline, membrane covered" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.015
+    kind: mcq
+    topic: ventral-wall-defects
+    stem: >-
+      A boy is born at 38 weeks to a 28-year-old woman. Prenatal screening showed elevated maternal serum
+      alpha-fetoprotein. At birth, loops of bowel protrude through a defect just to the right of the
+      umbilicus; the loops are not covered by any membrane, and the umbilical cord inserts normally.
+      Which statement about this condition is most accurate?
+    options:
+      - It is not commonly associated with chromosomal abnormalities and has a good prognosis
+      - It is strongly associated with trisomy 18
+      - It is a feature of Beckwith-Wiedemann syndrome
+      - The bowel herniates through the umbilical ring inside a peritoneal sac
+      - It usually closes spontaneously and needs no surgery
+    answer: 0
+    why:
+      - "Right. Uncovered, right-sided paraumbilical herniation is gastroschisis: not commonly associated with chromosomal abnormalities, and the prognosis is good."
+      - "Trisomies 13 and 18 go with omphalocele, the midline covered defect."
+      - "Beckwith-Wiedemann syndrome is associated with omphalocele, not gastroschisis."
+      - "Herniation through the umbilical ring inside peritoneum and amnion describes omphalocele."
+      - "Small congenital umbilical hernias close by themselves; uncovered bowel outside the body does not."
+    src: { page: 365, quote: "Not commonly associated with chromosomal abnormalities; good prognosis" }
+    status: unverified
+  # ---------- p365: congenital umbilical hernia ----------
+  - id: gi.L01.016
+    kind: card
+    topic: congenital-umbilical-hernia
+    front: What causes a congenital umbilical hernia, and what covers it?
+    back: The umbilical ring is slow to close spontaneously after physiologic herniation of the midgut, leaving a patent umbilical orifice. It is covered by skin.
+    src: { page: 365, quote: "Delay of umbilical ring to close spontaneously following physiological herniation of midgut → patent umbilical orifice. Covered by skin" }
+    status: unverified
+  - id: gi.L01.017
+    kind: cloze
+    topic: congenital-umbilical-hernia
+    text: A congenital umbilical hernia is often reducible but protrudes with ↑ intra-abdominal pressure (eg, {{c1::crying}}); it may be associated with {{c2::Down syndrome}} and {{c2::congenital hypothyroidism}}, and small defects usually {{c3::close spontaneously}}.
+    src: { page: 365, quote: "May be associated with congenital disorders (eg, Down syndrome, congenital hypothyroidism). Small defects usually close spontaneously." }
+    status: unverified
+  - id: gi.L01.018
+    kind: mcq
+    topic: congenital-umbilical-hernia
+    stem: >-
+      A 3-month-old girl is brought for a well-baby visit. Her mother noticed a soft bulge at the navel
+      that gets bigger when the baby cries and disappears when she is calm. Examination shows a 1-cm
+      skin-covered umbilical swelling that is easily reduced. The baby has a large tongue, a hoarse cry,
+      prolonged jaundice and constipation. Which test is most likely to explain the associated condition?
+    options:
+      - Serum TSH
+      - Karyotype for trisomy 18
+      - Abdominal ultrasound for a pyloric mass
+      - Sweat chloride test
+      - Upper GI contrast study
+    answer: 0
+    why:
+      - "Right. A skin-covered, reducible umbilical hernia can go with congenital hypothyroidism (large tongue, hoarse cry, prolonged jaundice, constipation): check TSH."
+      - "Trisomy 18 goes with omphalocele, a membrane-covered midline defect, not a skin-covered hernia."
+      - "A pyloric 'olive' gives projectile nonbilious vomiting, not an umbilical bulge."
+      - "Cystic fibrosis is associated with jejunal and ileal atresia, not umbilical hernia."
+      - "An upper GI series looks for obstruction or malrotation; it does not explain these features."
+    src: { page: 365, quote: "May be associated with congenital disorders (eg, Down syndrome, congenital hypothyroidism)." }
+    status: unverified
+  # ---------- p366: tracheoesophageal anomalies ----------
+  - id: gi.L01.019
+    kind: card
+    topic: tracheoesophageal-anomalies
+    front: What is the most common tracheoesophageal anomaly, and how does it present in utero?
+    back: Esophageal atresia with a distal tracheoesophageal fistula (85%). It often presents as polyhydramnios, because the fetus cannot swallow amniotic fluid.
+    src: { page: 366, quote: "Esophageal atresia (EA) with distal tracheoesophageal fistula (TEF) is the most common (85%) and often presents as polyhydramnios in utero (due to inability of fetus to swallow amniotic fluid)." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.020
+    kind: card
+    topic: tracheoesophageal-anomalies
+    front: How does a neonate with esophageal atresia and distal TEF present, and what is the bedside test?
+    back: Drooling, choking and vomiting with the first feeding; cyanosis from laryngospasm. The test is failure to pass a nasogastric tube into the stomach.
+    src: { page: 366, quote: "Neonates drool, choke, and vomit with first feeding." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.021
+    kind: table
+    topic: tracheoesophageal-anomalies
+    title: Tracheoesophageal anomalies on chest x-ray
+    columns: [Type, Stomach on CXR, Why]
+    rows:
+      - [EA with distal TEF (most common), Prominent gastric bubble, The fistula lets excess air into the stomach]
+      - [Pure EA, Gasless abdomen, No connection lets air reach the stomach]
+      - [Pure TEF (H-type), Normal-looking, The fistula resembles the letter H]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 366, quote: "TEFs allow excess air to enter stomach (visible on CXR as a prominent gastric bubble)." }
+    status: unverified
+  - id: gi.L01.022
+    kind: cloze
+    topic: tracheoesophageal-anomalies
+    text: In esophageal atresia with TEF, cyanosis is secondary to {{c1::laryngospasm}} (to avoid reflux-related aspiration), and the anomaly is associated with {{c2::VATER/VACTERL}} defects.
+    src: { page: 366, quote: "Cyanosis is 2° to laryngospasm (to avoid reflux-related aspiration). Clinical test: failure to pass nasogastric tube into stomach. Associated with VATER/VACTERL defects." }
+    status: unverified
+  - id: gi.L01.023
+    kind: mcq
+    topic: tracheoesophageal-anomalies
+    stem: >-
+      A boy is born at 36 weeks after a pregnancy complicated by polyhydramnios. At his first feeding
+      he drools, coughs, chokes and becomes briefly cyanotic. A nasogastric tube cannot be passed
+      beyond 10 cm, and a chest x-ray shows the tube coiled in the upper chest with a prominent gastric
+      bubble. Which additional finding should be looked for next?
+    options:
+      - Vertebral and limb anomalies
+      - A "double bubble" on abdominal x-ray
+      - A palpable olive-shaped epigastric mass
+      - A gasless abdomen
+      - A membrane-covered midline abdominal wall defect
+    answer: 0
+    why:
+      - "Right. This is esophageal atresia with distal TEF, which is associated with VATER/VACTERL defects (vertebral, anal, cardiac, tracheoesophageal, renal, limb)."
+      - "A double bubble is duodenal atresia, which presents with bilious vomiting, and a nasogastric tube passes."
+      - "An olive mass is hypertrophic pyloric stenosis at 2-6 weeks, not choking at the first feed."
+      - "A gasless abdomen is pure esophageal atresia; here air reaches the stomach through the distal fistula."
+      - "A membrane-covered midline defect is omphalocele, unrelated to this picture."
+    src: { page: 366, quote: "TEFs allow excess air to enter stomach (visible on CXR as a prominent gastric bubble)." }
+    status: unverified
+  # ---------- p366: hypertrophic pyloric stenosis ----------
+  - id: gi.L01.024
+    kind: card
+    topic: hypertrophic-pyloric-stenosis
+    front: What is the most common cause of gastric outlet obstruction in infants, and how does it present?
+    back: "Hypertrophic pyloric stenosis: a palpable olive-shaped epigastric mass, visible peristaltic waves, and postprandial nonbilious projectile vomiting at ~2-6 weeks old."
+    src: { page: 366, quote: "Most common cause of gastric outlet obstruction in infants. Palpable olive-shaped mass" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.025
+    kind: cloze
+    topic: hypertrophic-pyloric-stenosis
+    text: Hypertrophic pyloric stenosis is more common in {{c1::firstborn males}} and is associated with exposure to {{c2::macrolides}}.
+    src: { page: 366, quote: "More common in firstborn males; associated with exposure to macrolides." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.026
+    kind: card
+    topic: hypertrophic-pyloric-stenosis
+    front: Which acid-base and electrolyte disturbance does pyloric stenosis cause, and why?
+    back: Hypokalemic hypochloremic metabolic alkalosis, from vomiting gastric acid and the volume contraction that follows.
+    src: { page: 366, quote: "Results in hypokalemic hypochloremic metabolic alkalosis (2° to vomiting of gastric acid and subsequent volume contraction)." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.027
+    kind: card
+    topic: hypertrophic-pyloric-stenosis
+    front: How is hypertrophic pyloric stenosis diagnosed and treated?
+    back: "Diagnosis: a thickened and elongated pylorus on ultrasound. Treatment: surgical incision of the pyloric muscles (pyloromyotomy)."
+    src: { page: 366, quote: "Diagnosis: thickened and elongated pylorus on ultrasound. Treatment: surgical incision of pyloric muscles (pyloromyotomy)." }
+    status: unverified
+  - id: gi.L01.028
+    kind: mcq
+    topic: hypertrophic-pyloric-stenosis
+    stem: >-
+      A 4-week-old firstborn boy has had forceful vomiting of milk after every feed for 5 days. The
+      vomitus contains no bile, and he feeds hungrily right after vomiting. At 2 weeks he received
+      erythromycin for pertussis exposure. He has dry mucous membranes, and a firm mobile mass is felt in
+      the epigastrium. Which set of laboratory findings is most likely?
+    options:
+      - "↓ K+, ↓ Cl-, ↑ HCO3- (metabolic alkalosis)"
+      - "↑ K+, ↑ Cl-, ↓ HCO3- (metabolic acidosis)"
+      - "↓ K+, ↑ Cl-, ↓ HCO3- (normal anion gap acidosis)"
+      - "Normal K+, ↓ Cl-, ↓ HCO3- (anion gap acidosis)"
+      - "↑ K+, ↓ Na+, ↓ HCO3- (adrenal crisis)"
+    answer: 0
+    why:
+      - "Right. Pyloric stenosis gives hypokalemic hypochloremic metabolic alkalosis from vomiting gastric acid and volume contraction."
+      - "Losing HCl raises bicarbonate; it does not cause acidosis or hyperkalemia."
+      - "A normal anion gap acidosis comes from losing bicarbonate (diarrhea), the opposite of vomiting acid."
+      - "Vomiting gastric acid raises, not lowers, bicarbonate."
+      - "Salt-wasting adrenal hyperplasia gives hyperkalemia and acidosis, and there is no pyloric mass."
+    src: { page: 366, quote: "Results in hypokalemic hypochloremic metabolic alkalosis (2° to vomiting of gastric acid and subsequent volume contraction)." }
+    status: unverified
+  # ---------- p366: intestinal atresia ----------
+  - id: gi.L01.029
+    kind: card
+    topic: intestinal-atresia
+    front: How does intestinal atresia present?
+    back: Bilious vomiting and abdominal distension within the first 1-2 days of life.
+    src: { page: 366, quote: "Presents with bilious vomiting and abdominal distension within first 1-2 days of life." }
+    status: unverified
+  - id: gi.L01.030
+    kind: table
+    topic: intestinal-atresia
+    title: Duodenal vs jejunal and ileal atresia
+    columns: ["", Duodenal atresia, Jejunal and ileal atresia]
+    rows:
+      - [Cause, Failure to recanalize the lumen from the solid cord stage, "Disruption of mesenteric vessels (typically SMA) → ischemic necrosis → segmental resorption"]
+      - [X-ray, "\"Double bubble\" (dilated stomach, proximal duodenum)", "\"Triple bubble\" (stomach, duodenum, proximal jejunum) and gasless colon"]
+      - [Associations, Down syndrome, "Cystic fibrosis, gastroschisis; maternal smoking or vasoconstrictive drugs (eg, cocaine)"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 366, quote: "Duodenal atresia—failure to recanalize lumen from solid cord stage." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.031
+    kind: cloze
+    topic: intestinal-atresia
+    text: Duodenal atresia shows a {{c1::"double bubble"}} on x-ray and is associated with {{c2::Down syndrome}}.
+    src: { page: 366, quote: "X-ray A shows “double bubble” (dilated stomach, proximal duodenum). Associated with Down syndrome." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L01.032
+    kind: card
+    topic: intestinal-atresia
+    front: What causes jejunal and ileal atresia, and which maternal exposures can cause it?
+    back: Disruption of mesenteric vessels (typically the SMA) causes ischemic necrosis of fetal bowel and segmental resorption, so the bowel becomes discontinuous. Maternal tobacco smoking or vasoconstrictive drugs (eg, cocaine) in pregnancy can cause it.
+    src: { page: 366, quote: "May be caused by maternal tobacco smoking or use of vasoconstrictive drugs (eg, cocaine) during pregnancy." }
+    status: unverified
+  - id: gi.L01.033
+    kind: mcq
+    topic: intestinal-atresia
+    stem: >-
+      A newborn girl has bilious vomiting on her first day of life. Her mother used cocaine throughout the
+      pregnancy. Her abdomen is distended. Abdominal x-ray shows three dilated gas-filled loops in the
+      upper abdomen and no gas in the colon. Which mechanism best explains her condition?
+    options:
+      - Ischemic necrosis of fetal bowel from disrupted mesenteric vessels
+      - Failure to recanalize the duodenal lumen from the solid cord stage
+      - Abnormal rotation of the ventral pancreatic bud around the duodenum
+      - Hypertrophy and hyperplasia of the pyloric sphincter
+      - Failure of the lateral body folds to close
+    answer: 0
+    why:
+      - "Right. A triple bubble with a gasless colon is jejunal atresia: vasoconstriction (cocaine) disrupts mesenteric vessels, the fetal bowel dies and is resorbed."
+      - "Failed recanalization is duodenal atresia, which shows a double bubble and goes with Down syndrome."
+      - "Annular pancreas narrows the 2nd part of the duodenum; it would not leave a third dilated loop."
+      - "Pyloric stenosis presents at 2-6 weeks with nonbilious vomiting."
+      - "Lateral fold failure gives omphalocele or gastroschisis, defects seen on the abdominal wall."
+    src: { page: 366, quote: "Jejunal and ileal atresia—disruption of mesenteric vessels (typically SMA) → ischemic necrosis of fetal intestine → segmental resorption: bowel becomes discontinuous." }
+    status: unverified
