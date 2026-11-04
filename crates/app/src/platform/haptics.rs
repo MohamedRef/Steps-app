@@ -13,7 +13,7 @@ pub enum Haptic {
 impl Haptic {
     /// The constant in `Haptics.kt`.
     #[cfg_attr(not(target_os = "android"), allow(dead_code))]
-    fn code(self) -> i32 {
+    pub(crate) fn code(self) -> i32 {
         match self {
             Self::Right => 0,
             Self::Wrong => 1,

@@ -10,6 +10,8 @@ pub mod install;
 pub mod network;
 pub mod reminders;
 pub mod system_bars;
+#[cfg(test)]
+mod tests;
 pub mod time;
 pub mod tts;
 #[cfg(target_os = "android")]
