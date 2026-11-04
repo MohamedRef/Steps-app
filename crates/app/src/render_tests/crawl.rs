@@ -28,19 +28,35 @@ fn fresh<R: Send + 'static>(f: impl FnOnce() -> R + Send + 'static) -> R {
 
 fn crawl(screen: Screen) {
     let first = fresh(move || open(screen).tappables());
-    let mut missed = Vec::new();
-    for sig in first {
-        // Every button starts from a fresh app. Taps saved by an earlier
-        // button (Today's session-length chips change the hero's label) would
-        // otherwise rename the next one, and the crawl would skip it.
-        let tapped = fresh({
-            let sig = sig.clone();
-            move || crawl_from(screen, &sig)
-        });
-        if !tapped {
-            missed.push(sig);
+    // Every button starts from a fresh app. Taps saved by an earlier button
+    // (Today's session-length chips change the hero's label) would otherwise
+    // rename the next one, and the crawl would skip it. Fresh apps share
+    // nothing, so the buttons are crawled on several threads at once: one
+    // after another, Stats alone took about 4 minutes and was the last test
+    // the CI run waited for.
+    let workers = std::thread::available_parallelism().map_or(2, |n| n.get()).clamp(2, 8);
+    let queue = std::sync::Mutex::new(first.into_iter());
+    let missed = std::sync::Mutex::new(Vec::new());
+    std::thread::scope(|s| {
+        for _ in 0..workers {
+            s.spawn(|| {
+                loop {
+                    let Some(sig) = queue.lock().unwrap_or_else(|e| e.into_inner()).next() else {
+                        break;
+                    };
+                    let tapped = fresh({
+                        let sig = sig.clone();
+                        move || crawl_from(screen, &sig)
+                    });
+                    if !tapped {
+                        missed.lock().unwrap_or_else(|e| e.into_inner()).push(sig);
+                    }
+                }
+            });
         }
-    }
+    });
+    let mut missed = missed.into_inner().unwrap_or_else(|e| e.into_inner());
+    missed.sort();
     assert!(missed.is_empty(), "{screen:?}: a fresh app did not show {missed:#?}");
 }
 
