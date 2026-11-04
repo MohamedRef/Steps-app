@@ -862,7 +862,7 @@ pub(crate) fn DayDetail(d: DayPlan) -> Element {
     }
 }
 
-/// `["hb.L01", "hb.L02"]` → `Liver Cirrhosis, Non-invasive assessment…`:
+/// `["cvs.L04", "cvs.L05"]` → `Pathology, Pharmacology…`:
 /// the lectures' real titles (their course shows where the plan is).
 pub(crate) fn lecture_list(ids: &[String]) -> String {
     let lib = crate::content::Library::get();
@@ -920,8 +920,8 @@ mod tests {
         assert_eq!(short_date(d), "أربع 20 يناير");
         let lib = crate::content::Library::get();
         assert_eq!(
-            lecture_list(&["hb.L01".into(), "hb.L12".into()]),
-            format!("{}, {}", lib.title("hb.L01"), lib.title("hb.L12"))
+            lecture_list(&["cvs.L04".into(), "cvs.L12".into()]),
+            format!("{}, {}", lib.title("cvs.L04"), lib.title("cvs.L12"))
         );
     }
 

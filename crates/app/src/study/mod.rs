@@ -14,7 +14,7 @@ mod backend;
 #[cfg(test)]
 mod browser;
 mod card;
-mod cloze;
+pub(crate) mod cloze;
 mod enumerate;
 mod essay;
 pub mod grade;
@@ -48,7 +48,7 @@ const MINUTES: [u32; 4] = [5, 10, 15, 20];
 /// it, then switches to the Study screen).
 #[derive(Debug, Clone, PartialEq)]
 pub struct Start {
-    /// Lecture ids (`hb.L01`); `None` means every ready lecture.
+    /// Lecture ids (`cvs.L04`); `None` means every ready lecture.
     pub lectures: Option<Vec<String>>,
     /// Exactly these item ids, in this order ("study these", a session from
     /// mistakes). Overrides `lectures` and the time budget; ids the player

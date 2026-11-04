@@ -41,3 +41,8 @@ On a device without your Gmail (a borrowed laptop, a library computer), open the
 
 ## Your own cards
 Study › كروتك holds cards you write yourself: «＋ كارت جديد» opens a short form (front, back, and optionally the lecture, book page and where it came from). On the phone and tablet, select text in any app and pick «Steps» from the menu, or share text to Steps: it opens the same form with the text on the back, ready for you to write the question. Your cards study like the book's, as their own deck («ذاكر كروتك بس», or the ✎ chip with the lectures), skip the ✓ / ✎ / ✗ check, sync with Steps Cloud, and go into Anki with `--own` ([ANKI.md](ANKI.md)).
+
+## Tests and coverage
+- `just check` runs every check CI runs on a pull request.
+- Screen tests (`crates/app/src/render_tests/`) open the whole app with the real content, tap through it and read what each screen says. Each test starts from empty data, and no test touches your profile, opens anything on the computer or goes online.
+- Coverage: `cargo llvm-cov --workspace --summary-only --ignore-filename-regex '(browser\.rs|browser_fixture\.rs|crates/app/src/platform/)'` (install it once with `cargo install cargo-llvm-cov`). CI fails a pull request under 90% of lines. Left out: the fixture exporters for the browser checks, and `platform/`, the device glue that only runs on a Mac, an Android phone or in a browser.
