@@ -1,0 +1,481 @@
+schema: steps.lesson/v1
+lecture: bio.L04
+lessons:
+  - id: bio.L04.lesson1
+    title: "قاموس الوراثة: كلمات بتتسأل كل سنة"
+    hook: "penetrance ولا expressivity؟ locus ولا allelic؟ لو فرّقت بينهم، نص أسئلة الـ genetics خلصت"
+    minutes: 9
+    pages: [54, 55]
+    topics: [gene-expression-modifications, rna-interference, genetic-terms]
+    goals:
+      - "تفرّق بين miRNA و siRNA"
+      - "تفرّق بين الكلمات اللي شبه بعض بالأمثلة"
+      - "تفهم mosaicism و uniparental disomy"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "نتحكم في الجين إزاي في المعمل"
+        text: |-
+          - في الفيران: **random insertion** ← expression ==constitutive== (دايماً). **Targeted insertion** (homologous recombination) ← expression ==conditional==.
+          - Knock-out = شيل الجين. Knock-in = حط جين.
+        page: 54
+        quote: "Random insertion—constitutive expression. Targeted insertion—conditional expression."
+      - kind: table
+        title: "miRNA ضد siRNA"
+        columns: ["", "miRNA", "siRNA"]
+        rows:
+          - ["Source", "The cell (hairpins)", "Exogenous dsRNA (virus) or made in the lab"]
+          - ["Pairing", "Loose: many related mRNAs", "Complete: one mRNA"]
+          - ["Effect", "Blocks translation", "Cleaves the mRNA"]
+        hide: [[1, 1], [1, 2], [2, 2]]
+        page: 54
+        quote: "Once inside a cell, siRNA requires complete nucleotide pairing, leading to highly specific mRNA targeting. Results in mRNA cleavage prior to translation."
+      - kind: aside
+        tone: analogy
+        text: "الـ **miRNA** زي شبكة صيد: بتمسك سمك كتير شبه بعض. الـ **siRNA** زي سنارة على سمكة واحدة بالاسم: دقيقة جداً وبتقطعها. ولو الـ miRNA كتمت mRNA بتاع ==tumor suppressor==، ممكن يطلع سرطان."
+        page: 54
+        quote: "Abnormal expression of miRNAs contributes to certain malignancies (eg, by silencing an mRNA from a tumor suppressor gene)."
+      - kind: explain
+        title: "الكلمات اللي بتتلخبط"
+        text: |-
+          - **Codominance**: الاتنين باينين (blood group AB، α1-antitrypsin، HLA).
+          - **Variable expressivity**: نفس الجين، شدة مختلفة (اتنين عندهم NF1).
+          - **Incomplete penetrance**: مش كل اللي شايل الجين بيتعب (==BRCA1==).
+          - **Pleiotropy**: جين واحد، آثار كتير (CF: رئة وبنكرياس و infertility).
+          - **Anticipation**: أشد أو أبدر في الجيل اللي بعده (trinucleotide repeats).
+          - **Epistasis**: جين بيأثر على تعبير جين تاني (albinism، alopecia).
+        page: 54
+        quote: "Variable expressivity Patients with the same genotype have varying phenotypes. Two patients with neurofibromatosis type 1 (NF1) may have varying disease severity."
+      - kind: check
+        question: "Two siblings have NF1; one has a few café-au-lait spots, the other has hundreds of neurofibromas. Term?"
+        options: ["Variable expressivity", "Incomplete penetrance", "Pleiotropy", "Anticipation"]
+        answer: 0
+        why:
+          - "صح: الاتنين عندهم المرض بس بشدة مختلفة، ده مثال الكتاب."
+          - "الـ penetrance لو واحد شايل الجين ومش عيان خالص."
+          - "الـ pleiotropy جين واحد بأعضاء كتير."
+          - "الـ anticipation بين الأجيال، مش بين الإخوات."
+        page: 54
+        quote: "Two patients with neurofibromatosis type 1 (NF1) may have varying disease severity."
+      - kind: explain
+        title: "Loss of heterozygosity و dominant negative"
+        text: |-
+          - **Loss of heterozygosity**: في الـ ==tumor suppressor==، نسخة بايظة مش كفاية؛ لازم التانية تبوظ كمان (two-hit: retinoblastoma، Lynch، Li-Fraumeni). ده مش صحيح في الـ oncogenes.
+          - **Dominant negative**: النسخة البايظة مش بس مش شغالة، دي ==بتعطّل السليمة== كمان (p53 البايظ يمسك الـ DNA ويمنع السليم).
+        page: 54
+        quote: "If a patient inherits or develops a mutation in a tumor suppressor gene, the wild type allele must be deleted/mutated/eliminated before cancer develops. This is not true of oncogenes."
+      - kind: match
+        prompt: "وصّل كل مصطلح بمثاله"
+        pairs:
+          - ["Locus heterogeneity", "Albinism from different genes"]
+          - ["Allelic heterogeneity", "β-thalassemia"]
+          - ["Heteroplasmy", "Leber hereditary optic neuropathy"]
+          - ["Linkage disequilibrium", "HLA and CFTR genes"]
+        why: "Locus = أماكن مختلفة. Allelic = نفس المكان بطفرات مختلفة. Heteroplasmy = mtDNA سليم وبايظ مع بعض."
+        page: 55
+        quote: "Locus heterogeneity Mutations at different loci result in the same disease. Albinism, retinitis pigmentosa, familial hypercholesteremia. Allelic heterogeneity Different mutations in the same locus result in the same disease. β-thalassemia."
+      - kind: explain
+        title: "Mosaicism و uniparental disomy"
+        text: |-
+          - **Somatic mosaicism**: غلطة mitosis بعد الإخصاب. مثال: ==McCune-Albright== (GNAS): café-au-lait بحواف مقطّعة على جنب واحد، polyostotic fibrous dysplasia، و endocrinopathy زي precocious puberty. لو في كل الخلايا يموت، فبيعيش بس كـ mosaic.
+          - **Germline mosaicism**: الطفرة في البويضات أو الحيوانات المنوية بس. الأهل سليمين وعندهم كذا طفل عيان.
+          - **UPD**: النسختين من أب واحد. Heterodisomy = غلطة meiosis I، isodisomy = meiosis II. لو طفل عنده مرض recessive وأب واحد بس carrier: فكر في ==isodisomy==.
+        page: 55
+        quote: "Consider isodisomy in an individual manifesting a recessive disorder when only one parent is a carrier."
+      - kind: try
+        items: [bio.L04.004, bio.L04.007, bio.L04.009, bio.L04.010, bio.L04.013]
+    recap:
+      - "miRNA شبكة (loose، تمنع translation). siRNA سنارة (complete، تقطع)."
+      - "Expressivity = شدة. Penetrance = موجود ولا لأ (BRCA1)."
+      - "Loss of heterozygosity للـ tumor suppressors بس."
+      - "McCune-Albright = mosaicism. Recessive وأب واحد carrier = isodisomy."
+    practice: [bio.L04.001, bio.L04.002, bio.L04.003, bio.L04.004, bio.L04.005, bio.L04.006, bio.L04.007, bio.L04.008, bio.L04.009, bio.L04.010, bio.L04.011, bio.L04.012, bio.L04.013, bio.L04.014, bio.L04.015, bio.L04.016]
+  - id: bio.L04.lesson2
+    title: "Hardy-Weinberg و الـ imprinting"
+    hook: "معادلة واحدة بتحل كل أسئلة الـ carrier frequency، وكروموسوم 15 بيحكي حكاية الأب والأم"
+    minutes: 8
+    pages: [55, 56]
+    topics: [population-genetics, hardy-weinberg, imprinting]
+    goals:
+      - "تحسب carrier frequency من الـ prevalence"
+      - "تفرّق بين Prader-Willi و Angelman"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الجينات في المجتمع"
+        text: |-
+          - **Natural selection**: الأصلح بيتنقل أكتر.
+          - **Genetic drift**: تغيير بالصدفة. منه **bottleneck** (كارثة شالت ناس بالصدفة) و **founder effect** (مجموعة صغيرة اتفصلت).
+        page: 55
+        quote: "Founder effect and bottleneck effect are both examples of genetic drift."
+      - kind: explain
+        title: "المعادلة"
+        text: |-
+          p = تكرار الـ allele السليم، q = البايظ. p + q = 1، و ==p² + 2pq + q² = 1==.
+          - q² = المرضى (في الـ AR).
+          - 2pq = ==الـ carriers==.
+          - في الـ X-linked recessive: الرجالة = q، الستات = q².
+
+          ولو المرض نادر، p ≈ 1 فالـ carriers ≈ 2q.
+        page: 56
+        quote: "2pq = frequency of heterozygosity (carrier frequency, if an autosomal recessive disease)"
+      - kind: reveal
+        prompt: "الـ CF عند 1 من 3200. نسبة الـ carriers كام؟"
+        answer: "q² = 1/3200 ← q ≈ 0.017. p ≈ 1، فـ 2pq ≈ 2 × 0.017 ≈ ==0.035 (3.5%)==."
+        page: 56
+        quote: "q2 = 1/3200, with q ≈ 0.017 or 1.7% of the population."
+      - kind: check
+        question: "An AR disease affects 1 in 40,000. Carrier frequency?"
+        options: ["1 in 100", "1 in 200", "1 in 400", "1 in 20,000"]
+        answer: 0
+        why:
+          - "صح: q = 1/200، و 2q = 1/100."
+          - "ده q نفسه، مش 2pq."
+          - "ده نص q."
+          - "ده مضاعف q² مش 2q."
+        page: 56
+        quote: "In rare autosomal recessive diseases, p ≈ 1."
+      - kind: aside
+        tone: trap
+        text: "المعادلة شغالة بس لو: مفيش ==mutation== ولا selection، الجواز عشوائي، مفيش migration، والمجتمع كبير."
+        page: 56
+        quote: "Hardy-Weinberg law assumptions include: ▘ No mutation occurring at the locus ▘ Natural selection is not occurring ▘ Completely random mating ▘ No net migration ▘ Large population"
+      - kind: explain
+        title: "الـ imprinting: نسخة واحدة بس شغالة"
+        text: |-
+          في جينات معينة، نسخة بتتقفل بالـ ==methylation== حسب جاية من مين. فلو النسخة الشغالة ضاعت، المرض يطلع.
+
+          على **chromosome 15**:
+          - **Prader-Willi**: نسخة الأم مقفولة أصلاً، فلو ==نسخة الأب== ضاعت (deletion أو maternal UPD 25%) ← المرض.
+          - **Angelman**: الـ UBE3A بتاع الأب مقفول، فلو ==UBE3A بتاع الأم== ضاع ← المرض.
+        page: 56
+        quote: "One gene copy is silenced by methylation, and only the other copy is expressed → parent-of-origin effects."
+      - kind: figure
+        title: "مين ساكت ومين ضاع"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <text x="20" y="20" class="t-sm t-b">Prader-Willi</text>
+            <rect class="fg-bad" x="20" y="35" width="60" height="22" rx="5"/><text x="30" y="51" class="t-sm">P lost</text>
+            <rect class="fg-thin" x="90" y="35" width="70" height="22" rx="5"/><text x="96" y="51" class="t-sm t-mut">M silent</text>
+            <text x="20" y="80" class="t-sm">obesity, hyperphagia</text>
+            <text x="200" y="20" class="t-sm t-b">Angelman</text>
+            <rect class="fg-thin" x="200" y="35" width="70" height="22" rx="5"/><text x="206" y="51" class="t-sm t-mut">P silent</text>
+            <rect class="fg-bad" x="280" y="35" width="60" height="22" rx="5"/><text x="288" y="51" class="t-sm">M lost</text>
+            <text x="200" y="80" class="t-sm">laughter, seizures</text>
+            <text x="20" y="120" class="t-sm t-acc">Both: chromosome 15</text>
+          </svg>
+        caption: "في الاتنين نسخة ساكتة بالـ imprinting والتانية ضاعت، فمفيش ولا نسخة شغالة. Prader-Willi: نسخة الأب ضاعت. Angelman: نسخة الأم ضاعت."
+        alt: "Two panels for chromosome 15. Prader-Willi: paternal copy lost, maternal copy silent, leading to obesity and hyperphagia. Angelman: paternal copy silent, maternal copy lost, leading to laughter and seizures."
+        page: 56
+        quote: "CHROMOSOMES INVOlVED Chromosome 15 of paternal origin UBE3A on maternal copy of chromosome 15"
+      - kind: mnemonic
+        word: "POP"
+        parts:
+          - { key: "P", text: "Prader-Willi" }
+          - { key: "O", text: "Obesity/overeating" }
+          - { key: "P", text: "Paternal allele deleted" }
+        hook: "والتاني MAMAS: Maternal deleted، Angelman، Mood، Ataxia، Seizures (mnemonics الكتاب)"
+        page: 56
+        quote: "POP: Prader-Willi, Obesity/overeating, Paternal allele deleted MAMAS: Maternal allele deleted, Angelman syndrome, Mood, Ataxia, Seizures"
+      - kind: check
+        question: "A child with hand-flapping, ataxia, seizures and inappropriate laughter lost which copy?"
+        options: ["Maternal UBE3A", "Paternal chromosome 15", "Maternal FMR1", "Paternal UBE3A"]
+        answer: 0
+        why:
+          - "صح: Angelman (HAILS) = UBE3A بتاع الأم ضاع."
+          - "ده Prader-Willi."
+          - "FMR1 ده fragile X."
+          - "الـ paternal UBE3A ساكت طبيعي أصلاً."
+        page: 56
+        quote: "Hand-flapping, Ataxia, severe Intellectual disability, inappropriate Laughter, Seizures. HAILS the Angels."
+      - kind: try
+        items: [bio.L04.017, bio.L04.019, bio.L04.020, bio.L04.025]
+    recap:
+      - "Founder و bottleneck = genetic drift."
+      - "q² = المرضى، 2pq ≈ 2q = الـ carriers. XR: رجالة q، ستات q²."
+      - "Prader-Willi: الأب ضاع (POP). Angelman: UBE3A الأم ضاع (MAMAS)."
+    practice: [bio.L04.017, bio.L04.018, bio.L04.019, bio.L04.020, bio.L04.021, bio.L04.022, bio.L04.023, bio.L04.024, bio.L04.025, bio.L04.026, bio.L04.027]
+  - id: bio.L04.lesson3
+    title: "أنماط الوراثة، والـ cystic fibrosis"
+    hook: "شجرة العيلة بتقولك كل حاجة: مين اتصاب، ومين نقل لمين"
+    minutes: 10
+    pages: [57, 59]
+    topics: [modes-of-inheritance, autosomal-dominant-diseases, autosomal-recessive-diseases, cystic-fibrosis, x-linked-recessive-diseases]
+    goals:
+      - "تقرا الـ pedigree وتعرف النمط"
+      - "تحفظ قوايم AD و AR و XR"
+      - "تفهم الـ CF من الـ ΔF508 للعلاج"
+    status: unverified
+    steps:
+      - kind: table
+        title: "5 أنماط"
+        columns: ["Mode", "Clue"]
+        rows:
+          - ["AD", "Every generation, both sexes, 50% of children"]
+          - ["AR", "One generation, 25% with 2 carriers, consanguinity"]
+          - ["XR", "Sons of carrier mothers, no male-to-male, skips generations"]
+          - ["XD", "Affected father → all daughters, no sons"]
+          - ["Mitochondrial", "Only through mothers, variable (heteroplasmy)"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+        page: 57
+        quote: "Transmitted through both parents. Children of affected mothers each have a 50% chance of being affected. 100% of daughters and 0% of sons of affected fathers will be affected."
+      - kind: explain
+        title: "ليه AD غالباً structural و AR غالباً enzymes؟"
+        text: |-
+          الإنزيم لو نصه شغال، غالباً كفاية، فلازم النسختين يبوظوا ← ==recessive==. البروتين الـ structural لو نصه بايظ ممكن يبوّظ البناء كله ← ==dominant==.
+
+          ولو عندك أخ عنده مرض AR وانت سليم، احتمال تكون carrier = ==2/3== (لأن الـ AA و Aa و aA بس هما الاحتمالات الباقية).
+        page: 57
+        quote: "Unaffected individual with affected sibling has 2/3 probability of being a carrier."
+      - kind: check
+        question: "An affected father with an X-linked dominant disease. His sons?"
+        options: ["None affected", "All affected", "Half affected", "All carriers"]
+        answer: 0
+        why:
+          - "صح: الولد بياخد الـ Y من أبوه، فمستحيل ياخد الـ X البايظ."
+          - "البنات هما اللي كلهم بيتصابوا."
+          - "النص ده لو الأم هي المصابة."
+          - "الولاد مش بيبقوا carriers للـ X من الأب."
+        page: 57
+        quote: "100% of daughters and 0% of sons of affected fathers will be affected."
+      - kind: explain
+        title: "القوايم: الاستثناءات أهم من القاعدة"
+        text: |-
+          - الـ **sphingolipidoses** كلها AR ==ما عدا Fabry== (XR).
+          - الـ **mucopolysaccharidoses** كلها AR ==ما عدا Hunter== (XR).
+          - الـ XR: Bruton، Duchenne/Becker، Fabry، G6PD، hemophilia A و B، Hunter، Lesch-Nyhan، ocular albinism، OTC deficiency، Wiskott-Aldrich.
+          - بنت عندها مرض XR؟ فكر في **Turner** (45,XO) أو **skewed lyonization**.
+        page: 59
+        quote: "If skewed inactivation occurs, XX individuals may express X-linked recessive diseases (eg, G6PD)"
+      - kind: explain
+        title: "الـ CF: من حذف واحد لمخاط تقيل"
+        text: |-
+          **CFTR** على chromosome 7، والطفرة الأشهر **ΔF508**: البروتين بيتطبق غلط فـ ==مش بيوصل للـ membrane==.
+          - في الرئة والأمعاء: الـ Cl− مش بيخرج ← الـ Na+ بيتشد أكتر (ENaC) ← المية تتشد ← مخاط ناشف.
+          - في العرق: الـ Cl− مش بيترجع ← ==sweat chloride عالي==.
+
+          وفي الـ newborn screening: immunoreactive trypsinogen عالي.
+        page: 58
+        quote: "Phe508 deletion → misfolded protein → improper protein trafficking → protein absent from cell membrane"
+      - kind: figure
+        title: "الـ CFTR في مكانين"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b4a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="20" width="160" height="110" rx="10"/>
+            <text x="20" y="40" class="t-sm t-b">Airway</text>
+            <line class="fg-arrow-acc" x1="90" y1="110" x2="90" y2="60" marker-end="url(#b4a)"/>
+            <text x="98" y="85" class="t-sm">Cl− out</text>
+            <text x="20" y="122" class="t-sm t-bad">CF: thick mucus</text>
+            <rect class="fg-box" x="190" y="20" width="160" height="110" rx="10"/>
+            <text x="200" y="40" class="t-sm t-b">Sweat duct</text>
+            <line class="fg-arrow-acc" x1="270" y1="60" x2="270" y2="110" marker-end="url(#b4a)"/>
+            <text x="278" y="85" class="t-sm">Cl− back in</text>
+            <text x="200" y="122" class="t-sm t-bad">CF: salty sweat</text>
+          </svg>
+        caption: "نفس القناة بتشتغل في اتجاهين: في الرئة بتطلّع Cl− (ومعاه مية)، وفي العرق بترجّع Cl−. فلو باظت: مخاط ناشف في الرئة، وعرق مالح."
+        alt: "Two panels. Airway: CFTR moves chloride out into the lumen; in CF the mucus is thick. Sweat duct: CFTR moves chloride back into the cell; in CF the sweat is salty."
+        page: 58
+        quote: "CFTR encodes an ATP-gated Cl− channel (secretes C − l in lungs/GI tract, reabsorbs Cl− in sweat glands)."
+      - kind: explain
+        title: "المضاعفات والعلاج"
+        text: |-
+          - رئة: S aureus في الصغر، ==P aeruginosa== في الكبر، ABPA، bronchiectasis، nasal polyps، clubbing.
+          - بنكرياس: steatorrhea، نقص A و D و E و K، CF-related diabetes.
+          - Meconium ileus، و infertility عند الرجالة (absent vas deferens).
+          - العلاج: physiotherapy، dornase alfa، hypertonic saline، azithromycin، pancrelipase. والـ **modulators**: ==potentiators== (ivacaftor) بتفتح البوابة، و **correctors** (lumacaftor، tezacaftor) بتصلّح الشكل.
+        page: 58
+        quote: "Are either potentiators (hold gate of CFTR channel open → Cl− flows through cell membrane; eg, ivaCaFToR) or correctors (help CFTR protein to form right 3-D shape → moves to the cell surface; eg, lumaCaFToR, tezaCaFToR)."
+      - kind: check
+        question: "Which drug helps misfolded ΔF508 CFTR reach the cell surface?"
+        options: ["Lumacaftor (corrector)", "Ivacaftor (potentiator)", "Dornase alfa", "Azithromycin"]
+        answer: 0
+        why:
+          - "صح: الـ correctors بتساعد البروتين ياخد شكله الصح ويوصل للسطح."
+          - "الـ potentiator بيفتح بوابة بروتين موجود فعلاً على السطح."
+          - "Dornase alfa بيكسّر الـ DNA في المخاط."
+          - "Azithromycin بيمنع الـ exacerbations."
+        page: 58
+        quote: "Are either potentiators (hold gate of CFTR channel open → Cl− flows through cell membrane; eg, ivaCaFToR) or correctors (help CFTR protein to form right 3-D shape → moves to the cell surface; eg, lumaCaFToR, tezaCaFToR)."
+      - kind: try
+        items: [bio.L04.028, bio.L04.035, bio.L04.038, bio.L04.041, bio.L04.045]
+    recap:
+      - "AD structural وكل جيل. AR enzymes وجيل واحد. XD: الأب ← كل البنات."
+      - "Fabry و Hunter: الاستثناءات XR."
+      - "CF: ΔF508 ← مش بيوصل للسطح ← مخاط ناشف وعرق مالح."
+      - "Potentiator (ivacaftor) يفتح، corrector (lumacaftor) يصلّح الشكل."
+    practice: [bio.L04.028, bio.L04.029, bio.L04.030, bio.L04.031, bio.L04.032, bio.L04.033, bio.L04.034, bio.L04.035, bio.L04.036, bio.L04.037, bio.L04.038, bio.L04.039, bio.L04.040, bio.L04.041, bio.L04.042, bio.L04.043, bio.L04.044, bio.L04.045, bio.L04.046, bio.L04.047]
+  - id: bio.L04.lesson4
+    title: "العضلات والميتوكوندريا والـ repeats"
+    hook: "Duchenne و Becker نفس الجين، بس واحد frame بايظ والتاني لأ. والـ repeats كل جيل بتطول"
+    minutes: 9
+    pages: [59, 60]
+    topics: [muscular-dystrophies, mitochondrial-diseases, rett-syndrome, fragile-x, trinucleotide-repeats]
+    goals:
+      - "تفرّق بين Duchenne و Becker و myotonic"
+      - "تعرف شكل الـ mitochondrial disease في الـ biopsy"
+      - "تحفظ جدول الـ trinucleotide repeats"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Duchenne ضد Becker"
+        text: |-
+          نفس الجين (dystrophin، أكبر جين بيكوّد بروتين، فبيتطفّر كتير)، و X-linked recessive.
+          - **Duchenne**: ==frameshift== أو nonsense ← مفيش dystrophin. قبل 5 سنين. ضعف من الحوض لفوق، calf pseudohypertrophy، Gowers sign. بيموت غالباً بـ dilated cardiomyopathy.
+          - **Becker**: deletion ==in-frame== ← dystrophin ناقص بس شغال. في المراهقة. أخف (Becker is better).
+        page: 59
+        quote: "X-linked recessive disorder typically due to frameshift deletions or nonsense mutations → truncated or absent dystrophin protein → progressive myofiber damage."
+      - kind: reveal
+        prompt: "ليه deletion بنفس الحجم ممكن تعمل Duchenne مرة و Becker مرة؟"
+        answer: "لو الـ deletion عدد nucleotides مش مضاعف 3 ← ==frameshift== ← كل اللي بعده غلط ← مفيش بروتين (Duchenne). لو مضاعف 3 ← الـ frame سليم ← بروتين أقصر بس شغال (Becker)."
+        page: 59
+        quote: "X-linked recessive disorder typically due to non-frameshift deletions in dystrophin gene (partially functional instead of truncated)."
+      - kind: explain
+        title: "Myotonic dystrophy"
+        text: |-
+          AD، (CTG)n في الـ DMPK. بين 20 و 30 سنة. مش قادر يسيب إيدك بعد السلام (==myotonia==)، cataracts، صلع بدري، testicular atrophy، arrhythmia. «Cataracts، Toupee، Gonadal atrophy».
+        page: 59
+        quote: "Autosomal dominant. Onset 20-30 years. CTG trinucleotide repeat expansion in the DMPK gene"
+      - kind: check
+        question: "A man can't release his grip after shaking hands and has early cataracts and frontal balding. Repeat?"
+        options: ["CTG", "CAG", "CGG", "GAA"]
+        answer: 0
+        why:
+          - "صح: myotonic dystrophy = CTG في الـ DMPK."
+          - "CAG = Huntington."
+          - "CGG = fragile X."
+          - "GAA = Friedreich ataxia."
+        page: 60
+        quote: "Myotonic dystrophy (CTG)n AD Cataracts, Toupee (early balding in males)"
+      - kind: explain
+        title: "الميتوكوندريا: البطارية"
+        text: |-
+          لو الـ oxidative phosphorylation بايظة، أكتر الأماكن اللي بتتعب هي اللي ==محتاجة طاقة كتير==: المخ والعضل.
+          - **MELAS** و **MERRF**: في الـ biopsy ==ragged red fibers== (الخلية بتعمل ميتوكوندريا زيادة تعويض).
+          - **Leber hereditary optic neuropathy**: complex I ← فقد نظر في العينين، شباب، رجالة أكتر.
+        page: 60
+        quote: "Light microscopy with stain: ragged red fibers due to compensatory proliferation of mitochondria. Electron microscopy: mitochondrial crystalline inclusions."
+      - kind: explain
+        title: "Rett و fragile X"
+        text: |-
+          - **Rett**: MECP2 de novo على الـ X، بنات (الولاد بيموتوا جنين). طبيعية 6-18 شهر وبعدين ==بترجع لورا== («retturn»)، hand-wringing، seizures، ataxia.
+          - **Fragile X**: CGG في FMR1 ← hypermethylation ← الجين يسكت. ==أشهر سبب وراثي== للـ intellectual disability. الـ expansion بيحصل في الـ oogenesis («Fragile EGG»). Full mutation (>200): macroorchidism، وش طويل، ودان كبيرة، autism. Premutation (50-200): tremor و ataxia و ovarian insufficiency.
+        page: 60
+        quote: "Trinucleotide repeat expansion [(CGG)n] occurs during oogenesis. Fragile EGG (think CGG and oogenesis)."
+      - kind: table
+        title: "جدول الـ repeats"
+        columns: ["Disease", "Repeat", "Inheritance"]
+        rows:
+          - ["Huntington", "CAG", "AD"]
+          - ["Myotonic dystrophy", "CTG", "AD"]
+          - ["Fragile X", "CGG", "XD"]
+          - ["Friedreich ataxia", "GAA", "AR"]
+        hide: [[0, 1], [1, 1], [2, 1], [2, 2], [3, 1], [3, 2]]
+        page: 60
+        quote: "Fragile X syndrome (CGG)n XD Chin (protruding), Giant Gonads Friedreich ataxia (GAA)n AR Ataxic GAAit"
+      - kind: aside
+        tone: tip
+        text: "الحيلة: كل repeat ليه mnemonic في الكتاب. **C**AG = **C**audate (Huntington). C**T**G = Cataracts، **T**oupee، Gonads. C**G**G = Chin، **G**iant **G**onads. **GAA** = Ataxic **GAA**it."
+        page: 60
+        quote: "Huntington disease (CAG)n AD Caudate has ↓ ACh and GABA"
+      - kind: try
+        items: [bio.L04.048, bio.L04.052, bio.L04.055, bio.L04.062, bio.L04.064]
+    recap:
+      - "Duchenne frameshift (قبل 5، cardiomyopathy). Becker in-frame (أخف)."
+      - "Myotonic: CTG، AD، myotonia و cataracts و صلع."
+      - "Mitochondrial: ragged red fibers. Leber: complex I."
+      - "Rett: MECP2، بنات، regression. Fragile X: CGG في الـ oogenesis."
+    practice: [bio.L04.048, bio.L04.049, bio.L04.050, bio.L04.051, bio.L04.052, bio.L04.053, bio.L04.054, bio.L04.055, bio.L04.056, bio.L04.057, bio.L04.058, bio.L04.059, bio.L04.060, bio.L04.061, bio.L04.062, bio.L04.063, bio.L04.064, bio.L04.065]
+  - id: bio.L04.lesson5
+    title: "الـ trisomies، وكل كروموسوم وأمراضه"
+    hook: "21 سن الشرب، 18 سن الانتخاب، 13 سن البلوغ. والـ markers بتقولك مين"
+    minutes: 10
+    pages: [61, 62]
+    topics: [autosomal-trisomies, disorders-by-chromosome, robertsonian-translocation, cri-du-chat]
+    goals:
+      - "تفرّق بين Down و Edwards و Patau بالشكل والـ screening"
+      - "تعرف أسباب Down"
+      - "تربط الأمراض بالكروموسومات"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Down (21): الأشهر"
+        text: |-
+          أشهر chromosomal disorder بيعيش، وأشهر سبب genetic للـ intellectual disability.
+
+          - **95%** nondisjunction (غالباً meiosis I، بيزيد مع ==سن الأم==).
+          - **4%** Robertsonian translocation (غالباً 14 و 21).
+          - **1%** mitotic error بعد الإخصاب.
+        page: 61
+        quote: "95% of cases due to meiotic nondisjunction, most commonly during meiosis I (↑ with advanced maternal age: from 1:1500 in females <20 to 1:25 in females >45)."
+      - kind: mnemonic
+        word: "AAAAAA"
+        parts:
+          - { key: "A", text: "Atlantoaxial instability" }
+          - { key: "A", text: "Advanced maternal age" }
+          - { key: "A", text: "Atresia (duodenal)" }
+          - { key: "A", text: "Atrioventricular septal defect" }
+          - { key: "A", text: "Alzheimer disease (early onset): chromosome 21 فيه الـ amyloid precursor protein" }
+          - { key: "A", text: "AML (أقل من 5 سنين) / ALL (أكبر من 5)" }
+        hook: "الـ 6 As بتوع الكتاب"
+        page: 61
+        quote: "The 6 As of Down syndrome: ▘ Atlantoaxial instability ▘ Advanced maternal age ▘ Atresia (duodenal) ▘ Atrioventricular septal defect ▘ Alzheimer disease (early onset) ▘ AML (<5 years of age)/ALL (>5 years of age)"
+      - kind: explain
+        title: "Edwards (18) و Patau (13)"
+        text: |-
+          - **Edwards**: PRINCE Edward: Prominent occiput، Rocker-bottom feet، Intellectual disability، Nondisjunction، ==Clenched fists== بصوابع فوق بعض، low-set Ears. وكمان micrognathia، VSD، omphalocele. بيموت قبل سنة.
+          - **Patau**: عيب في fusion الـ prechordal mesoderm ← ==midline defects==: holoprosencephaly، cleft lip/palate، cutis aplasia، polydactyly، microphthalmia. بيموت قبل سنة.
+        page: 61
+        quote: "Defect in fusion of prechordal mesoderm → midline defects."
+      - kind: table
+        title: "الـ screening"
+        columns: ["Trisomy", "hCG", "Inhibin A", "Estriol", "AFP"]
+        rows:
+          - ["21", "↑", "↑", "↓", "↓"]
+          - ["18", "↓", "— or ↓", "↓", "↓"]
+          - ["13", "—", "—", "—", "—"]
+        hide: [[0, 1], [0, 2], [0, 3], [0, 4], [1, 1], [1, 4]]
+        page: 61
+        quote: "2nd trimester (quadruple) screening Trisomy hCG Inhibin A Estriol AFP"
+      - kind: aside
+        tone: tip
+        text: "Down: «Markers are ==hi up==» (hCG و inhibin بيطلعوا). Edwards: كل حاجة بتنزل. وفي الـ ultrasound بتاع Down: nuchal translucency عالي و nasal bone صغير."
+        page: 61
+        quote: "First-trimester ultrasound commonly shows ↑ nuchal translucency and hypoplastic nasal bone. Markers are hi up: ↑ hCG, ↑ inhibin."
+      - kind: check
+        question: "Quad screen: ↑ hCG, ↑ inhibin A, ↓ estriol, ↓ AFP. Most likely?"
+        options: ["Trisomy 21", "Trisomy 18", "Trisomy 13", "Normal pregnancy"]
+        answer: 0
+        why:
+          - "صح: Down، الـ markers hi up."
+          - "Edwards كلها بتنزل."
+          - "Patau الـ quad screen مش بيتغير بشكل ثابت."
+          - "النمط ده مش طبيعي."
+        page: 61
+        quote: "2nd trimester (quadruple) screening Trisomy hCG Inhibin A Estriol AFP"
+      - kind: match
+        prompt: "وصّل الكروموسوم بمرضه"
+        pairs:
+          - ["Chromosome 5", "Cri-du-chat, FAP"]
+          - ["Chromosome 7", "Cystic fibrosis, Williams"]
+          - ["Chromosome 13", "Retinoblastoma, Wilson, BRCA2"]
+          - ["Chromosome 17", "NF1, BRCA1, TP53"]
+          - ["Chromosome 22", "NF2, DiGeorge"]
+        why: "اتنين محتاجين انتباه: NF1 على 17 (كلمة neurofibromatosis فيها 17 حرف) و NF2 على 22. و BRCA1 على 17 و BRCA2 على 13."
+        page: 62
+        quote: "17 Neurofibromatosis type 1, BRCA1, TP53 (Li-Fraumeni syndrome) 18 Edwards syndrome 21 Down syndrome 22 Neurofibromatosis type 2, DiGeorge syndrome (22q11)"
+      - kind: explain
+        title: "Robertsonian و cri-du-chat"
+        text: |-
+          - **Robertsonian**: كروموسومين acrocentric (13، 14، 15، 21، 22) الـ long arms بتاعتهم ==بتلزق في بعض== والـ short arms بتضيع. الـ balanced carrier سليم، بس ممكن يجيله miscarriages أو طفل Down.
+          - **Cri-du-chat**: ==5p−==. microcephaly، intellectual disability، عياط زي القطة، epicanthal folds، VSD. «I cry when I am Very SaD».
+        page: 62
+        quote: "Occurs when the long arms of 2 acrocentric chromosomes (chromosomes with centromeres near their ends) fuse at the centromere and the 2 short arms are lost."
+      - kind: try
+        items: [bio.L04.068, bio.L04.069, bio.L04.070, bio.L04.072, bio.L04.076]
+    recap:
+      - "Down: 95% nondisjunction (meiosis I، سن الأم)، 4% Robertsonian، 6 As، markers hi up."
+      - "Edwards: PRINCE Edward، كل الـ markers تنزل. Patau: midline defects."
+      - "NF1 و BRCA1 على 17، NF2 و DiGeorge على 22، BRCA2 و RB1 على 13."
+      - "Robertsonian balanced = سليم. Cri-du-chat = 5p−."
+    practice: [bio.L04.066, bio.L04.067, bio.L04.068, bio.L04.069, bio.L04.070, bio.L04.071, bio.L04.072, bio.L04.073, bio.L04.074, bio.L04.075, bio.L04.076, bio.L04.077, bio.L04.078, bio.L04.079, bio.L04.080, bio.L04.081, bio.L04.082, bio.L04.083]

@@ -1,0 +1,633 @@
+schema: steps.content/v1
+lecture: gi.L03
+title: Physiology
+book: { chapter: 9, pages: [378, 382] }
+topics:
+  - { id: gi-regulatory-substances, title: Gastrointestinal regulatory substances }
+  - { id: gi-secretory-products, title: Gastrointestinal secretory products }
+  - { id: secretory-cell-locations, title: Locations of gastrointestinal secretory cells }
+  - { id: pancreatic-secretions, title: Pancreatic secretions }
+  - { id: carbohydrate-absorption, title: Carbohydrate absorption }
+  - { id: vitamin-mineral-absorption, title: Vitamin and mineral absorption }
+  - { id: peyer-patches, title: Peyer patches }
+  - { id: bile, title: Bile }
+  - { id: bilirubin, title: Bilirubin }
+items:
+  # ---------- p378: GI regulatory substances ----------
+  - id: gi.L03.001
+    kind: table
+    topic: gi-regulatory-substances
+    title: GI regulatory substances and their sources
+    columns: [Substance, Source]
+    rows:
+      - [Gastrin, "G cells (antrum of stomach, duodenum)"]
+      - [Ghrelin, Stomach]
+      - [Somatostatin, "D cells (pancreatic islets, GI mucosa)"]
+      - [Cholecystokinin, "I cells (duodenum, jejunum)"]
+      - [Secretin, S cells (duodenum)]
+      - [Glucose-dependent insulinotropic peptide, "K cells (duodenum, jejunum)"]
+      - [Motilin, Small intestine]
+      - [Vasoactive intestinal polypeptide, "Parasympathetic ganglia in sphincters, gallbladder, small intestine"]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1], [5, 1], [7, 1]]
+    src: { page: 378, quote: "Gastrin G cells (antrum of stomach, duodenum)" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.002
+    kind: card
+    topic: gi-regulatory-substances
+    front: What are the three actions of gastrin?
+    back: ↑ gastric H+ secretion, ↑ gastric motility, and ↑ growth of the gastric mucosa.
+    src: { page: 378, quote: "↑ gastric H+ secretion ↑ gastric motility ↑ growth of gastric mucosa" }
+    status: unverified
+  - id: gi.L03.003
+    kind: card
+    topic: gi-regulatory-substances
+    front: What increases gastrin release, and what decreases it?
+    back: "Increased by stomach distention/alkalinization, amino acids, peptides, and vagal stimulation via gastrin-releasing peptide (GRP). Decreased by pH < 1.5."
+    src: { page: 378, quote: "↑ by stomach distention/ alkalinization, amino acids, peptides, vagal stimulation via gastrin-releasing peptide (GRP) ↓ by pH <1.5" }
+    status: unverified
+  - id: gi.L03.004
+    kind: enumerate
+    topic: gi-regulatory-substances
+    prompt: Enumerate the conditions in which gastrin is raised (3).
+    points:
+      - Chronic PPI use
+      - Chronic atrophic gastritis (eg, H pylori)
+      - Zollinger-Ellison syndrome (gastrinoma), ↑↑
+    pass: 3
+    hook: "كل اللي بيقلل الحمض بيرفع الـ gastrin (الـ PPI والـ atrophic gastritis)، والوحيد اللي بيرفعه مع حمض كتير هو الـ gastrinoma."
+    src: { page: 378, quote: "↑ by chronic PPI use ↑ in chronic atrophic gastritis (eg, H pylori) ↑↑ in Zollinger-Ellison syndrome (gastrinoma)" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.005
+    kind: card
+    topic: gi-regulatory-substances
+    front: What does ghrelin do, and when is it high or low?
+    back: "↑ appetite (\"ghrowlin' stomach\"). ↑ in the fasting state and in Prader-Willi syndrome; ↓ by food and after gastric bypass surgery."
+    src: { page: 378, quote: "Ghrelin Stomach ↑ appetite (“ghrowlin’ stomach”) ↑ in fasting state ↓ by food ↑ in Prader-Willi syndrome ↓ after gastric bypass surgery" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.006
+    kind: card
+    topic: gi-regulatory-substances
+    front: What are the actions of somatostatin?
+    back: ↓ gastric acid and pepsinogen secretion, ↓ pancreatic and small intestine fluid secretion, ↓ gallbladder contraction, ↓ insulin and glucagon release. It inhibits secretion of many hormones ("somato-stasis").
+    src: { page: 378, quote: "↓ gastric acid and pepsinogen secretion ↓ pancreatic and small intestine fluid secretion ↓ gallbladder contraction ↓ insulin and glucagon release" }
+    status: unverified
+  - id: gi.L03.007
+    kind: cloze
+    topic: gi-regulatory-substances
+    text: Somatostatin is increased by {{c1::acid}} and decreased by {{c2::vagal stimulation}}.
+    src: { page: 378, quote: "↑ by acid ↓ by vagal stimulation" }
+    status: unverified
+  - id: gi.L03.008
+    kind: enumerate
+    topic: gi-regulatory-substances
+    prompt: Enumerate the uses of octreotide, the somatostatin analog (4).
+    points:
+      - Acromegaly
+      - Carcinoid syndrome
+      - VIPoma
+      - Variceal bleeding
+    pass: 4
+    src: { page: 378, quote: "Octreotide is an analog used to treat acromegaly, carcinoid syndrome, VIPoma, and variceal bleeding" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.009
+    kind: card
+    topic: gi-regulatory-substances
+    front: What are the actions of cholecystokinin (CCK), and what stimulates it?
+    back: ↑ pancreatic secretion, ↑ gallbladder contraction, ↓ gastric emptying, ↑ sphincter of Oddi relaxation. Stimulated by fatty acids and amino acids. It acts on neural muscarinic pathways to cause pancreatic secretion.
+    src: { page: 378, quote: "↑ pancreatic secretion ↑ gallbladder contraction ↓ gastric emptying ↑ sphincter of Oddi relaxation ↑ by fatty acids, amino acids" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.010
+    kind: card
+    topic: gi-regulatory-substances
+    front: What are the actions of secretin, what stimulates it, and why does it matter?
+    back: ↑ pancreatic HCO3- secretion, ↓ gastric acid secretion, ↑ bile secretion. Stimulated by acid and fatty acids in the duodenal lumen. The HCO3- neutralizes gastric acid in the duodenum so pancreatic enzymes can work.
+    src: { page: 378, quote: "↑ by acid, fatty acids in lumen of duodenum ↑ neutralizes gastric acid in duodenum, allowing pancreatic enzymes to function" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.011
+    kind: card
+    topic: gi-regulatory-substances
+    front: What does GIP do, and why does oral glucose raise insulin more than the same IV glucose?
+    back: "Exocrine: ↓ gastric H+ secretion. Endocrine: ↑ insulin release. Oral glucose stimulates GIP from K cells, so it raises insulin more than an IV equivalent."
+    src: { page: 378, quote: "Oral glucose load ↑ insulin compared to IV equivalent due to GIP secretion" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.012
+    kind: card
+    topic: gi-regulatory-substances
+    front: What does motilin do, when is it high, and which drug acts on its receptor?
+    back: It produces migrating motor complexes (MMCs) and is ↑ in the fasting state. Motilin receptor agonists (eg, erythromycin) stimulate intestinal peristalsis.
+    src: { page: 378, quote: "Motilin Small intestine Produces migrating motor complexes (MMCs) ↑ in fasting state Motilin receptor agonists (eg, erythromycin) are used to stimulate intestinal peristalsis." }
+    status: unverified
+  - id: gi.L03.013
+    kind: card
+    topic: gi-regulatory-substances
+    front: What are the actions of vasoactive intestinal polypeptide (VIP)?
+    back: ↑ intestinal water and electrolyte secretion, ↑ relaxation of intestinal smooth muscle and sphincters, ↓ gastric acid secretion. Increased by distention and vagal stimulation; decreased by adrenergic input.
+    src: { page: 378, quote: "↑ intestinal water and electrolyte secretion ↑ relaxation of intestinal smooth muscle and sphincters ↓ gastric acid secretion ↑ by distention and vagal stimulation ↓ by adrenergic input" }
+    status: unverified
+  - id: gi.L03.014
+    kind: cloze
+    topic: gi-regulatory-substances
+    text: A VIPoma is a non-α, non-β islet cell pancreatic tumor; it causes {{c1::WDHA}} syndrome (watery diarrhea, {{c2::hypokalemia}}, {{c3::achlorhydria}}).
+    src: { page: 378, quote: "VIPoma—non-α, non-β islet cell pancreatic tumor that secretes VIP; associated with Watery Diarrhea, Hypokalemia, Achlorhydria (WDHA syndrome)" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.015
+    kind: card
+    topic: gi-regulatory-substances
+    front: What does nitric oxide do in the gut, and what happens when it is lost?
+    back: It ↑ smooth muscle relaxation, including the lower esophageal sphincter (LES). Loss of NO secretion is implicated in the ↑ LES tone of achalasia.
+    src: { page: 378, quote: "Nitric oxide ↑ smooth muscle relaxation, including lower esophageal sphincter (LES) Loss of NO secretion is implicated in ↑ LES tone of achalasia" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.016
+    kind: mcq
+    topic: gi-regulatory-substances
+    stem: >-
+      A 45-year-old woman has had large-volume watery diarrhea for 3 months that persists during a
+      48-hour fast. She has muscle weakness. Serum potassium is 2.6 mEq/L. Gastric analysis shows almost
+      no acid. CT shows a 3-cm mass in the tail of the pancreas. Which drug would best control her
+      diarrhea while she awaits surgery?
+    options:
+      - Octreotide
+      - Omeprazole
+      - Erythromycin
+      - Metoclopramide
+      - Loperamide alone
+    answer: 0
+    why:
+      - "Right. This is a VIPoma (watery diarrhea, hypokalemia, achlorhydria); octreotide, the somatostatin analog, is used to treat VIPoma by inhibiting hormone secretion."
+      - "A PPI lowers acid, but she already has achlorhydria; it does nothing for VIP-driven secretion."
+      - "Erythromycin is a motilin agonist that increases peristalsis, worsening diarrhea."
+      - "Metoclopramide is a prokinetic; it would not stop secretory diarrhea."
+      - "Loperamide slows transit but doesn't stop the hormone; the book's treatment is octreotide."
+    src: { page: 378, quote: "Octreotide is an analog used to treat acromegaly, carcinoid syndrome, VIPoma, and variceal bleeding" }
+    status: unverified
+  - id: gi.L03.017
+    kind: mcq
+    topic: gi-regulatory-substances
+    stem: >-
+      A 38-year-old man eats a fatty meal. Within minutes, cells in his duodenal and jejunal mucosa
+      release a hormone that contracts the gallbladder. Which other effect does this hormone have?
+    options:
+      - Slows gastric emptying
+      - Increases gastric acid secretion
+      - Contracts the sphincter of Oddi
+      - Increases appetite
+      - Produces migrating motor complexes
+    answer: 0
+    why:
+      - "Right. CCK from I cells contracts the gallbladder, relaxes the sphincter of Oddi, increases pancreatic secretion and decreases gastric emptying."
+      - "Increased gastric acid is gastrin's action."
+      - "CCK relaxes, not contracts, the sphincter of Oddi so bile can enter the duodenum."
+      - "Increased appetite is ghrelin's action."
+      - "Migrating motor complexes are produced by motilin in the fasting state."
+    src: { page: 378, quote: "↑ pancreatic secretion ↑ gallbladder contraction ↓ gastric emptying ↑ sphincter of Oddi relaxation" }
+    status: unverified
+  - id: gi.L03.018
+    kind: mcq
+    topic: gi-regulatory-substances
+    stem: >-
+      A 52-year-old man has taken omeprazole daily for 6 years for reflux. A routine blood test shows a
+      markedly elevated fasting serum gastrin. Gastric pH is 6. Which mechanism best explains the high
+      gastrin?
+    options:
+      - Loss of acid inhibition of G cells
+      - A gastrin-secreting tumor of the pancreas
+      - Increased vagal release of gastrin-releasing peptide
+      - Increased somatostatin release from D cells
+      - Hypertrophy of parietal cells
+    answer: 0
+    why:
+      - "Right. Gastrin is decreased by pH < 1.5; chronic PPI use removes that brake, so gastrin rises."
+      - "A gastrinoma raises gastrin with high acid output, not a gastric pH of 6."
+      - "GRP does stimulate gastrin, but the PPI's effect is loss of acid feedback."
+      - "Somatostatin is stimulated by acid; with low acid it falls, and it inhibits, not raises, gastrin."
+      - "Parietal cell hypertrophy can follow high gastrin; it is not the cause."
+    src: { page: 378, quote: "↓ by pH <1.5 ↑ by chronic PPI use" }
+    status: unverified
+  # ---------- p379: GI secretory products ----------
+  - id: gi.L03.019
+    kind: card
+    topic: gi-secretory-products
+    front: What stimulates and what inhibits gastric acid secretion by parietal cells?
+    back: "Stimulated by histamine, vagal stimulation (ACh) and gastrin. Inhibited by somatostatin, GIP, prostaglandin and secretin."
+    src: { page: 379, quote: "↓ stomach pH ↑ by histamine, vagal stimulation (ACh), gastrin ↓ by somatostatin, GIP, prostaglandin, secretin" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.020
+    kind: card
+    topic: gi-secretory-products
+    front: What follows autoimmune destruction of parietal cells?
+    back: Chronic gastritis and pernicious anemia (parietal cells are pink/eosinophilic on histology).
+    src: { page: 379, quote: "Autoimmune destruction of parietal cells (pink/ eosinophilic histology) → chronic gastritis and pernicious anemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.021
+    kind: card
+    topic: gi-secretory-products
+    front: Which cells make intrinsic factor, and what is it for?
+    back: Parietal cells. It is a vitamin B12-binding protein required for B12 uptake in the terminal ileum.
+    src: { page: 379, quote: "Intrinsic factor Parietal cells (stomach) Vitamin B12 –binding protein (required for uptake in terminal ileum)" }
+    status: unverified
+  - id: gi.L03.022
+    kind: cloze
+    topic: gi-secretory-products
+    text: Pepsin comes from {{c1::chief cells}}; it is stimulated by vagal stimulation (ACh) and local acid, and pepsinogen is converted to pepsin in the presence of {{c2::H+}}.
+    src: { page: 379, quote: "Pepsin Chief cells (stomach) Protein digestion ↑ by vagal stimulation (ACh), local acid Pepsinogen (inactive) is converted to pepsin (active) in the presence of H+" }
+    status: unverified
+  - id: gi.L03.023
+    kind: card
+    topic: gi-secretory-products
+    front: Where does bicarbonate come from in the gut, and what stimulates it?
+    back: Mucosal cells of the stomach, duodenum, salivary glands and pancreas, and Brunner glands of the duodenum. It is increased by pancreatic and biliary secretion with secretin, and is trapped in the mucus covering the gastric epithelium.
+    src: { page: 379, quote: "Neutralizes acid ↑ by pancreatic and biliary secretion with secretin Trapped in mucus that covers the gastric epithelium" }
+    status: unverified
+  - id: gi.L03.024
+    kind: mcq
+    topic: gi-secretory-products
+    stem: >-
+      A 58-year-old woman with vitiligo and Hashimoto thyroiditis has fatigue and numbness in both feet.
+      Hemoglobin is 8.9 g/dL with an MCV of 118 fL. Antibodies against intrinsic factor are present.
+      Gastric biopsy would most likely show loss of cells with which feature?
+    options:
+      - Pink (eosinophilic) cytoplasm in the gastric body glands
+      - Basophilic cytoplasm with zymogen granules
+      - Location in the gastric antrum, releasing gastrin
+      - Mucus-filled cytoplasm at the surface
+      - Histamine-containing granules
+    answer: 0
+    why:
+      - "Right. Autoimmune destruction of parietal cells, which are pink/eosinophilic, causes chronic gastritis and pernicious anemia (no intrinsic factor, so no B12 uptake)."
+      - "Basophilic cells are chief cells, which make pepsinogen."
+      - "G cells are in the antrum; autoimmune gastritis spares them, so gastrin rises."
+      - "Surface mucous cells make mucus and bicarbonate."
+      - "ECL cells release histamine; they are not the target that causes B12 deficiency."
+    src: { page: 379, quote: "Autoimmune destruction of parietal cells (pink/ eosinophilic histology) → chronic gastritis and pernicious anemia" }
+    status: unverified
+  # ---------- p380: locations of secretory cells ----------
+  - id: gi.L03.025
+    kind: card
+    topic: secretory-cell-locations
+    front: Through which cell does gastrin mainly raise acid secretion?
+    back: Through enterochromaffin-like (ECL) cells, which release histamine, rather than through a direct effect on parietal cells.
+    src: { page: 380, quote: "Gastrin ↑ acid secretion primarily through its effects on enterochromaffin-like (ECL) cells (leading to histamine release) rather than through its direct effect on parietal cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.026
+    kind: table
+    topic: secretory-cell-locations
+    title: Where the secretory cells are (from the book's figure)
+    columns: [Site, Cells and products]
+    rows:
+      - ["Fundus and body", "Parietal cells (HCl, intrinsic factor), chief cells (pepsinogen), ECL cells (histamine)"]
+      - [Antrum, "G cells (gastrin), D cells (somatostatin)"]
+      - [Duodenum, "S cells (secretin), I cells (CCK), K cells (GIP)"]
+      - [Pancreas, "Acinar cells (zymogen granules), duct cells (HCO3-)"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 380, quote: "I cells S cells K cells Chief cells Parietal cells G cells ECL cells Mucous cells D cells" }
+    status: unverified
+  - id: gi.L03.027
+    kind: mcq
+    topic: secretory-cell-locations
+    stem: >-
+      A 30-year-old man takes famotidine, an H2 receptor blocker, for dyspepsia. A meal stimulates
+      gastrin release, but his acid output rises much less than before he started the drug. Why does
+      blocking H2 receptors blunt the effect of gastrin?
+    options:
+      - Gastrin raises acid mainly by making ECL cells release histamine
+      - Gastrin acts only on chief cells
+      - H2 blockers stop G cells from releasing gastrin
+      - Histamine is released by parietal cells themselves
+      - Gastrin raises acid mainly through vagal ACh release
+    answer: 0
+    why:
+      - "Right. Gastrin increases acid primarily through ECL cells releasing histamine, not through its direct effect on parietal cells, so blocking H2 receptors blunts it."
+      - "Chief cells make pepsinogen; gastrin's acid effect is through ECL cells."
+      - "H2 blockers act on parietal cell receptors; they do not block G cells."
+      - "Histamine comes from ECL cells, not parietal cells."
+      - "Vagal ACh is a separate pathway, also partly via histamine; it is not how gastrin works."
+    src: { page: 380, quote: "Gastrin ↑ acid secretion primarily through its effects on enterochromaffin-like (ECL) cells (leading to histamine release)" }
+    status: unverified
+  # ---------- p380: pancreatic secretions ----------
+  - id: gi.L03.028
+    kind: cloze
+    topic: pancreatic-secretions
+    text: "Pancreatic juice is an {{c1::isotonic}} fluid: at low flow it is high in {{c2::Cl−}}, and at high flow it is high in {{c3::HCO3−}}."
+    src: { page: 380, quote: "Pancreatic secretions Isotonic fluid; low flow → high Cl− , high flow → high HCO − 3" }
+    status: unverified
+  - id: gi.L03.029
+    kind: table
+    topic: pancreatic-secretions
+    title: Pancreatic enzymes
+    columns: [Enzyme, Role, Secreted as]
+    rows:
+      - [α-amylase, Starch digestion, Active form]
+      - [Lipases, Lipid digestion, Active form]
+      - ["Proteases (trypsin, chymotrypsin, elastase, carboxypeptidases A and B)", Protein digestion, Proenzymes (zymogens)]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 2]]
+    src: { page: 380, quote: "α-amylase Starch digestion Secreted in active form Lipases Lipid digestion Secreted in active form" }
+    status: unverified
+  - id: gi.L03.030
+    kind: card
+    topic: pancreatic-secretions
+    front: How is trypsinogen activated, and why is that step central?
+    back: Enterokinase (enteropeptidase), a brush-border enzyme of duodenal and jejunal mucosa, converts it to trypsin. Trypsin then activates the other proenzymes and cleaves more trypsinogen into trypsin (a positive feedback loop).
+    src: { page: 380, quote: "Converted to trypsin by enterokinase/ enteropeptidase, a brush-border enzyme on duodenal and jejunal mucosa" }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.031
+    kind: card
+    topic: pancreatic-secretions
+    front: Where are dipeptides and tripeptides broken down?
+    back: Within the intestinal mucosa, by an intracellular process.
+    src: { page: 380, quote: "Dipeptides and tripeptides degraded within intestinal mucosa via intracellular process" }
+    status: unverified
+  - id: gi.L03.032
+    kind: mcq
+    topic: pancreatic-secretions
+    stem: >-
+      A 4-month-old boy has failure to thrive, edema and loose stools. Sweat chloride is normal.
+      Pancreatic amylase and lipase activity in duodenal fluid are normal, but trypsin, chymotrypsin and
+      carboxypeptidase activities are all very low; adding a brush-border extract to the fluid restores
+      them. Deficiency of which enzyme best explains the findings?
+    options:
+      - Enterokinase (enteropeptidase)
+      - Trypsinogen
+      - α-amylase
+      - Pancreatic lipase
+      - Pepsin
+    answer: 0
+    why:
+      - "Right. Enterokinase, a duodenal and jejunal brush-border enzyme, converts trypsinogen to trypsin, which then activates the other proteases; without it all protease activity falls."
+      - "Trypsinogen is present; the brush-border extract activates it, so the missing piece is the activator."
+      - "Amylase is secreted in its active form and is normal here."
+      - "Lipase is secreted active and is normal here."
+      - "Pepsin is a gastric enzyme, not part of duodenal fluid activation."
+    src: { page: 380, quote: "Converted to active enzyme trypsin → activation of other proenzymes and cleavage of additional trypsinogen molecules into active trypsin (positive feedback loop)" }
+    status: unverified
+  # ---------- p381: carbohydrate absorption ----------
+  - id: gi.L03.033
+    kind: table
+    topic: carbohydrate-absorption
+    title: Monosaccharide transporters of the enterocyte
+    columns: [Sugar, Apical uptake, To blood]
+    rows:
+      - ["Glucose, galactose", SGLT1 (Na+ dependent), GLUT2]
+      - [Fructose, GLUT5 (facilitated diffusion), GLUT2]
+    blanks: [[0, 1], [1, 1], [0, 2]]
+    src: { page: 381, quote: "Glucose and galactose are taken up by SGLT1 (Na+ dependent). Fructose is taken up via facilitated diffusion by GLUT5. All are transported to blood by GLUT2." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.034
+    kind: card
+    topic: carbohydrate-absorption
+    front: Which carbohydrates can enterocytes absorb?
+    back: Only monosaccharides (glucose, galactose, fructose).
+    src: { page: 381, quote: "Only monosaccharides (glucose, galactose, fructose) are absorbed by enterocytes." }
+    status: unverified
+  - id: gi.L03.035
+    kind: card
+    topic: carbohydrate-absorption
+    front: What does the D-xylose test distinguish?
+    back: D-xylose is passively absorbed in the proximal small intestine. Blood and urine levels ↓ with mucosal damage but are normal in pancreatic insufficiency.
+    src: { page: 381, quote: "D-xylose test: simple sugar that is passively absorbed in proximal small intestine; blood and urine levels ↓ with mucosal damage, normal in pancreatic insufficiency." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.036
+    kind: mcq
+    topic: carbohydrate-absorption
+    stem: >-
+      A 41-year-old man with recurrent alcohol-associated pancreatitis has greasy, foul-smelling stools
+      and weight loss. A D-xylose test is performed. Which result is expected, and why?
+    options:
+      - Normal, because D-xylose is absorbed passively without pancreatic enzymes
+      - Low, because pancreatic amylase is needed to absorb D-xylose
+      - Low, because the proximal small bowel mucosa is damaged
+      - High, because of increased mucosal permeability
+      - Low, because GLUT5 is lost
+    answer: 0
+    why:
+      - "Right. D-xylose is a simple sugar absorbed passively in the proximal small intestine, so levels are normal in pancreatic insufficiency."
+      - "D-xylose needs no digestion; that is the point of the test."
+      - "Low levels point to mucosal damage (eg, celiac disease), not pancreatic disease."
+      - "The book describes no high result; levels fall only with mucosal damage."
+      - "D-xylose absorption is passive; GLUT5 carries fructose."
+    src: { page: 381, quote: "blood and urine levels ↓ with mucosal damage, normal in pancreatic insufficiency." }
+    status: unverified
+  # ---------- p381: vitamin and mineral absorption ----------
+  - id: gi.L03.037
+    kind: table
+    topic: vitamin-mineral-absorption
+    title: Where iron, folate and B12 are absorbed
+    columns: [Nutrient, Site, Note]
+    rows:
+      - [Iron, Duodenum, Absorbed as Fe2+]
+      - [Folate, Duodenum and jejunum, ""]
+      - [Vitamin B12, Terminal ileum, "Absorbed with bile salts; requires intrinsic factor"]
+    blanks: [[0, 1], [0, 2], [1, 1], [2, 1], [2, 2]]
+    src: { page: 381, quote: "Iron absorbed as Fe2+ in duodenum. Folates absorbed in duodenum and jejunum. Vitamin B12 absorbed in terminal ileum along with bile salts, requires intrinsic factor." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.038
+    kind: card
+    topic: vitamin-mineral-absorption
+    front: What is the book's mnemonic for iron, folate and B12 absorption sites?
+    back: "\"Iron fist, Bro\": Iron (duodenum), Folate (duodenum and jejunum), then B12 (terminal ileum), in order down the bowel."
+    src: { page: 381, quote: "Iron fist, Bro" }
+    status: unverified
+  - id: gi.L03.039
+    kind: card
+    topic: vitamin-mineral-absorption
+    front: In whom can vitamin and mineral deficiencies develop?
+    back: Patients with small bowel disease, bowel resection, intestinal failure (short bowel syndrome) or bariatric surgery; eg, terminal ileum resection causes B12 deficiency that requires supplementation.
+    src: { page: 381, quote: "Vitamin and mineral deficiencies may develop in patients with small bowel disease, bowel resection, intestinal failure (also called short bowel syndrome), or bariatric surgery" }
+    status: unverified
+  - id: gi.L03.040
+    kind: card
+    topic: vitamin-mineral-absorption
+    front: What is dumping syndrome, and when does it occur?
+    back: Hyperosmolar food (often sugary) moves too quickly from the stomach into the small intestine. It typically occurs after stomach or esophageal surgery.
+    src: { page: 381, quote: "Dumping syndrome—hyperosmolar food (often sugary) moves too quickly from the stomach to small intestine. Typically occurs after stomach or esophageal surgery." }
+    status: unverified
+  - id: gi.L03.041
+    kind: mcq
+    topic: vitamin-mineral-absorption
+    stem: >-
+      A 35-year-old woman had 60 cm of terminal ileum resected for Crohn disease 3 years ago. She now has
+      fatigue, a smooth red tongue and decreased vibration sense in her feet. Hemoglobin is 9.2 g/dL and
+      MCV 116 fL. Which nutrient deficiency is most likely, and why?
+    options:
+      - Vitamin B12, because it is absorbed with intrinsic factor in the terminal ileum
+      - Folate, because it is absorbed in the terminal ileum
+      - Iron, because it is absorbed as Fe2+ in the ileum
+      - Vitamin B12, because intrinsic factor is made in the ileum
+      - Folate, because bile salts are needed for its absorption
+    answer: 0
+    why:
+      - "Right. B12 is absorbed in the terminal ileum with bile salts and needs intrinsic factor; resection causes B12 deficiency (macrocytosis, neuropathy) that needs supplementation."
+      - "Folate is absorbed in the duodenum and jejunum, which are intact."
+      - "Iron is absorbed in the duodenum, and iron deficiency is microcytic."
+      - "Intrinsic factor comes from gastric parietal cells, not the ileum."
+      - "Folate does not depend on bile salts; B12 is absorbed along with them."
+    src: { page: 381, quote: "Vitamin B12 absorbed in terminal ileum along with bile salts, requires intrinsic factor." }
+    status: unverified
+  # ---------- p381: Peyer patches ----------
+  - id: gi.L03.042
+    kind: card
+    topic: peyer-patches
+    front: What are Peyer patches, where are they, and what do their M cells do?
+    back: Unencapsulated lymphoid tissue in the lamina propria and submucosa of the ileum. Their Microfold (M) cells sample antigens and present them to immune cells.
+    src: { page: 381, quote: "Unencapsulated lymphoid tissue A found in lamina propria and submucosa of ileum. Contain specialized Microfold (M) cells that sample and present antigens to iMmune cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.043
+    kind: order
+    topic: peyer-patches
+    prompt: Put the path from a Peyer patch B cell to secreted gut IgA in order.
+    steps:
+      - B cells are stimulated in the germinal centers of Peyer patches
+      - They differentiate into IgA-secreting plasma cells
+      - The plasma cells reside in the lamina propria
+      - IgA receives the protective secretory component
+      - IgA is transported across the epithelium into the gut lumen
+    src: { page: 381, quote: "B cells stimulated in germinal centers of Peyer patches differentiate into IgA-secreting plasma cells, which ultimately reside in lamina propria." }
+    status: unverified
+  - id: gi.L03.044
+    kind: mcq
+    topic: peyer-patches
+    stem: >-
+      A 22-year-old man has recurrent giardiasis and frequent sinus infections. Serum IgG and IgM are
+      normal, but IgA is undetectable. Which normal step in gut mucosal immunity is most directly
+      deficient in him?
+    options:
+      - Secretion of IgA across the epithelium after it acquires secretory component
+      - Sampling of luminal antigens by M cells
+      - Secretion of defensins by Paneth cells
+      - Phagocytosis by Kupffer cells
+      - Mucus production by goblet cells
+    answer: 0
+    why:
+      - "Right. Peyer patch B cells become IgA-secreting plasma cells in the lamina propria; IgA gets secretory component and crosses the epithelium to deal with luminal antigens such as Giardia."
+      - "M cells sample antigen normally; the defect is downstream, in IgA production."
+      - "Defensins come from Paneth cells and are not immunoglobulins."
+      - "Kupffer cells are liver macrophages."
+      - "Goblet cell mucus is unrelated to IgA deficiency."
+    src: { page: 381, quote: "IgA receives protective secretory component and is then transported across the epithelium to the gut to deal with intraluminal antigen." }
+    status: unverified
+  # ---------- p382: bile ----------
+  - id: gi.L03.045
+    kind: card
+    topic: bile
+    front: What is bile made of, and what makes bile salts water soluble?
+    back: Bile salts, phospholipids, cholesterol, bilirubin, water and ions. Bile salts are bile acids conjugated to glycine or taurine, which makes them water soluble.
+    src: { page: 382, quote: "Composed of bile salts (bile acids conjugated to glycine or taurine, making them water soluble), phospholipids, cholesterol, bilirubin, water, and ions." }
+    status: unverified
+  - id: gi.L03.046
+    kind: cloze
+    topic: bile
+    text: "{{c1::Cholesterol 7α-hydroxylase}} catalyzes the rate-limiting step of bile acid synthesis."
+    src: { page: 382, quote: "Cholesterol 7α-hydroxylase catalyzes rate-limiting step of bile acid synthesis." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.047
+    kind: enumerate
+    topic: bile
+    prompt: Enumerate the functions of bile (3).
+    points:
+      - Digestion and absorption of lipids and fat-soluble vitamins
+      - Bilirubin and cholesterol excretion (the body's 1° means of elimination)
+      - Antimicrobial activity (via membrane disruption)
+    pass: 3
+    src: { page: 382, quote: "Digestion and absorption of lipids and fat- soluble vitamins Bilirubin and cholesterol excretion (body’s 1° means of elimination) Antimicrobial activity (via membrane disruption)" }
+    status: unverified
+  - id: gi.L03.048
+    kind: card
+    topic: bile
+    front: What happens when bile salt absorption at the distal ileum falls (short bowel, Crohn disease)?
+    back: Fat absorption fails and bile acid diarrhea may follow. Calcium, which normally binds oxalate, binds fat instead, so free oxalate is absorbed → ↑ calcium oxalate kidney stones.
+    src: { page: 382, quote: "Calcium, which normally binds oxalate, binds fat instead, so free oxalate is absorbed by gut → ↑ frequency of calcium oxalate kidney stones." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.049
+    kind: mcq
+    topic: bile
+    stem: >-
+      A 29-year-old man with Crohn disease of the terminal ileum has chronic diarrhea with greasy stools.
+      He presents with sudden severe left flank pain radiating to the groin. Urinalysis shows red blood
+      cells and envelope-shaped crystals. Which mechanism best explains his stone?
+    options:
+      - Unbound dietary oxalate is absorbed because calcium binds unabsorbed fat
+      - Ileal loss of bicarbonate causes uric acid precipitation
+      - Urease-producing bacteria raise urine pH
+      - Increased intestinal calcium absorption causes hypercalciuria
+      - Defective renal reabsorption of cystine
+    answer: 0
+    why:
+      - "Right. With ↓ bile salt absorption at the distal ileum, fat stays in the lumen and binds calcium, so free oxalate is absorbed and calcium oxalate stones form."
+      - "Uric acid stones are not the bile-salt complication the book describes, and the crystals here are envelope-shaped (oxalate)."
+      - "Struvite stones come from urease-positive infections."
+      - "Calcium is bound by fat in the gut, not absorbed more."
+      - "Cystinuria gives hexagonal crystals and is hereditary."
+    src: { page: 382, quote: "↓ absorption of enteric bile salts at distal ileum (as in short bowel syndrome, Crohn disease) prevents normal fat absorption and may cause bile acid diarrhea." }
+    status: unverified
+  # ---------- p382: bilirubin ----------
+  - id: gi.L03.050
+    kind: order
+    topic: bilirubin
+    prompt: Put the steps of bilirubin metabolism in order.
+    steps:
+      - Heme is metabolized by heme oxygenase to biliverdin (green)
+      - Biliverdin is reduced to bilirubin (yellow-brown)
+      - Unconjugated bilirubin travels in blood bound to albumin
+      - The liver removes it and conjugates it with glucuronate (UDP-glucuronosyltransferase)
+      - Conjugated bilirubin is excreted in bile
+      - Gut bacteria convert it to urobilinogen
+    src: { page: 382, quote: "Heme is metabolized by heme oxygenase to biliverdin (green), which is subsequently reduced to bilirubin (yellow-brown). Unconjugated bilirubin is removed from blood by liver, conjugated with glucuronate, and excreted in bile." }
+    status: unverified
+  - id: gi.L03.051
+    kind: table
+    topic: bilirubin
+    title: Direct vs indirect bilirubin
+    columns: ["", Direct, Indirect]
+    rows:
+      - [Conjugated?, Conjugated with glucuronic acid, Unconjugated]
+      - [Water soluble?, "Yes", "No"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 382, quote: "Direct bilirubin: conjugated with glucuronic acid; water soluble (dissolves in water). Indirect bilirubin: unconjugated; water insoluble." }
+    status: unverified
+    tags: [high-yield]
+  - id: gi.L03.052
+    kind: card
+    topic: bilirubin
+    front: What happens to urobilinogen in the gut (per the book's figure)?
+    back: About 80% is excreted in feces as stercobilin (brown stool) and about 20% is reabsorbed (enterohepatic circulation); of that, ~90% returns to the liver and ~10% is excreted by the kidney as urobilin (yellow urine).
+    src: { page: 382, quote: "Excreted in feces as stercobilin ( brown color of stool) Excreted in urine as urobilin ( yellow color of urine)" }
+    status: unverified
+  - id: gi.L03.053
+    kind: mcq
+    topic: bilirubin
+    stem: >-
+      A 55-year-old man has jaundice, pale clay-colored stools and dark urine. A urine dipstick is positive
+      for bilirubin. Which property of the bilirubin that is raised in his blood explains the dark urine?
+    options:
+      - It is conjugated with glucuronic acid and water soluble
+      - It is unconjugated and bound to albumin
+      - It is biliverdin, which is green
+      - It is stercobilin reabsorbed from the colon
+      - It is unconjugated and water insoluble
+    answer: 0
+    why:
+      - "Right. Obstruction backs up direct (conjugated) bilirubin, which is water soluble and so appears in urine; no bile reaching the gut gives pale stools."
+      - "Unconjugated bilirubin rides on albumin and is not filtered into urine."
+      - "Biliverdin is the green intermediate reduced to bilirubin; it is not what darkens urine here."
+      - "Stercobilin stays in feces and gives stool its brown color."
+      - "Water-insoluble (indirect) bilirubin cannot pass into urine."
+    src: { page: 382, quote: "Direct bilirubin: conjugated with glucuronic acid; water soluble (dissolves in water)." }
+    status: unverified

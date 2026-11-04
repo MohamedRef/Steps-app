@@ -1,0 +1,463 @@
+schema: steps.lesson/v1
+lecture: gi.L03
+lessons:
+  - id: gi.L03.lesson1
+    title: "هرمونات الهضم: مين بيقول للمعدة تشتغل ومين بيقولها تقف"
+    hook: "كل هرمون ليه خلية ومكان ومنبّه، وكل سؤال بيلف حوالين واحد منهم"
+    minutes: 10
+    pages: [378, 378]
+    topics: [gi-regulatory-substances]
+    goals:
+      - "تعرف مصدر كل هرمون وأهم أفعاله"
+      - "تفهم ليه الـ PPI والـ atrophic gastritis بيرفعوا الـ gastrin"
+      - "تعرف الـ VIPoma واستخدامات الـ octreotide"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ gastrin: بنزين الحمض"
+        text: |-
+          بيطلع من ==G cells== في الـ antrum والـ duodenum. بيعمل 3 حاجات: يزوّد الـ H+، ويزوّد حركة المعدة، ويكبّر الـ mucosa.
+
+          **بيزيد** مع: انتفاخ المعدة أو قلة الحموضة، الـ amino acids والـ peptides، والـ vagus (عن طريق **GRP**).
+          **بيقل** لما الـ pH يوصل **أقل من 1.5**: المعدة بتقول "كفاية حمض".
+        page: 378
+        quote: "↑ by stomach distention/ alkalinization, amino acids, peptides, vagal stimulation via gastrin-releasing peptide (GRP) ↓ by pH <1.5"
+      - kind: reveal
+        prompt: "ليه مريض واخد PPI سنين، أو عنده atrophic gastritis، الـ gastrin بتاعه عالي؟"
+        answer: "الـ brake الطبيعي للـ gastrin هو الحمض نفسه (pH < 1.5). لو الحمض قل (PPI، أو الـ parietal cells اتدمرت في الـ atrophic gastritis)، الـ G cells مش بتلاقي اللي يوقفها ← ==gastrin عالي==. الفرق في الـ **Zollinger-Ellison**: الـ gastrin عالي جداً (↑↑) **مع** حمض كتير، لأن الورم مش بيسمع الكلام."
+        page: 378
+        quote: "↑ by chronic PPI use ↑ in chronic atrophic gastritis (eg, H pylori) ↑↑ in Zollinger-Ellison syndrome (gastrinoma)"
+      - kind: explain
+        title: "الـ ghrelin: هرمون الجوع"
+        text: |-
+          من المعدة، بيزوّد الشهية. الكتاب بيقولك **"ghrowlin' stomach"** (المعدة بتكركر).
+          - عالي: وإنت ==صايم==، وفي **Prader-Willi syndrome** (عشان كده عندهم جوع مش بيخلص).
+          - واطي: بعد الأكل، وبعد **gastric bypass** (وده جزء من سبب نزول الوزن).
+        page: 378
+        quote: "Ghrelin Stomach ↑ appetite (“ghrowlin’ stomach”) ↑ in fasting state ↓ by food ↑ in Prader-Willi syndrome ↓ after gastric bypass surgery"
+      - kind: explain
+        title: "الـ somatostatin: الفرامل العامة"
+        text: |-
+          من الـ ==D cells== (في الـ islets والـ GI mucosa). بيقلل تقريباً كل حاجة: الحمض والـ pepsinogen، إفراز البنكرياس والأمعاء، انقباض المرارة، والـ insulin والـ glucagon. الكتاب بيسميها **somato-stasis**.
+
+          بيزيد مع **الحمض** (feedback)، وبيقل مع الـ **vagus** (الـ vagus عايز الهضم يشتغل).
+
+          الـ **octreotide** هو الـ analog بتاعه: acromegaly و carcinoid syndrome و VIPoma و variceal bleeding.
+        page: 378
+        quote: "Octreotide is an analog used to treat acromegaly, carcinoid syndrome, VIPoma, and variceal bleeding"
+      - kind: check
+        question: "Which hormone is increased by acid and decreased by vagal stimulation?"
+        options:
+          - "Somatostatin"
+          - "Gastrin"
+          - "Ghrelin"
+          - "Motilin"
+        answer: 0
+        why:
+          - "صح: الحمض بيشغّل الفرامل (somatostatin)، والـ vagus بيشيلها."
+          - "الـ gastrin بيقل مع الحمض وبيزيد مع الـ vagus: العكس بالظبط."
+          - "الـ ghrelin بيزيد مع الصيام."
+          - "الـ motilin بيزيد مع الصيام."
+        page: 378
+        quote: "↑ by acid ↓ by vagal stimulation"
+      - kind: table
+        title: "التلاتي بتاع الـ duodenum"
+        columns: ["Hormone", "Cell", "Trigger", "Main actions"]
+        rows:
+          - ["CCK", "I cells", "Fatty acids, amino acids", "↑ pancreatic secretion, ↑ gallbladder contraction, ↓ gastric emptying, relaxes sphincter of Oddi"]
+          - ["Secretin", "S cells", "Acid, fatty acids in duodenum", "↑ pancreatic HCO3-, ↓ gastric acid, ↑ bile"]
+          - ["GIP", "K cells", "Fatty acids, amino acids, oral glucose", "↓ gastric H+, ↑ insulin"]
+        hide: [[0, 1], [1, 1], [1, 3], [2, 1]]
+        page: 378
+        quote: "Secretin S cells (duodenum) ↑ pancreatic HCO – 3 secretion ↓ gastric acid secretion ↑ bile secretion"
+      - kind: reveal
+        prompt: "ليه الـ secretin بالذات بيزوّد الـ bicarbonate؟"
+        answer: "لأن اللي بيشغّله هو ==الحمض في الـ duodenum==. الـ HCO3- بيعادل الحمض ده عشان الـ pancreatic enzymes تشتغل (مش بتشتغل في pH حمضي). يعني الـ secretin هو طفاية الحريق بتاعة الـ duodenum."
+        page: 378
+        quote: "↑ neutralizes gastric acid in duodenum, allowing pancreatic enzymes to function"
+      - kind: aside
+        tone: exam
+        text: "سؤال كلاسيكي: ليه الـ glucose بالبق بيطلّع insulin أكتر من نفس الكمية في الوريد؟ لأن الـ oral glucose بيشغّل الـ ==GIP== من الـ K cells، والـ GIP بيزوّد الـ insulin."
+        page: 378
+        quote: "Oral glucose load ↑ insulin compared to IV equivalent due to GIP secretion"
+      - kind: explain
+        title: "الـ motilin والـ VIP والـ NO"
+        text: |-
+          - **Motilin**: من الأمعاء الدقيقة، بيعمل الـ ==migrating motor complexes== (الكنّاسة اللي بتنضف الأمعاء بين الوجبات)، عالي وإنت صايم. الـ **erythromycin** بيشتغل على الـ receptor بتاعه وبيحرك الأمعاء.
+          - **VIP**: بيزوّد إفراز المية والأملاح، ويرخّي العضل والـ sphincters، ويقلل الحمض. الـ **VIPoma** بتعمل **WDHA**: Watery Diarrhea و Hypokalemia و Achlorhydria.
+          - **NO**: بيرخّي العضل، ومنها الـ **LES**. لو الـ NO راح، الـ LES يفضل مقفول = ==achalasia==.
+        page: 378
+        quote: "VIPoma—non-α, non-β islet cell pancreatic tumor that secretes VIP; associated with Watery Diarrhea, Hypokalemia, Achlorhydria (WDHA syndrome)"
+      - kind: match
+        prompt: "وصّل كل هرمون بفعله المميز"
+        pairs:
+          - ["Ghrelin", "↑ appetite"]
+          - ["Motilin", "Migrating motor complexes"]
+          - ["CCK", "Gallbladder contraction"]
+          - ["GIP", "↑ insulin release"]
+          - ["Nitric oxide", "LES relaxation"]
+        why: "افتكرهم بالقصة: جعان (ghrelin)، صايم والأمعاء بتتنضف (motilin)، أكلت دهون فالمرارة بتنقبض (CCK)، أكلت سكر فالـ insulin يطلع (GIP)، والـ LES بيفتح عشان الأكل يعدّي (NO)."
+        page: 378
+        quote: "Motilin Small intestine Produces migrating motor complexes (MMCs) ↑ in fasting state"
+      - kind: check
+        question: "A patient with watery diarrhea, hypokalemia and achlorhydria has a pancreatic tail mass. What is secreted?"
+        options:
+          - "VIP"
+          - "Gastrin"
+          - "Somatostatin"
+          - "Secretin"
+        answer: 0
+        why:
+          - "صح: WDHA = VIPoma، ورم islet cells مش alpha ولا beta."
+          - "الـ gastrinoma بيعمل حمض كتير، مش achlorhydria."
+          - "الـ somatostatinoma بيقلل الإفراز، مش بيعمل watery diarrhea بالشكل ده."
+          - "مش ده الورم اللي الكتاب بيربطه بالـ WDHA."
+        page: 378
+        quote: "associated with Watery Diarrhea, Hypokalemia, Achlorhydria (WDHA syndrome)"
+      - kind: try
+        items: [gi.L03.001, gi.L03.004, gi.L03.005, gi.L03.008, gi.L03.011]
+    recap:
+      - "Gastrin من G cells؛ بيقل مع pH < 1.5، فبيعلى مع الـ PPI والـ atrophic gastritis، وجداً في ZES."
+      - "Ghrelin جوع؛ عالي في الصيام و Prader-Willi، واطي بعد bypass."
+      - "Somatostatin فرامل؛ octreotide للـ acromegaly و carcinoid و VIPoma و varices."
+      - "CCK (I) مرارة؛ secretin (S) bicarbonate؛ GIP (K) insulin؛ motilin MMCs؛ VIP ← WDHA؛ NO ← achalasia."
+    practice: [gi.L03.001, gi.L03.002, gi.L03.003, gi.L03.004, gi.L03.005, gi.L03.006, gi.L03.007, gi.L03.008, gi.L03.009, gi.L03.010, gi.L03.011, gi.L03.012, gi.L03.013, gi.L03.014, gi.L03.015, gi.L03.016, gi.L03.017, gi.L03.018]
+  - id: gi.L03.lesson2
+    title: "المعدة والبنكرياس بيفرزوا إيه"
+    hook: "الحمض بيطلع بتلات مفاتيح، والـ trypsin هو اللي بيفتح الباقي"
+    minutes: 8
+    pages: [379, 380]
+    topics: [gi-secretory-products, secretory-cell-locations, pancreatic-secretions]
+    goals:
+      - "تعرف التلات منبهات والأربع موانع للحمض"
+      - "تفهم إن الـ gastrin بيشتغل أساساً عن طريق الـ ECL cells"
+      - "تعرف أي enzymes بتطلع شغالة وأيها zymogens، ودور الـ enterokinase"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ parietal cell: حمض و intrinsic factor"
+        text: |-
+          الـ **parietal cell** بتعمل حاجتين: ==HCl== و ==intrinsic factor== (البروتين اللي بيمسك الـ B12 عشان يتمتص في الـ terminal ileum).
+
+          **منبّهات الحمض** (3): histamine، والـ vagus (ACh)، والـ gastrin.
+          **موانعه** (4): somatostatin، و GIP، و prostaglandin، و secretin.
+        page: 379
+        quote: "↓ stomach pH ↑ by histamine, vagal stimulation (ACh), gastrin ↓ by somatostatin, GIP, prostaglandin, secretin"
+      - kind: reveal
+        prompt: "لو المناعة دمرت الـ parietal cells، إيه اللي هيحصل؟"
+        answer: "هتخسر الحاجتين: الحمض ← **chronic gastritis**، والـ intrinsic factor ← مفيش امتصاص B12 ← ==pernicious anemia==. والخلايا دي شكلها بينك (eosinophilic) في الـ histology."
+        page: 379
+        quote: "Autoimmune destruction of parietal cells (pink/ eosinophilic histology) → chronic gastritis and pernicious anemia"
+      - kind: explain
+        title: "الـ chief cell والـ bicarbonate"
+        text: |-
+          - **Chief cells**: بتعمل **pepsinogen**، وبيتحول لـ ==pepsin== في وجود الـ H+. بيزيد مع الـ vagus والحمض المحلي.
+          - **Bicarbonate**: من الـ mucosal cells (المعدة والـ duodenum والغدد اللعابية والبنكرياس) ومن **Brunner glands**. بيزيد مع الـ secretin، وفي المعدة بيتحبس جوّه طبقة الـ mucus عشان يحمي الحيطة.
+        page: 379
+        quote: "Pepsinogen (inactive) is converted to pepsin (active) in the presence of H+"
+      - kind: figure
+        title: "الـ gastrin بيشتغل من ورا الـ ECL"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="gi3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="60" width="80" height="44" rx="8"/>
+            <text x="50" y="80" class="t-sm t-b" text-anchor="middle">G cell</text>
+            <text x="50" y="96" class="t-sm" text-anchor="middle">gastrin</text>
+            <rect class="fg-acc" x="140" y="60" width="80" height="44" rx="8"/>
+            <text x="180" y="80" class="t-sm t-b" text-anchor="middle">ECL cell</text>
+            <text x="180" y="96" class="t-sm" text-anchor="middle">histamine</text>
+            <rect class="fg-good" x="270" y="60" width="80" height="44" rx="8"/>
+            <text x="310" y="80" class="t-sm t-b" text-anchor="middle">parietal</text>
+            <text x="310" y="96" class="t-sm" text-anchor="middle">HCl</text>
+            <line class="fg-arrow-acc" x1="90" y1="82" x2="138" y2="82" marker-end="url(#gi3a)" stroke-width="3"/>
+            <line class="fg-arrow-acc" x1="220" y1="82" x2="268" y2="82" marker-end="url(#gi3a)" stroke-width="3"/>
+            <path class="fg-thin" d="M50 60 C 120 10, 240 10, 310 58" fill="none"/>
+            <text x="180" y="24" class="t-sm t-mut" text-anchor="middle">direct effect: minor</text>
+            <text x="180" y="140" class="t-sm" text-anchor="middle">H2 blockers stop the main path</text>
+          </svg>
+        caption: "الـ gastrin بيرفع الحمض أساساً عن طريق إنه يخلي الـ ECL cells تطلّع histamine، مش عن طريق الـ parietal cell على طول. عشان كده الـ H2 blocker بيقلل مفعول الـ gastrin."
+        alt: "G cell releases gastrin, which acts mainly on the ECL cell to release histamine, which drives the parietal cell to make HCl; a dashed line shows a minor direct effect of gastrin on the parietal cell."
+        page: 380
+        quote: "Gastrin ↑ acid secretion primarily through its effects on enterochromaffin-like (ECL) cells (leading to histamine release) rather than through its direct effect on parietal cells."
+      - kind: sort
+        prompt: "كل خلية مكانها فين؟"
+        bins: ["Stomach fundus/body", "Stomach antrum", "Duodenum"]
+        cards:
+          - { text: "Parietal cells", bin: 0 }
+          - { text: "Chief cells", bin: 0 }
+          - { text: "ECL cells", bin: 0 }
+          - { text: "G cells", bin: 1 }
+          - { text: "S cells (secretin)", bin: 2 }
+          - { text: "I cells (CCK)", bin: 2 }
+          - { text: "K cells (GIP)", bin: 2 }
+        why: "اللي بيعمل الحمض (parietal و ECL) والـ pepsinogen (chief) في الـ fundus والـ body. الـ antrum فيه الـ G cells اللي بتتحكم فيهم. والـ duodenum فيه الخلايا اللي بتحس بالأكل اللي وصل (S و I و K)."
+        page: 380
+        quote: "I cells S cells K cells Chief cells Parietal cells G cells ECL cells Mucous cells D cells"
+      - kind: explain
+        title: "عصير البنكرياس"
+        text: |-
+          سائل **isotonic**. التركيب بيتغير مع السرعة: ==low flow ← Cl⁻ عالي==، و ==high flow ← HCO3⁻ عالي==.
+
+          - **α-amylase** (نشويات) و **lipases** (دهون): بيطلعوا ==شغالين على طول==.
+          - **Proteases** (trypsin و chymotrypsin و elastase و carboxypeptidases A و B): بيطلعوا **zymogens** (مقفولين). منطقي: لو طلعوا شغالين هيهضموا البنكرياس نفسه.
+          - الـ dipeptides والـ tripeptides بيتكسروا جوّه خلايا الـ mucosa.
+        page: 380
+        quote: "Proteases Protein digestion Includes trypsin, chymotrypsin, elastase, carboxypeptidases A and B Secreted as proenzymes also called zymogens"
+      - kind: order
+        prompt: "رتّب تشغيل الـ proteases"
+        steps:
+          - "Trypsinogen reaches the duodenum"
+          - "Enterokinase on the brush border converts it to trypsin"
+          - "Trypsin activates the other proenzymes"
+          - "Trypsin cleaves more trypsinogen into trypsin (positive feedback)"
+        why: "الـ enterokinase هو المفتاح الأول، وموجود في الـ duodenum والـ jejunum بس، يعني بعيد عن البنكرياس. بعد كده الـ trypsin بيفتح الباقي وبيفتح نفسه."
+        page: 380
+        quote: "Converted to trypsin by enterokinase/ enteropeptidase, a brush-border enzyme on duodenal and jejunal mucosa"
+      - kind: check
+        question: "Which pancreatic enzyme is secreted in its active form?"
+        options:
+          - "Lipase"
+          - "Trypsinogen"
+          - "Chymotrypsinogen"
+          - "Procarboxypeptidase"
+        answer: 0
+        why:
+          - "صح: الـ lipase والـ amylase بيطلعوا شغالين."
+          - "الـ trypsinogen zymogen ومحتاج enterokinase."
+          - "الـ chymotrypsinogen zymogen ومحتاج trypsin."
+          - "الـ procarboxypeptidases zymogens."
+        page: 380
+        quote: "Lipases Lipid digestion Secreted in active form"
+      - kind: try
+        items: [gi.L03.019, gi.L03.020, gi.L03.025, gi.L03.029, gi.L03.030]
+    recap:
+      - "الحمض: ↑ histamine و ACh و gastrin؛ ↓ somatostatin و GIP و prostaglandin و secretin."
+      - "Parietal cells: HCl و intrinsic factor؛ دمارها ← pernicious anemia."
+      - "الـ gastrin أساساً عن طريق ECL ← histamine."
+      - "البنكرياس: low flow Cl⁻، high flow HCO3⁻؛ amylase و lipase شغالين، proteases zymogens، enterokinase بيبدأ."
+    practice: [gi.L03.019, gi.L03.020, gi.L03.021, gi.L03.022, gi.L03.023, gi.L03.024, gi.L03.025, gi.L03.026, gi.L03.027, gi.L03.028, gi.L03.029, gi.L03.030, gi.L03.031, gi.L03.032]
+  - id: gi.L03.lesson3
+    title: "الامتصاص: السكر والفيتامينات والـ IgA"
+    hook: "Iron fist, Bro: تلات كلمات بيقولولك كل حاجة بتتمص فين"
+    minutes: 8
+    pages: [381, 381]
+    topics: [carbohydrate-absorption, vitamin-mineral-absorption, peyer-patches]
+    goals:
+      - "تعرف الـ transporters بتوع السكر"
+      - "تستخدم الـ D-xylose test تفرّق بين mucosal و pancreatic"
+      - "تعرف مكان امتصاص الحديد والـ folate والـ B12"
+      - "تشرح الـ Peyer patches والـ IgA"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "السكر داخل الـ enterocyte"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="gi3b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="110" y="20" width="140" height="140" rx="10"/>
+            <text x="180" y="95" class="t-sm t-b" text-anchor="middle">enterocyte</text>
+            <text x="20" y="16" class="t-sm t-mut">lumen (apical)</text>
+            <text x="354" y="16" class="t-sm t-mut" text-anchor="end">blood (basolateral)</text>
+            <rect class="fg-acc" x="98" y="40" width="26" height="30" rx="4"/>
+            <text x="20" y="60" class="t-sm">Glc, Gal + Na+</text>
+            <text x="111" y="85" class="t-sm t-acc" text-anchor="middle">SGLT1</text>
+            <rect class="fg-good" x="98" y="110" width="26" height="30" rx="4"/>
+            <text x="20" y="130" class="t-sm">Fructose</text>
+            <text x="111" y="155" class="t-sm t-good" text-anchor="middle">GLUT5</text>
+            <rect class="fg-acc" x="236" y="75" width="26" height="30" rx="4"/>
+            <text x="249" y="122" class="t-sm t-acc" text-anchor="middle">GLUT2</text>
+            <line class="fg-arrow-acc" x1="262" y1="90" x2="330" y2="90" marker-end="url(#gi3b)"/>
+            <text x="272" y="80" class="t-sm">all three</text>
+          </svg>
+        caption: "الـ glucose والـ galactose بيدخلوا مع الـ Na+ من SGLT1، والـ fructose بيدخل بـ facilitated diffusion من GLUT5. التلاتة بيطلعوا للدم من GLUT2."
+        alt: "Enterocyte with SGLT1 taking glucose and galactose with sodium and GLUT5 taking fructose on the luminal side, and GLUT2 releasing all three into blood on the basolateral side."
+        page: 381
+        quote: "Glucose and galactose are taken up by SGLT1 (Na+ dependent). Fructose is taken up via facilitated diffusion by GLUT5. All are transported to blood by GLUT2."
+      - kind: explain
+        title: "الـ D-xylose test"
+        text: |-
+          الـ enterocyte بيمص ==monosaccharides بس==. الـ **D-xylose** سكر بسيط مش محتاج هضم، بيتمص passive في أول الأمعاء.
+
+          فالاختبار بيسأل سؤال واحد: الـ mucosa سليمة ولا لأ؟
+          - **واطي** في الدم والبول ← ==mucosal damage== (زي celiac).
+          - **طبيعي** ← المشكلة في الهضم مش الامتصاص: **pancreatic insufficiency**.
+        page: 381
+        quote: "D-xylose test: simple sugar that is passively absorbed in proximal small intestine; blood and urine levels ↓ with mucosal damage, normal in pancreatic insufficiency."
+      - kind: check
+        question: "A patient with steatorrhea has a normal D-xylose test. Where is the problem?"
+        options:
+          - "Pancreatic insufficiency"
+          - "Celiac disease of the proximal bowel"
+          - "Loss of SGLT1"
+          - "Terminal ileum resection"
+        answer: 0
+        why:
+          - "صح: الـ mucosa سليمة، فالمشكلة إن الأكل مش بيتهضم: البنكرياس."
+          - "الـ celiac بيبوظ الـ mucosa فالـ D-xylose يقل."
+          - "الـ D-xylose بيتمص passive مش بالـ SGLT1."
+          - "الـ D-xylose بيتمص في الأول، مش الـ terminal ileum."
+        page: 381
+        quote: "normal in pancreatic insufficiency."
+      - kind: mnemonic
+        word: "IFB"
+        parts:
+          - { key: "I", text: "Iron: duodenum, as Fe2+" }
+          - { key: "F", text: "Folate: duodenum and jejunum" }
+          - { key: "B", text: "B12: terminal ileum, with bile salts, needs intrinsic factor" }
+        hook: "Iron fist, Bro: بالترتيب من فوق لتحت في الأمعاء، تحشيشة الكتاب."
+        page: 381
+        quote: "Iron absorbed as Fe2+ in duodenum. Folates absorbed in duodenum and jejunum. Vitamin B12 absorbed in terminal ileum along with bile salts, requires intrinsic factor."
+      - kind: reveal
+        prompt: "مريض اتشال منه الـ terminal ileum. إيه الـ deficiency اللي لازم تعوّضه؟"
+        answer: "==B12==: بيتمص في الـ terminal ileum مع الـ bile salts وبالـ intrinsic factor. الكتاب بيقول إنه محتاج supplementation. وعموماً أي small bowel disease أو resection أو short bowel أو bariatric surgery ممكن يعمل نقص فيتامينات ومعادن."
+        page: 381
+        quote: "Vitamin and mineral deficiencies may develop in patients with small bowel disease, bowel resection, intestinal failure (also called short bowel syndrome), or bariatric surgery"
+      - kind: aside
+        tone: tip
+        text: "**Dumping syndrome**: أكل hyperosmolar (غالباً مسكّر) بينزل من المعدة للأمعاء ==بسرعة زيادة==. بيحصل غالباً بعد عمليات المعدة أو المريء، لأن الـ pylorus مش بيتحكم في التفريغ زي الأول."
+        page: 381
+        quote: "Dumping syndrome—hyperosmolar food (often sugary) moves too quickly from the stomach to small intestine. Typically occurs after stomach or esophageal surgery."
+      - kind: explain
+        title: "الـ Peyer patches: نقطة تفتيش"
+        text: |-
+          lymphoid tissue مش متغلف في الـ lamina propria والـ submucosa بتاعة الـ **ileum**.
+
+          فيها ==M cells== (Microfold) بتاخد عينة من اللي في الـ lumen وتعرضها على الـ immune cells.
+
+          الـ B cells بتتنشط في الـ germinal centers وتبقى **IgA plasma cells** قاعدة في الـ lamina propria. الـ IgA بياخد **secretory component** ويتنقل عبر الـ epithelium للـ lumen. الكتاب: IgA = ==Intra-gut Antibody==.
+        page: 381
+        quote: "B cells stimulated in germinal centers of Peyer patches differentiate into IgA-secreting plasma cells, which ultimately reside in lamina propria."
+      - kind: check
+        question: "What do M cells in Peyer patches do?"
+        options:
+          - "Sample luminal antigens and present them to immune cells"
+          - "Secrete IgA into the lumen"
+          - "Secrete defensins and lysozyme"
+          - "Absorb vitamin B12"
+        answer: 0
+        why:
+          - "صح: M cells = Microfold، بتاخد عينة وتعرضها على الـ iMmune cells."
+          - "الـ IgA بيعمله الـ plasma cells، وبيعدّي عبر الـ epithelium بالـ secretory component."
+          - "الـ defensins من الـ Paneth cells."
+          - "الـ B12 بيمصه الـ enterocytes في الـ terminal ileum."
+        page: 381
+        quote: "Contain specialized Microfold (M) cells that sample and present antigens to iMmune cells."
+      - kind: try
+        items: [gi.L03.033, gi.L03.035, gi.L03.037, gi.L03.042, gi.L03.043]
+    recap:
+      - "Monosaccharides بس؛ SGLT1 (glucose و galactose مع Na+)، GLUT5 (fructose)، GLUT2 للدم."
+      - "D-xylose واطي = mucosa؛ طبيعي = بنكرياس."
+      - "Iron fist, Bro: iron duodenum، folate duodenum و jejunum، B12 terminal ileum."
+      - "Peyer patches في الـ ileum، M cells بتعرض، IgA بيتفرز للـ lumen."
+    practice: [gi.L03.033, gi.L03.034, gi.L03.035, gi.L03.036, gi.L03.037, gi.L03.038, gi.L03.039, gi.L03.040, gi.L03.041, gi.L03.042, gi.L03.043, gi.L03.044]
+  - id: gi.L03.lesson4
+    title: "الصفرا والـ bilirubin: ليه البراز بني والبول أصفر"
+    hook: "رحلة الـ heme من كرة دم حمرا لحد لون البراز"
+    minutes: 8
+    pages: [382, 382]
+    topics: [bile, bilirubin]
+    goals:
+      - "تعرف مكونات الصفرا ووظايفها"
+      - "تشرح ليه مرض الـ ileum بيعمل oxalate stones"
+      - "ترسم رحلة الـ bilirubin وتفرّق direct من indirect"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الصفرا متكونة من إيه"
+        text: |-
+          bile salts، phospholipids، cholesterol، bilirubin، مية وأملاح.
+
+          الـ **bile salts** = bile acids متوصلة بـ ==glycine أو taurine==، وده اللي بيخليها تدوب في المية.
+          الـ rate-limiting step في تصنيعها: ==cholesterol 7α-hydroxylase==.
+        page: 382
+        quote: "Cholesterol 7α-hydroxylase catalyzes rate-limiting step of bile acid synthesis."
+      - kind: explain
+        title: "الصفرا بتعمل إيه"
+        text: |-
+          - **هضم وامتصاص الدهون** والـ fat-soluble vitamins.
+          - **إخراج الـ bilirubin والـ cholesterol**: دي الطريقة الأساسية اللي الجسم بيتخلص بيها منهم.
+          - **Antimicrobial**: بتكسر الـ membranes.
+        page: 382
+        quote: "Digestion and absorption of lipids and fat- soluble vitamins Bilirubin and cholesterol excretion (body’s 1° means of elimination) Antimicrobial activity (via membrane disruption)"
+      - kind: reveal
+        prompt: "مريض Crohn في الـ terminal ileum جاله kidney stone. إيه العلاقة؟"
+        answer: |-
+          - الـ ileum مش بيمص الـ bile salts ← الدهون مش بتتمص (وممكن bile acid diarrhea).
+          - الدهون اللي فاضلة في الـ lumen بتمسك الـ **calcium**.
+          - الـ calcium كان المفروض يمسك الـ **oxalate**؛ دلوقتي الـ oxalate حر فبيتمص ← ==calcium oxalate stones==.
+        page: 382
+        quote: "Calcium, which normally binds oxalate, binds fat instead, so free oxalate is absorbed by gut → ↑ frequency of calcium oxalate kidney stones."
+      - kind: figure
+        title: "رحلة الـ bilirubin"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="gi3c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="10" width="100" height="40" rx="8"/>
+            <text x="60" y="28" class="t-sm t-b" text-anchor="middle">RBC → heme</text>
+            <text x="60" y="44" class="t-sm" text-anchor="middle">macrophage</text>
+            <rect class="fg-acc" x="130" y="10" width="100" height="40" rx="8"/>
+            <text x="180" y="28" class="t-sm t-b" text-anchor="middle">unconjugated</text>
+            <text x="180" y="44" class="t-sm" text-anchor="middle">on albumin</text>
+            <rect class="fg-good" x="250" y="10" width="100" height="40" rx="8"/>
+            <text x="300" y="28" class="t-sm t-b" text-anchor="middle">liver</text>
+            <text x="300" y="44" class="t-sm" text-anchor="middle">UDP-GT conjugates</text>
+            <line class="fg-arrow-acc" x1="110" y1="30" x2="128" y2="30" marker-end="url(#gi3c)"/>
+            <line class="fg-arrow-acc" x1="230" y1="30" x2="248" y2="30" marker-end="url(#gi3c)"/>
+            <rect class="fg-box" x="250" y="80" width="100" height="40" rx="8"/>
+            <text x="300" y="98" class="t-sm t-b" text-anchor="middle">gut bacteria</text>
+            <text x="300" y="114" class="t-sm" text-anchor="middle">urobilinogen</text>
+            <line class="fg-arrow-acc" x1="300" y1="50" x2="300" y2="78" marker-end="url(#gi3c)"/>
+            <text x="306" y="68" class="t-sm t-mut">bile</text>
+            <rect class="fg-box" x="250" y="150" width="100" height="40" rx="8"/>
+            <text x="300" y="168" class="t-sm t-b" text-anchor="middle">80% feces</text>
+            <text x="300" y="184" class="t-sm" text-anchor="middle">stercobilin, brown</text>
+            <line class="fg-arrow-acc" x1="300" y1="120" x2="300" y2="148" marker-end="url(#gi3c)"/>
+            <rect class="fg-box" x="70" y="120" width="140" height="40" rx="8"/>
+            <text x="140" y="138" class="t-sm t-b" text-anchor="middle">20% reabsorbed</text>
+            <text x="140" y="154" class="t-sm" text-anchor="middle">90% liver · 10% kidney</text>
+            <line class="fg-arrow-acc" x1="250" y1="100" x2="212" y2="130" marker-end="url(#gi3c)"/>
+            <text x="140" y="190" class="t-sm" text-anchor="middle">urine: urobilin, yellow</text>
+          </svg>
+        caption: "الـ heme ← biliverdin (أخضر) ← bilirubin (أصفر بني). بيمشي في الدم على albumin، الكبد بيعمله conjugation ويطلعه في الصفرا. بكتيريا الأمعاء بتعمله urobilinogen: أغلبه بيخرج في البراز stercobilin (اللون البني)، وجزء بيتمص تاني، ومنه شوية بيخرج في البول urobilin (اللون الأصفر)."
+        alt: "Flow: RBC heme in macrophage, unconjugated bilirubin on albumin, liver conjugation by UDP-glucuronosyltransferase, bile to gut bacteria making urobilinogen; 80% excreted in feces as stercobilin, 20% reabsorbed (90% back to liver, 10% to kidney as urobilin in urine)."
+        page: 382
+        quote: "Heme is metabolized by heme oxygenase to biliverdin (green), which is subsequently reduced to bilirubin (yellow-brown). Unconjugated bilirubin is removed from blood by liver, conjugated with glucuronate, and excreted in bile."
+      - kind: table
+        title: "Direct ولا indirect؟"
+        columns: ["", "Direct", "Indirect"]
+        rows:
+          - ["Conjugated?", "Yes, with glucuronic acid", "No"]
+          - ["Water soluble?", "Yes", "No"]
+          - ["Can appear in urine?", "Yes", "No (bound to albumin)"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2]]
+        page: 382
+        quote: "Direct bilirubin: conjugated with glucuronic acid; water soluble (dissolves in water). Indirect bilirubin: unconjugated; water insoluble."
+      - kind: aside
+        tone: exam
+        text: "بول غامق وبراز فاتح؟ ده ==direct (conjugated)== bilirubin راجع للدم بسبب انسداد: بيدوب في المية فبيعدّي في البول، ومفيش صفرا واصلة للأمعاء فمفيش stercobilin يلوّن البراز."
+        page: 382
+        quote: "Excreted in feces as stercobilin ( brown color of stool) Excreted in urine as urobilin ( yellow color of urine)"
+      - kind: check
+        question: "Which form of bilirubin can pass into the urine?"
+        options:
+          - "Conjugated (direct)"
+          - "Unconjugated (indirect)"
+          - "Biliverdin bound to albumin"
+          - "Stercobilin"
+        answer: 0
+        why:
+          - "صح: الـ conjugated بيدوب في المية."
+          - "الـ unconjugated مش بيدوب في المية وماشي على الـ albumin."
+          - "الـ biliverdin بيتحول لـ bilirubin، ومش ده اللي بيطلع في البول."
+          - "الـ stercobilin في البراز."
+        page: 382
+        quote: "Direct bilirubin: conjugated with glucuronic acid; water soluble (dissolves in water)."
+      - kind: try
+        items: [gi.L03.046, gi.L03.047, gi.L03.048, gi.L03.050, gi.L03.051]
+    recap:
+      - "Bile salts = bile acids + glycine أو taurine؛ 7α-hydroxylase هو الـ rate-limiting."
+      - "الصفرا: دهون وفيتامينات، إخراج الـ bilirubin والـ cholesterol، و antimicrobial."
+      - "مرض الـ ileum ← دهون تمسك الـ calcium ← oxalate يتمص ← calcium oxalate stones."
+      - "Heme ← biliverdin ← bilirubin؛ direct = conjugated وبيدوب، indirect = unconjugated ومش بيدوب."
+      - "Stercobilin بني في البراز، urobilin أصفر في البول."
+    practice: [gi.L03.045, gi.L03.046, gi.L03.047, gi.L03.048, gi.L03.049, gi.L03.050, gi.L03.051, gi.L03.052, gi.L03.053]

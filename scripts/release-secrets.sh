@@ -13,6 +13,10 @@
 # | STEPS_MAC_CERT_P12              | ~/.steps/steps-codesign.p12, base64 (just mac-codesign-cert) |
 # | STEPS_MAC_CERT_PASSWORD         | Keychain steps-codesign                         |
 #
+# It also sets the repo *variable* STEPS_ANDROID_CERT_SHA256 (the release
+# certificate's public fingerprint, not a secret): both Android workflows
+# refuse to publish an APK signed with any other key.
+#
 # The values go from the Keychain straight into `gh secret set` on stdin:
 # never into a file in the repo, an argument list or the terminal.
 # Needs gh (logged in with access to the repo), a JDK (keytool) and cargo.
@@ -37,15 +41,27 @@ if [ ! -f "$HOME/.steps/steps-codesign.p12" ]; then
   scripts/mac-codesign-cert.sh
 fi
 
+cert_sha256="$(STEPS_KS_PASS="$(security find-generic-password -s steps-android -w)" \
+  keytool -list -v -keystore "$HOME/.steps/steps-release.jks" -alias steps -storepass:env STEPS_KS_PASS \
+  | sed -n 's/^[[:space:]]*SHA256: *//p' | tr -d ':' | tr 'A-F' 'a-f')"
+[[ "$cert_sha256" =~ ^[0-9a-f]{64}$ ]] || { echo "could not read the release certificate's SHA-256" >&2; exit 1; }
+
 put() { gh secret set "$1" --repo "$repo" >/dev/null && echo "set $1"; }
 printf %s "$(security find-generic-password -s steps-update -w)" | put STEPS_UPDATE_SECRET
 base64 < "$HOME/.steps/steps-release.jks" | tr -d '\n' | put STEPS_ANDROID_KEYSTORE
 printf %s "$(security find-generic-password -s steps-android -w)" | put STEPS_ANDROID_KEYSTORE_PASSWORD
 base64 < "$HOME/.steps/steps-codesign.p12" | tr -d '\n' | put STEPS_MAC_CERT_P12
 printf %s "$(security find-generic-password -s steps-codesign -w)" | put STEPS_MAC_CERT_PASSWORD
+gh variable set STEPS_ANDROID_CERT_SHA256 --repo "$repo" --body "$cert_sha256" && echo "set variable STEPS_ANDROID_CERT_SHA256"
 gh secret list --repo "$repo"
 
 echo
-echo "Done. Commit crates/app/update-key.pub if it changed:"
-grep -v '^#' crates/app/update-key.pub
-echo "Back up ~/.steps/ and the Keychain items steps-update, steps-android, steps-codesign together."
+echo "Done. The release certificate is $cert_sha256."
+if git diff --quiet -- crates/app/update-key.pub; then
+  echo "crates/app/update-key.pub is unchanged."
+else
+  echo "The update key is new. Paste this line in the Steps chat so it lands in a PR"
+  echo "(or commit crates/app/update-key.pub yourself through a PR):"
+  grep -v '^#' crates/app/update-key.pub
+fi
+echo "Next: just release-keys-backup (one encrypted copy of every key; keep it in two places)."
