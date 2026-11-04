@@ -1,0 +1,539 @@
+schema: steps.lesson/v1
+lecture: cvs.L05
+lessons:
+  - id: cvs.L05.lesson1
+    title: "أدوية الضغط والذبحة: مين بيوسّع إيه؟"
+    hook: "الـ nitrates بتوسّع الأوردة، والـ hydralazine الشرايين، والـ nitroprusside الاتنين. لو عرفت مين بيوسّع إيه هتعرف الـ side effects لوحدك."
+    minutes: 10
+    pages: [321, 323]
+    topics: [deep-venous-thrombosis, hypertension-treatment, nitrates, calcium-channel-blockers, hydralazine, hypertensive-emergency, antianginal-therapy]
+    goals:
+      - "تختار دوا الضغط حسب المرض اللي معاه"
+      - "تفهم الـ nitrates والـ CCBs شغالين فين في الـ smooth muscle"
+      - "تعرف ليه الـ nitrates والـ β-blockers أحسن مع بعض"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ DVT في دقيقة"
+        text: |-
+          جلطة في وريد عميق ← تورم واحمرار وسخونية ووجع. السبب: ==Virchow triad (SHE)==: Stasis، Hypercoagulability، Endothelial damage.
+
+          - الخطر الأكبر للـ PE من الأوردة ==الـ proximal== (femoral و iliac و popliteal)؛ جلطة السمانة أقل وغالباً بتروح لوحدها.
+          - الـ D-dimer يستبعد لو الاحتمال قليل أو متوسط (sensitivity عالية). التشخيص: ==compression ultrasound with Doppler==.
+          - العلاج: heparin أو LMWH (enoxaparin) للوقاية والحالة الحادة، والـ direct anticoagulants (rivaroxaban, apixaban) للعلاج الطويل.
+        page: 321
+        quote: "DVT → PE risk highest in proximal veins (femoral, iliac, popliteal). Distal calf DVT less likely to embolize; often resolve spontaneously."
+      - kind: table
+        title: "الضغط مع مرض تاني"
+        columns: ["With", "Use", "Avoid / note"]
+        rows:
+          - ["Heart failure", "ACEi/ARB, β-blockers (compensated), aldosterone antagonists, diuretics", "β-blockers cautiously in decompensated HF; not in cardiogenic shock"]
+          - ["Diabetes", "ACEi/ARB, CCBs, thiazides, β-blockers", "ACEi/ARB protect against nephropathy"]
+          - ["Asthma", "ARBs, CCBs, thiazides, cardioselective β-blockers", "No nonselective β-blockers; no ACEi (cough confusion)"]
+          - ["Pregnancy", "Hydralazine, methyldopa, labetalol, nifedipine", "Hypertensive moms love nifedipine"]
+          - ["Gout", "ACEi, CCBs, ARBs (especially losartan)", "No loop or thiazide diuretics"]
+          - ["Osteoporosis", "Thiazides", "They ↑ Ca2+ reabsorption"]
+        hide: [[1, 2], [2, 2], [3, 1], [4, 2], [5, 1]]
+        page: 321
+        quote: "Hydralazine, methyldopa, labetalol, nifedipine. Hypertensive moms love nifedipine."
+      - kind: check
+        question: "A 30-year-old woman with asthma needs a drug for hypertension. Which should be avoided because it could make her cough hard to interpret?"
+        options: ["Lisinopril", "Losartan", "Amlodipine", "Hydrochlorothiazide"]
+        answer: 0
+        why:
+          - "صح: الـ ACE inhibitors بيعملوا كحة، فمش هتعرف الكحة من الدوا ولا من الربو."
+          - "الـ ARBs مسموحة في الربو."
+          - "الـ CCBs مسموحة."
+          - "الـ thiazides مسموحة."
+        page: 321
+        quote: "Avoid ACE inhibitors to prevent confusion between drug- or asthma-related cough."
+      - kind: aside
+        tone: trap
+        text: "**Pheochromocytoma**: ==α-blockade الأول== (phentolamine أو phenoxybenzamine) قبل الـ β-blocker وقبل العملية. لو بدأت بالـ β-blocker الـ α هيبقى لوحده ← hypertensive crisis."
+        page: 321
+        quote: "Phentolamine, phenoxybenzamine (α-blockade first) prior to resection and β-blockade. Avoid β-blockade first to mitigate unopposed α-mediated hypertensive crisis."
+      - kind: figure
+        title: "الـ smooth muscle: الـ Ca2+ بيقلّص والـ cGMP بيرخّي"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="cvs5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker><marker id="cvs5b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="20" width="100" height="36" rx="6"/><text x="22" y="43" class="t-b">L-type Ca2+</text>
+            <path class="fg-arrow-bad" d="M60 56 L60 96" marker-end="url(#cvs5b)"/>
+            <rect class="fg-bad" x="10" y="98" width="100" height="36" rx="6"/><text x="20" y="121" class="t-b">contraction</text>
+            <text x="10" y="160" class="t-sm t-bad">CCBs block here</text>
+            <rect class="fg-box" x="200" y="10" width="150" height="30" rx="6"/><text x="210" y="30" class="t-sm">Nitrates, nitroprusside: NO</text>
+            <path class="fg-arrow" d="M275 40 L275 62" marker-end="url(#cvs5a)"/>
+            <rect class="fg-box" x="200" y="64" width="150" height="30" rx="6"/><text x="210" y="84" class="t-sm">Guanylate cyclase</text>
+            <path class="fg-arrow" d="M275 94 L275 116" marker-end="url(#cvs5a)"/>
+            <rect class="fg-box" x="200" y="118" width="150" height="30" rx="6"/><text x="235" y="138" class="t-b">↑ cGMP</text>
+            <path class="fg-arrow" d="M275 148 L275 170" marker-end="url(#cvs5a)"/>
+            <text x="225" y="190" class="t-b">relaxation</text>
+            <text x="140" y="78" class="t-sm t-mut">hydralazine</text>
+            <text x="140" y="92" class="t-sm t-mut">↑ cGMP too</text>
+          </svg>
+        caption: "الـ CCBs بتقفل باب الـ Ca2+ فالعضلة ماتنقبضش. الـ nitrates والـ nitroprusside بيدّوا NO ← guanylate cyclase ← cGMP ← العضلة ترتخي. الـ hydralazine كمان بيعلّي الـ cGMP."
+        alt: "Smooth muscle cell pathways: on the left, L-type calcium channels lead to contraction and calcium channel blockers act there; on the right, nitrates and nitroprusside give NO, which activates guanylate cyclase, raising cGMP and causing relaxation; hydralazine also raises cGMP."
+        page: 322
+        quote: "Vasodilate by ↑ NO in vascular smooth muscle → ↑ in cGMP and smooth muscle relaxation."
+      - kind: explain
+        title: "الـ nitrates: أوردة أكتر بكتير من الشرايين"
+        text: |-
+          الـ nitroglycerin والـ isosorbide بيوسّعوا ==veins >> arteries== ← الدم يتحوّش في الأوردة ← ==↓ preload== ← القلب يشتغل أقل.
+
+          - الاستخدام: angina و ACS و pulmonary edema.
+          - الـ side effects: reflex tachycardia (علاجها β-blocker)، methemoglobinemia، hypotension، flushing، صداع.
+          - **Monday disease**: عمال المصانع بيتعودوا طول الأسبوع، والتعوّد يروح في الويك إند، فيوم الاتنين صداع ودوخة وtachycardia.
+        page: 322
+        quote: "Dilate veins >> arteries. ↓ preload. ClINICAl uSE Angina, ACS, pulmonary edema."
+      - kind: reveal
+        prompt: "ليه الـ nitrates ممنوعة في الـ RV infarction والـ HCM ومع الـ sildenafil؟"
+        answer: "التلاتة ==محتاجين preload==. الـ RV المتعور مايقدرش يضخ غير لو مليان، والـ HCM لو الـ LV فضي الـ obstruction بيزيد، والـ sildenafil (PDE-5 inhibitor) بيعلّي الـ cGMP هو كمان فالضغط يقع جامد."
+        page: 322
+        quote: "Contraindicated in right ventricular infarction, hypertrophic cardiomyopathy, and with concurrent PDE-5 inhibitor use."
+      - kind: explain
+        title: "الـ CCBs: شرايين ولا قلب؟"
+        text: |-
+          كلهم بيقفلوا الـ L-type Ca2+ channels، لكن كل واحد له مكانه:
+          - **Dihydropyridines** (amlodipine, nifedipine، ...): ==شرايين==. للضغط والـ angina (حتى الـ vasospastic) والـ Raynaud. الـ nimodipine للـ subarachnoid hemorrhage، والـ nicardipine والـ clevidipine للـ hypertensive emergency.
+          - **Non-dihydropyridines** (verapamil, diltiazem): ==قلب==. للضغط والـ angina والـ rate control في الـ AF.
+
+          الترتيب على القلب: verapamil > diltiazem > amlodipine = nifedipine، وعلى الأوعية العكس.
+        page: 323
+        quote: "Vascular smooth muscle—amlodipine = nifedipine > diltiazem > verapamil. Heart—verapamil > diltiazem > amlodipine = nifedipine."
+      - kind: sort
+        prompt: "ده side effect الـ dihydropyridine ولا الـ non-dihydropyridine؟"
+        bins: ["Dihydropyridine", "Nondihydropyridine"]
+        cards:
+          - { text: "Peripheral edema", bin: 0 }
+          - { text: "Flushing", bin: 0 }
+          - { text: "Dizziness", bin: 0 }
+          - { text: "AV block", bin: 1 }
+          - { text: "Constipation", bin: 1 }
+          - { text: "Hyperprolactinemia (verapamil)", bin: 1 }
+        why: "الـ dihydropyridine بيوسّع الشرايين فبيعمل edema وflushing ودوخة. الـ non-DHP بيهدّي القلب فبيعمل cardiac depression وAV block، والـ verapamil بيعمل إمساك وhyperprolactinemia. والاتنين بيعملوا gingival hyperplasia."
+        page: 323
+        quote: "Dihydropyridine: peripheral edema, flushing, dizziness. Nondihydropyridine: cardiac depression, AV block, hyperprolactinemia (verapamil), constipation."
+      - kind: explain
+        title: "الـ hydralazine والـ hypertensive emergency"
+        text: |-
+          **Hydralazine**: ↑ cGMP، بيوسّع ==arterioles > veins== (afterload). آمن في الحمل، ومع nitrate في الـ HF. بيعمل reflex tachycardia فبيتدّي مع β-blocker، وممنوع في الـ angina. وبيعمل ==drug-induced lupus==.
+
+          **Hypertensive emergency**: labetalol أو clevidipine أو fenoldopam أو nicardipine أو nitroprusside.
+          - **Nitroprusside**: قصير، arteries = veins، بيطلّع NO مباشرة، وبيطلّع ==cyanide==.
+          - **Fenoldopam**: D1 agonist ← توسيع الأوعية الكلوية وغيرها ← ↓ BP و ↑ natriuresis.
+        page: 323
+        quote: "Short acting vasodilator (arteries = veins); via direct release of NO. Can cause cyanide toxicity (releases cyanide)."
+      - kind: check
+        question: "A man with a hypertensive emergency gets an IV infusion of a short-acting drug that releases NO and dilates arteries and veins equally. Two days later he is confused with lactic acidosis. Which toxicity?"
+        options: ["Cyanide", "Methemoglobinemia only", "Drug-induced lupus", "Hyperkalemia"]
+        answer: 0
+        why:
+          - "صح: الـ nitroprusside بيطلّع cyanide."
+          - "الـ methemoglobinemia من الـ nitrates."
+          - "الـ lupus من الـ hydralazine."
+          - "مش من الـ nitroprusside."
+        page: 323
+        quote: "Can cause cyanide toxicity (releases cyanide)."
+      - kind: table
+        title: "الـ nitrates والـ β-blockers: كل واحد بيغطي على عيب التاني"
+        columns: ["Component", "Nitrates", "β-blockers", "Both"]
+        rows:
+          - ["End-diastolic volume", "↓", "No effect or ↑", "No effect or ↓"]
+          - ["Contractility", "↑ (reflex)", "↓", "Little/no effect"]
+          - ["Heart rate", "↑ (reflex)", "↓", "No effect or ↓"]
+          - ["Ejection time", "↓", "↑", "Little/no effect"]
+          - ["MVO2", "↓", "↓", "↓↓"]
+        hide: [[1, 1], [2, 1], [0, 2], [4, 3]]
+        page: 323
+        quote: "Goal is reduction of myocardial O2 consumption (MVO2) by 1 or more of the determinants of MVO2: end-diastolic volume, BP, HR, contractility."
+      - kind: aside
+        tone: exam
+        text: "الـ verapamil والـ diltiazem ==زي الـ β-blockers== في الجدول ده (بيقللوا الـ HR والـ contractility)."
+        page: 323
+        quote: "Nondihydropyridine calcium channel blockers (verapamil, diltiazem) are similar to β-blockers in effect."
+      - kind: try
+        items: [cvs.L05.005, cvs.L05.009, cvs.L05.014, cvs.L05.026, cvs.L05.029]
+    recap:
+      - "DVT: SHE، الـ proximal أخطر، compression US، heparin/LMWH ثم DOAC."
+      - "ربو: لا nonselective β ولا ACEi. حمل: hydralazine وmethyldopa وlabetalol وnifedipine. Pheo: α الأول."
+      - "Nitrates: أوردة ← ↓ preload، ممنوعة مع RV infarct وHCM وsildenafil."
+      - "DHP: شرايين (edema). Non-DHP: قلب (AV block، إمساك)."
+      - "Hydralazine: lupus. Nitroprusside: cyanide. Nitrate + β-blocker = ↓↓ MVO2."
+    practice: [cvs.L05.001, cvs.L05.002, cvs.L05.003, cvs.L05.004, cvs.L05.005, cvs.L05.006, cvs.L05.007, cvs.L05.008, cvs.L05.009, cvs.L05.010, cvs.L05.011, cvs.L05.012, cvs.L05.013, cvs.L05.014, cvs.L05.015, cvs.L05.016, cvs.L05.017, cvs.L05.018, cvs.L05.019, cvs.L05.020, cvs.L05.021, cvs.L05.022, cvs.L05.023, cvs.L05.024, cvs.L05.025, cvs.L05.026, cvs.L05.027, cvs.L05.028, cvs.L05.029]
+  - id: cvs.L05.lesson2
+    title: "الكوليسترول: كل دوا بيضرب فين؟"
+    hook: "الـ statins والـ resins والـ PCSK9 inhibitors بيوصلوا لنفس النتيجة بطرق مختلفة: كبد عايز LDL receptors أكتر."
+    minutes: 9
+    pages: [324, 325]
+    topics: [ranolazine, sacubitril, lipid-lowering-agents]
+    goals:
+      - "تعرف الـ ranolazine والـ sacubitril وليه الـ sacubitril مايتاخدش مع ACEi"
+      - "تحط كل دوا كوليسترول في مكانه: كبد ولا أمعاء ولا دهون ولا دم"
+      - "تربط كل دوا بالـ side effect المميز بتاعه"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ ranolazine: ذبحة من غير ما تلمس الضغط"
+        text: |-
+          بيقفل ==الـ late phase من الـ inward Na+ current== ← توتر جدار القلب في الـ diastole يقل ← استهلاك الـ O2 يقل.
+
+          الميزة: ==مابيغيّرش الـ HR ولا الـ BP==، فبيتدّي في الـ refractory angina لما الـ β-blocker والـ nitrate يكونوا وصلوا آخرهم. الـ side effects: إمساك ودوخة وصداع وغثيان و QT prolongation.
+        page: 324
+        quote: "Inhibits the late phase of inward sodium current thereby reducing diastolic wall tension and oxygen consumption. Does not affect heart rate or blood pressure."
+      - kind: figure
+        title: "الـ sacubitril/valsartan"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="cvs5c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker><marker id="cvs5d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="20" width="130" height="34" rx="6"/><text x="20" y="42" class="t-sm">Natriuretic peptides</text>
+            <rect class="fg-box" x="10" y="100" width="130" height="34" rx="6"/><text x="30" y="122" class="t-sm">Angiotensin II</text>
+            <rect class="fg-bad" x="170" y="60" width="90" height="34" rx="6"/><text x="180" y="82" class="t-sm">Neprilysin</text>
+            <path class="fg-arrow" d="M140 37 L168 70" marker-end="url(#cvs5c)"/>
+            <path class="fg-arrow" d="M140 117 L168 86" marker-end="url(#cvs5c)"/>
+            <text x="270" y="82" class="t-sm t-mut">inactive</text>
+            <text x="170" y="52" class="t-sm t-bad">sacubitril ✕</text>
+            <path class="fg-arrow" d="M75 54 L75 70" marker-end="url(#cvs5c)"/>
+            <text x="80" y="68" class="t-sm">vasodilation, ↓ ECF</text>
+            <path class="fg-arrow-bad" d="M75 134 L75 150" marker-end="url(#cvs5d)"/>
+            <text x="80" y="160" class="t-sm t-bad">AT1 ✕ valsartan</text>
+          </svg>
+        caption: "الـ neprilysin بيكسّر الـ natriuretic peptides والـ angiotensin II (والـ bradykinin). الـ sacubitril بيقفله فالـ peptides تزيد (توسيع، ↓ ECF)، والـ angiotensin II يزيد هو كمان، فالـ valsartan بيقفل الـ receptor بتاعه."
+        alt: "Neprilysin breaks down natriuretic peptides and angiotensin II into inactive products. Sacubitril blocks neprilysin, so natriuretic peptides cause vasodilation and lower ECF volume, while valsartan blocks the angiotensin II receptor."
+        page: 324
+        quote: "A neprilysin inhibitor; prevents degradation of bradykinin, natriuretic peptides, angiotensin II, and substance P"
+      - kind: check
+        question: "A patient with HFrEF on enalapril is started on sacubitril/valsartan without stopping enalapril. Which complication is most feared?"
+        options: ["Angioedema", "Cyanide toxicity", "Torsades de pointes", "Gingival hyperplasia"]
+        answer: 0
+        why:
+          - "صح: الاتنين بيعلّوا الـ bradykinin ← angioedema."
+          - "الـ cyanide من الـ nitroprusside."
+          - "الـ torsades من الـ drugs اللي بتطوّل الـ QT."
+          - "الـ gingival hyperplasia من الـ CCBs."
+        page: 324
+        quote: "contraindicated with ACE inhibitors due to angioedema (both drugs ↑ bradykinin)"
+      - kind: figure
+        title: "أدوية الكوليسترول على الخريطة"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="10" y="10" width="160" height="80" rx="8"/><text x="70" y="28" class="t-b">Liver</text>
+            <text x="18" y="48" class="t-sm">HMG-CoA reductase: statins</text>
+            <text x="18" y="64" class="t-sm">LDL receptor ↑: PCSK9 inhibitors</text>
+            <text x="18" y="80" class="t-sm">↓ VLDL: niacin, fish oil</text>
+            <rect class="fg-box" x="190" y="10" width="160" height="80" rx="8"/><text x="235" y="28" class="t-b">Intestine</text>
+            <text x="198" y="48" class="t-sm">Brush border: ezetimibe</text>
+            <text x="198" y="64" class="t-sm">Bile acid reabsorption:</text>
+            <text x="198" y="80" class="t-sm">resins</text>
+            <rect class="fg-box" x="10" y="105" width="160" height="70" rx="8"/><text x="50" y="123" class="t-b">Adipose</text>
+            <text x="18" y="143" class="t-sm">↓ lipolysis (HSL): niacin</text>
+            <rect class="fg-box" x="190" y="105" width="160" height="70" rx="8"/><text x="245" y="123" class="t-b">Blood</text>
+            <text x="198" y="143" class="t-sm">LPL ↑ (PPAR-α): fibrates</text>
+            <text x="198" y="159" class="t-sm">→ ↑ TG clearance</text>
+          </svg>
+        caption: "الـ statins والـ PCSK9 inhibitors في الكبد، والـ ezetimibe والـ resins في الأمعاء، والـ niacin في الدهون، والـ fibrates بتشغّل الـ LPL في الدم."
+        alt: "Four boxes: liver (statins inhibit HMG-CoA reductase, PCSK9 inhibitors raise LDL receptors, niacin and fish oil lower VLDL), intestine (ezetimibe at the brush border, resins block bile acid reabsorption), adipose tissue (niacin lowers lipolysis by hormone-sensitive lipase) and blood (fibrates upregulate LPL through PPAR-alpha, raising triglyceride clearance)."
+        page: 325
+        quote: "Activate PPAR-α → upregulate LPL → ↑ TG clearance"
+      - kind: explain
+        title: "الـ statins والـ resins والـ ezetimibe"
+        text: |-
+          - **Statins**: بتقفل ==HMG-CoA reductase== ← كوليسترول الكبد يقل ← الكبد يطلّع LDL receptors أكتر ← LDL الدم يقل (↓↓↓). بتقلل الوفيات في الـ CAD. الـ side effects: ↑ LFTs و ==myopathy== (خصوصاً مع fibrates أو niacin).
+          - **Bile acid resins**: بتمسك الـ bile acids في الأمعاء ← الكبد يحرق كوليسترول يعمل bile جديد ← نفس النتيجة. بتعمل GI upset و ==↓ امتصاص الأدوية والـ fat-soluble vitamins==، وبتعلّي الـ TG شوية.
+          - **Ezetimibe**: بيمنع امتصاص الكوليسترول عند الـ brush border.
+        page: 324
+        quote: "Hepatotoxicity (↑ LFTs), myopathy (especially when used with fibrates or niacin)"
+      - kind: reveal
+        prompt: "الـ statin والـ resin شغالين في أماكن مختلفة. إيه اللي بيخليهم يوصلوا لنفس النتيجة؟"
+        answer: "الاتنين بيقللوا ==الكوليسترول جوه خلية الكبد==. الكبد بيعوّض بإنه يعمل LDL receptors أكتر ويسحب الـ LDL من الدم. الـ statin بيمنع التصنيع، والـ resin بيخلي الكبد يصرف كوليسترول في عمل bile."
+        page: 324
+        quote: "Disrupt enterohepatic bile acid circulation → compensatory ↑ conversion of cholesterol to bile → ↓ intrahepatic cholesterol → ↑ LDL receptor recycling"
+      - kind: explain
+        title: "الـ fibrates والـ niacin والـ PCSK9 والـ fish oil"
+        text: |-
+          - **Fibrates**: PPAR-α ← ↑ LPL ← ==الـ TG تنزل أكتر حاجة== (↓↓↓)، و HDL يعلى. بتعمل myopathy وcholesterol gallstones (بتقفل 7α-hydroxylase).
+          - **Niacin**: بيقفل الـ lipolysis في الدهون و VLDL الكبد. ==أعلى HDL== (↑↑). بيعمل flushing وhyperglycemia وhyperuricemia.
+          - **PCSK9 inhibitors** (alirocumab, evolocumab): بتمنع تكسير الـ LDL receptor ← LDL ↓↓↓. مالهاش CYP، فتداخلاتها قليلة.
+          - **Fish oil**: TG تنزل في الجرعات العالية؛ غثيان وطعم سمك.
+        page: 325
+        quote: "Inhibits lipolysis (hormone-sensitive lipase) in adipose tissue; reduces hepatic VLDL synthesis"
+      - kind: match
+        prompt: "وصّل كل دوا بالـ side effect أو الميزة بتاعته"
+        pairs:
+          - ["Fibrates", "Cholesterol gallstones"]
+          - ["Niacin", "Prostaglandin-mediated flushing"]
+          - ["PCSK9 inhibitors", "No CYP metabolism, minimal interactions"]
+          - ["Fish oil", "Fishlike taste"]
+        why: "الـ fibrates بتقفل الـ 7α-hydroxylase فالكوليسترول مابيتحولش لـ bile acid والمرارة تتملي حصوات. والـ niacin flushing بيقل بالـ NSAIDs أو مع الوقت."
+        page: 325
+        quote: "Myopathy (↑ risk with statins), cholesterol gallstones (via inhibition of cholesterol 7α-hydroxylase)"
+      - kind: table
+        title: "مين بيعمل إيه في الـ lipids؟"
+        columns: ["Drug", "LDL", "HDL", "Triglycerides"]
+        rows:
+          - ["Fibrates", "↓", "↑", "↓↓↓"]
+          - ["Niacin", "↓↓", "↑↑", "↓"]
+          - ["PCSK9 inhibitors", "↓↓↓", "↑", "↓"]
+          - ["Fish oil", "↑ slightly", "↑ slightly", "↓ at high doses"]
+        hide: [[0, 3], [1, 2], [2, 1], [3, 3]]
+        page: 325
+        quote: "Lipid-lowering agents (continued) dRUG ldl Hdl TRIGlYCERIdES MECHANISM AdvERSE EFFECTS"
+      - kind: check
+        question: "A man starts niacin to raise his HDL. Each dose turns his face red and warm. What reduces it?"
+        options: ["An NSAID such as aspirin before the dose", "Adding gemfibrozil", "Adding a β-blocker", "Doubling the dose at once"]
+        answer: 0
+        why:
+          - "صح: الـ flushing من الـ prostaglandins، فالـ NSAIDs بتقلله، وبيقل كمان مع الاستخدام الطويل."
+          - "الـ fibrates مالهاش دعوة بالـ flushing."
+          - "الـ β-blockers مش بتمنعه."
+          - "مضاعفة الجرعة هتزوده."
+        page: 325
+        quote: "Flushed face (prostaglandin mediated; ↓ by NSAIDs or long-term use)"
+      - kind: try
+        items: [cvs.L05.032, cvs.L05.036, cvs.L05.049, cvs.L05.050, cvs.L05.051]
+    recap:
+      - "Ranolazine: late Na+ current، مابيغيّرش HR ولا BP، QT prolongation."
+      - "Sacubitril: neprilysin، دايماً مع valsartan، لا مع ACEi (angioedema)."
+      - "Statins وresins وPCSK9: كبد عايز LDL receptors أكتر. Statin + fibrate/niacin = myopathy."
+      - "Fibrates: TG وحصوات. Niacin: HDL وflushing وسكر ويوريك. Resins: فيتامينات A D E K."
+    practice: [cvs.L05.030, cvs.L05.031, cvs.L05.032, cvs.L05.033, cvs.L05.034, cvs.L05.035, cvs.L05.036, cvs.L05.037, cvs.L05.038, cvs.L05.039, cvs.L05.040, cvs.L05.041, cvs.L05.042, cvs.L05.043, cvs.L05.044, cvs.L05.045, cvs.L05.046, cvs.L05.047, cvs.L05.048, cvs.L05.049, cvs.L05.050, cvs.L05.051]
+  - id: cvs.L05.lesson3
+    title: "الديجوكسين والـ class I و II"
+    hook: "الديجوكسين بيقفل مضخة صغيرة فيقوّي القلب كله. والـ class I كلها Na+ blockers، بس كل واحد بقوة مختلفة."
+    minutes: 10
+    pages: [326, 327]
+    topics: [digoxin, class-i-antiarrhythmics, class-ii-antiarrhythmics]
+    goals:
+      - "تفهم الديجوكسين بيعلّي الـ Ca2+ إزاي، وإيه اللي بيخليه يسمّم"
+      - "تفرّق بين IA و IB و IC في القوة والاستخدام والـ side effects"
+      - "تعرف الـ β-blockers كـ antiarrhythmics وعلاج الـ overdose"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الديجوكسين: اقفل المضخة، يعلى الكالسيوم"
+        text: |-
+          بيقفل ==Na+/K+-ATPase== مباشرة ← الـ Na+ يتجمع جوه ← الـ Na+/Ca2+ exchanger مايلاقيش فرق يشتغل بيه ← ==الـ Ca2+ يفضل جوه== ← انقباض أقوى.
+
+          وكمان بيشغّل الـ vagus ← ↓ HR. عشان كده بيتدّي في الـ HF (↑ contractility) وفي الـ AF (يبطّأ الـ AV node).
+        page: 326
+        quote: "Direct inhibition of Na+/K+-ATPase → indirect inhibition of Na+/Ca2+ exchanger"
+      - kind: figure
+        title: "ليه قفل مضخة الصوديوم بيقوّي القلب؟"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="cvs5e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-ink" x="20" y="20" width="320" height="130" rx="20" fill="none"/>
+            <rect class="fg-bad" x="40" y="5" width="110" height="30" rx="6"/><text x="48" y="25" class="t-sm">Na+/K+-ATPase ✕</text>
+            <text x="40" y="52" class="t-sm t-bad">digoxin</text>
+            <rect class="fg-box" x="210" y="5" width="110" height="30" rx="6"/><text x="218" y="25" class="t-sm">Na+/Ca2+ exch ↓</text>
+            <text x="60" y="85" class="t-b">↑ Na+ inside</text>
+            <path class="fg-arrow" d="M150 80 L210 80" marker-end="url(#cvs5e)"/>
+            <text x="220" y="85" class="t-b">↑↑ Ca2+</text>
+            <path class="fg-arrow" d="M250 92 L250 118" marker-end="url(#cvs5e)"/>
+            <text x="190" y="138" class="t-sm">↑ TnC binding → ↑ contraction</text>
+          </svg>
+        caption: "المضخة واقفة ← الصوديوم يزيد جوه ← الـ exchanger اللي بيطلّع Ca2+ مقابل Na+ يكسل ← الكالسيوم يزيد ويمسك في الـ troponin C ← انقباض أقوى."
+        alt: "A cardiac myocyte: digoxin blocks the Na+/K+-ATPase, intracellular sodium rises, the Na+/Ca2+ exchanger slows, intracellular calcium rises, more calcium binds troponin C, and contraction increases."
+        page: 326
+        quote: "Direct inhibition of Na+/K+-ATPase → indirect inhibition of Na+/Ca2+ exchanger"
+      - kind: explain
+        title: "سُمّية الديجوكسين"
+        text: |-
+          - **الأعراض**: cholinergic (غثيان، ترجيع، إسهال)، ==رؤية صفرا== («van Glow»)، arrhythmias، و atrial tachycardia with AV block. والـ ==hyperkalemia== علامة إن الحالة وحشة.
+          - **اللي بيسهّلها**: renal failure، hypokalemia، أدوية بتزقه من أماكنه، وأدوية بتقلل الـ clearance: ==verapamil و amiodarone و quinidine==.
+          - **العلاج**: ظبّط الـ K+ بالراحة، pacer، anti-digoxin Fab، و Mg2+.
+        page: 326
+        quote: "Cholinergic effects (nausea, vomiting, diarrhea), blurry yellow vision (“van Glow”), arrhythmias, atrial tachycardia with AV block."
+      - kind: check
+        question: "A patient on digoxin starts furosemide and becomes toxic with normal renal function. Which change most likely explains it?"
+        options: ["Hypokalemia lets more digoxin bind the pump", "Hyperkalemia lets more digoxin bind the pump", "Furosemide blocks digoxin excretion", "Furosemide raises vagal tone"]
+        answer: 0
+        why:
+          - "صح: الـ K+ والديجوكسين بيتنافسوا على نفس المكان في المضخة؛ لو الـ K+ قليل الديجوكسين يمسك أكتر."
+          - "العكس: الـ hyperkalemia علامة سيئة لكنها مش اللي بتسهّل الربط."
+          - "مش ده الـ mechanism اللي في الكتاب."
+          - "مالوش علاقة."
+        page: 326
+        quote: "hypokalemia (permissive for digoxin binding at K+-binding site on Na+/K+-ATPase)"
+      - kind: explain
+        title: "الـ class I: Na+ blockers"
+        text: |-
+          كلهم بيقللوا ==slope الـ phase 0== ويبطّأوا التوصيل، خصوصاً في الخلايا الـ depolarized.
+
+          وشغلهم ==أقوى مع الـ HR العالي== (state dependent): القلب السريع ← diastole أقصر ← الـ Na+ channels تقعد وقت أقل في الـ resting state، وده الوقت الوحيد اللي الدوا بيسيب فيه الـ channel.
+        page: 326
+        quote: "Slow or block conduction (especially in depolarized cells). ↓ slope of phase 0 depolarization."
+      - kind: mnemonic
+        word: "CAB"
+        parts:
+          - { key: "C", text: "IC: أقوى ربط (strong)" }
+          - { key: "A", text: "IA: متوسط (moderate)" }
+          - { key: "B", text: "IB: أضعف ربط (weak)" }
+        hook: "Fast taxi CAB: التأثير أقوى في IC > IA > IB"
+        page: 326
+        quote: "Effect most pronounced in IC>IA>IB due to relative binding strength. Fast taxi CAB."
+      - kind: explain
+        title: "IA و IB"
+        text: |-
+          **IA** (quinidine, procainamide, disopyramide: «The queen proclaims Diso's pyramid»): moderate، ==↑ AP duration و ↑ QT== (فيه K+ block). لـ SVT و VT. الـ side effects: cinchonism (quinidine)، ==SLE-like== (procainamide)، HF (disopyramide)، thrombocytopenia، torsades.
+
+          **IB** (lidocaine, mexiletine: «I'd Buy Liddy's Mexican tacos»): weak، ↓ AP duration، بيحب ==الأنسجة الـ ischemic==. «IB is Best post-MI»، وللـ digitalis-induced arrhythmias. الـ side effects: CNS.
+        page: 326
+        quote: "Weak Na+ channel blockade. ↓ AP duration. Preferentially affect ischemic or depolarized Purkinje and ventricular tissue."
+      - kind: explain
+        title: "IC"
+        text: |-
+          **IC** (flecainide, propafenone: «Can I have fries, please?»): strong، بيطوّل الـ ERP في الـ AV node والـ accessory pathways، وتأثيره قليل على الـ AP duration.
+
+          للـ SVTs والـ AF. لكن ==proarrhythmic==: «IC is Contraindicated» في ==structural and ischemic heart disease==.
+        page: 327
+        quote: "Strong Na+ channel blockade. Significantly prolongs ERP in AV node and accessory bypass tracts."
+      - kind: check
+        question: "A man with a prior MI and low ejection fraction develops AF. Which drug is contraindicated?"
+        options: ["Flecainide", "Metoprolol", "Amiodarone", "Digoxin"]
+        answer: 0
+        why:
+          - "صح: الـ IC ممنوعة في الـ structural والـ ischemic heart disease."
+          - "الـ β-blockers بتتدّي بعد الـ MI وللـ rate control."
+          - "الـ amiodarone مسموح."
+          - "الديجوكسين مسموح في الـ HF والـ AF."
+        page: 327
+        quote: "Proarrhythmic, especially post-MI (contraindicated). IC is Contraindicated in structural and ischemic heart disease."
+      - kind: explain
+        title: "الـ class II: الـ β-blockers"
+        text: |-
+          ↓ cAMP و ↓ Ca2+ currents ← بيهدّوا الـ SA والـ AV node، وبيقللوا ==slope الـ phase 4== (يكتموا الـ abnormal pacemakers). الـ AV node حساس قوي ← ==↑ PR==. الـ esmolol قصير جداً.
+
+          للـ SVT، والـ rate control في الـ AF والـ flutter، ومنع الـ ventricular arrhythmias بعد الـ MI. الـ side effects: impotence، الربو والـ COPD، brady و AV block و HF، نوم، ==وبيخبّوا الـ hypoglycemia==.
+        page: 327
+        quote: "Suppress abnormal pacemakers by ↓ slope of phase 4. AV node particularly sensitive—↑ PR interval. Esmolol very short acting."
+      - kind: aside
+        tone: trap
+        text: "الـ β-blocker لوحده في الـ pheochromocytoma ← ==unopposed α1== (إلا الـ carvedilol والـ labetalol). والـ overdose علاجه **GAS**: Glucagon و Atropine و Saline."
+        page: 327
+        quote: "Treat β-blocker overdose with Glucagon, Atropine, Saline (GAS)."
+      - kind: try
+        items: [cvs.L05.058, cvs.L05.074, cvs.L05.075, cvs.L05.076, cvs.L05.084]
+    recap:
+      - "Digoxin: Na+/K+-ATPase ← ↑ Ca2+. سمّية: رؤية صفرا، hypokalemia بتسهّلها، verapamil/amiodarone/quinidine. العلاج Fab."
+      - "Class I: phase 0، أقوى مع HR عالي، CAB = IC > IA > IB."
+      - "IA: ↑ QT، lupus (procainamide)، cinchonism. IB: post-MI. IC: ممنوع في structural heart disease."
+      - "Class II: phase 4، ↑ PR، بيخبّي الـ hypoglycemia، overdose = GAS."
+    practice: [cvs.L05.052, cvs.L05.053, cvs.L05.054, cvs.L05.055, cvs.L05.056, cvs.L05.057, cvs.L05.058, cvs.L05.059, cvs.L05.060, cvs.L05.061, cvs.L05.062, cvs.L05.063, cvs.L05.064, cvs.L05.065, cvs.L05.066, cvs.L05.067, cvs.L05.068, cvs.L05.069, cvs.L05.070, cvs.L05.071, cvs.L05.072, cvs.L05.073, cvs.L05.074, cvs.L05.075, cvs.L05.076, cvs.L05.077, cvs.L05.078, cvs.L05.079, cvs.L05.080, cvs.L05.081, cvs.L05.082, cvs.L05.083, cvs.L05.084, cvs.L05.085]
+  - id: cvs.L05.lesson4
+    title: "الـ class III و IV والأدينوزين والإيفابرادين"
+    hook: "الـ class III بيطوّل الـ QT، والـ class IV بيطوّل الـ PR. والأميودارون بيعمل كل حاجة، حتى في الغدة."
+    minutes: 8
+    pages: [328, 328]
+    topics: [class-iii-antiarrhythmics, class-iv-antiarrhythmics, other-antiarrhythmics, ivabradine]
+    goals:
+      - "تحفظ الـ class III بـ AIDS وتعرف الـ amiodarone toxicity بالمنطق"
+      - "تعرف الـ class IV والأدينوزين والماغنسيوم بيتدّوا إمتى"
+      - "تفهم الإيفابرادين بيبطّأ القلب إزاي"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ class III: K+ blockers"
+        text: |-
+          **AIDS**: Amiodarone و Ibutilide و Dofetilide و Sotalol. بيقفلوا الـ K+ channels فالـ repolarization تطوّل: ==↑ AP duration و ↑ ERP و ↑ QT==.
+
+          للـ AF والـ flutter، وللـ VT (amiodarone و sotalol). الـ sotalol والـ ibutilide بيعملوا ==torsades de pointes==، والـ sotalol كمان β blockade زيادة.
+        page: 328
+        quote: "Amiodarone, Ibutilide, Dofetilide, Sotalol. AIDS. MECHANISM ↑ AP duration, ↑ ERP, ↑ QT interval."
+      - kind: figure
+        title: "الـ class III بيطوّل الـ repolarization"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-mut" x1="20" y1="130" x2="340" y2="130"/>
+            <path class="fg-ink" d="M30 130 L40 30 L55 45 C 110 45, 140 50, 165 130" fill="none" stroke-width="2.5"/>
+            <path class="fg-bad" d="M30 130 L40 30 L55 45 C 160 45, 220 50, 255 130" fill="none" stroke-width="2.5"/>
+            <text x="120" y="150" class="t-sm">normal</text>
+            <text x="230" y="150" class="t-sm t-bad">class III</text>
+            <text x="150" y="35" class="t-sm t-bad">↑ AP duration, ↑ ERP</text>
+            <text x="150" y="52" class="t-sm t-bad">→ ↑ QT</text>
+            <text x="30" y="20" class="t-sm t-mut">0 mV</text>
+          </svg>
+        caption: "الـ upstroke زي ما هو، لكن الـ repolarization (الـ IK) بتطوّل كتير ← الـ ERP يطوّل والـ QT يطوّل. وده نفسه اللي بيفتح الباب للـ torsades."
+        alt: "Two ventricular action potentials with the same upstroke; the class III one has a much longer plateau and repolarization, labeled as longer action potential duration, longer ERP and longer QT."
+        page: 328
+        quote: "Markedly prolonged repolarization (IK)"
+      - kind: explain
+        title: "الأميودارون: دوا واحد، أعضاء كتير"
+        text: |-
+          - ==Pulmonary fibrosis==، hepatotoxicity.
+          - ==Hypo أو hyperthyroidism==: 40% من وزنه iodine.
+          - Hapten: corneal deposits، وجلد أزرق رمادي مع photodermatitis.
+          - أعصاب، إمساك، brady و heart block و HF.
+
+          عشان كده ==PFTs و LFTs و TFTs== قبل وأثناء العلاج. وهو lipophilic، وله تأثير class I و II و III و IV.
+        page: 328
+        quote: "Remember to check PFTs, LFTs, and TFTs when using amiodarone. Amiodarone is lipophilic and has class I, II, III, and IV effects."
+      - kind: check
+        question: "A man on amiodarone for VT has fatigue, weight gain and a high TSH. Which property of the drug explains this?"
+        options: ["It is 40% iodine by weight", "It acts as a hapten", "It is lipophilic", "It blocks Na+ channels"]
+        answer: 0
+        why:
+          - "صح: الـ iodine الكتير بيلخبط الغدة في الاتجاهين."
+          - "الـ hapten بيفسّر الـ corneal والجلد."
+          - "الـ lipophilic بيفسّر إنه بيتخزن في الأنسجة."
+          - "الـ class I effect مالوش دعوة بالغدة."
+        page: 328
+        quote: "hypothyroidism or hyperthyroidism (amiodarone is 40% iodine by weight)"
+      - kind: explain
+        title: "الـ class IV: الـ verapamil والـ diltiazem"
+        text: |-
+          بيقفلوا الـ Ca2+ channels في الـ AV node: ==↓ conduction velocity و ↑ ERP و ↑ PR==.
+
+          للـ rate control في الـ AF والـ flutter، ومنع الـ nodal arrhythmias. الـ side effects: إمساك، ==gingival hyperplasia==، flushing، edema، و HF و AV block و sinus node depression.
+        page: 328
+        quote: "Decrease conduction velocity, ↑ ERP, ↑ PR interval."
+      - kind: match
+        prompt: "وصّل كل دوا بالـ side effect المميز"
+        pairs:
+          - ["Sotalol", "Torsades and excessive β blockade"]
+          - ["Amiodarone", "Pulmonary fibrosis, blue/gray skin"]
+          - ["Verapamil, diltiazem", "Gingival hyperplasia"]
+          - ["Adenosine", "Sense of impending doom"]
+          - ["Ivabradine", "Luminous phenomena"]
+        why: "الـ sotalol class III وβ في نفس الوقت. الأدينوزين ثواني بس لكن مخيف: flushing وألم صدر وإحساس بالموت وbronchospasm. والإيفابرادين بيعمل أنوار في العين."
+        page: 328
+        quote: "Adverse effects include flushing, hypotension, chest pain, sense of impending doom, bronchospasm."
+      - kind: explain
+        title: "الأدينوزين والماغنسيوم"
+        text: |-
+          **Adenosine**: ↑ خروج الـ K+ ← hyperpolarization، و ↓ الـ Ca2+ current ← ==الـ AV node يقف لحظة==. ده الـ drug of choice لتشخيص وإيقاف أنواع من الـ SVT، ومفعوله حوالي 15 ثانية. ==الـ theophylline والـ caffeine== بيقللوا مفعوله (adenosine receptor antagonists).
+
+          **Magnesium**: للـ ==torsades de pointes== وللـ digoxin toxicity.
+        page: 328
+        quote: "Effects blunted by theophylline and caffeine (both are adenosine receptor antagonists)."
+      - kind: check
+        question: "A patient on sotalol has runs of polymorphic VT with a twisting QRS on a long QT. She has a pulse. Which drug first?"
+        options: ["Magnesium", "Amiodarone", "Procainamide", "Ibutilide"]
+        answer: 0
+        why:
+          - "صح: الماغنسيوم فعّال في الـ torsades."
+          - "الـ amiodarone بيطوّل الـ QT أكتر."
+          - "الـ procainamide (IA) بيطوّل الـ QT."
+          - "الـ ibutilide بيعمل torsades."
+        page: 328
+        quote: "Magnesium Effective in torsades de pointes and digoxin toxicity."
+      - kind: explain
+        title: "الإيفابرادين: phase IV"
+        text: |-
+          **IVabradine** بيطوّل ==phase IV== (الـ slow depolarization) بإنه بيقفل الـ ==funny Na+ channels (If)== في الـ SA node ← HR أبطأ، من غير ما يلمس الـ contractility.
+
+          للـ chronic HFrEF. الـ side effects: luminous phenomena (أنوار في العين)، hypertension، bradycardia.
+        page: 328
+        quote: "IVabradine prolongs slow depolarization (phase “IV”) by selectively inhibiting “funny” sodium channels (If)."
+      - kind: aside
+        tone: exam
+        text: "ملخص سريع: class I = phase 0 (Na+)، class II = phase 4 و ↑ PR، class III = ↑ QT، class IV = ↑ PR. والأميودارون ==class I و II و III و IV== مع بعض."
+        page: 328
+        quote: "Amiodarone is lipophilic and has class I, II, III, and IV effects."
+      - kind: try
+        items: [cvs.L05.092, cvs.L05.093, cvs.L05.096, cvs.L05.101, cvs.L05.105]
+    recap:
+      - "Class III (AIDS): ↑ QT. Sotalol وibutilide: torsades."
+      - "Amiodarone: رئة، كبد، غدة (iodine)، جلد أزرق، قرنية. افحص PFTs وLFTs وTFTs."
+      - "Class IV: ↑ PR، إمساك، gingival hyperplasia."
+      - "Adenosine: 15 ثانية، الـ caffeine بيقلله. Mg: torsades وdigoxin. Ivabradine: If، أنوار في العين."
+    practice: [cvs.L05.086, cvs.L05.087, cvs.L05.088, cvs.L05.089, cvs.L05.090, cvs.L05.091, cvs.L05.092, cvs.L05.093, cvs.L05.094, cvs.L05.095, cvs.L05.096, cvs.L05.097, cvs.L05.098, cvs.L05.099, cvs.L05.100, cvs.L05.101, cvs.L05.102, cvs.L05.103, cvs.L05.104, cvs.L05.105]

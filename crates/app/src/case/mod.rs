@@ -70,17 +70,23 @@ pub fn effective(store: Option<&StudyStoreHandle>, item: &Item) -> Item {
 
 fn items_in_library(kind: &str) -> Vec<(&'static str, &'static Item)> {
     let lib = Library::get();
-    lib.index
+    let all = lib
+        .index
         .lectures
         .iter()
         .filter_map(|e| lib.lectures.get(&e.id))
-        .flat_map(|l| l.items.iter().map(move |i| (lib.title(&l.lecture), i)))
-        .filter(|(_, i)| i.body.kind() == kind && i.status != Status::Rejected)
-        .collect()
+        .flat_map(|l| l.items.iter().map(move |i| (lib.title(&l.lecture), i)));
+    #[cfg(test)]
+    let all = all.chain(tests::extra());
+    all.filter(|(_, i)| i.body.kind() == kind && i.status != Status::Rejected).collect()
 }
 
 /// The lecture title and the item, by item id.
 pub fn find_item(id: &str) -> Option<(&'static str, &'static Item)> {
+    #[cfg(test)]
+    if let Some(found) = tests::extra().find(|(_, i)| i.id == id) {
+        return Some(found);
+    }
     let lib = Library::get();
     let lecture = id.rsplit_once('.').map(|(l, _)| l)?;
     let lec = lib.lectures.get(lecture)?;
@@ -323,4 +329,4 @@ pub fn record(
 }
 
 #[cfg(test)]
-mod tests;
+pub(crate) mod tests;

@@ -357,20 +357,20 @@ mod tests {
         git(root, &["rev-parse", "HEAD"]).unwrap().trim().to_owned()
     }
 
-    const ONE: &str = "- kind: new\n  ar_eg: درس جديد عن الكبد\n  en: A new liver lesson\n";
-    const TWO: &str = "- kind: new\n  ar_eg: درس جديد عن الكبد\n  en: A new liver lesson\n- kind: fixed\n  ar_eg: الصورة بقت أوضح\n";
+    const ONE: &str = "- kind: new\n  ar_eg: درس جديد عن الصمامات\n  en: A new heart valves lesson\n";
+    const TWO: &str = "- kind: new\n  ar_eg: درس جديد عن الصمامات\n  en: A new heart valves lesson\n- kind: fixed\n  ar_eg: الصورة بقت أوضح\n";
 
     #[test]
     fn the_gate_wants_a_new_line() {
         let dir = repo();
         let root = dir.path();
         let step = |files: &[(&str, Option<&str>)]| step(root, files);
-        let base = step(&[("changes/liver.yaml", Some(ONE))]);
+        let base = step(&[("changes/cvs-valves.yaml", Some(ONE))]);
         // A comment or whitespace edit adds nothing.
-        step(&[("changes/liver.yaml", Some(&format!("# note\n{ONE}")))]);
+        step(&[("changes/cvs-valves.yaml", Some(&format!("# note\n{ONE}")))]);
         assert!(gate(root, &base).is_err());
         // An append counts, even when the file is renamed on the way.
-        step(&[("changes/liver.yaml", None), ("changes/hepar.yaml", Some(TWO))]);
+        step(&[("changes/cvs-valves.yaml", None), ("changes/cvs-valves-2.yaml", Some(TWO))]);
         let lines = gate(root, &base).unwrap();
         assert_eq!(lines.iter().map(|c| c.text.ar_eg.as_str()).collect::<Vec<_>>(), ["الصورة بقت أوضح"]);
         assert_eq!(collect(root, Some(&base)).unwrap().len(), 1);
@@ -470,5 +470,75 @@ mod tests {
         let n = notes_from(&c);
         assert_eq!(n.ar_eg, "حاجة جديدة\nحاجة اتصلحت");
         assert_eq!(n.en, "A new thing\nحاجة اتصلحت");
+    }
+
+    #[test]
+    fn lines_must_be_short_and_single() {
+        let long = "ب".repeat(MAX_CHARS + 1);
+        let e = parse(&format!("- kind: new\n  ar_eg: {long}\n")).unwrap_err();
+        assert_eq!(e, format!("ar_eg is {} characters (at most {MAX_CHARS})", MAX_CHARS + 1));
+        let e = parse("- kind: new\n  ar_eg: \"سطر\\nتاني\"\n").unwrap_err();
+        assert_eq!(e, "ar_eg is more than one line");
+        let e = parse("- kind: new\n  ar_eg: \"\"\n").unwrap_err();
+        assert_eq!(e, "ar_eg is empty");
+        assert!(parse("- kind: new\n  ar_eg: صمامات\n  note: x\n").is_err(), "unknown keys are refused");
+    }
+
+    #[test]
+    fn commits_without_a_file_fall_back_to_retro_or_their_title() {
+        let dir = repo();
+        let root = dir.path();
+        // The first commit, with no parent: its files are all new.
+        let first = step(root, &[("changes/cvs-valves.yaml", Some(ONE))]);
+        assert_eq!(collect(root, None).unwrap().len(), 1);
+        // A commit that names no file: its title, or retro's Arabic for it.
+        std::fs::create_dir_all(root.join("changes/retro")).unwrap();
+        std::fs::write(root.join(RETRO), "\"Faster bank\":\n  - kind: improved\n    ar_eg: البنك بقى أسرع\n")
+            .unwrap();
+        git(root, &["add", "-A"]).unwrap();
+        git(root, &["commit", "-q", "-m", "docs: retro titles"]).unwrap();
+        git(root, &["commit", "-q", "--allow-empty", "-m", "Faster bank (#12)"]).unwrap();
+        git(root, &["commit", "-q", "--allow-empty", "-m", "Add aortic dissection cards"]).unwrap();
+        git(root, &["commit", "-q", "--allow-empty", "-m", "CI: cache cargo"]).unwrap();
+        let found = collect(root, Some(&first)).unwrap();
+        let lines: Vec<(ChangeKind, &str)> = found.iter().map(|c| (c.kind, line_of(c))).collect();
+        assert_eq!(
+            lines,
+            [(ChangeKind::Improved, "البنك بقى أسرع"), (ChangeKind::New, "Add aortic dissection cards")]
+        );
+        // A `since` that isn't in this history: just HEAD.
+        assert!(collect(root, Some("0000000")).unwrap().is_empty(), "HEAD is CI noise");
+        // A broken retro file, and a broken fragment, are named.
+        step(root, &[(RETRO, Some("- not a map"))]);
+        assert!(retro(root).unwrap_err().starts_with(RETRO));
+        assert!(check_all(root).is_err());
+        step(root, &[(RETRO, None), ("changes/bad.yaml", Some("- kind: moved\n  ar_eg: صوت\n"))]);
+        let e = collect(root, None).unwrap_err();
+        assert!(e.starts_with("changes/bad.yaml at "), "{e}");
+        assert!(check_all(root).unwrap_err().contains("bad.yaml"));
+        assert!(gate(root, "no-such-ref").unwrap_err().starts_with("git rev-parse --verify no-such-ref"));
+        assert!(check_all(&root.join("nowhere")).is_err());
+    }
+
+    #[test]
+    fn history_drops_old_builds_to_stay_small() {
+        let big = |build: u64| BuildChanges {
+            changes: (0..400)
+                .map(|i| Change {
+                    kind: ChangeKind::New,
+                    text: UpdateNotes {
+                        en: format!("Cardiology lesson {build}.{i:03} {}", "x".repeat(100)),
+                        ar_eg: "درس".into(),
+                    },
+                })
+                .collect(),
+            ..entry(build)
+        };
+        let mut prev: UpdateManifest =
+            serde_json::from_str(include_str!("../../../fixtures/update/update.json")).unwrap();
+        prev.history = vec![big(2), big(1)];
+        let h = history(Some(&prev), Some(big(3)), &BTreeMap::new());
+        assert!(serde_json::to_vec(&h).unwrap().len() <= MAX_HISTORY_BYTES, "{}", h.len());
+        assert_eq!(h[0].build, 3, "the new build always stays");
     }
 }

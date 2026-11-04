@@ -1,5 +1,6 @@
 //! Keyboard shortcuts for tablet keyboards and the Mac (PARITY.md §6.5):
-//! Ctrl/⌘ + 1–7 for the screens, Ctrl/⌘ + , for Settings, and on study
+//! Ctrl/⌘ + 1–7 for the screens, Ctrl/⌘ + , for Settings, Ctrl/⌘ + G for a
+//! First Aid page, and on study
 //! screens Space to reveal, 1–4 to rate, A–E for MCQ options, Enter for next,
 //! ← / → between questions of a timed paper, F to flag, Esc to close, ? for
 //! the list.
@@ -31,6 +32,7 @@ window.__stepsKeys = (e) => {
   if (mod && !e.altKey && !e.shiftKey) {
     if (/^Digit[1-7]$/.test(e.code)) { e.preventDefault(); dioxus.send("go:" + e.code.slice(5)); return; }
     if (e.code === "Comma") { e.preventDefault(); dioxus.send("go:settings"); return; }
+    if (e.code === "KeyG") { e.preventDefault(); dioxus.send("page"); return; }
     return;
   }
   if (e.altKey || mod) return;
@@ -68,11 +70,13 @@ enum Command {
     Go(Screen),
     Settings,
     Help,
+    Page,
 }
 
 fn parse(msg: &str) -> Option<Command> {
     match msg {
         "help" => Some(Command::Help),
+        "page" => Some(Command::Page),
         "go:settings" => Some(Command::Settings),
         _ => {
             let n: usize = msg.strip_prefix("go:")?.parse().ok()?;
@@ -87,25 +91,34 @@ pub fn use_shortcuts() {
     use_future(move || async move {
         let mut eval = document::eval(KEYS_JS);
         while let Ok(msg) = eval.recv::<String>().await {
-            match parse(&msg) {
-                Some(Command::Go(screen)) => {
-                    open_sheet(false);
-                    settings.close();
-                    let mut s = ui.screen;
-                    s.set(screen);
-                }
-                Some(Command::Settings) => {
-                    open_sheet(false);
-                    settings.show(None);
-                }
-                Some(Command::Help) => {
-                    let open = !*SHEET_OPEN.peek();
-                    open_sheet(open);
-                }
-                None => {}
-            }
+            follow(&msg, ui, settings);
         }
     });
+}
+
+/// Does what one message from the key script asks.
+fn follow(msg: &str, ui: Ui, settings: SettingsNav) {
+    match parse(msg) {
+        Some(Command::Go(screen)) => {
+            open_sheet(false);
+            settings.close();
+            let mut s = ui.screen;
+            s.set(screen);
+        }
+        Some(Command::Settings) => {
+            open_sheet(false);
+            settings.show(None);
+        }
+        Some(Command::Page) => {
+            open_sheet(false);
+            crate::gopage::open(ui);
+        }
+        Some(Command::Help) => {
+            let open = !*SHEET_OPEN.peek();
+            open_sheet(open);
+        }
+        None => {}
+    }
 }
 
 /// The shortcut list: `?`, Help › Keyboard Shortcuts on the Mac, or the
@@ -116,9 +129,10 @@ pub fn KeysSheet() -> Element {
         return rsx! {};
     }
     let screens = format!("{} … {}", nav::TODAY, nav::STATS);
-    let rows: [(&[&str], String); 11] = [
+    let rows: [(&[&str], String); 12] = [
         (&["Ctrl", "1–7"], format!("{} ({screens})", tx::SCREENS)),
         (&["Ctrl", ","], tx::SETTINGS.into()),
+        (&["Ctrl", "G"], tx::PAGE.into()),
         (&["Space"], tx::REVEAL.into()),
         (&["1", "2", "3", "4"], tx::RATE.into()),
         (&["A", "B", "C", "D", "E"], tx::OPTIONS.into()),
@@ -172,6 +186,35 @@ pub fn KeysSheet() -> Element {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    thread_local! {
+        static NAV: std::cell::Cell<Option<(Ui, SettingsNav)>> = const { std::cell::Cell::new(None) };
+    }
+
+    fn keep() {
+        NAV.with(|n| n.set(Some((consume_context(), consume_context()))));
+    }
+
+    #[test]
+    fn keys_go_to_screens_settings_and_the_list() {
+        let mut app = crate::render_tests::App::with(Screen::Today, keep);
+        let (ui, settings) = NAV.with(std::cell::Cell::get).unwrap();
+        app.run(move || follow("help", ui, settings));
+        app.assert_has(tx::REVEAL);
+        app.assert_has("Ctrl");
+        app.tap(tx::CLOSE);
+        app.assert_lacks(tx::REVEAL);
+        app.run(move || follow("help", ui, settings));
+        app.tap("keys-backdrop");
+        app.assert_lacks(tx::REVEAL);
+        app.run(move || follow("go:settings", ui, settings));
+        assert!(app.can_tap("settings-backdrop"));
+        app.run(move || follow("go:3", ui, settings));
+        assert!(!app.can_tap("settings-backdrop"));
+        assert!(app.html().contains(r#"data-screen="Study""#));
+        app.run(move || follow("nothing", ui, settings));
+        assert!(app.html().contains(r#"data-screen="Study""#));
+    }
 
     #[test]
     fn messages_map_to_screens() {

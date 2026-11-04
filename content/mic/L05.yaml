@@ -1,0 +1,1792 @@
+schema: steps.content/v1
+lecture: mic.L05
+title: Virology
+book: { chapter: 3, pages: [159, 173] }
+topics:
+  - { id: viral-structure, title: Viral structure—general features }
+  - { id: viral-genetics, title: Viral genetics }
+  - { id: viral-genomes, title: Viral genomes }
+  - { id: viral-envelopes, title: Viral envelopes }
+  - { id: dna-viruses, title: DNA viruses }
+  - { id: herpesviruses, title: Herpesviruses }
+  - { id: hsv-identification, title: HSV identification }
+  - { id: viral-receptors, title: Receptors used by viruses }
+  - { id: rna-viruses, title: RNA viruses }
+  - { id: picornavirus, title: Picornavirus }
+  - { id: rhinovirus, title: Rhinovirus }
+  - { id: rotavirus, title: Rotavirus }
+  - { id: influenza, title: Influenza viruses }
+  - { id: antigenic-shift-drift, title: Genetic/antigenic shift and drift }
+  - { id: rubella, title: Rubella virus }
+  - { id: paramyxoviruses, title: Paramyxoviruses }
+  - { id: croup, title: Acute laryngotracheobronchitis }
+  - { id: measles, title: Measles (rubeola) virus }
+  - { id: mumps, title: Mumps virus }
+  - { id: aedes-arboviruses, title: Arboviruses transmitted by Aedes mosquitoes }
+  - { id: yellow-fever, title: Yellow fever virus }
+  - { id: zika, title: Zika virus }
+  - { id: rabies, title: Rabies virus }
+  - { id: ebola, title: Ebola virus }
+  - { id: sars-cov-2, title: Severe acute respiratory syndrome coronavirus 2 }
+  - { id: hepatitis-viruses, title: Hepatitis viruses }
+  - { id: hepatitis-extrahepatic, title: Extrahepatic manifestations of hepatitis B and C }
+  - { id: hepatitis-serology, title: Hepatitis serologic markers }
+  - { id: hiv, title: HIV }
+  - { id: hiv-diagnosis, title: HIV diagnosis }
+  - { id: hiv-diseases, title: Common diseases of HIV-positive adults }
+items:
+  # ---------- p159: structure and genetics ----------
+  - id: mic.L05.001
+    kind: card
+    topic: viral-structure
+    front: What are the three basic structural types of virus drawn in First Aid?
+    back: Naked (nonenveloped) virus with icosahedral capsid; enveloped virus with icosahedral capsid; enveloped virus with helical capsid (plus the bacteriophage).
+    src: { page: 159, quote: "Naked (nonenveloped) virus with icosahedral capsid Enveloped virus with icosahedral capsid Enveloped virus with helical capsid" }
+    status: unverified
+  - id: mic.L05.002
+    kind: table
+    topic: viral-genetics
+    title: Viral genetics
+    columns: [Process, What happens, Example]
+    rows:
+      - [Recombination, Exchange of genes between 2 chromosomes by crossing over within regions of significant base sequence homology, "-"]
+      - [Reassortment, Viruses with segmented genomes exchange genetic material, "2009 H1N1 influenza A pandemic; antigenic shift"]
+      - [Complementation, "A nonmutated virus makes a functional protein that serves a coinfecting mutated virus", HDV needs HBV to supply HBsAg]
+      - [Phenotypic mixing, Genome of virus A coated with surface proteins of virus B (pseudovirion); coat B sets tropism, "Next progeny have type A coat"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [1, 2], [2, 2]]
+    src: { page: 159, quote: "Reassortment When viruses with segmented genomes (eg, influenza virus) exchange genetic material." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.003
+    kind: card
+    topic: viral-genetics
+    front: How did the 2009 H1N1 influenza A pandemic emerge?
+    back: Complex viral reassortment of genes from human, swine and avian viruses. Reassortment can cause antigenic shift.
+    src: { page: 159, quote: "the 2009 novel H1N1 influenza A pandemic emerged via complex viral reassortment of genes from human, swine, and avian viruses. Has potential to cause antigenic shift." }
+    status: unverified
+  - id: mic.L05.004
+    kind: cloze
+    topic: viral-genetics
+    text: Hepatitis D virus needs replicating hepatitis B virus to supply {{c1::HBsAg}}, its envelope protein, an example of {{c2::complementation}}.
+    src: { page: 159, quote: "hepatitis D virus requires the presence of replicating hepatitis B virus to supply HBsAg, the envelope protein for HDV." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.005
+    kind: card
+    topic: viral-genetics
+    front: In phenotypic mixing, what determines the tropism of the hybrid virus, and what coat do its progeny have?
+    back: The type B protein coat determines tropism (infectivity) of the pseudovirion. Progeny from its next infection have a type A coat, encoded by its type A genetic material.
+    src: { page: 159, quote: "Type B protein coat determines the tropism (infectivity) of the hybrid virus. Progeny from subsequent infection of a cell by progeny 1 will have a type A coat that is encoded by its type A genetic material." }
+    status: unverified
+  # ---------- p160: genomes and envelopes ----------
+  - id: mic.L05.006
+    kind: card
+    topic: viral-genomes
+    front: Which naked viral nucleic acids are infectious, and why are the others not?
+    back: Naked nucleic acids of most dsDNA viruses (except poxviruses and HBV) and ⊕ ssRNA viruses are infectious. ⊝ ssRNA and dsRNA are not, because they lack the polymerases needed to replicate; ⊝ ssRNA virions carry RNA-dependent RNA polymerases.
+    src: { page: 160, quote: "Naked nucleic acids of ⊝ strand ssRNA and dsRNA viruses are not infectious because they lack the required polymerases to replicate." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.007
+    kind: card
+    topic: viral-genomes
+    front: What are the exceptions to the DNA virus rules (dsDNA, linear)?
+    back: All are dsDNA except Parvoviridae (ssDNA) ("Part of a virus"). All are linear except papilloma-, polyoma- and hepadnaviruses (circular).
+    src: { page: 160, quote: "All have dsDNA genomes (like our cells) except Parvoviridae (ssDNA). All are linear except papilloma-, polyoma-, and hepadnaviruses (circular)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.008
+    kind: card
+    topic: viral-genomes
+    front: Which RNA virus family is double stranded?
+    back: Reoviridae (dsRNA); all other RNA viruses are ssRNA ("Repeato-virus").
+    src: { page: 160, quote: "All have ssRNA genomes except Reoviridae (dsRNA)." }
+    status: unverified
+  - id: mic.L05.009
+    kind: enumerate
+    topic: viral-genomes
+    prompt: Enumerate the ⊕ stranded RNA virus families (7).
+    points:
+      - Retroviruses
+      - Togaviruses
+      - Flaviviruses
+      - Coronaviruses
+      - Hepeviruses
+      - Caliciviruses
+      - Picornaviruses
+    pass: 6
+    hook: "While at a retro toga party, I drank flavored Corona and ate hippie California pickles."
+    src: { page: 160, quote: "⊕ stranded (≈ mRNA): retro-, toga-, flavi-, corona-, hepe-, calici-, and picornaviruses." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.010
+    kind: enumerate
+    topic: viral-genomes
+    prompt: Enumerate the ⊝ stranded RNA virus families (6).
+    points:
+      - Arenaviruses
+      - Bunyaviruses
+      - Paramyxoviruses
+      - Orthomyxoviruses
+      - Filoviruses
+      - Rhabdoviruses
+    pass: 5
+    hook: "Always bring polymerase or fail replication."
+    src: { page: 160, quote: "⊝ stranded: arena-, bunya-, paramyxo-, orthomyxo-, filo-, and rhabdoviruses." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.011
+    kind: enumerate
+    topic: viral-genomes
+    prompt: Enumerate the segmented RNA viruses (4).
+    points:
+      - Bunyaviruses
+      - Orthomyxoviruses
+      - Arenaviruses
+      - Reoviruses
+    pass: 4
+    hook: "BOAR"
+    src: { page: 160, quote: "Segmented: Bunya-, Orthomyxo-, Arena-, and Reoviruses." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.012
+    kind: card
+    topic: viral-envelopes
+    front: Where do enveloped viruses get their envelopes, and which is the exception?
+    back: Generally from the plasma membrane as they exit the cell. Herpesviruses get theirs from the nuclear membrane.
+    src: { page: 160, quote: "Generally, enveloped viruses acquire their envelopes from plasma membrane when they exit from cell. Exceptions include herpesviruses, which acquire envelopes from nuclear membrane." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.013
+    kind: cloze
+    topic: viral-envelopes
+    text: The enveloped DNA viruses are {{c1::herpesvirus}}, {{c2::hepadnavirus}} and {{c3::poxvirus}} ("have helpful protection").
+    src: { page: 160, quote: "Enveloped DNA viruses (herpesvirus, hepadnavirus, poxvirus) have helpful protection." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p161: DNA viruses ----------
+  - id: mic.L05.014
+    kind: card
+    topic: dna-viruses
+    front: What do all DNA viruses share, and which is the exception?
+    back: All are icosahedral and replicate in the nucleus, except poxvirus ("Pox is out of the box (nucleus)").
+    src: { page: 161, quote: "All are icosahedral and replicate in the nucleus (except poxvirus). “Pox is out of the box (nucleus).”" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.015
+    kind: table
+    topic: dna-viruses
+    title: DNA viruses
+    columns: [Family, Envelope, DNA structure]
+    rows:
+      - [Herpesviruses, "Yes", DS and linear]
+      - [Poxvirus, "Yes", "DS and linear (largest DNA virus)"]
+      - [Hepadnavirus, "Yes", Partially DS and circular]
+      - [Adenovirus, "No", DS and linear]
+      - [Papillomavirus, "No", DS and circular]
+      - [Polyomavirus, "No", DS and circular]
+      - [Parvovirus, "No", "SS and linear (smallest DNA virus)"]
+    blanks: [[0, 1], [2, 2], [3, 1], [4, 2], [5, 2], [6, 2]]
+    src: { page: 161, quote: "VIRAL FAMILY ENVELOPE DNA STRUCTURE MEDICAL IMPORTANCE Herpesviruses Yes DS and linear" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.016
+    kind: card
+    topic: dna-viruses
+    front: What diseases do poxviruses cause?
+    back: Smallpox (eradicated by the live attenuated vaccine); cowpox ("milkmaid blisters"); molluscum contagiosum - flesh-colored papule with central umbilication, keratinocytes contain molluscum bodies.
+    src: { page: 161, quote: "Molluscum contagiosum—flesh-colored papule with central umbilication; keratinocytes contain molluscum bodies" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.017
+    kind: card
+    topic: dna-viruses
+    front: What is unusual about HBV, a hepadnavirus?
+    back: It causes acute or chronic hepatitis and is not a retrovirus but has reverse transcriptase.
+    src: { page: 161, quote: "Not a retrovirus but has reverse transcriptase" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.018
+    kind: enumerate
+    topic: dna-viruses
+    prompt: Enumerate the diseases caused by adenovirus (6).
+    points:
+      - Febrile pharyngitis
+      - Acute hemorrhagic cystitis
+      - Pneumonia
+      - Conjunctivitis (pink eye)
+      - Gastroenteritis
+      - Myocarditis
+    pass: 5
+    src: { page: 161, quote: "Febrile pharyngitis B —sore throat Acute hemorrhagic cystitis Pneumonia Conjunctivitis—“pink eye” Gastroenteritis Myocarditis" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.019
+    kind: cloze
+    topic: dna-viruses
+    text: HPV serotypes {{c1::1, 2, 6, 11}} are associated with warts and serotypes {{c2::16, 18}} with cancer (cervical, anal, penile, or oropharyngeal).
+    src: { page: 161, quote: "serotypes 1, 2, 6, 11 associated with warts; serotypes 16, 18 associated with cancer" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.020
+    kind: card
+    topic: dna-viruses
+    front: What do the two polyomaviruses cause?
+    back: JC virus - progressive multifocal leukoencephalopathy (PML) in the immunocompromised (eg, HIV) ("Junky Cerebrum"). BK virus - transplant patients, commonly targets the kidney ("Bad Kidney").
+    src: { page: 161, quote: "JC virus—progressive multifocal leukoencephalopathy (PML) in immunocompromised patients (eg, HIV) BK virus—transplant patients, commonly targets kidney JC: Junky Cerebrum; BK: Bad Kidney" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.021
+    kind: card
+    topic: dna-viruses
+    front: What does parvovirus B19 infect, and what does it cause in each group?
+    back: RBC precursors and endothelial cells, causing RBC destruction. Aplastic crises in sickle cell disease; "slapped cheek" rash in children (erythema infectiosum, fifth disease); hydrops fetalis and death in the fetus; pure RBC aplasia and rheumatoid arthritis-like symptoms in adults.
+    src: { page: 161, quote: "B19 virus—aplastic crises in sickle cell disease, “slapped cheek” rash in children (erythema infectiosum, or fifth disease); infects RBC precursors and endothelial cells →  RBC destruction →  hydrops fetalis and death in fetus" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.022
+    kind: mcq
+    topic: dna-viruses
+    stem: >-
+      A 9-year-old boy with sickle cell disease has fatigue and pallor 1 week after a febrile illness. His
+      younger sister has bright red cheeks and a lacy rash on her arms. His hemoglobin has fallen from 8.5
+      to 4.0 g/dL and the reticulocyte count is near zero. Which cells does the causative virus infect?
+    options:
+      - Erythroid precursors
+      - CD4+ T cells
+      - B cells via CD21
+      - Hepatocytes
+      - Renal tubular cells
+    answer: 0
+    why:
+      - "Right. Parvovirus B19 (fifth disease in the sister) infects RBC precursors, causing an aplastic crisis in sickle cell disease."
+      - "CD4+ T cells are the target of HIV."
+      - "B cells via CD21 are the target of EBV."
+      - "Hepatocytes are the target of the hepatitis viruses."
+      - "The kidney is targeted by BK virus in transplant patients."
+    src: { page: 161, quote: "infects RBC precursors and endothelial cells" }
+    status: unverified
+  - id: mic.L05.023
+    kind: mcq
+    topic: dna-viruses
+    stem: >-
+      A 46-year-old man with HIV and a CD4+ count of 40 cells/mm3 has weeks of progressive weakness of
+      his right arm, clumsiness and trouble finding words, without fever. MRI shows multiple nonenhancing
+      white matter lesions without mass effect. Which virus is the most likely cause?
+    options:
+      - JC virus
+      - BK virus
+      - Cytomegalovirus
+      - Herpes simplex virus-1
+      - Epstein-Barr virus
+    answer: 0
+    why:
+      - "Right. JC virus reactivation causes PML in the immunocompromised: nonenhancing areas of demyelination."
+      - "BK virus targets the kidney in transplant patients."
+      - "CMV causes retinitis, colitis and encephalitis at low CD4+ counts, not this picture."
+      - "HSV-1 causes temporal lobe encephalitis with fever and seizures."
+      - "EBV causes CNS lymphoma, which enhances."
+    src: { page: 173, quote: "JC virus (reactivation) Progressive multifocal leukoencephalopathy Nonenhancing areas of demyelination on MRI" }
+    status: unverified
+  # ---------- p162-163: herpesviruses ----------
+  - id: mic.L05.024
+    kind: card
+    topic: herpesviruses
+    front: What does HSV-1 cause, and where is it latent?
+    back: Gingivostomatitis, keratoconjunctivitis, herpes labialis (cold sores), herpetic whitlow, temporal lobe encephalitis, esophagitis, erythema multiforme, and a growing share of herpes genitalis. Most commonly latent in the trigeminal ganglia.
+    src: { page: 162, quote: "Gingivostomatitis, keratoconjunctivitis A , herpes labialis (cold sores) B , herpetic whitlow on finger, temporal lobe encephalitis, esophagitis, erythema multiforme." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.025
+    kind: card
+    topic: herpesviruses
+    front: What is the most common cause of sporadic encephalitis, and how does it present?
+    back: HSV-1 (temporal lobe encephalitis). Altered mental status, seizures, and/or aphasia.
+    src: { page: 162, quote: "Most common cause of sporadic encephalitis, can present as altered mental status, seizures, and/or aphasia" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.026
+    kind: card
+    topic: herpesviruses
+    front: How is HSV-2 transmitted, what does it cause, and where is it latent?
+    back: Sexual contact and perinatal. Herpes genitalis, neonatal herpes; viral meningitis is more common with HSV-2 than HSV-1. Most commonly latent in the sacral ganglia.
+    src: { page: 162, quote: "Herpes genitalis, neonatal herpes C Most commonly latent in sacral ganglia Viral meningitis more common with HSV-2 than with HSV-1" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.027
+    kind: card
+    topic: herpesviruses
+    front: What does varicella-zoster virus (HHV-3) cause, and where is it latent?
+    back: Chickenpox, shingles, encephalitis, pneumonia; the most common complication of shingles is post-herpetic neuralgia. Latent in dorsal root or trigeminal ganglia; CN V1 involvement causes herpes zoster ophthalmicus.
+    src: { page: 162, quote: "Latent in dorsal root or trigeminal ganglia; CN V1 branch involvement can cause herpes zoster ophthalmicus" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.028
+    kind: card
+    topic: herpesviruses
+    front: What are the features of infectious mononucleosis from EBV (HHV-4), and what must patients avoid?
+    back: Fever, hepatosplenomegaly, pharyngitis and lymphadenopathy (especially posterior cervical nodes). Avoid contact sports until resolution because of the risk of splenic rupture.
+    src: { page: 162, quote: "Mononucleosis—fever, hepatosplenomegaly F , pharyngitis, and lymphadenopathy (especially posterior cervical nodes); avoid contact sports until resolution due to risk of splenic rupture" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.029
+    kind: card
+    topic: herpesviruses
+    front: Which cancers are associated with EBV?
+    back: Lymphomas (eg, endemic Burkitt lymphoma), nasopharyngeal carcinoma (especially Asian adults), lymphoproliferative disease in transplant patients.
+    src: { page: 162, quote: "Associated with lymphomas (eg, endemic Burkitt lymphoma), nasopharyngeal carcinoma (especially Asian adults), lymphoproliferative disease in transplant patients" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.030
+    kind: cloze
+    topic: herpesviruses
+    text: EBV infects B cells through {{c1::CD21}} ("Must be 21 to drink Beer in a Barr"); the atypical lymphocytes on smear are reactive {{c2::cytotoxic T cells}}, not infected B cells.
+    src: { page: 162, quote: "Infects B cells through CD21, “Must be 21 to drink Beer in a Barr” Atypical lymphocytes on peripheral blood smear G—not infected B cells but reactive cytotoxic T cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.031
+    kind: card
+    topic: herpesviruses
+    front: What does the Monospot test detect, and what happens if a patient with mono gets amoxicillin?
+    back: Heterophile antibodies, detected by agglutination of sheep or horse RBCs. Amoxicillin (eg, for presumed strep pharyngitis) can cause a maculopapular rash.
+    src: { page: 162, quote: "⊕ Monospot test—heterophile antibodies detected by agglutination of sheep or horse RBCs Use of amoxicillin (eg, for presumed strep pharyngitis) can cause maculopapular rash" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.032
+    kind: card
+    topic: herpesviruses
+    front: How is CMV (HHV-5) transmitted, and what does it cause?
+    back: Congenital, transfusion, sexual contact, saliva, urine, transplant. Monospot-negative mononucleosis in the immunocompetent; in the immunocompromised, pneumonia (transplant), esophagitis, colitis, AIDS retinitis ("sightomegalovirus"); congenital CMV.
+    src: { page: 162, quote: "Mononucleosis (⊝ Monospot) in immunocompetent patients; infection in immunocompromised, especially pneumonia in transplant patients; esophagitis; colitis; AIDS retinitis (“sightomegalovirus”)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.033
+    kind: cloze
+    topic: herpesviruses
+    text: CMV-infected cells have characteristic {{c1::"owl eye"}} intranuclear inclusions, and the virus is latent in {{c2::mononuclear cells}}.
+    src: { page: 162, quote: "Infected cells have characteristic “owl eye” intranuclear inclusions H Latent in mononuclear cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.034
+    kind: card
+    topic: herpesviruses
+    front: What is roseola infantum, and which viruses cause it?
+    back: HHV-6 (and less often HHV-7), via saliva. High fevers for several days that can cause seizures, followed by a diffuse macular rash starting on the trunk then spreading to the extremities; usually children <2 years. "Fever first, Rosy (rash) later." Self-limited.
+    src: { page: 162, quote: "Roseola infantum (exanthem subitum): high fevers for several days that can cause seizures, followed by diffuse macular rash (starts on trunk then spreads to extremities) I ; usually seen in children <2 years old" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.035
+    kind: card
+    topic: herpesviruses
+    front: What does HHV-8 cause, and in whom?
+    back: Kaposi sarcoma, a neoplasm of endothelial cells, spread by sexual contact; seen in HIV/AIDS and transplant patients. Dark/violaceous plaques or nodules (vascular proliferations); can affect the GI tract and lungs.
+    src: { page: 162, quote: "Kaposi sarcoma (neoplasm of endothelial cells). Seen in HIV/AIDS and transplant patients. Dark/violaceous plaques or nodules J representing vascular proliferations" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.036
+    kind: table
+    topic: herpesviruses
+    title: Herpesvirus latency
+    columns: [Virus, Latent in]
+    rows:
+      - [HSV-1, Trigeminal ganglia]
+      - [HSV-2, Sacral ganglia]
+      - [VZV, Dorsal root or trigeminal ganglia]
+      - [CMV, Mononuclear cells]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 162, quote: "Most commonly latent in trigeminal ganglia" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.037
+    kind: mcq
+    topic: herpesviruses
+    stem: >-
+      A 17-year-old boy has fever, sore throat and fatigue for 1 week. He has tonsillar exudates, posterior
+      cervical lymphadenopathy and a palpable spleen. After amoxicillin is started for presumed strep
+      pharyngitis, he develops a diffuse maculopapular rash. What are the atypical lymphocytes on his blood
+      smear?
+    options:
+      - Reactive cytotoxic T cells
+      - EBV-infected B cells
+      - Plasma cells
+      - Monocytes containing owl eye inclusions
+      - Natural killer cells infected through CD4
+    answer: 0
+    why:
+      - "Right. In EBV mononucleosis, the atypical lymphocytes are reactive cytotoxic T cells, not infected B cells."
+      - "EBV infects B cells via CD21, but those are not the atypical cells on smear."
+      - "Plasma cells are not the atypical lymphocytes of mono."
+      - "Owl eye inclusions are CMV."
+      - "CD4 is the HIV receptor."
+    src: { page: 162, quote: "Atypical lymphocytes on peripheral blood smear G—not infected B cells but reactive cytotoxic T cells" }
+    status: unverified
+  - id: mic.L05.038
+    kind: mcq
+    topic: herpesviruses
+    stem: >-
+      A 34-year-old woman has fever, headache, confusion and a focal seizure. She says words that do not
+      make sense. MRI shows hyperintensity of the left medial temporal lobe. Which test confirms the most
+      likely diagnosis?
+    options:
+      - CSF PCR for HSV
+      - Tzanck smear of the oral mucosa
+      - India ink stain of CSF
+      - Monospot test
+      - Serum anti-HBc IgM
+    answer: 0
+    why:
+      - "Right. HSV-1 temporal lobe encephalitis, the most common cause of sporadic encephalitis; CSF PCR is the test."
+      - "The Tzanck test is outdated and is used on skin vesicles."
+      - "India ink is for Cryptococcus meningitis."
+      - "The Monospot test is for EBV mononucleosis."
+      - "Anti-HBc IgM is a hepatitis B marker."
+    src: { page: 163, quote: "CSF PCR for herpes encephalitis." }
+    status: unverified
+  - id: mic.L05.039
+    kind: mcq
+    topic: herpesviruses
+    stem: >-
+      A 10-month-old girl has had fevers to 40°C for 3 days, with one brief febrile seizure. On day 4 the fever
+      breaks and a pink macular rash appears on her trunk and spreads to her limbs. She is playful. Which
+      virus is the most likely cause?
+    options:
+      - Human herpesvirus 6
+      - Measles virus
+      - Parvovirus B19
+      - Rubella virus
+      - Varicella-zoster virus
+    answer: 0
+    why:
+      - "Right. Roseola (HHV-6): high fever first, then the rash on the trunk spreading out; under 2 years."
+      - "Measles has the 4 C's, and the rash starts at the head with fever ongoing."
+      - "Parvovirus B19 gives slapped cheeks."
+      - "Rubella's rash starts on the face with postauricular nodes."
+      - "VZV gives vesicles in crops."
+    src: { page: 162, quote: "Roseola: fever first, Rosy (rash) later" }
+    status: unverified
+  - id: mic.L05.040
+    kind: card
+    topic: hsv-identification
+    front: How are HSV infections identified?
+    back: PCR of skin lesions is the test of choice; CSF PCR for herpes encephalitis. The Tzanck test (outdated) shows multinucleated giant cells (HSV-1, HSV-2, VZV). Intranuclear eosinophilic Cowdry A inclusions are also seen with HSV-1, HSV-2, VZV.
+    src: { page: 163, quote: "PCR of skin lesions is test of choice. CSF PCR for herpes encephalitis. Tzanck test (outdated)—a smear of an opened skin vesicle to detect multinucleated giant cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.041
+    kind: table
+    topic: viral-receptors
+    title: Receptors used by viruses
+    columns: [Virus, Receptor]
+    rows:
+      - [CMV, Integrins (heparan sulfate)]
+      - [EBV, CD21]
+      - [HIV, "CD4, CXCR4, CCR5"]
+      - [Parvovirus B19, P antigen on RBCs]
+      - [Rabies, Nicotinic AChR]
+      - [Rhinovirus, ICAM-1 (I CAMe to see the rhino)]
+      - [SARS-CoV-2, ACE2]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 163, quote: "CMV Integrins (heparan sulfate) EBV CD21 HIV CD4, CXCR4, CCR5 Parvovirus B19 P antigen on RBCs Rabies Nicotinic AChR Rhinovirus ICAM-1 (I CAMe to see the rhino) SARS-CoV-2 ACE2" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p164: RNA viruses ----------
+  - id: mic.L05.042
+    kind: card
+    topic: rna-viruses
+    front: Where do RNA viruses replicate, and which are the exceptions?
+    back: All replicate in the cytoplasm except retrovirus and influenza virus ("Retro flu is outta cyt (sight)").
+    src: { page: 164, quote: "All replicate in the cytoplasm (except retrovirus and influenza virus). “Retro flu is outta cyt (sight).”" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.043
+    kind: table
+    topic: rna-viruses
+    title: RNA viruses (structure)
+    columns: [Family, Envelope, RNA structure]
+    rows:
+      - [Reoviruses, "No", "DS linear, multisegmented"]
+      - [Picornaviruses, "No", SS ⊕ linear]
+      - [Hepevirus, "No", SS ⊕ linear]
+      - [Caliciviruses, "No", SS ⊕ linear]
+      - [Flaviviruses, "Yes", SS ⊕ linear]
+      - [Togaviruses, "Yes", SS ⊕ linear]
+      - [Retroviruses, "Yes", SS ⊕ linear]
+      - [Coronaviruses, "Yes", SS ⊕ linear]
+      - [Orthomyxoviruses, "Yes", "SS ⊝ linear, multisegmented"]
+      - [Paramyxoviruses, "Yes", SS ⊝ linear]
+      - [Rhabdoviruses, "Yes", SS ⊝ linear]
+      - [Filoviruses, "Yes", SS ⊝ linear]
+      - [Arenaviruses, "Yes", "SS ⊕ and ⊝ circular, multisegmented"]
+      - [Bunyaviruses, "Yes", "SS ⊝ circular, multisegmented"]
+      - [Delta virus, "Yes", SS ⊝ circular]
+    blanks: [[0, 2], [1, 1], [2, 1], [3, 1], [4, 1], [8, 2], [12, 2], [13, 2]]
+    src: { page: 164, quote: "Reoviruses No DS linear Multisegmented" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.044
+    kind: card
+    topic: rna-viruses
+    front: Which naked (nonenveloped) RNA virus families are there?
+    back: Reoviruses, picornaviruses, hepevirus and caliciviruses; all other RNA viruses in the table are enveloped.
+    src: { page: 164, quote: "Hepevirus No SS ⊕ linear HEV Caliciviruses No SS ⊕ linear Norovirus—viral gastroenteritis" }
+    status: unverified
+  - id: mic.L05.045
+    kind: card
+    topic: rna-viruses
+    front: What do the picornaviruses cause?
+    back: Poliovirus (Salk/Sabin vaccines, IPV/OPV); echovirus (aseptic meningitis); rhinovirus (common cold); coxsackievirus (aseptic meningitis, herpangina, hand-foot-and-mouth disease, myocarditis, pericarditis); HAV (acute viral hepatitis). PERCH.
+    src: { page: 164, quote: "Coxsackievirus—aseptic meningitis; herpangina (mouth blisters, fever); hand, foot, and mouth disease; myocarditis; pericarditis" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.046
+    kind: card
+    topic: rna-viruses
+    front: Which viruses are flaviviruses, and what does West Nile virus cause?
+    back: HCV, yellow fever, dengue, West Nile virus and Zika (all but HCV are arboviruses). West Nile causes meningoencephalitis and acute asymmetric flaccid paralysis.
+    src: { page: 164, quote: "West Nile virusa —meningoencephalitis, acute asymmetric flaccid paralysis" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.047
+    kind: card
+    topic: rna-viruses
+    front: Which viruses are in "Toga CREW"?
+    back: Chikungunya virus (co-infection with dengue can occur), Rubella (formerly a togavirus, now a matonavirus), Eastern and Western equine encephalitis.
+    src: { page: 164, quote: "Toga CREW—Chikungunya virusa (co-infection with dengue virus can occur), Rubella (formerly a togavirus), Eastern and Western equine encephalitisa" }
+    status: unverified
+  - id: mic.L05.048
+    kind: card
+    topic: rna-viruses
+    front: What do retroviruses and coronaviruses cause?
+    back: Retroviruses have reverse transcriptase - HTLV (T-cell leukemia) and HIV (AIDS). Coronaviruses - common cold, SARS, COVID-19, MERS.
+    src: { page: 164, quote: "Have reverse transcriptase HTLV—T-cell leukemia HIV—AIDS Coronaviruses Yes SS ⊕ linear “Common cold,” SARS, COVID-19, MERS" }
+    status: unverified
+  - id: mic.L05.049
+    kind: card
+    topic: rna-viruses
+    front: Which diseases do the paramyxoviruses cause?
+    back: PaRaMyxovirus - Parainfluenza (croup), RSV (bronchiolitis in babies), Measles, Mumps.
+    src: { page: 164, quote: "PaRaMyxovirus: Parainfluenza—croup RSV—bronchiolitis in babies Measles, Mumps" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.050
+    kind: card
+    topic: rna-viruses
+    front: What do the filoviruses, arenaviruses and bunyaviruses cause?
+    back: Filoviruses - Ebola/Marburg, often fatal. Arenaviruses - LCMV, Lassa fever encephalitis (spread by rodents). Bunyaviruses - California encephalitis, Sandfly/Rift Valley fevers, Crimean-Congo hemorrhagic fever, hantavirus (hemorrhagic fever, pneumonia).
+    src: { page: 164, quote: "Hantavirus—hemorrhagic fever, pneumonia" }
+    status: unverified
+  - id: mic.L05.051
+    kind: cloze
+    topic: rna-viruses
+    text: HDV is "{{c1::Defective}}"; it requires the presence of {{c2::HBV}} to replicate.
+    src: { page: 164, quote: "HDV is “Defective”; requires presence of HBV to replicate" }
+    status: unverified
+  - id: mic.L05.052
+    kind: card
+    topic: rna-viruses
+    front: What is an arbovirus?
+    back: An arthropod-borne virus (mosquitoes, ticks).
+    src: { page: 164, quote: "arbovirus, arthropod borne (mosquitoes, ticks)" }
+    status: unverified
+  # ---------- p165: picorna, rhino, rota ----------
+  - id: mic.L05.053
+    kind: card
+    topic: picornavirus
+    front: How are picornavirus proteins made, and which picornaviruses are enteroviruses?
+    back: RNA is translated into 1 large polypeptide cleaved by virus-encoded proteases into functional proteins. Poliovirus, echovirus and coxsackievirus are enteroviruses and can cause aseptic (viral) meningitis.
+    src: { page: 165, quote: "RNA is translated into 1 large polypeptide that is cleaved by virus-encoded proteases into functional viral proteins. Poliovirus, echovirus, and coxsackievirus are enteroviruses and can cause aseptic (viral) meningitis." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.054
+    kind: card
+    topic: rhinovirus
+    front: Why doesn't rhinovirus infect the GI tract?
+    back: It is acid labile, destroyed by stomach acid (unlike the other picornaviruses). Nonenveloped RNA virus, cause of the common cold, >100 serologic types.
+    src: { page: 165, quote: "Acid labile—destroyed by stomach acid; therefore, does not infect the GI tract (unlike the other picornaviruses)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.055
+    kind: card
+    topic: rotavirus
+    front: What is rotavirus, and how does it cause diarrhea?
+    back: A segmented dsRNA virus (reovirus); the most important global cause of infantile gastroenteritis, and a major cause of winter diarrhea in day care. Villous destruction with atrophy leads to ↓ absorption of Na+ and loss of K+.
+    src: { page: 165, quote: "Most important global cause of infantile gastroenteritis. Major cause of acute diarrhea in the United States during winter, especially in day care centers, kindergartens. Villous destruction with atrophy leads to ↓ absorption of Na+ and loss of K+" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.056
+    kind: cloze
+    topic: rotavirus
+    text: Routine rotavirus vaccination is recommended for all infants except those with a history of {{c1::intussusception}} (a rare adverse effect of the vaccine) or {{c2::SCID}}.
+    src: { page: 165, quote: "CDC recommends routine vaccination of all infants except those with a history of intussusception (rare adverse effect of rotavirus vaccination) or SCID." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p166: influenza, rubella, paramyxo ----------
+  - id: mic.L05.057
+    kind: card
+    topic: influenza
+    front: What do the hemagglutinin and neuraminidase of influenza do?
+    back: Hemagglutinin binds sialic acid and promotes viral entry ("lets the virus in"). Neuraminidase promotes progeny virion release ("Neuraminidaways - sends the virus away").
+    src: { page: 166, quote: "Contain hemagglutinin (binds sialic acid and promotes viral entry) and neuraminidase (promotes progeny virion release) antigens." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.058
+    kind: card
+    topic: influenza
+    front: Which bacterial superinfections threaten patients with influenza, and how is influenza treated?
+    back: Fatal bacterial superinfection, most commonly S aureus, S pneumoniae and H influenzae. Treatment is supportive +/- a neuraminidase inhibitor (oseltamivir, zanamivir).
+    src: { page: 166, quote: "Patients at risk for fatal bacterial superinfection, most commonly S aureus, S pneumoniae, and H influenzae. Treatment: supportive +/– neuraminidase inhibitor (eg, oseltamivir, zanamivir)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.059
+    kind: card
+    topic: influenza
+    front: Why is the flu shot reformulated each year, and how does the live attenuated vaccine work?
+    back: It contains the strains most likely that season, because of the virus' rapid genetic change; the killed vaccine is most used. The live attenuated intranasal vaccine has a temperature-sensitive mutant that replicates in the nose but not in the lung.
+    src: { page: 166, quote: "Live attenuated vaccine contains temperature- sensitive mutant that replicates in the nose but not in the lung; administered intranasally." }
+    status: unverified
+  - id: mic.L05.060
+    kind: table
+    topic: antigenic-shift-drift
+    title: Antigenic shift vs drift
+    columns: ["", Shift, Drift]
+    rows:
+      - [Mechanism, Infection of 1 cell by 2 segmented viruses with RNA segment reassortment, Random mutation in HA or NA genes]
+      - [Change, Dramatically different virus, Minor changes in HA or NA protein]
+      - [Outcome, Major global outbreaks (pandemics), Local seasonal outbreaks (epidemics)]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 166, quote: "RNA segment reassortment →  dramatically different virus (genetic shift) →  major global outbreaks (pandemics)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.061
+    kind: card
+    topic: rubella
+    front: What are the features of rubella in children?
+    back: A matonavirus (formerly German 3-day measles). Fever, postauricular and other lymphadenopathy, arthralgias, and a fine maculopapular rash that starts on the face and spreads centrifugally to the trunk and extremities; mild disease.
+    src: { page: 166, quote: "Fever, postauricular and other lymphadenopathy, arthralgias, and fine, maculopapular rash that starts on face and spreads centrifugally to involve trunk and extremities" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.062
+    kind: enumerate
+    topic: rubella
+    prompt: Enumerate the classic triad of congenital rubella (3).
+    points:
+      - Sensorineural deafness
+      - Cataracts
+      - Patent ductus arteriosus
+    pass: 3
+    src: { page: 166, quote: "Congenital rubella findings include classic triad of sensorineural deafness, cataracts, and patent ductus arteriosus." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.063
+    kind: cloze
+    topic: rubella
+    text: A "{{c1::blueberry muffin}}" appearance in congenital rubella is due to dermal {{c2::extramedullary hematopoiesis}}.
+    src: { page: 166, quote: "“Blueberry muffin” appearance may be seen due to dermal extramedullary hematopoiesis." }
+    status: unverified
+  - id: mic.L05.064
+    kind: card
+    topic: paramyxoviruses
+    front: What protein do all paramyxoviruses share, and what does it do?
+    back: Surface F (fusion) protein, which makes respiratory epithelial cells fuse into multinucleated cells. All subtypes can cause respiratory infection (bronchiolitis, pneumonia) in infants.
+    src: { page: 166, quote: "All contain surface F (fusion) protein, which causes respiratory epithelial cells to fuse and form multinucleated cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.065
+    kind: cloze
+    topic: paramyxoviruses
+    text: "{{c1::Palivizumab}}, a monoclonal antibody against the {{c2::F protein}}, prevents RSV pneumonia in premature infants."
+    src: { page: 166, quote: "Palivizumab (monoclonal antibody against F protein) prevents pneumonia caused by RSV infection in premature infants." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.066
+    kind: mcq
+    topic: antigenic-shift-drift
+    stem: >-
+      A new influenza A strain spreads worldwide within months, causing a pandemic. Sequencing shows that its
+      hemagglutinin gene segment came from an avian virus and its other segments from a human virus. Which
+      process produced this strain?
+    options:
+      - Reassortment of RNA segments in a cell infected by 2 viruses
+      - Random point mutations in the hemagglutinin gene
+      - Complementation by a coinfecting virus
+      - Phenotypic mixing producing a pseudovirion
+      - Recombination by crossing over between homologous DNA
+    answer: 0
+    why:
+      - "Right. Antigenic shift: reassortment of segments from 2 viruses in 1 cell gives a dramatically different virus and pandemics."
+      - "Point mutations are antigenic drift, giving seasonal epidemics."
+      - "Complementation only supplies a protein; the genome is unchanged (eg, HDV with HBV)."
+      - "Phenotypic mixing changes only the coat for one generation."
+      - "Recombination by crossing over is not how segmented influenza changes."
+    src: { page: 166, quote: "Infection of 1 cell by 2 different segmented viruses (eg, swine influenza and human influenza viruses) →  RNA segment reassortment" }
+    status: unverified
+  - id: mic.L05.067
+    kind: mcq
+    topic: influenza
+    stem: >-
+      A 70-year-old man had fever, myalgia and cough for 4 days during the winter. He seemed to improve, then
+      developed high fever, rigors and cough with purulent sputum. Chest x-ray shows multilobar infiltrates with
+      early cavitation. Which organism is the most likely cause of the second illness?
+    options:
+      - Staphylococcus aureus
+      - Mycoplasma pneumoniae
+      - Pneumocystis jirovecii
+      - Respiratory syncytial virus
+      - Legionella pneumophila
+    answer: 0
+    why:
+      - "Right. Influenza predisposes to fatal bacterial superinfection, most commonly S aureus (also S pneumoniae and H influenzae); cavitation fits S aureus."
+      - "Mycoplasma causes atypical walking pneumonia, not post-flu cavitation."
+      - "Pneumocystis needs immunosuppression."
+      - "RSV is bronchiolitis in babies."
+      - "Legionella is not the classic post-influenza superinfection in First Aid."
+    src: { page: 166, quote: "Patients at risk for fatal bacterial superinfection, most commonly S aureus, S pneumoniae, and H influenzae." }
+    status: unverified
+  - id: mic.L05.068
+    kind: mcq
+    topic: rubella
+    stem: >-
+      A newborn has a continuous machine-like murmur, bilateral cloudy lenses, and fails the hearing screen.
+      There are purple papules scattered over the skin. The mother, a recent immigrant, had a mild rash with
+      painful joints and swollen nodes behind the ears early in pregnancy. Which virus is responsible?
+    options:
+      - Rubella virus
+      - Cytomegalovirus
+      - Toxoplasma gondii
+      - Zika virus
+      - Parvovirus B19
+    answer: 0
+    why:
+      - "Right. Congenital rubella: sensorineural deafness, cataracts, PDA, and blueberry muffin skin; the mother had postauricular nodes and arthralgias."
+      - "CMV causes congenital infection but not this triad in First Aid."
+      - "Toxoplasma gives chorioretinitis, hydrocephalus and calcifications."
+      - "Zika gives microcephaly and subcortical calcifications."
+      - "Parvovirus B19 gives hydrops fetalis."
+    src: { page: 166, quote: "classic triad of sensorineural deafness, cataracts, and patent ductus arteriosus." }
+    status: unverified
+  # ---------- p167: croup, measles, mumps ----------
+  - id: mic.L05.069
+    kind: card
+    topic: croup
+    front: What causes croup, and what are its signs?
+    back: Parainfluenza viruses. "Seal-like" barking cough and inspiratory stridor; narrowing of the upper trachea and subglottis gives the steeple sign on x-ray.
+    src: { page: 167, quote: "Results in a “seal-like” barking cough and inspiratory stridor. Narrowing of upper trachea and subglottis leads to characteristic steeple sign on x-ray" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.070
+    kind: card
+    topic: measles
+    front: What is the usual sequence of measles?
+    back: Prodromal fever with cough, coryza and conjunctivitis, then Koplik spots (bright red spots with blue-white center on buccal mucosa), followed 1-2 days later by a maculopapular rash that starts at the head/neck and spreads downward.
+    src: { page: 167, quote: "Usual presentation involves prodromal fever with cough, coryza, and conjunctivitis, then eventually Koplik spots (bright red spots with blue-white center on buccal mucosa A ), followed 1-2 days later by a maculopapular rash that starts at the head/neck and spreads downward." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.071
+    kind: enumerate
+    topic: measles
+    prompt: Enumerate the 4 C's of measles (4).
+    points:
+      - Cough
+      - Coryza
+      - Conjunctivitis
+      - "\"C\"oplik spots"
+    pass: 4
+    src: { page: 167, quote: "4 C’s of measles: Cough Coryza Conjunctivitis “C”oplik spots" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.072
+    kind: enumerate
+    topic: measles
+    prompt: Enumerate the possible sequelae of measles (4).
+    points:
+      - Subacute sclerosing panencephalitis (SSPE), years later
+      - Encephalitis (1:1000), within a few days of rash
+      - Giant cell pneumonia (rare except in immunosuppressed)
+      - Acute disseminated (postinfectious) encephalomyelitis
+    pass: 3
+    src: { page: 167, quote: "Subacute sclerosing panencephalitis (SSPE): personality changes, dementia, autonomic dysfunction, death (occurs years later)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.073
+    kind: cloze
+    topic: measles
+    text: Measles lymphadenitis shows {{c1::Warthin-Finkeldey}} giant cells (fused lymphocytes) in a background of paracortical hyperplasia.
+    src: { page: 167, quote: "Lymphadenitis with Warthin-Finkeldey giant cells (fused lymphocytes) in a background of paracortical hyperplasia." }
+    status: unverified
+  - id: mic.L05.074
+    kind: card
+    topic: measles
+    front: What reduces measles morbidity and mortality, and what is the most common cause of measles death in children?
+    back: Vitamin A supplementation, particularly in malnourished children. Pneumonia is the most common cause of measles-associated death in children.
+    src: { page: 167, quote: "Vitamin A supplementation can reduce morbidity and mortality from measles, particularly in malnourished children. Pneumonia is the most common cause of measles-associated death in children." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.075
+    kind: enumerate
+    topic: mumps
+    prompt: Enumerate the symptoms of mumps (4).
+    points:
+      - Parotitis
+      - Orchitis
+      - Aseptic meningitis
+      - Pancreatitis
+    pass: 4
+    hook: "Mumps makes your parotid glands and testes as big as POM-Poms."
+    src: { page: 167, quote: "Symptoms: Parotitis A , Orchitis (inflammation of testes), aseptic Meningitis, and Pancreatitis. Can cause sterility (especially after puberty)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.076
+    kind: mcq
+    topic: measles
+    stem: >-
+      A 14-year-old unvaccinated boy has had progressive personality changes, declining school performance and
+      myoclonic jerks over 6 months. At age 2 he had a febrile illness with cough, red eyes and a rash that
+      started on his face. Which complication does he have?
+    options:
+      - Subacute sclerosing panencephalitis
+      - Progressive multifocal leukoencephalopathy
+      - Acute disseminated encephalomyelitis
+      - HSV temporal lobe encephalitis
+      - Congenital rubella syndrome
+    answer: 0
+    why:
+      - "Right. SSPE: personality changes, dementia, autonomic dysfunction and death, years after measles."
+      - "PML is JC virus in the immunocompromised."
+      - "ADEM follows the infection closely, not years later."
+      - "HSV encephalitis is acute with fever and seizures."
+      - "Congenital rubella is present at birth."
+    src: { page: 167, quote: "Subacute sclerosing panencephalitis (SSPE): personality changes, dementia, autonomic dysfunction, death (occurs years later)" }
+    status: unverified
+  - id: mic.L05.077
+    kind: mcq
+    topic: croup
+    stem: >-
+      A 2-year-old boy wakes at night with a barking cough and noisy breathing on inspiration after 2 days of a
+      runny nose and low fever. A frontal neck x-ray shows narrowing of the subglottic trachea. Which property of
+      the causative virus promotes release of new virions from infected cells?
+    options:
+      - Neuraminidase
+      - F (fusion) protein alone, without neuraminidase
+      - Reverse transcriptase
+      - A segmented double-stranded RNA genome
+      - Binding to ICAM-1
+    answer: 0
+    why:
+      - "Right. Croup is parainfluenza, whose membrane has hemagglutinin (entry) and neuraminidase (progeny virion release)."
+      - "The F protein fuses cells; it does not release virions."
+      - "Reverse transcriptase belongs to retroviruses and HBV."
+      - "A segmented dsRNA genome is rotavirus."
+      - "ICAM-1 is the rhinovirus receptor."
+    src: { page: 167, quote: "Virus membrane contains hemagglutinin (binds sialic acid and promotes viral entry) and neuraminidase (promotes progeny virion release) antigens." }
+    status: unverified
+  # ---------- p168: arboviruses ----------
+  - id: mic.L05.078
+    kind: table
+    topic: aedes-arboviruses
+    title: Chikungunya vs dengue
+    columns: ["", Chikungunya, Dengue]
+    rows:
+      - [Type, Alphavirus/togavirus, Flavivirus]
+      - [Hallmark, "Inflammatory polyarthritis; joint swelling highly specific", "Retro-orbital pain, myalgias, neutropenia"]
+      - [Bleeding, "Thrombocytopenia, leukopenia, hemorrhage less common", "Dengue hemorrhagic fever: bleeding, plasma leakage, severe thrombocytopenia"]
+      - [Treatment, "Supportive; steroids or DMARDs for chronic arthritis", "Supportive; volume repletion or transfusion if severe shock"]
+      - [Vaccine, None, Live recombinant (yellow fever backbone)]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [4, 1], [4, 2]]
+    src: { page: 168, quote: "Arthralgias are more commonly reported (vs dengue); joint swelling is highly specific for Chikungunya." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.079
+    kind: card
+    topic: aedes-arboviruses
+    front: Why is dengue hemorrhagic fever more common after a second infection?
+    back: Infection with a different serotype after the first causes antibody-dependent enhancement of disease. It may progress to dengue shock syndrome (plasma leakage, circulatory collapse).
+    src: { page: 168, quote: "Most common if infected with a different serotype after initial infection due to antibody- dependent enhancement of disease. May progress to dengue shock syndrome: plasma leakage →  circulatory collapse." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.080
+    kind: card
+    topic: yellow-fever
+    front: What are the features of yellow fever?
+    back: A flavivirus (arbovirus) spread by Aedes mosquitoes, with a monkey or human reservoir. High fever, black vomitus, jaundice, hemorrhage, backache; Councilman bodies (eosinophilic apoptotic globules) on liver biopsy. Live attenuated vaccine for travelers.
+    src: { page: 168, quote: "Symptoms: high fever, black vomitus, jaundice, hemorrhage, backache. May see Councilman bodies (eosinophilic apoptotic globules) on liver biopsy." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.081
+    kind: card
+    topic: zika
+    front: What are the features of Zika virus infection in adults, and how does it spread?
+    back: Aedes mosquito bites, plus sexual and vertical transmission. Conjunctivitis, low-grade pyrexia and itchy rash in 20% of cases; may be complicated by Guillain-Barré syndrome. RT-PCR or serology; supportive care.
+    src: { page: 168, quote: "Causes conjunctivitis, low-grade pyrexia, and itchy rash in 20% of cases." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.082
+    kind: card
+    topic: zika
+    front: What is congenital Zika syndrome?
+    back: Brain imaging shows ventriculomegaly and subcortical calcifications. The newborn has microcephaly, ocular anomalies and motor abnormalities (spasticity, seizures). It can also cause miscarriage.
+    src: { page: 168, quote: "In pregnancy, can lead to miscarriage or congenital Zika syndrome: brain imaging shows ventriculomegaly, subcortical calcifications" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.083
+    kind: mcq
+    topic: aedes-arboviruses
+    stem: >-
+      A 25-year-old woman had dengue fever in Thailand 2 years ago. She now returns from Brazil with high
+      fever, severe pain behind the eyes, bleeding gums and petechiae. Platelets are 18,000/mm3 and her
+      hematocrit is rising. Why is this episode more severe than the first?
+    options:
+      - Antibody-dependent enhancement after infection with a different serotype
+      - Antigenic shift from reassortment of segmented RNA
+      - Reactivation of latent virus in sensory ganglia
+      - Coinfection with chikungunya virus causing arthritis
+      - A superantigen activating T cells
+    answer: 0
+    why:
+      - "Right. Dengue hemorrhagic fever is most common after infection with a different serotype, through antibody-dependent enhancement."
+      - "Antigenic shift is influenza; dengue is not segmented."
+      - "Latency in ganglia is a herpesvirus feature."
+      - "Chikungunya coinfection can occur but causes arthritis, not this mechanism."
+      - "Superantigens are bacterial toxins."
+    src: { page: 168, quote: "Most common if infected with a different serotype after initial infection due to antibody- dependent enhancement of disease." }
+    status: unverified
+  # ---------- p169: rabies, Ebola, SARS-CoV-2 ----------
+  - id: mic.L05.084
+    kind: card
+    topic: rabies
+    front: What does rabies look like under the microscope, and where are Negri bodies found?
+    back: Bullet-shaped virus. Negri bodies (cytoplasmic inclusions) are commonly found in Purkinje cells of the cerebellum and in hippocampal neurons.
+    src: { page: 169, quote: "Bullet-shaped virus A . Negri bodies (cytoplasmic inclusions B ) commonly found in Purkinje cells of cerebellum and in hippocampal neurons." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.085
+    kind: card
+    topic: rabies
+    front: How does rabies reach the CNS, and how does the disease progress?
+    back: After binding ACh receptors, it migrates retrograde (via dynein motors) up nerve axons. Fever, malaise, then agitation, photophobia, hydrophobia, hypersalivation, then paralysis, coma and death.
+    src: { page: 169, quote: "Travels to the CNS by migrating in a retrograde fashion (via dynein motors) up nerve axons after binding to ACh receptors." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.086
+    kind: cloze
+    topic: rabies
+    text: Rabies postexposure prophylaxis is wound cleaning plus {{c1::killed vaccine}} and {{c2::rabies immunoglobulin}}, an example of passive-active immunity.
+    src: { page: 169, quote: "Postexposure prophylaxis is wound cleaning plus immunization with killed vaccine and rabies immunoglobulin. Example of passive-active immunity." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.087
+    kind: card
+    topic: rabies
+    front: Which animals most commonly transmit rabies in the United States?
+    back: Bats, raccoons and skunks, more than dogs; aerosol transmission (eg, bat caves) is also possible. The incubation period is long (weeks to months).
+    src: { page: 169, quote: "Infection more commonly from bat, raccoon, and skunk bites than from dog bites in the United States; aerosol transmission (eg, bat caves) also possible." }
+    status: unverified
+  - id: mic.L05.088
+    kind: card
+    topic: ebola
+    front: How does Ebola present, how is it diagnosed, and how is it spread?
+    back: A filovirus. After up to 21 days, abrupt flulike symptoms, diarrhea/vomiting, high fever, myalgia, which can progress to DIC, diffuse hemorrhage and shock. RT-PCR within 48 hr of onset. Direct contact with bodily fluids, fomites (including dead bodies), infected bats or primates; high healthcare-associated infection.
+    src: { page: 169, quote: "Following an incubation period of up to 21 days, presents with abrupt onset of flulike symptoms, diarrhea/vomiting, high fever, myalgia. Can progress to DIC, diffuse hemorrhage, shock." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.089
+    kind: card
+    topic: ebola
+    front: How is Ebola transmission prevented?
+    back: Vaccination of contacts, strict isolation of infected individuals, and barrier practices for healthcare workers. Care is supportive; no definitive treatment.
+    src: { page: 169, quote: "Vaccination of contacts, strict isolation of infected individuals, and barrier practices for healthcare workers are key to preventing transmission." }
+    status: unverified
+  - id: mic.L05.090
+    kind: card
+    topic: sars-cov-2
+    front: What are the severe complications of COVID-19?
+    back: Pneumonia, hypercoagulability (DVT, PE, stroke), myocardial injury, neurologic sequelae, shock, organ failure, death. Common symptoms include anosmia and dysgeusia.
+    src: { page: 169, quote: "Severe cases may lead to complications like: pneumonia, hypercoagulability (DVT, PE, stroke), myocardial injury, neurologic sequelae, shock, organ failure, death." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.091
+    kind: card
+    topic: sars-cov-2
+    front: How does SARS-CoV-2 enter cells, and how do the vaccines work?
+    back: The viral spike protein attaches to ACE2 (highly expressed in lungs, intestines, heart and kidneys). mRNA and viral vector vaccines present the spike protein, leading to anti-spike antibodies.
+    src: { page: 169, quote: "Host cell entry occurs by attachment of viral spike protein to ACE2 receptor on cell membranes (highly expressed in the lungs, intestines, heart, and kidneys)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.092
+    kind: card
+    topic: sars-cov-2
+    front: How is COVID-19 diagnosed?
+    back: NAAT (RT-PCR), or a viral antigen test (RAT), which is rapid and accessible but less sensitive than NAAT.
+    src: { page: 169, quote: "Viral Antigen Test (RAT) →  rapid, accessible, less sensitive than NAAT" }
+    status: unverified
+  - id: mic.L05.093
+    kind: mcq
+    topic: rabies
+    stem: >-
+      A 30-year-old man woke to find a bat in his bedroom 1 day ago. He has no visible bite and has never been
+      vaccinated against rabies. He feels well. What is the most appropriate management?
+    options:
+      - Wound care, rabies immunoglobulin and killed rabies vaccine
+      - Killed rabies vaccine only
+      - Rabies immunoglobulin only
+      - Observe and treat if symptoms appear
+      - Oral acyclovir
+    answer: 0
+    why:
+      - "Right. Postexposure prophylaxis is wound cleaning plus killed vaccine and rabies immunoglobulin (passive-active immunity); bats are a leading US source."
+      - "Vaccine alone leaves no immediate protection in an unvaccinated person."
+      - "Immunoglobulin alone gives no lasting immunity."
+      - "Once symptoms start, rabies is almost always fatal."
+      - "Acyclovir treats herpesviruses."
+    src: { page: 169, quote: "Postexposure prophylaxis is wound cleaning plus immunization with killed vaccine and rabies immunoglobulin." }
+    status: unverified
+  # ---------- p170: hepatitis viruses ----------
+  - id: mic.L05.094
+    kind: card
+    topic: hepatitis-viruses
+    front: Which hepatitis viruses are naked, and why does it matter?
+    back: HAV and HEV lack an envelope and are not destroyed by the gut ("NAkEd viruses... the vowels hit your bowels"), so they spread fecal-oral.
+    src: { page: 170, quote: "NAkEd viruses (HAV and HEV) lack an envelope and are not destroyed by the gut: the vowels hit your bowels." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.095
+    kind: card
+    topic: hepatitis-viruses
+    front: How does the HBV DNA polymerase replicate the genome?
+    back: It has DNA- and RNA-dependent activities. In the nucleus it completes the partial dsDNA; host RNA polymerase transcribes mRNA from viral DNA; then the DNA polymerase reverse transcribes viral RNA to DNA.
+    src: { page: 170, quote: "HBV DNA polymerase has DNA- and RNA-dependent activities. Upon entry into nucleus, the polymerase completes the partial dsDNA." }
+    status: unverified
+  - id: mic.L05.096
+    kind: card
+    topic: hepatitis-viruses
+    front: Why do antibodies fail to clear HCV?
+    back: HCV lacks 3'-5' exonuclease activity, so it has no proofreading; its envelope proteins vary antigenically and host antibody production lags behind new mutant strains.
+    src: { page: 170, quote: "HCV lacks 3′-5′ exonuclease activity →  no proofreading ability →  antigenic variation of HCV envelope proteins." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.097
+    kind: table
+    topic: hepatitis-viruses
+    title: Hepatitis viruses
+    columns: [Virus, Family, Transmission, Course, HCC risk]
+    rows:
+      - [HAV, RNA picornavirus, "Fecal-oral (shellfish, travelers, day care)", Acute and self limiting; no carrier state, "No"]
+      - [HBV, DNA hepadnavirus, "Parenteral, sexual, perinatal (Blood, Bedroom, Birthing)", Serum sickness-like at first; carrier state common, "Yes"]
+      - [HCV, RNA flavivirus, "Primarily blood (IDU, posttransfusion)", "Majority chronic; Cirrhosis or Carcinoma", "Yes"]
+      - [HDV, RNA deltavirus, "Parenteral, sexual, perinatal", Superinfection worse than coinfection, "Yes"]
+      - [HEV, RNA hepevirus, "Fecal-oral, especially waterborne", Fulminant hepatitis in Expectant (pregnant) patients, "No"]
+    blanks: [[0, 2], [1, 2], [2, 2], [4, 2], [2, 3], [4, 3], [0, 4], [4, 4]]
+    src: { page: 170, quote: "Fecal-oral (shellfish, travelers, day care) Parenteral (Blood), sexual (Bedroom), perinatal (Birthing) Primarily blood (injection drug use, posttransfusion)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.098
+    kind: card
+    topic: hepatitis-viruses
+    front: How does the incubation of HDV differ between superinfection and coinfection, and which has the worse prognosis?
+    back: Superinfection (HDV after HBV) - short incubation and worse prognosis. Coinfection (HDV with HBV) - long incubation. HDV is defective and depends on the HBV HBsAg coat to enter hepatocytes.
+    src: { page: 170, quote: "Superinfection (HDV after HBV) = short Coinfection (HDV with HBV) = long" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.099
+    kind: table
+    topic: hepatitis-viruses
+    title: Liver biopsy in viral hepatitis
+    columns: [Virus, Biopsy]
+    rows:
+      - [HAV, "Hepatocyte swelling, monocyte infiltration, Councilman bodies"]
+      - [HBV, "Granular eosinophilic ground glass (surface antigen in hepatocytes); cytotoxic T cells mediate damage"]
+      - [HCV, Lymphoid aggregates with focal macrovesicular steatosis]
+      - [HEV, Patchy necrosis]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 170, quote: "Granular eosinophilic “ground glass” appearance due to accumulation of surface antigen within infected hepatocytes; cytotoxic T cells mediate damage" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.100
+    kind: card
+    topic: hepatitis-viruses
+    front: Who does HEV threaten most, and where is it epidemic?
+    back: Pregnant patients (fulminant hepatitis, high mortality). Enteric and epidemic (parts of Asia, Africa, Middle East); no carrier state.
+    src: { page: 170, quote: "Fulminant hepatitis in Expectant (pregnant) patients" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.101
+    kind: mcq
+    topic: hepatitis-viruses
+    stem: >-
+      A 26-year-old woman in her third trimester develops jaundice and confusion 5 weeks after drinking
+      untreated water during monsoon flooding in South Asia. INR is 3.1 and ALT is 2400 U/L. Which virus is
+      the most likely cause?
+    options:
+      - Hepatitis E virus
+      - Hepatitis A virus
+      - Hepatitis B virus
+      - Hepatitis C virus
+      - Hepatitis D virus
+    answer: 0
+    why:
+      - "Right. HEV is fecal-oral, especially waterborne, epidemic in Asia, and causes fulminant hepatitis with high mortality in pregnant patients."
+      - "HAV is fecal-oral too but is not singled out for fulminant disease in pregnancy."
+      - "HBV is parenteral, sexual or perinatal, with a long incubation."
+      - "HCV is mainly blood-borne and usually becomes chronic."
+      - "HDV needs HBV and is spread parenterally."
+    src: { page: 170, quote: "Fecal-oral, especially waterborne" }
+    status: unverified
+  # ---------- p171: extrahepatic and serology ----------
+  - id: mic.L05.102
+    kind: table
+    topic: hepatitis-extrahepatic
+    title: Extrahepatic manifestations of hepatitis B and C
+    columns: ["", Hepatitis B, Hepatitis C]
+    rows:
+      - [Hematologic, Aplastic anemia, "Essential mixed cryoglobulinemia, ↑ risk B-cell NHL, ITP, autoimmune hemolytic anemia"]
+      - [Renal, Membranous GN > membranoproliferative GN, Membranoproliferative GN > membranous GN]
+      - [Vascular, Polyarteritis nodosa, Leukocytoclastic vasculitis]
+      - [Dermatologic, "-", "Sporadic porphyria cutanea tarda, lichen planus"]
+      - [Endocrine, "-", "↑ risk of diabetes mellitus, autoimmune hypothyroidism"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2], [3, 2], [4, 2]]
+    src: { page: 171, quote: "Membranous GN > membranoproliferative GN Membranoproliferative GN > membranous GN" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.103
+    kind: table
+    topic: hepatitis-serology
+    title: Hepatitis serologic markers
+    columns: [Marker, Meaning]
+    rows:
+      - [Anti-HAV (IgM), Best test to detect acute hepatitis A]
+      - [Anti-HAV (IgG), Prior HAV infection and/or vaccination; protects against reinfection]
+      - [HBsAg, Hepatitis B infection]
+      - [Anti-HBs, Immunity from vaccination or recovery]
+      - [IgM anti-HBc, Acute/recent infection; may be the sole ⊕ marker in the window period]
+      - [IgG anti-HBc, Prior exposure or chronic infection]
+      - [HBeAg, "Active replication: high transmissibility, poorer prognosis"]
+      - [Anti-HBe, Low transmissibility]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 171, quote: "Anti-HAV (IgM) IgM antibody to HAV; best test to detect acute hepatitis A." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.104
+    kind: card
+    topic: hepatitis-serology
+    front: What is HBeAg, and what does it indicate?
+    back: It is secreted by infected hepatocytes into the circulation and is not part of the mature virion. It indicates active viral replication, so high transmissibility and poorer prognosis.
+    src: { page: 171, quote: "HBeAg Secreted by infected hepatocyte into circulation. Not part of mature HBV virion. Indicates active viral replication and therefore high transmissibility and poorer prognosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.105
+    kind: cloze
+    topic: hepatitis-serology
+    text: During the HBV window period, HBsAg and anti-HBs are both undetectable, and {{c1::IgM anti-HBc}} may be the sole ⊕ marker of infection.
+    src: { page: 171, quote: "IgM anti-HBc may be the sole ⊕ marker of infection during window period." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.106
+    kind: table
+    topic: hepatitis-serology
+    title: HBV serologic patterns
+    columns: [Phase, HBsAg, Anti-HBs, Anti-HBc, HBeAg, Anti-HBe]
+    rows:
+      - [Acute infection, ⊕, ⊝, ⊕ (IgM), ⊕, ⊝]
+      - [Window, ⊝, ⊝, ⊕ (IgM), ⊝, "⊕/⊝"]
+      - [Recovery, ⊝, ⊕, ⊕ (IgG), ⊝, ⊕]
+      - [Chronic (high infectivity), ⊕, ⊝, ⊕ (IgG), ⊕, ⊝]
+      - [Chronic (low infectivity), ⊕, ⊝, ⊕ (IgG), ⊝, ⊕]
+      - [Immunized, ⊝, ⊕, ⊝, ⊝, ⊝]
+    blanks: [[0, 1], [1, 3], [2, 2], [3, 4], [4, 5], [5, 3]]
+    src: { page: 171, quote: "HBsAg Anti-HBs Anti-HBc HBeAg Anti-HBe Incubation Acute infection (IgM) Window (IgM) Recovery (IgG) Chronic infection (high infectivity) (IgG) Chronic infection (low infectivity) (IgG) Immunized" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.107
+    kind: mcq
+    topic: hepatitis-serology
+    stem: >-
+      A 32-year-old nurse is tested before starting a new job. She received the hepatitis B vaccine series as
+      a teenager. Which serologic pattern is expected?
+    options:
+      - HBsAg ⊝, anti-HBs ⊕, anti-HBc ⊝
+      - HBsAg ⊝, anti-HBs ⊕, anti-HBc ⊕ (IgG)
+      - HBsAg ⊕, anti-HBs ⊝, anti-HBc ⊕ (IgM)
+      - HBsAg ⊝, anti-HBs ⊝, anti-HBc ⊕ (IgM)
+      - HBsAg ⊕, anti-HBs ⊝, anti-HBc ⊕ (IgG), HBeAg ⊕
+    answer: 0
+    why:
+      - "Right. The vaccine contains HBsAg only, so immunized people have anti-HBs but no anti-HBc."
+      - "Anti-HBc with anti-HBs means recovery from natural infection."
+      - "HBsAg with IgM anti-HBc is acute infection."
+      - "IgM anti-HBc alone is the window period."
+      - "HBsAg with HBeAg and IgG anti-HBc is chronic, high-infectivity infection."
+    src: { page: 171, quote: "Anti-HBs Antibody to HBsAg; indicates immunity to hepatitis B due to vaccination or recovery from infection." }
+    status: unverified
+  - id: mic.L05.108
+    kind: mcq
+    topic: hepatitis-extrahepatic
+    stem: >-
+      A 54-year-old man with chronic hepatitis C has palpable purpura on his legs, joint pain, and edema.
+      Urine shows protein and red cell casts. Serum complement C4 is low, and cold-precipitating
+      immunoglobulins are present. Which renal lesion is most likely?
+    options:
+      - Membranoproliferative glomerulonephritis
+      - Membranous nephropathy as the most typical HCV lesion
+      - Minimal change disease
+      - IgA nephropathy
+      - Focal segmental glomerulosclerosis
+    answer: 0
+    why:
+      - "Right. Hepatitis C causes essential mixed cryoglobulinemia and membranoproliferative GN more than membranous GN."
+      - "Membranous GN is more typical of hepatitis B."
+      - "Minimal change disease is not an HCV association in First Aid."
+      - "IgA nephropathy is not the HCV association."
+      - "FSGS is linked to HIV (HIV-associated nephropathy), not HCV."
+    src: { page: 171, quote: "Membranoproliferative GN > membranous GN" }
+    status: unverified
+  # ---------- p172: HIV ----------
+  - id: mic.L05.109
+    kind: table
+    topic: hiv
+    title: HIV structural genes
+    columns: [Gene, Proteins, Function]
+    rows:
+      - [env, gp120 and gp41 (from cleavage of gp160), "gp120: attachment to CD4+ T cell; gp41: fusion and entry"]
+      - [gag, p24 and p17, Capsid and matrix proteins]
+      - [pol, "Reverse transcriptase, integrase, protease", "RIP \"Pol\" (Paul)"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1]]
+    src: { page: 172, quote: "Env (gp120 and gp41)—formed from cleavage of gp160 to form envelope glycoproteins." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.110
+    kind: card
+    topic: hiv
+    front: What is the HIV genome, and what does reverse transcriptase do?
+    back: Diploid genome (2 molecules of RNA). Reverse transcriptase synthesizes dsDNA from genomic RNA, which integrates into the host genome. The envelope is acquired by budding from the host plasma membrane.
+    src: { page: 172, quote: "Reverse transcriptase synthesizes dsDNA from genomic RNA; dsDNA integrates into host genome." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.111
+    kind: card
+    topic: hiv
+    front: Which coreceptors does HIV use early and late, and what does a CCR5 mutation do?
+    back: CCR5 on macrophages (early) or CXCR4 on T cells (late), with CD4. Homozygous CCR5 mutation = immunity; heterozygous = slower course.
+    src: { page: 172, quote: "Virus binds CD4 as well as a coreceptor, either CCR5 on macrophages (early infection) or CXCR4 on T cells (late infection). Homozygous CCR5 mutation = immunity. Heterozygous CCR5 mutation = slower course." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.112
+    kind: card
+    topic: hiv-diagnosis
+    front: What does the HIV-1/2 Ag/Ab immunoassay detect, and what is its limitation?
+    back: Viral p24 capsid antigen and IgG and/or IgM to HIV-1/2. Very high sensitivity and specificity, but it may miss early HIV if tested within the first 2 weeks. A positive screen is followed by an HIV-1/2 differentiation immunoassay.
+    src: { page: 172, quote: "HIV-1/2 Ag/Ab immunoassays detect viral p24 antigen capsid protein and IgG and/or IgM to HIV-1/2." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.113
+    kind: card
+    topic: hiv-diagnosis
+    front: What are the two kinds of HIV RNA test, and what is each used for?
+    back: NAAT is qualitative, a sensitive way to detect viremia in antibody-negative patients. Viral load (RT-PCR) is quantitative, used to monitor response to treatment and transmissibility. Western blot is no longer recommended for confirmation.
+    src: { page: 172, quote: "NAAT is qualitative, and is a sensitive method to detect HIV viremia in antibody- negative patients." }
+    status: unverified
+  - id: mic.L05.114
+    kind: card
+    topic: hiv-diagnosis
+    front: How is HIV diagnosed in a baby, and why?
+    back: With HIV viral load, not Ag/Ab testing, because maternally transferred antibody confounds antibody tests.
+    src: { page: 172, quote: "HIV-1/2 Ag/Ab testing is not recommended in babies with suspected HIV due to maternally transferred antibody. Use HIV viral load instead." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.115
+    kind: cloze
+    topic: hiv-diagnosis
+    text: AIDS is diagnosed with {{c1::≤200}} CD4+ cells/mm3 (normal 500-1500) or HIV ⊕ with an {{c2::AIDS-defining condition}} (eg, Pneumocystis pneumonia).
+    src: { page: 172, quote: "AIDS diagnosis: ≤200 CD4+ cells/mm3 (normal: 500-1500 cells/mm3 ) or HIV ⊕ with AIDS-defining condition (eg, Pneumocystis pneumonia)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.116
+    kind: mcq
+    topic: hiv
+    stem: >-
+      A man has had many sexual exposures to partners with HIV but has never become infected. Genetic testing
+      shows that he is homozygous for a deletion in a chemokine receptor gene. Which viral step is blocked in
+      his cells?
+    options:
+      - Entry of macrophage-tropic virus via the CCR5 coreceptor
+      - Integration of proviral DNA by integrase
+      - Cleavage of gp160 into gp120 and gp41
+      - Reverse transcription of genomic RNA
+      - Budding from the plasma membrane
+    answer: 0
+    why:
+      - "Right. HIV binds CD4 and CCR5 on macrophages early in infection; homozygous CCR5 mutation gives immunity."
+      - "Integration is an intracellular step, unaffected by the coreceptor."
+      - "gp160 cleavage happens in the infected cell."
+      - "Reverse transcription follows entry."
+      - "Budding is the last step."
+    src: { page: 172, quote: "Homozygous CCR5 mutation = immunity." }
+    status: unverified
+  - id: mic.L05.117
+    kind: mcq
+    topic: hiv-diagnosis
+    stem: >-
+      A 24-year-old man has fever, sore throat, a rash and lymphadenopathy 10 days after condomless sex with a
+      new partner. A fourth-generation HIV-1/2 Ag/Ab immunoassay is negative. What is the most appropriate
+      next test?
+    options:
+      - HIV-1 nucleic acid test
+      - Western blot
+      - Repeat the Ag/Ab immunoassay in 1 year
+      - CD4+ cell count
+      - HIV-1/HIV-2 antibody differentiation immunoassay
+    answer: 0
+    why:
+      - "Right. The Ag/Ab test may miss HIV in the first 2 weeks; NAAT detects viremia in antibody-negative patients (acute HIV)."
+      - "Western blot is no longer recommended."
+      - "Waiting a year would miss acute infection."
+      - "A CD4+ count does not diagnose HIV."
+      - "The differentiation assay follows a positive screen."
+    src: { page: 172, quote: "may miss early HIV disease if tested within first 2 weeks of infection." }
+    status: unverified
+  # ---------- p173: diseases in HIV ----------
+  - id: mic.L05.118
+    kind: card
+    topic: hiv-diseases
+    front: What does a falling CD4+ count lead to in HIV?
+    back: Reactivation of past infections (eg, TB, HSV, shingles), dissemination of bacterial and fungal infections (eg, coccidioidomycosis), and non-Hodgkin lymphomas.
+    src: { page: 173, quote: "↓ CD4+ cell count →  reactivation of past infections (eg, TB, HSV, shingles), dissemination of bacterial infections and fungal infections (eg, coccidioidomycosis), and non-Hodgkin lymphomas." }
+    status: unverified
+  - id: mic.L05.119
+    kind: table
+    topic: hiv-diseases
+    title: HIV infections by CD4+ count
+    columns: [CD4+ count, Pathogens]
+    rows:
+      - [<500/mm3, "Candida (oral thrush), EBV (oral hairy leukoplakia), HHV-8 (localized Kaposi), HPV (SCC), TB reactivation"]
+      - [<200/mm3, "Histoplasma, HIV (dementia, nephropathy), JC virus (PML), HHV-8 (disseminated Kaposi), Pneumocystis"]
+      - [<100/mm3, "Bartonella, Candida esophagitis, CMV, Cryptococcus, Cryptosporidium, EBV lymphoma, MAC"]
+      - [<50/mm3 (most common), Toxoplasma brain abscesses]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 173, quote: "Pneumocystis jirovecii Pneumocystis pneumonia “Ground-glass” opacities on chest imaging" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.120
+    kind: card
+    topic: hiv-diseases
+    front: How do oral thrush and oral hairy leukoplakia differ in HIV?
+    back: Oral thrush (Candida) - scrapable white plaque, pseudohyphae on microscopy. Oral hairy leukoplakia (EBV) - unscrapable white plaque on the lateral tongue. Both at CD4+ <500.
+    src: { page: 173, quote: "EBV Oral hairy leukoplakia Unscrapable white plaque on lateral tongue" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.121
+    kind: enumerate
+    topic: hiv-diseases
+    prompt: Enumerate the CMV diseases in HIV with CD4+ <100 (5).
+    points:
+      - Colitis
+      - Retinitis
+      - Esophagitis
+      - Encephalitis
+      - Pneumonitis
+    pass: 5
+    hook: "CREEP"
+    src: { page: 173, quote: "Colitis, Retinitis, Esophagitis, Encephalitis, Pneumonitis (CREEP)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.122
+    kind: card
+    topic: hiv-diseases
+    front: How is CNS lymphoma told apart from Toxoplasma in HIV?
+    back: EBV CNS lymphoma is ring enhancing and may be solitary; Toxoplasma brain abscesses are multiple ring-enhancing lesions (most common at CD4+ <50).
+    src: { page: 173, quote: "CNS lymphoma—ring enhancing, may be solitary (vs Toxoplasma)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L05.123
+    kind: card
+    topic: hiv-diseases
+    front: What do Bartonella and MAC cause in HIV with CD4+ <100?
+    back: Bartonella - bacillary angiomatosis, multiple red to purple papules or nodules; biopsy shows neutrophilic inflammation. MAC - nonspecific systemic symptoms (fever, night sweats, weight loss, diarrhea) or superficial lymphadenitis.
+    src: { page: 173, quote: "Bartonella spp Bacillary angiomatosis Multiple red to purple papules or nodules Biopsy with neutrophilic inflammation" }
+    status: unverified
+  - id: mic.L05.124
+    kind: card
+    topic: hiv-diseases
+    front: How does Kaposi sarcoma look on histology?
+    back: Perivascular spindle cells invading and forming vascular tumors (HHV-8; localized cutaneous at CD4+ <500, disseminated at <200).
+    src: { page: 173, quote: "Perivascular spindle cells invading and forming vascular tumors on histology" }
+    status: unverified
+  - id: mic.L05.125
+    kind: mcq
+    topic: hiv-diseases
+    stem: >-
+      A 38-year-old woman with untreated HIV and a CD4+ count of 30 cells/mm3 has floaters and blurred vision
+      in her right eye. Fundoscopy shows fluffy white perivascular lesions with hemorrhage. Which finding on a
+      tissue biopsy would be characteristic of the cause?
+    options:
+      - Cells with large intranuclear owl eye inclusions
+      - Multinucleated giant cells with Cowdry A inclusions only in skin
+      - Negri bodies
+      - Ground glass hepatocytes
+      - Oval yeast within macrophages
+    answer: 0
+    why:
+      - "Right. CMV retinitis (hemorrhage, cotton-wool exudates) at CD4+ <100; biopsy shows owl eye intranuclear inclusions."
+      - "Cowdry A inclusions and giant cells are HSV and VZV."
+      - "Negri bodies are rabies."
+      - "Ground glass hepatocytes are HBV."
+      - "Oval yeast within macrophages is Histoplasma."
+    src: { page: 173, quote: "Biopsy reveals cells with intranuclear (owl eye) inclusion bodies" }
+    status: unverified
+  - id: mic.L05.126
+    kind: mcq
+    topic: hiv-diseases
+    stem: >-
+      A 41-year-old man with HIV has headache and confusion. His CD4+ count is 70 cells/mm3. MRI shows a single
+      large ring-enhancing periventricular lesion. CSF is positive for EBV DNA. Which diagnosis is most likely?
+    options:
+      - Primary CNS lymphoma
+      - Toxoplasma brain abscess
+      - Progressive multifocal leukoencephalopathy
+      - Cryptococcal meningitis
+      - HIV-associated dementia
+    answer: 0
+    why:
+      - "Right. EBV causes B-cell lymphoma at CD4+ <100; CNS lymphoma is ring enhancing and may be solitary."
+      - "Toxoplasma gives multiple ring-enhancing lesions."
+      - "PML lesions do not enhance."
+      - "Cryptococcus causes meningitis, not a ring lesion."
+      - "HIV dementia shows cerebral atrophy."
+    src: { page: 173, quote: "EBV B-cell lymphoma (eg, non-Hodgkin lymphoma, CNS lymphoma)" }
+    status: unverified
+  # ---------- one vignette MCQ for each remaining topic ----------
+  - id: mic.L05.127
+    kind: mcq
+    topic: viral-structure
+    stem: >-
+      A researcher compares three viruses by electron microscopy. One has an icosahedral capsid with no outer
+      layer; the others have a lipid bilayer with surface proteins. Which statement about the first virus is correct?
+    options:
+      - It is a naked (nonenveloped) virus
+      - It has a helical capsid
+      - It is a bacteriophage with a tail sheath
+      - It took its envelope from the nuclear membrane
+      - It has no capsid
+    answer: 0
+    why:
+      - "Right. A capsid with nucleic acid and no lipid bilayer is a naked (nonenveloped) icosahedral virus."
+      - "Its capsid is icosahedral."
+      - "A bacteriophage has a collar, helical sheath and base plate."
+      - "It has no envelope at all."
+      - "All three types have a capsid."
+    src: { page: 159, quote: "Naked (nonenveloped) virus with icosahedral capsid" }
+    status: unverified
+  - id: mic.L05.128
+    kind: mcq
+    topic: viral-genetics
+    stem: >-
+      A cell is infected with two viruses at once. The progeny carry the genome of virus A inside the coat of
+      virus B and infect cells that virus B targets. Their own progeny have a type A coat. What process is this?
+    options:
+      - Phenotypic mixing
+      - Reassortment
+      - Recombination
+      - Complementation
+      - Antigenic drift
+    answer: 0
+    why:
+      - "Right. In phenotypic mixing the B coat sets tropism for one round only; the A genome makes A coats next time."
+      - "Reassortment exchanges segments of segmented genomes."
+      - "Recombination is crossing over between homologous regions."
+      - "Complementation is one virus supplying a functional protein to a mutant."
+      - "Drift is random mutation in HA or NA."
+    src: { page: 159, quote: "Type B protein coat determines the tropism (infectivity) of the hybrid virus." }
+    status: unverified
+  - id: mic.L05.129
+    kind: mcq
+    topic: viral-genomes
+    stem: >-
+      Purified RNA from a virus is injected into cultured cells and produces no virus. The same RNA with its
+      virion enzymes produces infection. Which virus fits?
+    options:
+      - Measles virus (⊝ ssRNA)
+      - Poliovirus (⊕ ssRNA)
+      - Hepatitis C virus (⊕ ssRNA)
+      - Coronavirus (⊕ ssRNA)
+      - Rubella virus (⊕ ssRNA)
+    answer: 0
+    why:
+      - "Right. ⊝ strand ssRNA is not infectious alone; the virion must carry an RNA-dependent RNA polymerase."
+      - "⊕ ssRNA acts like mRNA and is infectious alone."
+      - "⊕ ssRNA is infectious alone."
+      - "⊕ ssRNA is infectious alone."
+      - "⊕ ssRNA is infectious alone."
+    src: { page: 160, quote: "Naked nucleic acids of ⊝ strand ssRNA and dsRNA viruses are not infectious because they lack the required polymerases to replicate." }
+    status: unverified
+  - id: mic.L05.130
+    kind: mcq
+    topic: viral-envelopes
+    stem: >-
+      A virus that causes painful vesicles on the lip is studied as it leaves the cell. From which membrane
+      does it acquire its envelope?
+    options:
+      - Nuclear membrane
+      - Plasma membrane
+      - Golgi membrane only
+      - Mitochondrial membrane
+      - It has no envelope
+    answer: 0
+    why:
+      - "Right. Herpesviruses are the exception: they take their envelope from the nuclear membrane."
+      - "Most enveloped viruses use the plasma membrane, but not herpesviruses."
+      - "The book names the nuclear membrane."
+      - "Mitochondria are not a source."
+      - "HSV is an enveloped DNA virus."
+    src: { page: 160, quote: "Exceptions include herpesviruses, which acquire envelopes from nuclear membrane." }
+    status: unverified
+  - id: mic.L05.131
+    kind: mcq
+    topic: hsv-identification
+    stem: >-
+      A 32-year-old woman has painful grouped vesicles on the vulva. What is the test of choice to confirm the
+      cause?
+    options:
+      - PCR of the skin lesions
+      - Tzanck smear
+      - Viral culture of blood
+      - Monospot test
+      - Serum IgM only
+    answer: 0
+    why:
+      - "Right. PCR of skin lesions is the test of choice for HSV."
+      - "The Tzanck test is outdated and does not tell HSV from VZV."
+      - "Blood culture is not used."
+      - "Monospot is for EBV."
+      - "Serology is not the test of choice."
+    src: { page: 163, quote: "PCR of skin lesions is test of choice." }
+    status: unverified
+  - id: mic.L05.132
+    kind: mcq
+    topic: viral-receptors
+    stem: >-
+      A 6-year-old boy with sickle cell disease has sudden pallor and a reticulocyte count near zero after a
+      febrile illness with a lacy rash. Which receptor did the virus use to enter red cell precursors?
+    options:
+      - P antigen
+      - CD21
+      - ICAM-1
+      - ACE2
+      - Nicotinic AChR
+    answer: 0
+    why:
+      - "Right. Parvovirus B19 binds P antigen on RBCs and causes aplastic crisis."
+      - "CD21 is EBV."
+      - "ICAM-1 is rhinovirus."
+      - "ACE2 is SARS-CoV-2."
+      - "Nicotinic AChR is rabies."
+    src: { page: 163, quote: "Parvovirus B19 P antigen on RBCs" }
+    status: unverified
+  - id: mic.L05.133
+    kind: mcq
+    topic: rna-viruses
+    stem: >-
+      A virologist finds that an RNA virus replicates its genome in the nucleus of the host cell. Which virus is
+      it most likely?
+    options:
+      - Influenza virus
+      - Poliovirus
+      - Measles virus
+      - Rabies virus
+      - Norovirus
+    answer: 0
+    why:
+      - "Right. All RNA viruses replicate in the cytoplasm except retroviruses and influenza (Retro flu is outta cyt)."
+      - "Poliovirus replicates in the cytoplasm."
+      - "Measles replicates in the cytoplasm."
+      - "Rabies replicates in the cytoplasm."
+      - "Norovirus replicates in the cytoplasm."
+    src: { page: 164, quote: "All replicate in the cytoplasm (except retrovirus and influenza virus)." }
+    status: unverified
+  - id: mic.L05.134
+    kind: mcq
+    topic: picornavirus
+    stem: >-
+      A 4-year-old child has fever and vesicles on the hands, feet and mouth. The virus's RNA is translated into
+      one large polypeptide. How are its functional proteins made?
+    options:
+      - Cleavage by virus-encoded proteases
+      - Splicing of the viral mRNA in the nucleus
+      - Translation of many separate segments
+      - Host furin cleavage of the envelope only
+      - Reverse transcription then transcription
+    answer: 0
+    why:
+      - "Right. Picornavirus RNA is translated into 1 polypeptide cleaved by virus-encoded proteases."
+      - "Picornaviruses stay in the cytoplasm."
+      - "Picornaviruses are not segmented."
+      - "Picornaviruses are nonenveloped."
+      - "That is a retrovirus."
+    src: { page: 165, quote: "RNA is translated into 1 large polypeptide that is cleaved by virus-encoded proteases into functional viral proteins." }
+    status: unverified
+  - id: mic.L05.135
+    kind: mcq
+    topic: rhinovirus
+    stem: >-
+      A 22-year-old woman has a runny nose and sneezing for 4 days. The causative virus is a picornavirus but
+      never causes gastroenteritis. Why?
+    options:
+      - It is acid labile and destroyed by stomach acid
+      - It has an envelope dissolved by bile
+      - It binds only ACE2
+      - It is a DNA virus
+      - It needs a helper virus in the gut
+    answer: 0
+    why:
+      - "Right. Rhinovirus is acid labile, so it does not infect the GI tract."
+      - "Rhinovirus is nonenveloped."
+      - "Rhinovirus binds ICAM-1."
+      - "It is an RNA virus."
+      - "HDV is the virus that needs a helper."
+    src: { page: 165, quote: "Acid labile—destroyed by stomach acid; therefore, does not infect the GI tract (unlike the other picornaviruses)." }
+    status: unverified
+  - id: mic.L05.136
+    kind: mcq
+    topic: rotavirus
+    stem: >-
+      A 10-month-old girl in day care has vomiting and watery diarrhea in winter. Her parents ask about her
+      younger brother's vaccine. Which history would make the vaccine contraindicated?
+    options:
+      - Previous intussusception
+      - Egg allergy
+      - Prematurity
+      - Recent otitis media
+      - Mild eczema
+    answer: 0
+    why:
+      - "Right. Rotavirus vaccine is for all infants except those with prior intussusception or SCID."
+      - "Egg allergy is not a contraindication here."
+      - "Prematurity is not listed."
+      - "A minor infection is not listed."
+      - "Eczema is not listed."
+    src: { page: 165, quote: "except those with a history of intussusception (rare adverse effect of rotavirus vaccination) or SCID." }
+    status: unverified
+  - id: mic.L05.137
+    kind: mcq
+    topic: paramyxoviruses
+    stem: >-
+      A premature infant born at 29 weeks gets monthly injections during winter to prevent RSV pneumonia.
+      What does this drug target?
+    options:
+      - The F (fusion) protein
+      - Hemagglutinin
+      - Neuraminidase
+      - Viral RNA polymerase
+      - The spike protein binding ACE2
+    answer: 0
+    why:
+      - "Right. Palivizumab is a monoclonal antibody against the F protein of paramyxoviruses."
+      - "Hemagglutinin is not palivizumab's target."
+      - "Neuraminidase inhibitors are for influenza."
+      - "Palivizumab is an antibody, not a polymerase inhibitor."
+      - "That is SARS-CoV-2."
+    src: { page: 166, quote: "Palivizumab (monoclonal antibody against F protein) prevents pneumonia caused by RSV infection in premature infants." }
+    status: unverified
+  - id: mic.L05.138
+    kind: mcq
+    topic: mumps
+    stem: >-
+      An unvaccinated 17-year-old boy has bilateral swelling at the angles of the jaw. A week later he has a
+      painful, swollen testis. Which long-term risk is most important to discuss?
+    options:
+      - Sterility
+      - Subacute sclerosing panencephalitis
+      - Rheumatic heart disease
+      - Chronic hepatitis
+      - Congenital cataracts in his children
+    answer: 0
+    why:
+      - "Right. Mumps orchitis can cause sterility, especially after puberty."
+      - "SSPE follows measles."
+      - "That follows group A strep."
+      - "Mumps does not cause chronic hepatitis."
+      - "Congenital cataracts come from maternal rubella."
+    src: { page: 167, quote: "Can cause sterility (especially after puberty)." }
+    status: unverified
+  - id: mic.L05.139
+    kind: mcq
+    topic: yellow-fever
+    stem: >-
+      A 30-year-old traveler returns from West Africa with high fever, back pain, jaundice and black vomitus.
+      A liver biopsy shows eosinophilic apoptotic globules. What are these?
+    options:
+      - Councilman bodies
+      - Negri bodies
+      - Cowdry A inclusions
+      - Koplik spots
+      - Warthin-Finkeldey cells
+    answer: 0
+    why:
+      - "Right. Yellow fever (a flavivirus spread by Aedes) shows Councilman bodies on liver biopsy."
+      - "Negri bodies are rabies."
+      - "Cowdry A inclusions are HSV and VZV."
+      - "Koplik spots are measles, in the mouth."
+      - "Warthin-Finkeldey cells are measles, in lymph nodes."
+    src: { page: 168, quote: "May see Councilman bodies (eosinophilic apoptotic globules) on liver biopsy." }
+    status: unverified
+  - id: mic.L05.140
+    kind: mcq
+    topic: zika
+    stem: >-
+      A newborn has microcephaly and spasticity. Brain imaging shows ventriculomegaly and subcortical
+      calcifications. The mother had a mild itchy rash and red eyes in pregnancy after a trip to Brazil. Which
+      virus is most likely?
+    options:
+      - Zika virus
+      - Rubella virus
+      - Cytomegalovirus
+      - Dengue virus
+      - Parvovirus B19
+    answer: 0
+    why:
+      - "Right. Congenital Zika syndrome: microcephaly, ocular and motor anomalies, ventriculomegaly and subcortical calcifications."
+      - "Rubella's triad is deafness, cataracts and PDA."
+      - "CMV calcifications are periventricular."
+      - "Dengue is not a TORCH infection in the book."
+      - "B19 causes hydrops fetalis."
+    src: { page: 168, quote: "brain imaging shows ventriculomegaly, subcortical calcifications" }
+    status: unverified
+  - id: mic.L05.141
+    kind: mcq
+    topic: ebola
+    stem: >-
+      A nurse returns from caring for patients in an outbreak. Ten days later she has abrupt high fever,
+      myalgia, vomiting and diarrhea, then bleeding from IV sites. How is this infection mainly transmitted?
+    options:
+      - Direct contact with bodily fluids or fomites
+      - Aedes mosquito bites
+      - Respiratory aerosols in casual contact
+      - Rodent urine aerosols only
+      - Fecal-oral spread from water
+    answer: 0
+    why:
+      - "Right. Ebola (a filovirus) spreads by direct contact with bodily fluids, fomites (including dead bodies), and infected bats or primates."
+      - "That is yellow fever, dengue, Zika."
+      - "Ebola needs direct contact."
+      - "That is hantavirus and Lassa."
+      - "That is HAV or HEV."
+    src: { page: 169, quote: "Transmission requires direct contact with bodily fluids, fomites (including dead bodies), infected bats or primates (apes/monkeys)" }
+    status: unverified
+  - id: mic.L05.142
+    kind: mcq
+    topic: sars-cov-2
+    stem: >-
+      A 45-year-old man with COVID-19 lost his sense of smell. Which host receptor does the virus's spike
+      protein bind to enter cells?
+    options:
+      - ACE2
+      - CD4
+      - ICAM-1
+      - CD21
+      - Sialic acid
+    answer: 0
+    why:
+      - "Right. The spike protein attaches to ACE2, highly expressed in the lungs, intestines, heart and kidneys."
+      - "CD4 is HIV."
+      - "ICAM-1 is rhinovirus."
+      - "CD21 is EBV."
+      - "Sialic acid is bound by influenza hemagglutinin."
+    src: { page: 169, quote: "Host cell entry occurs by attachment of viral spike protein to ACE2 receptor on cell membranes" }
+    status: unverified

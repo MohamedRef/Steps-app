@@ -7,16 +7,20 @@
 pub fn apply(day: &str, night: &str) {
     #[cfg(target_os = "android")]
     {
-        let argb = |hex: &str| {
-            let rgb = u32::from_str_radix(hex.trim_start_matches('#'), 16).unwrap_or(0);
-            (0xff00_0000 | rgb) as i32
-        };
         if let Err(e) = android::apply(argb(day), argb(night)) {
             crate::diag::report!("System bars: {e}");
         }
     }
     #[cfg(not(target_os = "android"))]
     let _ = (day, night);
+}
+
+/// `#rrggbb` as the opaque ARGB int Android's `Window` takes; anything
+/// that doesn't parse is black.
+#[cfg_attr(not(any(target_os = "android", test)), allow(dead_code))]
+pub(crate) fn argb(hex: &str) -> i32 {
+    let rgb = u32::from_str_radix(hex.trim_start_matches('#'), 16).unwrap_or(0);
+    (0xff00_0000 | rgb) as i32
 }
 
 /// Whether the device is in dark mode, where the platform can tell

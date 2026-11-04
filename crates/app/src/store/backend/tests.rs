@@ -22,13 +22,13 @@ fn backend() -> ReviewBackend {
 #[test]
 fn an_answer_that_isnt_saved_says_so_and_changes_nothing() {
     let mut b = backend();
-    answer(&mut b, "hb.L01.001", Grade::Good, T0);
-    let before = b.states.get("hb.L01.001").cloned();
+    answer(&mut b, "cvs.L04.001", Grade::Good, T0);
+    let before = b.states.get("cvs.L04.001").cloned();
     b.store.conn.lock().unwrap().execute("DROP TABLE sync_outbox", []).unwrap();
     let got = StudyStore::record_logged(
         &mut b,
         ReviewEvent {
-            item_id: "hb.L01.001".into(),
+            item_id: "cvs.L04.001".into(),
             grade: Grade::Again,
             origin: Origin::Study,
             at_ms: T0 + 60_000,
@@ -39,13 +39,13 @@ fn an_answer_that_isnt_saved_says_so_and_changes_nothing() {
     );
     assert!(got.is_err());
     assert_eq!(b.reviews_logged(), 1);
-    assert_eq!(b.states.get("hb.L01.001").cloned(), before);
+    assert_eq!(b.states.get("cvs.L04.001").cloned(), before);
 }
 
 #[test]
 fn rating_again_after_a_failed_save_clears_todays_note() {
     // An id no other test answers: Today's note is one process-wide slot.
-    const ID: &str = "hb.L01.retry-note";
+    const ID: &str = "cvs.L04.retry-note";
     let mut b = backend();
     let event = || ReviewEvent {
         item_id: ID.into(),
@@ -122,19 +122,19 @@ fn a_content_switch_rebuilds_the_catalog_and_keeps_his_cards() {
 fn due_cases_go_to_the_cases_screen_and_mcqs_never_fall_due() {
     let mut b = backend();
     // A card, a case and an MCQ, all missed (#242).
-    for id in ["hb.L01.001", "hb.L01.006", "hb.L01.003"] {
+    for id in ["cvs.L04.001", "cvs.L04.006", "cvs.L04.003"] {
         answer(&mut b, id, Grade::Again, T0);
     }
     let later = T0 + 6 * 3_600_000;
     let lib = Library::get();
     let o = b.overview(lib, later);
     assert_eq!(o.due, 1, "only the card plays in a session");
-    assert_eq!(o.due_cases, vec!["hb.L01.006".to_string()]);
-    assert_eq!(b.session_due(later), vec!["hb.L01.001".to_string()]);
+    assert_eq!(o.due_cases, vec!["cvs.L04.006".to_string()]);
+    assert_eq!(b.session_due(later), vec!["cvs.L04.001".to_string()]);
     // The Cases screen and oral still see the case.
     let mut all = b.due(later);
     all.sort();
-    assert_eq!(all, ["hb.L01.001", "hb.L01.006"]);
+    assert_eq!(all, ["cvs.L04.001", "cvs.L04.006"]);
     assert_eq!(b.due_forecast(1, later), vec![2]);
 }
 
@@ -154,13 +154,13 @@ fn a_settings_change_keeps_a_fit_made_meanwhile() {
 #[test]
 fn undo_retracts_the_answer_and_restores_the_schedule() {
     let mut b = backend();
-    answer(&mut b, "hb.L01.001", Grade::Good, T0);
-    let before_state = b.states.get("hb.L01.001").cloned();
-    let before_intervals = b.intervals("hb.L01.001", T0 + 60_000);
+    answer(&mut b, "cvs.L04.001", Grade::Good, T0);
+    let before_state = b.states.get("cvs.L04.001").cloned();
+    let before_intervals = b.intervals("cvs.L04.001", T0 + 60_000);
     let id = StudyStore::record_logged(
         &mut b,
         ReviewEvent {
-            item_id: "hb.L01.001".into(),
+            item_id: "cvs.L04.001".into(),
             grade: Grade::Again,
             origin: Origin::Study,
             at_ms: T0 + 60_000,
@@ -172,12 +172,12 @@ fn undo_retracts_the_answer_and_restores_the_schedule() {
     .unwrap()
     .unwrap();
     assert_eq!(b.reviews_logged(), 2);
-    assert_ne!(b.states.get("hb.L01.001").cloned(), before_state);
+    assert_ne!(b.states.get("cvs.L04.001").cloned(), before_state);
 
     assert!(b.retract(&id));
     assert_eq!(b.reviews_logged(), 1);
-    assert_eq!(b.states.get("hb.L01.001").cloned(), before_state);
-    assert_eq!(b.intervals("hb.L01.001", T0 + 60_000), before_intervals);
+    assert_eq!(b.states.get("cvs.L04.001").cloned(), before_state);
+    assert_eq!(b.intervals("cvs.L04.001", T0 + 60_000), before_intervals);
     // A second Undo (a double tap, a resumed screen) writes nothing.
     let queued = b.store.outbox_len();
     assert!(b.retract(&id));
@@ -186,13 +186,13 @@ fn undo_retracts_the_answer_and_restores_the_schedule() {
     // And it stays gone after the store is read again (a restart).
     b.reload();
     assert_eq!(b.reviews_logged(), 1);
-    assert_eq!(b.states.get("hb.L01.001").cloned(), before_state);
+    assert_eq!(b.states.get("cvs.L04.001").cloned(), before_state);
 
     // Undoing a first answer makes the item new again.
     let first = StudyStore::record_logged(
         &mut b,
         ReviewEvent {
-            item_id: "hb.L01.002".into(),
+            item_id: "cvs.L04.002".into(),
             grade: Grade::Good,
             origin: Origin::Study,
             at_ms: T0,
@@ -203,57 +203,57 @@ fn undo_retracts_the_answer_and_restores_the_schedule() {
     )
     .unwrap()
     .unwrap();
-    assert!(!b.is_new("hb.L01.002"));
+    assert!(!b.is_new("cvs.L04.002"));
     assert!(b.retract(&first));
-    assert!(b.is_new("hb.L01.002"));
+    assert!(b.is_new("cvs.L04.002"));
 }
 
 #[test]
 fn answers_schedule_and_wrong_items_hide() {
     let mut b = backend();
-    assert!(b.is_new("hb.L01.001"));
-    answer(&mut b, "hb.L01.001", Grade::Again, T0);
-    answer(&mut b, "hb.L01.002", Grade::Good, T0);
-    assert!(!b.is_new("hb.L01.001"));
+    assert!(b.is_new("cvs.L04.001"));
+    answer(&mut b, "cvs.L04.001", Grade::Again, T0);
+    answer(&mut b, "cvs.L04.002", Grade::Good, T0);
+    assert!(!b.is_new("cvs.L04.001"));
     // FSRS brings an Again back about five hours later.
     let later = T0 + 6 * 3_600_000;
-    assert_eq!(b.due(later), vec!["hb.L01.001".to_string()]);
+    assert_eq!(b.due(later), vec!["cvs.L04.001".to_string()]);
     assert!(b.next_due_ms(T0).is_some());
 
-    b.judge("hb.L01.001", Verdict::Wrong, Edit::new(), Some("  page 2 says otherwise ".into()));
-    assert!(b.is_hidden("hb.L01.001"));
+    b.judge("cvs.L04.001", Verdict::Wrong, Edit::new(), Some("  page 2 says otherwise ".into()));
+    assert!(b.is_hidden("cvs.L04.001"));
     assert!(b.due(later).is_empty());
-    assert_eq!(b.judgement("hb.L01.001").unwrap().note.as_deref(), Some("page 2 says otherwise"));
-    b.undo_judgement("hb.L01.001");
-    assert_eq!(b.check("hb.L01.001"), Check::Ask);
+    assert_eq!(b.judgement("cvs.L04.001").unwrap().note.as_deref(), Some("page 2 says otherwise"));
+    b.undo_judgement("cvs.L04.001");
+    assert_eq!(b.check("cvs.L04.001"), Check::Ask);
 }
 
 #[test]
 fn edits_override_what_he_studies() {
     let mut b = backend();
     let edit = Edit::from([("back".into(), verify::FieldValue::Text("Fibrosis + nodules".into()))]);
-    b.judge("hb.L01.001", Verdict::Edited, edit, None);
-    let item = b.entry("hb.L01.001").unwrap().item.clone();
+    b.judge("cvs.L04.001", Verdict::Edited, edit, None);
+    let item = b.entry("cvs.L04.001").unwrap().item.clone();
     let Body::Card { back, .. } = b.effective(&item).body else { panic!() };
     assert_eq!(back, "Fibrosis + nodules");
-    assert_eq!(b.check("hb.L01.001"), Check::Settled);
+    assert_eq!(b.check("cvs.L04.001"), Check::Settled);
     assert_eq!(b.verdicts(T0).verdicts.len(), 1);
 }
 
 #[test]
 fn stats_read_the_log_marks_and_forecast() {
     let mut b = backend();
-    answer(&mut b, "hb.L01.001", Grade::Good, T0);
-    answer(&mut b, "hb.L01.002", Grade::Again, T0 + 1000);
+    answer(&mut b, "cvs.L04.001", Grade::Good, T0);
+    answer(&mut b, "cvs.L04.002", Grade::Again, T0 + 1000);
     let log = StudyStore::log(&b);
     assert_eq!(log.len(), 2);
-    assert_eq!(log[1].item_id, "hb.L01.002");
+    assert_eq!(log[1].item_id, "cvs.L04.002");
 
-    b.judge("hb.L01.001", Verdict::Edited, Edit::new(), None);
-    b.judge("hb.L01.002", Verdict::Wrong, Edit::new(), None);
+    b.judge("cvs.L04.001", Verdict::Edited, Edit::new(), None);
+    b.judge("cvs.L04.002", Verdict::Wrong, Edit::new(), None);
     let marks = b.marks();
-    assert_eq!(marks.get("hb.L01.001"), Some(&Status::Approved));
-    assert_eq!(marks.get("hb.L01.002"), Some(&Status::Rejected));
+    assert_eq!(marks.get("cvs.L04.001"), Some(&Status::Approved));
+    assert_eq!(marks.get("cvs.L04.002"), Some(&Status::Rejected));
     assert_eq!(marks.len(), 2);
 
     // The ✗ item is out of the forecast; the Good one is not due today.
@@ -267,9 +267,9 @@ fn stats_read_the_log_marks_and_forecast() {
 fn counts_for_reminders_and_recap() {
     let mut b = backend();
     let day = 86_400_000;
-    answer(&mut b, "hb.L01.001", Grade::Good, T0 - day);
-    answer(&mut b, "hb.L01.002", Grade::Good, T0);
-    answer(&mut b, "hb.L01.002", Grade::Good, T0 + 1000);
+    answer(&mut b, "cvs.L04.001", Grade::Good, T0 - day);
+    answer(&mut b, "cvs.L04.002", Grade::Good, T0);
+    answer(&mut b, "cvs.L04.002", Grade::Good, T0 + 1000);
     assert_eq!(b.answers_today(T0 + 2000), 2);
     assert_eq!(b.learned_per_day(3, T0 + 2000), vec![0, 1, 1]);
     assert_eq!(b.due_forecast(30, T0).iter().sum::<u32>(), 2);
@@ -279,10 +279,10 @@ fn counts_for_reminders_and_recap() {
 fn the_daily_new_cap_counts_items_started_today() {
     let mut b = backend();
     b.set_settings(ReviewSettings { new_per_day: 15, ..Default::default() });
-    answer(&mut b, "hb.L01.001", Grade::Good, T0);
-    answer(&mut b, "hb.L01.001", Grade::Good, T0 + 1000);
+    answer(&mut b, "cvs.L04.001", Grade::Good, T0);
+    answer(&mut b, "cvs.L04.001", Grade::Good, T0 + 1000);
     assert_eq!(b.new_left_today(T0 + 2000), 14);
-    let i = b.intervals("hb.L01.002", T0).unwrap();
+    let i = b.intervals("cvs.L04.002", T0).unwrap();
     assert!(i[0] <= i[3]);
 }
 

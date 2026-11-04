@@ -396,8 +396,8 @@ mod tests {
     fn a_phone_answer_and_verdict_reach_the_tablet() {
         let phone = Store::open_in_memory().unwrap();
         let tablet = Store::open_in_memory().unwrap();
-        phone.append_review(ev("hb.L01.001", 10)).unwrap();
-        phone.set_judgement("hb.L01.001", Some(&judged(Verdict::Approved))).unwrap();
+        phone.append_review(ev("cvs.L04.001", 10)).unwrap();
+        phone.set_judgement("cvs.L04.001", Some(&judged(Verdict::Approved))).unwrap();
         phone.put_setting("sound", &2u32).unwrap();
         let ops = relay(&phone, 1);
         assert_eq!(ops.len(), 3);
@@ -417,7 +417,7 @@ mod tests {
         // A replay changes nothing.
         assert!(tablet.apply_remote(&ops, 3).unwrap().is_empty());
         // The tablet's next stamp sorts after the phone's.
-        let mine = tablet.append_review(ev("hb.L01.002", 0)).unwrap();
+        let mine = tablet.append_review(ev("cvs.L04.002", 0)).unwrap();
         assert!(mine.hlc > ops[2].op.hlc);
     }
 
@@ -425,8 +425,8 @@ mod tests {
     fn an_undone_answer_is_taken_back_on_the_other_device_once() {
         let phone = Store::open_in_memory().unwrap();
         let tablet = Store::open_in_memory().unwrap();
-        let kept = phone.append_review(ev("hb.L01.001", 10)).unwrap();
-        let undone = phone.append_review(ev("hb.L01.002", 20)).unwrap();
+        let kept = phone.append_review(ev("cvs.L04.001", 10)).unwrap();
+        let undone = phone.append_review(ev("cvs.L04.002", 20)).unwrap();
         tablet.apply_remote(&relay(&phone, 1), 2).unwrap();
         assert_eq!(tablet.reviews().unwrap().len(), 2);
         // Undo on the phone: one tombstone op, never a second one.
@@ -445,17 +445,17 @@ mod tests {
     fn the_newest_verdict_wins_on_both_devices() {
         let phone = Store::open_in_memory().unwrap();
         let tablet = Store::open_in_memory().unwrap();
-        phone.set_judgement("hb.L01.001", Some(&judged(Verdict::Wrong))).unwrap();
+        phone.set_judgement("cvs.L04.001", Some(&judged(Verdict::Wrong))).unwrap();
         std::thread::sleep(std::time::Duration::from_millis(3));
-        tablet.set_judgement("hb.L01.001", Some(&judged(Verdict::Approved))).unwrap();
+        tablet.set_judgement("cvs.L04.001", Some(&judged(Verdict::Approved))).unwrap();
         let from_phone = relay(&phone, 1);
         let from_tablet = relay(&tablet, 2);
         phone.apply_remote(&from_tablet, 2).unwrap();
         tablet.apply_remote(&from_phone, 2).unwrap();
-        assert_eq!(phone.judgements().unwrap()["hb.L01.001"].verdict, Verdict::Approved);
-        assert_eq!(tablet.judgements().unwrap()["hb.L01.001"].verdict, Verdict::Approved);
+        assert_eq!(phone.judgements().unwrap()["cvs.L04.001"].verdict, Verdict::Approved);
+        assert_eq!(tablet.judgements().unwrap()["cvs.L04.001"].verdict, Verdict::Approved);
         // Undo travels as a tombstone.
-        tablet.set_judgement("hb.L01.001", None).unwrap();
+        tablet.set_judgement("cvs.L04.001", None).unwrap();
         phone.apply_remote(&relay(&tablet, 3), 3).unwrap();
         assert!(phone.judgements().unwrap().is_empty());
     }
@@ -466,7 +466,7 @@ mod tests {
         let path = dir.join("steps.db");
         {
             let s = Store::open(&path).unwrap();
-            s.append_review(ev("hb.L01.001", 10)).unwrap();
+            s.append_review(ev("cvs.L04.001", 10)).unwrap();
             // As if the outbox came with an upgrade: empty it and forget the seed.
             let conn = s.conn.lock().unwrap();
             conn.execute("DELETE FROM sync_outbox", []).unwrap();

@@ -189,11 +189,8 @@ struct TokenResponse {
 /// only on [`OAuthError::Network`], when Google may never have seen it.
 pub fn exchange(client: &GoogleClient, auth: &Authorization) -> Result<String, OAuthError> {
     let (code, verifier, redirect_uri) = (&auth.code, &auth.verifier, &auth.redirect_uri);
-    let agent: ureq::Agent = ureq::Agent::config_builder()
-        .http_status_as_error(false)
-        .timeout_global(Some(Duration::from_secs(20)))
-        .build()
-        .into();
+    let token_url = token_url(client);
+    let agent = crate::update::agent(&token_url, Duration::from_secs(20));
     let mut form = vec![
         ("code", code.as_str()),
         ("client_id", client.client_id.as_str()),
@@ -204,7 +201,7 @@ pub fn exchange(client: &GoogleClient, auth: &Authorization) -> Result<String, O
     if let Some(secret) = &client.client_secret {
         form.push(("client_secret", secret));
     }
-    let mut res = agent.post(TOKEN_URL).send_form(form).map_err(|e| OAuthError::Network(e.to_string()))?;
+    let mut res = agent.post(&token_url).send_form(form).map_err(|e| OAuthError::Network(e.to_string()))?;
     if !res.status().is_success() {
         let body = res.body_mut().read_to_string().unwrap_or_default();
         return Err(OAuthError::Failed(format!("token exchange {}: {body}", res.status())));
@@ -212,6 +209,25 @@ pub fn exchange(client: &GoogleClient, auth: &Authorization) -> Result<String, O
     let token: TokenResponse = res.body_mut().read_json().map_err(|e| OAuthError::Failed(e.to_string()))?;
     Ok(token.id_token)
 }
+
+/// Google's token endpoint; a test points a client of its own at a local one.
+fn token_url(client: &GoogleClient) -> String {
+    #[cfg(test)]
+    if let Some((_, url)) = TOKEN_URLS
+        .lock()
+        .unwrap_or_else(std::sync::PoisonError::into_inner)
+        .iter()
+        .find(|(id, _)| *id == client.client_id)
+    {
+        return url.clone();
+    }
+    let _ = client;
+    TOKEN_URL.to_owned()
+}
+
+/// Test clients' token endpoints, by client id.
+#[cfg(test)]
+pub static TOKEN_URLS: std::sync::Mutex<Vec<(String, String)>> = std::sync::Mutex::new(Vec::new());
 
 fn form(params: &[(&str, &str)]) -> String {
     params.iter().map(|(k, v)| format!("{}={}", encode(k), encode(v))).collect::<Vec<_>>().join("&")

@@ -62,4 +62,16 @@ mod tests {
         assert_eq!(answer.code, ErrorCode::Internal);
         assert!(answer.message.contains(&why));
     }
+
+    #[test]
+    fn a_failed_sweep_only_warns() {
+        let db = MemSql::new();
+        // An op log that can't be written to: the schema is there, the sweep fails.
+        db.exec_batch("CREATE VIEW ops AS SELECT 1 AS seq").unwrap();
+        let warned = RefCell::new(Vec::new());
+        assert_eq!(open(&db, |w| warned.borrow_mut().push(w.to_owned())), Ok(()));
+        let warned = warned.into_inner();
+        assert_eq!(warned.len(), 1);
+        assert!(warned[0].starts_with("op log sweep failed: "), "{warned:?}");
+    }
 }

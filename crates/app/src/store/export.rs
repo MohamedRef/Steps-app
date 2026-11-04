@@ -132,7 +132,7 @@ mod tests {
         let store = Store::open_in_memory().unwrap();
         store
             .append_review(ReviewEvent {
-                item_id: "hb.L01.003".into(),
+                item_id: "cvs.L04.003".into(),
                 grade: Grade::Good,
                 origin: Origin::Review,
                 at_ms: 1,

@@ -1,11 +1,11 @@
-//! `steps-tools anki [--lecture hb.L01] [--verdicts FILE] [--own EXPORT]
+//! `steps-tools anki [--lecture cvs.L04] [--verdicts FILE] [--own EXPORT]
 //! [--drafts DIR] [--merged-only] [--out DIR]`: the Anki file, so Mohamed can study before
 //! the app is done. The deck itself is built by the `steps-anki` crate, which
 //! the app's «export to Anki» button shares; see docs/ANKI.md.
 //!
 //! By default it writes one file, `dist/anki/steps.apkg`, with a `Steps`
 //! deck, a level per course and one subdeck per lecture (`Steps::Cardiovascular::01 Embryology`).
-//! `--lecture` writes just that lecture to `steps-hb-L01.apkg`.
+//! `--lecture` writes just that lecture to `steps-cvs-L01.apkg`.
 //!
 //! So the file never shrinks while content threads work, a lecture that
 //! isn't merged yet comes from the project's shared folder, like
@@ -191,19 +191,20 @@ mod tests {
     fn unmerged_lectures_come_from_the_shared_folder() {
         let dir = tempfile::tempdir().unwrap();
         let d = dir.path();
-        std::fs::create_dir_all(d.join("content/hb")).unwrap();
-        std::fs::create_dir_all(d.join("steps/content-wip/hb")).unwrap();
+        std::fs::create_dir_all(d.join("content/cvs")).unwrap();
+        std::fs::create_dir_all(d.join("steps/content-wip/cvs")).unwrap();
         std::fs::write(
             d.join("content/index.yaml"),
-            "schema: steps.content/v1\nlectures:\n  - { id: hb.L01, title: Liver Cirrhosis, pages: [1, 22], chunk: 10 }\n  - { id: hb.L02, title: Two, pages: [23, 36], chunk: 10 }\n  - { id: hb.L03, title: Three, pages: [37, 64], chunk: 11 }\n",
+            "schema: steps.content/v1\nlectures:\n  - { id: cvs.L04, title: Pathology, pages: [300, 320], chunk: 6 }\n  - { id: cvs.L05, title: Pharmacology, pages: [321, 328], chunk: 6 }\n  - { id: cvs.L03, title: Physiology, pages: [288, 299], chunk: 6 }\n",
         )
         .unwrap();
         let sample = include_str!("../../../fixtures/content/sample.yaml");
-        std::fs::write(d.join("content/hb/L01.yaml"), sample).unwrap();
+        std::fs::write(d.join("content/cvs/L04.yaml"), sample).unwrap();
         // Merged wins over wip; a broken wip file is left out.
-        std::fs::write(d.join("steps/content-wip/hb/L01.yaml"), "not: read").unwrap();
-        std::fs::write(d.join("steps/content-wip/hb/L02.yaml"), sample.replace("hb.L01", "hb.L02")).unwrap();
-        std::fs::write(d.join("steps/content-wip/hb/L03.yaml"), "lecture: [").unwrap();
+        std::fs::write(d.join("steps/content-wip/cvs/L04.yaml"), "not: read").unwrap();
+        std::fs::write(d.join("steps/content-wip/cvs/L05.yaml"), sample.replace("cvs.L04", "cvs.L05"))
+            .unwrap();
+        std::fs::write(d.join("steps/content-wip/cvs/L03.yaml"), "lecture: [").unwrap();
         let args = |extra: &[&str]| {
             let mut a: Vec<String> =
                 ["--drafts", "steps", "--out", "out"].iter().map(|s| s.to_string()).collect();
@@ -214,8 +215,8 @@ mod tests {
         };
         let report = run(d, &args(&[])).unwrap();
         assert!(report.contains("steps.apkg: 22 notes"), "{report}");
-        assert!(report.contains("hb.L02: 11 notes (draft, not merged yet)"), "{report}");
-        assert!(report.contains("content-wip/hb/L03.yaml") && report.contains("(left out)"), "{report}");
+        assert!(report.contains("cvs.L05: 11 notes (draft, not merged yet)"), "{report}");
+        assert!(report.contains("content-wip/cvs/L03.yaml") && report.contains("(left out)"), "{report}");
         let merged = run(d, &args(&["--merged-only"])).unwrap();
         assert!(merged.contains("steps.apkg: 11 notes"), "{merged}");
     }
@@ -224,17 +225,17 @@ mod tests {
     fn verdicts_drop_wrong_items_and_use_edits() {
         let dir = tempfile::tempdir().unwrap();
         let d = dir.path();
-        std::fs::create_dir_all(d.join("content/hb")).unwrap();
+        std::fs::create_dir_all(d.join("content/cvs")).unwrap();
         std::fs::write(
             d.join("content/index.yaml"),
-            "schema: steps.content/v1\nlectures:\n  - { id: hb.L01, title: Liver Cirrhosis, pages: [1, 22], chunk: 10 }\n",
+            "schema: steps.content/v1\nlectures:\n  - { id: cvs.L04, title: Pathology, pages: [300, 320], chunk: 6 }\n",
         )
         .unwrap();
-        std::fs::write(d.join("content/hb/L01.yaml"), include_str!("../../../fixtures/content/sample.yaml"))
+        std::fs::write(d.join("content/cvs/L04.yaml"), include_str!("../../../fixtures/content/sample.yaml"))
             .unwrap();
         std::fs::write(
             d.join("export.yaml"),
-            "schema: steps.verdicts/v1\nexported: x\nverdicts:\n  - { id: hb.L01.003, verdict: wrong, at: a }\n  - { id: hb.L01.001, verdict: edited, at: a, edit: { back: Fibrosis plus nodules. } }\n  - { id: hb.L01.002, verdict: edited, at: a, edit: { nope: x } }\n  - { id: hb.L01.004, verdict: wrong, at: b, fingerprint: \"0000000000000000\" }\n",
+            "schema: steps.verdicts/v1\nexported: x\nverdicts:\n  - { id: cvs.L04.003, verdict: wrong, at: a }\n  - { id: cvs.L04.001, verdict: edited, at: a, edit: { back: \"The mitral valve, then the aortic.\" } }\n  - { id: cvs.L04.002, verdict: edited, at: a, edit: { nope: x } }\n  - { id: cvs.L04.004, verdict: wrong, at: b, fingerprint: \"0000000000000000\" }\n",
         )
         .unwrap();
         let args: Vec<String> =
@@ -246,7 +247,7 @@ mod tests {
         assert!(report.contains("steps.apkg: 10 notes"), "{report}");
         assert!(report.contains("left out: 1 item(s) marked ✗ or rejected"), "{report}");
         assert!(
-            report.contains("hb.L01.002: a cloze has no field `nope` (kept the book version)"),
+            report.contains("cvs.L04.002: a cloze has no field `nope` (kept the book version)"),
             "{report}"
         );
     }
@@ -255,7 +256,7 @@ mod tests {
     fn own_cards_from_an_export_get_their_own_subdeck() {
         let card = |id: &str, deleted: i64| {
             let value = format!(
-                r#"{{"id":"{id}","front":"SAAG?","back":"≥ 1.1","lecture":"hb.L09","created_ms":1}}"#
+                r#"{{"id":"{id}","front":"BNP in heart failure?","back":"≥ 100 pg/mL","lecture":"cvs.L09","created_ms":1}}"#
             );
             serde_json::json!({"id": id, "value": value, "deleted": deleted})
         };
@@ -270,7 +271,90 @@ mod tests {
         let deck = build(std::slice::from_ref(&lec), &Options::default());
         assert_eq!(deck.decks[1].1, "Steps::My own cards");
         let note = &deck.notes[0];
-        assert_eq!(note.tags, ["own::cards", "own", "hb.L09"]);
+        assert_eq!(note.tags, ["own::cards", "own", "cvs.L09"]);
         assert_eq!(note.fields[2], "My own cards");
+    }
+
+    use crate::testkit::{args, content_tree, write};
+
+    #[test]
+    fn one_lecture_and_own_cards_from_an_export() {
+        let dir = content_tree();
+        let root = dir.path();
+        let out = root.join("out");
+        let o = out.to_str().unwrap();
+        let report = run(root, &args(&["--merged-only", "--lecture", "cvs.L04", "--out", o])).unwrap();
+        assert!(report.contains("steps-cvs-L04.apkg: 11 notes"), "{report}");
+        assert!(out.join("steps-cvs-L04.apkg").exists());
+        let err = run(root, &args(&["--merged-only", "--lecture", "cvs.L09", "--out", o])).unwrap_err();
+        assert_eq!(err, ["cvs.L09: no such lecture written yet"]);
+
+        // An export with no live own cards is a warning; a file that isn't an export is an error.
+        let export = root.join("export.json");
+        std::fs::write(&export, r#"{"format":"steps-export","tables":{}}"#).unwrap();
+        let e = export.to_str().unwrap();
+        let report = run(root, &args(&["--merged-only", "--own", e, "--out", o])).unwrap();
+        assert!(report.contains("warning: ") && report.contains("no own cards in this export"), "{report}");
+        std::fs::write(&export, r#"{"format":"anki-export"}"#).unwrap();
+        let err = run(root, &args(&["--merged-only", "--own", e, "--out", o])).unwrap_err();
+        assert!(err[0].contains("not a Steps export"), "{err:?}");
+        std::fs::write(&export, "{").unwrap();
+        assert!(own_cards(&export).is_err());
+        assert!(own_cards(&root.join("none.json")).is_err());
+        // With one lecture only, own cards stay out.
+        let card = r#"{\"id\":\"own.a\",\"front\":\"BNP in heart failure?\",\"back\":\"≥ 100 pg/mL\",\"lecture\":\"cvs.L04\",\"created_ms\":1}"#;
+        std::fs::write(
+            &export,
+            format!(r#"{{"format":"steps-export","tables":{{"own_cards":{{"rows":[{{"id":"own.a","value":"{card}","deleted":0}}]}}}}}}"#),
+        )
+        .unwrap();
+        let report =
+            run(root, &args(&["--merged-only", "--own", e, "--lecture", "cvs.L04", "--out", o])).unwrap();
+        assert!(report.contains("11 notes"), "{report}");
+        let report = run(root, &args(&["--merged-only", "--own", e, "--out", o])).unwrap();
+        assert!(report.contains("steps.apkg: 12 notes"), "{report}");
+    }
+
+    #[test]
+    fn approvals_count_only_on_the_text_he_saw() {
+        let dir = content_tree();
+        let root = dir.path();
+        let lec: Lecture = serde_yaml_ng::from_str(crate::testkit::SAMPLE).unwrap();
+        let fp = steps_core::review::verify::fingerprint(&lec.items[0]);
+        write(
+            root,
+            "export.yaml",
+            &format!(
+                "schema: steps.verdicts/v1\nexported: x\nverdicts:\n  - {{ id: cvs.L04.001, verdict: approved, at: a, fingerprint: \"{fp}\" }}\n  - {{ id: cvs.L04.002, verdict: approved, at: a }}\n  - {{ id: cvs.L04.003, verdict: edited, at: a, fingerprint: \"0000000000000000\", edit: {{ answer: 1 }} }}\n  - {{ id: cvs.L04.099, verdict: edited, at: a, edit: {{ back: x }} }}\n"
+            ),
+        );
+        let out = root.join("out");
+        let a = args(&[
+            "--merged-only",
+            "--verdicts",
+            root.join("export.yaml").to_str().unwrap(),
+            "--out",
+            out.to_str().unwrap(),
+        ]);
+        let report = run(root, &a).unwrap();
+        assert!(report.contains("11 notes") && !report.contains("left out"), "{report}");
+        let bad = args(&["--verdicts", root.join("none.yaml").to_str().unwrap()]);
+        assert!(run(root, &bad).is_err());
+        // A drafts folder whose wip lecture says it is another lecture.
+        write(
+            root,
+            "content/index.yaml",
+            &format!(
+                "{}  - {{ id: cvs.L05, title: Pharmacology, pages: [321, 328], chunk: 6 }}\n",
+                crate::testkit::INDEX
+            ),
+        );
+        write(root, "wip/content-wip/cvs/L05.yaml", crate::testkit::SAMPLE);
+        let report = run(
+            root,
+            &args(&["--drafts", root.join("wip").to_str().unwrap(), "--out", out.to_str().unwrap()]),
+        )
+        .unwrap();
+        assert!(report.contains("says it is cvs.L04 (left out)"), "{report}");
     }
 }

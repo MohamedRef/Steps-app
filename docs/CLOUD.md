@@ -89,7 +89,7 @@ The auto-updating preview APK is built on GitHub, where there is no `.env`. Give
 |---|---|---|
 | Secret | `STEPS_GOOGLE_CLIENT_SECRET` | the Desktop client's secret |
 
-`steps-android-preview.yml` passes them to the build on pushes to `main` only; a PR's build gets none and its APK hides sign-in. The next preview build (and the update it ships) can sign in. GitHub masks the secret in logs, and nothing writes it to the repo. Like every installed-app secret, it can be read out of the APK. That is only acceptable because the client is a **Desktop app** (installed-app) OAuth client, which Google treats as public: its "secret" grants nothing without the user's own consent and PKCE. Never put a Web-application client's secret here, because that one is truly confidential.
+`steps-android-preview.yml` passes them to the nightly and hand-started builds of `main` only; a PR's build gets none and its APK hides sign-in. The next preview build (and the update it ships) can sign in. GitHub masks the secret in logs, and nothing writes it to the repo. Like every installed-app secret, it can be read out of the APK. That is only acceptable because the client is a **Desktop app** (installed-app) OAuth client, which Google treats as public: its "secret" grants nothing without the user's own consent and PKCE. Never put a Web-application client's secret here, because that one is truly confidential.
 
 ## 4. API
 
