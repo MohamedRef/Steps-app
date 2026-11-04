@@ -8,6 +8,7 @@
 use std::collections::{BTreeMap, HashSet};
 
 use crate::content::{Body, Item, Lecture, OutlineEntry, Status};
+use crate::pages::PagesRead;
 use crate::review::Grade;
 
 /// A rough time for one item, in seconds, used to fit a session to its budget.
@@ -46,6 +47,10 @@ pub struct Inputs<'a> {
     pub max_new: usize,
     /// Time budget in seconds.
     pub budget_secs: u32,
+    /// First Aid pages read, when the page gate is on: a new item starts
+    /// only once its page is read ([`crate::pages::unlocks`]). Due reviews
+    /// and Mohamed's own cards are never held back. `None` = no gate.
+    pub pages: Option<&'a PagesRead>,
 }
 
 /// One planned item.
@@ -76,12 +81,16 @@ pub fn compose(input: &Inputs<'_>) -> Vec<Planned> {
             if !input.topics.is_empty() && !input.topics.contains(&topic) {
                 continue;
             }
+            let fresh = !input.seen.contains(&item.id);
+            if fresh && !page_read(item, lecture, input.pages) {
+                continue;
+            }
             let planned = Planned {
                 item_id: item.id.clone(),
                 lecture: lecture.lecture.clone(),
                 topic,
                 est_secs: estimate_secs(&item.body),
-                fresh: !input.seen.contains(&item.id),
+                fresh,
             };
             pool.insert(item.id.as_str(), (book_pos, planned));
         }
@@ -121,6 +130,11 @@ fn eligible(item: &Item, input: &Inputs<'_>) -> bool {
     item.status != Status::Rejected
         && !input.hidden.contains(&item.id)
         && input.kinds.contains(&item.body.kind())
+}
+
+/// Whether the page gate lets a new item start (always, with no gate).
+pub fn page_read(item: &Item, lecture: &Lecture, pages: Option<&PagesRead>) -> bool {
+    pages.is_none_or(|read| crate::own::is_own(&item.id) || crate::pages::unlocks(item, &lecture.book, read))
 }
 
 fn topic_key(lecture: &str, item: &Item) -> String {
@@ -829,6 +843,7 @@ mod tests {
             hidden: &empty,
             max_new: usize::MAX,
             budget_secs: budget,
+            pages: None,
         })
     }
 
@@ -903,8 +918,52 @@ mod tests {
             hidden: &empty,
             max_new: 1,
             budget_secs: 600,
+            pages: None,
         });
         assert_eq!(ids(&plan), ["cvs.L04.004", "cvs.L04.001"]);
+    }
+
+    #[test]
+    fn page_gate_holds_back_new_items_from_unread_pages_not_reviews() {
+        let mut lecture = sample();
+        // Another source's item cites its own page: it waits for any read
+        // page of the lecture instead.
+        let mut pathoma = lecture.items[0].clone();
+        pathoma.id = "cvs.L04.300".into();
+        pathoma.src.book = Some("pathoma".into());
+        pathoma.src.page = 99;
+        lecture.items.push(pathoma);
+        let mut own = lecture.items[0].clone();
+        own.id = format!("{}x", crate::own::PREFIX);
+        own.src.page = 500;
+        lecture.items.push(own.clone());
+        let lectures = [&lecture];
+        // 004 (page 319, read or not) is due: reviews are never gated.
+        let due = vec!["cvs.L04.004".to_string()];
+        let seen: HashSet<String> = due.iter().cloned().collect();
+        let empty = HashSet::new();
+        let run = |pages: &PagesRead| {
+            let plan = compose(&Inputs {
+                lectures: &lectures,
+                topics: &empty,
+                kinds: STUDY,
+                due: &due,
+                seen: &seen,
+                hidden: &empty,
+                max_new: usize::MAX,
+                budget_secs: 6000,
+                pages: Some(pages),
+            });
+            ids(&plan).into_iter().map(str::to_string).collect::<Vec<_>>()
+        };
+        let mut read = PagesRead::from(vec![[319, 319], [305, 305]]);
+        // The two copies of 001 share its topic, so they come together.
+        assert_eq!(run(&read), ["cvs.L04.004", "cvs.L04.001", "cvs.L04.300", own.id.as_str(), "cvs.L04.005"]);
+        // Reading page 317 unlocks the cloze on it.
+        read.mark(317, 317);
+        assert!(run(&read).contains(&"cvs.L04.002".to_string()));
+        // Nothing read: only the review and his own card.
+        assert_eq!(run(&PagesRead::default()), ["cvs.L04.004", own.id.as_str()]);
     }
 
     #[test]
@@ -924,6 +983,7 @@ mod tests {
             hidden: &hidden,
             max_new: usize::MAX,
             budget_secs: 600,
+            pages: None,
         });
         assert_eq!(ids(&plan), ["cvs.L04.002"]);
     }

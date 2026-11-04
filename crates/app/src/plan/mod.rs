@@ -4,7 +4,10 @@
 use std::rc::Rc;
 
 use dioxus::prelude::*;
-use steps_core::plan::{self, Day, DayPlan, Focus, Plan, PlanInput, PlanSettings, PlanStatus, TightFix};
+use steps_core::plan::{
+    self, Day, DayLoad, DayPlan, Focus, MilestoneKind, Phase, Plan, PlanInput, PlanSettings, PlanStatus,
+    Rebalance, TightFix, Vacation,
+};
 use steps_core::review::StudyStore;
 use steps_core::stats;
 
@@ -63,6 +66,11 @@ pub struct DailyTarget {
     pub days_left: i32,
     /// What today has done so far.
     pub done: stats::DayDone,
+    /// New items yesterday's plan gave that weren't started yesterday.
+    pub missed: u32,
+    /// New items per day, today first, as yesterday's plan had them: the
+    /// "before" of the rebalance preview.
+    pub before: Vec<u32>,
 }
 
 impl DailyTarget {
@@ -92,7 +100,31 @@ pub fn daily_target(data: &StudyData, settings: &PlanSettings) -> Option<DailyTa
         return None;
     }
     let done = stats::done_today(&data.lectures, &data.events, &data.marks, data.clock);
-    Some(DailyTarget { days_left: data.clock.today().until(exam), plan: p, exam, done })
+    let (missed, before) = missed_yesterday(data, settings);
+    Some(DailyTarget { days_left: data.clock.today().until(exam), plan: p, exam, done, missed, before })
+}
+
+/// What yesterday's plan asked for and didn't get: the plan from yesterday
+/// morning against the items first seen yesterday. The plan already spreads
+/// the gap by itself; this only lets Today and the planner say so, and offer
+/// the catch-up day instead.
+fn missed_yesterday(data: &StudyData, settings: &PlanSettings) -> (u32, Vec<u32>) {
+    let clock = stats::Clock { now_ms: data.clock.now_ms - 86_400_000, ..data.clock };
+    let yesterday = clock.today();
+    if yesterday.until(data.clock.today()) != 1 {
+        return (0, Vec::new());
+    }
+    let seen = |p: &[plan::LectureProgress]| p.iter().map(|l| l.seen.min(l.total)).sum::<u32>();
+    let then = stats::progress_at_day_start(&data.lectures, &data.events, &data.marks, clock);
+    let now = stats::progress_at_day_start(&data.lectures, &data.events, &data.marks, data.clock);
+    let span = settings.exam.map_or(0, |e| yesterday.until(e).max(0) as usize);
+    let forecast: Vec<u32> = std::iter::once(0).chain(data.due_forecast(span)).collect();
+    // The plan as it stood, before any choice about yesterday.
+    let as_was = PlanSettings { rebalance: None, ..settings.clone() };
+    let p = plan::plan(&as_was, PlanInput { today: yesterday, lectures: &then, review_forecast: &forecast });
+    let planned = p.today().map_or(0, |d| d.new);
+    let missed = planned.saturating_sub(seen(&now).saturating_sub(seen(&then)));
+    (missed, p.days.iter().skip(1).map(|d| d.new).collect())
 }
 
 /// The target from the store and the saved plan. Reading `SETTINGS` here
@@ -161,9 +193,15 @@ pub fn Planner(data: Rc<StudyData>) -> Element {
     let mut now = p.clone();
     now.seen = live.iter().map(|l| l.seen.min(l.total)).sum();
     now.seen_twice = live.iter().map(|l| l.seen_twice.min(l.total)).sum();
+    // Not a hook: this runs after the early return above.
+    let target = try_consume_context::<crate::store::Review>().and_then(|r| target_now(&*r.backend.borrow()));
     rsx! {
         StatusCard { p: p.clone(), exam: settings.exam }
+        if let Some(t) = target {
+            RebalanceCard { t }
+        }
         TodayCard { p: p.clone() }
+        MilestonesCard { p: p.clone() }
         LoadCard { p: p.clone(), cap: settings.review_cap }
         PaceCard { p: p.clone(), past: past_pace(&data) }
         ProgressCard { p: now }
@@ -179,6 +217,14 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
     let mut date = use_signal(|| settings.exam.map(Day::iso).unwrap_or_default());
     let mut weekdays = use_signal(|| settings.weekdays);
     let mut cap = use_signal(|| settings.review_cap);
+    let mut dedicated = use_signal(|| settings.dedicated_weeks);
+    let mut qbank = use_signal(|| settings.qbank_per_day);
+    let mut loads = use_signal(|| settings.day_loads);
+    let mut catch_up = use_signal(|| settings.catch_up_day);
+    // Vacations as typed: (from, to) date-input values.
+    let mut vacations = use_signal(|| {
+        settings.vacations.iter().map(|v| (v.from.iso(), v.to.iso())).collect::<Vec<(String, String)>>()
+    });
     let mut error = use_signal(|| None::<&'static str>);
     let had_exam = settings.exam.is_some();
     let min = today.plus(1).iso();
@@ -196,10 +242,20 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
             error.set(Some(tx::PICK_WEEKDAY));
             return;
         }
+        let Some(trips) = parse_vacations(&vacations.read()) else {
+            error.set(Some(tx::PICK_VACATION));
+            return;
+        };
         let mut s = SETTINGS.write();
-        s.exam = Some(exam);
+        s.set_exam(exam, today);
         s.weekdays = *weekdays.read();
         s.review_cap = (*cap.read()).clamp(30, plan::MAX_REVIEW_CAP);
+        s.dedicated_weeks =
+            (*dedicated.read()).clamp(*plan::DEDICATED_WEEKS.start(), *plan::DEDICATED_WEEKS.end());
+        s.qbank_per_day = (*qbank.read()).min(plan::MAX_QBANK_PER_DAY);
+        s.day_loads = *loads.read();
+        s.catch_up_day = (*catch_up.read()).filter(|w| weekdays.read()[*w]);
+        s.vacations = trips;
         save(&s);
         on_done.call(());
     };
@@ -236,6 +292,108 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
                     }
                 }
             }
+            fieldset { class: "field day-loads",
+                legend { {tx::DAY_LOADS} }
+                for (w, name) in tx::WEEKDAYS.iter().enumerate().filter(|(w, _)| weekdays.read()[*w]) {
+                    label { key: "{w}", class: "day-load",
+                        span { {*name} }
+                        select {
+                            "data-weekday": "{w}",
+                            onchange: move |e| {
+                                loads.write()[w] = match e.value().as_str() {
+                                    "light" => DayLoad::Light,
+                                    "heavy" => DayLoad::Heavy,
+                                    _ => DayLoad::Normal,
+                                };
+                            },
+                            for (value, load, text) in [("light", DayLoad::Light, tx::LOADS[0]), ("normal", DayLoad::Normal, tx::LOADS[1]), ("heavy", DayLoad::Heavy, tx::LOADS[2])] {
+                                option { value, selected: loads.read()[w] == load, {text} }
+                            }
+                        }
+                    }
+                }
+            }
+            label { class: "field",
+                span { {tx::CATCH_UP_DAY} }
+                select {
+                    onchange: move |e| catch_up.set(e.value().parse::<usize>().ok().filter(|w| *w < 7)),
+                    option { value: "", selected: catch_up.read().is_none(), {tx::NO_CATCH_UP} }
+                    for (w, name) in tx::WEEKDAYS.iter().enumerate().filter(|(w, _)| weekdays.read()[*w]) {
+                        option { key: "{w}", value: "{w}", selected: *catch_up.read() == Some(w), {*name} }
+                    }
+                }
+            }
+            label { class: "field",
+                span { {tx::DEDICATED_WEEKS} }
+                select {
+                    onchange: move |e| {
+                        if let Ok(n) = e.value().parse() {
+                            dedicated.set(n);
+                        }
+                    },
+                    for n in plan::DEDICATED_WEEKS {
+                        option { key: "{n}", value: "{n}", selected: *dedicated.read() == n, {tx::weeks(n)} }
+                    }
+                }
+            }
+            label { class: "field",
+                span { {tx::QBANK_LABEL} }
+                input {
+                    r#type: "number",
+                    inputmode: "numeric",
+                    min: "0",
+                    max: "{plan::MAX_QBANK_PER_DAY}",
+                    step: "5",
+                    value: "{qbank}",
+                    oninput: move |e| {
+                        if let Ok(n) = e.value().parse() {
+                            qbank.set(n);
+                        }
+                    },
+                }
+                span { class: "muted small", {tx::QBANK_HINT} }
+            }
+            fieldset { class: "field vacations",
+                legend { {tx::VACATIONS} }
+                for (n, (from, to)) in vacations.read().iter().cloned().enumerate() {
+                    div { key: "{n}", class: "vacation",
+                        label {
+                            span { {tx::VACATION_FROM} }
+                            input {
+                                r#type: "date",
+                                value: "{from}",
+                                oninput: move |e| {
+                                    vacations.write()[n].0 = e.value();
+                                    error.set(None);
+                                },
+                            }
+                        }
+                        label {
+                            span { {tx::VACATION_TO} }
+                            input {
+                                r#type: "date",
+                                value: "{to}",
+                                oninput: move |e| {
+                                    vacations.write()[n].1 = e.value();
+                                    error.set(None);
+                                },
+                            }
+                        }
+                        button {
+                            class: "btn-link",
+                            onclick: move |_| {
+                                vacations.write().remove(n);
+                            },
+                            {tx::REMOVE}
+                        }
+                    }
+                }
+                button {
+                    class: "btn btn-secondary",
+                    onclick: move |_| vacations.write().push((today.iso(), today.plus(6).iso())),
+                    {tx::ADD_VACATION}
+                }
+            }
             label { class: "field",
                 span { {tx::CAP_LABEL} }
                 input {
@@ -265,25 +423,43 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
     }
 }
 
+/// The typed vacations, or `None` if one is incomplete or ends before it
+/// starts.
+fn parse_vacations(typed: &[(String, String)]) -> Option<Vec<Vacation>> {
+    typed
+        .iter()
+        .map(|(from, to)| {
+            let (from, to) = (Day::parse(from)?, Day::parse(to)?);
+            (from <= to).then_some(Vacation { from, to })
+        })
+        .collect()
+}
+
 #[component]
 fn StatusCard(p: Plan, exam: Option<Day>) -> Element {
     let message = match p.status {
         PlanStatus::OnTrack => tx::ON_TRACK.to_string(),
         PlanStatus::Snug => tx::SNUG.to_string(),
-        PlanStatus::Tight { left_over, fix } => {
+        PlanStatus::Tight { left_over, fix, later_exam } => {
             let fix = match fix {
                 TightFix::MoreDays(n) => format!("{} {n}.", tx::TIGHT_ADD),
                 TightFix::HigherCap(cap) => tx::tight_cap(cap),
                 TightFix::HighYield => tx::TIGHT_HIGH_YIELD.to_string(),
-                TightFix::FinalWindow => tx::TIGHT_FINAL.to_string(),
+                TightFix::Dedicated => tx::TIGHT_DEDICATED.to_string(),
             };
-            format!("{} {left_over}. {fix}", tx::TIGHT)
+            let later = later_exam.map(|d| format!(" {}", tx::later_exam(&long_date(d)))).unwrap_or_default();
+            format!("{} {left_over}. {fix}{later}", tx::TIGHT)
         }
-        PlanStatus::FinalWindow => tx::FINAL_WINDOW.to_string(),
+        PlanStatus::Dedicated => tx::DEDICATED.to_string(),
         PlanStatus::ExamDone => tx::EXAM_DONE.to_string(),
         PlanStatus::NoExamDate | PlanStatus::NoStudyDays => String::new(),
     };
     let tight = matches!(p.status, PlanStatus::Tight { .. });
+    let later = match p.status {
+        PlanStatus::Tight { later_exam, .. } => later_exam,
+        _ => None,
+    };
+    let today = p.today().map(|d| d.day);
     rsx! {
         crate::ui::Card { class: "plan-status",
             if let Some(exam) = exam {
@@ -292,10 +468,29 @@ fn StatusCard(p: Plan, exam: Option<Day>) -> Element {
             if p.status != PlanStatus::ExamDone {
                 p { class: "muted", {tx::days_left(p.study_days_left as usize)} }
             }
-            if let Some(from) = p.final_from.filter(|_| p.status != PlanStatus::ExamDone) {
-                p { class: "muted small", "{tx::FINAL_FROM} {long_date(from)}" }
+            if let Some(phase) = p.today().map(|d| d.phase) {
+                p { class: "plan-phase", "data-phase": "{phase:?}", {phase_label(phase)} }
+            }
+            if let Some(from) = p.integration_from.filter(|d| today.is_some_and(|t| *d > t)) {
+                p { class: "muted small", "{tx::INTEGRATION_FROM} {long_date(from)}" }
+            }
+            if let Some(from) = p.dedicated_from.filter(|d| today.is_some_and(|t| *d > t)) {
+                p { class: "muted small", "{tx::DEDICATED_FROM} {long_date(from)}" }
             }
             p { class: if tight { "note" } else { "" }, {message} }
+        }
+        if let Some(day) = later {
+            div { class: "plan-actions",
+                button {
+                    class: "btn btn-secondary",
+                    onclick: move |_| {
+                        let mut s = SETTINGS.write();
+                        s.exam = Some(day);
+                        save(&s);
+                    },
+                    {tx::MOVE_EXAM}
+                }
+            }
         }
     }
 }
@@ -349,6 +544,114 @@ fn TodayCard(p: Plan) -> Element {
                 }
             }
             DayDetail { d: today.clone() }
+        }
+    }
+}
+
+/// The self-assessments still ahead, with the next one first.
+#[component]
+fn MilestonesCard(p: Plan) -> Element {
+    let marks: Vec<(Day, MilestoneKind)> =
+        p.days.iter().filter_map(|d| d.milestone.map(|m| (d.day, m))).collect();
+    if marks.is_empty() {
+        return rsx! {};
+    }
+    rsx! {
+        crate::ui::Card { class: "plan-milestones",
+            h2 { {tx::MILESTONES_TITLE} }
+            ol { class: "plan-days",
+                for (day, kind) in marks {
+                    li { key: "{day.0}",
+                        div { class: "plan-day", "data-milestone": "{kind:?}",
+                            span { class: "plan-date", {short_date(day)} }
+                            span { class: "plan-focus", bdi { {milestone_label(kind)} } }
+                        }
+                    }
+                }
+            }
+            p { class: "muted small", {tx::MILESTONES_NOTE} }
+        }
+    }
+}
+
+/// Yesterday's missed new items: a calm offer to spread them (what the plan
+/// already does) or put them on the catch-up day, with a before/after
+/// preview and Undo. Never a red count or "overdue".
+#[component]
+pub(crate) fn RebalanceCard(t: DailyTarget) -> Element {
+    let settings = SETTINGS.read().clone();
+    let Some(today) = t.today().map(|d| d.day) else { return rsx! {} };
+    let catch_up =
+        settings.next_catch_up(today, t.exam).filter(|d| t.plan.dedicated_from.is_none_or(|f| *d < f));
+    let choice = settings.rebalance.filter(|r| {
+        r.on == today || (r.to_catch_up && settings.next_catch_up(r.on, t.exam).is_some_and(|d| d >= today))
+    });
+    if choice.is_none() && t.missed == 0 {
+        return rsx! {};
+    }
+    let missed = choice.map_or(t.missed, |r| r.missed);
+    let choose = move |to_catch_up: bool| {
+        let mut s = SETTINGS.write();
+        s.rebalance = Some(Rebalance { on: today, missed, to_catch_up });
+        save(&s);
+    };
+    let preview: Vec<(Day, u32, u32)> = t
+        .plan
+        .days
+        .iter()
+        .zip(t.before.iter().copied().chain(std::iter::repeat(0)))
+        .filter(|(d, _)| d.focus != Focus::Rest)
+        .take(7)
+        .map(|(d, before)| (d.day, before, d.new))
+        .collect();
+    let choose_now = choose;
+    rsx! {
+        crate::ui::Card { class: "plan-rebalance",
+            match choice {
+                None => rsx! {
+                    p { {tx::missed(missed)} }
+                    div { class: "plan-actions",
+                        button { class: "btn btn-primary", onclick: move |_| choose_now(false), {tx::SPREAD} }
+                        if let Some(day) = catch_up {
+                            button {
+                                class: "btn btn-secondary",
+                                onclick: move |_| choose_now(true),
+                                {tx::to_catch_up(&short_date(day))}
+                            }
+                        }
+                    }
+                },
+                Some(r) => rsx! {
+                    p {
+                        if r.to_catch_up {
+                            {tx::moved(&settings.next_catch_up(r.on, t.exam).map(short_date).unwrap_or_default())}
+                        } else {
+                            {tx::SPREAD_DONE}
+                        }
+                    }
+                    if r.to_catch_up || catch_up.is_some() {
+                        div { class: "plan-actions",
+                            button {
+                                class: "btn btn-secondary",
+                                onclick: move |_| choose_now(!r.to_catch_up),
+                                {tx::UNDO}
+                            }
+                        }
+                    }
+                },
+            }
+            details { class: "plan-preview",
+                summary { {tx::PREVIEW} }
+                ol { class: "plan-days",
+                    for (day, before, after) in preview {
+                        li { key: "{day.0}", class: "small",
+                            span { class: "plan-date", {short_date(day)} }
+                            " "
+                            bdi { "{before} ← {after}" }
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -433,7 +736,7 @@ fn PaceCard(p: Plan, past: Vec<(i32, u32)>) -> Element {
             total: p.total,
             from: past.first().map_or(0, |(o, _)| *o),
             to,
-            final_from: p.final_from.map(|f| today.until(f)),
+            final_from: p.dedicated_from.map(|f| today.until(f)),
         },
         tx::PACE_LABEL,
     );
@@ -548,6 +851,13 @@ pub(crate) fn DayDetail(d: DayPlan) -> Element {
                 " · "
             }
             {count(d.reviews, &REVIEW)} " {tx::APPROX}"
+            if d.qbank > 0 {
+                " · {tx::qbank(d.qbank)}"
+            }
+            if let Some(m) = d.milestone {
+                " · "
+                bdi { {milestone_label(m)} }
+            }
         }
     }
 }
@@ -565,18 +875,36 @@ pub(crate) fn focus_label(f: Focus) -> &'static str {
         Focus::Revisit => tx::FOCUS_REVISIT,
         Focus::Mock => tx::FOCUS_MOCK,
         Focus::WeakTopics => tx::FOCUS_WEAK,
+        Focus::CatchUp => tx::FOCUS_CATCH_UP,
         Focus::Rest => tx::FOCUS_REST,
     }
 }
 
+pub(crate) fn phase_label(p: Phase) -> &'static str {
+    match p {
+        Phase::Systems => tx::PHASE_SYSTEMS,
+        Phase::Integration => tx::PHASE_INTEGRATION,
+        Phase::Dedicated => tx::PHASE_DEDICATED,
+    }
+}
+
+pub(crate) fn milestone_label(m: MilestoneKind) -> &'static str {
+    match m {
+        MilestoneKind::Baseline => tx::BASELINE,
+        MilestoneKind::Checkpoint => tx::CHECKPOINT,
+        MilestoneKind::Weekly => tx::WEEKLY,
+        MilestoneKind::Free120 => tx::FREE_120,
+    }
+}
+
 /// `الأربع 20 يناير 2027`.
-fn long_date(d: Day) -> String {
+pub(crate) fn long_date(d: Day) -> String {
     let (y, m, day) = d.ymd();
     format!("{} {day} {} {y}", tx::WEEKDAYS[d.weekday()], tx::MONTHS[m as usize - 1])
 }
 
 /// `أربع 20 يناير`.
-fn short_date(d: Day) -> String {
+pub(crate) fn short_date(d: Day) -> String {
     let (_, m, day) = d.ymd();
     format!("{} {day} {}", tx::WEEKDAYS_SHORT[d.weekday()], tx::MONTHS[m as usize - 1])
 }
@@ -639,5 +967,66 @@ mod tests {
         assert_eq!(later.new_goal(), morning.new_goal(), "today's share doesn't shrink as he works");
         assert_eq!(later.done, stats::DayDone { new: 2, reviews: 1 });
         assert_eq!(later.new_left(), morning.new_goal().saturating_sub(2));
+    }
+
+    #[test]
+    fn vacations_parse_or_ask_again() {
+        let ok = parse_vacations(&[("2027-01-01".into(), "2027-01-07".into())]).unwrap();
+        assert_eq!(
+            ok,
+            vec![Vacation { from: Day::parse("2027-01-01").unwrap(), to: Day::parse("2027-01-07").unwrap() }]
+        );
+        assert_eq!(parse_vacations(&[]), Some(Vec::new()));
+        assert_eq!(
+            parse_vacations(&[("2027-01-07".into(), "2027-01-01".into())]),
+            None,
+            "ends before it starts"
+        );
+        assert_eq!(parse_vacations(&[("".into(), "2027-01-01".into())]), None, "half typed");
+    }
+
+    #[test]
+    fn yesterdays_missed_new_items_are_counted_not_blamed() {
+        use steps_core::review::{Grade, Origin, ReviewEvent};
+        use steps_core::stats::Clock;
+
+        let Some(lecture) =
+            crate::content::Library::get().lectures.values().find(|l| l.items.len() >= 20).cloned()
+        else {
+            return; // no content embedded
+        };
+        const DAY_MS: i64 = 86_400_000;
+        let now_ms = 20_400 * DAY_MS + 12 * 3_600_000;
+        let clock = Clock { now_ms, zone: steps_core::zone::Zone::fixed(0), rollover_hour: 4 };
+        let data = |events: Vec<ReviewEvent>| StudyData {
+            lectures: vec![lecture.clone()],
+            events,
+            marks: Default::default(),
+            forecast: Some(Vec::new()),
+            clock,
+            demo: false,
+        };
+        let settings = PlanSettings {
+            exam: Some(clock.today().plus(120)),
+            weekdays: [true; 7],
+            ..PlanSettings::default()
+        };
+        let idle = daily_target(&data(Vec::new()), &settings).unwrap();
+        assert!(idle.missed > 0, "yesterday's share wasn't started");
+        assert_eq!(idle.before.len(), idle.plan.days.len());
+        // He did yesterday's share: nothing missed.
+        let did: Vec<ReviewEvent> = lecture
+            .items
+            .iter()
+            .take(idle.missed as usize)
+            .map(|it| ReviewEvent {
+                item_id: it.id.clone(),
+                grade: Grade::Good,
+                origin: Origin::Review,
+                at_ms: now_ms - DAY_MS,
+                took_ms: 5000,
+            })
+            .collect();
+        assert_eq!(daily_target(&data(did), &settings).unwrap().missed, 0);
     }
 }

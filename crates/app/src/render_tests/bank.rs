@@ -90,7 +90,7 @@ fn the_setup_offers_the_three_modes_and_counts_the_pool() {
     app.assert_has(tx::MOCK_SCOPE_NOTE);
     app.assert_has(tx::START_MOCK);
     // A block is 10, 15 or 20 questions, as on the 2026 exam.
-    assert!(!app.can_tap("40"));
+    assert!(!app.tappables().iter().any(|t| t.ends_with("|40")), "{:?}", app.tappables());
     app.tap("15");
     app.assert_has(tx::POOL_OF);
 }

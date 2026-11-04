@@ -937,7 +937,15 @@ mod list_tests {
             }
         }
         assert!(lesson_for_item("nolecture").is_none());
-        assert!(lesson_for_item("renal.L01.001").is_none());
+        // An item of a lecture with no lessons has none.
+        if let Some(item) = lib
+            .lectures
+            .iter()
+            .find(|(id, _)| !lib.lessons.contains_key(*id))
+            .and_then(|(_, l)| l.items.first())
+        {
+            assert!(lesson_for_item(&item.id).is_none(), "{}", item.id);
+        }
         assert!(lesson_for_item("cvs.L01.zzz-no-such-item").is_none());
     }
 

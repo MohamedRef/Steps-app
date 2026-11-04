@@ -31,7 +31,9 @@ fn enter(app: &mut App, kind: &str, value: &str) {
         .page
         .walk()
         .into_iter()
-        .find(|&n| app.page.nodes[n].listeners.contains(&"input") && app.page.attr(n, "type") == Some(kind))
+        .filter(|&n| app.page.nodes[n].listeners.contains(&"input") && app.page.attr(n, "type") == Some(kind))
+        // The exam day is the first date; the review cap is the last number.
+        .reduce(|first, n| if kind == "number" { n } else { first })
         .unwrap_or_else(|| panic!("no {kind} field:\n{}", app.listing("input")));
     let data = dioxus_html::SerializedFormData::new(value.to_string(), Vec::new());
     app.fire("input", dioxus_html::EventData::Form(data), n);
@@ -172,15 +174,15 @@ fn a_rest_day_says_so_and_points_to_the_next_study_day() {
 
 #[test]
 fn a_plan_too_tight_for_the_days_left_says_so() {
-    // Three days left and nothing seen: the last days are for mock exams.
+    // Three days left and nothing seen: the last days are dedicated.
     let mut app = App::with(Screen::Stats, || {
         *crate::plan::SETTINGS.write() =
             PlanSettings { exam: Some(today().plus(3)), weekdays: [true; 7], ..PlanSettings::default() };
     });
     super::sheets::tap_row(&mut app, "tab", crate::i18n::stats::TAB_PLAN);
     app.assert_has(tx::TIGHT);
-    app.assert_has(tx::TIGHT_FINAL);
-    app.assert_has(tx::FOCUS_MOCK);
+    app.assert_has(tx::TIGHT_DEDICATED);
+    assert!(app.has(tx::FOCUS_WEAK) || app.has(tx::FOCUS_MOCK), "{}", app.text());
     app.assert_has(tx::PACE_NOT_DONE);
 }
 
@@ -188,12 +190,12 @@ fn a_plan_too_tight_for_the_days_left_says_so() {
 fn a_roomy_plan_is_on_track() {
     let mut app = App::with(Screen::Stats, || {
         *crate::plan::SETTINGS.write() =
-            PlanSettings { exam: Some(today().plus(90)), weekdays: [true; 7], ..PlanSettings::default() };
+            PlanSettings { exam: Some(today().plus(400)), weekdays: [true; 7], ..PlanSettings::default() };
     });
     super::sheets::tap_row(&mut app, "tab", crate::i18n::stats::TAB_PLAN);
     app.assert_has(tx::ON_TRACK);
     app.assert_has(tx::PACE_DONE_ON);
-    app.assert_has(tx::FINAL_FROM);
+    app.assert_has(tx::DEDICATED_FROM);
 }
 
 /// Every item seen once, yesterday.
@@ -218,10 +220,10 @@ fn all_seen() {
 
 #[test]
 fn the_last_days_and_a_passed_exam_read_differently() {
-    // Everything seen and inside the final window: no new items.
+    // Everything seen and inside dedicated: no new items.
     let mut app = App::with(Screen::Stats, all_seen);
     super::sheets::tap_row(&mut app, "tab", crate::i18n::stats::TAB_PLAN);
-    app.assert_has(tx::FINAL_WINDOW);
+    app.assert_has(tx::DEDICATED);
     // The exam day itself: done.
     app.run(|| {
         *crate::plan::SETTINGS.write() =

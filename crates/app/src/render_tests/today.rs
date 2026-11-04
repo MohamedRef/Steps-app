@@ -177,16 +177,15 @@ fn a_rest_day_in_the_plan_says_so() {
 }
 
 #[test]
-fn the_final_window_is_for_mocks_or_weak_topics() {
+fn dedicated_is_for_self_assessments_or_weak_topics() {
     let exam = today().plus(3);
-    let mut app =
-        planned(PlanSettings { exam: Some(exam), weekdays: [true; 7], final_days: 7, ..Default::default() });
+    let app = planned(PlanSettings { exam: Some(exam), weekdays: [true; 7], ..Default::default() });
     let text = app.text();
-    assert!(text.contains(tx::MOCK) || text.contains(tx::WEAK), "{text}");
-    if app.tap_if(tx::OPEN_BANK) {
-        assert!(on(&app, Screen::Bank));
-    } else {
-        app.assert_has(tx::WEAK_START);
+    if !text.contains(tx::WEAK) {
+        // A self-assessment day: log the score after it.
+        let log = tx::milestone_today("");
+        let after = log.rsplit(". ").next().unwrap();
+        assert!(text.contains(after), "{text}");
     }
 }
 
@@ -196,7 +195,8 @@ fn a_tight_plan_says_how_to_fix_it() {
     let mut days = [false; 7];
     days[today().weekday()] = true;
     let exam = today().plus(10);
-    let app = planned(PlanSettings { exam: Some(exam), weekdays: days, final_days: 0, ..Default::default() });
+    let app =
+        planned(PlanSettings { exam: Some(exam), weekdays: days, dedicated_weeks: 0, ..Default::default() });
     // A tight plan names a fix; an easy one has none. Either way today leads.
     app.assert_has(tx::HERO_KICKER_PLAN);
 }

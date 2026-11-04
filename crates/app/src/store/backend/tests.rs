@@ -280,3 +280,43 @@ fn the_daily_new_cap_counts_items_started_today() {
     let i = b.intervals("cvs.L04.002", T0).unwrap();
     assert!(i[0] <= i[3]);
 }
+
+#[test]
+fn pages_read_gate_todays_new_items_and_survive_a_reload() {
+    let lib = Library::get();
+    let store: &'static Store = Box::leak(Box::new(Store::open_in_memory().unwrap()));
+    let mut b = ReviewBackend::new(store, catalog(lib));
+    let all = b.overview(lib, T0).unseen;
+    assert!(all > 0);
+    assert_eq!(b.overview(lib, T0).locked, 0);
+    assert!(StudyStore::pages_read(&b).is_none(), "no page read, no switch: no gate");
+
+    // The first written lecture's first page that has items.
+    let lec = lib.index.lectures.iter().find_map(|e| lib.lectures.get(&e.id)).unwrap();
+    let page = lec.items[0].src.page;
+    let on_page = b
+        .catalog
+        .values()
+        .filter(|e| e.item.src.page == page && e.item.src.book.is_none() && !b.hidden(&e.item.id))
+        .count();
+    assert!(b.set_pages_read(lib, page, page, true));
+    let o = b.overview(lib, T0);
+    assert_eq!(o.unseen, on_page, "only the page read opens");
+    assert_eq!(o.unseen + o.locked, all);
+    assert!(StudyStore::pages_read(&b).is_some_and(|p| p.contains(page)));
+
+    // Synced: another run on the same store sees the same pages.
+    let again = ReviewBackend::new(store, catalog(lib));
+    assert_eq!(again.overview(lib, T0).unseen, on_page);
+    let course = steps_core::program::course_of(&lec.lecture).to_string();
+    let stored: steps_core::pages::PagesRead = store.setting(&format!("{}{course}", pages::KEY)).unwrap();
+    assert!(stored.contains(page));
+
+    // The switch off lets everything through again; back on, unmarking reverses it.
+    assert!(b.set_page_gate(false));
+    assert_eq!(b.overview(lib, T0).unseen, all);
+    assert!(b.set_page_gate(true));
+    assert!(b.set_pages_read(lib, page, page, false));
+    assert_eq!(b.overview(lib, T0).unseen, 0);
+    assert_eq!(store.setting::<bool>(pages::GATE_KEY), Some(true));
+}

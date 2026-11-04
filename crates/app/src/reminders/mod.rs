@@ -77,7 +77,10 @@ pub fn use_local_reminders() {
         let _ = (review.revision)();
         let prefs = PREFS.read().clone();
         let here = *HERE.read();
-        let weekdays = crate::plan::SETTINGS.read().weekdays;
+        let (weekdays, vacations) = {
+            let plan = crate::plan::SETTINGS.read();
+            (plan.weekdays, plan.vacations.clone())
+        };
         if !local() {
             return;
         }
@@ -91,6 +94,7 @@ pub fn use_local_reminders() {
             here,
             times: &times,
             weekdays,
+            vacations: &vacations,
             due: &due,
             // He studied today and nothing is left due: today's done.
             target_met: answered > 0 && due.first().is_none_or(|&d| d == 0),

@@ -1021,9 +1021,14 @@ fn explain_root() -> Element {
 #[test]
 fn explain_links_only_show_where_a_lesson_teaches_the_item() {
     // An item of a lecture with no lessons: nothing to link.
-    EXPLAIN.with_borrow_mut(|e| *e = "renal.L01.001".into());
-    let app = mount(explain_root);
-    assert!(!app.can_tap(tx::EXPLAIN));
+    let lib = crate::content::Library::get();
+    let bare =
+        lib.lectures.iter().find(|(id, _)| !lib.lessons.contains_key(*id)).and_then(|(_, l)| l.items.first());
+    if let Some(bare) = bare {
+        EXPLAIN.with_borrow_mut(|e| *e = bare.id.clone());
+        let app = mount(explain_root);
+        assert!(!app.can_tap(tx::EXPLAIN), "{}", bare.id);
+    }
     // An item a lesson practises: the link opens that lesson.
     let (_, l) = first_lesson();
     let Some(item) = l.practice.first().cloned() else { return };
