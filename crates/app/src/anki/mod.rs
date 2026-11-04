@@ -181,8 +181,12 @@ fn save_and_open(bytes: &[u8]) -> Result<String, String> {
 
 #[cfg(not(any(target_os = "android", target_arch = "wasm32")))]
 fn save_and_open(bytes: &[u8]) -> Result<String, String> {
-    let home =
-        std::env::var_os("HOME").or_else(|| std::env::var_os("USERPROFILE")).ok_or("no home folder")?;
+    // Unit tests save into their own scratch folder.
+    let home = if cfg!(test) {
+        crate::prefs::test_dir().into_os_string()
+    } else {
+        std::env::var_os("HOME").or_else(|| std::env::var_os("USERPROFILE")).ok_or("no home folder")?
+    };
     let downloads = std::path::Path::new(&home).join("Downloads");
     let dir = if downloads.is_dir() { downloads } else { std::path::PathBuf::from(home) };
     let path = dir.join(FILE_NAME);
@@ -194,8 +198,11 @@ fn save_and_open(bytes: &[u8]) -> Result<String, String> {
     } else {
         "xdg-open"
     };
-    // Opening is a convenience: the file is saved either way.
-    let _ = std::process::Command::new(opener).arg(&path).spawn();
+    // Opening is a convenience: the file is saved either way. Unit tests
+    // open nothing on the machine running them.
+    if !cfg!(test) {
+        let _ = std::process::Command::new(opener).arg(&path).spawn();
+    }
     Ok(path.display().to_string())
 }
 

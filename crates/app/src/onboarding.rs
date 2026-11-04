@@ -123,6 +123,12 @@ fn close() {
     *OPEN.write() = false;
 }
 
+/// Screen tests: this device has seen the first-run questions.
+#[cfg(test)]
+pub fn mark_done_for_tests() {
+    shared().put_local_setting(SEEN, &true).unwrap();
+}
+
 /// Opens the questions again (Settings › Study).
 pub fn reopen() {
     *OPEN.write() = true;

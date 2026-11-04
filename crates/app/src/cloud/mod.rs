@@ -284,7 +284,13 @@ pub fn open_url(url: &str) -> Result<(), String> {
         let window = web_sys::window().ok_or("no window")?;
         window.open_with_url_and_target(url, "_blank").map(drop).map_err(|e| format!("{e:?}"))
     }
-    #[cfg(not(any(target_os = "android", target_arch = "wasm32")))]
+    // Unit tests open nothing on the machine running them.
+    #[cfg(test)]
+    {
+        let _ = url;
+        Ok(())
+    }
+    #[cfg(not(any(target_os = "android", target_arch = "wasm32", test)))]
     {
         let opener = if cfg!(target_os = "macos") { "open" } else { "xdg-open" };
         std::process::Command::new(opener).arg(url).spawn().map(drop).map_err(|e| format!("{opener}: {e}"))

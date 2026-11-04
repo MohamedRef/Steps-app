@@ -506,7 +506,10 @@ pub fn shared() -> &'static Store {
             Store::open_in_memory().expect("an in-memory database always opens")
         }
     });
-    #[cfg(not(target_arch = "wasm32"))]
+    // Unit tests: each test thread has its own store in memory.
+    #[cfg(test)]
+    return TEST_STORE.with(|s| *s);
+    #[cfg(all(not(target_arch = "wasm32"), not(test)))]
     STORE.get_or_init(|| {
         let opened = paths::data_dir().and_then(|dir| {
             Store::open_marked(&dir.join("steps.db"), paths::install_marker().as_deref())
@@ -522,14 +525,14 @@ pub fn shared() -> &'static Store {
     })
 }
 
+#[cfg_attr(test, allow(dead_code))]
 static STORE: OnceLock<Store> = OnceLock::new();
 static OPEN_ERROR: OnceLock<String> = OnceLock::new();
 
-/// Test-only: the shared store in memory, for fixtures that render screens
-/// reading it (`browser_fixture`). Call before anything opens the store.
 #[cfg(test)]
-pub fn use_memory_store() {
-    let _ = STORE.set(Store::open_in_memory().expect("an in-memory database always opens"));
+thread_local! {
+    static TEST_STORE: &'static Store =
+        Box::leak(Box::new(Store::open_in_memory().expect("an in-memory database always opens")));
 }
 
 /// Why the store fell back to memory, if it did.

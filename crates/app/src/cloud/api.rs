@@ -55,11 +55,7 @@ impl Api {
     pub fn new(base_url: &str) -> Self {
         Self {
             #[cfg(not(target_arch = "wasm32"))]
-            agent: ureq::Agent::config_builder()
-                .http_status_as_error(false)
-                .timeout_global(Some(std::time::Duration::from_secs(20)))
-                .build()
-                .into(),
+            agent: crate::update::agent(base_url, std::time::Duration::from_secs(20)),
             base: base_url.trim_end_matches('/').to_string(),
         }
     }

@@ -189,11 +189,7 @@ struct TokenResponse {
 /// only on [`OAuthError::Network`], when Google may never have seen it.
 pub fn exchange(client: &GoogleClient, auth: &Authorization) -> Result<String, OAuthError> {
     let (code, verifier, redirect_uri) = (&auth.code, &auth.verifier, &auth.redirect_uri);
-    let agent: ureq::Agent = ureq::Agent::config_builder()
-        .http_status_as_error(false)
-        .timeout_global(Some(Duration::from_secs(20)))
-        .build()
-        .into();
+    let agent = crate::update::agent(TOKEN_URL, Duration::from_secs(20));
     let mut form = vec![
         ("code", code.as_str()),
         ("client_id", client.client_id.as_str()),

@@ -46,6 +46,8 @@ mod platform;
 mod prefs;
 mod recap;
 mod reminders;
+#[cfg(test)]
+mod render_tests;
 mod settings;
 mod sheet;
 mod shortcuts;
@@ -157,9 +159,17 @@ fn main() {
 
 #[component]
 fn App() -> Element {
+    rsx! { AppAt { start: Screen::from_env().unwrap_or(Screen::Today) } }
+}
+
+/// The whole app, opening on `start`. `children` draw last inside the app's
+/// frame, with every context in reach: the screen render tests use them to
+/// open sheets and pages (`render_tests.rs`); the app passes none.
+#[component]
+fn AppAt(start: Screen, children: Element) -> Element {
     persistence::use_provide_saves();
     let ui = use_context_provider(|| Ui {
-        screen: Signal::new(Screen::from_env().unwrap_or(Screen::Today)),
+        screen: Signal::new(start),
         prefs: Signal::new(prefs::DevicePrefs::load()),
         focus: Signal::new(false),
     });
@@ -298,6 +308,7 @@ fn App() -> Element {
             abbrsheet::AbbrSheet {}
             courses::Picker {}
             own::ShareInbox {}
+            {children}
             onboarding::Onboarding {}
         }
     }

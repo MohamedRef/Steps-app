@@ -19,11 +19,24 @@ const PEN_HOVER: &str = "pen_hover";
 const MOUSE_HOVER: &str = "mouse_hover";
 const APPEARANCE: &str = "appearance";
 
+/// This test thread's data folder (`data_dir` under `cfg(test)`).
+#[cfg_attr(not(test), allow(dead_code))]
+pub fn test_dir() -> PathBuf {
+    let thread = format!("{:?}", std::thread::current().id());
+    let n: String = thread.chars().filter(char::is_ascii_digit).collect();
+    std::env::temp_dir().join(format!("steps-test-{}-{n}", std::process::id()))
+}
+
 /// The app's own data folder: the local database and device files live here.
 pub fn data_dir() -> Option<PathBuf> {
-    // Previews and tests point the whole app at a scratch folder.
+    // Previews point the whole app at a scratch folder.
     if let Some(dir) = std::env::var_os("STEPS_DATA_DIR") {
         return Some(PathBuf::from(dir));
+    }
+    // Unit tests never touch the real profile: one scratch folder per test
+    // thread, so tests running side by side start from their own empty data.
+    if cfg!(test) {
+        return Some(test_dir());
     }
     if cfg!(target_arch = "wasm32") {
         // The browser has no folders: the database is in IndexedDB and the

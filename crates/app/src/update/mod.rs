@@ -443,13 +443,17 @@ fn range_start<B>(res: &ureq::http::Response<B>) -> Option<u64> {
     value.strip_prefix("bytes ")?.split('-').next()?.trim().parse().ok()
 }
 
-/// An HTTP agent; local development feeds skip any proxy in the environment.
+/// The app's HTTP agent (updates, Steps Cloud, Google sign-in); local
+/// development servers skip any proxy in the environment. Unit tests reach
+/// only local servers: anything else goes to a closed port and fails at once.
 #[cfg(not(target_arch = "wasm32"))]
-fn agent(url: &str, timeout: Duration) -> ureq::Agent {
+pub(crate) fn agent(url: &str, timeout: Duration) -> ureq::Agent {
     let local = url.starts_with("http://127.0.0.1") || url.starts_with("http://localhost");
     let mut config = ureq::Agent::config_builder().http_status_as_error(false).timeout_global(Some(timeout));
     if local {
         config = config.proxy(None);
+    } else if cfg!(test) {
+        config = config.proxy(ureq::Proxy::new("http://127.0.0.1:9").ok());
     }
     config.build().into()
 }

@@ -106,6 +106,7 @@ pub fn menu_bar() -> Menu {
 }
 
 /// Answers the menu's own items.
+#[cfg_attr(test, allow(dead_code))]
 pub fn use_menu_events() {
     let ui = use_context::<Ui>();
     let settings = use_context::<SettingsNav>();
