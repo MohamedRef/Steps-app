@@ -1,0 +1,482 @@
+schema: steps.lesson/v1
+lecture: pharm.L03
+lessons:
+  - id: pharm.L03.lesson1
+    title: "سموم السمك والنبات، وكل سم وله الـ antidote بتاعه"
+    hook: "الـ Na+ channel لو اتقفل أو اتفتح على الآخر، المريض بيتعب بطريقتين عكس بعض"
+    minutes: 9
+    pages: [246, 247]
+    topics: [ingested-seafood-toxins, plant-toxins, specific-toxicity-treatments]
+    goals:
+      - "تفرّق بين scombroid و tetrodotoxin و ciguatoxin"
+      - "تعرف سموم النبات وعلاجها"
+      - "تحفظ جدول الـ antidotes بالمنطق"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "السمك: 3 طرق للتسمم"
+        text: |-
+          سموم السمك بتعمل واحدة من 3: ==histamine release==، أو بتقفل الـ Na+ channels خالص، أو بتفتحها فتعمل depolarization.
+
+          - **Scombroid (histamine)**: سمك غامق اتعفن (tuna و mackerel). البكتيريا بتحوّل الـ histidine لـ histamine، فالمريض شكله ==anaphylaxis== وغالباً يتشخص غلط fish allergy. العلاج antihistamines و albuterol ± epinephrine.
+          - **Tetrodotoxin (pufferfish)**: بيقفل الـ fast Na+ channels ← مفيش depolarization ← paresthesias وضعف وفقدان reflexes.
+          - **Ciguatoxin (reef fish زي barracuda)**: بيفتح الـ Na+ channels ← perioral numbness و ==عكس الإحساس بالسخن والبارد== و bradycardia.
+        page: 246
+        quote: "Toxin actions include histamine release, total block of Na+ channels, or opening of Na+ channels to cause depolarization."
+      - kind: check
+        question: "A man has flushing, oral burning and urticaria 30 minutes after eating tuna left out in the sun. He has no fish allergy. What is the mechanism?"
+        options:
+          - "Bacterial histidine decarboxylase made histamine in the fish"
+          - "Tetrodotoxin blocked his Na+ channels"
+          - "Ciguatoxin opened his Na+ channels"
+          - "An IgE-mediated allergy to fish protein"
+        answer: 0
+        why:
+          - "صح: scombroid. البكتيريا في السمك الغامق المعفن بتحوّل الـ histidine لـ histamine."
+          - "الـ tetrodotoxin من الـ pufferfish وبيعمل ضعف و paresthesias."
+          - "الـ ciguatoxin من الـ reef fish وبيعمل عكس السخن والبارد."
+          - "ده اللي بيتشخص غلط: هو مش allergy، ده histamine جاهز في السمك."
+        page: 246
+        quote: "Bacterial histidine decarboxylase converts histidine to histamine Frequently misdiagnosed as fish allergy"
+      - kind: table
+        title: "سموم النبات"
+        columns: ["Toxin", "Source", "Key effect", "Treatment"]
+        rows:
+          - ["Grayanotoxin", "Mad honey (rhododendron)", "Opens Na+ channels → ↑ vagal tone, bradycardia", "Fluids, atropine if severe"]
+          - ["Aconitine", "Monkshood, wolfsbane", "Sustained Na+ influx → ventricular arrhythmias", "Lidocaine or amiodarone; avoid IA/III"]
+          - ["Cardiac glycosides", "Foxglove, oleander", "Na+/K+-ATPase ⊝ → xanthopsia, AV block", "Digoxin Fab, atropine, correct K+/Mg2+"]
+          - ["Coniine", "Poison hemlock", "Depolarizing nicotinic block → ascending paralysis", "Respiratory support, charcoal"]
+          - ["Atropine/scopolamine", "Belladonna, jimsonweed", "Anticholinergic toxidrome", "Physostigmine, cooling"]
+        hide: [[0, 1], [2, 1], [1, 3], [4, 3]]
+        page: 246
+        quote: "Aconitine alkaloids Aconitum (monkshood, wolfsbane) Activates Na+ channels (site 2) → delayed inactivation → sustained Na+ influx → ventricular arrhythmias"
+      - kind: figure
+        title: "الـ Na+ channel في وسط السموم"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="130" y="60" width="100" height="50" rx="10"/>
+            <text x="148" y="90" class="t-sm t-b">Na+ channel</text>
+            <rect class="fg-bad" x="5" y="10" width="115" height="60" rx="8"/>
+            <text x="12" y="30" class="t-sm t-b">BLOCK</text>
+            <text x="12" y="48" class="t-sm">tetrodotoxin</text>
+            <text x="12" y="64" class="t-sm t-mut">weakness, no reflexes</text>
+            <rect class="fg-acc" x="240" y="10" width="115" height="150" rx="8"/>
+            <text x="248" y="30" class="t-sm t-b">OPEN / activate</text>
+            <text x="248" y="50" class="t-sm">ciguatoxin</text>
+            <text x="248" y="68" class="t-sm">grayanotoxin</text>
+            <text x="248" y="86" class="t-sm">aconitine</text>
+            <text x="248" y="110" class="t-sm t-mut">depolarization,</text>
+            <text x="248" y="126" class="t-sm t-mut">vagal tone,</text>
+            <text x="248" y="142" class="t-sm t-mut">arrhythmias</text>
+            <line class="fg-arrow-bad" x1="120" y1="40" x2="140" y2="62"/>
+            <line class="fg-arrow-acc" x1="240" y1="85" x2="230" y2="85"/>
+          </svg>
+        caption: "الـ tetrodotoxin بيقفل الـ channel فالعصب ما يشتغلش. الـ ciguatoxin والـ grayanotoxin والـ aconitine بيفتحوه أو يأخروا قفله، فالخلايا تفضل depolarized: vagal tone و bradycardia أو ventricular arrhythmias."
+        alt: "A sodium channel in the middle. On one side tetrodotoxin blocks it, causing weakness and loss of reflexes. On the other side ciguatoxin, grayanotoxin and aconitine open or activate it, causing depolarization, vagal tone and arrhythmias."
+        page: 246
+        quote: "Toxin actions include histamine release, total block of Na+ channels, or opening of Na+ channels to cause depolarization."
+      - kind: explain
+        title: "الـ antidotes بالمنطق"
+        text: |-
+          حاول تربط كل antidote بالـ mechanism بدل ما تحفظه:
+          - **Acetaminophen** ← N-acetylcysteine بيرجّع الـ ==glutathione==.
+          - **Benzodiazepines** ← flumazenil (competitive antagonist). **Opioids** ← naloxone.
+          - **Heparin** ← protamine (شحنة موجبة بتلزق في الـ heparin السالب). **Dabigatran** ← idarucizumab. **Factor Xa inhibitors** ← andexanet alfa.
+          - **Warfarin** ← vitamin K (بطيء)، أو PCC/FFP (==فوري==).
+          - **Methotrexate** ← leucovorin. **Methemoglobin** ← methylene blue و vitamin C.
+          - **β-blockers** ← atropine و glucagon (بيرفع الـ cAMP من غير β receptors).
+        page: 247
+        quote: "Acetaminophen N-acetylcysteine (replenishes glutathione)"
+      - kind: match
+        prompt: "وصّل المعدن بالـ antidote"
+        pairs:
+          - ["Iron", "Deferoxamine, deferasirox, deferiprone"]
+          - ["Copper", "Penicillamine, trientine"]
+          - ["Lead", "Penicillamine, EDTA, dimercaprol, succimer"]
+          - ["Arsenic or mercury", "Dimercaprol, succimer"]
+          - ["Cyanide", "Hydroxocobalamin, nitrites + sodium thiosulfate"]
+        why: "الكتاب بيقول: Pennycillamine للنحاس (3 copper pennies = trientine)، و PEDS patients lead antidote للرصاص."
+        page: 247
+        quote: "Lead Penicillamine, calcium disodium EDTA, Dimercaprol, Succimer, (PEDS patients lead antidote) Mercury Dimercaprol, succimer"
+      - kind: aside
+        tone: trap
+        text: "الـ **NaHCO3** بيتدّى في حاجتين لسببين مختلفين: في الـ ==salicylates== بيقلّي البول فيطلّع الدوا، وفي الـ ==TCAs== بيثبّت غشاء خلايا القلب. ومع الـ methanol و ethylene glycol: **fomepizole** (the foe of methanol) أحسن من الـ ethanol، و dialysis."
+        page: 247
+        quote: "Salicylates NaHCO3 (alkalinizes urine), dialysis TCAs NaHCO3 (stabilizes cardiac cell membrane)"
+      - kind: check
+        question: "A man found in a closed garage with a running car has headache and confusion. Which treatment?"
+        options:
+          - "100% O2 or hyperbaric O2"
+          - "Methylene blue"
+          - "Hydroxocobalamin"
+          - "Fomepizole"
+        answer: 0
+        why:
+          - "صح: carbon monoxide ← 100% O2 أو hyperbaric O2."
+          - "الـ methylene blue للـ methemoglobin."
+          - "الـ hydroxocobalamin للـ cyanide."
+          - "الـ fomepizole للـ methanol والـ ethylene glycol."
+        page: 247
+        quote: "Carbon monoxide 100% O2 , hyperbaric O2"
+      - kind: try
+        items: [pharm.L03.001, pharm.L03.005, pharm.L03.009, pharm.L03.010, pharm.L03.012]
+    recap:
+      - "Scombroid = histamine (شكله anaphylaxis). Tetrodotoxin يقفل Na+. Ciguatoxin يفتحه (عكس السخن والبارد)."
+      - "Aconitine ← arrhythmias، lidocaine أو amiodarone، ابعد عن IA/III. Foxglove/oleander ← digoxin Fab."
+      - "Acetaminophen ← NAC، heparin ← protamine، dabigatran ← idarucizumab، Xa ← andexanet، warfarin ← K أو PCC/FFP."
+      - "Iron ← deferoxamine، copper ← penicillamine، lead ← PEDS، CO ← O2، cyanide ← hydroxocobalamin."
+    practice: [pharm.L03.001, pharm.L03.002, pharm.L03.003, pharm.L03.004, pharm.L03.005, pharm.L03.006, pharm.L03.007, pharm.L03.008, pharm.L03.009, pharm.L03.010, pharm.L03.011, pharm.L03.012, pharm.L03.013, pharm.L03.014]
+  - id: pharm.L03.lesson2
+    title: "الآثار الجانبية: القلب والغدد والجهاز الهضمي والدم"
+    hook: "كل جدول هنا ليه mnemonic من الكتاب؛ احفظ الـ mnemonic وافهم ليه الدوا بيعمل كده"
+    minutes: 10
+    pages: [247, 249]
+    topics: [drug-reactions-cardiovascular, drug-reactions-endocrine-reproductive, drug-reactions-gastrointestinal, drug-reactions-hematologic]
+    goals:
+      - "تعرف أدوية الـ vasospasm والـ flushing والـ torsades"
+      - "تعرف الأدوية اللي بتعمل DI و SIADH و hyperprolactinemia ومشاكل الغدة"
+      - "تعرف الأدوية اللي بتعمل hepatitis و pancreatitis و agranulocytosis و G6PD hemolysis"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "القلب"
+        text: |-
+          - **Coronary vasospasm**: ==CASE== = Cocaine و Amphetamines و Sumatriptan و Ergot alkaloids.
+          - **Flushing**: VANCEN = Vancomycin و Adenosine و Niacin و CCBs و Echinocandins و Nitrates.
+          - **Dilated cardiomyopathy**: alcohol و anthracyclines (نمنعها بـ dexrazoxane) و trastuzumab.
+          - **Peripheral edema**: الـ dihydropyridine CCBs (amlodipine).
+        page: 247
+        quote: "Coronary vasospasm Cocaine, Amphetamines, Sumatriptan, Ergot alkaloids (CASE)"
+      - kind: reveal
+        prompt: "مريض بياخد vancomycin بسرعة، وجسمه كله احمر وبيهرش. ده allergy؟"
+        answer: "لأ غالباً: ده ==vancomycin infusion reaction== (اسمها القديم red man syndrome). الـ vancomycin بيطلّع histamine، والموضوع بيعتمد على سرعة التسريب. العلاج: نبطّأ التسريب ونعطي diphenhydramine."
+        page: 247
+        quote: "Vancomycin infusion reaction (formerly called red man syndrome)—histamine release → widespread pruritic erythema. Infusion rate–dependent. Manage with slower infusion rate, diphenhydramine."
+      - kind: mnemonic
+        word: "ABCDEF"
+        parts:
+          - { key: "A", text: "antiArrhythmics (class IA, III)" }
+          - { key: "B", text: "antiBiotics (macrolides, fluoroquinolones)" }
+          - { key: "C", text: "anti-C-ychotics (ziprasidone)" }
+          - { key: "D", text: "antiDepressants (TCAs)" }
+          - { key: "E", text: "antiEmetics (ondansetron)" }
+          - { key: "F", text: "antiFungals (fluconazole)" }
+        hook: "أدوية الـ torsades: Memorize your ABCDEF، ومعاهم methadone"
+        page: 247
+        quote: "Methadone, antiArrhythmics (class IA, III), antiBiotics (eg, macrolides, fluoroquinolones), anti“C”ychotics (eg, ziprasidone), antiDepressants (eg, TCAs), antiEmetics (eg, ondansetron), antiFungals (eg, fluconazole) (Memorize your ABCDEF)"
+      - kind: explain
+        title: "الغدد"
+        text: |-
+          - **Adrenal insufficiency**: الـ glucocorticoids المزمنة بتكبت الـ HPA axis، والوقف ==المفاجئ== ← adrenal crisis.
+          - **Diabetes insipidus**: lithium و demeclocycline. **SIADH**: carbamazepine و cyclophosphamide و SSRIs («Can't Concentrate Serum Sodium»).
+          - **Hyperprolactinemia**: الـ antipsychotics و metoclopramide (بيقفلوا الـ dopamine) و methyldopa و verapamil ← hypogonadism و galactorrhea.
+          - **الغدة الدرقية**: amiodarone و lithium بيعملوا hypo («I am lethargic»)، و amiodarone و iodine و lithium بيعملوا hyper.
+          - **Hyperglycemia**: tacrolimus و protease inhibitors و niacin و HCTZ و glucocorticoids.
+          - **Gynecomastia**: ketoconazole و cimetidine و spironolactone وغيرهم.
+        page: 248
+        quote: "HPA suppression secondary to chronic exogenous glucocorticoid use Abrupt withdrawal of exogenous glucocorticoids leads to adrenal crisis"
+      - kind: check
+        question: "A woman on a drug for epilepsy and trigeminal neuralgia has confusion and serum sodium of 121 mEq/L with concentrated urine. Which drug?"
+        options:
+          - "Carbamazepine"
+          - "Lithium"
+          - "Demeclocycline"
+          - "Phenytoin"
+        answer: 0
+        why:
+          - "صح: الـ carbamazepine بيعمل SIADH (Can't Concentrate Serum Sodium)."
+          - "الـ lithium بيعمل DI: صوديوم عالي وبول مخفف، عكس كده."
+          - "الـ demeclocycline بيعمل DI، وبيتستخدم أصلاً لعلاج الـ SIADH."
+          - "الـ phenytoin مش في قايمة الـ SIADH."
+        page: 248
+        quote: "SIADH Carbamazepine, Cyclophosphamide, SSRIs Can’t Concentrate Serum Sodium"
+      - kind: explain
+        title: "الجهاز الهضمي"
+        text: |-
+          - **Hepatitis**: isoniazid و rifampin و pyrazinamide و statins و fibrates.
+          - **Hepatic necrosis**: الـ death cap mushroom و valproate و ==acetaminophen==.
+          - **Cholestatic hepatitis**: الـ macrolides (erythromycin).
+          - **Pancreatitis**: diuretics و glucocorticoids و alcohol و valproate و azathioprine («Drugs generate a violent abdominal distress»).
+          - **Pill esophagitis**: KCl و NSAIDs و bisphosphonates و ferrous sulfate و tetracyclines؛ بتحصل عند الأماكن الضيقة (جنب الـ aortic arch)، والوقاية ==وقوف + مية كفاية==.
+          - **Pseudomembranous colitis**: ampicillin و cephalosporins و clindamycin و fluoroquinolones و PPIs ← C difficile.
+        page: 248
+        quote: "Usually occurs at anatomic sites of esophageal narrowing (eg, near level of aortic arch); caustic effect minimized with upright posture and adequate water ingestion"
+      - kind: figure
+        title: "الدوا بيضرب نخاع العظم فين"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="130" y="70" width="100" height="40" rx="8"/>
+            <text x="145" y="95" class="t-sm t-b">Bone marrow</text>
+            <rect class="fg-bad" x="5" y="5" width="170" height="55" rx="8"/>
+            <text x="12" y="22" class="t-sm t-b">Agranulocytosis</text>
+            <text x="12" y="38" class="t-sm">clozapine, carbamazepine,</text>
+            <text x="12" y="53" class="t-sm">PTU, methimazole, dapsone</text>
+            <rect class="fg-bad" x="185" y="5" width="170" height="55" rx="8"/>
+            <text x="192" y="22" class="t-sm t-b">Aplastic anemia</text>
+            <text x="192" y="38" class="t-sm">carbamazepine, NSAIDs,</text>
+            <text x="192" y="53" class="t-sm">chloramphenicol, benzene</text>
+            <rect class="fg-box" x="5" y="120" width="170" height="55" rx="8"/>
+            <text x="12" y="137" class="t-sm t-b">Megaloblastic</text>
+            <text x="12" y="153" class="t-sm">hydroxyurea, phenytoin,</text>
+            <text x="12" y="168" class="t-sm">methotrexate, sulfa</text>
+            <rect class="fg-box" x="185" y="120" width="170" height="55" rx="8"/>
+            <text x="192" y="137" class="t-sm t-b">G6PD hemolysis</text>
+            <text x="192" y="153" class="t-sm">sulfonamides, dapsone,</text>
+            <text x="192" y="168" class="t-sm">primaquine, nitrofurantoin</text>
+          </svg>
+        caption: "الـ agranulocytosis = الكريات البيضا بس وقعت. الـ aplastic anemia = النخاع كله بطّل. الـ megaloblastic = الـ DNA synthesis اتأثر (folate). والـ G6PD hemolysis = oxidative stress على كرات حمرا ضعيفة."
+        alt: "Bone marrow in the center with four boxes: agranulocytosis (clozapine, carbamazepine, PTU, methimazole, dapsone), aplastic anemia (carbamazepine, NSAIDs, chloramphenicol, benzene), megaloblastic anemia (hydroxyurea, phenytoin, methotrexate, sulfa drugs), hemolysis in G6PD deficiency (sulfonamides, dapsone, primaquine, nitrofurantoin)."
+        page: 249
+        quote: "Agranulocytosis Dapsone, clozapine, carbamazepine, propylthiouracil, methimazole, ganciclovir, colchicine"
+      - kind: aside
+        tone: exam
+        text: "الـ **DRESS** (Drug Reaction with Eosinophilia and Systemic Symptoms) ==T cell–mediated==، واسمه التاني DIHS. أدويته: phenytoin و carbamazepine و minocycline و sulfa و allopurinol و vancomycin. والـ Coombs ⊕ hemolysis: penicillin و cephalosporins و methyldopa."
+        page: 249
+        quote: "Phenytoin, carbamazepine, minocycline, sulfa drugs, allopurinol, vancomycin T cell-mediated hypersensitivity reaction."
+      - kind: check
+        question: "A man treated with primaquine for malaria develops dark urine, jaundice and bite cells on smear. What is the setting?"
+        options:
+          - "Hemolysis in G6PD deficiency"
+          - "Direct Coombs-positive hemolytic anemia"
+          - "Aplastic anemia"
+          - "Megaloblastic anemia"
+        answer: 0
+        why:
+          - "صح: الـ primaquine مع الـ sulfonamides و dapsone و aspirin و nitrofurantoin بيعملوا hemolysis في الـ G6PD deficiency."
+          - "الـ Coombs ⊕ مع penicillin و cephalosporins و methyldopa."
+          - "الـ aplastic anemia كل الخلايا بتقل، مش hemolysis."
+          - "الـ megaloblastic مع hydroxyurea و phenytoin و methotrexate."
+        page: 249
+        quote: "Hemolysis in G6PD deficiency Sulfonamides, dapsone, primaquine, aspirin, nitrofurantoin"
+      - kind: try
+        items: [pharm.L03.015, pharm.L03.020, pharm.L03.023, pharm.L03.026, pharm.L03.031]
+    recap:
+      - "Vasospasm CASE، flushing VANCEN، torsades ABCDEF + methadone."
+      - "DI: lithium و demeclocycline. SIADH: carbamazepine و cyclophosphamide و SSRIs."
+      - "Pill esophagitis: وقوف ومية. Hepatitis: INH و rifampin و PZA و statins و fibrates."
+      - "Agranulocytosis: clozapine و carbamazepine و PTU و methimazole و dapsone. G6PD: sulfa و dapsone و primaquine."
+    practice: [pharm.L03.015, pharm.L03.016, pharm.L03.017, pharm.L03.018, pharm.L03.019, pharm.L03.020, pharm.L03.021, pharm.L03.022, pharm.L03.023, pharm.L03.024, pharm.L03.025, pharm.L03.026, pharm.L03.027, pharm.L03.028, pharm.L03.029, pharm.L03.030, pharm.L03.031, pharm.L03.032, pharm.L03.033, pharm.L03.034]
+  - id: pharm.L03.lesson3
+    title: "الآثار الجانبية: العضلات والجلد والأعصاب والكلى والرئة"
+    hook: "malignant hyperthermia في أوضة العمليات، و bupropion بيعمل seizure، و mesna بيحمي المثانة"
+    minutes: 10
+    pages: [249, 250]
+    topics: [drug-reactions-musculoskeletal-skin, drug-reactions-neurologic, drug-reactions-renal-genitourinary, drug-reactions-respiratory, drug-reactions-multiorgan]
+    goals:
+      - "تعرف أدوية الـ lupus والـ gingival hyperplasia والـ gout والـ SJS"
+      - "تعرف الأدوية اللي بتعمل seizures و neuropathy ومشاكل في النظر"
+      - "تعرف الأدوية اللي بتأذي الكلى والرئة، وأدوية الـ disulfiram-like reaction"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "العضلات والجلد"
+        text: |-
+          - **Drug-induced lupus**: hydralazine و procainamide و quinidine.
+          - **Gingival hyperplasia**: cyclosporine و CCBs و phenytoin («Can Cause puffy gums»).
+          - **Gout**: pyrazinamide و thiazides و furosemide و niacin و cyclosporine.
+          - **Photosensitivity**: sulfonamides و amiodarone و tetracyclines و fluoroquinolones («Sat for photo»).
+          - **SJS**: الـ antiepileptics (خصوصاً ==lamotrigine==) و allopurinol و sulfa و penicillin.
+          - **Tetracyclines**: teeth discoloration. **Fluoroquinolones**: ==tendon/cartilage== damage.
+        page: 249
+        quote: "Gingival hyperplasia Cyclosporine, Ca2+ channel blockers, phenytoin Can Cause puffy gums"
+      - kind: reveal
+        prompt: "شاب في عملية، بعد succinylcholine و isoflurane: rigidity وحرارة 40.5 والـ CO2 بيعلى. إيه اللي بيحصل، وإيه العلاج؟"
+        answer: "**Malignant hyperthermia**: عنده ==ryanodine receptor mutation==، فالـ Ca2+ بيخرج من الـ sarcoplasmic reticulum من غير تحكم ← العضلات تتقلص وتسخن. العلاج **dantrolene**."
+        page: 249
+        quote: "Individuals with ryanodine receptor mutation; antidote is dantrolene"
+      - kind: explain
+        title: "الأعصاب"
+        text: |-
+          - **Cinchonism** (quinidine و quinine): tinnitus، فقدان سمع أو نظر، psychosis.
+          - **Parkinsonism** و **tardive dyskinesia**: الـ antipsychotics و metoclopramide (بيقفلوا الـ D2).
+          - **Peripheral neuropathy**: cisplatin و isoniazid و vincristine و paclitaxel و phenytoin.
+          - **Idiopathic intracranial hypertension**: corticosteroids و danazol و vitamin A و growth hormone و tetracyclines.
+          - **Seizures**: isoniazid و ==bupropion== و imipenem/cilastatin و tramadol («With seizures, I bit my tongue»).
+        page: 250
+        quote: "Seizures Isoniazid, bupropion, imipenem/cilastatin, tramadol With seizures, I bit my tongue"
+      - kind: match
+        prompt: "وصّل الدوا بمشكلة النظر"
+        pairs:
+          - ["Digoxin", "Yellow-tinged vision"]
+          - ["Ethambutol", "Color vision changes"]
+          - ["PDE-5 inhibitors", "Blue-tinged vision"]
+          - ["Vigabatrin", "Tunnel vision"]
+          - ["Hydroxychloroquine", "↓ acuity, visual field defects"]
+          - ["Ivabradine", "Luminous phenomena"]
+        why: "وكمان الـ topiramate بيعمل blurred vision و haloes، والـ isoniazid بيعمل optic neuritis."
+        page: 250
+        quote: "hydroxychloroquine (↓ visual acuity, visual field defects), digoxin (yellow-tinged vision), isoniazid (optic neuritis), ivabradine (luminous phenomena), PDE-5 inhibitors (blue-tinged vision), ethambutol (color vision changes), vigabatrin (tunnel vision)"
+      - kind: check
+        question: "A patient on isoniazid has numb, burning feet. What else is isoniazid known to cause, according to these lists?"
+        options:
+          - "Seizures and hepatitis"
+          - "Gingival hyperplasia"
+          - "Hemorrhagic cystitis"
+          - "Pulmonary fibrosis"
+        answer: 0
+        why:
+          - "صح: الـ isoniazid في قايمة الـ neuropathy والـ seizures والـ hepatitis والـ optic neuritis."
+          - "الـ gingival hyperplasia من cyclosporine و CCBs و phenytoin."
+          - "الـ hemorrhagic cystitis من cyclophosphamide و ifosfamide."
+          - "الـ pulmonary fibrosis من methotrexate و nitrofurantoin و bleomycin و amiodarone وغيرهم."
+        page: 250
+        quote: "Peripheral neuropathy Platinum agents (eg, cisplatin), isoniazid, vincristine, paclitaxel, phenytoin"
+      - kind: explain
+        title: "الكلى والرئة"
+        text: |-
+          - **Fanconi syndrome**: cisplatin و ifosfamide و expired tetracyclines و tenofovir.
+          - **Hemorrhagic cystitis**: cyclophosphamide و ifosfamide، والوقاية ==mesna==.
+          - **Interstitial nephritis**: الـ 5 P's: diuretics (Pee) و NSAIDs (Pain-free) و Penicillins/cephalosporins و PPIs و rifamPin، و sulfa.
+          - **Nephrotoxicity**: cisplatin و aminoglycosides و amphotericin و vancomycin.
+          - **Dry cough**: ACE inhibitors. **Pulmonary fibrosis**: methotrexate و nitrofurantoin و carmustine و ==bleomycin== و busulfan و amiodarone («My nose cannot breathe bad air»).
+        page: 250
+        quote: "Hemorrhagic cystitis Cyclophosphamide, ifosfamide Prevent by coadministering with mesna"
+      - kind: aside
+        tone: tip
+        text: "الـ **disulfiram-like reaction** (flushing وصداع وترجيع مع الكحول): 1st-gen sulfonylureas و procarbazine وبعض الـ cephalosporins و griseofulvin و ==metronidazole== («Sorry pals, can't go mingle»). والـ antimuscarinic effects: atropine و TCAs و H1-blockers و antipsychotics."
+        page: 250
+        quote: "Disulfiram-like reaction 1st-generation sulfonylureas, procarbazine, certain cephalosporins, griseofulvin, metronidazole Sorry pals, can’t go mingle"
+      - kind: check
+        question: "A patient with Hodgkin lymphoma on chemotherapy develops progressive dyspnea and reticular opacities. Which drug is the likely cause?"
+        options:
+          - "Bleomycin"
+          - "Cyclophosphamide"
+          - "Vincristine"
+          - "Cisplatin"
+        answer: 0
+        why:
+          - "صح: الـ bleomycin في قايمة الـ pulmonary fibrosis."
+          - "الـ cyclophosphamide بيعمل hemorrhagic cystitis و SIADH."
+          - "الـ vincristine بيعمل neuropathy وإمساك."
+          - "الـ cisplatin بيعمل nephrotoxicity و neuropathy و Fanconi."
+        page: 250
+        quote: "Pulmonary fibrosis Methotrexate, nitrofurantoin, carmustine, bleomycin, busulfan, amiodarone"
+      - kind: try
+        items: [pharm.L03.035, pharm.L03.041, pharm.L03.042, pharm.L03.044, pharm.L03.049]
+    recap:
+      - "Lupus: hydralazine و procainamide و quinidine. Puffy gums: cyclosporine و CCBs و phenytoin."
+      - "Malignant hyperthermia ← ryanodine ← dantrolene."
+      - "Seizures: INH و bupropion و imipenem و tramadol. Digoxin أصفر، PDE-5 أزرق، ethambutol ألوان، vigabatrin tunnel."
+      - "Mesna للـ cyclophosphamide. 5 P's للـ interstitial nephritis. Bleomycin و amiodarone ← fibrosis. Metronidazole ← disulfiram-like."
+    practice: [pharm.L03.035, pharm.L03.036, pharm.L03.037, pharm.L03.038, pharm.L03.039, pharm.L03.040, pharm.L03.041, pharm.L03.042, pharm.L03.043, pharm.L03.044, pharm.L03.045, pharm.L03.046, pharm.L03.047, pharm.L03.048, pharm.L03.049, pharm.L03.050]
+  - id: pharm.L03.lesson4
+    title: "الحدقة والـ CYP450 والـ sulfa"
+    hook: "الـ rifampin بيبوّظ حبوب منع الحمل، والـ grapefruit juice بيرفع مستوى الأدوية: افهم ليه"
+    minutes: 8
+    pages: [251, 251]
+    topics: [drugs-affecting-pupil-size, cytochrome-p450-interactions, sulfa-drugs]
+    goals:
+      - "تعرف الأدوية اللي بتوسّع والأدوية اللي بتضيّق الحدقة"
+      - "تحفظ الـ inducers والـ substrates والـ inhibitors بالـ mnemonics"
+      - "تعرف الـ sulfa drugs وأعراض الـ sulfa allergy"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "عضلتين في القزحية"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <circle class="fg-box" cx="90" cy="85" r="70"/>
+            <circle class="fg-dot-acc" cx="90" cy="85" r="35"/>
+            <line class="fg-ink" x1="90" y1="15" x2="90" y2="45"/>
+            <line class="fg-ink" x1="20" y1="85" x2="50" y2="85"/>
+            <line class="fg-ink" x1="160" y1="85" x2="130" y2="85"/>
+            <line class="fg-ink" x1="90" y1="155" x2="90" y2="125"/>
+            <text x="180" y="40" class="t-sm t-b">Radial (dilator): α1</text>
+            <text x="180" y="58" class="t-sm">contracts → mydriasis</text>
+            <text x="180" y="100" class="t-sm t-b">Sphincter: M3</text>
+            <text x="180" y="118" class="t-sm">contracts → miosis</text>
+          </svg>
+        caption: "الحدقة بتتوسع لو الـ radial muscle (α1) اتقلصت أو الـ sphincter (M3) اترخت، وبتضيق لو العكس. فالـ anticholinergics والـ sympathomimetics بيوسعوا، والـ parasympathomimetics والـ α2-agonists والـ opioids بيضيّقوا."
+        alt: "Iris with radial dilator muscle (alpha1, contraction causes mydriasis) and circular sphincter muscle (M3, contraction causes miosis)."
+        page: 251
+        quote: "Sphincter muscle contraction (M3 receptor mediated) Radial muscle contraction (α1 receptor mediated)"
+      - kind: sort
+        prompt: "الدوا ده بيوسّع ولا بيضيّق الحدقة؟"
+        bins: ["Mydriasis", "Miosis"]
+        cards:
+          - { text: "Atropine", bin: 0 }
+          - { text: "Cocaine", bin: 0 }
+          - { text: "Meperidine", bin: 0 }
+          - { text: "LSD", bin: 0 }
+          - { text: "Morphine", bin: 1 }
+          - { text: "Pilocarpine", bin: 1 }
+          - { text: "Organophosphates", bin: 1 }
+          - { text: "Clonidine (α2-agonist)", bin: 1 }
+        why: "الـ opioids بتضيّق، ما عدا الـ meperidine. الـ cocaine والـ LSD والـ amphetamines indirect sympathomimetics فبيوسعوا."
+        page: 251
+        quote: "Indirect sympathomimetics (eg, amphetamines, cocaine, LSD), meperidine Direct sympathomimetics Sympatholytics (eg, α2 -agonists) Opioids (except meperidine)"
+      - kind: explain
+        title: "الـ CYP450: inducers و inhibitors"
+        text: |-
+          الـ **inducer** بيزوّد الإنزيم ← الـ substrate يتكسر أسرع ← ==مستواه يقل== (الدوا ما يشتغلش).
+          الـ **inhibitor** بيقفل الإنزيم ← الـ substrate يتراكم ← ==مستواه يعلى== (toxicity).
+
+          والـ **substrates** اللي الكتاب بيختارها: theophylline و OCPs و anti-epileptics و warfarin («The OCPs are anti-war»).
+        page: 251
+        quote: "Theophylline OCPs Anti-epileptics Warfarin"
+      - kind: mnemonic
+        word: "SICKFACES"
+        parts:
+          - { key: "S", text: "Sodium valproate" }
+          - { key: "I", text: "Isoniazid" }
+          - { key: "C", text: "Cimetidine" }
+          - { key: "K", text: "Ketoconazole" }
+          - { key: "F", text: "Fluconazole" }
+          - { key: "A", text: "Acute alcohol overuse" }
+          - { key: "C", text: "Chloramphenicol" }
+          - { key: "E", text: "Erythromycin/clarithromycin" }
+          - { key: "S", text: "Sulfonamides" }
+        hook: "الـ inhibitors: SICK FACES come when I am really drinking grapefruit juice (Ciprofloxacin و Omeprazole و Amiodarone و Ritonavir و grapefruit juice)"
+        page: 251
+        quote: "SICK FACES come when I am really drinking grapefruit juice"
+      - kind: aside
+        tone: analogy
+        text: "الـ **inducers** زي ما تجيب عمال زيادة في المصنع: الشغل (الدوا) يخلص بسرعة. والكتاب بيحفظهم كده: «St. John's funny funny (phen-phen) mom never refuses greasy carbs and chronic alcohol» = St. John's wort و Phenytoin و Phenobarbital و Modafinil و Nevirapine و Rifampin و Griseofulvin و Carbamazepine و chronic alcohol."
+        page: 251
+        quote: "St. John’s funny funny (phen- phen) mom never refuses greasy carbs and chronic alcohol"
+      - kind: check
+        question: "A patient stable on warfarin starts fluconazole for candidiasis. What happens to his INR?"
+        options:
+          - "It rises, because fluconazole inhibits warfarin's metabolism"
+          - "It falls, because fluconazole induces warfarin's metabolism"
+          - "No change: fluconazole doesn't affect CYP450"
+          - "It falls, because fluconazole binds vitamin K"
+        answer: 0
+        why:
+          - "صح: الـ fluconazole inhibitor (SICK FACES)، والـ warfarin substrate ← مستواه يعلى ← INR يعلى ونزيف."
+          - "الـ fluconazole مش inducer."
+          - "هو من أشهر الـ inhibitors."
+          - "ده مش الـ mechanism."
+        page: 251
+        quote: "Inducers (+) Substrates Inhibitors (–)"
+      - kind: explain
+        title: "الـ sulfa drugs"
+        text: |-
+          «==Scary Sulfa Pharm FACTS==»: Sulfonamide antibiotics و Sulfasalazine و Probenecid و Furosemide و Acetazolamide و Celecoxib و Thiazides و Sulfonylureas.
+
+          اللي عنده sulfa allergy ممكن يجيله: fever و UTI و **SJS** و hemolytic anemia و thrombocytopenia و agranulocytosis و acute interstitial nephritis و urticaria و photosensitivity.
+        page: 251
+        quote: "Sulfa drugs Sulfonamide antibiotics, Sulfasalazine, Probenecid, Furosemide, Acetazolamide, Celecoxib, Thiazides, Sulfonylureas."
+      - kind: check
+        question: "Which diuretic is NOT on the book's sulfa list, making it an option for a patient with a severe sulfa reaction?"
+        options:
+          - "Spironolactone"
+          - "Furosemide"
+          - "Hydrochlorothiazide"
+          - "Acetazolamide"
+        answer: 0
+        why:
+          - "صح: الـ spironolactone مش في قايمة الـ sulfa بتاعة الكتاب."
+          - "الـ furosemide: الـ F في FACTS."
+          - "الـ thiazides: الـ T في FACTS."
+          - "الـ acetazolamide: الـ A في FACTS."
+        page: 251
+        quote: "Probenecid, Furosemide, Acetazolamide, Celecoxib, Thiazides, Sulfonylureas."
+      - kind: try
+        items: [pharm.L03.051, pharm.L03.053, pharm.L03.054, pharm.L03.055, pharm.L03.057]
+    recap:
+      - "Mydriasis: anticholinergics و sympathomimetics و meperidine. Miosis: opioids و pilocarpine و organophosphates و α2-agonists."
+      - "Inducer ← مستوى الـ substrate يقل. Inhibitor ← يعلى. Substrates: theophylline و OCPs و anti-epileptics و warfarin."
+      - "Inducers: St. John's funny funny mom... Inhibitors: SICK FACES + grapefruit."
+      - "Sulfa: Scary Sulfa Pharm FACTS."
+    practice: [pharm.L03.051, pharm.L03.052, pharm.L03.053, pharm.L03.054, pharm.L03.055, pharm.L03.056, pharm.L03.057, pharm.L03.058, pharm.L03.059]

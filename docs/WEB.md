@@ -11,7 +11,9 @@ its Dioxus screens (HTML/CSS, right-to-left) instead of their egui toolkit
 
 | Piece | Where | What it does |
 |---|---|---|
-| The app | `crates/app` with `--no-default-features --features web` | Every screen, the content pack and the fonts, built in |
+| The app | `crates/app` with `--no-default-features --features web` | Every screen and the fonts, built in |
+| Content pack | `content.pack`, next to the wasm | The same pack the Mac and Android build in, fetched alongside the wasm (see Opening fast) |
+| Service worker | `web/sw.js` | Keeps the newest build on the device (see Opening fast) |
 | Browser stand-ins | `crates/app/src/platform/web.rs`, `platform/time.rs` | Storage, downloads, prefs, timers |
 | Web shell | `web/index.html`, `web/manifest.webmanifest`, `web/_headers` | Loads `steps.js`, installable as an app |
 | Build | `scripts/web/build.sh` (`just web`, `just web-release`) | cargo → wasm-bindgen → `target/web/steps` |
@@ -28,12 +30,29 @@ its Dioxus screens (HTML/CSS, right-to-left) instead of their egui toolkit
 | Exports (backup, checks, Anki) | A file in Downloads / Save to | A browser download |
 | Restore | File picker / found files | File picker or paste |
 | Read aloud | System voice | The browser's voice (Web Speech) |
-| Updates | Over the air | Each deploy is the newest build; reload to get it |
+| Updates | Over the air | Each deploy downloads in the background and is used from the next open |
 | Sync (Steps Cloud) | Live, WebSocket with a Bearer header | Live, the browser's `fetch` and `WebSocket`; see Sync below |
 | Sign-in | Google, desktop client (code + PKCE) | Google by redirect, Web client (ID token); session in `localStorage` |
 | Reminders | System notifications | Not on the web; the phone or Mac rings |
 
 Nothing is dropped: everything else on the Mac and Android also runs in the browser.
+
+## Opening fast
+
+The first version shipped one 17 MB wasm with the content pack inside, and
+most merges change the content, so a phone re-downloaded all of it after
+nearly every merge and took 9–19 s to open (simulated phone, 2026-11-04).
+Now:
+
+| What | How |
+|---|---|
+| Smaller code | `[profile.web-release]`: `opt-level = "z"`, fat LTO, then `wasm-opt -Oz` (19 → 8.5 MB before wasm-opt) |
+| Content apart from code | On wasm32, `build.rs` doesn't embed the pack; `scripts/web/build.sh` copies it from steps-app's `OUT_DIR` (named in cargo's JSON messages) to `content.pack`. `index.html` starts fetching it alongside the wasm and `platform::web::boot` waits for it, so a content merge doesn't re-send the code |
+| Opens from the device | `web/sw.js`, filled in by `build.sh` with the build id (a hash of every file) and the file list. It keeps one build per cache (`steps-<id>`), so `steps.js` and its wasm always match; answers this origin's GETs from it (every navigation is `./`); a new deploy installs in the background and the old cache goes once it activates. Steps Cloud never goes through it |
+
+Simulated phone (4× slower CPU): the first visit downloads everything
+(~8 s on 30 Mbps); every open after that takes ~3.5 s, whatever the network.
+A new deploy shows on the open after the one that fetched it.
 
 ## Sync
 
