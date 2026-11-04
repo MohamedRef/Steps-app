@@ -24,6 +24,10 @@ pub fn export_dir() -> Result<PathBuf, String> {
     }
     #[cfg(not(target_os = "android"))]
     {
+        // Unit tests export into their own scratch folder.
+        if cfg!(test) {
+            return data_dir();
+        }
         match directories::UserDirs::new() {
             Some(u) => Ok(u.download_dir().map_or_else(|| u.home_dir().to_path_buf(), PathBuf::from)),
             None => data_dir(),
@@ -31,6 +35,7 @@ pub fn export_dir() -> Result<PathBuf, String> {
     }
 }
 
+#[cfg_attr(test, allow(dead_code))]
 /// Android only: a file in the app's `no_backup` folder, which Auto Backup
 /// and device-to-device transfers never copy (`store::install`).
 pub fn install_marker() -> Option<PathBuf> {

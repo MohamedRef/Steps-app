@@ -167,6 +167,16 @@ mod tests {
     }
 
     #[test]
+    fn js_strings_escape_returns_separators_and_control_characters() {
+        assert_eq!(js_string("a\rb"), r#""a\rb""#);
+        // U+2028 and U+2029 end a line inside a JavaScript string literal.
+        assert_eq!(js_string("x\u{2028}y\u{2029}z"), r#""x\u2028y\u2029z""#);
+        assert_eq!(js_string("\u{1}\t"), r#""\u0001\u0009""#);
+        // Medical text in English and Arabic UI words pass through as is.
+        assert_eq!(js_string("β-blocker · قلب"), "\"β-blocker · قلب\"");
+    }
+
+    #[test]
     fn long_text_gets_more_time() {
         assert!(longest("one two three") < longest(&"word ".repeat(100)));
     }

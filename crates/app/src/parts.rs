@@ -298,6 +298,22 @@ mod view_tests {
     }
 
     #[test]
+    fn a_count_reads_left_to_right_inside_arabic() {
+        let html = dioxus::ssr::render_element(rsx! { Count { done: 3, total: 12 } });
+        assert_eq!(html, r#"<span class="num-ltr">3 / 12</span>"#);
+    }
+
+    #[test]
+    fn every_order_and_layout_has_its_own_name() {
+        let sorts: std::collections::BTreeSet<_> =
+            [Sort::Book, Sort::Left, Sort::Name, Sort::Due].into_iter().map(Sort::label).collect();
+        assert_eq!(sorts.len(), 4);
+        let layouts: std::collections::BTreeSet<_> = Layout::ALL.into_iter().map(Layout::label).collect();
+        assert_eq!(layouts.len(), Layout::ALL.len());
+        assert_eq!(Sort::Name.label(), tx::SORT_NAME);
+    }
+
+    #[test]
     fn sorting_keeps_book_order_inside_each_part() {
         let mut v = vec![("b", true, false), ("a", false, true), ("c", true, true), ("d", false, false)];
         sort_by(&mut v, Sort::Left, |i| i.1, |i| i.2, |i| i.0.to_string());

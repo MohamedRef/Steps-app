@@ -50,5 +50,38 @@ pub fn events(lectures: &[Lecture], now_ms: i64) -> Vec<ReviewEvent> {
 }
 
 pub fn marks() -> BTreeMap<String, Status> {
-    (1..=30).map(|n| (format!("hb.L01.{n:03}"), Status::Approved)).collect()
+    (1..=30).map(|n| (format!("cvs.L04.{n:03}"), Status::Approved)).collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn the_demo_is_the_same_every_run_and_only_in_the_past() {
+        let lib = crate::content::Library::get();
+        let lectures: Vec<Lecture> =
+            lib.index.lectures.iter().filter_map(|e| lib.lectures.get(&e.id).cloned()).collect();
+        let now = 20_400 * DAY_MS;
+        let a = events(&lectures, now);
+        assert_eq!(a, events(&lectures, now), "deterministic");
+        assert!(!a.is_empty(), "the first lecture gets answers");
+        assert!(a.iter().all(|e| e.at_ms < now && e.at_ms > now - 21 * DAY_MS));
+        // Only the first three lectures, and only their own items.
+        let first: Vec<&str> = lectures.iter().take(3).map(|l| l.lecture.as_str()).collect();
+        assert!(a.iter().all(|e| first.iter().any(|l| e.item_id.starts_with(&format!("{l}.")))));
+        // Mostly remembered, some missed.
+        let again = a.iter().filter(|e| e.grade == Grade::Again).count();
+        assert!(again < a.len() / 2, "{again} of {}", a.len());
+        assert!(events(&[], now).is_empty());
+    }
+
+    #[test]
+    fn demo_marks_approve_thirty_cardiovascular_items() {
+        let m = marks();
+        assert_eq!(m.len(), 30);
+        assert_eq!(m.get("cvs.L04.001"), Some(&Status::Approved));
+        assert_eq!(m.keys().last().map(String::as_str), Some("cvs.L04.030"));
+        assert_ne!(mix(1, 2), mix(2, 1));
+    }
 }

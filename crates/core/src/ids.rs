@@ -2,7 +2,7 @@
 //! between two versions of the content (`docs/CONTENT-IDS.md`).
 //!
 //! Review events, item states and the planner are stored against item ids
-//! (`hb.L01.001`); lesson progress against lesson ids (`hb.L01.lesson1`);
+//! (`cvs.L04.001`); lesson progress against lesson ids (`cvs.L04.lesson1`);
 //! the planner and the course switcher against lecture, topic and course
 //! ids. An id that disappears, or an item id that starts naming a
 //! different kind of question, silently cuts his history loose. So every
@@ -23,7 +23,7 @@ use std::collections::{BTreeMap, BTreeSet};
 use crate::pack::Pack;
 
 /// Every persistent id → what it is attached to (its parent, or for an
-/// item its kind). Keys read like `item hb.L01.001`.
+/// item its kind). Keys read like `item cvs.L04.001`.
 pub type Registry = BTreeMap<String, String>;
 
 pub fn registry(pack: &Pack) -> Registry {
@@ -141,7 +141,7 @@ mod tests {
 
     fn index() -> Index {
         serde_yaml_ng::from_str(
-            "schema: steps.content/v1\nlectures:\n  - { id: hb.L01, title: Liver Cirrhosis, pages: [1, 22], chunk: 10 }\n",
+            "schema: steps.content/v1\nlectures:\n  - { id: cvs.L04, title: Pathology, pages: [300, 320], chunk: 6 }\n",
         )
         .unwrap()
     }
@@ -151,7 +151,7 @@ mod tests {
         let none = BTreeSet::new();
         let base_lec = lecture();
         let base = registry(&Pack::new(index(), vec![base_lec.clone()]));
-        assert!(base.contains_key("lecture hb.L01") && base.contains_key("course hb"));
+        assert!(base.contains_key("lecture cvs.L04") && base.contains_key("course cvs"));
         let first = base_lec.items[0].id.clone();
         assert!(base.contains_key(&format!("item {first}")));
 
@@ -163,19 +163,19 @@ mod tests {
         // A new item is an addition.
         let mut more = base_lec.clone();
         let mut extra = more.items[0].clone();
-        extra.id = "hb.L01.900".into();
+        extra.id = "cvs.L04.900".into();
         more.items.push(extra);
         let r = compare(&base, &registry(&Pack::new(index(), vec![more])), &none);
-        assert!(!r.breaking() && r.added == ["item hb.L01.900"]);
+        assert!(!r.breaking() && r.added == ["item cvs.L04.900"]);
 
         // Renumbering an item removes the old id...
         let mut renumbered = base_lec.clone();
-        renumbered.items[0].id = "hb.L01.901".into();
+        renumbered.items[0].id = "cvs.L04.901".into();
         let head = registry(&Pack::new(index(), vec![renumbered]));
         let r = compare(&base, &head, &none);
         assert!(r.breaking() && r.removed[0].0 == format!("item {first}"), "{r:?}");
         // ...unless it was retired on purpose.
-        let retired = parse_retired(&format!("# merged\nitem {first}  # into hb.L01.901\n"));
+        let retired = parse_retired(&format!("# merged\nitem {first}  # into cvs.L04.901\n"));
         assert!(!compare(&base, &head, &retired).breaking());
 
         // The same id for another kind of question.
@@ -186,7 +186,7 @@ mod tests {
 
         // A lecture under another course: reported, allowed.
         let mut head = base.clone();
-        head.insert("lecture hb.L01".into(), "course xx".into());
+        head.insert("lecture cvs.L04".into(), "course xx".into());
         let r = compare(&base, &head, &none);
         assert!(!r.breaking() && r.moved.len() == 1);
     }

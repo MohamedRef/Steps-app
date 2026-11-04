@@ -43,7 +43,8 @@ pub fn Chrome() -> Element {
     let _ = crate::content::REV.read();
     crate::hover::use_hover();
     crate::shortcuts::use_shortcuts();
-    #[cfg(all(feature = "desktop", not(target_os = "android")))]
+    // Not under unit tests: the menu needs a real desktop window.
+    #[cfg(all(feature = "desktop", not(target_os = "android"), not(test)))]
     crate::settings::menu::use_menu_events();
     rsx! {
         style { {NAV_CSS.text()} }
