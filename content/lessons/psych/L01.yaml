@@ -1,0 +1,288 @@
+schema: steps.lesson/v1
+lecture: psych.L01
+lessons:
+  - id: psych.L01.lesson1
+    title: "التعلّم والـ transference والـ ego defenses"
+    hook: "Negative reinforcement مش عقاب: هو إنك تشيل حاجة وحشة عشان السلوك يزيد"
+    minutes: 10
+    pages: [570, 571]
+    topics: [classical-conditioning, operant-conditioning, transference-countertransference, ego-defenses]
+    goals:
+      - "تفرّق بين classical و operant conditioning، وتحط أي مثال في مربع Skinner الصح"
+      - "تفرّق بين transference و countertransference"
+      - "تعرف الـ ego defense من المثال، وتفرّق بين الأزواج اللي بتتلخبط"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Classical ولا operant؟"
+        text: |-
+          - **Classical conditioning**: رد فعل طبيعي ==involuntary== (اللعاب) بيطلع من stimulus متعلّم (الجرس) اتقدّم قبل كده مع stimulus طبيعي (الأكل). ده Pavlov والكلاب.
+          - **Operant conditioning**: سلوك ==voluntary== بيزيد أو يقل عشان بيجيب reward أو punishment. ده Skinner.
+          - **Extinction**: لو وقّفنا الـ reinforcement، السلوك بيختفي مع الوقت، وده بيحصل في النوعين.
+        page: 570
+        quote: "Operant conditioning Learning in which a particular action is elicited because it produces a punishment or reward. Usually elicits voluntary responses."
+      - kind: figure
+        title: "مربعات Skinner"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <text x="135" y="20" class="t-sm t-b">Increase behavior</text>
+            <text x="244" y="20" class="t-sm t-b">Decrease behavior</text>
+            <text x="10" y="75" class="t-sm t-b">Add a</text>
+            <text x="10" y="91" class="t-sm t-b">stimulus</text>
+            <text x="10" y="150" class="t-sm t-b">Remove a</text>
+            <text x="10" y="166" class="t-sm t-b">stimulus</text>
+            <rect class="fg-acc" x="115" y="35" width="115" height="75" rx="8"/>
+            <text x="125" y="68" class="t-sm t-b">Positive</text>
+            <text x="125" y="85" class="t-sm">reinforcement</text>
+            <rect class="fg-box" x="238" y="35" width="115" height="75" rx="8"/>
+            <text x="248" y="68" class="t-sm t-b">Positive</text>
+            <text x="248" y="85" class="t-sm">punishment</text>
+            <rect class="fg-acc" x="115" y="118" width="115" height="75" rx="8"/>
+            <text x="125" y="151" class="t-sm t-b">Negative</text>
+            <text x="125" y="168" class="t-sm">reinforcement</text>
+            <rect class="fg-box" x="238" y="118" width="115" height="75" rx="8"/>
+            <text x="248" y="151" class="t-sm t-b">Negative</text>
+            <text x="248" y="168" class="t-sm">punishment</text>
+          </svg>
+        caption: "Positive = بنضيف حاجة، و Negative = بنشيل حاجة. و Reinforcement = السلوك يزيد، و Punishment = السلوك يقل. فالـ negative reinforcement بيشيل حاجة وحشة عشان السلوك يزيد."
+        alt: "Two by two grid. Columns: increase behavior, decrease behavior. Rows: add a stimulus, remove a stimulus. Cells: positive reinforcement, positive punishment, negative reinforcement, negative punishment. The two reinforcement cells are highlighted."
+        page: 570
+        quote: "Skinner operant conditioning quadrants: Increase behavior Decrease behavior Add a stimulus Positive reinforcement Positive punishment Remove a stimulus Negative reinforcement Negative punishment"
+      - kind: sort
+        prompt: "المثال ده أنهي مربع؟"
+        bins: ["Positive reinforcement", "Negative reinforcement", "Positive punishment", "Negative punishment"]
+        cards:
+          - { text: "A sticker for every night without bedwetting", bin: 0 }
+          - { text: "The seatbelt alarm stops once you buckle up", bin: 1 }
+          - { text: "A scolding every time a child hits", bin: 2 }
+          - { text: "No phone tonight after lying", bin: 3 }
+        why: "اسأل سؤالين: بنضيف ولا بنشيل؟ والسلوك عايزينه يزيد ولا يقل؟ صوت الحزام الوحش بيتشال عشان تلبسه أكتر، ده negative reinforcement."
+        page: 570
+        quote: "Target behavior (response) is followed by desired reward (positive reinforcement) or removal of aversive stimulus (negative reinforcement)."
+      - kind: aside
+        tone: tip
+        text: "**Transference**: المريض بيسقط مشاعره عن حد مهم في حياته على الدكتور (يشوف الـ psychiatrist كأنه أبوه). **Countertransference**: ==الدكتور== هو اللي بيسقط مشاعره على المريض (المريض فكّره بأخوه الصغير)."
+        page: 570
+        quote: "Transference Patient projects feelings about formative or other important persons onto physician (eg, psychiatrist is seen as parent)."
+      - kind: explain
+        title: "الـ immature defenses (1)"
+        text: |-
+          الـ ego defenses أفكار وسلوكيات بنستخدمها عشان نحل الصراع ونتجنب القلق أو الاكتئاب.
+          - **Acting out**: يتصرف بدل ما يحس أو يفكر (يزوّغ من الـ therapy).
+          - **Denial**: ما يعترفش بالحقيقة المؤلمة.
+          - **Displacement**: يطلّع المشاعر في حد أو حاجة ==neutral== (المدرّسة اتزعقلها، فرجعت تنتقد أكل مراتها).
+          - **Dissociation**: تغيّر مؤقت وشديد في الشخصية أو الذاكرة أو الوعي، وذاكرة ناقصة للـ trauma.
+          - **Fixation** (فاضل جزئياً في مرحلة طفولية) و **Idealization** و **Identification** (ياخد صفات حد تاني) و **Intellectualization** (يهرب بالحقائق والمنطق).
+        page: 570
+        quote: "Dissociation Temporary, drastic change in personality, memory, consciousness, or motor behavior to avoid emotional stress."
+      - kind: explain
+        title: "الـ immature defenses (2)"
+        text: |-
+          - **Isolation of affect**: يفصل المشاعر عن الأحداث (يحكي جريمة من غير أي إحساس).
+          - **Passive aggression**: عدوان غير مباشر (يتأخر عشان يغيظ المدير).
+          - **Projection**: ==ينسب== رغبته المرفوضة لحد تاني (عايز يخون، فيتهم مراته).
+          - **Rationalization**: تبرير مقنع عشان ما يلومش نفسه.
+          - **Reaction formation**: يبالغ في ==عكس== الإحساس الحقيقي.
+          - **Regression**: يرجع لسلوك أصغر تحت الضغط (يرجع يبلّل السرير بعد أخ جديد).
+          - **Repression**: يخبّي الفكرة من وعيه ==من غير ما يقصد==.
+          - **Splitting**: الناس كلهم حلوين أو كلهم وحشين، وده شائع في الـ borderline ("Borders split countries").
+        page: 571
+        quote: "Repression Involuntarily withholding an idea or feeling from conscious awareness (vs suppression)."
+      - kind: check
+        question: "After a fight with his boss, a man comes home and kicks the dog. Which defense?"
+        options:
+          - "Displacement"
+          - "Projection"
+          - "Acting out"
+          - "Passive aggression"
+        answer: 0
+        why:
+          - "صح: طلّع غضبه في target محايد (الكلب) بدل مديره."
+          - "الـ projection إنه ينسب مشاعره هو لحد تاني."
+          - "الـ acting out تصرف بدل التفكير، بس هنا النقطة إن المشاعر راحت لهدف تاني."
+          - "الـ passive aggression عدوان غير مباشر للشخص نفسه."
+        page: 570
+        quote: "Displacement Redirection of emotions or impulses to a neutral person or object (vs projection)."
+      - kind: mnemonic
+        word: "SASH"
+        parts:
+          - { key: "S", text: "Sublimation: unacceptable wish → similar, socially acceptable action (aggression → sports)" }
+          - { key: "A", text: "Altruism: unsolicited generosity relieves negative feelings (a mafia boss donates to charity)" }
+          - { key: "S", text: "Suppression: intentional, temporary withholding from awareness (an athlete focuses on other tasks)" }
+          - { key: "H", text: "Humor: lighthearted expression of discomfort (a student jokes about the boards)" }
+        hook: "من الكتاب: Mature adults wear a SASH."
+        page: 571
+        quote: "Mature adults wear a SASH."
+      - kind: match
+        prompt: "وصّل كل defense بالفرق اللي بيميزه عن شبيهه"
+        pairs:
+          - ["Repression", "Involuntary; immature"]
+          - ["Suppression", "Intentional and temporary; mature"]
+          - ["Fixation", "Partially stuck at a childish level"]
+          - ["Regression", "Turns back to earlier behavior under stress"]
+          - ["Reaction formation", "Emphasizes the opposite feeling"]
+          - ["Sublimation", "Channels the wish into a similar, acceptable action"]
+        why: "الكتاب نفسه بيحط (vs ...) جنب كل واحد من دول، يعني الامتحان بيحب يحطهم مع بعض في الاختيارات."
+        page: 571
+        quote: "Sublimation Replacing an unacceptable wish with a course of action that is similar to the wish but socially acceptable (vs reaction formation)."
+      - kind: check
+        question: "A woman who is furious at her sister throws her sister an elaborate, loving birthday party. Which defense?"
+        options:
+          - "Reaction formation"
+          - "Sublimation"
+          - "Altruism"
+          - "Suppression"
+        answer: 0
+        why:
+          - "صح: بدّلت الغضب المرفوض بعكسه وبالغت فيه."
+          - "الـ sublimation بتحوّل الرغبة لحاجة شبهها مقبولة، مش لعكسها."
+          - "الـ altruism كرم بيخفف المشاعر الوحشة، من غير ما يبقى عكس إحساس مكبوت."
+          - "الـ suppression إنها تأجل التفكير في الحاجة بوعي."
+        page: 571
+        quote: "Replacing a warded-off idea or feeling with an emphasis on its opposite (vs sublimation)."
+      - kind: try
+        items: [psych.L01.002, psych.L01.008, psych.L01.011, psych.L01.023, psych.L01.024]
+    recap:
+      - "Classical: involuntary (Pavlov). Operant: voluntary (Skinner)."
+      - "Positive = نضيف، Negative = نشيل؛ reinforcement يزوّد، punishment يقلّل."
+      - "Transference: المريض ← الدكتور. Countertransference: الدكتور ← المريض."
+      - "Displacement لهدف محايد؛ projection ينسب للتاني. Repression لا إرادي؛ suppression إرادي."
+      - "Mature = SASH: Sublimation و Altruism و Suppression و Humor."
+    practice: [psych.L01.001, psych.L01.002, psych.L01.003, psych.L01.004, psych.L01.005, psych.L01.006, psych.L01.007, psych.L01.008, psych.L01.009, psych.L01.010, psych.L01.011, psych.L01.012, psych.L01.013, psych.L01.014, psych.L01.015, psych.L01.016, psych.L01.017, psych.L01.018, psych.L01.019, psych.L01.020, psych.L01.021, psych.L01.022, psych.L01.023, psych.L01.024, psych.L01.025, psych.L01.026, psych.L01.027]
+  - id: psych.L01.lesson2
+    title: "الحزن الطبيعي ومراحل نمو الطفل"
+    hook: "إنها تسمع صوت جوزها بعد ما مات ممكن يبقى حزن طبيعي، مش psychosis"
+    minutes: 8
+    pages: [572, 572]
+    topics: [grief, normal-development]
+    goals:
+      - "تفرّق بين الحزن الطبيعي والـ prolonged grief disorder"
+      - "تعرف عمر الطفل من الـ milestones بتاعته"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الحزن الطبيعي"
+        text: |-
+          الـ grief إحساس طبيعي بعد موت حد بنحبه. ==مالوش مراحل ثابتة==، وبيختلف من شخص لشخص ومن فقد لفقد.
+
+          ممكن يبقى فيه، غير الذنب والحزن والاشتياق: أعراض جسدية، و ==hallucinations للمتوفى==، ولحظات عابرة يتمنى فيها لو كان مات معاه أو بداله.
+
+          والحزن الحاد ==time limited==، والتأقلم بيحصل في خلال 6 شهور، وده مش مرض.
+        page: 572
+        quote: "Typical acute grief is time limited (adaptations within 6 months) and is not a disorder."
+      - kind: explain
+        title: "الـ prolonged grief disorder"
+        text: |-
+          بنشخّصه لو:
+          - الحزن شديد ومستمر وطويل (==6-12 شهر على الأقل==)
+          - بيعطّل حياته بشكل واضح
+          - مش متماشي مع ثقافته أو دينه
+          - ومش بيحقق criteria لمرض تاني (زي الـ MDD)
+        page: 572
+        quote: "Prolonged grief disorder—diagnosed if grief remains intense, persistent, and prolonged (at least 6-12 months), significantly impair functioning"
+      - kind: check
+        question: "Three weeks after her son's death, a mother sometimes sees him sitting at the dinner table. She functions at work. What is this?"
+        options:
+          - "Normal grief"
+          - "Prolonged grief disorder"
+          - "A psychotic disorder"
+          - "Major depressive disorder"
+        answer: 0
+        why:
+          - "صح: الـ hallucinations للمتوفى جزء من الحزن الطبيعي، وهي لسه في الأسابيع الأولى وشغالة."
+          - "الـ prolonged محتاج 6-12 شهر على الأقل وتعطيل للحياة."
+          - "رؤية المتوفى في الحزن مش psychosis."
+          - "مفيش criteria لاكتئاب، وهي بتشتغل كويس."
+        page: 572
+        quote: "patients may experience somatic symptoms, hallucinations of the deceased, and/or transient episodes of wishing they had died with or instead of their loved one."
+      - kind: explain
+        title: "الـ infant: Parents Start Observing"
+        text: |-
+          **Motor (Primitive reflexes و Posture و Picks)**: الـ ==Moro و rooting و palmar و Babinski== بيختفوا (Mr. Peanut Butter). يرفع راسه وهو على بطنه (1 شهر)، يتقلب ويقعد (6)، يحبي (8)، يقف (10)، يمشي (12-18). ينقل اللعبة من إيد لإيد (6-9)، والـ pincer grasp (10)، ويشاور (12).
+
+          **Social**: social smile (==2 شهر==)، stranger anxiety (6)، separation anxiety (9).
+
+          **Verbal/cognitive (Orients و Oratory)**: يلتفت للصوت (4)، وللاسم والإشارات (9)، والـ object permanence (9)، ويقول ماما وبابا (10).
+        page: 572
+        quote: "Primitive reflexes disappear— Moro, rooting, palmar, Babinski (Mr. Peanut Butter)"
+      - kind: figure
+        title: "خط زمن السنة الأولى"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="20" y1="85" x2="345" y2="85"/>
+            <circle class="fg-dot-acc" cx="47" cy="85" r="5"/>
+            <circle class="fg-dot-acc" cx="74" cy="85" r="5"/>
+            <circle class="fg-dot-acc" cx="128" cy="85" r="5"/>
+            <circle class="fg-dot-acc" cx="182" cy="85" r="5"/>
+            <circle class="fg-dot-acc" cx="236" cy="85" r="5"/>
+            <circle class="fg-dot-acc" cx="290" cy="85" r="5"/>
+            <circle class="fg-dot-acc" cx="345" cy="85" r="5"/>
+            <text x="40" y="108" class="t-sm t-b">1</text>
+            <text x="67" y="108" class="t-sm t-b">2</text>
+            <text x="121" y="108" class="t-sm t-b">4</text>
+            <text x="175" y="108" class="t-sm t-b">6</text>
+            <text x="229" y="108" class="t-sm t-b">8</text>
+            <text x="283" y="108" class="t-sm t-b">10</text>
+            <text x="335" y="108" class="t-sm t-b">12</text>
+            <text x="20" y="40" class="t-sm">Head up</text>
+            <text x="62" y="60" class="t-sm">Social smile</text>
+            <text x="110" y="130" class="t-sm">To voice</text>
+            <text x="150" y="40" class="t-sm">Sits, stranger anxiety</text>
+            <text x="215" y="130" class="t-sm">Crawls</text>
+            <text x="236" y="60" class="t-sm">Stands, pincer, mama</text>
+            <text x="275" y="150" class="t-sm">Walks, points</text>
+            <text x="20" y="160" class="t-sm t-mut">9 mo: separation anxiety, object permanence</text>
+          </svg>
+        caption: "الأرقام بالشهور. 2 شهر social smile، 6 شهور يقعد و stranger anxiety، 9 شهور separation anxiety و object permanence، 10 شهور يقف و pincer grasp ويقول ماما، و12 شهر يشاور ويبتدي يمشي (12-18)."
+        alt: "A timeline of months 1 to 12. Month 1 head up prone; 2 social smile; 4 orients to voice; 6 sits and stranger anxiety; 8 crawls; 10 stands, pincer grasp, says mama; 12 walks and points. Footnote: 9 months separation anxiety and object permanence."
+        page: 572
+        quote: "Posture—lifts head up prone (by 1 mo), rolls and sits (by 6 mo), crawls (by 8 mo), stands (by 10 mo), walks (by 12-18 mo)"
+      - kind: check
+        question: "An infant sits without support, shows stranger anxiety, but has no pincer grasp and doesn't crawl. Most likely age?"
+        options:
+          - "6 months"
+          - "2 months"
+          - "10 months"
+          - "12 months"
+        answer: 0
+        why:
+          - "صح: القعدة والـ stranger anxiety بحلول 6 شهور، والحبو (8) والـ pincer (10) لسه."
+          - "في الشهرين بيبتسم بس، ولسه ما بيقعدش."
+          - "في الـ 10 شهور المفروض عنده pincer grasp وبيحبي."
+          - "في السنة بيشاور وبيبتدي يمشي."
+        page: 572
+        quote: "rolls and sits (by 6 mo)"
+      - kind: explain
+        title: "الـ toddler: Child Rearing Working"
+        text: |-
+          - **Motor**: يمشي ماسك في الحاجات وأول خطوات (12 شهر)، يطلع السلم (18)، و ==عدد المكعبات = العمر بالسنين × 3==، ياكل بالشوكة والمعلقة (20)، ويشوط الكورة (24).
+          - **Social**: الـ ==parallel play== (24-36)، والـ rapprochement: يبعد عن أمه ويرجعلها (24)، والـ core gender identity (36).
+          - **Verbal**: 50-200 كلمة (سنتين)، و300+ كلمة (3 سنين).
+        page: 572
+        quote: "Recreation—parallel play (by 24-36 mo) Rapprochement—moves away from and returns to parent (by 24 mo)"
+      - kind: explain
+        title: "الـ preschool: Don't Forget, they're still Learning!"
+        text: |-
+          - **Drive و Drawings و Dexterity**: tricycle بـ 3 عجلات في 3 سنين، يرسم خط أو دايرة و stick figure (4)، ==يقف على رجل واحدة في 4 سنين== ("4 on one foot")، والزراير والسوست ويهتم بنفسه (5).
+          - **Freedom و Friends**: يقضي جزء من اليوم بعيد عن أهله براحته (3)، و ==cooperative play== وأصحاب خياليين (4).
+          - **Language و Legends**: بيفهم 1000 كلمة (3 أصفار في 3 سنين)، وجمل كاملة و prepositions (4)، ويحكي قصص بالتفصيل (4).
+        page: 572
+        quote: "Friends—cooperative play, has imaginary friends (by 4 yr)"
+      - kind: table
+        title: "اللعب مع الأطفال التانيين"
+        columns: ["", "Age", "Type of play"]
+        rows:
+          - ["Toddler", "24-36 mo", "Parallel play (next to, not with)"]
+          - ["Preschool", "4 yr", "Cooperative play; imaginary friends"]
+        hide: [[0, 2], [1, 2]]
+        page: 572
+        quote: "Recreation—parallel play (by 24-36 mo)"
+      - kind: try
+        items: [psych.L01.032, psych.L01.040, psych.L01.041]
+    recap:
+      - "الحزن الطبيعي: مالوش مراحل ثابتة، وممكن يبقى فيه hallucinations للمتوفى، والتأقلم في 6 شهور."
+      - "Prolonged grief: 6-12 شهر على الأقل، بيعطّل، ومش متماشي مع الثقافة."
+      - "Social smile 2، stranger 6، separation 9 شهور."
+      - "المكعبات = العمر × 3. Parallel play 24-36 شهر؛ cooperative play 4 سنين."
+      - "4 on one foot؛ 1000 كلمة في 3 سنين."
+    practice: [psych.L01.028, psych.L01.029, psych.L01.030, psych.L01.031, psych.L01.032, psych.L01.033, psych.L01.034, psych.L01.035, psych.L01.036, psych.L01.037, psych.L01.038, psych.L01.039, psych.L01.040, psych.L01.041]

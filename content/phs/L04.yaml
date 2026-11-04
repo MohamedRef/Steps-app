@@ -1,0 +1,527 @@
+schema: steps.content/v1
+lecture: phs.L04
+title: Healthcare delivery
+book: { chapter: 6, pages: [276, 278] }
+topics:
+  - { id: disease-prevention, title: Disease prevention }
+  - { id: chemoprophylaxis, title: Chemoprophylaxis and post-exposure prophylaxis }
+  - { id: medical-insurance-plans, title: Major medical insurance plans }
+  - { id: healthcare-payment-models, title: Healthcare payment models }
+  - { id: medicare-medicaid, title: Medicare and Medicaid }
+  - { id: palliative-care, title: Palliative care }
+  - { id: types-of-medical-errors, title: Types of medical errors }
+  - { id: medical-error-analysis, title: Medical error analysis }
+  - { id: causes-of-medical-errors, title: Causes of medical errors }
+items:
+  # ---------- p276: disease prevention ----------
+  - id: phs.L04.001
+    kind: table
+    topic: disease-prevention
+    title: Levels of disease prevention
+    columns: [Level, Target population, Goal, Example (diabetes)]
+    rows:
+      - [Primary, Susceptible/general population, Prevent disease onset (reduce risks or increase immunity), Healthy diet and exercise to prevent diabetes]
+      - [Secondary, Subclinical (asymptomatic), "Screen for early detection and treatment; prevent symptom onset", Glucose screening for type 2 diabetes mellitus]
+      - [Tertiary, Clinical (symptomatic), "Treat symptomatic disease; prevent progression and sequelae", Hemoglobin A1c monitoring to guide treatment and prevent complications]
+      - [Quaternary, "Symptomatic but overmedicalized or not treatable", "Quit unnecessary interventions; prevent overtreatment and iatrogenic harm", Discontinuing a sulfonylurea after multiple hypoglycemic events]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [0, 3], [1, 3], [2, 3], [3, 3]]
+    src: { page: 276, quote: "Prevent overtreatment and iatrogenic harm eg, discontinuing sulfonylurea after multiple hypoglycemic events" }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.002
+    kind: cloze
+    topic: disease-prevention
+    text: "{{c1::Secondary}} prevention screens for early detection and treatment of presymptomatic disease (eg, glucose screening for type 2 diabetes)."
+    src: { page: 276, quote: "Screen for early detection and treatment of presymptomatic disease" }
+    status: unverified
+  - id: phs.L04.003
+    kind: cloze
+    topic: disease-prevention
+    text: "{{c1::Quaternary}} prevention quits unnecessary medical interventions to prevent {{c2::overtreatment and iatrogenic harm}}."
+    src: { page: 276, quote: "Quit unnecessary medical interventions" }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.004
+    kind: mcq
+    topic: disease-prevention
+    stem: >-
+      A 66-year-old man with type 2 diabetes has a hemoglobin A1c of 7.8%. His physician orders an
+      annual dilated eye examination and urine albumin testing to detect early complications and adjust
+      his treatment. Which level of prevention do these measures represent?
+    options:
+      - Tertiary
+      - Primary
+      - Secondary
+      - Quaternary
+      - Primordial
+    answer: 0
+    why:
+      - "Right. Tertiary prevention treats symptomatic (clinical) disease and prevents progression, sequelae and complications, like A1c monitoring to guide treatment."
+      - "Primary prevention prevents disease onset in the general population (diet and exercise)."
+      - "Secondary prevention screens for presymptomatic disease (glucose screening)."
+      - "Quaternary prevention stops unnecessary interventions to prevent iatrogenic harm."
+      - "First Aid's levels here are primary to quaternary."
+    src: { page: 276, quote: "Prevent clinical disease progression and sequelae associated morbidity, mortality, and disability eg, hemoglobin A1c monitoring to guide treatment and prevent complications" }
+    status: unverified
+  - id: phs.L04.005
+    kind: mcq
+    topic: disease-prevention
+    stem: >-
+      An 82-year-old woman with type 2 diabetes has been brought to the emergency department three times
+      in 2 months with hypoglycemia. She takes glipizide. Her physician stops the glipizide and relaxes
+      her glycemic target. Which level of prevention does this represent?
+    options:
+      - Quaternary
+      - Tertiary
+      - Secondary
+      - Primary
+      - None, because treatment was stopped
+    answer: 0
+    why:
+      - "Right. Quaternary prevention quits unnecessary interventions to prevent overtreatment and iatrogenic harm, like stopping a sulfonylurea after multiple hypoglycemic events."
+      - "Tertiary prevention treats symptomatic disease to prevent complications."
+      - "Secondary prevention is screening for presymptomatic disease."
+      - "Primary prevention prevents disease onset."
+      - "Stopping a harmful intervention is itself prevention (quaternary)."
+    src: { page: 276, quote: "eg, discontinuing sulfonylurea after multiple hypoglycemic events" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p276: chemoprophylaxis ----------
+  - id: phs.L04.006
+    kind: table
+    topic: chemoprophylaxis
+    title: Chemoprophylaxis and post-exposure prophylaxis
+    columns: [Exposure, Prophylaxis, Notes]
+    rows:
+      - ["HIV (sexual, occupational)", "Tenofovir disoproxil fumarate + emtricitabine + (raltegravir or dolutegravir) × 28 days", "Start ≤72 hr; test HIV at baseline, 6 wk, 3 mo, 6 mo"]
+      - [Neisseria meningitidis (close contact), "Rifampin, ciprofloxacin, or ceftriaxone", Household or close exposure]
+      - [Rabies (animal bite), "Wound cleaning + rabies vaccine + rabies immune globulin (if not previously immunized)", "Day 0, 3, 7, 14 schedule"]
+      - [Hepatitis B virus, HBV vaccine ± hepatitis B immune globulin (if source positive and unvaccinated), Follow HBV serology]
+      - [Malaria (travel), "Atovaquone-proguanil, doxycycline, or mefloquine", "Start before travel; continue post-return"]
+      - [Sexual exposure (STI prevention), "Doxycycline ≤72 hr after sex, in patients with recent bacterial STI", "Prevents syphilis, chlamydia, gonorrhea; monitor q3-6 mo"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [0, 2], [2, 2]]
+    src: { page: 276, quote: "Tenofovir disoproxil fumarate + emtricitabine + (raltegravir or dolutegravir) × 28 days." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.007
+    kind: card
+    topic: chemoprophylaxis
+    front: When must HIV post-exposure prophylaxis start, how long is it given, and when is HIV tested?
+    back: Start ≤72 hr after exposure, for 28 days; test HIV at baseline and at 6 wk, 3 mo and 6 mo.
+    src: { page: 276, quote: "Start ≤72 hr after exposure; test HIV at baseline and 6 wk, 3 mo, 6 mo." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.008
+    kind: card
+    topic: chemoprophylaxis
+    front: What is the post-exposure prophylaxis for a household contact of a patient with meningococcal meningitis?
+    back: Rifampin, ciprofloxacin, or ceftriaxone.
+    src: { page: 276, quote: "Neisseria meningitidis (close contact) Rifampin, ciprofloxacin, or ceftriaxone." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.009
+    kind: cloze
+    topic: chemoprophylaxis
+    text: "Rabies post-exposure prophylaxis: {{c1::wound cleaning}} + rabies vaccine + {{c2::rabies immune globulin}} (if not previously immunized), on a day {{c3::0, 3, 7, 14}} schedule."
+    src: { page: 276, quote: "Wound cleaning + rabies vaccine + rabies immune globulin (if not previously immunized). 0, 3, 7, 14 day schedule." }
+    status: unverified
+  - id: phs.L04.010
+    kind: card
+    topic: chemoprophylaxis
+    front: When is hepatitis B immune globulin added to HBV vaccine after an exposure?
+    back: If the source is positive and the exposed person is unvaccinated; then follow HBV serology.
+    src: { page: 276, quote: "HBV vaccine ± Hepatitis B immune globulin (if source positive and unvaccinated). Follow HBV serology." }
+    status: unverified
+  - id: phs.L04.011
+    kind: card
+    topic: chemoprophylaxis
+    front: Which drugs are used for malaria travel prophylaxis, and when?
+    back: Atovaquone-proguanil, doxycycline, or mefloquine; start before travel and continue after return.
+    src: { page: 276, quote: "Atovaquone-proguanil, doxycycline, or mefloquine. Start before travel; continue post-return." }
+    status: unverified
+  - id: phs.L04.012
+    kind: card
+    topic: chemoprophylaxis
+    front: How effective is doxycycline post-exposure prophylaxis for STIs?
+    back: ↓ syphilis and chlamydia >70%, ↓ gonorrhea ~50%. Given ≤72 hr after sex to patients with a recent bacterial STI, with regular STI/HIV testing; monitor every 3–6 months.
+    src: { page: 276, quote: "Effectiveness: ↓ syphilis/chlamydia >70%, ↓ gonorrhea ~50%. Monitor q3-6 mo." }
+    status: unverified
+  - id: phs.L04.013
+    kind: mcq
+    topic: chemoprophylaxis
+    stem: >-
+      A 27-year-old nurse sustains a needlestick injury while drawing blood from a patient known to have
+      HIV with a detectable viral load. She comes to occupational health 4 hours later. Which of the
+      following is the most appropriate management?
+    options:
+      - Tenofovir disoproxil fumarate, emtricitabine and dolutegravir for 28 days, with HIV testing at baseline, 6 wk, 3 mo and 6 mo
+      - HIV testing in 3 months and treatment only if positive
+      - Zidovudine monotherapy for 7 days
+      - Hepatitis B immune globulin alone
+      - No prophylaxis because more than 2 hours have passed
+    answer: 0
+    why:
+      - "Right. HIV post-exposure prophylaxis is tenofovir disoproxil fumarate + emtricitabine + (raltegravir or dolutegravir) × 28 days, started ≤72 hr, with HIV tests at baseline and follow-up."
+      - "Prophylaxis must start within 72 hours; waiting loses the window."
+      - "The book's regimen is three drugs for 28 days."
+      - "This is for HBV exposure, not HIV."
+      - "The window is ≤72 hours after exposure."
+    src: { page: 276, quote: "HIV exposure (sexual, occupational) Tenofovir disoproxil fumarate + emtricitabine + (raltegravir or dolutegravir) × 28 days." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.014
+    kind: mcq
+    topic: chemoprophylaxis
+    stem: >-
+      A 34-year-old man is bitten on the hand by a raccoon while camping. He has never received a rabies
+      vaccine. Which of the following is the most appropriate management in addition to wound cleaning?
+    options:
+      - Rabies vaccine and rabies immune globulin
+      - Rabies vaccine alone
+      - Rabies immune globulin alone
+      - Observe the man for symptoms for 10 days
+      - Doxycycline
+    answer: 0
+    why:
+      - "Right. Rabies prophylaxis is wound cleaning + rabies vaccine + rabies immune globulin if not previously immunized, on a day 0, 3, 7, 14 schedule."
+      - "An unimmunized person also needs rabies immune globulin."
+      - "Immune globulin gives passive protection only; active vaccination is also needed."
+      - "Waiting for symptoms is too late; rabies is prevented after exposure."
+      - "Doxycycline is for STI prevention or malaria, not rabies."
+    src: { page: 276, quote: "Wound cleaning + rabies vaccine + rabies immune globulin (if not previously immunized)." }
+    status: unverified
+  # ---------- p277: insurance plans ----------
+  - id: phs.L04.015
+    kind: table
+    topic: medical-insurance-plans
+    title: Major medical insurance plans
+    columns: [Plan, Network, Referral, Cost]
+    rows:
+      - [EPO (exclusive provider organization), "In-network only; out-of-network for emergencies", "—", "—"]
+      - [HMO (health maintenance organization), Limited to in-network providers, Primary care referral for specialists, "Lower premiums, lower out-of-pocket cost"]
+      - [PoS (point of service), "Out-of-network allowed at higher cost (HMO + PPO)", Requires primary care referrals, Higher cost out of network]
+      - [PPO (preferred provider organization), In-network and out-of-network flexibility, No referral requirement, Higher cost for out-of-network]
+      - [HDHP (high deductible health plan), "—", "—", "Low premiums, high out-of-pocket cost; compatible with an HSA"]
+    blanks: [[0, 1], [1, 2], [2, 1], [3, 2], [4, 3]]
+    src: { page: 277, quote: "Lower premiums, limited to in-network providers, requires primary care referral for specialists, lower out-of-pocket cost." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.016
+    kind: card
+    topic: medical-insurance-plans
+    front: What is an accountable care organization (ACO)?
+    back: A group of providers who voluntarily coordinate care for Medicare patients.
+    src: { page: 277, quote: "Group of providers who voluntarily coordinate care for Medicare patients." }
+    status: unverified
+  - id: phs.L04.017
+    kind: card
+    topic: medical-insurance-plans
+    front: Which insurance plan pairs with a health savings account (HSA)?
+    back: "A high deductible health plan (HDHP): low premiums, high out-of-pocket cost."
+    src: { page: 277, quote: "Low premiums, high out-of-pocket cost, compatible with health savings account (HSA)." }
+    status: unverified
+  - id: phs.L04.018
+    kind: mcq
+    topic: medical-insurance-plans
+    stem: >-
+      A 38-year-old woman is choosing a health plan. She wants to see a dermatologist directly without
+      first seeing a primary care physician, and wants coverage if she sees a doctor outside the
+      network, even at higher cost. Which type of plan best fits her needs?
+    options:
+      - Preferred provider organization (PPO)
+      - Health maintenance organization (HMO)
+      - Point of service (PoS)
+      - Exclusive provider organization (EPO)
+      - Accountable care organization (ACO)
+    answer: 0
+    why:
+      - "Right. A PPO gives in-network and out-of-network flexibility, higher cost out of network, and no referral requirement."
+      - "An HMO is limited to in-network providers and requires a primary care referral for specialists."
+      - "A PoS allows out-of-network care but requires primary care referrals."
+      - "An EPO requires in-network care except for emergencies."
+      - "An ACO is a group of providers coordinating care for Medicare patients, not an insurance plan she buys."
+    src: { page: 277, quote: "Flexibility with in-network and out-of-network care, higher cost for out-of-network services, no referral requirement." }
+    status: unverified
+  # ---------- p277: payment models ----------
+  - id: phs.L04.019
+    kind: table
+    topic: healthcare-payment-models
+    title: Healthcare payment models
+    columns: [Model, How payment works]
+    rows:
+      - [Bundled payment, "Organization receives a set amount per service, regardless of ultimate cost, divided among all providers and facilities involved"]
+      - [Capitation, "Physicians receive a set amount per patient assigned per period of time, regardless of use; used by some HMOs"]
+      - [Discounted fee-for-service, "Pays for each service at a discounted rate predetermined by providers and payers (eg, PPOs)"]
+      - [Fee-for-service, Insurer and/or patient pays for each individual service]
+      - [Global payment, "One payment for all expenses of a single incident of care; most common for elective surgery (covers surgery plus pre- and postoperative visits)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 277, quote: "Capitation Physicians receive a set amount per patient assigned to them per period of time, regardless of how much the patient uses the healthcare system." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.020
+    kind: mcq
+    topic: healthcare-payment-models
+    stem: >-
+      A primary care physician joins a group that receives a fixed monthly payment for each of the 2,000
+      patients assigned to her, whether those patients visit once a year or every week. Which payment
+      model is this?
+    options:
+      - Capitation
+      - Fee-for-service
+      - Bundled payment
+      - Global payment
+      - Discounted fee-for-service
+    answer: 0
+    why:
+      - "Right. Capitation pays a set amount per patient assigned per period of time, regardless of how much the patient uses the healthcare system."
+      - "Fee-for-service pays for each individual service."
+      - "Bundled payment is a set amount per service divided among the providers involved."
+      - "Global payment is one payment for all expenses of a single incident of care, like elective surgery."
+      - "Discounted fee-for-service pays each service at a predetermined discounted rate."
+    src: { page: 277, quote: "Physicians receive a set amount per patient assigned to them per period of time, regardless of how much the patient uses the healthcare system." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.021
+    kind: card
+    topic: healthcare-payment-models
+    front: Which payment model is most commonly used for elective surgery?
+    back: Global payment, a single payment covering the surgery and the necessary pre- and postoperative visits.
+    src: { page: 277, quote: "Most commonly used during elective surgeries, as it covers the cost of surgery as well as the necessary pre- and postoperative visits." }
+    status: unverified
+  # ---------- p277: Medicare and Medicaid ----------
+  - id: phs.L04.022
+    kind: card
+    topic: medicare-medicaid
+    front: Who is eligible for Medicare?
+    back: Patients ≥65 years old, those <65 with certain disabilities, and those with end-stage renal disease.
+    src: { page: 277, quote: "Medicare is available to patients ≥65 years old, <65 with certain disabilities, and those with end-stage renal disease." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.023
+    kind: card
+    topic: medicare-medicaid
+    front: What is Medicaid?
+    back: Joint federal and state health assistance for people with limited income and/or resources ("MedicaiD is for Disadvantaged").
+    src: { page: 277, quote: "Medicaid is joint federal and state health assistance for people with limited income and/ or resources." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.024
+    kind: enumerate
+    topic: medicare-medicaid
+    prompt: Enumerate the 4 parts of Medicare.
+    points:
+      - "Part A: hospital Admissions, including hospice and skilled nursing"
+      - "Part B: Basic medical bills (eg, physician fees, diagnostic testing)"
+      - "Part C: parts A + B = Combo, delivered by approved private companies"
+      - "Part D: prescription Drugs"
+    pass: 4
+    hook: "A = Admissions، B = Basic bills، C = Combo، D = Drugs. وMedicarE للـ Elderly و MedicaiD للـ Disadvantaged."
+    src: { page: 277, quote: "Part A: hospital Admissions, including hospice, skilled nursing Part B: Basic medical bills (eg, physician fees, diagnostic testing)" }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.025
+    kind: mcq
+    topic: medicare-medicaid
+    stem: >-
+      A 70-year-old retired teacher is enrolled in Medicare. She is prescribed apixaban for atrial
+      fibrillation and asks which part of Medicare covers her prescription. Which of the following is
+      correct?
+    options:
+      - Part D
+      - Part A
+      - Part B
+      - Part C only
+      - Medicaid
+    answer: 0
+    why:
+      - "Right. Part D covers prescription Drugs."
+      - "Part A covers hospital Admissions, including hospice and skilled nursing."
+      - "Part B covers Basic medical bills such as physician fees and diagnostic tests."
+      - "Part C is A + B combined, delivered by approved private companies."
+      - "Medicaid is for people with limited income or resources, not eligibility by age."
+    src: { page: 277, quote: "Part C: (parts A + B = Combo) delivered by approved private companies Part D: prescription Drugs" }
+    status: unverified
+  # ---------- p278: palliative care ----------
+  - id: phs.L04.026
+    kind: card
+    topic: palliative-care
+    front: Does palliative care require a terminal prognosis or stopping curative treatment?
+    back: No. It aims for comfort, relief of suffering and quality of life in complex or life-threatening illness regardless of diagnosis or prognosis, and is often concurrent with curative or life-prolonging treatment.
+    src: { page: 278, quote: "regardless of their diagnosis or prognosis. Often concurrent with curative or life-prolonging treatment." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.027
+    kind: cloze
+    topic: palliative-care
+    text: "Hospice care is palliative care for patients with a prognosis of {{c1::≤6 months}} when {{c2::curative or life-prolonging}} treatment is no longer wanted or beneficial."
+    src: { page: 278, quote: "Hospice care (end-of-life care)—form of palliative care for patients with prognosis ≤6 months when curative or life-prolonging treatment is no longer wanted or beneficial." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.028
+    kind: mcq
+    topic: palliative-care
+    stem: >-
+      A 55-year-old man with newly diagnosed stage III colon cancer is starting curative chemotherapy.
+      He has severe neuropathic pain and anxiety. His oncologist suggests a palliative care
+      consultation. The patient asks whether this means he is dying. Which of the following is the best
+      response?
+    options:
+      - Palliative care can relieve his symptoms alongside his curative treatment, whatever his prognosis
+      - Palliative care is only for patients with ≤6 months to live
+      - He must stop chemotherapy to receive palliative care
+      - Palliative care is delivered only in hospice facilities
+      - Palliative care is only for patients who have stopped all treatment
+    answer: 0
+    why:
+      - "Right. Palliative care relieves suffering regardless of diagnosis or prognosis and is often concurrent with curative treatment."
+      - "That describes hospice, a form of palliative care for a prognosis ≤6 months."
+      - "It is often given at the same time as curative treatment."
+      - "It is delivered by an interdisciplinary team in hospitals, outpatient clinics or at home."
+      - "Stopping curative treatment is a feature of hospice, not palliative care in general."
+    src: { page: 278, quote: "Medical care aiming to provide comfort, relieve suffering, and improve quality of life in patients with complex or life-threatening illness regardless of their diagnosis or prognosis." }
+    status: unverified
+  # ---------- p278: types of medical errors ----------
+  - id: phs.L04.029
+    kind: table
+    topic: types-of-medical-errors
+    title: Types of medical errors
+    columns: [Type, Definition, Example, Impact]
+    rows:
+      - [Active error, At the level of the frontline operator, Wrong IV pump dose programmed, Immediate impact]
+      - [Latent error, In processes indirect from the operator but affecting patient care, Different types of IV pumps used in the same hospital, Accident waiting to happen]
+      - [Never event, "Identifiable, serious, usually preventable adverse event", Scalpel retained in a surgical patient's abdomen, Major error that should never occur]
+      - [Near miss, "Unplanned event without harm, but with the potential for it", Pharmacist recognizes a drug interaction and cancels the order, Narrow prevention of harm that exposes dangers]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [0, 3], [1, 3]]
+    src: { page: 278, quote: "Latent error Occurs in processes indirect from operator but impacts patient care (eg, different types of IV pumps used within same hospital)." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.030
+    kind: card
+    topic: types-of-medical-errors
+    front: What is a sentinel event?
+    back: A never event that leads to death, permanent harm, or severe temporary harm.
+    src: { page: 278, quote: "Sentinel event—a never event that leads to death, permanent harm, or severe temporary harm." }
+    status: unverified
+  - id: phs.L04.031
+    kind: card
+    topic: types-of-medical-errors
+    front: Should a medical error that caused no harm be disclosed to the patient?
+    back: Yes. Medical errors should be disclosed independent of the immediate outcome (harmful or not).
+    src: { page: 278, quote: "Medical errors should be disclosed to patients, independent of immediate outcome (harmful or not)." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.032
+    kind: mcq
+    topic: types-of-medical-errors
+    stem: >-
+      A hospital stocks two brands of insulin pens that look almost identical but have different
+      concentrations. Over 6 months, several patients receive the wrong dose. Which type of error does
+      the stocking practice represent?
+    options:
+      - Latent error
+      - Active error
+      - Near miss
+      - Never event
+      - Sentinel event
+    answer: 0
+    why:
+      - "Right. A latent error lies in processes indirect from the operator but impacts patient care (like different IV pumps in one hospital): an accident waiting to happen."
+      - "An active error occurs at the frontline operator, with immediate impact."
+      - "A near miss causes no harm; here patients were harmed."
+      - "A never event is a serious, identifiable, usually preventable event such as a retained scalpel."
+      - "A sentinel event is a never event leading to death or severe harm."
+    src: { page: 278, quote: "Occurs in processes indirect from operator but impacts patient care (eg, different types of IV pumps used within same hospital). Accident waiting to happen." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.033
+    kind: mcq
+    topic: types-of-medical-errors
+    stem: >-
+      A physician orders clarithromycin for a patient taking simvastatin. The pharmacist recognizes the
+      interaction and calls the physician, who cancels the order. The patient never receives the drug.
+      Which term best describes this event?
+    options:
+      - Near miss
+      - Latent error
+      - Active error with harm
+      - Never event
+      - Sentinel event
+    answer: 0
+    why:
+      - "Right. A near miss is an unplanned event that does not cause harm but could have, like a pharmacist catching an interaction and cancelling the order."
+      - "A latent error is a process flaw indirect from the operator."
+      - "No harm reached the patient."
+      - "A never event is a serious adverse event such as a retained surgical instrument."
+      - "A sentinel event is a never event causing death or severe harm."
+    src: { page: 278, quote: "Near miss Unplanned event that does not result in harm but has the potential to do so (eg, pharmacist recognizes a medication interaction and cancels the order)." }
+    status: unverified
+  # ---------- p278: medical error analysis ----------
+  - id: phs.L04.034
+    kind: table
+    topic: medical-error-analysis
+    title: Medical error analysis
+    columns: [Method, Timing, Approach]
+    rows:
+      - [Root cause analysis, "Retrospective: after a failure event, to prevent recurrence", "Records and interviews (5 whys, fishbone diagrams, process maps) to find all underlying problems"]
+      - [Failure mode and effects analysis, "Forward-looking: before process implementation, to prevent failure", "Inductive reasoning to find every way a process might fail, prioritized by probability and impact"]
+    blanks: [[0, 1], [1, 1], [0, 2], [1, 2]]
+    src: { page: 278, quote: "Failure mode and effects analysis Forward-looking approach. Applied before process implementation to prevent failure occurrence." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L04.035
+    kind: mcq
+    topic: medical-error-analysis
+    stem: >-
+      Before introducing a new electronic system for ordering chemotherapy, a hospital team lists every
+      way the system could fail and ranks each by how likely it is and how badly it would harm patients.
+      Which method are they using?
+    options:
+      - Failure mode and effects analysis
+      - Root cause analysis
+      - Fishbone diagram after an event
+      - Near-miss reporting
+      - The 5 whys approach
+    answer: 0
+    why:
+      - "Right. Failure mode and effects analysis is forward-looking, applied before implementation, and prioritizes failures by probability and impact."
+      - "Root cause analysis is retrospective, applied after a failure event."
+      - "Fishbone diagrams are a tool of root cause analysis after an error."
+      - "A near miss is a type of event, not a prospective method."
+      - "The 5 whys is a root cause analysis tool."
+    src: { page: 278, quote: "Uses inductive reasoning to identify all the ways a process might fail and prioritizes them by their probability of occurrence and impact on patients." }
+    status: unverified
+  # ---------- p278: causes of medical errors ----------
+  - id: phs.L04.036
+    kind: table
+    topic: causes-of-medical-errors
+    title: Causes of medical errors
+    columns: [Cause, Definition]
+    rows:
+      - [Burnout, "Prolonged, excessive stress → emotional exhaustion and depersonalization → reduced professional efficacy"]
+      - [Fatigue, Sleep or rest deprivation → cognitive impairment and decreased attention to detail]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 278, quote: "Burnout Prolonged, excessive stress leading to emotional exhaustion, depersonalization, leading to reduced professional efficacy." }
+    status: unverified
+  - id: phs.L04.037
+    kind: mcq
+    topic: causes-of-medical-errors
+    stem: >-
+      A second-year resident has worked 80-hour weeks for a year. She feels emotionally drained, has
+      started to think of her patients as "cases" she doesn't care about, and feels she is no longer
+      good at her job. She sleeps 7 hours most nights. Which of the following best describes her
+      condition?
+    options:
+      - Burnout
+      - Fatigue
+      - Major depressive disorder
+      - Latent error
+      - Near miss
+    answer: 0
+    why:
+      - "Right. Burnout is prolonged, excessive stress leading to emotional exhaustion and depersonalization, then reduced professional efficacy."
+      - "Fatigue is sleep or rest deprivation with cognitive impairment; she sleeps adequately."
+      - "Her symptoms are framed around work stress and match the book's definition of burnout."
+      - "A latent error is a process flaw, not a clinician state."
+      - "A near miss is an event without harm."
+    src: { page: 278, quote: "Prolonged, excessive stress leading to emotional exhaustion, depersonalization, leading to reduced professional efficacy." }
+    status: unverified
