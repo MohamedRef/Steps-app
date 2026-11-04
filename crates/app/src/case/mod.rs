@@ -1,5 +1,4 @@
-//! Cases: key-feature clinical cases, the `calc` number vignettes, and the
-//! standalone calculators, as three tabs of one screen.
+//! Cases: key-feature clinical cases (Step 1 style multi-step vignettes).
 //!
 //! A case shows its stem, then each step reveals new data and asks one
 //! decision, with feedback (`why` and the book page) right after. The data
@@ -15,7 +14,6 @@ use dioxus::prelude::*;
 use steps_core::content::{Body, Item, Status};
 use steps_core::review::{Grade, MemorySink, Origin, ReviewEvent, ReviewSink, StudyStoreHandle};
 
-use crate::calc::{Calculators, item::CalcItem};
 use crate::content::Library;
 use crate::hover::BookPage;
 use crate::i18n::case as tx;
@@ -26,71 +24,25 @@ const CSS: Css = css!("src/case/case.css");
 mod choices;
 use choices::{option_key, option_order, option_state};
 
-/// The tab the screen opens on next, when Today sends him to due items.
-/// `STEPS_OPEN_CALC=child_pugh` opens the Calculators tab at launch (previews).
-static START_TAB: GlobalSignal<Option<Tab>> =
-    Signal::global(|| std::env::var_os("STEPS_OPEN_CALC").map(|_| Tab::Calculators));
-
-/// Open the Cases screen on its due items (#242): the cases tab, or the calc
-/// items tab when only calc items are due. Due items sit first in each list.
-pub fn open_due(mut ui: crate::Ui, calc_only: bool) {
-    *START_TAB.write() = Some(if calc_only { Tab::CalcItems } else { Tab::Cases });
-    ui.screen.set(crate::Screen::Cases);
-}
-
-/// Open the Cases screen on its Calculators tab (More › الحاسبات).
-pub fn open_calculators(mut ui: crate::Ui) {
-    *START_TAB.write() = Some(Tab::Calculators);
-    ui.screen.set(crate::Screen::Cases);
-}
-
-#[derive(Clone, Copy, PartialEq, Eq, Debug)]
-enum Tab {
-    Cases,
-    CalcItems,
-    Calculators,
-}
-
-// The tab and the open case or calc item, kept across screens so a case
-// left half-way opens where it was.
-static TAB: GlobalSignal<Tab> = Signal::global(|| Tab::Cases);
+// The open case, kept across screens so a case left half-way opens where
+// it was. `open_due` clears it so Today lands on the list, due first.
 static OPEN: GlobalSignal<Option<String>> = Signal::global(|| None);
+
+/// Open the Cases screen on its due items (#242): due items sit first.
+pub fn open_due(mut ui: crate::Ui) {
+    *OPEN.write() = None;
+    ui.screen.set(crate::Screen::Cases);
+}
 
 #[component]
 pub fn CasesScreen() -> Element {
-    use_hook(|| {
-        if let Some(t) = START_TAB.write().take() {
-            *TAB.write() = t;
-            *OPEN.write() = None;
-        }
-    });
-    let tab = move || *TAB.read();
     let back = move |_| *OPEN.write() = None;
     rsx! {
         style { {CSS.text()} }
         if let Some(id) = OPEN.read().clone() {
-            if tab() == Tab::Cases {
-                CasePlayer { key: "{id}", item_id: id, on_back: back }
-            } else {
-                CalcItem { key: "{id}", item_id: id, on_back: back }
-            }
+            CasePlayer { key: "{id}", item_id: id, on_back: back }
         } else {
-            div { class: "tabs", role: "tablist",
-                for (t, label) in [(Tab::Cases, tx::TAB_CASES), (Tab::CalcItems, tx::TAB_CALC_ITEMS), (Tab::Calculators, crate::i18n::case::TAB_CALCULATORS)] {
-                    button {
-                        key: "{t:?}",
-                        role: "tab",
-                        "aria-selected": if tab() == t { "true" } else { "false" },
-                        onclick: move |_| *TAB.write() = t,
-                        {label}
-                    }
-                }
-            }
-            match tab() {
-                Tab::Cases => rsx! { ItemList { kind: "case", on_open: move |id| *OPEN.write() = Some(id) } },
-                Tab::CalcItems => rsx! { ItemList { kind: "calc", on_open: move |id| *OPEN.write() = Some(id) } },
-                Tab::Calculators => rsx! { Calculators {} },
-            }
+            CaseList { on_open: move |id| *OPEN.write() = Some(id) }
         }
     }
 }
@@ -135,19 +87,18 @@ pub fn find_item(id: &str) -> Option<(&'static str, &'static Item)> {
     lec.items.iter().find(|i| i.id == id).map(|i| (lib.title(&lec.lecture), i))
 }
 
-/// The cases and calc-items lists: due first by default, cards by default
+/// The cases list: due first by default, cards by default
 /// (each shows a few lines of its stem), and optionally grouped by lecture.
 const CASES_VIEW: Collection =
     Collection { key: "cases", layout: Layout::DEFAULT, sorts: &[Sort::Due, Sort::Book], groups: true };
-const CALC_VIEW: Collection =
-    Collection { key: "calc_items", layout: Layout::DEFAULT, sorts: &[Sort::Due, Sort::Book], groups: true };
 
 #[component]
-fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {
+fn CaseList(on_open: EventHandler<String>) -> Element {
+    const KIND: &str = "case";
     let store = use_case_store();
-    let view = if kind == "case" { CASES_VIEW } else { CALC_VIEW };
+    let view = CASES_VIEW;
     let pick = view.pick();
-    let mut items = items_of(kind, store.as_ref());
+    let mut items = items_of(KIND, store.as_ref());
     // Due ones first (#242) unless he picked book order; the sort is
     // stable, so each part keeps book order.
     let due: std::collections::HashSet<String> =
@@ -157,7 +108,7 @@ fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {
     // picked order inside).
     let mut groups: Vec<(&'static str, Vec<Item>)> = Vec::new();
     if pick.grouped {
-        let order: Vec<&'static str> = items_in_library(kind).into_iter().map(|(l, _)| l).collect();
+        let order: Vec<&'static str> = items_in_library(KIND).into_iter().map(|(l, _)| l).collect();
         for (lecture, item) in items {
             match groups.iter_mut().find(|(l, _)| *l == lecture) {
                 Some((_, v)) => v.push(item),
@@ -168,9 +119,9 @@ fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {
     } else {
         groups.push(("", items.into_iter().map(|(_, i)| i).collect()));
     }
-    let empty = if kind == "case" { tx::EMPTY } else { tx::EMPTY_CALC };
+    let empty = tx::EMPTY;
     let lectures: std::collections::HashMap<String, &'static str> =
-        items_in_library(kind).into_iter().map(|(l, i)| (i.id.clone(), l)).collect();
+        items_in_library(KIND).into_iter().map(|(l, i)| (i.id.clone(), l)).collect();
     rsx! {
         if groups.iter().all(|(_, v)| v.is_empty()) {
             crate::ui::Card { element: crate::ui::CardElement::Paragraph, class: "muted", {empty} }
@@ -191,7 +142,6 @@ fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {
                                     span { class: "coll-sub", dir: "rtl",
                                         match &item.body {
                                             Body::Case { steps, .. } => rsx! { {tx::steps(steps.len())} },
-                                            Body::Calc { calculator, .. } => rsx! { bdi { {steps_core::calc::spec(calculator).map_or("", |s| s.name)} } },
                                             _ => rsx! {},
                                         }
                                         if !pick.grouped {
@@ -215,7 +165,7 @@ fn ItemList(kind: &'static str, on_open: EventHandler<String>) -> Element {
 
 fn first_line(item: &Item) -> String {
     let text = match &item.body {
-        Body::Case { stem, .. } | Body::Calc { stem, .. } => stem.as_str(),
+        Body::Case { stem, .. } => stem.as_str(),
         _ => "",
     };
     let mut out: String = text.chars().take(120).collect();
@@ -344,7 +294,7 @@ pub fn now_ms() -> i64 {
 /// Answers given outside the app (no store in context) wait here.
 static EVENTS: Mutex<MemorySink> = Mutex::new(MemorySink { events: Vec::new() });
 
-/// One finished case or calc item as one review event in the store.
+/// One finished case as one review event in the store.
 pub fn record(
     store: Option<&StudyStoreHandle>,
     item_id: &str,

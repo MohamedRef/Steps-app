@@ -23,7 +23,7 @@ impl Mode {
 pub struct Prefs {
     #[serde(default)]
     pub mode: Mode,
-    /// Release builds only (a preview build always follows `preview`).
+    /// Picked in Settings; alpha when unset (every build, preview or release).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub channel: Option<Channel>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -288,7 +288,7 @@ pub struct Status {
     pub prefs: Prefs,
     /// The channel being followed right now.
     pub channel: Channel,
-    /// A preview build: the channel is fixed.
+    /// A CI preview build (it still follows alpha unless Settings says otherwise).
     pub preview: bool,
     /// A newer content pack is downloaded and verified; it opens once he
     /// is between sessions ([`Updater::apply_content`]) or at the next start.
@@ -419,12 +419,13 @@ impl BuildInfo {
         Self { version, build, preview, key: key_text.and_then(|k| parse_public_key(&k).ok()) }
     }
 
-    /// The channel picked in Settings, else the build's own: `preview`
-    /// for a CI preview build, `alpha` for a release build. Since the first
-    /// alpha both are signed with the release keys (Mohamed, 2026-11-02), so
-    /// either kind can follow any channel and move between them.
+    /// The channel picked in Settings, else alpha (Mohamed, 2026-11-04:
+    /// "خلينا على قناة الألفا"), for CI preview and release builds alike.
+    /// Both are signed with the same permanent release keys, so any build
+    /// can move to preview, beta or stable in Settings and back without
+    /// reinstalling.
     pub(super) fn channel(&self, chosen: Option<Channel>) -> Channel {
-        chosen.unwrap_or(if self.preview { Channel::Preview } else { Channel::Alpha })
+        chosen.unwrap_or(Channel::Alpha)
     }
 
     pub(super) fn installed(&self, chosen: Option<Channel>) -> Installed {

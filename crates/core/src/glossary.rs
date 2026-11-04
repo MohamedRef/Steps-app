@@ -1,4 +1,6 @@
-//! The hover glossary, `content/glossary.yaml`: abbreviations and drug names
+//! The hover glossary: `content/glossary.yaml` (shared terms) plus one
+//! `content/glossary/<course>.yaml` per course, so content threads never
+//! edit the same file. Abbreviations and drug names
 //! with a one-line expansion. The app shows an entry when the S Pen or the
 //! mouse rests on the word (PARITY.md §6.3); `validate::glossary` checks the
 //! file. Entries are content like any other: `status: unverified` until
@@ -55,6 +57,14 @@ impl Entry {
 }
 
 impl Glossary {
+    /// Adds a course file's entries and plain words to this glossary. The
+    /// merged glossary is what `validate::glossary` checks, so a term listed
+    /// in two files is still caught.
+    pub fn absorb(&mut self, part: Glossary) {
+        self.entries.extend(part.entries);
+        self.plain.extend(part.plain);
+    }
+
     /// Finds the entry for a word under the pointer. Abbreviations match
     /// exactly (`HE` is not `he`); drug names ignore case, so a drug at the
     /// start of a sentence still matches.
