@@ -1,0 +1,398 @@
+schema: steps.content/v1
+lecture: mic.L03
+title: Mycology
+book: { chapter: 3, pages: [149, 151] }
+topics:
+  - { id: systemic-mycoses, title: Systemic mycoses }
+  - { id: candida-albicans, title: Candida albicans }
+  - { id: aspergillus-fumigatus, title: Aspergillus fumigatus }
+  - { id: cryptococcus-neoformans, title: Cryptococcus neoformans }
+  - { id: mucor-rhizopus, title: Mucor and Rhizopus spp }
+  - { id: pneumocystis-jirovecii, title: Pneumocystis jirovecii }
+  - { id: sporothrix-schenckii, title: Sporothrix schenckii }
+items:
+  # ---------- p149: systemic mycoses ----------
+  - id: mic.L03.001
+    kind: card
+    topic: systemic-mycoses
+    front: What do the systemic mycoses have in common, and which one is the exception to dimorphism?
+    back: All can cause pneumonia and disseminate, and all are dimorphic fungi (cold 20°C = mold, heat 37°C = yeast). Coccidioides is the exception, a spherule (not yeast) in tissue.
+    src: { page: 149, quote: "All are caused by dimorphic fungi: cold (20°C) = mold; heat (37°C) = yeast. Only exception is Coccidioides, which is a spherule (not yeast) in tissue." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.002
+    kind: card
+    topic: systemic-mycoses
+    front: How are systemic mycoses like TB and unlike TB, and how are they treated?
+    back: Like TB they form granulomas; unlike TB they are not transmitted person to person. Fluconazole or itraconazole for local infection; amphotericin B for systemic infection.
+    src: { page: 149, quote: "Systemic mycoses can form granulomas (like TB); cannot be transmitted person-to-person (unlike TB). Treatment: fluconazole or itraconazole for local infection; amphotericin B for systemic infection." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.003
+    kind: table
+    topic: systemic-mycoses
+    title: Systemic mycoses
+    columns: [Disease, Endemic location, Pathologic features, Unique signs and notes]
+    rows:
+      - [Histoplasmosis, Mississippi and Ohio River Valleys, "Macrophages filled with Histoplasma (smaller than RBC); tuberculate macroconidia", "Palatal/tongue ulcers, splenomegaly, pancytopenia, erythema nodosum; bird or bat droppings (caves); urine/serum antigen"]
+      - [Blastomycosis, "Eastern and Central US, Great Lakes", Broad-based budding (same size as RBC), "Inflammatory lung disease; disseminates to bone/skin (verrucous lesions, may mimic SCC)"]
+      - [Coccidioidomycosis, "Southwestern US, California", Spherule filled with endospores (much larger than RBC), "Bone/skin; erythema nodosum (desert bumps) or multiforme; arthralgias (desert rheumatism); meningitis; dust (excavations, earthquakes)"]
+      - [Paracoccidioidomycosis, Latin America, "Budding yeast with \"captain's wheel\" (much larger than RBC)", "Like blastomycosis; males > females"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [0, 2], [1, 2], [2, 2], [3, 2]]
+    src: { page: 149, quote: "Histoplasmosis A Mississippi and Ohio River Valleys Macrophage filled with Histoplasma (smaller than RBC) A" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.004
+    kind: card
+    topic: systemic-mycoses
+    front: What exposure is linked to histoplasmosis, and how is it diagnosed?
+    back: Bird or bat droppings (eg, caves). Diagnosis via urine/serum antigen. "Histo hides" within macrophages.
+    src: { page: 149, quote: "Histo hides (within macrophages) Associated with bird or bat droppings (eg, caves) Diagnosis via urine/ serum antigen" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.005
+    kind: cloze
+    topic: systemic-mycoses
+    text: Blastomyces shows {{c1::broad-based budding}} and disseminates to bone and skin with {{c2::verrucous}} lesions that may mimic SCC.
+    src: { page: 149, quote: "Broad-based budding of Blastomyces (same size as RBC) B Inflammatory lung disease Disseminates to bone/ skin (verrucous lesions C , may mimic SCC)." }
+    status: unverified
+  - id: mic.L03.006
+    kind: card
+    topic: systemic-mycoses
+    front: Which exposures are linked to coccidioidomycosis, and what are its "desert" findings?
+    back: Dust exposure in endemic areas (archeological excavations, earthquakes). Erythema nodosum ("desert bumps") or multiforme and arthralgias ("desert rheumatism"); it can also cause meningitis.
+    src: { page: 149, quote: "Erythema nodosum (desert bumps) or multiforme Arthralgias (desert rheumatism) Can cause meningitis Associated with dust exposure in endemic areas (eg, archeological excavations, earthquakes)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.007
+    kind: mcq
+    topic: systemic-mycoses
+    stem: >-
+      A 45-year-old man from Ohio who explores caves as a hobby has fever, cough, painful tongue ulcers
+      and an enlarged spleen. Labs show pancytopenia. Bone marrow biopsy shows macrophages packed with
+      small oval yeasts, smaller than red blood cells. Which test is most useful for diagnosis?
+    options:
+      - Urine or serum antigen
+      - India ink stain of CSF
+      - Silver stain of bronchoalveolar lavage for disc-shaped yeast
+      - Culture at 37°C for spherules
+      - Germ tube test
+    answer: 0
+    why:
+      - "Right. Histoplasmosis (Ohio Valley, bat droppings, yeasts inside macrophages) is diagnosed via urine/serum antigen."
+      - "India ink is for Cryptococcus."
+      - "Disc-shaped yeast on silver stain is Pneumocystis."
+      - "Spherules are Coccidioides, and they are seen in tissue, not grown at 37°C."
+      - "Germ tubes identify Candida albicans."
+    src: { page: 149, quote: "Diagnosis via urine/ serum antigen" }
+    status: unverified
+  - id: mic.L03.008
+    kind: mcq
+    topic: systemic-mycoses
+    stem: >-
+      A 30-year-old woman who moved to Phoenix 2 months ago has fever, cough, tender red nodules on her
+      shins and aching joints after a dust storm. Lung biopsy shows large spherules filled with
+      endospores. What is the organism's form at 20°C in the soil?
+    options:
+      - Mold
+      - Yeast
+      - Spherule
+      - Pseudohyphae with germ tubes
+      - Encapsulated yeast
+    answer: 0
+    why:
+      - "Right. Coccidioides is dimorphic: mold in the cold (soil), spherule (not yeast) in tissue."
+      - "The other systemic mycoses become yeast at 37°C; Coccidioides is the exception and doesn't form yeast."
+      - "The spherule is the tissue form, not the soil form."
+      - "Pseudohyphae and germ tubes are Candida."
+      - "An encapsulated, non-dimorphic yeast is Cryptococcus."
+    src: { page: 149, quote: "cold (20°C) = mold; heat (37°C) = yeast. Only exception is Coccidioides, which is a spherule (not yeast) in tissue." }
+    status: unverified
+  # ---------- p150: Candida ----------
+  - id: mic.L03.009
+    kind: card
+    topic: candida-albicans
+    front: What forms does Candida albicans take at 20°C and at 37°C?
+    back: It is dimorphic; pseudohyphae and budding yeasts at 20°C, germ tubes at 37°C.
+    src: { page: 150, quote: "Dimorphic; forms pseudohyphae and budding yeasts at 20°C A , germ tubes at 37°C B ." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.010
+    kind: enumerate
+    topic: candida-albicans
+    prompt: Enumerate the infections caused by Candida albicans and who gets them (6).
+    points:
+      - Oral and esophageal thrush in the immunocompromised (neonates, steroids, diabetes, AIDS)
+      - Vulvovaginitis (diabetes, antibiotics)
+      - Diaper rash
+      - Infective endocarditis (people who inject drugs)
+      - Disseminated candidiasis (especially neutropenic patients)
+      - Chronic mucocutaneous candidiasis
+    pass: 5
+    src: { page: 150, quote: "Causes oral C and esophageal thrush in immunocompromised (neonates, steroids, diabetes, AIDS), vulvovaginitis (diabetes, use of antibiotics), diaper rash, infective endocarditis (people who inject drugs), disseminated candidiasis" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.011
+    kind: card
+    topic: candida-albicans
+    front: Why are neutropenic patients at risk of disseminated candidiasis?
+    back: Host defense against disseminated Candida relies on phagocytes.
+    src: { page: 150, quote: "disseminated candidiasis (especially in neutropenic patients as host defense relies on phagocytes)" }
+    status: unverified
+  - id: mic.L03.012
+    kind: table
+    topic: candida-albicans
+    title: Treatment of Candida
+    columns: [Site, Treatment]
+    rows:
+      - [Vaginal, Oral fluconazole or topical azoles]
+      - [Oral, "Nystatin, azoles, or rarely echinocandins"]
+      - [Esophageal or systemic, "Fluconazole, echinocandins, or amphotericin B"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 150, quote: "Treatment: oral fluconazole/topical azoles for vaginal; nystatin, azoles, or, rarely, echinocandins for oral; fluconazole, echinocandins, or amphotericin B for esophageal or systemic disease." }
+    status: unverified
+  - id: mic.L03.013
+    kind: mcq
+    topic: candida-albicans
+    stem: >-
+      A 38-year-old man with HIV and a CD4+ count of 90 cells/mm3 has painful swallowing. He has white
+      plaques on his tongue and palate that scrape off. Endoscopy shows similar plaques in the
+      esophagus. A culture forms germ tubes at 37°C. What is the best treatment?
+    options:
+      - Fluconazole
+      - Nystatin swish and swallow
+      - Topical clotrimazole
+      - Potassium iodide
+      - Flucytosine alone
+    answer: 0
+    why:
+      - "Right. Esophageal candidiasis needs systemic therapy: fluconazole, echinocandins or amphotericin B."
+      - "Nystatin is for oral thrush, not esophageal disease."
+      - "Topical azoles are for vaginal or oral disease."
+      - "Potassium iodide treats cutaneous sporotrichosis."
+      - "Flucytosine is paired with amphotericin B for cryptococcal meningitis."
+    src: { page: 150, quote: "fluconazole, echinocandins, or amphotericin B for esophageal or systemic disease." }
+    status: unverified
+  # ---------- p150: Aspergillus ----------
+  - id: mic.L03.014
+    kind: card
+    topic: aspergillus-fumigatus
+    front: What does Aspergillus fumigatus look like, and who gets invasive aspergillosis?
+    back: Septate hyphae branching at acute (45°) angles. Invasive disease occurs in the immunocompromised, especially with neutrophil dysfunction (eg, chronic granulomatous disease, because Aspergillus is catalase ⊕).
+    src: { page: 150, quote: "Causes invasive aspergillosis in immunocompromised patients, especially those with neutrophil dysfunction (eg, chronic granulomatous disease) because Aspergillus is catalase ⊕." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.015
+    kind: card
+    topic: aspergillus-fumigatus
+    front: Where do aspergillomas form, and what do aflatoxins cause?
+    back: Aspergillomas form in pre-existing lung cavities, especially after TB. Aflatoxins from some Aspergillus species induce TP53 mutations leading to hepatocellular carcinoma.
+    src: { page: 150, quote: "Can cause aspergillomas E in pre-existing lung cavities, especially after TB infection. Some species of Aspergillus produce aflatoxins (induce TP53 mutations leading to hepatocellular carcinoma)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.016
+    kind: card
+    topic: aspergillus-fumigatus
+    front: What is allergic bronchopulmonary aspergillosis (ABPA)?
+    back: A hypersensitivity response to Aspergillus growing in lung mucus, associated with asthma and cystic fibrosis; it may cause bronchiectasis and eosinophilia.
+    src: { page: 150, quote: "Allergic bronchopulmonary aspergillosis (ABPA)—hypersensitivity response to Aspergillus growing in lung mucus. Associated with asthma and cystic fibrosis; may cause bronchiectasis and eosinophilia." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.017
+    kind: cloze
+    topic: aspergillus-fumigatus
+    text: Invasive aspergillosis is treated with {{c1::voriconazole}}, or {{c2::echinocandins}} as 2nd line.
+    src: { page: 150, quote: "Treatment: voriconazole or echinocandins (2nd-line)." }
+    status: unverified
+  - id: mic.L03.018
+    kind: mcq
+    topic: aspergillus-fumigatus
+    stem: >-
+      A 24-year-old woman with long-standing asthma has worsening wheeze, cough with brown mucus plugs
+      and recurrent fleeting infiltrates. Her blood eosinophils are high, and CT shows central
+      bronchiectasis. Which mechanism best explains her disease?
+    options:
+      - Hypersensitivity to a fungus growing in airway mucus
+      - Invasion of blood vessel walls by nonseptate hyphae
+      - A fungus ball in a pre-existing cavity
+      - Aflatoxin-induced TP53 mutation
+      - Disseminated yeast inside macrophages
+    answer: 0
+    why:
+      - "Right. ABPA is a hypersensitivity response to Aspergillus growing in lung mucus, with asthma, eosinophilia and bronchiectasis."
+      - "Vessel invasion by nonseptate hyphae is mucormycosis."
+      - "A fungus ball in an old cavity is an aspergilloma."
+      - "Aflatoxins cause hepatocellular carcinoma."
+      - "Yeasts inside macrophages are Histoplasma."
+    src: { page: 150, quote: "Allergic bronchopulmonary aspergillosis (ABPA)—hypersensitivity response to Aspergillus growing in lung mucus. Associated with asthma and cystic fibrosis; may cause bronchiectasis and eosinophilia." }
+    status: unverified
+  # ---------- p150: Cryptococcus ----------
+  - id: mic.L03.019
+    kind: card
+    topic: cryptococcus-neoformans
+    front: Describe Cryptococcus neoformans and how it is acquired.
+    back: A 5-10 μm, narrow-budding, heavily encapsulated yeast; not dimorphic; ⊕ PAS. Found in soil and pigeon droppings; inhaled, with hematogenous spread to the meninges.
+    src: { page: 150, quote: "5-10 μm with narrow budding. Heavily encapsulated yeast. Not dimorphic. ⊕ PAS staining. Found in soil, pigeon droppings. Acquired through inhalation with hematogenous dissemination to meninges." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.020
+    kind: card
+    topic: cryptococcus-neoformans
+    front: How is Cryptococcus shown in the lab, and which test is most sensitive and specific?
+    back: India ink (clear halo) and mucicarmine (red inner capsule). The latex agglutination test for polysaccharide capsular antigen is more sensitive and specific.
+    src: { page: 150, quote: "Highlighted with India ink (clear halo F ) and mucicarmine (red inner capsule G ). Latex agglutination test detects polysaccharide capsular antigen and is more sensitive and specific." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.021
+    kind: card
+    topic: cryptococcus-neoformans
+    front: What does cryptococcosis cause, and how is cryptococcal meningitis treated?
+    back: Meningitis, pneumonia and/or encephalitis ("soap bubble" brain lesions), mainly in the immunocompromised. Treat meningitis with amphotericin B + flucytosine, then fluconazole.
+    src: { page: 150, quote: "Causes cryptococcosis, which can manifest with meningitis, pneumonia, and/or encephalitis (“soap bubble” lesions in brain), primarily in immunocompromised. Treatment: amphotericin B + flucytosine followed by fluconazole for cryptococcal meningitis." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.022
+    kind: mcq
+    topic: cryptococcus-neoformans
+    stem: >-
+      A 34-year-old man with untreated HIV has 3 weeks of headache and fever. CSF opening pressure is
+      high. An India ink preparation shows round yeasts with a clear halo. Brain MRI shows small cystic
+      lesions in the basal ganglia. What is the best initial treatment?
+    options:
+      - Amphotericin B plus flucytosine, then fluconazole
+      - Fluconazole alone
+      - Voriconazole
+      - Itraconazole
+      - TMP-SMX
+    answer: 0
+    why:
+      - "Right. Cryptococcal meningitis: amphotericin B + flucytosine, followed by fluconazole."
+      - "Fluconazole follows the induction phase; it isn't the first treatment."
+      - "Voriconazole is the treatment of Aspergillus."
+      - "Itraconazole is for local systemic mycoses and sporotrichosis."
+      - "TMP-SMX treats Pneumocystis."
+    src: { page: 150, quote: "Treatment: amphotericin B + flucytosine followed by fluconazole for cryptococcal meningitis." }
+    status: unverified
+  # ---------- p150: Mucor ----------
+  - id: mic.L03.023
+    kind: card
+    topic: mucor-rhizopus
+    front: What do Mucor and Rhizopus look like, and who gets mucormycosis?
+    back: Irregular, broad, nonseptate hyphae branching at wide angles. Mostly patients with DKA and/or neutropenia (eg, leukemia).
+    src: { page: 150, quote: "Irregular, broad, nonseptate hyphae branching at wide angles H . Causes mucormycosis, mostly in patients with DKA and/or neutropenia (eg, leukemia)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.024
+    kind: card
+    topic: mucor-rhizopus
+    front: How does mucormycosis spread, and how does it present?
+    back: Inhaled spores → fungi proliferate in blood vessel walls, penetrate the cribriform plate and enter the brain. Rhinocerebral disease, frontal lobe abscess, cavernous sinus thrombosis; headache, facial pain, black necrotic eschar on the face, possible cranial nerve involvement.
+    src: { page: 150, quote: "Inhalation of spores → fungi proliferate in blood vessel walls, penetrate cribriform plate, and enter brain. Rhinocerebral, frontal lobe abscess; cavernous sinus thrombosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.025
+    kind: mcq
+    topic: mucor-rhizopus
+    stem: >-
+      A 52-year-old woman with type 1 diabetes is admitted in diabetic ketoacidosis. Two days later she
+      has facial pain, a swollen eye with ophthalmoplegia and a black necrotic area on her nasal
+      turbinate. Biopsy shows broad, ribbonlike nonseptate hyphae branching at wide angles. Besides
+      correcting the ketoacidosis, what is the treatment?
+    options:
+      - Surgical debridement and amphotericin B
+      - Voriconazole alone
+      - Fluconazole alone
+      - Echinocandins alone
+      - Itraconazole or potassium iodide
+    answer: 0
+    why:
+      - "Right. Mucormycosis is treated with surgical debridement plus amphotericin B or isavuconazole."
+      - "Voriconazole is for Aspergillus (septate, acute-angle hyphae)."
+      - "Fluconazole isn't the book's treatment for mucormycosis."
+      - "Echinocandins are 2nd-line for Aspergillus and used for Candida."
+      - "Itraconazole or potassium iodide treat sporotrichosis."
+    src: { page: 150, quote: "Treatment: surgical debridement, amphotericin B or isavuconazole." }
+    status: unverified
+  # ---------- p151: Pneumocystis ----------
+  - id: mic.L03.026
+    kind: card
+    topic: pneumocystis-jirovecii
+    front: What does Pneumocystis jirovecii cause, and how does it look on imaging?
+    back: Pneumocystis pneumonia (PCP), a diffuse interstitial pneumonia; most infections are asymptomatic, and immunosuppression (eg, AIDS) predisposes. Imaging shows diffuse, bilateral ground-glass opacities with pneumatoceles.
+    src: { page: 151, quote: "Yeastlike fungus that causes Pneumocystis pneumonia (PCP), a diffuse interstitial pneumonia A . Most infections are asymptomatic. Immunosuppression (eg, AIDS) predisposes to disease." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.027
+    kind: card
+    topic: pneumocystis-jirovecii
+    front: How is PCP diagnosed?
+    back: Bronchoalveolar lavage or lung biopsy; disc-shaped yeast on methenamine silver stain or with fluorescent antibody.
+    src: { page: 151, quote: "Diagnosed by bronchoalveolar lavage or lung biopsy. Disc-shaped yeast seen on methenamine silver stain of lung tissue C or with fluorescent antibody." }
+    status: unverified
+  - id: mic.L03.028
+    kind: cloze
+    topic: pneumocystis-jirovecii
+    text: PCP is treated or prevented with {{c1::TMP-SMX}}, pentamidine, dapsone or atovaquone; prophylaxis starts when the CD4+ count drops below {{c2::200}} cells/mm3 in people living with HIV.
+    src: { page: 151, quote: "Treatment/prophylaxis: TMP-SMX, pentamidine, dapsone (prophylaxis as single agent, or treatment in combination with TMP), atovaquone. Start prophylaxis when CD4+ cell count drops to <200 cells/mm3" }
+    status: unverified
+    tags: [high-yield, numbers]
+  - id: mic.L03.029
+    kind: mcq
+    topic: pneumocystis-jirovecii
+    stem: >-
+      A 40-year-old man with newly diagnosed HIV has 3 weeks of progressive shortness of breath, a dry
+      cough and low-grade fever. His oxygen saturation falls with walking. CT shows diffuse bilateral
+      ground-glass opacities with thin-walled cysts. His CD4+ count is 80 cells/mm3. Which finding on
+      bronchoalveolar lavage confirms the diagnosis?
+    options:
+      - Disc-shaped yeast on methenamine silver stain
+      - Narrow-budding encapsulated yeast on India ink
+      - Acute-angle septate hyphae
+      - Spherules with endospores
+      - Acid-fast rods
+    answer: 0
+    why:
+      - "Right. Pneumocystis shows disc-shaped yeast on methenamine silver stain or fluorescent antibody."
+      - "Narrow-budding encapsulated yeast is Cryptococcus."
+      - "Acute-angle septate hyphae are Aspergillus."
+      - "Spherules are Coccidioides."
+      - "Acid-fast rods are Mycobacteria."
+    src: { page: 151, quote: "Disc-shaped yeast seen on methenamine silver stain of lung tissue C or with fluorescent antibody." }
+    status: unverified
+  # ---------- p151: Sporothrix ----------
+  - id: mic.L03.030
+    kind: card
+    topic: sporothrix-schenckii
+    front: Describe Sporothrix schenckii and how sporotrichosis presents.
+    back: A dimorphic fungus, cigar-shaped yeast at 37°C in the body and hyphae with spores in soil; lives on vegetation. Spores introduced by a thorn ("rose gardener's disease") cause a local pustule or ulcer with nodules along draining lymphatics (ascending lymphangitis); disseminates in the immunocompromised.
+    src: { page: 151, quote: "When spores are traumatically introduced into the skin, typically by a thorn (“rose gardener’s disease”), causes local pustule or ulcer with nodules along draining lymphatics (ascending lymphangitis A )." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L03.031
+    kind: cloze
+    topic: sporothrix-schenckii
+    text: "Sporotrichosis is treated with {{c1::itraconazole}} or {{c2::potassium iodide}} (only for cutaneous/lymphocutaneous disease): think of a rose gardener who smokes a cigar and pot."
+    src: { page: 151, quote: "Treatment: itraconazole or potassium iodide (only for cutaneous/lymphocutaneous). Think of a rose gardener who smokes a cigar and pot." }
+    status: unverified
+  - id: mic.L03.032
+    kind: mcq
+    topic: sporothrix-schenckii
+    stem: >-
+      A 55-year-old woman who tends rose bushes has a painless ulcer on her index finger, followed by
+      a line of red nodules up her forearm over 3 weeks. Biopsy shows cigar-shaped yeasts. What is the
+      best treatment?
+    options:
+      - Itraconazole
+      - Amphotericin B and flucytosine
+      - Voriconazole
+      - Nystatin
+      - Penicillin
+    answer: 0
+    why:
+      - "Right. Lymphocutaneous sporotrichosis is treated with itraconazole or potassium iodide."
+      - "Amphotericin B + flucytosine is for cryptococcal meningitis."
+      - "Voriconazole treats Aspergillus."
+      - "Nystatin is topical or oral for Candida."
+      - "Penicillin treats Actinomyces, which also drains through tracts but is a bacterium."
+    src: { page: 151, quote: "Treatment: itraconazole or potassium iodide (only for cutaneous/lymphocutaneous)." }
+    status: unverified
