@@ -24,12 +24,12 @@ items:
     kind: table
     topic: ingested-seafood-toxins
     title: Ingested seafood toxins
-    columns: [Toxin, Source, Action, Treatment]
+    columns: [Toxin, Source, Action, Symptoms, Treatment]
     rows:
-      - [Histamine (scombroid), "Spoiled dark-meat fish (tuna, mahi-mahi, mackerel, bonito)", "Bacterial histidine decarboxylase converts histidine → histamine", "Antihistamines; albuterol ± epinephrine"]
-      - [Tetrodotoxin, Pufferfish, "Binds fast voltage-gated Na+ channels in nerve, preventing depolarization", Supportive]
-      - [Ciguatoxin, "Reef fish (barracuda, snapper, moray eel)", "Opens Na+ channels, causing depolarization", Supportive]
-    blanks: [[0, 1], [1, 1], [2, 1], [0, 2], [1, 2], [2, 2], [0, 3]]
+      - [Histamine (scombroid), "Spoiled dark-meat fish (tuna, mahi-mahi, mackerel, bonito)", "Bacterial histidine decarboxylase converts histidine → histamine", "Mimics anaphylaxis: oral burning, flushing, urticaria, itching; may progress to bronchospasm, angioedema, hypotension", "Antihistamines; albuterol ± epinephrine"]
+      - [Tetrodotoxin, Pufferfish, "Binds fast voltage-gated Na+ channels in nerve, preventing depolarization", "Nausea, diarrhea, paresthesias, weakness, dizziness, loss of reflexes", Supportive]
+      - [Ciguatoxin, "Reef fish (barracuda, snapper, moray eel)", "Opens Na+ channels, causing depolarization", "Nausea, vomiting, diarrhea, perioral numbness, reversal of hot and cold sensations, bradycardia, heart block, hypotension", Supportive]
+    blanks: [[0, 1], [1, 1], [2, 1], [0, 2], [1, 2], [2, 2], [1, 3], [0, 4]]
     src: { page: 246, quote: "Tetrodotoxin Pufferfish Binds fast voltage-gated Na+ channels in nerve tissue, preventing depolarization" }
     status: unverified
     tags: [high-yield]
@@ -76,14 +76,14 @@ items:
     kind: table
     topic: plant-toxins
     title: Plant toxins
-    columns: [Toxin, Source, Action, Treatment]
+    columns: [Toxin, Source, Action, Symptoms, Treatment]
     rows:
-      - [Grayanotoxin, "Rhododendron nectar (mad honey)", "Opens voltage-gated Na+ channels → prolonged depolarization → ↑ vagal tone", "Supportive (IV fluids, atropine if severe bradycardia)"]
-      - [Aconitine alkaloids, "Aconitum (monkshood, wolfsbane)", "Activates Na+ channels (site 2) → delayed inactivation → ventricular arrhythmias", "Supportive; lidocaine or amiodarone; avoid class IA/III"]
-      - [Cardiac glycosides, "Digitalis purpurea, Nerium oleander", "Inhibits Na+/K+-ATPase → ↑ Ca2+ → ↑ vagal tone, ectopy", "Digoxin-specific Fab, atropine, correct K+/Mg2+"]
-      - [Coniine, Poison hemlock (Conium maculatum), "Nicotinic agonist/antagonist → depolarizing blockade → flaccid paralysis", "Respiratory support; activated charcoal early"]
-      - [Atropine/scopolamine, "Atropa belladonna, Datura stramonium (jimsonweed)", Muscarinic antagonist, "Physostigmine, cooling, fluids"]
-    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [2, 3], [4, 3]]
+      - [Grayanotoxin, "Rhododendron nectar (mad honey)", "Opens voltage-gated Na+ channels → prolonged depolarization → ↑ vagal tone", "Nausea, vomiting, dizziness, bradycardia, hypotension", "Supportive (IV fluids, atropine if severe bradycardia)"]
+      - [Aconitine alkaloids, "Aconitum (monkshood, wolfsbane)", "Activates Na+ channels (site 2) → delayed inactivation → ventricular arrhythmias", "Paresthesias, hypotension, ventricular tachyarrhythmias, cardiac arrest", "Supportive; lidocaine or amiodarone; avoid class IA/III"]
+      - [Cardiac glycosides, "Digitalis purpurea, Nerium oleander", "Inhibits Na+/K+-ATPase → ↑ Ca2+ → ↑ vagal tone, ectopy", "GI upset, visual disturbances (xanthopsia), AV block, arrhythmias", "Digoxin-specific Fab, atropine, correct K+/Mg2+"]
+      - [Coniine, Poison hemlock (Conium maculatum), "Nicotinic agonist/antagonist → depolarizing blockade → flaccid paralysis", "Ascending paralysis, respiratory failure, salivation", "Respiratory support; activated charcoal early"]
+      - [Atropine/scopolamine, "Atropa belladonna, Datura stramonium (jimsonweed)", Muscarinic antagonist, "Anticholinergic toxidrome: dry mouth, mydriasis, hyperthermia, delirium", "Physostigmine, cooling, fluids"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [0, 2], [1, 2], [4, 2], [2, 4], [4, 4]]
     src: { page: 246, quote: "Grayanotoxin Rhododendron nectar (“mad honey”) Opens voltage-gated Na+ channels → prolonged depolarization → ↑ vagal tone" }
     status: unverified
   - id: pharm.L03.006
