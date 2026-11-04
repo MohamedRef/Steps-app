@@ -1,0 +1,793 @@
+schema: steps.content/v1
+lecture: imm.L02
+title: Cellular components
+book: { chapter: 2, pages: [97, 101] }
+topics:
+  - { id: innate-vs-adaptive-immunity, title: Innate vs adaptive immunity }
+  - { id: immune-privilege, title: Immune privilege }
+  - { id: mhc-i-and-ii, title: Major histocompatibility complex I and II }
+  - { id: bare-lymphocyte-syndrome, title: Bare lymphocyte syndrome }
+  - { id: hla-subtypes, title: HLA subtypes associated with diseases }
+  - { id: natural-killer-cells, title: Major functions of natural killer cells }
+  - { id: b-and-t-cells, title: Major functions of B and T cells }
+  - { id: t-cell-differentiation, title: Differentiation of T cells }
+  - { id: positive-selection, title: Positive selection }
+  - { id: negative-selection, title: Negative selection }
+  - { id: macrophage-lymphocyte-interaction, title: Macrophage-lymphocyte interaction }
+  - { id: cytotoxic-t-cells, title: Cytotoxic T cells }
+  - { id: regulatory-t-cells, title: Regulatory T cells }
+  - { id: t-and-b-cell-activation, title: T- and B-cell activation }
+  - { id: peripheral-tolerance, title: Peripheral tolerance }
+  - { id: anergy, title: Anergy }
+items:
+  # ---------- p97: innate vs adaptive immunity ----------
+  - id: imm.L02.001
+    kind: table
+    topic: innate-vs-adaptive-immunity
+    title: Innate vs adaptive immunity
+    columns: [Feature, Innate immunity, Adaptive immunity]
+    rows:
+      - [Components, "Neutrophils, macrophages, monocytes, dendritic cells, NK cells (lymphoid origin), complement, physical epithelial barriers, secreted enzymes", "T cells, B cells, circulating antibodies"]
+      - [Mechanism, Germline encoded, Variation through V(D)J recombination during lymphocyte development]
+      - [Response to pathogens, "Nonspecific; occurs rapidly (minutes to hours); no memory response", "Highly specific, refined over time; develops over long periods; memory response is faster and more robust"]
+      - [Secreted proteins, "Lysozyme, complement, CRP, defensins, cytokines", "Immunoglobulins, cytokines"]
+      - [Key features in pathogen recognition, Toll-like receptors (pattern recognition receptors), Memory cells (activated B and T cells)]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 1], [3, 1], [4, 1]]
+    src: { page: 97, quote: "MECHANISM Germline encoded. Variation through V(D)J recombination during lymphocyte development." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.002
+    kind: card
+    topic: innate-vs-adaptive-immunity
+    front: Natural killer cells are part of which arm of immunity, and what is their origin?
+    back: Innate immunity, although they are of lymphoid origin.
+    src: { page: 97, quote: "Neutrophils, macrophages, monocytes, dendritic cells, natural killer (NK) cells (lymphoid origin), complement, physical epithelial barriers, secreted enzymes." }
+    status: unverified
+  - id: imm.L02.003
+    kind: cloze
+    topic: innate-vs-adaptive-immunity
+    text: Innate immunity is {{c1::germline}} encoded; adaptive immunity gains variation through {{c2::V(D)J recombination}} during lymphocyte development.
+    src: { page: 97, quote: "Germline encoded. Variation through V(D)J recombination during lymphocyte development." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.004
+    kind: card
+    topic: innate-vs-adaptive-immunity
+    front: What are Toll-like receptors, and what happens when they bind their ligands?
+    back: Pattern recognition receptors of innate immunity that recognize pathogen- and damage-associated molecular patterns (PAMPs and DAMPs) → activation of NF-κB → release of pro-inflammatory cytokines.
+    src: { page: 97, quote: "Toll-like receptors (TLRs): pattern recognition receptors that recognize pathogen- and damage-associated molecular patterns (PAMPs and DAMPs) → activation of NF-κB → release of pro-inflammatory cytokines." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.005
+    kind: table
+    topic: innate-vs-adaptive-immunity
+    title: PAMPs vs DAMPs (examples)
+    columns: [Pattern, Examples]
+    rows:
+      - [PAMPs, "LPS (gram ⊝ bacteria), flagellin (bacteria), nucleic acids (viruses)"]
+      - [DAMPs, "Mitochondrial DNA, histones, heat shock proteins"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 97, quote: "Examples of PAMPs: LPS (gram ⊝ bacteria), flagellin (bacteria), nucleic acids (viruses). Examples of DAMPs: mitochondrial DNA, histones, heat shock proteins." }
+    status: unverified
+  - id: imm.L02.006
+    kind: card
+    topic: innate-vs-adaptive-immunity
+    front: What are memory cells, and what happens to adaptive immune responses with age?
+    back: Activated B and T cells; re-exposure to a previously encountered antigen gives a stronger, quicker response. Adaptive responses decrease with age (immunosenescence).
+    src: { page: 97, quote: "Memory cells: activated B and T cells; subsequent exposure to a previously encountered antigen → stronger, quicker immune response. Adaptive immune responses decrease with age (immunosenescence)." }
+    status: unverified
+  - id: imm.L02.007
+    kind: mcq
+    topic: innate-vs-adaptive-immunity
+    stem: >-
+      A 68-year-old man is brought to the emergency department with fever, rigors and hypotension 2 days
+      after a urinary catheter was placed. Blood cultures grow Escherichia coli. Lipopolysaccharide from
+      the bacterial outer membrane binds a pattern recognition receptor on his macrophages. Which
+      intracellular event most directly leads to the release of pro-inflammatory cytokines?
+    options:
+      - V(D)J recombination of the receptor gene
+      - Activation of NF-κB
+      - Binding of the antigen to MHC II
+      - Class switching to IgG
+      - Release of perforin and granzymes
+    answer: 1
+    why:
+      - "V(D)J recombination makes T- and B-cell receptors; Toll-like receptors are germline encoded."
+      - "Right. LPS is a PAMP that binds a Toll-like receptor → NF-κB activation → pro-inflammatory cytokines."
+      - "MHC II presentation to CD4+ T cells is adaptive immunity and takes days, not the first minutes of sepsis."
+      - "Class switching is a B-cell event that needs T-cell help; it is not how macrophages release cytokines."
+      - "Perforin and granzymes are how NK and CD8+ T cells kill infected cells."
+    src: { page: 97, quote: "Toll-like receptors (TLRs): pattern recognition receptors that recognize pathogen- and damage-associated molecular patterns (PAMPs and DAMPs) → activation of NF-κB → release of pro-inflammatory cytokines. Examples of PAMPs: LPS (gram ⊝ bacteria)" }
+    status: unverified
+  # ---------- p97: immune privilege ----------
+  - id: imm.L02.008
+    kind: card
+    topic: immune-privilege
+    front: What is immune privilege, which organs have it, and why does it matter for transplants?
+    back: Organs and tissues (e.g., eye, brain, placenta, testes) where chemical or physical mechanisms limit immune responses to foreign antigens, to avoid damage from inflammation. Allograft rejection at these sites is less likely.
+    src: { page: 97, quote: "Organs (eg, eye, brain, placenta, testes) and tissues where chemical or physical mechanisms limit immune responses to foreign antigens to avoid damage that would occur from inflammatory sequelae. Allograft rejection at these sites is less likely." }
+    status: unverified
+  - id: imm.L02.009
+    kind: mcq
+    topic: immune-privilege
+    stem: >-
+      A 45-year-old woman with corneal scarring from herpes keratitis undergoes corneal transplantation
+      from a deceased donor. No HLA matching is done, and she receives only topical corticosteroids
+      afterward. Two years later the graft remains clear. Which of the following best explains the low
+      risk of rejection?
+    options:
+      - The cornea lacks all MHC I expression
+      - The eye is an immune-privileged site
+      - The donor cornea was tolerated through thymic negative selection
+      - Topical steroids eliminate donor-specific memory B cells
+      - The cornea is a primary lymphoid organ
+    answer: 1
+    why:
+      - "Nucleated cells express MHC I; the cornea is protected by local mechanisms, not by lacking MHC."
+      - "Right. The eye is immune privileged: chemical and physical mechanisms limit immune responses there, so allograft rejection is less likely."
+      - "Negative selection removes T cells reactive to self antigens, not to a donor's antigens met in adulthood."
+      - "Topical steroids reduce local inflammation; they do not erase memory B cells."
+      - "Primary lymphoid organs are the bone marrow and thymus."
+    src: { page: 97, quote: "Organs (eg, eye, brain, placenta, testes) and tissues where chemical or physical mechanisms limit immune responses to foreign antigens to avoid damage that would occur from inflammatory sequelae. Allograft rejection at these sites is less likely." }
+    status: unverified
+  # ---------- p98: MHC I and II ----------
+  - id: imm.L02.010
+    kind: table
+    topic: mhc-i-and-ii
+    title: MHC I vs MHC II
+    columns: [Feature, MHC I, MHC II]
+    rows:
+      - [Loci, "HLA-A, HLA-B, HLA-C (1 letter)", "HLA-DP, HLA-DQ, HLA-DR (2 letters)"]
+      - [Binding, "TCR and CD8 (CD8 × MHC 1 = 8)", "TCR and CD4 (CD4 × MHC 2 = 8)"]
+      - [Structure, "1 long chain, 1 short chain (3 α, 1 β)", "2 equal-length chains (2 α, 2 β)"]
+      - [Expression, "All nucleated cells, APCs, platelets (except RBCs)", APCs]
+      - [Function, "Present endogenous antigens (e.g., viral or cytosolic proteins) to CD8+ cytotoxic T cells", "Present exogenous antigens (e.g., bacterial proteins) to CD4+ helper T cells"]
+      - [Antigen loading, Peptides loaded onto MHC I in RER after delivery via TAP, Antigen loaded after release of invariant chain in a lysosome]
+      - [Associated proteins, β2-microglobulin, Invariant chain]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [3, 1], [3, 2], [4, 1], [4, 2], [5, 1], [5, 2], [6, 1], [6, 2]]
+    src: { page: 98, quote: "LOCI HLA-A, HLA-B, HLA-C MHC I loci have 1 letter HLA-DP, HLA-DQ, HLA-DR MHC II loci have 2 letters BINDING TCR and CD8 (CD8 × MHC 1 = 8) TCR and CD4 (CD4 × MHC 2 = 8)" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.011
+    kind: card
+    topic: mhc-i-and-ii
+    front: What do MHC molecules do, and which genes encode them?
+    back: They present antigen fragments to T cells and bind T-cell receptors (TCRs). They are encoded by HLA genes.
+    src: { page: 98, quote: "MHC encoded by HLA genes. Present antigen fragments to T cells and bind T-cell receptors (TCRs)." }
+    status: unverified
+  - id: imm.L02.012
+    kind: cloze
+    topic: mhc-i-and-ii
+    text: "MHC I is expressed on all nucleated cells, APCs and platelets, but not on {{c1::RBCs}}; MHC II is expressed on {{c2::APCs}}."
+    src: { page: 98, quote: "EXPRESSION All nucleated cells, APCs, platelets (except RBCs) APCs" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.013
+    kind: cloze
+    topic: mhc-i-and-ii
+    text: Peptides are loaded onto MHC I in the {{c1::RER}} after delivery by {{c2::TAP}} (transporter associated with antigen processing); MHC I associates with {{c3::β2-microglobulin}}.
+    src: { page: 98, quote: "Antigen peptides loaded onto MHC I in RER after delivery via TAP (transporter associated with antigen processing)" }
+    status: unverified
+  - id: imm.L02.014
+    kind: cloze
+    topic: mhc-i-and-ii
+    text: Antigen is loaded onto MHC II after release of the {{c1::invariant chain}} in a {{c2::lysosome}}.
+    src: { page: 98, quote: "Antigen loaded following release of invariant chain in a lysosome" }
+    status: unverified
+  - id: imm.L02.015
+    kind: mcq
+    topic: mhc-i-and-ii
+    stem: >-
+      A 30-year-old man has an acute influenza A infection. Viral proteins synthesized in the cytosol of
+      his respiratory epithelial cells are degraded into peptides. These peptides are then transported
+      into the rough endoplasmic reticulum for display on the cell surface. Which molecule pairs with the
+      presenting molecule's heavy chain at the cell surface?
+    options:
+      - Invariant chain
+      - β2-microglobulin
+      - CD4
+      - B7 (CD80/86)
+      - CD40 ligand
+    answer: 1
+    why:
+      - "The invariant chain belongs to MHC II, which presents exogenous antigen and is released in the lysosome."
+      - "Right. Cytosolic (endogenous) viral peptides go through TAP into the RER onto MHC I, whose associated protein is β2-microglobulin."
+      - "CD4 is on helper T cells and binds MHC II, not part of the presenting molecule."
+      - "B7 is a costimulatory molecule on APCs (signal 2), not part of MHC I."
+      - "CD40L is on activated T helper cells; it binds CD40 on B cells and macrophages."
+    src: { page: 98, quote: "Present endogenous antigens (eg, viral or cytosolic proteins) to CD8+ cytotoxic T cells" }
+    status: unverified
+  # ---------- p98: bare lymphocyte syndrome ----------
+  - id: imm.L02.016
+    kind: table
+    topic: bare-lymphocyte-syndrome
+    title: Bare lymphocyte syndrome (autosomal recessive; ↓ MHC → T-cell dysfunction)
+    columns: [Type, Defect, Result, Clinical picture]
+    rows:
+      - [Type I, TAP mutation, ↓ MHC I → ↓ CD8+ T cells, "Chronic respiratory infections, skin granulomas, vasculitis; normal Ig"]
+      - [Type II, Transcription factor mutations, ↓ MHC II → ↓ CD4+ T cells + APC/B-cell dysfunction, SCID-like infections; ↓ Ig]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [1, 3]]
+    src: { page: 98, quote: "Type I: TAP mutation → ↓ MHC I → ↓ CD8+ T cells → chronic respiratory infections, skin granulomas, vasculitis; normal Ig." }
+    status: unverified
+  - id: imm.L02.017
+    kind: card
+    topic: bare-lymphocyte-syndrome
+    front: What is the inheritance and treatment of bare lymphocyte syndrome?
+    back: "Autosomal recessive. Treatment: allogeneic hematopoietic stem cell transplant, IVIG."
+    src: { page: 98, quote: "Treatment: allogeneic hematopoietic stem cell transplant, IVIG." }
+    status: unverified
+  - id: imm.L02.018
+    kind: mcq
+    topic: bare-lymphocyte-syndrome
+    stem: >-
+      An 8-month-old girl, the child of consanguineous parents, has had recurrent pneumonia, chronic
+      diarrhea and oral thrush since age 3 months. Serum IgG, IgA and IgM are very low. Flow cytometry
+      shows normal numbers of B cells but markedly reduced CD4+ T cells; CD8+ T cells are normal. Her
+      B cells and monocytes do not express HLA-DR. A defect in which of the following is most likely?
+    options:
+      - TAP transporter
+      - Transcription factors that drive MHC II expression
+      - β2-microglobulin
+      - FOXP3
+      - AIRE
+    answer: 1
+    why:
+      - "A TAP defect lowers MHC I and CD8+ cells (type I bare lymphocyte syndrome) with normal Ig."
+      - "Right. Type II bare lymphocyte syndrome: transcription factor mutations → ↓ MHC II (no HLA-DR) → ↓ CD4+ T cells and APC/B-cell dysfunction → SCID-like infections with ↓ Ig."
+      - "β2-microglobulin is part of MHC I, so its loss would lower MHC I and CD8+ cells."
+      - "FOXP3 deficiency is IPEX: autoimmune enteropathy and endocrinopathy in a boy."
+      - "AIRE deficiency causes autoimmune polyendocrine syndrome, not low CD4+ counts."
+    src: { page: 98, quote: "Type II: transcription factor mutations → ↓ MHC II → ↓ CD4+ T cells + antigen-presenting cell/B-cell dysfunction → SCID-like infections; ↓ Ig." }
+    status: unverified
+  # ---------- p99: HLA subtypes ----------
+  - id: imm.L02.019
+    kind: table
+    topic: hla-subtypes
+    title: HLA subtypes associated with diseases
+    columns: [HLA subtype, Disease, Mnemonic]
+    rows:
+      - [B27, "Psoriatic arthritis, Ankylosing spondylitis, IBD-associated arthritis, Reactive arthritis", PAIR]
+      - [DQ2/DQ8, "Celiac disease, DM type 1", ""]
+      - [HLA-DQB1*0602, Narcolepsy, ""]
+      - [DR3, "DM type 1, SLE, Graves disease, Hashimoto thyroiditis, Addison disease", "DM type 1: HLA-3 and -4 (1 + 3 = 4); SL3 (SLE)"]
+      - [DR4, "Rheumatoid arthritis, DM type 1, Addison disease", "There are 4 walls in 1 \"rheum\" (room)"]
+      - [DR5, "Pernicious anemia, Hashimoto thyroiditis", ""]
+      - ["DRB1*15:01", ↑ risk of multiple sclerosis, ""]
+      - ["B*58:01", Allopurinol hypersensitivity → ↑ risk SJS/TEN, ""]
+      - ["DRB1*01:03", ↑ risk of severe ulcerative colitis, ""]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1]]
+    src: { page: 99, quote: "B27 Psoriatic arthritis, Ankylosing spondylitis, IBD-associated arthritis, Reactive arthritis PAIR DQ2/DQ8 Celiac disease, DM type 1" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.020
+    kind: enumerate
+    topic: hla-subtypes
+    prompt: Enumerate the diseases associated with HLA-B27 (the book's PAIR).
+    points:
+      - Psoriatic arthritis
+      - Ankylosing spondylitis
+      - IBD-associated arthritis
+      - Reactive arthritis
+    pass: 4
+    hook: "الكتاب بيقولها PAIR: Psoriatic، Ankylosing، IBD، Reactive. كلهم seronegative spondyloarthropathies."
+    src: { page: 99, quote: "B27 Psoriatic arthritis, Ankylosing spondylitis, IBD-associated arthritis, Reactive arthritis PAIR" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.021
+    kind: card
+    topic: hla-subtypes
+    front: Which HLA subtype is associated with allopurinol hypersensitivity, and what reaction does it raise the risk of?
+    back: HLA-B*58:01; ↑ risk of SJS/TEN.
+    src: { page: 99, quote: "B*58:01 Allopurinol hypersensitivity → ↑ risk SJS/TEN" }
+    status: unverified
+  - id: imm.L02.022
+    kind: cloze
+    topic: hla-subtypes
+    text: "DM type 1 is associated with HLA-{{c1::DR3}} and HLA-{{c2::DR4}} (1 + 3 = 4), and with HLA-{{c3::DQ2/DQ8}}."
+    src: { page: 99, quote: "DM type 1: HLA-3 and -4 (1 + 3 = 4)" }
+    status: unverified
+  - id: imm.L02.023
+    kind: mcq
+    topic: hla-subtypes
+    stem: >-
+      A 26-year-old man comes to the physician because of 6 months of low back pain and stiffness that is
+      worst in the morning and improves with exercise. Examination shows reduced lumbar flexion. X-rays
+      show bilateral sacroiliitis. The HLA subtype most strongly associated with his condition is also
+      associated with which of the following?
+    options:
+      - Celiac disease
+      - Rheumatoid arthritis
+      - Reactive arthritis
+      - Narcolepsy
+      - Pernicious anemia
+    answer: 2
+    why:
+      - "Celiac disease goes with HLA-DQ2/DQ8."
+      - "Rheumatoid arthritis goes with HLA-DR4."
+      - "Right. Ankylosing spondylitis is HLA-B27, which also goes with psoriatic, IBD-associated and reactive arthritis (PAIR)."
+      - "Narcolepsy goes with HLA-DQB1*0602."
+      - "Pernicious anemia goes with HLA-DR5."
+    src: { page: 99, quote: "B27 Psoriatic arthritis, Ankylosing spondylitis, IBD-associated arthritis, Reactive arthritis PAIR" }
+    status: unverified
+  # ---------- p99: NK cells ----------
+  - id: imm.L02.024
+    kind: card
+    topic: natural-killer-cells
+    front: How do natural killer cells kill, and which cells do they target?
+    back: They use perforin and granzymes to induce apoptosis of virally infected cells and tumor cells. NK cells are the lymphocyte member of the innate immune system.
+    src: { page: 99, quote: "Lymphocyte member of innate immune system. Use perforin and granzymes to induce apoptosis of virally infected cells and tumor cells." }
+    status: unverified
+  - id: imm.L02.025
+    kind: cloze
+    topic: natural-killer-cells
+    text: NK cell activity is enhanced by {{c1::IL-2}}, {{c2::IL-12}}, IFN-α and IFN-β; NK cells produce {{c3::IFN-γ}}, which activates macrophages.
+    src: { page: 99, quote: "Activity enhanced by IL-2, IL-12, IFN-α, and IFN-β. Produce IFN-γ → macrophage activation." }
+    status: unverified
+  - id: imm.L02.026
+    kind: card
+    topic: natural-killer-cells
+    front: What two situations induce an NK cell to kill a target cell?
+    back: Exposure to a nonspecific activation signal on the target cell and/or absence of an inhibitory signal such as MHC I on the target cell surface.
+    src: { page: 99, quote: "Induced to kill when exposed to a nonspecific activation signal on target cell and/or to an absence of an inhibitory signal such as MHC I on target cell surface." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.027
+    kind: card
+    topic: natural-killer-cells
+    front: How do NK cells perform antibody-dependent cell-mediated cytotoxicity (ADCC)?
+    back: CD16 on the NK cell binds the Fc region of IgG bound to the target, activating the NK cell.
+    src: { page: 99, quote: "Also kills via antibody-dependent cell-mediated cytotoxicity (CD16 binds Fc region of bound IgG, activating the NK cell)." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.028
+    kind: mcq
+    topic: natural-killer-cells
+    stem: >-
+      A researcher studies a human cell line infected with a herpesvirus that downregulates MHC I on the
+      host cell surface. The infected cells escape killing by virus-specific CD8+ T cells. However, the
+      cells are still killed by a population of large granular lymphocytes that express CD16 and CD56 and
+      need no prior sensitization. What triggers these effector cells to kill?
+    options:
+      - Recognition of viral peptide on MHC II
+      - Loss of an inhibitory signal from MHC I
+      - CD40 ligand binding to CD40 on the target
+      - B7 costimulation of the effector cell
+      - Binding of IgE to Fc receptors
+    answer: 1
+    why:
+      - "MHC II presents exogenous antigen to CD4+ cells; infected epithelial-type cells don't rely on it, and NK cells don't need antigen presentation."
+      - "Right. These are NK cells; absence of an inhibitory signal such as MHC I on the target induces them to kill with perforin and granzymes."
+      - "CD40-CD40L is how T helper cells activate B cells and macrophages."
+      - "B7-CD28 is the second signal for naïve T-cell activation, not NK killing."
+      - "IgE on Fc receptors arms mast cells and basophils; NK ADCC uses CD16 binding IgG."
+    src: { page: 99, quote: "Induced to kill when exposed to a nonspecific activation signal on target cell and/or to an absence of an inhibitory signal such as MHC I on target cell surface." }
+    status: unverified
+  # ---------- p99: B and T cells ----------
+  - id: imm.L02.029
+    kind: enumerate
+    topic: b-and-t-cells
+    prompt: Enumerate the major functions of B cells (humoral immunity) (3).
+    points:
+      - Recognize and present antigen (somatic hypermutation optimizes antigen specificity)
+      - Produce antibody (differentiate into plasma cells that secrete specific immunoglobulins)
+      - Maintain immunologic memory (memory B cells persist and accelerate future responses)
+    pass: 3
+    hook: "الـ B cell شغلته 3: يقدّم (present)، يصنّع (antibody)، يفتكر (memory)."
+    src: { page: 99, quote: "Recognize and present antigen—undergo somatic hypermutation to optimize antigen specificity. Produce antibody—differentiate into plasma cells to secrete specific immunoglobulins. Maintain immunologic memory" }
+    status: unverified
+  - id: imm.L02.030
+    kind: enumerate
+    topic: b-and-t-cells
+    prompt: Enumerate the major functions of T cells (cell-mediated immunity) (4).
+    points:
+      - CD4+ T cells help B cells make antibodies and produce cytokines to recruit phagocytes and activate other leukocytes
+      - CD8+ T cells directly kill virus-infected and tumor cells via perforin and granzymes
+      - Type IV hypersensitivity reaction
+      - Acute and chronic cellular organ rejection
+    pass: 4
+    src: { page: 99, quote: "CD4+ T cells help B cells make antibodies and produce cytokines to recruit phagocytes and activate other leukocytes. CD8+ T cells directly kill virus-infected and tumor cells via perforin and granzymes (similar to NK cells). Type IV hypersensitivity reaction. Acute and chronic cellular organ rejection." }
+    status: unverified
+  - id: imm.L02.031
+    kind: mcq
+    topic: b-and-t-cells
+    stem: >-
+      A 35-year-old nurse has a tuberculin skin test placed during routine screening. Forty-eight hours
+      later she has an 18-mm area of induration at the site. Chest x-ray is normal. Which cell type is
+      primarily responsible for initiating this reaction?
+    options:
+      - Plasma cells secreting IgE
+      - CD4+ T cells
+      - Neutrophils activated by complement
+      - Memory B cells
+      - Eosinophils
+    answer: 1
+    why:
+      - "IgE from plasma cells mediates type I (immediate) hypersensitivity, within minutes."
+      - "Right. A delayed (48-72 hours) induration is a type IV hypersensitivity reaction, a T-cell (cell-mediated) function."
+      - "Complement-activated neutrophils are the effectors of type III immune complex injury."
+      - "Memory B cells speed antibody responses; induration at 48 hours is T-cell mediated."
+      - "Eosinophils are recruited in type I and parasitic responses."
+    src: { page: 99, quote: "T cells Cell-mediated immunity. CD4+ T cells help B cells make antibodies and produce cytokines to recruit phagocytes and activate other leukocytes." }
+    status: unverified
+  # ---------- p100: differentiation of T cells ----------
+  - id: imm.L02.032
+    kind: order
+    topic: t-cell-differentiation
+    prompt: Put the steps of T-cell development in order, from where the cell is made.
+    steps:
+      - T-cell precursor in the bone marrow
+      - Double-positive (CD4+ CD8+) thymocyte in the thymic cortex
+      - Positive selection in the thymic cortex
+      - Negative selection in the thymic medulla
+      - Single-positive CD4+ or CD8+ T cell leaves for the blood and lymph nodes
+    src: { page: 100, quote: "Positive selection Thymic cortex. Keeps T cells that recognize self-peptides to allow for cooperation in immune responses. Double positive thymocytes expressing TCRs that recognize self-peptide MHC complexes receive a survival signal." }
+    status: unverified
+  - id: imm.L02.033
+    kind: table
+    topic: t-cell-differentiation
+    title: CD4+ helper T-cell subsets
+    columns: [Subset, Induced by, Secretes, Function, Inhibited by]
+    rows:
+      - [Th1, "IFN-γ, IL-12", "IFN-γ, IL-2", Activate macrophages and cytotoxic T cells, "IL-4, IL-10"]
+      - [Th2, "IL-2, IL-4", "IL-4, IL-5, IL-6, IL-10, IL-13", "Activate eosinophils, IgE", IFN-γ]
+      - [Th17, "TGF-β, IL-1, IL-6", "IL-17, IL-21, IL-22", Induce neutrophilic infiltration, "IFN-γ, IL-4"]
+      - [Treg, "TGF-β, IL-2", "TGF-β, IL-10, IL-35", Prevent autoimmunity (maintain tolerance), IL-6]
+    blanks: [[0, 1], [0, 2], [0, 3], [0, 4], [1, 2], [1, 3], [1, 4], [2, 2], [2, 3], [3, 1], [3, 2], [3, 3]]
+    src: { page: 100, quote: "Secretes Function IFN-γ, IL-2 Activate macrophages and cytotoxic T cells IL-4, IL-5, IL-6, IL-10, IL-13 IL-17, IL-21, IL-22 Induce neutrophilic infiltration" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.034
+    kind: mcq
+    topic: t-cell-differentiation
+    stem: >-
+      A 22-year-old woman has had recurrent wheezing triggered by cat exposure since childhood. Serum IgE
+      is elevated, and a blood count shows eosinophilia. The helper T-cell subset driving her disease
+      was most likely induced by which cytokine, and is suppressed by which cytokine?
+    options:
+      - Induced by IL-12; suppressed by IL-4
+      - Induced by IL-4; suppressed by IFN-γ
+      - Induced by TGF-β and IL-6; suppressed by IFN-γ and IL-4
+      - Induced by TGF-β and IL-2; suppressed by IL-6
+      - Induced by IFN-γ; suppressed by IL-10
+    answer: 1
+    why:
+      - "IL-12 induces Th1, which IL-4 suppresses; Th1 activates macrophages, not eosinophils."
+      - "Right. Eosinophils and IgE are Th2 functions; Th2 is induced by IL-4 (and IL-2) and inhibited by IFN-γ."
+      - "TGF-β plus IL-6 (and IL-1) induce Th17, which recruits neutrophils."
+      - "TGF-β plus IL-2 induce Tregs, which IL-6 inhibits."
+      - "IFN-γ induces Th1, which IL-10 (and IL-4) inhibit."
+    src: { page: 100, quote: "IL-4, IL-5, IL-6, IL-10, IL-13 IL-17, IL-21, IL-22 Induce neutrophilic infiltration TGF-β, IL-10, IL-35 Prevent autoimmunity (maintain tolerance)" }
+    status: unverified
+  # ---------- p100: positive and negative selection ----------
+  - id: imm.L02.035
+    kind: card
+    topic: positive-selection
+    front: Where does positive selection happen, and what does it keep?
+    back: In the thymic cortex. It keeps T cells that recognize self-peptides (so they can cooperate in immune responses); double-positive thymocytes whose TCRs recognize self-peptide-MHC complexes get a survival signal.
+    src: { page: 100, quote: "Positive selection Thymic cortex. Keeps T cells that recognize self-peptides to allow for cooperation in immune responses." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.036
+    kind: mcq
+    topic: positive-selection
+    stem: >-
+      In a mouse model, double-positive CD4+ CD8+ thymocytes are studied in the thymic cortex. Thymocytes
+      whose T-cell receptors cannot bind any self-peptide-MHC complex on cortical epithelial cells are
+      tracked. What is the most likely fate of these cells?
+    options:
+      - They receive a survival signal and become CD8+ cells
+      - They do not receive a survival signal and die
+      - They become regulatory T cells in the medulla
+      - They leave to the paracortex of lymph nodes
+      - They undergo class switching
+    answer: 1
+    why:
+      - "Only thymocytes whose TCRs recognize self-peptide-MHC get the survival signal."
+      - "Right. Positive selection in the cortex keeps only T cells that recognize self-MHC; cells that cannot get no survival signal."
+      - "Becoming a Treg is a fate of cells that bind self antigens with high affinity in the medulla (negative selection)."
+      - "Cells that fail selection do not reach the periphery."
+      - "Class switching is a B-cell process."
+    src: { page: 100, quote: "Double positive thymocytes expressing TCRs that recognize self-peptide MHC complexes receive a survival signal." }
+    status: unverified
+  - id: imm.L02.037
+    kind: card
+    topic: negative-selection
+    front: Where does negative selection happen, and what happens to thymocytes with high affinity for self antigens?
+    back: In the thymic medulla. Thymocytes whose TCRs bind self antigens with high affinity undergo apoptosis or become regulatory T cells.
+    src: { page: 100, quote: "Negative selection Thymic medulla. Removes T cells that bind too strongly to self-peptides. Thymocytes expressing TCRs with high affinity for self antigens undergo apoptosis or become regulatory T cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.038
+    kind: enumerate
+    topic: negative-selection
+    prompt: Which protein drives negative selection, and what are the features of the syndrome caused by its deficiency (the book's CHAR)?
+    points:
+      - "AIRE (autoimmune regulator) drives negative selection; deficiency → autoimmune polyendocrine syndrome"
+      - Chronic mucocutaneous candidiasis
+      - Hypoparathyroidism
+      - Adrenal insufficiency
+      - Recurrent Candida infections
+    pass: 5
+    hook: "الكتاب بيقول: Without AIRE, your body will CHAR (يتفحّم): Candidiasis، Hypoparathyroidism، Adrenal insufficiency، Recurrent Candida."
+    src: { page: 100, quote: "The autoimmune regulator (AIRE) protein drives negative selection, and deficiency leads to autoimmune polyendocrine syndrome (Chronic mucocutaneous candidiasis, Hypoparathyroidism, Adrenal insufficiency, Recurrent Candida infections)." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.039
+    kind: mcq
+    topic: negative-selection
+    stem: >-
+      A 12-year-old girl has had recurrent oral thrush and nail candidiasis since early childhood. She
+      now has carpopedal spasm; serum calcium is low and PTH is inappropriately low. A year later she
+      develops fatigue, hyperpigmentation and hyponatremia. A defect in which process is the most likely
+      cause?
+    options:
+      - Positive selection in the thymic cortex
+      - Negative selection in the thymic medulla
+      - TAP-mediated loading of MHC I
+      - FOXP3-dependent regulatory T-cell function
+      - Third pharyngeal pouch development
+    answer: 1
+    why:
+      - "Positive selection keeps T cells that see self-MHC; its failure would leave few T cells, not autoimmunity."
+      - "Right. AIRE deficiency impairs negative selection in the medulla → autoimmune polyendocrine syndrome (CHAR: candidiasis, hypoparathyroidism, adrenal insufficiency)."
+      - "TAP defects lower MHC I (type I bare lymphocyte syndrome)."
+      - "FOXP3 deficiency is IPEX, with enteropathy and diabetes in male infants."
+      - "Third pouch failure (DiGeorge) gives hypocalcemia and T-cell deficiency, but not adrenal insufficiency, and it presents in infancy."
+    src: { page: 100, quote: "The autoimmune regulator (AIRE) protein drives negative selection, and deficiency leads to autoimmune polyendocrine syndrome" }
+    status: unverified
+  # ---------- p100: macrophage-lymphocyte interaction ----------
+  - id: imm.L02.040
+    kind: card
+    topic: macrophage-lymphocyte-interaction
+    front: How do Th1 cells enhance macrophage killing, and how do macrophages activate lymphocytes?
+    back: Th1 cells secrete IFN-γ, which enhances the ability of monocytes and macrophages to kill ingested microbes; CD40L on the T cell binding CD40 on the macrophage also enhances it. Macrophages activate lymphocytes via antigen presentation.
+    src: { page: 100, quote: "Th1 cells secrete IFN-γ, which enhances the ability of monocytes and macrophages to kill microbes they ingest. This function is also enhanced by interaction of T cell CD40L with CD40 on macrophages." }
+    status: unverified
+  - id: imm.L02.041
+    kind: mcq
+    topic: macrophage-lymphocyte-interaction
+    stem: >-
+      A 40-year-old man with Crohn disease is started on a drug that blocks a cytokine. Six months
+      later he develops fever, night sweats and a cavitary upper lobe lesion with acid-fast bacilli.
+      Investigators find that his macrophages ingest the mycobacteria but fail to kill them. Loss of
+      which Th1 product most directly explains the failed killing?
+    options:
+      - IL-4
+      - IFN-γ
+      - IL-17
+      - TGF-β
+      - IL-5
+    answer: 1
+    why:
+      - "IL-4 is a Th2 cytokine that drives IgE; it inhibits Th1."
+      - "Right. Th1 cells secrete IFN-γ, which enhances the ability of macrophages to kill the microbes they ingest."
+      - "IL-17 from Th17 recruits neutrophils."
+      - "TGF-β is anti-inflammatory (Tregs)."
+      - "IL-5 activates eosinophils (Th2)."
+    src: { page: 100, quote: "Th1 cells secrete IFN-γ, which enhances the ability of monocytes and macrophages to kill microbes they ingest." }
+    status: unverified
+  # ---------- p100: cytotoxic T cells ----------
+  - id: imm.L02.042
+    kind: card
+    topic: cytotoxic-t-cells
+    front: Which cells do cytotoxic T cells kill, and how?
+    back: Virus-infected, neoplastic and donor graft cells, by inducing apoptosis. They release cytotoxic granules of preformed proteins (e.g., perforin, granzyme B). Their CD8 binds MHC I on the target.
+    src: { page: 100, quote: "Kill virus-infected, neoplastic, and donor graft cells by inducing apoptosis. Release cytotoxic granules containing preformed proteins (eg, perforin, granzyme B). Cytotoxic T cells have CD8, which binds to MHC I on virus-infected cells." }
+    status: unverified
+  - id: imm.L02.043
+    kind: mcq
+    topic: cytotoxic-t-cells
+    stem: >-
+      A 54-year-old man develops a rising creatinine 3 weeks after a deceased-donor kidney transplant.
+      Biopsy shows lymphocytes infiltrating the tubular epithelium, with tubular cell apoptosis. C4d
+      staining is negative. The infiltrating effector cells recognize donor antigen bound to which
+      molecule on the tubular cells?
+    options:
+      - MHC II
+      - MHC I
+      - CD40
+      - B7 (CD80/86)
+      - Fc receptor for IgG
+    answer: 1
+    why:
+      - "MHC II is on APCs; it presents to CD4+ cells, not the CD8+ killers of tubular cells."
+      - "Right. Cytotoxic T cells kill donor graft cells by apoptosis; their CD8 binds MHC I, which every nucleated cell expresses."
+      - "CD40 on B cells and macrophages binds CD40L on helper T cells."
+      - "B7 is a costimulatory molecule on APCs, not on tubular cells."
+      - "Fc receptors (CD16) are how NK cells do ADCC; negative C4d argues against antibody-mediated rejection."
+    src: { page: 100, quote: "Kill virus-infected, neoplastic, and donor graft cells by inducing apoptosis." }
+    status: unverified
+  # ---------- p100: regulatory T cells ----------
+  - id: imm.L02.044
+    kind: cloze
+    topic: regulatory-t-cells
+    text: Regulatory T cells are identified by expression of CD3, CD4, {{c1::CD25}} and {{c2::FOXP3}}, and produce anti-inflammatory cytokines such as {{c3::IL-10 and TGF-β}}.
+    src: { page: 100, quote: "Identified by expression of CD3, CD4, CD25, and FOXP3. Activated regulatory T cells (Tregs) produce anti-inflammatory cytokines (eg, IL-10, TGF-β)." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.045
+    kind: card
+    topic: regulatory-t-cells
+    front: What is the function of regulatory T cells?
+    back: They help maintain specific immune tolerance by suppressing CD4+ and CD8+ T-cell effector functions.
+    src: { page: 100, quote: "Help maintain specific immune tolerance by suppressing CD4+ and CD8+ T-cell effector functions." }
+    status: unverified
+  - id: imm.L02.046
+    kind: card
+    topic: regulatory-t-cells
+    front: What is IPEX syndrome, and what are its features?
+    back: "Immune dysregulation, Polyendocrinopathy, Enteropathy, X-linked: genetic deficiency of FOXP3 → autoimmunity. Enteropathy, endocrinopathy, nail dystrophy, dermatitis and/or other autoimmune skin conditions; associated with diabetes in male infants."
+    src: { page: 100, quote: "IPEX (Immune dysregulation, Polyendocrinopathy, Enteropathy, X-linked) syndrome— genetic deficiency of FOXP3 → autoimmunity. Characterized by enteropathy, endocrinopathy, nail dystrophy, dermatitis, and/or other autoimmune dermatologic conditions. Associated with diabetes in male infants." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.047
+    kind: mcq
+    topic: regulatory-t-cells
+    stem: >-
+      A 3-month-old boy is evaluated for severe watery diarrhea, failure to thrive, an eczematous rash
+      and hyperglycemia requiring insulin. His maternal uncle died in infancy with a similar illness.
+      Flow cytometry would most likely show absence of which of the following?
+    options:
+      - CD19+ B cells
+      - FOXP3 in CD4+ CD25+ T cells
+      - CD16 on NK cells
+      - HLA-DR on monocytes
+      - CD40 ligand on activated T cells
+    answer: 1
+    why:
+      - "Absent B cells is X-linked agammaglobulinemia, with bacterial infections, not autoimmune enteropathy and diabetes."
+      - "Right. This is IPEX: X-linked FOXP3 deficiency → no functional Tregs → enteropathy, dermatitis and diabetes in male infants."
+      - "CD16 mediates NK cell ADCC."
+      - "Absent HLA-DR is type II bare lymphocyte syndrome, with SCID-like infections."
+      - "Absent CD40L impairs class switching (hyper-IgM), with infections rather than this autoimmunity."
+    src: { page: 100, quote: "genetic deficiency of FOXP3 → autoimmunity. Characterized by enteropathy, endocrinopathy, nail dystrophy, dermatitis, and/or other autoimmune dermatologic conditions. Associated with diabetes in male infants." }
+    status: unverified
+  # ---------- p101: T- and B-cell activation ----------
+  - id: imm.L02.048
+    kind: enumerate
+    topic: t-and-b-cell-activation
+    prompt: Enumerate the antigen-presenting cells (4).
+    points:
+      - B cells
+      - Dendritic cells
+      - Langerhans cells
+      - Macrophages
+    pass: 4
+    hook: "الـ APCs هم BDLM: B cells، Dendritic، Langerhans، Macrophages."
+    src: { page: 101, quote: "APCs: B cells, dendritic cells, Langerhans cells, macrophages." }
+    status: unverified
+  - id: imm.L02.049
+    kind: card
+    topic: t-and-b-cell-activation
+    front: How many signals are needed for T-cell activation, B-cell activation and class switching?
+    back: Two signals.
+    src: { page: 101, quote: "Two signals are required for T-cell activation, B-cell activation, and class switching." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.050
+    kind: order
+    topic: t-and-b-cell-activation
+    prompt: Put the steps of naïve T-cell activation in order.
+    steps:
+      - APC ingests and processes antigen
+      - APC migrates to the draining lymph node
+      - "Signal 1: antigen on MHC II is recognized by the TCR of a CD4+ cell (or on MHC I by a CD8+ cell)"
+      - "Signal 2: B7 (CD80/86) on the dendritic cell binds CD28 on the naïve T cell"
+      - Activated Th cell produces cytokines; Tc cell can recognize and kill virus-infected cells
+    src: { page: 101, quote: "APC ingests and processes antigen, then migrates to the draining lymph node. T-cell activation (signal 1): exogenous antigen is presented on MHC II and recognized by TCR on Th (CD4+) cell." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.051
+    kind: cloze
+    topic: t-and-b-cell-activation
+    text: The costimulatory signal 2 for T-cell proliferation and survival is {{c1::B7 (CD80/86)}} on the dendritic cell binding {{c2::CD28}} on the naïve T cell.
+    src: { page: 101, quote: "Proliferation and survival (signal 2): costimulatory signal via interaction of B7 protein (CD80/86) on dendritic cell and CD28 on naïve T cell." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.052
+    kind: order
+    topic: t-and-b-cell-activation
+    prompt: Put the steps of B-cell activation and class switching in order.
+    steps:
+      - B-cell receptor-mediated endocytosis of antigen
+      - Exogenous antigen presented on MHC II is recognized by the TCR on a Th cell
+      - CD40 on the B cell binds CD40L on the Th cell
+      - Th cells secrete cytokines that determine the Ig class switch
+      - B cells are activated, produce IgM, then undergo class switching and affinity maturation
+    src: { page: 101, quote: "B-cell receptor–mediated endocytosis. Exogenous antigen is presented on MHC II and recognized by TCR on Th cell. CD40 receptor on B cell binds CD40 ligand (CD40L) on Th cell. Th cells secrete cytokines that determine Ig class switching of B cells." }
+    status: unverified
+  - id: imm.L02.053
+    kind: mcq
+    topic: t-and-b-cell-activation
+    stem: >-
+      A 2-year-old boy has had recurrent sinopulmonary infections and one episode of Pneumocystis
+      pneumonia. Serum IgM is markedly elevated, while IgG, IgA and IgE are very low. B-cell numbers are
+      normal. Activated CD4+ T cells fail to express a surface protein. Which interaction is missing?
+    options:
+      - B7 on dendritic cells with CD28 on T cells
+      - CD40 on B cells with CD40 ligand on Th cells
+      - MHC I with CD8
+      - CD16 with the Fc region of IgG
+      - TCR with MHC II
+    answer: 1
+    why:
+      - "B7-CD28 is signal 2 for naïve T-cell activation; it would not selectively stop class switching."
+      - "Right. B cells make IgM first; class switching needs a second signal, CD40 on the B cell binding CD40L on the Th cell. Without CD40L, IgM stays high and other classes are low."
+      - "MHC I-CD8 is how cytotoxic T cells recognize targets."
+      - "CD16-Fc binding is NK cell ADCC."
+      - "TCR-MHC II is signal 1, and it is intact if T cells are activated."
+    src: { page: 101, quote: "CD40 receptor on B cell binds CD40 ligand (CD40L) on Th cell. Th cells secrete cytokines that determine Ig class switching of B cells. B cells are activated and produce IgM. They undergo class switching and affinity maturation." }
+    status: unverified
+  # ---------- p101: peripheral tolerance and anergy ----------
+  - id: imm.L02.054
+    kind: card
+    topic: peripheral-tolerance
+    front: What is peripheral tolerance, and what happens when it is lost?
+    back: Suppression or inactivation of self-reactive T and B cells outside the thymus and bone marrow, preserving self-tolerance. Its loss → autoimmunity.
+    src: { page: 101, quote: "Suppression/inactivation of self-reactive T/B cells (outside thymus/bone marrow) → preserves self- tolerance; loss → autoimmunity." }
+    status: unverified
+  - id: imm.L02.055
+    kind: enumerate
+    topic: peripheral-tolerance
+    prompt: Enumerate the mechanisms of peripheral tolerance (3).
+    points:
+      - Anergy
+      - Regulatory T-cell suppression
+      - Apoptosis (Fas-FasL pathway)
+    pass: 3
+    src: { page: 101, quote: "Mechanisms: anergy, regulatory T-cell suppression, apoptosis (Fas–FasL pathway)." }
+    status: unverified
+  - id: imm.L02.056
+    kind: mcq
+    topic: peripheral-tolerance
+    stem: >-
+      A 6-year-old boy has had massive nontender lymphadenopathy and splenomegaly since age 2, with
+      autoimmune hemolytic anemia and thrombocytopenia. Flow cytometry shows increased double-negative
+      (CD4− CD8−) T cells. Activated lymphocytes from the boy fail to die when restimulated in culture.
+      Failure of which tolerance mechanism is most likely?
+    options:
+      - AIRE-driven negative selection
+      - Apoptosis through the Fas-FasL pathway
+      - FOXP3-dependent suppression
+      - Positive selection in the thymic cortex
+      - Lack of B7 costimulation
+    answer: 1
+    why:
+      - "AIRE deficiency gives polyendocrine autoimmunity with candidiasis, not lymphoproliferation."
+      - "Right. Fas-FasL apoptosis is a peripheral tolerance mechanism; when it fails, activated self-reactive lymphocytes survive and accumulate, with autoimmunity."
+      - "FOXP3 deficiency is IPEX (enteropathy, diabetes, dermatitis)."
+      - "Failed positive selection leaves too few T cells."
+      - "Lack of B7 costimulation causes anergy, which protects against autoimmunity."
+    src: { page: 101, quote: "Mechanisms: anergy, regulatory T-cell suppression, apoptosis (Fas–FasL pathway)." }
+    status: unverified
+  - id: imm.L02.057
+    kind: card
+    topic: anergy
+    front: What is anergy, and how does it arise?
+    back: A state in which a cell cannot become activated by exposure to its antigen. T and B cells become anergic when exposed to their antigen without the costimulatory signal (signal 2). It is a peripheral tolerance mechanism.
+    src: { page: 101, quote: "State during which a cell cannot become activated by exposure to its antigen. T and B cells become anergic when exposed to their antigen without costimulatory signal (signal 2)." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L02.058
+    kind: mcq
+    topic: anergy
+    stem: >-
+      In an experiment, naïve CD4+ T cells are cultured with epithelial cells that express MHC II loaded
+      with a peptide the T cells recognize. The epithelial cells express no B7 (CD80/86). A week later
+      the same T cells are exposed to professional antigen-presenting cells carrying the same peptide
+      and B7, but they do not proliferate. Which best describes the state of these T cells?
+    options:
+      - Anergy
+      - Negative selection
+      - Immunosenescence
+      - Clonal expansion
+      - Class switching
+    answer: 0
+    why:
+      - "Right. Signal 1 without the costimulatory signal 2 (B7-CD28) makes T cells anergic: they then can't be activated by their antigen."
+      - "Negative selection happens in the thymic medulla during development."
+      - "Immunosenescence is the decline of adaptive responses with age."
+      - "Clonal expansion needs both signals."
+      - "Class switching is a B-cell process."
+    src: { page: 101, quote: "T and B cells become anergic when exposed to their antigen without costimulatory signal (signal 2)." }
+    status: unverified
