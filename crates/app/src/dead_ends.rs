@@ -345,8 +345,9 @@ fn block_from(lines: &[&str], line: usize) -> String {
 const EXITS: &[&str] = &[];
 
 /// One-button cards whose button is a side action, not what the card
-/// shows: redoing the welcome questions (a stray tap must not restart it).
-const SIDE_ACTION_CARDS: &[&str] = &["onboard-reopen"];
+/// shows: redoing the welcome questions (a stray tap must not restart it),
+/// stopping a running catch-up plan (a stray tap must not end it).
+const SIDE_ACTION_CARDS: &[&str] = &["onboard-reopen", "catchup"];
 
 /// A card whose one job is one button (a lecture's "study", an invite) opens on a tap anywhere on it, not only on the
 /// button: such a card carries `card-action` and an `onclick` of its own.

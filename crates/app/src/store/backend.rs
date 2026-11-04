@@ -340,6 +340,25 @@ impl ReviewBackend {
         self.log.iter().filter(|l| self.scheduler.day.day(l.event.at_ms) == today).count()
     }
 
+    /// The study day `now_ms` falls in (the rollover hour applied).
+    pub fn study_day(&self, now_ms: i64) -> i64 {
+        self.scheduler.day.day(now_ms)
+    }
+
+    /// Answers logged on each of the last `days` study days, oldest first
+    /// (the last entry is today).
+    pub fn answers_per_day(&self, days: usize, now_ms: i64) -> Vec<u32> {
+        let today = self.scheduler.day.day(now_ms);
+        let mut out = vec![0; days];
+        for l in &self.log {
+            let ago = today - self.scheduler.day.day(l.event.at_ms);
+            if (0..days as i64).contains(&ago) {
+                out[days - 1 - ago as usize] += 1;
+            }
+        }
+        out
+    }
+
     /// New items started on each of the last `days` study days, oldest
     /// first (the last entry is today).
     pub fn learned_per_day(&self, days: usize, now_ms: i64) -> Vec<u32> {

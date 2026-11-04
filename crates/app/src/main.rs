@@ -18,6 +18,7 @@ mod bank;
 #[cfg(test)]
 mod browser_fixture;
 mod case;
+mod catchup;
 mod cloud;
 mod content;
 mod courses;
