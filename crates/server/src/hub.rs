@@ -725,8 +725,10 @@ mod tests {
         let hub = Hub::new(&db).unwrap();
         let mut phone = conn("s24u");
         send(&hub, &mut phone, &hello(0));
-        let ops =
-            vec![item_op("a", "s24u", NOW_I, "cvs.L04.002", "known"), item_op("b", "s24u", NOW_I, "cvs.L04.001", "learning")];
+        let ops = vec![
+            item_op("a", "s24u", NOW_I, "cvs.L04.002", "known"),
+            item_op("b", "s24u", NOW_I, "cvs.L04.001", "learning"),
+        ];
         send(&hub, &mut phone, &ClientMsg::Push { batch: 1, ops });
         let before = replay(&hub.catch_up(0).unwrap());
         // A version a server from before compaction kept.

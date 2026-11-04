@@ -50,8 +50,8 @@ use base64::engine::general_purpose::STANDARD as B64;
 use ed25519_dalek::{Signer, SigningKey};
 use sha2::{Digest, Sha256};
 use steps_core::update::{
-    BuildChanges, Channel, MANIFEST_FILE, SIGNATURE_FILE, UPDATE_FORMAT, UpdateAsset, UpdateManifest,
-    UpdateNotes, UpdatePlatform, Stage, Version, check_download, key_line, parse_public_key, verify_manifest,
+    BuildChanges, Channel, MANIFEST_FILE, SIGNATURE_FILE, Stage, UPDATE_FORMAT, UpdateAsset, UpdateManifest,
+    UpdateNotes, UpdatePlatform, Version, check_download, key_line, parse_public_key, verify_manifest,
 };
 
 use crate::changes;
@@ -201,7 +201,9 @@ fn run_inner(root: &Path, args: &[String]) -> Res<String> {
             };
             let parsed = Version::parse(&v).ok_or_else(|| format!("{v:?} isn't a version"))?;
             if parsed.stage == Stage::Alpha(0) {
-                return Err(format!("{v} is the placeholder before the first alpha: raise `version` in Cargo.toml"));
+                return Err(format!(
+                    "{v} is the placeholder before the first alpha: raise `version` in Cargo.toml"
+                ));
             }
             for p in values(args, "--previous").map(Path::new).filter(|p| p.exists()) {
                 let m: UpdateManifest = serde_json::from_str(&read_text(p)?)
@@ -673,7 +675,9 @@ mod tests {
         fs::write(&feed, serde_json::to_string(&manifest).unwrap()).unwrap();
         let feed = feed.to_string_lossy().into_owned();
         let missing = dir.path().join("none.json").to_string_lossy().into_owned();
-        let guard = |v: &str| run(dir.path(), &strings(&["guard", "--version", v, "--previous", &feed, "--previous", &missing]));
+        let guard = |v: &str| {
+            run(dir.path(), &strings(&["guard", "--version", v, "--previous", &feed, "--previous", &missing]))
+        };
         assert!(guard("1.0.0-alpha.0").unwrap_err()[0].contains("placeholder"));
         assert!(guard("1.0.0-alpha.2").unwrap_err()[0].contains("not newer"));
         assert!(guard("1.0.0-alpha.1").is_err());
