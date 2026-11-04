@@ -403,7 +403,9 @@ fn Runner() -> Element {
     let phase_now = *phase.read();
     let revealed = phase_now == Phase::Answer;
     let p = &entry.prompt;
-    let lecture = p.lecture.rsplit('.').next().unwrap_or(&p.lecture);
+    // The course and the lecture, not a bare "L02": a mixed session can
+    // come from any course (UX #300).
+    let lecture = crate::content::Library::get().crumb(&p.lecture);
 
     rsx! {
         div {

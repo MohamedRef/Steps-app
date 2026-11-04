@@ -279,7 +279,7 @@ pub mod nav {
     pub const STUDY: &str = "المراجعة";
     pub const BANK: &str = "الأسئلة";
     pub const CASES: &str = "حالات";
-    pub const ORAL: &str = "شفوي";
+    pub const ORAL: &str = "سمّع";
     pub const STATS: &str = "تقدّمي";
     pub const SETTINGS: &str = "الإعدادات";
     pub const MORE: &str = "المزيد";
@@ -985,7 +985,7 @@ pub mod plan {
     pub const FIRST_PASS: &str = "اللفّة الأولى";
     pub const SECOND_PASS: &str = "اللفّة التانية";
     pub const WEEK: &str = "الأيام الجاية";
-    pub const LOAD_TITLE: &str = "الحِمل في الأسبوعين الجايين";
+    pub const LOAD_TITLE: &str = "الشغل في الأسبوعين الجايين";
     pub const LOAD_LABEL: &str = "مراجعات وجديد متوقعين كل يوم، النهارده على اليمين";
     pub const LOAD_PEAK: &str = "أتقل يوم";
     pub const LOAD_KEY_REVIEWS: &str = "مراجعة";
@@ -1008,7 +1008,7 @@ pub mod plan {
     }
     pub const QBANK_LABEL: &str = "أسئلة بنك الأسئلة في اليوم العادي";
     pub const QBANK_HINT: &str = "ده في مرحلة الأجهزة. في الربط الضعف، وفي الفترة المركّزة 4 أضعاف.";
-    pub const DAY_LOADS: &str = "حِمل كل يوم";
+    pub const DAY_LOADS: &str = "شغل كل يوم";
     pub const LOADS: [&str; 3] = ["خفيف", "عادي", "تقيل"];
     pub const CATCH_UP_DAY: &str = "يوم اللحاق (من غير جديد)";
     pub const NO_CATCH_UP: &str = "مفيش";
@@ -1105,7 +1105,9 @@ pub mod order {
 
 pub mod oral {
     pub const MISSED_HINT: &str = "راجع السؤال ده في المراجعة";
-    pub const TITLE: &str = "امتحان شفوي";
+    // Step 1 has no oral exam: this is saying the answer out loud, then
+    // checking it against the book (UX #299).
+    pub const TITLE: &str = "سمّع لنفسك";
     pub const LECTURE: &str = "المحاضرة";
     pub const ALL_LECTURES: &str = "كل المحاضرات الجاهزة";
     pub const SIZE: &str = "عدد الأسئلة";
@@ -1116,9 +1118,9 @@ pub mod oral {
     pub const AUTO: &str = "كمّل لوحدك بعد الإجابة";
     pub const AUTO_HINT: &str =
         "لو ما ضغطتش على تقييم في 8 ثواني، يعدّي للسؤال اللي بعده من غير ما يسجّل حاجة.";
-    pub const AVAILABLE: &str = "ينفع يتسألوا شفوي:";
+    pub const AVAILABLE: &str = "ينفع تسمّعهم:";
     pub const START: &str = "ابدأ";
-    pub const EMPTY: &str = "لسه مفيش محاضرات جاهزة فيها أسئلة شفوي. أول ما محاضرة تخلص هتلاقيها هنا.";
+    pub const EMPTY: &str = "لسه مفيش محاضرات جاهزة فيها أسئلة تتسمّع. أول ما محاضرة تخلص هتلاقيها هنا.";
     pub const NO_VOICE: &str = "مفيش صوت إنجليزي شغّال على الجهاز ده، فالأسئلة هتظهر مكتوبة بس. على أندرويد: الإعدادات ← تحويل النص إلى كلام ← نزّل صوت English.";
 
     pub const HONEST: &str = "مفيش تسجيل لصوتك ولا تصحيح آلي: انت اللي بتقارن إجابتك بنقاط الكتاب وتقيّم نفسك.";
@@ -1136,7 +1138,7 @@ pub mod oral {
     pub const THINKING: &str = "فكّر وجاوب بصوتك";
     pub const WHAT_ELSE: &str = "وإيه كمان؟";
     pub const ANSWER: &str = "الإجابة";
-    pub const FOLLOW_UP: &str = "سؤال الممتحن بعد الكارت";
+    pub const FOLLOW_UP: &str = "سؤال كمان بعد الكارت";
     pub const AGAIN_BADGE: &str = "تاني مرة";
     pub const PASS: &str = "كفاية تذكر";
     pub const OF: &str = "من";
@@ -1149,8 +1151,8 @@ pub mod oral {
     pub const GOOD_HINT: &str = "جاوبت صح";
     pub const END: &str = "إنهاء";
     /// The Android notification channel for oral mode in the background.
-    pub const CHANNEL: &str = "المذاكرة الشفوي";
-    pub const CHANNEL_HINT: &str = "التحكم في الشفوي وهو شغّال في الخلفية";
+    pub const CHANNEL: &str = "التسميع بصوتك";
+    pub const CHANNEL_HINT: &str = "التحكم في التسميع وهو شغّال في الخلفية";
 
     pub const DONE: &str = "خلصت الجلسة";
     pub const DONE_GOOD: &str = "تمام";
@@ -1163,6 +1165,8 @@ pub mod oral {
 }
 
 pub mod case {
+    pub const TITLE: &str = "حالات";
+    pub const SUB: &str = "حالة خطوة بخطوة: فكّر زي الامتحان، وصحّح كل قرار قبل اللي بعده.";
     pub const SAVE_FAILED: &str = "ما عرفتش أحفظ الإجابة. إجابتك لسه موجودة؛ جرّب تاني قبل ما تقفل.";
     pub const EMPTY: &str = "لسه مفيش حالات. هتظهر هنا أول ما محاضراتها تتكتب.";
     pub const STEP: &str = "خطوة";

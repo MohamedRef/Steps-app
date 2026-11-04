@@ -52,7 +52,9 @@
   font-weight: 600;
 }
 .td-hero .td-go { margin-block-start: var(--sp-2); inline-size: 100%; justify-content: center; gap: var(--sp-2); }
-@media (min-width: 600px) { .td-hero .td-go { inline-size: auto; align-self: start; min-inline-size: 18rem; } }
+/* Never wider than the hero: in the narrow plan column at 840px+ an 18rem
+   minimum pushed the button's edge out of the card (UX #291). */
+@media (min-width: 600px) { .td-hero .td-go { inline-size: auto; align-self: start; min-inline-size: min(18rem, 100%); max-inline-size: 100%; } }
 .td-hero .td-go .icon { inline-size: 1.15rem; block-size: 1.15rem; }
 /* The plan's day inside the hero: ring and one line, on the brand colour. */
 .td-hero .plan-line { color: inherit; }
@@ -60,6 +62,11 @@
 .td-hero .ring { background: conic-gradient(var(--on-accent) var(--p), color-mix(in srgb, var(--on-accent) 25%, transparent) 0); }
 .td-hero .ring-hole { background: var(--accent); color: var(--on-accent); }
 .td-hero .note { background: color-mix(in srgb, var(--on-accent) 14%, transparent); color: inherit; }
+/* A plan card inside the hero (the rebalance offer) takes the hero's ink:
+   on --surface it was dark text on a dark card in Night, white on white in
+   Day. Its button stands out like the start button. */
+.td-hero .card { background: color-mix(in srgb, var(--on-accent) 14%, transparent); border-color: transparent; color: inherit; box-shadow: none; }
+.td-hero .card .btn-primary { background: var(--surface); border-color: transparent; color: var(--accent); }
 .td-hero .btn-link { color: inherit; text-decoration: underline; }
 .td-hero .session-start .btn-primary { background: var(--surface); border-color: transparent; color: var(--accent); }
 .td-hero .session-start .muted { color: inherit; opacity: 0.85; }
@@ -82,6 +89,14 @@
 @media (max-width: 839.98px) {
   .today-cols > .tab-aside { display: none; }
 }
+/* Beside the plan only when it gets a real column: from 840px the side
+   rail leaves two ~290px columns, and lecture titles broke one letter per
+   line (UX #291). Until 1100px Today is one column, as on a tablet. */
+@media (min-width: 840px) and (max-width: 1099.98px) {
+  .tab-cols.today-cols[data-wide] { grid-template-columns: minmax(0, 1fr); }
+  .today-cols > .tab-aside { display: none; }
+  .today-cols > .tab-main { position: static; max-block-size: none; overflow: visible; }
+}
 
 .in-progress, .library-head { display: flex; flex-direction: column; gap: var(--sp-2); }
 button.library-note { border: 0; color: inherit; }
@@ -103,6 +118,16 @@ button.library-note { border: 0; color: inherit; }
 .progress-row .progress { display: block; margin-block: var(--sp-1); }
 .progress-row .progress-fill { display: block; }
 .chip.due { background: var(--accent-soft); border-color: transparent; color: var(--accent); font-weight: 600; }
+/* The chip goes under the title on phones, and in Today's lecture column
+   whenever it is narrow, so the title keeps the row's width. */
+@container lectures (max-width: 26rem) {
+  .tap-row.lecture-row { flex-wrap: wrap; }
+  /* A real basis, so the chip can't fit beside the title and wraps. */
+  .tap-row.lecture-row > .tap-row-main { flex: 1 1 60%; }
+  .tap-row.lecture-row > .chip { order: 3; margin-inline-start: calc(2.4rem + var(--sp-3)); }
+  .tap-row.lecture-row > .chev { order: 2; }
+}
+.today-cols > .tab-aside { container: lectures / inline-size; }
 @media (max-width: 599px) {
   .tap-row.progress-row, .tap-row.lecture-row { flex-wrap: wrap; }
   .tap-row.progress-row > .chip, .tap-row.lecture-row > .chip { order: 3; margin-inline-start: calc(2.4rem + var(--sp-3)); }
@@ -154,7 +179,7 @@ table.plan th { color: var(--muted); font-weight: 600; }
 .app[data-appearance="glossy"] .td-hero .td-go { border-radius: var(--radius-pill); }
 
 /* Settings › Review: the page gate switch (A2). */
-.st-switch { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); cursor: pointer; }
+.st-switch { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); cursor: pointer; min-block-size: var(--target, 48px); }
 .st-switch-text { display: grid; gap: var(--sp-1, 0.25rem); }
 .st-switch-text h2 { margin: 0; }
 .td-locked { margin: 0; }
