@@ -25,7 +25,8 @@ fn main() {
 
     let mut files = Vec::new();
     for dir in std::fs::read_dir(&content).expect("content/ exists").flatten() {
-        if !dir.path().is_dir() {
+        // content/glossary/ holds the per-course glossaries, not lectures.
+        if !dir.path().is_dir() || dir.file_name() == "glossary" {
             continue;
         }
         println!("cargo:rerun-if-changed={}", dir.path().display());
@@ -87,9 +88,30 @@ fn main() {
     let pack = out.join("content.pack");
     std::fs::write(&pack, Pack::new(index, lectures).with_lessons(lessons).with_program(program).encode())
         .unwrap();
+    // The per-course glossaries (content/glossary/<course>.yaml), embedded
+    // beside content/glossary.yaml (crate::hover).
+    let glossary_dir = content.join("glossary");
+    println!("cargo:rerun-if-changed={}", glossary_dir.display());
+    let mut parts: Vec<PathBuf> = std::fs::read_dir(&glossary_dir)
+        .into_iter()
+        .flatten()
+        .flatten()
+        .map(|e| e.path())
+        .filter(|p| p.extension().is_some_and(|e| e == "yaml"))
+        .collect();
+    parts.sort();
+    let mut glossary_parts = String::from("pub const GLOSSARY_PARTS: &[&str] = &[\n");
+    for p in &parts {
+        println!("cargo:rerun-if-changed={}", p.display());
+        glossary_parts.push_str(&format!("    include_str!({:?}),\n", p.display().to_string()));
+    }
+    glossary_parts.push_str("];\n");
     std::fs::write(
         out.join("embedded.rs"),
-        format!("pub const PACK: &[u8] = include_bytes!({:?});\n", pack.display().to_string()),
+        format!(
+            "pub const PACK: &[u8] = include_bytes!({:?});\n{glossary_parts}",
+            pack.display().to_string()
+        ),
     )
     .unwrap();
 }

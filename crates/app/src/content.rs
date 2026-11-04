@@ -16,13 +16,16 @@ mod embedded {
     include!(concat!(env!("OUT_DIR"), "/embedded.rs"));
 }
 
+/// The per-course glossaries, `content/glossary/<course>.yaml` (build.rs).
+pub const GLOSSARY_PARTS: &[&str] = embedded::GLOSSARY_PARTS;
+
 pub struct Library {
     pub index: Index,
     /// Written lectures, by id (`hb.L01`).
     pub lectures: BTreeMap<String, Lecture>,
     /// Lesson files, by lecture id (`hb.L01`), in book order.
     pub lessons: BTreeMap<String, LessonFile>,
-    /// The MSc's courses (`content/program.yaml`).
+    /// First Aid's disciplines and systems as courses (`content/program.yaml`).
     pub program: Program,
 }
 

@@ -47,7 +47,7 @@ The list lives in `steps_protocol::sync::TABLES`. **A new synced table must be a
 ### 3.2 Google sign-in (Google Cloud Console, free)
 1. <https://console.cloud.google.com/> → create a **new** project "Steps" (not Kabar's).
 2. **Google Auth Platform → Branding/Audience**: External, keep it in *Testing*, add your Gmail as a test user.
-3. **Clients → Create client → Desktop app** "Steps desktop". The Mac and Android both use it (browser sign-in with PKCE and a loopback redirect). On Android the redirect lands while Chrome is in front and Android keeps a backgrounded Steps off the network, so the app only waits for the code there; the code exchange and the Steps Cloud sign-in run once Steps is back in front (the page's "ارجع لباطنة" button opens `app.steps://signed-in`), retrying for up to nine minutes.
+3. **Clients → Create client → Desktop app** "Steps desktop". The Mac and Android both use it (browser sign-in with PKCE and a loopback redirect). On Android the redirect lands while Chrome is in front and Android keeps a backgrounded Steps off the network, so the app only waits for the code there; the code exchange and the Steps Cloud sign-in run once Steps is back in front (the page's "ارجع لـ Steps" button opens `app.steps://signed-in`), retrying for up to nine minutes.
 4. Put its client id in `crates/server/wrangler.toml`:
    ```toml
    GOOGLE_CLIENT_IDS = "1234-desktop.apps.googleusercontent.com"

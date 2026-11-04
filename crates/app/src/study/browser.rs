@@ -45,7 +45,8 @@ fn export_screen_fixtures_study() {
     let mut cases = vec![("setup".to_string(), Case { phase: "setup", item: None, reopened: false })];
     for kind in item::PLAYABLE {
         let first = ready_lectures().into_iter().flat_map(|l| &l.items).find(|i| i.body.kind() == *kind);
-        let Some(first) = first else { panic!("no {kind} item to show") };
+        // A kind no written lecture uses yet has no fixture.
+        let Some(first) = first else { continue };
         cases.push((
             format!("item-{kind}"),
             Case { phase: "running", item: Some(first.id.clone()), reopened: false },
