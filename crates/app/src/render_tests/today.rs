@@ -101,7 +101,8 @@ fn a_started_lecture_shows_in_progress_and_opens_its_page() {
     app.assert_has(tx::IN_PROGRESS);
     app.assert_has(tx::STARTED);
     app.tap(tx::STARTED);
-    let title = crate::content::Library::get().title("cvs.L01").to_string();
+    let lecture = card.id.rsplit_once('.').unwrap().0;
+    let title = crate::content::Library::get().title(lecture).to_string();
     app.assert_has(&title);
 }
 

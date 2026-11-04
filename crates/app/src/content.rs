@@ -150,12 +150,12 @@ impl Library {
         self.program.course_for(id)
     }
 
-    /// The course's short Arabic name (`كبد`), else its id.
+    /// The course's short Arabic name (`قلب`), else its id.
     pub fn course_short<'a>(&'a self, id: &'a str) -> &'a str {
         self.course_of(id).map_or(steps_core::program::course_of(id), |c| c.short.as_str())
     }
 
-    /// `كبد 3`: a lecture named where its course isn't on screen.
+    /// `قلب 3`: a lecture named where its course isn't on screen.
     pub fn lecture_tag(&self, id: &str) -> String {
         format!("{} {}", self.course_short(id), lecture_no(id))
     }

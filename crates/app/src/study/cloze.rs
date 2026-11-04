@@ -11,14 +11,14 @@ use super::grade::GradeRow;
 use crate::i18n::study as tx;
 
 #[derive(Debug, Clone, PartialEq)]
-enum Seg {
+pub(crate) enum Seg {
     Text(String),
     Blank { answer: String, hint: Option<String> },
 }
 
 /// Splits `{{c1::answer::hint}}` text into plain runs and blanks. Malformed
 /// braces stay as text (the validator rejects them anyway).
-fn segments(text: &str) -> Vec<Seg> {
+pub(crate) fn segments(text: &str) -> Vec<Seg> {
     let mut out = Vec::new();
     let mut rest = text;
     while let Some(start) = rest.find("{{c") {
