@@ -1,5 +1,5 @@
 //! Browser fixtures for the production lesson player: the first step of each
-//! kind in book order, in Steps and in Pages, opened at that step from a saved
+//! kind in book order (and every `try` and `table` step), in Steps and in Pages, opened at that step from a saved
 //! attempt the way the app reopens a lesson (tests/screens-browser.cjs).
 
 use super::*;
@@ -50,15 +50,25 @@ fn export_screen_fixtures_learn() {
     for (_, lesson) in Library::get().all_lessons() {
         for (at, step) in lesson.steps.iter().enumerate() {
             let kind = step.body.kind();
-            if !kinds.insert(kind) {
-                continue;
-            }
-            for view in [View::Steps, View::Pages] {
+            // The first step of each kind in both views; after that every
+            // `try` and `table` step again in Steps, because the item or table
+            // inside each one has its own width (a 3-column table at 320px).
+            let first = kinds.insert(kind);
+            let views: &[View] = match (first, kind) {
+                (true, _) => &[View::Steps, View::Pages],
+                (false, "try" | "table") => &[View::Steps],
+                _ => continue,
+            };
+            for &view in views {
                 let case = Case { lesson: lesson.id.clone(), at, view, draft: None, abbr: false };
                 let mut dom = VirtualDom::new_with_props(root, case);
                 dom.rebuild_in_place();
                 let view = if view == View::Pages { "pages" } else { "steps" };
-                let file = format!("lesson-{kind}-{view}.html");
+                let file = if first {
+                    format!("lesson-{kind}-{view}.html")
+                } else {
+                    format!("lesson-{kind}-{}-{}-{view}.html", lesson.id, at + 1)
+                };
                 write_page(&dir, &file, &dom);
                 manifest.push(serde_json::json!({
                     "file": file, "screen": "learn", "kind": kind, "view": view,

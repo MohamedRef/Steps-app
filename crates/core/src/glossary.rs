@@ -57,12 +57,18 @@ impl Entry {
 }
 
 impl Glossary {
-    /// Adds a course file's entries and plain words to this glossary. The
-    /// merged glossary is what `validate::glossary` checks, so a term listed
-    /// in two files is still caught.
+    /// Adds a course file's entries and plain words to this glossary. Each
+    /// course file keeps every term its lectures use, even one another file
+    /// also has (nothing is removed for being repeated elsewhere); the merged
+    /// glossary holds one entry per term, from the file read first
+    /// (`glossary.yaml`, then the course files in name order). A term listed
+    /// twice within one file is still caught by `validate::glossary`.
     pub fn absorb(&mut self, part: Glossary) {
-        self.entries.extend(part.entries);
-        self.plain.extend(part.plain);
+        let known: std::collections::HashSet<String> =
+            self.entries.iter().flat_map(|e| e.spellings()).map(str::to_string).collect();
+        let words: std::collections::HashSet<String> = self.plain.iter().cloned().collect();
+        self.entries.extend(part.entries.into_iter().filter(|e| !e.spellings().any(|s| known.contains(s))));
+        self.plain.extend(part.plain.into_iter().filter(|w| !words.contains(w)));
     }
 
     /// Finds the entry for a word under the pointer. Abbreviations match

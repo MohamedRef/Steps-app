@@ -1,0 +1,504 @@
+schema: steps.content/v1
+lecture: bio.L03
+title: Laboratory techniques
+book: { chapter: 1, pages: [50, 53] }
+topics:
+  - { id: elastin, title: Elastin }
+  - { id: pcr, title: Polymerase chain reaction }
+  - { id: crispr-cas9, title: CRISPR/Cas9 }
+  - { id: blotting, title: Blotting procedures }
+  - { id: flow-cytometry, title: Flow cytometry }
+  - { id: microarrays, title: Microarrays }
+  - { id: elisa, title: Enzyme-linked immunosorbent assay }
+  - { id: karyotyping, title: Karyotyping }
+  - { id: molecular-cloning, title: Molecular cloning }
+items:
+  # ---------- p50: elastin, Marfan, homocystinuria ----------
+  - id: bio.L03.001
+    kind: card
+    topic: elastin
+    front: Where is elastin found?
+    back: Skin, lungs, large arteries, elastic ligaments, vocal cords, epiglottis and ligamenta flava.
+    src: { page: 50, quote: "Stretchy protein within skin, lungs, large arteries, elastic ligaments, vocal cords, epiglottis, ligamenta flava" }
+    status: unverified
+  - id: bio.L03.002
+    kind: card
+    topic: elastin
+    front: How does the amino acid makeup of elastin differ from collagen?
+    back: Elastin is rich in nonhydroxylated proline, glycine and lysine; collagen has hydroxylated residues.
+    src: { page: 50, quote: "Rich in nonhydroxylated proline, glycine, and lysine residues, vs the hydroxylated residues of collagen." }
+    status: unverified
+  - id: bio.L03.003
+    kind: card
+    topic: elastin
+    front: How is elastin assembled, and what gives it its elastic properties?
+    back: Tropoelastin on a fibrillin scaffold; extracellular cross-linking by lysyl oxidase gives it elasticity.
+    src: { page: 50, quote: "Tropoelastin with fibrillin scaffolding. Cross-linking occurs extracellularly via lysyl oxidase and gives elastin its elastic properties." }
+    status: unverified
+  - id: bio.L03.004
+    kind: card
+    topic: elastin
+    front: What breaks down elastin, what normally inhibits it, and what happens in deficiency?
+    back: Elastase, normally inhibited by α1-antitrypsin. α1-antitrypsin deficiency → unopposed elastase → COPD.
+    src: { page: 50, quote: "Broken down by elastase, which is normally inhibited by α1-antitrypsin. α1-Antitrypsin deficiency results in unopposed elastase activity, which can cause COPD." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L03.005
+    kind: card
+    topic: elastin
+    front: What is the genetic defect in Marfan syndrome?
+    back: Autosomal dominant FBN1 mutation on chromosome 15 (fifteen) → defective fibrillin-1, a glycoprotein that sheathes elastin and sequesters TGF-β. Variable expression from pleiotropy.
+    src: { page: 50, quote: "FBN1 gene mutation on chromosome 15 (fifteen) results in defective fibrillin-1, a glycoprotein that forms a sheath around elastin and sequesters TGF-β." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L03.006
+    kind: enumerate
+    topic: elastin
+    prompt: Enumerate the findings of Marfan syndrome.
+    points:
+      - Tall with long extremities
+      - Chest wall deformity (pectus carinatum or excavatum)
+      - Hypermobile joints
+      - Arachnodactyly (long, tapering fingers and toes)
+      - Cystic medial necrosis of the aorta; aortic root aneurysm rupture or dissection
+      - Mitral valve prolapse
+      - ↑ risk of spontaneous pneumothorax
+    pass: 5
+    hook: "Marfan بيضرب 3 أماكن: الهيكل (طويل، صدر، مفاصل، صوابع)، القلب (aorta و mitral)، والرئة (pneumothorax). والعين؟ الـ lens بيطلع لفوق."
+    src: { page: 50, quote: "Findings: tall with long extremities; chest wall deformity (pectus carinatum [pigeon chest] or pectus excavatum A ); hypermobile joints; long, tapering fingers and toes (arachnodactyly); cystic medial necrosis of aorta" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L03.007
+    kind: card
+    topic: elastin
+    front: What is the most common cause of death in Marfan syndrome?
+    back: Aortic root aneurysm rupture or dissection.
+    src: { page: 50, quote: "aortic root aneurysm rupture or dissection (most common cause of death)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L03.008
+    kind: card
+    topic: elastin
+    front: What most commonly causes homocystinuria, and how does it resemble Marfan?
+    back: Cystathionine-β-synthase deficiency → homocysteine buildup. Pectus deformity, tall stature, ↑ arm:height ratio, ↓ upper:lower segment ratio, arachnodactyly, joint hyperlaxity, skin hyperelasticity, scoliosis, and fair complexion (unlike Marfan).
+    src: { page: 50, quote: "Homocystinuria—most commonly due to cystathionine‐β‐synthase deficiency leading to homocysteine buildup." }
+    status: unverified
+  - id: bio.L03.009
+    kind: table
+    topic: elastin
+    title: Marfan syndrome vs homocystinuria
+    columns: [Feature, Marfan syndrome, Homocystinuria]
+    rows:
+      - [Inheritance, Autosomal dominant, Autosomal recessive]
+      - [Intellect, Normal, Decreased]
+      - [Vascular complications, Aortic root dilatation, Thrombosis]
+      - [Lens dislocation, "Upward/temporal (Marfan fans out)", "Downward/nasal"]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 1], [2, 2], [3, 1], [3, 2]]
+    src: { page: 50, quote: "INHERITANCE Autosomal dominant Autosomal recessive INTELLECT Normal Decreased VASCULAR COMPLICATIONS Aortic root dilatation Thrombosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L03.010
+    kind: mcq
+    topic: elastin
+    stem: >-
+      A 19-year-old college basketball player collapses with sudden tearing chest pain radiating to his
+      back. He is 203 cm tall with long fingers, a sunken sternum and upward-displaced lenses that were
+      found last year. His father died suddenly at 35. A defect in which protein is the underlying cause?
+    options:
+      - Type III collagen
+      - Fibrillin-1
+      - Cystathionine-β-synthase
+      - Elastase
+      - Lysyl oxidase
+    answer: 1
+    why:
+      - "Type III collagen defects give vascular Ehlers-Danlos (thin skin, bruising), not tall stature and upward lens dislocation."
+      - "Right. Marfan syndrome: FBN1 mutation → defective fibrillin-1. Aortic root dissection is the most common cause of death; lenses go up and out (Marfan fans out)."
+      - "CBS deficiency (homocystinuria) gives downward lens dislocation, thrombosis and ↓ intellect, recessive."
+      - "Unopposed elastase damages lungs (COPD) in α1-antitrypsin deficiency."
+      - "Lysyl oxidase is copper dependent and fails in Menkes disease."
+    src: { page: 50, quote: "FBN1 gene mutation on chromosome 15 (fifteen) results in defective fibrillin-1, a glycoprotein that forms a sheath around elastin and sequesters TGF-β." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L03.011
+    kind: mcq
+    topic: elastin
+    stem: >-
+      A 14-year-old girl with learning difficulties is tall and thin with long fingers, scoliosis and fair
+      skin. She has had a deep vein thrombosis of the leg. Slit-lamp examination shows both lenses
+      displaced downward and inward. Her parents are unaffected first cousins. Which finding is most
+      likely?
+    options:
+      - FBN1 mutation on chromosome 15
+      - Elevated plasma homocysteine
+      - Low serum α1-antitrypsin
+      - Absent type III procollagen
+      - Elevated very-long-chain fatty acids
+    answer: 1
+    why:
+      - "FBN1 (Marfan) is dominant, with normal intellect, aortic dilatation and upward lens dislocation."
+      - "Right. Homocystinuria (cystathionine-β-synthase deficiency, autosomal recessive): Marfan-like body, ↓ intellect, thrombosis, downward/nasal lens dislocation, fair complexion."
+      - "α1-antitrypsin deficiency causes COPD from unopposed elastase."
+      - "Type III procollagen defects cause vascular Ehlers-Danlos."
+      - "VLCFA rise in peroxisomal disorders."
+    src: { page: 50, quote: "LENS DISLOCATION Upward/temporal (Marfan fans out) Downward/nasal" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p50: PCR ----------
+  - id: bio.L03.012
+    kind: card
+    topic: pcr
+    front: What does PCR do, and what diagnoses does the book give as examples?
+    back: It amplifies a desired fragment of DNA. Examples are neonatal HIV and herpes encephalitis.
+    src: { page: 50, quote: "Molecular biology lab procedure used to amplify a desired fragment of DNA. Useful as a diagnostic tool (eg, neonatal HIV, herpes encephalitis)." }
+    status: unverified
+  - id: bio.L03.013
+    kind: order
+    topic: pcr
+    prompt: Put the steps of one PCR cycle in order.
+    steps:
+      - "Denaturation: template, primers, heat-stable DNA polymerase and dNTPs are heated to separate the strands"
+      - "Annealing: the sample is cooled and primers bind the target sequence"
+      - "Elongation: temperature is raised and the polymerase adds dNTPs after each primer"
+    src: { page: 50, quote: "Annealing—sample is cooled. DNA primers anneal to the specific sequence to be amplified on the DNA template." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L03.014
+    kind: mcq
+    topic: pcr
+    stem: >-
+      A 6-week-old infant is born to a mother with untreated HIV. Maternal IgG crosses the placenta, so
+      the infant's anti-HIV antibody test is positive. Which test best shows whether the infant is
+      infected?
+    options:
+      - ELISA for anti-HIV antibodies
+      - Western blot for anti-HIV antibodies
+      - PCR for HIV nucleic acid
+      - Flow cytometry for CD4+ count only
+      - Karyotyping
+    answer: 2
+    why:
+      - "ELISA detects antibodies, which may be the mother's IgG."
+      - "Western blot also detects antibodies, with the same problem."
+      - "Right. PCR amplifies the virus's own nucleic acid; neonatal HIV is the book's example of PCR as a diagnostic tool."
+      - "A CD4+ count follows HIV but doesn't diagnose infection in an infant."
+      - "Karyotyping finds chromosomal imbalances."
+    src: { page: 50, quote: "Useful as a diagnostic tool (eg, neonatal HIV, herpes encephalitis)." }
+    status: unverified
+  # ---------- p51: CRISPR/Cas9 ----------
+  - id: bio.L03.015
+    kind: card
+    topic: crispr-cas9
+    front: What are the 2 parts of CRISPR/Cas9, and what does each do?
+    back: A guide RNA (gRNA) complementary to the target DNA, and Cas9, an endonuclease that makes a single- or double-strand break at the target site.
+    src: { page: 51, quote: "Consists of a guide RNA (gRNA), which is complementary to a target DNA sequence, and an endonuclease (Cas9), which makes a single- or double-strand break at the target site." }
+    status: unverified
+  - id: bio.L03.016
+    kind: card
+    topic: crispr-cas9
+    front: After Cas9 cuts, how is a knock-out made and how is a knock-in made?
+    back: "Knock-out: nonhomologous end joining (NHEJ) → frameshift/inactivation. Knock-in: homology-directed repair (HDR) with donor DNA → edited sequence."
+    src: { page: 51, quote: "Frameshift/inactivation (”knock-out”) Edited sequence (”knock-in”) NHEJ Donor DNA + HDR" }
+    status: unverified
+  - id: bio.L03.017
+    kind: card
+    topic: crispr-cas9
+    front: What are the applications of CRISPR/Cas9 in the book?
+    back: Removing virulence factors from pathogens, replacing disease-causing alleles with healthy variants (eg, sickle cell disease), and targeting tumor cells.
+    src: { page: 51, quote: "Applications include removing virulence factors from pathogens, replacing disease-causing alleles of genes with healthy variants (eg, sickle cell disease), and specifically targeting tumor cells." }
+    status: unverified
+  - id: bio.L03.018
+    kind: mcq
+    topic: crispr-cas9
+    stem: >-
+      Researchers want to correct the sickle cell mutation in a patient's hematopoietic stem cells. They
+      deliver a guide RNA matching the mutant β-globin sequence, Cas9, and a donor DNA template carrying
+      the normal sequence. Which repair process must the cells use to insert the correct sequence?
+    options:
+      - Nonhomologous end joining
+      - Homology-directed repair
+      - Mismatch repair
+      - Nucleotide excision repair
+      - Base excision repair
+    answer: 1
+    why:
+      - "NHEJ joins the cut ends without a template and gives a frameshift knock-out."
+      - "Right. A donor template with HDR gives an edited sequence (knock-in), replacing the disease allele."
+      - "Mismatch repair fixes replication errors in the new strand, not Cas9 cuts."
+      - "NER removes bulky lesions like pyrimidine dimers."
+      - "BER removes single damaged bases."
+    src: { page: 51, quote: "Frameshift/inactivation (”knock-out”) Edited sequence (”knock-in”) NHEJ Donor DNA + HDR" }
+    status: unverified
+  # ---------- p51: blotting procedures ----------
+  - id: bio.L03.019
+    kind: table
+    topic: blotting
+    title: Blotting procedures (SNoW DRoP)
+    columns: [Blot, Sample, Probe, Detects]
+    rows:
+      - [Southern, DNA, Labeled DNA probe, "Size of specific sequences (heterozygosity, CGG repeats in FMR1)"]
+      - [Northern, RNA, Labeled DNA probe, "mRNA levels and size (gene expression); splicing errors"]
+      - [Western, Protein, Labeled antibody, Specific protein and its quantity]
+      - [Southwestern, Protein, Labeled dsDNA, "DNA-binding proteins (eg, transcription factors)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [2, 2], [3, 2], [3, 3]]
+    src: { page: 51, quote: "SNoW DRoP: Southern = DNA Northern = RNA Western = Protein" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L03.020
+    kind: order
+    topic: blotting
+    prompt: Put the steps of a Southern blot in order.
+    steps:
+      - DNA is cut enzymatically into smaller pieces
+      - The pieces are separated by gel electrophoresis
+      - They are transferred to a membrane
+      - The membrane is exposed to a labeled DNA probe that anneals to its complementary strand
+      - The labeled double-stranded DNA is visualized on film or a digital imager
+    src: { page: 51, quote: "DNA sample is enzymatically cleaved into smaller pieces, which are separated by gel electrophoresis, and then transferred to a membrane." }
+    status: unverified
+  - id: bio.L03.021
+    kind: mcq
+    topic: blotting
+    stem: >-
+      A 5-year-old boy has developmental delay, a long face and large ears. To confirm the diagnosis, his
+      DNA is cut with restriction enzymes, run on a gel, transferred to a membrane and hybridized with a
+      labeled probe for the FMR1 gene; the band is much larger than normal. Which technique was used?
+    options:
+      - Northern blot
+      - Southern blot
+      - Western blot
+      - Southwestern blot
+      - ELISA
+    answer: 1
+    why:
+      - "Northern blot runs RNA, not cut DNA."
+      - "Right. Southern blot (DNA) sizes specific sequences, such as the number of CGG repeats in FMR1 for fragile X."
+      - "Western blot detects proteins with antibodies."
+      - "Southwestern blot probes protein with dsDNA to find DNA-binding proteins."
+      - "ELISA detects antigens or antibodies."
+    src: { page: 51, quote: "Useful to identify size of specific sequences (eg, determination of heterozygosity [as seen in image], # of CGG repeats in FMR1 to diagnose fragile X syndrome)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L03.022
+    kind: mcq
+    topic: blotting
+    stem: >-
+      A researcher suspects that a mutation in a patient's muscle cells causes an exon to be skipped when
+      the dystrophin transcript is processed. She wants to see whether the dystrophin mRNA is shorter
+      than normal. Which technique fits best?
+    options:
+      - Southern blot
+      - Northern blot
+      - Western blot
+      - Southwestern blot
+      - Karyotyping
+    answer: 1
+    why:
+      - "A Southern blot sizes DNA, which wouldn't show a processing error."
+      - "Right. Northern blot runs RNA and shows mRNA level and size; it detects splicing errors."
+      - "Western blot would show the protein, not the transcript."
+      - "Southwestern blot finds DNA-binding proteins."
+      - "Karyotyping shows whole chromosomes."
+    src: { page: 51, quote: "Useful for studying mRNA levels and size, which are reflective of gene expression. Detects splicing errors." }
+    status: unverified
+  # ---------- p52: flow cytometry ----------
+  - id: bio.L03.023
+    kind: card
+    topic: flow-cytometry
+    front: What does flow cytometry measure, and how?
+    back: Size, granularity and protein expression (immunophenotype) of individual cells. Cells are tagged with fluorescent-labeled antibodies and analyzed one at a time with a laser, measuring light scatter and fluorescence.
+    src: { page: 52, quote: "Laboratory technique to assess size, granularity, and protein expression (immunophenotype) of individual cells in a sample." }
+    status: unverified
+  - id: bio.L03.024
+    kind: card
+    topic: flow-cytometry
+    front: In a CD3 vs CD8 flow scatter plot, why is the right lower quadrant (CD8+ CD3−) empty?
+    back: Because all CD8-expressing cells also express CD3.
+    src: { page: 52, quote: "In this example, right lower quadrant is empty because all CD8-expressing cells also express CD3." }
+    status: unverified
+  - id: bio.L03.025
+    kind: card
+    topic: flow-cytometry
+    front: In which conditions is flow cytometry commonly used?
+    back: Hematologic workups (leukemia, paroxysmal nocturnal hemoglobinuria, fetal RBCs in the pregnant person's blood) and immunodeficiencies (CD4+ count in HIV).
+    src: { page: 52, quote: "Commonly used in workup of hematologic abnormalities (eg, leukemia, paroxysmal nocturnal hemoglobinuria, fetal RBCs in pregnant person’s blood) and immunodeficiencies (eg, CD4+ cell count in HIV)." }
+    status: unverified
+  - id: bio.L03.026
+    kind: mcq
+    topic: flow-cytometry
+    stem: >-
+      A 34-year-old man with HIV starts antiretroviral therapy. His physician wants to follow how many of
+      his circulating lymphocytes carry a specific surface marker, counting cells one by one after
+      tagging them with fluorescent antibodies. Which technique does this?
+    options:
+      - ELISA
+      - Flow cytometry
+      - Western blot
+      - Microarray
+      - PCR
+    answer: 1
+    why:
+      - "ELISA detects antigen or antibody in a sample, not markers on single cells."
+      - "Right. Flow cytometry tags cells with fluorescent antibodies and reads them one at a time; the CD4+ count in HIV is the book's example."
+      - "Western blot identifies a protein in a lysate."
+      - "Microarrays compare gene transcription between RNA samples."
+      - "PCR measures nucleic acid (viral load), not cells."
+    src: { page: 52, quote: "Commonly used in workup of hematologic abnormalities (eg, leukemia, paroxysmal nocturnal hemoglobinuria, fetal RBCs in pregnant person’s blood) and immunodeficiencies (eg, CD4+ cell count in HIV)." }
+    status: unverified
+  # ---------- p52: microarrays ----------
+  - id: bio.L03.027
+    kind: card
+    topic: microarrays
+    front: What are microarrays used for?
+    back: Comparing the relative transcription of genes in two RNA samples. With DNA, they detect SNPs and copy number variants for genotyping, clinical genetic testing, forensics, cancer mutations and genetic linkage analysis.
+    src: { page: 52, quote: "Used to compare the relative transcription of genes in two RNA samples. Can detect single nucleotide polymorphisms (SNPs) and copy number variants (CNVs) for genotyping" }
+    status: unverified
+  - id: bio.L03.028
+    kind: mcq
+    topic: microarrays
+    stem: >-
+      A research team compares a patient's breast tumor with adjacent normal tissue to find which of
+      thousands of genes are switched on or off in the tumor. They label RNA from each sample with a
+      different dye and hybridize both to one chip of known DNA probes. Which technique is this?
+    options:
+      - Northern blot
+      - Microarray
+      - Spectral karyotyping
+      - Southern blot
+      - Flow cytometry
+    answer: 1
+    why:
+      - "A Northern blot looks at one transcript at a time."
+      - "Right. Microarrays compare relative transcription of genes in two RNA samples."
+      - "Spectral karyotyping paints whole chromosomes."
+      - "A Southern blot sizes DNA sequences."
+      - "Flow cytometry reads proteins on single cells."
+    src: { page: 52, quote: "Used to compare the relative transcription of genes in two RNA samples." }
+    status: unverified
+  # ---------- p52: ELISA ----------
+  - id: bio.L03.029
+    kind: table
+    topic: elisa
+    title: Direct vs indirect ELISA
+    columns: [Type, Detects, Labeled antibody]
+    rows:
+      - [Direct ELISA, A specific antigen, Labeled 1° antibody]
+      - [Indirect ELISA, An antibody in the patient's blood, Labeled 2° antibody]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 52, quote: "Immunologic test used to detect the presence of either a specific antigen (in direct ELISA) or antibody (in indirect ELISA) in a patient’s blood sample." }
+    status: unverified
+  - id: bio.L03.030
+    kind: card
+    topic: elisa
+    front: How does ELISA produce a signal, and how does its specificity compare with Western blot?
+    back: An antibody linked to an enzyme acts on added substrate to give a detectable signal. It can have high sensitivity and specificity but is less specific than Western blot; often used to screen for HIV.
+    src: { page: 52, quote: "Can have high sensitivity and specificity, but is less specific than Western blot. Often used to screen for HIV infection." }
+    status: unverified
+  - id: bio.L03.031
+    kind: mcq
+    topic: elisa
+    stem: >-
+      A blood donor's sample is tested by adding it to wells coated with HIV antigens, then adding an
+      enzyme-linked anti-human IgG antibody and a substrate; the well turns colored. What does this
+      result show?
+    options:
+      - HIV antigen in the donor's blood
+      - Antibodies against HIV in the donor's blood
+      - HIV RNA in the donor's blood
+      - The donor's CD4+ count
+      - An HIV-specific protein separated by size
+    answer: 1
+    why:
+      - "Direct ELISA detects antigen with a labeled primary antibody; here the wells already hold the antigen."
+      - "Right. Indirect ELISA detects the patient's antibody with a labeled secondary antibody; it is often used to screen for HIV."
+      - "Nucleic acid is detected by PCR."
+      - "Cell counts come from flow cytometry."
+      - "Separating proteins by size is Western blot."
+    src: { page: 52, quote: "Immunologic test used to detect the presence of either a specific antigen (in direct ELISA) or antibody (in indirect ELISA) in a patient’s blood sample." }
+    status: unverified
+  # ---------- p53: karyotyping, spectral karyotyping, FISH ----------
+  - id: bio.L03.032
+    kind: card
+    topic: karyotyping
+    front: How is a karyotype prepared?
+    back: Colchicine is added to cultured cells to disrupt mitotic spindles and arrest them at metaphase. Chromosomes are stained with Giemsa and ordered by morphology, size, arm-length ratio and banding pattern.
+    src: { page: 53, quote: "Colchicine is added to cultured cells to disrupt the assembly of mitotic spindles and arrest cells at metaphase of mitosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L03.033
+    kind: card
+    topic: karyotyping
+    front: On what samples can karyotyping be done, and what does it diagnose?
+    back: Blood, bone marrow, amniotic fluid or placental tissue. It diagnoses chromosomal imbalances (eg, autosomal trisomies, sex chromosome disorders).
+    src: { page: 53, quote: "Can be performed on a sample of blood, bone marrow, amniotic fluid, or placental tissue. Used to diagnose chromosomal imbalances (eg, autosomal trisomies, sex chromosome disorders)." }
+    status: unverified
+  - id: bio.L03.034
+    kind: table
+    topic: karyotyping
+    title: What spectral karyotyping shows
+    columns: [Finding, Meaning]
+    rows:
+      - [Translocation, "A chromosome breaks and its piece(s) attach to other chromosome(s)"]
+      - [Duplication, "A second copy of a chromosome → trisomy or tetrasomy"]
+      - [Microdeletion, "No fluorescence at a locus that fluoresces on the other copy"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 53, quote: "Chromosomes are “painted” by hybridization with fluorescent probes that distinguish each chromosome from the others. Used to identify aneuploidies and translocations in a karyotype." }
+    status: unverified
+  - id: bio.L03.035
+    kind: card
+    topic: karyotyping
+    front: What is FISH used for?
+    back: A fluorescent DNA or RNA probe binds specific genes or sites on chromosomes, for specific localization.
+    src: { page: 53, quote: "Fluorescence in situ hybridization (FISH)—fluorescent DNA or RNA probe binds to specific genes or other sites of interest on chromosomes. Used for specific localization." }
+    status: unverified
+  - id: bio.L03.036
+    kind: mcq
+    topic: karyotyping
+    stem: >-
+      A cytogenetics lab receives amniotic fluid from a 39-year-old woman at 16 weeks of gestation. Before
+      staining, the technician adds a drug to the cultured fetal cells so that their chromosomes can be
+      seen condensed and counted. Which phase do the cells stop in, and why?
+    options:
+      - G1, because the drug inhibits CDKs
+      - Metaphase, because the drug disrupts mitotic spindle assembly
+      - S phase, because the drug blocks ribonucleotide reductase
+      - Anaphase, because the drug blocks cohesin cleavage
+      - G0, because the drug removes growth factors
+    answer: 1
+    why:
+      - "CDK inhibition stops cells at G1, before chromosomes condense."
+      - "Right. Colchicine disrupts mitotic spindle assembly and arrests cells at metaphase, when chromosomes are condensed for Giemsa staining."
+      - "Blocking ribonucleotide reductase is hydroxyurea and stops DNA synthesis, with uncondensed chromatin."
+      - "The book's method arrests at metaphase, before anaphase."
+      - "Cells in G0 don't show condensed chromosomes."
+    src: { page: 53, quote: "Colchicine is added to cultured cells to disrupt the assembly of mitotic spindles and arrest cells at metaphase of mitosis." }
+    status: unverified
+  # ---------- p53: molecular cloning ----------
+  - id: bio.L03.037
+    kind: card
+    topic: molecular-cloning
+    front: What is molecular cloning, and what is it used for?
+    back: Production of a recombinant DNA molecule in a bacterial or eukaryotic host cell line; used to make human proteins in bacteria (eg, human growth hormone, insulin).
+    src: { page: 53, quote: "Production of a recombinant DNA molecule in a bacterial or eukaryotic cell line host. Useful for production of human proteins by bacteria (eg, human growth hormone, insulin)." }
+    status: unverified
+  - id: bio.L03.038
+    kind: mcq
+    topic: molecular-cloning
+    stem: >-
+      A 10-year-old girl with type 1 diabetes uses insulin that was made by E coli carrying the human
+      insulin gene inserted into a plasmid. Which laboratory technique made this possible?
+    options:
+      - Polymerase chain reaction
+      - Molecular cloning
+      - Southwestern blot
+      - Spectral karyotyping
+      - ELISA
+    answer: 1
+    why:
+      - "PCR amplifies DNA in a tube; it doesn't make protein."
+      - "Right. Molecular cloning makes recombinant DNA in a bacterial or eukaryotic host to produce human proteins such as insulin and growth hormone."
+      - "Southwestern blot detects DNA-binding proteins."
+      - "Spectral karyotyping paints chromosomes."
+      - "ELISA detects antigens or antibodies."
+    src: { page: 53, quote: "Useful for production of human proteins by bacteria (eg, human growth hormone, insulin)." }
+    status: unverified

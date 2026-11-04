@@ -1,18 +1,32 @@
 # Steps
 
-Mohamed's USMLE Step 1 study app: short retrieval sessions, spaced repetition (FSRS), Step 1 style vignette MCQs with an explanation for every option, lessons that explain the why in Egyptian Arabic, cases, and an Anki export. It runs offline on the S24 Ultra, the Tab S11 and the Mac. It is private and never published.
+Steps is my USMLE Step 1 study app. I built it for one learner, me, and it is private.
 
-Steps is built on a copy of Batna, Mohamed's internal-medicine MSc app (`MohamedRef/Batna-app`, 2026-11-04): the same engine with the content and course model changed for First Aid.
+It is made for short, focused sessions: spaced repetition (FSRS), Step 1 style vignette questions with an explanation for every option, lessons that explain the why in Egyptian Arabic, cases, and an Anki export. It works offline on my phone (S24 Ultra), my tablet (Tab S11) and my Mac.
 
-The content follows **First Aid for the USMLE Step 1 2026**: 16 courses (Section II General Principles: Biochemistry, Immunology, Microbiology, Pathology, Pharmacology, Public Health Sciences; Section III Organ Systems: Cardiovascular, Endocrine, Gastrointestinal, Hematology and Oncology, Musculoskeletal, Neurology, Psychiatry, Renal, Reproductive, Respiratory), one lecture per First Aid subsection (77 in all). Other sources are merged into the same topics ([docs/SOURCES.md](docs/SOURCES.md)).
+## What I study from
+
+The backbone is **First Aid for the USMLE Step 1 2026**. Steps follows the book's own order:
+
+- **General Principles:** Biochemistry, Immunology, Microbiology, Pathology, Pharmacology, Public Health Sciences
+- **Organ Systems:** Cardiovascular, Endocrine, Gastrointestinal, Hematology and Oncology, Musculoskeletal and Skin, Neurology and Special Senses, Psychiatry, Renal, Reproductive, Respiratory
+
+That is 16 courses and 77 lectures, one lecture for each First Aid subsection, and every card points back to its printed page in the book.
+
+When I add other sources, they go under the same First Aid topics, and each card says which source it came from, so one topic gathers everything I have on it.
+
+## Where things stand
 
 | Part | State |
 |---|---|
-| Content schema `steps.content/v1`, sources, validator | ✓ |
-| First Aid course and lecture index | ✓ |
-| Content | being written, one workstream per course group ([docs/WORKSTREAMS.md](docs/WORKSTREAMS.md)) |
-| App shell, review (FSRS), study sessions, question bank, lessons, sync, updates (from Batna) | ✓, renamed; USMLE features in progress |
-| Timed vignette blocks, lab values sheet, Rapid Review mode | planned |
-| Sync (Cloudflare Worker) and signed updates | code ready; Steps' own Worker, Google client and update key not set up yet |
+| Courses and lectures from First Aid | ✓ |
+| Cards, questions and lessons | being written, course by course |
+| Review, study sessions, question bank, lessons | ✓ |
+| Timed question blocks, lab values sheet, Rapid Review | coming |
+| Sync between my devices, updates over the air | ready, not switched on yet |
 
-How to run it: [docs/RUN.md](docs/RUN.md). How to write content: [docs/CONTENT.md](docs/CONTENT.md) and [docs/LESSONS.md](docs/LESSONS.md); the workflow and its checks: [docs/AUTHORING.md](docs/AUTHORING.md).
+## For whoever works on it
+
+How to run it: [docs/RUN.md](docs/RUN.md). How the content is written: [docs/CONTENT.md](docs/CONTENT.md), [docs/LESSONS.md](docs/LESSONS.md) and [docs/SOURCES.md](docs/SOURCES.md). Who writes what: [docs/WORKSTREAMS.md](docs/WORKSTREAMS.md).
+
+— Mohamed Refaat

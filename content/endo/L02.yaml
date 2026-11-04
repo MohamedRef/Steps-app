@@ -1,0 +1,208 @@
+schema: steps.content/v1
+lecture: endo.L02
+title: Anatomy
+book: { chapter: 8, pages: [331, 331] }
+topics:
+  - { id: pituitary-gland, title: Pituitary gland }
+  - { id: adrenal-cortex-and-medulla, title: Adrenal cortex and medulla }
+  - { id: endocrine-pancreas-cell-types, title: Endocrine pancreas cell types }
+items:
+  # ---------- p331: pituitary gland ----------
+  - id: endo.L02.001
+    kind: enumerate
+    topic: pituitary-gland
+    prompt: Enumerate the hormones secreted by the anterior pituitary (7).
+    points:
+      - FSH
+      - LH
+      - ACTH
+      - TSH
+      - Prolactin
+      - GH
+      - β-endorphin
+    pass: 7
+    hook: "الكتاب بيقولك FLAT PeG (FSH, LH, ACTH, TSH, PRL, GH)، وزوّد عليهم الـ β-endorphin اللي جاي مع الـ ACTH من نفس الـ POMC."
+    src: { page: 331, quote: "Secretes FSH, LH, ACTH, TSH, prolactin, GH, and β-endorphin." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L02.002
+    kind: card
+    topic: pituitary-gland
+    front: Where is melanotropin (MSH) secreted from?
+    back: The intermediate lobe of the pituitary.
+    src: { page: 331, quote: "Melanotropin (MSH) secreted from intermediate lobe of pituitary." }
+    status: unverified
+  - id: endo.L02.003
+    kind: cloze
+    topic: pituitary-gland
+    text: The anterior pituitary (adenohypophysis) is derived from {{c1::oral ectoderm (Rathke pouch)}}; the posterior pituitary (neurohypophysis) is derived from {{c2::neuroectoderm}}.
+    src: { page: 331, quote: "Derived from oral ectoderm (Rathke pouch)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L02.004
+    kind: card
+    topic: pituitary-gland
+    front: Which hormones share a common α subunit, and what does the β subunit do?
+    back: TSH, LH, FSH and hCG share the α subunit. The β subunit determines hormone specificity.
+    src: { page: 331, quote: "α subunit—hormone subunit common to TSH, LH, FSH, and hCG. β subunit—determines hormone specificity." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L02.005
+    kind: enumerate
+    topic: pituitary-gland
+    prompt: Enumerate the derivatives of proopiomelanocortin (POMC) (3).
+    points:
+      - β-endorphin
+      - ACTH
+      - MSH
+    pass: 3
+    hook: "الكتاب بيقولك: Go pro with a BAM! (B = β-endorphin، A = ACTH، M = MSH)."
+    src: { page: 331, quote: "Proopiomelanocortin (POMC) derivatives— β-endorphin, ACTH, and MSH. Go pro with a BAM!" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L02.006
+    kind: table
+    topic: pituitary-gland
+    title: Anterior pituitary cells by staining
+    columns: [Cell type, Hormones, Mnemonic]
+    rows:
+      - [Basophils, "FSH, LH, ACTH, TSH", B-FLAT]
+      - [Acidophils, "PRL, GH", Acid PiG]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 331, quote: "B-FLAT: Basophils—FSH, LH, ACTH, TSH. Acid PiG: Acidophils — PRL, GH." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L02.007
+    kind: card
+    topic: pituitary-gland
+    front: Which hormones does the posterior pituitary store and release, where are they made, and how do they reach it?
+    back: Vasopressin (ADH) and oxytocin. They are made in the supraoptic and paraventricular nuclei of the hypothalamus and carried to the posterior pituitary by neurophysins (carrier proteins).
+    src: { page: 331, quote: "Stores and releases vasopressin (antidiuretic hormone, or ADH) and oxytocin, both made in the hypothalamus (supraoptic and paraventricular nuclei) and transported to posterior pituitary via neurophysins (carrier proteins)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L02.008
+    kind: mcq
+    topic: pituitary-gland
+    stem: >-
+      A 27-year-old woman comes to the physician because she has not menstruated for 7 weeks. She
+      has nausea in the mornings and breast tenderness. A serum test for pregnancy is ordered. The
+      laboratory uses an antibody against the β subunit of human chorionic gonadotropin (hCG)
+      rather than the α subunit. Which of the following best explains this choice?
+    options:
+      - The α subunit is shared with TSH, LH and FSH
+      - The α subunit is cleaved off before hCG is secreted
+      - The α subunit is derived from POMC
+      - The α subunit is released by the posterior pituitary
+      - The α subunit is bound by neurophysins in plasma
+    answer: 0
+    why:
+      - "Right. TSH, LH, FSH and hCG share a common α subunit; only the β subunit determines hormone specificity, so it is the one an assay must detect."
+      - "hCG circulates with both subunits; nothing on the page says the α subunit is removed."
+      - "POMC gives β-endorphin, ACTH and MSH, not the glycoprotein hormones."
+      - "The posterior pituitary releases ADH and oxytocin only."
+      - "Neurophysins carry ADH and oxytocin down the axons to the posterior pituitary; they don't bind hCG."
+    src: { page: 331, quote: "α subunit—hormone subunit common to TSH, LH, FSH, and hCG. β subunit—determines hormone specificity." }
+    status: unverified
+  # ---------- p331: adrenal cortex and medulla ----------
+  - id: endo.L02.009
+    kind: cloze
+    topic: adrenal-cortex-and-medulla
+    text: The adrenal cortex is derived from {{c1::mesoderm}}; the adrenal medulla is derived from {{c2::neural crest}}.
+    src: { page: 331, quote: "Adrenal cortex (derived from mesoderm) and medulla (derived from neural crest)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L02.010
+    kind: table
+    topic: adrenal-cortex-and-medulla
+    title: Adrenal gland layers
+    columns: [Layer, Main regulation, Hormone class, Main hormone]
+    rows:
+      - [Zona glomerulosa, Angiotensin II, Mineralocorticoids, Aldosterone]
+      - [Zona fasciculata, "ACTH, CRH", Glucocorticoids, Cortisol]
+      - [Zona reticularis, "ACTH, CRH", Androgens, DHEA]
+      - [Medulla (chromaffin cells), Preganglionic sympathetic fibers, Catecholamines, "Epi, NE"]
+    blanks: [[0, 1], [0, 3], [1, 3], [2, 3], [3, 1], [3, 3]]
+    src: { page: 331, quote: "Angiotensin II Mineralocorticoids Aldosterone Zona Fasciculata ACTH, CRH Glucocorticoids Cortisol" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L02.011
+    kind: card
+    topic: adrenal-cortex-and-medulla
+    front: What mnemonic gives the adrenal cortex layers and their products from outside in?
+    back: "GFR corresponds with salt, sugar and sex: Glomerulosa = salt (mineralocorticoids), Fasciculata = sugar (glucocorticoids), Reticularis = sex (androgens)."
+    src: { page: 331, quote: "GFR corresponds with salt (mineralocorticoids), sugar (glucocorticoids), and sex (androgens)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L02.012
+    kind: card
+    topic: adrenal-cortex-and-medulla
+    front: Which cells make up the adrenal medulla, what do they secrete, and what controls them?
+    back: Chromaffin cells. They secrete catecholamines (epinephrine and norepinephrine) under control of preganglionic sympathetic fibers.
+    src: { page: 331, quote: "Chromaffin cells Preganglionic sympathetic ﬁbers Catecholamines Epi, NE" }
+    status: unverified
+  - id: endo.L02.013
+    kind: mcq
+    topic: adrenal-cortex-and-medulla
+    stem: >-
+      A 45-year-old man is treated for 3 months with a drug that blocks the angiotensin II type 1
+      receptor. A biopsy of his adrenal gland, done during surgery for an unrelated reason, would
+      most likely show reduced activity in which layer, and of which hormone?
+    options:
+      - Zona glomerulosa; aldosterone
+      - Zona fasciculata; cortisol
+      - Zona reticularis; DHEA
+      - Medulla; epinephrine
+      - Capsule; norepinephrine
+    answer: 0
+    why:
+      - "Right. The zona glomerulosa (outer layer, salt) is regulated mainly by angiotensin II and makes aldosterone."
+      - "The zona fasciculata is driven by ACTH and CRH, not angiotensin II."
+      - "The zona reticularis is also driven by ACTH and CRH and makes androgens such as DHEA."
+      - "The medulla's chromaffin cells respond to preganglionic sympathetic fibers."
+      - "The capsule makes no hormone; norepinephrine comes from the medulla."
+    src: { page: 331, quote: "Angiotensin II Mineralocorticoids Aldosterone Zona Fasciculata ACTH, CRH Glucocorticoids Cortisol" }
+    status: unverified
+  # ---------- p331: endocrine pancreas cell types ----------
+  - id: endo.L02.014
+    kind: card
+    topic: endocrine-pancreas-cell-types
+    front: What are the islets of Langerhans, and where do they arise from?
+    back: Collections of α, β and δ endocrine cells. They arise from the pancreatic buds.
+    src: { page: 331, quote: "Islets of Langerhans are collections of α, β, and δ endocrine cells. Islets arise from pancreatic buds." }
+    status: unverified
+  - id: endo.L02.015
+    kind: table
+    topic: endocrine-pancreas-cell-types
+    title: Islet cells
+    columns: [Cell, Hormone, Position in the islet]
+    rows:
+      - [α, Glucagon, Peripheral]
+      - [β, Insulin, Central]
+      - [δ, Somatostatin, Interspersed]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 331, quote: "α = glucαgon (peripheral) β = insulin (central) δ = somatostatin (interspersed)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L02.016
+    kind: mcq
+    topic: endocrine-pancreas-cell-types
+    stem: >-
+      A pathology student examines a section of normal pancreas stained with antibodies to islet
+      hormones. Cells at the center of the islets stain strongly, while cells at the rim stain for a
+      different hormone. A hormone made by the cells at the rim of the islet would be expected to do
+      which of the following?
+    options:
+      - Raise blood glucose
+      - Lower blood glucose by inserting GLUT4
+      - Inhibit GH and TSH release only
+      - Stimulate pancreatic enzyme secretion
+      - Stimulate gastric acid secretion
+    answer: 0
+    why:
+      - "Right. α cells sit at the periphery and make glucagon, which raises blood glucose."
+      - "Insulin lowers glucose, but β cells are central in the islet."
+      - "Somatostatin comes from δ cells, which are interspersed, not at the rim."
+      - "Enzymes come from exocrine acinar cells, not islet cells."
+      - "Gastric acid is driven by gastrin, histamine and ACh, not by an islet rim hormone."
+    src: { page: 331, quote: "α = glucαgon (peripheral) β = insulin (central) δ = somatostatin (interspersed)" }
+    status: unverified
