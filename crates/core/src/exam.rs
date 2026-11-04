@@ -475,18 +475,18 @@ mod tests {
     fn library() -> Vec<Lecture> {
         let mut l01: Vec<Item> = (0..30)
             .map(|i| {
-                let topic = if i % 3 == 0 { "child-pugh" } else { "management" };
+                let topic = if i % 3 == 0 { "shock" } else { "pericardium" };
                 let tags: &[&str] = if i % 5 == 0 { &["high-yield"] } else { &[] };
-                mcq(&format!("hb.L01.{i:03}"), topic, tags, ABCD, 1)
+                mcq(&format!("cvs.L04.{i:03}"), topic, tags, ABCD, 1)
             })
             .collect();
         l01.push(Item {
             body: Body::Card { front: "f".into(), back: "b".into() },
-            ..mcq("hb.L01.900", "management", &[], ABCD, 0)
+            ..mcq("cvs.L04.900", "pericardium", &[], ABCD, 0)
         });
-        l01.push(Item { status: Status::Rejected, ..mcq("hb.L01.901", "management", &[], ABCD, 0) });
-        let l09 = (0..10).map(|i| mcq(&format!("hb.L09.{i:03}"), "sbp", &[], ABCD, 2)).collect();
-        vec![lecture("hb.L01", l01), lecture("hb.L09", l09)]
+        l01.push(Item { status: Status::Rejected, ..mcq("cvs.L04.901", "pericardium", &[], ABCD, 0) });
+        let l09 = (0..10).map(|i| mcq(&format!("cvs.L09.{i:03}"), "ie", &[], ABCD, 2)).collect();
+        vec![lecture("cvs.L04", l01), lecture("cvs.L09", l09)]
     }
 
     #[test]
@@ -494,7 +494,7 @@ mod tests {
         let lib = library();
         let pool = mcqs(&lib);
         assert_eq!(pool.len(), 40);
-        assert!(pool.iter().all(|q| q.id != "hb.L01.900" && q.id != "hb.L01.901"));
+        assert!(pool.iter().all(|q| q.id != "cvs.L04.900" && q.id != "cvs.L04.901"));
     }
 
     #[test]
@@ -504,10 +504,10 @@ mod tests {
         let last = LastResults::new();
         let mut f = Filter::default();
         assert_eq!(f.select(&pool, &last).len(), 40);
-        f.lectures.insert("hb.L09".into());
+        f.lectures.insert("cvs.L09".into());
         assert_eq!(f.select(&pool, &last).len(), 10);
         f.lectures.clear();
-        f.topics.insert(("hb.L01".into(), "child-pugh".into()));
+        f.topics.insert(("cvs.L04".into(), "shock".into()));
         assert_eq!(f.select(&pool, &last).len(), 10);
         f.tags.insert("high-yield".into());
         // i % 3 == 0 and i % 5 == 0: 0, 15.
@@ -519,17 +519,17 @@ mod tests {
         let lib = library();
         let pool = mcqs(&lib);
         let mut last = LastResults::new();
-        last.insert("hb.L09.000".into(), true);
-        last.insert("hb.L09.001".into(), false);
+        last.insert("cvs.L09.000".into(), true);
+        last.insert("cvs.L09.001".into(), false);
         let f = Filter {
-            lectures: ["hb.L09".to_string()].into(),
+            lectures: ["cvs.L09".to_string()].into(),
             only: Only::WrongOrUnseen,
             ..Filter::default()
         };
         let ids: Vec<&str> = f.select(&pool, &last).iter().map(|q| q.id).collect();
         assert_eq!(ids.len(), 9);
-        assert!(!ids.contains(&"hb.L09.000"));
-        assert!(ids.contains(&"hb.L09.001"));
+        assert!(!ids.contains(&"cvs.L09.000"));
+        assert!(ids.contains(&"cvs.L09.001"));
     }
 
     #[test]
@@ -551,11 +551,11 @@ mod tests {
         let pool = mcqs(&lib);
         let paper = mock(&pool, 20, 42);
         assert_eq!(paper.len(), 20);
-        let l01 = paper.iter().filter(|q| q.lecture == "hb.L01").count();
+        let l01 = paper.iter().filter(|q| q.lecture == "cvs.L04").count();
         // 30 of 40 MCQs are L01, so 15 of 20.
         assert_eq!(l01, 15);
-        let cp = paper.iter().filter(|q| q.topic.as_deref() == Some("child-pugh")).count();
-        assert!((7..=8).contains(&cp), "child-pugh got {cp} of 15");
+        let cp = paper.iter().filter(|q| q.topic.as_deref() == Some("shock")).count();
+        assert!((7..=8).contains(&cp), "shock got {cp} of 15");
         let ids: BTreeSet<&str> = paper.iter().map(|q| q.id.as_str()).collect();
         assert_eq!(ids.len(), 20);
         assert_eq!(mock(&pool, 99, 1).len(), 40);
@@ -586,12 +586,12 @@ mod tests {
     #[test]
     fn options_that_name_others_stay_in_order() {
         let s = |v: &[&str]| v.iter().map(|x| x.to_string()).collect::<Vec<_>>();
-        assert!(shufflable(&s(&["Propranolol", "Carvedilol", "Band ligation", "TIPS"])));
+        assert!(shufflable(&s(&["Metoprolol", "Carvedilol", "Ivabradine", "Digoxin"])));
         assert!(!shufflable(&s(&["a", "b", "c", "All of the above"])));
         assert!(!shufflable(&s(&["a", "b", "Both a and b", "d"])));
         assert!(!shufflable(&s(&["x", "y", "z", "A and C"])));
         assert!(!shufflable(&s(&["x", "y", "z", "All of these"])));
-        assert!(!shufflable(&s(&["Hepatitis B", "Hepatitis C", "Both", "Neither"])));
+        assert!(!shufflable(&s(&["HCM", "DCM", "Both", "Neither"])));
         assert!(!shufflable(&s(&["x", "y", "None"])));
         assert!(shufflable(&s(&["None while compensated", "x", "y"])));
         assert!(shufflable(&s(&["Vitamin A and D deficiency", "x", "y", "z"])));
@@ -638,37 +638,37 @@ mod tests {
 
     #[test]
     fn scoring_counts_blanks_as_wrong() {
-        let qs = [q("1", "hb.L01", "cp", 1), q("2", "hb.L01", "mgmt", 0), q("3", "hb.L09", "sbp", 2)];
+        let qs = [q("1", "cvs.L04", "cp", 1), q("2", "cvs.L04", "mgmt", 0), q("3", "cvs.L09", "ie", 2)];
         let ans = [a(Some(1)), a(None), a(Some(0))];
         let o = score(&qs, &ans, Mode::Mock, 0, 60_000);
         assert_eq!(o.total, Score { right: 1, total: 3 });
         assert_eq!(o.unanswered, 1);
-        assert_eq!(o.by_lecture["hb.L01"], Score { right: 1, total: 2 });
-        assert_eq!(o.by_topic["hb.L09/sbp"], Score { right: 0, total: 1 });
+        assert_eq!(o.by_lecture["cvs.L04"], Score { right: 1, total: 2 });
+        assert_eq!(o.by_topic["cvs.L09/ie"], Score { right: 0, total: 1 });
         assert_eq!(o.total.percent(), 33);
         assert_eq!(Score { right: 1, total: 2 }.percent(), 50);
         assert_eq!(Score::default().percent(), 0);
         let weak = weak_topics(&o, 60, 1);
-        assert_eq!(weak.iter().map(|w| w.0).collect::<Vec<_>>(), ["hb.L01/mgmt", "hb.L09/sbp"]);
+        assert_eq!(weak.iter().map(|w| w.0).collect::<Vec<_>>(), ["cvs.L04/mgmt", "cvs.L09/ie"]);
     }
 
     #[test]
     fn a_thin_mock_still_names_topics_to_revise() {
         // One question per topic, mostly wrong: no topic has two answers.
-        let qs = [q("1", "hb.L01", "cp", 1), q("2", "hb.L09", "sbp", 0), q("3", "hb.L13", "aih", 2)];
+        let qs = [q("1", "cvs.L04", "cp", 1), q("2", "cvs.L09", "ie", 0), q("3", "cvs.L13", "rf", 2)];
         let o = score(&qs, &[a(Some(0)), a(Some(0)), a(None)], Mode::Mock, 0, 60_000);
         assert!(weak_topics(&o, 60, 2).is_empty());
         let focus: Vec<_> = focus_topics(&o, 60).into_iter().map(|w| w.0).collect();
-        assert_eq!(focus, ["hb.L01/cp", "hb.L13/aih"]);
+        assert_eq!(focus, ["cvs.L04/cp", "cvs.L13/rf"]);
         // With two answers in a topic, the stricter list wins.
-        let qs = [q("1", "hb.L01", "cp", 1), q("2", "hb.L01", "cp", 0), q("3", "hb.L09", "sbp", 2)];
+        let qs = [q("1", "cvs.L04", "cp", 1), q("2", "cvs.L04", "cp", 0), q("3", "cvs.L09", "ie", 2)];
         let o = score(&qs, &[a(Some(0)), a(None), a(Some(0))], Mode::Mock, 0, 60_000);
-        assert_eq!(focus_topics(&o, 60).into_iter().map(|w| w.0).collect::<Vec<_>>(), ["hb.L01/cp"]);
+        assert_eq!(focus_topics(&o, 60).into_iter().map(|w| w.0).collect::<Vec<_>>(), ["cvs.L04/cp"]);
     }
 
     #[test]
     fn wrong_is_again_right_is_good_blank_sends_nothing() {
-        let question = q("hb.L01.003", "hb.L01", "cp", 1);
+        let question = q("cvs.L04.003", "cvs.L04", "cp", 1);
         let right = review_event(&question, &a(Some(1)), Mode::Tutor, 9).unwrap();
         assert_eq!((right.grade, right.origin), (Grade::Good, Origin::Bank));
         let wrong = review_event(&question, &a(Some(0)), Mode::Mock, 9).unwrap();
@@ -678,7 +678,7 @@ mod tests {
 
     #[test]
     fn history_keeps_the_last_result() {
-        let qs = [q("1", "hb.L01", "cp", 1), q("2", "hb.L01", "cp", 1)];
+        let qs = [q("1", "cvs.L04", "cp", 1), q("2", "cvs.L04", "cp", 1)];
         let mut h = History::default();
         h.record(&qs, &[a(Some(0)), a(None)]);
         h.record(&qs[..1], &[a(Some(1))]);

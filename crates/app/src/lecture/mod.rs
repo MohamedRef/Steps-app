@@ -23,7 +23,7 @@ use crate::{Screen, Ui};
 pub(crate) const CSS: Css = css!("src/lecture/lecture.css");
 
 /// The open pages (last on top) and the screen they opened over. A page is a
-/// lecture id or [`REFERENCES`]. `STEPS_OPEN_LECTURE=hb.L01` (or
+/// lecture id or [`REFERENCES`]. `STEPS_OPEN_LECTURE=cvs.L04` (or
 /// `references`) opens one at launch over the first screen (previews,
 /// screenshots).
 static OPEN: GlobalSignal<Option<(Vec<String>, Screen)>> = Signal::global(|| None);

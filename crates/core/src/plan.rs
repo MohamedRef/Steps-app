@@ -308,7 +308,7 @@ impl PlanSettings {
 /// One lecture's progress, in book order.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct LectureProgress {
-    /// `hb.L01`.
+    /// `cvs.L04`.
     pub id: String,
     /// Items in the app (rejected items left out).
     pub total: u32,
@@ -879,7 +879,7 @@ mod tests {
     fn spreads_new_items_and_keeps_dedicated_free() {
         let today = day(2026, 10, 27);
         let exam = day(2027, 3, 20);
-        let lectures: Vec<_> = (1..=20).map(|n| lecture(&format!("hb.L{n:02}"), 75, 0)).collect();
+        let lectures: Vec<_> = (1..=20).map(|n| lecture(&format!("cvs.L{n:02}"), 75, 0)).collect();
         let p = plan(&settings(exam), PlanInput { today, lectures: &lectures, review_forecast: &[] });
         assert_eq!(p.status, PlanStatus::OnTrack);
         assert_eq!(p.days.len(), today.until(exam) as usize);
@@ -915,17 +915,17 @@ mod tests {
         }
         // Lectures are learned in book order.
         let order: Vec<&String> = p.days.iter().flat_map(|d| &d.new_lectures).collect();
-        assert_eq!(order.first().map(|s| s.as_str()), Some("hb.L01"));
-        assert_eq!(order.last().map(|s| s.as_str()), Some("hb.L20"));
+        assert_eq!(order.first().map(|s| s.as_str()), Some("cvs.L01"));
+        assert_eq!(order.last().map(|s| s.as_str()), Some("cvs.L20"));
     }
 
     #[test]
     fn started_lectures_come_first() {
         let today = day(2026, 10, 27);
-        let lectures = [lecture("hb.L01", 50, 0), lecture("hb.L02", 50, 10)];
+        let lectures = [lecture("cvs.L04", 50, 0), lecture("cvs.L05", 50, 10)];
         let p =
             plan(&settings(day(2027, 1, 20)), PlanInput { today, lectures: &lectures, review_forecast: &[] });
-        assert_eq!(p.days.iter().find(|d| d.new > 0).unwrap().new_lectures[0], "hb.L02");
+        assert_eq!(p.days.iter().find(|d| d.new > 0).unwrap().new_lectures[0], "cvs.L05");
         assert_eq!(p.seen, 10);
     }
 
@@ -934,7 +934,7 @@ mod tests {
         let today = day(2026, 10, 27);
         let mut s = settings(day(2026, 12, 15));
         s.weekdays = [true, false, true, false, true, false, false];
-        let lectures = [lecture("hb.L01", 3000, 0)];
+        let lectures = [lecture("cvs.L04", 3000, 0)];
         let p = plan(&s, PlanInput { today, lectures: &lectures, review_forecast: &[] });
         let PlanStatus::Tight { left_over, fix, .. } = p.status else { panic!("{:?}", p.status) };
         assert!(left_over > 0);
@@ -960,7 +960,7 @@ mod tests {
         s.review_cap = 60;
         let input =
             |l: &[LectureProgress]| plan(&s, PlanInput { today, lectures: l, review_forecast: &[] }).status;
-        let some = [lecture("hb.L01", 600, 0)];
+        let some = [lecture("cvs.L04", 600, 0)];
         let PlanStatus::Tight { fix: TightFix::HigherCap(cap), .. } = input(&some) else {
             panic!("{:?}", input(&some))
         };
@@ -971,7 +971,7 @@ mod tests {
             plan(&raised, PlanInput { today, lectures: &some, review_forecast: &[] }).status,
             PlanStatus::Tight { .. }
         ));
-        let huge = [lecture("hb.L01", 100_000, 0)];
+        let huge = [lecture("cvs.L04", 100_000, 0)];
         assert!(matches!(input(&huge), PlanStatus::Tight { fix: TightFix::HighYield, .. }));
     }
 
@@ -981,7 +981,7 @@ mod tests {
         assert!(exam_day_ok(today, day(2027, 1, 20)));
         assert!(!exam_day_ok(today, today));
         assert!(!exam_day_ok(today, day(2207, 1, 20)));
-        let lectures = [lecture("hb.L01", 100, 0)];
+        let lectures = [lecture("cvs.L04", 100, 0)];
         let p =
             plan(&settings(day(9999, 1, 1)), PlanInput { today, lectures: &lectures, review_forecast: &[] });
         assert_eq!(p.days.len(), MAX_DAYS_AHEAD as usize);
@@ -990,7 +990,7 @@ mod tests {
     #[test]
     fn forecast_reviews_count_against_the_cap() {
         let today = day(2026, 10, 27);
-        let lectures = [lecture("hb.L01", 300, 0)];
+        let lectures = [lecture("cvs.L04", 300, 0)];
         let s = settings(day(2027, 1, 20));
         let quiet = plan(&s, PlanInput { today, lectures: &lectures, review_forecast: &[] });
         let busy_forecast = vec![140; 30];
@@ -1016,7 +1016,7 @@ mod tests {
     fn inside_dedicated_only_self_assessments_and_weak_topics() {
         let exam = day(2027, 1, 20);
         let today = exam.plus(-6);
-        let lectures = [lecture("hb.L01", 40, 10)];
+        let lectures = [lecture("cvs.L04", 40, 10)];
         let p = plan(&settings(exam), PlanInput { today, lectures: &lectures, review_forecast: &[] });
         let later = Some(exam.plus(6 * 7));
         assert_eq!(
@@ -1024,7 +1024,7 @@ mod tests {
             PlanStatus::Tight { left_over: 30, fix: TightFix::Dedicated, later_exam: later }
         );
         assert!(p.days.iter().all(|d| matches!(d.focus, Focus::Mock | Focus::WeakTopics | Focus::Rest)));
-        let done = [lecture("hb.L01", 40, 40)];
+        let done = [lecture("cvs.L04", 40, 40)];
         let p = plan(&settings(exam), PlanInput { today, lectures: &done, review_forecast: &[] });
         assert_eq!(p.status, PlanStatus::Dedicated);
     }
@@ -1032,7 +1032,7 @@ mod tests {
     #[test]
     fn everything_seen_means_reviews_only() {
         let today = day(2026, 10, 27);
-        let lectures = [LectureProgress { id: "hb.L01".into(), total: 40, seen: 40, seen_twice: 40 }];
+        let lectures = [LectureProgress { id: "cvs.L04".into(), total: 40, seen: 40, seen_twice: 40 }];
         let p =
             plan(&settings(day(2027, 1, 20)), PlanInput { today, lectures: &lectures, review_forecast: &[] });
         assert_eq!(p.status, PlanStatus::OnTrack);
