@@ -273,7 +273,7 @@ mod tests {
         assert!(bytes.starts_with(MAGIC));
         let back = Pack::decode(&bytes).unwrap();
         assert_eq!(back, pack);
-        assert_eq!(back.item_count(), 18);
+        assert_eq!(back.item_count(), 16);
     }
 
     #[test]

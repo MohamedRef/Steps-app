@@ -219,11 +219,11 @@ mod tests {
             a
         };
         let report = run(d, &args(&[])).unwrap();
-        assert!(report.contains("steps.apkg: 24 notes"), "{report}");
-        assert!(report.contains("hb.L02: 12 notes (draft, not merged yet)"), "{report}");
+        assert!(report.contains("steps.apkg: 22 notes"), "{report}");
+        assert!(report.contains("hb.L02: 11 notes (draft, not merged yet)"), "{report}");
         assert!(report.contains("L03.draft.yaml") && report.contains("(left out)"), "{report}");
         let merged = run(d, &args(&["--merged-only"])).unwrap();
-        assert!(merged.contains("steps.apkg: 12 notes"), "{merged}");
+        assert!(merged.contains("steps.apkg: 11 notes"), "{merged}");
     }
 
     #[test]
@@ -249,7 +249,7 @@ mod tests {
         args[2] = d.join("export.yaml").display().to_string();
         args[4] = d.join("out").display().to_string();
         let report = run(d, &args).unwrap();
-        assert!(report.contains("steps.apkg: 11 notes"), "{report}");
+        assert!(report.contains("steps.apkg: 10 notes"), "{report}");
         assert!(report.contains("left out: 1 item(s) marked ✗ or rejected"), "{report}");
         assert!(
             report.contains("hb.L01.002: a cloze has no field `nope` (kept the book version)"),

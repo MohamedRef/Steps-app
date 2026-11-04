@@ -160,24 +160,6 @@ pub fn sort() -> Element {
     stroke("M7 4.5v15M4 16.5l3 3 3-3M13 6.5h7M13 11.5h5M13 16.5h3")
 }
 
-/// A favourite (the calculators' ☆): a star, filled once pinned.
-pub fn star(filled: bool) -> Element {
-    rsx! {
-        svg {
-            class: "icon",
-            width: "22",
-            height: "22",
-            view_box: "0 0 24 24",
-            fill: if filled { "currentColor" } else { "none" },
-            stroke: "currentColor",
-            stroke_width: "1.8",
-            stroke_linejoin: "round",
-            "aria-hidden": "true",
-            path { d: "M12 3.5l2.6 5.3 5.9.9-4.25 4.1 1 5.8L12 16.9l-5.25 2.7 1-5.8L3.5 9.7l5.9-.9z" }
-        }
-    }
-}
-
 /// A tick, for a finished lesson.
 pub fn check() -> Element {
     stroke("M5 12.5l4.5 4.5L19 7.5")

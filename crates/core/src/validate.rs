@@ -189,29 +189,6 @@ fn body_problems(body: &Body) -> Vec<String> {
                 p.push("order needs at least 3 steps".into());
             }
         }
-        Body::Calc { calculator, inputs, expect, .. } => {
-            if inputs.is_empty() {
-                p.push("calc needs inputs".into());
-            }
-            match crate::calc::spec(calculator) {
-                None => p.push(format!("unknown calculator `{calculator}`")),
-                Some(spec) => {
-                    // Compute it: the inputs must be complete and `expect` must agree.
-                    let inputs = crate::calc::Inputs::for_spec(spec, inputs);
-                    for key in crate::calc::unknown_inputs(spec, &inputs) {
-                        p.push(format!("calc input `{key}` is not used by `{calculator}`"));
-                    }
-                    match (spec.compute)(&inputs) {
-                        Err(e) => p.push(format!("calc inputs: {e}")),
-                        Ok(o) if !crate::calc::expect_matches(&o, expect) => p.push(format!(
-                            "calc expect {expect:?} disagrees with the calculator: {} ({}, band `{}`)",
-                            o.display, o.label, o.band
-                        )),
-                        Ok(_) => {}
-                    }
-                }
-            }
-        }
     }
     p
 }
@@ -301,7 +278,7 @@ mod tests {
         let problems = lecture(&l, &Context::default());
         assert!(problems.is_empty(), "{problems:#?}");
         let kinds: BTreeSet<_> = l.items.iter().map(|i| i.body.kind()).collect();
-        assert_eq!(kinds.len(), 9, "the fixture should show every kind");
+        assert_eq!(kinds.len(), 8, "the fixture should show every kind");
     }
 
     #[test]
@@ -364,24 +341,6 @@ mod tests {
         assert!(msgs.iter().any(|m| m.contains("unknown key `answer`")), "{msgs:#?}");
         // No length cap on quotes (Mohamed, 2026-10-29): a whole table is fine.
         assert!(!msgs.iter().any(|m| m.contains("quote")), "{msgs:#?}");
-    }
-
-    #[test]
-    fn calc_items_are_computed() {
-        let item = |inputs: &str, expect: &str| {
-            lec(&format!(
-                "{HEAD}items:\n  - id: hb.L01.001\n    kind: calc\n    calculator: child_pugh\n    stem: s\n    \
-                 inputs: {{ {inputs} }}\n    expect: {expect}\n    interpret: i\n    src: {{ page: 14 }}\n    status: unverified\n"
-            ))
-        };
-        let full =
-            "encephalopathy: none, ascites: mild, bilirubin_mg_dl: 2.5, albumin_g_dl: 3.0, pt_prolonged_s: 3";
-        assert!(lecture(&item(full, "Child-Pugh B (8 points)"), &Context::default()).is_empty());
-        let p = lecture(&item(full, "Child-Pugh C (10 points)"), &Context::default());
-        assert!(p[0].message.contains("disagrees"), "{p:?}");
-        let p = lecture(&item("encephalopathy: none, ascites: mild, bili: 2.5", "x"), &Context::default());
-        assert!(p.iter().any(|p| p.message.contains("`bili` is not used")), "{p:?}");
-        assert!(p.iter().any(|p| p.message.contains("missing input")), "{p:?}");
     }
 
     #[test]

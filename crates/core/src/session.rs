@@ -24,7 +24,6 @@ pub fn estimate_secs(body: &Body) -> u32 {
         Body::Case { steps, .. } => 30 + 40 * steps.len() as u32,
         Body::Table { blanks, .. } => 15 + 20 * blanks.len() as u32,
         Body::Order { steps, .. } => 10 + 8 * steps.len() as u32,
-        Body::Calc { .. } => 90,
     }
 }
 

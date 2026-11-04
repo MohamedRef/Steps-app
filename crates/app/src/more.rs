@@ -34,10 +34,7 @@ pub const ADD_CARD: Tool =
     Tool { label: i18n::refs::ADD_CARD, icon: icons::add_card, open: |_| crate::own::open_new() };
 
 /// The tools the rail and sidebar list under the screens from 600dp (More
-/// holds them on phones). Batna's calculators (hepatology, nephrology,
-/// geriatrics, research) cite Batna's MSc books, so Steps leaves them out;
-/// `calc` study items still render. A Step 1 calculator comes back only
-/// with First Aid's own formula and page.
+/// holds them on phones).
 pub const TOOLS: [Tool; 4] = [COURSES, REFERENCES, ABBREVIATIONS, ADD_CARD];
 
 /// One row in More.
