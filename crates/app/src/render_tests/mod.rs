@@ -20,6 +20,7 @@ mod nav;
 mod onboarding;
 mod oral;
 mod own;
+mod pages;
 mod plan;
 mod screens;
 mod settings;
