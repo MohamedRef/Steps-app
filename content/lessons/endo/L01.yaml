@@ -1,0 +1,121 @@
+schema: steps.lesson/v1
+lecture: endo.L01
+lessons:
+  - id: endo.L01.lesson1
+    title: "الغدة الدرقية بتنزل من اللسان للرقبة"
+    hook: "الغدة دي بتتولد في اللسان وبتمشي لحد الرقبة، وكل سؤال embryology عليها هو حاجة نسيت تمشي معاها"
+    minutes: 7
+    pages: [330, 330]
+    topics: [thyroid-development]
+    goals:
+      - "تعرف الـ thyroid بتبتدي منين وبتنزل إزاي"
+      - "تفرّق بين الـ thyroglossal duct cyst والـ pharyngeal cleft cyst من مكانهم في الرقبة"
+      - "تعرف الـ follicular cells والـ parafollicular cells جايين منين"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "البداية في أرضية البلعوم"
+        text: |-
+          الـ thyroid بتبتدي كـ ==thyroid diverticulum== طالع من **أرضية الـ primitive pharynx** (يعني من عند قاعدة اللسان)، وبعدين بتنزل لتحت لحد ما توصل الرقبة قدام الـ trachea.
+
+          وهي نازلة بتفضل مربوطة باللسان بخيط اسمه ==thyroglossal duct==. المفروض الخيط ده يختفي بعد ما الغدة توصل.
+        page: 330
+        quote: "Thyroid diverticulum arises from floor of primitive pharynx and descends into neck. Connected to tongue by thyroglossal duct, which normally disappears"
+      - kind: figure
+        title: "طريق الغدة من اللسان للرقبة"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="en1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="20" y="14" width="150" height="34" rx="12"/>
+            <text x="34" y="36" class="t-sm">Tongue: foramen cecum</text>
+            <circle class="fg-dot-acc" cx="95" cy="48" r="5"/>
+            <line class="fg-arrow-acc" x1="95" y1="54" x2="95" y2="150" stroke-dasharray="5 4" marker-end="url(#en1a)"/>
+            <text x="104" y="80" class="t-sm t-acc">thyroglossal duct</text>
+            <rect class="fg-thin" x="60" y="92" width="70" height="14" rx="4"/>
+            <text x="138" y="104" class="t-sm t-mut">hyoid bone</text>
+            <ellipse class="fg-good" cx="95" cy="170" rx="60" ry="18"/>
+            <text x="68" y="174" class="t-sm t-b">Thyroid</text>
+            <rect class="fg-bad" x="200" y="60" width="150" height="56" rx="10"/>
+            <text x="210" y="80" class="t-sm t-b">Duct persists</text>
+            <text x="210" y="98" class="t-sm">midline cyst or</text>
+            <text x="210" y="112" class="t-sm">pyramidal lobe</text>
+            <rect class="fg-acc" x="200" y="130" width="150" height="56" rx="10"/>
+            <text x="210" y="150" class="t-sm t-b">Gland stays up</text>
+            <text x="210" y="168" class="t-sm">lingual thyroid</text>
+          </svg>
+        caption: "الغدة بتبتدي عند الـ foramen cecum في اللسان وبتنزل في الـ midline. لو الخيط فضل ← cyst أو pyramidal lobe، ولو الغدة نفسها ما نزلتش ← lingual thyroid."
+        alt: "A vertical path from the foramen cecum on the tongue, past the hyoid bone, down to the thyroid in the neck. Side boxes: if the duct persists, a midline cyst or pyramidal lobe; if the gland stays up, a lingual thyroid."
+        page: 330
+        quote: "Connected to tongue by thyroglossal duct, which normally disappears but may persist as cysts or the pyramidal lobe of thyroid. Foramen cecum is normal remnant of thyroglossal duct."
+      - kind: reveal
+        prompt: "الـ foramen cecum (النقرة اللي ورا اللسان) ده عيب ولا طبيعي؟"
+        answer: "طبيعي خالص: هو ==البقية الطبيعية== للـ thyroglossal duct، المكان اللي الغدة نزلت منه. العيب إن الـ duct نفسه يفضل لحد تحت."
+        page: 330
+        quote: "Foramen cecum is normal remnant of thyroglossal duct."
+      - kind: explain
+        title: "لما الخيط ما يختفيش"
+        text: |-
+          لو الـ thyroglossal duct فضل، ممكن يسيب:
+          - **cyst** في الـ midline (الـ ==thyroglossal duct cyst==)
+          - أو **pyramidal lobe**: فص زيادة طالع لفوق من الـ isthmus
+
+          والـ cyst ليه علامة مميزة: بيتحرك لفوق مع **البلع** أو لما المريض **يطلّع لسانه**. ليه؟ لأنه لسه مربوط باللسان بالـ duct.
+        page: 330
+        quote: "Thyroglossal duct cyst A presents as an anterior midline neck mass that moves with swallowing or protrusion of the tongue"
+      - kind: aside
+        tone: trap
+        text: "الامتحان بيحب يقارن: كتلة في ==الـ midline== بتتحرك مع اللسان = thyroglossal duct cyst. كتلة على ==جنب الرقبة== = pharyngeal cleft cyst (من cervical sinus فضل مفتوح). خلّي المكان هو اللي يقولك الإجابة."
+        page: 330
+        quote: "(vs persistent cervical sinus leading to pharyngeal cleft cyst in lateral neck)."
+      - kind: check
+        question: "A 7-year-old has a painless anterior midline neck mass that rises when he protrudes his tongue. What is it?"
+        options:
+          - "Thyroglossal duct cyst"
+          - "Pharyngeal cleft cyst"
+          - "Lingual thyroid"
+          - "Cystic hygroma"
+        answer: 0
+        why:
+          - "صح: midline وبيتحرك مع اللسان لأنه لسه مربوط بيه بالـ duct."
+          - "الـ pharyngeal cleft cyst بيبقى في الـ lateral neck، مش في النص."
+          - "الـ lingual thyroid في اللسان نفسه، مش كتلة في الرقبة."
+          - "الـ cystic hygroma (lymphatic) بيبقى في الـ posterior triangle وما بيتحركش مع اللسان."
+        page: 330
+        quote: "Thyroglossal duct cyst A presents as an anterior midline neck mass that moves with swallowing or protrusion of the tongue"
+      - kind: explain
+        title: "لما الغدة كلها ما تنزلش"
+        text: |-
+          أشهر مكان للـ ectopic thyroid هو ==اللسان== نفسه (**lingual thyroid**): الغدة فضلت في المكان اللي اتولدت فيه.
+
+          الخطر هنا جراحي: لو شلتها وهي ==الـ thyroid الوحيدة== اللي عنده، المريض هيبقى **hypothyroid**. عشان كده لازم scan يتأكد في thyroid في الرقبة ولا لأ قبل أي استئصال.
+        page: 330
+        quote: "Most common ectopic thyroid tissue site is the tongue (lingual thyroid). Removal may result in hypothyroidism if it is the only thyroid tissue present."
+      - kind: explain
+        title: "نوعين خلايا من مصدرين"
+        text: |-
+          الـ thyroid فيها نوعين خلايا، وكل نوع له أصل مختلف:
+          - **Follicular cells** (اللي بتعمل T3 و T4): من الـ ==endoderm==، لأنها جاية من أرضية البلعوم.
+          - **Parafollicular (C) cells** (اللي بتعمل calcitonin): من الـ ==4th pharyngeal pouch==، وبتنضم للغدة بعد كده.
+
+          الفرق ده مهم بعدين: الـ medullary carcinoma طالع من الـ C cells، فما بيلقطش iodine زي الـ follicular cells.
+        page: 330
+        quote: "Thyroid follicular cells B derived from endoderm. Parafollicular cells arise from 4th pharyngeal pouch."
+      - kind: match
+        prompt: "وصّل كل حاجة بأصلها"
+        pairs:
+          - ["Follicular cells", "Endoderm (floor of primitive pharynx)"]
+          - ["Parafollicular (C) cells", "4th pharyngeal pouch"]
+          - ["Foramen cecum", "Normal remnant of the thyroglossal duct"]
+          - ["Pharyngeal cleft cyst", "Persistent cervical sinus"]
+        why: "الـ follicular من البلعوم نفسه (endoderm)، والـ C cells من الـ pouch الرابع، والـ foramen cecum مجرد البقية الطبيعية للطريق، والـ cleft cyst من الـ cervical sinus على جنب."
+        page: 330
+        quote: "Thyroid follicular cells B derived from endoderm. Parafollicular cells arise from 4th pharyngeal pouch."
+      - kind: try
+        items: [endo.L01.002, endo.L01.004, endo.L01.005, endo.L01.006]
+    recap:
+      - "الـ thyroid بتبتدي من أرضية البلعوم وتنزل للرقبة، مربوطة باللسان بالـ thyroglossal duct."
+      - "الـ foramen cecum هو البقية الطبيعية للـ duct."
+      - "Midline cyst بيتحرك مع البلع واللسان = thyroglossal duct cyst؛ lateral = pharyngeal cleft cyst."
+      - "أشهر ectopic مكان: اللسان؛ شيلها وهي الوحيدة ← hypothyroidism."
+      - "Follicular من الـ endoderm، والـ C cells من الـ 4th pouch."
+    practice: [endo.L01.001, endo.L01.002, endo.L01.003, endo.L01.004, endo.L01.005, endo.L01.006, endo.L01.007, endo.L01.008]

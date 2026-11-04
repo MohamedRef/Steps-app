@@ -1,0 +1,438 @@
+schema: steps.content/v1
+lecture: resp.L01
+title: Embryology
+book: { chapter: 16, pages: [678, 679] }
+topics:
+  - { id: lung-development, title: Lung development }
+  - { id: choanal-atresia, title: Choanal atresia }
+  - { id: pulmonary-hypoplasia, title: Pulmonary hypoplasia }
+  - { id: bronchogenic-cysts, title: Bronchogenic cysts }
+  - { id: club-cells, title: Club cells }
+  - { id: alveolar-cell-types, title: Alveolar cell types }
+  - { id: neonatal-respiratory-distress-syndrome, title: Neonatal respiratory distress syndrome }
+items:
+  # ---------- p678: lung development ----------
+  - id: resp.L01.001
+    kind: card
+    topic: lung-development
+    front: When and from what does lung development begin?
+    back: With formation of the lung bud from the distal end of the respiratory diverticulum, during week 4 of development.
+    src: { page: 678, quote: "Begins with the formation of lung bud from distal end of respiratory diverticulum during week 4 of development." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.002
+    kind: order
+    topic: lung-development
+    prompt: "Put the five stages of lung development in order (First Aid: \"Every pulmonologist can see alveoli\")."
+    steps:
+      - Embryonic (weeks 4–7)
+      - Pseudoglandular (weeks 5–17)
+      - Canalicular (weeks 16–25)
+      - Saccular (weeks 24–38)
+      - Alveolar (week 36–childhood)
+    src: { page: 678, quote: "Occurs in five stages. Begins with the formation of lung bud from distal end of respiratory diverticulum during week 4 of development. Every pulmonologist can see alveoli." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.003
+    kind: table
+    topic: lung-development
+    title: Stages of lung development
+    columns: [Stage, Weeks, Structural development]
+    rows:
+      - [Embryonic, 4–7, "Lung bud → trachea → bronchial buds → mainstem bronchi → secondary (lobar) → tertiary (segmental) bronchi"]
+      - [Pseudoglandular, 5–17, "Endodermal tubules → terminal bronchioles; modest capillary network"]
+      - [Canalicular, 16–25, "Terminal bronchioles → respiratory bronchioles → alveolar ducts; prominent capillary network"]
+      - [Saccular, 24–38, "Alveolar ducts → terminal sacs, separated by 1° septae"]
+      - [Alveolar, 36–childhood, "Terminal sacs → adult alveoli (2° septation)"]
+    blanks: [[0, 1], [1, 2], [2, 2], [3, 2], [4, 2]]
+    src: { page: 678, quote: "Terminal bronchioles → respiratory bronchioles → alveolar ducts. Surrounded by prominent capillary network." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.004
+    kind: enumerate
+    topic: lung-development
+    prompt: Enumerate the errors of the embryonic stage of lung development (4).
+    points:
+      - Tracheoesophageal fistula
+      - Tracheal atresia
+      - Tracheal stenosis
+      - Pulmonary agenesis
+    pass: 3
+    src: { page: 678, quote: "Errors at this stage can lead to tracheoesophageal fistula, tracheal atresia/ stenosis and pulmonary agenesis." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.005
+    kind: cloze
+    topic: lung-development
+    text: "In the pseudoglandular stage, respiration is {{c1::impossible}} (incompatible with life). Pneumocytes develop from week {{c2::20}}, and respiration is capable at week {{c3::25}} (canalicular stage)."
+    src: { page: 678, quote: "Pneumocytes develop starting at week 20 (surfactant synthesis). Respiration capable at week 25." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.006
+    kind: card
+    topic: lung-development
+    front: How does pulmonary vascular resistance change before and at birth?
+    back: In utero, "breathing" is aspiration and expulsion of amniotic fluid, so pulmonary vascular resistance rises through gestation. At birth, air replaces the fluid and resistance falls.
+    src: { page: 678, quote: "In utero, “breathing” occurs via aspiration and expulsion of amniotic fluid → ↑ pulmonary vascular resistance through gestation. At birth, air replaces fluid → ↓ pulmonary vascular resistance." }
+    status: unverified
+  - id: resp.L01.007
+    kind: mcq
+    topic: lung-development
+    stem: >-
+      A woman delivers at 23 weeks' gestation. Despite maximal support the neonate cannot exchange gas. At this age the
+      distal lung is developing which structures?
+    options:
+      - Mainstem and lobar bronchi from the lung bud
+      - Respiratory bronchioles and alveolar ducts with a prominent capillary network
+      - Terminal sacs separated by primary septae
+      - Adult alveoli by secondary septation
+      - Terminal bronchioles from endodermal tubules only, with no capillaries
+    answer: 1
+    why:
+      - "That is the embryonic stage (weeks 4–7)."
+      - "Right. Weeks 16–25 are the canalicular stage: respiratory bronchioles and alveolar ducts form, pneumocytes start at week 20, and respiration becomes possible only at week 25."
+      - "Terminal sacs are the saccular stage (weeks 24–38)."
+      - "Adult alveoli come in the alveolar stage (week 36–childhood)."
+      - "Endodermal tubules forming terminal bronchioles is the pseudoglandular stage (weeks 5–17), which has a modest capillary network."
+    src: { page: 678, quote: "Airways increase in diameter. Pneumocytes develop starting at week 20 (surfactant synthesis). Respiration capable at week 25." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p678: choanal atresia ----------
+  - id: resp.L01.008
+    kind: card
+    topic: choanal-atresia
+    front: What is choanal atresia, and how is it diagnosed?
+    back: Blockage of the posterior nasal opening, often with midface bony abnormalities and usually unilateral. Diagnosed by failure to pass a nasogastric tube beyond the pharynx; confirmed with CT.
+    src: { page: 678, quote: "Diagnosed by failure to pass nasogastric tube (beyond the pharynx) and confirmed with CT scan." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.009
+    kind: cloze
+    topic: choanal-atresia
+    text: "Bilateral choanal atresia is an emergency: upper airway obstruction, noisy breathing and/or cyanosis that worsens during {{c1::feeding}} and improves with {{c2::crying}}."
+    src: { page: 678, quote: "cyanosis that worsens during feeding and improves with crying." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.010
+    kind: enumerate
+    topic: choanal-atresia
+    prompt: Enumerate the features of CHARGE syndrome (6).
+    points:
+      - Coloboma of eye
+      - Heart defects
+      - Atresia of choanae
+      - Restricted growth and development
+      - Genitourinary defects
+      - Ear defects
+    pass: 5
+    src: { page: 678, quote: "Coloboma of eye ▘ Heart defects ▘ Atresia of choanae ▘ Restricted growth and development ▘ Genitourinary defects ▘ Ear defects" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.011
+    kind: mcq
+    topic: choanal-atresia
+    stem: >-
+      A newborn girl turns blue while breastfeeding and pinks up when she cries. A nasogastric tube cannot be passed
+      beyond the pharynx through either nostril. Examination also shows a keyhole defect of both irises and a heart
+      murmur. Which additional finding is most likely?
+    options:
+      - Bilateral renal agenesis
+      - Ear defects
+      - Tracheoesophageal fistula
+      - Left-sided diaphragmatic hernia
+      - Ground-glass lung fields
+    answer: 1
+    why:
+      - "Renal agenesis is Potter sequence, linked to pulmonary hypoplasia."
+      - "Right. Bilateral choanal atresia with coloboma and a heart defect is CHARGE syndrome, which also includes ear defects."
+      - "TEF is an embryonic-stage lung bud error, not part of CHARGE."
+      - "Diaphragmatic hernia goes with pulmonary hypoplasia."
+      - "Ground-glass lungs are neonatal RDS from surfactant deficiency."
+    src: { page: 678, quote: "Often part of multiple malformation syndromes, such as CHARGE syndrome" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p679: pulmonary hypoplasia ----------
+  - id: resp.L01.012
+    kind: card
+    topic: pulmonary-hypoplasia
+    front: What is pulmonary hypoplasia, and what is it associated with?
+    back: A poorly developed bronchial tree with abnormal histology; associated with congenital diaphragmatic hernia (usually left-sided) and bilateral renal agenesis (Potter sequence).
+    src: { page: 679, quote: "Poorly developed bronchial tree with abnormal histology. Associated with congenital diaphragmatic hernia (usually left-sided), bilateral renal agenesis (Potter sequence)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.013
+    kind: mcq
+    topic: pulmonary-hypoplasia
+    stem: >-
+      A term newborn has severe respiratory distress and a scaphoid abdomen. Chest x-ray shows bowel loops in the left
+      hemithorax. The baby dies despite ventilation. What is the most likely lung finding at autopsy?
+    options:
+      - Fluid-filled cyst from abnormal foregut budding
+      - Poorly developed bronchial tree with abnormal histology
+      - Hyaline membranes from surfactant deficiency
+      - Tracheoesophageal fistula
+      - Normal lungs with a patent ductus arteriosus
+    answer: 1
+    why:
+      - "A bronchogenic cyst is a discrete round density, not a whole underdeveloped lung."
+      - "Right. A congenital diaphragmatic hernia (usually left-sided) causes pulmonary hypoplasia: a poorly developed bronchial tree."
+      - "Surfactant deficiency is neonatal RDS of prematurity; this baby is term."
+      - "TEF is an embryonic-stage error and does not explain bowel in the chest."
+      - "The lungs cannot be normal when bowel fills the hemithorax."
+    src: { page: 679, quote: "Associated with congenital diaphragmatic hernia (usually left-sided)" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p679: bronchogenic cysts ----------
+  - id: resp.L01.014
+    kind: card
+    topic: bronchogenic-cysts
+    front: What causes bronchogenic cysts, and how do they look on CXR?
+    back: Abnormal budding of the foregut with dilation of terminal or large bronchi. Discrete, round, sharply defined, fluid-filled densities (air-filled if infected).
+    src: { page: 679, quote: "Caused by abnormal budding of the foregut and dilation of terminal or large bronchi. Discrete, round, sharply defined, fluid-filled densities on CXR (air-filled if infected)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.015
+    kind: mcq
+    topic: bronchogenic-cysts
+    stem: >-
+      A 9-year-old boy has had three episodes of pneumonia in the same area in a year. Chest x-ray shows a round, sharply
+      defined, fluid-filled density near the carina. What is the origin of this lesion?
+    options:
+      - Abnormal budding of the foregut
+      - Herniation of bowel through the diaphragm
+      - Failed septation of the trachea and esophagus
+      - Arrest at the saccular stage
+      - Surfactant deficiency
+    answer: 0
+    why:
+      - "Right. A bronchogenic cyst comes from abnormal foregut budding; it can drain poorly → airway compression and recurrent infections."
+      - "Diaphragmatic hernia causes pulmonary hypoplasia."
+      - "That describes a tracheoesophageal fistula, an embryonic-stage error."
+      - "Developmental arrest does not produce a discrete fluid-filled cyst."
+      - "Surfactant deficiency gives diffuse ground-glass lungs in premature babies."
+    src: { page: 679, quote: "Generally asymptomatic but can drain poorly → airway compression, recurrent respiratory infections." }
+    status: unverified
+  # ---------- p679: club cells ----------
+  - id: resp.L01.016
+    kind: card
+    topic: club-cells
+    front: Describe club cells and their three functions.
+    back: Microciliated, low columnar/cuboidal cells with secretory granules in the bronchioles. They degrade toxins (P-450), secrete a surfactant-like component and act as stem cells for bronchiolar epithelium.
+    src: { page: 679, quote: "Degrade toxins (P-450); secrete surfactant-like component; act as stem cells to replace bronchiolar epithelium." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.017
+    kind: mcq
+    topic: club-cells
+    stem: >-
+      A researcher studies a low columnar cell with secretory granules in the bronchioles. It metabolizes inhaled
+      toxins with cytochrome P-450. Which other function does this cell have?
+    options:
+      - Covers 97% of alveolar surfaces for gas exchange
+      - Secretes DPPC from lamellar bodies
+      - Replaces bronchiolar epithelium as a stem cell
+      - Phagocytoses dust and releases alveolar proteases
+      - Produces mucus in the trachea
+    answer: 2
+    why:
+      - "That is the type I pneumocyte."
+      - "Lamellar bodies belong to type II pneumocytes; club cells secrete only a surfactant-like component."
+      - "Right. Club cells degrade toxins, secrete a surfactant-like component and act as stem cells for bronchiolar epithelium."
+      - "That is the alveolar macrophage (dust cell)."
+      - "Club cells are in the bronchioles, and this function is not listed for them."
+    src: { page: 679, quote: "act as stem cells to replace bronchiolar epithelium." }
+    status: unverified
+  # ---------- p679: alveolar cell types ----------
+  - id: resp.L01.018
+    kind: table
+    topic: alveolar-cell-types
+    title: Alveolar cell types
+    columns: [Cell, Shape or role]
+    rows:
+      - [Type I pneumocytes, "Squamous; 97% of alveolar surfaces; thinly line the alveoli for gas exchange"]
+      - [Type II pneumocytes, "Cuboidal and clustered; stem cells for type I and II; secrete surfactant from lamellar bodies"]
+      - [Alveolar macrophages (dust cells), "Phagocytose foreign material; release cytokines and alveolar proteases"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 679, quote: "Squamous. 97% of alveolar surfaces. Thinly line the alveoli A for optimal gas exchange." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.019
+    kind: card
+    topic: alveolar-cell-types
+    front: What are the pores of Kohn?
+    back: Anatomical communications between alveoli that let air, fluid, phagocytes and bacteria (in pneumonia) pass.
+    src: { page: 679, quote: "Pores of Kohn—anatomical communications between alveoli that allow for passing of air, fluid, phagocytes, and bacteria (in pneumonia)." }
+    status: unverified
+  - id: resp.L01.020
+    kind: cloze
+    topic: alveolar-cell-types
+    text: "Type II pneumocytes serve as stem cell precursors for {{c1::type I and type II pneumocytes}} and proliferate during {{c2::lung damage}}."
+    src: { page: 679, quote: "Serve as stem cell precursors for 2 cell types (type I and type II pneumocytes); proliferate during lung damage." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.021
+    kind: card
+    topic: alveolar-cell-types
+    front: How does the law of Laplace apply to alveoli?
+    back: Collapsing pressure = 2 (surface tension)/radius, so alveoli tend to collapse on expiration as the radius falls.
+    src: { page: 679, quote: "Application of Law of Laplace in alveoli–alveoli have ↑ tendency to collapse on expiration as radius ↓." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.022
+    kind: enumerate
+    topic: alveolar-cell-types
+    prompt: Enumerate the four effects of surfactant (4).
+    points:
+      - ↓ Alveolar surface tension
+      - ↓ Alveolar collapse
+      - ↓ Lung recoil
+      - ↑ Compliance
+    pass: 4
+    src: { page: 679, quote: "Surfactant—↓ alveolar surface tension, ↓ alveolar collapse, ↓ lung recoil, and ↑ compliance." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.023
+    kind: cloze
+    topic: alveolar-cell-types
+    text: "Surfactant is mainly {{c1::dipalmitoylphosphatidylcholine (DPPC)}}. Synthesis begins at ~{{c2::20}} weeks and reaches mature levels at ~{{c3::35}} weeks of gestation."
+    src: { page: 679, quote: "Composed of multiple lecithins, mainly dipalmitoylphosphatidylcholine (DPPC). Synthesis begins ~20 weeks of gestation and achieves mature levels ~35 weeks of gestation." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.024
+    kind: card
+    topic: alveolar-cell-types
+    front: Which hormones are important for fetal surfactant synthesis?
+    back: Glucocorticoids, which are important for fetal surfactant synthesis and lung development.
+    src: { page: 679, quote: "Glucocorticoids are important for fetal surfactant synthesis and lung development." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.025
+    kind: card
+    topic: alveolar-cell-types
+    front: Where are hemosiderin-laden macrophages found?
+    back: In conditions such as pulmonary edema and alveolar hemorrhage.
+    src: { page: 679, quote: "Hemosiderin-laden macrophages may be found (eg, pulmonary edema, alveolar hemorrhage)." }
+    status: unverified
+  - id: resp.L01.026
+    kind: mcq
+    topic: alveolar-cell-types
+    stem: >-
+      Three weeks after a severe viral pneumonia with diffuse alveolar damage, a lung biopsy shows clusters of cuboidal
+      cells lining the alveoli. These cells are restoring the alveolar wall. Which other function do they have?
+    options:
+      - Degrading toxins with cytochrome P-450
+      - Secreting surfactant from lamellar bodies
+      - Phagocytosing hemosiderin
+      - Forming the pores of Kohn
+      - Covering 97% of the alveolar surface for gas exchange
+    answer: 1
+    why:
+      - "That is the club cell of the bronchioles."
+      - "Right. Type II pneumocytes proliferate after lung damage, replace type I cells, and secrete surfactant from lamellar bodies."
+      - "Hemosiderin-laden macrophages are alveolar macrophages."
+      - "Pores of Kohn are channels between alveoli, not cells."
+      - "That is the type I pneumocyte, which is squamous."
+    src: { page: 679, quote: "Secrete surfactant from lamellar bodies (arrowheads in B )." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p679: neonatal respiratory distress syndrome ----------
+  - id: resp.L01.027
+    kind: card
+    topic: neonatal-respiratory-distress-syndrome
+    front: What is the mechanism of neonatal respiratory distress syndrome, and what does the CXR show?
+    back: Surfactant deficiency → ↑ surface tension → alveolar collapse, giving a "ground-glass" appearance of the lung fields.
+    src: { page: 679, quote: "Surfactant deficiency → ↑ surface tension → alveolar collapse (“ground-glass” appearance of lung fields) A ." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.028
+    kind: enumerate
+    topic: neonatal-respiratory-distress-syndrome
+    prompt: Enumerate the risk factors for neonatal respiratory distress syndrome, with the reason where given (3).
+    points:
+      - Prematurity
+      - Diabetes during pregnancy (↑ fetal insulin)
+      - C-section delivery (↓ release of fetal glucocorticoids)
+    pass: 3
+    src: { page: 679, quote: "Risk factors: prematurity, diabetes during pregnancy (due to ↑ fetal insulin), C-section delivery (↓ release of fetal glucocorticoids; less stressful than vaginal delivery)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.029
+    kind: card
+    topic: neonatal-respiratory-distress-syndrome
+    front: How is neonatal respiratory distress syndrome treated?
+    back: Maternal glucocorticoids before birth; exogenous surfactant for the infant.
+    src: { page: 679, quote: "Treatment: maternal glucocorticoids before birth; exogenous surfactant for infant." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.030
+    kind: enumerate
+    topic: neonatal-respiratory-distress-syndrome
+    prompt: "Enumerate the complications of therapeutic supplemental O2 in neonates (RIB) (3)."
+    points:
+      - Retinopathy of prematurity
+      - Intraventricular hemorrhage
+      - Bronchopulmonary dysplasia
+    pass: 3
+    hook: "RIB: العين، المخ، والرئة نفسها."
+    src: { page: 679, quote: "Therapeutic supplemental O2 → Retinopathy of prematurity, Intraventricular hemorrhage, Bronchopulmonary dysplasia (RIB)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.031
+    kind: cloze
+    topic: neonatal-respiratory-distress-syndrome
+    text: "Persistently low O2 tension in neonatal RDS → risk of {{c1::PDA}}."
+    src: { page: 679, quote: "Persistently low O2 tension → risk of PDA." }
+    status: unverified
+  - id: resp.L01.032
+    kind: card
+    topic: neonatal-respiratory-distress-syndrome
+    front: Which amniotic fluid tests screen for fetal lung maturity, and what L/S ratio is healthy?
+    back: Lamellar body count, lecithin-sphingomyelin (L/S) ratio, foam stability index, surfactant-albumin ratio. L/S ≥ 2 is healthy; < 1.5 predicts NRDS.
+    src: { page: 679, quote: "Screening tests for fetal lung maturity: lamellar body count and lecithin-sphingomyelin (L/S) ratio in amniotic fluid (≥2 is healthy; <1.5 predictive of NRDS), foam stability index, surfactant-albumin ratio." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.033
+    kind: mcq
+    topic: neonatal-respiratory-distress-syndrome
+    stem: >-
+      A 33-year-old woman with poorly controlled diabetes delivers at 34 weeks. Within hours the infant has grunting,
+      retractions and cyanosis; chest x-ray shows diffuse ground-glass lung fields. What links the mother's diabetes to
+      this condition?
+    options:
+      - Fetal hyperglycemia damages type I pneumocytes
+      - Elevated fetal insulin impairs surfactant production
+      - Maternal glucocorticoid excess blocks lung budding
+      - Fetal hypoglycemia causes a patent ductus arteriosus
+      - Macrosomia compresses the chest during delivery
+    answer: 1
+    why:
+      - "First Aid gives the mechanism as fetal insulin, not direct pneumocyte damage."
+      - "Right. Diabetes in pregnancy raises fetal insulin, a risk factor for surfactant deficiency and neonatal RDS."
+      - "Glucocorticoids promote fetal surfactant synthesis; they are the treatment."
+      - "PDA is a risk from persistently low O2 tension, not a cause of RDS."
+      - "Ground-glass lungs reflect alveolar collapse, not birth trauma."
+    src: { page: 679, quote: "diabetes during pregnancy (due to ↑ fetal insulin)" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L01.034
+    kind: mcq
+    topic: neonatal-respiratory-distress-syndrome
+    stem: >-
+      A 27-week preterm infant with respiratory distress is treated with high concentrations of supplemental oxygen for
+      several weeks. Which complication is most likely from the treatment itself?
+    options:
+      - Choanal atresia
+      - Retinopathy of prematurity
+      - Bronchogenic cyst
+      - Pulmonary hypoplasia
+      - Tracheoesophageal fistula
+    answer: 1
+    why:
+      - "Choanal atresia is a congenital blockage, not a treatment effect."
+      - "Right. Supplemental O2 → RIB: retinopathy of prematurity, intraventricular hemorrhage, bronchopulmonary dysplasia."
+      - "Bronchogenic cysts come from abnormal foregut budding."
+      - "Pulmonary hypoplasia is developmental (diaphragmatic hernia, Potter sequence)."
+      - "TEF is an embryonic-stage error."
+    src: { page: 679, quote: "Therapeutic supplemental O2 → Retinopathy of prematurity, Intraventricular hemorrhage, Bronchopulmonary dysplasia (RIB)." }
+    status: unverified
+    tags: [high-yield]

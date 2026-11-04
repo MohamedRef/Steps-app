@@ -1,5 +1,5 @@
 //! The content format `steps.content/v1`: one YAML file per lecture
-//! (`content/hb/L01.yaml`). The rules for writing it are in docs/CONTENT.md and
+//! (`content/cvs/L01.yaml`). The rules for writing it are in docs/CONTENT.md and
 //! `docs/CONTENT.md`; [`crate::validate`] enforces them.
 
 use std::collections::BTreeMap;
@@ -13,7 +13,7 @@ pub const SCHEMA: &str = "steps.content/v1";
 #[serde(deny_unknown_fields)]
 pub struct Lecture {
     pub schema: String,
-    /// `hb.L01`: chapter slug, then the lecture number.
+    /// `cvs.L04`: chapter slug, then the lecture number.
     pub lecture: String,
     pub title: String,
     /// The lecturer named in the book.
@@ -44,7 +44,7 @@ pub struct Topic {
 /// fields are in [`Body`].
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Item {
-    /// `hb.L01.001`. Never reused or renumbered.
+    /// `cvs.L04.001`. Never reused or renumbered.
     pub id: String,
     #[serde(flatten)]
     pub body: Body,
@@ -235,7 +235,7 @@ pub enum Status {
 #[serde(deny_unknown_fields)]
 pub struct Update {
     pub text: String,
-    /// The guideline and year, e.g. "Baveno VII, 2021".
+    /// The guideline and year, e.g. "AHA/ACC 2022".
     #[serde(rename = "ref")]
     pub reference: String,
 }
@@ -292,26 +292,43 @@ mod tests {
 
     #[test]
     fn cloze_blanks_parse_numbers_answers_and_hints() {
-        let b = cloze_blanks("PMN {{c1::≥250}} cells/mm³ in {{c2::SBP::infection}}").unwrap();
-        assert_eq!(b, vec![(1, "≥250".into()), (2, "SBP".into())]);
+        let b = cloze_blanks("LDL {{c1::≥190}} mg/dL in {{c2::FH::inherited}}").unwrap();
+        assert_eq!(b, vec![(1, "≥190".into()), (2, "FH".into())]);
         assert_eq!(cloze_blanks("no blanks"), Some(vec![]));
         assert_eq!(cloze_blanks("{{c1::open"), None);
         assert_eq!(cloze_blanks("{{x1::bad}}"), None);
         assert_eq!(cloze_blanks("{{c1::}}"), None);
         assert_eq!(cloze_blanks("stray }}"), None);
+        assert_eq!(cloze_blanks("{{c1::{{c2::nested}}"), None);
+    }
+
+    #[test]
+    fn every_kind_has_its_keys() {
+        let lec: Lecture =
+            serde_yaml_ng::from_str(include_str!("../../../fixtures/content/sample.yaml")).unwrap();
+        for item in &lec.items {
+            let keys = allowed_keys(item.body.kind()).unwrap();
+            // The keys serde writes for the body are exactly the allowed ones in use.
+            let json = serde_json::to_value(item).unwrap();
+            for k in json.as_object().unwrap().keys() {
+                assert!(keys.contains(&k.as_str()) || SHARED_KEYS.contains(&k.as_str()), "{}: {k}", item.id);
+            }
+        }
+        assert_eq!(allowed_keys("table"), Some(&["title", "columns", "rows", "blanks"][..]));
+        assert_eq!(allowed_keys("flashcard"), None);
     }
 
     #[test]
     fn items_round_trip_through_yaml() {
         let yaml = r#"
-id: hb.L01.001
+id: cvs.L04.001
 kind: mcq
-topic: child-pugh
-stem: Child-Pugh class?
-options: [A, B, C, D]
+topic: shock
+stem: Most likely echo finding?
+options: [A, B, C, D, E]
 answer: 1
-why: [too low, "8 points", too high, not needed]
-src: { page: 14 }
+why: [no, "diastolic RV collapse", no, no, no]
+src: { page: 317 }
 status: unverified
 "#;
         let item: Item = serde_yaml_ng::from_str(yaml).unwrap();

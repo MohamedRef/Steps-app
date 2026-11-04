@@ -41,4 +41,10 @@ mod tests {
         assert_eq!(WidthClass::from_dp(839.9), WidthClass::Medium);
         assert_eq!(WidthClass::from_dp(1100.0), WidthClass::Expanded);
     }
+
+    #[test]
+    fn class_names_for_css() {
+        let names = [412.0, 700.0, 1280.0].map(|w| WidthClass::from_dp(w).as_str());
+        assert_eq!(names, ["compact", "medium", "expanded"]);
+    }
 }

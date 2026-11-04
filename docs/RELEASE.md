@@ -8,7 +8,7 @@ paid developer accounts. Everything here costs $0.
 No release yet. The first **alpha** will be `1.0.0-alpha.1`, when Mohamed
 says go. Releases are built and published by the **Release** workflow
 (`.github/workflows/release.yml`, run by hand; §4). The CI *preview* APKs
-(§3) keep coming on every merge.
+(§3) come once a night when `main` moved, or when Mohamed runs the workflow by hand.
 
 Steps has its own keys, its own feed and its own package (`app.steps`).
 It never shares a key, a feed or a client with Batna or Kabar.
@@ -42,12 +42,61 @@ key decides which feeds it trusts. Back them up the day they are made.
 
 ## 2. One-time setup on the Mac
 
+### The permanent keys (once, before the first alpha)
+
+Mohamed makes the keys himself on his Mac. Nothing here costs money, and no
+key or password ever goes into the repo, a file in it, or the chat.
+
+1. Tools, once: `brew install just gh` and `brew install --cask temurin`
+   (it brings `keytool`), Rust (`rustup`), then `gh auth login` (GitHub.com,
+   HTTPS, log in with the browser).
+2. In the repo on `main`: `git pull`, then **`just release-keys`**. It runs
+   `scripts/release-secrets.sh`, which makes each key once and reuses it on
+   every later run:
+   - the Android release keystore `~/.steps/steps-release.jks` (RSA 4096,
+     alias `steps`, valid about 27 years), its password in the Keychain
+     (`steps-android`);
+   - the update key (Ed25519): its public half in `crates/app/update-key.pub`,
+     its secret half only in the Keychain (`steps-update`);
+   - the "Steps Code Signing" identity for Steps.app, also kept as
+     `~/.steps/steps-codesign.p12` (password: Keychain `steps-codesign`).
+
+   It then fills the repo's Actions secrets with `gh secret set`
+   (`STEPS_UPDATE_SECRET`, `STEPS_ANDROID_KEYSTORE`,
+   `STEPS_ANDROID_KEYSTORE_PASSWORD`, `STEPS_MAC_CERT_P12`,
+   `STEPS_MAC_CERT_PASSWORD`) and the repo variable
+   `STEPS_ANDROID_CERT_SHA256` (the certificate's public fingerprint: both
+   Android workflows refuse to publish an APK signed with any other key).
+   macOS may ask for the login password to trust the code-signing
+   certificate.
+3. The script prints the new public update key (one line ending in `=`).
+   Paste that line in the Steps chat, and it lands in a PR that commits
+   `crates/app/update-key.pub` (it is public). Until that PR merges, the
+   "Android preview APK" job on `main` fails on purpose with "holds no key
+   yet".
+4. **`just release-keys-backup`** (or `just release-keys-backup /Volumes/USB`):
+   one encrypted `Steps-release-keys.dmg` with both key files, the three
+   Keychain passwords, the public key and `RESTORE.txt`. Pick a passphrase
+   and keep it in your password manager. Copy the image to a second place
+   (iCloud Drive and a USB stick).
+
+From the next merge on, every preview APK on `steps-preview` is signed with
+the permanent key, so it installs over any later alpha, beta or stable
+build and the other way round, with the data kept.
+
+**Never make the keys again.** Android installs an update only when it is
+signed with the same key, so a new keystore would mean uninstalling Steps;
+a new update key would strand every installed build. On a new Mac, restore
+from the backup (`RESTORE.txt`) and run `just release-keys` again: it
+reuses everything and only refreshes the GitHub secrets.
+`just android-keystore` on its own only checks that the keystore and its
+Keychain password still match, and prints the certificate's SHA-256.
+
+### Other one-time steps
+
 | Step | Command | Notes |
 |---|---|---|
 | Tools | `brew install just`, Rust, `cargo install dioxus-cli --version 0.7.10`, Android SDK + NDK | Same as `docs/RUN.md` |
-| Release signing key | `just android-keystore` | Writes `~/.steps/steps-release.jks`. The password goes into the Keychain (`steps-android`). **Back the file and password up.** Android only installs an update signed with the same key, so losing it means uninstalling Steps and starting over. |
-| Mac signing identity | `just mac-codesign-cert` | A free self-signed "Steps Code Signing" certificate. Every Steps.app keeps the same identity, so the updater keeps trusting it. |
-| Update key | `just update-keygen` | Once, before the first alpha. Writes `crates/app/update-key.pub` (commit it) and keeps the secret in the Keychain (`steps-update`). See §5. |
 | Icons | `just icons` (only after editing `assets/src/icon/*.svg`) | Needs `pip install cairosvg pillow`. The exported PNGs are committed. |
 
 ## 3. Builds
@@ -57,7 +106,7 @@ key decides which feeds it trusts. Back them up the day they are made.
 | Signed release APK | `just apk` | `dist/android/steps.apk` (arm64, not debuggable, R8, versionCode from the version) |
 | Install on a device | `just devices`, then `just install-android <serial>` | Installs over the previous Steps signed with the same key |
 | Mac app | `just bundle-mac` | `dist/mac/Steps.app`, signed "Steps Code Signing" once that exists |
-| CI preview APK | Every push to `main` (`.github/workflows/steps-android-preview.yml`) | `steps-preview.apk` on the `steps-preview` prerelease, signed with the permanent release keys, so it installs over a release build and the other way round. Until the keys exist, main only proves the APK builds and publishes nothing. It updates itself from its feed once Settings › Updates picks preview (§5). |
+| CI preview APK | Nightly at 03:00 Cairo time, only when `main` moved since the build on the feed, or by hand: Actions › Android preview APK › Run workflow (`.github/workflows/steps-android-preview.yml`; Mohamed, 2026-11-04). Pull requests touching the Android glue build it as a check and publish nothing. | `steps-preview.apk` on the `steps-preview` prerelease, signed with the permanent release keys, so it installs over a release build and the other way round. Until the keys exist, main only proves the APK builds and publishes nothing. It updates itself from its feed once Settings › Updates picks preview (§5). |
 
 Preview and release APKs carry the same keys, so either installs over the
 other and keeps the data.
@@ -66,14 +115,8 @@ other and keeps the data.
 
 ### From CI (the usual way)
 
-1. Once, on the Mac: `scripts/release-secrets.sh`. It makes (or reuses) the
-   update key, the Android release keystore and the "Steps Code Signing"
-   identity exactly as §2 does, and copies them into the repo's Actions
-   secrets with `gh secret set` (`STEPS_UPDATE_SECRET`,
-   `STEPS_ANDROID_KEYSTORE`, `STEPS_ANDROID_KEYSTORE_PASSWORD`,
-   `STEPS_MAC_CERT_P12`, `STEPS_MAC_CERT_PASSWORD`). Commit
-   `crates/app/update-key.pub` the first time. Back up `~/.steps/` and the
-   Keychain items `steps-update`, `steps-android`, `steps-codesign`.
+1. Once, on the Mac: the permanent keys (§2: `just release-keys`, the
+   public update key committed, `just release-keys-backup`).
 2. Set `version` in `Cargo.toml` in a PR (with its `changes/` line) and merge it.
 3. Actions › Release › Run workflow. It builds the content pack, the
    release APK (Linux) and Steps.app (macOS runner), signs them with the
@@ -84,7 +127,9 @@ other and keeps the data.
    - the channel feed(s) (`steps-alpha`, …): the signed `update.json`
      that installed release builds read (§5).
 4. The first time only, install by hand: install the APK on both Galaxy
-   devices (over any preview build: same keys), and on the Mac
+   devices (over any preview build signed with the permanent key: same
+   keys; a preview from before the keys existed was signed with a one-off
+   key and must be uninstalled first), and on the Mac
    move Steps.app to Applications and run
    `xattr -dr com.apple.quarantine /Applications/Steps.app` once (it is
    self-signed). Every later release reaches them over the air.
@@ -117,7 +162,7 @@ public release needs no token and costs nothing.
 
 | Channel | Release tag | Who follows it |
 |---|---|---|
-| Preview | `steps-preview` | Every push to `main`, signed with the release keys, for whoever picks it in Settings › Updates. |
+| Preview | `steps-preview` | The nightly (or hand-started) build of `main`, signed with the release keys, for whoever picks it in Settings › Updates. |
 | Alpha | `steps-alpha` | Every build by default (Mohamed, 2026-11-04), from the first alpha on. |
 | Beta / Stable | `steps-beta`, `steps-stable` | Later. A beta also reaches alpha followers; a release reaches everyone. |
 
@@ -279,7 +324,7 @@ or not reachable), with when it last looked. Then two per-device choices:
 | Choice | Options |
 |---|---|
 | How it updates | **لوحده** (automatic, the default): downloads on Wi-Fi only and installs at a calm moment. **قولّي الأول** (tell me first): says so, and downloads and installs on a tap. **لأ** (off): only on "دوّر على تحديث". |
-| Channel | Preview, alpha, beta or stable, on any build (a preview build starts on preview, a release build on alpha). Preview brings every merge; on the Mac it brings content only (no Mac preview build). Going back from preview to alpha offers the next alpha version. |
+| Channel | Preview, alpha, beta or stable, on any build (every build starts on alpha, Mohamed 2026-11-04; all are signed with the same permanent keys, so switching never needs a reinstall). Preview brings the nightly build of `main`; on the Mac it brings content only (no Mac preview build). Going back from preview to alpha offers the next alpha version. |
 
 When something is ready, a card above the current screen says so, with the
 first two lines of what's new (below) and "إيه الجديد؟". "بعدين" hides it

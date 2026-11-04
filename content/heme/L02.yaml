@@ -1,0 +1,814 @@
+schema: steps.content/v1
+lecture: heme.L02
+title: Anatomy
+book: { chapter: 10, pages: [412, 415] }
+topics:
+  - { id: hematopoiesis, title: Hematopoiesis }
+  - { id: neutrophils, title: Neutrophils }
+  - { id: erythrocytes, title: Erythrocytes }
+  - { id: thrombocytes, title: Thrombocytes (platelets) }
+  - { id: monocytes, title: Monocytes }
+  - { id: macrophages, title: Macrophages }
+  - { id: dendritic-cells, title: Dendritic cells }
+  - { id: eosinophils, title: Eosinophils }
+  - { id: basophils, title: Basophils }
+  - { id: mast-cells, title: Mast cells }
+  - { id: lymphocytes, title: Lymphocytes }
+  - { id: natural-killer-cells, title: Natural killer cells }
+  - { id: b-cells, title: B cells }
+  - { id: t-cells, title: T cells }
+  - { id: plasma-cells, title: Plasma cells }
+items:
+  # ---------- p412: hematopoiesis ----------
+  - id: heme.L02.001
+    kind: table
+    topic: hematopoiesis
+    title: Hematopoiesis from the multipotent stem cell
+    columns: [Stem cell, Precursor, Mature cells]
+    rows:
+      - [Myeloid stem cell, Erythroblast, Reticulocyte → erythrocyte]
+      - [Myeloid stem cell, Megakaryoblast, Megakaryocyte → platelets]
+      - [Myeloid stem cell, Myeloblast, "Band → neutrophil; eosinophil; basophil"]
+      - [Myeloid stem cell, Monoblast, Monocyte → macrophage]
+      - [Lymphoid stem cell, Lymphoblast, "B cell (→ plasma cell), T cell (→ T-helper, T-cytotoxic), NK cell"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [4, 2]]
+    src: { page: 412, quote: "Megakaryoblast Lymphoblast Myeloblast Erythroblast Granulocytopoiesis Monocytopoiesis Multipotent stem cell Lymphoid stem cell" }
+    status: unverified
+  - id: heme.L02.002
+    kind: card
+    topic: hematopoiesis
+    front: Which stem cell gives rise to NK cells, and which to monocytes?
+    back: "NK cells: the lymphoid stem cell (via the lymphoblast, with B and T cells). Monocytes: the myeloid stem cell (via the monoblast)."
+    src: { page: 412, quote: "Multipotent stem cell Lymphoid stem cell Band NK cell Monoblast Macrophage Monocyte" }
+    status: unverified
+  - id: heme.L02.003
+    kind: mcq
+    topic: hematopoiesis
+    stem: >-
+      A 58-year-old man has a bone marrow biopsy for unexplained pancytopenia. The pathologist identifies
+      a large precursor cell that undergoes repeated nuclear division without cell division and sheds
+      small cytoplasmic fragments into the marrow sinusoids. Which cell in the peripheral blood comes
+      from this precursor?
+    options:
+      - Reticulocyte
+      - Platelet
+      - Monocyte
+      - Band neutrophil
+      - Natural killer cell
+    answer: 1
+    why:
+      - "Reticulocytes come from the erythroblast line."
+      - "Right. The megakaryoblast matures into the megakaryocyte, whose cytoplasmic fragments are platelets."
+      - "Monocytes come from the monoblast."
+      - "Bands come from the myeloblast (granulocytopoiesis)."
+      - "NK cells come from the lymphoid stem cell."
+    src: { page: 412, quote: "Erythrocyte Platelets Megakaryocyte Megakaryoblast" }
+    status: unverified
+  # ---------- p412: neutrophils ----------
+  - id: heme.L02.004
+    kind: card
+    topic: neutrophils
+    front: What is the role of neutrophils, and what does their nucleus look like?
+    back: Acute inflammatory response cells; phagocytic. Multilobed nucleus.
+    src: { page: 412, quote: "Acute inflammatory response cells. Phagocytic. Multilobed nucleus" }
+    status: unverified
+  - id: heme.L02.005
+    kind: table
+    topic: neutrophils
+    title: Neutrophil granules
+    columns: [Granule, Contents]
+    rows:
+      - [Specific granules, "Leukocyte alkaline phosphatase (LAP), collagenase, lysozyme, lactoferrin"]
+      - [Azurophilic granules (lysosomes), "Proteinases, acid phosphatase, myeloperoxidase, β-glucuronidase"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 412, quote: "Specific granules contain leukocyte alkaline phosphatase (LAP), collagenase, lysozyme, and lactoferrin. Azurophilic granules (lysosomes) contain proteinases, acid phosphatase, myeloperoxidase, and β-glucuronidase." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.006
+    kind: enumerate
+    topic: neutrophils
+    prompt: Enumerate the neutrophil chemotactic agents (7).
+    points:
+      - C5a
+      - IL-8
+      - LTB4
+      - 5-HETE (leukotriene precursor)
+      - Kallikrein
+      - Platelet-activating factor
+      - N-formylmethionine (bacterial proteins)
+    pass: 6
+    hook: "3 بأرقام (C5a و IL-8 و LTB4)، وواحد قريب الـ LTB4 (5-HETE)، و3 بأسامي: Kallikrein و platelet-activating factor و N-formylmethionine."
+    src: { page: 412, quote: "5-HETE (leukotriene precursor), kallikrein, platelet-activating factor, N-formylmethionine (bacterial proteins)." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.007
+    kind: card
+    topic: neutrophils
+    front: Which morphologic changes do inflammatory states (eg, bacterial infection) cause in neutrophils?
+    back: Neutrophilia with left shift, toxic granulation (dark blue, coarse granules), Döhle bodies (light blue, peripheral inclusions), and cytoplasmic vacuoles.
+    src: { page: 412, quote: "left shift, toxic granulation (dark blue, coarse granules), Döhle bodies (light blue, peripheral inclusions" }
+    status: unverified
+  - id: heme.L02.008
+    kind: cloze
+    topic: neutrophils
+    text: Hypersegmented neutrophils (nucleus with {{c1::5-6+}} lobes) are seen in {{c2::vitamin B12/folate}} deficiency.
+    src: { page: 412, quote: "Hypersegmented neutrophils (nucleus has 5-6+ lobes) are seen in vitamin B12 /folate deficiency." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.009
+    kind: card
+    topic: neutrophils
+    front: What is a left shift, and what does it reflect?
+    back: ↑ neutrophil precursors (eg, band cells, metamyelocytes) in peripheral blood. It reflects ↑ myeloid proliferation (eg, inflammation, CML).
+    src: { page: 412, quote: "Left shift—↑ neutrophil precursors (eg, band cells, metamyelocytes) in peripheral blood. Reflects states of ↑ myeloid proliferation (eg, inflammation, CML)." }
+    status: unverified
+  - id: heme.L02.010
+    kind: card
+    topic: neutrophils
+    front: What is a leukoerythroblastic reaction, and what does it suggest?
+    back: A left shift accompanied by immature RBCs. It suggests bone marrow infiltration (eg, myelofibrosis, metastasis).
+    src: { page: 412, quote: "Leukoerythroblastic reaction—left shift accompanied by immature RBCs. Suggests bone marrow infiltration (eg, myelofibrosis, metastasis)." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.011
+    kind: mcq
+    topic: neutrophils
+    stem: >-
+      A 67-year-old woman with a history of breast cancer has 2 months of back pain and fatigue.
+      Hemoglobin is 8.9 g/dL and the platelet count is 95,000/mm3. A peripheral smear shows myelocytes,
+      metamyelocytes and nucleated red blood cells. There is no fever, and inflammatory markers are
+      normal. Which of the following best explains the smear?
+    options:
+      - Acute bacterial infection
+      - Vitamin B12 deficiency
+      - Bone marrow infiltration by metastatic cancer
+      - Glucocorticoid-induced demargination
+      - Iron deficiency
+    answer: 2
+    why:
+      - "Infection gives a left shift with toxic granulation and Döhle bodies, but not nucleated RBCs."
+      - "B12 deficiency gives hypersegmented neutrophils (5-6+ lobes), not a leukoerythroblastic picture."
+      - "Right. A left shift with immature RBCs is a leukoerythroblastic reaction, which suggests marrow infiltration (metastasis, myelofibrosis)."
+      - "Demargination raises mature neutrophils, without immature red cells."
+      - "Iron deficiency does not release immature white or red cells into the blood."
+    src: { page: 412, quote: "Leukoerythroblastic reaction—left shift accompanied by immature RBCs. Suggests bone marrow infiltration (eg, myelofibrosis, metastasis)." }
+    status: unverified
+  # ---------- p413: erythrocytes ----------
+  - id: heme.L02.012
+    kind: card
+    topic: erythrocytes
+    front: What shape are erythrocytes, and why does it help?
+    back: Biconcave, anucleate and without organelles. The shape gives a large surface area-to-volume ratio for rapid gas exchange.
+    src: { page: 413, quote: "Anucleate and lack organelles; biconcave A , with large surface area-to-volume ratio for rapid gas exchange." }
+    status: unverified
+  - id: heme.L02.013
+    kind: cloze
+    topic: erythrocytes
+    text: The RBC life span is about {{c1::120}} days in healthy adults and {{c2::60-90}} days in neonates.
+    src: { page: 413, quote: "Life span of ~120 days in healthy adults; 60-90 days in neonates." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.014
+    kind: cloze
+    topic: erythrocytes
+    text: The RBC's source of energy is {{c1::glucose}}; {{c2::90%}} is used in glycolysis and {{c3::10%}} in the HMP shunt.
+    src: { page: 413, quote: "Source of energy is glucose (90% used in glycolysis, 10% used in HMP shunt)." }
+    status: unverified
+  - id: heme.L02.015
+    kind: card
+    topic: erythrocytes
+    front: Which RBC membrane transporter lets red cells carry CO2 from the periphery to the lungs?
+    back: The Cl−/HCO3− antiporter, which lets RBCs export HCO3−.
+    src: { page: 413, quote: "Membranes contain Cl− /HCO3 − antiporter, which allow RBCs to export HCO3 − and transport CO2 from the periphery to the lungs for elimination." }
+    status: unverified
+  - id: heme.L02.016
+    kind: table
+    topic: erythrocytes
+    title: RBC terms
+    columns: [Term, Meaning]
+    rows:
+      - [Erythrocytosis (polycythemia), ↑ Hct]
+      - [Anisocytosis, Varying sizes]
+      - [Poikilocytosis, Varying shapes]
+      - [Reticulocyte, Immature RBC; reflects erythroid proliferation]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 413, quote: "Erythrocytosis = polycythemia = ↑ Hct. Anisocytosis = varying sizes. Poikilocytosis = varying shapes." }
+    status: unverified
+  - id: heme.L02.017
+    kind: card
+    topic: erythrocytes
+    front: Why do reticulocytes look bluish (polychromasia) on Wright-Giemsa stain?
+    back: The blue is residual ribosomal RNA.
+    src: { page: 413, quote: "Bluish color (polychromasia) on Wright-Giemsa stain of reticulocytes represents residual ribosomal RNA." }
+    status: unverified
+  - id: heme.L02.018
+    kind: mcq
+    topic: erythrocytes
+    stem: >-
+      A 24-year-old man develops dark urine and anemia after starting an antimalarial drug, and a
+      defect in an enzyme of the hexose monophosphate (HMP) shunt is found. A student asks why his red
+      cells depend entirely on glucose metabolism through glycolysis and the HMP shunt, with no
+      oxidative phosphorylation. Which feature of the mature erythrocyte explains this dependence?
+    options:
+      - It has a Cl−/HCO3− antiporter in its membrane
+      - It lacks a nucleus and organelles, including mitochondria
+      - It has a biconcave shape
+      - It contains residual ribosomal RNA
+      - It lives about 120 days
+    answer: 1
+    why:
+      - "The antiporter carries HCO3− for CO2 transport; it does not determine how the cell makes energy."
+      - "Right. RBCs are anucleate and lack organelles, so with no mitochondria they rely on glucose: 90% through glycolysis and 10% through the HMP shunt."
+      - "The biconcave shape is for a large surface area-to-volume ratio and gas exchange."
+      - "Residual ribosomal RNA is in reticulocytes (polychromasia), not mature RBCs."
+      - "The life span does not explain the energy source."
+    src: { page: 413, quote: "Anucleate and lack organelles" }
+    status: unverified
+  # ---------- p413: thrombocytes ----------
+  - id: heme.L02.019
+    kind: card
+    topic: thrombocytes
+    front: What are platelets derived from, and what is their life span?
+    back: Small anucleate cytoplasmic fragments of megakaryocytes. Life span 8-10 days ("pl8lets").
+    src: { page: 413, quote: "Anucleate, small cytoplasmic fragments A derived from megakaryocytes. Life span of 8-10 days (pl8lets)." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.020
+    kind: table
+    topic: thrombocytes
+    title: Platelet granules
+    columns: [Granule, Contents]
+    rows:
+      - [Dense granules, "Ca2+, ADP, Serotonin, Histamine (CASH)"]
+      - [α granules, "vWF, fibrinogen, fibronectin, platelet factor 4"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 413, quote: "Contain dense granules (Ca2+ , ADP, Serotonin, Histamine; CASH) and α granules (vWF, fibrinogen, fibronectin, platelet factor 4)." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.021
+    kind: cloze
+    topic: thrombocytes
+    text: The vWF receptor on platelets is {{c1::GpIb}}; the fibrinogen receptor is {{c2::GpIIb/IIIa}}.
+    src: { page: 413, quote: "vWF receptor: GpIb. Fibrinogen receptor: GpIIb/IIIa." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.022
+    kind: card
+    topic: thrombocytes
+    front: What share of the platelet pool is stored in the spleen?
+    back: About 1/3.
+    src: { page: 413, quote: "Approximately 1/3 of platelet pool is stored in the spleen." }
+    status: unverified
+  - id: heme.L02.023
+    kind: card
+    topic: thrombocytes
+    front: What does thrombocytopenia or ↓ platelet function cause, and what stimulates megakaryocyte proliferation?
+    back: Petechiae. Thrombopoietin stimulates megakaryocyte proliferation.
+    src: { page: 413, quote: "Thrombocytopenia or ↓ platelet function results in petechiae." }
+    status: unverified
+  - id: heme.L02.024
+    kind: mcq
+    topic: thrombocytes
+    stem: >-
+      A 62-year-old man undergoes coronary stenting for an acute myocardial infarction. During the
+      procedure he receives an intravenous drug that blocks the final common step of platelet
+      aggregation, in which fibrinogen bridges adjacent activated platelets. Which platelet surface
+      molecule does this drug target?
+    options:
+      - GpIb
+      - GpIIb/IIIa
+      - P2Y12 ADP receptor
+      - Platelet factor 4
+      - Thrombopoietin receptor
+    answer: 1
+    why:
+      - "GpIb is the vWF receptor, used for adhesion to the injured vessel, not for fibrinogen bridging."
+      - "Right. GpIIb/IIIa is the fibrinogen receptor; fibrinogen links activated platelets together into the plug."
+      - "ADP from dense granules activates platelets, but the receptor that binds fibrinogen is GpIIb/IIIa."
+      - "Platelet factor 4 is an α-granule content, not a surface receptor for fibrinogen."
+      - "Thrombopoietin stimulates megakaryocyte proliferation; it does not mediate aggregation."
+    src: { page: 413, quote: "Fibrinogen receptor: GpIIb/IIIa." }
+    status: unverified
+  # ---------- p413: monocytes ----------
+  - id: heme.L02.025
+    kind: card
+    topic: monocytes
+    front: What do monocytes look like, and what do they become in tissues?
+    back: A large, kidney-shaped nucleus with extensive "frosted glass" cytoplasm. In tissues they differentiate into macrophages or dendritic cells.
+    src: { page: 413, quote: "Large, kidney-shaped nucleus A . Extensive “frosted glass” cytoplasm." }
+    status: unverified
+  - id: heme.L02.026
+    kind: mcq
+    topic: monocytes
+    stem: >-
+      A hematology resident reviews a normal peripheral smear. She points to the largest white cell in
+      the field: it has a big kidney-shaped nucleus and abundant pale gray "frosted glass" cytoplasm.
+      Into which cell does this cell differentiate after it leaves the blood?
+    options:
+      - Plasma cell
+      - Mast cell
+      - Macrophage
+      - Natural killer cell
+      - Megakaryocyte
+    answer: 2
+    why:
+      - "Plasma cells come from B cells; they have a clock-face nucleus."
+      - "Mast cells share a precursor with basophils, not with monocytes."
+      - "Right. This is a monocyte; in tissues monocytes differentiate into macrophages or dendritic cells."
+      - "NK cells are lymphocytes with cytoplasmic lytic granules."
+      - "Megakaryocytes are marrow cells that shed platelets."
+    src: { page: 413, quote: "Found in blood, differentiate into macrophages or dendritic cells. in tissues." }
+    status: unverified
+  # ---------- p413: macrophages ----------
+  - id: heme.L02.027
+    kind: card
+    topic: macrophages
+    front: What do macrophages phagocytose, what activates them, and how do they present antigen?
+    back: Bacteria, cellular debris and senescent RBCs. Activated by IFN-γ. They present antigen via MHC II and also engage in antibody-dependent cellular cytotoxicity.
+    src: { page: 413, quote: "Phagocytose bacteria, cellular debris, and senescent RBCs. Long life in tissues. Differentiate from circulating blood monocytes A . Activated by IFN-γ. Can function as antigen-presenting cell via MHC II." }
+    status: unverified
+  - id: heme.L02.028
+    kind: table
+    topic: macrophages
+    title: Macrophage names by tissue
+    columns: [Tissue, Macrophage]
+    rows:
+      - [Liver, Kupffer cells]
+      - [Connective tissue, Histiocytes]
+      - [Bone, Osteoclasts]
+      - [Brain, Microglial cells]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 413, quote: "Kupffer cells in liver, histiocytes in connective tissue, osteoclasts in bone, microglial cells in brain" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.029
+    kind: card
+    topic: macrophages
+    front: What binds CD14 on macrophages to initiate septic shock?
+    back: Lipid A from bacterial LPS.
+    src: { page: 413, quote: "Lipid A from bacterial LPS binds CD14 on macrophages to initiate septic shock." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.030
+    kind: card
+    topic: macrophages
+    front: In which lesions are macrophages an important cellular component, and what can they form there?
+    back: Granulomas (eg, TB, sarcoidosis), where they may fuse to form giant cells.
+    src: { page: 413, quote: "Important cellular component of granulomas (eg, TB, sarcoidosis), where they may fuse to form giant cells." }
+    status: unverified
+  - id: heme.L02.031
+    kind: mcq
+    topic: macrophages
+    stem: >-
+      A 71-year-old man is admitted with fever, hypotension (BP 78/40 mm Hg) and confusion 2 days after
+      a urinary catheter was placed. Blood cultures grow Escherichia coli. The cytokine cascade that
+      caused his shock began when a bacterial component bound a receptor on his macrophages. Which
+      receptor did it bind?
+    options:
+      - CD14
+      - CD20
+      - CD56
+      - GpIb
+      - MHC class I
+    answer: 0
+    why:
+      - "Right. Lipid A of the LPS of gram-negative bacteria binds CD14 on macrophages and initiates septic shock."
+      - "CD20 is a B-cell marker."
+      - "CD56 is an NK-cell marker."
+      - "GpIb is the platelet vWF receptor."
+      - "MHC I presents endogenous antigen to CD8 T cells; it is not the LPS receptor."
+    src: { page: 413, quote: "Lipid A from bacterial LPS binds CD14 on macrophages to initiate septic shock." }
+    status: unverified
+  # ---------- p414: dendritic cells ----------
+  - id: heme.L02.032
+    kind: card
+    topic: dendritic-cells
+    front: What is the main role of dendritic cells, and which surface molecules do they express?
+    back: Highly phagocytic antigen-presenting cells that link innate and adaptive immunity (eg, via T-cell stimulation). They express MHC class II and Fc receptors.
+    src: { page: 414, quote: "Function as link between innate and adaptive immune systems (eg, via T-cell stimulation). Express MHC class II and Fc receptors on surface." }
+    status: unverified
+  - id: heme.L02.033
+    kind: cloze
+    topic: dendritic-cells
+    text: Dendritic cells can present exogenous antigens on MHC class {{c1::I}}, a process called {{c2::cross-presentation}}.
+    src: { page: 414, quote: "Can present exogenous antigens on MHC class I (cross-presentation)." }
+    status: unverified
+  - id: heme.L02.034
+    kind: mcq
+    topic: dendritic-cells
+    stem: >-
+      A researcher infects mice with a virus that infects only skin keratinocytes. Antigen-presenting
+      cells in the skin engulf dying infected keratinocytes, migrate to the lymph node, and activate
+      naive CD8+ T cells against the viral protein, although these presenting cells are never infected
+      themselves. Which process explains the activation of the CD8+ T cells?
+    options:
+      - Macrophage presentation of antigen on MHC class II
+      - Dendritic cell cross-presentation of exogenous antigen on MHC class I
+      - B-cell presentation on MHC class II
+      - NK-cell recognition of missing MHC class I
+      - Mast cell degranulation after IgE cross-linking
+    answer: 1
+    why:
+      - "MHC II presents to CD4 T cells, not CD8 T cells."
+      - "Right. Dendritic cells can present exogenous (engulfed) antigen on MHC class I to CD8 T cells: cross-presentation."
+      - "B cells present on MHC II to helper T cells."
+      - "NK cells kill cells lacking MHC I; they do not prime CD8 T cells."
+      - "Mast cell degranulation is a type I hypersensitivity event."
+    src: { page: 414, quote: "Can present exogenous antigens on MHC class I (cross-presentation)." }
+    status: unverified
+  # ---------- p414: eosinophils ----------
+  - id: heme.L02.035
+    kind: card
+    topic: eosinophils
+    front: What do eosinophils defend against, and what do they look like?
+    back: Helminthic infections (major basic protein). Bilobate nucleus, packed with large eosinophilic granules of uniform size. They are highly phagocytic for antigen-antibody complexes.
+    src: { page: 414, quote: "Defend against helminthic infections (major basic protein). Bilobate nucleus. Packed with large eosinophilic granules of uniform size" }
+    status: unverified
+  - id: heme.L02.036
+    kind: enumerate
+    topic: eosinophils
+    prompt: Enumerate what eosinophils produce (5).
+    points:
+      - Histaminase
+      - Major basic protein (MBP, a helminthotoxin)
+      - Eosinophil cationic protein
+      - Eosinophil-derived neurotoxin
+      - IL-5 (promotes eosinophil activation and proliferation)
+    pass: 4
+    src: { page: 414, quote: "Produce histaminase, major basic protein (MBP, a helminthotoxin), eosinophil cationic protein, eosinophil-derived neurotoxin, and IL-5" }
+    status: unverified
+  - id: heme.L02.037
+    kind: enumerate
+    topic: eosinophils
+    prompt: Enumerate the causes of eosinophilia (PACMAN Eats) (7).
+    points:
+      - Parasites
+      - Asthma
+      - Chronic adrenal insufficiency
+      - Myeloproliferative disorders
+      - Allergic processes
+      - Neoplasia (eg, Hodgkin lymphoma)
+      - Eosinophilic granulomatosis with polyangiitis
+    pass: 6
+    hook: "الـ mnemonic بتاع الكتاب: PACMAN Eats، زي اللعبة اللي بتاكل كل حاجة قدامها."
+    src: { page: 414, quote: "Causes of eosinophilia (PACMAN Eats): Parasites Asthma Chronic adrenal insufficiency Myeloproliferative disorders Allergic processes Neoplasia (eg, Hodgkin lymphoma) Eosinophilic granulomatosis with polyangiitis" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.038
+    kind: mcq
+    topic: eosinophils
+    stem: >-
+      A 9-year-old boy from a rural area has 3 weeks of abdominal pain and itching around the anus.
+      A complete blood count shows eosinophilia. Stool examination shows helminth eggs. Which
+      eosinophil product is the main toxin against the parasite?
+    options:
+      - Histaminase
+      - Major basic protein
+      - Myeloperoxidase
+      - Heparin
+      - Tryptase
+    answer: 1
+    why:
+      - "Histaminase breaks down histamine; it is not the helminthotoxin."
+      - "Right. Major basic protein (MBP) is the eosinophil's helminthotoxin."
+      - "Myeloperoxidase is in neutrophil azurophilic granules."
+      - "Heparin is in basophil and mast cell granules."
+      - "Tryptase is released by mast cells."
+    src: { page: 414, quote: "major basic protein (MBP, a helminthotoxin)" }
+    status: unverified
+  # ---------- p414: basophils ----------
+  - id: heme.L02.039
+    kind: card
+    topic: basophils
+    front: What do basophil granules contain, and what do basophils make on demand?
+    back: Heparin (anticoagulant) and histamine (vasodilator). Leukotrienes are synthesized and released on demand. Basophils mediate allergic reactions.
+    src: { page: 414, quote: "Densely basophilic granules A contain heparin (anticoagulant) and histamine (vasodilator). Leukotrienes synthesized and released on demand." }
+    status: unverified
+  - id: heme.L02.040
+    kind: mcq
+    topic: basophils
+    stem: >-
+      A 54-year-old man has fatigue, night sweats and early satiety. The spleen is palpable 8 cm below
+      the costal margin. The leukocyte count is 120,000/mm3 with neutrophils at all stages of
+      maturation and many cells whose dense dark purple granules obscure the nucleus. The increase in
+      these granulated cells is most suggestive of which condition?
+    options:
+      - Helminthic infection
+      - Vitamin B12 deficiency
+      - Chronic myeloid leukemia
+      - Acute bacterial infection
+      - Mastocytosis
+    answer: 2
+    why:
+      - "Helminths raise eosinophils (pink uniform granules), not basophils."
+      - "B12 deficiency gives hypersegmented neutrophils."
+      - "Right. Basophilia is uncommon, but it can be a sign of myeloproliferative disorders, particularly CML."
+      - "Bacterial infection gives neutrophilia with toxic granulation, not basophilia."
+      - "Mastocytosis is proliferation of mast cells in skin and organs, with ↑ serum tryptase."
+    src: { page: 414, quote: "Basophilia is uncommon, but can be a sign of myeloproliferative disorders, particularly CML." }
+    status: unverified
+  # ---------- p414: mast cells ----------
+  - id: heme.L02.041
+    kind: card
+    topic: mast-cells
+    front: How are mast cells related to basophils?
+    back: They originate from the same precursor as basophils but are not the same cell type. They mediate local tissue allergic reactions.
+    src: { page: 414, quote: "Originate from same precursor as basophils but are not the same cell type." }
+    status: unverified
+  - id: heme.L02.042
+    kind: enumerate
+    topic: mast-cells
+    prompt: Enumerate what activates mast cell degranulation (3).
+    points:
+      - Tissue trauma
+      - C3a and C5a
+      - Surface IgE cross-linking by antigen (IgE receptor aggregation)
+    pass: 3
+    src: { page: 414, quote: "Activated by tissue trauma, C3a and C5a, surface IgE cross-linking by antigen (IgE receptor aggregation)" }
+    status: unverified
+  - id: heme.L02.043
+    kind: card
+    topic: mast-cells
+    front: What do mast cells release on degranulation?
+    back: Histamine, heparin, tryptase, and eosinophil chemotactic factors.
+    src: { page: 414, quote: "→ degranulation → release of histamine, heparin, tryptase, and eosinophil chemotactic factors." }
+    status: unverified
+  - id: heme.L02.044
+    kind: card
+    topic: mast-cells
+    front: Which drug prevents mast cell degranulation, and what is it used for?
+    back: Cromolyn sodium; used for asthma prophylaxis.
+    src: { page: 414, quote: "Cromolyn sodium prevents mast cell degranulation (used for asthma prophylaxis)." }
+    status: unverified
+  - id: heme.L02.045
+    kind: card
+    topic: mast-cells
+    front: Which drugs can cause IgE-independent mast cell degranulation?
+    back: Vancomycin, opioids, and radiocontrast dye.
+    src: { page: 414, quote: "Vancomycin, opioids, and radiocontrast dye can elicit IgE-independent mast cell degranulation." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.046
+    kind: card
+    topic: mast-cells
+    front: What is mastocytosis, what is it associated with, and what symptoms does it cause?
+    back: A rare proliferation of mast cells in skin and/or extracutaneous organs. Associated with c-KIT mutations and ↑ serum tryptase. ↑ histamine → flushing, pruritus, hypotension, abdominal pain, diarrhea, peptic ulcer disease.
+    src: { page: 414, quote: "Associated with c-KIT mutations and ↑ serum tryptase. ↑ histamine → flushing, pruritus, hypotension, abdominal pain, diarrhea, peptic ulcer disease." }
+    status: unverified
+  - id: heme.L02.047
+    kind: mcq
+    topic: mast-cells
+    stem: >-
+      A 40-year-old woman has recurrent episodes of flushing, itching and lightheadedness, chronic
+      diarrhea, and a duodenal ulcer. Her skin has reddish-brown macules that urticate when stroked.
+      Serum tryptase is markedly elevated. A mutation in which gene is most likely responsible?
+    options:
+      - JAK2
+      - c-KIT
+      - BCR-ABL
+      - BRAF
+      - RET
+    answer: 1
+    why:
+      - "JAK2 mutations drive other myeloproliferative neoplasms; First Aid ties mastocytosis to c-KIT."
+      - "Right. Mastocytosis (mast cell proliferation in skin and organs) is associated with c-KIT mutations and ↑ serum tryptase; ↑ histamine gives flushing, pruritus, hypotension, diarrhea and peptic ulcer disease."
+      - "BCR-ABL is the fusion of CML."
+      - "BRAF is not the mutation tied to mastocytosis."
+      - "RET is the gene of MEN 2 and medullary thyroid cancer."
+    src: { page: 414, quote: "Mastocytosis—rare; proliferation of mast cells in skin and/or extracutaneous organs. Associated with c-KIT mutations and ↑ serum tryptase." }
+    status: unverified
+  - id: heme.L02.048
+    kind: mcq
+    topic: mast-cells
+    stem: >-
+      A 35-year-old man receives his first dose of intravenous vancomycin for a methicillin-resistant
+      Staphylococcus aureus skin infection. Twenty minutes into the infusion he develops flushing and
+      itching of the face, neck and upper trunk. He has never received the drug before. Which mechanism
+      explains his reaction?
+    options:
+      - Cross-linking of preformed drug-specific IgE on mast cells
+      - IgE-independent mast cell degranulation
+      - Immune complex deposition in small vessels
+      - Complement-mediated hemolysis
+      - Delayed T-cell-mediated hypersensitivity
+    answer: 1
+    why:
+      - "This is his first exposure, so no drug-specific IgE exists."
+      - "Right. Vancomycin, opioids and radiocontrast dye can trigger IgE-independent mast cell degranulation, releasing histamine (flushing, itching)."
+      - "Immune complex disease (type III) takes days, not minutes."
+      - "Hemolysis would cause anemia and dark urine, not flushing."
+      - "Delayed hypersensitivity (type IV) takes 48-72 hours."
+    src: { page: 414, quote: "Vancomycin, opioids, and radiocontrast dye can elicit IgE-independent mast cell degranulation." }
+    status: unverified
+  # ---------- p415: lymphocytes ----------
+  - id: heme.L02.049
+    kind: card
+    topic: lymphocytes
+    front: Which cells are lymphocytes, and which arm of immunity does each serve?
+    back: B cells, T cells and natural killer (NK) cells. B and T cells mediate adaptive immunity; NK cells are part of the innate immune response. Round, densely staining nucleus with little pale cytoplasm.
+    src: { page: 415, quote: "Refer to B cells, T cells, and natural killer (NK) cells. B cells and T cells mediate adaptive immunity. NK cells are part of the innate immune response." }
+    status: unverified
+  - id: heme.L02.050
+    kind: mcq
+    topic: lymphocytes
+    stem: >-
+      A 3-month-old boy has recurrent bacterial and viral infections. Flow cytometry shows that his
+      circulating cells with a round, densely staining nucleus and scant pale cytoplasm are almost all
+      CD56+ cells, with very few CD3+ or CD19+ cells. Which type of immunity remains intact?
+    options:
+      - Antibody-mediated (humoral) adaptive immunity
+      - Cell-mediated adaptive immunity
+      - Innate immunity by natural killer cells
+      - Memory B-cell responses
+      - Helper T-cell help to B cells
+    answer: 2
+    why:
+      - "Humoral immunity needs B cells (CD19+), which are almost absent."
+      - "Cell-mediated adaptive immunity needs T cells (CD3+), which are almost absent."
+      - "Right. CD56+ cells are NK cells, which belong to innate immunity; B and T cells mediate adaptive immunity."
+      - "Memory B cells come from B cells, which are missing."
+      - "Helper T cells (CD3+ CD4+) are missing."
+    src: { page: 415, quote: "B cells and T cells mediate adaptive immunity. NK cells are part of the innate immune response." }
+    status: unverified
+  # ---------- p415: natural killer cells ----------
+  - id: heme.L02.051
+    kind: card
+    topic: natural-killer-cells
+    front: What do NK-cell lytic granules contain, and what do they do?
+    back: Perforin and granzymes. When released they act on target cells to induce apoptosis.
+    src: { page: 415, quote: "distinctive cytoplasmic lytic granules (containing perforin and granzymes) that, when released, act on target cells to induce apoptosis." }
+    status: unverified
+  - id: heme.L02.052
+    kind: card
+    topic: natural-killer-cells
+    front: Which cells do NK cells kill?
+    back: Cells that do not express class I MHC surface molecules (eg, virally infected cells that downregulate them). They also recognize surface proteins induced by stress, malignant transformation, or microbial infection.
+    src: { page: 415, quote: "Induce apoptosis (natural killer) in cells that do not express class I MHC cell surface molecules, eg, virally infected cells in which these molecules are downregulated." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.053
+    kind: cloze
+    topic: natural-killer-cells
+    text: NK cells carry {{c1::CD56}} and {{c2::CD16}} (an Fc receptor), and are larger than B and T cells.
+    src: { page: 415, quote: "NK cells are larger than B and T cells" }
+    status: unverified
+  - id: heme.L02.054
+    kind: mcq
+    topic: natural-killer-cells
+    stem: >-
+      A 30-year-old woman has a herpesvirus infection. Virally infected cells in her tissues have
+      downregulated MHC class I to escape her cytotoxic T cells. Nevertheless, large granular
+      lymphocytes kill these cells by inducing apoptosis. Which molecules released by these lymphocytes
+      mediate the killing?
+    options:
+      - Perforin and granzymes
+      - Histamine and heparin
+      - Major basic protein and eosinophil cationic protein
+      - Myeloperoxidase and acid phosphatase
+      - Lysozyme and lactoferrin
+    answer: 0
+    why:
+      - "Right. NK cells kill cells lacking MHC class I; their lytic granules contain perforin and granzymes, which induce apoptosis."
+      - "Histamine and heparin are basophil and mast cell granule contents."
+      - "These are eosinophil products."
+      - "These are neutrophil azurophilic granule contents."
+      - "These are neutrophil specific granule contents."
+    src: { page: 415, quote: "lytic granules (containing perforin and granzymes) that, when released, act on target cells to induce apoptosis." }
+    status: unverified
+  # ---------- p415: B cells ----------
+  - id: heme.L02.055
+    kind: card
+    topic: b-cells
+    front: Where do B cells originate and mature, and where do they migrate?
+    back: They originate and mature in the bone marrow ("B = bone marrow"), then migrate to peripheral lymphoid tissue (follicles of lymph nodes, white pulp of the spleen, unencapsulated lymphoid tissue).
+    src: { page: 415, quote: "Originate from stem cells in bone marrow and matures in marrow. Migrate to peripheral lymphoid tissue (follicles of lymph nodes, white pulp of spleen, unencapsulated lymphoid tissue)." }
+    status: unverified
+  - id: heme.L02.056
+    kind: card
+    topic: b-cells
+    front: What do B cells become when they meet antigen, and what else can they do?
+    back: Plasma cells (which produce antibodies) and memory cells. B cells mediate the humoral immune response and can function as an APC.
+    src: { page: 415, quote: "When antigen is encountered, B cells differentiate into plasma cells (which produce antibodies) and memory cells. Can function as an APC." }
+    status: unverified
+  - id: heme.L02.057
+    kind: cloze
+    topic: b-cells
+    text: B-cell surface markers include {{c1::CD19}}, {{c2::CD20}} and {{c3::CD21}}.
+    src: { page: 415, quote: "CD20 CD21 CD19 B cell" }
+    status: unverified
+  - id: heme.L02.058
+    kind: mcq
+    topic: b-cells
+    stem: >-
+      A 6-year-old boy has had recurrent pneumonia and otitis media with encapsulated bacteria since
+      age 8 months. Lymph node biopsy shows absent follicles; the paracortex looks normal. Serum
+      immunoglobulins are very low. Which population of cells is most likely deficient?
+    options:
+      - Cells that mature in the thymus
+      - Cells that originate and mature in the bone marrow and populate lymph node follicles
+      - Cells that express CD56 and kill cells lacking MHC class I
+      - Cells that bind IgE and release tryptase
+      - Cells that phagocytose senescent red cells in the spleen
+    answer: 1
+    why:
+      - "Thymus-matured T cells sit in the paracortex, which is normal here."
+      - "Right. B cells originate and mature in the marrow and migrate to lymph node follicles; without them there are no follicles, no plasma cells, and low antibodies."
+      - "NK cells are innate and do not make antibodies."
+      - "Mast cells mediate type I hypersensitivity, not antibody production."
+      - "Macrophages do not make immunoglobulins."
+    src: { page: 415, quote: "Migrate to peripheral lymphoid tissue (follicles of lymph nodes, white pulp of spleen, unencapsulated lymphoid tissue)." }
+    status: unverified
+  # ---------- p415: T cells ----------
+  - id: heme.L02.059
+    kind: card
+    topic: t-cells
+    front: Where do T cells originate and mature?
+    back: They originate from stem cells in the bone marrow but mature in the thymus ("T = thymus"). They mediate the cellular immune response.
+    src: { page: 415, quote: "Mediate cellular immune response. Originate from stem cells in the bone marrow, but mature in the thymus." }
+    status: unverified
+  - id: heme.L02.060
+    kind: table
+    topic: t-cells
+    title: T-cell subsets
+    columns: [Subset, Marker, Recognizes]
+    rows:
+      - [Cytotoxic T cell, CD8, MHC I]
+      - [Helper T cell, CD4, MHC II]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 415, quote: "Differentiate into cytotoxic T cells (express CD8, recognize MHC I), helper T cells (express CD4, recognize MHC II), and regulatory T cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.061
+    kind: cloze
+    topic: t-cells
+    text: "Rule of 8: MHC {{c1::II}} × CD4 = 8; MHC {{c2::I}} × CD8 = 8."
+    src: { page: 415, quote: "Rule of 8: MHC II × CD4 = 8; MHC I × CD8 = 8." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.062
+    kind: card
+    topic: t-cells
+    front: Which costimulatory signal is necessary for T-cell activation, and what share of circulating lymphocytes are T cells?
+    back: CD28. About 80% of circulating lymphocytes are T cells.
+    src: { page: 415, quote: "CD28 (costimulatory signal) necessary for T-cell activation. Most circulating lymphocytes are T cells (80%)." }
+    status: unverified
+  - id: heme.L02.063
+    kind: mcq
+    topic: t-cells
+    stem: >-
+      A 34-year-old man with untreated HIV infection for 8 years presents with fever, dry cough and
+      hypoxemia; bronchoalveolar lavage shows Pneumocystis jirovecii. The virus primarily infects cells
+      that recognize antigen presented on which molecule?
+    options:
+      - MHC class I
+      - MHC class II
+      - CD14
+      - CD16
+      - CD19
+    answer: 1
+    why:
+      - "MHC I is recognized by CD8 cytotoxic T cells."
+      - "Right. CD4+ helper T cells, the primary target of HIV, recognize MHC II (rule of 8: MHC II × CD4 = 8)."
+      - "CD14 is the macrophage LPS receptor."
+      - "CD16 is an Fc receptor on NK cells."
+      - "CD19 is a B-cell marker."
+    src: { page: 415, quote: "CD4+ helper T cells are the primary target of HIV." }
+    status: unverified
+  # ---------- p415: plasma cells ----------
+  - id: heme.L02.064
+    kind: card
+    topic: plasma-cells
+    front: What does a plasma cell look like?
+    back: "\"Clock-face\" chromatin and an eccentric nucleus, abundant RER, and a well-developed Golgi apparatus. It produces large amounts of antibody specific to one antigen."
+    src: { page: 415, quote: "“Clock-face” chromatin distribution and eccentric nucleus, abundant RER, and well-developed Golgi apparatus" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L02.065
+    kind: card
+    topic: plasma-cells
+    front: Where are plasma cells found, and which disease is a plasma cell dyscrasia?
+    back: In the bone marrow; they normally do not circulate in peripheral blood. Multiple myeloma is a plasma cell dyscrasia.
+    src: { page: 415, quote: "Found in bone marrow and normally do not circulate in peripheral blood. Multiple myeloma is a plasma cell dyscrasia." }
+    status: unverified
+  - id: heme.L02.066
+    kind: mcq
+    topic: plasma-cells
+    stem: >-
+      A 68-year-old man has back pain, anemia and hypercalcemia. Bone marrow aspirate shows sheets of
+      cells with an eccentric nucleus, chromatin arranged like a clock face, and a pale perinuclear
+      zone. Which organelles are most abundant in these cells, reflecting their function?
+    options:
+      - Lysosomes and peroxisomes
+      - Rough endoplasmic reticulum and Golgi apparatus
+      - Smooth endoplasmic reticulum and lipid droplets
+      - Mitochondria and glycogen granules
+      - Lytic granules containing perforin
+    answer: 1
+    why:
+      - "Lysosomes dominate phagocytes such as macrophages and neutrophils."
+      - "Right. Plasma cells make large amounts of antibody, so they have abundant RER and a well-developed Golgi apparatus (the pale perinuclear zone)."
+      - "Smooth ER and lipid droplets mark steroid-making cells."
+      - "Abundant mitochondria are not the plasma cell feature."
+      - "Perforin granules are in NK cells and cytotoxic T cells."
+    src: { page: 415, quote: "abundant RER, and well-developed Golgi apparatus" }
+    status: unverified

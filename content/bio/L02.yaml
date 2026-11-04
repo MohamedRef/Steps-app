@@ -1,0 +1,888 @@
+schema: steps.content/v1
+lecture: bio.L02
+title: Cellular
+book: { chapter: 1, pages: [44, 49] }
+topics:
+  - { id: cell-cycle-phases, title: Cell cycle phases }
+  - { id: cell-types, title: Cell types }
+  - { id: rough-er, title: Rough endoplasmic reticulum }
+  - { id: smooth-er, title: Smooth endoplasmic reticulum }
+  - { id: cell-trafficking, title: Cell trafficking }
+  - { id: peroxisome, title: Peroxisome }
+  - { id: proteasome, title: Proteasome }
+  - { id: cytoskeletal-elements, title: Cytoskeletal elements }
+  - { id: cilia-structure, title: Cilia structure }
+  - { id: primary-ciliary-dyskinesia, title: Primary ciliary dyskinesia }
+  - { id: sodium-potassium-pump, title: Sodium-potassium pump }
+  - { id: collagen, title: Collagen }
+  - { id: osteogenesis-imperfecta, title: Osteogenesis imperfecta }
+  - { id: ehlers-danlos, title: Ehlers-Danlos syndrome }
+  - { id: menkes-disease, title: Menkes disease }
+items:
+  # ---------- p44: cell cycle phases and regulation ----------
+  - id: bio.L02.001
+    kind: card
+    topic: cell-cycle-phases
+    front: What regulates the checkpoints of the cell cycle?
+    back: Cyclins, cyclin-dependent kinases (CDKs) and tumor suppressors.
+    src: { page: 44, quote: "Checkpoints control transitions between phases of cell cycle. This process is regulated by cyclins, cyclin-dependent kinases (CDKs), and tumor suppressors." }
+    status: unverified
+  - id: bio.L02.002
+    kind: card
+    topic: cell-cycle-phases
+    front: Which is the shortest phase of the cell cycle, what does it include, and which phase varies in length?
+    back: M phase is the shortest; it includes mitosis (prophase, prometaphase, metaphase, anaphase, telophase) and cytokinesis. G1 is of variable duration.
+    src: { page: 44, quote: "M phase (shortest phase of cell cycle) includes mitosis (prophase, prometaphase, metaphase, anaphase, telophase) and cytokinesis (cytoplasm splits in two). G1 is of variable duration." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.003
+    kind: card
+    topic: cell-cycle-phases
+    front: Are CDKs always present? When are they active?
+    back: They are constitutively expressed but inactive until bound to a cyclin.
+    src: { page: 44, quote: "Constitutively expressed but inactive when not bound to cyclin." }
+    status: unverified
+  - id: bio.L02.004
+    kind: card
+    topic: cell-cycle-phases
+    front: What are cyclins, and what does the cyclin-CDK complex do?
+    back: Phase-specific regulatory proteins that activate CDKs when stimulated by growth factors. The complex phosphorylates other proteins (eg, Rb) to coordinate cell cycle progression.
+    src: { page: 44, quote: "Cyclins are phase-specific regulatory proteins that activate CDKs when stimulated by growth factors. The cyclin-CDK complex can then phosphorylate other proteins (eg, Rb) to coordinate cell cycle progression." }
+    status: unverified
+  - id: bio.L02.005
+    kind: order
+    topic: cell-cycle-phases
+    prompt: Put the steps by which p53 stops the cell cycle in order.
+    steps:
+      - p53 induces p21
+      - p21 inhibits CDK
+      - Rb stays hypophosphorylated (active)
+      - Progression from G1 to S is inhibited
+    src: { page: 44, quote: "p53 → p21 induction → CDK inhibition → Rb hypophosphorylation (activation) → G1-S progression inhibition." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.006
+    kind: card
+    topic: cell-cycle-phases
+    front: Mutations in which tumor suppressor gene cause Li-Fraumeni syndrome, and what is the result?
+    back: Loss of function of p53; unrestrained cell division.
+    src: { page: 44, quote: "Mutations in tumor suppressor genes can result in unrestrained cell division (eg, Li-Fraumeni syndrome)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.007
+    kind: card
+    topic: cell-cycle-phases
+    front: How do growth factors move a cell from G1 to S? Give the book's examples.
+    back: They bind receptor tyrosine kinases (eg, insulin, PDGF, EGF) and nonreceptor tyrosine kinases (eg, EPO via JAK2).
+    src: { page: 44, quote: "Growth factors bind receptor (eg, insulin, PDGF, EGF) and nonreceptor (eg, EPO via JAK2) tyrosine kinases to transition the cell from G1 to S phase." }
+    status: unverified
+  - id: bio.L02.008
+    kind: card
+    topic: cell-cycle-phases
+    front: Which viral protein inactivates p53, and which proteins carry out p53-driven apoptosis?
+    back: HPV E6 inactivates p53. p53 drives the intrinsic pathway through BAX/BAK and caspase activation, opposed by BCL-2 and BCL-XL.
+    src: { page: 44, quote: "Apoptosis (intrinsic pathway) BAX/BAK Caspase activation BCL-2 BCL-XL DNA damage Li-Fraumeni syndrome (loss of function) p53 HPV E6" }
+    status: unverified
+  - id: bio.L02.009
+    kind: mcq
+    topic: cell-cycle-phases
+    stem: >-
+      A 32-year-old woman has breast cancer. Her mother died of a brain tumor at 40, her brother had an
+      osteosarcoma at 14, and a cousin had a soft-tissue sarcoma at 25. Germline testing shows a
+      loss-of-function mutation in a tumor suppressor. In her normal cells after DNA damage, which
+      step is most likely impaired?
+    options:
+      - Phosphorylation of Rb by cyclin-CDK complexes
+      - Induction of p21 to inhibit CDKs and block G1-S progression
+      - Binding of growth factors to receptor tyrosine kinases
+      - Addition of TTAGGG repeats to chromosome ends
+      - Activation of CDKs by cyclins
+    answer: 1
+    why:
+      - "Rb phosphorylation by cyclin-CDK pushes the cycle forward; it is what p53 normally prevents."
+      - "Right. Li-Fraumeni is loss of p53: normally p53 → p21 → CDK inhibition → Rb stays active → G1-S blocked. Without it, damaged cells keep dividing."
+      - "Growth factor signalling is upstream and isn't the lost tumor suppressor."
+      - "That is telomerase."
+      - "Cyclins activating CDKs is the normal forward drive, not the brake that is lost."
+    src: { page: 44, quote: "p53 → p21 induction → CDK inhibition → Rb hypophosphorylation (activation) → G1-S progression inhibition." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p44: cell types ----------
+  - id: bio.L02.010
+    kind: table
+    topic: cell-types
+    title: Cell types by cell cycle
+    columns: [Type, Behaviour, Examples]
+    rows:
+      - [Permanent, "Remain in G0, regenerate from stem cells", "Neurons, skeletal and cardiac muscle, RBCs"]
+      - ["Stable (quiescent)", "Enter G1 from G0 when stimulated", "Hepatocytes, lymphocytes, PCT, periosteal cells"]
+      - [Labile, "Never go to G0, divide rapidly with a short G1; most affected by chemotherapy", "Bone marrow, gut epithelium, skin, hair follicles, germ cells"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 44, quote: "Permanent Remain in G0, regenerate from stem cells. Neurons, skeletal and cardiac muscle, RBCs. Stable (quiescent) Enter G1 from G0 when stimulated. Hepatocytes, lymphocytes, PCT, periosteal cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.011
+    kind: mcq
+    topic: cell-types
+    stem: >-
+      A 55-year-old man receives cyclophosphamide and doxorubicin for lymphoma. Ten days later he has
+      painful mouth ulcers, diarrhea, patchy hair loss and a neutrophil count of 400/mm³. His
+      neurologic and cardiac examinations are normal. Why are these tissues the most affected?
+    options:
+      - They remain permanently in G0
+      - They never enter G0 and divide rapidly with a short G1
+      - They enter G1 from G0 only when stimulated
+      - They lack cyclin-dependent kinases
+      - They regenerate only from stem cells
+    answer: 1
+    why:
+      - "Permanent cells (neurons, cardiac muscle) stay in G0, which is why his heart and nerves are spared."
+      - "Right. Labile cells (bone marrow, gut epithelium, skin, hair follicles) never go to G0 and divide rapidly, so chemotherapy hits them most."
+      - "That describes stable cells such as hepatocytes."
+      - "All dividing cells use CDKs."
+      - "Regeneration from stem cells describes permanent cells."
+    src: { page: 44, quote: "Labile Never go to G0, divide rapidly with a short G1. Most affected by chemotherapy." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p45: rough ER ----------
+  - id: bio.L02.012
+    kind: card
+    topic: rough-er
+    front: What is made in the rough endoplasmic reticulum?
+    back: Secretory (exported) proteins, and N-linked oligosaccharides are added to lysosomal and other proteins. Proteins within organelles (ER, Golgi, lysosomes) are also formed in RER.
+    src: { page: 45, quote: "Site of synthesis of secretory (exported) proteins and of N-linked oligosaccharide addition to lysosomal and other proteins." }
+    status: unverified
+  - id: bio.L02.013
+    kind: card
+    topic: rough-er
+    front: What are Nissl bodies?
+    back: RER in neurons; they synthesize peptide neurotransmitters for secretion.
+    src: { page: 45, quote: "Nissl bodies (RER in neurons)—synthesize peptide neurotransmitters for secretion." }
+    status: unverified
+  - id: bio.L02.014
+    kind: card
+    topic: rough-er
+    front: Which proteins are made on free ribosomes?
+    back: Cytosolic, peroxisomal and mitochondrial proteins.
+    src: { page: 45, quote: "Free ribosomes—unattached to any membrane; site of synthesis of cytosolic, peroxisomal, and mitochondrial proteins." }
+    status: unverified
+  - id: bio.L02.015
+    kind: cloze
+    topic: rough-er
+    text: N-linked glycosylation occurs in the {{c1::eNdoplasmic reticulum}}. Cells rich in RER include mucus-secreting {{c2::goblet cells}} of the small intestine and antibody-secreting {{c3::plasma cells}}.
+    src: { page: 45, quote: "N-linked glycosylation occurs in the eNdoplasmic reticulum. Mucus-secreting goblet cells of small intestine and antibody-secreting plasma cells are rich in RER." }
+    status: unverified
+  - id: bio.L02.016
+    kind: mcq
+    topic: rough-er
+    stem: >-
+      A bone marrow biopsy from a 68-year-old man with bone pain and hypercalcemia shows sheets of cells
+      with eccentric nuclei and abundant basophilic cytoplasm. Serum protein electrophoresis shows an M
+      spike of IgG. Which organelle is most abundant in these cells?
+    options:
+      - Smooth endoplasmic reticulum
+      - Rough endoplasmic reticulum
+      - Peroxisomes
+      - Free ribosomes only
+      - Lysosomes
+    answer: 1
+    why:
+      - "SER is abundant in steroid-producing cells and hepatocytes."
+      - "Right. Plasma cells secrete antibody, a secretory protein, so they are rich in RER."
+      - "Peroxisomes oxidize very-long-chain and branched fatty acids."
+      - "Free ribosomes make cytosolic, peroxisomal and mitochondrial proteins, not secreted Ig."
+      - "Lysosomes degrade material; they don't make antibody."
+    src: { page: 45, quote: "Mucus-secreting goblet cells of small intestine and antibody-secreting plasma cells are rich in RER." }
+    status: unverified
+  # ---------- p45: smooth ER ----------
+  - id: bio.L02.017
+    kind: card
+    topic: smooth-er
+    front: What are the functions of the smooth ER, and which enzyme is located there?
+    back: Steroid synthesis and detoxification of drugs and poisons (no surface ribosomes). It holds glucose-6-phosphatase, the last step of both glycogenolysis and gluconeogenesis.
+    src: { page: 45, quote: "Site of steroid synthesis and detoxification of drugs and poisons. Lacks surface ribosomes. Location of glucose-6-phosphatase (last step in both glycogenolysis and gluconeogenesis)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.018
+    kind: card
+    topic: smooth-er
+    front: Which cells are rich in smooth ER?
+    back: Hepatocytes and the steroid hormone-producing cells of the adrenal cortex and gonads.
+    src: { page: 45, quote: "Hepatocytes and steroid hormone–producing cells of the adrenal cortex and gonads are rich in SER." }
+    status: unverified
+  - id: bio.L02.019
+    kind: mcq
+    topic: smooth-er
+    stem: >-
+      Electron microscopy of a testicular tumor from a 30-year-old man with gynecomastia shows cells
+      packed with a tubular, anastomosing membrane network that has no ribosomes on its surface. The
+      cells most likely secrete which product?
+    options:
+      - Immunoglobulin
+      - Steroid hormones
+      - Mucin
+      - Peptide neurotransmitters
+      - Collagen
+    answer: 1
+    why:
+      - "Antibody is a secretory protein made on RER."
+      - "Right. Ribosome-free membranes are smooth ER, the site of steroid synthesis; gonadal steroid-producing cells are rich in SER."
+      - "Mucin comes from goblet cells, which are rich in RER."
+      - "Peptide neurotransmitters come from Nissl bodies (RER in neurons)."
+      - "Collagen chains are made on RER."
+    src: { page: 45, quote: "Hepatocytes and steroid hormone–producing cells of the adrenal cortex and gonads are rich in SER." }
+    status: unverified
+  # ---------- p45: cell trafficking ----------
+  - id: bio.L02.020
+    kind: enumerate
+    topic: cell-trafficking
+    prompt: Enumerate the posttranslational events in the Golgi (3).
+    points:
+      - Modifying N-oligosaccharides on asparagine
+      - Adding O-oligosaccharides on serine and threonine
+      - Adding mannose-6-phosphate to proteins for targeting to lysosomes
+    pass: 3
+    hook: "الـ Golgi مكتب بريد بيعمل 3 حاجات: يعدّل الـ N على الـ asparagine، يحط O على serine و threonine، ويلزق طابع mannose-6-phosphate على اللي رايح الـ lysosome."
+    src: { page: 45, quote: "Posttranslational events in GOlgi include modifying N-oligosaccharides on asparagine, adding O-oligosaccharides on serine and threonine, and adding mannose-6-phosphate to proteins for targeting to lysosomes" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.021
+    kind: card
+    topic: cell-trafficking
+    front: What do endosomes do?
+    back: They sort material from outside the cell or from the Golgi, sending it to lysosomes for destruction or back to the membrane/Golgi for reuse.
+    src: { page: 45, quote: "Endosomes are sorting centers for material from outside the cell or from the Golgi, sending it to lysosomes for destruction or back to the membrane/Golgi for further use." }
+    status: unverified
+  - id: bio.L02.022
+    kind: order
+    topic: cell-trafficking
+    prompt: Put the steps of I-cell disease in order.
+    steps:
+      - Defect in N-acetylglucosaminyl-1-phosphotransferase
+      - The Golgi fails to phosphorylate mannose residues (↓ mannose-6-phosphate)
+      - Enzymes are secreted outside the cell instead of going to lysosomes
+      - Lysosomes lack digestive enzymes
+      - Cellular debris builds up in lysosomes (inclusion bodies)
+    src: { page: 45, quote: "defect in N-acetylglucosaminyl-1-phosphotransferase → failure of the Golgi to phosphorylate mannose residues (↓ mannose-6-phosphate) on glycoproteins → enzymes secreted extracellularly rather than delivered to lysosomes" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.023
+    kind: card
+    topic: cell-trafficking
+    front: What are the features of I-cell disease (mucolipidosis type II)?
+    back: Autosomal recessive. Coarse facial features, gingival hyperplasia, corneal clouding, restricted joint movements, claw hand, kyphoscoliosis and ↑ plasma lysosomal enzymes. Like Hurler but more severe; often fatal in childhood.
+    src: { page: 45, quote: "Results in coarse facial features, gingival hyperplasia, corneal clouding, restricted joint movements, claw hand deformities, kyphoscoliosis, and ↑ plasma levels of lysosomal enzymes." }
+    status: unverified
+  - id: bio.L02.024
+    kind: card
+    topic: cell-trafficking
+    front: What does the signal recognition particle do, and what happens without it?
+    back: An abundant cytosolic ribonucleoprotein that carries the polypeptide-ribosome complex from the cytosol to the RER. Absent or dysfunctional SRP → protein accumulates in the cytosol.
+    src: { page: 45, quote: "Signal recognition particle (SRP)—abundant, cytosolic ribonucleoprotein that traffics polypeptide-ribosome complex from the cytosol to the RER. Absent or dysfunctional SRP → accumulation of protein in cytosol." }
+    status: unverified
+  - id: bio.L02.025
+    kind: table
+    topic: cell-trafficking
+    title: Vesicular trafficking proteins
+    columns: [Protein, Route]
+    rows:
+      - [COPI, "Golgi → Golgi (retrograde); cis-Golgi → ER"]
+      - [COPII, "ER → cis-Golgi (anterograde)"]
+      - [Clathrin, "trans-Golgi → lysosomes; plasma membrane → endosomes (receptor-mediated endocytosis, eg, LDL receptor)"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 45, quote: "COPI: Golgi → Golgi (retrograde); cis-Golgi → ER. ▘ COPII: ER → cis-Golgi (anterograde)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.026
+    kind: mcq
+    topic: cell-trafficking
+    stem: >-
+      A 14-month-old boy has coarse facial features, gingival hyperplasia, stiff joints and clouded
+      corneas. His fibroblasts contain large inclusions, but the lysosomal hydrolases are found at
+      very high levels in his plasma. Which step of protein processing is defective?
+    options:
+      - Addition of N-linked oligosaccharides in the RER
+      - Phosphorylation of mannose residues in the Golgi
+      - Transport of the ribosome-polypeptide complex to the RER by SRP
+      - Clathrin-mediated endocytosis of LDL
+      - Ubiquitin tagging for proteasome degradation
+    answer: 1
+    why:
+      - "N-linked glycosylation in the ER is intact; the problem is the lysosome tag added later."
+      - "Right. I-cell disease: N-acetylglucosaminyl-1-phosphotransferase is defective, so the Golgi can't add mannose-6-phosphate and the enzymes are secreted instead of reaching lysosomes."
+      - "Without SRP, protein would pile up in the cytosol, not be secreted."
+      - "Clathrin endocytosis isn't the step that targets hydrolases."
+      - "Proteasome defects don't send lysosomal enzymes into plasma."
+    src: { page: 45, quote: "failure of the Golgi to phosphorylate mannose residues (↓ mannose-6-phosphate) on glycoproteins → enzymes secreted extracellularly rather than delivered to lysosomes" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p46: peroxisome ----------
+  - id: bio.L02.027
+    kind: enumerate
+    topic: peroxisome
+    prompt: Enumerate the functions of the peroxisome (4).
+    points:
+      - β-oxidation of very-long-chain fatty acids (strictly peroxisomal)
+      - α-oxidation of branched-chain fatty acids (strictly peroxisomal)
+      - Catabolism of amino acids and ethanol
+      - Synthesis of bile acids and plasmalogens
+    pass: 4
+    hook: "الـ peroxisome بيكسّر الطويل (VLCFA) والمتفرع (branched)، وبيكسّر amino acids و ethanol، وبيبني bile acids و plasmalogens."
+    src: { page: 46, quote: "β-oxidation of very-long-chain fatty acids (VLCFA) (strictly peroxisomal process) ▘ α-oxidation of branched-chain fatty acids (strictly peroxisomal process)" }
+    status: unverified
+  - id: bio.L02.028
+    kind: card
+    topic: peroxisome
+    front: What are plasmalogens?
+    back: Important membrane phospholipids, especially in the white matter of the brain; made in peroxisomes.
+    src: { page: 46, quote: "Synthesis of bile acids and plasmalogens (important membrane phospholipid, especially in white matter of brain)" }
+    status: unverified
+  - id: bio.L02.029
+    kind: table
+    topic: peroxisome
+    title: Peroxisomal disorders
+    columns: [Disease, Inheritance, Defect, What builds up, Features]
+    rows:
+      - [Zellweger syndrome, AR, "Peroxisome biogenesis (mutated PEX genes)", "VLCFA and pipecolic acid", "Hypotonia, seizures, jaundice, craniofacial dysmorphia, hepatomegaly, early death"]
+      - [Refsum disease, AR, α-oxidation, Phytanic acid, "Retinitis pigmentosa, anosmia, hearing loss, ataxia, neuropathy, ichthyosis, cardiac conduction defects"]
+      - [Adrenoleukodystrophy, X-linked recessive, "β-oxidation (ABCD1 gene)", "VLCFA in adrenals, white matter, testes", "Adrenal crisis, progressive neurologic loss, death"]
+    blanks: [[0, 2], [0, 3], [1, 2], [1, 3], [2, 1], [2, 3]]
+    src: { page: 46, quote: "Zellweger syndrome—autosomal recessive disorder of peroxisome biogenesis due to mutated PEX genes → accumulation of VLCFA and pipecolic acid in plasma and urine." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.030
+    kind: card
+    topic: peroxisome
+    front: How is Refsum disease treated?
+    back: Diet and plasmapheresis.
+    src: { page: 46, quote: "Treatment: diet, plasmapheresis." }
+    status: unverified
+  - id: bio.L02.031
+    kind: mcq
+    topic: peroxisome
+    stem: >-
+      A 7-year-old boy has worsening school performance, clumsiness and a change in behavior over 6
+      months. He also tires easily and his skin has darkened. MRI shows symmetric white matter lesions.
+      His maternal uncle died of a similar illness. Plasma levels of very-long-chain fatty acids are
+      high. Mutation of which gene is most likely?
+    options:
+      - PEX genes
+      - ABCD1
+      - ATP7A
+      - COL1A1
+      - The gene for phytanoyl-CoA α-oxidation
+    answer: 1
+    why:
+      - "PEX mutations cause Zellweger syndrome, autosomal recessive, with hypotonia and seizures in infancy."
+      - "Right. Adrenoleukodystrophy: X-linked recessive ABCD1 mutation impairs β-oxidation, so VLCFA build up in the adrenals and white matter (adrenal insufficiency, neurologic decline)."
+      - "ATP7A is Menkes disease (copper)."
+      - "COL1A1 is osteogenesis imperfecta."
+      - "An α-oxidation defect is Refsum disease, with phytanic acid, not VLCFA."
+    src: { page: 46, quote: "Adrenoleukodystrophy—X-linked recessive disorder of β-oxidation due to mutation in ABCD1 gene → VLCFA buildup in adrenal glands, white (leuko) matter of brain, testes." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p46: proteasome ----------
+  - id: bio.L02.032
+    kind: card
+    topic: proteasome
+    front: What is the proteasome, and which immune process does it serve?
+    back: A barrel-shaped protein complex that degrades polyubiquitin-tagged proteins. It plays a role in the immune response (MHC I-mediated), and its defects are implicated in neurodegenerative diseases.
+    src: { page: 46, quote: "Barrel-shaped protein complex that degrades polyubiquitin-tagged proteins. Plays a role in many cellular processes, including immune response (MHC I–mediated)." }
+    status: unverified
+  - id: bio.L02.033
+    kind: mcq
+    topic: proteasome
+    stem: >-
+      A virus-infected hepatocyte presents fragments of a viral protein on its surface, and a cytotoxic
+      T cell kills it. Before presentation, the viral protein was tagged with chains of a small protein
+      and broken down by a barrel-shaped complex in the cytosol. Which pathway is this?
+    options:
+      - Lysosomal degradation via mannose-6-phosphate
+      - Ubiquitin-proteasome degradation feeding MHC I
+      - Peroxisomal β-oxidation
+      - Clathrin-mediated endocytosis
+      - Autophagy via the Golgi
+    answer: 1
+    why:
+      - "Mannose-6-phosphate targets enzymes to lysosomes; it doesn't tag cytosolic viral proteins."
+      - "Right. The proteasome degrades polyubiquitin-tagged proteins and serves the MHC I-mediated immune response."
+      - "Peroxisomes oxidize fatty acids."
+      - "Clathrin brings material in from outside, such as LDL."
+      - "The Golgi modifies and sorts proteins; it isn't the barrel-shaped complex."
+    src: { page: 46, quote: "Barrel-shaped protein complex that degrades polyubiquitin-tagged proteins. Plays a role in many cellular processes, including immune response (MHC I–mediated)." }
+    status: unverified
+  # ---------- p46: cytoskeletal elements and microtubules ----------
+  - id: bio.L02.034
+    kind: table
+    topic: cytoskeletal-elements
+    title: Cytoskeletal elements
+    columns: [Filament, Predominant function, Examples]
+    rows:
+      - [Microfilaments, "Muscle contraction, cytokinesis, phagocytosis", "Actin, microvilli"]
+      - [Intermediate filaments, Maintain cell structure, "Vimentin, desmin, cytokeratin, lamins, GFAP, neurofilaments"]
+      - [Microtubules, "Movement, cell division", "Cilia, flagella, mitotic spindle, axonal trafficking, centrioles"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 46, quote: "Microfilaments Muscle contraction, cytokinesis, phagocytosis Actin, microvilli Intermediate filaments Maintain cell structure Vimentin, desmin, cytokeratin, lamins, glial fibrillary acidic protein (GFAP), neurofilaments" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.035
+    kind: card
+    topic: cytoskeletal-elements
+    front: What is a microtubule made of?
+    back: A cylinder of a helical array of polymerized α- and β-tubulin heterodimers; each dimer has 2 GTP bound. Its negative end is near the nucleus and positive end points to the periphery.
+    src: { page: 46, quote: "Cylindrical outer structure composed of a helical array of polymerized heterodimers of α- and β-tubulin. Each dimer has 2 GTP bound." }
+    status: unverified
+  - id: bio.L02.036
+    kind: table
+    topic: cytoskeletal-elements
+    title: Microtubule motor proteins
+    columns: [Motor, Direction]
+    rows:
+      - [Dynein, "Retrograde (+ → −): toward the cell body"]
+      - [Kinesin, "Anterograde (− → +): toward the periphery"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 46, quote: "Retrograde to microtubule (+ → −)—dynein. ▘ Anterograde to microtubule (− → +)—kinesin." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.037
+    kind: card
+    topic: cytoskeletal-elements
+    front: Which toxin and viruses use dynein to reach the neuronal cell body, and how does HSV reactivate?
+    back: Clostridium tetani toxin, poliovirus, rabies virus and HSV use dynein (retrograde). HSV reactivation travels anterograde from the cell body (kinesin).
+    src: { page: 46, quote: "Clostridium tetani toxin, poliovirus, rabies virus, and herpes simplex virus (HSV) use dynein for retrograde transport to the neuronal cell body. HSV reactivation occurs via anterograde transport from cell body (kinesin mediated)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.038
+    kind: card
+    topic: cytoskeletal-elements
+    front: What is the rate-limiting step of peripheral nerve regeneration after injury?
+    back: Slow anterograde (axoplasmic) transport.
+    src: { page: 46, quote: "Slow anterograde transport rate limiting step of peripheral nerve regeneration after injury." }
+    status: unverified
+  - id: bio.L02.039
+    kind: enumerate
+    topic: cytoskeletal-elements
+    prompt: Enumerate the drugs that act on microtubules (4).
+    points: [Mebendazole (antihelminthic), Griseofulvin (antifungal), Vinca alkaloids (anticancer), Taxanes (anticancer)]
+    pass: 4
+    hook: "جملة الكتاب: microtubules get constructed very terribly. خد منها M و G و V و T: Mebendazole و Griseofulvin و Vinca و Taxanes."
+    src: { page: 46, quote: "Drugs that act on microtubules (microtubules get constructed very terribly): ▘ Mebendazole (antihelminthic) ▘ Griseofulvin (antifungal) ▘ Vinca alkaloids (anticancer) ▘ Taxanes (anticancer)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.040
+    kind: mcq
+    topic: cytoskeletal-elements
+    stem: >-
+      A 6-year-old unvaccinated boy stepped on a rusty nail 10 days ago. He now has jaw stiffness and
+      painful spasms of his back muscles. The toxin was taken up at the neuromuscular junction and
+      travelled to the spinal cord. Which protein carried it there?
+    options:
+      - Kinesin
+      - Dynein
+      - Clathrin
+      - Actin
+      - Vimentin
+    answer: 1
+    why:
+      - "Kinesin moves cargo anterograde, away from the cell body (as in HSV reactivation)."
+      - "Right. Tetanus toxin, poliovirus, rabies and HSV ride dynein retrograde (+ → −) to the neuronal cell body."
+      - "Clathrin coats vesicles for endocytosis; it doesn't move cargo along the axon."
+      - "Actin microfilaments serve contraction, cytokinesis and phagocytosis."
+      - "Vimentin is an intermediate filament for structure, not transport."
+    src: { page: 46, quote: "Clostridium tetani toxin, poliovirus, rabies virus, and herpes simplex virus (HSV) use dynein for retrograde transport to the neuronal cell body." }
+    status: unverified
+  # ---------- p47: cilia structure ----------
+  - id: bio.L02.041
+    kind: cloze
+    topic: cilia-structure
+    text: Motile cilia have a {{c1::9 doublet + 2 singlet}} arrangement of microtubules (axoneme); the basal body has {{c2::9 microtubule triplets}} with no central microtubules.
+    src: { page: 47, quote: "Motile cilia consist of 9 doublet + 2 singlet arrangement of microtubules (axoneme) A . Basal body (base of cilium below cell membrane) consists of 9 microtubule triplets B with no central microtubules." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.042
+    kind: card
+    topic: cilia-structure
+    front: What does axonemal dynein do?
+    back: It is an ATPase linking the peripheral 9 doublets; it bends the cilium by differential sliding of the doublets.
+    src: { page: 47, quote: "Axonemal dynein—ATPase that links peripheral 9 doublets and causes bending of cilium by differential sliding of doublets." }
+    status: unverified
+  - id: bio.L02.043
+    kind: card
+    topic: cilia-structure
+    front: What do nonmotile (primary) cilia do, and what can their dysgenesis cause?
+    back: They are chemical signal sensors in signal transduction and cell growth control. Dysgenesis may cause polycystic kidney disease, mitral valve prolapse or retinal degeneration.
+    src: { page: 47, quote: "Nonmotile (primary) cilia work as chemical signal sensors and have a role in signal transduction and cell growth control. Dysgenesis may lead to polycystic kidney disease, mitral valve prolapse, or retinal degeneration." }
+    status: unverified
+  - id: bio.L02.044
+    kind: card
+    topic: cilia-structure
+    front: What lets cilia move in a coordinated way?
+    back: Gap junctions.
+    src: { page: 47, quote: "Gap junctions enable coordinated ciliary movement." }
+    status: unverified
+  - id: bio.L02.045
+    kind: mcq
+    topic: cilia-structure
+    stem: >-
+      Electron microscopy of a cross-section through the base of a respiratory cilium, just below the
+      cell membrane, shows a ring of microtubule structures with nothing in the center. What is the
+      arrangement in this region?
+    options:
+      - 9 doublets + 2 central singlets
+      - 9 triplets with no central microtubules
+      - 9 doublets with no central microtubules
+      - 2 triplets + 9 singlets
+      - 13 protofilaments around a hollow core only
+    answer: 1
+    why:
+      - "That is the axoneme of the motile cilium shaft, above the membrane."
+      - "Right. The basal body, below the cell membrane, has 9 microtubule triplets and no central microtubules."
+      - "The basal body has triplets, not doublets."
+      - "No ciliary structure has this arrangement."
+      - "That describes a single microtubule, not the basal body."
+    src: { page: 47, quote: "Basal body (base of cilium below cell membrane) consists of 9 microtubule triplets B with no central microtubules." }
+    status: unverified
+  # ---------- p47: primary ciliary dyskinesia ----------
+  - id: bio.L02.046
+    kind: card
+    topic: primary-ciliary-dyskinesia
+    front: What is the defect in primary ciliary dyskinesia, its inheritance and its most common type?
+    back: A dynein arm defect → immotile cilia; autosomal recessive. Most common type is Kartagener syndrome (PCD with situs inversus).
+    src: { page: 47, quote: "Autosomal recessive. Dynein arm defect → immotile cilia → dysfunctional ciliated epithelia. Most common type is Kartagener syndrome (PCD with situs inversus)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.047
+    kind: enumerate
+    topic: primary-ciliary-dyskinesia
+    prompt: Enumerate the problems caused by primary ciliary dyskinesia.
+    points:
+      - Situs inversus (impaired migration and orientation)
+      - Hearing loss (dysfunctional eustachian tube cilia)
+      - Recurrent sinusitis and ear infections
+      - Bronchiectasis (impaired ciliary clearance)
+      - Infertility (immotile sperm; ↑ ectopic pregnancy from dysfunctional fallopian tube cilia)
+    pass: 4
+    hook: "الـ cilia موجودة في 4 أماكن: الجنين (situs inversus)، الودن (hearing loss و ear infections)، النَفَس (sinusitis و bronchiectasis)، والخِلفة (sperm و fallopian tubes)."
+    src: { page: 47, quote: "recurrent infections (eg, sinusitis, ear infections, bronchiectasis due to impaired ciliary clearance of debris/pathogens); infertility (↑ risk of ectopic pregnancy due to dysfunctional fallopian tube cilia, immotile spermatozoa)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.048
+    kind: card
+    topic: primary-ciliary-dyskinesia
+    front: Which lab finding is used to screen for primary ciliary dyskinesia?
+    back: ↓ nasal nitric oxide.
+    src: { page: 47, quote: "Lab findings: ↓ nasal nitric oxide (used as screening test)." }
+    status: unverified
+  - id: bio.L02.049
+    kind: mcq
+    topic: primary-ciliary-dyskinesia
+    stem: >-
+      A 30-year-old man is evaluated for infertility. He has had chronic sinusitis and productive cough
+      since childhood, and CT shows bronchiectasis. His heart sounds are loudest on the right side of
+      the chest. Semen analysis shows normal sperm count with no motility. Which screening test result
+      is expected?
+    options:
+      - Elevated sweat chloride
+      - Decreased nasal nitric oxide
+      - Elevated plasma very-long-chain fatty acids
+      - Low serum ceruloplasmin
+      - Elevated plasma lysosomal enzymes
+    answer: 1
+    why:
+      - "Sweat chloride is the test for cystic fibrosis, which doesn't cause situs inversus with immotile sperm."
+      - "Right. Kartagener syndrome (PCD with situs inversus): dynein arm defect → immotile cilia; ↓ nasal nitric oxide is the screening test."
+      - "VLCFA rise in peroxisomal disorders such as adrenoleukodystrophy."
+      - "Copper studies are for Menkes and Wilson disease."
+      - "Plasma lysosomal enzymes rise in I-cell disease."
+    src: { page: 47, quote: "Lab findings: ↓ nasal nitric oxide (used as screening test)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p47: sodium-potassium pump ----------
+  - id: bio.L02.050
+    kind: card
+    topic: sodium-potassium-pump
+    front: Where is the Na+/K+-ATPase, and what does it move per ATP?
+    back: In the plasma membrane, with the ATP site on the cytosolic side. Each ATP moves 3 Na+ out of the cell (pump phosphorylated) and 2 K+ into the cell (pump dephosphorylated). "2 strikes? K, you're still in. 3 strikes? Nah, you're out!"
+    src: { page: 47, quote: "2 strikes? K, you’re still in. 3 strikes? Nah, you’re out!" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.051
+    kind: order
+    topic: sodium-potassium-pump
+    prompt: Put the steps by which digoxin raises cardiac contractility in order.
+    steps:
+      - Digoxin directly inhibits the Na+/K+-ATPase
+      - Na+/Ca2+ exchange is indirectly inhibited
+      - Intracellular Ca2+ rises
+      - Cardiac contractility increases
+    src: { page: 47, quote: "Digoxin directly inhibits -ATPase → indirect inhibition of" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.052
+    kind: mcq
+    topic: sodium-potassium-pump
+    stem: >-
+      A 74-year-old woman with heart failure with reduced ejection fraction stays symptomatic on
+      standard therapy, and a drug is added that improves her contractility. Two months later she has
+      nausea and sees yellow halos around lights. Which is the direct molecular action of the added
+      drug?
+    options:
+      - Activation of β1-adrenergic receptors
+      - Inhibition of the Na+/K+-ATPase
+      - Direct inhibition of the Na+/Ca2+ exchanger
+      - Opening of L-type calcium channels
+      - Inhibition of phosphodiesterase
+    answer: 1
+    why:
+      - "β1 agonists act through cAMP, not this pump; the visual symptoms point to digoxin."
+      - "Right. Digoxin directly inhibits the Na+/K+-ATPase, which indirectly inhibits Na+/Ca2+ exchange → ↑ intracellular Ca2+ → ↑ contractility."
+      - "The exchanger is inhibited only indirectly, as a result of the pump block."
+      - "Digoxin doesn't open calcium channels."
+      - "PDE inhibitors (eg, milrinone) are a different class."
+    src: { page: 47, quote: "Digoxin directly inhibits -ATPase → indirect inhibition of" }
+    status: unverified
+  # ---------- p48: collagen ----------
+  - id: bio.L02.053
+    kind: card
+    topic: collagen
+    front: What is the most abundant protein in the human body, and which of its types are most common?
+    back: Collagen. Types I to IV are the most common.
+    src: { page: 48, quote: "Collagen Most abundant protein in the human body." }
+    status: unverified
+  - id: bio.L02.054
+    kind: table
+    topic: collagen
+    title: Collagen types (SCAB)
+    columns: [Type, Where, Disease link]
+    rows:
+      - [I, "Most common (90%): bone (osteoblasts), skin, tendon, dentin, fascia, cornea, late wound repair", "↓ production in osteogenesis imperfecta type I"]
+      - [II, "Cartilage (including hyaline), vitreous body, nucleus pulposus", "—"]
+      - [III, "Reticulin: skin, blood vessels, uterus, fetal tissue, early wound repair", "Deficient in vascular Ehlers-Danlos (threE D)"]
+      - [IV, "Basement membrane/basal lamina (glomerulus, cochlea), lens", "Defective in Alport; autoantibodies in Goodpasture"]
+    blanks: [[0, 1], [0, 2], [1, 1], [2, 1], [2, 2], [3, 1], [3, 2]]
+    src: { page: 48, quote: "Type I: Skeleton Type II: Cartilage Type III: Arteries Type IV: Basement membrane SCAB" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.055
+    kind: card
+    topic: collagen
+    front: Which cells secrete collagen and contract the wound during the proliferative stage?
+    back: Myofibroblasts.
+    src: { page: 48, quote: "Myofibroblasts are responsible for secretion (proliferative stage) and wound contraction." }
+    status: unverified
+  - id: bio.L02.056
+    kind: order
+    topic: collagen
+    prompt: Put the steps of collagen synthesis in order.
+    steps:
+      - Translation of collagen α chains (preprocollagen, Gly-X-Y) on the RER
+      - Hydroxylation of proline and lysine (vitamin C)
+      - Glycosylation of hydroxylysine and triple helix formation (procollagen)
+      - Exocytosis of procollagen
+      - Cleavage of terminal regions → tropocollagen
+      - Assembly into fibrils
+      - Cross-linking by lysyl oxidase (copper) → collagen fibers
+    src: { page: 48, quote: "Synthesis—translation of collagen α chains (preprocollagen)—usually Gly-X-Y (X is often proline or lysine and Y is often hydroxyproline or hydroxylysine)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.057
+    kind: cloze
+    topic: collagen
+    text: Collagen is about {{c1::1/3 glycine}}; its α chains are usually {{c2::Gly-X-Y}}, where X is often proline or lysine and Y often hydroxyproline or hydroxylysine.
+    src: { page: 48, quote: "Collagen is 1/3 glycine; glycine content of collagen is less variable than that of lysine and proline." }
+    status: unverified
+  - id: bio.L02.058
+    kind: table
+    topic: collagen
+    title: Collagen synthesis steps and their diseases
+    columns: [Step, Requirement, Disease when it fails]
+    rows:
+      - [Hydroxylation of proline and lysine, Vitamin C, Scurvy]
+      - [Triple helix formation (procollagen), "Hydrogen and disulfide bonds", Osteogenesis imperfecta]
+      - [Cross-linking of tropocollagen, "Copper-containing lysyl oxidase", Menkes disease]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 1], [2, 2]]
+    src: { page: 48, quote: "Requires vitamin C; deficiency → scurvy." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.059
+    kind: card
+    topic: collagen
+    front: What happens to collagen cross-linking with age?
+    back: It increases.
+    src: { page: 48, quote: "Cross-linking of collagen ↑ with age." }
+    status: unverified
+  - id: bio.L02.060
+    kind: mcq
+    topic: collagen
+    stem: >-
+      A 60-year-old man who lives alone and eats mostly bread and tea has bleeding gums, perifollicular
+      hemorrhages and corkscrew hairs. A small wound on his shin has not healed in 2 months. Which step
+      of collagen synthesis is impaired?
+    options:
+      - Translation of preprocollagen on the RER
+      - Hydroxylation of proline and lysine residues
+      - Cleavage of procollagen terminal regions
+      - Cross-linking by lysyl oxidase
+      - Glycosylation of hydroxylysine
+    answer: 1
+    why:
+      - "Translation needs no vitamin; it isn't the vitamin-dependent step."
+      - "Right. Scurvy: hydroxylation of proline and lysine needs vitamin C, so deficient collagen gives bleeding gums and poor wound healing."
+      - "Peptidase cleavage defects are one cause of Ehlers-Danlos."
+      - "Lysyl oxidase needs copper (Menkes disease)."
+      - "Glycosylation follows hydroxylation but isn't vitamin C dependent itself."
+    src: { page: 48, quote: "Requires vitamin C; deficiency → scurvy." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p49: osteogenesis imperfecta ----------
+  - id: bio.L02.061
+    kind: card
+    topic: osteogenesis-imperfecta
+    front: What causes osteogenesis imperfecta, and what is its most common inheritance?
+    back: Gene defects, most commonly COL1A1 and COL1A2. Most commonly autosomal dominant, with ↓ production of otherwise normal type I collagen (altered triple helix formation).
+    src: { page: 49, quote: "Most common form is autosomal dominant with ↓ production of otherwise normal type I collagen (altered triple helix formation)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.062
+    kind: enumerate
+    topic: osteogenesis-imperfecta
+    prompt: Enumerate the manifestations of osteogenesis imperfecta (BITE).
+    points:
+      - Bones = multiple fractures after minimal trauma
+      - I (eye) = blue sclerae (thin scleral collagen shows the choroidal veins)
+      - Teeth = dental imperfections (dentinogenesis imperfecta)
+      - Ear = hearing loss (abnormal ossicles)
+    pass: 4
+    hook: "مستر الكتاب: Patients can't BITE: Bones و I (eye) و Teeth و Ear."
+    src: { page: 49, quote: "Patients can’t BITE: Bones = multiple fractures I (eye) = blue sclerae Teeth = dental imperfections Ear = hearing loss" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.063
+    kind: card
+    topic: osteogenesis-imperfecta
+    front: What may osteogenesis imperfecta be confused with, and how is it treated?
+    back: Child abuse. Treat with bisphosphonates to ↓ fracture risk.
+    src: { page: 49, quote: "May be confused with child abuse. Treat with bisphosphonates to ↓ fracture risk." }
+    status: unverified
+  - id: bio.L02.064
+    kind: mcq
+    topic: osteogenesis-imperfecta
+    stem: >-
+      A 3-year-old girl is brought in with her fourth fracture, a spiral fracture of the humerus after a
+      minor fall. Child protective services are consulted. Examination shows bluish sclerae and grayish,
+      translucent teeth. Her father has had several fractures and wears a hearing aid. Which defect is
+      most likely?
+    options:
+      - Mutation in type V collagen
+      - ↓ production of normal type I collagen
+      - Defective type IV collagen
+      - Impaired copper transport by ATP7A
+      - Vitamin C deficiency
+    answer: 1
+    why:
+      - "Type V collagen mutations cause classical Ehlers-Danlos (skin and joint laxity)."
+      - "Right. Osteogenesis imperfecta, usually autosomal dominant (COL1A1/COL1A2): ↓ production of normal type I collagen → fractures, blue sclerae, dentinogenesis imperfecta, hearing loss. It may be confused with child abuse."
+      - "Type IV defects cause Alport syndrome."
+      - "ATP7A is Menkes disease: kinky hair and developmental delay."
+      - "Scurvy causes bleeding gums and poor wound healing, not blue sclerae or a family history."
+    src: { page: 49, quote: "Most common form is autosomal dominant with ↓ production of otherwise normal type I collagen (altered triple helix formation)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p49: Ehlers-Danlos syndrome ----------
+  - id: bio.L02.065
+    kind: card
+    topic: ehlers-danlos
+    front: What are the core features of Ehlers-Danlos syndrome?
+    back: Faulty collagen synthesis → hyperextensible, often thin or transparent skin, hypermobile joints and ↑ tendency to bleed (easy bruising). Associated with joint dislocation, berry and aortic aneurysms and organ rupture.
+    src: { page: 49, quote: "Faulty collagen synthesis → hyperextensible A and often thin or transparent skin, hypermobile B joints, ↑ tendency to bleed (easy bruising)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.066
+    kind: table
+    topic: ehlers-danlos
+    title: Ehlers-Danlos types
+    columns: [Type, Features, Defect]
+    rows:
+      - [Hypermobility, "Joint instability; most common type", "—"]
+      - [Classical, "Joint and skin symptoms", "Type V collagen (COL5A1, COL5A2)"]
+      - [Vascular, "Fragile vessels (eg, aorta), muscles and organs prone to rupture (eg, gravid uterus)", "Type III procollagen (COL3A1)"]
+    blanks: [[0, 1], [1, 2], [2, 2]]
+    src: { page: 49, quote: "Classical type (joint and skin symptoms): caused by a mutation in type V collagen (eg, COL5A1, COL5A2)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.067
+    kind: card
+    topic: ehlers-danlos
+    front: How is Ehlers-Danlos syndrome inherited, and which enzyme deficiency can cause it?
+    back: Inheritance and severity vary; it can be autosomal dominant or recessive. It can be caused by procollagen peptidase deficiency.
+    src: { page: 49, quote: "Can be caused by procollagen peptidase deficiency." }
+    status: unverified
+  - id: bio.L02.068
+    kind: mcq
+    topic: ehlers-danlos
+    stem: >-
+      A 28-year-old woman at 34 weeks of gestation has sudden severe abdominal pain and hypotension;
+      surgery finds a uterine rupture. She has thin, translucent skin with visible veins and bruises
+      easily, and her brother died suddenly of an aortic dissection at 30. A mutation affecting which
+      collagen is most likely?
+    options:
+      - Type I
+      - Type II
+      - Type III
+      - Type IV
+      - Type V
+    answer: 2
+    why:
+      - "Type I defects cause osteogenesis imperfecta (fractures, blue sclerae)."
+      - "Type II is cartilage, vitreous and nucleus pulposus."
+      - "Right. Vascular Ehlers-Danlos: type III procollagen (COL3A1) mutations → fragile vessels and organs that rupture, such as the aorta and gravid uterus (threE D)."
+      - "Type IV defects cause Alport syndrome."
+      - "Type V mutations cause classical EDS (joints and skin)."
+    src: { page: 49, quote: "Vascular type (fragile tissues including vessels [eg, aorta], muscles, and organs that are prone to rupture [eg, gravid uterus]): mutations in type III procollagen (eg, COL3A1)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p49: Menkes disease ----------
+  - id: bio.L02.069
+    kind: card
+    topic: menkes-disease
+    front: What causes Menkes disease and how is it inherited?
+    back: X-linked recessive. Defective Menkes protein ATP7A (Absent copper) → impaired copper absorption and transport → ↓ lysyl oxidase activity → defective collagen cross-linking.
+    src: { page: 49, quote: "X-linked recessive connective tissue disease caused by impaired copper absorption and transport due to defective Menkes protein ATP7A (Absent copper), vs ATP7B in Wilson disease (copper Buildup)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.070
+    kind: cloze
+    topic: menkes-disease
+    text: Menkes disease involves {{c1::ATP7A}} (Absent copper); Wilson disease involves {{c2::ATP7B}} (copper Buildup).
+    src: { page: 49, quote: "defective Menkes protein ATP7A (Absent copper), vs ATP7B in Wilson disease (copper Buildup)." }
+    status: unverified
+  - id: bio.L02.071
+    kind: card
+    topic: menkes-disease
+    front: What are the features of Menkes disease?
+    back: Brittle, "kinky" hair, growth and developmental delay, hypotonia and ↑ risk of cerebral aneurysms.
+    src: { page: 49, quote: "Results in brittle, “kinky” hair, growth and developmental delay, hypotonia, ↑ risk of cerebral aneurysms." }
+    status: unverified
+  - id: bio.L02.072
+    kind: mcq
+    topic: menkes-disease
+    stem: >-
+      A 4-month-old boy has hypotonia, seizures and failure to thrive. His hair is sparse, brittle and
+      steel-colored, twisted along its shaft on microscopy. Serum copper and ceruloplasmin are very low.
+      Which enzyme's reduced activity explains his connective tissue defects?
+    options:
+      - Prolyl hydroxylase
+      - Lysyl oxidase
+      - Procollagen peptidase
+      - N-acetylglucosaminyl-1-phosphotransferase
+      - Glucose-6-phosphatase
+    answer: 1
+    why:
+      - "Prolyl hydroxylation needs vitamin C (scurvy), not copper."
+      - "Right. Menkes disease: defective ATP7A → absent copper → ↓ lysyl oxidase (copper is its cofactor) → defective collagen cross-linking."
+      - "Procollagen peptidase deficiency causes a form of Ehlers-Danlos."
+      - "That enzyme is defective in I-cell disease."
+      - "Glucose-6-phosphatase is in the SER; it isn't copper dependent."
+    src: { page: 49, quote: "Leads to ↓ activity of lysyl oxidase (copper is a necessary cofactor) → defective collagen cross-linking." }
+    status: unverified
+    tags: [high-yield]

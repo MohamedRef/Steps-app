@@ -164,6 +164,24 @@ mod tests {
     }
 
     #[test]
+    fn a_test_binary_runs_from_no_bundle() {
+        assert_eq!(running_bundle(), None);
+    }
+
+    #[test]
+    fn a_zip_without_exactly_one_app_or_a_swap_that_fails_keeps_the_old_one() {
+        let dir = tempfile::tempdir().unwrap();
+        let bundle = fake_app(dir.path(), "old");
+        let zip = dir.path().join("x.zip");
+        let err = install_zip(&zip, &bundle, |_, _| Ok(()), |_| Ok(())).unwrap_err();
+        assert_eq!(err, "the zip holds 0 apps, not one");
+        // The new one vanished before the swap: the old one goes back.
+        let err = swap(&bundle, &dir.path().join("Gone.app")).unwrap_err();
+        assert!(err.contains("Steps.app"), "{err}");
+        assert_eq!(fs::read_to_string(bundle.join("Contents/MacOS/steps")).unwrap(), "old");
+    }
+
+    #[test]
     fn swaps_in_the_new_app_and_cleans_up() {
         let dir = tempfile::tempdir().unwrap();
         let apps = dir.path().join("Applications");

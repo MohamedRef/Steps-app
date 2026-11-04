@@ -19,12 +19,31 @@ const PEN_HOVER: &str = "pen_hover";
 const MOUSE_HOVER: &str = "mouse_hover";
 const APPEARANCE: &str = "appearance";
 
+/// This test thread's data folder (`data_dir` under `cfg(test)`).
+#[cfg_attr(not(test), allow(dead_code))]
+pub fn test_dir() -> PathBuf {
+    let thread = format!("{:?}", std::thread::current().id());
+    let n: String = thread.chars().filter(char::is_ascii_digit).collect();
+    std::env::temp_dir().join(format!("steps-test-{}-{n}", std::process::id()))
+}
+
 /// The app's own data folder: the local database and device files live here.
 pub fn data_dir() -> Option<PathBuf> {
-    // Previews and tests point the whole app at a scratch folder.
+    // Previews point the whole app at a scratch folder.
     if let Some(dir) = std::env::var_os("STEPS_DATA_DIR") {
         return Some(PathBuf::from(dir));
     }
+    // Unit tests never touch the real profile: one scratch folder per test
+    // thread, so tests running side by side start from their own empty data.
+    if cfg!(test) {
+        return Some(test_dir());
+    }
+    native_data_dir(|name| std::env::var_os(name))
+}
+
+/// Where this platform keeps an app's data, given how to read an
+/// environment variable.
+fn native_data_dir(var: impl Fn(&str) -> Option<std::ffi::OsString>) -> Option<PathBuf> {
     if cfg!(target_arch = "wasm32") {
         // The browser has no folders: the database is in IndexedDB and the
         // device prefs in localStorage (`platform::web`).
@@ -35,11 +54,11 @@ pub fn data_dir() -> Option<PathBuf> {
         // device owner). A JNI lookup can replace this once platform/ has one.
         return Some(PathBuf::from("/data/data/app.steps/files"));
     }
-    let home = std::env::var_os("HOME").map(PathBuf::from);
+    let home = var("HOME").map(PathBuf::from);
     if cfg!(target_os = "macos") {
         return home.map(|h| h.join("Library/Application Support/app.steps"));
     }
-    std::env::var_os("XDG_DATA_HOME")
+    var("XDG_DATA_HOME")
         .map(PathBuf::from)
         .or_else(|| home.map(|h| h.join(".local/share")))
         .map(|d| d.join("steps"))
@@ -236,6 +255,24 @@ impl DevicePrefs {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[cfg(not(any(target_os = "macos", target_os = "android", target_arch = "wasm32")))]
+    #[test]
+    fn linux_keeps_data_in_the_xdg_folder_or_under_home() {
+        use std::ffi::OsString;
+        let env = |pairs: &'static [(&'static str, &'static str)]| {
+            move |name: &str| pairs.iter().find(|(k, _)| *k == name).map(|(_, v)| OsString::from(v))
+        };
+        assert_eq!(
+            native_data_dir(env(&[("HOME", "/home/mohamed"), ("XDG_DATA_HOME", "/data")])),
+            Some(PathBuf::from("/data/steps"))
+        );
+        assert_eq!(
+            native_data_dir(env(&[("HOME", "/home/mohamed")])),
+            Some(PathBuf::from("/home/mohamed/.local/share/steps"))
+        );
+        assert_eq!(native_data_dir(env(&[])), None);
+    }
 
     #[test]
     fn round_trips_and_ignores_junk() {

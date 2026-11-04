@@ -165,6 +165,11 @@ pub fn init() {
 }
 
 pub fn get() -> Option<&'static Updater> {
+    // Screen tests give each test thread an updater of its own.
+    #[cfg(test)]
+    if let Some(u) = testing::TEST_UPDATER.with(std::cell::Cell::get) {
+        return Some(u);
+    }
     STARTED.get().and(UPDATER.get())
 }
 
@@ -443,13 +448,17 @@ fn range_start<B>(res: &ureq::http::Response<B>) -> Option<u64> {
     value.strip_prefix("bytes ")?.split('-').next()?.trim().parse().ok()
 }
 
-/// An HTTP agent; local development feeds skip any proxy in the environment.
+/// The app's HTTP agent (updates, Steps Cloud, Google sign-in); local
+/// development servers skip any proxy in the environment. Unit tests reach
+/// only local servers: anything else goes to a closed port and fails at once.
 #[cfg(not(target_arch = "wasm32"))]
-fn agent(url: &str, timeout: Duration) -> ureq::Agent {
+pub(crate) fn agent(url: &str, timeout: Duration) -> ureq::Agent {
     let local = url.starts_with("http://127.0.0.1") || url.starts_with("http://localhost");
     let mut config = ureq::Agent::config_builder().http_status_as_error(false).timeout_global(Some(timeout));
     if local {
         config = config.proxy(None);
+    } else if cfg!(test) {
+        config = config.proxy(ureq::Proxy::new("http://127.0.0.1:9").ok());
     }
     config.build().into()
 }
@@ -550,5 +559,7 @@ fn write_json(dir: &Path, name: &str, value: &impl Serialize) -> Result<(), Stri
     fs::rename(&tmp, dir.join(name)).map_err(|e| e.to_string())
 }
 
+#[cfg(test)]
+pub(crate) mod testing;
 #[cfg(test)]
 mod tests;

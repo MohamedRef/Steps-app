@@ -118,15 +118,70 @@ mod tests {
     #[test]
     fn a_broken_lecture_fails_the_check() {
         let dir = tempfile::tempdir().unwrap();
-        std::fs::create_dir_all(dir.path().join("content/hb")).unwrap();
+        std::fs::create_dir_all(dir.path().join("content/cvs")).unwrap();
         std::fs::write(
             dir.path().join("content/index.yaml"),
-            "schema: steps.content/v1\nlectures:\n  - { id: hb.L01, title: Liver Cirrhosis, pages: [1, 22], chunk: 10 }\n",
+            "schema: steps.content/v1\nlectures:\n  - { id: cvs.L04, title: Pathology, pages: [300, 320], chunk: 6 }\n",
         )
         .unwrap();
-        std::fs::write(dir.path().join("content/hb/L01.yaml"), "schema: steps.content/v1\nlecture: [")
+        std::fs::write(dir.path().join("content/cvs/L04.yaml"), "schema: steps.content/v1\nlecture: [")
             .unwrap();
         let problems = run(dir.path(), &["build".into(), "--check".into()]).unwrap_err();
-        assert!(problems[0].contains("L01.yaml"), "{problems:?}");
+        assert!(problems[0].contains("L04.yaml"), "{problems:?}");
+    }
+
+    use crate::testkit::{args, content_tree, write};
+
+    #[test]
+    fn build_writes_the_pack_with_the_look() {
+        let dir = content_tree();
+        let root = dir.path();
+        write(root, "crates/app/src/learn/learn.css", ".step { margin-inline: 1rem; }");
+        write(root, "crates/app/assets/main.css", ":root { --ink: black; }");
+        write(root, "crates/app/assets/logo.svg", "<svg/>");
+        let out = root.join("out");
+        let report = run(root, &args(&["build", "--out", out.to_str().unwrap()])).unwrap();
+        assert!(
+            report.contains("steps-content.pack: 1 lecture(s), 8 items, 0 lesson(s), 2 stylesheet(s)"),
+            "{report}"
+        );
+        let pack = Pack::decode(&std::fs::read(out.join("steps-content.pack")).unwrap()).unwrap();
+        assert_eq!(pack.look.keys().collect::<Vec<_>>(), ["assets/main.css", "src/learn/learn.css"]);
+        assert_eq!(pack.lectures[0].lecture, "cvs.L04");
+        assert!(pack.program.is_some());
+        assert!(run(root, &args(&["publish"])).unwrap_err()[0].starts_with("usage: steps-tools packs build"));
+    }
+
+    #[test]
+    fn a_broken_tree_never_builds() {
+        let dir = content_tree();
+        let root = dir.path();
+        // A lecture file that doesn't parse.
+        write(root, "content/cvs/L04.yaml", "lecture: [");
+        let err = run(root, &args(&["build", "--check"])).unwrap_err();
+        assert!(err[0].contains("L04.yaml"), "{err:?}");
+        write(root, "content/cvs/L04.yaml", crate::testkit::SAMPLE);
+        // A lesson figure whose image file is missing.
+        write(
+            root,
+            "content/lessons/cvs/L04.yaml",
+            "schema: steps.lesson/v1\nlecture: cvs.L04\nlessons:\n  - id: cvs.L04.lesson1\n    title: t\n    hook: h\n    minutes: 5\n    pages: [317, 317]\n    steps:\n      - { kind: figure, image: { file: cvs/echo.webp, book: true }, caption: c, alt: a, page: 317 }\n    recap: []\n    status: unverified\n",
+        );
+        let err = run(root, &args(&["build", "--check"])).unwrap_err();
+        assert_eq!(err, ["cvs.L04.lesson1 step 1: content/lessons/img/cvs/echo.webp is missing"]);
+        // With the image, a lesson that practises an item the lecture doesn't have.
+        write(root, "content/lessons/img/cvs/echo.webp", "RIFF");
+        let lesson = std::fs::read_to_string(root.join("content/lessons/cvs/L04.yaml")).unwrap();
+        write(
+            root,
+            "content/lessons/cvs/L04.yaml",
+            &lesson.replace("    recap: []", "    recap: []\n    practice: [cvs.L04.042]"),
+        );
+        let err = run(root, &args(&["build", "--check"])).unwrap_err();
+        assert_eq!(err, ["pack: cvs.L04.lesson1: item cvs.L04.042 isn't in lecture cvs.L04"]);
+        // No program.
+        std::fs::remove_file(root.join("content/lessons/cvs/L04.yaml")).unwrap();
+        std::fs::remove_file(root.join("content/program.yaml")).unwrap();
+        assert!(run(root, &args(&["build", "--check"])).unwrap_err()[0].contains("program.yaml"));
     }
 }
