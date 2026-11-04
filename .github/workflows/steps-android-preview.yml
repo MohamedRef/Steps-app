@@ -6,7 +6,12 @@ name: Android preview APK
 # .github/workflows/android-preview.yml; it also folds in chunk 20's
 # android-apk.yml (scripts/android-check-apk.sh runs on every build).
 #
-# Pushes to main are signed with the permanent *release* keys (repo secrets
+# When: once a night (only if main moved since the build on the feed) and
+# by hand (Actions › Android preview APK › Run workflow), Mohamed's choice on
+# 2026-11-04. It no longer runs on every push to main. Pull requests that
+# touch the Android glue still build it as a check (nothing is published).
+#
+# Builds from main are signed with the permanent *release* keys (repo secrets
 # from scripts/release-secrets.sh): the APK with the release keystore and the
 # feed with the release update key. So every build, preview or release, can
 # move between the preview, alpha, beta and stable channels in
@@ -19,11 +24,12 @@ name: Android preview APK
 #
 # Self-updates: the APK follows alpha by default (Settings can pick preview),
 # and the release carries a signed update.json naming the APK and the content pack, so an
-# installed preview updates itself (and its lectures) after every merge.
+# installed preview updates itself (and its lectures) after each nightly build.
 
 on:
-  push:
-    branches: [main]
+  schedule:
+    # 01:00 UTC = 03:00 in Cairo.
+    - cron: "0 1 * * *"
   pull_request:
     branches: [main]
     paths:
@@ -49,8 +55,33 @@ permissions:
   contents: read
 
 jobs:
+  due:
+    name: Anything new since the last preview?
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      run: ${{ steps.d.outputs.run }}
+    steps:
+      - id: d
+        # Nightly runs build only when main moved since the commit the live
+        # feed carries; a hand-started run and pull requests always build.
+        run: |
+          run=true
+          if [ "$GITHUB_EVENT_NAME" = schedule ]; then
+            live="$(curl -fsSL --retry 3 \
+              "https://github.com/$GITHUB_REPOSITORY/releases/download/steps-preview/update.json" \
+              | jq -r '.commit // empty' 2>/dev/null || true)"
+            if [ -n "$live" ] && [ "$live" = "${GITHUB_SHA::7}" ]; then
+              echo "The live preview already carries ${GITHUB_SHA::7}: nothing to build tonight."
+              run=false
+            fi
+          fi
+          echo "run=$run" >> "$GITHUB_OUTPUT"
+
   apk:
     name: Build preview APK
+    needs: due
+    if: needs.due.outputs.run == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     env:
@@ -119,6 +150,8 @@ jobs:
           mkdir -p ~/.steps-preview-update
           if [ "$KEEP_KEY" = true ]; then
             [ -n "$SECRET" ] || { echo "::error::secret STEPS_UPDATE_SECRET is missing (scripts/release-secrets.sh)"; exit 1; }
+            grep -q '^[A-Za-z0-9+/]\{43\}=$' crates/app/update-key.pub \
+              || { echo "::error::STEPS_UPDATE_SECRET is set but crates/app/update-key.pub holds no key yet: commit the public key scripts/release-secrets.sh printed (docs/RELEASE.md §2)"; exit 1; }
             cp crates/app/update-key.pub ~/.steps-preview-update/key.pub
             printf %s "$SECRET" > ~/.steps-preview-update/secret
           else
@@ -204,13 +237,23 @@ jobs:
           chmod 600 ~/.steps-preview/*
       - name: Sign
         if: env.CONTENT_ONLY != 'true'
+        env:
+          # The release certificate's public fingerprint (a repo variable set
+          # by scripts/release-secrets.sh): a kept-key build signed with any
+          # other key would never install over Steps, so it stops here.
+          CERT_SHA256: ${{ vars.STEPS_ANDROID_CERT_SHA256 }}
         run: |
           IN=dist/android/release/steps-unsigned.apk
           PASS="$(cat ~/.steps-preview/pass)"
           zipalign -f -p 4 "$IN" /tmp/aligned.apk
           apksigner sign --ks ~/.steps-preview/preview.jks --ks-key-alias "$(cat ~/.steps-preview/alias)" \
             --ks-pass "pass:$PASS" --key-pass "pass:$PASS" --out dist/android/steps-preview.apk /tmp/aligned.apk
-          apksigner verify --print-certs dist/android/steps-preview.apk
+          apksigner verify --print-certs dist/android/steps-preview.apk | tee /tmp/certs.txt
+          if [ "$KEEP_KEY" = true ]; then
+            [ -n "$CERT_SHA256" ] || { echo "::error::repo variable STEPS_ANDROID_CERT_SHA256 is missing (scripts/release-secrets.sh)"; exit 1; }
+            grep -qi "certificate SHA-256 digest: $CERT_SHA256\$" /tmp/certs.txt \
+              || { echo "::error::the APK is not signed with the permanent release key ($CERT_SHA256)"; exit 1; }
+          fi
           # The S24 Ultra and Tab S11 are arm64; dx defaults to the emulator ABI.
           unzip -l dist/android/steps-preview.apk | grep -q 'lib/arm64-v8a/' \
             || { echo "APK has no arm64-v8a library"; unzip -l dist/android/steps-preview.apk; exit 1; }

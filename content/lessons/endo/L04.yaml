@@ -1,0 +1,1043 @@
+schema: steps.lesson/v1
+lecture: endo.L04
+lessons:
+  - id: endo.L04.lesson1
+    title: "الماية: SIADH بيحبسها، والـ DI بيسيبها تنزل"
+    hook: "مريض بيشرب كتير وبيتبول كتير: هل العيب في الحنفية، ولا في الماسورة، ولا هو بيشرب بزيادة؟ اختبار واحد بيفرّق"
+    minutes: 9
+    pages: [342, 342]
+    topics: [siadh, primary-polydipsia-and-diabetes-insipidus]
+    goals:
+      - "تفهم ليه الـ SIADH بيعمل hyponatremia من غير edema"
+      - "تعدّ أسباب الـ SIADH وعلاجه"
+      - "تفرّق بين primary polydipsia و central DI و nephrogenic DI بالـ water restriction والـ desmopressin"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "SIADH: ADH شغال من غير لزمة"
+        text: |-
+          في الـ **SIADH** الـ ADH بيطلع وهو مش مطلوب، فالكلية بتمسك ==free water== زيادة. النتيجة:
+          - **Hyponatremia euvolemic**: المريض مش منفوخ.
+          - البول **مركّز** أكتر من الدم (urine osm > serum osm).
+          - والـ **Na+ بيفضل نازل في البول**.
+
+          ليه مش منفوخ؟ الجسم بيحس بالماية الزيادة فيقلل الـ **aldosterone** ويعلّي الـ **ANP و BNP** ← يرمي Na+ ومعاه ماية ← الـ volume يرجع طبيعي، بس الـ Na+ يفضل واطي.
+        page: 342
+        quote: "Body responds to water retention with ↓ aldosterone and ↑ ANP and BNP → ↑ urinary Na+ secretion → normalization of extracellular fluid volume → euvolemic hyponatremia."
+      - kind: mnemonic
+        word: "HEELD"
+        parts:
+          - { key: "H", text: "Head trauma / CNS disorders" }
+          - { key: "E", text: "Ectopic ADH (small cell lung cancer)" }
+          - { key: "E", text: "Exogenous hormones (vasopressin, desmopressin, oxytocin)" }
+          - { key: "L", text: "Lung disease" }
+          - { key: "D", text: "Drugs (SSRIs, carbamazepine, cyclophosphamide)" }
+        hook: "HEELD-up water من الكتاب: الماية محبوسة."
+        page: 342
+        quote: "SIADH causes include (HEELD-up water): Head trauma/CNS disorders Ectopic ADH (eg, small cell lung cancer)"
+      - kind: explain
+        title: "العلاج"
+        text: |-
+          أول خطوة: ==fluid restriction==. لو مش كفاية: salt tablets، أو **IV hypertonic saline**، أو diuretics، أو ==ADH antagonists== (conivaptan و tolvaptan و demeclocycline).
+        page: 342
+        quote: "Treatment: fluid restriction (first line), salt tablets, IV hypertonic saline, diuretics, ADH antagonists (eg, conivaptan, tolvaptan, demeclocycline)."
+      - kind: check
+        question: "A smoker with a hilar mass has Na 121, euvolemia, urine osm 500 and urine Na 45. First-line treatment?"
+        options:
+          - "Fluid restriction"
+          - "Desmopressin"
+          - "Water loading"
+          - "Fludrocortisone"
+        answer: 0
+        why:
+          - "صح: ده SIADH من ectopic ADH (small cell)، وأول علاج تقليل السوايل."
+          - "الـ desmopressin هو ADH، هيزوّد المشكلة."
+          - "ماية زيادة هتنزّل الـ Na+ أكتر."
+          - "الـ aldosterone أصلاً واطي، ومش هو العلاج في الكتاب."
+        page: 342
+        quote: "Treatment: fluid restriction (first line)"
+      - kind: figure
+        title: "3 أسباب لبول كتير خفيف"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="6" y="10" width="110" height="170" rx="10"/>
+            <text x="14" y="30" class="t-sm t-b">Primary</text>
+            <text x="14" y="46" class="t-sm t-b">polydipsia</text>
+            <text x="14" y="72" class="t-sm">drinks too much</text>
+            <text x="14" y="96" class="t-sm">serum osm ↓</text>
+            <text x="14" y="120" class="t-sm">ADH ↓/normal</text>
+            <text x="14" y="148" class="t-sm t-good">water restriction:</text>
+            <text x="14" y="164" class="t-sm t-good">urine osm ↑↑</text>
+            <rect class="fg-acc" x="125" y="10" width="110" height="170" rx="10"/>
+            <text x="133" y="30" class="t-sm t-b">Central DI</text>
+            <text x="133" y="72" class="t-sm">no ADH made</text>
+            <text x="133" y="96" class="t-sm">serum osm ↑</text>
+            <text x="133" y="120" class="t-sm">ADH ↓</text>
+            <text x="133" y="148" class="t-sm t-good">desmopressin:</text>
+            <text x="133" y="164" class="t-sm t-good">urine osm ↑ >50%</text>
+            <rect class="fg-bad" x="244" y="10" width="110" height="170" rx="10"/>
+            <text x="252" y="30" class="t-sm t-b">Nephrogenic DI</text>
+            <text x="252" y="72" class="t-sm">kidney deaf</text>
+            <text x="252" y="96" class="t-sm">serum osm ↑</text>
+            <text x="252" y="120" class="t-sm">ADH normal/↑</text>
+            <text x="252" y="148" class="t-sm t-bad">desmopressin:</text>
+            <text x="252" y="164" class="t-sm t-bad">minimal change</text>
+          </svg>
+        caption: "الـ serum osmolality بتفرّق الأول: واطية لو هو بيشرب زيادة، وعالية لو بيخسر ماية. وبعدين الـ desmopressin بيقولك العيب في الهرمون (central) ولا في الكلية (nephrogenic)."
+        alt: "Three columns. Primary polydipsia: drinks too much, low serum osmolality, low or normal ADH, urine concentrates with water restriction. Central DI: no ADH, high serum osmolality, urine concentrates by over 50 percent with desmopressin. Nephrogenic DI: kidney unresponsive, high serum osmolality, normal or high ADH, minimal change with desmopressin."
+        page: 342
+        quote: "SERUM OSMOLALITY ↓ ↑ ↑ ADH LEVEL ↓ or normal ↓ Normal or ↑"
+      - kind: explain
+        title: "الأسباب والعلاج"
+        text: |-
+          البول في الحالات دي: specific gravity أقل من **1.006** و osmolality غالباً أقل من **300**.
+          - **Primary polydipsia**: أمراض نفسية أو lesion في مركز العطش ← العلاج ==water restriction==.
+          - **Central DI** (AVP deficiency): idiopathic أو إصابة مخ (trauma و hypoxia و tumor و surgery و infiltrative) ← ==desmopressin (DDAVP)==.
+          - **Nephrogenic DI** (AVP resistance): وراثي (V2-receptor mutation)، أدوية (**lithium** و demeclocycline)، **hypercalcemia** و **hypokalemia** ← عالج السبب، و low-solute diet و ==HCTZ== و amiloride و indomethacin.
+        page: 342
+        quote: "Hereditary (V2-receptor mutation), drugs (eg, lithium, demeclocycline), hypercalcemia, hypokalemia"
+      - kind: reveal
+        prompt: "الـ central DI بعد عملية في الـ posterior pituitary ممكن يخف لوحده. إزاي والـ ADH مكانه اتشال؟"
+        answer: "الـ ADH بيتعمل فوق في الـ hypothalamus. لو الضرر ==تحت الـ median eminence== أو في الـ posterior pituitary بس، الـ ADH لسه يقدر يطلع للدم من الـ portal capillaries في الـ median eminence، فالـ DI يبقى transient."
+        page: 342
+        quote: "Central DI may be transient if damage is below hypothalamic median eminence or in the posterior pituitary"
+      - kind: explain
+        title: "الـ water restriction test"
+        text: |-
+          المريض ما يشربش **2-3 ساعات**، وكل ساعة نقيس حجم البول والـ osmolality والـ Na+ والـ plasma osmolality.
+
+          بنديله **desmopressin** لو: الـ serum osm بقت أكتر من **295-300**، أو الـ Na+ وصل **145** أو أكتر، أو البول ما اتركزش رغم إن الدم اتركّز.
+        page: 342
+        quote: "Desmopressin (ADH analog) is administered if serum osmolality >295-300 mOsm/kg, plasma Na+ ≥145 mEq/L, or urine osmolality does not increase despite ↑ plasma osmolality."
+      - kind: case
+        stem: "ست عندها bipolar على lithium من 10 سنين، بتتبول كل ساعة. Na 146 و serum osm 302 و urine osm 150."
+        steps:
+          - question: "After water restriction urine osm barely rises; after desmopressin it rises 5%. Diagnosis?"
+            options: ["Nephrogenic DI", "Central DI", "Primary polydipsia"]
+            answer: 0
+            why: "الكلية مش سامعة حتى للـ desmopressin، والـ lithium سبب كلاسيكي. الـ central كان هيستجيب أكتر من 50%، والـ polydipsia كان الـ serum osm هيبقى واطي."
+          - question: "Which treatment fits?"
+            options: ["Hydrochlorothiazide", "Desmopressin", "Tolvaptan"]
+            answer: 0
+            why: "علاج الـ nephrogenic: السبب، و low-solute diet و HCTZ و amiloride و indomethacin. الـ desmopressin مش هيفيد، والـ tolvaptan بيعمل عكس المطلوب."
+        page: 342
+        quote: "Manage the underlying cause; low-solute diet, HCTZ, amiloride, indomethacin"
+      - kind: try
+        items: [endo.L04.001, endo.L04.003, endo.L04.007, endo.L04.009]
+    recap:
+      - "SIADH: euvolemic hyponatremia، urine osm > serum osm، Na+ مستمر في البول."
+      - "HEELD-up water؛ أول علاج fluid restriction، والـ ADH antagonists (conivaptan و tolvaptan و demeclocycline)."
+      - "Polydipsia: serum osm ↓، تستجيب للـ water restriction."
+      - "Central DI: ADH ↓، الـ desmopressin يعلّي البول أكتر من 50%."
+      - "Nephrogenic DI (lithium، hypercalcemia، hypokalemia): مش بتستجيب؛ HCTZ و amiloride و indomethacin."
+    practice: [endo.L04.001, endo.L04.002, endo.L04.003, endo.L04.004, endo.L04.005, endo.L04.006, endo.L04.007, endo.L04.008, endo.L04.009, endo.L04.010]
+  - id: endo.L04.lesson2
+    title: "الـ pituitary: لما تقل ولما الـ GH يزيد"
+    hook: "ست ولدت ونزفت ومش عارفة ترضع، وراجل خاتمه مبقاش داخل صباعه. نفس الغدة، مشكلتين عكس بعض"
+    minutes: 8
+    pages: [343, 343]
+    topics: [hypopituitarism, acromegaly]
+    goals:
+      - "تعدّ أسباب الـ hypopituitarism وتعرف Sheehan"
+      - "تعرف علامات الـ acromegaly وسبب الوفاة"
+      - "تعرف ليه بنشخص بالـ IGF-1 مش بالـ GH"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Hypopituitarism"
+        text: |-
+          الـ pituitary بتطلّع هرمونات أقل بسبب:
+          - مرض في الـ **hypothalamus** (mass أو radiation أو infiltrative)
+          - **عملية** في الـ pituitary
+          - مشاكل الـ pituitary نفسها: **mass effect** من nonsecreting adenoma أو craniopharyngioma
+          - **Empty sella**
+          - ==Sheehan syndrome==
+
+          العلاج: نعوّض الهرمونات (glucocorticoids و thyroxine و sex steroids و GH).
+        page: 343
+        quote: "Undersecretion of pituitary hormones due to: Hypothalamic disease (ie, mass lesion, radiation, infiltrative lesions) Pituitary surgery"
+      - kind: reveal
+        prompt: "ليه الـ pituitary بالذات بتموت بعد نزيف الولادة؟"
+        answer: "في الحمل الـ pituitary ==بتكبر== (pregnancy-induced growth)، فبتبقى محتاجة دم أكتر. نزيف شديد بعد الولادة ← hypoperfusion ← ischemic infarct. ده **Sheehan syndrome**."
+        page: 343
+        quote: "Sheehan syndrome—ischemic infarct of pituitary following severe postpartum hemorrhage; pregnancy-induced pituitary growth → ↑ susceptibility to hypoperfusion."
+      - kind: explain
+        title: "شكل Sheehan"
+        text: |-
+          أغلب الضرر في الـ **anterior pituitary**، فالأعراض كلها هرموناتها:
+          - ==مش قادرة ترضع== (prolactin)
+          - **amenorrhea** (FSH و LH)
+          - **cold intolerance** (TSH)
+        page: 343
+        quote: "Usually presents with failure to lactate, amenorrhea, cold intolerance (anterior pituitary hormones mainly affected)."
+      - kind: explain
+        title: "Acromegaly: الـ GH الزيادة عند الكبير"
+        text: |-
+          الـ GH الزيادة عند الكبار = **acromegaly**، وغالباً سببها pituitary adenoma. عند الأطفال = **gigantism** لأن الـ epiphysis لسه مفتوحة فالعضم يطول (Acromegaly in adults, gigantism in j(g)uniors).
+
+          العلامات:
+          - **لسان كبير** فيه تجاعيد عميقة، frontal bossing، ملامح بتتخشن مع السن، صوت تخين
+          - **diaphoresis** (عرق كتير)، hypertrophic arthropathy
+          - **impaired glucose tolerance** (insulin resistance)، hypertension، **LVH**
+          - ==HFpEF==: أشهر سبب للوفاة
+        page: 343
+        quote: "Large tongue with deep furrows, frontal bossing, coarsening of facial features with aging A , deep voice, diaphoresis (excessive sweating), hypertrophic arthropathy"
+      - kind: figure
+        title: "الـ GH بيعمل إيه في الكبير"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="en4a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="130" y="8" width="100" height="30" rx="8"/>
+            <text x="146" y="28" class="t-sm t-b">GH ↑ → IGF-1 ↑</text>
+            <line class="fg-arrow-acc" x1="150" y1="38" x2="60" y2="70" marker-end="url(#en4a)"/>
+            <line class="fg-arrow-acc" x1="180" y1="38" x2="180" y2="70" marker-end="url(#en4a)"/>
+            <line class="fg-arrow-acc" x1="210" y1="38" x2="300" y2="70" marker-end="url(#en4a)"/>
+            <rect class="fg-box" x="4" y="72" width="112" height="100" rx="8"/>
+            <text x="12" y="90" class="t-sm t-b">Face, body</text>
+            <text x="12" y="108" class="t-sm">large tongue</text>
+            <text x="12" y="124" class="t-sm">frontal bossing</text>
+            <text x="12" y="140" class="t-sm">deep voice</text>
+            <text x="12" y="156" class="t-sm">sweating, joints</text>
+            <rect class="fg-box" x="124" y="72" width="112" height="100" rx="8"/>
+            <text x="132" y="90" class="t-sm t-b">Metabolic</text>
+            <text x="132" y="108" class="t-sm">insulin resistance</text>
+            <text x="132" y="124" class="t-sm">glucose intolerance</text>
+            <rect class="fg-bad" x="244" y="72" width="112" height="100" rx="8"/>
+            <text x="252" y="90" class="t-sm t-b">Heart</text>
+            <text x="252" y="108" class="t-sm">hypertension</text>
+            <text x="252" y="124" class="t-sm">LVH</text>
+            <text x="252" y="140" class="t-sm t-b">HFpEF</text>
+            <text x="252" y="156" class="t-sm t-bad">top cause of death</text>
+          </svg>
+        caption: "الـ GH الزيادة بيكبّر الأنسجة الرخوة والعضم، وبيعمل insulin resistance، وبيتعب القلب لحد HFpEF، وده اللي بيموّت المريض."
+        alt: "Excess GH and IGF-1 lead to soft tissue and bone changes (large tongue, frontal bossing, deep voice, sweating, joints), metabolic changes (insulin resistance, glucose intolerance) and heart changes (hypertension, LVH, HFpEF, the top cause of death)."
+        page: 343
+        quote: "hypertension, LVH, HFpEF (most common cause of death)."
+      - kind: check
+        question: "Best initial test for suspected acromegaly?"
+        options:
+          - "Serum IGF-1"
+          - "Random serum GH"
+          - "Serum prolactin"
+          - "Fasting insulin"
+        answer: 0
+        why:
+          - "صح: الـ IGF-1 ثابت، والـ GH بيتذبذب طول اليوم فما ينفعش نعتمد عليه."
+          - "الـ GH العشوائي unreliable لأنه بيطلع pulses."
+          - "الـ prolactin للـ prolactinoma."
+          - "الـ insulin مش هو التشخيص."
+        page: 343
+        quote: "↑ serum IGF-1 (GH levels unreliable as they fluctuate throughout the day)"
+      - kind: explain
+        title: "التشخيص والعلاج"
+        text: |-
+          التشخيص: ==↑ IGF-1==، والـ GH ==ما بيقلّش بعد OGTT== (المفروض السكر يكتمه)، و pituitary mass في الـ MRI.
+
+          العلاج: نشيل الـ adenoma. لو ما خفش:
+          - **octreotide** (somatostatin analog)
+          - **pegvisomant** (GH receptor antagonist)
+          - **dopamine agonists** (cabergoline)
+        page: 343
+        quote: "failure to suppress serum GH following oral glucose tolerance test; pituitary mass seen on brain MRI."
+      - kind: match
+        prompt: "وصّل كل دوا بطريقته في الـ acromegaly"
+        pairs:
+          - ["Octreotide", "Somatostatin analog"]
+          - ["Pegvisomant", "GH receptor antagonist"]
+          - ["Cabergoline", "Dopamine agonist"]
+        why: "التلاتة بعد الجراحة لو ما خفش. الـ pegvisomant الوحيد اللي بيقفل الـ receptor نفسه."
+        page: 343
+        quote: "treat with octreotide (somatostatin analog), pegvisomant (GH receptor antagonist), or dopamine agonists (eg, cabergoline)."
+      - kind: try
+        items: [endo.L04.011, endo.L04.012, endo.L04.016, endo.L04.018]
+    recap:
+      - "Hypopituitarism: hypothalamus، surgery، mass، empty sella، Sheehan."
+      - "Sheehan: pituitary كبيرة في الحمل + نزيف ← infarct ← مش بترضع و amenorrhea و cold intolerance."
+      - "Acromegaly: لسان كبير، frontal bossing، عرق، insulin resistance، LVH؛ HFpEF أشهر سبب وفاة."
+      - "التشخيص بالـ IGF-1 و الـ GH ما بيقلّش بعد OGTT."
+      - "العلاج: جراحة، ثم octreotide أو pegvisomant أو cabergoline."
+    practice: [endo.L04.011, endo.L04.012, endo.L04.013, endo.L04.014, endo.L04.015, endo.L04.016, endo.L04.017, endo.L04.018, endo.L04.019, endo.L04.020]
+  - id: endo.L04.lesson3
+    title: "الـ thyroid الكسلانة والـ thyroid المتهورة"
+    hook: "كل عَرَض في الـ hypothyroidism عكسه موجود في الـ hyperthyroidism. وبعدين: مين اللي بيبوّظ الغدة؟"
+    minutes: 10
+    pages: [344, 345]
+    topics: [hypothyroidism-vs-hyperthyroidism, hypothyroidism]
+    goals:
+      - "تقارن الـ hypo بالـ hyper في كل جهاز وتفهم السبب"
+      - "تفرّق بين Hashimoto و de Quervain و Riedel"
+      - "تعرف الـ 6 P's والأسباب التانية"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "القاعدة: الـ T3 بنزين"
+        text: |-
+          افتكر الـ 7 B's: الـ T3 بيعلّي الـ BMR والـ β-adrenergic والـ lipolysis. فالـ **hypo** كل حاجة فيه بطيئة وباردة، والـ **hyper** كل حاجة سريعة وسخنة:
+          - **Hypo**: برد، عرق أقل، وزن بيزيد، constipation، bradycardia، reflexes بطيئة، اكتئاب.
+          - **Hyper**: حر، عرق كتير، وزن بيقل (↑ Na+/K+-ATPase)، إسهال، tachycardia و AF، fine tremor، reflexes سريعة، قلق وأرق.
+        page: 344
+        quote: "Heat intolerance, ↑ sweating, weight loss (↑ synthesis of Na+ /K+ -ATPase → ↑ basal metabolic rate → ↑ calorigenesis)"
+      - kind: sort
+        prompt: "ده hypo ولا hyper؟"
+        bins: ["Hypothyroidism", "Hyperthyroidism"]
+        cards:
+          - { text: "Myoedema", bin: 0 }
+          - { text: "Hyponatremia", bin: 0 }
+          - { text: "Hypercholesterolemia", bin: 0 }
+          - { text: "Carpal tunnel syndrome", bin: 0 }
+          - { text: "Onycholysis", bin: 1 }
+          - { text: "Lid lag", bin: 1 }
+          - { text: "Osteoporosis", bin: 1 }
+          - { text: "Gynecomastia", bin: 1 }
+        why: "الـ hypo: الماية بتتحبس (hyponatremia)، والـ LDL receptors تقل (cholesterol ↑)، و myoedema و carpal tunnel. الـ hyper: الـ sympathetic بيشد الـ superior tarsal (lid lag)، والـ T3 بيشغّل الـ osteoclasts، و onycholysis و gynecomastia."
+        page: 344
+        quote: "Hypercholesterolemia (due to ↓ LDL receptor expression)"
+      - kind: explain
+        title: "تفاصيل بيحبها الامتحان"
+        text: |-
+          - **Myxedema** في الـ hypo: nonpitting، لأن ==GAGs== بتتجمع في الـ interstitium وبتشد ماية. (أما الـ **pretibial myxedema** فده Graves.)
+          - **Myopathy**: الاتنين proximal weakness، بس الـ ==CK عالي في الـ hypo== وطبيعي في الـ hyper.
+          - **Myoedema**: كورة صغيرة بتطلع في العضلة لما تخبطها بالـ hammer (hypo).
+          - **القلب في الـ hyper**: ↑ عدد وحساسية الـ β receptors، ↑ sarcolemmal ATPase، ↓ phospholamban.
+          - **Labs**: الـ hypo (1°) TSH ↑ و free T4 ↓ و cholesterol ↑؛ الـ hyper (1°) TSH ↓ و T3/T4 ↑ و cholesterol ↓.
+        page: 344
+        quote: "puffy facies and generalized nonpitting edema (myxedema) due to ↑ GAGs in interstitial spaces → ↑ osmotic pressure → water retention"
+      - kind: explain
+        title: "Hashimoto: أشهر سبب"
+        text: |-
+          **Hashimoto** (chronic autoimmune thyroiditis) هو ==أشهر سبب للـ hypothyroidism== في الأماكن اللي فيها iodine كفاية.
+          - غدة كبيرة شوية و **مش بتوجع**.
+          - ممكن يبتدي بـ hyper مؤقت (**Hashitoxicosis**) لأن الـ follicles بتنفجر وتطلّع هرمون.
+          - **Anti-TPO** (antimicrosomal) و **antithyroglobulin**.
+          - Histology: ==Hürthle cells== و lymphoid aggregates بـ germinal centers.
+          - **HLA-DR3**، و ↑ خطر **primary thyroid lymphoma** (DLBCL).
+
+          والـ **postpartum thyroiditis** نسخة خفيفة منه في أول سنة بعد الولادة: hyper ← hypo ← يرجع طبيعي.
+        page: 345
+        quote: "Also called chronic autoimmune thyroiditis. Most common cause of hypothyroidism in iodine sufficient regions."
+      - kind: table
+        title: "التلاتة thyroiditis"
+        columns: ["Type", "Pain?", "Clue", "Histology"]
+        rows:
+          - ["Hashimoto", "No", "Anti-TPO, lymphoma risk", "Hürthle cells, germinal centers"]
+          - ["de Quervain (subacute granulomatous)", "Very tender", "↑ ESR, jaw pain, after a virus", "Granulomatous inflammation"]
+          - ["Riedel (invasive fibrous)", "No, rock hard and fixed", "IgG4-related, mimics anaplastic cancer", "Fibrous tissue"]
+        hide: [[0, 3], [1, 1], [1, 3], [2, 3]]
+        page: 345
+        quote: "Findings: ↑ ESR, jaw pain, very tender thyroid (de Quervain is associated with pain). Histology: granulomatous inflammation C ."
+      - kind: aside
+        tone: tip
+        text: "الكتاب بيقولك: ==de Quervain is associated with pain==. والـ Riedel ناشفة زي الحجر وماسكة في اللي حواليها (trachea و esophagus)، فممكن تتلخبط مع الـ anaplastic carcinoma. وتلت المرضى بيبقى عندهم hypothyroidism."
+        page: 345
+        quote: "Hypothyroidism occurs in 1 ⁄3 of patients. Fibrosis may extend to local structures (eg, trachea, esophagus), mimicking anaplastic carcinoma."
+      - kind: check
+        question: "Painful, very tender thyroid with high ESR after a cold, initially hyperthyroid. Histology?"
+        options:
+          - "Granulomatous inflammation"
+          - "Hürthle cells with germinal centers"
+          - "Dense fibrosis"
+          - "Scalloped colloid"
+        answer: 0
+        why:
+          - "صح: de Quervain = ألم + ESR عالي + بعد virus + granulomas."
+          - "ده Hashimoto، ومش بيوجع."
+          - "ده Riedel، ناشفة ومش بتوجع."
+          - "الـ scalloped colloid في Graves."
+        page: 345
+        quote: "Histology: granulomatous inflammation C ."
+      - kind: mnemonic
+        word: "PPPPPP"
+        parts:
+          - { key: "P", text: "Pot-bellied" }
+          - { key: "P", text: "Pale" }
+          - { key: "P", text: "Puffy-faced" }
+          - { key: "P", text: "Protruding umbilicus" }
+          - { key: "P", text: "Protuberant tongue" }
+          - { key: "P", text: "Poor brain development" }
+        hook: "الـ 6 P's من الكتاب للـ congenital hypothyroidism. سببه غالباً dysgenesis (agenesis أو hypoplasia أو ectopy) أو dyshormonogenesis (زي TPO mutation)."
+        page: 345
+        quote: "Findings (6 P’s): pot-bellied, pale, puffy-faced child E with protruding umbilicus, protuberant tongue F , and poor brain development."
+      - kind: explain
+        title: "الأسباب التانية"
+        text: |-
+          - **Iodine deficiency**: ==أشهر سبب في العالم==، وبييجي مع goiter.
+          - **Iodine excess**: Wolff-Chaikoff.
+          - **أدوية**: amiodarone و lithium.
+          - **Nonthyroidal illness (euthyroid sick)**: مريض ICU عنده ==T3 واطي== و T4 و TSH طبيعيين أو واطيين.
+        page: 345
+        quote: "Iodine deficiency (most common cause worldwide; typically presents with goiter G ), iodine excess (Wolff-Chaikoff effect), drugs (eg, amiodarone, lithium)"
+      - kind: try
+        items: [endo.L04.021, endo.L04.030, endo.L04.033, endo.L04.037]
+    recap:
+      - "الـ hypo بطيء وبارد (CK ↑، cholesterol ↑، hyponatremia)؛ الـ hyper سريع وسخن (CK طبيعي، osteoporosis، lid lag)."
+      - "Hashimoto: أشهر سبب، anti-TPO، Hürthle cells، HLA-DR3، خطر lymphoma."
+      - "de Quervain بيوجع، Riedel ناشفة (IgG4)."
+      - "Congenital: 6 P's. في العالم: نقص الـ iodine."
+      - "Euthyroid sick: T3 ↓."
+    practice: [endo.L04.021, endo.L04.022, endo.L04.023, endo.L04.024, endo.L04.025, endo.L04.026, endo.L04.027, endo.L04.028, endo.L04.029, endo.L04.030, endo.L04.031, endo.L04.032, endo.L04.033, endo.L04.034, endo.L04.035, endo.L04.036, endo.L04.037, endo.L04.038, endo.L04.039, endo.L04.040, endo.L04.041]
+  - id: endo.L04.lesson4
+    title: "Graves والـ storm والعُقد والسرطان"
+    hook: "antibody واحد بيعمل 3 حاجات في 3 أماكن. وبعدين: العقدة دي حميدة ولا لأ؟"
+    minutes: 10
+    pages: [346, 347]
+    topics: [hyperthyroidism, causes-of-goiter, thyroid-adenoma, thyroid-cancer]
+    goals:
+      - "تفهم الـ TSI بيعمل إيه في الغدة والجلد والعين"
+      - "تعالج الـ thyroid storm بالـ 4 P's"
+      - "تفرّق بين أنواع سرطان الـ thyroid ومضاعفات العملية"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Graves: antibody بيعمل نفسه TSH"
+        text: |-
+          **Graves** هو ==أشهر سبب للـ hyperthyroidism==. الـ **TSI** (IgG، **type II hypersensitivity**) بيشغّل الـ TSH receptor في 3 أماكن:
+          - **الغدة** ← hyperthyroidism و diffuse goiter
+          - **dermal fibroblasts** ← ==pretibial myxedema==
+          - **orbital fibroblasts** ← Graves orbitopathy (بنعالجها بـ glucocorticoids)
+
+          ولأنه IgG بيعدّي الـ placenta، ممكن يعمل **hyperthyroidism مؤقت في المولود**. بيظهر مع الـ stress (زي الحمل)، و HLA-DR3 و HLA-B8. Histology: خلايا طويلة متزاحمة و **scalloped colloid**.
+        page: 346
+        quote: "stimulates TSH receptors on thyroid (hyperthyroidism, diffuse goiter), dermal fibroblasts (pretibial myxedema), and orbital fibroblasts (Graves orbitopathy; treat with glucocorticoids)."
+      - kind: order
+        prompt: "رتّب إزاي العين بتطلع لبرّه في Graves"
+        steps:
+          - "T cells تتنشّط"
+          - "Lymphocytes تدخل ورا العين (retroorbital)"
+          - "Cytokines تعلى (TNF-α و IFN-γ)"
+          - "الـ fibroblasts تطلّع hydrophilic GAGs"
+          - "العضلات تنتفخ وتلتهب والدهن يزيد"
+          - "Exophthalmos"
+        why: "الـ GAGs بتشد ماية (زي الـ myxedema)، فالعضلات والدهن ورا العين يكبروا ويزقّوا العين لقدام."
+        page: 346
+        quote: "Activation of T-cells → lymphocytic infiltration of retroorbital space → ↑ cytokines (eg, TNF-α, IFN-γ) → ↑ fibroblast secretion of hydrophilic GAGs → ↑ osmotic muscle swelling, muscle inflammation, and adipocyte count → exophthalmos A ."
+      - kind: explain
+        title: "Toxic multinodular goiter والأسباب التانية"
+        text: |-
+          - **Toxic multinodular goiter**: حتت من الـ follicles شغالة ==لوحدها من غير TSH== (TSH receptor mutation في 60%). الـ hot nodules نادراً ما تبقى خبيثة.
+          - **Exogenous thyrotoxicosis**: حد بياخد thyroid hormone عشان يخس.
+          - **Struma ovarii**: thyroid tissue في المبيض.
+          - **Jod-Basedow**: thyroiditis بعد الـ contrast (iodine).
+          - **أدوية**: amiodarone و lithium.
+        page: 346
+        quote: "Focal patches of hyperfunctioning follicular cells distended with colloid working independently of TSH (due to TSH receptor mutations in 60% of cases)."
+      - kind: explain
+        title: "Thyroid storm"
+        text: |-
+          hyperthyroidism مش متعالج كويس + **stress حاد** (infection أو trauma أو surgery) = **thyroid storm**: agitation و delirium و fever و diarrhea و coma، و ==tachyarrhythmia== (سبب الوفاة). ممكن الـ LFTs تعلى.
+
+          العلاج بالـ **4 P's**:
+          - **P**ropranolol (β-blocker)
+          - **P**TU
+          - **P**rednisolone (glucocorticoids)
+          - **P**otassium iodide (Lugol): الـ iodide الكتير بيوقف الـ T4 بالـ ==Wolff-Chaikoff==.
+        page: 346
+        quote: "Treat with the 4 P’s: β-blockers (eg, propranolol), propylthiouracil, glucocorticoids (eg, prednisolone), potassium iodide (Lugol iodine). Iodide load → ↓ T4 synthesis → Wolff-Chaikoff effect."
+      - kind: reveal
+        prompt: "3 من الـ 4 P's بيشتركوا في حاجة واحدة اتعلمناها في الـ physiology. إيه هي؟"
+        answer: "الـ propranolol والـ PTU والـ prednisolone ==كلهم بيوقفوا الـ 5′-deiodinase==، فالـ T4 ما يتحولش لـ T3 الشغّال. والـ PTU كمان بيوقف الـ TPO، والـ iodide بيوقف الإنتاج بالـ Wolff-Chaikoff."
+        page: 346
+        quote: "Treat with the 4 P’s: β-blockers (eg, propranolol), propylthiouracil, glucocorticoids (eg, prednisolone), potassium iodide (Lugol iodine)."
+      - kind: table
+        title: "Goiter: ناعم ولا عُقد؟"
+        columns: ["Type", "Causes"]
+        rows:
+          - ["Smooth/diffuse", "Graves, Hashimoto, iodine deficiency, TSH-secreting pituitary adenoma"]
+          - ["Nodular", "Toxic multinodular goiter, thyroid adenoma, thyroid cancer, thyroid cyst"]
+        hide: [[0, 1], [1, 1]]
+        page: 346
+        quote: "Smooth/diffuse: Graves disease, Hashimoto thyroiditis, iodine deficiency, TSH-secreting pituitary adenoma. Nodular: toxic multinodular goiter, thyroid adenoma, thyroid cancer, thyroid cyst."
+      - kind: explain
+        title: "Adenoma: العقدة الحميدة"
+        text: |-
+          **Thyroid adenoma**: عقدة واحدة حميدة. أغلبها ==cold== في الـ scan (مش شغالة)، ونادراً hot.
+
+          أغلبها **follicular**، والفرق بينه وبين الـ follicular carcinoma: ==ما فيش capsular أو vascular invasion==. والـ FNA (cytology) لوحدها مش بتقدر تفرّق؛ لازم الـ capsule كلها تتشاف.
+        page: 346
+        quote: "Most common histology is follicular (arrows in A ); absence of capsular or vascular invasion (unlike follicular carcinoma)."
+      - kind: table
+        title: "سرطانات الـ thyroid"
+        columns: ["Type", "Clue", "Genes", "Course"]
+        rows:
+          - ["Papillary (most common)", "Orphan Annie nuclei, psammoma bodies, nuclear grooves", "RET/PTC, BRAF; childhood irradiation", "Lymph nodes; good prognosis"]
+          - ["Follicular", "Invades capsule and vessels; uniform follicles", "RAS, PAX8-PPAR-γ", "Hematogenous spread; good prognosis"]
+          - ["Medullary", "C cells, calcitonin, amyloid (Congo red)", "RET (MEN 2A, 2B)", "—"]
+          - ["Anaplastic", "Pleomorphic, many mitoses; older patients", "From dedifferentiated papillary/follicular", "Rapid compressive mass; very poor"]
+        hide: [[0, 1], [1, 2], [2, 1], [3, 3]]
+        page: 347
+        quote: "Empty-appearing nuclei with central clearing (“Orphan Annie” eyes) A , psamMoma bodies, nuclear grooves (Papi and Moma adopted Orphan Annie)."
+      - kind: aside
+        tone: tip
+        text: "الكتاب: ==Papi and Moma adopted Orphan Annie== (Papillary، psamMoma، Orphan Annie nuclei). و الـ medullary (MEN2llary) مع MEN 2."
+        page: 347
+        quote: "From parafollicular “C cells”; produces calcitonin, sheets of polygonal cells in an amyloid stroma C (stains with Congo red). Associated with MEN 2A and 2B (RET mutations; MEN2llary carcinoma)."
+      - kind: explain
+        title: "مضاعفات العملية"
+        text: |-
+          - **Hypocalcemia**: لو الـ parathyroids اتشالت.
+          - **Recurrent laryngeal nerve**: بيتقطع وهو بيربط الـ ==inferior thyroid artery== ← dysphagia و ==hoarseness==.
+          - **External branch of the superior laryngeal nerve**: بيتأذي وهو بيربط الـ superior thyroid pedicle ← المريض يفقد الـ tenor (المغنيين بيلاحظوا).
+        page: 347
+        quote: "injury to the external branch of the superior laryngeal nerve during ligation of superior thyroid vascular pedicle (may lead to loss of tenor usually noticeable in professional voice users)."
+      - kind: check
+        question: "Thyroid nodule FNA: sheets of polygonal cells in amyloid stroma; calcitonin is high. Gene?"
+        options:
+          - "RET"
+          - "BRAF"
+          - "RAS"
+          - "PAX8-PPAR-γ"
+        answer: 0
+        why:
+          - "صح: ده medullary من الـ C cells، مع RET و MEN 2."
+          - "الـ BRAF للـ papillary."
+          - "الـ RAS للـ follicular."
+          - "الـ PAX8-PPAR-γ للـ follicular."
+        page: 347
+        quote: "Associated with MEN 2A and 2B (RET mutations; MEN2llary carcinoma)."
+      - kind: try
+        items: [endo.L04.042, endo.L04.047, endo.L04.054, endo.L04.057, endo.L04.058]
+    recap:
+      - "Graves: TSI (IgG، type II) على الغدة والجلد (pretibial myxedema) والعين (GAGs ← exophthalmos)."
+      - "Storm: 4 P's (propranolol و PTU و prednisolone و potassium iodide)."
+      - "Adenoma: ما فيش invasion؛ الـ FNA مش بتفرّقه عن الـ follicular carcinoma."
+      - "Papillary أشهر (Orphan Annie، psammoma، BRAF)؛ medullary = C cells و RET؛ anaplastic أوحش."
+      - "Recurrent laryngeal مع الـ inferior thyroid artery ← hoarseness."
+    practice: [endo.L04.042, endo.L04.043, endo.L04.044, endo.L04.045, endo.L04.046, endo.L04.047, endo.L04.048, endo.L04.049, endo.L04.050, endo.L04.051, endo.L04.052, endo.L04.053, endo.L04.054, endo.L04.055, endo.L04.056, endo.L04.057, endo.L04.058, endo.L04.059, endo.L04.060, endo.L04.061]
+  - id: endo.L04.lesson5
+    title: "الـ parathyroid: الـ Ca والـ PTH على محورين"
+    hook: "ارسم الـ Ca على محور والـ PTH على محور، وكل مرض هيقعد في خانته لوحده"
+    minutes: 10
+    pages: [348, 349]
+    topics: [diagnosing-parathyroid-disease, hypoparathyroidism, lab-values-in-hypocalcemic-disorders, hyperparathyroidism]
+    goals:
+      - "تحط أي مريض Ca في خانته من الـ Ca والـ PTH"
+      - "تفرّق pseudohypo عن pseudopseudo"
+      - "تعرف stones و bones و groans وتفرّق الـ FHH عن الـ primary"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "الخريطة: Ca على X و PTH على Y"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="en4b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <line class="fg-arrow" x1="30" y1="180" x2="350" y2="180" marker-end="url(#en4b)"/>
+            <line class="fg-arrow" x1="30" y1="180" x2="30" y2="8" marker-end="url(#en4b)"/>
+            <text x="300" y="196" class="t-sm t-mut">Ca2+ →</text>
+            <text x="34" y="18" class="t-sm t-mut">PTH ↑</text>
+            <rect class="fg-acc" x="40" y="30" width="130" height="44" rx="8"/>
+            <text x="48" y="48" class="t-sm t-b">2° hyperpara</text>
+            <text x="48" y="64" class="t-sm">vit D ↓, CKD</text>
+            <rect class="fg-bad" x="200" y="12" width="150" height="34" rx="8"/>
+            <text x="208" y="34" class="t-sm t-b">3° hyperpara (CKD)</text>
+            <rect class="fg-bad" x="200" y="52" width="150" height="40" rx="8"/>
+            <text x="208" y="68" class="t-sm t-b">1° hyperpara</text>
+            <text x="208" y="84" class="t-sm">adenoma, hyperplasia</text>
+            <rect class="fg-good" x="130" y="100" width="90" height="28" rx="8"/>
+            <text x="148" y="118" class="t-sm t-b">Normal</text>
+            <rect class="fg-box" x="40" y="136" width="130" height="38" rx="8"/>
+            <text x="48" y="152" class="t-sm t-b">Hypoparathyroid</text>
+            <text x="48" y="168" class="t-sm">surgery, autoimmune</text>
+            <rect class="fg-box" x="200" y="136" width="150" height="38" rx="8"/>
+            <text x="208" y="152" class="t-sm t-b">PTH-independent ↑Ca</text>
+            <text x="208" y="168" class="t-sm">cancer, vit D, Ca intake</text>
+          </svg>
+        caption: "Ca واطي و PTH عالي = الغدة بتعوّض (2°). Ca عالي و PTH عالي = الغدة نفسها هي المشكلة (1°، و 3° أعلى). Ca عالي و PTH مكتوم = حاجة تانية بتعلّي الـ Ca. Ca واطي و PTH واطي = الغدة مش شغالة."
+        alt: "Plot of calcium on the x-axis and PTH on the y-axis. Low calcium with high PTH is secondary hyperparathyroidism; high calcium with high PTH is primary, and very high PTH is tertiary; normal in the middle; low calcium with low PTH is hypoparathyroidism; high calcium with low PTH is PTH-independent hypercalcemia."
+        page: 348
+        quote: "PTH-independent hypercalcemia (excess Ca2+ intake, cancer, ↑ vitamin D)"
+      - kind: explain
+        title: "Hypoparathyroidism"
+        text: |-
+          السبب غالباً ==إصابة الـ parathyroids أو دمها في عملية الـ thyroid==، أو autoimmune، أو **DiGeorge**.
+
+          النتيجة: **tetany** و hypocalcemia و ==hyperphosphatemia== (الـ PTH مش موجود يرمي الـ PO4).
+
+          علامتين:
+          - **Chvostek**: تخبط على الـ facial nerve (tap the Cheek) ← عضلات الوش تنقبض.
+          - **Trousseau**: تنفخ الـ BP cuff على الدراع (cuff the Triceps) ← carpal spasm.
+        page: 348
+        quote: "Chvostek sign—tapping of facial nerve (tap the Cheek) → contraction of facial muscles. Trousseau sign—occlusion of brachial artery with BP cuff (cuff the Triceps) → carpal spasm."
+      - kind: explain
+        title: "Pseudohypo: الـ PTH موجود بس محدش سامع"
+        text: |-
+          **Pseudohypoparathyroidism type 1A**: autosomal dominant، جاي ==من الأم== (GNAS gene عليه imprinting). الـ mutation في الـ **Gs α subunit** اللي مربوطة بالـ PTH receptor، فالـ PTH يمسك الـ receptor والـ adenylate cyclase ما يشتغلش ← الكلية والعضم مش سامعين.
+
+          Labs: ==PTH ↑== و Ca ↓ و PO4 ↑.
+
+          وشكل **Albright hereditary osteodystrophy**: صوابع 4 و 5 قصيرة، قصر، وش مدوّر، subcutaneous calcifications، developmental delay.
+        page: 348
+        quote: "GNAS1-inactivating mutation (coupled to PTH receptor) that encodes the Gs protein α subunit → inactivation of adenylate cyclase when PTH binds to its receptor → end-organ resistance (kidney and bone) to PTH."
+      - kind: reveal
+        prompt: "Pseudopseudohypoparathyroidism: نفس الشكل بالظبط، بس الـ labs طبيعية. إزاي؟"
+        answer: "نفس الـ GNAS mutation بس جاية ==من الأب==. في الكلية الـ allele بتاع الأم هو اللي شغال، وهو سليم، فالكلية سامعة الـ PTH كويس ← PTH و Ca و PO4 طبيعيين، والشكل (Albright) موجود."
+        page: 348
+        quote: "Pseudopseudohypoparathyroidism—autosomal dominant, paternally transmitted mutations (imprinted GNAS gene) but without end-organ resistance to PTH due to normal maternal allele maintaining renal responsiveness to PTH."
+      - kind: table
+        title: "Labs في الـ hypocalcemia"
+        columns: ["Disorder", "PO4", "PTH", "25(OH)D", "1,25(OH)2D"]
+        rows:
+          - ["Vitamin D deficiency", "—/↓", "↑", "↓", "—/↑"]
+          - ["2° hyperpara (CKD)", "↑", "↑", "—", "↓"]
+          - ["Hypoparathyroidism", "↑", "↓", "—", "—/↓"]
+          - ["Pseudohypoparathyroidism", "↑", "↑", "—", "—/↓"]
+        hide: [[0, 3], [1, 1], [1, 4], [2, 2]]
+        page: 348
+        quote: "Lab values in hypocalcemic disorders"
+      - kind: aside
+        tone: trap
+        text: "الـ PO4 بيفرّق: في نقص الـ vitamin D الـ PO4 ==واطي== (الأمعاء مش بتمتص، والـ PTH بيرمي). في الـ CKD الـ PO4 ==عالي== لأن الكلية مش قادرة ترميه. وفي الـ hypopara والـ pseudo الـ PO4 عالي لأن الـ PTH مش شغال."
+        page: 349
+        quote: "Hypocalcemia, hyperphosphatemia in chronic kidney disease (vs hypophosphatemia with most other causes), ↑ ALP, ↑ PTH."
+      - kind: explain
+        title: "Primary hyperparathyroidism"
+        text: |-
+          غالباً **adenoma** أو hyperplasia. Labs: Ca ↑ و PO4 ↓ و PTH ↑ و ALP ↑ و urinary cAMP ↑ و hypercalciuria. ==أغلبهم مالهمش أعراض==.
+
+          لما يبقى فيه أعراض: **"Stones, thrones, bones, groans, and psychiatric overtones"**:
+          - **Stones**: حصاوي كلى
+          - **Thrones**: polyuria
+          - **Bones**: ألم عضم
+          - **Groans**: constipation، ضعف، ألم بطن (حصاوي أو pancreatitis)
+          - **Psychiatric overtones**
+
+          وفي العضم: ==osteitis fibrosa cystica== (brown tumor: osteoclasts و hemosiderin).
+        page: 349
+        quote: "“Stones, thrones, bones, groans, and psychiatric overtones.”"
+      - kind: explain
+        title: "2° و 3° و FHH"
+        text: |-
+          - **Secondary**: الغدة بتكبر عشان تعوّض Ca واطي، غالباً من **CKD** (vitamin D قليل و PO4 عالي). والـ **renal osteodystrophy** هي آثار ده على العضم.
+          - **Tertiary**: بعد سنين في الـ ESRD الغدة بقت ==autonomous== ← PTH ↑↑ و Ca ↑.
+          - **FHH**: autosomal dominant، الـ **Ca-sensing receptor** معيوب، فالغدة محتاجة Ca أعلى عشان تسكت، والكلية بتمسك Ca ← hypercalcemia خفيفة مع ==hypocalciuria== و PTH طبيعي أو عالي شوية.
+        page: 349
+        quote: "Higher than normal Ca2+ levels required to suppress PTH. Excessive renal Ca2+ reabsorption → mild hypercalcemia and hypocalciuria with normal to ↑ PTH levels."
+      - kind: check
+        question: "Mild hypercalcemia, PTH slightly high, very low urine calcium, same in his father. Diagnosis?"
+        options:
+          - "Familial hypocalciuric hypercalcemia"
+          - "Primary hyperparathyroidism"
+          - "Tertiary hyperparathyroidism"
+          - "PTH-independent hypercalcemia"
+        answer: 0
+        why:
+          - "صح: البول فيه Ca قليل جداً والعيلة كلها كده = FHH."
+          - "الـ primary بيعمل hypercalciuria (stones)، مش العكس."
+          - "الـ tertiary محتاج ESRD و PTH ↑↑."
+          - "هنا الـ PTH مش مكتوم."
+        page: 349
+        quote: "Excessive renal Ca2+ reabsorption → mild hypercalcemia and hypocalciuria with normal to ↑ PTH levels."
+      - kind: try
+        items: [endo.L04.062, endo.L04.065, endo.L04.068, endo.L04.070, endo.L04.073]
+    recap:
+      - "Ca و PTH: 1° (↑ ↑)، 2° (↓ ↑)، 3° (↑ ↑↑)، hypo (↓ ↓)، PTH-independent (↑ ↓)."
+      - "Hypopara: بعد عملية الـ thyroid؛ Chvostek (Cheek) و Trousseau (Triceps)."
+      - "Pseudohypo: GNAS من الأم، PTH ↑، Albright؛ pseudopseudo من الأب، labs طبيعية."
+      - "Stones و thrones و bones و groans و psychiatric overtones؛ osteitis fibrosa cystica."
+      - "FHH: hypocalciuria مع Ca خفيف ↑."
+    practice: [endo.L04.062, endo.L04.063, endo.L04.064, endo.L04.065, endo.L04.066, endo.L04.067, endo.L04.068, endo.L04.069, endo.L04.070, endo.L04.071, endo.L04.072, endo.L04.073, endo.L04.074, endo.L04.075, endo.L04.076, endo.L04.077, endo.L04.078, endo.L04.079]
+  - id: endo.L04.lesson6
+    title: "السكر: المضاعفات والتشخيص والطوارئ"
+    hook: "السكر بيلزق في البروتين وبيتحول لـ sorbitol، وفي الطوارئ الـ K+ في الدم بيكدب عليك"
+    minutes: 10
+    pages: [350, 352]
+    topics: [diabetes-mellitus, type-1-vs-type-2-diabetes-mellitus, hyperglycemic-emergencies, hypoglycemia-in-diabetes-mellitus]
+    goals:
+      - "تعرف آليتين المضاعفات المزمنة"
+      - "تحفظ cutoffs التشخيص"
+      - "تفرّق type 1 عن type 2 و DKA عن HHS"
+      - "تعرف ليه الـ β-blocker بيخبّي الـ hypoglycemia"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "آليتين للمضاعفات"
+        text: |-
+          **1. Nonenzymatic glycation** (السكر بيلزق في البروتينات):
+          - أوعية صغيرة (==hyaline arteriolosclerosis==) ← retinopathy و neuropathy و nephropathy.
+          - أوعية كبيرة (atherosclerosis) ← CAD و stroke و PVD. والـ ==MI أشهر سبب للوفاة==.
+
+          **2. Osmotic damage**: الـ **aldose reductase** بيحوّل السكر لـ **sorbitol**، وفي أنسجة الـ sorbitol dehydrogenase فيها قليل أو مش موجود، فالـ sorbitol يتراكم ويشد ماية ← neuropathy (motor و sensory glove-and-stocking و autonomic: GERD و gastroparesis و diabetic diarrhea) و ==cataracts==.
+        page: 350
+        quote: "Osmotic damage (sorbitol accumulation in organs with aldose reductase and ↓ or absent sorbitol dehydrogenase)"
+      - kind: table
+        title: "التشخيص"
+        columns: ["Test", "Cutoff", "Note"]
+        rows:
+          - ["HbA1c", "≥6.5%", "Average of 3 months; RBC turnover affects it"]
+          - ["Fasting plasma glucose", "≥126 mg/dL", "Fast >8 h"]
+          - ["2-h OGTT (75 g)", "≥200 mg/dL", ""]
+          - ["Random glucose", "≥200 mg/dL", "With symptoms"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+        page: 350
+        quote: "Fasting plasma glucose ≥126 mg/dL Fasting for >8 hours"
+      - kind: explain
+        title: "Type 1 و type 2"
+        text: |-
+          - **Type 1**: ==T cells بتدمّر الـ β cells== (antibodies ضد islet cell cytoplasm و GAD65 و insulin). insulin دايماً، غالباً أقل من 30، مش سمين، **HLA-DR4 و DR3** (4 – 3 = type 1)، ketoacidosis شائعة، histology: leukocytic infiltrate. الوراثة أضعف (50% في التوائم).
+          - **Type 2**: insulin resistance ثم β-cell failure. أكبر من 40، سمين، وراثة أقوى (==90% في التوائم==)، ما لوش HLA، الـ insulin عالي في الأول وبعدين يقل، histology: ==islet amyloid polypeptide==.
+        page: 351
+        quote: "Relatively weak (50% concordance in identical twins), polygenic Relatively strong (90% concordance in identical twins), polygenic"
+      - kind: check
+        question: "Which is true of type 2 rather than type 1 DM?"
+        options:
+          - "90% concordance in identical twins"
+          - "HLA-DR3 and -DR4 association"
+          - "Islet leukocytic infiltrate"
+          - "Ketoacidosis is common"
+        answer: 0
+        why:
+          - "صح: الـ type 2 وراثته أقوى (90%)، رغم إن الناس بتفتكر العكس."
+          - "الـ HLA للـ type 1."
+          - "الـ infiltrate للـ type 1؛ الـ type 2 فيه amyloid."
+          - "الـ DKA شائعة في الـ type 1."
+        page: 351
+        quote: "Relatively strong (90% concordance in identical twins), polygenic"
+      - kind: figure
+        title: "DKA: من نقص الـ insulin للحمض"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="en4c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-bad" x="120" y="6" width="120" height="28" rx="8"/>
+            <text x="138" y="25" class="t-sm t-b">↓ insulin</text>
+            <line class="fg-arrow-bad" x1="150" y1="34" x2="70" y2="62" marker-end="url(#en4c)"/>
+            <line class="fg-arrow-bad" x1="210" y1="34" x2="290" y2="62" marker-end="url(#en4c)"/>
+            <rect class="fg-box" x="4" y="64" width="150" height="40" rx="8"/>
+            <text x="12" y="82" class="t-sm">lipolysis → FFA</text>
+            <text x="12" y="98" class="t-sm">→ ketones</text>
+            <rect class="fg-box" x="206" y="64" width="150" height="40" rx="8"/>
+            <text x="214" y="82" class="t-sm">hyperglycemia</text>
+            <text x="214" y="98" class="t-sm">→ osmotic diuresis</text>
+            <line class="fg-arrow-bad" x1="80" y1="104" x2="80" y2="128" marker-end="url(#en4c)"/>
+            <line class="fg-arrow-bad" x1="280" y1="104" x2="280" y2="128" marker-end="url(#en4c)"/>
+            <rect class="fg-acc" x="4" y="130" width="150" height="54" rx="8"/>
+            <text x="12" y="148" class="t-sm">anion gap acidosis</text>
+            <text x="12" y="164" class="t-sm">Kussmaul breathing</text>
+            <text x="12" y="180" class="t-sm">fruity breath</text>
+            <rect class="fg-acc" x="206" y="130" width="150" height="54" rx="8"/>
+            <text x="214" y="148" class="t-sm">loss of water, Na, K</text>
+            <text x="214" y="164" class="t-sm">dehydration</text>
+            <text x="214" y="180" class="t-sm">total body K+ ↓</text>
+          </svg>
+        caption: "الـ insulin لو غاب: الدهون تتكسر ← ketones ← حمض ونفس سريع عميق وريحة فاكهة. والسكر العالي بيسحب ماية و Na و K في البول ← جفاف و K+ الجسم كله يخلص."
+        alt: "Low insulin leads to lipolysis, free fatty acids and ketones, then anion gap metabolic acidosis, Kussmaul breathing and fruity breath; and to hyperglycemia and osmotic diuresis, then loss of water, sodium and potassium, dehydration and total body potassium depletion."
+        page: 351
+        quote: "lipolysis and oxidation of free fatty acids → ↑ ketone bodies (β-hydroxybutyrate > acetoacetate)."
+      - kind: table
+        title: "DKA ولا HHS؟"
+        columns: ["", "DKA", "HHS"]
+        rows:
+          - ["Insulin", "Deficient", "Present"]
+          - ["Ketones", "Present", "Deficient"]
+          - ["pH", "Anion gap acidosis", "Normal"]
+          - ["Glucose / osm", "High", "Often >600, osm >320"]
+          - ["Typical patient", "Type 1, infection or missed insulin", "Older type 2 who can't drink"]
+          - ["Complications", "Mucormycosis, cerebral edema, arrhythmias", "Coma, death"]
+        hide: [[0, 1], [1, 2], [2, 2], [5, 1]]
+        page: 351
+        quote: "Insulin deficient, ketones present."
+      - kind: reveal
+        prompt: "في الـ DKA الـ K+ في الدم 5.6. ليه لازم نديله K+ مع الـ insulin؟"
+        answer: "الـ K+ ده ==كدّاب==: نقص الـ insulin والحمض طلّعوا الـ K+ من جوه الخلايا للدم، والـ osmotic diuresis رمت منه كتير في البول. فالـ total body K+ ناقص. أول ما الـ insulin يشتغل الـ K+ هيرجع جوه الخلايا وينزل فجأة. عشان كده العلاج: **IV fluids و IV insulin و K+**، ونضيف glucose لو السكر نزل."
+        page: 351
+        quote: "Normal/↑ serum K+ , but depleted intracellular K+ due to transcellular shift from ↓ insulin and acidosis."
+      - kind: mnemonic
+        word: "DKAD"
+        parts:
+          - { key: "D", text: "Delirium / psychosis" }
+          - { key: "K", text: "Kussmaul respirations (rapid, deep)" }
+          - { key: "A", text: "Abdominal pain, nausea, vomiting" }
+          - { key: "D", text: "Dehydration" }
+        hook: "الكتاب بيقولك: DKA is Deadly. وزوّد عليهم ريحة الـ acetone (fruity breath)."
+        page: 351
+        quote: "DKA is Deadly: Delirium/psychosis, Kussmaul respirations (rapid, deep breathing), Abdominal pain/nausea/vomiting, Dehydration."
+      - kind: explain
+        title: "الـ hypoglycemia في مريض السكر"
+        text: |-
+          بتحصل مع **insulin** أو secretagogues (sulfonylureas و meglitinides) لو الجرعة عالية، أو ما أكلش، أو عمل رياضة.
+          - **Neurogenic (autonomic)**: عرق و tachycardia و رعشة و قلق و جوع. دي ==الإنذار== اللي بيخليه يحس.
+          - **Neuroglycopenic**: لخبطة و seizures وممكن موت، لأن المخ مش لاقي glucose.
+
+          مع **β-blockers** الإنذار بيختفي، فممكن يجيله seizure من غير ما يحس: ==hypoglycemia unawareness==.
+
+          العلاج: سكر بسيط (tablets أو عصير)، IM glucagon، IV dextrose.
+        page: 352
+        quote: "May occur in the absence of preceding neurogenic symptoms in patients with attenuated autonomic response, eg, β-blocker use (ie, hypoglycemia unawareness)."
+      - kind: try
+        items: [endo.L04.081, endo.L04.083, endo.L04.085, endo.L04.087, endo.L04.092]
+    recap:
+      - "Glycation: small vessels (retina و nerve و kidney) و large vessels (MI أشهر سبب وفاة). Sorbitol: neuropathy و cataracts."
+      - "HbA1c ≥6.5، fasting ≥126، OGTT ≥200، random ≥200 مع أعراض."
+      - "Type 1: HLA-DR3/DR4، 50% توائم؛ type 2: 90% توائم، amyloid."
+      - "DKA: insulin غايب و ketones؛ HHS: insulin موجود وما فيش ketones."
+      - "الـ K+ في الـ DKA عالي في الدم وناقص في الجسم: نديه K+ مع الـ insulin."
+      - "β-blockers ← hypoglycemia unawareness."
+    practice: [endo.L04.080, endo.L04.081, endo.L04.082, endo.L04.083, endo.L04.084, endo.L04.085, endo.L04.086, endo.L04.087, endo.L04.088, endo.L04.089, endo.L04.090, endo.L04.091, endo.L04.092, endo.L04.093, endo.L04.094]
+  - id: endo.L04.lesson7
+    title: "الـ adrenal: cortisol زيادة، cortisol ناقص، و aldosterone زيادة"
+    hook: "الـ ACTH هو اللي بيقولك المشكلة فين: في الغدة، ولا في الـ pituitary، ولا في حقنة الـ steroid"
+    minutes: 10
+    pages: [352, 354]
+    topics: [cushing-syndrome, adrenal-insufficiency, hyperaldosteronism]
+    goals:
+      - "تعرف أسباب الـ Cushing وتمشي في الـ algorithm بتاعه"
+      - "تفرّق primary عن secondary/tertiary adrenal insufficiency"
+      - "تفرّق primary عن secondary hyperaldosteronism بالـ renin"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Cushing syndrome: 3 طرق للـ cortisol الزيادة"
+        text: |-
+          - **Exogenous glucocorticoids**: ==أشهر سبب==. الـ ACTH ↓ ← الغدتين يضمروا.
+          - **Primary adrenal** (adenoma أو hyperplasia أو carcinoma): ACTH ↓ ← الغدة التانية تضمر.
+          - **ACTH زيادة**: من **pituitary adenoma** (Cushing disease) أو **ectopic** (small cell lung cancer و bronchial carcinoids) ← الغدتين يكبروا (bilateral hyperplasia).
+
+          وأغلب الحالات اللي من جوه الجسم (endogenous) سببها ==Cushing disease==.
+        page: 352
+        quote: "Exogenous glucocorticoids → ↓ ACTH → bilateral adrenal atrophy. Most common cause."
+      - kind: mnemonic
+        word: "MOONFACIES"
+        parts:
+          - { key: "M", text: "Metabolic syndrome (HTN, hyperglycemia, hyperlipidemia)" }
+          - { key: "O", text: "Obesity: truncal، moon face، buffalo hump، أطراف رفيعة" }
+          - { key: "O", text: "Osteoporosis" }
+          - { key: "N", text: "Neuropsychiatric (depression, anxiety, irritability)" }
+          - { key: "F", text: "Facial plethora" }
+          - { key: "A", text: "Androgen excess (acne, hirsutism)" }
+          - { key: "C", text: "Cataract" }
+          - { key: "I", text: "Immunosuppression" }
+          - { key: "E", text: "Ecchymoses (easy bruising)" }
+          - { key: "S", text: "Skin: thinning, striae, hyperpigmentation" }
+        hook: "MOON FACIES من الكتاب: وش المريض بيقولك العلامات."
+        page: 352
+        quote: "MOON FACIES: Metabolic syndrome (hypertension, hyperglycemia, hyperlipidemia), Obesity"
+      - kind: order
+        prompt: "رتّب خطوات تشخيص الـ Cushing"
+        steps:
+          - "Screening: 24-hr urine free cortisol أو late night salivary cortisol أو 1 mg overnight dexamethasone"
+          - "Measure serum ACTH"
+          - "ACTH عالي ← high-dose dexamethasone و/أو CRH stimulation test"
+          - "اتكتم (أو علي مع CRH) ← pituitary MRI؛ ما اتكتمش ← CT chest/abdomen/pelvis"
+        why: "لو الـ ACTH مكتوم يبقى exogenous أو adrenal tumor (adrenal CT). لو عالي: الـ pituitary adenoma لسه بيسمع شوية للـ feedback فبيتكتم بالجرعة العالية، والـ ectopic ما بيسمعش."
+        page: 352
+        quote: "Screening tests include: ↑ free cortisol on 24-hr urinalysis, ↑ late night salivary cortisol, and no suppression with overnight low-dose dexamethasone test."
+      - kind: check
+        question: "Cushing features, high ACTH, no suppression with high-dose dexamethasone. Next step?"
+        options:
+          - "CT of chest, abdomen and pelvis"
+          - "MRI of the pituitary"
+          - "Adrenal CT"
+          - "Stop prednisone"
+        answer: 0
+        why:
+          - "صح: ACTH عالي وما اتكتمش ← ectopic ACTH، ندوّر على الـ tumor (small cell أو carcinoid)."
+          - "الـ pituitary MRI لو اتكتم."
+          - "الـ adrenal CT لو الـ ACTH مكتوم."
+          - "الـ steroids من برّه بتكتم الـ ACTH، وهنا عالي."
+        page: 352
+        quote: "CT of the chest/abdomen/pelvis (to identify tumor)"
+      - kind: explain
+        title: "Adrenal insufficiency"
+        text: |-
+          الغدة مش بتطلّع glucocorticoids كفاية (+/- mineralocorticoids): ضعف و تعب و orthostatic hypotension و آلام عضلات ونقص وزن و GI و ==نفسه في الملح أو السكر==. العلاج: glucocorticoid +/- mineralocorticoid.
+
+          - **Primary**: الغدة نفسها ← cortisol ↓ و aldosterone ↓ ← hypotension و hyperkalemia و metabolic acidosis. والـ ACTH بيعلى، ومعاه الـ MSH ← ==hyperpigmentation== (أماكن الضغط والـ buccal mucosa). Primary pigments.
+          - **Addison**: الـ primary المزمن؛ autoimmune في البلاد الغنية، **TB** في البلاد الفقيرة.
+          - **Secondary** (ACTH ↓) و **tertiary** (CRH ↓): الـ aldosterone سليم (الـ RAAS شغال) ← ما فيش hyperkalemia ولا hyperpigmentation. الـ tertiary غالباً من ==وقف الـ steroids فجأة== (Tertiary from treatment).
+        page: 353
+        quote: "2° adrenal insufficiency is due to pituitary pathologies, 3° adrenal insufficiency is most commonly due to abrupt cessation of chronic glucocorticoid therapy (HPA suppression). Tertiary from treatment."
+      - kind: sort
+        prompt: "Primary ولا secondary/tertiary؟"
+        bins: ["Primary", "Secondary/tertiary"]
+        cards:
+          - { text: "Hyperkalemia", bin: 0 }
+          - { text: "Hyperpigmentation", bin: 0 }
+          - { text: "↑ ACTH", bin: 0 }
+          - { text: "Waterhouse-Friderichsen", bin: 0 }
+          - { text: "Abrupt stop of chronic prednisone", bin: 1 }
+          - { text: "Pituitary pathology", bin: 1 }
+          - { text: "Low or inappropriately normal ACTH", bin: 1 }
+        why: "الـ primary بيضرب الغدة كلها (aldosterone كمان) وبيعلّي الـ ACTH والـ MSH. الـ secondary/tertiary بيقلل الـ ACTH، والـ aldosterone سليم."
+        page: 353
+        quote: "No hyperkalemia (aldosterone synthesis preserved due to functioning adrenal gland, intact RAAS), no hyperpigmentation."
+      - kind: explain
+        title: "الأزمة"
+        text: |-
+          **Adrenal (addisonian) crisis**: مريض عنده insufficiency أو على steroids، وجاله stress زي infection زوّد احتياجه ← ألم بطن حاد و ترجيع و لخبطة و ==shock==.
+
+          و **Waterhouse-Friderichsen**: نزيف في الـ adrenals الاتنين مع sepsis (زي ==meningococcemia==) ← primary insufficiency حادة.
+        page: 353
+        quote: "Waterhouse-Friderichsen syndrome—bilateral adrenal hemorrhage in the setting of sepsis (eg, meningococcemia) → acute 1° adrenal insufficiency."
+      - kind: explain
+        title: "Hyperaldosteronism"
+        text: |-
+          aldosterone زيادة ← hypertension و K+ ↓ أو طبيعي و ==metabolic alkalosis==.
+
+          - **Primary**: bilateral hyperplasia أو adenoma (**Conn syndrome**). aldosterone ↑ و ==renin ↓== ← hypertension مقاومة للعلاج. ما بيعملش edema بسبب الـ **aldosterone escape**.
+          - **Secondary**: renovascular hypertension، juxtaglomerular tumor (renin)، أو edema (cirrhosis و heart failure و nephrotic). aldosterone ↑ و ==renin ↑==. وبعضهم (زي HF) بيبوّظ الـ escape فالـ edema بيزيد.
+        page: 354
+        quote: "1° hyperaldosteronism does not directly cause edema due to aldosterone escape mechanism."
+      - kind: check
+        question: "Resistant hypertension, K 2.9, HCO3 31, high aldosterone, low renin. Diagnosis?"
+        options:
+          - "Primary hyperaldosteronism"
+          - "Renovascular hypertension"
+          - "Heart failure"
+          - "Juxtaglomerular tumor"
+        answer: 0
+        why:
+          - "صح: aldosterone عالي والـ renin مكتوم = المصدر الغدة نفسها (Conn أو hyperplasia)."
+          - "الـ renovascular بيعلّي الـ renin."
+          - "الـ heart failure secondary بـ renin عالي ومعاه edema."
+          - "الـ JG tumor بيطلّع renin."
+        page: 354
+        quote: "↑ aldosterone, ↓ renin. Leads to treatment-resistant hypertension."
+      - kind: try
+        items: [endo.L04.095, endo.L04.097, endo.L04.102, endo.L04.105, endo.L04.108]
+    recap:
+      - "Cushing: exogenous أشهر سبب؛ Cushing disease أشهر endogenous. MOON FACIES."
+      - "ACTH مكتوم ← exogenous أو adrenal؛ عالي ويتكتم بالـ high-dose ← pituitary؛ ما يتكتمش ← ectopic."
+      - "Primary insufficiency: aldosterone ↓ (K+ ↑) و ACTH ↑ (pigmentation)؛ secondary/tertiary لأ."
+      - "Tertiary from treatment؛ Waterhouse-Friderichsen مع meningococcemia."
+      - "Primary hyperaldo: renin ↓، ما فيش edema؛ secondary: renin ↑."
+    practice: [endo.L04.095, endo.L04.096, endo.L04.097, endo.L04.098, endo.L04.099, endo.L04.100, endo.L04.101, endo.L04.102, endo.L04.103, endo.L04.104, endo.L04.105, endo.L04.106, endo.L04.107, endo.L04.108, endo.L04.109]
+  - id: endo.L04.lesson8
+    title: "الأورام الـ neuroendocrine: من الـ adrenal للبنكرياس"
+    hook: "كل ورم هنا ليه رقم: rule of 10's، و 5 P's، و 6 D's، و rule of thirds. احفظ الرقم وهتفتكر الورم"
+    minutes: 10
+    pages: [354, 357]
+    topics: [neuroendocrine-tumors, neuroblastoma, pheochromocytoma, multiple-endocrine-neoplasias, pancreatic-islet-cell-tumors, carcinoid-tumors, zollinger-ellison-syndrome]
+    goals:
+      - "تفرّق الـ neuroblastoma عن الـ Wilms وعن الـ pheochromocytoma"
+      - "تعرف تحضير الـ pheochromocytoma للعملية (A before B)"
+      - "تحفظ أنواع الـ MEN بالـ P's و M's"
+      - "تعرف insulinoma و glucagonoma و somatostatinoma و carcinoid و ZES"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "عيلة واحدة"
+        text: |-
+          الـ **neuroendocrine cells** شبه الأعصاب وشبه الغدد في نفس الوقت، وبيشتركوا في ==APUD== (amine precursor uptake decarboxylase). أماكن الأورام: الـ GI (carcinoid و gastrinoma)، البنكرياس (insulinoma و glucagonoma)، الرئة (small cell)، والـ thyroid (medullary) والـ adrenal (pheochromocytoma).
+
+          الـ markers: **chromogranin A** و **NSE** و **synaptophysin**. العلاج: جراحة و somatostatin analogs.
+        page: 354
+        quote: "Neuroendocrine cells (eg, pancreatic β cells, enterochromaffin cells) share a common biologic function through amine precursor uptake decarboxylase (APUD)"
+      - kind: explain
+        title: "Neuroblastoma: الطفل الصغير"
+        text: |-
+          ==أشهر solid tumor برّه المخ في الأطفال== (غالباً أقل من 4 سنين). من الـ **neural crest**، في الـ adrenal medulla أو أي حتة على الـ sympathetic chain.
+          - كتلة ناشفة متعرّجة ==بتعدّي الـ midline== (الـ Wilms ناعم وفي ناحية واحدة).
+          - الضغط غالباً **طبيعي** (عكس الـ pheo).
+          - **Opsoclonus-myoclonus**: dancing eyes-dancing feet.
+          - ↑ **HVA و VMA** في البول، **Homer-Wright rosettes**، bombesin و NSE، و ==N-myc amplification==.
+        page: 354
+        quote: "Most common presentation is abdominal distension and a firm, irregular mass that can cross the midline (vs Wilms tumor, which is smooth and unilateral)."
+      - kind: explain
+        title: "Pheochromocytoma"
+        text: |-
+          ==أشهر ورم في الـ adrenal medulla في الكبار==، من الـ chromaffin cells. مرتبط بـ **NF-1** و **VHL** و **RET** (MEN 2A و 2B).
+
+          بيطلّع epinephrine و NE و dopamine في ==نوبات== (spells)، وممكن EPO ← polycythemia. الـ 5 P's: **P**ressure و **P**ain (صداع) و **P**erspiration و **P**alpitations و **P**allor.
+
+          التشخيص: ↑ catecholamines و ==metanephrines== في البول والدم.
+
+          Rule of 10's: 10% malignant، bilateral، extra-adrenal (paraganglioma، زي bladder wall أو organ of Zuckerkandl)، calcify، kids.
+        page: 355
+        quote: "Episodic hyperadrenergic symptoms (5 P’s): Pressure (↑ BP) Pain (headache) Perspiration Palpitations (tachycardia) Pallor"
+      - kind: reveal
+        prompt: "ليه ما ينفعش ندّي β-blocker الأول لمريض الـ pheochromocytoma؟"
+        answer: "الـ catecholamines بتشتغل على α (تضييق الأوعية) و β2 (توسيع). لو قفلت الـ β الأول، الـ ==α يفضل لوحده== من غير حاجة تعادله ← hypertensive crisis. عشان كده **phenoxybenzamine** (irreversible α-antagonist) الأول، وبعدين β-blocker: A before B."
+        page: 355
+        quote: "α-blockade must be achieved before giving β-blockers to avoid a hypertensive crisis. A before B."
+      - kind: figure
+        title: "الـ MEN بالـ P's و M's"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="4" y="8" width="112" height="154" rx="10"/>
+            <text x="14" y="28" class="t-sm t-b">MEN1 = 3 P's</text>
+            <text x="14" y="52" class="t-sm">Pituitary</text>
+            <text x="14" y="72" class="t-sm">Pancreas</text>
+            <text x="14" y="92" class="t-sm">Parathyroid</text>
+            <text x="14" y="122" class="t-sm t-mut">MEN1 gene, menin</text>
+            <text x="14" y="140" class="t-sm t-mut">chromosome 11</text>
+            <rect class="fg-good" x="124" y="8" width="112" height="154" rx="10"/>
+            <text x="134" y="28" class="t-sm t-b">MEN2A</text>
+            <text x="134" y="44" class="t-sm t-b">= 2 P's, 1 M</text>
+            <text x="134" y="68" class="t-sm">Parathyroid</text>
+            <text x="129" y="88" class="t-sm">Pheochromocytoma</text>
+            <text x="134" y="108" class="t-sm">Medullary thyroid</text>
+            <text x="134" y="140" class="t-sm t-mut">RET, chromosome 10</text>
+            <rect class="fg-bad" x="244" y="8" width="112" height="154" rx="10"/>
+            <text x="254" y="28" class="t-sm t-b">MEN2B</text>
+            <text x="254" y="44" class="t-sm t-b">= 1 P, 2 M's</text>
+            <text x="249" y="68" class="t-sm">Pheochromocytoma</text>
+            <text x="254" y="88" class="t-sm">Medullary thyroid</text>
+            <text x="254" y="108" class="t-sm">Mucosal neuromas</text>
+            <text x="254" y="140" class="t-sm t-mut">RET, marfanoid</text>
+          </svg>
+        caption: "كلهم autosomal dominant (The X-MEN are dominant over villains). MEN1 فيه 3 P's، و MEN2A فيه 2 P's و M، و MEN2B فيه P واحدة و 2 M's، ومعاه marfanoid habitus."
+        alt: "Three columns. MEN1 with 3 Ps: pituitary, pancreas, parathyroid; MEN1 gene, menin, chromosome 11. MEN2A with 2 Ps and 1 M: parathyroid, pheochromocytoma, medullary thyroid carcinoma; RET, chromosome 10. MEN2B with 1 P and 2 Ms: pheochromocytoma, medullary thyroid carcinoma, mucosal neuromas; RET, marfanoid habitus."
+        page: 356
+        quote: "MEN1 = 3 P’s MEN2A = 2 P’s, 1 M MEN2B = 1 P, 2 M’s"
+      - kind: aside
+        tone: exam
+        text: "في MEN 2A و 2B الـ medullary thyroid carcinoma شبه أكيد، عشان كده ==prophylactic thyroidectomy== مطلوبة. والـ MEN1 فيه كمان angiofibromas و collagenomas و meningiomas."
+        page: 356
+        quote: "Medullary thyroid carcinoma—neoplasm of parafollicular C cells; secretes calcitonin; prophylactic thyroidectomy required"
+      - kind: table
+        title: "أورام الـ islets"
+        columns: ["Tumor", "Cell", "Clue"]
+        rows:
+          - ["Insulinoma", "β", "Whipple triad; ↓ glucose with ↑ C-peptide; ~10% MEN1"]
+          - ["Glucagonoma", "α", "6 D's: dermatitis (necrolytic migratory erythema), diabetes, DVT, declining weight, depression, diarrhea"]
+          - ["Somatostatinoma", "δ", "Diabetes, steatorrhea, gallstones, achlorhydria"]
+        hide: [[0, 1], [1, 1], [1, 2], [2, 1], [2, 2]]
+        page: 357
+        quote: "Presents with 6 D’s: dermatitis (necrolytic migratory erythema), diabetes (hyperglycemia), DVT, declining weight, depression, diarrhea."
+      - kind: reveal
+        prompt: "الـ somatostatinoma بيعمل gallstones و steatorrhea و achlorhydria. إزاي هرمون واحد يعمل كل ده؟"
+        answer: "الـ somatostatin ==فرامل عامة==: بيقلل secretin و CCK (فالمرارة ما بتفضاش ← حصاوي، والبنكرياس ما بيفرزش ← steatorrhea)، و gastrin (← achlorhydria)، و insulin (← سكر)، و glucagon و GIP."
+        page: 357
+        quote: "Tumor of pancreatic δ cells → overproduction of somatostatin → ↓ secretion of secretin, cholecystokinin, glucagon, insulin, gastrin, gastric inhibitory peptide (GIP)."
+      - kind: explain
+        title: "Carcinoid: الـ serotonin لازم يهرب من الكبد"
+        text: |-
+          الـ carcinoid (غالباً أمعاء أو رئة) بيطلّع **5-HT**، والكبد بيكسّره (first-pass) والرئة كمان بالـ **MAO**. فالـ ==carcinoid syndrome بيظهر لما الـ 5-HT يوصل الدورة== (غالباً بعد liver metastasis):
+          - flushing في نوبات، diarrhea، wheezing
+          - ==right-sided== valve disease (tricuspid regurgitation و pulmonic stenosis)
+          - ↑ urinary **5-HIAA**
+          - الـ 5-HT بيستهلك الـ tryptophan ← نقص niacin (**pellagra**).
+
+          العلاج: جراحة، octreotide، أو **telotristat** (tryptophan hydroxylase inhibitor). Rule of thirds: 1/3 metastasize، 1/3 معاهم ورم تاني، 1/3 multiple.
+        page: 357
+        quote: "If 5-HT reaches the systemic circulation (eg, after liver metastasis), carcinoid tumor may present with carcinoid syndrome"
+      - kind: explain
+        title: "Zollinger-Ellison"
+        text: |-
+          **Gastrinoma** (أشهر مكان ==الـ duodenum==، أو البنكرياس) ← حمض كتير جداً ← قرح كتير ومتكررة في الـ duodenum والـ jejunum، مش بتخف بجرعة الـ PPI العادية، و malabsorption (الحمض بيبوّظ إنزيمات البنكرياس).
+
+          التشخيص: ==secretin stimulation test== موجب: الـ gastrin يعلى بعد الـ secretin، مع إن الطبيعي الـ secretin يكتمه. ومرتبط بـ MEN1. العلاج: PPI بجرعة عالية وجراحة.
+        page: 357
+        quote: "Positive secretin stimulation test (↑ gastrin levels after secretin administration, which normally inhibits gastrin release)."
+      - kind: check
+        question: "Flushing, diarrhea, wheezing and tricuspid regurgitation with an ileal mass. What must have happened for symptoms to appear?"
+        options:
+          - "Liver metastasis"
+          - "Lung metastasis only"
+          - "Tryptophan excess"
+          - "MEN1 mutation"
+        answer: 0
+        why:
+          - "صح: الكبد كان بيكسّر الـ 5-HT؛ لما الورم وصل الكبد، الـ 5-HT بقى يدخل الدورة على طول."
+          - "الرئة نفسها بتكسّر الـ 5-HT بالـ MAO."
+          - "بالعكس، الـ tryptophan بيقل ← pellagra."
+          - "الـ MEN1 مش شرط للـ carcinoid syndrome."
+        page: 357
+        quote: "If 5-HT reaches the systemic circulation (eg, after liver metastasis), carcinoid tumor may present with carcinoid syndrome"
+      - kind: try
+        items: [endo.L04.115, endo.L04.119, endo.L04.121, endo.L04.124, endo.L04.131]
+    recap:
+      - "Neuroendocrine: APUD؛ chromogranin A و NSE و synaptophysin."
+      - "Neuroblastoma: طفل، بيعدّي الـ midline، ضغط طبيعي، HVA و VMA، N-myc."
+      - "Pheo: 5 P's، metanephrines، rule of 10's؛ phenoxybenzamine قبل الـ β-blocker."
+      - "MEN1 = 3 P's، MEN2A = 2 P's و M، MEN2B = P و 2 M's؛ كلهم AD."
+      - "Insulinoma (C-peptide ↑)، glucagonoma (6 D's)، somatostatinoma (gallstones و steatorrhea)."
+      - "Carcinoid syndrome بعد liver mets؛ 5-HIAA. ZES: secretin بيعلّي الـ gastrin."
+    practice: [endo.L04.110, endo.L04.111, endo.L04.112, endo.L04.113, endo.L04.114, endo.L04.115, endo.L04.116, endo.L04.117, endo.L04.118, endo.L04.119, endo.L04.120, endo.L04.121, endo.L04.122, endo.L04.123, endo.L04.124, endo.L04.125, endo.L04.126, endo.L04.127, endo.L04.128, endo.L04.129, endo.L04.130, endo.L04.131, endo.L04.132, endo.L04.133, endo.L04.134, endo.L04.135, endo.L04.136, endo.L04.137]

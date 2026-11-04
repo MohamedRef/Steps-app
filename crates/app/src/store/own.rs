@@ -77,7 +77,9 @@ mod tests {
         s.delete_own_card("own.b").unwrap();
         s.delete_own_card("own.missing").unwrap();
         assert_eq!(s.own_cards().len(), 1);
-        assert_eq!(s.outbox_len(), before + 4);
+        // Only each card's newest version waits to go up: own.a as edited,
+        // own.b as deleted (`sync::enqueue`).
+        assert_eq!(s.outbox_len(), before + 2);
     }
 
     #[test]

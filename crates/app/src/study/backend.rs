@@ -68,3 +68,43 @@ pub fn now_ms() -> i64 {
         .map(|d| d.as_millis() as i64)
         .unwrap_or_default()
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use steps_core::review::{Grade, Origin};
+
+    fn event(id: &str) -> ReviewEvent {
+        ReviewEvent { item_id: id.into(), grade: Grade::Good, origin: Origin::Study, at_ms: 1, took_ms: 2 }
+    }
+
+    #[test]
+    fn answers_in_memory_are_logged_retracted_and_never_due() {
+        let mut s = MemoryStore::default();
+        assert!(s.is_new("cvs.L01.001"));
+        s.record(event("cvs.L01.001"));
+        let second = s.record_logged(event("cvs.L01.003")).unwrap().unwrap();
+        assert_eq!(second, "mem-2");
+        assert!(!s.is_new("cvs.L01.001") && !s.is_new("cvs.L01.003"));
+        // Undo takes exactly that answer back; an unknown id is already gone.
+        assert!(s.retract(&second));
+        assert!(s.is_new("cvs.L01.003"));
+        assert!(s.retract("mem-99"));
+        assert!(s.due(0).is_empty());
+        assert!(!s.is_hidden("cvs.L01.001"));
+        assert_eq!(s.next_due_ms(0), None);
+    }
+
+    #[test]
+    fn without_the_app_store_the_player_keeps_answers_in_memory() {
+        fn app() -> Element {
+            let store = use_store();
+            let id = store.0.borrow_mut().record_logged(event("cvs.L01.001")).unwrap().unwrap_or_default();
+            rsx! { p { "{id}" } }
+        }
+        let mut dom = VirtualDom::new(app);
+        dom.rebuild_in_place();
+        assert!(dioxus::ssr::render(&dom).contains("mem-"));
+        assert!(now_ms() > 1_700_000_000_000);
+    }
+}

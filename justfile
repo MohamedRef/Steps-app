@@ -89,6 +89,14 @@ icons:
 android-keystore:
     scripts/android-keystore.sh "{{keystore}}" "{{key_alias}}"
 
+# One-time, before the first alpha: make (or reuse) every permanent release key and copy them into the repo's GitHub secrets (docs/RELEASE.md §2)
+release-keys:
+    scripts/release-secrets.sh
+
+# One encrypted .dmg holding every release key and its password; keep it in two places (docs/RELEASE.md §2)
+release-keys-backup dest="":
+    scripts/release-keys-backup.sh {{dest}}
+
 # The SHA-256 of the content pack this tree builds: a build that carries it
 # (STEPS_BUILTIN_CONTENT) doesn't download the same pack again (docs/RELEASE.md)
 content-digest:

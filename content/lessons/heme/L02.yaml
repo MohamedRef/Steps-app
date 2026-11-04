@@ -1,0 +1,398 @@
+schema: steps.lesson/v1
+lecture: heme.L02
+lessons:
+  - id: heme.L02.lesson1
+    title: "شجرة الدم، والـ neutrophil، والكرة الحمرا، والـ platelet"
+    hook: "كل خلية في الدم ليها أصل وشغلانة وشكل. ابدأ بالشجرة وكل حاجة هتقعد في مكانها"
+    minutes: 10
+    pages: [412, 413]
+    topics: [hematopoiesis, neutrophils, erythrocytes, thrombocytes]
+    goals:
+      - "ترسم شجرة الـ hematopoiesis: myeloid ولا lymphoid"
+      - "تقرا الـ neutrophil في الـ smear: left shift، toxic granulation، hypersegmented، leukoerythroblastic"
+      - "تعرف ليه الـ RBC شكله كده، وليه الـ platelet عايش 8 أيام"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "شجرة واحدة، فرعين"
+        text: |-
+          كل خلايا الدم طالعة من ==multipotent stem cell== في الـ bone marrow، وبتتقسم لفرعين:
+
+          - **Myeloid stem cell**: بيطلّع الـ erythroblast (← reticulocyte ← RBC)، والـ megakaryoblast (← megakaryocyte ← platelets)، والـ myeloblast (← band ← neutrophil، وكمان eosinophil و basophil)، والـ monoblast (← monocyte ← macrophage).
+          - **Lymphoid stem cell**: بيطلّع الـ lymphoblast، ومنه الـ B cell (← plasma cell)، والـ T cell (← T-helper و T-cytotoxic)، والـ ==NK cell==.
+        page: 412
+        quote: "Megakaryoblast Lymphoblast Myeloblast Erythroblast Granulocytopoiesis Monocytopoiesis Multipotent stem cell Lymphoid stem cell"
+      - kind: figure
+        title: "شجرة الـ hematopoiesis"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="heme2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-ink" x="115" y="5" width="130" height="24" rx="6"/>
+            <text x="124" y="22" class="t-sm t-b">Multipotent stem cell</text>
+            <path class="fg-arrow" d="M150 29 L90 50" marker-end="url(#heme2a)"/>
+            <path class="fg-arrow" d="M210 29 L270 50" marker-end="url(#heme2a)"/>
+            <rect class="fg-acc" x="20" y="52" width="140" height="24" rx="6"/>
+            <text x="40" y="69" class="t-sm t-b">Myeloid stem cell</text>
+            <rect class="fg-good" x="200" y="52" width="140" height="24" rx="6"/>
+            <text x="218" y="69" class="t-sm t-b">Lymphoid stem cell</text>
+            <text x="12" y="100" class="t-sm">Erythroblast → RBC</text>
+            <text x="12" y="120" class="t-sm">Megakaryoblast → platelets</text>
+            <text x="12" y="140" class="t-sm">Myeloblast → neutrophil,</text>
+            <text x="30" y="156" class="t-sm">eosinophil, basophil</text>
+            <text x="12" y="176" class="t-sm">Monoblast → monocyte →</text>
+            <text x="30" y="192" class="t-sm">macrophage</text>
+            <text x="205" y="100" class="t-sm">Lymphoblast →</text>
+            <text x="215" y="120" class="t-sm">B cell → plasma cell</text>
+            <text x="215" y="140" class="t-sm">T cell → helper,</text>
+            <text x="250" y="156" class="t-sm">cytotoxic</text>
+            <text x="215" y="176" class="t-sm t-acc">NK cell</text>
+          </svg>
+        caption: "الفرع الـ myeloid بيطلّع كل حاجة ما عدا الـ lymphocytes. والـ NK cell، رغم إنه innate، طالع من الفرع الـ lymphoid."
+        alt: "Tree diagram. The multipotent stem cell splits into a myeloid stem cell, giving erythroblasts to red cells, megakaryoblasts to platelets, myeloblasts to neutrophils, eosinophils and basophils, and monoblasts to monocytes and macrophages; and a lymphoid stem cell, giving lymphoblasts to B cells and plasma cells, T cells, and NK cells."
+        page: 412
+        quote: "Multipotent stem cell Lymphoid stem cell Band NK cell Monoblast Macrophage Monocyte"
+      - kind: explain
+        title: "الـ neutrophil: أول واحد يوصل"
+        text: |-
+          الـ neutrophil هو خلية الـ ==acute inflammation==: بيلتهم البكتيريا، والـ nucleus بتاعه **multilobed**.
+
+          عنده نوعين granules:
+          - **Specific**: LAP (leukocyte alkaline phosphatase)، collagenase، lysozyme، lactoferrin
+          - **Azurophilic** (دي lysosomes): proteinases، acid phosphatase، ==myeloperoxidase==، β-glucuronidase
+
+          وبيتجذب للمكان بـ: C5a، IL-8، LTB4، 5-HETE، kallikrein، platelet-activating factor، و N-formylmethionine (من بروتينات البكتيريا).
+        page: 412
+        quote: "Specific granules contain leukocyte alkaline phosphatase (LAP), collagenase, lysozyme, and lactoferrin. Azurophilic granules (lysosomes) contain proteinases, acid phosphatase, myeloperoxidase, and β-glucuronidase."
+      - kind: reveal
+        prompt: "ليه الـ N-formylmethionine بالذات بيجذب الـ neutrophils؟"
+        answer: "لأن البكتيريا بتبدأ بروتيناتها بـ **formylmethionine**، وخلايانا ما بتعملش كده. فوجوده معناه «في بكتيريا هنا»، فالـ neutrophil بيمشي ناحيته."
+        page: 412
+        quote: "N-formylmethionine (bacterial proteins)."
+      - kind: table
+        title: "اقرا الـ neutrophil في الـ smear"
+        columns: ["Finding", "What it means"]
+        rows:
+          - ["Toxic granulation, Döhle bodies, vacuoles", "Inflammation (eg, bacterial infection)"]
+          - ["Left shift (bands, metamyelocytes)", "↑ myeloid proliferation: inflammation, CML"]
+          - ["Left shift + immature RBCs", "Leukoerythroblastic reaction: marrow infiltration (myelofibrosis, metastasis)"]
+          - ["Hypersegmented (5-6+ lobes)", "Vitamin B12/folate deficiency"]
+        hide: [[1, 1], [2, 1], [3, 1]]
+        page: 412
+        quote: "Left shift—↑ neutrophil precursors (eg, band cells, metamyelocytes) in peripheral blood. Reflects states of ↑ myeloid proliferation (eg, inflammation, CML). Leukoerythroblastic reaction—left shift accompanied by immature RBCs. Suggests bone marrow infiltration (eg, myelofibrosis, metastasis)."
+      - kind: aside
+        tone: analogy
+        text: "الـ **leukoerythroblastic reaction** زي ما تلاقي عيال صغيرين في الشارع بالليل، أبيض وأحمر مع بعض. معناه إن ==البيت (الـ marrow) اتملا بحاجة غريبة== (fibrosis أو metastasis) فطردهم بدري."
+        page: 412
+        quote: "Leukoerythroblastic reaction—left shift accompanied by immature RBCs. Suggests bone marrow infiltration"
+      - kind: check
+        question: "A smear shows neutrophils with 6 nuclear lobes. Which deficiency is most likely?"
+        options:
+          - "Vitamin B12 or folate"
+          - "Iron"
+          - "Glucose-6-phosphate dehydrogenase"
+          - "Vitamin K"
+        answer: 0
+        why:
+          - "صح: الـ hypersegmented neutrophils (5-6+ lobes) علامة B12/folate deficiency."
+          - "الـ iron deficiency ما بيعملش hypersegmentation."
+          - "ده enzyme في الـ RBC، مالوش دعوة بشكل الـ neutrophil."
+          - "الـ vitamin K بيأثر على التجلط مش على الـ neutrophils."
+        page: 412
+        quote: "Hypersegmented neutrophils (nucleus has 5-6+ lobes) are seen in vitamin B12 /folate deficiency."
+      - kind: explain
+        title: "الـ RBC: شنطة أكسجين"
+        text: |-
+          الـ RBC ==anucleate ومن غير organelles==، و**biconcave** عشان الـ surface area للـ volume تبقى كبيرة والغازات تتبادل بسرعة.
+
+          - عايش **~120 يوم** في الكبار، و**60-90** في المواليد.
+          - ما عندوش mitochondria، فطاقته من الـ **glucose**: 90% glycolysis و10% HMP shunt.
+          - في الـ membrane فيه **Cl−/HCO3− antiporter**: بيطلّع الـ HCO3− عشان الـ CO2 يتنقل من الأنسجة للرئة.
+        page: 413
+        quote: "Life span of ~120 days in healthy adults; 60-90 days in neonates. Source of energy is glucose (90% used in glycolysis, 10% used in HMP shunt)."
+      - kind: match
+        prompt: "وصّل كل مصطلح بمعناه"
+        pairs:
+          - ["Erythrocytosis (polycythemia)", "↑ Hct"]
+          - ["Anisocytosis", "Varying sizes"]
+          - ["Poikilocytosis", "Varying shapes"]
+          - ["Reticulocyte", "Immature RBC"]
+          - ["Polychromasia", "Residual ribosomal RNA (bluish)"]
+        why: "**aniso** = مش متساوي (الحجم)، **poikilo** = متنوع (الشكل). والـ reticulocyte لونه أزرق شوية لأن فيه لسه ribosomal RNA."
+        page: 413
+        quote: "Erythrocytosis = polycythemia = ↑ Hct. Anisocytosis = varying sizes. Poikilocytosis = varying shapes. Reticulocyte = immature RBC; reflects erythroid proliferation."
+      - kind: explain
+        title: "الـ platelet: حتة من megakaryocyte"
+        text: |-
+          الـ platelet مش خلية كاملة: حتة cytoplasm صغيرة من الـ **megakaryocyte**، من غير nucleus، وشغلانته الـ ==1° hemostasis==. عايش **8-10 أيام** (الكتاب بيكتبها pl8lets).
+
+          - **Dense granules** = **CASH**: Ca2+، ADP، Serotonin، Histamine
+          - **α granules**: vWF، fibrinogen، fibronectin، platelet factor 4
+          - الـ receptor بتاع الـ vWF هو ==GpIb==، وبتاع الـ fibrinogen هو **GpIIb/IIIa**
+          - **1/3** الـ platelets متخزنة في الـ spleen، والـ **thrombopoietin** بيكثّر الـ megakaryocytes
+          - لو قلّت أو شغلها باظ ← **petechiae**
+        page: 413
+        quote: "Contain dense granules (Ca2+ , ADP, Serotonin, Histamine; CASH) and α granules (vWF, fibrinogen, fibronectin, platelet factor 4)."
+      - kind: check
+        question: "Platelets fail to adhere to exposed subendothelium, but aggregate normally once activated. Which receptor is most likely missing?"
+        options:
+          - "GpIb"
+          - "GpIIb/IIIa"
+          - "CD14"
+          - "Thrombopoietin receptor"
+        answer: 0
+        why:
+          - "صح: GpIb هو الـ vWF receptor، والـ vWF هو اللي بيلزّق الـ platelet في الـ subendothelium."
+          - "GpIIb/IIIa بيمسك الـ fibrinogen وبيربط الـ platelets في بعض (aggregation)، وده سليم هنا."
+          - "CD14 على الـ macrophage وبيمسك الـ LPS."
+          - "الـ thrombopoietin بيكثّر الـ megakaryocytes، مش ليه دعوة بالـ adhesion."
+        page: 413
+        quote: "vWF receptor: GpIb. Fibrinogen receptor: GpIIb/IIIa."
+      - kind: try
+        items: [heme.L02.001, heme.L02.005, heme.L02.010, heme.L02.020, heme.L02.021]
+    recap:
+      - "Myeloid: RBC، platelets، granulocytes، monocytes. Lymphoid: B و T و NK."
+      - "Left shift = myeloid proliferation؛ مع immature RBCs = marrow infiltration؛ 5-6+ lobes = B12/folate."
+      - "RBC: 120 يوم، glucose (90% glycolysis)، Cl−/HCO3− antiporter."
+      - "Platelet: 8-10 أيام، CASH و α granules، GpIb للـ vWF و GpIIb/IIIa للـ fibrinogen."
+    practice: [heme.L02.001, heme.L02.002, heme.L02.003, heme.L02.004, heme.L02.005, heme.L02.006, heme.L02.007, heme.L02.008, heme.L02.009, heme.L02.010, heme.L02.011, heme.L02.012, heme.L02.013, heme.L02.014, heme.L02.015, heme.L02.016, heme.L02.017, heme.L02.018, heme.L02.019, heme.L02.020, heme.L02.021, heme.L02.022, heme.L02.023, heme.L02.024]
+  - id: heme.L02.lesson2
+    title: "اللي بياكلوا واللي بيقدّموا واللي بيعملوا allergy"
+    hook: "Monocyte و macrophage و dendritic و eosinophil و basophil و mast cell: كل واحد بجملة واحدة تفتكره بيها"
+    minutes: 10
+    pages: [413, 414]
+    topics: [monocytes, macrophages, dendritic-cells, eosinophils, basophils, mast-cells]
+    goals:
+      - "تعرف أسامي الـ macrophages في كل نسيج، وإيه اللي بيعمل septic shock"
+      - "تحفظ أسباب الـ eosinophilia بـ PACMAN Eats"
+      - "تفرّق بين الـ basophil والـ mast cell، وتعرف الـ mastocytosis"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Monocyte في الدم، macrophage في النسيج"
+        text: |-
+          الـ **monocyte** هو أكبر خلية بيضا في الـ smear: nucleus ==kidney-shaped== و cytoplasm زي «frosted glass». أول ما يدخل النسيج بيبقى **macrophage** أو **dendritic cell**.
+
+          الـ **macrophage** بياكل البكتيريا والـ debris والـ RBCs العجوزة، وبيعيش كتير في النسيج. بيتنشّط بـ ==IFN-γ==، وبيقدّم antigen على **MHC II**، وبيعمل كمان antibody-dependent cellular cytotoxicity. وهو أساس الـ **granuloma** (TB، sarcoidosis)، وهناك ممكن يلتحم ويعمل giant cells.
+        page: 413
+        quote: "Activated by IFN-γ. Can function as antigen-presenting cell via MHC II. Also engage in antibody- dependent cellular cytotoxicity. Important cellular component of granulomas (eg, TB, sarcoidosis), where they may fuse to form giant cells."
+      - kind: match
+        prompt: "وصّل النسيج باسم الـ macrophage بتاعه"
+        pairs:
+          - ["Liver", "Kupffer cells"]
+          - ["Connective tissue", "Histiocytes"]
+          - ["Bone", "Osteoclasts"]
+          - ["Brain", "Microglial cells"]
+        why: "كلهم نفس الخلية بأسامي مختلفة حسب المكان. الـ osteoclast بالذات بيتنسي إنه macrophage."
+        page: 413
+        quote: "Macrophage naming varies by specific tissue type (eg, Kupffer cells in liver, histiocytes in connective tissue, osteoclasts in bone, microglial cells in brain)."
+      - kind: aside
+        tone: exam
+        text: "سؤال septic shock من gram-negative؟ الـ ==Lipid A== اللي في الـ LPS بيمسك **CD14** على الـ macrophage، وده اللي بيبدأ الشلال."
+        page: 413
+        quote: "Lipid A from bacterial LPS binds CD14 on macrophages to initiate septic shock."
+      - kind: explain
+        title: "الـ dendritic cell: الجسر"
+        text: |-
+          الـ dendritic cell هو ==أقوى APC==: بيلتهم الـ antigen ويروح الـ lymph node ينشّط الـ T cells، فهو الجسر بين الـ innate والـ adaptive.
+
+          عليه **MHC II** و **Fc receptors**. والمميز فيه: يقدر يقدّم antigen جاي من بره (exogenous) على **MHC I**، ودي اسمها ==cross-presentation==، وبكده بينشّط الـ CD8 T cells ضد فيروس ما أصابوش هو نفسه.
+        page: 414
+        quote: "Highly phagocytic antigen-presenting cells (APCs) A . Function as link between innate and adaptive immune systems (eg, via T-cell stimulation). Express MHC class II and Fc receptors on surface. Can present exogenous antigens on MHC class I (cross-presentation)."
+      - kind: check
+        question: "Which cell can present an engulfed (exogenous) viral antigen on MHC class I to CD8+ T cells?"
+        options:
+          - "Dendritic cell"
+          - "Neutrophil"
+          - "Mast cell"
+          - "Plasma cell"
+        answer: 0
+        why:
+          - "صح: ده الـ cross-presentation، والـ dendritic cell بيعمله."
+          - "الـ neutrophil بيلتهم ويقتل، مش APC."
+          - "الـ mast cell بتاع الـ allergy."
+          - "الـ plasma cell بيعمل antibodies بس."
+        page: 414
+        quote: "Can present exogenous antigens on MHC class I (cross-presentation)."
+      - kind: explain
+        title: "الـ eosinophil: ضد الديدان"
+        text: |-
+          الـ eosinophil nucleus بتاعه ==bilobate==، ومليان granules كبيرة وردي بنفس الحجم. شغلانته الأساسية ضد الـ **helminths**، بالـ **major basic protein** (MBP، ده الـ helminthotoxin). وبيلتهم كمان الـ antigen-antibody complexes.
+
+          بيعمل: histaminase، MBP، eosinophil cationic protein، eosinophil-derived neurotoxin، و**IL-5** (اللي بيكثّر الـ eosinophils وينشّطها).
+        page: 414
+        quote: "Defend against helminthic infections (major basic protein). Bilobate nucleus. Packed with large eosinophilic granules of uniform size A . Highly phagocytic for antigen- antibody complexes."
+      - kind: mnemonic
+        word: "PACMANE"
+        parts:
+          - { key: "P", text: "Parasites" }
+          - { key: "A", text: "Asthma" }
+          - { key: "C", text: "Chronic adrenal insufficiency" }
+          - { key: "M", text: "Myeloproliferative disorders" }
+          - { key: "A", text: "Allergic processes" }
+          - { key: "N", text: "Neoplasia (eg, Hodgkin lymphoma)" }
+          - { key: "E", text: "Eosinophilic granulomatosis with polyangiitis" }
+        hook: "أسباب الـ eosinophilia من الكتاب: PACMAN Eats"
+        page: 414
+        quote: "Causes of eosinophilia (PACMAN Eats): Parasites Asthma Chronic adrenal insufficiency Myeloproliferative disorders Allergic processes Neoplasia (eg, Hodgkin lymphoma) Eosinophilic granulomatosis with polyangiitis"
+      - kind: reveal
+        prompt: "ليه الـ chronic adrenal insufficiency بيعمل eosinophilia؟"
+        answer: "الـ **cortisol** في العادي بيقلّل الـ eosinophils في الدم. لو الـ adrenal مش بيعمل cortisol كفاية، الفرامل دي بتروح فالـ eosinophils تزيد. (ده تفسير فسيولوجي مقبول؛ الكتاب بيذكر السبب في القائمة بس.)"
+        page: 414
+        quote: "Chronic adrenal insufficiency"
+      - kind: explain
+        title: "Basophil و mast cell: قرايب مش توأم"
+        text: |-
+          - **Basophil** (في الدم): granules غامقة فيها **heparin** (anticoagulant) و**histamine** (vasodilator)، والـ leukotrienes بيعملها وقت اللزوم. الـ ==basophilia== نادرة، بس ممكن تبقى علامة **myeloproliferative disorder**، خصوصاً **CML**.
+          - **Mast cell** (في النسيج): من نفس الـ precursor بتاع الـ basophil بس ==مش نفس الخلية==. بيمسك الـ Fc بتاع الـ **IgE**. بيتنشّط بالـ tissue trauma، و C3a و C5a، و IgE cross-linking ← degranulation ← histamine و heparin و tryptase و eosinophil chemotactic factors. ده أساس الـ **type I hypersensitivity**.
+        page: 414
+        quote: "Originate from same precursor as basophils but are not the same cell type. Can bind the Fc portion of IgE to membrane. Activated by tissue trauma, C3a and C5a, surface IgE cross-linking by antigen (IgE receptor aggregation) → degranulation → release of histamine, heparin, tryptase, and eosinophil chemotactic factors."
+      - kind: aside
+        tone: trap
+        text: "**Vancomycin** و **opioids** و **radiocontrast dye** بيعملوا mast cell degranulation ==من غير IgE==. فالمريض ممكن يحمرّ ويهرش من أول جرعة، من غير ما يكون اتعرّض للدوا قبل كده. و**cromolyn sodium** بيمنع الـ degranulation (للوقاية من الـ asthma)."
+        page: 414
+        quote: "Cromolyn sodium prevents mast cell degranulation (used for asthma prophylaxis). Vancomycin, opioids, and radiocontrast dye can elicit IgE-independent mast cell degranulation."
+      - kind: explain
+        title: "Mastocytosis"
+        text: |-
+          مرض نادر: mast cells بتتكاثر في الجلد و/أو أعضاء تانية. مرتبط بـ ==c-KIT mutations== و**↑ serum tryptase**.
+
+          وكل أعراضه من الـ **histamine** الزيادة: flushing، pruritus، hypotension، abdominal pain، diarrhea، و**peptic ulcer disease** (الـ histamine بيزوّد الـ acid).
+        page: 414
+        quote: "Mastocytosis—rare; proliferation of mast cells in skin and/or extracutaneous organs. Associated with c-KIT mutations and ↑ serum tryptase. ↑ histamine → flushing, pruritus, hypotension, abdominal pain, diarrhea, peptic ulcer disease."
+      - kind: sort
+        prompt: "حط كل حاجة مع الخلية بتاعتها"
+        bins: ["Eosinophil", "Mast cell", "Macrophage"]
+        cards:
+          - { text: "Major basic protein", bin: 0 }
+          - { text: "IL-5", bin: 0 }
+          - { text: "Tryptase", bin: 1 }
+          - { text: "c-KIT mutation (when proliferating)", bin: 1 }
+          - { text: "CD14 binds lipid A", bin: 2 }
+          - { text: "Activated by IFN-γ", bin: 2 }
+          - { text: "Bilobate nucleus", bin: 0 }
+          - { text: "Binds the Fc portion of IgE", bin: 1 }
+        why: "الـ eosinophil: ديدان (MBP) و IL-5 و bilobate. الـ mast cell: IgE و tryptase و c-KIT. الـ macrophage: CD14 و IFN-γ."
+        page: 414
+        quote: "Can bind the Fc portion of IgE to membrane."
+      - kind: try
+        items: [heme.L02.028, heme.L02.029, heme.L02.037, heme.L02.045, heme.L02.046]
+    recap:
+      - "Monocyte (kidney nucleus) ← macrophage أو dendritic cell. Kupffer، histiocyte، osteoclast، microglia."
+      - "Lipid A ← CD14 ← septic shock. Dendritic cell = cross-presentation على MHC I."
+      - "Eosinophil: MBP ضد الديدان؛ PACMAN Eats."
+      - "Basophilia ← فكّر في CML. Mast cell: IgE، tryptase؛ vancomycin/opioids/contrast من غير IgE؛ mastocytosis = c-KIT."
+    practice: [heme.L02.025, heme.L02.026, heme.L02.027, heme.L02.028, heme.L02.029, heme.L02.030, heme.L02.031, heme.L02.032, heme.L02.033, heme.L02.034, heme.L02.035, heme.L02.036, heme.L02.037, heme.L02.038, heme.L02.039, heme.L02.040, heme.L02.041, heme.L02.042, heme.L02.043, heme.L02.044, heme.L02.045, heme.L02.046, heme.L02.047, heme.L02.048]
+  - id: heme.L02.lesson3
+    title: "الـ lymphocytes: B و T و NK و plasma cell"
+    hook: "قاعدة الـ 8 وحرف واحد لكل خلية، وهتعرف مين بيعمل إيه في المناعة"
+    minutes: 8
+    pages: [415, 415]
+    topics: [lymphocytes, natural-killer-cells, b-cells, t-cells, plasma-cells]
+    goals:
+      - "تفرّق بين الـ innate (NK) والـ adaptive (B و T)"
+      - "تعرف الـ markers: CD19/20/21، CD3/4/8، CD56/16"
+      - "تعرف شكل الـ plasma cell وعلاقته بالـ multiple myeloma"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "تلات أنواع"
+        text: |-
+          الـ lymphocyte شكله بسيط: nucleus مدوّرة غامقة وحتة cytoplasm صغيرة باهتة. وتحته 3 أنواع:
+
+          - **B cells** و **T cells**: ==adaptive immunity==
+          - **NK cells**: ==innate immunity==
+
+          ومعظم الـ lymphocytes اللي في الدم (**80%**) T cells.
+        page: 415
+        quote: "Refer to B cells, T cells, and natural killer (NK) cells. B cells and T cells mediate adaptive immunity. NK cells are part of the innate immune response."
+      - kind: explain
+        title: "الـ NK cell: بيقتل اللي مخبّي بطاقته"
+        text: |-
+          الـ NK cell أكبر من الـ B والـ T، وفيه **lytic granules** فيها ==perforin و granzymes== بتعمل apoptosis في الخلية المستهدفة. عليه **CD56** و **CD16** (Fc receptor).
+
+          بيقتل إمتى؟ لما الخلية ==ما تعرضش MHC class I==، زي خلية فيها virus نزّلت الـ MHC I عشان تهرب من الـ CD8 T cells. وكمان بيتعرّف على بروتينات بتظهر مع الـ stress أو الـ malignant transformation أو الـ infection.
+        page: 415
+        quote: "Induce apoptosis (natural killer) in cells that do not express class I MHC cell surface molecules, eg, virally infected cells in which these molecules are downregulated."
+      - kind: aside
+        tone: analogy
+        text: "الـ MHC I زي **البطاقة الشخصية** اللي كل خلية لازم تطلّعها. الـ CD8 T cell بيقرا البطاقة ويشوف فيها virus ولا لأ. الـ virus الشاطر بيخبّي البطاقة خالص، وهنا بييجي الـ NK: ==«ما معاكش بطاقة؟ يبقى انت مشبوه»==."
+        page: 415
+        quote: "Distinguish between healthy and infected cells by identifying cell surface proteins"
+      - kind: check
+        question: "A virus downregulates MHC class I on infected cells. Which cell is best placed to kill them?"
+        options:
+          - "NK cell"
+          - "CD8+ cytotoxic T cell"
+          - "CD4+ helper T cell"
+          - "Plasma cell"
+        answer: 0
+        why:
+          - "صح: الـ NK بيقتل الخلايا اللي مفيهاش MHC I، بالـ perforin والـ granzymes."
+          - "الـ CD8 محتاج MHC I عشان يشوف الـ antigen، والـ virus شاله."
+          - "الـ CD4 بيشوف MHC II وما بيقتلش الخلايا المصابة بنفسه."
+          - "الـ plasma cell بيعمل antibodies بس."
+        page: 415
+        quote: "Induce apoptosis (natural killer) in cells that do not express class I MHC cell surface molecules"
+      - kind: explain
+        title: "B = bone marrow، T = thymus"
+        text: |-
+          - **B cells**: بتتولد ==وتنضج في الـ bone marrow==، وبعدين تروح الـ follicles في الـ lymph nodes والـ white pulp في الـ spleen والـ lymphoid tissue اللي مش متغلّف. لما تقابل antigen تبقى **plasma cells** (antibodies) و **memory cells**. وتقدر تشتغل APC. الـ markers: CD19، CD20، CD21.
+          - **T cells**: بتتولد في الـ marrow بس ==بتنضج في الـ thymus==. بتبقى cytotoxic (CD8) أو helper (CD4) أو regulatory. كلها عليها CD3، ومحتاجة **CD28** كـ costimulatory signal عشان تتنشّط.
+        page: 415
+        quote: "Originate from stem cells in the bone marrow, but mature in the thymus. Differentiate into cytotoxic T cells (express CD8, recognize MHC I), helper T cells (express CD4, recognize MHC II), and regulatory T cells. CD28 (costimulatory signal) necessary for T-cell activation."
+      - kind: aside
+        tone: tip
+        text: "**Rule of 8** من الكتاب: ==MHC II × CD4 = 8== و **MHC I × CD8 = 8**. لو افتكرت واحد، التاني بيطلع بالقسمة: الـ helper (CD4) بيشوف MHC II، والـ cytotoxic (CD8) بيشوف MHC I."
+        page: 415
+        quote: "Rule of 8: MHC II × CD4 = 8; MHC I × CD8 = 8."
+      - kind: aside
+        tone: exam
+        text: "الـ ==CD4+ helper T cells== هي الهدف الأساسي للـ **HIV**. فلما الـ CD4 count يقع، المناعة الخلوية كلها بتقع وتطلع الـ opportunistic infections."
+        page: 415
+        quote: "CD4+ helper T cells are the primary target of HIV."
+      - kind: explain
+        title: "الـ plasma cell: مصنع antibodies"
+        text: |-
+          الـ plasma cell بيعمل كميات ضخمة من antibody واحد. فشكله كله بيخدم ده:
+
+          - nucleus ==eccentric== و chromatin شكلها **«clock-face»**
+          - **RER** كتير (بيعمل البروتين) و **Golgi** واضح (بيغلّفه)
+
+          موجود في الـ **bone marrow** وما بيلفّش في الدم عادةً. والـ **multiple myeloma** هو ==plasma cell dyscrasia==.
+        page: 415
+        quote: "“Clock-face” chromatin distribution and eccentric nucleus, abundant RER, and well-developed Golgi apparatus (arrows in A ). Found in bone marrow and normally do not circulate in peripheral blood. Multiple myeloma is a plasma cell dyscrasia."
+      - kind: table
+        title: "مين عليه إيه"
+        columns: ["Cell", "Markers", "Immunity"]
+        rows:
+          - ["B cell", "CD19, CD20, CD21", "Adaptive (humoral)"]
+          - ["Cytotoxic T cell", "CD3, CD8", "Adaptive (cellular)"]
+          - ["Helper T cell", "CD3, CD4", "Adaptive (cellular)"]
+          - ["NK cell", "CD56, CD16", "Innate"]
+        hide: [[0, 1], [1, 1], [3, 1], [3, 2]]
+        page: 415
+        quote: "Mediate humoral immune response."
+      - kind: check
+        question: "Which cell type matures in the thymus?"
+        options:
+          - "T cell"
+          - "B cell"
+          - "NK cell"
+          - "Plasma cell"
+        answer: 0
+        why:
+          - "صح: T = thymus. بيتولد في الـ marrow وينضج في الـ thymus."
+          - "B = bone marrow: بيتولد وينضج هناك."
+          - "الـ NK innate وما بينضجش في الـ thymus."
+          - "الـ plasma cell جاي من B cell قابل antigen."
+        page: 415
+        quote: "Originate from stem cells in the bone marrow, but mature in the thymus."
+      - kind: try
+        items: [heme.L02.052, heme.L02.055, heme.L02.060, heme.L02.061, heme.L02.064]
+    recap:
+      - "B و T = adaptive؛ NK = innate. 80% من الـ lymphocytes في الدم T cells."
+      - "NK: perforin و granzymes، بيقتل اللي مفيهوش MHC I. CD56 و CD16."
+      - "B = bone marrow (CD19/20/21)؛ T = thymus، و CD28 لازم للتنشيط."
+      - "Rule of 8: MHC II × CD4، MHC I × CD8. الـ HIV بيضرب الـ CD4."
+      - "Plasma cell: clock-face، eccentric nucleus، RER و Golgi؛ multiple myeloma."
+    practice: [heme.L02.049, heme.L02.050, heme.L02.051, heme.L02.052, heme.L02.053, heme.L02.054, heme.L02.055, heme.L02.056, heme.L02.057, heme.L02.058, heme.L02.059, heme.L02.060, heme.L02.061, heme.L02.062, heme.L02.063, heme.L02.064, heme.L02.065, heme.L02.066]

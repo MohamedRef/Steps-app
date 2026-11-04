@@ -1,15 +1,17 @@
-//! The bank's start screen: filters, tutor/timed start, the mock exam, and
-//! the history of finished papers.
+//! The bank's start screen: filters, tutor/timed start, the Step 1 style
+//! block (systems he picks, 10–20 questions, 90 s each, timed or with the
+//! explanation after each), and the history of finished papers.
 
 use std::collections::BTreeSet;
 
 use dioxus::prelude::*;
 use serde::{Deserialize, Serialize};
 use steps_core::exam::{self, Filter, MOCK_SIZE, Mode, Only};
+use steps_core::program::{Group, course_of};
 
 use super::{
     HISTORY, PAUSED, date, lecture_title, minutes, now_ms, resume, short_lecture_title, start,
-    study_lectures, submit_paused, topic_title,
+    study_lectures, study_lectures_where, submit_paused, topic_title,
 };
 use crate::content::Library;
 use crate::i18n::bank as tx;
@@ -19,6 +21,10 @@ use crate::i18n::count::{LECTURE, MINUTE, QUESTION, TOPIC, count as counted};
 static FILTER: GlobalSignal<Filter> = Signal::global(Filter::default);
 static COUNT: GlobalSignal<usize> = Signal::global(|| 20);
 static MOCK_COUNT: GlobalSignal<usize> = Signal::global(|| MOCK_SIZE);
+/// The block's systems and disciplines (course ids); empty = all of them.
+static BLOCK_COURSES: GlobalSignal<BTreeSet<String>> = Signal::global(BTreeSet::new);
+/// A block with the explanation after each question instead of the clock.
+static BLOCK_TUTOR: GlobalSignal<bool> = Signal::global(|| false);
 /// Practice with the explanation, practice against the clock, or a mock.
 static MODE: GlobalSignal<Mode> = Signal::global(|| Mode::Tutor);
 /// Whether the lecture, topic and tag filters are open.
@@ -41,6 +47,10 @@ struct Saved {
     mock_count: usize,
     #[serde(default)]
     advanced: bool,
+    #[serde(default)]
+    block_courses: BTreeSet<String>,
+    #[serde(default)]
+    block_tutor: bool,
 }
 
 fn tutor() -> Mode {
@@ -61,6 +71,8 @@ impl Saved {
             count: *COUNT.peek(),
             mock_count: *MOCK_COUNT.peek(),
             advanced: *ADVANCED.peek(),
+            block_courses: BLOCK_COURSES.peek().clone(),
+            block_tutor: *BLOCK_TUTOR.peek(),
         }
     }
 
@@ -74,6 +86,8 @@ impl Saved {
         self.filter.lectures.retain(|l| lectures.contains(l.as_str()));
         self.filter.topics.retain(|(l, t)| topics.contains(&(l.as_str(), t.as_str())));
         self.filter.tags.retain(|t| tags.contains(t.as_str()));
+        let lib = Library::get();
+        self.block_courses.retain(|c| lib.program.course(c).is_some());
         if !COUNTS.contains(&self.count) {
             self.count = twenty();
         }
@@ -97,6 +111,34 @@ fn restore(pool: &[exam::Mcq]) {
     *COUNT.write() = saved.count;
     *MOCK_COUNT.write() = saved.mock_count;
     *ADVANCED.write() = saved.advanced;
+    *BLOCK_COURSES.write() = saved.block_courses;
+    *BLOCK_TUTOR.write() = saved.block_tutor;
+}
+
+/// The MCQs a block draws from: every written lecture of the chosen
+/// systems, whatever course is in view.
+fn block_lectures() -> Vec<steps_core::content::Lecture> {
+    let chosen = BLOCK_COURSES.peek().clone();
+    study_lectures_where(|l| chosen.is_empty() || chosen.contains(course_of(l)))
+}
+
+/// Courses with MCQs, in the book's order, with how many: the block's
+/// system chips.
+fn block_courses(pool: &[exam::Mcq]) -> Vec<(Group, String, String, usize)> {
+    Library::get()
+        .program
+        .courses
+        .iter()
+        .map(|c| {
+            (
+                c.group,
+                c.id.clone(),
+                c.short.clone(),
+                pool.iter().filter(|q| course_of(q.lecture) == c.id).count(),
+            )
+        })
+        .filter(|(.., n)| *n > 0)
+        .collect()
 }
 
 /// Narrows the filters to one lecture, or one of its topics (a lecture
@@ -132,7 +174,8 @@ fn all_lectures() -> String {
 }
 
 const COUNTS: [usize; 4] = [10, 20, 40, usize::MAX];
-const MOCK_COUNTS: [usize; 4] = [20, 40, 60, 100];
+/// Step 1 blocks hold up to 20 questions (30 minutes) since May 2026.
+const MOCK_COUNTS: [usize; 3] = [10, 15, 20];
 const TAGS: [(&str, &str); 3] =
     [("high-yield", tx::TAG_HIGH_YIELD), ("book-question", tx::TAG_BOOK), ("numbers", tx::TAG_NUMBERS)];
 const MODES: [(Mode, &str, &str); 3] = [
@@ -204,6 +247,7 @@ pub fn Setup() -> Element {
     // Keep the scope and mode for the next launch whenever they change.
     use_effect(|| {
         let _ = (MODE.read(), FILTER.read(), COUNT.read(), MOCK_COUNT.read(), ADVANCED.read());
+        let _ = (BLOCK_COURSES.read(), BLOCK_TUTOR.read());
         let _ = crate::store::shared().put_local_setting(SETUP_KEY, &Saved::now());
     });
     if pool.is_empty() {
@@ -275,12 +319,20 @@ pub fn Setup() -> Element {
         start(*MODE.read(), exam::practice(&selected, *COUNT.read(), now_ms() as u64));
     };
     let start_mock = move |_| {
-        let lectures = study_lectures();
+        let lectures = block_lectures();
         let pool = exam::mcqs(&lectures);
-        start(Mode::Mock, exam::mock(&pool, *MOCK_COUNT.read(), now_ms() as u64));
+        let mode = if *BLOCK_TUTOR.read() { Mode::Tutor } else { Mode::Mock };
+        start(mode, exam::mock(&pool, *MOCK_COUNT.read(), now_ms() as u64));
     };
     let shown = count.min(available);
-    let pool_size = pool.len();
+    // The block draws from every course, not just the one in view.
+    let all_owned = study_lectures_where(|_| true);
+    let all_pool = exam::mcqs(&all_owned);
+    let systems = block_courses(&all_pool);
+    let chosen = BLOCK_COURSES.read().clone();
+    let block_tutor = *BLOCK_TUTOR.read();
+    let pool_size =
+        all_pool.iter().filter(|q| chosen.is_empty() || chosen.contains(course_of(q.lecture))).count();
     let mock_shown = mock_count.min(pool_size);
     let has_history = !HISTORY.read().papers.is_empty();
     let mode_hint = if mode == Mode::Tutor { tx::PRESET_TUTOR } else { tx::PRESET_TIMED };
@@ -311,7 +363,41 @@ pub fn Setup() -> Element {
                 if mode == Mode::Mock {
                     crate::ui::Card { class: "bank-preset",
                         span { class: "chip", "data-tone": "accent", {tx::MOCK_SCOPE_CHIP} }
-                        h2 { class: "bank-scope", {all_lectures()} }
+                        h2 { class: "bank-scope",
+                            if chosen.is_empty() { {tx::BLOCK_ALL_SYSTEMS} } else { {tx::block_systems(chosen.len())} }
+                        }
+                        div { class: "bank-systems", role: "group", aria_label: tx::BLOCK_SYSTEMS,
+                            span { class: "muted small", {tx::BLOCK_SYSTEMS} }
+                            div { class: "chips",
+                                Chip { on: chosen.is_empty(), onclick: move |_| BLOCK_COURSES.write().clear(), {tx::BLOCK_ALL_SYSTEMS} }
+                            }
+                            for g in [Group::General, Group::Systems] {
+                                if systems.iter().any(|s| s.0 == g) {
+                                    h3 { key: "{g:?}", class: "label course-label",
+                                        bdi { if g == Group::General { {crate::i18n::courses::G_GENERAL} } else { {crate::i18n::courses::G_SYSTEMS} } }
+                                    }
+                                    div { class: "chips",
+                                        for (_, id, short, n) in systems.iter().filter(|s| s.0 == g).cloned() {
+                                            Chip {
+                                                key: "{id}",
+                                                on: chosen.contains(&id),
+                                                onclick: {
+                                                    let id = id.clone();
+                                                    move |_| {
+                                                        let mut c = BLOCK_COURSES.write();
+                                                        if !c.remove(&id) {
+                                                            c.insert(id.clone());
+                                                        }
+                                                    }
+                                                },
+                                                span { class: "chip-label", "{short}" }
+                                                span { class: "count", {tx::questions(n)} }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         div { class: "bank-count",
                             span { class: "muted small", {tx::COUNT} }
                             div { class: "chips",
@@ -320,12 +406,30 @@ pub fn Setup() -> Element {
                                 }
                             }
                         }
+                        div { class: "segmented bank-block-mode", role: "radiogroup", aria_label: tx::MODE_LABEL,
+                            button {
+                                role: "radio",
+                                "aria-checked": if block_tutor { "false" } else { "true" },
+                                onclick: move |_| *BLOCK_TUTOR.write() = false,
+                                span { {tx::BLOCK_TIMED} }
+                                span { class: "seg-hint", {tx::BLOCK_TIMED_HINT} }
+                            }
+                            button {
+                                role: "radio",
+                                "aria-checked": if block_tutor { "true" } else { "false" },
+                                onclick: move |_| *BLOCK_TUTOR.write() = true,
+                                span { {tx::BLOCK_TUTOR} }
+                                span { class: "seg-hint", {tx::BLOCK_TUTOR_HINT} }
+                            }
+                        }
                         p { class: "bank-sum",
                             strong { {counted(mock_shown, &QUESTION)} }
-                            " · " {counted(minutes(exam::time_limit_ms(mock_shown)), &MINUTE)}
+                            if !block_tutor {
+                                " · " {counted(minutes(exam::time_limit_ms(mock_shown)), &MINUTE)}
+                            }
                             span { class: "muted", " · {tx::POOL_OF} " {counted(pool_size, &QUESTION)} }
                         }
-                        button { class: "btn btn-primary btn-lg bank-go", onclick: start_mock,
+                        button { class: "btn btn-primary btn-lg bank-go", disabled: mock_shown == 0, onclick: start_mock,
                             {tx::START_MOCK}
                         }
                     }
@@ -599,5 +703,85 @@ fn Paused() -> Element {
                 button { class: "btn btn-secondary", onclick: move |_| submit_paused(), {tx::SUBMIT_NOW} }
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod block_tests {
+    use super::*;
+
+    #[test]
+    fn block_systems_follow_the_book_and_only_list_courses_with_questions() {
+        let lib = Library::get();
+        let pool = exam::mcqs(lib.lectures.values());
+        let systems = block_courses(&pool);
+        assert!(systems.iter().all(|(.., n)| *n > 0));
+        assert_eq!(systems.iter().map(|s| s.3).sum::<usize>(), pool.len());
+        let order: Vec<usize> = systems
+            .iter()
+            .map(|(_, id, ..)| lib.program.courses.iter().position(|c| &c.id == id).unwrap())
+            .collect();
+        assert!(order.windows(2).all(|w| w[0] < w[1]));
+    }
+
+    #[component]
+    fn BlockSetup(tutor: bool) -> Element {
+        use_hook(|| {
+            *RESTORED.write() = true;
+            *MODE.write() = Mode::Mock;
+            *BLOCK_TUTOR.write() = tutor;
+            BLOCK_COURSES.write().clear();
+        });
+        rsx! {
+            crate::browser_fixture::Shell { screen: crate::Screen::Bank, focus: false, Setup {} }
+        }
+    }
+
+    fn render_block(tutor: bool) -> String {
+        let mut dom = VirtualDom::new_with_props(BlockSetup, BlockSetupProps { tutor });
+        dom.rebuild_in_place();
+        dioxus::ssr::render(&dom)
+    }
+
+    #[test]
+    fn the_block_card_offers_systems_sizes_and_both_modes() {
+        let html = render_block(false);
+        for needle in [
+            tx::MODE_MOCK_NAME,
+            tx::BLOCK_SYSTEMS,
+            tx::BLOCK_ALL_SYSTEMS,
+            tx::BLOCK_TIMED_HINT,
+            tx::BLOCK_TUTOR,
+            tx::START_MOCK,
+        ] {
+            assert!(html.contains(needle), "missing {needle}");
+        }
+        // The written lectures' courses are offered as chips, in Arabic.
+        let lib = Library::get();
+        let pool = exam::mcqs(lib.lectures.values());
+        for (_, _, short, _) in block_courses(&pool) {
+            assert!(html.contains(&short), "missing chip {short}");
+        }
+        for n in MOCK_COUNTS {
+            assert!(html.contains(&format!(">{n}<")), "missing size {n}");
+        }
+        // Timed blocks show their clock; tutor blocks have none.
+        let timed_minutes = minutes(exam::time_limit_ms(MOCK_SIZE.min(pool.len())));
+        let clock = counted(timed_minutes, &MINUTE);
+        assert!(html.contains(&clock), "missing {clock}");
+        let tutor = render_block(true);
+        assert!(!tutor.contains(&clock), "a tutor block shows no clock");
+    }
+
+    #[test]
+    fn a_setup_saved_before_blocks_still_loads() {
+        let old = r#"{"mode":"mock","filter":{"lectures":[],"topics":[],"tags":[],"only":"all"},"count":20,"mock_count":100}"#;
+        let saved: Saved = serde_json::from_str(old).unwrap();
+        assert!(saved.block_courses.is_empty());
+        assert!(!saved.block_tutor);
+        // 100 is no longer a block size: it falls back to a full block.
+        let saved = saved.pruned(&[]);
+        assert_eq!(saved.mock_count, MOCK_SIZE);
+        assert!(MOCK_COUNTS.iter().all(|&n| (10..=20).contains(&n)));
     }
 }

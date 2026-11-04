@@ -27,7 +27,7 @@ fn root(case: Case) -> Element {
             attempt.put(case.at, sig(&lesson.steps[case.at].body), draft);
             attempt.answers[case.at] = answer;
         }
-        crate::store::shared().put_local_setting(&player::pos_key(&case.lesson), &attempt).unwrap();
+        crate::store::shared().put_place(&player::pos_key(&case.lesson), &attempt).unwrap();
         *OPEN.write() = Some(case.lesson.clone());
         *VIEW.write() = case.view;
         if case.abbr {
@@ -44,7 +44,6 @@ fn root(case: Case) -> Element {
 #[test]
 #[ignore = "exports production HTML for the screens browser CI job"]
 fn export_screen_fixtures_learn() {
-    crate::store::use_memory_store();
     let dir = out_dir("learn");
     let mut kinds = std::collections::BTreeSet::new();
     let mut manifest = Vec::new();

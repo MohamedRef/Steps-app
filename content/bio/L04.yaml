@@ -1,0 +1,1161 @@
+schema: steps.content/v1
+lecture: bio.L04
+title: Genetics
+book: { chapter: 1, pages: [54, 62] }
+topics:
+  - { id: gene-expression-modifications, title: Gene expression modifications }
+  - { id: rna-interference, title: RNA interference }
+  - { id: genetic-terms, title: Genetic terms }
+  - { id: population-genetics, title: Population genetics }
+  - { id: hardy-weinberg, title: Hardy-Weinberg principle }
+  - { id: imprinting, title: Disorders of imprinting }
+  - { id: modes-of-inheritance, title: Modes of inheritance }
+  - { id: autosomal-dominant-diseases, title: Autosomal dominant diseases }
+  - { id: autosomal-recessive-diseases, title: Autosomal recessive diseases }
+  - { id: cystic-fibrosis, title: Cystic fibrosis }
+  - { id: x-linked-recessive-diseases, title: X-linked recessive diseases }
+  - { id: muscular-dystrophies, title: Muscular dystrophies }
+  - { id: mitochondrial-diseases, title: Mitochondrial diseases }
+  - { id: rett-syndrome, title: Rett syndrome }
+  - { id: fragile-x, title: Fragile X syndrome }
+  - { id: trinucleotide-repeats, title: Trinucleotide repeat expansion diseases }
+  - { id: autosomal-trisomies, title: Autosomal trisomies }
+  - { id: disorders-by-chromosome, title: Genetic disorders by chromosome }
+  - { id: robertsonian-translocation, title: Robertsonian translocation }
+  - { id: cri-du-chat, title: Cri-du-chat syndrome }
+items:
+  # ---------- p54: gene expression modifications ----------
+  - id: bio.L04.001
+    kind: card
+    topic: gene-expression-modifications
+    front: What are the 2 transgenic strategies in mice, and what kind of expression does each give?
+    back: Random insertion of a gene into the mouse genome (constitutive expression), and targeted insertion or deletion through homologous recombination with the mouse gene (conditional expression).
+    src: { page: 54, quote: "Random insertion—constitutive expression. Targeted insertion—conditional expression." }
+    status: unverified
+  - id: bio.L04.002
+    kind: cloze
+    topic: gene-expression-modifications
+    text: Knock-{{c1::out}} = removing a gene, taking it out. Knock-{{c2::in}} = inserting a gene.
+    src: { page: 54, quote: "Knock-out = removing a gene, taking it out. Knock-in = inserting a gene." }
+    status: unverified
+  - id: bio.L04.003
+    kind: mcq
+    topic: gene-expression-modifications
+    stem: >-
+      Investigators want mice that express a human gene only in the liver and only after the mice are
+      fed a specific drug. Which strategy fits best?
+    options:
+      - Random insertion of the gene into the mouse genome
+      - Targeted insertion of the gene by homologous recombination
+      - siRNA knockdown of the mouse gene
+      - Introducing a nonsense mutation into the mouse gene
+      - Breeding for a dominant negative allele
+    answer: 1
+    why:
+      - "Random insertion gives constitutive expression, everywhere and always."
+      - "Right. Targeted insertion through homologous recombination gives conditional expression."
+      - "siRNA lowers expression of an existing gene; it doesn't add a human one."
+      - "A nonsense mutation knocks a gene out."
+      - "A dominant negative allele blocks the normal protein; it doesn't control where a new gene is expressed."
+    src: { page: 54, quote: "Random insertion—constitutive expression. Targeted insertion—conditional expression." }
+    status: unverified
+  # ---------- p54: RNA interference ----------
+  - id: bio.L04.004
+    kind: table
+    topic: rna-interference
+    title: MicroRNA vs small interfering RNA
+    columns: [Feature, MicroRNA, Small interfering RNA]
+    rows:
+      - [Source, Made by the cell as hairpin structures, "Usually exogenous dsRNA (eg, virus); can be made for knockdown experiments"]
+      - [Pairing, "Loose → broad targeting of related mRNAs", "Complete → highly specific targeting"]
+      - [Effect, "Blocks translation; sometimes helps degradation", mRNA cleavage before translation]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 2]]
+    src: { page: 54, quote: "Naturally produced by cell as hairpin structures. Loose nucleotide pairing allows broad targeting of related mRNAs." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.005
+    kind: card
+    topic: rna-interference
+    front: How can abnormal miRNA expression contribute to cancer?
+    back: For example, by silencing an mRNA from a tumor suppressor gene.
+    src: { page: 54, quote: "Abnormal expression of miRNAs contributes to certain malignancies (eg, by silencing an mRNA from a tumor suppressor gene)." }
+    status: unverified
+  - id: bio.L04.006
+    kind: mcq
+    topic: rna-interference
+    stem: >-
+      A drug for hereditary transthyretin amyloidosis is a synthetic double-stranded RNA that pairs
+      exactly with transthyretin mRNA in hepatocytes, so the mRNA is cut before it is translated. Which
+      mechanism does the drug use?
+    options:
+      - MicroRNA with loose pairing to many related mRNAs
+      - Small interfering RNA with complete pairing to one mRNA
+      - Antisense DNA that blocks transcription
+      - CRISPR/Cas9 cutting of the gene
+      - Histone deacetylation of the promoter
+    answer: 1
+    why:
+      - "miRNA pairs loosely and broadly and mainly blocks translation."
+      - "Right. siRNA needs complete pairing, targets one mRNA very specifically and cleaves it before translation."
+      - "The drug acts on mRNA, not on transcription."
+      - "CRISPR edits DNA; the gene itself isn't touched here."
+      - "Histone changes act on chromatin, not mRNA."
+    src: { page: 54, quote: "Once inside a cell, siRNA requires complete nucleotide pairing, leading to highly specific mRNA targeting. Results in mRNA cleavage prior to translation." }
+    status: unverified
+  # ---------- p54-55: genetic terms ----------
+  - id: bio.L04.007
+    kind: table
+    topic: genetic-terms
+    title: Genetic terms (1)
+    columns: [Term, Definition, Example]
+    rows:
+      - [Codominance, Both alleles contribute to the heterozygote's phenotype, "Blood groups A, B, AB; α1-antitrypsin deficiency; HLA groups"]
+      - [Variable expressivity, Same genotype gives varying phenotypes, Two patients with NF1 with different severity]
+      - [Incomplete penetrance, Not everyone with the pathogenic variant shows the disease, BRCA1 mutations don't always cause cancer]
+      - [Pleiotropy, One gene contributes to multiple phenotypic effects, "Cystic fibrosis (lungs, GI, pancreas, male infertility)"]
+      - [Anticipation, Increased severity or earlier onset in succeeding generations, "Trinucleotide repeat diseases (eg, Huntington)"]
+      - [Epistasis, The allele of one gene affects expression of alleles of another gene, "Albinism, alopecia"]
+      - [Aneuploidy, Abnormal number of chromosomes from nondisjunction, "Down syndrome, Turner syndrome, oncogenesis"]
+    blanks: [[0, 2], [1, 1], [2, 1], [3, 2], [4, 1], [5, 1], [6, 2]]
+    src: { page: 54, quote: "Codominance Both alleles contribute to the phenotype of the heterozygote. Blood groups A, B, AB; α1-antitrypsin deficiency; HLA groups." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.008
+    kind: cloze
+    topic: genetic-terms
+    text: "Risk of expressing a phenotype = {{c1::% penetrance}} × {{c2::probability of inheriting the genotype}}."
+    src: { page: 54, quote: "% penetrance × probability of inheriting genotype = risk of expressing phenotype." }
+    status: unverified
+  - id: bio.L04.009
+    kind: card
+    topic: genetic-terms
+    front: What is loss of heterozygosity, and which genes does it apply to?
+    back: With a mutation in a tumor suppressor gene, the wild-type allele must also be deleted or mutated before cancer develops (not true of oncogenes). Examples are retinoblastoma (two-hit hypothesis), Lynch syndrome and Li-Fraumeni syndrome.
+    src: { page: 54, quote: "If a patient inherits or develops a mutation in a tumor suppressor gene, the wild type allele must be deleted/mutated/eliminated before cancer develops. This is not true of oncogenes." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.010
+    kind: table
+    topic: genetic-terms
+    title: Genetic terms (2)
+    columns: [Term, Definition, Example]
+    rows:
+      - [Dominant negative mutation, "Heterozygote makes a nonfunctional protein that also blocks the normal one", "Mutant p53 binds DNA and blocks wild-type p53"]
+      - [Linkage disequilibrium, "Alleles near each other occur together more or less often than chance; measured in a population", "HLA gene, CFTR gene"]
+      - [Locus heterogeneity, Mutations at different loci → same disease, "Albinism, retinitis pigmentosa, familial hypercholesterolemia"]
+      - [Allelic heterogeneity, Different mutations in the same locus → same disease, β-thalassemia]
+      - [Heteroplasmy, "Normal and mutated mtDNA together → variable expression", Leber hereditary optic neuropathy]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [3, 2], [4, 1]]
+    src: { page: 55, quote: "Locus heterogeneity Mutations at different loci result in the same disease. Albinism, retinitis pigmentosa, familial hypercholesteremia. Allelic heterogeneity Different mutations in the same locus result in the same disease. β-thalassemia." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.011
+    kind: card
+    topic: genetic-terms
+    front: What is the difference between somatic and germline (gonadal) mosaicism, and when do you suspect germline mosaicism?
+    back: "Somatic: a mitotic error after fertilization spreads through multiple tissues. Germline: the mutation is only in egg or sperm cells. Suspect it when the parents and relatives don't have the disease."
+    src: { page: 55, quote: "Germline (gonadal) mosaicism—mutation only in egg or sperm cells. If parents and relatives do not have the disease, suspect gonadal (or germline) mosaicism." }
+    status: unverified
+  - id: bio.L04.012
+    kind: card
+    topic: genetic-terms
+    front: What causes McCune-Albright syndrome, and how does it present?
+    back: An activating Gs-protein (GNAS) mutation. Unilateral café-au-lait spots with ragged edges, polyostotic fibrous dysplasia and at least one endocrinopathy (eg, precocious puberty). Lethal if present before fertilization; survivable only as mosaicism.
+    src: { page: 55, quote: "McCune-Albright syndrome—due to Gs-protein (GNAS) activating mutation. Presents with unilateral café-au-lait spots A with ragged edges, polyostotic fibrous dysplasia" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.013
+    kind: card
+    topic: genetic-terms
+    front: What is uniparental disomy, and what do heterodisomy and isodisomy indicate?
+    back: "Two copies of a chromosome from 1 parent and none from the other (euploid; usually normal phenotype). Heterodisomy (heterozygous) = meiosis I error. Isodisomy (homozygous) = meiosis II error or postzygotic duplication and loss."
+    src: { page: 55, quote: "Offspring receives 2 copies of a chromosome from 1 parent and no copies from the other parent. HeterodIsomy (heterozygous) indicates a meiosis I error." }
+    status: unverified
+  - id: bio.L04.014
+    kind: card
+    topic: genetic-terms
+    front: A child has a recessive disease but only one parent is a carrier. What should you consider?
+    back: Isodisomy (uniparental disomy).
+    src: { page: 55, quote: "Consider isodisomy in an individual manifesting a recessive disorder when only one parent is a carrier." }
+    status: unverified
+  - id: bio.L04.015
+    kind: mcq
+    topic: genetic-terms
+    stem: >-
+      A 6-year-old girl has breast development and vaginal bleeding. She has a large café-au-lait patch
+      with ragged, irregular borders on one side of her back, and x-rays show multiple lytic, ground-glass
+      bone lesions. Her parents and siblings are healthy. Why does she survive with this mutation?
+    options:
+      - The mutation shows incomplete penetrance
+      - The mutation arose after fertilization, so only some cells carry it (mosaicism)
+      - She has uniparental disomy for the affected chromosome
+      - The mutation is a dominant negative mutation
+      - She has heteroplasmy of mitochondrial DNA
+    answer: 1
+    why:
+      - "Penetrance is about who shows a disease; it doesn't explain survival here."
+      - "Right. McCune-Albright (activating GNAS mutation) is lethal if present before fertilization in all cells, but survivable as mosaicism."
+      - "UPD gives disease through imprinting or isodisomy, not this picture."
+      - "The GNAS mutation is activating, not dominant negative."
+      - "Heteroplasmy applies to mitochondrial diseases."
+    src: { page: 55, quote: "Lethal if mutation occurs before fertilization (affecting all cells), but survivable in patients with mosaicism." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.016
+    kind: mcq
+    topic: genetic-terms
+    stem: >-
+      Two unrelated women each carry a BRCA1 pathogenic variant. One develops breast cancer at 38; the
+      other is 70 and has never had cancer. Which term describes this?
+    options:
+      - Variable expressivity
+      - Incomplete penetrance
+      - Pleiotropy
+      - Anticipation
+      - Locus heterogeneity
+    answer: 1
+    why:
+      - "Variable expressivity is different severity among people who all have the disease (eg, NF1)."
+      - "Right. Not everyone with the pathogenic variant shows the disease; BRCA1 is the book's example."
+      - "Pleiotropy is one gene giving many effects."
+      - "Anticipation is earlier or worse disease in later generations."
+      - "Locus heterogeneity is different genes giving the same disease."
+    src: { page: 54, quote: "BRCA1 gene mutations do not always result in breast or ovarian cancer." }
+    status: unverified
+  # ---------- p55: population genetics ----------
+  - id: bio.L04.017
+    kind: table
+    topic: population-genetics
+    title: Population genetics
+    columns: [Concept, Description]
+    rows:
+      - [Bottleneck effect, "A disaster removes certain alleles by chance → new allele frequency (not naturally selected)"]
+      - [Founder effect, A bottleneck caused by calamitous population separation]
+      - [Natural selection, Alleles that increase fitness are more likely to be passed on]
+      - [Genetic drift, "Dramatic chance shift in allele frequency (Wright effect); founder and bottleneck effects are examples"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 55, quote: "Genetic drift Also called allelic drift or Wright effect. A dramatic shift in allelic frequency that occurs by chance (not by natural selection)." }
+    status: unverified
+  - id: bio.L04.018
+    kind: mcq
+    topic: population-genetics
+    stem: >-
+      A small group of 30 families settled an isolated island 300 years ago. One founder carried a rare
+      recessive allele, which is now found in 12% of the island's people but almost nowhere else. The
+      allele gives no survival advantage. Which process explains its frequency?
+    options:
+      - Natural selection
+      - Genetic drift
+      - Hardy-Weinberg equilibrium
+      - Linkage disequilibrium
+      - Anticipation
+    answer: 1
+    why:
+      - "The allele has no fitness benefit, so it wasn't selected."
+      - "Right. The founder effect, a chance change in allele frequency from population separation, is a form of genetic drift."
+      - "Hardy-Weinberg assumes a large population with no such chance shifts."
+      - "Linkage disequilibrium describes alleles found together on a chromosome."
+      - "Anticipation is worsening disease across generations."
+    src: { page: 55, quote: "Founder effect and bottleneck effect are both examples of genetic drift." }
+    status: unverified
+  # ---------- p56: Hardy-Weinberg ----------
+  - id: bio.L04.019
+    kind: cloze
+    topic: hardy-weinberg
+    text: "In Hardy-Weinberg, p + q = 1 and {{c1::p² + 2pq + q²}} = 1, where {{c2::2pq}} is the heterozygote (carrier) frequency."
+    src: { page: 56, quote: "2pq = frequency of heterozygosity (carrier frequency, if an autosomal recessive disease)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.020
+    kind: cloze
+    topic: hardy-weinberg
+    text: The frequency of an X-linked recessive disease is {{c1::q}} in males and {{c2::q²}} in females.
+    src: { page: 56, quote: "The frequency of an X-linked recessive disease in males = q and in females = q2" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.021
+    kind: enumerate
+    topic: hardy-weinberg
+    prompt: Enumerate the assumptions of the Hardy-Weinberg law (5).
+    points:
+      - No mutation at the locus
+      - No natural selection
+      - Completely random mating
+      - No net migration
+      - Large population
+    pass: 5
+    hook: "المجتمع الهادي: مفيش طفرة، مفيش انتقاء، الجواز عشوائي، محدش داخل ولا خارج، والعدد كبير."
+    src: { page: 56, quote: "Hardy-Weinberg law assumptions include: ▘ No mutation occurring at the locus ▘ Natural selection is not occurring ▘ Completely random mating ▘ No net migration ▘ Large population" }
+    status: unverified
+  - id: bio.L04.022
+    kind: card
+    topic: hardy-weinberg
+    front: Cystic fibrosis affects about 1/3200 people in the US. What are q and the carrier frequency?
+    back: q² = 1/3200, so q ≈ 0.017. p ≈ 1 (rare disease), so carriers = 2pq ≈ 0.035 (3.5%).
+    src: { page: 56, quote: "q2 = 1/3200, with q ≈ 0.017 or 1.7% of the population." }
+    status: unverified
+  - id: bio.L04.023
+    kind: mcq
+    topic: hardy-weinberg
+    stem: >-
+      An autosomal recessive disease affects 1 in 10,000 newborns in a large, randomly mating
+      population. A healthy woman from this population with no family history asks her chance of being
+      a carrier. What is the best estimate?
+    options:
+      - 1 in 100
+      - 1 in 50
+      - 1 in 200
+      - 1 in 10,000
+      - 1 in 25
+    answer: 1
+    why:
+      - "1/100 is q, the allele frequency, not the carrier frequency."
+      - "Right. q² = 1/10,000 → q = 1/100; p ≈ 1, so 2pq ≈ 2 × 1/100 = 1/50."
+      - "This halves q instead of doubling it."
+      - "That is the disease frequency, q²."
+      - "This overestimates 2pq."
+    src: { page: 56, quote: "2pq = frequency of heterozygosity (carrier frequency, if an autosomal recessive disease)" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p56: disorders of imprinting ----------
+  - id: bio.L04.024
+    kind: card
+    topic: imprinting
+    front: What is imprinting, and what does it cause?
+    back: One gene copy is silenced by methylation and only the other is expressed → parent-of-origin effects. Disease follows if the expressed copy is mutated, not expressed or deleted.
+    src: { page: 56, quote: "One gene copy is silenced by methylation, and only the other copy is expressed → parent-of-origin effects." }
+    status: unverified
+  - id: bio.L04.025
+    kind: table
+    topic: imprinting
+    title: Prader-Willi vs Angelman syndrome
+    columns: [Feature, Prader-Willi, Angelman]
+    rows:
+      - [Normally silent, "Maternal genes (except UBE3A)", Paternal UBE3A]
+      - [Disease when deleted or mutated, Paternal allele, Maternal allele]
+      - [Signs, "Hyperphagia, obesity, intellectual disability, hypogonadism, hypotonia", "Hand-flapping, ataxia, severe intellectual disability, inappropriate laughter, seizures (HAILS)"]
+      - [Chromosome, Chromosome 15 of paternal origin, UBE3A on maternal chromosome 15]
+      - [Uniparental disomy, 25% are maternal UPD, 5% are paternal UPD]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2], [4, 1], [4, 2]]
+    src: { page: 56, quote: "SIGNS AND SYMPTOMS Hyperphagia, obesity, intellectual disability, hypogonadism, hypotonia Hand-flapping, Ataxia, severe Intellectual disability, inappropriate Laughter, Seizures." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.026
+    kind: card
+    topic: imprinting
+    front: What are the book's mnemonics for Prader-Willi and Angelman?
+    back: "POP: Prader-Willi, Obesity/overeating, Paternal allele deleted. MAMAS: Maternal allele deleted, Angelman, Mood, Ataxia, Seizures. HAILS the Angels."
+    src: { page: 56, quote: "POP: Prader-Willi, Obesity/overeating, Paternal allele deleted MAMAS: Maternal allele deleted, Angelman syndrome, Mood, Ataxia, Seizures" }
+    status: unverified
+  - id: bio.L04.027
+    kind: mcq
+    topic: imprinting
+    stem: >-
+      A 4-year-old boy was a floppy infant who fed poorly; now he eats constantly, takes food from the
+      trash and is obese. He has small genitalia and mild intellectual disability. Testing shows no
+      deletion on chromosome 15, but both copies of chromosome 15 came from his mother. Why is he
+      affected?
+    options:
+      - The maternal UBE3A gene is missing
+      - The paternally expressed genes on 15q are absent because there is no paternal copy
+      - He has a CGG repeat expansion
+      - He has a dominant negative mutation in UBE3A
+      - He has trisomy 15 mosaicism
+    answer: 1
+    why:
+      - "Maternal UBE3A loss causes Angelman; he has two maternal copies, so UBE3A is present."
+      - "Right. Prader-Willi: maternal genes are silenced by imprinting, so the disease appears when no active paternal copy exists; 25% of cases are maternal uniparental disomy."
+      - "CGG repeats cause fragile X."
+      - "The defect is imprinting, not a protein-blocking mutation."
+      - "UPD is euploid; there is no extra chromosome."
+    src: { page: 56, quote: "25% of cases are due to maternal uniparental disomy" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p57: modes of inheritance ----------
+  - id: bio.L04.028
+    kind: table
+    topic: modes-of-inheritance
+    title: Modes of inheritance
+    columns: [Mode, Key features]
+    rows:
+      - [Autosomal dominant, "Structural gene defects; many generations, both sexes; pleiotropic, variably expressive; 50% of children of an affected parent"]
+      - [Autosomal recessive, "Enzyme deficiencies; usually one generation; more severe, childhood onset; 25% affected with 2 carrier parents; ↑ with consanguinity"]
+      - [X-linked recessive, "Sons of carrier mothers 50% affected; no male-to-male transmission; skips generations"]
+      - [X-linked dominant, "Both parents transmit; 50% of children of affected mothers; all daughters and no sons of affected fathers"]
+      - [Mitochondrial, "Only through the mother; all offspring of affected females may show disease; variable from heteroplasmy"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 57, quote: "Transmitted through both parents. Children of affected mothers each have a 50% chance of being affected. 100% of daughters and 0% of sons of affected fathers will be affected." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.029
+    kind: card
+    topic: modes-of-inheritance
+    front: An unaffected person has a sibling with an autosomal recessive disease. What is their chance of being a carrier?
+    back: 2/3.
+    src: { page: 57, quote: "Unaffected individual with affected sibling has 2/3 probability of being a carrier." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.030
+    kind: card
+    topic: modes-of-inheritance
+    front: Name the X-linked dominant examples in the book.
+    back: Fragile X syndrome, Alport syndrome and hypophosphatemic rickets (X-linked hypophosphatemia, phosphate wasting at the proximal tubule).
+    src: { page: 57, quote: "Examples: fragile X syndrome, Alport syndrome, hypophosphatemic rickets (also called X-linked hypophosphatemia)—phosphate wasting at proximal tubule → ricketslike presentation." }
+    status: unverified
+  - id: bio.L04.031
+    kind: mcq
+    topic: modes-of-inheritance
+    stem: >-
+      A man has rickets-like bowing of the legs with low serum phosphate and high urinary phosphate. His
+      wife is unaffected. They have two sons and two daughters. Which pattern is expected in their
+      children?
+    options:
+      - All children affected
+      - All daughters affected, no sons affected
+      - Half of the sons affected, no daughters affected
+      - Half of all children affected regardless of sex
+      - No children affected, all daughters carriers
+    answer: 1
+    why:
+      - "Sons get his Y chromosome, not his X."
+      - "Right. Hypophosphatemic rickets is X-linked dominant: affected fathers pass it to 100% of daughters and 0% of sons."
+      - "That fits a carrier mother with an X-linked recessive disease."
+      - "That fits an autosomal dominant disease or an affected mother with an X-linked dominant one."
+      - "Daughters being only carriers fits X-linked recessive disease in the father."
+    src: { page: 57, quote: "100% of daughters and 0% of sons of affected fathers will be affected." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p58: autosomal dominant diseases ----------
+  - id: bio.L04.032
+    kind: enumerate
+    topic: autosomal-dominant-diseases
+    prompt: Enumerate the autosomal dominant diseases in First Aid's list.
+    points:
+      - Achondroplasia
+      - Autosomal dominant polycystic kidney disease
+      - Familial adenomatous polyposis
+      - Familial hypercholesterolemia
+      - Hereditary hemorrhagic telangiectasia (Osler-Weber-Rendu)
+      - Hereditary spherocytosis
+      - Huntington disease
+      - Li-Fraumeni syndrome
+      - Marfan syndrome
+      - Multiple endocrine neoplasias
+      - Myotonic muscular dystrophy
+      - Neurofibromatosis types 1 and 2
+      - Tuberous sclerosis
+      - von Hippel-Lindau disease
+    pass: 11
+    hook: "الـ AD أغلبها structural أو أورام: عضم (achondroplasia، Marfan)، كلى (ADPKD)، قولون (FAP)، دم (spherocytosis، HHT)، كوليسترول، أعصاب (Huntington، NF1/2، tuberous sclerosis، VHL)، عضل (myotonic)، وأورام (Li-Fraumeni، MEN)."
+    src: { page: 58, quote: "Achondroplasia, autosomal dominant polycystic kidney disease, familial adenomatous polyposis, familial hypercholesterolemia, hereditary hemorrhagic telangiectasia (Osler-Weber-Rendu syndrome), hereditary spherocytosis, Huntington disease" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.033
+    kind: mcq
+    topic: autosomal-dominant-diseases
+    stem: >-
+      A 40-year-old man has recurrent nosebleeds and iron deficiency anemia. He has small red spots on his
+      lips, tongue and fingertips that blanch with pressure. His mother and his daughter have the same
+      spots and nosebleeds. Which inheritance pattern is most likely?
+    options:
+      - Autosomal dominant
+      - Autosomal recessive
+      - X-linked recessive
+      - X-linked dominant
+      - Mitochondrial
+    answer: 0
+    why:
+      - "Right. Hereditary hemorrhagic telangiectasia (Osler-Weber-Rendu) is autosomal dominant: several generations, both sexes, father to daughter."
+      - "Recessive diseases usually appear in one generation."
+      - "X-linked recessive disease rarely affects women and isn't passed father to child as here."
+      - "HHT isn't X-linked; the book lists it as autosomal dominant."
+      - "Mitochondrial disease passes only through mothers, but here a father passed it on."
+    src: { page: 58, quote: "hereditary hemorrhagic telangiectasia (Osler-Weber-Rendu syndrome)" }
+    status: unverified
+  # ---------- p58: autosomal recessive diseases ----------
+  - id: bio.L04.034
+    kind: enumerate
+    topic: autosomal-recessive-diseases
+    prompt: Enumerate the autosomal recessive diseases in First Aid's list.
+    points:
+      - Oculocutaneous albinism
+      - Phenylketonuria
+      - Cystic fibrosis
+      - Sickle cell disease
+      - Wilson disease
+      - Sphingolipidoses (except Fabry disease)
+      - Hemochromatosis
+      - Glycogen storage diseases
+      - Thalassemia
+      - Mucopolysaccharidoses (except Hunter syndrome)
+      - Friedreich ataxia
+      - Kartagener syndrome
+      - ARPKD
+    pass: 10
+    hook: "جملة الكتاب: Oh, please! Can students who score high grades tell me features of the kidney disorder ARPKD؟ كل كلمة أول حرف مرض: Oculocutaneous albinism و PKU و CF و Sickle cell و Wilson و Sphingolipidoses و Hemochromatosis و Glycogen storage و Thalassemia و Mucopolysaccharidoses و Friedreich و Kartagener و ARPKD."
+    src: { page: 58, quote: "Mostly consist of enzyme defects. Oculocutaneous albinism, phenylketonuria, cystic fibrosis, sickle cell disease, Wilson disease, sphingolipidoses (except Fabry disease), hemochromatosis, glycogen storage diseases" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.035
+    kind: card
+    topic: autosomal-recessive-diseases
+    front: Which sphingolipidosis and which mucopolysaccharidosis are NOT autosomal recessive?
+    back: Fabry disease and Hunter syndrome (both X-linked recessive).
+    src: { page: 58, quote: "sphingolipidoses (except Fabry disease), hemochromatosis, glycogen storage diseases, thalassemia, mucopolysaccharidoses (except Hunter syndrome)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.036
+    kind: mcq
+    topic: autosomal-recessive-diseases
+    stem: >-
+      A 3-year-old girl born to first-cousin parents has coarse facial features, corneal clouding and
+      hepatosplenomegaly from a mucopolysaccharidosis. Her parents ask about the risk for their next
+      child. Which mucopolysaccharidosis does she NOT have, given the inheritance pattern?
+    options:
+      - Hurler syndrome
+      - Hunter syndrome
+      - Any autosomal recessive mucopolysaccharidosis
+      - Sanfilippo syndrome
+      - Morquio syndrome
+    answer: 1
+    why:
+      - "Hurler is autosomal recessive and fits a girl with consanguineous parents and corneal clouding."
+      - "Right. Mucopolysaccharidoses are autosomal recessive except Hunter syndrome, which is X-linked recessive and rarely affects girls."
+      - "Most mucopolysaccharidoses are autosomal recessive, and consanguinity raises that risk."
+      - "Sanfilippo is one of the autosomal recessive mucopolysaccharidoses."
+      - "Morquio is one of the autosomal recessive mucopolysaccharidoses."
+    src: { page: 58, quote: "mucopolysaccharidoses (except Hunter syndrome)" }
+    status: unverified
+  # ---------- p58: cystic fibrosis ----------
+  - id: bio.L04.037
+    kind: card
+    topic: cystic-fibrosis
+    front: What is the genetic defect in cystic fibrosis?
+    back: Autosomal recessive defect in the CFTR gene on chromosome 7 (deletion, ΔF508). The most common lethal genetic disease in patients with European ancestry.
+    src: { page: 58, quote: "Autosomal recessive; defect in CFTR gene on chromosome 7 (deletion; ΔF508). Most common lethal genetic disease in patients with European ancestry." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.038
+    kind: order
+    topic: cystic-fibrosis
+    prompt: Put the steps from the ΔF508 mutation to thick mucus in order.
+    steps:
+      - Phe508 deletion → misfolded CFTR protein
+      - Improper protein trafficking; CFTR absent from the cell membrane
+      - ↓ Cl− (and H2O and HCO3−) secretion
+      - Compensatory ↑ Na+ reabsorption via ENaC
+      - ↑ H2O reabsorption → thick mucus in lungs and GI tract
+    src: { page: 58, quote: "Phe508 deletion → misfolded protein → improper protein trafficking → protein absent from cell membrane" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.039
+    kind: card
+    topic: cystic-fibrosis
+    front: What does CFTR normally do in the lungs/GI tract and in sweat glands?
+    back: It is an ATP-gated Cl− channel that secretes Cl− in the lungs and GI tract and reabsorbs Cl− in sweat glands.
+    src: { page: 58, quote: "CFTR encodes an ATP-gated Cl− channel (secretes C − l in lungs/GI tract, reabsorbs Cl− in sweat glands)." }
+    status: unverified
+  - id: bio.L04.040
+    kind: card
+    topic: cystic-fibrosis
+    front: How is cystic fibrosis diagnosed, and what electrolyte picture can it cause?
+    back: ↑ Cl− in the pilocarpine-induced sweat test; ↑ immunoreactive trypsinogen on newborn screening. It can cause contraction alkalosis and hypokalemia (like a loop diuretic) from sweat losses and renal K+/H+ wasting.
+    src: { page: 58, quote: "↑ Cl− concentration in pilocarpine-induced sweat test. Can present with contraction alkalosis and hypokalemia (ECF effects analogous to loop diuretic effect)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.041
+    kind: table
+    topic: cystic-fibrosis
+    title: Cystic fibrosis complications
+    columns: [System, Complications]
+    rows:
+      - [Lungs, "Recurrent infections: S aureus (infancy, early childhood), P aeruginosa (adulthood), ABPA; bronchitis, bronchiectasis; sinus opacification, nasal polyps, clubbing"]
+      - [Pancreas and liver, "Pancreatic insufficiency, steatorrhea, fat-soluble vitamin (A, D, E, K) deficiency, CF-related diabetes, biliary cirrhosis"]
+      - [Newborn gut, Meconium ileus]
+      - [Reproduction, "Male infertility (absent vas deferens); female subfertility (amenorrhea, thick cervical mucus)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 58, quote: "Recurrent pulmonary infections (eg, S aureus [infancy and early childhood], P aeruginosa [adulthood], allergic bronchopulmonary aspergillosis [ABPA])" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.042
+    kind: card
+    topic: cystic-fibrosis
+    front: What is the treatment of cystic fibrosis?
+    back: Chest physiotherapy, aerosolized dornase alfa and inhaled hypertonic saline for mucus clearance; azithromycin to prevent exacerbations; ibuprofen for inflammation; pancrelipase for pancreatic insufficiency; and CFTR modulators.
+    src: { page: 58, quote: "Multifactorial: chest physiotherapy, aerosolized dornase alfa (DNase), and inhaled hypertonic saline → mucus clearance. Azithromycin prevents acute exacerbations." }
+    status: unverified
+  - id: bio.L04.043
+    kind: table
+    topic: cystic-fibrosis
+    title: CFTR modulators
+    columns: [Class, Action, Example]
+    rows:
+      - [Potentiators, "Hold the CFTR gate open → Cl− flows", Ivacaftor]
+      - [Correctors, "Help CFTR fold into its right 3-D shape → it reaches the cell surface", "Lumacaftor, tezacaftor"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 58, quote: "Are either potentiators (hold gate of CFTR channel open → Cl− flows through cell membrane; eg, ivaCaFToR) or correctors (help CFTR protein to form right 3-D shape → moves to the cell surface; eg, lumaCaFToR, tezaCaFToR)." }
+    status: unverified
+  - id: bio.L04.044
+    kind: mcq
+    topic: cystic-fibrosis
+    stem: >-
+      A 2-year-old boy has failure to thrive, bulky foul-smelling stools and three episodes of pneumonia.
+      He was treated for meconium ileus as a newborn. His sweat chloride is 85 mmol/L. He is homozygous
+      for the most common mutation of his disease. What happens to the protein made from this allele?
+    options:
+      - It reaches the membrane but its gate cannot open
+      - It misfolds and doesn't reach the cell membrane
+      - It isn't transcribed because of promoter methylation
+      - It is truncated by an early stop codon
+      - It is secreted out of the cell
+    answer: 1
+    why:
+      - "A gating defect is what potentiators like ivacaftor fix; it isn't the ΔF508 problem."
+      - "Right. ΔF508 (Phe508 deletion) misfolds CFTR, which is trafficked improperly and is absent from the membrane, so Cl− secretion falls."
+      - "Transcription is normal; the protein misfolds."
+      - "ΔF508 is an in-frame deletion of one amino acid, not a nonsense mutation."
+      - "CFTR is a membrane channel; it isn't secreted."
+    src: { page: 58, quote: "Phe508 deletion → misfolded protein → improper protein trafficking → protein absent from cell membrane" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p59: X-linked recessive diseases ----------
+  - id: bio.L04.045
+    kind: enumerate
+    topic: x-linked-recessive-diseases
+    prompt: Enumerate the X-linked recessive diseases in First Aid's list.
+    points:
+      - Bruton agammaglobulinemia
+      - Duchenne and Becker muscular dystrophies
+      - Fabry disease
+      - G6PD deficiency
+      - Hemophilia A and B
+      - Hunter syndrome
+      - Lesch-Nyhan syndrome
+      - Ocular albinism
+      - Ornithine transcarbamylase deficiency
+      - Wiskott-Aldrich syndrome
+    pass: 8
+    hook: "الولاد بس بيتعبوا: مناعة (Bruton، Wiskott-Aldrich)، عضل (Duchenne، Becker)، دم (G6PD، hemophilia)، storage (Fabry، Hunter)، purines (Lesch-Nyhan)، urea cycle (OTC)، وعين (ocular albinism)."
+    src: { page: 59, quote: "Bruton agammaglobulinemia, Duchenne and Becker muscular dystrophies, Fabry disease, G6PD deficiency, hemophilia A and B, Hunter syndrome, Lesch-Nyhan syndrome, ocular albinism" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.046
+    kind: card
+    topic: x-linked-recessive-diseases
+    front: Why might a female express an X-linked recessive disease?
+    back: Turner syndrome (45,XO) or skewed X-inactivation (lyonization), as in G6PD deficiency.
+    src: { page: 59, quote: "If skewed inactivation occurs, XX individuals may express X-linked recessive diseases (eg, G6PD)" }
+    status: unverified
+  - id: bio.L04.047
+    kind: mcq
+    topic: x-linked-recessive-diseases
+    stem: >-
+      A 25-year-old woman develops dark urine and anemia 2 days after starting nitrofurantoin. Her blood
+      smear shows bite cells. Her brother has the same problem with fava beans. She has a normal
+      karyotype and her father is healthy. Which mechanism best explains why she is affected?
+    options:
+      - Uniparental disomy of the X chromosome
+      - Skewed X-inactivation leaving mostly the mutant X active
+      - Anticipation from a trinucleotide expansion
+      - Germline mosaicism in her father
+      - Dominant negative effect of the mutant allele
+    answer: 1
+    why:
+      - "UPD isn't how an XX carrier usually expresses an X-linked recessive disease."
+      - "Right. In skewed lyonization, most cells inactivate the normal X, so an XX carrier expresses an X-linked recessive disease such as G6PD deficiency."
+      - "G6PD deficiency isn't a repeat disease."
+      - "Her father is healthy and would pass her his normal X."
+      - "Her brother's and her pattern fit a carrier with skewed inactivation, not a dominant negative effect."
+    src: { page: 59, quote: "If skewed inactivation occurs, XX individuals may express X-linked recessive diseases (eg, G6PD)" }
+    status: unverified
+  # ---------- p59: muscular dystrophies ----------
+  - id: bio.L04.048
+    kind: table
+    topic: muscular-dystrophies
+    title: Duchenne vs Becker muscular dystrophy
+    columns: [Feature, Duchenne, Becker]
+    rows:
+      - [Inheritance, X-linked recessive, X-linked recessive]
+      - [Mutation, "Frameshift deletions or nonsense → truncated or absent dystrophin", "Non-frameshift deletions → partially functional dystrophin"]
+      - [Onset, Before 5 years, Adolescence or early adulthood]
+      - [Severity, "Severe; dilated cardiomyopathy is a common cause of death", "Less severe (Becker is better)"]
+    blanks: [[1, 1], [1, 2], [2, 1], [2, 2], [3, 1]]
+    src: { page: 59, quote: "X-linked recessive disorder typically due to non-frameshift deletions in dystrophin gene (partially functional instead of truncated). Less severe than Duchenne (Becker is better)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.049
+    kind: card
+    topic: muscular-dystrophies
+    front: How does Duchenne muscular dystrophy present?
+    back: Weakness beginning in the pelvic girdle and progressing upward, calf pseudohypertrophy (fibrofatty replacement), waddling gait and Gowers sign. ↑ CK and aldolase; genetic testing confirms.
+    src: { page: 59, quote: "Weakness begins in pelvic girdle muscles and progresses superiorly. Pseudohypertrophy of calf muscles due to fibrofatty replacement of muscle A . Waddling gait." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.050
+    kind: card
+    topic: muscular-dystrophies
+    front: What is the Gowers sign, and is it specific for Duchenne?
+    back: The patient uses the arms to push up and stand. Classic for Duchenne but also seen in other muscular dystrophies and inflammatory myopathies (eg, polymyositis).
+    src: { page: 59, quote: "Gowers sign—patient uses upper extremities to help stand up. Classically seen in Duchenne muscular dystrophy, but also seen in other muscular dystrophies and inflammatory myopathies (eg, polymyositis)." }
+    status: unverified
+  - id: bio.L04.051
+    kind: card
+    topic: muscular-dystrophies
+    front: Why are dystrophin mutations so common, and what does dystrophin do?
+    back: DMD is the largest protein-coding human gene, so spontaneous mutation is more likely. Dystrophin anchors muscle fibers to the extracellular matrix, mainly in skeletal and cardiac muscle; its loss → myonecrosis.
+    src: { page: 59, quote: "Dystrophin gene (DMD) is the largest protein-coding human gene → ↑ chance of spontaneous mutation." }
+    status: unverified
+  - id: bio.L04.052
+    kind: card
+    topic: muscular-dystrophies
+    front: What causes myotonic dystrophy, and what are its features?
+    back: Autosomal dominant CTG repeat expansion in DMPK → abnormal myotonin protein kinase. Onset 20-30 years; percussion myotonia (can't release a handshake), muscle wasting, cataracts, testicular atrophy, frontal balding, arrhythmia. Biopsy shows ring fibers and central nuclei.
+    src: { page: 59, quote: "CTG trinucleotide repeat expansion in the DMPK gene → abnormal expression of myotonin protein kinase → percussion myotonia (eg, difficulty releasing hand from handshake), muscle wasting, cataracts, testicular atrophy, frontal balding, arrhythmia." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.053
+    kind: mcq
+    topic: muscular-dystrophies
+    stem: >-
+      A 16-year-old boy has had gradually progressive leg weakness and cramps with exercise since age 12.
+      He can still climb stairs slowly. His calves are enlarged and CK is raised. Muscle biopsy shows
+      reduced but present dystrophin. Which type of mutation is most likely?
+    options:
+      - Frameshift deletion in the dystrophin gene
+      - Non-frameshift (in-frame) deletion in the dystrophin gene
+      - CTG repeat expansion in DMPK
+      - Nonsense mutation in the dystrophin gene
+      - Mitochondrial DNA point mutation
+    answer: 1
+    why:
+      - "A frameshift truncates or abolishes dystrophin (Duchenne), with onset before 5."
+      - "Right. Becker: in-frame deletions leave partially functional dystrophin; onset in adolescence, milder (Becker is better)."
+      - "CTG repeats in DMPK cause myotonic dystrophy, autosomal dominant, with myotonia and cataracts."
+      - "Nonsense mutations give absent dystrophin, as in Duchenne."
+      - "Mitochondrial myopathies show ragged red fibers, not low dystrophin."
+    src: { page: 59, quote: "X-linked recessive disorder typically due to non-frameshift deletions in dystrophin gene (partially functional instead of truncated). Less severe than Duchenne (Becker is better)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p60: mitochondrial diseases ----------
+  - id: bio.L04.054
+    kind: card
+    topic: mitochondrial-diseases
+    front: What are mitochondrial diseases, and which tissues do they affect most?
+    back: Rare disorders from failed oxidative phosphorylation; tissues with high energy needs (CNS, skeletal muscle) are hit most.
+    src: { page: 60, quote: "Rare disorders arising 2° to failure in oxidative phosphorylation. Tissues with ↑ energy requirements are preferentially affected (eg, CNS, skeletal muscle)." }
+    status: unverified
+  - id: bio.L04.055
+    kind: card
+    topic: mitochondrial-diseases
+    front: Name 2 mitochondrial myopathies and their biopsy findings.
+    back: MELAS (encephalomyopathy, lactic acidosis, strokelike episodes) and MERRF (myoclonic epilepsy with ragged red fibers). Light microscopy shows ragged red fibers (compensatory mitochondrial proliferation); EM shows mitochondrial crystalline inclusions.
+    src: { page: 60, quote: "Light microscopy with stain: ragged red fibers due to compensatory proliferation of mitochondria. Electron microscopy: mitochondrial crystalline inclusions." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.056
+    kind: card
+    topic: mitochondrial-diseases
+    front: What causes Leber hereditary optic neuropathy, and how does it present?
+    back: Mutations in complex I of the ETC → neuronal death in the retina and optic nerve → subacute bilateral vision loss in teens/young adults (males > females), usually permanent, sometimes with neurologic dysfunction.
+    src: { page: 60, quote: "Leber hereditary optic neuropathy—mutations in complex I of ETC → neuronal death in retina and optic nerve → subacute bilateral vision loss in teens/young adults (males > females)." }
+    status: unverified
+  - id: bio.L04.057
+    kind: mcq
+    topic: mitochondrial-diseases
+    stem: >-
+      A 19-year-old man loses central vision in his right eye over 2 weeks, then in his left eye a month
+      later. His maternal uncle and his mother's brother's sister's son had the same problem; his own
+      father and paternal relatives are unaffected. Which structure carries the mutation?
+    options:
+      - Complex I of the electron transport chain encoded by mtDNA
+      - The dystrophin gene on the X chromosome
+      - FMR1 on the X chromosome
+      - Fibrillin-1 on chromosome 15
+      - MECP2 on the X chromosome
+    answer: 0
+    why:
+      - "Right. Leber hereditary optic neuropathy: mtDNA mutations in complex I → subacute bilateral vision loss in young men, passed through the mother's line."
+      - "Dystrophin mutations cause muscular dystrophy."
+      - "FMR1 causes fragile X (intellectual disability, macroorchidism)."
+      - "Fibrillin-1 is Marfan; lens dislocation, not optic neuropathy."
+      - "MECP2 causes Rett syndrome in girls."
+    src: { page: 60, quote: "Leber hereditary optic neuropathy—mutations in complex I of ETC → neuronal death in retina and optic nerve → subacute bilateral vision loss in teens/young adults (males > females)." }
+    status: unverified
+  # ---------- p60: Rett syndrome ----------
+  - id: bio.L04.058
+    kind: card
+    topic: rett-syndrome
+    front: What causes Rett syndrome, and who gets it?
+    back: A sporadic de novo mutation of MECP2 on the X chromosome. Seen mostly in females; embryonically lethal in males.
+    src: { page: 60, quote: "Sporadic disorder caused by de novo mutation of MECP2 on X chromosome. Seen mostly in females. Embryonically lethal in males." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.059
+    kind: mcq
+    topic: rett-syndrome
+    stem: >-
+      A 2-year-old girl developed normally until 12 months, then stopped speaking the few words she had,
+      lost purposeful use of her hands and began constant hand-wringing. She now has seizures and an
+      unsteady gait, and her head growth has slowed. Which gene is most likely mutated?
+    options:
+      - FMR1
+      - MECP2
+      - UBE3A
+      - DMPK
+      - CFTR
+    answer: 1
+    why:
+      - "FMR1 (fragile X) gives intellectual disability without this regression, mostly in boys."
+      - "Right. Rett syndrome: de novo MECP2 mutation on the X; normal development for 6-18 months, then regression (retturn), ataxia, seizures and stereotypic hand-wringing."
+      - "UBE3A (Angelman) gives hand-flapping and laughter without a period of normal development and loss of skills."
+      - "DMPK is myotonic dystrophy."
+      - "CFTR is cystic fibrosis."
+    src: { page: 60, quote: "Individuals with Rett syndrome experience initial normal development (6-18 months) followed by regression (“retturn”) in motor, verbal, and cognitive abilities; ataxia; seizures; scoliosis; and stereotypic hand-wringing." }
+    status: unverified
+  # ---------- p60: fragile X syndrome ----------
+  - id: bio.L04.060
+    kind: card
+    topic: fragile-x
+    front: What is the mechanism of fragile X syndrome?
+    back: X-linked (atypical) inheritance. CGG trinucleotide repeats in FMR1 → hypermethylation of cytosines → ↓ expression. The expansion occurs during oogenesis ("Fragile EGG").
+    src: { page: 60, quote: "X-linked (atypical) inheritance. Trinucleotide repeats in FMR1 → hypermethylation of cytosine residues → ↓ expression." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.061
+    kind: card
+    topic: fragile-x
+    front: Fragile X vs Down syndrome as causes of intellectual disability?
+    back: Fragile X is the most common inherited cause; Down syndrome is the most common genetic cause, but most Down cases are sporadic.
+    src: { page: 60, quote: "Most common inherited cause of intellectual disability (Down syndrome is most common genetic cause, but most cases occur sporadically)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.062
+    kind: table
+    topic: fragile-x
+    title: Fragile X premutation vs full mutation
+    columns: [Repeats, Findings]
+    rows:
+      - [Premutation (50-200), "Tremor, ataxia, 1° ovarian insufficiency"]
+      - [Full mutation (>200), "Postpubertal macroorchidism, long face with large jaw, large everted ears, autism, mitral valve prolapse, hypermobile joints"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 60, quote: "Premutation (50-200 repeats) → tremor, ataxia, 1° ovarian insufficiency. Full mutation (>200 repeats) → postpubertal macroorchidism (enlarged testes), long face with large jaw, large everted ears, autism, mitral valve prolapse, hypermobile joints." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.063
+    kind: mcq
+    topic: fragile-x
+    stem: >-
+      A 16-year-old boy has intellectual disability, autism, a long face, large protruding ears and
+      enlarged testes. His mother had menopause at 34, and his 68-year-old maternal grandfather has a new
+      intention tremor and unsteady gait. In which process did the repeat expansion that affects the boy
+      most likely occur?
+    options:
+      - Spermatogenesis in his father
+      - Oogenesis in his mother
+      - Mitosis after fertilization
+      - Meiosis I nondisjunction
+      - Mitochondrial replication
+    answer: 1
+    why:
+      - "Paternal transmission doesn't expand the CGG repeat in fragile X."
+      - "Right. The (CGG)n expansion occurs during oogenesis (Fragile EGG); his mother and grandfather carry premutations (ovarian insufficiency, tremor-ataxia)."
+      - "This is a repeat expansion inherited through the mother, not a postzygotic event."
+      - "Nondisjunction changes chromosome number, not repeat length."
+      - "Fragile X is an X-linked gene, not mtDNA."
+    src: { page: 60, quote: "Trinucleotide repeat expansion [(CGG)n] occurs during oogenesis. Fragile EGG (think CGG and oogenesis)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p60: trinucleotide repeat expansion diseases ----------
+  - id: bio.L04.064
+    kind: table
+    topic: trinucleotide-repeats
+    title: Trinucleotide repeat expansion diseases
+    columns: [Disease, Repeat, Inheritance, Mnemonic]
+    rows:
+      - [Huntington disease, (CAG)n, AD, Caudate has ↓ ACh and GABA]
+      - [Myotonic dystrophy, (CTG)n, AD, "Cataracts, Toupee, Gonadal atrophy"]
+      - [Fragile X syndrome, (CGG)n, XD, "Chin (protruding), Giant Gonads"]
+      - [Friedreich ataxia, (GAA)n, AR, Ataxic GAAit]
+    blanks: [[0, 1], [1, 1], [2, 1], [2, 2], [3, 1], [3, 2]]
+    src: { page: 60, quote: "Huntington disease (CAG)n AD Caudate has ↓ ACh and GABA Myotonic dystrophy (CTG)n AD Cataracts, Toupee (early balding in males)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.065
+    kind: mcq
+    topic: trinucleotide-repeats
+    stem: >-
+      A 13-year-old boy has worsening clumsiness, a wide-based gait, absent ankle reflexes and loss of
+      vibration sense. He also has pes cavus and scoliosis, and echocardiography shows hypertrophic
+      cardiomyopathy. His parents are healthy. Which repeat is most likely expanded?
+    options:
+      - (CAG)n
+      - (CTG)n
+      - (CGG)n
+      - (GAA)n
+      - (CCG)n
+    answer: 3
+    why:
+      - "CAG is Huntington disease (AD), with chorea in adults."
+      - "CTG is myotonic dystrophy (AD), with myotonia and cataracts."
+      - "CGG is fragile X."
+      - "Right. Friedreich ataxia is an autosomal recessive (GAA)n expansion: Ataxic GAAit, with healthy carrier parents."
+      - "This repeat isn't in the book's table."
+    src: { page: 60, quote: "Friedreich ataxia (GAA)n AR Ataxic GAAit" }
+    status: unverified
+  # ---------- p61: autosomal trisomies ----------
+  - id: bio.L04.066
+    kind: cloze
+    topic: autosomal-trisomies
+    text: "Incidence of trisomies: {{c1::Down (21)}} > {{c2::Edwards (18)}} > {{c3::Patau (13)}}. Autosomal monosomies are incompatible with life."
+    src: { page: 61, quote: "Incidence of trisomies: Down (21) > Edwards (18) > Patau (13). Autosomal monosomies are incompatible with life" }
+    status: unverified
+  - id: bio.L04.067
+    kind: card
+    topic: autosomal-trisomies
+    front: What are the findings of Down syndrome?
+    back: Intellectual disability, flat facies, prominent epicanthal folds, single palmar crease, incurved 5th finger, gap between the 1st 2 toes, duodenal atresia, Hirschsprung disease, congenital heart disease (AVSD), Brushfield spots. Early-onset Alzheimer and ↑ AML/ALL; ↑ umbilical hernia.
+    src: { page: 61, quote: "Findings: intellectual disability, flat facies, prominent epicanthal folds, single palmar crease, incurved 5th finger, gap between 1st 2 toes, duodenal atresia, Hirschsprung disease, congenital heart disease (eg, AVSD)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.068
+    kind: enumerate
+    topic: autosomal-trisomies
+    prompt: Enumerate the 6 As of Down syndrome.
+    points:
+      - Atlantoaxial instability
+      - Advanced maternal age
+      - Atresia (duodenal)
+      - Atrioventricular septal defect
+      - Alzheimer disease (early onset)
+      - AML (<5 years)/ALL (>5 years)
+    pass: 6
+    hook: "الـ 6 As بتوع الكتاب. ورقم 21 = Drinking age."
+    src: { page: 61, quote: "The 6 As of Down syndrome: ▘ Atlantoaxial instability ▘ Advanced maternal age ▘ Atresia (duodenal) ▘ Atrioventricular septal defect ▘ Alzheimer disease (early onset) ▘ AML (<5 years of age)/ALL (>5 years of age)" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.069
+    kind: table
+    topic: autosomal-trisomies
+    title: Causes of Down syndrome
+    columns: [Cause, Share, Note]
+    rows:
+      - [Meiotic nondisjunction, 95%, "Mostly meiosis I; ↑ with maternal age (1:1500 under 20 → 1:25 over 45)"]
+      - [Unbalanced Robertsonian translocation, 4%, Most typically between chromosomes 14 and 21]
+      - [Postfertilization mitotic error, 1%, "—"]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 1]]
+    src: { page: 61, quote: "95% of cases due to meiotic nondisjunction, most commonly during meiosis I (↑ with advanced maternal age: from 1:1500 in females <20 to 1:25 in females >45)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.070
+    kind: table
+    topic: autosomal-trisomies
+    title: Prenatal screening in trisomies
+    columns: [Trisomy, β-hCG (1st), PAPP-A (1st), hCG (2nd), Inhibin A, Estriol, AFP]
+    rows:
+      - ["21", ↑, ↓, ↑, ↑, ↓, ↓]
+      - ["18", ↓, ↓, ↓, "— or ↓", ↓, ↓]
+      - ["13", ↓, ↓, "—", "—", "—", "—"]
+    blanks: [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [0, 6], [1, 1], [1, 6]]
+    src: { page: 61, quote: "1st trimester screening Trisomy β-hCG PAPP-A 21 ↑ ↓ 18 ↓ ↓ 13 ↓ ↓" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.071
+    kind: card
+    topic: autosomal-trisomies
+    front: What does first-trimester ultrasound commonly show in Down syndrome, and which markers are high?
+    back: "↑ nuchal translucency and a hypoplastic nasal bone. Markers are hi up: ↑ hCG, ↑ inhibin."
+    src: { page: 61, quote: "First-trimester ultrasound commonly shows ↑ nuchal translucency and hypoplastic nasal bone. Markers are hi up: ↑ hCG, ↑ inhibin." }
+    status: unverified
+  - id: bio.L04.072
+    kind: enumerate
+    topic: autosomal-trisomies
+    prompt: Enumerate the findings of Edwards syndrome (PRINCE Edward).
+    points:
+      - Prominent occiput
+      - Rocker-bottom feet
+      - Intellectual disability
+      - Nondisjunction
+      - Clenched fists with overlapping fingers
+      - Low-set Ears
+      - Micrognathia, congenital heart disease (VSD), omphalocele, myelomeningocele
+    pass: 6
+    hook: "PRINCE Edward بتاع الكتاب، و18 = Election age. والـ markers كلها بتنزل."
+    src: { page: 61, quote: "Findings: PRINCE Edward—Prominent occiput, Rocker-bottom feet, Intellectual disability, Nondisjunction, Clenched fists with overlapping fingers, low-set Ears, micrognathia" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.073
+    kind: card
+    topic: autosomal-trisomies
+    front: What are the findings of Patau syndrome, and what is the underlying developmental defect?
+    back: Severe intellectual disability, rocker-bottom feet, microphthalmia, microcephaly, cleft lip/palate, holoprosencephaly, polydactyly, cutis aplasia, congenital heart disease, polycystic kidneys, omphalocele. Defective fusion of prechordal mesoderm → midline defects. Death usually by 1 year.
+    src: { page: 61, quote: "Findings: severe intellectual disability, rocker- bottom feet, microphthalmia, microcephaly, cleft lip/palate, holoprosencephaly, polydactyly, cutis aplasia" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.074
+    kind: mcq
+    topic: autosomal-trisomies
+    stem: >-
+      A 36-year-old woman has quadruple screening at 16 weeks. Results show low hCG, low estriol and low
+      AFP, with inhibin A at the lower end of normal. Ultrasound shows a fetus with clenched hands and
+      overlapping fingers and a ventricular septal defect. Which condition is most likely?
+    options:
+      - Trisomy 21
+      - Trisomy 18
+      - Trisomy 13
+      - Turner syndrome
+      - Neural tube defect alone
+    answer: 1
+    why:
+      - "Trisomy 21 shows ↑ hCG and ↑ inhibin (hi up)."
+      - "Right. Edwards syndrome: every prenatal screening marker decreases; clenched fists with overlapping fingers and VSD."
+      - "Trisomy 13 shows no consistent change on the quadruple screen, and features are midline defects."
+      - "Turner isn't on this screening table."
+      - "An isolated neural tube defect raises AFP."
+    src: { page: 61, quote: "In Edwards syndrome, every prenatal screening marker decreases." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.075
+    kind: mcq
+    topic: autosomal-trisomies
+    stem: >-
+      A newborn has a cleft lip and palate, an extra finger on each hand, small eyes, and a scalp defect
+      with absent skin at the vertex. MRI shows a single undivided forebrain. Failure of which process
+      underlies the brain and facial findings?
+    options:
+      - Neural crest cell migration
+      - Fusion of the prechordal mesoderm
+      - Closure of the neural tube
+      - Septation by the endocardial cushions
+      - Development of the third and fourth pharyngeal pouches
+    answer: 1
+    why:
+      - "Neural crest failure gives conotruncal heart defects."
+      - "Right. Patau syndrome (trisomy 13): defective fusion of prechordal mesoderm → midline defects such as holoprosencephaly and cleft lip/palate."
+      - "Neural tube defects give spina bifida or anencephaly."
+      - "Endocardial cushion defects give AVSD (Down syndrome)."
+      - "Pharyngeal pouch defects give DiGeorge syndrome."
+    src: { page: 61, quote: "Defect in fusion of prechordal mesoderm → midline defects." }
+    status: unverified
+  # ---------- p62: genetic disorders by chromosome ----------
+  - id: bio.L04.076
+    kind: table
+    topic: disorders-by-chromosome
+    title: Genetic disorders by chromosome
+    columns: [Chromosome, Selected examples]
+    rows:
+      - ["3", "von Hippel-Lindau disease, renal cell carcinoma"]
+      - ["4", "ADPKD (PKD2), achondroplasia, Huntington disease"]
+      - ["5", "Cri-du-chat syndrome, familial adenomatous polyposis"]
+      - ["6", Hemochromatosis (HFE)]
+      - ["7", "Williams syndrome, cystic fibrosis"]
+      - ["9", "Friedreich ataxia, tuberous sclerosis (TSC1)"]
+      - ["11", "Wilms tumor, β-globin defects, MEN1, ataxia telangiectasia, Ewing sarcoma t(11;22)"]
+      - ["13", "Patau syndrome, Wilson disease, retinoblastoma (RB1), BRCA2"]
+      - ["15", "Prader-Willi syndrome, Angelman syndrome, Marfan syndrome"]
+      - ["16", "ADPKD (PKD1), α-globin defects, tuberous sclerosis (TSC2)"]
+      - ["17", "Neurofibromatosis type 1, BRCA1, TP53 (Li-Fraumeni)"]
+      - ["18", Edwards syndrome]
+      - ["21", Down syndrome]
+      - ["22", "Neurofibromatosis type 2, DiGeorge syndrome (22q11)"]
+      - [X, "Fragile X, Turner (XO), XLA, Klinefelter (XXY)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1], [13, 1], [14, 1]]
+    src: { page: 62, quote: "3 von Hippel-Lindau disease, renal cell carcinoma 4 ADPKD (PKD2), achondroplasia, Huntington disease 5 Cri-du-chat syndrome, familial adenomatous polyposis" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.077
+    kind: cloze
+    topic: disorders-by-chromosome
+    text: ADPKD is caused by {{c1::PKD1}} on chromosome 16 or {{c2::PKD2}} on chromosome 4; tuberous sclerosis by TSC1 on chromosome {{c3::9}} or TSC2 on chromosome 16.
+    src: { page: 62, quote: "16 ADPKD (PKD1), α-globin gene defects (eg, α-thalassemia), tuberous sclerosis (TSC2)" }
+    status: unverified
+  - id: bio.L04.078
+    kind: mcq
+    topic: disorders-by-chromosome
+    stem: >-
+      A 35-year-old man has hematuria, hypertension and flank masses; CT shows numerous bilateral renal
+      cysts and some liver cysts. His father died of a ruptured intracranial aneurysm. Genetic testing
+      finds the more common causative gene. On which chromosome is it located?
+    options:
+      - Chromosome 4
+      - Chromosome 16
+      - Chromosome 6
+      - Chromosome 3
+      - Chromosome 9
+    answer: 1
+    why:
+      - "Chromosome 4 carries PKD2, the less common ADPKD gene."
+      - "Right. ADPKD (autosomal dominant) is caused by PKD1 on chromosome 16 or PKD2 on chromosome 4; PKD1 is the more common."
+      - "Chromosome 6 carries HFE (hemochromatosis)."
+      - "Chromosome 3 carries von Hippel-Lindau, which gives renal cell carcinoma."
+      - "Chromosome 9 carries TSC1 and Friedreich ataxia."
+    src: { page: 62, quote: "16 ADPKD (PKD1), α-globin gene defects (eg, α-thalassemia), tuberous sclerosis (TSC2)" }
+    status: unverified
+  # ---------- p62: Robertsonian translocation ----------
+  - id: bio.L04.079
+    kind: card
+    topic: robertsonian-translocation
+    front: What is a Robertsonian translocation, and which chromosomes does it usually involve?
+    back: The long arms of 2 acrocentric chromosomes fuse at the centromere and the 2 short arms are lost. It commonly involves pairs 21, 22, 13, 14 and 15.
+    src: { page: 62, quote: "Occurs when the long arms of 2 acrocentric chromosomes (chromosomes with centromeres near their ends) fuse at the centromere and the 2 short arms are lost." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.080
+    kind: card
+    topic: robertsonian-translocation
+    front: What is the difference between balanced and unbalanced translocations?
+    back: Balanced translocations (no significant gain or loss) usually don't cause an abnormal phenotype. Unbalanced ones (missing or extra genes) can cause miscarriage, stillbirth and chromosomal imbalance (eg, Down, Patau).
+    src: { page: 62, quote: "Balanced translocations (no gain or loss of significant genetic material) normally do not cause abnormal phenotype." }
+    status: unverified
+  - id: bio.L04.081
+    kind: mcq
+    topic: robertsonian-translocation
+    stem: >-
+      A healthy 27-year-old woman has had two miscarriages and a child with Down syndrome. Her karyotype
+      shows 45 chromosomes, with one chromosome made of the long arms of chromosomes 14 and 21 joined at
+      the centromere. Why is she healthy?
+    options:
+      - She has mosaicism for trisomy 21
+      - Her translocation is balanced, with no significant genetic material lost
+      - She has uniparental disomy of chromosome 21
+      - The lost short arms carry imprinted genes
+      - She has incomplete penetrance of trisomy 21
+    answer: 1
+    why:
+      - "Her karyotype shows a translocation, not two cell lines."
+      - "Right. In a Robertsonian translocation the short arms lost carry no significant genes, so a balanced carrier is normal but can make unbalanced gametes (miscarriage, Down syndrome)."
+      - "UPD is two copies from one parent, not a fused chromosome."
+      - "Imprinting isn't the reason; the short arms carry little essential material."
+      - "Penetrance doesn't apply; she has no extra chromosome 21 material."
+    src: { page: 62, quote: "Unbalanced translocations (missing or extra genes) can result in miscarriage, stillbirth, and chromosomal imbalance (eg, Down syndrome, Patau syndrome)." }
+    status: unverified
+  # ---------- p62: cri-du-chat ----------
+  - id: bio.L04.082
+    kind: card
+    topic: cri-du-chat
+    front: What causes cri-du-chat syndrome, and what are its findings?
+    back: Congenital deletion of the short arm of chromosome 5 (5p−). Microcephaly, moderate to severe intellectual disability, high-pitched crying, epicanthal folds and cardiac abnormalities (VSD). "I cry when I am Very SaD."
+    src: { page: 62, quote: "Congenital deletion on short arm of chromosome 5 (46,XX or XY, 5p−). Findings: microcephaly, moderate to severe intellectual disability, high-pitched crying, epicanthal folds, cardiac abnormalities (VSD)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L04.083
+    kind: mcq
+    topic: cri-du-chat
+    stem: >-
+      A newborn girl has a small head, wide-set eyes with epicanthal folds and a constant high-pitched,
+      mewing cry. Echocardiography shows a ventricular septal defect. Which karyotype is most likely?
+    options:
+      - 47,XX,+21
+      - 46,XX,5p−
+      - 45,X
+      - 47,XX,+18
+      - 46,XX,del(22q11)
+    answer: 1
+    why:
+      - "Trisomy 21 has flat facies, a single palmar crease and AVSD, not a cat-like cry."
+      - "Right. Cri-du-chat: deletion of the short arm of chromosome 5 → microcephaly, high-pitched cry, epicanthal folds, VSD (I cry when I am Very SaD)."
+      - "Turner syndrome is 45,X."
+      - "Trisomy 18 shows clenched fists and rocker-bottom feet."
+      - "22q11 deletion is DiGeorge syndrome."
+    src: { page: 62, quote: "Findings: microcephaly, moderate to severe intellectual disability, high-pitched crying, epicanthal folds, cardiac abnormalities (VSD). I cry when I am Very SaD." }
+    status: unverified
+    tags: [high-yield]

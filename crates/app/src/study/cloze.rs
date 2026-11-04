@@ -11,14 +11,14 @@ use super::grade::GradeRow;
 use crate::i18n::study as tx;
 
 #[derive(Debug, Clone, PartialEq)]
-enum Seg {
+pub(crate) enum Seg {
     Text(String),
     Blank { answer: String, hint: Option<String> },
 }
 
 /// Splits `{{c1::answer::hint}}` text into plain runs and blanks. Malformed
 /// braces stay as text (the validator rejects them anyway).
-fn segments(text: &str) -> Vec<Seg> {
+pub(crate) fn segments(text: &str) -> Vec<Seg> {
     let mut out = Vec::new();
     let mut rest = text;
     while let Some(start) = rest.find("{{c") {
@@ -186,17 +186,30 @@ mod tests {
 
     #[test]
     fn segments_keep_text_and_hints() {
-        let s = segments("PMN {{c1::≥250::count}} in {{c2::SBP}}.");
+        let s = segments("Heart beats by week {{c1::4-5::weeks}} via {{c2::neural crest}}.");
         assert_eq!(
             s,
             [
-                Seg::Text("PMN ".into()),
-                Seg::Blank { answer: "≥250".into(), hint: Some("count".into()) },
-                Seg::Text(" in ".into()),
-                Seg::Blank { answer: "SBP".into(), hint: None },
+                Seg::Text("Heart beats by week ".into()),
+                Seg::Blank { answer: "4-5".into(), hint: Some("weeks".into()) },
+                Seg::Text(" via ".into()),
+                Seg::Blank { answer: "neural crest".into(), hint: None },
                 Seg::Text(".".into()),
             ]
         );
         assert_eq!(segments("plain"), [Seg::Text("plain".into())]);
+        // Malformed braces stay text.
+        assert_eq!(segments("open {{c1 never closed"), [Seg::Text("open {{c1 never closed".into())]);
+        assert_eq!(segments("{{c1}} no answer"), [Seg::Text("{{c1}} no answer".into())]);
+    }
+
+    #[test]
+    fn the_verdict_follows_the_worst_blank() {
+        use Match::*;
+        assert_eq!((overall(&[Right, Right]), verdict(&[Right])), (Right, tx::CLOZE_RIGHT));
+        assert_eq!((overall(&[Right, Close]), verdict(&[Close, Right])), (Close, tx::CLOZE_CLOSE));
+        assert_eq!((overall(&[Close, Wrong]), verdict(&[Wrong])), (Wrong, tx::CLOZE_WRONG));
+        assert_eq!([Right, Close, Wrong].map(match_name), ["right", "close", "wrong"]);
+        assert_eq!([Right, Close, Wrong].map(match_mark), [" ✓", " ≈", " ✗"]);
     }
 }
