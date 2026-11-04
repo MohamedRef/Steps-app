@@ -315,6 +315,8 @@ pub fn record(
         origin: Origin::Case,
         at_ms,
         took_ms: u32::try_from(at_ms.saturating_sub(started_ms)).unwrap_or(u32::MAX),
+        confidence: None,
+        reason: None,
     };
     match store {
         Some(s) => s.0.borrow_mut().record_logged(event).map(|_| ()),

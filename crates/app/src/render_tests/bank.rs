@@ -570,6 +570,7 @@ fn open_paper(ago_ms: i64) -> crate::bank::Paper {
         started_ms: now - ago_ms,
         shown_ms: now - ago_ms,
         draft: None,
+        logged: None,
     }
 }
 

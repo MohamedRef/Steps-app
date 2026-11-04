@@ -1,0 +1,18 @@
+/* The confidence and error-reason chips (crate::metacog). Classes start
+   with mc-. Logical properties only; the chips wrap on a narrow phone. */
+
+.mc { display: flex; flex-direction: column; gap: var(--sp-2); }
+.mc-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-2); margin: 0; }
+.mc-chips { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.mc-chip {
+  display: inline-flex; align-items: center; gap: var(--sp-1);
+  min-block-size: max(var(--target), var(--tap)); padding-inline: var(--sp-3);
+  border: 1px solid var(--line); border-radius: var(--radius-pill);
+  background: var(--surface); color: var(--text); font-size: var(--fs-sm);
+  cursor: pointer; text-align: start;
+}
+.mc-chip:active { transform: var(--press, scale(0.97)); }
+.mc-chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); font-weight: 600; }
+.mc-chip:disabled { opacity: 0.55; cursor: default; }
+.mc-count { color: var(--muted); font-variant-numeric: tabular-nums; }
+.mc-sure { background: var(--accent-soft); border-color: transparent; color: var(--accent-ink); font-weight: 600; }

@@ -222,6 +222,8 @@ fn one_due() -> String {
     let card = first_of("card");
     crate::store::shared()
         .append_review(ReviewEvent {
+            confidence: None,
+            reason: None,
             item_id: card.id.clone(),
             grade: Grade::Again,
             origin: Origin::Study,

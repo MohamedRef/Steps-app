@@ -137,6 +137,8 @@ mod tests {
                 origin: Origin::Review,
                 at_ms: 1,
                 took_ms: 4000,
+                confidence: None,
+                reason: None,
             })
             .unwrap();
         store
