@@ -51,6 +51,8 @@ pub struct ReviewBackend {
     judgements: BTreeMap<String, Judgement>,
     /// First Aid pages read and the page gate (`store::pages`).
     pages: Pages,
+    /// His notes (`steps_core::note`), re-read with everything else.
+    notes: Vec<steps_core::note::Note>,
     /// Bumps the screens' revision signal after every write.
     on_change: Option<Box<dyn FnMut()>>,
 }
@@ -109,6 +111,7 @@ impl ReviewBackend {
             states: BTreeMap::new(),
             judgements: BTreeMap::new(),
             pages: Pages::default(),
+            notes: Vec::new(),
             on_change: None,
         };
         b.reload();
@@ -123,6 +126,7 @@ impl ReviewBackend {
         self.judgements = self.store.judgements().unwrap_or_default();
         self.pages = Pages::load(self.store);
         self.refresh_own();
+        self.notes = self.store.notes();
         self.replay();
     }
 
@@ -157,6 +161,35 @@ impl ReviewBackend {
     pub fn delete_own(&mut self, id: &str) -> super::Result<()> {
         self.store.delete_own_card(id)?;
         self.refresh_own();
+        self.changed();
+        Ok(())
+    }
+
+    /// Every note he has written.
+    pub fn notes(&self) -> &[steps_core::note::Note] {
+        &self.notes
+    }
+
+    /// The note on `anchor`, if any.
+    pub fn note(&self, anchor: &steps_core::note::Anchor) -> Option<&steps_core::note::Note> {
+        self.notes.iter().find(|n| &n.anchor == anchor)
+    }
+
+    /// Saves what he typed on `anchor`: empty text deletes the note.
+    pub fn save_note(
+        &mut self,
+        anchor: steps_core::note::Anchor,
+        text: &str,
+        page: Option<u32>,
+    ) -> std::result::Result<(), NoteError> {
+        use steps_core::note::{Save, save};
+        let existing = self.note(&anchor).cloned();
+        match save(anchor.clone(), text, page, existing.as_ref(), now_ms()).map_err(NoteError::Check)? {
+            Save::Put(n) => self.store.put_note(&n),
+            Save::Delete => self.store.delete_note(&anchor),
+        }
+        .map_err(NoteError::Store)?;
+        self.notes = self.store.notes();
         self.changed();
         Ok(())
     }
@@ -426,6 +459,13 @@ impl ReviewBackend {
             lectures,
         }
     }
+}
+
+/// Why a note didn't save.
+#[derive(Debug)]
+pub enum NoteError {
+    Check(steps_core::note::Problem),
+    Store(super::StoreError),
 }
 
 /// The review state in context, with a revision the screens subscribe to.
