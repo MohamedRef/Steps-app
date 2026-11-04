@@ -253,8 +253,15 @@ mod tests {
         exact.sort();
         exact.dedup();
         assert_eq!(exact.len(), hb.len());
-        // Only courses with lessons have a list.
-        assert!(idx.keys().all(|k| k == "cvs"), "{:?}", idx.keys().collect::<Vec<_>>());
+        // Only courses with lessons have a list, and only real courses.
+        let lib = Library::get();
+        for course in idx.keys() {
+            assert!(lib.program.courses.iter().any(|c| &c.id == course), "{course}");
+            assert!(
+                lib.lessons.keys().any(|l| steps_core::program::course_of(l) == course),
+                "{course} has a list but no lessons"
+            );
+        }
     }
 
     #[test]

@@ -1,7 +1,6 @@
 //! Anki decks from Steps content: one `.apkg` with a `Steps` deck, a level
-//! per course and a subdeck per lecture (`Steps::Hepatology::01 Liver
-//! Cirrhosis`). Shared by
-//! `steps-tools anki` and the app's «export to Anki» button.
+//! per course and a subdeck per lecture (`Steps::Cardiovascular::01 Embryology`).
+//! Shared by `steps-tools anki` and the app's «export to Anki» button.
 //!
 //! An `.apkg` is a zip of an Anki SQLite collection (`collection.anki2`, the
 //! schema-11 layout every Anki and AnkiDroid imports) and a `media` index.
@@ -10,7 +9,7 @@
 //! imported from either one update in place and keep their review history.
 //!
 //! Note types: Steps Basic (Front, Back, Source, Update, Id) and Steps Cloze
-//! (Text, Extra, Source, Update, Id). MCQ, enumerate, essay, order and calc
+//! (Text, Extra, Source, Update, Id). MCQ, enumerate, essay and order
 //! items become Basic notes; a case becomes one note per step and a table one
 //! note per blank. Tags: `hb::L01`, `topic::<slug>`, `approved` or
 //! `unverified`, `draft` for unmerged lectures, and the item's own tags.
@@ -48,8 +47,8 @@ pub struct Options<'a> {
     pub edits: Option<&'a BTreeMap<String, Item>>,
     /// Lectures not merged yet: tagged `draft`.
     pub drafts: Option<&'a BTreeSet<String>>,
-    /// The MSc's courses: every course gets its own level,
-    /// `Steps::Basics of Research::03 …`. Without it, lectures sit straight
+    /// The program's courses: every course gets its own level,
+    /// `Steps::Cardiovascular::04 Pathology`. Without it, lectures sit straight
     /// under `Steps` with their old names (`Steps::L01 …`).
     pub program: Option<&'a steps_core::program::Program>,
 }
@@ -117,7 +116,7 @@ impl Deck {
     }
 }
 
-/// `Steps::Hepatology::03 Portal hypertension`: course, then the lecture's
+/// `Steps::Cardiovascular::04 Pathology`: course, then the lecture's
 /// number in it and its real title (Mohamed, 2026-10-29), so decks nest the
 /// way the app lists them. Anki keeps cards it already has in their old
 /// deck on import (`Steps::L03 …` from before), so the import note says how
@@ -133,7 +132,7 @@ pub fn deck_name(lec: &Lecture, program: Option<&steps_core::program::Program>) 
     }
 }
 
-/// `Steps::Hepatology`: the lecture's course level.
+/// `Steps::Cardiovascular`: the lecture's course level.
 fn course_deck(lec: &Lecture, program: Option<&steps_core::program::Program>) -> Option<String> {
     let course = program?.course_for(&lec.lecture)?;
     Some(format!("Steps::{}", course.title))
@@ -193,7 +192,7 @@ pub fn build(lectures: &[Lecture], opts: &Options<'_>) -> Deck {
     deck
 }
 
-const ROOT_DESC: &str = "Steps: Alexandria Internal Medicine Postgraduate Lectures, Chapter 1 (Hepato-Biliary). \
+const ROOT_DESC: &str = "Steps: USMLE Step 1, following First Aid for the USMLE Step 1 2026. \
 Re-import a newer steps.apkg to update the cards; your reviews are kept. Cards tagged <b>unverified</b> \
 are not checked yet: trust the book page on the back.";
 
@@ -335,15 +334,6 @@ pub fn notes_for(item: &Item, lec: &Lecture, deck: i64, approved: bool) -> Vec<N
         Body::Order { prompt, steps } => {
             vec![basic(format!("Put in order: {}", esc(prompt)), list(steps), "")]
         }
-        Body::Calc { stem, question, expect, interpret, .. } => vec![basic(
-            format!(
-                "{}<br><br>{}",
-                esc(stem),
-                esc(question.as_deref().unwrap_or("Calculate and interpret."))
-            ),
-            format!("{}<br>{}", esc(expect), esc(interpret)),
-            "",
-        )],
     }
 }
 
@@ -649,8 +639,8 @@ mod tests {
         let opts = Options { approved: Some(&approved), ..Options::default() };
         let deck = build(std::slice::from_ref(&lec), &opts);
         // 7 one-note items + 2 case steps + 3 table blanks.
-        assert_eq!(deck.notes.len(), 12);
-        assert_eq!(deck.card_count(), 14, "the cloze has three blanks");
+        assert_eq!(deck.notes.len(), 11);
+        assert_eq!(deck.card_count(), 13, "the cloze has three blanks");
         assert_eq!(deck.notes[0].tags, ["hb::L01", "topic::definition", "approved"]);
         assert_eq!(
             deck.notes[1].tags,
@@ -676,9 +666,8 @@ mod tests {
         let blank = deck.notes.iter().find(|n| n.fields[4] == "hb.L01.007#r2c1").unwrap();
         assert_eq!(blank.fields[0], "Child-Pugh points: <b>Bilirubin (mg/dL)</b> → <b>1 point</b>?");
         assert_eq!(blank.fields[1], "&lt;2");
-        let calc = deck.notes.last().unwrap();
-        assert_eq!(calc.fields[2], "Liver Cirrhosis · Book p. 14");
-        assert!(calc.fields[3].starts_with("US organ allocation moved to MELD 3.0"));
+        let order = deck.notes.last().unwrap();
+        assert_eq!(order.fields[2], "Liver Cirrhosis · Book p. 16");
         assert_eq!(
             deck.decks.iter().map(|d| d.1.as_str()).collect::<Vec<_>>(),
             ["Steps", "Steps::L01 Liver Cirrhosis"]
@@ -705,7 +694,7 @@ mod tests {
         };
         let deck = build(&[lec], &opts);
         assert_eq!(deck.skipped, 1);
-        assert_eq!(deck.notes.len(), 11);
+        assert_eq!(deck.notes.len(), 10);
         assert_eq!(deck.notes[0].fields[1], "Fibrosis plus nodules.");
         assert!(deck.notes[0].tags.contains(&"unverified".to_string()));
         let order = deck.notes.iter().find(|n| n.fields[4] == "hb.L01.008").unwrap();
@@ -754,7 +743,7 @@ print(notes, cards, orphans, sorted(m["name"] for m in models.values()), names, 
         assert!(out.status.success(), "{}", String::from_utf8_lossy(&out.stderr));
         assert_eq!(
             String::from_utf8_lossy(&out.stdout).trim(),
-            "12 14 0 ['Steps Basic', 'Steps Cloze'] ['Default', 'Steps', 'Steps::L01 Liver Cirrhosis'] hb.L01.001"
+            "11 13 0 ['Steps Basic', 'Steps Cloze'] ['Default', 'Steps', 'Steps::L01 Liver Cirrhosis'] hb.L01.001"
         );
     }
 }
