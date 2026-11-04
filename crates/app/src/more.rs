@@ -30,7 +30,7 @@ pub const ABBREVIATIONS: Tool = Tool {
     icon: icons::abbreviations,
     open: |ui| crate::abbrdict::open(ui, None),
 };
-pub const GO_PAGE: Tool = Tool { label: i18n::gopage::TOOL, icon: icons::book, open: crate::gopage::open };
+pub const GO_PAGE: Tool = Tool { label: i18n::gopage::TOOL, icon: icons::go_page, open: crate::gopage::open };
 pub const NOTES: Tool =
     Tool { label: i18n::notes::LIST_TITLE, icon: icons::notes, open: crate::notes::open_list };
 pub const UWORLD: Tool =

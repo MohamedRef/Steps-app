@@ -277,6 +277,7 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
                         error.set(None);
                     },
                 }
+                DateWords { value: date() }
             }
             fieldset { class: "field weekdays",
                 legend { {tx::DAYS_LABEL} }
@@ -370,6 +371,7 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
                                     error.set(None);
                                 },
                             }
+                            DateWords { value: from.clone() }
                         }
                         label {
                             span { {tx::VACATION_TO} }
@@ -381,6 +383,7 @@ fn Setup(today: Day, settings: PlanSettings, on_done: EventHandler<()>) -> Eleme
                                     error.set(None);
                                 },
                             }
+                            DateWords { value: to.clone() }
                         }
                         button {
                             class: "btn-link",
@@ -927,6 +930,19 @@ pub(crate) fn milestone_label(m: MilestoneKind) -> &'static str {
         MilestoneKind::Checkpoint => tx::CHECKPOINT,
         MilestoneKind::Weekly => tx::WEEKLY,
         MilestoneKind::Free120 => tx::FREE_120,
+    }
+}
+
+/// The picked date in Arabic words under a date field (UX #302): the
+/// field itself shows the device's own order (mm/dd/yyyy on an en-US
+/// browser), so 03/09 could read as 3 September. Nothing while empty.
+#[component]
+pub(crate) fn DateWords(value: String) -> Element {
+    let Some(d) = Day::parse(value.trim()) else {
+        return rsx! {};
+    };
+    rsx! {
+        span { class: "field-date muted small", "aria-live": "polite", {long_date(d)} }
     }
 }
 
