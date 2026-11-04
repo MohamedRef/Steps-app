@@ -911,6 +911,12 @@ pub mod plan {
         format!("أو أجّل الامتحان لـ {date} وتفضل الفترة المركّزة كاملة. ده تخطيط، مش فشل.")
     }
     pub const MOVE_EXAM: &str = "انقل الامتحان للميعاد ده";
+    /// When the last NBME forms aren't there yet, close to dedicated.
+    pub fn not_ready(date: &str) -> String {
+        format!(
+            "آخر تقييمات NBME لسه تحت المستوى اللي عايزه. ممكن تأجّل الامتحان لـ {date} وتدّي نفسك 4 أسابيع كمان. ده تخطيط، مش فشل."
+        )
+    }
     pub const PICK_DAY_FAR: &str = "اختار يوم في خلال 3 سنين من النهارده.";
     pub const DEDICATED: &str = "إنت في الفترة المركّزة: بنك أسئلة ومواضيع ضعيفة وتقييم كل أسبوع. مفيش جديد.";
     pub const EXAM_DONE: &str = "الامتحان عدّى. ربنا يوفقك! لو عندك امتحان تاني، حط ميعاده.";
