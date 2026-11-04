@@ -11,7 +11,7 @@ says go. Releases are built and published by the **Release** workflow
 (§3) come once a night when `main` moved, or when Mohamed runs the workflow by hand.
 
 Steps has its own keys, its own feed and its own package (`app.steps`).
-It never shares a key, a feed or a client with Batna or Kabar.
+It never shares a key, a feed or a client with Batna or any other app.
 
 ## 1. Stages
 

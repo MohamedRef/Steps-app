@@ -120,9 +120,10 @@ width.
 SVG `<text>` has no `<bdi>`, so keep Arabic and English in separate `<text>`
 elements: brackets or numbers around an English term inside an Arabic
 `t-ar` label come out flipped. Lesson text (explain, captions, options) is
-isolated for you, so write it naturally there. Arrows don't flip: between
-Arabic words write `←` (it points along the reading direction), between
-English words `→`.
+isolated for you, so write it naturally there. In lesson text an arrow
+between Arabic words is drawn `←` (along the reading direction) whether you
+write `←` or `→`; inside an English run it stays as written. In SVG labels
+nothing is changed: write `←` between Arabic words, `→` between English.
 
 ## Images
 

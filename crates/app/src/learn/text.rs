@@ -188,6 +188,8 @@ fn space_punctuation(groups: &mut [(bool, Vec<Span>)]) {
 
 /// An arrow between the terms of an Arabic line points the way the line
 /// reads: "cause → effect" is drawn right to left, so its arrow is "←".
+/// Authors write either "→" (as in English) or "←" (as it is seen, the way
+/// docs/LESSONS.md asks); both come out "←", never flipped back (#217).
 /// Arrows inside an English isolate keep their direction.
 fn flip_arrows(groups: &mut [(bool, Vec<Span>)]) {
     for (latin, g) in groups.iter_mut() {
@@ -195,15 +197,13 @@ fn flip_arrows(groups: &mut [(bool, Vec<Span>)]) {
             continue;
         }
         for s in g {
-            if s.text.contains(['→', '←', '⇒', '⇐']) {
+            if s.text.contains(['→', '⇒']) {
                 s.text = s
                     .text
                     .chars()
                     .map(|c| match c {
                         '→' => '←',
-                        '←' => '→',
                         '⇒' => '⇐',
-                        '⇐' => '⇒',
                         c => c,
                     })
                     .collect();
@@ -267,6 +267,9 @@ mod tests {
         // Arrows between terms point the way the line reads.
         let h = html("الـ compensated → الـ first decompensation (بالراحة أو فجأة) → decompensated.");
         assert!(h.contains('←') && !h.contains('→'), "{h}");
+        // Written the way it is seen, it stays that way (#217).
+        let h = html("زيادة الـ preload ← زيادة الـ stroke volume ⇐ ضغط أعلى");
+        assert!(h.contains('←') && h.contains('⇐') && !h.contains('→') && !h.contains('⇒'), "{h}");
         // An English line keeps its own order, full stop and arrows.
         let h = html("- Tamponade → pericardiocentesis, then drainage.");
         assert!(h.contains(r#"<bdi dir="ltr" lang="en">"#) && h.contains("<span>.</span></bdi>"), "{h}");

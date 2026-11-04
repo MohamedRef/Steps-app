@@ -5,7 +5,7 @@
 //!
 //! The same flow on the Mac and on Android (Chrome comes back to the
 //! loopback listener the app holds open).
-// adapted from kabar-app main: crates/app/src/cloud/oauth.rs
+// adapted from batna-app main: crates/app/src/cloud/oauth.rs
 
 use std::time::Duration;
 

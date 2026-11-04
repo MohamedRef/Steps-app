@@ -318,6 +318,9 @@ pub fn allowed_keys(kind: &str) -> Option<&'static [&'static str]> {
     })
 }
 
+/// Item kinds a lesson's `try` step (and the study player) can show.
+pub const PLAYABLE: &[&str] = &["card", "cloze", "enumerate", "essay", "table", "order"];
+
 pub const SHARED_STEP_KEYS: &[&str] = &["kind", "page", "quote"];
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -594,11 +597,11 @@ fn script_runs(text: &str) -> Vec<(String, bool)> {
             // "1.5 ml/kg/h", "3–4 L").
             let mut from = i;
             while from > start
-                && (chars[from - 1].is_ascii_digit() || " .,–-×/~<>≥≤±%([\"'«".contains(chars[from - 1]))
+                && (chars[from - 1].is_ascii_digit() || " .,–-×/~<>≥≤±%([\"'".contains(chars[from - 1]))
             {
                 from -= 1;
             }
-            while from < i && !(chars[from].is_ascii_digit() || "<>≥≤±~([\"'«".contains(chars[from])) {
+            while from < i && !(chars[from].is_ascii_digit() || "<>≥≤±~([\"'".contains(chars[from])) {
                 from += 1;
             }
             for r in &mut resolved[from..i] {
@@ -1179,6 +1182,8 @@ mod tests {
         assert_eq!(latin_runs("Zone 3"), ["Zone 3"]);
         assert_eq!(latin_runs("الشكل (morphology): كده"), ["(morphology)"]);
         assert_eq!(latin_runs("الـ nodules. وبعدين"), ["nodules"]);
+        // Arabic quote marks stay with the Arabic on both sides (#293).
+        assert_eq!(latin_runs("(شكل «beads on a string»)، والـ"), ["beads on a string"]);
         assert_eq!(latin_runs("الـ LVEF ≥ 21 هنا"), ["LVEF ≥ 21"]);
         assert_eq!(latin_runs("لازم يتحققوا (all 5 must be fulfilled). تمام"), ["(all 5 must be fulfilled)"]);
         assert_eq!(latin_runs("Low risk (≤ 2%)"), ["Low risk (≤ 2%)"]);
