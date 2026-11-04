@@ -1,0 +1,966 @@
+schema: steps.content/v1
+lecture: endo.L05
+title: Pharmacology
+book: { chapter: 8, pages: [358, 362] }
+topics:
+  - { id: diabetes-mellitus-therapy, title: Diabetes mellitus therapy }
+  - { id: thionamides, title: Thionamides }
+  - { id: levothyroxine-liothyronine, title: "Levothyroxine, liothyronine" }
+  - { id: hypothalamic-pituitary-drugs, title: Hypothalamic/pituitary drugs }
+  - { id: fludrocortisone, title: Fludrocortisone }
+  - { id: cinacalcet, title: Cinacalcet }
+  - { id: sevelamer, title: Sevelamer }
+  - { id: cation-exchange-resins, title: Cation exchange resins }
+items:
+  # ---------- p358: diabetes mellitus therapy ----------
+  - id: endo.L05.001
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: What does every patient with diabetes mellitus receive, whatever the type?
+    back: Education on diet, exercise, blood glucose monitoring, and complication management.
+    src: { page: 358, quote: "All patients with diabetes mellitus should receive education on diet, exercise, blood glucose monitoring, and complication management." }
+    status: unverified
+  - id: endo.L05.002
+    kind: table
+    topic: diabetes-mellitus-therapy
+    title: Treatment by type of diabetes
+    columns: [Type, Treatment]
+    rows:
+      - [Type 1 DM, Insulin replacement]
+      - [Type 2 DM, "Oral agents (metformin first line), non-insulin injectables, insulin replacement; weight loss particularly helpful"]
+      - [Gestational DM, Insulin replacement if nutrition therapy and exercise alone fail]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 358, quote: "Type 2 DM—oral agents (metformin is first line), non-insulin injectables, insulin replacement;" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.003
+    kind: cloze
+    topic: diabetes-mellitus-therapy
+    text: The first-line oral agent for type 2 diabetes is {{c1::metformin}}.
+    src: { page: 358, quote: "Type 2 DM—oral agents (metformin is first line)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.004
+    kind: enumerate
+    topic: diabetes-mellitus-therapy
+    prompt: Enumerate the situations where regular (short-acting) insulin is preferred (3).
+    points:
+      - DKA (via IV)
+      - Hyperkalemia (with glucose to prevent concomitant hypoglycemia)
+      - Stress hyperglycemia
+    pass: 3
+    hook: "الـ regular هو الوحيد اللي بيتدّى IV، فهو بتاع الطوارئ: DKA و K+ عالي و stress."
+    src: { page: 358, quote: "Regular (short-acting) insulin is preferred for DKA (via IV), hyperkalemia (with glucose to prevent concomitant hypoglycemia), and stress hyperglycemia." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.005
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: Why is glucose given with insulin to treat hyperkalemia?
+    back: To prevent concomitant hypoglycemia; insulin drives K+ into cells (↑ K+ uptake across the cell membrane).
+    src: { page: 358, quote: "hyperkalemia (with glucose to prevent concomitant hypoglycemia)" }
+    status: unverified
+  - id: endo.L05.006
+    kind: table
+    topic: diabetes-mellitus-therapy
+    title: Insulin preparations by duration
+    columns: [Duration, Insulins]
+    rows:
+      - [Rapid acting (no lag), "Lispro, aspart, glulisine"]
+      - [Short acting, Regular]
+      - [Intermediate acting, NPH]
+      - [Long acting, "Detemir, glargine"]
+      - [Very long acting, Degludec]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 358, quote: "Rapid acting (no lag): lispro, aspart, glulisine Short acting: regular Intermediate acting: NPH Long acting: detemir, glargine Very long acting: degludec" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.007
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: What receptor does insulin bind, and what kind of activity does it have?
+    back: The insulin receptor, which has tyrosine kinase activity.
+    src: { page: 358, quote: "Bind insulin receptor (tyrosine kinase activity)." }
+    status: unverified
+  - id: endo.L05.008
+    kind: table
+    topic: diabetes-mellitus-therapy
+    title: Effects of insulin by tissue
+    columns: [Tissue, Effect]
+    rows:
+      - [Liver, ↑ glucose storage as glycogen]
+      - [Muscle, "↑ glycogen, protein synthesis"]
+      - [Fat, ↑ TG storage]
+      - [Cell membrane, ↑ K+ uptake]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 358, quote: "Liver: ↑ glucose storage as glycogen. Muscle: ↑ glycogen, protein synthesis. Fat: ↑ TG storage. Cell membrane: ↑ K+ uptake." }
+    status: unverified
+  - id: endo.L05.009
+    kind: enumerate
+    topic: diabetes-mellitus-therapy
+    prompt: Enumerate the adverse effects of insulin (4).
+    points:
+      - Hypoglycemia
+      - Lipodystrophy
+      - Hypersensitivity reactions (rare)
+      - Weight gain
+    pass: 4
+    src: { page: 358, quote: "Hypoglycemia, lipodystrophy, hypersensitivity reactions (rare), weight gain." }
+    status: unverified
+  - id: endo.L05.010
+    kind: table
+    topic: diabetes-mellitus-therapy
+    title: Where each diabetes drug class acts
+    columns: [Site, Drugs, Action]
+    rows:
+      - ["Adipose tissue, skeletal muscle", "Metformin, pioglitazone", ↑ insulin sensitivity]
+      - [Liver, Metformin, ↓ glucose production]
+      - [Kidney, SGLT2 inhibitors, ↓ glucose reabsorption]
+      - [Intestine, α-Glucosidase inhibitors, ↓ glucose absorption]
+      - [Stomach and pancreas (α cells), "GLP-1 analogs, DPP-4 inhibitors, amylin analogs", "↓ gastric emptying, ↓ glucagon release"]
+      - [Pancreas (β cells), "Sulfonylureas, meglitinides, GLP-1 analogs, DPP-4 inhibitors", ↑ insulin secretion]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 358, quote: "SGLT2 inhibitors glucose reabsorption Kidney α-Glucosidase inhibitors glucose absorption Intestine" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.011
+    kind: mcq
+    topic: diabetes-mellitus-therapy
+    stem: >-
+      A 19-year-old woman with type 1 diabetes comes to the emergency department with vomiting and
+      deep, rapid breathing. Glucose is 520 mg/dL, there is an anion gap metabolic acidosis, and
+      serum ketones are positive. An IV insulin infusion is started. Which preparation is used?
+    options:
+      - Regular insulin
+      - Glargine
+      - NPH
+      - Degludec
+      - Detemir
+    answer: 0
+    why:
+      - "Right. Regular (short-acting) insulin is preferred for DKA, given IV."
+      - "Glargine is long acting, a basal insulin, not an IV infusion for DKA."
+      - "NPH is intermediate acting and not used IV."
+      - "Degludec is very long acting basal insulin."
+      - "Detemir is long acting basal insulin."
+    src: { page: 358, quote: "Regular (short-acting) insulin is preferred for DKA (via IV)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.012
+    kind: mcq
+    topic: diabetes-mellitus-therapy
+    stem: >-
+      A 66-year-old man with chronic kidney disease has a serum potassium of 7.0 mEq/L with peaked
+      T waves. He receives IV calcium gluconate, then IV regular insulin together with dextrose.
+      What is the main reason the dextrose is given?
+    options:
+      - To prevent hypoglycemia while insulin shifts K+ into cells
+      - Glucose itself drives K+ out of the body in urine
+      - Glucose stabilizes the cardiac membrane
+      - Glucose blocks insulin binding to its receptor
+      - Glucose raises aldosterone to excrete K+
+    answer: 0
+    why:
+      - "Right. Insulin ↑ K+ uptake into cells; glucose is given with it to prevent concomitant hypoglycemia."
+      - "Glucose is not a kaliuretic; insulin does the shifting."
+      - "Calcium stabilizes the membrane, not glucose."
+      - "Glucose doesn't block the insulin receptor."
+      - "Insulin with glucose works by shifting K+, not through aldosterone."
+    src: { page: 358, quote: "hyperkalemia (with glucose to prevent concomitant hypoglycemia)" }
+    status: unverified
+  # ---------- p359: insulin sensitizers ----------
+  - id: endo.L05.013
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: What is the mechanism of metformin?
+    back: Inhibits mitochondrial glycerol-3-phosphate dehydrogenase (mGPD) and activates AMP-activated protein kinase (AMPK) → ↓ hepatic gluconeogenesis, ↓ glucagon action; ↑ glycolysis, peripheral glucose uptake (↑ insulin sensitivity), weight loss.
+    src: { page: 359, quote: "Metformin Inhibits mitochondrial glycerol-3-phosphate dehydrogenase (mGPD) and activates AMP- activated protein kinase (AMPK)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.014
+    kind: enumerate
+    topic: diabetes-mellitus-therapy
+    prompt: Enumerate the adverse effects of metformin (3).
+    points:
+      - GI upset
+      - Lactic acidosis (in renal insufficiency, cirrhosis, sepsis, or hypoperfusion)
+      - Vitamin B12 deficiency
+    pass: 3
+    src: { page: 359, quote: "GI upset, lactic acidosis (in patients with renal insufficiency, cirrhosis, sepsis, or hypoperfusion), vitamin B12 deficiency." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.015
+    kind: cloze
+    topic: diabetes-mellitus-therapy
+    text: Metformin causes lactic acidosis in patients with {{c1::renal insufficiency}}, cirrhosis, sepsis, or hypoperfusion.
+    src: { page: 359, quote: "lactic acidosis (in patients with renal insufficiency, cirrhosis, sepsis, or hypoperfusion)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.016
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: What is the mechanism of pioglitazone?
+    back: Activates PPAR-γ (a nuclear receptor) → ↑ insulin sensitivity and levels of adiponectin → regulation of glucose metabolism and fatty acid storage.
+    src: { page: 359, quote: "Pioglitazone Activates PPAR-γ (a nuclear receptor) → ↑ insulin sensitivity and levels of adiponectin" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.017
+    kind: enumerate
+    topic: diabetes-mellitus-therapy
+    prompt: Enumerate the adverse effects of pioglitazone (4).
+    points:
+      - Weight gain
+      - Edema
+      - Heart failure
+      - ↑ risk of fractures
+    pass: 4
+    src: { page: 359, quote: "Weight gain, edema, HF, ↑ risk of fractures." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.018
+    kind: cloze
+    topic: diabetes-mellitus-therapy
+    text: Pioglitazone has a {{c1::delayed onset of action (several weeks)}}.
+    src: { page: 359, quote: "Delayed onset of action (several weeks)." }
+    status: unverified
+  - id: endo.L05.019
+    kind: mcq
+    topic: diabetes-mellitus-therapy
+    stem: >-
+      A 61-year-old man with type 2 diabetes, heart failure with reduced ejection fraction and
+      stage 4 chronic kidney disease has been taking metformin. He is admitted with septic shock.
+      Serum lactate is 9 mmol/L with an anion gap acidosis. Which mechanism of the drug best
+      explains its role in this acidosis?
+    options:
+      - Inhibition of hepatic gluconeogenesis via mitochondrial glycerol-3-phosphate dehydrogenase
+      - Activation of PPAR-γ
+      - Closure of β-cell K+ channels
+      - Inhibition of intestinal α-glucosidases
+      - Blocking of glucose reabsorption in the proximal tubule
+    answer: 0
+    why:
+      - "Right. Metformin blocks mGPD and ↓ hepatic gluconeogenesis, so lactate isn't cleared into glucose; with renal insufficiency, sepsis or hypoperfusion it builds up as lactic acidosis."
+      - "PPAR-γ activation is pioglitazone (edema, HF, fractures)."
+      - "K+ channel closure is sulfonylureas (hypoglycemia)."
+      - "α-glucosidase inhibitors cause GI upset and bloating."
+      - "SGLT2 inhibitors cause glucosuria, UTIs, dehydration."
+    src: { page: 359, quote: "lactic acidosis (in patients with renal insufficiency, cirrhosis, sepsis, or hypoperfusion)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.020
+    kind: mcq
+    topic: diabetes-mellitus-therapy
+    stem: >-
+      A 70-year-old woman with type 2 diabetes was started on a new oral agent 3 months ago. She
+      now has bilateral ankle swelling, worsening dyspnea on exertion and a 4-kg weight gain, and
+      last month she broke her wrist after a minor fall. The drug acts on which target?
+    options:
+      - A nuclear receptor (PPAR-γ)
+      - AMP-activated protein kinase in the liver
+      - ATP-sensitive K+ channels of β cells
+      - Sodium-glucose co-transporter 2
+      - Dipeptidyl peptidase-4
+    answer: 0
+    why:
+      - "Right. Pioglitazone activates PPAR-γ; it causes weight gain, edema, HF and ↑ fractures."
+      - "Metformin (AMPK) causes weight loss, not gain or edema."
+      - "Sulfonylureas cause hypoglycemia and weight gain, but not edema, HF or fractures."
+      - "SGLT2 inhibitors cause weight loss and dehydration."
+      - "DPP-4 inhibitors are weight neutral; they cause respiratory and urinary infections."
+    src: { page: 359, quote: "Weight gain, edema, HF, ↑ risk of fractures." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p359: insulin secretagogues ----------
+  - id: endo.L05.021
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: How do sulfonylureas cause insulin release?
+    back: They close K+ channels in the pancreatic β-cell membrane → cell depolarizes → insulin release via ↑ Ca2+ influx.
+    src: { page: 359, quote: "Close K+ channels in pancreatic B cell membrane → cell depolarizes → insulin release via ↑ Ca2+ influx." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.022
+    kind: table
+    topic: diabetes-mellitus-therapy
+    title: Sulfonylureas by generation
+    columns: [Generation, Drugs]
+    rows:
+      - [1st gen, "Chlorpropamide, tolbutamide"]
+      - [2nd gen, "Glipizide, glyburide"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 359, quote: "Chlorpropamide, tolbutamide (1st gen) Glipizide, glyburide (2nd gen)" }
+    status: unverified
+  - id: endo.L05.023
+    kind: cloze
+    topic: diabetes-mellitus-therapy
+    text: A disulfiram-like reaction occurs with {{c1::first-generation}} sulfonylureas only.
+    src: { page: 359, quote: "Disulfiram-like reaction with first-generation sulfonylureas only (rarely used)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.024
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: What are the main adverse effects of sulfonylureas?
+    back: Hypoglycemia (↑ risk in renal insufficiency) and weight gain; a disulfiram-like reaction with first-generation drugs only.
+    src: { page: 359, quote: "Hypoglycemia (↑ risk in renal insufficiency), weight gain." }
+    status: unverified
+  - id: endo.L05.025
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: Name the meglitinides and their action.
+    back: Nateglinide and repaglinide; they increase glucose-induced insulin secretion.
+    src: { page: 359, quote: "Meglitinides Nateglinide, repaglinide Increase glucose-induced insulin secretion" }
+    status: unverified
+  - id: endo.L05.026
+    kind: mcq
+    topic: diabetes-mellitus-therapy
+    stem: >-
+      A 74-year-old man with type 2 diabetes and worsening chronic kidney disease is found confused
+      and sweaty at home. Fingerstick glucose is 38 mg/dL. He takes glyburide. By what mechanism
+      does this drug lower glucose?
+    options:
+      - Closes K+ channels in the β-cell membrane, depolarizing the cell
+      - Opens K+ channels in the β-cell membrane
+      - Activates GLP-1 receptors coupled to Gs
+      - Inhibits DPP-4
+      - Activates PPAR-γ
+    answer: 0
+    why:
+      - "Right. Sulfonylureas close β-cell K+ channels → depolarization → Ca2+ influx → insulin release; hypoglycemia risk ↑ in renal insufficiency."
+      - "Opening K+ channels would hyperpolarize the cell and stop insulin release."
+      - "GLP-1 agonists act through a Gs receptor and rarely cause hypoglycemia alone."
+      - "DPP-4 inhibitors protect GLP-1 and are glucose dependent."
+      - "PPAR-γ activation is pioglitazone."
+    src: { page: 359, quote: "Hypoglycemia (↑ risk in renal insufficiency), weight gain." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p359: incretins ----------
+  - id: endo.L05.027
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: What is the mechanism of GLP-1 receptor analogs (exenatide, liraglutide, semaglutide)?
+    back: Bind GLP-1 receptors on β cells (Gs-coupled → ↑ cAMP) → ↑ insulin secretion, ↓ glucagon secretion; slow gastric emptying and absorption; ↑ satiety, weight loss.
+    src: { page: 359, quote: "Bind to GLP-1 receptors on β-cells → ↑ insulin secretion, ↓ glucagon secretion." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.028
+    kind: enumerate
+    topic: diabetes-mellitus-therapy
+    prompt: Enumerate the adverse effects of GLP-1 receptor analogs (3).
+    points:
+      - Nausea, vomiting, diarrhea (constipation possible)
+      - ↑ risk of pancreatitis
+      - Gallbladder disease (cholelithiasis/cholecystitis)
+    pass: 3
+    src: { page: 359, quote: "Nausea, vomiting, diarrhea; constipation possible ↑ risk of pancreatitis, gallbladder disease (cholelithiasis/cholecystitis)." }
+    status: unverified
+  - id: endo.L05.029
+    kind: cloze
+    topic: diabetes-mellitus-therapy
+    text: GLP-1 receptor analogs are contraindicated with a personal or family history of {{c1::medullary thyroid carcinoma}} or {{c2::MEN2}}.
+    src: { page: 359, quote: "Contraindications: personal/family history of medullary thyroid carcinoma or MEN2." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.030
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: How do DPP-4 inhibitors (linagliptin, saxagliptin, sitagliptin) work?
+    back: They inhibit DPP-4, the enzyme that deactivates GLP-1 → ↓ glucagon release, ↓ gastric emptying, ↑ glucose-dependent insulin release, ↑ satiety.
+    src: { page: 359, quote: "Inhibit DPP-4 enzyme that deactivates GLP-1 → ↓ glucagon release, ↓ gastric emptying." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.031
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: What are the adverse effects of DPP-4 inhibitors, and their effect on weight?
+    back: Respiratory and urinary infections; they are weight neutral.
+    src: { page: 359, quote: "Respiratory and urinary infections, weight neutral." }
+    status: unverified
+  - id: endo.L05.032
+    kind: mcq
+    topic: diabetes-mellitus-therapy
+    stem: >-
+      A 48-year-old woman with obesity and type 2 diabetes wants a weekly injectable that will help
+      her lose weight. Her father had a thyroidectomy for medullary thyroid carcinoma and was found
+      to carry a RET mutation. Which drug should be avoided?
+    options:
+      - Semaglutide
+      - Insulin glargine
+      - Empagliflozin
+      - Sitagliptin
+      - Metformin
+    answer: 0
+    why:
+      - "Right. GLP-1 analogs are contraindicated with a personal or family history of medullary thyroid carcinoma or MEN2."
+      - "Insulin carries no MTC warning, though it causes weight gain."
+      - "SGLT2 inhibitors cause weight loss and carry no MTC warning."
+      - "DPP-4 inhibitors are oral and weight neutral."
+      - "Metformin is first line and has no MTC warning."
+    src: { page: 359, quote: "Contraindications: personal/family history of medullary thyroid carcinoma or MEN2." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.033
+    kind: mcq
+    topic: diabetes-mellitus-therapy
+    stem: >-
+      A 55-year-old man with type 2 diabetes started liraglutide 2 months ago. He now has severe
+      epigastric pain radiating to the back with vomiting. Lipase is 6 times the upper limit of
+      normal. Through which receptor signaling does this drug raise insulin secretion?
+    options:
+      - Gs-coupled receptor that ↑ cAMP in β cells
+      - Receptor tyrosine kinase
+      - Nuclear receptor PPAR-γ
+      - ATP-sensitive K+ channel closure
+      - Calcium-sensing receptor
+    answer: 0
+    why:
+      - "Right. The GLP-1 receptor is Gs-coupled → ↑ cAMP in β cells; GLP-1 analogs ↑ the risk of pancreatitis."
+      - "Tyrosine kinase signaling is the insulin receptor itself."
+      - "PPAR-γ is the target of pioglitazone."
+      - "K+ channel closure is sulfonylureas and meglitinides."
+      - "The CaSR is the target of cinacalcet."
+    src: { page: 359, quote: "Gs-coupled receptor → ↑ cAMP in β-cells." }
+    status: unverified
+  # ---------- p359: glucose absorption ----------
+  - id: endo.L05.034
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: What is the mechanism of SGLT2 inhibitors (canagliflozin, dapagliflozin, empagliflozin)?
+    back: Block reabsorption of glucose in the proximal convoluted tubule (glucosuria); they also cause natriuresis and osmotic diuresis → ↓ blood glucose, ↓ serum Na+, ↓ ECF volume, ↓ blood pressure.
+    src: { page: 359, quote: "Block reabsorption of glucose in proximal convoluted tubule (glucosuria). Also cause natriuresis, osmotic diuresis" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.035
+    kind: enumerate
+    topic: diabetes-mellitus-therapy
+    prompt: Enumerate the adverse effects of SGLT2 inhibitors (3).
+    points:
+      - Glucosuria (UTIs, vulvovaginal candidiasis)
+      - Dehydration (orthostatic hypotension)
+      - Weight loss
+    pass: 3
+    hook: "الكتاب: Glucose flows in urine. السكر في البول ← بكتيريا وفطريات، وماية وملح خارجين معاه."
+    src: { page: 359, quote: "Glucosuria (UTIs, vulvovaginal candidiasis), dehydration (orthostatic hypotension), weight loss. Glucose flows in urine." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.036
+    kind: cloze
+    topic: diabetes-mellitus-therapy
+    text: SGLT2 inhibitors are used with caution in renal insufficiency because efficacy {{c1::falls as GFR falls}}.
+    src: { page: 359, quote: "Use with caution in renal insufficiency (↓ efficacy with ↓ GFR)." }
+    status: unverified
+  - id: endo.L05.037
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: What is the mechanism of α-glucosidase inhibitors (acarbose, miglitol)?
+    back: Inhibit intestinal brush-border α-glucosidases → delayed carbohydrate hydrolysis and glucose absorption → ↓ postprandial hyperglycemia.
+    src: { page: 359, quote: "Inhibit intestinal brush-border α-glucosidases → delayed carbohydrate hydrolysis and glucose absorption → ↓ postprandial hyperglycemia." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.038
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: What are the adverse effects of α-glucosidase inhibitors, and when are they avoided?
+    back: GI upset and bloating; not recommended in renal insufficiency.
+    src: { page: 359, quote: "GI upset, bloating. Not recommended in renal insufficiency." }
+    status: unverified
+  - id: endo.L05.039
+    kind: card
+    topic: diabetes-mellitus-therapy
+    front: What does pramlintide (an amylin analog) do, and what are its adverse effects?
+    back: ↓ glucagon release, ↓ gastric emptying, ↑ satiety; adverse effects are hypoglycemia and nausea.
+    src: { page: 359, quote: "Pramlintide ↓ glucagon release, ↓ gastric emptying, ↑ satiety. Hypoglycemia, nausea." }
+    status: unverified
+  - id: endo.L05.040
+    kind: mcq
+    topic: diabetes-mellitus-therapy
+    stem: >-
+      A 58-year-old woman with type 2 diabetes and heart failure was started on a new oral agent.
+      Two weeks later she has dysuria and thick white vaginal discharge, and she feels light-headed
+      when she stands. Urinalysis shows marked glucosuria with a serum glucose of 140 mg/dL. Where
+      does this drug act?
+    options:
+      - Proximal convoluted tubule
+      - Intestinal brush border
+      - Pancreatic β-cell membrane
+      - Hepatocyte mitochondria
+      - Adipocyte nucleus
+    answer: 0
+    why:
+      - "Right. SGLT2 inhibitors block glucose reabsorption in the PCT: glucosuria → UTIs, vulvovaginal candidiasis, and osmotic diuresis → orthostatic hypotension."
+      - "Brush-border α-glucosidase inhibitors cause GI upset and bloating, not glucosuria."
+      - "β-cell drugs (sulfonylureas) cause hypoglycemia."
+      - "Metformin acts on hepatic mitochondrial mGPD; GI upset and lactic acidosis."
+      - "Pioglitazone acts on the nuclear receptor PPAR-γ; edema and weight gain."
+    src: { page: 359, quote: "Glucosuria (UTIs, vulvovaginal candidiasis), dehydration (orthostatic hypotension), weight loss." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.041
+    kind: mcq
+    topic: diabetes-mellitus-therapy
+    stem: >-
+      A 63-year-old man with type 2 diabetes has high glucose readings only after meals. He starts
+      acarbose. Two weeks later he complains of bloating and flatulence. What is the drug's
+      mechanism?
+    options:
+      - Inhibits brush-border α-glucosidases, delaying carbohydrate hydrolysis
+      - Blocks glucose reabsorption in the proximal tubule
+      - Slows gastric emptying through GLP-1 receptors
+      - Inhibits pancreatic lipase
+      - Activates AMP-activated protein kinase
+    answer: 0
+    why:
+      - "Right. α-glucosidase inhibitors delay carbohydrate hydrolysis and absorption → ↓ postprandial hyperglycemia; GI upset and bloating."
+      - "That's SGLT2 inhibitors (glucosuria)."
+      - "That's GLP-1 analogs (nausea, vomiting, diarrhea)."
+      - "Lipase inhibition is orlistat, not a diabetes drug in this table."
+      - "That's metformin."
+    src: { page: 359, quote: "Inhibit intestinal brush-border α-glucosidases → delayed carbohydrate hydrolysis and glucose absorption" }
+    status: unverified
+  - id: endo.L05.042
+    kind: table
+    topic: diabetes-mellitus-therapy
+    title: Effect of diabetes drugs on weight
+    columns: [Effect, Drugs]
+    rows:
+      - [Weight gain, "Insulin, sulfonylureas, pioglitazone"]
+      - [Weight loss, "Metformin, GLP-1 analogs, SGLT2 inhibitors"]
+      - [Weight neutral, DPP-4 inhibitors]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 359, quote: "Respiratory and urinary infections, weight neutral." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p360: thionamides ----------
+  - id: endo.L05.043
+    kind: card
+    topic: thionamides
+    front: What is the mechanism of thionamides (propylthiouracil, methimazole)?
+    back: Block thyroid peroxidase, inhibiting the oxidation of iodide and the organification and coupling of iodine → inhibition of thyroid hormone synthesis.
+    src: { page: 360, quote: "Block thyroid peroxidase, inhibiting the oxidation of iodide as well as the organification and coupling of iodine → inhibition of thyroid hormone synthesis." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.044
+    kind: cloze
+    topic: thionamides
+    text: PTU, but not methimazole, also blocks {{c1::5′-deiodinase}} → ↓ peripheral conversion of T4 to T3.
+    src: { page: 360, quote: "PTU also blocks 5′-deiodinase → ↓ Peripheral conversion of T4 to T3." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.045
+    kind: table
+    topic: thionamides
+    title: Thionamides in pregnancy
+    columns: [Trimester, Drug, Reason]
+    rows:
+      - [First, PTU, Methimazole teratogenicity]
+      - [Second and third, Methimazole, Risk of PTU-induced hepatotoxicity]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 360, quote: "PTU used in Primary (first) trimester of pregnancy (due to methimazole teratogenicity); methimazole used in second and third trimesters of pregnancy (due to risk of PTU-induced hepatotoxicity)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.046
+    kind: card
+    topic: thionamides
+    front: Are thionamides used to treat Graves ophthalmopathy?
+    back: No. Graves ophthalmopathy is treated with glucocorticoids.
+    src: { page: 360, quote: "Not used to treat Graves ophthalmopathy (treated with glucocorticoids)." }
+    status: unverified
+  - id: endo.L05.047
+    kind: enumerate
+    topic: thionamides
+    prompt: Enumerate the adverse effects of thionamides (4 shared, plus 1 for each drug).
+    points:
+      - Skin rash
+      - Agranulocytosis (rare)
+      - Aplastic anemia
+      - Hepatotoxicity
+      - "PTU: ANCA-positive vasculitis"
+      - "Methimazole: possible teratogen (aplasia cutis)"
+    pass: 5
+    src: { page: 360, quote: "Skin rash, agranulocytosis (rare), aplastic anemia, hepatotoxicity. PTU use has been associated with ANCA-positive vasculitis. Methimazole is a possible teratogen (can cause aplasia cutis)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.048
+    kind: mcq
+    topic: thionamides
+    stem: >-
+      A 29-year-old woman with Graves disease started methimazole 5 weeks ago. She now has a fever
+      of 39.2°C and a sore throat with oral ulcers. Which laboratory finding is most likely?
+    options:
+      - Absolute neutrophil count < 500/μL
+      - Positive ANCA
+      - Elevated serum lipase
+      - Hyperkalemia
+      - Elevated TSH
+    answer: 0
+    why:
+      - "Right. Agranulocytosis is a rare but serious thionamide adverse effect; fever and sore throat need a neutrophil count."
+      - "ANCA-positive vasculitis is linked to PTU, not to a sore throat on methimazole."
+      - "Pancreatitis is a GLP-1 analog adverse effect."
+      - "Hyperkalemia isn't a thionamide effect."
+      - "TSH rises with overtreatment over weeks to months; it doesn't explain fever and ulcers."
+    src: { page: 360, quote: "Skin rash, agranulocytosis (rare), aplastic anemia, hepatotoxicity." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.049
+    kind: mcq
+    topic: thionamides
+    stem: >-
+      A 31-year-old woman at 8 weeks' gestation has heat intolerance, tremor and weight loss. TSH is
+      suppressed, free T4 is high, and TSH receptor antibodies are positive. Which drug is
+      preferred now, and why?
+    options:
+      - Propylthiouracil, because methimazole is teratogenic in the first trimester
+      - Methimazole, because PTU causes aplasia cutis
+      - Methimazole, because PTU is hepatotoxic in the first trimester only
+      - Radioactive iodine, because it acts fastest
+      - Levothyroxine, to suppress TSH
+    answer: 0
+    why:
+      - "Right. PTU in the Primary (first) trimester because of methimazole teratogenicity; switch to methimazole for the second and third."
+      - "Aplasia cutis is from methimazole, not PTU."
+      - "PTU hepatotoxicity is why methimazole is used later in pregnancy, not why it is used now."
+      - "Radioactive iodine is not given in pregnancy."
+      - "Levothyroxine treats hypothyroidism and would worsen her thyrotoxicosis."
+    src: { page: 360, quote: "PTU used in Primary (first) trimester of pregnancy (due to methimazole teratogenicity)" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p360: levothyroxine, liothyronine ----------
+  - id: endo.L05.050
+    kind: card
+    topic: levothyroxine-liothyronine
+    front: Which hormone does each replace, levothyroxine or liothyronine (with the book's hook)?
+    back: Levothyroxine replaces T4 (levo = 4 letters); liothyronine replaces T3 (lio = 3 letters).
+    src: { page: 360, quote: "Hormone replacement for T4 (levothyroxine; levo = 4 letters) or T3 (liothyronine; lio = 3 letters)." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.051
+    kind: enumerate
+    topic: levothyroxine-liothyronine
+    prompt: Enumerate what lowers levothyroxine absorption (3).
+    points:
+      - Antacids
+      - Bile acid resins
+      - Ferrous sulfate
+    pass: 3
+    src: { page: 360, quote: "Avoid levothyroxine with antacids, bile acid resins, or ferrous sulfate (↓ absorption)." }
+    status: unverified
+  - id: endo.L05.052
+    kind: card
+    topic: levothyroxine-liothyronine
+    front: What are the clinical uses and adverse effects of levothyroxine/liothyronine?
+    back: "Uses: hypothyroidism, myxedema (may be misused for weight loss). Adverse effects: tachycardia, heat intolerance, tremors, arrhythmias."
+    src: { page: 360, quote: "Tachycardia, heat intolerance, tremors, arrhythmias." }
+    status: unverified
+  - id: endo.L05.053
+    kind: card
+    topic: levothyroxine-liothyronine
+    front: How is exogenous hyperthyroidism told apart from endogenous hyperthyroidism?
+    back: By a combination of TSH receptor antibodies, radioactive iodine uptake, and/or thyroid blood flow on ultrasound.
+    src: { page: 360, quote: "Distinguish exogenous hyperthyroidism from endogenous hyperthyroidism by using a combination of TSH receptor antibodies, radioactive iodine uptake, and/or measurement of thyroid blood flow on ultrasound." }
+    status: unverified
+  - id: endo.L05.054
+    kind: mcq
+    topic: levothyroxine-liothyronine
+    stem: >-
+      A 52-year-old woman on a stable levothyroxine dose for Hashimoto thyroiditis now has fatigue
+      and weight gain, and her TSH has risen from 2 to 11 mU/L. She was recently diagnosed with
+      iron deficiency anemia and started a new tablet each morning with her levothyroxine. What
+      explains the rise in TSH?
+    options:
+      - Ferrous sulfate ↓ levothyroxine absorption
+      - Iron induces hepatic metabolism of T4
+      - Iron blocks 5′-deiodinase
+      - Anemia stimulates TSH secretion directly
+      - Iron causes thyroid peroxidase antibodies to rise
+    answer: 0
+    why:
+      - "Right. Avoid levothyroxine with antacids, bile acid resins, or ferrous sulfate: they ↓ its absorption."
+      - "The problem is absorption in the gut, not liver metabolism."
+      - "5′-deiodinase is blocked by PTU, propranolol and glucocorticoids, not iron."
+      - "Anemia does not raise TSH directly."
+      - "Iron has no effect on TPO antibodies."
+    src: { page: 360, quote: "Avoid levothyroxine with antacids, bile acid resins, or ferrous sulfate (↓ absorption)." }
+    status: unverified
+  # ---------- p360: hypothalamic/pituitary drugs ----------
+  - id: endo.L05.055
+    kind: table
+    topic: hypothalamic-pituitary-drugs
+    title: Hypothalamic/pituitary drugs
+    columns: [Drug, Class, Clinical use]
+    rows:
+      - ["Conivaptan, tolvaptan", ADH antagonists, SIADH (block ADH at V2 receptor)]
+      - [Demeclocycline, "ADH antagonist, a tetracycline", SIADH (interferes with ADH signaling)]
+      - [Desmopressin, ADH analog, "Central DI, von Willebrand disease, sleep enuresis, hemophilia A"]
+      - [GH, Hormone, "GH deficiency, Turner syndrome"]
+      - [Oxytocin, Hormone, "Induction of labor (uterine contractions), control of uterine hemorrhage"]
+      - [Octreotide, Somatostatin analog, "Acromegaly, carcinoid syndrome, gastrinoma, glucagonoma, esophageal varices"]
+    blanks: [[0, 2], [1, 1], [2, 2], [3, 2], [4, 2], [5, 2]]
+    src: { page: 360, quote: "Conivaptan, tolvaptan ADH antagonists SIADH (block action of ADH at V2-receptor)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.056
+    kind: enumerate
+    topic: hypothalamic-pituitary-drugs
+    prompt: Enumerate the clinical uses of desmopressin (4).
+    points:
+      - Central DI
+      - von Willebrand disease
+      - Sleep enuresis
+      - Hemophilia A
+    pass: 4
+    src: { page: 360, quote: "Central DI, von Willebrand disease, sleep enuresis, hemophilia A" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.057
+    kind: enumerate
+    topic: hypothalamic-pituitary-drugs
+    prompt: Enumerate the clinical uses of octreotide (5).
+    points:
+      - Acromegaly
+      - Carcinoid syndrome
+      - Gastrinoma
+      - Glucagonoma
+      - Esophageal varices
+    pass: 5
+    src: { page: 360, quote: "Acromegaly, carcinoid syndrome, gastrinoma, glucagonoma, esophageal varices" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.058
+    kind: cloze
+    topic: hypothalamic-pituitary-drugs
+    text: Conivaptan and tolvaptan treat SIADH by blocking ADH at the {{c1::V2}} receptor; {{c2::demeclocycline}}, a tetracycline, interferes with ADH signaling.
+    src: { page: 360, quote: "SIADH (block action of ADH at V2-receptor) Demeclocycline ADH antagonist, a tetracycline SIADH (interferes with ADH signaling)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.059
+    kind: card
+    topic: hypothalamic-pituitary-drugs
+    front: What are the clinical uses of GH and of oxytocin?
+    back: "GH: GH deficiency, Turner syndrome. Oxytocin: induction of labor (stimulates uterine contractions), control of uterine hemorrhage."
+    src: { page: 360, quote: "GH GH deficiency, Turner syndrome Oxytocin Induction of labor (stimulates uterine contractions), control uterine hemorrhage" }
+    status: unverified
+  - id: endo.L05.060
+    kind: mcq
+    topic: hypothalamic-pituitary-drugs
+    stem: >-
+      A 64-year-old man with small cell lung cancer has confusion. Serum Na+ is 118 mEq/L, serum
+      osmolality is low, urine osmolality is 600 mOsm/kg, and he is euvolemic. Fluid restriction
+      fails. A drug is started that acts at the same receptor ADH uses in the collecting duct. Which
+      drug was given?
+    options:
+      - Tolvaptan
+      - Desmopressin
+      - Demeclocycline
+      - Octreotide
+      - Fludrocortisone
+    answer: 0
+    why:
+      - "Right. Conivaptan and tolvaptan are ADH antagonists that block ADH at the V2 receptor."
+      - "Desmopressin is an ADH analog and would worsen SIADH."
+      - "Demeclocycline treats SIADH by interfering with ADH signaling, not by blocking the receptor."
+      - "Octreotide is a somatostatin analog."
+      - "Fludrocortisone is a mineralocorticoid; it doesn't block V2."
+    src: { page: 360, quote: "Conivaptan, tolvaptan ADH antagonists SIADH (block action of ADH at V2-receptor)" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.061
+    kind: mcq
+    topic: hypothalamic-pituitary-drugs
+    stem: >-
+      A 22-year-old woman has heavy menstrual bleeding and bleeding gums since childhood. Platelet
+      count and PT are normal; bleeding time is prolonged and PTT is mildly prolonged. Before a
+      dental extraction she is given a drug that also treats central diabetes insipidus. What is
+      the drug?
+    options:
+      - Desmopressin
+      - Tolvaptan
+      - Oxytocin
+      - Octreotide
+      - Demeclocycline
+    answer: 0
+    why:
+      - "Right. Desmopressin, an ADH analog, is used for central DI, von Willebrand disease, sleep enuresis and hemophilia A."
+      - "Tolvaptan blocks ADH; it's for SIADH."
+      - "Oxytocin is for labor and uterine hemorrhage."
+      - "Octreotide is a somatostatin analog."
+      - "Demeclocycline blocks ADH signaling; it's for SIADH."
+    src: { page: 360, quote: "Desmopressin ADH analog Central DI, von Willebrand disease, sleep enuresis, hemophilia A" }
+    status: unverified
+  - id: endo.L05.062
+    kind: mcq
+    topic: hypothalamic-pituitary-drugs
+    stem: >-
+      A 57-year-old man with a liver metastasis from a small bowel tumor has episodes of facial
+      flushing, watery diarrhea and wheezing. Urine 5-HIAA is high. Which drug controls his
+      symptoms, and to which hormone is it an analog?
+    options:
+      - Octreotide, a somatostatin analog
+      - Desmopressin, an ADH analog
+      - Tolvaptan, an ADH antagonist
+      - Pramlintide, an amylin analog
+      - Exenatide, a GLP-1 analog
+    answer: 0
+    why:
+      - "Right. Octreotide is a somatostatin analog used in acromegaly, carcinoid syndrome, gastrinoma, glucagonoma and esophageal varices."
+      - "Desmopressin is for central DI and bleeding disorders."
+      - "Tolvaptan is for SIADH."
+      - "Pramlintide is a diabetes drug."
+      - "Exenatide is a diabetes drug."
+    src: { page: 360, quote: "Octreotide Somatostatin analog Acromegaly, carcinoid syndrome, gastrinoma, glucagonoma, esophageal varices" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p360: fludrocortisone ----------
+  - id: endo.L05.063
+    kind: card
+    topic: fludrocortisone
+    front: What is fludrocortisone, and what is it used for?
+    back: A synthetic analog of aldosterone with glucocorticoid effects ("Fluidrocortisone retains fluid"); used for mineralocorticoid replacement in 1° adrenal insufficiency.
+    src: { page: 360, quote: "Synthetic analog of aldosterone with glucocorticoid effects. Fluidrocortisone retains fluid." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.064
+    kind: card
+    topic: fludrocortisone
+    front: What are the adverse effects of fludrocortisone?
+    back: Similar to glucocorticoids; also edema, exacerbation of heart failure, hyperpigmentation.
+    src: { page: 360, quote: "Similar to glucocorticoids; also edema, exacerbation of heart failure, hyperpigmentation." }
+    status: unverified
+  - id: endo.L05.065
+    kind: mcq
+    topic: fludrocortisone
+    stem: >-
+      A 34-year-old woman with autoimmune adrenalitis takes hydrocortisone but still has salt
+      craving and orthostatic dizziness. Serum K+ is 5.6 mEq/L and plasma renin is high. A second
+      drug is added. Which adverse effect should be watched for?
+    options:
+      - Edema and worsening heart failure
+      - Hypoglycemia
+      - Agranulocytosis
+      - Hypocalcemia
+      - Glucosuria
+    answer: 0
+    why:
+      - "Right. Fludrocortisone, an aldosterone analog for 1° adrenal insufficiency, retains fluid: edema and exacerbation of heart failure."
+      - "Hypoglycemia is from insulin and sulfonylureas."
+      - "Agranulocytosis is a thionamide effect."
+      - "Hypocalcemia is the adverse effect of cinacalcet."
+      - "Glucosuria is from SGLT2 inhibitors."
+    src: { page: 360, quote: "Similar to glucocorticoids; also edema, exacerbation of heart failure, hyperpigmentation." }
+    status: unverified
+  # ---------- p361: cinacalcet, sevelamer, resins ----------
+  - id: endo.L05.066
+    kind: card
+    topic: cinacalcet
+    front: What is the mechanism of cinacalcet?
+    back: Sensitizes the calcium-sensing receptor (CaSR) in the parathyroid gland to circulating Ca2+ → ↓ PTH.
+    src: { page: 361, quote: "Sensitizes calcium-sensing receptor (CaSR) in parathyroid gland to circulating Ca2+ → ↓ PTH." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.067
+    kind: enumerate
+    topic: cinacalcet
+    prompt: Enumerate the clinical uses of cinacalcet (3).
+    points:
+      - 2° hyperparathyroidism in CKD on hemodialysis
+      - Hypercalcemia in 1° hyperparathyroidism (if parathyroidectomy fails)
+      - Parathyroid carcinoma
+    pass: 3
+    src: { page: 361, quote: "2° hyperparathyroidism in patients with CKD receiving hemodialysis, hypercalcemia in 1° hyperparathyroidism (if parathyroidectomy fails), or in parathyroid carcinoma." }
+    status: unverified
+  - id: endo.L05.068
+    kind: cloze
+    topic: cinacalcet
+    text: The adverse effect of cinacalcet is {{c1::hypocalcemia}}.
+    src: { page: 361, quote: "Hypocalcemia." }
+    status: unverified
+  - id: endo.L05.069
+    kind: mcq
+    topic: cinacalcet
+    stem: >-
+      A 60-year-old man on hemodialysis for end-stage kidney disease has bone pain. PTH is 900 pg/mL
+      and calcium is upper-normal. A drug is started that lowers PTH by acting on the parathyroid
+      gland itself. Two weeks later he has perioral tingling and carpopedal spasm. How does the
+      drug work?
+    options:
+      - Sensitizes the calcium-sensing receptor to circulating Ca2+
+      - Binds phosphate in the gut
+      - Activates the vitamin D receptor in the gut
+      - Blocks PTH at its receptor in bone
+      - Binds K+ in the colon
+    answer: 0
+    why:
+      - "Right. Cinacalcet sensitizes the CaSR to Ca2+ → ↓ PTH; its adverse effect is hypocalcemia."
+      - "That's sevelamer (adverse effects: hypophosphatemia, GI upset)."
+      - "Vitamin D receptor agonists (calcitriol) act mainly on gut and bone and raise calcium; they are not this drug."
+      - "No drug in this section blocks PTH receptors."
+      - "That's cation exchange resins (hyperkalemia)."
+    src: { page: 361, quote: "Sensitizes calcium-sensing receptor (CaSR) in parathyroid gland to circulating Ca2+ → ↓ PTH." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.070
+    kind: card
+    topic: sevelamer
+    front: What is sevelamer, what is it used for, and what are its adverse effects?
+    back: A nonabsorbable phosphate binder that prevents phosphate absorption from the GI tract; used for hyperphosphatemia in CKD; adverse effects are hypophosphatemia and GI upset.
+    src: { page: 361, quote: "Nonabsorbable phosphate binder that prevents phosphate absorption from the GI tract." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.071
+    kind: mcq
+    topic: sevelamer
+    stem: >-
+      A 47-year-old woman on hemodialysis has a serum phosphate of 7.8 mg/dL and pruritus. She is
+      given a drug to take with every meal. It is not absorbed and contains no calcium or aluminum.
+      Which adverse effect is expected if it is overdone?
+    options:
+      - Hypophosphatemia
+      - Hypocalcemia
+      - Hyperkalemia
+      - Lactic acidosis
+      - Hypoglycemia
+    answer: 0
+    why:
+      - "Right. Sevelamer, a nonabsorbable phosphate binder for hyperphosphatemia in CKD, can cause hypophosphatemia and GI upset."
+      - "Hypocalcemia is the adverse effect of cinacalcet."
+      - "Hyperkalemia is not caused by sevelamer."
+      - "Lactic acidosis is from metformin in renal insufficiency."
+      - "Hypoglycemia is from insulin and sulfonylureas."
+    src: { page: 361, quote: "Hyperphosphatemia in CKD." }
+    status: unverified
+  - id: endo.L05.072
+    kind: card
+    topic: cation-exchange-resins
+    front: How do cation exchange resins (patiromer, sodium polystyrene sulfonate, zirconium cyclosilicate) work?
+    back: They bind K+ in the colon in exchange for other cations (eg, Na+, Ca2+) → K+ excreted in feces. Used for hyperkalemia.
+    src: { page: 361, quote: "Bind K+ in colon in exchange for other cations (eg, Na+ , Ca2+ ) → K+ excreted in feces." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L05.073
+    kind: cloze
+    topic: cation-exchange-resins
+    text: The adverse effects of cation exchange resins are {{c1::hypokalemia}} and GI upset.
+    src: { page: 361, quote: "Hypokalemia, GI upset." }
+    status: unverified
+  - id: endo.L05.074
+    kind: mcq
+    topic: cation-exchange-resins
+    stem: >-
+      A 70-year-old man with CKD stage 4 and heart failure takes lisinopril and spironolactone. His
+      serum K+ is persistently 6.0 mEq/L with a normal ECG. He starts patiromer. Where and how does
+      it remove potassium?
+    options:
+      - Binds K+ in the colon in exchange for other cations; K+ leaves in feces
+      - Shifts K+ into cells by stimulating Na+/K+-ATPase
+      - Blocks aldosterone at the collecting duct
+      - ↑ K+ secretion in the distal nephron
+      - Binds phosphate in the small intestine
+    answer: 0
+    why:
+      - "Right. Cation exchange resins bind K+ in the colon for other cations (Na+, Ca2+) → K+ excreted in feces; adverse effects hypokalemia and GI upset."
+      - "Shifting into cells is insulin or β2 agonists, not resins."
+      - "Spironolactone blocks aldosterone and is part of his problem."
+      - "Loop and thiazide diuretics ↑ distal K+ loss; resins work in the gut."
+      - "That is sevelamer."
+    src: { page: 361, quote: "Bind K+ in colon in exchange for other cations (eg, Na+ , Ca2+ ) → K+ excreted in feces." }
+    status: unverified

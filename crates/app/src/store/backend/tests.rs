@@ -320,3 +320,32 @@ fn pages_read_gate_todays_new_items_and_survive_a_reload() {
     assert_eq!(b.overview(lib, T0).unseen, 0);
     assert_eq!(store.setting::<bool>(pages::GATE_KEY), Some(true));
 }
+
+#[test]
+fn notes_save_edit_and_clear_and_survive_a_content_change() {
+    use steps_core::note::{Anchor, MAX_TEXT, Problem};
+    let mut b = backend();
+    let on = Anchor::Item("hb.L01.001".into());
+    b.save_note(on.clone(), "  first  ", Some(16)).unwrap();
+    let first = b.note(&on).unwrap().clone();
+    assert_eq!((first.text.as_str(), first.page), ("first", Some(16)));
+    b.save_note(on.clone(), "second", None).unwrap();
+    assert_eq!(b.note(&on).unwrap().text, "second");
+    assert_eq!(b.note(&on).unwrap().created_ms, first.created_ms);
+    // Too long: refused, and the saved note is untouched.
+    assert!(matches!(
+        b.save_note(on.clone(), &"x".repeat(MAX_TEXT + 1), None),
+        Err(NoteError::Check(Problem::TooLong))
+    ));
+    assert_eq!(b.note(&on).unwrap().text, "second");
+    // A content update rebuilds the catalog; the note keys by id, not text.
+    if let Some(e) = b.catalog.get_mut("hb.L01.001") {
+        e.item.src.page = 99;
+    }
+    b.reload();
+    assert_eq!(b.note(&on).unwrap().text, "second");
+    // Empty text clears it.
+    b.save_note(on.clone(), "  ", None).unwrap();
+    assert!(b.note(&on).is_none());
+    assert!(b.notes().is_empty());
+}
