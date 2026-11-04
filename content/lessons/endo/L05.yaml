@@ -1,0 +1,300 @@
+schema: steps.lesson/v1
+lecture: endo.L05
+lessons:
+  - id: endo.L05.lesson1
+    title: "أدوية السكر: كل دوا بيشتغل فين، وبيأذي إزاي"
+    hook: "لو عرفت الدوا بيشتغل في أنهي عضو، هتعرف أعراضه الجانبية من غير ما تحفظها"
+    minutes: 10
+    pages: [358, 359]
+    topics: [diabetes-mellitus-therapy]
+    goals:
+      - "تختار العلاج حسب نوع السكر، وتعرف إمتى الـ regular insulin"
+      - "ترتّب أنواع الـ insulin من الأسرع للأطول"
+      - "تربط كل دوا بمكانه في الجسم وآليته"
+      - "تطلّع العرض الجانبي المميز لكل دوا من آليته"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "مين ياخد إيه"
+        text: |-
+          كل مريض سكر بياخد توعية: أكل ورياضة وقياس سكر ومتابعة المضاعفات. وبعدين حسب النوع:
+          - **Type 1**: ==insulin== وبس، لأن الـ β cells خلصت.
+          - **Type 2**: أدوية بالبق والـ ==metformin أول اختيار==، وبعدين injectables غير الـ insulin، وبعدين insulin. ونزول الوزن بيفرق جامد.
+          - **Gestational**: insulin لو الأكل والرياضة ما نفعوش.
+        page: 358
+        quote: "Type 1 DM—insulin replacement Type 2 DM—oral agents (metformin is first line), non-insulin injectables, insulin replacement;"
+      - kind: explain
+        title: "الـ regular insulin: بتاع الطوارئ"
+        text: |-
+          الـ insulin بيركب على receptor عنده **tyrosine kinase activity**، وبيخزّن: glycogen في الكبد والعضلات، و TG في الدهون، وبروتين في العضلات. ومهم: بيدخّل ==K+ جوه الخلايا==.
+
+          عشان كده الـ **regular** (اللي ينفع IV) هو المفضل في 3 حالات: ==DKA== و **hyperkalemia** (ومعاه glucose عشان ما يعملش hypoglycemia) و **stress hyperglycemia**.
+        page: 358
+        quote: "Regular (short-acting) insulin is preferred for DKA (via IV), hyperkalemia (with glucose to prevent concomitant hypoglycemia), and stress hyperglycemia."
+      - kind: table
+        title: "أنواع الـ insulin من الأسرع للأطول"
+        columns: ["المدة", "الأنواع"]
+        rows:
+          - ["Rapid (no lag)", "Lispro, aspart, glulisine"]
+          - ["Short", "Regular"]
+          - ["Intermediate", "NPH"]
+          - ["Long", "Detemir, glargine"]
+          - ["Very long", "Degludec"]
+        hide: [[0, 1], [2, 1], [3, 1], [4, 1]]
+        page: 358
+        quote: "Rapid acting (no lag): lispro, aspart, glulisine Short acting: regular Intermediate acting: NPH Long acting: detemir, glargine Very long acting: degludec"
+      - kind: check
+        question: "A patient with K+ 7.0 mEq/L gets IV regular insulin. Why is dextrose given with it?"
+        options:
+          - "To prevent hypoglycemia"
+          - "Dextrose lowers K+ by itself"
+          - "Dextrose protects the heart"
+          - "Dextrose makes insulin act faster"
+        answer: 0
+        why:
+          - "صح: الـ insulin هو اللي بيدخّل الـ K+ الخلايا، والـ glucose بس عشان السكر ما يقعش."
+          - "الـ glucose لوحده مش هو اللي بيعمل الشغل."
+          - "اللي بيحمي القلب هو الـ calcium."
+          - "الـ glucose ما بيسرّعش الـ insulin."
+        page: 358
+        quote: "hyperkalemia (with glucose to prevent concomitant hypoglycemia)"
+      - kind: figure
+        title: "كل دوا بيشتغل فين"
+        svg: |-
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="10" y="10" width="165" height="44" rx="8"/>
+            <text x="20" y="28" class="t-sm t-b">Pancreas β cells</text>
+            <text x="20" y="46" class="t-sm">SU, meglitinides, GLP-1, DPP-4</text>
+            <rect class="fg-box" x="185" y="10" width="165" height="44" rx="8"/>
+            <text x="195" y="28" class="t-sm t-b">Stomach, α cells</text>
+            <text x="195" y="46" class="t-sm">GLP-1, DPP-4, amylin</text>
+            <rect class="fg-good" x="10" y="64" width="165" height="44" rx="8"/>
+            <text x="20" y="82" class="t-sm t-b">Liver</text>
+            <text x="20" y="100" class="t-sm">Metformin: ↓ glucose made</text>
+            <rect class="fg-good" x="185" y="64" width="165" height="44" rx="8"/>
+            <text x="195" y="82" class="t-sm t-b">Fat, muscle</text>
+            <text x="195" y="100" class="t-sm">Metformin, pioglitazone</text>
+            <rect class="fg-bad" x="10" y="118" width="165" height="44" rx="8"/>
+            <text x="20" y="136" class="t-sm t-b">Kidney (PCT)</text>
+            <text x="20" y="154" class="t-sm">SGLT2 inhibitors</text>
+            <rect class="fg-ink" x="185" y="118" width="165" height="44" rx="8"/>
+            <text x="195" y="136" class="t-sm t-b">Intestine</text>
+            <text x="195" y="154" class="t-sm">α-glucosidase inhibitors</text>
+            <text x="20" y="190" class="t-sm t-acc">↑ insulin secretion</text>
+            <text x="195" y="190" class="t-sm t-mut">↓ emptying, ↓ glucagon</text>
+            <text x="20" y="212" class="t-sm t-good">↑ sensitivity</text>
+            <text x="195" y="212" class="t-sm t-bad">↓ reabsorption / absorption</text>
+          </svg>
+        caption: "الصورة دي من الكتاب بشكل أبسط: البنكرياس بيطلّع insulin أكتر، الكبد والعضلات بيبقوا حساسين أكتر، والكلى والأمعاء بيسيبوا السكر يخرج أو ما يدخلش."
+        alt: "Sites of diabetes drugs: pancreatic beta cells (sulfonylureas, meglitinides, GLP-1 analogs, DPP-4 inhibitors) increase insulin secretion; stomach and alpha cells (GLP-1 analogs, DPP-4 inhibitors, amylin analogs) slow gastric emptying and lower glucagon; liver (metformin) lowers glucose production; fat and muscle (metformin, pioglitazone) raise insulin sensitivity; kidney proximal tubule (SGLT2 inhibitors) lowers glucose reabsorption; intestine (alpha-glucosidase inhibitors) lowers glucose absorption."
+        page: 358
+        quote: "SGLT2 inhibitors glucose reabsorption Kidney α-Glucosidase inhibitors glucose absorption Intestine"
+      - kind: explain
+        title: "اللي بيزوّدوا الحساسية: metformin و pioglitazone"
+        text: |-
+          - **Metformin**: بيوقف الـ mGPD في الـ mitochondria ويشغّل الـ AMPK ← ==gluconeogenesis في الكبد ↓==. والوزن بينزل. أعراضه: GI upset و نقص B12، والأخطر **lactic acidosis** لو في renal insufficiency أو cirrhosis أو sepsis أو hypoperfusion (أي حاجة بتخلّي الـ lactate ما يتصرّفش).
+          - **Pioglitazone**: بيشغّل ==PPAR-γ== (nuclear receptor) ← حساسية الـ insulin والـ adiponectin بيزيدوا. بياخد أسابيع عشان يشتغل. أعراضه كلها "مية ووزن": weight gain و edema و **HF**، وكمان fractures.
+        page: 359
+        quote: "Pioglitazone Activates PPAR-γ (a nuclear receptor) → ↑ insulin sensitivity and levels of adiponectin"
+      - kind: explain
+        title: "اللي بيعصروا الـ β cell: sulfonylureas و meglitinides"
+        text: |-
+          الـ **sulfonylureas** بيقفلوا الـ ==K+ channels== في الـ β cell ← الخلية تعمل depolarization ← Ca2+ يدخل ← insulin يطلع، حتى لو السكر واطي. عشان كده عرضها الأشهر ==hypoglycemia== (وأكتر في الـ renal insufficiency) ومعاها weight gain.
+          - 1st gen: chlorpropamide و tolbutamide، ودول بس اللي بيعملوا **disulfiram-like reaction**.
+          - 2nd gen: glipizide و glyburide.
+
+          الـ **meglitinides** (nateglinide و repaglinide) بيزوّدوا الـ insulin اللي بيطلع مع السكر.
+        page: 359
+        quote: "Close K+ channels in pancreatic B cell membrane → cell depolarizes → insulin release via ↑ Ca2+ influx."
+      - kind: check
+        question: "An older man with CKD on glyburide is found confused with glucose 38 mg/dL. Which drug class caused this?"
+        options:
+          - "Sulfonylurea"
+          - "Biguanide"
+          - "SGLT2 inhibitor"
+          - "DPP-4 inhibitor"
+        answer: 0
+        why:
+          - "صح: الـ glyburide بيقفل الـ K+ channels ويطلّع insulin مهما كان السكر، والخطر أكبر مع الكلى التعبانة."
+          - "الـ metformin ما بيعملش hypoglycemia لوحده."
+          - "الـ SGLT2 inhibitors بيعملوا glucosuria وجفاف."
+          - "الـ DPP-4 inhibitors شغلهم glucose-dependent."
+        page: 359
+        quote: "Hypoglycemia (↑ risk in renal insufficiency), weight gain."
+      - kind: explain
+        title: "الـ incretins: GLP-1 و DPP-4"
+        text: |-
+          - **GLP-1 analogs** (exenatide و liraglutide و semaglutide): بيركبوا على receptor ==Gs== ← cAMP ↑ في الـ β cell ← insulin ↑ و glucagon ↓، والمعدة بتفضى ببطء فالشبع يزيد والوزن ينزل. أعراضهم: غثيان وترجيع وإسهال، و **pancreatitis** و gallbladder disease. وممنوعين لو في تاريخ شخصي أو عائلي لـ ==medullary thyroid carcinoma أو MEN2==.
+          - **DPP-4 inhibitors** (linagliptin و saxagliptin و sitagliptin): بيمنعوا تكسير الـ GLP-1 نفسه. ==Weight neutral==، وأعراضهم respiratory و urinary infections.
+          - **Pramlintide** (amylin analog): glucagon ↓ ومعدة أبطأ وشبع ↑، وأعراضه hypoglycemia وغثيان.
+        page: 359
+        quote: "Contraindications: personal/family history of medullary thyroid carcinoma or MEN2."
+      - kind: explain
+        title: "اللي بيمنعوا السكر يدخل: SGLT2 و α-glucosidase"
+        text: |-
+          - **SGLT2 inhibitors** (canagliflozin و dapagliflozin و empagliflozin): بيمنعوا رجوع الـ glucose في الـ ==proximal convoluted tubule== فالسكر يخرج في البول، ومعاه Na+ وماية (natriuresis و osmotic diuresis) فالضغط والـ ECF ينزلوا. الكتاب: ==Glucose flows in urine==، يعني UTIs و vulvovaginal candidiasis و جفاف و orthostatic hypotension ونزول وزن. وبيضعفوا لما الـ GFR ينزل.
+          - **α-glucosidase inhibitors** (acarbose و miglitol): بيأخّروا تكسير الكربوهيدرات في الـ brush border ← سكر ما بعد الأكل ↓. الكربوهيدرات اللي ما اتكسرتش بتتخمّر ← ==bloating== و GI upset. وما ينفعوش مع الـ renal insufficiency.
+        page: 359
+        quote: "Glucosuria (UTIs, vulvovaginal candidiasis), dehydration (orthostatic hypotension), weight loss. Glucose flows in urine."
+      - kind: table
+        title: "الوزن مع كل دوا"
+        columns: ["الوزن", "الأدوية"]
+        rows:
+          - ["↑", "Insulin, sulfonylureas, pioglitazone"]
+          - ["↓", "Metformin, GLP-1 analogs, SGLT2 inhibitors"]
+          - ["Neutral", "DPP-4 inhibitors"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+        page: 359
+        quote: "Respiratory and urinary infections, weight neutral."
+      - kind: reveal
+        prompt: "ست على دوا جديد للسكر جالها vaginal candidiasis ودوخة لما بتقف، وفي البول سكر كتير مع إن سكر الدم 140. الدوا ده إيه، وبيشتغل فين؟"
+        answer: "==SGLT2 inhibitor==، شغّال في الـ proximal convoluted tubule. السكر بيخرج في البول فالفطريات تكبر، والماية بتخرج معاه فيحصل جفاف و orthostatic hypotension."
+        page: 359
+        quote: "Block reabsorption of glucose in proximal convoluted tubule (glucosuria)."
+      - kind: match
+        prompt: "وصّل كل دوا بعرضه المميز"
+        pairs:
+          - ["Metformin", "Lactic acidosis, B12 deficiency"]
+          - ["Pioglitazone", "Edema, HF, fractures"]
+          - ["Sulfonylureas", "Hypoglycemia, weight gain"]
+          - ["GLP-1 analogs", "Pancreatitis, gallbladder disease"]
+          - ["α-glucosidase inhibitors", "Bloating"]
+        why: "كل عرض طالع من الآلية: الكبد ما بيصرّفش lactate، المية بتتحبس، الـ insulin بيطلع غصب، والكربوهيدرات بتتخمّر."
+        page: 359
+        quote: "GI upset, lactic acidosis (in patients with renal insufficiency, cirrhosis, sepsis, or hypoperfusion), vitamin B12 deficiency."
+      - kind: try
+        items: [endo.L05.011, endo.L05.019, endo.L05.020, endo.L05.032, endo.L05.040]
+    recap:
+      - "Type 1: insulin. Type 2: metformin أولاً. والـ regular insulin IV للـ DKA والـ hyperkalemia (مع glucose)."
+      - "Metformin: gluconeogenesis ↓، lactic acidosis مع الكلى أو الـ sepsis. Pioglitazone: PPAR-γ، edema و HF و fractures."
+      - "Sulfonylureas: بيقفلوا K+ channels ← hypoglycemia. GLP-1: ممنوع مع MTC أو MEN2، وبيعمل pancreatitis."
+      - "SGLT2: glucose flows in urine ← UTI و candidiasis وجفاف. Acarbose: bloating."
+  - id: endo.L05.lesson2
+    title: "أدوية الغدة الدرقية والـ pituitary والكالسيوم والبوتاسيوم"
+    hook: "كل دوا هنا ليه تريك واحد في الكتاب، ولو مسكته السؤال بيتحل لوحده"
+    minutes: 9
+    pages: [360, 361]
+    topics: [thionamides, levothyroxine-liothyronine, hypothalamic-pituitary-drugs, fludrocortisone, cinacalcet, sevelamer, cation-exchange-resins]
+    goals:
+      - "تفرق بين PTU و methimazole في الآلية والحمل والأعراض"
+      - "تعرف إيه اللي بيبوّظ امتصاص الـ levothyroxine"
+      - "تربط كل دوا من أدوية الـ hypothalamus والـ pituitary باستخدامه"
+      - "تعرف آلية cinacalcet و sevelamer والـ resins وعرض كل واحد"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ thionamides: بيقفلوا المصنع"
+        text: |-
+          الـ **PTU** والـ **methimazole** بيوقفوا الـ ==thyroid peroxidase==، فالـ iodide ما يتأكسدش وما يحصلش organification ولا coupling ← الهرمون ما يتصنعش.
+
+          والـ PTU زيادة بيوقف الـ ==5′-deiodinase== كمان، فالـ T4 ما يتحولش لـ T3 برّه الغدة. ومش بيعالجوا الـ Graves ophthalmopathy: دي بتتعالج بـ glucocorticoids.
+        page: 360
+        quote: "PTU also blocks 5′-deiodinase → ↓ Peripheral conversion of T4 to T3."
+      - kind: table
+        title: "الحمل: مين إمتى وليه"
+        columns: ["الـ trimester", "الدوا", "ليه"]
+        rows:
+          - ["الأول", "PTU", "الـ methimazole teratogen (aplasia cutis)"]
+          - ["التاني والتالت", "Methimazole", "الـ PTU بيعمل hepatotoxicity"]
+        hide: [[0, 1], [1, 1]]
+        page: 360
+        quote: "PTU used in Primary (first) trimester of pregnancy (due to methimazole teratogenicity); methimazole used in second and third trimesters of pregnancy (due to risk of PTU-induced hepatotoxicity)."
+      - kind: explain
+        title: "أعراض الـ thionamides"
+        text: |-
+          الاتنين: skin rash، و ==agranulocytosis== (نادر بس خطير: أي حمى أو التهاب زور = نقيس الـ neutrophils)، و aplastic anemia، و hepatotoxicity.
+
+          الـ PTU لوحده: ==ANCA-positive vasculitis==. والـ methimazole لوحده: teratogen بيعمل **aplasia cutis**.
+        page: 360
+        quote: "Skin rash, agranulocytosis (rare), aplastic anemia, hepatotoxicity. PTU use has been associated with ANCA-positive vasculitis."
+      - kind: check
+        question: "A woman on methimazole for Graves disease has fever and a sore throat. What must be checked first?"
+        options:
+          - "Neutrophil count"
+          - "ANCA"
+          - "TSH"
+          - "Liver enzymes"
+        answer: 0
+        why:
+          - "صح: ده شكل الـ agranulocytosis، والـ neutrophil count هو اللي بيأكد."
+          - "الـ ANCA vasculitis مرتبط بالـ PTU، ومش بيبدأ بالزور."
+          - "الـ TSH ما بيفسّرش الحمى."
+          - "الـ hepatotoxicity ما بتعملش زور."
+        page: 360
+        quote: "Skin rash, agranulocytosis (rare), aplastic anemia, hepatotoxicity."
+      - kind: explain
+        title: "Levothyroxine و liothyronine"
+        text: |-
+          تريك الكتاب: **levo** = 4 حروف = ==T4==، و **lio** = 3 حروف = ==T3==. بيعالجوا الـ hypothyroidism والـ myxedema، وأعراضهم شكل hyperthyroidism: tachycardia و heat intolerance و tremors و arrhythmias.
+
+          ما يتاخدش مع antacids أو bile acid resins أو ==ferrous sulfate== لأنهم بيقللوا امتصاصه. وفي ناس بتاخده عشان تخس؛ بنفرق الـ exogenous من الـ endogenous بالـ TSH receptor antibodies والـ radioactive iodine uptake وتدفق الدم في الـ ultrasound.
+        page: 360
+        quote: "Avoid levothyroxine with antacids, bile acid resins, or ferrous sulfate (↓ absorption)."
+      - kind: table
+        title: "أدوية الـ hypothalamus والـ pituitary"
+        columns: ["الدوا", "هو إيه", "بيعالج إيه"]
+        rows:
+          - ["Conivaptan, tolvaptan", "ADH antagonists (V2)", "SIADH"]
+          - ["Demeclocycline", "Tetracycline بيبوّظ إشارة الـ ADH", "SIADH"]
+          - ["Desmopressin", "ADH analog", "Central DI, vWD, sleep enuresis, hemophilia A"]
+          - ["GH", "Hormone", "GH deficiency, Turner syndrome"]
+          - ["Oxytocin", "Hormone", "Induction of labor, uterine hemorrhage"]
+          - ["Octreotide", "Somatostatin analog", "Acromegaly, carcinoid, gastrinoma, glucagonoma, esophageal varices"]
+        hide: [[0, 2], [2, 2], [5, 2]]
+        page: 360
+        quote: "Desmopressin ADH analog Central DI, von Willebrand disease, sleep enuresis, hemophilia A"
+      - kind: reveal
+        prompt: "ليه الـ octreotide بيعالج حاجات مختلفة كده: acromegaly و carcinoid و gastrinoma و varices؟"
+        answer: "لأنه ==somatostatin analog==، والـ somatostatin هو الفرامل العامة: بيوقف الـ GH، وبيوقف هرمونات الأورام الـ neuroendocrine (serotonin و gastrin و glucagon)، وبيقلل دم الـ splanchnic فبيهدّي نزيف الـ varices."
+        page: 360
+        quote: "Octreotide Somatostatin analog Acromegaly, carcinoid syndrome, gastrinoma, glucagonoma, esophageal varices"
+      - kind: explain
+        title: "Fludrocortisone: aldosterone صناعي"
+        text: |-
+          الكتاب: ==Fluidrocortisone retains fluid==. ده analog للـ aldosterone وعنده شوية glucocorticoid effect، بيتدّى بدل الـ mineralocorticoid في الـ ==1° adrenal insufficiency== (لأن في الـ secondary الـ aldosterone سليم).
+
+          أعراضه زي الـ glucocorticoids، وزيادة: edema و تدهور الـ heart failure و hyperpigmentation.
+        page: 360
+        quote: "Synthetic analog of aldosterone with glucocorticoid effects. Fluidrocortisone retains fluid."
+      - kind: explain
+        title: "Cinacalcet و sevelamer و الـ resins"
+        text: |-
+          - **Cinacalcet** (بيتنطق "Senacalcet": بيخلّي الـ receptor يحس): بيخلي الـ ==CaSR== في الـ parathyroid أحسّ للـ Ca2+ ← PTH ↓. بيتدّى في الـ 2° hyperparathyroidism مع الـ CKD على dialysis، أو 1° لو العملية فشلت، أو parathyroid carcinoma. عرضه: ==hypocalcemia==.
+          - **Sevelamer**: phosphate binder ما بيتمصّش ← الفوسفات ما يدخلش من الأمعاء. للـ hyperphosphatemia في الـ CKD. أعراضه: hypophosphatemia و GI upset.
+          - **Cation exchange resins** (patiromer و sodium polystyrene sulfonate و zirconium cyclosilicate): بيمسكوا الـ ==K+ في القولون== قصاد Na+ أو Ca2+ فيخرج في البراز. للـ hyperkalemia، وأعراضهم hypokalemia و GI upset.
+        page: 361
+        quote: "Sensitizes calcium-sensing receptor (CaSR) in parathyroid gland to circulating Ca2+ → ↓ PTH."
+      - kind: check
+        question: "A dialysis patient with very high PTH starts a drug that acts on the parathyroid gland. He then develops perioral tingling. Which drug?"
+        options:
+          - "Cinacalcet"
+          - "Sevelamer"
+          - "Patiromer"
+          - "Fludrocortisone"
+        answer: 0
+        why:
+          - "صح: الـ cinacalcet بيحسّس الـ CaSR فالـ PTH ينزل، وعرضه hypocalcemia (التنميل)."
+          - "الـ sevelamer شغال في الأمعاء على الفوسفات."
+          - "الـ patiromer بيمسك الـ K+ في القولون."
+          - "الـ fludrocortisone mineralocorticoid."
+        page: 361
+        quote: "Hypocalcemia."
+      - kind: match
+        prompt: "وصّل كل دوا بالحاجة اللي بيعالجها"
+        pairs:
+          - ["Tolvaptan", "SIADH"]
+          - ["Desmopressin", "Central DI"]
+          - ["Fludrocortisone", "1° adrenal insufficiency"]
+          - ["Sevelamer", "Hyperphosphatemia in CKD"]
+          - ["Patiromer", "Hyperkalemia"]
+        why: "الـ ADH antagonist للـ ADH الزيادة، والـ ADH analog للـ ADH الناقص، والـ aldosterone الصناعي للغدة اللي باظت، والـ binders للي الكلى مش قادرة تطلّعه."
+        page: 360
+        quote: "Conivaptan, tolvaptan ADH antagonists SIADH (block action of ADH at V2-receptor)"
+      - kind: try
+        items: [endo.L05.048, endo.L05.049, endo.L05.060, endo.L05.069, endo.L05.074]
+    recap:
+      - "PTU و methimazole بيوقفوا الـ TPO، والـ PTU كمان الـ 5′-deiodinase. PTU في الـ trimester الأول، methimazole بعده."
+      - "Agranulocytosis للاتنين، ANCA vasculitis للـ PTU، aplasia cutis للـ methimazole."
+      - "Levo = T4، lio = T3، والحديد والـ antacids بيقللوا امتصاصه."
+      - "Tolvaptan للـ SIADH، desmopressin للـ DI و vWD، octreotide = somatostatin، fludrocortisone retains fluid."
+      - "Cinacalcet ← hypocalcemia، sevelamer ← hypophosphatemia، الـ resins ← hypokalemia."
