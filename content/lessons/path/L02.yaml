@@ -1,0 +1,493 @@
+schema: steps.lesson/v1
+lecture: path.L02
+lessons:
+  - id: path.L02.lesson1
+    title: "الالتهاب: الإشارات الخمسة وجسمك كله بيرد"
+    hook: "ليه الـ ibuprofen بينزّل الحرارة؟ وليه الـ ESR يطلع واطي في الـ sickle cell حتى لو فيه التهاب؟"
+    minutes: 9
+    pages: [209, 210]
+    topics: [inflammation, cardinal-signs, systemic-manifestations, acute-phase-reactants, erythrocyte-sedimentation-rate]
+    goals:
+      - "تربط كل cardinal sign بالـ mechanism والـ mediators بتوعها"
+      - "تمشي خطوات الـ fever من الـ LPS للـ set point"
+      - "تفرّق بين الـ positive والـ negative acute-phase reactants"
+      - "تعرف إيه اللي بيعلّي الـ ESR وإيه اللي بيوطّيه"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الالتهاب بيعمل إيه؟"
+        text: |-
+          الالتهاب ليه 3 أهداف: يشيل ==السبب الأصلي== للـ injury، وينضّف الـ necrotic cells، ويبدأ الـ **repair**. وبيتقسم acute و chronic.
+
+          بس الالتهاب نفسه ممكن يأذي:
+          - لو **زيادة**: septic shock.
+          - لو **طويل**: infections مستمرة زي الـ TB.
+          - لو **في غير مكانه**: autoimmune زي الـ SLE.
+        page: 209
+        quote: "The inflammatory response itself can be harmful to the host if the reaction is excessive (eg, septic shock), prolonged (eg, persistent infections such as TB), or inappropriate (eg, autoimmune diseases such as SLE)."
+      - kind: table
+        title: "الـ cardinal signs"
+        columns: ["Sign", "Mechanism", "Mediators"]
+        rows:
+          - ["Rubor + calor", "Vasodilation → ↑ blood flow", "Histamine, prostaglandins, bradykinin, NO"]
+          - ["Tumor", "Endothelial contraction → exudate from postcapillary venules", "LTC4/D4/E4, histamine, serotonin, bradykinin"]
+          - ["Dolor", "Sensitized sensory nerve endings", "Bradykinin, PGE2, histamine"]
+          - ["Functio laesa", "Inflammation impairs function", "Hand cellulitis: can't make a fist"]
+        hide: [[0, 1], [1, 1], [2, 2]]
+        page: 209
+        quote: "Dolor Pain. Sensitization of sensory nerve endings. Mediated by bradykinin, PGE2, histamine."
+      - kind: reveal
+        prompt: "الـ histamine والـ bradykinin موجودين في الأحمرار والورم والألم كلهم. إيه اللي بيفرّق الورم عن الأحمرار؟"
+        answer: "الأحمرار والسخونية من ==vasodilation== في الـ arterioles (دم أكتر). الورم من ==endothelial contraction== في الـ postcapillary venules، فالـ junctions تفتح والـ protein-rich fluid يخرج (exudate) ويعلّي الـ interstitial oncotic pressure."
+        page: 209
+        quote: "Endothelial contraction/disruption (eg, from tissue damage) → ↑ vascular permeability → leakage of protein-rich fluid from postcapillary venules into interstitial space (exudate) → ↑ interstitial oncotic pressure."
+      - kind: order
+        prompt: "رتّب خطوات الـ fever"
+        steps:
+          - "Pyrogens (LPS) act on macrophages"
+          - "IL-1 and TNF released"
+          - "↑ COX in the anterior hypothalamus"
+          - "↑ PGE2"
+          - "↑ Temperature set point"
+        why: "الـ macrophage يطلّع IL-1 و TNF، دول يعلّوا الـ COX في الـ hypothalamus، فالـ PGE2 يعلى والـ set point يطلع. عشان كده الـ NSAIDs (COX inhibitors) بتنزّل الحرارة."
+        page: 209
+        quote: "Pyrogens (eg, LPS) induce macrophages to release IL-1 and TNF → ↑ COX activity in perivascular cells of anterior hypothalamus → ↑ PGE2 → ↑ temperature set point."
+      - kind: check
+        question: "A child with fever takes ibuprofen and the fever falls. Which molecule's synthesis in the hypothalamus was reduced?"
+        options:
+          - "PGE2"
+          - "IL-1"
+          - "TNF"
+          - "IL-6"
+        answer: 0
+        why:
+          - "صح: الـ ibuprofen بيمنع الـ COX، فالـ PGE2 مبيتعملش والـ set point ينزل."
+          - "الـ IL-1 بيطلع من الـ macrophages قبل الـ COX، والـ ibuprofen مبيمنعهوش."
+          - "الـ TNF زي الـ IL-1، قبل الخطوة اللي الـ ibuprofen بيقفلها."
+          - "الـ IL-6 بيشغّل الكبد يعمل acute-phase reactants، مش هو اللي بيحدد الـ set point."
+      - kind: explain
+        title: "الكبد بيرد: الـ acute-phase reactants"
+        text: |-
+          الكبد بيعملهم، والمحرّك الأساسي ==IL-6==.
+
+          **بيزيدوا**: CRP (opsonin، بيثبّت الـ complement)، ferritin (بيحبس الحديد من الميكروبات)، fibrinogen (بيمشي مع الـ ESR)، haptoglobin (بيمسك الـ hemoglobin الحر)، hepcidin، procalcitonin (في الـ **bacterial** infections)، و serum amyloid A.
+
+          **بيقلّوا**: albumin و transthyretin (عشان الـ amino acids تروح للـ positive)، و transferrin (الـ macrophages بتدخّله عشان تحبس الحديد).
+        page: 209
+        quote: "Serum concentrations significantly change in response to acute and chronic inflammation. Produced by liver. Notably induced by IL-6."
+      - kind: reveal
+        prompt: "الجسم ليه بيحبس الحديد في الالتهاب؟ وده بيعمل إيه في المريض المزمن؟"
+        answer: "الميكروبات محتاجة حديد، فالجسم بيخبّيه: الـ ferritin بيمسكه، والـ ==hepcidin== بيكسّر الـ ferroportin فالأمعاء متمتصّش حديد والـ macrophages متطلّعش اللي عندها. على المدى الطويل ← **anemia of chronic disease**."
+        page: 209
+        quote: "Hepcidin ↓ iron absorption (by degrading ferroportin) and ↓ iron release (from macrophages) → anemia of chronic disease."
+      - kind: sort
+        prompt: "حط كل protein في مكانه في الالتهاب"
+        bins: ["Upregulated", "Downregulated"]
+        cards:
+          - { text: "C-reactive protein", bin: 0 }
+          - { text: "Ferritin", bin: 0 }
+          - { text: "Hepcidin", bin: 0 }
+          - { text: "Haptoglobin", bin: 0 }
+          - { text: "Fibrinogen", bin: 0 }
+          - { text: "Albumin", bin: 1 }
+          - { text: "Transferrin", bin: 1 }
+          - { text: "Transthyretin", bin: 1 }
+        why: "الـ negative 3 بس: albumin و transferrin و transthyretin (prealbumin). الباقي كله بيزيد."
+        page: 209
+        quote: "Albumin Downregulation conserves amino acids for positive reactants. Transferrin Internalized by macrophages to sequester iron. Transthyretin Also called prealbumin."
+      - kind: try
+        items: [path.L02.004, path.L02.008, path.L02.010, path.L02.012, path.L02.013]
+      - kind: explain
+        title: "الـ ESR: الكور الحمرا بتنزل أسرع"
+        text: |-
+          الـ RBCs عادةً بتبعد عن بعض لأن عليها ==شحنة سالبة==. الـ fibrinogen وغيره بيغطّوها فالشحنة تقل، فتلزق في بعض، والكتل التقيلة تنزل أسرع في الأنبوبة ← ↑ ESR.
+
+          بيتعمل مع الـ **CRP**، والـ CRP أكتر specificity للالتهاب.
+        page: 210
+        quote: "RBCs normally remain separated via ⊝ charges. Products of inﬂammation (eg, fibrinogen) coat RBCs → ↓ ⊝ charge → ↑ RBC aggregation."
+      - kind: table
+        title: "يعلّي ولا يوطّي"
+        columns: ["↑ ESR", "↓ ESR"]
+        rows:
+          - ["Most anemias", "Sickle cell anemia (shape)"]
+          - ["Infections, inflammation (GCA, PMR)", "Polycythemia (dilution)"]
+          - ["Cancer (metastases, myeloma)", "HF"]
+          - ["Renal disease, pregnancy", "Microcytosis, hypofibrinogenemia"]
+        hide: [[0, 1], [1, 1], [3, 1]]
+        page: 210
+        quote: "Most anemias Sickle cell anemia (altered shape) Infections Polycythemia (↑ RBCs “dilute” aggregation factors)"
+      - kind: aside
+        tone: trap
+        text: "مريض sickle cell عنده التهاب واضح والـ ESR طالع واطي؟ مش غلط في المعمل: الشكل المتغيّر بيمنع الـ RBCs ==تتراص==، فالـ ESR بيطلع أقل من المتوقع. ثق في الـ CRP."
+        page: 210
+        quote: "Sickle cell anemia (altered shape)"
+      - kind: try
+        items: [path.L02.018, path.L02.019, path.L02.020]
+    recap:
+      - "الأحمرار والسخونية = vasodilation. الورم = endothelial contraction في الـ postcapillary venules."
+      - "Fever: LPS ← IL-1/TNF ← COX ← PGE2 ← set point."
+      - "الكبد بيعمل الـ acute-phase reactants بالـ IL-6. الـ negative 3: albumin و transferrin و transthyretin."
+      - "Hepcidin بيكسّر الـ ferroportin ← anemia of chronic disease."
+      - "ESR بيعلى مع الـ fibrinogen، وبيوطى في الـ sickle cell والـ polycythemia."
+    practice: [path.L02.001, path.L02.002, path.L02.003, path.L02.004, path.L02.005, path.L02.006, path.L02.007, path.L02.008, path.L02.009, path.L02.010, path.L02.011, path.L02.012, path.L02.013, path.L02.014, path.L02.015, path.L02.016, path.L02.017, path.L02.018, path.L02.019, path.L02.020, path.L02.021]
+  - id: path.L02.lesson2
+    title: "الـ acute inflammation: الـ neutrophil بيخرج من الوعاء إزاي"
+    hook: "طفل الـ cord بتاعه مقعش، والـ WBCs عنده 38 ألف، ومفيش صديد خالص. الـ neutrophils راحت فين؟"
+    minutes: 8
+    pages: [210, 211]
+    topics: [acute-inflammation, leukocyte-extravasation]
+    goals:
+      - "تعرف شكل الـ acute inflammation ومين بيحرّكها ونهاياتها"
+      - "تمشي الـ 4 خطوات بتوع الـ extravasation بالـ molecules بتاعتها"
+      - "تفرّق بين الـ LAD type 1 والـ type 2"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "سريعة وقصيرة وغير متخصصة"
+        text: |-
+          الـ acute inflammation رد فعل بدري: ==neutrophils== في النسيج ومعاها edema غالباً. بتبدأ في ثواني لدقايق وبتخلص في دقايق لأيام، وهي شغل الـ **innate** immune system.
+
+          **بتيجي من**: infections و trauma و necrosis و foreign bodies.
+          **بيحرّكها**: Toll-like receptors، arachidonic acid metabolites، neutrophils و eosinophils، antibodies موجودة قبل كده، mast cells و basophils، complement، والـ Hageman factor (factor XII).
+        page: 210
+        quote: "Transient and early response to injury or infection. Characterized by neutrophils in tissue A , often with associated edema. Rapid onset (seconds to minutes) and short duration (minutes to days)."
+      - kind: reveal
+        prompt: "مريض gout عنده نوبة: crystals في المفصل، سخونية، و leukocytosis. إزاي الـ crystal اللي مش ميكروب بيعمل fever؟"
+        answer: "عن طريق الـ ==inflammasome==: complex جوّه الـ cytoplasm بيتعرّف على الـ damage- والـ pathogen-associated patterns (زي الـ uric acid crystals والـ microbial products) ← يشغّل الـ **IL-1** ← fever و leukocytosis."
+        page: 210
+        quote: "Inﬂammasome—cytoplasmic complex recognizing damage- and pathogen-associated molecular patterns (eg, microbial products, uric acid crystals) → IL-1 activation → inflammatory response (eg, fever, leukocytosis)."
+      - kind: table
+        title: "الالتهاب الحاد بيخلص على إيه"
+        columns: ["Outcome", "Driver"]
+        rows:
+          - ["Resolution and healing", "IL-10, TGF-β"]
+          - ["Persistent acute inflammation", "IL-8"]
+          - ["Abscess", "Walled off by fibrosis"]
+          - ["Chronic inflammation", "APCs → CD4+ Th activation"]
+        hide: [[0, 1], [1, 1], [3, 1]]
+        page: 210
+        quote: "Resolution and healing (IL-10, TGF-β) Persistent acute inflammation (IL-8) Abscess (acute inflammation walled off by fibrosis)"
+      - kind: aside
+        tone: exam
+        text: "الـ neutrophils أول ناس، بس الـ ==macrophages== هي اللي بتسيطر في آخر الـ acute inflammation (peak بعد 2-3 أيام)، وبالـ cytokines بتحدد النهاية."
+        page: 210
+        quote: "Macrophages predominate in the late stages of acute inflammation (peak 2-3 days after onset) and influence outcome by secreting cytokines."
+      - kind: figure
+        title: "الـ 4 خطوات"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="pL02a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="8" y="16" class="t-sm t-mut">Vessel lumen</text>
+            <rect class="fg-box" x="6" y="78" width="348" height="14" rx="3"/>
+            <text x="8" y="108" class="t-sm t-mut">Endothelium</text>
+            <text x="8" y="190" class="t-sm t-mut">Interstitium</text>
+            <circle class="fg-acc" cx="40" cy="50" r="16"/>
+            <circle class="fg-acc" cx="120" cy="62" r="16"/>
+            <circle class="fg-acc" cx="215" cy="84" r="14"/>
+            <circle class="fg-acc" cx="305" cy="150" r="16"/>
+            <path class="fg-arrow-acc" d="M60 46 L 98 56" marker-end="url(#pL02a)"/>
+            <path class="fg-arrow-acc" d="M140 66 L 196 80" marker-end="url(#pL02a)"/>
+            <path class="fg-arrow-acc" d="M228 96 L 286 138" marker-end="url(#pL02a)"/>
+            <text x="20" y="30" class="t-sm t-b">1 Rolling</text>
+            <text x="26" y="132" class="t-sm">Selectins</text>
+            <text x="26" y="146" class="t-sm">Sialyl LewisX</text>
+            <text x="100" y="30" class="t-sm t-b">2 Tight binding</text>
+            <text x="110" y="132" class="t-sm">ICAM-1</text>
+            <text x="110" y="146" class="t-sm">CD11/18 (LFA-1)</text>
+            <text x="196" y="30" class="t-sm t-b">3 Diapedesis</text>
+            <text x="196" y="132" class="t-sm">PECAM-1</text>
+            <text x="270" y="30" class="t-sm t-b">4 Migration</text>
+            <text x="270" y="182" class="t-sm">C5a, IL-8, LTB4</text>
+          </svg>
+        caption: "الـ neutrophil بيتدحرج على الـ selectins، يلزق جامد بالـ integrins في الـ ICAM-1، يعدّي بين الخلايا بالـ PECAM-1، وبعدين يمشي ورا الـ chemotactic signals لحد الـ injury."
+        alt: "A neutrophil inside a vessel rolls on selectins binding sialyl LewisX, binds tightly through CD11/18 integrins to ICAM-1, squeezes between endothelial cells using PECAM-1, then migrates through the interstitium toward C5a, IL-8 and LTB4."
+        page: 211
+        quote: "ICAM-1 (CD54) CD11/18 integrins (LFA-1, Mac-1)"
+      - kind: table
+        title: "مين بيمسك مين"
+        columns: ["Step", "Endothelium", "Leukocyte"]
+        rows:
+          - ["Rolling", "E-selectin, P-selectin", "Sialyl LewisX"]
+          - ["Rolling", "GlyCAM-1, CD34", "L-selectin"]
+          - ["Tight binding", "ICAM-1 (CD54)", "CD11/18 integrins (LFA-1, Mac-1)"]
+          - ["Tight binding", "VCAM-1 (CD106)", "VLA-4 integrin"]
+          - ["Diapedesis", "PECAM-1 (CD31)", "PECAM-1 (CD31)"]
+        hide: [[0, 2], [2, 2], [4, 1]]
+        page: 211
+        quote: "ICAM-1 (CD54) CD11/18 integrins (LFA-1, Mac-1) VCAM-1 (CD106) VLA-4 integrin"
+      - kind: explain
+        title: "الـ selectins جايين منين"
+        text: |-
+          - **E-selectin**: الـ endothelium بيطلّعه، والـ ==TNF والـ IL-1== بيزوّدوه.
+          - **P-selectin**: محفوظ في الـ ==Weibel-Palade bodies==، وبيطلع على السطح بالـ exocytosis.
+
+          والـ migration بتمشي ورا: C5a و IL-8 و LTB4 و 5-HETE و kallikrein و platelet-activating factor و N-formylmethionyl peptides.
+        page: 211
+        quote: "E-selectin (released from endothelial cells, upregulated by TNF and IL-1) P-selectin (translocated to endothelial surface via exocytosis from Weibel-Palade bodies)"
+      - kind: reveal
+        prompt: "الطفل اللي في الأول: cord اتأخر، WBCs عالية جداً، ومفيش صديد. أنهي خطوة بايظة؟"
+        answer: "الـ ==tight binding==: **LAD type 1** (↓ CD18 integrin subunit). الـ neutrophils بتتدحرج بس مبتلزقش، فبتفضل في الدم (leukocytosis) ومبتوصلش النسيج. أما الـ **LAD type 2** فالخلل في الـ rolling (↓ sialyl LewisX)."
+        page: 211
+        quote: "Tight binding (adhesion)— defective in leukocyte adhesion deficiency type 1 (↓ CD18 integrin subunit)"
+      - kind: check
+        question: "Which molecule is missing in leukocyte adhesion deficiency type 2?"
+        options:
+          - "Sialyl LewisX"
+          - "CD18"
+          - "PECAM-1"
+          - "ICAM-1"
+        answer: 0
+        why:
+          - "صح: الـ type 2 خلل في الـ rolling، والـ sialyl LewisX هو اللي بيمسك الـ selectins."
+          - "الـ CD18 ناقص في الـ type 1 (tight binding)."
+          - "الـ PECAM-1 بتاع الـ diapedesis."
+          - "الـ ICAM-1 على الـ endothelium، ومش هو الناقص في الـ LAD."
+      - kind: try
+        items: [path.L02.022, path.L02.024, path.L02.029, path.L02.030, path.L02.033]
+    recap:
+      - "Acute = neutrophils، بسرعة، قصيرة، innate."
+      - "الـ inflammasome بيحس بالـ crystals والميكروبات ← IL-1."
+      - "Rolling (selectins) ← tight binding (ICAM-1 + CD18) ← diapedesis (PECAM-1) ← migration (C5a، IL-8، LTB4)."
+      - "LAD 1 = ↓ CD18، LAD 2 = ↓ sialyl LewisX."
+      - "P-selectin من الـ Weibel-Palade bodies، E-selectin بيزيد بالـ TNF و IL-1."
+    practice: [path.L02.022, path.L02.023, path.L02.024, path.L02.025, path.L02.026, path.L02.027, path.L02.028, path.L02.029, path.L02.030, path.L02.031, path.L02.032, path.L02.033, path.L02.034, path.L02.035]
+  - id: path.L02.lesson3
+    title: "الالتهاب المزمن والـ granuloma: الجسم بيحبس اللي مش قادر يقتله"
+    hook: "ليه لازم تعمل TB test قبل الـ infliximab؟ وليه مريض الـ sarcoidosis الـ calcium عنده عالي؟"
+    minutes: 9
+    pages: [212, 213]
+    topics: [chronic-inflammation, granulomatous-inflammation]
+    goals:
+      - "تعرف خلايا الـ chronic inflammation وأسبابها ونهاياتها"
+      - "تفرّق بين الـ classical والـ alternative macrophage activation"
+      - "تمشي خطوات تكوين الـ granuloma وتعرف أسبابها"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "مزمن = mononuclear"
+        text: |-
+          الـ chronic inflammation طويل، وخلاياه ==mononuclear==: macrophages و lymphocytes و plasma cells. وفيه **هدم وبناء مع بعض**: tissue destruction، ومعاه angiogenesis و fibrosis.
+
+          **أسبابه**: infections مستمرة (TB، T pallidum، fungi وفيروسات معيّنة) ← type IV hypersensitivity، و autoimmune diseases، و toxic agents (زي الـ silica)، و foreign material.
+        page: 212
+        quote: "Prolonged inflammation characterized by mononuclear infiltration (macrophages, lymphocytes, plasma cells), which leads to simultaneous tissue destruction and repair (including angiogenesis and fibrosis)."
+      - kind: table
+        title: "الـ T cell بيوجّه الـ macrophage"
+        columns: ["Th", "Cytokine", "Macrophage"]
+        rows:
+          - ["Th1", "IFN-γ", "Classical: proinflammatory"]
+          - ["Th2", "IL-4, IL-13", "Alternative: repair, anti-inflammatory"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2]]
+        page: 212
+        quote: "Th1 cells secrete IFN-γ → macrophage classical activation (proinflammatory) Th2 cells secrete IL-4 and IL-13 → macrophage alternative activation"
+      - kind: reveal
+        prompt: "الالتهاب المزمن ممكن يخلص على cancer. اذكر مثالين من الكتاب."
+        answer: "**HCV مزمن** ← chronic inflammation ← ==hepatocellular carcinoma==. و**H pylori** ← chronic gastritis ← ==gastric adenocarcinoma==. ونهاياته التانية: scarring و amyloidosis."
+        page: 212
+        quote: "Scarring, amyloidosis, and neoplastic transformation (eg, chronic HCV infection → chronic inflammation → hepatocellular carcinoma; Helicobacter pylori infection → chronic gastritis → gastric adenocarcinoma)."
+      - kind: check
+        question: "Which cell is dominant in chronic inflammation?"
+        options:
+          - "Macrophage"
+          - "Neutrophil"
+          - "Eosinophil"
+          - "Mast cell"
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول الـ macrophages هي الـ dominant cells، وتعاملها مع الـ T cells هو اللي بيعمل الـ chronic inflammation."
+          - "الـ neutrophil علامة الـ acute inflammation."
+          - "الـ eosinophil مش هو الـ dominant cell هنا."
+          - "الـ mast cell من mediators الـ acute inflammation."
+      - kind: explain
+        title: "الـ granuloma: سجن مش إعدام"
+        text: |-
+          الـ granuloma نوع من الـ chronic inflammation. بيحاوط stimulus مقاوم ==من غير ما يقضي عليه== ← التهاب مستمر ← fibrosis وأذى في العضو.
+
+          الشكل: **epithelioid cells** (activated macrophages بـ cytoplasm وردي كتير) حواليها lymphocytes و **multinucleated giant cells** (macrophages اندمجت في بعض).
+
+          - **Caseating**: فيها central necrosis، في الـ ==infections== (TB، fungi).
+          - **Noncaseating**: من غير necrosis، في الأسباب الـ noninfectious (sarcoidosis، Crohn).
+        page: 213
+        quote: "Granulomas “wall off” a resistant stimulus without completely eradicating or degrading it → persistent inflammation → fibrosis, organ damage."
+      - kind: figure
+        title: "الـ granuloma بيتبني إزاي"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="pL02b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="6" y="20" width="70" height="40" rx="6"/>
+            <text x="22" y="44" class="t-sm t-b">APC</text>
+            <rect class="fg-acc" x="104" y="20" width="76" height="40" rx="6"/>
+            <text x="116" y="44" class="t-sm t-acc">Th1 cell</text>
+            <rect class="fg-good" x="210" y="20" width="140" height="40" rx="6"/>
+            <text x="218" y="44" class="t-sm t-good">Activated macrophage</text>
+            <path class="fg-arrow-acc" d="M76 40 L 102 40" marker-end="url(#pL02b)"/>
+            <text x="72" y="76" class="t-sm">IL-12</text>
+            <path class="fg-arrow-acc" d="M180 40 L 208 40" marker-end="url(#pL02b)"/>
+            <text x="176" y="76" class="t-sm">IFN-γ</text>
+            <path class="fg-arrow-acc" d="M280 60 L 280 100" marker-end="url(#pL02b)"/>
+            <text x="290" y="86" class="t-sm">TNF</text>
+            <circle class="fg-ink" cx="200" cy="140" r="44"/>
+            <circle class="fg-good" cx="200" cy="140" r="26"/>
+            <text x="176" y="144" class="t-sm">epithelioid</text>
+            <circle class="fg-dot-acc" cx="160" cy="112" r="4"/>
+            <circle class="fg-dot-acc" cx="240" cy="116" r="4"/>
+            <circle class="fg-dot-acc" cx="164" cy="170" r="4"/>
+            <circle class="fg-dot-acc" cx="236" cy="168" r="4"/>
+            <text x="252" y="150" class="t-sm">lymphocytes</text>
+            <text x="252" y="166" class="t-sm">giant cells</text>
+            <text x="20" y="140" class="t-sm t-b">Granuloma</text>
+          </svg>
+        caption: "الـ APC تقدّم الـ antigen للـ CD4+ وتطلّع IL-12 ← Th1 ← IFN-γ يشغّل الـ macrophage ← TNF ← epithelioid cells و giant cells حواليهم lymphocytes."
+        alt: "Flow diagram: an APC secretes IL-12 to drive a Th1 cell, which secretes IFN-γ to activate a macrophage; TNF from the macrophage forms a granuloma of epithelioid cells ringed by lymphocytes and giant cells."
+        page: 213
+        quote: "APCs present antigens to CD4+ Th cells and secrete IL-12 → CD4+ Th cells differentiate into Th1 cells"
+      - kind: reveal
+        prompt: "لو الـ TNF هو اللي بيبني الـ granuloma ويمسكها، إيه اللي يحصل لمريض عنده latent TB وبدأ anti-TNF؟"
+        answer: "الـ granulomas اللي حابسة الـ TB ==بتتفك== ← disseminated disease (زي الـ miliary TB). عشان كده لازم **test للـ latent TB** قبل أي anti-TNF."
+        page: 213
+        quote: "Anti-TNF therapy can cause sequestering granulomas to break down → disseminated disease. Always test for latent TB before starting anti-TNF therapy."
+      - kind: aside
+        tone: exam
+        text: "الـ granulomas بتعلّي الـ calcium: الـ activated macrophages فيها ↑ ==1α-hydroxylase== ← vitamin D activity أعلى. فكّر في الـ sarcoidosis مع hypercalcemia و PTH واطي."
+        page: 213
+        quote: "Associated with hypercalcemia due to ↑ 1α-hydroxylase activity in activated macrophages, resulting in ↑ vitamin D activity."
+      - kind: sort
+        prompt: "حط كل سبب في نوعه"
+        bins: ["Infectious", "Noninfectious"]
+        cards:
+          - { text: "Tuberculosis", bin: 0 }
+          - { text: "Cat scratch disease", bin: 0 }
+          - { text: "Histoplasmosis", bin: 0 }
+          - { text: "Schistosomiasis", bin: 0 }
+          - { text: "Sarcoidosis", bin: 1 }
+          - { text: "Crohn disease", bin: 1 }
+          - { text: "Berylliosis", bin: 1 }
+          - { text: "Giant cell arteritis", bin: 1 }
+        why: "الـ infectious: mycobacteria و Bartonella و Listeria و T pallidum و endemic mycoses و schistosomiasis. الـ noninfectious: immune-mediated (sarcoidosis، Crohn)، vasculitis، و foreign bodies (berylliosis)."
+        page: 213
+        quote: "Foreign bodies: berylliosis, talcosis, hypersensitivity pneumonitis"
+      - kind: check
+        question: "A patient has noncaseating granulomas, bilateral hilar adenopathy, a high calcium and a low PTH. What causes the hypercalcemia?"
+        options:
+          - "↑ 1α-hydroxylase in activated macrophages"
+          - "PTH-related peptide"
+          - "Bone metastases"
+          - "↓ Calcitonin"
+        answer: 0
+        why:
+          - "صح: الـ macrophages في الـ granuloma بتعمل vitamin D active أكتر."
+          - "الـ PTHrP من الأورام، ومفيش ورم هنا."
+          - "الـ metastases مش موجودة، والـ noncaseating granulomas بتقول sarcoidosis."
+          - "الكتاب مش بيربط الـ granuloma بالـ calcitonin."
+      - kind: try
+        items: [path.L02.036, path.L02.038, path.L02.046, path.L02.047, path.L02.048]
+    recap:
+      - "Chronic = macrophages و lymphocytes و plasma cells، هدم وبناء مع بعض."
+      - "Th1 ← IFN-γ ← classical. Th2 ← IL-4/IL-13 ← alternative (repair)."
+      - "Granuloma: IL-12 ← Th1 ← IFN-γ ← macrophage ← TNF ← epithelioid و giant cells."
+      - "Caseating = infection. Noncaseating = sarcoidosis و Crohn."
+      - "Anti-TNF يفك الـ granuloma: اعمل TB test الأول. Granuloma ← 1α-hydroxylase ← hypercalcemia."
+    practice: [path.L02.036, path.L02.037, path.L02.038, path.L02.039, path.L02.040, path.L02.046, path.L02.047, path.L02.048, path.L02.049, path.L02.050, path.L02.051, path.L02.052, path.L02.053]
+  - id: path.L02.lesson4
+    title: "الجرح بيلم إزاي، والـ keloid بيطلع ليه"
+    hook: "مريض جرحه مش راضي يقفل وعنده rash حوالين بُقّه. والبنت اللي الـ keloid بيرجع لها كل ما تشيله."
+    minutes: 7
+    pages: [212, 214]
+    topics: [wound-healing, scar-formation]
+    goals:
+      - "تعرف الـ mediators بتوع الـ wound healing"
+      - "ترتّب الـ 3 phases وتعرف خلايا ومميزات كل واحدة"
+      - "تفرّق بين الـ hypertrophic scar والـ keloid"
+    status: unverified
+    steps:
+      - kind: table
+        title: "الـ mediators"
+        columns: ["Mediator", "Role"]
+        rows:
+          - ["FGF, VEGF", "Angiogenesis"]
+          - ["TGF-β", "Angiogenesis, fibrosis"]
+          - ["PDGF", "Platelets and macrophages; vascular remodeling, smooth muscle migration, fibroblast growth"]
+          - ["Metalloproteinases", "Tissue remodeling"]
+          - ["EGF", "Cell growth via tyrosine kinases (EGFR/ErbB1)"]
+        hide: [[0, 1], [1, 1], [3, 1]]
+        page: 212
+        quote: "FGF Stimulates angiogenesis TGF-β Angiogenesis, fibrosis VEGF Stimulates angiogenesis"
+      - kind: explain
+        title: "3 مراحل"
+        text: |-
+          - **Inflammatory** (لحد 3 أيام): platelets و neutrophils و macrophages. clot، ↑ permeability، والـ macrophages بتنضّف بعد يومين.
+          - **Proliferative** (يوم 3 لأسابيع): fibroblasts و myofibroblasts و endothelial cells و keratinocytes. **granulation tissue** و ==type III collagen== و angiogenesis، والـ **myofibroblasts** بتقفّل الجرح (contraction).
+          - **Remodeling** (أسبوع لـ 6 شهور وأكتر): fibroblasts. الـ type III بيتبدّل بـ ==type I== ← tensile strength أعلى.
+        page: 212
+        quote: "Fibroblasts Type III collagen replaced by type I collagen, ↑ tensile strength of tissue"
+      - kind: order
+        prompt: "رتّب أنواع الـ collagen في الجرح من الأول للآخر"
+        steps:
+          - "Clot (no collagen yet)"
+          - "Granulation tissue with type III collagen"
+          - "Type III replaced by type I collagen"
+        why: "الـ proliferative phase بتحط type III، والـ remodeling بتبدّله بـ type I الأقوى."
+        page: 212
+        quote: "Deposition of granulation tissue and type III collagen, angiogenesis, epithelial cell proliferation, dissolution of clot, and wound contraction (mediated by myofibroblasts)"
+      - kind: reveal
+        prompt: "إيه النواقص اللي بتأخّر الجرح، وكل واحد بيأخّر أنهي مرحلة؟"
+        answer: "**Vitamin C و copper**: بيأخّروا المرحلة التانية (==proliferative==). **Zinc**: الـ collagenases محتاجاه عشان تكسّر الـ type III في الـ ==remodeling==، فنقصه ← delayed wound healing."
+        page: 212
+        quote: "Collagenases (require zinc to function) break down type III collagen Zinc deficiency → delayed wound healing"
+      - kind: check
+        question: "A man with chronic diarrhea, perioral dermatitis and alopecia has a wound that will not heal. Which enzyme needs the missing element?"
+        options:
+          - "Collagenase"
+          - "Prolyl hydroxylase"
+          - "Lysyl oxidase"
+          - "Tyrosine kinase of EGFR"
+        answer: 0
+        why:
+          - "صح: الصورة دي zinc deficiency، والـ collagenases محتاجة zinc عشان تكسّر الـ type III."
+          - "الـ prolyl hydroxylase محتاج vitamin C."
+          - "الـ lysyl oxidase محتاج copper."
+          - "الـ EGFR مش محتاج zinc."
+      - kind: try
+        items: [path.L02.041, path.L02.042, path.L02.043, path.L02.044]
+      - kind: explain
+        title: "الـ scar"
+        text: |-
+          الـ scar بيتكوّن لما الـ ==regeneration لوحدها مش كفاية==، فالـ connective tissue ياخد مكان الخلايا اللي مرجعتش.
+
+          بعد **3 شهور** بيرجع 70%-80% من الـ tensile strength، وبعدها مبيزيدش كتير. والـ ==TGF-β== الزيادة بيعمل scars شاذة: hypertrophic و keloid.
+        page: 214
+        quote: "70%-80% of tensile strength regained at 3 months; little tensile strength regained thereafter. Excess TGF-β is associated with aberrant scarring, such as hypertrophic and keloid scars."
+      - kind: table
+        title: "Hypertrophic ولا keloid"
+        columns: ["", "Hypertrophic", "Keloid"]
+        rows:
+          - ["Collagen", "↑ type III > type I", "↑↑↑ type I > type III"]
+          - ["Organization", "Parallel", "Disorganized"]
+          - ["Extent", "Within the wound", "Beyond it, clawlike"]
+          - ["Recurrence", "Infrequent", "Frequent"]
+          - ["Predisposition", "None", "Darker skin"]
+        hide: [[0, 1], [0, 2], [1, 2], [2, 2], [3, 2]]
+        page: 214
+        quote: "COLLAGeN SYNTHeSIS ↑ (type III > type I) ↑↑↑ (type I > type III) COLLAGeN ORGANIZATION Parallel Disorganized"
+      - kind: check
+        question: "A scar on the earlobe grows beyond the original wound with clawlike projections and recurs after excision. What is its collagen?"
+        options:
+          - "Disorganized, type I > type III"
+          - "Parallel, type III > type I"
+          - "Parallel, type I only"
+          - "Type IV basement membrane collagen"
+        answer: 0
+        why:
+          - "صح: ده keloid، والـ collagen فيه كتير جداً و disorganized والـ type I أكتر."
+          - "ده الـ hypertrophic scar اللي بيفضل جوّه حدود الجرح."
+          - "الـ keloid مش parallel."
+          - "الـ type IV مش هو اللي بيتراكم في الـ scars."
+      - kind: try
+        items: [path.L02.054, path.L02.055, path.L02.056, path.L02.057]
+    recap:
+      - "FGF و VEGF و TGF-β للـ angiogenesis. PDGF من الـ platelets للـ fibroblasts."
+      - "Inflammatory (3 أيام) ← proliferative (type III، myofibroblasts) ← remodeling (type I)."
+      - "Vitamin C و copper يأخّروا الـ proliferative. Zinc للـ collagenases."
+      - "70-80% من الـ strength بعد 3 شهور."
+      - "Keloid = type I، disorganized، برّه الجرح، بيرجع، أكتر مع البشرة الغامقة."
+    practice: [path.L02.041, path.L02.042, path.L02.043, path.L02.044, path.L02.045, path.L02.054, path.L02.055, path.L02.056, path.L02.057]
