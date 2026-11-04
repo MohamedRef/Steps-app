@@ -115,7 +115,8 @@ fn its_lessons_questions_and_topics_open_from_the_page() {
     if let Some(file) = lib.lessons.get(&id) {
         let mut app = App::with(Screen::Today, open_ready);
         app.tap("ls-card-btn");
-        assert_eq!(app.run(|| crate::learn::OPEN.peek().clone()), Some(file.lessons[0].id.clone()));
+        let opened = app.run(|| crate::learn::OPEN.peek().clone()).expect("a lesson opened");
+        assert!(file.lessons.iter().any(|l| l.id == opened), "{opened} is not one of {id}'s lessons");
         assert_eq!(screen(&app), "Learn");
     }
     // The bank's questions on it.

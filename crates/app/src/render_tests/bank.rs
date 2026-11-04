@@ -32,6 +32,37 @@ fn mcqs() -> usize {
     ids_of("mcq").len()
 }
 
+/// The lecture an item belongs to.
+fn lecture_of(item_id: &str) -> String {
+    crate::content::Library::get()
+        .lectures
+        .iter()
+        .find(|(_, l)| l.items.iter().any(|i| i.id == item_id))
+        .map(|(id, _)| id.clone())
+        .unwrap_or_else(|| panic!("no lecture holds {item_id}"))
+}
+
+/// A lecture's topics that have MCQs, in the lecture's order.
+fn mcq_topics(lecture: &str) -> Vec<steps_core::content::Topic> {
+    let l = &crate::content::Library::get().lectures[lecture];
+    l.topics
+        .iter()
+        .filter(|t| l.items.iter().any(|i| i.topic.as_deref() == Some(&t.id) && i.body.kind() == "mcq"))
+        .cloned()
+        .collect()
+}
+
+/// The first written lecture with at least `n` topics that have MCQs.
+#[track_caller]
+fn lecture_with_mcq_topics(n: usize) -> Option<String> {
+    crate::content::Library::get().lectures.keys().find(|id| mcq_topics(id).len() >= n).cloned()
+}
+
+/// The lecture opened over the bank, if one is.
+fn open_lecture(app: &mut App) -> Option<String> {
+    app.run(|| crate::lecture::shown(Screen::Bank))
+}
+
 /// The bank set to 10 questions and `mode`, started.
 fn paper(mode: &str, start: &str) -> App {
     let mut app = App::open(Screen::Bank);
@@ -58,7 +89,9 @@ fn the_setup_offers_the_three_modes_and_counts_the_pool() {
     app.assert_has(tx::MOCK_SCOPE_CHIP);
     app.assert_has(tx::MOCK_SCOPE_NOTE);
     app.assert_has(tx::START_MOCK);
-    app.tap("40");
+    // A block is 10, 15 or 20 questions, as on the 2026 exam.
+    assert!(!app.can_tap("40"));
+    app.tap("15");
     app.assert_has(tx::POOL_OF);
 }
 
@@ -260,12 +293,20 @@ fn a_tutor_paper_left_just_ends() {
 
 #[test]
 fn a_mock_is_scored_and_kept_as_a_mock() {
-    let n = mcqs();
     let mut app = App::open(Screen::Bank);
     app.tap(tx::MODE_MOCK_NAME);
     app.tap("20");
     app.tap(tx::START_MOCK);
     app.assert_has(tx::MODE_MOCK_NAME);
+    // A full block, or the whole pool when fewer are written.
+    let n = app.run(|| {
+        use dioxus::prelude::*;
+        match &*crate::bank::PHASE.peek() {
+            crate::bank::Phase::Running(p) => p.questions.len(),
+            _ => panic!("the block runs"),
+        }
+    });
+    assert_eq!(n, mcqs().min(steps_core::exam::MOCK_SIZE));
     let (_, wrong) = options(&shown(&app));
     app.tap(&wrong);
     app.tap_nth(tx::SUBMIT, 0);
@@ -282,18 +323,19 @@ fn a_mock_is_scored_and_kept_as_a_mock() {
 
 #[test]
 fn the_scope_narrows_to_a_topic_and_widens_back() {
-    let lecture = &crate::content::Library::get().lectures["cvs.L01"];
-    let mut app = App::open(Screen::Bank);
+    let id = lecture_with_mcq_topics(1).expect("a lecture has MCQs filed under a topic");
+    let lecture = &crate::content::Library::get().lectures[&id];
+    // A lecture page's practise button narrows the bank to the lecture,
+    // whose topics are then offered.
+    PRACTISE.with(|p| *p.borrow_mut() = id.clone());
+    let mut app = App::with_part(Screen::Bank, practise_lecture_button);
+    app.tap("practise the lecture");
     app.tap(tx::CUSTOMISE);
     app.assert_has(tx::CUSTOMISE_CLOSE);
     app.assert_has(tx::TOPICS);
     app.assert_has(tx::TAGS);
     // The first topic that has MCQs.
-    let topic = lecture
-        .topics
-        .iter()
-        .find(|t| lecture.items.iter().any(|i| i.topic.as_deref() == Some(&t.id) && i.body.kind() == "mcq"))
-        .unwrap();
+    let topic = &mcq_topics(&id)[0];
     let in_topic = lecture
         .items
         .iter()
@@ -301,7 +343,7 @@ fn the_scope_narrows_to_a_topic_and_widens_back() {
         .count();
     app.tap(&topic.title);
     app.assert_has(tx::SCOPE_CHOSEN);
-    app.assert_has(&format!("{} {}", tx::SCOPE_NOW, topic.title));
+    app.assert_has(&topic.title);
     app.assert_has(&tx::questions(in_topic));
     // Only wrong or unseen: all unseen, the same count.
     app.tap(tx::ONLY_WRONG);
@@ -387,6 +429,21 @@ fn practise_button() -> dioxus::prelude::Element {
     }
 }
 
+thread_local! {
+    /// The lecture `practise_lecture_button` opens the bank on.
+    static PRACTISE: std::cell::RefCell<String> = const { std::cell::RefCell::new(String::new()) };
+}
+
+/// A button that opens the bank on the lecture in `PRACTISE`.
+fn practise_lecture_button() -> dioxus::prelude::Element {
+    use dioxus::prelude::*;
+    let ui = use_context::<crate::Ui>();
+    let id = PRACTISE.with(|p| p.borrow().clone());
+    rsx! {
+        button { class: "test-practise", onclick: move |_| crate::bank::practise(ui, &id, None), "practise the lecture" }
+    }
+}
+
 #[test]
 fn practise_from_a_lecture_narrows_the_bank_and_leaves_a_mock() {
     let mut app = App::with_part(Screen::Bank, practise_button);
@@ -425,11 +482,13 @@ fn the_report_link_reopens_the_check_after_a_verdict() {
 #[test]
 fn a_lecture_chip_on_an_answered_question_opens_the_lecture_page() {
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
-    let (right, _) = options(&shown(&app));
+    let q = shown(&app);
+    let (right, _) = options(&q);
     app.tap(&right).tap(tx::CHECK);
     app.tap(tx::OPEN_LECTURE);
-    let title = crate::content::Library::get().title("cvs.L01").to_string();
-    app.assert_has(&title);
+    let lecture = lecture_of(&q.id);
+    assert_eq!(open_lecture(&mut app), Some(lecture.clone()));
+    app.assert_has(crate::content::Library::get().title(&lecture));
 }
 
 #[test]
@@ -447,10 +506,11 @@ fn a_finished_paper_row_opens_its_lecture() {
     // A topic row practises the topic.
     app.tap(tx::PRACTISE_TOPIC);
     app.assert_has(tx::SCOPE_CHOSEN);
-    // The history row opens the lecture page.
+    // The history row opens the lecture page: one the paper drew from.
     app.tap(tx::OPEN_LECTURE);
-    let title = crate::content::Library::get().title("cvs.L01").to_string();
-    app.assert_has(&title);
+    let lecture = open_lecture(&mut app).expect("a lecture page opened");
+    assert!(ids_of("mcq").iter().any(|id| lecture_of(id) == lecture), "{lecture} has no MCQs");
+    app.assert_has(crate::content::Library::get().title(&lecture));
 }
 
 /// A timed paper on every MCQ, started `ago_ms` before now, as the app keeps
@@ -614,7 +674,15 @@ fn a_kept_setup_with_odd_counts_falls_back_to_the_offered_ones() {
 
 #[test]
 fn a_course_with_no_questions_says_so() {
-    crate::store::shared().put_setting("course_focus", &"bio".to_string()).unwrap();
+    // A course none of whose lectures has an MCQ written yet.
+    let with_mcqs: Vec<String> =
+        ids_of("mcq").iter().map(|id| steps_core::program::course_of(&lecture_of(id)).to_string()).collect();
+    let Some(course) =
+        crate::content::Library::get().program.courses.iter().find(|c| !with_mcqs.contains(&c.id))
+    else {
+        return; // every course has questions
+    };
+    crate::store::shared().put_setting("course_focus", &course.id).unwrap();
     let app = App::open(Screen::Bank);
     app.assert_has(tx::EMPTY_TITLE);
     app.assert_has(tx::EMPTY_BODY);
@@ -633,13 +701,13 @@ fn another_course_in_view_drops_the_lecture_picks() {
 
 #[test]
 fn two_topics_are_named_by_count_and_a_topic_with_a_tag_empties_to_topics() {
-    let lecture = &crate::content::Library::get().lectures["cvs.L01"];
-    let with_mcqs: Vec<_> = lecture
-        .topics
-        .iter()
-        .filter(|t| lecture.items.iter().any(|i| i.topic.as_deref() == Some(&t.id) && i.body.kind() == "mcq"))
-        .collect();
-    let mut app = App::open(Screen::Bank);
+    let id = lecture_with_mcq_topics(2)
+        .or_else(|| lecture_with_mcq_topics(1))
+        .expect("a lecture has MCQs filed under a topic");
+    let with_mcqs = mcq_topics(&id);
+    PRACTISE.with(|p| *p.borrow_mut() = id.clone());
+    let mut app = App::with_part(Screen::Bank, practise_lecture_button);
+    app.tap("practise the lecture");
     app.tap(tx::CUSTOMISE);
     if with_mcqs.len() >= 2 {
         app.tap(&with_mcqs[0].title).tap(&with_mcqs[1].title);

@@ -149,7 +149,14 @@ fn the_dictionary_lists_a_course_a_to_z_and_searches_it() {
     use crate::i18n::abbr as tx;
     app.assert_has(tx::DICT_TITLE);
     let idx = crate::abbrdict::index();
-    let (course, terms) = idx.iter().next().expect("a course has abbreviations");
+    // The courses with abbreviations, in the program's order: the first shows.
+    let courses: Vec<_> = Library::get()
+        .program
+        .courses
+        .iter()
+        .filter(|c| idx.get(&c.id).is_some_and(|t| !t.is_empty()))
+        .collect();
+    let terms = &idx[&courses[0].id];
     app.assert_has(&tx::count(terms.len()));
     app.assert_has(&terms[0].entry.term);
     app.type_into(tx::DICT_SEARCH, "zzzz-nothing");
@@ -158,11 +165,12 @@ fn the_dictionary_lists_a_course_a_to_z_and_searches_it() {
         terms.iter().find(|t| t.entry.term == "PFO").map(|t| &t.entry.term).unwrap_or(&terms[0].entry.term);
     app.type_into(tx::DICT_SEARCH, pfo);
     app.assert_lacks(tx::DICT_NO_MATCH);
-    // A course chip picks the course.
-    let short = &Library::get().program.courses.iter().find(|c| &c.id == course).unwrap().short;
-    app.tap("abd-course");
-    assert_eq!(app.run(|| crate::abbrdict::COURSE.peek().clone()), Some(course.clone()));
-    let _ = short;
+    // A course chip picks the course: another one when there is one.
+    let pick = courses.get(1).unwrap_or(&courses[0]);
+    let nth = app.targets("click", "abd-course").into_iter().position(|n| app.page.text(n) == pick.short);
+    app.tap_nth("abd-course", nth.expect("the course has a chip"));
+    assert_eq!(app.run(|| crate::abbrdict::COURSE.peek().clone()), Some(pick.id.clone()));
+    app.type_into(tx::DICT_SEARCH, "");
     // A lesson that uses the term opens it, and the page closes.
     app.tap("abd-lesson");
     assert_eq!(screen(&app), "Learn");
