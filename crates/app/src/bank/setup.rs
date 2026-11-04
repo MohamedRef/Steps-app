@@ -1,5 +1,5 @@
 //! The bank's start screen: filters, tutor/timed start, the Step 1 style
-//! block (systems he picks, 10–40 questions, 90 s each, timed or with the
+//! block (systems he picks, 10–20 questions, 90 s each, timed or with the
 //! explanation after each), and the history of finished papers.
 
 use std::collections::BTreeSet;
@@ -174,8 +174,8 @@ fn all_lectures() -> String {
 }
 
 const COUNTS: [usize; 4] = [10, 20, 40, usize::MAX];
-/// Step 1 blocks hold up to 40 questions.
-const MOCK_COUNTS: [usize; 4] = [10, 20, 30, 40];
+/// Step 1 blocks hold up to 20 questions (30 minutes) since May 2026.
+const MOCK_COUNTS: [usize; 3] = [10, 15, 20];
 const TAGS: [(&str, &str); 3] =
     [("high-yield", tx::TAG_HIGH_YIELD), ("book-question", tx::TAG_BOOK), ("numbers", tx::TAG_NUMBERS)];
 const MODES: [(Mode, &str, &str); 3] = [
@@ -783,6 +783,6 @@ mod block_tests {
         // 100 is no longer a block size: it falls back to a full block.
         let saved = saved.pruned(&[]);
         assert_eq!(saved.mock_count, MOCK_SIZE);
-        assert!(MOCK_COUNTS.iter().all(|&n| (10..=40).contains(&n)));
+        assert!(MOCK_COUNTS.iter().all(|&n| (10..=20).contains(&n)));
     }
 }

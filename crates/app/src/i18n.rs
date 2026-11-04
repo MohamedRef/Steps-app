@@ -518,7 +518,7 @@ pub mod bank {
     pub const SCOPE_ALL: &str = "كل الأسئلة";
     pub const SCOPE_CHOSEN: &str = "النطاق اللي اخترته";
     pub const MOCK_SCOPE_CHIP: &str = "زي Step 1";
-    pub const MOCK_SCOPE_NOTE: &str = "البلوك بياخد من كل المحاضرات المكتوبة في الأجهزة اللي اخترتها، موزّعة على المحاضرات والمواضيع. الامتحان الحقيقي بلوكات ساعة، كل واحد لحد 40 سؤال.";
+    pub const MOCK_SCOPE_NOTE: &str = "البلوك بياخد من كل المحاضرات المكتوبة في الأجهزة اللي اخترتها، موزّعة على المحاضرات والمواضيع. الامتحان الحقيقي (من مايو 2026) 14 بلوك، كل بلوك نص ساعة ولحد 20 سؤال.";
     pub const BLOCK_SYSTEMS: &str = "الأجهزة والمواد";
     pub const BLOCK_ALL_SYSTEMS: &str = "كل الأجهزة";
     pub fn block_systems(n: usize) -> String {

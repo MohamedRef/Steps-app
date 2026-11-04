@@ -10,10 +10,11 @@ use crate::content::{Body, Lecture, Status};
 use crate::review::{Grade, Origin, ReviewEvent};
 
 /// 90 seconds per question in timed mode and in blocks, as on Step 1
-/// (a one-hour block of up to 40 questions).
+/// (since 14 May 2026: fourteen 30-minute blocks of at most 20 items,
+/// usmle.org/step-exams/step-1).
 pub const MS_PER_QUESTION: u64 = 90_000;
 /// The default block length: a full Step 1 block.
-pub const MOCK_SIZE: usize = 40;
+pub const MOCK_SIZE: usize = 20;
 
 /// One MCQ from the library, with the lecture it came from.
 #[derive(Debug, Clone, Copy)]
@@ -615,8 +616,8 @@ mod tests {
     fn timing() {
         assert_eq!(time_limit_ms(40), 60 * 60_000);
         assert_eq!(remaining_ms(1, 1_000, 1_000), 90_000);
-        // A full 40-question block is Step 1's hour.
-        assert_eq!(time_limit_ms(MOCK_SIZE), 3_600_000);
+        // A full block is Step 1's 30 minutes.
+        assert_eq!(time_limit_ms(MOCK_SIZE), 1_800_000);
         assert_eq!(remaining_ms(1, 1_000, 61_000), 30_000);
         assert_eq!(remaining_ms(1, 1_000, 999_999), 0);
     }
