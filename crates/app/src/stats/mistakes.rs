@@ -34,9 +34,14 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
         None => all.clone(),
     };
     let ids = stats::mistakes_session(&groups);
+    let retest = stats::retest_due(&data.lectures, &data.events, &data.marks, data.clock);
     let find = |id: &str| data.lectures.iter().flat_map(|l| &l.items).find(|i| i.id == id);
     rsx! {
         style { {METACOG_CSS.text()} }
+        // Misses he was sure of, 2 to 7 days on: one more try, so they stick.
+        if !retest.is_empty() {
+            RetestCard { ids: retest.clone(), data: data.clone() }
+        }
         crate::ui::Card { class: "",
             h2 { {tx::MISTAKES_TITLE} }
             if groups.is_empty() {
@@ -106,6 +111,42 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
                             }
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+/// Misses he was sure of, back for one more try: cards and clozes as a study
+/// session, MCQs as a tutor set in the bank.
+#[component]
+fn RetestCard(ids: Vec<String>, data: Rc<StudyData>) -> Element {
+    let mut ui = use_context::<crate::Ui>();
+    let pool: Vec<steps_core::exam::Mcq> = steps_core::exam::mcqs(&data.lectures)
+        .into_iter()
+        .filter(|q| ids.iter().any(|id| id == q.id))
+        .collect();
+    let questions = steps_core::exam::practice(&pool, pool.len(), data.clock.now_ms as u64);
+    let n = questions.len();
+    let cards = ids.iter().any(|id| crate::study::is_playable(id));
+    rsx! {
+        crate::ui::Card { class: "mistake-retest",
+            h2 { {mc::RETEST_TITLE} }
+            p { class: "muted small", {mc::RETEST_BODY} }
+            if cards {
+                SessionButton { label: mc::RETEST_START, ids }
+            }
+            if n > 0 {
+                div { class: "session-start",
+                    button {
+                        class: "btn btn-secondary",
+                        onclick: move |_| {
+                            crate::bank::start(steps_core::exam::Mode::Tutor, questions.clone());
+                            ui.screen.set(crate::Screen::Bank);
+                        },
+                        {mc::RETEST_MCQS}
+                    }
+                    span { class: "muted small", {crate::i18n::count::count(n, &crate::i18n::count::QUESTION)} }
                 }
             }
         }
