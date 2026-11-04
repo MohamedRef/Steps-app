@@ -1,0 +1,1169 @@
+schema: steps.content/v1
+lecture: mic.L01
+title: Basic bacteriology
+book: { chapter: 3, pages: [122, 131] }
+topics:
+  - { id: bacterial-structures, title: Bacterial structures }
+  - { id: stains, title: Stains }
+  - { id: special-culture-requirements, title: Special culture requirements }
+  - { id: anaerobes, title: Anaerobes }
+  - { id: intracellular-bacteria, title: Intracellular bacteria }
+  - { id: encapsulated-bacteria, title: Encapsulated bacteria }
+  - { id: urease-positive-organisms, title: Urease-positive organisms }
+  - { id: catalase-positive-organisms, title: Catalase-positive organisms }
+  - { id: pigment-producing-bacteria, title: Pigment-producing bacteria }
+  - { id: biofilm-producing-bacteria, title: In vivo biofilm-producing bacteria }
+  - { id: spore-forming-bacteria, title: Spore-forming bacteria }
+  - { id: bacterial-virulence-factors, title: Bacterial virulence factors }
+  - { id: antibiotic-resistance-mechanisms, title: Antibiotic resistance mechanisms }
+  - { id: bacterial-genetics, title: Bacterial genetics }
+  - { id: exotoxins-endotoxins, title: Main features of exotoxins and endotoxins }
+  - { id: bacteria-with-exotoxins, title: Bacteria with exotoxins }
+  - { id: endotoxin, title: Endotoxin }
+items:
+  # ---------- p122: bacterial structures ----------
+  - id: mic.L01.001
+    kind: table
+    topic: bacterial-structures
+    title: Bacterial structures
+    columns: [Structure, Chemical composition, Function]
+    rows:
+      - [Flagellum, Proteins, Motility]
+      - [Pilus/fimbria, Glycoprotein, "Adherence to cell surface; sex pilus forms during conjugation"]
+      - [Spore, "Keratinlike coat, dipicolinic acid, peptidoglycan, DNA", "Survival: resists dehydration, heat, chemicals"]
+      - [Capsule, "Discrete layer, usually polysaccharides (rarely proteins)", Protects against phagocytosis]
+      - [Slime (S) layer, Loose network of polysaccharides, "Adherence to surfaces; biofilm formation (eg, indwelling catheters)"]
+      - [Outer membrane (gram ⊝ only), "Outer leaflet: endotoxin (LPS/LOS); porins and other OMPs; inner leaflet: phospholipids", "Lipid A induces TNF and IL-1; porins transport across the outer membrane"]
+      - [Periplasm, "Space between cytoplasmic and outer membrane in gram ⊝ (peptidoglycan in middle)", "Accumulates hydrolytic enzymes (eg, β-lactamases)"]
+      - [Cell wall, Peptidoglycan cross-linked by transpeptidase, "Rigid support; protects against osmotic pressure"]
+      - [Cytoplasmic membrane, "Phospholipid bilayer with embedded proteins (eg, PBPs)", "Oxidative and transport enzymes; PBPs in cell wall synthesis"]
+    blanks: [[0, 2], [1, 2], [2, 1], [3, 2], [4, 2], [6, 2], [7, 1], [8, 2]]
+    src: { page: 122, quote: "Flagellum Proteins Motility Pilus/fimbria Glycoprotein Mediate adherence of bacteria to cell surface; sex pilus forms during conjugation" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.002
+    kind: card
+    topic: bacterial-structures
+    front: What is a bacterial spore made of, and what does it let the bacterium survive?
+    back: A keratinlike coat, dipicolinic acid, peptidoglycan and DNA. It resists dehydration, heat and chemicals.
+    src: { page: 122, quote: "Spore Keratinlike coat, dipicolinic acid, peptidoglycan, DNA Survival: resist dehydration, heat, chemicals" }
+    status: unverified
+  - id: mic.L01.003
+    kind: cloze
+    topic: bacterial-structures
+    text: The capsule is a discrete layer usually made of {{c1::polysaccharides}} and protects against {{c2::phagocytosis}}; the loose slime (S) layer mediates adherence and {{c3::biofilm}} formation, eg, on indwelling catheters.
+    src: { page: 122, quote: "Capsule Discrete layer usually made of polysaccharides (and rarely proteins) Protects against phagocytosis Slime (S) layer Loose network of polysaccharides Mediates adherence to surfaces, plays a role in biofilm formation (eg, indwelling catheters)" }
+    status: unverified
+  - id: mic.L01.004
+    kind: card
+    topic: bacterial-structures
+    front: Which part of endotoxin induces TNF and IL-1, and which part is antigenic?
+    back: Lipid A induces TNF and IL-1; the O polysaccharide is the antigenic component. Endotoxin (LPS/LOS) sits in the outer leaflet of the outer membrane, found in gram ⊝ bacteria only.
+    src: { page: 122, quote: "Gram ⊝ only Endotoxin: lipid A induces TNF and IL-1; antigenic O polysaccharide component" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.005
+    kind: card
+    topic: bacterial-structures
+    front: What is the periplasm, and which enzymes accumulate there?
+    back: The space between the cytoplasmic membrane and the outer membrane in gram ⊝ bacteria (peptidoglycan in the middle). It accumulates hydrolytic enzymes exiting the cell, eg, β-lactamases.
+    src: { page: 122, quote: "Periplasm Space between cytoplasmic membrane and outer membrane in gram ⊝ bacteria (peptidoglycan in middle) Accumulates components exiting gram ⊝ cells, including hydrolytic enzymes (eg, β-lactamases)" }
+    status: unverified
+  - id: mic.L01.006
+    kind: cloze
+    topic: bacterial-structures
+    text: Peptidoglycan is a sugar backbone with peptide side chains cross-linked by {{c1::transpeptidase}}; this netlike structure protects against {{c2::osmotic pressure}} damage.
+    src: { page: 122, quote: "Cell wall Peptidoglycan is a sugar backbone with peptide side chains cross-linked by transpeptidase Netlike structure gives rigid support, protects against osmotic pressure damage" }
+    status: unverified
+  - id: mic.L01.007
+    kind: card
+    topic: bacterial-structures
+    front: Which cell envelope component is unique to gram ⊕ bacteria, and what does it induce?
+    back: Lipoteichoic acid, which extends from the cytoplasmic membrane to the exterior. It induces TNF-α and IL-1.
+    src: { page: 122, quote: "Lipoteichoic acids (gram positive) only extend from membrane to exterior" }
+    status: unverified
+  - id: mic.L01.008
+    kind: card
+    topic: bacterial-structures
+    front: Where are penicillin-binding proteins (PBPs) located and what do they do?
+    back: Embedded in the cytoplasmic membrane (phospholipid bilayer). They are involved in cell wall synthesis.
+    src: { page: 122, quote: "Phospholipid bilayer sac with embedded proteins (eg, penicillin-binding proteins [PBPs]) and other enzymes" }
+    status: unverified
+  - id: mic.L01.009
+    kind: mcq
+    topic: bacterial-structures
+    stem: >-
+      A 60-year-old man is admitted with fever, rigors and hypotension 2 days after a transrectal
+      prostate biopsy. Blood cultures grow a lactose-fermenting gram-negative rod. He develops
+      a high fever and falling blood pressure. Which bacterial component most directly triggers
+      the release of TNF and IL-1 that causes his shock?
+    options:
+      - Lipid A of the outer membrane
+      - Lipoteichoic acid
+      - Peptidoglycan cross-linked by transpeptidase
+      - Polysaccharide capsule
+      - Periplasmic β-lactamase
+    answer: 0
+    why:
+      - "Right. Lipid A of the endotoxin (LPS) in the gram ⊝ outer membrane induces TNF and IL-1, causing fever and shock."
+      - "Lipoteichoic acid also induces TNF-α and IL-1, but it is found only in gram ⊕ bacteria."
+      - "Peptidoglycan gives rigid support against osmotic pressure; it is not the toxic part of a gram ⊝ rod."
+      - "The capsule protects against phagocytosis; it doesn't trigger the cytokine storm."
+      - "β-lactamases in the periplasm destroy antibiotics; they do not cause shock."
+    src: { page: 122, quote: "Endotoxin: lipid A induces TNF and IL-1" }
+    status: unverified
+  # ---------- p123: stains ----------
+  - id: mic.L01.010
+    kind: card
+    topic: stains
+    front: Why do some bacteria stain gram ⊕ and others gram ⊝?
+    back: Bacteria with a thick peptidoglycan layer retain crystal violet (gram ⊕); bacteria with a thin peptidoglycan layer turn red or pink with the counterstain (gram ⊝).
+    src: { page: 123, quote: "Bacteria with thick peptidoglycan layer retain crystal violet dye (gram ⊕); bacteria with thin peptidoglycan layer turn red or pink (gram ⊝) with counterstain." }
+    status: unverified
+  - id: mic.L01.011
+    kind: table
+    topic: stains
+    title: Bugs that do not Gram stain well
+    columns: [Organisms, Reason]
+    rows:
+      - ["Treponema, Leptospira", Too thin to be visualized]
+      - [Mycobacteria, Cell wall has high lipid content]
+      - ["Mycoplasma, Ureaplasma", No cell wall]
+      - ["Legionella, Rickettsia, Chlamydia, Bartonella, Anaplasma, Ehrlichia", "Primarily intracellular (Chlamydia also lack classic peptidoglycan: ↓ muramic acid)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 123, quote: "Treponema, Leptospira Too thin to be visualized Mycobacteria Cell wall has high lipid content Mycoplasma, Ureaplasma No cell wall" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.012
+    kind: enumerate
+    topic: stains
+    prompt: Enumerate the bugs that do not Gram stain well (book mnemonic, 10).
+    points:
+      - Treponema
+      - Leptospira
+      - Mycobacteria
+      - Mycoplasma
+      - Ureaplasma
+      - Legionella
+      - Rickettsia
+      - Chlamydia
+      - Bartonella
+      - Anaplasma and Ehrlichia
+    pass: 8
+    hook: "These Little Microbes May Unfortunately Lack Real Color But Are Everywhere (الكتاب): رفيعين (T، L)، دهنيين (Mycobacteria)، من غير حيطة (Mycoplasma، Ureaplasma)، والباقي ساكنين جوه الخلية."
+    src: { page: 123, quote: "These bugs do not Gram stain well (These Little Microbes May Unfortunately Lack Real Color But Are Everywhere)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.013
+    kind: card
+    topic: stains
+    front: Which organisms does the Giemsa stain show, and what is the book's mnemonic?
+    back: "H pylori, Chlamydia, Borrelia, Rickettsia, Trypanosomes, Plasmodium. \"Help! Certain Bugs Really Try my Patience.\""
+    src: { page: 123, quote: "Giemsa stain H pylori, Chlamydia, Borrelia, Rickettsia, Trypanosomes A , Plasmodium Help! Certain Bugs Really Try my Patience" }
+    status: unverified
+  - id: mic.L01.014
+    kind: card
+    topic: stains
+    front: What does the periodic acid–Schiff (PAS) stain show, and which disease does it diagnose?
+    back: Glycogen and mucopolysaccharides. It is used to diagnose Whipple disease (Tropheryma whipplei).
+    src: { page: 123, quote: "Stains glycogen, mucopolysaccharides; used to diagnose Whipple disease (Tropheryma whipplei" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.015
+    kind: cloze
+    topic: stains
+    text: The Ziehl-Neelsen (carbol fuchsin) stain shows acid-fast bacteria such as Mycobacteria and {{c1::Nocardia}} by staining {{c2::mycolic acid}} in the cell wall, and protozoa such as {{c3::Cryptosporidium}} oocysts; auramine-rhodamine is more often used for screening.
+    src: { page: 123, quote: "Acid-fast bacteria (eg, Mycobacteria C , Nocardia; stains mycolic acid in cell wall); protozoa (eg, Cryptosporidium oocysts) Auramine-rhodamine stain is more often used for screening (inexpensive, more sensitive)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.016
+    kind: card
+    topic: stains
+    front: Which stains show the capsule of Cryptococcus neoformans?
+    back: India ink; mucicarmine can also stain the thick polysaccharide capsule red.
+    src: { page: 123, quote: "India ink stain Cryptococcus neoformans D ; mucicarmine can also be used to stain thick polysaccharide capsule red" }
+    status: unverified
+  - id: mic.L01.017
+    kind: card
+    topic: stains
+    front: Which organisms does the silver stain show (book mnemonic)?
+    back: "H pylori, Legionella, Bartonella henselae, and fungi (Coccidioides, Pneumocystis jirovecii, Aspergillus fumigatus). \"HeLiCoPters Are silver.\""
+    src: { page: 123, quote: "Silver stain Helicobacter pylori, Legionella, Bartonella henselae, and fungi (eg, Coccidioides E , Pneumocystis jirovecii, Aspergillus fumigatus) HeLiCoPters Are silver" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.018
+    kind: card
+    topic: stains
+    front: What does a fluorescent antibody stain identify, and what is the example for syphilis?
+    back: Many bacteria and viruses, Pneumocystis jirovecii, Giardia and Cryptosporidium. FTA-ABS for syphilis.
+    src: { page: 123, quote: "Used to identify many bacteria, viruses, Pneumocystis jirovecii, Giardia, and Cryptosporidium Example is FTA-ABS for syphilis" }
+    status: unverified
+  - id: mic.L01.019
+    kind: mcq
+    topic: stains
+    stem: >-
+      A 45-year-old man has had 6 months of diarrhea, a 10-kg weight loss, migratory joint pain and,
+      recently, memory problems. A small-bowel biopsy shows foamy macrophages in the lamina propria
+      that stain magenta. Which stain was most likely used to show these macrophages?
+    options:
+      - Periodic acid–Schiff
+      - Ziehl-Neelsen
+      - India ink
+      - Giemsa
+      - Gram stain
+    answer: 0
+    why:
+      - "Right. PAS stains glycogen and mucopolysaccharides and is used to diagnose Whipple disease (Tropheryma whipplei)."
+      - "Ziehl-Neelsen shows acid-fast organisms (Mycobacteria, Nocardia, Cryptosporidium)."
+      - "India ink shows the capsule of Cryptococcus neoformans."
+      - "Giemsa shows H pylori, Chlamydia, Borrelia, Rickettsia, trypanosomes and Plasmodium."
+      - "The Gram stain classifies bacteria by peptidoglycan thickness; it is not the stain for Whipple macrophages."
+    src: { page: 123, quote: "used to diagnose Whipple disease (Tropheryma whipplei" }
+    status: unverified
+  - id: mic.L01.020
+    kind: mcq
+    topic: stains
+    stem: >-
+      A 30-year-old woman has fever and a nonproductive cough. Chest x-ray shows patchy bilateral
+      infiltrates. A sputum Gram stain shows many neutrophils but no organisms. Which feature
+      explains why the most likely organism, which has no cell wall, is invisible on Gram stain?
+    options:
+      - It lacks a cell wall
+      - Its cell wall has a high lipid content
+      - It is too thin to be visualized
+      - It is an obligate intracellular organism
+      - It lacks muramic acid
+    answer: 0
+    why:
+      - "Right. Mycoplasma (and Ureaplasma) have no cell wall, so there is no peptidoglycan to hold the stain."
+      - "High lipid content is the reason for Mycobacteria."
+      - "Too thin to be visualized fits Treponema and Leptospira."
+      - "Being intracellular is the reason for Legionella, Rickettsia, Chlamydia and others, not this organism."
+      - "↓ muramic acid is the extra reason given for Chlamydia."
+    src: { page: 123, quote: "Mycoplasma, Ureaplasma No cell wall" }
+    status: unverified
+  # ---------- p124: special culture requirements ----------
+  - id: mic.L01.021
+    kind: table
+    topic: special-culture-requirements
+    title: Special culture requirements
+    columns: [Bug, Media used for isolation, Contents/other]
+    rows:
+      - [H influenzae, Chocolate agar, "Factors V (NAD+) and X (hematin)"]
+      - ["N gonorrhoeae, N meningitidis", Thayer-Martin agar, "Vancomycin, trimethoprim, colistin, nystatin"]
+      - [B pertussis, "Bordet-Gengou agar; Regan-Lowe medium", "Potato extract; charcoal, blood, antibiotic"]
+      - [C diphtheriae, "Tellurite agar, Löffler medium", ""]
+      - [M tuberculosis, "Löwenstein-Jensen, Middlebrook, rapid automated broth", ""]
+      - [M pneumoniae, Eaton agar, Requires cholesterol]
+      - [Lactose-fermenting enterics, MacConkey agar, Fermentation produces acid → pink colonies]
+      - [E coli, Eosin–methylene blue (EMB) agar, Green metallic sheen]
+      - ["Brucella, Francisella, Legionella, Pasteurella", Buffered charcoal yeast extract agar, Cysteine and iron]
+      - [Fungi, Sabouraud agar, "\"Sab's a fun guy!\""]
+    blanks: [[0, 1], [0, 2], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 2], [8, 1], [9, 1]]
+    src: { page: 124, quote: "H influenzae Chocolate agar Factors V (NAD+ ) and X (hematin)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.022
+    kind: cloze
+    topic: special-culture-requirements
+    text: H influenzae grows on {{c1::chocolate}} agar, which supplies factors {{c2::V (NAD+)}} and {{c3::X (hematin)}}.
+    src: { page: 124, quote: "H influenzae Chocolate agar Factors V (NAD+ ) and X (hematin)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.023
+    kind: card
+    topic: special-culture-requirements
+    front: How does Thayer-Martin agar select for Neisseria?
+    back: Vancomycin inhibits gram ⊕ organisms, trimethoprim and colistin inhibit gram ⊝ organisms except Neisseria, and nystatin inhibits fungi. ("Very Typically Cultures Neisseria.")
+    src: { page: 124, quote: "Selectively favors growth of Neisseria by inhibiting growth of gram ⊕ organisms with vancomycin, gram ⊝ organisms except Neisseria with trimethoprim and colistin, and fungi with nystatin" }
+    status: unverified
+  - id: mic.L01.024
+    kind: card
+    topic: special-culture-requirements
+    front: Which media isolate B pertussis and C diphtheriae?
+    back: "B pertussis: Bordet-Gengou agar (potato extract) or Regan-Lowe medium (charcoal, blood, antibiotic). C diphtheriae: tellurite agar, Löffler medium."
+    src: { page: 124, quote: "B pertussis Bordet-Gengou agar (Bordet for Bordetella) Regan-Lowe medium Potato extract Charcoal, blood, and antibiotic C diphtheriae Tellurite agar, Löffler medium" }
+    status: unverified
+  - id: mic.L01.025
+    kind: cloze
+    topic: special-culture-requirements
+    text: M pneumoniae grows on {{c1::Eaton}} agar, which requires {{c2::cholesterol}}; M tuberculosis grows on {{c3::Löwenstein-Jensen}} or Middlebrook medium.
+    src: { page: 124, quote: "M tuberculosis Löwenstein-Jensen medium, Middlebrook medium, rapid automated broth cultures M pneumoniae Eaton agar Requires cholesterol" }
+    status: unverified
+  - id: mic.L01.026
+    kind: card
+    topic: special-culture-requirements
+    front: What do lactose fermenters look like on MacConkey agar, and E coli on EMB agar?
+    back: "MacConkey: fermentation produces acid, so colonies turn pink. EMB (eosin–methylene blue): E coli gives colonies with a green metallic sheen."
+    src: { page: 124, quote: "MacConkey agar Fermentation produces acid, causing colonies to turn pink E coli Eosin–methylene blue (EMB) agar Colonies with green metallic sheen" }
+    status: unverified
+  - id: mic.L01.027
+    kind: card
+    topic: special-culture-requirements
+    front: Which bugs grow on buffered charcoal yeast extract agar with cysteine and iron (book mnemonic)?
+    back: "Brucella, Francisella, Legionella, Pasteurella. \"The Ella siblings, Bruce, Francis, a legionnaire, and a pasteur (pastor), built the Sistine (cysteine) chapel out of charcoal and iron.\""
+    src: { page: 124, quote: "Brucella, Francisella, Legionella, Pasteurella Buffered charcoal yeast extract agar with cysteine and iron" }
+    status: unverified
+  - id: mic.L01.028
+    kind: mcq
+    topic: special-culture-requirements
+    stem: >-
+      A 3-year-old unvaccinated girl has fever, drooling and a muffled voice. Blood cultures grow a
+      small gram-negative coccobacillus that grows on chocolate agar but not on sheep blood agar.
+      Which factors in chocolate agar does this organism require?
+    options:
+      - Factors V (NAD+) and X (hematin)
+      - Cholesterol
+      - Cysteine and iron
+      - Tellurite
+      - Vancomycin, colistin and nystatin
+    answer: 0
+    why:
+      - "Right. H influenzae needs factors V (NAD+) and X (hematin), supplied by chocolate agar."
+      - "Cholesterol is the requirement of M pneumoniae (Eaton agar)."
+      - "Cysteine and iron in charcoal yeast agar are for Brucella, Francisella, Legionella and Pasteurella."
+      - "Tellurite agar is for C diphtheriae."
+      - "Those antibiotics make Thayer-Martin agar selective for Neisseria."
+    src: { page: 124, quote: "H influenzae Chocolate agar Factors V (NAD+ ) and X (hematin)" }
+    status: unverified
+  # ---------- p125: anaerobes ----------
+  - id: mic.L01.029
+    kind: card
+    topic: anaerobes
+    front: Why are anaerobes susceptible to oxygen, and what are typical examples?
+    back: They lack catalase and/or superoxide dismutase, so they are susceptible to oxidative damage. Examples are Clostridioides, Clostridium, Bacteroides, Fusobacterium and Actinomyces israelii. ("Anaerobes Can't Breathe Fresh Air.")
+    src: { page: 125, quote: "Examples include Clostridioides, Clostridium, Bacteroides, Fusobacterium, and Actinomyces israelii. They lack catalase and/or superoxide dismutase and are thus susceptible to oxidative damage." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.030
+    kind: card
+    topic: anaerobes
+    front: What are the general features of anaerobic infections?
+    back: Foul smelling (short-chain fatty acids), difficult to culture, and produce gas in tissue (CO2 and H2). They are normal GI microbiota but pathogenic elsewhere, eg, aspiration pneumonia.
+    src: { page: 125, quote: "Generally foul smelling (short- chain fatty acids), are difficult to culture, and produce gas in tissue" }
+    status: unverified
+  - id: mic.L01.031
+    kind: card
+    topic: anaerobes
+    front: Why are aminoglycosides ineffective against anaerobes?
+    back: Aminoglycosides require O2 to enter the bacterial cell ("AminO2glycosides").
+    src: { page: 125, quote: "AminO2glycosides are ineffective against anaerobes because these antibiotics require O2 to enter into bacterial cell." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.032
+    kind: card
+    topic: anaerobes
+    front: What can facultative anaerobes do, and which bacteria are examples?
+    back: They may use O2 as the terminal electron acceptor to make ATP, but can also use fermentation and other O2-independent pathways. Examples are streptococci, staphylococci and enteric gram ⊝ bacteria.
+    src: { page: 125, quote: "May use O2 as a terminal electron acceptor to generate ATP, but can also use fermentation and other O2-independent pathways. Streptococci, staphylococci, and enteric gram ⊝ bacteria." }
+    status: unverified
+  - id: mic.L01.033
+    kind: mcq
+    topic: anaerobes
+    stem: >-
+      A 58-year-old man with alcohol use disorder has 2 weeks of fever and cough productive of
+      foul-smelling sputum. Chest x-ray shows a cavitary lesion with an air-fluid level in the
+      posterior segment of the right upper lobe. Which antibiotic class would be ineffective against
+      the most likely organisms, and why?
+    options:
+      - Aminoglycosides, because they need O2 to enter the bacterial cell
+      - β-lactams, because anaerobes lack a cell wall
+      - Macrolides, because anaerobes lack ribosomes
+      - Fluoroquinolones, because anaerobes have no DNA gyrase
+      - Metronidazole, because anaerobes lack nitroreductase
+    answer: 0
+    why:
+      - "Right. An aspiration lung abscess is anaerobic; aminoglycosides need O2 to enter the cell, so they don't work against anaerobes."
+      - "Anaerobes have a cell wall; lacking a cell wall describes Mycoplasma."
+      - "All bacteria have ribosomes."
+      - "Anaerobes have DNA gyrase like other bacteria."
+      - "Anaerobes reduce metronidazole, which is why it works against them."
+    src: { page: 125, quote: "AminO2glycosides are ineffective against anaerobes because these antibiotics require O2 to enter into bacterial cell." }
+    status: unverified
+  # ---------- p125: intracellular bacteria ----------
+  - id: mic.L01.034
+    kind: card
+    topic: intracellular-bacteria
+    front: Which bacteria are obligate intracellular, and why can't they live outside cells (book mnemonic)?
+    back: "Rickettsia, Chlamydia, Coxiella. They rely on host ATP. \"Stay inside (cells) when it is Really Chilly and Cold.\""
+    src: { page: 125, quote: "Obligate intracellular Rickettsia, Chlamydia, Coxiella Rely on host ATP Stay inside (cells) when it is Really Chilly and Cold" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.035
+    kind: enumerate
+    topic: intracellular-bacteria
+    prompt: Enumerate the facultative intracellular bacteria (8).
+    points:
+      - Salmonella
+      - Neisseria
+      - Brucella
+      - Mycobacterium
+      - Listeria
+      - Francisella
+      - Legionella
+      - Yersinia pestis
+    pass: 7
+    hook: "Some Nasty Bugs May Live FacultativeLY (الكتاب): كل حرف كبير بكتيريا، والـ LY في الآخر = Legionella و Yersinia."
+    src: { page: 125, quote: "Salmonella, Neisseria, Brucella, Mycobacterium, Listeria, Francisella, Legionella, Yersinia pestis Some Nasty Bugs May Live FacultativeLY" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.036
+    kind: mcq
+    topic: intracellular-bacteria
+    stem: >-
+      A 40-year-old farmer in Australia has 1 week of high fever, headache and a dry cough after
+      helping cattle give birth. Chest x-ray shows bilateral infiltrates. The organism cannot be
+      grown on standard media and must live inside host cells. Which feature explains this?
+    options:
+      - It relies on host ATP
+      - It lacks a cell wall
+      - It needs factors V and X
+      - It requires cholesterol
+      - It is killed by oxygen
+    answer: 0
+    why:
+      - "Right. Coxiella (Q fever) is obligate intracellular, like Rickettsia and Chlamydia, because it relies on host ATP."
+      - "No cell wall is Mycoplasma's feature; it can grow on Eaton agar."
+      - "Factors V and X are needs of H influenzae."
+      - "Cholesterol is required by M pneumoniae."
+      - "Oxygen sensitivity describes anaerobes, which can be cultured outside cells."
+    src: { page: 125, quote: "Obligate intracellular Rickettsia, Chlamydia, Coxiella Rely on host ATP" }
+    status: unverified
+  # ---------- p125: encapsulated bacteria ----------
+  - id: mic.L01.037
+    kind: enumerate
+    topic: encapsulated-bacteria
+    prompt: Enumerate the encapsulated bacteria (book mnemonic, 8).
+    points:
+      - Pseudomonas aeruginosa
+      - Streptococcus pneumoniae
+      - Haemophilus influenzae type b
+      - Neisseria meningitidis
+      - Escherichia coli
+      - Salmonella
+      - Klebsiella pneumoniae
+      - Group B Strep
+    pass: 7
+    hook: "Please SHiNE my SKiS (الكتاب): P، S pneumoniae، H influenzae، N meningitidis، E coli، Salmonella، Klebsiella، و group B Strep."
+    src: { page: 125, quote: "Examples are Pseudomonas aeruginosa, Streptococcus pneumoniae A , Haemophilus influenzae type b, Neisseria meningitidis, Escherichia coli, Salmonella, Klebsiella pneumoniae, and group B Strep." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.038
+    kind: card
+    topic: encapsulated-bacteria
+    front: Why are capsular polysaccharides conjugated to a carrier protein in vaccines?
+    back: A polysaccharide antigen alone cannot be presented to T cells; conjugating it to a carrier protein enhances immunogenicity.
+    src: { page: 125, quote: "A polysaccharide antigen alone cannot be presented to T cells; immunogenicity can be enhanced by conjugating capsule antigens to a carrier protein." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.039
+    kind: card
+    topic: encapsulated-bacteria
+    front: Why are asplenic patients at risk from encapsulated bacteria, and which vaccines do they need?
+    back: Encapsulated bacteria are opsonized and then cleared by the spleen; asplenics have ↓ opsonizing ability. They need vaccines against N meningitidis, S pneumoniae and H influenzae ("No Spleen Here").
+    src: { page: 125, quote: "Are opsonized, and then cleared by spleen. Asplenics (No Spleen Here) have ↓ opsonizing ability and thus ↑ risk for severe infections" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.040
+    kind: mcq
+    topic: encapsulated-bacteria
+    stem: >-
+      A 19-year-old man had a splenectomy after a motorcycle crash. Before discharge he is given
+      several vaccines, including a conjugate vaccine in which bacterial capsular polysaccharide is
+      linked to a carrier protein. Why does linking the polysaccharide to a protein improve the
+      vaccine?
+    options:
+      - It allows the antigen to be presented to T cells
+      - It lets the polysaccharide bind complement directly
+      - It turns the capsule into a toxoid
+      - It blocks the bacterial IgA protease
+      - It makes the capsule a superantigen
+    answer: 0
+    why:
+      - "Right. Polysaccharide alone can't be presented to T cells; the carrier protein brings in T-cell help and enhances immunogenicity."
+      - "The vaccine works by antibody response, not by binding complement itself."
+      - "Toxoids are inactivated exotoxins, not capsules."
+      - "IgA protease is a separate virulence factor; conjugation does not target it."
+      - "Superantigens cross-link TCR and MHC II and cause shock; that is not the aim of a vaccine."
+    src: { page: 125, quote: "A polysaccharide antigen alone cannot be presented to T cells; immunogenicity can be enhanced by conjugating capsule antigens to a carrier protein." }
+    status: unverified
+  # ---------- p125: urease-positive organisms ----------
+  - id: mic.L01.041
+    kind: enumerate
+    topic: urease-positive-organisms
+    prompt: Enumerate the urease-positive organisms (book mnemonic, 8).
+    points:
+      - Proteus
+      - Cryptococcus
+      - H pylori
+      - Ureaplasma
+      - Nocardia
+      - Klebsiella
+      - S epidermidis
+      - S saprophyticus
+    pass: 7
+    hook: "Pee CHUNKSS (الكتاب): الـ urease بيكسّر الـ urea اللي في البول، فالاسم نفسه فيه pee."
+    src: { page: 125, quote: "Proteus, Cryptococcus, H pylori, Ureaplasma, Nocardia, Klebsiella, S epidermidis, S saprophyticus." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.042
+    kind: card
+    topic: urease-positive-organisms
+    front: What does urease do, and which stones does it predispose to?
+    back: Urease hydrolyzes urea to ammonia and CO2 → ↑ pH. This predisposes to struvite (magnesium ammonium phosphate) stones, particularly with Proteus.
+    src: { page: 125, quote: "Urease hydrolyzes urea to release ammonia and CO2 → ↑ pH. Predisposes to struvite (magnesium ammonium phosphate) stones, particularly Proteus." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.043
+    kind: mcq
+    topic: urease-positive-organisms
+    stem: >-
+      A 52-year-old woman with recurrent urinary tract infections has right flank pain. CT shows a
+      large branching stone filling the right renal pelvis. Urine pH is 8.0, and urine culture grows a
+      swarming gram-negative rod. Which enzyme of this organism best explains the stone?
+    options:
+      - Urease
+      - Catalase
+      - Coagulase
+      - β-lactamase
+      - IgA protease
+    answer: 0
+    why:
+      - "Right. Proteus urease splits urea into ammonia → ↑ pH → struvite (magnesium ammonium phosphate) stones."
+      - "Catalase breaks down H2O2; it matters in chronic granulomatous disease, not in stones."
+      - "Coagulase is a staphylococcal enzyme and does not alkalinize urine."
+      - "β-lactamase destroys penicillins; it has nothing to do with stone formation."
+      - "IgA protease helps colonize mucosa; it doesn't raise urine pH."
+    src: { page: 125, quote: "Urease hydrolyzes urea to release ammonia and CO2 → ↑ pH. Predisposes to struvite (magnesium ammonium phosphate) stones, particularly Proteus." }
+    status: unverified
+  # ---------- p126: catalase-positive organisms ----------
+  - id: mic.L01.044
+    kind: card
+    topic: catalase-positive-organisms
+    front: What does catalase do, and why does it matter in chronic granulomatous disease (CGD)?
+    back: Catalase degrades H2O2 into H2O and O2 before it can be converted to microbicidal products by myeloperoxidase. Patients with CGD (NADPH oxidase deficiency) get recurrent infections with certain catalase ⊕ organisms.
+    src: { page: 126, quote: "Catalase degrades H2O2 into H2O and bubbles of O2 A before it can be converted to microbicidal products by the enzyme myeloperoxidase." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.045
+    kind: enumerate
+    topic: catalase-positive-organisms
+    prompt: Enumerate the catalase-positive organisms (book mnemonic, 11).
+    points:
+      - Candida
+      - Pseudomonas
+      - Nocardia
+      - Bordetella pertussis
+      - Burkholderia cepacia
+      - Helicobacter pylori
+      - Aspergillus
+      - Staphylococci
+      - Serratia
+      - Listeria
+      - E coli
+    pass: 9
+    hook: "Catalase Positive: Notoriously Big Bubbling HASSLE (الكتاب). الـ catalase بيطلّع فقاقيع O2، فالمريض بالـ CGD بيتعب من الـ bubbling hassle ده."
+    src: { page: 126, quote: "Catalase ⊕ organisms include Candida, Pseudomonas, Nocardia, Bordetella pertussis, Burkholderia cepacia, Helicobacter pylori, Aspergillus, Staphylococci, Serratia, Listeria, E coli." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.046
+    kind: mcq
+    topic: catalase-positive-organisms
+    stem: >-
+      A 4-year-old boy has had recurrent staphylococcal skin abscesses and two episodes of
+      Aspergillus pneumonia. A dihydrorhodamine test shows no oxidative burst in his neutrophils.
+      Why do catalase-positive organisms cause his infections?
+    options:
+      - They break down their own H2O2, so his phagocytes have none to use
+      - They resist complement-mediated lysis
+      - They cleave his IgA
+      - They inactivate myeloperoxidase
+      - They block neutrophil chemotaxis
+    answer: 0
+    why:
+      - "Right. In CGD (NADPH oxidase deficiency) the phagocyte depends on the microbe's H2O2; catalase degrades it before myeloperoxidase can make microbicidal products."
+      - "Complement resistance is a capsule effect, unrelated to CGD."
+      - "IgA protease (SHiN) helps mucosal colonization, not this defect."
+      - "Catalase removes the substrate; it doesn't inactivate myeloperoxidase."
+      - "His neutrophils reach the site; the problem is killing, not chemotaxis."
+    src: { page: 126, quote: "People with chronic granulomatous disease (NADPH oxidase deficiency) have recurrent infections with certain catalase ⊕ organisms." }
+    status: unverified
+  # ---------- p126: pigment-producing bacteria ----------
+  - id: mic.L01.047
+    kind: table
+    topic: pigment-producing-bacteria
+    title: Pigment-producing bacteria
+    columns: [Bacterium, Pigment, Book mnemonic]
+    rows:
+      - [Actinomyces israelii, Yellow "sulfur" granules (filaments of bacteria), Israel has yellow sand]
+      - [S aureus, Golden yellow, Aureus (Latin) = gold]
+      - [P aeruginosa, Blue-green (pyocyanin and pyoverdin), Aerugula is green]
+      - [Serratia marcescens, Red, Think red Sriracha hot sauce]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 126, quote: "Actinomyces israelii—yellow “sulfur” granules, which are composed of filaments of bacteria Israel has yellow sand S aureus—golden yellow pigment Aureus (Latin) = gold" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.048
+    kind: mcq
+    topic: pigment-producing-bacteria
+    stem: >-
+      A 38-year-old man has a painless, hard swelling at the angle of the jaw 6 weeks after a tooth
+      extraction. A sinus tract drains pus with small yellow granules. Microscopy of the granules
+      shows branching filaments. What is the most likely organism?
+    options:
+      - Actinomyces israelii
+      - Staphylococcus aureus
+      - Pseudomonas aeruginosa
+      - Serratia marcescens
+      - Nocardia
+    answer: 0
+    why:
+      - "Right. Actinomyces israelii forms yellow \"sulfur\" granules made of filaments of bacteria."
+      - "S aureus has a golden yellow pigment but grows as cocci in clusters, not granules of filaments."
+      - "P aeruginosa makes a blue-green pigment (pyocyanin, pyoverdin)."
+      - "Serratia marcescens makes a red pigment."
+      - "Nocardia also branches but does not form yellow sulfur granules in this pigment list."
+    src: { page: 126, quote: "Actinomyces israelii—yellow “sulfur” granules, which are composed of filaments of bacteria" }
+    status: unverified
+  # ---------- p126: biofilm ----------
+  - id: mic.L01.049
+    kind: table
+    topic: biofilm-producing-bacteria
+    title: In vivo biofilm-producing bacteria
+    columns: [Bacterium, Biofilm infection]
+    rows:
+      - [S epidermidis, Catheter and prosthetic device infections]
+      - ["Viridans streptococci (S mutans, S sanguinis)", "Dental plaques, infective endocarditis"]
+      - [P aeruginosa, "Respiratory tree colonization in cystic fibrosis, ventilator-associated pneumonia, contact lens–associated keratitis"]
+      - [Nontypeable (unencapsulated) H influenzae, Otitis media]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 126, quote: "S epidermidis Catheter and prosthetic device infections Viridans streptococci (S mutans, S sanguinis) Dental plaques, infective endocarditis" }
+    status: unverified
+  - id: mic.L01.050
+    kind: mcq
+    topic: biofilm-producing-bacteria
+    stem: >-
+      A 24-year-old woman who sleeps in her soft contact lenses has 2 days of a painful red right eye
+      with a corneal ulcer. Culture grows an oxidase-positive gram-negative rod with a blue-green
+      pigment. The same organism forms biofilms in which other setting?
+    options:
+      - The airways of patients with cystic fibrosis
+      - Dental plaque
+      - Prosthetic joints and catheters only
+      - The middle ear in otitis media
+      - The bladder of patients with struvite stones
+    answer: 0
+    why:
+      - "Right. P aeruginosa biofilms colonize the respiratory tree in cystic fibrosis and cause ventilator-associated pneumonia and contact lens keratitis."
+      - "Dental plaque is the biofilm of viridans streptococci (S mutans, S sanguinis)."
+      - "Catheter and prosthetic device biofilms are typical of S epidermidis."
+      - "Otitis media biofilm is nontypeable H influenzae."
+      - "Struvite stones come from urease ⊕ organisms such as Proteus; they are not listed as biofilm infections here."
+    src: { page: 126, quote: "P aeruginosa Respiratory tree colonization in patients with cystic fibrosis, ventilator-associated pneumonia Contact lens–associated keratitis" }
+    status: unverified
+  # ---------- p126: spore-forming ----------
+  - id: mic.L01.051
+    kind: card
+    topic: spore-forming-bacteria
+    front: When do bacteria form spores, and what makes spores resistant to heat?
+    back: Some gram ⊕ bacteria form spores when nutrients are limited. Spores lack metabolic activity; the core contains dipicolinic acid, which is responsible for heat resistance.
+    src: { page: 126, quote: "Some gram ⊕ bacteria can form spores when nutrients are limited. Spores lack metabolic activity and are highly resistant to heat and chemicals. Core contains dipicolinic acid (responsible for heat resistance)." }
+    status: unverified
+  - id: mic.L01.052
+    kind: cloze
+    topic: spore-forming-bacteria
+    text: Spores are killed by autoclaving, steaming at {{c1::121°C}} for {{c2::15 minutes}} at {{c3::15 psi}}; hydrogen peroxide and iodine-based agents are also sporicidal.
+    src: { page: 126, quote: "Must autoclave to kill spores (as is done to surgical equipment) by steaming at 121°C for 15 minutes at a pressure of 15 psi. Hydrogen peroxide and iodine-based agents are also sporicidal." }
+    status: unverified
+    tags: [numbers]
+  - id: mic.L01.053
+    kind: enumerate
+    topic: spore-forming-bacteria
+    prompt: Enumerate the spore-forming bacteria and their diseases (6).
+    points:
+      - B anthracis (anthrax)
+      - B cereus (food poisoning)
+      - Clostridium botulinum (botulism)
+      - Clostridioides difficile (pseudomembranous colitis)
+      - Clostridium perfringens (gas gangrene)
+      - Clostridium tetani (tetanus)
+    pass: 5
+    hook: "Autoclave to kill Bacillus and Clostridium = ABC (الكتاب): 2 Bacillus و 4 Clostridium."
+    src: { page: 126, quote: "Examples: B anthracis (anthrax), B cereus (food poisoning), Clostridium botulinum (botulism), Clostridioides difficile (pseudomembranous colitis), Clostridium perfringens (gas gangrene), Clostridium tetani (tetanus)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.054
+    kind: mcq
+    topic: spore-forming-bacteria
+    stem: >-
+      A hospital has a cluster of Clostridioides difficile colitis on one ward. The infection control
+      team notes that the alcohol hand rub used between patients does not stop transmission. Which
+      component of the organism's dormant form explains its resistance to heat?
+    options:
+      - Dipicolinic acid in the spore core
+      - A polysaccharide capsule
+      - Lipid A in the outer membrane
+      - Mycolic acid in the cell wall
+      - Lipoteichoic acid
+    answer: 0
+    why:
+      - "Right. Spores are metabolically inactive, and dipicolinic acid in the core gives heat resistance; autoclaving or sporicidal agents are needed."
+      - "A capsule protects against phagocytosis, not heat."
+      - "Lipid A is endotoxin of gram ⊝ bacteria; C difficile is gram ⊕."
+      - "Mycolic acid is in the acid-fast wall of Mycobacteria and Nocardia."
+      - "Lipoteichoic acid induces TNF-α and IL-1; it does not protect against heat."
+    src: { page: 126, quote: "Core contains dipicolinic acid (responsible for heat resistance)." }
+    status: unverified
+  # ---------- p127: virulence factors ----------
+  - id: mic.L01.055
+    kind: table
+    topic: bacterial-virulence-factors
+    title: Bacterial virulence factors
+    columns: [Factor, Action, Expressed by]
+    rows:
+      - [Capsular polysaccharide, Barrier to phagocytosis and complement-mediated lysis; major determinant of virulence, Encapsulated bacteria]
+      - [Protein A, Binds Fc region of IgG → prevents opsonization and phagocytosis, S aureus]
+      - [IgA protease, Cleaves IgA → adherence to and colonization of mucous membranes, "S pneumoniae, H influenzae type b, Neisseria (SHiN)"]
+      - [M protein, Prevents phagocytosis; homology with cardiac myosin, Group A streptococci]
+    blanks: [[1, 1], [1, 2], [2, 1], [2, 2], [3, 2]]
+    src: { page: 127, quote: "Protein A Binds Fc region of IgG. Prevents opsonization and phagocytosis. Expressed by S aureus." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.056
+    kind: card
+    topic: bacterial-virulence-factors
+    front: Which bacteria secrete IgA protease, and what does it let them do?
+    back: S pneumoniae, H influenzae type b and Neisseria (SHiN). Cleaving IgA lets them adhere to and colonize mucous membranes.
+    src: { page: 127, quote: "IgA protease Enzyme that cleaves IgA, allowing bacteria to adhere to and colonize mucous membranes. Secreted by S pneumoniae, H influenzae type b, and Neisseria (SHiN)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.057
+    kind: card
+    topic: bacterial-virulence-factors
+    front: How might M protein of group A streptococci underlie acute rheumatic fever?
+    back: M protein has sequence homology with human cardiac myosin (molecular mimicry), which possibly underlies the autoimmune response of acute rheumatic fever. It also helps prevent phagocytosis.
+    src: { page: 127, quote: "M protein Helps prevent phagocytosis. Expressed by group A streptococci. Sequence homology with human cardiac myosin (molecular mimicry); possibly underlies the autoimmune response seen in acute rheumatic fever." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.058
+    kind: mcq
+    topic: bacterial-virulence-factors
+    stem: >-
+      A 10-year-old girl has fever, migratory polyarthritis and a new apical holosystolic murmur
+      3 weeks after an untreated sore throat. Her antistreptolysin O titer is high. Which bacterial
+      factor most likely triggered her cardiac injury?
+    options:
+      - M protein
+      - Protein A
+      - IgA protease
+      - Lipid A
+      - Exotoxin A
+    answer: 0
+    why:
+      - "Right. Group A strep M protein shares sequence homology with cardiac myosin; molecular mimicry possibly underlies rheumatic fever."
+      - "Protein A binds the Fc of IgG and belongs to S aureus."
+      - "IgA protease (SHiN) helps mucosal colonization; it doesn't cause rheumatic fever."
+      - "Lipid A is gram ⊝ endotoxin; group A strep is gram ⊕."
+      - "Exotoxin A is the Pseudomonas toxin that inactivates EF-2."
+    src: { page: 127, quote: "Sequence homology with human cardiac myosin (molecular mimicry); possibly underlies the autoimmune response seen in acute rheumatic fever." }
+    status: unverified
+  # ---------- p127: antibiotic resistance mechanisms (figure) ----------
+  - id: mic.L01.059
+    kind: table
+    topic: antibiotic-resistance-mechanisms
+    title: Antibiotic resistance mechanisms
+    columns: [Mechanism, Drugs affected]
+    rows:
+      - ["Enzymatic inactivation: drug cleavage", "Penicillin G, V; penicillinase-sensitive penicillins; cephalosporins; carbapenems"]
+      - ["Enzymatic inactivation: drug modification", "Aminoglycosides, chloramphenicol"]
+      - ["Drug target modification: rRNA", "Linezolid, macrolides"]
+      - ["Drug target modification: enzyme", "Penicillinase-resistant penicillins, cephalosporins, sulfonamides, fluoroquinolones"]
+      - ["Drug target modification: cell wall", Vancomycin]
+      - ["Increased efflux, decreased uptake", "Tetracyclines, sulfonamides, fluoroquinolones"]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1], [5, 1]]
+    src: { page: 127, quote: "Drug cleavage Penicillin G, V Penicillinase-sensitive penicillins Cephalosporins Carbapenems Drug modification Aminoglycosides Chloramphenicol" }
+    status: unverified
+  - id: mic.L01.060
+    kind: mcq
+    topic: antibiotic-resistance-mechanisms
+    stem: >-
+      A 70-year-old woman in intensive care has a central line infection with Enterococcus faecium
+      that is resistant to vancomycin. The isolate carries genes that change the drug's binding site.
+      By which general mechanism is this organism resistant?
+    options:
+      - Modification of the cell wall drug target
+      - Enzymatic cleavage of the drug
+      - Enzymatic modification of the drug
+      - Increased efflux of the drug
+      - Modification of the rRNA target
+    answer: 0
+    why:
+      - "Right. Vancomycin resistance is drug target modification at the cell wall."
+      - "Drug cleavage (β-lactamases) affects penicillins, cephalosporins and carbapenems."
+      - "Drug modification affects aminoglycosides and chloramphenicol."
+      - "Increased efflux/decreased uptake affects tetracyclines, sulfonamides and fluoroquinolones."
+      - "rRNA target modification affects linezolid and macrolides."
+    src: { page: 127, quote: "Cell wall Vancomycin DRUG TARGET MODIFICATION" }
+    status: unverified
+  # ---------- p128-129: bacterial genetics ----------
+  - id: mic.L01.061
+    kind: card
+    topic: bacterial-genetics
+    front: What is the main mechanism for transfer of antibiotic resistance among bacteria?
+    back: Horizontal gene transfer.
+    src: { page: 128, quote: "Horizontal gene transfer is the main mechanism for transfer of antibiotic resistance among bacteria." }
+    status: unverified
+  - id: mic.L01.062
+    kind: card
+    topic: bacterial-genetics
+    front: What is transformation, which bacteria do it especially, and what prevents it?
+    back: Competent bacteria bind and import short pieces of naked environmental chromosomal DNA (from lysed bacteria) and express it. Especially S pneumoniae, H influenzae type b and Neisseria (SHiN). Adding deoxyribonuclease degrades naked DNA and prevents it.
+    src: { page: 128, quote: "Competent bacteria can bind and import short pieces of environmental naked bacterial chromosomal DNA (from bacterial cell lysis)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.063
+    kind: card
+    topic: bacterial-genetics
+    front: In F+ × F– conjugation, what is transferred and what is not?
+    back: The F+ plasmid carries genes for the sex pilus and conjugation. A single strand of plasmid DNA is transferred across the conjugal (mating) bridge; no chromosomal DNA is transferred.
+    src: { page: 128, quote: "A single strand of plasmid DNA is transferred across the conjugal bridge (“mating bridge”). No transfer of chromosomal DNA." }
+    status: unverified
+  - id: mic.L01.064
+    kind: card
+    topic: bacterial-genetics
+    front: What is an Hfr cell, and what does Hfr × F– conjugation transfer?
+    back: A high-frequency recombination (Hfr) cell has the F+ plasmid incorporated into its chromosome. It transfers the leading part of the plasmid and a few flanking chromosomal genes; the recipient stays F– but may gain new bacterial genes.
+    src: { page: 128, quote: "Transfer of leading part of plasmid and a few flanking chromosomal genes." }
+    status: unverified
+  - id: mic.L01.065
+    kind: table
+    topic: bacterial-genetics
+    title: Transduction
+    columns: [Type, Event, Phage]
+    rows:
+      - [Generalized, "A \"packaging\" error: bacterial DNA is packaged in the phage capsid", Lytic]
+      - [Specialized, "An \"excision\" event: flanking bacterial genes are excised with phage DNA", Lysogenic]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 128, quote: "Generalized A “packaging” error. Lytic phage infects bacterium, leading to cleavage of bacterial DNA." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.066
+    kind: enumerate
+    topic: bacterial-genetics
+    prompt: Enumerate the 5 bacterial toxins encoded in a lysogenic phage (book mnemonic).
+    points:
+      - Group A strep erythrogenic toxin
+      - Botulinum toxin
+      - Cholera toxin
+      - Diphtheria toxin
+      - Shiga toxin
+    pass: 5
+    hook: "ABCD'S (الكتاب): A strep، Botulinum، Cholera، Diphtheria، Shiga."
+    src: { page: 128, quote: "Genes for the following 5 bacterial toxins are encoded in a lysogenic phage (ABCD’S): Group A strep erythrogenic toxin, Botulinum toxin, Cholera toxin, Diphtheria toxin, Shiga toxin." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.067
+    kind: card
+    topic: bacterial-genetics
+    front: What is transposition, and why does it matter clinically?
+    back: A "jumping" transposon copies and excises itself and inserts into the same DNA or unrelated DNA (plasmid or chromosome). It creates plasmids with multiple drug resistance and transfers resistance across species, eg, Tn1546 with vanA from Enterococcus to S aureus.
+    src: { page: 129, quote: "Critical in creating plasmids with multiple drug resistance and transfer across species lines (eg, Tn1546 with vanA from Enterococcus to S aureus)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.068
+    kind: mcq
+    topic: bacterial-genetics
+    stem: >-
+      A 5-year-old unvaccinated boy has a sore throat, fever and a gray membrane over his tonsils that
+      bleeds when scraped, with marked neck swelling. Only strains of the organism carrying a
+      particular bacteriophage produce the toxin responsible. By which process did the bacterium
+      acquire the toxin gene?
+    options:
+      - Specialized transduction by a lysogenic phage
+      - Generalized transduction by a lytic phage
+      - Transformation with naked DNA
+      - F+ × F– conjugation
+      - Transposition of vanA
+    answer: 0
+    why:
+      - "Right. Diphtheria toxin is one of the ABCD'S toxins encoded in a lysogenic phage, transferred by specialized transduction."
+      - "Generalized transduction is a packaging error of a lytic phage; it doesn't explain toxin genes carried by a resident prophage."
+      - "Transformation is uptake of naked DNA, typical of SHiN."
+      - "F+ × F– conjugation transfers a plasmid, not a phage gene."
+      - "vanA transposition gives vancomycin resistance."
+    src: { page: 128, quote: "Genes for the following 5 bacterial toxins are encoded in a lysogenic phage (ABCD’S): Group A strep erythrogenic toxin, Botulinum toxin, Cholera toxin, Diphtheria toxin, Shiga toxin." }
+    status: unverified
+  # ---------- p129: exotoxins vs endotoxins ----------
+  - id: mic.L01.069
+    kind: table
+    topic: exotoxins-endotoxins
+    title: Main features of exotoxins and endotoxins
+    columns: [Feature, Exotoxins, Endotoxins]
+    rows:
+      - [Source, Certain gram ⊕ and gram ⊝ bacteria, Outer cell membrane of most gram ⊝ bacteria]
+      - [Secreted from cell, "Yes", "No"]
+      - [Chemistry, Polypeptide, Lipid A component of LPS (released when lysed)]
+      - [Location of genes, Plasmid or bacteriophage, Bacterial chromosome]
+      - [Toxicity, "High (fatal dose ~1 µg)", "Low (fatal dose ~hundreds of µg)"]
+      - [Clinical effects, Various, "Fever, shock (hypotension), DIC"]
+      - [Mode of action, Various, "Induces TNF, IL-1, IL-6"]
+      - [Antigenicity, Induces high-titer antitoxins, Poorly antigenic]
+      - [Vaccines, Toxoids used as vaccines, No toxoids and no vaccine]
+      - [Heat stability, "Destroyed rapidly at 60°C (except staphylococcal enterotoxin, E coli ST, B cereus emetic toxin)", Stable at 100°C for 1 hr]
+      - [Typical diseases, "Tetanus, botulism, diphtheria, cholera", "Meningococcemia; sepsis by gram ⊝ rods"]
+    blanks: [[2, 1], [2, 2], [3, 1], [3, 2], [4, 1], [6, 2], [7, 2], [8, 1], [9, 2]]
+    src: { page: 129, quote: "LOCATION OF GENES Plasmid or bacteriophage Bacterial chromosome TOXICITY High (fatal dose on the order of 1 µg) Low (fatal dose on the order of hundreds of micrograms)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.070
+    kind: card
+    topic: exotoxins-endotoxins
+    front: Which 3 exotoxins are heat stable (not destroyed at 60°C)?
+    back: Staphylococcal enterotoxin, E coli heat-stable toxin and B cereus emetic toxin.
+    src: { page: 129, quote: "Destroyed rapidly at 60°C (except staphylococcal enterotoxin, E coli heat-stable toxin, and B cereus emetic toxin)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.071
+    kind: mcq
+    topic: exotoxins-endotoxins
+    stem: >-
+      A 6-year-old boy steps on a rusty nail. His parents are unsure of his vaccinations. He receives
+      a vaccine made from an inactivated toxin that stimulates high-titer neutralizing antibodies.
+      Which property of this toxin makes such a vaccine possible?
+    options:
+      - It is a polypeptide that induces high-titer antitoxins
+      - It is lipid A that induces TNF and IL-1
+      - It is encoded on the bacterial chromosome
+      - It is stable at 100°C for 1 hour
+      - It is released only when the bacterium lyses
+    answer: 0
+    why:
+      - "Right. Tetanospasmin is an exotoxin: a polypeptide, highly antigenic, so a toxoid vaccine works."
+      - "Lipid A is endotoxin, which is poorly antigenic and has no toxoid."
+      - "Exotoxin genes are on a plasmid or phage; chromosomal genes describe endotoxin."
+      - "Stability at 100°C describes endotoxin; most exotoxins are destroyed at 60°C."
+      - "Release on lysis describes endotoxin; exotoxins are secreted."
+    src: { page: 129, quote: "ANTIGENICITY Induces high-titer antibodies called antitoxins Poorly antigenic VACCINES Toxoids used as vaccines No toxoids formed and no vaccine available" }
+    status: unverified
+  # ---------- p130-131: bacteria with exotoxins ----------
+  - id: mic.L01.072
+    kind: table
+    topic: bacteria-with-exotoxins
+    title: Exotoxins that inhibit protein synthesis
+    columns: [Bacterium, Toxin, Mechanism, Manifestation]
+    rows:
+      - [Corynebacterium diphtheriae, Diphtheria toxin, Inactivates EF-2 by ADP-ribosylation, "Pseudomembranous pharyngitis, bull neck, myocarditis"]
+      - [Pseudomonas aeruginosa, Exotoxin A, Inactivates EF-2 by ADP-ribosylation, Host cell death]
+      - [Shigella spp, Shiga toxin, Inactivates 60S ribosome by removing adenine from rRNA, "Dysentery; HUS"]
+      - [Enterohemorrhagic E coli, Shiga toxin, Inactivates 60S ribosome by removing adenine from rRNA, "HUS (O157:H7); does not invade cells"]
+    blanks: [[0, 2], [1, 2], [2, 2], [0, 3]]
+    src: { page: 130, quote: "Inactivate elongation factor (EF-2) through ADP-ribosylation" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.073
+    kind: card
+    topic: bacteria-with-exotoxins
+    front: What are the manifestations of diphtheria toxin?
+    back: Pharyngitis with pseudomembranes in the throat, severe lymphadenopathy (bull neck) and myocarditis.
+    src: { page: 130, quote: "Pharyngitis with pseudomembranes in throat and severe lymphadenopathy (bull neck), myocarditis" }
+    status: unverified
+  - id: mic.L01.074
+    kind: card
+    topic: bacteria-with-exotoxins
+    front: How does Shiga toxin cause hemolytic-uremic syndrome, and how does EHEC differ from Shigella?
+    back: Shiga toxin inactivates the 60S ribosome by removing adenine from rRNA; toxin-mediated injury and cytokine release cause HUS (prototypically EHEC O157:H7). Unlike Shigella, EHEC does not invade host cells.
+    src: { page: 130, quote: "Toxin-mediated injury and cytokine release → hemolytic-uremic syndrome (HUS; prototypically in EHEC serotype O157:H7) Unlike Shigella, EHEC does not invade host cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.075
+    kind: table
+    topic: bacteria-with-exotoxins
+    title: Exotoxins that increase fluid secretion or inhibit phagocytosis
+    columns: [Toxin, Mechanism, Manifestation]
+    rows:
+      - [ETEC heat-labile toxin (LT), Overactivates adenylate cyclase (↑ cAMP) → ↑ Cl− secretion, Watery diarrhea]
+      - [ETEC heat-stable toxin (ST), Overactivates guanylate cyclase (↑ cGMP) → ↓ NaCl and H2O resorption, Watery diarrhea]
+      - [Anthrax toxin, Mimics adenylate cyclase (↑ cAMP), Edematous borders of the black eschar]
+      - [Cholera toxin, Permanently activates Gs → ↑ cAMP, Voluminous "rice-water" diarrhea]
+      - [Pertussis toxin, Inactivates Gi → ↑ cAMP, "Whooping cough; 100-day cough in adults; posttussive emesis"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 130, quote: "Overactivates adenylate cyclase (↑ cAMP) by permanently activating Gs Voluminous “rice-water” diarrhea" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.076
+    kind: cloze
+    topic: bacteria-with-exotoxins
+    text: "ETEC toxins: \"labile in the Air ({{c1::Adenylate}} cyclase), stable on the Ground ({{c2::Guanylate}} cyclase).\""
+    src: { page: 130, quote: "Watery diarrhea: “labile in the Air (Adenylate cyclase), stable on the Ground (Guanylate cyclase)”" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.077
+    kind: card
+    topic: bacteria-with-exotoxins
+    front: Which bacteria increase cAMP with their toxins?
+    back: V cholerae, B anthracis, B pertussis and E coli.
+    src: { page: 130, quote: "Bacteria that ↑ cAMP include V cholerae, B anthracis, B pertussis, E coli" }
+    status: unverified
+  - id: mic.L01.078
+    kind: card
+    topic: bacteria-with-exotoxins
+    front: How do tetanospasmin and botulinum toxin work, and how do their effects differ?
+    back: Both are proteases that cleave SNARE proteins needed for vesicle fusion. Tetanospasmin blocks release of inhibitory GABA and glycine from Renshaw cells in the spinal cord → spastic paralysis, risus sardonicus, trismus, opisthotonos. Botulinum toxin blocks neurotransmitter release causing flaccid paralysis.
+    src: { page: 130, quote: "Toxin prevents release of inhibitory (GABA and glycine) neurotransmitters from Renshaw cells in spinal cord → spastic paralysis, risus sardonicus, trismus (lockjaw), opisthotonos" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.079
+    kind: card
+    topic: bacteria-with-exotoxins
+    front: How do infant and foodborne botulism differ?
+    back: "Infant botulism: ingestion of spores (eg, soil, raw honey), toxin produced in vivo. Foodborne botulism: ingestion of preformed toxin (eg, canned foods)."
+    src: { page: 130, quote: "Infant botulism—caused by ingestion of spores (eg, from soil, raw honey). Toxin produced in vivo Foodborne botulism—caused by ingestion of preformed toxin (eg, from canned foods)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.080
+    kind: card
+    topic: bacteria-with-exotoxins
+    front: What is an AB toxin?
+    back: A two-component toxin (three for anthrax) in which B enables Binding and triggers uptake (endocytosis) of the Active A component; A components are usually ADP-ribosyltransferases.
+    src: { page: 130, quote: "An AB toxin (also called two-component toxin [or three for anthrax]) with B enabling Binding and triggering uptake (endocytosis) of the Active A component." }
+    status: unverified
+  - id: mic.L01.081
+    kind: table
+    topic: bacteria-with-exotoxins
+    title: Exotoxins that lyse cell membranes or act as superantigens
+    columns: [Bacterium, Toxin, Mechanism, Manifestation]
+    rows:
+      - [Clostridium perfringens, Alpha toxin, Phospholipase (lecithinase), "Myonecrosis (gas gangrene); \"double zone\" hemolysis on blood agar"]
+      - [Streptococcus pyogenes, Streptolysin O, Protein that degrades cell membrane, "Lyses RBCs (β-hemolysis); ASO antibodies diagnose rheumatic fever"]
+      - [Staphylococcus aureus, TSST-1, Cross-links β region of TCR to MHC II outside the antigen binding site, "Toxic shock syndrome: fever, rash, shock"]
+      - [Streptococcus pyogenes, Erythrogenic exotoxin A, "Superantigen → release of IL-1, IL-2, IFN-γ, TNF-α", "Toxic shock–like syndrome; scarlet fever"]
+    blanks: [[0, 2], [0, 3], [1, 3], [2, 2], [3, 3]]
+    src: { page: 131, quote: "Alpha toxin Phospholipase (lecithinase) that degrades tissue and cell membranes" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.082
+    kind: card
+    topic: bacteria-with-exotoxins
+    front: Besides TSST-1, which other S aureus toxins does the book list, and what do they cause?
+    back: Exfoliative toxin (scalded skin syndrome) and heat-stable enterotoxin (food poisoning).
+    src: { page: 131, quote: "other toxins cause scalded skin syndrome (exfoliative toxin) and food poisoning (heat-stable enterotoxin)" }
+    status: unverified
+  - id: mic.L01.083
+    kind: mcq
+    topic: bacteria-with-exotoxins
+    stem: >-
+      A 28-year-old man returns from a relief mission and has profuse painless watery diarrhea
+      (about 15 L/day) that looks like rice water. He is profoundly dehydrated. By which mechanism
+      does the toxin of the most likely organism cause his diarrhea?
+    options:
+      - Permanent activation of Gs, raising cAMP
+      - Inactivation of Gi, raising cAMP
+      - Overactivation of guanylate cyclase
+      - Removal of adenine from 60S rRNA
+      - ADP-ribosylation of EF-2
+    answer: 0
+    why:
+      - "Right. Cholera toxin permanently activates Gs → ↑ adenylate cyclase → ↑ cAMP → voluminous rice-water diarrhea."
+      - "Inactivating Gi is pertussis toxin (whooping cough)."
+      - "Guanylate cyclase overactivation is the ETEC heat-stable toxin."
+      - "Removing adenine from 60S rRNA is Shiga toxin, which causes dysentery, not rice-water stools."
+      - "ADP-ribosylation of EF-2 is diphtheria toxin and Pseudomonas exotoxin A."
+    src: { page: 130, quote: "Overactivates adenylate cyclase (↑ cAMP) by permanently activating Gs Voluminous “rice-water” diarrhea" }
+    status: unverified
+  - id: mic.L01.084
+    kind: mcq
+    topic: bacteria-with-exotoxins
+    stem: >-
+      A 3-month-old girl is brought in with 3 days of constipation, poor feeding, a weak cry and
+      floppiness. Her mother has been sweetening her pacifier with raw honey. Examination shows
+      ptosis and decreased tone. What best describes how the disease was acquired and how the toxin
+      acts?
+    options:
+      - Ingested spores make toxin in vivo, which cleaves SNARE proteins
+      - Preformed toxin was ingested and blocks release of glycine
+      - Ingested spores make toxin that inactivates EF-2
+      - Preformed toxin cross-links the TCR to MHC II
+      - Ingested bacteria make a toxin that removes adenine from rRNA
+    answer: 0
+    why:
+      - "Right. Infant botulism comes from ingested spores (raw honey, soil); toxin produced in vivo cleaves SNARE and blocks acetylcholine release."
+      - "Preformed toxin is foodborne botulism; blocking glycine release from Renshaw cells is tetanus (spastic, not floppy)."
+      - "EF-2 inactivation is diphtheria toxin and Pseudomonas exotoxin A."
+      - "Cross-linking TCR to MHC II is a superantigen such as TSST-1."
+      - "Removing adenine from rRNA is Shiga toxin."
+    src: { page: 130, quote: "Infant botulism—caused by ingestion of spores (eg, from soil, raw honey). Toxin produced in vivo" }
+    status: unverified
+  - id: mic.L01.085
+    kind: mcq
+    topic: bacteria-with-exotoxins
+    stem: >-
+      A 22-year-old woman has sudden fever of 39.8°C, a diffuse sunburn-like rash, vomiting and
+      hypotension on the fourth day of her menstrual period, during which she used a tampon. Which
+      mechanism of the responsible toxin causes her shock?
+    options:
+      - It cross-links the β region of the TCR to MHC class II outside the antigen binding site
+      - It is a phospholipase that degrades cell membranes
+      - It cleaves SNARE proteins
+      - It permanently activates Gs
+      - It binds the Fc region of IgG
+    answer: 0
+    why:
+      - "Right. TSST-1 is a superantigen: it cross-links TCR and MHC II outside the antigen binding site, releasing a flood of cytokines → fever, rash, shock."
+      - "A phospholipase (lecithinase) is C perfringens alpha toxin (gas gangrene)."
+      - "SNARE cleavage is tetanus and botulinum toxin."
+      - "Permanent Gs activation is cholera toxin."
+      - "Binding IgG Fc is protein A, which prevents opsonization but is not a toxin that causes shock."
+    src: { page: 131, quote: "Cross-links β region of TCR to MHC class II on APCs outside of the antigen binding site" }
+    status: unverified
+  # ---------- p131: endotoxin ----------
+  - id: mic.L01.086
+    kind: card
+    topic: endotoxin
+    front: What is endotoxin made of, and which part is toxic?
+    back: LPS in the outer membrane of gram ⊝ bacteria (cocci and rods), made of O-antigen + core polysaccharide + lipid A (the toxic component). Neisseria have lipooligosaccharide.
+    src: { page: 131, quote: "Composed of O-antigen + core polysaccharide + lipid A (the toxic component). Neisseria have lipooligosaccharide." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.087
+    kind: card
+    topic: endotoxin
+    front: How is endotoxin released, compared with exotoxin?
+    back: On cell lysis, or by living cells through blebs detaching from the outer membrane; exotoxin is actively secreted.
+    src: { page: 131, quote: "Released upon cell lysis or by living cells by blebs detaching from outer surface membrane (vs exotoxin, which is actively secreted)." }
+    status: unverified
+  - id: mic.L01.088
+    kind: table
+    topic: endotoxin
+    title: The 3 main effects of endotoxin
+    columns: [Effect, Mediators, Result]
+    rows:
+      - [Macrophage activation (TLR4/CD14), "IL-1, IL-6, TNF-α, nitric oxide", "Fever, hypotension"]
+      - [Complement activation, "C3a; C5a", "Histamine release (hypotension, edema); neutrophil chemotaxis"]
+      - [Tissue factor activation, Coagulation cascade, DIC]
+    blanks: [[0, 1], [0, 2], [1, 2], [2, 2]]
+    src: { page: 131, quote: "Three main effects: macrophage activation (TLR4/CD14), complement activation, and tissue factor activation." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L01.089
+    kind: mcq
+    topic: endotoxin
+    stem: >-
+      A 17-year-old college student has fever, a petechial rash on his legs and hypotension. Blood
+      cultures grow gram-negative diplococci. Labs show prolonged PT and aPTT, low platelets and
+      high D-dimer. Which effect of the bacterial lipooligosaccharide most directly explains the
+      coagulation results?
+    options:
+      - Activation of tissue factor
+      - Activation of macrophages through TLR4/CD14
+      - Activation of complement C5a
+      - Release of histamine
+      - Cleavage of SNARE proteins
+    answer: 0
+    why:
+      - "Right. Endotoxin activates tissue factor → coagulation cascade → DIC."
+      - "Macrophage activation (TLR4/CD14) gives IL-1, IL-6, TNF-α and nitric oxide → fever and hypotension, not mainly the clotting picture."
+      - "C5a gives neutrophil chemotaxis."
+      - "Histamine release (via C3a) gives hypotension and edema."
+      - "SNARE cleavage is the action of tetanus and botulinum toxins."
+    src: { page: 131, quote: "Three main effects: macrophage activation (TLR4/CD14), complement activation, and tissue factor activation." }
+    status: unverified
