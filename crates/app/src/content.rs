@@ -84,8 +84,18 @@ impl Library {
         let program = pack.program_or_fallback();
         let Pack { index, lectures, lessons, look, .. } = pack;
         crate::look::set(look);
-        let lectures = lectures.into_iter().map(|l| (l.lecture.clone(), l)).collect();
-        let lessons = lessons.into_iter().map(|l| (l.lecture.clone(), l)).collect();
+        let lectures = lectures.into_iter().map(|l| (l.lecture.clone(), l));
+        let lessons = lessons.into_iter().map(|l| (l.lecture.clone(), l));
+        // Screen tests need a lecture still being written ("بتتكتب"); with
+        // every lecture written, the last one in the index plays that part.
+        #[cfg(test)]
+        let (lectures, lessons) = {
+            let unwritten = index.lectures.last().map(|e| e.id.clone()).unwrap_or_default();
+            let u = unwritten.clone();
+            (lectures.filter(move |(id, _)| *id != unwritten), lessons.filter(move |(id, _)| *id != u))
+        };
+        let lectures = lectures.collect();
+        let lessons = lessons.collect();
         Library { index, lectures, lessons, program }
     }
 
@@ -252,6 +262,9 @@ mod tests {
             .flat_map(|dir| dir.flatten())
             .filter(|f| f.path().extension().is_some_and(|e| e == "yaml"))
             .count();
-        assert_eq!(lib.lectures.len(), written, "every lecture file made it into the pack");
+        // Tests hide the index's last lecture so it reads as unwritten (load).
+        let hidden = lib.index.lectures.last().is_some_and(|e| !lib.lectures.contains_key(&e.id));
+        assert!(hidden, "the last lecture plays the unwritten one");
+        assert_eq!(lib.lectures.len() + 1, written, "every lecture file made it into the pack");
     }
 }
