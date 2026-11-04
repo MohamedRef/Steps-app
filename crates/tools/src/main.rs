@@ -192,7 +192,10 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     }
     // Lecture files that the index doesn't list.
     if let Ok(dirs) = std::fs::read_dir(&content) {
-        for dir in dirs.flatten().filter(|d| d.path().is_dir() && d.file_name() != "lessons") {
+        for dir in dirs
+            .flatten()
+            .filter(|d| d.path().is_dir() && d.file_name() != "lessons" && d.file_name() != "glossary")
+        {
             let chapter = dir.file_name().to_string_lossy().to_string();
             for f in std::fs::read_dir(dir.path()).into_iter().flatten().flatten() {
                 let name = f.file_name().to_string_lossy().to_string();
@@ -205,21 +208,20 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
             }
         }
     }
-    // The hover glossary (PARITY.md §6.3), when there is one.
-    let glossary_path = content.join("glossary.yaml");
+    // The hover glossary (PARITY.md §6.3), when there is one: the shared
+    // file plus `content/glossary/<course>.yaml`, checked as one.
     let mut terms = 0;
     let mut glossary = None;
-    if glossary_path.exists() {
-        match read_yaml::<steps_core::glossary::Glossary>(&glossary_path) {
-            Ok(g) => {
-                terms = g.entries.len();
-                for p in validate::glossary(&g, Some(&approved)) {
-                    problems.push(format!("content/glossary.yaml: {p}"));
-                }
-                glossary = Some(g);
+    match read_glossary(&content) {
+        Ok(Some(g)) => {
+            terms = g.entries.len();
+            for p in validate::glossary(&g, Some(&approved)) {
+                problems.push(format!("content/glossary: {p}"));
             }
-            Err(e) => problems.push(e),
+            glossary = Some(g);
         }
+        Ok(None) => {}
+        Err(e) => problems.extend(e),
     }
     // Lessons (docs/LESSONS.md), with every abbreviation in the glossary.
     let (_, lessons) = lessons::validate_all(root, &approved, glossary.as_ref(), &mut problems);
@@ -235,6 +237,44 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     } else {
         Err(problems)
     }
+}
+
+/// `content/glossary.yaml` and every `content/glossary/<course>.yaml`, as
+/// one glossary. A course file must be named after a course in
+/// `content/program.yaml` and carry the same schema line.
+fn read_glossary(content: &Path) -> Result<Option<steps_core::glossary::Glossary>, Vec<String>> {
+    let base = content.join("glossary.yaml");
+    if !base.exists() {
+        return Ok(None);
+    }
+    let mut g = read_yaml::<steps_core::glossary::Glossary>(&base).map_err(|e| vec![e])?;
+    let courses: Vec<String> = read_yaml::<steps_core::program::Program>(&content.join("program.yaml"))
+        .map(|p| p.courses.into_iter().map(|c| c.id).collect())
+        .unwrap_or_default();
+    let mut parts: Vec<_> = std::fs::read_dir(content.join("glossary"))
+        .into_iter()
+        .flatten()
+        .flatten()
+        .map(|e| e.path())
+        .filter(|p| p.extension().is_some_and(|x| x == "yaml"))
+        .collect();
+    parts.sort();
+    let mut problems = Vec::new();
+    for p in parts {
+        let stem = p.file_stem().unwrap_or_default().to_string_lossy().to_string();
+        if !courses.contains(&stem) {
+            problems.push(format!("content/glossary/{stem}.yaml: not a course in content/program.yaml"));
+        }
+        match read_yaml::<steps_core::glossary::Glossary>(&p) {
+            Ok(part) if part.schema != g.schema => problems.push(format!(
+                "content/glossary/{stem}.yaml: schema is {:?}, expected {:?}",
+                part.schema, g.schema
+            )),
+            Ok(part) => g.absorb(part),
+            Err(e) => problems.push(e),
+        }
+    }
+    if problems.is_empty() { Ok(Some(g)) } else { Err(problems) }
 }
 
 /// `hb.L01` → `content/hb/L01.yaml`.
@@ -298,6 +338,31 @@ mod tests {
         if let Err(problems) = validate_all(&root()) {
             panic!("{problems:#?}");
         }
+    }
+
+    #[test]
+    fn course_glossaries_join_the_shared_one() {
+        let dir = tempfile::tempdir().unwrap();
+        let content = dir.path();
+        std::fs::create_dir_all(content.join("glossary")).unwrap();
+        std::fs::copy(root().join("content/program.yaml"), content.join("program.yaml")).unwrap();
+        let entry = |t: &str| {
+            format!(
+                "schema: steps.glossary/v1\nentries:\n  - {{ term: {t}, kind: abbr, text: x, status: unverified }}\n"
+            )
+        };
+        std::fs::write(content.join("glossary.yaml"), entry("ASD")).unwrap();
+        std::fs::write(content.join("glossary/cvs.yaml"), entry("VSD")).unwrap();
+        let g = read_glossary(content).unwrap().unwrap();
+        assert_eq!(g.entries.len(), 2);
+        // A term in two files is one glossary's duplicate.
+        std::fs::write(content.join("glossary/renal.yaml"), entry("VSD")).unwrap();
+        let g = read_glossary(content).unwrap().unwrap();
+        assert!(validate::glossary(&g, None).iter().any(|p| p.message.contains("listed twice")));
+        // A file must be named after a course.
+        std::fs::write(content.join("glossary/hepatology.yaml"), entry("ALT")).unwrap();
+        let e = read_glossary(content).unwrap_err();
+        assert!(e[0].contains("hepatology.yaml: not a course"), "{e:?}");
     }
 
     #[test]

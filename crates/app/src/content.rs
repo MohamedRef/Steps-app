@@ -16,6 +16,9 @@ mod embedded {
     include!(concat!(env!("OUT_DIR"), "/embedded.rs"));
 }
 
+/// The per-course glossaries, `content/glossary/<course>.yaml` (build.rs).
+pub const GLOSSARY_PARTS: &[&str] = embedded::GLOSSARY_PARTS;
+
 pub struct Library {
     pub index: Index,
     /// Written lectures, by id (`hb.L01`).

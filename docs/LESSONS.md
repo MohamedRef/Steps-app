@@ -54,13 +54,16 @@ The model to copy is `content/lessons/cvs/L01.yaml`.
     `==term==` (the marker highlight; the validator allows at most 3).
 12. **Every abbreviation is explained.** A step's «اختصارات» chip (beside
     its «ص» chip) lists each abbreviation the step shows, text and figure
-    labels alike, with its expansion from `content/glossary.yaml`. So the
+    labels alike, with its expansion from the glossary. So the
     validator fails on any word with two or more capitals (`HRS-AKI`, `NITs`,
     `TIF1γ`) that the glossary doesn't explain. Add an entry (`kind: abbr`,
-    the expansion in English, likeliest meaning first, then "also …"), or,
-    when the word isn't an abbreviation (emphasis like `NOT`, a Roman
-    numeral, a mnemonic's letters, a trial name), add it to `plain:` at the
-    end of the glossary. The same entries fill the per-course «قاموس
+    the expansion in English, likeliest Step 1 meaning first, then "also
+    …") to your course's `content/glossary/<course>.yaml`, or, when the word
+    isn't an abbreviation (emphasis like `NOT`, a Roman numeral, a
+    mnemonic's letters, a trial name), add it to that file's `plain:` list.
+    Shared terms live in `content/glossary.yaml`; a term already there or in
+    another course's file is refused as a duplicate, so reuse it (ask the
+    core thread to reword a shared meaning). The same entries fill the per-course «قاموس
     الاختصارات» (Lessons screen, More), with the lessons that use each one.
 
 ## File shape

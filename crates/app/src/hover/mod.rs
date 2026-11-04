@@ -13,16 +13,23 @@ use crate::i18n::hover as tx;
 const HOVER_JS: &str = include_str!("../../assets/hover.js");
 const GLOSSARY_YAML: &str = include_str!("../../../../content/glossary.yaml");
 
-/// The glossary bundled with the app. A file that doesn't parse gives an
-/// empty glossary (CI's `steps-tools validate` fails on it first).
+/// The glossary bundled with the app: `content/glossary.yaml` plus every
+/// `content/glossary/<course>.yaml`. A file that doesn't parse is left out
+/// (CI's `steps-tools validate` fails on it first).
 pub fn glossary() -> &'static Glossary {
     static G: OnceLock<Glossary> = OnceLock::new();
     G.get_or_init(|| {
-        serde_yaml_ng::from_str(GLOSSARY_YAML).unwrap_or(Glossary {
+        let mut g = serde_yaml_ng::from_str(GLOSSARY_YAML).unwrap_or(Glossary {
             schema: String::new(),
             entries: Vec::new(),
             plain: Vec::new(),
-        })
+        });
+        for part in crate::content::GLOSSARY_PARTS {
+            if let Ok(p) = serde_yaml_ng::from_str::<Glossary>(part) {
+                g.absorb(p);
+            }
+        }
+        g
     })
 }
 
@@ -88,5 +95,7 @@ mod tests {
     fn the_bundled_glossary_parses() {
         assert!(term_count() > 50);
         assert!(glossary().find("SAAG").is_some());
+        // From content/glossary/cvs.yaml.
+        assert!(glossary().find("PFO").is_some());
     }
 }

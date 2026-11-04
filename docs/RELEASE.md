@@ -194,7 +194,7 @@ Pull-request CI writes the same classification and affected paths to the
 GitHub Actions job summary; `just content-impact-test` tests the rules.
 The preview publisher uses `scripts/content_impact.py --check-content-only`
 instead of its own separate path filter. Any unknown path, including
-`content/glossary.yaml` (which is compiled into the app), forces a full
+`content/glossary.yaml` and `content/glossary/` (compiled into the app), forces a full
 build. Content-only eligibility never bypasses validation, signing, or feed
 verification. Changing these rules requires adjusting the classifier tests.
 
