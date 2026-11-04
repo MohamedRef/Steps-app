@@ -12,9 +12,15 @@ mod cases;
 mod crawl;
 mod dom;
 mod kit;
+mod learn;
+mod lecture;
+mod nav;
 mod oral;
 mod own;
+mod plan;
 mod screens;
+mod sheets;
+mod stats;
 mod study;
 mod today;
 mod verify;
@@ -154,13 +160,15 @@ impl App {
     }
 
     /// The nodes that listen for `event` and carry `label` in their words,
-    /// aria-label, title or class: the innermost first.
+    /// aria-label, title or class: the innermost first. A disabled button
+    /// can't be tapped, as in the browser.
     fn targets(&self, event: &str, label: &str) -> Vec<usize> {
         let mut found: Vec<(usize, usize)> = self
             .page
             .walk()
             .into_iter()
             .filter(|&n| self.page.nodes[n].listeners.contains(&event))
+            .filter(|&n| self.page.attr(n, "disabled") != Some("true"))
             .filter(|&n| {
                 let text = self.page.text(n);
                 text.contains(label)

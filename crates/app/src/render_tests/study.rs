@@ -363,7 +363,7 @@ fn an_order_is_placed_moved_checked_and_graded() {
         app.tap(s);
     }
     app.tap_nth(or::MOVE_DOWN, 0);
-    app.tap_nth(or::MOVE_UP, 1);
+    app.tap_nth(or::MOVE_UP, 0); // the first row's "up" is disabled
     app.tap(or::CHECK);
     app.assert_has(or::ALL_IN_PLACE);
     app.assert_has(or::CORRECT_ORDER);
