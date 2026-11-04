@@ -1,0 +1,1321 @@
+schema: steps.content/v1
+lecture: heme.L05
+title: Pharmacology
+book: { chapter: 10, pages: [440, 448] }
+topics:
+  - { id: tumor-lysis-syndrome, title: Tumor lysis syndrome }
+  - { id: heparin, title: Heparin }
+  - { id: warfarin, title: Warfarin }
+  - { id: heparin-vs-warfarin, title: Heparin vs warfarin }
+  - { id: direct-coagulation-factor-inhibitors, title: Direct coagulation factor inhibitors }
+  - { id: anticoagulation-reversal, title: Anticoagulation reversal }
+  - { id: antiplatelets, title: Antiplatelets }
+  - { id: thrombolytics, title: Thrombolytics }
+  - { id: cancer-therapy-cell-cycle, title: Cancer therapy—cell cycle }
+  - { id: cancer-therapy-targets, title: Cancer therapy—targets }
+  - { id: antibody-drug-conjugates, title: Antibody-drug conjugates }
+  - { id: antitumor-antibiotics, title: Antitumor antibiotics }
+  - { id: antimetabolites, title: Antimetabolites }
+  - { id: alkylating-agents, title: Alkylating agents }
+  - { id: platinum-compounds, title: Platinum compounds }
+  - { id: microtubule-inhibitors, title: Microtubule inhibitors }
+  - { id: topoisomerase-inhibitors, title: Topoisomerase inhibitors }
+  - { id: tamoxifen, title: Tamoxifen }
+  - { id: anticancer-monoclonal-antibodies, title: Anticancer monoclonal antibodies }
+  - { id: anticancer-small-molecule-inhibitors, title: Anticancer small molecule inhibitors }
+  - { id: chemotoxicity-amelioration, title: Chemotoxicity amelioration }
+  - { id: key-chemotoxicities, title: Key chemotoxicities }
+items:
+  # ---------- p440: Tumor lysis syndrome ----------
+  - id: heme.L05.001
+    kind: enumerate
+    topic: tumor-lysis-syndrome
+    prompt: Enumerate the four lab changes of tumor lysis syndrome ("BreaK the CUP") (4).
+    points:
+      - ↑ K+ (hyperkalemia)
+      - ↓ Ca2+ (hypocalcemia)
+      - ↑ uric acid (hyperuricemia)
+      - ↑ PO4 3− (hyperphosphatemia)
+    pass: 4
+    hook: "BreaK the CUP: K، Ca، Uric acid، PO4."
+    src: { page: 440, quote: "Tumor cell breakdown causes ↑ K+ , ↓ Ca2+ , ↑ Uric acid, and ↑ PO 3– 4 (BreaK the CUP)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.002
+    kind: card
+    topic: tumor-lysis-syndrome
+    front: What is tumor lysis syndrome, and in which cancers is it most often seen?
+    back: An oncologic emergency triggered by massive tumor cell lysis, seen most often with lymphomas and leukemias. Usually caused by starting treatment, but it can occur spontaneously with fast-growing cancers.
+    src: { page: 440, quote: "Oncologic emergency triggered by massive tumor cell lysis, seen most often with lymphomas/leukemias. Usually caused by treatment initiation, but can occur spontaneously with fast-growing cancers." }
+    status: unverified
+  - id: heme.L05.003
+    kind: cloze
+    topic: tumor-lysis-syndrome
+    text: In tumor lysis syndrome, hypocalcemia is due to Ca2+ {{c1::sequestration by PO4 3−}}, and ↑ nucleic acid breakdown → {{c2::hyperuricemia}} → {{c3::acute kidney injury}}.
+    src: { page: 440, quote: "hypocalcemia due to Ca2+ sequestration by PO4 3– . ↑ nucleic acid breakdown → hyperuricemia → acute kidney injury" }
+    status: unverified
+  - id: heme.L05.004
+    kind: card
+    topic: tumor-lysis-syndrome
+    front: What are the clinical consequences of each lab change in tumor lysis syndrome?
+    back: "↑ K+ → arrhythmias, ECG changes, muscle weakness; ↓ Ca2+ → seizures, tetany; calcium phosphate and uric acid crystals → acute kidney injury."
+    src: { page: 440, quote: "Arrhythmias, ECG changes Seizures, tetany Acute kidney injury Calcium phosphate crystals Uric acid crystals" }
+    status: unverified
+  - id: heme.L05.005
+    kind: cloze
+    topic: tumor-lysis-syndrome
+    text: Prevention and treatment of tumor lysis syndrome include {{c1::aggressive hydration}}, {{c2::allopurinol}}, and {{c3::rasburicase}}.
+    src: { page: 440, quote: "Prevention and treatment include aggressive hydration, allopurinol, rasburicase." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.006
+    kind: mcq
+    topic: tumor-lysis-syndrome
+    stem: >-
+      A 9-year-old boy with a rapidly enlarging abdominal mass is diagnosed with Burkitt lymphoma and
+      starts induction chemotherapy. Two days later he has muscle cramps, perioral tingling and
+      decreased urine output. Serum potassium is 6.6 mEq/L and creatinine has tripled. Which of the
+      following additional laboratory findings is most likely?
+    options:
+      - Low phosphate, high calcium, low uric acid
+      - High phosphate, low calcium, high uric acid
+      - High phosphate, high calcium, normal uric acid
+      - Low phosphate, low calcium, high uric acid
+      - Normal phosphate, normal calcium, low uric acid
+    answer: 1
+    why:
+      - "Lysed cells release phosphate and nucleic acids, so phosphate and uric acid rise, not fall."
+      - "Right. Tumor lysis releases K+ and PO4 3−; phosphate sequesters Ca2+ (hypocalcemia, tingling), and nucleic acid breakdown raises uric acid (BreaK the CUP)."
+      - "Calcium falls, because the released phosphate binds it."
+      - "Phosphate is released from lysed cells, so it rises."
+      - "Every value of the CUP changes in tumor lysis; uric acid rises with nucleic acid breakdown."
+    src: { page: 440, quote: "Release of K+ → hyperkalemia, release of PO4 3– → hyperphosphatemia, hypocalcemia due to Ca2+ sequestration by PO4 3–" }
+    status: unverified
+  # ---------- p440: Heparin ----------
+  - id: heme.L05.007
+    kind: cloze
+    topic: heparin
+    text: Heparin activates {{c1::antithrombin}}, which ↓ the action primarily of factors {{c2::IIa (thrombin)}} and {{c3::Xa}}. Short half-life.
+    src: { page: 440, quote: "Activates antithrombin, which ↓ action primarily of factors IIa (thrombin) and Xa. Short half-life." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.008
+    kind: card
+    topic: heparin
+    front: What are the clinical uses of heparin, and how is it monitored?
+    back: Immediate anticoagulation for PE, acute coronary syndrome, MI and DVT. Used during pregnancy (does not cross the placenta; LMWH such as enoxaparin preferred). Monitor PTT.
+    src: { page: 440, quote: "Immediate anticoagulation for pulmonary embolism (PE), acute coronary syndrome, MI, deep venous thrombosis (DVT). Used during pregnancy (does not cross placenta" }
+    status: unverified
+  - id: heme.L05.009
+    kind: enumerate
+    topic: heparin
+    prompt: Enumerate the adverse effects of heparin (5).
+    points:
+      - Bleeding (reverse with protamine sulfate)
+      - Heparin-induced thrombocytopenia (HIT)
+      - Osteoporosis (long-term use)
+      - Drug-drug interactions
+      - Type 4 renal tubular acidosis
+    pass: 4
+    hook: "نزيف، HIT، عضم هش، تداخلات، و RTA type 4."
+    src: { page: 440, quote: "Bleeding (reverse with protamine sulfate), heparin-induced thrombocytopenia (HIT), osteoporosis (with long-term use), drug-drug interactions, type 4 renal tubular acidosis." }
+    status: unverified
+  - id: heme.L05.010
+    kind: table
+    topic: heparin
+    title: HIT type 1 vs type 2
+    columns: [Feature, HIT type 1, HIT type 2]
+    rows:
+      - [Mechanism, Nonimmunologic drop in platelet count, IgG antibodies against heparin-bound platelet factor 4 (PF4)]
+      - [Timing, Within the first 2 days of heparin, 5-10 days after heparin]
+      - [Severity, "Mild (platelets >100,000/mm3), transient, not clinically significant", "Antibody-heparin-PF4 complex activates platelets → splenic removal and thrombosis → ↓↓ platelets"]
+      - [Management, None needed, "Stop heparin; start an alternative anticoagulant (eg, argatroban); fondaparinux is safe"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [3, 2]]
+    src: { page: 440, quote: "HIT type 2—development of IgG antibodies against heparin-bound platelet factor 4 (PF4) that typically occurs 5-10 days after heparin administration" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.011
+    kind: cloze
+    topic: heparin
+    text: HIT type 2 carries the highest risk with {{c1::unfractionated heparin}}. Fondaparinux is safe because it {{c2::does not interact with PF4}}.
+    src: { page: 440, quote: "Highest risk with unfractionated heparin. Treatment: discontinue heparin, start alternative anticoagulant (eg, argatroban). Fondaparinux safe to use (does not interact with PF4)." }
+    status: unverified
+  - id: heme.L05.012
+    kind: card
+    topic: heparin
+    front: How do low-molecular-weight heparins and fondaparinux differ from unfractionated heparin?
+    back: "LMWHs (enoxaparin, dalteparin) act mainly on factor Xa and have a longer half-life; fondaparinux acts only on factor Xa. Both are not easily reversible."
+    src: { page: 440, quote: "Low-molecular-weight heparins (eg, enoxaparin, dalteparin) act mainly on factor Xa. Longer half- life. Fondaparinux acts only on factor Xa. Both are not easily reversible." }
+    status: unverified
+  - id: heme.L05.013
+    kind: card
+    topic: heparin
+    front: Which heparin is used in patients with renal insufficiency, and why?
+    back: Unfractionated heparin, because low-molecular-weight heparins undergo renal clearance and should be used with caution.
+    src: { page: 440, quote: "Unfractionated heparin used in patients with renal insufficiency (low-molecular-weight heparins should be used with caution because they undergo renal clearance)." }
+    status: unverified
+  - id: heme.L05.014
+    kind: mcq
+    topic: heparin
+    stem: >-
+      A 64-year-old woman is started on unfractionated heparin for a postoperative DVT. On day 7 her
+      platelet count has fallen from 260,000/mm3 to 70,000/mm3, and she develops a new cool, painful
+      left leg from an arterial thrombus. Which of the following best explains her findings?
+    options:
+      - Direct nonimmunologic platelet aggregation by heparin
+      - IgG antibodies against heparin-bound platelet factor 4 that activate platelets
+      - Depletion of protein C before factors II and X
+      - Inhibition of platelet COX with ↓ thromboxane A2
+      - Consumption of clotting factors by tissue factor release
+    answer: 1
+    why:
+      - "That is HIT type 1: mild, within the first 2 days, platelets stay >100,000/mm3 and there is no thrombosis."
+      - "Right. HIT type 2 appears 5-10 days after heparin; the antibody-heparin-PF4 complex activates platelets → thrombosis and splenic removal → ↓↓ platelets. Stop heparin and start argatroban."
+      - "Early protein C depletion causes warfarin skin necrosis, not thrombocytopenia on heparin."
+      - "That is aspirin's mechanism; it causes bleeding, not thrombosis."
+      - "Factor consumption with bleeding and thrombosis is DIC, which has a trigger such as sepsis, not heparin timing."
+    src: { page: 440, quote: "Antibody-heparin-PF4 complex binds and activates platelets → removal by splenic macrophages and thrombosis → ↓↓ platelet count." }
+    status: unverified
+  # ---------- p441: Warfarin ----------
+  - id: heme.L05.015
+    kind: cloze
+    topic: warfarin
+    text: Warfarin inhibits {{c1::vitamin K epoxide reductase}} by competing with vitamin K → ↓ γ-carboxylation of factors {{c2::II, VII, IX, and X}} and {{c3::proteins C and S}}.
+    src: { page: 441, quote: "Inhibits vitamin K epoxide reductase by competing with vitamin K → inhibition of vitamin K– dependent γ-carboxylation of clotting factors II, VII, IX, and X and proteins C and S." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.016
+    kind: card
+    topic: warfarin
+    front: Which gene polymorphism affects warfarin metabolism?
+    back: Polymorphisms in the gene for the vitamin K epoxide reductase complex (VKORC1).
+    src: { page: 441, quote: "Metabolism affected by polymorphisms in the gene for vitamin K epoxide reductase complex (VKORC1)." }
+    status: unverified
+  - id: heme.L05.017
+    kind: card
+    topic: warfarin
+    front: Which lab test does warfarin prolong, and what is the mnemonic?
+    back: "The PT (extrinsic pathway); monitor PT/INR. Long half-life. \"The ex-PresidenT went to war(farin).\""
+    src: { page: 441, quote: "In laboratory assay, has effect on extrinsic pathway and ↑ PT. Long half-life. “The ex-PresidenT went to war(farin).”" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.018
+    kind: card
+    topic: warfarin
+    front: What are the clinical uses of warfarin, and why is it avoided in pregnancy?
+    back: Chronic anticoagulation (VTE prophylaxis, stroke prevention in atrial fibrillation, systemic embolism prophylaxis with LVADs or mechanical heart valves). Not used in pregnancy because warfarin, unlike heparin, crosses the placenta.
+    src: { page: 441, quote: "Not used in pregnant patients (because warfarin, unlike heparin, crosses placenta). Monitor PT/INR." }
+    status: unverified
+  - id: heme.L05.019
+    kind: enumerate
+    topic: warfarin
+    prompt: Enumerate the adverse effects of warfarin (4).
+    points:
+      - Bleeding
+      - Teratogenic effects
+      - Skin/tissue necrosis
+      - Drug-drug interactions (metabolized by CYP2C9)
+    pass: 4
+    hook: "نزيف، تشوهات، necrosis في الجلد، وتداخلات الـ CYP2C9."
+    src: { page: 441, quote: "Bleeding, teratogenic effects, skin/tissue necrosis A , drug-drug interactions (metabolized by cytochrome P-450 [CYP2C9])." }
+    status: unverified
+  - id: heme.L05.020
+    kind: card
+    topic: warfarin
+    front: Why does warfarin cause an initial hypercoagulable state?
+    back: Protein C has a shorter half-life than factors II and X, so existing protein C is depleted before existing factors II and X (and before warfarin cuts their production) → hypercoagulation. Skin/tissue necrosis in the first few days of large doses is thought to come from small vessel microthrombosis.
+    src: { page: 441, quote: "Initial risk of hypercoagulation: protein C has shorter half-life than factors II and X. Existing protein C depletes before existing factors II and X deplete" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.021
+    kind: card
+    topic: warfarin
+    front: What is heparin "bridging", and why is it done?
+    back: Heparin is given when warfarin is started. Heparin's activation of antithrombin anticoagulates during warfarin's initial transient hypercoagulable state, reducing recurrent VTE and skin/tissue necrosis.
+    src: { page: 441, quote: "Heparin’s activation of antithrombin enables anticoagulation during initial, transient hypercoagulable state caused by warfarin." }
+    status: unverified
+  - id: heme.L05.022
+    kind: cloze
+    topic: warfarin
+    text: To reverse warfarin, give {{c1::vitamin K}}. For rapid reversal, give {{c2::FFP or PCC}}.
+    src: { page: 441, quote: "For reversal of warfarin, give vitamin K. For rapid reversal, give FFP or PCC." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.023
+    kind: mcq
+    topic: warfarin
+    stem: >-
+      A 45-year-old woman is started on high-dose warfarin alone for a DVT. On day 3 she develops
+      painful, dark purple, sharply demarcated skin lesions on her thighs and breasts that progress to
+      necrosis. Which of the following best explains this complication?
+    options:
+      - Antibodies against heparin-bound platelet factor 4
+      - Depletion of protein C, which has a shorter half-life than factors II and X
+      - Direct inhibition of thrombin by warfarin
+      - Warfarin-induced inhibition of CYP2C9
+      - Immune complex vasculitis triggered by the drug
+    answer: 1
+    why:
+      - "That is HIT type 2, caused by heparin, not warfarin."
+      - "Right. Protein C falls before factors II and X, so warfarin starts with a transient hypercoagulable state; small vessel microthrombosis causes skin necrosis. Heparin bridging prevents it."
+      - "Warfarin blocks vitamin K epoxide reductase; direct thrombin inhibitors are argatroban, bivalirudin and dabigatran."
+      - "Warfarin is metabolized by CYP2C9; that explains drug interactions, not necrosis."
+      - "The book attributes the necrosis to microthrombosis from early protein C loss, not vasculitis."
+    src: { page: 441, quote: "Skin/tissue necrosis within first few days of large doses believed to be due to small vessel microthrombosis." }
+    status: unverified
+  # ---------- p441: Heparin vs warfarin ----------
+  - id: heme.L05.024
+    kind: table
+    topic: heparin-vs-warfarin
+    title: Heparin vs warfarin
+    columns: [Feature, Heparin, Warfarin]
+    rows:
+      - [Route, "Parenteral (IV, SC)", Oral]
+      - [Site of action, Blood, Liver]
+      - [Onset, Rapid (seconds), "Slow, limited by half-lives of normal clotting factors"]
+      - [Duration, Hours, Days]
+      - [Monitoring, PTT (intrinsic pathway), PT/INR (extrinsic pathway)]
+      - [Crosses placenta, No, Yes (teratogenic)]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2], [3, 1], [3, 2], [4, 1], [4, 2], [5, 1], [5, 2]]
+    src: { page: 441, quote: "ROUTE OF ADMINISTRATION Parenteral (IV, SC) Oral SITE OF ACTION Blood Liver" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.025
+    kind: mcq
+    topic: heparin-vs-warfarin
+    stem: >-
+      A 30-year-old woman at 10 weeks' gestation has a proximal DVT confirmed on ultrasound. She has a
+      normal creatinine. Which of the following is the most appropriate anticoagulant, and why?
+    options:
+      - Warfarin, because it is oral and has a long duration of action
+      - Low-molecular-weight heparin, because it does not cross the placenta
+      - Warfarin, because it acts in the liver rather than in the blood
+      - Dabigatran, because it needs no lab monitoring
+      - Alteplase, because it dissolves the existing clot
+    answer: 1
+    why:
+      - "Warfarin crosses the placenta and is teratogenic, so it is not used in pregnancy."
+      - "Right. Heparin does not cross the placenta, and low-molecular-weight heparin (eg, enoxaparin) is preferred in pregnancy."
+      - "Its site of action is the liver, but it still crosses the placenta (teratogenic)."
+      - "Pregnancy use is not what the book lists for direct factor inhibitors; heparin is the agent named for pregnancy."
+      - "Thrombolytics are for early MI, early ischemic stroke and high-risk PE, not routine DVT."
+    src: { page: 441, quote: "CROSSES PLACENTA No Yes (teratogenic)" }
+    status: unverified
+  # ---------- p441: Direct coagulation factor inhibitors ----------
+  - id: heme.L05.026
+    kind: table
+    topic: direct-coagulation-factor-inhibitors
+    title: Direct coagulation factor inhibitors
+    columns: [Drugs, Mechanism, Clinical use, Adverse effects]
+    rows:
+      - ["Bivalirudin, argatroban, dabigatran", Directly inhibit thrombin (factor IIa), "VTE, atrial fibrillation; can be used in HIT (heparin is BAD for the patient)", Bleeding (idarucizumab reverses dabigatran)]
+      - ["Apixaban, edoxaban, rivaroxaban", Directly inhibit (ban) factor Xa, "Oral; DVT/PE treatment and prophylaxis; stroke prophylaxis in atrial fibrillation", Bleeding (reverse with andexanet alfa)]
+    blanks: [[0, 1], [0, 3], [1, 1], [1, 3]]
+    src: { page: 441, quote: "Bivalirudin, argatroban, dabigatran Directly inhibit thrombin (factor IIa)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.027
+    kind: card
+    topic: direct-coagulation-factor-inhibitors
+    front: What two general points does First Aid make about direct coagulation factor inhibitors?
+    back: They do not usually require lab monitoring, and they are not to be used in patients with mechanical heart valves.
+    src: { page: 441, quote: "Do not usually require lab monitoring. Not to be used in patients with mechanical heart valves." }
+    status: unverified
+  - id: heme.L05.028
+    kind: cloze
+    topic: direct-coagulation-factor-inhibitors
+    text: "Mnemonics: the direct thrombin inhibitors can be used in HIT, when heparin is {{c1::BAD}} (Bivalirudin, Argatroban, Dabigatran); apixaban, edoxaban and rivaroxaban directly inhibit ({{c2::ban}}) factor {{c3::Xa}}."
+    src: { page: 441, quote: "Can be used in HIT, when heparin is BAD for the patient" }
+    status: unverified
+  - id: heme.L05.029
+    kind: mcq
+    topic: direct-coagulation-factor-inhibitors
+    stem: >-
+      A 70-year-old man with atrial fibrillation wants an oral anticoagulant that does not need
+      regular INR checks. He is started on a drug that directly inhibits factor Xa. Months later he
+      arrives with a life-threatening GI bleed. Which of the following agents specifically reverses his
+      anticoagulant?
+    options:
+      - Protamine sulfate
+      - Idarucizumab
+      - Andexanet alfa
+      - Vitamin K
+      - Aminocaproic acid
+    answer: 2
+    why:
+      - "Protamine reverses heparin."
+      - "Idarucizumab reverses dabigatran, a direct thrombin inhibitor."
+      - "Right. Apixaban, edoxaban and rivaroxaban directly inhibit factor Xa, and andexanet alfa (an inactive recombinant factor Xa) reverses them."
+      - "Vitamin K reverses warfarin, slowly."
+      - "Aminocaproic acid is a nonspecific antifibrinolytic used for thrombolytic bleeding."
+    src: { page: 441, quote: "Apixaban, edoxaban, rivaroxaban Directly inhibit (ban) factor Xa" }
+    status: unverified
+  # ---------- p442: Anticoagulation reversal ----------
+  - id: heme.L05.030
+    kind: table
+    topic: anticoagulation-reversal
+    title: Anticoagulation reversal
+    columns: [Anticoagulant, Reversal agent, Notes]
+    rows:
+      - [Heparin, Protamine sulfate, Positively charged peptide that binds negatively charged heparin]
+      - [Warfarin, Vitamin K (slow) +/– FFP or PCC (rapid), ""]
+      - [Dabigatran, Idarucizumab, Monoclonal antibody Fab fragments]
+      - ["Direct factor Xa inhibitors (apixaban, rivaroxaban)", Andexanet alfa, Recombinant modified factor Xa (inactive)]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 442, quote: "Heparin Protamine sulfate ⊕ charged peptide that binds ⊝ charged heparin" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.031
+    kind: card
+    topic: anticoagulation-reversal
+    front: How does protamine sulfate reverse heparin?
+    back: It is a positively charged peptide that binds negatively charged heparin.
+    src: { page: 442, quote: "Protamine sulfate ⊕ charged peptide that binds ⊝ charged heparin" }
+    status: unverified
+  - id: heme.L05.032
+    kind: card
+    topic: anticoagulation-reversal
+    front: What kind of molecules are idarucizumab and andexanet alfa?
+    back: "Idarucizumab: monoclonal antibody Fab fragments (against dabigatran). Andexanet alfa: recombinant modified, inactive factor Xa (a decoy for factor Xa inhibitors)."
+    src: { page: 442, quote: "Dabigatran Idarucizumab Monoclonal antibody Fab fragments" }
+    status: unverified
+  - id: heme.L05.033
+    kind: mcq
+    topic: anticoagulation-reversal
+    stem: >-
+      A 58-year-old man receives an IV unfractionated heparin infusion during cardiac catheterization.
+      Afterward he bleeds briskly from the femoral access site, and his PTT is markedly prolonged. A
+      drug is given that reverses the heparin within minutes. Which of the following describes how this
+      drug works?
+    options:
+      - It supplies the vitamin K-dependent clotting factors
+      - It is a positively charged peptide that binds negatively charged heparin
+      - It is a Fab fragment that binds the drug
+      - It is an inactive factor Xa decoy
+      - It inhibits conversion of plasminogen to plasmin
+    answer: 1
+    why:
+      - "Supplying factors (PCC or FFP) is rapid warfarin reversal."
+      - "Right. Protamine sulfate is a ⊕ charged peptide that binds ⊝ charged heparin."
+      - "Fab fragments (idarucizumab) reverse dabigatran."
+      - "Andexanet alfa is the decoy for direct factor Xa inhibitors."
+      - "Antifibrinolytics (aminocaproic or tranexamic acid) treat thrombolytic bleeding."
+    src: { page: 442, quote: "Heparin Protamine sulfate ⊕ charged peptide that binds ⊝ charged heparin" }
+    status: unverified
+  # ---------- p442: Antiplatelets ----------
+  - id: heme.L05.034
+    kind: table
+    topic: antiplatelets
+    title: Antiplatelets (all ↓ platelet aggregation)
+    columns: [Drugs, Mechanism, Clinical use, Adverse effects]
+    rows:
+      - [Aspirin, Irreversibly blocks COX → ↓ TXA2 release, "Acute coronary syndrome, coronary stenting; ↓ thrombotic stroke", "Gastric ulcers, tinnitus, allergic reactions, renal injury, Reye syndrome (children)"]
+      - ["Clopidogrel, prasugrel, ticagrelor", Block ADP (P2Y12) receptor → ↓ ADP-induced GpIIb/IIIa expression, Same as aspirin; dual antiplatelet therapy, Bleeding]
+      - ["Eptifibatide, tirofiban, abciximab", Block GpIIb/IIIa (fibrinogen receptor) on activated platelets, "Unstable angina, percutaneous coronary intervention", "Bleeding, thrombocytopenia"]
+      - ["Cilostazol, dipyridamole", Block phosphodiesterase → ↑ cAMP in platelets, "Intermittent claudication, stroke prevention, cardiac stress testing, preventing coronary stent restenosis", "Nausea, headache, facial flushing, hypotension, abdominal pain"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [3, 2]]
+    src: { page: 442, quote: "Clopidogrel, prasugrel, ticagrelor Block ADP (P2Y12 ) receptor → ↓ ADP-induced expression of GpIIb/IIIa" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.035
+    kind: enumerate
+    topic: antiplatelets
+    prompt: Enumerate the adverse effects of aspirin (5).
+    points:
+      - Gastric ulcers
+      - Tinnitus
+      - Allergic reactions
+      - Renal injury
+      - Reye syndrome (in children)
+    pass: 4
+    hook: "معدة، ودن بتزن، حساسية، كلى، و Reye في الأطفال."
+    src: { page: 442, quote: "Gastric ulcers, tinnitus, allergic reactions, renal injury, Reye syndrome (in children)" }
+    status: unverified
+  - id: heme.L05.036
+    kind: cloze
+    topic: antiplatelets
+    text: Cilostazol and dipyridamole block {{c1::phosphodiesterase}} → ↓ cAMP hydrolysis → {{c2::↑ cAMP}} in platelets; a key use of cilostazol is {{c3::intermittent claudication}}.
+    src: { page: 442, quote: "Block phosphodiesterase → ↓ cAMP hydrolysis → ↑ cAMP in platelets Intermittent claudication" }
+    status: unverified
+  - id: heme.L05.037
+    kind: mcq
+    topic: antiplatelets
+    stem: >-
+      A 62-year-old man receives a coronary stent for an acute coronary syndrome. In addition to
+      aspirin, he is started on a second oral drug for dual antiplatelet therapy. Which of the
+      following is the mechanism of this second drug?
+    options:
+      - Irreversible inhibition of cyclooxygenase
+      - Blockade of the P2Y12 ADP receptor, ↓ expression of GpIIb/IIIa
+      - Blockade of the GpIIb/IIIa fibrinogen receptor
+      - Inhibition of phosphodiesterase with ↑ platelet cAMP
+      - Activation of antithrombin
+    answer: 1
+    why:
+      - "That is aspirin, which he is already taking."
+      - "Right. Clopidogrel, prasugrel and ticagrelor block the ADP (P2Y12) receptor → ↓ ADP-induced expression of GpIIb/IIIa; they are used with aspirin as dual antiplatelet therapy."
+      - "Eptifibatide, tirofiban and abciximab are IV agents for unstable angina and PCI, not oral dual therapy."
+      - "Cilostazol and dipyridamole are used for claudication and stroke prevention."
+      - "That is heparin, an anticoagulant, not an antiplatelet."
+    src: { page: 442, quote: "Same as aspirin; dual antiplatelet therapy" }
+    status: unverified
+  # ---------- p442: Thrombolytics ----------
+  - id: heme.L05.038
+    kind: card
+    topic: thrombolytics
+    front: Name the thrombolytics and their mechanism.
+    back: "Alteplase (tPA), reteplase (rPA), tenecteplase (TNK-tPA). They directly or indirectly aid conversion of plasminogen to plasmin, which cleaves fibrin clots."
+    src: { page: 442, quote: "Directly or indirectly aid conversion of plasminogen to plasmin, which cleaves fibrin clots." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.039
+    kind: cloze
+    topic: thrombolytics
+    text: Thrombolytics cause {{c1::↑ PT and ↑ PTT}} with {{c2::no change}} in platelet count. Uses are early MI, early ischemic stroke and direct thrombolysis of {{c3::high-risk PE}}.
+    src: { page: 442, quote: "↑ PT, ↑ PTT, no change in platelet count. CLINICAL USE Early MI, early ischemic stroke, direct thrombolysis of high-risk PE." }
+    status: unverified
+  - id: heme.L05.040
+    kind: enumerate
+    topic: thrombolytics
+    prompt: Enumerate the contraindications to thrombolytics (5).
+    points:
+      - Active bleeding
+      - History of intracranial bleeding
+      - Recent surgery
+      - Known bleeding diatheses
+      - Severe hypertension
+    pass: 4
+    hook: "أي حاجة بتنزف دلوقتي، نزفت في الدماغ، اتعملها عملية، عندها مرض نزيف، أو ضغطها عالي جداً."
+    src: { page: 442, quote: "Contraindicated in patients with active bleeding, history of intracranial bleeding, recent surgery, known bleeding diatheses, or severe hypertension." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.041
+    kind: card
+    topic: thrombolytics
+    front: How is bleeding from thrombolytics reversed?
+    back: "Nonspecifically: antifibrinolytics (aminocaproic acid, tranexamic acid), platelet transfusions, and factor corrections (cryoprecipitate, FFP, PCC)."
+    src: { page: 442, quote: "Nonspecific reversal with antifibrinolytics (eg, aminocaproic acid, tranexamic acid), platelet transfusions, and factor corrections (eg, cryoprecipitate, FFP, PCC)." }
+    status: unverified
+  - id: heme.L05.042
+    kind: mcq
+    topic: thrombolytics
+    stem: >-
+      A 66-year-old woman arrives 90 minutes after the sudden onset of right arm weakness and aphasia.
+      CT of the head shows no hemorrhage. She is given alteplase. Two hours later she develops gum
+      bleeding and oozing from IV sites. Which of the following is most appropriate to counter the
+      effect of the drug?
+    options:
+      - Protamine sulfate
+      - Vitamin K
+      - Tranexamic acid
+      - Idarucizumab
+      - Andexanet alfa
+    answer: 2
+    why:
+      - "Protamine reverses heparin."
+      - "Vitamin K reverses warfarin."
+      - "Right. Alteplase converts plasminogen to plasmin, so an antifibrinolytic such as tranexamic acid (or aminocaproic acid) counters it, with platelets and factor correction as needed."
+      - "Idarucizumab reverses dabigatran."
+      - "Andexanet alfa reverses direct factor Xa inhibitors."
+    src: { page: 442, quote: "Nonspecific reversal with antifibrinolytics (eg, aminocaproic acid, tranexamic acid)" }
+    status: unverified
+  # ---------- p443: Cancer therapy—cell cycle ----------
+  - id: heme.L05.043
+    kind: table
+    topic: cancer-therapy-cell-cycle
+    title: Where anticancer drugs act in the cell cycle
+    columns: [Phase, Drug classes]
+    rows:
+      - [S phase, "Antimetabolites (cytarabine, 5-FU, hydroxyurea, methotrexate, pentostatin, thiopurines; cladribine is phase nonspecific)"]
+      - [S and G2, "Topoisomerase inhibitors (etoposide, teniposide, irinotecan, topotecan)"]
+      - [G2, "Bleomycin (DNA scission), anthracyclines (DNA intercalation)"]
+      - [M, "Microtubule inhibitors (taxanes, vinca alkaloids)"]
+      - [Cell cycle–independent, "Platinum compounds, alkylating agents (busulfan, nitrogen mustards, nitrosoureas, procarbazine), dactinomycin"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 443, quote: "Cell cycle–independent drugs Platinum compounds Alkylating agents Busulfan Nitrogen mustards Nitrosoureas Procarbazine Dactinomycin" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.044
+    kind: card
+    topic: cancer-therapy-cell-cycle
+    front: Which proteins modulate the G1 restriction point?
+    back: Rb and p53.
+    src: { page: 443, quote: "Rb, p53 modulate G1 restriction point" }
+    status: unverified
+  - id: heme.L05.045
+    kind: mcq
+    topic: cancer-therapy-cell-cycle
+    stem: >-
+      In a study of cultured tumor cells, a drug kills cells only while they are in mitosis; cells
+      arrested in G0 or S phase are spared. Which of the following drugs fits this pattern?
+    options:
+      - Cisplatin
+      - Methotrexate
+      - Vincristine
+      - Busulfan
+      - Dactinomycin
+    answer: 2
+    why:
+      - "Platinum compounds are cell cycle nonspecific."
+      - "Methotrexate, an antimetabolite, acts in S phase."
+      - "Right. Microtubule inhibitors (vinca alkaloids and taxanes) are M-phase specific."
+      - "Alkylating agents such as busulfan are cell cycle nonspecific."
+      - "Dactinomycin is cell cycle nonspecific."
+    src: { page: 443, quote: "Microtubule inhibitors Taxanes Vinca alkaloids" }
+    status: unverified
+  # ---------- p443: Cancer therapy—targets ----------
+  - id: heme.L05.046
+    kind: table
+    topic: cancer-therapy-targets
+    title: Cancer therapy targets
+    columns: [Drugs, Target]
+    rows:
+      - ["MTX, 5-FU", ↓ Thymidine synthesis]
+      - [Thiopurines, ↓ De novo purine synthesis]
+      - [Hydroxyurea, Inhibits ribonucleotide reductase]
+      - ["Alkylating agents, platinum compounds", Cross-link DNA]
+      - [Bleomycin, DNA strand breakage]
+      - ["Anthracyclines, dactinomycin", DNA intercalators]
+      - [Etoposide/teniposide, Inhibit topoisomerase II]
+      - [Irinotecan/topotecan, Inhibit topoisomerase I]
+      - [Vinca alkaloids, Inhibit microtubule formation]
+      - [Taxanes, Inhibit microtubule disassembly]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1]]
+    src: { page: 443, quote: "Vinca alkaloids: inhibit microtubule formation Taxanes: inhibit microtubule disassembly" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.047
+    kind: mcq
+    topic: cancer-therapy-targets
+    stem: >-
+      A 52-year-old woman with metastatic breast cancer is treated with a drug that stabilizes
+      polymerized microtubules so the mitotic spindle cannot break down. Which of the following drugs
+      has the opposite effect on microtubules?
+    options:
+      - Paclitaxel
+      - Vinblastine
+      - Etoposide
+      - Bleomycin
+      - Doxorubicin
+    answer: 1
+    why:
+      - "Paclitaxel is the taxane she is receiving: it inhibits microtubule disassembly."
+      - "Right. Vinca alkaloids inhibit microtubule formation (they bind β-tubulin and block polymerization), the opposite of taxanes."
+      - "Etoposide inhibits topoisomerase II."
+      - "Bleomycin causes DNA strand breakage."
+      - "Doxorubicin intercalates into DNA."
+    src: { page: 443, quote: "Vinca alkaloids: inhibit microtubule formation Taxanes: inhibit microtubule disassembly" }
+    status: unverified
+  # ---------- p443: Antibody-drug conjugates ----------
+  - id: heme.L05.048
+    kind: card
+    topic: antibody-drug-conjugates
+    front: What is an antibody-drug conjugate, and why is it useful?
+    back: A monoclonal antibody linked to a cytotoxic chemotherapy drug. Antibody selectivity for tumor antigens delivers the drug to tumor cells while sparing healthy cells → ↑ efficacy and ↓ toxicity.
+    src: { page: 443, quote: "Formed by linking monoclonal antibodies with cytotoxic chemotherapeutic drugs. Antibody selectivity against tumor antigens allows targeted drug delivery to tumor cells while sparing healthy cells" }
+    status: unverified
+  - id: heme.L05.049
+    kind: order
+    topic: antibody-drug-conjugates
+    prompt: Put the steps of antibody-drug conjugate action in order.
+    steps:
+      - Conjugate binds the tumor antigen
+      - Receptor-mediated endocytosis
+      - Lysosomal degradation
+      - Drug release
+      - Cytotoxicity
+    src: { page: 443, quote: "Receptor-mediated endocytosis Lysosomal degradation Drug release Cytotoxicity Tumor antigen" }
+    status: unverified
+  - id: heme.L05.050
+    kind: mcq
+    topic: antibody-drug-conjugates
+    stem: >-
+      A 48-year-old woman has metastatic breast cancer whose cells strongly overexpress HER2. She is
+      given ado-trastuzumab emtansine (T-DM1). Which of the following best explains why this drug is
+      less toxic to normal tissue than giving the cytotoxic payload alone?
+    options:
+      - It is cleared by the kidneys before reaching normal cells
+      - The antibody delivers the drug to cells bearing the tumor antigen
+      - It works only on cells in M phase
+      - It activates NK cells against all dividing cells
+      - It requires bioactivation by the liver
+    answer: 1
+    why:
+      - "Monoclonal antibodies are eliminated by macrophages, not by the kidneys."
+      - "Right. The antibody targets HER2, the conjugate is taken up by receptor-mediated endocytosis and the drug is released inside the tumor cell, sparing healthy cells (↑ efficacy, ↓ toxicity)."
+      - "Cell cycle specificity does not explain targeted delivery."
+      - "NK-cell ADCC does not target all dividing cells."
+      - "Liver bioactivation applies to cyclophosphamide and nitrosoureas."
+    src: { page: 443, quote: "Example: ado-trastuzumab emtansine (T-DM1) for HER2 ⊕ breast cancer." }
+    status: unverified
+  # ---------- p444: Antitumor antibiotics ----------
+  - id: heme.L05.051
+    kind: table
+    topic: antitumor-antibiotics
+    title: Antitumor antibiotics
+    columns: [Drug, Mechanism, Clinical use, Adverse effects]
+    rows:
+      - [Bleomycin, Free radicals → DNA strand breaks, "Testicular cancer, Hodgkin lymphoma", "Pulmonary fibrosis, skin hyperpigmentation"]
+      - [Dactinomycin (actinomycin D), "Intercalates into DNA, preventing RNA synthesis", "Wilms tumor, Ewing sarcoma, rhabdomyosarcoma", Myelosuppression]
+      - ["Anthracyclines (doxorubicin, daunorubicin)", "Free radicals; intercalate into DNA → strand breaks; inhibit topoisomerase II", "Solid tumors, leukemias, lymphomas", "Dilated cardiomyopathy (often irreversible; prevent with dexrazoxane), myelosuppression"]
+    blanks: [[0, 2], [0, 3], [1, 2], [1, 3], [2, 1], [2, 3]]
+    src: { page: 444, quote: "Bleomycin Generates free radicals → DNA strand breaks Testicular cancer, Hodgkin lymphoma Pulmonary fibrosis, skin hyperpigmentation" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.052
+    kind: card
+    topic: antitumor-antibiotics
+    front: Which antitumor antibiotic is cell cycle nonspecific, and where do the others act?
+    back: Dactinomycin is cell cycle nonspecific; bleomycin and anthracyclines act in G2/M phase.
+    src: { page: 444, quote: "Dactinomycin is cell cycle nonspecific; bleomycin and anthracycline exert their effects on G2 /M phase." }
+    status: unverified
+  - id: heme.L05.053
+    kind: cloze
+    topic: antitumor-antibiotics
+    text: Anthracycline cardiotoxicity is a {{c1::dilated cardiomyopathy}}, often {{c2::irreversible}}, and is prevented with {{c3::dexrazoxane}}.
+    src: { page: 444, quote: "Dilated cardiomyopathy (often irreversible; prevent with dexrazoxane), myelosuppression" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.054
+    kind: mcq
+    topic: antitumor-antibiotics
+    stem: >-
+      A 24-year-old man is treated for nonseminomatous testicular cancer. Months later he has
+      progressive dyspnea on exertion and a dry cough. He has dark streaks of skin hyperpigmentation.
+      Chest CT shows bilateral reticular changes at the lung bases. Which of the following is the
+      mechanism of the drug most likely responsible?
+    options:
+      - Cross-linking of DNA by a platinum compound
+      - Free radical generation causing DNA strand breaks
+      - Inhibition of topoisomerase II
+      - Inhibition of dihydrofolate reductase
+      - Inhibition of microtubule polymerization
+    answer: 1
+    why:
+      - "Cisplatin, also used in testicular cancer, causes nephrotoxicity and ototoxicity, not pulmonary fibrosis."
+      - "Right. Bleomycin generates free radicals → DNA strand breaks; its adverse effects are pulmonary fibrosis and skin hyperpigmentation."
+      - "Etoposide, also used in testicular cancer, causes myelosuppression and alopecia."
+      - "Methotrexate can cause pulmonary fibrosis, but it is not a testicular cancer drug and causes no hyperpigmentation."
+      - "Vinblastine causes myelosuppression."
+    src: { page: 444, quote: "Bleomycin Generates free radicals → DNA strand breaks Testicular cancer, Hodgkin lymphoma Pulmonary fibrosis, skin hyperpigmentation" }
+    status: unverified
+  # ---------- p444: Antimetabolites ----------
+  - id: heme.L05.055
+    kind: card
+    topic: antimetabolites
+    front: Which antimetabolite is not S-phase specific?
+    back: Cladribine, which is cell cycle nonspecific; all other antimetabolites are S-phase specific.
+    src: { page: 444, quote: "All are S-phase specific except cladribine, which is cell cycle nonspecific." }
+    status: unverified
+  - id: heme.L05.056
+    kind: cloze
+    topic: antimetabolites
+    text: Azathioprine is converted to {{c1::6-MP}}, which is activated by {{c2::HGPRT}}; both are purine (thiol) analogs that ↓ {{c3::de novo purine synthesis}}.
+    src: { page: 444, quote: "Purine (thiol) analogs → ↓ de novo purine synthesis AZA is converted to 6-MP, which is then activated by HGPRT" }
+    status: unverified
+  - id: heme.L05.057
+    kind: card
+    topic: antimetabolites
+    front: What are the uses and adverse effects of thiopurines (azathioprine, 6-MP)?
+    back: "Uses: rheumatoid arthritis, IBD, SLE, ALL, steroid-refractory disease, preventing organ rejection, weaning from glucocorticoids. Adverse: myelosuppression, GI and liver toxicity."
+    src: { page: 444, quote: "Rheumatoid arthritis, IBD, SLE, ALL; steroid-refractory disease Prevention of organ rejection Weaning from glucocorticoids Myelosuppression; GI, liver toxicity" }
+    status: unverified
+  - id: heme.L05.058
+    kind: cloze
+    topic: antimetabolites
+    text: 6-MP is inactivated by {{c1::thiopurine S-methyltransferase}} (genetic polymorphism) and {{c2::xanthine oxidase}}, so its toxicity ↑ with {{c3::allopurinol or febuxostat}}.
+    src: { page: 444, quote: "6-MP is inactivated by thiopurine S-methyl- transferase (genetic polymorphism) and xanthine oxidase (↑ toxicity with allopurinol or febuxostat)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.059
+    kind: card
+    topic: antimetabolites
+    front: What are cladribine and pentostatin, and what are they used for?
+    back: Purine nucleoside analogs that cannot be processed by ADA, interfering with DNA synthesis. Used for hairy cell leukemia; adverse effect is myelosuppression.
+    src: { page: 444, quote: "Purine nucleoside analogs → unable to be processed by ADA, interfering with DNA synthesis Hairy cell leukemia Myelosuppression" }
+    status: unverified
+  - id: heme.L05.060
+    kind: card
+    topic: antimetabolites
+    front: What is the mechanism and main use of cytarabine?
+    back: A pyrimidine nucleoside analog (arabinofuranosyl cytidine) → DNA chain termination; inhibits DNA polymerase. Used for leukemias (AML) and lymphomas; causes myelosuppression.
+    src: { page: 444, quote: "Pyrimidine nucleoside analog → DNA chain termination Inhibits DNA polymerase Leukemias (AML), lymphomas Myelosuppression" }
+    status: unverified
+  - id: heme.L05.061
+    kind: cloze
+    topic: antimetabolites
+    text: 5-Fluorouracil is bioactivated to {{c1::5-FdUMP}} → inhibition of {{c2::thymidylate synthase}} → ↓ dTMP → ↓ DNA synthesis. Its effects are enhanced by {{c3::leucovorin}}.
+    src: { page: 444, quote: "Pyrimidine analog bioactivated to 5-FdUMP → thymidylate synthase inhibition" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.062
+    kind: card
+    topic: antimetabolites
+    front: What are the uses and adverse effects of 5-fluorouracil, and which drug is its prodrug?
+    back: "Uses: colon and pancreatic cancer; topical for actinic keratosis and basal cell carcinoma. Adverse: myelosuppression, palmar-plantar erythrodysesthesia (hand-foot syndrome). Capecitabine is a prodrug."
+    src: { page: 444, quote: "Myelosuppression, palmar- plantar erythrodysesthesia (hand-foot syndrome)" }
+    status: unverified
+  - id: heme.L05.063
+    kind: card
+    topic: antimetabolites
+    front: What is the mechanism, uses and toxicity of hydroxyurea?
+    back: "Inhibits ribonucleotide reductase → ↓ DNA synthesis. Used for myeloproliferative disorders (CML, polycythemia vera) and sickle cell disease (↑ HbF). Adverse: severe myelosuppression, megaloblastic anemia."
+    src: { page: 444, quote: "Inhibits ribonucleotide reductase → ↓ DNA synthesis Myeloproliferative disorders (eg, CML, polycythemia vera), sickle cell disease (↑ HbF)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.064
+    kind: cloze
+    topic: antimetabolites
+    text: Methotrexate is a folic acid analog that competitively inhibits {{c1::dihydrofolate reductase}} → ↓ dTMP → ↓ DNA synthesis; its myelosuppression is reversible with {{c2::leucovorin "rescue"}}.
+    src: { page: 444, quote: "Folic acid analog that competitively inhibits dihydrofolate reductase" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.065
+    kind: card
+    topic: antimetabolites
+    front: What are the cancer and noncancer uses of methotrexate?
+    back: "Cancers: leukemias (ALL), lymphomas, choriocarcinoma, sarcomas. Nonneoplastic: ectopic pregnancy, medical abortion (with misoprostol), rheumatoid arthritis, psoriasis, IBD, vasculitis."
+    src: { page: 444, quote: "Nonneoplastic: ectopic pregnancy, medical abortion (with misoprostol), rheumatoid arthritis, psoriasis, IBD, vasculitis" }
+    status: unverified
+  - id: heme.L05.066
+    kind: enumerate
+    topic: antimetabolites
+    prompt: Enumerate the adverse effects of methotrexate (6).
+    points:
+      - Myelosuppression (reversible with leucovorin)
+      - Hepatotoxicity
+      - Mucositis (eg, mouth ulcers)
+      - Pulmonary fibrosis
+      - Folate deficiency (teratogenic)
+      - Nephrotoxicity
+    pass: 5
+    hook: "الـ MTX بيضرب كل حاجة بتتجدد بسرعة: النخاع والفم، ومعاهم الكبد والرئة والكلى، ونقص الـ folate."
+    src: { page: 444, quote: "Myelosuppression (reversible with leucovorin “rescue”), hepatotoxicity, mucositis (eg, mouth ulcers), pulmonary fibrosis, folate deficiency (teratogenic), nephrotoxicity" }
+    status: unverified
+  - id: heme.L05.067
+    kind: mcq
+    topic: antimetabolites
+    stem: >-
+      A 6-year-old boy with ALL is maintained on 6-mercaptopurine. He develops gout-like joint pain and
+      is started on allopurinol without a dose change. Two weeks later his WBC count is 900/mm3 and his
+      platelets are 30,000/mm3. Which of the following best explains this?
+    options:
+      - Allopurinol inhibits HGPRT, activating 6-MP
+      - Allopurinol inhibits xanthine oxidase, which inactivates 6-MP
+      - Allopurinol induces thiopurine S-methyltransferase
+      - Allopurinol blocks dihydrofolate reductase
+      - Allopurinol causes autoimmune destruction of marrow precursors
+    answer: 1
+    why:
+      - "HGPRT activates 6-MP; allopurinol does not act on it."
+      - "Right. 6-MP is inactivated by xanthine oxidase and thiopurine S-methyltransferase; allopurinol (or febuxostat) blocks xanthine oxidase → ↑ 6-MP toxicity (myelosuppression)."
+      - "Inducing the enzyme would lower 6-MP levels, not raise toxicity."
+      - "Dihydrofolate reductase is the target of methotrexate."
+      - "The drop is a dose effect of 6-MP, not autoimmunity."
+    src: { page: 444, quote: "xanthine oxidase (↑ toxicity with allopurinol or febuxostat)" }
+    status: unverified
+  - id: heme.L05.068
+    kind: mcq
+    topic: antimetabolites
+    stem: >-
+      A 25-year-old woman with sickle cell disease has had four painful crises in the past year. She is
+      started on a daily oral drug that reduces crises by raising fetal hemoglobin. Which of the
+      following enzymes does this drug inhibit?
+    options:
+      - Dihydrofolate reductase
+      - Thymidylate synthase
+      - Ribonucleotide reductase
+      - Topoisomerase II
+      - Xanthine oxidase
+    answer: 2
+    why:
+      - "Methotrexate inhibits dihydrofolate reductase."
+      - "5-FU (as 5-FdUMP) inhibits thymidylate synthase."
+      - "Right. Hydroxyurea inhibits ribonucleotide reductase → ↓ DNA synthesis; it is used in sickle cell disease because it ↑ HbF. Watch for severe myelosuppression and megaloblastic anemia."
+      - "Etoposide and anthracyclines inhibit topoisomerase II."
+      - "Allopurinol inhibits xanthine oxidase."
+    src: { page: 444, quote: "Hydroxyurea Inhibits ribonucleotide reductase → ↓ DNA synthesis" }
+    status: unverified
+  # ---------- p445: Alkylating agents ----------
+  - id: heme.L05.069
+    kind: table
+    topic: alkylating-agents
+    title: Alkylating agents (all cell cycle nonspecific)
+    columns: [Drugs, Mechanism, Clinical use, Adverse effects]
+    rows:
+      - [Busulfan, Cross-links DNA, Ablates the patient's bone marrow before bone marrow transplantation, "Severe myelosuppression (almost all cases), pulmonary fibrosis, hyperpigmentation"]
+      - ["Nitrogen mustards (cyclophosphamide, ifosfamide)", Cross-link DNA; require liver bioactivation, "Solid tumors, leukemia, lymphomas, rheumatic disease (SLE, granulomatosis with polyangiitis)", "Myelosuppression, SIADH, Fanconi syndrome (ifosfamide), hemorrhagic cystitis and bladder cancer (prevent with mesna)"]
+      - ["Nitrosoureas (carmustine, lomustine)", Cross-link DNA; require liver bioactivation; cross the blood-brain barrier, Brain tumors (including glioblastoma multiforme), "CNS toxicity (convulsions, dizziness, ataxia)"]
+      - [Procarbazine, Mechanism unknown; weak MAO inhibitor, "Hodgkin lymphoma, brain tumors", "Myelosuppression, pulmonary toxicity, leukemia, disulfiram-like reaction"]
+    blanks: [[0, 2], [0, 3], [1, 3], [2, 2], [2, 3], [3, 3]]
+    src: { page: 445, quote: "Busulfan Cross-links DNA Used to ablate patient’s bone marrow before bone marrow transplantation" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.070
+    kind: cloze
+    topic: alkylating-agents
+    text: Cyclophosphamide and ifosfamide cause {{c1::hemorrhagic cystitis}} and bladder cancer, prevented with {{c2::mesna}}; ifosfamide also causes {{c3::Fanconi syndrome}}.
+    src: { page: 445, quote: "Fanconi syndrome (ifosfamide), hemorrhagic cystitis and bladder cancer (prevent with mesna)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.071
+    kind: card
+    topic: alkylating-agents
+    front: Why are nitrosoureas used for brain tumors, and what is the mnemonic?
+    back: They cross the blood-brain barrier → CNS entry, so they treat brain tumors including glioblastoma multiforme. "Put nitro in your Mustang and travel the globe." Their toxicity is in the CNS (convulsions, dizziness, ataxia).
+    src: { page: 445, quote: "Cross blood-brain barrier → CNS entry Brain tumors (including glioblastoma multiforme) Put nitro in your Mustang and travel the globe" }
+    status: unverified
+  - id: heme.L05.072
+    kind: card
+    topic: alkylating-agents
+    front: Why must patients on procarbazine avoid tyramine?
+    back: Procarbazine is a weak MAO inhibitor, so tyramine ingestion risks a hypertensive crisis. It also causes a disulfiram-like reaction.
+    src: { page: 445, quote: "Weak MAO inhibitor (risk of hypertensive crisis with tyramine ingestion)" }
+    status: unverified
+  - id: heme.L05.073
+    kind: mcq
+    topic: alkylating-agents
+    stem: >-
+      A 38-year-old woman with lupus nephritis is treated with monthly IV cyclophosphamide. She later
+      develops painful, gross hematuria with clots. Urine culture is negative. Which of the following
+      should have been given with each dose to prevent this?
+    options:
+      - Leucovorin
+      - Amifostine
+      - Dexrazoxane
+      - Mesna
+      - Rasburicase
+    answer: 3
+    why:
+      - "Leucovorin rescues methotrexate myelosuppression."
+      - "Amifostine prevents platinum nephrotoxicity."
+      - "Dexrazoxane prevents anthracycline cardiotoxicity."
+      - "Right. Mesna is a sulfhydryl compound that binds acrolein, the toxic metabolite of cyclophosphamide and ifosfamide that causes hemorrhagic cystitis."
+      - "Rasburicase treats tumor lysis syndrome."
+    src: { page: 445, quote: "hemorrhagic cystitis and bladder cancer (prevent with mesna)" }
+    status: unverified
+  # ---------- p445: Platinum compounds ----------
+  - id: heme.L05.074
+    kind: card
+    topic: platinum-compounds
+    front: Name the platinum compounds, their mechanism and clinical uses.
+    back: "Cisplatin, carboplatin, oxaliplatin. Cross-link DNA; cell cycle nonspecific. Used for solid tumors (testicular, bladder, ovarian, GI, lung) and lymphomas."
+    src: { page: 445, quote: "Cisplatin, carboplatin, oxaliplatin. MECHANISM Cross-link DNA. Cell cycle nonspecific." }
+    status: unverified
+  - id: heme.L05.075
+    kind: cloze
+    topic: platinum-compounds
+    text: Platinum compounds cause {{c1::nephrotoxicity}} (eg, Fanconi syndrome; prevent with {{c2::amifostine}}), {{c3::peripheral neuropathy}}, and ototoxicity.
+    src: { page: 445, quote: "Nephrotoxicity (eg, Fanconi syndrome; prevent with amifostine), peripheral neuropathy, ototoxicity." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.076
+    kind: mcq
+    topic: platinum-compounds
+    stem: >-
+      A 60-year-old man is treated for muscle-invasive bladder cancer with a drug that cross-links DNA.
+      After several cycles he notices ringing in his ears and difficulty hearing conversation, and his
+      serum creatinine has risen. Which drug was most likely used?
+    options:
+      - Cisplatin
+      - Vincristine
+      - Doxorubicin
+      - Bleomycin
+      - Cyclophosphamide
+    answer: 0
+    why:
+      - "Right. Platinum compounds cross-link DNA and cause nephrotoxicity, peripheral neuropathy and ototoxicity; amifostine protects the kidneys."
+      - "Vincristine causes peripheral neuropathy and constipation, not ototoxicity."
+      - "Doxorubicin causes cardiotoxicity."
+      - "Bleomycin causes pulmonary fibrosis."
+      - "Cyclophosphamide causes hemorrhagic cystitis, not hearing loss."
+    src: { page: 445, quote: "Solid tumors (eg, testicular, bladder, ovarian, GI, lung), lymphomas." }
+    status: unverified
+  # ---------- p445: Microtubule inhibitors ----------
+  - id: heme.L05.077
+    kind: table
+    topic: microtubule-inhibitors
+    title: Microtubule inhibitors (all M-phase specific)
+    columns: [Drugs, Mechanism, Clinical use, Adverse effects]
+    rows:
+      - ["Taxanes (docetaxel, paclitaxel)", Hyperstabilize polymerized microtubules → prevent mitotic spindle breakdown, "Ovarian and breast carcinomas, other tumors", "Myelosuppression, neuropathy, hypersensitivity"]
+      - ["Vinca alkaloids (vincristine, vinblastine)", Bind β-tubulin and inhibit polymerization → prevent mitotic spindle formation, "Solid tumors, leukemias, Hodgkin and non-Hodgkin lymphomas", "Vincristine: neurotoxicity (axonal neuropathy), constipation (ileus); vinblastine: myelosuppression"]
+    blanks: [[0, 1], [0, 3], [1, 1], [1, 3]]
+    src: { page: 445, quote: "Hyperstabilize polymerized microtubules → prevent mitotic spindle breakdown" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.078
+    kind: card
+    topic: microtubule-inhibitors
+    front: How do the toxicities of vincristine and vinblastine differ (mnemonic)?
+    back: "Vincristine \"crisps the nerves\": neurotoxicity (axonal neuropathy) and constipation including ileus. Vinblastine \"blasts the marrow\": myelosuppression."
+    src: { page: 445, quote: "Vincristine (crisps the nerves): neurotoxicity (axonal neuropathy), constipation (including ileus) Vinblastine (blasts the marrow): myelosuppression" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.079
+    kind: card
+    topic: microtubule-inhibitors
+    front: What is the mnemonic for the taxane mechanism?
+    back: "\"Taxes stabilize society\": taxanes hyperstabilize polymerized microtubules."
+    src: { page: 445, quote: "Taxes stabilize society" }
+    status: unverified
+  - id: heme.L05.080
+    kind: mcq
+    topic: microtubule-inhibitors
+    stem: >-
+      A 5-year-old girl with ALL receives induction chemotherapy. Three weeks later she has trouble
+      walking with foot drop, absent ankle reflexes, and no bowel movement for 5 days with abdominal
+      distension. Her blood counts are only mildly reduced. Which of the following is the mechanism of
+      the drug most likely responsible?
+    options:
+      - Binding β-tubulin and inhibiting its polymerization into microtubules
+      - Hyperstabilizing polymerized microtubules
+      - Inhibiting dihydrofolate reductase
+      - Cross-linking DNA after liver bioactivation
+      - Inhibiting topoisomerase I
+    answer: 0
+    why:
+      - "Right. Vincristine binds β-tubulin and blocks polymerization; it 'crisps the nerves' (axonal neuropathy) and causes constipation including ileus, with little marrow effect."
+      - "Taxanes cause neuropathy too, but they are not ALL drugs and they cause myelosuppression."
+      - "Methotrexate causes myelosuppression and mucositis, not ileus."
+      - "Cyclophosphamide causes myelosuppression and hemorrhagic cystitis."
+      - "Irinotecan causes diarrhea and severe myelosuppression."
+    src: { page: 445, quote: "Bind β-tubulin and inhibit its polymerization into microtubules → prevent mitotic spindle formation" }
+    status: unverified
+  # ---------- p445: Topoisomerase inhibitors ----------
+  - id: heme.L05.081
+    kind: table
+    topic: topoisomerase-inhibitors
+    title: Topoisomerase inhibitors (↑ DNA strand breaks → arrest in S and G2)
+    columns: [Drugs, Target, Clinical use, Adverse effects]
+    rows:
+      - ["Irinotecan, topotecan", "Topoisomerase I (\"-tecone\")", "Colon, ovarian, small cell lung cancer", "Severe myelosuppression, diarrhea"]
+      - ["Etoposide, teniposide", "Topoisomerase II (\"-bothside\")", "Testicular, small cell lung cancer, leukemia, lymphoma", "Myelosuppression, alopecia"]
+    blanks: [[0, 1], [0, 3], [1, 1], [1, 3]]
+    src: { page: 445, quote: "Irinotecan, topotecan Inhibit topoisomerase I “-tecone” Colon, ovarian, small cell lung cancer Severe myelosuppression, diarrhea" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.082
+    kind: cloze
+    topic: topoisomerase-inhibitors
+    text: All topoisomerase inhibitors cause ↑ DNA strand breaks, resulting in cell cycle arrest in {{c1::S and G2}} phases.
+    src: { page: 445, quote: "All cause ↑ DNA strand breaks, resulting in cell cycle arrest in S and G2 phases." }
+    status: unverified
+  - id: heme.L05.083
+    kind: mcq
+    topic: topoisomerase-inhibitors
+    stem: >-
+      A 67-year-old man with metastatic colon cancer starts a regimen that includes a drug that
+      inhibits topoisomerase I. Which of the following adverse effects is most characteristic of this
+      drug?
+    options:
+      - Severe diarrhea
+      - Hemorrhagic cystitis
+      - Pulmonary fibrosis
+      - Dilated cardiomyopathy
+      - Ototoxicity
+    answer: 0
+    why:
+      - "Right. Irinotecan and topotecan inhibit topoisomerase I ('-tecone') and cause severe myelosuppression and diarrhea."
+      - "Hemorrhagic cystitis is from cyclophosphamide and ifosfamide."
+      - "Pulmonary fibrosis is from bleomycin, busulfan and methotrexate."
+      - "Dilated cardiomyopathy is from anthracyclines and trastuzumab."
+      - "Ototoxicity is from cisplatin and carboplatin."
+    src: { page: 445, quote: "Irinotecan, topotecan Inhibit topoisomerase I “-tecone” Colon, ovarian, small cell lung cancer Severe myelosuppression, diarrhea" }
+    status: unverified
+  # ---------- p446: Tamoxifen ----------
+  - id: heme.L05.084
+    kind: card
+    topic: tamoxifen
+    front: What is the mechanism of tamoxifen?
+    back: A selective estrogen receptor modulator (SERM) with a complex mode of action, an antagonist in breast tissue and a partial agonist in endometrium and bone. Blocks estrogen binding to ER in ER ⊕ cells.
+    src: { page: 446, quote: "Selective estrogen receptor modulator with complex mode of action: antagonist in breast tissue, partial agonist in endometrium and bone." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.085
+    kind: card
+    topic: tamoxifen
+    front: What are the clinical uses and adverse effects of tamoxifen?
+    back: "Uses: prevention and treatment of breast cancer; preventing gynecomastia in patients on prostate cancer therapy. Adverse: hot flashes, ↑ thromboembolic events (DVT, PE), endometrial cancer, uterine sarcoma."
+    src: { page: 446, quote: "Hot flashes, ↑ risk of thromboembolic events (eg, DVT, PE), endometrial cancer, uterine sarcoma." }
+    status: unverified
+  - id: heme.L05.086
+    kind: mcq
+    topic: tamoxifen
+    stem: >-
+      A 56-year-old postmenopausal woman has taken a drug for 3 years after surgery for ER-positive
+      breast cancer. She now has painless vaginal bleeding, and endometrial biopsy shows endometrial
+      adenocarcinoma. Which of the following best explains the effect of her drug on the endometrium?
+    options:
+      - It is an estrogen receptor antagonist in all tissues
+      - It is a partial estrogen agonist in the endometrium
+      - It inhibits aromatase in peripheral fat
+      - It blocks HER2 on endometrial cells
+      - It is a progestin that causes endometrial atrophy
+    answer: 1
+    why:
+      - "If it were an antagonist everywhere, it would not stimulate the endometrium."
+      - "Right. Tamoxifen is a SERM: antagonist in breast, partial agonist in endometrium and bone, which raises the risk of endometrial cancer and uterine sarcoma."
+      - "Aromatase inhibitors lower estrogen and do not stimulate the endometrium."
+      - "HER2 is the target of trastuzumab."
+      - "A progestin would protect the endometrium."
+    src: { page: 446, quote: "antagonist in breast tissue, partial agonist in endometrium and bone" }
+    status: unverified
+  # ---------- p446: Anticancer monoclonal antibodies ----------
+  - id: heme.L05.087
+    kind: card
+    topic: anticancer-monoclonal-antibodies
+    front: How do anticancer monoclonal antibodies work, and how are they eliminated?
+    back: They act against extracellular targets, to neutralize them or to promote immune recognition (eg, ADCC by NK cells, complement-dependent cytotoxicity). They are eliminated by macrophages, not cleared by the kidneys or liver.
+    src: { page: 446, quote: "Work against extracellular targets to neutralize them or to promote immune system recognition (eg, ADCC by NK cells and complement-dependent cytotoxicity). Eliminated by macrophages (not cleared by kidneys or liver)." }
+    status: unverified
+  - id: heme.L05.088
+    kind: table
+    topic: anticancer-monoclonal-antibodies
+    title: Anticancer monoclonal antibodies
+    columns: [Agent, Target, Clinical use, Adverse effects]
+    rows:
+      - [Alemtuzumab, CD52, "CLL, multiple sclerosis", "↑ Infections and autoimmunity (eg, ITP)"]
+      - [Bevacizumab, VEGF (inhibits blood vessel formation), "CRC, RCC, NSCLC, angioproliferative retinopathy", "Hemorrhage, blood clots, impaired wound healing"]
+      - ["Cetuximab, panitumumab", EGFR, "Metastatic CRC (wild-type RAS), head and neck cancer", "Rash, elevated LFTs, diarrhea"]
+      - [Rituximab, CD20, "Non-Hodgkin lymphoma, CLL, rheumatoid arthritis, ITP, TTP, AIHA, multiple sclerosis", Infusion reaction from cytokine release after binding B cells]
+      - [Trastuzumab, HER2, "Breast cancer, gastric cancer", Dilated cardiomyopathy (often reversible)]
+      - ["Pembrolizumab, nivolumab, cemiplimab", PD-1, "Various tumors (NSCLC, RCC, melanoma, urothelial carcinoma)", ↑ Autoimmunity]
+      - ["Atezolizumab, durvalumab, avelumab", PD-L1, "Various tumors (NSCLC, RCC, melanoma, urothelial carcinoma)", ↑ Autoimmunity]
+      - [Ipilimumab, CTLA-4, "Various tumors (NSCLC, RCC, melanoma, urothelial carcinoma)", ↑ Autoimmunity]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 446, quote: "Alemtuzumab CD52 Chronic lymphocytic leukemia (CLL), multiple sclerosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.089
+    kind: card
+    topic: anticancer-monoclonal-antibodies
+    front: What are the adverse effects of bevacizumab, and why?
+    back: It targets VEGF and inhibits blood vessel formation, so it causes hemorrhage, blood clots and impaired wound healing.
+    src: { page: 446, quote: "Bevacizumab VEGF (inhibits blood vessel formation)" }
+    status: unverified
+  - id: heme.L05.090
+    kind: card
+    topic: anticancer-monoclonal-antibodies
+    front: When can cetuximab or panitumumab be used in colorectal cancer?
+    back: In metastatic CRC with wild-type RAS (they target EGFR). Also used for head and neck cancer. Adverse effects are rash, elevated LFTs and diarrhea.
+    src: { page: 446, quote: "Cetuximab, panitumumab EGFR Metastatic CRC (wild-type RAS), head and neck cancer Rash, elevated LFTs, diarrhea" }
+    status: unverified
+  - id: heme.L05.091
+    kind: card
+    topic: anticancer-monoclonal-antibodies
+    front: How does trastuzumab cardiotoxicity differ from anthracycline cardiotoxicity, and what is the mnemonic?
+    back: "Both cause dilated cardiomyopathy, but trastuzumab's is often reversible (anthracyclines' is often irreversible). \"Don't Trast HER, she will break your heart.\""
+    src: { page: 446, quote: "Don’t Trast HER, she will break your heart Breast cancer, gastric cancer Dilated cardiomyopathy (often reversible)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.092
+    kind: card
+    topic: anticancer-monoclonal-antibodies
+    front: What is the main adverse effect of the immune checkpoint inhibitors (PD-1, PD-L1, CTLA-4)?
+    back: "↑ Risk of autoimmunity: dermatitis, enterocolitis, hepatitis, pneumonitis, endocrinopathies."
+    src: { page: 446, quote: "↑ risk of autoimmunity (eg, dermatitis, enterocolitis, hepatitis, pneumonitis, endocrinopathies)" }
+    status: unverified
+  - id: heme.L05.093
+    kind: mcq
+    topic: anticancer-monoclonal-antibodies
+    stem: >-
+      A 63-year-old man with metastatic melanoma is treated with nivolumab. Eight weeks later he has
+      fatigue, cold intolerance and weight gain; TSH is high and free T4 is low. He also has new
+      watery diarrhea. Which of the following best explains these effects?
+    options:
+      - Direct cytotoxicity to thyroid follicular cells
+      - Release of T cells from inhibition, causing autoimmunity
+      - Depletion of CD20 ⊕ B cells
+      - VEGF blockade with impaired tissue perfusion
+      - EGFR blockade in the gut epithelium
+    answer: 1
+    why:
+      - "Checkpoint inhibitors are not directly cytotoxic."
+      - "Right. Nivolumab blocks PD-1, and checkpoint blockade ↑ the risk of autoimmunity (endocrinopathies, enterocolitis, hepatitis, pneumonitis, dermatitis)."
+      - "CD20 is the target of rituximab."
+      - "VEGF is the target of bevacizumab."
+      - "EGFR blockade (cetuximab) causes rash and diarrhea, but not hypothyroidism."
+    src: { page: 446, quote: "Pembrolizumab, nivolumab, cemiplimab PD-1" }
+    status: unverified
+  - id: heme.L05.094
+    kind: mcq
+    topic: anticancer-monoclonal-antibodies
+    stem: >-
+      A 70-year-old man with follicular lymphoma receives his first infusion of rituximab. Thirty
+      minutes in, he develops fever, rigors, flushing and hypotension. Which of the following best
+      explains this reaction?
+    options:
+      - IgE-mediated anaphylaxis to mouse protein
+      - Cytokine release after the drug binds its target on B cells
+      - Tumor lysis with hyperkalemia
+      - Antibodies against heparin-bound platelet factor 4
+      - Complement deficiency
+    answer: 1
+    why:
+      - "The book attributes the reaction to cytokine release, not IgE."
+      - "Right. Rituximab targets CD20, and its infusion reaction is due to cytokine release following its interaction with its target on B cells."
+      - "Tumor lysis causes electrolyte and kidney problems, typically after days, not rigors in minutes."
+      - "That is HIT type 2, with heparin."
+      - "Rituximab uses complement; it does not cause complement deficiency reactions."
+    src: { page: 446, quote: "Infusion reaction due to cytokine release following interaction of rituximab with its target on B cells" }
+    status: unverified
+  # ---------- p447: Anticancer small molecule inhibitors ----------
+  - id: heme.L05.095
+    kind: table
+    topic: anticancer-small-molecule-inhibitors
+    title: Anticancer small molecule inhibitors
+    columns: [Agent, Target, Clinical use, Adverse effects]
+    rows:
+      - ["Alectinib, crizotinib", ALK, Non–small cell lung cancer, "Edema, rash, diarrhea"]
+      - ["Erlotinib, gefitinib, afatinib", EGFR, Non–small cell lung cancer, "Rash, diarrhea"]
+      - ["Imatinib, dasatinib, nilotinib", "BCR-ABL (also other tyrosine kinases, eg, c-KIT)", "CML, ALL, GISTs", "Myelosuppression, ↑ LFTs, edema, myalgias"]
+      - [Ruxolitinib, JAK1/2, Polycythemia vera, "Bruises, ↑ LFTs"]
+      - ["Bortezomib, ixazomib, carfilzomib", Proteasome (arrest at G2-M → apoptosis), "Multiple myeloma, mantle cell lymphoma", "Peripheral neuropathy, herpes zoster reactivation"]
+      - ["Vemurafenib, encorafenib, dabrafenib", BRAF, Melanoma (often with MEK inhibitors such as trametinib), "Rash, fatigue, nausea, diarrhea"]
+      - [Palbociclib, Cyclin-dependent kinase 4/6 (arrest at G1-S → apoptosis), Breast cancer, "Myelosuppression, pneumonitis"]
+      - [Olaparib, Poly(ADP-ribose) polymerase (↓ DNA repair), "Breast, ovarian, pancreatic, and prostate cancers", "Myelosuppression, edema, diarrhea"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 447, quote: "Imatinib, dasatinib, nilotinib BCR-ABL (also other tyrosine kinases [eg, c-KIT]) CML, ALL, GISTs" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.096
+    kind: card
+    topic: anticancer-small-molecule-inhibitors
+    front: Why do proteasome inhibitors cause herpes zoster reactivation?
+    back: Bortezomib, ixazomib and carfilzomib ↓ T-cell activation → ↓ cell-mediated immunity. They also cause peripheral neuropathy.
+    src: { page: 447, quote: "Peripheral neuropathy, herpes zoster reactivation (↓ T-cell activation → ↓ cell-mediated immunity)" }
+    status: unverified
+  - id: heme.L05.097
+    kind: cloze
+    topic: anticancer-small-molecule-inhibitors
+    text: Proteasome inhibitors induce arrest at {{c1::G2-M}} phase via accumulation of abnormal proteins → apoptosis; palbociclib inhibits {{c2::cyclin-dependent kinase 4/6}}, arresting cells at {{c3::G1-S}}.
+    src: { page: 447, quote: "Proteasome (induce arrest at G2-M phase via accumulation of abnormal proteins → apoptosis)" }
+    status: unverified
+  - id: heme.L05.098
+    kind: mcq
+    topic: anticancer-small-molecule-inhibitors
+    stem: >-
+      A 66-year-old woman has bone pain, anemia, hypercalcemia and an IgG M spike, with 40% clonal
+      plasma cells in the marrow. She starts a drug that causes misfolded proteins to accumulate in the
+      tumor cells. Two months later she has a painful vesicular rash in a thoracic dermatome. Which of
+      the following is the target of her drug?
+    options:
+      - BCR-ABL tyrosine kinase
+      - Proteasome
+      - JAK1/2
+      - BRAF
+      - Poly(ADP-ribose) polymerase
+    answer: 1
+    why:
+      - "Imatinib targets BCR-ABL in CML, ALL and GISTs."
+      - "Right. Bortezomib (and ixazomib, carfilzomib) inhibits the proteasome → abnormal proteins accumulate → G2-M arrest and apoptosis; it is used in multiple myeloma and causes herpes zoster reactivation (↓ cell-mediated immunity)."
+      - "Ruxolitinib targets JAK1/2 in polycythemia vera."
+      - "Vemurafenib targets BRAF in melanoma."
+      - "Olaparib targets PARP in breast, ovarian, pancreatic and prostate cancer."
+    src: { page: 447, quote: "Multiple myeloma, mantle cell lymphoma Peripheral neuropathy, herpes zoster reactivation" }
+    status: unverified
+  # ---------- p447: Chemotoxicity amelioration ----------
+  - id: heme.L05.099
+    kind: table
+    topic: chemotoxicity-amelioration
+    title: Chemotoxicity amelioration
+    columns: [Drug, Mechanism, Clinical use]
+    rows:
+      - [Amifostine, Free radical scavenger, Nephrotoxicity from platinum compounds]
+      - [Dexrazoxane, Iron chelator, Cardiotoxicity from anthracyclines]
+      - [Leucovorin (folinic acid), Tetrahydrofolate precursor, Myelosuppression from methotrexate (rescue); also enhances 5-FU]
+      - [Mesna, Sulfhydryl compound that binds acrolein, Hemorrhagic cystitis from cyclophosphamide/ifosfamide]
+      - [Rasburicase, Recombinant uricase (uric acid → allantoin), Tumor lysis syndrome]
+      - ["Ondansetron, granisetron", 5-HT3 receptor antagonists, Acute nausea and vomiting (within 1-2 hr)]
+      - ["Prochlorperazine, metoclopramide", D2 receptor antagonists, Acute nausea and vomiting (within 1-2 hr)]
+      - ["Aprepitant, fosaprepitant", NK1 receptor antagonists, Delayed nausea and vomiting (>24 hr)]
+      - ["Filgrastim, sargramostim", Recombinant G(M)-CSF, Neutropenia]
+      - [Epoetin alfa, Recombinant erythropoietin, Anemia]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 2], [3, 1], [3, 2], [4, 1], [7, 1], [7, 2]]
+    src: { page: 447, quote: "Amifostine Free radical scavenger Nephrotoxicity from platinum compounds Dexrazoxane Iron chelator Cardiotoxicity from anthracyclines" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.100
+    kind: card
+    topic: chemotoxicity-amelioration
+    front: How does mesna prevent hemorrhagic cystitis?
+    back: It is a sulfhydryl compound that binds acrolein, the toxic metabolite of cyclophosphamide and ifosfamide.
+    src: { page: 447, quote: "Sulfhydryl compound that binds acrolein (toxic metabolite of cyclophosphamide/ifosfamide)" }
+    status: unverified
+  - id: heme.L05.101
+    kind: card
+    topic: chemotoxicity-amelioration
+    front: How do the antiemetics for acute and delayed chemotherapy-induced vomiting differ?
+    back: "Acute (within 1-2 hr): 5-HT3 antagonists (ondansetron, granisetron) or D2 antagonists (prochlorperazine, metoclopramide). Delayed (>24 hr): NK1 antagonists (aprepitant, fosaprepitant)."
+    src: { page: 447, quote: "Aprepitant, fosaprepitant NK1 receptor antagonists Delayed nausea and vomiting (>24 hr after chemotherapy)" }
+    status: unverified
+  - id: heme.L05.102
+    kind: mcq
+    topic: chemotoxicity-amelioration
+    stem: >-
+      A 14-year-old boy with osteosarcoma receives high-dose methotrexate. Twenty-four hours later a
+      drug is started to protect his normal marrow and mucosa from toxicity. Which of the following is
+      the mechanism of this protective drug?
+    options:
+      - Free radical scavenger
+      - Iron chelator
+      - Tetrahydrofolate precursor that bypasses dihydrofolate reductase
+      - Sulfhydryl compound that binds acrolein
+      - Recombinant uricase
+    answer: 2
+    why:
+      - "Amifostine, a free radical scavenger, protects against platinum nephrotoxicity."
+      - "Dexrazoxane, an iron chelator, protects against anthracycline cardiotoxicity."
+      - "Right. Leucovorin (folinic acid) is a tetrahydrofolate precursor, so it supplies folate past the blocked dihydrofolate reductase: the leucovorin rescue of methotrexate myelosuppression."
+      - "Mesna binds acrolein from cyclophosphamide and ifosfamide."
+      - "Rasburicase treats tumor lysis syndrome."
+    src: { page: 447, quote: "Leucovorin (folinic acid) Tetrahydrofolate precursor Myelosuppression from methotrexate (leucovorin “rescue”)" }
+    status: unverified
+  # ---------- p448: Key chemotoxicities ----------
+  - id: heme.L05.103
+    kind: table
+    topic: key-chemotoxicities
+    title: Key chemotoxicities
+    columns: [Drugs, Toxicity]
+    rows:
+      - ["Cisplatin, carboplatin", Ototoxicity and nephrotoxicity]
+      - [Vincristine, Peripheral neuropathy]
+      - ["Bleomycin, busulfan", Pulmonary fibrosis]
+      - ["Doxorubicin, daunorubicin", Cardiotoxicity]
+      - [Trastuzumab, Cardiotoxicity]
+      - [Cyclophosphamide, Hemorrhagic cystitis]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 448, quote: "Bleomycin, Busulfan pulmonary fibrosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L05.104
+    kind: card
+    topic: key-chemotoxicities
+    front: What are the nonspecific common toxicities of nearly all cytotoxic chemotherapies?
+    back: "Myelosuppression (neutropenia, anemia, thrombocytopenia), GI toxicity (nausea, vomiting, mucositis), and alopecia."
+    src: { page: 448, quote: "Nonspecific common toxicities of nearly all cytotoxic chemotherapies include myelosuppression (neutropenia, anemia, thrombocytopenia), GI toxicity (nausea, vomiting, mucositis), alopecia." }
+    status: unverified
+  - id: heme.L05.105
+    kind: mcq
+    topic: key-chemotoxicities
+    stem: >-
+      A 58-year-old woman with HER2-positive breast cancer is treated with doxorubicin followed by
+      trastuzumab. Several months later she has exertional dyspnea, orthopnea and bilateral leg edema.
+      Echocardiography shows a dilated left ventricle with an ejection fraction of 30%. Which of the
+      following drugs shares this key toxicity with her regimen?
+    options:
+      - Daunorubicin
+      - Vincristine
+      - Bleomycin
+      - Cisplatin
+      - Cyclophosphamide
+    answer: 0
+    why:
+      - "Right. Doxorubicin, daunorubicin and trastuzumab are the key causes of cardiotoxicity."
+      - "Vincristine's key toxicity is peripheral neuropathy."
+      - "Bleomycin (and busulfan) cause pulmonary fibrosis."
+      - "Cisplatin (and carboplatin) cause ototoxicity and nephrotoxicity."
+      - "Cyclophosphamide causes hemorrhagic cystitis."
+    src: { page: 448, quote: "Doxorubicin, Daunorubicin card ↓ iotoxicity Trastuzumab card ↓ iotoxicity" }
+    status: unverified
