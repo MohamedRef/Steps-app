@@ -39,7 +39,6 @@ fn Host(p: With) -> Element {
 }
 
 fn render(show: &'static str, answers: &[(&'static str, Grade)]) -> String {
-    crate::store::use_memory_store();
     let mut dom = VirtualDom::new_with_props(Host, With { answers: answers.to_vec(), show });
     dom.rebuild_in_place();
     dioxus::ssr::render(&dom)
