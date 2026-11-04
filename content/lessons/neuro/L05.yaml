@@ -1,0 +1,469 @@
+schema: steps.lesson/v1
+lecture: neuro.L05
+lessons:
+  - id: neuro.L05.lesson1
+    title: "الدوخة والعين من قدّام: من الـ conjunctiva للـ glaucoma"
+    hook: "عين حمرا ممكن تبقى حاجة بسيطة تخف لوحدها، وممكن تبقى طوارئ هتعمي المريض لو اديته القطرة الغلط"
+    minutes: 10
+    pages: [549, 551]
+    topics: [vertigo, normal-eye-anatomy, conjunctivitis, lens-disorders, refractive-errors, aqueous-humor-pathway, glaucoma]
+    goals:
+      - "تفرّق الـ vertigo الطرفي عن المركزي"
+      - "تعرف نوع الـ conjunctivitis من الإفرازات والسن"
+      - "تفهم طريق الـ aqueous humor وأدوية الـ glaucoma"
+      - "تفرّق open-angle عن acute angle-closure"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الدوخة: من الودن ولّا من المخ؟"
+        text: |-
+          الـ vertigo = إحساس إن الدنيا بتلف وإنت واقف.
+
+          - **طرفي** (الأشهر): الودن الداخلية. **BPPV**: فتافيت في الـ semicircular canal، نوبات ==أقل من دقيقة== مع حركة الراس (Dix-Hallpike للتشخيص و Epley للعلاج). **Ménière**: ↑ endolymph ← vertigo و sensorineural loss و tinnitus («men wear vests»).
+          - **مركزي**: جذع المخ أو الـ cerebellum (stroke، MS، ورم).
+
+          الفرق في الـ nystagmus: الطرفي horizontal-torsional و ==بيتلم لما يركّز على حاجة==. المركزي أي اتجاه (حتى vertical) ومش بيتلم، ومعاه diplopia أو ataxia.
+        page: 549
+        quote: "Findings: mixed horizontal-torsional nystagmus (never purely torsional or vertical) that does not change direction and is suppressible with visual fixation."
+      - kind: check
+        question: "A woman has brief spinning spells only when she rolls over in bed; each lasts 30 seconds. What treats it?"
+        options:
+          - "Epley maneuver"
+          - "Dix-Hallpike maneuver"
+          - "Urgent brain MRI and tPA"
+          - "Diuretics for endolymphatic hydrops"
+        answer: 0
+        why:
+          - "صح: BPPV، والـ Epley بيرجّع الفتافيت مكانها."
+          - "الـ Dix-Hallpike للتشخيص مش للعلاج."
+          - "مافيش علامات مركزية."
+          - "ده Ménière، معاه صمم وطنين."
+        page: 549
+        quote: "episodic vertigo lasting ≤1 minute provoked by certain head movements (diagnosed via Dix-Hallpike maneuver, treated via Epley maneuver)"
+      - kind: match
+        prompt: "وصّل كل نوع conjunctivitis بالـ clue بتاعه"
+        pairs:
+          - ["Viral", "Adenovirus, preauricular node, self-resolving"]
+          - ["Bacterial", "Purulent discharge, antibiotics"]
+          - ["Allergic", "Itchy, both eyes"]
+          - ["Neonatal chlamydia", "Day 5-14, azithromycin"]
+          - ["Neonatal gonorrhea", "Day 2-5, ceftriaxone"]
+        why: "الـ viral الأشهر ويخف لوحده. وفي حديثي الولادة الـ gonorrhea أسرع (2-5 أيام) وأخطر، والـ chlamydia أشهر وبتيجي متأخرة (5-14)."
+        page: 549
+        quote: "C trachomatis serotypes D-K (most common)—onset 5-14 days after birth; treat with erythromycin or azithromycin."
+      - kind: explain
+        title: "العدسة والنظر"
+        text: |-
+          - **Presbyopia**: العدسة بتنشف مع السن فمش قادر يقرا قريب.
+          - **Cataract**: العدسة تعتّم من غير ألم: glare، الـ red reflex يروح، والنظر يقل بالليل. افتكر الـ congenital: ==galactosemia==، trisomies، rubella، Marfan.
+          - **Lens dislocation**: trauma، Marfan، homocystinuria.
+
+          النظر: **myopia** (العين طويلة، الصورة قدّام الشبكية) ← ==concave==. **hyperopia** (قصيرة، ورا) ← convex. **astigmatism** ← cylindrical.
+        page: 550
+        quote: "Eye too long for refractive power of cornea and lens → light focused in front of retina. Correct with concave (diverging) lens."
+      - kind: figure
+        title: "الـ aqueous humor: يتعمل فين ويخرج منين"
+        svg: |-
+          <svg viewBox="0 0 360 232" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="nL05a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+            <path class="fg-box" d="M60 14 Q4 110 60 206" fill="none"/>
+            <text x="2" y="114" class="t-sm t-mut">cornea</text>
+            <rect class="fg-ink" x="98" y="16" width="9" height="76" rx="3"/>
+            <rect class="fg-ink" x="98" y="128" width="9" height="76" rx="3"/>
+            <text x="96" y="226" class="t-sm t-mut">iris</text>
+            <ellipse class="fg-box" cx="160" cy="110" rx="24" ry="52"/>
+            <text x="146" y="114" class="t-sm t-mut">lens</text>
+            <rect class="fg-good" x="114" y="2" width="56" height="22" rx="6"/>
+            <text x="120" y="17" class="t-sm">ciliary</text>
+            <line class="fg-arrow-acc" x1="124" y1="28" x2="120" y2="96" marker-end="url(#nL05a)"/>
+            <line class="fg-arrow-acc" x1="118" y1="110" x2="86" y2="102" marker-end="url(#nL05a)"/>
+            <line class="fg-arrow-acc" x1="80" y1="92" x2="80" y2="34" marker-end="url(#nL05a)"/>
+            <circle class="fg-dot-bad" cx="82" cy="22" r="6"/>
+            <text x="36" y="13" class="t-sm t-bad">angle</text>
+            <text x="220" y="30" class="t-sm t-b">Made: ciliary body</text>
+            <text x="220" y="46" class="t-sm">↓ by β-blocker,</text>
+            <text x="220" y="62" class="t-sm">α2-agonist,</text>
+            <text x="220" y="78" class="t-sm">acetazolamide</text>
+            <text x="220" y="96" class="t-sm t-b">Out 90%: trabecular</text>
+            <text x="220" y="112" class="t-sm">meshwork → Schlemm</text>
+            <text x="220" y="128" class="t-sm">↑ by pilocarpine (M3)</text>
+            <text x="220" y="162" class="t-sm t-b">Out 10%: uveoscleral</text>
+            <text x="220" y="178" class="t-sm">↑ by latanoprost</text>
+          </svg>
+        caption: "الـ ciliary body بيعمل الـ aqueous في الـ posterior chamber، يعدّي من الـ pupil للـ anterior chamber، ويخرج عند الـ angle (النقطة الحمرا) من الـ trabecular meshwork للـ canal of Schlemm. أي دوا للـ glaucoma يا إما بيقلل التصنيع يا إما بيزوّد الخروج."
+        alt: "Side view of the front of the eye: cornea, iris, lens and ciliary body. Arrows show aqueous humor made by the ciliary body flowing between iris and lens, through the pupil into the anterior chamber, and out at the angle. Side notes: production is reduced by beta-blockers, alpha-2 agonists and acetazolamide; 90 percent leaves through the trabecular meshwork to the canal of Schlemm, increased by pilocarpine; 10 percent leaves by the uveoscleral route, increased by latanoprost."
+        page: 550
+        quote: "Produced by nonpigmented epithelium on ciliary body"
+      - kind: check
+        question: "Which glaucoma drug lowers pressure by increasing uveoscleral outflow?"
+        options:
+          - "Latanoprost"
+          - "Timolol"
+          - "Acetazolamide"
+          - "Brimonidine"
+        answer: 0
+        why:
+          - "صح: الـ prostaglandin agonists بتفتح الطريق التاني (uveoscleral)."
+          - "Timolol بيقلل التصنيع."
+          - "Acetazolamide بيقلل التصنيع."
+          - "Brimonidine بيقلل التصنيع."
+        page: 550
+        quote: "Drainage into uvea and sclera with prostaglandin agonists (eg, latanoprost, bimatoprost)"
+      - kind: table
+        title: "Open-angle × Acute angle-closure"
+        columns: ["", "Open-angle", "Acute angle-closure"]
+        rows:
+          - ["Angle", "Open; trabecular resistance ↑", "Closed by the iris (pupillary block)"]
+          - ["Symptoms", "None; found incidentally, peripheral loss", "Severe pain, halos, headache, vomiting, red eye"]
+          - ["Pupil", "Normal", "Fixed, mid-dilated"]
+          - ["Treatment", "Prostaglandins or β-blockers", "β-blocker, α2-agonist, pilocarpine, acetazolamide, mannitol; NO mydriatics"]
+        hide: [[1, 2], [2, 2], [3, 2]]
+        page: 551
+        quote: "Presents with severe eye pain, conjunctival erythema C , sudden vision loss, halos around lights, headache, fixed and mid-dilated pupil, nausea and vomiting."
+      - kind: aside
+        tone: trap
+        text: "واحدة كبيرة نزّلوا لها قطرة توسيع للحدقة وبعد ساعة عينها وجعتها وشايفة ==halos== وبترجّع: ده **acute angle-closure**، والـ mydriatic هو اللي فجّره. «Hurts in a hurry with halos, a headache, and a half-dilated pupil». أوعى تدي atropine أو أي موسّع."
+        page: 551
+        quote: "Mydriatic agents are contraindicated."
+      - kind: check
+        question: "Why does pilocarpine help in acute angle-closure glaucoma?"
+        options:
+          - "It constricts the pupil and pulls the iris away from the angle"
+          - "It blocks aqueous production by the ciliary body"
+          - "It increases uveoscleral outflow"
+          - "It dehydrates the vitreous osmotically"
+        answer: 0
+        why:
+          - "صح: M3 agonist، بيقفل الـ pupil فيشد الـ iris بعيد عن الـ angle، وبيفتح الـ trabecular meshwork."
+          - "ده شغل الـ β-blockers والـ acetazolamide."
+          - "ده الـ latanoprost."
+          - "ده الـ mannitol."
+        page: 550
+        quote: "with M3 agonist (eg, carbachol, pilocarpine)"
+      - kind: try
+        items: [neuro.L05.005, neuro.L05.010, neuro.L05.020, neuro.L05.022, neuro.L05.028]
+    recap:
+      - "Vertigo طرفي: nystagmus بيتلم بالتركيز؛ مركزي: vertical ومعاه علامات."
+      - "Neonatal gonorrhea 2-5 أيام (ceftriaxone)، chlamydia 5-14 (azithromycin)."
+      - "Myopia = concave، hyperopia = convex."
+      - "التصنيع ↓ بـ timolol و brimonidine و acetazolamide؛ الخروج ↑ بـ pilocarpine و latanoprost."
+      - "Acute angle-closure: halos و pupil نص موسعة، ممنوع الـ mydriatics."
+    practice: [neuro.L05.001, neuro.L05.002, neuro.L05.003, neuro.L05.004, neuro.L05.005, neuro.L05.006, neuro.L05.007, neuro.L05.008, neuro.L05.009, neuro.L05.010, neuro.L05.011, neuro.L05.012, neuro.L05.013, neuro.L05.014, neuro.L05.015, neuro.L05.016, neuro.L05.017, neuro.L05.018, neuro.L05.020, neuro.L05.021, neuro.L05.022, neuro.L05.023, neuro.L05.024, neuro.L05.025, neuro.L05.026, neuro.L05.027, neuro.L05.028, neuro.L05.084]
+  - id: neuro.L05.lesson2
+    title: "الشبكية والـ pupil: اقرا الـ fundus"
+    hook: "الـ fundus بيورّيك السكر والضغط والجلطة والورم، كل واحد بشكل"
+    minutes: 10
+    pages: [552, 554]
+    topics: [retinal-disorders, papilledema, leukocoria, uveitis, pupillary-control]
+    goals:
+      - "تتعرف على أمراض الشبكية من شكل الـ fundus"
+      - "تفهم الـ retinopathy of prematurity بالـ VEGF"
+      - "تمشي طريق الـ pupil الـ parasympathetic والـ sympathetic"
+      - "تفهم الـ RAPD"
+    status: unverified
+    steps:
+      - kind: table
+        title: "الـ fundus بيقول إيه"
+        columns: ["Disease", "Fundus clue"]
+        rows:
+          - ["Dry macular degeneration", "Drusen"]
+          - ["Nonproliferative diabetic", "Microaneurysms, hemorrhages, cotton-wool spots, hard exudates"]
+          - ["Hypertensive", "AV nicking, macular star; papilledema = emergency"]
+          - ["Retinal artery occlusion", "Cloudy retina, cherry-red spot"]
+          - ["Retinal vein occlusion", "Blood and thunder"]
+          - ["Retinitis pigmentosa", "Bone spicules, pale disc, thin vessels"]
+        hide: [[0, 1], [3, 1], [4, 1], [5, 1]]
+        page: 552
+        quote: "Funduscopy: cloudy retina with “cherry-red” spot at fovea D"
+      - kind: explain
+        title: "ليه الـ cherry-red spot؟"
+        text: |-
+          الشبكية كلها بتاخد دم من الـ central retinal artery، فلما تتسد تبقى ==باهتة ومنفوخة==. بس الـ fovea رفيعة جداً وبتاخد من الـ choroid اللي تحتها، فالأحمر بتاعه يبان من خلالها كنقطة حمرا.
+
+          السبب غالباً **embolus** من الـ carotid (ممكن تشوف cholesterol crystal أصفر لامع)، وأقل الـ giant cell arteritis. فقدان نظر ==مفاجئ ومن غير ألم== في عين واحدة.
+        page: 552
+        quote: "Blockage of central or branch retinal artery usually due to embolism (carotid artery atherosclerosis > cardiogenic); less commonly due to giant cell arteritis."
+      - kind: check
+        question: "A 65-year-old has flashes and floaters for a day, then a dark curtain falling over the vision of one eye. What is it?"
+        options:
+          - "Retinal detachment"
+          - "Retinal artery occlusion"
+          - "Acute angle-closure glaucoma"
+          - "Optic neuritis"
+        answer: 0
+        why:
+          - "صح: الـ posterior vitreous detachment بيشد الشبكية فتتقطع، وده surgical emergency."
+          - "ده فقدان مفاجئ من غير flashes ولا ستارة."
+          - "ده بيوجع ومعاه halos."
+          - "ده بيوجع مع حركة العين عند الشباب."
+        page: 552
+        quote: "Commonly presents with symptoms of posterior vitreous detachment (eg, floaters, light flashes) followed by painless monocular vision loss (“dark curtain”)."
+      - kind: order
+        prompt: "رتّب اللي بيحصل في retinopathy of prematurity"
+        steps:
+          - "Preterm birth: relative hyperoxia (worse with oxygen)"
+          - "↓ VEGF stops normal retinal vessel growth"
+          - "The eye grows and the avascular retina becomes hypoxic"
+          - "↑ VEGF drives abnormal neovascularization"
+          - "Tractional retinal detachment"
+        why: "نفس فكرة الـ proliferative diabetic retinopathy: hypoxia ← VEGF ← أوعية جديدة هشة بتشد الشبكية."
+        page: 552
+        quote: "As the eyes grow → hypoxia of avascular retina → ↑ VEGF → retinal neovascularization (may cause tractional retinal detachment)."
+      - kind: explain
+        title: "Retinoblastoma و leukocoria و uveitis"
+        text: |-
+          - **Retinoblastoma**: أشهر ورم جوه عين الأطفال، الاتنين **RB1** على ==chromosome 13== بايظين (sporadic أو وراثي مع loss of heterozygosity). بيبان كـ **leukocoria** (الـ red reflex أبيض في الصور) أو حَوَل.
+          - الـ leukocoria عند طفل: retinoblastoma أو ==congenital cataract==.
+          - **Uveitis**: anterior = iritis، posterior = choroiditis أو retinitis. ممكن hypopyon (صديد في الـ anterior chamber). افتكر sarcoidosis، Behçet، JIA، و ==HLA-B27==.
+        page: 553
+        quote: "Loss (whitening) of the red reflex. Important causes in children include retinoblastoma A , congenital cataract."
+      - kind: check
+        question: "Both optic discs are elevated with blurred margins in a woman with morning headaches. What is the mechanism?"
+        options:
+          - "Raised intracranial pressure impairs axoplasmic flow"
+          - "Raised intraocular pressure cups the disc"
+          - "Demyelination of the optic nerve"
+          - "Central retinal artery embolus"
+        answer: 0
+        why:
+          - "صح: papilledema."
+          - "ده glaucoma، الديسك بيتجوّف مش بيتنفخ."
+          - "الـ optic neuritis غالباً عين واحدة ومعاها ألم ونظر قليل."
+          - "ده cherry-red spot مش ديسك منفوخ."
+        page: 553
+        quote: "Optic disc swelling (usually bilateral) due to ↑ ICP (eg, 2° to mass effect). Results from impaired axoplasmic flow in optic nerve."
+      - kind: figure
+        title: "طريق الـ pupil: يقفل ويفتح"
+        svg: |-
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="nL05b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+            <text x="10" y="18" class="t-sm t-b t-good">Constrict (parasympathetic)</text>
+            <rect class="fg-good" x="10" y="28" width="96" height="30" rx="6"/>
+            <text x="16" y="47" class="t-sm">Edinger-Westphal</text>
+            <line class="fg-arrow" x1="106" y1="43" x2="134" y2="43" marker-end="url(#nL05b)"/>
+            <text x="108" y="36" class="t-sm t-mut">III</text>
+            <rect class="fg-good" x="136" y="28" width="88" height="30" rx="6"/>
+            <text x="142" y="47" class="t-sm">Ciliary ganglion</text>
+            <line class="fg-arrow" x1="224" y1="43" x2="252" y2="43" marker-end="url(#nL05b)"/>
+            <rect class="fg-good" x="254" y="28" width="96" height="30" rx="6"/>
+            <text x="260" y="47" class="t-sm">Sphincter (M3)</text>
+            <text x="190" y="74" class="t-sm t-mut">short ciliary nn.</text>
+            <text x="10" y="108" class="t-sm t-b t-bad">Dilate (sympathetic)</text>
+            <rect class="fg-bad" x="10" y="118" width="96" height="30" rx="6"/>
+            <text x="16" y="137" class="t-sm">Hypothalamus</text>
+            <line class="fg-arrow" x1="106" y1="133" x2="134" y2="133" marker-end="url(#nL05b)"/>
+            <rect class="fg-bad" x="136" y="118" width="88" height="30" rx="6"/>
+            <text x="142" y="137" class="t-sm">Budge C8-T2</text>
+            <line class="fg-arrow" x1="224" y1="133" x2="252" y2="133" marker-end="url(#nL05b)"/>
+            <rect class="fg-bad" x="254" y="118" width="96" height="30" rx="6"/>
+            <text x="258" y="137" class="t-sm">Sup. cervical gg.</text>
+            <line class="fg-arrow" x1="302" y1="148" x2="302" y2="176" marker-end="url(#nL05b)"/>
+            <rect class="fg-bad" x="214" y="178" width="136" height="30" rx="6"/>
+            <text x="220" y="197" class="t-sm">Dilator (α1) via carotid</text>
+            <text x="10" y="176" class="t-sm t-mut">2nd neuron exits T1,</text>
+            <text x="10" y="192" class="t-sm t-mut">passes the lung apex</text>
+            <text x="10" y="222" class="t-sm t-mut">3rd: carotid, cavernous sinus, long ciliary</text>
+          </svg>
+        caption: "القفل parasympathetic من نيورونين: Edinger-Westphal ← CN III ← ciliary ganglion ← short ciliary nerves ← sphincter. الفتح sympathetic من 3: الـ hypothalamus ← center of Budge (C8-T2) ← يطلع عند T1 جنب قمة الرئة للـ superior cervical ganglion ← يمشي على الـ internal carotid والـ cavernous sinus ← long ciliary nerves ← dilator. «Short بيقصّر الـ pupil، long بيطوّلها»."
+        alt: "Two pathways. Top, parasympathetic constriction: Edinger-Westphal nucleus, through CN III to the ciliary ganglion, then short ciliary nerves to the sphincter pupillae (M3). Bottom, sympathetic dilation: hypothalamus to the ciliospinal center of Budge at C8-T2, then a second neuron exiting at T1 past the lung apex to the superior cervical ganglion, then a third neuron along the internal carotid artery and cavernous sinus to the dilator (alpha-1) via long ciliary nerves."
+        page: 554
+        quote: "1st neuron: hypothalamus to ciliospinal center of Budge (C8-T2)"
+      - kind: explain
+        title: "الـ RAPD (Marcus Gunn)"
+        text: |-
+          النور في أي عين بيقفل ==الاتنين== (direct و consensual)، لأن الـ pretectal nuclei بتشغّل الـ Edinger-Westphal في الناحيتين.
+
+          لو العصب البصري في عين واحدة تعبان (optic neuritis مثلاً): لما تنقل النور بسرعة من السليمة للتعبانة، المخ «يحس» بنور أقل، ==فالاتنين يوسعوا== بدل ما يقفلوا. ده عيب في الطرف الداخل (afferent)، والطرف الخارج سليم.
+        page: 554
+        quote: "When light shines into a normal eye, constriction of the ipsilateral eye (direct reflex) and contralateral eye (consensual reflex) is observed."
+      - kind: check
+        question: "Shining light in the left eye constricts only the left pupil; shining it in the right eye also constricts only the left pupil. Where is the lesion?"
+        options:
+          - "Right oculomotor nerve (efferent)"
+          - "Right optic nerve (afferent)"
+          - "Left optic nerve (afferent)"
+          - "Pretectal nuclei"
+        answer: 0
+        why:
+          - "صح: العين اليمين بتحس بالنور (عشان الشمال قفلت) بس مش بتقفل أبداً، يبقى الطرف الخارج اليمين (CN III) بايظ."
+          - "لو الـ afferent اليمين بايظ، النور في اليمين ماكانش هيقفل الشمال."
+          - "الـ afferent الشمال شغال، النور فيه قفل الشمال."
+          - "الـ pretectal بيبوّظ الاتنين."
+        page: 554
+        quote: "Result: illumination of 1 eye results in bilateral pupillary constriction."
+      - kind: try
+        items: [neuro.L05.040, neuro.L05.041, neuro.L05.045, neuro.L05.047, neuro.L05.053]
+    recap:
+      - "Drusen = dry AMD؛ metamorphopsia = wet."
+      - "Cherry-red spot = artery؛ blood and thunder = vein؛ dark curtain = detachment."
+      - "ROP: hyperoxia ← ↓ VEGF، وبعدين hypoxia ← ↑ VEGF."
+      - "Retinoblastoma = RB1 على 13، leukocoria."
+      - "Short ciliary يقفل (M3)، long ciliary يفتح (α1)؛ RAPD = عيب afferent."
+    practice: [neuro.L05.029, neuro.L05.030, neuro.L05.031, neuro.L05.032, neuro.L05.033, neuro.L05.034, neuro.L05.035, neuro.L05.036, neuro.L05.037, neuro.L05.038, neuro.L05.039, neuro.L05.040, neuro.L05.041, neuro.L05.042, neuro.L05.043, neuro.L05.044, neuro.L05.045, neuro.L05.046, neuro.L05.047, neuro.L05.048, neuro.L05.049, neuro.L05.050, neuro.L05.051, neuro.L05.052, neuro.L05.053]
+  - id: neuro.L05.lesson3
+    title: "حركة العين والمجال البصري: حدد مكان الإصابة"
+    hook: "عين نازلة لتحت وبره، أو نص المجال البصري ضايع: كل شكل بيشاور على حتة واحدة بس"
+    minutes: 10
+    pages: [555, 559]
+    topics: [horner-syndrome, ocular-motility, strabismus, cranial-nerve-iii-iv-vi-palsies, visual-field-defects, cavernous-sinus, internuclear-ophthalmoplegia, eyelid-disorders]
+    goals:
+      - "تحدد مكان الـ Horner من الـ neuron"
+      - "تعرف كل عضلة عين وعصبها وإزاي تختبرها"
+      - "تفرّق CN III palsy من الـ ischemia ومن الضغط"
+      - "ترسم الـ visual pathway وتحدد مكان أي field defect"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Horner: الـ sympathetic مقطوع"
+        text: |-
+          الثلاثي: ==ptosis خفيفة== (superior tarsal muscle)، **miosis**، و **anhidrosis** في نفس ناحية الوش.
+
+          مكان القطع حسب النيورون:
+          - الأول: pons، lateral medullary (Wallenberg)، حبل شوكي فوق T1.
+          - التاني: ==Pancoast tumor== بيضغط الـ stellate ganglion.
+          - التالت: **carotid dissection** (بيوجع)، وغالباً من غير anhidrosis لأن ألياف العرق بتمشي مع الـ external carotid.
+        page: 555
+        quote: "3rd neuron: carotid dissection (painful); anhidrosis is usually absent"
+      - kind: mnemonic
+        word: "LR6SO4R3"
+        parts:
+          - { key: "LR6", text: "Lateral rectus: CN VI" }
+          - { key: "SO4", text: "Superior oblique: CN IV" }
+          - { key: "R3", text: "The rest: CN III" }
+        hook: "«المعادلة الكيميائية» بتاعة العين: LR6 SO4 R3. والـ obliques بتتختبر بالعكس: الـ left superior و inferior obliques وهو باصص يمين."
+        page: 555
+        quote: "CN VI innervates the Lateral Rectus. CN IV innervates the Superior Oblique. CN III innervates the Rest."
+      - kind: check
+        question: "After a punch to the eye, a boy cannot look up with that eye and has a numb cheek. What happened?"
+        options:
+          - "Orbital floor blowout fracture trapping the inferior rectus"
+          - "CN IV palsy"
+          - "Medial wall fracture trapping the medial rectus"
+          - "Carotid dissection"
+        answer: 0
+        why:
+          - "صح: أرضية الـ orbit (maxillary bone) اتكسرت، الـ inferior rectus اتحبس فالبص لفوق بيعمل diplopia، والـ infraorbital nerve اتأثر."
+          - "الـ CN IV palsy بيعمل مشكلة في البص لتحت ومن غير تنميل."
+          - "الـ medial rectus بيأثر على الحركة الأفقية."
+          - "ده Horner مش مشكلة حركة."
+        page: 555
+        quote: "diplopia (especially on upward gaze) and enophthalmos due to IR muscle A +/– orbital fat entrapment. May injure infraorbital nerve."
+      - kind: explain
+        title: "CN III: جوه ولّا بره؟"
+        text: |-
+          تخيّل الـ CN III سلك: الألياف الـ **motor في النص**، والألياف الـ **parasympathetic (للـ pupil) على السطح**، والأوعية اللي بتغذيه ماشية بره.
+
+          - **Ischemia (السكر)**: النص بيجوع الأول ← ptosis و down-and-out بس ==الـ pupil سليمة==.
+          - **ضغط (PCom aneurysm، uncal herniation)**: السطح بيتضغط الأول ← ==blown pupil== (+/− down-and-out).
+
+          والـ **CN IV**: العين أعلى، والراس مايلة للناحية السليمة، ومش قادر ينزل السلم. **CN VI**: العين مش بتطلع بره.
+        page: 556
+        quote: "Ischemia → pupil sparing (motor fibers affected more than parasympathetic fibers)"
+      - kind: check
+        question: "A woman with a sudden severe headache has a dilated, unreactive left pupil with ptosis. What must be excluded first?"
+        options:
+          - "Posterior communicating artery aneurysm"
+          - "Diabetic CN III ischemia"
+          - "Myasthenia gravis"
+          - "Horner syndrome"
+        answer: 0
+        why:
+          - "صح: CN III palsy بالـ pupil = ضغط، وصداع مفاجئ = aneurysm لحد ما يثبت العكس."
+          - "الـ ischemia بتسيب الـ pupil سليمة."
+          - "الـ myasthenia مش بتأثر على الـ pupil."
+          - "الـ Horner بيعمل pupil صغيرة مش موسعة."
+        page: 556
+        quote: "PCom aneurysm → sudden-onset headache"
+      - kind: figure
+        title: "الـ visual pathway: 7 أماكن"
+        svg: |-
+          <svg viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg">
+            <circle class="fg-box" cx="70" cy="30" r="20"/>
+            <circle class="fg-box" cx="150" cy="30" r="20"/>
+            <text x="58" y="34" class="t-sm">L</text>
+            <text x="144" y="34" class="t-sm">R</text>
+            <path class="fg-ink" d="M70 50 L104 98" fill="none"/>
+            <path class="fg-ink" d="M150 50 L116 98" fill="none"/>
+            <path class="fg-ink" d="M104 106 L84 150 L60 220" fill="none"/>
+            <path class="fg-ink" d="M116 106 L136 150 L160 220" fill="none"/>
+            <rect class="fg-acc" x="96" y="94" width="28" height="14" rx="5"/>
+            <path class="fg-thin" d="M84 150 Q40 175 60 220" fill="none" stroke-dasharray="4 3"/>
+            <circle class="fg-dot-bad" cx="70" cy="12" r="7"/><text x="67" y="16" class="t-sm" fill="var(--surface)">1</text>
+            <circle class="fg-dot-bad" cx="84" cy="74" r="7"/><text x="81" y="78" class="t-sm" fill="var(--surface)">2</text>
+            <circle class="fg-dot-bad" cx="134" cy="96" r="7"/><text x="131" y="100" class="t-sm" fill="var(--surface)">3</text>
+            <circle class="fg-dot-bad" cx="80" cy="166" r="7"/><text x="77" y="170" class="t-sm" fill="var(--surface)">4</text>
+            <circle class="fg-dot-bad" cx="44" cy="188" r="7"/><text x="41" y="192" class="t-sm" fill="var(--surface)">5</text>
+            <circle class="fg-dot-bad" cx="76" cy="196" r="7"/><text x="73" y="200" class="t-sm" fill="var(--surface)">6</text>
+            <circle class="fg-dot-bad" cx="60" cy="220" r="7"/><text x="57" y="224" class="t-sm" fill="var(--surface)">7</text>
+            <text x="190" y="20" class="t-sm">1 macula: central scotoma</text>
+            <text x="190" y="46" class="t-sm">2 L optic nerve: L anopia</text>
+            <text x="190" y="72" class="t-sm">3 chiasm: bitemporal</text>
+            <text x="190" y="98" class="t-sm">4 L tract: R homonymous</text>
+            <text x="190" y="124" class="t-sm">5 L Meyer loop (temporal):</text>
+            <text x="200" y="140" class="t-sm">R upper quadrant</text>
+            <text x="190" y="166" class="t-sm">6 L parietal radiation:</text>
+            <text x="200" y="182" class="t-sm">R lower quadrant</text>
+            <text x="190" y="208" class="t-sm">7 L visual cortex (PCA):</text>
+            <text x="200" y="224" class="t-sm">R hemianopia, macula spared</text>
+          </svg>
+        caption: "الألياف الـ nasal بتعدّي في الـ chiasm، فقبله الإصابة بتضرب عين واحدة، وفيه بتضرب الـ temporal fields الاتنين، وبعده بتضرب نفس النص من المجال في العينين (homonymous) عكس ناحية الإصابة. الـ Meyer loop (المنقّط) بيلف في الـ temporal وشايل الجزء اللي فوق من المجال («pie in the sky»)، والـ parietal شايل اللي تحت."
+        alt: "Diagram of the visual pathway from the left and right eyes through the optic nerves, the chiasm, the left optic tract, the Meyer loop (dashed) and the parietal radiation to the left visual cortex. Seven numbered lesions: 1 macula, central scotoma; 2 left optic nerve, left anopia; 3 chiasm, bitemporal hemianopia; 4 left optic tract, right homonymous hemianopia; 5 left Meyer loop, right upper quadrantanopia; 6 left parietal radiation, right lower quadrantanopia; 7 left visual cortex, right hemianopia with macular sparing."
+        page: 557
+        quote: "Ventral optic radiation (Meyer loop)—lower retina; travels through temporal lobe; loops around inferior horn of lateral ventricle."
+      - kind: check
+        question: "A pituitary macroadenoma grows upward. Which field defect results?"
+        options:
+          - "Bitemporal hemianopia"
+          - "Right homonymous hemianopia"
+          - "Central scotoma"
+          - "Left upper quadrantanopia"
+        answer: 0
+        why:
+          - "صح: بيضغط الـ chiasm من تحت، والألياف الـ nasal (اللي شايفة الـ temporal field) هي اللي بتعدّي هناك."
+          - "ده optic tract."
+          - "ده macula."
+          - "ده Meyer loop اليمين."
+        page: 557
+        quote: "Optic chiasm Bitemporal hemianopia"
+      - kind: explain
+        title: "الـ cavernous sinus والـ INO"
+        text: |-
+          - **Cavernous sinus**: بيعدّي فيه CN III و IV و ==V1 و V2== و VI والـ sympathetic والـ internal carotid. فالإصابة (ورم pituitary، carotid-cavernous fistula، أو thrombosis من التهاب في الوش) بتعمل ophthalmoplegia + ↓ corneal sensation + Horner.
+          - **INO**: الـ MLF بيربط الـ CN VI بالـ CN III في الناحية التانية. لو اتقطع: العين اللي في ==نفس الناحية مش بتدخل لجوه== (adduction)، والعين التانية بترقص (nystagmus)، والـ convergence سليمة. في الناحيتين = **MS**.
+        page: 558
+        quote: "Lack of communication such that when CN VI nucleus activates ipsilateral lateral rectus, contralateral CN III nucleus does not stimulate medial rectus to contract."
+      - kind: check
+        question: "Looking left, the right eye stops at the midline and the left eye jerks; convergence is normal. Name it."
+        options:
+          - "Right INO (right MLF lesion)"
+          - "Left INO (left MLF lesion)"
+          - "Right CN III palsy"
+          - "Left CN VI palsy"
+        answer: 0
+        why:
+          - "صح: الاسم بيتبع العين اللي مش بتدخل (اليمين)، والـ MLF اليمين هو اللي اتقطع."
+          - "الـ left INO بيبان لما يبص يمين."
+          - "الـ CN III كان هيبوّظ الـ convergence كمان."
+          - "العين الشمال طلعت بره عادي."
+        page: 558
+        quote: "Directional term (eg, right INO, left INO) refers to the eye that is unable to adduct."
+      - kind: sort
+        prompt: "Preseptal ولّا orbital cellulitis؟"
+        bins: ["Preseptal", "Orbital"]
+        cards:
+          - { text: "Eyelid swelling, painless eye movement", bin: 0 }
+          - { text: "Mild, anterior soft tissue", bin: 0 }
+          - { text: "Pain and diplopia on eye movement", bin: 1 }
+          - { text: "From sinusitis; risk of cavernous sinus thrombosis", bin: 1 }
+        why: "الفيصل حركة العين: لو بتوجع أو فيه diplopia يبقى الالتهاب وصل للعضلات والدهن ورا الـ septum، وده خطر."
+        page: 559
+        quote: "Pain and double vision (diplopia) with eye movement."
+      - kind: try
+        items: [neuro.L05.056, neuro.L05.068, neuro.L05.072, neuro.L05.079, neuro.L05.083]
+    recap:
+      - "Horner: ptosis و miosis و anhidrosis؛ Pancoast = التاني، carotid dissection = التالت."
+      - "LR6 SO4 R3؛ blowout = inferior rectus."
+      - "CN III ischemia = pupil سليمة؛ ضغط = blown pupil."
+      - "Chiasm = bitemporal؛ Meyer loop = pie in the sky؛ PCA = macular sparing."
+      - "INO = اسم العين اللي مش بتدخل؛ convergence سليمة."
+    practice: [neuro.L05.001, neuro.L05.002, neuro.L05.003, neuro.L05.004, neuro.L05.005, neuro.L05.006, neuro.L05.007, neuro.L05.008, neuro.L05.009, neuro.L05.010, neuro.L05.011, neuro.L05.012, neuro.L05.013, neuro.L05.014, neuro.L05.015, neuro.L05.016, neuro.L05.017, neuro.L05.018, neuro.L05.020, neuro.L05.021, neuro.L05.022, neuro.L05.023, neuro.L05.024, neuro.L05.025, neuro.L05.026, neuro.L05.027, neuro.L05.028, neuro.L05.084]
