@@ -1,0 +1,621 @@
+schema: steps.lesson/v1
+lecture: path.L01
+lessons:
+  - id: path.L01.lesson1
+    title: "الخلية تحت الضغط: تتكيّف ولا تتعب ولا تموت"
+    hook: "ليه الـ Barrett بيبقى columnar وفي المدخّن بيبقى squamous؟ وإمتى الخلية تعدّي نقطة اللاعودة؟"
+    minutes: 9
+    pages: [202, 203]
+    topics: [cellular-adaptations, cell-injury, ferroptosis]
+    goals:
+      - "تفرّق بين hypertrophy و hyperplasia و atrophy و metaplasia و dysplasia"
+      - "تعرف علامات الـ reversible injury والـ irreversible injury"
+      - "تعرف الـ ferroptosis بتحصل إزاي وإيه اللي بيمنعها"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "التكيّف قابل للرجوع"
+        text: |-
+          الخلية لما يجيلها ضغط بتتكيّف، والتكيّف ده ==reversible==.
+
+          - ممكن يبقى **physiologic**: زي الرحم اللي بيكبر في الحمل.
+          - وممكن يبقى **pathologic**: زي الـ myocardial hypertrophy بسبب الـ hypertension.
+
+          لو الضغط زاد أوي أو استمر، التكيّف نفسه بيتحوّل لـ **cell injury**. مثال: LV hypertrophy جامد ← myocardial injury ← heart failure.
+        page: 202
+        quote: "Reversible changes that can be physiologic (eg, uterine enlargement during pregnancy) or pathologic (eg, myocardial hypertrophy 2° to systemic hypertension). If stress is excessive or persistent, adaptations can progress to cell injury"
+      - kind: table
+        title: "الأربع تكيّفات"
+        columns: ["Adaptation", "What changes", "Example"]
+        rows:
+          - ["Hypertrophy", "↑ cell size (↑ structural proteins and organelles)", "Cardiac hypertrophy"]
+          - ["Hyperplasia", "↑ cell number (controlled proliferation)", "Benign prostatic hyperplasia"]
+          - ["Atrophy", "↓ size (ubiquitin-proteasome, autophagy) and/or ↓ number (apoptosis)", "Disuse, denervation, ↓ blood supply"]
+          - ["Metaplasia", "One cell type replaced by another (stem cell reprogramming)", "Barrett esophagus"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+        page: 202
+        quote: "Hypertrophy ↑ structural proteins and organelles → ↑ in size of cells. Example: cardiac hypertrophy. Hyperplasia Controlled proliferation of stem cells and differentiated cells → ↑ in number of cells (eg, benign prostatic hyperplasia)."
+      - kind: reveal
+        prompt: "في الـ Barrett الـ squamous بيتحوّل لـ columnar، وفي مجرى الهوا عند المدخّن الـ columnar بيتحوّل لـ squamous. إزاي نفس الفكرة بتطلع عكس بعض؟"
+        answer: "الـ metaplasia بتجيب الخلية اللي ==تستحمل الضغط الجديد==. المريء محتاج يستحمل **الـ acid**، فبيجيب intestinal-type columnar. ومجرى الهوا محتاج **حماية** من الدخان، فبيجيب stratified squamous. ولو الـ insult استمر ← dysplasia ← cancer (Barrett ← esophageal adenocarcinoma)."
+        page: 202
+        quote: "Esophageal exposure to gastric acid: nonkeratinized stratified squamous → intestinal-type columnar epithelium (acid resistance), called Barrett esophagus. The opposite occurs upon airway exposure to tobacco smoke: pseudostratified ciliated columnar → stratified squamous epithelium (protection)."
+      - kind: aside
+        tone: exam
+        text: "الـ metaplasia ممكن تحصل في الـ connective tissue كمان: **myositis ossificans** = عضم بيتكوّن جوّه العضلة بعد trauma."
+        page: 202
+        quote: "Metaplasia of connective tissue can also occur (eg, myositis ossificans, the formation of bone within muscle after trauma)."
+      - kind: check
+        question: "A 55-year-old man who has smoked for 35 years has a bronchial biopsy. The normal lining has been replaced by stratified squamous epithelium without atypia. Which process is this?"
+        options:
+          - "Metaplasia"
+          - "Dysplasia"
+          - "Hyperplasia"
+          - "Carcinoma in situ"
+        answer: 0
+        why:
+          - "صح: نوع خلية اتبدّل بنوع تاني يستحمل الدخان، والخلايا نفسها من غير atypia."
+          - "الـ dysplasia فيها pleomorphism و ↑ N:C ratio، وهنا مفيش atypia."
+          - "الـ hyperplasia زيادة في عدد نفس نوع الخلية، مش تبديل نوع بنوع."
+          - "الـ carcinoma in situ هي severe dysplasia في كل سُمك الـ epithelium، وهنا مفيش atypia أصلاً."
+      - kind: explain
+        title: "الـ dysplasia مش تكيّف"
+        text: |-
+          الـ **dysplasia** نمو epithelial ==مش منظّم== و**precancerous**، والكتاب بيقول إنها مش adaptive response حقيقي.
+
+          - **pleomorphism**: الخلايا مش شبه بعض في الحجم والشكل.
+          - الـ tissue فقدت اتجاهها.
+          - النواة: ↑ nuclear:cytoplasmic ratio و clumped chromatin.
+
+          الـ mild والـ moderate ممكن ترجع لو السبب اتشال. الـ **severe** غالباً ==irreversible== وبتمشي لـ carcinoma in situ. وعادةً قبلها persistent metaplasia أو pathologic hyperplasia.
+        page: 202
+        quote: "Disordered, precancerous epithelial cell growth; not considered a true adaptive response. Characterized by loss of uniformity of cell size and shape (pleomorphism); loss of tissue orientation; nuclear changes (eg, ↑ nuclear:cytoplasmic ratio and clumped chromatin)."
+      - kind: figure
+        title: "من الطبيعي للموت"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="pL01a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker><marker id="pL01b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="8" y="80" width="70" height="36" rx="6"/>
+            <text x="16" y="102" class="t-sm t-b">Normal cells</text>
+            <rect class="fg-good" x="110" y="14" width="120" height="70" rx="6"/>
+            <text x="118" y="32" class="t-sm t-good">Reversible</text>
+            <text x="118" y="50" class="t-sm">Hypertrophy, hyperplasia</text>
+            <text x="118" y="66" class="t-sm">Atrophy, metaplasia</text>
+            <rect class="fg-acc" x="110" y="110" width="120" height="40" rx="6"/>
+            <text x="118" y="128" class="t-sm t-acc">Dysplasia</text>
+            <text x="118" y="143" class="t-sm">irritant persists</text>
+            <rect class="fg-bad" x="262" y="60" width="92" height="76" rx="6"/>
+            <text x="270" y="80" class="t-sm t-bad">Irreversible</text>
+            <text x="270" y="98" class="t-sm">necrosis or</text>
+            <text x="270" y="114" class="t-sm">apoptosis</text>
+            <text x="270" y="130" class="t-sm">or neoplasia</text>
+            <path class="fg-arrow-acc" d="M78 92 L 108 56" marker-end="url(#pL01a)"/>
+            <path class="fg-arrow-acc" d="M170 84 L 170 108" marker-end="url(#pL01a)"/>
+            <path class="fg-arrow-bad" d="M230 50 L 260 80" marker-end="url(#pL01b)"/>
+            <path class="fg-arrow-bad" d="M230 130 L 260 112" marker-end="url(#pL01b)"/>
+            <text x="12" y="186" class="t-sm t-mut">Severe stress or inability to adapt → irreversible</text>
+          </svg>
+        caption: "الخلية الطبيعية بتتكيّف (reversible). لو الـ irritant استمر ← dysplasia ← neoplasia، ولو الضغط جامد أو مقدرتش تتكيّف ← irreversible injury ← necrosis أو apoptosis."
+        alt: "Flow diagram: normal cells adapt reversibly by hypertrophy, hyperplasia, atrophy or metaplasia; a persistent irritant leads to dysplasia and then neoplasia; severe stress or inability to adapt leads to irreversible injury with necrosis or apoptosis."
+        page: 202
+        quote: "Severe dysplasia often becomes irreversible and progresses to carcinoma in situ. Usually preceded by persistent metaplasia or pathologic hyperplasia."
+      - kind: try
+        items: [path.L01.001, path.L01.003, path.L01.005, path.L01.006, path.L01.007]
+      - kind: explain
+        title: "الـ reversible injury: كله من قلّة الـ ATP"
+        text: |-
+          ↓ ATP ← الـ Na+/K+-ATPase والـ Ca2+ pumps بتقف ← المية تدخل ← **cellular swelling**، ودي ==أول morphologic manifestation==.
+
+          وبعدها:
+          - الـ ribosomes بتنفصل ← ↓ protein synthesis.
+          - **blebbing** في الـ plasma membrane.
+          - **chromatin clumping** في النواة.
+          - **myelin figures** (peroxidized lipids متجمّعة).
+          - الوظيفة بتروح بسرعة: الـ myocardium بيبطّل ينقبض بعد 1-2 دقيقة ischemia.
+        page: 203
+        quote: "cellular swelling (cytosol, mitochondria, endoplasmic reticulum/Golgi), which is the earliest morphologic manifestation"
+      - kind: explain
+        title: "الـ irreversible injury: الغشا اتكسر"
+        text: |-
+          - الـ **plasma membrane** بيتكسر ← enzymes زي الـ ==troponin== تخرج برّه، و Ca2+ يدخل ويشغّل degradative enzymes.
+          - الـ **mitochondria** بتبوظ ← مفيش electron transport chain ← ↓ ATP أكتر.
+          - الـ **lysosomes** بتنفجر ← autolysis.
+          - **amorphous densities** جوّه الـ mitochondria.
+          - النواة بتتكسّر على 3 مراحل.
+        page: 203
+        quote: "Breakdown of plasma membrane → cytosolic enzymes (eg, troponin) leak outside of cell, influx of Ca2+ → activation of degradative enzymes"
+      - kind: order
+        prompt: "رتّب مراحل موت النواة"
+        steps:
+          - "Pyknosis (condensation)"
+          - "Karyorrhexis (fragmentation)"
+          - "Karyolysis (dissolution)"
+        why: "النواة بتنكمش الأول، وبعدين الـ endonucleases تكسّرها حتت، وفي الآخر بتدوب خالص."
+        page: 203
+        quote: "Nuclear degradation: pyknosis (nuclear condensation) → karyorrhexis (nuclear fragmentation caused by endonuclease-mediated cleavage) → karyolysis (nuclear dissolution)"
+      - kind: reveal
+        prompt: "ليه الـ troponin في الدم معناه إن خلايا القلب عدّت مرحلة الـ reversible؟"
+        answer: "لأن الـ troponin جوّه الـ cytosol، ومش بيخرج غير لما الـ ==plasma membrane يتكسر==، والكسر ده علامة الـ irreversible injury. الـ swelling والـ blebbing لوحدهم reversible."
+        page: 203
+        quote: "Irreversible cell injury ▘ Breakdown of plasma membrane → cytosolic enzymes (eg, troponin) leak outside of cell"
+      - kind: check
+        question: "Minutes after coronary occlusion, which morphologic change appears first in the ischemic myocytes?"
+        options:
+          - "Cellular swelling"
+          - "Karyolysis"
+          - "Lysosomal rupture"
+          - "Amorphous densities in mitochondria"
+          - "Plasma membrane breakdown"
+        answer: 0
+        why:
+          - "صح: ↓ ATP ← الـ pumps تقف ← swelling، ودي أول morphologic manifestation."
+          - "الـ karyolysis آخر مرحلة في موت النواة، يعني irreversible ومتأخرة."
+          - "انفجار الـ lysosomes ← autolysis، ودي irreversible."
+          - "الـ amorphous densities في الـ mitochondria علامة irreversible injury."
+          - "كسر الـ plasma membrane هو تعريف الـ irreversible injury، بييجي بعد الـ swelling."
+      - kind: explain
+        title: "الـ ferroptosis: موت بالحديد"
+        text: |-
+          **Lipid peroxidation** ← lethal lipid species تتراكم ← موت ==iron-dependent==.
+
+          تحت الميكروسكوب: الـ mitochondria بتنكمش، الـ cristae بتروح، والـ outer membrane بيتقطع.
+
+          ليها دور في **MASLD/MASH** والـ ischemia–reperfusion injury والـ neurodegeneration، وممكن تتمنع بالـ ==iron chelators== (deferiprone، deferoxamine) وبالـ lipophilic antioxidants (ferrostatin، liproxstatin).
+        page: 203
+        quote: "Lipid peroxidation → accumulation of lethal lipid species → iron-dependent cell death. Results in shrinkage of mitochondria with loss of cristae and mitochondrial outer membrane rupture."
+      - kind: try
+        items: [path.L01.009, path.L01.010, path.L01.011, path.L01.014, path.L01.015]
+    recap:
+      - "التكيّف reversible: hypertrophy (حجم)، hyperplasia (عدد)، atrophy (↓)، metaplasia (نوع بنوع)."
+      - "الـ dysplasia مش تكيّف، precancerous، والـ severe منها irreversible."
+      - "Swelling = أول علامة وهي reversible. كسر الغشا (troponin برّه) = irreversible."
+      - "النواة: pyknosis ← karyorrhexis ← karyolysis."
+      - "Ferroptosis = lipid peroxidation بالحديد، وبتتمنع بالـ chelators."
+    practice: [path.L01.001, path.L01.002, path.L01.003, path.L01.004, path.L01.005, path.L01.006, path.L01.007, path.L01.008, path.L01.009, path.L01.010, path.L01.011, path.L01.012, path.L01.013, path.L01.014, path.L01.015, path.L01.016]
+  - id: path.L01.lesson2
+    title: "Apoptosis ولا necrosis: موت هادي وموت بفضيحة"
+    hook: "ليه الـ follicular lymphoma بيعيش للأبد؟ وليه الـ TB شكلها جبنة والـ pancreatitis شكلها طباشير؟"
+    minutes: 9
+    pages: [204, 205]
+    topics: [apoptosis, necrosis]
+    goals:
+      - "تعرف الـ 3 طرق للـ apoptosis ومين بيتحكّم في كل واحد"
+      - "تفرّق بين الـ apoptosis والـ necrosis في الشكل والـ inflammation"
+      - "تربط كل نوع necrosis بسببه وشكله"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ apoptosis: موت محتاج طاقة"
+        text: |-
+          الـ apoptosis موت ==ATP-dependent== مبرمج.
+
+          3 طرق (intrinsic و extrinsic و perforin/granzyme B) كلهم بيشغّلوا الـ **caspases**. والـ caspases بتعمل cell shrinkage و chromatin condensation و blebbing و **apoptotic bodies**، والـ macrophages بتاكل الحتت دي.
+
+          الشكل: cytoplasm **eosinophilic** جداً ونواة basophilic، pyknosis و karyorrhexis. والغشا بيفضل سليم، فـ ==مفيش inflammation== تُذكر.
+
+          وعلامته الحساسة: **DNA laddering** (حتت مضاعفات 180 bp).
+        page: 204
+        quote: "Cell membrane typically remains intact without significant inflammation (unlike necrosis). DNA laddering (fragments in multiples of 180 bp) is a sensitive indicator of apoptosis."
+      - kind: figure
+        title: "3 طرق وجلّاد واحد"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="pL01c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="6" y="10" width="110" height="78" rx="6"/>
+            <text x="14" y="28" class="t-sm t-acc">Intrinsic</text>
+            <text x="14" y="44" class="t-sm">DNA damage, hypoxia</text>
+            <text x="14" y="60" class="t-sm">Bax/Bak pores</text>
+            <text x="14" y="76" class="t-sm">cytochrome C out</text>
+            <rect class="fg-acc" x="125" y="10" width="110" height="78" rx="6"/>
+            <text x="133" y="28" class="t-sm t-acc">Extrinsic</text>
+            <text x="133" y="44" class="t-sm">FasL → Fas</text>
+            <text x="133" y="60" class="t-sm">TNF-α → TNFR</text>
+            <rect class="fg-acc" x="244" y="10" width="110" height="78" rx="6"/>
+            <text x="252" y="28" class="t-sm t-acc">Perforin</text>
+            <text x="252" y="44" class="t-sm">CD8 T cell, NK</text>
+            <text x="252" y="60" class="t-sm">pore → granzyme B</text>
+            <path class="fg-arrow-acc" d="M60 90 L 150 128" marker-end="url(#pL01c)"/>
+            <path class="fg-arrow-acc" d="M180 90 L 180 126" marker-end="url(#pL01c)"/>
+            <path class="fg-arrow-acc" d="M300 90 L 210 128" marker-end="url(#pL01c)"/>
+            <rect class="fg-bad" x="110" y="130" width="140" height="30" rx="6"/>
+            <text x="122" y="150" class="t-sm t-bad">Executioner caspases</text>
+            <path class="fg-arrow-acc" d="M180 162 L 180 180" marker-end="url(#pL01c)"/>
+            <text x="92" y="200" class="t-sm">Apoptotic bodies → macrophage</text>
+            <text x="14" y="104" class="t-sm t-good">Bcl-2 blocks</text>
+          </svg>
+        caption: "الـ 3 طرق بيوصلوا لنفس الـ executioner caspases، والـ Bcl-2 بيقفل الـ intrinsic pathway عند الـ mitochondria."
+        alt: "Three boxes for the intrinsic (Bax/Bak pores release cytochrome C, blocked by Bcl-2), extrinsic (FasL–Fas, TNF-α–TNFR) and perforin/granzyme B pathways converge on the executioner caspases, which produce apoptotic bodies eaten by macrophages."
+        page: 204
+        quote: "Intrinsic, extrinsic, and perforin/granzyme B pathways → activate caspases (cytosolic proteases)"
+      - kind: explain
+        title: "الـ intrinsic: معركة الـ Bcl-2"
+        text: |-
+          بيحصل في تشكيل الأنسجة في الـ embryo، ولما **regulating factor يتشال** (زي ↓ IL-2 بعد ما الـ immune reaction تخلص)، وبعد الـ radiation والـ toxins والـ hypoxia.
+
+          - **Bax و Bak**: ==proapoptotic==. بيعملوا pores في الـ outer mitochondrial membrane ← الـ cytochrome C يخرج ← caspases.
+          - **Bcl-2 و Bcl-xL**: ==antiapoptotic==. الـ Bcl-2 بيقفل الـ membrane فالـ cytochrome C ميخرجش.
+        page: 204
+        quote: "BAX and BAK form pores in the outer mitochondrial membrane → release of cytochrome C from the mitochondrial intermembrane space into the cytoplasm → activation of caspases."
+      - kind: aside
+        tone: tip
+        text: "حيلة الكتاب: **Ba**x و **Ba**k = «**Bad** for survival»، و **Bcl**-2 = «**Be clever, live**»."
+        page: 204
+        quote: "Bax and Bak are proapoptotic (Bad for survival), while Bcl-2 and Bcl-xL are antiapoptotic (Be clever, live)."
+      - kind: reveal
+        prompt: "في الـ follicular lymphoma فيه t(14;18). إيه علاقة ده بالـ apoptosis؟"
+        answer: "الـ translocation بيعمل **overexpression للـ Bcl-2** ← الـ mitochondria مقفولة ← ↓ caspase activation ← الخلايا ==مبتموتش== ← tumorigenesis. يعني الورم هنا من خلايا مش عارفة تموت، مش من خلايا بتتكاثر بسرعة."
+        page: 204
+        quote: "Bcl-2 overexpression (eg, follicular lymphoma t[14;18]) → ↓ caspase activation → tumorigenesis."
+      - kind: explain
+        title: "الـ extrinsic والـ perforin"
+        text: |-
+          - **Extrinsic (death receptor)**: الـ FasL يمسك الـ Fas (CD95)، أو الـ TNF-α يمسك الـ receptor بتاعه. الـ Fas-FasL ==لازم== للـ negative selection في الـ thymic medulla.
+          - **Autoimmune lymphoproliferative syndrome**: Fas-FasL بايظ ← الـ clonal deletion بيفشل ← lymphocytes ضد النفس كتير ← lymphadenopathy و hepatosplenomegaly و autoimmune cytopenias.
+          - **Perforin/granzyme B**: الـ cytotoxic T cells والـ NK cells بيطلّعوا granules، الـ perforin يعمل pore والـ granzyme B يدخل منه.
+        page: 204
+        quote: "Autoimmune lymphoproliferative syndrome—caused by defective Fas-FasL interaction → failure of clonal deletion → ↑ numbers of self-reacting lymphocytes. Presents with lymphadenopathy, hepatosplenomegaly, autoimmune cytopenias."
+      - kind: check
+        question: "A 6-year-old boy has chronic lymphadenopathy, splenomegaly and autoimmune hemolytic anemia with thrombocytopenia. His lymphocytes do not die when cultured with Fas ligand. Which process failed?"
+        options:
+          - "Clonal deletion through the death receptor pathway"
+          - "Cytochrome C release from mitochondria"
+          - "Perforin pore formation by NK cells"
+          - "Bcl-2 suppression of caspases"
+        answer: 0
+        why:
+          - "صح: Fas-FasL بايظ ← الـ clonal deletion بيفشل ← autoimmune lymphoproliferative syndrome."
+          - "الـ cytochrome C جزء من الـ intrinsic pathway، والخلل هنا في الـ Fas (extrinsic)."
+          - "الـ perforin/granzyme B طريق تالت، ومش هو اللي بيعمل الـ clonal deletion."
+          - "الـ Bcl-2 بيمنع الـ apoptosis في الـ intrinsic pathway، وده مش اللي بيحصل مع الـ Fas ligand."
+      - kind: try
+        items: [path.L01.017, path.L01.018, path.L01.019, path.L01.021, path.L01.023]
+      - kind: explain
+        title: "الـ necrosis: موت بفضيحة"
+        text: |-
+          **Exogenous injury** ← الـ plasma membrane بيتكسر ← محتويات الخلية تسرّب ← enzymatic degradation و protein denaturation ← ==local inflammatory reaction==.
+
+          ده الفرق الكبير عن الـ apoptosis: هناك الغشا سليم ومفيش inflammation، هنا الغشا مكسور والجسم كله بيعرف.
+        page: 205
+        quote: "Exogenous injury → plasma membrane damage → intracellular components leak → cell undergoes enzymatic degradation and protein denaturation → local inflammatory reaction (unlike apoptosis)."
+      - kind: table
+        title: "الـ 6 أنواع"
+        columns: ["Type", "Seen in", "Look"]
+        rows:
+          - ["Coagulative", "Ischemia/infarcts in most tissues (except brain)", "Cell outlines kept, nuclei gone, ↑ eosinophilia"]
+          - ["Liquefactive", "Bacterial abscesses, CNS infarcts", "Neutrophil enzymes digest tissue; cystic spaces"]
+          - ["Caseous", "TB, systemic fungi, Nocardia", "Granuloma; cheeselike"]
+          - ["Fat", "Acute pancreatitis; breast trauma", "Saponification; chalky white, dark blue on H&E"]
+          - ["Fibrinoid", "Polyarteritis nodosa; hypertensive emergency, preeclampsia", "Eosinophilic layer in vessel wall"]
+          - ["Gangrenous", "Distal extremity, GI tract", "Dry = coagulative; wet = + liquefactive"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 2], [4, 1], [5, 2]]
+        page: 205
+        quote: "Preserved cellular architecture (cell outlines seen), but nuclei disappear; ↑ cytoplasmic binding of eosin stain"
+      - kind: reveal
+        prompt: "في الـ fat necrosis بتاعة الـ pancreatitis، ليه المكان بيبان أبيض زي الطباشير؟"
+        answer: "الـ pancreatic cells بتطلّع **lipase** ← تكسّر الـ triglycerides ← الـ fatty acids الحرة تمسك ==calcium== ← **saponification** (صابون كالسيوم). والكالسيوم ده نفسه اللي بيدّي اللون الـ dark blue على الـ H&E."
+        page: 205
+        quote: "Damaged pancreatic cells release lipase, which breaks down triglycerides; liberated fatty acids bind calcium → saponification (chalky- white appearance)"
+      - kind: sort
+        prompt: "حط كل حالة في نوع الـ necrosis بتاعها"
+        bins: ["Coagulative", "Liquefactive", "Caseous", "Fat"]
+        cards:
+          - { text: "Myocardial infarct", bin: 0 }
+          - { text: "Renal infarct", bin: 0 }
+          - { text: "Ischemic stroke", bin: 1 }
+          - { text: "Bacterial abscess", bin: 1 }
+          - { text: "Tuberculosis", bin: 2 }
+          - { text: "Histoplasma capsulatum", bin: 2 }
+          - { text: "Acute pancreatitis", bin: 3 }
+          - { text: "Breast trauma", bin: 3 }
+        why: "الـ infarct coagulative في كل مكان ما عدا المخ (liquefactive). الـ TB والـ systemic fungi caseous. والـ pancreatitis والـ trauma للثدي fat."
+        page: 205
+        quote: "Liquefactive Bacterial abscesses, CNS infarcts"
+      - kind: check
+        question: "A 45-year-old man with hepatitis B has fever, weight loss, livedo reticularis and renal artery microaneurysms. Biopsy of a medium-sized artery shows a bright eosinophilic layer of proteinaceous material in the wall. Which type of necrosis is this?"
+        options:
+          - "Fibrinoid"
+          - "Coagulative"
+          - "Caseous"
+          - "Liquefactive"
+          - "Fat"
+        answer: 0
+        why:
+          - "صح: polyarteritis nodosa = immune vascular reaction، و immune complexes (type III) و fibrin في جدار الوعاء ← fibrinoid."
+          - "الـ coagulative بتاعة الـ infarcts، بتحافظ على شكل الخلايا ومش بتعمل layer في جدار الوعاء."
+          - "الـ caseous بتاعة الـ TB والـ fungi، granuloma وشكل جبنة."
+          - "الـ liquefactive في الـ abscesses والمخ."
+          - "الـ fat في الـ pancreatitis والـ trauma للثدي."
+      - kind: try
+        items: [path.L01.026, path.L01.027, path.L01.028, path.L01.029]
+    recap:
+      - "Apoptosis = ATP، caspases، غشا سليم، مفيش inflammation، DNA laddering."
+      - "Bax/Bak = Bad for survival، Bcl-2 = Be clever, live. Bcl-2 زيادة = follicular lymphoma t(14;18)."
+      - "Fas-FasL بايظ = autoimmune lymphoproliferative syndrome."
+      - "Necrosis = غشا مكسور + inflammation. Infarct = coagulative ما عدا المخ (liquefactive)."
+      - "TB = caseous، pancreatitis = fat (saponification)، PAN = fibrinoid."
+    practice: [path.L01.017, path.L01.018, path.L01.019, path.L01.020, path.L01.021, path.L01.022, path.L01.023, path.L01.024, path.L01.025, path.L01.026, path.L01.027, path.L01.028, path.L01.029]
+  - id: path.L01.lesson3
+    title: "الدم مش واصل: ischemia و infarcts و free radicals"
+    hook: "ليه الـ hypotension بتموّت zone III في الكبد، وليه الـ infarct في الرئة أحمر وفي الكلية باهت؟"
+    minutes: 9
+    pages: [206, 207]
+    topics: [ischemia, types-of-infarcts, free-radical-injury, ionizing-radiation-toxicity]
+    goals:
+      - "تعرف أكتر حتة في كل عضو بتتأذي من الـ ischemia وليه"
+      - "تفرّق بين الـ red والـ pale infarct"
+      - "تعرف الـ free radicals بتيجي منين وبتتشال إزاي"
+      - "تعرف مضاعفات الـ ionizing radiation"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ ischemia: العرض أقل من الطلب"
+        text: |-
+          الـ **ischemia** = الدم اللي واصل ==مش كفاية للطلب==. ليها 3 أسباب:
+
+          - ↓ arterial perfusion: زي الـ atherosclerosis.
+          - ↓ venous drainage: زي الـ testicular torsion والـ Budd-Chiari syndrome.
+          - الـ shock.
+        page: 206
+        quote: "Inadequate blood supply to meet demand. Mechanisms include ↓ arterial perfusion (eg, atherosclerosis), ↓ venous drainage (eg, testicular torsion, Budd-Chiari syndrome), shock."
+      - kind: table
+        title: "أضعف حتة في كل عضو"
+        columns: ["Organ", "Most vulnerable region"]
+        rows:
+          - ["Brain", "ACA/MCA/PCA boundary areas"]
+          - ["Heart", "Subendocardium of LV"]
+          - ["Kidney", "Straight segment of proximal tubule; thick ascending limb (medulla)"]
+          - ["Liver", "Area around central vein (zone III)"]
+          - ["Colon", "Splenic flexure (Griffith point); rectosigmoid junction (Sudeck point)"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+        page: 206
+        quote: "Heart Subendocardium of LV"
+      - kind: reveal
+        prompt: "الـ splenic flexure والحدود بين الـ ACA والـ MCA بيموتوا الأول لما الضغط يقع. إيه المشترك بينهم؟"
+        answer: "دي ==watershed areas==: بتاخد دمّها من **آخر فروع** شريانين، والـ collaterals فيها قليلة. لما الـ perfusion يقل، أطراف الشجرتين هي أول حتة الدم ميوصلهاش."
+        page: 206
+        quote: "Watershed areas (border zones) receive blood supply from most distal branches of 2 arteries with limited collateral vascularity. These areas are susceptible to ischemia from hypoperfusion."
+      - kind: aside
+        tone: exam
+        text: "أكتر neurons بتتأذي من الـ hypoxia: الـ **Purkinje cells** في الـ cerebellum، والـ **pyramidal cells** في الـ hippocampus والـ neocortex (layers 3، 5، 6)."
+        page: 206
+        quote: "Neurons most vulnerable to hypoxic-ischemic insults include Purkinje cells of the cerebellum and pyramidal cells of the hippocampus and neocortex (layers 3, 5, 6)."
+      - kind: check
+        question: "A 68-year-old man has 6 hours of septic shock with a mean arterial pressure of 50 mm Hg. Two days later his transaminases are in the thousands. Where in the hepatic lobule is necrosis most marked?"
+        options:
+          - "Around the central vein (zone III)"
+          - "Around the portal triad (zone I)"
+          - "Midzone (zone II)"
+          - "Along the bile ducts"
+        answer: 0
+        why:
+          - "صح: الحتة اللي حوالين الـ central vein (zone III) أبعد حتة عن الـ oxygen، فهي الأضعف في الـ ischemia."
+          - "الـ zone I جنب الـ portal triad وبتاخد أحسن oxygen، فهي آخر حتة تتأذي."
+          - "الـ zone II في النص، أقل حساسية من zone III."
+          - "الـ bile ducts مش هي الحتة اللي الكتاب بيقول عليها في الـ ischemia."
+      - kind: figure
+        title: "أحمر ولا باهت؟"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-bad" x="10" y="12" width="160" height="150" rx="8"/>
+            <text x="22" y="34" class="t-b t-bad">Red infarct</text>
+            <text x="22" y="56" class="t-sm">Dual blood supply</text>
+            <text x="22" y="72" class="t-sm">Liver, lung,</text>
+            <text x="22" y="88" class="t-sm">intestine, testes</text>
+            <text x="22" y="110" class="t-sm">Venous occlusion</text>
+            <text x="22" y="132" class="t-sm">Reperfusion</text>
+            <text x="22" y="148" class="t-sm t-mut">(after angioplasty)</text>
+            <rect class="fg-box" x="190" y="12" width="160" height="150" rx="8"/>
+            <text x="202" y="34" class="t-b">Pale infarct</text>
+            <text x="202" y="56" class="t-sm">Single end-artery</text>
+            <text x="202" y="72" class="t-sm">supply</text>
+            <text x="202" y="96" class="t-sm">Heart, kidney</text>
+            <text x="202" y="120" class="t-sm">Solid organ</text>
+          </svg>
+        caption: "الـ red infarct لما الدم يقدر يوصل تاني للحتة الميتة: dual supply، أو venous occlusion، أو reperfusion. الـ pale في الأعضاء الصلبة اللي ليها end-artery واحد."
+        alt: "Two panels: red infarct with dual blood supply (liver, lung, intestine, testes), venous occlusion or reperfusion after angioplasty; pale infarct in solid organs with a single end-arterial supply such as heart and kidney."
+        page: 206
+        quote: "Pale infarct Occurs in solid organs with a single (end- arterial) blood supply (eg, heart B , kidney)."
+      - kind: explain
+        title: "الـ reperfusion بيأذي برضه"
+        text: |-
+          الـ **red infarct** بيحصل في الـ venous occlusion، وفي الأعضاء اللي ليها أكتر من مصدر دم (liver و lung و intestine و testes)، ومع الـ ==reperfusion== زي بعد الـ angioplasty.
+
+          والـ reperfusion injury سببها الـ **free radicals**: الـ oxygen رجع لنسيج متأذي ← radicals.
+        page: 206
+        quote: "Red infarct Occurs in venous occlusion and tissues with multiple blood supplies (eg, liver, lung A , intestine, testes), and with reperfusion (eg, after angioplasty). Reperfusion injury is due to damage by free radicals."
+      - kind: try
+        items: [path.L01.030, path.L01.032, path.L01.033, path.L01.035, path.L01.036]
+      - kind: explain
+        title: "الـ free radicals: بييجوا منين وبيمشوا إزاي"
+        text: |-
+          بيأذوا بـ ==lipid peroxidation== للغشا، وتعديل الـ proteins، وكسر الـ DNA.
+
+          **بييجوا من**: radiation، الـ phase I drug metabolism، الـ redox reactions، الـ nitric oxide، الـ transition metals (iron و copper بالـ **Fenton reaction**)، والـ oxidative burst بتاع الـ neutrophils والـ macrophages.
+
+          **بيمشوا بـ**: scavenging enzymes (catalase و superoxide dismutase و glutathione peroxidase)، spontaneous decay، antioxidants (vitamins A و C و E)، والـ metal carriers (transferrin و ceruloplasmin).
+        page: 206
+        quote: "Free radicals can be eliminated by scavenging enzymes (eg, catalase, superoxide dismutase, glutathione peroxidase), spontaneous decay, antioxidants (eg, vitamins A, C, E), and certain metal carrier proteins (eg, transferrin, ceruloplasmin)."
+      - kind: reveal
+        prompt: "ليه الـ transferrin والـ ceruloplasmin محسوبين antioxidants، والـ hemochromatosis والـ Wilson بيتحسبوا free radical diseases؟"
+        answer: "الحديد والنحاس الحرّين بيعملوا free radicals بالـ ==Fenton reaction==. الـ transferrin بيشيل الحديد والـ ceruloplasmin بيشيل النحاس، فبيمنعوهم يتفاعلوا. في الـ hemochromatosis والـ Wilson المعدن بيتراكم ← radicals ← أذى."
+        page: 206
+        quote: "transition metals (eg, iron, copper; form free radicals via Fenton reaction)"
+      - kind: aside
+        tone: exam
+        text: "الـ **CCl4** بيتحوّل بالـ cytochrome P-450 لـ CCl3 free radical ← cell injury ← ↓ apolipoprotein synthesis ← ==fatty liver==، ومعاها centrilobular necrosis. والـ acetaminophen overdose ← hepatotoxicity."
+        page: 206
+        quote: "carbon tetrachloride (converted by cytochrome P-450 into CCl3 free radical → fatty liver [cell injury → ↓ apolipoprotein synthesis → fatty change], centrilobular necrosis)"
+      - kind: check
+        question: "A preterm infant born at 26 weeks received high-concentration oxygen for weeks. At 3 months, screening shows abnormal retinal vascularization. Which mechanism best explains the injury?"
+        options:
+          - "Free radical damage from oxygen toxicity"
+          - "Watershed ischemia of the retina"
+          - "Immune complex deposition in retinal vessels"
+          - "Ferroptosis from iron overload"
+        answer: 0
+        why:
+          - "صح: retinopathy of prematurity مثال الكتاب على oxygen toxicity، يعني free radicals."
+          - "الـ watershed ischemia سببها قلّة perfusion، والطفل هنا أخد oxygen زيادة مش أقل."
+          - "الـ immune complexes بتعمل fibrinoid necrosis في الـ vasculitis، مش في الـ retinopathy of prematurity."
+          - "الـ ferroptosis بتحتاج حديد، والسبب هنا الـ oxygen."
+      - kind: explain
+        title: "الـ ionizing radiation"
+        text: |-
+          بتكسر الـ DNA (double strand breaks) ==مباشرة==، وبشكل غير مباشر بالـ free radicals.
+
+          - مع الجرعات الكبيرة: inflammation و fibrosis في المكان، و neoplasia (leukemia، thyroid cancer).
+          - **Acute radiation syndrome** بعد جرعة كبيرة للجسم كله: nausea و vomiting و diarrhea و hair loss و erythema و cytopenias و headache و altered mental status.
+          - أكتر حاجة بتتأذي: ==stem cells== الأنسجة اللي بتتجدد بسرعة (skin و bone marrow و GI و gonads).
+          - الـ radiotherapy بتضرب الـ cancer أكتر لأن الـ DNA repair فيه بايظ وبيتكاثر بسرعة.
+          - **Radiation dermatitis**: الـ acute = erythema و peeling و pain و pruritus. الـ chronic = atrophy و pigmentation و telangiectasia و fibrosis (↑ TGF-β).
+        page: 207
+        quote: "Stem cells of rapidly regenerating tissues (eg, skin, bone marrow, GI tract, gonads) are the most susceptible to radiation injury."
+      - kind: try
+        items: [path.L01.037, path.L01.038, path.L01.039, path.L01.042, path.L01.043]
+    recap:
+      - "Watershed = آخر فروع شريانين. القلب: subendocardium. الكبد: zone III. الكلية: الـ straight proximal tubule والـ TAL."
+      - "Red infarct = dual supply أو venous أو reperfusion. Pale = end-artery (قلب، كلية)."
+      - "Free radicals: من radiation و Fenton و oxidative burst. بتمشي بالـ catalase والـ SOD والـ glutathione peroxidase والـ vitamins A و C و E."
+      - "Radiation بتضرب الـ stem cells في skin و marrow و GI و gonads."
+    practice: [path.L01.030, path.L01.031, path.L01.032, path.L01.033, path.L01.034, path.L01.035, path.L01.036, path.L01.037, path.L01.038, path.L01.039, path.L01.040, path.L01.041, path.L01.042, path.L01.043, path.L01.044, path.L01.045, path.L01.046]
+  - id: path.L01.lesson4
+    title: "حاجات بتترسّب: calcium و amyloid"
+    hook: "الـ calcium في نسيج ميت ولا في نسيج سليم؟ والـ amyloid بيبان أخضر إمتى؟"
+    minutes: 8
+    pages: [207, 208]
+    topics: [types-of-calcification, psammoma-bodies, amyloidosis]
+    goals:
+      - "تفرّق بين الـ dystrophic والـ metastatic calcification"
+      - "تفتكر الأورام اللي فيها psammoma bodies"
+      - "تعرف الـ amyloid بيتشاف إزاي وكل نوع من أنهي protein"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "نوعين calcification"
+        text: |-
+          الـ calcium على الـ H&E بيبان ==deeply basophilic==.
+
+          - **Dystrophic**: في نسيج **مريض** والـ calcium في الدم طبيعي. بيبقى localized (زي الـ calcific aortic stenosis). بعد injury أو necrosis.
+          - **Metastatic**: في نسيج **سليم**، و widespread، بسبب ==hyperphosphatemia== (CKD) أو hypercalcemia (1° hyperparathyroidism، sarcoidosis، hypervitaminosis D).
+        page: 207
+        quote: "Calcium deposits appear deeply basophilic (arrow in A ) on H&E stain."
+      - kind: table
+        title: "Dystrophic ولا metastatic"
+        columns: ["", "Dystrophic", "Metastatic"]
+        rows:
+          - ["Deposition", "In abnormal (diseased) tissues", "In normal tissues"]
+          - ["Extent", "Localized", "Widespread"]
+          - ["Etiology", "2° to injury or necrosis", "Hyperphosphatemia or hypercalcemia"]
+          - ["Examples", "TB, fat necrosis, infarcts, psammoma bodies, atherosclerotic plaques", "Kidney, lung, gastric mucosa interstitium"]
+        hide: [[0, 1], [0, 2], [2, 1], [2, 2]]
+        page: 207
+        quote: "In abnormal (diseased) tissues In normal tissues"
+      - kind: reveal
+        prompt: "الـ metastatic calcification بتحب الكلية والرئة والـ gastric mucosa بالذات. ليه؟"
+        answer: "الأنسجة دي ==بتفقد acid بسرعة==، فالـ pH عندها بيعلى، والـ pH العالي بيساعد الـ calcium يترسّب. وفي الكلية الـ nephrocalcinosis في الـ collecting ducts ممكن تعمل nephrogenic diabetes insipidus و renal failure."
+        page: 207
+        quote: "Predominantly in interstitial tissues of kidney, lung, and gastric mucosa (these tissues lose acid quickly; ↑ pH favors Ca2+ deposition)"
+      - kind: check
+        question: "A 60-year-old woman on hemodialysis for chronic kidney disease has a serum phosphate of 8.5 mg/dL and a normal calcium. A chest CT shows diffuse calcification of otherwise normal lung interstitium. What kind of calcification is this?"
+        options:
+          - "Metastatic, from hyperphosphatemia"
+          - "Dystrophic, from prior lung necrosis"
+          - "Dystrophic, from granulomatous infection"
+          - "Psammoma bodies"
+        answer: 0
+        why:
+          - "صح: نسيج سليم، منتشر، و CKD ← hyperphosphatemia = metastatic."
+          - "الـ dystrophic بتبقى في نسيج مريض و localized، والرئة هنا سليمة."
+          - "الـ granulomatous infection (زي TB) بتعمل dystrophic localized، مش diffuse في نسيج سليم."
+          - "الـ psammoma bodies spherules في أورام معيّنة، dystrophic."
+      - kind: mnemonic
+        word: "PSMMOM"
+        parts:
+          - { key: "P", text: "Papillary carcinoma of thyroid and kidney" }
+          - { key: "S", text: "Somatostatinoma" }
+          - { key: "M", text: "Meningioma" }
+          - { key: "M", text: "Mesothelioma" }
+          - { key: "O", text: "Ovarian serous papillary cystadenocarcinoma" }
+          - { key: "M", text: "Milk (prolactinoma)" }
+        hook: "الكتاب: PSaMMoMa Bodies. دي concentrically laminated calcified spherules في أورام معيّنة."
+        page: 207
+        quote: "Concentrically laminated calcified spherules A . PSoMMOMa Bodies."
+      - kind: try
+        items: [path.L01.047, path.L01.048, path.L01.050, path.L01.051]
+      - kind: explain
+        title: "الـ amyloid: protein اتطبّق غلط"
+        text: |-
+          **Extracellular** deposition لـ protein في شكل fibrils (==β-pleated sheet==) ← cell injury و apoptosis.
+
+          حسب العضو:
+          - الكلية: nephrotic syndrome.
+          - القلب: restrictive cardiomyopathy.
+          - الـ GI: hepatosplenomegaly.
+          - الأعصاب: dementia و peripheral neuropathy.
+          - العضلات: macroglossia و carpal tunnel syndrome.
+          - الجلد: waxy thickening و easy bruising.
+        page: 208
+        quote: "Extracellular deposition of protein in abnormal fibrillar form (β-pleated sheet configuration) → cell injury and apoptosis."
+      - kind: figure
+        title: "الـ Congo red: أحمر وبعدين أخضر"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <circle class="fg-bad" cx="90" cy="76" r="56"/>
+            <circle class="fg-dot-bad" cx="72" cy="62" r="10"/>
+            <circle class="fg-dot-bad" cx="104" cy="88" r="13"/>
+            <circle class="fg-dot-bad" cx="96" cy="50" r="7"/>
+            <text x="34" y="156" class="t-sm t-bad">Nonpolarized: red/orange</text>
+            <circle class="fg-good" cx="270" cy="76" r="56"/>
+            <circle class="fg-dot-good" cx="252" cy="62" r="10"/>
+            <circle class="fg-dot-good" cx="284" cy="88" r="13"/>
+            <circle class="fg-dot-good" cx="276" cy="50" r="7"/>
+            <text x="200" y="156" class="t-sm t-good">Polarized: apple-green</text>
+          </svg>
+        caption: "نفس الـ amyloid بالـ Congo red: أحمر/برتقالي في الضوء العادي، و apple-green birefringence في الضوء الـ polarized. وعلى الـ H&E بيبان amorphous pink."
+        alt: "Two microscope fields of the same amyloid deposits stained with Congo red: red-orange under nonpolarized light, apple-green under polarized light."
+        page: 208
+        quote: "Amyloid deposits are visualized by Congo red stain (red/orange on nonpolarized light A , apple-green birefringence on polarized light B ), and H&E stain (amorphous pink)."
+      - kind: table
+        title: "كل amyloid من أنهي protein"
+        columns: ["Type", "Fibril protein", "Seen in"]
+        rows:
+          - ["Primary (systemic)", "AL (Ig light chains)", "Plasma cell dyscrasias (multiple myeloma)"]
+          - ["Secondary (systemic)", "AA (serum amyloid A)", "Chronic inflammation (RA, IBD, FMF, infection)"]
+          - ["Transthyretin", "TTR", "Wild type: aging, heart; mutated: polyneuropathy/cardiomyopathy"]
+          - ["Dialysis-related", "β2-microglobulin", "ESRD on long-term dialysis"]
+          - ["Alzheimer disease", "β-amyloid", "Cleaved from amyloid precursor protein"]
+          - ["Isolated atrial", "ANP", "Aging; ↑ risk of atrial fibrillation"]
+          - ["Type 2 diabetes", "Amylin (islet amyloid polypeptide)", "Pancreatic islets"]
+          - ["Medullary thyroid cancer", "Calcitonin", "Secreted by tumor cells"]
+        hide: [[0, 1], [1, 1], [3, 1], [5, 1], [6, 1], [7, 1]]
+        page: 208
+        quote: "Primary amyloidosis AL (from Ig Light chains) Seen in plasma cell dyscrasias (eg, multiple myeloma)"
+      - kind: reveal
+        prompt: "مريض rheumatoid arthritis من 20 سنة جاله nephrotic syndrome، ومريض تاني عنده multiple myeloma جاله نفس الحاجة. الـ amyloid في الاتنين نفس النوع؟"
+        answer: "لا. مريض الـ RA عنده **AA** (serum ==Amyloid A==، من الـ chronic inflammation). ومريض الـ myeloma عنده **AL** (Ig ==Light chains==). نفس الـ Congo red ونفس الكلية، بس الـ protein مختلف."
+        page: 208
+        quote: "AA (serum Amyloid A) Seen in chronic inflammatory conditions, (eg, rheumatoid arthritis, IBD, familial Mediterranean fever, protracted infection)"
+      - kind: check
+        question: "A 58-year-old man has been on hemodialysis for 15 years. He now has bilateral carpal tunnel syndrome, and a synovial biopsy shows Congo red–positive deposits. Which protein forms the fibrils?"
+        options:
+          - "β2-microglobulin"
+          - "Immunoglobulin light chains"
+          - "Serum amyloid A"
+          - "Transthyretin"
+          - "Amylin"
+        answer: 0
+        why:
+          - "صح: الـ dialysis-related amyloidosis في ESRD على dialysis طويل = β2-microglobulin."
+          - "الـ light chains (AL) مع الـ plasma cell dyscrasias زي الـ myeloma."
+          - "الـ serum amyloid A (AA) مع الـ chronic inflammation."
+          - "الـ transthyretin مع السن (القلب) أو وراثي (neuropathy)."
+          - "الـ amylin في الـ islets في type 2 diabetes."
+      - kind: try
+        items: [path.L01.053, path.L01.054, path.L01.055, path.L01.056]
+    recap:
+      - "Dystrophic = نسيج مريض و calcium طبيعي. Metastatic = نسيج سليم و ↑ phosphate أو ↑ calcium."
+      - "Metastatic بتحب الكلية والرئة والمعدة لأن الـ pH عالي."
+      - "Psammoma: Papillary، Somatostatinoma، Meningioma، Mesothelioma، Ovarian serous، Milk."
+      - "Amyloid = β-pleated، Congo red، apple-green في الـ polarized."
+      - "AL = light chains (myeloma)، AA = inflammation، β2-microglobulin = dialysis."
+    practice: [path.L01.047, path.L01.048, path.L01.049, path.L01.050, path.L01.051, path.L01.052, path.L01.053, path.L01.054, path.L01.055, path.L01.056]
