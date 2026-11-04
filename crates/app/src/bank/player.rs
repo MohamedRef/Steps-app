@@ -67,6 +67,8 @@ pub fn Player() -> Element {
                             class: "icon-button run-leave",
                             // Android Back takes it while the bar is hidden.
                             "data-back": "true",
+                            // Esc leaves too, as in study, lessons and cases (UX #296).
+                            "aria-keyshortcuts": "Escape",
                             "aria-label": tx::LEAVE,
                             title: if timed { tx::LEAVE_TIMED_HINT } else { tx::LEAVE },
                             onclick: move |_| leave(),

@@ -845,8 +845,12 @@ pub fn ExplainLink(item_id: String) -> Element {
     let id = l.id.clone();
     rsx! {
         button { class: "st-link ls-explain", title: tx::EXPLAIN_HINT, onclick: move |_| open(ui, &id),
-            "📖 {tx::EXPLAIN} · "
-            text::Line { text: l.title.clone() }
+            // One inline run inside the flex button: as separate flex items
+            // the spaces around "DNA" were dropped ("الـDNAبيتلف", UX #297).
+            span {
+                "📖 {tx::EXPLAIN} · "
+                text::Line { text: l.title.clone() }
+            }
         }
     }
 }

@@ -615,5 +615,8 @@ mod hierarchy_tests {
         let css = include_str!("today.css");
         assert!(css.contains("@media (max-width: 839.98px)"));
         assert!(css.contains(".today-cols > .tab-aside { display: none; }"));
+        // UX #291: one column until the lecture list can get a real column.
+        assert!(css.contains("@media (min-width: 840px) and (max-width: 1099.98px)"));
+        assert!(css.contains("max-inline-size: 100%"));
     }
 }

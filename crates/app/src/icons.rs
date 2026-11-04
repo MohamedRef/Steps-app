@@ -75,6 +75,12 @@ pub fn references() -> Element {
     stroke(OPEN_BOOK)
 }
 
+/// Go to a page: a page with an arrow into it, so it doesn't look like
+/// References' book beside it (UX #303).
+pub fn go_page() -> Element {
+    stroke("M6 3h8l4 4v14H6zM14 3v4h4M9 14h6M12.5 11.5 15 14l-2.5 2.5")
+}
+
 /// The abbreviations dictionary: "A" over "Z" with a line between.
 pub fn abbreviations() -> Element {
     stroke("M4 11l3-7 3 7M5.3 8h3.4M14 4h6l-6 7h6M4 15h16M7 20h10")

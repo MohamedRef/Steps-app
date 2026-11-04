@@ -337,6 +337,7 @@ fn Form(draft: Draft, today: Day, on_done: EventHandler<bool>) -> Element {
                         value: "{date}",
                         oninput: move |ev| date.set(ev.value()),
                     }
+                    crate::plan::DateWords { value: date() }
                 }
                 label { class: "field score-field score-narrow",
                     span { {tx::PERCENT} }

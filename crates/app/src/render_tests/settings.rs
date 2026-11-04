@@ -24,7 +24,8 @@ fn the_list_groups_the_sections_and_search_narrows_it() {
     for line in [tx::GROUP_STUDY, tx::GROUP_DEVICE, tx::GROUP_DATA, tx::LOOK, tx::DATA, tx::ABOUT] {
         app.assert_has(line);
     }
-    app.assert_has(&format!("{} {}", tx::VERSION, env!("CARGO_PKG_VERSION")));
+    // Isolated left to right in the Arabic line (UX #295).
+    app.assert_has(&format!("{} \u{2066}{}\u{2069}", tx::VERSION, env!("CARGO_PKG_VERSION")));
     // The Mac's section, never the tablet's, on a desktop.
     app.assert_has(crate::i18n::desk::MAC);
     app.assert_lacks(crate::i18n::desk::TABLET);

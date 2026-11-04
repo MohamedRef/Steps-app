@@ -350,6 +350,12 @@ pub fn LecturePage(id: String) -> Element {
     }
 }
 
+/// The page typed in «قريت لحد صفحة», kept inside the lecture; None for
+/// an empty or unreadable box.
+fn upto_page(typed: &str, first: u32, last: u32) -> Option<u32> {
+    typed.trim().parse::<u32>().ok().map(|v| v.clamp(first, last))
+}
+
 /// What of the lecture's First Aid pages is read, and the ways to mark
 /// them (A2): the whole lecture, or every page up to one.
 #[component]
@@ -358,7 +364,10 @@ fn PagesRead(first: u32, last: u32) -> Element {
     let read = review.backend.borrow().pages().all().within(first, last);
     let n: u32 = read.iter().map(|[a, b]| b - a + 1).sum();
     let all = last - first + 1;
-    let mut upto = use_signal(|| read.last().map_or(first, |r| r[1]));
+    // The box keeps what he types; it is read and clamped only when he
+    // marks (UX #292): clamping each keystroke turned "4" into the first
+    // page, so "40" could never be typed.
+    let mut upto = use_signal(|| read.last().map_or(first, |r| r[1]).to_string());
     let backend = review.backend.clone();
     let mark = move |a: u32, b: u32, on: bool| {
         let backend = backend.clone();
@@ -392,9 +401,11 @@ fn PagesRead(first: u32, last: u32) -> Element {
                         min: "{first}",
                         max: "{last}",
                         value: "{upto}",
-                        oninput: move |e| {
-                            if let Ok(v) = e.value().trim().parse::<u32>() {
-                                upto.set(v.clamp(first, last));
+                        oninput: move |e| upto.set(e.value()),
+                        onchange: move |_| {
+                            let page = upto_page(&upto.read(), first, last);
+                            if let Some(page) = page {
+                                upto.set(page.to_string());
                             }
                         },
                     }
@@ -404,12 +415,31 @@ fn PagesRead(first: u32, last: u32) -> Element {
                     onclick: {
                         let backend = review.backend.clone();
                         move |_| {
-                            backend.borrow_mut().set_pages_read(Library::get(), first, upto(), true);
+                            let page = upto_page(&upto.read(), first, last);
+                            let Some(page) = page else { return };
+                            upto.set(page.to_string());
+                            backend.borrow_mut().set_pages_read(Library::get(), first, page, true);
                         }
                     },
                     {tx::READ_UPTO_GO}
                 }
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod upto_tests {
+    use super::upto_page;
+
+    #[test]
+    fn typed_page_is_clamped_only_when_read() {
+        // bio.L01 is pp. 32–43: "4" on the way to "40" is not a page yet.
+        assert_eq!(upto_page("40", 32, 43), Some(40));
+        assert_eq!(upto_page(" 38 ", 32, 43), Some(38));
+        assert_eq!(upto_page("4", 32, 43), Some(32));
+        assert_eq!(upto_page("400", 32, 43), Some(43));
+        assert_eq!(upto_page("", 32, 43), None);
+        assert_eq!(upto_page("x", 32, 43), None);
     }
 }

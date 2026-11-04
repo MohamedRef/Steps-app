@@ -129,6 +129,11 @@ fn CaseList(on_open: EventHandler<String>) -> Element {
     let lectures: std::collections::HashMap<String, &'static str> =
         items_in_library(KIND).into_iter().map(|(l, i)| (i.id.clone(), l)).collect();
     rsx! {
+        // A heading and what the screen is for, like the other main screens (UX #298).
+        header { class: "page-head",
+            h1 { {tx::TITLE} }
+            p { class: "page-sub", {tx::SUB} }
+        }
         if groups.iter().all(|(_, v)| v.is_empty()) {
             crate::ui::Card { element: crate::ui::CardElement::Paragraph, class: "muted", {empty} }
         } else {

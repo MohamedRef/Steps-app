@@ -293,6 +293,7 @@ fn Questions() -> Element {
                         error.set(None);
                     },
                 }
+                crate::plan::DateWords { value: exam() }
                 span { class: "field-hint", {tx::EXAM_HINT} }
             }
         },

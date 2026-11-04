@@ -93,7 +93,8 @@
 }
 @media (hover: hover) and (pointer: fine) { .st-link:hover { text-decoration: underline; } }
 .st-item-foot button.tap-chip { display: inline-flex; align-items: center; min-block-size: var(--target); }
-.st-quote summary, .st-mine summary { cursor: pointer; }
+/* A full touch row (UX #294), not just the words. */
+.st-quote summary, .st-mine summary, .st-update summary { cursor: pointer; min-block-size: var(--tap); padding-block: var(--sp-2); }
 .st-quote q { font-family: var(--font-latin); font-style: italic; }
 .st-update { background: var(--accent-soft); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-1); }
 .st-update summary { cursor: pointer; }

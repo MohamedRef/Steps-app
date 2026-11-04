@@ -90,7 +90,7 @@
 /* ---------- mistakes ---------- */
 .mistake-group h2 { display: flex; align-items: center; gap: var(--sp-2); }
 .mistakes { margin: 0; }
-.mistake-topic { display: inline-flex; align-items: center; gap: var(--sp-2); inline-size: auto; font-weight: inherit; }
+.mistake-topic { display: inline-flex; align-items: center; gap: var(--sp-2); inline-size: auto; font-weight: inherit; min-block-size: var(--tap); }
 .mistake-text { min-width: 0; overflow-wrap: anywhere; }
 .chip.bad { background: var(--bad-soft); border-color: transparent; color: var(--bad); }
 
@@ -199,7 +199,8 @@ button.big {
   background: var(--bg);
 }
 /* A topic's name in the per-lecture table starts a session on it. */
-.topic-link { text-decoration: underline dotted; text-underline-offset: 3px; text-decoration-color: var(--muted); }
+/* A whole touch row high (UX #294), the text still a dotted link. */
+.topic-link { display: inline-flex; align-items: center; min-block-size: var(--tap); text-decoration: underline dotted; text-underline-offset: 3px; text-decoration-color: var(--muted); }
 .stat-open { margin-block-start: var(--sp-3); }
 
 /* ---------- the period head (2026-10-29 redesign) ----------
