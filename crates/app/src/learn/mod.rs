@@ -200,7 +200,7 @@ pub fn Learn() -> Element {
         style { {CSS.text()} }
         match open.and_then(|id| Library::get().lesson(&id).map(|(lec, l)| (lec, l.clone()))) {
             Some((lecture, lesson)) => rsx! {
-                player::Player { key: "{lesson.id}", lesson, lecture_title: Library::get().title(&lecture.lecture).to_string() }
+                player::Player { lesson, lecture_title: Library::get().title(&lecture.lecture).to_string() }
             },
             None => rsx! { LessonList {} },
         }
@@ -851,6 +851,16 @@ pub fn ExplainLink(item_id: String) -> Element {
     }
 }
 
+/// Screen tests: the player on a lesson built by the test, not one of the
+/// bundled lessons (so every step kind can be played).
+#[cfg(test)]
+pub(crate) fn test_player(lesson: Lesson) -> Element {
+    rsx! {
+        style { {CSS.text()} }
+        player::Player { lesson, lecture_title: "Cardiovascular › Embryology".to_string() }
+    }
+}
+
 #[cfg(test)]
 mod list_tests {
     use super::*;
@@ -907,6 +917,28 @@ mod list_tests {
             .unwrap();
         assert!(list.contains("resume.filter(|l| lecture_of(&l.id) != shown)"));
         assert!(list.contains(".or(resume_lecture)"));
+    }
+
+    #[test]
+    fn an_item_no_lesson_practises_is_taught_by_the_lesson_on_its_topic() {
+        let lib = Library::get();
+        for (lec, file) in &lib.lessons {
+            let Some(lecture) = lib.lectures.get(lec) else { continue };
+            for item in &lecture.items {
+                let Some(l) = lesson_for_item(&item.id) else { continue };
+                let practised = l.practice.contains(&item.id)
+                    || l.steps.iter().any(|s| matches!(&s.body, steps_core::lesson::StepBody::Try { items } if items.contains(&item.id)));
+                if !practised {
+                    // Found by topic: the lesson covers the item's topic.
+                    let topic = item.topic.as_deref().expect("matched by its topic");
+                    assert!(l.topics.iter().any(|t| t == topic), "{} -> {}", item.id, l.id);
+                }
+                assert!(file.lessons.iter().any(|x| x.id == l.id));
+            }
+        }
+        assert!(lesson_for_item("nolecture").is_none());
+        assert!(lesson_for_item("renal.L01.001").is_none());
+        assert!(lesson_for_item("cvs.L01.zzz-no-such-item").is_none());
     }
 
     #[test]

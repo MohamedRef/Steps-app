@@ -9,7 +9,13 @@
 
 mod crawl;
 mod dom;
+mod learn;
+mod lecture;
+mod nav;
+mod plan;
 mod screens;
+mod sheets;
+mod stats;
 
 use std::time::Duration;
 
