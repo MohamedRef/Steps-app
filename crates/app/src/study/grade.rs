@@ -118,4 +118,15 @@ mod suggestion_tests {
         }
         assert!(GRADES.into_iter().all(|grade| suggestion_label(None, grade).is_none()));
     }
+
+    #[test]
+    fn intervals_read_in_minutes_hours_days_and_months() {
+        use crate::i18n::count::{DAY, HOUR, MINUTE, MONTH, count};
+        assert_eq!(interval_label(10.0 / 1440.0), count(10, &MINUTE));
+        assert_eq!(interval_label(0.0), count(1, &MINUTE), "never zero");
+        assert_eq!(interval_label(5.0 / 24.0), count(5, &HOUR));
+        assert_eq!(interval_label(3.0), count(3, &DAY));
+        assert_eq!(interval_label(90.0), count(3, &MONTH));
+        assert_eq!(GRADES.map(grade_name), ["again", "hard", "good", "easy"]);
+    }
 }

@@ -67,7 +67,7 @@ pub const MINUTE_CHOICES: [u32; 4] = [5, 10, 15, 20];
 pub struct Answers {
     /// Minutes a day; the study screen's default session length.
     pub minutes: Option<u32>,
-    /// Lectures he had already studied before Steps (`hb.L01`, ...).
+    /// Lectures he had already studied before Steps (`cvs.L04`, ...).
     pub studied: Vec<String>,
 }
 
@@ -121,6 +121,12 @@ fn close() {
         crate::diag::report!("saving first-run flag: {e}");
     }
     *OPEN.write() = false;
+}
+
+/// Screen tests: this device has seen the first-run questions.
+#[cfg(test)]
+pub fn mark_done_for_tests() {
+    shared().put_local_setting(SEEN, &true).unwrap();
 }
 
 /// Opens the questions again (Settings › Study).

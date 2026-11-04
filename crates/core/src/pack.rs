@@ -140,7 +140,7 @@ impl Pack {
         let mut listed = BTreeSet::new();
         for e in &self.index.lectures {
             if !crate::validate::is_lecture_id(&e.id) {
-                out.push(format!("index: lecture id {:?} must look like hb.L01", e.id));
+                out.push(format!("index: lecture id {:?} must look like cvs.L04", e.id));
             }
             if !listed.insert(e.id.as_str()) {
                 out.push(format!("index: lecture {} is listed twice", e.id));
@@ -243,7 +243,7 @@ mod tests {
 
     fn index() -> Index {
         serde_yaml_ng::from_str(
-            "schema: steps.content/v1\nlectures:\n  - { id: hb.L01, title: Liver Cirrhosis, pages: [1, 22], chunk: 10 }\n  - { id: hb.L02, title: Two, pages: [23, 36], chunk: 10 }\n",
+            "schema: steps.content/v1\nlectures:\n  - { id: cvs.L04, title: Pathology, pages: [300, 320], chunk: 6 }\n  - { id: cvs.L05, title: Pharmacology, pages: [321, 328], chunk: 6 }\n",
         )
         .unwrap()
     }
@@ -266,9 +266,9 @@ mod tests {
     #[test]
     fn a_pack_round_trips_and_keeps_index_order() {
         let mut second = sample();
-        second.lecture = "hb.L02".into();
+        second.lecture = "cvs.L05".into();
         let pack = Pack::new(index(), vec![second, sample()]);
-        assert_eq!(pack.lectures[0].lecture, "hb.L01");
+        assert_eq!(pack.lectures[0].lecture, "cvs.L04");
         let bytes = pack.encode();
         assert!(bytes.starts_with(MAGIC));
         let back = Pack::decode(&bytes).unwrap();
@@ -279,7 +279,7 @@ mod tests {
     #[test]
     fn the_program_travels_and_old_packs_fall_back() {
         let pack = Pack::new(index(), vec![sample()]);
-        assert_eq!(pack.program_or_fallback().courses[0].id, "hb");
+        assert_eq!(pack.program_or_fallback().courses[0].id, "cvs");
         let program: Program =
             serde_yaml_ng::from_str(include_str!("../../../content/program.yaml")).unwrap();
         let pack = pack.with_program(program.clone());
@@ -296,15 +296,15 @@ mod tests {
         // The same lecture twice: every item id repeats.
         let twice = Pack::new(index(), vec![sample(), sample()]);
         let p = twice.problems();
-        assert!(p.iter().any(|m| m == "hb.L01: the lecture appears twice"), "{p:?}");
+        assert!(p.iter().any(|m| m == "cvs.L04: the lecture appears twice"), "{p:?}");
         assert!(p.iter().any(|m| m.ends_with("item id is used twice")));
 
         // A lecture the index doesn't list, and an item under the wrong lecture.
         let mut stray = sample();
-        stray.lecture = "hb.L09".into();
+        stray.lecture = "cvs.L09".into();
         let p = Pack::new(index(), vec![stray]).problems();
-        assert!(p.iter().any(|m| m == "hb.L09: not listed in the index"), "{p:?}");
-        assert!(p.iter().any(|m| m.contains("isn't under its lecture hb.L09")), "{p:?}");
+        assert!(p.iter().any(|m| m == "cvs.L09: not listed in the index"), "{p:?}");
+        assert!(p.iter().any(|m| m.contains("isn't under its lecture cvs.L09")), "{p:?}");
 
         // A newer lecture schema this build doesn't read.
         let mut future = sample();
@@ -325,7 +325,7 @@ mod tests {
         let lesson = |practice: &str, id: &str| -> LessonFile {
             serde_json::from_value(serde_json::json!({
                 "schema": crate::lesson::SCHEMA,
-                "lecture": "hb.L01",
+                "lecture": "cvs.L04",
                 "lessons": [{
                     "id": id, "title": "t", "hook": "h", "minutes": 5, "pages": [1, 2],
                     "steps": [], "recap": [], "practice": [practice], "status": "unverified"
@@ -334,13 +334,13 @@ mod tests {
             .unwrap()
         };
         let ok =
-            Pack::new(index(), vec![lecture.clone()]).with_lessons(vec![lesson(&first, "hb.L01.lesson1")]);
+            Pack::new(index(), vec![lecture.clone()]).with_lessons(vec![lesson(&first, "cvs.L04.lesson1")]);
         assert_eq!(ok.problems(), Vec::<String>::new());
         let gone = Pack::new(index(), vec![lecture.clone()])
-            .with_lessons(vec![lesson("hb.L01.999", "hb.L01.lesson1")]);
-        assert!(gone.problems().iter().any(|m| m.contains("item hb.L01.999 isn't in lecture hb.L01")));
+            .with_lessons(vec![lesson("cvs.L04.999", "cvs.L04.lesson1")]);
+        assert!(gone.problems().iter().any(|m| m.contains("item cvs.L04.999 isn't in lecture cvs.L04")));
         let twice = Pack::new(index(), vec![lecture])
-            .with_lessons(vec![lesson(&first, "hb.L01.lesson1"), lesson(&first, "hb.L01.lesson1")]);
+            .with_lessons(vec![lesson(&first, "cvs.L04.lesson1"), lesson(&first, "cvs.L04.lesson1")]);
         let p = twice.problems();
         assert!(p.iter().any(|m| m.contains("lesson id is used twice")), "{p:?}");
         assert!(p.iter().any(|m| m.contains("the file appears twice")), "{p:?}");
@@ -352,5 +352,71 @@ mod tests {
         let mut bad = MAGIC.to_vec();
         bad.extend([1, 2, 3]);
         assert!(matches!(Pack::decode(&bad), Err(PackError::Inflate(_))));
+    }
+
+    #[test]
+    fn the_look_travels_with_the_pack() {
+        let look: BTreeMap<String, String> =
+            [("src/style.css".to_string(), ":root { --ink: #222; }".to_string())].into();
+        let pack = Pack::new(index(), vec![sample()]).with_look(look.clone());
+        assert_eq!(Pack::decode(&pack.encode()).unwrap().look, look);
+    }
+
+    #[test]
+    fn index_lesson_and_topic_problems_are_named() {
+        let mut idx = index();
+        idx.schema = "steps.content/v0".into();
+        idx.lectures[1].id = "CVS-5".into();
+        let lesson = |lecture: &str, id: &str, topic: &str| -> LessonFile {
+            serde_json::from_value(serde_json::json!({
+                "schema": "steps.lesson/v0",
+                "lecture": lecture,
+                "lessons": [{
+                    "id": id, "title": "الـ tamponade", "hook": "h", "minutes": 5, "pages": [317, 317],
+                    "topics": [topic],
+                    "steps": [{ "kind": "try", "items": ["cvs.L04.042"] }],
+                    "recap": [], "status": "unverified"
+                }]
+            }))
+            .unwrap()
+        };
+        let pack = Pack::new(idx, vec![sample()]).with_lessons(vec![
+            lesson("cvs.L04", "cvs.L05.lesson1", "murmurs"),
+            lesson("cvs.L07", "cvs.L07.lesson1", "shock"),
+        ]);
+        // Lessons follow the index order, then the lecture id.
+        assert_eq!(
+            pack.lessons.iter().map(|l| l.lecture.as_str()).collect::<Vec<_>>(),
+            ["cvs.L04", "cvs.L07"]
+        );
+        let p = pack.problems();
+        for want in [
+            "index: schema is \"steps.content/v0\", expected \"steps.content/v1\"",
+            "index: lecture id \"CVS-5\" must look like cvs.L04",
+            "cvs.L04 lessons: schema is \"steps.lesson/v0\", expected \"steps.lesson/v1\"",
+            "cvs.L07 lessons: the lecture isn't listed in the index",
+            "cvs.L05.lesson1: lesson id isn't under its lecture cvs.L04",
+            "cvs.L05.lesson1: item cvs.L04.042 isn't in lecture cvs.L04",
+            "cvs.L05.lesson1: topic murmurs isn't in lecture cvs.L04",
+        ] {
+            assert!(p.iter().any(|m| m == want), "{want}: {p:#?}");
+        }
+        // A lecture with no items in the pack: its lessons' references aren't checked.
+        assert!(!p.iter().any(|m| m.starts_with("cvs.L07.lesson1: item")), "{p:#?}");
+    }
+
+    #[test]
+    fn program_problems_are_prefixed() {
+        let program: Program =
+            serde_yaml_ng::from_str(include_str!("../../../content/program.yaml")).unwrap();
+        assert_eq!(
+            Pack::new(index(), vec![sample()]).with_program(program.clone()).problems(),
+            Vec::<String>::new()
+        );
+        // A lecture whose course the program doesn't have.
+        let mut idx = index();
+        idx.lectures[1].id = "zz.L01".into();
+        let p = Pack::new(idx, vec![sample()]).with_program(program).problems();
+        assert_eq!(p, ["program: lecture zz.L01 has no course zz in content/program.yaml"]);
     }
 }
