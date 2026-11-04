@@ -1,18 +1,16 @@
-/* The MSc map (courses/map.rs): the hours ring, then course tiles grouped
-   by status. Layout only; colours from tokens. */
+/* The map (courses/map.rs): the progress ring, then course tiles grouped
+   by First Aid section. Layout only; colours from tokens. */
 .courses { display: flex; flex-direction: column; gap: var(--sp-4); }
 .cm-hours { flex-direction: row; align-items: center; gap: var(--sp-4); }
 .cm-ring { flex: none; }
 .cm-ring circle { fill: none; stroke-width: 12; stroke-linecap: round; }
 .cm-ring-track { stroke: var(--line); }
-.cm-ring-now { stroke: var(--accent-soft); }
 .cm-ring-done { stroke: var(--accent); }
 .cm-ring-num { fill: var(--text); font-family: var(--font-latin); font-size: 17px; font-variant-numeric: tabular-nums; }
 .cm-hours-text { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; }
 .cm-big { font-weight: 600; font-size: var(--fs-md); }
 .cm-key { display: inline-block; inline-size: 0.7rem; block-size: 0.7rem; border-radius: 50%; margin-inline-end: var(--sp-2); vertical-align: middle; }
 .cm-key-done { background: var(--accent); }
-.cm-key-now { background: var(--accent-soft); border: 1px solid var(--accent); }
 .cm-group { display: flex; flex-direction: column; gap: var(--sp-2); }
 .cm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr)); gap: var(--sp-2); }
 .cm-cell { display: contents; }
@@ -28,9 +26,10 @@
 .cm-tile:focus-visible { outline-offset: 2px; }
 .cm-meta { display: flex; justify-content: space-between; align-items: center; gap: var(--sp-2); margin-block-start: auto; }
 .cm-meta > .small { min-inline-size: 0; white-space: nowrap; }
-.cm-dots { flex: none; display: inline-flex; gap: 3px; color: var(--cm-c, var(--accent)); }
-.cm-dots i { display: block; inline-size: 0.55rem; block-size: 0.55rem; border-radius: 2px; background: currentColor; }
-.cm-dots i.half { inline-size: 0.3rem; }
+.cm-progress { display: block; block-size: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.cm-progress i { display: block; block-size: 100%; border-radius: 3px; background: var(--cm-c, var(--accent)); }
+.cm-status-chip { align-self: flex-start; }
+.cm-tile[data-status="archived"], .cm-tile[data-status="later"] { opacity: 0.8; }
 .cm-detail h3 { margin: 0; }
 .cm-open { align-self: flex-start; }
 

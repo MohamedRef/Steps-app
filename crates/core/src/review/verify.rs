@@ -150,12 +150,6 @@ pub fn editable_fields(body: &Body) -> Vec<(&'static str, FieldValue)> {
         Body::Case { stem, .. } => vec![("stem", t(stem))],
         Body::Table { title, .. } => vec![("title", t(title))],
         Body::Order { prompt, steps } => vec![("prompt", t(prompt)), ("steps", l(steps))],
-        Body::Calc { stem, question, expect, interpret, .. } => vec![
-            ("stem", t(stem)),
-            ("question", t(question.as_deref().unwrap_or(""))),
-            ("expect", t(expect)),
-            ("interpret", t(interpret)),
-        ],
     }
 }
 
@@ -213,12 +207,8 @@ pub fn apply_edit(body: &Body, edit: &Edit) -> Body {
             | (Body::Essay { prompt: f, .. }, "prompt", FieldValue::Text(v))
             | (Body::Case { stem: f, .. }, "stem", FieldValue::Text(v))
             | (Body::Table { title: f, .. }, "title", FieldValue::Text(v))
-            | (Body::Order { prompt: f, .. }, "prompt", FieldValue::Text(v))
-            | (Body::Calc { stem: f, .. }, "stem", FieldValue::Text(v))
-            | (Body::Calc { expect: f, .. }, "expect", FieldValue::Text(v))
-            | (Body::Calc { interpret: f, .. }, "interpret", FieldValue::Text(v)) => *f = v.clone(),
-            (Body::Cloze { extra: f, .. }, "extra", FieldValue::Text(v))
-            | (Body::Calc { question: f, .. }, "question", FieldValue::Text(v)) => {
+            | (Body::Order { prompt: f, .. }, "prompt", FieldValue::Text(v)) => *f = v.clone(),
+            (Body::Cloze { extra: f, .. }, "extra", FieldValue::Text(v)) => {
                 *f = Some(v.clone()).filter(|v| !v.trim().is_empty());
             }
             (Body::Mcq { options: f, .. }, "options", FieldValue::List(v))

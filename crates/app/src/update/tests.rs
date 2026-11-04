@@ -115,7 +115,8 @@ fn prefs_round_trip_and_default_to_automatic_alpha() {
     // follow the preview feed and a preview build may go back to alpha.
     assert_eq!(release.channel(Some(Channel::Preview)), Channel::Preview);
     let preview = BuildInfo { preview: true, ..release };
-    assert_eq!(preview.channel(None), Channel::Preview);
+    // Every build follows alpha unless Settings picks another channel.
+    assert_eq!(preview.channel(None), Channel::Alpha);
     assert_eq!(preview.channel(Some(Channel::Alpha)), Channel::Alpha);
 }
 
@@ -294,6 +295,15 @@ fn updater(feed: &str, info: BuildInfo) -> (&'static Updater, tempfile::TempDir)
 }
 
 fn updater_in(data: &Path, feed: &str, info: BuildInfo) -> &'static Updater {
+    // The fixture feed is signed for the preview channel. Every build
+    // follows alpha until Settings picks another, so a preview build in
+    // these tests starts as if he had picked preview.
+    let dir = data.join("updates");
+    if info.preview && !dir.join("prefs.json").exists() {
+        fs::create_dir_all(&dir).unwrap();
+        let prefs = Prefs { channel: Some(Channel::Preview), ..Prefs::default() };
+        fs::write(dir.join("prefs.json"), serde_json::to_vec(&prefs).unwrap()).unwrap();
+    }
     let mut u = Updater::new(
         data.join("updates"),
         info,
