@@ -1,0 +1,1159 @@
+schema: steps.lesson/v1
+lecture: mic.L02
+lessons:
+  - id: mic.L02.lesson1
+    title: "الـ gram ⊕ cocci: شجرة القرارات والـ Staph"
+    hook: "3 أسئلة بس (catalase، coagulase، hemolysis) بيعرّفوك أي coccus في المعمل"
+    minutes: 9
+    pages: [132, 133]
+    topics: [gram-positive-lab-algorithm, hemolytic-bacteria, staphylococcus-aureus, staphylococcus-epidermidis, staphylococcus-saprophyticus]
+    goals:
+      - "تمشي في الـ algorithm من الـ Gram لحد اسم الميكروب"
+      - "تعرف أمراض الـ S aureus الالتهابية والـ toxin-mediated"
+      - "تفرّق الـ S epidermidis من الـ S saprophyticus"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "أول سؤال: cocci ولا bacilli؟"
+        text: |-
+          الـ gram ⊕ cocci بيتقسموا بالـ **catalase**:
+
+          - catalase ⊕ وعناقيد (clusters) ← ==Staphylococcus==. بعدين **coagulase**: ⊕ يبقى S aureus، ⊝ يبقى S epidermidis أو S saprophyticus (ونفرّقهم بالـ novobiocin).
+          - catalase ⊝ وأزواج أو سلاسل ← ==Streptococcus==، ونقسمهم بالـ hemolysis.
+        page: 132
+        quote: "Hemolysis Coagulase Catalase"
+      - kind: figure
+        title: "شجرة الـ gram ⊕ cocci"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="micL02a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-ink" x="130" y="5" width="100" height="26" rx="6" fill="none"/>
+            <text x="142" y="23" class="t-sm t-b">Gram ⊕ cocci</text>
+            <line class="fg-arrow" x1="160" y1="31" x2="80" y2="55" marker-end="url(#micL02a)"/>
+            <line class="fg-arrow" x1="200" y1="31" x2="270" y2="55" marker-end="url(#micL02a)"/>
+            <text x="70" y="45" class="t-sm t-mut">catalase ⊕</text>
+            <text x="235" y="45" class="t-sm t-mut">catalase ⊝</text>
+            <rect class="fg-acc" x="20" y="58" width="120" height="26" rx="6"/>
+            <text x="30" y="76" class="t-sm">Staphylococcus</text>
+            <rect class="fg-good" x="215" y="58" width="130" height="26" rx="6"/>
+            <text x="225" y="76" class="t-sm">Streptococcus</text>
+            <text x="10" y="105" class="t-sm">coagulase ⊕ → S aureus</text>
+            <text x="10" y="123" class="t-sm">coagulase ⊝, novobiocin S →</text>
+            <text x="20" y="139" class="t-sm">S epidermidis</text>
+            <text x="10" y="157" class="t-sm">novobiocin R → S saprophyticus</text>
+            <text x="190" y="105" class="t-sm">α: optochin → pneumo/viridans</text>
+            <text x="200" y="125" class="t-sm">β: bacitracin → group A/B</text>
+            <text x="200" y="145" class="t-sm">γ: 6.5% NaCl →</text>
+            <text x="210" y="161" class="t-sm">Enterococcus / gallolyticus</text>
+          </svg>
+        caption: "الـ catalase بيفصل الـ Staph عن الـ Strep. الـ Staph بنكمّل بالـ coagulase والـ novobiocin، والـ Strep بالـ hemolysis وبعدين optochin أو bacitracin أو الملح."
+        alt: "Decision tree. Gram-positive cocci split by catalase: positive is Staphylococcus, split by coagulase (positive S aureus) then novobiocin (sensitive S epidermidis, resistant S saprophyticus). Negative is Streptococcus, split by hemolysis: alpha by optochin, beta by bacitracin, gamma by growth in 6.5% NaCl."
+        page: 132
+        quote: "Optochin sensitiVity and bile solubility Bacitracin sensitiVity and PYR status GroWth in 6.5% NaCl and PYR Status NoVobiocin sensitiVity"
+      - kind: explain
+        title: "الـ hemolysis على الـ blood agar"
+        text: |-
+          - **α**: hemoglobin بيتأكسد جزئياً ← لون أخضر أو بني ==من غير ما يبقى شفاف==. S pneumoniae و viridans.
+          - **β**: الـ RBCs بتتكسر خالص ← ==هالة شفافة==. S aureus، S pyogenes (A)، S agalactiae (B)، و **Listeria** (الـ bacillus الوحيد في اللستة).
+          - **γ**: مافيش hemolysis.
+        page: 133
+        quote: "Include Staphylococcus aureus, Streptococcus pyogenes (group A strep), Streptococcus agalactiae (group B strep), Listeria monocytogenes."
+      - kind: check
+        question: "A β-hemolytic gram-positive organism is catalase negative. Which test comes next?"
+        options:
+          - "Bacitracin sensitivity"
+          - "Optochin sensitivity"
+          - "Coagulase"
+          - "Novobiocin sensitivity"
+        answer: 0
+        why:
+          - "صح: الـ β-hemolytic strep بنفصلهم بالـ bacitracin (A حساس، B مقاوم)."
+          - "الـ optochin للـ α-hemolytic."
+          - "الـ coagulase للـ Staph (catalase ⊕)."
+          - "الـ novobiocin للـ coagulase ⊝ Staph."
+        page: 132
+        quote: "Bacitracin sensitiVity and PYR status"
+      - kind: explain
+        title: "S aureus: نوعين أمراض"
+        text: |-
+          **Inflammatory**: skin infections، abscesses، pneumonia (غالباً ==بعد الإنفلونزا==)، endocarditis، septic arthritis، osteomyelitis.
+
+          **Toxin-mediated**:
+          - TSST-1 ← toxic shock syndrome.
+          - exfoliative toxin ← scalded skin syndrome.
+          - enterotoxins ← food poisoning سريع.
+
+          وسلاحه الخاص: **coagulase** بيلف حوالين نفسه fibrin clot ← ==abscess==. و **Protein A** بيمسك الـ Fc بتاع الـ IgG.
+        page: 133
+        quote: "Toxin-mediated disease—toxic shock syndrome (TSST-1), scalded skin syndrome (exfoliative toxin), rapid-onset food poisoning (enterotoxins)."
+      - kind: explain
+        title: "TSS و MRSA"
+        text: |-
+          **Toxic shock syndrome**: fever، vomiting، diarrhea، rash، desquamation، shock، و end-organ failure (↑ AST و ALT و bilirubin). مرتبط بالـ ==tampons أو nasal packing== لفترة طويلة. الـ TSST-1 superantigen بيربط MHC II بالـ TCR ← polyclonal T-cell activation.
+
+          **MRSA**: الـ PBPs اتغيّرت بسبب جين ==mecA==. وبعض السلالات بتطلّع **PVL** اللي بيقتل الـ leukocytes ويعمل necrosis.
+        page: 133
+        quote: "Resistance due to altered penicillin- binding proteins (conferred by mecA gene)."
+      - kind: reveal
+        prompt: "أكل S aureus food poisoning: ليه الأعراض بتبدأ بعد 2-6 ساعات بس، وليه تسخين الأكل ما بيحميش؟"
+        answer: "لأن الـ toxin ==جاهز في الأكل== (preformed)، مش محتاج البكتيريا تكبر جوه الجسم. والـ enterotoxin **heat stable**، فالطبخ ما بيبوظوش. والنتيجة: vomiting وإسهال من غير دم."
+        page: 133
+        quote: "S aureus food poisoning due to ingestion of preformed toxin → short incubation period (2-6 hr) followed by nonbloody diarrhea and emesis. Enterotoxin is heat stable → not destroyed by cooking."
+      - kind: table
+        title: "الـ coagulase ⊝ Staph"
+        columns: ["", "S epidermidis", "S saprophyticus"]
+        rows:
+          - ["Novobiocin", "Sensitive", "Resistant"]
+          - ["Lives on", "Skin", "Female genital tract, perineum"]
+          - ["Causes", "Prosthetic device and IV catheter infections (biofilm)", "Uncomplicated UTI in young females (2nd after E coli)"]
+        hide: [[0, 1], [0, 2], [2, 1], [2, 2]]
+        page: 133
+        quote: "Gram ⊕, catalase ⊕, coagulase ⊝, urease ⊕ cocci in clusters. Novobiocin resistant. Normal microbiota of female genital tract and perineum."
+      - kind: aside
+        tone: tip
+        text: "عشان تفتكر: ==saprophyticus is resistant== (S و R جنب بعض في الأبجدية تقريباً)، والـ epidermidis حساس. والـ S epidermidis بيلوّث الـ blood cultures، فلازم تفكّر: هل هو contaminant ولا عنده valve صناعي؟"
+        page: 133
+        quote: "Normal microbiota of skin; contaminates blood cultures."
+      - kind: check
+        question: "A woman 4 months after a prosthetic hip has a painful joint. Culture: catalase ⊕, coagulase ⊝, novobiocin sensitive cocci. How does the organism cause this?"
+        options:
+          - "An adherent biofilm on the prosthesis"
+          - "TSST-1 superantigen"
+          - "Urease-induced struvite"
+          - "Protein A binding IgG"
+        answer: 0
+        why:
+          - "صح: الـ S epidermidis بيعمل biofilm على الأجهزة الصناعية."
+          - "الـ TSST-1 بتاع S aureus."
+          - "الـ struvite في الكلى، مش في المفصل."
+          - "الـ Protein A بتاع S aureus (coagulase ⊕)."
+        page: 133
+        quote: "Infects prosthetic devices (eg, hip implant, heart valve) and IV catheters by producing adherent biofilms."
+      - kind: try
+        items: [mic.L02.001, mic.L02.005, mic.L02.009, mic.L02.010, mic.L02.016]
+    recap:
+      - "Catalase ⊕ = Staph؛ coagulase ⊕ = S aureus؛ novobiocin R = saprophyticus."
+      - "β-hemolytic: S aureus و group A و group B و Listeria."
+      - "S aureus: abscess بالـ coagulase، TSS بالـ TSST-1، food poisoning سريع وheat stable، MRSA بالـ mecA."
+    practice: [mic.L02.001, mic.L02.002, mic.L02.003, mic.L02.004, mic.L02.005, mic.L02.006, mic.L02.007, mic.L02.008, mic.L02.009, mic.L02.010, mic.L02.011, mic.L02.012, mic.L02.013, mic.L02.014, mic.L02.015, mic.L02.016, mic.L02.017, mic.L02.018, mic.L02.019]
+  - id: mic.L02.lesson2
+    title: "الـ Streptococci والـ Enterococci: كل واحد ومكانه"
+    hook: "الـ pneumococcus في الرئة، الـ viridans في البق، الـ group B في البيبي، والـ gallolyticus بيقولك افحص القولون"
+    minutes: 10
+    pages: [134, 135]
+    topics: [streptococcus-pneumoniae, viridans-streptococci, streptococcus-pyogenes, streptococcus-agalactiae, streptococcus-gallolyticus, enterococci]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ α-hemolytic: pneumococcus ولا viridans؟"
+        text: |-
+          الاتنين أخضر على الـ blood agar. الفرق في ==optochin والـ bile==:
+
+          - **S pneumoniae**: optochin sensitive و bile soluble. lancet-shaped diplococci، encapsulated، وعنده IgA protease. ==No virulence without capsule==.
+          - **viridans**: optochin resistant و bile insoluble. عايشين في الـ oropharynx. الكتاب: مش خايفين من الـ "chin" (op-to-chin)، فقاعدين في البق.
+        page: 134
+        quote: "Gram ⊕, α-hemolytic cocci. Optochin resistant and bile insoluble. Normal microbiota of the oropharynx."
+      - kind: mnemonic
+        word: "MOPS"
+        parts:
+          - { key: "M", text: "Meningitis" }
+          - { key: "O", text: "Otitis media (in children)" }
+          - { key: "P", text: "Pneumonia (rusty sputum)" }
+          - { key: "S", text: "Sinusitis" }
+        hook: "الـ pneumococcus أشهر سبب للـ MOPS (الكتاب)"
+        page: 134
+        quote: "Most commonly causes MOPS: ▘ Meningitis ▘ Otitis media (in children) ▘ Pneumonia ▘ Sinusitis"
+      - kind: explain
+        title: "الـ viridans: سنان وصمامات"
+        text: |-
+          - **S mutans و S mitis** ← ==dental caries==.
+          - **S sanguinis** بيعمل **dextrans** بتلزق في الـ fibrin-platelet aggregates اللي على صمام متعوّر ← ==infective endocarditis== (الكتاب: Sanguinis = blood، والقلب مليان دم).
+        page: 134
+        quote: "S sanguinis makes dextrans that bind to fibrin- platelet aggregates on damaged heart valves, causing infective endocarditis."
+      - kind: explain
+        title: "الـ group A strep: 3 أنواع أمراض"
+        text: |-
+          **S pyogenes**: β-hemolytic، bacitracin sensitive، PYR ⊕. عنده **hyaluronic acid capsule** و **M protein** ضد الـ phagocytosis.
+
+          - **Pyogenic**: pharyngitis، cellulitis، impetigo (honey-crusted)، erysipelas.
+          - **Toxigenic**: scarlet fever، toxic shock–like syndrome، necrotizing fasciitis.
+          - **Immunologic**: ==rheumatic fever و glomerulonephritis==.
+        page: 134
+        quote: "Bacitracin sensitive, β-hemolytic, pyrrolidonyl arylamidase (PYR) ⊕. Hyaluronic acid capsule and M protein inhibit phagocytosis."
+      - kind: aside
+        tone: trap
+        text: "الـ pharyngitis ممكن تجيب rheumatic fever و glomerulonephritis، بس الـ ==impetigo بتجيب glomerulonephritis بس==. الكتاب: Ph-yogenes pharyngitis → rheumatic phever."
+        page: 134
+        quote: "“Ph”yogenes pharyngitis can result in rheumatic “phever” and glomerulonephritis. Strains causing impetigo can induce glomerulonephritis."
+      - kind: check
+        question: "A boy has a sandpaper rash sparing palms and soles, strawberry tongue and circumoral pallor after a sore throat. Which antibody test confirms a recent infection?"
+        options:
+          - "ASO titer or anti-DNase B"
+          - "Heterophile antibody"
+          - "FTA-ABS"
+          - "Cold agglutinins"
+        answer: 0
+        why:
+          - "صح: scarlet fever من group A strep، والـ ASO أو anti-DNase B بيبينوا الـ infection الحديثة."
+          - "الـ heterophile للـ EBV."
+          - "الـ FTA-ABS للـ syphilis."
+          - "الـ cold agglutinins للـ Mycoplasma."
+        page: 134
+        quote: "ASO titer or anti-DNase B antibodies indicate recent S pyogenes infection."
+      - kind: explain
+        title: "group B: للبيبيهات"
+        text: |-
+          **S agalactiae**: β-hemolytic بس ==bacitracin resistant==، بيستعمر الـ vagina، وبيعمل pneumonia و meningitis و sepsis في المواليد. الـ capsule هو الـ virulence.
+
+          في المعمل: **CAMP factor** بيكبّر منطقة الـ hemolysis بتاعة الـ S aureus (CAMP اسم المؤلفين، مش cyclic AMP)، hippurate ⊕، PYR ⊝.
+
+          الوقاية: swab من الـ rectum والـ vagina في أسبوع ==35-37==، ولو ⊕ تاخد penicillin/ampicillin وقت الولادة.
+        page: 135
+        quote: "Screen pregnant patients at 35-37 weeks of gestation with rectal and vaginal swabs. Patients with ⊕ culture receive intrapartum penicillin/ampicillin prophylaxis."
+      - kind: figure
+        title: "الـ γ-hemolytic: ملح ولا لأ"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="120" y="10" width="120" height="30" rx="6"/>
+            <text x="130" y="30" class="t-sm t-b">γ-hemolytic strep</text>
+            <line class="fg-arrow" x1="150" y1="40" x2="80" y2="70"/>
+            <line class="fg-arrow" x1="210" y1="40" x2="280" y2="70"/>
+            <text x="30" y="62" class="t-sm t-mut">grows in 6.5% NaCl + bile</text>
+            <text x="250" y="62" class="t-sm t-mut">does not</text>
+            <rect class="fg-acc" x="10" y="75" width="150" height="65" rx="8"/>
+            <text x="20" y="95" class="t-sm t-b">Enterococcus</text>
+            <text x="20" y="113" class="t-sm">PYR ⊕, penicillin G R</text>
+            <text x="20" y="130" class="t-sm">UTI, biliary, IE</text>
+            <rect class="fg-bad" x="200" y="75" width="150" height="65" rx="8"/>
+            <text x="210" y="95" class="t-sm t-b">S gallolyticus</text>
+            <text x="210" y="113" class="t-sm">bacteremia, IE</text>
+            <text x="210" y="130" class="t-sm">→ look for colon cancer</text>
+          </svg>
+        caption: "الاتنين ساكنين في الأمعاء. الـ Enterococcus أجمد فبيكبر في الملح والـ bile، ومقاوم للـ penicillin G. الـ S gallolyticus لو طلع في الدم يبقى لازم colonoscopy."
+        alt: "Gamma-hemolytic streptococci split by growth in 6.5% NaCl and bile. Grows: Enterococcus, PYR positive, resistant to penicillin G, causing UTI, biliary infection and endocarditis. Does not grow: S gallolyticus, causing bacteremia and endocarditis, linked to colon cancer."
+        page: 135
+        quote: "Enterococci are more resilient than streptococci, can grow in 6.5% NaCl and bile (lab test)."
+      - kind: aside
+        tone: exam
+        text: "==Bovis in the blood = cancer in the colon==. أي endocarditis بـ S gallolyticus (اللي كان اسمه S bovis) ← colonoscopy."
+        page: 135
+        quote: "Patients with S gallolyticus endocarditis have ↑ incidence of colon cancer."
+      - kind: explain
+        title: "الـ Enterococci"
+        text: |-
+          **E faecalis و E faecium**: جزء من الـ colon microbiota، و ==intrinsically resistant to penicillin G==. بيعملوا UTI، biliary tract infections، و endocarditis (بعد إجراءات في الـ GI أو الـ GU).
+
+          catalase ⊝، PYR ⊕، غالباً nonhemolytic. والـ **VRE** (vancomycin-resistant) سبب مهم للـ healthcare-associated infection.
+        page: 135
+        quote: "VRE (vancomycin-resistant enterococci) are an important cause of healthcare-associated infection."
+      - kind: match
+        prompt: "وصّل الـ strep بالمريض النموذجي"
+        pairs:
+          - ["S pneumoniae", "Sickle cell patient with rusty sputum"]
+          - ["S sanguinis", "Endocarditis after dental work"]
+          - ["S agalactiae", "Septic newborn"]
+          - ["S gallolyticus", "Endocarditis with occult colon cancer"]
+          - ["Enterococcus", "Endocarditis after a GU procedure"]
+        why: "الطحال يشيل الـ pneumococcus، الـ viridans في البق، group B for Babies، bovis = colon، والـ Enterococcus من الأمعاء والمسالك."
+        page: 135
+        quote: "Group B for Babies!"
+      - kind: try
+        items: [mic.L02.021, mic.L02.026, mic.L02.028, mic.L02.037, mic.L02.041]
+    recap:
+      - "Pneumococcus: optochin S، capsule، MOPS. Viridans: optochin R، سنان وصمامات (dextrans)."
+      - "Group A: bacitracin S، M protein، pharyngitis ← rheumatic fever و GN."
+      - "Group B: bacitracin R، CAMP ⊕، screening 35-37 أسبوع."
+      - "Enterococcus: 6.5% NaCl، penicillin G R. Gallolyticus ← colon cancer."
+    practice: [mic.L02.020, mic.L02.021, mic.L02.022, mic.L02.023, mic.L02.024, mic.L02.025, mic.L02.026, mic.L02.027, mic.L02.028, mic.L02.029, mic.L02.030, mic.L02.031, mic.L02.032, mic.L02.033, mic.L02.034, mic.L02.035, mic.L02.036, mic.L02.037, mic.L02.038, mic.L02.039, mic.L02.040, mic.L02.041, mic.L02.042, mic.L02.043]
+  - id: mic.L02.lesson3
+    title: "الـ Bacillus والـ Clostridia: spores وtoxins"
+    hook: "anthrax، رز بايت، colitis بعد مضاد حيوي، lockjaw، وطفل floppy: كلهم gram ⊕ rods بيعملوا spores"
+    minutes: 10
+    pages: [135, 136]
+    topics: [bacillus-anthracis, bacillus-cereus, clostridioides-difficile, clostridia]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ anthrax toxin: 3 قطع"
+        text: |-
+          **B anthracis** عنده capsule غريبة: ==polypeptide== (poly D-glutamate)، مش polysaccharide. ومستعمراته شكلها **medusa head**.
+
+          الـ toxin 3 أجزاء:
+          - **protective antigen**: بيدخّل الباقي.
+          - **lethal factor**: بيوقّف الـ MAP kinase ← macrophage apoptosis.
+          - **edema factor**: هو نفسه ==adenylyl cyclase== ← ↑ cAMP ← edema و necrosis.
+        page: 135
+        quote: "lethal factor (inhibits MAP kinase → macrophage apoptosis), and edema factor (acts as adenylyl cyclase → ↑ intracellular cAMP, upsetting homeostasis → edema, necrosis)."
+      - kind: table
+        title: "شكلين للـ anthrax"
+        columns: ["Form", "Features"]
+        rows:
+          - ["Cutaneous", "Painless papule with vesicles → ulcer with painless black eschar"]
+          - ["Pulmonary (woolsorter's)", "Inhaled spores → flulike → pulmonary hemorrhage, mediastinitis (widened mediastinum), shock"]
+        hide: [[0, 1], [1, 1]]
+        page: 135
+        quote: "Pulmonary anthrax—inhalation of spores, most commonly from contaminated animals or animal products, although also a potential bioweapon → flulike symptoms that rapidly progress to fever, pulmonary hemorrhage, mediastinitis (CXR may show widened mediastinum), and shock."
+      - kind: aside
+        tone: exam
+        text: "الـ eschar في الـ anthrax ==مش بيوجع==. واللي اتعرّض يشرب ciprofloxacin أو doxycycline كـ prophylaxis."
+        page: 135
+        quote: "Prophylaxis with ciprofloxacin or doxycycline when exposed."
+      - kind: explain
+        title: "B cereus: الرز اللي بايت"
+        text: |-
+          الـ spores بتستحمل طبخ الرز. لو الرز اتساب **دافي**، الـ spores تصحى وتعمل toxin.
+
+          - **Emetic**: vomiting بعد ==1-5 ساعات==، من **cereulide** (toxin جاهز).
+          - **Diarrheal**: إسهال مائي من غير دم بعد ==8-18 ساعة==.
+
+          العلاج supportive، لأن المضادات الحيوية ما بتعملش حاجة في الـ toxins.
+        page: 136
+        quote: "Spores survive cooking rice (reheated rice syndrome). Keeping rice warm results in germination of spores and enterotoxin formation."
+      - kind: explain
+        title: "C difficile: المضاد الحيوي فتح له الباب"
+        text: |-
+          المضاد الحيوي بيموّت الـ microbiota الطبيعية، فالـ C difficile يكبر ويطلّع ==toxins A و B== ← تكسير الـ enterocytes ← إسهال مائي ← **pseudomembranous colitis**.
+
+          أشهر الأدوية: clindamycin، ampicillin، cephalosporins، fluoroquinolones. وكمان مرتبط بالـ **PPIs**.
+
+          التشخيص: PCR أو antigen للـ toxins في البراز. العلاج: ==oral vancomycin أو fidaxomicin==، وللمتكرر: نكرر نفس العلاج أو fecal microbiota transplant.
+        page: 136
+        quote: "Treatment: oral vancomycin or fidaxomicin. For recurrent cases, consider repeating prior regimen or fecal microbiota transplant."
+      - kind: check
+        question: "Why must vancomycin be given orally, not IV, for C difficile colitis?"
+        options:
+          - "The organism and its toxins are in the colonic lumen, which oral drug reaches"
+          - "IV vancomycin causes C difficile"
+          - "C difficile is gram negative"
+          - "Oral vancomycin neutralizes toxin A directly"
+        answer: 0
+        why:
+          - "صح: الـ oral vancomycin بيوصل للـ lumen بتاع القولون، والـ IV لأ."
+          - "الـ IV vancomycin مش في لستة الأدوية اللي بتسببه."
+          - "الـ C difficile gram ⊕."
+          - "الدوا بيقتل البكتيريا، مش بيعادل الـ toxin."
+        page: 136
+        quote: "Treatment: oral vancomycin or fidaxomicin."
+      - kind: figure
+        title: "Tetanus قصاد botulism"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="micL02t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="20" y="18" class="t-sm t-b">Tetanus toxin</text>
+            <rect class="fg-bad" x="20" y="28" width="120" height="28" rx="6"/>
+            <text x="28" y="46" class="t-sm">Renshaw cell ✕</text>
+            <line class="fg-arrow" x1="80" y1="56" x2="80" y2="82" marker-end="url(#micL02t)"/>
+            <rect class="fg-box" x="20" y="85" width="120" height="28" rx="6"/>
+            <text x="28" y="103" class="t-sm">motor neuron fires</text>
+            <text x="20" y="135" class="t-sm t-bad">unopposed → spastic</text>
+            <text x="200" y="18" class="t-sm t-b">Botulinum toxin</text>
+            <rect class="fg-box" x="200" y="28" width="140" height="28" rx="6"/>
+            <text x="208" y="46" class="t-sm">motor neuron</text>
+            <line class="fg-arrow" x1="270" y1="56" x2="270" y2="82" marker-end="url(#micL02t)"/>
+            <rect class="fg-bad" x="200" y="85" width="140" height="28" rx="6"/>
+            <text x="208" y="103" class="t-sm">no ACh at NMJ ✕</text>
+            <text x="200" y="135" class="t-sm t-bad">no stimulation → flaccid</text>
+            <text x="60" y="162" class="t-sm t-mut">both cleave SNARE proteins</text>
+          </svg>
+        caption: "الاتنين بيقصّوا الـ SNARE، بس في مكانين مختلفين. الـ tetanus بيشيل الفرامل (Renshaw cells) فالعضلة تتشنج. الـ botulinum بيقطع الإشارة عن العضلة نفسها فتبقى مرخية."
+        alt: "Left: tetanus toxin knocks out the inhibitory Renshaw cell, so the motor neuron fires unopposed and gives spastic paralysis. Right: botulinum toxin stops acetylcholine release at the neuromuscular junction, so there is no stimulation and paralysis is flaccid. Both cleave SNARE proteins."
+        page: 136
+        quote: "Tetanus toxin and botulinum toxin are proteases that cleave SNARE proteins involved in neurotransmission."
+      - kind: explain
+        title: "Tetanus"
+        text: |-
+          الـ C tetani نفسه ==بيفضل في الجرح==. الـ tetanospasmin هو اللي بيمشي **retrograde** في الـ axon لحد الـ CNS ويوقّف الـ GABA والـ glycine من الـ Renshaw cells.
+
+          النتيجة: spastic paralysis، trismus (lockjaw)، risus sardonicus (حواجب مرفوعة وابتسامة مفتوحة)، opisthotonos.
+
+          العلاج: **antitoxin** ± vaccine booster، antibiotics، **diazepam** للتشنجات، و wound debridement.
+        page: 136
+        quote: "Tetanospasmin spreads by retrograde axonal transport to CNS and blocks release of GABA and glycine from Renshaw cells in spinal cord."
+      - kind: explain
+        title: "Botulism: الـ 5 D's"
+        text: |-
+          الـ toxin heat-labile بيمنع إفراز الـ **ACh** عند الـ NMJ. الأعراض الـ ==5 D's==: diplopia، dysarthria، dysphagia، dyspnea، و **descending flaccid paralysis**، ومن غير sensory deficits.
+
+          - الرضيع: بلع **spores** (عسل) ← floppy baby syndrome.
+          - الكبير: أكل **toxin جاهز** (معلبات).
+
+          العلاج: ==human botulinum immunoglobulin==. والـ Botox نفسه بيعالج focal dystonia و hyperhidrosis و muscle spasms والتجاعيد.
+        page: 136
+        quote: "Symptoms of botulism (the 5 D’s): diplopia, dysarthria, dysphagia, dyspnea, descending flaccid paralysis. Does not present with sensory deficits."
+      - kind: explain
+        title: "C perfringens و C septicum"
+        text: |-
+          - **α-toxin** (lecithinase، phospholipase) ← ==gas gangrene== (crepitus تحت الجلد) و hemolysis.
+          - **food poisoning**: أكل فيه spores كتير، اتطبخ واتساب أقل من 60°C ← الـ spores تصحى ← enterotoxin ← أعراض متأخرة (==10-12 ساعة==) وبتخلص في 24 ساعة.
+          - **spontaneous** gas gangrene من غير جرح ← غالباً **C septicum** عن طريق الدم، ومرتبط بـ ==colonic malignancy==.
+        page: 136
+        quote: "Spontaneous gas gangrene (via hematogenous seeding; associated with colonic malignancy) is most commonly caused by Clostridium septicum."
+      - kind: sort
+        prompt: "رتّب الـ food poisoning حسب بداية الأعراض"
+        bins: ["Hours 1-6", "Hours 8-18"]
+        cards:
+          - { text: "S aureus enterotoxin (2-6 hr)", bin: 0 }
+          - { text: "B cereus emetic (1-5 hr)", bin: 0 }
+          - { text: "B cereus diarrheal (8-18 hr)", bin: 1 }
+          - { text: "C perfringens (10-12 hr)", bin: 1 }
+        why: "اللي toxin بتاعه جاهز في الأكل (S aureus و cereulide) بيبدأ بسرعة. اللي محتاج البكتيريا تعمل toxin جوه الأمعاء بيتأخر."
+        page: 136
+        quote: "Emetic type causes nausea and vomiting within 1-5 hours. Caused by cereulide, a preformed toxin."
+      - kind: try
+        items: [mic.L02.046, mic.L02.048, mic.L02.050, mic.L02.055, mic.L02.057]
+    recap:
+      - "Anthrax: polypeptide capsule، edema factor = adenylyl cyclase، eschar مش بيوجع."
+      - "B cereus: رز دافي؛ emetic 1-5 hr، diarrheal 8-18 hr."
+      - "C difficile: toxins A و B بعد مضاد حيوي؛ oral vancomycin أو fidaxomicin."
+      - "Tetanus: Renshaw ← spastic. Botulism: ACh ← flaccid و 5 D's."
+      - "C septicum من غير جرح ← colon cancer."
+    practice: [mic.L02.044, mic.L02.045, mic.L02.046, mic.L02.047, mic.L02.048, mic.L02.049, mic.L02.050, mic.L02.051, mic.L02.052, mic.L02.053, mic.L02.054, mic.L02.055, mic.L02.056, mic.L02.057, mic.L02.058, mic.L02.059, mic.L02.060, mic.L02.061]
+  - id: mic.L02.lesson4
+    title: "Diphtheria و Listeria و الخيوط و الـ Mycobacteria"
+    hook: "من الغشا الرمادي في الزور، لـ rocket tails، لحد الـ TB اللي بتحب قمة الرئة"
+    minutes: 10
+    pages: [137, 139]
+    topics: [corynebacterium-diphtheriae, listeria-monocytogenes, nocardia-vs-actinomyces, mycobacteria, tuberculosis, leprosy]
+    status: unverified
+    steps:
+      - kind: mnemonic
+        word: "ABCDEFG"
+        parts:
+          - { key: "A", text: "ADP-ribosylation" }
+          - { key: "B", text: "β-prophage" }
+          - { key: "C", text: "Corynebacterium" }
+          - { key: "D", text: "Diphtheriae" }
+          - { key: "E", text: "Elongation" }
+          - { key: "F", text: "Factor 2" }
+          - { key: "G", text: "Granules" }
+        hook: "الكتاب: الـ diphtheria كلها في ABCDEFG"
+        page: 137
+        quote: "ABCDEFG: ADP-ribosylation β-prophage Corynebacterium Diphtheriae Elongation Factor 2 Granules"
+      - kind: explain
+        title: "Diphtheria"
+        text: |-
+          الـ toxin (جيناته على **β-prophage**) بيعطّل الـ EF-2 ← necrosis في الزور والقلب والـ CNS.
+
+          - **الزور**: pseudomembranous pharyngitis (==غشا رمادي-أبيض==) و bull's neck.
+          - **لو انتشر**: myocarditis، arrhythmias، neuropathies.
+
+          المعمل: gram ⊕ rods فيها **metachromatic granules** (أزرق وأحمر)، و ==Elek test ⊕== للـ toxin، ومستعمرات سودا على الـ cystine-tellurite.
+
+          العلاج: antitoxin ± erythromycin أو penicillin. والوقاية: toxoid vaccine.
+        page: 137
+        quote: "Lab diagnosis based on gram ⊕ rods with metachromatic (blue and red) granules and ⊕ Elek test for toxin."
+      - kind: explain
+        title: "Listeria: بتحب التلاجة"
+        text: |-
+          gram ⊕ rod، facultative intracellular. بتيجي من ==unpasteurized dairy و cold deli meats==، أو عبر الـ placenta، أو وقت الولادة. وبتكبر كويس في التلاجة (cold enrichment).
+
+          حيلها:
+          - **rocket tails** من الـ actin ← تنط من خلية لخلية من غير ما تطلع بره ← ==تهرب من الـ antibodies==.
+          - **listeriolysin** بيخرم الـ phagosome فتطلع للـ cytoplasm.
+          - tumbling motility في الـ broth.
+        page: 137
+        quote: "Listeriolysin generates pores in phagosomes, allowing its escape into cytoplasm. Characteristic tumbling motility in broth."
+      - kind: check
+        question: "A pregnant woman who ate soft unpasteurized cheese has fever; her neonate has meningitis with gram-positive rods. Which drug treats it?"
+        options:
+          - "Ampicillin"
+          - "Ceftriaxone"
+          - "TMP-SMX"
+          - "Vancomycin"
+        answer: 0
+        why:
+          - "صح: الكتاب: Listeria treatment = ampicillin."
+          - "الـ cephalosporins ما بتغطيش Listeria."
+          - "الـ TMP-SMX للـ Nocardia."
+          - "مش علاج الـ Listeria في الكتاب."
+        page: 137
+        quote: "Treatment: ampicillin."
+      - kind: table
+        title: "Nocardia قصاد Actinomyces"
+        columns: ["", "Nocardia", "Actinomyces"]
+        rows:
+          - ["O2 / catalase", "Aerobe, ⊕", "Anaerobe, ⊝"]
+          - ["Acid fast", "Weak", "No"]
+          - ["Lives in", "Soil", "Mouth, GI, reproductive tract"]
+          - ["Typical case", "Lung disease in immunocompromised (⊝ PPD), brain abscess", "Jaw abscess with sinus tracts and sulfur granules after dental work; PID with IUD"]
+          - ["Treat", "Sulfonamides (TMP-SMX)", "Penicillin"]
+        hide: [[0, 1], [0, 2], [1, 1], [4, 1], [4, 2]]
+        page: 137
+        quote: "Treat with sulfonamides (TMP-SMX) Treat with penicillin"
+      - kind: aside
+        tone: tip
+        text: "الكتاب: ==Treatment is a SNAP==: Sulfonamides لـ Nocardia، و Actinomyces ياخد Penicillin."
+        page: 137
+        quote: "Treatment is a SNAP: Sulfonamides—Nocardia; Actinomyces—Penicillin"
+      - kind: explain
+        title: "الـ Mycobacteria وأسلحة الـ TB"
+        text: |-
+          acid-fast rods بطيئة في الـ culture:
+          - **M tuberculosis**: TB، غالباً multidrug resistant.
+          - **M avium–intracellulare**: disseminated في الـ AIDS.
+          - **M scrofulaceum**: cervical lymphadenitis في الأطفال.
+          - **M marinum**: جلد بتوع الـ aquarium.
+
+          أسلحة الـ TB: ==cord factor== (serpentine cord، بيشغّل الـ macrophages ← granuloma، وبيطلّع TNF-α)، و **sulfatides** (بتمنع الـ phagolysosomal fusion).
+        page: 138
+        quote: "Cord factor creates a “serpentine cord” appearance in virulent M tuberculosis strains; activates macrophages (promoting granuloma formation) and induces release of TNF-α. Sulfatides (surface glycolipids) inhibit phagolysosomal fusion."
+      - kind: figure
+        title: "طريق الـ TB"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="micL02b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="120" y="5" width="120" height="28" rx="6"/>
+            <text x="130" y="24" class="t-sm t-b">Primary TB</text>
+            <text x="100" y="48" class="t-sm t-mut">Ghon focus (mid/lower) + hilar nodes</text>
+            <line class="fg-arrow" x1="150" y1="55" x2="70" y2="85" marker-end="url(#micL02b)"/>
+            <line class="fg-arrow" x1="210" y1="55" x2="290" y2="85" marker-end="url(#micL02b)"/>
+            <rect class="fg-good" x="10" y="88" width="140" height="44" rx="6"/>
+            <text x="18" y="106" class="t-sm">&gt;90%: fibrosis,</text>
+            <text x="18" y="123" class="t-sm">calcification (PPD ⊕)</text>
+            <rect class="fg-bad" x="210" y="88" width="140" height="44" rx="6"/>
+            <text x="218" y="106" class="t-sm">&lt;10%: progressive</text>
+            <text x="218" y="123" class="t-sm">(AIDS, malnutrition)</text>
+            <line class="fg-arrow" x1="80" y1="132" x2="80" y2="155" marker-end="url(#micL02b)"/>
+            <rect class="fg-acc" x="10" y="158" width="160" height="36" rx="6"/>
+            <text x="18" y="180" class="t-sm">reactivation → apex cavity</text>
+            <text x="200" y="170" class="t-sm">bacteremia → miliary TB</text>
+            <text x="190" y="188" class="t-sm t-mut">(meninges, spine, adrenal...)</text>
+          </svg>
+        caption: "الـ primary TB في معظم الناس بيلم نفسه ويتكلّس. لو المناعة وقعت بعدين، يحصل reactivation في القمة (cavity). ولو انتشر في الدم يبقى miliary في أي حتة."
+        alt: "Primary tuberculosis forms a Ghon focus in the mid or lower lobe with hilar nodes. Over 90% heal with fibrosis and calcification and a positive PPD; under 10% progress, as in AIDS or malnutrition. Healed disease can reactivate as an apical cavity, and bacteremia gives miliary tuberculosis in the meninges, vertebrae, adrenals and other organs."
+        page: 138
+        quote: "Ghon focus (usually mid/ lower lobes)"
+      - kind: reveal
+        prompt: "ليه الـ reactivation بيروح لقمة الرئة بالذات؟"
+        answer: "لأن الـ TB ==highly aerobic==، والقمة فيها أعلى O2. والـ reactivation بيحصل لما المناعة تقع: HIV، transplant، أو ==TNF-α inhibitors== (لأن الـ TNF-α هو اللي ماسك الـ granuloma)."
+        page: 138
+        quote: "TB reactivation risk highest in immunocompromised individuals (eg, HIV, organ transplant recipients, TNF-α inhibitor use). Reactivation has a predilection for the apices of the lung (due to the bacteria being highly aerobic)."
+      - kind: aside
+        tone: trap
+        text: "**PPD** ⊕ مع infection حالية أو قديمة **أو BCG**. و ⊝ في الـ immunocompromised (CD4 قليل) حتى لو عنده TB. الـ ==IGRA== أقل false positive من الـ BCG. وما تخلطش **Langhans** giant cell (macrophages ملزوقة، في الـ TB) بـ **Langerhans** cell (APC في الجلد)."
+        page: 138
+        quote: "Interferon-γ release assay (IGRA) has fewer false positives from BCG vaccination."
+      - kind: table
+        title: "Leprosy: شكلين"
+        columns: ["", "Lepromatous", "Tuberculoid"]
+        rows:
+          - ["Skin", "Diffuse, leonine facies", "Few hypoesthetic hairless plaques"]
+          - ["Immunity", "Low CMI, Th2", "High CMI, Th1"]
+          - ["Bacteria", "Many (communicable)", "Few"]
+          - ["Treatment", "Dapsone + rifampin + clofazimine", "Dapsone + rifampin"]
+        hide: [[1, 1], [1, 2], [3, 1]]
+        page: 139
+        quote: "Treatment: dapsone and rifampin for tuberculoid form; clofazimine is added for lepromatous form."
+      - kind: check
+        question: "Why does M leprae infect the skin and superficial nerves (glove-and-stocking numbness)?"
+        options:
+          - "It likes cool temperatures"
+          - "It needs host ATP"
+          - "It is anaerobic"
+          - "It binds the Fc of IgG"
+        answer: 0
+        why:
+          - "صح: الـ M leprae بيحب الحرارة الأقل، فبيروح للجلد والأعصاب السطحية والأطراف."
+          - "الـ obligate intracellular اللي بيحتاج ATP هم Rickettsia و Chlamydia و Coxiella."
+          - "الـ Mycobacteria aerobic."
+          - "ده Protein A بتاع S aureus."
+        page: 139
+        quote: "Caused by Mycobacterium leprae, an acid-fast bacillus that likes cool temperatures (infects skin and superficial nerves—“glove and stocking” loss of sensation) and cannot be grown in vitro."
+      - kind: try
+        items: [mic.L02.062, mic.L02.067, mic.L02.070, mic.L02.077, mic.L02.083]
+    recap:
+      - "Diphtheria: EF-2، β-prophage، metachromatic granules، Elek test."
+      - "Listeria: تلاجة و deli meats، rocket tails، ampicillin."
+      - "Nocardia: aerobic، weakly acid fast، TMP-SMX. Actinomyces: anaerobic، sulfur granules، penicillin."
+      - "TB: cord factor، reactivation في القمة، IGRA أحسن مع BCG."
+      - "Leprosy: lepromatous Th2 و tuberculoid Th1."
+    practice: [mic.L02.062, mic.L02.063, mic.L02.064, mic.L02.065, mic.L02.066, mic.L02.067, mic.L02.068, mic.L02.069, mic.L02.070, mic.L02.071, mic.L02.072, mic.L02.073, mic.L02.074, mic.L02.075, mic.L02.076, mic.L02.077, mic.L02.078, mic.L02.079, mic.L02.080, mic.L02.081, mic.L02.082, mic.L02.083, mic.L02.084]
+  - id: mic.L02.lesson5
+    title: "الـ gram ⊝: Neisseria و Haemophilus والـ coccobacilli و Pseudomonas"
+    hook: "الـ meningococcus في العنابر، الـ Legionella في التكييف، والـ Pseudomonas في الميه"
+    minutes: 10
+    pages: [139, 141]
+    topics: [gram-negative-lab-algorithm, neisseria, haemophilus-influenzae, burkholderia-cepacia, bordetella-pertussis, brucella, legionella-pneumophila, pseudomonas-aeruginosa]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "شجرة الـ gram ⊝ في دقيقة"
+        text: |-
+          - **diplococci**: N meningitidis، N gonorrhoeae، Moraxella.
+          - **curved rods**: Campylobacter (==42°C==)، H pylori (==urease==)، V cholerae (==alkaline media==).
+          - **coccobacilli**: H influenzae، Pasteurella، Brucella، B pertussis، Francisella، Acinetobacter.
+          - **bacilli**: نبدأ بالـ **lactose**. fast fermenters: Klebsiella، E coli، Enterobacter. slow: Citrobacter، Serratia. non-fermenters: oxidase ⊕ = Pseudomonas؛ oxidase ⊝ والـ H2S ⊕ = Proteus و Salmonella، H2S ⊝ = Shigella و Yersinia.
+        page: 139
+        quote: "Grows in 42°C Produces urease Grows in alkaline media Campylobacter jejuni Helicobacter pylori Vibrio cholerae"
+      - kind: explain
+        title: "Neisseria: أخين مختلفين"
+        text: |-
+          الاتنين gram ⊝ diplococci، بيعملوا IgA protease، وعندهم **LOS** بـ endotoxin قوي.
+
+          - **Meningococcus**: عنده ==capsule==، بيخمّر maltose و glucose، فيه vaccine، بينتقل بالرذاذ في الأماكن الزحمة (عنابر، dorms). بيعمل meningococcemia (petechiae)، meningitis، و **Waterhouse-Friderichsen** (نزيف في الـ adrenal).
+          - **Gonococcus**: من غير capsule، glucose بس، ==مافيش vaccine== بسبب antigenic variation في الـ pili. بيعمل gonorrhea، septic arthritis، PID، Fitz-Hugh–Curtis، و neonatal conjunctivitis.
+        page: 140
+        quote: "No polysaccharide capsule Polysaccharide capsule No maltose acid detection Maltose acid detection No vaccine due to antigenic variation of pilus proteins"
+      - kind: aside
+        tone: analogy
+        text: "**M**eningococcus بيخمّر **M**altose: الحرفين زي بعض. والـ gonococcus اسمه **G**، بيخمّر **G**lucose بس."
+        page: 140
+        quote: "Acid production: meningococci—maltose and glucose; gonococci—glucose."
+      - kind: table
+        title: "الوقاية والعلاج"
+        columns: ["", "Gonococci", "Meningococci"]
+        rows:
+          - ["Prevent", "Condoms; erythromycin eye ointment for neonates", "Rifampin, ciprofloxacin or ceftriaxone for close contacts"]
+          - ["Treat", "Single IM ceftriaxone (+ doxycycline if chlamydia not excluded)", "Ceftriaxone or penicillin G"]
+        hide: [[0, 2], [1, 1]]
+        page: 140
+        quote: "Treatment: single dose IM ceftriaxone; if chlamydial coinfection not excluded by molecular testing, add doxycycline Treatment: ceftriaxone or penicillin G"
+      - kind: explain
+        title: "H influenzae"
+        text: |-
+          coccobacillus صغير، بالرذاذ. بعد الـ type b vaccine، ==الـ nontypeable (من غير capsule)== بقى أشهر سبب للـ otitis media والـ conjunctivitis والـ bronchitis، وكمان للـ invasive.
+
+          بيعمل **epiglottitis** (cherry red، و ==thumb sign== على الـ lateral neck x-ray)، meningitis، otitis media، pneumonia. ومش بيعمل الإنفلونزا.
+
+          الـ vaccine: PRP (type b capsule) مربوط في diphtheria toxoid، من 2 لـ 18 شهر. العلاج: amoxicillin ± clavulanate للـ mucosal، ceftriaxone للـ meningitis، rifampin للمخالطين.
+        page: 140
+        quote: "Haemophilus causes epiglottitis (endoscopic appearance can be “cherry red” in children; “thumb sign” on lateral neck x-ray A ), meningitis, otitis media, and pneumonia."
+      - kind: check
+        question: "A 20-year-old student dies of meningococcemia. What should her roommate get?"
+        options:
+          - "Rifampin, ciprofloxacin or ceftriaxone"
+          - "Penicillin G for 10 days"
+          - "Nothing, since there is no person-to-person spread"
+          - "Erythromycin"
+        answer: 0
+        why:
+          - "صح: المخالطين القريبين ياخدوا rifampin أو ciprofloxacin أو ceftriaxone."
+          - "Penicillin G علاج مش prophylaxis."
+          - "الـ meningococcus بينتقل بالرذاذ؛ اللي مالوش person-to-person هو Legionella."
+          - "الـ erythromycin للـ pertussis أو eye ointment للمواليد."
+        page: 140
+        quote: "Rifampin, ciprofloxacin, or ceftriaxone prophylaxis in close contacts"
+      - kind: explain
+        title: "Pertussis و Brucella و Burkholderia"
+        text: |-
+          **B pertussis**: pertussis toxin (بيطفي Gi)، adenylate cyclase toxin، و tracheal cytotoxin (بيكسّر الـ cilia). 3 مراحل: catarrhal ← paroxysmal (whoop و vomiting) ← convalescent. ==Lymphocytosis== (غريبة على بكتيريا). العلاج macrolides، أو TMP-SMX.
+
+          **Brucella**: من اللبن مش مبستر. بتعيش في الـ macrophages وتعمل noncaseating granulomas. ==undulant fever== و night sweats و arthralgia. doxycycline + rifampin أو streptomycin.
+
+          **Burkholderia cepacia**: pneumonia في الـ cystic fibrosis، multidrug resistant، وبتعتبر relative contraindication للـ lung transplant.
+        page: 141
+        quote: "Produces lymphocytosis (unlike most acute bacterial infections)."
+      - kind: explain
+        title: "Legionella"
+        text: |-
+          gram ⊝ rod ما بياخدش Gram كويس (==silver stain==)، بيتزرع على charcoal yeast extract بـ iron و cysteine، وبنكشفه بـ **urinary antigen**.
+
+          بينتقل بالـ aerosol من الميه (التكييف، سخانات)؛ outbreaks في الـ cruise ships والـ nursing homes، و ==مافيش person-to-person==.
+
+          - **Legionnaires' disease**: pneumonia شديدة (lobar)، fever، أعراض GI و CNS، و ==hyponatremia== و ↑ transaminases.
+          - **Pontiac fever**: flulike خفيف.
+
+          العلاج: macrolide أو quinolone.
+        page: 141
+        quote: "Gram ⊝ rod. Gram stains poorly—use silver stain. Grow on charcoal yeast extract medium with iron and cysteine. Detected by presence of antigen in urine. Labs may show hyponatremia and elevated transaminases."
+      - kind: figure
+        title: "Pseudomonas: PEEP"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <ellipse class="fg-acc" cx="180" cy="75" rx="55" ry="28"/>
+            <text x="138" y="80" class="t-sm t-b">P aeruginosa</text>
+            <rect class="fg-box" x="5" y="10" width="125" height="34" rx="6"/>
+            <text x="12" y="31" class="t-sm">Phospholipase C</text>
+            <rect class="fg-box" x="230" y="10" width="125" height="34" rx="6"/>
+            <text x="238" y="31" class="t-sm">Endotoxin: shock</text>
+            <rect class="fg-box" x="5" y="106" width="125" height="34" rx="6"/>
+            <text x="12" y="127" class="t-sm">Exotoxin A: EF-2</text>
+            <rect class="fg-good" x="230" y="106" width="125" height="34" rx="6"/>
+            <text x="238" y="127" class="t-sm">green Pigment</text>
+            <line class="fg-thin" x1="130" y1="35" x2="140" y2="58"/>
+            <line class="fg-thin" x1="230" y1="35" x2="220" y2="58"/>
+            <line class="fg-thin" x1="130" y1="115" x2="140" y2="92"/>
+            <line class="fg-thin" x1="230" y1="115" x2="220" y2="92"/>
+          </svg>
+        caption: "الـ Pseudomonas بيطلّع PEEP: Phospholipase C بيكسّر الـ membranes، Endotoxin (fever و shock)، Exotoxin A بيعطّل EF-2 زي الـ diphtheria، و Pigment أخضر."
+        alt: "Pseudomonas aeruginosa in the centre with four products: phospholipase C, endotoxin causing shock, exotoxin A inactivating EF-2, and a green pigment."
+        page: 141
+        quote: "Produces PEEP: Phospholipase C (degrades cell membranes); Endotoxin (fever, shock); Exotoxin A (inactivates EF-2); green Pigment A ."
+      - kind: explain
+        title: "Pseudomonas: فين وإزاي نعالجه"
+        text: |-
+          aerobic، oxidase ⊕، non-lactose fermenter، ريحته زي ==العنب==، وعايش في الميه.
+
+          اسمه نفسه هو اللستة: **PSEUDOMONAS**: Pneumonia، Sepsis، Ecthyma gangrenosum، UTIs، Diabetes (otitis externa الخبيثة)، Osteomyelitis، Mucoid capsule (cystic fibrosis)، Otitis externa، Nosocomial، Addiction، Skin (hot tub، حروق).
+
+          العلاج: piperacillin-tazobactam، ceftazidime أو cefepime، monobactams، fluoroquinolones، carbapenems. و ==ما نديش aminoglycoside لوحده== لأنه بيشتغل وحش في الـ acidic environment.
+        page: 141
+        quote: "Despite antipseudomonal activity, aminoglycoside monotherapy is avoided due to poor performance in acidic environments."
+      - kind: check
+        question: "A cruise passenger has lobar pneumonia, diarrhea, confusion and sodium 127. Gram stain shows no organisms. Which test?"
+        options:
+          - "Urinary antigen"
+          - "Cold agglutinins"
+          - "Optochin disk"
+          - "India ink"
+        answer: 0
+        why:
+          - "صح: Legionella بنكشفها بالـ urinary antigen، والـ hyponatremia بتشاور عليها."
+          - "الـ cold agglutinins للـ Mycoplasma."
+          - "الـ optochin للـ pneumococcus، وكان هيبان في الـ Gram."
+          - "الـ India ink للـ Cryptococcus."
+        page: 141
+        quote: "Detected by presence of antigen in urine."
+      - kind: try
+        items: [mic.L02.090, mic.L02.097, mic.L02.105, mic.L02.109, mic.L02.115]
+    recap:
+      - "Meningococcus: capsule، maltose، vaccine، prophylaxis للمخالطين. Gonococcus: مافيش vaccine (pili variation)."
+      - "H influenzae: nontypeable هو الأشهر دلوقتي؛ epiglottitis و thumb sign."
+      - "Pertussis: Gi، lymphocytosis، macrolides. Brucella: لبن نيء و undulant fever."
+      - "Legionella: silver stain، urinary antigen، hyponatremia، مافيش person-to-person."
+      - "Pseudomonas: PEEP، ريحة عنب، ما ينفعش aminoglycoside لوحده."
+    practice: [mic.L02.085, mic.L02.086, mic.L02.087, mic.L02.088, mic.L02.089, mic.L02.090, mic.L02.091, mic.L02.092, mic.L02.093, mic.L02.094, mic.L02.095, mic.L02.096, mic.L02.097, mic.L02.098, mic.L02.099, mic.L02.100, mic.L02.101, mic.L02.102, mic.L02.103, mic.L02.104, mic.L02.105, mic.L02.106, mic.L02.107, mic.L02.108, mic.L02.109, mic.L02.110, mic.L02.111, mic.L02.112, mic.L02.113, mic.L02.114, mic.L02.115, mic.L02.116, mic.L02.117, mic.L02.118, mic.L02.119]
+  - id: mic.L02.lesson6
+    title: "بكتيريا الأمعاء: إسهال بدم ولا ميه؟"
+    hook: "سؤال واحد بيفرز نص الـ enterics: البراز فيه دم ولا رز؟"
+    minutes: 10
+    pages: [142, 144]
+    topics: [salmonella-vs-shigella, yersinia-enterocolitica, lactose-fermenting-enterics, escherichia-coli, klebsiella, campylobacter-jejuni, proteus-mirabilis, vibrio-cholerae, helicobacter-pylori]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Salmonella و Shigella: الشبه"
+        text: |-
+          الاتنين gram ⊝ rods، ==non-lactose fermenters==، oxidase ⊝، وبيدخلوا من الـ **M cells** بتاعة الـ Peyer patches.
+
+          الفرق الكبير في الحاجات اللي بتتحرك وبتعمل غاز: الـ Salmonella عندها **flagella** (salmon swim) وبتعمل **H2S**؛ الـ Shigella لأ.
+        page: 142
+        quote: "Both Salmonella and Shigella are gram ⊝ rods, non-lactose fermenters, oxidase ⊝, and can invade the GI tract via M cells of Peyer patches."
+      - kind: table
+        title: "الفروق اللي بتيجي في الامتحان"
+        columns: ["", "S typhi", "Other Salmonella", "Shigella"]
+        rows:
+          - ["Reservoir", "Humans only", "Humans and animals", "Humans only"]
+          - ["Infectious dose", "High (acid-labile)", "High", "Low (acid stable)"]
+          - ["Antibiotics", "Prolong excretion", "Prolong excretion", "Shorten excretion"]
+          - ["Immune cells", "Monocytes", "PMNs if disseminated", "PMNs"]
+          - ["GI", "Constipation, then diarrhea", "Diarrhea ± blood", "Tenesmus, bloody mucoid stools"]
+        hide: [[1, 1], [1, 3], [2, 3], [4, 3]]
+        page: 142
+        quote: "INFECTIOUS DOSE (ID50) High—large inoculum required; acid-labile (inactivated by gastric acids) High Low—very small inoculum required; acid stable (resistant to gastric acids)"
+      - kind: reveal
+        prompt: "ليه الـ Shigella بتنتشر بسهولة في الحضانة، والـ Salmonella محتاجة أكل ملوّث كتير؟"
+        answer: "الـ Shigella ==acid stable==، فعدد قليل جداً بيعدّي المعدة ويعمل مرض (low ID50) ← بتنتقل بالـ 4 F's: fingers، flies، food، feces. الـ Salmonella acid-labile فمحتاجة inoculum كبير."
+        page: 142
+        quote: "4 F’s: fingers, flies, food, feces"
+      - kind: explain
+        title: "Typhoid و الـ carrier"
+        text: |-
+          **S typhi** (الـ Vi capsule): fever مع ==pulse-temperature dissociation== (حرارة عالية ونبض بطيء)، rose spots (salmon-colored macules على الجذع)، ألم في البطن، وبعدين ulceration ونزيف. العلاج ceftriaxone أو fluoroquinolone. وممكن يفضل **carrier** في الـ gallbladder.
+
+          الـ Salmonella التانية (فراخ، بيض، **turtles**): العلاج ==supportive==، والمضاد الحيوي بيطوّل الإخراج في الـ immunocompetent.
+        page: 142
+        quote: "Causes typhoid fever (salmon- colored truncal macular rash, abdominal pain, fever [pulse-temperature dissociation]; later GI ulceration and hemorrhage); treat with ceftriaxone or fluoroquinolone"
+      - kind: explain
+        title: "E coli: 4 سلالات"
+        text: |-
+          - **EIEC**: ==Invasive== ← dysentery زي الـ Shigella.
+          - **ETEC**: heat-labile و heat-stable toxins، مافيش invasion ← Traveler's diarrhea مائي.
+          - **EPEC**: مافيش toxin؛ بيلزق ويفرطح الـ villi ← إسهال في الأطفال (==P==ediatrics).
+          - **EHEC (O157:H7)**: Shiga toxin ← dysentery و ==HUS==، من اللحمة الني والخضار الورقي. ما بيخمّرش **sorbitol**.
+
+          وعوامل الـ E coli عموماً: P pili (cystitis و pyelonephritis)، K capsule (pneumonia و neonatal meningitis)، LPS (septic shock).
+        page: 143
+        quote: "Produces heat-labile and heat-stable enteroToxins. No inflammation or invasion. ETEC; Traveler’s diarrhea (watery)."
+      - kind: figure
+        title: "الـ HUS: 3 حاجات من جلطة صغيرة"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="micL02h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-bad" x="105" y="8" width="150" height="40" rx="8"/>
+            <text x="115" y="25" class="t-sm t-b">Shiga toxin →</text>
+            <text x="115" y="41" class="t-sm">microthrombi on endothelium</text>
+            <line class="fg-arrow-bad" x1="140" y1="48" x2="60" y2="95" marker-end="url(#micL02h)"/>
+            <line class="fg-arrow-bad" x1="180" y1="48" x2="180" y2="95" marker-end="url(#micL02h)"/>
+            <line class="fg-arrow-bad" x1="220" y1="48" x2="300" y2="95" marker-end="url(#micL02h)"/>
+            <rect class="fg-box" x="5" y="98" width="110" height="50" rx="6"/>
+            <text x="12" y="118" class="t-sm">anemia</text>
+            <text x="12" y="136" class="t-sm t-mut">schistocytes</text>
+            <rect class="fg-box" x="125" y="98" width="110" height="50" rx="6"/>
+            <text x="132" y="118" class="t-sm">↓ platelets</text>
+            <text x="132" y="136" class="t-sm t-mut">consumption</text>
+            <rect class="fg-box" x="245" y="98" width="110" height="50" rx="6"/>
+            <text x="252" y="118" class="t-sm">AKI</text>
+            <text x="252" y="136" class="t-sm t-mut">↓ renal flow</text>
+          </svg>
+        caption: "جلطات صغيرة على endothelium متعوّر بتكسّر كرات الدم وهي معدية (schistocytes)، وبتاكل الـ platelets، وبتسد الكلية."
+        alt: "Shiga toxin causes microthrombi on damaged endothelium, leading to three results: anemia with schistocytes from mechanical hemolysis, thrombocytopenia from platelet consumption, and acute kidney injury from reduced renal blood flow."
+        page: 143
+        quote: "Shiga toxin causes hemolytic-uremic syndrome—triad of anemia, thrombocytopenia, and acute kidney injury due to microthrombi forming on damaged endothelium"
+      - kind: check
+        question: "A child has bloody diarrhea after a hamburger, then anemia with schistocytes, low platelets and rising creatinine. Why give no antidiarrheal or antibiotic-based workup on sorbitol?"
+        options:
+          - "The strain, EHEC O157:H7, does not ferment sorbitol, which the lab uses to find it"
+          - "The strain ferments sorbitol but not lactose"
+          - "The strain is EPEC, which flattens villi"
+          - "The strain is ETEC, which is noninvasive"
+        answer: 0
+        why:
+          - "صح: الـ EHEC ما بيخمّرش sorbitol، والمعمل بيستخدم ده يفرزه من باقي الـ E coli."
+          - "العكس: الـ EHEC lactose ⊕ و sorbitol ⊝."
+          - "الـ EPEC مالوش toxin ومش بيعمل HUS."
+          - "الـ ETEC مائي ومش بيعمل HUS."
+        page: 143
+        quote: "Does not ferment sorbitol (vs other E coli). EHEC associated with hemorrhage, hamburgers, hemolytic-uremic syndrome."
+      - kind: mnemonic
+        word: "ABCDE"
+        parts:
+          - { key: "A", text: "Aspiration pneumonia" }
+          - { key: "B", text: "aBscess in lungs and liver" }
+          - { key: "C", text: "Currant jelly sputum" }
+          - { key: "D", text: "Diabetes mellitus" }
+          - { key: "E", text: "EtOH overuse" }
+        hook: "ABCDE's of Klebsiella (الكتاب): capsule كبيرة ← مستعمرات mucoid"
+        page: 143
+        quote: "ABCDE’s of Klebsiella: Aspiration pneumonia aBscess in lungs and liver “Currant jelly” sputum Diabetes mellitus EtOH overuse"
+      - kind: table
+        title: "الـ curved rods وصحابهم"
+        columns: ["Organism", "Clue", "Big deal"]
+        rows:
+          - ["Campylobacter jejuni", "Comma/S shape, grows at 42°C", "Bloody diarrhea from poultry → Guillain-Barré, reactive arthritis"]
+          - ["Proteus mirabilis", "Urease ⊕, swarming motility", "UTI → struvite staghorn calculi"]
+          - ["Vibrio cholerae", "Comma, alkaline media, acid labile", "Rice-water diarrhea (Gs → cAMP); oral rehydration"]
+          - ["Vibrio vulnificus", "Sea water", "Necrotizing fasciitis with high serum iron (cirrhosis, hemochromatosis)"]
+          - ["H pylori", "Catalase, oxidase, urease ⊕", "Gastritis, duodenal ulcer, gastric adenocarcinoma, MALT lymphoma"]
+        hide: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]]
+        page: 144
+        quote: "Presents as cellulitis that can progress to necrotizing fasciitis in high-risk patients, especially those with high serum iron (eg, cirrhosis, hemochromatosis)."
+      - kind: aside
+        tone: exam
+        text: "الـ H pylori: ==triple ⊕== (catalase، oxidase، urease). العلاج الأول triple therapy: amoxicillin (أو metronidazole لو allergy) + clarithromycin + PPI. ولو خايف من macrolide resistance: bismuth quadruple."
+        page: 144
+        quote: "Most common initial treatment is triple therapy: amoxicillin (metronidazole if penicillin allergy) + clarithromycin + proton pump inhibitor; antibiotics cure Pylori."
+      - kind: sort
+        prompt: "الإسهال ده شكله إيه؟"
+        bins: ["Bloody (dysentery)", "Watery"]
+        cards:
+          - { text: "Shigella", bin: 0 }
+          - { text: "EHEC", bin: 0 }
+          - { text: "Campylobacter", bin: 0 }
+          - { text: "EIEC", bin: 0 }
+          - { text: "ETEC", bin: 1 }
+          - { text: "V cholerae", bin: 1 }
+          - { text: "EPEC", bin: 1 }
+        why: "اللي بيـ invade أو عنده Shiga toxin بيعمل دم. اللي بيلعب في الـ cAMP/cGMP أو بيفرطح الـ villi بس بيعمل إسهال مائي."
+        page: 143
+        quote: "Dysentery (toxin alone causes necrosis and inflammation)."
+      - kind: try
+        items: [mic.L02.121, mic.L02.132, mic.L02.135, mic.L02.142, mic.L02.148]
+    recap:
+      - "Shigella: acid stable، low dose، 4 F's، المضاد بيقصّر المرض."
+      - "S typhi: pulse-temperature dissociation، rose spots، carrier في الـ gallbladder."
+      - "EHEC O157:H7: HUS، sorbitol ⊝. ETEC: traveler's. EPEC: أطفال."
+      - "Campylobacter 42°C ← Guillain-Barré. Proteus ← staghorn. Vibrio vulnificus ← iron."
+      - "H pylori triple ⊕؛ triple therapy."
+    practice: [mic.L02.120, mic.L02.121, mic.L02.122, mic.L02.123, mic.L02.124, mic.L02.125, mic.L02.126, mic.L02.127, mic.L02.128, mic.L02.129, mic.L02.130, mic.L02.131, mic.L02.132, mic.L02.133, mic.L02.134, mic.L02.135, mic.L02.136, mic.L02.137, mic.L02.138, mic.L02.139, mic.L02.140, mic.L02.141, mic.L02.142, mic.L02.143, mic.L02.144, mic.L02.145, mic.L02.146, mic.L02.147, mic.L02.148, mic.L02.149]
+  - id: mic.L02.lesson7
+    title: "الـ spirochetes: Lyme و Leptospira و Syphilis"
+    hook: "3 بكتيريا ملفوفة، كل واحدة ليها حشرة أو مية أو علاقة"
+    minutes: 10
+    pages: [144, 146]
+    topics: [spirochetes, lyme-disease, leptospira-interrogans, syphilis, diagnosing-syphilis]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "مين يتشاف وإزاي"
+        text: |-
+          الـ spirochetes: **Leptospira و Treponema و Borrelia** (Little Twirling Bacteria). حلزونية وعندها axial filaments.
+
+          - ==Borrelia بس== كبيرة كفاية تتشاف بالـ Wright أو Giemsa.
+          - الـ Treponema محتاجة **dark-field** أو DFA microscopy.
+        page: 144
+        quote: "Only Borrelia can be visualized using aniline dyes (Wright or Giemsa stain) in light microscopy due to size. Treponema is visualized by dark-field microscopy or direct fluorescent antibody (DFA) microscopy."
+      - kind: aside
+        tone: trap
+        text: "مريض اتعالج من syphilis وبعد ساعات جاله fever و chills و myalgia؟ ده مش allergy: ده ==Jarisch-Herxheimer reaction==، الجسم بيرد على الـ antigens اللي اتفرجت فجأة لما البكتيريا ماتت."
+        page: 144
+        quote: "Jarisch-Herxheimer reaction—flulike symptoms (fever, chills, headache, myalgia) after antibiotics are started due to host response to sudden release of bacterial antigens."
+      - kind: explain
+        title: "Lyme: القرادة والفار والغزال"
+        text: |-
+          **Borrelia burgdorferi**، بتنقلها ==Ixodes deer tick== (نفس القرادة بتنقل Anaplasma و Babesia). الـ reservoir هو **الفار**؛ الغزال مهم لحياة القرادة بس مش شايل البكتيريا. منتشر في الـ northeastern US.
+
+          - **Stage 1**: erythema migrans (bulls-eye) و flulike.
+          - **Stage 2**: lesions تانية، carditis و ==AV block==، facial (Bell) palsy، arthritis متنقل.
+          - **Stage 3**: encephalopathy، chronic arthritis، peripheral neuropathy.
+        page: 144
+        quote: "Stage 1—early localized: erythema migrans (typical “bulls-eye” configuration B is pathognomonic but not always present), flulike symptoms."
+      - kind: mnemonic
+        word: "FACE"
+        parts:
+          - { key: "F", text: "Facial nerve palsy (typically bilateral)" }
+          - { key: "A", text: "Arthritis" }
+          - { key: "C", text: "Cardiac block" }
+          - { key: "E", text: "Erythema migrans" }
+        hook: "A Key Lyme pie to the FACE (الكتاب)"
+        page: 144
+        quote: "A Key Lyme pie to the FACE: Facial nerve palsy (typically bilateral) Arthritis Cardiac block Erythema migrans"
+      - kind: check
+        question: "A pregnant woman has erythema migrans. Which drug?"
+        options:
+          - "Amoxicillin"
+          - "Doxycycline"
+          - "Ciprofloxacin"
+          - "Penicillin G benzathine"
+        answer: 0
+        why:
+          - "صح: في الحمل والأطفال تحت 8 سنين: amoxicillin."
+          - "الـ doxycycline الأول عادةً، بس مش في الحمل."
+          - "مش علاج Lyme في الكتاب."
+          - "ده علاج الـ syphilis."
+        page: 144
+        quote: "Treatment: doxycycline (1st line); amoxicillin (pregnant patients, children <8 years old); ceftriaxone if IV therapy required"
+      - kind: explain
+        title: "Leptospira: الميه وبول الحيوانات"
+        text: |-
+          spirochete بأطراف زي ==الشنكل==، في الميه الملوّثة ببول الحيوانات. منتشر في الـ surfers والمناطق الاستوائية (Hawaii).
+
+          **Leptospirosis**: flulike، ألم في ==السمانة== بالذات، jaundice، photophobia مع **conjunctival suffusion** (عين حمرا من غير صديد).
+
+          **Weil disease** (الشكل الشديد): jaundice و azotemia (كبد وكلى)، fever، نزيف، و anemia.
+        page: 145
+        quote: "Leptospirosis—flulike symptoms, myalgias (classically of calves), jaundice, photophobia with conjunctival suffusion (erythema without exudate)."
+      - kind: figure
+        title: "مراحل الـ syphilis"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="micL02s" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="5" y="15" width="105" height="70" rx="8"/>
+            <text x="12" y="34" class="t-sm t-b">Primary</text>
+            <text x="12" y="52" class="t-sm">painless chancre</text>
+            <text x="12" y="70" class="t-sm t-mut">dark-field ⊕</text>
+            <line class="fg-arrow" x1="110" y1="50" x2="125" y2="50" marker-end="url(#micL02s)"/>
+            <rect class="fg-acc" x="128" y="15" width="105" height="70" rx="8"/>
+            <text x="135" y="34" class="t-sm t-b">Secondary</text>
+            <text x="135" y="52" class="t-sm">palms/soles rash</text>
+            <text x="135" y="70" class="t-sm">condylomata lata</text>
+            <line class="fg-arrow" x1="233" y1="50" x2="248" y2="50" marker-end="url(#micL02s)"/>
+            <rect class="fg-bad" x="251" y="15" width="105" height="70" rx="8"/>
+            <text x="258" y="34" class="t-sm t-b">Tertiary</text>
+            <text x="258" y="52" class="t-sm">gummas, aortitis</text>
+            <text x="258" y="70" class="t-sm">tabes, AR pupil</text>
+            <text x="135" y="110" class="t-sm t-mut">latent: ⊕ serology only</text>
+            <rect class="fg-box" x="5" y="125" width="350" height="38" rx="8"/>
+            <text x="12" y="142" class="t-sm">Congenital: rhagades, snuffles, saddle nose,</text>
+            <text x="12" y="157" class="t-sm">Hutchinson teeth, mulberry molars, saber shins, CN VIII deafness</text>
+          </svg>
+        caption: "الـ syphilis بيبدأ بقرحة مش بتوجع، وبعدين بينتشر (rash في الكفوف والرجلين)، وبعد سنين يضرب الأوعية والأعصاب. واللي بيتولد بيه ليه شكل مميز."
+        alt: "Three stages of syphilis left to right: primary with a painless chancre seen on dark-field microscopy, secondary with a palms and soles rash and condylomata lata, tertiary with gummas, aortitis, tabes dorsalis and Argyll Robertson pupil. Latent syphilis has only positive serology. Below, congenital syphilis features."
+        page: 145
+        quote: "Gummas E (chronic granulomas), aortitis (vasa vasorum destruction), neurosyphilis (tabes dorsalis, “general paresis”), Argyll Robertson pupil (constricts with accommodation but is not reactive to light)."
+      - kind: aside
+        tone: tip
+        text: "الـ ==Argyll Robertson pupil==: بيضيق مع الـ accommodation بس مش مع النور. الحفظة المشهورة: زي البنت اللي بتـ accommodate بس مش بترد (prostitute's pupil). وعلامات الـ tertiary كمان: ataxia بقاعدة واسعة، Romberg ⊕، Charcot joint، stroke من غير ضغط."
+        page: 145
+        quote: "Signs: broad-based ataxia, ⊕ Romberg, Charcot joint, stroke without hypertension."
+      - kind: explain
+        title: "تشخيص الـ syphilis"
+        text: |-
+          - **Nontreponemal** (VDRL، RPR): antibody ضد ==beef cardiolipin==. رخيص، quantitative، sensitive بس مش specific. ==بيرجع ⊝ بعد العلاج==.
+          - **Treponemal** (FTA-ABS، TP-PA): specific، و ==بيفضل ⊕ طول العمر==.
+          - **Direct**: dark-field أو PCR.
+
+          الـ VDRL ⊕ في ~80% من الـ primary. والعلاج كله: **penicillin G**. وفي الحمل: عالج بدري، لأن الـ placenta بتنقل غالباً بعد الـ first trimester.
+        page: 146
+        quote: "Nontreponemal tests (VDRL, RPR) and direct testing revert to negative after treatment. Antibodies detected by treponemal tests (FTA- ABS, TP-PA) will remain positive."
+      - kind: mnemonic
+        word: "PVDRL"
+        parts:
+          - { key: "P", text: "Pregnancy" }
+          - { key: "V", text: "Viral infection (EBV, hepatitis)" }
+          - { key: "D", text: "Drugs (chlorpromazine, procainamide)" }
+          - { key: "R", text: "Rheumatic fever (rare)" }
+          - { key: "L", text: "Lupus (anticardiolipin) and Leprosy" }
+        hook: "False-Positive VDRL (الكتاب)"
+        page: 146
+        quote: "False-Positive results on VDRL with: Pregnancy Viral infection (eg, EBV, hepatitis) Drugs (eg, chlorpromazine, procainamide) Rheumatic fever (rare) Lupus (anticardiolipin antibody) and Leprosy"
+      - kind: case
+        stem: "A 29-year-old man has a rash on his palms and soles, patchy hair loss and smooth white lesions on his scrotum."
+        steps:
+          - question: "Which stage is this?"
+            options: ["Secondary syphilis", "Primary syphilis", "Tertiary syphilis", "Latent syphilis"]
+            answer: 0
+            why: "Rash في الكفوف والرجلين و condylomata lata و hair loss = secondary (systemic)."
+          - reveal: "RPR is 1:64 and FTA-ABS is positive. He is treated."
+            question: "One year later, which result shows successful treatment?"
+            options: ["RPR falls toward negative; FTA-ABS stays positive", "FTA-ABS becomes negative", "Both stay unchanged", "RPR rises"]
+            answer: 0
+            why: "الـ nontreponemal بيرجع ⊝ بعد العلاج، والـ treponemal بيفضل ⊕."
+        page: 146
+        quote: "Nontreponemal tests (VDRL, RPR) and direct testing revert to negative after treatment."
+      - kind: try
+        items: [mic.L02.150, mic.L02.154, mic.L02.158, mic.L02.161, mic.L02.167]
+    recap:
+      - "Borrelia بس بتتشاف بالـ Giemsa؛ Treponema بالـ dark-field."
+      - "Lyme: Ixodes، الفار reservoir، FACE، doxycycline (amoxicillin للحامل والطفل)."
+      - "Leptospira: ميه وبول حيوانات، سمانة، conjunctival suffusion، Weil disease."
+      - "Syphilis: VDRL بيرجع ⊝ بعد العلاج، FTA-ABS بيفضل ⊕. PVDRL للـ false positive."
+    practice: [mic.L02.150, mic.L02.151, mic.L02.152, mic.L02.153, mic.L02.154, mic.L02.155, mic.L02.156, mic.L02.157, mic.L02.158, mic.L02.159, mic.L02.160, mic.L02.161, mic.L02.162, mic.L02.163, mic.L02.164, mic.L02.165, mic.L02.166, mic.L02.167, mic.L02.168]
+  - id: mic.L02.lesson8
+    title: "Chlamydia و Gardnerella والحيوانات والقراد و Mycoplasma"
+    hook: "مين جه من بغبغان، مين من قطة، ومين من قرادة: الجدول ده لوحده كذا سؤال"
+    minutes: 10
+    pages: [146, 148]
+    topics: [chlamydiae, chlamydia-trachomatis-serotypes, gardnerella-vaginalis, zoonotic-bacteria, rickettsial-diseases, mycoplasma-pneumoniae]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Chlamydia: بتعيش على حساب الخلية"
+        text: |-
+          ==ما تقدرش تعمل ATP==، فهي obligate intracellular. ليها شكلين:
+
+          - **elementary body**: صغير وتقيل، هو اللي ==enfectious== وبيدخل الخلية بالـ endocytosis.
+          - **reticulate body**: بيتكاثر جوه الخلية بالـ fission، وبعدين يرجع elementary bodies.
+
+          وحيطتها ناقصها peptidoglycan (muramic acid قليل) ← ==β-lactams ما بتشتغلش==.
+        page: 146
+        quote: "Chlamydial cell wall lacks classic peptidoglycan (due to reduced muramic acid), rendering β-lactam antibiotics ineffective."
+      - kind: table
+        title: "الـ serotypes"
+        columns: ["Serotypes", "Disease", "Hook"]
+        rows:
+          - ["A, B, C", "Chronic follicular conjunctivitis → blindness", "Africa, Blindness, Chronic"]
+          - ["D–K", "Urethritis/PID, neonatal pneumonia (staccato cough, eosinophilia), neonatal conjunctivitis (1-2 weeks)", "Everything else"]
+          - ["L1–L3", "Lymphogranuloma venereum: painless ulcer → painful buboes", ""]
+        hide: [[0, 1], [1, 1], [2, 1]]
+        page: 146
+        quote: "Types L1, L2, and L3 Lymphogranuloma venereum—small, painless ulcers on genitals → swollen, painful inguinal lymph nodes that ulcerate (buboes). Treat with doxycycline."
+      - kind: aside
+        tone: exam
+        text: "conjunctivitis في مولود: لو في ==2-5 أيام== فكّر gonococcus، لو في ==1-2 أسبوع== فكّر Chlamydia D–K."
+        page: 146
+        quote: "Types D–K Urethritis/PID, neonatal pneumonia (staccato cough) with eosinophilia, neonatal conjunctivitis (1-2 weeks after birth)."
+      - kind: check
+        question: "A woman with chlamydial cervicitis is 20 weeks pregnant. Treatment?"
+        options:
+          - "Azithromycin"
+          - "Doxycycline"
+          - "Amoxicillin-clavulanate"
+          - "Ceftriaxone alone"
+        answer: 0
+        why:
+          - "صح: الـ azithromycin للحوامل."
+          - "الـ doxycycline العلاج العادي بس مش في الحمل."
+          - "الـ β-lactams ما بتشتغلش على Chlamydia."
+          - "الـ ceftriaxone بيتضاف بس لو gonorrhea ⊕."
+        page: 146
+        quote: "Treatment: doxycycline, azithromycin (for pregnant patients)."
+      - kind: explain
+        title: "Bacterial vaginosis"
+        text: |-
+          **Gardnerella vaginalis** (pleomorphic، gram-variable). إفرازات رمادي بريحة ==سمك==، ومن غير ألم. مرتبطة بالـ sexual activity بس ==مش STI==. السبب إن الـ lactobacilli قلّت فالـ anaerobes كترت.
+
+          - **clue cells**: خلايا الـ vagina مغطية بالـ Gardnerella.
+          - **whiff test**: الإفراز + 10% KOH ← الريحة تزيد.
+          - **pH >4.5**.
+
+          العلاج: metronidazole أو clindamycin.
+        page: 147
+        quote: "Amine whiff test—mixing discharge with 10% KOH enhances fishy odor. Vaginal pH >4.5 during infection. Treatment: metronidazole or clindamycin."
+      - kind: match
+        prompt: "وصّل كل حيوان أو حشرة بالمرض"
+        pairs:
+          - ["Parrots", "Psittacosis (Chlamydophila psittaci)"]
+          - ["Cat scratch", "Bartonella"]
+          - ["Cattle/sheep amniotic fluid", "Q fever (Coxiella)"]
+          - ["Rabbits, deer flies", "Tularemia (Francisella)"]
+          - ["Armadillo", "Leprosy"]
+          - ["Lone Star tick", "Ehrlichiosis"]
+        why: "الجدول بتاع الـ zoonoses: الطيور ← psittaci، القطة بتخربش ← Bartonella وبتعض ← Pasteurella، والـ amniotic fluid ← Coxiella."
+        page: 147
+        quote: "Chlamydophila psittaci Psittacosis Parrots, other birds Coxiella burnetii Q fever Aerosols of cattle/sheep amniotic fluid"
+      - kind: sort
+        prompt: "مين بينقله إيه؟"
+        bins: ["Tick", "Louse", "Flea"]
+        cards:
+          - { text: "Rocky Mountain spotted fever", bin: 0 }
+          - { text: "Lyme disease", bin: 0 }
+          - { text: "Anaplasmosis", bin: 0 }
+          - { text: "Epidemic typhus", bin: 1 }
+          - { text: "Relapsing fever", bin: 1 }
+          - { text: "Endemic typhus", bin: 2 }
+          - { text: "Plague", bin: 2 }
+        why: "القراد: Lyme و Anaplasma (Ixodes)، RMSF (Dermacentor)، Ehrlichia (Amblyomma). القمل: R prowazekii و B recurrentis. البراغيث: R typhi و Y pestis."
+        page: 147
+        quote: "Rickettsia prowazekii Epidemic typhus Human to human via human body louse Rickettsia rickettsii Rocky Mountain spotted fever Dermacentor (dog tick) Rickettsia typhi Endemic typhus Fleas"
+      - kind: explain
+        title: "الـ rickettsial: الـ rash بيبدأ منين؟"
+        text: |-
+          كلهم علاجهم ==doxycycline==.
+
+          - **RMSF** (R rickettsii، قرادة؛ غالباً في الـ South Atlantic زي North Carolina): الـ rash ==بيبدأ من الرسغ والكاحل== ويطلع للجذع والكفوف. Triad: headache و fever و rash (vasculitis).
+          - **Typhus** (R typhi بالبراغيث، R prowazekii بالقمل): الـ rash ==بيبدأ من الجذع== ويطلع لبره، ومش بيوصل للكفوف.
+
+          الكتاب: Rickettsii on the wrists، typhus on the trunk.
+        page: 148
+        quote: "Rickettsii on the wrists, typhus on the trunk."
+      - kind: aside
+        tone: tip
+        text: "Rash على الكفوف والرجلين: ==CARS== (you drive CARS using your palms and soles): Coxsackievirus A، Rocky Mountain spotted fever، و 2° Syphilis."
+        page: 148
+        quote: "Palms and soles rash is seen in Coxsackievirus A infection (hand, foot, and mouth disease), Rocky Mountain spotted fever, and 2° Syphilis (you drive CARS using your palms and soles)."
+      - kind: figure
+        title: "الـ morulae: MEGA"
+        svg: |-
+          <svg viewBox="0 0 360 140" xmlns="http://www.w3.org/2000/svg">
+            <circle class="fg-box" cx="80" cy="65" r="45"/>
+            <ellipse class="fg-ink" cx="65" cy="60" rx="22" ry="18" fill="none"/>
+            <circle class="fg-dot-acc" cx="98" cy="48" r="4"/>
+            <circle class="fg-dot-acc" cx="104" cy="54" r="4"/>
+            <circle class="fg-dot-acc" cx="98" cy="58" r="4"/>
+            <circle class="fg-dot-acc" cx="105" cy="62" r="4"/>
+            <text x="30" y="128" class="t-sm t-b">Monocyte = Ehrlichia</text>
+            <circle class="fg-box" cx="270" cy="65" r="45"/>
+            <circle class="fg-ink" cx="250" cy="55" r="9" fill="none"/>
+            <circle class="fg-ink" cx="268" cy="72" r="9" fill="none"/>
+            <circle class="fg-ink" cx="250" cy="82" r="9" fill="none"/>
+            <circle class="fg-dot-good" cx="290" cy="50" r="4"/>
+            <circle class="fg-dot-good" cx="296" cy="56" r="4"/>
+            <circle class="fg-dot-good" cx="290" cy="60" r="4"/>
+            <text x="200" y="128" class="t-sm t-b">Granulocyte = Anaplasma</text>
+          </svg>
+        caption: "الـ morulae كتل شبه التوت جوه الـ cytoplasm. في الـ monocytes يبقى Ehrlichiosis، في الـ granulocytes يبقى Anaplasmosis (MEGA). والاتنين من القراد ومن غير rash غالباً."
+        alt: "Two cells with mulberry-like inclusions. Left: a monocyte with a kidney-shaped nucleus and morulae, labelled Ehrlichia. Right: a granulocyte with a lobed nucleus and morulae, labelled Anaplasma."
+        page: 148
+        quote: "MEGA: Monocytes = Ehrlichiosis Granulocytes = Anaplasmosis"
+      - kind: explain
+        title: "Q fever و Mycoplasma"
+        text: |-
+          **Q fever** (Coxiella): ==مالوش vector== ومالوش rash؛ بتتنفسه من الـ amniotic fluid بتاع البقر والغنم. headache و cough و pneumonia وممكن hepatitis، وسبب مشهور للـ ==culture ⊝ endocarditis==. بيعيش بره في شكل endospore (Quite Complicated).
+
+          **Mycoplasma pneumoniae**: walking pneumonia في الأقل من 30 سنة (عساكر، سجون، جامعات). الـ CXR ==أوحش من المريض==. مالوش cell wall فالـ penicillin ما بيشتغلش، والـ membrane فيها sterols. وعنده **cold agglutinins** (IgM). العلاج macrolides أو doxycycline أو fluoroquinolone.
+        page: 148
+        quote: "CXR appears more severe than patient presentation. High titer of cold agglutinins (IgM), which can agglutinate RBCs."
+      - kind: check
+        question: "A sheep farmer has pneumonia, hepatitis and later culture-negative endocarditis. No rash, no tick bite. Organism?"
+        options:
+          - "Coxiella burnetii"
+          - "Rickettsia rickettsii"
+          - "Ehrlichia chaffeensis"
+          - "Brucella"
+        answer: 0
+        why:
+          - "صح: Q fever من الـ amniotic fluid، مالوش vector ولا rash، و culture ⊝ endocarditis."
+          - "RMSF ليه rash وقرادة."
+          - "Ehrlichia من قرادة، morulae في الـ monocytes."
+          - "Brucella من اللبن و undulant fever، والكتاب ما ربطهاش بالـ culture ⊝ endocarditis."
+        page: 148
+        quote: "Presents with headache, cough, flulike symptoms, pneumonia, possibly in combination with hepatitis. Common cause of culture ⊝ endocarditis."
+      - kind: try
+        items: [mic.L02.170, mic.L02.174, mic.L02.177, mic.L02.185, mic.L02.190]
+    recap:
+      - "Chlamydia: elementary body بيعدي، reticulate بيتكاثر؛ β-lactams مش شغالة؛ doxycycline (azithromycin للحامل)."
+      - "Bacterial vaginosis: clue cells، whiff ⊕، pH >4.5، metronidazole."
+      - "RMSF من الرسغ، typhus من الجذع؛ CARS للكفوف؛ MEGA للـ morulae."
+      - "Q fever: مالوش vector، culture ⊝ endocarditis. Mycoplasma: cold agglutinins و CXR أوحش من المريض."
+    practice: [mic.L02.169, mic.L02.170, mic.L02.171, mic.L02.172, mic.L02.173, mic.L02.174, mic.L02.175, mic.L02.176, mic.L02.177, mic.L02.178, mic.L02.179, mic.L02.180, mic.L02.181, mic.L02.182, mic.L02.183, mic.L02.184, mic.L02.185, mic.L02.186, mic.L02.187, mic.L02.188, mic.L02.189, mic.L02.190, mic.L02.191]

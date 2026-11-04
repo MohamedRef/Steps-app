@@ -28,6 +28,7 @@ pub(super) fn plan(
         hidden: &hidden,
         max_new: crate::plan::new_left_today(&*s, now),
         budget_secs: minutes * 60,
+        pages: s.pages_read(),
     })
 }
 

@@ -13,6 +13,7 @@ pub mod import;
 mod install;
 pub mod notes;
 pub mod own;
+pub mod pages;
 mod paths;
 pub mod sync;
 

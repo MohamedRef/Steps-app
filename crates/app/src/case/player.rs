@@ -83,7 +83,10 @@ pub fn CasePlayer(item_id: String, on_back: EventHandler) -> Element {
                 // What is known so far: the stem, every reveal up to this
                 // step, and each finished step's question and answer.
                 crate::ui::Card { class: "case-data",
-                    h2 { class: "label", {tx::KNOWN} }
+                    div { class: "case-data-head",
+                        h2 { class: "label", {tx::KNOWN} }
+                        crate::labs::LabButton {}
+                    }
                     bdi { class: "case-stem", lang: "en", "{stem}" }
                     for (i, s) in steps.iter().enumerate().take(k + 1) {
                         div { key: "{i}", id: "case-step-{i}", class: "case-history",
