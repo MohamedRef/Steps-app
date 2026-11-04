@@ -1,0 +1,385 @@
+schema: steps.lesson/v1
+lecture: neuro.L01
+lessons:
+  - id: neuro.L01.lesson1
+    title: "الجهاز العصبي بيتبني إزاي؟"
+    hook: "أنبوبة واحدة بتطلع منها المخ كله والحبل الشوكي، وشوية خلايا بتهرب منها بتعمل الأعصاب الطرفية"
+    minutes: 8
+    pages: [500, 500]
+    topics: [neural-development, regionalization-of-neural-tube, cns-pns-origins]
+    goals:
+      - "تعرف مين بيقول للـ ectoderm يبقى أعصاب"
+      - "تفرّق الـ alar من الـ basal plate ومين بيعمل كل واحد"
+      - "ترتّب الـ 5 vesicles وتعرف كل واحد بيطلع إيه"
+      - "تعرف كل خلية في الجهاز العصبي جاية منين"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "البداية: الـ notochord بيدّي الأمر"
+        text: |-
+          الـ ==notochord== (عمود في نص الجنين) بيبعت إشارات للـ ectoderm اللي فوقه، فيتحول لـ **neuroectoderm** ويبقى **neural plate**.
+
+          والـ notochord نفسه مش بيختفي كله: بيفضل منه ==nucleus pulposus== جوه الـ intervertebral discs.
+
+          الـ neural plate بيطلع منه حاجتين:
+          - **neural tube**: هيبقى المخ والحبل الشوكي.
+          - **neural crest cells**: خلايا بتنفصل من حافة الأنبوبة وتهاجر.
+        page: 500
+        quote: "Notochord (precursor to nucleus pulposus of intervertebral discs) induces ectoderm to form neuroectoderm → neural plate. Neural plate gives rise to neural tube and neural crest cells."
+      - kind: figure
+        title: "مقطع في الـ neural tube"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <ellipse class="fg-box" cx="120" cy="100" rx="70" ry="85"/>
+            <ellipse class="fg-thin" cx="120" cy="100" rx="10" ry="45"/>
+            <rect class="fg-acc" x="62" y="30" width="45" height="55" rx="8"/>
+            <rect class="fg-acc" x="133" y="30" width="45" height="55" rx="8"/>
+            <rect class="fg-good" x="62" y="115" width="45" height="55" rx="8"/>
+            <rect class="fg-good" x="133" y="115" width="45" height="55" rx="8"/>
+            <line class="fg-thin" x1="50" y1="100" x2="190" y2="100"/>
+            <text x="68" y="62" class="t-sm t-acc">alar</text>
+            <text x="139" y="62" class="t-sm t-acc">alar</text>
+            <text x="64" y="147" class="t-sm t-good">basal</text>
+            <text x="135" y="147" class="t-sm t-good">basal</text>
+            <circle class="fg-dot-good" cx="120" cy="196" r="4"/>
+            <text x="210" y="40" class="t-sm t-b">Dorsal (back)</text>
+            <text x="210" y="58" class="t-sm t-acc">Alar plate: sensory</text>
+            <text x="210" y="76" class="t-sm">induced by BMPs</text>
+            <text x="210" y="130" class="t-sm t-b">Ventral (front)</text>
+            <text x="210" y="148" class="t-sm t-good">Basal plate: motor</text>
+            <text x="210" y="166" class="t-sm">induced by SHH</text>
+            <text x="210" y="190" class="t-sm t-mut">notochord below</text>
+          </svg>
+        caption: "الحيطان الجانبية للأنبوبة بتتقسم: فوق (dorsal) الـ alar plate وده sensory، وتحت (ventral) الـ basal plate وده motor. نفس ترتيب الحبل الشوكي: dorsal horn حسي و ventral horn حركي."
+        alt: "Cross-section of the neural tube. The dorsal half of each lateral wall is the alar plate, labelled sensory and induced by BMPs. The ventral half is the basal plate, labelled motor and induced by SHH, with the notochord below."
+        page: 500
+        quote: "Alar plate (dorsal): sensory; induced by bone morphogenetic proteins (BMPs) Same orientation as spinal cord Basal plate (ventral): motor; induced by sonic hedgehog (SHH)"
+      - kind: reveal
+        prompt: "الـ SHH جاي من الـ notochord اللي تحت الأنبوبة. فكّر: ليه منطقي إنه يعمل الـ basal (ventral) plate بالذات؟"
+        answer: "لأن الإشارة بتبقى أقوى في الحتة الأقرب للمصدر. الـ notochord **ventral** للأنبوبة، فالـ SHH بيشكّل الحتة اللي جنبه: الـ **basal plate** ← **motor**. والـ BMPs جايين من فوق (من الـ ectoderm) فبيعملوا الـ alar plate الـ sensory. (ده تفسير فسيولوجي مقبول، والكتاب بيدّيك المعلومة: SHH = basal = motor.)"
+        page: 500
+        quote: "Basal plate (ventral): motor; induced by sonic hedgehog (SHH)"
+      - kind: aside
+        tone: tip
+        text: "حيلة: الـ ==Basal== = **B**ottom (ventral) = حركة، والـ **A**lar = **A**bove (dorsal) = إحساس. وخلّي بالك من الفخ: الـ **B**MP مش بتاع الـ **B**asal، ده بيعمل الـ alar."
+        page: 500
+        quote: "Alar plate (dorsal): sensory; induced by bone morphogenetic proteins (BMPs)"
+      - kind: explain
+        title: "الـ HOX genes: مين فوق ومين تحت"
+        text: |-
+          الـ **HOX (homeobox) genes** هي اللي بتقسم الأنبوبة لـ segments وبتحدد الـ ==cranial-caudal== (الراس من الديل).
+
+          ولأنها جينات «تحديد مكان» في الجسم كله، الطفرات فيها بتبان بره المخ: ==syndactyly== في الأطراف و **hypospadias** في الجهاز البولي التناسلي.
+        page: 500
+        quote: "Homeobox (HOX) genes regulate neural tube segmentation, cranial-caudal differentiation. Mutations → syndactyly (limbs), hypospadias (urogenital)."
+      - kind: check
+        question: "An embryo lacks sonic hedgehog signaling from the notochord. Which part of the spinal cord fails to form?"
+        options:
+          - "Basal plate (motor neurons)"
+          - "Alar plate (sensory neurons)"
+          - "Neural crest (dorsal root ganglia)"
+          - "Nucleus pulposus"
+        answer: 0
+        why:
+          - "صح: الـ SHH بيعمل الـ basal plate الـ ventral، وده الـ motor."
+          - "الـ alar plate (sensory) بيعمله الـ BMPs."
+          - "الـ DRG من الـ neural crest، والكتاب ما ربطهاش بالـ SHH."
+          - "الـ nucleus pulposus بقية الـ notochord نفسه، مش حاجة الـ SHH بيعملها في الأنبوبة."
+        page: 500
+        quote: "Basal plate (ventral): motor; induced by sonic hedgehog (SHH)"
+      - kind: explain
+        title: "3 حويصلات ← 5"
+        text: |-
+          راس الأنبوبة بتنفخ 3 **primary vesicles**: forebrain و midbrain و hindbrain. وبعدين الـ forebrain والـ hindbrain كل واحد بيتقسم اتنين، فيبقوا ==5 secondary vesicles==.
+
+          الكتاب بيدّيك حيلة للترتيب: ==telencephalon الأول==، **diencephalon التاني** (di = اتنين)، والباقي بالترتيب الأبجدي: **mes**encephalon ← **met**encephalon ← **my**elencephalon.
+        page: 500
+        quote: "Telencephalon is the 1st part. Diencephalon is the 2nd part. The rest are arranged alphabetically: mesencephalon, metencephalon, myelencephalon."
+      - kind: figure
+        title: "كل حويصلة بتطلع إيه"
+        svg: |-
+          <svg viewBox="0 0 390 262" xmlns="http://www.w3.org/2000/svg">
+            <text x="6" y="16" class="t-sm t-b">Primary</text>
+            <text x="100" y="16" class="t-sm t-b">Secondary</text>
+            <text x="206" y="16" class="t-sm t-b">Walls / cavity</text>
+            <rect class="fg-acc" x="4" y="28" width="86" height="84" rx="8"/>
+            <text x="10" y="66" class="t-sm">Forebrain</text>
+            <text x="8" y="82" class="t-sm t-mut">prosen-</text>
+            <text x="8" y="96" class="t-sm t-mut">cephalon</text>
+            <rect class="fg-box" x="100" y="28" width="96" height="38" rx="6"/>
+            <text x="106" y="51" class="t-sm">Telencephalon</text>
+            <rect class="fg-box" x="100" y="74" width="96" height="38" rx="6"/>
+            <text x="106" y="97" class="t-sm">Diencephalon</text>
+            <rect class="fg-good" x="4" y="122" width="86" height="38" rx="8"/>
+            <text x="10" y="145" class="t-sm">Midbrain</text>
+            <rect class="fg-box" x="100" y="122" width="96" height="38" rx="6"/>
+            <text x="106" y="145" class="t-sm">Mesencephalon</text>
+            <rect class="fg-bad" x="4" y="170" width="86" height="84" rx="8"/>
+            <text x="10" y="208" class="t-sm">Hindbrain</text>
+            <text x="8" y="224" class="t-sm t-mut">rhomben-</text>
+            <text x="8" y="238" class="t-sm t-mut">cephalon</text>
+            <rect class="fg-box" x="100" y="170" width="96" height="38" rx="6"/>
+            <text x="106" y="193" class="t-sm">Metencephalon</text>
+            <rect class="fg-box" x="100" y="216" width="96" height="38" rx="6"/>
+            <text x="106" y="239" class="t-sm">Myelencephalon</text>
+            <text x="210" y="44" class="t-sm">Hemispheres, basal ganglia</text>
+            <text x="210" y="59" class="t-sm t-acc">lateral ventricles</text>
+            <text x="210" y="90" class="t-sm">Thalamus, hypothalamus, retina</text>
+            <text x="210" y="105" class="t-sm t-acc">third ventricle</text>
+            <text x="210" y="138" class="t-sm">Midbrain</text>
+            <text x="210" y="153" class="t-sm t-acc">cerebral aqueduct</text>
+            <text x="210" y="186" class="t-sm">Pons, cerebellum</text>
+            <text x="210" y="201" class="t-sm t-acc">upper 4th ventricle</text>
+            <text x="210" y="232" class="t-sm">Medulla</text>
+            <text x="210" y="247" class="t-sm t-acc">lower 4th ventricle</text>
+          </svg>
+        caption: "الحيطة بتبقى أنسجة المخ، والتجويف بيبقى الـ ventricles. لاحظ إن الـ retina جاية من الـ diencephalon: العين حتة من المخ طالعة لبره."
+        alt: "Table-like diagram. Forebrain divides into telencephalon (cerebral hemispheres, basal ganglia; lateral ventricles) and diencephalon (thalamus, hypothalamus, retina; third ventricle). Midbrain stays mesencephalon (midbrain; cerebral aqueduct). Hindbrain divides into metencephalon (pons, cerebellum; upper fourth ventricle) and myelencephalon (medulla; lower fourth ventricle)."
+        page: 500
+        quote: "Telencephalon Diencephalon Mesencephalon Metencephalon Myelencephalon Cerebral hemispheres Thalamus Hypothalamus Midbrain Pons Cerebellum Medulla Spinal cord"
+      - kind: match
+        prompt: "وصّل كل secondary vesicle باللي بيطلع منه"
+        pairs:
+          - ["Telencephalon", "Cerebral hemispheres, basal ganglia"]
+          - ["Diencephalon", "Thalamus, hypothalamus, retina"]
+          - ["Mesencephalon", "Midbrain"]
+          - ["Metencephalon", "Pons, cerebellum"]
+          - ["Myelencephalon", "Medulla"]
+        why: "الـ **met**encephalon هو اللي «في النص» من الـ hindbrain فبيدّي الـ pons والـ cerebellum، والـ **my**elencephalon آخر واحد قبل الحبل الشوكي فبيدّي الـ medulla اللي بتكمّل فيه."
+        page: 500
+        quote: "Telencephalon Diencephalon Mesencephalon Metencephalon Myelencephalon Cerebral hemispheres Thalamus Hypothalamus Midbrain Pons Cerebellum Medulla Spinal cord"
+      - kind: explain
+        title: "كل خلية جاية منين"
+        text: |-
+          ثلاث مصادر بس:
+          - **Neuroepithelium** (جوه الـ neural tube): كل ==CNS== تقريباً: الـ neurons والـ glia (astrocytes و oligodendrocytes و ependymal cells).
+          - **Neural crest**: كل حاجة **PNS**: الـ dorsal root ganglia، والـ autonomic ganglia (sympathetic و parasympathetic و enteric)، والـ Schwann cells والـ satellite cells، وكمان الـ **adrenal medulla**.
+          - **Mesoderm**: الـ ==microglia== بس.
+        page: 500
+        quote: "Neuroepithelia in neural tube—CNS neurons, CNS glial cells (astrocytes, oligodendrocytes, ependymal cells). Neural crest—PNS neurons (dorsal root ganglia, autonomic ganglia [sympathetic, parasympathetic, enteric]), PNS glial cells (Schwann cells, satellite cells), adrenal medulla. Mesoderm—microglia (specialized macrophages)."
+      - kind: aside
+        tone: trap
+        text: "الـ ==microglia== هي الخلية الوحيدة في الـ CNS اللي **مش** من الـ neural tube. منطقي: هي **macrophages** متخصصة، والـ macrophages كلها mesoderm. والـ adrenal medulla أصلاً عبارة عن sympathetic ganglion متعدّل، فطبيعي تبقى neural crest."
+        page: 500
+        quote: "Mesoderm—microglia (specialized macrophages)."
+      - kind: sort
+        prompt: "حط كل خلية في المصدر بتاعها"
+        bins: ["Neural tube", "Neural crest", "Mesoderm"]
+        cards:
+          - { text: "Oligodendrocytes", bin: 0 }
+          - { text: "Astrocytes", bin: 0 }
+          - { text: "Ependymal cells", bin: 0 }
+          - { text: "Schwann cells", bin: 1 }
+          - { text: "Adrenal medulla", bin: 1 }
+          - { text: "Enteric ganglia", bin: 1 }
+          - { text: "Satellite cells", bin: 1 }
+          - { text: "Microglia", bin: 2 }
+        why: "الـ myelin جوه الـ CNS (oligodendrocytes) من الـ neural tube، وبره (Schwann) من الـ neural crest. والـ microglia لوحدها mesoderm."
+        page: 500
+        quote: "Neural crest—PNS neurons (dorsal root ganglia, autonomic ganglia [sympathetic, parasympathetic, enteric]), PNS glial cells (Schwann cells, satellite cells), adrenal medulla."
+      - kind: try
+        items: [neuro.L01.004, neuro.L01.008, neuro.L01.009, neuro.L01.013, neuro.L01.014]
+    recap:
+      - "الـ notochord بيحوّل الـ ectoderm لـ neural plate، وبيفضل منه الـ nucleus pulposus."
+      - "Alar = dorsal = sensory (BMPs). Basal = ventral = motor (SHH)."
+      - "HOX mutations ← syndactyly و hypospadias."
+      - "Tel ← Di ← Mes ← Met ← My؛ الـ retina من الـ diencephalon."
+      - "Neural tube = CNS، neural crest = PNS + adrenal medulla، mesoderm = microglia."
+    practice: [neuro.L01.001, neuro.L01.002, neuro.L01.003, neuro.L01.004, neuro.L01.005, neuro.L01.006, neuro.L01.007, neuro.L01.008, neuro.L01.009, neuro.L01.010, neuro.L01.011, neuro.L01.012, neuro.L01.013, neuro.L01.014, neuro.L01.015, neuro.L01.016]
+  - id: neuro.L01.lesson2
+    title: "لما الأنبوبة ما تتقفلش أو المخ ما يتقسمش"
+    hook: "من spina bifida لحد Chiari والـ syrinx: كل عيب بيحكي هو حصل في أنهي خطوة"
+    minutes: 10
+    pages: [501, 502]
+    topics: [neural-tube-defects, brain-malformations, posterior-fossa-malformations, syringomyelia]
+    goals:
+      - "ترتّب الـ spinal dysraphism من الأخف للأتقل"
+      - "تعرف ليه الـ AFP بيعلى وليه الـ anencephaly بتعمل polyhydramnios"
+      - "تفرّق Chiari I من Chiari II من Dandy-Walker"
+      - "تفهم ليه الـ syrinx بيعمل cape-like loss"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الأنبوبة لازم تتقفل في الأسبوع 4"
+        text: |-
+          الـ **neural tube defect (NTD)** = الأنبوبة ما اتقفلتش خالص ==بحلول الأسبوع 4==.
+
+          أهم الأسباب:
+          - نقص ==folate== عند الأم.
+          - أدوية teratogenic في الحمل: **valproate** و **carbamazepine**.
+
+          التشخيص: ultrasound، و **AFP** في دم الأم، و/أو **AChE** في الـ amniotic fluid. الاتنين بيعلوا في الـ **open** NTDs.
+        page: 501
+        quote: "Failure of the neural tube to close completely by week 4 of development, associated with maternal folate deficiency or exposure to teratogens such as valproate and carbamazepine during pregnancy. Diagnosis: ultrasound, maternal serum AFP and/or amniotic fluid AChE (↑ in open NTDs)."
+      - kind: reveal
+        prompt: "ليه الـ AFP والـ AChE بيعلوا في الـ open NTD بس، مش في الـ closed؟"
+        answer: "لأن في الـ **open** defect أنسجة الجنين العصبية مكشوفة على الـ amniotic fluid، فالبروتينات دي بتسرّب منها للسائل ومنه لدم الأم. في الـ **closed** (زي spina bifida occulta) الجلد مغطي، فمفيش تسريب والأرقام طبيعية. (تفسير فسيولوجي؛ الكتاب بيقول ↑ في الـ open.)"
+        page: 501
+        quote: "Diagnosis: ultrasound, maternal serum AFP and/or amniotic fluid AChE (↑ in open NTDs)."
+      - kind: figure
+        title: "الـ spinal dysraphism من الأخف للأتقل"
+        svg: |-
+          <svg viewBox="0 0 370 180" xmlns="http://www.w3.org/2000/svg">
+            <text x="4" y="14" class="t-sm t-mut">skin</text>
+            <line class="fg-ink" x1="4" y1="50" x2="366" y2="50"/>
+            <rect class="fg-thin" x="20" y="75" width="60" height="60" rx="10"/>
+            <circle class="fg-dot-good" cx="50" cy="105" r="13"/>
+            <text x="36" y="44" class="t-sm">hair</text>
+            <rect class="fg-thin" x="110" y="75" width="60" height="60" rx="10"/>
+            <circle class="fg-dot-good" cx="140" cy="105" r="13"/>
+            <path class="fg-acc" d="M115 50 C 115 10, 165 10, 165 50 Z"/>
+            <rect class="fg-thin" x="200" y="75" width="60" height="60" rx="10"/>
+            <path class="fg-bad" d="M205 50 C 205 10, 255 10, 255 50 Z"/>
+            <circle class="fg-dot-bad" cx="230" cy="36" r="10"/>
+            <line class="fg-bad" x1="230" y1="46" x2="230" y2="90" stroke-width="3"/>
+            <rect class="fg-thin" x="290" y="75" width="60" height="60" rx="10"/>
+            <rect class="fg-dot-bad" x="294" y="42" width="52" height="14" rx="4"/>
+            <text x="8" y="158" class="t-sm t-b">Occulta</text>
+            <text x="8" y="174" class="t-sm t-good">closed</text>
+            <text x="96" y="158" class="t-sm t-b">Meningocele</text>
+            <text x="96" y="174" class="t-sm t-mut">meninges only</text>
+            <text x="186" y="158" class="t-sm t-b">Myelomening.</text>
+            <text x="186" y="174" class="t-sm t-mut">+ neural tissue</text>
+            <text x="284" y="158" class="t-sm t-b">Myeloschisis</text>
+            <text x="284" y="174" class="t-sm t-mut">no covering</text>
+          </svg>
+        caption: "من الشمال لليمين الحالة بتتقل: occulta مقفولة (شعر أو dimple بس)، meningocele الأغشية بس طالعة، myelomeningocele الأغشية ومعاها أعصاب، myeloschisis الأعصاب مكشوفة من غير أي غطا."
+        alt: "Four panels from mild to severe. Spina bifida occulta: skin intact over the cord with a small hair tuft. Meningocele: a sac of meninges above the skin line with the cord inside the canal. Myelomeningocele: the sac contains neural tissue. Myeloschisis: neural tissue exposed with no covering."
+        page: 501
+        quote: "Meningocele Open NTD. Meninges (but no neural tissue) herniate through bony defect. Myelomeningocele Open NTD. Meninges and neural tissue (eg, cauda equina) herniate through bony defect. Myeloschisis Open NTD. Exposed, unfused neural tissue without skin/meningeal covering."
+      - kind: aside
+        tone: exam
+        text: "طفل أو بالغ عنده ==tuft of hair== أو **skin dimple** في أسفل الضهر وكل حاجة سليمة؟ ده **spina bifida occulta**: closed NTD، الـ vertebral arch بس ما اتقفلش ومفيش herniation."
+        page: 501
+        quote: "Spina bifida occulta Closed NTD. Failure of posterior vertebral arch fusion, but no herniation. Usually occurs at lower vertebral levels. Associated with tuft of hair or skin dimple at level of defect."
+      - kind: explain
+        title: "Anencephaly: الطرف التاني من الأنبوبة"
+        text: |-
+          لو الـ ==rostral neuropore== (الفتحة اللي فوق) ما اتقفلتش: مفيش forebrain والـ calvarium مفتوح.
+
+          والعلامة اللي بتجيلك في السؤال: ==polyhydramnios==. السبب إن الجنين بيبلع الـ amniotic fluid بشكل طبيعي، والبلع ده محتاج تحكم عصبي. من غير مخ، البلع يقل والسائل يتراكم.
+        page: 501
+        quote: "Anencephaly Open NTD. Failure of rostral neuropore to close → no forebrain, open calvarium. Often presents with polyhydramnios (↓ fetal swallowing due to lack of neural control)."
+      - kind: check
+        question: "A woman on valproate has polyhydramnios at 20 weeks. Ultrasound shows absent forebrain and open calvarium. What failed?"
+        options:
+          - "Closure of the rostral neuropore"
+          - "Division of the prosencephalon"
+          - "Neuronal migration"
+          - "Fusion of the posterior vertebral arch"
+        answer: 0
+        why:
+          - "صح: ده anencephaly، والـ polyhydramnios من قلة البلع."
+          - "فشل انقسام الـ prosencephalon = holoprosencephaly، المخ موجود بس ما اتقسمش."
+          - "فشل الـ neuronal migration = lissencephaly (مخ أملس)."
+          - "ده spina bifida occulta، closed ومن غير polyhydramnios."
+        page: 501
+        quote: "Failure of rostral neuropore to close → no forebrain, open calvarium."
+      - kind: table
+        title: "Holoprosencephaly و lissencephaly"
+        columns: ["", "Holoprosencephaly", "Lissencephaly"]
+        rows:
+          - ["What failed", "Forebrain division into 2 hemispheres (weeks 3-4)", "Neuronal migration"]
+          - ["Brain", "Monoventricle, fused basal ganglia", "Smooth surface, no sulci or gyri"]
+          - ["Face / body", "Cleft lip/palate, hypotelorism, cyclopia, proboscis", "Facial anomalies, microcephaly"]
+          - ["Other", "SHH mutations; Patau (trisomy 13), fetal alcohol; pituitary dysfunction (DI)", "Dysphagia, seizures"]
+        hide: [[0, 1], [0, 2], [3, 1]]
+        page: 501
+        quote: "Failure of forebrain (prosencephalon) to divide into 2 cerebral hemispheres; developmental field defect usually occurring at weeks 3-4 of development. Associated with SHH mutations."
+      - kind: aside
+        tone: analogy
+        text: "الـ **holo**prosencephaly = المخ «كله حتة واحدة» (holo = كامل). ولأن الوش والمخ بيتبنوا من نفس الـ midline field، أي حاجة في النص بتتلم: عينين قريبين، شفة مشقوقة، ولحد عين واحدة. والـ **lis**sencephaly = «أملس» (lissos باليوناني)."
+        page: 501
+        quote: "Presents with midline defects: monoventricle A , fused basal ganglia, cleft lip/palate, hypotelorism, cyclopia, proboscis."
+      - kind: explain
+        title: "Chiari: عدّ الحاجات اللي نزلت"
+        text: |-
+          الكتاب نفسه بيعدّ لك:
+          - **Chiari I** = ==1 structure==: الـ cerebellar tonsils بس نزلت من الـ foramen magnum. غالباً ساكت في الطفولة، ويطلع في الكبر بـ headache وأعراض cerebellar، ومعاه **syringomyelia**.
+          - **Chiari II** = ==2 structures==: الـ cerebellum (vermis و tonsils) **و** الـ medulla ← noncommunicating hydrocephalus. أتقل، بيبان بدري بـ dysphagia و stridor و apnea و limb weakness، ومعاه **myelomeningocele** (غالباً lumbosacral).
+        page: 502
+        quote: "Chiari II malformation Downward displacement of cerebellum (vermis and tonsils) and medulla (2 structures) through foramen magnum noncommunicating hydrocephalus. More severe than Chiari I, usually presents early in life with dysphagia, stridor, apnea, limb weakness. Associated with myelomeningocele (usually lumbosacral)."
+      - kind: reveal
+        prompt: "طفل Chiari II عنده dysphagia و stridor و apnea. ليه الأعراض دي بالذات؟"
+        answer: "لأن الـ **medulla** نفسها نازلة ومضغوطة في الـ foramen magnum، والـ medulla فيها مراكز البلع والتنفس والأعصاب اللي بتحرك الحنجرة. فلما تتضغط: بلع صعب، stridor، وتنفس بيقف. (ربط تشريحي؛ الأعراض نفسها من الكتاب.)"
+        page: 502
+        quote: "More severe than Chiari I, usually presents early in life with dysphagia, stridor, apnea, limb weakness."
+      - kind: explain
+        title: "Dandy-Walker: الـ vermis مش موجود أصلاً"
+        text: |-
+          هنا مفيش حاجة نازلة. الـ ==cerebellar vermis== مش موجود (agenesis)، فالـ **4th ventricle** بيتنفخ ويبقى cyst مالي **posterior fossa** كبيرة.
+
+          ومعاه noncommunicating hydrocephalus و spina bifida.
+        page: 502
+        quote: "Agenesis of cerebellar vermis cystic enlargement of 4th ventricle (arrow in B ) that fills the enlarged posterior fossa. Associated with noncommunicating hydrocephalus, spina bifida."
+      - kind: match
+        prompt: "وصّل كل malformation بالوصف بتاعه"
+        pairs:
+          - ["Chiari I", "Tonsils only; adult headaches; syringomyelia"]
+          - ["Chiari II", "Vermis + tonsils + medulla; myelomeningocele"]
+          - ["Dandy-Walker", "No vermis; cystic 4th ventricle"]
+          - ["Holoprosencephaly", "Monoventricle; cyclopia; SHH"]
+          - ["Lissencephaly", "Smooth brain; failed neuronal migration"]
+        why: "عدّ اللي نزل: 1 (tonsils) = Chiari I، 2 (cerebellum + medulla) = Chiari II، ومفيش نزول بس vermis ناقص = Dandy-Walker."
+        page: 502
+        quote: "Chiari I malformation Downward displacement of cerebellar tonsils (top arrow in A ) through foramen magnum (1 structure)"
+      - kind: figure
+        title: "الـ syrinx بيضغط على إيه الأول"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="nL01b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <ellipse class="fg-box" cx="110" cy="100" rx="95" ry="75"/>
+            <path class="fg-thin" d="M70 45 L95 95 L70 155 M150 45 L125 95 L150 155"/>
+            <circle class="fg-bad" cx="110" cy="100" r="18"/>
+            <text x="98" y="104" class="t-sm t-bad">syrinx</text>
+            <path class="fg-arrow-acc" d="M40 120 C 70 130, 95 125, 105 120 C 125 125, 150 130, 180 120"/>
+            <text x="44" y="146" class="t-sm t-acc">crossing fibers</text>
+            <line class="fg-arrow-bad" x1="225" y1="62" x2="125" y2="118" marker-end="url(#nL01b)"/>
+            <text x="220" y="40" class="t-sm t-b">1st: anterior white</text>
+            <text x="220" y="54" class="t-sm t-b">commissure</text>
+            <text x="220" y="100" class="t-sm">pain + temperature lost</text>
+            <text x="220" y="116" class="t-sm">bilateral, cape-like</text>
+            <text x="220" y="146" class="t-sm t-good">dorsal columns spared</text>
+            <text x="220" y="162" class="t-sm t-good">light touch preserved</text>
+          </svg>
+        caption: "الـ syrinx في نص الحبل الشوكي، وأقرب حاجة ليه هي الألياف اللي بتعدّي للناحية التانية في الـ anterior white commissure (spinothalamic: ألم وحرارة). فبتروح الأول، على الناحيتين، في الـ dermatomes اللي عند الـ syrinx بس."
+        alt: "Spinal cord cross-section with a central cavity labelled syrinx. Pain and temperature fibers crossing in front of it in the anterior white commissure are compressed first, giving bilateral cape-like loss of pain and temperature with dorsal columns and light touch spared."
+        page: 502
+        quote: "Fibers crossing in anterior white commissure (spinothalamic tract) are damaged first “cape-like” loss of pain and temperature sensation in bilateral upper extremities with preserved light touch."
+      - kind: explain
+        title: "ولما الـ syrinx يكبر"
+        text: |-
+          ممكن ينزل لتحت (غالباً ==C2-T9==) أو يطلع للـ brainstem ويبقى **syringobulbia**. وبيبدأ ياكل اللي حواليه:
+          - **anterior horns** ← LMN weakness و atrophy في الإيدين والدراعات.
+          - **lateral corticospinal tracts** ← spasticity أو الرجلين تدخل.
+          - الحالات المتقدمة ← scoliosis و ==Charcot joints== ومشاكل في المثانة والأمعاء.
+          - لو وصل الـ medulla ← dysphagia ومشاكل في التنفس.
+
+          وأشهر حاجة معاه: **Chiari I**؛ وأقل: عيوب خلقية تانية، trauma، infection أو tumor.
+        page: 502
+        quote: "Anterior horns → LMN weakness/atrophy (hands, arms) ▘ Lateral corticospinal tracts → spasticity or leg involvement Advanced cases → scoliosis, Charcot joints, bladder/bowel dysfunction. If syrinx reaches medulla → dysphagia, respiratory compromise."
+      - kind: check
+        question: "A 30-year-old has painless burns on both hands, loss of pain and temperature over both shoulders and arms, and normal light touch. Most likely associated malformation?"
+        options:
+          - "Chiari I malformation"
+          - "Chiari II malformation"
+          - "Dandy-Walker malformation"
+          - "Holoprosencephaly"
+        answer: 0
+        why:
+          - "صح: ده syringomyelia (cape-like loss)، وأشهر حاجة معاها Chiari I، وده بيطلع في الكبار."
+          - "Chiari II بيبان بدري في الطفولة ومعاه myelomeningocele."
+          - "Dandy-Walker معاه hydrocephalus و spina bifida، مش syrinx."
+          - "Holoprosencephaly عيب midline خطير بيبان من الولادة."
+        page: 502
+        quote: "Most commonly associated with Chiari I malformation (red arrow in A ); less often with other congenital malformations, trauma, infection, or tumor."
+      - kind: try
+        items: [neuro.L01.019, neuro.L01.021, neuro.L01.029, neuro.L01.035, neuro.L01.037]
+    recap:
+      - "NTD = الأنبوبة ما اتقفلتش بحلول الأسبوع 4؛ folate، valproate، carbamazepine."
+      - "AFP في دم الأم و AChE في الـ amniotic fluid بيعلوا في الـ open NTDs."
+      - "Occulta (closed، شعر/dimple) ← meningocele ← myelomeningocele ← myeloschisis."
+      - "Anencephaly ← polyhydramnios. Holoprosencephaly ← SHH و Patau. Lissencephaly ← مخ أملس."
+      - "Chiari I = 1 (tonsils، syrinx)، Chiari II = 2 (+ medulla، myelomeningocele)، Dandy-Walker = vermis مش موجود."
+      - "Syrinx ← anterior white commissure الأول ← cape-like loss of pain/temp."
+    practice: [neuro.L01.017, neuro.L01.018, neuro.L01.019, neuro.L01.020, neuro.L01.021, neuro.L01.022, neuro.L01.023, neuro.L01.024, neuro.L01.025, neuro.L01.026, neuro.L01.027, neuro.L01.028, neuro.L01.029, neuro.L01.030, neuro.L01.031, neuro.L01.032, neuro.L01.033, neuro.L01.034, neuro.L01.035, neuro.L01.036, neuro.L01.037, neuro.L01.038, neuro.L01.039]
