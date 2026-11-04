@@ -1,7 +1,7 @@
 //! Colour themes. Each theme is a fixed set of tokens that the app turns into
 //! CSS custom properties. Contrast is checked in tests against WCAG AA, so a
 //! new theme can't ship unreadable text.
-// adapted from kabar-app main: crates/core/src/theme.rs
+// adapted from batna-app main: crates/core/src/theme.rs
 
 /// Light or dark, for the CSS `color-scheme` property (form controls,
 /// scrollbars).
@@ -371,7 +371,7 @@ mod tests {
     #[test]
     fn the_info_sheet_stands_out() {
         // The sheet floats over the page and its cards: it must read as a
-        // different layer at a glance (adapted from kabar-app main:
+        // different layer at a glance (adapted from batna-app main:
         // crates/core/src/theme.rs word_sheet_stands_out).
         let dist = |a: &str, b: &str| {
             let (a, b) = (rgb(a), rgb(b));

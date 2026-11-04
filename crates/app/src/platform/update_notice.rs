@@ -3,8 +3,8 @@
 //! (`app.steps.UpdateCheckJob`, android/). No-ops elsewhere for now: the
 //! Mac's notifications come with UNUserNotificationCenter (Steps-app#50).
 //!
-//! Adapted from kabar-app: crates/app/src/platform/{mod,android}.rs (the
-//! `update_notice` calls and `Java_app_kabar_UpdateCheckJob_check`).
+//! Adapted from batna-app main: crates/app/src/platform/{mod,android}.rs (the
+//! `update_notice` calls and its `UpdateCheckJob_check` JNI entry).
 
 use crate::update::Notice;
 

@@ -8,9 +8,9 @@ three variations each:
 - calm-N: a calm tone when a session ends (a struck bowl, not a fanfare).
 
 Renders 48 kHz mono, normalizes to about -18 LUFS (measured with ffmpeg's
-EBU R128 filter; a little quieter than Kabar's, for long study sessions) and
+EBU R128 filter; a little quieter than Batna's, for long study sessions) and
 writes 16-bit WAV to assets/sounds/, which every web view plays.
-Adapted from kabar-app main: scripts/assets/synth_sounds.py.
+Adapted from batna-app main: scripts/assets/synth_sounds.py.
 
     pip install numpy      # and ffmpeg on PATH
     python3 scripts/assets/synth_sounds.py

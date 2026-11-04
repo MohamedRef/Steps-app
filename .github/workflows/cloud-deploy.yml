@@ -1,27 +1,31 @@
 name: Deploy Steps Cloud
 
 # Deploys the Steps Cloud Worker (crates/server) from GitHub, so no Mac or
-# wrangler login is needed (docs/CLOUD.md §3.3). Runs by hand (Actions › Deploy
-# Steps Cloud › Run workflow) and on every push to main that touches the hub,
-# so the hub is always at least as new as the apps built from main.
+# wrangler login is needed (docs/CLOUD.md §3.3). Runs by hand from main
+# (Actions › Deploy Steps Cloud › Run workflow) and after CI passes on main
+# when the hub changed since the last deploy, so a main commit that fails CI
+# never reaches the hub every device talks to (#103).
 #
 # Needs two repo secrets: CLOUDFLARE_API_TOKEN (the "Edit Cloudflare Workers"
-# template) and STEPS_ALLOWED_EMAILS (the Gmail allowed to sign in). Without
-# the token the run says so and stops green. The token signing key is made
+# template) and STEPS_ALLOWED_EMAILS (the Gmail allowed to sign in), and the
+# repo variable STEPS_GOOGLE_CLIENT_IDS (Steps's Google OAuth client ids,
+# desktop and web, comma-separated; not secret). Without the token the run
+# says so and stops green; without the client ids it deploys and then fails,
+# because Google sign-in can't work (#102). The token signing key is made
 # here once, piped straight into the Worker's secrets, and never printed or
 # stored anywhere else.
 
 on:
   workflow_dispatch:
-  push:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
     branches: [main]
-    paths:
-      - crates/server/**
-      - crates/protocol/**
-      - .github/workflows/cloud-deploy.yml
 
 permissions:
   contents: read
+  # To find the commit the last successful deploy shipped.
+  actions: read
 
 concurrency:
   group: cloud-deploy
@@ -30,13 +34,21 @@ concurrency:
 jobs:
   deploy:
     name: Deploy the Worker
+    # By hand from main only; otherwise after a green CI run of a push to main.
+    if: >-
+      (github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main') ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.event == 'push')
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     env:
-      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      # The commit CI passed on (a hand-started run: the newest main).
+      SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
     steps:
       - name: Check the Cloudflare token
         id: ready
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
           if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
             echo "::notice::No CLOUDFLARE_API_TOKEN secret yet; nothing deployed (docs/CLOUD.md §3.3)."
@@ -47,34 +59,72 @@ jobs:
       - uses: actions/checkout@v5
         if: steps.ready.outputs.go == 'true'
         with:
+          ref: ${{ env.SHA }}
           persist-credentials: false
-      - uses: dtolnay/rust-toolchain@stable
+          fetch-depth: 0
+      # CI runs on every main push, so this decides whether the hub changed
+      # since the commit the last successful deploy shipped (CI cancels
+      # older main runs, so one green run can cover several merges).
+      - name: Anything new for the hub?
+        id: due
         if: steps.ready.outputs.go == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          if [ "$GITHUB_EVENT_NAME" != workflow_run ]; then
+            echo "go=true" >> "$GITHUB_OUTPUT"; exit 0
+          fi
+          last="$(gh run list --workflow cloud-deploy.yml --branch main --status success --limit 1 \
+            --json headSha --jq '.[0].headSha // empty' || true)"
+          if [ -n "$last" ] && git cat-file -e "$last^{commit}" 2>/dev/null \
+            && git diff --quiet "$last" "$SHA" -- crates/server crates/protocol .github/workflows/cloud-deploy.yml; then
+            echo "Nothing for the hub changed since ${last::7}: no deploy."
+            echo "go=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "go=true" >> "$GITHUB_OUTPUT"
+          fi
+      - uses: dtolnay/rust-toolchain@stable
+        if: steps.due.outputs.go == 'true'
         with:
           targets: wasm32-unknown-unknown
       - uses: Swatinem/rust-cache@v2
-        if: steps.ready.outputs.go == 'true'
+        if: steps.due.outputs.go == 'true'
         with:
           key: steps-cloud-deploy
       - uses: cargo-bins/cargo-binstall@8a2045612414e945291083f820cd50b4d8fc2218 # v1.26.0
-        if: steps.ready.outputs.go == 'true'
+        if: steps.due.outputs.go == 'true'
       - name: Install worker-build and wrangler
-        if: steps.ready.outputs.go == 'true'
+        if: steps.due.outputs.go == 'true'
         run: |
           cargo binstall -y --force worker-build@0.8
           npm install -g wrangler@4
 
+      # wrangler.toml keeps GOOGLE_CLIENT_IDS empty; the ids come from the
+      # repo variable on every deploy (a dashboard edit would be overwritten).
       - name: Deploy
-        if: steps.ready.outputs.go == 'true'
+        id: deploy
+        if: steps.due.outputs.go == 'true'
         working-directory: crates/server
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLIENT_IDS: ${{ vars.STEPS_GOOGLE_CLIENT_IDS || vars.STEPS_GOOGLE_CLIENT_ID }}
+          WEB_CLIENT_ID: ${{ vars.STEPS_WEB_GOOGLE_CLIENT_ID }}
         run: |
           # Without pipefail, tee's success would hide a failed deploy (#283).
           set -o pipefail
-          wrangler deploy 2>&1 | tee deploy.log
+          ids="$(printf '%s,%s' "$CLIENT_IDS" "$WEB_CLIENT_ID" | tr -s ', ' ',' | sed 's/^,//; s/,$//')"
+          vars=()
+          if [ -n "$ids" ]; then
+            vars=(--var "GOOGLE_CLIENT_IDS:$ids")
+          fi
+          echo "ids=${ids:+set}" >> "$GITHUB_OUTPUT"
+          wrangler deploy "${vars[@]}" 2>&1 | tee deploy.log
           url="$(grep -oE 'https://[a-z0-9.-]+\.workers\.dev' deploy.log | head -1 || true)"
           rm -f deploy.log
+          echo "url=$url" >> "$GITHUB_OUTPUT"
           {
-            echo "### Steps Cloud is deployed"
+            echo "### Steps Cloud is deployed (${SHA::7})"
             if [ -n "$url" ]; then
               echo "Worker URL: \`$url\`"
               echo
@@ -84,19 +134,28 @@ jobs:
 
       # Once per Worker: these stay in Cloudflare across deploys.
       - name: Token signing key (first deploy only)
-        if: steps.ready.outputs.go == 'true'
+        if: steps.due.outputs.go == 'true'
         working-directory: crates/server
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
-          if wrangler secret list | grep -q TOKEN_SIGNING_KEY; then
+          # A failed list must stop here: read as "not set", it would put a
+          # new key and sign every device out of sync (#112).
+          if ! secrets="$(wrangler secret list)"; then
+            echo "::error::wrangler secret list failed; the signing key was left alone. Run this workflow again."
+            exit 1
+          fi
+          if grep -q TOKEN_SIGNING_KEY <<<"$secrets"; then
             echo "already set"
           else
             openssl rand -base64 32 | tr -d '\n' | wrangler secret put TOKEN_SIGNING_KEY >/dev/null
             echo "set"
           fi
       - name: Sign-in allowlist
-        if: steps.ready.outputs.go == 'true'
+        if: steps.due.outputs.go == 'true'
         working-directory: crates/server
         env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           ALLOWED: ${{ secrets.STEPS_ALLOWED_EMAILS }}
         run: |
           if [ -z "$ALLOWED" ]; then
@@ -105,3 +164,28 @@ jobs:
             printf '%s' "$ALLOWED" | wrangler secret put ALLOWED_EMAILS >/dev/null
             echo "set"
           fi
+
+      # The deployed hub must be able to sign in: an empty body to the Google
+      # route answers "invalid request" when it is set up and "server not set
+      # up" when a var or secret is missing.
+      - name: Sign-in works on the deployed hub
+        if: steps.due.outputs.go == 'true'
+        env:
+          URL: ${{ steps.deploy.outputs.url || vars.STEPS_CLOUD_URL || 'https://steps-cloud.hamorefaat85.workers.dev' }}
+          IDS: ${{ steps.deploy.outputs.ids }}
+        run: |
+          if [ -z "$IDS" ]; then
+            echo "::error::Repo variable STEPS_GOOGLE_CLIENT_IDS is empty, so the hub refuses Google sign-in. Set it to Steps's Google client ids (desktop and web, comma-separated; docs/CLOUD.md §3.2) and run this workflow again."
+            exit 1
+          fi
+          # Secrets reach a new Worker version within seconds.
+          for i in 1 2 3 4 5 6; do
+            answer="$(curl -sS -X POST -H 'content-type: application/json' --data '{}' "$URL/v1/auth/google" || true)"
+            if ! grep -q 'not set up' <<<"$answer"; then
+              echo "Sign-in is set up: $(head -c 200 <<<"$answer")"
+              exit 0
+            fi
+            sleep 10
+          done
+          echo "::error::The hub answers: $(head -c 300 <<<"$answer")"
+          exit 1

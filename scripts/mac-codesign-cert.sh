@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Adapted from kabar-app main: scripts/mac-codesign-cert.sh.
+# Adapted from batna-app main: scripts/mac-codesign-cert.sh.
 # Once, on the Mac: a free, self-signed "Steps Code Signing" certificate in
 # the login Keychain. `just bundle-mac` signs Steps.app with it, so every
 # build keeps the same code identity: the Keychain keeps trusting Steps after

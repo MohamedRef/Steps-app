@@ -1,8 +1,8 @@
 //! The lesson player: one step at a time, a segmented progress bar, Back and
 //! Continue at the foot. Questions must be answered (or skipped) before
 //! Continue; only first tries count. The end screen recaps the lesson and
-//! hands its practice items to a study session. The layout follows Kabar's
-//! lesson player (adapted from kabar-app main: crates/app/src/lesson.rs).
+//! hands its practice items to a study session. The layout follows Batna's
+//! lesson player (adapted from batna-app main: crates/app/src/lesson.rs).
 
 use dioxus::prelude::*;
 use steps_core::lesson::{Lesson, Step, StepBody};

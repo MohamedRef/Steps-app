@@ -1,6 +1,6 @@
 //! The sync engine: one task that owns the session, the WebSocket and its own
 //! database connection. It drives [`SyncClient`] and reports to the UI.
-// adapted from kabar-app main: crates/app/src/cloud/engine.rs
+// adapted from batna-app main: crates/app/src/cloud/engine.rs
 
 use std::collections::HashSet;
 use std::time::Duration;

@@ -3,7 +3,7 @@
 //! Android will (same package, same signing key, a versionCode no lower than
 //! this one) and hands it to PackageInstaller. Rust starts it and polls.
 //!
-//! Adapted from kabar-app main: crates/app/src/platform/android.rs (the
+//! Adapted from batna-app main: crates/app/src/platform/android.rs (the
 //! `UpdateInstaller` calls).
 
 #![allow(unsafe_code)]

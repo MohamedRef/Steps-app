@@ -2,7 +2,7 @@
 //! 5.3.0 packages: IBM Plex Sans Arabic for the Arabic UI and Plus Jakarta
 //! Sans for medical terms and other Latin text. Embedded as `data:` URLs, so
 //! every device shows the same faces offline.
-// adapted from kabar-app main: crates/app/src/fonts.rs
+// adapted from batna-app main: crates/app/src/fonts.rs
 
 macro_rules! font {
     ($path:literal) => {
@@ -51,7 +51,7 @@ const FACES: [(&str, &str, &str, &[u8]); 5] = [
 
 /// Whether this build bundles the Arabic faces. Not on desktop Linux: there
 /// WebKitGTK draws words carrying tashkeel smaller and above the baseline
-/// when an Arabic web font has a `unicode-range` (Kabar #227), so Arabic
+/// when an Arabic web font has a `unicode-range` (fixed upstream, in the app Steps came from), so Arabic
 /// falls back to the system's Noto Arabic. Android and the Mac keep Plex.
 const ARABIC_FACES: bool = !cfg!(target_os = "linux");
 

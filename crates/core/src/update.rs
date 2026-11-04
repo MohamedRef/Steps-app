@@ -4,7 +4,7 @@
 //! build. Pure logic: the app downloads and installs, `steps-tools update`
 //! signs.
 //!
-//! Adapted from kabar-app main: `crates/protocol/src/update.rs` (the feed
+//! Adapted from batna-app main: `crates/protocol/src/update.rs` (the feed
 //! types) and `crates/core/src/update.rs` (the checks), merged into one
 //! module. Steps has its own key, its own channels (`steps-*` release tags)
 //! and one more kind of asset, the content pack, so new lectures can arrive
@@ -201,7 +201,7 @@ pub const HISTORY_BUILDS: usize = 40;
 /// One build's changes, as Mohamed reads them: written per pull request in
 /// `changes/*.yaml` (`docs/RELEASE.md` §5) and gathered when a feed is built.
 ///
-/// Adapted from kabar-app main: `crates/protocol/src/update.rs`.
+/// Adapted from batna-app main: `crates/protocol/src/update.rs`.
 #[derive(Clone, Debug, PartialEq, Eq, Serialize, Deserialize)]
 pub struct BuildChanges {
     pub version: String,
@@ -276,7 +276,7 @@ impl Named for Change {
 /// entries were never for this build. Every other entry must parse: a
 /// damaged known entry still fails the manifest.
 ///
-/// Adapted from kabar-app main: `crates/protocol/src/update.rs`.
+/// Adapted from batna-app main: `crates/protocol/src/update.rs`.
 fn known_only<'de, D, T>(de: D) -> Result<Vec<T>, D::Error>
 where
     D: serde::Deserializer<'de>,

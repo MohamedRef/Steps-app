@@ -2,7 +2,7 @@
 //! chime for a right answer and a calm tone when a session ends, three
 //! variations each, picked in Settings › Study. WAV, so every web view plays
 //! them. Phones also give a light tap of vibration with each cue
-//! ([`crate::platform::haptics`]). Adapted from Kabar's
+//! ([`crate::platform::haptics`]). Adapted from Batna's
 //! `crates/app/src/sounds.rs` (main).
 
 use std::collections::HashMap;

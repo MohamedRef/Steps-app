@@ -7,7 +7,7 @@
 //! keeps scrolling, and the sheet floats over it without moving it
 //! (Mohamed, 2026-10-29). A tap outside it closes it (Mohamed, 2026-11-03).
 //!
-//! Adapted from kabar-app main: crates/app/src/sheet.rs (PR #453). The
+//! Adapted from batna-app main: crates/app/src/sheet.rs (PR #453). The
 //! gestures live in `assets/sheet.js`, installed once by [`use_gestures`]:
 //! a drag must follow the finger frame by frame, which a round trip to Rust
 //! per pointer move can't do on a phone. It closes the sheet by clicking its

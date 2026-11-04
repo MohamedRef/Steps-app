@@ -10,7 +10,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.view.WindowInsetsController
 
-// Adapted from kabar-app: android/src/main/kotlin/app/kabar/SystemBars.kt
+// Adapted from batna-app main: android/src/main/kotlin/…/SystemBars.kt
 /**
  * Makes the status and navigation bars match the app's theme (Settings ›
  * Look): their colour, and light or dark icons on it. With True black the

@@ -1,6 +1,6 @@
 //! Inline SVG charts for the planner, built as strings so every mark can
 //! carry an SVG `<title>` (the hover tooltip) and the whole chart a
-//! `role="img"` with a label. (Adapted from kabar-app main:
+//! `role="img"` with a label. (Adapted from batna-app main:
 //! crates/app/src/stats/charts.rs.) Colours come from theme tokens in
 //! `stats.css`, never hex values here.
 //!

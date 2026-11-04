@@ -1,6 +1,6 @@
 //! Android side of «export to Anki», through JNI from Rust using the JavaVM
 //! and Activity that tao/wry register in `ndk_context` (adapted from
-//! kabar-app main: crates/app/src/platform/android.rs).
+//! batna-app main: crates/app/src/platform/android.rs).
 //!
 //! 1. MediaStore puts the file in `Download/Steps/` (Android 10+, no storage
 //!    permission). Our earlier copy is deleted first, so the name stays

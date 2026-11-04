@@ -29,9 +29,24 @@ items:
   - id: bio.L05.001
     kind: card
     topic: williams-syndrome
-    front: What causes Williams syndrome, and what are its findings?
-    back: Congenital microdeletion of the long arm of chromosome 7, including the elastin gene. "Elfin" facies, intellectual disability, hypercalcemia, well-developed verbal skills, extreme friendliness with strangers, and cardiovascular problems (supravalvular aortic stenosis, pulmonary and renal artery stenosis).
+    front: What is the genetic cause of Williams syndrome?
+    back: A congenital microdeletion of the long arm of chromosome 7; the deleted region includes the elastin gene.
     src: { page: 63, quote: "Congenital microdeletion of long arm of chromosome 7 (deleted region includes elastin gene)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L05.080
+    kind: enumerate
+    topic: williams-syndrome
+    prompt: Enumerate the findings of Williams syndrome.
+    points:
+      - Distinctive "elfin" facies
+      - Intellectual disability
+      - Hypercalcemia
+      - Well-developed verbal skills
+      - Extreme friendliness with strangers
+      - Cardiovascular problems (supravalvular aortic stenosis, pulmonary and renal artery stenosis)
+    pass: 5
+    src: { page: 63, quote: "Findings: distinctive “elfin” facies, intellectual disability, hypercalcemia, well-developed verbal skills, extreme friendliness with strangers, cardiovascular problems (eg, supravalvular aortic stenosis, pulmonary artery stenosis, renal artery stenosis)." }
     status: unverified
     tags: [high-yield]
   - id: bio.L05.002
@@ -114,14 +129,14 @@ items:
       - Vitamin A
       - Vitamin C
       - Vitamin B6
-      - Vitamin B12 only
+      - Vitamin B7
     answer: 1
     why:
       - "Thiamine is water soluble and isn't tied to steatorrhea."
       - "Right. Malabsorption with steatorrhea (eg, celiac disease, cystic fibrosis) causes deficiency of the fat-soluble vitamins A, D, E and K."
       - "Vitamin C is water soluble."
       - "B6 deficiency comes with isoniazid or oral contraceptives."
-      - "Her K and D deficiency point to fat malabsorption, which hits A as well."
+      - "Biotin is water soluble; its deficiency follows long-term antibiotics or raw egg whites."
     src: { page: 63, quote: "Malabsorption syndromes with steatorrhea (eg, cystic fibrosis and celiac disease) or mineral oil intake can cause fat-soluble vitamin deficiencies." }
     status: unverified
   # ---------- p63: water-soluble vitamins ----------
@@ -158,6 +173,13 @@ items:
     front: What does B-complex deficiency often cause?
     back: Dermatitis, glossitis and diarrhea.
     src: { page: 63, quote: "B-complex deficiencies often result in dermatitis, glossitis, and diarrhea." }
+    status: unverified
+  - id: bio.L05.081
+    kind: card
+    topic: water-soluble-vitamins
+    front: How do water-soluble vitamins work in metabolism? Give an example of each role.
+    back: They can be coenzymes themselves (eg, ascorbic acid) or precursors to coenzymes (eg, FAD, NAD+).
+    src: { page: 63, quote: "Can be coenzymes (eg, ascorbic acid) or precursors to coenzymes (eg, FAD, NAD+ )." }
     status: unverified
   - id: bio.L05.011
     kind: mcq
@@ -222,6 +244,13 @@ items:
     front: What are the functions of vitamin A?
     back: Antioxidant; part of visual pigments (retinal); essential for differentiation of epithelial cells into specialized tissue (pancreatic, mucus-secreting cells); prevents squamous metaplasia.
     src: { page: 64, quote: "Antioxidant; constituent of visual pigments (retinal); essential for normal differentiation of epithelial cells into specialized tissue (pancreatic cells, mucus-secreting cells); prevents squamous metaplasia." }
+    status: unverified
+  - id: bio.L05.082
+    kind: card
+    topic: vitamin-a
+    front: Which compounds make up vitamin A, and which foods contain it?
+    back: Retinal, retinol and retinoic acid; found in liver and leafy vegetables.
+    src: { page: 64, quote: "Includes retinal, retinol, retinoic acid." }
     status: unverified
   - id: bio.L05.015
     kind: card
@@ -329,7 +358,7 @@ items:
       - [Wernicke encephalopathy, "Acute, reversible: confusion, ophthalmoplegia/nystagmus, ataxia (CorONA beer)"]
       - [Korsakoff syndrome, "Chronic alcohol amnestic disorder: confabulation, personality change, permanent memory loss"]
       - [Wernicke-Korsakoff syndrome, "Damage to the medial dorsal thalamic nucleus and mammillary bodies"]
-      - [Dry beriberi, "Polyneuropathy, symmetric muscle wasting"]
+      - [Dry beriberi, "Polyneuropathy, symmetric muscle wasting (spell beriberi Ber1Ber1)"]
       - [Wet beriberi, High-output cardiac failure (systemic vasodilation)]
     blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
     src: { page: 64, quote: "Acute, reversible, life-threatening neurologic condition. Symptoms: Confusion, Ophthalmoplegia/ Nystagmus, Ataxia (CorONA beer)." }
@@ -412,7 +441,7 @@ items:
       - Dementia (also hallucinations)
       - Dermatitis (Casal necklace, hyperpigmentation of sun-exposed limbs)
     pass: 3
-    hook: "الـ 3 D's بتوع الكتاب. والـ rash بيلف حوالين الرقبة زي عقد (Casal necklace)."
+    hook: "الـ 3 D's بتوع الكتاب (و Pellagra = vitamin B3 levels fell). والـ rash بيلف حوالين الرقبة زي عقد (Casal necklace)."
     src: { page: 65, quote: "Symptoms of B3 deficiency (pellagra) (the 3 D’s): diarrhea, dementia (also hallucinations), dermatitis (C3/C4 dermatome circumferential “broad collar” rash [Casal necklace], hyperpigmentation of sun-exposed limbs A )." }
     status: unverified
     tags: [high-yield]
@@ -630,11 +659,31 @@ items:
   - id: bio.L05.047
     kind: card
     topic: vitamin-b12
-    front: What are the findings of B12 deficiency?
-    back: Macrocytic megaloblastic anemia, hypersegmented PMNs, paresthesias and subacute combined degeneration (dorsal columns, lateral corticospinal and spinocerebellar tracts, from abnormal myelin). ↑ homocysteine and ↑ methylmalonic acid, with 2° folate deficiency. Prolonged deficiency → irreversible nerve damage.
+    front: Which serum metabolites rise in B12 deficiency, and which other deficiency comes with it?
+    back: ↑ homocysteine and ↑ methylmalonic acid, along with 2° folate deficiency.
+    src: { page: 67, quote: "Associated with ↑ serum homocysteine and methylmalonic acid levels, along with 2° folate deficiency." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L05.083
+    kind: enumerate
+    topic: vitamin-b12
+    prompt: Enumerate the clinical findings of B12 deficiency.
+    points:
+      - Macrocytic, megaloblastic anemia
+      - Hypersegmented PMNs
+      - Paresthesias
+      - Subacute combined degeneration (dorsal columns, lateral corticospinal and spinocerebellar tracts) from abnormal myelin
+    pass: 4
     src: { page: 67, quote: "Macrocytic, megaloblastic anemia; hypersegmented PMNs; paresthesias and subacute combined degeneration (degeneration of dorsal columns, lateral corticospinal tracts, and spinocerebellar tracts) due to abnormal myelin." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L05.084
+    kind: card
+    topic: vitamin-b12
+    front: What does prolonged B12 deficiency lead to?
+    back: Irreversible nerve damage.
+    src: { page: 67, quote: "Prolonged deficiency → irreversible nerve damage." }
+    status: unverified
   - id: bio.L05.048
     kind: enumerate
     topic: vitamin-b12
@@ -686,7 +735,7 @@ items:
     kind: card
     topic: vitamin-c
     front: What are the functions of vitamin C?
-    back: Antioxidant; ↑ iron absorption by reducing it to Fe2+; hydroxylation of proline and lysine in collagen synthesis; cofactor for dopamine β-hydroxylase (dopamine → NE). Ancillary treatment for methemoglobinemia (Fe3+ → Fe2+).
+    back: Antioxidant; ↑ iron absorption by reducing it to Fe2+; hydroxylation of proline and lysine in collagen synthesis; cofactor for dopamine β-hydroxylase (dopamine → NE). (Book mnemonic for the iron role, pronounce "absorbic" acid.) Ancillary treatment for methemoglobinemia (Fe3+ → Fe2+).
     src: { page: 67, quote: "Antioxidant; also facilitates iron absorption by reducing it to Fe2+ state. Necessary for hydroxylation of proline and lysine in collagen synthesis. Necessary for dopamine β-hydroxylase (converts dopamine to NE)." }
     status: unverified
     tags: [high-yield]
@@ -742,6 +791,13 @@ items:
     front: What does vitamin D do, and how is it regulated?
     back: ↑ intestinal absorption of Ca2+ and PO4 3−; ↑ bone mineralization at low levels, ↑ bone resorption at higher levels. ↑ PTH, ↓ Ca2+ and ↓ PO4 3− → ↑ calcitriol, which feedback-inhibits its own production.
     src: { page: 68, quote: "1,25-(OH)2D3 feedback inhibits its own production." }
+    status: unverified
+  - id: bio.L05.085
+    kind: card
+    topic: vitamin-d
+    front: How does ↑ PTH change Ca2+ and phosphate handling in the kidney?
+    back: ↑ Ca2+ reabsorption and ↓ PO4 3– reabsorption.
+    src: { page: 68, quote: "↑ PTH → ↑ Ca2+ reabsorption and ↓ PO 3– 4 reabsorption in the kidney." }
     status: unverified
   - id: bio.L05.057
     kind: card
@@ -845,6 +901,21 @@ items:
     src: { page: 69, quote: "Neonatal hemorrhage with ↑ PT and ↑ aPTT but normal bleeding time (neonates have sterile intestines and are unable to synthesize vitamin K)." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L05.086
+    kind: card
+    topic: vitamin-k
+    front: Besides the neonatal period, when can vitamin K deficiency occur?
+    back: After prolonged use of broad-spectrum antibiotics, or with hepatocellular disease.
+    src: { page: 69, quote: "Can also occur after prolonged use of broad-spectrum antibiotics or hepatocellular disease." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L05.087
+    kind: card
+    topic: vitamin-k
+    front: Where does vitamin K come from?
+    back: It is synthesized by intestinal microbiota; dietary sources include leafy greens.
+    src: { page: 69, quote: "Synthesized by intestinal microbiota; dietary sources include leafy greens." }
+    status: unverified
   - id: bio.L05.066
     kind: mcq
     topic: vitamin-k
@@ -882,19 +953,19 @@ items:
     topic: zinc
     stem: >-
       A 9-month-old boy weaned from breast milk has diarrhea, patchy hair loss and a red, crusted rash
-      around his mouth, anus and on his fingertips. Which mineral is deficient?
+      around his mouth, anus and on his fingertips. Which nutrient is deficient?
     options:
       - Copper
       - Zinc
       - Iron
-      - Selenium
+      - Biotin
       - Iodine
     answer: 1
     why:
       - "Copper deficiency (Menkes) gives kinky hair and developmental delay."
       - "Right. Acrodermatitis enteropathica, a congenital defect in zinc absorption: hair loss, diarrhea and a periorificial and acral rash."
       - "Iron deficiency gives microcytic anemia."
-      - "Selenium isn't in the book's section."
+      - "Biotin deficiency (dermatitis, enteritis, alopecia) is rare and follows long-term antibiotics or raw egg whites, not weaning."
       - "Iodine deficiency gives hypothyroidism."
     src: { page: 69, quote: "Associated with acrodermatitis enteropathica A —congenital defect in intestinal zinc absorption manifesting with triad of hair loss, diarrhea, and inflammatory skin rash around body openings (periorificial) and tips of fingers/toes (acral)." }
     status: unverified
@@ -921,6 +992,13 @@ items:
     pass: 5
     hook: "الكتاب: kwashiorkor results from protein-deficient MEALS."
     src: { page: 69, quote: "Kwashiorkor results from protein- deficient MEALS: Malnutrition Edema Anemia Liver (fatty) Skin lesions (eg, hyperkeratosis, dyspigmentation)" }
+    status: unverified
+  - id: bio.L05.088
+    kind: card
+    topic: protein-energy-malnutrition
+    front: In acute protein-energy malnutrition (marasmus), what happens to linear growth?
+    back: It is maintained (vs chronic malnutrition).
+    src: { page: 69, quote: "Linear growth maintained in acute protein- energy malnutrition (vs chronic malnutrition)." }
     status: unverified
   - id: bio.L05.071
     kind: mcq
@@ -969,6 +1047,13 @@ items:
     src: { page: 70, quote: "Disulfiram—blocks acetaldehyde dehydrogenase → ↑ acetaldehyde → ↑ hangover symptoms → discouraging drinking." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L05.089
+    kind: card
+    topic: ethanol-metabolism
+    front: Besides cytosolic alcohol dehydrogenase, which 2 routes in the book's figure oxidize ethanol to acetaldehyde?
+    back: Microsomal CYP2E1 (uses NADPH and makes ROS) and peroxisomal catalase (uses H2O2).
+    src: { page: 70, quote: "Peroxisome Mitochondria Cytosol Microsome" }
+    status: unverified
   - id: bio.L05.074
     kind: card
     topic: ethanol-metabolism

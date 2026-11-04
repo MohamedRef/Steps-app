@@ -2,9 +2,9 @@ name: Android preview APK
 
 # Builds an installable arm64 APK for trying Steps on the phone and tablet
 # without the Mac, and the signed update feed that lets an installed preview
-# update itself (docs/RELEASE.md §3 and §5). Adapted from kabar-app main:
-# .github/workflows/android-preview.yml; it also folds in chunk 20's
-# android-apk.yml (scripts/android-check-apk.sh runs on every build).
+# update itself (docs/RELEASE.md §3 and §5). Adapted from batna-app main:
+# .github/workflows/android-preview.yml (scripts/android-check-apk.sh runs on
+# every build).
 #
 # When: once a night (only if main moved since the build on the feed) and
 # by hand (Actions › Android preview APK › Run workflow), Mohamed's choice on
@@ -22,9 +22,11 @@ name: Android preview APK
 # (enough to prove the APK builds, signs and passes the checks) and get a
 # read-only token. Only the separate `publish` job can write.
 #
-# Self-updates: the APK follows alpha by default (Settings can pick preview),
-# and the release carries a signed update.json naming the APK and the content pack, so an
-# installed preview updates itself (and its lectures) after each nightly build.
+# Self-updates: the APK follows alpha by default (Mohamed's choice), and the
+# release carries a signed update.json naming the APK and the content pack.
+# An installed preview updates itself (and its lectures) after each nightly
+# build once Settings › Updates is set to «معاينة» (preview); until the first
+# alpha ships there is no alpha feed to follow (#106, the release notes say so).
 
 on:
   schedule:
@@ -89,7 +91,9 @@ jobs:
       # keys. Until the permanent release keys exist (scripts/release-secrets.sh,
       # once, before the first alpha), main builds like a PR too: it proves the
       # APK builds and signs, and nothing is published.
-      KEEP_KEY: ${{ github.event_name != 'pull_request' && secrets.STEPS_UPDATE_SECRET != '' }}
+      # A hand-started run from any branch but main builds like a PR too:
+      # only reviewed, merged code is signed with the release keys (#104).
+      KEEP_KEY: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && secrets.STEPS_UPDATE_SECRET != '' }}
     outputs:
       keep: ${{ env.KEEP_KEY }}
     steps:
@@ -164,7 +168,8 @@ jobs:
           {
             echo "STEPS_UPDATE_CHANNEL=preview"
             echo "STEPS_UPDATE_KEY=$(grep -v '^#' ~/.steps-preview-update/key.pub | head -1)"
-            echo "STEPS_BUILD=${{ github.run_number }}"
+            # main's commit count, the same scale as releases (#110)
+            echo "STEPS_BUILD=$(scripts/build-number.sh)"
             echo "STEPS_COMMIT=${GITHUB_SHA::7}"
           } >> "$GITHUB_ENV"
 
@@ -312,7 +317,7 @@ jobs:
   publish:
     name: Publish the steps-preview release
     needs: apk
-    if: github.event_name != 'pull_request' && needs.apk.outputs.keep == 'true'
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && needs.apk.outputs.keep == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     permissions:
@@ -355,7 +360,7 @@ jobs:
               exit 1
             fi
           fi
-          NOTES="Preview build of ${GITHUB_SHA::7}, signed with the release key, so it installs over the alpha and back. Install: download steps-preview.apk on the phone or tablet and allow installs from your browser. Releases are the steps-v* alphas."
+          NOTES="Preview build of ${GITHUB_SHA::7}, signed with the release key, so it installs over the alpha and back. Install: download steps-preview.apk on the phone or tablet and allow installs from your browser. To get each nightly build (and new lectures) by itself: after installing, open الإعدادات › التحديثات and pick «معاينة». Every build starts on the alpha channel, which has no builds until the first alpha. Releases are the steps-v* alphas."
           # The release stays in place and only its tag and files change, so
           # the download link and the update feed never 404.
           if gh release view "$TAG" >/dev/null 2>&1; then

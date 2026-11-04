@@ -20,7 +20,7 @@ import kotlin.concurrent.thread
  * that copy. Rust starts it through [Documents.save] or [Documents.open] and
  * polls [Documents.state].
  */
-// Adapted from kabar-app main: android/src/main/kotlin/app/kabar/ExportSaveActivity.kt
+// Adapted from batna-app main: android/src/main/kotlin/…/ExportSaveActivity.kt
 class DocumentActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

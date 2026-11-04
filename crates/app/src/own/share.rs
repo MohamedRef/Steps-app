@@ -1,7 +1,7 @@
 //! Share-to-Steps on Android: `app.steps.ShareActivity` keeps the shared text
 //! in `PendingShare`; [`take`] hands it over once. Nothing on the Mac (there
 //! he pastes into the "add a card" form).
-// Adapted from kabar-app main: crates/app/src/platform/android.rs (take_shared_input).
+// Adapted from batna-app main: crates/app/src/platform/android.rs (take_shared_input).
 
 use serde::Deserialize;
 

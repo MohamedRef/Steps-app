@@ -1,4 +1,4 @@
-// adapted from kabar-app: crates/app/src/settings/browser.rs
+// adapted from batna-app main: crates/app/src/settings/browser.rs
 //! Browser fixtures render production Settings with the app's own preferences.
 //! Rust callbacks are not hydrated; this suite checks layout and the production
 //! keyboard controller, not application click or persistence integration.

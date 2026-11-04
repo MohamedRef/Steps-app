@@ -28,8 +28,8 @@ pub struct Reopened(pub bool);
 pub struct Tagging(pub bool);
 
 /// Item kinds this player can show; the session composer picks only these.
-/// A chunk that adds a renderer adds its kind here and an arm below.
-pub const PLAYABLE: &[&str] = &["card", "cloze", "enumerate", "essay", "table", "order"];
+/// A chunk that adds a renderer adds its kind there and an arm below.
+pub use steps_core::lesson::PLAYABLE;
 
 #[component]
 pub fn ItemView(

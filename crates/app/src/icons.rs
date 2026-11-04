@@ -1,5 +1,5 @@
 //! Small stroke icons, drawn inline so they follow `currentColor`.
-// adapted from kabar-app main: crates/app/src/icons.rs
+// adapted from batna-app main: crates/app/src/icons.rs
 
 use dioxus::prelude::*;
 

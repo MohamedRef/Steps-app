@@ -1,4 +1,4 @@
-// adapted from kabar-app main: crates/app/src/persistence/
+// adapted from batna-app main: crates/app/src/persistence/
 //! UI-independent latest-choice retry bookkeeping for preference writes.
 use std::collections::BTreeMap;
 use std::rc::Rc;

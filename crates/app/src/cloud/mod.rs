@@ -4,8 +4,8 @@
 //! channels and shows it in Settings › Sync (`ui.rs`).
 //!
 //! Steps Cloud is its own free Cloudflare Worker (`crates/server`): nothing
-//! is shared with Kabar Cloud. See docs/CLOUD.md.
-// adapted from kabar-app main: crates/app/src/cloud/mod.rs
+//! is shared with any other app's cloud. See docs/CLOUD.md.
+// adapted from batna-app main: crates/app/src/cloud/mod.rs
 
 pub mod api;
 pub mod engine;
@@ -371,7 +371,7 @@ pub fn open_url(url: &str) -> Result<(), String> {
     }
 }
 
-// adapted from kabar-app main: crates/app/src/platform/android.rs (open_url)
+// adapted from batna-app main: crates/app/src/platform/android.rs (open_url)
 #[cfg(target_os = "android")]
 fn android_open_url(url: &str) -> Result<(), String> {
     use jni::{jni_sig, jni_str};

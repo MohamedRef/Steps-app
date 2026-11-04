@@ -1,5 +1,5 @@
 //! Plans the next few study reminders on the device, so they work offline.
-//! Pattern adapted from Kabar's `crates/app/src/coach/notify.rs` (main):
+//! Pattern adapted from batna-app main (its reminders, from `crates/app/src/coach/notify.rs`):
 //! Rust words and times them, and the platform arms each one from its
 //! wall-clock `date` and `time` in the device's own zone, so Egypt's
 //! daylight-saving switch keeps 19:00 at 19:00.

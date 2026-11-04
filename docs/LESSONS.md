@@ -55,7 +55,7 @@ The model to copy is `content/lessons/cvs/L01.yaml`.
 12. **Every abbreviation is explained.** A step's «اختصارات» chip (beside
     its «ص» chip) lists each abbreviation the step shows, text and figure
     labels alike, with its expansion from the glossary. So the
-    validator fails on any word with two or more capitals (`HRS-AKI`, `NITs`,
+    validator fails on any word, in a step or a recap line, with two or more capitals (`HRS-AKI`, `NITs`,
     `TIF1γ`) that the glossary doesn't explain. Add an entry (`kind: abbr`,
     the expansion in English, likeliest Step 1 meaning first, then "also
     …") to your course's `content/glossary/<course>.yaml`, or, when the word
@@ -120,9 +120,10 @@ width.
 SVG `<text>` has no `<bdi>`, so keep Arabic and English in separate `<text>`
 elements: brackets or numbers around an English term inside an Arabic
 `t-ar` label come out flipped. Lesson text (explain, captions, options) is
-isolated for you, so write it naturally there. Arrows don't flip: between
-Arabic words write `←` (it points along the reading direction), between
-English words `→`.
+isolated for you, so write it naturally there. In lesson text an arrow
+between Arabic words is drawn `←` (along the reading direction) whether you
+write `←` or `→`; inside an English run it stays as written. In SVG labels
+nothing is changed: write `←` between Arabic words, `→` between English.
 
 ## Images
 

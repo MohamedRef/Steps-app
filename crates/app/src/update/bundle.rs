@@ -6,7 +6,7 @@
 //! while Steps runs; it only restarts when the learner says so, or at the
 //! next launch in automatic mode.
 //!
-//! Adapted from kabar-app main: crates/app/src/update/bundle.rs.
+//! Adapted from batna-app main: crates/app/src/update/bundle.rs.
 
 use std::fs;
 use std::path::{Path, PathBuf};
