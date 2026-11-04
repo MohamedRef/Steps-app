@@ -1,0 +1,844 @@
+schema: steps.lesson/v1
+lecture: rr.L05
+lessons:
+  - id: rr.L05.lesson1
+    title: "Exam pivots: Biochemistry و Immunology"
+    hook: "السؤال بيحطلك إجابة شبه الصح بالظبط. الفرق في clue واحد، ولو عرفته مش هتقع تاني"
+    minutes: 9
+    pages: [735, 736]
+    topics: [biochemistry, immunology]
+    goals:
+      - "تفهم فكرة الـ exam pivot: نفس الصورة، إجابتين، وclue واحد بيفرق"
+      - "تفرّق بين أشهر أمراض الـ biochemistry اللي بتتشابه"
+      - "تعرف ليه CGD هو الـ distractor المفضل في الـ immunology"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "يعني إيه exam pivot؟"
+        text: |-
+          الجدول ده جديد في طبعة 2026: كل سطر فيه **shared clinical features** (الصورة اللي بتتشابه)، و**common distractor** (الإجابة اللي بتشدك)، و**correct answer**، والـ ==differentiating clues== اللي بتفرق.
+
+          أول مثال: hemolytic anemia مع ↑ reticulocytes و↑ indirect bilirubin. عقلك هيقول G6PD deficiency على طول. بس لو السؤال قال ↑ 2,3-BPG أو echinocytes، يبقى ==pyruvate kinase deficiency==.
+
+          ليه؟ الـ PK بيعمل ATP في الـ glycolysis. الـ RBC مالهاش mitochondria، فلو الـ ATP قل، الـ Na+/K+-ATPase يقف، الخلية تبوظ وتتكسر. والـ 2,3-BPG بيتراكم قبل الخطوة الواقفة، فيقلل الـ O2 affinity. وهو autosomal recessive فبيجي للبنات والولاد (G6PD بيجي للولاد أكتر لأنه X-linked).
+        page: 735
+        quote: "Involves ↓ ATP → ↓ Na+/K+-ATPase function → echinocytes/hemolysis; hallmark is ↑ 2,3-BPG (→ ↓ O2 affinity); autosomal recessive (affects both sexes)"
+      - kind: figure
+        title: "شكل كل pivot"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rr5a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="90" y="8" width="180" height="50" rx="8"/>
+            <text x="180" y="28" text-anchor="middle" class="t-sm t-b">Hemolytic anemia</text>
+            <text x="180" y="46" text-anchor="middle" class="t-sm">↑ retics, ↑ indirect bili</text>
+            <line class="fg-arrow" x1="150" y1="58" x2="85" y2="95" marker-end="url(#rr5a)"/>
+            <line class="fg-arrow" x1="210" y1="58" x2="275" y2="95" marker-end="url(#rr5a)"/>
+            <rect class="fg-bad" x="8" y="98" width="160" height="94" rx="8"/>
+            <text x="88" y="118" text-anchor="middle" class="t-sm t-bad t-b">Distractor</text>
+            <text x="88" y="138" text-anchor="middle" class="t-sm">G6PD deficiency</text>
+            <text x="88" y="158" text-anchor="middle" class="t-sm t-mut">X-linked</text>
+            <text x="88" y="176" text-anchor="middle" class="t-sm t-mut">oxidant triggers</text>
+            <rect class="fg-good" x="192" y="98" width="160" height="94" rx="8"/>
+            <text x="272" y="118" text-anchor="middle" class="t-sm t-good t-b">Correct answer</text>
+            <text x="272" y="138" text-anchor="middle" class="t-sm">Pyruvate kinase def.</text>
+            <text x="272" y="158" text-anchor="middle" class="t-sm">↑ 2,3-BPG, echinocytes</text>
+            <text x="272" y="176" text-anchor="middle" class="t-sm">AR: both sexes</text>
+          </svg>
+        caption: "كل سطر في الجدول بالشكل ده: صورة مشتركة فوق، الـ distractor على الشمال، والإجابة الصح على اليمين ومعاها الـ clue اللي بيحسم."
+        alt: "Diagram: hemolytic anemia with high reticulocytes and indirect bilirubin branches to the distractor G6PD deficiency (X-linked, oxidant triggers) and to the correct answer pyruvate kinase deficiency (high 2,3-BPG, echinocytes, autosomal recessive)."
+        page: 735
+        quote: "Involves ↓ ATP → ↓ Na+/K+-ATPase function → echinocytes/hemolysis; hallmark is ↑ 2,3-BPG"
+      - kind: reveal
+        prompt: "مراهق طويل ورفيع (Marfanoid) وعنده lens dislocation. إمتى تقول homocystinuria مش Marfan؟"
+        answer: "لما الـ lens تنزل **inferomedial** (في Marfan بتطلع **superotemporal**)، ولما يكون فيه ↑ risk of **thrombosis**. وكمان homocystinuria بتستجيب لـ vitamin B6 و B12."
+        page: 735
+        quote: "risk of thrombosis and inferomedial lens dislocation (vs Marfan: superotemporal dislocation); responsive to vitamin B6 and B12 supplementation"
+      - kind: check
+        question: "A toddler has fasting hypoglycemia and hepatomegaly. Which single finding points to von Gierke rather than Cori disease?"
+        options:
+          - "Lactic acidosis"
+          - "Hepatomegaly"
+          - "Fasting hypoglycemia"
+          - "Onset in early childhood"
+        answer: 0
+        why:
+          - "صح: von Gierke هو الـ «super-sick» kid، فيه lactic acidosis. Cori هو الـ «not-so-sick» kid من غيرها."
+          - "الاتنين عندهم hepatomegaly، دي الصورة المشتركة مش الـ clue."
+          - "الـ fasting hypoglycemia في الاتنين."
+          - "الاتنين بيبانوا في الطفولة."
+        page: 736
+        quote: "Lactic acidosis present (“super-sick” kid); absent in Cori (“not-so-sick” kid)"
+      - kind: explain
+        title: "باقي الـ Biochemistry"
+        text: |-
+          - **I-cell disease** مش Hurler: الـ Golgi مش بيحط mannose-6-phosphate على الـ lysosomal enzymes، فبدل ما تروح الـ lysosome بتطلع برا الخلية ← ==↑↑ plasma lysosomal enzymes== و gingival hyperplasia.
+          - **DNA repair**: لو الـ defect بيخلي الـ UV dimers ما تتشالش (pyrimidine dimers) يبقى **nucleotide-excision repair** ← xeroderma pigmentosum و skin cancer، مش base-excision.
+          - **colorectal cancer في عيلة كاملة**: ==Lynch syndrome== (defective MMR) مع microsatellite instability، مش FAP.
+        page: 736
+        quote: "Golgi apparatus fails to tag lysosomal"
+      - kind: aside
+        tone: exam
+        text: "خد بالك: في الـ Immunology الـ ==CGD== هو الـ distractor في 3 سطور. الامتحان عارف إنك حافظه، فبيحطه جنب أي recurrent infections. اسأل نفسك: الـ infection نوعها إيه؟ Neisseria؟ mycobacteria؟ skin مع retained teeth؟"
+        page: 736
+        quote: "Infection with Neisseria (to which patients with terminal complement defects are uniquely susceptible)"
+      - kind: table
+        title: "لما الـ distractor يكون CGD"
+        columns: ["Presentation", "Correct answer", "Clue"]
+        rows:
+          - ["Teen with recurrent infections", "C5-C9 (MAC) deficiency", "Neisseria infections"]
+          - ["Infant with disseminated mycobacterial/BCG infection", "IL-12 receptor deficiency", "Defective Th1 → ↓ IFN-γ"]
+          - ["Child with recurrent skin infection", "Job syndrome (hyper-IgE)", "Coarse facies, retained teeth, ↓ Th17"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+        page: 736
+        quote: "Defective Th1 response → ↓ IFN-γ → severe mycobacterial infections"
+      - kind: check
+        question: "A boy has recurrent sinopulmonary infections with low IgG and IgA. What finding points to CD40L deficiency rather than CVID?"
+        options:
+          - "↑ IgM"
+          - "Low IgA"
+          - "Recurrent sinusitis"
+          - "Male sex alone"
+        answer: 0
+        why:
+          - "صح: الـ T cell مش بيكلم الـ B cell (CD40L)، فمفيش class switching، فالـ IgM بيعلى. الـ CVID مفيهوش ↑ IgM."
+          - "الـ IgA واطي في الاتنين."
+          - "الـ sinopulmonary infections هي الصورة المشتركة."
+          - "الولد لوحده مش clue كفاية، الـ IgM هو اللي بيحسم."
+        page: 736
+        quote: "Defective T-cell interaction with B cells → impaired class switching → ↑ IgM, ↓ IgG/IgA (vs no ↑ IgM in CVID)"
+      - kind: explain
+        title: "4 pivots كمان"
+        text: |-
+          - **ورم في الوش والشفايف من غير urticaria**: ==hereditary angioedema== (bradykinin)، مش anaphylaxis. وممكن الـ ACE inhibitors تفجّرها لأنها بتزود الـ bradykinin.
+          - **rash بعد دوا مع systemic reaction**: type III hypersensitivity، مش type I (والـ Arthus reaction local بس).
+          - **ولد عنده immunodeficiency و ↑ malignancy**: Wiskott-Aldrich لو فيه thrombocytopenia و eczema؛ ataxia-telangiectasia لو فيه ataxia و ↑ AFP و telangiectasias.
+          - **infections مع autoimmune و allergy**: ==selective IgA deficiency== (↓ IgA بس، و giardiasis)، مش CVID.
+        page: 736
+        quote: "Mediated by bradykinin; lacks urticaria; can be precipitated by ACE inhibitors"
+      - kind: check
+        question: "A boy with recurrent infections has eczema and thrombocytopenia. Which is the answer the table wants, over ataxia-telangiectasia?"
+        options:
+          - "Wiskott-Aldrich syndrome"
+          - "Selective IgA deficiency"
+          - "Hereditary angioedema"
+          - "IL-12 receptor deficiency"
+        answer: 0
+        why:
+          - "صح: X-linked recessive مع thrombocytopenia و eczema."
+          - "IgA deficiency فيها ↓ IgA و giardiasis، مش eczema مع thrombocytopenia."
+          - "HAE بيعمل swelling بالـ bradykinin، مش infections."
+          - "IL-12 receptor بيعمل mycobacterial infections."
+        page: 736
+        quote: "X-linked recessive; thrombocytopenia, eczema (vs ataxia-telangiectasia: ataxia, ↑ AFP, telangiectasias, café-au-lait spots)"
+      - kind: try
+        items: [rr.L05.001, rr.L05.005, rr.L05.009, rr.L05.011, rr.L05.016]
+    recap:
+      - "كل pivot: صورة مشتركة، distractor، إجابة صح، و clue بيحسم."
+      - "PK deficiency: ↑ 2,3-BPG و autosomal recessive. von Gierke: lactic acidosis."
+      - "CGD distractor: Neisseria = MAC، mycobacteria = IL-12R، retained teeth = Job."
+      - "↑ IgM = CD40L. ↓ IgA بس = selective IgA deficiency."
+    practice: [rr.L05.001, rr.L05.002, rr.L05.003, rr.L05.004, rr.L05.005, rr.L05.006, rr.L05.007, rr.L05.008, rr.L05.009, rr.L05.010, rr.L05.011, rr.L05.012, rr.L05.013, rr.L05.014, rr.L05.015, rr.L05.016, rr.L05.017, rr.L05.018]
+
+  - id: rr.L05.lesson2
+    title: "Microbiology و Pathology و Pharmacology: مين الحقيقي؟"
+    hook: "C tetani ولا C perfringens؟ CMV ولا EBV؟ و p = 0.06 significant ولا لأ؟"
+    minutes: 9
+    pages: [736, 738]
+    topics: [microbiology, pathology, pharmacology, public-health]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "meningitis بـ gram ⊝"
+        text: |-
+          الـ CSF فيه gram ⊝ organism، فعقلك يروح لـ Hib. بس لو فيه ==epidemics== و **petechial rash** و capsule يبقى ==N meningitidis==.
+
+          والـ clue الشكلي: الـ H influenzae **coccobacillus**، والـ meningococcus diplococcus. والـ vaccines بتغطي types A و C و Y و W-135.
+        page: 736
+        quote: "Epidemics + petechial rash + capsule; vaccines cover types A, C, Y, W-135; H influenzae is a coccobacillus"
+      - kind: table
+        title: "Microbiology pivots في صفحة واحدة"
+        columns: ["Presentation", "Distractor", "Correct answer", "Clue"]
+        rows:
+          - ["Wound infection, gram ⊕ anaerobic spore-forming bacillus", "C tetani", "C perfringens", "Alpha toxin → gas gangrene + bullae"]
+          - ["Mono-like illness", "CMV", "EBV", "⊕ heterophile (Monospot)"]
+          - ["Systemic budding yeast", "B dermatitidis", "C neoformans", "Mucicarmine capsule, pigeon droppings"]
+          - ["Giemsa stain in blood or tissue", "Chlamydia or Rickettsia", "Trypanosomes/Plasmodium", "Blood smear parasites"]
+          - ["Acid-fast on Ziehl-Neelsen", "M tuberculosis", "Nocardia", "Branching filaments, brain abscess"]
+        hide: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]]
+        page: 737
+        quote: "Alpha toxin (phospholipase) → gas gangrene + bullae, rapid spread"
+      - kind: check
+        question: "A child with sickle cell disease has fever and focal bone pain from osteomyelitis. Which organism does the table want?"
+        options:
+          - "Salmonella"
+          - "S aureus"
+          - "Nocardia"
+          - "C perfringens"
+        answer: 0
+        why:
+          - "صح: Salmonella هو الأشهر في الـ sickle cell disease."
+          - "S aureus هو الأشهر overall، وده بالظبط الـ distractor."
+          - "Nocardia بيعمل brain abscesses و lung disease."
+          - "C perfringens بيعمل gas gangrene في الجروح."
+        page: 737
+        quote: "Salmonella most common in sickle cell disease; S aureus most common overall"
+      - kind: reveal
+        prompt: "مريض HIV عنده ring-enhancing lesions في المخ. إيه اللي يخليك تقول toxoplasmosis مش primary CNS lymphoma؟"
+        answer: "**Multiple lesions** مع ↓ **CD4+** count. الـ lymphoma غالباً **solitary lesion**."
+        page: 737
+        quote: "Multiple lesions and ↓ CD4+ cell count (vs solitary lesion in lymphoma)"
+      - kind: explain
+        title: "Pathology: 3 سطور"
+        text: |-
+          - **gross hematuria وقت الـ URI**: ==IgA nephropathy== (Berger). الـ hematuria **مع** الـ infection. الـ PSGN بييجي بعدها بأسابيع.
+          - **esophageal mass في upper/middle third** مع EtOH و hot beverages: **squamous cell carcinoma**. الـ adenocarcinoma في الـ distal third ومرتبط بـ Barrett.
+          - **breast حمرا ووارمة فجأة في ست مش بترضع** من غير fever: ==inflammatory breast carcinoma== (dermal lymphatic invasion ← peau d'orange)، مش acute mastitis.
+        page: 737
+        quote: "Location: upper/middle third (vs adenocarcinoma: distal third); associated with EtOH and hot beverage consumption (vs adenocarcinoma: associated with Barrett metaplasia)"
+      - kind: aside
+        tone: trap
+        text: "مريض UTI اتعالج وجاله hearing loss؟ الـ ciprofloxacin مش الجواب (الـ fluoroquinolones بتعمل tendinopathy و prolonged QT). الجواب ==ampicillin + gentamicin==: الـ aminoglycoside بيعمل ototoxicity و nephrotoxicity."
+        page: 737
+        quote: "Ototoxicity and nephrotoxicity (vs fluoroquinolones: tendinopathy and prolonged QT)"
+      - kind: explain
+        title: "Pharmacology: 3 pivots كمان"
+        text: |-
+          - **nausea مع أعراض عامة**: لو فيه ==xanthopsia== (بيشوف كل حاجة صفرا) و ↑ K+ يبقى **digoxin toxicity**. الـ hyperbilirubinemia بتصفّر الجلد مش النظر.
+          - **anticoagulation في الحمل**: **heparin** لأنه ما بيعديش الـ placenta. الـ warfarin teratogenic.
+          - **gout attack دلوقتي**: colchicine أو NSAID. الـ ==allopurinol للـ prevention بس==.
+        page: 738
+        quote: "Xanthopsia (yellow vision) and ↑ K+ (vs hyperbilirubinemia: jaundice [yellow skin])"
+      - kind: check
+        question: "A pregnant woman needs anticoagulation. Why heparin rather than warfarin, per the table?"
+        options:
+          - "Heparin does not cross the placenta; warfarin is teratogenic"
+          - "Heparin can be taken by mouth"
+          - "Warfarin acts too fast"
+          - "Heparin does not need monitoring in any form"
+        answer: 0
+        why:
+          - "صح: heparin آمن في الحمل لأنه ما بيعديش الـ placenta."
+          - "الـ heparin بيتاخد injection، مش بالبُق."
+          - "الـ warfarin بالعكس بطيء، والمشكلة إنه teratogenic."
+          - "ده مش الـ clue اللي في الجدول."
+        page: 738
+        quote: "Safe in pregnancy, does not cross placenta (vs warfarin: teratogenic)"
+      - kind: figure
+        title: "الـ cutoff عند .05"
+        svg: |-
+          <svg viewBox="0 0 360 130" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="20" y1="70" x2="340" y2="70"/>
+            <rect class="fg-good" x="20" y="55" width="120" height="30" rx="4"/>
+            <rect class="fg-bad" x="140" y="55" width="200" height="30" rx="4"/>
+            <line class="fg-ink" x1="140" y1="40" x2="140" y2="100" stroke-width="3"/>
+            <text x="140" y="32" text-anchor="middle" class="t-sm t-b">p = .05</text>
+            <text x="80" y="115" text-anchor="middle" class="t-sm t-good">significant</text>
+            <text x="250" y="115" text-anchor="middle" class="t-sm t-bad">not significant</text>
+            <circle class="fg-dot-acc" cx="164" cy="70" r="6"/>
+            <text x="172" y="50" class="t-sm t-acc">p = 0.06</text>
+            <text x="20" y="32" class="t-sm t-mut">0</text>
+            <text x="330" y="32" class="t-sm t-mut">1</text>
+          </svg>
+        caption: "الـ 0.06 قريبة من الـ .05، بس قريبة مش كفاية: أي P > .05 يبقى not significant."
+        alt: "Number line from 0 to 1 with a cutoff at p = .05. Values below are significant; values above, including p = 0.06, are not significant."
+        page: 738
+        quote: "Standard cutoff is .05; P > .05 = not significant"
+      - kind: check
+        question: "A study reports p = 0.06 with the standard cutoff. Interpretation?"
+        options:
+          - "Not significant"
+          - "Significant"
+          - "Borderline significant, so accept the result"
+          - "The null hypothesis is proven"
+        answer: 0
+        why:
+          - "صح: P > .05 = not significant."
+          - "ده الـ distractor: الرقم قريب بس فوق الـ cutoff."
+          - "مفيش «borderline» في الامتحان: يا تحت .05 يا لأ."
+          - "عدم رفض الـ null مش معناه إنه اتثبت."
+        page: 738
+        quote: "Standard cutoff is .05; P > .05 = not significant"
+      - kind: try
+        items: [rr.L05.019, rr.L05.021, rr.L05.026, rr.L05.029, rr.L05.034]
+    recap:
+      - "Epidemics و petechial rash و capsule = N meningitidis. H influenzae coccobacillus."
+      - "Sickle cell osteomyelitis = Salmonella. HIV مع lesions كتير = toxo."
+      - "Hematuria مع الـ URI = IgA nephropathy. Esophagus upper/middle = SCC."
+      - "Xanthopsia و ↑ K+ = digoxin. الحمل = heparin. الـ attack = colchicine/NSAID."
+      - "p = 0.06 = not significant."
+    practice: [rr.L05.019, rr.L05.020, rr.L05.021, rr.L05.022, rr.L05.023, rr.L05.024, rr.L05.025, rr.L05.026, rr.L05.027, rr.L05.028, rr.L05.029, rr.L05.030, rr.L05.031, rr.L05.032, rr.L05.033, rr.L05.034, rr.L05.035, rr.L05.036, rr.L05.037, rr.L05.038, rr.L05.039]
+
+  - id: rr.L05.lesson3
+    title: "القلب والغدة والجهاز الهضمي: الـ distractor الأقرب"
+    hook: "ألم في الصدر بعد وقعة؟ ممكن يكون MI مش عضلة. وdysphagia؟ أول سؤال: solids بس ولا الاتنين؟"
+    minutes: 10
+    pages: [738, 739]
+    topics: [cardiovascular, endocrine, gastrointestinal]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Cardiovascular: ما تستسهلش"
+        text: |-
+          - **راجل كبير وقع وعنده chest pain**: سهل تقول musculoskeletal. بس لو فيه ==new LBBB== مع ischemic symptoms يبقى MI لحد ما يثبت العكس: ↑ troponin و wall motion abnormality على الـ echo.
+          - **dyspnea مع crackles**: COPD ولا left HF؟ الـ ==orthopnea و PND== بيرجّحوا LHF، ومعاهم S3 و pulmonary edema و cardiomegaly و ↑ PCWP.
+          - **مريض بياخد IV drugs مع fever**: مش pneumonia؛ ده infective endocarditis: ⊕ blood cultures و Osler nodes (painful) و Janeway lesions (painless)، وغالباً الـ tricuspid ← TR.
+        page: 738
+        quote: "New left bundle branch block + ischemic symptoms = MI until proven otherwise → ↑ troponin; wall motion abnormality on echocardiogram"
+      - kind: reveal
+        prompt: "مريض عنده dyspnea و loud P2. ليه الـ PCWP بيفرق بين primary pulmonary hypertension و left HF؟"
+        answer: "الـ PCWP بيعكس ضغط الـ left atrium. في **left HF** الضغط بيرجع لورا فالـ PCWP يعلى. في **primary pulmonary hypertension** المشكلة في الشرايين نفسها (↑ endothelin-1، ↓ NO)، فالـ **PCWP normal**."
+        page: 738
+        quote: "↑ endothelin-1, ↓ NO; PCWP normal"
+      - kind: check
+        question: "A 10-year-old has hypertension. Which finding makes coarctation of the aorta the answer over essential hypertension?"
+        options:
+          - "Arm-leg blood pressure difference with rib notching on CXR"
+          - "Family history of hypertension"
+          - "Obesity"
+          - "Headache"
+        answer: 0
+        why:
+          - "صح: الضغط في الدراع أعلى من الرجل، والـ collaterals بتحفر الضلوع (rib notching)."
+          - "الـ family history مع الـ essential hypertension، الـ distractor."
+          - "الـ obesity بتروح ناحية الـ essential hypertension."
+          - "الصداع ممكن في الاتنين."
+        page: 738
+        quote: "Arm–leg BP difference; rib notching on CXR"
+      - kind: explain
+        title: "2 pivots فيهم ACE inhibitor و strep"
+        text: |-
+          - **cough عند مريض على ACE inhibitor**: الكحة **dry** ومفيش fever، وسببها ==↑ bradykinin== (الـ ACE هو اللي بيكسّر الـ bradykinin). الـ angioedema هو الـ distractor.
+          - **مهاجر عنده murmur جديد بعد strep infection**: مش infective endocarditis؛ ده ==rheumatic carditis==: Aschoff bodies و Anitschkow cells، بسبب molecular mimicry.
+        page: 738
+        quote: "Dry cough due to ↑ bradykinin, without fever"
+      - kind: explain
+        title: "Endocrine: thyrotoxicosis بعد عيا"
+        text: |-
+          أعراض thyrotoxic مؤقتة بعد illness قريب. الـ distractor هو Hashimoto. الصح: ==subacute granulomatous (de Quervain) thyroiditis==.
+
+          الـ clues: الغدة **بتوجع** (painful thyroid)، و ↑ ESR، و granulomatous inflammation في الـ histology، وغالباً self-limited.
+        page: 738
+        quote: "Typically presents with painful thyroid, ↑ ESR, and granulomatous inflammation on histology; often self-limited"
+      - kind: check
+        question: "Transient thyrotoxicosis 2 weeks after a viral illness. Which feature points to de Quervain thyroiditis rather than Hashimoto?"
+        options:
+          - "Painful thyroid with ↑ ESR"
+          - "Painless goiter"
+          - "Female sex"
+          - "Low TSH"
+        answer: 0
+        why:
+          - "صح: de Quervain بيوجع ومعاه ↑ ESR و granulomas."
+          - "الـ painless goiter أقرب لـ Hashimoto، الـ distractor."
+          - "الستات أكتر في الاتنين."
+          - "الـ TSH واطي في أي thyrotoxic phase."
+        page: 738
+        quote: "Typically presents with painful thyroid, ↑ ESR, and granulomatous inflammation on histology"
+      - kind: explain
+        title: "طفل صغير عنده lower GI bleeding"
+        text: |-
+          الـ distractor: intussusception. الصح: ==Meckel diverticulum==.
+
+          الـ clue: الـ **99mTc pertechnetate** (Meckel scan) بيتمسك في الـ heterotopic gastric mucosa، لأن الـ pertechnetate بيتاخد في خلايا المعدة. والـ Meckel ليه ==«rule of 2s»==.
+        page: 738
+        quote: "Tc pertechnetate (Meckel scan) uptake in heterotopic gastric mucosa; “rule of 2s”"
+      - kind: figure
+        title: "dysphagia: أول سؤال"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rr5b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="110" y="8" width="140" height="36" rx="8"/>
+            <text x="180" y="31" text-anchor="middle" class="t-sm t-b">Dysphagia</text>
+            <line class="fg-arrow" x1="150" y1="44" x2="90" y2="78" marker-end="url(#rr5b)"/>
+            <line class="fg-arrow" x1="210" y1="44" x2="270" y2="78" marker-end="url(#rr5b)"/>
+            <rect class="fg-acc" x="8" y="80" width="165" height="120" rx="8"/>
+            <text x="90" y="100" text-anchor="middle" class="t-sm t-b">Solids first</text>
+            <text x="90" y="120" text-anchor="middle" class="t-sm">mechanical obstruction</text>
+            <text x="90" y="145" text-anchor="middle" class="t-sm t-good">Esophageal carcinoma</text>
+            <text x="90" y="165" text-anchor="middle" class="t-sm t-mut">EtOH, tobacco: SCC</text>
+            <text x="90" y="185" text-anchor="middle" class="t-sm t-mut">Barrett: adenocarcinoma</text>
+            <rect class="fg-acc" x="187" y="80" width="165" height="120" rx="8"/>
+            <text x="270" y="100" text-anchor="middle" class="t-sm t-b">Solids + liquids</text>
+            <text x="270" y="120" text-anchor="middle" class="t-sm">motility problem</text>
+            <text x="270" y="145" text-anchor="middle" class="t-sm t-good">Achalasia</text>
+            <text x="270" y="165" text-anchor="middle" class="t-sm t-mut">↑ LES tone, no relaxation</text>
+            <text x="270" y="185" text-anchor="middle" class="t-sm t-mut">bird-beak; Chagas</text>
+          </svg>
+        caption: "الأكل الناشف بس الأول = حاجة سادة الطريق (carcinoma، والـ achalasia هي الـ distractor). الناشف والسوايل مع بعض = مشكلة في الحركة: achalasia (والـ scleroderma هي الـ distractor)."
+        alt: "Flowchart: dysphagia to solids first points to mechanical obstruction and esophageal carcinoma (EtOH and tobacco for SCC, Barrett for adenocarcinoma); dysphagia to solids and liquids points to a motility problem, achalasia, with high LES tone, failed relaxation, bird-beak and Chagas disease."
+        page: 739
+        quote: "first); age/risk factors (EtOH, tobacco for SCC; Barrett esophagus for adenocarcinoma)"
+      - kind: explain
+        title: "باقي الـ GI"
+        text: |-
+          - **chest pain جامد بعد vomiting**: Mallory-Weiss ده tear سطحي. لو فيه crepitus (==Hamman sign==) و هوا في الـ mediastinum يبقى **Boerhaave** (transmural rupture) وخطر sepsis.
+          - **epigastric pain مرتبط بالأكل**: لو الألم ↓ مع الأكل والوزن بيزيد يبقى ==duodenal ulcer==؛ والـ posterior duodenal ulcer بينزف من الـ gastroduodenal artery.
+          - **chronic diarrhea**: Crohn لو فيه transmural skip lesions و noncaseating granulomas و creeping fat و fistulas.
+          - **ست في منتصف العمر عندها pruritus و cholestasis**: PBC (anti-mitochondrial Ab ⊕، Sjögren)، مش PSC.
+          - **RUQ pain مع fever**: لو Charcot triad (ومعاها hypotension و confusion = Reynolds pentad) يبقى ascending cholangitis، مش cholecystitis.
+        page: 739
+        quote: "Distal esophagus most often affected; crepitus (Hamman sign), mediastinal/pleural air on CXR/CT; rapid sepsis risk"
+      - kind: match
+        prompt: "وصّل كل إجابة صح بالـ clue بتاعها"
+        pairs:
+          - ["Boerhaave syndrome", "Hamman sign, mediastinal air"]
+          - ["Duodenal ulcer", "Pain ↓ with eating, weight gain"]
+          - ["Crohn disease", "Skip lesions, creeping fat"]
+          - ["Primary biliary cholangitis", "Anti-mitochondrial Ab ⊕"]
+          - ["Ascending cholangitis", "Charcot triad, CBD obstruction"]
+        why: "كل clue هنا هو الحاجة اللي الـ distractor مش بيعملها: Mallory-Weiss مش transmural، الـ gastric ulcer بيوجع أكتر مع الأكل، الـ UC مش transmural، الـ PSC مش anti-mitochondrial، والـ cholecystitis مش بتسد الـ common bile duct."
+        page: 739
+        quote: "Transmural “skip” lesions, noncaseating granulomas, creeping fat; ↑ risk of fistulas/strictures"
+      - kind: try
+        items: [rr.L05.040, rr.L05.045, rr.L05.049, rr.L05.054, rr.L05.058]
+    recap:
+      - "New LBBB مع ischemic symptoms = MI. Orthopnea/PND = LHF. Loud P2 مع PCWP normal = primary pulmonary hypertension."
+      - "Dry cough على ACE inhibitor = bradykinin. Murmur بعد strep = rheumatic carditis."
+      - "Painful thyroid و ↑ ESR بعد عيا = de Quervain."
+      - "Toddler بينزف = Meckel (pertechnetate scan)."
+      - "Solids بس = carcinoma. Solids و liquids = achalasia."
+    practice: [rr.L05.040, rr.L05.041, rr.L05.042, rr.L05.043, rr.L05.044, rr.L05.045, rr.L05.046, rr.L05.047, rr.L05.048, rr.L05.049, rr.L05.050, rr.L05.051, rr.L05.052, rr.L05.053, rr.L05.054, rr.L05.055, rr.L05.056, rr.L05.057, rr.L05.058, rr.L05.059, rr.L05.060, rr.L05.061]
+
+  - id: rr.L05.lesson4
+    title: "الدم والعضم والجلد: الـ clue اللي بيقلب الإجابة"
+    hook: "نزيف في المفصل ولا في اللثة؟ ألم بيتحسن بالراحة ولا بالحركة؟ سؤال واحد بيحسم"
+    minutes: 10
+    pages: [739, 740]
+    topics: [hematology-oncology, musculoskeletal]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Hematology/Oncology"
+        text: |-
+          - **microcytosis مع low ferritin و ↑ TIBC**: ==iron deficiency anemia==. الـ ferritin الواطي هو المفتاح. الـ ACD: iron واطي و TIBC **واطي** و ferritin normal أو ↑ (الـ ferritin acute phase reactant).
+          - **bite cells و Heinz bodies**: G6PD deficiency، مش thalassemia: oxidant stress (sulfa، fava، infection) و hemolysis على نوبات.
+          - **owl-eye nuclei**: ==Hodgkin lymphoma==: CD15+ CD30+، bimodal age، B symptoms، و EBV.
+        page: 739
+        quote: "Low ferritin is key; ACD = low iron + low TIBC + normal/ ferritin"
+      - kind: figure
+        title: "النزيف فين؟"
+        svg: |-
+          <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rr5c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="120" y="8" width="120" height="34" rx="8"/>
+            <text x="180" y="30" text-anchor="middle" class="t-sm t-b">Bleeding</text>
+            <line class="fg-arrow" x1="150" y1="42" x2="80" y2="72" marker-end="url(#rr5c)"/>
+            <line class="fg-arrow" x1="210" y1="42" x2="270" y2="72" marker-end="url(#rr5c)"/>
+            <rect class="fg-acc" x="8" y="74" width="150" height="80" rx="8"/>
+            <text x="83" y="94" text-anchor="middle" class="t-sm t-b">Joints</text>
+            <text x="83" y="116" text-anchor="middle" class="t-sm t-good">Hemophilia A/B</text>
+            <text x="83" y="136" text-anchor="middle" class="t-sm t-mut">X-linked; only PTT ↑</text>
+            <rect class="fg-acc" x="200" y="74" width="152" height="50" rx="8"/>
+            <text x="276" y="94" text-anchor="middle" class="t-sm t-b">Mucosa</text>
+            <text x="276" y="113" text-anchor="middle" class="t-sm t-mut">menses, nose, gums</text>
+            <line class="fg-arrow" x1="250" y1="124" x2="225" y2="152" marker-end="url(#rr5c)"/>
+            <line class="fg-arrow" x1="300" y1="124" x2="325" y2="152" marker-end="url(#rr5c)"/>
+            <rect class="fg-good" x="170" y="154" width="105" height="58" rx="8"/>
+            <text x="222" y="174" text-anchor="middle" class="t-sm">platelets</text>
+            <text x="222" y="190" text-anchor="middle" class="t-sm">normal</text>
+            <text x="222" y="206" text-anchor="middle" class="t-sm t-good t-b">vWD</text>
+            <rect class="fg-bad" x="283" y="154" width="70" height="58" rx="8"/>
+            <text x="318" y="174" text-anchor="middle" class="t-sm">platelets</text>
+            <text x="318" y="190" text-anchor="middle" class="t-sm">↓</text>
+            <text x="318" y="206" text-anchor="middle" class="t-sm t-bad t-b">ITP</text>
+          </svg>
+        caption: "نزيف المفاصل = hemophilia (الـ distractor فيه vWD). نزيف الـ mucosa = vWD لو الـ platelets normal، و ITP لو واطية."
+        alt: "Tree: bleeding into joints points to hemophilia A/B (X-linked, only PTT raised). Mucosal bleeding (menses, nose, gums) splits by platelet count: normal platelets for von Willebrand disease, low platelets for ITP."
+        page: 739
+        quote: "X-linked; only PTT ; joint rather than mucosal bleeding"
+      - kind: check
+        question: "A teenager has heavy periods, nosebleeds and gum bleeding. Platelet count is normal and bleeding time is prolonged. Diagnosis?"
+        options:
+          - "von Willebrand disease"
+          - "ITP"
+          - "Hemophilia A"
+          - "APL"
+        answer: 0
+        why:
+          - "صح: mucosal bleeding مع ↑ bleeding time و platelets normal."
+          - "ITP هو الـ distractor: الـ platelets عادة ↓."
+          - "Hemophilia بينزف في المفاصل، والـ PTT بس اللي بيعلى."
+          - "APL هيبان فيه promyelocytes و Auer rods و DIC."
+        page: 739
+        quote: "bleeding time; platelet count usually normal in vWF and usually  in ITP"
+      - kind: explain
+        title: "بعد الـ chemo، ومع promyelocytes"
+        text: |-
+          - **hematuria و dysuria بعد chemo**: مش UTI؛ ده ==hemorrhagic cystitis== من الـ acrolein metabolite، ونمنعه بـ **mesna**.
+          - **bleeding/bruising مع promyelocytes على الـ smear**: مش ITP؛ ده ==APL== t(15;17): Auer rods، خطر DIC، وبيستجيب لـ all-trans retinoic acid.
+        page: 739
+        quote: "Auer rods, DIC risk, responds to all-trans retinoic acid"
+      - kind: explain
+        title: "المفاصل: الراحة ولا الحركة؟"
+        text: |-
+          - **كبير في السن عنده joint pain و stiffness**: ==osteoarthritis==: asymmetric، DIP +/– PIP، و**بيتحسن بالراحة**. الـ rheumatoid arthritis هو الـ distractor.
+          - **شاب عنده chronic back pain**: ==ankylosing spondylitis== (HLA-B27): **بيتحسن بالحركة**، و sacroiliitis على الأشعة (bamboo spine). الـ mechanical back pain بالعكس.
+
+          القاعدة: الألم الـ inflammatory بيتحسن بالحركة، والـ mechanical/degenerative بيتحسن بالراحة.
+        page: 740
+        quote: "Improves with activity; presents with radiographic sacroilitis (bamboo spine)"
+      - kind: check
+        question: "Acute monoarthritis with high fever, ↑ WBCs and a positive Gram stain on joint aspiration. Answer?"
+        options:
+          - "Septic arthritis"
+          - "Gout"
+          - "Osteoarthritis"
+          - "Ankylosing spondylitis"
+        answer: 0
+        why:
+          - "صح: الـ Gram stain الـ positive بيحسم."
+          - "Gout هو الـ distractor: ممكن يعمل monoarthritis ووجع وسخونية، بس الـ Gram stain مش positive."
+          - "OA مزمن ومش بيعمل fever."
+          - "AS في الضهر والـ sacroiliac joints."
+        page: 740
+        quote: "High fever, ↑ WBCs, positive Gram stain from joint aspiration"
+      - kind: explain
+        title: "رجل حمرا، ضعف، rash"
+        text: |-
+          - **رجل واحدة حمرا ووارمة**: ==cellulitis== لو فيه warmth و erythema حدوده مش واضحة و systemic symptoms، ومن غير risk factors للـ thrombosis. الـ DVT هو الـ distractor.
+          - **proximal weakness مع ↑ CK**: dermatomyositis لو فيه skin findings (heliotrope rash، Gottron papules)، مش polymyositis.
+          - **painful vesicular rash**: herpes zoster لو **dermatomal** وما بيعديش الـ midline، مش HSV.
+          - **heel pain عند runner**: ==plantar fasciitis==: الوجع أوحش مع أول خطوة الصبح، و tenderness عند الـ medial calcaneal tuberosity. مش Achilles tendinitis.
+        page: 740
+        quote: "Warmth, poorly demarcated erythema, systemic symptoms; not associated with risk factors for thrombosis"
+      - kind: aside
+        tone: trap
+        text: "«Pain out of proportion to exam» جت مرتين في الصفحة: بعد trauma مع pain on passive stretch و paresthesia = ==compartment syndrome== (مش مجرد fracture pain)؛ ومع rapid progression و crepitus و systemic toxicity = ==necrotizing fasciitis== (مش cellulitis)، وده surgical emergency."
+        page: 740
+        quote: "Rapid progression, pain out of proportion to exam, systemic toxicity, crepitus; surgical emergency"
+      - kind: table
+        title: "العضم عند الكبار والصغار"
+        columns: ["Presentation", "Distractor", "Correct answer", "Clue"]
+        rows:
+          - ["Elderly, bone pain, ↑ ALP", "Bone metastasis", "Osteitis deformans", "Mosaic bone, normal Ca2+/PO4 3–, hearing loss"]
+          - ["Elderly, brittle bones", "Osteitis deformans", "Osteopetrosis", "Dense bones; defective osteoclast resorption"]
+          - ["Teen, painful bone mass", "Ewing sarcoma", "Osteosarcoma", "Metaphyseal; sunburst on x-ray"]
+          - ["Elderly, headache, no trauma", "Cluster headache", "Giant cell arteritis", "↑ ESR, jaw claudication; vision loss risk"]
+        hide: [[0, 2], [1, 2], [2, 2], [3, 2]]
+        page: 740
+        quote: "Dense, brittle bones; defective osteoclast resorption"
+      - kind: check
+        question: "A trauma patient has leg pain that morphine does not touch, pain on passive stretch, and paresthesia. A pulse is present. Answer?"
+        options:
+          - "Compartment syndrome"
+          - "Fracture pain"
+          - "Cellulitis"
+          - "Deep venous thrombosis"
+        answer: 0
+        why:
+          - "صح: pain out of proportion و pain with passive stretch و paresthesia؛ الـ pulse ممكن يكون موجود (+/– pulselessness)."
+          - "ده الـ distractor: الـ fracture pain مش بيعمل pain on passive stretch و paresthesia بالشكل ده."
+          - "الـ cellulitis بتاخد وقت ومعاها warmth و erythema."
+          - "الـ DVT مش بيعمل الصورة دي بعد الـ trauma على طول."
+        page: 740
+        quote: "Pain out of proportion to exam, pain with passive stretch, paresthesia"
+      - kind: try
+        items: [rr.L05.062, rr.L05.069, rr.L05.073, rr.L05.079, rr.L05.085]
+    recap:
+      - "Low ferritin = iron deficiency. ACD: TIBC واطي و ferritin normal/↑."
+      - "Joints = hemophilia. Mucosa مع platelets normal = vWD، مع platelets ↓ = ITP."
+      - "بعد chemo = hemorrhagic cystitis (mesna). Promyelocytes = APL."
+      - "بيتحسن بالراحة = OA. بيتحسن بالحركة = AS."
+      - "Pain out of proportion = compartment syndrome أو necrotizing fasciitis."
+    practice: [rr.L05.062, rr.L05.063, rr.L05.064, rr.L05.065, rr.L05.066, rr.L05.067, rr.L05.068, rr.L05.069, rr.L05.070, rr.L05.071, rr.L05.072, rr.L05.073, rr.L05.074, rr.L05.075, rr.L05.076, rr.L05.077, rr.L05.078, rr.L05.079, rr.L05.080, rr.L05.081, rr.L05.082, rr.L05.083, rr.L05.084, rr.L05.085, rr.L05.086, rr.L05.087, rr.L05.088]
+
+  - id: rr.L05.lesson5
+    title: "الأعصاب والطب النفسي: نفس الشكل، سبب تاني"
+    hook: "ضعف بيتحسن مع الاستعمال ولا بيوحش؟ والـ rigidity بعد الدوا: lead-pipe ولا clonus؟"
+    minutes: 10
+    pages: [740, 742]
+    topics: [neurology, psychiatry]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Neurology: صفحة 740"
+        text: |-
+          - **acute paralysis**: مش stroke؛ ده ==Guillain-Barré== لو symmetric و progressive مع areflexia و albuminocytologic dissociation في الـ CSF.
+          - **tremor**: مش essential tremor؛ ده Parkinson disease لو resting «pill-rolling» tremor و bradykinesia و rigidity (و Lewy bodies).
+          - **صداع مفاجئ جامد**: مش migraine؛ ده ==subarachnoid hemorrhage==: thunderclap onset +/– nuchal rigidity، xanthochromia على الـ LP، و berry aneurysm rupture.
+        page: 740
+        quote: "Thunderclap onset +/– nuchal rigidity; xanthochromia on LP; berry aneurysm rupture"
+      - kind: figure
+        title: "الـ NMJ: قبل ولا بعد الـ synapse؟"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rr5d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="110" y="10" width="140" height="60" rx="20"/>
+            <text x="180" y="35" text-anchor="middle" class="t-sm t-b">Presynaptic nerve</text>
+            <text x="180" y="55" text-anchor="middle" class="t-sm t-mut">ACh release</text>
+            <line class="fg-arrow-acc" x1="180" y1="72" x2="180" y2="118" marker-end="url(#rr5d)"/>
+            <rect class="fg-box" x="80" y="122" width="200" height="40" rx="6"/>
+            <text x="180" y="147" text-anchor="middle" class="t-sm t-b">Muscle: AChR</text>
+            <rect class="fg-bad" x="262" y="18" width="94" height="72" rx="8"/>
+            <text x="309" y="38" text-anchor="middle" class="t-sm t-b">Lambert-Eaton</text>
+            <text x="309" y="56" text-anchor="middle" class="t-sm">↓ ACh release</text>
+            <text x="309" y="74" text-anchor="middle" class="t-sm t-good">better with use</text>
+            <rect class="fg-bad" x="4" y="118" width="72" height="74" rx="8"/>
+            <text x="40" y="138" text-anchor="middle" class="t-sm t-b">MG</text>
+            <text x="40" y="156" text-anchor="middle" class="t-sm">AChR Abs</text>
+            <text x="40" y="174" text-anchor="middle" class="t-sm t-bad">worse</text>
+            <text x="40" y="188" text-anchor="middle" class="t-sm t-bad">with use</text>
+          </svg>
+        caption: "Lambert-Eaton مشكلته قبل الـ synapse (الـ ACh بيطلع قليل، والاستعمال المتكرر بيزوّده فالقوة تتحسن). الـ myasthenia gravis مشكلته في الـ AChR بعد الـ synapse، فالضعف بيوحش مع الاستعمال."
+        alt: "Neuromuscular junction: presynaptic nerve releasing ACh onto muscle acetylcholine receptors. Lambert-Eaton acts presynaptically with reduced ACh release and improves with use; myasthenia gravis acts on postsynaptic receptors with AChR antibodies and worsens with use."
+        page: 740
+        quote: "Caudal-to-cranial disease progression; ↓ ACh release from presynaptic nerves, improves with use; associated with small cell lung cancer"
+      - kind: check
+        question: "A smoker with a hilar mass has proximal leg weakness that improves with repeated effort. Which answer, over myasthenia gravis?"
+        options:
+          - "Lambert-Eaton syndrome"
+          - "Oculomotor palsy"
+          - "Guillain-Barré syndrome"
+          - "Polymyositis"
+        answer: 0
+        why:
+          - "صح: caudal-to-cranial، ↓ ACh release، بيتحسن مع الاستعمال، ومرتبط بـ small cell lung cancer."
+          - "Oculomotor palsy هو الـ distractor في سطر ptosis/diplopia (اللي جوابه MG)."
+          - "GBS حاد، ascending، مع areflexia في أيام."
+          - "Polymyositis فيه ↑ CK ومش بيتحسن مع التكرار."
+        page: 740
+        quote: "Caudal-to-cranial disease progression; ↓ ACh release from presynaptic nerves, improves with use; associated with small cell lung cancer"
+      - kind: explain
+        title: "Neurology: صفحة 741"
+        text: |-
+          - **fever و headache و altered mental status**: لو فيه neurologic deficits و seizures و lymphocytic CSF يبقى ==HSV-1 encephalitis== (⊕ HSV PCR)، مش bacterial meningitis.
+          - **motor weakness مع reflexes غريبة**: ALS: mixed UMN/LMN، و**مفيش sensory**، مش peripheral neuropathy.
+          - **facial pain زي الكهربا**: trigeminal neuralgia، بيستجيب لـ carbamazepine، مش TMJ disorder.
+          - **confusion و ataxia**: مش stroke؛ ده ==Wernicke== لو الـ findings bilateral مع confusion و ophthalmoplegia و ataxia، وبيتحسن بالـ thiamine.
+        page: 741
+        quote: "Neurologic deficits, seizures; lymphocytic CSF, ⊕ HSV PCR"
+      - kind: mnemonic
+        word: "WWW"
+        parts:
+          - { key: "W", text: "Wet: urinary incontinence" }
+          - { key: "W", text: "Wobbly: gait disturbance" }
+          - { key: "W", text: "Wacky: dementia" }
+        hook: "كبير في السن عنده dementia و incontinence؟ لو مشيته بايظة يبقى NPH مش AD، وممكن يتحسن بعد LP"
+        page: 741
+        quote: "Gait disturbances, urinary incontinence, dementia (“wet, wobbly, wacky”); may improve after LP"
+      - kind: check
+        question: "A young woman has optic neuritis and neurologic deficits. Which clue makes MS the answer over acute disseminated encephalomyelitis?"
+        options:
+          - "Dissemination in time and space, oligoclonal bands, periventricular lesions"
+          - "A single episode after a viral infection"
+          - "Female sex"
+          - "Fever at onset"
+        answer: 0
+        why:
+          - "صح: MS = dissemination in time and space، oligoclonal bands، و lesions صغيرة واضحة periventricular."
+          - "حلقة واحدة بعد infection أقرب للـ distractor."
+          - "الستات أكتر في MS، بس ده مش الـ clue اللي بيحسم."
+          - "الـ fever مش جزء من clues الـ MS في الجدول."
+        page: 741
+        quote: "Dissemination in time and space; oligoclonal bands; MRI shows small, well-defined, periventricular lesions"
+      - kind: explain
+        title: "5 pivots كمان في 741"
+        text: |-
+          - **dementia بتنزل steps مع focal deficits**: ==vascular dementia==، مش AD.
+          - **back pain و bladder و saddle anesthesia**: cauda equina = unilateral، asymmetric، radicular pain، LMN. الـ conus medullaris = sudden، bilateral، symmetric، LMN/UMN.
+          - **ست عندها ↑ ICP و papilledema**: idiopathic intracranial hypertension: ↑ opening pressure و imaging **normal** (مش brain tumor).
+          - **café-au-lait و tumors في طفل**: NF1 (neurofibromas، optic gliomas، Lisch nodules). الـ NF2 = bilateral vestibular schwannomas.
+          - **movement disorder و psychiatric symptoms في شاب**: ==Wilson disease== (hepatic disease، Kayser-Fleischer rings، ↓ ceruloplasmin)، مش Huntington.
+        page: 741
+        quote: "Cauda equina = unilateral, asymmetric + radicular pain, LMN signs; Conus medullaris = sudden, bilateral, symmetric, LMN/UMN signs"
+      - kind: reveal
+        prompt: "مريض عنده deficits شديدة بعد ما صلّحوا الـ Na+ بسرعة. إمتى osmotic demyelination وإمتى cerebral edema؟"
+        answer: "الاتجاه هو اللي بيحسم: رفع الـ Na+ بسرعة (↑) = **central pontine myelinolysis** (osmotic demyelination). نزول الـ Na+ بسرعة (↓) = **cerebral edema**، لأن المية بتدخل خلايا المخ."
+        page: 741
+        quote: "Rapid ↑ Na+ = central pontine myelinolysis; rapid ↓ Na+ = cerebral edema"
+      - kind: order
+        prompt: "رتّب الـ extrapyramidal adverse effects زي ما الكتاب كاتبها"
+        steps:
+          - "Acute dystonia"
+          - "Akathisia"
+          - "Parkinsonism"
+          - "Tardive dyskinesia"
+        why: "مريض على antipsychotics عنده restlessness و rigid movements: الجواب acute extrapyramidal adverse effects، والـ parkinsonism مجرد خطوة واحدة في الـ spectrum ده."
+        page: 741
+        quote: "Spectrum: acute dystonia → akathisia → parkinsonism → tardive dyskinesia"
+      - kind: explain
+        title: "Psychiatry: الدوا عمل إيه؟"
+        text: |-
+          - **galactorrhea على antipsychotic**: ==risperidone==: dopamine antagonism ← ↑ prolactin ← galactorrhea و gynecomastia. الـ olanzapine شهرته weight gain.
+          - **fever و mental status بعد psych meds مع hyperreflexia و clonus**: serotonin syndrome، وقف الأدوية و ممكن cyproheptadine.
+        page: 741
+        quote: "Dopamine receptor antagonism → ↑ prolactin → galactorrhea, gynecomastia"
+      - kind: check
+        question: "Fever, lead-pipe rigidity and ↑ CK after a neuroleptic. Which answer and treatment?"
+        options:
+          - "NMS; dantrolene or bromocriptine"
+          - "Serotonin syndrome; cyproheptadine"
+          - "TCA overdose; supportive care only"
+          - "Acute dystonia; nothing needed"
+        answer: 0
+        why:
+          - "صح: NMS: lead-pipe rigidity و ↑ CK، وعلاجه dantrolene أو bromocriptine."
+          - "ده الـ distractor: الـ serotonin syndrome فيه hyperreflexia و clonus مش lead-pipe."
+          - "TCA overdose: dry mouth و urinary retention و arrhythmias (anticholinergic و cardiotoxic)."
+          - "الـ dystonia مش بتعمل fever و ↑ CK."
+        page: 742
+        quote: "Lead-pipe rigidity, ↑ CK, treat with dantrolene or bromocriptine"
+      - kind: try
+        items: [rr.L05.091, rr.L05.096, rr.L05.104, rr.L05.112, rr.L05.113]
+    recap:
+      - "Symmetric areflexic paralysis = GBS. Thunderclap = SAH."
+      - "Lambert-Eaton بيتحسن مع الاستعمال؛ MG بيوحش."
+      - "Lymphocytic CSF مع seizures = HSV-1. Wet, wobbly, wacky = NPH."
+      - "↑ Na+ بسرعة = osmotic demyelination؛ ↓ Na+ بسرعة = cerebral edema."
+      - "Clonus = serotonin syndrome. Lead-pipe و ↑ CK = NMS. Galactorrhea = risperidone."
+    practice: [rr.L05.089, rr.L05.090, rr.L05.091, rr.L05.092, rr.L05.093, rr.L05.094, rr.L05.095, rr.L05.096, rr.L05.097, rr.L05.098, rr.L05.099, rr.L05.100, rr.L05.101, rr.L05.102, rr.L05.103, rr.L05.104, rr.L05.105, rr.L05.106, rr.L05.107, rr.L05.108, rr.L05.109, rr.L05.110, rr.L05.111, rr.L05.112, rr.L05.113, rr.L05.114, rr.L05.115, rr.L05.116]
+
+  - id: rr.L05.lesson6
+    title: "الكلى والـ reproductive والرئة: آخر الـ pivots"
+    hook: "Calcium gluconate قبل Kayexalate، و silicosis فوق و asbestosis تحت، والطفل اللي بيـ wheeze من ناحية واحدة"
+    minutes: 10
+    pages: [742, 743]
+    topics: [renal, reproductive, respiratory]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Renal: الـ creatinine بيعلى"
+        text: |-
+          - **creatinine بيعلى بعد عملية**: مش ATN؛ ده ==prerenal azotemia==: BUN:Cr >20:1 و FENa <1% وبيستجيب للـ fluids. الكلية سليمة وبتمسك الصوديوم، فالـ FENa واطي.
+          - **AKI على NSAIDs**: acute interstitial nephritis: drug exposure (penicillins، cephalosporins) و eosinophilia و WBC casts.
+          - **طفل عنده nephrotic syndrome مفاجئ**: ==minimal change disease==: age <10، foot process effacement على الـ EM، و steroid responsive، مش FSGS.
+        page: 742
+        quote: "BUN:Cr ratio >20:1 + FeNa <1% + fluid responsive"
+      - kind: check
+        question: "Euvolemic hyponatremia with urine osmolality of 450 mOsm/kg. Which answer over psychogenic polydipsia?"
+        options:
+          - "SIADH"
+          - "Psychogenic polydipsia"
+          - "Prerenal azotemia"
+          - "Fanconi syndrome"
+        answer: 0
+        why:
+          - "صح: الـ urine concentrated (UOsm >300)، يعني الـ ADH شغال غلط."
+          - "ده الـ distractor: الـ psychogenic polydipsia بتعمل dilute urine."
+          - "Prerenal مش euvolemic hyponatremia."
+          - "Fanconi = proximal tubule defects."
+        page: 742
+        quote: "Concentrated urine (UOsm >300; vs dilute urine in psychogenic polydipsia)"
+      - kind: aside
+        tone: exam
+        text: "Severe hyperkalemia مع ECG changes؟ أول حاجة ==calcium gluconate==: الـ arrhythmia محتاجة membrane stabilization فوراً، وبعدين نعالج الـ hyperkalemia. الـ Kayexalate هو الـ distractor."
+        page: 742
+        quote: "Presence of cardiac arrhythmia requires immediate membrane stabilization first, then treat hyperkalemia"
+      - kind: explain
+        title: "3 pivots كلوية كمان"
+        text: |-
+          - **شاب عنده hemoptysis و hematuria**: ==anti-GBM disease== (Goodpasture): anti-GBM Ab+، linear IgG على الـ IF، type II hypersensitivity. الـ GPA هو الـ distractor.
+          - **طفل عنده MAHA و thrombocytopenia و AKI بعد إسهال**: ==HUS== من Shiga toxin (S dysenteriae أو E coli O157:H7)، مش TTP.
+          - **طفل عنده growth failure و rickets**: Fanconi syndrome: multiple PT defects (acidosis، hypokalemia، hypovolemia من polyuria)، مش vitamin D deficiency بس.
+        page: 742
+        quote: "Infection with a Shiga toxin–producing organism (eg, S dysenteriae or some serotypes of E coli, eg, O157:H7)"
+      - kind: explain
+        title: "Reproductive: صفحة 742"
+        text: |-
+          - **irregular periods و obesity و ↑ androgens**: ==PCOS== (insulin resistance، LH:FSH >2:1، polycystic ovaries على الـ US)، مش Cushing.
+          - **hypertension و proteinuria جديدة في الحمل** مع hemolysis (↑ LDH، schistocytes) و ↑ LFTs و ↓ platelets: **HELLP**، مش preeclampsia بس.
+          - **↓ libido و ↓ sperm count**: pituitary tumor (prolactinoma): ↑ prolactin، visual field changes، mass على الـ MRI، مش Klinefelter.
+          - سطرين AIS و MRKH: الجواب AIS معاه 46,XY و functioning gonads و ↑ testosterone و blind vaginal pouch؛ و MRKH معاه normal ovarian function و absent uterus و upper vagina.
+        page: 742
+        quote: "Insulin resistance, LH:FSH >2:1, polycystic ovaries on ultrasound"
+      - kind: check
+        question: "A pregnant woman has new hypertension and proteinuria plus ↑ LDH, schistocytes, ↑ LFTs and low platelets. Answer?"
+        options:
+          - "HELLP syndrome"
+          - "Preeclampsia alone"
+          - "PCOS"
+          - "Pituitary tumor"
+        answer: 0
+        why:
+          - "صح: Hemolysis و Elevated Liver enzymes و Low Platelets."
+          - "الـ preeclampsia هي الـ distractor: بتفسر الضغط والبروتين بس."
+          - "PCOS مالهاش علاقة بالحمل والـ hemolysis."
+          - "الـ pituitary tumor بيعمل ↑ prolactin و visual field changes."
+        page: 742
+        quote: "Hemolysis (↑ LDH, schistocytes), ↑ LFTs, ↓ platelets"
+      - kind: explain
+        title: "Reproductive: صفحة 743"
+        text: |-
+          - **anovulation في ست obese**: لو ↑ FSH و LH و ↓ estrogen (menopausal pattern) يبقى ==premature ovarian failure==، مش PCOS.
+          - **clomiphene و spotting**: مش miscarriage؛ ده ovarian hyperstimulation syndrome: ovaries كبيرة، ascites، hemoconcentration.
+          - **breast lumps بتتغير**: fibrocystic change (multiple bilateral، الوجع مع الـ cycle، green discharge)، مش fibroadenoma.
+          - **dysmenorrhea**: endometriosis (chocolate cysts، dyspareunia)، مش PID.
+          - **painless testicular mass**: ==testicular cancer== لو ما بيعملش transillumination (↑ AFP في nonseminoma، ↑ β-hCG في choriocarcinoma)، والعلاج radical orchiectomy، مش varicocele.
+        page: 743
+        quote: "↑ FSH and LH, ↓ estrogen, menopausal gonadotropin pattern"
+      - kind: figure
+        title: "الرئة: فوق ولا تحت؟ يمين ولا شمال؟"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="180" y1="10" x2="180" y2="60" stroke-width="4"/>
+            <line class="fg-ink" x1="180" y1="60" x2="140" y2="95" stroke-width="4"/>
+            <line class="fg-ink" x1="180" y1="60" x2="230" y2="85" stroke-width="3"/>
+            <text x="190" y="25" class="t-sm t-mut">trachea</text>
+            <rect class="fg-box" x="30" y="70" width="120" height="130" rx="40"/>
+            <rect class="fg-box" x="210" y="70" width="120" height="130" rx="40"/>
+            <rect class="fg-acc" x="38" y="78" width="104" height="40" rx="14"/>
+            <text x="90" y="103" text-anchor="middle" class="t-sm t-b">Silicosis</text>
+            <rect class="fg-bad" x="38" y="150" width="104" height="40" rx="14"/>
+            <text x="90" y="175" text-anchor="middle" class="t-sm t-b">Asbestosis</text>
+            <text x="90" y="138" text-anchor="middle" class="t-sm t-mut">right lung</text>
+            <circle class="fg-dot-acc" cx="140" cy="95" r="6"/>
+            <text x="215" y="105" class="t-sm t-acc">FB → right</text>
+            <text x="215" y="122" class="t-sm t-acc">main bronchus</text>
+            <text x="215" y="150" class="t-sm">upper: silica, ↑ TB</text>
+            <text x="215" y="170" class="t-sm">lower: ferruginous</text>
+            <text x="215" y="186" class="t-sm">bodies</text>
+          </svg>
+        caption: "الـ silicosis بتصيب الـ upper lobes (ومعاها ↑ TB risk)، والـ asbestosis الـ lower lobes (ferruginous bodies). والـ foreign body بيروح الـ right main bronchus لأنه أكتر vertical."
+        alt: "Sketch of the trachea and both lungs. Silicosis is marked in the upper lobe with silica exposure and higher TB risk; asbestosis in the lower lobe with ferruginous bodies; a foreign body lodges in the more vertical right main bronchus."
+        page: 743
+        quote: "↑ TB risk; affects upper lobes; silica exposure"
+      - kind: explain
+        title: "Respiratory"
+        text: |-
+          - **dyspnea و tachycardia مفاجئة**: مش asthma؛ ده ==PE==: respiratory alkalosis، V/Q mismatch، و risk factors (عملية، immobilization، hypercoagulable state).
+          - **راجل عنده chest pain مفاجئ**: spontaneous pneumothorax لو طويل ورفيع، hyperresonance، و absent breath sounds، مش MI.
+          - **post-stroke مع fever و cough**: aspiration pneumonia: dependent lobes (الـ RLL واقف)، anaerobes، sputum ريحته وحشة، مش influenza.
+          - **dyspnea مع wheezing**: HFrEF لو ↑ BNP و pulmonary edema و orthopnea، مش asthma.
+          - **chronic cough و hemoptysis**: bronchiectasis (cystic fibrosis، Kartagener، copious purulent sputum)، مش lung cancer.
+          - الكتاب كاتب «CGD with skin findings» وجوابه ==sarcoidosis== (bilateral hilar lymphadenopathy، ↑ ACE، hypercalcemia)، والـ distractor TB.
+        page: 743
+        quote: "Tall, thin body habitus; hyperresonance; absent breath sounds"
+      - kind: check
+        question: "A 3-year-old starts wheezing suddenly while playing; the wheeze is on one side only. Answer over asthma?"
+        options:
+          - "Foreign body aspiration"
+          - "Asthma"
+          - "Croup"
+          - "Epiglottitis"
+        answer: 0
+        why:
+          - "صح: sudden onset وهو بيلعب أو بياكل مع unilateral wheezing، وغالباً الـ right main bronchus."
+          - "ده الـ distractor: الـ asthma wheezing bilateral."
+          - "الـ croup فيه hoarseness و stridor و steeple sign."
+          - "الـ epiglottitis فيها thumbprint sign."
+        page: 743
+        quote: "Sudden onset while eating/playing + unilateral wheezing (asthma: bilateral wheezing); right main bronchus (more vertical)"
+      - kind: check
+        question: "A child has hoarseness and stridor with a steeple sign on CXR. Answer and cause?"
+        options:
+          - "Croup, from parainfluenza virus"
+          - "Epiglottitis"
+          - "Foreign body aspiration"
+          - "Asthma"
+        answer: 0
+        why:
+          - "صح: croup (laryngotracheobronchitis) من الـ parainfluenza، و steeple sign."
+          - "ده الـ distractor: الـ epiglottitis ليها thumbprint sign."
+          - "الـ foreign body بيعمل unilateral wheezing فجأة."
+          - "الـ asthma مش بتعمل hoarseness و steeple sign."
+        page: 743
+        quote: "CXR (vs epiglottitis: thumbprint sign)"
+      - kind: try
+        items: [rr.L05.117, rr.L05.122, rr.L05.131, rr.L05.151, rr.L05.149]
+    recap:
+      - "BUN:Cr >20 و FENa <1% = prerenal. UOsm >300 = SIADH."
+      - "Hyperkalemia مع ECG changes: calcium gluconate الأول."
+      - "Hemoptysis و hematuria مع linear IgG = anti-GBM. إسهال قبل HUS."
+      - "↑ FSH و LH مع ↓ estrogen = premature ovarian failure. HELLP = hemolysis و LFTs و platelets."
+      - "Silicosis فوق، asbestosis تحت. Unilateral wheeze في طفل = foreign body."
+    practice: [rr.L05.117, rr.L05.118, rr.L05.119, rr.L05.120, rr.L05.121, rr.L05.122, rr.L05.123, rr.L05.124, rr.L05.125, rr.L05.126, rr.L05.127, rr.L05.128, rr.L05.129, rr.L05.130, rr.L05.131, rr.L05.132, rr.L05.133, rr.L05.134, rr.L05.135, rr.L05.136, rr.L05.137, rr.L05.138, rr.L05.139, rr.L05.140, rr.L05.141, rr.L05.142, rr.L05.143, rr.L05.144, rr.L05.145, rr.L05.146, rr.L05.147, rr.L05.148, rr.L05.149, rr.L05.150, rr.L05.151, rr.L05.152, rr.L05.153]

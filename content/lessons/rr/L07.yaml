@@ -1,0 +1,398 @@
+schema: steps.lesson/v1
+lecture: rr.L07
+lessons:
+  - id: rr.L07.lesson1
+    title: "أدوية القلب اللي أساميها توأم: ami- و nitro- و -enone"
+    hook: "amiloride و amiodarone و amlodipine: تلات أسامي بتبدأ بنفس الحروف، وكل واحد بيشتغل على قناة مختلفة"
+    minutes: 8
+    pages: [745, 746]
+    topics: [cardiovascular]
+    goals:
+      - "تفرّق بين amiloride و amiodarone و amlodipine بالقناة اللي كل واحد بيقفلها"
+      - "تفرّق بين eplerenone و propafenone، و nitroprusside و nitroglycerin"
+      - "تعرف chlorthalidone و clonidine في مكانهم"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الجدول ده بيعمل إيه"
+        text: |-
+          جدول ==Easily confused medications== في آخر First Aid مش جدول فارماكولوجي عادي: كل اللي فيه أدوية أساميها شبه بعض، والامتحان بيحب يحط الاسم الغلط وسط الاختيارات.
+
+          الطريقة: ما تحفظش الاسم لوحده. اربط كل اسم **بالاستخدام** و **بالآلية**، وساعتها الاسم اللي شبهه مش هيخدعك.
+
+          ونبدأ بأشهر تلاتة: **amiloride** و **amiodarone** و **amlodipine**.
+        page: 745
+        quote: "Amiloride HTN, K+-sparing diuretic (blocks epithelial Na+ channels in the late distal convoluted tubule and collecting duct)"
+      - kind: table
+        title: "Ami- / Amlo-: تلات قنوات مختلفة"
+        columns: ["Drug", "Use", "Mechanism"]
+        rows:
+          - ["Amiloride", "HTN", "K+-sparing diuretic: blocks epithelial Na+ channels"]
+          - ["Amiodarone", "Ventricular arrhythmia, AF, SVT", "K+ channel blocker (class III)"]
+          - ["Amlodipine", "HTN, angina", "Dihydropyridine Ca2+ channel blocker"]
+        hide: [[0, 2], [1, 2], [2, 2]]
+        page: 745
+        quote: "Amlodipine HTN, angina (dihydropyridine Ca2+ channel blocker)"
+      - kind: explain
+        title: "ليه كل واحد بيعمل اللي بيعمله"
+        text: |-
+          - ==Amiloride==: بيقفل الـ **epithelial Na+ channels** في آخر الـ distal convoluted tubule والـ collecting duct. الصوديوم ما بيدخلش الخلية، فالـ K+ اللي كان بيطلع بداله في البول بيفضل جوّه ← **K+-sparing diuretic**.
+          - ==Amiodarone==: **K+ channel blocker** (class III): بيطوّل الـ repolarization، فبيهدّي الـ ventricular arrhythmia والـ atrial fibrillation والـ SVT.
+          - ==Amlodipine==: **dihydropyridine Ca2+ channel blocker**: بيرخّي الأوعية ← بيوطّي الضغط وبيريّح الـ angina.
+        page: 745
+        quote: "Amiodarone Ventricular arrhythmia, atrial fibrillation, supraventricular tachycardia (K+ channel blocker; class III antiarrhythmic)"
+      - kind: check
+        question: "A 66-year-old woman with atrial fibrillation is started on a K+ channel blocker (class III antiarrhythmic). Which drug?"
+        options: ["Amiloride", "Amlodipine", "Amiodarone", "Propafenone"]
+        answer: 2
+        why:
+          - "Amiloride بيقفل Na+ channels في الكلية: diuretic مش antiarrhythmic."
+          - "Amlodipine بيقفل Ca2+ channels في الأوعية: للـ HTN والـ angina."
+          - "صح: amiodarone هو الـ K+ channel blocker (class III)."
+          - "Propafenone بيعالج AF برضه، بس هو Na+ channel blocker (class Ic)."
+        page: 745
+        quote: "Amiodarone Ventricular arrhythmia, atrial fibrillation, supraventricular tachycardia (K+ channel blocker; class III antiarrhythmic)"
+      - kind: figure
+        title: "ثلاث أسامي، ثلاث قنوات"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L07a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <rect class="fg-box" x="130" y="8" width="100" height="30" rx="8"/>
+            <text x="180" y="28" text-anchor="middle" class="t-b">Ami- / Amlo-</text>
+            <line class="fg-arrow" x1="160" y1="40" x2="60" y2="70" marker-end="url(#L07a)"/>
+            <line class="fg-arrow" x1="180" y1="40" x2="180" y2="70" marker-end="url(#L07a)"/>
+            <line class="fg-arrow" x1="200" y1="40" x2="300" y2="70" marker-end="url(#L07a)"/>
+            <rect class="fg-good" x="5" y="72" width="112" height="90" rx="8"/>
+            <text x="61" y="92" text-anchor="middle" class="t-b">Amiloride</text>
+            <text x="61" y="112" text-anchor="middle" class="t-sm">kidney</text>
+            <text x="61" y="130" text-anchor="middle" class="t-sm">blocks Na+ (ENaC)</text>
+            <text x="61" y="148" text-anchor="middle" class="t-sm t-mut">K+-sparing, HTN</text>
+            <rect class="fg-bad" x="124" y="72" width="112" height="90" rx="8"/>
+            <text x="180" y="92" text-anchor="middle" class="t-b">Amiodarone</text>
+            <text x="180" y="112" text-anchor="middle" class="t-sm">heart rhythm</text>
+            <text x="180" y="130" text-anchor="middle" class="t-sm">blocks K+</text>
+            <text x="180" y="148" text-anchor="middle" class="t-sm t-mut">class III</text>
+            <rect class="fg-acc" x="243" y="72" width="112" height="90" rx="8"/>
+            <text x="299" y="92" text-anchor="middle" class="t-b">Amlodipine</text>
+            <text x="299" y="112" text-anchor="middle" class="t-sm">vessels</text>
+            <text x="299" y="130" text-anchor="middle" class="t-sm">blocks Ca2+</text>
+            <text x="299" y="148" text-anchor="middle" class="t-sm t-mut">HTN, angina</text>
+          </svg>
+        caption: "Amiloride في الكلية بيقفل Na+، و amiodarone في القلب بيقفل K+، و amlodipine في الأوعية بيقفل Ca2+."
+        alt: "Three boxes under the prefix Ami- / Amlo-. Amiloride: kidney, blocks Na+ (ENaC), K+-sparing, HTN. Amiodarone: heart rhythm, blocks K+, class III. Amlodipine: vessels, blocks Ca2+, HTN and angina."
+        page: 745
+        quote: "Amlodipine HTN, angina (dihydropyridine Ca2+ channel blocker)"
+      - kind: explain
+        title: "Eplerenone و propafenone و chlorthalidone"
+        text: |-
+          - ==Eplerenone==: HTN، و K+-sparing diuretic زي amiloride، بس من باب تاني: **selective mineralocorticoid receptor antagonist**. بيقفل مستقبل الـ aldosterone بدل ما يقفل القناة نفسها.
+          - ==Propafenone==: ventricular arrhythmia و paroxysmal AF/flutter و SVT: **Na+ channel blocker (class Ic)**. نهاية «-enone» زي eplerenone، بس ده antiarrhythmic.
+          - **Chlorthalidone**: HTN و edema: **thiazide diuretic** بيمنع امتصاص الـ Na+ والـ Cl− في الـ distal convoluted tubule.
+        page: 746
+        quote: "Eplerenone HTN, K+-sparing diuretic (selective mineralocorticoid receptor antagonist)"
+      - kind: sort
+        prompt: "حط كل دوا في مجموعته"
+        bins: ["K+-sparing diuretic", "Antiarrhythmic", "Other HTN drug"]
+        cards:
+          - { text: "Amiloride", bin: 0 }
+          - { text: "Eplerenone", bin: 0 }
+          - { text: "Amiodarone", bin: 1 }
+          - { text: "Propafenone", bin: 1 }
+          - { text: "Amlodipine", bin: 2 }
+          - { text: "Chlorthalidone", bin: 2 }
+          - { text: "Clonidine", bin: 2 }
+        why: "Amiloride (Na+ channel) و eplerenone (mineralocorticoid receptor) هما الـ K+-sparing. Amiodarone (class III) و propafenone (class Ic) antiarrhythmics. Amlodipine و chlorthalidone و clonidine أدوية ضغط تانية."
+        page: 746
+        quote: "Propafenone Ventricular arrhythmia, paroxysmal atrial fibrillation/flutter or supraventricular tachycardia"
+      - kind: explain
+        title: "Nitroprusside و nitroglycerin و clonidine"
+        text: |-
+          - ==Nitroprusside== و **nitroglycerin**: الاتنين **↑ cGMP/NO** (يعني vasodilation). الفرق في الاستخدام: nitroprusside للـ **hypertensive emergency**، و nitroglycerin للـ **angina**.
+          - ==Clonidine==: **α2-receptor agonist**: بيوطّي الـ sympathetic outflow من المخ، فبيستخدم في الـ **hypertensive urgency** وكمان في الـ **ADHD**.
+
+          خد بالك: الجدول بيقول urgency للـ clonidine و emergency للـ nitroprusside.
+        page: 746
+        quote: "Nitroprusside Hypertensive emergency (↑ cGMP/NO) Nitroglycerin Angina (↑ cGMP/NO)"
+      - kind: check
+        question: "A 52-year-old man has BP 240/140 mm Hg with papilledema. Which drug in the table is listed for this hypertensive emergency?"
+        options: ["Nitroglycerin", "Nitroprusside", "Clonidine", "Amlodipine"]
+        answer: 1
+        why:
+          - "Nitroglycerin نفس الآلية (↑ cGMP/NO) بس الجدول بيحطه للـ angina."
+          - "صح: nitroprusside للـ hypertensive emergency."
+          - "Clonidine للـ hypertensive urgency، مش emergency."
+          - "Amlodipine للـ HTN والـ angina، مش emergency."
+        page: 746
+        quote: "Nitroprusside Hypertensive emergency (↑ cGMP/NO)"
+      - kind: aside
+        tone: joke
+        text: "amiloride و amiodarone و amlodipine زي تلات توائم في فصل واحد: المدرّس بيلخبط في الأسامي، بس كل واحد عنده هواية: واحد بيحب الكلية، وواحد بيظبط إيقاع القلب، والتالت بيرخّي الأوعية. اسأل عن الهواية، مش عن الاسم."
+        page: 745
+        quote: "Amlodipine HTN, angina (dihydropyridine Ca2+ channel blocker)"
+      - kind: try
+        items: [rr.L07.009, rr.L07.014, rr.L07.017, rr.L07.010, rr.L07.011]
+    recap:
+      - "Amiloride: Na+ channel في الكلية (K+-sparing)؛ amiodarone: K+ channel (class III)؛ amlodipine: Ca2+ channel (dihydropyridine)"
+      - "Eplerenone: mineralocorticoid receptor antagonist؛ propafenone: Na+ channel (class Ic)"
+      - "Nitroprusside للـ emergency و nitroglycerin للـ angina، الاتنين ↑ cGMP/NO"
+      - "Clonidine: α2 agonist للـ hypertensive urgency والـ ADHD"
+    practice: [rr.L07.006, rr.L07.007, rr.L07.008, rr.L07.009, rr.L07.010, rr.L07.011, rr.L07.012, rr.L07.013, rr.L07.014, rr.L07.015, rr.L07.016, rr.L07.017, rr.L07.018, rr.L07.019]
+
+  - id: rr.L07.lesson2
+    title: "عائلات B و chlor- و clo- و dox-: نفس البداية، أجهزة مختلفة"
+    hook: "ست أدوية بتبدأ بـ chlor-، ولا واحد فيهم شبه التاني: مضاد حيوي ومهدئ ومضاد ذهان ودوا سكر وحساسية ومدر بول"
+    minutes: 9
+    pages: [745, 746]
+    topics: [neurology, psychiatry, endocrine, microbiology, respiratory, reproductive]
+    goals:
+      - "تفرّق بين benztropine و bromocriptine و buspirone و bupropion"
+      - "توصّل كل دوا من الـ chlor- بالجهاز بتاعه"
+      - "تفرّق بين clozapine و clomipramine و clomiphene و clonidine، و doxepin و doxazosin"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "عائلة الـ B"
+        text: |-
+          - ==Benztropine==: **cholinergic antagonist** للـ Parkinson disease والـ extrapyramidal symptoms. في Parkinson الـ dopamine قليل فالـ acetylcholine بيبقى غالب؛ لما تقفل الـ cholinergic ترجع التوازن.
+          - ==Bromocriptine==: **dopamine agonist** للـ Parkinson disease والـ hyperprolactinemia (الـ dopamine هو اللي بيكبس الـ prolactin). الجدول بيقول rarely used.
+          - **Buspirone**: **partial 5-HT1A-receptor agonist** للـ generalized anxiety disorder.
+          - **Bupropion**: **norepinephrine-dopamine reuptake inhibitor** للـ depression والـ smoking cessation.
+        page: 745
+        quote: "Benztropine Parkinson disease, extrapyramidal symptoms (cholinergic antagonist) Bromocriptine Parkinson disease, hyperprolactinemia (dopamine agonist; rarely used)"
+      - kind: table
+        title: "الـ B-drugs"
+        columns: ["Drug", "Use", "Mechanism"]
+        rows:
+          - ["Benztropine", "Parkinson disease, EPS", "Cholinergic antagonist"]
+          - ["Bromocriptine", "Parkinson disease, hyperprolactinemia", "Dopamine agonist"]
+          - ["Buspirone", "Generalized anxiety disorder", "Partial 5-HT1A-receptor agonist"]
+          - ["Bupropion", "Depression, smoking cessation", "Norepinephrine-dopamine reuptake inhibitor"]
+        hide: [[0, 2], [1, 2], [2, 1], [3, 1]]
+        page: 745
+        quote: "Buspirone Generalized anxiety disorder (partial 5-HT1A-receptor agonist)"
+      - kind: check
+        question: "A 29-year-old woman has galactorrhea, amenorrhea and a high prolactin. Which drug from the table also treats Parkinson disease and fits her?"
+        options: ["Benztropine", "Bromocriptine", "Buspirone", "Bupropion"]
+        answer: 1
+        why:
+          - "Benztropine cholinergic antagonist، للـ Parkinson والـ EPS، ملوش دعوة بالـ prolactin."
+          - "صح: bromocriptine dopamine agonist، والـ dopamine بيكبس الـ prolactin."
+          - "Buspirone للـ generalized anxiety disorder."
+          - "Bupropion للـ depression والـ smoking cessation."
+        page: 745
+        quote: "Bromocriptine Parkinson disease, hyperprolactinemia (dopamine agonist; rarely used)"
+      - kind: explain
+        title: "الـ chlor-: ست أجهزة"
+        text: |-
+          - **Chloramphenicol**: antibiotic، بيقفل الـ **50S subunit**.
+          - **Chlordiazepoxide**: ==EtOH withdrawal==: **long-acting benzodiazepine** بيزوّد ↑ frequency of Cl− channel opening في الـ GABAergic neurons.
+          - **Chlorpromazine**: schizophrenia: typical antipsychotic (D2-receptor blockade).
+          - **Chlorpropamide**: diabetes: ==1st-generation sulfonylurea==.
+          - **Chlorpheniramine**: allergy: 1st-generation H1-receptor antagonist.
+          - **Chlorthalidone**: HTN و edema: thiazide diuretic.
+        page: 746
+        quote: "Chlordiazepoxide EtOH withdrawal (↑ frequency of Cl− channel opening in GABAergic neuron membranes; long-acting benzodiazepine)"
+      - kind: figure
+        title: "شجرة الـ chlor-"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L07b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <rect class="fg-acc" x="10" y="85" width="70" height="30" rx="8"/>
+            <text x="45" y="105" text-anchor="middle" class="t-b">Chlor-</text>
+            <line class="fg-arrow" x1="80" y1="100" x2="115" y2="20" marker-end="url(#L07b)"/>
+            <line class="fg-arrow" x1="80" y1="100" x2="115" y2="52" marker-end="url(#L07b)"/>
+            <line class="fg-arrow" x1="80" y1="100" x2="115" y2="84" marker-end="url(#L07b)"/>
+            <line class="fg-arrow" x1="80" y1="100" x2="115" y2="116" marker-end="url(#L07b)"/>
+            <line class="fg-arrow" x1="80" y1="100" x2="115" y2="148" marker-end="url(#L07b)"/>
+            <line class="fg-arrow" x1="80" y1="100" x2="115" y2="180" marker-end="url(#L07b)"/>
+            <text x="120" y="24" class="t-sm"><tspan class="t-b">-amphenicol</tspan> antibiotic (50S)</text>
+            <text x="120" y="56" class="t-sm"><tspan class="t-b">-diazepoxide</tspan> EtOH withdrawal (BZD)</text>
+            <text x="120" y="88" class="t-sm"><tspan class="t-b">-promazine</tspan> schizophrenia (D2)</text>
+            <text x="120" y="120" class="t-sm"><tspan class="t-b">-propamide</tspan> diabetes (sulfonylurea)</text>
+            <text x="120" y="152" class="t-sm"><tspan class="t-b">-pheniramine</tspan> allergy (H1, 1st gen)</text>
+            <text x="120" y="184" class="t-sm"><tspan class="t-b">-thalidone</tspan> HTN, edema (thiazide)</text>
+          </svg>
+        caption: "بداية الاسم واحدة، والآخر هو اللي بيقولك الجهاز: -promazine مضاد ذهان، -propamide دوا سكر، وهكذا."
+        alt: "A tree from the prefix Chlor- to six endings: -amphenicol, antibiotic (50S); -diazepoxide, EtOH withdrawal (benzodiazepine); -promazine, schizophrenia (D2); -propamide, diabetes (sulfonylurea); -pheniramine, allergy (H1, 1st generation); -thalidone, HTN and edema (thiazide)."
+        page: 746
+        quote: "Chlorpromazine Schizophrenia (typical antipsychotic, D2-receptor blockade) Chlorpropamide Diabetes (1st-generation sulfonylurea) Chlorpheniramine Allergy (1st-generation H1-receptor antagonist)"
+      - kind: match
+        prompt: "وصّل كل chlor- باستخدامه"
+        pairs:
+          - ["Chloramphenicol", "Antibiotic"]
+          - ["Chlordiazepoxide", "EtOH withdrawal"]
+          - ["Chlorpromazine", "Schizophrenia"]
+          - ["Chlorpropamide", "Diabetes"]
+          - ["Chlorpheniramine", "Allergy"]
+          - ["Chlorthalidone", "HTN, edema"]
+        why: "الآخر بيفرّق: -promazine (زي fluphenazine) مضاد ذهان، و -propamide sulfonylurea للسكر."
+        page: 746
+        quote: "Chloramphenicol Antibiotic (blocks 50S subunit)"
+      - kind: aside
+        tone: trap
+        text: "أكتر اتنين بيتلخبطوا: ==chlorpromazine== (schizophrenia) و ==chlorpropamide== (diabetes). الفرق حرفين في النص بس، فاقرا الاسم لآخره قبل ما تجاوب."
+        page: 746
+        quote: "Chlorpropamide Diabetes (1st-generation sulfonylurea)"
+      - kind: explain
+        title: "الـ clo- والـ dox-"
+        text: |-
+          - **Clozapine**: schizophrenia (atypical antipsychotic).
+          - **Clomipramine**: depression و anxiety و chronic pain: ==tricyclic antidepressant==.
+          - **Clomiphene**: infertility due to anovulation: ==selective estrogen receptor modulator== في الـ hypothalamus. بيقفل الـ negative feedback بتاع الـ estrogen، فالـ hypothalamus يزوّد الإشارة للـ ovary.
+          - **Clonidine**: hypertensive urgency و ADHD: α2-receptor agonist.
+
+          و **doxepin** (depression و anxiety، low-dose للـ insomnia، ومش للـ bipolar disorder عشان risk of mania) غير **doxazosin** (BPH و HTN: α1-receptor antagonist).
+        page: 746
+        quote: "Clomiphene Infertility due to anovulation (selective estrogen receptor modulator in hypothalamus)"
+      - kind: check
+        question: "A 27-year-old woman cannot conceive because she does not ovulate. She is given a SERM that acts in the hypothalamus. Which drug?"
+        options: ["Clomipramine", "Clomiphene", "Clonidine", "Clozapine"]
+        answer: 1
+        why:
+          - "Clomipramine tricyclic antidepressant."
+          - "صح: clomiphene للـ infertility due to anovulation، SERM في الـ hypothalamus."
+          - "Clonidine α2-receptor agonist للـ hypertensive urgency والـ ADHD."
+          - "Clozapine atypical antipsychotic للـ schizophrenia."
+        page: 746
+        quote: "Clomiphene Infertility due to anovulation (selective estrogen receptor modulator in hypothalamus)"
+      - kind: reveal
+        prompt: "مريض عنده BPH و HTN، والروشتة مكتوب فيها «Dox...». أنهي واحد؟ وليه التاني غلط؟"
+        answer: "**Doxazosin**: α1-receptor antagonist للـ BPH والـ HTN. أما **doxepin** فده للـ depression والـ anxiety (و low-dose للـ insomnia)، ومش بيتدّى في الـ bipolar disorder عشان risk of mania."
+        page: 746
+        quote: "Doxazosin BPH, HTN (α1-receptor antagonist)"
+      - kind: try
+        items: [rr.L07.031, rr.L07.041, rr.L07.044, rr.L07.065, rr.L07.020]
+    recap:
+      - "Benztropine cholinergic antagonist، bromocriptine dopamine agonist، buspirone 5-HT1A partial agonist، bupropion NDRI"
+      - "Chlor-: amphenicol (50S)، diazepoxide (EtOH withdrawal)، promazine (schizophrenia)، propamide (diabetes)، pheniramine (allergy)، thalidone (thiazide)"
+      - "Clomiphene للـ anovulation، clomipramine TCA، clonidine α2 agonist، clozapine antipsychotic"
+      - "Doxepin للـ depression، doxazosin α1 blocker للـ BPH"
+    practice: [rr.L07.001, rr.L07.020, rr.L07.021, rr.L07.029, rr.L07.030, rr.L07.031, rr.L07.036, rr.L07.037, rr.L07.038, rr.L07.039, rr.L07.040, rr.L07.041, rr.L07.042, rr.L07.043, rr.L07.044, rr.L07.045, rr.L07.059, rr.L07.062, rr.L07.063, rr.L07.064, rr.L07.065, rr.L07.070, rr.L07.073]
+
+  - id: rr.L07.lesson3
+    title: "بقية الأزواج: flu- و nal- و -azole و rif- وغيرهم"
+    hook: "naloxone بينقذ في الـ overdose و naltrexone بيحمي من الانتكاسة: نفس الآلية، وقت مختلف خالص"
+    minutes: 9
+    pages: [746, 746]
+    topics: [psychiatry, neurology, gastrointestinal, microbiology, reproductive, respiratory]
+    goals:
+      - "تفرّق بين الأزواج النفسية: fluoxetine/fluphenazine، naloxone/naltrexone، trazodone/tramadol، varenicline/venlafaxine، sertraline/selegiline"
+      - "تعرف عائلة الـ -azole والـ rif- بالـ target"
+      - "تفرّق بين cimetidine و cetirizine، و mifepristone و misoprostol"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Flu- و ser-/sel-"
+        text: |-
+          - ==Fluoxetine==: depression: **selective serotonin reuptake inhibitor**.
+          - ==Fluphenazine==: schizophrenia: **typical antipsychotic** (D2-receptor antagonist).
+          - **Sertraline**: depression و PTSD: SSRI برضه.
+          - **Selegiline**: Parkinson disease: **MAO-B inhibitor** (بيقلّل تكسير الـ dopamine).
+          - **Aripiprazole**: schizophrenia: atypical antipsychotic، D2 partial agonist.
+        page: 746
+        quote: "Fluoxetine Depression (selective serotonin reuptake inhibitor) Fluphenazine Schizophrenia (typical antipsychotic, D2-receptor antagonist)"
+      - kind: check
+        question: "A 68-year-old man with Parkinson disease starts an MAO-B inhibitor. Which drug?"
+        options: ["Sertraline", "Selegiline", "Fluphenazine", "Benztropine"]
+        answer: 1
+        why:
+          - "Sertraline SSRI للـ depression والـ PTSD."
+          - "صح: selegiline MAO-B inhibitor للـ Parkinson disease."
+          - "Fluphenazine typical antipsychotic، بالعكس بيقفل D2."
+          - "Benztropine للـ Parkinson بس cholinergic antagonist."
+        page: 746
+        quote: "Selegiline Parkinson disease (MAO-B inhibitor)"
+      - kind: explain
+        title: "Nal- و tra- و var-/ven-"
+        text: |-
+          - ==Naloxone==: **opioid overdose**، و ==naltrexone==: **alcohol and opioid use disorder**. الاتنين **opioid receptor antagonist**؛ الأول للإنقاذ دلوقتي، والتاني للوقاية من الانتكاسة بعدين.
+          - **Trazodone**: insomnia: بيقفل 5-HT2 و α1-adrenergic و H1 receptors، وبيمنع الـ 5-HT reuptake بشكل ضعيف. و **tramadol**: chronic pain: weak opioid agonist.
+          - **Varenicline**: smoking cessation: nicotinic ACh receptor partial agonist. و **venlafaxine**: depression و diabetic neuropathy: SNRI.
+        page: 746
+        quote: "Naloxone Opioid overdose (opioid receptor antagonist) Naltrexone Alcohol and opioid use disorder (opioid receptor antagonist)"
+      - kind: match
+        prompt: "وصّل كل دوا باستخدامه"
+        pairs:
+          - ["Naloxone", "Opioid overdose"]
+          - ["Naltrexone", "Alcohol and opioid use disorder"]
+          - ["Trazodone", "Insomnia"]
+          - ["Tramadol", "Chronic pain"]
+          - ["Varenicline", "Smoking cessation"]
+          - ["Venlafaxine", "Depression, diabetic neuropathy"]
+        why: "كل زوج نفس البداية: nal- الاتنين opioid antagonists بس واحد للـ overdose والتاني للـ use disorder؛ tra- واحد للنوم وواحد للألم؛ va-/ve- واحد للسجاير وواحد للاكتئاب."
+        page: 746
+        quote: "Varenicline Smoking cessation (nicotinic ACh receptor partial agonist) Venlafaxine Depression, diabetic neuropathy (serotonin-norepinephrine reuptake inhibitor)"
+      - kind: explain
+        title: "الحموضة والحساسية: H1 و H2 و الـ pump"
+        text: |-
+          - ==Cimetidine==: gastritis و peptic ulcer: **H2-receptor antagonist** (الـ H2 على الـ parietal cell).
+          - ==Cetirizine==: allergy: **2nd-generation H1-receptor antagonist**. وقريبه **chlorpheniramine** 1st-generation H1.
+          - **Omeprazole**: GERD: بيقفل الـ **H+/K+-ATPase** في الـ parietal cells نفسها.
+        page: 746
+        quote: "Cimetidine Gastritis, peptic ulcer (H2-receptor antagonist) Cetirizine Allergy (2nd-generation H1-receptor antagonist)"
+      - kind: figure
+        title: "أربع -azoles، أربع targets"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="5" y="10" width="170" height="70" rx="8"/>
+            <text x="15" y="32" class="t-b">Omeprazole</text>
+            <text x="15" y="52" class="t-sm">GERD</text>
+            <text x="15" y="70" class="t-sm t-mut">H+/K+-ATPase</text>
+            <rect class="fg-good" x="185" y="10" width="170" height="70" rx="8"/>
+            <text x="195" y="32" class="t-b">Ketoconazole</text>
+            <text x="195" y="52" class="t-sm">antifungal</text>
+            <text x="195" y="70" class="t-sm t-mut">fungal sterol synthesis</text>
+            <rect class="fg-bad" x="5" y="90" width="170" height="70" rx="8"/>
+            <text x="15" y="112" class="t-b">Aripiprazole</text>
+            <text x="15" y="132" class="t-sm">schizophrenia</text>
+            <text x="15" y="150" class="t-sm t-mut">D2 partial agonist</text>
+            <rect class="fg-box" x="185" y="90" width="170" height="70" rx="8"/>
+            <text x="195" y="112" class="t-b">Anastrozole</text>
+            <text x="195" y="132" class="t-sm">ER+ breast cancer</text>
+            <text x="195" y="150" class="t-sm t-mut">aromatase inhibitor</text>
+          </svg>
+        caption: "كلهم آخرهم «-azole» تقريبًا، بس واحد للمعدة، وواحد للفطريات، وواحد للـ schizophrenia، وواحد لسرطان الثدي."
+        alt: "Four boxes: Omeprazole, GERD, H+/K+-ATPase; Ketoconazole, antifungal, fungal sterol synthesis; Aripiprazole, schizophrenia, D2 partial agonist; Anastrozole, ER-positive breast cancer, aromatase inhibitor."
+        page: 746
+        quote: "Omeprazole GERD (inhibits H+/K+-ATPase in parietal cells) Ketoconazole Antifungal (inhibits fungal sterol synthesis)"
+      - kind: check
+        question: "A 63-year-old postmenopausal woman with ER ⊕ breast cancer takes anastrozole. What does it inhibit?"
+        options: ["Aromatase", "H+/K+-ATPase", "Fungal sterol synthesis", "D2 receptor (partial agonist)"]
+        answer: 0
+        why:
+          - "صح: anastrozole aromatase inhibitor للـ ER ⊕ breast cancer في الـ postmenopausal women."
+          - "ده omeprazole، للـ GERD."
+          - "ده ketoconazole، antifungal."
+          - "ده aripiprazole، للـ schizophrenia."
+        page: 746
+        quote: "Anastrozole ER ⊕ breast cancer in postmenopausal women (aromatase inhibitor)"
+      - kind: explain
+        title: "Rif- و mife-/miso-"
+        text: |-
+          - ==Rifaximin== و ==rifampin==: نفس الآلية بالظبط: **inhibit DNA-dependent RNA polymerase**. الفرق في الاستخدام: rifaximin للـ **hepatic encephalopathy** (بيقلّل البكتيريا اللي بتعمل ammonia في المصران)، و rifampin **antituberculous drug** و antimicrobial.
+          - **Mifepristone**: pregnancy termination: progesterone receptor antagonist (الحمل محتاج progesterone يفضل ماشي). و **misoprostol** بيتدّى **معاه**: synthetic PGE1 analog.
+        page: 746
+        quote: "Rifampin Antituberculous drug/antimicrobial (inhibits DNA-dependent RNA polymerase)"
+      - kind: check
+        question: "A man with cirrhosis has recurrent hepatic encephalopathy despite lactulose. Which drug that inhibits DNA-dependent RNA polymerase is added?"
+        options: ["Rifampin", "Rifaximin", "Ketoconazole", "Omeprazole"]
+        answer: 1
+        why:
+          - "Rifampin نفس الآلية بس للـ TB."
+          - "صح: rifaximin للـ hepatic encephalopathy: بيقلّل الـ ammoniagenic bacteria."
+          - "Ketoconazole antifungal."
+          - "Omeprazole للـ GERD."
+        page: 746
+        quote: "Rifaximin Hepatic encephalopathy (inhibits DNA-dependent RNA polymerase"
+      - kind: try
+        items: [rr.L07.025, rr.L07.004, rr.L07.051, rr.L07.058, rr.L07.068]
+    recap:
+      - "Fluoxetine SSRI و fluphenazine typical antipsychotic؛ sertraline SSRI و selegiline MAO-B inhibitor"
+      - "Naloxone للـ overdose و naltrexone للـ use disorder؛ trazodone للنوم و tramadol للألم؛ varenicline للسجاير و venlafaxine SNRI"
+      - "Cimetidine H2، cetirizine H1 (2nd gen)، omeprazole H+/K+-ATPase"
+      - "Rifaximin للـ hepatic encephalopathy و rifampin للـ TB، نفس الآلية"
+    practice: [rr.L07.002, rr.L07.003, rr.L07.004, rr.L07.005, rr.L07.022, rr.L07.023, rr.L07.024, rr.L07.025, rr.L07.026, rr.L07.027, rr.L07.028, rr.L07.032, rr.L07.033, rr.L07.034, rr.L07.035, rr.L07.046, rr.L07.047, rr.L07.048, rr.L07.049, rr.L07.050, rr.L07.051, rr.L07.052, rr.L07.053, rr.L07.054, rr.L07.055, rr.L07.056, rr.L07.057, rr.L07.058, rr.L07.060, rr.L07.061, rr.L07.066, rr.L07.067, rr.L07.068, rr.L07.069, rr.L07.071, rr.L07.072, rr.L07.074]
