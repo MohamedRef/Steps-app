@@ -5,7 +5,9 @@
 use std::time::Duration;
 
 use steps_protocol::client::{Backoff, Effect, Phase, SyncClient};
-use steps_protocol::cloud::{DeviceInfo, DeviceSummary, ErrorCode, GoogleSignIn};
+use steps_protocol::cloud::{
+    DeviceInfo, DeviceSummary, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, Session, SetPassword,
+};
 use steps_protocol::sync::{ClientMsg, MAX_OPS_PER_PUSH, ServerMsg};
 use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
 use web_time::Instant;
@@ -13,9 +15,10 @@ use web_time::Instant;
 use super::GoogleClient;
 use super::api::{Api, CloudError};
 use super::oauth::{self, OAuthError};
+use super::password::{self, Invalid};
 use super::session::{Auth, SessionVault};
 use super::socket::{ConnectError, Frame, Socket};
-use super::{CloudStatus, Command, Event, Problem, SyncState};
+use super::{CloudStatus, Command, Event, LoginStatus, Problem, SyncState};
 use crate::store::Store;
 
 type Ws = Socket;
@@ -88,6 +91,10 @@ pub struct Engine {
     /// Pushes wait until then (the clock was ahead); pulls go on.
     hold_pushes_until: Option<Instant>,
     pending_sign_in: Option<PendingSignIn>,
+    /// The usual vault, set aside while a sign-in on someone else's device
+    /// keeps its session in a forgetful one; back after sign-out.
+    spare_vault: Option<Box<dyn SessionVault>>,
+    login: LoginStatus,
     events: UnboundedSender<Event>,
 }
 
@@ -128,6 +135,8 @@ impl Engine {
             problem: None,
             hold_pushes_until: None,
             pending_sign_in,
+            spare_vault: None,
+            login: LoginStatus::default(),
             events,
         }
     }
@@ -207,6 +216,23 @@ impl Engine {
                 self.pending_sign_in = None;
                 self.events.send(Event::SigningIn(true)).ok();
                 self.sign_in_google(google).await;
+            }
+            Command::SignInPassword { username, password, remember } => {
+                self.problem = None;
+                self.pending_sign_in = None;
+                self.events.send(Event::SigningIn(true)).ok();
+                self.sign_in_password(username, password, remember).await;
+                self.events.send(Event::SigningIn(false)).ok();
+            }
+            Command::LoadLogin => {
+                let result = self.authed(|api, access| async move { api.login(&access).await }).await;
+                self.login_answer(result);
+            }
+            Command::SetLogin { username, password } => self.set_login(username, password).await,
+            Command::RemoveLogin => {
+                self.login_busy();
+                let result = self.authed(|api, access| async move { api.remove_login(&access).await }).await;
+                self.login_answer(result);
             }
             Command::SignOut => {
                 let _ = self.authed(|api, access| async move { api.sign_out(&access).await }).await;
@@ -301,24 +327,7 @@ impl Engine {
         let SignInStep::IdToken(id_token) = &pending.step else { return };
         let body = GoogleSignIn { id_token: id_token.clone(), device: self.device.clone() };
         match self.api.sign_in_google(&body).await {
-            Ok(session) => {
-                let vault =
-                    self.vault.take().unwrap_or_else(|| Box::new(super::session::MemoryVault::default()));
-                match Auth::new(session, vault) {
-                    Ok(auth) => self.auth = Some(auth),
-                    Err(vault) => {
-                        crate::diag::report!("Steps Cloud: sign-in session was not saved");
-                        self.vault = Some(vault);
-                        self.problem = Some(Problem::SignInFailed);
-                        return;
-                    }
-                }
-                self.problem = None;
-                self.stopped = false;
-                self.client = SyncClient::new(self.store.last_seq());
-                self.backoff.reset();
-                self.retry_at = Instant::now();
-            }
+            Ok(session) => self.begin_session(session, true),
             Err(CloudError::Network(e)) => {
                 crate::diag::report!("Steps Cloud sign-in: network: {e}");
                 self.wait_for_network(pending);
@@ -333,6 +342,117 @@ impl Engine {
         }
     }
 
+    /// Keeps a session Steps Cloud just gave and starts syncing: the whole
+    /// account comes down from the start of its log, so a new device ends
+    /// up where the others are. `remember: false` keeps it until the app or
+    /// tab closes ([`super::session::not_remembered`]).
+    fn begin_session(&mut self, session: Session, remember: bool) {
+        let usual = self.vault.take().unwrap_or_else(|| Box::new(super::session::MemoryVault::default()));
+        let vault = if remember {
+            usual
+        } else {
+            // An older session for this device mustn't outlive this one.
+            usual.clear();
+            self.spare_vault = Some(usual);
+            super::session::not_remembered()
+        };
+        match Auth::new(session, vault) {
+            Ok(auth) => self.auth = Some(auth),
+            Err(vault) => {
+                crate::diag::report!("Steps Cloud: sign-in session was not saved");
+                self.vault = Some(self.spare_vault.take().unwrap_or(vault));
+                self.problem = Some(Problem::SignInFailed);
+                return;
+            }
+        }
+        self.problem = None;
+        self.stopped = false;
+        self.client = SyncClient::new(self.store.last_seq());
+        self.backoff.reset();
+        self.retry_at = Instant::now();
+    }
+
+    async fn sign_in_password(&mut self, username: String, password: String, remember: bool) {
+        let key = match stretch(username.clone(), password).await {
+            Ok(k) => k,
+            Err(e) => {
+                crate::diag::report!("password sign-in: {e}");
+                self.problem = Some(Problem::SignInFailed);
+                return;
+            }
+        };
+        let body = PasswordSignIn { username, password_key: key, device: self.device.clone() };
+        match self.api.sign_in_password(&body).await {
+            Ok(session) => self.begin_session(session, remember),
+            Err(e) => {
+                crate::diag::report!("password sign-in: {e}");
+                self.problem = Some(password_problem(&e).unwrap_or(match e {
+                    CloudError::Network(_) => Problem::Network,
+                    CloudError::Api { code: ErrorCode::NotAllowed, .. } => Problem::NotAllowed,
+                    _ => Problem::SignInFailed,
+                }));
+            }
+        }
+    }
+
+    fn login_busy(&mut self) {
+        self.login.saving = true;
+        self.login.saved = false;
+        self.login.problem = None;
+        self.events.send(Event::Login(self.login.clone())).ok();
+    }
+
+    /// Settings shows what Steps Cloud said about the username, or why it
+    /// couldn't say.
+    fn login_answer(&mut self, result: Option<Result<PasswordLogin, CloudError>>) {
+        let was_saving = std::mem::take(&mut self.login.saving);
+        match result {
+            Some(Ok(l)) => {
+                self.login.username = Some(l.username);
+                self.login.saved = was_saving;
+                self.login.problem = None;
+            }
+            Some(Err(e)) => {
+                self.login.problem = Some(password_problem(&e).unwrap_or_else(|| {
+                    self.cloud_error(&e);
+                    self.problem.unwrap_or(Problem::Server)
+                }));
+            }
+            None => self.login.problem = Some(self.problem.unwrap_or(Problem::Network)),
+        }
+        self.events.send(Event::Login(self.login.clone())).ok();
+    }
+
+    async fn set_login(&mut self, username: String, password: String) {
+        if let Err(why) = password::check_new(&username, &password) {
+            self.login.problem = Some(match why {
+                Invalid::Username => Problem::BadUsername,
+                Invalid::TooShort => Problem::ShortPassword,
+            });
+            self.login.saved = false;
+            self.events.send(Event::Login(self.login.clone())).ok();
+            return;
+        }
+        self.login_busy();
+        let key = match stretch(username.clone(), password).await {
+            Ok(k) => k,
+            Err(e) => {
+                crate::diag::report!("setting the password: {e}");
+                self.login.saving = false;
+                self.login.problem = Some(Problem::Server);
+                self.events.send(Event::Login(self.login.clone())).ok();
+                return;
+            }
+        };
+        let body = SetPassword { username, password_key: key };
+        let call = move |api: Api, access: String| {
+            let body = body.clone();
+            async move { api.set_login(&access, &body).await }
+        };
+        let result = self.authed(call).await;
+        self.login_answer(result);
+    }
+
     fn wait_for_network(&mut self, mut pending: PendingSignIn) {
         pending.schedule_retry();
         self.pending_sign_in = Some(pending);
@@ -342,8 +462,11 @@ impl Engine {
     fn sign_out_locally(&mut self) {
         self.drop_socket();
         if let Some(auth) = self.auth.take() {
-            self.vault = Some(auth.forget());
+            let forgetful = auth.forget();
+            self.vault = Some(self.spare_vault.take().unwrap_or(forgetful));
         }
+        self.login = LoginStatus::default();
+        self.events.send(Event::Login(LoginStatus::default())).ok();
         // The next sign-in may be another account: read its log from the start.
         let _ = self.store.reset_sync();
         self.stopped = false;
@@ -602,6 +725,7 @@ impl Engine {
             last_sync_ms: self.store.last_sync_ms(),
             problem: self.problem,
             finishing_sign_in: self.pending_sign_in.is_some(),
+            temporary: self.auth.as_ref().is_some_and(|a| !a.remembered()),
         };
         if self.last_status.as_ref() != Some(&status) {
             self.last_status = Some(status.clone());
@@ -629,9 +753,59 @@ pub fn now_ms() -> u64 {
         .unwrap_or_default()
 }
 
+/// Stretches the password (`password::password_key`) off the UI thread
+/// where there is one. The browser has one thread: a short nap first lets
+/// the page show «بيدخل…» before the work starts.
+async fn stretch(username: String, password: String) -> Result<String, String> {
+    #[cfg(not(target_arch = "wasm32"))]
+    return blocking(move || password::password_key(&username, &password)).await;
+    #[cfg(target_arch = "wasm32")]
+    {
+        crate::platform::time::sleep(Duration::from_millis(50)).await;
+        password::password_key(&username, &password)
+    }
+}
+
+/// What a password answer means for Mohamed, when it's about the password.
+fn password_problem(e: &CloudError) -> Option<Problem> {
+    match e {
+        CloudError::Api { code: ErrorCode::WrongPassword, .. } => Some(Problem::WrongPassword),
+        CloudError::Api { code: ErrorCode::UsernameTaken, .. } => Some(Problem::UsernameTaken),
+        CloudError::Api { code: ErrorCode::TooManyTries, retry_after_ms, .. } => {
+            Some(Problem::Locked(retry_after_ms.unwrap_or(60_000).div_ceil(60_000).max(1)))
+        }
+        _ => None,
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn password_answers_become_their_own_problems() {
+        let api = |status, body: &str| super::super::api::api_error(status, body);
+        assert_eq!(
+            password_problem(&api(401, r#"{"code":"wrong_password","message":""}"#)),
+            Some(Problem::WrongPassword)
+        );
+        assert_eq!(
+            password_problem(&api(409, r#"{"code":"username_taken","message":""}"#)),
+            Some(Problem::UsernameTaken)
+        );
+        // Minutes, rounded up: 61 seconds is "2 minutes", never "0".
+        let locked = |ms: u64| {
+            password_problem(&api(
+                429,
+                &format!(r#"{{"code":"too_many_tries","message":"","retry_after_ms":{ms}}}"#),
+            ))
+        };
+        assert_eq!(locked(61_000), Some(Problem::Locked(2)));
+        assert_eq!(locked(1), Some(Problem::Locked(1)));
+        assert_eq!(locked(3_600_000), Some(Problem::Locked(60)));
+        assert_eq!(password_problem(&api(401, r#"{"code":"unauthorized","message":""}"#)), None);
+        assert_eq!(password_problem(&CloudError::Network("down".into())), None);
+    }
 
     #[test]
     fn a_waiting_sign_in_retries_quickly_then_every_fifteen_seconds() {

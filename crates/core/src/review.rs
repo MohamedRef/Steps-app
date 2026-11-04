@@ -234,6 +234,11 @@ pub trait StudyStore {
     fn new_left_today(&self, _now_ms: i64) -> usize {
         usize::MAX
     }
+    /// The First Aid pages read, when the page gate is on: new items start
+    /// only from these pages (`session::Inputs::pages`). `None` = no gate.
+    fn pages_read(&self) -> Option<&crate::pages::PagesRead> {
+        None
+    }
     /// The interval in days each grade (Again, Hard, Good, Easy) would give
     /// the item now, for "1d · 3d · 9d" on the grade buttons.
     fn intervals(&self, _item_id: &str, _now_ms: i64) -> Option<[f32; 4]> {
@@ -342,5 +347,37 @@ mod tests {
         let json = serde_json::to_string(&l).unwrap();
         assert!(json.contains("\"item_id\":\"hb.L01.001\""));
         assert_eq!(serde_json::from_str::<LoggedReview>(&json).unwrap(), l);
+    }
+
+    proptest::proptest! {
+        /// Whatever the wall clock does and whatever the other device's
+        /// stamps say, every new local stamp sorts after the last one and
+        /// after everything observed, so a local edit always wins LWW.
+        #[test]
+        fn stamps_only_go_up(
+            steps in proptest::collection::vec((proptest::prelude::any::<bool>(), 0i64..5_000, 0i64..5_000, 0u32..4), 1..60),
+        ) {
+            let mut c = HlcClock::new("s24u");
+            let mut last: Option<Hlc> = None;
+            let mut seen_max: Option<Hlc> = None;
+            for (remote, now, remote_wall, remote_counter) in steps {
+                if remote {
+                    let seen = Hlc { wall_ms: remote_wall, counter: remote_counter, device: "tab".into() };
+                    c.observe(&seen);
+                    seen_max = seen_max.max(Some(seen));
+                    continue;
+                }
+                let next = c.tick(now);
+                proptest::prop_assert!(next.wall_ms >= now, "never behind the wall clock");
+                proptest::prop_assert_eq!(next.device.as_str(), "s24u");
+                if let Some(prev) = &last {
+                    proptest::prop_assert!(&next > prev);
+                }
+                if let Some(seen) = &seen_max {
+                    proptest::prop_assert!((next.wall_ms, next.counter) > (seen.wall_ms, seen.counter));
+                }
+                last = Some(next);
+            }
+        }
     }
 }

@@ -30,11 +30,23 @@
     </div>
     <noscript>Steps needs JavaScript and WebAssembly.</noscript>
     <script type="module">
-      import init from "./steps.js";
-      init({ module_or_path: "./steps_bg.wasm" }).catch((e) => {
-        document.querySelector("#boot img").style.animation = "none";
-        document.getElementById("boot-msg").textContent = "Steps مافتحتش في المتصفح ده: " + e;
+      // The content pack downloads alongside the wasm; the app waits for it.
+      globalThis.stepsPack = fetch("./content.pack").then((r) => {
+        if (!r.ok) throw new Error("content.pack: HTTP " + r.status);
+        return r.arrayBuffer();
       });
+      import init from "./steps.js";
+      init({ module_or_path: "./steps_bg.wasm" })
+        .then(() => globalThis.stepsPack)
+        .then(() => {
+          // Once this visit has everything, keep it on the device for the next.
+          if ("serviceWorker" in navigator) navigator.serviceWorker.register("./sw.js").catch(() => {});
+        })
+        .catch((e) => {
+          document.querySelector("#boot img").style.animation = "none";
+          const msg = document.getElementById("boot-msg");
+          if (!msg.textContent) msg.textContent = "Steps مافتحتش في المتصفح ده: " + e;
+        });
     </script>
   </body>
 </html>

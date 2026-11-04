@@ -12,6 +12,7 @@ pub mod export;
 pub mod import;
 mod install;
 pub mod own;
+pub mod pages;
 mod paths;
 pub mod sync;
 
@@ -383,6 +384,29 @@ impl Store {
             params![format!("local.{key}"), serde_json::to_string(value)?],
         )?;
         Ok(())
+    }
+
+    /// Where Mohamed is in something (a lesson's step and answers, an open
+    /// paper): synced, so another device, or a new one after a password
+    /// sign-in, opens at the same point. One too big for a sync op stays on
+    /// this device instead, and this device's own copy then wins here.
+    pub fn put_place<T: Serialize>(&self, key: &str, value: &T) -> Result<()> {
+        let json = serde_json::to_string(value)?;
+        // The op wraps the value in a few dozen bytes of its own.
+        if json.len() + 1024 > steps_protocol::sync::MAX_PAYLOAD_BYTES {
+            return self.put_local_setting(key, value);
+        }
+        self.conn
+            .lock()
+            .unwrap_or_else(std::sync::PoisonError::into_inner)
+            .execute("DELETE FROM meta WHERE key = ?1", [format!("local.{key}")])?;
+        self.put_setting(key, value)
+    }
+
+    /// Reads what [`Store::put_place`] wrote; also finds a place saved
+    /// before places synced (a local setting).
+    pub fn place<T: DeserializeOwned>(&self, key: &str) -> Option<T> {
+        self.local_setting(key).or_else(|| self.setting(key))
     }
 
     pub fn review_settings(&self) -> ReviewSettings {
@@ -781,6 +805,24 @@ mod tests {
         s.put_setting("sound", &2u32).unwrap();
         s.put_setting("sound", &3u32).unwrap();
         assert_eq!(s.setting::<u32>("sound"), Some(3));
+        // Saved on every answer, a lesson's place still sends one op.
+        let before = s.outbox_len();
+        for at in 0..5 {
+            s.put_place("lessonpos.y", &at).unwrap();
+        }
+        assert_eq!(s.outbox_len(), before + 1);
+        assert_eq!(s.outbox(100).unwrap().last().unwrap().payload.as_ref().unwrap()["value"], "4");
+        // A place syncs and replaces this device's old local copy.
+        s.put_local_setting("lessonpos.x", &1).unwrap();
+        s.put_place("lessonpos.x", &2).unwrap();
+        assert_eq!(s.place::<i32>("lessonpos.x"), Some(2));
+        assert_eq!(s.setting::<i32>("lessonpos.x"), Some(2), "synced");
+        assert_eq!(s.local_setting::<i32>("lessonpos.x"), None);
+        // One too big for a sync op stays here, and wins here.
+        let big = "x".repeat(steps_protocol::sync::MAX_PAYLOAD_BYTES);
+        s.put_place("lessonpos.x", &big).unwrap();
+        assert_eq!(s.place::<String>("lessonpos.x").as_deref(), Some(big.as_str()));
+        assert_eq!(s.setting::<i32>("lessonpos.x"), Some(2));
         s.put_local_setting("rings", &true).unwrap();
         assert_eq!(s.local_setting::<bool>("rings"), Some(true));
         assert_eq!(s.setting::<bool>("rings"), None);
