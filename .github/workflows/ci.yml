@@ -50,7 +50,18 @@ jobs:
           save-if: ${{ github.ref == 'refs/heads/main' }}
       - run: cargo fmt --all --check
       - run: cargo clippy --workspace --all-targets -- -D warnings
-      - run: cargo test --workspace
+      # A test past a minute is named on the run (Mohamed, 2026-11-04: keep
+      # the runs fast). Tests that grow with the content were the cause
+      # before: a bank paper of every MCQ took minutes per test.
+      - name: cargo test --workspace
+        run: |
+          set -o pipefail
+          cargo test --workspace 2>&1 | tee test-output.txt
+      - name: Name the slow tests
+        if: always()
+        run: |
+          grep -oE 'test [^ ]+ has been running for over 60 seconds' test-output.txt 2>/dev/null \
+            | awk '{print "::warning title=Slow test::" $2 " ran over a minute; make it smaller (docs/RUN.md § Tests and coverage)"}' || true
       - uses: actions/setup-node@v5
         with:
           node-version: 22
