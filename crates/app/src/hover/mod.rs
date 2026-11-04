@@ -53,7 +53,7 @@ pub fn BookPage(
     held: bool,
     /// The item, lesson step or lecture citing it; a course that cites
     /// slides shows "سلايد N" and opens that lecture's slide. Empty: the
-    /// hepatology book.
+    /// primary book (First Aid).
     #[props(default)]
     of: String,
     /// The تحشيشة of the list the quote holds, shown with it in the sheet.

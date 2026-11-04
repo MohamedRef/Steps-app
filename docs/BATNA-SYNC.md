@@ -16,4 +16,4 @@ git apply --reject --whitespace=nowarn /tmp/port.patch   # then fix any *.rej by
 
 Then run `just check`, fix tests that expect Batna's courses (`hb`, `res`…), add a `changes/` line for anything Mohamed can see, update the commit above, and open a PR titled "Port Batna main up to <sha>".
 
-Watch for: Batna-only features (its MSc calculators, course wording such as credit hours and semesters), which Steps may adapt rather than copy, and anything signed or keyed (update keys, Worker names, Google client), which Steps never shares with Batna.
+Watch for: Batna-only features (MSc calculators, course wording such as credit hours and semesters), which Steps leaves out (its calculators were removed on 2026-11-04), and anything signed or keyed (update keys, Worker names, Google client), which Steps never shares with Batna.

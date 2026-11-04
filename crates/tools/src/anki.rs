@@ -4,13 +4,12 @@
 //! the app's «export to Anki» button shares; see docs/ANKI.md.
 //!
 //! By default it writes one file, `dist/anki/steps.apkg`, with a `Steps`
-//! deck, a level per course and one subdeck per lecture (`Steps::Hepatology::01 Liver Cirrhosis`).
+//! deck, a level per course and one subdeck per lecture (`Steps::Cardiovascular::01 Embryology`).
 //! `--lecture` writes just that lecture to `steps-hb-L01.apkg`.
 //!
 //! So the file never shrinks while content threads work, a lecture that
 //! isn't merged yet comes from the project's shared folder, like
-//! make_apkg.py does: `<medstudy>/content-wip/hb/LNN.yaml`, then
-//! `<medstudy>/drafts/LNN.yaml` or `LNN.draft.yaml`. `<medstudy>` is
+//! make_apkg.py does: `<medstudy>/content-wip/<course>/LNN.yaml`. `<medstudy>` is
 //! `--drafts DIR`, or `/mnt/project-files/steps` when it exists;
 //! `--merged-only` turns this off. Those notes get a `draft` tag.
 //!
@@ -163,14 +162,11 @@ const MEDSTUDY: &str = "/mnt/project-files/steps";
 
 /// The newest unmerged version of a lecture, if there is one.
 fn draft_for(medstudy: &Path, id: &str) -> Option<Result<Lecture, String>> {
-    let (course, num) = id.split_once('.').unwrap_or(("hb", id));
-    let mut candidates = vec![medstudy.join("content-wip").join(course).join(format!("{num}.yaml"))];
-    // The old drafts folder only ever held Hepatology.
-    if course == "hb" {
-        candidates.push(medstudy.join("drafts").join(format!("{num}.yaml")));
-        candidates.push(medstudy.join("drafts").join(format!("{num}.draft.yaml")));
+    let (course, num) = id.split_once('.')?;
+    let path = medstudy.join("content-wip").join(course).join(format!("{num}.yaml"));
+    if !path.exists() {
+        return None;
     }
-    let path = candidates.into_iter().find(|p| p.exists())?;
     Some(crate::read_yaml::<Lecture>(&path).and_then(|lec| {
         if lec.lecture == id {
             Ok(lec)
@@ -196,7 +192,6 @@ mod tests {
         let dir = tempfile::tempdir().unwrap();
         let d = dir.path();
         std::fs::create_dir_all(d.join("content/hb")).unwrap();
-        std::fs::create_dir_all(d.join("steps/drafts")).unwrap();
         std::fs::create_dir_all(d.join("steps/content-wip/hb")).unwrap();
         std::fs::write(
             d.join("content/index.yaml"),
@@ -205,11 +200,10 @@ mod tests {
         .unwrap();
         let sample = include_str!("../../../fixtures/content/sample.yaml");
         std::fs::write(d.join("content/hb/L01.yaml"), sample).unwrap();
-        // Merged wins over wip; wip wins over drafts.
+        // Merged wins over wip; a broken wip file is left out.
         std::fs::write(d.join("steps/content-wip/hb/L01.yaml"), "not: read").unwrap();
         std::fs::write(d.join("steps/content-wip/hb/L02.yaml"), sample.replace("hb.L01", "hb.L02")).unwrap();
-        std::fs::write(d.join("steps/drafts/L02.draft.yaml"), "not: read").unwrap();
-        std::fs::write(d.join("steps/drafts/L03.draft.yaml"), "lecture: [").unwrap();
+        std::fs::write(d.join("steps/content-wip/hb/L03.yaml"), "lecture: [").unwrap();
         let args = |extra: &[&str]| {
             let mut a: Vec<String> =
                 ["--drafts", "steps", "--out", "out"].iter().map(|s| s.to_string()).collect();
@@ -221,7 +215,7 @@ mod tests {
         let report = run(d, &args(&[])).unwrap();
         assert!(report.contains("steps.apkg: 22 notes"), "{report}");
         assert!(report.contains("hb.L02: 11 notes (draft, not merged yet)"), "{report}");
-        assert!(report.contains("L03.draft.yaml") && report.contains("(left out)"), "{report}");
+        assert!(report.contains("content-wip/hb/L03.yaml") && report.contains("(left out)"), "{report}");
         let merged = run(d, &args(&["--merged-only"])).unwrap();
         assert!(merged.contains("steps.apkg: 11 notes"), "{merged}");
     }

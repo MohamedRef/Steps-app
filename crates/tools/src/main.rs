@@ -99,7 +99,7 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     if index.schema != SCHEMA {
         problems.push(format!("content/index.yaml: schema must be {SCHEMA}"));
     }
-    // The MSc's courses: every lecture belongs to one.
+    // The program's courses: every lecture belongs to one.
     let mut courses = 0;
     match read_yaml::<steps_core::program::Program>(&content.join("program.yaml")) {
         Ok(p) => {

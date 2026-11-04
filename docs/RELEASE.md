@@ -200,7 +200,7 @@ verification. Changing these rules requires adjusting the classifier tests.
 
 **Content-only feeds.** When everything merged since the build on the
 preview feed is under `content/index.yaml`, `content/program.yaml`, a course
-folder such as `content/hb/`, `content/lessons/`,
+folder such as `content/cvs/`, `content/lessons/`,
 `changes/`, `docs/`, a top-level `.md` or a `crates/app/**/*.css` file, CI
 builds no APK: `steps-tools update manifest --carry android-arm64` keeps the
 feed's APK entry as it is (same file, its own `build`), and only the pack is

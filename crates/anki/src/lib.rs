@@ -1,7 +1,6 @@
 //! Anki decks from Steps content: one `.apkg` with a `Steps` deck, a level
-//! per course and a subdeck per lecture (`Steps::Hepatology::01 Liver
-//! Cirrhosis`). Shared by
-//! `steps-tools anki` and the app's «export to Anki» button.
+//! per course and a subdeck per lecture (`Steps::Cardiovascular::01 Embryology`).
+//! Shared by `steps-tools anki` and the app's «export to Anki» button.
 //!
 //! An `.apkg` is a zip of an Anki SQLite collection (`collection.anki2`, the
 //! schema-11 layout every Anki and AnkiDroid imports) and a `media` index.
@@ -48,8 +47,8 @@ pub struct Options<'a> {
     pub edits: Option<&'a BTreeMap<String, Item>>,
     /// Lectures not merged yet: tagged `draft`.
     pub drafts: Option<&'a BTreeSet<String>>,
-    /// The MSc's courses: every course gets its own level,
-    /// `Steps::Basics of Research::03 …`. Without it, lectures sit straight
+    /// The program's courses: every course gets its own level,
+    /// `Steps::Cardiovascular::04 Pathology`. Without it, lectures sit straight
     /// under `Steps` with their old names (`Steps::L01 …`).
     pub program: Option<&'a steps_core::program::Program>,
 }
@@ -117,7 +116,7 @@ impl Deck {
     }
 }
 
-/// `Steps::Hepatology::03 Portal hypertension`: course, then the lecture's
+/// `Steps::Cardiovascular::04 Pathology`: course, then the lecture's
 /// number in it and its real title (Mohamed, 2026-10-29), so decks nest the
 /// way the app lists them. Anki keeps cards it already has in their old
 /// deck on import (`Steps::L03 …` from before), so the import note says how
@@ -133,7 +132,7 @@ pub fn deck_name(lec: &Lecture, program: Option<&steps_core::program::Program>) 
     }
 }
 
-/// `Steps::Hepatology`: the lecture's course level.
+/// `Steps::Cardiovascular`: the lecture's course level.
 fn course_deck(lec: &Lecture, program: Option<&steps_core::program::Program>) -> Option<String> {
     let course = program?.course_for(&lec.lecture)?;
     Some(format!("Steps::{}", course.title))
@@ -193,7 +192,7 @@ pub fn build(lectures: &[Lecture], opts: &Options<'_>) -> Deck {
     deck
 }
 
-const ROOT_DESC: &str = "Steps: Alexandria Internal Medicine Postgraduate Lectures, Chapter 1 (Hepato-Biliary). \
+const ROOT_DESC: &str = "Steps: USMLE Step 1, following First Aid for the USMLE Step 1 2026. \
 Re-import a newer steps.apkg to update the cards; your reviews are kept. Cards tagged <b>unverified</b> \
 are not checked yet: trust the book page on the back.";
 

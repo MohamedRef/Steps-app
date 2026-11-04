@@ -2,11 +2,11 @@
 
 Lessons are the teaching layer: Mohamed opens a lesson, understands the
 *why*, and only then reviews the lecture's cards. Cards and questions stay in
-`content/hb/LNN.yaml`; lessons live beside them in
-**`content/lessons/hb/LNN.yaml`**, one file per lecture, and point at the
+`content/cvs/LNN.yaml`; lessons live beside them in
+**`content/lessons/cvs/LNN.yaml`**, one file per lecture, and point at the
 cards by id.
 
-The model to copy is `content/lessons/hb/L01.yaml`.
+The model to copy is `content/lessons/cvs/L01.yaml`.
 
 ## The rules (the validator enforces most of them)
 
@@ -67,9 +67,9 @@ The model to copy is `content/lessons/hb/L01.yaml`.
 
 ```yaml
 schema: steps.lesson/v1
-lecture: hb.L01
+lecture: cvs.L01
 lessons:
-  - id: hb.L01.lesson1          # .lessonN, never reused
+  - id: cvs.L01.lesson1          # .lessonN, never reused
     title: "الكبد بيتليف إزاي؟"
     hook: "سطر واحد يخليه عايز يفتح الدرس"
     minutes: 8
@@ -79,7 +79,7 @@ lessons:
     status: unverified
     steps: [...]
     recap: ["...", "..."]        # take-aways on the end screen
-    practice: [hb.L01.001, ...]  # items of this lecture
+    practice: [cvs.L01.001, ...]  # items of this lecture
 ```
 
 ## Step kinds
@@ -124,7 +124,7 @@ English words `→`.
 ## Images
 
 A figure takes `image:` instead of `svg:`. The file goes in
-**`content/lessons/img/hb/`** (name it `L05-ascites-us.webp`: lecture,
+**`content/lessons/img/cvs/`** (name it `L04-mitral-stenosis-echo.webp`: lecture,
 then what it shows). WebP, about 800 px wide, under 150 KB.
 
 From the book (Mohamed allowed book figures in the repo, 2026-10-28; the
@@ -134,7 +134,7 @@ book's *text* still never goes in git). The step's `page:` cites it:
 - kind: figure
   page: 23
   title: "شكل الـ varices في المنظار"
-  image: { file: hb/L03-varices-endoscopy.webp, book: true }
+  image: { file: cvs/L04-aortic-dissection-ct.webp, book: true }
   caption: "..."
   alt: "Endoscopy view of three large oesophageal varices with red wale signs."
 ```
@@ -150,7 +150,7 @@ a line in `ATTRIBUTION.md`:
 
 ```yaml
   image:
-    file: hb/L05-ascites-us.webp
+    file: cvs/L04-mitral-stenosis-echo.webp
     credit: "James Heilman, MD"
     license: CC BY-SA 4.0
     source: https://commons.wikimedia.org/wiki/File:...
