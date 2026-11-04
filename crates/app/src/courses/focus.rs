@@ -129,7 +129,7 @@ pub fn CourseChip() -> Element {
     }
 }
 
-/// The order courses are listed in: this semester's first.
+/// The order courses are listed in: the ones he studies now first.
 const ORDER: [CourseStatus; 4] =
     [CourseStatus::Active, CourseStatus::Maintenance, CourseStatus::Later, CourseStatus::Archived];
 
@@ -146,8 +146,8 @@ fn lesson_counts(lib: &Library, course: Option<&str>) -> (usize, usize) {
     (done, all)
 }
 
-/// The courses the sheet lists: the ones with lectures in the index, this
-/// semester's first, then the program's order.
+/// The courses the sheet lists: the ones with lectures in the index, the
+/// ones he studies now first, then the book's order.
 pub fn listed(all: Vec<Summary>) -> Vec<Summary> {
     let mut shown: Vec<Summary> = all.into_iter().filter(|s| s.lectures > 0).collect();
     shown.sort_by_key(|s| ORDER.iter().position(|o| *o == s.status).unwrap_or(ORDER.len()));

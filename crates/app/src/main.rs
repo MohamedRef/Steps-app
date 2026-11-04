@@ -17,7 +17,6 @@ mod back;
 mod bank;
 #[cfg(test)]
 mod browser_fixture;
-mod calc;
 mod case;
 mod cloud;
 mod content;
@@ -263,7 +262,7 @@ fn App() -> Element {
                 }
                 // Phones: Cases, Oral and Progress sit under More (more.rs).
                 more::More {}
-                // From 600px: References, a new card and the calculators.
+                // From 600px: Courses, References, Abbreviations and a new card.
                 more::ToolButtons {}
                 // From 600px the rail or sidebar carries Settings at its foot (nav.css).
                 button {
