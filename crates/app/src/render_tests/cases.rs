@@ -39,6 +39,7 @@ update: { text: "Closure is considered for selected young patients with cryptoge
 
 #[test]
 fn with_no_case_written_the_list_says_so() {
+    crate::case::tests::hide_bundled();
     let app = App::open(Screen::Cases);
     app.assert_has(tx::EMPTY);
 }
