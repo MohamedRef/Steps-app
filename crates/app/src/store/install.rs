@@ -72,7 +72,7 @@ mod tests {
             let s = Store::open_marked(&db, Some(&marker)).unwrap();
             s.put_local_setting("remind_here", &true).unwrap();
             s.append_review(steps_core::review::ReviewEvent {
-                item_id: "hb.L01.001".into(),
+                item_id: "cvs.L04.001".into(),
                 grade: steps_core::review::Grade::Good,
                 origin: steps_core::review::Origin::Study,
                 at_ms: 1,

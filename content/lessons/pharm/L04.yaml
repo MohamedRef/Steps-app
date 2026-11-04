@@ -1,0 +1,158 @@
+schema: steps.lesson/v1
+lecture: pharm.L04
+lessons:
+  - id: pharm.L04.lesson1
+    title: "اسم الدوا بيقولك هو إيه: الـ suffixes"
+    hook: "مش لازم تعرف كل دوا في الدنيا؛ آخر الاسم بيقولك الـ class، والامتحان بيستغل ده"
+    minutes: 9
+    pages: [252, 254]
+    topics: [drug-names-antimicrobial, drug-names-antineoplastic, drug-names-cns, drug-names-autonomic, drug-names-cardiovascular, drug-names-metabolic, drug-names-other, biologic-agents]
+    goals:
+      - "تعرف الـ class من آخر اسم الدوا في كل مجموعة"
+      - "تفرّق بين -ximab و -zumab و -umab"
+      - "تعرف -ib و -kin بيشتغلوا فين"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "ليه الـ suffixes مهمة"
+        text: |-
+          الامتحان ممكن يجيبلك دوا جديد إنت عمرك ما شفته. لو عرفت ==آخر الاسم==، هتعرف الـ class، ومن الـ class هتعرف الـ mechanism والآثار الجانبية.
+
+          مثلاً أي حاجة آخرها **-tegravir** = integrase inhibitor، و **-navir** = protease inhibitor، و **-mivir** = neuraminidase inhibitor (oseltamivir).
+        page: 252
+        quote: "-mivir Neuraminidase inhibitor Oseltamivir -navir Protease inhibitor Ritonavir"
+      - kind: match
+        prompt: "وصّل الـ antimicrobial ending بالـ class"
+        pairs:
+          - ["-buvir", "NS5B inhibitor"]
+          - ["-asvir", "NS5A inhibitor"]
+          - ["-previr", "NS3/4A inhibitor"]
+          - ["-ovir", "Viral DNA polymerase inhibitor"]
+          - ["-conazole", "Ergosterol synthesis inhibitor"]
+          - ["-bendazole", "Antiparasitic/antihelminthic"]
+        why: "أدوية الـ hepatitis C التلاتة: sofosbuvir (NS5B) و ledipasvir (NS5A) و grazoprevir (NS3/4A). والـ -cillin transpeptidase inhibitor، والـ -cycline protein synthesis inhibitor، والـ -floxacin fluoroquinolone، والـ -thromycin macrolide."
+        page: 252
+        quote: "-asvir NS5A inhibitor Ledipasvir -bendazole Antiparasitic/antihelminthic Mebendazole -buvir NS5B inhibitor Sofosbuvir"
+      - kind: table
+        title: "الـ antineoplastics"
+        columns: ["Ending", "Class", "Example"]
+        rows:
+          - ["-case", "Recombinant uricase", "Rasburicase"]
+          - ["-mustine", "Nitrosourea", "Carmustine"]
+          - ["-platin", "Platinum compound", "Cisplatin"]
+          - ["-poside", "Topoisomerase II inhibitor", "Etoposide"]
+          - ["-rubicin", "Anthracycline", "Doxorubicin"]
+          - ["-taxel", "Taxane", "Paclitaxel"]
+          - ["-tecan", "Topoisomerase I inhibitor", "Irinotecan"]
+        hide: [[0, 1], [3, 1], [6, 1]]
+        page: 252
+        quote: "-poside Topoisomerase II inhibitor Etoposide -rubicin Anthracycline Doxorubicin -taxel Taxane Paclitaxel -tecan Topoisomerase I inhibitor Irinotecan"
+      - kind: aside
+        tone: trap
+        text: "فخ: الـ **-tecan** = topoisomerase ==I==، والـ **-poside** = topoisomerase ==II==. حفظة سهلة: etoposide فيها حرفين o، فهي II."
+        page: 252
+        quote: "-poside Topoisomerase II inhibitor Etoposide"
+      - kind: explain
+        title: "الـ CNS"
+        text: |-
+          - **-flurane**: inhaled anesthetic. **-caine**: local anesthetic. **-barbital**: barbiturate. **-zepam و -zolam**: benzodiazepine.
+          - **-apine و -idone**: ==atypical== antipsychotic. **-azine**: typical antipsychotic.
+          - **-capone**: COMT inhibitor. **-giline**: MAO-B inhibitor. **-benazine**: VMAT inhibitor.
+          - **-curium و -curonium**: nondepolarizing neuromuscular blocker.
+          - **-ipramine و -triptyline**: TCA. **-triptan**: 5-HT1B/1D agonist.
+        page: 252
+        quote: "-capone COMT inhibitor Entacapone -curium, -curonium Nondepolarizing neuromuscular blocker Atracurium, pancuronium -giline MAO-B inhibitor Selegiline"
+      - kind: check
+        question: "A drug named 'ziprasidone' belongs to which class?"
+        options:
+          - "Atypical antipsychotic"
+          - "Typical antipsychotic"
+          - "TCA"
+          - "Benzodiazepine"
+        answer: 0
+        why:
+          - "صح: -idone (زي -apine) = atypical antipsychotic."
+          - "الـ typical آخرها -azine."
+          - "الـ TCA آخرها -ipramine أو -triptyline."
+          - "الـ benzodiazepine آخرها -zepam أو -zolam."
+        page: 252
+        quote: "-apine, -idone Atypical antipsychotic Quetiapine, risperidone"
+      - kind: sort
+        prompt: "حط كل ending في المجموعة بتاعته"
+        bins: ["Autonomic", "Cardiovascular", "Metabolic"]
+        cards:
+          - { text: "-stigmine (AChE inhibitor)", bin: 0 }
+          - { text: "-terol (β2-agonist)", bin: 0 }
+          - { text: "-sartan (ARB)", bin: 1 }
+          - { text: "-xaban (factor Xa inhibitor)", bin: 1 }
+          - { text: "-dipine (dihydropyridine CCB)", bin: 1 }
+          - { text: "-gliptin (DPP-4 inhibitor)", bin: 2 }
+          - { text: "-glutide (GLP-1 analog)", bin: 2 }
+          - { text: "-statin (HMG-CoA reductase inhibitor)", bin: 2 }
+        why: "والباقي: -chol cholinergic agonist، -olol β-blocker، -zosin α1-blocker، -afil PDE-5، -parin LMWH، -plase thrombolytic، -pril ACE inhibitor، -gliflozin SGLT-2، -glinide meglitinide، -glitazone PPAR-γ."
+        page: 253
+        quote: "-gliflozin SGLT-2 inhibitor Dapagliflozin -glinide Meglitinide Repaglinide -gliptin DPP-4 inhibitor Sitagliptin"
+      - kind: match
+        prompt: "وصّل الـ ending (Other) بالـ class"
+        pairs:
+          - ["-lukast", "CysLT1 receptor blocker"]
+          - ["-pitant", "NK1 blocker"]
+          - ["-setron", "5-HT3 blocker"]
+          - ["-sentan", "Endothelin receptor antagonist"]
+          - ["-vaptan", "ADH antagonist"]
+          - ["-steride", "5α-reductase inhibitor"]
+        why: "وكمان: -caftor CFTR modulator، -dronate bisphosphonate، -lutamide androgen receptor inhibitor، -prazole PPI، -prost prostaglandin analog، -tadine H1-antagonist، -tidine H2-antagonist، -trozole aromatase inhibitor."
+        page: 253
+        quote: "-sentan Endothelin receptor antagonist Bosentan"
+      - kind: figure
+        title: "الـ monoclonal antibodies: قد إيه بشري؟"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-bad" x="10" y="20" width="105" height="80" rx="8"/>
+            <rect class="fg-acc" x="127" y="20" width="105" height="80" rx="8"/>
+            <rect class="fg-good" x="244" y="20" width="105" height="80" rx="8"/>
+            <text x="22" y="45" class="t-lg t-b">-ximab</text>
+            <text x="22" y="68" class="t-sm">Chimeric</text>
+            <text x="22" y="86" class="t-sm t-mut">Rituximab</text>
+            <text x="139" y="45" class="t-lg t-b">-zumab</text>
+            <text x="139" y="68" class="t-sm">Humanized</text>
+            <text x="139" y="86" class="t-sm t-mut">Bevacizumab</text>
+            <text x="256" y="45" class="t-lg t-b">-umab</text>
+            <text x="256" y="68" class="t-sm">Human</text>
+            <text x="256" y="86" class="t-sm t-mut">Denosumab</text>
+            <text x="10" y="130" class="t-sm t-mut">mouse part: more  →  less  →  none</text>
+          </svg>
+        caption: "الـ -ximab chimeric (فيه حتة كبيرة من الفار)، الـ -zumab humanized (فيه حتة صغيرة)، والـ -umab human خالص. وكلهم بيستهدفوا receptors على سطح الخلية."
+        alt: "Three boxes: -ximab chimeric human-mouse (rituximab), -zumab humanized (bevacizumab), -umab human (denosumab), with decreasing mouse component."
+        page: 254
+        quote: "-ximab Chimeric human-mouse monoclonal antibody Rituximab -zumab Humanized monoclonal antibody Bevacizumab -umab Human monoclonal antibody Denosumab"
+      - kind: explain
+        title: "-ib و -kin"
+        text: |-
+          - **-ib** = ==small molecule inhibitors== بتدخل الخلية وتضرب حاجة جوه: -tinib tyrosine kinase، -ciclib CDK، -parib PARP، -rafenib BRAF، -zomib proteasome، و -coxib COX-2.
+          - **-kin** = interleukin receptor modulators: -leukin IL-2 agonist (aldesleukin)، و -kinra IL receptor antagonist (anakinra).
+        page: 254
+        quote: "Small molecule inhibitors (-ib)—target intracellular molecules"
+      - kind: check
+        question: "A woman with a BRCA-mutated ovarian cancer gets olaparib. What does it inhibit?"
+        options:
+          - "Poly(ADP-ribose) polymerase"
+          - "Cyclin-dependent kinase"
+          - "The proteasome"
+          - "BRAF"
+        answer: 0
+        why:
+          - "صح: -parib = PARP inhibitor."
+          - "الـ CDK inhibitor آخره -ciclib (palbociclib)."
+          - "الـ proteasome inhibitor آخره -zomib (bortezomib)."
+          - "الـ BRAF inhibitor آخره -rafenib (vemurafenib)."
+        page: 254
+        quote: "-parib Poly(ADP-ribose) polymerase inhibitor Olaparib"
+      - kind: try
+        items: [pharm.L04.001, pharm.L04.004, pharm.L04.006, pharm.L04.012, pharm.L04.016]
+    recap:
+      - "آخر الاسم = الـ class: -navir protease، -tegravir integrase، -mivir neuraminidase."
+      - "-tecan topo I، -poside topo II، -rubicin anthracycline، -platin platinum."
+      - "-apine/-idone atypical، -azine typical، -capone COMT، -giline MAO-B."
+      - "-ximab chimeric، -zumab humanized، -umab human. -ib جوه الخلية، -kin interleukins."
+    practice: [pharm.L04.001, pharm.L04.002, pharm.L04.003, pharm.L04.004, pharm.L04.005, pharm.L04.006, pharm.L04.007, pharm.L04.008, pharm.L04.009, pharm.L04.010, pharm.L04.011, pharm.L04.012, pharm.L04.013, pharm.L04.014, pharm.L04.015, pharm.L04.016, pharm.L04.017, pharm.L04.018]

@@ -159,4 +159,18 @@ mod tests {
         );
         let _ = std::fs::remove_dir_all(dir);
     }
+
+    #[test]
+    fn save_to_says_when_the_dialog_cannot_open_and_offers_it_again() {
+        fn app() -> Element {
+            rsx! { SaveTo { path: "/nowhere/steps-export-2026-11-04.json" } }
+        }
+        let mut dom = VirtualDom::new(app);
+        dom.rebuild_in_place();
+        // Only Android has the system dialog: here it fails at once.
+        let html = dioxus::ssr::render(&dom);
+        assert!(html.contains(tx::EXPORT_SAVE_FAILED), "{html}");
+        assert!(html.contains(tx::EXPORT_ANDROID_HINT), "{html}");
+        assert!(html.contains(tx::EXPORT_SAVE_TO), "{html}");
+    }
 }
