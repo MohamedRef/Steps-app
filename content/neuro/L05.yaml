@@ -1,0 +1,1106 @@
+schema: steps.content/v1
+lecture: neuro.L05
+title: Ophthalmology
+book: { chapter: 12, pages: [549, 559] }
+topics:
+  - { id: vertigo, title: Vertigo }
+  - { id: normal-eye-anatomy, title: Normal eye anatomy }
+  - { id: conjunctivitis, title: Conjunctivitis }
+  - { id: lens-disorders, title: Lens disorders }
+  - { id: refractive-errors, title: Refractive errors }
+  - { id: aqueous-humor-pathway, title: Aqueous humor pathway }
+  - { id: glaucoma, title: Glaucoma }
+  - { id: retinal-disorders, title: Retinal disorders }
+  - { id: papilledema, title: Papilledema }
+  - { id: leukocoria, title: Leukocoria }
+  - { id: uveitis, title: Uveitis }
+  - { id: pupillary-control, title: Pupillary control }
+  - { id: horner-syndrome, title: Horner syndrome }
+  - { id: ocular-motility, title: Ocular motility }
+  - { id: strabismus, title: Strabismus }
+  - { id: cranial-nerve-iii-iv-vi-palsies, title: "Cranial nerve III, IV, VI palsies" }
+  - { id: visual-field-defects, title: Visual field defects }
+  - { id: cavernous-sinus, title: Cavernous sinus }
+  - { id: internuclear-ophthalmoplegia, title: Internuclear ophthalmoplegia }
+  - { id: eyelid-disorders, title: Eyelid disorders }
+items:
+  # ---------- p549: vertigo, eye anatomy, conjunctivitis ----------
+  - id: neuro.L05.001
+    kind: card
+    topic: vertigo
+    front: What is vertigo, and which kind is more common?
+    back: "A sensation of spinning while actually stationary, a subtype of dizziness distinct from lightheadedness. Peripheral vertigo is more common than central."
+    src: { page: 549, quote: "Sensation of spinning while actually stationary. Subtype of “dizziness,” but distinct from “lightheadedness.” Peripheral vertigo is more common than central vertigo." }
+    status: unverified
+  - id: neuro.L05.002
+    kind: card
+    topic: vertigo
+    front: What is benign paroxysmal positional vertigo, and how is it diagnosed and treated?
+    back: "Semicircular canal debris → episodic vertigo lasting ≤1 minute, provoked by certain head movements. Diagnosed with the Dix-Hallpike maneuver, treated with the Epley maneuver."
+    src: { page: 549, quote: "episodic vertigo lasting ≤1 minute provoked by certain head movements (diagnosed via Dix-Hallpike maneuver, treated via Epley maneuver)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.003
+    kind: enumerate
+    topic: vertigo
+    prompt: Enumerate the triad of Ménière disease (endolymphatic hydrops, 3).
+    points:
+      - Vertigo
+      - Sensorineural hearing loss
+      - Tinnitus
+    pass: 3
+    hook: "«Men wear vests»: Ménière = vertigo + sensorineural loss + tinnitus، من ↑ endolymph في الودن الداخلية."
+    src: { page: 549, quote: "triad of vertigo, sensorineural hearing loss, tinnitus (“men wear vests”)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.004
+    kind: table
+    topic: vertigo
+    title: Peripheral vs central vertigo
+    columns: [Feature, Peripheral, Central]
+    rows:
+      - [Cause, "Inner ear (vestibular neuritis, BPPV, Ménière disease)", "Brainstem or cerebellum (stroke, demyelination, posterior fossa tumor)"]
+      - [Nystagmus direction, "Mixed horizontal-torsional, never purely torsional or vertical; does not change direction", Any direction]
+      - [Visual fixation, Suppresses nystagmus, Does not suppress]
+      - [Other neurologic signs, None, "Diplopia, ataxia, dysmetria"]
+    blanks: [[1, 1], [2, 1], [2, 2], [3, 2]]
+    src: { page: 549, quote: "Findings: nystagmus of any direction that is not suppressible with visual fixation, neurologic findings (eg, diplopia, ataxia, dysmetria)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.005
+    kind: mcq
+    topic: vertigo
+    stem: >-
+      A 58-year-old man with hypertension has 6 hours of continuous spinning vertigo and vomiting. He has purely vertical
+      nystagmus that does not lessen when he fixes his gaze on a target, and he cannot walk heel to toe; his finger-to-nose
+      test is clumsy on the left. Hearing is normal. What is the most likely location of the lesion?
+    options:
+      - Brainstem or cerebellum
+      - Semicircular canal
+      - Vestibular nerve
+      - Endolymphatic sac
+      - Cochlea
+    answer: 0
+    why:
+      - "Right. Purely vertical nystagmus not suppressed by fixation, with ataxia and dysmetria, points to central vertigo (eg, cerebellar or brainstem stroke)."
+      - "Canal debris (BPPV) gives brief episodes on head movement with horizontal-torsional nystagmus."
+      - "Vestibular neuritis is peripheral: nystagmus is suppressed by fixation and there is no dysmetria."
+      - "Ménière disease brings hearing loss and tinnitus."
+      - "Cochlear disease affects hearing, which is normal here."
+    src: { page: 549, quote: "Due to brainstem or cerebellar lesions (eg, stroke affecting vestibular nuclei, demyelinating disease, or posterior fossa tumor)." }
+    status: unverified
+  - id: neuro.L05.006
+    kind: table
+    topic: normal-eye-anatomy
+    title: Layers of the eye wall
+    columns: [Layer, Front of the eye, Back of the eye]
+    rows:
+      - [Outer, Cornea, Sclera]
+      - [Middle, "Iris, ciliary body", Choroid]
+      - [Inner, "—", Retina]
+    blanks: [[0, 1], [1, 1], [1, 2], [2, 2]]
+    src: { page: 549, quote: "Choroid (middle) Vitreous chamber Cornea (outer) Iris (middle)" }
+    status: unverified
+  - id: neuro.L05.007
+    kind: card
+    topic: normal-eye-anatomy
+    front: What makes up the anterior segment of the eye, and what separates its two chambers?
+    back: "The anterior chamber (between cornea and iris) and the posterior chamber (between iris and lens). The vitreous chamber behind the lens belongs to the posterior segment."
+    src: { page: 549, quote: "ANTERIOR SEGMENT (anterior chamber + posterior chamber)" }
+    status: unverified
+  - id: neuro.L05.008
+    kind: table
+    topic: conjunctivitis
+    title: Conjunctivitis
+    columns: [Type, Clues, Management]
+    rows:
+      - [Allergic, "Itchy, bilateral", "—"]
+      - [Bacterial, Purulent discharge, Antibiotics]
+      - [Viral (most common), "Adenovirus; sparse mucous discharge, swollen preauricular node, ↑ lacrimation", Self-resolving]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 549, quote: "Viral—most common, often adenovirus; sparse mucous discharge, swollen preauricular node, ↑ lacrimation; self-resolving." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.009
+    kind: table
+    topic: conjunctivitis
+    title: Neonatal conjunctivitis
+    columns: [Cause, Onset after birth, Treatment]
+    rows:
+      - [C trachomatis serotypes D-K (most common), 5-14 days, Erythromycin or azithromycin]
+      - [N gonorrhoeae, 2-5 days, "Ceftriaxone (prophylaxis: erythromycin eyedrops)"]
+    blanks: [[0, 1], [1, 1], [1, 2]]
+    src: { page: 549, quote: "N gonorrhoeae—onset 2-5 days after birth; prophylaxis: erythromycin eyedrops; treat with ceftriaxone to prevent blindness." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.010
+    kind: mcq
+    topic: conjunctivitis
+    stem: >-
+      A 9-day-old girl born vaginally has 2 days of swollen eyelids with watery-then-mucopurulent discharge from both eyes.
+      She received erythromycin eye ointment at birth. Her mother had no prenatal care. Nucleic acid amplification of the
+      discharge is positive. Which treatment is most appropriate?
+    options:
+      - Oral erythromycin or azithromycin
+      - IM ceftriaxone
+      - Topical erythromycin alone
+      - IV acyclovir
+      - No treatment; it will self-resolve
+    answer: 0
+    why:
+      - "Right. Onset at 5-14 days fits C trachomatis (serotypes D-K), the most common cause; treat with erythromycin or azithromycin."
+      - "Ceftriaxone treats gonococcal conjunctivitis, which starts earlier (2-5 days)."
+      - "Topical prophylaxis does not reliably prevent or treat chlamydial disease."
+      - "HSV is possible but the timing and NAAT for bacteria point to chlamydia."
+      - "Self-resolution fits viral conjunctivitis in older children, not neonatal chlamydia."
+    src: { page: 549, quote: "C trachomatis serotypes D-K (most common)—onset 5-14 days after birth; treat with erythromycin or azithromycin." }
+    status: unverified
+  # ---------- p550: lens, refraction, aqueous humor ----------
+  - id: neuro.L05.011
+    kind: card
+    topic: lens-disorders
+    front: What is presbyopia?
+    back: "Age-related impairment of accommodation (focusing on near objects), likely from ↓ lens elasticity. Patients need reading glasses or magnifiers."
+    src: { page: 550, quote: "Aging-related impairment in accommodation (focusing on near objects)." }
+    status: unverified
+  - id: neuro.L05.012
+    kind: card
+    topic: lens-disorders
+    front: How does a cataract present, and how is it treated?
+    back: "Painless, often bilateral lens opacification: glare, loss of red reflex, ↓ vision especially at night. Treatment: surgical replacement with an artificial lens."
+    src: { page: 550, quote: "Painless, often bilateral, opacification of lens A . Can result in glare, loss of red reflex, and ↓ vision, especially at night." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.013
+    kind: table
+    topic: lens-disorders
+    title: Risk factors for cataract
+    columns: [Type, Risk factors]
+    rows:
+      - [Acquired, "↑ age, smoking, alcohol overuse, excessive sunlight, prolonged glucocorticoids, diabetes mellitus, trauma, infection"]
+      - [Congenital, "Classic galactosemia, galactokinase deficiency, trisomies 13/18/21, TORCH (rubella), Marfan, Alport, myotonic dystrophy, NF-2"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 550, quote: "Congenital risk factors: classic galactosemia, galactokinase deficiency, trisomies (13, 18, 21), TORCH infections (eg, rubella), Marfan syndrome, Alport syndrome, myotonic dystrophy, NF-2." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.014
+    kind: card
+    topic: lens-disorders
+    front: What is ectopia lentis, and with which systemic diseases does it occur?
+    back: "Lens dislocation, usually from trauma, but also with Marfan syndrome and homocystinuria."
+    src: { page: 550, quote: "Usually due to trauma, but may occur in association with systemic diseases (eg, Marfan syndrome, homocystinuria)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.015
+    kind: table
+    topic: refractive-errors
+    title: Refractive errors
+    columns: [Error, Problem, Focus, Correction]
+    rows:
+      - [Myopia (most common), Eye too long, In front of retina, Concave (diverging) lens]
+      - [Hyperopia, Eye too short, Behind retina, Convex (converging) lens]
+      - [Astigmatism, Irregular curvature of cornea or lens, Different at different axes, Cylindrical lens]
+    blanks: [[0, 2], [0, 3], [1, 3], [2, 3]]
+    src: { page: 550, quote: "Eye too long for refractive power of cornea and lens → light focused in front of retina. Correct with concave (diverging) lens." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.016
+    kind: card
+    topic: aqueous-humor-pathway
+    front: Where is aqueous humor made, and which drugs reduce its production?
+    back: "By the nonpigmented epithelium of the ciliary body. ↓ by β-blockers (timolol), α2-agonists (brimonidine) and carbonic anhydrase inhibitors (acetazolamide)."
+    src: { page: 550, quote: "Produced by nonpigmented epithelium on ciliary body" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.017
+    kind: order
+    topic: aqueous-humor-pathway
+    prompt: Put the trabecular (main, 90%) outflow of aqueous humor in order.
+    steps:
+      - Ciliary body makes aqueous humor in the posterior chamber
+      - Through the pupil into the anterior chamber
+      - Trabecular meshwork at the angle
+      - Canal of Schlemm
+      - Episcleral vessels
+    src: { page: 550, quote: "Drainage through trabecular meshwork canal of Schlemm episcleral vasculature" }
+    status: unverified
+  - id: neuro.L05.018
+    kind: table
+    topic: aqueous-humor-pathway
+    title: Aqueous outflow and drugs that increase it
+    columns: [Route, Share, Increased by]
+    rows:
+      - [Trabecular (meshwork → canal of Schlemm), 90%, "M3 agonists (carbachol, pilocarpine)"]
+      - [Uveoscleral (uvea and sclera), 10%, "Prostaglandin agonists (latanoprost, bimatoprost)"]
+    blanks: [[0, 2], [1, 2]]
+    src: { page: 550, quote: "Drainage into uvea and sclera with prostaglandin agonists (eg, latanoprost, bimatoprost)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.020
+    kind: mcq
+    topic: refractive-errors
+    stem: >-
+      A 12-year-old boy cannot read the board from the back of the classroom but reads his books without difficulty.
+      Ophthalmologic examination shows that parallel light focuses in front of his retina. Which lens corrects this?
+    options:
+      - Concave (diverging) lens
+      - Convex (converging) lens
+      - Cylindrical lens
+      - Bifocal reading lens for presbyopia
+      - Artificial lens implant
+    answer: 0
+    why:
+      - "Right. Myopia: the eye is too long, light focuses in front of the retina, and a concave lens moves the focus back."
+      - "Convex lenses correct hyperopia, where light focuses behind the retina."
+      - "Cylindrical lenses correct astigmatism."
+      - "Presbyopia is age-related loss of near focus, not a problem at 12."
+      - "Lens replacement treats cataract."
+    src: { page: 550, quote: "Correct with concave (diverging) lens." }
+    status: unverified
+  - id: neuro.L05.021
+    kind: mcq
+    topic: lens-disorders
+    stem: >-
+      A 4-week-old infant has jaundice, vomiting after feeds and hepatomegaly. Examination shows absent red reflexes in
+      both eyes. Urine tests positive for reducing substances but negative on a glucose oxidase strip. What is the cause
+      of the eye finding?
+    options:
+      - Galactitol accumulation in the lens
+      - Retinoblastoma
+      - Lens dislocation from fibrillin defect
+      - Glaucoma from trabecular dysgenesis
+      - Congenital rubella retinitis
+    answer: 0
+    why:
+      - "Right. Classic galactosemia is a congenital cataract risk: galactitol builds up in the lens and opacifies it."
+      - "Retinoblastoma gives leukocoria but no galactosemia picture."
+      - "Fibrillin defects (Marfan) dislocate the lens rather than opacify it."
+      - "Glaucoma does not explain jaundice and reducing sugars."
+      - "Rubella causes cataract too, but not with reducing sugars in urine."
+    src: { page: 550, quote: "Congenital risk factors: classic galactosemia, galactokinase deficiency" }
+    status: unverified
+  - id: neuro.L05.022
+    kind: mcq
+    topic: aqueous-humor-pathway
+    stem: >-
+      A 66-year-old man with open-angle glaucoma starts an eye drop that lowers intraocular pressure by increasing
+      uveoscleral outflow. Over months his light-brown iris becomes darker. Which drug did he start?
+    options:
+      - Latanoprost
+      - Timolol
+      - Pilocarpine
+      - Acetazolamide
+      - Brimonidine
+    answer: 0
+    why:
+      - "Right. Prostaglandin agonists (latanoprost) ↑ uveoscleral outflow; darkening of the iris is a known adverse effect."
+      - "Timolol ↓ aqueous production."
+      - "Pilocarpine ↑ trabecular outflow by contracting the ciliary muscle."
+      - "Acetazolamide ↓ aqueous production."
+      - "Brimonidine ↓ aqueous production."
+    src: { page: 550, quote: "Drainage into uvea and sclera with prostaglandin agonists (eg, latanoprost, bimatoprost)" }
+    status: unverified
+  # ---------- p551: glaucoma ----------
+  - id: neuro.L05.023
+    kind: card
+    topic: glaucoma
+    front: What is glaucoma, and what does funduscopy show?
+    back: "Optic neuropathy with progressive vision loss (peripheral → central), usually but not always with ↑ IOP. Most often 1°, sometimes 2° (uveitis, glucocorticoids). Funduscopy: optic disc cupping (thinning of the outer rim)."
+    src: { page: 551, quote: "Optic neuropathy causing progressive vision loss (peripheral → central). Usually, but not always, accompanied by ↑ intraocular pressure (IOP)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.024
+    kind: card
+    topic: glaucoma
+    front: What is open-angle glaucoma, who gets it, and how is it treated?
+    back: "Angle is open; ↑ resistance to drainage through the trabecular meshwork. Most common type in the US. Risk factors: ↑ age, Black race, family history, diabetes. Usually asymptomatic, found incidentally. Treat with prostaglandins or β-blockers."
+    src: { page: 551, quote: "Associated with ↑ resistance to aqueous humor drainage through trabecular meshwork." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.025
+    kind: order
+    topic: glaucoma
+    prompt: Put the mechanism of angle-closure glaucoma in order.
+    steps:
+      - Anteriorly displaced lens rests against the central iris
+      - ↓ aqueous flow through the pupil (pupillary block)
+      - Pressure builds up in the posterior chamber
+      - Peripheral iris is pushed against the cornea
+      - Iris obstructs the drainage pathways
+    src: { page: 551, quote: "↓ aqueous flow through pupil (pupillary block) → pressure buildup in posterior chamber → peripheral iris pushed against cornea → obstruction of drainage pathways by the iris." }
+    status: unverified
+  - id: neuro.L05.026
+    kind: card
+    topic: glaucoma
+    front: How does acute angle-closure glaucoma present?
+    back: "Severe eye pain, conjunctival erythema, sudden vision loss, halos around lights, headache, fixed mid-dilated pupil, nausea and vomiting. «Hurts in a hurry with halos, a headache, and a half-dilated pupil.» A true ophthalmic emergency."
+    src: { page: 551, quote: "Presents with severe eye pain, conjunctival erythema C , sudden vision loss, halos around lights, headache, fixed and mid-dilated pupil, nausea and vomiting." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.027
+    kind: cloze
+    topic: glaucoma
+    text: "In acute angle-closure glaucoma, {{c1::mydriatic agents}} are contraindicated; treat with β-blocker, α2-agonist, {{c2::pilocarpine}}, {{c3::acetazolamide}}, mannitol."
+    src: { page: 551, quote: "Mydriatic agents are contraindicated. Treat with β-blocker, α2 -agonist, pilocarpine, acetazolamide, mannitol." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.028
+    kind: mcq
+    topic: glaucoma
+    stem: >-
+      A 67-year-old woman is given dilating drops for a fundus examination. One hour later she has severe right eye pain,
+      blurred vision with colored halos around lights, headache and vomiting. The right eye is red with a hazy cornea and a
+      fixed, mid-dilated pupil, and the globe is rock hard. Which drug is contraindicated now?
+    options:
+      - Tropicamide
+      - Timolol
+      - Pilocarpine
+      - Acetazolamide
+      - Mannitol
+    answer: 0
+    why:
+      - "Right. Acute angle-closure glaucoma: mydriatics (like tropicamide, which likely triggered it) push the iris further into the angle and are contraindicated."
+      - "Timolol ↓ aqueous production and is part of treatment."
+      - "Pilocarpine constricts the pupil and pulls the iris out of the angle."
+      - "Acetazolamide ↓ aqueous production."
+      - "Mannitol lowers IOP osmotically."
+    src: { page: 551, quote: "True ophthalmic emergency that requires immediate management to prevent blindness. Mydriatic agents are contraindicated." }
+    status: unverified
+  # ---------- p552-553: retinal disorders ----------
+  - id: neuro.L05.029
+    kind: table
+    topic: retinal-disorders
+    title: Age-related macular degeneration
+    columns: [Type, Course, Finding]
+    rows:
+      - [Dry (most common), Gradual ↓ vision, Subretinal deposits (drusen)]
+      - [Wet, Rapid ↓ vision, "Bleeding from choroidal neovascularization; metamorphopsia early"]
+    blanks: [[0, 2], [1, 2]]
+    src: { page: 552, quote: "Wet—rapid ↓ in vision due to bleeding 2° to choroidal neovascularization." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.030
+    kind: card
+    topic: retinal-disorders
+    front: What visual loss does macular degeneration cause, and what is its early wet symptom?
+    back: "Loss of central vision (scotomas), since the macula is the central retina. Distortion of straight lines (metamorphopsia) is an early symptom of the wet type."
+    src: { page: 552, quote: "Distortion of straight lines (metamorphopsia) is an early symptom." }
+    status: unverified
+  - id: neuro.L05.031
+    kind: table
+    topic: retinal-disorders
+    title: Diabetic retinopathy
+    columns: [Type, Findings, Main threat]
+    rows:
+      - ["Nonproliferative (most common)", "Microaneurysms, hemorrhages, cotton-wool spots, hard exudates", Macular edema]
+      - [Proliferative, Retinal neovascularization from chronic hypoxia, "Vitreous hemorrhage, tractional retinal detachment"]
+    blanks: [[0, 2], [1, 1], [1, 2]]
+    src: { page: 552, quote: "Proliferative—retinal neovascularization due to chronic hypoxia. Abnormal new vessels may cause vitreous hemorrhage and tractional retinal detachment." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.032
+    kind: card
+    topic: retinal-disorders
+    front: What does funduscopy show in hypertensive retinopathy, and which sign means an emergency?
+    back: "Arteriovenous nicking, microaneurysms, hemorrhages, cotton-wool spots, hard exudates (may form a macular star). Papilledema means hypertensive emergency: lower blood pressure immediately."
+    src: { page: 552, quote: "Presence of papilledema is indicative of hypertensive emergency and warrants immediate lowering of blood pressure." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.033
+    kind: card
+    topic: retinal-disorders
+    front: What causes retinal artery occlusion, and what does it look like?
+    back: "Usually embolism (carotid atherosclerosis > cardiogenic), less often giant cell arteritis. Acute painless monocular vision loss. Funduscopy: cloudy retina with a cherry-red spot at the fovea; emboli may be seen (cholesterol crystals = yellow refractile deposits)."
+    src: { page: 552, quote: "Presents with acute, painless monocular vision loss. Funduscopy: cloudy retina with “cherry-red” spot at fovea D" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.034
+    kind: card
+    topic: retinal-disorders
+    front: What causes central vs branch retinal vein occlusion, and what is the fundus picture?
+    back: "Central: 1° thrombosis. Branch: 2° thrombosis at arteriovenous crossings (a sclerotic arteriole compresses the venule). Funduscopy: retinal hemorrhage and venous engorgement («blood and thunder»), retinal edema."
+    src: { page: 552, quote: "Funduscopy: retinal hemorrhage and venous engorgement (“blood and thunder” appearance; arrows in E ), retinal edema in affected areas." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.035
+    kind: card
+    topic: retinal-disorders
+    front: What is retinal detachment, and how does it present?
+    back: "Separation of the neurosensory retina from the retinal pigment epithelium → loss of choroidal supply → photoreceptor degeneration. Rhegmatogenous (most common, retinal tears, posterior vitreous detachment; age, high myopia) or tractional/exudative. Floaters and flashes, then painless monocular «dark curtain». Surgical emergency."
+    src: { page: 552, quote: "Commonly presents with symptoms of posterior vitreous detachment (eg, floaters, light flashes) followed by painless monocular vision loss (“dark curtain”)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.036
+    kind: enumerate
+    topic: retinal-disorders
+    prompt: Enumerate the funduscopic triad of retinitis pigmentosa (3).
+    points:
+      - Optic disc pallor
+      - Retinal vessel attenuation
+      - Bone spicule-shaped pigment deposits
+    pass: 3
+    hook: "الـ photoreceptors بتموت من بره لجوه: عمى ليلي و peripheral loss الأول، والـ fundus فيه «عضم» أسود وأوعية رفيعة وديسك باهت."
+    src: { page: 552, quote: "Funduscopy: triad of optic disc pallor, retinal vessel attenuation, and retinal pigmentation with bone spicule-shaped deposits G ." }
+    status: unverified
+  - id: neuro.L05.037
+    kind: card
+    topic: retinal-disorders
+    front: What are the early symptoms of retinitis pigmentosa, and with what metabolic disease may it occur?
+    back: "Night blindness (nyctalopia) and peripheral vision loss. May be associated with abetalipoproteinemia."
+    src: { page: 552, quote: "May be associated with abetalipoproteinemia. Early symptoms: night blindness (nyctalopia) and peripheral vision loss." }
+    status: unverified
+  - id: neuro.L05.038
+    kind: order
+    topic: retinal-disorders
+    prompt: Put the mechanism of retinopathy of prematurity in order.
+    steps:
+      - Preterm birth ends the hypoxic environment in utero
+      - Relative hyperoxia (worse with supplemental oxygen)
+      - ↓ VEGF arrests normal retinal vascularization
+      - The growing eye makes the avascular retina hypoxic
+      - ↑ VEGF → retinal neovascularization
+    src: { page: 552, quote: "↓ VEGF → arrest of normal retinal vascularization. As the eyes grow → hypoxia of avascular retina → ↑ VEGF → retinal neovascularization" }
+    status: unverified
+  - id: neuro.L05.039
+    kind: card
+    topic: retinal-disorders
+    front: What causes retinoblastoma, and how does it present?
+    back: "Most common intraocular malignancy of children, from immature retinal cells. Mutations of both RB1 tumor suppressor genes (chromosome 13; normally block G1 → S); sporadic or familial (loss of heterozygosity). Leukocoria, strabismus, nystagmus, red eye."
+    src: { page: 552, quote: "Caused by mutations to both RB1 tumor suppressor genes on chromosome 13, which normally impede G1 → S phase progression." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.040
+    kind: mcq
+    topic: retinal-disorders
+    stem: >-
+      A 72-year-old man with carotid bruits suddenly loses vision in his right eye without pain. Funduscopy shows a pale,
+      swollen retina with a bright red spot at the center of the macula and a tiny yellow, shiny deposit at an arteriolar
+      branch point. What is the most likely cause?
+    options:
+      - Cholesterol embolus to the central retinal artery
+      - Thrombosis of the central retinal vein
+      - Choroidal neovascularization
+      - Retinal tear with vitreous traction
+      - Increased intracranial pressure
+    answer: 0
+    why:
+      - "Right. Retinal artery occlusion, usually embolic from carotid atherosclerosis: cloudy retina, cherry-red spot, and a refractile cholesterol embolus."
+      - "Vein occlusion gives a blood and thunder fundus with hemorrhages."
+      - "Wet macular degeneration gives gradual or subacute central distortion with bleeding."
+      - "Detachment follows floaters and flashes with a dark curtain and a wrinkled retina."
+      - "Raised ICP gives bilateral papilledema without sudden monocular loss."
+    src: { page: 552, quote: "Blockage of central or branch retinal artery usually due to embolism (carotid artery atherosclerosis > cardiogenic); less commonly due to giant cell arteritis." }
+    status: unverified
+  - id: neuro.L05.041
+    kind: mcq
+    topic: retinal-disorders
+    stem: >-
+      A 61-year-old man with type 2 diabetes for 20 years has sudden painless loss of vision in his left eye. The left
+      fundus cannot be seen because of a dense haze in the vitreous; the right fundus shows fine new vessels on the optic
+      disc. What process caused his vision loss?
+    options:
+      - Retinal neovascularization driven by chronic hypoxia
+      - Microaneurysm leakage causing macular edema
+      - Drusen deposition under the macula
+      - Arteriovenous nicking from hypertension
+      - Cholesterol embolus to the retinal artery
+    answer: 0
+    why:
+      - "Right. Proliferative diabetic retinopathy: hypoxia drives fragile new vessels that bleed into the vitreous."
+      - "Macular edema is the main cause of vision loss in nonproliferative disease, gradual, not a vitreous haze."
+      - "Drusen are dry macular degeneration."
+      - "AV nicking is hypertensive retinopathy."
+      - "An embolus gives a cherry-red spot with a visible retina."
+    src: { page: 552, quote: "Abnormal new vessels may cause vitreous hemorrhage and tractional retinal detachment." }
+    status: unverified
+  - id: neuro.L05.042
+    kind: card
+    topic: papilledema
+    front: What is papilledema, and why does it happen?
+    back: "Optic disc swelling, usually bilateral, from ↑ ICP (eg, mass effect), caused by impaired axoplasmic flow in the optic nerve. Funduscopy: elevated disc with blurred margins."
+    src: { page: 553, quote: "Optic disc swelling (usually bilateral) due to ↑ ICP (eg, 2° to mass effect). Results from impaired axoplasmic flow in optic nerve." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.043
+    kind: mcq
+    topic: papilledema
+    stem: >-
+      A 45-year-old woman has 2 months of morning headaches that worsen when she bends over, and transient visual
+      dimming. Funduscopy shows both optic discs elevated with blurred margins. Visual acuity is normal. What is the
+      mechanism of the disc finding?
+    options:
+      - Impaired axoplasmic flow in the optic nerve from raised intracranial pressure
+      - Demyelination of the optic nerve
+      - Ischemia of the optic nerve head from giant cell arteritis
+      - Loss of retinal ganglion cells from raised intraocular pressure
+      - Hemorrhage from a central retinal vein thrombosis
+    answer: 0
+    why:
+      - "Right. Papilledema: raised ICP impairs axoplasmic flow, so both discs swell with blurred margins."
+      - "Optic neuritis is usually unilateral and painful with ↓ acuity and RAPD."
+      - "Arteritic ischemic optic neuropathy is unilateral with sudden vision loss."
+      - "Glaucoma causes disc cupping, not swelling."
+      - "Vein occlusion is unilateral with diffuse retinal hemorrhages."
+    src: { page: 553, quote: "Funduscopy: elevated optic disc with blurred margins A ." }
+    status: unverified
+  - id: neuro.L05.044
+    kind: cloze
+    topic: leukocoria
+    text: "Leukocoria is {{c1::loss (whitening) of the red reflex}}; important causes in children are {{c2::retinoblastoma}} and {{c3::congenital cataract}}."
+    src: { page: 553, quote: "Loss (whitening) of the red reflex. Important causes in children include retinoblastoma A , congenital cataract." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.045
+    kind: mcq
+    topic: leukocoria
+    stem: >-
+      A 14-month-old girl's parents notice that in flash photographs one of her pupils looks white instead of red. Her
+      father had an eye removed in infancy for a tumor. Examination shows leukocoria and esotropia of the right eye. What
+      is the genetic basis of this condition?
+    options:
+      - Loss of both RB1 alleles on chromosome 13
+      - Activating mutation in GNAQ
+      - Deletion of VHL on chromosome 3
+      - Trisomy 21
+      - Galactokinase deficiency
+    answer: 0
+    why:
+      - "Right. Retinoblastoma, here familial: an inherited RB1 mutation plus loss of the second allele (loss of heterozygosity)."
+      - "GNAQ is Sturge-Weber syndrome, with port-wine stain and glaucoma."
+      - "VHL gives retinal hemangioblastomas, usually later in life."
+      - "Trisomy 21 is a congenital cataract risk, but the family history of an eye tumor points to retinoblastoma."
+      - "Galactokinase deficiency causes cataracts without a family tumor history."
+    src: { page: 552, quote: "Can be sporadic or familial (loss of heterozygosity). Presents with leukocoria, strabismus, nystagmus, eye redness." }
+    status: unverified
+  - id: neuro.L05.046
+    kind: card
+    topic: uveitis
+    front: What is uveitis, and with which systemic disorders is it associated?
+    back: "Inflammation of the uvea: anterior = iritis; posterior = choroiditis and/or retinitis. May show hypopyon (pus in the anterior chamber) or conjunctival redness. Sarcoidosis, Behçet syndrome, juvenile idiopathic arthritis, HLA-B27–associated conditions."
+    src: { page: 553, quote: "Associated with systemic inflammatory disorders (eg, sarcoidosis, Behçet syndrome, juvenile idiopathic arthritis, HLA-B27–associated conditions)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.047
+    kind: mcq
+    topic: uveitis
+    stem: >-
+      A 27-year-old man has 2 days of a painful red right eye with photophobia. He has had 2 years of low back pain and
+      morning stiffness that improves with exercise. Slit-lamp examination shows a layer of white cells settled in the
+      lower anterior chamber. Which finding is most likely?
+    options:
+      - HLA-B27 positivity
+      - Anti-acetylcholine receptor antibodies
+      - Elevated intraocular pressure with a closed angle
+      - Cherry-red spot at the fovea
+      - Bilateral papilledema
+    answer: 0
+    why:
+      - "Right. Anterior uveitis with hypopyon in a man with inflammatory back pain (ankylosing spondylitis): an HLA-B27–associated condition."
+      - "Myasthenia gives ptosis and diplopia, not inflammation."
+      - "Angle closure gives a mid-dilated fixed pupil and halos, not hypopyon."
+      - "A cherry-red spot is retinal artery occlusion."
+      - "Papilledema is from raised ICP."
+    src: { page: 553, quote: "May have hypopyon (accumulation of pus in anterior chamber A ) or conjunctival redness." }
+    status: unverified
+  # ---------- p554: pupillary control ----------
+  - id: neuro.L05.048
+    kind: order
+    topic: pupillary-control
+    prompt: Put the parasympathetic pathway for miosis in order.
+    steps:
+      - Edinger-Westphal nucleus
+      - CN III to the ciliary ganglion
+      - Short ciliary nerves
+      - Sphincter pupillae muscle
+    src: { page: 554, quote: "1st neuron: Edinger-Westphal nucleus to ciliary ganglion via CN III ▘ 2nd neuron: short ciliary nerves to sphincter pupillae muscles" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.049
+    kind: card
+    topic: pupillary-control
+    front: Describe the pupillary light reflex.
+    back: "Light in either retina → CN II → pretectal nuclei in the midbrain → both Edinger-Westphal nuclei → both pupils constrict (direct and consensual)."
+    src: { page: 554, quote: "Light in either retina sends a signal via CN II to pretectal nuclei in midbrain that activates bilateral Edinger-Westphal nuclei; pupils constrict bilaterally (direct and consensual reflex)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.050
+    kind: table
+    topic: pupillary-control
+    title: Sympathetic pathway for mydriasis
+    columns: [Neuron, Course]
+    rows:
+      - [1st, Hypothalamus → ciliospinal center of Budge (C8-T2)]
+      - [2nd, "Exits at T1 → superior cervical ganglion (along the cervical chain near the lung apex and subclavian vessels)"]
+      - [3rd, "Along the internal carotid, through the cavernous sinus → long ciliary nerve → pupillary dilator"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 554, quote: "1st neuron: hypothalamus to ciliospinal center of Budge (C8-T2)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.051
+    kind: card
+    topic: pupillary-control
+    front: Besides the pupil, what do the third-order sympathetic fibers supply, and how do you remember short vs long ciliary nerves?
+    back: "Smooth muscle of the eyelids (minor retractors) and sweat glands of the forehead and face. Short ciliary nerves shorten the pupil (parasympathetic); long ciliary nerves lengthen it (sympathetic)."
+    src: { page: 554, quote: "Sympathetic fibers also innervate smooth muscle of eyelids (minor retractors) and sweat glands of forehead and face." }
+    status: unverified
+  - id: neuro.L05.052
+    kind: card
+    topic: pupillary-control
+    front: What is a relative afferent pupillary defect (Marcus Gunn pupil)?
+    back: "Unequal constriction when light is shone in one eye at a time, from a unilateral or asymmetric lesion of the afferent limb (retina, optic nerve). Swinging light from the normal eye to the affected eye makes both pupils dilate instead of constrict."
+    src: { page: 554, quote: "When light is swung from a normal eye to an affected eye, both pupils dilate instead of constricting." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.053
+    kind: mcq
+    topic: pupillary-control
+    stem: >-
+      A 31-year-old woman has painful blurred vision in her left eye. In dim light, shining a penlight in the right eye
+      constricts both pupils. When the light swings quickly to the left eye, both pupils dilate. Where is the lesion?
+    options:
+      - Left optic nerve
+      - Left oculomotor nerve
+      - Right optic nerve
+      - Left ciliary ganglion
+      - Pretectal nuclei
+    answer: 0
+    why:
+      - "Right. Relative afferent pupillary defect: the afferent limb (retina or optic nerve) on the left is damaged, as in optic neuritis."
+      - "A CN III lesion is efferent: the left pupil would not constrict to light in either eye, but the right would."
+      - "A right-sided afferent lesion would make both pupils dilate when light moves to the right."
+      - "A ciliary ganglion lesion gives a tonic (Adie) pupil on that side."
+      - "A pretectal lesion affects both sides and gives light-near dissociation."
+    src: { page: 554, quote: "Extent of pupillary constriction differs when light is shone in one eye at a time due to unilateral or asymmetric lesions of afferent limb of pupillary reflex (eg, retina, optic nerve)." }
+    status: unverified
+  # ---------- p555: Horner, ocular motility, strabismus ----------
+  - id: neuro.L05.054
+    kind: enumerate
+    topic: horner-syndrome
+    prompt: Enumerate the features of Horner syndrome (sympathetic denervation of the face, 3).
+    points:
+      - Ptosis (slight, superior tarsal muscle)
+      - Miosis
+      - Anhidrosis and absent flushing of that side of the face
+    pass: 3
+    hook: "PAM is horny: Ptosis، Anhidrosis، Miosis. الـ ptosis خفيفة لأن العضلة الـ sympathetic صغيرة (superior tarsal)، مش الـ levator."
+    src: { page: 555, quote: "Ptosis (slight drooping of eyelid: superior tarsal muscle)  Miosis (pupil constriction)  Anhidrosis (absence of sweating) and absence of flushing of affected side of face" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.055
+    kind: table
+    topic: horner-syndrome
+    title: Horner syndrome by neuron
+    columns: [Neuron, Example lesions]
+    rows:
+      - [1st (central), "Pontine hemorrhage, lateral medullary syndrome, cord lesion above T1 (Brown-Séquard, late syringomyelia)"]
+      - [2nd (preganglionic), Stellate ganglion compression by a Pancoast tumor]
+      - [3rd (postganglionic), "Carotid dissection (painful); anhidrosis usually absent"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 555, quote: "2nd neuron: stellate ganglion compression by Pancoast tumor  3rd neuron: carotid dissection (painful); anhidrosis is usually absent" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.056
+    kind: mcq
+    topic: horner-syndrome
+    stem: >-
+      A 58-year-old man who smokes has 3 months of pain in his right shoulder radiating down the inner arm, and weakness
+      of the right hand. His right eyelid droops slightly, his right pupil is small, and the right side of his face is dry.
+      Compression of which structure explains the eye findings?
+    options:
+      - Stellate (cervicothoracic) sympathetic ganglion
+      - Internal carotid artery wall
+      - Hypothalamus
+      - Oculomotor nerve
+      - Lateral medulla
+    answer: 0
+    why:
+      - "Right. A Pancoast (apical lung) tumor compresses the 2nd-order sympathetic neurons at the stellate ganglion, plus the lower brachial plexus."
+      - "Carotid dissection affects 3rd-order fibers, with neck pain and usually no anhidrosis."
+      - "Central lesions do not explain the shoulder and hand findings."
+      - "CN III palsy gives a large, not small, pupil with a down-and-out eye."
+      - "Lateral medullary syndrome brings vertigo, dysphagia and crossed sensory loss."
+    src: { page: 555, quote: "2nd neuron: stellate ganglion compression by Pancoast tumor" }
+    status: unverified
+  - id: neuro.L05.057
+    kind: cloze
+    topic: ocular-motility
+    text: "Extraocular muscle innervation: CN VI → {{c1::lateral rectus}}; CN IV → {{c2::superior oblique}}; CN III → {{c3::the rest}} («LR6 SO4 R3»)."
+    src: { page: 555, quote: "CN VI innervates the Lateral Rectus. CN IV innervates the Superior Oblique. CN III innervates the Rest." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.058
+    kind: card
+    topic: ocular-motility
+    front: How are the oblique muscles tested?
+    back: "Obliques go opposite: the left superior and inferior obliques are tested with the patient looking right. IOU: the inferior oblique is tested looking up (in adduction); the superior oblique looking down (in adduction)."
+    src: { page: 555, quote: "Obliques go Opposite (left SO and IO tested with patient looking right) IOU: IO tested looking Up" }
+    status: unverified
+  - id: neuro.L05.059
+    kind: card
+    topic: ocular-motility
+    front: What is a blowout fracture, and what are its signs?
+    back: "Fracture of the orbital floor (maxillary bone), usually from blunt trauma. Diplopia (especially on upward gaze) and enophthalmos from inferior rectus +/− orbital fat entrapment; may injure the infraorbital nerve."
+    src: { page: 555, quote: "Blowout fracture—orbital floor (maxillary bone) fracture; usually 2° to blunt trauma." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.060
+    kind: card
+    topic: ocular-motility
+    front: Why is a «white-eyed» (trapdoor) orbital floor fracture in a child urgent?
+    back: "Few external signs but significant muscle entrapment → risk of the oculocardiac reflex (bradycardia, nausea, syncope) → urgent surgical repair."
+    src: { page: 555, quote: "In children, “white-eyed” (trapdoor) fracture may show minimal external signs but significant muscle entrapment" }
+    status: unverified
+  - id: neuro.L05.061
+    kind: card
+    topic: strabismus
+    front: What is strabismus, which type is most common in children, and what are its complications?
+    back: "Eye misalignment («crossed eyes»); esotropia (deviation toward the nose) is most common in children. Complications: amblyopia, diplopia, psychosocial impact."
+    src: { page: 555, quote: "Deviation of eye toward the nose (esotropia) is the most common type of strabismus in children." }
+    status: unverified
+  - id: neuro.L05.062
+    kind: card
+    topic: strabismus
+    front: What is amblyopia?
+    back: "«Lazy eye»: ↓ visual acuity from maldevelopment of the visual cortex, caused by abnormal visual experience early in life (eg, strabismus). Typically unilateral."
+    src: { page: 555, quote: "visual acuity due to maldevelopment of visual cortex. Caused by abnormal visual experience early in life (eg, due to strabismus). Typically unilateral." }
+    status: unverified
+  - id: neuro.L05.063
+    kind: mcq
+    topic: ocular-motility
+    stem: >-
+      A 16-year-old boy is hit in the right eye by a baseball. He has double vision that is worst when looking up, a
+      sunken right eye, and numbness of the right cheek and upper lip. Which structure is most likely trapped?
+    options:
+      - Inferior rectus muscle
+      - Superior oblique tendon
+      - Lateral rectus muscle
+      - Medial rectus muscle
+      - Levator palpebrae superioris
+    answer: 0
+    why:
+      - "Right. Orbital floor blowout fracture: the inferior rectus (and fat) is trapped, limiting upgaze; the infraorbital nerve gives cheek numbness."
+      - "The superior oblique sits at the roof, not the floor."
+      - "The lateral rectus runs along the lateral wall."
+      - "Medial rectus entrapment follows a medial wall fracture and limits horizontal gaze."
+      - "The levator raises the lid and is not near the floor."
+    src: { page: 555, quote: "diplopia (especially on upward gaze) and enophthalmos due to IR muscle A +/– orbital fat entrapment. May injure infraorbital nerve." }
+    status: unverified
+  # ---------- p556: CN III, IV, VI palsies ----------
+  - id: neuro.L05.064
+    kind: table
+    topic: cranial-nerve-iii-iv-vi-palsies
+    title: CN III fibers and how they are hit
+    columns: [Fibers, Position in nerve, Hit by, Signs]
+    rows:
+      - [Motor, Middle (central), "Ischemia (eg, diabetes)", "Ptosis, down-and-out gaze; pupil spared"]
+      - [Parasympathetic, Periphery, "Compression (PCom aneurysm, uncal herniation)", "Blown pupil, ↓ light reflex, +/− down-and-out"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 556, quote: "Parasympathetic output—fibers on the periphery are first affected by compression (eg, PCom aneurysm, uncal herniation)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.065
+    kind: table
+    topic: cranial-nerve-iii-iv-vi-palsies
+    title: Causes of CN III palsy and their clue
+    columns: [Cause, Clue]
+    rows:
+      - [Ischemia, Pupil sparing]
+      - [Uncal herniation, Coma]
+      - [PCom aneurysm, Sudden-onset headache]
+      - [Cavernous sinus thrombosis, "Proptosis, CN IV, V1/V2, VI also involved"]
+      - [Midbrain stroke, Contralateral hemiplegia]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 556, quote: "Ischemia → pupil sparing (motor fibers affected more than parasympathetic fibers)" }
+    status: unverified
+  - id: neuro.L05.066
+    kind: card
+    topic: cranial-nerve-iii-iv-vi-palsies
+    front: What are the signs of CN IV palsy?
+    back: "The affected eye sits higher; head tilts to the contralateral (unaffected) side to make up for lost intorsion. Cannot see the floor: trouble going down stairs or reading."
+    src: { page: 556, quote: "Pupil is higher in the affected eye. Characteristic head tilt to contralateral/unaffected side to compensate for lack of intorsion in affected eye." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.067
+    kind: card
+    topic: cranial-nerve-iii-iv-vi-palsies
+    front: What are the signs of CN VI palsy?
+    back: "The affected eye cannot abduct and rests medially in primary gaze."
+    src: { page: 556, quote: "Affected eye unable to abduct and is displaced medially in primary position of gaze." }
+    status: unverified
+  - id: neuro.L05.068
+    kind: mcq
+    topic: cranial-nerve-iii-iv-vi-palsies
+    stem: >-
+      A 64-year-old woman with long-standing diabetes wakes with double vision. Her left eyelid droops and the left eye
+      rests down and out, but both pupils are equal and react briskly to light. Why is the pupil spared?
+    options:
+      - Ischemia hits the central motor fibers before the peripheral parasympathetic fibers
+      - The parasympathetic fibers travel in CN IV
+      - The lesion is in the Edinger-Westphal nucleus
+      - Compression affects the inner fibers first
+      - Sympathetic fibers take over pupillary constriction
+    answer: 0
+    why:
+      - "Right. Diabetic (ischemic) CN III palsy: the vessels run on the outside, so the central motor fibers lose supply first and the peripheral pupillary fibers survive."
+      - "Pupillary parasympathetic fibers run with CN III, not CN IV."
+      - "An Edinger-Westphal lesion would affect the pupil."
+      - "Compression hits the outer (parasympathetic) fibers first, giving a blown pupil."
+      - "Sympathetic fibers dilate the pupil; they do not constrict it."
+    src: { page: 556, quote: "Motor output to extraocular muscles—affected primarily by vascular disease (eg, diabetes mellitus: glucose → sorbitol)" }
+    status: unverified
+  - id: neuro.L05.069
+    kind: mcq
+    topic: cranial-nerve-iii-iv-vi-palsies
+    stem: >-
+      A 45-year-old man has vertical double vision after a head injury, worst when walking down stairs. His right eye sits
+      higher than the left, and he keeps his head tilted to the left. Which muscle is weak?
+    options:
+      - Right superior oblique
+      - Left superior oblique
+      - Right inferior rectus
+      - Right lateral rectus
+      - Left inferior oblique
+    answer: 0
+    why:
+      - "Right. Right CN IV palsy: the right eye is higher, intorsion is lost, and the head tilts to the unaffected (left) side."
+      - "A left superior oblique palsy would raise the left eye and tilt the head right."
+      - "Inferior rectus weakness (CN III) brings other CN III signs."
+      - "Lateral rectus weakness (CN VI) gives horizontal diplopia."
+      - "Inferior oblique weakness does not cause trouble going down stairs."
+    src: { page: 556, quote: "Can’t see the floor with CN IV damage (eg, difficulty going down stairs, reading)." }
+    status: unverified
+  # ---------- p557: visual fields, cavernous sinus ----------
+  - id: neuro.L05.070
+    kind: table
+    topic: visual-field-defects
+    title: Visual field defects by lesion site
+    columns: [Lesion, Defect]
+    rows:
+      - [Macula, Central scotoma (macular degeneration)]
+      - [Left optic nerve, Left anopia]
+      - [Optic chiasm, Bitemporal hemianopia]
+      - [Left optic tract, Right homonymous hemianopia]
+      - [Left Meyer loop (temporal), Right upper quadrantanopia]
+      - [Left dorsal optic radiation (parietal), Right lower quadrantanopia]
+      - [Left visual cortex (PCA infarct), Right hemianopia with macular sparing]
+    blanks: [[2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 557, quote: "Right hemianopia with macular sparing (PCA infarct)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.071
+    kind: card
+    topic: visual-field-defects
+    front: Which part of the retina does Meyer loop carry, and where does it run?
+    back: "The ventral optic radiation (Meyer loop) carries the lower retina (upper visual field) through the temporal lobe, looping around the inferior horn of the lateral ventricle. The dorsal radiation carries the superior retina through the parietal lobe."
+    src: { page: 557, quote: "Ventral optic radiation (Meyer loop)—lower retina; travels through temporal lobe; loops around inferior horn of lateral ventricle." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.072
+    kind: mcq
+    topic: visual-field-defects
+    stem: >-
+      A 38-year-old man has a left temporal lobectomy for epilepsy. Afterward he bumps into objects at head height on his
+      right side. Which visual field defect is expected?
+    options:
+      - Right upper quadrantanopia
+      - Right lower quadrantanopia
+      - Bitemporal hemianopia
+      - Left homonymous hemianopia
+      - Right hemianopia with macular sparing
+    answer: 0
+    why:
+      - "Right. The left Meyer loop runs through the temporal lobe and carries the lower retina, which sees the upper contralateral field: «pie in the sky»."
+      - "Lower quadrant loss follows a parietal (dorsal radiation) lesion."
+      - "Bitemporal loss is a chiasm lesion."
+      - "A left-sided lesion affects the right field."
+      - "Macular sparing comes with occipital (PCA) infarcts."
+    src: { page: 557, quote: "Right upper quadrantanopia (left temporal lesion)" }
+    status: unverified
+  - id: neuro.L05.073
+    kind: card
+    topic: cavernous-sinus
+    front: What passes through the cavernous sinus?
+    back: "CN III, IV, V1, V2 and VI, postganglionic sympathetic pupillary fibers, and the cavernous internal carotid artery (I, TOMATO)."
+    src: { page: 557, quote: "CNs III, IV, V1 , V2 , and VI plus postganglionic sympathetic pupillary fibers en route to orbit all pass through cavernous sinus." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.074
+    kind: card
+    topic: cavernous-sinus
+    front: How does cavernous sinus syndrome present, and what causes it?
+    back: "Variable ophthalmoplegia (eg, CN III and VI), ↓ corneal sensation, Horner syndrome, sometimes ↓ maxillary sensation. Causes: pituitary tumor, carotid-cavernous fistula, or septic cavernous sinus thrombosis (dural sinuses lack valves)."
+    src: { page: 557, quote: "2° to pituitary tumor mass effect, carotid-cavernous fistula, or cavernous sinus thrombosis related to infection (spread due to lack of valves in dural venous sinuses)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.075
+    kind: mcq
+    topic: cavernous-sinus
+    stem: >-
+      A 30-year-old woman squeezed a pimple near her nose a week ago. She now has fever, headache, a bulging right eye,
+      and she cannot move the right eye in any direction. The right cornea has reduced sensation. Which nerve passing
+      through the same space is also likely affected?
+    options:
+      - Maxillary division of CN V
+      - Mandibular division of CN V
+      - Optic nerve
+      - Facial nerve
+      - Hypoglossal nerve
+    answer: 0
+    why:
+      - "Right. Septic cavernous sinus thrombosis: CN III, IV, V1, V2 and VI run through the sinus, so maxillary sensation may drop too."
+      - "V3 leaves through the foramen ovale and does not pass through the sinus."
+      - "The optic nerve runs above the sinus through the optic canal."
+      - "CN VII runs through the internal acoustic meatus."
+      - "CN XII exits through the hypoglossal canal."
+    src: { page: 557, quote: "Cavernous sinus syndrome—presents with variable ophthalmoplegia (eg, CN III and CN VI), ↓ corneal sensation, Horner syndrome and occasional ↓ maxillary sensation." }
+    status: unverified
+  # ---------- p558: INO ----------
+  - id: neuro.L05.076
+    kind: card
+    topic: internuclear-ophthalmoplegia
+    front: What is the medial longitudinal fasciculus, and why is it vulnerable in multiple sclerosis?
+    back: "A pair of tracts linking the CN VI and CN III nuclei so both eyes move in the same horizontal direction. It is highly myelinated (must signal fast), so demyelination (MS) hits it; bilateral lesions are classic for MS, also stroke."
+    src: { page: 558, quote: "Highly myelinated (must communicate quickly so eyes move at same time)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.077
+    kind: order
+    topic: internuclear-ophthalmoplegia
+    prompt: Put the pathway for voluntary gaze to the left in order.
+    steps:
+      - Right frontal eye field
+      - Left PPRF
+      - Left CN VI nucleus (left lateral rectus contracts)
+      - Right MLF
+      - Right CN III nucleus (right medial rectus contracts)
+    src: { page: 558, quote: "When looking left, the left nucleus of CN VI fires, which contracts the left lateral rectus and stimulates the contralateral (right) nucleus of CN III via the right MLF to contract the right medial rectus." }
+    status: unverified
+  - id: neuro.L05.078
+    kind: cloze
+    topic: internuclear-ophthalmoplegia
+    text: "INO = {{c1::ipsilateral adduction failure}}, {{c2::nystagmus opposite}} (in the abducting eye); {{c3::convergence}} is normal. The side named is the eye that cannot adduct."
+    src: { page: 558, quote: "INO = Ipsilateral adduction failure, Nystagmus Opposite." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.079
+    kind: mcq
+    topic: internuclear-ophthalmoplegia
+    stem: >-
+      A 27-year-old woman has double vision. When asked to look right, her left eye stops at the midline and her right eye
+      shows nystagmus. Looking left is normal, and both eyes converge normally on a near target. Where is the lesion?
+    options:
+      - Left medial longitudinal fasciculus
+      - Right medial longitudinal fasciculus
+      - Left oculomotor nerve
+      - Right abducens nucleus
+      - Right paramedian pontine reticular formation
+    answer: 0
+    why:
+      - "Right. Left INO: the left eye fails to adduct on right gaze and the abducting right eye shows nystagmus; normal convergence shows CN III and the medial rectus work."
+      - "A right MLF lesion stops the right eye adducting on left gaze."
+      - "A CN III palsy would impair convergence and cause ptosis."
+      - "A right CN VI nucleus lesion paralyzes rightward gaze in both eyes."
+      - "A right PPRF lesion also causes a conjugate rightward gaze palsy."
+    src: { page: 558, quote: "Directional term (eg, right INO, left INO) refers to the eye that is unable to adduct." }
+    status: unverified
+  # ---------- p559: eyelid disorders ----------
+  - id: neuro.L05.080
+    kind: table
+    topic: eyelid-disorders
+    title: Preseptal vs orbital cellulitis
+    columns: [Feature, Preseptal, Orbital]
+    rows:
+      - [Location, Anterior eyelid soft tissue, "Posterior; orbit contents (fat, muscles)"]
+      - [Source, "—", 2° to bacterial sinusitis]
+      - [Signs, "Mild; pain, swelling, erythema at rest", Pain and diplopia with eye movement]
+      - [Risks, "—", "Vision loss, cavernous sinus thrombosis, intracranial spread"]
+    blanks: [[1, 2], [2, 2], [3, 2]]
+    src: { page: 559, quote: "Pain and double vision (diplopia) with eye movement. Risk of vision loss, cavernous sinus thrombosis, and intracranial spread." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.081
+    kind: card
+    topic: eyelid-disorders
+    front: What usually causes orbital cellulitis?
+    back: "Spread from bacterial sinusitis; most commonly S aureus and streptococci."
+    src: { page: 559, quote: "Most commonly caused by S aureus and streptococci." }
+    status: unverified
+  - id: neuro.L05.082
+    kind: table
+    topic: eyelid-disorders
+    title: Eyelid lumps and inflammation
+    columns: [Disorder, What it is]
+    rows:
+      - [Blepharitis, "Lid margin inflammation, irritation, crusting"]
+      - [Hordeolum (stye), "Acute infection of sebaceous or sweat glands: tender red nodule"]
+      - [Chalazion, Noninfectious granulomatous inflammation from a blocked meibomian or Zeis gland]
+      - [Xanthelasma, "Yellow patch on the medial eyelid; may go with high cholesterol"]
+    blanks: [[1, 1], [2, 1], [3, 1]]
+    src: { page: 559, quote: "Noninfectious granulomatous inflammation D caused by obstruction of a meibomian (modified sebaceous) or Zeis (sebaceous) gland." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.083
+    kind: mcq
+    topic: eyelid-disorders
+    stem: >-
+      A 9-year-old boy has a week of nasal congestion, then 2 days of fever and a swollen, red left upper eyelid. He has
+      pain when moving the left eye and double vision on looking to the left. CT shows inflammation behind the orbital
+      septum next to an opacified ethmoid sinus. Which complication is this condition at risk of?
+    options:
+      - Cavernous sinus thrombosis
+      - Chalazion
+      - Retinoblastoma
+      - Angle-closure glaucoma
+      - Xanthelasma
+    answer: 0
+    why:
+      - "Right. Orbital cellulitis (from sinusitis; pain and diplopia with eye movement) risks vision loss, cavernous sinus thrombosis and intracranial spread."
+      - "A chalazion is a painless blocked gland, not a complication."
+      - "Retinoblastoma is a tumor, not an infectious complication."
+      - "Angle closure is a different emergency with a fixed mid-dilated pupil."
+      - "Xanthelasma is a lipid deposit."
+    src: { page: 559, quote: "Posterior eyelid infection affecting orbit contents (fat and muscles) B , 2º to bacterial sinusitis." }
+    status: unverified
+  - id: neuro.L05.084
+    kind: mcq
+    topic: normal-eye-anatomy
+    stem: >-
+      A 30-year-old man is struck in the eye with a stick. Slit-lamp examination shows blood layering in the space between
+      the cornea and the iris. In which compartment is the blood?
+    options:
+      - Anterior chamber
+      - Posterior chamber
+      - Vitreous chamber
+      - Subretinal space
+      - Suprachoroidal space
+    answer: 0
+    why:
+      - "Right. The anterior chamber lies between the cornea and the iris; blood there is a hyphema."
+      - "The posterior chamber lies between the iris and the lens."
+      - "The vitreous chamber lies behind the lens, in the posterior segment."
+      - "Subretinal blood lies under the retina, seen on funduscopy."
+      - "The suprachoroidal space lies between the choroid and sclera."
+    src: { page: 549, quote: "ANTERIOR SEGMENT (anterior chamber + posterior chamber)" }
+    status: unverified
+  - id: neuro.L05.085
+    kind: mcq
+    topic: strabismus
+    stem: >-
+      A 4-year-old girl has had her right eye turning inward since age 1, never treated. Now, with glasses correcting a
+      mild refractive error, her right eye still reads only 20/100 while the left reads 20/20. The right eye and its
+      retina look structurally normal. What explains the reduced acuity?
+    options:
+      - Maldevelopment of the visual cortex from abnormal early visual experience
+      - Damage to the right optic nerve
+      - Cataract in the right lens
+      - Retinal detachment
+      - Paralysis of the right lateral rectus
+    answer: 0
+    why:
+      - "Right. Amblyopia: untreated strabismus early in life deprives the visual cortex of normal input from that eye, so acuity stays low despite a normal eye."
+      - "An optic nerve lesion would show disc changes or an RAPD."
+      - "A cataract would remove the red reflex."
+      - "Detachment would be seen on funduscopy."
+      - "Lateral rectus paralysis explains the turn, but not the low acuity of a structurally normal eye."
+    src: { page: 555, quote: "Caused by abnormal visual experience early in life (eg, due to strabismus). Typically unilateral." }
+    status: unverified

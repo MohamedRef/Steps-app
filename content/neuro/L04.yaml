@@ -1,0 +1,285 @@
+schema: steps.content/v1
+lecture: neuro.L04
+title: Otology
+book: { chapter: 12, pages: [547, 548] }
+topics:
+  - { id: auditory-anatomy-and-physiology, title: Auditory anatomy and physiology }
+  - { id: otitis-externa, title: Otitis externa }
+  - { id: otitis-media, title: Otitis media }
+  - { id: common-causes-of-hearing-loss, title: Common causes of hearing loss }
+  - { id: diagnosing-hearing-loss, title: Diagnosing hearing loss }
+  - { id: cholesteatoma, title: Cholesteatoma }
+items:
+  # ---------- p547: anatomy, otitis ----------
+  - id: neuro.L04.001
+    kind: table
+    topic: auditory-anatomy-and-physiology
+    title: Parts of the ear
+    columns: [Part, Contents, Role]
+    rows:
+      - [Outer ear, "Pinna, auditory canal, tympanic membrane", Transfers sound waves via tympanic membrane vibration]
+      - [Middle ear, "Air-filled; ossicles (malleus, incus, stapes); eustachian tube to nasopharynx", "Ossicles conduct and amplify sound; tube equalizes pressure"]
+      - [Inner ear, "Fluid-filled cochlea with basilar membrane and hair cells", Transduces vibration into auditory nerve signals]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 547, quote: "Air-filled space with three bones called the ossicles (malleus, incus, stapes). Ossicles conduct and amplify sound from tympanic membrane to inner ear." }
+    status: unverified
+  - id: neuro.L04.002
+    kind: card
+    topic: auditory-anatomy-and-physiology
+    front: What connects the middle ear to the nasopharynx, and what does it do?
+    back: "The eustachian tube; it equalizes pressure. Its dysfunction underlies otitis media and cholesteatoma."
+    src: { page: 547, quote: "Connected to nasopharynx via Eustachian tube (equalizes pressure)." }
+    status: unverified
+  - id: neuro.L04.003
+    kind: cloze
+    topic: auditory-anatomy-and-physiology
+    text: "Cochlear tonotopy: low frequencies are heard at the {{c1::apex}} near the helicotrema, where the basilar membrane is {{c2::wide and flexible}}; high frequencies at the {{c3::base}}, where it is thin and rigid."
+    src: { page: 547, quote: "Low frequency heard at apex near helicotrema (wide and flexible)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L04.004
+    kind: order
+    topic: auditory-anatomy-and-physiology
+    prompt: Put the path of sound in order.
+    steps:
+      - Tympanic membrane vibrates
+      - Ossicles conduct and amplify
+      - Basilar membrane of the cochlea vibrates
+      - Hair cells transduce the vibration
+      - Auditory nerve signals the brainstem
+    src: { page: 547, quote: "Vibration transduced via specialized hair cells → auditory nerve signaling → brainstem." }
+    status: unverified
+  - id: neuro.L04.005
+    kind: card
+    topic: otitis-externa
+    front: What is the most common cause of otitis externa, and what is it associated with?
+    back: "Pseudomonas. Water exposure (swimmer's ear) and ear canal trauma or occlusion (eg, hearing aids)."
+    src: { page: 547, quote: "Most commonly due to Pseudomonas. Associated with water exposure (swimmer’s ear), ear canal trauma/occlusion (eg, hearing aids)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L04.006
+    kind: card
+    topic: otitis-externa
+    front: How does otitis externa present?
+    back: "Otalgia that worsens with manipulation of the ear, pruritus, hearing loss, discharge."
+    src: { page: 547, quote: "Presents with otalgia that worsens with ear manipulation, pruritus, hearing loss, discharge A ." }
+    status: unverified
+  - id: neuro.L04.007
+    kind: card
+    topic: otitis-externa
+    front: What is malignant (necrotizing) otitis externa, and who gets it?
+    back: "Invasive infection causing osteomyelitis of the skull base, mostly in older patients with diabetes. Severe otalgia and otorrhea, granulation tissue in the canal; may cause cranial nerve palsies."
+    src: { page: 547, quote: "Malignant (necrotizing) otitis externa—invasive infection causing osteomyelitis. Complication of otitis externa mostly seen in older patients with diabetes." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L04.008
+    kind: mcq
+    topic: otitis-externa
+    stem: >-
+      A 74-year-old man with poorly controlled type 2 diabetes has 3 weeks of severe left ear pain and purulent discharge
+      despite antibiotic drops. Examination shows granulation tissue in the floor of the left ear canal and weakness of the
+      left side of his face including the forehead. Which organism is most likely?
+    options:
+      - Pseudomonas aeruginosa
+      - Streptococcus pneumoniae
+      - Moraxella catarrhalis
+      - Nontypeable Haemophilus influenzae
+      - Herpes simplex virus 1
+    answer: 0
+    why:
+      - "Right. Malignant otitis externa (osteomyelitis) in an older diabetic, with granulation tissue and a cranial nerve palsy: Pseudomonas."
+      - "S pneumoniae causes acute otitis media in children."
+      - "M catarrhalis is an otitis media pathogen."
+      - "Nontypeable H influenzae is an otitis media pathogen."
+      - "HSV-1 reactivation causes Bell palsy, without granulation tissue or otorrhea."
+    src: { page: 547, quote: "Presents with severe otalgia and otorrhea. May lead to cranial nerve palsies. Physical exam shows granulation tissue in ear canal." }
+    status: unverified
+  - id: neuro.L04.009
+    kind: enumerate
+    topic: otitis-media
+    prompt: Enumerate the most common causes of otitis media (3).
+    points:
+      - Nontypeable H influenzae
+      - S pneumoniae
+      - M catarrhalis
+    pass: 3
+    hook: "نفس التلاتة بتوع الـ sinusitis: Haemophilus و Strep و Moraxella، جايين من الـ nasopharynx عن طريق الـ eustachian tube."
+    src: { page: 547, quote: "Most common causes: nontypeable H influenzae, S pneumoniae, M catarrhalis." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L04.010
+    kind: card
+    topic: otitis-media
+    front: Who gets otitis media, what predisposes to it, and how does it present?
+    back: "Children 6 months to 3 years, usually after an upper respiratory infection; eustachian tube dysfunction lets nasopharyngeal bacteria overgrow. Fever, otalgia, bulging erythematous tympanic membrane; rare rupture → temporary conductive hearing loss."
+    src: { page: 547, quote: "Presents with fever, otalgia, bulging erythematous tympanic membrane A → rupture (rare) → temporary conductive hearing loss." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L04.011
+    kind: order
+    topic: otitis-media
+    prompt: Put the course of mastoiditis in order.
+    steps:
+      - Acute otitis media
+      - Infection spreads to the mastoid air cells
+      - Postauricular pain, erythema, swelling
+      - Subperiosteal abscess or meningitis
+    src: { page: 547, quote: "infection spreads to mastoid air cells → postauricular pain, erythema, swelling → subperiosteal abscess or meningitis." }
+    status: unverified
+  - id: neuro.L04.012
+    kind: mcq
+    topic: otitis-media
+    stem: >-
+      A 2-year-old boy has fever and pulls at his right ear 4 days after a cold. Otoscopy shows a red, bulging tympanic
+      membrane. Three weeks later he returns with redness and a tender, boggy swelling behind the right ear that pushes
+      the auricle forward. Where has the infection spread?
+    options:
+      - Mastoid air cells
+      - External auditory canal skin
+      - Cochlear hair cells
+      - Skull base bone in a diabetic pattern
+      - Middle ear squamous epithelium forming a cyst
+    answer: 0
+    why:
+      - "Right. Mastoiditis is a complication of acute otitis media: postauricular pain, erythema and swelling, risking subperiosteal abscess or meningitis."
+      - "Canal skin infection is otitis externa, with pain on pulling the ear and no bulging drum."
+      - "Hair cell loss gives sensorineural hearing loss, not a postauricular swelling."
+      - "Malignant otitis externa affects older diabetics."
+      - "Cholesteatoma presents with painless otorrhea."
+    src: { page: 547, quote: "Mastoiditis—complication of acute otitis media; infection spreads to mastoid air cells" }
+    status: unverified
+  # ---------- p548: hearing loss, cholesteatoma ----------
+  - id: neuro.L04.013
+    kind: card
+    topic: common-causes-of-hearing-loss
+    front: What does noise-induced hearing loss damage, and which frequencies go first?
+    back: "Stereociliated (hair) cells of the organ of Corti; high-frequency hearing is lost first. A sudden extremely loud noise can rupture the tympanic membrane."
+    src: { page: 548, quote: "Damage to stereociliated cells in organ of Corti. Loss of high-frequency hearing first." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L04.014
+    kind: card
+    topic: common-causes-of-hearing-loss
+    front: What is presbycusis, and why are low frequencies preserved?
+    back: "Age-related, progressive, bilateral symmetric sensorineural loss, often of higher frequencies, from destruction of hair cells at the cochlear base; the apex (low frequency) is preserved."
+    src: { page: 548, quote: "due to destruction of hair cells at the cochlear base (preserved low-frequency hearing at apex)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L04.015
+    kind: table
+    topic: common-causes-of-hearing-loss
+    title: Temporal bone fracture and hearing loss
+    columns: [Fracture, Hearing loss]
+    rows:
+      - [Longitudinal, Conductive]
+      - [Transverse, Sensorineural]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 548, quote: "Transverse temporal bone fracture sensorineural hearing loss." }
+    status: unverified
+  - id: neuro.L04.016
+    kind: card
+    topic: common-causes-of-hearing-loss
+    front: What can cause traumatic tympanic membrane rupture?
+    back: "Blunt trauma, barotrauma (eg, scuba diving), penetrating injury, or acoustic trauma (which also damages stereociliated cells)."
+    src: { page: 548, quote: "Tympanic membrane rupture from blunt trauma, barotrauma (eg, scuba diving), penetrating injury, or acoustic trauma" }
+    status: unverified
+  - id: neuro.L04.017
+    kind: mcq
+    topic: common-causes-of-hearing-loss
+    stem: >-
+      A 70-year-old woman has trouble following conversations in noisy restaurants for 3 years, worse for her
+      granddaughter's high-pitched voice. Both tympanic membranes are normal. Audiometry shows symmetric bilateral loss
+      at high frequencies with preserved low frequencies. Destruction of which structure explains this?
+    options:
+      - Hair cells at the base of the cochlea
+      - Hair cells at the apex of the cochlea
+      - The ossicles
+      - The tympanic membrane
+      - The vestibulocochlear nerve at the cerebellopontine angle
+    answer: 0
+    why:
+      - "Right. Presbycusis: hair cells at the cochlear base (high frequency) are destroyed first; the apex (low frequency) is spared."
+      - "The apex hears low frequencies, which are preserved here."
+      - "Ossicle damage gives conductive loss with abnormal Rinne."
+      - "Her tympanic membranes are normal; rupture gives conductive loss."
+      - "A vestibular schwannoma gives unilateral loss with tinnitus and imbalance."
+    src: { page: 548, quote: "Aging-related progressive bilateral/symmetric sensorineural hearing loss (often of higher frequencies)" }
+    status: unverified
+  - id: neuro.L04.018
+    kind: table
+    topic: diagnosing-hearing-loss
+    title: Weber and Rinne tests
+    columns: [Test, Normal, Conductive loss, Sensorineural loss]
+    rows:
+      - ["Weber (fork on vertex)", No localization, Localizes to affected ear, Localizes to unaffected ear]
+      - ["Rinne (fork in front of ear vs on mastoid)", "Air > bone", "Bone > air", "Air > bone"]
+    blanks: [[0, 2], [0, 3], [1, 2], [1, 3]]
+    src: { page: 548, quote: "Localizes to affected ear ↓ transmission of background noise" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L04.019
+    kind: card
+    topic: diagnosing-hearing-loss
+    front: Why does the Weber test lateralize to the affected ear in conductive hearing loss?
+    back: "The conductive block ↓ transmission of background noise to that ear, so bone-conducted sound from the vertex seems louder there. In sensorineural loss all sound transmission is ↓ in the affected ear, so it lateralizes to the good ear."
+    src: { page: 548, quote: "Localizes to unaffected ear ↓ transmission of all sound" }
+    status: unverified
+  - id: neuro.L04.020
+    kind: mcq
+    topic: diagnosing-hearing-loss
+    stem: >-
+      A 30-year-old man has reduced hearing in his left ear after a week of a cold. On the Rinne test, bone conduction is
+      louder than air conduction on the left. On the Weber test, sound is heard loudest in the left ear. What type of
+      hearing loss does he have?
+    options:
+      - Left conductive hearing loss
+      - Left sensorineural hearing loss
+      - Right conductive hearing loss
+      - Right sensorineural hearing loss
+      - Normal hearing
+    answer: 0
+    why:
+      - "Right. Bone > air on the left with Weber lateralizing to the left = left conductive loss (eg, middle ear effusion)."
+      - "Left sensorineural loss keeps air > bone and lateralizes Weber to the right."
+      - "The abnormal Rinne is on the left, not the right."
+      - "Right sensorineural loss would lateralize Weber to the left but keep the left Rinne normal (air > bone)."
+      - "Normal hearing gives air > bone and no lateralization."
+    src: { page: 548, quote: "Localizes to affected ear ↓ transmission of background noise" }
+    status: unverified
+  - id: neuro.L04.021
+    kind: card
+    topic: cholesteatoma
+    front: What is a cholesteatoma, and how is it acquired?
+    back: "Abnormal growth of keratinized squamous epithelium in the middle ear («skin in the wrong place»). 1° acquired: tympanic membrane retraction pockets from eustachian tube dysfunction. 2° acquired: tympanic membrane perforation (eg, otitis media) lets squamous epithelium migrate in. Can be congenital."
+    src: { page: 548, quote: "Abnormal growth of keratinized squamous epithelium in middle ear A (“skin in wrong place”)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L04.022
+    kind: cloze
+    topic: cholesteatoma
+    text: "Cholesteatoma classically presents with {{c1::painless otorrhea}} and may erode the {{c2::ossicles}} → {{c3::conductive}} hearing loss."
+    src: { page: 548, quote: "Classically presents with painless otorrhea. May erode ossicles conductive hearing loss." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L04.023
+    kind: mcq
+    topic: cholesteatoma
+    stem: >-
+      A 25-year-old woman with recurrent childhood ear infections has months of foul-smelling, painless discharge from her
+      right ear and gradually worsening right-sided hearing. Otoscopy shows a pearly white mass behind a perforated
+      tympanic membrane. Rinne is bone > air on the right. What is the mass made of?
+    options:
+      - Keratinized squamous epithelium
+      - Granulation tissue from Pseudomonas osteomyelitis
+      - Schwann cells
+      - Cholesterol-laden macrophages from a vascular tumor
+      - Middle ear mucosal polyp of respiratory epithelium
+    answer: 0
+    why:
+      - "Right. Cholesteatoma is skin in the wrong place: keratinized squamous epithelium that migrated through a perforation and erodes the ossicles."
+      - "Granulation tissue with severe pain points to malignant otitis externa in an older diabetic."
+      - "Schwann cells form a vestibular schwannoma, with sensorineural loss."
+      - "The name misleads: it is not a cholesterol or vascular tumor."
+      - "The book defines it as keratinized squamous epithelium, not respiratory mucosa."
+    src: { page: 548, quote: "2° acquired results from tympanic membrane perforation (eg, due to otitis media) that permits migration of squamous epithelium to middle ear." }
+    status: unverified

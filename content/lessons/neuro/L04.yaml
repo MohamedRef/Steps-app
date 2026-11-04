@@ -1,0 +1,136 @@
+schema: steps.lesson/v1
+lecture: neuro.L04
+lessons:
+  - id: neuro.L04.lesson1
+    title: "الودن: الصوت ماشي إزاي، وبيتسد فين"
+    hook: "شوكة رنانة واحدة على راس المريض بتقولك المشكلة في التوصيل ولّا في العصب"
+    minutes: 8
+    pages: [547, 548]
+    topics: [auditory-anatomy-and-physiology, otitis-externa, otitis-media, common-causes-of-hearing-loss, diagnosing-hearing-loss, cholesteatoma]
+    goals:
+      - "تمشي مع الصوت من الطبلة لجذع المخ"
+      - "تفهم ليه الكبار بيفقدوا الأصوات الرفيعة الأول"
+      - "تفرّق otitis externa عن media"
+      - "تحل Weber و Rinne من غير حفظ"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "3 أوض في الودن"
+        text: |-
+          - **الخارجية**: الصيوان والقناة والطبلة، والطبلة بتتهز مع الصوت.
+          - **الوسطى**: أوضة فيها هوا و 3 عضمات (**malleus، incus، stapes**) بيوصّلوا الصوت ==ويكبّروه==. متوصلة بالـ nasopharynx بالـ **eustachian tube** اللي بتعادل الضغط.
+          - **الداخلية**: الـ **cochlea** مليانة سايل، وفيها الـ basilar membrane والـ hair cells اللي بتحوّل الهزة لإشارة عصب.
+        page: 547
+        quote: "Air-filled space with three bones called the ossicles (malleus, incus, stapes). Ossicles conduct and amplify sound from tympanic membrane to inner ear."
+      - kind: figure
+        title: "الـ cochlea: كل تردد ليه مكان"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <path class="fg-acc" d="M20 70 L330 40 L330 130 L20 100 Z"/>
+            <rect class="fg-bad" x="20" y="74" width="40" height="22" rx="4"/>
+            <rect class="fg-good" x="290" y="52" width="40" height="66" rx="4"/>
+            <text x="14" y="62" class="t-sm t-b t-bad">Base</text>
+            <text x="14" y="122" class="t-sm">thin, rigid</text>
+            <text x="14" y="138" class="t-sm t-bad">high pitch</text>
+            <text x="270" y="30" class="t-sm t-b t-good">Apex</text>
+            <text x="250" y="150" class="t-sm">wide, flexible</text>
+            <text x="250" y="166" class="t-sm t-good">low pitch</text>
+            <text x="120" y="90" class="t-sm t-mut">basilar membrane</text>
+          </svg>
+        caption: "تخيّل الـ basilar membrane مفرودة: عند الـ base رفيعة وناشفة فبتتهز مع الأصوات الرفيعة (high frequency)، وعند الـ apex عريضة ولينة فبتتهز مع الأصوات التخينة. الـ hair cells اللي عند الـ base هي اللي بتموت الأول مع السن والدوشة."
+        alt: "The basilar membrane drawn as a strip that is narrow at the base on the left and wide at the apex on the right. The base is labeled thin and rigid, high pitch; the apex is labeled wide and flexible, low pitch."
+        page: 547
+        quote: "High frequency heard best at base of cochlea (thin and rigid)."
+      - kind: check
+        question: "A factory worker without ear protection begins to lose hearing. Which sounds go first?"
+        options:
+          - "High-frequency sounds, from damage at the cochlear base"
+          - "Low-frequency sounds, from damage at the apex"
+          - "All frequencies equally, from ossicle damage"
+          - "Only sounds in noisy places, from tympanic membrane damage"
+        answer: 0
+        why:
+          - "صح: الدوشة بتموّت الـ stereociliated cells في الـ organ of Corti، والأصوات الرفيعة تروح الأول."
+          - "الـ apex بيتحمّل أكتر."
+          - "ده conductive، مش اللي بيحصل من الدوشة المزمنة."
+          - "الطبلة بتتقطع من صوت عالي فجأة، مش من الدوشة المزمنة."
+        page: 548
+        quote: "Damage to stereociliated cells in organ of Corti. Loss of high-frequency hearing first."
+      - kind: table
+        title: "Externa × Media"
+        columns: ["", "Otitis externa", "Otitis media"]
+        rows:
+          - ["Where", "External auditory canal", "Middle ear"]
+          - ["Bug", "Pseudomonas", "H influenzae, S pneumoniae, M catarrhalis"]
+          - ["Setting", "Swimmer's ear, hearing aids", "Child 6 months-3 yr after a cold"]
+          - ["Sign", "Pain when the ear is moved", "Fever, bulging red tympanic membrane"]
+        hide: [[1, 1], [1, 2], [3, 1]]
+        page: 547
+        quote: "Presents with otalgia that worsens with ear manipulation, pruritus, hearing loss, discharge A ."
+      - kind: aside
+        tone: trap
+        text: "راجل كبير عنده ==diabetes== وألم ودن شديد مش بيخف وفيه granulation tissue في القناة: ده **malignant otitis externa**، osteomyelitis من الـ Pseudomonas، وممكن يعمل cranial nerve palsies. ده مش swimmer's ear عادي."
+        page: 547
+        quote: "Complication of otitis externa mostly seen in older patients with diabetes."
+      - kind: check
+        question: "A 3-year-old with otitis media develops a red, tender swelling behind the ear. What complication is this, and what can it lead to?"
+        options:
+          - "Mastoiditis; subperiosteal abscess or meningitis"
+          - "Cholesteatoma; painless otorrhea"
+          - "Malignant otitis externa; cranial nerve palsies"
+          - "Tympanic membrane rupture; permanent sensorineural loss"
+        answer: 0
+        why:
+          - "صح: الالتهاب بيوصل للـ mastoid air cells."
+          - "الـ cholesteatoma مش بيوجع."
+          - "ده بتاع الكبار اللي عندهم سكر."
+          - "الـ rupture بيعمل conductive loss مؤقت."
+        page: 547
+        quote: "Mastoiditis—complication of acute otitis media; infection spreads to mastoid air cells → postauricular pain, erythema, swelling → subperiosteal abscess or meningitis."
+      - kind: explain
+        title: "Weber و Rinne بالمنطق"
+        text: |-
+          - **Rinne**: الطبيعي إن الهوا (air conduction) أحسن من العضم (bone conduction). لو ==bone > air== يبقى في سدة في التوصيل (conductive). في الـ sensorineural الاتنين بيقلوا مع بعض فالهوا يفضل أحسن من العضم.
+          - **Weber** (الشوكة على نص الراس): في الـ **conductive** الصوت يروح ==للودن التعبانة==، لأنها مش سامعة دوشة الأوضة فالعضم يبان أعلى (جرّب تسد ودنك وتدندن). في الـ **sensorineural** الصوت يروح للودن السليمة.
+        page: 548
+        quote: "Tuning fork in front of ear (air conduction, AC), Tuning fork on mastoid process (bone conduction, BC)"
+      - kind: table
+        title: "جدول الشوكة"
+        columns: ["", "Normal", "Conductive", "Sensorineural"]
+        rows:
+          - ["Weber", "No localization", "To the affected ear", "To the unaffected ear"]
+          - ["Rinne", "air > bone", "bone > air", "air > bone"]
+        hide: [[0, 2], [0, 3], [1, 2], [1, 3]]
+        page: 548
+        quote: "Localizes to unaffected ear ↓ transmission of all sound"
+      - kind: check
+        question: "Weber lateralizes to the right ear; Rinne is air > bone in both ears. What is the problem?"
+        options:
+          - "Left sensorineural hearing loss"
+          - "Right conductive hearing loss"
+          - "Right sensorineural hearing loss"
+          - "Left conductive hearing loss"
+        answer: 0
+        why:
+          - "صح: الـ Rinne طبيعي في الناحيتين فمش conductive، والـ Weber راح للسليمة (اليمين)، يبقى الشمال sensorineural."
+          - "الـ conductive اليمين كان هيخلّي Rinne اليمين bone > air."
+          - "الـ sensorineural اليمين كان هيودّي الـ Weber للشمال."
+          - "الـ conductive الشمال كان هيودّي الـ Weber للشمال."
+        page: 548
+        quote: "Localizes to unaffected ear ↓ transmission of all sound"
+      - kind: explain
+        title: "كسر الجمجمة والـ cholesteatoma"
+        text: |-
+          - كسر الـ temporal bone: ==longitudinal = conductive==، و transverse = sensorineural.
+          - **Cholesteatoma** = «==skin in the wrong place==»: جلد (keratinized squamous epithelium) جوه الودن الوسطى، من retraction pocket (eustachian tube) أو من خرم في الطبلة. بيعمل إفرازات **من غير ألم**، ويآكل العضمات ← conductive loss.
+        page: 548
+        quote: "Abnormal growth of keratinized squamous epithelium in middle ear A (“skin in wrong place”)."
+      - kind: try
+        items: [neuro.L04.008, neuro.L04.012, neuro.L04.017, neuro.L04.020, neuro.L04.023]
+    recap:
+      - "Base = رفيع = high pitch، والـ base بيروح الأول (presbycusis والدوشة)."
+      - "Externa = Pseudomonas وألم مع تحريك الودن؛ malignant عند كبار السكر."
+      - "Media = H flu و Strep و Moraxella عند الأطفال؛ mastoiditis مضاعفة."
+      - "Conductive: Rinne bone > air و Weber للتعبانة. Sensorineural: Weber للسليمة."
+      - "Cholesteatoma = جلد في الودن الوسطى، إفرازات من غير ألم."
+    practice: [neuro.L04.001, neuro.L04.002, neuro.L04.003, neuro.L04.004, neuro.L04.005, neuro.L04.006, neuro.L04.007, neuro.L04.008, neuro.L04.009, neuro.L04.010, neuro.L04.011, neuro.L04.012, neuro.L04.013, neuro.L04.014, neuro.L04.015, neuro.L04.016, neuro.L04.017, neuro.L04.018, neuro.L04.019, neuro.L04.020, neuro.L04.021, neuro.L04.022, neuro.L04.023]
