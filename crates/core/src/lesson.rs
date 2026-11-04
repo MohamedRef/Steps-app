@@ -318,6 +318,9 @@ pub fn allowed_keys(kind: &str) -> Option<&'static [&'static str]> {
     })
 }
 
+/// Item kinds a lesson's `try` step (and the study player) can show.
+pub const PLAYABLE: &[&str] = &["card", "cloze", "enumerate", "essay", "table", "order"];
+
 pub const SHARED_STEP_KEYS: &[&str] = &["kind", "page", "quote"];
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -895,6 +898,15 @@ pub fn validate(file: &LessonFile, cx: &LessonContext<'_>) -> Vec<Problem> {
                 && step.page.is_none()
             {
                 bad(&sat, "a book figure needs its page".into());
+            }
+            if let StepBody::Try { items: ids } = &step.body
+                && !ids.is_empty()
+                && ids.iter().all(|id| lec.items.iter().any(|i| &i.id == id))
+                && !ids
+                    .iter()
+                    .any(|id| lec.items.iter().any(|i| &i.id == id && PLAYABLE.contains(&i.body.kind())))
+            {
+                bad(&sat, format!("a try step needs an item the lesson can play ({})", PLAYABLE.join(", ")));
             }
             for m in step_problems(&step.body, &items) {
                 bad(&sat, m);
@@ -1496,6 +1508,20 @@ lessons:
         );
         assert_eq!(text[12], ["Shock", "Type", "PCWP", "Cardiogenic", "↑", "Hypovolemic", "↓"]);
         assert!(text[13].is_empty(), "a try step shows the items themselves");
+    }
+
+    #[test]
+    fn a_try_step_needs_an_item_the_lesson_can_play() {
+        let mut f = good();
+        let last = f.lessons[0].steps.len() - 1;
+        // An MCQ and a case: neither plays inside a lesson (#177).
+        f.lessons[0].steps[last].body =
+            StepBody::Try { items: vec!["cvs.L04.003".into(), "cvs.L04.006".into()] };
+        let p = problems(&f);
+        assert!(p.iter().any(|m| m.contains("a try step needs an item the lesson can play")), "{p:?}");
+        f.lessons[0].steps[last].body =
+            StepBody::Try { items: vec!["cvs.L04.003".into(), "cvs.L04.008".into()] };
+        assert_eq!(problems(&f), Vec::<String>::new());
     }
 
     #[test]
