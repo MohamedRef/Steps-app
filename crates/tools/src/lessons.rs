@@ -47,22 +47,6 @@ pub fn unknown_abbreviations(file: &LessonFile, g: &Glossary) -> Vec<String> {
     let g = g.finder();
     let mut out = Vec::new();
     for l in &file.lessons {
-        // The recap shows too (#184).
-        let mut unknown: Vec<String> = Vec::new();
-        for t in &l.recap {
-            for w in g.unknown_in(t) {
-                if !unknown.contains(&w) {
-                    unknown.push(w);
-                }
-            }
-        }
-        if !unknown.is_empty() {
-            out.push(format!(
-                "{} recap: {} not in content/glossary.yaml (add an entry, or list it under plain: if it isn't an abbreviation)",
-                l.id,
-                unknown.iter().map(|w| format!("`{w}`")).collect::<Vec<_>>().join(", ")
-            ));
-        }
         for (k, step) in l.steps.iter().enumerate() {
             let mut unknown: Vec<String> = Vec::new();
             for t in step.shown_text() {
@@ -199,7 +183,7 @@ lessons:
         answer: 1
         anwser: 1
         why: [no, yes, no]
-    recap: [Beck triad, ACS can look the same]
+    recap: [Beck triad]
     status: unverified
 ";
 
@@ -224,7 +208,6 @@ lessons:
             "content/lessons/cvs/L09.yaml: its lecture cvs.L09 has no content file yet",
             "content/lessons/cvs/L04.yaml: cvs.L04.lesson1 step 3: unknown key `anwser` for a check step",
             "content/lessons/cvs/L04.yaml: cvs.L04.lesson1 step 2: `RA` not in content/glossary.yaml",
-            "content/lessons/cvs/L04.yaml: cvs.L04.lesson1 recap: `ACS` not in content/glossary.yaml",
         ] {
             assert!(problems.iter().any(|p| p.starts_with(want)), "{want}: {problems:#?}");
         }

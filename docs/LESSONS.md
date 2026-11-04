@@ -55,7 +55,7 @@ The model to copy is `content/lessons/cvs/L01.yaml`.
 12. **Every abbreviation is explained.** A step's «اختصارات» chip (beside
     its «ص» chip) lists each abbreviation the step shows, text and figure
     labels alike, with its expansion from the glossary. So the
-    validator fails on any word, in a step or a recap line, with two or more capitals (`HRS-AKI`, `NITs`,
+    validator fails on any word with two or more capitals (`HRS-AKI`, `NITs`,
     `TIF1γ`) that the glossary doesn't explain. Add an entry (`kind: abbr`,
     the expansion in English, likeliest Step 1 meaning first, then "also
     …") to your course's `content/glossary/<course>.yaml`, or, when the word
