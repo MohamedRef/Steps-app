@@ -152,6 +152,9 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
    "show answer" and "explain it" (screens-browser.cjs). */
 .ls-stage :is(.btn, .btn-link, .ls-explain) { min-block-size: var(--target); }
 .ls-stage button.tap-chip { display: inline-flex; align-items: center; min-block-size: var(--target); }
+/* Study items inside a `try` step keep the player's 48dp floor, which is
+   taller than the study screen's --tap-lg on phones (order tiles). */
+.ls-stage .or-tile { min-block-size: max(var(--target), var(--tap-lg)); }
 
 /* ---------- the player ---------- */
 .ls-player {
