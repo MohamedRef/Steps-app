@@ -11,6 +11,7 @@ mod backend;
 pub mod export;
 pub mod import;
 mod install;
+pub mod notes;
 pub mod own;
 pub mod pages;
 mod paths;
@@ -28,7 +29,7 @@ use steps_core::review::{Confidence, ErrorReason, Grade, Hlc, HlcClock, LoggedRe
 use steps_core::srs::ReviewSettings;
 use steps_core::zone::Zone;
 
-pub use backend::{LectureProgress, Overview, Review, use_provide_review, use_review};
+pub use backend::{LectureProgress, NoteError, Overview, Review, use_provide_review, use_review};
 
 #[derive(Debug)]
 pub enum StoreError {
@@ -116,6 +117,19 @@ const MIGRATIONS: &[&str] = &[
     "
     -- Mohamed's own cards (steps_core::own::OwnCard as JSON). Last writer wins.
     CREATE TABLE own_cards (
+        id          TEXT PRIMARY KEY,
+        value       TEXT NOT NULL,
+        account_id  TEXT,
+        device_id   TEXT NOT NULL,
+        hlc_wall    INTEGER NOT NULL,
+        hlc_counter INTEGER NOT NULL,
+        deleted     INTEGER NOT NULL DEFAULT 0
+    ) STRICT;
+",
+    "
+    -- Mohamed's notes on items, lesson steps and pages
+    -- (steps_core::note::Note as JSON), keyed by Anchor::row_id. Last writer wins.
+    CREATE TABLE notes (
         id          TEXT PRIMARY KEY,
         value       TEXT NOT NULL,
         account_id  TEXT,
@@ -730,10 +744,10 @@ mod tests {
     fn answers_logged_before_the_tags_read_without_them() {
         // A database from the build before confidence and reasons.
         let conn = Connection::open_in_memory().unwrap();
-        for sql in &MIGRATIONS[..3] {
+        for sql in &MIGRATIONS[..4] {
             conn.execute_batch(sql).unwrap();
         }
-        conn.pragma_update(None, "user_version", 3).unwrap();
+        conn.pragma_update(None, "user_version", 4).unwrap();
         conn.execute(
             "INSERT INTO review_events (id, item_id, grade, origin, at_ms, took_ms, device_id, hlc_wall, hlc_counter)
              VALUES ('old-1', 'hb.L01.001', 'again', 'bank', 5, 900, 'old', 5, 0)",

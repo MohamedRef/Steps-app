@@ -91,6 +91,12 @@ pub fn ItemView(
             }
             footer { class: "st-item-foot",
                 crate::learn::ExplainLink { item_id: item.id.clone() }
+                // His note stays out of sight until the answer is (it may hold it).
+                crate::notes::NoteChip {
+                    anchor: steps_core::note::Anchor::Item(item.id.clone()),
+                    page: (item.src.page > 0).then_some(item.src.page),
+                    show_text: revealed(),
+                }
                 // His own cards may have no page.
                 if item.src.page > 0 {
                     crate::hover::BookPage {
