@@ -74,6 +74,7 @@ pub fn StudySection() -> Element {
                 input {
                     r#type: "checkbox",
                     role: "switch",
+                    aria_label: tx::PAGE_GATE,
                     checked: gate,
                     onchange: {
                         let review = review.clone();
