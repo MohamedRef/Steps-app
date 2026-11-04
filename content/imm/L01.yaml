@@ -1,0 +1,414 @@
+schema: steps.content/v1
+lecture: imm.L01
+title: Lymphoid structures
+book: { chapter: 2, pages: [94, 96] }
+topics:
+  - { id: immune-system-organs, title: Immune system organs }
+  - { id: lymph-node, title: Lymph node }
+  - { id: lymphatic-drainage-associations, title: Lymphatic drainage associations }
+  - { id: spleen, title: Spleen }
+  - { id: thymus, title: Thymus }
+items:
+  # ---------- p94: immune system organs ----------
+  - id: imm.L01.001
+    kind: table
+    topic: immune-system-organs
+    title: Immune system organs
+    columns: [Organ type, Organs, Function]
+    rows:
+      - ["1° lymphoid organs", "Bone marrow; thymus", "Bone marrow: immune cell production and B cell maturation. Thymus: T cell maturation"]
+      - ["2° lymphoid organs", "Spleen, lymph nodes, tonsils, adenoids, appendix, Peyer patches", "Allow immune cells to interact with antigen"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 94, quote: "1° organs: Bone marrow—immune cell production, B cell maturation Thymus—T cell maturation 2° organs: Spleen, lymph nodes, tonsils, adenoids, appendix, Peyer patches Allow immune cells to interact with antigen" }
+    status: unverified
+  - id: imm.L01.002
+    kind: cloze
+    topic: immune-system-organs
+    text: B cells mature in the {{c1::bone marrow}}; T cells mature in the {{c2::thymus}}.
+    src: { page: 94, quote: "Bone marrow—immune cell production, B cell maturation Thymus—T cell maturation" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p94: lymph node ----------
+  - id: imm.L01.003
+    kind: card
+    topic: lymph-node
+    front: Describe the structure of a lymph node (afferents, efferents, capsule).
+    back: A 2° lymphoid organ with many afferent lymphatics and 1 or more efferents. It is encapsulated, with trabeculae.
+    src: { page: 94, quote: "A 2° lymphoid organ that has many afferents, 1 or more efferents. Encapsulated, with trabeculae" }
+    status: unverified
+  - id: imm.L01.004
+    kind: enumerate
+    topic: lymph-node
+    prompt: Enumerate the functions of a lymph node (3).
+    points:
+      - Nonspecific filtration by macrophages
+      - Circulation of B and T cells
+      - Immune response activation
+    pass: 3
+    hook: "الـ lymph node زي كمين على الطريق: بيفلتر (macrophages)، وبيلف فيه العساكر (B و T)، وبيدّي إنذار (activation)."
+    src: { page: 94, quote: "Functions are nonspecific filtration by macrophages, circulation of B and T cells, and immune response activation." }
+    status: unverified
+  - id: imm.L01.005
+    kind: card
+    topic: lymph-node
+    front: Where is the lymph node follicle, and what happens there?
+    back: In the outer cortex; it is the site of B-cell localization and proliferation.
+    src: { page: 94, quote: "Located in outer cortex; site of B-cell localization and proliferation." }
+    status: unverified
+  - id: imm.L01.006
+    kind: card
+    topic: lymph-node
+    front: How do 1° and 2° lymph node follicles differ?
+    back: 1° follicles are dense and quiescent. 2° follicles have pale central germinal centers and are active.
+    src: { page: 94, quote: "1° follicles are dense and quiescent. 2° follicles have pale central germinal centers and are active." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.007
+    kind: card
+    topic: lymph-node
+    front: What makes up the lymph node medulla?
+    back: Medullary cords (closely packed lymphocytes and plasma cells) and medullary sinuses (reticular cells and macrophages). The medullary sinuses communicate with the efferent lymphatics.
+    src: { page: 94, quote: "Consists of medullary cords (closely packed lymphocytes and plasma cells) and medullary sinuses (contain reticular cells and macrophages). Medullary sinuses communicate with efferent lymphatics." }
+    status: unverified
+  - id: imm.L01.008
+    kind: cloze
+    topic: lymph-node
+    text: The lymph node paracortex contains {{c1::T cells}} and {{c2::high endothelial venules}}, through which T and B cells enter from blood.
+    src: { page: 94, quote: "Paracortex Contains T cells. Region of cortex between follicles and medulla. Contains high endothelial venules through which T and B cells enter from blood." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.009
+    kind: card
+    topic: lymph-node
+    front: In which syndrome is the lymph node paracortex underdeveloped, and why?
+    back: DiGeorge syndrome. The paracortex is the T-cell zone, and DiGeorge patients lack a normal thymus, so they make few T cells.
+    src: { page: 94, quote: "Underdeveloped in patients with DiGeorge syndrome." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.010
+    kind: card
+    topic: lymph-node
+    front: Which lymph node region enlarges in an extreme cellular immune response, and with what infection is this classic?
+    back: The paracortex (paracortical hyperplasia → lymphadenopathy), e.g., EBV and other viral infections.
+    src: { page: 94, quote: "Paracortex enlarges in an extreme cellular immune response (eg, EBV and other viral infections paracortical hyperplasia lymphadenopathy)." }
+    status: unverified
+  - id: imm.L01.011
+    kind: mcq
+    topic: lymph-node
+    stem: >-
+      A 6-month-old boy is evaluated for recurrent viral and fungal infections. At birth he had
+      hypocalcemic seizures, and echocardiography showed a conotruncal heart defect. Chest x-ray shows
+      no thymic shadow. A biopsy of an inguinal lymph node is performed. Which region of the node is
+      most likely to be poorly developed?
+    options:
+      - Primary follicles of the outer cortex
+      - Germinal centers of secondary follicles
+      - Paracortex
+      - Medullary cords
+      - Subcapsular sinus
+    answer: 2
+    why:
+      - "Primary follicles hold B cells, which mature in the bone marrow and are spared in DiGeorge syndrome."
+      - "Germinal centers are B-cell zones; they may be smaller from lack of T-cell help, but the zone the book names as underdeveloped is the T-cell zone."
+      - "Right. This is DiGeorge syndrome (no thymus, hypocalcemia, conotruncal defect). The paracortex is the T-cell zone, and it is underdeveloped."
+      - "Medullary cords hold lymphocytes and plasma cells (B-cell lineage); they are not the classic finding."
+      - "The subcapsular sinus is where afferent lymph enters; it is not a T-cell zone."
+    src: { page: 94, quote: "Paracortex Contains T cells. Region of cortex between follicles and medulla. Contains high endothelial venules through which T and B cells enter from blood. Underdeveloped in patients with DiGeorge syndrome." }
+    status: unverified
+  # ---------- p95: lymphatic drainage associations ----------
+  - id: imm.L01.012
+    kind: table
+    topic: lymphatic-drainage-associations
+    title: Lymphatic drainage associations (head, neck and chest)
+    columns: [Lymph node cluster, Area of body drained, Associated pathology]
+    rows:
+      - ["Submandibular, submental", "Oral cavity, anterior tongue, lower lip", "Malignancy of and metastasis to the oral cavity"]
+      - ["Deep cervical", "Head, neck, oropharynx", "Upper respiratory tract infection; infectious mononucleosis; Kawasaki disease; malignancy of head, neck, oropharynx"]
+      - ["Supraclavicular", "Right: right hemithorax. Left (Virchow node): left hemithorax, abdomen, pelvis", "Malignancies of thorax, abdomen, pelvis"]
+      - ["Mediastinal", "Trachea, esophagus", "Pulmonary TB (unilateral hilar); sarcoidosis (bilateral hilar); lung cancer; granulomatous disease"]
+      - ["Hilar", "Lungs", "Pulmonary TB (unilateral hilar); sarcoidosis (bilateral hilar); lung cancer; granulomatous disease"]
+      - ["Axillary", "Upper limb, breast, skin above umbilicus", "Mastitis; metastasis (especially breast cancer)"]
+      - ["Epitrochlear", "Hand, forearm", "Secondary syphilis"]
+    blanks: [[0, 1], [1, 2], [2, 1], [3, 2], [5, 1], [6, 1], [6, 2]]
+    src: { page: 95, quote: "Lymph node cluster Area of body drained Associated pathology Submandibular, submental Oral cavity, anterior tongue, lower lip Malignancy of and metastasis to the oral cavity" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.013
+    kind: table
+    topic: lymphatic-drainage-associations
+    title: Lymphatic drainage associations (abdomen, pelvis and leg)
+    columns: [Lymph node cluster, Area of body drained, Associated pathology]
+    rows:
+      - ["Celiac", "Liver, stomach, spleen, pancreas, upper duodenum", "Mesenteric lymphadenitis; inflammatory bowel disease; celiac disease"]
+      - ["Superior mesenteric", "Lower duodenum, jejunum, ileum, colon to splenic flexure", "Mesenteric lymphadenitis; inflammatory bowel disease; celiac disease"]
+      - ["Inferior mesenteric", "Colon from splenic flexure to upper rectum", "Mesenteric lymphadenitis; inflammatory bowel disease; celiac disease"]
+      - ["Periumbilical (Sister Mary Joseph node)", "Abdomen, pelvis", "Gastric cancer"]
+      - ["Para-aortic", "Pair of testes, ovaries, kidneys, fallopian tubes, fundus of uterus", "Metastasis"]
+      - ["External iliac", "Body of uterus, cervix, superior bladder", "Sexually transmitted infections; medial foot/leg cellulitis (superficial inguinal)"]
+      - ["Internal iliac", "Cervix, proximal vagina, corpus cavernosum, prostate, inferior bladder, lower rectum to anal canal (above pectinate line)", "Sexually transmitted infections; medial foot/leg cellulitis (superficial inguinal)"]
+      - ["Superficial inguinal", "Distal vagina, vulva, scrotum, urethra, anal canal (below pectinate line), skin below umbilicus (except popliteal area)", "Sexually transmitted infections; medial foot/leg cellulitis"]
+      - ["Popliteal (\"pop-lateral\")", "Dorsolateral foot, posterior calf", "Lateral foot/leg cellulitis"]
+    blanks: [[0, 1], [3, 2], [4, 1], [6, 1], [7, 1], [8, 1], [8, 2]]
+    src: { page: 95, quote: "Para-aortic Pair of testes, ovaries, kidneys, fallopian tubes, fundus of uterus Metastasis" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.014
+    kind: card
+    topic: lymphatic-drainage-associations
+    front: Enlargement of the left supraclavicular (Virchow) node suggests malignancy where?
+    back: The left supraclavicular node drains the left hemithorax, abdomen and pelvis, so malignancies of the thorax, abdomen or pelvis.
+    src: { page: 95, quote: "Left (Virchow node): left hemithorax, abdomen, pelvis Malignancies of thorax, abdomen, pelvis" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.015
+    kind: card
+    topic: lymphatic-drainage-associations
+    front: What is the Sister Mary Joseph node, and with which cancer is it classically associated?
+    back: A periumbilical node that drains the abdomen and pelvis; classically gastric cancer.
+    src: { page: 95, quote: "Periumbilical (Sister Mary Joseph node) Abdomen, pelvis Gastric cancer" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.016
+    kind: card
+    topic: lymphatic-drainage-associations
+    front: Where does testicular (or ovarian) cancer first spread through lymphatics, and where does scrotal skin drain?
+    back: "Testes and ovaries: para-aortic nodes. Scrotum: superficial inguinal nodes."
+    src: { page: 95, quote: "Para-aortic Pair of testes, ovaries, kidneys, fallopian tubes, fundus of uterus Metastasis" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.017
+    kind: cloze
+    topic: lymphatic-drainage-associations
+    text: The anal canal above the pectinate line drains to the {{c1::internal iliac}} nodes; below the pectinate line it drains to the {{c2::superficial inguinal}} nodes.
+    src: { page: 95, quote: "lower rectum to anal canal (above pectinate line) Superﬁcial inguinal Distal vagina, vulva, scrotum, urethra, anal canal (below pectinate line)" }
+    status: unverified
+  - id: imm.L01.018
+    kind: cloze
+    topic: lymphatic-drainage-associations
+    text: "Lateral foot/leg cellulitis enlarges the {{c1::popliteal}} nodes (\"pop-lateral\"); medial foot/leg cellulitis enlarges the {{c2::superficial inguinal}} nodes."
+    src: { page: 95, quote: "Popliteal (“pop-lateral”) Dorsolateral foot, posterior calf Lateral foot/leg cellulitis" }
+    status: unverified
+  - id: imm.L01.019
+    kind: card
+    topic: lymphatic-drainage-associations
+    front: Epitrochlear lymphadenopathy is classically associated with which infection?
+    back: Secondary syphilis (the epitrochlear nodes drain the hand and forearm).
+    src: { page: 95, quote: "Epitrochlear Hand, forearm Secondary syphilis" }
+    status: unverified
+  - id: imm.L01.020
+    kind: card
+    topic: lymphatic-drainage-associations
+    front: How does hilar adenopathy differ between pulmonary TB and sarcoidosis?
+    back: "Pulmonary TB: unilateral hilar. Sarcoidosis: bilateral hilar."
+    src: { page: 95, quote: "Pulmonary TB (unilateral hilar) Sarcoidosis (bilateral hilar)" }
+    status: unverified
+  - id: imm.L01.021
+    kind: card
+    topic: lymphatic-drainage-associations
+    front: What do the right lymphatic duct and the thoracic duct drain, and where do they empty?
+    back: "Right lymphatic duct: right side of the body above the diaphragm → junction of the right subclavian and internal jugular veins. Thoracic duct: everything below the diaphragm plus the left thorax and left upper limb → junction of the left subclavian and internal jugular veins."
+    src: { page: 95, quote: "Right lymphatic duct drains right side of body above diaphragm into junction of the right subclavian and internal jugular vein Thoracic duct drains below the diaphragm and left thorax and upper limb into junction of left subclavian and internal jugular veins" }
+    status: unverified
+  - id: imm.L01.022
+    kind: card
+    topic: lymphatic-drainage-associations
+    front: Rupture of the thoracic duct can cause what?
+    back: Chylothorax.
+    src: { page: 95, quote: "rupture of thoracic duct can cause chylothorax" }
+    status: unverified
+  - id: imm.L01.023
+    kind: mcq
+    topic: lymphatic-drainage-associations
+    stem: >-
+      A 31-year-old man comes to the physician because of a painless, firm mass in his left testis for
+      2 months. Ultrasonography shows a solid intratesticular mass. Orchiectomy shows a germ cell tumor.
+      To which lymph node group is this tumor most likely to spread first?
+    options:
+      - Superficial inguinal nodes
+      - Para-aortic nodes
+      - Internal iliac nodes
+      - External iliac nodes
+      - Inferior mesenteric nodes
+    answer: 1
+    why:
+      - "Superficial inguinal nodes drain the scrotum, not the testis; a scrotal skin cancer would go there."
+      - "Right. The testes drain to the para-aortic nodes, because they descend from the posterior abdominal wall and keep their lymphatics."
+      - "Internal iliac nodes drain the cervix, prostate, inferior bladder and anal canal above the pectinate line."
+      - "External iliac nodes drain the body of the uterus, cervix and superior bladder."
+      - "Inferior mesenteric nodes drain the colon from the splenic flexure to the upper rectum."
+    src: { page: 95, quote: "Para-aortic Pair of testes, ovaries, kidneys, fallopian tubes, fundus of uterus Metastasis" }
+    status: unverified
+  # ---------- p96: spleen ----------
+  - id: imm.L01.024
+    kind: card
+    topic: spleen
+    front: Where is the spleen, and why is it commonly injured?
+    back: In the LUQ of the abdomen, anterolateral to the left kidney, deep to the 9th-11th ribs; commonly injured in blunt abdominal trauma.
+    src: { page: 96, quote: "Located in LUQ of abdomen. Anterolateral to left kidney, deep to the 9th-11th ribs; commonly injured in blunt abdominal trauma." }
+    status: unverified
+  - id: imm.L01.025
+    kind: table
+    topic: spleen
+    title: Spleen white pulp zones
+    columns: [Zone, Cells, Location]
+    rows:
+      - [Periarteriolar lymphatic sheath (PALS), T cells, Within white pulp]
+      - [Follicle, B cells, Within white pulp]
+      - [Marginal zone, "Macrophages and specialized B cells; site where APCs capture blood-borne antigens", Between red pulp and white pulp]
+    blanks: [[0, 1], [1, 1], [2, 1], [2, 2]]
+    src: { page: 96, quote: "Contains T cells. Located within white pulp. Follicle Contains B cells. Located within white pulp. Marginal zone Contains macrophages and specialized B cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.026
+    kind: card
+    topic: spleen
+    front: What happens in the splenic marginal zone?
+    back: Antigen-presenting cells (APCs) capture blood-borne antigens for recognition by lymphocytes. It contains macrophages and specialized B cells and lies between red and white pulp.
+    src: { page: 96, quote: "Contains macrophages and specialized B cells. Site where antigen-presenting cells (APCs) capture blood-borne antigens for recognition by lymphocytes. Located between red pulp and white pulp." }
+    status: unverified
+  - id: imm.L01.027
+    kind: order
+    topic: spleen
+    prompt: Put the chain that links splenic dysfunction to infection in order.
+    steps:
+      - Splenic dysfunction (postsplenectomy, sickle cell autosplenectomy)
+      - ↓ IgM
+      - ↓ Complement activation
+      - ↓ C3b opsonization
+      - ↑ Susceptibility to encapsulated organisms
+    src: { page: 96, quote: "Splenic dysfunction (eg, postsplenectomy, sickle cell disease autosplenectomy) IgM complement activation C3b opsonization susceptibility to encapsulated organisms" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.028
+    kind: cloze
+    topic: spleen
+    text: "After splenectomy, patients should be vaccinated against encapsulated organisms, from most to least common: {{c1::pneumococci}}, {{c2::meningococci}}, {{c3::Haemophilus influenzae type b}}."
+    src: { page: 96, quote: "against which patients should be vaccinated (from most to least common: pneumococci, meningococci, Haemophilus influenzae type b [Hib])." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.029
+    kind: enumerate
+    topic: spleen
+    prompt: Enumerate the postsplenectomy findings (4).
+    points:
+      - Howell-Jolly bodies (nuclear remnants)
+      - Target cells
+      - Thrombocytosis (loss of sequestration and removal)
+      - Lymphocytosis (loss of sequestration)
+    pass: 4
+    hook: "الطحال كان الزبّال اللي بيلم: من غيره الـ RBCs بتفضل بزبالتها (Howell-Jolly و target cells)، والـ platelets والـ lymphocytes بتفضل سايبة في الدم (thrombocytosis و lymphocytosis)."
+    src: { page: 96, quote: "Postsplenectomy findings: Howell-Jolly bodies (nuclear remnants) Target cells Thrombocytosis (loss of sequestration and removal) Lymphocytosis (loss of sequestration)" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.030
+    kind: mcq
+    topic: spleen
+    stem: >-
+      A 24-year-old man is brought to the emergency department with fever, confusion and a petechial
+      rash 12 hours after a sore throat. Three years ago he underwent splenectomy after a motorcycle
+      crash. His blood pressure is 82/50 mm Hg. A peripheral blood smear taken before antibiotics would
+      most likely show which of the following?
+    options:
+      - Schistocytes and thrombocytopenia
+      - Howell-Jolly bodies and thrombocytosis
+      - Spherocytes and reticulocytopenia
+      - Ringed sideroblasts
+      - Hypersegmented neutrophils
+    answer: 1
+    why:
+      - "Schistocytes and low platelets suggest a microangiopathy (it may come later with DIC), but they are not the baseline asplenic smear."
+      - "Right. Without a spleen, nuclear remnants stay in RBCs (Howell-Jolly bodies), and platelets are no longer sequestered or removed (thrombocytosis)."
+      - "Spherocytes point to hereditary spherocytosis or autoimmune hemolysis, and a spleen would remove them."
+      - "Ringed sideroblasts are a bone marrow finding of sideroblastic anemia."
+      - "Hypersegmented neutrophils point to B12 or folate deficiency."
+    src: { page: 96, quote: "Postsplenectomy findings: Howell-Jolly bodies (nuclear remnants) Target cells Thrombocytosis (loss of sequestration and removal)" }
+    status: unverified
+  # ---------- p96: thymus ----------
+  - id: imm.L01.031
+    kind: card
+    topic: thymus
+    front: Where is the thymus, and what is its function?
+    back: In the anterosuperior mediastinum; the site of T-cell differentiation and maturation. It is encapsulated.
+    src: { page: 96, quote: "Located in the anterosuperior mediastinum. Site of T-cell differentiation and maturation. Encapsulated." }
+    status: unverified
+  - id: imm.L01.032
+    kind: cloze
+    topic: thymus
+    text: Thymus epithelium is derived from the {{c1::third pharyngeal pouch}} ({{c2::endoderm}}), whereas thymic lymphocytes are of {{c3::mesodermal}} origin.
+    src: { page: 96, quote: "Thymus epithelium is derived from third pharyngeal pouch (endoderm), whereas thymic lymphocytes are of mesodermal origin." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.033
+    kind: card
+    topic: thymus
+    front: How do the thymic cortex and medulla differ?
+    back: The cortex is dense with immature T cells. The medulla is pale, with mature T cells and Hassall corpuscles (containing epithelial reticular cells).
+    src: { page: 96, quote: "Cortex is dense with immature T cells; medulla is pale with mature T cells and Hassall corpuscles containing epithelial reticular cells." }
+    status: unverified
+  - id: imm.L01.034
+    kind: card
+    topic: thymus
+    front: What does the normal neonatal thymus look like on chest x-ray, and when does it involute?
+    back: '"Sail-shaped"; it involutes by age 3 years.'
+    src: { page: 96, quote: "Normal neonatal thymus “sail-shaped” on CXR (arrows in A ), involutes by age 3 years." }
+    status: unverified
+  - id: imm.L01.035
+    kind: card
+    topic: thymus
+    front: In which immunodeficiencies is the thymic shadow absent or the thymus hypoplastic?
+    back: Some immunodeficiencies, e.g., SCID and DiGeorge syndrome.
+    src: { page: 96, quote: "Absent thymic shadow or hypoplastic thymus seen in some immunodeficiencies (eg, SCID, DiGeorge syndrome)." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.036
+    kind: enumerate
+    topic: thymus
+    prompt: Enumerate the conditions associated with thymoma (4).
+    points:
+      - Myasthenia gravis
+      - Superior vena cava syndrome
+      - Pure red cell aplasia
+      - Good syndrome
+    pass: 4
+    hook: "الـ thymoma بيعمل MSPG: Myasthenia، SVC syndrome، Pure red cell aplasia، Good syndrome."
+    src: { page: 96, quote: "Thymoma—neoplasm of thymus. Associated with myasthenia gravis, superior vena cava syndrome, pure red cell aplasia, Good syndrome." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L01.037
+    kind: enumerate
+    topic: thymus
+    prompt: Enumerate the features of thymus involution (the book's "Thymus FADES").
+    points:
+      - "Fatty replacement of tissue"
+      - "Age-related Atrophy (accelerated after puberty)"
+      - "Decline in naïve T cells (↓ IL-7, thymopoietin)"
+      - "Elderly immunosenescence (↓ vaccine response)"
+      - "Partly reversible with ↓ cortisol; ↓ Size, cellularity, function"
+    pass: 4
+    hook: "الكتاب بيقولها: Thymus FADES، الغدة بتبهت: Fat، Atrophy، Decline في الـ naïve T، Elderly، Size."
+    src: { page: 96, quote: "Thymus involution—Fatty replacement of tissue due to age-related Atrophy (accelerated after puberty) Decline in naïve T cells ( IL- 7, thymopoietin), Elderly immunosenescence ( vaccine response)" }
+    status: unverified
+  - id: imm.L01.038
+    kind: mcq
+    topic: thymus
+    stem: >-
+      A 52-year-old woman comes to the physician because of double vision and drooping eyelids that
+      worsen toward evening. Her ptosis improves after an ice pack is placed on the eyelids. Serum
+      acetylcholine receptor antibodies are positive. Further evaluation of this patient is most likely
+      to show a mass in which location?
+    options:
+      - Anterosuperior mediastinum
+      - Posterior mediastinum
+      - Middle mediastinum, at the carina
+      - Lung apex
+      - Left upper quadrant of the abdomen
+    answer: 0
+    why:
+      - "Right. This is myasthenia gravis, which is associated with thymoma; the thymus sits in the anterosuperior mediastinum."
+      - "Posterior mediastinal masses are classically neurogenic tumors, not thymus."
+      - "Carinal masses are lymph nodes or bronchogenic lesions, not the thymus."
+      - "An apical lung (Pancoast) tumor causes Horner syndrome, not fatigable ptosis with AChR antibodies."
+      - "The LUQ holds the spleen, not the thymus."
+    src: { page: 96, quote: "Thymoma—neoplasm of thymus. Associated with myasthenia gravis" }
+    status: unverified
+    tags: [high-yield]

@@ -1,0 +1,295 @@
+schema: steps.lesson/v1
+lecture: imm.L01
+lessons:
+  - id: imm.L01.lesson1
+    title: "الـ lymph node: المكان اللي المناعة بتتقابل فيه مع العدو"
+    hook: "اعرف مين قاعد فين في الـ node، وهتعرف تلقائياً إيه اللي يكبر في EBV وإيه اللي يختفي في DiGeorge"
+    minutes: 9
+    pages: [94, 95]
+    topics: [immune-system-organs, lymph-node, lymphatic-drainage-associations]
+    goals:
+      - "تفرّق بين الـ primary والـ secondary lymphoid organs"
+      - "تعرف مكان الـ B cells والـ T cells في الـ lymph node"
+      - "تربط كل مجموعة lymph nodes بالحتة اللي بتصرّفها والمرض اللي بيكبّرها"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "مدرسة وبعدين ميدان"
+        text: |-
+          الـ lymphoid organs نوعين:
+
+          - **Primary (1°)**: دي ==المدرسة==. الـ bone marrow بيعمل كل خلايا المناعة وبيخرّج الـ B cells، والـ thymus بيخرّج الـ T cells.
+          - **Secondary (2°)**: دي ==الميدان==: spleen و lymph nodes و tonsils و adenoids و appendix و Peyer patches. هنا الخلايا المتخرجة بتقابل الـ antigen.
+
+          سهلة تفتكرها: **T** = **T**hymus، **B** = **B**one marrow.
+        page: 94
+        quote: "1° organs: Bone marrow—immune cell production, B cell maturation Thymus—T cell maturation 2° organs: Spleen, lymph nodes, tonsils, adenoids, appendix, Peyer patches Allow immune cells to interact with antigen"
+      - kind: explain
+        title: "شكل الـ lymph node"
+        text: |-
+          الـ node له **afferents كتير** داخلة و **efferent واحد أو أكتر** خارج، وعليه capsule و trabeculae.
+
+          شغلته 3 حاجات: **filtration** غير متخصص بالـ macrophages، ومكان **تلف فيه** الـ B والـ T cells، و**activation** للـ immune response.
+        page: 94
+        quote: "A 2° lymphoid organ that has many afferents, 1 or more efferents. Encapsulated, with trabeculae A . Functions are nonspecific filtration by macrophages, circulation of B and T cells, and immune response activation."
+      - kind: figure
+        title: "مين قاعد فين في الـ node"
+        svg: |-
+          <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="imm1a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <ellipse class="fg-ink" cx="180" cy="110" rx="150" ry="95"/>
+            <ellipse class="fg-box" cx="180" cy="110" rx="110" ry="65"/>
+            <ellipse class="fg-good" cx="180" cy="110" rx="55" ry="32"/>
+            <circle class="fg-acc" cx="80" cy="60" r="18"/>
+            <circle class="fg-acc" cx="280" cy="60" r="18"/>
+            <circle class="fg-acc" cx="180" cy="28" r="16"/>
+            <circle class="fg-dot-acc" cx="80" cy="60" r="7"/>
+            <text x="62" y="92" class="t-sm t-acc">Follicle: B cells</text>
+            <text x="250" y="96" class="t-sm t-acc">germinal center</text>
+            <text x="120" y="68" class="t-sm t-b">Paracortex: T cells + HEV</text>
+            <text x="148" y="108" class="t-sm t-good">Medulla</text>
+            <text x="128" y="124" class="t-sm t-good">cords + sinuses</text>
+            <path class="fg-arrow-acc" d="M10 110 L 30 110" marker-end="url(#imm1a)"/>
+            <text x="2" y="130" class="t-sm">afferent</text>
+            <path class="fg-arrow-acc" d="M236 120 L 345 175" marker-end="url(#imm1a)"/>
+            <text x="290" y="200" class="t-sm">efferent</text>
+          </svg>
+        caption: "من برّه لجوّه: الـ follicles (B cells) في الـ outer cortex، بعدها الـ paracortex (T cells)، وفي النص الـ medulla. الـ lymph بيدخل من afferents كتير ويخرج من الـ efferent."
+        alt: "Diagram of a lymph node: B-cell follicles with germinal centers in the outer cortex, the T-cell paracortex with high endothelial venules beneath them, the medulla with cords and sinuses in the centre, many afferent lymphatics entering and an efferent leaving."
+        page: 94
+        quote: "Follicle Located in outer cortex; site of B-cell localization and proliferation."
+      - kind: explain
+        title: "الـ follicle والـ medulla"
+        text: |-
+          - **Follicle**: في الـ outer cortex، وده بيت الـ ==B cells==. الـ **1°** follicle كثيف وهادي، والـ **2°** follicle فيه **germinal center** فاتح في النص ومعناه إنه شغال.
+          - **Medulla**: فيها **medullary cords** (lymphocytes و plasma cells لازقين في بعض) و **medullary sinuses** (reticular cells و macrophages)، والـ sinuses دي بتوصل للـ efferent lymphatics.
+        page: 94
+        quote: "1° follicles are dense and quiescent. 2° follicles have pale central germinal centers and are active. Medulla Consists of medullary cords (closely packed lymphocytes and plasma cells) and medullary sinuses (contain reticular cells and macrophages)."
+      - kind: reveal
+        prompt: "الـ paracortex فيه T cells، وفيه الـ HEV اللي الـ lymphocytes بتدخل منها من الدم. تتوقع الحتة دي تبقى عاملة إزاي في طفل عنده DiGeorge؟ وإزاي في واحد عنده EBV؟"
+        answer: "في **DiGeorge** مفيش thymus كويس، يعني T cells قليلة، فالـ ==paracortex underdeveloped==. وفي **EBV** والفيروسات عموماً فيه cellular response جامد، فالـ paracortex بيكبر (**paracortical hyperplasia**) ← lymphadenopathy."
+        page: 94
+        quote: "Contains high endothelial venules through which T and B cells enter from blood. Underdeveloped in patients with DiGeorge syndrome. Paracortex enlarges in an extreme cellular immune response (eg, EBV and other viral infections"
+      - kind: check
+        question: "A 3-month-old with hypocalcemia, a conotruncal heart defect and an absent thymic shadow has a lymph node biopsy. Which region is underdeveloped?"
+        options:
+          - "Paracortex"
+          - "Follicles"
+          - "Medullary sinuses"
+          - "Germinal centers"
+        answer: 0
+        why:
+          - "صح: ده DiGeorge، والـ paracortex هو منطقة الـ T cells."
+          - "الـ follicles فيها B cells، ودي بتتعمل في الـ bone marrow وسليمة."
+          - "الـ medullary sinuses فيها reticular cells و macrophages، مش T cells."
+          - "الـ germinal centers جوه الـ follicles، يعني B cells."
+        page: 94
+        quote: "Underdeveloped in patients with DiGeorge syndrome."
+      - kind: explain
+        title: "كل node بيصرّف حتة"
+        text: |-
+          الفكرة بسيطة: ==الـ node بيكبر لما الحتة اللي بيصرّفها تتعب== (عدوى أو cancer). فلو حفظت مين بيصرّف إيه، هتعرف الـ node من المرض.
+
+          أهم الحاجات:
+          - **Left supraclavicular (Virchow node)**: بيصرّف الـ left hemithorax والبطن والحوض ← malignancy في أي حتة منهم.
+          - **Periumbilical (Sister Mary Joseph)**: البطن والحوض ← **gastric cancer**.
+          - **Epitrochlear**: الإيد والـ forearm ← **secondary syphilis**.
+          - **Hilar**: TB بيعمل unilateral، و ==sarcoidosis بيعمل bilateral==.
+        page: 95
+        quote: "Left (Virchow node): left hemithorax, abdomen, pelvis Malignancies of thorax, abdomen, pelvis"
+      - kind: aside
+        tone: trap
+        text: "فخ كلاسيكي: الـ ==testis بيصرّف على الـ para-aortic==، مش الـ inguinal، لأن الخصية نازلة من جنب الكلية وواخدة الـ lymphatics معاها. إنما جلد الـ **scrotum** بيصرّف على الـ superficial inguinal. ونفس الحكاية للـ ovaries: para-aortic."
+        page: 95
+        quote: "Para-aortic Pair of testes, ovaries, kidneys, fallopian tubes, fundus of uterus Metastasis"
+      - kind: match
+        prompt: "وصّل الـ node بالحتة اللي بيصرّفها"
+        pairs:
+          - ["Popliteal", "Dorsolateral foot, posterior calf"]
+          - ["Superficial inguinal", "Anal canal below pectinate line, scrotum, vulva"]
+          - ["Internal iliac", "Anal canal above pectinate line, prostate, cervix"]
+          - ["Celiac", "Liver, stomach, spleen, pancreas, upper duodenum"]
+          - ["Axillary", "Upper limb, breast, skin above umbilicus"]
+        why: "الـ **pop-lateral** بيصرّف الـ lateral foot، والـ medial foot بيروح على الـ superficial inguinal. والـ **pectinate line** هي الحد: فوقها internal iliac، وتحتها superficial inguinal."
+        page: 95
+        quote: "Popliteal (“pop-lateral”) Dorsolateral foot, posterior calf Lateral foot/leg cellulitis"
+      - kind: explain
+        title: "الـ lymph بيرجع للدم منين؟"
+        text: |-
+          - **Right lymphatic duct**: الجنب اليمين من الجسم ==فوق الـ diaphragm== بس، وبيصب عند تقاطع الـ right subclavian والـ internal jugular.
+          - **Thoracic duct**: كل اللي تحت الـ diaphragm + الـ left thorax + الدراع الشمال، وبيصب عند تقاطع الـ left subclavian والـ internal jugular.
+
+          لو الـ thoracic duct اتقطع، الـ lymph الأبيض (chyle) يتجمع في الـ pleura ← ==chylothorax==.
+        page: 95
+        quote: "Thoracic duct drains below the diaphragm and left thorax and upper limb into junction of left subclavian and internal jugular veins (rupture of thoracic duct can cause chylothorax)"
+      - kind: check
+        question: "A 65-year-old man has weight loss, early satiety and a hard nodule at his umbilicus. Which cancer is classic?"
+        options:
+          - "Gastric cancer"
+          - "Testicular cancer"
+          - "Breast cancer"
+          - "Melanoma of the lateral foot"
+        answer: 0
+        why:
+          - "صح: ده Sister Mary Joseph node، والكتاب بيربطه بالـ gastric cancer."
+          - "الخصية بتصرّف على الـ para-aortic."
+          - "الـ breast بيصرّف على الـ axillary."
+          - "الـ lateral foot بيصرّف على الـ popliteal."
+        page: 95
+        quote: "Periumbilical (Sister Mary Joseph node) Abdomen, pelvis Gastric cancer"
+      - kind: try
+        items: [imm.L01.002, imm.L01.006, imm.L01.008, imm.L01.012, imm.L01.013]
+    recap:
+      - "T = Thymus، B = Bone marrow. الـ secondary organs هي اللي بتقابل فيها الـ antigen."
+      - "Follicles = B cells في الـ outer cortex؛ paracortex = T cells + HEV."
+      - "Paracortex: صغير في DiGeorge، وكبير في EBV."
+      - "Virchow ← malignancy في الصدر والبطن والحوض؛ Sister Mary Joseph ← gastric؛ testis ← para-aortic."
+    practice: [imm.L01.001, imm.L01.002, imm.L01.003, imm.L01.004, imm.L01.005, imm.L01.006, imm.L01.007, imm.L01.008, imm.L01.009, imm.L01.010, imm.L01.011, imm.L01.012, imm.L01.013, imm.L01.014, imm.L01.015, imm.L01.016, imm.L01.017, imm.L01.018, imm.L01.019, imm.L01.020, imm.L01.021, imm.L01.022, imm.L01.023]
+  - id: imm.L01.lesson2
+    title: "الطحال والـ thymus: الفلتر والمدرسة"
+    hook: "ليه اللي من غير طحال يموت من pneumococcus؟ وليه الـ thymoma بيعمل myasthenia؟"
+    minutes: 8
+    pages: [96, 96]
+    topics: [spleen, thymus]
+    goals:
+      - "تعرف مين قاعد فين في الـ white pulp"
+      - "تفهم سلسلة: من غير طحال ← encapsulated organisms"
+      - "تحفظ لقطة الـ smear بعد الـ splenectomy وأمراض الـ thymoma"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الطحال: فلتر للدم"
+        text: |-
+          الطحال في الـ **LUQ**، قدام الكلية الشمال، تحت ضلوع **9-11**. عشان كده ==بيتعور كتير في الـ blunt abdominal trauma==.
+
+          الطحال بيعمل للدم اللي الـ lymph node بيعمله للـ lymph: بيفلتره. فيه **red pulp** (الـ RBCs والـ sinusoids)، و **white pulp** (الـ WBCs).
+        page: 96
+        quote: "Located in LUQ of abdomen. Anterolateral to left kidney, deep to the 9th-11th ribs; commonly injured in blunt abdominal trauma."
+      - kind: table
+        title: "الـ white pulp"
+        columns: ["Zone", "Cells", "Where"]
+        rows:
+          - ["PALS", "T cells", "Within white pulp, around the arteriole"]
+          - ["Follicle", "B cells", "Within white pulp"]
+          - ["Marginal zone", "Macrophages + specialized B cells", "Between red and white pulp"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+        page: 96
+        quote: "Contains T cells. Located within white pulp. Follicle Contains B cells. Located within white pulp. Marginal zone Contains macrophages and specialized B cells."
+      - kind: aside
+        tone: analogy
+        text: "الـ **marginal zone** زي ==بوابة التفتيش==: على الحد بين الدم (red pulp) والعساكر (white pulp). الـ APCs هناك بتمسك الـ antigens اللي جاية في الدم وتقدّمها للـ lymphocytes."
+        page: 96
+        quote: "Site where antigen-presenting cells (APCs) capture blood-borne antigens for recognition by lymphocytes. Located between red pulp and white pulp."
+      - kind: order
+        prompt: "رتّب: ليه اللي من غير طحال بيتعب من الـ encapsulated organisms؟"
+        steps:
+          - "Splenic dysfunction (splenectomy, sickle cell autosplenectomy)"
+          - "↓ IgM"
+          - "↓ Complement activation"
+          - "↓ C3b opsonization"
+          - "↑ Infections by encapsulated organisms"
+        why: "الـ capsule بتخلّي الـ bacteria تتزحلق من الـ phagocytes. اللي بيغلبها هو الـ ==C3b opsonization==، وده محتاج IgM يشغّل الـ complement، والطحال هو أكبر مصنع IgM للـ antigens اللي في الدم."
+        page: 96
+        quote: "Splenic dysfunction (eg, postsplenectomy, sickle cell disease autosplenectomy) IgM complement activation C3b opsonization susceptibility to encapsulated organisms"
+      - kind: explain
+        title: "التطعيمات"
+        text: |-
+          عشان كده أي حد من غير طحال لازم يتطعّم ضد الـ encapsulated organisms، بالترتيب من الأشهر للأقل:
+
+          - ==pneumococci==
+          - meningococci
+          - **Haemophilus influenzae type b** (Hib)
+        page: 96
+        quote: "against which patients should be vaccinated (from most to least common: pneumococci, meningococci, Haemophilus influenzae type b [Hib])."
+      - kind: reveal
+        prompt: "الطحال بيشيل إيه من الدم عادة؟ يبقى الـ smear هيبان عليه إيه بعد الـ splenectomy؟"
+        answer: "الطحال بينضّف الـ RBCs من الحاجات اللي جواها، وبيحبس platelets و lymphocytes. من غيره:\n\n- ==Howell-Jolly bodies== (بقايا nucleus جوه الـ RBC)\n- **Target cells**\n- **Thrombocytosis** (مفيش sequestration ولا removal)\n- **Lymphocytosis** (مفيش sequestration)"
+        page: 96
+        quote: "Postsplenectomy findings: Howell-Jolly bodies (nuclear remnants) Target cells Thrombocytosis (loss of sequestration and removal) Lymphocytosis (loss of sequestration)"
+      - kind: check
+        question: "A 20-year-old with sickle cell disease has a smear with nuclear remnants inside RBCs. What does this finding tell you?"
+        options:
+          - "Functional asplenia (autosplenectomy)"
+          - "Iron deficiency"
+          - "Lead poisoning"
+          - "Vitamin B12 deficiency"
+        answer: 0
+        why:
+          - "صح: دي Howell-Jolly bodies، معناها الطحال مش شغال، وفي الـ sickle cell ده autosplenectomy."
+          - "الـ iron deficiency بيعمل microcytic hypochromic cells، مش nuclear remnants."
+          - "الـ lead بيعمل basophilic stippling."
+          - "الـ B12 بيعمل macrocytes و hypersegmented neutrophils."
+        page: 96
+        quote: "Splenic dysfunction (eg, postsplenectomy, sickle cell disease autosplenectomy)"
+      - kind: explain
+        title: "الـ thymus: مدرسة الـ T cells"
+        text: |-
+          في الـ **anterosuperior mediastinum**، وعليه capsule. هنا الـ T cells بتتعلم وتكبر.
+
+          - الـ ==epithelium من الـ third pharyngeal pouch== (endoderm)، والـ lymphocytes نفسها mesoderm.
+          - الـ **cortex** كثيف، فيه T cells لسه صغيرة. الـ **medulla** فاتحة، فيها T cells خلصت تعليمها و **Hassall corpuscles**.
+          - في الـ neonate بيبان على الـ CXR زي ==الشراع (sail-shaped)==، وبيصغر (involutes) بسن 3 سنين.
+        page: 96
+        quote: "Thymus epithelium is derived from third pharyngeal pouch (endoderm), whereas thymic lymphocytes are of mesodermal origin. Cortex is dense with immature T cells; medulla is pale with mature T cells and Hassall corpuscles containing epithelial reticular cells."
+      - kind: figure
+        title: "الـ third pouch والـ thymus"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="imm1b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="10" y="20" width="130" height="50" rx="8"/>
+            <text x="20" y="42" class="t-sm t-b">3rd pharyngeal pouch</text>
+            <text x="20" y="60" class="t-sm">(endoderm)</text>
+            <path class="fg-arrow-acc" d="M140 45 L 200 45" marker-end="url(#imm1b)"/>
+            <rect class="fg-good" x="205" y="20" width="145" height="50" rx="8"/>
+            <text x="215" y="42" class="t-sm t-b">Thymus epithelium</text>
+            <text x="215" y="60" class="t-sm">(no pouch → no thymus)</text>
+            <rect class="fg-box" x="10" y="95" width="160" height="50" rx="8"/>
+            <text x="20" y="117" class="t-sm t-b">Cortex: dense</text>
+            <text x="20" y="135" class="t-sm">immature T cells</text>
+            <rect class="fg-box" x="190" y="95" width="160" height="50" rx="8"/>
+            <text x="200" y="117" class="t-sm t-b">Medulla: pale</text>
+            <text x="200" y="135" class="t-sm">mature T + Hassall</text>
+          </svg>
+        caption: "لو الـ third pouch ما اتكوّنش (زي DiGeorge) مفيش thymus، فمفيش thymic shadow على الـ CXR. والـ T cell بتدخل الـ cortex صغيرة وتخرج من الـ medulla متعلمة."
+        alt: "Diagram: the third pharyngeal pouch (endoderm) forms the thymus epithelium. Below, the dense cortex holds immature T cells and the pale medulla holds mature T cells and Hassall corpuscles."
+        page: 96
+        quote: "Absent thymic shadow or hypoplastic thymus seen in some immunodeficiencies (eg, SCID, DiGeorge syndrome)."
+      - kind: mnemonic
+        word: "FADES"
+        parts:
+          - { key: "F", text: "Fatty replacement of tissue" }
+          - { key: "A", text: "age-related Atrophy, faster after puberty" }
+          - { key: "D", text: "Decline in naïve T cells (↓ IL-7, thymopoietin)" }
+          - { key: "E", text: "Elderly immunosenescence (↓ vaccine response)" }
+          - { key: "S", text: "↓ Size, cellularity, function; partly reversible with ↓ cortisol" }
+        hook: "الكتاب بيقولها: الـ thymus بيـ FADES مع السن"
+        page: 96
+        quote: "Thymus involution—Fatty replacement of tissue due to age-related Atrophy (accelerated after puberty) Decline in naïve T cells ( IL- 7, thymopoietin), Elderly immunosenescence ( vaccine response)"
+      - kind: aside
+        tone: exam
+        text: "**Thymoma** = ورم في الـ thymus. الكتاب بيربطه بـ 4: ==myasthenia gravis==، و SVC syndrome (لأنه في الـ anterior mediastinum فبيضغط على الـ SVC)، و pure red cell aplasia، و Good syndrome."
+        page: 96
+        quote: "Thymoma—neoplasm of thymus. Associated with myasthenia gravis, superior vena cava syndrome, pure red cell aplasia, Good syndrome."
+      - kind: check
+        question: "A woman with fatigable ptosis and AChR antibodies has a chest CT. Where is the mass most likely?"
+        options:
+          - "Anterosuperior mediastinum"
+          - "Posterior mediastinum"
+          - "Left upper quadrant"
+          - "Lung hilum"
+        answer: 0
+        why:
+          - "صح: myasthenia ← thymoma، والـ thymus في الـ anterosuperior mediastinum."
+          - "الـ posterior mediastinum مش مكان الـ thymus."
+          - "الـ LUQ ده الطحال."
+          - "الـ hilum فيه lymph nodes (TB أو sarcoidosis)."
+        page: 96
+        quote: "Located in the anterosuperior mediastinum. Site of T-cell differentiation and maturation."
+      - kind: try
+        items: [imm.L01.025, imm.L01.027, imm.L01.029, imm.L01.032, imm.L01.036]
+    recap:
+      - "PALS = T cells، follicle = B cells، marginal zone = APCs بتمسك antigens الدم."
+      - "من غير طحال: ↓ IgM ← ↓ C3b ← encapsulated organisms، فطعّم: pneumococci و meningococci و Hib."
+      - "الـ smear: Howell-Jolly و target cells و thrombocytosis و lymphocytosis."
+      - "الـ thymus من الـ 3rd pouch؛ مفيش shadow في DiGeorge و SCID؛ thymoma ← myasthenia."
+    practice: [imm.L01.024, imm.L01.025, imm.L01.026, imm.L01.027, imm.L01.028, imm.L01.029, imm.L01.030, imm.L01.031, imm.L01.032, imm.L01.033, imm.L01.034, imm.L01.035, imm.L01.036, imm.L01.037, imm.L01.038]
