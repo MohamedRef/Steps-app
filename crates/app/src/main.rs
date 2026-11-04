@@ -30,6 +30,7 @@ mod hover;
 mod i18n;
 mod icons;
 mod import;
+mod labs;
 mod learn;
 mod lecture;
 mod look;
@@ -297,6 +298,7 @@ fn App() -> Element {
             update::sheet::UpdateSheet {}
             pagesheet::BookSheet {}
             abbrsheet::AbbrSheet {}
+            labs::LabSheet {}
             courses::Picker {}
             own::ShareInbox {}
             onboarding::Onboarding {}
