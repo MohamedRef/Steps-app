@@ -1,0 +1,20 @@
+/* The lab values sheet (labs/mod.rs) in the info sheet (sheet.rs,
+   assets/sheet.css). Layout only; colours from tokens. */
+.lab-title { margin: 0; line-height: 1.25; }
+.lab-tools { display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; margin-block-end: var(--sp-3); }
+.lab-search { flex: 1 1 12rem; min-inline-size: 0; min-block-size: var(--target, 44px); padding-inline: var(--sp-3);
+  border: 1px solid var(--line); border-radius: var(--radius-control, var(--radius)); background: var(--surface); color: var(--text); font: inherit; }
+.lab-units { flex: none; }
+.lab-section { margin-block-end: var(--sp-4); }
+.lab-section-title { margin: 0 0 var(--sp-2); font-size: var(--fs-sm); color: var(--accent-ink); text-align: start; }
+.lab-table { inline-size: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.lab-table th, .lab-table td { padding: var(--sp-1) var(--sp-2); text-align: start; vertical-align: top; border-block-end: 1px solid var(--line);
+  min-inline-size: 0; overflow-wrap: anywhere; }
+.lab-table th { font-weight: 500; inline-size: 55%; }
+.lab-table tr[data-sub="true"] th { padding-inline-start: var(--sp-5, 1.5rem); font-weight: 400; }
+.lab-table td { font-variant-numeric: tabular-nums; }
+.lab-val { display: block; }
+.lab-star { color: var(--accent); margin-inline-start: 2px; }
+.lab-empty, .lab-foot { margin-block: var(--sp-2) 0; }
+.lab-open { gap: var(--sp-1); }
+.lab-open-icon { font-size: 1.05em; }

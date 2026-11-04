@@ -1,0 +1,637 @@
+schema: steps.lesson/v1
+lecture: pharm.L02
+lessons:
+  - id: pharm.L02.lesson1
+    title: "الأدوية بتتجمع إزاي، وخريطة الأعصاب الـ autonomic"
+    hook: "2 + 2 ممكن تطلع 4 أو أكتر أو أقل، وعصب الـ sweat glands بيكسر القاعدة"
+    minutes: 8
+    pages: [234, 235]
+    topics: [drug-effect-modifications, autonomic-receptors, acetylcholine-receptors, pain-transmission]
+    goals:
+      - "تفرّق بين additive و synergistic و potentiation و antagonistic و tachyphylaxis"
+      - "تعرف مين بيفرز إيه على أنهي receptor في الـ sympathetic والـ parasympathetic"
+      - "تعرف الـ nicotinic من الـ muscarinic، والـ pain بيتنقل ويتوقف إزاي"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "لما دوائين يتقابلوا"
+        text: |-
+          - **Additive**: الاتنين مع بعض = مجموعهم (2 + 2 = 4)، زي aspirin مع acetaminophen.
+          - **Synergistic**: أكتر من مجموعهم (2 + 2 > 4)، زي clopidogrel مع aspirin.
+          - **Potentiation**: الدوا التاني ==لوحده ما بيعملش حاجة== بس بيقوّي الأول (2 + 0 > 2): الـ carbidopa بيمنع تحويل الـ levodopa برّه المخ.
+          - **Antagonistic**: أقل من مجموعهم (2 + 2 < 4)، زي morphine مع naloxone.
+          - **Permissive**: الأول لازم يكون موجود عشان التاني يشتغل كويس: الـ cortisol بيخلي الأوعية تستجيب للـ catecholamines.
+        page: 234
+        quote: "Similar to synergism, but drug B (with no therapeutic action alone) enhances the therapeutic action of drug A"
+      - kind: reveal
+        prompt: "واحدة بتستخدم nasal spray (oxymetazoline) كل يوم، ومفعوله بيقل، ولما توقفه مناخيرها تتسد أكتر. اسم ده إيه؟"
+        answer: "**Tachyphylaxis**: نقص حاد في الاستجابة بعد التكرار، ومعاه **rebound congestion**."
+        page: 234
+        quote: "Repeat use of intranasal decongestant (eg, oxymetazoline) → ↓ therapeutic response (with rebound congestion)"
+      - kind: figure
+        title: "مين بيفرز إيه"
+        svg: |-
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="ph2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="8" y="20" class="t-sm t-b">Parasympathetic</text>
+            <line class="fg-arrow" x1="10" y1="35" x2="170" y2="35" marker-end="url(#ph2a)"/>
+            <text x="40" y="30" class="t-sm t-mut">long pre: ACh → Nn</text>
+            <line class="fg-arrow" x1="175" y1="35" x2="230" y2="35" marker-end="url(#ph2a)"/>
+            <text x="236" y="39" class="t-sm">ACh → M (organs)</text>
+            <text x="8" y="70" class="t-sm t-b">Sympathetic</text>
+            <line class="fg-arrow" x1="10" y1="85" x2="60" y2="85" marker-end="url(#ph2a)"/>
+            <text x="12" y="80" class="t-sm t-mut">ACh → Nn</text>
+            <line class="fg-arrow-acc" x1="65" y1="85" x2="230" y2="85" marker-end="url(#ph2a)"/>
+            <text x="236" y="89" class="t-sm t-acc">NE → α, β (organs)</text>
+            <line class="fg-arrow" x1="65" y1="110" x2="230" y2="110" marker-end="url(#ph2a)"/>
+            <text x="236" y="114" class="t-sm">ACh → M3 (sweat)</text>
+            <line class="fg-arrow" x1="65" y1="135" x2="230" y2="135" marker-end="url(#ph2a)"/>
+            <text x="224" y="139" class="t-sm">D → D1 (renal vessels)</text>
+            <line class="fg-arrow-acc" x1="10" y1="165" x2="100" y2="165" marker-end="url(#ph2a)"/>
+            <text x="104" y="169" class="t-sm">adrenal medulla (Nn) → Epi in blood</text>
+            <text x="8" y="200" class="t-sm t-b">Somatic</text>
+            <line class="fg-arrow" x1="10" y1="215" x2="230" y2="215" marker-end="url(#ph2a)"/>
+            <text x="236" y="219" class="t-sm">ACh → Nm (muscle)</text>
+          </svg>
+        caption: "أي ganglion بيشتغل بـ ACh على Nn. الـ parasympathetic بيوصل للعضو بـ ACh على M. الـ sympathetic غالباً بـ NE، ما عدا الـ sweat glands (ACh) والـ renal vessels (dopamine). والـ adrenal medulla بيوصلها preganglionic على طول. والـ somatic بيروح للعضلة بـ ACh على Nm."
+        alt: "Diagram of autonomic and somatic pathways: parasympathetic long preganglionic neuron with ACh on Nn then ACh on muscarinic receptors; sympathetic short preganglionic with ACh on Nn then NE on alpha and beta receptors, ACh on M3 at sweat glands, dopamine on D1 at renal vessels; preganglionic fiber to the adrenal medulla releasing epinephrine; somatic motor nerve with ACh on Nm."
+        page: 234
+        quote: "Adrenal medulla is directly innervated by preganglionic sympathetic fibers."
+      - kind: aside
+        tone: exam
+        text: "الاستثناء اللي بيتسأل: الـ ==sweat glands== جزء من الـ sympathetic بس عصبها **cholinergic** (ACh على M3). الكتاب بيسميه «chold» sweat. يعني الـ antimuscarinic بيوقف العرق، والـ α-blocker لأ. والـ parasympathetic = CNs III و VII و IX و X والـ pelvic splanchnic nerves."
+        page: 234
+        quote: "Sweat glands are part of the sympathetic pathway but are innervated by cholinergic fibers (sympathetic nervous system results in a “chold” sweat)."
+      - kind: explain
+        title: "Nicotinic و muscarinic"
+        text: |-
+          - **Nicotinic**: ==ligand-gated channel==. الـ ACh يفتحه على طول فيدخل Na+ ويخرج K+ (وأحياناً Ca2+). نوعين: **NN** في الـ autonomic ganglia والـ adrenal medulla، و **NM** في الـ neuromuscular junction.
+          - **Muscarinic**: ==G-protein–coupled== وبيشتغل بـ 2nd messengers. 5 أنواع (M1–5) في القلب والـ smooth muscle والمخ والـ exocrine glands والـ sweat glands.
+        page: 235
+        quote: "Nicotinic ACh receptors are ligand-gated channels allowing efflux of K+ and influx of Na+ and in some cases Ca2+."
+      - kind: check
+        question: "Which receptor is found in autonomic ganglia and the adrenal medulla?"
+        options:
+          - "NN nicotinic receptor"
+          - "NM nicotinic receptor"
+          - "M3 muscarinic receptor"
+          - "α1-adrenergic receptor"
+        answer: 0
+        why:
+          - "صح: الـ NN في الـ ganglia والـ adrenal medulla."
+          - "الـ NM في الـ neuromuscular junction بتاع الـ skeletal muscle."
+          - "الـ M3 على الأعضاء والـ sweat glands، مش في الـ ganglia."
+          - "الـ α1 على الـ smooth muscle بتاع الأوعية والأحشاء."
+        page: 235
+        quote: "Two subtypes: NN (found in autonomic ganglia, adrenal medulla) and NM (found in neuromuscular junction of skeletal muscle)."
+      - kind: explain
+        title: "الألم بيتنقل إزاي"
+        text: |-
+          **Nociceptive pain**: مؤثر ميكانيكي أو حراري أو كيميائي ← الـ ==TRPV receptors== تدخّل Ca2+ ← Na+ channels تفتح. الإشارة بتمشي على **Aδ** (ألم حاد سريع) أو **C fibers** (ألم ممل نابض مزمن).
+
+          **Neuropathic pain**: العصب نفسه بايظ (CNS أو PNS)، والـ ==voltage-gated Na+ channels== بتزيد وتفضل شغالة. مثال: diabetic peripheral neuropathy.
+        page: 235
+        quote: "Transient receptor potential vanilloid ligand receptors cause Ca2+ influx–induced Na+ channel activation. Signals transmitted by Aδ fibers (sharp, acute pain) or C fibers (dull, throbbing, chronic pain)."
+      - kind: sort
+        prompt: "الدوا ده بيوقف أنهي مرحلة؟ (الكتاب بيحط بعض الأدوية في أكتر من مرحلة؛ هنا كل دوا في مرحلة ينفع فيها)"
+        bins: ["Transduction", "Modulation"]
+        cards:
+          - { text: "NSAIDs", bin: 0 }
+          - { text: "Acetaminophen", bin: 0 }
+          - { text: "Glucocorticoids", bin: 0 }
+          - { text: "TCAs", bin: 1 }
+          - { text: "SSRIs", bin: 1 }
+          - { text: "SNRIs", bin: 1 }
+        why: "الـ NSAIDs والـ acetaminophen والـ glucocorticoids بيوقفوا الـ transduction عند الطرف. الـ TCAs والـ SSRIs والـ SNRIs بيشتغلوا في الـ modulation (وكمان الـ perception). الـ local anesthetics والـ α2-agonists والـ gabapentinoids بيظهروا في أكتر من مرحلة."
+        page: 235
+        quote: "Modulation—blocked by TCAs, SSRIs, SNRIs, gabapentinoids"
+      - kind: try
+        items: [pharm.L02.001, pharm.L02.006, pharm.L02.010, pharm.L02.013, pharm.L02.015]
+    recap:
+      - "Synergistic 2 + 2 > 4 (clopidogrel + aspirin)، potentiation 2 + 0 > 2 (carbidopa)، antagonistic (morphine + naloxone)، tachyphylaxis (oxymetazoline)."
+      - "Sweat glands: sympathetic بس cholinergic. Adrenal medulla: preganglionic على طول. Renal vessels: dopamine على D1."
+      - "Nicotinic = ligand-gated (NN ganglia/adrenal، NM عضلة). Muscarinic = GPCR، M1–5."
+      - "Aδ حاد، C مزمن. Neuropathic = voltage-gated Na+ channels شغالة على طول."
+    practice: [pharm.L02.001, pharm.L02.002, pharm.L02.003, pharm.L02.004, pharm.L02.005, pharm.L02.006, pharm.L02.007, pharm.L02.008, pharm.L02.009, pharm.L02.010, pharm.L02.011, pharm.L02.012, pharm.L02.013, pharm.L02.014, pharm.L02.015, pharm.L02.016, pharm.L02.017]
+  - id: pharm.L02.lesson2
+    title: "المثانة والـ receptors والـ G-proteins: جدول واحد يحل نص الفارما"
+    hook: "لو حفظت كل receptor شغال بأنهي G-protein، هتتوقع أثر أي دوا من غير ما تحفظه"
+    minutes: 9
+    pages: [236, 237]
+    topics: [micturition-control, adrenergic-receptor-distribution, g-protein-second-messengers]
+    goals:
+      - "تعرف الأعصاب والـ receptors اللي بتتحكم في المثانة والأدوية اللي بتشتغل عليها"
+      - "تعرف كل adrenergic receptor فين وبيعمل إيه"
+      - "تحفظ Gq و Gs و Gi بالـ mnemonic"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "المثانة: مين بيقفل ومين بيفتح"
+        text: |-
+          مركز التبول في الـ ==pons== بينسّق بين الاتنين:
+          - **Sympathetic** (hypogastric nerve) ← ==احتباس==: β3 بيرخّي الـ detrusor، و α1 بيقفل الـ internal sphincter.
+          - **Parasympathetic** (pelvic nerve) ← ==تبول==: M3 بيقلّص الـ detrusor.
+          - **Somatic** (pudendal nerve): nicotinic على الـ external sphincter (اللي إنت بتتحكم فيه).
+        page: 236
+        quote: "Micturition center in pons regulates involuntary bladder function via coordination of sympathetic and parasympathetic nervous systems. ⊕ sympathetic → ↑ urinary retention. ⊕ parasympathetic → ↑ urine voiding."
+      - kind: aside
+        tone: analogy
+        text: "افتكرها كده: الـ **sympathetic** وإنت بتجري من أسد، مش وقت تدخل الحمام، فبيقفل. الـ **parasympathetic** وإنت مرتاح بعد الأكل، فبيفضّي. (الكتاب بيكتب جنبها «Baby one more time».)"
+        page: 236
+        quote: "⊕ sympathetic → ↑ urinary retention. ⊕ parasympathetic → ↑ urine voiding."
+      - kind: match
+        prompt: "وصّل الدوا بالاستخدام بتاعه في المثانة"
+        pairs:
+          - ["Bethanechol (⊕ M3)", "Urinary retention"]
+          - ["Oxybutynin (⊝ M3)", "Urgency incontinence, by ↓ detrusor overactivity"]
+          - ["Mirabegron (⊕ β3)", "Urgency incontinence, by ↑ bladder capacity"]
+          - ["Tamsulosin (⊝ α1)", "BPH"]
+        why: "الـ bethanechol بيقلّص الـ detrusor فيفضّي المثانة. الـ oxybutynin والـ mirabegron الاتنين بيرخّوه بطريقتين (يوقف M3 أو ينشّط β3). الـ tamsulosin بيرخّي الـ prostate وعنق المثانة فيقلل الانسداد."
+        page: 236
+        quote: "α1 -antagonists (eg, tamsulosin) ⊝ α1 -receptor → relaxation of smooth muscle (eg, bladder, neck, prostate) → ↓ urinary obstruction BPH"
+      - kind: table
+        title: "الـ adrenergic receptors فين وبيعملوا إيه"
+        columns: ["Receptor", "Tissue", "Effect"]
+        rows:
+          - ["α1", "Vascular and visceral smooth muscle", "Vasoconstriction, smooth muscle contraction"]
+          - ["α2", "Pancreas, presynaptic terminals, salivary glands", "↓ insulin, ↓ neurotransmitter release, ↓ saliva"]
+          - ["β1", "Heart, kidney", "↑ HR and contractility, ↑ renin"]
+          - ["β2", "Bronchioles, heart, liver, arteries, pancreas", "Bronchodilation, ↑ HR, glycogenolysis, vasodilation, ↑ insulin"]
+          - ["β3", "Adipose", "↑ lipolysis"]
+        hide: [[0, 2], [1, 2], [2, 2], [4, 2]]
+        page: 236
+        quote: "β1 Heart Kidney ↑ heart rate, contractility ↑ renin secretion"
+      - kind: reveal
+        prompt: "ليه الـ β-blocker بيقلل الضغط حتى من غير ما يأثر على القلب بس؟"
+        answer: "لأن ==β1 في الكلى بيزوّد الـ renin==. لما تقفله، الـ renin يقل فالـ angiotensin II يقل."
+        page: 236
+        quote: "β1 Heart Kidney ↑ heart rate, contractility ↑ renin secretion"
+      - kind: figure
+        title: "الـ G-proteins التلاتة"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="10" y="10" width="340" height="55" rx="8"/>
+            <text x="20" y="30" class="t-sm t-b">Gq: H1, α1, V1, M1, M3</text>
+            <text x="20" y="52" class="t-sm">phospholipase C → IP3 (↑ Ca2+) + DAG (PKC)</text>
+            <rect class="fg-good" x="10" y="75" width="340" height="55" rx="8"/>
+            <text x="20" y="95" class="t-sm t-b">Gs: β1, β2, β3, D1, H2, V2</text>
+            <text x="20" y="117" class="t-sm">adenylyl cyclase → ↑ cAMP → protein kinase A</text>
+            <rect class="fg-bad" x="10" y="140" width="340" height="55" rx="8"/>
+            <text x="20" y="160" class="t-sm t-b">Gi: M2, α2, D2</text>
+            <text x="20" y="182" class="t-sm">inhibits adenylyl cyclase → ↓ cAMP</text>
+          </svg>
+        caption: "Gq بيعلّي الـ Ca2+ (عن طريق IP3) فبيقلّص العضلات الملساء. Gs بيعلّي الـ cAMP. Gi بيقلله. والـ mnemonic: «HAVe 1 M&M» لـ Gq، و «MAD 2s» لـ Gi، والباقي Gs."
+        alt: "Three boxes: Gq receptors H1, alpha1, V1, M1, M3 act through phospholipase C, IP3, calcium and DAG; Gs receptors beta1, beta2, beta3, D1, H2, V2 raise cAMP; Gi receptors M2, alpha2, D2 lower cAMP."
+        page: 237
+        quote: "H1, α1, V1, M1, or M3 receptor Ligand Phospholipase C Gq protein PIP2 Smooth muscle contraction IP3 DAG Protein kinase C"
+      - kind: check
+        question: "Which receptor works through Gi?"
+        options:
+          - "α2"
+          - "α1"
+          - "β1"
+          - "H2"
+          - "V2"
+        answer: 0
+        why:
+          - "صح: Gi = M2 و α2 و D2 (MAD 2s)."
+          - "α1 بيشتغل بـ Gq."
+          - "β1 بيشتغل بـ Gs."
+          - "H2 بيشتغل بـ Gs وبيعلّي الحمض في المعدة."
+          - "V2 بيشتغل بـ Gs وبيعلّي الـ aquaporin-2."
+        page: 237
+        quote: "B1 , B2 , B3 , D1 , H2 , or V2 receptor Gi protein M2 , α2 , or D2 receptor"
+      - kind: explain
+        title: "أهم الوظايف اللي بتتسأل"
+        text: |-
+          - **α1**: انقباض الأوعية، ==mydriasis== (pupillary dilator)، وقفل الـ sphincters بتاعة الأمعاء والمثانة.
+          - **α2**: ↓ sympathetic outflow، ↓ insulin، ↑ platelet aggregation، ↓ aqueous humor.
+          - **β1**: ↑ HR والـ contractility ("one heart")، ↑ renin.
+          - **β2**: bronchodilation ("two lungs")، vasodilation، ↓ uterine tone (tocolysis)، ↑ ==K+ uptake== جوه الخلايا.
+          - **M2**: ↓ HR والـ AV conduction. **M3**: إفرازات، حركة الأمعاء، تقلص المثانة، bronchoconstriction، miosis.
+          - **V2**: ↑ aquaporin-2 في الـ collecting tubules و ↑ vWF.
+        page: 237
+        quote: "Vasodilation, bronchodilation (two lungs), ↑ lipolysis, ↑ insulin release, ↑ glycogenolysis, ↓ uterine tone (tocolysis), ↑ aqueous humor production, ↑ cellular K+ uptake"
+      - kind: aside
+        tone: tip
+        text: "الـ β2 بيدخّل K+ جوه الخلايا، وده سبب إن الـ albuterol بيتستخدم مع الـ hyperkalemia. والـ M3 بيعمل miosis، والـ α1 بيعمل mydriasis: عضلتين مختلفتين في العين."
+        page: 237
+        quote: "↑ pupillary sphincter muscle contraction (miosis), ciliary muscle contraction (accommodation)"
+      - kind: try
+        items: [pharm.L02.019, pharm.L02.020, pharm.L02.022, pharm.L02.025, pharm.L02.027]
+    recap:
+      - "Sympathetic ← احتباس (β3 + α1). Parasympathetic ← تبول (M3). Somatic ← nicotinic على الـ external sphincter."
+      - "Bethanechol للاحتباس؛ oxybutynin و mirabegron للـ urgency؛ tamsulosin للـ BPH."
+      - "Gq: HAVe 1 M&M. Gi: MAD 2s. الباقي Gs."
+      - "β1 ← renin. β2 ← K+ uptake و tocolysis. α2 ← ↓ sympathetic outflow."
+    practice: [pharm.L02.018, pharm.L02.019, pharm.L02.020, pharm.L02.021, pharm.L02.022, pharm.L02.023, pharm.L02.024, pharm.L02.025, pharm.L02.026, pharm.L02.027, pharm.L02.028, pharm.L02.029, pharm.L02.030, pharm.L02.031]
+  - id: pharm.L02.lesson3
+    title: "الـ cholinergic drugs والفلاح اللي اتسمم بالمبيد"
+    hook: "سؤال الـ organophosphate بيجي كل سنة تقريباً: atropine الأول، وبعدين pralidoxime ليه؟"
+    minutes: 9
+    pages: [238, 239]
+    topics: [autonomic-drugs, cholinomimetic-agents, anticholinesterase-poisoning]
+    goals:
+      - "تعرف الـ NE بيوقف نفسه إزاي، والـ amphetamine بيطلّعه إزاي"
+      - "تفرّق بين الـ direct والـ indirect cholinergic agonists ومين بيدخل المخ"
+      - "تعالج organophosphate poisoning وتعرف ليه"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ NE بيفرمل نفسه"
+        text: |-
+          الـ NE اللي بيخرج من الطرف العصبي بيرجع يقعد على ==α2-autoreceptors== على نفس الطرف ← negative feedback ← إفراز أقل.
+
+          والـ **amphetamine** بيدخل الطرف من الـ **NET**، وبعدين يدخل الـ vesicles من الـ **VMAT** ويطرد الـ NE منها. لما الـ NE جوه الطرف يكتر قوي، الـ NET ==بيشتغل بالعكس== ويطلّع الـ NE برّه.
+        page: 238
+        quote: "Amphetamines use the NE transporter (NET) to enter the presynaptic terminal, where they utilize the vesicular monoamine transporter (VMAT) to enter neurosecretory vesicles. This displaces NE from the vesicles."
+      - kind: order
+        prompt: "رتّب خطوات الـ amphetamine في الطرف العصبي"
+        steps:
+          - "Enters the terminal through NET"
+          - "Enters vesicles through VMAT"
+          - "Displaces NE from the vesicles"
+          - "NE in the terminal reaches a threshold"
+          - "NET reverses and expels NE into the cleft"
+        why: "الـ amphetamine بيستخدم نفس البوابات بتاعة الـ NE، بس في الآخر بيقلب الـ NET يشتغل للخارج."
+        page: 238
+        quote: "Once NE reaches a concentration threshold within the presynaptic terminal, the action of NET is reversed, and NE is expelled into the synaptic cleft"
+      - kind: aside
+        tone: tip
+        text: "من نفس الرسمة: **botulinum toxin** بيمنع خروج الـ ACh، و **tetrabenazine** بيقفل الـ VMAT (فالـ monoamines ما تدخلش الـ vesicles)، و **donepezil** AChE inhibitor."
+        page: 238
+        quote: "Cholinergic stimulant AChE inhibitors eg, Donepezil Cholinergic inhibitor Botulinum toxin Vesicular monoamine transporter (VMAT) inhibitor Tetrabenazine"
+      - kind: explain
+        title: "الـ direct agonists"
+        text: |-
+          - **Bethanechol**: muscarinic بس، مقاوم للـ AChE، بيشغّل المثانة ← urinary retention («Bethany, call me to activate your bladder»).
+          - **Carbachol**: carbon copy من الـ ACh ← miosis أثناء العمليات.
+          - **Methacholine**: بالاستنشاق ← ==challenge test للـ asthma==.
+          - **Pilocarpine**: بيقلّص الـ ciliary muscle والـ pupillary sphincter ← glaucoma (open و closed angle)، وبيزود العرق والدموع والريق ← xerostomia في **Sjögren**.
+
+          وخلي بالك: الـ cholinomimetics ممكن تزوّد الـ COPD والـ asthma والـ peptic ulcers.
+        page: 239
+        quote: "Methacholine Stimulates muscarinic receptors in airway when inhaled. Challenge test for diagnosis of asthma."
+      - kind: explain
+        title: "الـ indirect agonists: الشحنة بتحدد المخ"
+        text: |-
+          كلهم بيمنعوا الـ AChE فالـ ACh يزيد. الفرق المهم: ==مين بيعدّي الـ BBB==.
+
+          - **Neostigmine**: مشحون موجب ← ما بيدخلش المخ («Neo = no BBB») ← ileus واحتباس بعد العمليات، myasthenia، وعكس الـ NMJ blockade.
+          - **Pyridostigmine**: ما بيدخلش المخ، طويل المفعول ← myasthenia gravis («gets rid of myasthenia»).
+          - **Physostigmine**: مش مشحون ← بيدخل المخ («Phreely») ← ==antidote للـ anticholinergic toxicity==.
+          - **Donepezil و rivastigmine و galantamine**: 1st line للـ Alzheimer («Dona Riva forgot the gala»).
+        page: 239
+        quote: "Neo = no blood-brain barrier penetration due to positive charge."
+      - kind: check
+        question: "A delirious child with dilated pupils and hot dry skin after eating jimson weed needs an antidote that reaches the brain. Which one?"
+        options:
+          - "Physostigmine"
+          - "Neostigmine"
+          - "Pyridostigmine"
+          - "Bethanechol"
+        answer: 0
+        why:
+          - "صح: الـ physostigmine مش مشحون فبيدخل المخ ويعكس الـ delirium؛ بيـ phyxes الـ atropine overdose."
+          - "الـ neostigmine مشحون وما بيدخلش المخ."
+          - "الـ pyridostigmine ما بيدخلش الـ CNS."
+          - "الـ bethanechol muscarinic agonist للمثانة، مش antidote ومش بيدخل المخ."
+        page: 239
+        quote: "Physostigmine ↑ ACh. Phreely (freely) crosses blood-brain barrier as not charged → CNS. Antidote for anticholinergic toxicity"
+      - kind: explain
+        title: "الـ organophosphate poisoning"
+        text: |-
+          الـ **organophosphates** (parathion و malathion و fenthion) مبيدات حشرية ==بتقفل الـ AChE بشكل irreversible==، فالـ ACh بيغرق كل الـ receptors. المريض الكلاسيكي **فلاح**.
+
+          - **Muscarinic**: DUMBBELSS.
+          - **Nicotinic**: neuromuscular blockade (زي الـ succinylcholine): fasciculations وضعف.
+          - **CNS**: respiratory depression و lethargy و seizures و coma.
+        page: 239
+        quote: "Often due to organophosphates (eg, fenthion, parathion, malathion) that irreversibly inhibit AChE. Organophosphates commonly used as insecticides; poisoning usually seen in farmers."
+      - kind: mnemonic
+        word: "DUMBBELSS"
+        parts:
+          - { key: "D", text: "Diarrhea" }
+          - { key: "U", text: "Urination" }
+          - { key: "M", text: "Miosis" }
+          - { key: "B", text: "Bronchospasm" }
+          - { key: "B", text: "Bradycardia" }
+          - { key: "E", text: "Emesis" }
+          - { key: "L", text: "Lacrimation" }
+          - { key: "S", text: "Sweating" }
+          - { key: "S", text: "Salivation" }
+        hook: "المريض بيغرق من كل حتة، وعينه نقطة وقلبه بطيء"
+        page: 239
+        quote: "Diarrhea, Urination, Miosis, Bronchospasm, Bradycardia, Emesis, Lacrimation, Sweating, Salivation."
+      - kind: reveal
+        prompt: "ليه بنعطي atropine و pralidoxime مع بعض، مش واحد بس؟"
+        answer: "الـ **atropine** competitive inhibitor على الـ ==muscarinic== بس (وبيدخل المخ)، فبيوقف الـ DUMBBELSS بس مش بيصلّح ضعف العضلات. الـ **pralidoxime** بيرجّع الـ AChE يشتغل (dephosphorylation) لو اتدّى بدري، فبيصلّح الـ ==nicotinic== effects. ولازم يتدّى مع الـ atropine عشان يمنع إن الأعراض تزيد مؤقتاً، وهو ما بيعدّيش الـ BBB بسهولة."
+        page: 239
+        quote: "Reversed by pralidoxime, regenerates AChE via dephosphorylation if given early. Must be coadministered with atropine to prevent transient worsening of symptoms."
+      - kind: check
+        question: "After atropine, a farmer with organophosphate poisoning stops wheezing and drooling but still has fasciculations and weakness. What is missing?"
+        options:
+          - "Pralidoxime, to regenerate AChE"
+          - "More atropine, to block nicotinic receptors"
+          - "Physostigmine"
+          - "Neostigmine"
+        answer: 0
+        why:
+          - "صح: الضعف nicotinic، والـ pralidoxime هو اللي بيرجّع الـ AChE."
+          - "الـ atropine ما بيقفلش nicotinic receptors مهما زودته."
+          - "الـ physostigmine AChE inhibitor، هيزوّد التسمم."
+          - "الـ neostigmine برضه AChE inhibitor."
+        page: 239
+        quote: "Nicotinic effects Neuromuscular blockade (mechanism similar to succinylcholine). Reversed by pralidoxime"
+      - kind: try
+        items: [pharm.L02.036, pharm.L02.038, pharm.L02.042, pharm.L02.043, pharm.L02.044]
+    recap:
+      - "الـ NE بيفرمل نفسه بـ α2-autoreceptors. الـ amphetamine: NET ← VMAT ← يطرد NE ← NET يشتغل بالعكس."
+      - "Bethanechol للمثانة، methacholine للـ asthma test، pilocarpine للـ glaucoma و Sjögren."
+      - "Neostigmine و pyridostigmine مشحونين (برّه المخ). Physostigmine بيدخل المخ ← antidote."
+      - "Organophosphates: DUMBBELSS + ضعف. Atropine للـ muscarinic، pralidoxime للـ nicotinic، مع بعض."
+    practice: [pharm.L02.032, pharm.L02.033, pharm.L02.034, pharm.L02.035, pharm.L02.036, pharm.L02.037, pharm.L02.038, pharm.L02.039, pharm.L02.040, pharm.L02.041, pharm.L02.042, pharm.L02.043, pharm.L02.044, pharm.L02.045, pharm.L02.046]
+  - id: pharm.L02.lesson4
+    title: "الـ antimuscarinics والـ sympathomimetics: مين بيعلّي الضغط ومين بيوطيه"
+    hook: "Hot as a hare, dry as a bone، وليه الـ epinephrine بيقلب الضغط بعد الـ α-blocker"
+    minutes: 10
+    pages: [240, 242]
+    topics: [muscarinic-antagonists, sympathomimetics, physiologic-effects-sympathomimetics]
+    goals:
+      - "تعرف كل antimuscarinic بيتستخدم في إيه، وأعراض الـ atropine"
+      - "تعرف كل sympathomimetic على أنهي receptor ويتستخدم إمتى"
+      - "تفهم الـ reflex bradycardia والـ epinephrine reversal"
+    status: unverified
+    steps:
+      - kind: table
+        title: "الـ antimuscarinics واستخداماتهم"
+        columns: ["Drugs", "Use"]
+        rows:
+          - ["Atropine, homatropine, tropicamide", "Eye: mydriasis and cycloplegia"]
+          - ["Benztropine, trihexyphenidyl", "Parkinson disease (park my Benz), acute dystonia"]
+          - ["Glycopyrrolate", "Preoperative ↓ airway secretions; drooling, peptic ulcer"]
+          - ["Hyoscyamine, dicyclomine", "Irritable bowel syndrome (antispasmodic)"]
+          - ["Ipratropium, tiotropium", "COPD, asthma (tiotropium longer)"]
+          - ["Solifenacin, oxybutynin, flavoxate, tolterodine", "Overactive bladder (make bladder SOFT)"]
+          - ["Scopolamine", "Motion sickness"]
+        hide: [[1, 1], [4, 1], [5, 1], [6, 1]]
+        page: 240
+        quote: "Benztropine, trihexyphenidyl CNS Parkinson disease (“park my Benz”) Acute dystonia"
+      - kind: explain
+        title: "الـ atropine: عكس الـ DUMBBELSS"
+        text: |-
+          الـ **atropine** muscarinic antagonist: بيتستخدم في الـ ==bradycardia== وفي العين. بيوسّع الحدقة ويعمل cycloplegia، بيوسّع الشعب ويقلل الإفرازات، بيسرّع القلب، يقلل الحمض وحركة الأمعاء، ويقلل الـ urgency.
+
+          وزي ما قلنا: بيوقف الـ **muscarinic** effects بتاعة الـ anticholinesterases بس، ==مش الـ nicotinic==.
+        page: 240
+        quote: "Atropine Muscarinic antagonist. Used to treat bradycardia and for ophthalmic applications."
+      - kind: mnemonic
+        word: "HFDRBMF"
+        parts:
+          - { key: "H", text: "Hot as a hare: ↑ body temperature (↓ sweating)" }
+          - { key: "F", text: "Fast as a fiddle: ↑ HR" }
+          - { key: "D", text: "Dry as a bone: dry mouth and skin" }
+          - { key: "R", text: "Red as a beet: flushed skin" }
+          - { key: "B", text: "Blind as a bat: cycloplegia" }
+          - { key: "M", text: "Mad as a hatter: disorientation" }
+          - { key: "F", text: "Full as a flask: urinary retention" }
+        hook: "الـ mnemonic بتاعة الكتاب للـ anticholinergic toxicity"
+        page: 240
+        quote: "Hot as a hare Fast as a fiddle Dry as a bone Red as a beet Blind as a bat Mad as a hatter Full as a flask"
+      - kind: aside
+        tone: trap
+        text: "3 ناس الـ atropine خطر عليهم: ==الكبار== (mydriasis ← acute angle-closure glaucoma)، والرجالة اللي عندهم prostatic hyperplasia (urinary retention)، و==الأطفال الرضّع== (hyperthermia). والـ Jimson weed (Datura) بيعمل «gardener's pupil»."
+        page: 240
+        quote: "Can cause acute angle-closure glaucoma in older adults (due to mydriasis), urinary retention in men with prostatic hyperplasia, and hyperthermia in infants"
+      - kind: check
+        question: "A COPD patient needs a long-acting inhaled antimuscarinic. Which drug?"
+        options:
+          - "Tiotropium"
+          - "Scopolamine"
+          - "Benztropine"
+          - "Dicyclomine"
+        answer: 0
+        why:
+          - "صح: الـ ipratropium والـ tiotropium للـ COPD، والـ tiotropium أطول."
+          - "الـ scopolamine للـ motion sickness."
+          - "الـ benztropine للـ Parkinson والـ acute dystonia."
+          - "الـ dicyclomine antispasmodic للـ IBS."
+        page: 240
+        quote: "Ipratropium, tiotropium Respiratory COPD, asthma Duration: tiotropium > ipratropium"
+      - kind: match
+        prompt: "وصّل الـ sympathomimetic بالاستخدام"
+        pairs:
+          - ["Dobutamine (β1 > β2, α)", "Cardiac stress test, cardiogenic shock (inotrope)"]
+          - ["Norepinephrine (α1 > α2 > β1)", "Septic shock"]
+          - ["Epinephrine (β > α)", "Anaphylaxis"]
+          - ["Phenylephrine (α1 > α2)", "Decongestant, mydriasis, ischemic priapism"]
+          - ["Midodrine (α1)", "Postural hypotension, autonomic insufficiency"]
+          - ["Isoproterenol (β1 = β2)", "Electrophysiologic evaluation of tachyarrhythmias"]
+        why: "الـ α1 بيقبض الأوعية فبيعلّي الضغط (norepinephrine، phenylephrine، midodrine). الـ β1 بيقوّي القلب (dobutamine). الـ epinephrine بيجمع β2 (يفتح الشعب) و α (يرفع الضغط) فهو دوا الـ anaphylaxis."
+        page: 241
+        quote: "Dobutamine β1 > β2 , α –/↓ BP, ↑ HR, ↑ CO Cardiac stress testing, acute decompensated heart failure (HF) with cardiogenic shock (inotrope)."
+      - kind: explain
+        title: "الجرعة بتغيّر الـ receptor"
+        text: |-
+          - **Dopamine**: جرعة قليلة ← β (inotropic و chronotropic)؛ جرعة عالية ← ==α (vasoconstriction)==.
+          - **Epinephrine**: الـ α بتسيطر في الجرعات العالية، وأثره على الـ β2 أقوى من الـ norepinephrine.
+
+          والـ **indirect** agonists: الـ amphetamine (reuptake inhibitor + بيطلّع المخزون) ← narcolepsy و obesity و ADHD. الـ ephedrine بيطلّع المخزون ← decongestion. الـ **cocaine** reuptake inhibitor + local anesthetic، وبيوسّع الحدقة لو الـ sympathetic سليم ← بيأكد الـ ==Horner syndrome==.
+        page: 241
+        quote: "inotropic and chronotropic effects at lower doses via β effects; vasoconstriction at high doses via α effects."
+      - kind: aside
+        tone: exam
+        text: "مريض cocaine عنده chest pain وضغط عالي جداً؟ الكتاب بيقول خلي بالك من الـ β-blockers: الـ α1 هيفضل لوحده (unopposed) ← ضغط أعلى و coronary vasospasm."
+        page: 241
+        quote: "Caution when giving β-blockers if cocaine intoxication is suspected (unopposed α1 activation → ↑↑↑ BP, coronary vasospasm)."
+      - kind: figure
+        title: "الـ epinephrine reversal"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="10" y="10" width="165" height="150" rx="8"/>
+            <rect class="fg-box" x="185" y="10" width="165" height="150" rx="8"/>
+            <text x="22" y="30" class="t-sm t-b">Before α-blockade</text>
+            <text x="197" y="30" class="t-sm t-b">After α-blockade</text>
+            <line class="fg-thin" x1="20" y1="100" x2="165" y2="100"/>
+            <line class="fg-thin" x1="195" y1="100" x2="340" y2="100"/>
+            <path class="fg-arrow-acc" d="M20 100 L60 100 C 80 100, 85 50, 105 50 C 125 50, 130 100, 165 100" fill="none" stroke-width="3"/>
+            <text x="60" y="44" class="t-sm t-acc">MAP ↑ (α1)</text>
+            <path class="fg-arrow-bad" d="M195 100 L235 100 C 255 100, 260 140, 280 140 C 300 140, 305 100, 340 100" fill="none" stroke-width="3"/>
+            <text x="232" y="132" class="t-sm t-bad">MAP ↓</text>
+            <text x="200" y="65" class="t-sm">unopposed β2</text>
+            <text x="200" y="80" class="t-sm">vasodilation</text>
+          </svg>
+        caption: "الـ epinephrine بيعلّي الضغط لأن الـ α1 أقوى من الـ β2. لو قفلت الـ α بـ phentolamine مثلاً، يفضل الـ β2 لوحده فيوسّع الأوعية والضغط ينزل. الـ phenylephrine (α بس) أثره يختفي بس ما يتقلبش."
+        alt: "Two blood pressure tracings. Before alpha-blockade, epinephrine raises mean arterial pressure through alpha1. After alpha-blockade, the same dose lowers mean arterial pressure through unopposed beta2 vasodilation."
+        page: 242
+        quote: "Epinephrine response exhibits reversal of mean arterial pressure from a net increase (the α response) to a net decrease (the β2 response)."
+      - kind: reveal
+        prompt: "ليه الـ norepinephrine ممكن يبطّأ القلب مع إنه بيشغّل β1؟"
+        answer: "الـ α1 بيقبض الأوعية فالـ systolic والـ diastolic والـ ==MAP يعلوا== ← الـ baroreceptors تعمل **reflex bradycardia** أقوى من أثر الـ β1 المباشر. والـ isoproterenol عكسه: β2 بيوسّع الأوعية ← MAP ↓ ← القلب يسرّع (β1 + reflex)."
+        page: 242
+        quote: "NE ↑ systolic and diastolic pressures as a result of α1 -mediated vasoconstriction → ↑ mean arterial pressure → reflex bradycardia."
+      - kind: check
+        question: "A drug raises blood pressure. After an α-blocker, the same drug's pressor effect is suppressed but not reversed. Which drug?"
+        options:
+          - "Phenylephrine"
+          - "Epinephrine"
+          - "Isoproterenol"
+          - "Dobutamine"
+        answer: 0
+        why:
+          - "صح: الـ phenylephrine pure α-agonist، مفيش β2 يبان بعد الـ blockade."
+          - "الـ epinephrine أثره بيتقلب (reversal) عشان الـ β2."
+          - "الـ isoproterenol بيوطّي الضغط من الأول."
+          - "الـ dobutamine أثره على الضغط قليل أو بيوطيه (β1 > β2)."
+        page: 242
+        quote: "Phenylephrine response is suppressed but not reversed because it is a “pure” α-agonist (lacks β-agonist properties)."
+      - kind: try
+        items: [pharm.L02.047, pharm.L02.049, pharm.L02.050, pharm.L02.053, pharm.L02.062]
+    recap:
+      - "Antimuscarinics: benztropine للـ Parkinson، tiotropium للـ COPD، SOFT للمثانة، scopolamine للـ motion sickness."
+      - "Atropine: hot، fast، dry، red، blind، mad، full. خطر: glaucoma في الكبار، retention مع BPH، hyperthermia في الرضّع."
+      - "NE للـ septic shock، dobutamine للـ cardiogenic shock، epinephrine للـ anaphylaxis، phenylephrine decongestant."
+      - "NE ← reflex bradycardia. Epinephrine بعد α-blockade ← الضغط يتقلب. Phenylephrine يختفي بس."
+    practice: [pharm.L02.047, pharm.L02.048, pharm.L02.049, pharm.L02.050, pharm.L02.051, pharm.L02.052, pharm.L02.053, pharm.L02.054, pharm.L02.055, pharm.L02.056, pharm.L02.057, pharm.L02.058, pharm.L02.059, pharm.L02.060, pharm.L02.061, pharm.L02.062, pharm.L02.063]
+  - id: pharm.L02.lesson5
+    title: "الـ sympatholytics والـ β-blockers والـ PDE inhibitors"
+    hook: "من A لـ M selective ومن N لـ Z لأ: حروف الأبجدية هتحفظك الـ β-blockers"
+    minutes: 10
+    pages: [243, 245]
+    topics: [alpha2-agonists, alpha-blockers, beta-blockers, phosphodiesterase-inhibitors]
+    goals:
+      - "تعرف الـ α2-agonists والـ α-blockers واستخداماتهم وآثارهم"
+      - "تعرف استخدامات الـ β-blockers وآثارها الجانبية والـ selectivity"
+      - "تفرّق بين أنواع الـ PDE inhibitors"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ α2-agonists: بيقفلوا الـ sympathetic من المخ"
+        text: |-
+          الـ α2 بيقلل الـ sympathetic outflow، فالـ agonist بيوطّي الضغط والنبض.
+
+          - **Clonidine و guanfacine**: hypertensive urgency، ADHD، Tourette، و opioid withdrawal. آثارهم: CNS depression و bradycardia و miosis، و==rebound hypertension== لو اتوقفوا فجأة.
+          - **α-methyldopa**: الضغط في ==الحمل==. آثاره: Coombs ⊕ hemolysis و drug-induced lupus و hyperprolactinemia.
+          - **Tizanidine**: الـ spasticity.
+        page: 243
+        quote: "Clonidine, guanfacine Hypertensive urgency (limited situations), ADHD, Tourette syndrome, symptom control in opioid withdrawal"
+      - kind: explain
+        title: "الـ α-blockers"
+        text: |-
+          - **Phenoxybenzamine** (irreversible): قبل عملية الـ ==pheochromocytoma== عشان يمنع الـ hypertensive crisis. آثاره: orthostatic hypotension و reflex tachycardia.
+          - **Phentolamine** (reversible): مريض على ==MAO inhibitors== أكل tyramine، الـ cocaine hypertension الشديد (2nd line)، و NE extravasation.
+          - **α1-selective (-osin)**: prazosin و terazosin و doxazosin و tamsulosin ← BPH، والـ prazosin للـ PTSD، والضغط (ما عدا tamsulosin). أشهر عرض: ==1st-dose orthostatic hypotension==.
+          - **Mirtazapine** (α2 antagonist): depression، وبيعمل نوم وجوع و ↑ cholesterol.
+        page: 243
+        quote: "Phenoxybenzamine Irreversible. Pheochromocytoma (used preoperatively) to prevent catecholamine (hypertensive) crisis."
+      - kind: check
+        question: "A 70-year-old man faints after his first dose of a drug for benign prostatic hyperplasia. Which drug?"
+        options:
+          - "Terazosin"
+          - "Phenoxybenzamine"
+          - "Clonidine"
+          - "Mirtazapine"
+        answer: 0
+        why:
+          - "صح: الـ α1 blockers (-osin) بيعملوا 1st-dose orthostatic hypotension."
+          - "الـ phenoxybenzamine للـ pheochromocytoma."
+          - "الـ clonidine α2 agonist مش للـ BPH."
+          - "الـ mirtazapine للـ depression."
+        page: 243
+        quote: "Urinary symptoms of BPH; PTSD (prazosin); hypertension (except tamsulosin). 1st-dose orthostatic hypotension, dizziness, headache."
+      - kind: table
+        title: "الـ β-blockers بتتستخدم في إيه"
+        columns: ["Use", "Why", "Example"]
+        rows:
+          - ["Glaucoma", "↓ aqueous humor production", "Timolol"]
+          - ["Heart failure", "Prevents remodeling → ↓ mortality", "Bisoprolol, carvedilol, metoprolol"]
+          - ["Hypertension", "↓ CO, ↓ renin (β1 on JG cells)", "—"]
+          - ["Thyroid storm", "↓ HR, ↓ tremor", "Propranolol"]
+          - ["Hypertrophic cardiomyopathy", "↓ HR → ↑ filling time", "—"]
+          - ["SVT", "↓ AV conduction (class II)", "Metoprolol, esmolol"]
+          - ["Variceal bleeding", "↓ portal hypertension (prophylaxis)", "Nadolol, propranolol, carvedilol"]
+        hide: [[0, 2], [1, 2], [3, 2], [6, 2]]
+        page: 244
+        quote: "Heart failure Blockade of neurohormonal stress → prevention of deleterious cardiac remodeling → ↓ mortality Bisoprolol, carvedilol, metoprolol (β-blockers curb mortality)"
+      - kind: aside
+        tone: tip
+        text: "الـ mnemonic بتاعة الكتاب للـ selectivity: ==A لـ M = β1-selective== (atenolol، betaxolol، bisoprolol، esmolol، metoprolol). ==N لـ Z = nonselective== (nadolol، propranolol، timolol). والـ carvedilol والـ labetalol بيقفلوا α1 كمان، وآخرهم مش -olol. والـ **nebivolol** β1-selective وبيشغّل β3 ← NO ← ↓ SVR («NebivOlol increases NO»)."
+        page: 244
+        quote: "Selective antagonists mostly go from A to M (β1 with 1st half of alphabet)"
+      - kind: reveal
+        prompt: "مريض diabetic على propranolol، ليه السكر بيوقع من غير ما يحس؟"
+        answer: "الـ β-blockers بتعمل ==masked hypoglycemia==: الرعشة وسرعة القلب اللي بتنبهه بيتقفلوا. وباقي الآثار: erectile dysfunction، bradycardia و AV block و HF، seizures ومشاكل نوم، dyslipidemia (metoprolol)، و asthma/COPD exacerbation."
+        page: 244
+        quote: "Erectile dysfunction, cardiovascular (bradycardia, AV block, HF), CNS (seizures, sleep alterations), dyslipidemia (metoprolol), masked hypoglycemia, asthma/COPD exacerbations"
+      - kind: check
+        question: "Which β-blocker is β1-selective?"
+        options:
+          - "Metoprolol"
+          - "Propranolol"
+          - "Nadolol"
+          - "Labetalol"
+        answer: 0
+        why:
+          - "صح: M في النص الأول من الأبجدية ← β1-selective."
+          - "الـ propranolol P ← nonselective."
+          - "الـ nadolol N ← nonselective."
+          - "الـ labetalol nonselective β ومعاه α1 blockade."
+        page: 244
+        quote: "β1 -selective antagonists (β1 > β2 )—atenolol, betaxolol, bisoprolol, esmolol, metoprolol"
+      - kind: explain
+        title: "الـ PDE inhibitors"
+        text: |-
+          الـ PDE بيكسّر الـ cAMP والـ cGMP. لو قفلته، ==cAMP أو cGMP يعلوا==، وكل نوع PDE في نسيج مختلف.
+
+          - **Theophylline** (nonspecific): COPD/asthma نادراً. سمّيته في القلب (arrhythmia) والمخ (seizures).
+          - **PDE-5** (sildenafil و tadalafil...): ↑ cGMP ← ED و pulmonary hypertension (و BPH للـ tadalafil). ممنوع مع ==nitrates== (هبوط ضغط).
+          - **PDE-4** (roflumilast): severe COPD.
+          - **PDE-3** (milrinone): inotrope للـ cardiogenic shock.
+          - **Cilostazol و dipyridamole**: platelet inhibitors ← claudication و stroke/TIA prevention.
+        page: 245
+        quote: "Phosphodiesterase (PDE) inhibitors inhibit PDE, which catalyzes the hydrolysis of cAMP and/or cGMP, and thereby increase cAMP and/or cGMP."
+      - kind: figure
+        title: "milrinone: القلب أقوى والأوعية أوسع"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="ph2b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="130" y="55" width="100" height="40" rx="8"/>
+            <text x="148" y="80" class="t-sm t-b">PDE-3 ⊝ → ↑ cAMP</text>
+            <line class="fg-arrow-acc" x1="180" y1="55" x2="100" y2="25" marker-end="url(#ph2b)"/>
+            <line class="fg-arrow-acc" x1="180" y1="95" x2="100" y2="125" marker-end="url(#ph2b)"/>
+            <rect class="fg-good" x="5" y="5" width="95" height="40" rx="8"/>
+            <text x="12" y="22" class="t-sm">Heart: ↑ Ca2+</text>
+            <text x="12" y="38" class="t-sm">↑ inotropy</text>
+            <rect class="fg-good" x="5" y="105" width="95" height="40" rx="8"/>
+            <text x="12" y="122" class="t-sm">Vessels: MLCK ⊝</text>
+            <text x="12" y="138" class="t-sm">vasodilation</text>
+            <text x="240" y="40" class="t-sm t-mut">↓ preload</text>
+            <text x="240" y="120" class="t-sm t-mut">↓ afterload</text>
+          </svg>
+        caption: "نفس الـ cAMP بيعمل حاجتين عكس بعض في نسيجين: في القلب بيزوّد الـ Ca2+ فيقوّي الانقباض، وفي الأوعية بيقفل الـ MLCK فيرخّيها. فالـ milrinone بيقوّي القلب ويخفف الحمل عليه."
+        alt: "PDE-3 inhibition raises cAMP: in cardiomyocytes this increases calcium influx and inotropy; in vascular smooth muscle it inhibits MLCK, causing vasodilation and lower preload and afterload."
+        page: 245
+        quote: "In vascular smooth muscle: ↑ cAMP → MLCK inhibition → vasodilation → ↓ preload and afterload"
+      - kind: check
+        question: "A man taking sildenafil develops blue-tinted vision. Why?"
+        options:
+          - "Inhibition of PDE-6 in the retina"
+          - "Inhibition of PDE-3 in the retina"
+          - "Excess cAMP in the lens"
+          - "Interaction with nitrates"
+        answer: 0
+        why:
+          - "صح: الـ sildenafil بس بيعمل cyanopia عشان بيقفل PDE-6 (six) في الشبكية."
+          - "الـ PDE-3 بتاع الـ milrinone والـ cilostazol."
+          - "مش ده الـ mechanism اللي الكتاب بيقوله."
+          - "الـ nitrates بتعمل هبوط ضغط، مش رؤية زرقا."
+        page: 245
+        quote: "Sildenafil only: cyanopia (blue- tinted vision) via inhibition of PDE-6 (six) in retina"
+      - kind: try
+        items: [pharm.L02.064, pharm.L02.066, pharm.L02.069, pharm.L02.070, pharm.L02.074]
+    recap:
+      - "Clonidine: rebound hypertension. α-methyldopa: الحمل، Coombs ⊕. Tizanidine: spasticity."
+      - "Phenoxybenzamine للـ pheo، phentolamine للـ MAOI + tyramine، -osin للـ BPH (1st-dose hypotension)."
+      - "β-blockers: A–M selective، N–Z لأ. Masked hypoglycemia. HF: bisoprolol و carvedilol و metoprolol."
+      - "PDE-5 + nitrates = هبوط ضغط، sildenafil ← PDE-6 ← cyanopia. Milrinone PDE-3 inotrope. Roflumilast PDE-4 COPD."
+    practice: [pharm.L02.064, pharm.L02.065, pharm.L02.066, pharm.L02.067, pharm.L02.068, pharm.L02.069, pharm.L02.070, pharm.L02.071, pharm.L02.072, pharm.L02.073, pharm.L02.074, pharm.L02.075, pharm.L02.076, pharm.L02.077, pharm.L02.078]

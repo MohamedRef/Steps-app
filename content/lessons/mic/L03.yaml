@@ -1,0 +1,411 @@
+schema: steps.lesson/v1
+lecture: mic.L03
+lessons:
+  - id: mic.L03.lesson1
+    title: "الـ systemic mycoses: فطريات ليها خريطة"
+    hook: "المكان اللي المريض عاش فيه أو زاره بيقولك الفطر قبل الميكروسكوب"
+    minutes: 8
+    pages: [149, 149]
+    topics: [systemic-mycoses]
+    goals:
+      - "تفهم الـ dimorphism وليه الـ Coccidioides استثناء"
+      - "تربط كل فطر بمكانه وشكله في الأنسجة وعلامته المميزة"
+      - "تعرف العلاج: azoles للموضعي و amphotericin B للمنتشر"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "فطر بوشّين"
+        text: |-
+          الأربعة دول (Histoplasma، Blastomyces، Coccidioides، Paracoccidioides) كلهم **dimorphic**:
+
+          - في البرد (20°C، في التربة) ← ==mold==، وده اللي بنتنفّسه.
+          - في الحرارة (37°C، جوه الجسم) ← ==yeast==.
+
+          الاستثناء: الـ Coccidioides في الأنسجة بيبقى ==spherule== مليانة endospores مش yeast.
+        page: 149
+        quote: "All are caused by dimorphic fungi: cold (20°C) = mold; heat (37°C) = yeast."
+      - kind: explain
+        title: "شبه الـ TB بس مش بيتعدي"
+        text: |-
+          كلهم ممكن يعملوا **pneumonia** وينتشروا. وبيعملوا ==granulomas== زي الـ TB بالظبط، فممكن يتلخبطوا معاه في الأشعة.
+
+          الفرق المهم: ==مش بيتنقلوا من شخص لشخص==. العدوى من استنشاق الـ spores من البيئة.
+        page: 149
+        quote: "Systemic mycoses can form granulomas (like TB); cannot be transmitted person-to-person (unlike TB)."
+      - kind: figure
+        title: "الحجم قصاد كرة الدم الحمرا"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <circle class="fg-ink" cx="35" cy="70" r="14" fill="none"/>
+            <text x="18" y="110" class="t-sm t-mut">RBC</text>
+            <circle class="fg-acc" cx="85" cy="66" r="5"/>
+            <circle class="fg-acc" cx="97" cy="74" r="5"/>
+            <circle class="fg-acc" cx="88" cy="80" r="5"/>
+            <text x="68" y="110" class="t-sm">Histo</text>
+            <text x="64" y="126" class="t-sm t-mut">&lt; RBC</text>
+            <circle class="fg-good" cx="148" cy="70" r="14"/>
+            <circle class="fg-good" cx="168" cy="70" r="12"/>
+            <text x="138" y="110" class="t-sm">Blasto</text>
+            <text x="134" y="126" class="t-sm t-mut">= RBC</text>
+            <circle class="fg-ink" cx="235" cy="66" r="32" fill="none"/>
+            <circle class="fg-acc" cx="225" cy="58" r="4"/>
+            <circle class="fg-acc" cx="242" cy="56" r="4"/>
+            <circle class="fg-acc" cx="232" cy="74" r="4"/>
+            <circle class="fg-acc" cx="248" cy="72" r="4"/>
+            <text x="215" y="118" class="t-sm">Cocci</text>
+            <text x="200" y="134" class="t-sm t-mut">spherule ≫ RBC</text>
+            <circle class="fg-good" cx="318" cy="66" r="18"/>
+            <circle class="fg-good" cx="318" cy="40" r="6"/>
+            <circle class="fg-good" cx="344" cy="66" r="6"/>
+            <circle class="fg-good" cx="318" cy="92" r="6"/>
+            <circle class="fg-good" cx="292" cy="66" r="6"/>
+            <text x="296" y="118" class="t-sm">Para</text>
+            <text x="268" y="134" class="t-sm t-mut">captain's wheel</text>
+          </svg>
+        caption: "الـ Histo أصغر من الـ RBC وجوه الـ macrophage، الـ Blasto قدها وبيتبرعم بقاعدة عريضة، والـ Cocci spherule كبيرة مليانة endospores، والـ Para زي دركسيون المركب."
+        alt: "Size comparison with a red blood cell. Histoplasma yeasts are smaller than the RBC. Blastomyces is the same size with a broad-based bud. Coccidioides is a much larger spherule filled with endospores. Paracoccidioides is a large yeast with buds around it like a captain's wheel."
+        page: 149
+        quote: "Spherule filled with endospores of Coccidioides (much larger than RBC)"
+      - kind: table
+        title: "الأربعة في جدول واحد"
+        columns: ["", "Where", "In tissue", "Clue"]
+        rows:
+          - ["Histoplasmosis", "Mississippi and Ohio River Valleys", "Inside macrophages, smaller than RBC", "Bird or bat droppings (caves)"]
+          - ["Blastomycosis", "Eastern and Central US, Great Lakes", "Broad-based budding, same size as RBC", "Verrucous skin lesions, bone"]
+          - ["Coccidioidomycosis", "Southwestern US, California", "Spherule with endospores", "Dust exposure (excavations, earthquakes)"]
+          - ["Paracoccidioidomycosis", "Latin America", "Captain's wheel budding yeast", "Males > females"]
+        hide: [[0, 1], [1, 2], [2, 1], [3, 2]]
+        page: 149
+        quote: "Eastern and Central US, Great Lakes Broad-based budding of Blastomyces (same size as RBC)"
+      - kind: check
+        question: "A man who explored caves in Kentucky has pneumonia, oral ulcers and splenomegaly. Biopsy shows small yeasts inside macrophages. Which organism?"
+        options:
+          - "Histoplasma capsulatum"
+          - "Blastomyces dermatitidis"
+          - "Coccidioides immitis"
+          - "Paracoccidioides brasiliensis"
+          - "Cryptococcus neoformans"
+        answer: 0
+        why:
+          - "صح: Ohio River Valley، bat droppings في الكهوف، و ==Histo hides== جوه الـ macrophages."
+          - "الـ Blasto قد الـ RBC وبرّه الخلايا، وبيروح للجلد والعضم."
+          - "الـ Cocci في الـ Southwest وشكله spherule كبيرة."
+          - "الـ Para في Latin America."
+          - "الـ Crypto مش dimorphic ومكانه الـ meninges، وبيجي من زرق الحمام."
+        page: 149
+        quote: "Histo hides (within macrophages)"
+      - kind: explain
+        title: "Histo: العلامات"
+        text: |-
+          غير الـ pneumonia، الـ Histo المنتشر بيدّي:
+
+          - ==palatal/tongue ulcers==
+          - splenomegaly و pancytopenia
+          - erythema nodosum
+
+          والتشخيص بالـ **urine/serum antigen**. وفي الـ culture بيبان tuberculate macroconidia.
+        page: 149
+        quote: "Palatal/tongue ulcers, splenomegaly, pancytopenia, erythema nodosum"
+      - kind: explain
+        title: "Blasto و Cocci: الجلد والعضم"
+        text: |-
+          - **Blasto**: lung disease التهابي، وينتشر للعضم والجلد بـ ==verrucous lesions== ممكن تتلخبط مع الـ SCC. "Blasto buds broadly".
+          - **Cocci**: ينتشر للعضم والجلد، يعمل erythema nodosum (==desert bumps==) أو multiforme، و arthralgias (desert rheumatism)، و ممكن meningitis.
+        page: 149
+        quote: "Disseminates to bone/ skin (verrucous lesions C , may mimic SCC)."
+      - kind: reveal
+        prompt: "عامل في حفريات أثرية في California، أو حد عاش زلزال هناك، جاله pneumonia وألم مفاصل وحبوب حمرا في رجله. إيه الفطر وليه الحفر بالذات؟"
+        answer: "==Coccidioides==. الـ spores عايشة في تراب الصحرا (==dust==)، وأي حاجة بتطيّر التراب (archeological excavations، earthquakes) بتخلّي الناس تتنفّسها. والنتيجة desert bumps (erythema nodosum) و desert rheumatism."
+        page: 149
+        quote: "Associated with dust exposure in endemic areas (eg, archeological excavations, earthquakes)"
+      - kind: aside
+        tone: tip
+        text: "تحشيشة الـ Para: ==Paracoccidio parasails with the captain's wheel all the way to Latin America==. يعني Latin America، وشكل دركسيون المركب، وصورته شبه الـ Blasto، وأكتر في الرجالة."
+        page: 149
+        quote: "Paracoccidio parasails with the captain’s wheel all the way to Latin America"
+      - kind: explain
+        title: "العلاج"
+        text: |-
+          - عدوى موضعية ← ==fluconazole أو itraconazole==.
+          - عدوى منتشرة (systemic) ← ==amphotericin B==.
+        page: 149
+        quote: "Treatment: fluconazole or itraconazole for local infection; amphotericin B for systemic infection."
+      - kind: check
+        question: "A patient with disseminated blastomycosis involving bone is very ill. Which drug is the best initial treatment?"
+        options:
+          - "Amphotericin B"
+          - "Fluconazole"
+          - "Nystatin"
+          - "Griseofulvin"
+          - "Caspofungin"
+        answer: 0
+        why:
+          - "صح: العدوى المنتشرة علاجها amphotericin B."
+          - "الـ fluconazole أو itraconazole للعدوى الموضعية بس."
+          - "الـ nystatin موضعي للـ thrush."
+          - "الـ griseofulvin للـ dermatophytes."
+          - "الـ echinocandins مش علاج الـ systemic mycoses في الكتاب."
+        page: 149
+        quote: "amphotericin B for systemic infection"
+      - kind: try
+        items: [mic.L03.001, mic.L03.004, mic.L03.006, mic.L03.007, mic.L03.008]
+    recap:
+      - "Dimorphic: mold في البرد، yeast في الحرارة. الـ Cocci spherule في الأنسجة."
+      - "Granulomas زي الـ TB، بس مش بيتعدي من شخص لشخص."
+      - "Histo: Ohio/Mississippi، جوه الـ macrophage، طيور وخفافيش. Blasto: Great Lakes، broad-based، جلد وعضم."
+      - "Cocci: Southwest، تراب وزلازل، desert bumps. Para: Latin America، captain's wheel."
+      - "Local: fluconazole/itraconazole. Systemic: amphotericin B."
+    practice: [mic.L03.001, mic.L03.002, mic.L03.003, mic.L03.004, mic.L03.005, mic.L03.006, mic.L03.007, mic.L03.008]
+  - id: mic.L03.lesson2
+    title: "Candida و Aspergillus: الفطريات الانتهازية"
+    hook: "مناعة مين اللي وقعت؟ ده اللي بيحدد مين الفطر اللي هيستغل الفرصة"
+    minutes: 7
+    pages: [150, 150]
+    topics: [candida-albicans, aspergillus-fumigatus]
+    goals:
+      - "تعرف أشكال الـ Candida وأمراضها وعلاجها حسب المكان"
+      - "تفرّق invasive aspergillosis من aspergilloma من ABPA"
+      - "تفهم ليه الـ CGD بيقع قدام الـ Aspergillus"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Candida albicans: الأبيض"
+        text: |-
+          alba = white. وهو **dimorphic** برضه:
+
+          - في 20°C ← ==pseudohyphae و budding yeasts==.
+          - في 37°C ← ==germ tubes==.
+
+          ممكن يعمل عدوى سطحية أو systemic.
+        page: 150
+        quote: "Dimorphic; forms pseudohyphae and budding yeasts at 20°C A , germ tubes at 37°C B ."
+      - kind: explain
+        title: "مين بيجيله إيه"
+        text: |-
+          - **Oral و esophageal thrush** ← immunocompromised: neonates، steroids، diabetes، AIDS.
+          - **Vulvovaginitis** ← diabetes أو بعد antibiotics.
+          - **Diaper rash**.
+          - **Infective endocarditis** ← ==people who inject drugs==.
+          - **Disseminated candidiasis** ← خصوصاً ==neutropenia==، لأن الدفاع ضده على الـ phagocytes.
+          - **Chronic mucocutaneous candidiasis**.
+        page: 150
+        quote: "disseminated candidiasis (especially in neutropenic patients as host defense relies on phagocytes)"
+      - kind: table
+        title: "علاج الـ Candida حسب المكان"
+        columns: ["", "Treatment"]
+        rows:
+          - ["Vaginal", "Oral fluconazole or topical azoles"]
+          - ["Oral", "Nystatin, azoles, or rarely echinocandins"]
+          - ["Esophageal or systemic", "Fluconazole, echinocandins, or amphotericin B"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+        page: 150
+        quote: "Treatment: oral fluconazole/topical azoles for vaginal; nystatin, azoles, or, rarely, echinocandins for oral; fluconazole, echinocandins, or amphotericin B for esophageal or systemic disease."
+      - kind: check
+        question: "A patient with acute leukemia and an absolute neutrophil count near zero develops fungemia with Candida. Why is this patient at particular risk?"
+        options:
+          - "Host defense against disseminated Candida relies on phagocytes"
+          - "Neutropenia lowers IgA on mucosal surfaces"
+          - "Candida needs low CD4+ counts to invade the blood"
+          - "Chemotherapy induces germ tube formation"
+        answer: 0
+        why:
+          - "صح: الكتاب بيقول disseminated candidiasis خصوصاً في الـ neutropenia لأن الدفاع على الـ phagocytes."
+          - "الـ IgA مش هو السبب في الكتاب."
+          - "الـ low CD4 مرتبط أكتر بالـ thrush، مش ده سبب الـ fungemia هنا."
+          - "الـ germ tubes بتتكوّن في 37°C عادي، مش بسبب الكيماوي."
+        page: 150
+        quote: "especially in neutropenic patients as host defense relies on phagocytes"
+      - kind: figure
+        title: "Hyphae: زاوية حادة ولا عريضة؟"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="30" y1="130" x2="110" y2="50" stroke-width="6"/>
+            <line class="fg-ink" x1="70" y1="90" x2="150" y2="70" stroke-width="6"/>
+            <line class="fg-mut" x1="50" y1="104" x2="58" y2="112"/>
+            <line class="fg-mut" x1="80" y1="74" x2="88" y2="82"/>
+            <line class="fg-mut" x1="105" y1="76" x2="108" y2="86"/>
+            <text x="40" y="150" class="t-sm t-b">Aspergillus</text>
+            <text x="120" y="45" class="t-sm t-mut">45°, septate</text>
+            <path class="fg-acc" d="M200,130 L250,70 L340,70" fill="none" stroke-width="14" stroke-linecap="round"/>
+            <path class="fg-acc" d="M250,70 L255,25" fill="none" stroke-width="12" stroke-linecap="round"/>
+            <text x="210" y="150" class="t-sm t-b">Mucor / Rhizopus</text>
+            <text x="268" y="45" class="t-sm t-mut">~90°, no septa</text>
+          </svg>
+        caption: "الـ Aspergillus hyphae رفيعة وفيها septa وبتتفرّع بزاوية حادة 45°. الـ Mucor عريضة ومن غير septa وبتتفرّع بزاوية واسعة."
+        alt: "Two hyphae drawings. Left, Aspergillus: thin septate hyphae branching at an acute 45 degree angle. Right, Mucor and Rhizopus: broad, irregular, nonseptate hyphae branching at wide angles."
+        page: 150
+        quote: "Acute angle (45°) D branching of septate hyphae."
+      - kind: explain
+        title: "Aspergillus fumigatus: 3 صور"
+        text: |-
+          1. **Invasive aspergillosis** ← immunocompromised، خصوصاً مشاكل الـ neutrophils زي ==CGD==، لأن الـ Aspergillus ==catalase ⊕==.
+          2. **Aspergilloma** (fungus ball) ← في cavity قديمة في الرئة، خصوصاً بعد الـ TB.
+          3. **ABPA** ← hypersensitivity للفطر اللي بيعيش في الـ mucus.
+        page: 150
+        quote: "Causes invasive aspergillosis in immunocompromised patients, especially those with neutrophil dysfunction (eg, chronic granulomatous disease) because Aspergillus is catalase ⊕."
+      - kind: reveal
+        prompt: "ليه الـ catalase بالذات بيخلّي الـ CGD خطر مع الـ Aspergillus؟"
+        answer: "في الـ CGD الـ NADPH oxidase بايظ، فالـ neutrophil مش بيعمل H2O2 بنفسه. الميكروب الـ catalase ⊝ بيطلّع H2O2 تقدر الخلية تستخدمه، لكن الـ ==catalase ⊕== بيكسّر الـ H2O2 بتاعه، فالـ neutrophil يفضل من غير سلاح."
+        page: 150
+        quote: "because Aspergillus is catalase ⊕"
+      - kind: explain
+        title: "ABPA والـ aflatoxin"
+        text: |-
+          **ABPA**: مرتبط بالـ ==asthma و cystic fibrosis==، وممكن يعمل bronchiectasis و eosinophilia.
+
+          **Aflatoxins**: بعض أنواع الـ Aspergillus بتطلّعها، وبتعمل mutations في ==TP53== ← hepatocellular carcinoma.
+
+          العلاج: **voriconazole**، والـ echinocandins خط تاني.
+        page: 150
+        quote: "Some species of Aspergillus produce aflatoxins (induce TP53 mutations leading to hepatocellular carcinoma)."
+      - kind: check
+        question: "A teenager with cystic fibrosis has worsening wheeze, eosinophilia and new bronchiectasis. What is the most likely cause?"
+        options:
+          - "A hypersensitivity response to Aspergillus growing in lung mucus"
+          - "An aspergilloma in an old cavity"
+          - "Invasive aspergillosis from neutrophil dysfunction"
+          - "Disseminated candidiasis"
+        answer: 0
+        why:
+          - "صح: ده ABPA، hypersensitivity مع asthma أو CF، بيعمل bronchiectasis و eosinophilia."
+          - "الـ aspergilloma كرة في cavity قديمة (بعد TB)، من غير eosinophilia."
+          - "الـ invasive في الـ immunocompromised، زي الـ CGD."
+          - "الـ Candida مش بتعمل الصورة دي."
+        page: 150
+        quote: "Associated with asthma and cystic fibrosis; may cause bronchiectasis and eosinophilia."
+      - kind: try
+        items: [mic.L03.009, mic.L03.011, mic.L03.013, mic.L03.014, mic.L03.018]
+    recap:
+      - "Candida: pseudohyphae و yeast في 20°C، germ tubes في 37°C."
+      - "Thrush في الـ immunocompromised، endocarditis في الـ PWID، disseminated في الـ neutropenia."
+      - "Aspergillus: septate، 45°، catalase ⊕ ← CGD. Aspergilloma بعد الـ TB. ABPA مع asthma و CF."
+      - "Aflatoxin ← TP53 ← HCC. العلاج voriconazole."
+    practice: [mic.L03.009, mic.L03.010, mic.L03.011, mic.L03.012, mic.L03.013, mic.L03.014, mic.L03.015, mic.L03.016, mic.L03.017, mic.L03.018]
+  - id: mic.L03.lesson3
+    title: "Crypto و Mucor و PCP و Sporothrix"
+    hook: "حمام، سكّر عالي، CD4 واطي، ووردة بشوك: أربع قصص بأربع فطريات"
+    minutes: 9
+    pages: [150, 151]
+    topics: [cryptococcus-neoformans, mucor-rhizopus, pneumocystis-jirovecii, sporothrix-schenckii]
+    goals:
+      - "تعرف الـ Cryptococcus من الـ capsule وطريقة تشخيصه وعلاج الـ meningitis"
+      - "تشخّص الـ mucormycosis في مريض DKA وتعرف علاجه"
+      - "تعرف صورة الـ PCP وإمتى نبدأ الـ prophylaxis"
+      - "تعرف الـ rose gardener's disease"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Cryptococcus: الـ capsule هو كل حاجة"
+        text: |-
+          yeast ==heavily encapsulated==، 5-10 μm، بيتبرعم بـ narrow budding. **مش dimorphic**. و ⊕ PAS.
+
+          بيعيش في التربة و ==pigeon droppings==. بيتنفّس، وبعدين بالدم يوصل للـ ==meninges==.
+        page: 150
+        quote: "Found in soil, pigeon droppings. Acquired through inhalation with hematogenous dissemination to meninges."
+      - kind: explain
+        title: "التشخيص والمرض"
+        text: |-
+          - **India ink** ← هالة شفافة حوالين الـ yeast.
+          - **Mucicarmine** ← الـ capsule من جوه أحمر.
+          - **Latex agglutination** للـ capsular antigen ← ==أكتر sensitive و specific==.
+
+          المرض: meningitis و pneumonia و encephalitis، وفي المخ ==soap bubble== lesions، غالباً في الـ immunocompromised.
+        page: 150
+        quote: "Latex agglutination test detects polysaccharide capsular antigen and is more sensitive and specific."
+      - kind: check
+        question: "A man with advanced HIV has headache and fever. CSF India ink shows yeasts with a clear halo. Which regimen is best?"
+        options:
+          - "Amphotericin B + flucytosine, then fluconazole"
+          - "Fluconazole alone"
+          - "Voriconazole"
+          - "TMP-SMX"
+          - "Nystatin"
+        answer: 0
+        why:
+          - "صح: علاج الـ cryptococcal meningitis في الكتاب amphotericin B + flucytosine وبعدين fluconazole."
+          - "الـ fluconazole بييجي بعد الـ induction، مش لوحده."
+          - "الـ voriconazole للـ Aspergillus."
+          - "الـ TMP-SMX للـ PCP."
+          - "الـ nystatin موضعي للـ thrush."
+        page: 150
+        quote: "Treatment: amphotericin B + flucytosine followed by fluconazole for cryptococcal meningitis."
+      - kind: explain
+        title: "Mucor و Rhizopus: سكّر عالي وأنف سودا"
+        text: |-
+          hyphae عريضة، irregular، ==nonseptate==، بتتفرّع بزوايا واسعة.
+
+          المرضى: ==DKA== و/أو neutropenia (زي الـ leukemia).
+
+          الـ spores تتنفّس ← الفطر يكبر في جدار الأوعية الدموية ← يخترق الـ cribriform plate ← يدخل المخ.
+        page: 150
+        quote: "Inhalation of spores →  fungi proliferate in blood vessel walls, penetrate cribriform plate, and enter brain."
+      - kind: reveal
+        prompt: "مريض DKA عنده صداع وألم في الوش، وفيه حتة سودا ميتة على الأنف أو الـ palate. إيه اللي بيحصل وإيه العلاج؟"
+        answer: "==Rhinocerebral mucormycosis==: frontal lobe abscess، وممكن cavernous sinus thrombosis و cranial nerve involvement. والـ black necrotic eschar من الأوعية اللي الفطر قفلها. العلاج: ==surgical debridement== مع amphotericin B أو isavuconazole."
+        page: 150
+        quote: "Rhinocerebral, frontal lobe abscess; cavernous sinus thrombosis. Headache, facial pain, black necrotic eschar on face I ; may have cranial nerve involvement."
+      - kind: match
+        prompt: "وصّل الفطر بالحاجة اللي بتشاور عليه"
+        pairs:
+          - ["Cryptococcus", "Pigeon droppings and India ink halo"]
+          - ["Mucor", "DKA with black necrotic eschar"]
+          - ["Aspergillus", "Fungus ball in an old TB cavity"]
+          - ["Candida", "Endocarditis in people who inject drugs"]
+        why: "الحمام و الـ capsule للـ Crypto، الـ DKA والـ eschar للـ Mucor، الـ cavity القديمة للـ Aspergillus، والـ IVDU للـ Candida."
+        page: 150
+        quote: "Causes mucormycosis, mostly in patients with DKA and/or neutropenia (eg, leukemia)."
+      - kind: explain
+        title: "Pneumocystis jirovecii: PCP"
+        text: |-
+          فطر شبه الـ yeast بيعمل ==diffuse interstitial pneumonia==. أغلب العدوى من غير أعراض، والمرض بيطلع مع الـ immunosuppression (زي الـ AIDS).
+
+          - الأشعة: ==bilateral ground-glass opacities== مع pneumatoceles.
+          - التشخيص: BAL أو lung biopsy، و disc-shaped yeast على الـ **methenamine silver stain** أو fluorescent antibody.
+        page: 151
+        quote: "Diffuse, bilateral ground-glass opacities on chest imaging, with pneumatoceles B ."
+      - kind: explain
+        title: "العلاج والـ prophylaxis"
+        text: |-
+          - **TMP-SMX** (الأساس)، pentamidine، dapsone، atovaquone.
+          - الـ dapsone لوحده prophylaxis، ومع TMP علاج.
+          - ابدأ الـ prophylaxis لما الـ ==CD4+ تنزل تحت 200 cells/mm3== في الـ HIV.
+        page: 151
+        quote: "Start prophylaxis when CD4+ cell count drops to <200 cells/mm3"
+      - kind: check
+        question: "A woman with HIV has a CD4+ count of 150 cells/mm3 and no lung symptoms. Which step prevents the most likely opportunistic pneumonia?"
+        options:
+          - "Start TMP-SMX prophylaxis"
+          - "Start fluconazole prophylaxis"
+          - "Start voriconazole prophylaxis"
+          - "No prophylaxis until CD4+ is below 50"
+          - "Start amphotericin B"
+        answer: 0
+        why:
+          - "صح: الـ PCP prophylaxis بيبدأ تحت 200، والـ TMP-SMX أول اختيار."
+          - "الـ fluconazole مش prophylaxis الـ PCP."
+          - "الـ voriconazole للـ Aspergillus."
+          - "الحد بتاع الـ PCP في الكتاب 200 مش 50."
+          - "الـ amphotericin B علاج للعدوى المنتشرة، مش وقاية."
+        page: 151
+        quote: "Treatment/prophylaxis: TMP-SMX, pentamidine, dapsone (prophylaxis as single agent, or treatment in combination with TMP), atovaquone."
+      - kind: explain
+        title: "Sporothrix: rose gardener's disease"
+        text: |-
+          **Dimorphic**: في الجسم (37°C) ==cigar-shaped yeast==، وفي التربة hyphae مع spores. بيعيش على النباتات.
+
+          الشوكة بتدخّل الـ spores الجلد ← pustule أو ulcer، وبعدين nodules على طول الـ lymphatics (==ascending lymphangitis==). وممكن ينتشر في الـ immunocompromised.
+        page: 151
+        quote: "When spores are traumatically introduced into the skin, typically by a thorn (“rose gardener’s disease”), causes local pustule or ulcer with nodules along draining lymphatics (ascending lymphangitis A )."
+      - kind: aside
+        tone: tip
+        text: "تحشيشة الكتاب: ==Think of a rose gardener who smokes a cigar and pot==. الـ cigar = شكل الـ yeast، والـ pot = potassium iodide. والعلاج itraconazole أو potassium iodide (للجلد والـ lymphocutaneous بس)."
+        page: 151
+        quote: "Treatment: itraconazole or potassium iodide (only for cutaneous/lymphocutaneous). Think of a rose gardener who smokes a cigar and pot."
+      - kind: try
+        items: [mic.L03.019, mic.L03.022, mic.L03.025, mic.L03.029, mic.L03.032]
+    recap:
+      - "Crypto: capsule، حمام، meninges. India ink و mucicarmine، والـ latex agglutination أحسن. Ampho B + flucytosine ثم fluconazole."
+      - "Mucor: nonseptate، DKA، يخترق الـ cribriform plate، eschar أسود. Debridement + ampho B أو isavuconazole."
+      - "PCP: ground glass، methenamine silver. TMP-SMX، والـ prophylaxis تحت CD4+ 200."
+      - "Sporothrix: شوكة وردة، cigar yeast، ascending lymphangitis. Itraconazole أو KI."
+    practice: [mic.L03.019, mic.L03.020, mic.L03.021, mic.L03.022, mic.L03.023, mic.L03.024, mic.L03.025, mic.L03.026, mic.L03.027, mic.L03.028, mic.L03.029, mic.L03.030, mic.L03.031, mic.L03.032]

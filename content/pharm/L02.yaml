@@ -1,0 +1,1017 @@
+schema: steps.content/v1
+lecture: pharm.L02
+title: Autonomic drugs
+book: { chapter: 5, pages: [234, 245] }
+topics:
+  - { id: drug-effect-modifications, title: Drug effect modifications }
+  - { id: autonomic-receptors, title: Autonomic receptors }
+  - { id: acetylcholine-receptors, title: Acetylcholine receptors }
+  - { id: pain-transmission, title: Pain transmission }
+  - { id: micturition-control, title: Micturition control }
+  - { id: adrenergic-receptor-distribution, title: Tissue distribution of adrenergic receptors }
+  - { id: g-protein-second-messengers, title: G-protein–linked second messengers }
+  - { id: autonomic-drugs, title: Autonomic drugs }
+  - { id: cholinomimetic-agents, title: Cholinomimetic agents }
+  - { id: anticholinesterase-poisoning, title: Anticholinesterase poisoning }
+  - { id: muscarinic-antagonists, title: Muscarinic antagonists }
+  - { id: sympathomimetics, title: Sympathomimetics }
+  - { id: physiologic-effects-sympathomimetics, title: Physiologic effects of sympathomimetics }
+  - { id: alpha2-agonists, title: Sympatholytics (α2-agonists) }
+  - { id: alpha-blockers, title: α-blockers }
+  - { id: beta-blockers, title: β-blockers }
+  - { id: phosphodiesterase-inhibitors, title: Phosphodiesterase inhibitors }
+items:
+  # ---------- p234: drug effect modifications ----------
+  - id: pharm.L02.001
+    kind: table
+    topic: drug-effect-modifications
+    title: Drug effect modifications
+    columns: [Term, Definition, Example]
+    rows:
+      - [Additive, "A + B = sum of individual effects (2 + 2 = 4)", Aspirin and acetaminophen]
+      - [Permissive, "A is required for the full effects of B", Cortisol on catecholamine responsiveness]
+      - [Synergistic, "A + B > sum of individual effects (2 + 2 > 4)", Clopidogrel with aspirin]
+      - [Potentiation, "Drug B (no action alone) enhances drug A (2 + 0 > 2)", Carbidopa blocking peripheral conversion of levodopa]
+      - [Antagonistic, "A + B < sum of individual effects (2 + 2 < 4)", Morphine with naloxone]
+      - [Tachyphylactic, "Acute ↓ response after initial/repeated administration", "Repeated intranasal oxymetazoline → ↓ response, rebound congestion"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2], [5, 2], [3, 1], [1, 1]]
+    src: { page: 234, quote: "Synergistic Effect of substances A and B together is greater than the sum of their individual effects Clopidogrel with aspirin" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.002
+    kind: card
+    topic: drug-effect-modifications
+    front: How does potentiation differ from synergism? Give the book's example.
+    back: In potentiation drug B has no therapeutic action alone but enhances drug A ("2 + 0 > 2"), eg, carbidopa only blocks the enzyme that converts levodopa peripherally.
+    src: { page: 234, quote: "Similar to synergism, but drug B (with no therapeutic action alone) enhances the therapeutic action of drug A Carbidopa only blocks enzyme to prevent peripheral conversion of levodopa" }
+    status: unverified
+  - id: pharm.L02.003
+    kind: mcq
+    topic: drug-effect-modifications
+    stem: >-
+      A 28-year-old woman has used an over-the-counter oxymetazoline nasal spray several times a day for
+      two weeks for a cold. The spray now seems to work less each time, and her congestion is worse than
+      before whenever she stops it. Which term best describes this change in her response to the drug?
+    options:
+      - Tachyphylaxis
+      - Permissive effect
+      - Potentiation
+      - Synergism
+      - Antagonism
+    answer: 0
+    why:
+      - "Right. Tachyphylaxis is an acute decrease in response after repeated doses; the book's example is intranasal oxymetazoline with rebound congestion."
+      - "A permissive effect means drug A is needed for B's full effect (cortisol on catecholamine responsiveness)."
+      - "Potentiation is drug B with no action alone enhancing drug A (carbidopa with levodopa)."
+      - "Synergism is a combined effect greater than the sum (clopidogrel with aspirin)."
+      - "Antagonism is a combined effect less than the sum (morphine with naloxone); only one drug is used here."
+    src: { page: 234, quote: "Acute decrease in response to a drug after initial/repeated administration Repeat use of intranasal decongestant (eg, oxymetazoline) → ↓ therapeutic response (with rebound congestion)" }
+    status: unverified
+  # ---------- p234: autonomic receptors ----------
+  - id: pharm.L02.004
+    kind: card
+    topic: autonomic-receptors
+    front: Which nerves make up the parasympathetic nervous system?
+    back: The pelvic splanchnic nerves and cranial nerves III, VII, IX and X.
+    src: { page: 234, quote: "Pelvic splanchnic nerves and CNs III, VII, IX, and X are part of the parasympathetic nervous system." }
+    status: unverified
+  - id: pharm.L02.005
+    kind: card
+    topic: autonomic-receptors
+    front: What innervates the adrenal medulla?
+    back: Preganglionic sympathetic fibers directly (acting on Nn receptors); the medulla releases epinephrine into the blood.
+    src: { page: 234, quote: "Adrenal medulla is directly innervated by preganglionic sympathetic fibers." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.006
+    kind: card
+    topic: autonomic-receptors
+    front: Sweat glands belong to which autonomic pathway, and which neurotransmitter do their fibers use?
+    back: The sympathetic pathway, but they are innervated by cholinergic fibers (ACh on M3), the "chold" sweat.
+    src: { page: 234, quote: "Sweat glands are part of the sympathetic pathway but are innervated by cholinergic fibers (sympathetic nervous system results in a “chold” sweat)." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.007
+    kind: cloze
+    topic: autonomic-receptors
+    text: The renal vasculature smooth muscle is innervated by sympathetic postganglionic fibers releasing {{c1::dopamine}}, acting on {{c2::D1}} receptors.
+    src: { page: 234, quote: "Renal vasculature smooth muscle" }
+    status: unverified
+  - id: pharm.L02.008
+    kind: mcq
+    topic: autonomic-receptors
+    stem: >-
+      A 45-year-old man has severe palmar hyperhidrosis that persists despite topical antiperspirants. His
+      physician notes that although sweating is a fight-or-flight response, a drug that blocks
+      adrenergic receptors would not reduce it. Which receptor, activated by which neurotransmitter,
+      mediates his sweating?
+    options:
+      - Muscarinic receptor activated by acetylcholine
+      - α1-receptor activated by norepinephrine
+      - β2-receptor activated by epinephrine
+      - Nicotinic Nm receptor activated by acetylcholine
+      - D1 receptor activated by dopamine
+    answer: 0
+    why:
+      - "Right. Sweat glands are on the sympathetic pathway but are innervated by cholinergic fibers acting on muscarinic (M3) receptors."
+      - "α1-receptors are on vascular and visceral smooth muscle, not the cholinergic sweat gland fibers."
+      - "β2-receptors mediate bronchodilation and vasodilation, not eccrine sweating."
+      - "Nm receptors are at the skeletal neuromuscular junction."
+      - "D1 receptors are on renal vascular smooth muscle."
+    src: { page: 234, quote: "Sweat glands are part of the sympathetic pathway but are innervated by cholinergic fibers" }
+    status: unverified
+  # ---------- p235: acetylcholine receptors ----------
+  - id: pharm.L02.009
+    kind: card
+    topic: acetylcholine-receptors
+    front: What kind of receptor is the nicotinic ACh receptor, and which ions move through it?
+    back: A ligand-gated channel allowing efflux of K+ and influx of Na+ (and in some cases Ca2+).
+    src: { page: 235, quote: "Nicotinic ACh receptors are ligand-gated channels allowing efflux of K+ and influx of Na+ and in some cases Ca2+." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.010
+    kind: cloze
+    topic: acetylcholine-receptors
+    text: The NN nicotinic receptor is found in {{c1::autonomic ganglia}} and the {{c2::adrenal medulla}}; the NM receptor is found at the {{c3::neuromuscular junction}} of skeletal muscle.
+    src: { page: 235, quote: "Two subtypes: NN (found in autonomic ganglia, adrenal medulla) and NM (found in neuromuscular junction of skeletal muscle)." }
+    status: unverified
+  - id: pharm.L02.011
+    kind: card
+    topic: acetylcholine-receptors
+    front: What kind of receptor is the muscarinic ACh receptor, how many subtypes are there, and where are they found?
+    back: G-protein–coupled receptors acting through 2nd messengers. 5 subtypes (M1–5) in the heart, smooth muscle, brain, exocrine glands and sweat glands (cholinergic sympathetic).
+    src: { page: 235, quote: "Muscarinic ACh receptors are G-protein–coupled receptors that usually act through 2nd messengers. 5 subtypes: M1–5 found in heart, smooth muscle, brain, exocrine glands, and on sweat glands (cholinergic sympathetic)." }
+    status: unverified
+  - id: pharm.L02.012
+    kind: mcq
+    topic: acetylcholine-receptors
+    stem: >-
+      A researcher applies acetylcholine to two preparations. In preparation 1, the response begins
+      within a millisecond as the receptor itself opens to let Na+ in and K+ out. In preparation 2, the
+      response takes seconds and requires GTP. Preparation 1 most likely comes from which tissue?
+    options:
+      - Adrenal medulla chromaffin cells
+      - Cardiac sinoatrial node cells
+      - Bronchial smooth muscle
+      - Parietal cells of the stomach
+      - Eccrine sweat glands
+    answer: 0
+    why:
+      - "Right. A fast ligand-gated Na+/K+ channel is a nicotinic receptor; NN receptors are in autonomic ganglia and the adrenal medulla."
+      - "SA node cells use muscarinic (M2) G-protein–coupled receptors."
+      - "Bronchial smooth muscle uses muscarinic (M3) receptors."
+      - "Gastric glands use muscarinic receptors, not ligand-gated channels."
+      - "Sweat glands use muscarinic receptors (cholinergic sympathetic)."
+    src: { page: 235, quote: "Two subtypes: NN (found in autonomic ganglia, adrenal medulla)" }
+    status: unverified
+  # ---------- p235: pain transmission ----------
+  - id: pharm.L02.013
+    kind: card
+    topic: pain-transmission
+    front: Which fibers carry nociceptive pain, and what kind of pain does each carry?
+    back: Aδ fibers carry sharp, acute pain; C fibers carry dull, throbbing, chronic pain.
+    src: { page: 235, quote: "Signals transmitted by Aδ fibers (sharp, acute pain) or C fibers (dull, throbbing, chronic pain)." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.014
+    kind: card
+    topic: pain-transmission
+    front: Which receptors start nociceptive signaling, and how?
+    back: Transient receptor potential vanilloid ligand receptors cause Ca2+ influx–induced Na+ channel activation.
+    src: { page: 235, quote: "Transient receptor potential vanilloid ligand receptors cause Ca2+ influx–induced Na+ channel activation." }
+    status: unverified
+  - id: pharm.L02.015
+    kind: table
+    topic: pain-transmission
+    title: Processes in pain transmission and what blocks them
+    columns: [Process, Blocked by]
+    rows:
+      - [Transduction, "Local anesthetics, α2-agonists, gabapentinoids, NSAIDs, acetaminophen, glucocorticoids"]
+      - [Transmission, "Local anesthetics, α2-agonists, opioids"]
+      - [Modulation, "TCAs, SSRIs, SNRIs, gabapentinoids"]
+      - [Perception, "α2-agonists, opioids, TCAs, SSRIs, SNRIs"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 235, quote: "Transmission—blocked by local anesthetics, α2 -agonists, opioids Modulation—blocked by TCAs, SSRIs, SNRIs, gabapentinoids" }
+    status: unverified
+  - id: pharm.L02.016
+    kind: card
+    topic: pain-transmission
+    front: What causes neuropathic pain, how is it transmitted, and what is the book's example?
+    back: Neuronal dysfunction of the CNS or PNS, transmitted via upregulation and persistent activation of voltage-gated Na+ channels; eg, diabetic peripheral neuropathy.
+    src: { page: 235, quote: "Caused by neuronal dysfunction of the CNS or PNS. Transmitted via upregulation and persistent activation of voltage-gated Na+ channels. Example: diabetic peripheral neuropathy." }
+    status: unverified
+  - id: pharm.L02.017
+    kind: mcq
+    topic: pain-transmission
+    stem: >-
+      A 62-year-old man with long-standing type 2 diabetes has burning pain and tingling in both feet in a
+      stocking distribution, worse at night. Light touch with cotton feels painful. Which mechanism most
+      directly sustains his pain?
+    options:
+      - Upregulated, persistently active voltage-gated Na+ channels in damaged neurons
+      - Activation of transient receptor potential vanilloid receptors by tissue injury
+      - Prostaglandin sensitization of nociceptors at an inflamed site
+      - Signals carried mainly by fast myelinated Aδ fibers
+      - Loss of muscarinic receptors on sweat glands
+    answer: 0
+    why:
+      - "Right. This is neuropathic pain (the book's example is diabetic peripheral neuropathy), transmitted by upregulation and persistent activation of voltage-gated Na+ channels."
+      - "Vanilloid receptor activation starts nociceptive pain from mechanical, thermal or chemical stimuli."
+      - "Prostaglandin sensitization is part of inflammatory nociceptive transduction, which NSAIDs block."
+      - "Aδ fibers carry sharp acute nociceptive pain, not this chronic neuropathic pain."
+      - "Sweat gland innervation is unrelated to the pain mechanism."
+    src: { page: 235, quote: "Transmitted via upregulation and persistent activation of voltage-gated Na+ channels. Example: diabetic peripheral neuropathy." }
+    status: unverified
+  # ---------- p236: micturition ----------
+  - id: pharm.L02.018
+    kind: card
+    topic: micturition-control
+    front: What does stimulating the sympathetic and the parasympathetic system do to the bladder, and what coordinates them?
+    back: "⊕ sympathetic → ↑ urinary retention; ⊕ parasympathetic → ↑ urine voiding. The micturition center in the pons coordinates them."
+    src: { page: 236, quote: "Micturition center in pons regulates involuntary bladder function via coordination of sympathetic and parasympathetic nervous systems. ⊕ sympathetic → ↑ urinary retention. ⊕ parasympathetic → ↑ urine voiding." }
+    status: unverified
+  - id: pharm.L02.019
+    kind: table
+    topic: micturition-control
+    title: Bladder nerves and receptors
+    columns: [Nerve, Input, Receptor and target]
+    rows:
+      - [Pelvic nerve, Parasympathetic, M3 on detrusor muscle]
+      - [Hypogastric nerve, Sympathetic, "β3 on detrusor; α1 on internal urethral sphincter"]
+      - [Pudendal nerve, Somatic, Nicotinic on external urethral sphincter]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+    src: { page: 236, quote: "Pelvic nerve (parasympathetic input) Hypogastric nerve (sympathetic input) Pudendal nerve (somatic input)" }
+    status: unverified
+  - id: pharm.L02.020
+    kind: table
+    topic: micturition-control
+    title: Autonomic drugs for bladder dysfunction
+    columns: [Drug, Mechanism, Application]
+    rows:
+      - [Muscarinic agonist (bethanechol), "⊕ M3 → detrusor contraction → ↑ bladder emptying", Urinary retention]
+      - [Muscarinic antagonist (oxybutynin), "⊝ M3 → detrusor relaxation → ↓ detrusor overactivity", Urgency incontinence]
+      - [Sympathomimetic (mirabegron), "⊕ β3 → detrusor relaxation → ↑ bladder capacity", Urgency incontinence]
+      - [α1-antagonist (tamsulosin), "⊝ α1 → relaxation of bladder neck and prostate smooth muscle → ↓ obstruction", BPH]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [3, 1], [3, 2]]
+    src: { page: 236, quote: "Muscarinic agonists (eg, bethanechol) ⊕ M3 receptor → contraction of detrusor smooth muscle → ↑ bladder emptying Urinary retention" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.021
+    kind: mcq
+    topic: micturition-control
+    stem: >-
+      A 71-year-old woman has a sudden urge to urinate many times a day and sometimes leaks before
+      reaching the toilet. Urinalysis is normal. Her physician avoids an antimuscarinic because of her
+      mild cognitive impairment and chooses a drug that relaxes the detrusor and increases bladder
+      capacity. Which receptor does this drug stimulate?
+    options:
+      - β3-receptor
+      - M3 receptor
+      - α1-receptor
+      - Nicotinic receptor of the external sphincter
+      - β1-receptor
+    answer: 0
+    why:
+      - "Right. Mirabegron stimulates β3-receptors → detrusor relaxation → ↑ bladder capacity, for urgency incontinence."
+      - "Stimulating M3 (bethanechol) contracts the detrusor; it treats urinary retention."
+      - "α1-receptors are on the internal sphincter and prostate; blocking them (tamsulosin) treats BPH."
+      - "The nicotinic receptor on the external sphincter is somatic (pudendal) and is not the target."
+      - "β1-receptors are in the heart and kidney."
+    src: { page: 236, quote: "Sympathomimetics (eg, mirabegron) ⊕ β3 receptor → relaxation of detrusor smooth muscle → ↑ bladder capacity Urgency incontinence" }
+    status: unverified
+  # ---------- p236: adrenergic receptor distribution ----------
+  - id: pharm.L02.022
+    kind: table
+    topic: adrenergic-receptor-distribution
+    title: Tissue distribution of adrenergic receptors
+    columns: [Receptor, Tissue, Effect]
+    rows:
+      - [α1, Vascular / visceral smooth muscle, Vasoconstriction / smooth muscle contraction]
+      - [α2, "Pancreas / presynaptic terminals / salivary glands", "Inhibits insulin secretion / neurotransmitter release / salivary secretion"]
+      - [β1, Heart / kidney, "↑ heart rate, contractility / ↑ renin secretion"]
+      - [β2, "Bronchioles, cardiac muscle, liver, arterial smooth muscle, pancreas", "Bronchodilation, ↑ HR and contractility, glycogenolysis, vasodilation, ↑ insulin secretion"]
+      - [β3, Adipose, ↑ lipolysis]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 1]]
+    src: { page: 236, quote: "α2 Pancreas Presynaptic terminals Salivary glands Inhibition of insulin secretion Inhibition of neurotransmitter release Inhibition of salivary secretion" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.023
+    kind: card
+    topic: adrenergic-receptor-distribution
+    front: In the pancreas, which adrenergic receptor causes inhibition of insulin secretion, and which causes stimulation of insulin secretion?
+    back: "α2 (pancreas): inhibition of insulin secretion. β2 (pancreas): stimulation of insulin secretion."
+    src: { page: 236, quote: "Pancreas Presynaptic terminals Salivary glands Inhibition of insulin secretion" }
+    status: unverified
+  - id: pharm.L02.024
+    kind: mcq
+    topic: adrenergic-receptor-distribution
+    stem: >-
+      A 55-year-old man with hypertension is started on a drug that blocks a receptor on the
+      juxtaglomerular cells, which lowers his plasma renin activity. Which receptor is blocked?
+    options:
+      - β1
+      - β2
+      - α1
+      - α2
+      - β3
+    answer: 0
+    why:
+      - "Right. β1-receptors in the kidney ↑ renin secretion; β-blockers lower renin by blocking them on JG cells."
+      - "β2 mediates bronchodilation, vasodilation, glycogenolysis and insulin secretion, not renin."
+      - "α1 mediates vasoconstriction and visceral smooth muscle contraction."
+      - "α2 inhibits insulin, neurotransmitter and salivary secretion."
+      - "β3 is on adipose (↑ lipolysis) and the bladder."
+    src: { page: 236, quote: "β1 Heart Kidney ↑ heart rate, contractility ↑ renin secretion" }
+    status: unverified
+  # ---------- p237: G-protein second messengers ----------
+  - id: pharm.L02.025
+    kind: table
+    topic: g-protein-second-messengers
+    title: G-protein class of each receptor
+    columns: [G-protein, Receptors, Second messenger]
+    rows:
+      - [Gq, "H1, α1, V1, M1, M3", "Phospholipase C → IP3 (↑ Ca2+) and DAG (protein kinase C)"]
+      - [Gs, "β1, β2, β3, D1, H2, V2", "Adenylyl cyclase → ↑ cAMP → protein kinase A"]
+      - [Gi, "M2, α2, D2", "Inhibits adenylyl cyclase → ↓ cAMP"]
+    blanks: [[0, 1], [1, 1], [2, 1], [0, 2], [1, 2]]
+    src: { page: 237, quote: "H1, α1, V1, M1, or M3 receptor Ligand Phospholipase C Gq protein PIP2 Smooth muscle contraction IP3 DAG Protein kinase C" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.026
+    kind: card
+    topic: g-protein-second-messengers
+    front: Name the major functions of the α1 (Gq) and α2 (Gi) receptors.
+    back: "α1: ↑ vascular smooth muscle contraction, ↑ pupillary dilator contraction (mydriasis), ↑ intestinal and bladder sphincter contraction. α2: ↓ sympathetic outflow, ↓ insulin release, ↓ lipolysis, ↑ platelet aggregation, ↓ aqueous humor production."
+    src: { page: 237, quote: "i ↓ sympathetic (adrenergic) outflow, ↓ insulin release, ↓ lipolysis, ↑ platelet aggregation, ↓ aqueous humor production" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.027
+    kind: card
+    topic: g-protein-second-messengers
+    front: Name the major functions of the β2 receptor (Gs).
+    back: Vasodilation, bronchodilation ("two lungs"), ↑ lipolysis, ↑ insulin release, ↑ glycogenolysis, ↓ uterine tone (tocolysis), ↑ aqueous humor production, ↑ cellular K+ uptake.
+    src: { page: 237, quote: "Vasodilation, bronchodilation (two lungs), ↑ lipolysis, ↑ insulin release, ↑ glycogenolysis, ↓ uterine tone (tocolysis), ↑ aqueous humor production, ↑ cellular K+ uptake" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.028
+    kind: card
+    topic: g-protein-second-messengers
+    front: Name the major functions of the M2 (Gi) and M3 (Gq) receptors.
+    back: "M2: ↓ heart rate, AV node conduction velocity and atrial contractility. M3: ↑ exocrine gland secretions, gut peristalsis, bladder contraction, bronchoconstriction, vasodilation, miosis (pupillary sphincter) and accommodation (ciliary muscle)."
+    src: { page: 237, quote: "M2 i ↓ heart rate, AV node conduction velocity, and atrial contractility" }
+    status: unverified
+  - id: pharm.L02.029
+    kind: cloze
+    topic: g-protein-second-messengers
+    text: The V2 receptor (G{{c1::s}}) ↑ water reabsorption by upregulating {{c2::aquaporin-2}} in the collecting tubules and ↑ release of {{c3::vWF}}; V1 (Gq) ↑ vascular smooth muscle contraction.
+    src: { page: 237, quote: "O permeability and reabsorption via upregulating aquaporin-2 in collecting twobules (tubules) of kidney, ↑ release of vWF" }
+    status: unverified
+  - id: pharm.L02.030
+    kind: card
+    topic: g-protein-second-messengers
+    front: What do the D1 and D2 dopamine receptors do?
+    back: "D1 (Gs): relaxes renal vascular smooth muscle, activates the direct pathway of the striatum. D2 (Gi): modulates transmitter release (especially in brain), inhibits the indirect pathway of the striatum."
+    src: { page: 237, quote: "D1 s Relaxes renal vascular smooth muscle, activates direct pathway of striatum D2 i Modulates transmitter release, especially in brain, inhibits indirect pathway of striatum" }
+    status: unverified
+  - id: pharm.L02.031
+    kind: mcq
+    topic: g-protein-second-messengers
+    stem: >-
+      A 25-year-old woman with seasonal allergies has itching, sneezing and hives after exposure to
+      pollen. The mediator acts on a receptor that activates phospholipase C, raising IP3 and
+      intracellular Ca2+. Which other receptor uses the same G-protein pathway?
+    options:
+      - α1-adrenergic receptor
+      - β1-adrenergic receptor
+      - M2 muscarinic receptor
+      - H2 histamine receptor
+      - D2 dopamine receptor
+    answer: 0
+    why:
+      - "Right. H1 is Gq (phospholipase C → IP3, DAG, Ca2+), like α1, V1, M1 and M3 (mnemonic HAVe 1 M&M)."
+      - "β1 is Gs (↑ cAMP)."
+      - "M2 is Gi (↓ cAMP)."
+      - "H2 is Gs and raises gastric acid via cAMP."
+      - "D2 is Gi."
+    src: { page: 237, quote: "H1, α1, V1, M1, or M3 receptor Ligand Phospholipase C Gq protein" }
+    status: unverified
+  # ---------- p238: autonomic drugs (nerve terminal) ----------
+  - id: pharm.L02.032
+    kind: card
+    topic: autonomic-drugs
+    front: How does norepinephrine limit its own release from a sympathetic nerve ending?
+    back: By acting on presynaptic α2-autoreceptors → negative feedback.
+    src: { page: 238, quote: "Release of norepinephrine from a sympathetic nerve ending is modulated by NE itself, acting on presynaptic α2 -autoreceptors → negative feedback." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.033
+    kind: order
+    topic: autonomic-drugs
+    prompt: Put the steps of amphetamine's action at the noradrenergic terminal in order.
+    steps:
+      - Amphetamine enters the presynaptic terminal through the NE transporter (NET)
+      - It enters neurosecretory vesicles through VMAT
+      - It displaces NE from the vesicles
+      - NE in the terminal reaches a concentration threshold
+      - NET reverses and expels NE into the synaptic cleft
+    src: { page: 238, quote: "Amphetamines use the NE transporter (NET) to enter the presynaptic terminal, where they utilize the vesicular monoamine transporter (VMAT) to enter neurosecretory vesicles. This displaces NE from the vesicles." }
+    status: unverified
+  - id: pharm.L02.034
+    kind: table
+    topic: autonomic-drugs
+    title: Drugs acting at the nerve terminal
+    columns: [Action, Drugs]
+    rows:
+      - [Noradrenergic stimulant (reuptake), "Amphetamine, SNRIs, cocaine, TCAs, MDMA"]
+      - [Dopaminergic stimulant, "Amphetamine, methylphenidate, cocaine"]
+      - [Serotonergic stimulant, "Amphetamine, SNRIs, cocaine, SSRIs"]
+      - [Cholinergic stimulant, "AChE inhibitors (eg, donepezil)"]
+      - [Cholinergic inhibitor (blocks ACh release), Botulinum toxin]
+      - [VMAT inhibitor, Tetrabenazine]
+    blanks: [[3, 1], [4, 1], [5, 1], [1, 1]]
+    src: { page: 238, quote: "Cholinergic stimulant AChE inhibitors eg, Donepezil Cholinergic inhibitor Botulinum toxin Vesicular monoamine transporter (VMAT) inhibitor Tetrabenazine" }
+    status: unverified
+  - id: pharm.L02.035
+    kind: mcq
+    topic: autonomic-drugs
+    stem: >-
+      A 48-year-old man with Huntington disease is started on a drug for chorea. The drug depletes
+      monoamines by preventing their uptake into synaptic vesicles. Which drug was most likely given?
+    options:
+      - Tetrabenazine
+      - Botulinum toxin
+      - Donepezil
+      - Methylphenidate
+      - Cocaine
+    answer: 0
+    why:
+      - "Right. Tetrabenazine is the book's VMAT inhibitor: monoamines cannot enter vesicles."
+      - "Botulinum toxin blocks ACh release at cholinergic terminals."
+      - "Donepezil is an AChE inhibitor (cholinergic stimulant)."
+      - "Methylphenidate is a dopaminergic stimulant (blocks reuptake)."
+      - "Cocaine blocks reuptake of NE, dopamine and serotonin."
+    src: { page: 238, quote: "Vesicular monoamine transporter (VMAT) inhibitor Tetrabenazine" }
+    status: unverified
+  # ---------- p239: cholinomimetics ----------
+  - id: pharm.L02.036
+    kind: table
+    topic: cholinomimetic-agents
+    title: Direct cholinergic agonists
+    columns: [Drug, Action, Application]
+    rows:
+      - [Bethanechol, "Activates bladder smooth muscle; muscarinic only; resistant to AChE", Urinary retention]
+      - [Carbachol, Carbon copy of ACh (resistant to AChE), Intraoperative miosis induction]
+      - [Methacholine, Stimulates airway muscarinic receptors when inhaled, Challenge test for asthma]
+      - [Pilocarpine, "Contracts ciliary muscle and pupillary sphincter; crosses BBB; potent stimulator of sweat, tears, saliva", "Open- and closed-angle glaucoma, xerostomia (Sjögren)"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [0, 1]]
+    src: { page: 239, quote: "Methacholine Stimulates muscarinic receptors in airway when inhaled. Challenge test for diagnosis of asthma." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.037
+    kind: card
+    topic: cholinomimetic-agents
+    front: Which conditions can cholinomimetic agents worsen?
+    back: COPD, asthma and peptic ulcers, in susceptible patients.
+    src: { page: 239, quote: "Watch for exacerbation of COPD, asthma, and peptic ulcers in susceptible patients." }
+    status: unverified
+  - id: pharm.L02.038
+    kind: table
+    topic: cholinomimetic-agents
+    title: Indirect agonists (anticholinesterases)
+    columns: [Drug, Key feature, Use]
+    rows:
+      - ["Donepezil, rivastigmine, galantamine", ↑ ACh, "1st line for Alzheimer disease (Dona Riva forgot the gala)"]
+      - [Neostigmine, No BBB penetration (positive charge), "Postoperative/neurogenic ileus and urinary retention, myasthenia gravis, reversal of NMJ blockade"]
+      - [Pyridostigmine, "↑ muscle strength; does not penetrate CNS", "Myasthenia gravis (long acting), with glycopyrrolate or hyoscyamine for adverse effects"]
+      - [Physostigmine, Crosses BBB (not charged), Antidote for anticholinergic toxicity (phyxes atropine overdose)]
+    blanks: [[0, 2], [1, 1], [2, 2], [3, 1], [3, 2]]
+    src: { page: 239, quote: "Physostigmine ↑ ACh. Phreely (freely) crosses blood-brain barrier as not charged → CNS. Antidote for anticholinergic toxicity; physostigmine “phyxes” atropine overdose." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.039
+    kind: card
+    topic: cholinomimetic-agents
+    front: Why doesn't neostigmine cause CNS effects, while physostigmine does?
+    back: Neostigmine has a positive charge, so it does not cross the blood-brain barrier ("Neo = no BBB"). Physostigmine is not charged and crosses it freely ("Phreely").
+    src: { page: 239, quote: "Neo = no blood-brain barrier penetration due to positive charge." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.040
+    kind: mcq
+    topic: cholinomimetic-agents
+    stem: >-
+      A 4-year-old boy is brought to the emergency department after eating berries from a plant in the
+      garden. He is agitated and confused, with hot, dry, flushed skin, dilated pupils, a heart rate of
+      160/min and a distended bladder. Which drug best reverses both his peripheral and central
+      findings?
+    options:
+      - Physostigmine
+      - Neostigmine
+      - Pyridostigmine
+      - Atropine
+      - Pralidoxime
+    answer: 0
+    why:
+      - "Right. This is anticholinergic toxicity (jimson weed-like). Physostigmine is uncharged and crosses the BBB, so it reverses CNS and peripheral effects; it phyxes atropine overdose."
+      - "Neostigmine is charged and does not enter the CNS, so it would not treat his delirium."
+      - "Pyridostigmine does not penetrate the CNS; it is used for myasthenia gravis."
+      - "Atropine is itself an antimuscarinic and would worsen the toxicity."
+      - "Pralidoxime regenerates AChE after organophosphate poisoning; it is not an anticholinergic antidote."
+    src: { page: 239, quote: "Antidote for anticholinergic toxicity; physostigmine “phyxes” atropine overdose." }
+    status: unverified
+  # ---------- p239: anticholinesterase poisoning ----------
+  - id: pharm.L02.041
+    kind: card
+    topic: anticholinesterase-poisoning
+    front: What usually causes anticholinesterase poisoning, and who is usually affected?
+    back: Organophosphates (eg, fenthion, parathion, malathion) that irreversibly inhibit AChE; used as insecticides, so usually seen in farmers.
+    src: { page: 239, quote: "Often due to organophosphates (eg, fenthion, parathion, malathion) that irreversibly inhibit AChE. Organophosphates commonly used as insecticides; poisoning usually seen in farmers." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.042
+    kind: enumerate
+    topic: anticholinesterase-poisoning
+    prompt: Enumerate the muscarinic effects of anticholinesterase poisoning (DUMBBELSS, 9).
+    points:
+      - Diarrhea
+      - Urination
+      - Miosis
+      - Bronchospasm
+      - Bradycardia
+      - Emesis
+      - Lacrimation
+      - Sweating
+      - Salivation
+    pass: 8
+    hook: "الكتاب بيقول DUMBBELSS: المريض بيغرق من كل فتحة (إسهال وبول ودموع وعرق وريالة وترجيع)، ومعاهم Miosis و 2 B (Bronchospasm و Bradycardia)."
+    src: { page: 239, quote: "Diarrhea, Urination, Miosis, Bronchospasm, Bradycardia, Emesis, Lacrimation, Sweating, Salivation. DUMBBELSS." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.043
+    kind: card
+    topic: anticholinesterase-poisoning
+    front: Which drug reverses the muscarinic effects of organophosphate poisoning, and does it help the CNS?
+    back: Atropine, a competitive inhibitor; it crosses the BBB, so it also relieves CNS symptoms.
+    src: { page: 239, quote: "Reversed by atropine, a competitive inhibitor. Atropine can cross BBB to relieve CNS symptoms." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.044
+    kind: card
+    topic: anticholinesterase-poisoning
+    front: How does pralidoxime work in organophosphate poisoning, and what must be given with it?
+    back: It regenerates AChE by dephosphorylation if given early, reversing the nicotinic effects (neuromuscular blockade). It must be given with atropine to prevent transient worsening. It does not readily cross the BBB.
+    src: { page: 239, quote: "Reversed by pralidoxime, regenerates AChE via dephosphorylation if given early. Must be coadministered with atropine to prevent transient worsening of symptoms." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.045
+    kind: card
+    topic: anticholinesterase-poisoning
+    front: What are the CNS effects of anticholinesterase poisoning?
+    back: Respiratory depression, lethargy, seizures, coma.
+    src: { page: 239, quote: "CNS effects Respiratory depression, lethargy, seizures, coma." }
+    status: unverified
+  - id: pharm.L02.046
+    kind: mcq
+    topic: anticholinesterase-poisoning
+    stem: >-
+      A 38-year-old farmer is brought in 1 hour after spraying his crops without protection. He has
+      pinpoint pupils, wheezing, profuse sweating, drooling, vomiting and diarrhea, a heart rate of
+      44/min, and muscle fasciculations with weakness of his limbs. Atropine is given. Which additional
+      drug treats his muscle weakness, and how does it act?
+    options:
+      - Pralidoxime, which regenerates acetylcholinesterase by dephosphorylation
+      - Physostigmine, which inhibits acetylcholinesterase in the CNS
+      - Neostigmine, which increases acetylcholine at the neuromuscular junction
+      - More atropine, which blocks nicotinic receptors
+      - Glycopyrrolate, which blocks muscarinic receptors without entering the CNS
+    answer: 0
+    why:
+      - "Right. Atropine reverses only the muscarinic (DUMBBELSS) effects; pralidoxime regenerates AChE if given early and reverses the nicotinic neuromuscular blockade."
+      - "Physostigmine is another anticholinesterase and would worsen the poisoning."
+      - "Neostigmine inhibits AChE too, adding to the excess ACh."
+      - "Atropine blocks muscarinic, not nicotinic, receptors, so it does not fix the weakness."
+      - "Glycopyrrolate is antimuscarinic only; it would not treat the nicotinic weakness."
+    src: { page: 239, quote: "Nicotinic effects Neuromuscular blockade (mechanism similar to succinylcholine). Reversed by pralidoxime, regenerates AChE via dephosphorylation if given early." }
+    status: unverified
+  # ---------- p240: muscarinic antagonists ----------
+  - id: pharm.L02.047
+    kind: table
+    topic: muscarinic-antagonists
+    title: Muscarinic antagonists
+    columns: [Drugs, Organ system, Applications]
+    rows:
+      - ["Atropine, homatropine, tropicamide", Eye, Mydriasis and cycloplegia]
+      - ["Benztropine, trihexyphenidyl", CNS, "Parkinson disease (park my Benz), acute dystonia"]
+      - [Glycopyrrolate, "GI, respiratory", "Parenteral: preoperative to ↓ airway secretions. Oral: drooling, peptic ulcer"]
+      - ["Hyoscyamine, dicyclomine", GI, Antispasmodics for irritable bowel syndrome]
+      - ["Ipratropium, tiotropium", Respiratory, "COPD, asthma (tiotropium lasts longer)"]
+      - ["Solifenacin, oxybutynin, flavoxate, tolterodine", Genitourinary, "Bladder spasms and urge incontinence (make bladder SOFT)"]
+      - [Scopolamine, CNS, Motion sickness]
+    blanks: [[0, 2], [1, 2], [3, 2], [4, 2], [5, 2], [6, 2]]
+    src: { page: 240, quote: "Solifenacin, Oxybutynin, Flavoxate, Tolterodine Genitourinary Reduce bladder spasms and urge urinary incontinence (overactive bladder) Make bladder SOFT" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.048
+    kind: card
+    topic: muscarinic-antagonists
+    front: What does atropine do to the eye, airway, heart, stomach, gut and bladder?
+    back: "Eye: ↑ pupil dilation, cycloplegia. Airway: bronchodilation, ↓ secretions. Heart: ↑ heart rate. Stomach: ↓ acid secretion. Gut: ↓ motility. Bladder: ↓ urgency in cystitis."
+    src: { page: 240, quote: "Atropine Muscarinic antagonist. Used to treat bradycardia and for ophthalmic applications." }
+    status: unverified
+  - id: pharm.L02.049
+    kind: enumerate
+    topic: muscarinic-antagonists
+    prompt: Enumerate the adverse effects of atropine using the book's mnemonic (7).
+    points:
+      - Hot as a hare (↑ body temperature from ↓ sweating)
+      - Fast as a fiddle (↑ HR)
+      - Dry as a bone (dry mouth, dry skin)
+      - Red as a beet (flushed skin)
+      - Blind as a bat (cycloplegia)
+      - Mad as a hatter (disorientation)
+      - Full as a flask (urinary retention)
+    pass: 6
+    hook: "المريض اللي واخد anticholinergic بقى عكس الـ DUMBBELSS: سخن وناشف وأحمر ومش شايف ومجنون ومثانته مليانة، وقلبه بيجري."
+    src: { page: 240, quote: "Hot as a hare Fast as a fiddle Dry as a bone Red as a beet Blind as a bat Mad as a hatter Full as a flask" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.050
+    kind: card
+    topic: muscarinic-antagonists
+    front: Which three serious problems can atropine cause in special groups?
+    back: Acute angle-closure glaucoma in older adults (from mydriasis), urinary retention in men with prostatic hyperplasia, and hyperthermia in infants.
+    src: { page: 240, quote: "Can cause acute angle-closure glaucoma in older adults (due to mydriasis), urinary retention in men with prostatic hyperplasia, and hyperthermia in infants" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.051
+    kind: card
+    topic: muscarinic-antagonists
+    front: Atropine blocks which effects of anticholinesterases, and which does it not block?
+    back: It blocks the muscarinic effects (DUMBBELSS) but not the nicotinic effects.
+    src: { page: 240, quote: "Blocks muscarinic effects (DUMBBELSS) of anticholinesterases, but not the nicotinic effects" }
+    status: unverified
+  - id: pharm.L02.052
+    kind: mcq
+    topic: muscarinic-antagonists
+    stem: >-
+      A 74-year-old man is given an antimuscarinic drug for overactive bladder. Two days later he comes to
+      the emergency department with severe eye pain, a red eye, blurred vision with halos and a fixed,
+      mid-dilated pupil. Which effect of the drug caused this emergency?
+    options:
+      - Mydriasis narrowing the anterior chamber angle
+      - Increased production of aqueous humor
+      - Contraction of the ciliary muscle
+      - Miosis blocking the pupil
+      - Retinal PDE-6 inhibition
+    answer: 0
+    why:
+      - "Right. Muscarinic blockade dilates the pupil, which can precipitate acute angle-closure glaucoma in older adults."
+      - "β2 stimulation ↑ aqueous humor; muscarinic blockade is not the cause."
+      - "Antimuscarinics relax the ciliary muscle (cycloplegia); contraction is the effect of pilocarpine."
+      - "Miosis is caused by muscarinic agonists, not antagonists."
+      - "PDE-6 inhibition (cyanopia) is from sildenafil."
+    src: { page: 240, quote: "Can cause acute angle-closure glaucoma in older adults (due to mydriasis)" }
+    status: unverified
+  # ---------- p241: sympathomimetics ----------
+  - id: pharm.L02.053
+    kind: table
+    topic: sympathomimetics
+    title: Direct sympathomimetics
+    columns: [Drug, Site, Main uses]
+    rows:
+      - ["Albuterol, salmeterol, terbutaline", β2 > β1, "Albuterol: acute asthma/COPD. Salmeterol: long-term. Terbutaline: acute bronchospasm, tocolysis"]
+      - [Dobutamine, "β1 > β2, α", "Cardiac stress testing, acute decompensated HF with cardiogenic shock (inotrope)"]
+      - [Dopamine, D1 = D2 > β > α, "Unstable bradycardia, shock"]
+      - [Epinephrine, β > α, "Anaphylaxis, asthma, shock, open-angle glaucoma"]
+      - [Fenoldopam, D1, "Postoperative hypertension, hypertensive crisis"]
+      - [Isoproterenol, β1 = β2, Electrophysiologic evaluation of tachyarrhythmias]
+      - [Midodrine, α1, Autonomic insufficiency and postural hypotension]
+      - [Mirabegron, β3, Urinary urgency or overactive bladder]
+      - [Norepinephrine, α1 > α2 > β1, "Hypotension, septic shock"]
+      - [Phenylephrine, α1 > α2, "Hypotension, mydriasis, decongestant, ischemic priapism"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [8, 1], [9, 1], [3, 2], [8, 2]]
+    src: { page: 241, quote: "Norepinephrine α1 > α2 > β1 ↑ BP, –/↓ HR" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.054
+    kind: card
+    topic: sympathomimetics
+    front: How do dopamine's effects change with dose?
+    back: Inotropic and chronotropic effects at lower doses via β effects; vasoconstriction at high doses via α effects.
+    src: { page: 241, quote: "inotropic and chronotropic effects at lower doses via β effects; vasoconstriction at high doses via α effects." }
+    status: unverified
+  - id: pharm.L02.055
+    kind: card
+    topic: sympathomimetics
+    front: Which receptor effects of epinephrine dominate at high doses, and how does it compare with norepinephrine at β2?
+    back: α effects predominate at high doses. Epinephrine has a stronger effect at the β2-receptor than norepinephrine.
+    src: { page: 241, quote: "α effects predominate at high doses. Stronger effect at β2 -receptor than norepinephrine." }
+    status: unverified
+  - id: pharm.L02.056
+    kind: card
+    topic: sympathomimetics
+    front: What are the uses and adverse effects of fenoldopam?
+    back: "A D1 agonist vasodilator (coronary, peripheral, renal, splanchnic) that promotes natriuresis; used for postoperative hypertension and hypertensive crisis. Can cause hypotension, tachycardia, flushing, headache."
+    src: { page: 241, quote: "Vasodilator (coronary, peripheral, renal, and splanchnic). Promotes natriuresis. Can cause hypotension, tachycardia, flushing, headache." }
+    status: unverified
+  - id: pharm.L02.057
+    kind: table
+    topic: sympathomimetics
+    title: Indirect sympathomimetics
+    columns: [Drug, Mechanism, Uses]
+    rows:
+      - [Amphetamine, "Indirect general agonist, reuptake inhibitor, releases stored catecholamines", "Narcolepsy, obesity, ADHD"]
+      - [Cocaine, "Indirect general agonist, reuptake inhibitor; vasoconstriction and local anesthesia", Confirms Horner syndrome (mydriasis only with intact sympathetic innervation)]
+      - [Ephedrine, "Indirect general agonist, releases stored catecholamines", "Nasal decongestion (pseudoephedrine), urinary incontinence, hypotension"]
+    blanks: [[0, 2], [1, 2], [2, 2], [0, 1]]
+    src: { page: 241, quote: "Amphetamine Indirect general agonist, reuptake inhibitor, also releases stored catecholamines. Narcolepsy, obesity, ADHD." }
+    status: unverified
+  - id: pharm.L02.058
+    kind: card
+    topic: sympathomimetics
+    front: Why is caution needed with β-blockers in suspected cocaine intoxication?
+    back: Unopposed α1 activation → ↑↑↑ BP and coronary vasospasm.
+    src: { page: 241, quote: "Caution when giving β-blockers if cocaine intoxication is suspected (unopposed α1 activation → ↑↑↑ BP, coronary vasospasm)." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.059
+    kind: mcq
+    topic: sympathomimetics
+    stem: >-
+      A 67-year-old woman is admitted with pneumonia and becomes hypotensive (BP 78/40 mm Hg) despite 3 L
+      of IV fluids. She has warm extremities and a lactate of 4.5 mmol/L. The team starts a vasopressor
+      for septic shock. Which receptor profile best describes the drug the book lists for this use?
+    options:
+      - α1 > α2 > β1
+      - β2 > β1
+      - β1 > β2, α
+      - β1 = β2
+      - D1
+    answer: 0
+    why:
+      - "Right. Norepinephrine (α1 > α2 > β1) is listed for hypotension and septic shock; α1 vasoconstriction raises BP."
+      - "β2 > β1 is albuterol, salmeterol and terbutaline for bronchospasm."
+      - "β1 > β2, α is dobutamine, an inotrope for cardiogenic shock."
+      - "β1 = β2 is isoproterenol, which vasodilates and lowers BP."
+      - "D1 is fenoldopam, a vasodilator for hypertensive crisis."
+    src: { page: 241, quote: "Norepinephrine α1 > α2 > β1 ↑ BP, –/↓ HR" }
+    status: unverified
+  # ---------- p242: physiologic effects ----------
+  - id: pharm.L02.060
+    kind: card
+    topic: physiologic-effects-sympathomimetics
+    front: Why does norepinephrine cause reflex bradycardia?
+    back: α1-mediated vasoconstriction ↑ systolic and diastolic pressures → ↑ mean arterial pressure → reflex bradycardia.
+    src: { page: 242, quote: "NE ↑ systolic and diastolic pressures as a result of α1 -mediated vasoconstriction → ↑ mean arterial pressure → reflex bradycardia." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.061
+    kind: card
+    topic: physiologic-effects-sympathomimetics
+    front: What does isoproterenol do to mean arterial pressure and heart rate, and why?
+    back: It has little α effect but causes β2-mediated vasodilation → ↓ MAP, and ↑ heart rate through β1 and reflex activity.
+    src: { page: 242, quote: "isoproterenol (rarely used) has little α effect but causes β2 -mediated vasodilation, resulting in ↓ mean arterial pressure and ↑ heart rate through β1 and reflex activity." }
+    status: unverified
+  - id: pharm.L02.062
+    kind: card
+    topic: physiologic-effects-sympathomimetics
+    front: What happens to the blood pressure response to epinephrine and to phenylephrine after α-blockade?
+    back: "Epinephrine: the MAP response reverses from a net increase (α) to a net decrease (β2), epinephrine reversal. Phenylephrine: the response is suppressed but not reversed, because it is a pure α-agonist."
+    src: { page: 242, quote: "Epinephrine response exhibits reversal of mean arterial pressure from a net increase (the α response) to a net decrease (the β2 response)." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.063
+    kind: mcq
+    topic: physiologic-effects-sympathomimetics
+    stem: >-
+      In a pharmacology laboratory, a dog's blood pressure is recorded. An unknown drug X raises the mean
+      arterial pressure. After phentolamine is given, the same dose of drug X now lowers the mean arterial
+      pressure. Drug X is most likely which of the following?
+    options:
+      - Epinephrine
+      - Phenylephrine
+      - Isoproterenol
+      - Norepinephrine
+      - Midodrine
+    answer: 0
+    why:
+      - "Right. After α-blockade the unopposed β2 vasodilation of epinephrine shows, reversing the MAP response from net increase to net decrease."
+      - "Phenylephrine is a pure α-agonist: its response is suppressed but not reversed."
+      - "Isoproterenol lowers MAP from the start (β2 vasodilation, little α effect)."
+      - "Norepinephrine has little β2 effect, so its pressor response would be blunted, not reversed."
+      - "Midodrine is an α1 agonist; its response would be suppressed, not reversed."
+    src: { page: 242, quote: "Epinephrine response exhibits reversal of mean arterial pressure from a net increase (the α response) to a net decrease (the β2 response)." }
+    status: unverified
+  # ---------- p243: α2-agonists ----------
+  - id: pharm.L02.064
+    kind: table
+    topic: alpha2-agonists
+    title: Sympatholytics (α2-agonists)
+    columns: [Drug, Applications, Adverse effects]
+    rows:
+      - ["Clonidine, guanfacine", "Hypertensive urgency (limited), ADHD, Tourette syndrome, opioid withdrawal symptoms", "CNS depression, bradycardia, hypotension, respiratory depression, miosis, rebound hypertension with abrupt cessation"]
+      - [α-methyldopa, Hypertension in pregnancy, "Direct Coombs ⊕ hemolysis, drug-induced lupus, hyperprolactinemia"]
+      - [Tizanidine, Relief of spasticity, "Hypotension, weakness, xerostomia"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1]]
+    src: { page: 243, quote: "α-methyldopa Hypertension in pregnancy Direct Coombs ⊕ hemolysis, drug-induced lupus, hyperprolactinemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.065
+    kind: mcq
+    topic: alpha2-agonists
+    stem: >-
+      A 52-year-old man with hypertension runs out of one of his antihypertensive drugs while traveling.
+      Two days later he has headache, sweating, anxiety, tremor and a BP of 210/120 mm Hg. The drug he
+      stopped also helped his opioid withdrawal symptoms in the past. Which drug did he stop?
+    options:
+      - Clonidine
+      - α-methyldopa
+      - Prazosin
+      - Phenoxybenzamine
+      - Tizanidine
+    answer: 0
+    why:
+      - "Right. Clonidine (α2-agonist) is used for opioid withdrawal symptoms and causes rebound hypertension with abrupt cessation."
+      - "α-methyldopa is used for hypertension in pregnancy; its adverse effects are Coombs ⊕ hemolysis, lupus and hyperprolactinemia."
+      - "Prazosin's typical adverse effect is 1st-dose orthostatic hypotension."
+      - "Phenoxybenzamine is used before pheochromocytoma surgery."
+      - "Tizanidine treats spasticity."
+    src: { page: 243, quote: "CNS depression, bradycardia, hypotension, respiratory depression, miosis, rebound hypertension with abrupt cessation" }
+    status: unverified
+  # ---------- p243: α-blockers ----------
+  - id: pharm.L02.066
+    kind: table
+    topic: alpha-blockers
+    title: α-blockers
+    columns: [Drug, Applications, Adverse effects]
+    rows:
+      - ["Phenoxybenzamine (nonselective, irreversible)", Pheochromocytoma (preoperatively) to prevent hypertensive crisis, "Orthostatic hypotension, reflex tachycardia"]
+      - ["Phentolamine (nonselective, reversible)", "MAO inhibitor patients who eat tyramine; severe cocaine-induced hypertension (2nd line); NE extravasation", ""]
+      - ["Prazosin, terazosin, doxazosin, tamsulosin (α1, -osin)", "Urinary symptoms of BPH; PTSD (prazosin); hypertension (except tamsulosin)", "1st-dose orthostatic hypotension, dizziness, headache"]
+      - [Mirtazapine (α2), Depression, "Sedation, ↑ serum cholesterol, ↑ appetite"]
+    blanks: [[0, 1], [1, 1], [2, 1], [2, 2], [3, 1], [3, 2]]
+    src: { page: 243, quote: "Phenoxybenzamine Irreversible. Pheochromocytoma (used preoperatively) to prevent catecholamine (hypertensive) crisis." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.067
+    kind: mcq
+    topic: alpha-blockers
+    stem: >-
+      A 46-year-old woman taking phenelzine for depression eats aged cheese and red wine at a party. An
+      hour later she has a pounding headache, palpitations and a BP of 230/130 mm Hg. Which drug,
+      a reversible nonselective α-blocker, is given for this situation?
+    options:
+      - Phentolamine
+      - Phenoxybenzamine
+      - Prazosin
+      - Propranolol
+      - Clonidine
+    answer: 0
+    why:
+      - "Right. Phentolamine (reversible) is given to patients on MAO inhibitors who eat tyramine-containing foods."
+      - "Phenoxybenzamine is irreversible and is used before pheochromocytoma surgery."
+      - "Prazosin is α1-selective and used for BPH, PTSD and hypertension, not acute tyramine crisis."
+      - "A β-blocker alone leaves α stimulation unopposed and can worsen the crisis."
+      - "Clonidine is an α2-agonist, not an α-blocker."
+    src: { page: 243, quote: "Phentolamine Reversible. Given to patients on MAO inhibitors who eat tyramine-containing foods and for severe cocaine-induced hypertension (2nd line)." }
+    status: unverified
+  # ---------- p244: β-blockers ----------
+  - id: pharm.L02.068
+    kind: table
+    topic: beta-blockers
+    title: β-blocker applications
+    columns: [Application, Action, Examples]
+    rows:
+      - [Angina pectoris, "↓ HR and contractility → ↓ O2 consumption", ""]
+      - [Glaucoma, ↓ production of aqueous humor, Timolol]
+      - [Heart failure, "Blocks neurohormonal stress → prevents deleterious remodeling → ↓ mortality", "Bisoprolol, carvedilol, metoprolol"]
+      - [Hypertension, "↓ cardiac output, ↓ renin secretion (β1 on JG cells)", ""]
+      - [Hyperthyroidism / thyroid storm, "Symptom control (↓ HR, ↓ tremor)", Propranolol]
+      - [Hypertrophic cardiomyopathy, "↓ HR → ↑ filling time, relieving obstruction", ""]
+      - [Migraine, ↓ nitric oxide production (prevention), ""]
+      - [Myocardial infarction, "↓ O2 demand (short term), ↓ mortality (long term)", ""]
+      - [Supraventricular tachycardia, ↓ AV conduction velocity (class II), "Metoprolol, esmolol"]
+      - [Variceal bleeding, ↓ hepatic venous pressure gradient and portal hypertension, "Nadolol, propranolol, carvedilol"]
+    blanks: [[1, 2], [2, 2], [4, 2], [8, 2], [9, 2], [3, 1], [5, 1]]
+    src: { page: 244, quote: "Heart failure Blockade of neurohormonal stress → prevention of deleterious cardiac remodeling → ↓ mortality Bisoprolol, carvedilol, metoprolol (β-blockers curb mortality)" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.069
+    kind: card
+    topic: beta-blockers
+    front: List the adverse effects of β-blockers.
+    back: Erectile dysfunction; cardiovascular (bradycardia, AV block, HF); CNS (seizures, sleep alterations); dyslipidemia (metoprolol); masked hypoglycemia; asthma/COPD exacerbations.
+    src: { page: 244, quote: "Erectile dysfunction, cardiovascular (bradycardia, AV block, HF), CNS (seizures, sleep alterations), dyslipidemia (metoprolol), masked hypoglycemia, asthma/COPD exacerbations" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.070
+    kind: table
+    topic: beta-blockers
+    title: β-blocker selectivity
+    columns: [Group, Drugs, Rule]
+    rows:
+      - [β1-selective (β1 > β2), "Atenolol, betaxolol, bisoprolol, esmolol, metoprolol", A to M (β1 with 1st half of alphabet)]
+      - [Nonselective (β1 = β2), "Nadolol, propranolol, timolol", N to Z (β2 with 2nd half of alphabet)]
+      - [Nonselective β and α1-selective, "Carvedilol, labetalol", Modified suffixes instead of -olol]
+      - [β1-selective + β3 stimulation, Nebivolol, "Activates NO synthase in vessels, ↓ SVR (NebivOlol increases NO)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 244, quote: "Selective antagonists mostly go from A to M (β1 with 1st half of alphabet)" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.071
+    kind: card
+    topic: beta-blockers
+    front: What is the book's position on β-blockers for acute cocaine-associated chest pain?
+    back: It remains controversial, because of an unsubstantiated concern for unopposed α-adrenergic stimulation.
+    src: { page: 244, quote: "Use of β-blockers for acute cocaine-associated chest pain remains controversial due to unsubstantiated concern for unopposed α-adrenergic stimulation" }
+    status: unverified
+  - id: pharm.L02.072
+    kind: mcq
+    topic: beta-blockers
+    stem: >-
+      A 58-year-old man with type 1 diabetes and stable angina is started on propranolol. A month later
+      his wife finds him confused and sweaty at night; his fingerstick glucose is 38 mg/dL. He says he no
+      longer feels the shakiness and palpitations that used to warn him of low sugar. Which property of
+      the drug best explains this?
+    options:
+      - β-blockade masks the adrenergic warning signs of hypoglycemia
+      - α1 blockade causes insulin release
+      - β2 stimulation increases glycogenolysis
+      - It is β1-selective and so spares the pancreas
+      - It causes dyslipidemia
+    answer: 0
+    why:
+      - "Right. β-blockers can cause masked hypoglycemia: the tremor and tachycardia that warn of low glucose are blocked."
+      - "Propranolol does not block α1, and α1 blockade does not release insulin."
+      - "Propranolol blocks, not stimulates, β2; blocking β2 ↓ glycogenolysis."
+      - "Propranolol is nonselective (β1 = β2), N to Z."
+      - "Dyslipidemia is listed for metoprolol and does not cause hypoglycemia."
+    src: { page: 244, quote: "masked hypoglycemia, asthma/COPD exacerbations" }
+    status: unverified
+  # ---------- p245: PDE inhibitors ----------
+  - id: pharm.L02.073
+    kind: card
+    topic: phosphodiesterase-inhibitors
+    front: How do PDE inhibitors work, and why do they have different uses?
+    back: They inhibit PDE, which hydrolyzes cAMP and/or cGMP, so cAMP and/or cGMP rise. Their specificity for PDE isoforms differs, so their clinical uses differ.
+    src: { page: 245, quote: "Phosphodiesterase (PDE) inhibitors inhibit PDE, which catalyzes the hydrolysis of cAMP and/or cGMP, and thereby increase cAMP and/or cGMP." }
+    status: unverified
+  - id: pharm.L02.074
+    kind: table
+    topic: phosphodiesterase-inhibitors
+    title: Phosphodiesterase inhibitors
+    columns: [Type, Drug, Clinical uses, Adverse effects]
+    rows:
+      - [Nonspecific, Theophylline, COPD/asthma (rarely used), "Cardiotoxicity (tachycardia, arrhythmia), neurotoxicity (seizures, headache), abdominal pain"]
+      - [PDE-5, "Sildenafil, vardenafil, tadalafil, avanafil", "Erectile dysfunction, pulmonary hypertension, BPH (tadalafil only)", "Flushing, headache, dyspepsia, hypotension with nitrates; cyanopia (sildenafil, PDE-6)"]
+      - [PDE-4, Roflumilast, Severe COPD, "Abdominal pain, weight loss, depression, anxiety, insomnia"]
+      - [PDE-3, Milrinone, Acute decompensated HF with cardiogenic shock (inotrope), "Tachycardia, ventricular arrhythmias, hypotension"]
+      - ["Platelet inhibitors", "Cilostazol, dipyridamole", "Intermittent claudication, stroke/TIA prevention (with aspirin), stress testing (dipyridamole), stent restenosis prevention", "Nausea, headache, flushing, hypotension, abdominal pain"]
+    blanks: [[0, 1], [1, 2], [2, 1], [3, 1], [4, 2], [0, 3]]
+    src: { page: 245, quote: "PDE-4 inhibitor Roflumilast ↑ cAMP in neutrophils, granulocytes, and bronchial epithelium Severe COPD Abdominal pain, weight loss, depression, anxiety, insomnia" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L02.075
+    kind: card
+    topic: phosphodiesterase-inhibitors
+    front: How does milrinone act in the heart and in vascular smooth muscle?
+    back: "Cardiomyocytes: ↑ cAMP → ↑ Ca2+ influx → ↑ inotropy and chronotropy. Vascular smooth muscle: ↑ cAMP → MLCK inhibition → vasodilation → ↓ preload and afterload."
+    src: { page: 245, quote: "In vascular smooth muscle: ↑ cAMP → MLCK inhibition → vasodilation → ↓ preload and afterload" }
+    status: unverified
+  - id: pharm.L02.076
+    kind: card
+    topic: phosphodiesterase-inhibitors
+    front: Besides PDE inhibition, what else does dipyridamole do, and why is it used in cardiac stress testing?
+    back: It prevents adenosine reuptake by platelets → ↑ extracellular adenosine → ↑ vasodilation (coronary vasodilation for stress testing).
+    src: { page: 245, quote: "It also prevents adenosine reuptake by platelets → ↑ extracellular adenosine → ↑ vasodilation." }
+    status: unverified
+  - id: pharm.L02.077
+    kind: mcq
+    topic: phosphodiesterase-inhibitors
+    stem: >-
+      A 61-year-old man with erectile dysfunction takes a drug that ↑ cGMP in the corpus cavernosum. He
+      notices that everything looks blue for a few hours after each dose. Inhibition of which enzyme
+      explains his visual symptom?
+    options:
+      - PDE-6 in the retina
+      - PDE-5 in the retina
+      - PDE-3 in the retina
+      - PDE-4 in retinal neutrophils
+      - Adenylyl cyclase in photoreceptors
+    answer: 0
+    why:
+      - "Right. Sildenafil can cause cyanopia (blue-tinted vision) by inhibiting PDE-6 (six) in the retina."
+      - "PDE-5 inhibition causes the therapeutic effect (↑ cGMP in the penis), not cyanopia."
+      - "PDE-3 inhibitors are milrinone and cilostazol."
+      - "PDE-4 inhibition is roflumilast for COPD."
+      - "Sildenafil does not act on adenylyl cyclase."
+    src: { page: 245, quote: "Sildenafil only: cyanopia (blue- tinted vision) via inhibition of PDE-6 (six) in retina" }
+    status: unverified
+  - id: pharm.L02.078
+    kind: card
+    topic: phosphodiesterase-inhibitors
+    front: Which drug combination with PDE-5 inhibitors causes dangerous hypotension?
+    back: Nitrates.
+    src: { page: 245, quote: "hypotension in patients taking nitrates" }
+    status: unverified
+    tags: [high-yield]

@@ -1,0 +1,840 @@
+schema: steps.lesson/v1
+lecture: endo.L03
+lessons:
+  - id: endo.L03.lesson1
+    title: "الـ hypothalamus بيدّي أوامر، والـ pituitary بينفّذ"
+    hook: "كل هرمون في الـ anterior pituitary له زرار في الـ hypothalamus. اعرف الزراير وهتعرف ليه الـ antipsychotics بتنزّل لبن"
+    minutes: 10
+    pages: [332, 334]
+    topics: [hypothalamic-pituitary-hormones, growth-hormone, antidiuretic-hormone, prolactin]
+    goals:
+      - "تربط كل هرمون hypothalamic بالهرمون اللي بيشغّله أو بيوقفه"
+      - "تفهم ليه الـ dopamine هو الفرامل الأساسية للـ prolactin"
+      - "تعرف الـ GH بيشتغل من خلال IGF-1، وإيه بيعلّيه وإيه بيوطّيه"
+      - "تفرّق بين V1 و V2 وبين central و nephrogenic DI"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "الزراير"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="en3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker>
+              <marker id="en3b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <text x="10" y="18" class="t-sm t-b">Hypothalamus</text>
+            <rect class="fg-acc" x="4" y="26" width="50" height="22" rx="6"/><text x="12" y="41" class="t-sm">CRH</text>
+            <rect class="fg-acc" x="62" y="26" width="56" height="22" rx="6"/><text x="68" y="41" class="t-sm">GnRH</text>
+            <rect class="fg-acc" x="126" y="26" width="48" height="22" rx="6"/><text x="134" y="41" class="t-sm">TRH</text>
+            <rect class="fg-acc" x="182" y="26" width="60" height="22" rx="6"/><text x="188" y="41" class="t-sm">GHRH</text>
+            <rect class="fg-bad" x="250" y="26" width="104" height="22" rx="6"/><text x="256" y="41" class="t-sm">SST, dopamine</text>
+            <line class="fg-arrow-acc" x1="29" y1="50" x2="29" y2="138" marker-end="url(#en3a)"/>
+            <line class="fg-arrow-acc" x1="90" y1="50" x2="90" y2="138" marker-end="url(#en3a)"/>
+            <line class="fg-arrow-acc" x1="150" y1="50" x2="150" y2="138" marker-end="url(#en3a)"/>
+            <line class="fg-arrow-acc" x1="160" y1="50" x2="300" y2="138" marker-end="url(#en3a)"/>
+            <line class="fg-arrow-acc" x1="212" y1="50" x2="230" y2="138" marker-end="url(#en3a)"/>
+            <line class="fg-arrow-bad" x1="290" y1="50" x2="245" y2="138" marker-end="url(#en3b)"/>
+            <line class="fg-arrow-bad" x1="320" y1="50" x2="315" y2="138" marker-end="url(#en3b)"/>
+            <text x="10" y="132" class="t-sm t-b">Anterior pituitary</text>
+            <rect class="fg-box" x="4" y="142" width="54" height="24" rx="6"/><text x="10" y="158" class="t-sm">ACTH</text>
+            <rect class="fg-box" x="62" y="142" width="62" height="24" rx="6"/><text x="66" y="158" class="t-sm">FSH, LH</text>
+            <rect class="fg-box" x="128" y="142" width="48" height="24" rx="6"/><text x="136" y="158" class="t-sm">TSH</text>
+            <rect class="fg-box" x="210" y="142" width="48" height="24" rx="6"/><text x="222" y="158" class="t-sm">GH</text>
+            <rect class="fg-box" x="280" y="142" width="74" height="24" rx="6"/><text x="292" y="158" class="t-sm">Prolactin</text>
+            <text x="4" y="190" class="t-sm t-mut">green arrows stimulate, red arrows inhibit</text>
+          </svg>
+        caption: "كل زرار في الـ hypothalamus بيشغّل هرمون في الـ anterior pituitary. لاحظ الـ TRH بيشغّل الـ TSH والـ prolactin مع بعض، والـ dopamine والـ somatostatin هما الفرامل."
+        alt: "Hypothalamic hormones CRH, GnRH, TRH, GHRH stimulate ACTH, FSH and LH, TSH and prolactin, and GH respectively; somatostatin inhibits GH and dopamine inhibits prolactin."
+        page: 332
+        quote: "TRH ↑ TSH, ↑ prolactin"
+      - kind: explain
+        title: "كل زرار وشغلته"
+        text: |-
+          - **CRH** ← ↑ ACTH و MSH و β-endorphin (كلهم من الـ POMC). بيقل مع ==chronic glucocorticoid use== (الـ feedback).
+          - **GnRH** ← ↑ FSH و LH. لازم ييجي **pulsatile** عشان البلوغ والخصوبة؛ لو اديته **tonic** (زي leuprolide) بيقفل المحور كله.
+          - **TRH** ← ↑ TSH و ==prolactin== كمان.
+          - **GHRH** ← ↑ GH، والـ analog بتاعه **tesamorelin** بيعالج الـ HIV-associated lipodystrophy.
+          - **Somatostatin (GHIH)** ← ↓ GH و TSH.
+          - **Dopamine** (prolactin-inhibiting factor) ← ↓ prolactin و TSH.
+        page: 332
+        quote: "Tonic GnRH analog (eg, leuprolide) suppresses hypothalamic–pituitary–gonadal axis. Pulsatile GnRH leads to puberty, fertility"
+      - kind: aside
+        tone: analogy
+        text: "الـ GnRH زي جرس الباب: لو رنّيت كل شوية الناس تفتح (pulsatile ← FSH و LH). لو حطيت صباعك على الجرس وسبته (tonic) الناس هتطنّش خالص. عشان كده ==leuprolide== المستمر بيوقف المحور، وبنستخدمه نقفل الـ testosterone أو الـ estrogen."
+        page: 332
+        quote: "Tonic GnRH analog (eg, leuprolide) suppresses hypothalamic–pituitary–gonadal axis."
+      - kind: explain
+        title: "الـ prolactin: الهرمون الوحيد اللي فرامله أقوى من بنزينه"
+        text: |-
+          معظم الـ anterior pituitary بيستنى أمر عشان يشتغل. الـ prolactin العكس: الـ hypothalamus بيدوس عليه فرامل ==طول الوقت== بالـ dopamine من الـ **tuberoinfundibular pathway**. والـ dopamine أقوى في التحكم فيه من الـ TRH.
+
+          والـ prolactin نفسه بيعلّي الـ dopamine عشان يوقف نفسه (negative feedback).
+
+          الـ prolactin بيعمل لبن، وبيقفل الـ ==GnRH==. وده بيفسّر كل أعراضه: الرضاعة بتأخر التبويض (منع حمل طبيعي)، والـ prolactinoma بتعمل amenorrhea و osteoporosis و hypogonadism و galactorrhea.
+        page: 334
+        quote: "Prolactin secretion from anterior pituitary is tonically inhibited by dopamine from tuberoinfundibular pathway of hypothalamus."
+      - kind: reveal
+        prompt: "طب لو اديت المريض دوا بيـ block الـ dopamine (زي antipsychotic أو metoclopramide)، الـ prolactin هيعمل إيه؟ وإيه اللي هيعالج الـ prolactinoma؟"
+        answer: "الفرامل اتشالت ← ==hyperprolactinemia== ← galactorrhea و amenorrhea. والعلاج بالعكس: **dopamine agonists** (bromocriptine و cabergoline) يرجّعوا الفرامل. والـ estrogens (OCPs و الحمل) كمان بتعلّي الـ prolactin."
+        page: 334
+        quote: "Dopamine antagonists (eg, most antipsychotics, metoclopramide) and estrogens (eg, OCPs, pregnancy) stimulate prolactin secretion."
+      - kind: table
+        title: "الـ prolactin العالي عند الست والراجل (+ infertility في الاتنين)"
+        columns: ["Sex", "Effects"]
+        rows:
+          - ["Females", "Galactorrhea, amenorrhea, osteoporosis"]
+          - ["Males", "Gynecomastia, ↓ libido, impotence"]
+        hide: [[0, 1], [1, 1]]
+        page: 334
+        quote: "Elevated prolactin associated with infertility, plus In females: galactorrhea, amenorrhea, osteoporosis In males: gynecomastia, ↓ libido, impotence"
+      - kind: aside
+        tone: exam
+        text: "ست عندها **hypothyroidism** ولبن نازل؟ مش لازم يبقى عندها tumor: الـ ==TRH== العالي بيشغّل الـ TSH والـ prolactin مع بعض."
+        page: 332
+        quote: "↑ TRH (eg, in 1°/2° hypothyroidism) may increase prolactin secretion → galactorrhea"
+      - kind: check
+        question: "A woman on haloperidol develops galactorrhea and amenorrhea. Which drug would best counter the mechanism?"
+        options:
+          - "Cabergoline"
+          - "Metoclopramide"
+          - "Octreotide"
+          - "Leuprolide"
+        answer: 0
+        why:
+          - "صح: الـ haloperidol شال فرامل الـ dopamine، والـ cabergoline (dopamine agonist) بيرجّعها."
+          - "الـ metoclopramide هو كمان dopamine antagonist، هيزوّد المشكلة."
+          - "الـ octreotide (somatostatin analog) للـ GH الزيادة."
+          - "الـ leuprolide بيقفل محور الـ gonads، مش بيوطّي الـ prolactin."
+        page: 334
+        quote: "Dopamine agonists (eg, bromocriptine, cabergoline) inhibit prolactin secretion and can be used in treatment of prolactinoma."
+      - kind: explain
+        title: "الـ GH: بيشتغل بالوكالة"
+        text: |-
+          الـ **GH (somatotropin)** بيطلع من الـ anterior pituitary في **pulses** بأمر الـ GHRH. معظم شغله في النمو مش بإيده: بيخلي الكبد يطلّع ==IGF-1 (somatomedin C)==، وده اللي بيطوّل العضم ويكبّر العضل.
+
+          وفي نفس الوقت الـ GH ==diabetogenic==: بيعلّي الـ insulin resistance. منطقي، لأنه بيطلع وقت الجوع والـ stress عشان يحافظ على السكر.
+        page: 333
+        quote: "Stimulates linear growth and muscle mass through IGF-1 (somatomedin C) secretion by liver. ↑ insulin resistance (diabetogenic)."
+      - kind: sort
+        prompt: "الـ GH secretion: بيزيد ولا بيقل؟"
+        bins: ["↑ GH", "↓ GH"]
+        cards:
+          - { text: "Deep sleep", bin: 0 }
+          - { text: "Hypoglycemia", bin: 0 }
+          - { text: "Exercise", bin: 0 }
+          - { text: "Puberty", bin: 0 }
+          - { text: "Hyperglycemia", bin: 1 }
+          - { text: "Obesity", bin: 1 }
+          - { text: "Aging", bin: 1 }
+          - { text: "Somatomedin (IGF-1)", bin: 1 }
+        why: "الـ GH بيطلع لما الجسم عايز يحمي السكر أو يبني (نوم، جوع، رياضة، بلوغ، stress). السكر العالي والسن والسمنة والـ somatostatin والـ IGF-1 نفسه (feedback) بيوطّوه."
+        page: 333
+        quote: "Secretion ↑ during (deep) sleep, hypoglycemia, stress, puberty, exercise. Secretion ↓ with aging, obesity, hyperglycemia, somatostatin, somatomedin"
+      - kind: explain
+        title: "الـ ADH: الحنفية بتاعة الـ collecting duct"
+        text: |-
+          الـ **ADH (vasopressin)** بيتعمل في الـ supraoptic و paraventricular nuclei وبيتخزن في الـ posterior pituitary. ليه receptors اتنين:
+          - ==V2==: في الـ principal cells بتاعة الـ collecting duct، بيدخّل **aquaporins** ← الماية ترجع ← البول يتركز والـ serum osmolality تقل. دي وظيفته الأساسية.
+          - ==V1==: على الأوعية، بيعلّي الضغط. عشان كده الـ vasopressin بيتدي في الـ **septic shock**.
+
+          اللي بيتحكم فيه أساساً الـ **plasma osmolality**، وبعدها الـ hypovolemia. والـ alcohol بيقفله ← polyuria وجفاف.
+        page: 333
+        quote: "Regulates b1ood pressure (V1-receptors) and serum osmolality (V2-receptors). Primary function is serum osmolality regulation"
+      - kind: check
+        question: "Polyuria after head trauma. The ADH level is low and urine concentrates after desmopressin. Diagnosis?"
+        options:
+          - "Central DI"
+          - "Nephrogenic DI"
+          - "Primary polydipsia"
+          - "SIADH"
+        answer: 0
+        why:
+          - "صح: الـ ADH واطي في الـ central DI، والـ desmopressin (ADH analog) بيعالجه."
+          - "في الـ nephrogenic DI الـ ADH طبيعي أو عالي والكلية هي اللي مش سامعة."
+          - "الـ primary polydipsia مش مذكورة هنا، ومش بتفرق مع الـ desmopressin بالشكل ده."
+          - "الـ SIADH عكسه: ADH زيادة وبول مركز."
+        page: 333
+        quote: "ADH level is ↓ in central diabetes insipidus (DI), normal or ↑ in nephrogenic DI. Desmopressin (ADH analog) is a treatment for central DI and nocturnal enuresis."
+      - kind: try
+        items: [endo.L03.003, endo.L03.005, endo.L03.014, endo.L03.019, endo.L03.030]
+    recap:
+      - "CRH ← ACTH؛ GnRH (pulsatile) ← FSH و LH؛ TRH ← TSH و prolactin؛ GHRH ← GH؛ somatostatin و dopamine فرامل."
+      - "الـ prolactin متفرمل بالـ dopamine؛ dopamine antagonists ← galactorrhea، dopamine agonists ← علاج الـ prolactinoma."
+      - "الـ prolactin بيقفل الـ GnRH ← amenorrhea و infertility."
+      - "الـ GH بيشتغل بالـ IGF-1 من الكبد، وهو diabetogenic."
+      - "ADH: V2 للماية (aquaporins)، V1 للضغط؛ واطي في central DI."
+    practice: [endo.L03.001, endo.L03.002, endo.L03.003, endo.L03.004, endo.L03.005, endo.L03.006, endo.L03.007, endo.L03.008, endo.L03.009, endo.L03.010, endo.L03.011, endo.L03.012, endo.L03.013, endo.L03.014, endo.L03.015, endo.L03.016, endo.L03.017, endo.L03.018, endo.L03.019, endo.L03.020, endo.L03.021, endo.L03.022, endo.L03.023, endo.L03.024, endo.L03.025, endo.L03.026, endo.L03.027, endo.L03.028, endo.L03.029, endo.L03.030, endo.L03.031]
+  - id: endo.L03.lesson2
+    title: "الـ thyroid: من الـ iodine للـ 7 B's"
+    hook: "مصنع صغير بياخد iodine ويطلّع T4، والجسم هو اللي بيحوّله لـ T3. اعرف كل خطوة مين بيوقفها وهتحل أسئلة الأدوية"
+    minutes: 9
+    pages: [335, 335]
+    topics: [thyroid-hormones]
+    goals:
+      - "تمشي خطوات صناعة الـ T3 و T4 وتعرف مين بيوقف كل خطوة"
+      - "تعدّ الـ 7 B's"
+      - "تفهم ليه الحامل عندها total T4 عالي وهي طبيعية"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "المصنع جوه الـ follicle"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="en3c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="4" y="30" width="70" height="120" rx="8"/>
+            <text x="20" y="22" class="t-sm t-b">Blood</text>
+            <text x="14" y="70" class="t-sm">I⁻ in</text>
+            <text x="14" y="130" class="t-sm">T4, T3 out</text>
+            <rect class="fg-acc" x="84" y="30" width="130" height="120" rx="8"/>
+            <text x="100" y="22" class="t-sm t-b">Follicular cell</text>
+            <line class="fg-arrow-acc" x1="74" y1="66" x2="214" y2="66" marker-end="url(#en3c)"/>
+            <text x="94" y="86" class="t-sm">TPO: oxidation,</text>
+            <text x="94" y="102" class="t-sm">organification, coupling</text>
+            <line class="fg-arrow-acc" x1="214" y1="126" x2="74" y2="126" marker-end="url(#en3c)"/>
+            <text x="94" y="144" class="t-sm t-mut">endocytosis, proteases</text>
+            <rect class="fg-good" x="224" y="30" width="130" height="120" rx="8"/>
+            <text x="240" y="22" class="t-sm t-b">Follicle lumen</text>
+            <text x="234" y="60" class="t-sm">TG + iodine</text>
+            <text x="234" y="84" class="t-sm">MIT, DIT</text>
+            <text x="234" y="108" class="t-sm t-b">DIT + DIT = T4</text>
+            <text x="234" y="128" class="t-sm t-b">DIT + MIT = T3</text>
+            <text x="4" y="172" class="t-sm t-bad">PTU and methimazole block TPO</text>
+          </svg>
+        caption: "الـ iodide بيدخل الخلية، والـ thyroid peroxidase (TPO) بيعمل 3 حاجات: oxidation و organification و coupling على الـ thyroglobulin. بعدها الخلية بتبلع الـ TG وتقطعه وتطلّع T4 (أغلبه) و T3."
+        alt: "Thyroid follicle: iodide enters the follicular cell from blood; thyroid peroxidase oxidizes and organifies iodine on thyroglobulin in the lumen and couples MIT and DIT; DIT plus DIT gives T4 and DIT plus MIT gives T3; the cell takes back thyroglobulin and releases T4 and T3. PTU and methimazole block thyroid peroxidase."
+        page: 335
+        quote: "Functions of thyroid peroxidase include oxidation, organification of iodine, and coupling of monoiodotyrosine (MIT) and diiodotyrosine (DIT). Inhibited by PTU and methimazole. DIT + DIT = T4. DIT + MIT = T3."
+      - kind: explain
+        title: "الـ T4 هو المنتج، والـ T3 هو الشغّال"
+        text: |-
+          الغدة بتطلّع ==T4== أساساً، والأنسجة بتحوّله لـ **T3** بإنزيم **5′-deiodinase**. الـ T3 هو اللي بيمسك الـ nuclear receptor أقوى.
+
+          الإنزيم ده:
+          - بيتشغّل بالـ **growth hormone**.
+          - بيتوقف بالـ ==glucocorticoids== والـ **β-blockers** والـ **PTU**.
+
+          وفي طريق جانبي بيطلّع **reverse T3**: مالوش أي شغل، والـ glucocorticoids بتزوّده.
+        page: 335
+        quote: "5′-deiodinase converts T4 (the major thyroid product) to T3 in peripheral tissue"
+      - kind: reveal
+        prompt: "ليه الـ PTU بالذات مميز عن الـ methimazole في الـ thyroid storm؟ (من الصفحة دي بس)"
+        answer: "الاتنين بيوقفوا الـ ==thyroid peroxidase== جوه الغدة. بس الـ PTU كمان بيوقف الـ **5′-deiodinase** برّه الغدة، فبيقلل تحويل T4 لـ T3 الشغّال. ضربتين بدل ضربة."
+        page: 335
+        quote: "this pathway is activated by growth hormone and inhibited by glucocorticoids, β-blockers, and propylthiouracil (PTU)."
+      - kind: aside
+        tone: trap
+        text: "الـ ==Wolff-Chaikoff effect==: لو الغدة أخدت iodine كتير فجأة، بتقفل الـ thyroid peroxidase مؤقتاً ← T3 و T4 يقلّوا. حماية ذاتية، مش العكس زي ما ممكن تتوقع."
+        page: 335
+        quote: "Wolff-Chaikoff effect—protective autoregulation; sudden exposure to excess iodine temporarily turns off thyroid peroxidase → ↓ T3/T4 production."
+      - kind: mnemonic
+        word: "BBBBBBB"
+        parts:
+          - { key: "B", text: "Brain maturation" }
+          - { key: "B", text: "Bone growth (مع GH و IGF-1)" }
+          - { key: "B", text: "β-adrenergic: ↑ β1 في القلب ← ↑ CO و HR و SV و contractility" }
+          - { key: "B", text: "BMR ↑ عن طريق ↑ Na+/K+-ATPase ← ↑ O2 consumption و RR و الحرارة" }
+          - { key: "B", text: "Blood sugar ↑ (glycogenolysis و gluconeogenesis)" }
+          - { key: "B", text: "Break down lipids (lipolysis)" }
+          - { key: "B", text: "Babies: surfactant synthesis" }
+        hook: "الـ 7 B's من الكتاب. كله بيقول حاجة واحدة: الـ T3 بيدوس بنزين على الجسم كله."
+        page: 335
+        quote: "T3 functions —7 B’s: Brain maturation Bone growth (synergism with GH and IGF-1)"
+      - kind: reveal
+        prompt: "ليه الـ β-blocker بيريّح مريض الـ thyrotoxicosis بسرعة حتى قبل ما الهرمون يقل؟"
+        answer: "لأن الـ T3 بيكتّر الـ ==β1 receptors== في القلب. الـ β-blocker بيقفل الـ receptors دي فالخفقان والرعشة يهدوا، وكمان بيوقف الـ 5′-deiodinase شوية."
+        page: 335
+        quote: "↑ β1 receptors in heart → ↑ CO, HR, SV, contractility; β-blockers alleviate adrenergic symptoms in thyrotoxicosis"
+      - kind: explain
+        title: "التحكم والـ feedback"
+        text: |-
+          **TRH** ← **TSH** ← الـ follicular cells. وفي **Graves disease** الـ ==TSI== (antibody) بيعمل نفسه TSH ويشغّل الخلايا.
+
+          الـ feedback بيحصل بالـ **free T3/T4**: بيقلل حساسية الـ anterior pituitary للـ TRH، وبيقلل الـ TRH من الـ hypothalamus.
+        page: 335
+        quote: "TRH → ⊕ TSH release → ⊕ follicular cells. Thyroid-stimulating immunoglobulin (TSI) may ⊕ follicular cells in Graves disease."
+      - kind: explain
+        title: "الـ TBG: الشيّال"
+        text: |-
+          معظم الـ T3/T4 في الدم ماسكه **TBG**، والمربوط ده ==inactive==. اللي شغّال بس هو الـ free.
+
+          - ↑ TBG: **الحمل** و **OCPs** (الـ estrogen بيعلّيه) ← total T3/T4 يعلى.
+          - ↓ TBG: **steroids** و **nephrotic syndrome** و **cirrhosis** ← total يقل.
+
+          في الحالتين الـ free بيفضل طبيعي والمريض ==euthyroid==، لأن الغدة بتعوّض.
+
+          ونقطة صغيرة: الـ T3 و T4 lipophilic بس فيهم amino acids مشحونة، فمحتاجين transporters عشان يدخلوا الخلية (facilitated diffusion).
+        page: 335
+        quote: "↑ TBG in pregnancy, OCP use (↑ estrogen → ↑ TBG) → ↑ total T3/T4 ↓ TBG in steroid use, nephrotic syndrome, cirrhosis → ↓ total T3/T4"
+      - kind: aside
+        tone: analogy
+        text: "الـ TBG زي محفظة: الفلوس اللي في المحفظة مش بتشتري حاجة، اللي في إيدك (free) هي اللي بتصرف. الحامل محفظتها اتكبرت (↑ TBG) فشايلة فلوس أكتر (total T4 عالي)، بس اللي في إيدها زي ما هو."
+        page: 335
+        quote: "Thyroxine-binding globulin (TBG) binds most T3/T4 in blood. Bound T3/T4 = inactive."
+      - kind: check
+        question: "A woman with nephrotic syndrome has a low total T4, normal free T4 and normal TSH. Why?"
+        options:
+          - "↓ TBG lowers bound hormone"
+          - "Central hypothyroidism"
+          - "Inhibited 5′-deiodinase"
+          - "Wolff-Chaikoff effect"
+        answer: 0
+        why:
+          - "صح: الـ nephrotic syndrome بيوطّي الـ TBG، فالـ total يقل والـ free طبيعي."
+          - "في الـ central hypothyroidism الـ free T4 نفسه بيقل."
+          - "الـ deiodinase بيأثر على تحويل T4 لـ T3، مش على الـ total مع free طبيعي."
+          - "الـ Wolff-Chaikoff بيقلل الإنتاج نفسه بعد iodine كتير."
+        page: 335
+        quote: "↓ TBG in steroid use, nephrotic syndrome, cirrhosis → ↓ total T3/T4"
+      - kind: try
+        items: [endo.L03.032, endo.L03.034, endo.L03.036, endo.L03.038, endo.L03.041]
+    recap:
+      - "الـ TPO بيعمل oxidation و organification و coupling؛ PTU و methimazole بيوقفوه."
+      - "DIT + DIT = T4، DIT + MIT = T3."
+      - "5′-deiodinase (T4 ← T3) بيتشغل بالـ GH، وبيتوقف بالـ glucocorticoids و β-blockers و PTU."
+      - "Wolff-Chaikoff: iodine كتير فجأة ← ↓ إنتاج."
+      - "الـ 7 B's. والـ free بس هو الشغّال؛ TBG ↑ في الحمل و OCPs، ↓ في steroids و nephrotic و cirrhosis."
+    practice: [endo.L03.032, endo.L03.033, endo.L03.034, endo.L03.035, endo.L03.036, endo.L03.037, endo.L03.038, endo.L03.039, endo.L03.040, endo.L03.041, endo.L03.042, endo.L03.043]
+  - id: endo.L03.lesson3
+    title: "الكالسيوم: الـ PTH بيمسكه ويرمي الـ phosphate"
+    hook: "الـ PTH هرمون واحد بيشتغل على العضم والكلية والأمعاء. وفي سر صغير: الـ pH بيغيّر الـ calcium الشغّال من غير ما الـ total يتحرك"
+    minutes: 9
+    pages: [336, 337]
+    topics: [parathyroid-hormone, calcium-homeostasis, calcitonin]
+    goals:
+      - "تعدّ أفعال الـ PTH في كل عضو"
+      - "تفهم ليه الـ magnesium الواطي جداً بيوقف الـ PTH"
+      - "تفهم ليه الـ alkalosis بيعمل tetany"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ PTH: هدفه واحد"
+        text: |-
+          الـ **PTH** طالع من الـ ==chief cells== بتاعة الـ parathyroid، وهدفه الأساسي إنه يعلّي الـ **free Ca2+** في الدم. بيعمل كده من 3 أماكن:
+          - **العضم**: بيسحب Ca و PO4 (bone resorption).
+          - **الأمعاء**: ↑ امتصاص Ca و PO4 (عن طريق الـ vitamin D).
+          - **الكلية**: ↑ Ca reabsorption في الـ **DCT**، و ↓ PO4 reabsorption في الـ **PCT**، وبيشغّل الـ **1α-hydroxylase** في الـ PCT ← calcitriol.
+
+          الكتاب بيقولك: tri to make D3 in the PCT.
+        page: 336
+        quote: "↑ 1,25-(OH)2D3 (calcitriol) production by activating 1α-hydroxylase in PCT (tri to make D3 in the PCT)"
+      - kind: figure
+        title: "الـ PTH في 3 أعضاء"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="en3d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="130" y="8" width="100" height="34" rx="10"/>
+            <text x="150" y="30" class="t-sm t-b">PTH ↑</text>
+            <line class="fg-arrow-acc" x1="150" y1="42" x2="60" y2="80" marker-end="url(#en3d)"/>
+            <line class="fg-arrow-acc" x1="180" y1="42" x2="180" y2="80" marker-end="url(#en3d)"/>
+            <line class="fg-arrow-acc" x1="210" y1="42" x2="300" y2="80" marker-end="url(#en3d)"/>
+            <rect class="fg-box" x="4" y="82" width="112" height="70" rx="8"/>
+            <text x="14" y="100" class="t-sm t-b">Bone</text>
+            <text x="14" y="118" class="t-sm">RANK-L → osteoclasts</text>
+            <text x="14" y="136" class="t-sm">Ca, PO4 out</text>
+            <rect class="fg-box" x="124" y="82" width="112" height="70" rx="8"/>
+            <text x="134" y="100" class="t-sm t-b">Kidney</text>
+            <text x="134" y="118" class="t-sm">DCT: Ca back</text>
+            <text x="134" y="134" class="t-sm">PCT: PO4 lost</text>
+            <text x="134" y="148" class="t-sm">PCT: 1α-hydroxylase</text>
+            <rect class="fg-box" x="244" y="82" width="112" height="70" rx="8"/>
+            <text x="254" y="100" class="t-sm t-b">Gut</text>
+            <text x="254" y="118" class="t-sm">via calcitriol:</text>
+            <text x="254" y="136" class="t-sm">Ca, PO4 in</text>
+            <rect class="fg-good" x="60" y="160" width="240" height="26" rx="8"/>
+            <text x="72" y="178" class="t-sm t-b">↑ serum Ca, ↓ serum PO4, ↑ urine PO4</text>
+          </svg>
+        caption: "الـ PTH بيجيب Ca من العضم والأمعاء ويمسكه في الكلية، بس بيرمي الـ PO4 في البول. النتيجة: Ca عالي و PO4 واطي في الدم."
+        alt: "PTH acts on bone (RANK-L activates osteoclasts, calcium and phosphate released), kidney (calcium reabsorbed in the DCT, phosphate lost in the PCT, 1-alpha-hydroxylase activated in the PCT) and gut (calcitriol increases calcium and phosphate absorption). Net: high serum calcium, low serum phosphate, high urine phosphate."
+        page: 336
+        quote: "PTH ↑ serum Ca2+ , ↓ serum PO 3– 4 , ↑ urine PO 3– 4 , ↑ urine cAMP"
+      - kind: aside
+        tone: tip
+        text: "الكتاب بيقولك: ==PTH = Phosphate-Trashing Hormone==. فاكر إنه بيمسك الـ Ca بس بيرمي الـ PO4، فالـ PO4 في الدم بيقل وفي البول بيزيد."
+        page: 336
+        quote: "PTH = Phosphate-Trashing Hormone"
+      - kind: reveal
+        prompt: "الـ osteoclast ما عندوش PTH receptor. أمال الـ PTH بيشغّله إزاي؟"
+        answer: "بالواسطة: الـ PTH بيخلي الـ **osteoblasts** والـ osteocytes يطلّعوا ==RANK-L==، وده بيمسك الـ **RANK** على الـ osteoclasts وأسلافهم فيشتغلوا ويكسّروا العضم. (ولو الـ PTH اتدّى متقطع، ممكن يبني عضم كمان.)"
+        page: 336
+        quote: "secreted by osteoblasts and osteocytes; binds RANK (receptor) on osteoclasts and their precursors to stimulate osteoclasts"
+      - kind: explain
+        title: "مين بيتحكم في الـ PTH"
+        text: |-
+          - ↓ Ca2+ ← ↑ PTH (وده ==المتحكم الأساسي==).
+          - ↑ PO4 ← ↑ PTH.
+          - ↓ Mg2+ ← ↑ PTH.
+          - لكن **↓↓ Mg2+** (واطي جداً) ← ==↓ PTH==.
+
+          أسباب الـ Mg الواطي: diarrhea و aminoglycosides و diuretics و alcohol use disorder.
+
+          وفي كمان **PTHrP**: بيشتغل زي الـ PTH، وبيطلع من أورام زي **squamous cell carcinoma of the lung** و **renal cell carcinoma**.
+        page: 336
+        quote: "Common causes of ↓ Mg2+ include diarrhea, aminoglycosides, diuretics, alcohol use disorder"
+      - kind: aside
+        tone: exam
+        text: "مريض alcohol عنده hypocalcemia ومش بتتصلح بالـ calcium؟ شوف الـ ==magnesium==: الـ Mg الواطي جداً بيقفل الـ PTH. صلّح الـ Mg الأول."
+        page: 336
+        quote: "↓↓ serum Mg2+ → ↓ PTH secretion"
+      - kind: explain
+        title: "الـ calcium في الدم 3 أشكال"
+        text: |-
+          - **Free/ionized ~45%**: ده الشغّال، وهو اللي الـ PTH بيحس بيه.
+          - **مربوط بالـ albumin ~40%**
+          - **مربوط بـ anions ~15%**
+
+          الـ Ca2+ والـ ==H+== بيتخانقوا على نفس الأماكن في الـ albumin. فالـ **pH** بيغيّر الـ free Ca والـ PTH، لكن تغيير الـ albumin نفسه ما بيغيّرش الـ PTH.
+        page: 337
+        quote: "Ionized/free Ca2+ is 1° regulator of PTH; changes in pH alter PTH secretion, whereas changes in albumin concentration do not"
+      - kind: order
+        prompt: "رتّب اللي بيحصل في الـ alkalemia (زي hyperventilation)"
+        steps:
+          - "↑ pH (H+ أقل)"
+          - "الـ albumin بيمسك Ca2+ أكتر"
+          - "↓ ionized Ca2+ ← cramps و paresthesias و carpopedal spasm"
+          - "↑ PTH"
+        why: "الـ H+ قل، فأماكنه على الـ albumin فضيت، والـ Ca2+ قعد مكانه. الـ total ما اتغيّرش، بس الـ free قل فالأعصاب بقت متهيجة."
+        page: 337
+        quote: "↑ pH (less H+ ) → albumin binds more Ca2+ → ↓ ionized Ca2+ (eg, cramps, pain, paresthesias, carpopedal spasm) → ↑ PTH"
+      - kind: explain
+        title: "الـ calcitonin: موجود بس مش مهم"
+        text: |-
+          الـ **calcitonin** طالع من الـ ==parafollicular (C) cells== في الـ thyroid. بيطلع لما الـ Ca يعلى، وبيوقف الـ osteoclasts (↓ bone resorption)، يعني عكس الـ PTH.
+
+          بس في الظروف العادية ==مش مهم== في توازن الـ Ca. الكتاب بيقولك: Calcitonin tones down serum Ca2+ levels and keeps it in bones.
+        page: 337
+        quote: "Calcitonin opposes actions of PTH. Not important in normal Ca2+ homeostasis"
+      - kind: check
+        question: "A man with heavy alcohol use has Ca 6.8 mg/dL, very low Mg and a low PTH. What should be corrected first?"
+        options:
+          - "Magnesium"
+          - "Phosphate"
+          - "Calcitonin"
+          - "Albumin"
+        answer: 0
+        why:
+          - "صح: الـ ↓↓ Mg بيقفل الـ PTH، فالـ Ca مش هيتصلح غير لما الـ Mg يرجع."
+          - "الـ PO4 العالي بيعلّي الـ PTH، مش هو السبب هنا."
+          - "الـ calcitonin مش مهم في التوازن العادي."
+          - "الـ albumin ما بيغيّرش الـ PTH."
+        page: 336
+        quote: "↓↓ serum Mg2+ → ↓ PTH secretion"
+      - kind: try
+        items: [endo.L03.045, endo.L03.046, endo.L03.048, endo.L03.049, endo.L03.054]
+    recap:
+      - "الـ PTH من الـ chief cells: ↑ Ca، ↓ PO4 في الدم، ↑ PO4 و cAMP في البول."
+      - "العضم بالـ RANK-L، والكلية: Ca في الـ DCT، PO4 و 1α-hydroxylase في الـ PCT."
+      - "↓ Ca و ↑ PO4 و ↓ Mg ← ↑ PTH؛ ↓↓ Mg ← ↓ PTH."
+      - "PTHrP: squamous cell lung و renal cell carcinoma."
+      - "Alkalemia ← الـ albumin يمسك Ca أكتر ← ↓ free Ca ← tetany."
+      - "الـ calcitonin من الـ C cells، مش مهم في العادي."
+    practice: [endo.L03.044, endo.L03.045, endo.L03.046, endo.L03.047, endo.L03.048, endo.L03.049, endo.L03.050, endo.L03.051, endo.L03.052, endo.L03.053, endo.L03.054, endo.L03.055, endo.L03.056, endo.L03.057]
+  - id: endo.L03.lesson4
+    title: "الـ insulin والـ glucagon: الشبعان والجعان"
+    hook: "هرمونين بيشدّوا الحبل في اتجاهين. والسؤال اللي الامتحان بيحبه: الـ C-peptide بيكشف مين حقن نفسه"
+    minutes: 10
+    pages: [337, 338]
+    topics: [glucagon, insulin]
+    goals:
+      - "تعرف شغل الـ glucagon ومين بيوقفه"
+      - "تفهم ليه الـ C-peptide بيفرّق بين insulin من جوه ومن برّه"
+      - "تفرّق الـ GLUTs وتعدّ BRICK LIPS"
+      - "تمشي خطوات طلوع الـ insulin من الـ β cell"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ glucagon: هرمون الجوع"
+        text: |-
+          الـ **glucagon** طالع من الـ ==α cells==. بيطلع لما السكر يقل (الصيام)، ووظيفته يرجّع السكر:
+          - **glycogenolysis** و **gluconeogenesis**
+          - **lipolysis** و **ketogenesis**
+
+          اللي بيوقفه: **insulin** و **amylin** و **somatostatin** والسكر العالي.
+        page: 337
+        quote: "Promotes glycogenolysis, gluconeogenesis, lipolysis, ketogenesis."
+      - kind: explain
+        title: "الـ insulin بيتعمل إزاي"
+        text: |-
+          في الـ RER بتاع الـ β cell بيتعمل **preproinsulin** ← يتشال الـ presignal ← **proinsulin** يتخزن في granules ← يتقطع ← يطلع ==insulin و C-peptide بكميات متساوية==.
+
+          يعني أي insulin جسمك عمله، معاه C-peptide. الـ insulin اللي في الحقنة ما فيهوش C-peptide.
+
+          والـ insulin بيتشال من الدم بالكبد والكلية الاتنين.
+        page: 338
+        quote: "cleavage of proinsulin → exocytosis of insulin and C-peptide equally."
+      - kind: table
+        title: "مين عامل الـ hypoglycemia؟"
+        columns: ["Cause", "Insulin", "C-peptide"]
+        rows:
+          - ["Exogenous insulin (factitious)", "↑", "Low / absent"]
+          - ["Insulinoma", "↑", "↑"]
+          - ["Insulin secretagogue (sulfonylurea)", "↑", "↑"]
+        hide: [[0, 2], [1, 2], [2, 2]]
+        page: 338
+        quote: "Both insulin and C-peptide are ↑ in endogenous insulin secretion (eg, type 2 DM, insulin secretagogues, insulinoma), whereas exogenous insulin lacks C-peptide (helps differentiate factitious hypoglycemia)."
+      - kind: aside
+        tone: exam
+        text: "ممرضة أو قريب مريض سكر، سكره واطي جداً، الـ insulin عالي والـ ==C-peptide واطي==؟ ده insulin محقون من برّه. لو الـ C-peptide عالي، فكّر insulinoma أو sulfonylurea (اطلب drug screen)."
+        page: 338
+        quote: "whereas exogenous insulin lacks C-peptide (helps differentiate factitious hypoglycemia)."
+      - kind: explain
+        title: "الـ insulin بيعمل إيه"
+        text: |-
+          بيمسك receptor فيه **tyrosine kinase** ويشغّل دخول السكر وكتابة الجينات. كله **anabolic** (تخزين):
+          - ↑ دخول السكر للعضل والدهن، ↑ glycogen، ↑ triglycerides، ↑ protein.
+          - ↑ دخول ==K+== والـ amino acids للخلايا (عشان كده الـ insulin بيعالج الـ hyperkalemia).
+          - ↑ Na+ retention في الكلية.
+          - ↓ glucagon و ↓ lipolysis.
+
+          الـ insulin ما بيعدّيش الـ placenta، بس السكر بيعدّي: أم عندها سكر ← الجنين يعمل ==insulin كتير== جداً.
+        page: 338
+        quote: "Unlike glucose, insulin does not cross placenta. In mothers with diabetes, excess glucose can cross placenta and ↑↑ fetal insulin."
+      - kind: explain
+        title: "الـ GLUTs: مين محتاج إذن"
+        text: |-
+          نسيجين بس محتاجين insulin عشان يدخّلوا السكر: ==العضل والدهن==، عن طريق **GLUT4** (والرياضة كمان بتزوّد الـ GLUT4).
+
+          الباقي ما بيستناش:
+          - **GLUT1**: RBCs و brain و cornea و placenta
+          - **GLUT2** (في الاتجاهين، two-way street): β cells و liver و kidney و GI
+          - **GLUT3**: brain و placenta
+          - **GLUT5** (fructose): spermatocytes و GI
+          - **SGLT1/SGLT2**: kidney و small intestine
+        page: 338
+        quote: "Insulin-dependent glucose transporters: GLUT4: adipose tissue, striated muscle (exercise can also ↑ GLUT4 expression)"
+      - kind: mnemonic
+        word: "BRICKLIPS"
+        parts:
+          - { key: "B", text: "Brain" }
+          - { key: "R", text: "RBCs" }
+          - { key: "I", text: "Intestine" }
+          - { key: "C", text: "Cornea" }
+          - { key: "K", text: "Kidney" }
+          - { key: "L", text: "Liver" }
+          - { key: "I", text: "Islet (β) cells" }
+          - { key: "P", text: "Placenta" }
+          - { key: "S", text: "Spermatocytes" }
+        hook: "BRICK LIPS من الكتاب: دول بياخدوا السكر من غير insulin. منطقي: المخ والـ RBCs ما ينفعش يستنّوا، والـ β cell لازم تحس بالسكر الحقيقي."
+        page: 338
+        quote: "BRICK LIPS (insulin-independent glucose uptake): Brain, RBCs, Intestine, Cornea, Kidney, Liver, Islet (β) cells, Placenta, Spermatocytes."
+      - kind: reveal
+        prompt: "ليه الـ RBCs لازم تاخد glucose بس، والمخ لأ؟"
+        answer: "الـ RBCs ==ما عندهاش mitochondria==، فمش هتعرف تحرق ketones أو دهون؛ الـ glycolysis هو كل اللي عندها. المخ بيفضّل الـ glucose بس في الجوع الطويل ممكن يحرق **ketone bodies**."
+        page: 338
+        quote: "Brain prefers glucose, but may use ketone bodies during starvation. RBCs utilize only glucose, as they lack mitochondria for aerobic metabolism."
+      - kind: order
+        prompt: "رتّب خطوات طلوع الـ insulin من الـ β cell"
+        steps:
+          - "الـ glucose بيدخل من GLUT2"
+          - "الـ metabolism بيعلّي الـ ATP"
+          - "الـ ATP بيقفل الـ K+ channels"
+          - "الـ membrane بيعمل depolarization"
+          - "الـ voltage-gated Ca2+ channels تفتح ← Ca2+ يدخل"
+          - "الـ insulin granules تطلع (exocytosis)"
+        why: "الـ K+ channel ده نفسه هو target الـ ==sulfonylureas==: بتقفله من غير ما السكر يعلى، فالـ insulin يطلع."
+        page: 338
+        quote: "Glucose enters β cells → ↑ ATP generated from glucose metabolism closes K+ channels (target of sulfonylureas) and depolarizes β cell membrane"
+      - kind: explain
+        title: "ليه السكر في البق أحسن من الوريد؟"
+        text: |-
+          نفس كمية السكر لو بلعتها، الـ insulin بيطلع أكتر من لو اتدّت IV. السبب الـ ==incretins== (**GLP-1** و **GIP**): الأمعاء بتطلّعهم بعد الأكل فيخلّوا الـ β cell أحسّ للسكر.
+
+          وكمان الأعصاب: **α2** بيقلل الـ insulin، و **β2** بيزوّده (2 = regulates insulin).
+        page: 338
+        quote: "↑ insulin response with oral vs IV glucose due to incretins"
+      - kind: check
+        question: "Which tissue needs insulin to take up glucose?"
+        options:
+          - "Skeletal muscle"
+          - "Brain"
+          - "Liver"
+          - "Red blood cells"
+          - "β islet cells"
+        answer: 0
+        why:
+          - "صح: العضل والدهن بس بيستخدموا GLUT4 اللي محتاج insulin."
+          - "المخ في BRICK LIPS (GLUT1 و GLUT3)."
+          - "الكبد في BRICK LIPS (GLUT2)."
+          - "الـ RBCs في BRICK LIPS (GLUT1)."
+          - "الـ β cells بتستخدم GLUT2 عشان تحس بالسكر من غير insulin."
+        page: 338
+        quote: "Insulin-dependent glucose transporters: GLUT4: adipose tissue, striated muscle"
+      - kind: try
+        items: [endo.L03.059, endo.L03.062, endo.L03.066, endo.L03.068, endo.L03.071]
+    recap:
+      - "Glucagon من α cells: glycogenolysis و gluconeogenesis و lipolysis و ketogenesis؛ بيوقفه insulin و amylin و somatostatin."
+      - "Insulin و C-peptide بيطلعوا بالتساوي؛ insulin عالي و C-peptide واطي = حقن من برّه."
+      - "GLUT4 (عضل ودهن) بس محتاج insulin؛ الباقي BRICK LIPS."
+      - "Glucose ← ATP ← K+ channel يتقفل (sulfonylureas) ← depolarization ← Ca2+ ← insulin."
+      - "Incretins (GLP-1 و GIP) ← oral أقوى من IV. α2 بيوطّي، β2 بيعلّي."
+    practice: [endo.L03.058, endo.L03.059, endo.L03.060, endo.L03.061, endo.L03.062, endo.L03.063, endo.L03.064, endo.L03.065, endo.L03.066, endo.L03.067, endo.L03.068, endo.L03.069, endo.L03.070, endo.L03.071, endo.L03.072]
+  - id: endo.L03.lesson5
+    title: "الـ CAH بقاعدة واحدة، والـ cortisol بـ A BIG FIB"
+    hook: "3 إنزيمات و 7 خانات في الجدول؟ لأ: قاعدة الرقم 1 بتحلهم كلهم"
+    minutes: 10
+    pages: [339, 340]
+    topics: [adrenal-steroids-and-cah, cortisol]
+    goals:
+      - "تعرف الـ cholesterol بيمشي في أنهي طريق في كل طبقة"
+      - "تتنبأ بأعراض أي نقص إنزيم من مكانه في الطريق"
+      - "تعدّ أفعال الـ cortisol"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "طريق واحد بيتفرّع لـ 3"
+        text: |-
+          كله بيبتدي من **cholesterol** (يدخل بالـ StAR، وده الـ rate-limiting step) ← **pregnenolone**. ومن هنا 3 طرق:
+          - **Glomerulosa**: progesterone ← 11-deoxycorticosterone ← corticosterone ← ==aldosterone== (بالـ aldosterone synthase، تحت أمر الـ angiotensin II).
+          - **Fasciculata**: يدخل الـ ==17α-hydroxylase== ← 17-OH progesterone ← 11-deoxycortisol ← **cortisol**.
+          - **Reticularis**: 17α-hydroxylase تاني ← **DHEA** و androstenedione ← testosterone.
+
+          الإنزيمين اللي في النص: **21-hydroxylase** (بيشتغل في طريق الـ aldosterone والـ cortisol) و **11β-hydroxylase** (آخر خطوة فيهم).
+        page: 339
+        quote: "Cholesterol (via StARa) Pregnenolone Progesterone 11-deoxycorticosterone Corticosterone Aldosterone"
+      - kind: figure
+        title: "الخريطة"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="en3e" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="6" y="16" class="t-sm t-b">Glomerulosa</text>
+            <text x="126" y="16" class="t-sm t-b">Fasciculata</text>
+            <text x="246" y="16" class="t-sm t-b">Reticularis</text>
+            <text x="6" y="40" class="t-sm">Progesterone</text>
+            <text x="126" y="40" class="t-sm">17-OH progesterone</text>
+            <text x="246" y="40" class="t-sm">Androstenedione</text>
+            <line class="fg-arrow-acc" x1="86" y1="36" x2="122" y2="36" marker-end="url(#en3e)"/>
+            <line class="fg-arrow-acc" x1="232" y1="36" x2="244" y2="36" marker-end="url(#en3e)"/>
+            <text x="88" y="30" class="t-sm t-acc">17α</text>
+            <line class="fg-arrow" x1="40" y1="46" x2="40" y2="82" marker-end="url(#en3e)"/>
+            <line class="fg-arrow" x1="160" y1="46" x2="160" y2="82" marker-end="url(#en3e)"/>
+            <rect class="fg-bad" x="56" y="54" width="148" height="22" rx="6"/>
+            <text x="64" y="70" class="t-sm t-b">21-hydroxylase</text>
+            <text x="6" y="98" class="t-sm">11-deoxycorticosterone</text>
+            <text x="166" y="98" class="t-sm">11-deoxycortisol</text>
+            <line class="fg-arrow" x1="40" y1="106" x2="40" y2="140" marker-end="url(#en3e)"/>
+            <line class="fg-arrow" x1="190" y1="106" x2="190" y2="140" marker-end="url(#en3e)"/>
+            <rect class="fg-bad" x="56" y="112" width="148" height="22" rx="6"/>
+            <text x="64" y="128" class="t-sm t-b">11β-hydroxylase</text>
+            <text x="6" y="156" class="t-sm">Corticosterone → Aldosterone</text>
+            <text x="166" y="156" class="t-sm">Cortisol</text>
+            <text x="246" y="98" class="t-sm">Testosterone</text>
+            <line class="fg-arrow" x1="280" y1="46" x2="280" y2="84" marker-end="url(#en3e)"/>
+            <text x="6" y="192" class="t-sm t-mut">Blocked step → substrates pile up and spill into the open branch</text>
+          </svg>
+        caption: "أي إنزيم يقف، اللي قبله بيتراكم ويتحوّل للطريق المفتوح. الـ 21 والـ 11β في طريق الـ aldosterone والـ cortisol، فلو وقفوا الزيادة بتروح للـ androgens. الـ 17α هو باب الـ cortisol والـ androgens، فلو وقف الزيادة بتروح للـ mineralocorticoids."
+        alt: "Adrenal steroid map in three columns: glomerulosa (progesterone to 11-deoxycorticosterone to corticosterone to aldosterone), fasciculata (17-hydroxyprogesterone to 11-deoxycortisol to cortisol), reticularis (androstenedione to testosterone). 17-alpha-hydroxylase opens the second and third columns; 21-hydroxylase and 11-beta-hydroxylase act in the first two."
+        page: 339
+        quote: "Androgens Estrogens, DHT Cholesterol (via StARa) Pregnenolone Progesterone"
+      - kind: explain
+        title: "قاعدة الرقم 1"
+        text: |-
+          الكتاب بيقولك:
+          - الإنزيم اللي ==بيبتدي بـ 1== (11β و 17α) ← **hypertension**.
+          - الإنزيم اللي ==بيخلص بـ 1== (21 و 11β) ← **virilization** في البنات.
+
+          الـ 11β بيبتدي وبيخلص بـ 1، فبيعمل الاتنين.
+
+          الضغط العالي سببه تراكم **11-deoxycorticosterone**، وده mineralocorticoid قوي.
+        page: 339
+        quote: "If deficient enzyme starts with 1, it causes hypertension; if deficient enzyme ends with 1, it causes virilization in females."
+      - kind: table
+        title: "الـ CAH التلاتة"
+        columns: ["Enzyme", "BP", "[K+]", "Sex hormones", "Clue"]
+        rows:
+          - ["17α-hydroxylase", "↑", "↓", "↓", "XY atypical genitalia; XX no 2° sexual development"]
+          - ["21-hydroxylase", "↓", "↑", "↑", "Most common; salt wasting; ↑ 17-OH progesterone, ↑ renin"]
+          - ["11β-hydroxylase", "↑", "↓", "↑", "Severe hypertension, virilization, ↓ renin"]
+        hide: [[0, 1], [0, 3], [1, 1], [1, 2], [2, 1], [2, 3]]
+        page: 339
+        quote: "Most common Presents in infancy (salt wasting) or childhood (precocious puberty) XX: virilization"
+      - kind: reveal
+        prompt: "ليه كل أنواع الـ CAH بتعمل adrenal كبيرة على الجنبين وجلد غامق؟"
+        answer: "لأن الـ ==cortisol بيقل== في الكل، فالـ feedback بيروح ← ↑ ACTH ← الغدة تكبر (hyperplasia). والـ MSH بيطلع مع الـ ACTH من نفس الـ POMC ← hyperpigmentation. وكلهم autosomal recessive."
+        page: 339
+        quote: "All congenital adrenal enzyme deficiencies are autosomal recessive disorders and most are characterized by bilateral adrenal gland enlargement (due to ↑ ACTH stimulation)"
+      - kind: case
+        stem: "بنت عندها أسبوعين، بترجّع ومش بترضع، dehydrated، وعندها clitoromegaly. Na 124 و K 6.9."
+        steps:
+          - question: "Which enzyme is deficient?"
+            options: ["21-hydroxylase", "11β-hydroxylase", "17α-hydroxylase"]
+            answer: 0
+            why: "Salt wasting (↓ aldosterone ← Na واطي و K عالي و ضغط واطي) مع virilization = ==21-hydroxylase==، وده الأشهر. الـ 11β والـ 17α بيعلّوا الضغط."
+          - question: "Which lab is most expected?"
+            options: ["↑ 17-hydroxyprogesterone", "↓ renin activity", "↓ androstenedione"]
+            answer: 0
+            why: "الـ 17-OH progesterone قبل الإنزيم اللي واقف فبيتراكم، والـ renin بيعلى لأن الـ volume ناقص. الـ ↓ renin للـ 11β، والـ ↓ androstenedione للـ 17α."
+        page: 339
+        quote: "↑ renin activity ↑ 17-hydroxy progesterone"
+      - kind: explain
+        title: "الـ cortisol: هرمون الـ stress"
+        text: |-
+          طالع من الـ ==zona fasciculata== وماشي في الدم مربوط بالـ corticosteroid-binding globulin. التحكم: CRH ← ACTH ← cortisol، والـ cortisol الزيادة بيوقف التلاتة.
+
+          الكتاب بيقولك: **Cortisol is A BIG FIB**:
+          - **A**ppetite ↑
+          - **B**lood pressure ↑: بيحوّل NE لـ epinephrine، وبيكتّر الـ α1 receptors (permissive action)، وفي التركيزات العالية بيمسك الـ mineralocorticoid receptor.
+          - **I**nsulin resistance ↑ (diabetogenic)
+          - **G**luconeogenesis و lipolysis و proteolysis ↑
+          - **F**ibroblasts ↓ ← جروح بطيئة، collagen أقل، striae
+          - **I**nflammation و Immunity ↓
+          - **B**one formation ↓ (osteoblasts أقل)
+        page: 340
+        quote: "Cortisol is A BIG FIB."
+      - kind: explain
+        title: "الـ cortisol والمناعة"
+        text: |-
+          - بيوقف الـ leukotrienes والـ prostaglandins.
+          - بيوقف الـ WBC adhesion ← الـ neutrophils تفضل في الدم ← ==neutrophilia==.
+          - بيوقف الـ histamine من الـ mast cells.
+          - ==eosinopenia و lymphopenia==.
+          - بيوقف الـ **IL-2** ← عشان كده الـ steroids من برّه ممكن ترجّع **TB** و **candidiasis**.
+
+          والـ chronic stress ممكن يعمل cortisol عالي طول الوقت و cortisol resistance ومناعة ضعيفة.
+        page: 340
+        quote: "Inhibits production of leukotrienes and prostaglandins Inhibits WBC adhesion → neutrophilia Blocks histamine release from mast cells"
+      - kind: check
+        question: "A patient on long-term prednisone develops reactivation TB. Which cortisol effect explains it?"
+        options:
+          - "Blocks IL-2 production"
+          - "Inhibits WBC adhesion"
+          - "Upregulates α1 receptors"
+          - "Blocks histamine release"
+        answer: 0
+        why:
+          - "صح: الكتاب بيربط إعادة نشاط الـ TB والـ candidiasis بوقف الـ IL-2."
+          - "ده بيعمل neutrophilia، مش TB."
+          - "دي بتعلّي الضغط."
+          - "ده بيقلل الحساسية، مش بيرجّع TB."
+        page: 340
+        quote: "Exogenous glucocorticoids can cause reactivation of TB and candidiasis (blocks IL-2 production)."
+      - kind: try
+        items: [endo.L03.076, endo.L03.077, endo.L03.078, endo.L03.082, endo.L03.084]
+    recap:
+      - "StAR هو الـ rate-limiting step. الـ 17α هو باب الـ cortisol والـ androgens."
+      - "بيبتدي بـ 1 ← hypertension؛ بيخلص بـ 1 ← virilization."
+      - "21-hydroxylase الأشهر: salt wasting و ↑ 17-OH progesterone و ↑ renin."
+      - "كل الـ CAH: autosomal recessive، ↑ ACTH ← adrenals كبيرة و hyperpigmentation."
+      - "Cortisol is A BIG FIB؛ بيوقف IL-2 ← TB و candidiasis."
+    practice: [endo.L03.073, endo.L03.074, endo.L03.075, endo.L03.076, endo.L03.077, endo.L03.078, endo.L03.079, endo.L03.080, endo.L03.081, endo.L03.082, endo.L03.083, endo.L03.084, endo.L03.085, endo.L03.086, endo.L03.087, endo.L03.088]
+  - id: endo.L03.lesson6
+    title: "الجوع والشبع، وكل هرمون بيكلّم الخلية إزاي"
+    hook: "ghrelin بيجوّعك و leptin بيشبّعك. وبعدين جدول الـ second messengers بالـ mnemonics بتاعة الكتاب"
+    minutes: 8
+    pages: [340, 341]
+    topics: [appetite-regulation, signaling-pathways-of-endocrine-hormones, signaling-pathways-of-steroid-hormones]
+    goals:
+      - "تفرّق بين ghrelin و leptin ومكان شغل كل واحد"
+      - "تعرف الـ pathway بتاع أي هرمون من الـ mnemonic"
+      - "تفهم ليه الـ SHBG بيغيّر الـ free testosterone"
+    status: unverified
+    steps:
+      - kind: table
+        title: "هرمونات الأكل"
+        columns: ["Hormone", "From", "Effect", "Hypothalamus area"]
+        rows:
+          - ["Ghrelin", "Stomach", "↑ hunger, ↑ GH", "Lateral (hunger center)"]
+          - ["Leptin", "Adipose tissue", "Satiety, ↓ appetite", "Ventromedial (satiety center)"]
+          - ["Endocannabinoids", "—", "↑ appetite", "Hypothalamus + nucleus accumbens"]
+        hide: [[0, 1], [0, 3], [1, 1], [1, 3]]
+        page: 340
+        quote: "Ghrelin makes you ghrow hunghry. Acts on lateral area of hypothalamus (hunger center) to ↑ appetite."
+      - kind: explain
+        title: "الاتنين ومين بيغيّرهم"
+        text: |-
+          - **Ghrelin** (Ghrelin makes you ghrow hunghry): بيعلى مع ==قلة النوم== والصيام و **Prader-Willi syndrome**.
+          - **Leptin** (Leptin keeps you thin): الدهن بيطلّعه، فالسمين عنده leptin ==عالي== بس جسمه مش سامع (resistance). لو جين الـ leptin نفسه باظ ← سمنة شديدة. وقلة النوم والجوع بيوطّوه.
+
+          والـ **endocannabinoids** بيعلّوا الشهية من الـ hypothalamus والـ nucleus accumbens، وده سبب "the munchies" مع الـ cannabis.
+        page: 340
+        quote: "Sleep deprivation, fasting, or Prader-Willi syndrome → ↑ ghrelin production."
+      - kind: reveal
+        prompt: "ليه السهر بيخليك جعان؟"
+        answer: "قلة النوم بتعمل ضربتين: ==↑ ghrelin== (الجوع) و ==↓ leptin== (الشبع). فالجوع يعلى والفرامل تضعف."
+        page: 340
+        quote: "Sleep deprivation or starvation → ↓ leptin production."
+      - kind: explain
+        title: "الـ second messengers بالـ mnemonics بتاعة الكتاب"
+        text: |-
+          - **cAMP**: ==FLAT ChAMPs CHuGG== = FSH و LH و ACTH و TSH، CRH و hCG و ADH (V2) و MSH و PTH، Calcitonin و Histamine (H2) و Glucagon و GHRH.
+          - **cGMP**: **BAD GraMPa** = BNP و ANP و EDRF (NO). فكّر vasodilation و diuresis.
+          - **IP3**: **GOAT HAG** = GnRH و Oxytocin و ADH (V1) و TRH، Histamine (H1) و Angiotensin II و Gastrin.
+        page: 341
+        quote: "FLAT ChAMPs CHuGG cGMP BNP, ANP, EDRF (NO) BAD GraMPa Think vasodilation and diuresis"
+      - kind: explain
+        title: "والباقيين"
+        text: |-
+          - **Intracellular receptor**: ==PET CAT in TV== = Progesterone و Estrogen و Testosterone، Cortisol و Aldosterone و T3/T4، Vitamin D.
+          - **Receptor tyrosine kinase** (MAP kinase): **Get Found In the MAP** = IGF-1 و FGF و PDGF و EGF و Insulin.
+          - **Nonreceptor tyrosine kinase** (JAK/STAT): **GET a JAKed PIG** = G-CSF و Erythropoietin و Thrombopoietin، Prolactin و Immunomodulators (IL-2 و IL-6 و IFN) و GH. فكّر acidophils و cytokines.
+        page: 341
+        quote: "Progesterone, Estrogen, Testosterone, Cortisol, Aldosterone, T3/T4, Vitamin D PET CAT in TV"
+      - kind: sort
+        prompt: "حط كل هرمون في الـ pathway بتاعه"
+        bins: ["cAMP", "IP3", "JAK/STAT"]
+        cards:
+          - { text: "PTH", bin: 0 }
+          - { text: "Glucagon", bin: 0 }
+          - { text: "ADH (V2)", bin: 0 }
+          - { text: "ADH (V1)", bin: 1 }
+          - { text: "Oxytocin", bin: 1 }
+          - { text: "Angiotensin II", bin: 1 }
+          - { text: "GH", bin: 2 }
+          - { text: "Prolactin", bin: 2 }
+          - { text: "Erythropoietin", bin: 2 }
+        why: "FLAT ChAMPs CHuGG للـ cAMP، و GOAT HAG للـ IP3، و GET a JAKed PIG للـ JAK/STAT. لاحظ الـ ADH: V2 (الكلية) cAMP و V1 (الأوعية) IP3."
+        page: 341
+        quote: "GnRH, Oxytocin, ADH (V1-receptor), TRH, Histamine (H1-receptor), Angiotensin II, Gastrin GOAT HAG"
+      - kind: figure
+        title: "الـ steroid بيدخل لحد النواة"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="en3f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-ink" x="70" y="10" width="280" height="140" rx="16"/>
+            <text x="80" y="28" class="t-sm t-mut">Cytoplasm</text>
+            <rect class="fg-good" x="210" y="40" width="130" height="100" rx="14"/>
+            <text x="222" y="58" class="t-sm t-mut">Nucleus</text>
+            <circle class="fg-dot-acc" cx="30" cy="80" r="10"/>
+            <text x="10" y="110" class="t-sm">H + SHBG</text>
+            <line class="fg-arrow-acc" x1="42" y1="80" x2="110" y2="80" marker-end="url(#en3f)"/>
+            <text x="116" y="76" class="t-sm">H binds R</text>
+            <line class="fg-arrow-acc" x1="160" y1="86" x2="230" y2="96" marker-end="url(#en3f)"/>
+            <text x="220" y="84" class="t-sm">H-R on DNA</text>
+            <text x="220" y="104" class="t-sm">→ mRNA</text>
+            <text x="220" y="124" class="t-sm">→ protein</text>
+          </svg>
+        caption: "الـ steroid بيعدّي الـ membrane لوحده، يمسك الـ receptor في الـ cytoplasm أو النواة، والاتنين يقعدوا على الـ DNA ويغيّروا الجينات. عشان هو lipophilic، بيمشي في الدم مربوط بـ binding globulin."
+        alt: "A steroid hormone carried by a binding globulin enters the cell, binds its receptor in the cytoplasm or nucleus, and the hormone-receptor complex binds DNA to change transcription into mRNA and protein."
+        page: 341
+        quote: "Steroid hormones are lipophilic and therefore must circulate bound to specific binding globulins, which ↑ their solubility."
+      - kind: explain
+        title: "الـ SHBG: نفس فكرة الـ TBG"
+        text: |-
+          الـ **SHBG** شايل الـ testosterone، والمربوط مش شغّال:
+          - راجل عنده ==↑ SHBG== ← free testosterone يقل ← **gynecomastia**.
+          - ست عندها ==↓ SHBG== ← free testosterone يعلى ← **hirsutism**.
+          - الـ estrogen (OCPs و الحمل) بيعلّي الـ SHBG.
+        page: 341
+        quote: "In males, ↑ sex hormone–binding globulin (SHBG) lowers free testosterone → gynecomastia. In females, ↓ SHBG raises free testosterone → hirsutism."
+      - kind: check
+        question: "Which hormone signals through cGMP?"
+        options:
+          - "ANP"
+          - "Insulin"
+          - "Aldosterone"
+          - "TRH"
+        answer: 0
+        why:
+          - "صح: BAD GraMPa = BNP و ANP و EDRF (NO)، كلهم vasodilation و diuresis."
+          - "الـ insulin receptor tyrosine kinase."
+          - "الـ aldosterone intracellular receptor."
+          - "الـ TRH بيستخدم IP3 (GOAT HAG)."
+        page: 341
+        quote: "cGMP BNP, ANP, EDRF (NO) BAD GraMPa"
+      - kind: try
+        items: [endo.L03.089, endo.L03.090, endo.L03.093, endo.L03.097]
+    recap:
+      - "Ghrelin من المعدة ← جوع (lateral hypothalamus)؛ بيعلى مع السهر والصيام و Prader-Willi."
+      - "Leptin من الدهن ← شبع (ventromedial)؛ السمين عنده resistance."
+      - "cAMP = FLAT ChAMPs CHuGG، cGMP = BAD GraMPa، IP3 = GOAT HAG."
+      - "Intracellular = PET CAT in TV، RTK = Get Found In the MAP، JAK/STAT = GET a JAKed PIG."
+      - "↑ SHBG في الراجل ← gynecomastia؛ ↓ SHBG في الست ← hirsutism."
+    practice: [endo.L03.089, endo.L03.090, endo.L03.091, endo.L03.092, endo.L03.093, endo.L03.094, endo.L03.095, endo.L03.096, endo.L03.097, endo.L03.098, endo.L03.099]
