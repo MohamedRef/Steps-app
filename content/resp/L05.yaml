@@ -1,0 +1,438 @@
+schema: steps.content/v1
+lecture: resp.L05
+title: Pharmacology
+book: { chapter: 16, pages: [704, 706] }
+topics:
+  - { id: pseudoephedrine-phenylephrine, title: "Pseudoephedrine, phenylephrine" }
+  - { id: h1-blockers, title: H1-blockers }
+  - { id: dextromethorphan, title: Dextromethorphan }
+  - { id: asthma-drugs, title: Asthma drugs }
+  - { id: triple-therapy-copd, title: Triple therapy for chronic obstructive pulmonary disease }
+  - { id: pcv20-vaccine, title: PCV20 vaccine }
+  - { id: pulmonary-hypertension-drugs, title: Pulmonary hypertension drugs }
+  - { id: sotatercept, title: Sotatercept }
+items:
+  # ---------- p704: decongestants ----------
+  - id: resp.L05.001
+    kind: card
+    topic: pseudoephedrine-phenylephrine
+    front: How do pseudoephedrine and phenylephrine work, and what are they used for?
+    back: They activate α-adrenergic receptors in the nasal mucosa → local vasoconstriction. Used to reduce hyperemia and edema (nasal decongestants) and to open obstructed eustachian tubes.
+    src: { page: 704, quote: "Reduce hyperemia, edema (used as nasal decongestants); open obstructed eustachian tubes." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.002
+    kind: cloze
+    topic: pseudoephedrine-phenylephrine
+    text: "Nasal decongestant adverse effects: {{c1::hypertension}}; rebound congestion ({{c2::rhinitis medicamentosa}}) if used more than {{c3::4-6}} days; tachyphylaxis; CNS stimulation/anxiety (pseudoephedrine)."
+    src: { page: 704, quote: "Hypertension. Rebound congestion (rhinitis medicamentosa) if used more than 4-6 days." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.003
+    kind: mcq
+    topic: pseudoephedrine-phenylephrine
+    stem: >-
+      A 30-year-old man has used a phenylephrine nasal spray several times a day for 2 weeks for a cold. Now his nose
+      feels more blocked than ever, especially when he skips a dose. What is the most likely explanation?
+    options:
+      - Allergic rhinitis from the spray
+      - Rebound congestion (rhinitis medicamentosa)
+      - Nasal polyps from COX inhibition
+      - Sinusitis from H influenzae
+      - Choanal atresia
+    answer: 1
+    why:
+      - "This is not an allergy; it follows prolonged use."
+      - "Right. α-agonist decongestants cause rebound congestion (rhinitis medicamentosa) and tachyphylaxis when used more than 4–6 days."
+      - "Polyps with COX sensitivity are Samter's triad."
+      - "Nothing suggests bacterial sinusitis."
+      - "Choanal atresia is congenital."
+    src: { page: 704, quote: "Rebound congestion (rhinitis medicamentosa) if used more than 4-6 days. Associated with tachyphylaxis." }
+    status: unverified
+  # ---------- p704: H1-blockers ----------
+  - id: resp.L05.004
+    kind: table
+    topic: h1-blockers
+    title: First vs second generation H1-blockers
+    columns: [Generation, Examples, Use, Adverse effects]
+    rows:
+      - [First, "Diphenhydramine, dimenhydrinate, chlorpheniramine, doxylamine (\"-en/-ine\", \"-en/-ate\")", "Allergy, motion sickness, vomiting in pregnancy, sleep aid", "Sedation, antimuscarinic, anti-α-adrenergic"]
+      - [Second, "Loratadine, fexofenadine, desloratadine, cetirizine (\"-adine\")", Allergy, "Similar, but less sedation (less CNS entry)"]
+    blanks: [[0, 2], [0, 3], [1, 1], [1, 3]]
+    src: { page: 704, quote: "Allergy, motion sickness, vomiting in pregnancy, sleep aid." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.005
+    kind: card
+    topic: h1-blockers
+    front: How do H1-blockers act at the receptor?
+    back: Reversible inhibitors of H1 histamine receptors; they are inverse agonists.
+    src: { page: 704, quote: "Also called antihistamines. Reversible inhibitors of H histamine receptors (inverse agonists)." }
+    status: unverified
+  - id: resp.L05.006
+    kind: mcq
+    topic: h1-blockers
+    stem: >-
+      A 75-year-old man takes an over-the-counter sleep aid containing diphenhydramine. Two days later he has urinary
+      retention, dry mouth and confusion. Which property of the drug explains these effects?
+    options:
+      - Antimuscarinic activity
+      - α-adrenergic agonism
+      - NMDA receptor antagonism
+      - Serotonin reuptake inhibition
+      - β2 agonism
+    answer: 0
+    why:
+      - "Right. First-generation H1-blockers cause sedation and antimuscarinic and anti-α-adrenergic effects; urinary retention, dry mouth and confusion are antimuscarinic."
+      - "They are anti-α-adrenergic, not agonists."
+      - "NMDA antagonism is dextromethorphan."
+      - "That is not an H1-blocker action."
+      - "β2 agonists cause tremor and arrhythmia."
+    src: { page: 704, quote: "Sedation, antimuscarinic, anti-α-adrenergic." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p704: dextromethorphan ----------
+  - id: resp.L05.007
+    kind: card
+    topic: dextromethorphan
+    front: What is dextromethorphan, and what happens at high doses?
+    back: An antitussive that antagonizes NMDA glutamate receptors (dissociative, hallucinogenic, ketamine-like effects at high doses). As a synthetic codeine analog, excess use gives a mild opioid effect (naloxone for overdose). Mild abuse potential.
+    src: { page: 704, quote: "Antitussive. NMDA glutamate receptor antagonist" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.008
+    kind: cloze
+    topic: dextromethorphan
+    text: "Dextromethorphan may cause {{c1::serotonin syndrome}} if combined with other serotonergic agents, and may be combined with {{c2::bupropion}} as a fast-acting antidepressant."
+    src: { page: 704, quote: "May cause serotonin syndrome if combined with other serotonergic agents." }
+    status: unverified
+  - id: resp.L05.009
+    kind: mcq
+    topic: dextromethorphan
+    stem: >-
+      A 40-year-old woman taking phenelzine for depression drinks a large amount of cough syrup. Hours later she is
+      agitated and febrile with clonus and diarrhea. Which cough syrup ingredient is responsible?
+    options:
+      - Dextromethorphan
+      - Diphenhydramine
+      - Pseudoephedrine
+      - Guaifenesin
+      - Codeine
+    answer: 0
+    why:
+      - "Right. Dextromethorphan can cause serotonin syndrome when combined with other serotonergic agents such as an MAOI."
+      - "Diphenhydramine causes antimuscarinic toxicity."
+      - "Pseudoephedrine causes hypertension and anxiety."
+      - "Guaifenesin is not discussed in this section."
+      - "Codeine causes opioid effects."
+    src: { page: 704, quote: "May cause serotonin syndrome if combined with other serotonergic agents." }
+    status: unverified
+  # ---------- p704-705: asthma drugs ----------
+  - id: resp.L05.010
+    kind: card
+    topic: asthma-drugs
+    front: Which two pathways mediate bronchoconstriction in asthma, and what does therapy target?
+    back: Inflammatory processes and parasympathetic tone; therapy is directed at both.
+    src: { page: 704, quote: "Bronchoconstriction is mediated by (1) inflammatory processes and (2) parasympathetic tone; therapy is directed at these 2 pathways." }
+    status: unverified
+  - id: resp.L05.011
+    kind: table
+    topic: asthma-drugs
+    title: Asthma drugs
+    columns: [Class, Examples, Mechanism]
+    rows:
+      - [β2-agonists, "Albuterol (short-acting), salmeterol, formoterol", Relax bronchial smooth muscle]
+      - [Glucocorticoids, "Fluticasone, budesonide", "Inhibit cytokine synthesis; inactivate NF-κB"]
+      - [Muscarinic antagonists, "Tiotropium (long acting), ipratropium", Block muscarinic receptors]
+      - [Antileukotrienes, "Montelukast, zafirlukast", Block CysLT1 receptors]
+      - [5-lipoxygenase inhibitor, Zileuton, ↓ Leukotriene synthesis from arachidonic acid]
+      - [Anti-IgE, Omalizumab, Binds unbound IgE; blocks FcεRI binding]
+      - [Methylxanthines, Theophylline, "Inhibits PDE → ↑ cAMP; blocks adenosine"]
+      - [PDE-4 inhibitor, Roflumilast, "↑ cAMP → bronchodilation, ↓ inflammation (COPD)"]
+      - [Chromones, Cromolyn, Prevents mast cell degranulation]
+      - [Anti-IL-5 / IL-5R, "Mepolizumab, reslizumab / benralizumab", Block eosinophil differentiation and survival]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [5, 2], [6, 2], [8, 2], [9, 2]]
+    src: { page: 704, quote: "Fluticasone, budesonide—inhibit the synthesis of virtually all cytokines." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.012
+    kind: card
+    topic: asthma-drugs
+    front: Which β2-agonist is used for acute symptoms, and what are the adverse effects of the class?
+    back: Albuterol (short-acting) for acute symptoms; β2-agonists can cause tremor and arrhythmia.
+    src: { page: 704, quote: "Can cause tremor, arrhythmia. Albuterol is for acute symptoms." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.013
+    kind: card
+    topic: asthma-drugs
+    front: How do inhaled glucocorticoids work, and how is oral thrush prevented?
+    back: They inhibit synthesis of virtually all cytokines by inactivating NF-κB (which induces TNF-α and other mediators); 1st-line for chronic asthma. Use a spacer or rinse the mouth after use.
+    src: { page: 704, quote: "1st-line therapy for chronic asthma. Use a spacer or rinse mouth after use to prevent oral thrush." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.014
+    kind: card
+    topic: asthma-drugs
+    front: When are antileukotrienes especially useful, and what is unique about zileuton?
+    back: Montelukast and zafirlukast (CysLT1 blockers) are especially good for aspirin-induced and exercise-induced asthma. Zileuton is a 5-lipoxygenase inhibitor and is hepatotoxic.
+    src: { page: 704, quote: "Especially good for aspirin induced and exercise-induced asthma." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.015
+    kind: card
+    topic: asthma-drugs
+    front: What is omalizumab, and when is it used?
+    back: Anti-IgE monoclonal that binds mostly unbound serum IgE and blocks binding to FcεRI. For allergic asthma with ↑ IgE resistant to inhaled glucocorticoids and LABAs; also chronic rhinosinusitis with nasal polyps, chronic urticaria and IgE-mediated food allergy.
+    src: { page: 704, quote: "Omalizumab—binds mostly unbound serum IgE and blocks binding to FcεRI." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.016
+    kind: card
+    topic: asthma-drugs
+    front: Why is theophylline of limited use?
+    back: Narrow therapeutic index (cardiotoxicity, neurotoxicity) and metabolism by cytochrome P-450. It likely bronchodilates by inhibiting phosphodiesterase (↑ cAMP) and blocks adenosine.
+    src: { page: 704, quote: "Limited use due to narrow therapeutic index (cardiotoxicity, neurotoxicity); metabolized by cytochrome P-450. Blocks actions of adenosine." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.017
+    kind: card
+    topic: asthma-drugs
+    front: Name the asthma biologics that target the IL-5 and IL-4 pathways.
+    back: Mepolizumab and reslizumab target IL-5; benralizumab targets IL-5 receptor α (maintenance in severe eosinophilic asthma). Dupilumab targets IL-4 receptor α (inhibits IL-4 and IL-13 signaling).
+    src: { page: 705, quote: "Mepolizumab, reslizumab—target IL-5. Benralizumab—targets IL-5 receptor α." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.018
+    kind: cloze
+    topic: asthma-drugs
+    text: "{{c1::Roflumilast}} inhibits PDE-4 → ↑ cAMP → bronchodilation and ↓ airway inflammation; used in {{c2::COPD}} to reduce exacerbations. {{c3::Cromolyn}} prevents mast cell degranulation."
+    src: { page: 705, quote: "Used in COPD to reduce exacerbations." }
+    status: unverified
+  - id: resp.L05.019
+    kind: mcq
+    topic: asthma-drugs
+    stem: >-
+      A 14-year-old boy wheezes only during football practice. His physician adds a daily oral drug that blocks the
+      receptor for cysteinyl leukotrienes. Which drug was prescribed?
+    options:
+      - Zileuton
+      - Montelukast
+      - Cromolyn
+      - Omalizumab
+      - Theophylline
+    answer: 1
+    why:
+      - "Zileuton inhibits 5-lipoxygenase (synthesis), not the receptor, and is hepatotoxic."
+      - "Right. Montelukast blocks CysLT1 receptors and is especially good for exercise-induced and aspirin-induced asthma."
+      - "Cromolyn prevents mast cell degranulation."
+      - "Omalizumab binds IgE."
+      - "Theophylline inhibits phosphodiesterase."
+    src: { page: 704, quote: "Montelukast, zafirlukast—block leukotriene receptors (CysLT1)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.020
+    kind: mcq
+    topic: asthma-drugs
+    stem: >-
+      A 45-year-old man with asthma is well controlled on theophylline. He is started on ciprofloxacin for a urinary tract
+      infection and a week later has palpitations, tremor and a seizure. What explains this?
+    options:
+      - Ciprofloxacin induced theophylline metabolism
+      - Inhibited cytochrome P-450 metabolism raised theophylline levels
+      - Theophylline blocked adenosine in the kidneys
+      - Ciprofloxacin acted as a β2-agonist
+      - Seizure from hypokalemia due to the infection
+    answer: 1
+    why:
+      - "Induction would lower levels, not cause toxicity."
+      - "Right. Theophylline has a narrow therapeutic index and is metabolized by cytochrome P-450; an inhibitor raises levels → cardiotoxicity and neurotoxicity."
+      - "Adenosine blockade is part of its action, not the cause of toxicity here."
+      - "Ciprofloxacin is not a β2-agonist."
+      - "Nothing supports hypokalemia."
+    src: { page: 704, quote: "Limited use due to narrow therapeutic index (cardiotoxicity, neurotoxicity); metabolized by cytochrome P-450." }
+    status: unverified
+  - id: resp.L05.021
+    kind: mcq
+    topic: asthma-drugs
+    stem: >-
+      A 38-year-old woman with severe asthma still has exacerbations on high-dose inhaled glucocorticoids plus a LABA.
+      Her blood eosinophil count is very high. Which drug best targets her disease?
+    options:
+      - Mepolizumab
+      - Zileuton
+      - Ipratropium
+      - Roflumilast
+      - Cromolyn
+    answer: 0
+    why:
+      - "Right. Mepolizumab (anti-IL-5) prevents eosinophil differentiation, maturation, activation and survival; it is maintenance therapy in severe eosinophilic asthma."
+      - "Zileuton is a 5-lipoxygenase inhibitor, not targeted to eosinophils."
+      - "Ipratropium blocks muscarinic receptors."
+      - "Roflumilast is used in COPD."
+      - "Cromolyn is rarely used and not for severe eosinophilic asthma."
+    src: { page: 705, quote: "For maintenance therapy in severe eosinophilic asthma." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p706: triple therapy ----------
+  - id: resp.L05.022
+    kind: card
+    topic: triple-therapy-copd
+    front: What is triple therapy for COPD, and when is it used?
+    back: Inhaled corticosteroid (↓ airway inflammation) + long-acting β2-agonist (bronchodilation) + long-acting muscarinic agent (↓ bronchoconstriction, ↓ mucus), for COPD with persistent dyspnea or exacerbations; ↑ FEV1, ↓ exacerbations. (The book prints "agonists" for the muscarinic drug; the class is the long-acting muscarinic antagonist, as on p704.)
+    src: { page: 706, quote: "for treatment of COPD with persistent dyspnea or exacerbations." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.023
+    kind: mcq
+    topic: triple-therapy-copd
+    stem: >-
+      A 68-year-old woman with COPD has persistent dyspnea and two exacerbations a year despite a LABA. Her physician
+      adds an inhaled corticosteroid and tiotropium. What does tiotropium add?
+    options:
+      - Reduced bronchoconstriction and mucus via muscarinic blockade
+      - Reduced airway inflammation via NF-κB
+      - Leukotriene receptor blockade
+      - PDE-4 inhibition
+      - IgE binding
+    answer: 0
+    why:
+      - "Right. Tiotropium (a long-acting muscarinic antagonist) ↓ bronchoconstriction and ↓ mucus; with an ICS and a LABA it is triple therapy."
+      - "That is the inhaled corticosteroid."
+      - "That is montelukast."
+      - "That is roflumilast."
+      - "That is omalizumab."
+    src: { page: 704, quote: "Tiotropium, ipratropium—competitively block muscarinic receptors, preventing bronchoconstriction. Also used for COPD. Tiotropium is long acting." }
+    status: unverified
+  # ---------- p706: PCV20 ----------
+  - id: resp.L05.024
+    kind: card
+    topic: pcv20-vaccine
+    front: How does the PCV20 vaccine protect?
+    back: A 20-valent pneumococcal conjugate vaccine giving a T-cell–dependent IgG response → ↓ nasopharyngeal colonization; it adds serotypes beyond PCV13/15 for broader protection against lobar pneumonia ("Plenty CoVered in 20").
+    src: { page: 706, quote: "20-valent pneumococcal conjugate vaccine: T-cell–dependent IgG response" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.025
+    kind: mcq
+    topic: pcv20-vaccine
+    stem: >-
+      A 66-year-old man receives the PCV20 vaccine. Compared with a pure polysaccharide vaccine, which feature of its
+      immune response explains why it reduces nasopharyngeal carriage?
+    options:
+      - T-cell–independent IgM response
+      - T-cell–dependent IgG response
+      - Cytotoxic T-cell killing of infected cells
+      - Passive transfer of antibodies
+      - Complement-independent opsonization
+    answer: 1
+    why:
+      - "A T-cell–independent response is the polysaccharide pattern."
+      - "Right. Conjugating to a protein gives a T-cell–dependent IgG response, which reduces nasopharyngeal colonization."
+      - "Pneumococcus is extracellular; this is antibody protection."
+      - "Vaccination is active, not passive."
+      - "This is not the stated mechanism."
+    src: { page: 706, quote: "20-valent pneumococcal conjugate vaccine: T-cell–dependent IgG response" }
+    status: unverified
+  # ---------- p706: pulmonary hypertension drugs ----------
+  - id: resp.L05.026
+    kind: table
+    topic: pulmonary-hypertension-drugs
+    title: Pulmonary hypertension drugs
+    columns: [Class, Mechanism, Notes]
+    rows:
+      - ["Endothelin receptor antagonists (bosentan)", "Block endothelin-1 receptors → ↓ PVR", "Hepatotoxic (monitor LFTs)"]
+      - ["PDE-5 inhibitors (sildenafil)", "↑ cGMP → prolonged NO vasodilation", "Also for erectile dysfunction; contraindicated with nitrates"]
+      - ["Prostacyclin analogs (epoprostenol, iloprost)", "Direct pulmonary and systemic vasodilation; inhibit platelet aggregation", "Flushing, jaw pain"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 2]]
+    src: { page: 706, quote: "Contraindicated when taking nitroglycerin or other nitrates (due to risk of severe hypotension)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.027
+    kind: mcq
+    topic: pulmonary-hypertension-drugs
+    stem: >-
+      A 34-year-old woman with idiopathic pulmonary arterial hypertension starts bosentan. Which test must be monitored?
+    options:
+      - Liver function tests
+      - Serum potassium
+      - Audiometry
+      - Thyroid function
+      - Pulmonary function tests
+    answer: 0
+    why:
+      - "Right. Bosentan, an endothelin receptor antagonist, is hepatotoxic, so LFTs are monitored."
+      - "Potassium is monitored with RAAS blockers and K+-sparing diuretics."
+      - "Audiometry is for loop diuretics and aminoglycosides."
+      - "Thyroid tests are for amiodarone."
+      - "PFTs do not monitor bosentan toxicity."
+    src: { page: 706, quote: "Hepatotoxic (monitor LFTs). Example: bosentan." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.028
+    kind: mcq
+    topic: pulmonary-hypertension-drugs
+    stem: >-
+      A 60-year-old man with pulmonary arterial hypertension takes sildenafil. He develops chest pain and takes a
+      sublingual nitroglycerin tablet from his wife's prescription. What is the danger?
+    options:
+      - Severe hypotension
+      - Hepatotoxicity
+      - Bronchospasm
+      - Hyperkalemia
+      - Jaw pain and flushing
+    answer: 0
+    why:
+      - "Right. PDE-5 inhibitors ↑ cGMP and prolong NO vasodilation; nitrates add more NO, so together they risk severe hypotension."
+      - "Hepatotoxicity is bosentan."
+      - "Bronchospasm is not the risk."
+      - "Hyperkalemia is not a PDE-5 inhibitor effect."
+      - "Flushing and jaw pain are prostacyclin analog effects."
+    src: { page: 706, quote: "Contraindicated when taking nitroglycerin or other nitrates (due to risk of severe hypotension)." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p706: sotatercept ----------
+  - id: resp.L05.029
+    kind: card
+    topic: sotatercept
+    front: What is sotatercept, and what is it used for?
+    back: A fusion protein (activin receptor + IgG Fc) that traps TGF-β family molecules (activins, growth differentiation factors) → ↓ pulmonary arteriolar remodeling; treats PAH (group 1).
+    src: { page: 706, quote: "Treatment for PAH (group 1 pulmonary hypertension)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L05.030
+    kind: enumerate
+    topic: sotatercept
+    prompt: Enumerate the adverse effects of sotatercept (7).
+    points:
+      - ↑ Hb
+      - Thrombocytopenia → ↑ bleeding risk (eg, epistaxis)
+      - Telangiectasia
+      - Hypertension
+      - Headache
+      - Rash
+      - Teratogenic (contraception required)
+    pass: 5
+    src: { page: 706, quote: "telangiectasia, hypertension, headache, rash, teratogenic (contraception required)." }
+    status: unverified
+  - id: resp.L05.031
+    kind: mcq
+    topic: sotatercept
+    stem: >-
+      A 31-year-old woman with group 1 PAH starts a drug that traps activins and growth differentiation factors. Which
+      monitoring is required?
+    options:
+      - Hemoglobin and platelet counts
+      - Liver function tests only
+      - Blood glucose
+      - Audiometry
+      - Serum uric acid
+    answer: 0
+    why:
+      - "Right. Sotatercept raises Hb and causes thrombocytopenia (bleeding, eg, epistaxis), so Hb and platelets are monitored; it is also teratogenic."
+      - "LFT monitoring is for bosentan."
+      - "Glucose is not listed."
+      - "Audiometry is not relevant."
+      - "Uric acid is not listed."
+    src: { page: 706, quote: "Fusion protein (activin receptor paired with the Fc portion of IgG) that binds/traps TGF-β molecules (activins and growth differentiation factors)" }
+    status: unverified
