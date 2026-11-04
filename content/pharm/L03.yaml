@@ -1,0 +1,887 @@
+schema: steps.content/v1
+lecture: pharm.L03
+title: Toxicities and adverse effects
+book: { chapter: 5, pages: [246, 251] }
+topics:
+  - { id: ingested-seafood-toxins, title: Ingested seafood toxins }
+  - { id: plant-toxins, title: Plant toxins }
+  - { id: specific-toxicity-treatments, title: Specific toxicity treatments }
+  - { id: drug-reactions-cardiovascular, title: Drug reactions—cardiovascular }
+  - { id: drug-reactions-endocrine-reproductive, title: Drug reactions—endocrine/reproductive }
+  - { id: drug-reactions-gastrointestinal, title: Drug reactions—gastrointestinal }
+  - { id: drug-reactions-hematologic, title: Drug reactions—hematologic }
+  - { id: drug-reactions-musculoskeletal-skin, title: Drug reactions—musculoskeletal/skin/connective tissue }
+  - { id: drug-reactions-neurologic, title: Drug reactions—neurologic }
+  - { id: drug-reactions-renal-genitourinary, title: Drug reactions—renal/genitourinary }
+  - { id: drug-reactions-respiratory, title: Drug reactions—respiratory }
+  - { id: drug-reactions-multiorgan, title: Drug reactions—multiorgan }
+  - { id: drugs-affecting-pupil-size, title: Drugs affecting pupil size }
+  - { id: cytochrome-p450-interactions, title: Cytochrome P-450 interactions }
+  - { id: sulfa-drugs, title: Sulfa drugs }
+items:
+  # ---------- p246: seafood toxins ----------
+  - id: pharm.L03.001
+    kind: table
+    topic: ingested-seafood-toxins
+    title: Ingested seafood toxins
+    columns: [Toxin, Source, Action, Treatment]
+    rows:
+      - [Histamine (scombroid), "Spoiled dark-meat fish (tuna, mahi-mahi, mackerel, bonito)", "Bacterial histidine decarboxylase converts histidine → histamine", "Antihistamines; albuterol ± epinephrine"]
+      - [Tetrodotoxin, Pufferfish, "Binds fast voltage-gated Na+ channels in nerve, preventing depolarization", Supportive]
+      - [Ciguatoxin, "Reef fish (barracuda, snapper, moray eel)", "Opens Na+ channels, causing depolarization", Supportive]
+    blanks: [[0, 1], [1, 1], [2, 1], [0, 2], [1, 2], [2, 2], [0, 3]]
+    src: { page: 246, quote: "Tetrodotoxin Pufferfish Binds fast voltage-gated Na+ channels in nerve tissue, preventing depolarization" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.002
+    kind: card
+    topic: ingested-seafood-toxins
+    front: What are the symptoms of scombroid poisoning, and what is it often mistaken for?
+    back: It mimics anaphylaxis (oral burning, facial flushing, erythema, urticaria, itching; may progress to bronchospasm, angioedema, hypotension) and is frequently misdiagnosed as fish allergy.
+    src: { page: 246, quote: "Frequently misdiagnosed as fish allergy Mimics anaphylaxis: oral burning sensation, facial flushing, erythema, urticaria, itching; may progress to bronchospasm, angioedema, hypotension" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.003
+    kind: card
+    topic: ingested-seafood-toxins
+    front: Which seafood toxin causes reversal of hot and cold sensations, and what are its other features?
+    back: "Ciguatoxin (reef fish): nausea, vomiting, diarrhea, perioral numbness, reversal of hot and cold sensations, bradycardia, heart block, hypotension."
+    src: { page: 246, quote: "Nausea, vomiting, diarrhea, perioral numbness, reversal of hot and cold sensations, bradycardia, heart block, hypotension" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.004
+    kind: mcq
+    topic: ingested-seafood-toxins
+    stem: >-
+      A 30-year-old man comes to the emergency department 2 hours after eating barracuda on a Caribbean
+      holiday. He has vomiting, diarrhea and numbness around his mouth, and says that cold drinks feel
+      hot. His heart rate is 48/min. What is the mechanism of the toxin responsible?
+    options:
+      - It opens Na+ channels, causing depolarization
+      - It blocks fast voltage-gated Na+ channels, preventing depolarization
+      - Bacterial histidine decarboxylase converts histidine to histamine
+      - It inhibits Na+/K+-ATPase
+      - It antagonizes muscarinic ACh receptors
+    answer: 0
+    why:
+      - "Right. Ciguatoxin from reef fish (barracuda, snapper, moray eel) opens Na+ channels; reversal of hot and cold sensations and bradycardia are classic."
+      - "Blocking Na+ channels is tetrodotoxin from pufferfish, causing paresthesias, weakness and loss of reflexes."
+      - "Histamine (scombroid) poisoning comes from spoiled dark-meat fish and mimics anaphylaxis."
+      - "Na+/K+-ATPase inhibition is the action of cardiac glycosides (foxglove, oleander)."
+      - "Muscarinic antagonism is the action of atropine/jimsonweed: dry skin and mydriasis, not hot-cold reversal."
+    src: { page: 246, quote: "Ciguatoxin Reef fish such as barracuda, snapper, and moray eel Opens Na+ channels, causing depolarization" }
+    status: unverified
+  # ---------- p246: plant toxins ----------
+  - id: pharm.L03.005
+    kind: table
+    topic: plant-toxins
+    title: Plant toxins
+    columns: [Toxin, Source, Action, Treatment]
+    rows:
+      - [Grayanotoxin, "Rhododendron nectar (mad honey)", "Opens voltage-gated Na+ channels → prolonged depolarization → ↑ vagal tone", "Supportive (IV fluids, atropine if severe bradycardia)"]
+      - [Aconitine alkaloids, "Aconitum (monkshood, wolfsbane)", "Activates Na+ channels (site 2) → delayed inactivation → ventricular arrhythmias", "Supportive; lidocaine or amiodarone; avoid class IA/III"]
+      - [Cardiac glycosides, "Digitalis purpurea, Nerium oleander", "Inhibits Na+/K+-ATPase → ↑ Ca2+ → ↑ vagal tone, ectopy", "Digoxin-specific Fab, atropine, correct K+/Mg2+"]
+      - [Coniine, Poison hemlock (Conium maculatum), "Nicotinic agonist/antagonist → depolarizing blockade → flaccid paralysis", "Respiratory support; activated charcoal early"]
+      - [Atropine/scopolamine, "Atropa belladonna, Datura stramonium (jimsonweed)", Muscarinic antagonist, "Physostigmine, cooling, fluids"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [2, 3], [4, 3]]
+    src: { page: 246, quote: "Grayanotoxin Rhododendron nectar (“mad honey”) Opens voltage-gated Na+ channels → prolonged depolarization → ↑ vagal tone" }
+    status: unverified
+  - id: pharm.L03.006
+    kind: card
+    topic: plant-toxins
+    front: What are the symptoms of cardiac glycoside (foxglove, oleander) poisoning?
+    back: GI upset, visual disturbances (xanthopsia), AV block, arrhythmias.
+    src: { page: 246, quote: "GI upset, visual disturbances (xanthopsia), AV block, arrhythmias" }
+    status: unverified
+  - id: pharm.L03.007
+    kind: card
+    topic: plant-toxins
+    front: How does poison hemlock (coniine) present?
+    back: Ascending paralysis, respiratory failure and salivation, from depolarizing nicotinic blockade → flaccid paralysis.
+    src: { page: 246, quote: "Ascending paralysis, respiratory failure, salivation" }
+    status: unverified
+  - id: pharm.L03.008
+    kind: mcq
+    topic: plant-toxins
+    stem: >-
+      A 42-year-old man collapses after drinking an herbal tincture made from monkshood. He has tingling
+      of his face and limbs, a BP of 80/50 mm Hg, and ECG shows polymorphic ventricular tachycardia.
+      Which antiarrhythmic approach does the book recommend?
+    options:
+      - Lidocaine or amiodarone, avoiding class IA and III agents
+      - Procainamide
+      - Sotalol
+      - Digoxin-specific Fab fragments
+      - Physostigmine
+    answer: 0
+    why:
+      - "Right. Aconitine activates Na+ channels (site 2) with sustained Na+ influx → ventricular arrhythmias; treat with lidocaine or amiodarone and avoid class IA/III."
+      - "Procainamide is class IA, which the book says to avoid."
+      - "Sotalol is a class III agent, also to avoid."
+      - "Digoxin Fab treats cardiac glycoside (foxglove, oleander) poisoning."
+      - "Physostigmine treats anticholinergic (jimsonweed) toxicity."
+    src: { page: 246, quote: "Supportive, lidocaine or amiodarone for arrhythmia; avoid class IA/III agents" }
+    status: unverified
+  # ---------- p247: specific toxicity treatments ----------
+  - id: pharm.L03.009
+    kind: table
+    topic: specific-toxicity-treatments
+    title: Specific toxicity treatments (1)
+    columns: [Toxin, Treatment]
+    rows:
+      - [Acetaminophen, N-acetylcysteine (replenishes glutathione)]
+      - ["AChE inhibitors, organophosphates", Atropine > pralidoxime]
+      - ["Antimuscarinic, anticholinergic agents", "Physostigmine (crosses BBB), control hyperthermia"]
+      - [Arsenic, "Dimercaprol, succimer"]
+      - [Benzodiazepines, Flumazenil]
+      - [β-blockers, "Atropine, glucagon, saline"]
+      - [Carbon monoxide, "100% O2, hyperbaric O2"]
+      - [Copper, "Penicillamine (Pennycillamine), trientine (3 copper pennies)"]
+      - [Cyanide, "Hydroxocobalamin, nitrites + sodium thiosulfate"]
+      - [Dabigatran, Idarucizumab]
+      - [Digoxin, Digoxin-specific antibody fragments]
+      - ["Direct factor Xa inhibitors (eg, apixaban)", Andexanet alfa]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1], [11, 1]]
+    src: { page: 247, quote: "Cyanide Hydroxocobalamin, nitrites + sodium thiosulfate Dabigatran Idarucizumab Digoxin Digoxin-specific antibody fragments" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.010
+    kind: table
+    topic: specific-toxicity-treatments
+    title: Specific toxicity treatments (2)
+    columns: [Toxin, Treatment]
+    rows:
+      - [Heparin, Protamine sulfate]
+      - [Iron (Fe), "Deferoxamine, deferasirox, deferiprone"]
+      - [Lead, "Penicillamine, calcium disodium EDTA, dimercaprol, succimer (PEDS patients lead antidote)"]
+      - [Mercury, "Dimercaprol, succimer"]
+      - ["Methanol, ethylene glycol", "Fomepizole > ethanol, dialysis"]
+      - [Methemoglobin, "Methylene blue, vitamin C"]
+      - [Methotrexate, Leucovorin]
+      - [Opioids, Naloxone]
+      - [Salicylates, "NaHCO3 (alkalinizes urine), dialysis"]
+      - [TCAs, NaHCO3 (stabilizes cardiac cell membrane)]
+      - [Warfarin, "Vitamin K (delayed); PCC/FFP (immediate)"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1]]
+    src: { page: 247, quote: "Methanol, ethylene glycol (antifreeze) Fomepizole (the foe of methanol) > ethanol, dialysis Methemoglobin Methylene blue, vitamin C (reducing agent) Methotrexate Leucovorin" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.011
+    kind: card
+    topic: specific-toxicity-treatments
+    front: How does N-acetylcysteine treat acetaminophen toxicity?
+    back: It replenishes glutathione.
+    src: { page: 247, quote: "Acetaminophen N-acetylcysteine (replenishes glutathione)" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.012
+    kind: enumerate
+    topic: specific-toxicity-treatments
+    prompt: Enumerate the antidotes for lead poisoning (4).
+    points:
+      - Penicillamine
+      - Calcium disodium EDTA
+      - Dimercaprol
+      - Succimer
+    pass: 4
+    hook: "الكتاب بيقول PEDS patients lead antidote: Penicillamine و EDTA و Dimercaprol و Succimer."
+    src: { page: 247, quote: "Lead Penicillamine, calcium disodium EDTA, Dimercaprol, Succimer, (PEDS patients lead antidote)" }
+    status: unverified
+  - id: pharm.L03.013
+    kind: card
+    topic: specific-toxicity-treatments
+    front: How do you reverse warfarin quickly and slowly?
+    back: "Immediate: PCC (prothrombin complex concentrate) or FFP. Delayed: vitamin K."
+    src: { page: 247, quote: "Warfarin Vitamin K (delayed effect), PCC (prothrombin complex concentrate)/FFP (immediate effect)" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.014
+    kind: mcq
+    topic: specific-toxicity-treatments
+    stem: >-
+      A 3-year-old boy is brought in after his mother found him with an open bottle of her prenatal
+      vitamins. He has vomited twice with blood, has abdominal pain, and an abdominal x-ray shows
+      radiopaque tablets in the stomach. Which agent is the most appropriate antidote?
+    options:
+      - Deferoxamine
+      - Succimer
+      - N-acetylcysteine
+      - Methylene blue
+      - Penicillamine
+    answer: 0
+    why:
+      - "Right. Iron (Fe) poisoning is treated with deferoxamine (or deferasirox, deferiprone)."
+      - "Succimer treats lead, arsenic and mercury."
+      - "N-acetylcysteine treats acetaminophen toxicity."
+      - "Methylene blue treats methemoglobinemia."
+      - "Penicillamine treats copper and lead."
+    src: { page: 247, quote: "Iron (Fe) Deferoxamine, deferasirox, deferiprone" }
+    status: unverified
+  # ---------- p247: cardiovascular ----------
+  - id: pharm.L03.015
+    kind: enumerate
+    topic: drug-reactions-cardiovascular
+    prompt: Enumerate the drugs that cause coronary vasospasm (CASE, 4).
+    points:
+      - Cocaine
+      - Amphetamines
+      - Sumatriptan
+      - Ergot alkaloids
+    pass: 4
+    hook: "الكتاب بيقول CASE: Cocaine و Amphetamines و Sumatriptan و Ergot alkaloids."
+    src: { page: 247, quote: "Coronary vasospasm Cocaine, Amphetamines, Sumatriptan, Ergot alkaloids (CASE)" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.016
+    kind: enumerate
+    topic: drug-reactions-cardiovascular
+    prompt: Enumerate the drugs that cause cutaneous flushing (VANCEN, 6).
+    points:
+      - Vancomycin
+      - Adenosine
+      - Niacin
+      - Ca2+ channel blockers
+      - Echinocandins
+      - Nitrates
+    pass: 6
+    hook: "الكتاب بيقول flushed from VANCEN (dancing): Vancomycin و Adenosine و Niacin و CCBs و Echinocandins و Nitrates."
+    src: { page: 247, quote: "Cutaneous flushing Vancomycin, Adenosine, Niacin, Ca2+ channel blockers, Echinocandins, Nitrates (flushed from VANCEN [dancing])" }
+    status: unverified
+  - id: pharm.L03.017
+    kind: card
+    topic: drug-reactions-cardiovascular
+    front: What causes vancomycin infusion reaction (formerly red man syndrome), and how is it managed?
+    back: Histamine release → widespread pruritic erythema; infusion rate–dependent. Manage with a slower infusion rate and diphenhydramine.
+    src: { page: 247, quote: "Vancomycin infusion reaction (formerly called red man syndrome)—histamine release → widespread pruritic erythema. Infusion rate–dependent. Manage with slower infusion rate, diphenhydramine." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.018
+    kind: card
+    topic: drug-reactions-cardiovascular
+    front: Which drugs cause dilated cardiomyopathy, and how is anthracycline cardiotoxicity prevented?
+    back: Alcohol, anthracyclines (doxorubicin, daunorubicin; prevent with dexrazoxane) and trastuzumab.
+    src: { page: 247, quote: "Alcohol, anthracycline (eg, doxorubicin, daunorubicin; prevent with dexrazoxane), trastuzumab" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.019
+    kind: cloze
+    topic: drug-reactions-cardiovascular
+    text: Peripheral edema is caused by {{c1::dihydropyridine Ca2+ channel blockers}} (eg, amlodipine).
+    src: { page: 247, quote: "Peripheral edema Dihydropyridine Ca2+ channel blockers (eg, amlodipine)" }
+    status: unverified
+  - id: pharm.L03.020
+    kind: enumerate
+    topic: drug-reactions-cardiovascular
+    prompt: Enumerate the QT-prolonging drug groups that cause torsades de pointes (ABCDEF + methadone, 7).
+    points:
+      - Methadone
+      - antiArrhythmics (class IA, III)
+      - antiBiotics (macrolides, fluoroquinolones)
+      - anti"C"ychotics (ziprasidone)
+      - antiDepressants (TCAs)
+      - antiEmetics (ondansetron)
+      - antiFungals (fluconazole)
+    pass: 6
+    hook: "الكتاب بيقول Memorize your ABCDEF: antiArrhythmics و antiBiotics و antiCychotics و antiDepressants و antiEmetics و antiFungals، والـ M = Methadone."
+    src: { page: 247, quote: "Associated with agents that prolong QT interval: Methadone, antiArrhythmics (class IA, III), antiBiotics (eg, macrolides, fluoroquinolones)" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.021
+    kind: mcq
+    topic: drug-reactions-cardiovascular
+    stem: >-
+      A 34-year-old woman in a methadone maintenance program is admitted with community-acquired
+      pneumonia and started on azithromycin. On day 2 she has nausea and is given ondansetron. That
+      evening she has a syncopal episode; telemetry shows polymorphic ventricular tachycardia with a
+      twisting QRS axis. What is the shared mechanism of her three medications that caused this?
+    options:
+      - Prolongation of the QT interval
+      - Coronary vasospasm
+      - Inhibition of Na+/K+-ATPase
+      - Dilated cardiomyopathy
+      - Histamine release
+    answer: 0
+    why:
+      - "Right. Methadone, macrolides (antiBiotics) and ondansetron (antiEmetics) all prolong QT, causing torsades de pointes."
+      - "Coronary vasospasm is from cocaine, amphetamines, sumatriptan and ergots (CASE)."
+      - "Na+/K+-ATPase inhibition is digoxin's mechanism."
+      - "Dilated cardiomyopathy is from alcohol, anthracyclines and trastuzumab."
+      - "Histamine release is vancomycin infusion reaction."
+    src: { page: 247, quote: "Torsades de pointes Associated with agents that prolong QT interval: Methadone, antiArrhythmics (class IA, III), antiBiotics (eg, macrolides, fluoroquinolones)" }
+    status: unverified
+  # ---------- p248: endocrine/reproductive ----------
+  - id: pharm.L03.022
+    kind: card
+    topic: drug-reactions-endocrine-reproductive
+    front: What causes drug-induced adrenocortical insufficiency, and what does abrupt withdrawal do?
+    back: HPA suppression from chronic exogenous glucocorticoids; abrupt withdrawal leads to adrenal crisis.
+    src: { page: 248, quote: "HPA suppression secondary to chronic exogenous glucocorticoid use Abrupt withdrawal of exogenous glucocorticoids leads to adrenal crisis" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.023
+    kind: table
+    topic: drug-reactions-endocrine-reproductive
+    title: Drug reactions—endocrine/reproductive
+    columns: [Reaction, Causal agents]
+    rows:
+      - [Diabetes insipidus, "Lithium, demeclocycline"]
+      - [Gynecomastia, "Ketoconazole, cimetidine, spironolactone, GnRH analogs/antagonists, androgen receptor inhibitors, 5α-reductase inhibitors"]
+      - [Hot flashes, "SERMs (tamoxifen, clomiphene, raloxifene)"]
+      - [Hyperglycemia, "Tacrolimus, protease inhibitors, niacin, HCTZ, glucocorticoids"]
+      - [Hyperprolactinemia, "Typical and atypical antipsychotics, metoclopramide, methyldopa, verapamil"]
+      - [Hyperthyroidism, "Amiodarone, iodine, lithium"]
+      - [Hypothyroidism, "Amiodarone, lithium"]
+      - [SIADH, "Carbamazepine, cyclophosphamide, SSRIs"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 248, quote: "SIADH Carbamazepine, Cyclophosphamide, SSRIs Can’t Concentrate Serum Sodium" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.024
+    kind: card
+    topic: drug-reactions-endocrine-reproductive
+    front: How does drug-induced hyperprolactinemia present?
+    back: With hypogonadism (eg, infertility, amenorrhea, erectile dysfunction) and galactorrhea.
+    src: { page: 248, quote: "Presents with hypogonadism (eg, infertility, amenorrhea, erectile dysfunction) and galactorrhea" }
+    status: unverified
+  - id: pharm.L03.025
+    kind: mcq
+    topic: drug-reactions-endocrine-reproductive
+    stem: >-
+      A 38-year-old man with bipolar disorder controlled for years on a mood stabilizer has passed large
+      volumes of dilute urine and been very thirsty for 3 months. Serum sodium is 146 mEq/L; urine
+      osmolality stays low after water deprivation and does not rise after desmopressin. Which other
+      drug can cause the same disorder?
+    options:
+      - Demeclocycline
+      - Carbamazepine
+      - Cyclophosphamide
+      - Tacrolimus
+      - Metoclopramide
+    answer: 0
+    why:
+      - "Right. Lithium and demeclocycline cause (nephrogenic) diabetes insipidus."
+      - "Carbamazepine causes SIADH, the opposite problem."
+      - "Cyclophosphamide also causes SIADH (Can't Concentrate Serum Sodium)."
+      - "Tacrolimus causes hyperglycemia."
+      - "Metoclopramide causes hyperprolactinemia."
+    src: { page: 248, quote: "Diabetes insipidus Lithium, demeclocycline" }
+    status: unverified
+  # ---------- p248: gastrointestinal ----------
+  - id: pharm.L03.026
+    kind: table
+    topic: drug-reactions-gastrointestinal
+    title: Drug reactions—gastrointestinal
+    columns: [Reaction, Causal agents]
+    rows:
+      - [Acute cholestatic hepatitis, Macrolides (erythromycin)]
+      - [Focal to massive hepatic necrosis, "Amanita phalloides (death cap), valproate, acetaminophen"]
+      - [Hepatitis, "Isoniazid, rifampin, pyrazinamide, statins, fibrates"]
+      - [Pancreatitis, "Diuretics (furosemide, HCTZ), glucocorticoids, alcohol, valproate, azathioprine"]
+      - [Medication-induced esophagitis, "Potassium chloride, NSAIDs, bisphosphonates, ferrous sulfate, tetracyclines"]
+      - [Pseudomembranous colitis, "Ampicillin, cephalosporins, clindamycin, fluoroquinolones, PPIs"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 248, quote: "Pancreatitis Diuretics (eg, furosemide, HCTZ), glucocorticoids, alcohol, valproate, azathioprine Drugs generate a violent abdominal distress" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.027
+    kind: card
+    topic: drug-reactions-gastrointestinal
+    front: Name drugs that cause constipation.
+    back: Antimuscarinics, antipsychotics, opioids, non-dihydropyridine CCBs, ranolazine, amiodarone, aluminum hydroxide, loperamide, 5HT3 antagonists (ondansetron), vincristine.
+    src: { page: 248, quote: "Antimuscarinics (eg, atropine), antipsychotics, opioids, non-dihydropyridine CCBs, ranolazine, amiodarone, aluminum hydroxide, loperamide, 5HT3 receptor antagonist (ondansetron), vincristine" }
+    status: unverified
+  - id: pharm.L03.028
+    kind: card
+    topic: drug-reactions-gastrointestinal
+    front: Name drugs that cause diarrhea.
+    back: Acamprosate, antidiabetics (acarbose, metformin, pramlintide), colchicine, cholinesterase inhibitors, lipid-lowering agents (ezetimibe, orlistat), macrolides, SSRIs, chemotherapy (irinotecan).
+    src: { page: 248, quote: "Acamprosate, antidiabetic agents (acarbose, metformin, pramlintide), colchicine, cholinesterase inhibitors, lipid-lowering agents (eg, ezetimibe, orlistat), macrolides (eg, erythromycin), SSRIs, chemotherapy (eg, irinotecan)" }
+    status: unverified
+  - id: pharm.L03.029
+    kind: card
+    topic: drug-reactions-gastrointestinal
+    front: Where does medication-induced esophagitis usually occur, and how is it minimized?
+    back: At anatomic sites of esophageal narrowing (eg, near the aortic arch); minimized with upright posture and adequate water.
+    src: { page: 248, quote: "Usually occurs at anatomic sites of esophageal narrowing (eg, near level of aortic arch); caustic effect minimized with upright posture and adequate water ingestion" }
+    status: unverified
+  - id: pharm.L03.030
+    kind: mcq
+    topic: drug-reactions-gastrointestinal
+    stem: >-
+      A 68-year-old woman with osteoporosis starts a weekly oral alendronate tablet, which she takes at
+      bedtime with a sip of water. Two weeks later she has severe pain on swallowing behind the sternum.
+      Endoscopy shows a discrete ulcer in the mid-esophagus. Which advice would most likely have
+      prevented this?
+    options:
+      - Take the tablet upright with a full glass of water
+      - Take the tablet with food
+      - Take it with a proton pump inhibitor
+      - Switch to a daily tablet at the same time
+      - Take it lying down to slow absorption
+    answer: 0
+    why:
+      - "Right. Pill esophagitis (bisphosphonates, KCl, NSAIDs, ferrous sulfate, tetracyclines) occurs at narrowings near the aortic arch; upright posture and adequate water minimize it."
+      - "Food does not prevent the caustic contact and reduces bisphosphonate absorption."
+      - "The injury is local caustic contact, not acid; the book's prevention is posture and water."
+      - "A daily tablet taken the same way would carry the same risk."
+      - "Lying down keeps the pill in the esophagus longer."
+    src: { page: 248, quote: "caustic effect minimized with upright posture and adequate water ingestion" }
+    status: unverified
+  # ---------- p249: hematologic ----------
+  - id: pharm.L03.031
+    kind: table
+    topic: drug-reactions-hematologic
+    title: Drug reactions—hematologic
+    columns: [Reaction, Causal agents]
+    rows:
+      - [Agranulocytosis, "Dapsone, clozapine, carbamazepine, propylthiouracil, methimazole, ganciclovir, colchicine"]
+      - [Aplastic anemia, "Carbamazepine, methimazole, NSAIDs, benzene, chloramphenicol, propylthiouracil"]
+      - [Direct Coombs ⊕ hemolytic anemia, "Penicillin, cephalosporins, methyldopa"]
+      - [DRESS, "Phenytoin, carbamazepine, minocycline, sulfa drugs, allopurinol, vancomycin"]
+      - [Hemolysis in G6PD deficiency, "Sulfonamides, dapsone, primaquine, aspirin, nitrofurantoin"]
+      - [Megaloblastic anemia, "Hydroxyurea, phenytoin, methotrexate, sulfa drugs"]
+      - [Thrombocytopenia, "Heparin, quinidine, ganciclovir, vancomycin, linezolid"]
+      - [Thrombotic complications, "Combined OCPs, HRT, SERMs, testosterone, epoetin alfa"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 249, quote: "Hemolysis in G6PD deficiency Sulfonamides, dapsone, primaquine, aspirin, nitrofurantoin" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.032
+    kind: card
+    topic: drug-reactions-hematologic
+    front: What kind of reaction is DRESS, and what is its other name?
+    back: Drug reaction with eosinophilia and systemic symptoms, a T cell–mediated hypersensitivity reaction; also called drug-induced hypersensitivity syndrome (DIHS).
+    src: { page: 249, quote: "T cell-mediated hypersensitivity reaction. Also known as drug-induced hypersensitivity syn- drome (DIHS)" }
+    status: unverified
+  - id: pharm.L03.033
+    kind: card
+    topic: drug-reactions-hematologic
+    front: How do estrogen-containing drugs cause thrombotic complications?
+    back: Estrogen-mediated; testosterone and epoetin alfa act through ↑ blood viscosity and platelet accumulation.
+    src: { page: 249, quote: "Estrogen-mediated ↑ blood viscosity and platelet accumulation" }
+    status: unverified
+  - id: pharm.L03.034
+    kind: mcq
+    topic: drug-reactions-hematologic
+    stem: >-
+      A 26-year-old woman with schizophrenia that failed two antipsychotics is started on a new drug.
+      Eight weeks later she has fever and a sore throat. Her white cell count is 1,200/mm3 with an
+      absolute neutrophil count of 150/mm3. Which drug was she most likely given?
+    options:
+      - Clozapine
+      - Haloperidol
+      - Risperidone
+      - Ziprasidone
+      - Lithium
+    answer: 0
+    why:
+      - "Right. Clozapine (for treatment-resistant schizophrenia) is one of the book's causes of agranulocytosis, with dapsone, carbamazepine, PTU, methimazole, ganciclovir and colchicine."
+      - "Haloperidol is listed for hyperprolactinemia and parkinsonism, not agranulocytosis."
+      - "Risperidone is listed for hyperprolactinemia."
+      - "Ziprasidone is listed for QT prolongation."
+      - "Lithium is listed for DI and thyroid problems."
+    src: { page: 249, quote: "Agranulocytosis Dapsone, clozapine, carbamazepine, propylthiouracil, methimazole, ganciclovir, colchicine" }
+    status: unverified
+  # ---------- p249: MSK/skin ----------
+  - id: pharm.L03.035
+    kind: table
+    topic: drug-reactions-musculoskeletal-skin
+    title: Drug reactions—musculoskeletal/skin/connective tissue
+    columns: [Reaction, Causal agents]
+    rows:
+      - [Drug-induced lupus, "Hydralazine, procainamide, quinidine"]
+      - [Fat redistribution, "Protease inhibitors, glucocorticoids"]
+      - [Gingival hyperplasia, "Cyclosporine, Ca2+ channel blockers, phenytoin"]
+      - [Hyperuricemia (gout), "Pyrazinamide, thiazides, furosemide, niacin, cyclosporine"]
+      - [Malignant hyperthermia, "Inhaled anesthetics (isoflurane), succinylcholine"]
+      - [Photosensitivity, "Sulfonamides, amiodarone, tetracyclines, fluoroquinolones"]
+      - [Stevens-Johnson syndrome, "Antiepileptics (especially lamotrigine), allopurinol, sulfa drugs, penicillin"]
+      - [Teeth discoloration, Tetracyclines]
+      - [Tendon/cartilage damage, Fluoroquinolones]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1]]
+    src: { page: 249, quote: "Drug-induced lupus Hydralazine, procainamide, quinidine Fat redistribution Protease inhibitors, glucocorticoids Fat protects glutes" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.036
+    kind: card
+    topic: drug-reactions-musculoskeletal-skin
+    front: Who gets malignant hyperthermia, and what is the antidote?
+    back: Individuals with a ryanodine receptor mutation exposed to inhaled anesthetics or succinylcholine. The antidote is dantrolene.
+    src: { page: 249, quote: "Individuals with ryanodine receptor mutation; antidote is dantrolene" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.037
+    kind: card
+    topic: drug-reactions-musculoskeletal-skin
+    front: Name drugs that cause myopathy.
+    back: Statins, fibrates, niacin, colchicine, daptomycin, hydroxychloroquine, interferon-α, penicillamine, glucocorticoids.
+    src: { page: 249, quote: "Myopathy Statins, fibrates, niacin, colchicine, daptomycin, hydroxychloroquine, interferon-α, penicillamine, glucocorticoids" }
+    status: unverified
+  - id: pharm.L03.038
+    kind: card
+    topic: drug-reactions-musculoskeletal-skin
+    front: Name drugs that cause osteoporosis.
+    back: Glucocorticoids, depot medroxyprogesterone acetate, GnRH agonists, aromatase inhibitors, anticonvulsants, heparin, PPIs.
+    src: { page: 249, quote: "Osteoporosis Glucocorticoids, depot medroxyprogesterone acetate, GnRH agonists, aromatase inhibitors, anticonvulsants, heparin, PPIs" }
+    status: unverified
+  - id: pharm.L03.039
+    kind: mcq
+    topic: drug-reactions-musculoskeletal-skin
+    stem: >-
+      A 19-year-old man is undergoing an appendectomy under isoflurane anesthesia after succinylcholine
+      for intubation. Twenty minutes in, his end-tidal CO2 rises sharply, his jaw and limbs become rigid,
+      and his temperature climbs to 40.5 °C. Which drug should be given?
+    options:
+      - Dantrolene
+      - Neostigmine
+      - Acetaminophen
+      - Physostigmine
+      - Bromocriptine
+    answer: 0
+    why:
+      - "Right. Malignant hyperthermia (ryanodine receptor mutation) is triggered by inhaled anesthetics and succinylcholine; the antidote is dantrolene."
+      - "Neostigmine reverses nondepolarizing blockade; it does not treat malignant hyperthermia."
+      - "The fever is from muscle hypermetabolism, not a hypothalamic set point, so antipyretics don't work."
+      - "Physostigmine treats anticholinergic toxicity."
+      - "The book's antidote here is dantrolene, not a dopamine agonist."
+    src: { page: 249, quote: "Malignant hyperthermia Inhaled anesthetics (eg, isoflurane), succinylcholine Individuals with ryanodine receptor mutation; antidote is dantrolene" }
+    status: unverified
+  # ---------- p250: neurologic ----------
+  - id: pharm.L03.040
+    kind: card
+    topic: drug-reactions-neurologic
+    front: What is cinchonism, and which drugs cause it?
+    back: Quinidine and quinine; it can present with tinnitus, hearing/vision loss, psychosis and cognitive impairment.
+    src: { page: 250, quote: "Cinchonism Quinidine, quinine Can present with tinnitus, hearing/vision loss, psychosis, and cognitive impairment" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.041
+    kind: table
+    topic: drug-reactions-neurologic
+    title: Drug reactions—neurologic
+    columns: [Reaction, Causal agents]
+    rows:
+      - [Parkinson-like syndrome, "Antipsychotics, metoclopramide"]
+      - [Peripheral neuropathy, "Platinum agents (cisplatin), isoniazid, vincristine, paclitaxel, phenytoin"]
+      - [Idiopathic intracranial hypertension, "Corticosteroids, danazol, vitamin A, growth hormones, tetracyclines"]
+      - [Seizures, "Isoniazid, bupropion, imipenem/cilastatin, tramadol"]
+      - [Tardive dyskinesia, "Antipsychotics, metoclopramide"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 250, quote: "Seizures Isoniazid, bupropion, imipenem/cilastatin, tramadol With seizures, I bit my tongue" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.042
+    kind: table
+    topic: drug-reactions-neurologic
+    title: Drug-induced visual disturbances
+    columns: [Drug, Visual effect]
+    rows:
+      - [Topiramate, "Blurred vision/diplopia, haloes"]
+      - [Hydroxychloroquine, "↓ visual acuity, visual field defects"]
+      - [Digoxin, Yellow-tinged vision]
+      - [Isoniazid, Optic neuritis]
+      - [Ivabradine, Luminous phenomena]
+      - [PDE-5 inhibitors, Blue-tinged vision]
+      - [Ethambutol, Color vision changes]
+      - [Vigabatrin, Tunnel vision]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 250, quote: "digoxin (yellow-tinged vision), isoniazid (optic neuritis), ivabradine (luminous phenomena), PDE-5 inhibitors (blue-tinged vision), ethambutol (color vision changes), vigabatrin (tunnel vision)" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.043
+    kind: mcq
+    topic: drug-reactions-neurologic
+    stem: >-
+      A 24-year-old woman who wants to quit smoking is started on a drug that also treats depression.
+      She has a history of bulimia nervosa. Ten days later she has a generalized tonic-clonic seizure.
+      Which drug was she given?
+    options:
+      - Bupropion
+      - Varenicline
+      - Nicotine patch
+      - Sertraline
+      - Mirtazapine
+    answer: 0
+    why:
+      - "Right. Bupropion (smoking cessation and depression) is on the book's seizure list with isoniazid, imipenem/cilastatin and tramadol."
+      - "Varenicline is a smoking-cessation drug but not an antidepressant, and it is not on the seizure list."
+      - "Nicotine replacement is not on the seizure list and does not treat depression."
+      - "Sertraline is an SSRI; the book lists SSRIs for SIADH and diarrhea, not seizures."
+      - "Mirtazapine causes sedation and weight gain."
+    src: { page: 250, quote: "Seizures Isoniazid, bupropion, imipenem/cilastatin, tramadol" }
+    status: unverified
+  # ---------- p250: renal ----------
+  - id: pharm.L03.044
+    kind: table
+    topic: drug-reactions-renal-genitourinary
+    title: Drug reactions—renal/genitourinary
+    columns: [Reaction, Causal agents]
+    rows:
+      - [Fanconi syndrome, "Cisplatin, ifosfamide, expired tetracyclines, tenofovir"]
+      - [Hemorrhagic cystitis, "Cyclophosphamide, ifosfamide (prevent with mesna)"]
+      - [Interstitial nephritis, "Diuretics, NSAIDs, penicillins and cephalosporins, PPIs, rifampin, sulfa drugs (5 P's)"]
+      - [Nephrotoxicity, "Cisplatin, aminoglycosides, amphotericin, vancomycin"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 250, quote: "Hemorrhagic cystitis Cyclophosphamide, ifosfamide Prevent by coadministering with mesna" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.045
+    kind: mcq
+    topic: drug-reactions-renal-genitourinary
+    stem: >-
+      A 45-year-old woman receiving high-dose cyclophosphamide for lupus nephritis develops painful
+      urination and gross hematuria with clots. Urine culture is negative. Which drug, given with the
+      chemotherapy, would most likely have prevented this?
+    options:
+      - Mesna
+      - Leucovorin
+      - Dexrazoxane
+      - Amifostine
+      - Allopurinol
+    answer: 0
+    why:
+      - "Right. Cyclophosphamide and ifosfamide cause hemorrhagic cystitis, prevented by coadministering mesna."
+      - "Leucovorin rescues from methotrexate toxicity."
+      - "Dexrazoxane prevents anthracycline cardiotoxicity."
+      - "The book's preventive for hemorrhagic cystitis is mesna."
+      - "Allopurinol prevents hyperuricemia; it is unrelated."
+    src: { page: 250, quote: "Prevent by coadministering with mesna" }
+    status: unverified
+  # ---------- p250: respiratory ----------
+  - id: pharm.L03.046
+    kind: card
+    topic: drug-reactions-respiratory
+    front: Which drugs cause pulmonary fibrosis, and which cause a dry cough?
+    back: "Pulmonary fibrosis: methotrexate, nitrofurantoin, carmustine, bleomycin, busulfan, amiodarone. Dry cough: ACE inhibitors."
+    src: { page: 250, quote: "Pulmonary fibrosis Methotrexate, nitrofurantoin, carmustine, bleomycin, busulfan, amiodarone My nose cannot breathe bad air" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.047
+    kind: mcq
+    topic: drug-reactions-respiratory
+    stem: >-
+      A 66-year-old man has had progressive exertional dyspnea and a dry cough for 6 months. He takes a
+      drug for atrial fibrillation that has also caused bluish skin discoloration and abnormal thyroid
+      tests. Chest CT shows bilateral reticular opacities. Which drug is responsible?
+    options:
+      - Amiodarone
+      - Digoxin
+      - Metoprolol
+      - Lisinopril
+      - Diltiazem
+    answer: 0
+    why:
+      - "Right. Amiodarone is on the pulmonary fibrosis list and also causes hyper- and hypothyroidism."
+      - "Digoxin causes yellow vision and arrhythmias, not fibrosis."
+      - "Metoprolol causes bradycardia and asthma exacerbation, not fibrosis."
+      - "ACE inhibitors cause a dry cough, but not fibrosis on CT or thyroid changes."
+      - "Diltiazem (non-dihydropyridine CCB) causes constipation."
+    src: { page: 250, quote: "Pulmonary fibrosis Methotrexate, nitrofurantoin, carmustine, bleomycin, busulfan, amiodarone" }
+    status: unverified
+  # ---------- p250: multiorgan ----------
+  - id: pharm.L03.048
+    kind: card
+    topic: drug-reactions-multiorgan
+    front: Which drugs cause antimuscarinic effects?
+    back: Atropine, TCAs, H1-blockers, antipsychotics.
+    src: { page: 250, quote: "Antimuscarinic Atropine, TCAs, H -blockers, antipsychotics" }
+    status: unverified
+  - id: pharm.L03.049
+    kind: enumerate
+    topic: drug-reactions-multiorgan
+    prompt: Enumerate the drugs that cause a disulfiram-like reaction (5).
+    points:
+      - 1st-generation sulfonylureas
+      - Procarbazine
+      - Certain cephalosporins
+      - Griseofulvin
+      - Metronidazole
+    pass: 5
+    hook: "الكتاب بيقول Sorry pals, can't go mingle: Sulfonylureas و Procarbazine و Cephalosporins و Griseofulvin و Metronidazole."
+    src: { page: 250, quote: "Disulfiram-like reaction 1st-generation sulfonylureas, procarbazine, certain cephalosporins, griseofulvin, metronidazole Sorry pals, can’t go mingle" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.050
+    kind: mcq
+    topic: drug-reactions-multiorgan
+    stem: >-
+      A 32-year-old woman is treated for bacterial vaginosis. Two days later she drinks wine at a wedding
+      and within minutes has flushing, throbbing headache, nausea, vomiting and palpitations. Which drug
+      was she most likely taking?
+    options:
+      - Metronidazole
+      - Clindamycin
+      - Fluconazole
+      - Doxycycline
+      - Azithromycin
+    answer: 0
+    why:
+      - "Right. Metronidazole is on the disulfiram-like reaction list (sorry pals, can't go mingle)."
+      - "Clindamycin is listed for pseudomembranous colitis, not disulfiram-like reactions."
+      - "Fluconazole is listed for QT prolongation and CYP450 inhibition."
+      - "Tetracyclines are listed for photosensitivity, teeth discoloration and esophagitis."
+      - "Macrolides are listed for QT prolongation, cholestatic hepatitis and diarrhea."
+    src: { page: 250, quote: "1st-generation sulfonylureas, procarbazine, certain cephalosporins, griseofulvin, metronidazole" }
+    status: unverified
+  # ---------- p251: pupil size ----------
+  - id: pharm.L03.051
+    kind: table
+    topic: drugs-affecting-pupil-size
+    title: Drugs affecting pupil size
+    columns: [Effect, Drugs, Mechanism]
+    rows:
+      - [↑ pupil size (mydriasis), "Anticholinergics (atropine, TCAs, tropicamide, scopolamine, antihistamines); indirect sympathomimetics (amphetamines, cocaine, LSD); meperidine; direct sympathomimetics", "Radial muscle contraction (α1), or loss of sphincter contraction"]
+      - [↓ pupil size (miosis), "Sympatholytics (α2-agonists); opioids (except meperidine); parasympathomimetics (pilocarpine); organophosphates", "Sphincter muscle contraction (M3), or loss of radial contraction"]
+    blanks: [[0, 1], [1, 1], [0, 2], [1, 2]]
+    src: { page: 251, quote: "Sympatholytics (eg, α2 -agonists) Opioids (except meperidine) Parasympathomimetics (eg, pilocarpine), organophosphates" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.052
+    kind: mcq
+    topic: drugs-affecting-pupil-size
+    stem: >-
+      A 27-year-old man is found unresponsive at a party. His respiratory rate is 6/min and his oxygen
+      saturation is 84% on room air. Which pupil finding is most expected, and why?
+    options:
+      - Miosis, unless the opioid is meperidine
+      - Mydriasis from radial muscle contraction
+      - Mydriasis, because opioids are anticholinergic
+      - Miosis, because opioids are α1-agonists
+      - Normal pupils, because opioids do not affect the eye
+    answer: 0
+    why:
+      - "Right. Opioids cause miosis (except meperidine, which causes mydriasis)."
+      - "Radial (α1) contraction causes mydriasis with sympathomimetics such as cocaine and amphetamines."
+      - "Opioids are not in the book's anticholinergic list."
+      - "α1 stimulation dilates the pupil; it does not constrict it."
+      - "Opioids are a classic cause of miosis."
+    src: { page: 251, quote: "Opioids (except meperidine)" }
+    status: unverified
+  # ---------- p251: CYP450 ----------
+  - id: pharm.L03.053
+    kind: enumerate
+    topic: cytochrome-p450-interactions
+    prompt: Enumerate the selected CYP450 inducers (9).
+    points:
+      - St. John's wort
+      - Phenytoin
+      - Phenobarbital
+      - Modafinil
+      - Nevirapine
+      - Rifampin
+      - Griseofulvin
+      - Carbamazepine
+      - Chronic alcohol overuse
+    pass: 7
+    hook: "الكتاب بيقول: St. John's funny funny (phen-phen) mom never refuses greasy carbs and chronic alcohol."
+    src: { page: 251, quote: "St. John’s funny funny (phen- phen) mom never refuses greasy carbs and chronic alcohol" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.054
+    kind: enumerate
+    topic: cytochrome-p450-interactions
+    prompt: Enumerate the selected CYP450 substrates (4).
+    points:
+      - Theophylline
+      - OCPs
+      - Anti-epileptics
+      - Warfarin
+    pass: 4
+    hook: "الكتاب بيقول: The OCPs are anti-war: Theophylline و OCPs و Anti-epileptics و Warfarin."
+    src: { page: 251, quote: "Theophylline OCPs Anti-epileptics Warfarin" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.055
+    kind: enumerate
+    topic: cytochrome-p450-interactions
+    prompt: Enumerate the selected CYP450 inhibitors (SICK FACES ... grapefruit juice, 14).
+    points:
+      - Sodium valproate
+      - Isoniazid
+      - Cimetidine
+      - Ketoconazole
+      - Fluconazole
+      - Acute alcohol overuse
+      - Chloramphenicol
+      - Erythromycin/clarithromycin
+      - Sulfonamides
+      - Ciprofloxacin
+      - Omeprazole
+      - Amiodarone
+      - Ritonavir
+      - Grapefruit juice
+    pass: 11
+    hook: "الكتاب بيقول: SICK FACES come when I am really drinking grapefruit juice."
+    src: { page: 251, quote: "SICK FACES come when I am really drinking grapefruit juice" }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.056
+    kind: mcq
+    topic: cytochrome-p450-interactions
+    stem: >-
+      A 30-year-old woman with pulmonary tuberculosis is started on rifampin, isoniazid, pyrazinamide and
+      ethambutol. She has taken a combined oral contraceptive pill for years. Three months later she has
+      an unplanned pregnancy. Which mechanism best explains this?
+    options:
+      - Induction of the enzymes that metabolize the contraceptive
+      - Inhibition of the enzymes that metabolize the contraceptive
+      - Displacement of the contraceptive from plasma proteins
+      - Reduced absorption of the contraceptive in the gut
+      - Antagonism at the estrogen receptor
+    answer: 0
+    why:
+      - "Right. Rifampin is a CYP450 inducer, and OCPs are CYP450 substrates, so their levels fall."
+      - "Inhibition (eg, isoniazid, ketoconazole) would raise, not lower, OCP levels."
+      - "Protein displacement is not the book's mechanism for this interaction."
+      - "Rifampin does not prevent absorption; it speeds metabolism."
+      - "Rifampin is not an estrogen receptor antagonist."
+    src: { page: 251, quote: "Inducers (+) Substrates Inhibitors (–)" }
+    status: unverified
+  # ---------- p251: sulfa drugs ----------
+  - id: pharm.L03.057
+    kind: enumerate
+    topic: sulfa-drugs
+    prompt: Enumerate the sulfa drugs (Scary Sulfa Pharm FACTS, 8).
+    points:
+      - Sulfonamide antibiotics
+      - Sulfasalazine
+      - Probenecid
+      - Furosemide
+      - Acetazolamide
+      - Celecoxib
+      - Thiazides
+      - Sulfonylureas
+    pass: 7
+    hook: "الكتاب بيقول Scary Sulfa Pharm FACTS: Sulfonamides و Sulfasalazine و Probenecid و Furosemide و Acetazolamide و Celecoxib و Thiazides و Sulfonylureas."
+    src: { page: 251, quote: "Sulfa drugs Sulfonamide antibiotics, Sulfasalazine, Probenecid, Furosemide, Acetazolamide, Celecoxib, Thiazides, Sulfonylureas." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L03.058
+    kind: card
+    topic: sulfa-drugs
+    front: What reactions can patients with sulfa allergies develop?
+    back: Fever, UTI, SJS, hemolytic anemia, thrombocytopenia, agranulocytosis, acute interstitial nephritis, urticaria (hives), photosensitivity.
+    src: { page: 251, quote: "Patients with sulfa allergies may develop fever, UTI, SJS, hemolytic anemia, thrombocytopenia, agranulocytosis, acute interstitial nephritis, urticaria (hives), and photosensitivity." }
+    status: unverified
+  - id: pharm.L03.059
+    kind: mcq
+    topic: sulfa-drugs
+    stem: >-
+      A 58-year-old man with a history of Stevens-Johnson syndrome after trimethoprim-sulfamethoxazole now
+      has an acute gout flare. His physician wants a long-term drug to lower his uric acid but chooses
+      to avoid one because it shares the same chemical group as his reaction. Which drug is avoided?
+    options:
+      - Probenecid
+      - Allopurinol
+      - Febuxostat
+      - Colchicine
+      - Pegloticase
+    answer: 0
+    why:
+      - "Right. Probenecid is one of the sulfa drugs (Scary Sulfa Pharm FACTS)."
+      - "Allopurinol is not a sulfa drug (though it is on the SJS list itself)."
+      - "Febuxostat is not on the book's sulfa list."
+      - "Colchicine is not a sulfa drug and does not lower uric acid."
+      - "Pegloticase is not on the book's sulfa list."
+    src: { page: 251, quote: "Sulfonamide antibiotics, Sulfasalazine, Probenecid, Furosemide, Acetazolamide, Celecoxib, Thiazides, Sulfonylureas." }
+    status: unverified
