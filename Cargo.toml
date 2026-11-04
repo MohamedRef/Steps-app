@@ -29,6 +29,14 @@ lto = "thin"
 codegen-units = 1
 strip = true
 
+# Argon2id (password sign-in) is unusably slow unoptimised: a debug build
+# would take seconds per sign-in.
+[profile.dev.package.argon2]
+opt-level = 3
+
+[profile.dev.package.blake2]
+opt-level = 3
+
 # The web app (scripts/web/build.sh): smallest code, as Kabar's web build does
 # (adapted from kabar-app main: Cargo.toml). `strip` stays off for wasm-bindgen.
 [profile.web-release]

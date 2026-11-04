@@ -13,6 +13,7 @@ pub mod devices;
 pub mod google;
 pub mod hub;
 pub mod internal;
+pub mod login;
 pub mod sql;
 pub mod tokens;
 

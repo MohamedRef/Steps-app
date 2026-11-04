@@ -156,6 +156,7 @@ pub fn Onboarding() -> Element {
 #[component]
 fn Questions() -> Element {
     let mut ui = use_context::<Ui>();
+    let settings = use_context::<crate::settings::SettingsNav>();
     // STEPS_ONBOARD=3 opens on that screen (previews and screenshots).
     let mut step = use_signal(|| {
         let n = std::env::var("STEPS_ONBOARD").ok().and_then(|v| v.parse::<usize>().ok()).unwrap_or(1);
@@ -248,6 +249,17 @@ fn Questions() -> Element {
             h1 { {tx::WELCOME_TITLE} }
             p { class: "muted", {tx::WELCOME_BODY} }
             p { class: "note", {tx::WELCOME_NOTE} }
+            // A new device of his: sign in and his plan and lessons sync
+            // down instead of being asked again (Settings › Sync).
+            p {
+                button { class: "btn btn-secondary",
+                    onclick: move |_| {
+                        close();
+                        settings.show(Some(crate::settings::Section::Sync));
+                    },
+                    {tx::HAVE_ACCOUNT}
+                }
+            }
         },
         Step::Time => rsx! {
             h1 { {tx::TIME_TITLE} }

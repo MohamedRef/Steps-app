@@ -94,6 +94,13 @@ export function ls_get(key) { try { return localStorage.getItem(key); } catch (_
 export function ls_set(key, value) {
   try { localStorage.setItem(key, value); return true; } catch (_) { return false; }
 }
+export function ss_get(key) { try { return sessionStorage.getItem(key) || null; } catch (_) { return null; } }
+export function ss_set(key, value) {
+  try {
+    if (value) sessionStorage.setItem(key, value); else sessionStorage.removeItem(key);
+    return true;
+  } catch (_) { return false; }
+}
 "#)]
 extern "C" {
     #[wasm_bindgen(catch)]
@@ -117,6 +124,8 @@ extern "C" {
     fn js_browser_name() -> String;
     fn ls_get(key: &str) -> Option<String>;
     fn ls_set(key: &str, value: &str) -> bool;
+    fn ss_get(key: &str) -> Option<String>;
+    fn ss_set(key: &str, value: &str) -> bool;
 }
 
 const DB_KEY: &str = "steps.db";
@@ -277,4 +286,15 @@ pub fn read_pref(file: &str) -> Option<String> {
 
 pub fn write_pref(file: &str, text: &str) -> bool {
     ls_set(&format!("steps:{file}"), text)
+}
+
+/// Like [`read_pref`], but kept only while this browser tab is open
+/// (`sessionStorage`): a sign-in on someone else's computer.
+pub fn read_tab_pref(file: &str) -> Option<String> {
+    ss_get(&format!("steps:{file}"))
+}
+
+/// `""` removes it.
+pub fn write_tab_pref(file: &str, text: &str) -> bool {
+    ss_set(&format!("steps:{file}"), text)
 }
