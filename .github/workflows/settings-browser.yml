@@ -1,9 +1,10 @@
 name: Settings browser regression
 
+# Nightly and by hand only, not per pull request (Mohamed, 2026-11-04).
 on:
-  pull_request:
-  push:
-    branches: [main]
+  schedule:
+    - cron: "37 3 * * *"
+  workflow_dispatch:
 
 permissions:
   contents: read
