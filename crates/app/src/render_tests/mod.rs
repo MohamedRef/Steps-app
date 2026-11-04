@@ -7,10 +7,13 @@
 
 #![allow(dead_code)] // helpers for the screen tests; not every test uses each one
 
+mod cloud;
 mod crawl;
+mod data;
 mod dom;
 mod onboarding;
 mod screens;
+mod settings;
 mod update;
 
 use std::time::Duration;

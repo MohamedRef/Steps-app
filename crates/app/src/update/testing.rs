@@ -21,7 +21,7 @@ pub fn serve_fixture_feed() -> String {
     for name in [MANIFEST_FILE, SIGNATURE_FILE] {
         fs::copy(src.join(name), feed.join(name)).unwrap();
     }
-    fs::write(feed.join("batna-0.1.0-b42-android-arm64.apk"), FIXTURE_APK).unwrap();
+    fs::write(feed.join("steps-0.1.0-b42-android-arm64.apk"), FIXTURE_APK).unwrap();
     serve(feed)
 }
 

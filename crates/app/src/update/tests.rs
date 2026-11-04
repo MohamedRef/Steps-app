@@ -252,7 +252,7 @@ fn a_part_left_from_before_is_resumed_and_a_bad_one_fetched_again() {
     let feed = fixture_feed();
     let (url, seen) = serve_logged(feed.path().to_path_buf(), None);
     let (u, _data) = updater(&url, build("0.1.0", 41, true));
-    let file = "batna-0.1.0-b42-android-arm64.apk";
+    let file = "steps-0.1.0-b42-android-arm64.apk";
     fs::create_dir_all(&u.dir).unwrap();
     // Steps closed half-way last time.
     fs::write(u.dir.join(format!("{file}.part")), &FIXTURE_APK[..5]).unwrap();
@@ -284,8 +284,8 @@ fn fixture_feed() -> tempfile::TempDir {
     for name in [MANIFEST_FILE, SIGNATURE_FILE] {
         fs::copy(src.join(name), feed.path().join(name)).unwrap();
     }
-    fs::write(feed.path().join("batna-0.1.0-b42-android-arm64.apk"), FIXTURE_APK).unwrap();
-    fs::write(feed.path().join("batna-content-0.1.0-b42-content.pack"), FIXTURE_PACK).unwrap();
+    fs::write(feed.path().join("steps-0.1.0-b42-android-arm64.apk"), FIXTURE_APK).unwrap();
+    fs::write(feed.path().join("steps-content-0.1.0-b42-content.pack"), FIXTURE_PACK).unwrap();
     feed
 }
 
@@ -385,11 +385,11 @@ fn checks_downloads_and_verifies_from_a_signed_feed() {
 fn a_notice_goes_out_once_per_offer_and_step() {
     use crate::i18n::update as tx;
     let mut o = offer("0.1.0", 42);
-    o.notes.ar_eg = "محاضرة الاستسقاء اتضافت".into();
+    o.notes.ar_eg = "محاضرة أجنة القلب اتضافت".into();
     let mut s = status(Phase::Available(o.clone()), Mode::Notify);
     let n = notice(&s).expect("a new version is announced");
     assert_eq!(n.title, format!("{} · 0.1.0 (42)", tx::NOTICE_AVAILABLE));
-    assert!(n.body.starts_with(&format!("{}: محاضرة الاستسقاء اتضافت\n", tx::WHATS_NEW)), "{}", n.body);
+    assert!(n.body.starts_with(&format!("{}: محاضرة أجنة القلب اتضافت\n", tx::WHATS_NEW)), "{}", n.body);
     assert_eq!((n.action, n.button), ("download", tx::DOWNLOAD));
     s.prefs.notified = Some(n.key.clone());
     assert!(notice(&s).is_none(), "sent once");
@@ -446,7 +446,7 @@ fn the_background_check_downloads_on_wifi_and_announces_once() {
 fn a_swapped_build_or_manifest_is_never_offered() {
     // The build on the server isn't the one the manifest signed.
     let feed = fixture_feed();
-    fs::write(feed.path().join("batna-0.1.0-b42-android-arm64.apk"), b"evil apk bytes!!!").unwrap();
+    fs::write(feed.path().join("steps-0.1.0-b42-android-arm64.apk"), b"evil apk bytes!!!").unwrap();
     let url = serve(feed.path().to_path_buf());
     let (u, data) = updater(&url, build("0.1.0", 41, true));
     u.check(true);

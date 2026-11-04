@@ -1748,7 +1748,7 @@ pub mod learn {
     pub fn no_match(q: &str) -> String {
         format!("مفيش درس فيه «{q}». جرّب كلمة تانية أو اسم المحاضرة بالإنجليزي.")
     }
-    /// `كبد › المحاضرة 3`: the course, then the lecture's number in it.
+    /// `قلب › المحاضرة 3`: the course, then the lecture's number in it.
     pub fn lecture_n(course: &str, n: &str) -> String {
         format!("{course} › المحاضرة {n}")
     }

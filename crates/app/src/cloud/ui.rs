@@ -27,6 +27,18 @@ impl Cloud {
     }
 }
 
+#[cfg(test)]
+impl Cloud {
+    /// Screen tests: the commands the screen sends arrive here, as the
+    /// engine would get them.
+    pub fn listen_for_tests(&self) -> tokio::sync::mpsc::UnboundedReceiver<Command> {
+        let (tx, rx) = tokio::sync::mpsc::unbounded_channel();
+        let mut commands = self.commands;
+        commands.set(Some(tx));
+        rx
+    }
+}
+
 /// Provides [`Cloud`] and, when this build knows a server, starts sync.
 /// Call once in `App`, after `store::use_provide_review`.
 pub fn use_provide_cloud() {

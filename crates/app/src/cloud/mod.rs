@@ -44,6 +44,8 @@ pub struct GoogleClient {
 /// Steps Cloud, for builds that don't say otherwise (the web app).
 #[cfg(target_arch = "wasm32")]
 const DEFAULT_CLOUD_URL: &str = "https://steps-cloud.hamorefaat85.workers.dev";
+#[cfg(test)]
+pub use ui::Cloud;
 pub use ui::{SyncSection, ago, use_provide_cloud};
 
 /// Where Steps Cloud is and which Google client signs in. Set at build time
