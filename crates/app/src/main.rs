@@ -33,6 +33,7 @@ mod import;
 mod learn;
 mod lecture;
 mod look;
+mod metacog;
 mod more;
 mod onboarding;
 mod oral;

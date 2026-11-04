@@ -286,13 +286,13 @@ pub(super) fn forget_position(conn: &Connection) -> rusqlite::Result<()> {
 #[cfg(test)]
 mod tests {
     use steps_core::review::verify::{Edit, Judgement, Verdict};
-    use steps_core::review::{Grade, Origin, ReviewEvent};
+    use steps_core::review::{Confidence, ErrorReason, Grade, Origin, ReviewEvent};
     use steps_protocol::sync::SeqOp;
 
     use super::*;
 
     fn ev(item: &str, at_ms: i64) -> ReviewEvent {
-        ReviewEvent { item_id: item.into(), grade: Grade::Good, origin: Origin::Study, at_ms, took_ms: 3000 }
+        ReviewEvent::new(item, Grade::Good, Origin::Study, at_ms, 3000)
     }
 
     fn judged(verdict: Verdict) -> Judgement {
@@ -334,6 +334,51 @@ mod tests {
         }
         assert!(tablet.apply_remote(&ops, 8).is_err());
         assert_eq!(tablet.last_seq(), 7);
+    }
+
+    fn tagged(item: &str, at_ms: i64) -> ReviewEvent {
+        ReviewEvent {
+            confidence: Some(Confidence::Sure),
+            reason: Some(ErrorReason::Misread),
+            ..ReviewEvent::new(item, Grade::Again, Origin::Bank, at_ms, 3000)
+        }
+    }
+
+    #[test]
+    fn confidence_and_reason_sync_and_older_builds_still_merge() {
+        let phone = Store::open_in_memory().unwrap();
+        phone.append_review(tagged("hb.L01.001", 10)).unwrap();
+        phone.append_review(ev("hb.L01.002", 20)).unwrap();
+        let ops = relay(&phone, 1);
+        let payload = ops[0].op.payload.as_ref().unwrap();
+        assert_eq!(
+            (payload["confidence"].as_str(), payload["reason"].as_str()),
+            (Some("sure"), Some("misread"))
+        );
+        assert!(ops[1].op.payload.as_ref().unwrap()["reason"].is_null());
+
+        let tablet = Store::open_in_memory().unwrap();
+        tablet.apply_remote(&ops, 2).unwrap();
+        assert_eq!(tablet.reviews().unwrap(), phone.reviews().unwrap());
+        assert_eq!(tablet.reviews().unwrap()[0].event, tagged("hb.L01.001", 10));
+
+        // A build from before these columns keeps the answer and drops the tags.
+        let old = Store::open_in_memory().unwrap();
+        {
+            let conn = old.conn.lock().unwrap();
+            conn.execute_batch(
+                "ALTER TABLE review_events DROP COLUMN confidence; ALTER TABLE review_events DROP COLUMN reason;",
+            )
+            .unwrap();
+        }
+        assert!(old.apply_remote(&ops, 2).unwrap().contains("review_events"));
+        let n: i64 = old
+            .conn
+            .lock()
+            .unwrap()
+            .query_row("SELECT COUNT(*) FROM review_events", [], |r| r.get(0))
+            .unwrap();
+        assert_eq!(n, 2);
     }
 
     #[test]

@@ -616,6 +616,8 @@ mod tests {
             origin: Origin::Review,
             at_ms: now_ms - days_ago * DAY_MS,
             took_ms: 5000,
+            confidence: None,
+            reason: None,
         };
         let data = |events: Vec<ReviewEvent>| StudyData {
             lectures: vec![lecture.clone()],

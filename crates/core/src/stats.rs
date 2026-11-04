@@ -13,14 +13,15 @@
 //!   answers, scored `0.6 × misses on retention + 0.4 × misses on MCQs`.
 //!   A topic that hasn't been studied is never "weak": that's the planner's job.
 //! - **Mistake:** an "Again" in the last [`MISTAKE_WINDOW_DAYS`], unless the
-//!   item has since been answered right [`RECOVERED_AFTER`] times.
+//!   item has since been answered right [`RECOVERED_AFTER`] times. Its reason
+//!   is the one he gave for the latest miss; misses he was sure of come first.
 //! - Rejected items (✗) count nowhere.
 
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 
 use crate::content::{Lecture, Status};
 use crate::plan::{Day, LectureProgress};
-use crate::review::{Grade, ReviewEvent};
+use crate::review::{ErrorReason, Grade, ReviewEvent};
 
 pub const RETENTION_WINDOW_DAYS: i64 = 30;
 pub const WEAK_MIN_ANSWERS: u32 = 5;
@@ -450,6 +451,11 @@ pub struct Mistake {
     /// "Again" answers inside the window.
     pub misses: u32,
     pub last_miss_ms: i64,
+    /// Why he missed it last time, when he said.
+    pub reason: Option<ErrorReason>,
+    /// He was sure of an answer that was wrong, inside the window: a
+    /// high-confidence error, the one most worth re-testing.
+    pub sure: bool,
 }
 
 /// Mistakes of one topic.
@@ -485,7 +491,14 @@ pub fn mistakes(
             }
             let misses =
                 answers.iter().filter(|e| e.grade == Grade::Again && e.at_ms >= since).count() as u32;
-            let mistake = Mistake { item_id: item.id.clone(), misses, last_miss_ms: answers[last].at_ms };
+            let sure = answers.iter().any(|e| e.at_ms >= since && e.sure_miss());
+            let mistake = Mistake {
+                item_id: item.id.clone(),
+                misses,
+                last_miss_ms: answers[last].at_ms,
+                reason: answers[last].reason,
+                sure,
+            };
             match groups.iter_mut().find(|g| g.topic == item.topic) {
                 Some(g) => g.items.push(mistake),
                 None => {
@@ -511,18 +524,47 @@ pub fn mistakes(
         };
         groups.sort_by_key(order);
         for g in &mut groups {
-            g.items.sort_by_key(|m| std::cmp::Reverse(m.last_miss_ms));
+            g.items.sort_by_key(|m| (!m.sure, std::cmp::Reverse(m.last_miss_ms)));
         }
         out.extend(groups);
     }
     out
 }
 
-/// Item ids for a session from the mistakes log: most-missed first, then newest.
+/// Item ids for a session from the mistakes log: misses he was sure of
+/// first, then most-missed, then newest.
 pub fn mistakes_session(groups: &[MistakeGroup]) -> Vec<String> {
     let mut all: Vec<&Mistake> = groups.iter().flat_map(|g| &g.items).collect();
-    all.sort_by(|a, b| b.misses.cmp(&a.misses).then(b.last_miss_ms.cmp(&a.last_miss_ms)));
+    all.sort_by(|a, b| {
+        b.sure.cmp(&a.sure).then(b.misses.cmp(&a.misses)).then(b.last_miss_ms.cmp(&a.last_miss_ms))
+    });
     all.into_iter().map(|m| m.item_id.clone()).collect()
+}
+
+/// How many mistakes in the log carry each reason, in [`ErrorReason::ALL`]
+/// order, reasons with none left out; then how many have no reason.
+pub fn mistake_reasons(groups: &[MistakeGroup]) -> (Vec<(ErrorReason, u32)>, u32) {
+    let mut counts = BTreeMap::<ErrorReason, u32>::new();
+    let mut none = 0;
+    for m in groups.iter().flat_map(|g| &g.items) {
+        match m.reason {
+            Some(r) => *counts.entry(r).or_default() += 1,
+            None => none += 1,
+        }
+    }
+    let listed = ErrorReason::ALL.into_iter().filter_map(|r| counts.get(&r).map(|&n| (r, n))).collect();
+    (listed, none)
+}
+
+/// The log narrowed to mistakes with one reason; empty groups dropped.
+pub fn mistakes_with_reason(groups: &[MistakeGroup], reason: ErrorReason) -> Vec<MistakeGroup> {
+    groups
+        .iter()
+        .filter_map(|g| {
+            let items: Vec<Mistake> = g.items.iter().filter(|m| m.reason == Some(reason)).cloned().collect();
+            (!items.is_empty()).then(|| MistakeGroup { items, ..g.clone() })
+        })
+        .collect()
 }
 
 /// Item ids for a session on the given topics: items already seen first
@@ -556,7 +598,7 @@ pub fn topics_session(
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::review::Origin;
+    use crate::review::{Confidence, Origin};
 
     const LECTURE: &str = r#"
 schema: steps.content/v1
@@ -610,6 +652,8 @@ items:
             origin: Origin::Review,
             at_ms: NOW - days_ago * DAY_MS,
             took_ms: 5000,
+            confidence: None,
+            reason: None,
         }
     }
 
@@ -710,9 +754,62 @@ items:
         assert_eq!(log[0].title, "Child-Pugh and MELD");
         assert_eq!(
             log[0].items,
-            [Mistake { item_id: "hb.L01.002".into(), misses: 2, last_miss_ms: NOW - 2 * DAY_MS }]
+            [Mistake {
+                item_id: "hb.L01.002".into(),
+                misses: 2,
+                last_miss_ms: NOW - 2 * DAY_MS,
+                reason: None,
+                sure: false,
+            }]
         );
         assert_eq!(mistakes_session(&log), ["hb.L01.002"]);
+    }
+
+    fn tagged(
+        id: &str,
+        days_ago: i64,
+        confidence: Option<Confidence>,
+        reason: Option<ErrorReason>,
+    ) -> ReviewEvent {
+        ReviewEvent { confidence, reason, ..ev(id, Grade::Again, days_ago) }
+    }
+
+    #[test]
+    fn misses_he_was_sure_of_come_first() {
+        let events = [
+            tagged("hb.L01.003", 5, Some(Confidence::Sure), Some(ErrorReason::Misread)),
+            ev("hb.L01.003", Grade::Good, 4),
+            tagged("hb.L01.002", 1, Some(Confidence::Guess), Some(ErrorReason::Knowledge)),
+            ev("hb.L01.001", Grade::Good, 9),
+            tagged("hb.L01.001", 2, None, None),
+        ];
+        let log = mistakes(&lectures(), &events, &marks(), NOW);
+        let ids: Vec<&str> = log.iter().flat_map(|g| g.items.iter().map(|m| m.item_id.as_str())).collect();
+        // Within the topic, the older sure miss leads the newer guess.
+        assert_eq!(ids, ["hb.L01.001", "hb.L01.003", "hb.L01.002"]);
+        let m3 = &log[1].items[0];
+        assert!(m3.sure);
+        assert_eq!(m3.reason, Some(ErrorReason::Misread));
+        assert_eq!(mistakes_session(&log), ["hb.L01.003", "hb.L01.002", "hb.L01.001"]);
+    }
+
+    #[test]
+    fn mistakes_count_and_filter_by_reason() {
+        let events = [
+            tagged("hb.L01.001", 3, None, Some(ErrorReason::Knowledge)),
+            // The latest miss's reason is the one that counts.
+            tagged("hb.L01.002", 3, None, Some(ErrorReason::Timing)),
+            tagged("hb.L01.002", 2, None, Some(ErrorReason::Knowledge)),
+            tagged("hb.L01.003", 1, Some(Confidence::Unsure), None),
+        ];
+        let log = mistakes(&lectures(), &events, &marks(), NOW);
+        let (counts, none) = mistake_reasons(&log);
+        assert_eq!(counts, [(ErrorReason::Knowledge, 2)]);
+        assert_eq!(none, 1);
+        let knowledge = mistakes_with_reason(&log, ErrorReason::Knowledge);
+        assert_eq!(knowledge.len(), 2);
+        assert!(knowledge.iter().all(|g| g.items.iter().all(|m| m.reason == Some(ErrorReason::Knowledge))));
+        assert!(mistakes_with_reason(&log, ErrorReason::Misread).is_empty());
     }
 
     #[test]

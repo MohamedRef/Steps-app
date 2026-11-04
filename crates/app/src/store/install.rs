@@ -77,6 +77,8 @@ mod tests {
                 origin: steps_core::review::Origin::Study,
                 at_ms: 1,
                 took_ms: 1,
+                confidence: None,
+                reason: None,
             })
             .unwrap();
             s.device()

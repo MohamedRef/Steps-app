@@ -651,6 +651,8 @@ fn rate_current(store: &StudyStoreHandle, turn: u64, grade: Option<Grade>, asked
             origin: Origin::Oral,
             at_ms: now_ms(),
             took_ms: asked_at.elapsed().as_millis().min(u32::MAX as u128) as u32,
+            confidence: None,
+            reason: None,
         });
     }
     true

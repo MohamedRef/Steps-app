@@ -7,7 +7,7 @@ use std::collections::{BTreeMap, BTreeSet};
 use serde::{Deserialize, Serialize};
 
 use crate::content::{Body, Lecture, Status};
-use crate::review::{Grade, Origin, ReviewEvent};
+use crate::review::{Confidence, ErrorReason, Grade, Origin, ReviewEvent};
 
 /// About 1.2 minutes per question in timed mode and in mocks.
 pub const MS_PER_QUESTION: u64 = 72_000;
@@ -290,6 +290,12 @@ pub struct Answer {
     pub chosen: Option<usize>,
     pub took_ms: u32,
     pub flagged: bool,
+    /// How sure he was before checking, when he said.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub confidence: Option<Confidence>,
+    /// Why he missed it, when he said (wrong answers only).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub reason: Option<ErrorReason>,
 }
 
 impl Answer {
@@ -308,6 +314,9 @@ pub fn review_event(q: &Question, a: &Answer, mode: Mode, at_ms: i64) -> Option<
         origin: mode.origin(),
         at_ms,
         took_ms: a.took_ms,
+        confidence: a.confidence,
+        // A reason left over from a changed answer doesn't follow a right one.
+        reason: a.reason.filter(|_| !a.correct(q)),
     })
 }
 
@@ -629,7 +638,7 @@ mod tests {
     }
 
     fn a(chosen: Option<usize>) -> Answer {
-        Answer { chosen, took_ms: 5_000, flagged: false }
+        Answer { chosen, took_ms: 5_000, ..Answer::default() }
     }
 
     #[test]
@@ -670,6 +679,31 @@ mod tests {
         let wrong = review_event(&question, &a(Some(0)), Mode::Mock, 9).unwrap();
         assert_eq!((wrong.grade, wrong.origin), (Grade::Again, Origin::Mock));
         assert!(review_event(&question, &a(None), Mode::Timed, 9).is_none());
+    }
+
+    #[test]
+    fn confidence_and_reason_go_with_the_answer() {
+        let question = q("hb.L01.003", "hb.L01", "cp", 1);
+        let tagged = |chosen| Answer {
+            confidence: Some(Confidence::Sure),
+            reason: Some(ErrorReason::Misread),
+            ..a(Some(chosen))
+        };
+        let wrong = review_event(&question, &tagged(0), Mode::Tutor, 9).unwrap();
+        assert_eq!((wrong.confidence, wrong.reason), (Some(Confidence::Sure), Some(ErrorReason::Misread)));
+        assert!(wrong.sure_miss());
+        // A right answer keeps its confidence but never a reason.
+        let right = review_event(&question, &tagged(1), Mode::Tutor, 9).unwrap();
+        assert_eq!((right.confidence, right.reason), (Some(Confidence::Sure), None));
+        assert!(!right.sure_miss());
+    }
+
+    #[test]
+    fn answers_saved_before_confidence_still_load() {
+        let old: Answer = serde_json::from_str(r#"{"chosen":1,"took_ms":5,"flagged":false}"#).unwrap();
+        assert_eq!((old.confidence, old.reason), (None, None));
+        let json = serde_json::to_string(&old).unwrap();
+        assert!(!json.contains("confidence") && !json.contains("reason"));
     }
 
     #[test]

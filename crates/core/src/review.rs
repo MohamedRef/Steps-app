@@ -90,6 +90,67 @@ impl Origin {
     }
 }
 
+/// How sure Mohamed was before the answer came out: one optional tap.
+/// A miss he was sure of is the one most worth re-testing (Butler 2011).
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum Confidence {
+    Sure,
+    Unsure,
+    Guess,
+}
+
+impl Confidence {
+    pub const ALL: [Confidence; 3] = [Self::Sure, Self::Unsure, Self::Guess];
+
+    pub fn as_str(self) -> &'static str {
+        match self {
+            Self::Sure => "sure",
+            Self::Unsure => "unsure",
+            Self::Guess => "guess",
+        }
+    }
+
+    pub fn parse(s: &str) -> Option<Self> {
+        Self::ALL.into_iter().find(|c| c.as_str() == s)
+    }
+}
+
+/// Why a wrong answer was wrong, picked after it: the "why I missed it" log.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum ErrorReason {
+    /// He didn't know the fact.
+    Knowledge,
+    /// He misread the question or an option.
+    Misread,
+    /// He had it right, then changed his answer.
+    SecondGuessed,
+    /// He knew the facts but a step of the reasoning went wrong.
+    Reasoning,
+    /// He ran out of time or rushed.
+    Timing,
+}
+
+impl ErrorReason {
+    pub const ALL: [ErrorReason; 5] =
+        [Self::Knowledge, Self::Misread, Self::SecondGuessed, Self::Reasoning, Self::Timing];
+
+    pub fn as_str(self) -> &'static str {
+        match self {
+            Self::Knowledge => "knowledge",
+            Self::Misread => "misread",
+            Self::SecondGuessed => "second_guessed",
+            Self::Reasoning => "reasoning",
+            Self::Timing => "timing",
+        }
+    }
+
+    pub fn parse(s: &str) -> Option<Self> {
+        Self::ALL.into_iter().find(|r| r.as_str() == s)
+    }
+}
+
 /// One answer to one item. Append-only: never edited, never deleted.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ReviewEvent {
@@ -100,6 +161,25 @@ pub struct ReviewEvent {
     pub at_ms: i64,
     /// Time spent on the item, in milliseconds.
     pub took_ms: u32,
+    /// How sure he was before the answer came out, when he said.
+    /// Optional, so events from older builds and devices still read.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub confidence: Option<Confidence>,
+    /// Why he missed it, when he said. Only on "Again" answers.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub reason: Option<ErrorReason>,
+}
+
+impl ReviewEvent {
+    /// An answer with no confidence or reason given.
+    pub fn new(item_id: impl Into<String>, grade: Grade, origin: Origin, at_ms: i64, took_ms: u32) -> Self {
+        Self { item_id: item_id.into(), grade, origin, at_ms, took_ms, confidence: None, reason: None }
+    }
+
+    /// A miss he was sure of: re-test it first.
+    pub fn sure_miss(&self) -> bool {
+        self.grade == Grade::Again && self.confidence == Some(Confidence::Sure)
+    }
 }
 
 /// Where answers go. The store implements it (`crate::store` in the app).
@@ -279,6 +359,8 @@ mod tests {
                 origin: Origin::Study,
                 at_ms: i as i64,
                 took_ms: 1000,
+                confidence: None,
+                reason: None,
             });
         }
         assert_eq!(sink.events.len(), 2);
@@ -327,6 +409,42 @@ mod tests {
     }
 
     #[test]
+    fn confidence_and_reason_names_round_trip() {
+        for c in Confidence::ALL {
+            assert_eq!(Confidence::parse(c.as_str()), Some(c));
+            assert_eq!(serde_json::to_string(&c).unwrap(), format!("\"{}\"", c.as_str()));
+        }
+        for r in ErrorReason::ALL {
+            assert_eq!(ErrorReason::parse(r.as_str()), Some(r));
+            assert_eq!(serde_json::to_string(&r).unwrap(), format!("\"{}\"", r.as_str()));
+        }
+        assert_eq!(ErrorReason::parse("bad_luck"), None);
+    }
+
+    #[test]
+    fn events_from_older_builds_still_read() {
+        let old = r#"{"item_id":"hb.L01.001","grade":"again","origin":"bank","at_ms":1,"took_ms":900}"#;
+        let e: ReviewEvent = serde_json::from_str(old).unwrap();
+        assert_eq!(e, ReviewEvent::new("hb.L01.001", Grade::Again, Origin::Bank, 1, 900));
+        // And an event without them writes nothing new, so older builds read it too.
+        assert_eq!(serde_json::to_string(&e).unwrap(), old);
+    }
+
+    #[test]
+    fn a_tagged_event_round_trips() {
+        let e = ReviewEvent {
+            confidence: Some(Confidence::Sure),
+            reason: Some(ErrorReason::SecondGuessed),
+            ..ReviewEvent::new("hb.L01.001", Grade::Again, Origin::Study, 1, 900)
+        };
+        let json = serde_json::to_string(&e).unwrap();
+        assert!(json.contains("\"confidence\":\"sure\"") && json.contains("\"reason\":\"second_guessed\""));
+        assert_eq!(serde_json::from_str::<ReviewEvent>(&json).unwrap(), e);
+        assert!(e.sure_miss());
+        assert!(!ReviewEvent { grade: Grade::Good, ..e }.sure_miss());
+    }
+
+    #[test]
     fn logged_review_flattens_the_event() {
         let l = LoggedReview {
             id: "s24-1-0".into(),
@@ -337,6 +455,8 @@ mod tests {
                 origin: Origin::Review,
                 at_ms: 1,
                 took_ms: 900,
+                confidence: None,
+                reason: None,
             },
         };
         let json = serde_json::to_string(&l).unwrap();
