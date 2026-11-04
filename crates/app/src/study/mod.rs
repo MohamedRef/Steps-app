@@ -14,7 +14,7 @@ mod backend;
 #[cfg(test)]
 mod browser;
 mod card;
-mod cloze;
+pub(crate) mod cloze;
 mod enumerate;
 mod essay;
 pub mod grade;

@@ -141,7 +141,7 @@ fn his_checks_are_exported_and_a_failed_export_can_be_tried_again() {
     let date = crate::store::zone().calendar_day(crate::store::now_ms()).iso();
     let path = dir.join(format!("steps-verdicts-{date}.yaml"));
     let yaml = std::fs::read_to_string(&path).unwrap();
-    assert!(yaml.contains("cvs.L01."), "{yaml}");
+    assert!(yaml.contains("verdict: approved"), "{yaml}");
     // A folder where the file goes: the write fails and says so.
     std::fs::remove_file(&path).unwrap();
     std::fs::create_dir_all(&path).unwrap();

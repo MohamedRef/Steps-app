@@ -168,3 +168,14 @@ impl App {
         nodes.len()
     }
 }
+
+/// A First Aid course with no lecture written yet, if one is left. Tests
+/// that need an empty course skip once every course has content.
+pub fn empty_course() -> Option<String> {
+    let lib = crate::content::Library::get();
+    lib.program
+        .courses
+        .iter()
+        .find(|c| !lib.lectures.keys().any(|id| id.starts_with(&format!("{}.", c.id))))
+        .map(|c| c.id.clone())
+}

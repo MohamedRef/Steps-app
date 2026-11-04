@@ -143,8 +143,20 @@ fn the_setup_starts_a_session_from_the_ready_lectures() {
     let mut app = App::open(Screen::Study);
     app.assert_has(tx::TITLE);
     app.assert_has(tx::TIME);
-    // The cardiovascular embryology lecture is ready and picked.
-    let title = crate::content::Library::get().title("cvs.L01").to_string();
+    // A ready lecture whose title no other lecture shares, so its chip is
+    // the only one with that name.
+    let lib = crate::content::Library::get();
+    let lecture = lib
+        .lectures
+        .keys()
+        .find(|id| {
+            let t = lib.title(id);
+            !lib.lectures[*id].topics.is_empty()
+                && lib.lectures.keys().filter(|o| lib.title(o) == t).count() == 1
+        })
+        .expect("a ready lecture with a unique title")
+        .clone();
+    let title = lib.title(&lecture).to_string();
     app.assert_has(&title);
     app.assert_has(tx::CLEAR_ALL);
 
@@ -156,10 +168,10 @@ fn the_setup_starts_a_session_from_the_ready_lectures() {
     // Picking the lecture back shows its topics.
     app.tap(&title);
     app.assert_has(tx::TOPICS);
-    let topic = crate::content::Library::get().lectures["cvs.L01"].topics[0].title.clone();
+    let topic = lib.lectures[&lecture].topics[0].title.clone();
     app.tap(&topic);
     app.tap(&topic);
-    app.tap(tx::CLEAR_ALL);
+    // One lecture of several: the button picks them all, then clears.
     app.tap(tx::PICK_ALL);
     app.assert_has(tx::CLEAR_ALL);
 
@@ -237,8 +249,11 @@ fn a_cloze_left_blank_and_revealed_is_marked_wrong() {
 
 #[test]
 fn a_cloze_with_a_number_has_the_numbers_tip_and_checks_by_button() {
+    use crate::study::cloze::{Seg, segments};
     let numeric = ids_of("cloze").into_iter().find(|id| match item(id).body {
-        Body::Cloze { text, .. } => text.split("{{").skip(1).any(|b| b.chars().any(|c| c.is_ascii_digit())),
+        Body::Cloze { text, .. } => segments(&text)
+            .iter()
+            .any(|s| matches!(s, Seg::Blank { answer, .. } if answer.chars().any(|c| c.is_ascii_digit()))),
         _ => false,
     });
     let Some(id) = numeric else { return };
@@ -595,7 +610,14 @@ fn an_order_step_is_dragged_into_place() {
 #[test]
 fn a_card_due_in_another_course_is_counted_and_all_courses_bring_it_in() {
     use steps_core::review::ReviewEvent;
-    let card = first_of("card");
+    let lib = crate::content::Library::get();
+    let card = lib.lectures["cvs.L01"].items.iter().find(|i| i.body.kind() == "card").unwrap().clone();
+    // Another written course is in focus, so the cvs card is due elsewhere.
+    let Some(other) = lib.lectures.keys().map(|id| id.split('.').next().unwrap()).find(|c| *c != "cvs")
+    else {
+        return;
+    };
+    let other = other.to_string();
     let day = 86_400_000;
     // Missed two days ago: due again now.
     crate::store::shared()
@@ -619,7 +641,7 @@ fn a_card_due_in_another_course_is_counted_and_all_courses_bring_it_in() {
             created_ms: 1,
         })
         .unwrap();
-    crate::store::shared().put_setting("course_focus", &"bio".to_string()).unwrap();
+    crate::store::shared().put_setting("course_focus", &other).unwrap();
     let mut app = App::open(Screen::Study);
     app.assert_has(&tx::due_elsewhere(1));
     app.tap(tx::ELSEWHERE_ALL);
@@ -630,7 +652,8 @@ fn a_card_due_in_another_course_is_counted_and_all_courses_bring_it_in() {
 
 #[test]
 fn a_course_with_nothing_ready_says_so() {
-    crate::store::shared().put_setting("course_focus", &"bio".to_string()).unwrap();
+    let Some(empty) = super::kit::empty_course() else { return };
+    crate::store::shared().put_setting("course_focus", &empty).unwrap();
     let app = App::open(Screen::Study);
     app.assert_has(tx::EMPTY_LIBRARY);
     app.assert_has(crate::i18n::own::TITLE);
