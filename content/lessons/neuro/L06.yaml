@@ -1,0 +1,397 @@
+schema: steps.lesson/v1
+lecture: neuro.L06
+lessons:
+  - id: neuro.L06.lesson1
+    title: "أدوية التشنجات والنوم: كل دوا وبوابته"
+    hook: "كل الأدوية دي بتعمل حاجة من اتنين: تهدّي الـ neuron المتحمس، أو تقوّي الفرامل بتاعة الـ GABA"
+    minutes: 10
+    pages: [560, 562]
+    topics: [anticonvulsants, barbiturates, benzodiazepines, insomnia-therapy, triptans]
+    goals:
+      - "تعرف آلية كل anticonvulsant ومداه"
+      - "تحفظ الأعراض الجانبية المميزة لكل واحد"
+      - "تفرّق الـ barbiturates عن الـ benzodiazepines"
+      - "تختار دوا النوم المناسب"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "أهداف الـ anticonvulsants في الـ synapse"
+        svg: |-
+          <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-bad" x="10" y="14" width="160" height="88" rx="12"/>
+            <text x="20" y="34" class="t-sm t-b">Excitatory neuron</text>
+            <text x="20" y="54" class="t-sm"><tspan class="t-b">Na+</tspan>: phenytoin, carba-</text>
+            <text x="20" y="68" class="t-sm">mazepine, lamotrigine</text>
+            <text x="20" y="84" class="t-sm"><tspan class="t-b">Ca2+</tspan>: ethosuximide,</text>
+            <text x="20" y="98" class="t-sm">gabapentinoids</text>
+            <rect class="fg-bad" x="190" y="14" width="160" height="88" rx="12"/>
+            <text x="200" y="34" class="t-sm t-b">Vesicle release</text>
+            <text x="200" y="54" class="t-sm"><tspan class="t-b">SV2A</tspan>: levetiracetam</text>
+            <text x="200" y="76" class="t-sm"><tspan class="t-b">Broad</tspan>: valproate</text>
+            <text x="200" y="90" class="t-sm">(Na+, Ca2+, GABA-T)</text>
+            <rect class="fg-good" x="10" y="122" width="340" height="88" rx="12"/>
+            <text x="20" y="142" class="t-sm t-b">Inhibitory side: GABA-A receptor (Cl− in)</text>
+            <text x="20" y="164" class="t-sm"><tspan class="t-b">Benzodiazepines</tspan>: ↑ frequency of opening</text>
+            <text x="20" y="182" class="t-sm"><tspan class="t-b">Barbiturates</tspan>: ↑ duration of opening</text>
+            <text x="20" y="200" class="t-sm"><tspan class="t-b">Topiramate</tspan>: potentiates GABA-A (and blocks Na+)</text>
+          </svg>
+        caption: "فوق: بنهدّي الـ neuron المتحمس بقفل الـ Na+ channels (phenytoin، carbamazepine، lamotrigine) أو الـ Ca2+ channels (ethosuximide، gabapentinoids)، أو بنمنع إطلاق الـ vesicles (levetiracetam). تحت: بنقوّي الـ GABA-A فالـ Cl− يدخل والخلية تهدى. الـ valproate بيعمل كل حاجة شوية، فهو broad spectrum."
+        alt: "Three panels. Excitatory neuron: Na+ channel blockers phenytoin, carbamazepine and lamotrigine; Ca2+ channel blockers ethosuximide and gabapentinoids. Vesicle release: levetiracetam blocks SV2A; valproate blocks Na+ and Ca2+ channels and GABA transaminase. Inhibitory side: the GABA-A receptor, where benzodiazepines increase frequency of opening, barbiturates increase duration, and topiramate potentiates it."
+        page: 560
+        quote: "Blocks Na+ channel Blocks Ca2+ channel Blocks GABA transaminase"
+      - kind: match
+        prompt: "وصّل كل anticonvulsant بالعَرَض الجانبي المميز ليه"
+        pairs:
+          - ["Phenytoin", "Gingival hypertrophy, hirsutism"]
+          - ["Carbamazepine", "Agranulocytosis, SIADH"]
+          - ["Valproate", "Hepatotoxicity, highest teratogenic risk"]
+          - ["Topiramate", "Kidney stones, weight loss"]
+          - ["Levetiracetam", "Psychosis"]
+          - ["Lamotrigine", "Stevens-Johnson syndrome"]
+        why: "الـ phenytoin والـ carbamazepine بيـ induce الـ CYP450، والـ valproate بيـ inhibit. والـ ethosuximide للـ absence بس."
+        page: 560
+        quote: "Hepatotoxicity, pancreatitis, teratogenicity (highest risk of all anticonvulsants)"
+      - kind: check
+        question: "Which anticonvulsant is used for absence seizures only?"
+        options:
+          - "Ethosuximide"
+          - "Phenytoin"
+          - "Carbamazepine"
+          - "Gabapentin"
+        answer: 0
+        why:
+          - "صح: narrow spectrum للـ absence، بيقفل الـ Ca2+ channels."
+          - "للـ focal."
+          - "للـ focal وممكن يزوّد الـ absence."
+          - "للـ focal."
+        page: 560
+        quote: "Narrow spectrum (absence seizures only) Ethosuximide Blocks Ca2+ channel"
+      - kind: table
+        title: "Barbiturates × Benzodiazepines"
+        columns: ["", "Barbiturates", "Benzodiazepines"]
+        rows:
+          - ["GABA-A effect", "↑ duration of Cl− opening", "↑ frequency of Cl− opening"]
+          - ["Respiratory depression", "Can be fatal", "Less risk"]
+          - ["Overdose", "Supportive only", "Flumazenil (may precipitate seizures)"]
+          - ["Note", "Induce CYP-450; contraindicated in porphyria", "Short acting = ATOM, more addictive"]
+        hide: [[0, 1], [0, 2], [2, 2], [3, 1]]
+        page: 562
+        quote: "Less risk of respiratory depression and coma than with barbiturates."
+      - kind: aside
+        tone: tip
+        text: "«==Barbidurates==» بتطوّل مدة الفتح، و «==frenzodiazepines==» بتكتّر عدد مرات الفتح. والاتنين مع الكحول بيجمعوا على بعض لأنهم كلهم على نفس الـ GABA-A receptor."
+        page: 562
+        quote: "Dependence, additive CNS depression effects with alcohol and barbiturates (all bind the GABAA receptor)."
+      - kind: explain
+        title: "الـ benzodiazepine المناسب"
+        text: |-
+          - **Status epilepticus**: lorazepam أو diazepam أو midazolam.
+          - **Alcohol withdrawal**: طويلة المفعول (==chlordiazepoxide، diazepam==).
+          - لو الكبد تعبان: «**LOT**» = ==Lorazepam، Oxazepam، Temazepam== لأن الـ first-pass بتاعهم قليل.
+          - بتقلل الـ N3 والـ REM، فبتنفع في night terrors والمشي أثناء النوم.
+        page: 562
+        quote: "Lorazepam, Oxazepam, and Temazepam can be used for those with liver disease who drink a LOT due to minimal first-pass metabolism."
+      - kind: check
+        question: "A patient overdosed on alprazolam is given flumazenil and starts seizing. Why?"
+        options:
+          - "Flumazenil precipitated acute benzodiazepine withdrawal"
+          - "Flumazenil is a proconvulsant GABA agonist"
+          - "Alprazolam is a barbiturate"
+          - "Flumazenil induces CYP-450"
+        answer: 0
+        why:
+          - "صح: الـ flumazenil competitive antagonist، بيشيل الـ benzo فجأة فيعمل withdrawal وتشنجات."
+          - "ده antagonist مش agonist."
+          - "الـ alprazolam benzodiazepine قصير المفعول (ATOM)."
+          - "مالوش علاقة بالـ CYP."
+        page: 562
+        quote: "Can precipitate seizures by causing acute benzodiazepine withdrawal."
+      - kind: table
+        title: "أدوية النوم"
+        columns: ["Drug", "Target", "Note"]
+        rows:
+          - ["Zolpidem, zaleplon, eszopiclone", "BZ1 GABA receptor", "Sleepwalking; reversed by flumazenil"]
+          - ["Suvorexant", "Orexin receptor antagonist", "Not in narcolepsy"]
+          - ["Ramelteon", "Melatonin MT1/MT2 agonist", "No dependency"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+        page: 562
+        quote: "Suvorexant Orexin (hypocretin) receptor antagonist"
+      - kind: explain
+        title: "Triptans"
+        text: |-
+          **Sumatriptan** = 5-HT1B/1D agonist: بيمنع تنشيط الـ trigeminal وإطلاق الـ peptides، وبيعمل vasoconstriction. للـ migraine الحاد ونوبة الـ cluster («trip the migraine with serotonin»).
+
+          ==ممنوع في CAD والـ vasospastic angina== لأنه بيعمل coronary vasospasm، ومع أدوية serotonin تانية ممكن serotonin syndrome.
+        page: 562
+        quote: "Coronary vasospasm (contraindicated in patients with CAD or vasospastic angina), mild paresthesia, serotonin syndrome (in combination with other 5-HT agonists)."
+      - kind: try
+        items: [neuro.L06.006, neuro.L06.007, neuro.L06.017, neuro.L06.020, neuro.L06.022]
+    recap:
+      - "Na+: phenytoin، carbamazepine، lamotrigine؛ Ca2+: ethosuximide، gabapentinoids؛ SV2A: levetiracetam."
+      - "Valproate = broad، كبد وبنكرياس وأعلى teratogenicity."
+      - "Barbiturates = duration؛ benzodiazepines = frequency؛ flumazenil ممكن يعمل تشنجات."
+      - "LOT في مرضى الكبد؛ ATOM قصيرة وإدمانها أعلى."
+      - "Triptans ممنوعة في الـ CAD."
+    practice: [neuro.L06.001, neuro.L06.002, neuro.L06.003, neuro.L06.004, neuro.L06.005, neuro.L06.006, neuro.L06.007, neuro.L06.008, neuro.L06.009, neuro.L06.010, neuro.L06.011, neuro.L06.012, neuro.L06.013, neuro.L06.014, neuro.L06.015, neuro.L06.016, neuro.L06.017, neuro.L06.018, neuro.L06.019, neuro.L06.020, neuro.L06.021, neuro.L06.022]
+  - id: neuro.L06.lesson2
+    title: "Parkinson والـ dementia والتخدير"
+    hook: "إزاي توصّل dopamine للمخ وهو مش بيعدّي الـ BBB؟ الحيلة كلها في إنك تحميه في السكة"
+    minutes: 10
+    pages: [563, 565]
+    topics: [parkinson-disease-therapy, carbidopa-levodopa, neurodegenerative-disease-therapy, local-anesthetics, general-anesthetics]
+    goals:
+      - "تفهم كل استراتيجية في علاج Parkinson"
+      - "تعرف علاج Alzheimer و ALS و Huntington"
+      - "تفهم الـ local anesthetics والـ pH"
+      - "تفرّق الـ IV anesthetics"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "رحلة الـ L-DOPA"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="nL06a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0 0 L10 5 L0 10 z"/></marker></defs>
+            <text x="10" y="18" class="t-sm t-b">Blood (periphery)</text>
+            <text x="200" y="18" class="t-sm t-b">Brain</text>
+            <line class="fg-thin" x1="180" y1="10" x2="180" y2="200" stroke-dasharray="6 4"/>
+            <text x="150" y="208" class="t-sm t-mut">BBB</text>
+            <rect class="fg-acc" x="10" y="80" width="70" height="30" rx="6"/>
+            <text x="22" y="99" class="t-sm t-b">L-DOPA</text>
+            <line class="fg-arrow" x1="80" y1="95" x2="194" y2="95" marker-end="url(#nL06a)"/>
+            <rect class="fg-acc" x="196" y="80" width="70" height="30" rx="6"/>
+            <text x="208" y="99" class="t-sm t-b">L-DOPA</text>
+            <line class="fg-arrow" x1="266" y1="95" x2="286" y2="95" marker-end="url(#nL06a)"/>
+            <rect class="fg-good" x="288" y="80" width="66" height="30" rx="6"/>
+            <text x="292" y="99" class="t-sm t-b">Dopamine</text>
+            <line class="fg-arrow" x1="40" y1="80" x2="40" y2="46" marker-end="url(#nL06a)"/>
+            <text x="4" y="40" class="t-sm">DDC: carbidopa</text>
+            <line class="fg-arrow" x1="60" y1="110" x2="60" y2="150" marker-end="url(#nL06a)"/>
+            <text x="20" y="166" class="t-sm">COMT: entacapone,</text>
+            <text x="20" y="182" class="t-sm">tolcapone</text>
+            <line class="fg-arrow" x1="320" y1="110" x2="320" y2="146" marker-end="url(#nL06a)"/>
+            <text x="248" y="162" class="t-sm">MAO-B: selegiline,</text>
+            <text x="248" y="178" class="t-sm">rasagiline</text>
+            <text x="248" y="194" class="t-sm">COMT: tolcapone</text>
+            <text x="200" y="56" class="t-sm t-mut">agonists act here:</text>
+            <text x="200" y="70" class="t-sm t-mut">pramipexole, ropinirole</text>
+          </svg>
+        caption: "الـ L-DOPA بيعدّي الـ BBB، بس في الدم الـ DDC والـ COMT بيكسّروه قبل ما يوصل. الـ carbidopa والـ entacapone بيحموه بره. جوه، الـ MAO-B والـ COMT بيكسّروا الـ dopamine، فالـ selegiline والـ tolcapone بيحافظوا عليه. والـ agonists (pramipexole) بتشتغل على الـ receptor على طول."
+        alt: "L-DOPA in the blood crosses the blood-brain barrier and becomes dopamine in the brain. In the periphery, DOPA decarboxylase (blocked by carbidopa) and COMT (blocked by entacapone and tolcapone) break L-DOPA down. In the brain, MAO-B (blocked by selegiline and rasagiline) and COMT (blocked by tolcapone) break dopamine down. Dopamine agonists pramipexole and ropinirole act directly on receptors."
+        page: 563
+        quote: "Agents prevent peripheral (pre-BBB) l-DOPA degradation → ↑ l-DOPA entering CNS → ↑ central l-DOPA available for conversion to dopamine."
+      - kind: explain
+        title: "مين ياخد إيه في Parkinson"
+        text: |-
+          - الشباب: ==non-ergot dopamine agonists== (pramipexole، ropinirole). احذر الـ **impulse control disorder** (قمار، شرا)، hallucinations، ونوم مفاجئ.
+          - الكبار: **levodopa/carbidopa**. مع الوقت ==on-off phenomenon==، والـ MAO-B inhibitors بتساعد.
+          - الرعشة: **benztropine** أو trihexyphenidyl (antimuscarinic) بيحسّنوا الرعشة والـ rigidity بس مش الـ bradykinesia («Tri Parking my Mercedes-Benz»).
+          - **Amantadine**: للـ dyskinesias اللي بيعملها الـ levodopa، ومعاه livedo reticularis.
+        page: 563
+        quote: "Most effective treatments are non-ergot dopamine agonists (younger patients) and levodopa/ carbidopa (older patients)."
+      - kind: check
+        question: "What does carbidopa do?"
+        options:
+          - "Inhibits peripheral DOPA decarboxylase without crossing the BBB"
+          - "Inhibits MAO-B in the brain"
+          - "Is a direct dopamine receptor agonist"
+          - "Inhibits central COMT"
+        answer: 0
+        why:
+          - "صح: فالـ L-DOPA يوصل للمخ أكتر، والغثيان يقل."
+          - "ده selegiline و rasagiline."
+          - "ده pramipexole و ropinirole."
+          - "ده tolcapone."
+        page: 564
+        quote: "Carbidopa, a peripheral DOPA decarboxylase inhibitor that cannot cross BBB, is given with l-DOPA to ↑ bioavailability of l-DOPA in the brain and to limit peripheral adverse effects."
+      - kind: table
+        title: "علاج الأمراض الـ neurodegenerative"
+        columns: ["Disease", "Drug", "Mechanism"]
+        rows:
+          - ["Alzheimer", "Donepezil, rivastigmine, galantamine", "AChE inhibitor"]
+          - ["Alzheimer (moderate-advanced)", "Memantine", "NMDA antagonist"]
+          - ["ALS", "Riluzole", "↓ glutamate excitotoxicity"]
+          - ["Huntington chorea", "Tetrabenazine", "VMAT inhibitor"]
+        hide: [[0, 2], [1, 2], [3, 2]]
+        page: 564
+        quote: "Inhibit vesicular monoamine transporter (VMAT) → ↓ dopamine vesicle packaging and release"
+      - kind: explain
+        title: "الـ local anesthetics والـ pH"
+        text: |-
+          بتقفل الـ **Na+ channel من جوه**. الدوا قاعدة ضعيفة: لازم يعدّي الغشا ==وهو مش مشحون==، وبعدين يشتغل وهو مشحون.
+
+          في الـ tissue الملتهب (حامضي)، الدوا يتشحن بره فمش بيعرف يدخل ← ==محتاج جرعة أكبر==.
+
+          الـ epinephrine بيقفل الأوعية فالدوا يفضل مكانه أطول. والإحساس بيروح بالترتيب: ألم، حرارة، لمس، ضغط. وأي حد عنده حساسية من الـ esters ياخد amides («2 i's»).
+        page: 565
+        quote: "3° amine local anesthetics penetrate membrane in uncharged form, then bind to ion channels as charged form."
+      - kind: sort
+        prompt: "Ester ولّا amide؟"
+        bins: ["Ester", "Amide"]
+        cards:
+          - { text: "Lidocaine", bin: 1 }
+          - { text: "Bupivacaine", bin: 1 }
+          - { text: "Prilocaine", bin: 1 }
+          - { text: "Cocaine", bin: 0 }
+          - { text: "Benzocaine", bin: 0 }
+          - { text: "Tetracaine", bin: 0 }
+        why: "الـ amides فيها حرفين i (lidocaine فيها i قبل الـ caine وكمان في أولها، و bupivacaine كده برضه). والسُمّية: bupivacaine للقلب، cocaine arrhythmias وضغط، benzocaine و prilocaine methemoglobinemia."
+        page: 565
+        quote: "Amides—bupivacaine, lidocaine, mepivacaine, prilocaine, ropivacaine (amides have 2 i’s in name)."
+      - kind: explain
+        title: "التخدير العام"
+        text: |-
+          - ذوبان قليل في الدم (N2O) = ==بيدخل ويخرج بسرعة==. ذوبان عالي في الدهون (isoflurane) = أقوى. القوة = 1/MAC.
+          - الـ inhaled: ↓ تنفس وضغط، ↑ ICP، وممكن malignant hyperthermia. والـ N2O بيكبّر أي فراغ فيه هوا (pneumothorax).
+          - **Propofol**: الأشهر للـ induction، بيوطّي الضغط.
+          - **Etomidate**: ==مش بيأثر على الضغط== بس ممكن adrenal insufficiency.
+          - **Ketamine**: NMDA antagonist، ==بيرفع الضغط== ويوسّع الشعب، بس ممكن hallucinations.
+        page: 565
+        quote: "Drugs with ↑ solubility in lipids (eg, isoflurane) = ↑ potency."
+      - kind: check
+        question: "Which IV induction agent is hemodynamically neutral but can cause acute adrenal insufficiency?"
+        options:
+          - "Etomidate"
+          - "Propofol"
+          - "Ketamine"
+          - "Midazolam"
+        answer: 0
+        why:
+          - "صح."
+          - "Propofol بيوطّي الضغط."
+          - "Ketamine بيرفع الضغط والنبض."
+          - "مش هو اللي الكتاب ذكره هنا."
+        page: 565
+        quote: "Acute adrenal insufficiency, postoperative nausea and vomiting; hemodynamically neutral"
+      - kind: try
+        items: [neuro.L06.028, neuro.L06.033, neuro.L06.039, neuro.L06.043, neuro.L06.067]
+    recap:
+      - "Carbidopa = DDC بره؛ entacapone = COMT بره؛ selegiline = MAO-B جوه؛ tolcapone = COMT بره وجوه."
+      - "Dopamine agonists = impulse control disorder."
+      - "Alzheimer: AChE inhibitors ثم memantine؛ ALS: riluzole؛ Huntington: tetrabenazine."
+      - "Local anesthetics: tissue حامضي = جرعة أكبر؛ 2 i's = amide."
+      - "Ketamine يرفع الضغط، etomidate محايد، propofol يوطّي."
+    practice: [neuro.L06.023, neuro.L06.024, neuro.L06.025, neuro.L06.026, neuro.L06.027, neuro.L06.028, neuro.L06.029, neuro.L06.030, neuro.L06.031, neuro.L06.032, neuro.L06.033, neuro.L06.034, neuro.L06.035, neuro.L06.036, neuro.L06.037, neuro.L06.038, neuro.L06.039, neuro.L06.040, neuro.L06.041, neuro.L06.042, neuro.L06.043, neuro.L06.067]
+  - id: neuro.L06.lesson3
+    title: "شلل العضلات والألم والـ glaucoma"
+    hook: "دوا واحد بيشلّ المريض في العملية ممكن يرفع حرارته لـ 41 لو جيناته غلط"
+    minutes: 10
+    pages: [566, 568]
+    topics: [neuromuscular-blocking-drugs, malignant-hyperthermia, skeletal-muscle-relaxants, opioid-analgesics, tramadol, butorphanol-nalbuphine, capsaicin, glaucoma-therapy]
+    goals:
+      - "تفرّق الـ depolarizing عن الـ nondepolarizing blockers وطريقة عكسهم"
+      - "تعرف الـ malignant hyperthermia وعلاجها"
+      - "ترتّب الـ opioids بالـ efficacy وتعرف أعراضها"
+      - "تراجع أدوية الـ glaucoma"
+    status: unverified
+    steps:
+      - kind: table
+        title: "Succinylcholine × Nondepolarizing"
+        columns: ["", "Succinylcholine", "Rocuronium, vecuronium..."]
+        rows:
+          - ["Action at Nm receptor", "Agonist: sustained depolarization", "Competitive antagonist"]
+          - ["Reversal", "Phase I: none (neostigmine worsens); phase II: cholinesterase inhibitors", "Sugammadex or neostigmine + atropine/glycopyrrolate"]
+          - ["Risks", "Hyperkalemia, malignant hyperthermia; prolonged with pseudocholinesterase deficiency", "—"]
+        hide: [[0, 1], [1, 1], [1, 2], [2, 1]]
+        page: 566
+        quote: "Reversal of blockade—sugammadex or cholinesterase inhibitors (eg, neostigmine)."
+      - kind: explain
+        title: "Malignant hyperthermia"
+        text: |-
+          عيب وراثي (AD) في الـ ==ryanodine receptor (RYR1)== أو الـ DHPR. لما يجي الـ trigger (inhaled anesthetics أو succinylcholine) الـ Ca2+ يطلع من الـ sarcoplasmic reticulum من غير ما يقف ← العضلات تفضل منقبضة.
+
+          النتيجة: ==CO2 بيعلى الأول== (hypercapnia)، tachycardia، تيبّس الفك والجسم، rhabdomyolysis، وحرارة عالية.
+
+          العلاج: **dantrolene** بيقفل الـ ryanodine receptor.
+        page: 566
+        quote: "Treatment: dantrolene (ryanodine receptor antagonist)."
+      - kind: check
+        question: "Why is neostigmine given with glycopyrrolate when reversing rocuronium?"
+        options:
+          - "To block muscarinic effects such as bradycardia"
+          - "To speed up rocuronium metabolism"
+          - "To prevent malignant hyperthermia"
+          - "To block nicotinic receptors"
+        answer: 0
+        why:
+          - "صح: الـ neostigmine بيزوّد الـ ACh في كل حتة، فالـ antimuscarinic بيحمي القلب."
+          - "مالوش علاقة بالـ metabolism."
+          - "الـ rocuronium مش trigger أصلاً."
+          - "إحنا عايزين الـ nicotinic يشتغل تاني."
+        page: 566
+        quote: "Anticholinergics (eg, atropine, glycopyrrolate) are given with cholinesterase inhibitors to prevent muscarinic effects (eg, bradycardia)."
+      - kind: match
+        prompt: "وصّل كل muscle relaxant بمكان شغله"
+        pairs:
+          - ["Baclofen", "GABA-B in the spinal cord"]
+          - ["Tizanidine", "Central α2 agonist"]
+          - ["Cyclobenzaprine", "Brainstem, TCA-like"]
+          - ["Dantrolene", "Ryanodine receptor in muscle"]
+        why: "Baclofen على الـ back (spinal cord)، والـ dantrolene الوحيد اللي بيشتغل على العضلة نفسها، فبيعالج الـ malignant hyperthermia والـ neuroleptic malignant syndrome."
+        page: 567
+        quote: "Acts directly on muscle"
+      - kind: figure
+        title: "الـ opioids من القوي للضعيف"
+        svg: |-
+          <svg viewBox="0 0 360 214" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="16" class="t-sm t-mut">bar = how far the μ receptor is switched on</text>
+            <text x="10" y="42" class="t-sm"><tspan class="t-b">Full agonist</tspan>: morphine, fentanyl, methadone</text>
+            <rect class="fg-bad" x="10" y="50" width="330" height="12" rx="4"/>
+            <text x="10" y="88" class="t-sm"><tspan class="t-b">Partial</tspan>: buprenorphine</text>
+            <rect class="fg-acc" x="10" y="96" width="170" height="12" rx="4"/>
+            <text x="10" y="134" class="t-sm"><tspan class="t-b">Mixed</tspan>: butorphanol, nalbuphine</text>
+            <rect class="fg-acc" x="10" y="142" width="140" height="12" rx="4"/>
+            <text x="10" y="180" class="t-sm"><tspan class="t-b">Antagonist</tspan>: naloxone, naltrexone</text>
+            <rect class="fg-good" x="10" y="188" width="8" height="12" rx="3"/>
+            <text x="26" y="199" class="t-sm t-mut">0</text>
+          </svg>
+        caption: "الـ full agonist بيشغّل الـ receptor لآخره. الـ partial والـ mixed بيشغّلوه نص نص، فلو المريض واخد full agonist هيزقّوه ويعملوا withdrawal. والـ antagonist بيقفله خالص: naloxone للـ overdose، و naltrexone للوقاية بعد الـ detox."
+        alt: "Bars ranking opioids by efficacy: full agonists morphine, fentanyl and methadone at the top; partial agonist buprenorphine; mixed agonist-antagonists butorphanol and nalbuphine; antagonists naloxone and naltrexone at zero."
+        page: 567
+        quote: "Full agonist: morphine, meperidine (short acting), methadone, codeine (prodrug; activated by CYP2D6), fentanyl. Partial agonist: buprenorphine."
+      - kind: explain
+        title: "أعراض الـ opioids"
+        text: |-
+          غثيان، هرش (histamine)، ==respiratory depression==، إمساك، miosis (ما عدا meperidine)، و sphincter of Oddi spasm.
+
+          الجسم ==مش بيتعوّد== على الـ miosis والإمساك، فالمدمن لسه حدقته صغيرة وعنده إمساك.
+
+          **Tramadol**: opioid ضعيف وكمان بيمنع reuptake للـ serotonin والـ NE ← بيقلل الـ seizure threshold وممكن serotonin syndrome.
+        page: 567
+        quote: "Tolerance does not develop to miosis and constipation."
+      - kind: check
+        question: "A woman on methadone gets butorphanol in labor and develops withdrawal. Why?"
+        options:
+          - "It is a μ partial agonist that displaces the full agonist"
+          - "It is a pure antagonist like naloxone"
+          - "It inhibits serotonin reuptake"
+          - "It induces methadone metabolism"
+        answer: 0
+        why:
+          - "صح: μ partial و κ full، فبيزق الـ methadone ويقلل التأثير فجأة."
+          - "ده mixed مش pure antagonist."
+          - "ده tramadol."
+          - "مش ده الـ mechanism."
+        page: 568
+        quote: "μ-opioid receptor partial agonists and κ-opioid receptor full agonists."
+      - kind: table
+        title: "أدوية الـ glaucoma بسرعة"
+        columns: ["Drug", "Effect on aqueous", "Clue"]
+        rows:
+          - ["Timolol", "↓ synthesis", "No pupil change"]
+          - ["Acetazolamide", "↓ synthesis", "No pupil change"]
+          - ["Brimonidine", "↓ synthesis, ↑ uveoscleral outflow", "Ocular allergy, hyperemia"]
+          - ["Latanoprost", "↑ uveoscleral outflow", "Brown iris, eyelash growth"]
+          - ["Pilocarpine", "↑ trabecular outflow", "Miosis; best in acute angle closure"]
+          - ["Epinephrine", "↓ synthesis", "Mydriasis; avoid in closed angle"]
+        hide: [[3, 2], [4, 2], [5, 2]]
+        page: 568
+        quote: "Use pilocarpine in acute angle closure glaucoma—very effective at opening meshwork into canal of Schlemm"
+      - kind: try
+        items: [neuro.L06.047, neuro.L06.050, neuro.L06.057, neuro.L06.059, neuro.L06.066]
+    recap:
+      - "Succinylcholine: phase I مالوش antidote؛ pseudocholinesterase deficiency = شلل طويل."
+      - "Malignant hyperthermia: RYR1، CO2 بيعلى وتيبّس، dantrolene."
+      - "Baclofen = GABA-B في الحبل الشوكي؛ dantrolene = على العضلة."
+      - "مافيش tolerance للـ miosis والإمساك؛ naloxone للـ overdose و naltrexone للوقاية."
+      - "Mixed agonists بيعملوا withdrawal مع الـ full agonists."
+    practice: [neuro.L06.044, neuro.L06.045, neuro.L06.046, neuro.L06.047, neuro.L06.048, neuro.L06.049, neuro.L06.050, neuro.L06.051, neuro.L06.052, neuro.L06.053, neuro.L06.054, neuro.L06.055, neuro.L06.056, neuro.L06.057, neuro.L06.058, neuro.L06.059, neuro.L06.060, neuro.L06.061, neuro.L06.062, neuro.L06.063, neuro.L06.064, neuro.L06.065, neuro.L06.066, neuro.L06.068]

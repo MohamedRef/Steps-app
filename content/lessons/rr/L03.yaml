@@ -1,0 +1,718 @@
+schema: steps.lesson/v1
+lecture: rr.L03
+lessons:
+  - id: rr.L03.lesson1
+    title: "من الـ sweat test لحد الـ Negri body: المعمل بيقولك التشخيص"
+    hook: "كل lab finding هنا ليه سبب منطقي. افهم السبب، والتشخيص ييجي لوحده"
+    minutes: 9
+    pages: [726, 727]
+    topics: [biochemistry, immunology, microbiology]
+    goals:
+      - "تعرف ليه الـ cystic fibrosis بيرفع الـ sweat chloride والـ trypsinogen"
+      - "تفرّق بين B12 والـ folate بالـ methylmalonic acid"
+      - "تحفظ اختبارات الـ optochin والـ novobiocin والـ bacitracin بمنطق"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Cystic fibrosis: قناة كلور بايظة"
+        text: |-
+          الـ ==CFTR== قناة بتطلّع الـ Cl⁻ برّه الخلية. لو باظت (autosomal recessive):
+
+          - في **الغدد العرقية**: الكلور ما بيرجعش يتمص، فيطلع في العرق عالي ← **↑ Cl⁻ on sweat test**.
+          - في **البنكرياس**: الإفرازات تتقل وتسد القنوات، فالـ trypsinogen يرجع للدم ← **↑ immunoreactive trypsinogen** (ده اللي بيتشاف في الـ newborn screen).
+          - في **الرئة**: mucous plugs تقيلة، والـ ==Pseudomonas== بتحب تعشش فيها.
+
+          ومن غير إنزيمات البنكرياس، الدهون ما بتتمصش ← **fat-soluble vitamin deficiency**.
+        page: 726
+        quote: "Colonies of Pseudomonas in lungs, ↑ Cl– on sweat test, ↑ immunoreactive trypsinogen Cystic fibrosis (autosomal recessive mutation in CFTR gene → fat-soluble vitamin deficiency and mucous plugs)"
+      - kind: explain
+        title: "الـ prenatal screening في سطرين"
+        text: |-
+          - **الـ second trimester**: ==↓ AFP== ← Down syndrome أو Edwards syndrome.
+          - **الـ first trimester**: ==↑ β-hCG مع ↓ PAPP-A== ← Down syndrome.
+
+          خلي بالك: الـ AFP **العالي** في دم الأم ليه معنى تاني خالص (dating error أو open neural tube defect)، وهنشوفه مع الـ neurology.
+        page: 726
+        quote: "↓ AFP on second trimester screening Down syndrome, Edwards syndrome"
+      - kind: reveal
+        prompt: "↑ homocysteine و ↑ methylmalonic acid مع بعض: ليه ده بيقول B12 بالذات مش folate؟"
+        answer: "الـ B12 cofactor لإنزيمين: واحد بيحوّل الـ homocysteine لـ methionine، والتاني بيحوّل الـ methylmalonyl-CoA لـ succinyl-CoA. الـ folate بيشارك في الأول بس. فلو الاتنين عاليين يبقى ==vitamin B12 deficiency==؛ لو الـ homocysteine لوحده عالي فكّر في الـ folate."
+        page: 726
+        quote: "↑ homocysteine, ↑ methylmalonic acid Vitamin B12 deficiency"
+      - kind: explain
+        title: "أربع علامات في المناعة"
+        text: |-
+          - **Anti-histone antibodies** ← ==drug-induced lupus==.
+          - **↓ T cells و ↓ PTH و ↓ Ca²⁺ و absent thymic shadow** ← thymic aplasia (==22q11 microdeletion==: DiGeorge). الـ thymus والـ parathyroid جايين من نفس الـ pharyngeal pouches، فالاتنين بيضيعوا مع بعض.
+          - **Recurrent infections و eczema و thrombocytopenia، ↑ IgE و IgA** ← Wiskott-Aldrich (WAS gene).
+          - **Giant granules in phagocytes و pancytopenia** ← Chédiak-Higashi (LYST gene: الـ phagolysosome ما بيتكوّنش).
+        page: 726
+        quote: "↓ T cells, ↓ PTH, ↓ Ca , absent thymic shadow on CXR Thymic aplasia (22q11 microdeletion: DiGeorge syndrome, velocardiofacial syndrome)"
+      - kind: check
+        question: "A 1-year-old boy has recurrent otitis media, eczema and petechiae. Labs show thrombocytopenia with high IgE and IgA. Which gene is mutated?"
+        options:
+          - "WAS"
+          - "LYST"
+          - "CFTR"
+          - "22q11 deletion"
+        answer: 0
+        why:
+          - "صح: infections و eczema و thrombocytopenia مع ↑ IgE و IgA = Wiskott-Aldrich."
+          - "LYST = Chédiak-Higashi: giant granules في الـ phagocytes."
+          - "CFTR = cystic fibrosis: Pseudomonas و sweat chloride عالي."
+          - "22q11 = DiGeorge: ↓ T cells و ↓ Ca²⁺ و مفيش thymic shadow."
+        page: 727
+        quote: "Recurrent infections, eczema, thrombocytopenia, ↑ IgE and IgA, ↓/normal IgG and IgM"
+      - kind: figure
+        title: "تلات disks يفرّقوا بين البكتيريا"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rr3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="10" y="10" width="100" height="34" rx="8"/>
+            <text x="22" y="32" class="t-sm t-b">Optochin</text>
+            <rect class="fg-acc" x="130" y="10" width="100" height="34" rx="8"/>
+            <text x="140" y="32" class="t-sm t-b">Novobiocin</text>
+            <rect class="fg-acc" x="250" y="10" width="100" height="34" rx="8"/>
+            <text x="262" y="32" class="t-sm t-b">Bacitracin</text>
+            <line class="fg-arrow" x1="40" y1="44" x2="40" y2="80" marker-end="url(#rr3a)"/>
+            <line class="fg-arrow" x1="80" y1="44" x2="80" y2="140" marker-end="url(#rr3a)"/>
+            <line class="fg-arrow" x1="160" y1="44" x2="160" y2="80" marker-end="url(#rr3a)"/>
+            <line class="fg-arrow" x1="200" y1="44" x2="200" y2="140" marker-end="url(#rr3a)"/>
+            <line class="fg-arrow" x1="280" y1="44" x2="280" y2="80" marker-end="url(#rr3a)"/>
+            <line class="fg-arrow" x1="320" y1="44" x2="320" y2="140" marker-end="url(#rr3a)"/>
+            <rect class="fg-good" x="10" y="82" width="100" height="40" rx="6"/>
+            <text x="16" y="98" class="t-sm t-good">Sensitive</text>
+            <text x="16" y="114" class="t-sm">S pneumoniae</text>
+            <rect class="fg-bad" x="40" y="142" width="80" height="44" rx="6"/>
+            <text x="46" y="158" class="t-sm t-bad">Resistant</text>
+            <text x="46" y="176" class="t-sm">viridans</text>
+            <rect class="fg-good" x="130" y="82" width="100" height="40" rx="6"/>
+            <text x="136" y="98" class="t-sm t-good">Sensitive</text>
+            <text x="136" y="114" class="t-sm">S epidermidis</text>
+            <rect class="fg-bad" x="150" y="142" width="96" height="44" rx="6"/>
+            <text x="156" y="158" class="t-sm t-bad">Resistant</text>
+            <text x="156" y="176" class="t-sm">S saprophyticus</text>
+            <rect class="fg-good" x="250" y="82" width="100" height="40" rx="6"/>
+            <text x="256" y="98" class="t-sm t-good">Sensitive</text>
+            <text x="256" y="114" class="t-sm">S pyogenes (A)</text>
+            <rect class="fg-bad" x="262" y="142" width="92" height="44" rx="6"/>
+            <text x="268" y="158" class="t-sm t-bad">Resistant</text>
+            <text x="268" y="176" class="t-sm">S agalactiae (B)</text>
+          </svg>
+        caption: "كل disk بيفرّق بين اتنين شبه بعض: الحساس بيموت حوالين الـ disk، والـ resistant بيكمّل يكبر."
+        alt: "Three disk tests. Optochin: sensitive S pneumoniae, resistant viridans streptococci. Novobiocin: sensitive S epidermidis, resistant S saprophyticus. Bacitracin: sensitive S pyogenes group A, resistant S agalactiae group B."
+        page: 727
+        quote: "Optochin sensitivity Sensitive: S pneumoniae; resistant: viridans streptococci (S mutans, S sanguis, S mitis)"
+      - kind: aside
+        tone: tip
+        text: "حيلة الحفظ: الحرف الأول يمشي مع بعض. **O**ptochin ← pneum**O**niae حساس. **N**ovobiocin: الـ ==S**a**prophyticus== هو اللي **مقاوم** (resistant). **B**acitracin: group **A** حساس و group **B** مقاوم."
+        page: 727
+        quote: "Novobiocin response Sensitive: S epidermidis; resistant: S saprophyticus"
+      - kind: explain
+        title: "علامات الأشعة والشريحة في الميكروبيولوجي"
+        text: |-
+          - **Thumb sign** على lateral neck x-ray ← ==epiglottitis== (H influenzae): الـ epiglottis وارمة فشكلها زي الصباع الكبير.
+          - **Steeple sign** (ضيق الـ upper trachea والـ subglottis) ← ==croup== (parainfluenza): الضيق تحت الـ glottis بيخلي الهوا شكله زي برج الكنيسة.
+          - **Branching gram ⊕ rods مع sulfur granules** ← Actinomyces israelii.
+          - **Hilar lymphadenopathy + granuloma في الـ middle أو lower lobe** ← Ghon complex (1° TB).
+          - **Clue cells مع ⊕ whiff test** ← Gardnerella vaginalis.
+        page: 727
+        quote: "“Thumb sign” on lateral neck x-ray Epiglottitis (Haemophilus influenzae)"
+      - kind: check
+        question: "A 2-year-old has a barking cough and stridor. Neck x-ray shows narrowing of the upper trachea and subglottis. Most likely organism?"
+        options:
+          - "Parainfluenza virus"
+          - "Haemophilus influenzae"
+          - "Gardnerella vaginalis"
+          - "Actinomyces israelii"
+        answer: 0
+        why:
+          - "صح: steeple sign = croup، والسبب parainfluenza virus."
+          - "H influenzae بيعمل epiglottitis، وعلامتها thumb sign مش steeple."
+          - "Gardnerella بتعمل clue cells في الـ vagina."
+          - "Actinomyces: branching gram ⊕ rods مع sulfur granules."
+        page: 727
+        quote: "Narrowing of upper trachea and subglottis (Steeple sign) on x-ray Croup (parainfluenza virus)"
+      - kind: explain
+        title: "AIDS وطفيليات وفيروسات"
+        text: |-
+          - **Ring-enhancing brain lesion في AIDS**: لو ==multiple== ← Toxoplasma gondii؛ لو ممكن تكون solitary ← CNS lymphoma.
+          - **Dilated cardiomyopathy مع apical atrophy و megacolon و megaesophagus** ← Chagas (Trypanosoma cruzi): الطفيلي بيدمّر الأعصاب والعضلة، فكل أنبوبة عضلية بتوسع.
+          - **Atypical lymphocytes + heterophile antibodies** ← infectious mononucleosis (EBV).
+          - **Cytoplasmic inclusions في Purkinje cells والـ hippocampus** ← ==Negri bodies== (rabies).
+        page: 727
+        quote: "Ring-enhancing brain lesion on CT/MRI in AIDS Toxoplasma gondii (multiple), CNS lymphoma (may be solitary)"
+      - kind: try
+        items: [rr.L03.001, rr.L03.004, rr.L03.007, rr.L03.014, rr.L03.019]
+    recap:
+      - "CF: ↑ sweat Cl⁻ و ↑ trypsinogen و Pseudomonas، ونقص الـ fat-soluble vitamins."
+      - "↑ homocysteine + ↑ MMA = B12. ↓ AFP في الـ second trimester = Down أو Edwards."
+      - "Optochin يفرّق pneumoniae عن viridans، novobiocin يفرّق epidermidis عن saprophyticus، bacitracin يفرّق group A عن B."
+      - "Thumb sign = epiglottitis، steeple sign = croup، multiple ring-enhancing في AIDS = Toxoplasma."
+    practice: [rr.L03.001, rr.L03.002, rr.L03.003, rr.L03.004, rr.L03.005, rr.L03.006, rr.L03.007, rr.L03.008, rr.L03.009, rr.L03.010, rr.L03.011, rr.L03.012, rr.L03.013, rr.L03.014, rr.L03.015, rr.L03.016, rr.L03.017, rr.L03.018, rr.L03.019, rr.L03.020, rr.L03.021, rr.L03.022, rr.L03.023, rr.L03.024]
+  - id: rr.L03.lesson2
+    title: "Psammoma والقلب والغدد: علامات بتتشاف في الشريحة والـ ECG"
+    hook: "Boot-shaped heart و electrical alternans و Orphan Annie: أسماء غريبة بس كل واحدة بتوصف اللي بتشوفه بالظبط"
+    minutes: 8
+    pages: [727, 727]
+    topics: [pathology, cardiovascular, endocrine]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Psammoma bodies: كرات كالسيوم بطبقات"
+        text: |-
+          **Concentrically laminated calcified spherules** يعني كرات كالسيوم ملفوفة طبقات زي البصلة: دي ==psammoma bodies==.
+
+          بتطلع في 6 أورام: papillary thyroid carcinoma، somatostatinoma، meningioma، mesothelioma، ovarian serous papillary cystadenocarcinoma، و prolactinoma.
+        page: 727
+        quote: "Concentrically laminated calcified spherules (psammoma Papillary thyroid carcinoma, somatostatinoma"
+      - kind: mnemonic
+        word: "PSMM"
+        parts:
+          - { key: "P", text: "Papillary thyroid carcinoma و Prolactinoma" }
+          - { key: "S", text: "Somatostatinoma و Serous papillary cystadenocarcinoma of the ovary" }
+          - { key: "M", text: "Meningioma" }
+          - { key: "M", text: "Mesothelioma" }
+        hook: "الكلمة psammoma نفسها فيها الحروف دي: P و S و M و M"
+        page: 727
+        quote: "meningioma, mesothelioma, ovarian serous papillary cystadenocarcinoma, prolactinoma"
+      - kind: explain
+        title: "القلب في الأشعة والـ ECG"
+        text: |-
+          - **Boot-shaped heart** ← tetralogy of Fallot، والشكل ده ==due to RVH==: الـ RV المتضخم بيرفع الـ apex لفوق فيبقى شكل الجزمة.
+          - **Rib notching** (الحافة السفلية للضلوع) ← ==coarctation of the aorta==: الدم بيلف حوالين الضيق من الـ intercostal arteries فتوسع وتاكل في الضلع.
+          - **Delta wave + short PR** ← WPW: الـ bundle of Kent بيعدّي الـ AV node، فالـ ventricle بيبدأ يتنشّط بدري.
+        page: 727
+        quote: "Boot-shaped heart on x-ray Tetralogy of Fallot (due to RVH)"
+      - kind: reveal
+        prompt: "ليه الـ cardiac tamponade بيعمل electrical alternans (R waves طولها بيتغير كل دقة)؟"
+        answer: "القلب سايب جوه كيس مليان سوائل، فبيتمرجح يمين وشمال مع كل دقة. لما يقرب من الـ electrode الـ R تطلع كبيرة، ولما يبعد تطلع صغيرة: ==electrical alternans==."
+        page: 727
+        quote: "Electrical alternans (alternating amplitude of R waves on ECG) Cardiac tamponade"
+      - kind: explain
+        title: "Aschoff و D-dimer"
+        text: |-
+          - **Granuloma with giant cells بعد pharyngeal infection** ← ==Aschoff bodies== (rheumatic fever).
+          - **↑ fibrin degradation products (D-dimer)** ← DVT أو DIC: الاتنين فيهم جلطة اتكوّنت واتكسّرت، فنواتج تكسير الـ fibrin بتعلى.
+        page: 727
+        quote: "Granuloma with giant cells after pharyngeal infection Aschoff bodies (rheumatic fever)"
+      - kind: check
+        question: "A 5-year-old has had a sore throat 3 weeks ago and now has fever, migratory arthritis and a new murmur. A cardiac biopsy would most likely show which finding?"
+        options:
+          - "Granulomas with giant cells (Aschoff bodies)"
+          - "Concentrically laminated calcified spherules"
+          - "Interdigitating layers of platelets and RBCs"
+          - "Empty-appearing nuclei with central clearing"
+        answer: 0
+        why:
+          - "صح: granuloma with giant cells بعد pharyngeal infection = Aschoff bodies في الـ rheumatic fever."
+          - "دي psammoma bodies، في أورام زي papillary thyroid و meningioma."
+          - "دي lines of Zahn في جلطة اتكوّنت قبل الوفاة."
+          - "دي Orphan Annie eyes في papillary thyroid carcinoma."
+        page: 727
+        quote: "Granuloma with giant cells after pharyngeal infection Aschoff bodies (rheumatic fever)"
+      - kind: figure
+        title: "ليه الـ renin بينزل في الـ Conn؟"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rr3b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker>
+            <marker id="rr3c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-bad" x="10" y="14" width="120" height="40" rx="8"/>
+            <text x="20" y="32" class="t-sm t-b">Adrenal adenoma</text>
+            <text x="20" y="47" class="t-sm">↑ aldosterone</text>
+            <line class="fg-arrow-acc" x1="130" y1="34" x2="200" y2="34" marker-end="url(#rr3b)"/>
+            <rect class="fg-box" x="202" y="14" width="148" height="40" rx="8"/>
+            <text x="212" y="32" class="t-sm">Na⁺ and water kept</text>
+            <text x="212" y="47" class="t-sm t-b">Hypertension</text>
+            <line class="fg-arrow-acc" x1="276" y1="54" x2="276" y2="100" marker-end="url(#rr3b)"/>
+            <rect class="fg-good" x="202" y="102" width="148" height="34" rx="8"/>
+            <text x="212" y="124" class="t-sm t-b">↓ renin (suppressed)</text>
+            <line class="fg-arrow-acc" x1="70" y1="54" x2="70" y2="100" marker-end="url(#rr3b)"/>
+            <rect class="fg-box" x="10" y="102" width="150" height="56" rx="8"/>
+            <text x="20" y="120" class="t-sm">K⁺ lost → hypokalemia</text>
+            <text x="20" y="138" class="t-sm">H⁺ lost → metabolic</text>
+            <text x="20" y="152" class="t-sm">alkalosis</text>
+            <path class="fg-arrow-bad" d="M276 136 C 276 176, 140 180, 120 160" marker-end="url(#rr3c)" stroke-dasharray="4 3"/>
+            <text x="128" y="184" class="t-sm t-mut">autonomous source: renin can't fix it</text>
+          </svg>
+        caption: "الغدة بتطلّع aldosterone لوحدها. الضغط يعلى فالكلية تقفل الـ renin، والـ K⁺ والـ H⁺ بيتفقدوا في البول."
+        alt: "Flow: adrenal adenoma raises aldosterone, which retains sodium and water causing hypertension, which suppresses renin; aldosterone also wastes potassium and hydrogen ions causing hypokalemia and metabolic alkalosis."
+        page: 727
+        quote: "Hypertension, hypokalemia, metabolic alkalosis, ↑ aldosterone, ↓ renin 1° hyperaldosteronism (eg, Conn syndrome)"
+      - kind: explain
+        title: "الغدد: Orphan Annie و brown tumor"
+        text: |-
+          - **Empty-appearing nuclei with central clearing** في خلايا الـ thyroid ← ==Orphan Annie eyes== (papillary thyroid carcinoma). نفس الورم اللي فيه psammoma bodies.
+          - **Brown tumor of bone** ← hyperparathyroidism أو osteitis fibrosa cystica. اللون البني جاي من ==hemosiderin== من نزيف قديم جوه العضمة.
+        page: 727
+        quote: "“Brown” tumor of bone Hyperparathyroidism or osteitis fibrosa cystica (deposited hemosiderin from hemorrhages causes brown color)"
+      - kind: aside
+        tone: trap
+        text: "**Aldosterone عالي** لوحده مش كفاية. لو الـ renin **عالي** معاه يبقى حاجة بتزق الـ adrenal من برّه. الـ ==1° hyperaldosteronism== لازم يبقى ↑ aldosterone مع ↓ renin."
+        page: 727
+        quote: "Hypertension, hypokalemia, metabolic alkalosis, ↑ aldosterone, ↓ renin 1° hyperaldosteronism (eg, Conn syndrome)"
+      - kind: try
+        items: [rr.L03.026, rr.L03.028, rr.L03.031, rr.L03.036, rr.L03.037]
+    recap:
+      - "Psammoma bodies: papillary thyroid، somatostatinoma، meningioma، mesothelioma، serous ovarian، prolactinoma."
+      - "Boot-shaped heart = TOF (RVH). Rib notching = coarctation. Delta wave = WPW. Electrical alternans = tamponade."
+      - "Aschoff = rheumatic fever. D-dimer = DVT أو DIC."
+      - "Conn: HTN و ↓ K⁺ و alkalosis مع ↑ aldosterone و ↓ renin."
+    practice: [rr.L03.025, rr.L03.026, rr.L03.027, rr.L03.028, rr.L03.029, rr.L03.030, rr.L03.031, rr.L03.032, rr.L03.033, rr.L03.034, rr.L03.035, rr.L03.036, rr.L03.037, rr.L03.038]
+  - id: rr.L03.lesson3
+    title: "الجهاز الهضمي: من الـ signet ring للـ nutmeg liver"
+    hook: "الأسماء دي كلها وصف لشكل: string و lead pipe و apple core و nutmeg. شوف الشكل وانت هتفتكر"
+    minutes: 9
+    pages: [727, 728]
+    topics: [gastrointestinal]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "المعدة والأمعاء الدقيقة"
+        text: |-
+          - **Mucin-filled cell with peripheral nucleus** ← ==signet ring cells== (diffuse gastric carcinoma): الـ mucin مالي الخلية وزاق النواة على جنب، فشكلها خاتم بفص.
+          - **Anti-transglutaminase / anti-deamidated gliadin / anti-endomysial antibodies** ← ==celiac disease== (diarrhea و weight loss).
+        page: 727
+        quote: "Mucin-filled cell with peripheral nucleus “Signet ring” cells (diffuse gastric carcinoma)"
+      - kind: figure
+        title: "تلات أشكال للأمعاء في الأشعة"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="18" class="t-sm t-b">String sign</text>
+            <path class="fg-ink" d="M10 40 L60 40 C 70 52, 100 52, 110 40 L 110 40" fill="none"/>
+            <path class="fg-ink" d="M10 80 L60 80 C 70 68, 100 68, 110 80" fill="none"/>
+            <text x="10" y="104" class="t-sm t-mut">narrow lumen:</text>
+            <text x="10" y="120" class="t-sm t-acc">Crohn disease</text>
+            <text x="130" y="18" class="t-sm t-b">Lead pipe</text>
+            <rect class="fg-box" x="130" y="40" width="100" height="40" rx="2"/>
+            <text x="130" y="104" class="t-sm t-mut">no haustra:</text>
+            <text x="130" y="120" class="t-sm t-acc">Ulcerative colitis</text>
+            <text x="250" y="18" class="t-sm t-b">Apple core</text>
+            <path class="fg-ink" d="M250 40 L280 40 L290 52 L310 52 L320 40 L350 40" fill="none"/>
+            <path class="fg-ink" d="M250 80 L280 80 L290 68 L310 68 L320 80 L350 80" fill="none"/>
+            <rect class="fg-bad" x="288" y="52" width="24" height="16"/>
+            <text x="250" y="104" class="t-sm t-mut">annular tumor:</text>
+            <text x="250" y="120" class="t-sm t-acc">Colorectal cancer</text>
+            <text x="250" y="136" class="t-sm t-mut">(usually left-sided)</text>
+          </svg>
+        caption: "الـ Crohn بيضيّق الـ lumen من الالتهاب والتليف (string sign). الـ UC بيمسح الـ haustra فالقولون يبقى ماسورة ملسا (lead pipe). الـ cancer بيلف حوالين القولون زي قلب التفاحة المقضومة (apple core)."
+        alt: "Three bowel outlines: a narrowed segment labelled string sign for Crohn disease, a smooth featureless tube labelled lead pipe for ulcerative colitis, and an annular narrowing labelled apple core for colorectal cancer."
+        page: 728
+        quote: "“Lead pipe” appearance of colon on imaging Ulcerative colitis (loss of haustra)"
+      - kind: check
+        question: "A 58-year-old man has iron deficiency anemia and a change in bowel habits. Barium enema shows an annular narrowing in the sigmoid colon. Diagnosis?"
+        options:
+          - "Colorectal cancer"
+          - "Crohn disease"
+          - "Ulcerative colitis"
+          - "Familial adenomatous polyposis"
+        answer: 0
+        why:
+          - "صح: apple core lesion = colorectal cancer، وغالباً left-sided."
+          - "الـ Crohn بيعمل string sign في الـ small bowel follow-through."
+          - "الـ UC بيعمل lead pipe colon من غير haustra."
+          - "الـ FAP: آلاف الـ polyps في الـ colonoscopy بعد البلوغ."
+        page: 728
+        quote: "“Apple core” lesion on barium enema x-ray Colorectal cancer (usually left-sided)"
+      - kind: explain
+        title: "FAP: آلاف الـ polyps"
+        text: "**Thousands of polyps on colonoscopy after puberty** ← ==familial adenomatous polyposis==: autosomal dominant، mutation في الـ **APC** gene. واحدة بس من الـ APC بتيجي بالوراثة، والتانية بتبوظ في القولون، فالـ polyps بتطلع بالآلاف."
+        page: 728
+        quote: "Thousands of polyps on colonoscopy after puberty Familial adenomatous polyposis (autosomal dominant APC gene mutation)"
+      - kind: explain
+        title: "الكبد تحت الميكروسكوب"
+        text: |-
+          - **Nutmeg (mottled) liver** ← ==chronic passive congestion== من right heart failure، أو Budd-Chiari. الدم واقف حوالين الـ central veins (غامق) والباقي فاتح، فيبقى شكله زي جوزة الطيب.
+          - **Eosinophilic inclusion of damaged keratin جوه الـ hepatocyte** ← ==Mallory body== (alcohol-associated hepatitis).
+          - **Fatty infiltration ← ballooning ← necrosis** ← fatty liver disease (alcohol أو metabolic syndrome).
+        page: 728
+        quote: "“Nutmeg” (mottled) appearance of liver Chronic passive congestion of liver due to right heart failure, Budd-Chiari syndrome"
+      - kind: match
+        prompt: "وصّل كل antibody أو lab بالمرض"
+        pairs:
+          - ["ASMAs, anti-LKM1", "Autoimmune hepatitis"]
+          - ["Antimitochondrial antibodies", "1° biliary cholangitis"]
+          - ["↓ serum ceruloplasmin", "Wilson disease"]
+          - ["Anti-transglutaminase", "Celiac disease"]
+        why: "الـ AMA بيمشي مع الـ ==cholestasis== (ست، حكة، ↑ alkaline phosphatase). الـ ASMA والـ anti-LKM1 للـ autoimmune hepatitis. الـ ceruloplasmin بيقل في الـ Wilson."
+        page: 728
+        quote: "Antimitochondrial antibodies (AMAs) 1° biliary cholangitis (female, cholestasis, portal"
+      - kind: reveal
+        prompt: "مريض عنده جلطات في الـ veins بتظهر وتختفي في أماكن مختلفة (migratory thrombophlebitis). تدوّر على إيه؟"
+        answer: "==Trousseau syndrome==: علامة على **pancreatic adenocarcinoma**. الورم بيطلّع مواد بتخلي الدم يتجلط بسهولة، فتطلع DVTs متنقلة و vasculitis."
+        page: 728
+        quote: "Migratory thrombophlebitis (leading to migrating DVTs and vasculitis) Trousseau syndrome (pancreatic adenocarcinoma)"
+      - kind: aside
+        tone: exam
+        text: "ست في منتصف العمر عندها **حكة و ↑ alkaline phosphatase** والـ ultrasound نضيف؟ الـ antibody اللي هيسألك عليه هو ==AMA== (1° biliary cholangitis)."
+        page: 728
+        quote: "Antimitochondrial antibodies (AMAs) 1° biliary cholangitis (female, cholestasis, portal"
+      - kind: try
+        items: [rr.L03.039, rr.L03.043, rr.L03.046, rr.L03.050, rr.L03.052]
+    recap:
+      - "Signet ring = diffuse gastric carcinoma. Anti-tTG = celiac."
+      - "String sign = Crohn، lead pipe = UC، apple core = colorectal cancer، آلاف الـ polyps = FAP (APC)."
+      - "Nutmeg = right heart failure أو Budd-Chiari. Mallory body = alcohol hepatitis."
+      - "AMA = PBC، ASMA/anti-LKM1 = AIH، ↓ ceruloplasmin = Wilson، migratory thrombophlebitis = pancreatic cancer."
+    practice: [rr.L03.039, rr.L03.040, rr.L03.041, rr.L03.042, rr.L03.043, rr.L03.044, rr.L03.045, rr.L03.046, rr.L03.047, rr.L03.048, rr.L03.049, rr.L03.050, rr.L03.051, rr.L03.052, rr.L03.053]
+  - id: rr.L03.lesson4
+    title: "الدم تحت الميكروسكوب: نقط وأجسام وخلايا مدهوسة"
+    hook: "الـ smear بيحكي قصة: نقطة جوه الـ RBC ممكن تقولك إن الطحال اتشال"
+    minutes: 9
+    pages: [728, 729]
+    topics: [hematology-oncology]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "نقط جوه الـ RBCs"
+        text: |-
+          - **Basophilic stippling** (نقط كتير صغيرة = ribosomal precipitates) ← ==sideroblastic anemia== و thalassemias.
+          - **Basophilic nuclear remnants** (نقطة واحدة كبيرة = بقايا نواة) ← ==Howell-Jolly bodies==. الطحال هو اللي بينضّف البقايا دي، فلو اتشال (splenectomy) أو مش شغال، تفضل في الـ RBC.
+        page: 728
+        quote: "Basophilic nuclear remnants in RBCs Howell-Jolly bodies (due to splenectomy or nonfunctional spleen)"
+      - kind: explain
+        title: "الـ anemias في الـ Rapid Review"
+        text: |-
+          - **Hypochromic, microcytic** ← iron deficiency، lead poisoning، thalassemia، sideroblastic anemia. الأربعة فيهم مشكلة في تصنيع الـ hemoglobin (heme أو globin)، فالخلية بتطلع صغيرة وباهتة.
+          - **Hair on end (crew cut) skull** ← β-thalassemia و sickle cell: النخاع بيتمدد (==marrow expansion==) عشان يعوّض، فيزق عضم الجمجمة.
+          - **Hypersegmented neutrophils** ← megaloblastic anemia. ==B12 بيعمل neurologic symptoms==، الـ folate لأ.
+        page: 728
+        quote: "Hypersegmented neutrophils Megaloblastic anemia (vitamin B12 deficiency: neurologic symptoms; folate deficiency: no neurologic symptoms)"
+      - kind: check
+        question: "A 30-year-old vegan has macrocytic anemia, hypersegmented neutrophils and reduced vibration sense in both feet. Which deficiency?"
+        options:
+          - "Vitamin B12"
+          - "Folate"
+          - "Iron"
+          - "Lead poisoning"
+        answer: 0
+        why:
+          - "صح: megaloblastic anemia مع neurologic symptoms = B12."
+          - "الـ folate بيعمل نفس الـ anemia بس من غير neurologic symptoms."
+          - "الـ iron deficiency بتعمل hypochromic microcytic، مش hypersegmented neutrophils."
+          - "الـ lead بيعمل microcytic مع basophilic stippling."
+        page: 728
+        quote: "Hypersegmented neutrophils Megaloblastic anemia (vitamin B12 deficiency: neurologic symptoms; folate deficiency: no neurologic symptoms)"
+      - kind: explain
+        title: "الـ lymphomas"
+        text: |-
+          - **Anti-GpIIb/IIIa antibodies** ← immune thrombocytopenia: الـ antibody بيمسك في الـ platelet فالطحال يشيلها.
+          - **Giant B cells بنواة bilobed و owl's eye** ← ==Reed-Sternberg cells== (Hodgkin lymphoma).
+          - **Starry sky**: sheets of lymphocytes بينهم tingible body macrophages ← ==Burkitt lymphoma==: t(8;14) و c-myc activation، مع EBV.
+        page: 728
+        quote: "Giant B cells featuring bilobed nuclei with prominent inclusions (“owl’s eye”) Reed-Sternberg cells (Hodgkin lymphoma)"
+      - kind: figure
+        title: "الـ monoclonal spike في الـ SPEP"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="20" y1="150" x2="340" y2="150"/>
+            <path class="fg-ink" d="M20 150 C 40 150, 45 40, 60 40 C 75 40, 80 150, 100 148 C 120 140, 130 130, 140 140 C 160 130, 170 125, 185 140 C 200 132, 210 128, 225 140 L 250 140 C 262 140, 266 30, 272 30 C 278 30, 282 140, 294 140 L 340 148" fill="none"/>
+            <text x="38" y="30" class="t-sm">Albumin</text>
+            <text x="250" y="22" class="t-sm t-bad t-b">M spike</text>
+            <text x="120" y="168" class="t-sm t-mut">α1   α2   β</text>
+            <text x="255" y="168" class="t-sm t-mut">γ</text>
+            <text x="150" y="70" class="t-sm">one clone →</text>
+            <text x="150" y="86" class="t-sm">one narrow peak</text>
+          </svg>
+        caption: "Clone واحد من الـ plasma cells بيطلّع نفس الـ immunoglobulin بالظبط، فيطلع peak رفيع وطويل في منطقة الـ γ. ده multiple myeloma (IgG أو IgA)، أو Waldenström (IgM)، أو MGUS."
+        alt: "Serum protein electrophoresis curve with a broad albumin peak on the left and a tall narrow monoclonal spike in the gamma region."
+        page: 728
+        quote: "Monoclonal spike on serum protein electrophoresis Multiple myeloma (usually IgG or IgA); Waldenström macroglobulinemia (IgM); monoclonal gammopathy of undetermined significance"
+      - kind: explain
+        title: "Multiple myeloma من كل ناحية"
+        text: |-
+          - **Punched-out lytic lesions** في الـ x-ray ← multiple myeloma.
+          - **Stacks of RBCs** ← ==rouleaux== (↑ ESR): الـ protein الكتير بيلزّق الـ RBCs في بعض زي العملات.
+          - **M spike** ← myeloma أو Waldenström أو MGUS.
+        page: 728
+        quote: "Stacks of RBCs Rouleaux formation (↑ ESR, multiple myeloma)"
+      - kind: sort
+        prompt: "حط كل علامة تحت المرض بتاعها"
+        bins: ["APL", "CLL", "Langerhans cell histiocytosis"]
+        cards:
+          - { text: "Auer rods (MPO ⊕ inclusions)", bin: 0 }
+          - { text: "↑↑↑ circulating myeloblasts", bin: 0 }
+          - { text: "Smudged WBCs", bin: 1 }
+          - { text: "Birbeck granules", bin: 2 }
+          - { text: "Tennis racket organelles on EM", bin: 2 }
+        why: "الـ ==Auer rods== جوه الـ myeloblasts في الـ APL. الـ CLL خلاياها هشة فبتتهرس على الشريحة (smudge). الـ Birbeck granules شكلها مضرب تنس في الـ Langerhans cells."
+        page: 728
+        quote: "Myeloperoxidase ⊕ cytoplasmic inclusions in myeloblasts, Auer rods (APL) ↑↑↑ circulating myeloblasts"
+      - kind: aside
+        tone: trap
+        text: "**Stippling** ولا **Howell-Jolly**؟ نقط كتير صغيرة = ribosomes (stippling: sideroblastic أو thalassemia). نقطة واحدة = بقايا نواة (==Howell-Jolly==: مفيش طحال)."
+        page: 728
+        quote: "Basophilic stippling of RBCs (basophilic ribosomal precipitates) Sideroblastic anemia, thalassemias"
+      - kind: try
+        items: [rr.L03.055, rr.L03.056, rr.L03.058, rr.L03.061, rr.L03.063]
+    recap:
+      - "Stippling = sideroblastic أو thalassemia. Howell-Jolly = splenectomy."
+      - "Microcytic: iron، lead، thalassemia، sideroblastic. Hair on end = β-thal أو sickle cell."
+      - "Hypersegmented = megaloblastic؛ B12 بأعراض عصبية، folate من غيرها."
+      - "Reed-Sternberg = Hodgkin، starry sky = Burkitt، Auer rods = APL، smudge = CLL، Birbeck = LCH."
+    practice: [rr.L03.054, rr.L03.055, rr.L03.056, rr.L03.057, rr.L03.058, rr.L03.059, rr.L03.060, rr.L03.061, rr.L03.062, rr.L03.063, rr.L03.064, rr.L03.065, rr.L03.066, rr.L03.067, rr.L03.068]
+  - id: rr.L03.lesson5
+    title: "العضم والمفاصل والمخ: crystals و antibodies و inclusions"
+    hook: "Needle ولا rhomboid؟ جوه الخلية ولا برّه؟ سؤالين بيحلوا نص الصفحة"
+    minutes: 10
+    pages: [729, 729]
+    topics: [musculoskeletal, neurology]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "أورام العضم في الأشعة"
+        text: |-
+          - **Soap bubble** في الـ femur أو الـ tibia ← ==giant cell tumor== (generally benign).
+          - **Codman triangle أو sunburst** ← ==osteosarcoma==: الورم بيرفع الـ periosteum فيعمل مثلث.
+          - **Onion skin periosteal reaction** ← ==Ewing sarcoma== (malignant small blue cell tumor): طبقات عضم جديد فوق بعض زي البصلة.
+        page: 729
+        quote: "“Onion skin” periosteal reaction Ewing sarcoma (malignant small blue cell tumor)"
+      - kind: figure
+        title: "Needle ولا rhomboid؟"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-bad" x="10" y="10" width="160" height="140" rx="10"/>
+            <line class="fg-ink" x1="30" y1="40" x2="90" y2="60" stroke-width="2"/>
+            <line class="fg-ink" x1="50" y1="80" x2="120" y2="70" stroke-width="2"/>
+            <line class="fg-ink" x1="40" y1="100" x2="100" y2="115" stroke-width="2"/>
+            <text x="20" y="135" class="t-sm t-b">Needle, ⊝ birefringent</text>
+            <text x="100" y="40" class="t-sm">Gout</text>
+            <text x="100" y="100" class="t-sm t-mut">urate</text>
+            <rect class="fg-acc" x="190" y="10" width="160" height="140" rx="10"/>
+            <path class="fg-ink" d="M215 50 L245 40 L260 60 L230 70 Z" fill="none" stroke-width="2"/>
+            <path class="fg-ink" d="M270 85 L300 75 L315 95 L285 105 Z" fill="none" stroke-width="2"/>
+            <text x="200" y="135" class="t-sm t-b">Rhomboid, ⊕ birefringent</text>
+            <text x="270" y="45" class="t-sm">Pseudogout</text>
+            <text x="210" y="105" class="t-sm t-mut">CPPD</text>
+          </svg>
+        caption: "الـ gout: إبر monosodium urate، ⊝ birefringent. الـ pseudogout: معينات calcium pyrophosphate dihydrate، ⊕ birefringent. P للـ Pseudogout و P للـ Positive."
+        alt: "Left panel: thin needle-shaped crystals labelled negatively birefringent, gout, urate. Right panel: rhomboid crystals labelled positively birefringent, pseudogout, calcium pyrophosphate."
+        page: 729
+        quote: "Needle-shaped, ⊝ birefringent crystals Gout (monosodium urate crystals)"
+      - kind: reveal
+        prompt: "مين اللي بيرفع الـ uric acid حسب الجدول؟"
+        answer: "أربعة: ==gout==، Lesch-Nyhan syndrome، tumor lysis syndrome (خلايا بتتكسر فالـ purines تطلع)، و loop و thiazide diuretics (بتقلل إخراج الـ urate)."
+        page: 729
+        quote: "↑ uric acid levels Gout, Lesch-Nyhan syndrome, tumor lysis syndrome, loop and thiazide diuretics"
+      - kind: table
+        title: "Antibodies المناعة الذاتية"
+        columns: ["Antibody", "Disease"]
+        rows:
+          - ["IgM against IgG Fc, anti-CCP", "Rheumatoid arthritis"]
+          - ["ANA, anti-Smith, anti-dsDNA, antiphospholipid", "SLE"]
+          - ["Anti-Scl-70, anti-RNA polymerase III", "Diffuse scleroderma"]
+          - ["Anti-centromere", "Limited scleroderma (CREST)"]
+          - ["Anti-desmoglein 3 +/– 1", "Pemphigus vulgaris"]
+          - ["Anti-hemidesmosome", "Bullous pemphigoid"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+        page: 729
+        quote: "Anti-centromere antibodies Limited scleroderma (CREST syndrome)"
+      - kind: aside
+        tone: tip
+        text: "**desmo**some بيمسك الخلايا في **بعض** (فوق في الـ epidermis) ← pemphigus: الطبقة بتتقشر. ==hemidesmosome== نص زرار بيمسك الخلية في الـ basement membrane (تحت) ← bullous pemphigoid: الفقاعة كلها بتطلع من تحت."
+        page: 729
+        quote: "Anti-desmoglein 3 +/– 1 (anti-desmosome) antibodies Pemphigus vulgaris"
+      - kind: explain
+        title: "ANCA و bamboo spine و keratin pearls"
+        text: |-
+          - **MPO-ANCA / p-ANCA** ← microscopic polyangiitis و eosinophilic granulomatosis with polyangiitis و ==primary sclerosing cholangitis==.
+          - **PR3-ANCA / c-ANCA** ← ==granulomatosis with polyangiitis==.
+          - **Bamboo spine** (vertebral fusion) ← ankylosing spondylitis، مع HLA-B27.
+          - **Keratin pearls** على skin biopsy ← squamous cell carcinoma.
+        page: 729
+        quote: "Antineutrophil cytoplasmic antibodies (ANCAs) Microscopic polyangiitis, eosinophilic granulomatosis"
+      - kind: check
+        question: "A 26-year-old man has low back pain and stiffness that improves with exercise. X-ray shows fused vertebrae. Which association is most likely?"
+        options:
+          - "HLA-B27"
+          - "Anti-centromere antibodies"
+          - "Anti-cyclic citrullinated peptide antibodies"
+          - "Rhomboid, positively birefringent crystals"
+        answer: 0
+        why:
+          - "صح: bamboo spine = ankylosing spondylitis، مع HLA-B27."
+          - "Anti-centromere = limited scleroderma (CREST)."
+          - "Anti-CCP = rheumatoid arthritis."
+          - "Rhomboid ⊕ crystals = pseudogout."
+        page: 729
+        quote: "“Bamboo spine” (vertebral fusion) on x-ray Ankylosing spondylitis (chronic inflammatory arthritis, associated with HLA-B27)"
+      - kind: explain
+        title: "المخ: جوه الخلية ولا برّه؟"
+        text: |-
+          - **↑ AFP في دم الأم** ← dating error أو ==open neural tube defect== (الـ AFP بيتسرّب من الفتحة).
+          - **Bloody أو yellow CSF** ← xanthochromia (subarachnoid hemorrhage).
+          - **Loss of pigmented dopaminergic neurons في الـ substantia nigra** ← Parkinson.
+          - **Pseudopalisading pleomorphic tumor cells** ← glioblastoma.
+          - **Small blue cells حوالين neuropil** ← Homer-Wright rosettes (neuroblastoma، medulloblastoma).
+        page: 729
+        quote: "↑ AFP in maternal serum Dating error, open neural tube defects"
+      - kind: figure
+        title: "الـ inclusions في الـ neurodegeneration"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <ellipse class="fg-box" cx="120" cy="85" rx="80" ry="60"/>
+            <text x="80" y="38" class="t-sm t-mut">Neuron</text>
+            <circle class="fg-dot-acc" cx="90" cy="80" r="14"/>
+            <text x="60" y="112" class="t-sm t-acc">Lewy body</text>
+            <text x="60" y="126" class="t-sm t-mut">α-synuclein</text>
+            <path class="fg-ink" d="M140 70 q 6 -10 12 0 q 6 10 12 0 q 6 -10 12 0" fill="none" stroke-width="2"/>
+            <text x="135" y="95" class="t-sm">Tangles</text>
+            <text x="135" y="109" class="t-sm t-mut">tau</text>
+            <circle class="fg-dot-bad" cx="290" cy="85" r="22"/>
+            <text x="258" y="130" class="t-sm t-bad">Senile plaque</text>
+            <text x="258" y="144" class="t-sm t-mut">amyloid, outside</text>
+          </svg>
+        caption: "جوه الـ neuron: Lewy body (α-synuclein: Parkinson و Lewy body dementia) و neurofibrillary tangles (tau: Alzheimer؛ والـ Pick bodies tau برضه في الـ frontotemporal dementia). برّه في الـ gray matter: senile plaques (amyloid: Alzheimer)."
+        alt: "A neuron containing a round Lewy body labelled alpha-synuclein and wavy tangles labelled tau; outside the neuron, a senile plaque labelled amyloid."
+        page: 729
+        quote: "Hyperphosphorylated tau protein aggregates in neurons Neurofibrillary tangles (Alzheimer disease) and Pick bodies (frontotemporal dementia)"
+      - kind: check
+        question: "Autopsy of a woman with progressive memory loss shows extracellular amyloid deposits in the gray matter. What are they called?"
+        options:
+          - "Senile plaques"
+          - "Neurofibrillary tangles"
+          - "Lewy bodies"
+          - "Pick bodies"
+        answer: 0
+        why:
+          - "صح: amyloid برّه الخلية = senile plaques (Alzheimer)."
+          - "الـ tangles tau جوه الـ neuron."
+          - "الـ Lewy bodies α-synuclein جوه الـ neuron."
+          - "الـ Pick bodies tau جوه الـ neuron في الـ frontotemporal dementia."
+        page: 729
+        quote: "Extracellular amyloid deposition in gray matter of brain Senile plaques (Alzheimer disease)"
+      - kind: try
+        items: [rr.L03.071, rr.L03.076, rr.L03.079, rr.L03.089, rr.L03.091]
+    recap:
+      - "Soap bubble = giant cell tumor، Codman/sunburst = osteosarcoma، onion skin = Ewing."
+      - "Needle ⊝ = gout، rhomboid ⊕ = pseudogout. ↑ uric acid: gout، Lesch-Nyhan، tumor lysis، loop و thiazide."
+      - "Anti-centromere = CREST، anti-Scl-70 = diffuse، desmoglein = pemphigus، hemidesmosome = pemphigoid."
+      - "Lewy = α-synuclein، tangles و Pick = tau، plaques = amyloid برّه الخلية."
+    practice: [rr.L03.069, rr.L03.070, rr.L03.071, rr.L03.072, rr.L03.073, rr.L03.074, rr.L03.075, rr.L03.076, rr.L03.077, rr.L03.078, rr.L03.079, rr.L03.080, rr.L03.081, rr.L03.082, rr.L03.083, rr.L03.084, rr.L03.085, rr.L03.086, rr.L03.087, rr.L03.088, rr.L03.089, rr.L03.090, rr.L03.091, rr.L03.092, rr.L03.093, rr.L03.094]
+  - id: rr.L03.lesson6
+    title: "الكلية والتناسلي والصدر: casts و bodies و crystals"
+    hook: "الـ cast قالب للـ tubule: اللي محبوس جواه بيقولك المشكلة فين"
+    minutes: 10
+    pages: [729, 730]
+    topics: [renal, reproductive, respiratory]
+    status: unverified
+    steps:
+      - kind: figure
+        title: "كل cast جاي منين"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <circle class="fg-acc" cx="50" cy="60" r="34"/>
+            <text x="22" y="64" class="t-sm t-b">Glomerulus</text>
+            <path class="fg-ink" d="M84 60 L150 60 C 170 60, 170 120, 190 120 L 340 120" fill="none" stroke-width="3"/>
+            <text x="100" y="50" class="t-sm">Tubule</text>
+            <rect class="fg-bad" x="10" y="108" width="110" height="34" rx="6"/>
+            <text x="16" y="124" class="t-sm t-b">RBC casts</text>
+            <text x="16" y="138" class="t-sm t-mut">glomerulonephritis</text>
+            <rect class="fg-box" x="130" y="134" width="110" height="40" rx="6"/>
+            <text x="136" y="150" class="t-sm t-b">Muddy-brown</text>
+            <text x="136" y="166" class="t-sm t-mut">ATN</text>
+            <rect class="fg-good" x="200" y="20" width="150" height="40" rx="6"/>
+            <text x="206" y="36" class="t-sm t-b">WBC casts</text>
+            <text x="206" y="52" class="t-sm t-mut">pyelonephritis, interstitium</text>
+            <rect class="fg-thin" x="250" y="134" width="100" height="40" rx="6"/>
+            <text x="256" y="150" class="t-sm t-b">Waxy</text>
+            <text x="256" y="166" class="t-sm t-mut">ESRD/CKD</text>
+          </svg>
+        caption: "الـ RBCs بتعدّي من glomerulus ملتهب (glomerulonephritis أو hypertensive emergency). الـ WBCs جاية من التهاب في الـ tubules والـ interstitium (pyelonephritis، rejection). الخلايا الميتة من الـ tubule بتعمل muddy-brown casts (ATN). والـ waxy casts بتتكوّن في tubules البول فيها بطيء جداً (ESRD/CKD)."
+        alt: "Diagram of a glomerulus leading into a tubule, with labels: RBC casts from the glomerulus in glomerulonephritis, muddy-brown granular casts from tubular injury in acute tubular necrosis, WBC casts from interstitial inflammation in pyelonephritis, and waxy casts in end-stage renal disease."
+        page: 729
+        quote: "RBC casts in urine Glomerulonephritis, hypertensive emergency"
+      - kind: check
+        question: "A 25-year-old woman has fever, flank pain and dysuria. Urinalysis shows WBC casts. Most likely diagnosis?"
+        options:
+          - "Acute pyelonephritis"
+          - "Acute tubular necrosis"
+          - "Glomerulonephritis"
+          - "Chronic kidney disease"
+        answer: 0
+        why:
+          - "صح: WBC casts = acute pyelonephritis (أو rejection أو tubulointerstitial inflammation)."
+          - "الـ ATN بيعمل granular muddy-brown casts."
+          - "الـ glomerulonephritis بيعمل RBC casts."
+          - "الـ CKD/ESRD بيعمل waxy casts مع urine flow قليل جداً."
+        page: 729
+        quote: "WBC casts in urine Acute pyelonephritis, transplant rejection, tubulointerstitial inflammation"
+      - kind: explain
+        title: "الـ glomerulus تحت الميكروسكوب"
+        text: |-
+          - **Lumpy-bumpy** على immunofluorescence ← infection-related GN (IgG و IgM و C3).
+          - **Linear IgG على الـ glomerular و alveolar basement membranes** ← ==Goodpasture== (hematuria و hemoptysis).
+          - **Necrotizing vasculitis في الرئة + necrotizing GN** ← GPA (PR3-ANCA/c-ANCA) أو Goodpasture.
+          - **Cellular crescents في Bowman's space** ← ==rapidly progressive (crescentic) GN==.
+          - **Wire loop** ← diffuse proliferative GN (lupus). **Tram-track** ← membranoproliferative GN.
+        page: 730
+        quote: "Anti–glomerular basement membrane antibodies, linear appearance of IgG deposition on glomerular and alveolar basement membranes Goodpasture syndrome (hematuria, hemoptysis)"
+      - kind: table
+        title: "Nephrotic في الشريحة"
+        columns: ["Finding", "Disease"]
+        rows:
+          - ["Effacement of podocyte foot processes on EM", "Minimal change disease (child), FSGS"]
+          - ["Spike and dome subepithelial deposits", "Membranous nephropathy"]
+          - ["Eosinophilic nodular glomerulosclerosis", "Kimmelstiel-Wilson lesions (diabetes)"]
+          - ["Thyroid-like kidney", "Chronic pyelonephritis"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+        page: 730
+        quote: "Effacement of podocyte foot processes on EM Minimal change disease (child with nephrotic syndrome), focal segmental glomerulosclerosis"
+      - kind: aside
+        tone: analogy
+        text: "الـ **thyroid-like kidney**: في الـ chronic pyelonephritis الـ tubules بتضمر وتتملي بـ casts وردي، فتبان زي ==thyroid follicles== مليانة colloid."
+        page: 730
+        quote: "Thyroid-like appearance of kidney Chronic pyelonephritis"
+      - kind: explain
+        title: "التناسلي: ↑ hCG وأجسام بأسماء"
+        text: |-
+          - **↑ hCG** ← multifetal gestation، hydatidiform mole، choriocarcinoma، dysgerminoma، Down syndrome.
+          - **Raisinoid nuclei + perinuclear halo** ← ==koilocytes== (HPV؛ بيمهّد للـ cervical cancer).
+          - **Fried egg cells + ↑ hCG + ↑ LDH** ← dysgerminoma. **Schiller-Duval bodies + ↑ AFP** ← ==yolk sac tumor==.
+          - **Call-Exner bodies** ← granulosa cell tumor. **Reinke crystals** ← Leydig cell tumor.
+          - **Chocolate cyst** ← endometriosis (دم قديم). **Blue domed cyst** ← fibrocystic change.
+        page: 730
+        quote: "↑ hCG Multifetal gestation, hydatidiform mole, choriocarcinoma, dysgerminoma, Down syndrome"
+      - kind: match
+        prompt: "وصّل الـ body بالورم"
+        pairs:
+          - ["Schiller-Duval bodies", "Yolk sac tumor"]
+          - ["Call-Exner bodies", "Granulosa cell tumor"]
+          - ["Reinke crystals", "Leydig cell tumor"]
+          - ["Fried egg cells", "Dysgerminoma"]
+        why: "الـ Schiller-Duval شكلها ==glomeruli==. الـ Call-Exner: granulosa cells حوالين سائل eosinophilic. الـ Reinke: crystals جوه الـ Leydig cells."
+        page: 730
+        quote: "Schiller-Duval bodies (resemble glomeruli), ↑ AFP Yolk sac tumor"
+      - kind: explain
+        title: "الصدر"
+        text: |-
+          - **Lines of Zahn** (طبقات platelets و RBCs) ← جلطة ==اتكوّنت قبل الوفاة==. الجلطة بعد الوفاة ما بيبقاش فيها طبقات.
+          - **Charcot-Leyden crystals** (hexagonal و double-pointed) و **Curschmann spirals** (mucus plugs ملفوفة) ← ==asthma==.
+          - **Honeycomb lung** ← idiopathic pulmonary fibrosis.
+          - **Golden-brown dumbbell rods مع Prussian blue** ← asbestos (ferruginous) bodies: فيها حديد عشان كده بتصبغ بالـ Prussian blue.
+          - **Apical tumor** ← Pancoast: ممكن يضغط على الـ cervical sympathetic chain ← Horner syndrome.
+        page: 730
+        quote: "Interdigitating layers of pink and red in arterial thrombi Lines of Zahn (layers of platelets and RBCs seen only in"
+      - kind: check
+        question: "A 22-year-old with episodic wheezing coughs up sputum showing whorled mucus plugs of shed epithelium. These are:"
+        options:
+          - "Curschmann spirals"
+          - "Charcot-Leyden crystals"
+          - "Asbestos bodies"
+          - "Lines of Zahn"
+        answer: 0
+        why:
+          - "صح: whorled mucus plugs من الـ bronchial epithelium = Curschmann spirals (asthma)."
+          - "الـ Charcot-Leyden دي crystals hexagonal و double-pointed، مش mucus plugs (برضه asthma)."
+          - "الـ asbestos bodies: golden-brown dumbbell rods."
+          - "الـ lines of Zahn في الجلطة، مش في البلغم."
+        page: 730
+        quote: "Whorled mucus plugs formed from shed bronchial epithelium Curschmann spirals (asthma)"
+      - kind: try
+        items: [rr.L03.099, rr.L03.103, rr.L03.106, rr.L03.111, rr.L03.120]
+    recap:
+      - "RBC casts = GN، WBC casts = pyelonephritis، muddy-brown = ATN، waxy = ESRD."
+      - "Linear IgG = Goodpasture، crescents = RPGN، wire loop = lupus، tram-track = MPGN، spike and dome = membranous، KW = diabetes."
+      - "↑ hCG: twins، mole، choriocarcinoma، dysgerminoma، Down. Schiller-Duval = yolk sac (AFP)."
+      - "Lines of Zahn = قبل الوفاة. Curschmann و Charcot-Leyden = asthma. Honeycomb = IPF."
+    practice: [rr.L03.095, rr.L03.096, rr.L03.097, rr.L03.098, rr.L03.099, rr.L03.100, rr.L03.101, rr.L03.102, rr.L03.103, rr.L03.104, rr.L03.105, rr.L03.106, rr.L03.107, rr.L03.108, rr.L03.109, rr.L03.110, rr.L03.111, rr.L03.112, rr.L03.113, rr.L03.114, rr.L03.115, rr.L03.116, rr.L03.117, rr.L03.118, rr.L03.119, rr.L03.120, rr.L03.121, rr.L03.122, rr.L03.123, rr.L03.124, rr.L03.125, rr.L03.126]

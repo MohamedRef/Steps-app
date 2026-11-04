@@ -1,0 +1,500 @@
+schema: steps.lesson/v1
+lecture: rr.L06
+lessons:
+  - id: rr.L06.lesson1
+    title: "معادلات الـ pharmacokinetics: الدوا في جردل بيخرّ"
+    hook: "خمس معادلات بس، ولو فهمت إن الجسم جردل بيتملي وبيخرّ هتكتبهم من دماغك في الامتحان"
+    minutes: 8
+    pages: [744, 744]
+    topics: [pharmacology]
+    goals:
+      - "تكتب Vd و CL و t½ و loading dose و maintenance dose من غير حفظ أعمى"
+      - "تعرف أي dose بيتغير لما الـ clearance يقل"
+      - "تفتكر الـ therapeutic index بالترتيب الصح"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Volume of distribution: الجردل كبير قد إيه"
+        text: |-
+          ==Vd== = **amount of drug in the body / plasma drug concentration**.
+
+          فكّر فيها كده: حطيت 100 mg في الجسم، وقست التركيز في البلازما. لو التركيز طلع واطي جدًا، يبقى الدوا «اختفى» في الأنسجة، فالجردل اللي بيتوزع فيه شكله كبير. عشان كده Vd رقم نظري: هو الحجم اللي **لو** الدوا كان متوزع فيه بنفس تركيز البلازما.
+
+          - Vd كبير = الدوا سايب الدم ورايح الأنسجة.
+          - Vd صغير = الدوا قاعد في الدم.
+        page: 744
+        quote: "amount of drug in the body Vd = plasma drug concentration"
+      - kind: explain
+        title: "Clearance و half-life"
+        text: |-
+          **Clearance (CL)** = **rate of elimination / plasma drug concentration** = ==Vd × Ke== (Ke = elimination constant). يعني حجم البلازما اللي بيتنضف من الدوا في وحدة الزمن.
+
+          **Half-life**: ==t½ = 0.7 × Vd / CL==.
+
+          ليه كده؟ الـ 0.7 هو ln 2 (نص الكمية). وبعدين المنطق واضح:
+          - Vd أكبر ← الدوا مستخبي في الأنسجة والكلية والكبد مش شايفينه ← t½ **أطول**.
+          - CL أكبر ← بيتشال أسرع ← t½ **أقصر**.
+        page: 744
+        quote: "CL = rate of elimination of drug = Vd × Ke (elimination constant) plasma drug concentration"
+      - kind: reveal
+        prompt: "دوا الـ Vd بتاعه اتضاعف والـ clearance زي ما هو. الـ half-life هيحصلها إيه؟"
+        answer: "هتتضاعف. t½ = 0.7 × Vd / CL، فالـ Vd في البسط: لو اتضاعف والـ CL ثابت، الـ t½ تتضاعف."
+        page: 744
+        quote: "t½ = 0.7 × Vd CL"
+      - kind: explain
+        title: "Loading dose و maintenance dose"
+        text: |-
+          - **Loading dose**: ==LD = Cp × Vd / F==. عايز توصل لتركيز Cp في جردل حجمه Vd؟ يبقى محتاج Cp × Vd. ولو الدوا بالبُق ومش كله بيوصل (F = bioavailability)، تقسم على F.
+          - **Maintenance dose** = ==Cp × CL × τ / F==. بعد ما الجردل اتملى، كل اللي محتاجه إنك تعوّض اللي بيخرّ: CL × Cp في الساعة، مضروبة في τ (الفترة بين الجرعات)، وبرضه تقسم على F.
+
+          الخلاصة: الـ LD بيتكلم عن **الحجم**، والـ maintenance بيتكلم عن **الـ clearance**.
+        page: 744
+        quote: "Maintenance dose = Cp × CL × τ"
+      - kind: figure
+        title: "الجسم جردل"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L06a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker>
+              <marker id="L06b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <rect class="fg-ink" x="120" y="50" width="120" height="120" rx="6"/>
+            <rect class="fg-acc" x="122" y="100" width="116" height="68"/>
+            <text x="180" y="140" text-anchor="middle" class="t-b">Vd</text>
+            <text x="180" y="158" text-anchor="middle" class="t-sm">level = Cp</text>
+            <line class="fg-arrow-acc" x1="40" y1="20" x2="140" y2="70" marker-end="url(#L06a)"/>
+            <text x="8" y="16" class="t-sm t-acc">LD = Cp × Vd / F</text>
+            <text x="8" y="34" class="t-sm t-mut">(fill the bucket)</text>
+            <line class="fg-arrow-acc" x1="320" y1="20" x2="225" y2="70" marker-end="url(#L06a)"/>
+            <text x="230" y="16" class="t-sm t-acc">MD = Cp × CL × τ / F</text>
+            <text x="250" y="34" class="t-sm t-mut">(top it up)</text>
+            <line class="fg-arrow-bad" x1="240" y1="160" x2="320" y2="190" marker-end="url(#L06b)"/>
+            <text x="250" y="150" class="t-sm t-bad">CL (leak)</text>
+            <text x="20" y="190" class="t-sm">t½ = 0.7 × Vd / CL</text>
+          </svg>
+        caption: "الـ loading dose بيملا الجردل (حجمه Vd)، والـ clearance هو الخُرم اللي في الجنب، والـ maintenance dose بيعوّض اللي بيخرّ. جردل كبير وخُرم صغير = half-life طويلة."
+        alt: "A bucket labelled Vd filled to a level Cp. An arrow into it labelled loading dose = Cp × Vd / F (fill the bucket); a second arrow labelled maintenance dose = Cp × CL × τ / F (top it up); a leak at the side labelled CL. Below: t½ = 0.7 × Vd / CL."
+        page: 744
+        quote: "Maintenance dose = Cp × CL × τ"
+      - kind: check
+        question: "A patient on a drug cleared by the kidney develops renal failure, so the drug's clearance halves. Its Vd does not change. Using the equations, which dose must change?"
+        options: ["Only the maintenance dose (halve it)", "Only the loading dose (halve it)", "Both doses must halve", "Neither dose changes"]
+        answer: 0
+        why:
+          - "صح: الـ CL موجود في معادلة الـ maintenance dose بس (Cp × CL × τ / F)، فلو اتنصّف تنصّ الجرعة."
+          - "الـ loading dose = Cp × Vd / F، ومفيهوش CL، والـ Vd ما اتغيرش."
+          - "الـ loading dose مش هيتغير لأنه بيعتمد على Vd مش CL."
+          - "الـ maintenance dose لازم يقل وإلا الدوا هيتراكم."
+        page: 744
+        quote: "Maintenance dose = Cp × CL × τ"
+      - kind: explain
+        title: "Therapeutic index"
+        text: |-
+          ==TI = TD50 / ED50==: الـ median toxic dose على الـ median effective dose.
+
+          يعني الجرعة اللي بتأذي نص الناس، كام ضعف الجرعة اللي بتنفع نص الناس؟ لو الرقم كبير يبقى فيه مسافة أمان كبيرة بين الفايدة والضرر، يعني الدوا **أأمن**.
+        page: 744
+        quote: "TI = median toxic dose/median effective dose = TD50/ED50"
+      - kind: aside
+        tone: trap
+        text: "الغلطة المشهورة إنك تقلب الكسر. افتكر ==TITE==: **T**herapeutic **I**ndex = **T**D50 / **E**D50. الـ toxic فوق والـ effective تحت."
+        page: 744
+        quote: "TI = median toxic dose/median effective dose = TD50/ED50"
+      - kind: check
+        question: "A drug has Vd 50 L and oral F 0.5. The target concentration is 2 mg/L. What oral loading dose is needed?"
+        options: ["50 mg", "100 mg", "200 mg", "400 mg"]
+        answer: 2
+        why:
+          - "50 mg هو الـ Vd بس؛ نسيت الـ Cp والـ F."
+          - "100 mg هو Cp × Vd من غير ما تقسم على F: ده لو الدوا IV."
+          - "صح: LD = Cp × Vd / F = 2 × 50 / 0.5 = 200 mg."
+          - "400 mg ضربت في 2 مرتين؛ الـ F بتقسم عليه مرة واحدة."
+        page: 744
+        quote: "Cp × Vd"
+      - kind: try
+        items: [rr.L06.001, rr.L06.002, rr.L06.004, rr.L06.005, rr.L06.006]
+    recap:
+      - "Vd = amount in body / plasma concentration، و CL = elimination rate / plasma concentration = Vd × Ke"
+      - "t½ = 0.7 × Vd / CL: الجردل الكبير والخُرم الصغير بيطولوا الـ half-life"
+      - "LD = Cp × Vd / F (حجم)، MD = Cp × CL × τ / F (clearance)"
+      - "TI = TD50 / ED50: الأكبر أأمن"
+    practice: [rr.L06.001, rr.L06.002, rr.L06.003, rr.L06.004, rr.L06.005, rr.L06.006, rr.L06.007, rr.L06.008]
+
+  - id: rr.L06.lesson2
+    title: "الـ biostatistics: جدول 2 × 2 واحد بيطلع منه كل حاجة"
+    hook: "ارسم الجدول صح مرة واحدة، وكل معادلة من الـ 13 هتطلع منه لوحدها"
+    minutes: 10
+    pages: [744, 744]
+    topics: [public-health]
+    goals:
+      - "تحسب OR و RR و AR و ARR و RRR و NNT و NNH من جدول 2 × 2"
+      - "تحسب sensitivity و specificity و PPV و NPV و likelihood ratios"
+      - "تعرف مين بيتأثر بالـ prevalence ومين لأ"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "ارسم الجدول الأول"
+        text: |-
+          الـ odds ratio والـ relative risk والـ attributable risk والـ sensitivity والـ specificity والـ predictive value: كلهم مبنيين على نفس الجدول:
+
+          - **a** = exposed وعنده المرض، **b** = exposed ومعندوش.
+          - **c** = unexposed وعنده المرض، **d** = unexposed ومعندوش.
+
+          في التجارب العلاجية، الصف الأول (a و b) هو الـ treatment group والصف التاني (c و d) هو الـ control.
+
+          ونفس الشكل للـ diagnostic test: الصفوف = نتيجة الاختبار (+ / −)، والأعمدة = المرض موجود ولا لأ، فالخانات بقت ==TP و FP و FN و TN==.
+        page: 744
+        quote: "RR = a/(a + b) c/(c + d)"
+      - kind: figure
+        title: "جدول 2 × 2"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <text x="170" y="18" text-anchor="middle" class="t-b">Disease +</text>
+            <text x="280" y="18" text-anchor="middle" class="t-b">Disease −</text>
+            <text x="10" y="70" class="t-b">Exposed</text>
+            <text x="10" y="88" class="t-sm t-mut">(Test +)</text>
+            <text x="10" y="140" class="t-b">Unexposed</text>
+            <text x="10" y="158" class="t-sm t-mut">(Test −)</text>
+            <rect class="fg-good" x="115" y="30" width="110" height="70" rx="6"/>
+            <text x="170" y="62" text-anchor="middle" class="t-lg">a</text>
+            <text x="170" y="84" text-anchor="middle" class="t-sm">TP</text>
+            <rect class="fg-bad" x="230" y="30" width="110" height="70" rx="6"/>
+            <text x="285" y="62" text-anchor="middle" class="t-lg">b</text>
+            <text x="285" y="84" text-anchor="middle" class="t-sm">FP</text>
+            <rect class="fg-bad" x="115" y="105" width="110" height="70" rx="6"/>
+            <text x="170" y="137" text-anchor="middle" class="t-lg">c</text>
+            <text x="170" y="159" text-anchor="middle" class="t-sm">FN</text>
+            <rect class="fg-good" x="230" y="105" width="110" height="70" rx="6"/>
+            <text x="285" y="137" text-anchor="middle" class="t-lg">d</text>
+            <text x="285" y="159" text-anchor="middle" class="t-sm">TN</text>
+            <text x="180" y="195" text-anchor="middle" class="t-sm t-mut">columns → sensitivity, specificity; rows → PPV, NPV</text>
+          </svg>
+        caption: "الصفوف exposure (أو نتيجة الاختبار)، والأعمدة المرض. الأعمدة بتديك sensitivity و specificity، والصفوف بتديك PPV و NPV."
+        alt: "A 2 by 2 table. Columns: disease positive, disease negative. Rows: exposed (test positive), unexposed (test negative). Cells: a = TP, b = FP, c = FN, d = TN. Note: columns give sensitivity and specificity; rows give PPV and NPV."
+        page: 744
+        quote: "Sensitivity = TP / (TP + FN)"
+      - kind: explain
+        title: "Odds ratio و relative risk"
+        text: |-
+          - ==Odds ratio== (للـ case-control): OR = (a/c) / (b/d) = **ad / bc**.
+          - ==Relative risk== (للـ cohort): RR = [a/(a + b)] / [c/(c + d)]: خطر المرض في الـ exposed على خطره في الـ unexposed.
+
+          ليه الـ case-control بياخد OR بس؟ لأن الباحث هو اللي بيختار عدد الـ cases والـ controls، فـ a/(a + b) مش «خطر» حقيقي في الناس. اللي يتحسب صح هو الـ odds.
+        page: 744
+        quote: "OR = a/c ad = b/d bc"
+      - kind: explain
+        title: "الـ risk differences و NNT و NNH"
+        text: |-
+          - **Attributable risk**: AR = a/(a + b) − c/(c + d): قد إيه الـ exposure زوّد الخطر.
+          - **Absolute risk reduction**: ARR = c/(c + d) − a/(a + b): قد إيه العلاج قلّل الخطر (control ناقص treatment).
+          - **Relative risk reduction**: RRR = (ARC − ART) / ARC = **1 − RR**.
+          - ==NNT = 1 / ARR==، و ==NNH = 1 / AR==.
+
+          ليه مقلوب؟ لو العلاج بيقلّل الخطر 5% (0.05)، يبقى كل 100 مريض بتمنع 5 أحداث، يعني محتاج 20 مريض عشان تمنع حدث واحد = 1 / 0.05.
+        page: 744
+        quote: "RRR = (ARC – ART)/ARC or RRR = 1 − RR"
+      - kind: check
+        question: "Stroke occurs in 10 of 200 patients on a new drug and 20 of 200 on placebo. What is the NNT?"
+        options: ["5", "10", "20", "50"]
+        answer: 2
+        why:
+          - "5% هو خطر الـ treatment group، مش الـ NNT."
+          - "10% هو خطر الـ placebo group."
+          - "صح: ARR = 0.10 − 0.05 = 0.05، و NNT = 1 / 0.05 = 20."
+          - "الـ RRR هنا 50%، بس الـ NNT بيستخدم الـ absolute reduction مش الـ relative."
+        page: 744
+        quote: "Number needed to treat NNT = 1/ARR"
+      - kind: explain
+        title: "Sensitivity و specificity: اقرا العمود"
+        text: |-
+          - ==Sensitivity== = TP / (TP + FN): من كل العيانين، كام واحد الاختبار مسكه.
+          - ==Specificity== = TN / (TN + FP): من كل السليمين، كام واحد الاختبار قال عليه سليم.
+
+          الاتنين بيتحسبوا من **عمود واحد** (عيانين بس أو سليمين بس)، فمش بيفرق معاهم المرض منتشر قد إيه. دول صفات الاختبار نفسه.
+        page: 744
+        quote: "Specificity = TN / (TN + FP)"
+      - kind: explain
+        title: "PPV و NPV: اقرا الصف"
+        text: |-
+          - ==PPV== = TP / (TP + FP): لو الاختبار طلع موجب، إيه احتمال إنه عيان فعلًا؟ **PPV is proportional to prevalence**.
+          - **NPV** = TN / (TN + FN): لو طلع سالب، إيه احتمال إنه سليم فعلًا؟ **NPV is proportional to 1/prevalence**.
+
+          ليه؟ الصف فيه عيانين وسليمين مع بعض. لو المرض منتشر أكتر، الـ TP بيزيدوا والـ FP بيقلوا، فالموجب أغلبه حقيقي ← PPV يعلى و NPV يقل.
+        page: 744
+        quote: "PPV = TP / (TP + FP); PPV is proportional to prevalence"
+      - kind: check
+        question: "A screening test moves to a clinic where the disease is three times as common. The test is unchanged. Which value rises?"
+        options: ["Sensitivity", "Specificity", "Positive predictive value", "Negative predictive value"]
+        answer: 2
+        why:
+          - "الـ sensitivity من عمود العيانين بس، فمش بتتأثر بالـ prevalence."
+          - "الـ specificity من عمود السليمين بس، فمش بتتأثر."
+          - "صح: PPV proportional to prevalence."
+          - "الـ NPV proportional to 1/prevalence، فهتقل."
+        page: 744
+        quote: "PPV = TP / (TP + FP); PPV is proportional to prevalence"
+      - kind: explain
+        title: "Likelihood ratios"
+        text: |-
+          - ==LR+== = sensitivity / (1 − specificity) = **TP rate / FP rate**: النتيجة الموجبة أكتر احتمالًا بكام مرة في العيان منها في السليم.
+          - **LR−** = (1 − sensitivity) / specificity = **FN rate / TN rate**: النتيجة السالبة أكتر احتمالًا بكام مرة في العيان منها في السليم (عايزها صغيرة).
+
+          الاتنين مبنيين على sensitivity و specificity بس، فمش بيتأثروا بالـ prevalence.
+        page: 744
+        quote: "LR+ = sensitivity/(1 – specificity) = TP rate/FP rate"
+      - kind: reveal
+        prompt: "اختبار sensitivity بتاعه 90% و specificity بتاعه 80%. احسب LR+ و LR−."
+        answer: "LR+ = 0.9 / (1 − 0.8) = 0.9 / 0.2 = **4.5**. و LR− = (1 − 0.9) / 0.8 = 0.1 / 0.8 = **0.125**."
+        page: 744
+        quote: "(1 – sensitivity)/specificity = FN rate/TN rate"
+      - kind: try
+        items: [rr.L06.009, rr.L06.013, rr.L06.014, rr.L06.020, rr.L06.022]
+    recap:
+      - "OR = ad / bc للـ case-control، RR = [a/(a + b)] / [c/(c + d)] للـ cohort"
+      - "NNT = 1 / ARR و NNH = 1 / AR، و RRR = 1 − RR"
+      - "Sensitivity و specificity من الأعمدة (ثابتين)، PPV و NPV من الصفوف (بيتأثروا بالـ prevalence)"
+      - "LR+ = sens / (1 − spec)، LR− = (1 − sens) / spec"
+    practice: [rr.L06.009, rr.L06.010, rr.L06.011, rr.L06.012, rr.L06.013, rr.L06.014, rr.L06.015, rr.L06.016, rr.L06.017, rr.L06.018, rr.L06.019, rr.L06.020, rr.L06.021, rr.L06.022, rr.L06.023, rr.L06.024, rr.L06.025, rr.L06.026, rr.L06.027]
+
+  - id: rr.L06.lesson3
+    title: "القلب والأوعية والـ reticulocytes: معادلات بتتحسب في دماغك"
+    hook: "نص قطر الشريان بيعمل 16 ضعف مقاومة: معادلة واحدة بتشرح ليه البلاك الصغير خطير"
+    minutes: 9
+    pages: [744, 745]
+    topics: [cardiovascular, hematology-oncology]
+    goals:
+      - "تحسب CO بالـ Fick وبالـ SV × HR، و MAP، و SV و EF"
+      - "تفهم ليه الـ radius هو أقوى عامل في الـ resistance"
+      - "تقرا معادلة Starling وتحسب الـ RPI"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Cardiac output بطريقتين"
+        text: |-
+          - **Fick**: ==CO = rate of O2 consumption / (arterial O2 content − venous O2 content)==. المنطق: الجسم بياخد كمية O2 معينة في الدقيقة، وكل لتر دم بيعدي بيسيب فرق الـ arterial − venous. اقسم الكمية على اللي بيسيبه كل لتر ← عدد اللترات = CO.
+          - **CO = stroke volume × heart rate**: كل ضربة بتطلع SV، مضروبة في عدد الضربات.
+        page: 744
+        quote: "CO = rate of O2 consumption (arterial O2 content − venous O2 content)"
+      - kind: explain
+        title: "MAP و SV و EF"
+        text: |-
+          - **MAP = CO × TPR**: نفس قانون أوم (الضغط = التدفق × المقاومة).
+          - ==MAP (at resting HR) = 2/3 DBP + 1/3 SBP = DBP + 1/3 PP==. ليه الـ diastolic واخد التلتين؟ لأن القلب في الراحة بيقضي وقت في الـ diastole أطول من الـ systole.
+          - **SV = EDV − ESV**: اللي كان في البطين في الآخر ناقص اللي فضل.
+          - **EF = SV / EDV = (EDV − ESV) / EDV**: نسبة اللي اتضخ من اللي كان موجود.
+        page: 744
+        quote: "MAP (at resting HR) = 2 ⁄3 DBP + 1 ⁄3 SBP = DBP + 1 ⁄3 PP"
+      - kind: check
+        question: "Blood pressure 150/90 mm Hg at a resting heart rate. What is the MAP?"
+        options: ["100 mm Hg", "110 mm Hg", "120 mm Hg", "130 mm Hg"]
+        answer: 1
+        why:
+          - "100 مش طالعة من أي طريقة من الاتنين."
+          - "صح: 2/3 × 90 + 1/3 × 150 = 60 + 50 = 110، أو DBP + 1/3 PP = 90 + 20 = 110."
+          - "120 هو متوسط بسيط للرقمين، بس الـ diastole أطول فبياخد وزن أكبر."
+          - "130 بيدّي الـ systolic وزن أكبر، وده عكس الصح."
+        page: 744
+        quote: "MAP (at resting HR) = 2 ⁄3 DBP + 1 ⁄3 SBP = DBP + 1 ⁄3 PP"
+      - kind: reveal
+        prompt: "EDV = 120 mL و ESV = 50 mL. احسب SV و EF."
+        answer: "SV = 120 − 50 = **70 mL**، و EF = 70 / 120 ≈ **58%**."
+        page: 744
+        quote: "SV = EDV – ESV"
+      - kind: explain
+        title: "Resistance: الـ radius أس 4"
+        text: |-
+          ==Resistance = ΔP / Q = 8η × length / (π × r^4)==.
+
+          - **η** (viscosity) و **length** في البسط: دم أتقل أو أنبوبة أطول ← مقاومة أكتر.
+          - **r** تحت وبأُس 4: ده أقوى عامل في المعادلة. نص الـ radius ← المقاومة تضرب في 2^4 = **16**.
+
+          عشان كده تغيير بسيط في قطر الـ arterioles (vasoconstriction أو vasodilation) بيغيّر المقاومة جامد.
+        page: 745
+        quote: "Resistance = driving pressure (ΔP) 8η (viscosity) × length = flow (Q) πr4"
+      - kind: figure
+        title: "نص القطر = 16 ضعف مقاومة"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L06c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <rect class="fg-good" x="20" y="20" width="220" height="40" rx="20"/>
+            <text x="250" y="45" class="t-sm">radius r</text>
+            <text x="250" y="60" class="t-sm t-good">R = 1×</text>
+            <rect class="fg-bad" x="20" y="95" width="220" height="20" rx="10"/>
+            <text x="250" y="105" class="t-sm">radius r/2</text>
+            <text x="250" y="122" class="t-sm t-bad">R = 2^4 = 16×</text>
+            <line class="fg-arrow" x1="30" y1="40" x2="220" y2="40" marker-end="url(#L06c)"/>
+            <line class="fg-arrow" x1="30" y1="105" x2="220" y2="105" marker-end="url(#L06c)"/>
+            <text x="20" y="150" class="t-sm t-mut">R = 8η × length / (π × r^4)</text>
+          </svg>
+        caption: "نفس الطول ونفس الـ viscosity، بس الأنبوبة اللي قطرها النص مقاومتها 16 ضعف."
+        alt: "Two tubes. The upper wide tube with radius r has resistance 1 times. The lower tube with radius r/2 has resistance 2 to the 4th power, 16 times. Below: R = 8η × length / (π × r^4)."
+        page: 745
+        quote: "Resistance = driving pressure (ΔP) 8η (viscosity) × length = flow (Q) πr4"
+      - kind: explain
+        title: "Capillary fluid exchange (Starling)"
+        text: |-
+          ==Jv = net fluid flow = Kf [(Pc − Pi) − σ(πc − πi)]==.
+
+          - **(Pc − Pi)**: الضغط الـ hydrostatic بيزق المية **برّه** الـ capillary.
+          - **σ(πc − πi)**: الـ oncotic pressure (البروتينات) بتشد المية **جوّه**.
+          - **Kf**: قد إيه الجدار بيعدّي مية، و **σ** (reflection coefficient): قد إيه بيمنع البروتين.
+
+          لو Jv موجب ← المية بتطلع للأنسجة (filtration)، لو سالب ← بترجع (absorption).
+        page: 745
+        quote: "Jv = net fluid flow = K f [(Pc − Pi) − σ(πc − πi)]"
+      - kind: explain
+        title: "Reticulocyte production index"
+        text: |-
+          ==RPI = % reticulocytes × (actual Hct / normal Hct) / maturation time==.
+
+          ليه التصحيح ده؟ الـ reticulocyte % نسبة من كرات حمرا قليلة أصلًا في الأنيميا، فبتبان عالية وهي مش كده. فبتضرب في (actual / normal Hct). وفي الأنيميا الجامدة الـ reticulocytes بتخرج بدري وتقعد في الدم أكتر، فبتقسم على الـ maturation time.
+
+          RPI أقل من 2 = الـ marrow مش بيرد كفاية، وأكتر من 3 = بيعوّض.
+        page: 745
+        quote: "RPI = % reticulocytes × Hct / maturation time"
+      - kind: check
+        question: "Reticulocytes 6%, Hct 22.5% (normal 45%), maturation time 2 days. What is the RPI?"
+        options: ["0.75", "1.5", "3", "6"]
+        answer: 1
+        why:
+          - "0.75 قسمت على الـ maturation time مرتين."
+          - "صح: 6 × (22.5 / 45) / 2 = 1.5، يعني أقل من 2: رد الـ marrow مش كفاية."
+          - "3 صححت للـ Hct بس نسيت تقسم على الـ maturation time."
+          - "6 ده الرقم الخام من غير أي تصحيح."
+        page: 745
+        quote: "RPI = % reticulocytes × Hct / maturation time"
+      - kind: try
+        items: [rr.L06.028, rr.L06.031, rr.L06.033, rr.L06.034, rr.L06.039]
+    recap:
+      - "CO = O2 consumption / (arterial − venous O2 content) = SV × HR"
+      - "MAP = CO × TPR = 2/3 DBP + 1/3 SBP"
+      - "SV = EDV − ESV، EF = SV / EDV"
+      - "Resistance فيها r^4 تحت: نص القطر = 16 ضعف"
+      - "RPI = % retic × (actual / normal Hct) / maturation time"
+    practice: [rr.L06.028, rr.L06.029, rr.L06.030, rr.L06.031, rr.L06.032, rr.L06.033, rr.L06.034, rr.L06.035, rr.L06.036, rr.L06.037, rr.L06.038, rr.L06.039, rr.L06.040]
+
+  - id: rr.L06.lesson4
+    title: "الكلية والرئة: clearance و acid-base و الغازات"
+    hook: "الـ FENa بيقولك الكلية نفسها عيانة ولا مستخبية من قلة الدم، والـ Winters بيكشف اضطراب تاني مستخبي"
+    minutes: 10
+    pages: [745, 745]
+    topics: [renal, respiratory]
+    goals:
+      - "تحسب clearance و GFR و eRPF و FF و FENa"
+      - "تستخدم الـ anion gap و Winters formula مع بعض"
+      - "تحسب الـ dead space و PVR و الـ alveolar PO2"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Clearance: كام mL بلازما اتنضفت"
+        text: |-
+          ==Cx = (Ux × V) / Px==: الكمية اللي طلعت في البول في الدقيقة (Ux × V)، مقسومة على تركيزها في البلازما = حجم البلازما اللي اتنضف منها.
+
+          - **GFR = C inulin = U inulin × V / P inulin**. ليه الـ inulin؟ لأنه بيتفلتر وخلاص: لا بيتمص ولا بيتفرز، فكل اللي في البول جه من الفلترة.
+          - والـ GFR كمان = **Kf [(PGC − PBS) − (πGC − πBS)]**: نفس فكرة Starling بين الـ glomerular capillary و Bowman space.
+        page: 745
+        quote: "Cinulin = GFR = Uinulin × V/Pinulin = K f [(PGC – PBS) – (πGC – πBS)]"
+      - kind: explain
+        title: "eRPF و filtration fraction"
+        text: |-
+          - ==eRPF = U PAH × V / P PAH = C PAH==. الـ PAH بيتفلتر **وبيتفرز** كمان، فتقريبًا كل البلازما اللي بتعدي على الكلية بتتنضف منه، فالـ clearance بتاعه = الـ renal plasma flow.
+          - ==FF = GFR / RPF==: من كل البلازما اللي داخلة، كام نسبة اتفلترت.
+        page: 745
+        quote: "Effective renal plasma flow eRPF = UPAH"
+      - kind: figure
+        title: "من الـ RPF للـ GFR"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <marker id="L06d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker>
+            </defs>
+            <rect class="fg-acc" x="10" y="20" width="340" height="34" rx="8"/>
+            <text x="20" y="42" class="t-b">RPF = C PAH (e.g. 600 mL/min)</text>
+            <rect class="fg-good" x="10" y="90" width="68" height="34" rx="8"/>
+            <text x="16" y="112" class="t-sm t-b">GFR 120</text>
+            <line class="fg-arrow-acc" x1="44" y1="56" x2="44" y2="88" marker-end="url(#L06d)"/>
+            <text x="90" y="104" class="t-sm">GFR = C inulin</text>
+            <text x="90" y="122" class="t-sm t-acc">FF = GFR / RPF = 120 / 600 = 20%</text>
+          </svg>
+        caption: "الـ PAH بيقيس كل البلازما اللي داخلة الكلية، والـ inulin بيقيس اللي اتفلتر منها بس. النسبة بينهم هي الـ filtration fraction."
+        alt: "A wide bar labelled RPF = C PAH, for example 600 mL/min. A small box below labelled GFR 120 with an arrow from the bar. Text: GFR = C inulin; FF = GFR / RPF = 120 / 600 = 20%."
+        page: 745
+        quote: "Filtration fraction FF"
+      - kind: explain
+        title: "FENa"
+        text: |-
+          ==FENa = V × UNa / (GFR × PNa) = PCr × UNa / (UCr × PNa)==.
+
+          يعني الصوديوم اللي طلع في البول على الصوديوم اللي اتفلتر. والصيغة التانية أسهل لأن الـ V بيروح مع بعضه لما تحط الـ creatinine clearance مكان الـ GFR.
+
+          المنطق: لو الكلية سليمة بس الدم قليل (prerenal)، الـ tubules بتمسك في الصوديوم ← FENa صغير (أقل من 1%). لو الـ tubules نفسها بايظة، الصوديوم بيهرب ← FENa عالي.
+        page: 745
+        quote: "FENa+ = V × UNa / GFR × PNa = PCr × UNa / UCr × PNa"
+      - kind: check
+        question: "PCr 2 mg/dL, UNa 10 mEq/L, UCr 100 mg/dL, PNa 140 mEq/L. What is the FENa?"
+        options: ["About 0.14%", "About 1.4%", "About 14%", "Cannot be calculated without urine volume"]
+        answer: 0
+        why:
+          - "صح: (2 × 10) / (100 × 140) = 0.0014 = 0.14%: أقل من 1%، يعني الـ tubules ماسكة الصوديوم."
+          - "1.4% غلطة في العلامة العشرية."
+          - "14% غلطة في العلامة العشرية مرتين."
+          - "صيغة الـ creatinine مش محتاجة V، لأنه بيروح من البسط والمقام."
+        page: 745
+        quote: "FENa+ = V × UNa / GFR × PNa = PCr × UNa / UCr × PNa"
+      - kind: explain
+        title: "Henderson-Hasselbalch و anion gap و Winters"
+        text: |-
+          - **Henderson-Hasselbalch**: pH = 6.1 + log ([HCO3−] / 0.03 Pco2). الـ pH بيتحدد بالنسبة بين الـ HCO3− (الكلية) والـ Pco2 (الرئة).
+          - ==Anion gap = Na+ − (Cl− + HCO3−)==: الـ anions اللي مش بنقيسها. لو عالي، فيه حمض زيادة بالـ anion بتاعه (زي ketoacids).
+          - ==Winters formula==: Pco2 = 1.5 [HCO3−] + 8 ± 2. ده الـ Pco2 المتوقع لو الرئة عوّضت metabolic acidosis بسيطة. لو الـ Pco2 المقاس أعلى ← فيه respiratory acidosis معاها، لو أوطى ← respiratory alkalosis.
+        page: 745
+        quote: "Pco2 = 1.5 [HCO3–] + 8 ± 2"
+      - kind: case
+        stem: "A 19-year-old with DKA: Na+ 140, Cl− 100, HCO3− 12 mEq/L, Pco2 40 mm Hg."
+        steps:
+          - question: "What is the anion gap?"
+            options: ["12", "28", "40", "52"]
+            answer: 1
+            why: "140 − (100 + 12) = 28 mEq/L: عالي."
+          - question: "His expected Pco2 by the Winters formula, and what his actual Pco2 of 40 means?"
+            options: ["26 ± 2: appropriate", "26 ± 2: concomitant respiratory acidosis", "40 ± 2: appropriate", "18 ± 2: concomitant respiratory alkalosis"]
+            answer: 1
+            why: "1.5 × 12 + 8 = 26 ± 2. المقاس 40 أعلى من المتوقع، يعني الرئة مش بتطلّع CO2 كفاية: respiratory acidosis معاها."
+        page: 745
+        quote: "Anion gap Na+ − (Cl– + HCO3–)"
+      - kind: explain
+        title: "الرئة: dead space و PVR"
+        text: |-
+          - ==Physiologic dead space: VD = VT × (PaCO2 − PECO2) / PaCO2==. الهوا اللي بيطلع من الـ dead space ملوش CO2، فبيخفف الـ CO2 اللي في الزفير. كل ما الـ PECO2 يبقى أوطى من الـ PaCO2، الـ dead space أكبر.
+          - **PVR = (P pulm artery − P L atrium) / cardiac output**: نفس قانون المقاومة (فرق الضغط على التدفق)، بس على الدورة الرئوية.
+        page: 745
+        quote: "Physiologic dead space VD = VT ×"
+      - kind: explain
+        title: "Alveolar gas equation"
+        text: |-
+          ==PAO2 = PIO2 − PaCO2 / RQ ≈ 150 mm Hg − PaCO2 / 0.8== (عند مستوى البحر على هوا الأوضة).
+
+          الـ alveolus مساحته محدودة: كل ما الـ CO2 يزيد فيه، الـ O2 بيقل. والقسمة على الـ RQ (0.8) عشان الجسم بيستهلك O2 أكتر من الـ CO2 اللي بيطلعه.
+        page: 745
+        quote: "PAo2 = PIo2 – Paco2 = 150 mm Hga – Paco2 / 0.8 RQ"
+      - kind: check
+        question: "After a heroin overdose a man breathing room air at sea level has a PaCO2 of 80 mm Hg. What is his expected alveolar PO2?"
+        options: ["50 mm Hg", "70 mm Hg", "100 mm Hg", "130 mm Hg"]
+        answer: 0
+        why:
+          - "صح: 150 − 80 / 0.8 = 150 − 100 = 50 mm Hg. الـ hypoventilation بيملا الـ alveolus CO2."
+          - "70 طرحت 80 من غير ما تقسم على 0.8."
+          - "100 ده الطبيعي لما الـ PaCO2 يبقى 40."
+          - "130 جمعت بدل ما تطرح."
+        page: 745
+        quote: "PAo2 = PIo2 – Paco2 = 150 mm Hga – Paco2 / 0.8 RQ"
+      - kind: try
+        items: [rr.L06.042, rr.L06.044, rr.L06.045, rr.L06.047, rr.L06.054]
+    recap:
+      - "Cx = Ux × V / Px؛ GFR = C inulin؛ eRPF = C PAH؛ FF = GFR / RPF"
+      - "FENa = PCr × UNa / (UCr × PNa)؛ أقل من 1% = prerenal"
+      - "AG = Na+ − (Cl− + HCO3−)؛ Winters: Pco2 = 1.5 [HCO3−] + 8 ± 2"
+      - "PAO2 ≈ 150 − PaCO2 / 0.8"
+    practice: [rr.L06.041, rr.L06.042, rr.L06.043, rr.L06.044, rr.L06.045, rr.L06.046, rr.L06.047, rr.L06.048, rr.L06.049, rr.L06.050, rr.L06.051, rr.L06.052, rr.L06.053, rr.L06.054, rr.L06.055, rr.L06.056]

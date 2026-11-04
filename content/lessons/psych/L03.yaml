@@ -1,0 +1,509 @@
+schema: steps.lesson/v1
+lecture: psych.L03
+lessons:
+  - id: psych.L03.lesson1
+    title: "الكحول و Wernicke والعلاج النفسي والـ stimulants"
+    hook: "في السكران المتلخبط: الـ thiamine الأول، وبعدين الـ dextrose"
+    minutes: 8
+    pages: [590, 590]
+    topics: [alcohol-use-disorder, wernicke-korsakoff, psychotherapy, cns-stimulants]
+    goals:
+      - "تعرف مضاعفات الـ alcohol use disorder وتختار الدوا المناسب حسب الكبد والكلى"
+      - "تعرف ثلاثي Wernicke وليه الـ B1 قبل الـ dextrose"
+      - "تفرّق بين أنواع الـ psychotherapy من المثال"
+      - "تعرف الـ CNS stimulants: بيعملوا إيه، وبيتستخدموا في إيه، وأعراضهم الجانبية"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ alcohol use disorder"
+        text: |-
+          بيتشخّص بنفس criteria الـ substance use disorder.
+          - **المضاعفات**: نقص ==vitamin B1== (thiamine)، و alcoholic cirrhosis، و hepatitis، و pancreatitis، و peripheral neuropathy، و testicular atrophy.
+          - **العلاج**: naltrexone و acamprosate و disulfiram، والـ support groups زي Alcoholics Anonymous بتساعد المريض وأهله يكمّلوا من غير شرب.
+        page: 590
+        quote: "Complications: vitamin B1 (thiamine) deficiency, alcoholic cirrhosis, hepatitis, pancreatitis, peripheral neuropathy, testicular atrophy."
+      - kind: table
+        title: "أنهي دوا لمين؟"
+        columns: ["Drug", "Role", "Avoid in"]
+        rows:
+          - ["Naltrexone", "Reduces cravings", "Liver failure"]
+          - ["Acamprosate", "Maintains abstinence", "Renal failure"]
+          - ["Disulfiram", "Conditions the patient to abstain", "—"]
+        hide: [[0, 2], [1, 2], [2, 1]]
+        page: 590
+        quote: "Treatment: naltrexone (reduces cravings; avoid in liver failure), acamprosate (contraindicated in renal failure), disulfiram (to condition the patient to abstain from alcohol use)."
+      - kind: check
+        question: "A man with alcohol use disorder and cirrhosis wants a drug to reduce cravings. Which drug should you avoid?"
+        options:
+          - "Naltrexone"
+          - "Acamprosate"
+          - "Disulfiram"
+          - "Support group referral"
+        answer: 0
+        why:
+          - "صح: الـ naltrexone بيقلل الـ cravings بس ممنوع في الـ liver failure."
+          - "الـ acamprosate ممنوع في الـ renal failure، مش الكبد."
+          - "الـ disulfiram مش اللي الكتاب بيحذّر منه هنا؛ دوره إنه يعمل conditioning عشان المريض يبعد عن الكحول."
+          - "الـ support groups مفيدة دايماً ومش ممنوعة."
+        page: 590
+        quote: "naltrexone (reduces cravings; avoid in liver failure)"
+      - kind: figure
+        title: "Wernicke ثم Korsakoff"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="18" class="t-sm t-b">Vitamin B1 deficiency</text>
+            <rect class="fg-acc" x="10" y="30" width="105" height="40" rx="8"/>
+            <text x="20" y="55" class="t-sm t-b">Confusion</text>
+            <rect class="fg-acc" x="125" y="30" width="125" height="40" rx="8"/>
+            <text x="133" y="55" class="t-sm t-b">Ophthalmoplegia</text>
+            <rect class="fg-acc" x="260" y="30" width="90" height="40" rx="8"/>
+            <text x="280" y="55" class="t-sm t-b">Ataxia</text>
+            <text x="10" y="92" class="t-sm">Wernicke encephalopathy (reversible)</text>
+            <line class="fg-line" x1="180" y1="100" x2="180" y2="125"/>
+            <rect class="fg-box" x="10" y="130" width="340" height="55" rx="8"/>
+            <text x="20" y="152" class="t-sm t-b">Korsakoff syndrome (irreversible)</text>
+            <text x="20" y="172" class="t-sm">Memory loss, confabulation, personality</text>
+          </svg>
+        caption: "الثلاثي: confusion و ophthalmoplegia و ataxia ده Wernicke. لو ما اتعالجش ممكن يوصل لـ Korsakoff: ذاكرة بتضيع ومش بترجع، و confabulation، وتغيّر في الشخصية."
+        alt: "Three highlighted boxes labelled confusion, ophthalmoplegia and ataxia, under the heading vitamin B1 deficiency, form Wernicke encephalopathy. A line leads down to a box for Korsakoff syndrome: memory loss, confabulation, personality change."
+        page: 590
+        quote: "Triad of confusion, ophthalmoplegia, ataxia (Wernicke encephalopathy). May progress to irreversible memory loss, confabulation, personality change (Korsakoff syndrome)."
+      - kind: aside
+        tone: trap
+        text: "لو اديت ==dextrose== قبل الـ vitamin B1 ممكن تطلّع الأعراض أو تزوّدها. العلاج: IV vitamin B1 الأول، وبعدين الـ dextrose."
+        page: 590
+        quote: "Symptoms can be precipitated by administering dextrose before vitamin B1 . Triad of confusion"
+      - kind: match
+        prompt: "وصّل نوع العلاج النفسي بوصفه"
+        pairs:
+          - ["Behavioral therapy", "Changes maladaptive behaviors; systematic desensitization for phobia"]
+          - ["Cognitive behavioral therapy", "Recognizes distorted thoughts; builds coping skills"]
+          - ["Dialectical behavioral therapy", "Designed for borderline personality disorder"]
+          - ["Motivational interviewing", "Resolves ambivalence; substance use and weight loss"]
+          - ["Supportive therapy", "Empathy to keep hope during hardship"]
+        why: "الـ behavioral بيغيّر السلوك نفسه، والـ CBT بيغيّر طريقة التفكير اللي ورا السلوك. والـ interpersonal therapy بتركّز على العلاقات ومهارات التواصل."
+        page: 590
+        quote: "Enhances intrinsic motivation to change by exploring and resolving ambivalence. Used in substance use disorder and weight loss."
+      - kind: explain
+        title: "الـ CNS stimulants"
+        text: |-
+          Methylphenidate و dextroamphetamine و methamphetamine و lisdexamfetamine.
+          - **الآلية**: بيزوّدوا الـ ==catecholamines== في الـ synaptic cleft، خصوصاً الـ norepinephrine والـ dopamine.
+          - **الاستخدام**: ADHD، و narcolepsy، و binge-eating disorder.
+          - **الأعراض الجانبية**: nervousness و agitation و anxiety و insomnia و anorexia، و tachycardia و hypertension، و weight loss، و ==tics== و bruxism (الضغط على السنان).
+        page: 590
+        quote: "MECHANISM ↑ catecholamines in the synaptic cleft, especially norepinephrine and dopamine. CLINICAL USE ADHD, narcolepsy, binge-eating disorder."
+      - kind: check
+        question: "A child on methylphenidate for ADHD has lost weight and sleeps poorly. Which other adverse effect fits this drug?"
+        options:
+          - "Tics"
+          - "Bradycardia"
+          - "Hypotension"
+          - "Weight gain"
+        answer: 0
+        why:
+          - "صح: الـ tics والـ bruxism من الأعراض الجانبية للـ stimulants."
+          - "الـ stimulants بتعمل tachycardia، مش bradycardia."
+          - "بتعمل hypertension، مش hypotension."
+          - "بتقلل الوزن (anorexia و weight loss)."
+        page: 590
+        quote: "ADVERSE EFFECTS Nervousness, agitation, anxiety, insomnia, anorexia, tachycardia, hypertension, weight loss, tics, bruxism."
+      - kind: try
+        items: [psych.L03.003, psych.L03.007, psych.L03.009, psych.L03.012]
+    recap:
+      - "Naltrexone: ممنوع في الكبد. Acamprosate: ممنوع في الكلى."
+      - "Wernicke: confusion و ophthalmoplegia و ataxia؛ IV B1 قبل الـ dextrose."
+      - "Korsakoff: ذاكرة بتضيع ومش بترجع، و confabulation."
+      - "Systematic desensitization = behavioral therapy. DBT = borderline."
+      - "الـ stimulants: catecholamines زيادة؛ أعراضهم insomnia و weight loss و tics."
+    practice: [psych.L03.001, psych.L03.002, psych.L03.003, psych.L03.004, psych.L03.005, psych.L03.006, psych.L03.007, psych.L03.008, psych.L03.009, psych.L03.010, psych.L03.011, psych.L03.012]
+  - id: psych.L03.lesson2
+    title: "الـ antipsychotics والـ xanomeline-trospium"
+    hook: "الـ typicals بيمسكوا الـ D2 أقوى، فالـ EPS والـ prolactin عندهم أكتر"
+    minutes: 10
+    pages: [591, 591]
+    topics: [antipsychotics, xanomeline-trospium]
+    goals:
+      - "تعرف آلية الـ typical والـ atypical antipsychotics، وإيه المختلف في الـ aripiprazole"
+      - "ترتّب الـ extrapyramidal symptoms حسب الوقت (ADAPT) وتعرف علاج كل واحد"
+      - "تفرّق بين الـ high-potency والـ low-potency typicals"
+      - "تعرف الـ clozapine وأعراضه، والـ xanomeline-trospium وفكرته"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "بيشتغلوا إزاي؟"
+        text: |-
+          - **Typical** (1st-generation): haloperidol و pimozide و trifluoperazine و fluphenazine و thioridazine و chlorpromazine.
+          - **Atypical** (2nd-generation): aripiprazole و clozapine و olanzapine و quetiapine و risperidone و ziprasidone وغيرهم.
+          - الاتنين بيعملوا block للـ ==dopamine D2== receptor (↑ cAMP)، والـ atypicals كمان بيعملوا block للـ ==5-HT2==.
+          - الـ **aripiprazole** مختلف: ده D2 ==partial agonist==.
+        page: 591
+        quote: "Block dopamine D2 receptor (↑ cAMP). Atypical antipsychotics also block serotonin 5-HT2 receptor. Aripiprazole is a D2 partial agonist."
+      - kind: explain
+        title: "بيتستخدموا في إيه؟"
+        text: |-
+          - **Schizophrenia**: الـ typicals بيعالجوا ==positive symptoms== أساساً، والـ atypicals بيعالجوا الـ positive والـ negative.
+          - اضطرابات معاها psychosis (زي الـ bipolar)، و Tourette syndrome، و OCD، و Huntington disease.
+          - **Clozapine**: للـ psychosis اللي ما ردّتش على العلاج، أو لو فيه ==suicidality== مستمرة ("cloze to the edge").
+        page: 591
+        quote: "Clozapine is used for treatment resistant psychotic disorders or those with persistent suicidality (cloze to the edge)."
+      - kind: table
+        title: "الأعراض الجانبية العامة"
+        columns: ["System", "Effect"]
+        rows:
+          - ["Anti-HAM", "Sedation (H), orthostatic hypotension (α1), dry mouth and constipation (M)"]
+          - ["Metabolic", "Weight gain, hyperglycemia, dyslipidemia; worst with clozapine, olanzapine"]
+          - ["Endocrine", "Hyperprolactinemia: galactorrhea, oligomenorrhea, gynecomastia"]
+          - ["Cardiac", "QT prolongation"]
+          - ["Ophthalmologic", "Chlorpromazine corneal, thioridazine retinal deposits"]
+          - ["Clozapine", "Agranulocytosis, seizures, myocarditis, hypersalivation"]
+        hide: [[0, 1], [2, 1], [5, 1]]
+        page: 591
+        quote: "Metabolic: weight gain, hyperglycemia, dyslipidemia. ↑ risk with clozapine and olanzapine (obesity)."
+      - kind: check
+        question: "A man starts clozapine for treatment-resistant schizophrenia. Which test must be followed closely?"
+        options:
+          - "White blood cell count"
+          - "Serum lithium level"
+          - "Thyroid function"
+          - "Serum calcium"
+        answer: 0
+        why:
+          - "صح: الـ clozapine بيعمل agranulocytosis، فبنتابع الـ WBCs (monitor WBCs clozely)."
+          - "الـ serum level بنتابعه مع الـ lithium، مش الـ clozapine."
+          - "الـ thyroid بيتأثر بالـ lithium."
+          - "الـ hypercalcemia من الـ lithium برضه."
+        page: 591
+        quote: "Clozapine—agranulocytosis (monitor WBCs clozely), seizures (dose related), myocarditis, hypersalivation."
+      - kind: figure
+        title: "ADAPT: الـ EPS على خط الوقت"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-line" x1="10" y1="30" x2="350" y2="30"/>
+            <text x="10" y="20" class="t-sm">Hours–days</text>
+            <text x="130" y="20" class="t-sm">Days–months</text>
+            <text x="255" y="20" class="t-sm">Months–years</text>
+            <rect class="fg-acc" x="10" y="42" width="110" height="60" rx="8"/>
+            <text x="18" y="64" class="t-sm t-b">Acute</text>
+            <text x="18" y="80" class="t-sm t-b">Dystonia</text>
+            <rect class="fg-box" x="128" y="42" width="118" height="60" rx="8"/>
+            <text x="136" y="64" class="t-sm t-b">Akathisia</text>
+            <text x="136" y="80" class="t-sm t-b">Parkinsonism</text>
+            <rect class="fg-acc" x="254" y="42" width="96" height="60" rx="8"/>
+            <text x="262" y="64" class="t-sm t-b">Tardive</text>
+            <text x="262" y="80" class="t-sm t-b">dyskinesia</text>
+            <text x="10" y="128" class="t-sm">Spasm, stiffness,</text>
+            <text x="10" y="144" class="t-sm">oculogyric crisis</text>
+            <text x="128" y="128" class="t-sm">Restlessness;</text>
+            <text x="128" y="144" class="t-sm">bradykinesia</text>
+            <text x="254" y="128" class="t-sm">Chorea, mostly</text>
+            <text x="254" y="144" class="t-sm">orofacial</text>
+            <text x="10" y="185" class="t-sm">From ↓ activity in the nigrostriatal pathway</text>
+          </svg>
+        caption: "ADAPT: Acute Dystonia في ساعات لأيام، و Akathisia و Parkinsonism في أيام لشهور، و Tardive dyskinesia في شهور لسنين. كلهم من نقص النشاط في الـ nigrostriatal pathway."
+        alt: "A timeline with three boxes. Hours to days: acute dystonia, with spasm, stiffness and oculogyric crisis. Days to months: akathisia and parkinsonism, with restlessness and bradykinesia. Months to years: tardive dyskinesia, with chorea, mostly orofacial. A note says all come from reduced activity in the nigrostriatal pathway."
+        page: 591
+        quote: "Extrapyramidal symptoms (↓ activity in the nigrostriatal pathway)—ADAPT"
+      - kind: match
+        prompt: "وصّل الـ EPS بعلاجه"
+        pairs:
+          - ["Acute dystonia", "Benztropine, diphenhydramine"]
+          - ["Akathisia", "β-blockers, benztropine, benzodiazepines"]
+          - ["Parkinsonism", "Benztropine, amantadine"]
+          - ["Tardive dyskinesia", "Valbenazine, deutetrabenazine, botulinum toxin, benzodiazepines"]
+        why: "الـ benztropine (anticholinergic) شغال في الأولانيين. الـ akathisia بس هي اللي فيها β-blockers. والـ tardive dyskinesia علاجها valbenazine أو deutetrabenazine أو botulinum toxin أو benzodiazepines."
+        page: 591
+        quote: "Akathisia (restlessness). Treatment: β-blockers, benztropine, benzodiazepines."
+      - kind: check
+        question: "Three weeks after starting haloperidol, a woman paces and cannot sit still. Best treatment?"
+        options:
+          - "Propranolol"
+          - "Valbenazine"
+          - "Dantrolene"
+          - "Increase the haloperidol dose"
+        answer: 0
+        why:
+          - "صح: ده akathisia (restlessness) في أيام لشهور، وعلاجها β-blockers."
+          - "الـ valbenazine للـ tardive dyskinesia اللي بتيجي بعد شهور لسنين."
+          - "الـ dantrolene بيتكلم عنه الكتاب مع الـ NMS، ودي مش NMS."
+          - "زيادة الجرعة هتزوّد الـ EPS."
+        page: 591
+        quote: "Days to months: ▘ Akathisia (restlessness). Treatment: β-blockers"
+      - kind: table
+        title: "High-potency ضد low-potency"
+        columns: ["", "Drugs", "Main adverse effects"]
+        rows:
+          - ["High potency", "Haloperidol, trifluoperazine, pimozide, fluphenazine", "Neurologic (EPS)"]
+          - ["Low potency", "Chlorpromazine, thioridazine", "Anti-HAM (H1, α1, muscarinic)"]
+        hide: [[0, 2], [1, 2]]
+        page: 591
+        quote: "High-potency typical antipsychotics: haloperidol, trifluoperazine, pimozide, fluphenazine (Hal tries pie to fly high)—more neurologic adverse effects (eg, extrapyramidal symptoms)."
+      - kind: aside
+        tone: tip
+        text: "\"Hal tries pie to fly high\" للـ high-potency، و \"cheating thieves are low\" للـ low-potency. والـ typicals ليهم ==affinity== أكبر للـ D2، فالـ hyperprolactinemia والـ EPS والـ NMS عندهم أكتر. وكلهم lipid soluble، بيتخزنوا في الدهون وبيخرجوا ببطء."
+        page: 591
+        quote: "Typical antipsychotics have greater affinity for D2 receptor than atypical antipsychotics → ↑ risk for hyperprolactinemia, extrapyramidal symptoms, neuroleptic malignant syndrome."
+      - kind: explain
+        title: "الـ xanomeline-trospium"
+        text: |-
+          - **Xanomeline**: muscarinic ==agonist== على M1 و M4 في الـ CNS. الـ M1 بيحسّن الإدراك (hippocampus و cortex)، والـ M4 بيقلل الـ ==mesolimbic dopamine== فيبقى antipsychotic.
+          - **Trospium**: muscarinic antagonist في الـ PNS ومش بيعدي الـ BBB، فبيقلل الأعراض الطرفية من غير ما يلغي الأثر المركزي.
+          - **الاستخدام**: schizophrenia (positive symptoms والإدراك).
+          - **الأعراض**: anticholinergic (nausea و constipation و urinary retention و tachycardia)، و EPS قليلة. ==ممنوع== في الـ narrow-angle glaucoma.
+        page: 591
+        quote: "Trospium—PNS muscarinic antagonist (does not cross BBB) → limits peripheral muscarinic effects of xanomeline without inhibiting its central action."
+      - kind: try
+        items: [psych.L03.023, psych.L03.024, psych.L03.025, psych.L03.028]
+    recap:
+      - "الكل D2 blockers؛ الـ atypicals كمان 5-HT2؛ الـ aripiprazole partial agonist."
+      - "Clozapine: للمقاوم والـ suicidality؛ agranulocytosis فتابع الـ WBCs."
+      - "ADAPT: dystonia ← akathisia و parkinsonism ← tardive dyskinesia."
+      - "High potency = EPS. Low potency = anti-HAM."
+      - "Xanomeline: M1/M4 agonist. Trospium: ما بيعديش الـ BBB."
+    practice: [psych.L03.013, psych.L03.014, psych.L03.015, psych.L03.016, psych.L03.017, psych.L03.018, psych.L03.019, psych.L03.020, psych.L03.021, psych.L03.022, psych.L03.023, psych.L03.024, psych.L03.025, psych.L03.026, psych.L03.027, psych.L03.028]
+  - id: psych.L03.lesson3
+    title: "الـ lithium والـ buspirone ومضادات الاكتئاب"
+    hook: "مضاد الاكتئاب محتاج 4 لـ 8 أسابيع، فما تغيّرهوش بعد أسبوع"
+    minutes: 10
+    pages: [592, 593]
+    topics: [lithium, buspirone, antidepressants, ssris, snris, tricyclic-antidepressants, mao-inhibitors]
+    goals:
+      - "تعرف أعراض الـ lithium (LiTHIUM) والأدوية اللي بتعمل toxicity"
+      - "تعرف مميزات الـ buspirone"
+      - "تعرف كل مجموعة مضادات اكتئاب بتشتغل فين في الـ synapse"
+      - "تعرف الأعراض المهمة للـ SSRIs والـ SNRIs والـ TCAs والـ MAO inhibitors"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ lithium"
+        text: |-
+          - **الآلية**: بيأثر على الـ neurotransmission (↓ excitatory، ↑ inhibitory) والـ second messengers (زي الـ G proteins).
+          - **الاستخدام**: ==mood stabilizer== للـ bipolar: بيعالج نوبة الـ mania وبيمنع الرجوع.
+          - الـ therapeutic window ==ضيّقة==، فلازم نتابع الـ serum levels. بيخرج كله تقريباً من الكلى، وأغلبه بيترجع في الـ PCT عن طريق Na⁺ channels.
+          - الـ thiazides والـ ACE inhibitors والـ NSAIDs بيعملوا lithium toxicity.
+        page: 592
+        quote: "Narrow therapeutic window requires close monitoring of serum levels. Almost exclusively excreted by kidneys; most is reabsorbed at PCT via Na+ channels."
+      - kind: mnemonic
+        word: "LiTHIUM"
+        parts:
+          - { key: "Li", text: "Low (read with T): low thyroid" }
+          - { key: "T", text: "Thyroid: hypothyroidism" }
+          - { key: "H", text: "Heart: Ebstein anomaly (teratogen)" }
+          - { key: "I", text: "Insipidus: nephrogenic diabetes insipidus, polyuria" }
+          - { key: "U", text: "Unwanted" }
+          - { key: "M", text: "Movements: tremor" }
+        hook: "وكمان ممكن يعمل hyperthyroidism و hypercalcemia خفيفة. فأي واحدة بتشرب وتتبوّل كتير وهي على lithium، فكّر في الـ nephrogenic DI."
+        page: 592
+        quote: "Tremor, hypothyroidism, hyperthyroidism, mild hypercalcemia, polyuria (causes nephrogenic diabetes insipidus), teratogenesis (causes Ebstein anomaly)."
+      - kind: check
+        question: "A woman stable on lithium starts a new drug for hypertension and develops coarse tremor and confusion. Which drug most likely?"
+        options:
+          - "Hydrochlorothiazide"
+          - "Amlodipine"
+          - "Hydralazine"
+          - "Doxazosin"
+        answer: 0
+        why:
+          - "صح: الـ thiazides بتقلل الـ clearance فتعمل lithium toxicity."
+          - "الـ amlodipine مش من الأدوية اللي الكتاب ذكرها مع الـ lithium toxicity."
+          - "الـ hydralazine مش مذكور مع الـ lithium."
+          - "الـ doxazosin مش مذكور مع الـ lithium."
+        page: 592
+        quote: "Thiazides, ACE inhibitors, NSAIDs, and other drugs affecting clearance are implicated in lithium toxicity."
+      - kind: aside
+        tone: tip
+        text: "**Buspirone**: partial ==5-HT1A== agonist للـ generalized anxiety disorder. ما بيعملش sedation ولا addiction ولا tolerance، ومش بيتفاعل مع الكحول (عكس الـ benzodiazepines). بس بيبدأ يشتغل بعد 1–2 أسبوع. \"I get anxious if the bus doesn't arrive at one\"."
+        page: 592
+        quote: "Does not cause sedation, addiction, or tolerance. Begins to take effect after 1-2 weeks. Does not interact with alcohol (vs barbiturates, benzodiazepines)."
+      - kind: figure
+        title: "مضادات الاكتئاب بتشتغل فين؟"
+        svg: |-
+          <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="10" y="10" width="160" height="90" rx="10"/>
+            <text x="20" y="30" class="t-sm t-b">Noradrenergic axon</text>
+            <text x="20" y="52" class="t-sm">MAO → metabolites</text>
+            <text x="20" y="70" class="t-sm">NE reuptake</text>
+            <text x="20" y="88" class="t-sm">α2 autoreceptor</text>
+            <rect class="fg-box" x="190" y="10" width="160" height="90" rx="10"/>
+            <text x="200" y="30" class="t-sm t-b">Serotonergic axon</text>
+            <text x="200" y="52" class="t-sm">MAO → metabolites</text>
+            <text x="200" y="70" class="t-sm">5-HT reuptake</text>
+            <rect class="fg-acc" x="10" y="115" width="340" height="30" rx="8"/>
+            <text x="20" y="135" class="t-sm t-b">Postsynaptic neuron: NE and 5-HT receptors</text>
+            <text x="10" y="168" class="t-sm">MAO: MAO inhibitors</text>
+            <text x="10" y="186" class="t-sm">NE reuptake: TCAs, SNRIs, bupropion</text>
+            <text x="10" y="204" class="t-sm">5-HT reuptake: TCAs, SSRIs, SNRIs, trazodone</text>
+            <text x="200" y="168" class="t-sm">α2: mirtazapine</text>
+          </svg>
+        caption: "الـ MAO inhibitors بيمنعوا تكسير الـ NE والـ 5-HT جوه الـ axon. والـ reuptake inhibitors بيسيبوا الـ neurotransmitter في الـ cleft. والـ mirtazapine بيعمل block للـ α2 autoreceptor فيزوّد الـ release."
+        alt: "Two presynaptic axons, noradrenergic and serotonergic, each with MAO breaking transmitter into metabolites and a reuptake site; the noradrenergic axon also has an alpha-2 autoreceptor. Below is the postsynaptic neuron with NE and 5-HT receptors. Labels: MAO inhibitors act on MAO; TCAs, SNRIs and bupropion block NE reuptake; TCAs, SSRIs, SNRIs and trazodone block 5-HT reuptake; mirtazapine blocks the alpha-2 autoreceptor."
+        page: 592
+        quote: "MAO inhibitors SEROTONERGIC AXON NORADRENERGIC POSTSYNAPTIC NEURON Mirtazapine TCAs, SSRIs, SNRIs, trazodone"
+      - kind: explain
+        title: "الـ SSRIs والـ SNRIs"
+        text: |-
+          - **SSRIs** (fluoxetine و fluvoxamine و paroxetine و sertraline و escitalopram و citalopram): للاكتئاب و GAD و panic و OCD و bulimia و binge-eating و social anxiety و PTSD و premature ejaculation و premenstrual dysphoric disorder. أعراضهم: 5-HT syndrome و GI upset و ==SIADH== و sexual dysfunction، و mania لو فيه bipolar مستخبي.
+          - **Discontinuation syndrome** لو وقّفته فجأة (أعراض زي الإنفلونزا، insomnia، nausea، hyperarousal)، وأكتر مع الـ ==paroxetine== عشان الـ t½ قصير.
+          - **SNRIs** (venlafaxine و desvenlafaxine و duloxetine و levomilnacipran و milnacipran): للاكتئاب و GAD و diabetic neuropathy. الـ duloxetine والـ milnacipran كمان للـ ==fibromyalgia==. أعراضهم: ↑ BP، و stimulant effects، و sedation، و sexual dysfunction، و nausea.
+        page: 593
+        quote: "Discontinuation syndrome—abrupt cessation leads to flulike symptoms, insomnia, nausea, sensory disturbances, and hyperarousal. Higher risk with paroxetine due to short t1/2"
+      - kind: check
+        question: "An older woman on citalopram becomes confused; her serum sodium is low with concentrated urine. Mechanism?"
+        options:
+          - "SIADH"
+          - "Nephrogenic diabetes insipidus"
+          - "Serotonin syndrome"
+          - "Discontinuation syndrome"
+        answer: 0
+        why:
+          - "صح: الـ SSRIs بتعمل SIADH، فالصوديوم يقل والبول يبقى مركّز."
+          - "الـ nephrogenic DI من الـ lithium، والبول فيه بيبقى مخفف."
+          - "الـ serotonin syndrome فيه hyperthermia و clonus، مش hyponatremia."
+          - "الـ discontinuation بيحصل لما توقف الدوا، وهي لسه بتاخده."
+        page: 593
+        quote: "ADVERSE EFFECTS 5-HT syndrome, GI upset, SIADH, sexual dysfunction, mania if underlying bipolar disorder."
+      - kind: explain
+        title: "الـ TCAs"
+        text: |-
+          Amitriptyline و nortriptyline و imipramine و desipramine و clomipramine و doxepin و amoxapine. بيمنعوا reuptake الـ 5-HT والـ NE.
+          - **الاستخدام**: MDD، و peripheral neuropathy، و neuropathic pain، و migraine prophylaxis، و OCD (==clomipramine==)، و nocturnal enuresis (==imipramine==).
+          - **الأعراض**: sedation، و α1 block (postural hypotension)، و anticholinergic (tachycardia و urinary retention و dry mouth)، و QT prolongation. الـ 3° (amitriptyline) anticholinergic أكتر من الـ 2° (nortriptyline)، فالـ nortriptyline أحسن للكبار.
+        page: 593
+        quote: "3° TCAs (amitriptyline) have more anticholinergic effects than 2° TCAs (nortriptyline). Can prolong QT interval."
+      - kind: aside
+        tone: exam
+        text: "الـ TCA overdose: \"Tri-CyCliC's\" = Convulsions و Coma و ==Cardiotoxicity== (arrhythmia من Na⁺ channel inhibition)، ومعاهم respiratory depression و hyperpyrexia. العلاج NaHCO₃ عشان يمنع الـ arrhythmia."
+        page: 593
+        quote: "Tri-CyCliC’s: Convulsions, Coma, Cardiotoxicity (arrhythmia due to Na+ channel inhibition); also respiratory depression, hyperpyrexia."
+      - kind: explain
+        title: "الـ MAO inhibitors"
+        text: |-
+          Tranylcypromine و phenelzine و isocarboxazid و selegiline (selective MAO-B) ("MAO takes pride in Shanghai"). بيزوّدوا الـ NE والـ 5-HT والـ dopamine.
+          - **الاستخدام**: atypical depression و anxiety، والـ selegiline للـ Parkinson.
+          - **الخطر**: ==hypertensive crisis== مع الـ tyramine (الجبنة القديمة والنبيت).
+          - **ممنوع معاهم**: SSRIs و TCAs و St. John's wort و meperidine و dextromethorphan و pseudoephedrine و linezolid، عشان الـ serotonin syndrome. واستنى ==2 weeks== بعد ما توقفهم.
+        page: 593
+        quote: "CNS stimulation; hypertensive crisis, most notably with ingestion of tyramine. Contraindicated with SSRIs, TCAs, St. John’s wort, meperidine, dextromethorphan, pseudoephedrine, linezolid"
+      - kind: try
+        items: [psych.L03.032, psych.L03.038, psych.L03.042, psych.L03.049, psych.L03.053]
+    recap:
+      - "LiTHIUM: hypothyroidism، Ebstein، nephrogenic DI، tremor. Thiazides و ACEi و NSAIDs = toxicity."
+      - "Buspirone: GAD، من غير sedation ولا addiction، بعد 1–2 أسبوع."
+      - "مضادات الاكتئاب: 4–8 أسابيع."
+      - "SSRIs: SIADH و sexual dysfunction؛ paroxetine = discontinuation أكتر."
+      - "TCAs: 3 Cs، والعلاج NaHCO₃. MAOIs: tyramine، واستنى أسبوعين."
+    practice: [psych.L03.029, psych.L03.030, psych.L03.031, psych.L03.032, psych.L03.033, psych.L03.034, psych.L03.035, psych.L03.036, psych.L03.037, psych.L03.038, psych.L03.039, psych.L03.040, psych.L03.041, psych.L03.042, psych.L03.043, psych.L03.044, psych.L03.045, psych.L03.046, psych.L03.047, psych.L03.048, psych.L03.049, psych.L03.050, psych.L03.051, psych.L03.052, psych.L03.053]
+  - id: psych.L03.lesson4
+    title: "الـ atypical antidepressants والتدخين والـ opioids"
+    hook: "الـ buprenorphine partial agonist: لو اديته بدري بعد الهيروين هيعمل withdrawal"
+    minutes: 8
+    pages: [594, 594]
+    topics: [atypical-antidepressants, smoking-cessation, opioid-withdrawal-relapse]
+    goals:
+      - "تختار الـ atypical antidepressant المناسب من المريض (وزنه، نومه، الـ sexual dysfunction)"
+      - "تفرّق بين الـ nicotine replacement والـ varenicline والـ bupropion للتدخين"
+      - "ترتّب أدوية الـ opioid من full agonist لـ antagonist وتعرف استخدام كل واحد"
+    status: unverified
+    steps:
+      - kind: table
+        title: "Atypical Bees Make Tasty Vegan Venison"
+        columns: ["Drug", "Mechanism", "Key point"]
+        rows:
+          - ["Bupropion", "Inhibits NE and dopamine reuptake", "Smoking cessation; seizures in bulimia or anorexia; least sexual effects and weight gain"]
+          - ["Mirtazapine", "α2 antagonist; 5-HT2, 5-HT3, H1 antagonist", "Sedation, ↑ appetite, weight gain"]
+          - ["Trazodone", "Blocks 5-HT2, α1, H1", "Mainly insomnia; priapism, postural hypotension"]
+          - ["Vilazodone", "5-HT reuptake inhibitor; 5-HT1A partial agonist", "MDD; serotonin syndrome with other serotonergic drugs"]
+          - ["Vortioxetine", "5-HT reuptake inhibitor; 5-HT1A agonist, 5-HT3 antagonist", "MDD; nausea, sexual dysfunction"]
+        hide: [[0, 2], [1, 2], [2, 2]]
+        page: 594
+        quote: "Bupropion Inhibits NE and DA reuptake. Also used for smoking cessation. Adverse effects: stimulant effects (tachycardia, insomnia), headache, seizures in patients with bulimia and anorexia nervosa."
+      - kind: sort
+        prompt: "أنهي دوا يناسب المريض ده؟"
+        bins: ["Bupropion", "Mirtazapine", "Trazodone"]
+        cards:
+          - { text: "Depressed, thin, sleeping 3 hours a night", bin: 1 }
+          - { text: "Stopped an SSRI because of sexual dysfunction", bin: 0 }
+          - { text: "Wants help sleeping at a low dose", bin: 2 }
+          - { text: "Depressed smoker who wants to quit", bin: 0 }
+        why: "الـ mirtazapine بيعمل sedation وجوع وزيادة وزن، وده مفيد للمكتئب الرفيع اللي مش بينام (munch more and move less). الـ bupropion أقل واحد في الـ sexual effects ويساعد في التدخين. والـ trazodone للنوم أساساً (traZZZobone). وما تديش bupropion لحد عنده bulimia أو anorexia."
+        page: 594
+        quote: "Adverse effects: sedation (which may be desirable in depressed patients with insomnia), ↑ appetite, weight gain (which may be desirable in underweight patients), dry mouth."
+      - kind: check
+        question: "A man on a sedating antidepressant for insomnia comes in with a painful erection lasting 5 hours. Which drug?"
+        options:
+          - "Trazodone"
+          - "Bupropion"
+          - "Mirtazapine"
+          - "Vortioxetine"
+        answer: 0
+        why:
+          - "صح: الـ trazodone بيعمل priapism وsedation (traZZZobone)."
+          - "الـ bupropion أقل دوا في الـ sexual adverse effects."
+          - "الـ mirtazapine بيعمل sedation وجوع، مش priapism."
+          - "الـ vortioxetine بيعمل sexual dysfunction، مش priapism."
+        page: 594
+        quote: "Adverse effects: sedation, nausea, priapism, postural hypotension. Think traZZZobone due to sedative and male specific adverse effects."
+      - kind: explain
+        title: "أدوية بطّل التدخين"
+        text: |-
+          - **Nicotine replacement**: بيرتبط بالـ nicotinic ACh receptors عشان يخفف الـ withdrawal. ينفع patch طويل المفعول مع gum أو lozenge قصير. أعراضه: headache و oral irritation.
+          - **Varenicline**: nicotinic ACh receptor ==partial agonist==: بيقلل أثر الـ reward وكمان بيقلل الـ withdrawal. أعراضه: GI discomfort و sleep disturbance. "Varenicline helps nicotine cravings decline".
+          - **Bupropion**: برضه بيتستخدم للتدخين.
+        page: 594
+        quote: "Varenicline Nicotinic ACh receptor partial agonist. Diminishes effect on reward system, but also reduces withdrawal."
+      - kind: figure
+        title: "أدوية الـ opioid من agonist لـ antagonist"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="18" class="t-sm t-b">Full agonist</text>
+            <text x="268" y="18" class="t-sm t-b">Antagonist</text>
+            <line class="fg-line" x1="10" y1="30" x2="350" y2="30"/>
+            <rect class="fg-acc" x="10" y="42" width="105" height="70" rx="8"/>
+            <text x="18" y="64" class="t-sm t-b">Methadone</text>
+            <text x="18" y="82" class="t-sm">Long-acting,</text>
+            <text x="18" y="98" class="t-sm">oral</text>
+            <rect class="fg-box" x="123" y="42" width="110" height="70" rx="8"/>
+            <text x="131" y="64" class="t-sm t-b">Buprenorphine</text>
+            <text x="131" y="82" class="t-sm">Partial agonist,</text>
+            <text x="131" y="98" class="t-sm">sublingual film</text>
+            <rect class="fg-acc" x="241" y="42" width="109" height="70" rx="8"/>
+            <text x="249" y="64" class="t-sm t-b">Naloxone</text>
+            <text x="249" y="82" class="t-sm">Overdose</text>
+            <text x="249" y="98" class="t-sm">IM, IV, nasal</text>
+            <text x="10" y="140" class="t-sm">Withdrawal and maintenance: methadone,</text>
+            <text x="10" y="158" class="t-sm">buprenorphine</text>
+            <text x="10" y="182" class="t-sm">Relapse after detox: naltrexone (oral)</text>
+          </svg>
+        caption: "الـ methadone full agonist طويل المفعول، والـ buprenorphine partial agonist، والـ naloxone antagonist قصير للـ overdose. والـ naltrexone antagonist طويل المفعول بعد الـ detox عشان يمنع الرجوع."
+        alt: "A line from full agonist to antagonist with three boxes: methadone, long-acting and oral; buprenorphine, partial agonist given as a sublingual film; naloxone, for overdose, given IM, IV or nasally. Notes below: methadone and buprenorphine for withdrawal and maintenance; oral naltrexone for relapse prevention after detoxification."
+        page: 594
+        quote: "Methadone Long-acting oral opioid used for medically supervised opioid (eg, heroin) withdrawal or long-term maintenance therapy."
+      - kind: aside
+        tone: trap
+        text: "الـ buprenorphine ==partial agonist==، فلو اديته لحد معتمد على الـ opioids، أو بعد ما أخد full agonist بوقت قصير، هيعمل ==precipitated withdrawal==."
+        page: 594
+        quote: "Partial agonists can precipitate withdrawal symptoms in opioid-dependent individuals or when administered shortly after use of a full agonist."
+      - kind: match
+        prompt: "وصّل الدوا باستخدامه"
+        pairs:
+          - ["Naloxone", "Reverses respiratory and CNS depression in acute overdose"]
+          - ["Naltrexone", "Prevents relapse after detoxification; helps alcohol use disorder too"]
+          - ["Methadone", "Long-acting oral opioid for withdrawal or maintenance"]
+          - ["Methylnaltrexone", "Opioid-induced constipation; analgesia preserved"]
+        why: "الـ naloxone قصير وللطوارئ، والـ naltrexone طويل وبعد الـ detox. والـ methylnaltrexone μ antagonist طرفي ما بيعديش الـ BBB، فبيعالج الإمساك من غير ما يلغي المسكّن."
+        page: 594
+        quote: "Naloxone Short-acting opioid antagonist given IM, IV, or as a nasal spray to treat acute opioid overdose, particularly to reverse respiratory and CNS depression."
+      - kind: aside
+        tone: exam
+        text: "الـ injection drug use بيزوّد خطر الـ HBV و HCV و HIV، و skin and soft tissue infections، و bacteremia، و ==right-sided== infective endocarditis."
+        page: 594
+        quote: "Injection drug use ↑ risk for HBV, HCV, HIV, skin and soft tissue infections, bacteremia, right sided infective endocarditis."
+      - kind: try
+        items: [psych.L03.057, psych.L03.058, psych.L03.060, psych.L03.064, psych.L03.065]
+    recap:
+      - "Bupropion: تدخين وأقل sexual effects؛ ممنوع في الـ bulimia والـ anorexia."
+      - "Mirtazapine: munch more and move less. Trazodone: نوم و priapism."
+      - "Varenicline: nicotinic partial agonist."
+      - "Methadone و buprenorphine للـ withdrawal؛ naloxone للـ overdose؛ naltrexone ضد الرجوع."
+      - "Buprenorphine بدري بعد full agonist = precipitated withdrawal."
+    practice: [psych.L03.054, psych.L03.055, psych.L03.056, psych.L03.057, psych.L03.058, psych.L03.059, psych.L03.060, psych.L03.061, psych.L03.062, psych.L03.063, psych.L03.064, psych.L03.065]

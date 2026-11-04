@@ -3,10 +3,25 @@
 use super::*;
 
 thread_local! {
-    /// Cases a test thread adds beside the bundled content (none is written
-    /// yet): the case list and player find them like any other.
+    /// Cases a test thread adds beside the bundled content: the case list and
+    /// player find them like any other.
     static EXTRA: std::cell::RefCell<Vec<(&'static str, &'static Item)>> =
         const { std::cell::RefCell::new(Vec::new()) };
+}
+
+thread_local! {
+    /// Leaves the bundled cases out of the list for this test thread, so the
+    /// empty state can still be seen now that the content has cases.
+    static HIDE_BUNDLED: std::cell::Cell<bool> = const { std::cell::Cell::new(false) };
+}
+
+/// Hides the bundled cases from the list on this test thread.
+pub(crate) fn hide_bundled() {
+    HIDE_BUNDLED.with(|h| h.set(true));
+}
+
+pub(super) fn bundled_hidden() -> bool {
+    HIDE_BUNDLED.with(std::cell::Cell::get)
 }
 
 /// Adds `item` under the lecture title `lecture`, for this test thread.

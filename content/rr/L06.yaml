@@ -1,0 +1,627 @@
+schema: steps.content/v1
+lecture: rr.L06
+title: Equation review
+book: { chapter: 17, pages: [744, 745] }
+topics:
+  - { id: pharmacology, title: "Pharmacology" }
+  - { id: public-health, title: "Public health sciences" }
+  - { id: cardiovascular, title: "Cardiovascular" }
+  - { id: hematology-oncology, title: "Hematology and oncology" }
+  - { id: renal, title: "Renal" }
+  - { id: respiratory, title: "Respiratory" }
+items:
+  # ---------- Pharmacology ----------
+  - id: rr.L06.001
+    kind: cloze
+    topic: pharmacology
+    text: "Volume of distribution: Vd = {{c1::amount of drug in the body}} / {{c2::plasma drug concentration}}"
+    extra: "(First Aid p. 229)"
+    src: { page: 744, quote: "amount of drug in the body Vd = plasma drug concentration" }
+    status: unverified
+  - id: rr.L06.002
+    kind: cloze
+    topic: pharmacology
+    text: "Half-life: t½ = {{c1::0.7 × Vd / CL}}"
+    extra: "Vd = volume of distribution, CL = clearance. (First Aid p. 229)"
+    src: { page: 744, quote: "t½ = 0.7 × Vd CL" }
+    status: unverified
+  - id: rr.L06.003
+    kind: cloze
+    topic: pharmacology
+    text: "Drug clearance: CL = {{c1::rate of elimination of drug / plasma drug concentration}} = {{c2::Vd × Ke}}"
+    extra: "Ke = elimination constant. (First Aid p. 229)"
+    src: { page: 744, quote: "CL = rate of elimination of drug = Vd × Ke (elimination constant) plasma drug concentration" }
+    status: unverified
+  - id: rr.L06.004
+    kind: cloze
+    topic: pharmacology
+    text: "Loading dose: LD = {{c1::Cp × Vd / F}}"
+    extra: "Cp = target plasma concentration, Vd = volume of distribution, F = bioavailability. (First Aid p. 229)"
+    src: { page: 744, quote: "Cp × Vd" }
+    status: unverified
+  - id: rr.L06.005
+    kind: cloze
+    topic: pharmacology
+    text: "Maintenance dose = {{c1::Cp × CL × τ / F}}"
+    extra: "Cp = target plasma concentration, CL = clearance, τ = dosage interval, F = bioavailability. (First Aid p. 229)"
+    src: { page: 744, quote: "Maintenance dose = Cp × CL × τ" }
+    status: unverified
+  - id: rr.L06.006
+    kind: card
+    topic: pharmacology
+    front: "Equation for the therapeutic index?"
+    back: "TI = median toxic dose / median effective dose = TD50 / ED50. (First Aid p. 233)"
+    src: { page: 744, quote: "TI = median toxic dose/median effective dose = TD50/ED50" }
+    status: unverified
+  - id: rr.L06.007
+    kind: mcq
+    topic: pharmacology
+    stem: >-
+      A 64-year-old man with a ventricular arrhythmia needs an oral drug started quickly. The drug has a
+      volume of distribution of 50 L and an oral bioavailability of 0.5. The target plasma concentration
+      is 2 mg/L. Which oral loading dose reaches the target concentration?
+    options:
+      - "25 mg"
+      - "50 mg"
+      - "100 mg"
+      - "200 mg"
+      - "400 mg"
+    answer: 3
+    why:
+      - "25 mg would be Cp × Vd divided by 4: there is no such step in the equation."
+      - "50 mg is just Vd; the target concentration and bioavailability were left out."
+      - "100 mg is Cp × Vd without dividing by F, the dose an IV drug (F = 1) would need."
+      - "Right. LD = Cp × Vd / F = 2 mg/L × 50 L / 0.5 = 200 mg."
+      - "400 mg multiplies by 2 twice; F divides only once."
+    src: { page: 744, quote: "Cp × Vd" }
+    status: unverified
+  - id: rr.L06.008
+    kind: case
+    topic: pharmacology
+    stem: "A drug has a volume of distribution of 40 L and a clearance of 7 L/h. It is eliminated by first-order kinetics."
+    steps:
+      - question: "What is its half-life?"
+        options: ["2 hours", "4 hours", "5.7 hours", "28 hours"]
+        answer: 1
+        why: "t½ = 0.7 × Vd / CL = 0.7 × 40 / 7 = 4 hours. 5.7 hours forgets the 0.7; 28 hours multiplies Vd by CL."
+      - reveal: "The target plasma concentration is 10 mg/L, the dosage interval is 8 hours and the oral bioavailability is 0.8."
+        question: "What maintenance dose is given every 8 hours?"
+        options: ["70 mg", "448 mg", "560 mg", "700 mg"]
+        answer: 3
+        why: "Maintenance dose = Cp × CL × τ / F = 10 × 7 × 8 / 0.8 = 700 mg. 560 mg forgets to divide by F; 448 mg multiplies by F instead."
+    src: { page: 744, quote: "Maintenance dose = Cp × CL × τ" }
+    status: unverified
+  # ---------- Public health sciences ----------
+  - id: rr.L06.009
+    kind: cloze
+    topic: public-health
+    text: "Odds ratio (for case-control studies): OR = {{c1::(a/c) / (b/d)}} = {{c2::ad / bc}}"
+    extra: "In the 2 × 2 table a = exposed with disease, b = exposed without disease, c = unexposed with disease, d = unexposed without disease. (First Aid p. 258)"
+    src: { page: 744, quote: "OR = a/c ad = b/d bc" }
+    status: unverified
+  - id: rr.L06.010
+    kind: cloze
+    topic: public-health
+    text: "Relative risk: RR = {{c1::[a/(a + b)] / [c/(c + d)]}}"
+    extra: "Risk of disease in the exposed divided by risk in the unexposed. (First Aid p. 258)"
+    src: { page: 744, quote: "RR = a/(a + b) c/(c + d)" }
+    status: unverified
+  - id: rr.L06.011
+    kind: cloze
+    topic: public-health
+    text: "Attributable risk: AR = {{c1::a/(a + b) − c/(c + d)}}"
+    extra: "(First Aid p. 258)"
+    src: { page: 744, quote: "AR = a c − a+b c+d" }
+    status: unverified
+  - id: rr.L06.012
+    kind: cloze
+    topic: public-health
+    text: "Relative risk reduction: RRR = {{c1::(ARC − ART) / ARC}} or RRR = {{c2::1 − RR}}"
+    extra: "ARC = absolute risk in the control group, ART = absolute risk in the treatment group. (First Aid p. 258)"
+    src: { page: 744, quote: "RRR = (ARC – ART)/ARC or RRR = 1 − RR" }
+    status: unverified
+  - id: rr.L06.013
+    kind: cloze
+    topic: public-health
+    text: "Absolute risk reduction: ARR = {{c1::c/(c + d) − a/(a + b)}}"
+    extra: "Here a and b are the treated group, c and d the control group. (First Aid p. 258)"
+    src: { page: 744, quote: "ARR = c c+d a a+b" }
+    status: unverified
+  - id: rr.L06.014
+    kind: card
+    topic: public-health
+    front: "Equation for the number needed to treat?"
+    back: "NNT = 1 / ARR (absolute risk reduction). (First Aid p. 258)"
+    src: { page: 744, quote: "Number needed to treat NNT = 1/ARR" }
+    status: unverified
+  - id: rr.L06.015
+    kind: card
+    topic: public-health
+    front: "Equation for the number needed to harm?"
+    back: "NNH = 1 / AR (attributable risk). (First Aid p. 258)"
+    src: { page: 744, quote: "Number needed to harm NNH = 1/AR" }
+    status: unverified
+  - id: rr.L06.016
+    kind: cloze
+    topic: public-health
+    text: "Positive likelihood ratio: LR+ = {{c1::sensitivity / (1 − specificity)}} = {{c2::TP rate / FP rate}}"
+    extra: "(First Aid p. 259)"
+    src: { page: 744, quote: "LR+ = sensitivity/(1 – specificity) = TP rate/FP rate" }
+    status: unverified
+  - id: rr.L06.017
+    kind: cloze
+    topic: public-health
+    text: "Negative likelihood ratio: LR− = {{c1::(1 − sensitivity) / specificity}} = {{c2::FN rate / TN rate}}"
+    extra: "(First Aid p. 259)"
+    src: { page: 744, quote: "(1 – sensitivity)/specificity = FN rate/TN rate" }
+    status: unverified
+  - id: rr.L06.018
+    kind: cloze
+    topic: public-health
+    text: "Sensitivity = {{c1::TP / (TP + FN)}}"
+    extra: "TP = true positives, FN = false negatives. (First Aid p. 260)"
+    src: { page: 744, quote: "Sensitivity = TP / (TP + FN)" }
+    status: unverified
+  - id: rr.L06.019
+    kind: cloze
+    topic: public-health
+    text: "Specificity = {{c1::TN / (TN + FP)}}"
+    extra: "TN = true negatives, FP = false positives. (First Aid p. 260)"
+    src: { page: 744, quote: "Specificity = TN / (TN + FP)" }
+    status: unverified
+  - id: rr.L06.020
+    kind: cloze
+    topic: public-health
+    text: "Positive predictive value: PPV = {{c1::TP / (TP + FP)}}; PPV is proportional to {{c2::prevalence}}"
+    extra: "(First Aid p. 260)"
+    src: { page: 744, quote: "PPV = TP / (TP + FP); PPV is proportional to prevalence" }
+    status: unverified
+  - id: rr.L06.021
+    kind: cloze
+    topic: public-health
+    text: "Negative predictive value: NPV = {{c1::TN / (TN + FN)}}; NPV is proportional to {{c2::1/prevalence}}"
+    extra: "(First Aid p. 260)"
+    src: { page: 744, quote: "NPV = TN / (TN + FN); NPV is proportional to 1/prevalence" }
+    status: unverified
+  - id: rr.L06.022
+    kind: table
+    topic: public-health
+    title: "Test measures from the 2 × 2 table"
+    columns: [Measure, Equation]
+    rows:
+      - [Sensitivity, "TP / (TP + FN)"]
+      - [Specificity, "TN / (TN + FP)"]
+      - [PPV, "TP / (TP + FP); proportional to prevalence"]
+      - [NPV, "TN / (TN + FN); proportional to 1/prevalence"]
+      - [LR+, "sensitivity / (1 − specificity)"]
+      - [LR−, "(1 − sensitivity) / specificity"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 744, quote: "Sensitivity = TP / (TP + FN)" }
+    status: unverified
+  - id: rr.L06.023
+    kind: mcq
+    topic: public-health
+    stem: >-
+      In a case-control study of bladder cancer, 50 patients with the cancer and 50 controls without it are
+      asked about smoking. Of the patients, 40 smoked; of the controls, 20 smoked. What is the odds ratio for
+      bladder cancer associated with smoking?
+    options:
+      - "0.17"
+      - "2"
+      - "2.67"
+      - "3"
+      - "6"
+    answer: 4
+    why:
+      - "0.17 is bc/ad, the equation turned upside down."
+      - "2 is 40/20, the exposed cases over the exposed controls, leaving out the unexposed groups."
+      - "2.67 is a relative risk, (40/60) / (10/40), which treats the study as a cohort. A case-control study starts from disease, so it gives an odds ratio."
+      - "3 is 30/10, only the unexposed pair of cells; the odds ratio needs all four."
+      - "Right. a = 40, b = 20, c = 10, d = 30. OR = ad / bc = (40 × 30) / (20 × 10) = 6."
+    src: { page: 744, quote: "OR = a/c ad = b/d bc" }
+    status: unverified
+  - id: rr.L06.024
+    kind: mcq
+    topic: public-health
+    stem: >-
+      In a 2-year trial in adults with atrial fibrillation, 10 of 200 patients given a new anticoagulant had
+      a stroke, compared with 20 of 200 patients given placebo. How many patients must be treated to prevent
+      one stroke?
+    options:
+      - "2"
+      - "5"
+      - "10"
+      - "20"
+      - "50"
+    answer: 3
+    why:
+      - "2 is the relative risk (10% / 5%) upside down, not the NNT."
+      - "5 is the treated group's risk as a percentage."
+      - "10 is the placebo group's risk as a percentage."
+      - "Right. ARR = 20/200 − 10/200 = 0.10 − 0.05 = 0.05, and NNT = 1 / ARR = 20."
+      - "50 would need an ARR of 0.02; here the ARR is 0.05. Do not use the 50% relative risk reduction for NNT."
+    src: { page: 744, quote: "Number needed to treat NNT = 1/ARR" }
+    status: unverified
+  - id: rr.L06.025
+    kind: mcq
+    topic: public-health
+    stem: >-
+      A new rapid test for streptococcal pharyngitis has a sensitivity of 90% and a specificity of 80%.
+      A 9-year-old girl with fever and sore throat tests positive. What is the positive likelihood ratio of
+      this test?
+    options:
+      - "0.125"
+      - "0.72"
+      - "1.125"
+      - "4.5"
+      - "9"
+    answer: 3
+    why:
+      - "0.125 is the negative likelihood ratio: (1 − 0.9) / 0.8."
+      - "0.72 is sensitivity × specificity, which is not a likelihood ratio."
+      - "1.125 is sensitivity / specificity."
+      - "Right. LR+ = sensitivity / (1 − specificity) = 0.9 / 0.2 = 4.5."
+      - "9 is sensitivity / (1 − sensitivity)."
+    src: { page: 744, quote: "LR+ = sensitivity/(1 – specificity) = TP rate/FP rate" }
+    status: unverified
+  - id: rr.L06.026
+    kind: mcq
+    topic: public-health
+    stem: >-
+      A screening test is moved from a general clinic to a specialist clinic where the disease is three times
+      as common. The test itself and its cut-off are unchanged. Which value will rise in the specialist clinic?
+    options:
+      - "Sensitivity"
+      - "Specificity"
+      - "Positive predictive value"
+      - "Negative predictive value"
+      - "Negative likelihood ratio"
+    answer: 2
+    why:
+      - "Sensitivity, TP / (TP + FN), is a property of the test and does not change with prevalence."
+      - "Specificity, TN / (TN + FP), is a property of the test and does not change with prevalence."
+      - "Right. PPV = TP / (TP + FP) is proportional to prevalence: more diseased people make a positive result more often a true positive."
+      - "NPV is proportional to 1/prevalence, so it falls when the disease is more common."
+      - "Likelihood ratios are built from sensitivity and specificity only, so they do not change."
+    src: { page: 744, quote: "PPV = TP / (TP + FP); PPV is proportional to prevalence" }
+    status: unverified
+  - id: rr.L06.027
+    kind: case
+    topic: public-health
+    stem: "In a trial, 30 of 200 patients taking a new drug develop a rash, compared with 10 of 200 patients taking placebo."
+    steps:
+      - question: "What is the attributable risk of rash from the drug?"
+        options: ["0.05", "0.10", "0.15", "3"]
+        answer: 1
+        why: "AR = a/(a + b) − c/(c + d) = 30/200 − 10/200 = 0.15 − 0.05 = 0.10. 3 is the relative risk (0.15 / 0.05), not the attributable risk."
+      - question: "How many patients must take the drug for one extra rash?"
+        options: ["3", "7", "10", "20"]
+        answer: 2
+        why: "NNH = 1 / AR = 1 / 0.10 = 10."
+    src: { page: 744, quote: "Number needed to harm NNH = 1/AR" }
+    status: unverified
+  # ---------- Cardiovascular ----------
+  - id: rr.L06.028
+    kind: cloze
+    topic: cardiovascular
+    text: "Cardiac output (Fick): CO = {{c1::rate of O2 consumption}} / {{c2::(arterial O2 content − venous O2 content)}}"
+    extra: "(First Aid p. 290)"
+    src: { page: 744, quote: "CO = rate of O2 consumption (arterial O2 content − venous O2 content)" }
+    status: unverified
+  - id: rr.L06.029
+    kind: cloze
+    topic: cardiovascular
+    text: "Cardiac output: CO = {{c1::stroke volume × heart rate}}"
+    extra: "(First Aid p. 290)"
+    src: { page: 744, quote: "CO = stroke volume × heart rate" }
+    status: unverified
+  - id: rr.L06.030
+    kind: cloze
+    topic: cardiovascular
+    text: "Mean arterial pressure: MAP = {{c1::CO × total peripheral resistance (TPR)}}"
+    extra: "(First Aid p. 290)"
+    src: { page: 744, quote: "MAP = CO × total peripheral resistance (TPR)" }
+    status: unverified
+  - id: rr.L06.031
+    kind: cloze
+    topic: cardiovascular
+    text: "MAP at resting heart rate = {{c1::2/3 DBP + 1/3 SBP}} = {{c2::DBP + 1/3 PP}}"
+    extra: "DBP = diastolic, SBP = systolic, PP = pulse pressure. (First Aid p. 290)"
+    src: { page: 744, quote: "MAP (at resting HR) = 2 ⁄3 DBP + 1 ⁄3 SBP = DBP + 1 ⁄3 PP" }
+    status: unverified
+  - id: rr.L06.032
+    kind: cloze
+    topic: cardiovascular
+    text: "Stroke volume: SV = {{c1::EDV − ESV}}"
+    extra: "EDV = end-diastolic volume, ESV = end-systolic volume. (First Aid p. 290)"
+    src: { page: 744, quote: "SV = EDV – ESV" }
+    status: unverified
+  - id: rr.L06.033
+    kind: cloze
+    topic: cardiovascular
+    text: "Ejection fraction: EF = {{c1::SV / EDV}} = {{c2::(EDV − ESV) / EDV}}"
+    extra: "(First Aid p. 290)"
+    src: { page: 744, quote: "EF = SV EDV − ESV = EDV EDV" }
+    status: unverified
+  - id: rr.L06.034
+    kind: cloze
+    topic: cardiovascular
+    text: "Resistance = {{c1::driving pressure (ΔP) / flow (Q)}} = {{c2::8η (viscosity) × length / (π × r^4)}}"
+    extra: "(First Aid p. 291)"
+    src: { page: 745, quote: "Resistance = driving pressure (ΔP) 8η (viscosity) × length = flow (Q) πr4" }
+    status: unverified
+  - id: rr.L06.035
+    kind: cloze
+    topic: cardiovascular
+    text: "Capillary fluid exchange: Jv = net fluid flow = {{c1::Kf [(Pc − Pi) − σ(πc − πi)]}}"
+    extra: "Pc and Pi = capillary and interstitial hydrostatic pressure; πc and πi = capillary and interstitial oncotic pressure; σ = reflection coefficient; Kf = filtration constant. (First Aid p. 301)"
+    src: { page: 745, quote: "Jv = net fluid flow = K f [(Pc − Pi) − σ(πc − πi)]" }
+    status: unverified
+  - id: rr.L06.036
+    kind: mcq
+    topic: cardiovascular
+    stem: >-
+      A 30-year-old woman has a right heart catheterization. Her oxygen consumption is 250 mL/min, arterial
+      O2 content is 0.20 mL O2/mL blood and pulmonary artery (mixed venous) O2 content is 0.15 mL O2/mL blood.
+      What is her cardiac output?
+    options:
+      - "1.25 L/min"
+      - "2.5 L/min"
+      - "5 L/min"
+      - "12.5 L/min"
+      - "50 L/min"
+    answer: 2
+    why:
+      - "1.25 L/min divides by the arterial content alone (250 / 0.20 = 1250 mL/min)."
+      - "2.5 L/min halves the right answer; the difference is 0.05, not 0.10."
+      - "Right. CO = O2 consumption / (arterial − venous O2 content) = 250 / (0.20 − 0.15) = 5000 mL/min = 5 L/min."
+      - "12.5 L/min would need an arteriovenous difference of 0.02."
+      - "50 L/min misplaces the decimal of the content difference."
+    src: { page: 744, quote: "CO = rate of O2 consumption (arterial O2 content − venous O2 content)" }
+    status: unverified
+  - id: rr.L06.037
+    kind: mcq
+    topic: cardiovascular
+    stem: >-
+      A 67-year-old man with atherosclerosis has a plaque that narrows the radius of a renal artery segment to
+      one half of normal. Viscosity, length and driving pressure are unchanged. By how much does the
+      resistance of that segment change?
+    options:
+      - "It halves"
+      - "It doubles"
+      - "It rises 4-fold"
+      - "It rises 8-fold"
+      - "It rises 16-fold"
+    answer: 4
+    why:
+      - "Resistance rises when the radius falls; it does not halve."
+      - "Doubling would mean resistance varies with 1/r; it varies with 1/r^4."
+      - "4-fold would be 1/r^2 (cross-sectional area), not the resistance equation."
+      - "8-fold is the viscosity constant in the numerator, not the radius effect."
+      - "Right. Resistance = 8η × length / (π × r^4): halving r multiplies resistance by 2^4 = 16."
+    src: { page: 745, quote: "Resistance = driving pressure (ΔP) 8η (viscosity) × length = flow (Q) πr4" }
+    status: unverified
+  - id: rr.L06.038
+    kind: case
+    topic: cardiovascular
+    stem: "A 55-year-old man has an echocardiogram: end-diastolic volume 120 mL, end-systolic volume 50 mL. His heart rate is 70/min and his blood pressure is 150/90 mm Hg."
+    steps:
+      - question: "What is his stroke volume?"
+        options: ["50 mL", "70 mL", "120 mL", "170 mL"]
+        answer: 1
+        why: "SV = EDV − ESV = 120 − 50 = 70 mL."
+      - question: "What is his ejection fraction?"
+        options: ["42%", "58%", "70%", "140%"]
+        answer: 1
+        why: "EF = SV / EDV = 70 / 120 = 0.58, about 58%. 42% is ESV / EDV; 70% confuses the stroke volume in mL with a percentage."
+      - question: "What is his cardiac output?"
+        options: ["3.5 L/min", "4.9 L/min", "8.4 L/min", "1.0 L/min"]
+        answer: 1
+        why: "CO = SV × HR = 70 mL × 70/min = 4900 mL/min, 4.9 L/min. 8.4 L/min uses EDV instead of SV."
+      - question: "What is his mean arterial pressure at this resting heart rate?"
+        options: ["100 mm Hg", "110 mm Hg", "120 mm Hg", "130 mm Hg"]
+        answer: 1
+        why: "MAP = 2/3 DBP + 1/3 SBP = 60 + 50 = 110 mm Hg (or DBP + 1/3 PP = 90 + 20). 120 mm Hg is the simple average of 150 and 90."
+    src: { page: 744, quote: "MAP (at resting HR) = 2 ⁄3 DBP + 1 ⁄3 SBP = DBP + 1 ⁄3 PP" }
+    status: unverified
+  # ---------- Hematology and oncology ----------
+  - id: rr.L06.039
+    kind: cloze
+    topic: hematology-oncology
+    text: "Reticulocyte production index: RPI = {{c1::% reticulocytes × (actual Hct / normal Hct)}} / {{c2::maturation time}}"
+    extra: "Hct = hematocrit. (First Aid p. 423)"
+    src: { page: 745, quote: "RPI = % reticulocytes × Hct / maturation time" }
+    status: unverified
+  - id: rr.L06.040
+    kind: mcq
+    topic: hematology-oncology
+    stem: >-
+      A 34-year-old woman has fatigue and pallor. Her hematocrit is 22.5% (normal 45%) and her reticulocyte
+      count is 6%. For this hematocrit the reticulocyte maturation time is taken as 2 days. Which best
+      describes her marrow response?
+    options:
+      - "RPI 1.5: inadequate marrow response to the anemia"
+      - "RPI 3: adequate compensatory red cell production"
+      - "RPI 6: adequate compensatory red cell production"
+      - "RPI 12: adequate compensatory red cell production"
+      - "RPI 0.75: no marrow response at all"
+    answer: 0
+    why:
+      - "Right. RPI = 6 × (22.5 / 45) / 2 = 1.5. An RPI under 2 means the marrow is not responding enough to correct the anemia."
+      - "3 corrects for the hematocrit but forgets to divide by the maturation time."
+      - "6 is the raw reticulocyte count, which overstates production in anemia."
+      - "12 multiplies by the maturation time instead of dividing."
+      - "0.75 divides by the maturation time twice."
+    src: { page: 745, quote: "RPI = % reticulocytes × Hct / maturation time" }
+    status: unverified
+  # ---------- Renal ----------
+  - id: rr.L06.041
+    kind: cloze
+    topic: renal
+    text: "Renal clearance of substance x: Cx = {{c1::(Ux × V) / Px}}"
+    extra: "Ux = urine concentration, V = urine flow rate, Px = plasma concentration. (First Aid p. 600)"
+    src: { page: 745, quote: "Renal clearance Cx = (UxV)/Px" }
+    status: unverified
+  - id: rr.L06.042
+    kind: cloze
+    topic: renal
+    text: "Glomerular filtration rate: Cinulin = GFR = {{c1::Uinulin × V / Pinulin}} = {{c2::Kf [(PGC − PBS) − (πGC − πBS)]}}"
+    extra: "GC = glomerular capillary, BS = Bowman space. (First Aid p. 600)"
+    src: { page: 745, quote: "Cinulin = GFR = Uinulin × V/Pinulin = K f [(PGC – PBS) – (πGC – πBS)]" }
+    status: unverified
+  - id: rr.L06.043
+    kind: cloze
+    topic: renal
+    text: "Effective renal plasma flow: eRPF = {{c1::UPAH × V / PPAH}} = {{c2::CPAH}}"
+    extra: "PAH = para-aminohippuric acid. (First Aid p. 600)"
+    src: { page: 745, quote: "Effective renal plasma flow eRPF = UPAH" }
+    status: unverified
+  - id: rr.L06.044
+    kind: card
+    topic: renal
+    front: "Equation for the filtration fraction?"
+    back: "FF = GFR / RPF. (First Aid p. 601)"
+    src: { page: 745, quote: "Filtration fraction FF" }
+    status: unverified
+  - id: rr.L06.045
+    kind: cloze
+    topic: renal
+    text: "Fractional excretion of sodium: FENa = {{c1::V × UNa / (GFR × PNa)}} = {{c2::PCr × UNa / (UCr × PNa)}}"
+    extra: "(First Aid p. 602)"
+    src: { page: 745, quote: "FENa+ = V × UNa / GFR × PNa = PCr × UNa / UCr × PNa" }
+    status: unverified
+  - id: rr.L06.046
+    kind: cloze
+    topic: renal
+    text: "Henderson-Hasselbalch equation (extracellular pH): pH = {{c1::6.1 + log ([HCO3−] / 0.03 Pco2)}}"
+    extra: "(First Aid p. 609)"
+    src: { page: 745, quote: "Henderson-Hasselbalch equation (for extracellular pH) pH = 6.1 + log [HCO3−]" }
+    status: unverified
+  - id: rr.L06.047
+    kind: cloze
+    topic: renal
+    text: "Winters formula (predicted respiratory compensation for a simple metabolic acidosis): Pco2 = {{c1::1.5 [HCO3−] + 8 ± 2}}"
+    extra: "(First Aid p. 609)"
+    src: { page: 745, quote: "Pco2 = 1.5 [HCO3–] + 8 ± 2" }
+    status: unverified
+  - id: rr.L06.048
+    kind: cloze
+    topic: renal
+    text: "Anion gap = {{c1::Na+ − (Cl− + HCO3−)}}"
+    extra: "(First Aid p. 610)"
+    src: { page: 745, quote: "Anion gap Na+ − (Cl– + HCO3–)" }
+    status: unverified
+  - id: rr.L06.049
+    kind: mcq
+    topic: renal
+    stem: >-
+      A 72-year-old woman has had vomiting and poor oral intake for 3 days. Her creatinine has risen to 2 mg/dL.
+      Urine sodium is 10 mEq/L, plasma sodium 140 mEq/L, urine creatinine 100 mg/dL. Which is the best
+      interpretation of her fractional excretion of sodium?
+    options:
+      - "About 0.14%, pointing to prerenal azotemia"
+      - "About 1.4%, an indeterminate value"
+      - "About 14%, pointing to intrinsic renal failure"
+      - "About 0.14%, pointing to acute tubular necrosis"
+      - "It cannot be calculated without a timed urine volume"
+    answer: 0
+    why:
+      - "Right. FENa = PCr × UNa / (UCr × PNa) = (2 × 10) / (100 × 140) = 0.0014, about 0.14%. Under 1% means the tubules are still saving sodium: prerenal azotemia."
+      - "1.4% misplaces the decimal by a factor of 10."
+      - "14% misplaces the decimal by a factor of 100."
+      - "Acute tubular necrosis is intrinsic renal failure, where damaged tubules lose sodium and FENa is above 2%."
+      - "The creatinine form, PCr × UNa / UCr × PNa, needs no urine volume: V cancels out."
+    src: { page: 745, quote: "FENa+ = V × UNa / GFR × PNa = PCr × UNa / UCr × PNa" }
+    status: unverified
+  - id: rr.L06.050
+    kind: case
+    topic: renal
+    stem: "A 19-year-old man with type 1 diabetes has DKA. Na+ 140 mEq/L, Cl− 100 mEq/L, HCO3− 12 mEq/L, arterial Pco2 40 mm Hg."
+    steps:
+      - question: "What is his anion gap?"
+        options: ["12 mEq/L", "28 mEq/L", "40 mEq/L", "52 mEq/L"]
+        answer: 1
+        why: "Anion gap = Na+ − (Cl− + HCO3−) = 140 − (100 + 12) = 28 mEq/L, well above the normal 8–12 mEq/L."
+      - question: "By the Winters formula, what Pco2 would full respiratory compensation give?"
+        options: ["18 ± 2 mm Hg", "26 ± 2 mm Hg", "40 ± 2 mm Hg", "12 ± 2 mm Hg"]
+        answer: 1
+        why: "Pco2 = 1.5 × 12 + 8 ± 2 = 26 ± 2 mm Hg (24–28)."
+      - question: "His measured Pco2 is 40 mm Hg. What does that mean?"
+        options: ["Appropriate compensation", "Concomitant respiratory acidosis", "Concomitant respiratory alkalosis", "Concomitant metabolic alkalosis"]
+        answer: 1
+        why: "Measured Pco2 above the predicted 24–28 mm Hg means he is not blowing off enough CO2: a concomitant respiratory acidosis."
+    src: { page: 745, quote: "Pco2 = 1.5 [HCO3–] + 8 ± 2" }
+    status: unverified
+  - id: rr.L06.051
+    kind: case
+    topic: renal
+    stem: "A healthy volunteer has an inulin and PAH clearance study. Urine inulin is 30 mg/mL, plasma inulin 0.5 mg/mL and urine flow 2 mL/min. The effective renal plasma flow is 600 mL/min."
+    steps:
+      - question: "What is the GFR?"
+        options: ["15 mL/min", "60 mL/min", "120 mL/min", "240 mL/min"]
+        answer: 2
+        why: "GFR = Cinulin = Uinulin × V / Pinulin = 30 × 2 / 0.5 = 120 mL/min."
+      - question: "What is the filtration fraction?"
+        options: ["5%", "12%", "20%", "50%"]
+        answer: 2
+        why: "FF = GFR / RPF = 120 / 600 = 0.20, 20%."
+    src: { page: 745, quote: "Cinulin = GFR = Uinulin × V/Pinulin = K f [(PGC – PBS) – (πGC – πBS)]" }
+    status: unverified
+  # ---------- Respiratory ----------
+  - id: rr.L06.052
+    kind: cloze
+    topic: respiratory
+    text: "Physiologic dead space: VD = {{c1::VT × (PaCO2 − PECO2) / PaCO2}}"
+    extra: "VT = tidal volume, PECO2 = PCO2 of expired air. (First Aid p. 682)"
+    src: { page: 745, quote: "Physiologic dead space VD = VT ×" }
+    status: unverified
+  - id: rr.L06.053
+    kind: cloze
+    topic: respiratory
+    text: "Pulmonary vascular resistance: PVR = {{c1::(P pulm artery − P L atrium) / cardiac output}}"
+    extra: "(First Aid p. 684)"
+    src: { page: 745, quote: "Ppulm artery – PL atrium" }
+    status: unverified
+  - id: rr.L06.054
+    kind: cloze
+    topic: respiratory
+    text: "Alveolar gas equation: PAO2 = {{c1::PIO2 − PaCO2 / RQ}} ≈ {{c2::150 mm Hg − PaCO2 / 0.8}}"
+    extra: "150 mm Hg is the inspired PO2 at sea level breathing room air; RQ = respiratory quotient. (First Aid p. 685)"
+    src: { page: 745, quote: "PAo2 = PIo2 – Paco2 = 150 mm Hga – Paco2 / 0.8 RQ" }
+    status: unverified
+  - id: rr.L06.055
+    kind: mcq
+    topic: respiratory
+    stem: >-
+      A 24-year-old man is brought in unresponsive after a heroin overdose. He is breathing room air at sea
+      level, slowly and shallowly. Arterial PaCO2 is 80 mm Hg. What is his expected alveolar PO2?
+    options:
+      - "50 mm Hg"
+      - "70 mm Hg"
+      - "100 mm Hg"
+      - "110 mm Hg"
+      - "130 mm Hg"
+    answer: 0
+    why:
+      - "Right. PAO2 ≈ 150 − PaCO2 / 0.8 = 150 − 100 = 50 mm Hg. Hypoventilation lets CO2 build up in the alveoli and leaves less room for O2."
+      - "70 mm Hg subtracts 80 without dividing by the respiratory quotient."
+      - "100 mm Hg is the normal alveolar PO2 with a PaCO2 of 40 mm Hg."
+      - "110 mm Hg would need a PaCO2 of 32 mm Hg, hyperventilation."
+      - "130 mm Hg adds instead of subtracting the CO2 term."
+    src: { page: 745, quote: "PAo2 = PIo2 – Paco2 = 150 mm Hga – Paco2 / 0.8 RQ" }
+    status: unverified
+  - id: rr.L06.056
+    kind: case
+    topic: respiratory
+    stem: "A 60-year-old man has a tidal volume of 500 mL. Arterial PaCO2 is 40 mm Hg and expired PECO2 is 28 mm Hg. At catheterization his mean pulmonary artery pressure is 25 mm Hg, left atrial pressure 10 mm Hg and cardiac output 5 L/min."
+    steps:
+      - question: "What is his physiologic dead space?"
+        options: ["120 mL", "150 mL", "350 mL", "500 mL"]
+        answer: 1
+        why: "VD = VT × (PaCO2 − PECO2) / PaCO2 = 500 × (40 − 28) / 40 = 500 × 0.3 = 150 mL. 350 mL is VT minus VD."
+      - question: "What is his pulmonary vascular resistance?"
+        options: ["2 mm Hg·min/L", "3 mm Hg·min/L", "5 mm Hg·min/L", "7 mm Hg·min/L"]
+        answer: 1
+        why: "PVR = (P pulm artery − P L atrium) / CO = (25 − 10) / 5 = 3 mm Hg·min/L. 5 uses the pulmonary artery pressure alone."
+    src: { page: 745, quote: "Physiologic dead space VD = VT ×" }
+    status: unverified
