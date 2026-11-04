@@ -270,7 +270,7 @@ impl App {
         let json = serde_json::json!({
             "element": 0, "name": "keydown", "bubbles": true,
             "data": {
-                "char_code": 0, "key": key, "code": "Unidentified", "key_code": 0, "location": 0,
+                "char_code": 0, "which": 0, "key": key, "code": "Unidentified", "key_code": 0, "location": 0,
                 "alt_key": false, "ctrl_key": false, "meta_key": false, "shift_key": false,
                 "repeat": false, "is_composing": false,
             }
