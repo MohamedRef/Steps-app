@@ -86,10 +86,15 @@ fn check_download_and_install_from_the_signed_feed() {
     until(&mut app, u, "a download", |s| matches!(s.phase, Phase::Ready(_)));
     app.assert_has(tx::READY);
     app.tap(tx::INSTALL_NOW);
-    // Linux has no installer: it says so and offers another try.
+    // A test run has no installer (Linux), or isn't Steps.app (macOS): it
+    // says so and offers another try.
     until(&mut app, u, "the install", |s| matches!(s.phase, Phase::Failed { .. }));
     app.assert_has(tx::FAILED_INSTALL);
-    app.assert_has("no installer on this system");
+    app.assert_has(if cfg!(target_os = "macos") {
+        "not running from Steps.app"
+    } else {
+        "no installer on this system"
+    });
     assert!(app.can_tap(tx::TRY_AGAIN));
 }
 

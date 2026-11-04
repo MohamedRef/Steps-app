@@ -165,7 +165,12 @@ fn blocked_notifications_and_a_sleeping_battery_are_explained() {
     app.tap_nth(rtx::ON, 1);
     app.assert_has(rtx::BLOCKED);
     app.assert_has(rtx::BATTERY);
-    app.tap(rtx::ALLOW);
+    // macOS asks only once, so it offers System Settings and no "allow".
+    if cfg!(target_os = "macos") {
+        assert!(!app.can_tap(rtx::ALLOW));
+    } else {
+        app.tap(rtx::ALLOW);
+    }
     app.tap(rtx::OPEN_NOTIFICATIONS);
     app.tap(rtx::OPEN_APP);
     // Answering every day keeps the planner arming them.

@@ -157,12 +157,14 @@ fn a_signed_in_device_catches_up_pushes_and_manages_devices() {
     fake.route("POST /v1/auth/signout", 200, "{}");
     let mut run = start(&fake, s, Some(session(&me, "acc-1", now() + DAY)), None);
 
+    // Live comes first: `status` only looks at statuses after the call, and
+    // a fast machine (macOS CI) is live before "changed" is read.
+    let live = run.status("live", |s| s.sync == SyncState::Live);
     // The tablet's plan arrives and the screens hear which table changed.
     let Event::Changed(tables) = run.event("changed", |e| matches!(e, Event::Changed(_))) else {
         unreachable!()
     };
     assert!(tables.contains("settings"), "{tables:?}");
-    let live = run.status("live", |s| s.sync == SyncState::Live);
     assert_eq!(live.email.as_deref(), Some("mohamed@example.com"));
     assert_eq!(live.device_id, me);
     assert!(live.configured);
@@ -639,10 +641,16 @@ fn the_sync_thread_starts_on_its_own_database() {
     let dir = tempfile::tempdir().unwrap();
     let config = super::CloudConfig { base_url: fake.url.clone(), google: None };
     let device = super::device_info("d-test".into());
-    assert_eq!(
-        (device.name.as_str(), device.platform, device.model.clone()),
-        ("Steps (dev)", Platform::Other, None)
-    );
+    if cfg!(target_os = "macos") {
+        // A Mac names itself by its computer name.
+        assert_eq!(device.platform, Platform::Macos);
+        assert!(!device.name.is_empty());
+    } else {
+        assert_eq!(
+            (device.name.as_str(), device.platform, device.model.clone()),
+            ("Steps (dev)", Platform::Other, None)
+        );
+    }
     let mut handle =
         super::start(config, dir.path().join("steps.db"), device, Box::new(MemoryVault::default())).unwrap();
     let first = handle.events.blocking_recv().unwrap();
