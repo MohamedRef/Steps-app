@@ -7,9 +7,17 @@
 
 #![allow(dead_code)] // helpers for the screen tests; not every test uses each one
 
+mod bank;
+mod cases;
 mod crawl;
 mod dom;
+mod kit;
+mod oral;
+mod own;
 mod screens;
+mod study;
+mod today;
+mod verify;
 
 use std::time::Duration;
 

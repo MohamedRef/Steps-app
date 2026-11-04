@@ -15,7 +15,7 @@ const CSS: Css = css!("src/own/own.css");
 pub static DRAFT: GlobalSignal<Option<Draft>> = Signal::global(|| None);
 /// A share that arrived while he was writing a card: it waits, and opens
 /// once that sheet closes, so nothing he typed is replaced.
-static QUEUED: GlobalSignal<Option<Draft>> = Signal::global(|| None);
+pub(crate) static QUEUED: GlobalSignal<Option<Draft>> = Signal::global(|| None);
 
 #[derive(Clone, Debug, PartialEq)]
 pub struct Draft {
@@ -447,7 +447,7 @@ mod tests {
 
     #[test]
     fn a_failed_check_names_the_field_and_keeps_the_draft() {
-        let draft = card("  SAAG ≥ 1.1 means?  ", "   ");
+        let draft = card("  When does the heart start beating?  ", "   ");
         let before = draft.clone();
         assert_eq!(validate(&draft), Err((Field::Back, Problem::EmptyBack)));
         assert_eq!(draft, before, "nothing he typed is touched");
@@ -455,6 +455,21 @@ mod tests {
         assert_eq!(validate(&long).unwrap_err().0, Field::Front);
         let src = OwnCard { source: Some("s".repeat(core_own::MAX_SOURCE + 1)), ..card("q", "a") };
         assert_eq!(validate(&src).unwrap_err().0, Field::Source);
+    }
+
+    #[test]
+    fn every_problem_has_its_own_words() {
+        let all = [
+            Problem::EmptyFront,
+            Problem::EmptyBack,
+            Problem::FrontTooLong,
+            Problem::BackTooLong,
+            Problem::SourceTooLong,
+        ];
+        let texts: std::collections::BTreeSet<&str> = all.into_iter().map(problem_text).collect();
+        assert_eq!(texts.len(), all.len());
+        let long_back = card("q", &"y".repeat(core_own::MAX_BACK + 1));
+        assert_eq!(validate(&long_back), Err((Field::Back, Problem::BackTooLong)));
     }
 
     #[test]
