@@ -269,10 +269,26 @@ items:
   - id: bio.L02.023
     kind: card
     topic: cell-trafficking
-    front: What are the features of I-cell disease (mucolipidosis type II)?
-    back: Autosomal recessive. Coarse facial features, gingival hyperplasia, corneal clouding, restricted joint movements, claw hand, kyphoscoliosis and ↑ plasma lysosomal enzymes. Like Hurler but more severe; often fatal in childhood.
+    front: How is I-cell disease inherited, and how does it compare with Hurler syndrome?
+    back: Autosomal recessive. Its symptoms are similar to Hurler syndrome but more severe; it is often fatal in childhood.
+    src: { page: 45, quote: "Symptoms similar to but more severe than Hurler syndrome. Often fatal in childhood." }
+    status: unverified
+  - id: bio.L02.073
+    kind: enumerate
+    topic: cell-trafficking
+    prompt: Enumerate the findings of I-cell disease (mucolipidosis type II).
+    points:
+      - Coarse facial features
+      - Gingival hyperplasia
+      - Corneal clouding
+      - Restricted joint movements
+      - Claw hand deformities
+      - Kyphoscoliosis
+      - ↑ plasma levels of lysosomal enzymes
+    pass: 6
     src: { page: 45, quote: "Results in coarse facial features, gingival hyperplasia, corneal clouding, restricted joint movements, claw hand deformities, kyphoscoliosis, and ↑ plasma levels of lysosomal enzymes." }
     status: unverified
+    tags: [high-yield]
   - id: bio.L02.024
     kind: card
     topic: cell-trafficking
@@ -524,23 +540,24 @@ items:
     kind: mcq
     topic: cilia-structure
     stem: >-
-      Electron microscopy of a cross-section through the base of a respiratory cilium, just below the
-      cell membrane, shows a ring of microtubule structures with nothing in the center. What is the
-      arrangement in this region?
+      A 28-year-old man is evaluated for infertility. He has had recurrent sinusitis and ear infections
+      since childhood, and chest imaging shows bronchiectasis with the heart on the right side. Semen
+      analysis shows immotile spermatozoa, and nasal nitric oxide is low. Electron microscopy of his
+      respiratory cilia most likely shows a defect in which structure?
     options:
-      - 9 doublets + 2 central singlets
-      - 9 triplets with no central microtubules
-      - 9 doublets with no central microtubules
-      - 2 triplets + 9 singlets
-      - 13 protofilaments around a hollow core only
-    answer: 1
+      - The ATPase arms that link the 9 peripheral doublets
+      - The 9 microtubule triplets of the basal body
+      - The kinesin motors of the axoneme
+      - The mannose-6-phosphate tags on ciliary proteins
+      - The collagen triple helix
+    answer: 0
     why:
-      - "That is the axoneme of the motile cilium shaft, above the membrane."
-      - "Right. The basal body, below the cell membrane, has 9 microtubule triplets and no central microtubules."
-      - "The basal body has triplets, not doublets."
-      - "No ciliary structure has this arrangement."
-      - "That describes a single microtubule, not the basal body."
-    src: { page: 47, quote: "Basal body (base of cilium below cell membrane) consists of 9 microtubule triplets B with no central microtubules." }
+      - "Right. Primary ciliary dyskinesia (Kartagener syndrome with situs inversus): an autosomal recessive dynein arm defect. Axonemal dynein is the ATPase linking the peripheral 9 doublets that bends the cilium; without it, cilia and sperm are immotile."
+      - "The basal body (9 triplets) anchors the cilium below the membrane; PCD is a defect of the axonemal arms."
+      - "Kinesin carries cargo anterograde along microtubules; it doesn't bend the axoneme."
+      - "Mannose-6-phosphate targets enzymes to lysosomes (lost in I-cell disease)."
+      - "Collagen defects (osteogenesis imperfecta, Ehlers-Danlos) affect bone, skin and joints, not ciliary motion."
+    src: { page: 47, quote: "Autosomal recessive. Dynein arm defect → immotile cilia → dysfunctional ciliated epithelia. Most common type is Kartagener syndrome (PCD with situs inversus)." }
     status: unverified
   # ---------- p47: primary ciliary dyskinesia ----------
   - id: bio.L02.046
@@ -603,7 +620,7 @@ items:
     topic: sodium-potassium-pump
     front: Where is the Na+/K+-ATPase, and what does it move per ATP?
     back: In the plasma membrane, with the ATP site on the cytosolic side. Each ATP moves 3 Na+ out of the cell (pump phosphorylated) and 2 K+ into the cell (pump dephosphorylated). "2 strikes? K, you're still in. 3 strikes? Nah, you're out!"
-    src: { page: 47, quote: "2 strikes? K, you’re still in. 3 strikes? Nah, you’re out!" }
+    src: { page: 47, quote: "Na+/K+-ATPase is located in the plasma membrane with ATP site on cytosolic side. For each ATP consumed, 2 K+ go in to the cell (pump dephosphorylated) and 3 Na+ go out of the cell (pump phosphorylated)." }
     status: unverified
     tags: [high-yield]
   - id: bio.L02.051
@@ -615,7 +632,7 @@ items:
       - Na+/Ca2+ exchange is indirectly inhibited
       - Intracellular Ca2+ rises
       - Cardiac contractility increases
-    src: { page: 47, quote: "Digoxin directly inhibits -ATPase → indirect inhibition of" }
+    src: { page: 47, quote: "Digoxin directly inhibits Na+/K+-ATPase → indirect inhibition of Na+/Ca2+ exchange → ↑ [Ca2+]i → ↑ cardiac contractility." }
     status: unverified
     tags: [high-yield]
   - id: bio.L02.052
@@ -639,7 +656,7 @@ items:
       - "The exchanger is inhibited only indirectly, as a result of the pump block."
       - "Digoxin doesn't open calcium channels."
       - "PDE inhibitors (eg, milrinone) are a different class."
-    src: { page: 47, quote: "Digoxin directly inhibits -ATPase → indirect inhibition of" }
+    src: { page: 47, quote: "Digoxin directly inhibits Na+/K+-ATPase → indirect inhibition of Na+/Ca2+ exchange → ↑ [Ca2+]i → ↑ cardiac contractility." }
     status: unverified
   # ---------- p48: collagen ----------
   - id: bio.L02.053
@@ -753,7 +770,7 @@ items:
       - Teeth = dental imperfections (dentinogenesis imperfecta)
       - Ear = hearing loss (abnormal ossicles)
     pass: 4
-    hook: "مستر الكتاب: Patients can't BITE: Bones و I (eye) و Teeth و Ear."
+    hook: "الـ mnemonic بتاع الكتاب: Patients can’t BITE: Bones و I (eye) و Teeth و Ear."
     src: { page: 49, quote: "Patients can’t BITE: Bones = multiple fractures I (eye) = blue sclerae Teeth = dental imperfections Ear = hearing loss" }
     status: unverified
     tags: [high-yield]
@@ -793,10 +810,17 @@ items:
     kind: card
     topic: ehlers-danlos
     front: What are the core features of Ehlers-Danlos syndrome?
-    back: Faulty collagen synthesis → hyperextensible, often thin or transparent skin, hypermobile joints and ↑ tendency to bleed (easy bruising). Associated with joint dislocation, berry and aortic aneurysms and organ rupture.
+    back: Faulty collagen synthesis → hyperextensible, often thin or transparent skin, hypermobile joints and ↑ tendency to bleed (easy bruising).
     src: { page: 49, quote: "Faulty collagen synthesis → hyperextensible A and often thin or transparent skin, hypermobile B joints, ↑ tendency to bleed (easy bruising)." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L02.074
+    kind: card
+    topic: ehlers-danlos
+    front: Which complications may be associated with Ehlers-Danlos syndrome?
+    back: Joint dislocation, berry and aortic aneurysms, and organ rupture.
+    src: { page: 49, quote: "May be associated with joint dislocation, berry and aortic aneurysms, organ rupture." }
+    status: unverified
   - id: bio.L02.066
     kind: table
     topic: ehlers-danlos
@@ -856,6 +880,7 @@ items:
     text: Menkes disease involves {{c1::ATP7A}} (Absent copper); Wilson disease involves {{c2::ATP7B}} (copper Buildup).
     src: { page: 49, quote: "defective Menkes protein ATP7A (Absent copper), vs ATP7B in Wilson disease (copper Buildup)." }
     status: unverified
+    tags: [high-yield]
   - id: bio.L02.071
     kind: card
     topic: menkes-disease
