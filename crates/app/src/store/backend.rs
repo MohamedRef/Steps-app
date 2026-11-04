@@ -532,6 +532,8 @@ pub fn use_private_review(answers: &[(&str, steps_core::review::Grade)]) {
                 origin: steps_core::review::Origin::Study,
                 at_ms: 1_793_610_000_000 + k as i64 * 60_000,
                 took_ms: 5_000,
+                confidence: None,
+                reason: None,
             });
         }
         let backend = Rc::new(RefCell::new(backend));
