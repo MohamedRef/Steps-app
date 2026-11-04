@@ -263,6 +263,44 @@ impl Store {
         Ok(ops)
     }
 
+    /// Like [`Store::outbox`], leaving out ops for tables the hub doesn't
+    /// know yet, so they don't block the ops behind them.
+    pub fn outbox_skipping(
+        &self,
+        limit: usize,
+        skip_tables: &std::collections::HashSet<String>,
+    ) -> Result<Vec<Op>> {
+        if skip_tables.is_empty() {
+            return self.outbox(limit);
+        }
+        let conn = self.conn.lock().unwrap();
+        let mut stmt = conn.prepare("SELECT op FROM sync_outbox ORDER BY seq")?;
+        let ops = stmt
+            .query_map([], |r| r.get::<_, String>(0))?
+            .filter_map(|r| r.ok().and_then(|json| serde_json::from_str::<Op>(&json).ok()))
+            .filter(|op| !skip_tables.contains(&op.table))
+            .take(limit)
+            .collect();
+        Ok(ops)
+    }
+
+    /// The tables of these outbox ops (unknown ids are left out).
+    pub fn outbox_tables<'a>(&self, op_ids: impl IntoIterator<Item = &'a str>) -> Vec<String> {
+        let conn = self.conn.lock().unwrap();
+        let Ok(mut stmt) = conn.prepare("SELECT op FROM sync_outbox WHERE op_id = ?1") else {
+            return Vec::new();
+        };
+        let mut tables: Vec<String> = op_ids
+            .into_iter()
+            .filter_map(|id| stmt.query_row([id], |r| r.get::<_, String>(0)).ok())
+            .filter_map(|json| serde_json::from_str::<Op>(&json).ok())
+            .map(|op| op.table)
+            .collect();
+        tables.sort();
+        tables.dedup();
+        tables
+    }
+
     pub fn outbox_len(&self) -> u64 {
         let conn = self.conn.lock().unwrap();
         conn.query_row("SELECT COUNT(*) FROM sync_outbox", [], |r| r.get::<_, i64>(0)).unwrap_or(0) as u64
@@ -477,6 +515,24 @@ mod tests {
         drop(s);
         assert_eq!(Store::open(&path).unwrap().outbox_len(), 1, "only once");
         let _ = std::fs::remove_dir_all(dir);
+    }
+
+    #[test]
+    fn ops_for_a_table_the_hub_lacks_wait_without_blocking_the_rest() {
+        let s = Store::open_in_memory().unwrap();
+        s.append_review(ev("cvs.L04.001", 10)).unwrap();
+        s.set_judgement("cvs.L04.001", Some(&judged(Verdict::Wrong))).unwrap();
+        let all = s.outbox(10).unwrap();
+        assert_eq!(all.len(), 2);
+        let first = &all[0];
+        let tables = s.outbox_tables([first.id.as_str(), "nope"]);
+        assert_eq!(tables, std::slice::from_ref(&first.table));
+        let skip: std::collections::HashSet<String> = tables.into_iter().collect();
+        let rest = s.outbox_skipping(10, &skip).unwrap();
+        assert_eq!(rest.iter().map(|o| &o.id).collect::<Vec<_>>(), [&all[1].id]);
+        assert_eq!(s.outbox_skipping(10, &Default::default()).unwrap().len(), 2);
+        // Still in the outbox, for a newer hub.
+        assert_eq!(s.outbox_len(), 2);
     }
 
     #[test]
