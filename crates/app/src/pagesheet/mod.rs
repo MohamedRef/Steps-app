@@ -183,6 +183,9 @@ pub fn BookSheet() -> Element {
                 } else {
                     p { class: "muted", {tx::NOTHING_YET} }
                 }
+                if matches!(scope, Scope::Book(_)) {
+                    crate::notes::PageNotes { page }
+                }
             }
             div { class: "bk-foot",
                 if n > 0 {

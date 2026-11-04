@@ -59,7 +59,8 @@ pub fn AnkiExport() -> Element {
         spawn(async move {
             futures_yield().await;
             let backend = review.backend.borrow();
-            state.set(match export_now(|id| backend.judgement(id)) {
+            let mine = item_notes(backend.notes());
+            state.set(match export_now(|id| backend.judgement(id), &mine) {
                 Ok((notes, place)) => State::Done { notes, place },
                 Err(e) => State::Failed(e),
             });
@@ -144,9 +145,24 @@ fn verdicts<'a>(lectures: &[Lecture], judgement: impl Fn(&str) -> Option<&'a Jud
     out
 }
 
+/// His notes on items, by item id, for the deck's `Notes` field. Notes on
+/// pages and lesson steps have no Anki card to sit on.
+fn item_notes(notes: &[steps_core::note::Note]) -> BTreeMap<String, String> {
+    notes
+        .iter()
+        .filter_map(|n| match &n.anchor {
+            steps_core::note::Anchor::Item(id) => Some((id.clone(), n.text.clone())),
+            _ => None,
+        })
+        .collect()
+}
+
 /// Builds the deck from the embedded content and his verdicts; returns the
 /// note count and where the file went.
-fn export_now<'a>(judgement: impl Fn(&str) -> Option<&'a Judgement>) -> Result<(usize, String), String> {
+fn export_now<'a>(
+    judgement: impl Fn(&str) -> Option<&'a Judgement>,
+    notes: &BTreeMap<String, String>,
+) -> Result<(usize, String), String> {
     let mut lectures: Vec<_> = Library::get().lectures.values().cloned().collect();
     // His own cards ride along as `Steps::My own cards`.
     lectures.extend(crate::own::lecture().cloned());
@@ -157,6 +173,7 @@ fn export_now<'a>(judgement: impl Fn(&str) -> Option<&'a Judgement>) -> Result<(
         edits: Some(&v.edits),
         drafts: None,
         program: Some(&crate::content::Library::get().program),
+        notes: Some(notes),
     };
     let deck = steps_anki::build(&lectures, &opts);
     let now_ms = web_time::SystemTime::now()

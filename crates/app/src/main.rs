@@ -34,6 +34,7 @@ mod learn;
 mod lecture;
 mod look;
 mod more;
+mod notes;
 mod onboarding;
 mod oral;
 mod order;
@@ -296,6 +297,8 @@ fn App() -> Element {
             update::sheet::UpdateSheet {}
             pagesheet::BookSheet {}
             abbrsheet::AbbrSheet {}
+            // After the page sheet, which opens it, so it draws on top.
+            notes::NoteSheet {}
             courses::Picker {}
             own::ShareInbox {}
             onboarding::Onboarding {}

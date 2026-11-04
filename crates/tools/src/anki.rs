@@ -20,7 +20,8 @@
 //!
 //! `--own steps-export-….json` adds Mohamed's own cards (the app's Settings ›
 //! Your data export) as one more subdeck, `Steps::My own cards`, tagged
-//! `own` and never `unverified`.
+//! `own` and never `unverified`, and puts his notes on items in each
+//! note's `Notes` field.
 
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
@@ -69,7 +70,9 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
             return Err(vec![format!("{id}: no such lecture written yet")]);
         }
     }
+    let mut mine = BTreeMap::new();
     if let Some(file) = crate::flag(args, "--own") {
+        mine = item_notes(Path::new(file)).map_err(|e| vec![e])?;
         let cards = own_cards(Path::new(file)).map_err(|e| vec![e])?;
         if cards.is_empty() {
             warnings.push(format!("{file}: no own cards in this export"));
@@ -117,6 +120,7 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         edits: Some(&edits),
         drafts: Some(&drafts),
         program: program.as_ref(),
+        notes: Some(&mine),
     };
     let deck = build(&lectures, &opts);
 
@@ -154,6 +158,23 @@ pub fn own_cards(path: &Path) -> Result<Vec<steps_core::own::OwnCard>, String> {
         .iter()
         .filter(|r| r["deleted"].as_i64() == Some(0))
         .filter_map(|r| r["value"].as_str().and_then(|v| serde_json::from_str(v).ok()))
+        .collect())
+}
+
+/// His live notes on items from an app export (`tables.notes`), by item id.
+pub fn item_notes(path: &Path) -> Result<BTreeMap<String, String>, String> {
+    use steps_core::note::{Anchor, Note};
+    let text = std::fs::read_to_string(path).map_err(|e| format!("{}: {e}", path.display()))?;
+    let doc: Value = serde_json::from_str(&text).map_err(|e| format!("{}: {e}", path.display()))?;
+    let rows = doc["tables"]["notes"]["rows"].as_array().cloned().unwrap_or_default();
+    Ok(rows
+        .iter()
+        .filter(|r| r["deleted"].as_i64() == Some(0))
+        .filter_map(|r| r["value"].as_str().and_then(|v| serde_json::from_str::<Note>(v).ok()))
+        .filter_map(|n| match n.anchor {
+            Anchor::Item(id) => Some((id, n.text)),
+            _ => None,
+        })
         .collect())
 }
 
@@ -272,5 +293,21 @@ mod tests {
         let note = &deck.notes[0];
         assert_eq!(note.tags, ["own::cards", "own", "hb.L09"]);
         assert_eq!(note.fields[2], "My own cards");
+    }
+
+    #[test]
+    fn notes_on_items_come_from_an_export() {
+        let row = |id: &str, value: serde_json::Value, deleted: i64| serde_json::json!({"id": id, "value": value.to_string(), "deleted": deleted});
+        let doc = serde_json::json!({"format": "steps-export", "tables": {"notes": {"rows": [
+            row("item:cvs.L01.003", serde_json::json!({"anchor": {"on": "item", "id": "cvs.L01.003"}, "text": "mine", "created_ms": 1, "edited_ms": 1}), 0),
+            row("item:cvs.L01.004", serde_json::json!({"anchor": {"on": "item", "id": "cvs.L01.004"}, "text": "gone", "created_ms": 1, "edited_ms": 1}), 1),
+            row("page:284", serde_json::json!({"anchor": {"on": "page", "id": 284}, "text": "page", "created_ms": 1, "edited_ms": 1}), 0),
+        ]}}});
+        let dir = tempfile::tempdir().unwrap();
+        let path = dir.path().join("export.json");
+        std::fs::write(&path, doc.to_string()).unwrap();
+        let notes = item_notes(&path).unwrap();
+        assert_eq!(notes, BTreeMap::from([("cvs.L01.003".to_string(), "mine".to_string())]));
+        assert!(item_notes(&dir.path().join("missing.json")).is_err());
     }
 }

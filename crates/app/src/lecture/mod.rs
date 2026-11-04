@@ -142,6 +142,9 @@ pub fn LecturePage(id: String) -> Element {
     if id == crate::abbrdict::PAGE {
         return rsx! { crate::abbrdict::Dictionary {} };
     }
+    if id == crate::notes::PAGE {
+        return rsx! { crate::notes::NotesList {} };
+    }
     let ui = use_context::<Ui>();
     let lib = Library::get();
     let review = use_review();
