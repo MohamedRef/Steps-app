@@ -528,7 +528,8 @@ fn scores(
     pages
         .iter()
         .map(|(p, t)| {
-            let got: f64 = weights.iter().filter(|(w, _)| t.contains(w)).map(|(_, w)| w).sum();
+            // A fold from +0.0: an empty f64 `sum` is -0.0, printed "-0%".
+            let got = weights.iter().filter(|(w, _)| t.contains(w)).fold(0.0, |a, (_, w)| a + w);
             (*p, if total > 0.0 { got / total } else { 0.0 })
         })
         .collect()
@@ -801,6 +802,24 @@ mod tests {
         assert_eq!(lock["cvs.L04.001"].basis, "quote");
         assert_eq!(lock["cvs.L04.002"].basis, "quote");
         assert!(check_locks(root, &["cvs.L04".into()]).is_empty());
+    }
+
+    #[test]
+    fn a_page_without_the_terms_scores_zero_not_minus_zero() {
+        let pages: BTreeMap<u32, BTreeSet<String>> = [
+            (1, terms("Mitral stenosis follows rheumatic fever")),
+            (2, terms("troponin rises after infarction aspirin")),
+        ]
+        .into();
+        let mut df = HashMap::new();
+        for t in pages.values() {
+            for w in t {
+                *df.entry(w.clone()).or_default() += 1;
+            }
+        }
+        let sc = scores("troponin rises after infarction: give aspirin", &pages, &df);
+        assert_eq!(format!("{:.0}%", sc[&1] * 100.0), "0%");
+        assert_eq!(format!("{:.0}%", sc[&2] * 100.0), "100%");
     }
 
     #[test]

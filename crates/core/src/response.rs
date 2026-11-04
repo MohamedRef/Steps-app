@@ -21,7 +21,7 @@ use crate::lesson::{Lesson, StepBody};
 /// `answers`, `skipped` and `tries`).
 pub const VERSION: u32 = 2;
 
-/// A lesson attempt part-way through (the local setting `lessonpos.<id>`).
+/// A lesson attempt part-way through (the synced setting `lessonpos.<id>`, written through the app's `Store::put_place`).
 #[derive(Debug, Clone, Default, PartialEq, Serialize, Deserialize)]
 pub struct Attempt {
     #[serde(default)]

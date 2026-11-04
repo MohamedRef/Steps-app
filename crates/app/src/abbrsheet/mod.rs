@@ -26,6 +26,7 @@ pub fn entries(texts: &[String]) -> Vec<&'static Entry> {
 pub fn open(terms: Vec<String>) {
     document::eval("window.__stepsHover && window.__stepsHover.hide();");
     crate::pagesheet::close();
+    crate::labs::close();
     *OPEN.write() = Some(terms);
 }
 

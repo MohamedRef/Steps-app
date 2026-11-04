@@ -9,7 +9,8 @@ use crate::{devices, hub};
 /// Creates or upgrades every table the account keeps. Safe on every start.
 pub fn migrate(db: &impl Sql) -> Result<(), SqlError> {
     devices::migrate(db)?;
-    db.exec_batch(hub::SCHEMA)
+    db.exec_batch(hub::SCHEMA)?;
+    db.exec_batch(crate::login::ACCOUNT_SCHEMA)
 }
 
 /// Sets up storage, then sweeps the op log once. A failed sweep only costs
@@ -30,6 +31,7 @@ pub fn unavailable(why: &str) -> ApiError {
     ApiError {
         code: ErrorCode::Internal,
         message: format!("this account's storage couldn't be set up ({why}); Steps Cloud retries on restart"),
+        retry_after_ms: None,
     }
 }
 

@@ -18,6 +18,7 @@ pub mod oauth;
 #[cfg(target_arch = "wasm32")]
 #[path = "oauth_web.rs"]
 pub mod oauth;
+pub mod password;
 pub mod session;
 mod socket;
 #[cfg(test)]
@@ -88,9 +89,24 @@ impl CloudConfig {
     }
 }
 
-#[derive(Debug)]
 pub enum Command {
     SignInGoogle,
+    /// Username + password, on a device without Google. `remember: false`
+    /// (someone else's device) keeps the session only until the app or the
+    /// browser tab closes.
+    SignInPassword {
+        username: String,
+        password: String,
+        remember: bool,
+    },
+    /// Read the account's username (`Event::Login`).
+    LoadLogin,
+    /// Set or change the username and password, from a signed-in device.
+    SetLogin {
+        username: String,
+        password: String,
+    },
+    RemoveLogin,
     SignOut,
     LoadDevices,
     RevokeDevice(String),
@@ -107,8 +123,41 @@ pub enum Event {
     Devices(Result<Vec<DeviceSummary>, Problem>),
     /// Ops from another device changed these tables.
     Changed(BTreeSet<String>),
-    /// The browser is open for Google sign-in.
+    /// The browser is open for Google sign-in, or a password is being checked.
     SigningIn(bool),
+    Login(LoginStatus),
+}
+
+/// The account's username and password, as Settings › Sync shows them.
+#[derive(Clone, Debug, Default, PartialEq)]
+pub struct LoginStatus {
+    /// `None` until Steps Cloud has answered.
+    pub username: Option<Option<String>>,
+    /// A change is on its way.
+    pub saving: bool,
+    /// The last change went through.
+    pub saved: bool,
+    pub problem: Option<Problem>,
+}
+
+/// Passwords stay out of logs.
+impl std::fmt::Debug for Command {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Self::SignInGoogle => write!(f, "SignInGoogle"),
+            Self::SignInPassword { username, remember, .. } => {
+                write!(f, "SignInPassword {{ username: {username:?}, remember: {remember} }}")
+            }
+            Self::LoadLogin => write!(f, "LoadLogin"),
+            Self::SetLogin { username, .. } => write!(f, "SetLogin {{ username: {username:?} }}"),
+            Self::RemoveLogin => write!(f, "RemoveLogin"),
+            Self::SignOut => write!(f, "SignOut"),
+            Self::LoadDevices => write!(f, "LoadDevices"),
+            Self::RevokeDevice(d) => write!(f, "RevokeDevice({d:?})"),
+            Self::Kick => write!(f, "Kick"),
+            Self::Shutdown => write!(f, "Shutdown"),
+        }
+    }
 }
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -138,6 +187,17 @@ pub enum Problem {
     Outdated,
     /// The hub turned changes away because this device's clock is ahead.
     ClockOff,
+    /// Username and password don't match.
+    WrongPassword,
+    /// Too many wrong passwords: the next try counts in this many minutes.
+    Locked(u64),
+    UsernameTaken,
+    /// The username isn't 3–32 of a-z 0-9 . _ - (checked before sending).
+    BadUsername,
+    /// The new password is shorter than `MIN_PASSWORD_CHARS`.
+    ShortPassword,
+    /// The two new passwords differ (Settings only).
+    Mismatch,
 }
 
 #[derive(Clone, Debug, PartialEq)]
@@ -153,6 +213,8 @@ pub struct CloudStatus {
     pub problem: Option<Problem>,
     /// Google approved a sign-in that is still reaching the server.
     pub finishing_sign_in: bool,
+    /// Signed in on someone else's device: the session ends with the app or tab.
+    pub temporary: bool,
 }
 
 impl CloudStatus {
@@ -166,6 +228,7 @@ impl CloudStatus {
             last_sync_ms: None,
             problem: None,
             finishing_sign_in: false,
+            temporary: false,
         }
     }
 }
@@ -220,7 +283,7 @@ pub fn start(config: CloudConfig, device: DeviceInfo) -> CloudHandle {
     let (cmd_tx, cmd_rx) = unbounded_channel();
     let (ev_tx, ev_rx) = unbounded_channel();
     let api = api::Api::new(&config.base_url);
-    let vault = Box::new(session::BrowserVault);
+    let vault = Box::new(session::BrowserVault::default());
     let engine = engine::Engine::new(crate::store::shared(), api, config.google, device, vault, ev_tx);
     wasm_bindgen_futures::spawn_local(engine.run(cmd_rx));
     CloudHandle { commands: cmd_tx, events: ev_rx }

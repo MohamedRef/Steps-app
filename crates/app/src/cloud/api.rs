@@ -5,12 +5,21 @@
 
 use serde::Serialize;
 use serde::de::DeserializeOwned;
-use steps_protocol::cloud::{ApiError, DeviceList, ErrorCode, GoogleSignIn, RefreshRequest, Session};
+use steps_protocol::cloud::{
+    ApiError, DeviceList, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, RefreshRequest, Session,
+    SetPassword,
+};
 
 #[derive(Clone, Debug, PartialEq)]
 pub enum CloudError {
     Network(String),
-    Api { status: u16, code: ErrorCode, message: String },
+    /// `retry_after_ms` comes with [`ErrorCode::TooManyTries`].
+    Api {
+        status: u16,
+        code: ErrorCode,
+        message: String,
+        retry_after_ms: Option<u64>,
+    },
     Decode(String),
 }
 
@@ -18,7 +27,7 @@ impl std::fmt::Display for CloudError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Network(e) => write!(f, "network: {e}"),
-            Self::Api { status, code, message } => write!(f, "{status} {code:?}: {message}"),
+            Self::Api { status, code, message, .. } => write!(f, "{status} {code:?}: {message}"),
             Self::Decode(e) => write!(f, "unexpected response: {e}"),
         }
     }
@@ -68,6 +77,22 @@ impl Api {
 
     pub async fn sign_in_google(&self, body: &GoogleSignIn) -> Result<Session, CloudError> {
         read(self.call(Verb::Post, "/v1/auth/google", None, Some(json(body)?)).await)
+    }
+
+    pub async fn sign_in_password(&self, body: &PasswordSignIn) -> Result<Session, CloudError> {
+        read(self.call(Verb::Post, "/v1/auth/password", None, Some(json(body)?)).await)
+    }
+
+    pub async fn login(&self, access: &str) -> Result<PasswordLogin, CloudError> {
+        read(self.call(Verb::Get, "/v1/login", Some(access), None).await)
+    }
+
+    pub async fn set_login(&self, access: &str, body: &SetPassword) -> Result<PasswordLogin, CloudError> {
+        read(self.call(Verb::Post, "/v1/login", Some(access), Some(json(body)?)).await)
+    }
+
+    pub async fn remove_login(&self, access: &str) -> Result<PasswordLogin, CloudError> {
+        read(self.call(Verb::Delete, "/v1/login", Some(access), None).await)
     }
 
     pub async fn refresh(&self, refresh_token: &str) -> Result<Session, CloudError> {
@@ -164,7 +189,9 @@ fn read<T: DeserializeOwned>(text: Result<String, CloudError>) -> Result<T, Clou
 /// Cloudflare) still gets a code from the status.
 pub fn api_error(status: u16, body: &str) -> CloudError {
     match serde_json::from_str::<ApiError>(body) {
-        Ok(e) => CloudError::Api { status, code: e.code, message: e.message },
+        Ok(e) => {
+            CloudError::Api { status, code: e.code, message: e.message, retry_after_ms: e.retry_after_ms }
+        }
         Err(_) => {
             let code = match status {
                 401 => ErrorCode::Unauthorized,
@@ -172,7 +199,7 @@ pub fn api_error(status: u16, body: &str) -> CloudError {
                 404 => ErrorCode::NotFound,
                 _ => ErrorCode::Internal,
             };
-            CloudError::Api { status, code, message: body.chars().take(200).collect() }
+            CloudError::Api { status, code, message: body.chars().take(200).collect(), retry_after_ms: None }
         }
     }
 }
@@ -198,5 +225,16 @@ mod tests {
         let e = api_error(403, "<html>blocked</html>");
         assert!(matches!(e, CloudError::Api { code: ErrorCode::NotAllowed, .. }));
         assert!(!e.is_signed_out());
+    }
+
+    #[test]
+    fn a_lockout_keeps_its_wait_and_a_wrong_password_is_not_a_sign_out() {
+        let e = api_error(429, r#"{"code":"too_many_tries","message":"wait","retry_after_ms":120000}"#);
+        assert!(matches!(
+            e,
+            CloudError::Api { code: ErrorCode::TooManyTries, retry_after_ms: Some(120_000), .. }
+        ));
+        let e = api_error(401, r#"{"code":"wrong_password","message":"no"}"#);
+        assert!(!e.is_signed_out(), "a typo must not sign the device out");
     }
 }

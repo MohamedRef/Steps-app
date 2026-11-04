@@ -74,8 +74,13 @@ impl Library {
         // A newer pack from the update feed wins (checked and decoded
         // there); else the embedded one, which build.rs wrote from types
         // it just parsed, so it can't fail.
+        // The web app's pack is a file of its own, fetched before it starts.
+        #[cfg(target_arch = "wasm32")]
+        let built_in = crate::platform::web::content_pack();
+        #[cfg(not(target_arch = "wasm32"))]
+        let built_in = embedded::PACK;
         let pack = crate::update::installed_pack()
-            .unwrap_or_else(|| Pack::decode(embedded::PACK).expect("embedded content pack"));
+            .unwrap_or_else(|| Pack::decode(built_in).expect("built-in content pack"));
         let program = pack.program_or_fallback();
         let Pack { index, lectures, lessons, look, .. } = pack;
         crate::look::set(look);

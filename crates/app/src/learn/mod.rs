@@ -213,7 +213,7 @@ static SHOWN: GlobalSignal<Option<String>> = Signal::global(|| None);
 /// What the search box holds, kept when a lesson opens and closes.
 static QUERY: GlobalSignal<String> = Signal::global(String::new);
 
-/// Where an unfinished lesson stands on this device: the step it reopens at
+/// Where an unfinished lesson stands (on any of his devices): the step it reopens at
 /// (0-based), read from the player's saved position (`player.rs`).
 pub fn resume_step(id: &str) -> Option<usize> {
     part_way(id).map(|(at, _)| at)
@@ -232,7 +232,7 @@ fn part_way(id: &str) -> Option<(usize, i64)> {
         return None;
     }
     crate::store::shared()
-        .local_setting::<At>(&format!("lessonpos.{id}"))
+        .place::<At>(&format!("lessonpos.{id}"))
         .filter(|p| p.at > 0)
         .map(|p| (p.at, p.started_ms))
 }

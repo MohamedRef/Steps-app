@@ -59,6 +59,7 @@ fn status(sync: SyncState) -> CloudStatus {
         last_sync_ms: None,
         problem: None,
         finishing_sign_in: false,
+        temporary: false,
     }
 }
 
