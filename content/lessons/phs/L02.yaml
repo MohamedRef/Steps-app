@@ -1,0 +1,319 @@
+schema: steps.lesson/v1
+lecture: phs.L02
+lessons:
+  - id: phs.L02.lesson1
+    title: "مين يقرر؟ الـ correlation، ومبادئ الأخلاق، والـ capacity، والـ consent"
+    hook: "في أي سؤال ethics، اسأل الأول: المريض ده قادر يقرر القرار ده بالذات ولا لأ؟"
+    minutes: 9
+    pages: [268, 269]
+    topics: [pearson-correlation, core-ethical-principles, decision-making-capacity, informed-consent, consent-for-minors]
+    goals:
+      - "تقرا الـ Pearson r والـ r² صح، وتفتكر إن الـ correlation مش causation"
+      - "تعرف المبادئ الأربعة ومبدأ الـ double effect"
+      - "تفرّق بين capacity و competency، وتعرف استثناءات الـ informed consent والـ minors"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ Pearson correlation في دقيقة"
+        text: |-
+          - **r** بيقيس الـ ==linear correlation== بين متغيرين، ودايماً بين **−1 و +1**. كل ما الـ |r| قرّب من 1 كل ما الـ correlation أقوى.
+          - r موجب ← الاتنين بيطلعوا مع بعض. r سالب ← واحد يطلع والتاني ينزل. r = 0 ← مفيش correlation.
+          - **r²** = الـ coefficient of determination: نسبة الـ variance في متغير اللي بيفسرها الـ variance في التاني.
+          - وأهم سطر: ==Correlation does not necessarily imply causation==.
+        page: 268
+        quote: "Coefficient of determination = r2 (proportion of variance in one variable that can be explained by variance in the other variable). Correlation does not necessarily imply causation."
+      - kind: figure
+        title: "شكل الـ r على الـ scatter plot"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-box" x="10" y="20" width="100" height="90" rx="8"/>
+            <rect class="fg-box" x="130" y="20" width="100" height="90" rx="8"/>
+            <rect class="fg-box" x="250" y="20" width="100" height="90" rx="8"/>
+            <circle class="fg-ink" cx="25" cy="35" r="3"/><circle class="fg-ink" cx="38" cy="45" r="3"/><circle class="fg-ink" cx="50" cy="52" r="3"/>
+            <circle class="fg-ink" cx="62" cy="66" r="3"/><circle class="fg-ink" cx="75" cy="72" r="3"/><circle class="fg-ink" cx="88" cy="86" r="3"/><circle class="fg-ink" cx="98" cy="95" r="3"/>
+            <circle class="fg-ink" cx="145" cy="40" r="3"/><circle class="fg-ink" cx="160" cy="90" r="3"/><circle class="fg-ink" cx="172" cy="55" r="3"/>
+            <circle class="fg-ink" cx="185" cy="80" r="3"/><circle class="fg-ink" cx="198" cy="35" r="3"/><circle class="fg-ink" cx="210" cy="70" r="3"/><circle class="fg-ink" cx="220" cy="95" r="3"/>
+            <circle class="fg-ink" cx="265" cy="95" r="3"/><circle class="fg-ink" cx="278" cy="82" r="3"/><circle class="fg-ink" cx="290" cy="78" r="3"/>
+            <circle class="fg-ink" cx="303" cy="62" r="3"/><circle class="fg-ink" cx="315" cy="55" r="3"/><circle class="fg-ink" cx="328" cy="42" r="3"/><circle class="fg-ink" cx="340" cy="33" r="3"/>
+            <text x="18" y="130" class="t-sm t-b">r = −0.8</text>
+            <text x="18" y="145" class="t-sm t-mut">strong negative</text>
+            <text x="150" y="130" class="t-sm t-b">r = 0</text>
+            <text x="138" y="145" class="t-sm t-mut">no correlation</text>
+            <text x="262" y="130" class="t-sm t-b">r = +0.8</text>
+            <text x="258" y="145" class="t-sm t-mut">strong positive</text>
+          </svg>
+        caption: "النقط القريبة من خط نازل يعني r سالب وقوي، والنقط المتلخبطة يعني r قريب من صفر، والنقط القريبة من خط طالع يعني r موجب وقوي. القوة في القيمة المطلقة مش في الإشارة."
+        alt: "Three scatter plots: points falling along a descending line labelled r = −0.8 strong negative; scattered points labelled r = 0 no correlation; points rising along a line labelled r = +0.8 strong positive."
+        page: 268
+        quote: "r = –0.8 Strong negative correlation r = –0.4 Weak negative correlation r = 0 No correlation r = +0.4 Weak positive correlation r = +0.8 Strong positive correlation"
+      - kind: check
+        question: "Two variables have r = −0.5. What proportion of the variance in one is explained by the other?"
+        options:
+          - "25%"
+          - "50%"
+          - "−50%"
+          - "None, because r is negative"
+        answer: 0
+        why:
+          - "صح: r² = 0.25، يعني 25% من الـ variance."
+          - "ده الـ |r| نفسه، والـ variance بيتحسب بـ r²."
+          - "النسبة عمرها ما تبقى سالبة: r² دايماً موجب."
+          - "الإشارة بتقول الاتجاه بس، والـ r² بيتحسب برضه."
+        page: 268
+        quote: "Coefficient of determination = r2 (proportion of variance in one variable that can be explained by variance in the other variable)."
+      - kind: match
+        prompt: "وصّل المبدأ بمعناه"
+        pairs:
+          - ["Autonomy", "Respect the patient's informed choice, truth-telling and confidentiality"]
+          - ["Beneficence", "Do good: a fiduciary duty to act in the patient's best interest"]
+          - ["Nonmaleficence", "Do no harm, balanced against benefit"]
+          - ["Justice", "Fair and equitable, not always equal (triage)"]
+        why: "الـ beneficence ممكن تتعارض مع الـ autonomy (المريض الفاهم من حقه يقرر) أو مع مصلحة المجتمع (علاج الـ TB الإجباري)، وتقليدياً مصلحة المريض بتكسب."
+        page: 268
+        quote: "Beneficence “Do good.” Physicians have a special ethical (fiduciary) duty to act in the patient’s best interest."
+      - kind: aside
+        tone: tip
+        text: "**Principle of double effect**: في الـ end-of-life care، راحة المريض بتسبق الآثار الجانبية المحتملة. يعني نزوّد الـ opioid عشان الألم حتى لو فيه احتمال ==respiratory depression==."
+        page: 268
+        quote: "Principle of double effect—facilitating comfort is prioritized over potential side effects (eg, respiratory depression with opioid use) for patients receiving end-of-life care."
+      - kind: explain
+        title: "Capacity مش competency"
+        text: |-
+          - **Capacity**: بيحددها ==الدكتور==، لقرار طبي معيّن (زي إنه يرفض العلاج).
+          - **Competency**: بيحددها ==القاضي==، وهي قانونية (زي إنه مش قادر قانونياً ياخد أي قرار طبي).
+          - الـ intellectual disability أو المرض النفسي **مش** بيلغوا الـ capacity، إلا لو الحالة دلوقتي بتأثر على قدرته يقرر.
+          - والقرار اللي اتاخد وهو عنده capacity ما يتلغيش لمجرد إنه فقدها بعدين.
+
+          ومكونات القرار الأربعة: **Understanding** ثم **Appreciation** ثم **Reasoning** ثم **Expressing a choice**.
+        page: 268
+        quote: "Capacity is determined by a physician for a specific healthcare-related decision (eg, to refuse medical care). Competency is determined by a judge"
+      - kind: check
+        question: "A patient with mild intellectual disability understands her diagnosis, explains what it means for her, weighs the options and clearly refuses surgery. What is true?"
+        options:
+          - "She has capacity for this decision"
+          - "Her intellectual disability means she lacks capacity"
+          - "A judge must decide her capacity"
+          - "Her parents must consent"
+        answer: 0
+        why:
+          - "صح: عندها الأربع مكونات، والـ intellectual disability مش exclusion criterion إلا لو بتأثر دلوقتي على القرار."
+          - "الإعاقة لوحدها مش بتلغي الـ capacity."
+          - "القاضي بيحدد الـ competency، والدكتور بيحدد الـ capacity."
+          - "الـ surrogate بيقرر بس لو فقدت الـ capacity."
+        page: 268
+        quote: "Intellectual disabilities and mental illnesses are not exclusion criteria unless the patient’s condition presently impairs their ability to make healthcare decisions."
+      - kind: explain
+        title: "الـ informed consent"
+        text: |-
+          أربع حاجات: **Disclosure** (المعلومات والـ risks والـ benefits)، **Understanding**، **Capacity**، و **Voluntariness** (من غير ضغط أو manipulation).
+
+          والمريض لازم يعرف التشخيص والـ risks والـ benefits والبدائل، ==including no treatment==. ومن حقه يلغي الموافقة المكتوبة في أي وقت، ==even orally==.
+        page: 269
+        quote: "Patients must be informed of their right to revoke written consent at any time, even orally."
+      - kind: mnemonic
+        word: "WIPE"
+        parts:
+          - { key: "W", text: "Waiver: the patient explicitly gives up the right of informed consent" }
+          - { key: "I", text: "Legally Incompetent: lacks decision-making capacity; get consent from the legal surrogate" }
+          - { key: "P", text: "Therapeutic Privilege: withhold information whose disclosure would severely harm the patient" }
+          - { key: "E", text: "Emergency: implied consent may apply" }
+        hook: "من الكتاب: استثناءات الـ informed consent بتتمسح، WIPE it away."
+        page: 269
+        quote: "Exceptions to informed consent (WIPE it away): Waiver—patient explicitly relinquishes the right of informed consent"
+      - kind: explain
+        title: "الـ minors: Sex و Drugs و Rock and roll"
+        text: |-
+          الـ minor = أي حد ==أقل من 18 سنة==. عادةً بناخد موافقة الأهل، إلا في الطوارئ (زي نقل الدم) أو لو الـ minor **emancipated** (متجوز، أو بيصرف على نفسه، أو في الجيش).
+
+          ومش محتاجين موافقة الأهل عادةً في:
+          - **Sex**: contraception، والأمراض الجنسية، والـ prenatal care (بس ==usually not abortion==).
+          - **Drugs**: علاج الـ substance use disorder.
+          - **Rock and roll**: الطوارئ والـ trauma.
+
+          ولازم نشجّع الكلام بين الـ minor وأهله، ونطلب الـ **assent** بتاعه حتى لو موافقته مش مطلوبة قانونياً.
+        page: 269
+        quote: "Situations in which parental consent is usually not required: Sex (contraception, STIs, prenatal care— usually not abortion)"
+      - kind: check
+        question: "A 15-year-old asks for treatment of opioid use disorder without telling his parents. Is parental consent usually required?"
+        options:
+          - "No: substance use treatment is an exception (Drugs)"
+          - "Yes: he is under 18"
+          - "Yes, unless he is married"
+          - "Only a court can allow it"
+        answer: 0
+        why:
+          - "صح: الـ Drugs في Sex و Drugs و Rock and roll، يعني علاج الـ substance use disorder."
+          - "السن لوحده مش بيمنع، فيه استثناءات."
+          - "الـ emancipation استثناء تاني، ومش محتاجينه هنا."
+          - "مفيش محكمة؛ ده استثناء معروف."
+        page: 269
+        quote: "Drugs (substance use disorder treatment) Rock and roll (emergency/trauma)"
+      - kind: try
+        items: [phs.L02.006, phs.L02.011, phs.L02.016, phs.L02.022, phs.L02.026]
+    recap:
+      - "r بين −1 و +1؛ r² = نسبة الـ variance المتفسرة؛ correlation مش causation."
+      - "Autonomy و Beneficence و Nonmaleficence و Justice؛ والـ double effect: الراحة قبل الآثار الجانبية."
+      - "Capacity: دكتور، لقرار معيّن. Competency: قاضي."
+      - "WIPE: Waiver و Incompetent و Privilege و Emergency."
+      - "Minors: Sex (مش الإجهاض) و Drugs و Rock and roll."
+    practice: [phs.L02.001, phs.L02.002, phs.L02.003, phs.L02.004, phs.L02.005, phs.L02.006, phs.L02.007, phs.L02.008, phs.L02.009, phs.L02.010, phs.L02.011, phs.L02.012, phs.L02.013, phs.L02.014, phs.L02.015, phs.L02.016, phs.L02.017, phs.L02.018, phs.L02.019, phs.L02.020, phs.L02.021, phs.L02.022, phs.L02.023, phs.L02.024, phs.L02.025, phs.L02.026]
+  - id: phs.L02.lesson2
+    title: "لما المريض ما يقدرش يتكلم: الـ advance directives والـ surrogate والـ confidentiality"
+    hook: "الـ surrogate بيقول المريض كان عايز إيه، مش هو عايز إيه"
+    minutes: 9
+    pages: [269, 270]
+    topics: [advance-directives, ventilator-life-support, surrogate-decision-maker, confidentiality, accepting-gifts]
+    goals:
+      - "تفرّق بين الـ living will والـ medical power of attorney والـ DNR"
+      - "تعرف ترتيب الـ surrogates وتمشي ورا رغبة المريض في الـ ventilator"
+      - "تعرف امتى تكسر الـ confidentiality (SAVED) وامتى ترفض هدية"
+    status: unverified
+    steps:
+      - kind: table
+        title: "الـ advance directives"
+        columns: ["", "What it is", "Key point"]
+        rows:
+          - ["Oral", "Prior oral statements", "More valid if informed, specific, a choice, repeated to many"]
+          - ["Written (living will)", "Specific interventions accepted or rejected", "For critical or life-threatening illness"]
+          - ["Medical power of attorney", "An agent decides if capacity is lost", "Revocable while capacity intact; more flexible"]
+          - ["DNR order", "No CPR", "Other life-sustaining measures still possible"]
+        hide: [[2, 2], [3, 2]]
+        page: 269
+        quote: "Can be revoked by patient if decision-making capacity is intact. More flexible than a living will."
+      - kind: explain
+        title: "الـ DNR مش معناه ما نعملش حاجة"
+        text: |-
+          الـ **DNR order** بيمنع الـ ==CPR (cardiopulmonary resuscitation)== بس. المريض لسه ممكن يختار intubation، أو feeding tube، أو chemotherapy.
+
+          والـ **medical power of attorney** أمرن من الـ living will: بيعيّن شخص يقرر لو فقد الـ capacity، ويقدر يلغيه طول ما الـ capacity موجودة.
+        page: 269
+        quote: "DNR order prohibits cardiopulmonary resuscitation (CPR). Patient may still consider other life- sustaining measures (eg, intubation, feeding tube, chemotherapy)."
+      - kind: check
+        question: "A patient with a DNR order develops respiratory failure. She is alert and agrees to intubation. What should happen?"
+        options:
+          - "Intubate: a DNR order prohibits CPR, not intubation"
+          - "Do not intubate: a DNR order forbids it"
+          - "Ask her medical power of attorney"
+          - "Cancel the DNR order first"
+        answer: 0
+        why:
+          - "صح: الـ DNR بيمنع الـ CPR بس، والـ intubation حاجة تانية ممكن تختارها."
+          - "الـ DNR مش بيمنع الـ intubation."
+          - "هي alert وعندها capacity، فهي اللي تقرر."
+          - "مش محتاجين نلغي الـ DNR عشان نعمل intubation."
+        page: 269
+        quote: "Patient may still consider other life- sustaining measures (eg, intubation, feeding tube, chemotherapy)."
+      - kind: explain
+        title: "الـ ventilator: رغبة المريض هي اللي بتحكم"
+        text: |-
+          أحسن حاجة نتكلم مع المريض قبل ما يحتاج الـ ventilator، بس كتير بيحصل إن مفيش معلومة ساعتها. ساعتها بنعتمد على الـ **surrogate**، والكلام بيبقى على الـ prognosis وعلى ==the believed wishes of the patient==.
+
+          لو الـ surrogate قال إن المريض ما كانش عايز life support ← ==withhold أو withdraw== حتى لو الـ surrogate نفسه عايز يكمّل. وساعتها بندخّل الـ palliative care والـ chaplain وطبيب الرعاية الأولية، وبندعم الأسرة.
+        page: 270
+        quote: "If surrogates indicate patient would not have wanted to receive life support with ventilation → withhold or withdraw life support regardless of what the surrogate prefers."
+      - kind: figure
+        title: "ترتيب الـ surrogates"
+        svg: |-
+          <svg viewBox="0 0 360 120" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="ps2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="5" y="40" width="58" height="36" rx="8"/>
+            <text x="14" y="63" class="t-sm t-b">Spouse</text>
+            <line class="fg-arrow-acc" x1="64" y1="58" x2="76" y2="58" marker-end="url(#ps2a)"/>
+            <rect class="fg-box" x="78" y="40" width="64" height="36" rx="8"/>
+            <text x="84" y="55" class="t-sm">Adult</text>
+            <text x="84" y="70" class="t-sm">children</text>
+            <line class="fg-arrow-acc" x1="143" y1="58" x2="155" y2="58" marker-end="url(#ps2a)"/>
+            <rect class="fg-box" x="157" y="40" width="58" height="36" rx="8"/>
+            <text x="164" y="63" class="t-sm">Parents</text>
+            <line class="fg-arrow-acc" x1="216" y1="58" x2="228" y2="58" marker-end="url(#ps2a)"/>
+            <rect class="fg-box" x="230" y="40" width="58" height="36" rx="8"/>
+            <text x="236" y="55" class="t-sm">Adult</text>
+            <text x="236" y="70" class="t-sm">siblings</text>
+            <line class="fg-arrow-acc" x1="289" y1="58" x2="294" y2="58" marker-end="url(#ps2a)"/>
+            <rect class="fg-box" x="296" y="40" width="62" height="36" rx="8"/>
+            <text x="301" y="55" class="t-sm">Other</text>
+            <text x="301" y="70" class="t-sm">relatives</text>
+            <text x="5" y="25" class="t-sm t-mut">the spouse chips in</text>
+            <text x="5" y="100" class="t-sm t-mut">Each decides what the patient would have done</text>
+          </svg>
+        caption: "لو المريض فقد الـ capacity ومفيش advance directive: الزوج أو الزوجة الأول، بعدين الأولاد الكبار، بعدين الأب والأم، بعدين الإخوات الكبار، بعدين باقي القرايب. وكلهم بيقرروا المريض كان هيعمل إيه."
+        alt: "A chain of five boxes from left to right: spouse (highlighted), adult children, parents, adult siblings, other relatives. Above: the spouse chips in. Below: each decides what the patient would have done."
+        page: 270
+        quote: "Priority of surrogates: spouse → adult children → parents → adult siblings → other relatives (the spouse chips in)."
+      - kind: check
+        question: "An unconscious patient with no advance directive has an adult son and a mother who disagree. The patient is widowed. Who decides?"
+        options:
+          - "The adult son"
+          - "The mother"
+          - "The physician"
+          - "Both must agree"
+        answer: 0
+        why:
+          - "صح: مفيش spouse، فالأولاد الكبار قبل الأب والأم."
+          - "الأب والأم بعد الأولاد الكبار."
+          - "الدكتور مش surrogate."
+          - "فيه ترتيب واضح، ومش لازم الاتنين يتفقوا."
+        page: 270
+        quote: "Priority of surrogates: spouse → adult children → parents → adult siblings → other relatives"
+      - kind: explain
+        title: "الـ confidentiality وامتى نكسرها"
+        text: |-
+          الـ confidentiality بتحترم خصوصية المريض والـ autonomy. المريض يقدر يتنازل عنها بنفسه (زي طلب شركة التأمين). ولو هو incapacitated أو الموقف emergency، الكلام مع الأهل بيمشي بالـ professional judgment لمصلحته.
+
+          ونكسرها بس لو: الخطر الجسدي على نفسه أو على غيره ==serious and imminent==، ومفيش طريقة تانية نحذّر بيها، وفيه خطوات تمنع الضرر.
+        page: 270
+        quote: "Potential physical harm to self or others is serious and imminent Alternative means to warn or protect those at risk is not possible Steps can be taken to prevent harm"
+      - kind: mnemonic
+        word: "SAVED"
+        parts:
+          - { key: "S", text: "Active Suicidal or homicidal ideation" }
+          - { key: "A", text: "Abuse of children, older adults or prisoners" }
+          - { key: "V", text: "Duty to protect a potential Victim (state-specific)" }
+          - { key: "E", text: "Epilepsy and other impaired automobile drivers" }
+          - { key: "D", text: "Reportable Diseases (STIs, hepatitis, food poisoning); TB or Ebola may need involuntary treatment" }
+        hook: "من الكتاب: The physician's good judgment SAVED the day. وفي الأمراض المبلَّغ عنها بنبلّغ الـ public officials وهم يبلّغوا الناس."
+        page: 270
+        quote: "Examples of exceptions to patient confidentiality (many are state specific) include the following (“The physician’s good judgment SAVED the day”)"
+      - kind: check
+        question: "A patient tells you he plans to kill his neighbor tonight and names him. What do you do?"
+        options:
+          - "Break confidentiality to protect the neighbor"
+          - "Keep it confidential"
+          - "Wait and reassess next week"
+          - "Ask the patient's permission first"
+        answer: 0
+        why:
+          - "صح: homicidal ideation وخطر serious and imminent ← duty to protect الـ Victim."
+          - "الـ confidentiality ليها استثناءات، ودي واحدة منها."
+          - "الخطر الليلة، يعني imminent، ومفيش وقت."
+          - "الاستثناء ده مش محتاج موافقته."
+        page: 270
+        quote: "Patients with active Suicidal/homicidal ideation"
+      - kind: sort
+        prompt: "الهدية دي تتقبل ولا تترفض؟"
+        bins: ["Usually fine to accept", "Decline politely"]
+        cards:
+          - { text: "A thank-you card", bin: 0 }
+          - { text: "Home-baked cookies", bin: 0 }
+          - { text: "An inexpensive gift", bin: 0 }
+          - { text: "An expensive watch", bin: 1 }
+          - { text: "A gift that could affect patient care", bin: 1 }
+          - { text: "A gift that strains the patient's finances", bin: 1 }
+        why: "مفيش قواعد قاطعة، والدكتور بيوزن الضرر مقابل الفايدة. الكروت والحلويات والحاجات الرخيصة عادي. بس الهدية تترفض لو كبيرة أو غالية أوي، أو ممكن تأثر على العلاج، أو هتعمل ضغط نفسي أو مادي على المريض."
+        page: 270
+        quote: "In practice, patients often present items such as cards, baked goods, and inexpensive gifts to physicians."
+      - kind: aside
+        tone: tip
+        text: "لو هترفض هدية: اشكر المريض على الـ ==kind gift==، وقول بأدب إنك مش هتقدر تقبلها، وأكّد إن ده مش هيأثر خالص على العلاقة بينكم."
+        page: 270
+        quote: "If a gift violates any of the guidelines above, the best practice is to thank the patient for offering a kind gift, but politely indicate that it must be declined."
+      - kind: try
+        items: [phs.L02.031, phs.L02.036, phs.L02.039, phs.L02.045, phs.L02.049]
+    recap:
+      - "Living will: تدخلات محددة. Medical power of attorney: شخص يقرر، وأمرن، ويتلغي طول ما الـ capacity موجودة."
+      - "DNR = مفيش CPR بس."
+      - "الـ ventilator: لو المريض ما كانش عايز ← withdraw مهما كان رأي الـ surrogate."
+      - "Spouse ← adult children ← parents ← adult siblings ← other relatives."
+      - "SAVED: Suicidal/homicidal و Abuse و Victim و Epilepsy و Diseases."
+      - "هدية كبيرة أو بتأثر على العلاج أو بتتعب المريض ← اشكره وارفض بأدب."
+    practice: [phs.L02.027, phs.L02.028, phs.L02.029, phs.L02.030, phs.L02.031, phs.L02.032, phs.L02.033, phs.L02.034, phs.L02.035, phs.L02.036, phs.L02.037, phs.L02.038, phs.L02.039, phs.L02.040, phs.L02.041, phs.L02.042, phs.L02.043, phs.L02.044, phs.L02.045, phs.L02.046, phs.L02.047, phs.L02.048, phs.L02.049]
