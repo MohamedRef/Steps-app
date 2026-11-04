@@ -14,27 +14,56 @@ fn open(screen: Screen) -> App {
     app
 }
 
+/// Runs `f` on a thread of its own: each test thread has its own data
+/// (`prefs::test_dir`, the in-memory store), so `f` starts from an empty app
+/// whatever earlier taps saved.
+fn fresh<R: Send + 'static>(f: impl FnOnce() -> R + Send + 'static) -> R {
+    std::thread::Builder::new()
+        .stack_size(16 << 20)
+        .spawn(f)
+        .expect("a crawl thread starts")
+        .join()
+        .unwrap_or_else(|e| std::panic::resume_unwind(e))
+}
+
 fn crawl(screen: Screen) {
-    let first = open(screen).tappables();
+    let first = fresh(move || open(screen).tappables());
+    let mut missed = Vec::new();
     for sig in first {
-        let mut app = open(screen);
-        let before = app.tappables();
-        // A label that changes on its own (a clock, a random tip) is skipped.
-        if !app.tap_signature(&sig) {
-            continue;
+        // Every button starts from a fresh app. Taps saved by an earlier
+        // button (Today's session-length chips change the hero's label) would
+        // otherwise rename the next one, and the crawl would skip it.
+        let tapped = fresh({
+            let sig = sig.clone();
+            move || crawl_from(screen, &sig)
+        });
+        if !tapped {
+            missed.push(sig);
         }
-        // Then everything the tap brought up, in turn, in the same app.
-        let new: Vec<String> = app.tappables().into_iter().filter(|s| !before.contains(s)).take(25).collect();
-        for next in new {
-            let seen = app.tappables();
-            if app.tap_signature(&next) {
-                for third in app.tappables().into_iter().filter(|s| !seen.contains(s)).take(6) {
-                    app.tap_signature(&third);
-                }
+    }
+    assert!(missed.is_empty(), "{screen:?}: a fresh app did not show {missed:#?}");
+}
+
+/// Taps `sig` on `screen`, then what it brought up, two levels deep.
+/// False when a fresh app does not show `sig`.
+fn crawl_from(screen: Screen, sig: &str) -> bool {
+    let mut app = open(screen);
+    let before = app.tappables();
+    if !app.tap_signature(sig) {
+        return false;
+    }
+    // Then everything the tap brought up, in turn, in the same app.
+    let new: Vec<String> = app.tappables().into_iter().filter(|s| !before.contains(s)).take(25).collect();
+    for next in new {
+        let seen = app.tappables();
+        if app.tap_signature(&next) {
+            for third in app.tappables().into_iter().filter(|s| !seen.contains(s)).take(6) {
+                app.tap_signature(&third);
             }
         }
-        assert!(app.html().contains("data-screen="), "{screen:?} after {sig}");
     }
+    assert!(app.html().contains("data-screen="), "{screen:?} after {sig}");
+    true
 }
 
 #[test]
