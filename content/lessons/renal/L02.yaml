@@ -1,0 +1,159 @@
+schema: steps.lesson/v1
+lecture: renal.L02
+lessons:
+  - id: renal.L02.lesson1
+    title: "الدم بيدخل الكلية إزاي، وليه الـ medulla بتتعب الأول"
+    hook: "صفحة واحدة فيها reflux، وطريق الدم، وقاعدة الـ Ls، والفلتر بتاع الـ glomerulus"
+    minutes: 7
+    pages: [598, 598]
+    topics: [vesicoureteral-reflux, renal-blood-flow, glomerular-anatomy]
+    goals:
+      - "تفرّق بين الـ reflux الـ primary والـ secondary"
+      - "ترتّب شرايين الكلية من الـ renal artery لحد الـ peritubular capillaries"
+      - "تعرف ليه الـ left renal vein مهمة في الامتحان"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Vesicoureteral reflux: البول راجع لفوق"
+        text: |-
+          الطبيعي إن الـ ureter بيدخل في حيطة الـ bladder بشكل مايل، فلما الـ bladder يتملي ويعصر، الحيطة نفسها تقفل الـ ureter زي الـ valve.
+
+          الـ ==reflux== هو إن البول يرجع من الـ bladder لفوق. ليه سببين:
+          - **1° (primary)**: الـ ureter مركّب غلط أو قصير في حيطة الـ bladder (عند الـ **UVJ**).
+          - **2° (secondary)**: ضغط الـ bladder عالي جداً فيزق البول لفوق من الـ UVJ.
+
+          والنتيجة: ↑ ==recurrent UTIs==.
+        page: 598
+        quote: "Retrograde flow of urine from bladder toward upper urinary tract. Can be 1° due to abnormal/ insufficient insertion of the ureter within the vesicular wall (ureterovesical junction [UVJ]) or 2° due to abnormally high bladder pressure resulting in retrograde flow via the UVJ. ↑ risk of recurrent UTIs."
+      - kind: check
+        question: "A boy with a high-pressure trabeculated bladder after posterior urethral valves has reflux into both ureters. What type of reflux?"
+        options:
+          - "Secondary, from high bladder pressure"
+          - "Primary, from abnormal ureteral insertion"
+          - "Ureteropelvic junction obstruction"
+          - "Duplex collecting system"
+        answer: 0
+        why:
+          - "صح: السبب ضغط الـ bladder العالي اللي بيزق البول من الـ UVJ."
+          - "الـ primary لما الـ ureter نفسه مركّب غلط، وهنا فيه سبب واضح للضغط."
+          - "الـ UPJ obstruction بيمنع البول ينزل، مش بيرجّعه من الـ bladder."
+          - "مفيش في السؤال ureter مشقوق."
+        page: 598
+        quote: "2° due to abnormally high bladder pressure resulting in retrograde flow via the UVJ."
+      - kind: figure
+        title: "طريق الدم في الكلية"
+        svg: |-
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="rL2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="10" width="150" height="26" rx="6"/><text x="20" y="28" class="t-sm">Renal artery</text>
+            <rect class="fg-box" x="10" y="46" width="150" height="26" rx="6"/><text x="20" y="64" class="t-sm">Segmental artery</text>
+            <rect class="fg-box" x="10" y="82" width="150" height="26" rx="6"/><text x="20" y="100" class="t-sm">Interlobar artery</text>
+            <rect class="fg-box" x="10" y="118" width="150" height="26" rx="6"/><text x="20" y="136" class="t-sm">Arcuate artery</text>
+            <rect class="fg-box" x="10" y="154" width="150" height="26" rx="6"/><text x="20" y="172" class="t-sm">Interlobular artery</text>
+            <rect class="fg-box" x="10" y="190" width="150" height="26" rx="6"/><text x="20" y="208" class="t-sm">Afferent arteriole</text>
+            <line class="fg-arrow" x1="85" y1="36" x2="85" y2="45" marker-end="url(#rL2a)"/>
+            <line class="fg-arrow" x1="85" y1="72" x2="85" y2="81" marker-end="url(#rL2a)"/>
+            <line class="fg-arrow" x1="85" y1="108" x2="85" y2="117" marker-end="url(#rL2a)"/>
+            <line class="fg-arrow" x1="85" y1="144" x2="85" y2="153" marker-end="url(#rL2a)"/>
+            <line class="fg-arrow" x1="85" y1="180" x2="85" y2="189" marker-end="url(#rL2a)"/>
+            <rect class="fg-acc" x="200" y="190" width="150" height="26" rx="6"/><text x="210" y="208" class="t-sm t-b">Glomerulus</text>
+            <line class="fg-arrow" x1="160" y1="203" x2="199" y2="203" marker-end="url(#rL2a)"/>
+            <rect class="fg-box" x="200" y="154" width="150" height="26" rx="6"/><text x="210" y="172" class="t-sm">Efferent arteriole</text>
+            <rect class="fg-good" x="200" y="118" width="150" height="26" rx="6"/><text x="210" y="136" class="t-sm">Peritubular capillaries</text>
+            <rect class="fg-box" x="200" y="82" width="150" height="26" rx="6"/><text x="210" y="100" class="t-sm">Interlobular → arcuate vein</text>
+            <rect class="fg-box" x="200" y="46" width="150" height="26" rx="6"/><text x="210" y="64" class="t-sm">Interlobar vein</text>
+            <rect class="fg-box" x="200" y="10" width="150" height="26" rx="6"/><text x="210" y="28" class="t-sm">Renal vein</text>
+            <line class="fg-arrow" x1="275" y1="190" x2="275" y2="181" marker-end="url(#rL2a)"/>
+            <line class="fg-arrow" x1="275" y1="154" x2="275" y2="145" marker-end="url(#rL2a)"/>
+            <line class="fg-arrow" x1="275" y1="118" x2="275" y2="109" marker-end="url(#rL2a)"/>
+            <line class="fg-arrow" x1="275" y1="82" x2="275" y2="73" marker-end="url(#rL2a)"/>
+            <line class="fg-arrow" x1="275" y1="46" x2="275" y2="37" marker-end="url(#rL2a)"/>
+          </svg>
+        caption: "الدم نازل في الشرايين (شمال) لحد الـ glomerulus، وبعدين طالع في الـ efferent والـ peritubular capillaries والأوردة (يمين). كل vein ماشية جنب الـ artery اللي بنفس اسمها."
+        alt: "Flow chart: renal artery, segmental, interlobar, arcuate, interlobular arteries, afferent arteriole, glomerulus, efferent arteriole, peritubular capillaries, interlobular and arcuate veins, interlobar vein, renal vein."
+        page: 598
+        quote: "Renal artery Segmental artery Interlobar artery Interlobar vein Arcuate artery Arcuate vein Interlobular artery Afferent arteriole Efferent arteriole Peritubular capillaries Glomerulus Interlobular vein Renal vein"
+      - kind: aside
+        tone: tip
+        text: "ترتيب الشرايين بالحروف: ==S I A I== (Segmental، Interlobar، Arcuate، Interlobular). افتكر إن الـ **arcuate** هي اللي «بتقوّس» على الحدود بين الـ cortex والـ medulla، وقبلها interlobar وبعدها interlobular."
+        page: 598
+        quote: "Renal artery Segmental artery Interlobar artery Interlobar vein Arcuate artery Arcuate vein Interlobular artery Afferent arteriole"
+      - kind: order
+        prompt: "رتّب الشرايين من الـ renal artery لحد الـ glomerulus"
+        steps:
+          - "Renal artery"
+          - "Segmental artery"
+          - "Interlobar artery"
+          - "Arcuate artery"
+          - "Interlobular artery"
+          - "Afferent arteriole"
+        why: "Segmental ثم Interlobar ثم Arcuate ثم Interlobular ثم الـ afferent اللي بيدخل الـ glomerulus."
+        page: 598
+        quote: "Renal artery Segmental artery Interlobar artery Interlobar vein Arcuate artery Arcuate vein Interlobular artery Afferent arteriole"
+      - kind: explain
+        title: "الـ medulla: آخر واحد بياكل"
+        text: |-
+          الـ ==medulla بتاخد دم أقل بكتير من الـ cortex==. الدم بيوصلها بعد ما عدّى على الـ glomerulus وخرج من الـ efferent، والـ O2 فيه قليل أصلاً.
+
+          عشان كده الـ medulla حساسة جداً للـ hypoxia، وأول حتة بتتعب في الـ ischemia: زي الـ ==ATN== بعد hypotension طويل.
+        page: 598
+        quote: "Renal medulla receives significantly less blood flow than the renal cortex. This makes medulla very sensitive to hypoxia and vulnerable to ischemic damage (eg, ATN)."
+      - kind: explain
+        title: "الـ left renal vein: الوريد اللي بيلم من الكل"
+        text: |-
+          الـ **left renal vein** بتستقبل وريدين زيادة: ==left suprarenal== و ==left gonadal==. (اليمين بيصبّوا في الـ IVC على طول.)
+
+          وعشان هي ماشية من الشمال لحد الـ IVC اللي على اليمين، فهي ==أطول==. فالـ **left kidney** هي اللي بتتاخد عادة في الـ living donor transplant، والكتاب بيسميها **rule of Ls**: Left kidney، Living donor transpLantation، Longer renal vein.
+        page: 598
+        quote: "Left renal vein receives two additional veins: left suprarenal and left gonadal veins. Renal medulla receives significantly less blood flow than the renal cortex. This makes medulla very sensitive to hypoxia and vulnerable to ischemic damage (eg, ATN). Left kidney is most commonly taken during Living donor transpLantation because it has a Longer renal vein (rule of Ls)."
+      - kind: reveal
+        prompt: "راجل عنده left renal cell carcinoma داخلة في الـ left renal vein، وظهر عنده فجأة varicocele شمال. ليه؟"
+        answer: "لأن الـ **left gonadal vein** بتصب في الـ left renal vein. لما الورم يسد الـ renal vein، الدم يرجع في الـ gonadal vein ← ==varicocele== شمال."
+        page: 598
+        quote: "Left renal vein receives two additional veins: left suprarenal and left gonadal veins."
+      - kind: explain
+        title: "الـ glomerulus: فلتر بـ 3 طبقات"
+        text: |-
+          الدم في الـ glomerular capillaries بيتفلتر لـ Bowman space من خلال ==glomerular filtration barrier==:
+          - **Fenestrated capillary endothelium** (شبابيك)
+          - **Basement membrane**
+          - **Podocytes**: دول الـ ==visceral layer== بتاع Bowman capsule، ورجليهم (foot processes) قاعدة على الـ basement membrane.
+
+          والـ **parietal layer** هو الحيطة اللي برّه لـ Bowman capsule. وبين الـ capillaries فيه **mesangial cells**.
+
+          وعند المدخل: الـ **afferent arteriole** فيها **juxtaglomerular cells**، وجنبها الـ **macula densa** في الـ DCT. (هنرجع للاتنين دول في الـ physiology مع الـ renin.)
+        page: 598
+        quote: "Endothelial cells Distal convoluted tubule Macula densa Juxtaglomerular cells Afferent arteriole Efferent arteriole Mesangial cells Bowman capsule (parietal layer) Basement membrane Podocytes (visceral layer) Glomerular filtration barrier Fenestrated capillary endothelium"
+      - kind: match
+        prompt: "وصّل كل خلية بمكانها"
+        pairs:
+          - ["Podocytes", "Visceral layer of Bowman capsule"]
+          - ["Juxtaglomerular cells", "Wall of the afferent arteriole"]
+          - ["Macula densa", "Distal convoluted tubule"]
+          - ["Fenestrated endothelium", "Blood side of the basement membrane"]
+        why: "الفلتر من جوه لبرّه: endothelium ثم basement membrane ثم podocytes. والـ JG cells والـ macula densa عند الـ vascular pole."
+        page: 598
+        quote: "Distal convoluted tubule Macula densa Juxtaglomerular cells Afferent arteriole Efferent arteriole Mesangial cells Bowman capsule (parietal layer) Basement membrane Podocytes (visceral layer)"
+      - kind: check
+        question: "After 3 hours of intraoperative hypotension, a man develops muddy brown casts and rising creatinine. Why was that part of the kidney hit first?"
+        options:
+          - "The medulla receives much less blood flow than the cortex"
+          - "The cortex has no peritubular capillaries"
+          - "The podocytes lack a basement membrane"
+          - "The left renal vein is longer"
+        answer: 0
+        why:
+          - "صح: الـ medulla دمها قليل فحساسة للـ hypoxia، وده سبب الـ ATN."
+          - "الـ cortex فيه peritubular capillaries، وهو أحسن حتة في الأكل."
+          - "الـ podocytes قاعدة على الـ basement membrane؛ مالهاش علاقة بالـ ischemia."
+          - "طول الـ vein ميزة في الـ transplant، مش سبب للـ ATN."
+        page: 598
+        quote: "This makes medulla very sensitive to hypoxia and vulnerable to ischemic damage (eg, ATN)."
+      - kind: try
+        items: [renal.L02.001, renal.L02.004, renal.L02.005, renal.L02.007, renal.L02.010]
+    recap:
+      - "Reflux: 1° الـ ureter مركّب غلط، 2° ضغط الـ bladder عالي؛ النتيجة recurrent UTIs."
+      - "الشرايين: segmental ← interlobar ← arcuate ← interlobular ← afferent ← glomerulus ← efferent ← peritubular."
+      - "الـ medulla دمها قليل ← حساسة للـ ischemia (ATN)."
+      - "الـ left renal vein بتاخد الـ suprarenal والـ gonadal، وأطول ← rule of Ls."
+    practice: [renal.L02.001, renal.L02.002, renal.L02.003, renal.L02.004, renal.L02.005, renal.L02.006, renal.L02.007, renal.L02.008, renal.L02.009, renal.L02.010, renal.L02.011, renal.L02.012, renal.L02.013]

@@ -115,7 +115,15 @@
 .sync-email { align-self: flex-start; font-family: var(--font-latin, inherit); font-weight: 600; overflow-wrap: anywhere; text-align: start; }
 .sync-state { padding-inline-start: calc(2.25rem + var(--sp-3)); display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-1) var(--sp-2); margin: 0; }
 .sync-state > span:not(.chip) + span:not(.chip)::before { content: "· "; }
-.sync-actions { display: flex; justify-content: flex-end; margin-block-start: var(--sp-1); }
+.sync-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--sp-2); margin-block-start: var(--sp-1); }
+/* Username + password: the sign-in form when signed out, the set/change
+   form when signed in. Fields are Latin, so they read left to right. */
+.pw-form { display: flex; flex-direction: column; gap: var(--sp-3); }
+.pw-form input:is([type="text"], [type="password"]) { font-family: var(--font-latin, inherit); text-align: start; }
+.pw-theirs { display: flex; align-items: flex-start; gap: var(--sp-2); cursor: pointer; }
+.pw-theirs input { margin-block-start: 0.15rem; flex: none; }
+.pw-theirs > span { display: flex; flex-direction: column; gap: 2px; }
+.pw-temporary { background: var(--accent-soft); border-radius: var(--radius); padding: var(--sp-2) var(--sp-3); margin: 0; }
 .sync-devices .section-head { margin: 0; }
 .sync-devices .section-head .btn-ghost .icon { inline-size: 1.1rem; block-size: 1.1rem; }
 .device-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }

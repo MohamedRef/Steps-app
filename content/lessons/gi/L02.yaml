@@ -1,0 +1,658 @@
+schema: steps.lesson/v1
+lecture: gi.L02
+lessons:
+  - id: gi.L02.lesson1
+    title: "البنكرياس والطحال والأربطة: خريطة البطن"
+    hook: "مين ورا الـ peritoneum ومين قدّامه، وكل رباط شايل إيه جوّاه"
+    minutes: 9
+    pages: [367, 368]
+    topics: [pancreas-spleen-embryology, retroperitoneal-structures, gi-ligaments]
+    goals:
+      - "تشرح الـ annular pancreas والـ pancreas divisum من الـ buds"
+      - "تعدّ الـ retroperitoneal organs بـ SAD PUCKER"
+      - "تعرف الـ portal triad في أنهي رباط وليه ده مهم في الـ Pringle maneuver"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "البنكرياس من برعمين"
+        text: |-
+          البنكرياس جاي من الـ **foregut** في شكل برعمين: **ventral** و **dorsal**.
+          - الـ ==ventral bud== لوحده بيعمل الـ **uncinate process**.
+          - الاتنين مع بعض بيعملوا الـ **head** والـ **main pancreatic duct**.
+
+          الـ ventral bud لازم يلف حوالين الـ duodenum عشان يقابل الـ dorsal. اللفة دي هي مصدر العيبين المشهورين.
+        page: 367
+        quote: "Pancreas—derived from foregut. Ventral pancreatic bud contributes to uncinate process. Both ventral and dorsal buds contribute to pancreatic head and main pancreatic duct."
+      - kind: table
+        title: "عيبين من نفس اللفة"
+        columns: ["", "Annular pancreas", "Pancreas divisum"]
+        rows:
+          - ["What goes wrong", "Ventral bud rotates abnormally → ring around 2nd part of duodenum", "Ventral and dorsal ducts fail to fuse at 7 weeks"]
+          - ["Drainage / effect", "Duodenal narrowing, vomiting", "Dorsal → minor papilla (dominant); ventral → major papilla"]
+          - ["Clinical", "Associated with Down syndrome", "Common; mostly asymptomatic; may cause chronic pain or pancreatitis"]
+        hide: [[0, 1], [1, 2], [2, 1]]
+        page: 367
+        quote: "Pancreas divisum—ventral and dorsal ducts fail to fuse at 7 weeks of development → separate dorsal (→ minor papilla, dominant) and ventral (→ major papilla) drainage."
+      - kind: reveal
+        prompt: "الطحال mesoderm مش endoderm، بس شريانه من الـ celiac (foregut). إزاي؟"
+        answer: "الطحال بيطلع جوّه ==dorsal mesogastrium== (المساريقا بتاعة المعدة)، فهو mesodermal مش جزء من الأنبوبة نفسها. بس عشان قاعد في مساريقا المعدة، بياخد دمه من شريان المعدة: celiac trunk ← splenic artery."
+        page: 367
+        quote: "Spleen—arises in mesentery of the stomach (dorsal mesogastrium, hence, mesodermal), but has foregut supply (celiac trunk → splenic artery)."
+      - kind: mnemonic
+        word: "SADPUCKER"
+        parts:
+          - { key: "S", text: "Suprarenal (adrenal) glands" }
+          - { key: "A", text: "Aorta and IVC" }
+          - { key: "D", text: "Duodenum (2nd through 4th parts)" }
+          - { key: "P", text: "Pancreas (except tail)" }
+          - { key: "U", text: "Ureters" }
+          - { key: "C", text: "Colon (descending and ascending)" }
+          - { key: "K", text: "Kidneys" }
+          - { key: "E", text: "Esophagus" }
+          - { key: "R", text: "Rectum (partially)" }
+        hook: "SAD PUCKER تحشيشة الكتاب: كل حاجة قاعدة ورا الـ peritoneum. استثناءين مهمين: أول جزء من الـ duodenum، وذيل البنكرياس."
+        page: 367
+        quote: "SAD PUCKER: Suprarenal (adrenal) glands [not shown] Aorta and IVC Duodenum (2nd through 4th parts) Pancreas (except tail) Ureters [not shown] Colon (descending and ascending) Kidneys Esophagus [not shown] Rectum (partially) [not shown]"
+      - kind: aside
+        tone: exam
+        text: "إصابة في عضو ==retroperitoneal== (زي الـ duodenum من ضربة الدريكسيون) بتعمل دم أو هوا في الـ retroperitoneal space، مش free air تحت الحجاب."
+        page: 367
+        quote: "Injuries to retroperitoneal structures can cause blood or gas accumulation in retroperitoneal space."
+      - kind: figure
+        title: "الأربطة حوالين المعدة"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="20" y="30" width="110" height="70" rx="14"/>
+            <text x="75" y="70" class="t-sm t-b" text-anchor="middle">Liver</text>
+            <ellipse class="fg-box" cx="200" cy="90" rx="60" ry="42"/>
+            <text x="200" y="95" class="t-sm t-b" text-anchor="middle">Stomach</text>
+            <ellipse class="fg-good" cx="320" cy="70" rx="28" ry="38"/>
+            <text x="320" y="74" class="t-sm t-b" text-anchor="middle">Spleen</text>
+            <rect class="fg-box" x="120" y="165" width="180" height="24" rx="8"/>
+            <text x="210" y="182" class="t-sm" text-anchor="middle">Transverse colon</text>
+            <line class="fg-ink" x1="130" y1="65" x2="150" y2="75" stroke-width="3"/>
+            <text x="110" y="20" class="t-sm t-acc">hepatogastric</text>
+            <line class="fg-ink" x1="95" y1="100" x2="110" y2="140" stroke-width="3"/>
+            <text x="20" y="150" class="t-sm t-acc">hepatoduodenal</text>
+            <text x="20" y="165" class="t-sm t-mut">(portal triad)</text>
+            <line class="fg-ink" x1="258" y1="80" x2="292" y2="72" stroke-width="3"/>
+            <text x="230" y="40" class="t-sm t-acc">gastrosplenic</text>
+            <line class="fg-ink" x1="210" y1="132" x2="210" y2="165" stroke-width="3"/>
+            <text x="216" y="152" class="t-sm t-acc">gastrocolic</text>
+          </svg>
+        caption: "الأربطة اللي بين الكبد والمعدة والـ duodenum (hepatogastric و hepatoduodenal) هي الـ lesser omentum، من الـ ventral mesentery. اللي على الـ greater curvature (gastrocolic و gastrosplenic) جزء من الـ greater omentum، من الـ dorsal mesentery."
+        alt: "Sketch of liver, stomach, spleen and transverse colon with lines for the hepatogastric, hepatoduodenal (portal triad), gastrosplenic and gastrocolic ligaments."
+        page: 368
+        quote: "Gastrosplenic ligament Greater curvature and spleen Short gastrics, left gastroepiploic vessels Derivative of dorsal mesentery"
+      - kind: explain
+        title: "الـ hepatoduodenal: الرباط الأهم"
+        text: |-
+          ده الحرف الحر بتاع الـ lesser omentum، وجوّاه الـ ==portal triad==: **proper hepatic artery** و **portal vein** و **common bile duct**.
+
+          وهو حافة الـ **omental foramen** (اللي بيوصل الـ greater sac بالـ lesser sac).
+
+          **Pringle maneuver**: تحط صوابعك أو clamp على الرباط ده جوّه الـ omental foramen. لو النزيف وقف يبقى من الـ **inflow** (portal vein أو hepatic artery). لو ما وقفش يبقى من الـ **outflow** (hepatic veins أو IVC).
+        page: 368
+        quote: "Pringle maneuver—ligament is compressed manually or with a vascular clamp in omental foramen to control bleeding from hepatic inflow source (portal vein, hepatic artery) vs outflow (hepatic veins, IVC)"
+      - kind: match
+        prompt: "وصّل كل رباط باللي جوّاه"
+        pairs:
+          - ["Falciform", "Ligamentum teres hepatis, paraumbilical veins"]
+          - ["Hepatogastric", "Gastric vessels"]
+          - ["Gastrocolic", "Gastroepiploic arteries"]
+          - ["Gastrosplenic", "Short gastrics, left gastroepiploic vessels"]
+          - ["Splenorenal", "Splenic artery and vein, tail of pancreas"]
+        why: "الـ splenorenal شايل ذيل البنكرياس، عشان كده الذيل مش retroperitoneal. والـ falciform شايل بقايا الـ umbilical vein (ligamentum teres)."
+        page: 368
+        quote: "Splenorenal ligament Spleen to left pararenal space Splenic artery and vein, tail of pancreas"
+      - kind: check
+        question: "During surgery, a surgeon cuts a ligament on the right to enter the lesser sac. Which ligament?"
+        options:
+          - "Hepatogastric"
+          - "Gastrosplenic"
+          - "Falciform"
+          - "Splenorenal"
+        answer: 0
+        why:
+          - "صح: الـ hepatogastric بيفصل الـ greater sac عن الـ lesser sac على اليمين، وممكن يتقطع عشان تدخل الـ lesser sac."
+          - "الـ gastrosplenic بيفصلهم على الشمال."
+          - "الـ falciform بين الكبد وجدار البطن القدّامي."
+          - "الـ splenorenal بين الطحال والـ left pararenal space."
+        page: 368
+        quote: "Separates greater and lesser sacs on the right May be cut during surgery to access lesser sac"
+      - kind: try
+        items: [gi.L02.002, gi.L02.003, gi.L02.007, gi.L02.010, gi.L02.012]
+    recap:
+      - "Ventral bud ← uncinate. Annular pancreas (حلقة حوالين D2، Down). Divisum: الـ dorsal duct ← minor papilla."
+      - "الطحال mesoderm من الـ dorsal mesogastrium، ودمه من الـ celiac."
+      - "SAD PUCKER، ما عدا D1 وذيل البنكرياس."
+      - "Hepatoduodenal = portal triad؛ Pringle بيفرّق بين inflow و outflow."
+    practice: [gi.L02.001, gi.L02.002, gi.L02.003, gi.L02.004, gi.L02.005, gi.L02.006, gi.L02.007, gi.L02.008, gi.L02.009, gi.L02.010, gi.L02.011, gi.L02.012, gi.L02.013, gi.L02.014, gi.L02.015]
+  - id: gi.L02.lesson2
+    title: "جدار الأمعاء تحت الميكروسكوب"
+    hook: "أربع طبقات وشوية علامات، وتعرف أي biopsy جاية منين"
+    minutes: 7
+    pages: [369, 369]
+    topics: [digestive-tract-anatomy, digestive-tract-histology]
+    goals:
+      - "ترتّب طبقات الجدار وتعرف مكان Meissner و Auerbach"
+      - "تفرّق بين erosion و ulcer"
+      - "تعرف كل جزء من الأمعاء من علامته المميزة"
+    status: unverified
+    steps:
+      - kind: figure
+        title: "الطبقات من جوّه لبرّه"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="20" y="20" width="320" height="34" rx="6"/>
+            <text x="30" y="42" class="t-sm t-b">Mucosa</text>
+            <text x="110" y="42" class="t-sm">epithelium · lamina propria · muscularis mucosa</text>
+            <rect class="fg-box" x="20" y="60" width="320" height="34" rx="6"/>
+            <text x="30" y="82" class="t-sm t-b">Submucosa</text>
+            <text x="130" y="82" class="t-sm">Meissner plexus · vessels · secretes fluid</text>
+            <rect class="fg-good" x="20" y="100" width="320" height="44" rx="6"/>
+            <text x="30" y="118" class="t-sm t-b">Muscularis externa</text>
+            <text x="30" y="136" class="t-sm">inner circular · Auerbach plexus · outer longitudinal</text>
+            <rect class="fg-thin" x="20" y="150" width="320" height="30" rx="6"/>
+            <text x="30" y="170" class="t-sm t-b">Serosa / adventitia</text>
+            <text x="190" y="170" class="t-sm t-mut">retroperitoneal = adventitia</text>
+          </svg>
+        caption: "من جوّه لبرّه MSMS: mucosa ثم submucosa (فيها Meissner) ثم muscularis externa (Auerbach في النص بين الطبقتين) ثم serosa، أو adventitia لو العضو retroperitoneal."
+        alt: "Four stacked bands from lumen outward: mucosa, submucosa with Meissner plexus, muscularis externa with Auerbach plexus between circular and longitudinal layers, serosa or adventitia."
+        page: 369
+        quote: "Layers of gut wall A (inside to outside—MSMS):"
+      - kind: explain
+        title: "مين بيعمل إيه"
+        text: |-
+          - **Meissner** (submucosal plexus) في الـ submucosa: بيظبط ==الإفراز== والـ fluid.
+          - **Auerbach** (myenteric plexus) بين الـ circular والـ longitudinal: بيظبط ==الحركة==.
+
+          افتكرها كده: Auerbach في وسط العضل، فهو المسؤول عن العضل.
+        page: 369
+        quote: "Muscularis externa—circular inner, Auerbach, longitudinal outer layer; myenteric nerve plexus in the middle helps with motility"
+      - kind: aside
+        tone: exam
+        text: "**Erosion** = في الـ mucosa بس. **Ulcer** = نازل للـ submucosa أو العضل. يعني الـ ulcer هو اللي ممكن يوصل لشريان وينزف أو يخرّم."
+        page: 369
+        quote: "Ulcers can extend into submucosa, inner or outer muscular layer. Erosions are in mucosa only."
+      - kind: explain
+        title: "الـ slow waves"
+        text: "الـ basal electric rhythm طالع من ==interstitial cells of Cajal== (الـ pacemaker بتاع الأمعاء). أسرع إيقاع في الـ **duodenum**، بعده الـ ileum، وأبطأ حاجة المعدة: duodenum > ileum > stomach."
+        page: 369
+        quote: "Frequency of basal electric rhythm (slow waves), which originate in the interstitial cells of Cajal: duodenum > ileum > stomach."
+      - kind: check
+        question: "A biopsy shows no ganglion cells between the inner circular and outer longitudinal muscle layers. Which function fails first?"
+        options:
+          - "Motility"
+          - "Fluid secretion"
+          - "Absorption"
+          - "Bicarbonate secretion"
+        answer: 0
+        why:
+          - "صح: ده مكان الـ myenteric (Auerbach) plexus، وهو بتاع الحركة."
+          - "الإفراز شغل الـ Meissner في الـ submucosa."
+          - "الامتصاص شغل الـ villi في الـ mucosa."
+          - "الـ bicarbonate من Brunner glands في الـ duodenal submucosa."
+        page: 369
+        quote: "myenteric nerve plexus in the middle helps with motility"
+      - kind: explain
+        title: "المريء والمعدة"
+        text: |-
+          - **Esophagus**: ==nonkeratinized stratified squamous==. العضل: الـ 1/3 اللي فوق striated، والـ 2/3 اللي تحت smooth، مع تداخل في النص.
+          - **Stomach**: gastric glands. الـ **parietal cells** بينك (eosinophilic) والـ **chief cells** basophilic (مليانة RER بتعمل pepsinogen).
+        page: 369
+        quote: "Esophagus Nonkeratinized stratified squamous epithelium. Upper 1/3, striated muscle; middle and lower 2/3 smooth muscle, with some overlap at the transition."
+      - kind: table
+        title: "اعرف الجزء من علامته"
+        columns: ["Segment", "Key feature"]
+        rows:
+          - ["Duodenum", "Brunner glands (bicarbonate, submucosa)"]
+          - ["Jejunum", "Tallest, most numerous plicae circulares → feathered on contrast"]
+          - ["Ileum", "Peyer patches; most goblet cells in small bowel"]
+          - ["Colon", "Crypts with abundant goblet cells, no villi"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+        page: 369
+        quote: "Ileum Villi, Peyer patches (arrow in C ; lymphoid aggregates in lamina propria, submucosa), plicae circulares (proximal ileum), crypts of Lieberkühn. Largest number of goblet cells in small intestine."
+      - kind: reveal
+        prompt: "ليه الـ duodenum بالذات اللي فيه bicarbonate glands؟"
+        answer: "لأن الـ duodenum هو أول مكان بيستقبل الحمض اللي نازل من المعدة. الـ ==Brunner glands== بتعادل الحمض ده عشان تحمي الـ mucosa ويشتغلوا الـ pancreatic enzymes في pH مناسب."
+        page: 369
+        quote: "Brunner glands (bicarbonate-secreting cells of submucosa)"
+      - kind: explain
+        title: "الـ crypts of Lieberkühn"
+        text: "الـ crypts موجودة في كل الأمعاء. فيها **stem cells** بتجدد الـ enterocytes والـ goblet cells، وفيها ==Paneth cells== اللي بتفرز defensins و lysozyme و TNF (جيش صغير ضد البكتيريا)."
+        page: 369
+        quote: "crypts of Lieberkühn (contain stem cells that replace enterocytes/goblet cells and Paneth cells that secrete defensins, lysozyme, and TNF)"
+      - kind: check
+        question: "A biopsy shows crypts full of goblet cells and no villi at all. Where is it from?"
+        options:
+          - "Colon"
+          - "Ileum"
+          - "Jejunum"
+          - "Duodenum"
+        answer: 0
+        why:
+          - "صح: الـ colon مالوش villi خالص، بس crypts مليانة goblet cells."
+          - "الـ ileum فيه villi و Peyer patches."
+          - "الـ jejunum فيه villi وplicae كتير."
+          - "الـ duodenum فيه villi و Brunner glands."
+        page: 369
+        quote: "Colon Crypts of Lieberkühn with abundant goblet cells, but no villi"
+      - kind: try
+        items: [gi.L02.016, gi.L02.017, gi.L02.018, gi.L02.023, gi.L02.024]
+    recap:
+      - "MSMS من جوّه لبرّه؛ Meissner إفراز في الـ submucosa، Auerbach حركة في العضل."
+      - "Erosion في الـ mucosa بس، ulcer أعمق."
+      - "Slow waves من Cajal: duodenum > ileum > stomach."
+      - "Brunner = duodenum، Peyer = ileum، colon من غير villi."
+    practice: [gi.L02.016, gi.L02.017, gi.L02.018, gi.L02.019, gi.L02.020, gi.L02.021, gi.L02.022, gi.L02.023, gi.L02.024, gi.L02.025]
+  - id: gi.L02.lesson3
+    title: "شرايين البطن وأوردتها: مين بيغذي مين"
+    hook: "تلات شرايين، تلات مستويات، وتلات أماكن الدم بيهرب منها في الـ portal hypertension"
+    minutes: 10
+    pages: [370, 372]
+    topics: [abdominal-aorta-branches, nutcracker-syndrome, sma-syndrome, gi-blood-supply-innervation, celiac-trunk, portosystemic-anastomoses]
+    goals:
+      - "تربط foregut و midgut و hindgut بالشريان والعصب والـ vertebral level"
+      - "تعرف الـ watershed areas وليه بتتأذي"
+      - "تفرّق بين nutcracker و SMA syndrome"
+      - "تعرف التلات portosystemic anastomoses والـ TIPS"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "قاعدة الفروع"
+        text: |-
+          شرايين الـ GI (celiac و SMA و IMA) ==فردية وطالعة لقدّام== (single, branch anteriorly). شرايين الحاجات التانية (الكلى والـ adrenals والـ gonads) ==أزواج وطالعة للجناب وورا== (paired, branch laterally and posteriorly).
+
+          منطقي: الأمعاء أصلها أنبوبة واحدة في النص قدّام الـ aorta، فشريان واحد من قدّام يكفيها.
+        page: 370
+        quote: "Arteries supplying GI structures are single and branch anteriorly. Arteries supplying non-GI structures are paired and branch laterally and posteriorly."
+      - kind: table
+        title: "التلات أجزاء والتلات شرايين"
+        columns: ["Gut", "Artery", "Parasympathetic", "Level", "Supplies"]
+        rows:
+          - ["Foregut", "Celiac", "Vagus", "T12/L1", "Lower esophagus to proximal duodenum; liver, gallbladder, pancreas, spleen"]
+          - ["Midgut", "SMA", "Vagus", "L1", "Distal duodenum to proximal 2/3 of transverse colon"]
+          - ["Hindgut", "IMA", "Pelvic splanchnic", "L3", "Distal 1/3 of transverse colon to upper anal canal"]
+        hide: [[0, 3], [1, 1], [2, 2], [2, 3]]
+        page: 371
+        quote: "Midgut SMA Vagus L1 Distal duodenum to proximal 2/3 of transverse colon"
+      - kind: aside
+        tone: tip
+        text: "الـ sympathetic كله جاي من الـ prevertebral ganglia اللي على اسم الشرايين نفسها: celiac و superior mesenteric و inferior mesenteric. والـ vagus بيوقف عند آخر الـ midgut، وبعده الـ ==pelvic splanchnic== هو اللي بيكمل."
+        page: 371
+        quote: "Sympathetic innervation arises from abdominal prevertebral ganglia: celiac, superior mesenteric, and inferior mesenteric."
+      - kind: figure
+        title: "الـ watershed areas"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <path class="fg-box" d="M90 180 L90 40 L270 40 L270 150 L220 180" fill="none" stroke-width="16"/>
+            <text x="180" y="30" class="t-sm t-mut" text-anchor="middle">transverse colon</text>
+            <circle class="fg-dot-bad" cx="270" cy="40" r="10"/>
+            <text x="354" y="30" class="t-sm t-bad" text-anchor="end">splenic flexure</text>
+            <text x="285" y="62" class="t-sm">SMA + IMA</text>
+            <circle class="fg-dot-bad" cx="225" cy="176" r="10"/>
+            <text x="245" y="180" class="t-sm t-bad">rectosigmoid</text>
+            <text x="245" y="196" class="t-sm">IMA branches</text>
+            <text x="20" y="110" class="t-sm t-acc">SMA</text>
+            <text x="300" y="110" class="t-sm t-acc">IMA</text>
+          </svg>
+        caption: "الـ watershed هو المكان اللي في آخر فروع شريانين. لما الضغط يقع (shock) أو تيجي جلطة، آخر حتة بيوصلها الدم هي اللي تتأذي: splenic flexure (بين SMA و IMA) والـ rectosigmoid junction (بين آخر sigmoid branch و superior rectal)."
+        alt: "Outline of the colon with two red dots: the splenic flexure between SMA and IMA territories, and the rectosigmoid junction between IMA branches."
+        page: 370
+        quote: "Splenic flexure—SMA and IMA Rectosigmoid junction—IMA branches (last sigmoid arterial branch and superior rectal artery)"
+      - kind: reveal
+        prompt: "مريض في الـ ICU على vasopressors عمل ألم شمال ونزيف من تحت. فين في الـ colon؟ وليه؟"
+        answer: "غالباً ==splenic flexure==. هي watershed: بتاخد دم من آخر فروع الـ SMA وآخر فروع الـ IMA، فلما الضغط يقع هي أول حتة تجوع (colonic ischemia)."
+        page: 370
+        quote: "Two areas of the colon have dual blood supply from distal arterial branches (“watershed areas”) → susceptible in colonic ischemia (hypotensive states, thromboemboli, or atheroemboli):"
+      - kind: table
+        title: "الـ SMA بيعصر مين؟"
+        columns: ["", "Nutcracker syndrome", "SMA syndrome"]
+        rows:
+          - ["Squeezed", "Left renal vein (between SMA and aorta)", "Third part of duodenum (between SMA and aorta)"]
+          - ["Presents", "Flank pain, gross hematuria, left varicocele", "Intermittent obstruction, postprandial pain"]
+          - ["Setting", "", "Low mesenteric fat: rapid weight loss, malnutrition, gastric bypass"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2]]
+        page: 370
+        quote: "Typically occurs in conditions associated with diminished mesenteric fat (eg, rapid weight loss, low body weight, malnutrition, gastric bypass surgeries)."
+      - kind: aside
+        tone: analogy
+        text: "الـ SMA والـ aorta زي ==كسّارة البندق==: الزاوية بينهم فيها حاجتين معديين، الـ left renal vein والـ D3. الدهن اللي في المساريقا هو اللي بيفتح الزاوية؛ لو المريض خس جامد (anorexia، بعد gastric bypass) الزاوية تقفل وتعصر."
+        page: 370
+        quote: "Characterized by intermittent intestinal obstruction symptoms (primarily postprandial pain) when SMA and aorta compress transverse (third) portion of duodenum."
+      - kind: explain
+        title: "الـ celiac trunk وفروعه"
+        text: |-
+          تلات فروع: **common hepatic** و **splenic** و **left gastric**، وهم الإمداد الأساسي للـ foregut.
+
+          من الرسمة في الكتاب:
+          - **Left gastric** ← esophageal branches، وبيمشي على الـ lesser curvature.
+          - **Splenic** ← short gastrics و left gastroepiploic.
+          - **Common hepatic** ← proper hepatic (← right و left hepatic، والـ cystic من اليمين، و right gastric) و ==gastroduodenal== (← right gastroepiploic و superior pancreaticoduodenals).
+        page: 371
+        quote: "Celiac trunk Branches of the celiac trunk (common hepatic, splenic, left gastric) constitute the main blood supply of the foregut."
+      - kind: check
+        question: "A posterior duodenal ulcer bleeds massively. Which artery?"
+        options:
+          - "Gastroduodenal"
+          - "Left gastric"
+          - "Short gastric"
+          - "Splenic"
+        answer: 0
+        why:
+          - "صح: الـ gastroduodenal بيعدّي ورا أول جزء من الـ duodenum."
+          - "الـ left gastric على الـ lesser curvature بتاع المعدة."
+          - "الـ short gastrics للـ fundus."
+          - "الـ splenic على الحافة اللي فوق في البنكرياس."
+        page: 371
+        quote: "Right gastric Gastroduodenal Posterior superior pancreaticoduodenal Anterior superior pancreaticoduodenal"
+      - kind: explain
+        title: "لما الـ portal vein يتسد"
+        text: |-
+          في الـ **portal hypertension** الدم بيدوّر على طريق تاني يرجع بيه للقلب من غير الكبد. بيلاقي 3 أماكن الـ portal فيها بيلمس الـ systemic:
+          - **Esophagus**: left gastric ↔ esophageal (← azygos) = ==esophageal varices==.
+          - **Umbilicus**: paraumbilical ↔ epigastric veins = **caput medusae**.
+          - **Rectum**: superior rectal ↔ middle و inferior rectal = **anorectal varices**.
+
+          الكتاب بيقولها: varices of **gut, butt, and caput**.
+        page: 372
+        quote: "Varices of gut, butt, and caput (medusae) are commonly seen with portal hypertension."
+      - kind: explain
+        title: "الـ TIPS: تحويلة صناعية"
+        text: |-
+          الـ **TIPS** بيوصّل الـ ==portal vein بالـ hepatic vein== جوّه الكبد، فالضغط ينزل والدم يروح على الـ systemic.
+
+          التمن: الدم ده عدّى من غير ما الكبد ينضفه، فالـ **ammonia** بتوصل للمخ ← ==hepatic encephalopathy==.
+        page: 372
+        quote: "TIPS can precipitate hepatic encephalopathy due to ↓ clearance of ammonia from shunting."
+      - kind: try
+        items: [gi.L02.027, gi.L02.029, gi.L02.031, gi.L02.033, gi.L02.039]
+    recap:
+      - "Celiac T12/L1، SMA L1، IMA L3؛ vagus لحد الـ midgut، بعده pelvic splanchnic."
+      - "Watershed: splenic flexure و rectosigmoid."
+      - "Nutcracker = left renal vein؛ SMA syndrome = D3 مع خسارة الوزن."
+      - "Posterior duodenal ulcer ← gastroduodenal artery."
+      - "Gut, butt, caput؛ TIPS ← encephalopathy."
+    practice: [gi.L02.026, gi.L02.027, gi.L02.028, gi.L02.029, gi.L02.030, gi.L02.031, gi.L02.032, gi.L02.033, gi.L02.034, gi.L02.035, gi.L02.036, gi.L02.037, gi.L02.038, gi.L02.039, gi.L02.040, gi.L02.041, gi.L02.042]
+  - id: gi.L02.lesson4
+    title: "الـ pectinate line والكبد من جوّه"
+    hook: "خط واحد في الشرج بيقسم كل حاجة نصين، وزون واحدة في الكبد بتموت من الـ acetaminophen"
+    minutes: 10
+    pages: [373, 375]
+    topics: [pectinate-line, liver-tissue-architecture, biliary-structures]
+    goals:
+      - "تعرف فوق وتحت الـ pectinate line: أعصاب ودم ولمف وأمراض"
+      - "ترتّب الـ liver zones وأمراض كل زون"
+      - "تفهم الـ double duct sign و Courvoisier sign"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "خط بين عالمين"
+        text: |-
+          الـ **pectinate (dentate) line** هو المكان اللي ==الـ endoderm (hindgut) بيقابل الـ ectoderm==.
+
+          عشان كده كل حاجة فوقه "جوّانية" (visceral زي الأمعاء)، وكل حاجة تحته "جلد" (somatic).
+        page: 373
+        quote: "Pectinate line Also called dentate line. Formed where endoderm (hindgut) meets ectoderm."
+      - kind: table
+        title: "فوق وتحت الخط"
+        columns: ["", "Above", "Below"]
+        rows:
+          - ["Nerves", "Visceral (inferior hypogastric plexus)", "Somatic (pudendal, S2-S4)"]
+          - ["Artery", "Superior rectal (IMA)", "Inferior rectal (internal pudendal)"]
+          - ["Vein", "Superior rectal → IMV → splenic → portal", "Inferior rectal → internal pudendal → internal iliac → IVC"]
+          - ["Lymph", "Internal iliac nodes", "Superficial inguinal nodes"]
+          - ["Disease", "Internal hemorrhoids, adenocarcinoma", "External hemorrhoids, fissures, squamous cell carcinoma"]
+        hide: [[0, 2], [2, 1], [3, 1], [3, 2], [4, 2]]
+        page: 373
+        quote: "Inferior rectal vein →internal pudendal vein →internal iliac vein →common iliac vein →IVC"
+      - kind: reveal
+        prompt: "ليه الـ internal hemorrhoid ما بيوجعش، والـ external لما يعمل thrombosis بيوجع جداً؟"
+        answer: "الـ ==internal== فوق الخط، أعصابه visceral (زي الأمعاء: بتحس بالشد بس مش بالوجع الحاد). الـ ==external== تحت الخط، أعصابه somatic من الـ inferior rectal branch بتاع الـ pudendal، زي الجلد بالظبط، فبيوجع لما يتجلط."
+        page: 373
+        quote: "Receive visceral innervation and are therefore not painful. External hemorrhoids—receive somatic innervation (inferior rectal branch of pudendal nerve) and are therefore painful if thrombosed."
+      - kind: explain
+        title: "الـ anal fissure"
+        text: |-
+          شرخ في الـ anoderm ==تحت الخط==، فبيوجع وقت الدخول للحمام، ودم على الـ toilet paper.
+
+          مكانه في الـ **posterior midline** لأن المنطقة دي دمها ضعيف (poorly perfused)، فبتلم ببطء. مرتبط بأكل قليل الألياف والإمساك.
+        page: 373
+        quote: "Anal fissure—tear in anoderm below pectinate line. Pain while pooping; blood on toilet paper. Located in the posterior midline because this area is poorly perfused. Associated with low-fiber diets and constipation."
+      - kind: check
+        question: "Squamous cell carcinoma below the pectinate line spreads first to which nodes?"
+        options:
+          - "Superficial inguinal"
+          - "Internal iliac"
+          - "Inferior mesenteric"
+          - "Para-aortic"
+        answer: 0
+        why:
+          - "صح: تحت الخط جلد، فاللمف بيروح للـ superficial inguinal زي جلد الفخذ."
+          - "الـ internal iliac لفوق الخط (adenocarcinoma)."
+          - "الـ inferior mesenteric للـ colon."
+          - "الـ para-aortic للـ gonads."
+        page: 373
+        quote: "Drain to superﬁcial inguinal LN"
+      - kind: figure
+        title: "الـ lobule والزونات"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="gi2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="20" y="50" width="90" height="100" rx="8"/>
+            <rect class="fg-box" x="110" y="50" width="90" height="100" rx="8"/>
+            <rect class="fg-bad" x="200" y="50" width="90" height="100" rx="8"/>
+            <text x="65" y="40" class="t-sm t-b" text-anchor="middle">Zone I</text>
+            <text x="155" y="40" class="t-sm t-b" text-anchor="middle">Zone II</text>
+            <text x="245" y="40" class="t-sm t-b" text-anchor="middle">Zone III</text>
+            <text x="65" y="80" class="t-sm" text-anchor="middle">periportal</text>
+            <text x="65" y="100" class="t-sm" text-anchor="middle">best O2</text>
+            <text x="65" y="120" class="t-sm" text-anchor="middle">viral hepatitis</text>
+            <text x="65" y="138" class="t-sm" text-anchor="middle">cocaine</text>
+            <text x="155" y="100" class="t-sm" text-anchor="middle">yellow fever</text>
+            <text x="245" y="80" class="t-sm" text-anchor="middle">pericentral</text>
+            <text x="245" y="100" class="t-sm" text-anchor="middle">least O2, P-450</text>
+            <text x="245" y="120" class="t-sm" text-anchor="middle">ischemia</text>
+            <text x="245" y="138" class="t-sm" text-anchor="middle">acetaminophen</text>
+            <text x="20" y="175" class="t-sm t-acc">portal triad</text>
+            <line class="fg-arrow-acc" x1="110" y1="170" x2="280" y2="170" marker-end="url(#gi2a)"/>
+            <text x="354" y="175" class="t-sm t-acc" text-anchor="end">central vein</text>
+          </svg>
+        caption: "الدم داخل من الـ portal triad على الأطراف وماشي ناحية الـ central vein. أول زون بتاخد أحسن أكسجين، وآخر زون بتاخد الفضلة، بس هي اللي فيها الـ P-450."
+        alt: "Three bands from portal triad to central vein: zone I periportal, best oxygen, viral hepatitis and cocaine; zone II yellow fever; zone III pericentral, least oxygen, P-450, ischemia and acetaminophen."
+        page: 374
+        quote: "Zone I—periportal zone: Affected 1st by viral hepatitis Best oxygenated, most resistant to circulatory compromise Ingested toxins (eg, cocaine)"
+      - kind: explain
+        title: "مين ساكن في الكبد"
+        text: |-
+          - الـ lobule شكله **hexagon** حوالين **central vein**، والـ portal triads على الأركان (portal vein و hepatic artery و bile ducts ومعاهم lymphatics).
+          - الـ hepatocyte وشّه الـ **apical** ناحية الـ bile canaliculi، والـ **basolateral** ناحية الـ sinusoids.
+          - ==Kupffer cells==: macrophages في الـ sinusoids، بتشيل البكتيريا وكرات الدم الحمرا القديمة.
+          - ==Stellate (Ito) cells== في الـ space of Disse: وهي هادية بتخزن **vitamin A**، ولما تتنشط بتعمل extracellular matrix ← **fibrosis**.
+          - الدم: ~80% من الـ portal vein و ~20% من الـ hepatic artery.
+        page: 374
+        quote: "Kupffer cells (specialized macrophages) located in sinusoids clear bacteria and damaged or senescent RBCs."
+      - kind: sort
+        prompt: "وزّع كل حاجة على الزون بتاعتها"
+        bins: ["Zone I", "Zone II", "Zone III"]
+        cards:
+          - { text: "Viral hepatitis (first)", bin: 0 }
+          - { text: "Cocaine", bin: 0 }
+          - { text: "Yellow fever", bin: 1 }
+          - { text: "Acetaminophen", bin: 2 }
+          - { text: "Congestive hepatopathy", bin: 2 }
+          - { text: "Alcohol-associated hepatitis", bin: 2 }
+          - { text: "Highest cytochrome P-450", bin: 2 }
+        why: "Zone III آخر محطة للدم (أقل أكسجين، فالـ ischemia بتضربها الأول) وفيها أعلى P-450 (فالسموم اللي بتتحول لحاجة سامة زي الـ acetaminophen والـ ethanol بتضربها). Zone I أول ما الدم يدخل، فاللي جاي مع الدم (فيروس، cocaine) بيقابلها الأول."
+        page: 374
+        quote: "Most sensitive to metabolic toxins (eg, ethanol, CCl4, rifampin, acetaminophen) Site of alcohol-associated hepatitis"
+      - kind: explain
+        title: "الصفرا والبنكرياس بيتقابلوا في الـ ampulla"
+        text: |-
+          الـ common bile duct والـ main pancreatic duct بيتقابلوا في الـ **ampulla of Vater**.
+          - **Double duct sign**: حصوة واقفة في الـ ampulla بتسد الاتنين ← ==cholangitis و pancreatitis== مع بعض.
+          - **Courvoisier sign**: ورم في الـ **head of pancreas** (غالباً ductal adenocarcinoma) بيسد الـ CBD ببطء ← gallbladder كبيرة ==nontender== مع jaundice.
+        page: 375
+        quote: "Tumors that arise in head of pancreas (usually ductal adenocarcinoma) can cause obstruction of common bile duct → enlarged nontender gallbladder with jaundice (Courvoisier sign)."
+      - kind: check
+        question: "Painless jaundice, weight loss and a palpable nontender gallbladder. Where is the lesion?"
+        options:
+          - "Head of the pancreas"
+          - "Tail of the pancreas"
+          - "Cystic duct"
+          - "Common hepatic duct above the cystic duct"
+        answer: 0
+        why:
+          - "صح: ده Courvoisier sign، والسبب ورم في رأس البنكرياس بيسد الـ CBD."
+          - "الذيل بعيد عن الـ CBD."
+          - "حصوة في الـ cystic duct بتعمل cholecystitis بوجع ومن غير jaundice."
+          - "سد فوق الـ cystic duct مش هيكبّر المرارة."
+        page: 375
+        quote: "enlarged nontender gallbladder with jaundice (Courvoisier sign)"
+      - kind: try
+        items: [gi.L02.044, gi.L02.045, gi.L02.051, gi.L02.053, gi.L02.056]
+    recap:
+      - "Pectinate line = endoderm/ectoderm: فوقه visceral و portal و internal iliac، تحته somatic و IVC و superficial inguinal."
+      - "Internal hemorrhoids مش بتوجع، external بتوجع لو اتجلطت؛ fissure في الـ posterior midline."
+      - "Zone I: viral و cocaine؛ II: yellow fever؛ III: ischemia و P-450 (acetaminophen، alcohol)."
+      - "Stellate cells: vitamin A و fibrosis. Courvoisier = رأس البنكرياس."
+    practice: [gi.L02.043, gi.L02.044, gi.L02.045, gi.L02.046, gi.L02.047, gi.L02.048, gi.L02.049, gi.L02.050, gi.L02.051, gi.L02.052, gi.L02.053, gi.L02.054, gi.L02.055, gi.L02.056, gi.L02.057]
+  - id: gi.L02.lesson5
+    title: "الفتق: من فين طالع؟"
+    hook: "الـ inferior epigastric vessels هي البوصلة: MDs don't lie"
+    minutes: 10
+    pages: [375, 377]
+    topics: [femoral-region, inguinal-canal, hernias, spigelian-hernia, diaphragmatic-hernia, indirect-inguinal-hernia, direct-inguinal-hernia, femoral-hernia]
+    goals:
+      - "ترتّب الـ femoral region من برّه لجوّه"
+      - "تعرف طبقات الـ spermatic cord جاية منين"
+      - "تفرّق بين indirect و direct و femoral hernia"
+      - "تعرف الـ diaphragmatic hernia في الأطفال والكبار"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ femoral region: NAVeL"
+        text: |-
+          من برّه لجوّه: ==nerve ثم artery ثم vein ثم lymphatics==. الكتاب بيقولك: تمشي من برّه لجوّه عشان تلاقي سرتك (navel).
+
+          - **Femoral triangle**: فيه الـ nerve والـ artery والـ vein.
+          - **Femoral sheath**: أنبوبة fascia لحد 3-4 سم تحت الـ inguinal ligament، فيها الـ vein والـ artery والـ canal (deep inguinal lymph nodes)، بس ==من غير الـ femoral nerve==.
+        page: 375
+        quote: "Femoral sheath Fascial tube 3-4 cm below inguinal ligament. Contains femoral vein, artery, and canal (deep inguinal lymph nodes) but not femoral nerve."
+      - kind: match
+        prompt: "كل طبقة في الـ spermatic cord جاية من أنهي طبقة في جدار البطن؟"
+        pairs:
+          - ["External spermatic fascia", "External oblique"]
+          - ["Cremasteric muscle and fascia", "Internal oblique"]
+          - ["Internal spermatic fascia", "Transversalis fascia"]
+        why: "الخصية وهي نازلة بتزق كل طبقة من جدار البطن قدّامها كأنها شراب، فكل طبقة في الـ cord نسخة من طبقة في الجدار. الكتاب بيرتبها ICE من تحت لفوق: Internal و Cremasteric و External."
+        page: 376
+        quote: "External spermatic fascia (external oblique) Cremasteric muscle and fascia (internal oblique)"
+      - kind: explain
+        title: "الفتق عموماً"
+        text: |-
+          الفتق = الـ peritoneum طالع من فتحة، غالباً في مكان ضعيف.
+          - **Incarceration**: مش راجع جوّه.
+          - **Strangulation**: الدم اتقطع ← ==ischemia و necrosis==. الفتق المعقد بيبان بـ tenderness و erythema و fever.
+
+          **Spigelian hernia**: من بين الـ rectus abdominis والـ semilunar line، وأغلبها تحت لأن مفيش **posterior rectus sheath** هناك. التشخيص ultrasound و CT.
+        page: 376
+        quote: "Contents may be at risk for incarceration (not reducible back into abdomen/pelvis) and strangulation (ischemia and necrosis). Complicated hernias can present with tenderness, erythema, fever."
+      - kind: figure
+        title: "البوصلة: الـ inferior epigastric vessels"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="20" y1="140" x2="340" y2="140" stroke-width="3"/>
+            <text x="200" y="158" class="t-sm t-mut">inguinal ligament</text>
+            <line class="fg-arrow-bad" x1="180" y1="20" x2="180" y2="135" stroke-width="3"/>
+            <text x="186" y="34" class="t-sm t-bad">inferior epigastric vessels</text>
+            <rect class="fg-acc" x="90" y="70" width="80" height="60" rx="8"/>
+            <text x="130" y="96" class="t-sm t-b" text-anchor="middle">Hesselbach</text>
+            <text x="130" y="114" class="t-sm" text-anchor="middle">direct</text>
+            <circle class="fg-good" cx="240" cy="105" r="24"/>
+            <text x="240" y="101" class="t-sm t-b" text-anchor="middle">deep ring</text>
+            <text x="240" y="117" class="t-sm" text-anchor="middle">indirect</text>
+            <rect class="fg-box" x="70" y="40" width="20" height="100"/>
+            <text x="30" y="34" class="t-sm t-mut">rectus</text>
+            <circle class="fg-bad" cx="120" cy="175" r="16"/>
+            <text x="145" y="185" class="t-sm t-b">femoral (below ligament)</text>
+            <text x="20" y="196" class="t-sm t-mut">medial</text>
+            <text x="310" y="196" class="t-sm t-mut">lateral</text>
+          </svg>
+        caption: "الـ direct جوّه (medial) الـ inferior epigastric vessels في الـ Hesselbach triangle، والـ indirect برّاهم (lateral) من الـ deep ring، والـ femoral تحت الـ inguinal ligament خالص."
+        alt: "Diagram of the inner groin: a vertical line for the inferior epigastric vessels; medial to it the Hesselbach triangle (direct hernia) next to the rectus; lateral to it the deep ring (indirect hernia); below the inguinal ligament the femoral hernia."
+        page: 377
+        quote: "MDs don’t lie: Medial to inferior epigastric vessels = Direct hernia. Lateral to inferior epigastric vessels = indirect hernia."
+      - kind: explain
+        title: "Indirect: الطريق اللي الخصية مشيته"
+        text: |-
+          بيدخل من الـ **deep ring** (lateral للـ inferior epigastric vessels)، يمشي في الـ canal، ويطلع من الـ **superficial ring** للـ scrotum.
+
+          السبب: الـ ==processus vaginalis ما اتقفلش== (وممكن يعمل hydrocele). فبيمشي في نفس طريق نزول الخصية، ومتغطي بـ **التلات طبقات** بتوع الـ spermatic fascia. أكتر بكتير في الذكور، وممكن يبان في الرضيع أو يتكشف في الكبر.
+        page: 377
+        quote: "Caused by failure of processus vaginalis to close (can form hydrocele). May be noticed in infants or discovered in adulthood. Much more common in males B ."
+      - kind: explain
+        title: "Direct: الحيطة ضعفت"
+        text: |-
+          بيزق ==على طول من الـ Hesselbach triangle==: medial للـ inferior epigastric vessels و lateral للـ rectus abdominis.
+
+          بيطلع من الـ **superficial ring بس**، ومتغطي بالـ **external spermatic fascia** بس. غالباً في راجل كبير، لأن الـ **transversalis fascia** ضعفت مع السن.
+        page: 377
+        quote: "Goes through external (superficial) inguinal ring only. Covered by external spermatic fascia. Usually occurs in older males due to acquired weakness of transversalis fascia."
+      - kind: check
+        question: "At surgery, a hernia sac emerges lateral to the inferior epigastric vessels inside the spermatic cord. Which statement is true?"
+        options:
+          - "It is covered by all three layers of spermatic fascia"
+          - "It is caused by acquired weakness of the transversalis fascia"
+          - "It passes through the external ring only"
+          - "It lies below the inguinal ligament"
+        answer: 0
+        why:
+          - "صح: lateral يبقى indirect، ماشي جوّه الـ cord فمتغطي بالتلات طبقات."
+          - "ضعف الـ transversalis fascia ده الـ direct."
+          - "الـ external ring بس ده الـ direct."
+          - "تحت الـ inguinal ligament ده الـ femoral."
+        page: 377
+        quote: "Follows the pathway of testicular descent. Covered by all 3 layers of spermatic fascia."
+      - kind: explain
+        title: "Femoral: الست الكبيرة والخطر"
+        text: |-
+          بيطلع ==تحت الـ inguinal ligament== من الـ femoral canal، تحت وبرّه الـ pubic tubercle.
+
+          أكتر في **الستات**، بس خلي بالك: الـ inguinal hernias لسه أشهر نوع عموماً حتى في الستات. والـ femoral ==أكتر عرضة للـ incarceration والـ strangulation== لأن الـ canal ضيق.
+        page: 377
+        quote: "More common in females, but overall inguinal hernias are the most common. More likely to present with incarceration or strangulation (vs inguinal hernia)."
+      - kind: explain
+        title: "الـ diaphragmatic hernia"
+        text: |-
+          حاجات من البطن بتطلع الصدر، وممكن تسمع **bowel sounds في الصدر**.
+          - **الأطفال**: عيب خلقي في الـ ==pleuroperitoneal membrane==، غالباً **شمال** لأن الكبد بيحمي اليمين.
+          - **الكبار**: ارتخاء في الـ phrenoesophageal membrane ← **hiatal hernia**:
+            - **Sliding** (الأشهر): الـ GE junction بيطلع لفوق والـ cardia بتتزحلق، "hourglass stomach"، ومع **GERD**.
+            - **Paraesophageal**: الـ GE junction مكانه، والـ **fundus** هو اللي بيطلع.
+        page: 377
+        quote: "Infants—congenital defect of pleuroperitoneal membrane → left-sided herniation (right hemidiaphragm is relatively protected by liver)"
+      - kind: sort
+        prompt: "وزّع كل وصف على نوع الفتق"
+        bins: ["Indirect inguinal", "Direct inguinal", "Femoral"]
+        cards:
+          - { text: "Patent processus vaginalis", bin: 0 }
+          - { text: "Lateral to inferior epigastric vessels", bin: 0 }
+          - { text: "Infant boy", bin: 0 }
+          - { text: "Hesselbach triangle", bin: 1 }
+          - { text: "Weak transversalis fascia in an older man", bin: 1 }
+          - { text: "Below the inguinal ligament", bin: 2 }
+          - { text: "Most likely to strangulate", bin: 2 }
+        why: "الـ inferior epigastric vessels والـ inguinal ligament هما المرجعين: فوق الرباط وبرّه الأوعية indirect، فوق الرباط وجوّه الأوعية direct، تحت الرباط femoral."
+        page: 377
+        quote: "Femoral hernia Protrudes below inguinal ligament through femoral canal below and lateral to pubic tubercle."
+      - kind: try
+        items: [gi.L02.058, gi.L02.061, gi.L02.071, gi.L02.077, gi.L02.079]
+    recap:
+      - "NAVeL من برّه لجوّه؛ الـ femoral sheath من غير الـ nerve."
+      - "External oblique ← external spermatic؛ internal oblique ← cremaster؛ transversalis ← internal spermatic."
+      - "MDs don't lie: medial = direct (Hesselbach، كبير السن)، lateral = indirect (processus vaginalis، التلات طبقات)."
+      - "Femoral تحت الرباط، في الستات، وأكتر strangulation."
+      - "CDH شمال (pleuroperitoneal)؛ sliding hiatal الأشهر ومع GERD."
+    practice: [gi.L02.058, gi.L02.059, gi.L02.060, gi.L02.061, gi.L02.062, gi.L02.063, gi.L02.064, gi.L02.065, gi.L02.066, gi.L02.067, gi.L02.068, gi.L02.069, gi.L02.070, gi.L02.071, gi.L02.072, gi.L02.073, gi.L02.074, gi.L02.075, gi.L02.076, gi.L02.077, gi.L02.078, gi.L02.079, gi.L02.080, gi.L02.081]

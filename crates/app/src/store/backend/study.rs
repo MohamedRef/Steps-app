@@ -76,6 +76,10 @@ impl StudyStore for ReviewBackend {
         srs::new_left_today(&self.settings, self.scheduler.started_today(self.states.values(), now_ms))
     }
 
+    fn pages_read(&self) -> Option<&steps_core::pages::PagesRead> {
+        self.pages.gate()
+    }
+
     fn intervals(&self, item_id: &str, now_ms: i64) -> Option<[f32; 4]> {
         let state = self.states.get(item_id).cloned().unwrap_or_else(|| CardState::new(item_id));
         Some(self.scheduler.intervals(&state, now_ms))

@@ -106,12 +106,12 @@ fn main() {
         glossary_parts.push_str(&format!("    include_str!({:?}),\n", p.display().to_string()));
     }
     glossary_parts.push_str("];\n");
-    std::fs::write(
-        out.join("embedded.rs"),
-        format!(
-            "pub const PACK: &[u8] = include_bytes!({:?});\n{glossary_parts}",
-            pack.display().to_string()
-        ),
-    )
-    .unwrap();
+    // The web app fetches the pack as its own file (scripts/web/build.sh copies
+    // it next to the wasm), so a content change doesn't re-send the code.
+    let pack_const = if std::env::var("CARGO_CFG_TARGET_ARCH").as_deref() == Ok("wasm32") {
+        "pub const PACK: &[u8] = &[];\n".to_string()
+    } else {
+        format!("pub const PACK: &[u8] = include_bytes!({:?});\n", pack.display().to_string())
+    };
+    std::fs::write(out.join("embedded.rs"), format!("{pack_const}{glossary_parts}")).unwrap();
 }
