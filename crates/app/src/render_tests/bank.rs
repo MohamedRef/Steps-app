@@ -89,13 +89,48 @@ fn open_lecture(app: &mut App) -> Option<String> {
     app.run(|| crate::lecture::shown(Screen::Bank))
 }
 
+/// Questions in a test paper. A paper of the whole bank (every MCQ, over
+/// 2000 once the book was written) made each of these tests take minutes:
+/// every answer redraws a navigator with a button per question.
+const PAPER: usize = 10;
+
+/// Questions in the paper `paper` starts.
+fn paper_len() -> usize {
+    mcqs().min(PAPER)
+}
+
 /// The bank set to 10 questions and `mode`, started.
 fn paper(mode: &str, start: &str) -> App {
     let mut app = App::open(Screen::Bank);
     app.tap(mode);
-    app.tap(tx::ALL);
+    app.tap(&PAPER.to_string());
     app.tap(start);
     app
+}
+
+/// The bank narrowed to the first topic with MCQs, every question of it in
+/// one paper in `mode`, started, and how many that is: for a test that
+/// needs a whole scope answered.
+fn topic_paper(mode: &str, start: &str) -> (App, usize) {
+    let id = lecture_with_mcq_topics(1).expect("a lecture has MCQs filed under a topic");
+    let topic = mcq_topics(&id).remove(0);
+    let lecture = &crate::content::Library::get().lectures[&id];
+    let n = lecture
+        .items
+        .iter()
+        .filter(|i| i.topic.as_deref() == Some(&topic.id) && i.body.kind() == "mcq")
+        .count();
+    PRACTISE.with(|p| *p.borrow_mut() = id.clone());
+    let mut app = App::with_part(Screen::Bank, practise_lecture_button);
+    app.tap("practise the lecture");
+    app.tap(tx::CUSTOMISE);
+    app.tap(&topic.title);
+    app.assert_has(&tx::questions(n));
+    app.tap(tx::CUSTOMISE_CLOSE);
+    app.tap(mode);
+    app.tap(tx::ALL);
+    app.tap(start);
+    (app, n)
 }
 
 #[test]
@@ -123,7 +158,7 @@ fn the_setup_offers_the_three_modes_and_counts_the_pool() {
 
 #[test]
 fn a_tutor_paper_checks_each_answer_and_sends_it_to_review() {
-    let n = mcqs();
+    let n = paper_len();
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
     app.assert_has(&format!("1 / {n}"));
     app.assert_has(tx::PICK_FIRST);
@@ -181,7 +216,7 @@ fn a_tutor_paper_checks_each_answer_and_sends_it_to_review() {
 
 #[test]
 fn the_result_opens_each_question_and_goes_back_to_the_bank() {
-    let n = mcqs();
+    let n = paper_len();
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
     for k in 0..n {
         let (right, _) = options(&shown(&app));
@@ -206,7 +241,7 @@ fn the_result_opens_each_question_and_goes_back_to_the_bank() {
 
 #[test]
 fn a_timed_paper_flags_moves_and_asks_before_it_goes_in() {
-    let n = mcqs();
+    let n = paper_len();
     assert!(n >= 2, "the timed paper needs two questions");
     let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);
     app.assert_has(tx::MODE_TIMED_NAME);
@@ -261,7 +296,7 @@ fn a_timed_paper_flags_moves_and_asks_before_it_goes_in() {
 
 #[test]
 fn a_whole_timed_paper_answered_goes_in_without_asking() {
-    let n = mcqs();
+    let n = paper_len();
     let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);
     for k in 0..n {
         let (right, _) = options(&shown(&app));
@@ -278,7 +313,7 @@ fn a_whole_timed_paper_answered_goes_in_without_asking() {
 
 #[test]
 fn a_timed_paper_left_waits_with_its_clock_and_can_be_resumed_or_submitted() {
-    let n = mcqs();
+    let n = paper_len();
     let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);
     let (right, _) = options(&shown(&app));
     app.answer(&right);
@@ -386,8 +421,7 @@ fn the_scope_narrows_to_a_topic_and_widens_back() {
 
 #[test]
 fn a_scope_answered_all_right_says_so_and_widens() {
-    let n = mcqs();
-    let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
+    let (mut app, n) = topic_paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
     for k in 0..n {
         let (right, _) = options(&shown(&app));
         app.answer(&right).tap(tx::CHECK);
@@ -519,7 +553,7 @@ fn a_lecture_chip_on_an_answered_question_opens_the_lecture_page() {
 
 #[test]
 fn a_finished_paper_row_opens_its_lecture() {
-    let n = mcqs();
+    let n = paper_len();
     let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);
     for k in 0..n {
         let (right, _) = options(&shown(&app));
@@ -634,7 +668,7 @@ fn the_clock_running_out_hands_the_paper_in() {
 
 #[test]
 fn a_full_paper_with_a_flag_asks_and_goes_back_to_it() {
-    let n = mcqs();
+    let n = paper_len();
     let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);
     for k in 0..n {
         let (right, _) = options(&shown(&app));
@@ -662,8 +696,7 @@ fn a_full_paper_with_a_flag_asks_and_goes_back_to_it() {
 
 #[test]
 fn answers_from_before_a_launch_fill_the_last_results() {
-    let n = mcqs();
-    let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
+    let (mut app, n) = topic_paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
     for k in 0..n {
         let (right, _) = options(&shown(&app));
         app.answer(&right).tap(tx::CHECK);
@@ -757,7 +790,7 @@ fn two_topics_are_named_by_count_and_a_topic_with_a_tag_empties_to_topics() {
 
 #[test]
 fn a_result_review_shows_flagged_marks() {
-    let n = mcqs();
+    let n = paper_len();
     let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);
     app.tap(tx::FLAG);
     app.tap(&format!("{} {n}", tx::QUESTION));
@@ -770,7 +803,7 @@ fn a_result_review_shows_flagged_marks() {
 
 #[test]
 fn a_new_paper_from_the_result_goes_back_to_the_setup() {
-    let n = mcqs();
+    let n = paper_len();
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
     for k in 0..n {
         let (right, _) = options(&shown(&app));
@@ -785,7 +818,7 @@ fn a_new_paper_from_the_result_goes_back_to_the_setup() {
 
 #[test]
 fn a_weak_topic_after_a_paper_opens_the_bank_on_it() {
-    let n = mcqs();
+    let n = paper_len();
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
     for k in 0..n {
         let (_, wrong) = options(&shown(&app));
