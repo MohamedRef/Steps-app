@@ -1,0 +1,522 @@
+schema: steps.lesson/v1
+lecture: mic.L06
+lessons:
+  - id: mic.L06.lesson1
+    title: "Prions، الـ microbiota، والأكل والإسهال"
+    hook: "قول لي أكلت إيه وإسهالك شكله إيه، أقولك الميكروب"
+    minutes: 9
+    pages: [174, 175]
+    topics: [prions, normal-microbiota, foodborne-illness, diarrhea]
+    goals:
+      - "تفهم الـ prion وليه الـ autoclave ما بيقتلوش"
+      - "تعرف الـ normal microbiota في كل مكان"
+      - "تربط الأكل بالميكروب، وتفرّق الإسهال الدموي من المائي"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Prion: بروتين بيعدي"
+        text: |-
+          البروتين الطبيعي PrPc أغلبه ==α-helical==، ولما يتحوّل لـ PrPsc (==β-pleated==) بيبقى مقاوم للـ proteases، وبيقلب الطبيعي زيه. والنتيجة spongiform encephalopathy: dementia، ataxia، startle myoclonus، وموت.
+
+          وبيقاوم الـ sterilization العادي، حتى الـ ==standard autoclaving==.
+        page: 174
+        quote: "Resistant to standard sterilizing procedures, including standard autoclaving."
+      - kind: explain
+        title: "الأمراض"
+        text: |-
+          - **CJD**: dementia سريعة جداً، غالباً sporadic. و iatrogenic من أنسجة CNS، و ==variant CJD== من أكل حيوانات فيها BSE.
+          - **BSE**: mad cow disease.
+          - **Kuru**: في قبائل كانت بتاكل البشر.
+        page: 174
+        quote: "Kuru—acquired prion disease noted in tribal populations practicing human cannibalism."
+      - kind: table
+        title: "الـ normal microbiota"
+        columns: ["", "Dominant"]
+        rows:
+          - ["Skin", "S epidermidis"]
+          - ["Nose", "S epidermidis; S aureus colonizes"]
+          - ["Oropharynx", "Viridans streptococci"]
+          - ["Dental plaque", "S mutans"]
+          - ["Colon", "B fragilis > E coli"]
+          - ["Vagina", "Lactobacillus"]
+        hide: [[2, 1], [3, 1], [4, 1], [5, 1]]
+        page: 174
+        quote: "Vagina Lactobacillus; colonized by E coli and group B strep"
+      - kind: match
+        prompt: "وصّل الأكل بالميكروب"
+        pairs:
+          - ["Reheated rice", "B cereus"]
+          - ["Raw honey", "C botulinum spores"]
+          - ["Reheated meat", "C perfringens"]
+          - ["Deli meats, soft cheeses", "L monocytogenes"]
+          - ["Mayonnaise, custard", "S aureus"]
+        why: "Be serious مع الرز، العسل للرضيع، اللحمة المسخّنة للـ perfringens، الجبنة الطرية للـ Listeria، والمايونيز للـ S aureus."
+        page: 174
+        quote: "B cereus Reheated rice. “Food poisoning from reheated rice? Be serious!” (B cereus)"
+      - kind: aside
+        tone: exam
+        text: "الـ S aureus والـ B cereus ==بيبدأوا بسرعة وبيخلصوا بسرعة== لأنهم exotoxin جاهز. والـ V vulnificus أكتر حاجة بيعملها wound infection من مية أو shellfish ملوث."
+        page: 174
+        quote: "S aureus and B cereus food poisoning starts quickly and ends quickly (exotoxin-mediated)."
+      - kind: explain
+        title: "إسهال بدم"
+        text: |-
+          - **Campylobacter**: comma أو S-shaped، بيكبر في 42°C.
+          - **E histolytica**: amebic dysentery و liver abscess.
+          - **EHEC (O157:H7)**: Shiga toxin و ==HUS==.
+          - **EIEC**: بيغزو الـ colonic mucosa.
+          - **Salmonella** (nontyphoidal): flagellar motility، فراخ وبيض.
+          - **Shigella**: ==very low ID50==، Shiga toxin، الإنسان بس.
+          - **Yersinia**: حضانات و ==pseudoappendicitis==.
+        page: 175
+        quote: "Shigella Lactose ⊝; very low ID50; produces Shiga toxin; human reservoir only; bacillary dysentery"
+      - kind: explain
+        title: "إسهال مية"
+        text: |-
+          - **C difficile**: pseudomembranous colitis بعد ==antibiotics أو PPIs==.
+          - **C perfringens**: وكمان gas gangrene.
+          - **ETEC**: ==travelers' diarrhea==، LT و ST toxins.
+          - **Giardia و Cryptosporidium**.
+          - **V cholerae**: rice-water.
+          - **Viruses**: norovirus (الأشهر في الدول المتقدمة)، rotavirus، adenovirus.
+        page: 175
+        quote: "C difficile Pseudomembranous colitis; associated with antibiotics and PPIs; occasionally bloody diarrhea"
+      - kind: check
+        question: "A traveler to Mexico has watery diarrhea on day 3 of the trip. What is the most likely cause?"
+        options:
+          - "Enterotoxigenic E coli"
+          - "Shigella"
+          - "Enterohemorrhagic E coli"
+          - "Yersinia enterocolitica"
+        answer: 0
+        why:
+          - "صح: الـ ETEC هو travelers' diarrhea، watery بالـ LT و ST."
+          - "الـ Shigella بتعمل dysentery بدم."
+          - "الـ EHEC إسهال بدم و HUS."
+          - "الـ Yersinia في الحضانات و pseudoappendicitis."
+        page: 175
+        quote: "Enterotoxigenic E coli Travelers’ diarrhea"
+      - kind: try
+        items: [mic.L06.001, mic.L06.005, mic.L06.007, mic.L06.011, mic.L06.012]
+    recap:
+      - "Prion: α-helix ← β-sheet، مقاوم للـ autoclave؛ CJD و variant CJD و kuru."
+      - "Colon: B fragilis > E coli. Vagina: Lactobacillus. Plaque: S mutans."
+      - "رز = B cereus، عسل = botulinum، deli = Listeria، مايونيز = S aureus."
+      - "بدم: Campylobacter (42°C)، EHEC (HUS)، Shigella، Yersinia. مية: C diff، ETEC، cholera، noro."
+    practice: [mic.L06.001, mic.L06.002, mic.L06.003, mic.L06.004, mic.L06.005, mic.L06.006, mic.L06.007, mic.L06.008, mic.L06.009, mic.L06.010, mic.L06.011, mic.L06.012, mic.L06.013, mic.L06.014, mic.L06.015]
+  - id: mic.L06.lesson2
+    title: "Pneumonia و meningitis والعضم"
+    hook: "السن بيحدد الميكروب، والـ CSF بيقولك بكتيريا ولا فيروس"
+    minutes: 10
+    pages: [175, 176]
+    topics: [pneumonia, meningitis, csf-findings, brain-abscess, osteomyelitis]
+    goals:
+      - "تعرف أسباب الـ pneumonia حسب السن والمجموعة"
+      - "تعرف أسباب الـ meningitis والعلاج الـ empiric وتقرا الـ CSF"
+      - "تعرف الـ brain abscess والـ osteomyelitis حسب الـ risk factor"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Pneumonia حسب السن"
+        text: |-
+          - الرضيع (<4 أسابيع): ==group B strep و E coli==.
+          - الأطفال: ==Runts May Cough Chunky Sputum== (RSV، Mycoplasma، C trachomatis، C pneumoniae، S pneumoniae).
+          - 18-40: Mycoplasma و C pneumoniae و S pneumoniae.
+          - فوق 40: S pneumoniae أولاً، و H influenzae، و anaerobes، وفوق 65 gram ⊝ rods.
+        page: 175
+        quote: "Runts May Cough Chunky Sputum"
+      - kind: table
+        title: "مجموعات خاصة"
+        columns: ["", "Think of"]
+        rows:
+          - ["Alcohol overuse", "Klebsiella, aspiration anaerobes"]
+          - ["Cystic fibrosis", "Pseudomonas, S aureus, B cepacia"]
+          - ["Postviral", "S pneumoniae, S aureus, H influenzae"]
+          - ["COPD", "S pneumoniae, H influenzae, M catarrhalis"]
+          - ["HIV", "P jirovecii"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1]]
+        page: 175
+        quote: "COPD S pneumoniae, H influenzae, M catarrhalis, Pseudomonas"
+      - kind: explain
+        title: "Meningitis حسب السن"
+        text: |-
+          - حديث الولادة (0-6 شهور): ==group B strep، E coli، Listeria==.
+          - 6 شهور لـ 60 سنة: S pneumoniae و N meningitidis (وفي الأطفال Hib، وفي الكبار enteroviruses و HSV).
+          - فوق 60: S pneumoniae و N meningitidis و Hib و GBS و ==Listeria== تاني.
+        page: 176
+        quote: "Group B Streptococcus HSV Group B Streptococcus Enteroviruses Listeria"
+      - kind: explain
+        title: "العلاج الـ empiric"
+        text: |-
+          ==ceftriaxone + vancomycin==.
+          - شاكك في Listeria (رضيع أو كبير في السن)؟ زوّد ==ampicillin==.
+          - شاكك في viral encephalitis؟ زوّد acyclovir.
+
+          والـ viral: enteroviruses (coxsackie)، HSV-2، HIV، West Nile، VZV. وفي الـ HIV: Cryptococcus.
+        page: 176
+        quote: "Give ceftriaxone and vancomycin empirically (add ampicillin if Listeria is suspected; add acyclovir if viral encephalitis is suspected)."
+      - kind: table
+        title: "اقرا الـ CSF"
+        columns: ["", "Cells", "Protein", "Glucose"]
+        rows:
+          - ["Bacterial", "↑ PMNs", "↑", "↓"]
+          - ["Fungal/TB", "↑ lymphocytes", "↑", "↓"]
+          - ["Viral", "↑ lymphocytes", "Normal/↑", "Normal"]
+        hide: [[0, 1], [0, 3], [1, 1], [2, 3]]
+        page: 176
+        quote: "OPENING PRESSURE CELL TYPE PROTEIN GLUCOSE Bacterial ↑ ↑ PMNs ↑ ↓"
+      - kind: check
+        question: "CSF shows lymphocytes, high protein and low glucose. Which group fits?"
+        options:
+          - "Fungal or TB"
+          - "Bacterial"
+          - "Viral"
+          - "Normal"
+        answer: 0
+        why:
+          - "صح: lymphocytes مع glucose واطي = fungal أو TB."
+          - "البكتيريا PMNs."
+          - "الفيروس glucose طبيعي."
+          - "الـ cells والـ protein عاليين، مش طبيعي."
+        page: 176
+        quote: "Fungal/TB ↑ ↑ lymphocytes ↑ ↓"
+      - kind: explain
+        title: "Brain abscess"
+        text: |-
+          أشهر ميكروبات: ==viridans strep و S aureus==، و oral anaerobes بعد خلع سنة.
+
+          - abscesses كتير ← bacteremia.
+          - واحد ← من حاجة جنبه: otitis أو mastoiditis ← ==temporal lobe و cerebellum==؛ sinusitis أو سنان ← ==frontal lobe==.
+          - في الـ AIDS: Toxoplasma.
+        page: 176
+        quote: "Multiple abscesses are usually from bacteremia"
+      - kind: figure
+        title: "الـ abscess جه منين"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <ellipse class="fg-box" cx="140" cy="80" rx="120" ry="65"/>
+            <ellipse class="fg-acc" cx="60" cy="70" rx="28" ry="22"/>
+            <text x="40" y="74" class="t-sm">frontal</text>
+            <ellipse class="fg-good" cx="150" cy="105" rx="34" ry="18"/>
+            <text x="122" y="109" class="t-sm">temporal</text>
+            <ellipse class="fg-good" cx="225" cy="120" rx="26" ry="16"/>
+            <text x="204" y="124" class="t-sm">cerebellum</text>
+            <text x="270" y="40" class="t-sm t-b">source</text>
+            <text x="270" y="60" class="t-sm t-mut">sinus, teeth</text>
+            <text x="270" y="76" class="t-sm t-mut">→ frontal</text>
+            <text x="270" y="104" class="t-sm t-mut">ear, mastoid</text>
+            <text x="270" y="120" class="t-sm t-mut">→ temporal,</text>
+            <text x="270" y="136" class="t-sm t-mut">cerebellum</text>
+          </svg>
+        caption: "الـ sinus والسنان قدام ← frontal. الودن والـ mastoid تحت وجنب ← temporal و cerebellum."
+        alt: "Brain outline. Sinusitis or dental infection spreads to the frontal lobe; otitis media and mastoiditis spread to the temporal lobe and cerebellum."
+        page: 176
+        quote: "otitis media and mastoiditis →  temporal lobe and cerebellum; sinusitis or dental infection →  frontal lobe."
+      - kind: explain
+        title: "Osteomyelitis"
+        text: |-
+          - مافيش معلومات ← ==S aureus==.
+          - sickle cell ← ==Salmonella== و S aureus.
+          - prosthetic joint ← S aureus و S epidermidis.
+          - العمود الفقري ← S aureus و TB (==Pott disease==).
+          - عضة قطة أو كلب ← Pasteurella multocida.
+          - IV drugs ← S aureus، و Pseudomonas و Candida.
+
+          الـ MRI أحسن حاجة للحاد، والـ x-ray مفيد في المزمن بس. والـ biopsy أو culture لتحديد الميكروب.
+        page: 176
+        quote: "Assume if no other information is available S aureus (most common overall)"
+      - kind: try
+        items: [mic.L06.016, mic.L06.020, mic.L06.024, mic.L06.025, mic.L06.028]
+    recap:
+      - "رضيع: GBS و E coli (و Listeria في الـ meningitis). أطفال: Runts May Cough Chunky Sputum."
+      - "Meningitis: ceftriaxone + vancomycin، + ampicillin للـ Listeria، + acyclovir للـ encephalitis."
+      - "CSF: بكتيريا PMNs و glucose ↓؛ fungal/TB lymphocytes و glucose ↓؛ viral lymphocytes و glucose طبيعي."
+      - "Abscess: ودن ← temporal؛ sinus ← frontal. Osteo: sickle ← Salmonella؛ عضة ← Pasteurella؛ vertebra ← Pott."
+    practice: [mic.L06.016, mic.L06.017, mic.L06.018, mic.L06.019, mic.L06.020, mic.L06.021, mic.L06.022, mic.L06.023, mic.L06.024, mic.L06.025, mic.L06.026, mic.L06.027, mic.L06.028, mic.L06.029, mic.L06.030]
+  - id: mic.L06.lesson3
+    title: "Rashes الأطفال والـ UTI والـ vaginitis"
+    hook: "الـ rash بدأ منين؟ والإفرازات شكلها إيه؟ الإجابة في السؤالين دول"
+    minutes: 9
+    pages: [177, 178]
+    topics: [childhood-rashes, uti, vaginal-infections]
+    goals:
+      - "تفرّق الـ rashes السبعة"
+      - "تفرّق الـ cystitis من الـ pyelonephritis وتعرف ميكروبات الـ UTI"
+      - "تفرّق BV و Trichomonas و Candida"
+    status: unverified
+    steps:
+      - kind: table
+        title: "الـ rash بدأ منين؟"
+        columns: ["", "Where it starts", "Clue"]
+        rows:
+          - ["Measles", "Head, moves down", "Koplik spots, 3 C's"]
+          - ["Rubella", "Head, moves down, discrete", "Postauricular nodes"]
+          - ["Chickenpox", "Trunk, spreads out", "Lesions of different stages"]
+          - ["Roseola", "Body, after days of fever", "Febrile seizures"]
+          - ["Fifth disease", "Face", "Slapped cheek"]
+          - ["Hand-foot-mouth", "Palms, soles, mouth", "Coxsackie A vesicles"]
+        hide: [[0, 2], [1, 2], [2, 1], [4, 2]]
+        page: 177
+        quote: "Pink macules and papules begin at head and move down, remain discrete →  fine desquamating truncal rash; postauricular lymphadenopathy"
+      - kind: mnemonic
+        word: "SCARLET"
+        parts:
+          - { key: "S", text: "Sore throat" }
+          - { key: "C", text: "Circumoral pallor" }
+          - { key: "A", text: "group A strep" }
+          - { key: "R", text: "Rash, sandpaperlike, neck to trunk and limbs" }
+          - { key: "L", text: "Lymphadenopathy" }
+          - { key: "E", text: "Erythrogenic toxin" }
+          - { key: "T", text: "strawberry Tongue" }
+        hook: "Scarlet fever من الـ S pyogenes (الكتاب)"
+        page: 177
+        quote: "Sore throat, Circumoral pallor, group A strep, Rash (sandpaperlike D, from neck to trunk and extremities), Lymphadenopathy, Erythrogenic toxin, strawberry Tongue (SCARLET)"
+      - kind: explain
+        title: "Cystitis ولا pyelonephritis؟"
+        text: |-
+          - **Cystitis**: dysuria، frequency، urgency، suprapubic pain، و WBCs في البول ==من غير WBC casts==.
+          - **Pyelonephritis** (الميكروب طلع للكلية): fever، chills، flank pain، CVA tenderness، hematuria، و ==WBC casts==.
+
+          أكتر في الستات 10 مرات (urethra أقصر).
+        page: 178
+        quote: "Ascension to kidney results in pyelonephritis, which presents with fever, chills, flank pain, costovertebral angle tenderness, hematuria, and WBC casts."
+      - kind: explain
+        title: "ميكروبات الـ UTI"
+        text: |-
+          1. ==E coli== (pink على MacConkey).
+          2. ==S saprophyticus== (ستات صغيرين sexually active).
+          3. Klebsiella (mucoid capsule).
+
+          وكمان: Serratia (لون أحمر)، Enterococcus، Pseudomonas (أزرق أخضر وريحة فاكهة)، و **Proteus** (swarming، urease، ==struvite stones==).
+        page: 178
+        quote: "Staphylococcus saprophyticus 2nd leading cause of UTI, particularly in young, sexually active females."
+      - kind: check
+        question: "What does a positive urine nitrite test indicate?"
+        options:
+          - "Gram-negative bacteria reducing nitrates"
+          - "WBC activity"
+          - "Glomerular bleeding"
+          - "Gram-positive cocci"
+        answer: 0
+        why:
+          - "صح: البكتيريا الـ gram ⊝ زي الـ E coli بتحوّل الـ nitrate لـ nitrite."
+          - "ده الـ leukocyte esterase."
+          - "مش علاقة بالـ nitrite."
+          - "الـ gram ⊕ زي الـ S saprophyticus غالباً ما بيعملوش nitrite."
+        page: 178
+        quote: "⊕ Nitrite test = reduction of urinary nitrates by gram ⊝ bacterial species (eg, E coli)."
+      - kind: table
+        title: "الإفرازات"
+        columns: ["", "BV", "Trichomonas", "Candida"]
+        rows:
+          - ["Discharge", "Thin white, fishy", "Frothy yellow-green", "Thick cottage cheese"]
+          - ["Inflammation", "No", "Yes, strawberry cervix", "Yes"]
+          - ["Lab", "Clue cells, whiff ⊕", "Motile trichomonads", "Pseudohyphae"]
+          - ["pH", ">4.5", ">4.5", "Normal 4.0-4.5"]
+          - ["Treatment", "Metronidazole or clindamycin", "Metronidazole + partners", "Azoles"]
+        hide: [[0, 1], [2, 1], [2, 2], [3, 3], [4, 2]]
+        page: 178
+        quote: "Thick, white, “cottage cheese” discharge D"
+      - kind: reveal
+        prompt: "ليه الـ pH في الـ Candida طبيعي وفي الاتنين التانيين عالي؟"
+        answer: "الـ Lactobacillus هو اللي بيحافظ على الحموضة. في الـ BV والـ Trichomonas الفلورا بتتغيّر فالـ ==pH بيعلى فوق 4.5==، لكن الـ Candida بتعيش في الوسط الحمضي العادي، فالـ ==pH بيفضل 4.0-4.5==."
+        page: 178
+        quote: "Pseudohyphae pH normal (4.0-4.5)"
+      - kind: try
+        items: [mic.L06.031, mic.L06.032, mic.L06.035, mic.L06.038, mic.L06.039]
+    recap:
+      - "من الراس: measles (Koplik) و rubella (postauricular). من الجذع: chickenpox. بعد الحرارة: roseola. Slapped cheek: B19. SCARLET."
+      - "Cystitis من غير casts؛ pyelo بـ WBC casts. E coli ثم saprophyticus ثم Klebsiella. Proteus: urease و struvite."
+      - "BV: fishy، clue cells. Trich: strawberry، motile. Candida: cottage cheese، pH طبيعي."
+    practice: [mic.L06.031, mic.L06.032, mic.L06.033, mic.L06.034, mic.L06.035, mic.L06.036, mic.L06.037, mic.L06.038, mic.L06.039, mic.L06.040, mic.L06.041]
+  - id: mic.L06.lesson4
+    title: "الـ STIs والـ TORCH والـ PID"
+    hook: "القرحة بتوجع ولا لأ؟ ده أول سؤال"
+    minutes: 10
+    pages: [179, 181]
+    topics: [sti, torch, pid]
+    goals:
+      - "تفرّق الـ genital ulcers"
+      - "تعرف مراحل الـ syphilis"
+      - "تعرف علامات كل TORCH في الجنين، والـ PID ومضاعفاته"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "القرح: بتوجع ولا لأ؟"
+        text: |-
+          **بتوجع**:
+          - ==Chancroid== (H ducreyi): قرحة بـ exudate و nodes. "it's so painful, you do cry".
+          - Herpes genitalis (HSV-2): vesicles وقرح و nodes الناحيتين، وممكن fever.
+
+          **ما بتوجعش**:
+          - ==Primary syphilis==: chancre.
+          - Granuloma inguinale: beefy red، بتنزف، و Donovan bodies.
+          - ==LGV== (C trachomatis L1-L3): القرحة مش بتوجع بس الـ buboes بتوجع.
+        page: 179
+        quote: "Infection of lymphatics; painless genital ulcers, painful lymphadenopathy (ie, buboes E )"
+      - kind: explain
+        title: "Chlamydia و gonorrhea"
+        text: |-
+          - **C trachomatis (D-K)**: urethritis، cervicitis، epididymitis، conjunctivitis، ==reactive arthritis==، PID.
+          - **N gonorrhoeae**: نفسهم تقريباً + prostatitis و arthritis، والإفرازات ==creamy purulent==.
+          - **HPV-6 و 11**: condylomata acuminata (koilocytes).
+        page: 179
+        quote: "Urethritis, cervicitis, PID, prostatitis, epididymitis, arthritis, creamy purulent discharge"
+      - kind: table
+        title: "مراحل الـ syphilis"
+        columns: ["", "Features"]
+        rows:
+          - ["Primary", "Painless chancre"]
+          - ["Secondary", "Fever, diffuse nodes, rash, condylomata lata"]
+          - ["Tertiary", "Gummas, tabes dorsalis, aortitis, Argyll Robertson pupil"]
+        hide: [[1, 1], [2, 1]]
+        page: 179
+        quote: "Primary syphilis Painless chancre F , regional lymphadenopathy Treponema pallidum"
+      - kind: check
+        question: "A painless genital ulcer is followed weeks later by tender, swollen inguinal nodes that drain. Which organism?"
+        options:
+          - "C trachomatis L1-L3"
+          - "H ducreyi"
+          - "T pallidum"
+          - "K granulomatis"
+        answer: 0
+        why:
+          - "صح: LGV، قرحة مش بتوجع و buboes بتوجع."
+          - "الـ chancroid القرحة نفسها بتوجع."
+          - "الـ chancre nodes مش بتوجع ولا بتطلّع صديد."
+          - "الـ granuloma inguinale beefy red من غير buboes."
+        page: 179
+        quote: "Lymphogranuloma venereum Infection of lymphatics; painless genital ulcers, painful lymphadenopathy"
+      - kind: explain
+        title: "TORCH"
+        text: |-
+          بيعدّوا من الأم للجنين، غالباً من الـ placenta، أو في الولادة (==خصوصاً HSV-2==). علامات مشتركة: hepatosplenomegaly، jaundice، thrombocytopenia، growth restriction.
+
+          وغيرهم: GBS و E coli و Listeria (meningitis)، و B19 (hydrops).
+        page: 180
+        quote: "Transmission is transplacental in most cases, or via vaginal delivery (especially HSV-2)."
+      - kind: table
+        title: "علامة كل واحد في المولود"
+        columns: ["", "Newborn"]
+        rows:
+          - ["Toxoplasma", "Chorioretinitis, hydrocephalus, intracranial calcifications"]
+          - ["Rubella", "Cataracts, deafness, PDA"]
+          - ["CMV", "Hearing loss, chorioretinitis, periventricular calcifications"]
+          - ["HSV-2", "Meningoencephalitis, vesicles"]
+          - ["Syphilis", "Notched teeth, saddle nose, saber shins, CN VIII deafness"]
+        hide: [[0, 1], [1, 1], [2, 1], [4, 1]]
+        page: 180
+        quote: "Classic triad: chorioretinitis, hydrocephalus, and intracranial calcifications"
+      - kind: aside
+        tone: tip
+        text: "تحشيشات الكتاب: الـ rubella ==I (eye) ♥ ruby (rubella) earrings== (عين وقلب وودن). والـ CMV = Chorioretinitis، Microcephaly، periVentricular calcifications."
+        page: 180
+        quote: "“I (eye) ♥ ruby (rubella) earrings”"
+      - kind: explain
+        title: "PID"
+        text: |-
+          عدوى طالعة في الجهاز التناسلي: salpingitis، endometritis، hydrosalpinx، tubo-ovarian abscess. العلامات: ==cervical motion tenderness==، adnexal tenderness، إفرازات صديد.
+
+          الأسباب: ==C trachomatis== (subacute، كتير ما بيتشخصش، وأشهر STI بكتيري في أمريكا) و N gonorrhoeae (acute).
+        page: 181
+        quote: "Top bugs—Chlamydia trachomatis (subacute, often undiagnosed), Neisseria gonorrhoeae (acute)."
+      - kind: reveal
+        prompt: "ست عندها PID وجالها ألم في الـ RUQ مع النفس. إيه اللي بيحصل؟ وإيه المضاعفات البعيدة للـ salpingitis؟"
+        answer: "ده ==Fitz-Hugh-Curtis== (perihepatitis): التهاب في كبسولة الكبد و adhesions شكلها violin strings. والـ salpingitis بيزوّد خطر ==ectopic pregnancy== والعقم والألم المزمن والـ adhesions."
+        page: 181
+        quote: "Salpingitis is a risk factor for ectopic pregnancy, infertility, chronic pelvic pain, and adhesions."
+      - kind: try
+        items: [mic.L06.042, mic.L06.044, mic.L06.048, mic.L06.052, mic.L06.054]
+    recap:
+      - "بتوجع: chancroid و herpes. مش بتوجع: syphilis، granuloma inguinale، LGV (buboes بتوجع)."
+      - "Chlamydia D-K: reactive arthritis و PID. Syphilis: chancre ← rash و condylomata lata ← gummas و tabes."
+      - "Toxo: hydrocephalus. Rubella: eye ♥ ear. CMV: periventricular. Syphilis: saddle nose."
+      - "PID: CMT؛ chlamydia و gonorrhea؛ Fitz-Hugh-Curtis؛ ectopic."
+    practice: [mic.L06.042, mic.L06.043, mic.L06.044, mic.L06.045, mic.L06.046, mic.L06.047, mic.L06.048, mic.L06.049, mic.L06.050, mic.L06.051, mic.L06.052, mic.L06.053, mic.L06.054, mic.L06.057]
+  - id: mic.L06.lesson5
+    title: "عدوى المستشفى والأطفال غير المتطعمين"
+    hook: "الـ catheter والـ ventilator والمضاد الحيوي: كل جهاز وميكروبه"
+    minutes: 7
+    pages: [181, 182]
+    topics: [healthcare-associated, unvaccinated-children]
+    goals:
+      - "تربط كل risk factor في المستشفى بالميكروب"
+      - "تعرف الأمراض اللي بترجع لما الطفل ما يتطعمش"
+    status: unverified
+    steps:
+      - kind: table
+        title: "عدوى المستشفى"
+        columns: ["", "Pathogen"]
+        rows:
+          - ["Antibiotics, PPIs", "C difficile"]
+          - ["IV catheter", "S aureus, S epidermidis (long term)"]
+          - ["Ventilator (late)", "P aeruginosa, Klebsiella, Acinetobacter, S aureus"]
+          - ["Urinary catheter", "Proteus, E coli, Klebsiella (PEcK)"]
+          - ["Water aerosols", "Legionella"]
+          - ["Needlesticks", "HBV, HCV"]
+        hide: [[0, 1], [2, 1], [3, 1], [4, 1]]
+        page: 181
+        quote: "Intravascular catheters S aureus (including MRSA), S epidermidis (long term)"
+      - kind: explain
+        title: "Aspiration"
+        text: |-
+          مع تغيّر الوعي أو السن الكبير. polymicrobial، gram ⊝، وغالباً ==anaerobes==.
+
+          مكانها: ==right lower lobe==، أو right upper/middle لو المريض نايم. والبلغم صديد وريحته وحشة.
+        page: 181
+        quote: "Polymicrobial, gram ⊝ bacteria, often anaerobes"
+      - kind: explain
+        title: "Legionella من المية"
+        text: "الـ aerosols من المية (تكييف، دش) ← Legionella: pneumonia مع ==أعراض GI== (إسهال، غثيان، ترجيع) و ==أعراض عصبية==."
+        page: 181
+        quote: "Water aerosols Legionella Signs of pneumonia, GI symptoms (diarrhea, nausea, vomiting), neurologic abnormalities"
+      - kind: check
+        question: "A hospitalized patient with a urinary catheter for 10 days develops flank pain and fever. Which group of organisms is most likely?"
+        options:
+          - "Proteus, E coli, Klebsiella"
+          - "S aureus, S epidermidis"
+          - "HBV, HCV"
+          - "Legionella"
+        answer: 0
+        why:
+          - "صح: PEcK للـ urinary catheter."
+          - "دول للـ IV catheters."
+          - "دول للـ needlesticks والدم."
+          - "ده من الـ water aerosols."
+        page: 181
+        quote: "Urinary catheterization Proteus spp, E coli, Klebsiella (PEcK) Dysuria, leukocytosis, flank pain or costovertebral angle tenderness"
+      - kind: explain
+        title: "الطفل اللي ما اتطعمش"
+        text: |-
+          - **Rash من الراس**: rubella (postauricular و suboccipital nodes) أو measles (Koplik).
+          - **Meningitis**: ==Hib== (بيستعمر الـ nasopharynx)، أو polio (ومعاها paralysis).
+          - **Tetanus**: spasms، ==lockjaw==، opisthotonus.
+        page: 182
+        quote: "Tetanus Muscle spasms and spastic paralysis (eg, lockjaw, opisthotonus) C tetani"
+      - kind: explain
+        title: "التنفس"
+        text: |-
+          - **Epiglottitis** (==Hib==): حرارة، صعوبة بلع، ==drooling==، stridor. ممكن حتى في المتطعم.
+          - **Pertussis**: coryza ← whooping cough و posttussive vomiting ← تحسّن بالراحة.
+          - **Diphtheria**: ==grayish pseudomembranes== ممكن تسد الـ airway.
+        page: 182
+        quote: "Pertussis Low-grade fevers, coryza →  whooping cough, posttussive vomiting →  gradual recovery Bordetella pertussis"
+      - kind: sort
+        prompt: "رتّب كل علامة تحت الميكروب"
+        bins: ["H influenzae type b", "Bordetella pertussis", "C diphtheriae"]
+        cards:
+          - { text: "Drooling and stridor", bin: 0 }
+          - { text: "Meningitis from nasopharynx", bin: 0 }
+          - { text: "Whooping cough", bin: 1 }
+          - { text: "Posttussive vomiting", bin: 1 }
+          - { text: "Grayish pseudomembranes", bin: 2 }
+        why: "الـ Hib بيعمل epiglottitis و meningitis، الـ pertussis الكحة والترجيع، والـ diphtheria الغشا الرمادي."
+        page: 182
+        quote: "Pharyngitis Grayish pseudomembranes (may obstruct airways) Corynebacterium diphtheriae"
+      - kind: try
+        items: [mic.L06.055, mic.L06.056, mic.L06.058, mic.L06.059, mic.L06.061]
+    recap:
+      - "Antibiotics و PPIs ← C diff. IV line ← S aureus و S epi. Ventilator ← Pseudomonas. Urinary catheter ← PEcK. مية ← Legionella."
+      - "Aspiration: anaerobes في الـ right lower lobe."
+      - "غير متطعم: rubella، measles، Hib، polio، tetanus، epiglottitis، pertussis، diphtheria."
+    practice: [mic.L06.055, mic.L06.056, mic.L06.058, mic.L06.059, mic.L06.060, mic.L06.061]
