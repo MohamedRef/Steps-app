@@ -1,7 +1,5 @@
-//! Cases: key-feature clinical cases and the `calc` number vignettes, as
-//! tabs of one screen. The standalone calculators are Batna's and stay
-//! hidden in Steps (`more::CALCULATORS`); `STEPS_OPEN_CALC` still opens them
-//! for previews.
+//! Cases: key-feature clinical cases, the `calc` number vignettes, and the
+//! standalone calculators, as three tabs of one screen.
 //!
 //! A case shows its stem, then each step reveals new data and asks one
 //! decision, with feedback (`why` and the book page) right after. The data
@@ -40,6 +38,12 @@ pub fn open_due(mut ui: crate::Ui, calc_only: bool) {
     ui.screen.set(crate::Screen::Cases);
 }
 
+/// Open the Cases screen on its Calculators tab (More › الحاسبات).
+pub fn open_calculators(mut ui: crate::Ui) {
+    *START_TAB.write() = Some(Tab::Calculators);
+    ui.screen.set(crate::Screen::Cases);
+}
+
 #[derive(Clone, Copy, PartialEq, Eq, Debug)]
 enum Tab {
     Cases,
@@ -72,7 +76,7 @@ pub fn CasesScreen() -> Element {
             }
         } else {
             div { class: "tabs", role: "tablist",
-                for (t, label) in [(Tab::Cases, tx::TAB_CASES), (Tab::CalcItems, tx::TAB_CALC_ITEMS)] {
+                for (t, label) in [(Tab::Cases, tx::TAB_CASES), (Tab::CalcItems, tx::TAB_CALC_ITEMS), (Tab::Calculators, crate::i18n::case::TAB_CALCULATORS)] {
                     button {
                         key: "{t:?}",
                         role: "tab",

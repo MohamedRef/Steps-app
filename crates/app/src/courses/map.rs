@@ -1,20 +1,18 @@
-//! The map (More › المواد): First Aid's General Principles and Organ
-//! Systems as tiles, in the book's order, with how much of each he has
-//! started. A tile opens its course: First Aid pages, lectures, and the
-//! status he can change.
-
-use std::collections::BTreeMap;
+//! The MSc map (More › المقررات): every course of the program as a tile,
+//! grouped by where it stands, with the credit hours behind him. A tile
+//! opens its course: hours, lectures, and the status he can change.
 
 use dioxus::prelude::*;
 use steps_core::program::{CourseStatus, Group};
 
 use super::CSS;
-use super::{Summary, percent, set_status, started, summaries};
+use super::{Summary, fmt_hours, hours, set_status, summaries};
 use crate::content::Library;
 use crate::i18n::courses as tx;
 
-/// The book's two sections, in its order.
-const GROUPS: [Group; 2] = [Group::General, Group::Systems];
+/// The order of the map's groups.
+const ORDER: [CourseStatus; 4] =
+    [CourseStatus::Active, CourseStatus::Maintenance, CourseStatus::Later, CourseStatus::Archived];
 
 pub(super) fn status_label(s: CourseStatus) -> &'static str {
     match s {
@@ -41,13 +39,6 @@ fn group_label(g: Group) -> &'static str {
     }
 }
 
-fn group_hint(g: Group) -> &'static str {
-    match g {
-        Group::General => tx::G_GENERAL_HINT,
-        Group::Systems => tx::G_SYSTEMS_HINT,
-    }
-}
-
 pub(super) fn group_key(g: Group) -> &'static str {
     match g {
         Group::General => "general",
@@ -58,19 +49,14 @@ pub(super) fn group_key(g: Group) -> &'static str {
 #[component]
 pub fn Map() -> Element {
     let ui = use_context::<crate::Ui>();
-    let review = crate::store::use_review();
     let lib = Library::get();
     let all = summaries(lib, super::status);
-    let seen: BTreeMap<String, usize> =
-        started(&review.backend.borrow().overview(lib, crate::store::now_ms()).lectures);
-    let pages: u32 = all.iter().map(|s| s.page_count).sum();
-    let items: usize = all.iter().map(|s| s.items).sum();
-    let begun: usize = seen.values().sum();
-    let pct = percent(begun, items);
+    let (done, now, total) = hours(&all);
     let mut open = use_signal(|| None::<String>);
-    // The ring: cards started out of the cards written so far.
+    // The ring: done hours solid, this semester's lighter after them.
     let c = 2.0 * std::f32::consts::PI * 42.0;
-    let done_len = c * pct as f32 / 100.0;
+    let done_len = c * done / total.max(1.0);
+    let now_len = c * now / total.max(1.0);
 
     rsx! {
         style { {CSS.text()} }
@@ -98,37 +84,44 @@ pub fn Map() -> Element {
                     height: "104",
                     "aria-hidden": "true",
                     circle { class: "cm-ring-track", cx: "52", cy: "52", r: "42" }
-                    if pct > 0 {
+                    circle {
+                        class: "cm-ring-now",
+                        cx: "52",
+                        cy: "52",
+                        r: "42",
+                        stroke_dasharray: "{done_len + now_len} {c}",
+                        transform: "rotate(-90 52 52)",
+                    }
+                    if done > 0.0 {
                         circle {
                             class: "cm-ring-done",
-                            cx: "52",
-                            cy: "52",
-                            r: "42",
+                        cx: "52",
+                        cy: "52",
+                        r: "42",
                             stroke_dasharray: "{done_len} {c}",
                             transform: "rotate(-90 52 52)",
                         }
                     }
-                    text { class: "cm-ring-num", x: "52", y: "58", text_anchor: "middle", "{pct}%" }
-                }
-                div { class: "cm-hours-text",
-                    p { class: "cm-big", {tx::pages_line(pages, all.len())} }
-                    p { span { class: "cm-key cm-key-done" } {tx::started(begun, items)} }
-                    p { class: "muted small",
-                        {tx::ready_lectures(all.iter().map(|s| s.written).sum(), all.iter().map(|s| s.lectures).sum())}
+                    text { class: "cm-ring-num", x: "52", y: "58", text_anchor: "middle",
+                        "{fmt_hours(done + now)}/{fmt_hours(total)}"
                     }
                 }
+                div { class: "cm-hours-text",
+                    p { class: "cm-big", {tx::hours_line(&fmt_hours(total), all.len())} }
+                    p { span { class: "cm-key cm-key-done" } {tx::hours_done(&fmt_hours(done))} }
+                    p { span { class: "cm-key cm-key-now" } {tx::hours_now(&fmt_hours(now))} }
+                }
             }
-            for g in GROUPS {
-                if all.iter().any(|s| s.course.group == g) {
-                    section { key: "{group_key(g)}", class: "cm-group", aria_label: group_label(g),
-                        h2 { bdi { {group_label(g)} } }
-                        p { class: "muted small", {group_hint(g)} }
+            for st in ORDER {
+                if all.iter().any(|s| s.status == st) {
+                    section { key: "{st.key()}", class: "cm-group", aria_label: status_label(st),
+                        h2 { {status_label(st)} }
+                        p { class: "muted small", {status_hint(st)} }
                         div { class: "cm-grid",
-                            for s in all.iter().filter(|s| s.course.group == g).cloned() {
+                            for s in all.iter().filter(|s| s.status == st).cloned() {
                                 CourseTile {
                                     key: "{s.course.id}",
                                     open: open() == Some(s.course.id.clone()),
-                                    seen: seen.get(&s.course.id).copied().unwrap_or(0),
                                     on_toggle: move |id: String| {
                                         let same = open() == Some(id.clone());
                                         open.set(if same { None } else { Some(id) });
@@ -157,41 +150,37 @@ fn open_course_lessons(mut ui: crate::Ui, id: &str) {
 fn CourseTile(
     summary: Summary,
     open: bool,
-    /// Cards of this course he has started.
-    seen: usize,
     on_toggle: EventHandler<String>,
     on_lectures: EventHandler<String>,
 ) -> Element {
     let s = summary;
     let id = s.course.id.clone();
     let lecture_id = id.clone();
-    let pct = percent(seen, s.items);
+    let half = s.course.hours.fract() != 0.0;
+    let whole = s.course.hours.trunc() as usize;
     rsx! {
         div { class: "cm-cell", "data-open": open,
             crate::ui::CardButton {
                 class: "tap tile cm-tile",
                 "data-group": group_key(s.course.group),
-                "data-status": s.status.key(),
                 "aria-expanded": open,
                 "aria-controls": "cm-detail-{s.course.id}",
                 onclick: move |_| on_toggle.call(id.clone()),
                 span { class: "cm-bar", aria_hidden: "true" }
                 span { class: "cm-name", bdi { "{s.course.title}" } }
-                if s.status != CourseStatus::Active {
-                    span { class: "chip cm-status-chip", {status_label(s.status)} }
-                }
-                if s.items > 0 {
-                    span { class: "cm-progress", aria_hidden: "true",
-                        i { style: "inline-size: {pct}%" }
+                span { class: "cm-meta",
+                    span { class: "cm-dots", aria_hidden: "true",
+                        for k in 0..whole {
+                            i { key: "{k}" }
+                        }
+                        if half {
+                            i { class: "half" }
+                        }
                     }
-                    span { class: "cm-coverage muted small", {tx::started(seen, s.items)} }
-                } else if s.lectures > 0 {
+                    span { class: "muted small", {tx::tile_line(&s.course.short, &fmt_hours(s.course.hours))} }
+                }
+                if s.lectures > 0 {
                     span { class: "cm-coverage muted small", {tx::ready_lectures(s.written, s.lectures)} }
-                }
-                if let Some([from, to]) = s.pages {
-                    span { class: "cm-meta",
-                        span { class: "muted small", {tx::tile_line(&s.course.short, from, to)} }
-                    }
                 }
             }
             if open {
@@ -202,10 +191,10 @@ fn CourseTile(
                     role: "region",
                     aria_label: s.course.title.clone(),
                     p { class: "small",
-                        bdi { {group_label(s.course.group)} }
-                        if let Some([from, to]) = s.pages {
+                        {group_label(s.course.group)}
+                        if let Some(n) = s.course.semester {
                             " · "
-                            {tx::book_pages(from, to, s.page_count)}
+                            {tx::semester(n)}
                         }
                     }
                     if s.lectures > 0 {
@@ -233,7 +222,6 @@ fn CourseTile(
                             }
                         }
                     }
-                    p { class: "muted small", {status_hint(s.status)} }
                 }
             }
         }
@@ -265,7 +253,6 @@ mod ux_tests {
                 CourseTile {
                     summary,
                     open: true,
-                    seen: 0,
                     on_toggle: move |_: String| {},
                     on_lectures: move |_: String| {},
                 }
@@ -273,7 +260,7 @@ mod ux_tests {
         }
         let lib = Library::get();
         let summary = summaries(lib, |c| c.status).into_iter().find(|s| s.course.id == "cvs").unwrap();
-        let expected = tx::content_line(summary.written, summary.lectures, summary.items, summary.lessons);
+        let expected = tx::ready_lectures(summary.written, summary.lectures);
         let mut dom = VirtualDom::new(app);
         dom.rebuild_in_place();
         let html = dioxus::ssr::render(&dom);
@@ -283,7 +270,6 @@ mod ux_tests {
             "id=\"cm-detail-cvs\"",
             tx::OPEN_LECTURES,
             expected.as_str(),
-            "First Aid ص 284–328",
         ] {
             assert!(html.contains(required), "missing {required}: {html}");
         }

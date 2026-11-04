@@ -1,7 +1,7 @@
 //! Phones: the bottom bar keeps four screens (Today, Lessons, Review,
 //! Questions) and a "More" tab. More opens a bounded sheet above the bar,
-//! grouped as in the 2026-10 redesign: practice (Cases, Oral) and your
-//! references and tools (References, a new card, Progress,
+//! grouped as in the 2026-10 redesign: practice (Cases, Oral, Calculators)
+//! and your references and tools (References, a new card, Progress,
 //! Settings). From 600dp the rail and sidebar show every screen and the
 //! tools ([`ToolButtons`]), so the tab and the sheet hide (shape.css).
 
@@ -21,6 +21,8 @@ pub struct Tool {
     pub open: fn(Ui),
 }
 
+pub const CALCULATORS: Tool =
+    Tool { label: i18n::calc::TITLE, icon: icons::calculator, open: crate::case::open_calculators };
 pub const REFERENCES: Tool =
     Tool { label: i18n::refs::TITLE, icon: icons::references, open: crate::lecture::open_references };
 pub const COURSES: Tool =
@@ -34,11 +36,8 @@ pub const ADD_CARD: Tool =
     Tool { label: i18n::refs::ADD_CARD, icon: icons::add_card, open: |_| crate::own::open_new() };
 
 /// The tools the rail and sidebar list under the screens from 600dp (More
-/// holds them on phones). Batna's calculators (hepatology, nephrology,
-/// geriatrics, research) cite Batna's MSc books, so Steps leaves them out;
-/// `calc` study items still render. A Step 1 calculator comes back only
-/// with First Aid's own formula and page.
-pub const TOOLS: [Tool; 4] = [COURSES, REFERENCES, ABBREVIATIONS, ADD_CARD];
+/// holds them on phones).
+pub const TOOLS: [Tool; 5] = [COURSES, REFERENCES, ABBREVIATIONS, ADD_CARD, CALCULATORS];
 
 /// One row in More.
 #[derive(Clone, Copy)]
@@ -67,7 +66,10 @@ impl Row {
 
 /// More's groups: a heading and its rows, in order.
 const GROUPS: [(&str, &[Row]); 2] = [
-    (i18n::nav::MORE_PRACTICE, &[Row::Screen(Screen::Cases), Row::Screen(Screen::Oral)]),
+    (
+        i18n::nav::MORE_PRACTICE,
+        &[Row::Screen(Screen::Cases), Row::Screen(Screen::Oral), Row::Tool(CALCULATORS)],
+    ),
     (
         i18n::nav::MORE_TOOLS,
         &[
