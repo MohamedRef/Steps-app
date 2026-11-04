@@ -66,7 +66,8 @@ mod tests {
         s.delete_note(&item).unwrap();
         s.delete_note(&Anchor::Page(1)).unwrap();
         assert_eq!(s.notes().len(), 1);
-        assert_eq!(s.outbox_len(), before + 4);
+        // One op per row waits: the outbox keeps only a row's newest write.
+        assert_eq!(s.outbox_len(), before + 2);
         // A deleted note can be written again.
         s.put_note(&note(item.clone(), "back")).unwrap();
         assert_eq!(s.notes().len(), 2);

@@ -16,14 +16,15 @@ use super::{Mark, VIEW, View, close, mark, next_lesson, save_mark, set_view};
 use crate::i18n::learn as tx;
 use crate::{Screen, Ui};
 
-/// Local (per device) setting: the unfinished attempt (`Attempt`), so the
-/// lesson reopens at the same step with the same responses and score.
+/// Where an unfinished lesson stands (`Attempt`): the step, every answer
+/// and note, and the score, so it reopens exactly there, on this device or
+/// another one (`Store::put_place`, synced).
 pub(super) fn pos_key(id: &str) -> String {
     format!("lessonpos.{id}")
 }
 
 fn save_pos(id: &str, pos: &Attempt) {
-    if let Err(e) = crate::store::shared().put_local_setting(&pos_key(id), pos) {
+    if let Err(e) = crate::store::shared().put_place(&pos_key(id), pos) {
         crate::diag::report!("saving lesson position {id} failed: {e}");
     }
 }
@@ -46,7 +47,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
         if let Some(s) = preview {
             return Attempt { at: s.saturating_sub(1).min(n), ..Attempt::new(n, now) };
         }
-        let saved: Option<Attempt> = crate::store::shared().local_setting(&pos_key(&id));
+        let saved: Option<Attempt> = crate::store::shared().place(&pos_key(&id));
         Attempt::restore(&lesson, saved, mark(&id).map(|m| m.done_ms), now)
     });
     let sigs = use_hook(|| lesson.steps.iter().map(|s| sig(&s.body)).collect::<Vec<_>>());
