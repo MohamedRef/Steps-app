@@ -1021,13 +1021,7 @@ mod tests {
             .items
             .iter()
             .take(idle.missed as usize)
-            .map(|it| ReviewEvent {
-                item_id: it.id.clone(),
-                grade: Grade::Good,
-                origin: Origin::Review,
-                at_ms: now_ms - DAY_MS,
-                took_ms: 5000,
-            })
+            .map(|it| ReviewEvent::new(it.id.clone(), Grade::Good, Origin::Review, now_ms - DAY_MS, 5000))
             .collect();
         assert_eq!(daily_target(&data(did), &settings).unwrap().missed, 0);
     }
