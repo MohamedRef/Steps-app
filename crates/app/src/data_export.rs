@@ -3,7 +3,7 @@
 //! `Store::export`; this module names, writes and reports the file.
 //! On Android the file lands in the app's own folder first, then the system
 //! "Save to" dialog offers Downloads or Drive (`platform::documents`).
-// adapted from kabar-app main: crates/app/src/data_export.rs
+// adapted from batna-app main: crates/app/src/data_export.rs
 
 use std::io::Write;
 use std::path::{Path, PathBuf};

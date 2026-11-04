@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Renders Steps's drawn icon (assets/src/icon/*.svg) to every platform size.
 
-Adapted from kabar-app main: scripts/assets/export_icons.py. Kabar starts from
+Adapted from batna-app main: scripts/assets/export_icons.py. Batna starts from
 painted PNG layers; Steps's mark is plain SVG, so this renders the SVG layers
 first and then cuts the same Android, macOS and notification sizes.
 

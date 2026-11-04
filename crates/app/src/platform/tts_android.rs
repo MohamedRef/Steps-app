@@ -1,7 +1,7 @@
 //! Android's `android.speech.tts.TextToSpeech`, reached through JNI with the
 //! JavaVM and Activity that tao/wry register in `ndk_context`.
 //!
-//! Adapted from kabar-app main: crates/app/src/platform/android.rs (the
+//! Adapted from batna-app main: crates/app/src/platform/android.rs (the
 //! text-to-speech section and `with_activity`). Changes for Steps: an English
 //! voice (en-US, then en-GB, then any English), and `isSpeaking()` / `stop()`
 //! so oral mode knows when a question has been read.

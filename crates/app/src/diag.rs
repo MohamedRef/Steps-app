@@ -7,7 +7,7 @@
 //! stderr on the Mac and in development, and a ring of the last [`KEEP`]
 //! lines that Settings › Your data shows and copies. `eprintln!` is
 //! disallowed in this crate (clippy.toml), so new code reports through here.
-// adapted from kabar-app main: crates/app/src/diag.rs
+// adapted from batna-app main: crates/app/src/diag.rs
 
 use std::collections::VecDeque;
 use std::fmt;

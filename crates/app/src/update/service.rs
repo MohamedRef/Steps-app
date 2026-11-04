@@ -6,7 +6,7 @@ use super::*;
 /// has built in: CI builds the pack before the APK and bakes its digest in
 /// as `STEPS_BUILTIN_CONTENT`. Only while no downloaded pack is in use, so a
 /// feed going back to this content still replaces a newer one. Adapted from
-/// kabar-app main: `crates/app/src/update/content.rs`.
+/// batna-app main: `crates/app/src/update/content.rs`.
 pub(super) fn built_in(builtin: Option<&str>, pack_in_use: bool, sha: &str) -> bool {
     !pack_in_use && builtin.is_some_and(|b| b.trim().eq_ignore_ascii_case(sha))
 }

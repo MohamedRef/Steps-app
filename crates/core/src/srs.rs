@@ -1,7 +1,7 @@
 //! FSRS-6 scheduling, with each item's state derived from the review log.
 //! Every device replays the same events in HLC order and gets the same
 //! state, so reviews on the phone and the tablet never conflict.
-// adapted from kabar-app main: crates/core/src/srs.rs
+// adapted from batna-app main: crates/core/src/srs.rs
 
 use std::collections::{BTreeMap, HashMap, HashSet};
 

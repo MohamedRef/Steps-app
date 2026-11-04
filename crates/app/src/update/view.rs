@@ -1,7 +1,7 @@
 //! Settings › Updates, the gentle "new Steps is ready" card above every
 //! screen, and the hooks that follow the updater from the UI.
 //!
-//! Adapted from kabar-app main: crates/app/src/update/view.rs (one
+//! Adapted from batna-app main: crates/app/src/update/view.rs (one
 //! language, Steps's settings rows and screens).
 
 use dioxus::prelude::*;

@@ -10,6 +10,8 @@
 //! update changes [--since COMMIT]          what the next build's "what's new" says
 //! update changes --gate BASE               fails unless HEAD adds a line (CI, #320)
 //! update channels [--version V]             the channels a version is published on
+//! update guard [--version V] [--previous FEED/update.json …]
+//!                                           refuses a version that can't be released
 //! update sign DIR [--public-key FILE]       secret from STEPS_UPDATE_SECRET
 //! update verify DIR [--public-key FILE] [--carried PLATFORM …]
 //! ```
@@ -26,6 +28,9 @@
 //!   the folder, so only its build is checked (older than the feed's).
 //! - `channels` prints one channel per line (an alpha → alpha; a beta → alpha
 //!   and beta; a release → all three), for `scripts/update-publish.sh`.
+//! - `guard` fails on the `-alpha.0` placeholder and on a version that is
+//!   not newer than every `--previous` feed's (a missing file is fine), so
+//!   the Release workflow never publishes over a newer or equal build (#104).
 //! - `--previous` keeps the channel's current history (a missing file is
 //!   fine); with `--changes`, `changes/` since that feed's commit becomes
 //!   this build's entry, and the notes when none are given (`crate::changes`).
@@ -34,7 +39,7 @@
 //!   so devices get the new pack without installing anything. Its history
 //!   entry is marked `content_only`.
 //!
-//! Adapted from kabar-app main: `crates/tools/src/update.rs` (clap and
+//! Adapted from batna-app main: `crates/tools/src/update.rs` (clap and
 //! anyhow swapped for this crate's plain argument handling).
 
 use std::fs;
@@ -45,7 +50,7 @@ use base64::engine::general_purpose::STANDARD as B64;
 use ed25519_dalek::{Signer, SigningKey};
 use sha2::{Digest, Sha256};
 use steps_core::update::{
-    BuildChanges, Channel, MANIFEST_FILE, SIGNATURE_FILE, UPDATE_FORMAT, UpdateAsset, UpdateManifest,
+    BuildChanges, Channel, MANIFEST_FILE, SIGNATURE_FILE, Stage, UPDATE_FORMAT, UpdateAsset, UpdateManifest,
     UpdateNotes, UpdatePlatform, Version, check_download, key_line, parse_public_key, verify_manifest,
 };
 
@@ -57,7 +62,7 @@ pub const RELEASE_KEY_FILE: &str = "crates/app/update-key.pub";
 /// The secret, base64, for `update sign`.
 const SECRET_ENV: &str = "STEPS_UPDATE_SECRET";
 
-const USAGE: &str = "usage: steps-tools update <keygen | manifest | sign DIR | verify DIR | changes | channels> (see crates/tools/src/update.rs)";
+const USAGE: &str = "usage: steps-tools update <keygen | manifest | sign DIR | verify DIR | changes | channels | guard> (see crates/tools/src/update.rs)";
 
 type Res<T> = Result<T, String>;
 
@@ -188,6 +193,31 @@ fn run_inner(root: &Path, args: &[String]) -> Res<String> {
             };
             let parsed = Version::parse(&v).ok_or_else(|| format!("{v:?} isn't a version"))?;
             Ok(parsed.channels().iter().map(|c| c.as_str()).collect::<Vec<_>>().join("\n"))
+        }
+        Some("guard") => {
+            let v = match flag(args, "--version") {
+                Some(v) => v.to_owned(),
+                None => workspace_version(root)?,
+            };
+            let parsed = Version::parse(&v).ok_or_else(|| format!("{v:?} isn't a version"))?;
+            if parsed.stage == Stage::Alpha(0) {
+                return Err(format!(
+                    "{v} is the placeholder before the first alpha: raise `version` in Cargo.toml"
+                ));
+            }
+            for p in values(args, "--previous").map(Path::new).filter(|p| p.exists()) {
+                let m: UpdateManifest = serde_json::from_str(&read_text(p)?)
+                    .map_err(|e| format!("previous feed {}: {e}", p.display()))?;
+                let live = Version::parse(&m.version)
+                    .ok_or_else(|| format!("{}: {:?} isn't a version", p.display(), m.version))?;
+                if parsed <= live {
+                    return Err(format!(
+                        "{v} is not newer than {live} on the {} feed: raise `version` in Cargo.toml",
+                        m.channel.as_str()
+                    ));
+                }
+            }
+            Ok(format!("{v} can be released"))
         }
         Some("verify") => {
             let dir = args.get(1).filter(|a| !a.starts_with("--")).ok_or(USAGE)?;
@@ -603,7 +633,7 @@ mod tests {
         assert_eq!((m.build, m.ui_build), (45, Some(40)), "the look fits the app it carries");
 
         // The preview workflow verifies the feed it uploads: the carried APK
-        // is on the release, not in the folder (Kabar preview run 355).
+        // is on the release, not in the folder (seen on a preview run of the app Steps came from).
         let (pub_file, second) = (dir.path().join("k.pub"), Path::new(&second));
         let (_, secret) = keygen(&pub_file, false).unwrap();
         let public = fs::read_to_string(&pub_file).unwrap();
@@ -624,6 +654,38 @@ mod tests {
         assert_eq!(channels("0.2.0-beta.1").unwrap(), "alpha\nbeta");
         assert_eq!(channels("1.0.0").unwrap(), "alpha\nbeta\nstable");
         assert!(channels("one").is_err(), "a bad version fails instead of publishing nowhere");
+    }
+
+    #[test]
+    fn guard_refuses_the_placeholder_and_older_versions() {
+        let dir = tempfile::tempdir().unwrap();
+        let feed = dir.path().join("alpha.json");
+        let manifest = UpdateManifest {
+            format: UPDATE_FORMAT,
+            channel: Channel::Alpha,
+            version: "1.0.0-alpha.2".into(),
+            build: 7,
+            commit: None,
+            published_at: "2026-11-04T00:00:00Z".into(),
+            notes: UpdateNotes::default(),
+            assets: Vec::new(),
+            history: Vec::new(),
+            ui_build: None,
+        };
+        fs::write(&feed, serde_json::to_string(&manifest).unwrap()).unwrap();
+        let feed = feed.to_string_lossy().into_owned();
+        let missing = dir.path().join("none.json").to_string_lossy().into_owned();
+        let guard = |v: &str| {
+            run(dir.path(), &strings(&["guard", "--version", v, "--previous", &feed, "--previous", &missing]))
+        };
+        assert!(guard("1.0.0-alpha.0").unwrap_err()[0].contains("placeholder"));
+        assert!(guard("1.0.0-alpha.2").unwrap_err()[0].contains("not newer"));
+        assert!(guard("1.0.0-alpha.1").is_err());
+        assert!(guard("1.0.0-alpha.3").is_ok());
+        assert!(guard("1.0.0-beta.1").is_ok());
+        let fresh = |v: &str| run(dir.path(), &strings(&["guard", "--version", v]));
+        assert!(fresh("1.0.0-alpha.1").is_ok(), "no feed yet: the first alpha may go");
+        assert!(fresh("x").is_err());
     }
 
     #[test]

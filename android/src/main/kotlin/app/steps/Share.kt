@@ -14,7 +14,7 @@ import java.io.File
  * activity stores it as [PendingShare] JSON (`{text, subject, app}`), brings
  * Steps to the front and closes; Rust picks it up (`own::share`).
  */
-// Adapted from kabar-app main: android/src/main/kotlin/app/kabar/ShareActivity.kt and PendingShare.kt
+// Adapted from batna-app main: android/src/main/kotlin/…/ShareActivity.kt and PendingShare.kt
 class ShareActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

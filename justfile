@@ -13,14 +13,22 @@ key_alias := "steps"
 default:
     @just --list
 
-# fmt + clippy (zero warnings) + tests + content checks: run before every commit
-check:
+# Every check CI's `check` job runs on a pull request (fmt, clippy with zero
+# warnings, tests, content, ids, What's new), against `base`; run before
+# every commit. CI checks the app without its desktop WebView (#109); here
+# the default features build it too, so this is a superset.
+check base="origin/main":
     scripts/check-tracked-files.sh
     cargo fmt --all --check
     cargo clippy --workspace --all-targets -- -D warnings
     cargo test --workspace
+    node --test crates/app/tests/system-back.test.cjs
+    node --test crates/app/tests/ui-runtime.test.mjs
+    python3 -m unittest discover -s scripts/tests -p 'test_content_impact.py'
     cargo run -q -p steps-tools -- validate
     cargo run -q -p steps-tools -- packs build --check
+    cargo run -q -p steps-tools -- ids check --base {{base}}
+    cargo run -q -p steps-tools -- update changes --gate {{base}}
 
 fmt:
     cargo fmt --all
@@ -106,7 +114,7 @@ content-digest:
 # Build a signed release APK into dist/android/steps.apk
 apk:
     rm -rf {{dist}}/android && mkdir -p {{dist}}/android
-    export STEPS_BUILTIN_CONTENT="$({{just_executable()}} content-digest)" && cd {{app}} && STEPS_COMMIT="$(git rev-parse --short HEAD)" dx bundle --platform android --release --package-types apk --target aarch64-linux-android --no-default-features --features mobile --out-dir ../../{{dist}}/android/raw
+    export STEPS_BUILTIN_CONTENT="$({{just_executable()}} content-digest)" && cd {{app}} && STEPS_BUILD="$(../../scripts/build-number.sh)" STEPS_COMMIT="$(git rev-parse --short HEAD)" dx bundle --platform android --release --package-types apk --target aarch64-linux-android --no-default-features --features mobile --out-dir ../../{{dist}}/android/raw
     # dx leaves a debug build; rebuild it as a release (not debuggable, R8, versionCode).
     apk="$(scripts/android-release-apk.sh)" && \
       { [ ! -x scripts/android-check-apk.sh ] || scripts/android-check-apk.sh "$apk"; } && \
@@ -122,7 +130,7 @@ install-android device="":
 
 # Build a release Steps.app for the Mac into dist/mac/Steps.app
 bundle-mac:
-    rm -rf {{dist}}/mac/raw && export STEPS_BUILTIN_CONTENT="$({{just_executable()}} content-digest)" && cd {{app}} && STEPS_COMMIT="$(git rev-parse --short HEAD)" dx bundle --platform macos --release --package-types macos --out-dir ../../{{dist}}/mac/raw
+    rm -rf {{dist}}/mac/raw && export STEPS_BUILTIN_CONTENT="$({{just_executable()}} content-digest)" && cd {{app}} && STEPS_BUILD="$(../../scripts/build-number.sh)" STEPS_COMMIT="$(git rev-parse --short HEAD)" dx bundle --platform macos --release --package-types macos --out-dir ../../{{dist}}/mac/raw
     app="$(find {{dist}}/mac/raw -maxdepth 4 -name '*.app' | head -1)"; \
       rm -rf {{dist}}/mac/Steps.app && cp -R "$app" {{dist}}/mac/Steps.app
     # The same code identity on every build, once `just mac-codesign-cert` made it.

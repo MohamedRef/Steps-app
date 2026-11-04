@@ -1,6 +1,6 @@
 # Steps Cloud on the Cloudflare Workers Free plan. Its own Worker, its own
-# Durable Object storage and its own secrets: nothing is shared with Kabar
-# Cloud. See docs/CLOUD.md.
+# Durable Object storage and its own secrets: nothing is shared with another
+# app's cloud. See docs/CLOUD.md.
 name = "steps-cloud"
 main = "build/index.js"
 compatibility_date = "2026-10-01"
@@ -31,8 +31,9 @@ new_sqlite_classes = ["Login"]
 # Not secret. Secrets (ALLOWED_EMAILS, TOKEN_SIGNING_KEY) go in with
 # `wrangler secret put`.
 [vars]
-# Steps's own Google OAuth client id(s), comma-separated.
-# Empty until Steps' own Google project has its clients (docs/CLOUD.md).
+# Steps's own Google OAuth client id(s), comma-separated. Left empty here:
+# the deploy passes the repo variable STEPS_GOOGLE_CLIENT_IDS with
+# `--var GOOGLE_CLIENT_IDS:…` and fails without it (docs/CLOUD.md §3.2).
 GOOGLE_CLIENT_IDS = ""
 # The web app's address(es): only its pages may call the API from a browser
 # (CORS), and only its sync socket may bring the token in the query.

@@ -1,6 +1,6 @@
 # Steps Cloud: sync between the Mac, the phone and the tablet
 
-Steps Cloud is a small Rust Cloudflare Worker (`crates/server`) on the **Workers Free** plan. It is Steps's own: its own Worker name (`steps-cloud`), its own Durable Object storage, its own Google OAuth client and its own secrets. Nothing is shared with Kabar Cloud. Parts of the code are adapted from Kabar's `crates/server` and `crates/app/src/cloud` (credited in each file).
+Steps Cloud is a small Rust Cloudflare Worker (`crates/server`) on the **Workers Free** plan. It is Steps's own: its own Worker name (`steps-cloud`), its own Durable Object storage, its own Google OAuth client and its own secrets. Nothing is shared with another app's cloud. Parts of the code are adapted from Batna's `crates/server` and `crates/app/src/cloud` (credited in each file).
 
 It does three things:
 
@@ -50,14 +50,10 @@ The list lives in `steps_protocol::sync::TABLES`. **A new synced table must be a
    ```
 
 ### 3.2 Google sign-in (Google Cloud Console, free)
-1. <https://console.cloud.google.com/> → create a **new** project "Steps" (not Kabar's).
+1. <https://console.cloud.google.com/> → create a **new** project "Steps" (not another app's).
 2. **Google Auth Platform → Branding/Audience**: External, keep it in *Testing*, add your Gmail as a test user.
 3. **Clients → Create client → Desktop app** "Steps desktop". The Mac and Android both use it (browser sign-in with PKCE and a loopback redirect). On Android the redirect lands while Chrome is in front and Android keeps a backgrounded Steps off the network, so the app only waits for the code there; the code exchange and the Steps Cloud sign-in run once Steps is back in front (the page's "ارجع لـ Steps" button opens `app.steps://signed-in`), retrying for up to nine minutes.
-4. Put its client id in `crates/server/wrangler.toml`:
-   ```toml
-   GOOGLE_CLIENT_IDS = "1234-desktop.apps.googleusercontent.com"
-   ```
-   The id is not a secret; commit it.
+4. Put its client id in the repo variable **`STEPS_GOOGLE_CLIENT_IDS`** (Settings › Secrets and variables › Actions › Variables), with the web client's id after a comma once there is one ([WEB.md](WEB.md) § Sync): `1234-desktop.apps.googleusercontent.com,5678-web.apps.googleusercontent.com`. The ids are not secret. The deploy passes them to the Worker (`wrangler deploy --var GOOGLE_CLIENT_IDS:…`); `crates/server/wrangler.toml` keeps the value empty, and a Cloudflare dashboard edit would be overwritten by the next deploy. Without the variable the deploy fails and says so, because Google sign-in can't work (#102). Put the desktop id in `STEPS_GOOGLE_CLIENT_ID` too: the preview and release builds build it into the apps (§3.5). For `just cloud-deploy` from the Mac, set it in the Cloudflare dashboard or pass `--var` yourself.
 
 ### 3.3 Deploy
 **From GitHub (no Mac needed).** The `Deploy Steps Cloud` workflow builds and deploys the Worker.
@@ -68,7 +64,7 @@ The list lives in `steps_protocol::sync::TABLES`. **A new synced table must be a
    - `STEPS_ALLOWED_EMAILS`: your Gmail.
 4. Run **Actions › Deploy Steps Cloud › Run workflow**. The run summary shows the Worker URL.
 
-The first run makes the token signing key inside Cloudflare, so `just cloud-setup` isn't needed. After that, every push to `main` that touches `crates/server` or `crates/protocol` redeploys the hub.
+The first run makes the token signing key inside Cloudflare, so `just cloud-setup` isn't needed. After that, the hub redeploys when CI passes on `main` and `crates/server` or `crates/protocol` changed since the last deploy (a commit that fails CI never reaches it). Each deploy then checks that sign-in answers on the live hub.
 
 **From the Mac:**
 ```bash
@@ -89,6 +85,7 @@ The auto-updating preview APK is built on GitHub, where there is no `.env`. Give
 
 | Kind | Name | Value |
 |---|---|---|
+| Variable | `STEPS_GOOGLE_CLIENT_ID` | the Desktop client's id |
 | Secret | `STEPS_GOOGLE_CLIENT_SECRET` | the Desktop client's secret |
 
 `steps-android-preview.yml` passes them to the nightly and hand-started builds of `main` only; a PR's build gets none and its APK hides sign-in. The next preview build (and the update it ships) can sign in. GitHub masks the secret in logs, and nothing writes it to the repo. Like every installed-app secret, it can be read out of the APK. That is only acceptable because the client is a **Desktop app** (installed-app) OAuth client, which Google treats as public: its "secret" grants nothing without the user's own consent and PKCE. Never put a Web-application client's secret here, because that one is truly confidential.

@@ -1,4 +1,4 @@
-// adapted from kabar-app: crates/app/src/ui.rs
+// adapted from batna-app main: crates/app/src/ui.rs
 //! Shared UI primitives. Features compose these and own their state;
 //! surface, spacing and shape come from the shared CSS tokens.
 

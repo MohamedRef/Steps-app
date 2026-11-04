@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Creates the permanent Android release signing key outside the repo
-# (adapted from kabar-app main: scripts/android-keystore.sh). The password
+# (adapted from batna-app main: scripts/android-keystore.sh). The password
 # lives in the macOS Keychain (service "steps-android"), never in a file or
 # an argument list. Run it again any time: an existing key is only checked,
 # never replaced (docs/RELEASE.md §2).

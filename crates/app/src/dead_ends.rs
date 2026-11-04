@@ -3,7 +3,7 @@
 //! when a class that looks tappable sits on an element that can't be
 //! pressed, when a card with one button only reacts to that button, and
 //! when CSS draws something as a link (pointer, underline) that isn't one.
-//! The scanner is adapted from kabar-app main: crates/app/src/dead_ends.rs.
+//! The scanner is adapted from batna-app main: crates/app/src/dead_ends.rs.
 //!
 //! The rule for new UI: put such a class on a `button` (with `.tap`, see
 //! main.css) or a `summary`. A card that only holds a form or text keeps
@@ -407,10 +407,10 @@ fn single_action_cards_open_anywhere() {
 
 #[test]
 fn the_card_check_sees_a_one_button_card() {
-    // A card like Kabar's Kabar Pagi before Kabar-app#433: only its button reacted.
-    let before = "div { class: \"card pagi-card reveal\",\n    h2 { \"Kabar Pagi\" }\n    p { class: \"muted\", \"x\" }\n    button { class: \"primary\", onclick: move |_| go(), \"Listen\" }\n}\n";
+    // A daily card where only its button reacted, as one did upstream once.
+    let before = "div { class: \"card plan-card reveal\",\n    h2 { \"Today's plan\" }\n    p { class: \"muted\", \"x\" }\n    button { class: \"primary\", onclick: move |_| go(), \"Start\" }\n}\n";
     assert_eq!(one_button_cards(before), vec![1]);
-    let after = "div { class: \"card card-action pagi-card\",\n    onclick: move |_| go(),\n    h2 { \"Kabar Pagi\" }\n    button { class: \"primary\", \"Listen\" }\n}\n";
+    let after = "div { class: \"card card-action plan-card\",\n    onclick: move |_| go(),\n    h2 { \"Today's plan\" }\n    button { class: \"primary\", \"Start\" }\n}\n";
     assert!(one_button_cards(after).is_empty());
     // Two choices (do it now / later) stay a card with two buttons.
     let choice = "div { class: \"card\",\n    button { onclick: move |_| a(), \"Now\" }\n    button { onclick: move |_| b(), \"Later\" }\n}\n";

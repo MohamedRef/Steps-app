@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Fails loudly if an APK lacks Steps's Kotlin glue from android/, i.e. if dx
 # did not pick up the `#[manganis::ffi]` module (crates/app/src/platform/background.rs).
-# Adapted from kabar-app main: scripts/android-check-apk.sh.
+# Adapted from batna-app main: scripts/android-check-apk.sh.
 #
 # Usage: scripts/android-check-apk.sh path/to/steps.apk
 # When a chunk adds a Kotlin class that Rust calls by name, add it to CLASSES.

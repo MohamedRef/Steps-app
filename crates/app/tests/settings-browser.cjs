@@ -1,4 +1,4 @@
-// adapted from kabar-app: crates/app/tests/settings-browser.cjs
+// adapted from batna-app main: crates/app/tests/settings-browser.cjs
 // Browser layout and keyboard checks of HTML rendered from production Settings.
 // No Dioxus hydration: domain callbacks, native Back and device QA are separate.
 const assert = require('node:assert/strict');

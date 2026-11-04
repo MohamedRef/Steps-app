@@ -1,7 +1,7 @@
 //! Builds the offline content pack (`steps_core::pack`) from
 //! `content/index.yaml`, `content/program.yaml` and every `content/<chapter>/LNN.yaml`, and embeds it
-//! with `include_bytes!`, the same pattern as Kabar's build.rs (adapted from
-//! kabar-app main: crates/app/build.rs). A new lecture file needs no code
+//! with `include_bytes!`, the same pattern as Batna's build.rs (adapted from
+//! batna-app main: crates/app/build.rs). A new lecture file needs no code
 //! change. A file that doesn't parse is left out with a warning; CI's
 //! `steps-tools validate` and `packs build --check` fail on it.
 

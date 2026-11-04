@@ -2,7 +2,7 @@
 //! menus (so ⌘C, ⌘V and ⌘W work as everywhere else), Go with ⌘1–⌘7, and
 //! Help › Keyboard Shortcuts (also the "?" key).
 //! Built on every desktop so it is type-checked here; only macOS installs it.
-// adapted from kabar-app main: crates/app/src/settings/menu.rs
+// adapted from batna-app main: crates/app/src/settings/menu.rs
 
 use dioxus::desktop::muda::accelerator::{Accelerator, Code, Modifiers};
 use dioxus::desktop::muda::{AboutMetadata, Menu, MenuItem, PredefinedMenuItem, Submenu};
