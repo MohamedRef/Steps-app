@@ -132,7 +132,7 @@ mod tests {
     fn the_built_in_library_has_the_whole_program() {
         let lib = Library::get();
         let all = summaries(lib, |c| c.status);
-        assert_eq!(all.len(), 16);
+        assert_eq!(all.len(), 17);
         let cvs = all.iter().find(|s| s.course.id == "cvs").unwrap();
         assert_eq!(cvs.lectures, 5);
         assert!(cvs.items > 0 && cvs.lessons > 0);

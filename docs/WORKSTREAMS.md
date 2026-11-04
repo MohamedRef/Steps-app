@@ -18,5 +18,6 @@ Each workstream is one project thread. A content workstream writes only its own 
 | 12 | Renal and Respiratory | renal (596–628), resp (678–706) |
 | 13 | Reproductive | repro (630–676) |
 | 14 | USMLE app features: timed vignette blocks, lab values sheet, Rapid Review mode, course screens without MSc wording | crates/app |
+| 15 | Rapid Review (Section III's closing tables, one lecture per table) | rr (707–746) |
 
 Order inside a content workstream: one lecture per PR, in book order; items first, then its lessons.
