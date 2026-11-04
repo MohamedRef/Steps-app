@@ -1,0 +1,414 @@
+schema: steps.lesson/v1
+lecture: imm.L02
+lessons:
+  - id: imm.L02.lesson1
+    title: "المناعة بتشوف العدو إزاي: TLRs و MHC"
+    hook: "قاعدة الـ 8 هتحلّلك نص أسئلة الـ MHC من غير حفظ"
+    minutes: 9
+    pages: [97, 98]
+    topics: [innate-vs-adaptive-immunity, immune-privilege, mhc-i-and-ii, bare-lymphocyte-syndrome]
+    goals:
+      - "تفرّق بين الـ innate والـ adaptive في السرعة والذاكرة والـ genes"
+      - "تفهم الـ TLRs بتشغّل الالتهاب إزاي"
+      - "تعرف MHC I من MHC II: مين بيقدّم إيه لمين وفين"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "جيشين: سريع وغبي، وبطيء وذكي"
+        text: |-
+          - **Innate**: neutrophils و macrophages و monocytes و dendritic cells و NK cells (أصلها lymphoid بس شغالة innate)، و complement و الجلد والـ mucosa. ==germline encoded==، يعني الـ receptors مكتوبة جاهزة في الـ DNA. بيرد في دقايق لساعات، **من غير memory**.
+          - **Adaptive**: T cells و B cells و antibodies. بيعمل receptors جديدة بالـ ==V(D)J recombination==، فبقى highly specific، بس بياخد وقت. ميزته الـ **memory**: المرة التانية أسرع وأقوى.
+
+          ومع السن الـ adaptive بيضعف (**immunosenescence**).
+        page: 97
+        quote: "Germline encoded. Variation through V(D)J recombination during lymphocyte development. RESPONSE TO PATHOGENS Nonspecific. Occurs rapidly (minutes to hours). No memory response."
+      - kind: explain
+        title: "الـ TLRs: جرس إنذار"
+        text: |-
+          الـ innate ما بيعرفش كل جرثومة باسمها، بس بيعرف ==أشكال عامة== مش موجودة في جسمك:
+
+          - **PAMPs** (من الجرثومة): LPS بتاع الـ gram ⊝، و flagellin، و nucleic acids بتاعة الفيروسات.
+          - **DAMPs** (من خلاياك لما تموت): mitochondrial DNA، و histones، و heat shock proteins.
+
+          الـ TLR يمسك أي واحد منهم ← ==NF-κB== يشتغل ← pro-inflammatory cytokines.
+        page: 97
+        quote: "Toll-like receptors (TLRs): pattern recognition receptors that recognize pathogen- and damage-associated molecular patterns (PAMPs and DAMPs) → activation of NF-κB → release of pro-inflammatory cytokines."
+      - kind: reveal
+        prompt: "ليه الـ mitochondrial DNA بالذات بيشتغل كـ danger signal؟"
+        answer: "الـ mitochondria أصلها bacteria قديمة، فالـ DNA بتاعها شبه الـ bacterial DNA. طول ما هو جوه الخلية مستخبي، بس لو الخلية اتكسرت وطلع برّه، الـ TLRs بتشوفه كأنه جرثومة فتعمل التهاب. عشان كده موت الخلايا لوحده بيعمل inflammation."
+        page: 97
+        quote: "Examples of DAMPs: mitochondrial DNA, histones, heat shock proteins."
+      - kind: aside
+        tone: tip
+        text: "**Immune privilege**: العين والمخ والـ placenta والـ testes فيها آليات بتقلّل المناعة عمداً، لأن الالتهاب فيها هيبوّظها أكتر من الجرثومة. عشان كده ==الـ allograft فيها أقل في الـ rejection== (زي زرع القرنية)."
+        page: 97
+        quote: "Organs (eg, eye, brain, placenta, testes) and tissues where chemical or physical mechanisms limit immune responses to foreign antigens to avoid damage that would occur from inflammatory sequelae. Allograft rejection at these sites is less likely."
+      - kind: explain
+        title: "الـ MHC: الفاترينة"
+        text: |-
+          الـ T cell ما بتشوفش الجرثومة نفسها؛ بتشوف ==حتة منها معروضة على MHC==. الـ MHC بيتعمل من الـ **HLA genes**.
+
+          - **MHC I** (HLA-A و B و C: حرف واحد): على ==كل خلية فيها nucleus== + platelets، ما عدا الـ RBCs. بيعرض اللي جوه الخلية (endogenous: فيروس، بروتين cytosolic) للـ **CD8+**.
+          - **MHC II** (HLA-DP و DQ و DR: حرفين): على الـ **APCs** بس. بيعرض اللي اتبلع من برّه (exogenous: bacteria) للـ **CD4+**.
+        page: 98
+        quote: "MHC encoded by HLA genes. Present antigen fragments to T cells and bind T-cell receptors (TCRs)."
+      - kind: mnemonic
+        word: "88"
+        parts:
+          - { key: "8", text: "CD8 × MHC 1 = 8" }
+          - { key: "8", text: "CD4 × MHC 2 = 8" }
+        hook: "الكتاب بيقولها: اضرب رقم الـ CD في رقم الـ MHC لازم يطلع 8"
+        page: 98
+        quote: "BINDING TCR and CD8 (CD8 × MHC 1 = 8) TCR and CD4 (CD4 × MHC 2 = 8)"
+      - kind: figure
+        title: "طريقين للتحميل"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="imm2a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="20" y="20" class="t-b t-acc">MHC I (endogenous)</text>
+            <rect class="fg-box" x="10" y="30" width="70" height="36" rx="6"/><text x="16" y="53" class="t-sm">cytosol</text>
+            <path class="fg-arrow-acc" d="M80 48 L 108 48" marker-end="url(#imm2a)"/>
+            <rect class="fg-acc" x="110" y="30" width="50" height="36" rx="6"/><text x="120" y="53" class="t-sm t-b">TAP</text>
+            <path class="fg-arrow-acc" d="M160 48 L 188 48" marker-end="url(#imm2a)"/>
+            <rect class="fg-box" x="190" y="30" width="60" height="36" rx="6"/><text x="200" y="53" class="t-sm">RER</text>
+            <path class="fg-arrow-acc" d="M250 48 L 278 48" marker-end="url(#imm2a)"/>
+            <rect class="fg-good" x="280" y="30" width="70" height="36" rx="6"/><text x="290" y="53" class="t-sm">to CD8+</text>
+            <text x="110" y="84" class="t-sm t-mut">with β2-microglobulin</text>
+            <text x="20" y="120" class="t-b t-acc">MHC II (exogenous)</text>
+            <rect class="fg-box" x="10" y="130" width="70" height="36" rx="6"/><text x="16" y="153" class="t-sm">ingested</text>
+            <path class="fg-arrow-acc" d="M80 148 L 108 148" marker-end="url(#imm2a)"/>
+            <rect class="fg-acc" x="110" y="130" width="140" height="36" rx="6"/><text x="118" y="153" class="t-sm">lysosome: invariant out</text>
+            <path class="fg-arrow-acc" d="M250 148 L 278 148" marker-end="url(#imm2a)"/>
+            <rect class="fg-good" x="280" y="130" width="70" height="36" rx="6"/><text x="290" y="153" class="t-sm">to CD4+</text>
+          </svg>
+        caption: "MHC I بيتحمّل في الـ RER بعد ما الـ TAP يدخّل الـ peptide، وماسك فيه الـ β2-microglobulin. MHC II بيتحمّل في الـ lysosome بعد ما الـ invariant chain (اللي كانت حاجزة مكانه) تتشال."
+        alt: "Two pathways. MHC I: cytosolic peptide goes through TAP into the rough ER, is loaded onto MHC I with beta-2 microglobulin and shown to CD8+ cells. MHC II: ingested antigen meets MHC II in the lysosome after the invariant chain is released and is shown to CD4+ cells."
+        page: 98
+        quote: "Antigen peptides loaded onto MHC I in RER after delivery via TAP (transporter associated with antigen processing) Antigen loaded following release of invariant chain in a lysosome"
+      - kind: check
+        question: "A virus makes its proteins in the host cytosol. Which molecule carries its peptides from the cytosol to the site of MHC loading?"
+        options:
+          - "TAP"
+          - "Invariant chain"
+          - "CD4"
+          - "B7"
+        answer: 0
+        why:
+          - "صح: الـ endogenous peptide بيدخل الـ RER بالـ TAP ويتحمّل على MHC I."
+          - "الـ invariant chain بتاعة MHC II، وبتتشال في الـ lysosome."
+          - "CD4 على الـ helper T cell وبيمسك MHC II."
+          - "B7 هو الـ signal 2 على الـ APC."
+        page: 98
+        quote: "Antigen peptides loaded onto MHC I in RER after delivery via TAP"
+      - kind: table
+        title: "Bare lymphocyte syndrome (AR)"
+        columns: ["Type", "Defect", "What drops", "Picture"]
+        rows:
+          - ["I", "TAP mutation", "MHC I → CD8+", "Chronic respiratory infections, skin granulomas, vasculitis; normal Ig"]
+          - ["II", "Transcription factors", "MHC II → CD4+ + APC/B-cell dysfunction", "SCID-like infections; ↓ Ig"]
+        hide: [[0, 1], [1, 1], [0, 3], [1, 3]]
+        page: 98
+        quote: "Type I: TAP mutation → ↓ MHC I → ↓ CD8+ T cells → chronic respiratory infections, skin granulomas, vasculitis; normal Ig. Type II: transcription factor mutations → ↓ MHC II → ↓ CD4+ T cells + antigen-presenting cell/B-cell dysfunction → SCID-like infections; ↓ Ig."
+      - kind: reveal
+        prompt: "ليه type II بيطلع زي SCID و الـ Ig واطي، بينما type I الـ Ig طبيعي؟"
+        answer: "الـ B cell محتاجة **CD4+ help** عشان تعمل antibodies كويسة. في type II الـ MHC II راح، فالـ CD4+ قلّت ← مفيش help ← ==↓ Ig== ومعاها كل أنواع العدوى. في type I الـ CD8+ بس اللي قلّت، والـ CD4+ والـ B cells شغالين، فالـ Ig طبيعي. العلاج في الاتنين: allogeneic HSCT و IVIG."
+        page: 98
+        quote: "Treatment: allogeneic hematopoietic stem cell transplant, IVIG."
+      - kind: try
+        items: [imm.L02.001, imm.L02.004, imm.L02.010, imm.L02.012, imm.L02.016]
+    recap:
+      - "Innate: germline، سريع، من غير memory. Adaptive: V(D)J، specific، بـ memory."
+      - "TLR يمسك PAMP أو DAMP ← NF-κB ← cytokines."
+      - "MHC I: كل خلية فيها nucleus (مش RBC)، endogenous، TAP و β2-microglobulin، للـ CD8+."
+      - "MHC II: APCs، exogenous، invariant chain في الـ lysosome، للـ CD4+."
+    practice: [imm.L02.001, imm.L02.002, imm.L02.003, imm.L02.004, imm.L02.005, imm.L02.006, imm.L02.007, imm.L02.008, imm.L02.009, imm.L02.010, imm.L02.011, imm.L02.012, imm.L02.013, imm.L02.014, imm.L02.015, imm.L02.016, imm.L02.017, imm.L02.018]
+  - id: imm.L02.lesson2
+    title: "HLA و NK والـ T cells بتتعلم إزاي"
+    hook: "الـ NK cell بتقتل اللي بيستخبى، والـ thymus بيمتحن كل T cell امتحانين"
+    minutes: 9
+    pages: [99, 100]
+    topics: [hla-subtypes, natural-killer-cells, b-and-t-cells, t-cell-differentiation, positive-selection, negative-selection]
+    goals:
+      - "تحفظ أهم ارتباطات الـ HLA بحيل الكتاب"
+      - "تفهم الـ NK بتقرر تقتل إمتى"
+      - "تعرف الـ Th subsets: مين بيعملهم ومين بيوقفهم"
+      - "تفرّق بين positive و negative selection و AIRE"
+    status: unverified
+    steps:
+      - kind: table
+        title: "HLA والأمراض"
+        columns: ["HLA", "Diseases"]
+        rows:
+          - ["B27", "Psoriatic arthritis, Ankylosing spondylitis, IBD-associated arthritis, Reactive arthritis (PAIR)"]
+          - ["DQ2/DQ8", "Celiac disease, DM type 1"]
+          - ["DR3", "DM type 1, SLE, Graves, Hashimoto, Addison"]
+          - ["DR4", "Rheumatoid arthritis, DM type 1, Addison"]
+          - ["DR5", "Pernicious anemia, Hashimoto"]
+          - ["B*58:01", "Allopurinol hypersensitivity → ↑ SJS/TEN"]
+        hide: [[0, 1], [1, 1], [3, 1], [5, 1]]
+        page: 99
+        quote: "B27 Psoriatic arthritis, Ankylosing spondylitis, IBD-associated arthritis, Reactive arthritis PAIR DQ2/DQ8 Celiac disease, DM type 1"
+      - kind: aside
+        tone: tip
+        text: "حيل الكتاب: **DM type 1** = DR3 و DR4 لأن ==1 + 3 = 4==. **SLE** = SL3 (DR3). و **DR4** = rheumatoid، لأن «فيه 4 حيطان في الـ rheum (room)». والـ **narcolepsy** = DQB1*0602، والـ **multiple sclerosis** = DRB1*15:01، و DRB1*01:03 = severe UC."
+        page: 99
+        quote: "DM type 1: HLA-3 and -4 (1 + 3 = 4) SL3 (SLE) DR4 Rheumatoid arthritis, DM type 1, Addison disease There are 4 walls in 1 “rheum” (room)"
+      - kind: explain
+        title: "الـ NK cell: بتقتل اللي ملوش بطاقة"
+        text: |-
+          الـ NK هي الـ lymphocyte الوحيدة في الـ **innate**. بتقتل الخلايا المصابة بفيروس والـ tumor cells بالـ ==perforin و granzymes== (apoptosis).
+
+          بتقرر تقتل لو:
+          - شافت **activation signal** غير متخصص على الخلية، و/أو
+          - ==ما لقتش MHC I== (الـ inhibitory signal).
+
+          وكمان بتعمل **ADCC**: الـ CD16 بتاعها يمسك الـ Fc بتاع IgG لازق على الخلية.
+
+          بيقوّيها IL-2 و IL-12 و IFN-α و IFN-β، وهي بتطلّع **IFN-γ** يشغّل الـ macrophages.
+        page: 99
+        quote: "Induced to kill when exposed to a nonspecific activation signal on target cell and/or to an absence of an inhibitory signal such as MHC I on target cell surface."
+      - kind: aside
+        tone: analogy
+        text: "الـ MHC I زي ==البطاقة الشخصية==. الـ CD8+ بيقرا البطاقة ويقبض على اللي فيها اسم فيروس. الفيروس الشاطر يقطع البطاقة خالص (↓ MHC I) عشان يهرب من الـ CD8+... فتمسكه الـ NK لأنه ماشي من غير بطاقة."
+        page: 99
+        quote: "an absence of an inhibitory signal such as MHC I on target cell surface."
+      - kind: check
+        question: "A tumor cell line loses all surface MHC I. Which cell is now most likely to kill it?"
+        options:
+          - "NK cell"
+          - "CD8+ cytotoxic T cell"
+          - "CD4+ helper T cell"
+          - "Plasma cell"
+        answer: 0
+        why:
+          - "صح: غياب الـ MHC I بيشيل الـ inhibitory signal عن الـ NK فتقتل."
+          - "الـ CD8+ محتاج MHC I عشان يشوف الـ antigen."
+          - "الـ CD4+ بيشوف MHC II وما بيقتلش مباشرة."
+          - "الـ plasma cell بتعمل antibodies بس."
+        page: 99
+        quote: "Use perforin and granzymes to induce apoptosis of virally infected cells and tumor cells."
+      - kind: explain
+        title: "B و T: مين بيعمل إيه"
+        text: |-
+          - **B cells** (humoral): تقدّم الـ antigen وتعمل **somatic hypermutation** عشان تبقى أدق، وتتحول لـ ==plasma cells== تعمل immunoglobulins، والـ **memory B cells** تسرّع المرة الجاية.
+          - **T cells** (cell-mediated): الـ **CD4+** بتساعد الـ B cells وبتطلّع cytokines تجيب phagocytes. الـ **CD8+** بتقتل مباشرة بالـ perforin و granzymes زي الـ NK. والـ T cells هي اللي ورا ==type IV hypersensitivity== والـ cellular rejection (acute و chronic).
+        page: 99
+        quote: "Produce antibody—differentiate into plasma cells to secrete specific immunoglobulins. Maintain immunologic memory—memory B cells persist and accelerate future response to antigen."
+      - kind: explain
+        title: "امتحانين في الـ thymus"
+        text: |-
+          الـ T cell بتيجي من الـ bone marrow للـ thymus وهي **double positive** (CD4+ CD8+):
+
+          1. ==Positive selection== في الـ **cortex**: «إنت شايف الـ self-MHC؟» لو آه تاخد survival signal، لو لأ تموت. لازم تشوف الـ MHC عشان تشتغل بعدين.
+          2. ==Negative selection== في الـ **medulla**: «إنت ماسك الـ self قوي أوي؟» لو آه تعمل apoptosis أو تتحول **Treg**.
+
+          اللي بيعدّي يبقى single positive (CD4+ أو CD8+) ويخرج.
+        page: 100
+        quote: "Negative selection Thymic medulla. Removes T cells that bind too strongly to self-peptides. Thymocytes expressing TCRs with high affinity for self antigens undergo apoptosis or become regulatory T cells."
+      - kind: reveal
+        prompt: "إزاي الـ medulla بتعرض على الـ T cells بروتينات الـ parathyroid والـ adrenal عشان تمتحنها؟ وإيه اللي يحصل لو ده باظ؟"
+        answer: "ده شغل الـ ==AIRE== (autoimmune regulator): بيخلّي خلايا الـ medulla تعمل بروتينات من أعضاء تانية. من غيره الـ T cells اللي بتهاجم الأعضاء دي تعدّي ← **autoimmune polyendocrine syndrome**. الكتاب: «Without AIRE, your body will CHAR»: Chronic mucocutaneous candidiasis، Hypoparathyroidism، Adrenal insufficiency، Recurrent Candida."
+        page: 100
+        quote: "The autoimmune regulator (AIRE) protein drives negative selection, and deficiency leads to autoimmune polyendocrine syndrome (Chronic mucocutaneous candidiasis, Hypoparathyroidism, Adrenal insufficiency, Recurrent Candida infections)."
+      - kind: figure
+        title: "الـ CD4+ بتتفرع لـ 4"
+        svg: |-
+          <svg viewBox="0 0 360 230" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="imm2b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-ink" x="10" y="95" width="70" height="36" rx="8"/><text x="22" y="118" class="t-b">CD4+</text>
+            <path class="fg-arrow-acc" d="M80 113 L 120 32" marker-end="url(#imm2b)"/>
+            <path class="fg-arrow-acc" d="M80 113 L 120 87" marker-end="url(#imm2b)"/>
+            <path class="fg-arrow-acc" d="M80 113 L 120 142" marker-end="url(#imm2b)"/>
+            <path class="fg-arrow-acc" d="M80 113 L 120 197" marker-end="url(#imm2b)"/>
+            <rect class="fg-acc" x="122" y="14" width="228" height="38" rx="6"/>
+            <text x="130" y="30" class="t-sm t-b">Th1 (IL-12, IFN-γ) → IFN-γ, IL-2</text>
+            <text x="130" y="46" class="t-sm">macrophages, CD8+</text>
+            <rect class="fg-acc" x="122" y="69" width="228" height="38" rx="6"/>
+            <text x="130" y="85" class="t-sm t-b">Th2 (IL-2, IL-4) → IL-4, 5, 6, 10, 13</text>
+            <text x="130" y="101" class="t-sm">eosinophils, IgE</text>
+            <rect class="fg-acc" x="122" y="124" width="228" height="38" rx="6"/>
+            <text x="130" y="140" class="t-sm t-b">Th17 (TGF-β, IL-1, IL-6) → IL-17, 21, 22</text>
+            <text x="130" y="156" class="t-sm">neutrophils</text>
+            <rect class="fg-good" x="122" y="179" width="228" height="38" rx="6"/>
+            <text x="130" y="195" class="t-sm t-b">Treg (TGF-β, IL-2) → TGF-β, IL-10, IL-35</text>
+            <text x="130" y="211" class="t-sm">tolerance</text>
+          </svg>
+        caption: "بين القوسين اللي بيعمل الـ subset، وبعد السهم اللي هو بيطلّعه. Th1 و Th2 بيوقفوا بعض: IL-4 و IL-10 بيوقفوا Th1، و IFN-γ بيوقف Th2. و IL-6 بيوقف الـ Treg."
+        alt: "A CD4+ T cell branching to four subsets with their inducing cytokines and products: Th1 (IL-12, IFN-gamma) makes IFN-gamma and IL-2 to activate macrophages and CD8+ cells; Th2 (IL-2, IL-4) makes IL-4, 5, 6, 10 and 13 for eosinophils and IgE; Th17 (TGF-beta, IL-1, IL-6) makes IL-17, 21 and 22 to recruit neutrophils; Treg (TGF-beta, IL-2) makes TGF-beta, IL-10 and IL-35 to keep tolerance."
+        page: 100
+        quote: "Secretes Function IFN-γ, IL-2 Activate macrophages and cytotoxic T cells IL-4, IL-5, IL-6, IL-10, IL-13 IL-17, IL-21, IL-22 Induce neutrophilic infiltration TGF-β, IL-10, IL-35 Prevent autoimmunity (maintain tolerance)"
+      - kind: aside
+        tone: exam
+        text: "لاحظ: ==TGF-β لوحده يعمل Treg، و TGF-β + IL-6 يعمل Th17==. يعني الـ IL-6 هو المفتاح اللي بيقلب الهدنة لالتهاب. وعشان كده IL-6 بيوقف الـ Treg."
+        page: 100
+        quote: "TGF-β, IL-2 TGF-β, IL-1, IL-6"
+      - kind: match
+        prompt: "وصّل الـ subset بشغلته"
+        pairs:
+          - ["Th1", "Activate macrophages and cytotoxic T cells"]
+          - ["Th2", "Activate eosinophils, IgE"]
+          - ["Th17", "Induce neutrophilic infiltration"]
+          - ["Treg", "Prevent autoimmunity"]
+        why: "Th1 للحاجات اللي جوه الخلايا (TB، فيروسات)، Th2 للديدان والحساسية، Th17 للـ bacteria والـ fungi برّه الخلايا بالـ neutrophils، والـ Treg بيهدّي الكل."
+        page: 100
+        quote: "Activate macrophages and cytotoxic T cells IL-4, IL-5, IL-6, IL-10, IL-13 IL-17, IL-21, IL-22 Induce neutrophilic infiltration"
+      - kind: check
+        question: "Thymocytes whose TCRs bind self-peptide–MHC with very high affinity are found in the thymic medulla. What happens to them?"
+        options:
+          - "Apoptosis or conversion to regulatory T cells"
+          - "Survival signal and release to the periphery"
+          - "Return to the cortex for positive selection"
+          - "Class switching"
+        answer: 0
+        why:
+          - "صح: ده negative selection في الـ medulla."
+          - "الـ survival signal بيتدّى في الـ positive selection للي بيشوف الـ self-MHC بدرجة معقولة."
+          - "الـ positive selection بتحصل قبل كده في الـ cortex."
+          - "الـ class switching في الـ B cells."
+        page: 100
+        quote: "Thymocytes expressing TCRs with high affinity for self antigens undergo apoptosis or become regulatory T cells."
+      - kind: try
+        items: [imm.L02.020, imm.L02.026, imm.L02.033, imm.L02.035, imm.L02.038]
+    recap:
+      - "B27 = PAIR؛ DR3 + DR4 = DM1؛ DR4 = RA؛ DQ2/DQ8 = celiac."
+      - "NK: innate، بتقتل لما الـ MHC I يغيب، و ADCC بالـ CD16."
+      - "Th1 = IFN-γ للـ macrophages؛ Th2 = IL-4/5 للـ eosinophils و IgE؛ Th17 = IL-17 للـ neutrophils؛ Treg = TGF-β و IL-10."
+      - "Positive selection في الـ cortex، negative في الـ medulla بالـ AIRE (CHAR)."
+    practice: [imm.L02.019, imm.L02.020, imm.L02.021, imm.L02.022, imm.L02.023, imm.L02.024, imm.L02.025, imm.L02.026, imm.L02.027, imm.L02.028, imm.L02.029, imm.L02.030, imm.L02.031, imm.L02.032, imm.L02.033, imm.L02.034, imm.L02.035, imm.L02.036, imm.L02.037, imm.L02.038, imm.L02.039]
+  - id: imm.L02.lesson3
+    title: "إشارتين عشان تشتغل: activation و tolerance"
+    hook: "الـ T cell محتاجة مفتاحين زي خزنة البنك، ولو جالها مفتاح واحد بتنام للأبد"
+    minutes: 8
+    pages: [100, 101]
+    topics: [macrophage-lymphocyte-interaction, cytotoxic-t-cells, regulatory-t-cells, t-and-b-cell-activation, peripheral-tolerance, anergy]
+    goals:
+      - "تفهم الـ Th1 بتقوّي الـ macrophage إزاي"
+      - "تعرف الـ Treg markers و IPEX"
+      - "تحفظ signal 1 و signal 2 للـ T و B cells"
+      - "تفهم الـ anergy والـ peripheral tolerance"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ macrophage والـ Th1: شراكة"
+        text: |-
+          الـ macrophage بيبلع الميكروب ويعرضه على الـ T cell (antigen presentation). الـ Th1 بترد الجميل:
+
+          - بتطلّع ==IFN-γ== يخلّي الـ macrophage يقتل اللي بلعه أحسن.
+          - والـ **CD40L** بتاعها يمسك الـ **CD40** على الـ macrophage فيقوّيه أكتر.
+        page: 100
+        quote: "Th1 cells secrete IFN-γ, which enhances the ability of monocytes and macrophages to kill microbes they ingest. This function is also enhanced by interaction of T cell CD40L with CD40 on macrophages."
+      - kind: explain
+        title: "الـ CD8+ والـ Treg"
+        text: |-
+          - **Cytotoxic T cells**: بتقتل خلايا الفيروس والـ tumor وخلايا الـ graft بالـ ==apoptosis==، بـ granules جاهزة (perforin و granzyme B). الـ CD8 بيمسك الـ MHC I.
+          - **Regulatory T cells**: بتوقف الـ CD4+ والـ CD8+ عشان الـ tolerance. علامتها ==CD3 و CD4 و CD25 و FOXP3==، وبتطلّع IL-10 و TGF-β.
+        page: 100
+        quote: "Identified by expression of CD3, CD4, CD25, and FOXP3. Activated regulatory T cells (Tregs) produce anti-inflammatory cytokines (eg, IL-10, TGF-β)."
+      - kind: aside
+        tone: exam
+        text: "**IPEX** = Immune dysregulation، Polyendocrinopathy، Enteropathy، X-linked. مفيش ==FOXP3== ← مفيش Treg ← autoimmunity: إسهال (enteropathy)، endocrinopathy، nail dystrophy، dermatitis. الصورة الكلاسيكية: ==ولد رضيع عنده diabetes== وإسهال و eczema."
+        page: 100
+        quote: "IPEX (Immune dysregulation, Polyendocrinopathy, Enteropathy, X-linked) syndrome— genetic deficiency of FOXP3 → autoimmunity."
+      - kind: check
+        question: "A male infant has intractable diarrhea, eczematous dermatitis and insulin-requiring diabetes. Which marker is missing from his regulatory T cells?"
+        options:
+          - "FOXP3"
+          - "AIRE"
+          - "CD16"
+          - "TAP"
+        answer: 0
+        why:
+          - "صح: ده IPEX، نقص FOXP3."
+          - "الـ AIRE في خلايا الـ thymic medulla مش في الـ Treg، ونقصه بيعمل CHAR."
+          - "CD16 على الـ NK cells للـ ADCC."
+          - "الـ TAP بيحمّل MHC I."
+        page: 100
+        quote: "Associated with diabetes in male infants."
+      - kind: explain
+        title: "مفتاحين للخزنة"
+        text: |-
+          الـ APCs: B cells و dendritic cells و Langerhans cells و macrophages. الـ APC يبلع الـ antigen ويروح الـ **draining lymph node**.
+
+          - ==Signal 1==: الـ antigen على MHC II يقابل الـ TCR بتاع CD4+ (أو على MHC I للـ CD8+).
+          - ==Signal 2== (costimulation): **B7 (CD80/86)** على الـ dendritic cell يمسك **CD28** على الـ naïve T cell.
+
+          الاتنين مع بعض ← proliferation و survival: الـ Th تطلّع cytokines، والـ Tc تقدر تقتل.
+        page: 101
+        quote: "Proliferation and survival (signal 2): costimulatory signal via interaction of B7 protein (CD80/86) on dendritic cell and CD28 on naïve T cell."
+      - kind: figure
+        title: "Signal 1 و Signal 2"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-acc" x="10" y="20" width="120" height="130" rx="14"/>
+            <text x="38" y="40" class="t-sm t-b">APC</text>
+            <rect class="fg-good" x="230" y="20" width="120" height="130" rx="14"/>
+            <text x="250" y="40" class="t-sm t-b">Naïve T cell</text>
+            <rect class="fg-ink" x="130" y="55" width="40" height="22" rx="4"/><text x="134" y="70" class="t-sm">MHC</text>
+            <rect class="fg-ink" x="190" y="55" width="40" height="22" rx="4"/><text x="196" y="70" class="t-sm">TCR</text>
+            <line class="fg-arrow" x1="170" y1="66" x2="190" y2="66"/>
+            <text x="150" y="50" class="t-sm t-acc">signal 1</text>
+            <rect class="fg-ink" x="130" y="105" width="40" height="22" rx="4"/><text x="137" y="120" class="t-sm">B7</text>
+            <rect class="fg-ink" x="190" y="105" width="40" height="22" rx="4"/><text x="193" y="120" class="t-sm">CD28</text>
+            <line class="fg-arrow" x1="170" y1="116" x2="190" y2="116"/>
+            <text x="150" y="145" class="t-sm t-acc">signal 2</text>
+          </svg>
+        caption: "Signal 1 = الـ antigen على الـ MHC بيقابل الـ TCR (مع CD4 أو CD8). Signal 2 = B7 (CD80/86) بيمسك CD28. واحد من غير التاني ← anergy."
+        alt: "An antigen-presenting cell on the left and a naive T cell on the right. Top pair: MHC binding the T-cell receptor, labelled signal 1. Bottom pair: B7 binding CD28, labelled signal 2."
+        page: 101
+        quote: "T-cell activation (signal 1): exogenous antigen is presented on MHC II and recognized by TCR on Th (CD4+) cell."
+      - kind: explain
+        title: "والـ B cell؟"
+        text: |-
+          الـ B cell تبلع الـ antigen بالـ **BCR** وتعرضه على MHC II للـ Th (signal 1). بعدين:
+
+          - ==CD40 على الـ B cell يمسك CD40L على الـ Th== (signal 2).
+          - الـ Th تطلّع cytokines تحدد الـ B cell هتعمل class switch لأنهي Ig.
+
+          الـ B cell تعمل **IgM** الأول، وبعدين class switching و affinity maturation.
+        page: 101
+        quote: "CD40 receptor on B cell binds CD40 ligand (CD40L) on Th cell. Th cells secrete cytokines that determine Ig class switching of B cells. B cells are activated and produce IgM. They undergo class switching and affinity maturation."
+      - kind: reveal
+        prompt: "لو الـ CD40L بايظ، تتوقع الـ immunoglobulins تبقى عاملة إزاي؟"
+        answer: "الـ B cells هتعمل **IgM** عادي (ده أول حاجة من غير switch)، بس ==مش هتقدر تعمل class switch== للـ IgG و IgA و IgE. يعني IgM عالي أو طبيعي وكل الباقي واطي."
+        page: 101
+        quote: "B cells are activated and produce IgM. They undergo class switching and affinity maturation."
+      - kind: explain
+        title: "Peripheral tolerance"
+        text: |-
+          الـ thymus مش بيمسك كل حاجة، فبرّه الـ thymus والـ bone marrow فيه 3 خطوط تانية بتوقف الخلايا اللي بتهاجم الـ self:
+
+          - **Anergy**
+          - **Treg suppression**
+          - **Apoptosis** بالـ ==Fas–FasL pathway==
+
+          لو الـ peripheral tolerance راحت ← **autoimmunity**.
+        page: 101
+        quote: "Suppression/inactivation of self-reactive T/B cells (outside thymus/bone marrow) → preserves self- tolerance; loss → autoimmunity. Mechanisms: anergy, regulatory T-cell suppression, apoptosis (Fas–FasL pathway)."
+      - kind: aside
+        tone: analogy
+        text: "**Anergy** زي خزنة بمفتاحين: لو حد جه بمفتاح واحد بس (signal 1 من غير signal 2)، الخزنة ==بتقفل نفسها للأبد==. ده منطقي: الـ self antigens بتتعرض عادة من غير التهاب، فمفيش B7، فالـ T cell اللي بتشوفها تنام."
+        page: 101
+        quote: "T and B cells become anergic when exposed to their antigen without costimulatory signal (signal 2)."
+      - kind: check
+        question: "A T cell meets its antigen on MHC II, but the presenting cell has no B7. What happens to this T cell?"
+        options:
+          - "It becomes anergic"
+          - "It proliferates and makes IL-2"
+          - "It becomes a plasma cell"
+          - "It undergoes positive selection"
+        answer: 0
+        why:
+          - "صح: signal 1 من غير signal 2 = anergy."
+          - "الـ proliferation محتاجة الإشارتين."
+          - "الـ plasma cells جاية من B cells."
+          - "الـ positive selection في الـ thymic cortex أثناء التطور."
+        page: 101
+        quote: "Anergy State during which a cell cannot become activated by exposure to its antigen."
+      - kind: try
+        items: [imm.L02.044, imm.L02.046, imm.L02.050, imm.L02.051, imm.L02.057]
+    recap:
+      - "Th1 بتقوّي الـ macrophage بالـ IFN-γ و CD40L-CD40."
+      - "Treg: CD3، CD4، CD25، FOXP3؛ نقص FOXP3 = IPEX (ولد رضيع، diabetes، إسهال)."
+      - "T: signal 1 = MHC + TCR، signal 2 = B7-CD28. B: CD40-CD40L، وبعدين class switch."
+      - "Peripheral tolerance: anergy و Tregs و Fas-FasL."
+    practice: [imm.L02.040, imm.L02.041, imm.L02.042, imm.L02.043, imm.L02.044, imm.L02.045, imm.L02.046, imm.L02.047, imm.L02.048, imm.L02.049, imm.L02.050, imm.L02.051, imm.L02.052, imm.L02.053, imm.L02.054, imm.L02.055, imm.L02.056, imm.L02.057, imm.L02.058]

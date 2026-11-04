@@ -355,10 +355,18 @@ mod tests {
         std::fs::write(content.join("glossary/cvs.yaml"), entry("VSD")).unwrap();
         let g = read_glossary(content).unwrap().unwrap();
         assert_eq!(g.entries.len(), 2);
-        // A term in two files is one glossary's duplicate.
+        // A term two course files both add (threads merged side by side)
+        // stays once, from the file read first, and main stays valid.
         std::fs::write(content.join("glossary/renal.yaml"), entry("VSD")).unwrap();
         let g = read_glossary(content).unwrap().unwrap();
+        assert_eq!(g.entries.len(), 2);
+        assert!(validate::glossary(&g, None).is_empty(), "{:?}", validate::glossary(&g, None));
+        // Twice within one file is still a mistake.
+        let twice = entry("GFR") + "  - { term: GFR, kind: abbr, text: y, status: unverified }\n";
+        std::fs::write(content.join("glossary/renal.yaml"), twice).unwrap();
+        let g = read_glossary(content).unwrap().unwrap();
         assert!(validate::glossary(&g, None).iter().any(|p| p.message.contains("listed twice")));
+        std::fs::remove_file(content.join("glossary/renal.yaml")).unwrap();
         // A file must be named after a course.
         std::fs::write(content.join("glossary/hepatology.yaml"), entry("ALT")).unwrap();
         let e = read_glossary(content).unwrap_err();
