@@ -1,0 +1,935 @@
+schema: steps.content/v1
+lecture: mic.L06
+title: Systems
+book: { chapter: 3, pages: [174, 182] }
+topics:
+  - { id: prions, title: Prions }
+  - { id: normal-microbiota, title: "Normal microbiota: dominant" }
+  - { id: foodborne-illness, title: Bugs causing food-borne illness }
+  - { id: diarrhea, title: Bugs causing diarrhea }
+  - { id: pneumonia, title: Common causes of pneumonia }
+  - { id: meningitis, title: Common causes of meningitis }
+  - { id: csf-findings, title: Cerebrospinal fluid findings in meningitis }
+  - { id: brain-abscess, title: Infections causing brain abscess }
+  - { id: osteomyelitis, title: Osteomyelitis }
+  - { id: childhood-rashes, title: Red rashes of childhood }
+  - { id: uti, title: Urinary tract infections }
+  - { id: vaginal-infections, title: Common vaginal infections }
+  - { id: sti, title: Sexually transmitted infections }
+  - { id: torch, title: TORCH infections }
+  - { id: pid, title: Pelvic inflammatory disease }
+  - { id: healthcare-associated, title: Healthcare-associated infections }
+  - { id: unvaccinated-children, title: Bugs affecting unvaccinated children }
+items:
+  # ---------- p174: prions ----------
+  - id: mic.L06.001
+    kind: card
+    topic: prions
+    front: What is the molecular basis of prion disease?
+    back: Normal, mostly α-helical prion protein (PrPc) converts to a β-pleated form (PrPsc), which resists protease degradation and converts more PrPc to PrPsc. Accumulation causes spongiform encephalopathy.
+    src: { page: 174, quote: "PrPsc resists protease degradation and facilitates the conversion of still more PrPc to PrPsc." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.002
+    kind: card
+    topic: prions
+    front: How are prions transmitted, and why are they a hazard for instruments?
+    back: Via CNS-related tissue (iatrogenic CJD) or food contaminated by BSE-infected animal products (variant CJD). They resist standard sterilizing procedures, including standard autoclaving.
+    src: { page: 174, quote: "which is transmissible via CNS-related tissue (iatrogenic CJD) or food contaminated by BSE-infected animal products (variant CJD)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.003
+    kind: card
+    topic: prions
+    front: What are the clinical features of prion disease, and what are the main prion diseases?
+    back: Dementia, ataxia, startle myoclonus, death. Creutzfeldt-Jakob disease (rapidly progressive dementia, usually sporadic); bovine spongiform encephalopathy ("mad cow disease"); kuru (from human cannibalism).
+    src: { page: 174, quote: "Accumulation of PrPsc results in spongiform encephalopathy and dementia, ataxia, startle myoclonus, and death." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.004
+    kind: mcq
+    topic: prions
+    stem: >-
+      A 64-year-old woman has 4 months of rapidly worsening memory, unsteady gait, and sudden jerks of her limbs
+      when startled. EEG shows periodic sharp wave complexes. She dies 2 months later, and brain autopsy shows
+      small vacuoles throughout the cortex without inflammation. What is the mechanism of her disease?
+    options:
+      - Conversion of α-helical prion protein to a protease-resistant β-pleated form
+      - Reactivation of JC virus in oligodendrocytes
+      - Persistent measles virus infection
+      - Accumulation of hyperphosphorylated tau in neurofibrillary tangles
+      - Retrograde axonal spread of a bullet-shaped virus
+    answer: 0
+    why:
+      - "Right. Creutzfeldt-Jakob disease: rapidly progressive dementia, startle myoclonus and spongiform change from PrPc to PrPsc conversion."
+      - "JC virus causes PML in the immunocompromised."
+      - "Persistent measles causes SSPE years after measles in childhood."
+      - "Tau tangles are Alzheimer disease, which progresses slowly."
+      - "Retrograde spread is rabies, with hydrophobia and Negri bodies."
+    src: { page: 174, quote: "conversion of a normal (predominantly α-helical) protein termed prion protein (PrPc ) to a β-pleated form (PrPsc )" }
+    status: unverified
+  # ---------- p174: microbiota and food ----------
+  - id: mic.L06.005
+    kind: table
+    topic: normal-microbiota
+    title: Normal microbiota (dominant)
+    columns: [Location, Microorganism]
+    rows:
+      - [Skin, S epidermidis]
+      - [Nose, S epidermidis; colonized by S aureus]
+      - [Oropharynx, Viridans group streptococci]
+      - [Dental plaque, S mutans]
+      - [Colon, B fragilis > E coli]
+      - [Vagina, Lactobacillus; colonized by E coli and group B strep]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 174, quote: "Skin S epidermidis Nose S epidermidis; colonized by S aureus Oropharynx Viridans group streptococci Dental plaque S mutans Colon B fragilis > E coli" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.006
+    kind: cloze
+    topic: normal-microbiota
+    text: Neonates delivered by C-section have microbiota enriched in {{c1::skin commensals}}.
+    src: { page: 174, quote: "Neonates delivered by C-section have microbiota enriched in skin commensals." }
+    status: unverified
+  - id: mic.L06.007
+    kind: table
+    topic: foodborne-illness
+    title: Bugs causing food-borne illness
+    columns: [Microorganism, Source]
+    rows:
+      - [B cereus, Reheated rice]
+      - [C botulinum, "Improperly canned foods (toxins), raw honey (spores)"]
+      - [C perfringens, Reheated meat]
+      - [E coli O157:H7, Undercooked meat]
+      - [L monocytogenes, "Deli meats, soft cheeses"]
+      - [Salmonella, "Poultry, meat, and eggs"]
+      - [S aureus, "Meats, mayonnaise, custard; preformed toxin"]
+      - [V parahaemolyticus and V vulnificus, Raw/undercooked seafood]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 174, quote: "C botulinum Improperly canned foods (toxins), raw honey (spores) C perfringens Reheated meat E coli O157:H7 Undercooked meat L monocytogenes Deli meats, soft cheeses" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.008
+    kind: card
+    topic: foodborne-illness
+    front: Which food poisonings start and end quickly, and why?
+    back: S aureus and B cereus; they are exotoxin-mediated.
+    src: { page: 174, quote: "S aureus and B cereus food poisoning starts quickly and ends quickly (exotoxin-mediated)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.009
+    kind: card
+    topic: foodborne-illness
+    front: What does V vulnificus predominantly cause?
+    back: Wound infections from contact with contaminated water or shellfish.
+    src: { page: 174, quote: "V vulnificus predominantly causes wound infections from contact with contaminated water or shellfish." }
+    status: unverified
+  - id: mic.L06.010
+    kind: mcq
+    topic: foodborne-illness
+    stem: >-
+      Three hours after a picnic, several guests develop intense vomiting and abdominal cramps, followed by
+      nonbloody diarrhea. All ate potato salad with mayonnaise and custard pastries left in the sun. All recover
+      within 24 hours. What explains the short incubation?
+    options:
+      - Ingestion of a preformed toxin
+      - Invasion of the colonic mucosa
+      - Germination of ingested spores in the gut
+      - Antibody-dependent enhancement
+      - Production of Shiga toxin in the colon
+    answer: 0
+    why:
+      - "Right. S aureus in meats, mayonnaise and custard makes a preformed toxin; the illness starts quickly and ends quickly."
+      - "Mucosal invasion (Shigella, EIEC) takes longer and gives bloody diarrhea."
+      - "Spore germination in the gut is C perfringens or infant botulism, with a longer delay."
+      - "Antibody-dependent enhancement is dengue."
+      - "Shiga toxin gives bloody diarrhea after days."
+    src: { page: 174, quote: "S aureus Meats, mayonnaise, custard; preformed toxin" }
+    status: unverified
+  # ---------- p175: diarrhea ----------
+  - id: mic.L06.011
+    kind: table
+    topic: diarrhea
+    title: Bugs causing bloody diarrhea
+    columns: [Organism, Clue]
+    rows:
+      - [Campylobacter, "Comma- or S-shaped; growth at 42°C"]
+      - [E histolytica, Protozoan; amebic dysentery; liver abscess]
+      - [Enterohemorrhagic E coli, O157:H7; can cause HUS; makes Shiga toxin]
+      - [Enteroinvasive E coli, Invades colonic mucosa]
+      - [Salmonella (nontyphoidal), "Lactose ⊝; flagellar motility; animal reservoir, especially poultry and eggs"]
+      - [Shigella, "Lactose ⊝; very low ID50; Shiga toxin; human reservoir only"]
+      - [Y enterocolitica, Day care outbreaks; pseudoappendicitis]
+    blanks: [[0, 1], [2, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 175, quote: "Campylobacter Comma- or S-shaped organisms; growth at 42°C" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.012
+    kind: table
+    topic: diarrhea
+    title: Bugs causing watery diarrhea
+    columns: [Organism, Clue]
+    rows:
+      - [C difficile, "Pseudomembranous colitis; antibiotics and PPIs"]
+      - [C perfringens, Also causes gas gangrene]
+      - [Enterotoxigenic E coli, Travelers' diarrhea; LT and ST toxins]
+      - [Protozoa, "Giardia, Cryptosporidium"]
+      - [V cholerae, Rice-water diarrhea; often from seafood]
+      - [Viruses, "Norovirus (most common in developed countries), rotavirus, enteric adenovirus"]
+    blanks: [[0, 1], [2, 1], [4, 1], [5, 1]]
+    src: { page: 175, quote: "Enterotoxigenic E coli Travelers’ diarrhea; produces heat-labile (LT) and heat-stable (ST) toxins" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.013
+    kind: cloze
+    topic: diarrhea
+    text: The most common cause of viral diarrhea in developed countries is {{c1::norovirus}}; {{c2::rotavirus}} has become less common there because of vaccination.
+    src: { page: 175, quote: "Norovirus (most common cause in developed countries), rotavirus (↓ incidence in developed countries due to vaccination)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.014
+    kind: mcq
+    topic: diarrhea
+    stem: >-
+      An 8-year-old boy has right lower quadrant pain, fever and diarrhea. Several children at his day care have
+      similar symptoms. At surgery for presumed appendicitis, the appendix is normal but the mesenteric nodes
+      are enlarged. Which organism is the most likely cause?
+    options:
+      - Yersinia enterocolitica
+      - Campylobacter jejuni
+      - Shigella sonnei
+      - Enterotoxigenic E coli
+      - Vibrio cholerae
+    answer: 0
+    why:
+      - "Right. Y enterocolitica causes day care outbreaks and pseudoappendicitis."
+      - "Campylobacter is comma shaped, grows at 42°C, and is linked to poultry."
+      - "Shigella gives bacillary dysentery with a very low ID50."
+      - "ETEC gives watery travelers' diarrhea."
+      - "V cholerae gives rice-water diarrhea."
+    src: { page: 175, quote: "Y enterocolitica Day care outbreaks; pseudoappendicitis" }
+    status: unverified
+  - id: mic.L06.015
+    kind: mcq
+    topic: diarrhea
+    stem: >-
+      A 30-year-old woman develops bloody diarrhea 3 days after eating undercooked chicken at a barbecue. Two
+      weeks later she has ascending weakness of both legs. Stool culture grew curved gram-negative rods at 42°C.
+      Which organism caused the diarrhea?
+    options:
+      - Campylobacter jejuni
+      - Salmonella enteritidis
+      - Yersinia enterocolitica
+      - Enteroinvasive E coli
+      - Clostridioides difficile
+    answer: 0
+    why:
+      - "Right. Campylobacter: comma or S shaped, grows at 42°C, from poultry; it is a classic trigger of Guillain-Barré syndrome."
+      - "Salmonella is also from poultry and eggs but is not comma shaped and does not grow at 42°C as its clue."
+      - "Yersinia causes pseudoappendicitis."
+      - "EIEC invades colonic mucosa but is a straight rod."
+      - "C difficile follows antibiotics and is usually watery."
+    src: { page: 175, quote: "Comma- or S-shaped organisms; growth at 42°C" }
+    status: unverified
+  # ---------- p175: pneumonia ----------
+  - id: mic.L06.016
+    kind: table
+    topic: pneumonia
+    title: Common causes of pneumonia by age
+    columns: [Age, Causes]
+    rows:
+      - [Neonates (<4 wk), "Group B Streptococcus, E coli"]
+      - [Children (4 wk-18 yr), "Viruses (RSV), Mycoplasma, C trachomatis (infants-3 yr), C pneumoniae (school-aged), S pneumoniae"]
+      - [Adults (18-40 yr), "Mycoplasma, C pneumoniae, S pneumoniae, viruses (eg, influenza)"]
+      - [Adults (40-65 yr), "S pneumoniae, H influenzae, anaerobes, viruses, Mycoplasma"]
+      - [Adults (65 yr+), "S pneumoniae, influenza virus, anaerobes, H influenzae, gram ⊝ rods"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 175, quote: "NEONATES (<4 WK) CHILDREN (4 WK-18 YR) ADULTS (18-40 YR) ADULTS (40-65 YR) ADULTS (65 YR+) Group B Streptococcus E coli" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.017
+    kind: card
+    topic: pneumonia
+    front: What is the mnemonic for pneumonia causes in children?
+    back: "\"Runts May Cough Chunky Sputum\": RSV, Mycoplasma, C trachomatis, C pneumoniae, S pneumoniae."
+    src: { page: 175, quote: "Runts May Cough Chunky Sputum" }
+    status: unverified
+  - id: mic.L06.018
+    kind: table
+    topic: pneumonia
+    title: Pneumonia in special groups
+    columns: [Group, Causes]
+    rows:
+      - [Alcohol overuse, "Klebsiella; anaerobes from aspiration (Peptostreptococcus, Fusobacterium, Prevotella, Bacteroides)"]
+      - [Injection drug use, "S pneumoniae, S aureus"]
+      - [Aspiration, Anaerobes]
+      - [Atypical, "Mycoplasma, Chlamydophila, Legionella, viruses (RSV, CMV, influenza, adenovirus)"]
+      - [Cystic fibrosis, "Pseudomonas, S aureus, S pneumoniae, Burkholderia cepacia"]
+      - [Immunocompromised, "S aureus, enteric gram ⊝ rods, fungi, viruses, P jirovecii (with HIV)"]
+      - [Healthcare-associated, "S aureus, Pseudomonas, other enteric gram ⊝ rods"]
+      - [Postviral, "S pneumoniae, S aureus, H influenzae"]
+      - [COPD, "S pneumoniae, H influenzae, M catarrhalis, Pseudomonas"]
+    blanks: [[0, 1], [1, 1], [4, 1], [6, 1], [7, 1], [8, 1]]
+    src: { page: 175, quote: "Cystic fibrosis Pseudomonas, S aureus, S pneumoniae, Burkholderia cepacia" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.019
+    kind: mcq
+    topic: pneumonia
+    stem: >-
+      A 52-year-old man with long-standing alcohol use disorder is found after a binge with fever and cough
+      productive of thick, bloody "currant jelly" sputum. Chest x-ray shows a right upper lobe consolidation with
+      a bulging fissure. Which organism is the most likely cause?
+    options:
+      - Klebsiella pneumoniae
+      - Mycoplasma pneumoniae
+      - Legionella pneumophila
+      - Chlamydophila pneumoniae
+      - Pneumocystis jirovecii
+    answer: 0
+    why:
+      - "Right. In alcohol overuse, think Klebsiella (and aspiration anaerobes)."
+      - "Mycoplasma is atypical pneumonia in young adults."
+      - "Legionella comes from water aerosols."
+      - "C pneumoniae is atypical pneumonia in school-aged children and young adults."
+      - "Pneumocystis needs immunosuppression such as HIV."
+    src: { page: 175, quote: "Alcohol overuse Klebsiella, anaerobes usually due to aspiration" }
+    status: unverified
+  # ---------- p176: meningitis, CSF, abscess, osteomyelitis ----------
+  - id: mic.L06.020
+    kind: table
+    topic: meningitis
+    title: Common causes of meningitis by age
+    columns: [Age, Causes]
+    rows:
+      - [Newborn (0-6 mo), "Group B Streptococcus, E coli, Listeria"]
+      - [Children (6 mo-6 yr), "S pneumoniae, N meningitidis, H influenzae type b, group B Streptococcus, enteroviruses"]
+      - [6-60 yr, "S pneumoniae, N meningitidis, enteroviruses, HSV"]
+      - [60 yr+, "S pneumoniae, N meningitidis, H influenzae type b, group B Streptococcus, Listeria"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 176, quote: "Group B Streptococcus S pneumoniae S pneumoniae S pneumoniae E coli N meningitidis N meningitidis N meningitidis Listeria H influenzae type b Enteroviruses H influenzae type b" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.021
+    kind: cloze
+    topic: meningitis
+    text: Empiric treatment of meningitis is {{c1::ceftriaxone and vancomycin}}; add {{c2::ampicillin}} if Listeria is suspected and {{c3::acyclovir}} if viral encephalitis is suspected.
+    src: { page: 176, quote: "Give ceftriaxone and vancomycin empirically (add ampicillin if Listeria is suspected; add acyclovir if viral encephalitis is suspected)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.022
+    kind: card
+    topic: meningitis
+    front: What are the viral causes of meningitis, and what causes meningitis in HIV?
+    back: Enteroviruses (especially coxsackievirus), HSV-2 (HSV-1 = encephalitis), HIV, West Nile virus (also encephalitis), VZV. In HIV, Cryptococcus.
+    src: { page: 176, quote: "Viral causes of meningitis: enteroviruses (especially coxsackievirus), HSV-2 (HSV-1 = encephalitis), HIV, West Nile virus (also causes encephalitis), VZV. In HIV: Cryptococcus spp." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.023
+    kind: card
+    topic: meningitis
+    front: Why have group B strep and H influenzae meningitis fallen?
+    back: Group B strep in neonates - screening and antibiotic prophylaxis in pregnancy. H influenzae - conjugate vaccination; cases are now usually in unimmunized children.
+    src: { page: 176, quote: "Incidence of H influenzae meningitis has ↓ greatly due to conjugate H influenzae vaccinations. Today, cases are usually seen in unimmunized children." }
+    status: unverified
+  - id: mic.L06.024
+    kind: table
+    topic: csf-findings
+    title: CSF findings in meningitis
+    columns: [Type, Opening pressure, Cells, Protein, Glucose]
+    rows:
+      - [Bacterial, ↑, ↑ PMNs, ↑, ↓]
+      - [Fungal/TB, ↑, ↑ lymphocytes, ↑, ↓]
+      - [Viral, Normal/↑, ↑ lymphocytes, Normal/↑, Normal]
+    blanks: [[0, 2], [0, 4], [1, 2], [1, 4], [2, 2], [2, 4]]
+    src: { page: 176, quote: "Bacterial ↑ ↑ PMNs ↑ ↓ Fungal/TB ↑ ↑ lymphocytes ↑ ↓ Viral Normal/↑ ↑ lymphocytes Normal/↑ Normal" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.025
+    kind: mcq
+    topic: meningitis
+    stem: >-
+      A 72-year-old man has fever, headache and neck stiffness for 1 day. CSF shows high opening pressure,
+      2,800 white cells/mm3 with 90% neutrophils, high protein and low glucose. Gram stain is pending. Which
+      empiric regimen is most appropriate?
+    options:
+      - Ceftriaxone, vancomycin, and ampicillin
+      - Ceftriaxone and vancomycin only
+      - Acyclovir only
+      - Amphotericin B and flucytosine
+      - Ampicillin and gentamicin only
+    answer: 0
+    why:
+      - "Right. Bacterial CSF picture; empiric ceftriaxone and vancomycin, plus ampicillin because Listeria causes meningitis over age 60."
+      - "Without ampicillin, Listeria is not covered in an older adult."
+      - "Acyclovir is added for viral encephalitis; this CSF is bacterial."
+      - "Amphotericin and flucytosine treat cryptococcal meningitis."
+      - "Ampicillin and gentamicin miss resistant S pneumoniae, the leading cause."
+    src: { page: 176, quote: "Give ceftriaxone and vancomycin empirically (add ampicillin if Listeria is suspected" }
+    status: unverified
+  - id: mic.L06.026
+    kind: mcq
+    topic: csf-findings
+    stem: >-
+      A 25-year-old woman has fever, headache and photophobia in late summer. She is alert without focal deficits.
+      CSF shows a mildly raised opening pressure, 120 white cells/mm3 that are mostly lymphocytes, slightly high
+      protein and normal glucose. Which cause is most likely?
+    options:
+      - Enterovirus
+      - Streptococcus pneumoniae
+      - Mycobacterium tuberculosis
+      - Cryptococcus neoformans
+      - Neisseria meningitidis
+    answer: 0
+    why:
+      - "Right. Viral CSF (lymphocytes, normal glucose); enteroviruses, especially coxsackievirus, are the leading viral cause."
+      - "S pneumoniae gives PMNs and low glucose."
+      - "TB gives lymphocytes but low glucose."
+      - "Fungal meningitis gives low glucose, mostly in HIV."
+      - "N meningitidis gives a bacterial CSF picture."
+    src: { page: 176, quote: "Viral Normal/↑ ↑ lymphocytes Normal/↑ Normal" }
+    status: unverified
+  - id: mic.L06.027
+    kind: card
+    topic: brain-abscess
+    front: What usually causes a brain abscess, and how does the source predict the location?
+    back: Most commonly viridans streptococci and S aureus; oral anaerobes after dental infection or extraction. Multiple abscesses usually come from bacteremia. Single ones from contiguous sites - otitis media and mastoiditis to the temporal lobe and cerebellum; sinusitis or dental infection to the frontal lobe. Toxoplasma reactivation in AIDS.
+    src: { page: 176, quote: "single lesions from contiguous sites: otitis media and mastoiditis →  temporal lobe and cerebellum; sinusitis or dental infection →  frontal lobe." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.028
+    kind: table
+    topic: osteomyelitis
+    title: Osteomyelitis by risk factor
+    columns: [Risk factor, Infection]
+    rows:
+      - [No other information, S aureus (most common overall)]
+      - [Sexually active, "Neisseria gonorrhoeae (rare); septic arthritis more common"]
+      - [Sickle cell disease, "Salmonella, S aureus"]
+      - [Prosthetic joint replacement, "S aureus, S epidermidis"]
+      - [Vertebral involvement, "S aureus, M tuberculosis (Pott disease)"]
+      - [Cat and dog bites, Pasteurella multocida]
+      - [Injection drug use, "S aureus; also Pseudomonas, Candida"]
+    blanks: [[0, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 176, quote: "Sickle cell disease Salmonella, S aureus Prosthetic joint replacement S aureus, S epidermidis Vertebral involvement S aureus, M tuberculosis (Pott disease) Cat and dog bites Pasteurella multocida" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.029
+    kind: card
+    topic: osteomyelitis
+    front: Which tests are useful in osteomyelitis?
+    back: ESR and CRP are sensitive but not specific. Radiographs are insensitive early but useful in chronic disease. MRI is best for acute infection and anatomy. Biopsy or aspiration with culture identifies the organism.
+    src: { page: 176, quote: "Radiographs are insensitive early but can be useful in chronic osteomyelitis ( A , left). MRI is best for detecting acute infection and detailing anatomic involvement ( A , right)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.030
+    kind: mcq
+    topic: osteomyelitis
+    stem: >-
+      A 7-year-old boy with sickle cell disease has a 5-day history of fever and pain in his left tibia. MRI
+      shows marrow edema and a subperiosteal collection. Besides S aureus, which organism must the empiric
+      antibiotics cover?
+    options:
+      - Salmonella
+      - Pasteurella multocida
+      - Pseudomonas aeruginosa
+      - Neisseria gonorrhoeae
+      - Mycobacterium tuberculosis
+    answer: 0
+    why:
+      - "Right. In sickle cell disease, osteomyelitis is caused by Salmonella and S aureus."
+      - "Pasteurella follows cat and dog bites."
+      - "Pseudomonas is added in injection drug use."
+      - "Gonorrhea is linked to sexually active patients."
+      - "M tuberculosis causes vertebral osteomyelitis (Pott disease)."
+    src: { page: 176, quote: "Sickle cell disease Salmonella, S aureus" }
+    status: unverified
+  # ---------- p177: rashes ----------
+  - id: mic.L06.031
+    kind: table
+    topic: childhood-rashes
+    title: Red rashes of childhood
+    columns: [Agent, Disease, Presentation]
+    rows:
+      - [Coxsackievirus type A, Hand-foot-mouth disease, Oval vesicles on palms and soles; oral vesicles and ulcers (herpangina)]
+      - [Human herpesvirus 6, Roseola, Rose-colored macules after several days of high fever; febrile seizures]
+      - [Measles virus, Measles, "Confluent rash from head down; cough, coryza, conjunctivitis, Koplik spots"]
+      - [Parvovirus B19, Erythema infectiosum (fifth disease), Slapped cheek rash on face]
+      - [Rubella virus, Rubella, "Discrete pink macules from head down, fine desquamating truncal rash; postauricular nodes"]
+      - [Streptococcus pyogenes, Scarlet fever, "Sandpaperlike rash, circumoral pallor, strawberry tongue"]
+      - [Varicella-zoster virus, Chickenpox, Vesicular rash from trunk out with lesions of different stages]
+    blanks: [[0, 1], [1, 1], [3, 1], [5, 1], [0, 2], [2, 2], [4, 2], [6, 2]]
+    src: { page: 177, quote: "Coxsackievirus type A Hand-foot-mouth disease Oval-shaped vesicles on palms and soles" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.032
+    kind: enumerate
+    topic: childhood-rashes
+    prompt: Enumerate the features of scarlet fever (SCARLET) (7).
+    points:
+      - Sore throat
+      - Circumoral pallor
+      - group A strep
+      - Rash (sandpaperlike, from neck to trunk and extremities)
+      - Lymphadenopathy
+      - Erythrogenic toxin
+      - strawberry Tongue
+    pass: 6
+    hook: "SCARLET"
+    src: { page: 177, quote: "Sore throat, Circumoral pallor, group A strep, Rash (sandpaperlike D, from neck to trunk and extremities), Lymphadenopathy, Erythrogenic toxin, strawberry Tongue (SCARLET)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.033
+    kind: mcq
+    topic: childhood-rashes
+    stem: >-
+      A 6-year-old girl has a sore throat and fever, then a red, rough rash on her neck that spreads to her trunk
+      and limbs. Her face is flushed except around the mouth, and her tongue is red with prominent papillae.
+      What produces the rash?
+    options:
+      - Erythrogenic toxin of group A strep
+      - Parvovirus B19 infection of erythroid precursors
+      - Measles virus infection of the endothelium
+      - Superantigen of S aureus toxic shock syndrome toxin
+      - Coxsackievirus A infection of the skin
+    answer: 0
+    why:
+      - "Right. Scarlet fever (SCARLET): group A strep erythrogenic toxin gives a sandpaperlike rash, circumoral pallor and strawberry tongue."
+      - "Parvovirus B19 gives a slapped cheek rash."
+      - "Measles gives a confluent rash from the head down with Koplik spots."
+      - "TSST-1 gives diffuse rash with shock and desquamation."
+      - "Coxsackie A gives vesicles on the palms, soles and mouth."
+    src: { page: 177, quote: "Erythrogenic toxin, strawberry Tongue (SCARLET)" }
+    status: unverified
+  - id: mic.L06.034
+    kind: mcq
+    topic: childhood-rashes
+    stem: >-
+      A 4-year-old boy has an itchy rash that began on his trunk 2 days ago and has spread to his face and limbs.
+      There are papules, vesicles and crusted lesions side by side. Which virus is the most likely cause?
+    options:
+      - Varicella-zoster virus
+      - Coxsackievirus A
+      - Rubella virus
+      - Human herpesvirus 6
+      - Measles virus
+    answer: 0
+    why:
+      - "Right. Chickenpox: vesicular rash begins on the trunk and spreads, with lesions of different stages."
+      - "Coxsackie A gives vesicles on palms, soles and mouth."
+      - "Rubella starts at the head with postauricular nodes."
+      - "HHV-6 gives macules after days of fever."
+      - "Measles is a confluent rash from the head down."
+    src: { page: 177, quote: "Vesicular rash begins on trunk E , spreads to face and extremities with lesions of different stages" }
+    status: unverified
+  # ---------- p178: UTI and vaginal infections ----------
+  - id: mic.L06.035
+    kind: table
+    topic: uti
+    title: Cystitis vs pyelonephritis
+    columns: ["", Cystitis, Pyelonephritis]
+    rows:
+      - [Symptoms, "Dysuria, frequency, urgency, suprapubic pain", "Fever, chills, flank pain, CVA tenderness, hematuria"]
+      - [Urine, WBCs but not WBC casts, WBC casts]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 178, quote: "Cystitis presents with dysuria, frequency, urgency, suprapubic pain, and WBCs (but not WBC casts) in urine." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.036
+    kind: card
+    topic: uti
+    front: Why are UTIs more common in females, and what are the risk factors?
+    back: Ten times more common in females (shorter urethras colonized by fecal microbiota). Risk factors - obstruction (stones, enlarged prostate), kidney surgery, catheterization, congenital GU malformation (vesicoureteral reflux), diabetes, pregnancy.
+    src: { page: 178, quote: "Ten times more common in females (shorter urethras colonized by fecal microbiota)." }
+    status: unverified
+  - id: mic.L06.037
+    kind: card
+    topic: uti
+    front: What do positive leukocyte esterase and nitrite tests mean?
+    back: Leukocyte esterase = evidence of WBC activity. Nitrite = reduction of urinary nitrates by gram ⊝ bacteria (eg, E coli).
+    src: { page: 178, quote: "⊕ Leukocyte esterase = evidence of WBC activity. ⊕ Nitrite test = reduction of urinary nitrates by gram ⊝ bacterial species (eg, E coli)." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.038
+    kind: table
+    topic: uti
+    title: Causes of UTI
+    columns: [Species, Feature]
+    rows:
+      - [Escherichia coli, Leading cause; strong pink lactose fermentation on MacConkey]
+      - [Staphylococcus saprophyticus, "2nd leading cause, young sexually active females"]
+      - [Klebsiella pneumoniae, 3rd leading cause; large mucoid capsule and viscous colonies]
+      - [Serratia marcescens, "Red pigment; healthcare-associated, drug resistant"]
+      - [Enterococcus, "Healthcare-associated, drug resistant"]
+      - [Proteus mirabilis, Swarming motility; struvite stones; urease]
+      - [Pseudomonas aeruginosa, "Blue-green pigment, fruity odor; healthcare-associated"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [5, 1], [6, 1]]
+    src: { page: 178, quote: "Proteus mirabilis Motility causes “swarming” on agar; associated with struvite stones. Produces urease." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.039
+    kind: table
+    topic: vaginal-infections
+    title: Common vaginal infections
+    columns: ["", Bacterial vaginosis, Trichomonas vaginitis, Candida vulvovaginitis]
+    rows:
+      - [Discharge, "Thin, white, fishy odor; no inflammation", "Frothy, yellow-green, foul; strawberry cervix", "Thick, white, cottage cheese; inflammation"]
+      - [Lab, "Clue cells, pH >4.5, ⊕ KOH whiff test", "Motile pear-shaped trichomonads, pH >4.5", "Pseudohyphae, pH normal (4.0-4.5)"]
+      - [Treatment, Metronidazole or clindamycin, Metronidazole; treat sexual partner(s), Azoles]
+    blanks: [[0, 1], [0, 2], [0, 3], [1, 1], [1, 2], [1, 3], [2, 1], [2, 3]]
+    src: { page: 178, quote: "Clue cells (bacteria-coated epithelial cells) pH >4.5 ⊕ KOH whiff test" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.040
+    kind: mcq
+    topic: uti
+    stem: >-
+      A 58-year-old woman has recurrent UTIs. A CT shows a large branching stone filling the left renal pelvis.
+      Urine pH is 8.0. Culture grows a gram-negative rod that spreads across the agar plate in waves. Which
+      enzyme of this organism promotes the stone?
+    options:
+      - Urease
+      - Catalase
+      - Coagulase
+      - Elastase
+      - β-lactamase
+    answer: 0
+    why:
+      - "Right. Proteus mirabilis swarms on agar and produces urease, which alkalinizes urine and forms struvite stones."
+      - "Catalase does not make stones."
+      - "Coagulase is S aureus."
+      - "Elastase is a Pseudomonas virulence factor."
+      - "β-lactamase gives drug resistance, not stones."
+    src: { page: 178, quote: "Motility causes “swarming” on agar; associated with struvite stones. Produces urease." }
+    status: unverified
+  - id: mic.L06.041
+    kind: mcq
+    topic: vaginal-infections
+    stem: >-
+      A 27-year-old woman has a thin, gray-white vaginal discharge with a fishy odor, worse after intercourse.
+      There is no vulvar redness or itching. Vaginal pH is 5.5, and adding KOH releases a fishy smell. What will
+      microscopy most likely show?
+    options:
+      - Epithelial cells coated with bacteria
+      - Motile pear-shaped flagellated organisms
+      - Budding yeast with pseudohyphae
+      - Gram-negative diplococci inside neutrophils
+      - Multinucleated giant cells
+    answer: 0
+    why:
+      - "Right. Bacterial vaginosis: no inflammation, fishy odor, pH >4.5, ⊕ whiff test and clue cells."
+      - "Motile trichomonads mark Trichomonas, with inflammation and strawberry cervix."
+      - "Pseudohyphae mark Candida, with normal pH."
+      - "Intracellular diplococci are gonorrhea."
+      - "Multinucleated giant cells are HSV on a Tzanck smear."
+    src: { page: 178, quote: "Clue cells (bacteria-coated epithelial cells)" }
+    status: unverified
+  # ---------- p179: STI ----------
+  - id: mic.L06.042
+    kind: table
+    topic: sti
+    title: Genital ulcers
+    columns: [Disease, Ulcer, Pathogen]
+    rows:
+      - [Chancroid, "Painful ulcer with exudate, inguinal adenopathy", Haemophilus ducreyi]
+      - [Herpes genitalis, "Painful vesicles and ulcers, bilateral tender nodes", "HSV-2, less commonly HSV-1"]
+      - [Granuloma inguinale, "Painless, beefy red ulcer that bleeds on contact", Klebsiella granulomatis (Donovan bodies)]
+      - [Lymphogranuloma venereum, "Painless ulcer, painful buboes", C trachomatis (L1-L3)]
+      - [Primary syphilis, "Painless chancre, regional nodes", Treponema pallidum]
+    blanks: [[0, 1], [0, 2], [2, 1], [2, 2], [3, 1], [3, 2], [4, 1]]
+    src: { page: 179, quote: "Chancroid Painful genital ulcer(s) with exudate, inguinal adenopathy A Haemophilus ducreyi (it’s so painful, you “do cry”)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.043
+    kind: card
+    topic: sti
+    front: What do Chlamydia trachomatis (D-K) and gonorrhea cause?
+    back: Chlamydia - urethritis, cervicitis, epididymitis, conjunctivitis, reactive arthritis, PID. Gonorrhea - urethritis, cervicitis, PID, prostatitis, epididymitis, arthritis, creamy purulent discharge.
+    src: { page: 179, quote: "Urethritis, cervicitis, epididymitis, conjunctivitis, reactive arthritis, PID Chlamydia trachomatis (D–K)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.044
+    kind: table
+    topic: sti
+    title: Stages of syphilis
+    columns: [Stage, Features]
+    rows:
+      - [Primary, "Painless chancre, regional lymphadenopathy"]
+      - [Secondary, "Fever, diffuse lymphadenopathy, generalized rash, condylomata lata"]
+      - [Tertiary, "Gummas, tabes dorsalis, general paresis, aortitis, Argyll Robertson pupil"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 179, quote: "Secondary syphilis Fever, diffuse lymphadenopathy, generalized rash, condylomata lata Tertiary syphilis Gummas, tabes dorsalis, general paresis, aortitis, Argyll Robertson pupil" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.045
+    kind: cloze
+    topic: sti
+    text: Condylomata acuminata (genital warts with {{c1::koilocytes}}) are caused by HPV-{{c2::6 and -11}}.
+    src: { page: 179, quote: "Genital warts B , koilocytes HPV-6 and -11" }
+    status: unverified
+  - id: mic.L06.046
+    kind: mcq
+    topic: sti
+    stem: >-
+      A 31-year-old man returning from Southeast Asia has a painful, ragged genital ulcer with a gray exudate and
+      tender, matted inguinal nodes. Dark-field microscopy and HSV PCR are negative. Gram stain shows small
+      gram-negative rods in chains. Which organism is the most likely cause?
+    options:
+      - Haemophilus ducreyi
+      - Treponema pallidum
+      - Klebsiella granulomatis
+      - Chlamydia trachomatis L2
+      - Herpes simplex virus-2
+    answer: 0
+    why:
+      - "Right. Chancroid: painful ulcer with exudate and inguinal adenopathy (\"do cry\")."
+      - "The syphilitic chancre is painless and dark-field positive."
+      - "Granuloma inguinale is a painless, beefy red ulcer."
+      - "LGV gives a painless ulcer with painful buboes."
+      - "HSV gives painful vesicles, and the PCR was negative."
+    src: { page: 179, quote: "Painful genital ulcer(s) with exudate, inguinal adenopathy" }
+    status: unverified
+  # ---------- p180: TORCH ----------
+  - id: mic.L06.047
+    kind: card
+    topic: torch
+    front: How are TORCH infections transmitted, and what nonspecific signs do they share?
+    back: Mostly transplacental, or via vaginal delivery (especially HSV-2). Common signs - hepatosplenomegaly, jaundice, thrombocytopenia, growth restriction.
+    src: { page: 180, quote: "Nonspecific signs common to many ToRCHHeS infections include hepatosplenomegaly, jaundice, thrombocytopenia, and growth restriction." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.048
+    kind: table
+    topic: torch
+    title: TORCH neonatal manifestations
+    columns: [Agent, Maternal acquisition, Neonatal findings]
+    rows:
+      - [Toxoplasma gondii, Cat feces or undercooked meat, "Chorioretinitis, hydrocephalus, intracranial calcifications"]
+      - [Rubella, Respiratory droplets, "Cataracts, deafness, PDA (I eye ♥ ruby earrings)"]
+      - [Cytomegalovirus, "Sexual contact, organ transplants", "Hearing loss, seizures, petechial rash, chorioretinitis, periventricular calcifications"]
+      - [HIV, "Sexual contact, needlestick", "Recurrent infections, chronic diarrhea"]
+      - [HSV-2, Skin or mucous membrane contact, "Meningoencephalitis, vesicular lesions"]
+      - [Syphilis, Sexual contact, "Stillbirth, hydrops; notched teeth, saddle nose, saber shins, CN VIII deafness"]
+    blanks: [[0, 2], [1, 2], [2, 2], [4, 2], [5, 2], [0, 1], [1, 1]]
+    src: { page: 180, quote: "Hearing loss, seizures, petechial rash, “blueberry muffin” rash, chorioretinitis, periventricular calcifications C" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.049
+    kind: card
+    topic: torch
+    front: How do congenital CMV and Toxoplasma calcifications differ?
+    back: CMV gives periventricular calcifications ("CMV = Chorioretinitis, Microcephaly, periVentricular calcifications"); Toxoplasma gives intracranial calcifications with hydrocephalus.
+    src: { page: 180, quote: "CMV = Chorioretinitis, Microcephaly, periVentricular calcifications" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.050
+    kind: card
+    topic: torch
+    front: Which maternal syphilis stages most often infect the fetus?
+    back: Primary (chancre) and secondary (disseminated rash).
+    src: { page: 180, quote: "Chancre (1°) and disseminated rash (2°) are the two stages likely to result in fetal infection" }
+    status: unverified
+  - id: mic.L06.051
+    kind: card
+    topic: torch
+    front: Besides TORCH, which infections are important in neonates?
+    back: Group B strep, E coli and Listeria monocytogenes (all cause neonatal meningitis); parvovirus B19 causes hydrops fetalis.
+    src: { page: 180, quote: "Other important infectious agents include Streptococcus agalactiae (group B streptococci), E coli, and Listeria monocytogenes—all causes of meningitis in neonates. Parvovirus B19 causes hydrops fetalis." }
+    status: unverified
+  - id: mic.L06.052
+    kind: mcq
+    topic: torch
+    stem: >-
+      A newborn is small for gestational age with a petechial rash and fails the hearing screen. Head CT shows
+      calcifications lining the lateral ventricles, and fundoscopy shows chorioretinitis. The mother had a
+      mononucleosis-like illness during pregnancy with a negative Monospot test. Which agent is responsible?
+    options:
+      - Cytomegalovirus
+      - Toxoplasma gondii
+      - Rubella virus
+      - Herpes simplex virus-2
+      - Treponema pallidum
+    answer: 0
+    why:
+      - "Right. Congenital CMV: hearing loss, petechial rash, chorioretinitis and periventricular calcifications; the mother had Monospot-negative mono."
+      - "Toxoplasma gives diffuse intracranial calcifications with hydrocephalus."
+      - "Rubella gives cataracts, deafness and PDA."
+      - "HSV-2 gives vesicles and meningoencephalitis."
+      - "Syphilis gives notched teeth, saddle nose and saber shins."
+    src: { page: 180, quote: "CMV = Chorioretinitis, Microcephaly, periVentricular calcifications" }
+    status: unverified
+  # ---------- p181: PID and HAI ----------
+  - id: mic.L06.053
+    kind: card
+    topic: pid
+    front: What is PID, and what are its signs and top causes?
+    back: Ascending infection of the female genital tract (salpingitis, endometritis, hydrosalpinx, tubo-ovarian abscess). Cervical motion tenderness, adnexal tenderness, purulent cervical discharge. Chlamydia trachomatis (subacute, often undiagnosed) and N gonorrhoeae (acute).
+    src: { page: 181, quote: "Signs include cervical motion tenderness, adnexal tenderness, purulent cervical discharge A ." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.054
+    kind: card
+    topic: pid
+    front: What are the consequences of salpingitis, and what is Fitz-Hugh-Curtis syndrome?
+    back: Ectopic pregnancy, infertility, chronic pelvic pain, adhesions. Fitz-Hugh-Curtis is perihepatitis - inflammation of the liver capsule with "violin string" adhesions of peritoneum to liver.
+    src: { page: 181, quote: "Salpingitis is a risk factor for ectopic pregnancy, infertility, chronic pelvic pain, and adhesions." }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.055
+    kind: table
+    topic: healthcare-associated
+    title: Healthcare-associated infections
+    columns: [Risk factor, Pathogen]
+    rows:
+      - ["Antibiotic use, PPIs", C difficile]
+      - [Aspiration, "Polymicrobial, gram ⊝, often anaerobes"]
+      - ["Decubitus ulcers, wounds, drains", "S aureus (incl MRSA), gram ⊝ anaerobes"]
+      - [Intravascular catheters, "S aureus (incl MRSA), S epidermidis (long term)"]
+      - [Mechanical ventilation, "Late onset: P aeruginosa, Klebsiella, Acinetobacter, S aureus"]
+      - ["Blood products, needlesticks", "HBV, HCV"]
+      - [Urinary catheterization, "Proteus, E coli, Klebsiella (PEcK)"]
+      - [Water aerosols, Legionella]
+    blanks: [[0, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 181, quote: "Urinary catheterization Proteus spp, E coli, Klebsiella (PEcK)" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.056
+    kind: card
+    topic: healthcare-associated
+    front: Where does aspiration pneumonia appear on imaging, and what is its sputum like?
+    back: Right lower lobe infiltrate, or right upper/middle lobe if the patient is recumbent; purulent malodorous sputum. Polymicrobial, gram ⊝, often anaerobes.
+    src: { page: 181, quote: "Right lower lobe infiltrate or right upper/ middle lobe (patient recumbent); purulent malodorous sputum" }
+    status: unverified
+  - id: mic.L06.057
+    kind: mcq
+    topic: pid
+    stem: >-
+      A 23-year-old woman has fever, lower abdominal pain and right upper quadrant pain that worsens with
+      breathing. Pelvic exam shows purulent cervical discharge and cervical motion tenderness. Liver enzymes are
+      normal. Laparoscopy would most likely show which finding over the liver?
+    options:
+      - Violin string adhesions between the liver capsule and peritoneum
+      - A hydatid cyst with eggshell calcification
+      - An amebic abscess with anchovy paste fluid
+      - Multiple ring-enhancing lesions
+      - Gallstones in the common bile duct
+    answer: 0
+    why:
+      - "Right. PID can cause perihepatitis (Fitz-Hugh-Curtis): violin string adhesions of peritoneum to the liver."
+      - "Hydatid cysts are Echinococcus."
+      - "Anchovy paste fluid is an amebic liver abscess."
+      - "Ring-enhancing lesions are brain findings."
+      - "Gallstones do not fit cervical motion tenderness."
+    src: { page: 181, quote: "Can lead to perihepatitis (Fitz-Hugh–Curtis syndrome)—infection and inflammation of liver capsule and “violin string” adhesions of peritoneum to liver" }
+    status: unverified
+  - id: mic.L06.058
+    kind: mcq
+    topic: healthcare-associated
+    stem: >-
+      A 67-year-old man on mechanical ventilation in the ICU for 8 days develops fever, a new infiltrate on chest
+      x-ray, and more secretions with a sweet, grape-like odor. Culture grows an oxidase-positive gram-negative
+      rod. Which organism is the most likely cause?
+    options:
+      - Pseudomonas aeruginosa
+      - Legionella pneumophila
+      - Streptococcus pneumoniae
+      - Clostridioides difficile
+      - Staphylococcus epidermidis
+    answer: 0
+    why:
+      - "Right. Late ventilator-associated pneumonia: P aeruginosa, Klebsiella, Acinetobacter, S aureus; a sweet odor suggests Pseudomonas."
+      - "Legionella comes from water aerosols."
+      - "S pneumoniae is community-acquired and gram positive."
+      - "C difficile causes diarrhea."
+      - "S epidermidis infects long-term intravascular catheters."
+    src: { page: 181, quote: "Late onset: P aeruginosa, Klebsiella, Acinetobacter, S aureus New infiltrate on CXR, ↑ sputum production; sweet odor (Pseudomonas)" }
+    status: unverified
+  # ---------- p182: unvaccinated children ----------
+  - id: mic.L06.059
+    kind: table
+    topic: unvaccinated-children
+    title: Bugs affecting unvaccinated children
+    columns: [Presentation, Findings, Pathogen]
+    rows:
+      - [Rash, "Head down; postauricular, posterior cervical, suboccipital nodes", Rubella virus]
+      - [Rash, "Head down; cough, coryza, conjunctivitis, Koplik spots", Measles virus]
+      - [Meningitis, Colonizes nasopharynx, H influenzae type b]
+      - [Meningitis, Can also cause myalgia and paralysis, Poliovirus]
+      - [Tetanus, "Muscle spasms, spastic paralysis (lockjaw, opisthotonus)", C tetani]
+      - [Epiglottitis, "Fever, dysphagia, drooling, inspiratory stridor", H influenzae type b]
+      - [Pertussis, "Coryza, then whooping cough, posttussive vomiting", Bordetella pertussis]
+      - [Pharyngitis, Grayish pseudomembranes, Corynebacterium diphtheriae]
+    blanks: [[0, 2], [1, 2], [3, 2], [4, 2], [5, 2], [6, 2], [7, 2]]
+    src: { page: 182, quote: "Epiglottitis Fever with dysphagia, drooling, inspiratory stridor, and difficulty breathing due to edema H influenzae type b" }
+    status: unverified
+    tags: [high-yield]
+  - id: mic.L06.060
+    kind: card
+    topic: unvaccinated-children
+    front: Can H influenzae type b cause epiglottitis in a fully immunized child?
+    back: Yes; First Aid notes Hib is also capable of causing epiglottitis in fully immunized children.
+    src: { page: 182, quote: "H influenzae type b (also capable of causing epiglottitis in fully immunized children)" }
+    status: unverified
+  - id: mic.L06.061
+    kind: mcq
+    topic: unvaccinated-children
+    stem: >-
+      A 4-year-old unvaccinated boy has a high fever, sore throat, drooling and muffled voice. He sits leaning
+      forward with his neck extended and has inspiratory stridor. Which organism is the most likely cause?
+    options:
+      - Haemophilus influenzae type b
+      - Parainfluenza virus
+      - Corynebacterium diphtheriae
+      - Bordetella pertussis
+      - Streptococcus pyogenes
+    answer: 0
+    why:
+      - "Right. Epiglottitis: fever, dysphagia, drooling and stridor from edema, classically Hib in unvaccinated children."
+      - "Parainfluenza causes croup with a barking cough and steeple sign."
+      - "Diphtheria gives grayish pseudomembranes."
+      - "Pertussis gives whooping cough and posttussive vomiting."
+      - "Group A strep gives pharyngitis without this airway picture."
+    src: { page: 182, quote: "Fever with dysphagia, drooling, inspiratory stridor, and difficulty breathing due to edema" }
+    status: unverified
+  - id: mic.L06.062
+    kind: mcq
+    topic: normal-microbiota
+    stem: >-
+      A 25-year-old woman takes a broad-spectrum antibiotic for 10 days. She then develops vaginal itching with
+      thick white discharge. Loss of which normally dominant vaginal organism allowed this?
+    options:
+      - Lactobacillus
+      - Staphylococcus epidermidis
+      - Bacteroides fragilis
+      - Viridans group streptococci
+      - Streptococcus mutans
+    answer: 0
+    why:
+      - "Right. Lactobacillus dominates the vagina; antibiotics that kill it let Candida overgrow."
+      - "S epidermidis dominates the skin and nose."
+      - "B fragilis dominates the colon."
+      - "Viridans streptococci dominate the oropharynx."
+      - "S mutans lives in dental plaque."
+    src: { page: 174, quote: "Vagina Lactobacillus; colonized by E coli and group B" }
+    status: unverified
+  - id: mic.L06.063
+    kind: mcq
+    topic: brain-abscess
+    stem: >-
+      A 14-year-old boy with chronic left otitis media and mastoiditis has headache, fever and a left-sided
+      ataxia. MRI shows a single ring-enhancing lesion. Where is the lesion most likely?
+    options:
+      - Temporal lobe or cerebellum
+      - Frontal lobe
+      - Occipital lobe
+      - Multiple sites at the gray-white junction
+      - Basal ganglia
+    answer: 0
+    why:
+      - "Right. Otitis media and mastoiditis spread contiguously to the temporal lobe and cerebellum."
+      - "Sinusitis or dental infection spreads to the frontal lobe."
+      - "The occipital lobe is not a typical contiguous site."
+      - "Multiple abscesses usually come from bacteremia."
+      - "Basal ganglia lesions are not the contiguous pattern here."
+    src: { page: 176, quote: "otitis media and mastoiditis →  temporal lobe and cerebellum; sinusitis or dental infection →  frontal lobe." }
+    status: unverified

@@ -1,0 +1,33 @@
+/* His notes (notes/mod.rs): the chip, a note under its item, the page
+   sheet's list, the list page and the note sheet. Layout only. */
+.nt-chip[data-has="true"] { background: var(--gold-soft); color: var(--gold); font-weight: 600; }
+.nt-inline { margin: var(--sp-2) 0 0; padding: var(--sp-2) var(--sp-3); flex-basis: 100%;
+  border-radius: var(--radius-control, var(--radius)); background: var(--gold-soft);
+  border-inline-start: 3px solid var(--gold); white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; }
+.nt-page { display: flex; flex-direction: column; gap: var(--sp-2); }
+.nt-page-title { margin: 0; font-size: var(--fs-md, 1rem); }
+.nt-page p { margin: 0; }
+.nt-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
+.nt-open { inline-size: 100%; min-block-size: var(--target, 48px); display: flex; flex-direction: column; align-items: stretch;
+  gap: 2px; padding: var(--sp-2) var(--sp-3); border-radius: var(--radius-control, var(--radius));
+  background: var(--soft); border: 0; border-inline-start: 3px solid var(--gold); text-align: start; }
+.nt-on { overflow-wrap: anywhere; }
+.nt-pg { font-weight: 700; color: var(--accent-ink); font-variant-numeric: tabular-nums; }
+.nt-text { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; }
+.nt-add { inline-size: 100%; min-block-size: var(--target, 48px); }
+.ntl-head { display: flex; align-items: flex-start; gap: var(--sp-2); }
+.ntl-head .page-head { flex: 1; min-inline-size: 0; }
+.ntl-head .lec-back { min-inline-size: var(--target, 48px); min-block-size: var(--target, 48px); }
+.ntl-courses { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-block: var(--sp-3); }
+.ntl-courses .chip { display: inline-flex; align-items: center; min-block-size: var(--target, 48px); }
+.ntl .nt-list { margin-block: var(--sp-3); }
+
+/* Over any screen, the page sheet and the More sheet. */
+.nt-backdrop { z-index: 60; }
+.nt-sheet { z-index: 61; }
+.nt-sheet h2, .nt-sheet p { margin: 0; }
+.nt-field textarea { resize: vertical; }
+.nt-label { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-2); }
+.nt-count { font-weight: 400; font-size: var(--fs-sm); color: var(--muted); font-variant-numeric: tabular-nums; }
+.nt-field:has(textarea[aria-invalid="true"]) textarea { background: var(--bad-soft); }
+.nt-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); }
