@@ -418,9 +418,9 @@ mod tests {
 
     #[test]
     fn every_third_card_leads_into_its_topics_essay() {
-        let mut essay = card("essay", "portal");
+        let mut essay = card("essay", "septation");
         essay.kind = "essay";
-        let mut pool: Vec<_> = (0..5).map(|i| card(&format!("c{i}"), "portal")).collect();
+        let mut pool: Vec<_> = (0..5).map(|i| card(&format!("c{i}"), "septation")).collect();
         pool.push(essay);
         // Find a seed that puts the essay last, so only the follow-up can pull it forward.
         let seed = (0..200)

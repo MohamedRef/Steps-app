@@ -2,6 +2,23 @@
 
 use super::*;
 
+thread_local! {
+    /// Cases a test thread adds beside the bundled content (none is written
+    /// yet): the case list and player find them like any other.
+    static EXTRA: std::cell::RefCell<Vec<(&'static str, &'static Item)>> =
+        const { std::cell::RefCell::new(Vec::new()) };
+}
+
+/// Adds `item` under the lecture title `lecture`, for this test thread.
+pub(crate) fn add_case(lecture: &'static str, item: Item) {
+    let item: &'static Item = Box::leak(Box::new(item));
+    EXTRA.with(|e| e.borrow_mut().push((lecture, item)));
+}
+
+pub(super) fn extra() -> impl Iterator<Item = (&'static str, &'static Item)> {
+    EXTRA.with(|e| e.borrow().clone()).into_iter()
+}
+
 #[test]
 fn grades_from_steps_right() {
     assert_eq!(grade_for(3, 3), Grade::Good);
@@ -29,7 +46,7 @@ fn opts(xs: &[&str]) -> Vec<String> {
 // never shuffled.
 #[test]
 fn options_are_shuffled_per_attempt() {
-    let o = opts(&["Propranolol", "Carvedilol", "Band ligation", "TIPS", "Octreotide"]);
+    let o = opts(&["Aspirin", "Alteplase", "PFO closure", "Warfarin", "Heparin"]);
     let a = option_order(&o, 1, 0);
     assert_eq!(a, option_order(&o, 1, 0), "steady while the step is open");
     let mut sorted = a.clone();
@@ -46,7 +63,7 @@ fn options_are_shuffled_per_attempt() {
 
 #[test]
 fn a_step_is_selected_then_checked_once() {
-    let mut r = CaseRun::new("cvs.L03.050");
+    let mut r = CaseRun::new("cvs.L01.901");
     // Nothing selected: Check does nothing.
     assert!(!r.check(Some(1)));
     r.select(0);
@@ -70,9 +87,9 @@ fn a_step_is_selected_then_checked_once() {
 
 #[test]
 fn record_keeps_the_case_as_one_review() {
-    record(None, "cvs.L03.050", 2, 3, now_ms() - 1500).unwrap();
+    record(None, "cvs.L01.901", 2, 3, now_ms() - 1500).unwrap();
     let sink = EVENTS.lock().unwrap();
-    let e = sink.events.iter().find(|e| e.item_id == "cvs.L03.050").unwrap();
+    let e = sink.events.iter().find(|e| e.item_id == "cvs.L01.901").unwrap();
     assert_eq!(e.grade, Grade::Hard);
     assert_eq!(e.origin, Origin::Case);
     assert!(e.took_ms >= 1500);
@@ -117,7 +134,7 @@ fn failed_finish_keeps_the_answer_and_success_records_once() {
     let blocked = Rc::new(Cell::new(true));
     let events = Rc::new(RefCell::new(Vec::new()));
     let store = StudyStoreHandle::new(Fallible { blocked: blocked.clone(), events: events.clone() });
-    let mut run = CaseRun::new("cvs.L03.050");
+    let mut run = CaseRun::new("cvs.L01.901");
     run.grade_self(true);
     run.next_logged(2, Some(&store)).unwrap();
     assert_eq!(run.step, 1);
@@ -137,4 +154,27 @@ fn failed_finish_keeps_the_answer_and_success_records_once() {
     assert_eq!(events.len(), 1, "repeated Finish cannot append a second review");
     assert_eq!(events[0].grade, Grade::Good);
     assert_eq!(events[0].origin, Origin::Case);
+}
+
+#[test]
+fn items_are_found_in_the_library_by_id() {
+    let (lecture, item) = find_item("cvs.L01.001").expect("a written card");
+    assert_eq!((lecture, item.id.as_str()), ("Embryology", "cvs.L01.001"));
+    assert!(find_item("cvs.L01.999").is_none());
+    assert!(find_item("zz.L01.001").is_none());
+    assert!(find_item("nodot").is_none());
+}
+
+#[test]
+fn a_long_stem_is_cut_to_one_line_and_other_kinds_have_none() {
+    let long: Item = serde_yaml_ng::from_str(&format!(
+        "{{ id: cvs.L01.903, kind: case, stem: '{}', steps: [{{ question: q, why: w }}], src: {{ page: 284 }}, status: unverified }}",
+        "A newborn is cyanotic. ".repeat(8)
+    ))
+    .unwrap();
+    let line = first_line(&long);
+    assert_eq!(line.chars().count(), 121);
+    assert!(line.ends_with('…'));
+    let (_, card) = find_item("cvs.L01.001").unwrap();
+    assert_eq!(first_line(card), "");
 }
