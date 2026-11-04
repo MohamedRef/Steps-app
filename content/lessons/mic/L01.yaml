@@ -1,0 +1,703 @@
+schema: steps.lesson/v1
+lecture: mic.L01
+lessons:
+  - id: mic.L01.lesson1
+    title: "البكتيريا من بره لجوه، وليه الـ Gram stain بيفرّق بينهم"
+    hook: "كل مضاد حيوي وكل toxin وكل stain هتقابلهم بعد كده مبنيين على الصفحة دي"
+    minutes: 9
+    pages: [122, 123]
+    topics: [bacterial-structures, stains]
+    goals:
+      - "تعرف كل طبقة في الـ cell envelope بتعمل إيه"
+      - "تفرّق gram ⊕ من gram ⊝ بالتركيب، مش بالحفظ"
+      - "تعرف أنهي stain لأنهي ميكروب، وليه في ميكروبات ما بتاخدش Gram"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "البكتيريا عاملة زي البصلة"
+        text: |-
+          من جوه لبره: **cytoplasmic membrane** ← **cell wall** (peptidoglycan) ← في الـ gram ⊝ بس: **outer membrane** ← وأحياناً **capsule** أو **slime layer**.
+
+          الـ ==peptidoglycan== شبكة سكر بسلاسل peptide متربطة ببعض بإنزيم اسمه **transpeptidase**. الشبكة دي هي اللي بتحمي البكتيريا من إنها تنفجر من الـ osmotic pressure.
+        page: 122
+        quote: "Peptidoglycan is a sugar backbone with peptide side chains cross-linked by transpeptidase Netlike structure gives rigid support, protects against osmotic pressure damage"
+      - kind: figure
+        title: "gram ⊕ قصاد gram ⊝"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <text x="20" y="18" class="t-sm t-b">Gram positive</text>
+            <rect class="fg-acc" x="20" y="30" width="140" height="44" rx="4"/>
+            <text x="30" y="56" class="t-sm">thick peptidoglycan</text>
+            <rect class="fg-ink" x="20" y="80" width="140" height="10"/>
+            <text x="30" y="106" class="t-sm t-mut">cytoplasmic membrane</text>
+            <line class="fg-arrow" x1="60" y1="30" x2="60" y2="85"/>
+            <text x="22" y="128" class="t-sm t-acc">lipoteichoic acid</text>
+            <text x="200" y="18" class="t-sm t-b">Gram negative</text>
+            <rect class="fg-bad" x="200" y="30" width="140" height="18" rx="4"/>
+            <text x="206" y="43" class="t-sm">outer membrane + LPS</text>
+            <rect class="fg-thin" x="200" y="52" width="140" height="22"/>
+            <text x="206" y="67" class="t-sm t-mut">periplasm: β-lactamase</text>
+            <rect class="fg-acc" x="200" y="58" width="140" height="6"/>
+            <rect class="fg-ink" x="200" y="80" width="140" height="10"/>
+            <text x="206" y="106" class="t-sm t-mut">cytoplasmic membrane</text>
+            <text x="206" y="128" class="t-sm t-bad">porins in outer membrane</text>
+            <text x="20" y="165" class="t-sm">thick wall keeps crystal violet → purple</text>
+            <text x="20" y="185" class="t-sm">thin wall loses it → pink with counterstain</text>
+          </svg>
+        caption: "الـ gram ⊕ حيطته تخينة وفيها lipoteichoic acid. الـ gram ⊝ حيطته رفيعة، وبرّاها outer membrane فيها الـ LPS، وبين الاتنين periplasm بيتجمع فيه الـ β-lactamase."
+        alt: "Side-by-side cell envelopes. Gram positive: thick peptidoglycan over the cytoplasmic membrane with lipoteichoic acid. Gram negative: outer membrane with LPS and porins, a periplasm with a thin peptidoglycan layer and β-lactamase, then the cytoplasmic membrane."
+        page: 122
+        quote: "Wide periplasmic space containing β-lactamase Unique to gram ⊝ Outer membrane"
+      - kind: explain
+        title: "الـ outer membrane: سلاح وحماية"
+        text: |-
+          الـ outer membrane في الـ **gram ⊝ بس**. وشّها اللي بره فيه ==endotoxin== (LPS):
+
+          - **lipid A**: هو اللي بيشغّل الـ TNF و الـ IL-1، يعني هو اللي بيعمل الحمّى والـ shock.
+          - **O polysaccharide**: الجزء الـ antigenic.
+          - **porins**: بوابات بتدخّل حاجات (ومنها مضادات حيوية) جوه.
+
+          وبين الـ outer membrane والـ cytoplasmic membrane فيه الـ ==periplasm==: هنا الـ β-lactamase بيستنى البنسلين قبل ما يوصل لهدفه.
+        page: 122
+        quote: "Endotoxin: lipid A induces TNF and IL-1; antigenic O polysaccharide component Most OMPs are antigenic Porins: transport across outer membrane"
+      - kind: reveal
+        prompt: "الـ gram ⊕ ما عندوش LPS. طب إيه اللي بيعمل عنده TNF و IL-1؟"
+        answer: "الـ **lipoteichoic acid**: طالع من الـ membrane لبره، وبيعمل TNF-α و IL-1 زي الـ lipid A بالظبط. فالـ gram ⊕ برضه ممكن يعمل sepsis."
+        page: 122
+        quote: "Lipoteichoic acids induce TNF-α and IL-1"
+      - kind: explain
+        title: "الحاجات اللي برّه الحيطة"
+        text: |-
+          - **capsule**: طبقة polysaccharide واضحة ← بتمنع الـ ==phagocytosis==.
+          - **slime (S) layer**: شبكة polysaccharide سايبة ← بتلزّق البكتيريا على الأسطح وبتعمل **biofilm** (زي على الـ catheter).
+          - **pilus/fimbria** (glycoprotein): بتلزّق البكتيريا على الخلايا، والـ **sex pilus** بيستخدم في الـ conjugation.
+          - **flagellum** (proteins): للحركة.
+          - **spore**: keratinlike coat و dipicolinic acid ← بيستحمل الحرارة والجفاف والكيماويات.
+        page: 122
+        quote: "Capsule Discrete layer usually made of polysaccharides (and rarely proteins) Protects against phagocytosis Slime (S) layer Loose network of polysaccharides Mediates adherence to surfaces, plays a role in biofilm formation (eg, indwelling catheters)"
+      - kind: check
+        question: "A drug binds penicillin-binding proteins. Where in the bacterium are these proteins?"
+        options:
+          - "Embedded in the cytoplasmic membrane"
+          - "In the outer membrane, as porins"
+          - "In the capsule"
+          - "In the spore core"
+        answer: 0
+        why:
+          - "صح: الـ PBPs متغروزة في الـ cytoplasmic membrane، وشغلتها بناء الـ cell wall."
+          - "الـ porins بوابات في الـ outer membrane، مش PBPs."
+          - "الـ capsule polysaccharide وشغلتها ضد الـ phagocytosis."
+          - "الـ spore core فيه dipicolinic acid."
+        page: 122
+        quote: "Phospholipid bilayer sac with embedded proteins (eg, penicillin-binding proteins [PBPs]) and other enzymes"
+      - kind: explain
+        title: "الـ Gram stain وليه في ناس ما بتاخدهوش"
+        text: |-
+          الـ ==Gram stain== أول test في التعرّف على البكتيريا. الحيطة التخينة بتمسك الـ crystal violet (بنفسجي = gram ⊕)، والرفيعة بتسيبه وتاخد لون الـ counterstain (وردي = gram ⊝).
+
+          فاللي ما بياخدش Gram كويس، السبب دايماً واحد من 4:
+          - **رفيع قوي** ما يتشافش: Treponema، Leptospira.
+          - **حيطته دهنية**: Mycobacteria.
+          - **مالوش حيطة أصلاً**: Mycoplasma، Ureaplasma.
+          - **قاعد جوه الخلية**: Legionella، Rickettsia، Chlamydia، Bartonella، Anaplasma، Ehrlichia.
+        page: 123
+        quote: "Treponema, Leptospira Too thin to be visualized Mycobacteria Cell wall has high lipid content Mycoplasma, Ureaplasma No cell wall"
+      - kind: aside
+        tone: tip
+        text: "الكتاب بيجمعهم في جملة واحدة: **These Little Microbes May Unfortunately Lack Real Color But Are Everywhere**. وخلي بالك: الـ Chlamydia عندها سبب زيادة، الـ peptidoglycan بتاعها مش كامل عشان ==↓ muramic acid==."
+        page: 123
+        quote: "Primarily intracellular; also, Chlamydia lack classic peptidoglycan because of ↓ muramic acid"
+      - kind: table
+        title: "كل stain وجماعته"
+        columns: ["Stain", "What it shows", "Book mnemonic"]
+        rows:
+          - ["Giemsa", "H pylori, Chlamydia, Borrelia, Rickettsia, Trypanosomes, Plasmodium", "Help! Certain Bugs Really Try my Patience"]
+          - ["PAS", "Glycogen, mucopolysaccharides: Whipple disease", ""]
+          - ["Ziehl-Neelsen", "Acid-fast: Mycobacteria, Nocardia (mycolic acid); Cryptosporidium oocysts", ""]
+          - ["India ink", "Cryptococcus neoformans (mucicarmine stains the capsule red)", ""]
+          - ["Silver", "H pylori, Legionella, Bartonella henselae, fungi (Coccidioides, Pneumocystis, Aspergillus)", "HeLiCoPters Are silver"]
+          - ["Fluorescent antibody", "Many bacteria, viruses, Pneumocystis, Giardia, Cryptosporidium; FTA-ABS for syphilis", ""]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+        page: 123
+        quote: "Giemsa stain H pylori, Chlamydia, Borrelia, Rickettsia, Trypanosomes A , Plasmodium Help! Certain Bugs Really Try my Patience"
+      - kind: aside
+        tone: exam
+        text: "الـ Ziehl-Neelsen بيشوف الـ acid-fast، بس للـ **screening** المعامل بتستخدم أكتر ==auramine-rhodamine== لأنه أرخص و more sensitive."
+        page: 123
+        quote: "Auramine-rhodamine stain is more often used for screening (inexpensive, more sensitive)"
+      - kind: match
+        prompt: "وصّل الميكروب بالـ stain بتاعه"
+        pairs:
+          - ["Tropheryma whipplei", "PAS"]
+          - ["Cryptococcus neoformans", "India ink"]
+          - ["Nocardia", "Ziehl-Neelsen"]
+          - ["Legionella", "Silver stain"]
+          - ["Plasmodium", "Giemsa"]
+        why: "Whipple = PAS. Cryptococcus = India ink (capsule). Nocardia acid-fast = Ziehl-Neelsen. Legionella من الـ HeLiCoPters = silver. Plasmodium من Help! Certain Bugs Really Try my Patience = Giemsa."
+        page: 123
+        quote: "Silver stain Helicobacter pylori, Legionella, Bartonella henselae, and fungi"
+      - kind: try
+        items: [mic.L01.001, mic.L01.004, mic.L01.012, mic.L01.015, mic.L01.017]
+    recap:
+      - "الـ outer membrane والـ LPS والـ periplasm في الـ gram ⊝ بس؛ الـ lipoteichoic acid في الـ gram ⊕ بس."
+      - "Lipid A و lipoteichoic acid الاتنين بيعملوا TNF و IL-1."
+      - "اللي ما ياخدش Gram: رفيع، دهني، مالوش حيطة، أو جوه الخلية."
+      - "PAS = Whipple، India ink = Cryptococcus، silver = HeLiCoPters Are silver."
+    practice: [mic.L01.001, mic.L01.002, mic.L01.003, mic.L01.004, mic.L01.005, mic.L01.006, mic.L01.007, mic.L01.008, mic.L01.009, mic.L01.010, mic.L01.011, mic.L01.012, mic.L01.013, mic.L01.014, mic.L01.015, mic.L01.016, mic.L01.017, mic.L01.018, mic.L01.019, mic.L01.020]
+  - id: mic.L01.lesson2
+    title: "كل ميكروب وأكله: الـ culture والأكسجين والعيشة جوه الخلية"
+    hook: "ليه الـ H influenzae بيحب الـ chocolate، وليه الـ aminoglycosides ما بتشتغلش على الـ anaerobes؟"
+    minutes: 8
+    pages: [124, 125]
+    topics: [special-culture-requirements, anaerobes, intracellular-bacteria]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "كل واحد ليه أكل مخصوص"
+        text: |-
+          بعض الميكروبات ما بتطلعش على الـ blood agar العادي، ولازم وسط مخصوص.
+
+          أشهرهم ==H influenzae==: محتاج **factor V (NAD+)** و **factor X (hematin)**. الاتنين جوه كرات الدم الحمرا، فلما نسخّن الدم يبقى **chocolate agar** ويطلعوا برّه.
+        page: 124
+        quote: "H influenzae Chocolate agar Factors V (NAD+ ) and X (hematin)"
+      - kind: explain
+        title: "Thayer-Martin: وسط بيطرد الكل إلا الـ Neisseria"
+        text: |-
+          الـ Neisseria (gonorrhoeae و meningitidis) بتتزرع على **Thayer-Martin**. الفكرة إنه selective: فيه مضادات بتقتل كل المنافسين:
+
+          - **vancomycin** ← يقتل الـ gram ⊕.
+          - **trimethoprim و colistin** ← يقتلوا الـ gram ⊝ إلا الـ Neisseria.
+          - **nystatin** ← يقتل الفطريات.
+
+          والكتاب بيقولها: ==Very Typically Cultures Neisseria==.
+        page: 124
+        quote: "Selectively favors growth of Neisseria by inhibiting growth of gram ⊕ organisms with vancomycin, gram ⊝ organisms except Neisseria with trimethoprim and colistin, and fungi with nystatin"
+      - kind: match
+        prompt: "وصّل الميكروب بالوسط بتاعه"
+        pairs:
+          - ["B pertussis", "Bordet-Gengou agar"]
+          - ["C diphtheriae", "Tellurite agar"]
+          - ["M pneumoniae", "Eaton agar (cholesterol)"]
+          - ["M tuberculosis", "Löwenstein-Jensen medium"]
+          - ["Fungi", "Sabouraud agar"]
+          - ["Legionella", "Charcoal yeast extract (cysteine, iron)"]
+        why: "Bordet لـ Bordetella. الـ Mycoplasma مالوش حيطة فمحتاج cholesterol يعمل بيه membrane. Sab's a fun guy للفطريات. والـ Ella siblings (Brucella، Francisella، Legionella، Pasteurella) بنوا الـ Sistine (cysteine) chapel من charcoal و iron."
+        page: 124
+        quote: "M pneumoniae Eaton agar Requires cholesterol"
+      - kind: aside
+        tone: exam
+        text: "**MacConkey**: الـ lactose fermenters بيعملوا acid فالمستعمرات تبقى ==pink==. **EMB**: الـ E coli بيطلع بلمعة خضرا معدنية (green metallic sheen)."
+        page: 124
+        quote: "MacConkey agar Fermentation produces acid, causing colonies to turn pink E coli Eosin–methylene blue (EMB) agar Colonies with green metallic sheen"
+      - kind: explain
+        title: "الـ anaerobes: الأكسجين بيسمّمهم"
+        text: |-
+          الـ anaerobes (Clostridioides، Clostridium، Bacteroides، Fusobacterium، Actinomyces israelii) ==ما عندهمش catalase و/أو superoxide dismutase==، فأي أكسجين بيعمل جواهم oxidative damage.
+
+          علاماتهم: ريحة وحشة (short-chain fatty acids)، صعب تزرعهم، وبيعملوا غاز في الأنسجة. وهما طبيعيين في الـ GI، بس لو راحوا مكان تاني (زي الرئة في الـ **aspiration pneumonia**) يعملوا مشكلة.
+
+          الكتاب: **Anaerobes Can't Breathe Fresh Air**.
+        page: 125
+        quote: "They lack catalase and/or superoxide dismutase and are thus susceptible to oxidative damage."
+      - kind: reveal
+        prompt: "ليه الـ aminoglycosides (gentamicin مثلاً) ما بتنفعش مع الـ anaerobes؟"
+        answer: "لأن الـ aminoglycosides ==محتاجة O2 عشان تدخل البكتيريا==. والـ anaerobes عايشين من غير O2، فالدوا ما بيدخلش. الكتاب كاتبها AminO2glycosides."
+        page: 125
+        quote: "AminO2glycosides are ineffective against anaerobes because these antibiotics require O2 to enter into bacterial cell."
+      - kind: figure
+        title: "الأكسجين: مين بيحبه ومين بيموت منه"
+        svg: |-
+          <svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-good" x="10" y="20" width="105" height="110" rx="8"/>
+            <text x="18" y="40" class="t-sm t-b">Facultative</text>
+            <text x="18" y="60" class="t-sm">uses O2 or</text>
+            <text x="18" y="76" class="t-sm">fermentation</text>
+            <text x="18" y="98" class="t-sm t-mut">strep, staph,</text>
+            <text x="18" y="114" class="t-sm t-mut">enteric gram ⊝</text>
+            <rect class="fg-bad" x="127" y="20" width="105" height="110" rx="8"/>
+            <text x="135" y="40" class="t-sm t-b">Anaerobes</text>
+            <text x="135" y="60" class="t-sm">no catalase/SOD</text>
+            <text x="135" y="76" class="t-sm">O2 → damage</text>
+            <text x="135" y="98" class="t-sm t-mut">Clostridium,</text>
+            <text x="135" y="114" class="t-sm t-mut">Bacteroides</text>
+            <rect class="fg-acc" x="244" y="20" width="105" height="110" rx="8"/>
+            <text x="252" y="40" class="t-sm t-b">Obligate</text>
+            <text x="252" y="56" class="t-sm t-b">intracellular</text>
+            <text x="252" y="76" class="t-sm">needs host ATP</text>
+            <text x="252" y="98" class="t-sm t-mut">Rickettsia,</text>
+            <text x="252" y="114" class="t-sm t-mut">Chlamydia, Coxiella</text>
+          </svg>
+        caption: "الـ facultative بيعيش بالأكسجين أو من غيره. الـ anaerobe بيموت من الأكسجين لأنه مالوش catalase أو SOD. والـ obligate intracellular ما يعرفش يعيش بره الخلية لأنه بيشحت ATP منها."
+        alt: "Three boxes. Facultative anaerobes use oxygen or fermentation (streptococci, staphylococci, enteric gram-negative bacteria). Anaerobes lack catalase or superoxide dismutase and are damaged by oxygen (Clostridium, Bacteroides). Obligate intracellular bacteria need host ATP (Rickettsia, Chlamydia, Coxiella)."
+        page: 125
+        quote: "May use O2 as a terminal electron acceptor to generate ATP, but can also use fermentation and other O2-independent pathways."
+      - kind: explain
+        title: "اللي عايشين جوه الخلية"
+        text: |-
+          - **Obligate intracellular**: ==Rickettsia، Chlamydia، Coxiella==. ما يقدروش يعيشوا بره لأنهم بيعتمدوا على الـ **ATP** بتاع الخلية. الكتاب: Stay inside (cells) when it is Really Chilly and Cold.
+          - **Facultative intracellular**: Salmonella، Neisseria، Brucella، Mycobacterium، Listeria، Francisella، Legionella، Yersinia pestis. يقدروا يعيشوا جوه أو بره. الكتاب: ==Some Nasty Bugs May Live FacultativeLY==.
+        page: 125
+        quote: "Obligate intracellular Rickettsia, Chlamydia, Coxiella Rely on host ATP Stay inside (cells) when it is Really Chilly and Cold"
+      - kind: sort
+        prompt: "حط كل ميكروب في مكانه"
+        bins: ["Obligate intracellular", "Facultative intracellular"]
+        cards:
+          - { text: "Rickettsia", bin: 0 }
+          - { text: "Coxiella", bin: 0 }
+          - { text: "Chlamydia", bin: 0 }
+          - { text: "Listeria", bin: 1 }
+          - { text: "Legionella", bin: 1 }
+          - { text: "Brucella", bin: 1 }
+          - { text: "Yersinia pestis", bin: 1 }
+        why: "الـ obligate تلاتة بس (Really Chilly and Cold). الباقي facultative (Some Nasty Bugs May Live FacultativeLY)."
+        page: 125
+        quote: "Facultative intracellular Salmonella, Neisseria, Brucella, Mycobacterium, Listeria, Francisella, Legionella, Yersinia pestis"
+      - kind: check
+        question: "A man with an aspiration lung abscess is started on gentamicin alone and does not improve. Why?"
+        options:
+          - "Aminoglycosides need O2 to enter the bacterial cell"
+          - "Anaerobes have no cell wall"
+          - "Anaerobes live inside host cells"
+          - "Anaerobes make catalase that destroys the drug"
+        answer: 0
+        why:
+          - "صح: الـ aminoglycosides محتاجة O2 تدخل، والـ anaerobes عايشين من غيره."
+          - "الـ anaerobes عندهم حيطة؛ اللي مالوش حيطة هو Mycoplasma."
+          - "الـ anaerobes مش intracellular."
+          - "بالعكس، الـ anaerobes ناقصهم catalase."
+        page: 125
+        quote: "AminO2glycosides are ineffective against anaerobes because these antibiotics require O2 to enter into bacterial cell."
+      - kind: try
+        items: [mic.L01.021, mic.L01.023, mic.L01.029, mic.L01.031, mic.L01.035]
+    recap:
+      - "H influenzae: chocolate agar (factors V و X). Neisseria: Thayer-Martin."
+      - "الـ anaerobes ناقصهم catalase/SOD، وريحتهم وحشة، والـ aminoglycosides مش بتدخلهم."
+      - "Obligate intracellular: Rickettsia و Chlamydia و Coxiella (محتاجين ATP الخلية)."
+    practice: [mic.L01.021, mic.L01.022, mic.L01.023, mic.L01.024, mic.L01.025, mic.L01.026, mic.L01.027, mic.L01.028, mic.L01.029, mic.L01.030, mic.L01.031, mic.L01.032, mic.L01.033, mic.L01.034, mic.L01.035, mic.L01.036]
+  - id: mic.L01.lesson3
+    title: "الـ capsule والـ urease والـ catalase والـ spores: كل خاصية ليها مريض"
+    hook: "كل لستة هنا بتجاوب على سؤال واحد: مين المريض اللي هيتعب منها؟"
+    minutes: 9
+    pages: [125, 126]
+    topics: [encapsulated-bacteria, urease-positive-organisms, catalase-positive-organisms, pigment-producing-bacteria, biofilm-producing-bacteria, spore-forming-bacteria]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ capsule: البكتيريا لابسة جاكيت ناعم"
+        text: |-
+          الـ capsule بتخلي البكتيريا ناعمة فالـ phagocyte ما يعرفش يمسكها. الحل الطبيعي: الجسم ==يعمل opsonization== (يغطيها بـ antibody و complement)، وبعدين **الطحال** يشيلها من الدم.
+
+          عشان كده المريض اللي ==مالوش طحال== (asplenia) بيتعب جداً من الـ encapsulated bacteria، ولازم ياخد vaccines ضد **N meningitidis** و **S pneumoniae** و **H influenzae**.
+        page: 125
+        quote: "Are opsonized, and then cleared by spleen. Asplenics (No Spleen Here) have ↓ opsonizing ability and thus ↑ risk for severe infections"
+      - kind: mnemonic
+        word: "PSHNESKS"
+        parts:
+          - { key: "P", text: "Pseudomonas aeruginosa" }
+          - { key: "S", text: "Streptococcus pneumoniae" }
+          - { key: "H", text: "Haemophilus influenzae type b" }
+          - { key: "N", text: "Neisseria meningitidis" }
+          - { key: "E", text: "Escherichia coli" }
+          - { key: "S", text: "Salmonella" }
+          - { key: "K", text: "Klebsiella pneumoniae" }
+          - { key: "S", text: "group B Strep" }
+        hook: "Please SHiNE my SKiS (الكتاب)"
+        page: 125
+        quote: "Examples are Pseudomonas aeruginosa, Streptococcus pneumoniae A , Haemophilus influenzae type b, Neisseria meningitidis, Escherichia coli, Salmonella, Klebsiella pneumoniae, and group B Strep."
+      - kind: reveal
+        prompt: "ليه الـ vaccine بتاع الـ capsule بيتربط في protein (conjugate vaccine)؟"
+        answer: "الـ polysaccharide لوحده ==ما ينفعش يتقدّم للـ T cells==، فالـ response يبقى ضعيف (خصوصاً في الأطفال). لما تربطه في carrier protein، الـ T cells تشارك والـ immunogenicity تعلى."
+        page: 125
+        quote: "A polysaccharide antigen alone cannot be presented to T cells; immunogenicity can be enhanced by conjugating capsule antigens to a carrier protein."
+      - kind: explain
+        title: "الـ urease: بيقلب البول قلوي"
+        text: |-
+          الـ urease بيكسّر الـ urea لـ **ammonia** و CO2 ← الـ pH يعلى ← يترسب ==struvite== (magnesium ammonium phosphate) ويعمل حصوة، وأشهرهم **Proteus** (ممكن تبقى staghorn كبيرة).
+
+          اللستة: **Pee CHUNKSS**: Proteus، Cryptococcus، H pylori، Ureaplasma، Nocardia، Klebsiella، S epidermidis، S saprophyticus.
+        page: 125
+        quote: "Urease hydrolyzes urea to release ammonia and CO2 → ↑ pH. Predisposes to struvite (magnesium ammonium phosphate) stones, particularly Proteus."
+      - kind: aside
+        tone: analogy
+        text: "الـ H pylori بيستخدم نفس الحيلة في المعدة: يعمل ammonia حواليه زي ==بطانية قلوية== تحميه من الـ acid."
+        page: 125
+        quote: "Proteus, Cryptococcus, H pylori, Ureaplasma, Nocardia, Klebsiella, S epidermidis, S saprophyticus."
+      - kind: explain
+        title: "الـ catalase ومريض الـ CGD"
+        text: |-
+          الـ neutrophil بيقتل البكتيريا بالـ H2O2: الـ myeloperoxidase بيحوّله لحاجات قاتلة. في ==CGD== (chronic granulomatous disease) الـ **NADPH oxidase** ناقص، فالـ neutrophil ما بيعملش H2O2 بنفسه، وبيعتمد على الـ H2O2 اللي البكتيريا بتعمله.
+
+          البكتيريا اللي عندها **catalase** بتكسّر الـ H2O2 بتاعها قبل ما الـ neutrophil يستخدمه ← فمريض الـ CGD بيتعب منها هي بالذات.
+        page: 126
+        quote: "Catalase degrades H2O2 into H2O and bubbles of O2 A before it can be converted to microbicidal products by the enzyme myeloperoxidase."
+      - kind: figure
+        title: "ليه الـ CGD بيتعب من الـ catalase ⊕ بس"
+        svg: |-
+          <svg viewBox="0 0 360 160" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="micL01c" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="20" width="100" height="40" rx="6"/>
+            <text x="22" y="45" class="t-sm">bacterial H2O2</text>
+            <line class="fg-arrow" x1="110" y1="40" x2="190" y2="40" marker-end="url(#micL01c)"/>
+            <text x="120" y="32" class="t-sm t-mut">MPO</text>
+            <rect class="fg-good" x="195" y="20" width="155" height="40" rx="6"/>
+            <text x="205" y="45" class="t-sm">microbicidal products</text>
+            <rect class="fg-bad" x="10" y="95" width="100" height="40" rx="6"/>
+            <text x="22" y="120" class="t-sm">catalase ⊕ bug</text>
+            <line class="fg-arrow" x1="110" y1="115" x2="190" y2="115" marker-end="url(#micL01c)"/>
+            <rect class="fg-thin" x="195" y="95" width="155" height="40" rx="6"/>
+            <text x="205" y="120" class="t-sm">H2O + O2: nothing to kill with</text>
+          </svg>
+        caption: "في الـ CGD الـ neutrophil بيستعير الـ H2O2 من البكتيريا. لو البكتيريا catalase ⊕، بتكسّر الـ H2O2 لميه وأكسجين، فالـ neutrophil يفضل من غير سلاح."
+        alt: "Top row: bacterial hydrogen peroxide is turned by myeloperoxidase into microbicidal products. Bottom row: a catalase-positive organism breaks its hydrogen peroxide into water and oxygen, leaving nothing to kill with."
+        page: 126
+        quote: "People with chronic granulomatous disease (NADPH oxidase deficiency) have recurrent infections with certain catalase ⊕ organisms."
+      - kind: check
+        question: "A boy with chronic granulomatous disease is at highest risk of recurrent infection with which organism?"
+        options:
+          - "Staphylococcus aureus"
+          - "Streptococcus pyogenes"
+          - "Enterococcus faecalis"
+          - "Streptococcus pneumoniae"
+        answer: 0
+        why:
+          - "صح: الـ Staphylococci catalase ⊕ (من الـ HASSLE)."
+          - "الـ streptococci catalase ⊝، فبيسيبوا الـ H2O2 بتاعهم للـ neutrophil يستخدمه."
+          - "الـ Enterococcus catalase ⊝."
+          - "الـ S pneumoniae strep وكمان catalase ⊝."
+        page: 126
+        quote: "Catalase ⊕ organisms include Candida, Pseudomonas, Nocardia, Bordetella pertussis, Burkholderia cepacia, Helicobacter pylori, Aspergillus, Staphylococci, Serratia, Listeria, E coli."
+      - kind: table
+        title: "الألوان والـ biofilm"
+        columns: ["Bacterium", "Pigment or biofilm", "Hook"]
+        rows:
+          - ["Actinomyces israelii", "Yellow sulfur granules", "Israel has yellow sand"]
+          - ["S aureus", "Golden yellow", "Aureus = gold"]
+          - ["P aeruginosa", "Blue-green (pyocyanin, pyoverdin)", "Aerugula is green"]
+          - ["Serratia marcescens", "Red", "Red Sriracha"]
+          - ["S epidermidis", "Biofilm: catheters, prosthetic devices", ""]
+          - ["Viridans strep", "Biofilm: dental plaque, endocarditis", ""]
+          - ["Nontypeable H influenzae", "Biofilm: otitis media", ""]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+        page: 126
+        quote: "P aeruginosa—blue-green pigment (pyocyanin and pyoverdin) Aerugula is green Serratia marcescens—red pigment Think red Sriracha hot sauce"
+      - kind: explain
+        title: "الـ spores: البكتيريا في وضع الطيران"
+        text: |-
+          بعض الـ **gram ⊕** لما الأكل يقل بتعمل spore: مافيهاش أي metabolism، وجوّاها ==dipicolinic acid== اللي بيخليها تستحمل الحرارة.
+
+          عشان تقتلها لازم **autoclave**: بخار **121°C لمدة 15 دقيقة تحت ضغط 15 psi**. والـ hydrogen peroxide والـ iodine برضه sporicidal.
+
+          الجماعة دول: **Bacillus** (anthracis و cereus) و **Clostridium** (botulinum و difficile و perfringens و tetani). الكتاب: Autoclave to kill ==Bacillus and Clostridium (ABC)==.
+        page: 126
+        quote: "Must autoclave to kill spores (as is done to surgical equipment) by steaming at 121°C for 15 minutes at a pressure of 15 psi. Hydrogen peroxide and iodine-based agents are also sporicidal."
+      - kind: aside
+        tone: trap
+        text: "الـ alcohol hand rub ==مش sporicidal==. عشان كده في outbreak الـ C difficile بنغسل بالمية والصابون بدل الكحول (الـ spores بتتشال ميكانيكياً)."
+        page: 126
+        quote: "Spores lack metabolic activity and are highly resistant to heat and chemicals."
+      - kind: check
+        question: "A man has a painful renal staghorn calculus and alkaline urine. Which group of organisms is the likely cause?"
+        options:
+          - "Urease ⊕ organisms such as Proteus"
+          - "Catalase ⊕ organisms such as Staphylococci"
+          - "Spore formers such as Clostridium"
+          - "Pigment producers such as Serratia"
+        answer: 0
+        why:
+          - "صح: الـ urease بيعمل ammonia ← pH عالي ← struvite."
+          - "الـ catalase بيكسّر H2O2، ومالوش علاقة بالحصوة."
+          - "الـ spores مالهاش علاقة بالحصوات."
+          - "الـ pigment مالوش دعوة بالـ urine pH."
+        page: 125
+        quote: "Predisposes to struvite (magnesium ammonium phosphate) stones, particularly Proteus."
+      - kind: try
+        items: [mic.L01.037, mic.L01.039, mic.L01.041, mic.L01.045, mic.L01.053]
+    recap:
+      - "الـ capsule ضد الـ phagocytosis؛ الطحال بيشيلها بعد الـ opsonization؛ الـ asplenic محتاج vaccines."
+      - "Urease ← ammonia ← struvite (Proteus). Pee CHUNKSS."
+      - "Catalase ⊕ بيتعبوا مريض الـ CGD. Notoriously Big Bubbling HASSLE."
+      - "Spores: dipicolinic acid؛ autoclave 121°C / 15 min / 15 psi."
+    practice: [mic.L01.037, mic.L01.038, mic.L01.039, mic.L01.040, mic.L01.041, mic.L01.042, mic.L01.043, mic.L01.044, mic.L01.045, mic.L01.046, mic.L01.047, mic.L01.048, mic.L01.049, mic.L01.050, mic.L01.051, mic.L01.052, mic.L01.053, mic.L01.054]
+  - id: mic.L01.lesson4
+    title: "البكتيريا بتهرب من المناعة ومن الدوا إزاي، وبتسلّف بعضها الجينات"
+    hook: "الـ resistance مش بيتولد في كل بكتيريا لوحده: هي بتاخده جاهز من جارتها"
+    minutes: 9
+    pages: [127, 129]
+    topics: [bacterial-virulence-factors, antibiotic-resistance-mechanisms, bacterial-genetics]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "4 حيل ضد المناعة"
+        text: |-
+          - **capsule**: ناعمة ومشحونة ← حاجز ضد الـ phagocytosis والـ complement. أهم virulence factor.
+          - ==Protein A== (S aureus): بيمسك الـ **Fc** بتاع الـ IgG من الضهر، فالـ antibody يتلف بالمقلوب وما يعرفش يعمل opsonization.
+          - **IgA protease** (SHiN: S pneumoniae، H influenzae type b، Neisseria): بيكسّر الـ IgA فالبكتيريا تقعد على الـ mucosa.
+          - ==M protein== (group A strep): ضد الـ phagocytosis، وشبه الـ cardiac myosin.
+        page: 127
+        quote: "Protein A Binds Fc region of IgG. Prevents opsonization and phagocytosis. Expressed by S aureus."
+      - kind: reveal
+        prompt: "الـ M protein شبه الـ cardiac myosin. ده بيفسّر إيه؟"
+        answer: "==molecular mimicry==: الـ antibodies اللي اتعملت ضد الـ M protein بتضرب القلب كمان، وده غالباً اللي ورا الـ **acute rheumatic fever** بعد التهاب الزور بالـ group A strep."
+        page: 127
+        quote: "Sequence homology with human cardiac myosin (molecular mimicry); possibly underlies the autoimmune response seen in acute rheumatic fever."
+      - kind: explain
+        title: "3 طرق للـ resistance"
+        text: |-
+          البكتيريا بتقاوم الدوا بواحدة من 3:
+
+          - ==تكسّر أو تعدّل الدوا== (enzymatic inactivation): الـ β-lactamase بيكسّر البنسلين والـ cephalosporins والـ carbapenems؛ وفي إنزيمات بتعدّل الـ aminoglycosides والـ chloramphenicol.
+          - **تغيّر الهدف**: الـ rRNA (linezolid، macrolides)، الإنزيم (penicillinase-resistant penicillins، cephalosporins، sulfonamides، fluoroquinolones)، أو الحيطة (==vancomycin==).
+          - **تطرد الدوا أو ما تدخلهوش** (efflux، ↓ uptake): tetracyclines، sulfonamides، fluoroquinolones.
+        page: 127
+        quote: "Drug cleavage Penicillin G, V Penicillinase-sensitive penicillins Cephalosporins Carbapenems Drug modification Aminoglycosides Chloramphenicol"
+      - kind: sort
+        prompt: "حط كل دوا في طريقة الـ resistance بتاعته"
+        bins: ["Enzymatic inactivation", "Target modification", "Efflux / ↓ uptake"]
+        cards:
+          - { text: "Penicillin G", bin: 0 }
+          - { text: "Aminoglycosides", bin: 0 }
+          - { text: "Vancomycin", bin: 1 }
+          - { text: "Linezolid", bin: 1 }
+          - { text: "Macrolides", bin: 1 }
+          - { text: "Tetracyclines", bin: 2 }
+        why: "البنسلين بيتكسر (β-lactamase)، والـ aminoglycosides بتتعدّل. الـ vancomycin والـ linezolid والـ macrolides هدفهم بيتغير. الـ tetracyclines بتتطرد بره."
+        page: 127
+        quote: "rRNA Linezolid Macrolides"
+      - kind: explain
+        title: "الـ horizontal gene transfer: البكتيريا بتسلّف بعض"
+        text: |-
+          ==Horizontal gene transfer== هو الطريق الأساسي اللي الـ resistance بيتنقل بيه. 4 طرق:
+
+          - **Transformation**: البكتيريا تلقط DNA عريان من بكتيريا ماتت. أشهرهم **SHiN** (نفس جماعة الـ IgA protease). الـ DNase بيمنعه.
+          - **Conjugation**: عن طريق الـ sex pilus.
+          - **Transduction**: عن طريق phage.
+          - **Transposition**: جين بينط من مكان لمكان.
+        page: 128
+        quote: "Horizontal gene transfer is the main mechanism for transfer of antibiotic resistance among bacteria."
+      - kind: figure
+        title: "الـ conjugation: F+ و Hfr"
+        svg: |-
+          <svg viewBox="0 0 360 180" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="micL01g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="10" y="18" class="t-sm t-b">F+ × F–</text>
+            <ellipse class="fg-acc" cx="55" cy="55" rx="45" ry="25"/>
+            <circle class="fg-ink" cx="55" cy="55" r="8" fill="none"/>
+            <text x="30" y="92" class="t-sm">F+ (plasmid)</text>
+            <ellipse class="fg-box" cx="190" cy="55" rx="45" ry="25"/>
+            <text x="175" y="92" class="t-sm">F–</text>
+            <line class="fg-arrow-acc" x1="100" y1="55" x2="143" y2="55" marker-end="url(#micL01g)"/>
+            <text x="245" y="48" class="t-sm">one plasmid strand</text>
+            <text x="245" y="64" class="t-sm t-mut">no chromosomal DNA</text>
+            <text x="10" y="118" class="t-sm t-b">Hfr × F–</text>
+            <ellipse class="fg-acc" cx="55" cy="150" rx="45" ry="22"/>
+            <path class="fg-ink" d="M25 150 Q55 135 85 150" fill="none"/>
+            <text x="30" y="178" class="t-sm">Hfr</text>
+            <ellipse class="fg-box" cx="190" cy="150" rx="45" ry="22"/>
+            <line class="fg-arrow-acc" x1="100" y1="150" x2="143" y2="150" marker-end="url(#micL01g)"/>
+            <text x="245" y="142" class="t-sm">plasmid part +</text>
+            <text x="245" y="158" class="t-sm">flanking genes</text>
+            <text x="245" y="174" class="t-sm t-mut">recipient stays F–</text>
+          </svg>
+        caption: "الـ F+ بيبعت نسخة من الـ plasmid بس. الـ Hfr الـ plasmid بتاعه دخل في الـ chromosome، فلما يبعت بياخد معاه شوية جينات من الـ chromosome، والمستقبِل يفضل F–."
+        alt: "Top: an F+ cell with a plasmid passes one plasmid strand to an F– cell, with no chromosomal DNA. Bottom: an Hfr cell, whose plasmid is in the chromosome, passes part of the plasmid with flanking chromosomal genes; the recipient remains F–."
+        page: 128
+        quote: "A single strand of plasmid DNA is transferred across the conjugal bridge (“mating bridge”). No transfer of chromosomal DNA."
+      - kind: table
+        title: "الـ transduction: نوعين"
+        columns: ["Type", "Phage", "What happens"]
+        rows:
+          - ["Generalized", "Lytic", "Packaging error: random bacterial DNA packed in the capsid"]
+          - ["Specialized", "Lysogenic", "Excision event: flanking genes leave with the phage DNA"]
+        hide: [[0, 1], [1, 1], [0, 2], [1, 2]]
+        page: 128
+        quote: "Specialized An “excision” event. Lysogenic phage infects bacterium; viral DNA incorporates into bacterial chromosome."
+      - kind: mnemonic
+        word: "ABCDS"
+        parts:
+          - { key: "A", text: "group A strep erythrogenic toxin" }
+          - { key: "B", text: "Botulinum toxin" }
+          - { key: "C", text: "Cholera toxin" }
+          - { key: "D", text: "Diphtheria toxin" }
+          - { key: "S", text: "Shiga toxin" }
+        hook: "ABCD'S: الـ 5 toxins اللي جيناتهم في lysogenic phage (الكتاب)"
+        page: 128
+        quote: "Genes for the following 5 bacterial toxins are encoded in a lysogenic phage (ABCD’S): Group A strep erythrogenic toxin, Botulinum toxin, Cholera toxin, Diphtheria toxin, Shiga toxin."
+      - kind: explain
+        title: "الـ transposon: الجين النطّاط"
+        text: |-
+          الـ **transposon** حتة DNA بتنسخ نفسها وتنط في نفس الـ DNA أو في DNA تاني (plasmid أو chromosome).
+
+          ده اللي بيعمل ==plasmids فيها resistance لأكتر من دوا==، وبينقل الـ resistance بين أنواع مختلفة: زي **Tn1546** شايل **vanA** من الـ Enterococcus للـ S aureus.
+        page: 129
+        quote: "Critical in creating plasmids with multiple drug resistance and transfer across species lines (eg, Tn1546 with vanA from Enterococcus to S aureus)."
+      - kind: check
+        question: "Adding DNase to the culture blocks the gene transfer. Which process was it?"
+        options:
+          - "Transformation"
+          - "Conjugation"
+          - "Generalized transduction"
+          - "Specialized transduction"
+        answer: 0
+        why:
+          - "صح: الـ transformation DNA عريان، والـ DNase بيكسّره."
+          - "في الـ conjugation الـ DNA بيعدّي جوه الـ mating bridge، محمي."
+          - "في الـ transduction الـ DNA جوه الـ phage capsid، محمي."
+          - "نفس الكلام: محمي جوه الـ capsid."
+        page: 128
+        quote: "Adding deoxyribonuclease degrades naked DNA, preventing transformation."
+      - kind: try
+        items: [mic.L01.055, mic.L01.056, mic.L01.059, mic.L01.065, mic.L01.066]
+    recap:
+      - "Protein A يمسك Fc الـ IgG. IgA protease = SHiN. M protein شبه cardiac myosin."
+      - "Resistance: تكسير/تعديل الدوا، تغيير الهدف، أو طرده."
+      - "Transformation (DNA عريان، SHiN)، conjugation (pilus)، transduction (phage)، transposition (Tn1546/vanA)."
+      - "ABCD'S جيناتهم في lysogenic phage."
+    practice: [mic.L01.055, mic.L01.056, mic.L01.057, mic.L01.058, mic.L01.059, mic.L01.060, mic.L01.061, mic.L01.062, mic.L01.063, mic.L01.064, mic.L01.065, mic.L01.066, mic.L01.067, mic.L01.068]
+  - id: mic.L01.lesson5
+    title: "الـ toxins: الـ exotoxin سلاح متصوّب والـ endotoxin قنبلة"
+    hook: "اعرف الـ toxin بيضرب فين، وهتعرف المرض من غير ما تحفظه"
+    minutes: 10
+    pages: [129, 131]
+    topics: [exotoxins-endotoxins, bacteria-with-exotoxins, endotoxin]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الفرق الأساسي"
+        text: |-
+          - **Exotoxin**: ==polypeptide== البكتيريا بتفرزه (gram ⊕ أو ⊝)، جيناته على plasmid أو phage، سام جداً (~1 µg يموّت)، والجسم بيعمل ضده antitoxins ← فينفع نعمل منه **toxoid vaccine**. وبيبوظ بالحرارة عند 60°C.
+          - **Endotoxin**: ==lipid A== جزء من الـ outer membrane بتاع الـ gram ⊝، مش بيتفرز، جيناته في الـ chromosome، أقل سمّية، poorly antigenic، ومافيش منه vaccine. ويستحمل 100°C لمدة ساعة.
+        page: 129
+        quote: "LOCATION OF GENES Plasmid or bacteriophage Bacterial chromosome TOXICITY High (fatal dose on the order of 1 µg) Low (fatal dose on the order of hundreds of micrograms)"
+      - kind: aside
+        tone: trap
+        text: "معظم الـ exotoxins بتبوظ عند 60°C، ==إلا 3==: staphylococcal enterotoxin، E coli heat-stable toxin، و B cereus emetic toxin. عشان كده تسخين الأكل اللي فيه staph toxin ما بيحميش من الـ food poisoning."
+        page: 129
+        quote: "Destroyed rapidly at 60°C (except staphylococcal enterotoxin, E coli heat-stable toxin, and B cereus emetic toxin)"
+      - kind: explain
+        title: "toxins بتوقّف تصنيع البروتين"
+        text: |-
+          - **Diphtheria toxin** و **Pseudomonas exotoxin A**: بيعطّلوا ==EF-2== بالـ ADP-ribosylation. الـ diphtheria: pseudomembranes في الزور، bull neck، و myocarditis.
+          - **Shiga toxin** (Shigella و EHEC): بيعطّل الـ **60S ribosome** بإنه يشيل adenine من الـ rRNA ← dysentery، والـ cytokines ← ==HUS== (أشهره EHEC O157:H7). والـ EHEC، عكس Shigella، ما بيدخلش الخلايا.
+        page: 130
+        quote: "Inactivate 60S ribosome by removing adenine from rRNA"
+      - kind: figure
+        title: "الـ cAMP: نفس الزرار من 4 ميكروبات"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="micL01t" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-acc" x="120" y="80" width="120" height="36" rx="8"/>
+            <text x="134" y="102" class="t-sm t-b">adenylate cyclase</text>
+            <rect class="fg-box" x="5" y="10" width="110" height="34" rx="6"/>
+            <text x="12" y="31" class="t-sm">cholera: Gs on</text>
+            <rect class="fg-box" x="245" y="10" width="110" height="34" rx="6"/>
+            <text x="252" y="31" class="t-sm">pertussis: Gi off</text>
+            <rect class="fg-box" x="5" y="145" width="110" height="34" rx="6"/>
+            <text x="12" y="166" class="t-sm">ETEC LT: overactive</text>
+            <rect class="fg-box" x="245" y="145" width="110" height="34" rx="6"/>
+            <text x="252" y="166" class="t-sm">anthrax: mimics it</text>
+            <line class="fg-arrow-acc" x1="80" y1="44" x2="140" y2="80" marker-end="url(#micL01t)"/>
+            <line class="fg-arrow-acc" x1="280" y1="44" x2="220" y2="80" marker-end="url(#micL01t)"/>
+            <line class="fg-arrow-acc" x1="80" y1="145" x2="140" y2="116" marker-end="url(#micL01t)"/>
+            <line class="fg-arrow-acc" x1="280" y1="145" x2="220" y2="116" marker-end="url(#micL01t)"/>
+            <text x="150" y="140" class="t-sm t-acc">↑ cAMP</text>
+          </svg>
+        caption: "4 ميكروبات بيرفعوا الـ cAMP بطرق مختلفة: الكوليرا بتشغّل Gs على طول، الـ pertussis بيطفي Gi، الـ ETEC heat-labile toxin بيشغّل الـ adenylate cyclase زيادة، والـ anthrax نفسه شبه adenylate cyclase."
+        alt: "Adenylate cyclase in the centre with four arrows: cholera toxin turns Gs on, pertussis toxin turns Gi off, ETEC heat-labile toxin overactivates it, and anthrax toxin mimics it; all raise cAMP."
+        page: 130
+        quote: "Bacteria that ↑ cAMP include V cholerae, B anthracis, B pertussis, E coli"
+      - kind: aside
+        tone: tip
+        text: "ETEC عنده toxinين: الكتاب بيقولك ==labile in the Air (Adenylate cyclase)، stable on the Ground (Guanylate cyclase)==. الـ LT بيرفع cAMP ← Cl− يخرج؛ الـ ST بيرفع cGMP ← NaCl والمية ما يترجعوش."
+        page: 130
+        quote: "Watery diarrhea: “labile in the Air (Adenylate cyclase), stable on the Ground (Guanylate cyclase)”"
+      - kind: check
+        question: "A toxin raises cAMP by inactivating the inhibitory G protein (Gi). Which disease?"
+        options:
+          - "Whooping cough"
+          - "Cholera"
+          - "Cutaneous anthrax"
+          - "Traveler's diarrhea from heat-stable toxin"
+        answer: 0
+        why:
+          - "صح: الـ pertussis toxin بيطفي Gi ← cAMP يعلى ← whooping cough."
+          - "الكوليرا بتشغّل Gs على طول، مش بتطفي Gi."
+          - "الـ anthrax toxin نفسه بيقلّد الـ adenylate cyclase."
+          - "الـ ST بيشغّل الـ guanylate cyclase (cGMP)."
+        page: 130
+        quote: "Activates adenylate cyclase (↑ cAMP) by inactivating inhibitory subunit (Gi)."
+      - kind: explain
+        title: "Tetanus و botulism: نفس المقص، مكانين"
+        text: |-
+          الاتنين ==proteases بتقص الـ SNARE== (البروتينات اللي بتخلي الـ vesicle تفرّغ الـ neurotransmitter).
+
+          - **Tetanospasmin**: بيوقّف إفراز الـ **inhibitory** neurotransmitters (GABA و glycine) من الـ Renshaw cells في الـ spinal cord ← مافيش فرامل ← **spastic paralysis**، risus sardonicus، trismus (lockjaw)، opisthotonos.
+          - **Botulinum toxin**: بيوقّف إفراز الـ neurotransmitter عند العضلة ← flaccid paralysis.
+        page: 130
+        quote: "Toxin prevents release of inhibitory (GABA and glycine) neurotransmitters from Renshaw cells in spinal cord → spastic paralysis, risus sardonicus, trismus (lockjaw), opisthotonos"
+      - kind: aside
+        tone: exam
+        text: "**Infant botulism**: الطفل بلع ==spores== (من التراب أو العسل الخام) والـ toxin اتعمل جوه. **Foodborne botulism**: الشخص أكل ==toxin جاهز== (من المعلبات). عشان كده ما نديش عسل خام للرضيع."
+        page: 130
+        quote: "Infant botulism—caused by ingestion of spores (eg, from soil, raw honey). Toxin produced in vivo Foodborne botulism—caused by ingestion of preformed toxin (eg, from canned foods)"
+      - kind: explain
+        title: "toxins بتخرم الـ membrane، و superantigens"
+        text: |-
+          - **C perfringens alpha toxin**: phospholipase (lecithinase) ← myonecrosis (==gas gangrene==)، و "double zone" hemolysis على الـ blood agar.
+          - **Streptolysin O** (S pyogenes): بيخرم الـ RBCs (β-hemolysis). الـ antibodies ضده (**ASO**) بتشخّص الـ rheumatic fever.
+          - **Superantigens**: TSST-1 (S aureus) و erythrogenic exotoxin A (S pyogenes). بيربطوا الـ TCR بالـ MHC II ==بره مكان الـ antigen== ← T cells كتير جداً تشتغل مرة واحدة ← cytokines ← fever، rash، shock.
+        page: 131
+        quote: "Cross-links β region of TCR to MHC class II on APCs outside of the antigen binding site"
+      - kind: reveal
+        prompt: "ليه الـ superantigen بيعمل shock، والـ antigen العادي لأ؟"
+        answer: "الـ antigen العادي بيشغّل الـ T cells القليلة اللي عندها receptor مخصوص ليه. الـ superantigen بيربط الـ TCR والـ MHC II من بره مكان الـ antigen، فبيشغّل نسبة ضخمة من الـ T cells مرة واحدة ← overwhelming release of IL-1 و IL-2 و IFN-γ و TNF-α ← shock."
+        page: 131
+        quote: "overwhelming release of IL-1, IL-2, IFN- , and γ TNF-α  shock"
+      - kind: explain
+        title: "الـ endotoxin: 3 زراير، كل واحد ليه نتيجة"
+        text: |-
+          الـ LPS = O-antigen + core polysaccharide + ==lipid A== (الجزء السام). الـ Neisseria عندها lipooligosaccharide. بيطلع لما البكتيريا تموت، أو من فقاقيع (blebs) بتنفصل من البكتيريا وهي عايشة.
+
+          - **macrophage activation** (TLR4/CD14) ← IL-1 و IL-6 و TNF-α و nitric oxide ← fever و hypotension.
+          - **complement activation** ← C3a (histamine: hypotension و edema)، C5a (neutrophil chemotaxis).
+          - **tissue factor activation** ← coagulation cascade ← ==DIC==.
+        page: 131
+        quote: "Three main effects: macrophage activation (TLR4/CD14), complement activation, and tissue factor activation."
+      - kind: mnemonic
+        word: "ENDOTOXINS"
+        parts:
+          - { key: "E", text: "Edema" }
+          - { key: "N", text: "Nitric oxide" }
+          - { key: "D", text: "DIC/Death" }
+          - { key: "O", text: "Outer membrane" }
+          - { key: "T", text: "TNF-α" }
+          - { key: "O", text: "O-antigen + core polysaccharide + lipid A" }
+          - { key: "X", text: "eXtremely heat stable" }
+          - { key: "I", text: "IL-1 and IL-6" }
+          - { key: "N", text: "Neutrophil chemotaxis" }
+          - { key: "S", text: "Shock" }
+        hook: "ENDOTOXINS (الكتاب): كل حرف خاصية"
+        page: 131
+        quote: "ENDOTOXINS: Edema Nitric oxide DIC/Death Outer membrane TNF-α O-antigen + core polysaccharide + lipid A eXtremely heat stable IL-1 and IL-6 Neutrophil chemotaxis Shock"
+      - kind: case
+        stem: "A 19-year-old student has fever, a petechial rash and hypotension. Blood cultures grow gram-negative diplococci."
+        steps:
+          - question: "Which molecule of the organism drives the shock?"
+            options: ["Lipooligosaccharide (lipid A)", "TSST-1", "Protein A", "Streptolysin O"]
+            answer: 0
+            why: "الـ N meningitidis gram ⊝، والـ endotoxin بتاعها lipooligosaccharide فيه lipid A. TSST-1 و Protein A بتوع S aureus، و Streptolysin O بتاع S pyogenes."
+          - reveal: "Platelets fall, PT and aPTT rise, and D-dimer is high."
+            question: "Which endotoxin effect explains these labs?"
+            options: ["Tissue factor activation", "C5a release", "Nitric oxide release", "SNARE cleavage"]
+            answer: 0
+            why: "الـ tissue factor بيشغّل الـ coagulation cascade ← DIC. الـ C5a للـ chemotaxis، والـ NO للـ hypotension، والـ SNARE ده tetanus و botulinum."
+        page: 131
+        quote: "Composed of O-antigen + core polysaccharide + lipid A (the toxic component). Neisseria have lipooligosaccharide."
+      - kind: try
+        items: [mic.L01.069, mic.L01.075, mic.L01.078, mic.L01.081, mic.L01.088]
+    recap:
+      - "Exotoxin: polypeptide، plasmid/phage، toxoid vaccine. Endotoxin: lipid A، chromosome، heat stable."
+      - "EF-2: diphtheria و Pseudomonas. 60S: Shiga."
+      - "cAMP: cholera (Gs)، pertussis (Gi)، anthrax، ETEC LT. cGMP: ETEC ST."
+      - "Tetanus و botulinum بيقصوا SNARE. Superantigens بيربطوا TCR بـ MHC II."
+      - "Endotoxin: macrophage و complement و tissue factor (DIC)."
+    practice: [mic.L01.069, mic.L01.070, mic.L01.071, mic.L01.072, mic.L01.073, mic.L01.074, mic.L01.075, mic.L01.076, mic.L01.077, mic.L01.078, mic.L01.079, mic.L01.080, mic.L01.081, mic.L01.082, mic.L01.083, mic.L01.084, mic.L01.085, mic.L01.086, mic.L01.087, mic.L01.088, mic.L01.089]
