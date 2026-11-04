@@ -18,7 +18,7 @@ its Dioxus screens (HTML/CSS, right-to-left) instead of their egui toolkit
 | Web shell | `web/index.html`, `web/manifest.webmanifest`, `web/_headers` | Loads `steps.js`, installable as an app |
 | Build | `scripts/web/build.sh` (`just web`, `just web-release`) | cargo → wasm-bindgen → `target/web/steps` |
 | Host | `web/wrangler.toml`, `.github/workflows/web-deploy.yml` | A static-assets Worker on the free plan, same account as Steps Cloud |
-| CI gate | `ci.yml` › "Web app compiles (wasm32)" | clippy for wasm32, nightly and by hand |
+| CI gate | `nightly.yml` › "Web app compiles (wasm32)" | clippy for wasm32, nightly and by hand |
 
 ## What differs in the browser
 

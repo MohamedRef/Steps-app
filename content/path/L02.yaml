@@ -1,0 +1,734 @@
+schema: steps.content/v1
+lecture: path.L02
+title: Inflammation
+book: { chapter: 4, pages: [209, 214] }
+topics:
+  - { id: inflammation, title: Inflammation }
+  - { id: cardinal-signs, title: Cardinal signs }
+  - { id: systemic-manifestations, title: Systemic manifestations (acute-phase reaction) }
+  - { id: acute-phase-reactants, title: Acute-phase reactants }
+  - { id: erythrocyte-sedimentation-rate, title: Erythrocyte sedimentation rate }
+  - { id: acute-inflammation, title: Acute inflammation }
+  - { id: leukocyte-extravasation, title: Leukocyte extravasation }
+  - { id: chronic-inflammation, title: Chronic inflammation }
+  - { id: wound-healing, title: Wound healing }
+  - { id: granulomatous-inflammation, title: Granulomatous inflammation }
+  - { id: scar-formation, title: Scar formation }
+items:
+  # ---------- p209: inflammation ----------
+  - id: path.L02.001
+    kind: card
+    topic: inflammation
+    front: What are the three goals of inflammation?
+    back: To eliminate the initial cause of cell injury, to remove necrotic cells resulting from the original insult, and to initiate tissue repair.
+    src: { page: 209, quote: "Response to eliminate initial cause of cell injury, to remove necrotic cells resulting from the original insult, and to initiate tissue repair." }
+    status: unverified
+  - id: path.L02.002
+    kind: enumerate
+    topic: inflammation
+    prompt: Enumerate the three ways inflammation itself harms the host, with the book's example of each (3).
+    points:
+      - "Excessive (septic shock)"
+      - "Prolonged (persistent infections such as TB)"
+      - "Inappropriate (autoimmune diseases such as SLE)"
+    pass: 3
+    src: { page: 209, quote: "The inflammatory response itself can be harmful to the host if the reaction is excessive (eg, septic shock), prolonged (eg, persistent infections such as TB), or inappropriate (eg, autoimmune diseases such as SLE)." }
+    status: unverified
+  - id: path.L02.003
+    kind: mcq
+    topic: inflammation
+    stem: >-
+      A 24-year-old woman has a malar rash, arthralgias and proteinuria. Anti-dsDNA antibodies are
+      positive, and a renal biopsy shows immune complex deposition with inflammation of the
+      glomeruli. Her kidney damage is best explained by an inflammatory response that is which of
+      the following?
+    options:
+      - Excessive, as in septic shock
+      - Prolonged, as in persistent infection
+      - Inappropriate, directed against self
+      - Appropriate, removing necrotic cells
+      - Absent, allowing infection to spread
+    answer: 2
+    why:
+      - "Septic shock is the book's example of an excessive response to an infection."
+      - "Persistent infections such as TB are the book's example of a prolonged response."
+      - "Right. SLE is the book's example of inappropriate inflammation: the response targets the host's own antigens."
+      - "Removing necrotic cells is a goal of inflammation; here inflammation is causing the injury."
+      - "Inflammation is present and is causing the damage."
+    src: { page: 209, quote: "inappropriate (eg, autoimmune diseases such as SLE)" }
+    status: unverified
+  # ---------- p209: cardinal signs ----------
+  - id: path.L02.004
+    kind: table
+    topic: cardinal-signs
+    title: Cardinal signs of inflammation
+    columns: [Sign, Mechanism, Mediators]
+    rows:
+      - ["Rubor and calor (redness, warmth)", "Vasodilation (arteriolar smooth muscle relaxes) → ↑ blood flow", "Histamine, prostaglandins, bradykinin, NO"]
+      - ["Tumor (swelling)", "Endothelial contraction/disruption → ↑ permeability → exudate from postcapillary venules", "Leukotrienes C4, D4, E4; histamine; serotonin; bradykinin"]
+      - ["Dolor (pain)", "Sensitization of sensory nerve endings", "Bradykinin, PGE2, histamine"]
+      - ["Functio laesa (loss of function)", "Inflammation impairs function", "e.g., cannot make a fist with hand cellulitis"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 2]]
+    src: { page: 209, quote: "Rubor and calor Redness and warmth. Vasodilation (relaxation of arteriolar smooth muscle) → ↑ blood flow. Mediated by histamine, prostaglandins, bradykinin, NO." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.005
+    kind: card
+    topic: cardinal-signs
+    front: How does swelling (tumor) form in inflammation?
+    back: Endothelial contraction or disruption → ↑ vascular permeability → protein-rich fluid leaks from postcapillary venules into the interstitium (exudate) → ↑ interstitial oncotic pressure.
+    src: { page: 209, quote: "Endothelial contraction/disruption (eg, from tissue damage) → ↑ vascular permeability → leakage of protein-rich fluid from postcapillary venules into interstitial space (exudate) → ↑ interstitial oncotic pressure." }
+    status: unverified
+  - id: path.L02.006
+    kind: cloze
+    topic: cardinal-signs
+    text: "Inflammatory pain (dolor) comes from sensitization of sensory nerve endings, mediated by {{c1::bradykinin}}, {{c2::PGE2}} and histamine."
+    src: { page: 209, quote: "Dolor Pain. Sensitization of sensory nerve endings. Mediated by bradykinin, PGE2, histamine." }
+    status: unverified
+  - id: path.L02.007
+    kind: mcq
+    topic: cardinal-signs
+    stem: >-
+      A 30-year-old man is stung by a bee on the forearm. Within minutes the area becomes swollen
+      with protein-rich interstitial fluid. Contraction of which cells, at which site, produces this
+      swelling?
+    options:
+      - Arteriolar smooth muscle cells
+      - Endothelial cells of postcapillary venules
+      - Capillary pericytes in the arterioles
+      - Lymphatic endothelial cells
+      - Fibroblasts of the dermis
+    answer: 1
+    why:
+      - "Arteriolar smooth muscle relaxation (vasodilation) gives redness and warmth, not exudate."
+      - "Right. Endothelial contraction (leukotrienes C4/D4/E4, histamine, serotonin, bradykinin) opens junctions so protein-rich fluid leaks from postcapillary venules."
+      - "The book places the leak at postcapillary venules, not arterioles."
+      - "Lymphatics drain fluid; they do not create the exudate."
+      - "Fibroblasts lay down collagen in repair; they do not cause acute swelling."
+    src: { page: 209, quote: "leakage of protein-rich fluid from postcapillary venules into interstitial space (exudate) → ↑ interstitial oncotic pressure. Endothelial cell contraction is mediated by leukotrienes (C4, D4, E4), histamine, serotonin, bradykinin." }
+    status: unverified
+  # ---------- p209: systemic manifestations ----------
+  - id: path.L02.008
+    kind: order
+    topic: systemic-manifestations
+    prompt: Put the steps that raise the temperature set point in fever in order.
+    steps:
+      - Pyrogens (e.g., LPS) act on macrophages
+      - Macrophages release IL-1 and TNF
+      - ↑ COX activity in perivascular cells of the anterior hypothalamus
+      - ↑ PGE2
+      - ↑ Temperature set point
+    src: { page: 209, quote: "Pyrogens (eg, LPS) induce macrophages to release IL-1 and TNF → ↑ COX activity in perivascular cells of anterior hypothalamus → ↑ PGE2 → ↑ temperature set point." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.009
+    kind: card
+    topic: systemic-manifestations
+    front: What determines the predominant cell type in inflammatory leukocytosis?
+    back: The inciting agent or injury, e.g., bacteria → ↑ neutrophils.
+    src: { page: 209, quote: "↑ WBC count; type of predominant cell depends on inciting agent or injury (eg, bacteria → ↑ neutrophils)." }
+    status: unverified
+  - id: path.L02.010
+    kind: cloze
+    topic: systemic-manifestations
+    text: "Acute-phase reactants are produced by the {{c1::liver}} and are notably induced by {{c2::IL-6}}."
+    src: { page: 209, quote: "Produced by liver. Notably induced by IL-6." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.011
+    kind: mcq
+    topic: systemic-manifestations
+    stem: >-
+      A 45-year-old woman with gram-negative pyelonephritis has a temperature of 39.6 °C (103.3 °F).
+      She takes ibuprofen and her fever falls within an hour. Which step in fever generation did the
+      drug block?
+    options:
+      - Binding of LPS to macrophages
+      - Release of IL-1 by macrophages
+      - Prostaglandin E2 synthesis in the anterior hypothalamus
+      - IL-6–driven hepatic acute-phase protein synthesis
+      - Neutrophil release from the bone marrow
+    answer: 2
+    why:
+      - "Ibuprofen does not stop LPS from acting on macrophages."
+      - "IL-1 release comes before the step the drug blocks; NSAIDs act downstream."
+      - "Right. IL-1 and TNF ↑ COX activity in the anterior hypothalamus → ↑ PGE2 → ↑ set point. A COX inhibitor blocks PGE2."
+      - "Acute-phase proteins do not set the hypothalamic temperature."
+      - "Leukocytosis is a separate systemic manifestation and does not set the temperature."
+    src: { page: 209, quote: "Pyrogens (eg, LPS) induce macrophages to release IL-1 and TNF → ↑ COX activity in perivascular cells of anterior hypothalamus → ↑ PGE2 → ↑ temperature set point." }
+    status: unverified
+  # ---------- p209: acute-phase reactants ----------
+  - id: path.L02.012
+    kind: table
+    topic: acute-phase-reactants
+    title: Positive acute-phase reactants (upregulated)
+    columns: [Reactant, Role]
+    rows:
+      - ["C-reactive protein", "Opsonin; fixes complement, aids phagocytosis; nonspecific marker of inflammation"]
+      - ["Ferritin", "Binds and sequesters iron to inhibit microbial iron scavenging"]
+      - ["Fibrinogen", "Coagulation factor; promotes endothelial repair; correlates with ESR"]
+      - ["Haptoglobin", "Binds extracellular hemoglobin; protects against oxidative stress"]
+      - ["Hepcidin", "↓ Iron absorption (degrades ferroportin) and ↓ release from macrophages → anemia of chronic disease"]
+      - ["Procalcitonin", "Increases in bacterial infections"]
+      - ["Serum amyloid A", "Prolonged elevation → secondary amyloidosis"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 209, quote: "C-reactive protein Opsonin; fixes complement and facilitates phagocytosis. Measured clinically as a nonspecific sign of ongoing inflammation." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.013
+    kind: enumerate
+    topic: acute-phase-reactants
+    prompt: Enumerate the negative (downregulated) acute-phase reactants (3).
+    points:
+      - Albumin
+      - Transferrin
+      - Transthyretin (prealbumin)
+    pass: 3
+    hook: "الـ 3 بيقلّوا: الـ albumin والـ transthyretin عشان الـ amino acids تروح للـ positive reactants، والـ transferrin بيدخل الـ macrophages عشان الحديد يتحبس."
+    src: { page: 209, quote: "NeGATIVe (DOWNReGULATeD) Albumin Downregulation conserves amino acids for positive reactants. Transferrin Internalized by macrophages to sequester iron. Transthyretin Also called prealbumin." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.014
+    kind: card
+    topic: acute-phase-reactants
+    front: How does hepcidin cause anemia of chronic disease?
+    back: Hepcidin degrades ferroportin, so iron absorption falls and macrophages release less iron.
+    src: { page: 209, quote: "Hepcidin ↓ iron absorption (by degrading ferroportin) and ↓ iron release (from macrophages) → anemia of chronic disease." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.015
+    kind: card
+    topic: acute-phase-reactants
+    front: Why are albumin and transthyretin downregulated in the acute-phase response?
+    back: Downregulating them conserves amino acids for the positive acute-phase reactants.
+    src: { page: 209, quote: "Albumin Downregulation conserves amino acids for positive reactants." }
+    status: unverified
+  - id: path.L02.016
+    kind: cloze
+    topic: acute-phase-reactants
+    text: "{{c1::Procalcitonin}} is the acute-phase reactant that increases in {{c2::bacterial}} infections."
+    src: { page: 209, quote: "Procalcitonin Increases in bacterial infections." }
+    status: unverified
+  - id: path.L02.017
+    kind: mcq
+    topic: acute-phase-reactants
+    stem: >-
+      A 62-year-old man with rheumatoid arthritis for 20 years has fatigue. Hemoglobin is 10.1 g/dL
+      with a normocytic picture, serum iron is low, ferritin is high and total iron-binding capacity
+      is low. Which acute-phase reactant most directly lowers his serum iron?
+    options:
+      - Haptoglobin
+      - Hepcidin
+      - C-reactive protein
+      - Serum amyloid A
+      - Fibrinogen
+    answer: 1
+    why:
+      - "Haptoglobin binds free hemoglobin; it does not trap iron."
+      - "Right. Hepcidin degrades ferroportin → ↓ iron absorption and ↓ release from macrophages → anemia of chronic disease."
+      - "CRP is an opsonin and a marker of inflammation; it does not regulate iron."
+      - "Serum amyloid A can cause secondary amyloidosis after prolonged elevation, but not low iron."
+      - "Fibrinogen raises the ESR; it does not handle iron."
+    src: { page: 209, quote: "Hepcidin ↓ iron absorption (by degrading ferroportin) and ↓ iron release (from macrophages) → anemia of chronic disease." }
+    status: unverified
+  # ---------- p210: ESR ----------
+  - id: path.L02.018
+    kind: card
+    topic: erythrocyte-sedimentation-rate
+    front: Why does inflammation raise the ESR?
+    back: RBCs normally stay apart through their negative surface charges. Inflammatory products (e.g., fibrinogen) coat RBCs → ↓ negative charge → ↑ aggregation. Denser aggregates fall faster in the tube → ↑ ESR.
+    src: { page: 210, quote: "RBCs normally remain separated via ⊝ charges. Products of inﬂammation (eg, fibrinogen) coat RBCs → ↓ ⊝ charge → ↑ RBC aggregation. Denser RBC aggregates fall at a faster rate within a pipette tube → ↑ ESR." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.019
+    kind: table
+    topic: erythrocyte-sedimentation-rate
+    title: What changes the ESR
+    columns: [↑ ESR, ↓ ESR (lower than expected)]
+    rows:
+      - ["Most anemias", "Sickle cell anemia (altered shape)"]
+      - ["Infections", "Polycythemia (↑ RBCs dilute aggregation factors)"]
+      - ["Inflammation (giant cell arteritis, polymyalgia rheumatica)", "HF"]
+      - ["Cancer (metastases, multiple myeloma)", "Microcytosis"]
+      - ["Renal disease (end-stage or nephrotic syndrome)", "Hypofibrinogenemia"]
+      - ["Pregnancy", ""]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 210, quote: "Most anemias Sickle cell anemia (altered shape) Infections Polycythemia (↑ RBCs “dilute” aggregation factors)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.020
+    kind: cloze
+    topic: erythrocyte-sedimentation-rate
+    text: "The ESR is often co-tested with {{c1::CRP}}, the {{c2::more specific}} marker of inflammation."
+    src: { page: 210, quote: "Often co-tested with CRP (more specific marker of inflammation)." }
+    status: unverified
+  - id: path.L02.021
+    kind: mcq
+    topic: erythrocyte-sedimentation-rate
+    stem: >-
+      A 19-year-old man with known sickle cell disease has fever and painful dactylitis. His CRP is
+      markedly elevated, but his erythrocyte sedimentation rate is near zero. Which explanation best
+      accounts for the low ESR?
+    options:
+      - Abnormal RBC shape prevents aggregation
+      - Fibrinogen production is suppressed by sickling
+      - The extra RBCs dilute the aggregation factors
+      - Microcytosis from coexisting iron deficiency
+      - Hemolysis lowers CRP production
+    answer: 0
+    why:
+      - "Right. In sickle cell anemia the altered RBC shape prevents the stacking that makes cells fall fast, so the ESR is lower than expected."
+      - "Fibrinogen is a positive acute-phase reactant and rises in inflammation."
+      - "Dilution by extra RBCs is how polycythemia lowers the ESR; he has anemia."
+      - "Microcytosis can lower the ESR, but sickle cell disease is the cause here; the book lists its altered shape."
+      - "His CRP is high, and CRP doesn't explain the ESR."
+    src: { page: 210, quote: "Sickle cell anemia (altered shape)" }
+    status: unverified
+  # ---------- p210: acute inflammation ----------
+  - id: path.L02.022
+    kind: card
+    topic: acute-inflammation
+    front: What characterizes acute inflammation (cells, onset, duration, arm of immunity)?
+    back: Neutrophils in tissue, often with edema. Rapid onset (seconds to minutes) and short duration (minutes to days). It is a reaction of the innate immune system, less specific than chronic inflammation.
+    src: { page: 210, quote: "Characterized by neutrophils in tissue A , often with associated edema. Rapid onset (seconds to minutes) and short duration (minutes to days). Represents a reaction of the innate immune system" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.023
+    kind: enumerate
+    topic: acute-inflammation
+    prompt: Enumerate the stimuli of acute inflammation (4).
+    points:
+      - Infections
+      - Trauma
+      - Necrosis
+      - Foreign bodies
+    pass: 4
+    src: { page: 210, quote: "STIMULI Infections, trauma, necrosis, foreign bodies." }
+    status: unverified
+  - id: path.L02.024
+    kind: card
+    topic: acute-inflammation
+    front: What is the inflammasome?
+    back: A cytoplasmic complex that recognizes damage- and pathogen-associated molecular patterns (e.g., microbial products, uric acid crystals) → IL-1 activation → inflammatory response (fever, leukocytosis).
+    src: { page: 210, quote: "Inﬂammasome—cytoplasmic complex recognizing damage- and pathogen-associated molecular patterns (eg, microbial products, uric acid crystals) → IL-1 activation → inflammatory response (eg, fever, leukocytosis)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.025
+    kind: card
+    topic: acute-inflammation
+    front: What are the vascular and cellular components of acute inflammation?
+    back: "Vascular: vasodilation (↑ blood flow and stasis) and ↑ endothelial permeability (contracted endothelial cells open interendothelial junctions). Cellular: leukocytes (mainly neutrophils) extravasate from postcapillary venules, accumulate at the injury and are activated."
+    src: { page: 210, quote: "Vascular: vasodilation (→ ↑ blood flow and stasis) and ↑ endothelial permeability (contraction of endothelial cells opens interendothelial junctions)" }
+    status: unverified
+  - id: path.L02.026
+    kind: table
+    topic: acute-inflammation
+    title: Outcomes of acute inflammation
+    columns: [Outcome, Driver]
+    rows:
+      - ["Resolution and healing", "IL-10, TGF-β"]
+      - ["Persistent acute inflammation", "IL-8"]
+      - ["Abscess", "Acute inflammation walled off by fibrosis"]
+      - ["Chronic inflammation", "Antigen presentation by macrophages and other APCs → CD4+ Th activation"]
+      - ["Scarring", ""]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
+    src: { page: 210, quote: "Resolution and healing (IL-10, TGF-β) Persistent acute inflammation (IL-8) Abscess (acute inflammation walled off by fibrosis)" }
+    status: unverified
+  - id: path.L02.027
+    kind: cloze
+    topic: acute-inflammation
+    text: "{{c1::Macrophages}} predominate in the late stages of acute inflammation, peaking {{c2::2-3 days}} after onset, and influence the outcome by secreting cytokines."
+    src: { page: 210, quote: "Macrophages predominate in the late stages of acute inflammation (peak 2-3 days after onset) and influence outcome by secreting cytokines." }
+    status: unverified
+  - id: path.L02.028
+    kind: mcq
+    topic: acute-inflammation
+    stem: >-
+      A 58-year-old man wakes with a hot, swollen, exquisitely painful first metatarsophalangeal
+      joint. Aspiration shows needle-shaped, negatively birefringent crystals and many neutrophils.
+      Which cytoplasmic sensor most directly converts these crystals into an IL-1–driven response?
+    options:
+      - Toll-like receptor on the cell surface
+      - The inflammasome
+      - Hageman factor (factor XII)
+      - The membrane attack complex
+      - MHC class II
+    answer: 1
+    why:
+      - "Toll-like receptors are acute inflammation mediators, but the book names the cytoplasmic complex that senses uric acid crystals."
+      - "Right. The inflammasome is a cytoplasmic complex that recognizes damage patterns such as uric acid crystals → IL-1 activation → fever and leukocytosis."
+      - "Hageman factor is a plasma mediator of acute inflammation, not a cytoplasmic crystal sensor."
+      - "The membrane attack complex lyses cells; it does not activate IL-1."
+      - "MHC II presents peptides to CD4+ T cells, leading to chronic, not crystal-induced acute, inflammation."
+    src: { page: 210, quote: "cytoplasmic complex recognizing damage- and pathogen-associated molecular patterns (eg, microbial products, uric acid crystals) → IL-1 activation" }
+    status: unverified
+  # ---------- p211: leukocyte extravasation ----------
+  - id: path.L02.029
+    kind: order
+    topic: leukocyte-extravasation
+    prompt: Put the steps of leukocyte extravasation in order.
+    steps:
+      - Margination and rolling
+      - Tight binding (adhesion)
+      - Diapedesis (transmigration)
+      - Migration (chemoattraction)
+    src: { page: 210, quote: "Leukocyte extravasation has 4 steps: margination and rolling, adhesion, transmigration, and migration (chemoattraction)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.030
+    kind: table
+    topic: leukocyte-extravasation
+    title: Leukocyte extravasation molecules
+    columns: [Step, Vasculature/stroma, Leukocyte]
+    rows:
+      - ["Margination and rolling", "E-selectin, P-selectin; GlyCAM-1, CD34", "Sialyl LewisX; L-selectin"]
+      - ["Tight binding (adhesion)", "ICAM-1 (CD54); VCAM-1 (CD106)", "CD11/18 integrins (LFA-1, Mac-1); VLA-4"]
+      - ["Diapedesis", "PECAM-1 (CD31)", "PECAM-1 (CD31)"]
+      - ["Migration", "C5a, IL-8, LTB4, 5-HETE, kallikrein, PAF, N-formylmethionyl peptides", "Various"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [3, 1]]
+    src: { page: 211, quote: "ICAM-1 (CD54) CD11/18 integrins (LFA-1, Mac-1) VCAM-1 (CD106) VLA-4 integrin" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.031
+    kind: card
+    topic: leukocyte-extravasation
+    front: Where does leukocyte extravasation mainly occur?
+    back: At postcapillary venules.
+    src: { page: 211, quote: "Extravasation predominantly occurs at postcapillary venules." }
+    status: unverified
+  - id: path.L02.032
+    kind: card
+    topic: leukocyte-extravasation
+    front: Where do E-selectin and P-selectin come from?
+    back: E-selectin is released from endothelial cells and upregulated by TNF and IL-1. P-selectin is translocated to the endothelial surface by exocytosis from Weibel-Palade bodies.
+    src: { page: 211, quote: "E-selectin (released from endothelial cells, upregulated by TNF and IL-1) P-selectin (translocated to endothelial surface via exocytosis from Weibel-Palade bodies)" }
+    status: unverified
+  - id: path.L02.033
+    kind: cloze
+    topic: leukocyte-extravasation
+    text: "Leukocyte adhesion deficiency type 1 is a defect in {{c1::tight binding}} (↓ {{c2::CD18}} integrin subunit); type 2 is a defect in {{c3::rolling}} (↓ sialyl LewisX)."
+    src: { page: 211, quote: "Tight binding (adhesion)— defective in leukocyte adhesion deficiency type 1 (↓ CD18 integrin subunit)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.034
+    kind: enumerate
+    topic: leukocyte-extravasation
+    prompt: Enumerate the chemotactic factors that guide leukocyte migration (7).
+    points:
+      - C5a
+      - IL-8
+      - LTB4
+      - 5-HETE
+      - Kallikrein
+      - Platelet-activating factor
+      - N-formylmethionyl peptides
+    pass: 5
+    src: { page: 211, quote: "Chemotactic factors: C5a, IL-8, LTB4, 5-HETE, kallikrein, platelet-activating factor, N-formylmethionyl peptides" }
+    status: unverified
+  - id: path.L02.035
+    kind: mcq
+    topic: leukocyte-extravasation
+    stem: >-
+      A 3-week-old boy has omphalitis, and his umbilical cord did not separate until day 30. His
+      white blood cell count is 38,000/mm3 with marked neutrophilia, yet the infected tissue shows
+      almost no neutrophils or pus. Flow cytometry is most likely to show a deficiency of which
+      molecule?
+    options:
+      - Sialyl LewisX
+      - CD18 integrin subunit
+      - PECAM-1 (CD31)
+      - E-selectin
+      - NADPH oxidase
+    answer: 1
+    why:
+      - "↓ Sialyl LewisX is leukocyte adhesion deficiency type 2, a rolling defect."
+      - "Right. Leukocyte adhesion deficiency type 1 (↓ CD18) blocks tight binding, so neutrophils stay in the blood and don't reach the tissue."
+      - "PECAM-1 mediates diapedesis; the book doesn't link its deficiency to this syndrome."
+      - "E-selectin is on the endothelium, not on the patient's leukocytes."
+      - "NADPH oxidase deficiency is chronic granulomatous disease; neutrophils still reach tissue."
+    src: { page: 211, quote: "defective in leukocyte adhesion deficiency type 1 (↓ CD18 integrin subunit)" }
+    status: unverified
+  # ---------- p212: chronic inflammation ----------
+  - id: path.L02.036
+    kind: card
+    topic: chronic-inflammation
+    front: What characterizes chronic inflammation?
+    back: Prolonged inflammation with mononuclear infiltration (macrophages, lymphocytes, plasma cells), causing tissue destruction and repair at the same time (including angiogenesis and fibrosis). It may be preceded by acute inflammation.
+    src: { page: 212, quote: "Prolonged inflammation characterized by mononuclear infiltration (macrophages, lymphocytes, plasma cells), which leads to simultaneous tissue destruction and repair (including angiogenesis and fibrosis). May be preceded by acute inflammation." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.037
+    kind: enumerate
+    topic: chronic-inflammation
+    prompt: Enumerate the stimuli of chronic inflammation (4).
+    points:
+      - "Persistent infections (TB, T pallidum, certain fungi and viruses) → type IV hypersensitivity"
+      - Autoimmune diseases
+      - "Prolonged exposure to toxic agents (e.g., silica)"
+      - Foreign material
+    pass: 3
+    src: { page: 212, quote: "Persistent infections (eg, TB, T pallidum, certain fungi and viruses) → type IV hypersensitivity, autoimmune diseases, prolonged exposure to toxic agents (eg, silica) and foreign material." }
+    status: unverified
+  - id: path.L02.038
+    kind: table
+    topic: chronic-inflammation
+    title: Macrophage activation in chronic inflammation
+    columns: [T-cell subset, Cytokine, Macrophage activation]
+    rows:
+      - ["Th1", "IFN-γ", "Classical (proinflammatory)"]
+      - ["Th2", "IL-4 and IL-13", "Alternative (repair and anti-inflammatory)"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 212, quote: "Th1 cells secrete IFN-γ → macrophage classical activation (proinflammatory) Th2 cells secrete IL-4 and IL-13 → macrophage alternative activation (repair and anti- inflammatory)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.039
+    kind: card
+    topic: chronic-inflammation
+    front: What are the outcomes of chronic inflammation? Give the book's two cancer examples.
+    back: Scarring, amyloidosis and neoplastic transformation, e.g., chronic HCV → hepatocellular carcinoma, and H pylori → chronic gastritis → gastric adenocarcinoma.
+    src: { page: 212, quote: "Scarring, amyloidosis, and neoplastic transformation (eg, chronic HCV infection → chronic inflammation → hepatocellular carcinoma; Helicobacter pylori infection → chronic gastritis → gastric adenocarcinoma)." }
+    status: unverified
+  - id: path.L02.040
+    kind: mcq
+    topic: chronic-inflammation
+    stem: >-
+      A 52-year-old man has had dyspepsia for many years. Endoscopy shows a gastric mass, and biopsy
+      shows adenocarcinoma arising in a background of chronic gastritis with curved gram-negative
+      rods on the surface. Which cells dominated the inflammation that preceded the tumor?
+    options:
+      - Neutrophils alone
+      - Eosinophils and mast cells
+      - Macrophages, lymphocytes and plasma cells
+      - Platelets and fibrin
+      - Epithelioid granulomas with caseation
+    answer: 2
+    why:
+      - "Neutrophils define acute inflammation."
+      - "Eosinophils and mast cells are not the defining cells of chronic inflammation."
+      - "Right. Chronic inflammation is mononuclear (macrophages are dominant, with lymphocytes and plasma cells). H pylori → chronic gastritis → gastric adenocarcinoma is the book's example."
+      - "Platelets and fibrin belong to clot formation."
+      - "Caseating granulomas are a pattern seen with TB and fungi, not H pylori gastritis."
+    src: { page: 212, quote: "Macrophages are the dominant cells. Interaction of macrophages and T cells → chronic inflammation." }
+    status: unverified
+  # ---------- p212: wound healing ----------
+  - id: path.L02.041
+    kind: table
+    topic: wound-healing
+    title: Tissue mediators of wound healing
+    columns: [Mediator, Role]
+    rows:
+      - ["FGF", "Stimulates angiogenesis"]
+      - ["TGF-β", "Angiogenesis, fibrosis"]
+      - ["VEGF", "Stimulates angiogenesis"]
+      - ["PDGF", "From activated platelets and macrophages; vascular remodeling, smooth muscle migration, fibroblast growth for collagen synthesis"]
+      - ["Metalloproteinases", "Tissue remodeling"]
+      - ["EGF", "Cell growth via tyrosine kinases (EGFR/ErbB1)"]
+    blanks: [[1, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 212, quote: "PDGF Secreted by activated platelets and macrophages Induces vascular remodeling and smooth muscle cell migration Stimulates fibroblast growth for collagen synthesis" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.042
+    kind: table
+    topic: wound-healing
+    title: Phases of wound healing
+    columns: [Phase, Timing, Effector cells, Characteristics]
+    rows:
+      - ["Inflammatory", "Up to 3 days", "Platelets, neutrophils, macrophages", "Clot; ↑ permeability, neutrophil migration; macrophages clear debris 2 days later"]
+      - ["Proliferative", "Day 3 to weeks", "Fibroblasts, myofibroblasts, endothelial cells, keratinocytes, macrophages", "Granulation tissue, type III collagen, angiogenesis, epithelial proliferation, clot dissolution, contraction (myofibroblasts)"]
+      - ["Remodeling", "1 week to 6+ months", "Fibroblasts", "Type III replaced by type I collagen → ↑ tensile strength"]
+    blanks: [[0, 1], [1, 1], [1, 3], [2, 1], [2, 3]]
+    src: { page: 212, quote: "Deposition of granulation tissue and type III collagen, angiogenesis, epithelial cell proliferation, dissolution of clot, and wound contraction (mediated by myofibroblasts)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.043
+    kind: cloze
+    topic: wound-healing
+    text: "Wound contraction in the proliferative phase is mediated by {{c1::myofibroblasts}}."
+    src: { page: 212, quote: "wound contraction (mediated by myofibroblasts)" }
+    status: unverified
+  - id: path.L02.044
+    kind: card
+    topic: wound-healing
+    front: Which deficiencies delay which phase of wound healing?
+    back: Vitamin C and copper deficiency delay the second (proliferative) phase. Zinc deficiency delays healing in remodeling, because the collagenases that break down type III collagen need zinc.
+    src: { page: 212, quote: "Delayed second phase of wound healing in vitamin C and copper deficiency" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.045
+    kind: mcq
+    topic: wound-healing
+    stem: >-
+      A 46-year-old man with alcohol use disorder and chronic diarrhea has a surgical wound that
+      is still open 6 weeks after a laparotomy. He has an eczematous rash around his mouth and
+      alopecia. Which enzyme activity is most likely impaired in his wound?
+    options:
+      - Lysyl oxidase cross-linking of collagen
+      - Prolyl hydroxylation of procollagen
+      - Collagenase breakdown of type III collagen
+      - Myofibroblast contraction of the wound
+      - Platelet release of PDGF
+    answer: 2
+    why:
+      - "Lysyl oxidase needs copper; copper deficiency delays the proliferative phase, and his rash and alopecia point to zinc."
+      - "Prolyl hydroxylation needs vitamin C; scurvy gives bleeding gums and perifollicular hemorrhage, not perioral dermatitis."
+      - "Right. Perioral dermatitis and alopecia suggest zinc deficiency. Collagenases need zinc to break down type III collagen in remodeling, so healing is delayed."
+      - "Myofibroblast contraction doesn't depend on zinc."
+      - "PDGF release by platelets is not the step zinc controls."
+    src: { page: 212, quote: "Collagenases (require zinc to function) break down type III collagen Zinc deficiency → delayed wound healing" }
+    status: unverified
+  # ---------- p213: granulomatous inflammation ----------
+  - id: path.L02.046
+    kind: card
+    topic: granulomatous-inflammation
+    front: What is a granuloma histologically?
+    back: A focus of epithelioid cells (activated macrophages with abundant pink cytoplasm) surrounded by lymphocytes and multinucleated giant cells, which form by fusion of several activated macrophages.
+    src: { page: 213, quote: "Focus of epithelioid cells (activated macrophages with abundant pink cytoplasm) surrounded by lymphocytes and multinucleated giant cells (formed by fusion of several activated macrophages)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.047
+    kind: cloze
+    topic: granulomatous-inflammation
+    text: "{{c1::Caseating}} granulomas have central necrosis and are seen with infectious causes (TB, fungal); {{c2::noncaseating}} granulomas have none and are seen with noninfectious causes (sarcoidosis, Crohn disease)."
+    src: { page: 213, quote: "Caseating: associated with central necrosis A . Seen with infectious etiologies (eg, TB, fungal). Noncaseating: no central necrosis. Seen with noninfectious etiologies (eg, sarcoidosis, Crohn disease)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.048
+    kind: order
+    topic: granulomatous-inflammation
+    prompt: Put the steps of granuloma formation in order.
+    steps:
+      - APCs present antigen to CD4+ Th cells and secrete IL-12
+      - CD4+ Th cells differentiate into Th1 cells
+      - Th1 cells secrete IFN-γ → macrophage activation
+      - Macrophages ↑ cytokine secretion (e.g., TNF)
+      - Epithelioid macrophages and giant cells form
+    src: { page: 213, quote: "APCs present antigens to CD4+ Th cells and secrete IL-12 → CD4+ Th cells differentiate into Th1 cells Th1 secretes IFN-γ → macrophage activation Macrophages ↑ cytokine secretion (eg, TNF) → formation of epithelioid macrophages and giant cells" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.049
+    kind: card
+    topic: granulomatous-inflammation
+    front: Why must latent TB be excluded before starting anti-TNF therapy?
+    back: Anti-TNF therapy can make sequestering granulomas break down → disseminated disease.
+    src: { page: 213, quote: "Anti-TNF therapy can cause sequestering granulomas to break down → disseminated disease. Always test for latent TB before starting anti-TNF therapy." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.050
+    kind: card
+    topic: granulomatous-inflammation
+    front: Why are granulomatous diseases associated with hypercalcemia?
+    back: Activated macrophages have ↑ 1α-hydroxylase activity → ↑ vitamin D activity.
+    src: { page: 213, quote: "Associated with hypercalcemia due to ↑ 1α-hydroxylase activity in activated macrophages, resulting in ↑ vitamin D activity." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.051
+    kind: table
+    topic: granulomatous-inflammation
+    title: Causes of granulomas
+    columns: [Group, Examples]
+    rows:
+      - ["Bacterial", "Mycobacteria (TB, leprosy); Bartonella henselae (stellate necrotizing); Listeria (granulomatosis infantiseptica); T pallidum (3° syphilis)"]
+      - ["Fungal and parasitic", "Endemic mycoses (histoplasmosis); schistosomiasis"]
+      - ["Chronic granulomatous disease", "Catalase ⊕ organisms"]
+      - ["Immune-mediated", "Sarcoidosis, Crohn disease, 1° biliary cholangitis, subacute (de Quervain) thyroiditis"]
+      - ["Vasculitis", "GPA, EGPA, giant cell (temporal) arteritis, Takayasu arteritis"]
+      - ["Foreign bodies", "Berylliosis, talcosis, hypersensitivity pneumonitis"]
+    blanks: [[2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 213, quote: "Immune-mediated: sarcoidosis, Crohn disease, 1° biliary cholangitis, subacute (de Quervain/ granulomatous) thyroiditis" }
+    status: unverified
+  - id: path.L02.052
+    kind: mcq
+    topic: granulomatous-inflammation
+    stem: >-
+      A 34-year-old Black woman has bilateral hilar lymphadenopathy on chest x-ray, erythema nodosum
+      and a serum calcium of 11.8 mg/dL. Her PTH is suppressed. A transbronchial biopsy shows tight
+      noncaseating granulomas. What is the most likely mechanism of her hypercalcemia?
+    options:
+      - PTH-related peptide from tumor cells
+      - ↑ 1α-hydroxylase activity in activated macrophages
+      - Osteolytic bone metastases
+      - ↓ Renal calcium excretion from thiazides
+      - Primary hyperparathyroidism
+    answer: 1
+    why:
+      - "PTHrP is a paraneoplastic cause; this is sarcoidosis."
+      - "Right. Activated macrophages in granulomas have ↑ 1α-hydroxylase → ↑ vitamin D activity → hypercalcemia, with PTH suppressed."
+      - "There is no tumor; noncaseating granulomas point to sarcoidosis."
+      - "Nothing suggests thiazide use."
+      - "PTH is suppressed, which rules out primary hyperparathyroidism."
+    src: { page: 213, quote: "Associated with hypercalcemia due to ↑ 1α-hydroxylase activity in activated macrophages, resulting in ↑ vitamin D activity." }
+    status: unverified
+  - id: path.L02.053
+    kind: mcq
+    topic: granulomatous-inflammation
+    stem: >-
+      A 41-year-old man with Crohn disease starts infliximab. Three months later he has fever,
+      night sweats, weight loss and a miliary pattern on chest x-ray. What is the most likely
+      mechanism?
+    options:
+      - Loss of TNF-driven maintenance of granulomas
+      - Loss of IL-4–driven alternative macrophage activation
+      - Defective CD18-mediated neutrophil adhesion
+      - Loss of IgA at mucosal surfaces
+      - Complement deficiency from drug-induced consumption
+    answer: 0
+    why:
+      - "Right. TNF from macrophages builds and holds granulomas. Anti-TNF therapy lets sequestering granulomas break down → disseminated (miliary) TB. Latent TB must be tested for first."
+      - "Alternative activation (Th2, IL-4/IL-13) drives repair, not TB containment."
+      - "CD18 defects are leukocyte adhesion deficiency type 1."
+      - "IgA loss predisposes to Giardia and sinopulmonary infection, not TB reactivation."
+      - "Infliximab does not consume complement to cause TB."
+    src: { page: 213, quote: "Anti-TNF therapy can cause sequestering granulomas to break down → disseminated disease. Always test for latent TB before starting anti-TNF therapy." }
+    status: unverified
+  # ---------- p214: scar formation ----------
+  - id: path.L02.054
+    kind: card
+    topic: scar-formation
+    front: When does a scar form, and how much tensile strength returns?
+    back: When repair can't be done by regeneration alone, nonregenerated cells are replaced by connective tissue. 70%-80% of tensile strength is regained at 3 months, with little gained after that.
+    src: { page: 214, quote: "Occurs when repair cannot be accomplished by cell regeneration alone. Nonregenerated cells (2° to severe acute or chronic injury) are replaced by connective tissue. 70%-80% of tensile strength regained at 3 months; little tensile strength regained thereafter." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.055
+    kind: table
+    topic: scar-formation
+    title: Hypertrophic vs keloid scar
+    columns: [Feature, Hypertrophic, Keloid]
+    rows:
+      - ["Collagen synthesis", "↑ (type III > type I)", "↑↑↑ (type I > type III)"]
+      - ["Collagen organization", "Parallel", "Disorganized"]
+      - ["Extent", "Confined to the original wound", "Beyond the wound, clawlike (earlobes, face, upper extremities)"]
+      - ["Recurrence", "Infrequent", "Frequent"]
+      - ["Predisposition", "None", "↑ In people with darker skin"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 2], [3, 2]]
+    src: { page: 214, quote: "COLLAGeN SYNTHeSIS ↑ (type III > type I) ↑↑↑ (type I > type III) COLLAGeN ORGANIZATION Parallel Disorganized" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L02.056
+    kind: cloze
+    topic: scar-formation
+    text: "Excess {{c1::TGF-β}} is associated with aberrant scarring, such as hypertrophic and keloid scars."
+    src: { page: 214, quote: "Excess TGF-β is associated with aberrant scarring, such as hypertrophic and keloid scars." }
+    status: unverified
+  - id: path.L02.057
+    kind: mcq
+    topic: scar-formation
+    stem: >-
+      A 22-year-old woman with darker skin had both earlobes pierced a year ago. She now has firm,
+      shiny nodules that extend well beyond the piercing sites with clawlike projections. One was
+      excised before and came back. Which finding would a biopsy most likely show?
+    options:
+      - Parallel type III collagen confined to the wound
+      - Disorganized collagen with type I > type III
+      - Granulation tissue with new capillaries
+      - Noncaseating granulomas around foreign material
+      - Psammoma bodies
+    answer: 1
+    why:
+      - "Parallel collagen with type III > type I, confined to the wound, describes a hypertrophic scar."
+      - "Right. A keloid has ↑↑↑ disorganized collagen (type I > type III), extends beyond the wound, often on earlobes, recurs frequently and is more common with darker skin."
+      - "Granulation tissue belongs to the proliferative phase, not a scar a year later."
+      - "Foreign-body granulomas don't extend with clawlike projections."
+      - "Psammoma bodies are calcified spherules in certain tumors."
+    src: { page: 214, quote: "Extends beyond borders of original wound with “clawlike” projections typically on earlobes, face, upper extremities" }
+    status: unverified

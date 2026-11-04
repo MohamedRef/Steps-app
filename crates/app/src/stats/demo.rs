@@ -42,6 +42,8 @@ pub fn events(lectures: &[Lecture], now_ms: i64) -> Vec<ReviewEvent> {
                     origin: Origin::Review,
                     at_ms: now_ms - back * DAY_MS - 3_600_000,
                     took_ms: 8_000,
+                    confidence: None,
+                    reason: None,
                 });
             }
         }

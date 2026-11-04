@@ -622,6 +622,8 @@ fn a_card_due_in_another_course_is_counted_and_all_courses_bring_it_in() {
     // Missed two days ago: due again now.
     crate::store::shared()
         .append_review(ReviewEvent {
+            confidence: None,
+            reason: None,
             item_id: card.id.clone(),
             grade: Grade::Again,
             origin: Origin::Study,

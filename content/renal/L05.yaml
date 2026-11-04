@@ -1,0 +1,758 @@
+schema: steps.content/v1
+lecture: renal.L05
+title: Pharmacology
+book: { chapter: 14, pages: [625, 628] }
+topics:
+  - { id: diuretics-site-of-action, title: "Diuretics: site of action" }
+  - { id: diuretics-electrolyte-excretion, title: "Diuretics: effects on electrolyte excretion" }
+  - { id: mannitol, title: Mannitol }
+  - { id: acetazolamide, title: Acetazolamide }
+  - { id: loop-diuretics, title: Loop diuretics }
+  - { id: ethacrynic-acid, title: Ethacrynic acid }
+  - { id: thiazide-diuretics, title: Thiazide diuretics }
+  - { id: potassium-sparing-diuretics, title: Potassium-sparing diuretics }
+  - { id: ace-inhibitors, title: Angiotensin-converting enzyme inhibitors }
+  - { id: angiotensin-ii-receptor-blockers, title: Angiotensin II receptor blockers }
+  - { id: aliskiren, title: Aliskiren }
+items:
+  # ---------- p625: diuretics, site of action ----------
+  - id: renal.L05.001
+    kind: table
+    topic: diuretics-site-of-action
+    title: "Diuretics: where along the nephron each class acts"
+    columns: [Diuretic class, Site of action]
+    rows:
+      - [Mannitol, "Proximal convoluted tubule and descending limb (osmotic; segments permeable to water)"]
+      - [Acetazolamide, Proximal convoluted tubule]
+      - [Loop diuretics, Thick ascending limb of the loop of Henle]
+      - [Thiazide diuretics, Early distal convoluted tubule]
+      - [K+-sparing diuretics, Cortical collecting tubule]
+    blanks: [[1, 1], [2, 1], [3, 1], [4, 1]]
+    src: { page: 625, quote: "Mannitol Acetazolamide Loop diuretics Thiazide diuretics K+ -sparing diuretics" }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.002
+    kind: card
+    topic: diuretics-site-of-action
+    front: In the First Aid nephron diagram, which ions does the thick ascending limb reabsorb, and which diuretic class acts there?
+    back: Na+, K+ and 2Cl− (with paracellular Ca2+ and Mg2+); loop diuretics act there.
+    src: { page: 625, quote: "Ascending limb, loop of Henle (permeable to salts)" }
+    status: unverified
+  - id: renal.L05.003
+    kind: mcq
+    topic: diuretics-site-of-action
+    stem: >-
+      A 64-year-old man with heart failure is started on a diuretic. Two weeks later his serum K+ is high and he has new
+      tenderness under both nipples. The drug acts at which segment of the nephron?
+    options:
+      - Proximal convoluted tubule
+      - Descending limb of the loop of Henle
+      - Thick ascending limb of the loop of Henle
+      - Early distal convoluted tubule
+      - Cortical collecting tubule
+    answer: 4
+    why:
+      - "The PCT is where acetazolamide works; it causes hypokalemia, not hyperkalemia."
+      - "The water-permeable descending limb is where mannitol pulls water; no gynecomastia."
+      - "Loop diuretics work in the thick ascending limb and cause hypokalemia."
+      - "Thiazides act in the early DCT and cause hypokalemia."
+      - "Right. Hyperkalemia plus gynecomastia is spironolactone, an aldosterone receptor antagonist in the cortical collecting tubule."
+    src: { page: 627, quote: "Spironolactone and eplerenone are competitive aldosterone receptor antagonists in cortical collecting tubule." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p625: diuretics, electrolyte excretion ----------
+  - id: renal.L05.004
+    kind: table
+    topic: diuretics-electrolyte-excretion
+    title: "Diuretics: effects on urinary Na+, K+ and Ca2+ excretion"
+    columns: [Diuretic class, Na+, K+, Ca2+]
+    rows:
+      - [Carbonic anhydrase inhibitors, ↑, ↑↑, —]
+      - [Loop diuretics, ↑↑, ↑↑, ↑↑]
+      - [Thiazide diuretics, ↑, ↑↑, ↓↓]
+      - [K+-sparing diuretics, ↑, ↓, ↓/—]
+    blanks: [[1, 3], [2, 3], [3, 2]]
+    src: { page: 625, quote: "Loop diuretics ↑↑ ↓ ↑↑ ↑↑ ↑↑ ↑↑ ↑ Thiazide diuretics ↑ ↓ ↑↑ ↑ ↓↓ —/↑ ↑" }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.005
+    kind: table
+    topic: diuretics-electrolyte-excretion
+    title: "Diuretics: effects on urinary HCO3−, Cl−, Mg2+ and H+ excretion"
+    columns: [Diuretic class, HCO3−, Cl−, Mg2+, H+]
+    rows:
+      - [Carbonic anhydrase inhibitors, ↑↑, —/↑, —, ↓]
+      - [Loop diuretics, ↓, ↑↑, ↑↑, ↑]
+      - [Thiazide diuretics, ↓, ↑, —/↑, ↑]
+      - [K+-sparing diuretics, —, ↑, ↓/—, ↓]
+    blanks: [[0, 1], [1, 3], [2, 3]]
+    src: { page: 625, quote: "Carbonic anhydrase inhibitors ↑ ↑↑ ↑↑ —/↑ — — ↓" }
+    status: unverified
+  - id: renal.L05.006
+    kind: cloze
+    topic: diuretics-electrolyte-excretion
+    text: "Blood pH falls ({{c1::acidemia}}) with carbonic anhydrase inhibitors and K+-sparing diuretics, and rises ({{c2::alkalemia}}) with loop diuretics and thiazides."
+    src: { page: 625, quote: "↑ (alkalemia): loop diuretics and thiazides cause alkalemia through several mechanisms" }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.007
+    kind: card
+    topic: diuretics-electrolyte-excretion
+    front: Why do K+-sparing diuretics cause acidemia?
+    back: Aldosterone blockade prevents K+ secretion and H+ secretion; the hyperkalemia also drives K+ into cells (via the H+/K+ exchanger) in exchange for H+ leaving cells.
+    src: { page: 625, quote: "K+ sparing: aldosterone blockade prevents K+ secretion and H+ secretion." }
+    status: unverified
+  - id: renal.L05.008
+    kind: enumerate
+    topic: diuretics-electrolyte-excretion
+    prompt: Enumerate the three mechanisms by which loop diuretics and thiazides cause alkalemia (3).
+    points:
+      - "Volume contraction → ↑ AT II → ↑ Na+/H+ exchange in PCT → ↑ HCO3− reabsorption (contraction alkalosis)"
+      - "K+ loss → K+ leaves cells via the H+/K+ exchanger in exchange for H+ entering cells"
+      - "In a low K+ state, H+ (rather than K+) is exchanged for Na+ in the cortical collecting tubule → alkalosis and paradoxical aciduria"
+    pass: 3
+    hook: "ناشف، ناقص K+، والـ H+ بيطلع بدل الـ K+: تلاتة طرق للـ alkalosis."
+    src: { page: 625, quote: "Volume contraction → ↑ AT II → ↑ Na+ /H+ exchange in PCT → ↑ HCO − 3 reabsorption (“contraction alkalosis”)" }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.009
+    kind: card
+    topic: diuretics-electrolyte-excretion
+    front: What is "paradoxical aciduria" with loop or thiazide diuretics?
+    back: In a low K+ state, the cortical collecting tubule exchanges H+ (rather than K+) for Na+, so acidic urine is passed despite metabolic alkalosis.
+    src: { page: 625, quote: "In low K+ state, H+ (rather than K+ ) is exchanged for Na+ in cortical collecting tubule → alkalosis and “paradoxical aciduria”" }
+    status: unverified
+  - id: renal.L05.010
+    kind: mcq
+    topic: diuretics-electrolyte-excretion
+    stem: >-
+      A 58-year-old woman with heart failure takes high-dose furosemide. Labs show K+ 2.9 mEq/L and HCO3− 34 mEq/L, yet
+      her urine pH is 5.0. Which mechanism best explains the acidic urine?
+    options:
+      - Inhibition of carbonic anhydrase in the proximal tubule
+      - H+ secreted instead of K+ in exchange for Na+ in the cortical collecting tubule
+      - Aldosterone receptor blockade in the collecting duct
+      - Loss of NH3 synthesis in the proximal tubule
+      - Increased bicarbonate excretion in the thick ascending limb
+    answer: 1
+    why:
+      - "Carbonic anhydrase inhibition alkalinizes the urine and causes acidemia."
+      - "Right. With low K+, the collecting tubule swaps H+ for Na+, giving paradoxical aciduria on top of contraction alkalosis."
+      - "Aldosterone blockade (K+-sparing) lowers H+ secretion and causes acidemia."
+      - "NH3 toxicity is an acetazolamide adverse effect; it does not explain acidic urine with alkalosis."
+      - "Loop diuretics decrease, not increase, urinary HCO3− in the First Aid table."
+    src: { page: 625, quote: "In low K+ state, H+ (rather than K+ ) is exchanged for Na+ in cortical collecting tubule" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p626: mannitol ----------
+  - id: renal.L05.011
+    kind: card
+    topic: mannitol
+    front: How does mannitol work?
+    back: Osmotic diuretic. ↑ Serum osmolality pulls fluid from the interstitium into the intravascular space → ↑ urine flow and ↓ intracranial/intraocular pressure.
+    src: { page: 626, quote: "Osmotic diuretic. ↑ serum osmolality → fluid shift from interstitium to intravascular space → ↑ urine flow, ↓ intracranial/intraocular pressure." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.012
+    kind: enumerate
+    topic: mannitol
+    prompt: Enumerate the clinical uses of mannitol (4).
+    points:
+      - Drug overdose
+      - Elevated intracranial pressure
+      - Elevated intraocular pressure
+      - Augmenting diuresis
+    pass: 3
+    src: { page: 626, quote: "Drug overdose, elevated intracranial/intraocular pressure, augmenting diuresis." }
+    status: unverified
+  - id: renal.L05.013
+    kind: cloze
+    topic: mannitol
+    text: "Mannitol adverse effects: dehydration, hypo- or hypernatremia, {{c1::pulmonary edema}}. Contraindicated in {{c2::anuria}} and {{c3::HF}}."
+    src: { page: 626, quote: "Dehydration, hypo- or hypernatremia, pulmonary edema. Contraindicated in anuria, HF." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.014
+    kind: mcq
+    topic: mannitol
+    stem: >-
+      A 30-year-old man with a head injury is given an IV drug to lower intracranial pressure. He has a history of
+      severe heart failure, and within hours he becomes dyspneic with bilateral crackles. Which mechanism caused this?
+    options:
+      - Inhibition of the Na+/K+/2Cl− cotransporter
+      - Blockade of aldosterone receptors
+      - Fluid shift from the interstitium into the intravascular space
+      - Accumulation of bradykinin
+      - Inhibition of carbonic anhydrase
+    answer: 2
+    why:
+      - "Loop diuretics relieve pulmonary edema; they do not cause it."
+      - "Spironolactone helps in HF and does not cause acute edema."
+      - "Right. Mannitol raises serum osmolality and expands plasma volume; in HF this causes pulmonary edema, so HF is a contraindication."
+      - "Bradykinin accumulation (ACE inhibitors) causes cough and angioedema."
+      - "Acetazolamide causes acidosis and paresthesias, not volume overload."
+    src: { page: 626, quote: "Contraindicated in anuria, HF." }
+    status: unverified
+  # ---------- p626: acetazolamide ----------
+  - id: renal.L05.015
+    kind: card
+    topic: acetazolamide
+    front: What is acetazolamide's mechanism, and what does it do to the urine?
+    back: Carbonic anhydrase inhibitor. Self-limited NaHCO3 diuresis with ↓ total body HCO3− stores; it alkalinizes the urine.
+    src: { page: 626, quote: "Carbonic anhydrase inhibitor. Causes self- limited NaHCO3 diuresis and ↓ total body HCO − 3 stores. Alkalinizes urine." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.016
+    kind: enumerate
+    topic: acetazolamide
+    prompt: Enumerate the clinical uses of acetazolamide (4).
+    points:
+      - Glaucoma
+      - Metabolic alkalosis
+      - Altitude sickness (offsets respiratory alkalosis)
+      - Idiopathic intracranial hypertension (pseudotumor cerebri)
+    pass: 3
+    src: { page: 626, quote: "Glaucoma, metabolic alkalosis, altitude sickness (by offsetting respiratory alkalosis), idiopathic intracranial hypertension (pseudotumor cerebri)." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.017
+    kind: enumerate
+    topic: acetazolamide
+    prompt: Enumerate the adverse effects of acetazolamide (6).
+    points:
+      - Proximal renal tubular acidosis (type 2 RTA)
+      - Paresthesias
+      - NH3 toxicity
+      - Sulfa allergy
+      - Hypokalemia
+      - Calcium phosphate stones (insoluble at high urine pH)
+    pass: 5
+    hook: "«Acid»azolamide بيعمل acidosis: type 2 RTA، تنميل، NH3، sulfa، K+ واطي، وحصوة calcium phosphate."
+    src: { page: 626, quote: "Proximal renal tubular acidosis (type 2 RTA), paresthesias, NH3 toxicity, sulfa allergy, hypokalemia. Promotes calcium phosphate stones (insoluble at high urine pH)." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.018
+    kind: cloze
+    topic: acetazolamide
+    text: "First Aid's mnemonic: \"{{c1::Acid}}\"azolamide causes {{c2::acidosis}}."
+    src: { page: 626, quote: "“Acid”azolamide causes acidosis." }
+    status: unverified
+  - id: renal.L05.019
+    kind: mcq
+    topic: acetazolamide
+    stem: >-
+      A 26-year-old woman plans to climb Kilimanjaro and takes a prophylactic drug for altitude sickness. On day 3 she
+      notes tingling in her fingers. Which acid-base finding is most likely?
+    options:
+      - Metabolic alkalosis with low urine pH
+      - Normal anion gap metabolic acidosis with alkaline urine
+      - High anion gap metabolic acidosis
+      - Respiratory acidosis
+      - Hyperkalemic metabolic alkalosis
+    answer: 1
+    why:
+      - "Contraction alkalosis with paradoxical aciduria is the loop or thiazide picture."
+      - "Right. Acetazolamide causes a proximal (type 2) RTA: HCO3− is lost in the urine, so the urine is alkaline and the acidosis is non-anion gap."
+      - "RTA does not add an unmeasured anion."
+      - "Acetazolamide offsets respiratory alkalosis at altitude; it does not cause respiratory acidosis."
+      - "Acetazolamide causes hypokalemia and acidosis."
+    src: { page: 626, quote: "Proximal renal tubular acidosis (type 2 RTA), paresthesias" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p626: loop diuretics ----------
+  - id: renal.L05.020
+    kind: card
+    topic: loop-diuretics
+    front: Name the loop diuretics and their mechanism.
+    back: Furosemide, bumetanide, torsemide. Sulfonamide drugs that inhibit the Na+/K+/2Cl− cotransporter of the thick ascending limb, abolishing medullary hypertonicity so urine can't be concentrated.
+    src: { page: 626, quote: "Sulfonamide loop diuretics. Inhibit cotransport system (Na+ /K+ /2Cl− ) of thick ascending limb of loop of Henle. Abolish hypertonicity of medulla, preventing concentration of urine." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.021
+    kind: card
+    topic: loop-diuretics
+    front: How do prostaglandins and NSAIDs relate to loop diuretics?
+    back: Loop diuretics are associated with ↑ PGE (vasodilation of the afferent arteriole); NSAIDs inhibit this and blunt their effect.
+    src: { page: 626, quote: "Associated with ↑ PGE (vasodilatory effect on afferent arteriole); inhibited by NSAIDs." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.022
+    kind: cloze
+    topic: loop-diuretics
+    text: "Loop diuretics {{c1::increase}} Ca2+ excretion: \"Loops {{c2::lose}} Ca2+.\""
+    src: { page: 626, quote: "↑ Ca2+ excretion. Loops lose Ca2+ ." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.023
+    kind: enumerate
+    topic: loop-diuretics
+    prompt: Enumerate the clinical uses of loop diuretics (3 groups).
+    points:
+      - "Edematous states: HF, cirrhosis, nephrotic syndrome, pulmonary edema"
+      - Hypertension
+      - Hypercalcemia
+    pass: 3
+    src: { page: 626, quote: "Edematous states (HF, cirrhosis, nephrotic syndrome, pulmonary edema), hypertension, hypercalcemia." }
+    status: unverified
+  - id: renal.L05.024
+    kind: enumerate
+    topic: loop-diuretics
+    prompt: "Enumerate the adverse effects of loop diuretics (OHH DAANG!) (8)."
+    points:
+      - Ototoxicity
+      - Hypokalemia
+      - Hypomagnesemia
+      - Dehydration
+      - Allergy (sulfa)
+      - Metabolic alkalosis
+      - Nephritis (interstitial)
+      - Gout
+    pass: 7
+    hook: "OHH DAANG!: الودن، K+، Mg2+، ناشف، sulfa، alkalosis، nephritis، gout."
+    src: { page: 626, quote: "Ototoxicity, Hypokalemia, Hypomagnesemia, Dehydration, Allergy (sulfa), metabolic Alkalosis, Nephritis (interstitial), Gout. OHH DAANG!" }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.025
+    kind: mcq
+    topic: loop-diuretics
+    stem: >-
+      A 70-year-old man is admitted with acute pulmonary edema and receives IV furosemide. He also takes ibuprofen daily
+      for knee pain, and his urine output is less than expected. Which mechanism explains the weak response?
+    options:
+      - Ibuprofen blocks the Na+/K+/2Cl− cotransporter
+      - Ibuprofen blocks prostaglandin-mediated afferent arteriole dilation
+      - Ibuprofen increases aldosterone secretion
+      - Ibuprofen causes metabolic alkalosis
+      - Ibuprofen raises the medullary concentration gradient
+    answer: 1
+    why:
+      - "That is the action of furosemide itself, not of NSAIDs."
+      - "Right. Loop diuretics work partly through ↑ PGE (afferent dilation); NSAIDs inhibit prostaglandin synthesis and blunt the diuresis."
+      - "The page links NSAIDs to loop diuretics only through prostaglandins, not aldosterone."
+      - "Metabolic alkalosis is a loop diuretic effect, not an NSAID one."
+      - "Loop diuretics abolish medullary hypertonicity; NSAIDs do not rebuild it."
+    src: { page: 626, quote: "Associated with ↑ PGE (vasodilatory effect on afferent arteriole); inhibited by NSAIDs." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.026
+    kind: mcq
+    topic: loop-diuretics
+    stem: >-
+      A 66-year-old woman with lung cancer has confusion and a serum Ca2+ of 14.2 mg/dL. After IV saline she is given a
+      diuretic to increase calcium excretion. Which other effect should be monitored?
+    options:
+      - Hyperkalemia
+      - Hypercalcemia
+      - Hearing loss
+      - Gynecomastia
+      - Hyperchloremic metabolic acidosis
+    answer: 2
+    why:
+      - "Loop diuretics cause hypokalemia."
+      - "Loops lower serum Ca2+ (they lose Ca2+); thiazides are the ones that cause hypercalcemia."
+      - "Right. A loop diuretic treats hypercalcemia, and ototoxicity is its signature adverse effect (the O of OHH DAANG!)."
+      - "Gynecomastia is spironolactone."
+      - "Loop diuretics cause metabolic alkalosis."
+    src: { page: 626, quote: "Ototoxicity, Hypokalemia, Hypomagnesemia, Dehydration, Allergy (sulfa), metabolic Alkalosis" }
+    status: unverified
+  # ---------- p626: ethacrynic acid ----------
+  - id: renal.L05.027
+    kind: card
+    topic: ethacrynic-acid
+    front: What is ethacrynic acid, and when is it used?
+    back: A nonsulfonamide inhibitor of the Na+/K+/2Cl− cotransporter of the thick ascending limb; used for diuresis in patients allergic to sulfa drugs.
+    src: { page: 626, quote: "Nonsulfonamide inhibitor of cotransport system (Na+ /K+ /2Cl− ) of thick ascending limb of loop of Henle." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.028
+    kind: cloze
+    topic: ethacrynic-acid
+    text: "Ethacrynic acid adverse effects are similar to furosemide but it is {{c1::more ototoxic}}: \"Loop earrings hurt your ears.\""
+    src: { page: 626, quote: "Similar to furosemide, but more ototoxic. Loop earrings hurt your ears." }
+    status: unverified
+  - id: renal.L05.029
+    kind: mcq
+    topic: ethacrynic-acid
+    stem: >-
+      A 55-year-old man with cirrhotic edema had hives and lip swelling after a dose of furosemide. He still needs a loop
+      diuretic. Which adverse effect is more pronounced with the drug that is chosen?
+    options:
+      - Hyperkalemia
+      - Ototoxicity
+      - Gynecomastia
+      - Angioedema
+      - Calcium phosphate stones
+    answer: 1
+    why:
+      - "Loop-type drugs cause hypokalemia."
+      - "Right. Sulfa allergy → ethacrynic acid, a nonsulfonamide loop diuretic that is more ototoxic than furosemide."
+      - "Gynecomastia is spironolactone."
+      - "Angioedema is an ACE inhibitor (and aliskiren) adverse effect."
+      - "Calcium phosphate stones are from acetazolamide."
+    src: { page: 626, quote: "Similar to furosemide, but more ototoxic." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p627: thiazide diuretics ----------
+  - id: renal.L05.030
+    kind: card
+    topic: thiazide-diuretics
+    front: Name the thiazide diuretics and their mechanism.
+    back: Hydrochlorothiazide, chlorthalidone, metolazone. They inhibit NaCl reabsorption in the early DCT → ↓ diluting capacity of the nephron; ↓ Ca2+ excretion.
+    src: { page: 627, quote: "Inhibit NaCl reabsorption in early DCT → ↓ diluting capacity of nephron. ↓ Ca2+ excretion." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.031
+    kind: enumerate
+    topic: thiazide-diuretics
+    prompt: Enumerate the clinical uses of thiazide diuretics (6).
+    points:
+      - Hypertension
+      - HF
+      - Idiopathic hypercalciuria
+      - Nephrogenic diabetes insipidus
+      - Osteoporosis
+      - Potentiating loop diuretics in refractory volume overload
+    pass: 5
+    src: { page: 627, quote: "Hypertension, HF, idiopathic hypercalciuria, nephrogenic diabetes insipidus, osteoporosis. Potentiates loop diuretics in refractory volume overload." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.032
+    kind: enumerate
+    topic: thiazide-diuretics
+    prompt: "Enumerate the adverse effects of thiazide diuretics (Hypergluc) (7)."
+    points:
+      - Hypokalemic metabolic alkalosis
+      - Hyponatremia
+      - Hyperglycemia
+      - Hyperlipidemia
+      - Hyperuricemia
+      - Hypercalcemia
+      - Sulfa allergy
+    pass: 6
+    hook: "Hyper GLUC: Glucose، Lipids، Uric acid، Calcium. وزوّد عليهم K+ واطي و Na+ واطي و sulfa."
+    src: { page: 627, quote: "Hypokalemic metabolic alkalosis, hyponatremia, hyperglycemia, hyperlipidemia, hyperuricemia, hypercalcemia. Sulfa allergy. Hypergluc." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.033
+    kind: cloze
+    topic: thiazide-diuretics
+    text: "Thiazides {{c1::decrease}} urinary Ca2+ excretion, so they treat {{c2::idiopathic hypercalciuria}} and {{c3::osteoporosis}}."
+    src: { page: 627, quote: "idiopathic hypercalciuria, nephrogenic diabetes insipidus, osteoporosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.034
+    kind: mcq
+    topic: thiazide-diuretics
+    stem: >-
+      A 52-year-old man has recurrent calcium oxalate kidney stones; 24-hour urine calcium is high with normal serum
+      calcium and PTH. He is started on a drug to reduce stone formation. Six months later, which new problem is most
+      likely?
+    options:
+      - Hyperkalemia
+      - Hypocalcemia
+      - Acute gouty arthritis
+      - Hearing loss
+      - Dry cough
+    answer: 2
+    why:
+      - "Thiazides cause hypokalemia, not hyperkalemia."
+      - "Thiazides lower Ca2+ excretion and can cause hypercalcemia."
+      - "Right. Idiopathic hypercalciuria → a thiazide, which causes hyperuricemia (the U of Hypergluc) and can precipitate gout."
+      - "Ototoxicity is the loop diuretic signature."
+      - "Dry cough is an ACE inhibitor effect."
+    src: { page: 627, quote: "hyperglycemia, hyperlipidemia, hyperuricemia, hypercalcemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.035
+    kind: mcq
+    topic: thiazide-diuretics
+    stem: >-
+      A 34-year-old woman on lithium for bipolar disorder passes 8 L of dilute urine a day. Her urine osmolality does
+      not rise after desmopressin. Which drug can paradoxically reduce her urine output?
+    options:
+      - Furosemide
+      - Mannitol
+      - Hydrochlorothiazide
+      - Acetazolamide
+      - Spironolactone
+    answer: 2
+    why:
+      - "Loop diuretics abolish the medullary gradient and worsen concentrating ability."
+      - "Mannitol is an osmotic diuretic and increases urine flow."
+      - "Right. Nephrogenic DI is a First Aid use of thiazides (amiloride is also listed for nephrogenic DI)."
+      - "Acetazolamide is not a First Aid treatment for nephrogenic DI."
+      - "Spironolactone is not listed for nephrogenic DI; amiloride (another K+-sparing drug) is."
+    src: { page: 627, quote: "nephrogenic diabetes insipidus, osteoporosis" }
+    status: unverified
+  # ---------- p627: potassium-sparing diuretics ----------
+  - id: renal.L05.036
+    kind: card
+    topic: potassium-sparing-diuretics
+    front: "Name the K+-sparing diuretics (First Aid mnemonic: \"Keep your SEAT\")."
+    back: Spironolactone, Eplerenone, Amiloride, Triamterene.
+    src: { page: 627, quote: "Spironolactone, Eplerenone, Amiloride, Triamterene. Keep your SEAT." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.037
+    kind: table
+    topic: potassium-sparing-diuretics
+    title: K+-sparing diuretics, two mechanisms
+    columns: [Drugs, Mechanism, Site]
+    rows:
+      - [Spironolactone and eplerenone, Competitive aldosterone receptor antagonists, Cortical collecting tubule]
+      - [Triamterene and amiloride, Block Na+ channels, "Cortical collecting tubule (same part of the tubule)"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 627, quote: "Spironolactone and eplerenone are competitive aldosterone receptor antagonists in cortical collecting tubule. Triamterene and amiloride block Na+ channels at the same part of the tubule." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.038
+    kind: enumerate
+    topic: potassium-sparing-diuretics
+    prompt: Enumerate the clinical uses of K+-sparing diuretics, naming the drug where First Aid does (5).
+    points:
+      - Hyperaldosteronism
+      - HF
+      - Hepatic ascites (spironolactone)
+      - Nephrogenic DI (amiloride)
+      - Antiandrogen (spironolactone)
+    pass: 4
+    src: { page: 627, quote: "Hyperaldosteronism, HF, hepatic ascites (spironolactone), nephrogenic DI (amiloride), antiandrogen (spironolactone)." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.039
+    kind: cloze
+    topic: potassium-sparing-diuretics
+    text: "K+-sparing diuretic adverse effects: {{c1::hyperkalemia}} (can lead to arrhythmias), endocrine effects with spironolactone (eg, {{c2::gynecomastia}}, antiandrogen effects), and {{c3::metabolic acidosis}}."
+    src: { page: 627, quote: "Hyperkalemia (can lead to arrhythmias), endocrine effects with spironolactone (eg, gynecomastia, antiandrogen effects), metabolic acidosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.040
+    kind: mcq
+    topic: potassium-sparing-diuretics
+    stem: >-
+      A 45-year-old man with alcoholic cirrhosis has tense ascites and is started on a diuretic. One month later he
+      reports painful breast enlargement. Which is the mechanism of the drug?
+    options:
+      - Blocks Na+ channels in the cortical collecting tubule
+      - Competitive antagonist of the aldosterone receptor
+      - Inhibits NaCl reabsorption in the early DCT
+      - Inhibits the Na+/K+/2Cl− cotransporter
+      - Inhibits carbonic anhydrase
+    answer: 1
+    why:
+      - "Amiloride and triamterene block Na+ channels but have no endocrine effects."
+      - "Right. Spironolactone (hepatic ascites) is a competitive aldosterone receptor antagonist with antiandrogen effects such as gynecomastia."
+      - "Thiazides act in the early DCT and do not cause gynecomastia."
+      - "Loop diuretics block the cotransporter in the thick ascending limb."
+      - "Acetazolamide inhibits carbonic anhydrase."
+    src: { page: 627, quote: "endocrine effects with spironolactone (eg, gynecomastia, antiandrogen effects)" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p628: ACE inhibitors ----------
+  - id: renal.L05.041
+    kind: card
+    topic: ace-inhibitors
+    front: Name four ACE inhibitors and describe how they lower GFR.
+    back: Captopril, enalapril, lisinopril, ramipril. Inhibit ACE → ↓ AT II → ↓ GFR by preventing constriction of the efferent arterioles.
+    src: { page: 628, quote: "Inhibit ACE → ↓ AT II → ↓ GFR by preventing constriction of efferent arterioles." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.042
+    kind: card
+    topic: ace-inhibitors
+    front: What happens to renin and bradykinin with ACE inhibitors?
+    back: Renin rises (loss of negative feedback). Bradykinin, a potent vasodilator, is no longer inactivated, so it accumulates.
+    src: { page: 628, quote: "↑ renin due to loss of negative feedback. Inhibition of ACE also prevents inactivation of bradykinin, a potent vasodilator." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.043
+    kind: enumerate
+    topic: ace-inhibitors
+    prompt: Enumerate the clinical uses of ACE inhibitors (5).
+    points:
+      - Hypertension
+      - HF (↓ mortality)
+      - Proteinuria
+      - Diabetic nephropathy
+      - Preventing unfavorable heart remodeling from chronic hypertension
+    pass: 4
+    src: { page: 628, quote: "Hypertension, HF (↓ mortality), proteinuria, diabetic nephropathy. Prevent unfavorable heart remodeling as a result of chronic hypertension." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.044
+    kind: card
+    topic: ace-inhibitors
+    front: How do ACE inhibitors protect the kidney in chronic kidney disease such as diabetic nephropathy?
+    back: They ↓ intraglomerular pressure, slowing GBM thickening.
+    src: { page: 628, quote: "In chronic kidney disease (eg, diabetic nephropathy), ↓ intraglomerular pressure, slowing GBM thickening." }
+    status: unverified
+  - id: renal.L05.045
+    kind: enumerate
+    topic: ace-inhibitors
+    prompt: "Enumerate the adverse effects of ACE inhibitors (Captopril's CATCHH) (6)."
+    points:
+      - Cough (dry, nonproductive)
+      - Angioedema
+      - Teratogen (fetal renal malformations)
+      - ↑ Creatinine (↓ GFR)
+      - Hyperkalemia
+      - Hypotension
+    pass: 5
+    hook: "CATCHH: كحة، Angioedema، Teratogen، Creatinine، Hyperkalemia، Hypotension."
+    src: { page: 628, quote: "Cough (dry, nonproductive), Angioedema (both due to ↑ bradykinin; contraindicated in C1 esterase inhibitor deficiency), Teratogen (fetal renal malformations), ↑ Creatinine (↓ GFR), Hyperkalemia, and Hypotension." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.046
+    kind: cloze
+    topic: ace-inhibitors
+    text: "ACE inhibitor cough and angioedema are both due to ↑ {{c1::bradykinin}}; ACE inhibitors are contraindicated in {{c2::C1 esterase inhibitor}} deficiency."
+    src: { page: 628, quote: "Angioedema (both due to ↑ bradykinin; contraindicated in C1 esterase inhibitor deficiency)" }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.047
+    kind: card
+    topic: ace-inhibitors
+    front: Why are ACE inhibitors used with caution in bilateral renal artery stenosis?
+    back: They further ↓ GFR (the kidneys depend on AT II efferent constriction) → renal failure.
+    src: { page: 628, quote: "Used with caution in bilateral renal artery stenosis because ACE inhibitors will further ↓ GFR → renal failure." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.048
+    kind: mcq
+    topic: ace-inhibitors
+    stem: >-
+      A 62-year-old man with type 2 diabetes and albuminuria is started on lisinopril. Six weeks later he has a
+      persistent dry, nonproductive cough. The cough is caused by accumulation of which substance?
+    options:
+      - Angiotensin II
+      - Renin
+      - Bradykinin
+      - Aldosterone
+      - Prostaglandin E2 from the afferent arteriole
+    answer: 2
+    why:
+      - "Angiotensin II falls with ACE inhibitors."
+      - "Renin rises (loss of feedback) but does not cause the cough."
+      - "Right. ACE also inactivates bradykinin; blocking ACE lets bradykinin build up, causing cough and angioedema."
+      - "Aldosterone falls with ACE inhibitors."
+      - "PGE is linked to loop diuretics in First Aid, not to ACE inhibitor cough."
+    src: { page: 628, quote: "Cough (dry, nonproductive), Angioedema (both due to ↑ bradykinin" }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.049
+    kind: mcq
+    topic: ace-inhibitors
+    stem: >-
+      A 74-year-old man with diffuse atherosclerosis and an abdominal bruit is started on enalapril for hypertension.
+      Ten days later his creatinine has risen from 1.1 to 2.6 mg/dL. Which change explains the fall in GFR?
+    options:
+      - Afferent arteriole constriction
+      - Loss of efferent arteriole constriction
+      - Increased Bowman space oncotic pressure
+      - Tubular necrosis from bradykinin
+      - Obstruction of the ureters
+    answer: 1
+    why:
+      - "ACE inhibitors do not constrict the afferent arteriole."
+      - "Right. In bilateral renal artery stenosis, GFR depends on AT II constricting the efferent arteriole; ACE inhibitors remove it, so GFR falls → renal failure."
+      - "Bowman space oncotic pressure is normally zero and is not changed by ACE inhibitors."
+      - "Bradykinin causes cough and angioedema, not ATN."
+      - "Nothing here points to postrenal obstruction."
+    src: { page: 628, quote: "Inhibit ACE → ↓ AT II → ↓ GFR by preventing constriction of efferent arterioles." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p628: ARBs ----------
+  - id: renal.L05.050
+    kind: card
+    topic: angiotensin-ii-receptor-blockers
+    front: Name three angiotensin II receptor blockers and their mechanism.
+    back: Losartan, candesartan, valsartan. They selectively block binding of angiotensin II to the AT1 receptor.
+    src: { page: 628, quote: "Selectively block binding of angiotensin II to AT1 receptor." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.051
+    kind: card
+    topic: angiotensin-ii-receptor-blockers
+    front: How do ARBs differ from ACE inhibitors, and when are they chosen?
+    back: Effects are similar but ARBs do not increase bradykinin. Used for hypertension, HF, proteinuria or CKD (eg, diabetic nephropathy) when ACE inhibitors aren't tolerated (eg, cough, angioedema).
+    src: { page: 628, quote: "Effects similar to ACE inhibitors, but ARBs do not increase bradykinin." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.052
+    kind: cloze
+    topic: angiotensin-ii-receptor-blockers
+    text: "ARB adverse effects: {{c1::hyperkalemia}}, ↓ GFR, hypotension; {{c2::teratogen}}."
+    src: { page: 628, quote: "Hyperkalemia, ↓ GFR, hypotension; teratogen." }
+    status: unverified
+  - id: renal.L05.053
+    kind: mcq
+    topic: angiotensin-ii-receptor-blockers
+    stem: >-
+      A 50-year-old woman with hypertension and diabetic nephropathy stopped ramipril because of a dry cough. She is
+      switched to losartan. Which statement about the new drug is correct?
+    options:
+      - It increases bradykinin levels more than ramipril
+      - It blocks angiotensin II binding to the AT1 receptor
+      - It blocks the conversion of angiotensinogen to angiotensin I
+      - It causes hypokalemia
+      - It is safe in pregnancy
+    answer: 1
+    why:
+      - "ARBs do not increase bradykinin, which is why they avoid the cough."
+      - "Right. Losartan selectively blocks angiotensin II at the AT1 receptor."
+      - "That is aliskiren, the direct renin inhibitor."
+      - "ARBs cause hyperkalemia."
+      - "ARBs are teratogens."
+    src: { page: 628, quote: "Selectively block binding of angiotensin II to AT1 receptor. Effects similar to ACE inhibitors, but ARBs do not increase bradykinin." }
+    status: unverified
+    tags: [high-yield]
+  # ---------- p628: aliskiren ----------
+  - id: renal.L05.054
+    kind: card
+    topic: aliskiren
+    front: What is aliskiren's mechanism and clinical use?
+    back: Direct renin inhibitor; blocks conversion of angiotensinogen to angiotensin I ("Aliskiren kills renin"). Used for hypertension.
+    src: { page: 628, quote: "Direct renin inhibitor, blocks conversion of angiotensinogen to angiotensin I. Aliskiren kills renin." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.055
+    kind: card
+    topic: aliskiren
+    front: List aliskiren's adverse effects and contraindications.
+    back: Hyperkalemia, ↓ GFR, hypotension, angioedema. Relatively contraindicated in patients already taking ACE inhibitors or ARBs; contraindicated in pregnancy.
+    src: { page: 628, quote: "Hyperkalemia, ↓ GFR, hypotension, angioedema. Relatively contraindicated in patients already taking ACE inhibitors or ARBs and contraindicated in pregnancy." }
+    status: unverified
+  - id: renal.L05.056
+    kind: mcq
+    topic: aliskiren
+    stem: >-
+      A 57-year-old man with hypertension is started on a drug that blocks the conversion of angiotensinogen to
+      angiotensin I. He already takes valsartan. Why is this combination discouraged?
+    options:
+      - The two drugs cancel each other at the AT1 receptor
+      - Additive risk of hyperkalemia, ↓ GFR and hypotension
+      - The new drug causes hypokalemia that ARBs worsen
+      - The new drug raises bradykinin, causing cough
+      - The new drug is a loop diuretic and adds ototoxicity
+    answer: 1
+    why:
+      - "Aliskiren acts upstream on renin; it does not compete at the AT1 receptor."
+      - "Right. Aliskiren shares the RAAS-blocker adverse effects (hyperkalemia, ↓ GFR, hypotension), so it is relatively contraindicated with ACE inhibitors or ARBs."
+      - "Aliskiren causes hyperkalemia, not hypokalemia."
+      - "Cough from bradykinin is the ACE inhibitor signature."
+      - "Aliskiren is a direct renin inhibitor, not a diuretic."
+    src: { page: 628, quote: "Relatively contraindicated in patients already taking ACE inhibitors or ARBs and contraindicated in pregnancy." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L05.057
+    kind: table
+    topic: aliskiren
+    title: Where each RAAS blocker acts
+    columns: [Drug class, Step blocked]
+    rows:
+      - [Aliskiren, Angiotensinogen → angiotensin I (direct renin inhibitor)]
+      - [ACE inhibitors, "Angiotensin I → angiotensin II (ACE); bradykinin is no longer inactivated"]
+      - [ARBs, "Angiotensin II binding to the AT1 receptor; bradykinin not increased"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 628, quote: "Direct renin inhibitor, blocks conversion of angiotensinogen to angiotensin I." }
+    status: unverified

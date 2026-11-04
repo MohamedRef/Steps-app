@@ -1,0 +1,1026 @@
+schema: steps.content/v1
+lecture: path.L03
+title: Neoplasia
+book: { chapter: 4, pages: [215, 224] }
+topics:
+  - { id: neoplastic-progression, title: Neoplasia and neoplastic progression }
+  - { id: tumor-nomenclature, title: Tumor nomenclature }
+  - { id: tumor-grade-vs-stage, title: Tumor grade vs stage }
+  - { id: hallmarks-of-cancer, title: Hallmarks of cancer }
+  - { id: immune-checkpoint-interactions, title: Immune checkpoint interactions }
+  - { id: cancer-epidemiology, title: Cancer epidemiology }
+  - { id: common-metastases, title: Common metastases }
+  - { id: oncogenes, title: Oncogenes }
+  - { id: tumor-suppressor-genes, title: Tumor suppressor genes }
+  - { id: carcinogens, title: Carcinogens }
+  - { id: oncogenic-microbes, title: Oncogenic microbes }
+  - { id: serum-tumor-markers, title: Serum tumor markers }
+  - { id: cancer-testing, title: Cancer testing }
+  - { id: immunohistochemical-stains, title: Important immunohistochemical stains }
+  - { id: p-glycoprotein, title: P-glycoprotein }
+  - { id: paraneoplastic-syndromes, title: Paraneoplastic syndromes }
+items:
+  # ---------- p215: neoplastic progression ----------
+  - id: path.L03.001
+    kind: card
+    topic: neoplastic-progression
+    front: What is neoplasia, and what are the two components of every neoplasm?
+    back: Uncontrolled, often monoclonal proliferation of cells, benign or malignant. Every neoplasm has parenchyma (the neoplastic cells) and supporting stroma (non-neoplastic, e.g., blood vessels and connective tissue).
+    src: { page: 215, quote: "Uncontrolled, often monoclonal proliferation of cells. Can be benign or malignant. Any neoplastic growth has two components: parenchyma (neoplastic cells) and supporting stroma" }
+    status: unverified
+  - id: path.L03.002
+    kind: order
+    topic: neoplastic-progression
+    prompt: Put the stages of neoplastic progression in order.
+    steps:
+      - Normal cells (basal → apical polarity)
+      - Dysplasia
+      - Carcinoma in situ
+      - Invasive carcinoma
+      - Metastasis
+    src: { page: 215, quote: "Irreversible severe dysplasia that involves the entire thickness of epithelium but does not penetrate the intact basement membrane." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.003
+    kind: card
+    topic: neoplastic-progression
+    front: What separates carcinoma in situ from invasive carcinoma?
+    back: Carcinoma in situ is irreversible severe dysplasia through the entire epithelial thickness that does not penetrate the intact basement membrane. Invasive carcinoma has breached the basement membrane using collagenases and hydrolases (metalloproteinases).
+    src: { page: 215, quote: "Invasive carcinoma Cells have invaded basement membrane using collagenases and hydrolases (metalloproteinases)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.004
+    kind: cloze
+    topic: neoplastic-progression
+    text: "In invasive carcinoma, cell–cell contacts are lost by inactivation of {{c1::E-cadherin}}."
+    src: { page: 215, quote: "Cell-cell contacts lost by inactivation of E-cadherin." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.005
+    kind: mcq
+    topic: neoplastic-progression
+    stem: >-
+      A 34-year-old woman has a cervical biopsy after an abnormal Pap test. Atypical cells with a
+      high nuclear:cytoplasmic ratio replace the entire thickness of the squamous epithelium, and
+      the basement membrane is intact throughout. Which term best describes the lesion?
+    options:
+      - Mild dysplasia
+      - Carcinoma in situ
+      - Invasive squamous cell carcinoma
+      - Squamous metaplasia
+      - Metastatic carcinoma
+    answer: 1
+    why:
+      - "Mild dysplasia doesn't involve the full thickness and is often reversible."
+      - "Right. Full-thickness, irreversible severe dysplasia that does not penetrate the intact basement membrane is carcinoma in situ."
+      - "Invasive carcinoma has breached the basement membrane."
+      - "Metaplasia replaces one cell type with another without atypia."
+      - "Metastasis is spread to distant organs."
+    src: { page: 215, quote: "Irreversible severe dysplasia that involves the entire thickness of epithelium but does not penetrate the intact basement membrane." }
+    status: unverified
+  # ---------- p216: tumor nomenclature ----------
+  - id: path.L03.006
+    kind: card
+    topic: tumor-nomenclature
+    front: What do "carcinoma" and "sarcoma" mean?
+    back: Carcinoma means epithelial origin and sarcoma means mesenchymal origin. Both generally imply malignancy.
+    src: { page: 216, quote: "Carcinoma implies epithelial origin, whereas sarcoma denotes mesenchymal origin. Both terms generally imply malignancy." }
+    status: unverified
+  - id: path.L03.007
+    kind: table
+    topic: tumor-nomenclature
+    title: Benign vs malignant tumors
+    columns: [Feature, Benign, Malignant]
+    rows:
+      - ["Differentiation", "Usually well differentiated", "May be poorly differentiated"]
+      - ["Growth and borders", "Well demarcated", "Erratic growth, local invasion"]
+      - ["Mitoses", "Low mitotic activity", "Often high"]
+      - ["Metastases", "None", "Yes"]
+      - ["Other", "No necrosis", "↓ Apoptosis"]
+    blanks: [[0, 1], [1, 2], [3, 1], [4, 2]]
+    src: { page: 216, quote: "Benign tumors are usually well-differentiated and well-demarcated, with low mitotic activity, no metastases, and no necrosis." }
+    status: unverified
+  - id: path.L03.008
+    kind: table
+    topic: tumor-nomenclature
+    title: Tumor names by cell type
+    columns: [Cell type, Benign, Malignant]
+    rows:
+      - ["Epithelium", "Adenoma, papilloma", "Adenocarcinoma, papillary carcinoma"]
+      - ["Blood vessels", "Hemangioma", "Angiosarcoma"]
+      - ["Smooth muscle", "Leiomyoma", "Leiomyosarcoma"]
+      - ["Striated muscle", "Rhabdomyoma", "Rhabdomyosarcoma"]
+      - ["Connective tissue", "Fibroma", "Fibrosarcoma"]
+      - ["Bone", "Osteoma", "Osteosarcoma"]
+      - ["Fat", "Lipoma", "Liposarcoma"]
+      - ["Melanocyte", "Nevus/mole", "Melanoma"]
+      - ["Blood cells", "", "Leukemia, lymphoma"]
+    blanks: [[1, 2], [2, 1], [3, 2], [7, 1], [7, 2]]
+    src: { page: 216, quote: "Smooth muscle Leiomyoma Leiomyosarcoma" }
+    status: unverified
+  - id: path.L03.009
+    kind: table
+    topic: tumor-nomenclature
+    title: Hamartoma vs choristoma
+    columns: [Term, Definition, Example]
+    rows:
+      - ["Hamartoma", "Disorganized overgrowth of tissues in their native location", "Peutz-Jeghers polyps"]
+      - ["Choristoma", "Normal tissue in a foreign location", "Gastric tissue in the distal ileum (Meckel diverticulum)"]
+    blanks: [[0, 1], [1, 1], [0, 2], [1, 2]]
+    src: { page: 216, quote: "hamartoma (disorganized overgrowth of tissues in their native location, eg, Peutz-Jeghers polyps) and choristoma (normal tissue in a foreign location, eg, gastric tissue located in distal ileum in Meckel diverticulum)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.010
+    kind: mcq
+    topic: tumor-nomenclature
+    stem: >-
+      A 2-year-old boy has painless rectal bleeding. A technetium-99m pertechnetate scan shows uptake
+      in the right lower quadrant, and resection shows a diverticulum of the distal ileum lined
+      partly by acid-secreting gastric mucosa. Which term describes the gastric tissue?
+    options:
+      - Hamartoma
+      - Choristoma
+      - Metaplasia
+      - Adenoma
+      - Teratoma
+    answer: 1
+    why:
+      - "A hamartoma is disorganized overgrowth of tissue in its native location, e.g., Peutz-Jeghers polyps."
+      - "Right. Normal tissue in a foreign location is a choristoma; gastric tissue in a Meckel diverticulum is the book's example."
+      - "Metaplasia is reprogramming of resident stem cells in response to a stressor."
+      - "An adenoma is a benign epithelial neoplasm, not a malformation."
+      - "A teratoma is a germ cell neoplasm with tissues from several germ layers."
+    src: { page: 216, quote: "choristoma (normal tissue in a foreign location, eg, gastric tissue located in distal ileum in Meckel diverticulum)" }
+    status: unverified
+  # ---------- p216: grade vs stage ----------
+  - id: path.L03.011
+    kind: table
+    topic: tumor-grade-vs-stage
+    title: Grade vs stage
+    columns: ["", Grade, Stage]
+    rows:
+      - ["Measures", "Cell differentiation and mitotic activity on histology", "Degree of invasion and spread from the initial site"]
+      - ["Range", "Low grade (well differentiated) to high grade (poorly or undifferentiated, anaplastic)", "TNM: tumor size/invasion, regional nodes, distant metastasis"]
+      - ["Prognosis", "Higher grade often more aggressive", "More prognostic value; stage determines survival"]
+    blanks: [[0, 1], [0, 2], [2, 2]]
+    src: { page: 216, quote: "Stage generally has more prognostic value than grade (eg, a high-stage yet low-grade tumor is usually worse than a low-stage yet high-grade tumor). Stage (spread) determines survival." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.012
+    kind: cloze
+    topic: tumor-grade-vs-stage
+    text: "In the TNM staging system, the order of importance is {{c1::M > N > T}}."
+    src: { page: 216, quote: "TNM staging system (importance: M > N > T)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.013
+    kind: mcq
+    topic: tumor-grade-vs-stage
+    stem: >-
+      Two patients have colon adenocarcinoma. Patient 1 has a poorly differentiated tumor confined
+      to the submucosa with no nodal spread. Patient 2 has a well-differentiated tumor with liver
+      metastases. Which statement about their prognosis is most accurate?
+    options:
+      - Patient 1 has the worse prognosis because grade determines survival
+      - Patient 2 has the worse prognosis because stage determines survival
+      - They have the same prognosis because both are adenocarcinomas
+      - Prognosis depends only on tumor size
+      - Nodal status matters more than distant metastasis
+    answer: 1
+    why:
+      - "Grade (differentiation) has less prognostic value than stage."
+      - "Right. Stage has more prognostic value than grade: a high-stage, low-grade tumor is usually worse than a low-stage, high-grade one. Distant metastasis (M) matters most."
+      - "Histologic type alone doesn't set prognosis."
+      - "Size (T) is the least important TNM component."
+      - "In TNM, M > N > T."
+    src: { page: 216, quote: "a high-stage yet low-grade tumor is usually worse than a low-stage yet high-grade tumor" }
+    status: unverified
+  # ---------- p217: hallmarks of cancer ----------
+  - id: path.L03.014
+    kind: enumerate
+    topic: hallmarks-of-cancer
+    prompt: Enumerate the gene classes whose mutation gives growth signal self-sufficiency, with the book's example of each (5).
+    points:
+      - "Proto-oncogenes → ↑ growth factors → autocrine loop (↑ PDGF in brain tumors)"
+      - "Growth factor receptors → constitutive signaling (HER2 in breast cancer)"
+      - "Signaling molecules (RAS)"
+      - "Transcription factors (MYC)"
+      - "Cell cycle regulators (cyclins, CDKs)"
+    pass: 4
+    src: { page: 217, quote: "Proto-oncogenes → ↑ growth factors → autocrine loop (eg, ↑ PDGF in brain tumors) Growth factor receptors → constitutive signaling (eg, HER2 in breast cancer) Signaling molecules (eg, RAS) Transcription factors (eg, MYC) Cell cycle regulators (eg, cyclins, CDKs)" }
+    status: unverified
+  - id: path.L03.015
+    kind: table
+    topic: hallmarks-of-cancer
+    title: Hallmarks of cancer
+    columns: [Hallmark, Mechanism]
+    rows:
+      - ["Anti-growth signal insensitivity", "Tumor suppressor mutations (Rb); loss of E-cadherin → loss of contact inhibition (NF2)"]
+      - ["Evasion of apoptosis", "Mutations in apoptosis genes (TP53; BCL2 → follicular B-cell lymphoma)"]
+      - ["Limitless replicative potential", "Reactivated telomerase maintains and lengthens telomeres"]
+      - ["Sustained angiogenesis", "↑ Pro-angiogenic factors (VEGF) or ↓ inhibitors; neoangiogenesis or vasculogenesis"]
+      - ["Warburg effect", "Glycolysis even with oxygen → biosynthetic intermediates, ↑ lactate"]
+      - ["Immune evasion", "↓ MHC I, TGF-β and Tregs, immune checkpoint molecules"]
+      - ["Tissue invasion", "Loss of E-cadherin → metalloproteinases degrade basement membrane and ECM → locomotion"]
+    blanks: [[0, 1], [1, 1], [2, 1], [4, 1], [5, 1]]
+    src: { page: 217, quote: "Reactivation of telomerase → maintenance and lengthening of telomeres → prevention of chromosome shortening and cell aging." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.016
+    kind: card
+    topic: hallmarks-of-cancer
+    front: What is the Warburg effect, and why does it help cancer cells?
+    back: A shift of glucose metabolism from mitochondrial oxidative phosphorylation to glycolysis even with oxygen present, driven by altered enzymes (pyruvate kinase M2, LDH-A). Aerobic glycolysis supplies intermediates for nucleotide, lipid and amino acid synthesis, with ↑ lactate.
+    src: { page: 217, quote: "Shift of glucose metabolism from mitochondrial oxidative phosphorylation to glycolysis, even under aerobic conditions. Driven by altered metabolic enzymes (eg, pyruvate kinase M2, LDH-A)." }
+    status: unverified
+  - id: path.L03.017
+    kind: enumerate
+    topic: hallmarks-of-cancer
+    prompt: Enumerate the ways tumors evade the immune system (3).
+    points:
+      - "↓ MHC class I → cytotoxic T cells can't recognize tumor cells"
+      - "Secrete immunosuppressive factors (TGF-β) and recruit regulatory T cells"
+      - "Upregulate immune checkpoint molecules"
+    pass: 3
+    src: { page: 217, quote: "↓ MHC class I expression by tumor cells → cytotoxic T cells are unable to recognize tumor cells. Tumor cells secrete immunosuppressive factors (eg, TGF-β) and recruit regulatory T cells to downregulate immune response." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.018
+    kind: order
+    topic: hallmarks-of-cancer
+    prompt: Put the steps of tissue invasion in order.
+    steps:
+      - Loss of E-cadherin → loosened intercellular junctions
+      - Metalloproteinases degrade basement membrane and ECM
+      - Cells attach to ECM proteins (laminin, fibronectin)
+      - Cells migrate through degraded ECM (locomotion)
+      - Vascular dissemination
+    src: { page: 217, quote: "Loss of E-cadherin function → loosening of intercellular junctions → metalloproteinases degrade basement membrane and ECM → cells attach to ECM proteins (eg, laminin, fibronectin) → cells migrate through degraded ECM (“locomotion”) → vascular dissemination." }
+    status: unverified
+  - id: path.L03.019
+    kind: card
+    topic: hallmarks-of-cancer
+    front: How can the site of metastasis be predicted? Give the book's example of organ tropism.
+    back: From the site of the primary tumor, because the target organ is often the first capillary bed the cells meet. Some cancers show organ tropism, e.g., lung cancers commonly metastasize to the adrenals.
+    src: { page: 217, quote: "Site of metastasis can be predicted by site of 1° tumor, as the target organ is often the first-encountered capillary bed. Some cancers show organ tropism (eg, lung cancers commonly metastasize to adrenals)." }
+    status: unverified
+  - id: path.L03.020
+    kind: mcq
+    topic: hallmarks-of-cancer
+    stem: >-
+      A tumor biopsy shows cancer cells that continue to divide for hundreds of generations in
+      culture without their chromosome ends shortening. Which change most likely explains this?
+    options:
+      - Loss of E-cadherin
+      - Reactivation of telomerase
+      - ↑ VEGF secretion
+      - Shift to aerobic glycolysis
+      - ↓ MHC class I expression
+    answer: 1
+    why:
+      - "E-cadherin loss allows invasion and loss of contact inhibition, not endless division."
+      - "Right. Telomerase reactivation maintains and lengthens telomeres, preventing chromosome shortening and cell aging: limitless replicative potential."
+      - "VEGF sustains angiogenesis."
+      - "The Warburg effect supplies building blocks but doesn't protect telomeres."
+      - "↓ MHC I helps tumors evade cytotoxic T cells."
+    src: { page: 217, quote: "Reactivation of telomerase → maintenance and lengthening of telomeres → prevention of chromosome shortening and cell aging." }
+    status: unverified
+  # ---------- p218: immune checkpoints ----------
+  - id: path.L03.021
+    kind: table
+    topic: immune-checkpoint-interactions
+    title: Immune checkpoints and their inhibitors
+    columns: [Checkpoint, Effect, Inhibitors]
+    rows:
+      - ["PD-1 (T cell) – PD-L1/2 (tumor)", "T-cell dysfunction (exhaustion)", "Anti-PD-1: cemiplimab, nivolumab, pembrolizumab; anti-PD-L1: atezolizumab, durvalumab, avelumab"]
+      - ["CTLA-4 (T cell) outcompetes CD28 for B7 (APC)", "Loss of T-cell costimulation", "Anti-CTLA-4: ipilimumab"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2]]
+    src: { page: 218, quote: "CTLA-4 on T cells outcompetes CD28 for B7 on APCs → loss of T-cell costimulatory signal. Inhibited by antibodies against CTLA-4 (eg, ipilimumab)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.022
+    kind: cloze
+    topic: immune-checkpoint-interactions
+    text: "{{c1::Ipilimumab}} blocks CTLA-4, which otherwise outcompetes {{c2::CD28}} for B7 on APCs."
+    src: { page: 218, quote: "CTLA-4 on T cells outcompetes CD28 for B7 on APCs → loss of T-cell costimulatory signal." }
+    status: unverified
+  - id: path.L03.023
+    kind: mcq
+    topic: immune-checkpoint-interactions
+    stem: >-
+      A 66-year-old man with metastatic melanoma starts nivolumab. Which interaction does the drug
+      block to restore his antitumor T-cell response?
+    options:
+      - CTLA-4 binding to B7
+      - PD-1 on T cells binding PD-L1 on tumor cells
+      - CD28 binding to B7
+      - TCR binding to MHC I
+      - VEGF binding to its receptor
+    answer: 1
+    why:
+      - "CTLA-4 is blocked by ipilimumab."
+      - "Right. Nivolumab is an anti-PD-1 antibody; PD-1–PD-L1 binding causes T-cell exhaustion."
+      - "CD28–B7 is the costimulatory signal the drugs aim to restore, not block."
+      - "TCR–MHC I is the antigen signal T cells need."
+      - "Anti-VEGF drugs target angiogenesis, not checkpoints."
+    src: { page: 218, quote: "Inhibited by antibodies against PD-1 (eg, cemiplimab, nivolumab, pembrolizumab) or PD-L1 (eg, atezolizumab, durvalumab, avelumab)." }
+    status: unverified
+  # ---------- p218: epidemiology ----------
+  - id: path.L03.024
+    kind: table
+    topic: cancer-epidemiology
+    title: Cancer incidence and mortality (skin cancer excluded)
+    columns: [Group, Incidence, Mortality]
+    rows:
+      - ["Males", "Prostate > lung > colon/rectum", "Lung > prostate > colon/rectum"]
+      - ["Females", "Breast > lung > colon/rectum", "Lung > breast > colon/rectum"]
+      - ["Children (0-14)", "Leukemia > CNS > neuroblastoma", "Leukemia > CNS > neuroblastoma"]
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1]]
+    src: { page: 218, quote: "Cancer is the 2nd leading cause of death in the United States (heart disease is 1st)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.025
+    kind: card
+    topic: cancer-epidemiology
+    front: What is the most common cancer overall, and in what order are its types?
+    back: Skin cancer, with basal cell > squamous cell >> melanoma. It is left out of the incidence tables.
+    src: { page: 218, quote: "Skin cancer (basal > squamous >> melanoma) is the most common cancer (not included below)." }
+    status: unverified
+  - id: path.L03.026
+    kind: mcq
+    topic: cancer-epidemiology
+    stem: >-
+      A public health student asks which cancer kills the most women in the United States, although
+      it is not the one diagnosed most often in women. Which cancer is it?
+    options:
+      - Breast cancer
+      - Lung cancer
+      - Colorectal cancer
+      - Ovarian cancer
+      - Pancreatic cancer
+    answer: 1
+    why:
+      - "Breast cancer is the most common in women, but second in mortality."
+      - "Right. In women, lung cancer is first in mortality and second in incidence."
+      - "Colorectal cancer is third in both lists."
+      - "Ovarian cancer isn't in the top three."
+      - "Pancreatic cancer isn't in the top three in the book's table."
+    src: { page: 218, quote: "Cancer mortality 1. Lung 2. Prostate 3. Colon/rectum 1. Lung 2. Breast 3. Colon/rectum" }
+    status: unverified
+  # ---------- p219: common metastases ----------
+  - id: path.L03.027
+    kind: card
+    topic: common-metastases
+    front: How do carcinomas and sarcomas usually spread, and which four carcinomas spread hematogenously?
+    back: "Most Carcinomas spread via Lymphatics and most Sarcomas Hematogenously (CLaSH). Hematogenous carcinomas: follicular thyroid carcinoma, choriocarcinoma, renal cell carcinoma and hepatocellular carcinoma."
+    src: { page: 219, quote: "Most Carcinomas spread via Lymphatics; most Sarcomas spread Hematogenously (CLaSH). However, four carcinomas route hematogenously: follicular thyroid carcinoma, choriocarcinoma, renal cell carcinoma, and hepatocellular carcinoma." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.028
+    kind: table
+    topic: common-metastases
+    title: Common sources of metastasis by site
+    columns: [Site, Primary tumors, Note]
+    rows:
+      - ["Bone", "Prostate, breast >> lung > kidney, colon", "Axial skeleton"]
+      - ["Liver", "Colon > breast >> pancreas, lung, prostate", "Scattered through the parenchyma"]
+      - ["Lung", "Colon, breast >> kidney, prostate", "Typically both lungs"]
+      - ["Brain", "Lung > breast >> melanoma > colon, prostate", "Gray-white matter junction"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [3, 2]]
+    src: { page: 219, quote: "Lung > breast >> melanoma > colon, prostate Usually seen at gray-white matter junction" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.029
+    kind: table
+    topic: common-metastases
+    title: Bone metastasis patterns
+    columns: [Pattern, Primary tumors]
+    rows:
+      - ["Blastic", "Prostate, small cell lung cancer"]
+      - ["Mixed", "Breast"]
+      - ["Lytic", "Kidney, colon, non-small cell lung cancer"]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 219, quote: "Blastic (eg, prostate, small cell lung cancer) Mixed (eg, breast) Lytic (eg, kidney, colon, non-small cell lung cancer)" }
+    status: unverified
+  - id: path.L03.030
+    kind: cloze
+    topic: common-metastases
+    text: "In bone, liver, lung and brain, {{c1::metastasis}} is more common than a primary malignancy, and metastases usually appear as {{c2::multiple}} lesions."
+    src: { page: 219, quote: "Metastasis to bone, liver, lung, and brain is more common than 1° malignancy in these organs. Metastases often appear as multiple lesions" }
+    status: unverified
+  - id: path.L03.031
+    kind: mcq
+    topic: common-metastases
+    stem: >-
+      A 72-year-old man has low back pain and a PSA of 85 ng/mL. A bone scan shows multiple foci in
+      the lumbar vertebrae and pelvis, and x-rays show these lesions are dense and sclerotic. Which
+      statement about his bone lesions is most accurate?
+    options:
+      - They are lytic, as with renal cell carcinoma
+      - They are blastic, typical of prostate cancer
+      - They are a primary bone sarcoma
+      - They favor the distal limbs
+      - They are mixed, typical of breast cancer
+    answer: 1
+    why:
+      - "Kidney and colon cancers give lytic lesions."
+      - "Right. Prostate cancer gives blastic bone metastases, with a predilection for the axial skeleton."
+      - "Metastases to bone are more common than primary bone tumors, and the PSA points to prostate."
+      - "Bone metastases favor the axial skeleton."
+      - "Breast cancer gives mixed lesions."
+    src: { page: 219, quote: "Prostate, breast >> lung > kidney, colon Predilection for axial skeleton A Bone metastasis can be: Blastic (eg, prostate, small cell lung cancer)" }
+    status: unverified
+  # ---------- p220: oncogenes ----------
+  - id: path.L03.032
+    kind: card
+    topic: oncogenes
+    front: How does a proto-oncogene become an oncogene, and how many alleles must be hit?
+    back: By a gain-of-function mutation, which ↑ cancer risk. Damage to only one allele is needed.
+    src: { page: 220, quote: "Gain of function mutation converts proto-oncogene (normal gene) to oncogene → ↑ cancer risk. Requires damage to only one allele of a proto-oncogene." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.033
+    kind: table
+    topic: oncogenes
+    title: Oncogenes (tyrosine kinases)
+    columns: [Gene, Product, Neoplasm]
+    rows:
+      - ["ALK", "Receptor tyrosine kinase", "Lung adenocarcinoma"]
+      - ["EGFR (ERBB1)", "Receptor tyrosine kinase", "Lung adenocarcinoma"]
+      - ["HER2 (ERBB2)", "Receptor tyrosine kinase", "Breast and gastric carcinomas"]
+      - ["RET", "Receptor tyrosine kinase", "MEN2A/2B, medullary and papillary thyroid carcinoma, pheochromocytoma"]
+      - ["BCR-ABL", "Non-receptor tyrosine kinase", "CML, ALL"]
+      - ["JAK2", "Non-receptor tyrosine kinase", "Myeloproliferative neoplasms"]
+      - ["c-KIT", "Cytokine receptor (CD117)", "GIST, mastocytosis"]
+    blanks: [[0, 2], [2, 2], [3, 2], [4, 2], [5, 2], [6, 2]]
+    src: { page: 220, quote: "RET REceptor Tyrosine kinase MEN2A and 2B, medullary and papillary thyroid carcinoma, pheochromocytoma" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.034
+    kind: table
+    topic: oncogenes
+    title: Oncogenes (other products)
+    columns: [Gene, Product, Neoplasm]
+    rows:
+      - ["BRAF", "Serine/threonine kinase", "Melanoma, non-Hodgkin lymphoma, colorectal and papillary thyroid carcinoma, hairy cell leukemia"]
+      - ["MYCC (c-myc)", "Transcription factor", "Burkitt lymphoma"]
+      - ["MYCN (N-myc)", "Transcription factor", "Neuroblastoma"]
+      - ["KRAS", "RAS GTPase", "Pancreatic, colorectal, lung, endometrial cancers"]
+      - ["BCL-2", "Antiapoptotic molecule", "Follicular and diffuse large B-cell lymphomas"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]]
+    src: { page: 220, quote: "MYCC (c-myc) Transcription factor Burkitt lymphoma MYCN (N-myc) Transcription factor Neuroblastoma" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.035
+    kind: cloze
+    topic: oncogenes
+    text: "{{c1::c-KIT}} encodes a cytokine receptor (CD117) linked to {{c2::gastrointestinal stromal tumor}} and mastocytosis."
+    src: { page: 220, quote: "c-KIT CytoKIne receptor (CD117) Gastrointestinal stromal tumor (GIST), mastocytosis" }
+    status: unverified
+  - id: path.L03.036
+    kind: mcq
+    topic: oncogenes
+    stem: >-
+      A 2-year-old girl has an abdominal mass that crosses the midline, periorbital ecchymoses and
+      elevated urinary homovanillic acid. Which oncogene is most closely associated with this
+      tumor?
+    options:
+      - MYCC (c-myc)
+      - MYCN (N-myc)
+      - KRAS
+      - RET
+      - WT1
+    answer: 1
+    why:
+      - "c-myc is linked to Burkitt lymphoma."
+      - "Right. These findings describe neuroblastoma, the neoplasm the book links to the MYCN (N-myc) transcription factor oncogene."
+      - "KRAS is linked to pancreatic, colorectal, lung and endometrial cancers."
+      - "RET is linked to MEN2 and thyroid carcinomas."
+      - "WT1 is a tumor suppressor in Wilms tumor, which doesn't usually cross the midline."
+    src: { page: 220, quote: "MYCN (N-myc) Transcription factor Neuroblastoma" }
+    status: unverified
+  # ---------- p220: tumor suppressor genes ----------
+  - id: path.L03.037
+    kind: card
+    topic: tumor-suppressor-genes
+    front: What is the Knudson 2-hit hypothesis?
+    back: Tumor suppressor genes cause disease by loss of function, and both alleles must be lost for the disease to appear.
+    src: { page: 220, quote: "Loss of function → ↑ cancer risk; both (two) alleles of a tumor suppressor gene must be lost for expression of disease (the Knudson 2-hit hypothesis)." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.038
+    kind: table
+    topic: tumor-suppressor-genes
+    title: Tumor suppressor genes (cell cycle and signaling)
+    columns: [Gene, Product, Condition]
+    rows:
+      - ["APC", "Negative regulator of β-catenin/WNT", "Colorectal cancer (FAP)"]
+      - ["CDKN2A", "p16, blocks G1 → S", "Melanoma, lung, pancreatic and others"]
+      - ["RB1", "Inhibits E2F; blocks G1 → S", "Retinoblastoma, osteosarcoma"]
+      - ["TP53", "p53, activates p21; blocks G1 → S", "Most cancers; Li-Fraumeni syndrome"]
+      - ["PTEN", "Negative regulator of PI3K/AKT", "Prostate, breast, endometrial cancers"]
+      - ["NF1", "Neurofibromin (Ras GTPase activating protein)", "Neurofibromatosis type 1"]
+      - ["VHL", "Inhibits hypoxia-inducible factor 1α", "von Hippel-Lindau disease"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 220, quote: "RB1 Inhibits E2F; blocks G1 → S phase Retinoblastoma, osteosarcoma (Bone cancer)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.039
+    kind: table
+    topic: tumor-suppressor-genes
+    title: Tumor suppressor genes (named syndromes and cancers)
+    columns: [Gene, Product, Condition]
+    rows:
+      - ["BRCA1/BRCA2", "BRCA1/BRCA2 proteins", "Breast, ovarian, prostate, pancreatic cancers"]
+      - ["DCC", "Deleted in Colorectal Cancer", "Colorectal cancer"]
+      - ["SMAD4 (DPC4)", "Deleted in Pancreatic Cancer", "Pancreatic, colorectal cancer"]
+      - ["MEN1", "Menin", "Multiple endocrine neoplasia type 1"]
+      - ["NF2", "Merlin (schwannomin)", "Neurofibromatosis type 2"]
+      - ["TSC1 / TSC2", "Hamartin / tuberin", "Tuberous sclerosis complex"]
+      - ["WT1", "Urogenital development transcription factor", "Wilms tumor (nephroblastoma)"]
+    blanks: [[0, 2], [2, 2], [3, 1], [4, 1], [5, 1], [6, 2]]
+    src: { page: 220, quote: "NF2 Merlin (schwannomin) protein NeuroFibromatosis type 2" }
+    status: unverified
+  - id: path.L03.040
+    kind: enumerate
+    topic: tumor-suppressor-genes
+    prompt: Enumerate the cancers of Li-Fraumeni syndrome (TP53) (4).
+    points:
+      - Sarcoma
+      - Breast/brain
+      - Lung/leukemia
+      - Adrenal gland
+    pass: 4
+    hook: "الكتاب: SBLA = Sarcoma، Breast/Brain، Lung/Leukemia، Adrenal. أورام كتير وفي سن صغير."
+    src: { page: 220, quote: "Most cancers, Li-Fraumeni (SBLA) syndrome (multiple malignancies at early age; Sarcoma, Breast/Brain, Lung/Leukemia, Adrenal gland)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.041
+    kind: cloze
+    topic: tumor-suppressor-genes
+    text: "{{c1::RB1}} inhibits {{c2::E2F}}, and {{c3::TP53}} activates p21; both block the G1 → S transition."
+    src: { page: 220, quote: "RB1 Inhibits E2F; blocks G1 → S phase Retinoblastoma, osteosarcoma (Bone cancer) TP53 p53, activates p21, blocks G1 → S phase" }
+    status: unverified
+  - id: path.L03.042
+    kind: mcq
+    topic: tumor-suppressor-genes
+    stem: >-
+      A 6-month-old girl has leukocoria in both eyes and is found to have retinoblastoma. Her
+      father had an eye removed in infancy. Which tumor is she at greatest risk of later in
+      childhood?
+    options:
+      - Osteosarcoma
+      - Medullary thyroid carcinoma
+      - Wilms tumor
+      - Burkitt lymphoma
+      - Neuroblastoma
+    answer: 0
+    why:
+      - "Right. Germline RB1 loss (bilateral, familial retinoblastoma) also predisposes to osteosarcoma (bone cancer)."
+      - "Medullary thyroid carcinoma is linked to RET (MEN2)."
+      - "Wilms tumor is linked to WT1."
+      - "Burkitt lymphoma is linked to MYCC (c-myc)."
+      - "Neuroblastoma is linked to MYCN."
+    src: { page: 220, quote: "RB1 Inhibits E2F; blocks G1 → S phase Retinoblastoma, osteosarcoma (Bone cancer)" }
+    status: unverified
+  - id: path.L03.043
+    kind: mcq
+    topic: tumor-suppressor-genes
+    stem: >-
+      A 40-year-old man has bilateral renal masses, a cerebellar hemangioblastoma and retinal
+      angiomas. Loss of the tumor suppressor in this syndrome causes which change?
+    options:
+      - Unopposed E2F activity
+      - Accumulation of hypoxia-inducible factor 1α
+      - Constitutive β-catenin signaling
+      - Loss of Ras GTPase activation
+      - Unopposed PI3K/AKT signaling
+    answer: 1
+    why:
+      - "Unopposed E2F follows RB1 loss."
+      - "Right. This is von Hippel-Lindau disease; the VHL protein inhibits hypoxia-inducible factor 1α, so its loss lets HIF-1α build up."
+      - "β-catenin signaling is unopposed with APC loss."
+      - "Neurofibromin (NF1) is a Ras GTPase activating protein."
+      - "PTEN negatively regulates PI3K/AKT."
+    src: { page: 220, quote: "VHL Inhibits hypoxia-inducible factor 1α von Hippel-Lindau disease" }
+    status: unverified
+  # ---------- p221: carcinogens ----------
+  - id: path.L03.044
+    kind: table
+    topic: carcinogens
+    title: Carcinogens (single target)
+    columns: [Toxin, Exposure, Cancer]
+    rows:
+      - ["Aflatoxins (Aspergillus)", "Stored grains and nuts", "Hepatocellular carcinoma"]
+      - ["Alkylating agents", "Chemotherapy", "Leukemia/lymphoma"]
+      - ["Aromatic amines (benzidine, 2-naphthylamine)", "Textile dyes, tobacco smoke", "Bladder transitional cell carcinoma"]
+      - ["Nitrosamines", "Smoked foods", "Gastric cancer (intestinal type)"]
+      - ["Radon", "Uranium decay, basements", "Lung cancer (2nd to tobacco)"]
+      - ["Vinyl chloride", "PVC pipes", "Hepatic angiosarcoma"]
+      - ["Nickel, chromium, beryllium, silica", "Occupational", "Lung cancer"]
+    blanks: [[0, 2], [2, 2], [3, 2], [4, 2], [5, 2]]
+    src: { page: 221, quote: "Vinyl chloride Used to make PVC pipes LiVer Hepatic angiosarcoma" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.045
+    kind: table
+    topic: carcinogens
+    title: Carcinogens (several targets)
+    columns: [Toxin, Organ, Cancer]
+    rows:
+      - ["Arsenic", "Liver; lung; skin", "Hepatic angiosarcoma; lung cancer; squamous cell carcinoma"]
+      - ["Asbestos", "Lung", "Bronchogenic carcinoma > mesothelioma"]
+      - ["Ethanol", "Esophagus; liver; breast", "Squamous cell carcinoma; HCC; breast cancer"]
+      - ["Ionizing radiation", "Blood; thyroid", "Leukemia; papillary thyroid carcinoma"]
+    blanks: [[0, 2], [1, 2], [3, 2]]
+    src: { page: 221, quote: "Asbestos Old roofing material, shipyard workers Lung Bronchogenic carcinoma > mesothelioma" }
+    status: unverified
+  - id: path.L03.046
+    kind: enumerate
+    topic: carcinogens
+    prompt: Enumerate the organs where tobacco smoke causes cancer (8).
+    points:
+      - "Bladder (transitional cell)"
+      - "Cervix (squamous cell)"
+      - "Esophagus (squamous cell/adenocarcinoma)"
+      - "Kidney (renal cell)"
+      - "Larynx (squamous cell)"
+      - "Lung (squamous cell and small cell)"
+      - "Oropharynx (squamous cell)"
+      - "Pancreas (adenocarcinoma)"
+    pass: 6
+    src: { page: 221, quote: "Tobacco smoke Bladder Transitional cell carcinoma Cervix Squamous cell carcinoma Esophagus Squamous cell carcinoma/ adenocarcinoma Kidney Renal cell carcinoma Larynx Squamous cell carcinoma" }
+    status: unverified
+  - id: path.L03.047
+    kind: mcq
+    topic: carcinogens
+    stem: >-
+      A 58-year-old man who worked for 25 years in a vineyard spraying herbicides has a liver mass.
+      Biopsy shows a malignant tumor of endothelial origin. He also has scaly hyperkeratotic skin
+      lesions on his palms. Which exposure best explains both findings?
+    options:
+      - Aflatoxin
+      - Arsenic
+      - Vinyl chloride
+      - Nitrosamines
+      - Radon
+    answer: 1
+    why:
+      - "Aflatoxin causes hepatocellular carcinoma, not angiosarcoma, and comes from stored grains and nuts."
+      - "Right. Arsenic (herbicides used by vineyard workers, smelting, wood preservation) causes hepatic angiosarcoma, lung cancer and skin squamous cell carcinoma."
+      - "Vinyl chloride also causes hepatic angiosarcoma, but the exposure is PVC manufacture and it doesn't cause the skin lesions."
+      - "Nitrosamines cause intestinal-type gastric cancer."
+      - "Radon causes lung cancer."
+    src: { page: 221, quote: "Arsenic Herbicides (vineyard workers), metal smelting, wood preservation Liver Hepatic angiosarcoma" }
+    status: unverified
+  # ---------- p222: oncogenic microbes ----------
+  - id: path.L03.048
+    kind: table
+    topic: oncogenic-microbes
+    title: Oncogenic microbes
+    columns: [Microbe, Cancer]
+    rows:
+      - ["EBV", "Burkitt, Hodgkin, nasopharyngeal carcinoma, 1° CNS lymphoma (immunocompromised)"]
+      - ["HBV, HCV", "Hepatocellular carcinoma"]
+      - ["HHV-8", "Kaposi sarcoma"]
+      - ["HPV (types 16, 18)", "Cervical, penile/anal, head and neck cancer"]
+      - ["H pylori", "Gastric adenocarcinoma, MALT lymphoma"]
+      - ["HTLV-1", "Adult T-cell leukemia/lymphoma"]
+      - ["Liver fluke (Clonorchis sinensis)", "Cholangiocarcinoma"]
+      - ["Schistosoma haematobium", "Squamous cell bladder cancer"]
+    blanks: [[0, 1], [2, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
+    src: { page: 222, quote: "Liver fluke (Clonorchis sinensis) Cholangiocarcinoma Schistosoma haematobium Squamous cell bladder cancer" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.049
+    kind: mcq
+    topic: oncogenic-microbes
+    stem: >-
+      A 45-year-old man from rural Egypt has painless hematuria. He swam in the Nile as a child and
+      had "red urine" for years. Cystoscopy shows a bladder mass. Which tumor type is most likely?
+    options:
+      - Transitional cell carcinoma from aromatic amines
+      - Squamous cell carcinoma from Schistosoma haematobium
+      - Cholangiocarcinoma from Clonorchis
+      - Adenocarcinoma from a urachal remnant
+      - Adult T-cell lymphoma from HTLV-1
+    answer: 1
+    why:
+      - "Aromatic amines cause transitional cell carcinoma, but the history points to schistosomiasis."
+      - "Right. Schistosoma haematobium is linked to squamous cell bladder cancer."
+      - "Clonorchis (liver fluke) causes cholangiocarcinoma."
+      - "Nothing here points to a urachal remnant."
+      - "HTLV-1 causes adult T-cell leukemia/lymphoma, not a bladder carcinoma."
+    src: { page: 222, quote: "Schistosoma haematobium Squamous cell bladder cancer" }
+    status: unverified
+  # ---------- p222: serum tumor markers ----------
+  - id: path.L03.050
+    kind: card
+    topic: serum-tumor-markers
+    front: What are serum tumor markers used for, and what are they not used for?
+    back: To monitor recurrence and response to therapy. They are not the primary tool for diagnosis or screening; diagnosis is made by biopsy, and some markers rise in non-neoplastic conditions.
+    src: { page: 222, quote: "Tumor markers should not be used as the 1° tool for cancer diagnosis or screening. They may be used to monitor tumor recurrence and response to therapy, but definitive diagnosis is made via biopsy." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.051
+    kind: table
+    topic: serum-tumor-markers
+    title: Serum tumor markers
+    columns: [Marker, Main associations]
+    rows:
+      - ["Alkaline phosphatase", "Bone or liver metastases, Paget disease of bone, seminoma (PLAP)"]
+      - ["α-fetoprotein", "HCC, yolk sac tumor, mixed germ cell tumor, ataxia-telangiectasia, neural tube defects"]
+      - ["hCG", "Hydatidiform mole, choriocarcinoma, testicular cancer, mixed germ cell tumor"]
+      - ["CA15-3/CA27-29", "Breast cancer"]
+      - ["CA 19-9", "Pancreatic adenocarcinoma"]
+      - ["CA 125", "Epithelial ovarian cancer"]
+      - ["Calcitonin", "Medullary thyroid carcinoma (alone, MEN2A, MEN2B)"]
+      - ["CEA", "Colorectal and pancreatic cancers; very nonspecific"]
+      - ["Chromogranin", "Neuroendocrine tumors"]
+      - ["LDH", "Testicular germ cell tumors, dysgerminoma; tumor burden"]
+      - ["Neuron-specific enolase", "Small cell lung cancer, carcinoid, neuroblastoma"]
+      - ["PSA", "Prostate cancer; also ↑ in BPH and prostatitis"]
+    blanks: [[1, 1], [2, 1], [4, 1], [5, 1], [6, 1], [10, 1]]
+    src: { page: 222, quote: "CA 19-9 Pancreatic adenocarcinoma. CA 125 Epithelial ovarian cancer." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.052
+    kind: card
+    topic: serum-tumor-markers
+    front: What do high and low α-fetoprotein mean in pregnancy?
+    back: AFP is normally made by the fetus and rises transiently in pregnancy. High levels are associated with neural tube and abdominal wall defects; low levels with Down syndrome.
+    src: { page: 222, quote: "Normally made by fetus. Transiently elevated in pregnancy. High levels associated with neural tube and abdominal wall defects, low levels associated with Down syndrome." }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.053
+    kind: cloze
+    topic: serum-tumor-markers
+    text: "hCG is produced by the {{c1::syncytiotrophoblasts}} of the placenta."
+    src: { page: 222, quote: "Produced by syncytiotrophoblasts of the placenta." }
+    status: unverified
+  - id: path.L03.054
+    kind: mcq
+    topic: serum-tumor-markers
+    stem: >-
+      A 63-year-old man had a colon adenocarcinoma resected 1 year ago. His serum CEA, which fell to
+      normal after surgery, has now tripled. What is the most appropriate interpretation?
+    options:
+      - CEA confirms a new primary pancreatic cancer
+      - Rising CEA suggests recurrence and needs imaging and biopsy
+      - CEA rises only with colorectal cancer, so this proves recurrence
+      - CEA should have been used to screen him before surgery
+      - CEA is specific enough to start chemotherapy
+    answer: 1
+    why:
+      - "CEA can't tell which primary is present."
+      - "Right. Tumor markers monitor recurrence and response; CEA is very nonspecific, so the diagnosis still needs imaging and biopsy."
+      - "CEA is very nonspecific; it also rises with pancreatic and other cancers."
+      - "Tumor markers shouldn't be the primary screening tool."
+      - "Definitive diagnosis is by biopsy, not a marker."
+    src: { page: 222, quote: "CEA Colorectal and pancreatic cancers. Minor associations: gastric, breast, and medullary thyroid carcinomas. CarcinoEmbryonic Antigen. Very nonspecific." }
+    status: unverified
+  # ---------- p223: cancer testing ----------
+  - id: path.L03.055
+    kind: table
+    topic: cancer-testing
+    title: Cancer tests
+    columns: [Test, What it shows, Use]
+    rows:
+      - ["Tumor mutational burden", "Total mutations in cancer cells", "May predict response to checkpoint inhibitors"]
+      - ["Microsatellite instability", "Mismatch repair deficit (hallmark of Lynch syndrome)", "Prognosis and treatment (colorectal, endometrial)"]
+      - ["PD-L1 expression", "PD-L1 on cancers (NSCLC, urothelial)", "Anti-PD-L1 or anti-PD-1 therapy"]
+      - ["Homologous recombination deficiency", "Genomic instability (breast, ovarian)", "PARP inhibitors"]
+      - ["Liquid biopsy", "ctDNA, ctRNA or CTCs in blood or urine", "Profiling (EGFR in lung), monitoring, surveillance"]
+    blanks: [[1, 1], [2, 2], [3, 2], [4, 1]]
+    src: { page: 223, quote: "Assesses deficits in the mismatch repair pathway (hallmark of Lynch syndrome)." }
+    status: unverified
+  - id: path.L03.056
+    kind: mcq
+    topic: cancer-testing
+    stem: >-
+      A 38-year-old woman with high-grade serous ovarian carcinoma is found to have a germline BRCA1
+      mutation. Testing for which tumor property best predicts benefit from olaparib, a PARP
+      inhibitor?
+    options:
+      - Microsatellite instability
+      - Homologous recombination deficiency
+      - PD-L1 expression
+      - Tumor mutational burden
+      - P-glycoprotein expression
+    answer: 1
+    why:
+      - "MSI tests mismatch repair (Lynch syndrome)."
+      - "Right. Homologous recombination deficiency testing finds cancers with genomic instability (breast, ovarian) that may respond to PARP inhibitors."
+      - "PD-L1 predicts response to anti-PD-1/PD-L1 antibodies."
+      - "Tumor mutational burden may predict response to checkpoint inhibitors."
+      - "P-glycoprotein pumps drugs out and causes chemotherapy resistance."
+    src: { page: 223, quote: "Identifies cancer types with genetic abnormalities and genomic instability (eg, breast, ovarian) that may respond to certain treatments (eg, PARP inhibitors)." }
+    status: unverified
+  # ---------- p223: immunohistochemical stains ----------
+  - id: path.L03.057
+    kind: table
+    topic: immunohistochemical-stains
+    title: Immunohistochemical stains
+    columns: [Stain, Target, Tumors]
+    rows:
+      - ["Chromogranin, synaptophysin", "Neuroendocrine cells", "Small cell lung carcinoma, carcinoid, neuroblastoma"]
+      - ["Cytokeratin", "Epithelial cells", "Epithelial tumors (squamous cell carcinoma)"]
+      - ["Desmin", "Muscle", "Rhabdomyosarcoma"]
+      - ["GFAP", "Neuroglia", "Astrocytoma, glioblastoma"]
+      - ["Neurofilament", "Neurons", "Neuroblastoma"]
+      - ["PECAM-1/CD31", "Endothelial cells", "Angiosarcoma"]
+      - ["S-100", "Neural crest cells", "Melanoma, schwannoma, Langerhans cell histiocytosis"]
+      - ["TRAP", "Tartrate-resistant acid phosphatase", "Hairy cell leukemia"]
+      - ["Vimentin", "Mesenchymal tissue", "Sarcoma; also endometrial, renal cell carcinoma, meningioma"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [5, 1], [6, 2], [7, 2]]
+    src: { page: 223, quote: "S-100 Neural crest cells Melanoma, schwannoma, Langerhans cell histiocytosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.058
+    kind: card
+    topic: immunohistochemical-stains
+    front: What are immunohistochemical stains used for?
+    back: To find the primary site of a metastatic tumor and to characterize tumors that are hard to classify. They can also carry prognostic and predictive value.
+    src: { page: 223, quote: "Determine primary site of origin for metastatic tumors and characterize tumors that are difficult to classify. Can have prognostic and predictive value." }
+    status: unverified
+  - id: path.L03.059
+    kind: mcq
+    topic: immunohistochemical-stains
+    stem: >-
+      A 50-year-old man has a pigmented skin lesion removed, and a year later a liver mass is found.
+      Biopsy shows poorly differentiated cells with no visible pigment. Which stain is most likely
+      to be positive if this is metastatic from the skin lesion?
+    options:
+      - Desmin
+      - S-100
+      - GFAP
+      - TRAP
+      - Chromogranin
+    answer: 1
+    why:
+      - "Desmin marks muscle tumors such as rhabdomyosarcoma."
+      - "Right. S-100 marks neural crest cells and is positive in melanoma (also schwannoma and Langerhans cell histiocytosis)."
+      - "GFAP marks neuroglia (astrocytoma, glioblastoma)."
+      - "TRAP marks hairy cell leukemia."
+      - "Chromogranin marks neuroendocrine tumors."
+    src: { page: 223, quote: "S-100 Neural crest cells Melanoma, schwannoma, Langerhans cell histiocytosis" }
+    status: unverified
+  # ---------- p223: P-glycoprotein ----------
+  - id: path.L03.060
+    kind: card
+    topic: p-glycoprotein
+    front: What is P-glycoprotein, and why does it matter in cancer?
+    back: An ATP-dependent efflux pump (multidrug resistance protein 1, MDR1). Some cancer cells express it to pump out toxins, including chemotherapy drugs, one way tumors become resistant over time.
+    src: { page: 223, quote: "ATP-dependent efflux pump, also called multidrug resistance protein 1 (MDR1). Expressed in some cancer cells to pump out toxins, including chemotherapeutic agents" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.061
+    kind: mcq
+    topic: p-glycoprotein
+    stem: >-
+      A 55-year-old woman's tumor responds well to doxorubicin at first, but after several cycles
+      it grows despite the same dose. Her tumor cells now pump the drug out using ATP. Which
+      molecule most likely explains this?
+    options:
+      - P-glycoprotein (MDR1)
+      - Telomerase
+      - PD-L1
+      - BCL-2
+      - E-cadherin
+    answer: 0
+    why:
+      - "Right. P-glycoprotein (MDR1) is an ATP-dependent efflux pump that pumps chemotherapy out of cancer cells, causing resistance over time."
+      - "Telomerase gives limitless replication, not drug efflux."
+      - "PD-L1 suppresses T cells."
+      - "BCL-2 blocks apoptosis but doesn't pump drugs."
+      - "E-cadherin loss allows invasion."
+    src: { page: 223, quote: "Expressed in some cancer cells to pump out toxins, including chemotherapeutic agents (one mechanism of ↓ responsiveness or resistance to chemotherapy over time)." }
+    status: unverified
+  # ---------- p224: paraneoplastic syndromes ----------
+  - id: path.L03.062
+    kind: table
+    topic: paraneoplastic-syndromes
+    title: Musculoskeletal and cutaneous paraneoplastic syndromes
+    columns: [Manifestation, Description, Tumor]
+    rows:
+      - ["Dermatomyositis", "Proximal weakness, Gottron papules, heliotrope rash", "Adenocarcinomas, especially ovarian"]
+      - ["Acanthosis nigricans", "Velvety hyperpigmented plaques in axilla and neck", "Gastric adenocarcinoma and other visceral cancers"]
+      - ["Sign of Leser-Trélat", "Sudden multiple seborrheic keratoses", "GI adenocarcinomas and other visceral cancers"]
+      - ["Hypertrophic osteoarthropathy", "Clubbing, arthralgia, effusions, periostosis", "Adenocarcinoma of the lung"]
+    blanks: [[0, 2], [1, 2], [2, 2], [3, 2]]
+    src: { page: 224, quote: "Sign of Leser-Trélat Sudden onset of multiple seborrheic keratoses GI adenocarcinomas and other visceral malignancies" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.063
+    kind: table
+    topic: paraneoplastic-syndromes
+    title: Endocrine and hematologic paraneoplastic syndromes
+    columns: [Manifestation, Mechanism, Tumor]
+    rows:
+      - ["Hypercalcemia", "PTHrP", "Squamous cell carcinomas of lung, head and neck; renal, bladder, breast, ovarian"]
+      - ["Hypercalcemia", "↑ 1,25-(OH)2 vitamin D3", "Lymphoma"]
+      - ["Cushing syndrome", "↑ ACTH", "Small cell lung cancer"]
+      - ["Hyponatremia (SIADH)", "↑ ADH", "Small cell lung cancer"]
+      - ["Polycythemia", "↑ Erythropoietin", "Pheochromocytoma, RCC, HCC, hemangioblastoma, leiomyoma"]
+      - ["Pure red cell aplasia; Good syndrome", "Anemia with low reticulocytes; hypogammaglobulinemia", "Thymoma"]
+      - ["Trousseau syndrome; nonbacterial thrombotic endocarditis", "Migratory thrombophlebitis; sterile platelet thrombi on valves", "Adenocarcinomas, especially pancreatic"]
+    blanks: [[0, 1], [1, 1], [2, 2], [3, 2], [4, 1], [5, 2], [6, 2]]
+    src: { page: 224, quote: "Pheochromocytoma, renal cell carcinoma, HCC, hemangioblastoma, leiomyoma" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.064
+    kind: enumerate
+    topic: paraneoplastic-syndromes
+    prompt: Enumerate the tumors that cause paraneoplastic polycythemia (5).
+    points:
+      - Pheochromocytoma
+      - Renal cell carcinoma
+      - HCC
+      - Hemangioblastoma
+      - Leiomyoma
+    pass: 4
+    hook: "الكتاب: Paraneoplastic rise to High hematocrit levels = Pheochromocytoma، RCC، HCC، Hemangioblastoma، Leiomyoma."
+    src: { page: 224, quote: "Paraneoplastic rise to High hematocrit levels Pheochromocytoma, renal cell carcinoma, HCC, hemangioblastoma, leiomyoma" }
+    status: unverified
+  - id: path.L03.065
+    kind: table
+    topic: paraneoplastic-syndromes
+    title: Neuromuscular paraneoplastic syndromes
+    columns: [Syndrome, Mechanism or picture, Tumor]
+    rows:
+      - ["Anti-NMDA receptor encephalitis", "Psychiatric change, memory loss, seizures, dyskinesias, autonomic instability", "Ovarian teratoma"]
+      - ["Opsoclonus-myoclonus ataxia", "Dancing eyes, dancing feet", "Neuroblastoma (children), small cell lung cancer (adults)"]
+      - ["Paraneoplastic cerebellar degeneration", "Antibodies against Purkinje cell antigens", "SCLC (anti-Hu), gynecologic and breast (anti-Yo), Hodgkin (anti-Tr)"]
+      - ["Paraneoplastic encephalomyelitis", "Anti-Hu in neurons", "Small cell lung cancer"]
+      - ["Lambert-Eaton myasthenic syndrome", "Antibodies against presynaptic P/Q-type Ca2+ channels", "Small cell lung cancer"]
+      - ["Myasthenia gravis", "Antibodies against postsynaptic ACh receptors", "Thymoma"]
+    blanks: [[0, 2], [1, 2], [2, 2], [4, 1], [4, 2], [5, 2]]
+    src: { page: 224, quote: "Antibodies against antigens in Purkinje cells Small cell lung cancer (anti-Hu), gynecologic and breast cancers (anti-Yo), and Hodgkin lymphoma (anti-Tr)" }
+    status: unverified
+    tags: [high-yield]
+  - id: path.L03.066
+    kind: mcq
+    topic: paraneoplastic-syndromes
+    stem: >-
+      A 64-year-old man who smokes 2 packs a day has proximal leg weakness that improves after
+      repeated effort, dry mouth and absent reflexes. Chest CT shows a central lung mass. Antibodies
+      against which target most likely cause his weakness?
+    options:
+      - Postsynaptic acetylcholine receptors
+      - Presynaptic P/Q-type calcium channels
+      - Purkinje cell antigens (anti-Yo)
+      - NMDA receptors
+      - Neuronal Hu antigen in the spinal cord
+    answer: 1
+    why:
+      - "Antibodies against postsynaptic ACh receptors cause myasthenia gravis (thymoma); its weakness worsens with use."
+      - "Right. Lambert-Eaton myasthenic syndrome is from antibodies against presynaptic P/Q-type Ca2+ channels at the NMJ, linked to small cell lung cancer."
+      - "Anti-Yo cerebellar degeneration is linked to gynecologic and breast cancers and causes ataxia."
+      - "Anti-NMDA receptor encephalitis is linked to ovarian teratoma and causes psychiatric and seizure features."
+      - "Anti-Hu encephalomyelitis doesn't improve with repeated effort."
+    src: { page: 224, quote: "Lambert-Eaton myasthenic syndrome Antibodies against presynaptic (P/Q-type) Ca2+ channels at NMJ" }
+    status: unverified
+  - id: path.L03.067
+    kind: mcq
+    topic: paraneoplastic-syndromes
+    stem: >-
+      A 25-year-old woman develops anxiety, hallucinations and memory loss over 2 weeks, then has a
+      seizure and orofacial dyskinesias with labile blood pressure. Antibodies to NMDA receptors are
+      found in her CSF. Which study is most important next?
+    options:
+      - Chest CT for small cell lung cancer
+      - Pelvic imaging for an ovarian teratoma
+      - Abdominal CT for a neuroblastoma
+      - Mammography for breast cancer
+      - Thyroid ultrasound for medullary carcinoma
+    answer: 1
+    why:
+      - "Small cell lung cancer is linked to anti-Hu, Lambert-Eaton and ectopic ACTH/ADH, not anti-NMDA encephalitis in a young woman."
+      - "Right. Anti-NMDA receptor encephalitis is linked to ovarian teratoma."
+      - "Neuroblastoma gives opsoclonus-myoclonus in children."
+      - "Breast cancer is linked to anti-Yo cerebellar degeneration."
+      - "Medullary thyroid carcinoma secretes calcitonin and isn't linked to this syndrome."
+    src: { page: 224, quote: "Psychiatric disturbance, memory deficits, seizures, dyskinesias, autonomic instability, language dysfunction Ovarian teratoma" }
+    status: unverified
+  - id: path.L03.068
+    kind: mcq
+    topic: paraneoplastic-syndromes
+    stem: >-
+      A 61-year-old man has a serum calcium of 14.2 mg/dL, a suppressed PTH and a hilar mass that
+      biopsy shows is a keratinizing squamous cell carcinoma. What is the most likely cause of his
+      hypercalcemia?
+    options:
+      - Ectopic ACTH
+      - PTH-related peptide
+      - ↑ 1,25-(OH)2 vitamin D3
+      - Ectopic ADH
+      - Primary hyperparathyroidism
+    answer: 1
+    why:
+      - "Ectopic ACTH (Cushing syndrome) comes from small cell lung cancer."
+      - "Right. Squamous cell carcinomas of the lung, head and neck secrete PTHrP → hypercalcemia with suppressed PTH."
+      - "↑ 1,25-(OH)2 vitamin D3 is the hypercalcemia mechanism in lymphoma."
+      - "Ectopic ADH causes hyponatremia (SIADH)."
+      - "PTH is suppressed, so this is not primary hyperparathyroidism."
+    src: { page: 224, quote: "Hypercalcemia PTHrP SCa2+ mous cell carcinomas of lung, head, and neck" }
+    status: unverified

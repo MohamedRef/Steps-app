@@ -397,7 +397,7 @@ mod tests {
         LoggedReview {
             id: id.into(),
             hlc: Hlc { wall_ms: at_ms, counter: 0, device: "s24".into() },
-            event: ReviewEvent { item_id: item.into(), grade, origin, at_ms, took_ms: 4000 },
+            event: ReviewEvent::new(item, grade, origin, at_ms, 4000),
         }
     }
 
