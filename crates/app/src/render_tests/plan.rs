@@ -206,6 +206,8 @@ fn all_seen() {
     for l in crate::content::Library::get().lectures.values() {
         for i in &l.items {
             review.backend.borrow_mut().record(steps_core::review::ReviewEvent {
+                confidence: None,
+                reason: None,
                 item_id: i.id.clone(),
                 grade: steps_core::review::Grade::Good,
                 origin: steps_core::review::Origin::Study,

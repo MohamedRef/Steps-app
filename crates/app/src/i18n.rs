@@ -528,6 +528,31 @@ pub mod anki {
     }
 }
 
+/// The two optional taps around an answer (`crate::metacog`): how sure he
+/// was before it came out, and why he missed it.
+pub mod metacog {
+    pub const CONFIDENCE_LABEL: &str = "متأكد قد إيه؟";
+    pub const OPTIONAL: &str = "اختياري";
+    pub const SURE: &str = "متأكد";
+    pub const UNSURE: &str = "مش متأكد";
+    pub const GUESS: &str = "تخمين";
+
+    pub const REASON_LABEL: &str = "غلطت ليه؟";
+    /// The study player: a reason chip rates the item "تاني" too.
+    pub const REASON_LABEL_AGAIN: &str = "نسيتها؟ اختار السبب وهتتسجل «تاني»";
+    pub const KNOWLEDGE: &str = "مكنتش عارف المعلومة";
+    pub const MISREAD: &str = "قريت السؤال غلط";
+    pub const SECOND_GUESSED: &str = "غيّرت إجابتي الصح";
+    pub const REASONING: &str = "خطوة في التفكير";
+    pub const TIMING: &str = "استعجلت / الوقت";
+
+    /// On a mistake he was sure of.
+    pub const WAS_SURE: &str = "كنت متأكد";
+    pub const WAS_SURE_HINT: &str = "غلطة كنت متأكد منها: دي أهم حاجة تتراجع، فبتيجي الأول.";
+    pub const ALL_REASONS: &str = "الكل";
+    pub const BY_REASON: &str = "حسب السبب";
+}
+
 pub mod bank {
     pub const PRACTISE_TOPIC: &str = "اتمرّن على الموضوع ده";
     pub const OPEN_LECTURE: &str = "افتح المحاضرة";

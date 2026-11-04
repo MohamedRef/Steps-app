@@ -92,6 +92,8 @@ pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
                     origin: Origin::Study,
                     at_ms: crate::store::now_ms(),
                     took_ms: started().elapsed().as_millis().min(u32::MAX as u128) as u32,
+                    confidence: None,
+                    reason: None,
                 });
                 if grade == Grade::Again {
                     *again.write() += 1;

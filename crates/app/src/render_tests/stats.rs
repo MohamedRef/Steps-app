@@ -32,6 +32,8 @@ pub(super) fn some_study() {
     let now = crate::store::now_ms();
     let record = |item: &str, grade: Grade, days_ago: i64| {
         review.backend.borrow_mut().record(ReviewEvent {
+            confidence: None,
+            reason: None,
             item_id: item.to_string(),
             grade,
             origin: Origin::Study,

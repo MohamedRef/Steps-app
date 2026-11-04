@@ -75,7 +75,15 @@ mod tests {
     use steps_core::review::{Grade, Origin};
 
     fn event(id: &str) -> ReviewEvent {
-        ReviewEvent { item_id: id.into(), grade: Grade::Good, origin: Origin::Study, at_ms: 1, took_ms: 2 }
+        ReviewEvent {
+            confidence: None,
+            reason: None,
+            item_id: id.into(),
+            grade: Grade::Good,
+            origin: Origin::Study,
+            at_ms: 1,
+            took_ms: 2,
+        }
     }
 
     #[test]

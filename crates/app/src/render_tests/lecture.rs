@@ -82,6 +82,8 @@ fn reviews_due_get_the_primary_button() {
             .clone();
         let review = consume_context::<crate::store::Review>();
         review.backend.borrow_mut().record(ReviewEvent {
+            confidence: None,
+            reason: None,
             item_id: item,
             grade: Grade::Good,
             origin: Origin::Study,
