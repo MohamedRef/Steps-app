@@ -1,0 +1,774 @@
+schema: steps.lesson/v1
+lecture: cvs.L03
+lessons:
+  - id: cvs.L03.lesson1
+    title: "الـ stroke volume: 3 زراير بيتحكموا في كل حاجة"
+    hook: "Contractility و Preload و Afterload. افهمهم صح وأي دوا قلب هتعرف بيعمل إيه من غير حفظ"
+    minutes: 10
+    pages: [288, 289]
+    topics: [cardiac-output-variables, cardiac-output-equations]
+    goals:
+      - "تعرف إيه اللي بيعلّي ويقلّل الـ SV"
+      - "تفهم الـ β1 والـ digoxin بيقوّوا القلب إزاي"
+      - "تحفظ معادلات الـ CO والـ EF والـ MAP والـ pulse pressure بالمنطق"
+    status: unverified
+    steps:
+      - kind: explain
+        title: "SV CAP"
+        text: |-
+          الـ **stroke volume** (الدم اللي بيطلع في كل ضربة) بيتحكم فيه 3 حاجات، والكتاب بيقولهم ==SV CAP==:
+          - **Contractility**: القلب بيعصر قد إيه. يعلى مع الـ anxiety والـ exercise.
+          - **Afterload**: الضغط اللي القلب بيزق ضده. كل ما يقل، الـ SV يزيد.
+          - **Preload**: القلب اتملى قد إيه قبل ما يعصر. يعلى مثلاً في أول الحمل.
+
+          والـ **stroke work** = الشغل اللي بيعمله الـ ventricle عشان يطلّع الـ SV، و ==SW ∝ SV × MAP==.
+        page: 288
+        quote: "Stroke Volume affected by Contractility, Afterload, and Preload. ↑ SV with: ↑ Contractility (eg, anxiety, exercise) ↑ Preload (eg, early pregnancy) ↓ Afterload SV CAP."
+      - kind: explain
+        title: "الـ β1 بيقوّي القلب إزاي؟"
+        text: |-
+          الـ catecholamine يركب على **β1** ← cAMP ← ==protein kinase A== تشتغل، وبتعمل حاجتين:
+          - تعمل phosphorylation للـ ==phospholamban== ← الـ Ca2+ ATPase بتاعة الـ SR تشتغل ← Ca2+ أكتر متخزن في الـ SR للضربة الجاية.
+          - تعمل phosphorylation للـ Ca2+ channels ← Ca2+ يدخل أكتر ← Ca2+-induced Ca2+ release أكبر.
+
+          النتيجة: Ca2+ أكتر جوه الخلية = عصرة أقوى.
+        page: 288
+        quote: "Catecholamine stimulation via β1 receptor: Activated protein kinase A → phospholamban phosphorylation → active Ca2+ ATPase → ↑ Ca2+ storage in sarcoplasmic reticulum (SR)"
+      - kind: reveal
+        prompt: "الـ digoxin بيوقف الـ Na+/K+ pump. إزاي ده بيخلّي القلب يعصر أقوى؟"
+        answer: "الـ pump وقف ← Na+ يتراكم جوه الخلية ← الـ **Na+/Ca2+ exchanger** (اللي بيطلّع Ca2+ مقابل Na+ داخل) مش لاقي gradient يشتغل بيه ← Ca2+ يفضل جوه ← ==intracellular Ca2+ يعلى== ← contractility تعلى."
+        page: 288
+        quote: "Digoxin (blocks Na+ /K+ pump → ↑ intracellular Na+ → ↓ Na+ /Ca2+ exchanger activity → ↑ intracellular Ca2+ )"
+      - kind: sort
+        prompt: "حط كل حاجة في مكانها: بتعلّي ولا بتقلّل الـ contractility؟"
+        bins: ["↑ contractility", "↓ contractility"]
+        cards:
+          - { text: "Digoxin", bin: 0 }
+          - { text: "β1 stimulation (catecholamines)", bin: 0 }
+          - { text: "↑ intracellular Ca2+", bin: 0 }
+          - { text: "β1-blockade", bin: 1 }
+          - { text: "Acidosis", bin: 1 }
+          - { text: "Hypoxia/hypercapnia", bin: 1 }
+          - { text: "Nondihydropyridine Ca2+ channel blockers", bin: 1 }
+          - { text: "Systolic heart failure", bin: 1 }
+        why: "كل حاجة بتعلّي الـ Ca2+ جوه الخلية بتقوّي العصرة. والـ β-blocker بيقلّل الـ cAMP، والـ verapamil/diltiazem بيقفلوا باب الـ Ca2+، والـ acidosis والـ hypoxia بيتعبوا العضلة."
+        page: 288
+        quote: "Contractility (and SV) ↓ with: β1-blockade (↓ cAMP) Heart failure (HF) with systolic dysfunction Acidosis Hypoxia/hypercapnia (↓ Po2/↑ Pco2) Nondihydropyridine Ca2+ channel blockers"
+      - kind: explain
+        title: "Preload و Afterload"
+        text: |-
+          - **Preload** ≈ ==EDV== (حجم الدم في آخر الـ diastole). بيعتمد على الـ venous tone وحجم الدم، والاتنين بيأثروا على الـ venous return. الـ **nitroglycerin** (venous dilator) بيقلّله.
+          - **Afterload** ≈ ==MAP==. ضغط أعلى ← wall tension أعلى (Laplace) ← afterload أعلى. الـ **hydralazine** (arterial dilator) بيقلّله.
+          - الـ ACE inhibitors والـ ARBs بيقلّلوا الاتنين.
+        page: 288
+        quote: "Venous vasodilators (eg, nitroglycerin) ↓ preload."
+      - kind: figure
+        title: "Laplace: ليه القلب بيتخن؟"
+        svg: |-
+          <svg viewBox="0 0 360 170" xmlns="http://www.w3.org/2000/svg">
+            <circle class="fg-box" cx="80" cy="85" r="55"/>
+            <circle class="fg-thin" cx="80" cy="85" r="47"/>
+            <text x="40" y="160" class="t-sm">thin wall: high stress</text>
+            <circle class="fg-good" cx="260" cy="85" r="55"/>
+            <circle class="fg-box" cx="260" cy="85" r="35"/>
+            <text x="205" y="160" class="t-sm t-good">thick wall: stress falls</text>
+            <text x="120" y="20" class="t-sm t-b">stress = P × r / (2 × h)</text>
+            <text x="245" y="90" class="t-sm">P ↑</text>
+            <text x="68" y="90" class="t-sm">P ↑</text>
+          </svg>
+        caption: "الـ wall stress = الضغط × نص القطر ÷ (2 × سُمك الحيطة). لو الضغط علي (hypertension)، الطريقة الوحيدة إن الـ stress يرجع طبيعي إن الحيطة تتخن: LV hypertrophy."
+        alt: "Two circles representing the left ventricle under high pressure: a thin wall with high stress, and a thick wall where stress falls, with the formula stress equals pressure times radius over twice wall thickness."
+        page: 288
+        quote: "Wall tension follows Laplace’s law: Wall tension = pressure × radius Wall stress = pressure × radius 2 × wall thickness"
+      - kind: aside
+        tone: exam
+        text: "الـ ==myocardial O2 demand== بيعلى مع 4 حاجات: contractility، afterload، heart rate، وقطر الـ ventricle (wall tension). وأكتر دم ناقص أكسجين في الجسم كله في الـ **coronary sinus**، لأن القلب بيسحب معظم الأكسجين من الدم اللي بيوصله."
+        page: 288
+        quote: "Myocardial O2 demand is ↑ by: ↑ contractility ↑ afterload (proportional to arterial pressure) ↑ heart rate ↑ diameter of ventricle (↑ wall tension) Coronary sinus contains most deoxygenated blood in body."
+      - kind: check
+        question: "Which drug lowers both preload and afterload?"
+        options: ["Nitroglycerin", "Hydralazine", "Lisinopril (ACE inhibitor)", "Dobutamine"]
+        answer: 2
+        why:
+          - "الـ nitroglycerin venous dilator: بيقلّل الـ preload أساساً."
+          - "الـ hydralazine arterial dilator: بيقلّل الـ afterload."
+          - "صح: الـ ACE inhibitors والـ ARBs بيقلّلوا الـ preload والـ afterload مع بعض."
+          - "الـ dobutamine بيعلّي الـ contractility."
+        page: 288
+        quote: "ACE inhibitors and ARBs ↓ both preload and afterload."
+      - kind: table
+        title: "المعادلات"
+        columns: ["Quantity", "Equation"]
+        rows:
+          - ["Stroke volume", "SV = EDV − ESV"]
+          - ["Ejection fraction", "EF = SV / EDV (normal 50%-70%)"]
+          - ["Cardiac output", "CO = SV × HR"]
+          - ["Fick", "CO = O2 consumption / (arterial − venous O2 content)"]
+          - ["Pulse pressure", "PP = SBP − DBP"]
+          - ["MAP", "MAP = CO × TPR = 2/3 DBP + 1/3 SBP"]
+        hide: [[0, 1], [1, 1], [3, 1], [5, 1]]
+        page: 289
+        quote: "MAP = CO × total peripheral resistance (TPR) MAP (at resting HR) = 2/3 DBP + 1/3 SBP = DBP + 1/3 PP."
+      - kind: explain
+        title: "ليه الـ MAP مش متوسط عادي؟"
+        text: |-
+          القلب بيقضي وقت في الـ diastole أكتر من الـ systole (وهو مرتاح)، فالـ MAP أقرب للـ diastolic: ==2/3 DBP + 1/3 SBP==.
+
+          والـ **EF** مقياس للـ contractility: يقل في الـ **systolic HF**، وغالباً طبيعي في الـ diastolic HF.
+
+          ولو الـ HR علي جداً (زي VT)، الـ ==diastole بيقصر== ← وقت ملء أقل ← SV أقل ← CO يقع.
+        page: 289
+        quote: "Diastole is shortened with ↑↑ HR (eg, ventricular tachycardia) → ↓ diastolic filling time → ↓ SV → ↓ CO."
+      - kind: reveal
+        prompt: "الـ pulse pressure بيتناسب طردياً مع الـ SV وعكسياً مع الـ arterial compliance. يبقى إمتى يوسع وإمتى يضيق؟"
+        answer: "**يوسع** (SV كبير أو شرايين ناشفة): aortic regurgitation، aortic stiffening عند الكبار (isolated systolic hypertension)، obstructive sleep apnea، high-output states (anemia و hyperthyroidism)، و exercise.\n\n**يضيق** (SV صغير): ==aortic stenosis==، cardiogenic shock، cardiac tamponade، advanced HF."
+        page: 289
+        quote: "↑ PP in aortic regurgitation, aortic stiffening (isolated systolic hypertension in older adults), obstructive sleep apnea (↑ sympathetic tone), high-output state (eg, anemia, hyperthyroidism), exercise (transient). ↓ PP in aortic stenosis, cardiogenic shock, cardiac tamponade, advanced HF."
+      - kind: check
+        question: "A patient consumes 250 mL O2/min. Arterial O2 content is 20 mL/100 mL, venous is 15 mL/100 mL. Cardiac output?"
+        options: ["2.5 L/min", "5 L/min", "12.5 L/min", "50 L/min"]
+        answer: 1
+        why:
+          - "غلط في الحساب: الفرق 5 mL لكل 100 mL يعني 0.05 mL لكل mL."
+          - "صح: 250 ÷ 0.05 = 5000 mL/min = 5 L/min."
+          - "ده لو قسمت على 20 بدل الفرق."
+          - "ده لو نسيت تحوّل الـ 100 mL."
+        page: 289
+        quote: "Fick principle: CO = rate of O2 consumption (arterial O2 content – venous O2 content)"
+      - kind: try
+        items: [cvs.L03.001, cvs.L03.005, cvs.L03.009, cvs.L03.021, cvs.L03.022]
+    recap:
+      - "SV CAP: الـ SV يعلى مع ↑ contractility و ↑ preload و ↓ afterload."
+      - "الـ β1 ← PKA ← phospholamban و Ca2+ channels؛ الـ digoxin ← Na+ جوه ← Ca2+ جوه."
+      - "Preload ≈ EDV (nitrates)، afterload ≈ MAP (hydralazine)؛ ACEi/ARB الاتنين."
+      - "Laplace: ضغط عالي ← الحيطة تتخن عشان الـ stress يقل."
+      - "MAP = 2/3 DBP + 1/3 SBP؛ PP يوسع مع SV كبير ويضيق في AS و tamponade."
+    practice: [cvs.L03.001, cvs.L03.002, cvs.L03.003, cvs.L03.004, cvs.L03.005, cvs.L03.006, cvs.L03.007, cvs.L03.008, cvs.L03.009, cvs.L03.010, cvs.L03.011, cvs.L03.012, cvs.L03.013, cvs.L03.014, cvs.L03.015, cvs.L03.016, cvs.L03.017, cvs.L03.018, cvs.L03.019, cvs.L03.020, cvs.L03.021, cvs.L03.022, cvs.L03.023, cvs.L03.024]
+  - id: cvs.L03.lesson2
+    title: "Starling والمقاومة والـ curves اللي بتتقاطع"
+    hook: "ليه نص قطر الشريان بيضاعف المقاومة 16 مرة؟ وإيه اللي بيحصل للـ curves في الـ spinal anesthesia؟"
+    minutes: 8
+    pages: [289, 290]
+    topics: [starling-curves, resistance-pressure-flow, cardiac-vascular-function-curves]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "Frank-Starling"
+        text: |-
+          ==قوة الانقباض بتتناسب مع طول الـ fiber في آخر الـ diastole== (الـ preload). يعني كل ما القلب يتملى أكتر، يعصر أجمد، لحد حد معين.
+
+          على الرسمة: الـ x = EDV (preload)، والـ y = SV.
+          - **تتحرك على نفس الـ curve**: لما الـ preload يتغير.
+          - **الـ curve كله يطلع لفوق**: contractility أعلى (catecholamines، dobutamine، milrinone، digoxin).
+          - **الـ curve ينزل لتحت**: contractility أقل (MI، β-blockers acutely، non-DHP CCBs، HF).
+        page: 289
+        quote: "Force of contraction is proportional to end- diastolic length of cardiac muscle fiber (preload). ↑ contractility with catecholamines, positive inotropes (eg, dobutamine, milrinone, digoxin)."
+      - kind: figure
+        title: "Starling curves"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-ink" x1="40" y1="170" x2="340" y2="170"/>
+            <line class="fg-ink" x1="40" y1="170" x2="40" y2="15"/>
+            <text x="150" y="192" class="t-sm">EDV (preload)</text>
+            <text x="4" y="30" class="t-sm">SV</text>
+            <path class="fg-arrow-acc" d="M45 160 C 100 60, 160 35, 330 30" fill="none"/>
+            <text x="250" y="24" class="t-sm t-acc">↑ inotropy</text>
+            <path class="fg-arrow" d="M45 165 C 110 90, 170 70, 330 65" fill="none"/>
+            <text x="270" y="60" class="t-sm">normal</text>
+            <path class="fg-arrow-bad" d="M45 168 C 120 130, 190 115, 330 110" fill="none"/>
+            <text x="260" y="105" class="t-sm t-bad">heart failure</text>
+          </svg>
+        caption: "كل curve بيوصف قلب بـ contractility معينة. الـ preload بيحركك على الـ curve، والـ inotropes بيطلّعوا الـ curve كله لفوق، والـ HF بينزّله."
+        alt: "Graph of stroke volume against end-diastolic volume with three curves: positive inotropy highest, normal in the middle, heart failure lowest."
+        page: 289
+        quote: "↓ contractility with loss of functional myocardium (eg, MI), β-blockers (acutely), nondihydropyridine Ca2+ channel blockers, HF."
+      - kind: explain
+        title: "المقاومة: الـ r أس 4"
+        text: |-
+          R = 8η × length / ==πr4==. يعني المقاومة بتتناسب مع **1/r4**.
+
+          نص القطر يقل للنص ← المقاومة تزيد 2⁴ = ==16 مرة==. عشان كده الـ arterioles (اللي بتقدر تضيّق وتوسّع) هي اللي عاملة معظم الـ **TPR**.
+
+          - على التوالي (series): R الكلية = R1 + R2 + R3.
+          - على التوازي (parallel): 1/R = 1/R1 + 1/R2 + 1/R3.
+          - ΔP = flow × R، زي قانون Ohm.
+        page: 290
+        quote: "Resistance (R) = driving pressure (ΔP) = 8η (viscosity) × length πr4"
+      - kind: match
+        prompt: "وصّل كل وعاء بالصفة بتاعته"
+        pairs:
+          - ["Capillaries", "Highest total cross-sectional area, lowest velocity"]
+          - ["Arterioles", "Most of TPR"]
+          - ["Veins", "Most of blood storage capacity"]
+        why: "الـ capillaries كتير جداً فمساحتها الكلية كبيرة فالدم بيمشي فيها ببطء (وقت للتبادل). الـ arterioles بتتحكم في القطر فبتعمل المقاومة. والـ veins واسعة ومطاطة فبتخزّن الدم."
+        page: 290
+        quote: "Capillaries have highest total cross-sectional area and lowest flow velocity. Pressure gradient drives flow from high pressure to low pressure. Arterioles account for most of TPR. Veins provide most of blood storage capacity."
+      - kind: aside
+        tone: tip
+        text: "الـ ==viscosity بتعتمد أساساً على الـ hematocrit==. تعلى في الـ polycythemia والـ hyperproteinemia (multiple myeloma)، وتقل في الـ anemia."
+        page: 290
+        quote: "Viscosity depends mostly on hematocrit. Viscosity ↑ in hyperproteinemic states (eg, multiple myeloma), polycythemia. Viscosity ↓ in anemia."
+      - kind: check
+        question: "The radius of an artery falls to half. Pressure, viscosity and length are unchanged. Resistance becomes:"
+        options: ["2 times higher", "4 times higher", "16 times higher", "Half"]
+        answer: 2
+        why:
+          - "ده لو R ∝ 1/r."
+          - "ده لو R ∝ 1/r²."
+          - "صح: R ∝ 1/r4، فـ 2⁴ = 16."
+          - "قطر أصغر يعني مقاومة أكبر."
+        page: 290
+        quote: "∝ r4 R ∝ 1/r4"
+      - kind: explain
+        title: "الـ cardiac والـ vascular function curves"
+        text: |-
+          فيه curveين على نفس الرسمة، والـ x فيهم = **RAP** (right atrial pressure):
+          - **Cardiac function curve**: القلب بيطلّع قد إيه عند كل RAP (Starling).
+          - **Vascular function curve**: الدم بيرجع قد إيه عند كل RAP.
+
+          ==نقطة التقاطع هي الـ operating point==: هناك الـ venous return = الـ CO، لأن الدورة مقفولة.
+        page: 290
+        quote: "Intersection of curves = operating point of heart (ie, venous return and CO are equal, as circulatory system is a closed system)."
+      - kind: table
+        title: "إيه اللي بيحرّك كل curve"
+        columns: ["Change", "↑ by", "↓ by"]
+        rows:
+          - ["Inotropy (cardiac curve up/down)", "Catecholamines, dobutamine, digoxin, exercise", "HF with reduced EF, narcotic overdose, sympathetic inhibition"]
+          - ["Venous return (vascular curve right/left)", "Fluid infusion, sympathetic activity, AV shunt", "Acute hemorrhage, spinal anesthesia"]
+          - ["TPR (vascular curve rotates)", "Vasopressors", "Exercise, AV shunt"]
+        hide: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2]]
+        page: 290
+        quote: "Catecholamines, dobutamine, digoxin, exercise ⊕ HF with reduced EF, narcotic overdose, sympathetic inhibition ⊝"
+      - kind: aside
+        tone: analogy
+        text: "الـ exercise بيعمل حاجتين مع بعض في نفس الاتجاه: يعلّي الـ inotropy ويقلّل الـ TPR، فالـ CO يطير (reinforcing). أما الـ HF فبيقلّل الـ inotropy، والجسم يعوّض بـ fluid retention يعلّي الـ preload عشان الـ CO يفضل ماشي (compensatory)."
+        page: 290
+        quote: "Changes often occur in tandem, and may be reinforcing (eg, exercise ↑ inotropy and ↓ TPR to maximize CO) or compensatory (eg, HF ↓ inotropy → fluid retention to ↑ preload to maintain CO)."
+      - kind: check
+        question: "A woman's blood pressure falls after spinal anesthesia. Which curve change is primary?"
+        options: ["Cardiac curve shifts down", "Vascular curve shifts left (↓ venous return)", "Vascular curve rotates for ↑ TPR", "Cardiac curve shifts up"]
+        answer: 1
+        why:
+          - "الـ spinal anesthesia مش بتضعف الـ contractility أساساً."
+          - "صح: الـ spinal anesthesia (زي الـ hemorrhage) بتقلّل الـ venous return، فالـ vascular curve يروح شمال."
+          - "بالعكس، الـ sympathetic block بيوسّع الأوعية."
+          - "ده يحصل مع catecholamines أو exercise."
+        page: 290
+        quote: "Acute hemorrhage, spinal anesthesia ⊝"
+      - kind: try
+        items: [cvs.L03.026, cvs.L03.028, cvs.L03.031, cvs.L03.035]
+    recap:
+      - "Starling: preload يحركك على الـ curve؛ inotropy يطلّعه أو ينزّله."
+      - "R ∝ 1/r4: نص القطر = 16 ضعف المقاومة. الـ arterioles = معظم الـ TPR، الـ veins = المخزن."
+      - "الـ viscosity من الـ hematocrit."
+      - "تقاطع الـ curves = operating point (CO = venous return)."
+      - "Hemorrhage و spinal anesthesia ← venous return يقل؛ vasopressors ← TPR يعلى."
+    practice: [cvs.L03.025, cvs.L03.026, cvs.L03.027, cvs.L03.028, cvs.L03.029, cvs.L03.030, cvs.L03.031, cvs.L03.032, cvs.L03.033, cvs.L03.034, cvs.L03.035, cvs.L03.036, cvs.L03.037]
+  - id: cvs.L03.lesson3
+    title: "الـ cardiac cycle: الـ PV loop والأصوات والـ JVP"
+    hook: "رسمة واحدة (الـ PV loop) لو فهمتها هتعرف كل valve disease بيعمل إيه في الـ EDV والـ ESV"
+    minutes: 10
+    pages: [291, 292]
+    topics: [pressure-volume-loops-cardiac-cycle, jugular-venous-pressure-tracings, pressure-volume-loops-valvular-disease]
+    status: unverified
+    steps:
+      - kind: figure
+        title: "الـ PV loop"
+        svg: |-
+          <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="cvs3a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <line class="fg-ink" x1="40" y1="190" x2="340" y2="190"/>
+            <line class="fg-ink" x1="40" y1="190" x2="40" y2="15"/>
+            <text x="140" y="212" class="t-sm">LV volume</text>
+            <text x="4" y="25" class="t-sm">P</text>
+            <path class="fg-arrow-acc" d="M110 170 L270 160" marker-end="url(#cvs3a)"/>
+            <path class="fg-arrow-acc" d="M270 160 L270 70" marker-end="url(#cvs3a)"/>
+            <path class="fg-arrow-acc" d="M270 70 C 230 40, 150 35, 110 55" marker-end="url(#cvs3a)"/>
+            <path class="fg-arrow-acc" d="M110 55 L110 170" marker-end="url(#cvs3a)"/>
+            <text x="150" y="182" class="t-sm">filling</text>
+            <text x="276" y="114" class="t-sm">isovol.</text><text x="276" y="128" class="t-sm">contract.</text>
+            <text x="160" y="32" class="t-sm">ejection</text>
+            <text x="44" y="110" class="t-sm">isovol.</text>
+            <text x="44" y="124" class="t-sm">relax.</text>
+            <circle class="fg-dot-bad" cx="270" cy="160" r="4"/>
+            <text x="276" y="176" class="t-sm t-bad">MV closes (EDV)</text>
+            <circle class="fg-dot-bad" cx="270" cy="70" r="4"/>
+            <text x="276" y="66" class="t-sm t-bad">AV opens</text>
+            <circle class="fg-dot-bad" cx="110" cy="55" r="4"/>
+            <text x="60" y="48" class="t-sm t-bad">AV closes (ESV)</text>
+            <circle class="fg-dot-bad" cx="110" cy="170" r="4"/>
+            <text x="60" y="186" class="t-sm t-bad">MV opens</text>
+          </svg>
+        caption: "الـ loop بيلف عكس عقارب الساعة: ملء (filling) ← الـ mitral يقفل ← isovolumetric contraction ← الـ aortic يفتح ← ejection ← الـ aortic يقفل ← isovolumetric relaxation ← الـ mitral يفتح. العرض = الـ SV (EDV − ESV)."
+        alt: "Left ventricular pressure-volume loop running counterclockwise: filling along the bottom, isovolumetric contraction on the right side, ejection across the top, isovolumetric relaxation on the left side, with valve opening and closing points marked."
+        page: 291
+        quote: "Isovolumetric contraction—period between mitral valve closing and aortic valve opening; period of highest O2 consumption"
+      - kind: order
+        prompt: "رتّب مراحل الـ LV في الـ cardiac cycle، ابتداءً من قفلة الـ mitral"
+        steps:
+          - "Isovolumetric contraction"
+          - "Systolic ejection"
+          - "Isovolumetric relaxation"
+          - "Rapid filling"
+          - "Reduced filling"
+        why: "الـ mitral يقفل ← ضغط يتبني والحجم ثابت ← الـ aortic يفتح والدم يطلع ← الـ aortic يقفل والضغط يقع والحجم ثابت ← الـ mitral يفتح وملء سريع ← ملء بطيء قبل ما يقفل تاني."
+        page: 291
+        quote: "Isovolumetric relaxation—period between aortic valve closing and mitral valve opening Rapid filling—period just after mitral valve opening Reduced filling—period just before mitral valve closing"
+      - kind: aside
+        tone: exam
+        text: "أعلى ==O2 consumption== في الـ isovolumetric contraction: القلب بيعصر بكل قوته والـ valves كلها مقفولة، فالضغط بيتبني من غير ما الدم يتحرك."
+        page: 291
+        quote: "period of highest O2 consumption"
+      - kind: explain
+        title: "الأصوات الأربعة"
+        text: |-
+          - **S1**: قفلة الـ mitral والـ tricuspid. أعلى حاجة في الـ mitral area.
+          - **S2**: قفلة الـ aortic والـ pulmonary. أعلى حاجة في الـ left upper sternal border.
+          - **S3**: ==early diastole== (rapid filling). دم من الـ LA بيخبط في ESV كبير. مع ↑ filling pressures (MR، AR، HF، thyrotoxicosis) والـ dilated ventricles. ممكن يبقى طبيعي في الأطفال والشباب والرياضيين والحوامل.
+          - **S4**: ==late diastole== (atrial kick). دم داخل LV ناشف. مع الـ hypertrophy. شائع في الكبار، وغير طبيعي لو بيتحس باليد.
+
+          الاتنين (S3 و S4) أحسن حاجة على الـ apex والمريض نايم على جنبه الشمال.
+        page: 291
+        quote: "S3—in early diastole during rapid ventricular filling phase. Best heard at apex with patient in left lateral decubitus position."
+      - kind: aside
+        tone: analogy
+        text: "S3 = ==قلب واسع==: الدم بيقع في أوضة كبيرة مليانة (dilated، HF). S4 = ==قلب ناشف==: الـ atrium بيزق دم في حيطة مش عايزة تتمط (hypertrophy). S3 «Kentucky» و S4 «Tennessee» لو بتحب الإيقاع."
+        page: 291
+        quote: "S4—in late diastole (“atrial kick”). Turbulence caused by blood entering stiffened LV. Best heard at apex with patient in left lateral decubitus position. High atrial pressure. Associated with ventricular noncompliance (eg, hypertrophy)."
+      - kind: table
+        title: "موجات الـ JVP"
+        columns: ["Wave", "What it is", "Key abnormality"]
+        rows:
+          - ["a", "Atrial contraction", "Cannon a: AV dissociation; absent in AF"]
+          - ["c", "RV contraction (tricuspid bulges into RA)", ""]
+          - ["x", "Atrial relaxation + tricuspid pulled down", "Reduced/absent in TR and right HF"]
+          - ["v", "RA filling against closed tricuspid", ""]
+          - ["y", "RA emptying into RV", "Prominent in constriction; absent in tamponade"]
+        hide: [[0, 1], [2, 1], [4, 1], [0, 2], [4, 2]]
+        page: 291
+        quote: "y descent—RA emptying into RV. Prominent in constrictive pericarditis, absent in cardiac tamponade."
+      - kind: reveal
+        prompt: "ليه الـ y descent بيختفي في الـ tamponade وبيبقى عميق في الـ constrictive pericarditis؟"
+        answer: "في الـ **tamponade** السائل ضاغط على القلب طول الوقت، فالـ RA ما يقدرش يفضى في الـ RV بسهولة ← ==مافيش y descent==.\n\nفي الـ **constrictive pericarditis** الـ pericardium الناشف بيسيب الملء الأول يحصل بسرعة جداً وبعدين يوقفه مرة واحدة ← y descent عميق وسريع."
+        page: 292
+        quote: "Constrictive pericarditis (prominent y wave)"
+      - kind: check
+        question: "A patient with complete heart block has intermittent giant a waves in the neck. Why?"
+        options: ["Atrium contracts against a closed tricuspid valve", "Tricuspid regurgitation", "Atrial fibrillation", "Fast RA emptying"]
+        answer: 0
+        why:
+          - "صح: في الـ AV dissociation الـ atrium ساعات يعصر والـ tricuspid مقفول: cannon a waves."
+          - "الـ TR بيلغي الـ x descent وبيعمل cv waves كبيرة."
+          - "الـ AF بيلغي الـ a wave خالص."
+          - "تفريغ الـ RA هو الـ y descent."
+        page: 291
+        quote: "Prominent in AV dissociation (cannon a wave)"
+      - kind: table
+        title: "الـ PV loop في الـ valve disease"
+        columns: ["Lesion", "EDV", "ESV", "SV", "Clue"]
+        rows:
+          - ["Aortic stenosis", "Same (if mild)", "↑", "↓", "↑ LV pressure"]
+          - ["Aortic regurgitation", "↑", "", "↑", "No isovolumetric phase, no dicrotic notch"]
+          - ["Mitral stenosis", "↓", "↓", "↓", "↑ LA pressure"]
+          - ["Mitral regurgitation", "↑", "↓", "↑", "No isovolumetric phase, tall v wave"]
+        hide: [[0, 2], [1, 1], [2, 1], [3, 1], [3, 2]]
+        page: 292
+        quote: "↑ EDV due to ↑ LA volume/pressure from regurgitation → ↑ ventricular filling ↑ SV (forward flow into systemic circulation plus backflow into LA)"
+      - kind: reveal
+        prompt: "ليه الـ regurgitant lesions (AR و MR) مالهمش isovolumetric phase حقيقية؟"
+        answer: "عشان الـ isovolumetric معناها إن كل الـ valves مقفولة والحجم ثابت. في الـ ==MR== الدم بيهرب للـ LA أول ما الـ LV يبتدي يعصر، وفي الـ ==AR== الدم بيرجع من الـ aorta أول ما الـ LV يرتاح. فالحجم بيتغير دايماً."
+        page: 292
+        quote: "No true isovolumetric phase ↓ ESV due to ↓ resistance and ↑ regurgitation into LA during systole"
+      - kind: try
+        items: [cvs.L03.038, cvs.L03.041, cvs.L03.043, cvs.L03.046, cvs.L03.048]
+    recap:
+      - "الـ PV loop: filling ← isovolumetric contraction (أعلى O2) ← ejection ← isovolumetric relaxation."
+      - "S3 early diastole (قلب واسع)، S4 late diastole (قلب ناشف)."
+      - "JVP: cannon a في AV dissociation، مافيش a في AF، مافيش x في TR، y عميق في constriction ومافيش y في tamponade."
+      - "AS: ESV ↑ و SV ↓. AR: EDV و SV ↑. MS: كله ↓. MR: EDV ↑ و ESV ↓ و SV ↑."
+    practice: [cvs.L03.038, cvs.L03.039, cvs.L03.040, cvs.L03.041, cvs.L03.042, cvs.L03.043, cvs.L03.044, cvs.L03.045, cvs.L03.046, cvs.L03.047, cvs.L03.048, cvs.L03.049, cvs.L03.050]
+  - id: cvs.L03.lesson4
+    title: "الـ S2 splitting والـ murmurs: اسمع بمخك"
+    hook: "كل murmur ليه مكان وتوقيت وحركة بتعلّيه. اعرف الـ 3 دول وهتحل أي سؤال auscultation"
+    minutes: 10
+    pages: [293, 295]
+    topics: [splitting-of-s2, auscultation-of-the-heart, heart-murmurs]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ physiologic splitting"
+        text: |-
+          في الشهيق: الضغط في الصدر يقل ← venous return يزيد ← الـ RV يتملى أكتر ← ==الـ RV ياخد وقت أطول يفضى== ← الـ pulmonic valve يقفل متأخر. كمان الـ pulmonary impedance بيقل في الشهيق، فيأخّر P2 أكتر.
+
+          فـ A2 و P2 بيبعدوا عن بعض في الشهيق، ويرجعوا مع بعض في الزفير.
+        page: 293
+        quote: "Inspiration → drop in intrathoracic pressure → ↑ venous return → ↑ RV filling → ↑ RV stroke volume → ↑ RV ejection time → delayed closure of pulmonic valve."
+      - kind: table
+        title: "أنواع الـ splitting"
+        columns: ["Type", "Seen in", "Why"]
+        rows:
+          - ["Wide", "Pulmonic stenosis, RBBB", "RV empties late (exaggerated normal split)"]
+          - ["Fixed", "ASD", "L→R shunt keeps RV volume high in both phases"]
+          - ["Paradoxical", "Aortic stenosis, LBBB", "A2 delayed after P2; split on expiration only"]
+        hide: [[0, 1], [1, 1], [2, 1]]
+        page: 293
+        quote: "Wide splitting Seen in conditions that delay RV emptying (eg, pulmonic stenosis, right bundle branch block)."
+      - kind: reveal
+        prompt: "في الـ paradoxical splitting، ليه الـ split بيختفي في الشهيق؟"
+        answer: "الـ A2 متأخر أصلاً (AS أو LBBB)، فبيجي ==بعد== P2. في الشهيق P2 يتأخر زي العادي، فيقرّب من A2 ويلزق فيه ← الـ split يختفي. في الزفير P2 يرجع بدري فتسمع الاتنين. عكس الطبيعي بالظبط."
+        page: 293
+        quote: "On inspiration, P2 closes later and moves closer to A2, “paradoxically” eliminating the split. On expiration, the split can be heard (opposite to physiologic splitting)."
+      - kind: check
+        question: "A young woman has a split S2 that doesn't change with breathing. Most likely?"
+        options: ["Atrial septal defect", "Left bundle branch block", "Pulmonic stenosis", "Normal finding"]
+        answer: 0
+        why:
+          - "صح: الـ ASD بيعمل fixed splitting، لأن الـ shunt مالي الـ RV في الشهيق والزفير."
+          - "الـ LBBB بيعمل paradoxical splitting."
+          - "الـ pulmonic stenosis بيعمل wide splitting بيزيد في الشهيق."
+          - "الطبيعي بيتغير مع التنفس."
+        page: 293
+        quote: "Fixed splitting Heard in ASD."
+      - kind: figure
+        title: "فين تسمع كل murmur (APT M)"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <rect class="fg-thin" x="150" y="10" width="40" height="190" rx="6"/>
+            <text x="157" y="105" class="t-sm t-mut">sternum</text>
+            <circle class="fg-dot-acc" cx="130" cy="40" r="6"/>
+            <text x="10" y="36" class="t-sm t-b">A: aortic</text>
+            <text x="10" y="50" class="t-sm">AS, flow murmur</text>
+            <circle class="fg-dot-acc" cx="210" cy="40" r="6"/>
+            <text x="222" y="36" class="t-sm t-b">P: pulmonic</text>
+            <text x="222" y="50" class="t-sm">PS, ASD flow</text>
+            <circle class="fg-dot-acc" cx="200" cy="150" r="6"/>
+            <text x="180" y="180" class="t-sm t-b">T: tricuspid</text>
+            <text x="180" y="194" class="t-sm">TR, VSD</text>
+            <circle class="fg-dot-acc" cx="290" cy="155" r="6"/>
+            <text x="270" y="140" class="t-sm t-b">M: apex</text>
+            <text x="270" y="172" class="t-sm">MR, MVP, MS</text>
+            <circle class="fg-dot-bad" cx="205" cy="100" r="6"/>
+            <text x="222" y="96" class="t-sm t-b">LSB</text>
+            <text x="222" y="110" class="t-sm">HCM, AR, PR</text>
+          </svg>
+        caption: "الـ aortic area على يمين الـ sternum فوق، والـ pulmonic على شماله فوق، والـ tricuspid تحت على الشمال، والـ mitral عند الـ apex. والـ left sternal border للـ HCM والـ AR والـ PR."
+        alt: "Diagram of the chest with auscultation points: aortic area right upper sternal border, pulmonic area left upper sternal border, tricuspid area lower left sternal border, mitral area at the apex, and the left sternal border."
+        page: 294
+        quote: "Systolic murmur Hypertrophic cardiomyopathy Diastolic murmur Aortic regurgitation Pulmonic regurgitation Left sternal border"
+      - kind: explain
+        title: "الـ maneuvers: كله preload و afterload"
+        text: |-
+          القاعدة: ==معظم الـ murmurs بتعلى لما الدم يزيد== (passive leg raise، squatting) وتقل لما الدم يقل (standing، Valsalva).
+
+          الاستثناءين: ==HCM و MVP== بيعملوا العكس، لأنهم بيسوءوا لما الـ LV يصغر:
+          - LV صغير ← الـ septum يقرّب من الـ outflow (HCM أعلى).
+          - LV صغير ← الـ leaflets ترتخي وتـ prolapse بدري (click أبدري).
+
+          الـ **hand grip** (↑↑ afterload) بيعلّي الـ AR والـ MR والـ VSD، ويقلّل الـ AS (الـ gradient يقل) والـ HCM.
+
+          الـ **inspiration** بيعلّي الـ right-sided murmurs، والـ expiration بيعلّي الـ left-sided.
+        page: 294
+        quote: "Standing, Valsalva (strain phase) ↓ preload (↓ LV volume) MVP (↓ LV volume) with earlier midsystolic click HCM (↓ LV volume) Most murmurs (↓ flow through stenotic or regurgitant valve)"
+      - kind: sort
+        prompt: "لما المريض يقف من القرفصة (↓ preload)، الـ murmur ده يعلى ولا يوطى؟"
+        bins: ["Louder", "Softer"]
+        cards:
+          - { text: "Hypertrophic cardiomyopathy", bin: 0 }
+          - { text: "Mitral valve prolapse", bin: 0 }
+          - { text: "Aortic stenosis", bin: 1 }
+          - { text: "Mitral regurgitation", bin: 1 }
+          - { text: "Ventricular septal defect", bin: 1 }
+        why: "الوقوف بيقلّل الـ LV volume. الـ HCM والـ MVP بيسوءوا لما الـ LV يصغر، وباقي الـ murmurs بتوطى لأن الدم اللي بيعدّي في الـ valve قل."
+        page: 294
+        quote: "MVP (↓ LV volume) with earlier midsystolic click HCM (↓ LV volume) Most murmurs (↓ flow through stenotic or regurgitant valve)"
+      - kind: table
+        title: "الـ systolic murmurs"
+        columns: ["Lesion", "Sound", "Key clue"]
+        rows:
+          - ["Aortic stenosis", "Crescendo-decrescendo, base → carotids", "Pulsus parvus et tardus; SAD; calcification"]
+          - ["MR / TR", "Holosystolic blowing", "MR apex → axilla (post-MI, MVP); TR from RV dilatation"]
+          - ["MVP", "Late crescendo + midsystolic click", "Click = chordae tensing; endocarditis risk"]
+          - ["VSD", "Holosystolic harsh, tricuspid area", "Bigger VSD = softer murmur"]
+        hide: [[0, 1], [1, 1], [2, 1], [3, 2]]
+        page: 295
+        quote: "Crescendo-decrescendo ejection murmur, loudest at heart base, radiates to carotids"
+      - kind: mnemonic
+        word: "SAD"
+        parts:
+          - { key: "S", text: "Syncope" }
+          - { key: "A", text: "Angina" }
+          - { key: "D", text: "Dyspnea on exertion" }
+        hook: "الـ aortic stenosis بيخلّي المريض SAD (اختصار الكتاب)"
+        page: 295
+        quote: "Can lead to Syncope, Angina, Dyspnea on exertion (SAD)"
+      - kind: explain
+        title: "الـ diastolic والـ continuous"
+        text: |-
+          - **Aortic regurgitation**: early diastolic decrescendo blowing. عند الـ base لو السبب aortic root، وعند الـ left sternal border لو السبب الـ valve. ==wide pulse pressure==، pistol shot femoral pulse، نبض في الضوافر، و head bobbing لو شديد ومزمن. أسبابه **BEAR**: Bicuspid، Endocarditis، Aortic root dilation، Rheumatic fever.
+          - **Mitral stenosis**: ==opening snap== وبعده rumble متأخر. كل ما المسافة بين S2 والـ OS تقصر، كل ما الحالة أشد. سببه المميز الـ rheumatic fever، وبيعمل LA كبير و AF و Ortner و hemoptysis و right HF.
+          - **PDA**: continuous machinelike تحت الترقوة الشمال، أعلى عند S2. مع الـ congenital rubella والـ prematurity. «You need a patent for that machine».
+        page: 295
+        quote: "Early diastolic, decrescendo, high-pitched “blowing” murmur best heard at base (aortic root dilation) or left sternal border (valvular disease)"
+      - kind: reveal
+        prompt: "ليه المسافة بين S2 والـ opening snap بتقصر كل ما الـ mitral stenosis يشتد؟"
+        answer: "الـ OS بيحصل لما ضغط الـ LA يغلب ضغط الـ LV والـ valve يفتح. كل ما الـ stenosis يشتد، ==ضغط الـ LA يعلى أكتر== (LA >> LV)، فيغلب الـ LV بدري بعد قفلة الـ aortic، فالـ OS يجي أقرب لـ S2. يعني ↓ interval = ↑ severity."
+        page: 295
+        quote: "Delayed rumbling mid-to-late murmur (↓ interval between S2 and OS correlates with ↑ severity)"
+      - kind: check
+        question: "A 72-year-old man faints on exertion. Crescendo-decrescendo systolic murmur radiating to the carotids, weak delayed pulses. Cause?"
+        options: ["Age-related calcification", "Rheumatic fever", "Myxomatous degeneration", "Infective endocarditis"]
+        answer: 0
+        why:
+          - "صح: aortic stenosis فوق الـ 60 سنة = age-related calcification."
+          - "الـ rheumatic fever سببه المميز الـ mitral stenosis."
+          - "الـ myxomatous degeneration بيعمل MVP."
+          - "الـ endocarditis بيعمل regurgitation."
+        page: 295
+        quote: "Age-related calcification (>60 years old) Early-onset calcification of bicuspid aortic valve (~50-60 years old)"
+      - kind: try
+        items: [cvs.L03.052, cvs.L03.056, cvs.L03.060, cvs.L03.066, cvs.L03.068]
+    recap:
+      - "Wide: PS و RBBB. Fixed: ASD. Paradoxical: AS و LBBB."
+      - "APT M: aortic و pulmonic فوق، tricuspid تحت، mitral عند الـ apex."
+      - "معظم الـ murmurs بتعلى مع ↑ preload؛ HCM و MVP بالعكس. Hand grip يعلّي AR و MR و VSD."
+      - "AS: crescendo-decrescendo ← carotids، SAD. MS: OS ثم rumble. AR: BEAR و wide PP. PDA: machinelike."
+    practice: [cvs.L03.051, cvs.L03.052, cvs.L03.053, cvs.L03.054, cvs.L03.055, cvs.L03.056, cvs.L03.057, cvs.L03.058, cvs.L03.059, cvs.L03.060, cvs.L03.061, cvs.L03.062, cvs.L03.063, cvs.L03.064, cvs.L03.065, cvs.L03.066, cvs.L03.067, cvs.L03.068, cvs.L03.069, cvs.L03.070, cvs.L03.071, cvs.L03.072]
+  - id: cvs.L03.lesson5
+    title: "الكهربا: الـ action potentials والـ ECG"
+    hook: "ليه الـ AV node بطيء؟ وليه الـ adenosine بيوقف الـ SVT؟ كله في الـ phase 4 والـ phase 0"
+    minutes: 9
+    pages: [296, 297]
+    topics: [myocardial-action-potential, pacemaker-action-potential, electrocardiogram, natriuretic-peptides]
+    status: unverified
+    steps:
+      - kind: figure
+        title: "الـ ventricular action potential"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <line class="fg-thin" x1="30" y1="40" x2="340" y2="40"/>
+            <text x="300" y="34" class="t-sm t-mut">0 mV</text>
+            <line class="fg-thin" x1="30" y1="170" x2="340" y2="170"/>
+            <text x="290" y="186" class="t-sm t-mut">−85 mV</text>
+            <path class="fg-arrow-acc" d="M30 170 L70 170 L78 30 L95 50 L190 60 C 220 70, 240 160, 260 170 L340 170" fill="none" stroke-width="3"/>
+            <text x="50" y="100" class="t-sm t-b">0: Na+ in</text>
+            <text x="92" y="28" class="t-sm">1</text>
+            <text x="120" y="80" class="t-sm t-b">2: Ca2+ in = K+ out</text>
+            <text x="230" y="110" class="t-sm t-b">3: K+ out</text>
+            <text x="270" y="160" class="t-sm">4: rest (K+)</text>
+          </svg>
+        caption: "Phase 0 = الـ Na+ بيدخل بسرعة. Phase 1 = الـ Na+ يقفل. Phase 2 = plateau (الـ Ca2+ داخل والـ K+ طالع بيتعادلوا). Phase 3 = الـ K+ يطلع. Phase 4 = راحة."
+        alt: "Ventricular myocyte action potential with phase 0 rapid sodium upstroke, phase 1 brief repolarization, phase 2 calcium plateau, phase 3 potassium repolarization, and phase 4 resting potential near minus 85 millivolts."
+        page: 296
+        quote: "Phase 0 = rapid upstroke and depolarization— fast voltage-gated Na+ channels open."
+      - kind: explain
+        title: "الـ plateau هو سر القلب"
+        text: |-
+          في الـ **phase 2** (الكتاب بيقولها «platwo») الـ Ca2+ داخل من الـ voltage-gated Ca2+ channels وبيعادل الـ K+ الطالع. والـ Ca2+ ده بيشعلل ==Ca2+-induced Ca2+ release== من الـ SR فالخلية تنقبض (excitation-contraction coupling).
+
+          الفرق عن العضل العادي (skeletal) 3 حاجات:
+          - فيه **plateau**.
+          - محتاج Ca2+ من برا (ECF) عشان يطلّع Ca2+ من الـ SR.
+          - الخلايا متوصلة ببعض بـ ==gap junctions== فالكهربا تمشي في القلب كله.
+        page: 296
+        quote: "Phase 2 = plateau (“platwo”)—Ca2+ influx through voltage-gated Ca2+ channels balances K+ efflux. Ca2+ influx triggers Ca2+ release from SR and myocyte contraction (excitation- contraction coupling)."
+      - kind: explain
+        title: "الـ pacemaker cells مختلفة"
+        text: |-
+          في الـ **SA و AV nodes** مافيش phase 1 ولا 2:
+          - **Phase 4**: ==funny current (If)== من الـ HCN channels، تيار Na+/K+ داخل ببطء ← الخلية تعلى لوحدها لحد الـ threshold. ده سر الـ automaticity.
+          - **Phase 0**: بالـ ==Ca2+ مش الـ Na+==، لأن الـ resting potential أقل سالبية فالـ Na+ channels مقفولة على طول ← conduction بطيء. والـ AV node بيستغل ده عشان يأخّر الكهربا بين الـ atria والـ ventricles.
+          - **Phase 3**: الـ Ca2+ يقفل والـ K+ يطلع.
+        page: 296
+        quote: "Fast voltage-gated Na+ channels are permanently inactivated due to the less negative resting potential of these cells → slow conduction velocity, used by AV node to prolong transmission from atria to ventricles."
+      - kind: reveal
+        prompt: "إيه اللي بيحدد الـ heart rate؟ وإزاي الـ adenosine والـ catecholamines بيغيّروه؟"
+        answer: "==ميل الـ phase 4 في الـ SA node==. الـ ACh والـ adenosine بيقلّلوا الميل ← الخلية تاخد وقت أطول توصل الـ threshold ← HR يقل. الـ catecholamines بيعلّوا الميل (بيفتحوا HCN channels أكتر) ← HR يعلى."
+        page: 296
+        quote: "The slope of phase 4 in the SA node determines HR. ACh/adenosine ↓ the rate of diastolic depolarization and ↓ HR, while catecholamines ↑ depolarization and ↑ HR."
+      - kind: check
+        question: "A toxin abolishes the plateau of ventricular myocytes and weakens contraction, but the upstroke is intact. Which channel?"
+        options: ["L-type Ca2+ channels", "Fast Na+ channels", "HCN channels", "Delayed-rectifier K+ channels"]
+        answer: 0
+        why:
+          - "صح: الـ plateau هو Ca2+ داخل، والـ Ca2+ ده بيشغّل الانقباض."
+          - "الـ Na+ channels بتعمل الـ upstroke، وده سليم."
+          - "الـ HCN في الـ pacemaker cells بس."
+          - "قفلها كان هيطوّل الـ repolarization مش يلغي الـ plateau."
+        page: 296
+        quote: "Phase 2 = plateau (“platwo”)—Ca2+ influx through voltage-gated Ca2+ channels balances K+ efflux."
+      - kind: order
+        prompt: "رتّب طريق الكهربا في القلب"
+        steps:
+          - "SA node"
+          - "Atria (internodal tracts, Bachmann bundle)"
+          - "AV node"
+          - "Bundle of His"
+          - "Right and left bundle branches"
+          - "Purkinje fibers"
+        why: "الـ SA node في الـ crista terminalis جنب الـ SVC، والـ AV node في الـ interatrial septum جنب فتحة الـ coronary sinus وبيأخّر 100 msec عشان الـ ventricles تتملى."
+        page: 297
+        quote: "Conduction pathway: SA node → right atrium (via internodal tracts) and left atrium (via interatrial bundle/Bachmann bundle) → AV node → bundle of His → right bundle branch and left bundle branch"
+      - kind: aside
+        tone: tip
+        text: "سرعة التوصيل: His-Purkinje > Atria > Ventricles > AV node. الكتاب: «==He Parks At Ventura AVenue==». والـ pacemaker rates: SA > atria > AV > His/Purkinje/ventricles."
+        page: 297
+        quote: "Speed of conduction: His-Purkinje > Atria > Ventricles > AV node. He Parks At Ventura AVenue."
+      - kind: table
+        title: "الـ ECG"
+        columns: ["Part", "Meaning", "Normal / clue"]
+        rows:
+          - ["P wave", "Atrial depolarization", ""]
+          - ["PR interval", "Atrial start → ventricular start", "120-200 msec"]
+          - ["QRS", "Ventricular depolarization", "≤100 msec"]
+          - ["T wave", "Ventricular repolarization", "Inversion: ischemia or recent MI"]
+          - ["U wave", "", "Prominent in hypokalemia, bradycardia"]
+        hide: [[1, 2], [2, 2], [4, 2]]
+        page: 297
+        quote: "PR interval—time from start of atrial depolarization to start of ventricular depolarization (normally 120-200 msec). QRS complex—ventricular depolarization (normally ≤100 msec)."
+      - kind: explain
+        title: "ANP و BNP"
+        text: |-
+          - **ANP**: من الـ atria لما الحجم والضغط يعلوا. بيشتغل بـ ==cGMP==. بيوسّع الأوعية، ويقلّل امتصاص الـ Na+ في الـ collecting tubule، ويوسّع الـ afferent ويضيّق الـ efferent ← diuresis. وده جزء من الـ «aldosterone escape».
+          - **BNP**: من الـ ventricles لما الـ tension يعلى. نفس الشغل بس half-life أطول. التحليل بتاعه ممتاز للـ HF، خصوصاً الـ ==negative predictive value==: لو واطي، الـ HF مستبعد.
+        page: 297
+        quote: "Released from atrial myocytes in response to ↑ blood volume and atrial pressure. Acts via cGMP."
+      - kind: try
+        items: [cvs.L03.073, cvs.L03.076, cvs.L03.083, cvs.L03.084, cvs.L03.086]
+    recap:
+      - "Ventricular AP: 0 Na+، 1 Na+ يقفل، 2 Ca2+ = K+ (plateau)، 3 K+، 4 راحة."
+      - "Pacemaker: phase 4 funny current (HCN)، phase 0 بالـ Ca2+، مافيش 1 و 2."
+      - "ميل الـ phase 4 = HR؛ adenosine/ACh يقلّلوه."
+      - "He Parks At Ventura AVenue. PR 120-200، QRS ≤100. U wave = hypokalemia."
+      - "ANP من الـ atria (cGMP)، BNP من الـ ventricles (NPV عالي للـ HF)."
+    practice: [cvs.L03.073, cvs.L03.074, cvs.L03.075, cvs.L03.076, cvs.L03.077, cvs.L03.078, cvs.L03.079, cvs.L03.080, cvs.L03.081, cvs.L03.082, cvs.L03.083, cvs.L03.084, cvs.L03.085, cvs.L03.086, cvs.L03.087, cvs.L03.088]
+  - id: cvs.L03.lesson6
+    title: "الضغط بيتظبط إزاي: receptors و autoregulation و Starling forces"
+    hook: "ليه مريض الـ COPD بيعيش على الـ hypoxia؟ وليه الرئة بس اللي بتضيّق أوعيتها لما الأكسجين يقل؟"
+    minutes: 9
+    pages: [298, 299]
+    topics: [baroreceptors-chemoreceptors, normal-resting-cardiac-pressures, autoregulation, capillary-fluid-exchange]
+    status: unverified
+    steps:
+      - kind: explain
+        title: "الـ chemoreceptors"
+        text: |-
+          - **Peripheral** (carotid و aortic bodies): بتحس بـ ↑ Pco2، ↓ pH، و ==↓ Po2 (أقل من 60 mm Hg)==.
+          - **Central**: بتحس بالـ pH والـ Pco2 في سائل المخ. الـ H+ ما بيعدّيش الـ blood-brain barrier، فاللي بيأثر هو الـ CO2 اللي في الدم. ==ما بتحسش بالـ Po2 خالص==.
+        page: 298
+        quote: "Peripheral—carotid and aortic bodies are stimulated by ↑ Pco2, ↓ pH of blood, and ↓ Po2 (<60 mm Hg)."
+      - kind: reveal
+        prompt: "مريض COPD عنده Pco2 عالي من سنين. إيه اللي بقى بيخلّيه يتنفس؟"
+        answer: "الـ central chemoreceptors ==اتعودت== على الـ Pco2 العالي وبقت أقل حساسية، فهو بقى معتمد على الـ **peripheral chemoreceptors** اللي بتحس بالـ O2 الواطي عشان تشغّل التنفس."
+        page: 298
+        quote: "Central chemoreceptors become less sensitive with chronically ↑ Pco2 (eg, COPD) → ↑ dependence on peripheral chemoreceptors to detect ↓ O2 to drive respiration."
+      - kind: figure
+        title: "الـ baroreceptor reflex"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="cvs3b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="10" y="20" width="110" height="40" rx="8"/>
+            <text x="18" y="38" class="t-sm t-b">Carotid sinus</text>
+            <text x="18" y="52" class="t-sm">CN IX</text>
+            <rect class="fg-box" x="10" y="80" width="110" height="40" rx="8"/>
+            <text x="18" y="98" class="t-sm t-b">Aortic arch</text>
+            <text x="18" y="112" class="t-sm">CN X</text>
+            <rect class="fg-acc" x="160" y="45" width="100" height="50" rx="8"/>
+            <text x="168" y="66" class="t-sm t-b">NTS (medulla)</text>
+            <text x="168" y="82" class="t-sm">integrates</text>
+            <path class="fg-arrow" d="M120 40 L158 60" marker-end="url(#cvs3b)"/>
+            <path class="fg-arrow" d="M120 100 L158 80" marker-end="url(#cvs3b)"/>
+            <rect class="fg-good" x="200" y="130" width="150" height="60" rx="8"/>
+            <text x="208" y="150" class="t-sm t-b">BP falls:</text>
+            <text x="208" y="166" class="t-sm">↑ sympathetic, ↓ vagal</text>
+            <text x="208" y="182" class="t-sm">↑ HR, ↑ contractility, ↑ SVR</text>
+            <path class="fg-arrow" d="M230 95 L260 128" marker-end="url(#cvs3b)"/>
+          </svg>
+        caption: "الـ carotid sinus بيبعت على CN IX، والـ aortic arch على CN X، والاتنين للـ nucleus tractus solitarius. لو الضغط وقع: الـ stretch يقل ← الـ firing يقل ← sympathetic يعلى و vagus يقل ← الضغط يرجع."
+        alt: "Baroreceptor reflex diagram: carotid sinus via cranial nerve nine and aortic arch via cranial nerve ten send signals to the nucleus tractus solitarius in the medulla, which, when blood pressure falls, raises sympathetic and lowers vagal outflow."
+        page: 298
+        quote: "Baroreceptors—via aortic arch (CN X) and carotid sinus (CN IX) → nucleus tractus solitarius of medulla; detect arterial pressure changes."
+      - kind: explain
+        title: "لما الـ reflex يزوّدها"
+        text: |-
+          - **Carotid sinus hypersensitivity**: حلاقة الرقبة، كرافتة ضيقة، أو carotid massage ← ضغط على الـ carotid sinus ← firing يعلى ← الـ AV node refractory period يطول ← HR يقع + vasodilation ← ==presyncope أو syncope==. بيزيد مع الـ atherosclerosis، عملية قديمة في الرقبة، والسن.
+          - **Cushing reflex**: ==hypertension + bradycardia + respiratory depression==. ضغط المخ يعلى ← ischemia ← CO2 يعلى ← الجسم يعلّي الضغط عشان يوصل دم للمخ ← الـ baroreceptors تحس بالضغط العالي فتعمل bradycardia.
+        page: 298
+        quote: "Component of Cushing reflex (triad of hypertension, bradycardia, and respiratory depression)"
+      - kind: check
+        question: "An older man nearly faints while shaving his neck. Which nerve carries the afferent signal?"
+        options: ["Glossopharyngeal (CN IX)", "Vagus (CN X) from the aortic arch", "Phrenic", "Hypoglossal"]
+        answer: 0
+        why:
+          - "صح: الـ carotid sinus بيبعت على الـ glossopharyngeal للـ nucleus tractus solitarius."
+          - "الـ aortic arch على الـ vagus، بس الحلاقة بتضغط على الـ carotid sinus."
+          - "الـ phrenic للـ pericardium والـ diaphragm."
+          - "الـ hypoglossal motor للسان."
+        page: 298
+        quote: "Carotid sinus hypersensitivity—elicited by carotid massage, shaving, tight necktie or shirt collar."
+      - kind: aside
+        tone: trap
+        text: "الـ ==PCWP== (بالـ Swan-Ganz catheter) بيقيس الـ LA pressure والـ LVEDP، ==إلا في الـ mitral stenosis==: الـ valve الضيق بيفصل بينهم، فالـ PCWP يبقى أعلى من الـ LVEDP."
+        page: 298
+        quote: "Pulmonary capillary wedge pressure (PCWP; mm Hg) estimates left atrial pressure and LV end-diastolic pressure (LVEDP), except in mitral stenosis, where PCWP > LVEDP. Measured via Swan-Ganz catheter."
+      - kind: match
+        prompt: "وصّل كل عضو بالحاجة اللي بتظبط الـ blood flow بتاعه"
+        pairs:
+          - ["Lungs", "Hypoxia causes vasoconstriction"]
+          - ["Heart", "NO, CO2, ↓ O2"]
+          - ["Brain", "CO2 (pH)"]
+          - ["Kidneys", "Myogenic + tubuloglomerular feedback"]
+          - ["Skin", "Sympathetic vasoconstriction"]
+        why: "كل عضو بيستخدم اللي يناسبه: المخ حساس للـ CO2، والقلب للـ metabolites، والكلية للـ stretch، والجلد للحرارة. والرئة الوحيدة اللي بتضيّق مع الـ hypoxia."
+        page: 299
+        quote: "Lungs Hypoxia causes vasoconstriction Heart Local metabolites (vasodilatory): NO, CO2, ↓ O2 Brain Local metabolites (vasodilatory): CO2 (pH) Kidneys Myogenic (stretch-dependent response of afferent arteriole) and tubuloglomerular feedback"
+      - kind: reveal
+        prompt: "ليه الرئة بالذات بتضيّق أوعيتها مع الـ hypoxia، وكل الأعضاء التانية بتوسّع؟"
+        answer: "عشان الرئة مش محتاجة أكسجين من الدم، هي اللي بتدّيه. لو حتة من الرئة مش بتتهوّى كويس، مالوش لازمة الدم يروحلها. فبتضيّق أوعيتها ==والدم يروح للحتت اللي بتتهوّى==. باقي الأعضاء لما الأكسجين يقل محتاجة دم أكتر فبتوسّع."
+        page: 299
+        quote: "The pulmonary vasculature is unique in that alveolar hypoxia causes vasoconstriction so that only well-ventilated areas are perfused. In other organs, hypoxia causes vasodilation"
+      - kind: mnemonic
+        word: "CHALK"
+        parts:
+          - { key: "C", text: "CO2" }
+          - { key: "H", text: "H+" }
+          - { key: "A", text: "Adenosine" }
+          - { key: "L", text: "Lactate" }
+          - { key: "K", text: "K+" }
+        hook: "الـ metabolites اللي بتوسّع أوعية العضل في الـ exercise (اختصار الكتاب). وفي الراحة: sympathetic tone."
+        page: 299
+        quote: "Skeletal muscle Local metabolites during exercise (vasodilatory): CHALK CO2, H+ , Adenosine, Lactate, K+ At rest: sympathetic tone in arteries"
+      - kind: explain
+        title: "Starling forces والـ edema"
+        text: |-
+          4 قوى بتحرّك السائل في الـ capillary:
+          - **Pc** (hydrostatic جوه): بيزق برا.
+          - **Pi** (hydrostatic برا): بيزق جوه.
+          - **πc** (oncotic جوه، البروتين): بيشد جوه.
+          - **πi** (oncotic برا): بيشد برا.
+
+          ==Jv = Kf [(Pc − Pi) − σ(πc − πi)]==.
+
+          الـ edema بيحصل لما: Pc يعلى (HF)، Kf يعلى (toxins، infections، burns)، πi يعلى (lymphatic blockage)، أو πc يقل (nephrotic، liver failure، malnutrition).
+        page: 299
+        quote: "Jv = net fluid flow = Kf [(Pc − Pi) − σ(πc − πi)] Kf = capillary permeability to fluid σ = reflection coefficient (measure of capillary impermeability to protein)"
+      - kind: check
+        question: "A boy with nephrotic syndrome (albumin 1.8 g/dL) has edema. Which Starling force changed?"
+        options: ["↓ plasma oncotic pressure (πc)", "↑ capillary hydrostatic pressure (Pc)", "↑ capillary permeability (Kf)", "↑ interstitial oncotic pressure (πi)"]
+        answer: 0
+        why:
+          - "صح: البروتين ضاع في البول ← πc يقل ← السائل ما بيرجعش للـ capillary."
+          - "ده الـ HF."
+          - "ده الـ burns والـ toxins والـ infections."
+          - "ده الـ lymphatic blockage."
+        page: 299
+        quote: "↓ plasma proteins (↓ πc; eg, nephrotic syndrome, liver failure, protein malnutrition)"
+      - kind: try
+        items: [cvs.L03.090, cvs.L03.091, cvs.L03.094, cvs.L03.098, cvs.L03.103]
+    recap:
+      - "Peripheral chemoreceptors بتحس بالـ Po2 تحت 60؛ central لأ. COPD ← معتمد على الـ hypoxic drive."
+      - "Carotid sinus ← CN IX، aortic arch ← CN X، للـ NTS."
+      - "Carotid sinus hypersensitivity ← syncope؛ Cushing = hypertension + bradycardia + respiratory depression."
+      - "PCWP = LA pressure، إلا في MS (PCWP > LVEDP)."
+      - "الرئة بتضيّق مع الـ hypoxia؛ CHALK للعضل."
+      - "Edema: ↑ Pc، ↑ Kf، ↑ πi، ↓ πc."
+    practice: [cvs.L03.089, cvs.L03.090, cvs.L03.091, cvs.L03.092, cvs.L03.093, cvs.L03.094, cvs.L03.095, cvs.L03.096, cvs.L03.097, cvs.L03.098, cvs.L03.099, cvs.L03.100, cvs.L03.101, cvs.L03.102, cvs.L03.103, cvs.L03.104]

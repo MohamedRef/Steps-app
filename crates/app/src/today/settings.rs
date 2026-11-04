@@ -1,4 +1,5 @@
-//! Settings › Review: desired retention and new items a day. The export of
+//! Settings › Review: desired retention, new items a day, and whether new
+//! items wait for their First Aid page to be read. The export of
 //! his content checks and the backup rows live in Settings › Your data.
 
 use dioxus::prelude::*;
@@ -15,6 +16,7 @@ pub fn StudySection() -> Element {
     let personal = settings.fsrs.as_ref().map(|p| p.reviews);
     // With an exam day the plan sets the new items, so only its number shows (#99).
     let plan_new = crate::plan::target_now(&*review.backend.borrow()).map(|t| t.new_goal());
+    let gate = review.backend.borrow().pages().gate_on();
 
     rsx! {
         style { {super::CSS.text()} }
@@ -63,7 +65,35 @@ pub fn StudySection() -> Element {
                 }
             }
         }
+        crate::ui::Card { class: "",
+            label { class: "st-switch",
+                span { class: "st-switch-text",
+                    h2 { {tx::PAGE_GATE} }
+                    span { class: "muted small", {tx::PAGE_GATE_NOTE} }
+                }
+                input {
+                    r#type: "checkbox",
+                    role: "switch",
+                    checked: gate,
+                    onchange: {
+                        let review = review.clone();
+                        move |e: Event<FormData>| save_gate(&review, e.checked())
+                    },
+                }
+            }
+        }
     }
+}
+
+fn save_gate(review: &crate::store::Review, on: bool) {
+    let backend = review.backend.clone();
+    crate::persistence::save(crate::store::pages::GATE_KEY, move || {
+        if backend.borrow_mut().set_page_gate(on) {
+            Ok(())
+        } else {
+            Err("The page gate could not be saved".into())
+        }
+    });
 }
 
 fn retention_hint(r: Retention) -> &'static str {

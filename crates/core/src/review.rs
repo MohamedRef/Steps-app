@@ -314,6 +314,11 @@ pub trait StudyStore {
     fn new_left_today(&self, _now_ms: i64) -> usize {
         usize::MAX
     }
+    /// The First Aid pages read, when the page gate is on: new items start
+    /// only from these pages (`session::Inputs::pages`). `None` = no gate.
+    fn pages_read(&self) -> Option<&crate::pages::PagesRead> {
+        None
+    }
     /// The interval in days each grade (Again, Hard, Good, Easy) would give
     /// the item now, for "1d · 3d · 9d" on the grade buttons.
     fn intervals(&self, _item_id: &str, _now_ms: i64) -> Option<[f32; 4]> {

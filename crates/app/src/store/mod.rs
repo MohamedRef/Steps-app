@@ -12,6 +12,7 @@ pub mod export;
 pub mod import;
 mod install;
 pub mod own;
+pub mod pages;
 mod paths;
 pub mod sync;
 
