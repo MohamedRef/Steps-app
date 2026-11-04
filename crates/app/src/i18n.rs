@@ -604,6 +604,11 @@ pub mod metacog {
     pub const WAS_SURE_HINT: &str = "غلطة كنت متأكد منها: دي أهم حاجة تتراجع، فبتيجي الأول.";
     pub const ALL_REASONS: &str = "الكل";
     pub const BY_REASON: &str = "حسب السبب";
+    /// The mistakes view: misses he was sure of, back for one more try.
+    pub const RETEST_TITLE: &str = "جرّب تاني اللي كنت متأكد منه";
+    pub const RETEST_BODY: &str = "غلطات كنت متأكد منها من يومين لأسبوع. الغلطة دي بتتصلح بسرعة بس بتتنسي لو ما اتراجعتش، فمحاولة واحدة دلوقتي بتثبّتها.";
+    pub const RETEST_START: &str = "جرّب الكروت";
+    pub const RETEST_MCQS: &str = "جرّب الأسئلة";
 }
 
 pub mod bank {

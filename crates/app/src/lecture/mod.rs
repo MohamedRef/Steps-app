@@ -388,6 +388,7 @@ fn PagesRead(first: u32, last: u32) -> Element {
                     input {
                         r#type: "number",
                         inputmode: "numeric",
+                        aria_label: tx::READ_UPTO,
                         min: "{first}",
                         max: "{last}",
                         value: "{upto}",

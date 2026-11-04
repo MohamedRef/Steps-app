@@ -541,6 +541,42 @@ pub fn mistakes_session(groups: &[MistakeGroup]) -> Vec<String> {
     all.into_iter().map(|m| m.item_id.clone()).collect()
 }
 
+/// A miss he was sure of comes back for one more test this many days later
+/// (high-confidence errors are corrected well but relapse if not re-tested,
+/// Butler 2011), until it has been answered on a later day.
+pub const RETEST_AFTER_DAYS: std::ops::RangeInclusive<i64> = 2..=7;
+
+/// Items to re-test now: a miss he was sure of 2 to 7 days ago, not
+/// answered since that day. Oldest miss first; rejected items left out.
+pub fn retest_due(
+    lectures: &[Lecture],
+    events: &[ReviewEvent],
+    marks: &BTreeMap<String, Status>,
+    clock: Clock,
+) -> Vec<String> {
+    let status: HashMap<&str, Status> = lectures
+        .iter()
+        .flat_map(|l| &l.items)
+        .map(|i| (i.id.as_str(), status_of(&i.id, i.status, marks)))
+        .collect();
+    let today = clock.today();
+    let mut due: Vec<(i64, String)> = Vec::new();
+    for (id, answers) in answers_by_item(events) {
+        if status.get(id).is_none_or(|s| *s == Status::Rejected) {
+            continue;
+        }
+        let Some(miss) = answers.iter().rev().find(|e| e.sure_miss()) else { continue };
+        let miss_day = clock.day_of(miss.at_ms);
+        let age = (today.0 - miss_day.0) as i64;
+        let tested_since = answers.iter().any(|e| clock.day_of(e.at_ms).0 > miss_day.0);
+        if RETEST_AFTER_DAYS.contains(&age) && !tested_since {
+            due.push((miss.at_ms, id.to_string()));
+        }
+    }
+    due.sort();
+    due.into_iter().map(|(_, id)| id).collect()
+}
+
 /// How many mistakes in the log carry each reason, in [`ErrorReason::ALL`]
 /// order, reasons with none left out; then how many have no reason.
 pub fn mistake_reasons(groups: &[MistakeGroup]) -> (Vec<(ErrorReason, u32)>, u32) {
@@ -791,6 +827,23 @@ items:
         assert!(m3.sure);
         assert_eq!(m3.reason, Some(ErrorReason::Misread));
         assert_eq!(mistakes_session(&log), ["cvs.L04.003", "cvs.L04.002", "cvs.L04.001"]);
+    }
+
+    #[test]
+    fn sure_misses_come_back_for_a_retest_after_two_days() {
+        let sure = |id: &str, days_ago| tagged(id, days_ago, Some(Confidence::Sure), None);
+        let events = [
+            sure("cvs.L04.001", 3), // due: not answered since
+            sure("cvs.L04.002", 1), // too soon
+            sure("cvs.L04.003", 5), // answered on a later day: done
+            ev("cvs.L04.003", Grade::Good, 2),
+            sure("cvs.L04.004", 3),                                  // rejected
+            tagged("cvs.L04.002", 9, Some(Confidence::Guess), None), // a guess is no surprise
+        ];
+        assert_eq!(retest_due(&lectures(), &events, &marks(), clock()), ["cvs.L04.001"]);
+        // A week and a day later it has had its chance.
+        let late = [sure("cvs.L04.001", 8)];
+        assert!(retest_due(&lectures(), &late, &marks(), clock()).is_empty());
     }
 
     #[test]
