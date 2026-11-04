@@ -17,7 +17,8 @@ mod embedded {
 }
 
 /// The per-course glossaries, `content/glossary/<course>.yaml` (build.rs).
-pub const GLOSSARY_PARTS: &[&str] = embedded::GLOSSARY_PARTS;
+/// Each course's glossary file, as (course id, YAML).
+pub const GLOSSARY_PARTS: &[(&str, &str)] = embedded::GLOSSARY_PARTS;
 
 pub struct Library {
     pub index: Index,
