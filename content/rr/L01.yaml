@@ -23,7 +23,7 @@ items:
     kind: card
     topic: biochemistry
     front: "Lesch-Nyhan syndrome: what is the mechanism?"
-    back: "HGPRT deficiency → ↓ purine salvage → ↑ de novo purine synthesis → ↑ uric acid. (First Aid p. 35)"
+    back: "Without HGPRT, purines can't be salvaged, so the cell makes more from scratch (de novo) → excess uric acid. (First Aid p. 35)"
     src: { page: 708, quote: "Lesch-Nyhan syndrome HGPRT deficiency → ↓ purine salvage → ↑ de novo purine synthesis → ↑ uric acid" }
     status: unverified
   - id: rr.L01.002
@@ -43,7 +43,7 @@ items:
     kind: card
     topic: biochemistry
     front: "Osteogenesis imperfecta: what is the mechanism?"
-    back: "Mutation in COL1A1 and COL1A2 → type 1 collagen defect → inability to form triple helices. (First Aid p. 49)"
+    back: "COL1A1/COL1A2 mutations → faulty type I collagen that can't wind into triple helices. (First Aid p. 49)"
     src: { page: 708, quote: "Osteogenesis imperfecta Mutation in COL1A1 and COL1A2 genes → Type 1 collagen defect → inability to form triple helices" }
     status: unverified
   - id: rr.L01.005
@@ -119,7 +119,7 @@ items:
     topic: biochemistry
     front: "Bitot spots in vitamin A deficiency: what is the mechanism?"
     back: "↓ differentiation of epithelial cells into specialized tissue → conjunctival squamous metaplasia → keratin buildup. (First Aid p. 64)"
-    src: { page: 708, quote: "differentiation of epithelial cells into specialized tissue → conjunctival squamous metaplasia → keratin buildup" }
+    src: { page: 708, quote: "↓ differentiation of epithelial cells into specialized tissue → conjunctival squamous metaplasia → keratin buildup" }
     status: unverified
   - id: rr.L01.016
     kind: card
@@ -145,14 +145,14 @@ items:
     kind: card
     topic: biochemistry
     front: "Aspirin-induced hyperthermia: what is the mechanism?"
-    back: "↑ permeability of the inner mitochondrial membrane → ↓ proton gradient and ↑ O2 consumption (uncoupling) → heat production. (First Aid p. 76)"
-    src: { page: 708, quote: "permeability of inner mitochondrial membrane → ↓ proton gradient and ↑ O2 consumption (uncoupling) → heat production" }
+    back: "Aspirin makes the inner mitochondrial membrane leaky to protons: the gradient collapses, O2 use rises and the energy is released as heat instead of ATP (uncoupling). (First Aid p. 76)"
+    src: { page: 708, quote: "↑ permeability of inner mitochondrial membrane → ↓ proton gradient and ↑ O2 consumption (uncoupling) → heat production" }
     status: unverified
   - id: rr.L01.020
     kind: card
     topic: biochemistry
     front: "Hereditary fructose intolerance: what is the mechanism?"
-    back: "Aldolase B deficiency → fructose-1-phosphate accumulation → ↓ available phosphate → inhibition of glycogenolysis and gluconeogenesis. (First Aid p. 78)"
+    back: "No aldolase B, so fructose-1-phosphate piles up and traps phosphate; with too little free phosphate, glycogenolysis and gluconeogenesis stall. (First Aid p. 78)"
     src: { page: 708, quote: "Aldolase B deficiency → Fructose-1-phosphate accumulation → ↓ available phosphate → inhibition of glycogenolysis and gluconeogenesis" }
     status: unverified
   - id: rr.L01.021
@@ -162,22 +162,22 @@ items:
     options:
       - "Accumulated fructose-1-phosphate traps phosphate, inhibiting glycogenolysis and gluconeogenesis"
       - "Accumulated fructose is converted by hexokinase to fructose-6-phosphate"
-      - "Thiamine deficiency impairs glucose breakdown"
-      - "Protein malnutrition decreases apolipoprotein synthesis"
-      - "Uncoupling of oxidative phosphorylation wastes energy as heat"
+      - "Galactose-1-phosphate uridyltransferase deficiency traps galactose-1-phosphate"
+      - "Glucose-6-phosphatase deficiency blocks the final step of glycogenolysis and gluconeogenesis"
+      - "Medium-chain acyl-CoA dehydrogenase deficiency blocks fatty acid oxidation"
     answer: 0
     why:
       - "Right. Aldolase B deficiency → fructose-1-phosphate builds up → ↓ available phosphate → glycogenolysis and gluconeogenesis stop → hypoglycemia."
       - "This is essential fructosuria (fructokinase deficiency): the hexokinase pathway handles the fructose and the child stays well."
-      - "Thiamine deficiency (Wernicke) causes ATP depletion worsened by glucose; it doesn't follow a first fruit meal in an infant."
-      - "↓ apolipoprotein synthesis explains the fatty liver of kwashiorkor, a chronic protein malnutrition."
-      - "Uncoupling (eg, aspirin) explains hyperthermia, not hypoglycemia after fructose."
+      - "Classic galactosemia (GALT deficiency) also gives hypoglycemia, hepatomegaly and reducing sugars in urine, but it starts with breast milk (lactose), which he tolerated; table sugar has no galactose."
+      - "Von Gierke disease causes fasting hypoglycemia from birth with lactic acidosis, not symptoms right after a first fruit meal."
+      - "MCAD deficiency gives hypoketotic hypoglycemia after fasting or illness, not after eating fructose, and no reducing sugar in urine."
     src: { page: 708, quote: "Aldolase B deficiency → Fructose-1-phosphate accumulation → ↓ available phosphate → inhibition of glycogenolysis and gluconeogenesis" }
     status: unverified
   - id: rr.L01.022
     kind: card
     topic: biochemistry
-    front: "Essential fructosuria: what is the mechanism, and why is it benign?"
+    front: "Essential fructosuria: what is the mechanism?"
     back: "Fructokinase deficiency → ↑ fructose; the hexokinase pathway converts fructose to fructose-6-phosphate. (First Aid p. 78)"
     src: { page: 709, quote: "Fructokinase deficiency → ↑ fructose; hexokinase pathway converts fructose to fructose-6-phosphate" }
     status: unverified
@@ -225,7 +225,7 @@ items:
   - id: rr.L01.029
     kind: mcq
     topic: immunology
-    stem: "A 31-year-old man comes to the physician for fatigue and dark urine that is worst on waking. Hemoglobin is 9.1 g/dL, reticulocytes are increased, LDH is high and haptoglobin is undetectable. A direct antiglobulin (Coombs) test is negative. Flow cytometry shows red cells lacking CD55 and CD59. An acquired mutation in which gene is the underlying cause?"
+    stem: "A 31-year-old man comes to the physician for fatigue and dark urine that is worst on waking. Hemoglobin is 9.1 g/dL, reticulocytes are increased, LDH is high and haptoglobin is undetectable. A direct antiglobulin (Coombs) test is negative. An acquired mutation in which gene is the underlying cause?"
     options:
       - "BTK"
       - "PIGA"
@@ -323,7 +323,7 @@ items:
     topic: immunology
     front: "Candida infection in immunodeficiency: which deficits allow systemic vs local (mucocutaneous) Candida infection?"
     back: "↓ granulocytes → systemic infection; ↓ T cells → local infection. (First Aid pp. 114, 116)"
-    src: { page: 709, quote: "granulocytes (systemic), ↓ T cells (local)" }
+    src: { page: 709, quote: "↓ granulocytes (systemic), ↓ T cells (local)" }
     status: unverified
   - id: rr.L01.042
     kind: card
@@ -338,7 +338,7 @@ items:
     topic: microbiology
     front: "Why are patients with CGD prone to recurrent S aureus, Serratia and B cepacia infections?"
     back: "These catalase ⊕ organisms degrade H2O2 before it can be converted to microbicidal products by the myeloperoxidase system. (First Aid p. 126)"
-    src: { page: 709, quote: "organisms degrade H2O2 before it can be converted to microbicidal products by the myeloperoxidase system" }
+    src: { page: 709, quote: "⊕ organisms degrade H2O2 before it can be converted to microbicidal products by the myeloperoxidase system" }
     status: unverified
   - id: rr.L01.044
     kind: card
@@ -542,7 +542,7 @@ items:
     topic: pathology
     front: "Tissue invasion by cancer: what are the steps?"
     back: "↓ E-cadherin function → ↓ intercellular junctions → basement membrane and ECM degradation by metalloproteinases → cell attachment to ECM proteins (laminin, fibronectin) → locomotion → vascular dissemination. (First Aid p. 217)"
-    src: { page: 710, quote: "E-cadherin function → ↓ intercellular junctions → basement membrane and ECM degradation by metalloproteinases" }
+    src: { page: 710, quote: "↓ E-cadherin function → ↓ intercellular junctions → basement membrane and ECM degradation by metalloproteinases" }
     status: unverified
   # ---------- Cardiovascular ----------
   - id: rr.L01.070
@@ -583,8 +583,8 @@ items:
   - id: rr.L01.075
     kind: card
     topic: cardiovascular
-    front: "Thoracic aortic aneurysm: what is the mechanism, and which infection is associated?"
-    back: "Cystic medial degeneration; associated with tertiary (3°) syphilis. (First Aid p. 306)"
+    front: "Thoracic aortic aneurysm: what is the mechanism?"
+    back: "Degeneration of the cystic media of the aortic wall (cystic medial degeneration). (First Aid p. 306)"
     src: { page: 711, quote: "Thoracic aortic aneurysm Cystic medial degeneration; associated with 3° syphilis" }
     status: unverified
   - id: rr.L01.076
@@ -650,8 +650,8 @@ items:
   - id: rr.L01.083
     kind: card
     topic: cardiovascular
-    front: "Hypertrophic obstructive cardiomyopathy (HOCM): what is the mechanism, and the usual cause of death?"
-    back: "Sarcomere protein gene mutation → asymmetric septal hypertrophy (sarcomeres added in parallel); death is due to arrhythmia. (First Aid p. 315)"
+    front: "Hypertrophic obstructive cardiomyopathy (HOCM): what is the mechanism?"
+    back: "A sarcomere protein gene mutation adds sarcomeres in parallel → asymmetric septal hypertrophy. (First Aid p. 315)"
     src: { page: 711, quote: "Sarcomere protein gene mutation → asymmetric septal hypertrophy (sarcomeres added in parallel); death due to arrhythmia" }
     status: unverified
   - id: rr.L01.084
@@ -714,8 +714,8 @@ items:
     kind: card
     topic: endocrine
     front: "Why is the hyponatremia of SIADH euvolemic?"
-    back: "↑ ADH → water retention → ↓ aldosterone, ↑ ANP and ↑ BNP → ↑ urinary Na⁺ secretion. (First Aid p. 342)"
-    src: { page: 711, quote: "ADH → water retention → ↓ aldosterone, ↑ ANP, ↑ BNP → ↑ urinary Na" }
+    back: "↑ ADH → water retention → ↓ aldosterone, ↑ ANP and ↑ BNP → ↑ urinary Na⁺ excretion (book: secretion), which keeps the volume normal. (First Aid p. 342)"
+    src: { page: 711, quote: "↑ ADH → water retention → ↓ aldosterone, ↑ ANP, ↑ BNP → ↑ urinary Na" }
     status: unverified
   - id: rr.L01.093
     kind: mcq
@@ -729,12 +729,12 @@ items:
       - "Hypoaldosteronism → ↑ K⁺ → ↓ NH3 synthesis"
     answer: 0
     why:
-      - "Right. ↑ ADH → water retention → ↓ aldosterone, ↑ ANP, ↑ BNP → ↑ urinary Na⁺ secretion, which keeps him euvolemic."
+      - "Right. ↑ ADH → water retention → ↓ aldosterone, ↑ ANP, ↑ BNP → ↑ urinary Na⁺ excretion (book: secretion), which keeps him euvolemic."
       - "Adrenal insufficiency also wastes salt, but primary adrenal destruction would raise potassium; his potassium is normal, and the central lung mass with euvolemia points to ectopic ADH."
       - "He takes no diuretic and is not volume depleted."
       - "Hyperglycemic osmotic diuresis is HHS; it would make him dehydrated with high serum osmolality."
       - "That is type 4 RTA, which gives hyperkalemic metabolic acidosis, not euvolemic hyponatremia."
-    src: { page: 711, quote: "ADH → water retention → ↓ aldosterone, ↑ ANP, ↑ BNP → ↑ urinary Na" }
+    src: { page: 711, quote: "↑ ADH → water retention → ↓ aldosterone, ↑ ANP, ↑ BNP → ↑ urinary Na" }
     status: unverified
   - id: rr.L01.094
     kind: card
@@ -748,7 +748,7 @@ items:
     topic: endocrine
     front: "Myxedema in hypothyroidism: what is the mechanism?"
     back: "↑ GAGs in the interstitial space → ↑ osmotic pressure → ↑ water retention. (First Aid p. 344)"
-    src: { page: 711, quote: "GAGs in interstitial space → ↑ osmotic pressure → ↑ water retention" }
+    src: { page: 711, quote: "↑ GAGs in interstitial space → ↑ osmotic pressure → ↑ water retention" }
     status: unverified
   - id: rr.L01.096
     kind: card
@@ -783,7 +783,7 @@ items:
     topic: endocrine
     front: "Diabetic ketoacidosis: what is the mechanism?"
     back: "↓ insulin or ↑ insulin requirement → ↑ lipolysis → ↑ free fatty acid oxidation → ↑ ketogenesis. (First Aid p. 351)"
-    src: { page: 712, quote: "insulin or ↑ insulin requirement → ↑ lipolysis → ↑ free fatty acid oxidation → ↑ ketogenesis" }
+    src: { page: 712, quote: "↓ insulin or ↑ insulin requirement → ↑ lipolysis → ↑ free fatty acid oxidation → ↑ ketogenesis" }
     status: unverified
   - id: rr.L01.101
     kind: card
@@ -825,14 +825,14 @@ items:
     kind: card
     topic: gastrointestinal
     front: "Achalasia: what is the mechanism?"
-    back: "Degeneration of inhibitory neurons in the myenteric plexus of the esophageal wall → failure of LES relaxation. (First Aid p. 383)"
+    back: "The inhibitory neurons of the esophageal myenteric plexus degenerate, so the LES cannot relax. (First Aid p. 383)"
     src: { page: 712, quote: "Degeneration of inhibitory neurons in myenteric plexus of esophageal wall → failure of LES relaxation" }
     status: unverified
   - id: rr.L01.107
     kind: card
     topic: gastrointestinal
     front: "Barrett esophagus: what is the mechanism?"
-    back: "Chronic GERD → metaplasia of nonkeratinized stratified squamous epithelium to intestinal epithelium (nonciliated columnar with goblet cells). (First Aid p. 385)"
+    back: "Long-standing GERD turns the normal nonkeratinized squamous lining into intestinal-type epithelium (columnar cells with goblet cells): metaplasia. (First Aid p. 385)"
     src: { page: 712, quote: "Chronic GERD → metaplasia of nonkeratinized stratified squamous epithelium to intestinal epithelium (nonciliated columnar with goblet cells)" }
     status: unverified
   - id: rr.L01.108
@@ -867,7 +867,7 @@ items:
     kind: card
     topic: gastrointestinal
     front: "Hirschsprung disease: what is the mechanism?"
-    back: "Loss-of-function mutation in RET → failure of neural crest migration → lack of ganglion cells/enteric nervous plexuses in the distal colon. (First Aid p. 391)"
+    back: "A loss-of-function RET mutation stops neural crest cells from migrating, so the distal colon has no ganglion cells in its enteric plexuses. (First Aid p. 391)"
     src: { page: 712, quote: "Loss of function mutation in RET → failure of neural crest migration → lack of ganglion cells/enteric nervous plexuses in distal colon" }
     status: unverified
   - id: rr.L01.113
@@ -900,8 +900,8 @@ items:
   - id: rr.L01.117
     kind: card
     topic: gastrointestinal
-    front: "α1-antitrypsin deficiency: what happens in the liver and in the lungs?"
-    back: "Liver: misfolded proteins aggregate in the hepatocellular ER → cirrhosis. Lungs: ↓ α1-antitrypsin → uninhibited elastase in alveoli → panacinar emphysema. (First Aid p. 400)"
+    front: "α1-antitrypsin deficiency: what happens in the liver?"
+    back: "Misfolded α1-antitrypsin clumps in the ER of hepatocytes → cirrhosis. (First Aid p. 400)"
     src: { page: 712, quote: "Liver: misfolded proteins aggregate in hepatocellular ER → cirrhosis; lungs: ↓ α1-antitrypsin → uninhibited elastase in alveoli → panacinar emphysema" }
     status: unverified
   - id: rr.L01.118
@@ -963,7 +963,7 @@ items:
     topic: hematology-oncology
     front: "Rh hemolytic disease of the newborn: what is the mechanism?"
     back: "An Rh ⊝ mother forms antibodies (maternal anti-D IgG) against the RBCs of an Rh ⊕ fetus. (First Aid p. 411)"
-    src: { page: 713, quote: "mother forms antibodies (maternal anti-D IgG) against RBCs of Rh" }
+    src: { page: 713, quote: "⊝ mother forms antibodies (maternal anti-D IgG) against RBCs of Rh" }
     status: unverified
   - id: rr.L01.125
     kind: card
@@ -1004,21 +1004,21 @@ items:
     topic: hematology-oncology
     front: "Glanzmann thrombasthenia: what is the mechanism?"
     back: "↓ GpIIb/IIIa → ↓ platelet-to-platelet aggregation, defective platelet plug formation. (First Aid p. 432)"
-    src: { page: 713, quote: "GpIIb/IIIa → ↓ platelet-to-platelet aggregation, defective platelet plug formation" }
+    src: { page: 713, quote: "↓ GpIIb/IIIa → ↓ platelet-to-platelet aggregation, defective platelet plug formation" }
     status: unverified
   - id: rr.L01.131
     kind: card
     topic: hematology-oncology
     front: "Thrombotic thrombocytopenic purpura: what is the mechanism?"
     back: "↓ ADAMTS13 (vWF metalloprotease) → ↓ degradation of vWF multimers → ↑ platelet adhesion and aggregation (microthrombi). (First Aid p. 432)"
-    src: { page: 713, quote: "ADAMTS13 (vWF metalloprotease) → ↓ degradation of vWF multimers → ↑ platelet adhesion and aggregation (microthrombi formation)" }
+    src: { page: 713, quote: "↓ ADAMTS13 (vWF metalloprotease) → ↓ degradation of vWF multimers → ↑ platelet adhesion and aggregation (microthrombi formation)" }
     status: unverified
   - id: rr.L01.132
     kind: card
     topic: hematology-oncology
-    front: "von Willebrand disease: what is the mechanism, and why can the PTT rise?"
-    back: "↓ vWF → ↓ platelet-to-vWF adhesion; possibly ↑ PTT because vWF protects factor VIII. (First Aid p. 433)"
-    src: { page: 713, quote: "vWF → ↓ platelet-to-vWF adhesion, possibly ↑ PTT (vWF protects factor VIII)" }
+    front: "von Willebrand disease: what is the mechanism of bleeding?"
+    back: "Low vWF → platelets can't adhere to vWF. (First Aid p. 433)"
+    src: { page: 713, quote: "↓ vWF → ↓ platelet-to-vWF adhesion, possibly ↑ PTT (vWF protects factor VIII)" }
     status: unverified
   - id: rr.L01.133
     kind: card
@@ -1120,14 +1120,14 @@ items:
   - id: rr.L01.145
     kind: card
     topic: musculoskeletal
-    front: "Superior gluteal nerve injury: cause, and which side is the lesion in a Trendelenburg sign?"
-    back: "Iatrogenic injury during IM injection in the gluteal region → Trendelenburg sign: the lesion is contralateral to the side of the hip that drops (abductor weakness). (First Aid p. 457)"
+    front: "Superior gluteal nerve injury: what is the classic cause?"
+    back: "An IM injection into the gluteal region (iatrogenic). (First Aid p. 457)"
     src: { page: 714, quote: "Iatrogenic injury during IM injection in gluteal region → Trendelenburg sign: lesion contralateral to side of hip that drops due to abductor weakness" }
     status: unverified
   - id: rr.L01.146
     kind: mcq
     topic: musculoskeletal
-    stem: "A 40-year-old woman notices a waddling, lurching gait 2 weeks after receiving an intramuscular injection in her right buttock. When she stands on her right leg alone, the pelvis tilts. Sensation is normal. Which finding is expected?"
+    stem: "A 40-year-old woman notices a lurching gait 2 weeks after receiving an intramuscular injection in her right buttock. When she stands on her right leg alone, the pelvis tilts. Sensation is normal. Which finding is expected?"
     options:
       - "The left hip drops when she stands on her right leg"
       - "The right hip drops when she stands on her right leg"
@@ -1168,7 +1168,7 @@ items:
     kind: card
     topic: musculoskeletal
     front: "Achondroplasia: what is the mechanism?"
-    back: "Constitutive activation of FGFR3 → ↓ chondrocyte proliferation → failure of endochondral ossification → short limbs. (First Aid p. 467)"
+    back: "FGFR3 is switched on all the time, which slows chondrocyte proliferation; endochondral ossification fails and the limbs stay short. (First Aid p. 467)"
     src: { page: 714, quote: "Constitutive activation of FGFR3 → ↓ chondrocyte proliferation → failure of endochondral ossification → short limbs" }
     status: unverified
   - id: rr.L01.151
@@ -1176,13 +1176,13 @@ items:
     topic: musculoskeletal
     front: "Osteoporosis: what is the mechanism and its causes?"
     back: "↑ osteoclast activity → ↓ bone mass, due to ↓ estrogen, old age, and long-term medications like steroids. (First Aid p. 467)"
-    src: { page: 714, quote: "osteoclast activity → ↓ bone mass 2° to ↓ estrogen levels, old age, and long" }
+    src: { page: 714, quote: "↑ osteoclast activity → ↓ bone mass 2° to ↓ estrogen levels, old age, and long" }
     status: unverified
   - id: rr.L01.152
     kind: card
     topic: musculoskeletal
     front: "Osteopetrosis: what is the mechanism?"
-    back: "Carbonic anhydrase II mutations → osteoclasts can't generate an acidic environment → ↓ bone resorption → dense bones prone to fracture, pancytopenia (↓ marrow space). (First Aid p. 468)"
+    back: "Without carbonic anhydrase II, osteoclasts can't acidify bone to resorb it; bones become dense but break easily, and the crowded marrow gives pancytopenia. (First Aid p. 468)"
     src: { page: 714, quote: "Carbonic anhydrase II mutations → ↓ ability of osteoclasts to generate acidic environment → ↓ bone resorption" }
     status: unverified
   - id: rr.L01.153
@@ -1190,7 +1190,7 @@ items:
     topic: musculoskeletal
     front: "Osteitis deformans (Paget disease of bone): what is the mechanism?"
     back: "↑ osteoclast activity followed by ↑ osteoblast activity → poor-quality, fracture-prone bone. (First Aid p. 468)"
-    src: { page: 714, quote: "osteoclast activity followed by ↑ osteoblast activity → formation of poor quality, fracture-prone bone" }
+    src: { page: 714, quote: "↑ osteoclast activity followed by ↑ osteoblast activity → formation of poor quality, fracture-prone bone" }
     status: unverified
   - id: rr.L01.154
     kind: card
@@ -1259,7 +1259,7 @@ items:
     kind: card
     topic: musculoskeletal
     front: "Atopic dermatitis: what are the mechanisms?"
-    back: "Epidermal barrier dysfunction, genetic factors (loss-of-function mutations in the filaggrin [FLG] gene), immune dysregulation, altered skin microbiome, environmental triggers of inflammation. (First Aid p. 485)"
+    back: "Several at once: a leaky skin barrier, genes (loss-of-function filaggrin [FLG] mutations), a dysregulated immune response, a changed skin microbiome, and environmental triggers. (First Aid p. 485)"
     src: { page: 714, quote: "Epidermal barrier dysfunction, genetic factors (ie, loss-of-function mutations in the filaggrin [FLG] gene)" }
     status: unverified
   - id: rr.L01.164
@@ -1272,15 +1272,15 @@ items:
   - id: rr.L01.165
     kind: card
     topic: musculoskeletal
-    front: "Pemphigus vulgaris: what is the mechanism, and is the Nikolsky sign ⊕ or ⊝?"
-    back: "Type II hypersensitivity: IgG autoantibodies against desmoglein 1 and 3 in desmosomes → keratinocytes in stratum spinosum separate from stratum basale; Nikolsky sign ⊕. (First Aid p. 489)"
+    front: "Pemphigus vulgaris: what is the mechanism?"
+    back: "Type II hypersensitivity: IgG against desmoglein 1 and 3 (desmosomes) → keratinocytes of the stratum spinosum split from the stratum basale. (First Aid p. 489)"
     src: { page: 715, quote: "IgG autoantibodies form against desmoglein 1 and 3 in desmosomes → separation of keratinocytes in stratum spinosum from stratum basale" }
     status: unverified
   - id: rr.L01.166
     kind: card
     topic: musculoskeletal
-    front: "Bullous pemphigoid: what is the mechanism, and is the Nikolsky sign ⊕ or ⊝?"
-    back: "Type II hypersensitivity: IgG autoantibodies against hemidesmosomes → separation of epidermis from dermis; Nikolsky sign ⊝. (First Aid p. 489)"
+    front: "Bullous pemphigoid: what is the mechanism?"
+    back: "Type II hypersensitivity: IgG against hemidesmosomes → the epidermis lifts off the dermis. (First Aid p. 489)"
     src: { page: 715, quote: "IgG autoantibodies against hemidesmosomes → separation of epidermis from dermis" }
     status: unverified
   # ---------- Neurology and special senses ----------
@@ -1384,8 +1384,8 @@ items:
   - id: rr.L01.181
     kind: card
     topic: neurology
-    front: "Locked-in syndrome: which artery, and which eye movements are spared?"
-    back: "Basilar artery stroke; loss of horizontal but not vertical eye movements. (First Aid p. 526)"
+    front: "Locked-in syndrome: which artery is occluded?"
+    back: "The basilar artery. (First Aid p. 526)"
     src: { page: 715, quote: "Stroke of the basilar artery; loss of horizontal, but not vertical, eye movements" }
     status: unverified
   - id: rr.L01.182
@@ -1415,7 +1415,7 @@ items:
     answer: 2
     why:
       - "Anterior spinal artery stroke gives medial medullary syndrome (motor and tongue findings), not hoarseness and crossed pain loss."
-      - "AICA stroke gives lateral pontine syndrome."
+      - "AICA stroke gives lateral pontine syndrome: facial palsy and hearing loss, with no hoarseness. Hoarseness and dysphagia come from the nucleus ambiguus in the lateral medulla, which PICA supplies."
       - "Right. PICA stroke → lateral medullary (Wallenberg) syndrome, which also causes a 1st-neuron Horner syndrome."
       - "Basilar artery stroke gives locked-in syndrome."
       - "Middle meningeal artery rupture gives an epidural hematoma, not a stroke syndrome."
@@ -1522,7 +1522,7 @@ items:
     kind: card
     topic: neurology
     front: "Alzheimer disease: what are the pathologic changes?"
-    back: "Widespread cortical atrophy (narrow gyri, wide sulci); senile plaques in gray matter with a β-amyloid core; neurofibrillary tangles of intracellular hyperphosphorylated tau → ↓ ACh in the nucleus basalis of Meynert. (First Aid p. 534)"
+    back: "Diffuse cortical shrinkage (thin gyri, wide sulci), β-amyloid-cored senile plaques in gray matter, and tangles of hyperphosphorylated tau inside neurons; ACh falls in the nucleus basalis of Meynert. (First Aid p. 534)"
     src: { page: 716, quote: "Widespread cortical atrophy, narrowing of gyri, and widening of sulci; senile plaques in gray matter composed of" }
     status: unverified
   - id: rr.L01.200
@@ -1551,14 +1551,14 @@ items:
     topic: neurology
     front: "Idiopathic intracranial hypertension: what is the mechanism?"
     back: "↑ ICP, associated with dural venous sinus stenosis; impaired optic nerve axoplasmic flow → papilledema. (First Aid p. 536)"
-    src: { page: 716, quote: "ICP, associated with dural venous sinus stenosis; impaired optic nerve" }
+    src: { page: 716, quote: "↑ ICP, associated with dural venous sinus stenosis; impaired optic nerve" }
     status: unverified
   - id: rr.L01.204
     kind: card
     topic: neurology
     front: "Communicating hydrocephalus: what is the mechanism?"
     back: "↓ CSF absorption by arachnoid granulations → ↑ ICP, papilledema, herniation. (First Aid p. 536)"
-    src: { page: 716, quote: "CSF absorption by arachnoid granulations → ↑ ICP, papilledema" }
+    src: { page: 716, quote: "↓ CSF absorption by arachnoid granulations → ↑ ICP, papilledema" }
     status: unverified
   - id: rr.L01.205
     kind: card
@@ -1579,7 +1579,7 @@ items:
     topic: neurology
     front: "Ex vacuo ventriculomegaly: what is the mechanism?"
     back: "↓ brain tissue and neuronal atrophy → appearance of ↑ CSF on imaging. (First Aid p. 536)"
-    src: { page: 716, quote: "brain tissue and neuronal atrophy → appearance of ↑ CSF on imaging" }
+    src: { page: 716, quote: "↓ brain tissue and neuronal atrophy → appearance of ↑ CSF on imaging" }
     status: unverified
   - id: rr.L01.208
     kind: card
@@ -1592,7 +1592,7 @@ items:
     kind: card
     topic: neurology
     front: "Osmotic demyelination syndrome: what is the mechanism?"
-    back: "Rapid osmotic changes, most often iatrogenic correction of hyponatremia (also rapid shifts of other osmolytes, eg, glucose) → massive axonal demyelination in pontine white matter. (First Aid p. 538)"
+    back: "A fast swing in osmolality, usually correcting hyponatremia too quickly (sometimes other osmolytes such as glucose), strips myelin from pontine white matter on a large scale. (First Aid p. 538)"
     src: { page: 717, quote: "Rapid osmotic changes, most commonly iatrogenic correction of hyponatremia" }
     status: unverified
   - id: rr.L01.210
@@ -1600,14 +1600,14 @@ items:
     topic: neurology
     front: "Acute inflammatory demyelinating polyneuropathy (Guillain-Barré subtype): what is the mechanism?"
     back: "Autoimmune destruction of Schwann cells via inflammation and demyelination of motor and sensory fibers and peripheral nerves; likely molecular mimicry, triggered by inoculations or stress. (First Aid p. 538)"
-    src: { page: 717, quote: "Autoimmune destruction of Schwann cells via inflammation and" }
+    src: { page: 717, quote: "Autoimmune destruction of Schwann cells via inflammation and demyelination of motor and sensory fibers and peripheral nerves" }
     status: unverified
   - id: rr.L01.211
     kind: card
     topic: neurology
     front: "Charcot-Marie-Tooth disease: what is the mechanism?"
     back: "Defective production of proteins for the structure and function of peripheral nerves or the myelin sheath. (First Aid p. 538)"
-    src: { page: 717, quote: "Defective production of proteins involved in the structure and function of" }
+    src: { page: 717, quote: "Defective production of proteins involved in the structure and function of peripheral nerves or the myelin sheath" }
     status: unverified
   - id: rr.L01.212
     kind: card
@@ -1626,8 +1626,8 @@ items:
   - id: rr.L01.214
     kind: card
     topic: neurology
-    front: "Pituitary adenoma: what is the mechanism, and which cell type is most common?"
-    back: "Hyperplasia of only one type of pituitary endocrine cell; most often prolactin-producing lactotrophs. (First Aid p. 540)"
+    front: "Pituitary adenoma: what is the mechanism?"
+    back: "Hyperplasia of a single type of pituitary endocrine cell. (First Aid p. 540)"
     src: { page: 717, quote: "Hyperplasia of only one type of endocrine cells found in pituitary" }
     status: unverified
   - id: rr.L01.215
@@ -1635,7 +1635,7 @@ items:
     topic: neurology
     front: "Poliomyelitis: how does the virus reach and damage the cord?"
     back: "Spreads from oropharyngeal lymphoid tissue to the small intestine, then to the CNS by the bloodstream → destruction of anterior horn cells (LMN death). (First Aid p. 544)"
-    src: { page: 717, quote: "Poliovirus infection spreads from lymphoid tissue of oropharynx to small" }
+    src: { page: 717, quote: "Poliovirus infection spreads from lymphoid tissue of oropharynx to small intestine then to CNS via bloodstream → cell destruction in anterior horn of spinal cord (LMN death)" }
     status: unverified
   - id: rr.L01.216
     kind: card
@@ -1647,9 +1647,9 @@ items:
   - id: rr.L01.217
     kind: card
     topic: neurology
-    front: "Amyotrophic lateral sclerosis: what is the mechanism, and which gene in the familial form?"
-    back: "Combined UMN and LMN degeneration; the familial form is associated with SOD1 mutation. (First Aid p. 544)"
-    src: { page: 717, quote: "Combined UMN and LMN degeneration; familial form associated with" }
+    front: "Amyotrophic lateral sclerosis: what is the mechanism?"
+    back: "Degeneration of both upper and lower motor neurons. (First Aid p. 544)"
+    src: { page: 717, quote: "Combined UMN and LMN degeneration" }
     status: unverified
   - id: rr.L01.218
     kind: card
@@ -1661,14 +1661,14 @@ items:
   - id: rr.L01.219
     kind: cloze
     topic: neurology
-    text: "Friedreich ataxia: {{c1::GAA}} repeat on chromosome {{c2::9}} in the frataxin gene → impaired {{c3::mitochondrial}} function → degeneration of lateral corticospinal tract, spinocerebellar tract, dorsal columns and dorsal root ganglia. (First Aid p. 545)"
-    src: { page: 717, quote: "Trinucleotide repeat (GAA) on chromosome 9 in frataxin gene (iron-binding" }
+    text: "Friedreich ataxia: an expanded {{c1::GAA}} repeat in the frataxin gene (chromosome {{c2::9}}) disrupts {{c3::mitochondrial}} function; the lateral corticospinal and spinocerebellar tracts, dorsal columns and dorsal root ganglia degenerate. (First Aid p. 545)"
+    src: { page: 717, quote: "Trinucleotide repeat (GAA) on chromosome 9 in frataxin gene (iron-binding protein) → impaired mitochondrial function → degeneration of lateral corticospinal tract, spinocerebellar tract, dorsal columns, dorsal root ganglia" }
     status: unverified
   - id: rr.L01.220
     kind: card
     topic: neurology
-    front: "Noise-induced hearing loss: what is the mechanism, and which frequencies go first?"
-    back: "Damage to stereociliated cells in the organ of Corti → high-frequency hearing is lost first. (First Aid p. 548)"
+    front: "Noise-induced hearing loss: what is the mechanism?"
+    back: "Damage to the stereociliated hair cells of the organ of Corti. (First Aid p. 548)"
     src: { page: 717, quote: "Damage to stereociliated cells in organ of Corti" }
     status: unverified
   - id: rr.L01.221
@@ -1690,7 +1690,7 @@ items:
     topic: neurology
     front: "Ménière disease: what is the mechanism and the findings?"
     back: "↑ endolymph in the inner ear → vertigo, sensorineural hearing loss, tinnitus, ear fullness. (First Aid p. 548)"
-    src: { page: 717, quote: "endolymph in inner ear" }
+    src: { page: 717, quote: "↑ endolymph in inner ear → vertigo, sensorineural hearing loss, tinnitus, ear fullness" }
     status: unverified
   - id: rr.L01.224
     kind: card
@@ -1718,7 +1718,7 @@ items:
     topic: neurology
     front: "Presbyopia: what is the mechanism?"
     back: "Age-related impaired accommodation, likely mainly from ↓ lens elasticity. (First Aid p. 550)"
-    src: { page: 718, quote: "Age-related impaired accommodation, likely primarily due to" }
+    src: { page: 718, quote: "Age-related impaired accommodation, likely primarily due to ↓ lens elasticity" }
     status: unverified
   - id: rr.L01.228
     kind: card
@@ -1732,13 +1732,13 @@ items:
     topic: neurology
     front: "Open-angle glaucoma: what is the mechanism?"
     back: "↑ resistance to aqueous humor drainage through the trabecular meshwork. (First Aid p. 551)"
-    src: { page: 718, quote: "resistance to aqueous humor drainage through trabecular" }
+    src: { page: 718, quote: "Associated with ↑ resistance to aqueous humor drainage through trabecular meshwork" }
     status: unverified
   - id: rr.L01.230
     kind: card
     topic: neurology
     front: "Angle-closure glaucoma: what is the mechanism?"
-    back: "Narrowed or closed anterior chamber angle (eg, anteriorly displaced lens resting against the central iris) → ↓ aqueous flow through the pupil → ↑ posterior chamber pressure → peripheral iris pushed against the cornea → drainage blocked by the iris. (First Aid p. 551)"
+    back: "The anterior chamber angle is narrow (eg, the lens sits forward against the iris), so aqueous can't pass through the pupil; pressure behind the iris pushes its edge onto the cornea and closes off drainage. (First Aid p. 551)"
     src: { page: 718, quote: "Anterior chamber angle narrowed or closed; associated anatomic abnormalities" }
     status: unverified
   - id: rr.L01.231
@@ -1753,7 +1753,7 @@ items:
     topic: neurology
     front: "Hypertensive retinopathy: what is the mechanism?"
     back: "Chronic hypertension → spasm, sclerosis and fibrinoid necrosis of retinal vessels. (First Aid p. 552)"
-    src: { page: 718, quote: "spasm, sclerosis, and fibrinoid necrosis of retinal" }
+    src: { page: 718, quote: "Chronic hypertension → spasm, sclerosis, and fibrinoid necrosis of retinal vessels" }
     status: unverified
   - id: rr.L01.233
     kind: card
@@ -1767,14 +1767,14 @@ items:
     topic: neurology
     front: "Retinal vein occlusion: what causes central vs branch occlusion?"
     back: "Central: 1° thrombosis. Branch: 2° thrombosis at arteriovenous crossings. (First Aid p. 552)"
-    src: { page: 718, quote: "Central occlusion due to 1° thrombosis; branch occlusion due to" }
+    src: { page: 718, quote: "Central occlusion due to 1° thrombosis; branch occlusion due to 2° thrombosis at arteriovenous crossings" }
     status: unverified
   - id: rr.L01.235
     kind: card
     topic: neurology
     front: "Retinal detachment: what is the mechanism?"
     back: "Neurosensory retina separates from the retinal pigment epithelium → loss of choroidal blood supply → hypoxia and photoreceptor degeneration. (First Aid p. 552)"
-    src: { page: 718, quote: "Neurosensory retina separates from underlying retinal pigment" }
+    src: { page: 718, quote: "Neurosensory retina separates from underlying retinal pigment epithelium → choroidal blood supply loss → hypoxia and degeneration of photoreceptors" }
     status: unverified
   - id: rr.L01.236
     kind: card
@@ -1819,15 +1819,15 @@ items:
   - id: rr.L01.240
     kind: cloze
     topic: neurology
-    text: "Horner syndrome: 1st neuron, eg {{c1::lateral medullary syndrome}}; 2nd neuron, stellate ganglion compression by a {{c2::Pancoast tumor}}; 3rd neuron, {{c3::carotid dissection}}. (First Aid p. 555)"
+    text: "Horner syndrome: 1st neuron, eg pontine hemorrhage or {{c1::lateral medullary syndrome}} (PICA stroke); 2nd neuron, stellate ganglion compression by a {{c2::Pancoast tumor}}; 3rd neuron, {{c3::carotid dissection}}. (First Aid p. 555)"
     src: { page: 718, quote: "Lesions along sympathetic chain: 1st neuron (pontine hemorrhage, lateral" }
     status: unverified
   - id: rr.L01.241
     kind: card
     topic: neurology
-    front: "Cavernous sinus syndrome: what are the causes, and why does infection spread there?"
-    back: "Pituitary tumor mass effect, carotid-cavernous fistula, or cavernous sinus thrombosis from infection (spreads because dural venous sinuses lack valves). (First Aid p. 557)"
-    src: { page: 718, quote: "to pituitary tumor mass effect, carotid-cavernous fistula, or cavernous" }
+    front: "Cavernous sinus syndrome: what are the causes?"
+    back: "Mass effect from a pituitary tumor, a carotid-cavernous fistula, or septic cavernous sinus thrombosis. (First Aid p. 557)"
+    src: { page: 718, quote: "2° to pituitary tumor mass effect, carotid-cavernous fistula, or cavernous sinus thrombosis related to infection" }
     status: unverified
   # ---------- Psychiatry ----------
   - id: rr.L01.242
@@ -1861,7 +1861,7 @@ items:
     topic: psychiatry
     front: "Schizophrenia: what is the mechanism?"
     back: "Altered dopaminergic activity, ↑ serotonergic activity, ↓ dendritic branching. (First Aid p. 577)"
-    src: { page: 718, quote: "Altered dopaminergic activity" }
+    src: { page: 718, quote: "Altered dopaminergic activity, ↑ serotonergic activity, ↓ dendritic branching" }
     status: unverified
   # ---------- Renal ----------
   - id: rr.L01.245
@@ -1869,7 +1869,7 @@ items:
     topic: renal
     front: "Distal renal tubular acidosis (type 1): what is the mechanism?"
     back: "α-intercalated cells cannot secrete H⁺ → no new HCO3⁻ is generated → metabolic acidosis. (First Aid p. 611)"
-    src: { page: 718, quote: "intercalated cells to secrete H" }
+    src: { page: 718, quote: "Inability of α-intercalated cells to secrete H+ → no new HCO3– generated → metabolic acidosis" }
     status: unverified
   - id: rr.L01.246
     kind: mcq
@@ -1888,14 +1888,14 @@ items:
       - "That is type 4 RTA, which gives a high potassium, not a low one."
       - "Renin release doesn't explain a normal anion gap acidosis."
       - "Podocyte damage is nephrotic syndrome."
-    src: { page: 718, quote: "intercalated cells to secrete H" }
+    src: { page: 718, quote: "Inability of α-intercalated cells to secrete H+ → no new HCO3– generated → metabolic acidosis" }
     status: unverified
   - id: rr.L01.247
     kind: card
     topic: renal
     front: "Proximal RTA (type 2): what is the mechanism?"
     back: "Defective PCT HCO3⁻ reabsorption → ↑ urinary excretion of HCO3⁻ → metabolic acidosis. (First Aid p. 611)"
-    src: { page: 718, quote: "Defective PCT HCO3" }
+    src: { page: 718, quote: "Defective PCT HCO3– reabsorption → ↑ urinary excretion of HCO3– → metabolic acidosis" }
     status: unverified
   - id: rr.L01.248
     kind: card
@@ -1964,7 +1964,7 @@ items:
     topic: renal
     front: "Prerenal azotemia: what is the mechanism?"
     back: "↓ RBF → ↓ GFR → ↑ reabsorption of Na⁺/H2O and urea. (First Aid p. 620)"
-    src: { page: 719, quote: "reabsorption of Na+/H2O and urea" }
+    src: { page: 719, quote: "↓ RBF → ↓ GFR → ↑ reabsorption of Na+/H2O and urea" }
     status: unverified
   - id: rr.L01.258
     kind: card
@@ -1986,7 +1986,7 @@ items:
     topic: reproductive
     front: "Adnexal torsion: what is the sequence?"
     back: "Twisting of the ovary/fallopian tube around the infundibulopelvic and ovarian ligaments → venous/lymphatic blockage while arterial inflow continues → edema → blockade of arterial inflow → necrosis/hemorrhage. (First Aid p. 643)"
-    src: { page: 719, quote: "Twisting of ovary/fallopian tube around infundibulopelvic ligament and" }
+    src: { page: 719, quote: "Twisting of ovary/fallopian tube around infundibulopelvic ligament and ovarian ligament → venous/lymphatic blockage; arterial inflow continues → edema → blockade of arterial inflow → necrosis/hemorrhage" }
     status: unverified
   - id: rr.L01.261
     kind: card
@@ -2000,7 +2000,7 @@ items:
     topic: reproductive
     front: "Supine hypotensive syndrome: what is the mechanism?"
     back: "Supine position → the gravid uterus compresses the abdominal aorta and IVC → ↓ placental perfusion, ↓ venous return. (First Aid p. 661)"
-    src: { page: 719, quote: "gravid uterus compresses abdominal aorta and IVC" }
+    src: { page: 719, quote: "Supine position → gravid uterus compresses abdominal aorta and IVC → ↓ placental perfusion, ↓ venous return" }
     status: unverified
   - id: rr.L01.263
     kind: cloze
@@ -2023,7 +2023,7 @@ items:
       - "Right. PCOS: hyperinsulinemia/insulin resistance → altered hypothalamic feedback → ↑ LH:FSH, ↑ androgens → unruptured follicles, anovulation."
       - "That is functional hypothalamic amenorrhea (caloric restriction, exercise, stress)."
       - "This is the opposite of the PCOS pattern."
-      - "That is 21-hydroxylase deficiency (CAH), not PCOS."
+      - "That is 21-hydroxylase deficiency (CAH). Its nonclassic form is the classic PCOS mimic, with hirsutism and irregular periods, but cortisol is not low and ↑ LH:FSH with polycystic ovaries points to PCOS."
       - "A prolactinoma is the most common pituitary adenoma, but it doesn't explain these ovaries."
     src: { page: 719, quote: "Hyperinsulinemia and/or insulin resistance → altered hypothalamic" }
     status: unverified
@@ -2032,22 +2032,22 @@ items:
     topic: reproductive
     front: "Functional hypothalamic amenorrhea: what is the mechanism?"
     back: "Severe caloric restriction, ↑ energy expenditure and/or stress → altered pulsatile GnRH secretion → ↓ LH, FSH, estrogen. (First Aid p. 663)"
-    src: { page: 719, quote: "altered pulsatile GnRH secretion" }
+    src: { page: 719, quote: "Severe caloric restriction, ↑ energy expenditure, and/or stress → altered pulsatile GnRH secretion → ↓ LH, FSH, estrogen" }
     status: unverified
   - id: rr.L01.266
     kind: card
     topic: reproductive
     front: "Varicocele: what is the mechanism?"
     back: "↑ venous pressure → dilated veins in the pampiniform plexus → enlarged scrotum (\"bag of worms\"). (First Aid p. 669)"
-    src: { page: 719, quote: "dilated veins in pampiniform plexus" }
+    src: { page: 719, quote: "↑ venous pressure → dilated veins in pampiniform plexus → enlarged scrotum (“bag of worms”)" }
     status: unverified
   # ---------- Respiratory ----------
   - id: rr.L01.267
     kind: card
     topic: respiratory
-    front: "Methemoglobinemia: what is the mechanism, and which drugs cause it?"
-    back: "↑ oxidized Hb (Fe3+), from dapsone, local anesthetics or nitrites → ↓ O2 binding but ↑ cyanide affinity → tissue hypoxia. (First Aid p. 688)"
-    src: { page: 719, quote: "to dapsone, local anesthetics, nitrites" }
+    front: "Methemoglobinemia: what is the mechanism of tissue hypoxia?"
+    back: "Hb iron is oxidized to Fe3+ → it binds O2 poorly (but binds cyanide more) → tissue hypoxia. (First Aid p. 688)"
+    src: { page: 719, quote: "↑ oxidized Hb (Fe3+) 2° to dapsone, local anesthetics, nitrites → ↓ O2 binding but ↑ cyanide affinity → tissue hypoxia" }
     status: unverified
   - id: rr.L01.268
     kind: card
@@ -2064,23 +2064,23 @@ items:
       - "↑ 1α-hydroxylase activity in granuloma macrophages → vitamin D activation"
       - "Autonomous PTH secretion"
       - "Direct bone destruction by tumor cells"
-      - "Excess calcium intake"
-      - "Decreased vitamin D activation"
+      - "PTH-related peptide secreted by a tumor"
+      - "Milk-alkali syndrome from calcium carbonate antacids"
     answer: 0
     why:
       - "Right. Noncaseating granulomas → ↑ macrophage activity → ↑ 1α-hydroxylase in macrophages → vitamin D activation → ↑ Ca²⁺ (and PTH is suppressed)."
       - "Autonomous PTH secretion would give a high PTH, not a low one."
       - "She has granulomas, not a tumor in bone."
-      - "Nothing in her history points to excess intake, and it wouldn't explain the granulomas."
-      - "Less vitamin D activation would lower calcium, not raise it."
+      - "PTHrP (eg, squamous cell lung cancer) causes hypercalcemia with low PTH, but her biopsy shows noncaseating granulomas, not tumor."
+      - "Milk-alkali syndrome needs heavy calcium and alkali intake, which she doesn't report, and it doesn't explain the granulomas or hilar nodes."
     src: { page: 719, quote: "hydroxylase activity in macrophages → vitamin D activation" }
     status: unverified
   - id: rr.L01.270
     kind: card
     topic: respiratory
     front: "ARDS: what is the sequence from alveolar injury to raised pulmonary vascular resistance?"
-    back: "Alveolar injury → inflammation → capillary endothelial damage and ↑ vessel permeability → protein-rich fluid leaks into alveoli → intra-alveolar hyaline membranes and noncardiogenic pulmonary edema → ↓ compliance and V/Q mismatch → hypoxic vasoconstriction → ↑ pulmonary vascular resistance. (First Aid p. 697)"
-    src: { page: 719, quote: "Alveolar injury → inflammation → capillary endothelial damage and" }
+    back: "Injured alveoli become inflamed; damaged capillaries leak protein-rich fluid into the air spaces, forming hyaline membranes (noncardiogenic edema). Stiff lungs and V/Q mismatch follow, and hypoxic vasoconstriction raises pulmonary vascular resistance. (First Aid p. 697)"
+    src: { page: 719, quote: "Alveolar injury → inflammation → capillary endothelial damage and ↑ vessel permeability → leakage of protein-rich fluid into alveoli → intra-alveolar hyaline membranes and noncardiogenic pulmonary edema" }
     status: unverified
   - id: rr.L01.271
     kind: mcq
@@ -2183,7 +2183,7 @@ items:
     topic: neurology
     front: "Retinal detachment: what are its types?"
     back: "Rhegmatogenous (due to retinal tears), or nonrhegmatogenous: tractional or exudative (fluid accumulation). (First Aid p. 552)"
-    src: { page: 718, quote: "due to retinal tears (rhegmatogenous) or tractional or" }
+    src: { page: 718, quote: "due to retinal tears (rhegmatogenous) or tractional or exudative (fluid accumulation) (nonrhegmatogenous)" }
     status: unverified
   - id: rr.L01.284
     kind: card
@@ -2197,5 +2197,137 @@ items:
     topic: respiratory
     front: "Obesity hypoventilation syndrome: what is the mechanism?"
     back: "Obesity → hypoventilation → ↑ PaCO2 during waking hours. (First Aid p. 697)"
-    src: { page: 719, quote: "obesity hypoventilation PaCO2 during waking hours" }
+    src: { page: 719, quote: "obesity → hypoventilation → ↑ PaCO2 during waking hours" }
+    status: unverified
+  - id: rr.L01.286
+    kind: card
+    topic: cardiovascular
+    front: "Which infection is classically associated with thoracic aortic aneurysm?"
+    back: "Tertiary (3°) syphilis. (First Aid p. 306)"
+    src: { page: 711, quote: "Thoracic aortic aneurysm Cystic medial degeneration; associated with 3° syphilis" }
+    status: unverified
+  - id: rr.L01.287
+    kind: card
+    topic: cardiovascular
+    front: "HOCM: what is the usual cause of death?"
+    back: "Arrhythmia. (First Aid p. 315)"
+    src: { page: 711, quote: "asymmetric septal hypertrophy (sarcomeres added in parallel); death due to arrhythmia" }
+    status: unverified
+  - id: rr.L01.288
+    kind: card
+    topic: gastrointestinal
+    front: "α1-antitrypsin deficiency: what happens in the lungs?"
+    back: "Too little α1-antitrypsin leaves alveolar elastase unchecked → panacinar emphysema. (First Aid p. 400)"
+    src: { page: 712, quote: "↓ α1-antitrypsin → uninhibited elastase in alveoli → panacinar emphysema" }
+    status: unverified
+  - id: rr.L01.289
+    kind: card
+    topic: hematology-oncology
+    front: "von Willebrand disease: why can the PTT be prolonged?"
+    back: "vWF normally protects factor VIII, so low vWF can lower factor VIII and raise the PTT. (First Aid p. 433)"
+    src: { page: 713, quote: "possibly ↑ PTT (vWF protects factor VIII)" }
+    status: unverified
+  - id: rr.L01.290
+    kind: card
+    topic: musculoskeletal
+    front: "Trendelenburg sign from superior gluteal nerve injury: which side is the lesion?"
+    back: "Opposite the hip that drops: the abductors on the lesion side are weak, so the unsupported hip sags. (First Aid p. 457)"
+    src: { page: 714, quote: "lesion contralateral to side of hip that drops due to abductor weakness" }
+    status: unverified
+  - id: rr.L01.291
+    kind: card
+    topic: musculoskeletal
+    front: "Pemphigus vulgaris: is the Nikolsky sign ⊕ or ⊝?"
+    back: "⊕ (the split is within the epidermis). (First Aid p. 489)"
+    src: { page: 715, quote: "separation of keratinocytes in stratum spinosum from stratum basale; Nikolsky sign ⊕" }
+    status: unverified
+  - id: rr.L01.292
+    kind: card
+    topic: musculoskeletal
+    front: "Bullous pemphigoid: is the Nikolsky sign ⊕ or ⊝?"
+    back: "⊝ (the split is below the epidermis). (First Aid p. 489)"
+    src: { page: 715, quote: "hemidesmosomes → separation of epidermis from dermis; Nikolsky sign ⊝" }
+    status: unverified
+  - id: rr.L01.293
+    kind: card
+    topic: neurology
+    front: "Locked-in syndrome: which eye movements are spared?"
+    back: "Vertical eye movements (horizontal ones are lost). (First Aid p. 526)"
+    src: { page: 715, quote: "loss of horizontal, but not vertical, eye movements" }
+    status: unverified
+  - id: rr.L01.294
+    kind: card
+    topic: neurology
+    front: "Pituitary adenoma: which cell type is most often involved?"
+    back: "Prolactin-producing lactotrophs. (First Aid p. 540)"
+    src: { page: 717, quote: "most commonly from prolactin-producing lactrotrophs" }
+    status: unverified
+  - id: rr.L01.295
+    kind: card
+    topic: neurology
+    front: "Familial ALS: which gene mutation is associated?"
+    back: "SOD1. (First Aid p. 544)"
+    src: { page: 717, quote: "familial form associated with SOD1 mutation" }
+    status: unverified
+  - id: rr.L01.296
+    kind: card
+    topic: neurology
+    front: "Noise-induced hearing loss: which frequencies are lost first?"
+    back: "High frequencies. (First Aid p. 548)"
+    src: { page: 717, quote: "Damage to stereociliated cells in organ of Corti → loss of high-frequency hearing first" }
+    status: unverified
+  - id: rr.L01.297
+    kind: card
+    topic: neurology
+    front: "Why can facial infection spread to the cavernous sinus?"
+    back: "The dural venous sinuses have no valves. (First Aid p. 557)"
+    src: { page: 718, quote: "spreads due to lack of valves in dural venous sinuses" }
+    status: unverified
+  - id: rr.L01.298
+    kind: card
+    topic: respiratory
+    front: "Which drugs classically cause methemoglobinemia?"
+    back: "Dapsone, local anesthetics and nitrites. (First Aid p. 688)"
+    src: { page: 719, quote: "↑ oxidized Hb (Fe3+) 2° to dapsone, local anesthetics, nitrites" }
+    status: unverified
+  - id: rr.L01.299
+    kind: cloze
+    topic: renal
+    text: "Nephrotic syndrome: {{c1::hypoalbuminemia}} → ↑ hepatic {{c2::lipogenesis}} → {{c3::hypercholesterolemia}}. (First Aid p. 613)"
+    src: { page: 719, quote: "hypoalbuminemia → ↑ hepatic lipogenesis → hypercholesterolemia" }
+    status: unverified
+  - id: rr.L01.300
+    kind: card
+    topic: reproductive
+    front: "PCOS: how does insulin resistance lead to ovarian cysts?"
+    back: "Altered hypothalamic feedback → ↑ LH:FSH and ↑ androgens → follicles mature more slowly → they don't rupture (cysts) → anovulation. (First Aid p. 662)"
+    src: { page: 719, quote: "↓ rate of follicular maturation → unruptured follicles (cysts), anovulation" }
+    status: unverified
+  - id: rr.L01.301
+    kind: card
+    topic: neurology
+    front: "Horner syndrome: name four causes of a 1st-neuron (central) lesion."
+    back: "Pontine hemorrhage, lateral medullary syndrome, a spinal cord lesion above T1 (eg, Brown-Séquard syndrome), late-stage syringomyelia. (First Aid p. 555)"
+    src: { page: 718, quote: "1st neuron (pontine hemorrhage, lateral medullary syndrome, spinal cord lesion above T1 like Brown-Sequard syndrome or late-stage syringomyelia)" }
+    status: unverified
+  - id: rr.L01.302
+    kind: card
+    topic: neurology
+    front: "Huntington disease: what happens to the lateral ventricles, and why?"
+    back: "Ex vacuo ventriculomegaly: the ventricles enlarge to fill the space left by the atrophied caudate and putamen. (First Aid p. 534)"
+    src: { page: 716, quote: "atrophy of caudate and putamen with ex vacuo ventriculomegaly" }
+    status: unverified
+  - id: rr.L01.303
+    kind: card
+    topic: neurology
+    front: "Huntington disease: how do the neurons die?"
+    back: "Glutamate excitotoxicity through NMDA receptor binding. (First Aid p. 534)"
+    src: { page: 716, quote: "neuronal death via glutamate excitotoxicity and NMDA receptor binding" }
+    status: unverified
+  - id: rr.L01.304
+    kind: card
+    topic: biochemistry
+    front: "Which tissues lack sorbitol dehydrogenase, and what damage does diabetes cause there?"
+    back: "Lens, retina, kidney and Schwann cells: sorbitol builds up → osmotic damage (eg, cataracts, retinopathy, peripheral neuropathy). First Aid's mnemonic: LARKS. (First Aid p. 79)"
+    src: { page: 709, quote: "lens, retina, kidney, and Schwann cells lack sorbitol dehydrogenase → intracellular sorbitol accumulation → osmotic damage" }
     status: unverified
