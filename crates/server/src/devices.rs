@@ -39,6 +39,12 @@ pub fn migrate(db: &impl Sql) -> Result<(), SqlError> {
             // Google one signs in with Google again to be trusted (#541).
             // `register` always sets it for a new sign-in.
             "ALTER TABLE devices ADD COLUMN by_password INTEGER NOT NULL DEFAULT 1",
+            // Whether `by_password` was recorded at sign-in (1) or is only
+            // the safe guess for a device from before it (0). A guess still
+            // asks for the current password, but a password change signs
+            // out only devices known to use it, so his Google devices from
+            // before the column stay signed in (#608).
+            "ALTER TABLE devices ADD COLUMN sign_in_known INTEGER NOT NULL DEFAULT 0",
         ],
     )
 }
@@ -220,7 +226,7 @@ impl<'a, S: Sql> Devices<'a, S> {
     /// with Google. Called after every [`Self::register`].
     pub fn set_by_password(&self, device: &str, by_password: bool) -> Result<(), SqlError> {
         self.db.exec(
-            "UPDATE devices SET by_password = ? WHERE device_id = ?",
+            "UPDATE devices SET by_password = ?, sign_in_known = 1 WHERE device_id = ?",
             &[u64::from(by_password).into(), device.into()],
         )?;
         Ok(())
@@ -228,11 +234,13 @@ impl<'a, S: Sql> Devices<'a, S> {
 
     /// Signs out every device that signed in with the username and password,
     /// except `keep`: after the password changes or goes, the old one opens
-    /// nothing (#540). Returns the devices signed out.
+    /// nothing (#540). Devices whose sign-in is unknown (from before
+    /// `by_password`) stay (#608). Returns the devices signed out.
     pub fn revoke_password_sessions(&self, keep: &str, now_ms: u64) -> Result<Vec<String>, SqlError> {
         let rows = self.db.exec(
             "UPDATE devices SET revoked_ms = ?, refresh_hash = NULL, prev_hash = NULL, retired_hash = NULL
-             WHERE by_password = 1 AND revoked_ms IS NULL AND device_id != ? RETURNING device_id",
+             WHERE by_password = 1 AND sign_in_known = 1 AND revoked_ms IS NULL AND device_id != ?
+             RETURNING device_id",
             &[now_ms.into(), keep.into()],
         )?;
         Ok(rows.into_iter().filter_map(|r| r.into_iter().next()).filter_map(Value::into_string).collect())
@@ -370,6 +378,11 @@ mod tests {
         .unwrap();
         let d = Devices::new(&db).unwrap(); // adds by_password
         assert!(d.by_password("old-pc").unwrap(), "how it signed in is unknown: ask for the password");
+        // But a password change doesn't sign it out: it may be a Google one (#608).
+        d.register(&info("pc", "PC", Platform::Web), "me@example.com", "h3", NOW).unwrap();
+        d.set_by_password("pc", true).unwrap();
+        assert!(d.revoke_password_sessions("pc", NOW + 1).unwrap().is_empty());
+        assert!(d.is_active("old-pc").unwrap());
         d.register(&info("new-phone", "Phone", Platform::Android), "me@example.com", "h2", NOW).unwrap();
         d.set_by_password("new-phone", false).unwrap();
         assert!(!d.by_password("new-phone").unwrap(), "a fresh Google sign-in is trusted");
