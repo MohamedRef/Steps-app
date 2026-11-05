@@ -246,7 +246,7 @@ lessons:
       - "Leflunomide، 5-FU، 6-MP، mycophenolate، hydroxyurea، MTX: كل واحد وإنزيمه."
       - "Allopurinol + azathioprine ← 6-TGNs سامة ← قلل الجرعة."
       - "ADA ← dATP ← SCID. HGPRT ← Lesch-Nyhan (X-linked)."
-    practice: [bio.L01.026, bio.L01.027, bio.L01.028, bio.L01.029, bio.L01.030, bio.L01.031, bio.L01.032, bio.L01.033, bio.L01.034, bio.L01.035, bio.L01.036, bio.L01.037, bio.L01.038, bio.L01.039, bio.L01.040, bio.L01.041, bio.L01.042]
+    practice: [bio.L01.026, bio.L01.027, bio.L01.028, bio.L01.029, bio.L01.030, bio.L01.031, bio.L01.032, bio.L01.033, bio.L01.034, bio.L01.035, bio.L01.036, bio.L01.037, bio.L01.038, bio.L01.039, bio.L01.040, bio.L01.041, bio.L01.042, bio.L01.124, bio.L01.125]
   - id: bio.L01.lesson3
     title: "نسخ الـ DNA وتصليحه"
     hook: "كل إنزيم هنا له دوا أو مرض، فالسؤال دايماً: مين بيعمل إيه؟"
@@ -370,7 +370,7 @@ lessons:
       - "TOP I: irinotecan/topotecan. TOP II: etoposide/teniposide. Fluoroquinolones: gyrase و TOP IV."
       - "Helicase بايظ في Bloom. Telomerase يضيف TTAGGG ويعلى في السرطان."
       - "NER (G1) ← XP. Mismatch (S) ← Lynch. HR ← BRCA و Fanconi."
-    practice: [bio.L01.047, bio.L01.048, bio.L01.049, bio.L01.050, bio.L01.051, bio.L01.052, bio.L01.053, bio.L01.054, bio.L01.055, bio.L01.056, bio.L01.057, bio.L01.058, bio.L01.059, bio.L01.060, bio.L01.061, bio.L01.062]
+    practice: [bio.L01.047, bio.L01.048, bio.L01.049, bio.L01.050, bio.L01.051, bio.L01.052, bio.L01.053, bio.L01.054, bio.L01.055, bio.L01.056, bio.L01.057, bio.L01.058, bio.L01.059, bio.L01.060, bio.L01.061, bio.L01.062, bio.L01.126, bio.L01.127]
   - id: bio.L01.lesson4
     title: "الطفرات، والجين بيتشغل ويتقفل إزاي"
     hook: "من حرف واحد بيتغير لحد بكتيريا بتقرر تاكل lactose: كله منطق"
@@ -441,6 +441,33 @@ lessons:
         text: "لو مفيش lactose، الـ repressor قاعد على الـ operator، فمفيش expression حتى لو الـ glucose قليل والـ CAP شغال. الفرامل بتغلب البنزين."
         page: 39
         quote: "High lactose → unbinds repressor protein from repressor/operator site → ↑ transcription."
+      - kind: figure
+        title: "البنزين والفرامل على الـ lac operon"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b1f4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <line class="fg-ink" x1="10" y1="110" x2="350" y2="110"/>
+            <rect class="fg-good" x="14" y="98" width="52" height="24" rx="4"/><text x="20" y="114" class="t-sm">CAP site</text>
+            <rect class="fg-box" x="70" y="98" width="60" height="24" rx="4"/><text x="76" y="114" class="t-sm">Promoter</text>
+            <rect class="fg-bad" x="134" y="98" width="56" height="24" rx="4"/><text x="140" y="114" class="t-sm">Operator</text>
+            <rect class="fg-acc" x="194" y="98" width="48" height="24" rx="4"/><text x="204" y="114" class="t-sm">lacZ</text>
+            <rect class="fg-acc" x="246" y="98" width="48" height="24" rx="4"/><text x="256" y="114" class="t-sm">lacY</text>
+            <rect class="fg-acc" x="298" y="98" width="48" height="24" rx="4"/><text x="308" y="114" class="t-sm">lacA</text>
+            <text x="10" y="22" class="t-sm t-b t-good">Gas pedal</text>
+            <text x="10" y="38" class="t-sm">Low glucose → ↑ cAMP</text>
+            <text x="10" y="54" class="t-sm">cAMP-CAP binds → ↑ transcription</text>
+            <line class="fg-arrow-acc" x1="40" y1="60" x2="40" y2="94" marker-end="url(#b1f4)"/>
+            <text x="200" y="22" class="t-sm t-b t-bad">Brake</text>
+            <text x="200" y="38" class="t-sm">Repressor sits on operator</text>
+            <text x="200" y="54" class="t-sm">Lactose pulls it off</text>
+            <line class="fg-arrow-bad" x1="162" y1="60" x2="162" y2="94" marker-end="url(#b1f4)"/>
+            <text x="10" y="150" class="t-sm t-acc">Strong expression only when</text>
+            <text x="10" y="166" class="t-sm t-acc">glucose is low and lactose is present</text>
+          </svg>
+        caption: "الـ CAP لما يركب عليه الـ cAMP (لما الـ glucose يقل) بيدوس بنزين على الـ promoter. الـ repressor قاعد على الـ operator فرامل، والـ lactose هو اللي بيشيله. الجينات تشتغل جامد بس لما الاتنين يحصلوا مع بعض."
+        alt: "A strip of DNA from left to right: CAP site, promoter, operator, then the lacZ, lacY and lacA genes. Above the CAP site: low glucose raises cAMP, and cAMP-CAP binding increases transcription (the gas pedal). Above the operator: the repressor sits there and lactose pulls it off (the brake). Strong expression needs low glucose and lactose present."
+        page: 39
+        quote: "Low glucose → ↑ adenylate cyclase activity → ↑ generation of cAMP from ATP → activation of catabolite activator protein (CAP) → ↑ transcription."
       - kind: explain
         title: "الجين في الـ eukaryotes"
         text: |-
