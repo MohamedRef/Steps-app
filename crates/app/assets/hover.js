@@ -67,8 +67,10 @@
     if (!word) return null;
     const own = courseOf(node);
     if (own) {
-      const hit = (own.exact && own.exact[word]) || (own.lower && own.lower[word.toLowerCase()]);
-      if (hit) return hit;
+      // null: the course keeps the word plain (a book mnemonic), no peek.
+      if (own.exact && word in own.exact) return own.exact[word];
+      const low = word.toLowerCase();
+      if (own.lower && low in own.lower) return own.lower[low];
     }
     return state.exact[word] || state.lower[word.toLowerCase()] || null;
   }
