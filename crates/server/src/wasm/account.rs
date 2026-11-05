@@ -160,6 +160,10 @@ impl DurableObject for Account {
                 }
                 let body: LoginName = req.json().await?;
                 AccountLogin::open(&db).set_username(body.username.as_deref()).map_err(sql_err)?;
+                // The password changed or went: its other sessions end (#540).
+                for device in devices.revoke_password_sessions(&caller, now).map_err(sql_err)? {
+                    self.close_device(&device);
+                }
                 Response::empty()
             }
             (Method::Post, "/revoke") => {
