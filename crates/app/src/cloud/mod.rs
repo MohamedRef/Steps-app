@@ -191,6 +191,10 @@ pub enum Problem {
     Network,
     /// Google approved the sign-in; the network half is waiting to retry.
     SignInWaiting,
+    /// The code exchange was cut off after Google took the code (Android
+    /// aborts a backgrounded app's sockets), so it can't be retried: sign in
+    /// again.
+    SignInInterrupted,
     Server,
     Outdated,
     /// The hub turned changes away because this device's clock is ahead.
@@ -379,6 +383,39 @@ pub fn open_url(url: &str) -> Result<(), String> {
         let opener = if cfg!(target_os = "macos") { "open" } else { "xdg-open" };
         std::process::Command::new(opener).arg(url).spawn().map(drop).map_err(|e| format!("{opener}: {e}"))
     }
+}
+
+/// Whether Steps is in front, so a request it makes won't be cut off
+/// halfway. Android aborts a backgrounded app's sockets, even after the
+/// request went out, so a single-use sign-in code waits for this
+/// (`engine::finish_sign_in`). Elsewhere the app is never cut off. If
+/// Android can't say, it counts as in front, so a sign-in never waits forever.
+pub fn in_foreground() -> bool {
+    #[cfg(target_os = "android")]
+    {
+        android_in_foreground().map_err(|e| crate::diag::report!("in front: {e}")).unwrap_or(true)
+    }
+    #[cfg(not(target_os = "android"))]
+    {
+        true
+    }
+}
+
+/// `SignInBridge.inForeground()` (android/…/SignInReturn.kt).
+#[cfg(target_os = "android")]
+fn android_in_foreground() -> Result<bool, String> {
+    use jni::objects::JClassLoader;
+    use jni::refs::LoaderContext;
+    use jni::{jni_sig, jni_str};
+    crate::platform::tts_android::with_activity(|env, activity| {
+        let loader = env
+            .call_method(activity, jni_str!("getClassLoader"), jni_sig!("()Ljava/lang/ClassLoader;"), &[])?
+            .l()?;
+        let loader = env.cast_local::<JClassLoader>(loader)?;
+        let class =
+            LoaderContext::Loader(&loader).load_class(env, jni_str!("app.steps.SignInBridge"), true)?;
+        env.call_static_method(&class, jni_str!("inForeground"), jni_sig!("()Z"), &[])?.z()
+    })
 }
 
 // adapted from batna-app main: crates/app/src/platform/android.rs (open_url)
