@@ -339,12 +339,31 @@ fn many(kind: ChangeKind, n: usize, what: &str) -> Vec<Change> {
     (1..=n).map(|i| change(kind, &format!("{what} {i}"))).collect()
 }
 
+/// The release time `days` before now, at 08:00 UTC that day.
+fn ago(days: i64) -> String {
+    (chrono::Utc::now() - chrono::Duration::days(days)).format("%Y-%m-%dT08:00:00Z").to_string()
+}
+
+/// How the changelog dates a build `days` old (over a week): "28 أكتوبر",
+/// with the year when it isn't this year's.
+fn month_label(days: i64) -> String {
+    use chrono::Datelike;
+    let now = chrono::Utc::now();
+    let d = now - chrono::Duration::days(days);
+    let month = tx::MONTHS[d.month0() as usize];
+    if d.year() == now.year() {
+        format!("{} {month}", d.day())
+    } else {
+        format!("{} {month} {}", d.day(), d.year())
+    }
+}
+
 #[test]
 fn the_changelog_folds_long_lists_and_older_builds() {
     let u = install(&dead_feed(), "0.1.0", 44, notify());
     let mut history = vec![release(
         50,
-        "2026-11-04T08:00:00Z",
+        &ago(0),
         [
             many(ChangeKind::New, 8, "محاضرة"),
             many(ChangeKind::Improved, 2, "تحسين"),
@@ -353,13 +372,9 @@ fn the_changelog_folds_long_lists_and_older_builds() {
         .concat(),
         false,
     )];
-    let dates = [
-        "2026-11-03T08:00:00Z",
-        "2026-11-02T08:00:00Z",
-        "2026-10-30T08:00:00Z",
-        "2026-09-01T08:00:00Z",
-        "2025-12-01T08:00:00Z",
-    ];
+    // Dates from today's clock: fixed ones read "yesterday" the day after
+    // they were written, and the test failed on its own.
+    let dates = [ago(1), ago(2), ago(5), ago(40), ago(400)];
     for (i, d) in dates.iter().enumerate() {
         history.push(release(
             49 - i as u64,
@@ -393,7 +408,7 @@ fn the_changelog_folds_long_lists_and_older_builds() {
     app.assert_has(tx::YESTERDAY);
     app.assert_has(tx::TWO_DAYS_AGO);
     app.assert_has(&tx::DAYS_AGO.replace("{n}", "5"));
-    app.assert_has(&format!("1 {}", tx::MONTHS[8]));
+    app.assert_has(&month_label(40));
     app.assert_lacks("إصلاح 49");
     app.tap("v0.1.0 (49)");
     app.assert_has("إصلاح 49");
@@ -401,7 +416,7 @@ fn the_changelog_folds_long_lists_and_older_builds() {
     app.assert_lacks("إصلاح 49");
     app.assert_lacks(tx::BADGE_INSTALLED);
     app.tap(tx::SHOW_OLDER);
-    app.assert_has("2025");
+    app.assert_has(&month_label(400));
     app.assert_has(tx::BADGE_INSTALLED);
     // The foot: GitHub opens the channel's releases page.
     app.tap("GitHub");

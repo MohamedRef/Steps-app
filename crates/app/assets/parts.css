@@ -418,3 +418,12 @@ button.activity-row:focus-visible { outline-offset: -3px; }
 .bk-q-list { margin: 0; padding-inline-start: 1.2em; line-height: 1.55; }
 .bk-q-list li.d1 { margin-inline-start: 1.2em; }
 .bk-q-list li.d2, .bk-q-list li.d3 { margin-inline-start: 2.4em; }
+
+/* A disclosure line that opens with a tap (Settings › Data, UX #330): a
+   full touch target, not just its text. It stays a list item, so the
+   open/closed marker still shows. */
+summary.tap-summary {
+  min-block-size: var(--target);
+  padding-block: var(--sp-3);
+  cursor: pointer;
+}
