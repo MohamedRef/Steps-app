@@ -254,7 +254,11 @@ impl Store {
         if let Some(last) = newest_stamp(&conn)? {
             clock.observe(&last);
         }
-        Ok(Self { conn: Mutex::new(conn), clock: Mutex::new(clock), path })
+        let store = Self { conn: Mutex::new(conn), clock: Mutex::new(clock), path };
+        // Rows stamped while the date was ahead would beat every new write
+        // until real time caught up (#606), signed in or not.
+        store.restamp_future(now_ms())?;
+        Ok(store)
     }
 
     /// Moves the clock past rows another connection wrote (the sync
@@ -272,7 +276,19 @@ impl Store {
     }
 
     fn tick(&self, now_ms: i64) -> Hlc {
-        self.clock.lock().unwrap_or_else(std::sync::PoisonError::into_inner).tick(now_ms)
+        let clock = || self.clock.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+        // The clock was wrong and is right again (#606): first give this
+        // device's rows stamped in the future fresh stamps, or this write
+        // would lose to them. Skipped when the caller holds the connection;
+        // opening the store does it too.
+        let ahead = clock().is_ahead_of(now_ms);
+        if ahead
+            && let Ok(conn) = self.conn.try_lock()
+            && let Err(e) = self.restamp_future_in(&conn, now_ms)
+        {
+            crate::diag::report!("restamping future rows: {e}");
+        }
+        clock().tick(now_ms)
     }
 
     /// Appends one answer and returns it as logged.

@@ -222,12 +222,18 @@ impl HlcClock {
         &self.device
     }
 
+    /// True when the last stamp is further ahead of `now_ms` than Steps
+    /// Cloud accepts: the next [`Self::tick`] starts again from now.
+    pub fn is_ahead_of(&self, now_ms: i64) -> bool {
+        self.last_ms > now_ms.saturating_add(steps_protocol::sync::MAX_CLOCK_SKEW_MS)
+    }
+
     pub fn tick(&mut self, now_ms: i64) -> Hlc {
         // A stamp further ahead than Steps Cloud accepts came from a clock
         // that was wrong (or a backup stamped in the future). Keeping it
         // would pin every later write there, and the hub would refuse them
         // all until real time caught up (#539): start again from now.
-        if self.last_ms > now_ms.saturating_add(steps_protocol::sync::MAX_CLOCK_SKEW_MS) {
+        if self.is_ahead_of(now_ms) {
             self.last_ms = now_ms;
             self.counter = 0;
             return Hlc { wall_ms: now_ms, counter: 0, device: self.device.clone() };

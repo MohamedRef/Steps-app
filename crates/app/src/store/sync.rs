@@ -290,9 +290,17 @@ impl Store {
     /// instead of being refused as clock skew until real time catches up.
     /// Returns how many were stamped again.
     pub fn restamp_future(&self, now_ms: i64) -> Result<usize> {
+        let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+        self.restamp_future_in(&conn, now_ms)
+    }
+
+    /// [`Self::restamp_future`] on a connection the caller already holds.
+    /// Rows too (#606): a row whose op the hub refused, or that went up
+    /// before the clock check, still carries the future stamp and would
+    /// beat every later local write.
+    pub(super) fn restamp_future_in(&self, conn: &Connection, now_ms: i64) -> Result<usize> {
         let device = self.device();
         let limit = now_ms.saturating_add(steps_protocol::sync::MAX_CLOCK_SKEW_MS);
-        let conn = self.conn.lock().unwrap();
         let ahead: Vec<(String, Op)> = {
             let mut stmt = conn.prepare(
                 "SELECT op_id, op FROM sync_outbox
@@ -307,7 +315,7 @@ impl Store {
         };
         let mut done = 0;
         for (op_id, op) in ahead {
-            let Some(key_col) = key_column(&conn, &op.table)? else { continue };
+            let Some(key_col) = key_column(conn, &op.table)? else { continue };
             let fresh = self.tick(now_ms);
             conn.execute(
                 &format!(
@@ -318,8 +326,30 @@ impl Store {
                 params![fresh.wall_ms, fresh.counter, op.row_id, op.hlc.wall_ms, op.hlc.counter, device],
             )?;
             conn.execute("DELETE FROM sync_outbox WHERE op_id = ?1", [&op_id])?;
-            enqueue(&conn, &op.table, &key_col, &op.row_id, &device)?;
+            enqueue(conn, &op.table, &key_col, &op.row_id, &device)?;
             done += 1;
+        }
+        // Rows still ahead with no op waiting.
+        for (table, _) in TABLES {
+            let Some(key_col) = key_column(conn, table)? else { continue };
+            let keys: Vec<String> = {
+                let mut stmt = conn.prepare(&format!(
+                    "SELECT CAST(\"{key_col}\" AS TEXT) FROM \"{table}\" WHERE device_id = ?1 AND hlc_wall > ?2"
+                ))?;
+                stmt.query_map(params![device, limit], |r| r.get(0))?.collect::<rusqlite::Result<_>>()?
+            };
+            for key in keys {
+                let fresh = self.tick(now_ms);
+                conn.execute(
+                    &format!(
+                        "UPDATE \"{table}\" SET hlc_wall = ?1, hlc_counter = ?2
+                         WHERE CAST(\"{key_col}\" AS TEXT) = ?3 AND device_id = ?4"
+                    ),
+                    params![fresh.wall_ms, fresh.counter, key, device],
+                )?;
+                enqueue(conn, table, &key_col, &key, &device)?;
+                done += 1;
+            }
         }
         Ok(done)
     }
@@ -519,6 +549,33 @@ mod tests {
         // The next write is not pinned to the wrong date either.
         let next = phone.append_review(ev("cvs.L04.002", now)).unwrap();
         assert!(next.hlc.wall_ms <= limit && next.hlc > row.hlc);
+    }
+
+    #[test]
+    fn a_setting_saved_while_the_clock_was_ahead_can_be_changed_once_it_is_right() {
+        // #606: the row kept its future stamp, so the next write lost to it.
+        const DAY: i64 = 86_400_000;
+        let now = crate::store::now_ms();
+        let phone = Store::open_in_memory().unwrap();
+        let ahead = Hlc { wall_ms: now + DAY, counter: 0, device: phone.device() };
+        phone.put_lww("settings", "key", "sound", None, "1", false, &ahead).unwrap();
+        // The clock that wrote it was ahead too.
+        phone.clock.lock().unwrap().observe(&ahead);
+        // Signed out, so no sync ever restamps it: only the store can.
+        phone.conn.lock().unwrap().execute("DELETE FROM sync_outbox", []).unwrap();
+        phone.put_setting("sound", &2u32).unwrap();
+        assert_eq!(phone.setting::<u32>("sound"), Some(2));
+
+        // And on opening: a copy with the future row, reopened.
+        let fresh = Store::open_in_memory().unwrap();
+        let ahead = Hlc { wall_ms: now + DAY, counter: 0, device: fresh.device() };
+        fresh.put_lww("settings", "key", "theme", None, "\"calm\"", false, &ahead).unwrap();
+        let (_, bytes) = fresh.snapshot().unwrap();
+        let reopened = Store::from_snapshot(&bytes).unwrap();
+        let limit = now + steps_protocol::sync::MAX_CLOCK_SKEW_MS;
+        assert!(reopened.outbox(10).unwrap().iter().all(|op| op.hlc.wall_ms <= limit));
+        reopened.put_setting("theme", &"glossy").unwrap();
+        assert_eq!(reopened.setting::<String>("theme").as_deref(), Some("glossy"));
     }
 
     #[test]
