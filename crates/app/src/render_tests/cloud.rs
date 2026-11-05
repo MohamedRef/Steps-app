@@ -122,6 +122,7 @@ fn signing_in_shows_each_step_and_its_problems() {
         (Problem::NotAllowed, tx::P_NOT_ALLOWED),
         (Problem::SignInCancelled, tx::P_CANCELLED),
         (Problem::SignInFailed, tx::P_FAILED),
+        (Problem::SignInInterrupted, tx::P_INTERRUPTED),
         (Problem::SignedOutRemotely, tx::P_REMOTE),
         (Problem::Network, tx::P_NETWORK),
         (Problem::Server, tx::P_SERVER),

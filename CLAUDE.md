@@ -28,7 +28,7 @@ The workstreams (which thread writes which course) are in `docs/WORKSTREAMS.md`.
 
 ## Language
 - Reply to Mohamed in Egyptian Arabic, and keep it short. Code, comments, commit messages and docs are in English.
-- UI text is Egyptian Arabic (`crates/app/src/i18n.rs`, one module per feature). Medical content is in English, wrapped in `<bdi>` inside Arabic UI.
+- UI text is Egyptian Arabic (`crates/app/src/i18n/`, one file per feature). Medical content is in English, wrapped in `<bdi>` inside Arabic UI.
 
 ## Workflow
 - **Nothing on GitHub names the tools the work was written with** (Mohamed, 2026-11-05): no assistant or AI names, no "generated with" footers, co-author trailers, session links or "requested by" headers in commits, branch names, PR titles and bodies, issues, comments, reviews, docs or code. Squash-merge with the PR's own title and body as the message, so branch commit trailers never reach `main`. CI checks the tracked files and the PR's title and body.
