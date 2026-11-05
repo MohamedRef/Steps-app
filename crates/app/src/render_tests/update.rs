@@ -58,6 +58,19 @@ fn release(build: u64, published_at: &str, changes: Vec<Change>, content_only: b
     BuildChanges { version: "0.1.0".into(), build, published_at: published_at.into(), changes, content_only }
 }
 
+/// A publish time `days` days before now, so date labels ("today",
+/// "5 days ago", "1 سبتمبر") don't go stale as the calendar moves.
+fn days_ago(days: i64) -> String {
+    (chrono::Utc::now() - chrono::Duration::days(days)).format("%Y-%m-%dT%H:%M:%SZ").to_string()
+}
+
+/// How the sheet labels a date more than a week old in this year: "1 سبتمبر".
+fn day_month(published: &str) -> String {
+    let d = chrono::DateTime::parse_from_rfc3339(published).unwrap();
+    use chrono::Datelike;
+    format!("{} {}", d.day(), tx::MONTHS[d.month0() as usize])
+}
+
 fn notify() -> Prefs {
     Prefs { mode: Mode::Notify, ..Prefs::default() }
 }
@@ -339,31 +352,12 @@ fn many(kind: ChangeKind, n: usize, what: &str) -> Vec<Change> {
     (1..=n).map(|i| change(kind, &format!("{what} {i}"))).collect()
 }
 
-/// The release time `days` before now, at 08:00 UTC that day.
-fn ago(days: i64) -> String {
-    (chrono::Utc::now() - chrono::Duration::days(days)).format("%Y-%m-%dT08:00:00Z").to_string()
-}
-
-/// How the changelog dates a build `days` old (over a week): "28 أكتوبر",
-/// with the year when it isn't this year's.
-fn month_label(days: i64) -> String {
-    use chrono::Datelike;
-    let now = chrono::Utc::now();
-    let d = now - chrono::Duration::days(days);
-    let month = tx::MONTHS[d.month0() as usize];
-    if d.year() == now.year() {
-        format!("{} {month}", d.day())
-    } else {
-        format!("{} {month} {}", d.day(), d.year())
-    }
-}
-
 #[test]
 fn the_changelog_folds_long_lists_and_older_builds() {
     let u = install(&dead_feed(), "0.1.0", 44, notify());
     let mut history = vec![release(
         50,
-        &ago(0),
+        &days_ago(0),
         [
             many(ChangeKind::New, 8, "محاضرة"),
             many(ChangeKind::Improved, 2, "تحسين"),
@@ -372,23 +366,17 @@ fn the_changelog_folds_long_lists_and_older_builds() {
         .concat(),
         false,
     )];
-    // Dates from today's clock: fixed ones read "yesterday" the day after
-    // they were written, and the test failed on its own.
-    let dates = [ago(1), ago(2), ago(5), ago(40), ago(400)];
+    let dates = [days_ago(1), days_ago(2), days_ago(5), days_ago(60), days_ago(400)];
+    let installed_at = days_ago(500);
     for (i, d) in dates.iter().enumerate() {
         history.push(release(
             49 - i as u64,
-            d,
+            d.as_str(),
             vec![change(ChangeKind::Fixed, &format!("إصلاح {}", 49 - i))],
             false,
         ));
     }
-    history.push(release(
-        44,
-        "2025-11-01T08:00:00Z",
-        vec![change(ChangeKind::New, "اللي معاك دلوقتي")],
-        false,
-    ));
+    history.push(release(44, &installed_at, vec![change(ChangeKind::New, "اللي معاك دلوقتي")], false));
     u.set_status_for_tests(|s| s.history = history.clone());
     let mut app = open_updates();
     app.tap(tx::HISTORY);
@@ -408,7 +396,7 @@ fn the_changelog_folds_long_lists_and_older_builds() {
     app.assert_has(tx::YESTERDAY);
     app.assert_has(tx::TWO_DAYS_AGO);
     app.assert_has(&tx::DAYS_AGO.replace("{n}", "5"));
-    app.assert_has(&month_label(40));
+    app.assert_has(&day_month(&dates[3]));
     app.assert_lacks("إصلاح 49");
     app.tap("v0.1.0 (49)");
     app.assert_has("إصلاح 49");
@@ -416,7 +404,7 @@ fn the_changelog_folds_long_lists_and_older_builds() {
     app.assert_lacks("إصلاح 49");
     app.assert_lacks(tx::BADGE_INSTALLED);
     app.tap(tx::SHOW_OLDER);
-    app.assert_has(&month_label(400));
+    app.assert_has(&installed_at[..4]);
     app.assert_has(tx::BADGE_INSTALLED);
     // The foot: GitHub opens the channel's releases page.
     app.tap("GitHub");
