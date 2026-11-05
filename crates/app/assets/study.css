@@ -195,14 +195,6 @@
   .st-item .desk-side .st-grades { position: static; }
 }
 
-/* ---------- Glossy ----------
-   The pinned progress row is a small floating surface: a light blur over
-   the gradient instead of a solid band. Solid when transparency is reduced. */
-.app[data-appearance="glossy"] .st-progress {
-  background: color-mix(in srgb, var(--bg) 82%, transparent);
-  -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
-}
-.app[data-appearance="glossy"] .st-answer { border-radius: 18px; }
-@media (prefers-reduced-transparency: reduce) {
-  .app[data-appearance="glossy"] .st-progress { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
-}
+/* ---------- Stepped ----------
+   The revealed answer stands on the ledge like a card. */
+.app[data-appearance="stepped"] .st-answer { box-shadow: 0 3px 0 var(--ledge); }

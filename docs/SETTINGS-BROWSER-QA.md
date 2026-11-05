@@ -14,7 +14,7 @@ No real user data, live APIs, app launch, installation or release is involved.
 | Width | 320, 384, 600, 840, 1280 CSS px |
 | Height | 900 CSS px |
 | Theme | Every supported theme; System variants in light and dark OS schemes |
-| Appearance | Calm, Glossy and Liquid Glass |
+| Appearance | Every theme in Stepped; every style (Stepped, Calm, Outline, Tinted, Liquid Glass) on Paper, Night and True black |
 | Text size | Normal and the largest supported size |
 | Direction | Arabic RTL with the production Latin medical sample |
 

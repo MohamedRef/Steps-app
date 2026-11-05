@@ -1565,25 +1565,36 @@ pub mod settings {
     pub const THEME: &str = "الألوان";
     pub const THEME_SYSTEM: &str = "زي الجهاز";
     pub const THEME_SYSTEM_SUB: &str = "فاتح بالنهار، وغامق لما الجهاز يبقى غامق";
-    pub const THEME_PAPER: &str = "ورق";
-    pub const THEME_PAPER_SUB: &str = "فاتح وهادي";
-    pub const THEME_NIGHT: &str = "ليل";
-    pub const THEME_NIGHT_SUB: &str = "غامق";
+    pub const THEME_PAPER: &str = "صبح";
+    pub const THEME_PAPER_SUB: &str = "فاتح، بترولي على ورق رايق";
+    pub const THEME_NIGHT: &str = "بترولي";
+    pub const THEME_NIGHT_SUB: &str = "غامق، أزرق بترولي عميق";
     pub const THEME_SYSTEM_BLACK: &str = "زي الجهاز، وبالليل أسود";
     pub const THEME_SYSTEM_BLACK_SUB: &str = "فاتح بالنهار، وأسود خالص لما الجهاز يبقى غامق";
     pub const THEME_BLACK: &str = "أسود AMOLED";
     pub const THEME_BLACK_SUB: &str = "أسود خالص، فبكسلات شاشة الأموليد بتطفي: أريح للعين بالليل وبتوفّر بطارية";
-    pub const THEME_SHIFT: &str = "نبطشية";
+    pub const THEME_SHIFT: &str = "سهر";
     pub const THEME_SHIFT_SUB: &str = "غامق ودافي من غير ضوء أزرق، للمذاكرة متأخر قبل النوم";
+    pub const THEME_SCRUBS: &str = "سكرَب";
+    pub const THEME_SCRUBS_SUB: &str = "فاتح، أخضر تيل زي لبس العمليات";
+    pub const THEME_SEPIA: &str = "سيبيا";
+    pub const THEME_SEPIA_SUB: &str = "ورق كتاب دافي وحبر بني، للقراية الطويلة";
+    pub const THEME_INDIGO: &str = "نيلي";
+    pub const THEME_INDIGO_SUB: &str = "غامق، أزرق بنفسجي هادي";
+    pub const THEME_CONTRAST: &str = "تباين عالي";
+    pub const THEME_CONTRAST_SUB: &str = "أسود على أبيض وحدود أوضح، للنور القوي أو العين التعبانة";
 
     pub const APPEARANCE: &str = "نمط الواجهة";
-    pub const APPEARANCE_CALM: &str = "هادئ";
-    pub const APPEARANCE_CALM_SUB: &str = "أسطح سادة وهادية، من غير لمعة";
-    pub const APPEARANCE_GLOSSY: &str = "Glossy · Material You";
-    pub const APPEARANCE_GLOSSY_SUB: &str =
-        "أسطح ملونة فيها لمعة خفيفة وأزرار مدوّرة. ألوانها من ألوان Steps، مش من خلفية الموبايل";
-    pub const APPEARANCE_LIQUID_GLASS: &str = "Liquid Glass · iOS";
-    pub const APPEARANCE_LIQUID_GLASS_SUB: &str =
+    pub const APPEARANCE_STEPPED: &str = "درجات";
+    pub const APPEARANCE_STEPPED_SUB: &str = "شكل Steps: كروت واقفة على درجة، وزراير بتنزل لما تدوس عليها";
+    pub const APPEARANCE_CALM: &str = "سادة";
+    pub const APPEARANCE_CALM_SUB: &str = "أسطح سادة وخطوط رفيعة، من غير درجات ولا لمعة";
+    pub const APPEARANCE_OUTLINE: &str = "خطوط";
+    pub const APPEARANCE_OUTLINE_SUB: &str = "كروت شفافة بحدود واضحة، زي كشكول المذاكرة";
+    pub const APPEARANCE_TINTED: &str = "ملوّن";
+    pub const APPEARANCE_TINTED_SUB: &str = "كروت متلوّنة بلون الثيم، والصفحة أهدى منها";
+    pub const APPEARANCE_GLASS: &str = "زجاج";
+    pub const APPEARANCE_GLASS_SUB: &str =
         "خلفية وكروت زجاجية ناعمة وشريط تنقّل مطفي، مع الحفاظ على وضوح أسئلة المذاكرة";
 
     pub const TEXT_SIZE: &str = "حجم الواجهة";

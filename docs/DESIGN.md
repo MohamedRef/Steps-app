@@ -1,6 +1,7 @@
 # Steps design system
 
-The 2026-10 redesign (Calm / Glossy · Material You / Liquid Glass). Every screen builds
+Steps' own identity (2026-11-05): the S mark, Readex Pro, the stepped shape
+language, eight colour themes and five surface styles. Every screen builds
 from the tokens and shared classes below; feature stylesheets add layout,
 never their own colours or their own copy of a button, chip or sheet.
 
@@ -41,29 +42,37 @@ Aliases in `parts.css` for code ported from the design reference:
 `--bad-bg`, `--gold-bg` = the `-soft` tokens. Careful: the reference's
 `--accent` is our `--accent-soft`.
 
-Themes: Paper and Night carry the redesign's steps-light / steps-dark
+Themes (Arabic names in brackets): Paper («صبح»), Night («بترولي»), True
+black («أسود AMOLED»), Night shift («سهر»), Scrubs («سكرَب», clinic teal),
+Sepia («سيبيا», warm book paper with a cool sheet), Indigo («نيلي», a
+blue-violet dark) and High contrast («تباين عالي»). Paper and Night carry the
+redesign's steps-light / steps-dark
 (Paper's muted is one step darker than the reference's `#5b7080` to pass AA
 on `--surface-2`). True black keeps `#000000` page and cards with Night's
 brand blue. Night shift keeps its amber accent: it must have no colour where
 blue outweighs red. Theme ids never change. `theme.rs` tests every pairing
 above against WCAG AA (4.5:1).
 
-## Appearance: Calm, Glossy and Liquid Glass
+## Appearance: Stepped, Calm, Outline, Tinted and Liquid Glass
 
 A device preference (`prefs::Appearance`, `appearance=` in
-`device-prefs.txt`, default Calm, never synced), picked in
-Settings › Look › "نمط الواجهة". It sets `data-appearance="calm|glossy|liquid-glass"`
-on `.app`; only CSS reads it, so switching keeps every screen's state.
+`device-prefs.txt`, default Stepped, never synced), picked in
+Settings › Look › "نمط الواجهة". It sets
+`data-appearance="stepped|calm|outline|tinted|liquid-glass"` on `.app`; only
+CSS reads it, so switching keeps every screen's state. The old `glossy`
+value loads as Stepped.
 
-- Calm (default): solid surfaces, hairlines, 18px cards, 13px controls.
-- Glossy (`assets/appearance.css`): tonal gradients from the theme's own
-  tokens, a faint top highlight, pill buttons, 22px cards, a still sheen on
-  `.hero`. Blur (18px) only on small floating surfaces (`.nav`,
-  `.more-sheet`, `.sheet`); long lists get opaque gradients. Nothing
-  animates on its own. Selected/right/wrong/disabled stay solid.
-  `prefers-reduced-transparency` and `prefers-contrast: more` fall back to
-  solid surfaces. On True black, `--glass-white` is black so pixels stay
-  off. It does not take colours from the wallpaper; don't claim it does.
+- Stepped (default, `assets/appearance.css`): Steps' own look. Cards stand
+  on a solid ledge (`--ledge`, the hairline warmed toward the brand) through
+  `--card-shadow`; brand-filled things (the hero, the primary button, the
+  picked session length) stand on `--ledge-deep`. Pressing moves a button
+  down onto its ledge instead of shrinking it. No blur.
+- Calm: flat surfaces and hairlines, main.css as it is.
+- Outline: cards are transparent with a firmer 1.5px `--outline`, like a
+  study notebook; the bars take the page colour.
+- Tinted: cards take `--soft`, tiles `--surface-2`, the bar `--soft`;
+  answers stay on `--surface` so a question reads the same in every style.
+- More contrast and forced colours drop ledges and tints for plain lines.
 - Liquid Glass (`assets/liquid-glass.css`): an **iOS-inspired CSS treatment**, not
   Apple's native refraction. It reads as glass because there is something
   behind it: a fixed colour field from the theme (accent, accent-soft, gold,
@@ -85,17 +94,17 @@ on `.app`; only CSS reads it, so switching keeps every screen's state.
   `surface_ink_stays_solid_under_liquid_glass`). Reduced transparency, more
   contrast and forced colours fall back to solid surfaces.
 
-A feature that needs a Glossy variant of its own class writes
-`.app[data-appearance="glossy"] .my-class { … }` in its own stylesheet,
-from tokens only.
+A feature that needs a style variant of its own class writes
+`.app[data-appearance="stepped"] .my-class { … }` in its own stylesheet,
+from tokens only (`--ledge`, `--ledge-deep`, `--outline` are set per style).
 
 ## Type, space, shape
 
-Fonts are bundled (`fonts.rs`): IBM Plex Sans Arabic for the UI,
-Plus Jakarta Sans for English (`bdi`, `--font-latin`). Sizes and spacing are
+Fonts are bundled (`fonts.rs`): Readex Pro (variable, 160–700) draws both
+the Arabic UI and English terms (`bdi`, `--font-latin`). Sizes and spacing are
 the existing rem tokens (`--fs-sm/md/lg/xl`, `--sp-1..6`, `--tap`,
 `--tap-lg`, `--row`), so Settings › Look › interface size scales them all.
-Radii: `--radius-control` 13px, `--radius-card` 18px (22px Glossy),
+Radii: `--radius` 10px, `--radius-control` 13px, `--radius-card` 16px,
 `--radius-sheet` 24px, `--radius-pill`. Touch targets: `--target` 48px.
 
 ## Shared classes

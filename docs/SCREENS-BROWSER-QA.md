@@ -25,7 +25,7 @@ The store is in memory and the review log is empty, so items are fresh.
 |---|---|
 | Width | 320, 384, 600, 840, 1280 CSS px (height 900) |
 | Theme | System, in the light and dark OS schemes |
-| Appearance | Calm and Glossy |
+| Appearance | Stepped and Calm |
 | Text size | Normal and Larger |
 | Direction | Arabic RTL |
 

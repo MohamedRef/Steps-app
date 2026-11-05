@@ -96,15 +96,15 @@ impl Palette {
             out.push_str(value);
             out.push(';');
         }
-        // Glossy's highlights mix toward white and its page glows with the
-        // accent; on True black both turn to black, so its pixels stay off.
-        // Liquid Glass (assets/liquid-glass.css) hides its colour field and
-        // keeps surfaces opaque there for the same reason.
+        // Glass highlights mix toward white; on True black they turn to
+        // black, so its pixels stay off. Liquid Glass
+        // (assets/liquid-glass.css) hides its colour field and keeps surfaces
+        // opaque there for the same reason.
         out.push_str(if self.is_true_black() {
-            "--glass-white:#000000;--glass-glow:transparent;\
+            "--glass-white:#000000;\
              --glass-field-on:0;--glass-alpha:100%;--glass-alpha-2:100%;--glass-alpha-bg:100%;"
         } else {
-            "--glass-white:#ffffff;--glass-glow:var(--accent-soft);"
+            "--glass-white:#ffffff;"
         });
         out.push_str("color-scheme:");
         out.push_str(self.scheme.as_str());
@@ -213,6 +213,101 @@ pub const NIGHT_SHIFT: Palette = Palette {
     sheet: "#3a2c1f",
 };
 
+/// Scrubs: clinic teal on a fresh mint page, like a ward in the morning.
+pub const SCRUBS: Palette = Palette {
+    scheme: Scheme::Light,
+    bg: "#f1f7f5",
+    surface: "#ffffff",
+    surface_2: "#e3efeb",
+    text: "#12322c",
+    muted: "#4c665f",
+    line: "#d3e3de",
+    accent: "#0f6b5f",
+    on_accent: "#ffffff",
+    accent_soft: "#d2ece6",
+    accent_ink: "#12584e",
+    soft: "#e5f2ee",
+    good: "#256d48",
+    good_soft: "#e6f3ea",
+    bad: "#a8453a",
+    bad_soft: "#fbece8",
+    gold: "#80601a",
+    gold_soft: "#fbf1d9",
+    sheet: "#fcf1d8",
+};
+
+/// Sepia: warm book paper and brown ink, for long reading. The info sheet is
+/// cool blue so it never melts into the warm page.
+pub const SEPIA: Palette = Palette {
+    scheme: Scheme::Light,
+    bg: "#f6f0e4",
+    surface: "#fcf8f0",
+    surface_2: "#efe6d4",
+    text: "#3a2c1d",
+    muted: "#65543f",
+    line: "#e2d6c0",
+    accent: "#8a4b22",
+    on_accent: "#ffffff",
+    accent_soft: "#f1dfcc",
+    accent_ink: "#6e3c1b",
+    soft: "#f2e9d9",
+    good: "#3b6530",
+    good_soft: "#e8efdc",
+    bad: "#9c3a2b",
+    bad_soft: "#f7e3dc",
+    gold: "#6e510f",
+    gold_soft: "#f5e7c2",
+    sheet: "#dde9f0",
+};
+
+/// Indigo: deep blue-violet with a soft periwinkle brand, a calmer dark than
+/// Night.
+pub const INDIGO: Palette = Palette {
+    scheme: Scheme::Dark,
+    bg: "#14142b",
+    surface: "#1c1d3a",
+    surface_2: "#26284b",
+    text: "#eeeefa",
+    muted: "#b2b4d6",
+    line: "#45487a",
+    accent: "#b4b8ff",
+    on_accent: "#1a1b3d",
+    accent_soft: "#2e3163",
+    accent_ink: "#d2d4ff",
+    soft: "#23254a",
+    good: "#9fdcb3",
+    good_soft: "#1d3a33",
+    bad: "#f4b2a6",
+    bad_soft: "#4a2a35",
+    gold: "#e6c983",
+    gold_soft: "#3b3626",
+    sheet: "#383b78",
+};
+
+/// High contrast: black on white with a strong blue brand, outlines a step
+/// darker, for bright light or tired eyes.
+pub const CONTRAST: Palette = Palette {
+    scheme: Scheme::Light,
+    bg: "#ffffff",
+    surface: "#ffffff",
+    surface_2: "#eeeeee",
+    text: "#000000",
+    muted: "#333333",
+    line: "#6b6b6b",
+    accent: "#003d99",
+    on_accent: "#ffffff",
+    accent_soft: "#dbe7ff",
+    accent_ink: "#002a6b",
+    soft: "#f0f0f0",
+    good: "#0b5a2e",
+    good_soft: "#e3f3e8",
+    bad: "#9e1b0f",
+    bad_soft: "#fde4e0",
+    gold: "#5c4200",
+    gold_soft: "#fbefcc",
+    sheet: "#fff1c2",
+};
+
 /// What the learner picked in Settings › Look.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
 pub enum Theme {
@@ -226,11 +321,25 @@ pub enum Theme {
     /// True black (AMOLED).
     Black,
     NightShift,
+    Scrubs,
+    Sepia,
+    Indigo,
+    Contrast,
 }
 
 impl Theme {
-    pub const ALL: [Self; 6] =
-        [Self::System, Self::SystemBlack, Self::Paper, Self::Night, Self::Black, Self::NightShift];
+    pub const ALL: [Self; 10] = [
+        Self::System,
+        Self::SystemBlack,
+        Self::Paper,
+        Self::Night,
+        Self::Black,
+        Self::NightShift,
+        Self::Scrubs,
+        Self::Sepia,
+        Self::Indigo,
+        Self::Contrast,
+    ];
 
     /// Stored value.
     pub fn as_str(self) -> &'static str {
@@ -241,6 +350,10 @@ impl Theme {
             Self::Night => "night",
             Self::Black => "black",
             Self::NightShift => "night-shift",
+            Self::Scrubs => "scrubs",
+            Self::Sepia => "sepia",
+            Self::Indigo => "indigo",
+            Self::Contrast => "contrast",
         }
     }
 
@@ -257,6 +370,10 @@ impl Theme {
             Self::Night => Some(&NIGHT),
             Self::Black => Some(&BLACK),
             Self::NightShift => Some(&NIGHT_SHIFT),
+            Self::Scrubs => Some(&SCRUBS),
+            Self::Sepia => Some(&SEPIA),
+            Self::Indigo => Some(&INDIGO),
+            Self::Contrast => Some(&CONTRAST),
         }
     }
 
@@ -328,8 +445,25 @@ fn rgb(hex: &str) -> (u8, u8, u8) {
 mod tests {
     use super::*;
 
-    const ALL: [(&str, &Palette); 4] =
-        [("paper", &PAPER), ("night", &NIGHT), ("black", &BLACK), ("night-shift", &NIGHT_SHIFT)];
+    const ALL: [(&str, &Palette); 8] = [
+        ("paper", &PAPER),
+        ("night", &NIGHT),
+        ("black", &BLACK),
+        ("night-shift", &NIGHT_SHIFT),
+        ("scrubs", &SCRUBS),
+        ("sepia", &SEPIA),
+        ("indigo", &INDIGO),
+        ("contrast", &CONTRAST),
+    ];
+
+    #[test]
+    fn every_fixed_theme_is_tested() {
+        let fixed = Theme::ALL.iter().filter(|t| t.palette().is_some()).count();
+        assert_eq!(fixed, ALL.len());
+        for (name, p) in ALL {
+            assert_eq!(Theme::parse(name).palette(), Some(p), "{name}");
+        }
+    }
 
     #[test]
     fn every_theme_meets_wcag_aa_for_text() {
@@ -417,8 +551,8 @@ mod tests {
         // With surface == bg, cards are drawn by their outline alone.
         assert!(contrast(BLACK.line, BLACK.bg) >= 1.5, "card outlines must show on black");
         assert_eq!(Theme::Black.css(), format!(":root{{{}}}", BLACK.css()));
-        // Glossy's white highlights and glow turn black too.
-        assert!(BLACK.css().contains("--glass-white:#000000;--glass-glow:transparent;"));
+        // Glass's white highlights turn black too.
+        assert!(BLACK.css().contains("--glass-white:#000000;--glass-field-on:0;"));
         assert!(BLACK.css().contains("--glass-field-on:0;--glass-alpha:100%;"));
         assert!(!PAPER.css().contains("--glass-field-on"));
         assert!(!PAPER.is_true_black() && PAPER.css().contains("--glass-white:#ffffff;"));

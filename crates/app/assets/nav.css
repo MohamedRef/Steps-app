@@ -28,6 +28,11 @@
   /* Settings sits at the foot of the rail; the top bar is gone. */
   .nav-foot { display: flex; margin-block-start: auto; }
   .nav-foot .label { font-size: 0.75rem; }
+  /* On the rail the step marks the inline-start edge instead of the top. */
+  .nav-item[aria-current="page"]::before {
+    inset-block: 22%; inset-inline: 0 auto; block-size: auto; inline-size: 3px;
+    border-radius: 0 3px 3px 0;
+  }
 }
 
 @media (min-width: 840px) {

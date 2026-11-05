@@ -131,31 +131,41 @@ impl NavStyle {
 }
 
 /// The surface style (Settings › Look › "نمط الواجهة"), independent of the
-/// colour theme: Calm is solid and quiet; Glossy adds tonal gradients, a
-/// soft top highlight, pill buttons and blur on small floating surfaces.
-/// Liquid Glass keeps content solid and brings a frosted treatment to navigation.
-/// `data-appearance` on `.app` (assets/appearance.css, assets/liquid-glass.css).
+/// colour theme. Stepped, the default, is Steps' own look: cards stand on a
+/// solid ledge and buttons press down into it. Calm is flat with hairlines;
+/// Outline draws cards as clear outlines on the page; Tinted fills them with
+/// the theme's soft colour; Liquid Glass keeps content solid and brings a
+/// frosted treatment to navigation. `data-appearance` on `.app`
+/// (assets/appearance.css, assets/liquid-glass.css).
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum Appearance {
     #[default]
+    Stepped,
     Calm,
-    Glossy,
+    Outline,
+    Tinted,
     LiquidGlass,
 }
 
 impl Appearance {
-    pub const ALL: [Self; 3] = [Self::Calm, Self::Glossy, Self::LiquidGlass];
+    pub const ALL: [Self; 5] = [Self::Stepped, Self::Calm, Self::Outline, Self::Tinted, Self::LiquidGlass];
 
     /// Stored value and `data-appearance`.
     pub fn as_str(self) -> &'static str {
         match self {
+            Self::Stepped => "stepped",
             Self::Calm => "calm",
-            Self::Glossy => "glossy",
+            Self::Outline => "outline",
+            Self::Tinted => "tinted",
             Self::LiquidGlass => "liquid-glass",
         }
     }
 
     fn parse(s: &str) -> Self {
+        // "glossy" was the gradient style Stepped replaced (2026-11-05).
+        if s == "glossy" {
+            return Self::Stepped;
+        }
         Self::ALL.into_iter().find(|t| t.as_str() == s).unwrap_or_default()
     }
 }
@@ -169,8 +179,8 @@ pub struct DevicePrefs {
     pub pen_hover: bool,
     /// Peeks when the mouse rests on a word (Settings › Mac).
     pub mouse_hover: bool,
-    /// Calm, Glossy or Liquid Glass. Older files have no line for it
-    /// and loads as Calm.
+    /// Stepped, Calm, Outline, Tinted or Liquid Glass. Older files have no
+    /// line for it and load as Stepped.
     pub appearance: Appearance,
 }
 
@@ -282,7 +292,7 @@ mod tests {
             nav_style: NavStyle::Slim,
             pen_hover: false,
             mouse_hover: true,
-            appearance: Appearance::Glossy,
+            appearance: Appearance::Tinted,
         };
         assert_eq!(DevicePrefs::parse(&p.render()), p);
         assert_eq!(DevicePrefs::parse("theme=neon\nnonsense\ntext_size=huge"), DevicePrefs::default());
@@ -296,13 +306,16 @@ mod tests {
     }
 
     #[test]
-    fn a_file_from_before_the_redesign_loads_as_calm() {
+    fn a_file_from_before_the_redesign_loads_as_stepped() {
         // The exact file an older build wrote: no appearance line.
         let old = "theme=night\ntext_size=small\nnav_style=labels\npen_hover=on\nmouse_hover=off\n";
         let p = DevicePrefs::parse(old);
-        assert_eq!(p.appearance, Appearance::Calm);
+        assert_eq!(p.appearance, Appearance::Stepped);
         assert_eq!((p.theme, p.text_size, p.mouse_hover), (Theme::Night, TextSize::Small, false));
-        assert_eq!(DevicePrefs::parse("appearance=sparkly").appearance, Appearance::Calm);
+        assert_eq!(DevicePrefs::parse("appearance=sparkly").appearance, Appearance::Stepped);
+        // The old gradient style moves to Stepped, the style that replaced it.
+        assert_eq!(DevicePrefs::parse("appearance=glossy").appearance, Appearance::Stepped);
+        assert_eq!(DevicePrefs::parse("appearance=calm").appearance, Appearance::Calm);
         for appearance in Appearance::ALL {
             let with_appearance = DevicePrefs { appearance, ..p };
             assert_eq!(DevicePrefs::parse(&with_appearance.render()), with_appearance);

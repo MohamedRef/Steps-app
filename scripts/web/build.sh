@@ -41,7 +41,7 @@ if [[ $profile != dev ]] && command -v wasm-opt >/dev/null; then
     "$out/steps_bg.wasm" -o "$out/steps_bg.wasm"
 fi
 cp "$pack" "$out/content.pack"
-cp web/index.html web/manifest.webmanifest web/_headers "$out/"
+cp web/index.html web/manifest.webmanifest web/_headers web/icon.svg "$out/"
 cp assets/export/desktop/256x256.png "$out/icon-256.png"
 cp assets/export/desktop/512x512.png "$out/icon-512.png"
 # The service worker keeps exactly this build's files: its name is their
