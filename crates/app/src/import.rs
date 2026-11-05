@@ -156,7 +156,7 @@ pub fn ImportCard() -> Element {
                 }
                 }
                 details {
-                    summary { class: "small", {tx::IMPORT_PASTE} }
+                    summary { class: "small tap-summary", {tx::IMPORT_PASTE} }
                     textarea {
                         class: "export-text",
                         dir: "ltr",

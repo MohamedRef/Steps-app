@@ -137,7 +137,7 @@ pub fn DiagnosticsCard() -> Element {
                 p { {tx::DIAG_EMPTY} }
             } else {
                 details {
-                    summary { {tx::diag_lines(count)} }
+                    summary { class: "tap-summary", {tx::diag_lines(count)} }
                     pre { class: "diag-lines", dir: "ltr",
                         for (i, line) in shown.read().iter().enumerate() {
                             bdi { key: "{i}", "{line}\n" }
