@@ -223,6 +223,15 @@ impl HlcClock {
     }
 
     pub fn tick(&mut self, now_ms: i64) -> Hlc {
+        // A stamp further ahead than Steps Cloud accepts came from a clock
+        // that was wrong (or a backup stamped in the future). Keeping it
+        // would pin every later write there, and the hub would refuse them
+        // all until real time caught up (#539): start again from now.
+        if self.last_ms > now_ms.saturating_add(steps_protocol::sync::MAX_CLOCK_SKEW_MS) {
+            self.last_ms = now_ms;
+            self.counter = 0;
+            return Hlc { wall_ms: now_ms, counter: 0, device: self.device.clone() };
+        }
         if now_ms > self.last_ms {
             self.last_ms = now_ms;
             self.counter = 0;
@@ -390,6 +399,21 @@ mod tests {
         c.observe(&Hlc { wall_ms: 5000, counter: 3, device: "tab".into() });
         let after = c.tick(2000);
         assert_eq!((after.wall_ms, after.counter), (5000, 4));
+    }
+
+    #[test]
+    fn a_stamp_from_a_wrong_clock_does_not_pin_later_writes() {
+        // #539: written with the date a day ahead, then the clock is fixed.
+        const DAY: i64 = 86_400_000;
+        let mut c = HlcClock::new("s24");
+        c.observe(&Hlc { wall_ms: 1_000 + DAY, counter: 7, device: "s24".into() });
+        let next = c.tick(1_000);
+        assert_eq!((next.wall_ms, next.counter), (1_000, 0), "back to the real clock");
+        assert!(c.tick(1_000) > next, "and still going up from there");
+        // Within the hub's skew, a stamp ahead is kept as before.
+        let mut c = HlcClock::new("s24");
+        c.observe(&Hlc { wall_ms: 61_000, counter: 2, device: "tab".into() });
+        assert_eq!(c.tick(1_000).wall_ms, 61_000);
     }
 
     #[test]

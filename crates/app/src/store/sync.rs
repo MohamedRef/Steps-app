@@ -284,6 +284,46 @@ impl Store {
         Ok(ops)
     }
 
+    /// This device's own ops still waiting with a stamp further ahead than
+    /// Steps Cloud accepts (written while the clock was wrong, #539) take a
+    /// fresh stamp, row and op both, so they go up once the clock is right
+    /// instead of being refused as clock skew until real time catches up.
+    /// Returns how many were stamped again.
+    pub fn restamp_future(&self, now_ms: i64) -> Result<usize> {
+        let device = self.device();
+        let limit = now_ms.saturating_add(steps_protocol::sync::MAX_CLOCK_SKEW_MS);
+        let conn = self.conn.lock().unwrap();
+        let ahead: Vec<(String, Op)> = {
+            let mut stmt = conn.prepare(
+                "SELECT op_id, op FROM sync_outbox
+                 WHERE json_extract(op, '$.hlc.wall_ms') > ?1 AND json_extract(op, '$.relay') IS NULL
+                 ORDER BY seq",
+            )?;
+            stmt.query_map([limit], |r| Ok((r.get::<_, String>(0)?, r.get::<_, String>(1)?)))?
+                .filter_map(|r| r.ok())
+                .filter_map(|(id, json)| Some((id, serde_json::from_str::<Op>(&json).ok()?)))
+                .filter(|(_, op)| op.hlc.device == device)
+                .collect()
+        };
+        let mut done = 0;
+        for (op_id, op) in ahead {
+            let Some(key_col) = key_column(&conn, &op.table)? else { continue };
+            let fresh = self.tick(now_ms);
+            conn.execute(
+                &format!(
+                    "UPDATE \"{}\" SET hlc_wall = ?1, hlc_counter = ?2
+                     WHERE \"{key_col}\" = ?3 AND hlc_wall = ?4 AND hlc_counter = ?5 AND device_id = ?6",
+                    op.table
+                ),
+                params![fresh.wall_ms, fresh.counter, op.row_id, op.hlc.wall_ms, op.hlc.counter, device],
+            )?;
+            conn.execute("DELETE FROM sync_outbox WHERE op_id = ?1", [&op_id])?;
+            enqueue(&conn, &op.table, &key_col, &op.row_id, &device)?;
+            done += 1;
+        }
+        Ok(done)
+    }
+
     /// The tables of these outbox ops (unknown ids are left out).
     pub fn outbox_tables<'a>(&self, op_ids: impl IntoIterator<Item = &'a str>) -> Vec<String> {
         let conn = self.conn.lock().unwrap();
@@ -457,6 +497,28 @@ mod tests {
         // The tablet's next stamp sorts after the phone's.
         let mine = tablet.append_review(ev("cvs.L04.002", 0)).unwrap();
         assert!(mine.hlc > ops[2].op.hlc);
+    }
+
+    #[test]
+    fn writes_from_a_clock_that_was_ahead_go_up_once_it_is_right() {
+        // #539: an answer saved with the date a day ahead, then the clock is fixed.
+        const DAY: i64 = 86_400_000;
+        let now = crate::store::now_ms();
+        let phone = Store::open_in_memory().unwrap();
+        let ahead = phone.append_review(ev("cvs.L04.001", now + DAY)).unwrap();
+        assert!(ahead.hlc.wall_ms >= now + DAY);
+        assert_eq!(phone.restamp_future(now).unwrap(), 1);
+        let ops = phone.outbox(10).unwrap();
+        assert_eq!(ops.len(), 1);
+        let limit = now + steps_protocol::sync::MAX_CLOCK_SKEW_MS;
+        assert!(ops[0].hlc.wall_ms <= limit, "{:?}", ops[0].hlc);
+        // The row carries the new stamp too, and nothing else is touched.
+        let row = phone.reviews().unwrap().into_iter().find(|r| r.id == ahead.id).unwrap();
+        assert_eq!(row.hlc, ops[0].hlc);
+        assert_eq!(phone.restamp_future(now).unwrap(), 0);
+        // The next write is not pinned to the wrong date either.
+        let next = phone.append_review(ev("cvs.L04.002", now)).unwrap();
+        assert!(next.hlc.wall_ms <= limit && next.hlc > row.hlc);
     }
 
     #[test]
