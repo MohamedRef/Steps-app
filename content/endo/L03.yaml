@@ -76,9 +76,27 @@ items:
   - id: endo.L03.007
     kind: card
     topic: hypothalamic-pituitary-hormones
-    front: What are the functions of oxytocin?
-    back: Uterine contractions during labor and the milk letdown reflex in response to suckling. It also modulates fear, anxiety, social bonding, mood and depression.
+    front: What are the two classic functions of oxytocin?
+    back: Uterine contractions during labor, and the milk letdown reflex in response to suckling.
     src: { page: 332, quote: "Oxytocin Causes uterine contractions during labor. Responsible for milk letdown reflex in response to suckling." }
+    status: unverified
+  - id: endo.L03.105
+    kind: card
+    topic: hypothalamic-pituitary-hormones
+    front: Besides labor and milk letdown, what does oxytocin modulate?
+    back: Fear, anxiety, social bonding, mood and depression.
+    src: { page: 332, quote: "Modulates fear, anxiety, social bonding, mood, and depression." }
+    status: unverified
+  - id: endo.L03.112
+    kind: table
+    topic: hypothalamic-pituitary-hormones
+    title: Anterior pituitary cell staining
+    columns: [Cells, Hormones]
+    rows:
+      - [Basophils (basophilic), "ACTH, LH, FSH, TSH"]
+      - [Acidophils (eosinophilic), "GH, prolactin"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 332, quote: "Basophils (basophilic) Acidophils (eosinophilic) LH FSH TSH GH Prolactin" }
     status: unverified
   - id: endo.L03.008
     kind: enumerate
@@ -246,9 +264,16 @@ items:
   - id: endo.L03.022
     kind: card
     topic: antidiuretic-hormone
-    front: What are the uses of desmopressin and of vasopressin?
-    back: "Desmopressin (ADH analog): central DI and nocturnal enuresis. Vasopressin: a potent vasopressor that can increase organ perfusion in septic shock."
+    front: What is desmopressin used for?
+    back: It is an ADH analog used for central DI and nocturnal enuresis.
     src: { page: 333, quote: "Desmopressin (ADH analog) is a treatment for central DI and nocturnal enuresis." }
+    status: unverified
+  - id: endo.L03.106
+    kind: card
+    topic: antidiuretic-hormone
+    front: How is vasopressin used in septic shock?
+    back: As a potent vasopressor to ↑ organ perfusion.
+    src: { page: 333, quote: "Vasopressin is a potent vasopressor that can be used to increase organ perfusion in septic shock." }
     status: unverified
   - id: endo.L03.023
     kind: cloze
@@ -355,12 +380,32 @@ items:
       - "Haloperidol blocks dopamine receptors and raises prolactin."
     src: { page: 334, quote: "Dopamine agonists (eg, bromocriptine, cabergoline) inhibit prolactin secretion and can be used in treatment of prolactinoma." }
     status: unverified
+  - id: endo.L03.109
+    kind: enumerate
+    topic: prolactin
+    prompt: Besides TRH, dopamine antagonists and estrogen, list what else raises prolactin in the book's regulation figure (4).
+    points:
+      - Sight or cry of the baby
+      - Nipple stimulation
+      - Chest wall injury (via the ANS)
+      - Renal failure (reduced prolactin elimination)
+    pass: 3
+    src: { page: 334, quote: "Chest wall injury (via ANS) Nipple stimulation" }
+    status: unverified
   # ---------- p335: thyroid hormones ----------
   - id: endo.L03.032
     kind: card
     topic: thyroid-hormones
-    front: Which enzyme converts T4 to T3 in peripheral tissue, what activates it and what inhibits it?
-    back: 5′-deiodinase. Activated by growth hormone; inhibited by glucocorticoids, β-blockers and propylthiouracil (PTU).
+    front: Which enzyme converts T4 to T3 in peripheral tissue?
+    back: 5′-deiodinase.
+    src: { page: 335, quote: "5′-deiodinase converts T4 (the major thyroid product) to T3 in peripheral tissue" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.107
+    kind: card
+    topic: thyroid-hormones
+    front: What activates and what inhibits peripheral T4 → T3 conversion?
+    back: Growth hormone activates it; glucocorticoids, β-blockers and propylthiouracil (PTU) inhibit it.
     src: { page: 335, quote: "this pathway is activated by growth hormone and inhibited by glucocorticoids, β-blockers, and propylthiouracil (PTU)." }
     status: unverified
     tags: [high-yield]
@@ -393,7 +438,7 @@ items:
     kind: card
     topic: thyroid-hormones
     front: What is the Wolff-Chaikoff effect?
-    back: Protective autoregulation; sudden exposure to excess iodine temporarily turns off thyroid peroxidase → ↓ T3/T4 production.
+    back: A protective brake; a sudden iodine load briefly shuts down thyroid peroxidase, so the gland makes less T3/T4.
     src: { page: 335, quote: "Wolff-Chaikoff effect—protective autoregulation; sudden exposure to excess iodine temporarily turns off thyroid peroxidase → ↓ T3/T4 production." }
     status: unverified
     tags: [high-yield]
@@ -451,7 +496,7 @@ items:
     kind: card
     topic: thyroid-hormones
     front: How do T3 and T4 enter cells?
-    back: They are the only lipophilic hormones with charged amino acids, so they need specific transporters (facilitated diffusion).
+    back: By facilitated diffusion through specific transporters, because they are lipophilic but carry charged amino acids (the only such hormones).
     src: { page: 335, quote: "T3 and T4 are the only lipophilic hormones with charged amino acids and require specific transporters to diffuse into the cell (facilitated diffusion)." }
     status: unverified
   - id: endo.L03.043
@@ -496,7 +541,7 @@ items:
       - ↑ calcitriol production by activating 1α-hydroxylase in the PCT
     pass: 5
     hook: "الـ PTH عايز Ca عالي وبيرمي الـ phosphate: بيسحب من العضم والأمعاء، وبيمسك الـ Ca في الـ DCT، وبيرمي الـ PO4 في الـ PCT، وبيشغّل الـ vitamin D (tri to make D3 in the PCT)."
-    src: { page: 336, quote: "reabsorption from DCT ↓ PO" }
+    src: { page: 336, quote: "↑ Ca2+ reabsorption from DCT" }
     status: unverified
     tags: [high-yield]
   - id: endo.L03.046
@@ -623,23 +668,44 @@ items:
       - "Low ionized Ca2+ stimulates PTH, not suppresses it."
     src: { page: 337, quote: "↑ pH (less H+ ) → albumin binds more Ca2+ → ↓ ionized Ca2+ (eg, cramps, pain, paresthesias, carpopedal spasm) → ↑ PTH" }
     status: unverified
+  - id: endo.L03.111
+    kind: cloze
+    topic: calcium-homeostasis
+    text: "↓ pH (more H+) → albumin binds {{c1::less}} Ca2+ → {{c2::↑}} ionized Ca2+ → {{c3::↓}} PTH."
+    src: { page: 337, quote: "albumin binds less Ca2+ → ↑ ionized Ca2+ → ↓ PTH" }
+    status: unverified
   # ---------- p337: calcitonin ----------
   - id: endo.L03.056
     kind: card
     topic: calcitonin
-    front: Where is calcitonin made, what does it do, and what stimulates it?
-    back: Parafollicular (C) cells of the thyroid. It ↓ bone resorption, opposing PTH. ↑ serum Ca2+ → ↑ calcitonin. It is not important in normal Ca2+ homeostasis.
-    src: { page: 337, quote: "Parafollicular cells (C cells) of thyroid. Calcitonin opposes actions of PTH. Not important in normal Ca2+ homeostasis" }
+    front: Where is calcitonin made?
+    back: In the parafollicular (C) cells of the thyroid.
+    src: { page: 337, quote: "Parafollicular cells (C cells) of thyroid." }
+    status: unverified
+  - id: endo.L03.100
+    kind: card
+    topic: calcitonin
+    front: What does calcitonin do to bone, and how does it relate to PTH?
+    back: It ↓ bone resorption, opposing the actions of PTH.
+    src: { page: 337, quote: "Calcitonin opposes actions of PTH." }
+    status: unverified
+  - id: endo.L03.101
+    kind: card
+    topic: calcitonin
+    front: What stimulates calcitonin release, and how important is it in normal Ca2+ balance?
+    back: ↑ serum Ca2+ ↑ calcitonin; it is not important in normal Ca2+ homeostasis.
+    src: { page: 337, quote: "Not important in normal Ca2+ homeostasis" }
     status: unverified
   - id: endo.L03.057
     kind: mcq
     topic: calcitonin
     stem: >-
-      A 47-year-old woman undergoes total thyroidectomy for a large multinodular goiter, with all
-      four parathyroid glands preserved. She is started on levothyroxine. Six months later, which
-      of the following is most likely regarding her calcium balance?
+      A 47-year-old woman underwent total thyroidectomy for a large multinodular goiter 6 months ago, with
+      all four parathyroid glands preserved. She takes levothyroxine and feels well. She has no
+      paresthesias, muscle cramps or bone pain, and Chvostek and Trousseau signs are negative. She asks
+      whether losing her thyroid will affect her calcium. Which of the following is most likely?
     options:
-      - Normal serum calcium, because calcitonin is not important in normal calcium homeostasis
+      - Normal serum calcium
       - Hypercalcemia from loss of calcitonin
       - Hypocalcemia from loss of calcitonin
       - Increased bone resorption causing osteoporosis
@@ -657,9 +723,16 @@ items:
   - id: endo.L03.058
     kind: card
     topic: glucagon
-    front: What does glucagon promote, and when?
-    back: Glycogenolysis, gluconeogenesis, lipolysis and ketogenesis. It raises blood sugar when glucose falls too low (fasting state). It is made by α cells of the pancreas.
+    front: Which processes does glucagon promote?
+    back: Glycogenolysis, gluconeogenesis, lipolysis and ketogenesis.
     src: { page: 337, quote: "Promotes glycogenolysis, gluconeogenesis, lipolysis, ketogenesis." }
+    status: unverified
+  - id: endo.L03.108
+    kind: card
+    topic: glucagon
+    front: Which cells make glucagon, and when is it released?
+    back: Pancreatic α cells; it raises blood glucose when it falls too low (fasting state).
+    src: { page: 337, quote: "Made by α cells of pancreas." }
     status: unverified
   - id: endo.L03.059
     kind: enumerate
@@ -708,11 +781,19 @@ items:
       - Insulin and C-peptide are exocytosed in equal amounts
     src: { page: 338, quote: "Preproinsulin (synthesized in RER of pancreatic β cells) → cleavage of “presignal” → proinsulin (stored in secretory granules) → cleavage of proinsulin → exocytosis of insulin and C-peptide equally." }
     status: unverified
+  - id: endo.L03.110
+    kind: card
+    topic: insulin
+    front: What is the major regulator of insulin release?
+    back: Glucose.
+    src: { page: 338, quote: "Glucose is the major regulator of insulin release." }
+    status: unverified
+    tags: [high-yield]
   - id: endo.L03.062
     kind: card
     topic: insulin
     front: How does C-peptide help differentiate factitious hypoglycemia?
-    back: Both insulin and C-peptide are ↑ in endogenous insulin secretion (type 2 DM, insulin secretagogues, insulinoma), whereas exogenous insulin lacks C-peptide.
+    back: Injected insulin carries no C-peptide, so high insulin with low C-peptide means factitious use; when the body makes the insulin (insulinoma, secretagogues, type 2 DM), both rise.
     src: { page: 338, quote: "Both insulin and C-peptide are ↑ in endogenous insulin secretion (eg, type 2 DM, insulin secretagogues, insulinoma), whereas exogenous insulin lacks C-peptide (helps differentiate factitious hypoglycemia)." }
     status: unverified
     tags: [high-yield]
@@ -744,7 +825,7 @@ items:
     kind: card
     topic: insulin
     front: Does insulin cross the placenta, and what happens to the fetus of a mother with diabetes?
-    back: Insulin does not cross the placenta, but glucose does; excess maternal glucose crosses and ↑↑ fetal insulin.
+    back: Maternal insulin stays on her side of the placenta, but her extra glucose crosses and drives the fetus to make much more insulin.
     src: { page: 338, quote: "Unlike glucose, insulin does not cross placenta. In mothers with diabetes, excess glucose can cross placenta and ↑↑ fetal insulin." }
     status: unverified
   - id: endo.L03.066
@@ -767,7 +848,7 @@ items:
     kind: card
     topic: insulin
     front: What fuels can the brain and RBCs use?
-    back: The brain prefers glucose but may use ketone bodies during starvation. RBCs use only glucose, as they lack mitochondria for aerobic metabolism.
+    back: The brain runs on glucose by preference and switches to ketones in starvation; RBCs have no mitochondria, so glucose is their only fuel.
     src: { page: 338, quote: "Brain prefers glucose, but may use ketone bodies during starvation. RBCs utilize only glucose, as they lack mitochondria for aerobic metabolism." }
     status: unverified
   - id: endo.L03.068
@@ -1004,16 +1085,25 @@ items:
   - id: endo.L03.087
     kind: card
     topic: cortisol
-    front: How is cortisol secretion regulated, and what can chronic stress do?
-    back: CRH (hypothalamus) → ACTH (pituitary) → cortisol (zona fasciculata); excess cortisol ↓ CRH, ACTH and cortisol. Chronic stress may cause prolonged cortisol secretion, cortisol resistance, impaired immunocompetency and HPA axis dysregulation.
+    front: How is cortisol secretion regulated?
+    back: CRH (hypothalamus) → ACTH (pituitary) → cortisol (zona fasciculata); excess cortisol feeds back to ↓ CRH, ACTH and cortisol.
     src: { page: 340, quote: "CRH (hypothalamus) stimulates ACTH release (pituitary) → cortisol production in adrenal zona fasciculata. Excess cortisol ↓ CRH, ACTH, and cortisol secretion." }
+    status: unverified
+  - id: endo.L03.102
+    kind: card
+    topic: cortisol
+    front: What can chronic stress do to the cortisol axis?
+    back: Prolonged cortisol secretion, cortisol resistance, impaired immunocompetency and HPA axis dysregulation.
+    src: { page: 340, quote: "Chronic stress may induce prolonged cortisol secretion, cortisol resistance, impaired immunocompetency, and dysregulation of HPA axis." }
     status: unverified
   - id: endo.L03.088
     kind: mcq
     topic: cortisol
     stem: >-
-      A 58-year-old man has taken prednisone 40 mg daily for 4 months for polymyalgia rheumatica. A
-      complete blood count is obtained at follow-up. Which pattern of white cells is most likely?
+      A 58-year-old man has taken prednisone 40 mg daily for 4 months for polymyalgia rheumatica. His
+      shoulder pain and morning stiffness have resolved. He has gained 5 kg, his face is round, and he
+      has easy bruising on his forearms. Temperature is 36.8°C, and he has no signs of infection. A
+      complete blood count is obtained. Which pattern of white cells is most likely?
     options:
       - Neutrophilia, lymphopenia and eosinopenia
       - Neutropenia, lymphocytosis and eosinophilia
@@ -1054,9 +1144,23 @@ items:
   - id: endo.L03.091
     kind: card
     topic: appetite-regulation
-    front: What happens to leptin in obesity, in leptin gene mutation, and in sleep deprivation or starvation?
-    back: Obese people have ↑ leptin (more adipose) but are tolerant or resistant to its anorexigenic effect. Leptin gene mutation → severe obesity. Sleep deprivation or starvation → ↓ leptin.
-    src: { page: 340, quote: "Mutation of leptin gene → severe obesity. Obese people have ↑ leptin due to ↑ adipose tissue but are tolerant or resistant to leptin’s anorexigenic effect." }
+    front: What happens to leptin levels and leptin action in obesity?
+    back: Obese people have more adipose tissue, so leptin is ↑, but they are tolerant or resistant to its appetite-suppressing effect.
+    src: { page: 340, quote: "Obese people have ↑ leptin due to ↑ adipose tissue but are tolerant or resistant to leptin’s anorexigenic effect." }
+    status: unverified
+  - id: endo.L03.103
+    kind: card
+    topic: appetite-regulation
+    front: What does a leptin gene mutation cause?
+    back: Severe obesity.
+    src: { page: 340, quote: "Mutation of leptin gene → severe obesity." }
+    status: unverified
+  - id: endo.L03.104
+    kind: card
+    topic: appetite-regulation
+    front: What do sleep deprivation and starvation do to leptin production?
+    back: They ↓ leptin production.
+    src: { page: 340, quote: "Sleep deprivation or starvation → ↓ leptin production." }
     status: unverified
   - id: endo.L03.092
     kind: mcq
@@ -1163,14 +1267,14 @@ items:
       - Sex hormone–binding globulin
       - Thyroxine-binding globulin
       - Corticosteroid-binding globulin
-      - Serum albumin
+      - Insulin-like growth factor–binding protein
       - Aromatase activity in the liver
     answer: 0
     why:
       - "Right. In females, ↓ SHBG raises free testosterone → hirsutism."
       - "TBG carries T3/T4, not testosterone."
       - "Corticosteroid-binding globulin carries cortisol."
-      - "Albumin binds testosterone weakly; the book names SHBG as the key carrier."
+      - "IGF-binding proteins carry IGF-1, not testosterone."
       - "Less aromatase would raise testosterone overall, not just the free fraction."
     src: { page: 341, quote: "In females, ↓ SHBG raises free testosterone → hirsutism." }
     status: unverified
