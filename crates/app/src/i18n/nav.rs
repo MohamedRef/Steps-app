@@ -1,0 +1,12 @@
+pub const LABEL: &str = "التنقل";
+pub const TODAY: &str = "النهارده";
+pub const LEARN: &str = "الدروس";
+pub const STUDY: &str = "المراجعة";
+pub const BANK: &str = "الأسئلة";
+pub const CASES: &str = "حالات";
+pub const ORAL: &str = "سمّع";
+pub const STATS: &str = "تقدّمي";
+pub const SETTINGS: &str = "الإعدادات";
+pub const MORE: &str = "المزيد";
+pub const MORE_PRACTICE: &str = "درّب طريقة تفكيرك";
+pub const MORE_TOOLS: &str = "مراجعك وأدواتك";
