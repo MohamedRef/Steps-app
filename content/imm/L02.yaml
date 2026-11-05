@@ -166,7 +166,7 @@ items:
     kind: cloze
     topic: mhc-i-and-ii
     text: Peptides are loaded onto MHC I in the {{c1::RER}} after delivery by {{c2::TAP}} (transporter associated with antigen processing); MHC I associates with {{c3::β2-microglobulin}}.
-    src: { page: 98, quote: "Antigen peptides loaded onto MHC I in RER after delivery via TAP (transporter associated with antigen processing)" }
+    src: { page: 98, quote: "Antigen peptides loaded onto MHC I in RER after delivery via TAP (transporter associated with antigen processing) Antigen loaded following release of invariant chain in a lysosome ASSOCIATED PROTEINS β2-microglobulin" }
     status: unverified
   - id: imm.L02.014
     kind: cloze
@@ -284,7 +284,7 @@ items:
     kind: cloze
     topic: hla-subtypes
     text: "DM type 1 is associated with HLA-{{c1::DR3}} and HLA-{{c2::DR4}} (1 + 3 = 4), and with HLA-{{c3::DQ2/DQ8}}."
-    src: { page: 99, quote: "DM type 1: HLA-3 and -4 (1 + 3 = 4)" }
+    src: { page: 99, quote: "DQ2/DQ8 Celiac disease, DM type 1 HLA-DQB1*0602 Narcolepsy DR3 DM type 1, SLE, Graves disease, Hashimoto thyroiditis, Addison disease DM type 1: HLA-3 and -4 (1 + 3 = 4)" }
     status: unverified
   - id: imm.L02.023
     kind: mcq
@@ -327,7 +327,7 @@ items:
     kind: card
     topic: natural-killer-cells
     front: What two situations induce an NK cell to kill a target cell?
-    back: Exposure to a nonspecific activation signal on the target cell and/or absence of an inhibitory signal such as MHC I on the target cell surface.
+    back: "Either the target cell displays a nonspecific activating signal, or it is missing an inhibitory signal such as surface MHC I (or both)."
     src: { page: 99, quote: "Induced to kill when exposed to a nonspecific activation signal on target cell and/or to an absence of an inhibitory signal such as MHC I on target cell surface." }
     status: unverified
     tags: [high-yield]
@@ -343,25 +343,25 @@ items:
     kind: mcq
     topic: natural-killer-cells
     stem: >-
-      A 52-year-old man who received a kidney transplant 3 months ago presents with fever, fatigue and
-      diarrhea. Colon biopsy shows cytomegalovirus-infected cells with intranuclear inclusions. The
-      virus downregulates MHC I on the infected cells, so virus-specific CD8+ T cells do not recognize
-      them. Over the next weeks the infection is controlled; the biopsy shows large granular lymphocytes
-      that express CD16 and CD56 and needed no prior sensitization killing the infected cells. What
-      triggers these effector cells to kill?
+      A 52-year-old man who received a kidney transplant 3 months ago comes to the physician because of
+      fever, fatigue and diarrhea. He takes tacrolimus, mycophenolate and prednisone. Colon biopsy shows
+      enlarged cells with intranuclear inclusions, and immunostaining is positive for cytomegalovirus.
+      Laboratory studies show that the virus makes a protein that removes MHC I molecules from the surface
+      of the cells it infects. Which of the following cells is best able to recognize and kill these
+      infected cells?
     options:
-      - Recognition of viral peptide on MHC II
-      - Loss of an inhibitory signal from MHC I
-      - CD40 ligand binding to CD40 on the target
-      - B7 costimulation of the effector cell
-      - Binding of IgE to Fc receptors
+      - CD8+ cytotoxic T cells
+      - Natural killer cells
+      - CD4+ helper T cells
+      - Plasma cells
+      - Eosinophils
     answer: 1
     why:
-      - "MHC II presents exogenous antigen to CD4+ cells; infected epithelial-type cells don't rely on it, and NK cells don't need antigen presentation."
-      - "Right. These are NK cells; absence of an inhibitory signal such as MHC I on the target induces them to kill with perforin and granzymes."
-      - "CD40-CD40L is how T helper cells activate B cells and macrophages."
-      - "B7-CD28 is the second signal for naïve T-cell activation, not NK killing."
-      - "IgE on Fc receptors arms mast cells and basophils; NK ADCC uses CD16 binding IgG."
+      - "CD8+ T cells recognize viral peptide only on MHC I; cells that have lost MHC I escape them (and tacrolimus blunts T-cell activation as well)."
+      - "Right. NK cells are innate lymphocytes that are induced to kill when an inhibitory signal such as MHC I is missing from the target; they then use perforin and granzymes to trigger apoptosis."
+      - "CD4+ T cells recognize antigen on MHC II and help other cells; they do not kill infected epithelial cells directly."
+      - "Plasma cells secrete antibody; they do not kill cells."
+      - "Eosinophils defend against helminths; they are not the main killers of virus-infected cells."
     src: { page: 99, quote: "Induced to kill when exposed to a nonspecific activation signal on target cell and/or to an absence of an inhibitory signal such as MHC I on target cell surface." }
     status: unverified
   # ---------- p99: B and T cells ----------
@@ -475,9 +475,9 @@ items:
     stem: >-
       A 7-month-old boy of consanguineous parents has had recurrent pneumonia, chronic diarrhea and oral
       thrush since 3 months of age. Flow cytometry shows very few CD4+ T cells with normal CD8+ T-cell
-      counts, and serum immunoglobulins are low. His cells express no MHC II because of a transcription
-      factor mutation. In his thymus, double-positive thymocytes that would recognize self-peptide on
-      MHC II receive no survival signal. In which site does this failed step normally happen?
+      counts. B cells are present, but neither his B cells nor his monocytes express HLA-DR. Serum
+      immunoglobulins are low. The development of his CD4+ T cells most likely fails in which of the
+      following sites?
     options:
       - Thymic cortex
       - Thymic medulla
@@ -486,12 +486,12 @@ items:
       - Germinal centers of lymph node follicles
     answer: 0
     why:
-      - "Right. This is positive selection, in the thymic cortex: double-positive thymocytes whose TCRs recognize self-peptide-MHC get a survival signal. With no MHC II, none become CD4+ cells (bare lymphocyte syndrome type II)."
-      - "The medulla is where negative selection removes T cells that bind self-peptides too strongly; it is not the survival signal."
+      - "Right. No HLA-DR means no MHC II (bare lymphocyte syndrome type II). Positive selection in the thymic cortex keeps double-positive thymocytes whose TCRs recognize self-peptide on MHC; with no MHC II to recognize, none survive as CD4+ cells."
+      - "The medulla is where negative selection removes T cells that bind self-peptides too strongly; it is not where the survival signal is given."
       - "T-cell precursors come from the bone marrow, but selection happens in the thymus."
       - "The paracortex of lymph nodes houses mature T cells after they leave the thymus."
       - "Germinal centers are B-cell sites (somatic hypermutation, class switching)."
-    src: { page: 100, quote: "Double positive thymocytes expressing TCRs that recognize self-peptide MHC complexes receive a survival signal." }
+    src: { page: 100, quote: "Positive selection Thymic cortex. Keeps T cells that recognize self-peptides to allow for cooperation in immune responses. Double positive thymocytes expressing TCRs that recognize self-peptide MHC complexes receive a survival signal." }
     status: unverified
   - id: imm.L02.037
     kind: card
@@ -553,10 +553,10 @@ items:
     stem: >-
       A 6-month-old boy has had fever, weight loss and enlarged axillary lymph nodes for 2 months. He
       received the BCG vaccine at birth. Lymph node and bone marrow biopsies show macrophages filled
-      with acid-fast bacilli. His total T and B cell counts and immunoglobulins are normal, but very few
-      of his CD4+ T cells have become Th1 cells. His macrophages ingest the mycobacteria but fail to
-      kill them. Loss of which Th1 product most directly explains the
-      failed killing?
+      with acid-fast bacilli. His total T- and B-cell counts and serum immunoglobulins are normal, and a
+      dihydrorhodamine test shows a normal neutrophil oxidative burst. His macrophages ingest the
+      mycobacteria but fail to kill them. Lack of which of the following signals to his macrophages most
+      likely explains the failed killing?
     options:
       - IL-4
       - IFN-γ
@@ -565,10 +565,10 @@ items:
       - IL-5
     answer: 1
     why:
-      - "IL-4 is a Th2 cytokine that drives IgE; it inhibits Th1."
-      - "Right. Few Th1 cells means ↓ IFN-γ; Th1 cells secrete IFN-γ, which enhances the ability of macrophages to kill the microbes they ingest."
-      - "IL-17 from Th17 recruits neutrophils."
-      - "TGF-β is anti-inflammatory (Tregs)."
+      - "IL-4 is a Th2 cytokine that drives IgE and class switching; it inhibits, not enhances, macrophage killing."
+      - "Right. Disseminated BCG with normal lymphocyte counts and a normal oxidative burst points to a defect in the IL-12/IFN-γ (Th1) axis. Th1 cells secrete IFN-γ, which enhances the ability of macrophages to kill the microbes they ingest."
+      - "IL-17 from Th17 cells recruits neutrophils; it does not arm macrophages against intracellular mycobacteria."
+      - "TGF-β is an anti-inflammatory cytokine of regulatory T cells."
       - "IL-5 activates eosinophils (Th2)."
     src: { page: 100, quote: "Th1 cells secrete IFN-γ, which enhances the ability of monocytes and macrophages to kill microbes they ingest." }
     status: unverified
@@ -621,11 +621,29 @@ items:
   - id: imm.L02.046
     kind: card
     topic: regulatory-t-cells
-    front: What is IPEX syndrome, and what are its features?
-    back: "Immune dysregulation, Polyendocrinopathy, Enteropathy, X-linked: genetic deficiency of FOXP3 → autoimmunity. Enteropathy, endocrinopathy, nail dystrophy, dermatitis and/or other autoimmune skin conditions; associated with diabetes in male infants."
-    src: { page: 100, quote: "IPEX (Immune dysregulation, Polyendocrinopathy, Enteropathy, X-linked) syndrome— genetic deficiency of FOXP3 → autoimmunity. Characterized by enteropathy, endocrinopathy, nail dystrophy, dermatitis, and/or other autoimmune dermatologic conditions. Associated with diabetes in male infants." }
+    front: What is IPEX syndrome, and what causes it?
+    back: "Immune dysregulation, Polyendocrinopathy, Enteropathy, X-linked syndrome: an inherited lack of FOXP3, so regulatory T cells fail and autoimmunity follows."
+    src: { page: 100, quote: "IPEX (Immune dysregulation, Polyendocrinopathy, Enteropathy, X-linked) syndrome— genetic deficiency of FOXP3 → autoimmunity." }
     status: unverified
     tags: [high-yield]
+  - id: imm.L02.059
+    kind: enumerate
+    topic: regulatory-t-cells
+    prompt: Enumerate the features of IPEX syndrome (4).
+    points:
+      - Enteropathy
+      - Endocrinopathy
+      - Nail dystrophy
+      - Dermatitis and/or other autoimmune skin conditions
+    pass: 4
+    src: { page: 100, quote: "Characterized by enteropathy, endocrinopathy, nail dystrophy, dermatitis, and/or other autoimmune dermatologic conditions." }
+    status: unverified
+  - id: imm.L02.060
+    kind: cloze
+    topic: regulatory-t-cells
+    text: IPEX syndrome is associated with {{c1::diabetes}} in {{c2::male infants}}.
+    src: { page: 100, quote: "Associated with diabetes in male infants." }
+    status: unverified
   - id: imm.L02.047
     kind: mcq
     topic: regulatory-t-cells
@@ -770,7 +788,7 @@ items:
     kind: card
     topic: anergy
     front: What is anergy, and how does it arise?
-    back: A state in which a cell cannot become activated by exposure to its antigen. T and B cells become anergic when exposed to their antigen without the costimulatory signal (signal 2). It is a peripheral tolerance mechanism.
+    back: "A T or B cell that meets its antigen but cannot be switched on by it. It happens when the cell sees its antigen with no costimulation (the second signal), and it is one of the ways peripheral tolerance is kept."
     src: { page: 101, quote: "State during which a cell cannot become activated by exposure to its antigen. T and B cells become anergic when exposed to their antigen without costimulatory signal (signal 2)." }
     status: unverified
     tags: [high-yield]
