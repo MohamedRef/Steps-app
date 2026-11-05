@@ -67,7 +67,7 @@ items:
       - [Hydroxylase, Adds a hydroxyl group (−OH), Tyrosine hydroxylase]
       - [Carboxylase, Transfers carboxyl groups with the help of biotin, Pyruvate carboxylase]
       - [Mutase, Relocates a functional group within a molecule, Methylmalonyl-CoA mutase]
-      - [Synthase, Synthesis without ATP as the energy source, Glycogen synthase]
+      - [Synthase, Synthesis without ATP as the energy source, "—"]
     blanks: [[0, 1], [1, 1], [2, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
     src: { page: 71, quote: "Phosphorylase Adds inorganic phosphate onto substrate without using ATP (eg, glycogen phosphorylase)." }
     status: unverified
@@ -142,6 +142,12 @@ items:
     src: { page: 71, quote: "Fatty acid oxidation Carnitine acyltransferase I Malonyl-CoA ⊝ Ketogenesis HMG-CoA synthase" }
     status: unverified
     tags: [high-yield]
+  - id: bio.L06.196
+    kind: cloze
+    topic: rate-determining-enzymes
+    text: "Ketogenesis: {{c1::HMG-CoA synthase}} (the book's mnemonic: HOMG! I'm starving!)."
+    src: { page: 71, quote: "Ketogenesis HMG-CoA synthase (HOMG! I’m starving!)" }
+    status: unverified
   - id: bio.L06.007
     kind: card
     topic: rate-determining-enzymes
@@ -176,8 +182,10 @@ items:
     kind: mcq
     topic: rate-determining-enzymes
     stem: >-
-      A 25-year-old woman is running a marathon. In her skeletal muscle, AMP rises as ATP is consumed.
-      Which enzyme is directly activated by AMP to speed up glucose breakdown?
+      A 25-year-old woman comes to the medical tent at mile 20 of a marathon because her legs feel
+      heavy. She is alert, heart rate is 118/min, blood glucose is 82 mg/dL and lactate is mildly
+      raised. In her working skeletal muscle, AMP rises as ATP is consumed. Which enzyme is directly
+      activated by AMP to speed up glucose breakdown?
     options:
       - Fructose-1,6-bisphosphatase 1
       - Glycogen synthase
@@ -415,9 +423,10 @@ items:
     kind: mcq
     topic: glycolysis-regulation
     stem: >-
-      During a prolonged fast, a 40-year-old man's liver shifts from glycolysis to gluconeogenesis.
-      Glucagon is high, and alanine released from muscle reaches the liver. Which glycolytic enzyme is
-      inhibited by both of these signals?
+      A 40-year-old man is admitted on day 4 of a hunger strike, taking only water. He is alert and
+      mildly dehydrated. Blood glucose is 66 mg/dL, serum β-hydroxybutyrate is raised, insulin is low and
+      glucagon is high. His liver has shifted from glycolysis to gluconeogenesis, fed by alanine released
+      from his muscles. Which glycolytic enzyme is inhibited by both glucagon and alanine?
     options:
       - Hexokinase
       - Phosphoglycerate kinase
@@ -437,17 +446,32 @@ items:
   - id: bio.L06.027
     kind: card
     topic: fructose-2-6-bisphosphate
-    front: How do fasting and feeding control fructose-2,6-bisphosphate?
-    back: "PFK-2 and FBPase-2 are one bifunctional enzyme. Fasting: ↑ glucagon → ↑ cAMP → ↑ protein kinase A → ↑ FBPase-2, ↓ PFK-2 → less glycolysis, more gluconeogenesis. Fed: ↑ insulin → ↑ PFK-2 → more glycolysis. FaBian the Peasant (FBP) works hard when starving; Prince FredericK (PFK) works only when fed."
+    front: In the fasting state, what happens to FBPase-2 and PFK-2, and to glycolysis and gluconeogenesis?
+    back: "↑ glucagon → ↑ cAMP → ↑ protein kinase A → ↑ FBPase-2 and ↓ PFK-2, so less glycolysis and more gluconeogenesis. (FaBian the Peasant [FBP] works hard when starving.)"
     src: { page: 74, quote: "Fasting state: ↑ glucagon → ↑ cAMP → ↑ protein kinase A → ↑ FBPase-2, ↓ PFK-2, less glycolysis, more gluconeogenesis." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L06.185
+    kind: cloze
+    topic: fructose-2-6-bisphosphate
+    text: "In the fed state, ↑ insulin → ↑ {{c1::PFK-2}} → {{c2::more glycolysis, less gluconeogenesis}}. (Prince FredericK [PFK] works only when fed.)"
+    src: { page: 74, quote: "Fed state: ↑ insulin → ↑ PFK-2 → more glycolysis, less gluconeogenesis. Prince FredericK (PFK) works only when fed." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.186
+    kind: cloze
+    topic: fructose-2-6-bisphosphate
+    text: "FBPase-2 and PFK-2 are the same {{c1::bifunctional}} enzyme, whose function is reversed by phosphorylation by {{c2::protein kinase A}}."
+    src: { page: 74, quote: "Fructose bisphosphatase-2 (FBPase-2) and phosphofructokinase-2 (PFK-2) are the same bifunctional enzyme whose function is reversed by phosphorylation by protein kinase A." }
+    status: unverified
   - id: bio.L06.028
     kind: mcq
     topic: fructose-2-6-bisphosphate
     stem: >-
-      A 22-year-old woman has not eaten for 18 hours. In her hepatocytes, protein kinase A phosphorylates
-      the bifunctional enzyme that makes and breaks fructose-2,6-bisphosphate. What is the result?
+      A 22-year-old woman comes to the emergency department with gastroenteritis; she has kept no food
+      down for 18 hours. She is mildly dehydrated. Blood glucose is 72 mg/dL, insulin is low and glucagon
+      is high. In her hepatocytes, protein kinase A phosphorylates the bifunctional enzyme that makes and
+      breaks fructose-2,6-bisphosphate. What is the result?
     options:
       - ↑ PFK-2 activity and ↑ glycolysis
       - ↑ FBPase-2 activity and ↑ gluconeogenesis
@@ -642,7 +666,7 @@ items:
     topic: tca-cycle
     stem: >-
       A 38-year-old man with chronic alcohol use and thiamine deficiency has impaired conversion of
-      α-ketoglutarate to succinyl-CoA. Which other set of cofactors does this enzyme complex share with
+      α-ketoglutarate to succinyl-CoA. Which set of cofactors does this enzyme complex share with
       pyruvate dehydrogenase?
     options:
       - Biotin and ATP
@@ -756,8 +780,11 @@ items:
     kind: mcq
     topic: gluconeogenesis
     stem: >-
-      A 30-year-old man has fasted for 20 hours. β-Oxidation of fatty acids in his liver raises
-      mitochondrial acetyl-CoA. Which gluconeogenic enzyme does acetyl-CoA directly activate?
+      A 30-year-old man is brought to the emergency department after being trapped for 20 hours without
+      food in a collapsed building. He is alert, with bruises but no fractures. Blood glucose is
+      70 mg/dL, serum free fatty acids are high and urine dipstick shows 1+ ketones. β-Oxidation of fatty
+      acids in his liver raises mitochondrial acetyl-CoA. Which gluconeogenic enzyme does acetyl-CoA
+      directly activate?
     options:
       - PEP carboxykinase
       - Pyruvate carboxylase
@@ -797,21 +824,22 @@ items:
     kind: mcq
     topic: pentose-phosphate-pathway
     stem: >-
-      A malnourished 50-year-old man with chronic alcohol use is being evaluated for thiamine deficiency.
-      Which enzyme of the nonoxidative HMP shunt is measured in his red cells before and after giving B1?
+      A 50-year-old man with chronic alcohol use is admitted with confusion, a wide-based unsteady gait
+      and horizontal nystagmus. He is thin and malnourished, and both feet are numb. Which laboratory
+      test best confirms the vitamin deficiency suspected here?
     options:
-      - Glucose-6-phosphate dehydrogenase
-      - Transketolase
-      - Phosphopentose isomerase
-      - Pyruvate kinase
-      - Glutathione reductase
+      - Red cell glucose-6-phosphate dehydrogenase activity
+      - Red cell transketolase activity before and after adding B1
+      - Serum methylmalonic acid
+      - Serum ceruloplasmin
+      - Red cell glutathione level after an oxidant challenge
     answer: 1
     why:
-      - "G6PD is the oxidative-phase enzyme and needs NADP+, not B1."
-      - "Right. Transketolase in the nonoxidative, reversible phase needs B1 (TPP); its RBC activity rises after giving B1 in deficiency."
-      - "Phosphopentose isomerase doesn't need B1."
-      - "Pyruvate kinase is glycolytic."
-      - "Glutathione reductase uses NADPH."
+      - "G6PD runs the oxidative phase of the HMP shunt and uses NADP+, not B1; its deficiency causes hemolysis, not this picture."
+      - "Right. Wernicke findings in alcohol use point to thiamine (B1) deficiency. Transketolase, a nonoxidative HMP shunt enzyme, needs B1 (TPP), so its RBC activity rises after B1 is added."
+      - "Methylmalonic acid rises in B12 deficiency, which gives subacute combined degeneration rather than confusion, ataxia and nystagmus."
+      - "Ceruloplasmin is a copper protein; it tests Wilson or Menkes disease, not a vitamin."
+      - "Glutathione depends on NADPH from G6PD; it tests oxidant defense in red cells, not thiamine."
     src: { page: 77, quote: "Transketolase, B₁" }
     status: unverified
   # ---------- p77: G6PD deficiency ----------
@@ -1085,9 +1113,11 @@ items:
     kind: mcq
     topic: amino-acids
     stem: >-
-      A 30-year-old woman follows a very low-carbohydrate diet. Her liver converts amino acids into
-      ketone bodies. Which pair of amino acids can only be converted to ketone bodies and never to new
-      glucose?
+      A 30-year-old woman comes to the clinic after 3 weeks on a very low-carbohydrate diet to lose
+      weight. She has lost 4 kg and her partner notices a fruity smell on her breath. Blood glucose is
+      84 mg/dL, bicarbonate is 22 mEq/L and urine dipstick shows 2+ ketones. Part of her ketone bodies
+      come from amino acids. Which pair of amino acids can only be converted to ketone bodies and never
+      to new glucose?
     options:
       - Methionine and valine
       - Leucine and lysine
@@ -1125,7 +1155,7 @@ items:
     topic: urea-cycle
     front: What is the rate-limiting step of the urea cycle and where does it happen?
     back: Carbamoyl phosphate synthetase I, in the mitochondria (HCO3− + NH3 → carbamoyl phosphate, 2 ATP), allosterically activated by N-acetylglutamate. The rest of the cycle is cytoplasmic (liver), and urea goes to the kidney.
-    src: { page: 80, quote: "Excess nitrogen is converted to urea and excreted by the kidneys." }
+    src: { page: 80, quote: "HCO3 – + NH3 Carbamoyl phosphate Mitochondria H2 O N-acetylglutamate Carbamoyl phosphate synthetase I* Cytoplasm (liver) (allosteric activator) Citrulline Ornithine Arginine Fumarate Argininosuccinate Aspartate Urea CO2 + H2 O To kidney *Rate-limiting step 2 ATP" }
     status: unverified
     tags: [high-yield]
   - id: bio.L06.076
@@ -1156,15 +1186,16 @@ items:
     topic: ammonia-transport
     front: How does muscle send ammonia to the liver (Cahill cycle)?
     back: In muscle, amino acids pass NH3 to α-ketoglutarate → glutamate → onto pyruvate as alanine. In the liver, alanine gives back pyruvate (→ glucose) and glutamate (→ urea). The glucose returns to muscle.
-    src: { page: 80, quote: "Transport of ammonia by alanine" }
+    src: { page: 80, quote: "Transport of ammonia by alanine Cori cycle Cahill cycle Amino acids (NH3) α-Ketoacids α-Ketoglutarate Glutamate (NH3) Alanine (NH3) Pyruvate Glucose Alanine (NH3) Pyruvate Glucose α-Ketoglutarate Glutamate (NH3) Urea (NH3) Muscle Liver Lactate Lactate" }
     status: unverified
   - id: bio.L06.078
     kind: mcq
     topic: ammonia-transport
     stem: >-
-      During a long run, a 30-year-old woman's leg muscles break down amino acids. Which molecule
-      carries most of the resulting nitrogen to her liver while also supplying a carbon skeleton for
-      gluconeogenesis?
+      A 30-year-old woman comes to the medical tent after a 4-hour trail run, tired but alert. Blood
+      glucose is 76 mg/dL, BUN is at the upper limit of normal and her urine is concentrated. During the
+      run her leg muscles broke down amino acids for fuel. Which molecule carries most of the resulting
+      nitrogen to her liver while also supplying a carbon skeleton for gluconeogenesis?
     options:
       - Lactate
       - Alanine
@@ -1178,7 +1209,7 @@ items:
       - "Urea is made in the liver, not muscle."
       - "Ketone bodies carry no nitrogen."
       - "Free ammonia is toxic and isn't the carrier."
-    src: { page: 80, quote: "Transport of ammonia by alanine" }
+    src: { page: 80, quote: "Transport of ammonia by alanine Cori cycle Cahill cycle Amino acids (NH3) α-Ketoacids α-Ketoglutarate Glutamate (NH3) Alanine (NH3) Pyruvate Glucose Alanine (NH3) Pyruvate Glucose α-Ketoglutarate Glutamate (NH3) Urea (NH3) Muscle Liver Lactate Lactate" }
     status: unverified
   - id: bio.L06.184
     kind: card
@@ -1252,9 +1283,30 @@ items:
   - id: bio.L06.083
     kind: card
     topic: otc-deficiency
-    front: What is ornithine transcarbamylase deficiency, and why does orotic acid rise?
-    back: The most common urea cycle disorder, X-linked recessive (others are AR). Excess carbamoyl phosphate is shunted into pyrimidine synthesis → orotic acid. Findings are ↑ orotic acid in blood and urine, ↓ BUN, hyperammonemia, and no megaloblastic anemia.
+    front: How is ornithine transcarbamylase deficiency inherited, and how common is it among urea cycle disorders?
+    back: X-linked recessive (the other urea cycle enzyme deficiencies are autosomal recessive); it is the most common urea cycle disorder.
     src: { page: 81, quote: "Most common urea cycle disorder. X-linked recessive (vs other urea cycle enzyme deficiencies, which are autosomal recessive)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.190
+    kind: card
+    topic: otc-deficiency
+    front: Why does orotic acid rise in ornithine transcarbamylase deficiency?
+    back: Carbamoyl phosphate piles up and is diverted into the pyrimidine synthesis pathway, which turns it into orotic acid.
+    src: { page: 81, quote: "Excess carbamoyl phosphate is converted to orotic acid (part of the pyrimidine synthesis pathway; vs. carbamoyl phosphate synthetase I deficiency)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.191
+    kind: enumerate
+    topic: otc-deficiency
+    prompt: Enumerate the findings of ornithine transcarbamylase deficiency (4).
+    points:
+      - ↑ orotic acid in blood and urine
+      - ↓ BUN
+      - Symptoms of hyperammonemia
+      - No megaloblastic anemia (vs orotic aciduria)
+    pass: 4
+    src: { page: 81, quote: "Findings: ↑ orotic acid in blood and urine, ↓ BUN, symptoms of hyperammonemia. No megaloblastic anemia (vs orotic aciduria)." }
     status: unverified
     tags: [high-yield]
   - id: bio.L06.084
@@ -1331,7 +1383,7 @@ items:
       - Dopamine (dopamine β-hydroxylase, vitamin C)
       - Norepinephrine (PNMT, SAM; needs cortisol)
       - Epinephrine
-    src: { page: 81, quote: "Phenylethanolamine-N- methyltransferase" }
+    src: { page: 81, quote: "Phenylalanine hydroxylase Phenylketonuria Tyrosinase Tyrosine hydroxylase Melanin Cortisol Albinism TCA cycle Homogentisate oxidase DOPA decarboxylase Dopamine β-hydroxylase Carbidopa Catechol-O-methyltransferase Catechol-O- methyltransferase – L-DOPA (Dihydroxyphenylalanine) Fumarate Phenylethanolamine-N- methyltransferase Phenylalanine" }
     status: unverified
     tags: [high-yield]
   - id: bio.L06.088
@@ -1581,11 +1633,31 @@ items:
   - id: bio.L06.102
     kind: card
     topic: cystinuria
-    front: What is cystinuria?
-    back: AR (1:7000) defect of the renal PCT and intestinal transporter for Cystine, Ornithine, Lysine and Arginine (COLA). Excess cystine forms recurrent hexagonal stones. Detected with the sodium cyanide-nitroprusside test.
+    front: What is the defect in cystinuria?
+    back: A hereditary defect of the renal PCT and intestinal amino acid transporter, so Cystine, Ornithine, Lysine and Arginine (COLA) aren't reabsorbed.
     src: { page: 83, quote: "Hereditary defect of renal PCT and intestinal amino acid transporter that prevents reabsorption of Cystine, Ornithine, Lysine, and Arginine (COLA)." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L06.187
+    kind: cloze
+    topic: cystinuria
+    text: Cystinuria is {{c1::autosomal recessive}} and common ({{c2::1:7000}}).
+    src: { page: 83, quote: "Autosomal recessive. Common (1:7000)." }
+    status: unverified
+  - id: bio.L06.188
+    kind: card
+    topic: cystinuria
+    front: What stones does cystinuria cause, and what shape are they?
+    back: Recurrent cystine stones, hexagonal in shape, from excess cystine in the urine.
+    src: { page: 83, quote: "Excess cystine in the urine can lead to recurrent precipitation of hexagonal cystine stones." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.189
+    kind: cloze
+    topic: cystinuria
+    text: Cystinuria is detected with the urinary {{c1::sodium-cyanide nitroprusside}} test and proton nuclear magnetic resonance spectroscopy of urine.
+    src: { page: 83, quote: "Cystinuria detected with urinary sodium- cyanide nitroprusside test and proton nuclear magnetic resonance spectroscopy of urine." }
+    status: unverified
   - id: bio.L06.103
     kind: mcq
     topic: cystinuria
@@ -1626,7 +1698,7 @@ items:
     rows:
       - [Deficiency, Propionyl-CoA carboxylase (biotin), Methylmalonyl-CoA mutase or vitamin B12]
       - [Builds up, "↑ propionyl-CoA, ↓ methylmalonic acid", ↑ methylmalonic acid]
-      - [Diet, "Low protein; limit Valine, Odd-chain fatty acids, Methionine, Isoleucine, Threonine (VOMIT)", Same precursors]
+      - [Diet, "Low protein; limit Valine, Odd-chain fatty acids, Methionine, Isoleucine, Threonine (VOMIT)", "—"]
     blanks: [[0, 1], [0, 2], [2, 1]]
     src: { page: 83, quote: "Deficiency of propionyl-CoA carboxylase → ↑ propionyl-CoA, ↓ methylmalonic acid." }
     status: unverified
@@ -1683,7 +1755,7 @@ items:
     topic: glycogen-regulation
     front: How do glucagon and epinephrine switch the liver from glycogen storage to breakdown?
     back: Their receptors raise cAMP (adenylate cyclase) → protein kinase A → activates glycogen phosphorylase kinase → glycogen phosphorylase on, glycogen synthase off. Insulin (tyrosine kinase receptor) activates protein phosphatase, doing the opposite.
-    src: { page: 84, quote: "Glycogen regulation by insulin and glucagon/epinephrine" }
+    src: { page: 84, quote: "Glycogen regulation by insulin and glucagon/epinephrine Glycogen Glycogen phosphorylase kinase Calcium-calmodulin in muscle during contraction Protein kinase A Protein phosphatase Protein kinase A Calcium ATP cAMP Epinephrine (liver and muscle) Epinephrine (liver) Insulin (liver and muscle) Endoplasmic reticulum Glucose − Adenylate cyclase Glycogen phosphorylase Glycogen synthase Glucagon receptor receptor 1 Tyrosine kinase dimer receptor Glucagon (liver) receptor" }
     status: unverified
   - id: bio.L06.108
     kind: card
@@ -1696,8 +1768,11 @@ items:
     kind: mcq
     topic: glycogen-regulation
     stem: >-
-      A 25-year-old man skips breakfast. In his hepatocytes, glucagon binds its receptor. Which enzyme is
-      phosphorylated and made more active as a direct result of protein kinase A?
+      A 25-year-old man without diabetes feels shaky and sweaty at 11 AM after skipping breakfast and
+      cycling to class. At the student clinic his fingerstick glucose is 62 mg/dL; without treatment it
+      is 80 mg/dL 15 minutes later as glucagon acts on his liver. In his hepatocytes, glucagon binds its
+      receptor. Which enzyme is phosphorylated and made more active as a direct result of protein
+      kinase A?
     options:
       - Glycogen synthase
       - Glycogen phosphorylase kinase
@@ -1987,9 +2062,31 @@ items:
   - id: bio.L06.125
     kind: card
     topic: lysosomal-storage-diseases
-    front: What are the findings of Gaucher disease?
-    back: The most common lysosomal storage disease. Hepatosplenomegaly, pancytopenia, osteoporosis, avascular necrosis of the femur, bone crises, and Gaucher cells (macrophages like crumpled tissue paper). Treat with recombinant glucocerebrosidase.
+    front: What are Gaucher cells?
+    back: Macrophages stuffed with lipid that look like crumpled tissue paper.
     src: { page: 86, quote: "Hepatosplenomegaly, pancytopenia, osteoporosis, avascular necrosis of femur, bone crises, Gaucher cells (lipid-laden macrophages resembling crumpled tissue paper C )." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.192
+    kind: enumerate
+    topic: lysosomal-storage-diseases
+    prompt: Enumerate the findings of Gaucher disease (6).
+    points:
+      - Hepatosplenomegaly
+      - Pancytopenia
+      - Osteoporosis
+      - Avascular necrosis of the femur
+      - Bone crises
+      - Gaucher cells (crumpled tissue paper macrophages)
+    pass: 5
+    src: { page: 86, quote: "Hepatosplenomegaly, pancytopenia, osteoporosis, avascular necrosis of femur, bone crises, Gaucher cells (lipid-laden macrophages resembling crumpled tissue paper C )." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.193
+    kind: cloze
+    topic: lysosomal-storage-diseases
+    text: Gaucher disease is the {{c1::most common}} lysosomal storage disease, and it is treated with {{c2::recombinant glucocerebrosidase}}.
+    src: { page: 86, quote: "Gaucher disease Most common." }
     status: unverified
     tags: [high-yield]
   - id: bio.L06.126
@@ -2178,14 +2275,16 @@ items:
     topic: fasted-vs-fed-lipid
     front: How do fasted and fed adipocytes handle triglycerides?
     back: "Fasted: epinephrine and glucagon → cAMP → protein kinase A → hormone-sensitive lipase → TG broken into FFA and glycerol. Fed: insulin → lipoprotein lipase (with apo CII) frees FFA from circulating TG, and glucose → DHAP → glycerol-3-P to store new TG."
-    src: { page: 88, quote: "Adipocyte (fasted) Adipocyte (fed)" }
+    src: { page: 88, quote: "Fasted vs fed state HSL Protein kinase A TG cAMP HSL-P ATP FFA Glycerol Epinephrine Glucagon FFA Glycerol 3-P Glucose TG Apo CII Glucose DHAP Glycerol FFA Insulin Adipocyte (fasted) Adipocyte (fed) Blood TG LPL" }
     status: unverified
   - id: bio.L06.138
     kind: mcq
     topic: fasted-vs-fed-lipid
     stem: >-
-      A 28-year-old man is fasting for religious reasons. By late afternoon, glucagon and epinephrine are
-      high. Which enzyme in his adipocytes is activated by protein kinase A to release free fatty acids?
+      A 28-year-old man who has fasted since dawn comes to the clinic in the late afternoon with mild
+      lightheadedness. Blood pressure is 112/70 mm Hg. Blood glucose is 72 mg/dL, serum free fatty acids
+      and glycerol are raised, and glucagon and epinephrine are high. Which enzyme in his adipocytes is
+      activated by protein kinase A to release the free fatty acids?
     options:
       - Lipoprotein lipase
       - Hormone-sensitive lipase
@@ -2214,8 +2313,10 @@ items:
     kind: mcq
     topic: metabolic-fuel-use
     stem: >-
-      A sprinter runs a 10-second 100-m race. After the first 2 seconds, when stored ATP is exhausted,
-      which energy source mainly keeps his muscles going for the rest of the race?
+      A 19-year-old man runs a 100-m sprint in 10 seconds at a university track meet. At the finish his
+      heart rate is 170/min, he is breathless and his thighs burn; he recovers fully within minutes.
+      After the first 2 seconds of the race, when his muscles' stored ATP was used up, which energy
+      source mainly kept them going to the finish?
     options:
       - Creatine phosphate
       - Fatty acid oxidation
@@ -2445,8 +2546,11 @@ items:
     kind: mcq
     topic: lipoprotein-functions
     stem: >-
-      A 60-year-old woman asks which of her lipoproteins carries cholesterol from her arteries back to her
-      liver. Its synthesis is increased by moderate alcohol intake. Which one is it?
+      A 60-year-old woman comes for a cardiovascular risk check. She drinks one glass of wine with dinner
+      daily. Blood pressure is 126/80 mm Hg. Fasting total cholesterol is 205 mg/dL, LDL is 112 mg/dL and
+      triglycerides are 95 mg/dL. One lipoprotein fraction is high, which her physician links in part to
+      her moderate alcohol intake; it carries cholesterol from peripheral tissues, including her arterial
+      walls, back to her liver. Which lipoprotein is it?
     options:
       - Chylomicron
       - VLDL
@@ -2526,7 +2630,7 @@ items:
       - [I hyperchylomicronemia, AR, LPL or apo CII deficiency, "Chylomicrons, TG, cholesterol", "Pancreatitis, HSM, eruptive xanthomas; no ↑ atherosclerosis"]
       - [II hypercholesterolemia, AD, Absent or defective LDL receptor or apo B100, "LDL, cholesterol (IIb: + VLDL)", "Early atherosclerosis, tendon xanthomas, corneal arcus"]
       - [III dysbetalipoproteinemia, AR, ApoE, "Chylomicron and VLDL remnants, TG", "Premature atherosclerosis, tuberoeruptive and palmar xanthomas"]
-      - [IV hypertriglyceridemia, AD, Hepatic VLDL overproduction, "VLDL, TG", "Acute pancreatitis; insulin resistance"]
+      - [IV hypertriglyceridemia, AD, Hepatic VLDL overproduction, "VLDL, TG", "TG >1000 mg/dL can cause acute pancreatitis; insulin resistance"]
     blanks: [[0, 2], [1, 2], [2, 2], [3, 2]]
     src: { page: 92, quote: "AR ApoE (defective in type thrEE) Chylomicrons and VLDL remnants, TG Premature atherosclerosis, tuberoeruptive and palmar xanthomas." }
     status: unverified
@@ -2535,9 +2639,23 @@ items:
     kind: card
     topic: familial-dyslipidemias
     front: How high is cholesterol in heterozygous vs homozygous familial hypercholesterolemia?
-    back: Heterozygotes (1:500) ≈300 mg/dL; homozygotes (very rare) ≥700 mg/dL, with MI possibly before age 20.
+    back: Heterozygotes (1:500) ≈300 mg/dL; homozygotes (very rare) ≥700 mg/dL.
     src: { page: 92, quote: "Heterozygotes (1:500) have cholesterol ≈300 mg/dL; homozygotes (very rare) have cholesterol ≥700 mg/dL." }
     status: unverified
+  - id: bio.L06.194
+    kind: cloze
+    topic: familial-dyslipidemias
+    text: In type II familial hypercholesterolemia, atherosclerosis is accelerated and MI may occur before age {{c1::20}}.
+    src: { page: 92, quote: "Accelerated atherosclerosis (may have MI before age 20), tendon (Achilles) xanthomas, and corneal arcus." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L06.195
+    kind: cloze
+    topic: familial-dyslipidemias
+    text: In type IV familial dyslipidemia, hypertriglyceridemia above {{c1::1000 mg/dL}} can cause {{c2::acute pancreatitis}}.
+    src: { page: 92, quote: "Hypertriglyceridemia (>1000 mg/dL) can cause acute pancreatitis. Related to insulin resistance." }
+    status: unverified
+    tags: [high-yield]
   - id: bio.L06.159
     kind: mcq
     topic: familial-dyslipidemias

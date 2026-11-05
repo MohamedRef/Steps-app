@@ -58,12 +58,17 @@ lessons:
         page: 54
         quote: "Two patients with neurofibromatosis type 1 (NF1) may have varying disease severity."
       - kind: explain
-        title: "Loss of heterozygosity و dominant negative"
+        title: "Loss of heterozygosity"
         text: |-
           - **Loss of heterozygosity**: في الـ ==tumor suppressor==، نسخة بايظة مش كفاية؛ لازم التانية تبوظ كمان (two-hit: retinoblastoma، Lynch، Li-Fraumeni). ده مش صحيح في الـ oncogenes.
-          - **Dominant negative**: النسخة البايظة مش بس مش شغالة، دي ==بتعطّل السليمة== كمان (p53 البايظ يمسك الـ DNA ويمنع السليم).
         page: 54
         quote: "If a patient inherits or develops a mutation in a tumor suppressor gene, the wild type allele must be deleted/mutated/eliminated before cancer develops. This is not true of oncogenes."
+      - kind: explain
+        title: "Dominant negative"
+        text: |-
+          - **Dominant negative**: النسخة البايظة مش بس مش شغالة، دي ==بتعطّل السليمة== كمان (p53 البايظ يمسك الـ DNA ويمنع السليم).
+        page: 55
+        quote: "Exerts a dominant effect. A heterozygote produces a nonfunctional altered protein that also prevents the normal gene product from functioning."
       - kind: match
         prompt: "وصّل كل مصطلح بمثاله"
         pairs:
@@ -82,6 +87,40 @@ lessons:
           - **UPD**: النسختين من أب واحد. Heterodisomy = غلطة meiosis I، isodisomy = meiosis II. لو طفل عنده مرض recessive وأب واحد بس carrier: فكر في ==isodisomy==.
         page: 55
         quote: "Consider isodisomy in an individual manifesting a recessive disorder when only one parent is a carrier."
+      - kind: figure
+        title: "الشبكة والسنارة"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b4f1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="20" y="20" class="t-sm t-b">miRNA</text>
+            <text x="20" y="36" class="t-sm t-mut">made by the cell</text>
+            <rect class="fg-acc" x="20" y="48" width="40" height="16" rx="4"/>
+            <line class="fg-arrow-acc" x1="62" y1="56" x2="98" y2="40" marker-end="url(#b4f1)"/>
+            <line class="fg-arrow-acc" x1="62" y1="56" x2="98" y2="62" marker-end="url(#b4f1)"/>
+            <line class="fg-arrow-acc" x1="62" y1="56" x2="98" y2="84" marker-end="url(#b4f1)"/>
+            <rect class="fg-box" x="100" y="32" width="70" height="14" rx="3"/><text x="106" y="43" class="t-sm">mRNA 1</text>
+            <rect class="fg-box" x="100" y="54" width="70" height="14" rx="3"/><text x="106" y="65" class="t-sm">mRNA 2</text>
+            <rect class="fg-box" x="100" y="76" width="70" height="14" rx="3"/><text x="106" y="87" class="t-sm">mRNA 3</text>
+            <text x="20" y="112" class="t-sm">Loose pairing</text>
+            <text x="20" y="128" class="t-sm">many related targets</text>
+            <text x="20" y="144" class="t-sm t-acc">Blocks translation</text>
+            <line class="fg-thin" x1="180" y1="10" x2="180" y2="190"/>
+            <text x="195" y="20" class="t-sm t-b">siRNA</text>
+            <text x="195" y="36" class="t-sm t-mut">exogenous dsRNA</text>
+            <rect class="fg-bad" x="195" y="48" width="40" height="16" rx="4"/>
+            <line class="fg-arrow-bad" x1="237" y1="56" x2="273" y2="56" marker-end="url(#b4f1)"/>
+            <rect class="fg-box" x="275" y="48" width="70" height="16" rx="3"/><text x="281" y="60" class="t-sm">one mRNA</text>
+            <line class="fg-arrow-bad" x1="310" y1="70" x2="310" y2="92"/>
+            <line class="fg-arrow-bad" x1="300" y1="80" x2="320" y2="80"/>
+            <text x="195" y="112" class="t-sm">Complete pairing</text>
+            <text x="195" y="128" class="t-sm">one specific target</text>
+            <text x="195" y="144" class="t-sm t-bad">Cleaves the mRNA</text>
+            <text x="195" y="160" class="t-sm t-bad">before translation</text>
+          </svg>
+        caption: "الـ miRNA بتلزق لزقة خفيفة في mRNAs كتير شبه بعض وتمنع ترجمتها. الـ siRNA بتلزق لزقة كاملة في mRNA واحد بالاسم وتقطعه قبل ما يتترجم."
+        alt: "Two panels. Left: a microRNA made by the cell pairs loosely with three related mRNAs and blocks their translation. Right: a small interfering RNA from exogenous double-stranded RNA pairs completely with one mRNA and cleaves it before translation."
+        page: 54
+        quote: "Once inside a cell, siRNA requires complete nucleotide pairing, leading to highly specific mRNA targeting. Results in mRNA cleavage prior to translation."
       - kind: try
         items: [bio.L04.004, bio.L04.007, bio.L04.009, bio.L04.010, bio.L04.013]
     recap:
@@ -243,6 +282,11 @@ lessons:
         text: |-
           - الـ **sphingolipidoses** كلها AR ==ما عدا Fabry== (XR).
           - الـ **mucopolysaccharidoses** كلها AR ==ما عدا Hunter== (XR).
+        page: 58
+        quote: "sphingolipidoses (except Fabry disease), hemochromatosis, glycogen storage diseases, thalassemia, mucopolysaccharidoses (except Hunter syndrome)"
+      - kind: explain
+        title: "قايمة الـ XR، وإمتى البنت تتعب"
+        text: |-
           - الـ XR: Bruton، Duchenne/Becker، Fabry، G6PD، hemophilia A و B، Hunter، Lesch-Nyhan، ocular albinism، OTC deficiency، Wiskott-Aldrich.
           - بنت عندها مرض XR؟ فكر في **Turner** (45,XO) أو **skewed lyonization**.
         page: 59
@@ -304,7 +348,7 @@ lessons:
       - "Fabry و Hunter: الاستثناءات XR."
       - "CF: ΔF508 ← مش بيوصل للسطح ← مخاط ناشف وعرق مالح."
       - "Potentiator (ivacaftor) يفتح، corrector (lumacaftor) يصلّح الشكل."
-    practice: [bio.L04.028, bio.L04.029, bio.L04.030, bio.L04.031, bio.L04.032, bio.L04.033, bio.L04.034, bio.L04.035, bio.L04.036, bio.L04.037, bio.L04.038, bio.L04.039, bio.L04.040, bio.L04.041, bio.L04.042, bio.L04.043, bio.L04.044, bio.L04.045, bio.L04.046, bio.L04.047, bio.L04.085, bio.L04.086, bio.L04.087, bio.L04.088]
+    practice: [bio.L04.028, bio.L04.029, bio.L04.030, bio.L04.031, bio.L04.032, bio.L04.033, bio.L04.034, bio.L04.035, bio.L04.036, bio.L04.037, bio.L04.038, bio.L04.039, bio.L04.040, bio.L04.041, bio.L04.042, bio.L04.043, bio.L04.044, bio.L04.045, bio.L04.046, bio.L04.047, bio.L04.085, bio.L04.086, bio.L04.087, bio.L04.088, bio.L04.099]
   - id: bio.L04.lesson4
     title: "العضلات والميتوكوندريا والـ repeats"
     hook: "Duchenne و Becker نفس الجين، بس واحد frame بايظ والتاني لأ. والـ repeats كل جيل بتطول"
@@ -378,6 +422,36 @@ lessons:
         text: "الحيلة: كل repeat ليه mnemonic في الكتاب. **C**AG = **C**audate (Huntington). C**T**G = Cataracts، **T**oupee، Gonads. C**G**G = Chin، **G**iant **G**onads. **GAA** = Ataxic **GAA**it."
         page: 60
         quote: "Huntington disease (CAG)n AD Caudate has ↓ ACh and GABA"
+      - kind: figure
+        title: "الـ reading frame: Duchenne ضد Becker"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <text x="10" y="18" class="t-sm t-b">Normal</text>
+            <rect class="fg-box" x="10" y="26" width="50" height="20" rx="3"/><text x="18" y="40" class="t-sm">THE</text>
+            <rect class="fg-box" x="64" y="26" width="50" height="20" rx="3"/><text x="72" y="40" class="t-sm">BIG</text>
+            <rect class="fg-box" x="118" y="26" width="50" height="20" rx="3"/><text x="126" y="40" class="t-sm">RED</text>
+            <rect class="fg-box" x="172" y="26" width="50" height="20" rx="3"/><text x="180" y="40" class="t-sm">CAT</text>
+            <text x="232" y="40" class="t-sm t-good">full dystrophin</text>
+            <text x="10" y="80" class="t-sm t-b">In-frame deletion (3 letters lost)</text>
+            <rect class="fg-box" x="10" y="88" width="50" height="20" rx="3"/><text x="18" y="102" class="t-sm">THE</text>
+            <rect class="fg-thin" x="64" y="88" width="50" height="20" rx="3"/><text x="72" y="102" class="t-sm t-mut">---</text>
+            <rect class="fg-box" x="118" y="88" width="50" height="20" rx="3"/><text x="126" y="102" class="t-sm">RED</text>
+            <rect class="fg-box" x="172" y="88" width="50" height="20" rx="3"/><text x="180" y="102" class="t-sm">CAT</text>
+            <text x="232" y="96" class="t-sm t-acc">shorter, partly</text>
+            <text x="232" y="110" class="t-sm t-acc">working: Becker</text>
+            <text x="10" y="142" class="t-sm t-b">Frameshift deletion (1 letter lost)</text>
+            <rect class="fg-box" x="10" y="150" width="50" height="20" rx="3"/><text x="18" y="164" class="t-sm">THE</text>
+            <rect class="fg-bad" x="64" y="150" width="50" height="20" rx="3"/><text x="72" y="164" class="t-sm">BGR</text>
+            <rect class="fg-bad" x="118" y="150" width="50" height="20" rx="3"/><text x="126" y="164" class="t-sm">EDC</text>
+            <rect class="fg-bad" x="172" y="150" width="50" height="20" rx="3"/><text x="180" y="164" class="t-sm">AT…</text>
+            <text x="232" y="158" class="t-sm t-bad">truncated or absent:</text>
+            <text x="232" y="172" class="t-sm t-bad">Duchenne</text>
+            <text x="10" y="200" class="t-sm t-mut">Reading frame = codons read 3 letters at a time</text>
+          </svg>
+        caption: "الـ ribosome بيقرا 3 حروف 3 حروف. لو اتشال مضاعف 3، باقي الجملة سليم فالبروتين أقصر بس شغال (Becker). لو اتشال حرف واحد، كل اللي بعده بيتقري غلط، فالبروتين يتقطع أو يختفي (Duchenne)."
+        alt: "Three rows of three-letter word boxes. Normal: THE BIG RED CAT gives full dystrophin. In-frame deletion removes the whole word BIG, so THE RED CAT still reads correctly and gives a shorter, partly working protein (Becker). Frameshift deletion removes one letter, so the rest reads BGR EDC AT, giving a truncated or absent protein (Duchenne)."
+        page: 59
+        quote: "X-linked recessive disorder typically due to frameshift deletions or nonsense mutations → truncated or absent dystrophin protein → progressive myofiber damage."
       - kind: try
         items: [bio.L04.048, bio.L04.052, bio.L04.055, bio.L04.062, bio.L04.064]
     recap:
@@ -385,7 +459,7 @@ lessons:
       - "Myotonic: CTG، AD، myotonia و cataracts و صلع."
       - "Mitochondrial: ragged red fibers. Leber: complex I."
       - "Rett: MECP2، بنات، regression. Fragile X: CGG في الـ oogenesis."
-    practice: [bio.L04.048, bio.L04.049, bio.L04.050, bio.L04.051, bio.L04.052, bio.L04.053, bio.L04.054, bio.L04.055, bio.L04.056, bio.L04.057, bio.L04.058, bio.L04.059, bio.L04.060, bio.L04.061, bio.L04.062, bio.L04.063, bio.L04.064, bio.L04.065, bio.L04.089, bio.L04.090, bio.L04.091]
+    practice: [bio.L04.048, bio.L04.049, bio.L04.050, bio.L04.051, bio.L04.052, bio.L04.053, bio.L04.054, bio.L04.055, bio.L04.056, bio.L04.057, bio.L04.058, bio.L04.059, bio.L04.060, bio.L04.061, bio.L04.062, bio.L04.063, bio.L04.064, bio.L04.065, bio.L04.089, bio.L04.090, bio.L04.091, bio.L04.101, bio.L04.102, bio.L04.103, bio.L04.104, bio.L04.105, bio.L04.106]
   - id: bio.L04.lesson5
     title: "الـ trisomies، وكل كروموسوم وأمراضه"
     hook: "21 سن الشرب، 18 سن الانتخاب، 13 سن البلوغ. والـ markers بتقولك مين"
@@ -471,6 +545,36 @@ lessons:
           - **Cri-du-chat**: ==5p−==. microcephaly، intellectual disability، عياط زي القطة، epicanthal folds، VSD. «I cry when I am Very SaD».
         page: 62
         quote: "Occurs when the long arms of 2 acrocentric chromosomes (chromosomes with centromeres near their ends) fuse at the centromere and the 2 short arms are lost."
+      - kind: figure
+        title: "Robertsonian 14;21"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="b4f5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <text x="20" y="18" class="t-sm t-b">Two acrocentric chromosomes</text>
+            <rect class="fg-thin" x="30" y="30" width="16" height="10" rx="3"/>
+            <circle class="fg-dot-acc" cx="38" cy="46" r="5"/>
+            <rect class="fg-box" x="30" y="52" width="16" height="90" rx="5"/>
+            <text x="26" y="160" class="t-sm">14</text>
+            <rect class="fg-thin" x="80" y="30" width="16" height="10" rx="3"/>
+            <circle class="fg-dot-acc" cx="88" cy="46" r="5"/>
+            <rect class="fg-acc" x="80" y="52" width="16" height="60" rx="5"/>
+            <text x="76" y="160" class="t-sm">21</text>
+            <text x="110" y="38" class="t-sm t-mut">short arms</text>
+            <line class="fg-arrow-acc" x1="135" y1="90" x2="195" y2="90" marker-end="url(#b4f5)"/>
+            <text x="140" y="80" class="t-sm">fuse at</text>
+            <text x="140" y="110" class="t-sm">centromere</text>
+            <rect class="fg-acc" x="220" y="20" width="16" height="60" rx="5"/>
+            <circle class="fg-dot-acc" cx="228" cy="86" r="5"/>
+            <rect class="fg-box" x="220" y="92" width="16" height="90" rx="5"/>
+            <text x="245" y="60" class="t-sm">21q</text>
+            <text x="245" y="140" class="t-sm">14q</text>
+            <text x="280" y="100" class="t-sm t-mut">short arms</text>
+            <text x="280" y="114" class="t-sm t-mut">lost</text>
+          </svg>
+        caption: "الـ long arms بتوع 14 و 21 بيلزقوا عند الـ centromere والـ short arms بتضيع. الـ carrier الـ balanced سليم (الـ short arms مفيهاش جينات مهمة)، بس ممكن يدّي gamete فيها 21 زيادة ← طفل Down أو miscarriage."
+        alt: "Chromosomes 14 and 21, both acrocentric with tiny short arms, fuse at their centromeres into one chromosome made of 21q on top and 14q below; the two short arms are lost."
+        page: 62
+        quote: "Occurs when the long arms of 2 acrocentric chromosomes (chromosomes with centromeres near their ends) fuse at the centromere and the 2 short arms are lost."
       - kind: try
         items: [bio.L04.068, bio.L04.069, bio.L04.070, bio.L04.072, bio.L04.076]
     recap:
@@ -478,4 +582,4 @@ lessons:
       - "Edwards: PRINCE Edward، كل الـ markers تنزل. Patau: midline defects."
       - "NF1 و BRCA1 على 17، NF2 و DiGeorge على 22، BRCA2 و RB1 على 13."
       - "Robertsonian balanced = سليم. Cri-du-chat = 5p−."
-    practice: [bio.L04.066, bio.L04.067, bio.L04.068, bio.L04.069, bio.L04.070, bio.L04.071, bio.L04.072, bio.L04.073, bio.L04.074, bio.L04.075, bio.L04.076, bio.L04.077, bio.L04.078, bio.L04.079, bio.L04.080, bio.L04.081, bio.L04.082, bio.L04.083, bio.L04.092, bio.L04.093, bio.L04.094, bio.L04.095, bio.L04.096, bio.L04.097, bio.L04.098]
+    practice: [bio.L04.066, bio.L04.067, bio.L04.068, bio.L04.069, bio.L04.070, bio.L04.071, bio.L04.072, bio.L04.073, bio.L04.074, bio.L04.075, bio.L04.076, bio.L04.077, bio.L04.078, bio.L04.079, bio.L04.080, bio.L04.081, bio.L04.082, bio.L04.083, bio.L04.092, bio.L04.093, bio.L04.094, bio.L04.095, bio.L04.096, bio.L04.097, bio.L04.098, bio.L04.100]
