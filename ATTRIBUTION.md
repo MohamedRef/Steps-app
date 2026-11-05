@@ -7,6 +7,5 @@
 
 ## Fonts
 
-The UI fonts are bundled from the [Fontsource](https://fontsource.org) npm packages, version 5.3.0 (the same files Batna ships), and each license is copied next to its files. `crates/app/src/fonts.rs` embeds them.
-- **IBM Plex Sans Arabic** (400, 600 and 700, Arabic subset; `@fontsource/ibm-plex-sans-arabic` 5.3.0): © 2019 IBM Corp., SIL Open Font License 1.1. Used for the Arabic UI. Files are in `assets/fonts/ibm-plex-sans-arabic/` with `OFL.txt`.
-- **Plus Jakarta Sans** (variable, Latin and Latin Extended; `@fontsource-variable/plus-jakarta-sans` 5.3.0): © 2020 The Plus Jakarta Sans Project Authors ([tokotype/PlusJakartaSans](https://github.com/tokotype/PlusJakartaSans)), SIL Open Font License 1.1. Used for medical terms and other Latin text. Files are in `assets/fonts/plus-jakarta-sans/` with `OFL.txt`.
+The UI fonts are bundled from the [Fontsource](https://fontsource.org) npm packages, version 5.3.0, and each license is copied next to its files. `crates/app/src/fonts.rs` embeds them.
+- **Readex Pro** (variable, Arabic, Latin and Latin Extended; `@fontsource-variable/readex-pro` 5.3.0): © 2019 The Readex Pro Project Authors ([ThomasJockin/readexpro](https://github.com/ThomasJockin/readexpro)), SIL Open Font License 1.1. Used for the whole UI, Arabic and English. Files are in `assets/fonts/readex-pro/` with `OFL.txt`.

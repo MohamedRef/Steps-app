@@ -1,6 +1,6 @@
-/* Steps: an ochre accent and a calm
-   green for "ready / right", on a faint green-grey paper. Logical properties
-   only, so the Arabic UI mirrors without extra rules. No image assets.
+/* Steps: petrol blue on cool paper, a calm green for "ready / right" and a
+   gold summit for the goal. Logical properties only, so the Arabic UI
+   mirrors without extra rules. No image assets.
    Layout by window width: bottom bar under 600px, side rail from 600px,
    a wider reading column from 840px. */
 
@@ -8,8 +8,8 @@
    --good[-soft], --bad[-soft]) come from steps_core::theme, per the theme
    picked in Settings › Look. */
 :root {
-  --font: "IBM Plex Sans Arabic", "Noto Sans Arabic", "Segoe UI", "Roboto", system-ui, sans-serif;
-  --font-latin: "Plus Jakarta Sans", "Segoe UI", "Roboto", system-ui, sans-serif;
+  --font: "Readex Pro", "Noto Sans Arabic", "Segoe UI", "Roboto", system-ui, sans-serif;
+  --font-latin: "Readex Pro", "Segoe UI", "Roboto", system-ui, sans-serif;
   --fs-sm: 0.875rem;
   --fs-md: 1rem;
   --fs-lg: 1.2rem;
@@ -19,8 +19,8 @@
   --sp-3: 0.75rem;
   --sp-4: 1rem;
   --sp-6: 1.5rem;
-  --radius: 12px;
-  --radius-card: 18px;
+  --radius: 10px;
+  --radius-card: 16px;
   --card-pad: var(--sp-4);
   --card-shadow: none;
   --radius-pill: 999px;
@@ -33,6 +33,13 @@
   --lh: 1.7;
   --nav-h: 64px;
   --rail-w: 88px;
+  /* The Steps mark (assets/src/icon/full.svg): a bold S that turns like a
+     stair, with the summit dot. --mark-line is the S alone, so the dot can
+     take its own colour. */
+  --mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='27 22 60 64'%3E%3Cpath d='M72 32 H44 a8 8 0 0 0 -8 8 V48 a8 8 0 0 0 8 8 H64 a8 8 0 0 1 8 8 V68 a8 8 0 0 1 -8 8 H36' fill='none' stroke='%23000' stroke-width='9' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='80' cy='32' r='5.5'/%3E%3C/svg%3E");
+  --mark-line: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='27 22 60 64'%3E%3Cpath d='M72 32 H44 a8 8 0 0 0 -8 8 V48 a8 8 0 0 0 8 8 H64 a8 8 0 0 1 8 8 V68 a8 8 0 0 1 -8 8 H36' fill='none' stroke='%23000' stroke-width='9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  /* The summit: the goal the mark climbs to. Decoration only, never text. */
+  --summit: #f2c45a;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --dur: 180ms;
 }
@@ -121,7 +128,12 @@ input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
   background: var(--surface);
 }
 .brand { display: flex; align-items: baseline; gap: var(--sp-2); min-width: 0; }
-.brand-name { font-weight: 700; font-size: var(--fs-lg); color: var(--accent); }
+.brand-name { font-weight: 700; font-size: var(--fs-lg); color: var(--accent); white-space: nowrap; display: inline-flex; align-items: center; gap: 0.35em; }
+/* The mark before the name, in the brand colour. */
+.brand-name::before {
+  content: ""; flex: none; inline-size: 0.95em; block-size: 1em; background: currentColor;
+  -webkit-mask: var(--mark) center / contain no-repeat; mask: var(--mark) center / contain no-repeat;
+}
 .brand-tag { color: var(--muted); font-size: var(--fs-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 /* The full line only when the bar has room for it; in rem, so Larger text
    switches sooner (UX #584: «…MLE Step 1 مذاكرة» at 320). */
@@ -267,6 +279,13 @@ input[type="file"]::file-selector-button {
 }
 .nav-item .glyph { display: grid; place-items: center; block-size: 1.75rem; }
 .nav-item[aria-current="page"] { color: var(--accent); font-weight: 700; }
+/* The current screen is marked by a short step on the bar's top edge (the
+   side rail moves it to the inline-start edge, nav.css). */
+.nav-item { position: relative; }
+.nav-item[aria-current="page"]::before {
+  content: ""; position: absolute; inset-block-start: 0; inset-inline: 30%;
+  block-size: 4px; border-radius: 0 0 4px 4px; background: var(--accent);
+}
 
 /* ---------- side rail (medium and expanded) ---------- */
 /* Tablets (Tab S11: 753dp portrait, 1205dp landscape) and the Mac: no top

@@ -18,14 +18,25 @@ fn theme_label(t: Theme) -> (&'static str, &'static str) {
         Theme::Night => (tx::THEME_NIGHT, tx::THEME_NIGHT_SUB),
         Theme::Black => (tx::THEME_BLACK, tx::THEME_BLACK_SUB),
         Theme::NightShift => (tx::THEME_SHIFT, tx::THEME_SHIFT_SUB),
+        Theme::Scrubs => (tx::THEME_SCRUBS, tx::THEME_SCRUBS_SUB),
+        Theme::Sepia => (tx::THEME_SEPIA, tx::THEME_SEPIA_SUB),
+        Theme::Indigo => (tx::THEME_INDIGO, tx::THEME_INDIGO_SUB),
+        Theme::Contrast => (tx::THEME_CONTRAST, tx::THEME_CONTRAST_SUB),
     }
 }
 
 fn appearance_label(a: Appearance) -> (&'static str, &'static str) {
     match a {
+        Appearance::Stepped => (tx::APPEARANCE_STEPPED, tx::APPEARANCE_STEPPED_SUB),
         Appearance::Calm => (tx::APPEARANCE_CALM, tx::APPEARANCE_CALM_SUB),
-        Appearance::Glossy => (tx::APPEARANCE_GLOSSY, tx::APPEARANCE_GLOSSY_SUB),
-        Appearance::LiquidGlass => (tx::APPEARANCE_LIQUID_GLASS, tx::APPEARANCE_LIQUID_GLASS_SUB),
+        Appearance::Outline => (tx::APPEARANCE_OUTLINE, tx::APPEARANCE_OUTLINE_SUB),
+        Appearance::Tinted => (tx::APPEARANCE_TINTED, tx::APPEARANCE_TINTED_SUB),
+        Appearance::Borderless => (tx::APPEARANCE_BORDERLESS, tx::APPEARANCE_BORDERLESS_SUB),
+        Appearance::Dividers => (tx::APPEARANCE_DIVIDERS, tx::APPEARANCE_DIVIDERS_SUB),
+        Appearance::SideLine => (tx::APPEARANCE_SIDE_LINE, tx::APPEARANCE_SIDE_LINE_SUB),
+        Appearance::SoftFill => (tx::APPEARANCE_SOFT_FILL, tx::APPEARANCE_SOFT_FILL_SUB),
+        Appearance::Mono => (tx::APPEARANCE_MONO, tx::APPEARANCE_MONO_SUB),
+        Appearance::LiquidGlass => (tx::APPEARANCE_GLASS, tx::APPEARANCE_GLASS_SUB),
     }
 }
 
@@ -87,13 +98,7 @@ pub fn LookSection() -> Element {
                         onclick: move |_| ui.update_prefs(|prefs| prefs.appearance = a),
                         span { class: "appearance-swatch", "data-swatch": a.as_str(), aria_hidden: "true" }
                         span { class: "choice-text",
-                            span { class: "choice-title",
-                                if matches!(a, Appearance::Glossy | Appearance::LiquidGlass) {
-                                    bdi { {appearance_label(a).0} }
-                                } else {
-                                    {appearance_label(a).0}
-                                }
-                            }
+                            span { class: "choice-title", {appearance_label(a).0} }
                             span { class: "muted small", {appearance_label(a).1} }
                         }
                     }

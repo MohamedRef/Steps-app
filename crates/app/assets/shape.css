@@ -121,17 +121,15 @@ button.chip { border-color: var(--line-soft); }
 
 /* ---------- phones ---------- */
 @media (max-width: 599.98px) {
-  /* Floating pill bar: inset from the edges, a soft pill behind the active
-     icon. Phones show four or five tabs plus More (more.rs). */
+  /* Docked bar: edge to edge on a hairline, the current tab marked by a
+     step on the top edge (main.css). Phones show four or five tabs plus
+     More (more.rs). */
   .nav {
-    margin-inline: var(--sp-3);
-    margin-block-end: calc(var(--sp-2) + env(safe-area-inset-bottom, 0px));
-    padding-block: var(--sp-1);
+    padding-block: 0 env(safe-area-inset-bottom, 0px);
     padding-inline: var(--sp-1);
-    border: 1px solid var(--line-soft);
-    border-radius: var(--radius-pill);
-    background: var(--raised);
-    box-shadow: 0 6px 24px rgb(0 0 0 / 0.12);
+    border: 0;
+    border-block-start: 1px solid var(--line);
+    background: var(--surface);
     /* One column per visible tab, whatever their number; minmax(0, 1fr): a
        long label shrinks into its tab instead of widening the bar past a
        360px screen (#152). */
@@ -148,15 +146,8 @@ button.chip { border-color: var(--line-soft); }
     min-height: calc(var(--nav-h) - var(--sp-2));
     justify-content: center;
     font-size: max(0.6875rem, 11px);
-    border-radius: var(--radius-pill);
   }
-  .nav-item .glyph {
-    inline-size: min(3rem, 100%);
-    block-size: 1.75rem;
-    border-radius: var(--radius-pill);
-    transition: background-color var(--dur) var(--ease);
-  }
-  .nav-item[aria-current="page"] .glyph { background: var(--accent-soft); }
+  .nav-item .glyph { inline-size: min(3rem, 100%); block-size: 1.75rem; }
 
   /* Today's lecture list: one grouped block instead of a stack of cards. */
   .lectures {

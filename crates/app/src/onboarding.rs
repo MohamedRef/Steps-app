@@ -551,6 +551,10 @@ fn theme_name(t: Theme) -> &'static str {
         Theme::Night => s::THEME_NIGHT,
         Theme::Black => s::THEME_BLACK,
         Theme::NightShift => s::THEME_SHIFT,
+        Theme::Scrubs => s::THEME_SCRUBS,
+        Theme::Sepia => s::THEME_SEPIA,
+        Theme::Indigo => s::THEME_INDIGO,
+        Theme::Contrast => s::THEME_CONTRAST,
     }
 }
 

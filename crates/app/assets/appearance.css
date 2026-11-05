@@ -1,120 +1,172 @@
-/* Glossy · Material You (Settings › Look › نمط الواجهة). Calm, the default,
-   is everything else; this file only adds to the shared classes when
-   `.app[data-appearance="glossy"]`. Tonal containers from the theme's own
-   tokens (no wallpaper colours), a faint top highlight, pill buttons,
-   ~22px cards. Blur only on small floating surfaces (the bar, sheets);
-   long lists get an opaque gradient instead. Nothing moves on its own.
-   Readable states stay solid: selected, right, wrong and disabled. */
+/* Surface styles (Settings › Look › نمط الواجهة). Each adds to the shared
+   classes when `.app[data-appearance="…"]` is set; colours come from the
+   theme's tokens only, so every style works on every theme. Liquid Glass
+   lives in liquid-glass.css. Nothing here moves on its own, and selected,
+   right, wrong and disabled states stay solid in every style.
 
-.app[data-appearance="glossy"] {
-  --glass-radius: 22px;
-  --glass-blur: 18px;
-  --glass-hi: inset 0 1px 0 color-mix(in srgb, var(--glass-white, white) 26%, transparent);
-  --glass-shadow: 0 7px 22px color-mix(in srgb, var(--text) 7%, transparent);
-  --radius-card: var(--glass-radius);
-  --radius-lg: var(--glass-radius);
-  background:
-    radial-gradient(ellipse at 94% 4%, color-mix(in srgb, var(--glass-glow, var(--accent-soft)) 70%, transparent), transparent 46%),
-    radial-gradient(ellipse at 2% 46%, color-mix(in srgb, var(--glass-glow, var(--accent)) 12%, transparent), transparent 50%),
-    var(--bg);
-}
+   - stepped (default): Steps' own look. Cards stand on a solid ledge, the
+     main buttons press down into theirs. No blur, no gradients but the hero.
+   - calm: flat surfaces and hairlines (main.css as it is).
+   - outline: cards drawn as clear outlines on the page, like a study
+     notebook; no fills, no shadows.
+   - tinted: cards filled with the theme's quiet tint, the page plainer. */
 
-/* ---------- surfaces ---------- */
-.app[data-appearance="glossy"] :is(.card, .stat-tile, .tap-list, .lectures, .choice-list, .answer) {
-  background: linear-gradient(145deg, color-mix(in srgb, var(--surface) 96%, var(--glass-white, white)), color-mix(in srgb, var(--surface) 90%, var(--bg)));
-  border-color: color-mix(in srgb, var(--accent) 16%, var(--line));
-  box-shadow: var(--glass-hi), var(--glass-shadow);
+/* ---------- Stepped ---------- */
+.app[data-appearance="stepped"] {
+  /* The ledge under a card: the hairline, warmed toward the brand. */
+  --ledge: color-mix(in srgb, var(--line) 82%, var(--accent));
+  /* The ledge under something brand-filled: the brand, a step darker. */
+  --ledge-deep: color-mix(in srgb, var(--accent) 58%, black);
+  --card-border: var(--line);
+  --card-shadow: 0 3px 0 var(--ledge);
 }
-.app[data-appearance="glossy"] :is(.card, .stat-tile, .tap-list, .lectures, .choice-list) { border-radius: var(--glass-radius); }
-.app[data-appearance="glossy"] :is(.card-flat, .note) {
-  background: linear-gradient(150deg, color-mix(in srgb, var(--soft) 86%, var(--surface)), var(--soft));
-  border-color: color-mix(in srgb, var(--accent) 12%, var(--line));
-  box-shadow: var(--glass-hi);
+.app[data-appearance="stepped"] :is(.tap-list, .lectures, .choice-list, .coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn) {
+  box-shadow: 0 3px 0 var(--ledge);
 }
-.app[data-appearance="glossy"] .hero {
-  border-radius: 26px;
-  background: linear-gradient(145deg, color-mix(in srgb, var(--accent) 88%, var(--glass-white, white)), var(--accent) 54%, color-mix(in srgb, var(--accent) 92%, black));
-  border-color: color-mix(in srgb, var(--accent) 80%, var(--glass-white, white));
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--glass-white, white) 38%, transparent), 0 10px 25px color-mix(in srgb, var(--accent) 18%, transparent);
+/* A list inside a card is part of that card: no second ledge. */
+.app[data-appearance="stepped"] .card :is(.choice-list, .tap-list) { box-shadow: none; }
+.app[data-appearance="stepped"] .hero {
+  border-radius: calc(var(--radius-card) + 2px);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--accent) 86%, white), var(--accent) 62%);
+  box-shadow: 0 4px 0 var(--ledge-deep);
 }
-/* A still sheen across the hero's top: drawn once, never animated. */
-.app[data-appearance="glossy"] .hero::after {
-  content: ""; position: absolute; inset-block-start: -20%; inset-inline: -7%; block-size: 58%;
-  border-radius: 0 0 60% 50%; background: linear-gradient(165deg, color-mix(in srgb, var(--glass-white, white) 9%, transparent), transparent);
-  pointer-events: none;
+.app[data-appearance="stepped"] .btn-on-hero { box-shadow: 0 3px 0 rgb(0 0 0 / 0.22); }
+.app[data-appearance="stepped"] .btn-primary:not(:disabled) { box-shadow: 0 3px 0 var(--ledge-deep); }
+.app[data-appearance="stepped"] :is(.btn-secondary, .btn-tonal, .answer, .rating):not(:disabled) { box-shadow: 0 2px 0 var(--ledge); }
+.app[data-appearance="stepped"] .rating[data-grade="good"]:not(:disabled) { box-shadow: 0 3px 0 var(--ledge-deep); }
+/* Pressing steps down onto the ledge instead of shrinking. */
+@media (prefers-reduced-motion: no-preference) {
+  .app[data-appearance="stepped"] :is(.btn, .answer, .rating, .card-action) { transition: transform 90ms ease, box-shadow 90ms ease; }
 }
-.app[data-appearance="glossy"] .btn-on-hero {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--accent-soft) 70%, var(--glass-white, white)), var(--accent-soft));
-  border-color: transparent; color: var(--accent-ink);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--glass-white, white) 45%, transparent), 0 5px 14px rgb(0 0 0 / 0.08);
+.app[data-appearance="stepped"] :is(.btn, .answer, .rating):not(:disabled):active,
+.app[data-appearance="stepped"] .card-action:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 var(--ledge);
 }
+.app[data-appearance="stepped"] .btn-primary:not(:disabled):active { box-shadow: 0 1px 0 var(--ledge-deep); }
 
-/* ---------- buttons: pills with a top highlight ---------- */
-.app[data-appearance="glossy"] :is(.btn, .rating, .segmented, .answer) { border-radius: var(--radius-pill); }
-.app[data-appearance="glossy"] .answer { border-radius: 18px; }
-.app[data-appearance="glossy"] .rating { border-radius: 18px; }
-.app[data-appearance="glossy"] .btn-primary,
-.app[data-appearance="glossy"] .rating[data-grade="good"] {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--accent) 90%, var(--glass-white, white)), var(--accent));
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--glass-white, white) 25%, transparent), 0 4px 11px color-mix(in srgb, var(--accent) 14%, transparent);
+/* ---------- Outline ---------- */
+.app[data-appearance="outline"] {
+  /* A firmer line than the hairline, still quieter than the text. */
+  --outline: color-mix(in srgb, var(--text) 30%, var(--line));
+  --card-border: var(--outline);
+  --card-shadow: none;
 }
-.app[data-appearance="glossy"] .btn-primary:disabled { background: var(--surface-2); box-shadow: none; }
-.app[data-appearance="glossy"] .btn-tonal {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--accent-soft) 80%, var(--surface)), var(--accent-soft));
-  color: var(--accent-ink);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--glass-white, white) 32%, transparent);
+.app[data-appearance="outline"] :is(.card, .stat-tile, .tap-list, .lectures, .choice-list, .coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn):not(.hero) {
+  background: transparent;
+  border-width: 1.5px;
+  border-color: var(--outline);
 }
-.app[data-appearance="glossy"] .btn-secondary { box-shadow: var(--glass-hi); }
-.app[data-appearance="glossy"] :is(.icon-button, .row-icon) {
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--glass-white, white) 32%, transparent), 0 2px 6px color-mix(in srgb, var(--text) 5%, transparent);
-}
+.app[data-appearance="outline"] .card-flat { background: transparent; border: 1.5px dashed var(--outline); }
+.app[data-appearance="outline"] .card :is(.choice-list, .tap-list) { border: 0; }
+.app[data-appearance="outline"] :is(.btn-secondary, .icon-button) { background: transparent; border: 1.5px solid var(--outline); }
+.app[data-appearance="outline"] .answer:not([data-state]) { background: transparent; border-color: var(--outline); }
+.app[data-appearance="outline"] :is(.nav, .topbar) { background: var(--bg); }
+.app[data-appearance="outline"] .nav { border-color: var(--outline); }
 
-/* ---------- states stay solid ---------- */
-.app[data-appearance="glossy"] .answer[data-state="selected"] { background: var(--accent-soft); border-color: var(--accent); }
-.app[data-appearance="glossy"] :is(.answer[data-state="correct"], .answer[data-state="missed"]) { background: var(--good-soft); border-color: var(--good); }
-.app[data-appearance="glossy"] .answer[data-state="wrong"] { background: var(--bad-soft); border-color: var(--bad); }
-.app[data-appearance="glossy"] :is(.choice[aria-checked="true"], .segmented > button[aria-checked="true"]) {
-  background: linear-gradient(170deg, color-mix(in srgb, var(--accent-soft) 90%, var(--glass-white, white)), var(--accent-soft));
+/* ---------- Tinted ---------- */
+.app[data-appearance="tinted"] {
+  --card-border: transparent;
+  --card-shadow: none;
 }
-/* A list inside a card is part of that card: no second glass layer. */
-.app[data-appearance="glossy"] .card :is(.choice-list, .tap-list) { background: transparent; box-shadow: none; }
-
-/* ---------- floating surfaces: the only blur ---------- */
-@supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .app[data-appearance="glossy"] :is(.nav, .more-sheet, .sheet) {
-    background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 84%, transparent), color-mix(in srgb, var(--surface) 96%, transparent));
-    -webkit-backdrop-filter: blur(var(--glass-blur));
-    backdrop-filter: blur(var(--glass-blur));
-  }
+.app[data-appearance="tinted"] :is(.card, .tap-list, .lectures, .choice-list, .coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn):not(.hero) {
+  background: var(--soft);
+  border-color: transparent;
 }
-.app[data-appearance="glossy"] .nav-item[aria-current="page"] .glyph {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--accent-soft) 70%, var(--surface)), var(--accent-soft));
-  color: var(--accent-ink);
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--glass-white, white) 36%, transparent);
-}
+.app[data-appearance="tinted"] .stat-tile { background: var(--surface-2); border-color: transparent; }
+.app[data-appearance="tinted"] .card-flat { background: var(--surface-2); }
+.app[data-appearance="tinted"] .card :is(.choice-list, .tap-list) { background: transparent; }
+/* Answers stay on the plain surface, so a question reads the same in every style. */
+.app[data-appearance="tinted"] .answer:not([data-state]) { background: var(--surface); }
+.app[data-appearance="tinted"] .nav { background: var(--soft); border-color: transparent; }
 
 /* ---------- solid fallbacks ----------
-   Reduced transparency (and high contrast) gets Calm's solid surfaces with
-   Glossy's shape; True black keeps its black page. */
-@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
-  .app[data-appearance="glossy"] { background: var(--bg); }
-  .app[data-appearance="glossy"] :is(.nav, .more-sheet, .sheet) {
-    background: var(--raised, var(--surface)); -webkit-backdrop-filter: none; backdrop-filter: none;
+   More contrast and forced colours get plain outlines in every style. */
+@media (prefers-contrast: more), (forced-colors: active) {
+  .app:is([data-appearance="stepped"], [data-appearance="tinted"]) :is(.card, .stat-tile, .tap-list) {
+    border-color: var(--line); box-shadow: none;
   }
-  .app[data-appearance="glossy"] :is(.card, .stat-tile, .tap-list, .lectures, .choice-list, .answer) { background: var(--surface); }
-  .app[data-appearance="glossy"] .hero::after { display: none; }
 }
 
-/* ---------- list screens (parts.css .coll, .view-bar) ---------- */
-.app[data-appearance="glossy"] .coll:not([data-layout="cards"]),
-.app[data-appearance="glossy"] .coll[data-layout="cards"] button.coll-btn {
-  background: linear-gradient(145deg, color-mix(in srgb, var(--surface) 96%, var(--glass-white, white)), color-mix(in srgb, var(--surface) 90%, var(--bg)));
-  border-color: color-mix(in srgb, var(--accent) 16%, var(--line));
-  border-radius: var(--glass-radius);
-  box-shadow: var(--glass-hi), var(--glass-shadow);
+/* ---------- the minimal styles ----------
+   No ledges, no shadows and no decoration in the hero's corner; they differ
+   only in how a card is told apart from the page. */
+.app:is([data-appearance="borderless"], [data-appearance="dividers"], [data-appearance="side-line"], [data-appearance="soft-fill"], [data-appearance="mono"]) {
+  --card-shadow: none;
 }
-.app[data-appearance="glossy"] .coll[data-layout="cards"] button.ls-soon { background: none; box-shadow: none; }
-.app[data-appearance="glossy"] .view-seg > button[aria-checked="true"] { box-shadow: var(--glass-hi); }
-@media (prefers-reduced-transparency: reduce) {
-  .app[data-appearance="glossy"] :is(.coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn) { background: var(--surface); }
+.app:is([data-appearance="calm"], [data-appearance="borderless"], [data-appearance="dividers"], [data-appearance="side-line"], [data-appearance="soft-fill"], [data-appearance="mono"]) .hero::before,
+.app:is([data-appearance="calm"], [data-appearance="borderless"], [data-appearance="dividers"], [data-appearance="side-line"], [data-appearance="soft-fill"], [data-appearance="mono"]) .hero::after {
+  display: none;
 }
+/* The session lengths sit level in every minimal style. */
+.app:is([data-appearance="borderless"], [data-appearance="dividers"], [data-appearance="side-line"], [data-appearance="soft-fill"], [data-appearance="mono"]) .td-chip {
+  min-block-size: var(--tap); align-items: center; padding-block: 0; border-radius: 8px;
+}
+
+/* Borderless: cards are plain surfaces on the page, set apart by space. */
+.app[data-appearance="borderless"] { --card-border: transparent; }
+.app[data-appearance="borderless"] .content { gap: var(--sp-6); }
+.app[data-appearance="borderless"] :is(.card, .stat-tile, .tap-list, .lectures, .choice-list, .coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn):not(.hero) { border-color: transparent; }
+.app[data-appearance="borderless"] .td-chip:not([aria-checked="true"]) { border-color: transparent; }
+.app[data-appearance="borderless"] :is(.nav, .topbar) { border-color: transparent; }
+
+/* Dividers: no boxes at all, only rules between things, on one plain page. */
+.app[data-appearance="dividers"] { --card-border: transparent; }
+.app[data-appearance="dividers"], .app[data-appearance="dividers"] :is(.content, .topbar, .nav) { background: var(--surface); }
+.app[data-appearance="dividers"] :is(.card, .tap-list, .lectures, .choice-list, .coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn):not(.hero) {
+  background: transparent; border: 0; border-block-end: 1px solid var(--line); border-radius: 0;
+}
+.app[data-appearance="dividers"] .stat-tile { background: transparent; border: 0; border-radius: 0; }
+.app[data-appearance="dividers"] .stat-tile + .stat-tile { border-inline-start: 1px solid var(--line); }
+.app[data-appearance="dividers"] .stat-tiles { border-block: 1px solid var(--line); padding-block: var(--sp-1); }
+.app[data-appearance="dividers"] .card-flat { background: transparent; }
+.app[data-appearance="dividers"] .td-chip { border: 0; background: transparent; border-radius: 0; border-block-end: 2px solid transparent; }
+.app[data-appearance="dividers"] .td-chip[aria-checked="true"] { background: transparent; color: var(--accent); border-block-end-color: var(--accent); }
+
+/* Side line: a thin brand line at a card's start is all there is; the hero
+   is text on the page and its button carries the colour. */
+.app[data-appearance="side-line"] :is(.card, .tap-list, .lectures, .coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn):not(.hero) {
+  background: transparent; border: 0; border-inline-start: 2px solid var(--accent); border-radius: 0;
+}
+.app[data-appearance="side-line"] .stat-tile { background: transparent; border: 0; border-inline-start: 2px solid var(--line); border-radius: 0; }
+.app[data-appearance="side-line"] .td-chip { border: 0; background: transparent; border-radius: 0; }
+.app[data-appearance="side-line"] .td-chip[aria-checked="true"] { background: transparent; color: var(--accent); text-decoration: underline 2px; text-underline-offset: 6px; }
+.app[data-appearance="side-line"] .nav { border-color: transparent; background: var(--bg); }
+
+/* Soft fill: one plain page, cards a quiet grey step off it, no lines. */
+.app[data-appearance="soft-fill"] { --card-border: transparent; }
+.app[data-appearance="soft-fill"], .app[data-appearance="soft-fill"] :is(.content, .topbar) { background: var(--surface); }
+.app[data-appearance="soft-fill"] :is(.card, .stat-tile, .tap-list, .lectures, .choice-list, .coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn):not(.hero) {
+  background: var(--surface-2); border-color: transparent;
+}
+.app[data-appearance="soft-fill"] .card :is(.choice-list, .tap-list) { background: transparent; }
+.app[data-appearance="soft-fill"] .answer:not([data-state]) { background: var(--surface); }
+.app[data-appearance="soft-fill"] .td-chip:not([aria-checked="true"]) { background: var(--surface-2); border-color: transparent; }
+.app[data-appearance="soft-fill"] .nav { background: var(--surface-2); border-color: transparent; }
+
+/* Mono: ink and paper. Colour is kept for meaning (right, wrong, links)
+   and the one main action; the rest is text and hairlines. */
+.app[data-appearance="mono"] :is(.card, .stat-tile, .tap-list, .lectures, .choice-list, .coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn):not(.hero) {
+  background: transparent; border-color: var(--line);
+}
+.app[data-appearance="mono"] .stat-num { color: var(--text); }
+.app[data-appearance="mono"] .td-chip:not([aria-checked="true"]) { background: transparent; }
+.app[data-appearance="mono"] .td-chip[aria-checked="true"] { background: var(--text); border-color: var(--text); color: var(--bg); }
+.app[data-appearance="mono"] .nav-item[aria-current="page"] { color: var(--text); }
+.app[data-appearance="mono"] .nav-item[aria-current="page"]::before { background: var(--text); }
+.app[data-appearance="mono"] .brand-name { color: var(--text); }
+
+/* A hero without its fill (Side line, Mono) reads in the page's ink. */
+.app:is([data-appearance="side-line"], [data-appearance="mono"]) .hero {
+  background: transparent; color: var(--text); box-shadow: none;
+}
+.app[data-appearance="side-line"] .hero { border: 0; border-inline-start: 4px solid var(--accent); border-radius: 0; }
+.app[data-appearance="mono"] .hero { border: 1px solid var(--text); }
+.app:is([data-appearance="side-line"], [data-appearance="mono"]) .hero :is(.muted, .page-sub, .hero-meta) { color: var(--muted); opacity: 1; }
+.app:is([data-appearance="side-line"], [data-appearance="mono"]) .hero .chip { background: var(--accent-soft); color: var(--accent-ink); }
+.app:is([data-appearance="side-line"], [data-appearance="mono"]) .hero .note { background: var(--soft); }
+.app:is([data-appearance="side-line"], [data-appearance="mono"]) .hero .card { background: var(--soft); }
+.app:is([data-appearance="side-line"], [data-appearance="mono"]) :is(.btn-on-hero, .hero .btn-primary) {
+  background: var(--accent); border-color: var(--accent); color: var(--on-accent);
+}
+.app[data-appearance="mono"] :is(.btn-on-hero, .hero .btn-primary) { background: var(--text); border-color: var(--text); color: var(--bg); }

@@ -413,7 +413,9 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 .ls-figure figcaption .ls-rich { font-size: var(--fs-sm); }
 
 /* Classes figure authors use (docs/LESSONS.md): theme colours only. */
-.ls-fig-svg svg text { fill: var(--text); font-family: var(--font-latin); font-size: 13px; }
+/* Readex Pro runs about 3% wider than the face the figures were drawn for;
+   a hair of tracking keeps every label inside its picture. */
+.ls-fig-svg svg text { fill: var(--text); font-family: var(--font-latin); font-size: 13px; letter-spacing: -0.03em; }
 .ls-fig-svg svg .t-sm { font-size: 11px; }
 .ls-fig-svg svg .t-lg { font-size: 16px; }
 .ls-fig-svg svg .t-b { font-weight: 700; }
@@ -763,22 +765,14 @@ button.ls-slot:hover { border-color: var(--accent); }
 .coll[data-layout="cards"] button.ls-soon { background: none; border-style: dashed; }
 button.ls-soon .coll-title { color: var(--muted); }
 
-/* Glossy · Material You on the list: appearance.css draws the shared
-   parts (cards, rows, search); these are the list's own. */
-.app[data-appearance="glossy"] .ls-lec-go { border-radius: var(--radius-pill); }
-
-/* ---------- Glossy · Material You (lesson player) ----------
-   Tonal, rounded tiles and slots; solid fills keep every state readable. */
-.app[data-appearance="glossy"] :is(.ls-tile, .ls-slot, .ls-chiplet, .ls-chiplet-done) {
-  border-radius: var(--radius-card);
-  box-shadow: var(--glass-hi);
-}
-.app[data-appearance="glossy"] .ls-slots li[data-state="filled"] .ls-slot {
+/* ---------- Stepped (lesson player) ----------
+   appearance.css draws the shared parts; the player's tiles stand on the
+   same ledge, and a filled slot is the tile set down in it. */
+.app[data-appearance="stepped"] :is(.ls-tile, .ls-chiplet) { box-shadow: 0 2px 0 var(--ledge); }
+.app[data-appearance="stepped"] .ls-slots li[data-state="filled"] .ls-slot {
   background: var(--soft, var(--accent-soft));
   border-color: var(--accent);
 }
-.app[data-appearance="glossy"] .ls-verdict { border-radius: var(--radius-card); }
-.app[data-appearance="glossy"] .ls-bin { border-radius: var(--radius-card); }
 
 /* Follow reduced-motion preferences for the step indicator as well. */
 @media (prefers-reduced-motion: reduce) {

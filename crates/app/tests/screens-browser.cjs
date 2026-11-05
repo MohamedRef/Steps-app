@@ -10,7 +10,7 @@ const { chromium } = require('playwright');
 
 const WIDTHS = [320, 384, 600, 840, 1280];
 const SCHEMES = ['light', 'dark'];
-const APPEARANCES = ['calm', 'glossy'];
+const APPEARANCES = ['stepped', 'calm'];
 const SIZES = ['normal', 'larger'];
 // The floor each screen keeps: the lesson player promises the shared 48dp
 // `--target` (assets/parts.css) for every control; the study screen sizes
