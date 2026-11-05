@@ -58,6 +58,19 @@ fn release(build: u64, published_at: &str, changes: Vec<Change>, content_only: b
     BuildChanges { version: "0.1.0".into(), build, published_at: published_at.into(), changes, content_only }
 }
 
+/// A publish time `days` days before now, so date labels ("today",
+/// "5 days ago", "1 سبتمبر") don't go stale as the calendar moves.
+fn days_ago(days: i64) -> String {
+    (chrono::Utc::now() - chrono::Duration::days(days)).format("%Y-%m-%dT%H:%M:%SZ").to_string()
+}
+
+/// How the sheet labels a date more than a week old in this year: "1 سبتمبر".
+fn day_month(published: &str) -> String {
+    let d = chrono::DateTime::parse_from_rfc3339(published).unwrap();
+    use chrono::Datelike;
+    format!("{} {}", d.day(), tx::MONTHS[d.month0() as usize])
+}
+
 fn notify() -> Prefs {
     Prefs { mode: Mode::Notify, ..Prefs::default() }
 }
@@ -342,14 +355,9 @@ fn many(kind: ChangeKind, n: usize, what: &str) -> Vec<Change> {
 #[test]
 fn the_changelog_folds_long_lists_and_older_builds() {
     let u = install(&dead_feed(), "0.1.0", 44, notify());
-    // Relative dates come from today's clock, so build the recent ones from it.
-    let ago = |days: i64| {
-        (chrono::Utc::now() - chrono::Duration::days(days)).format("%Y-%m-%dT08:00:00Z").to_string()
-    };
-    let newest = ago(0);
     let mut history = vec![release(
         50,
-        &newest,
+        &days_ago(0),
         [
             many(ChangeKind::New, 8, "محاضرة"),
             many(ChangeKind::Improved, 2, "تحسين"),
@@ -358,8 +366,8 @@ fn the_changelog_folds_long_lists_and_older_builds() {
         .concat(),
         false,
     )];
-    let dates =
-        [ago(1), ago(2), ago(5), "2026-09-01T08:00:00Z".to_owned(), "2025-12-01T08:00:00Z".to_owned()];
+    let dates = [days_ago(1), days_ago(2), days_ago(5), days_ago(60), days_ago(400)];
+    let installed_at = days_ago(500);
     for (i, d) in dates.iter().enumerate() {
         history.push(release(
             49 - i as u64,
@@ -368,12 +376,7 @@ fn the_changelog_folds_long_lists_and_older_builds() {
             false,
         ));
     }
-    history.push(release(
-        44,
-        "2025-11-01T08:00:00Z",
-        vec![change(ChangeKind::New, "اللي معاك دلوقتي")],
-        false,
-    ));
+    history.push(release(44, &installed_at, vec![change(ChangeKind::New, "اللي معاك دلوقتي")], false));
     u.set_status_for_tests(|s| s.history = history.clone());
     let mut app = open_updates();
     app.tap(tx::HISTORY);
@@ -393,7 +396,7 @@ fn the_changelog_folds_long_lists_and_older_builds() {
     app.assert_has(tx::YESTERDAY);
     app.assert_has(tx::TWO_DAYS_AGO);
     app.assert_has(&tx::DAYS_AGO.replace("{n}", "5"));
-    app.assert_has(&format!("1 {}", tx::MONTHS[8]));
+    app.assert_has(&day_month(&dates[3]));
     app.assert_lacks("إصلاح 49");
     app.tap("v0.1.0 (49)");
     app.assert_has("إصلاح 49");
@@ -401,7 +404,7 @@ fn the_changelog_folds_long_lists_and_older_builds() {
     app.assert_lacks("إصلاح 49");
     app.assert_lacks(tx::BADGE_INSTALLED);
     app.tap(tx::SHOW_OLDER);
-    app.assert_has("2025");
+    app.assert_has(&installed_at[..4]);
     app.assert_has(tx::BADGE_INSTALLED);
     // The foot: GitHub opens the channel's releases page.
     app.tap("GitHub");
