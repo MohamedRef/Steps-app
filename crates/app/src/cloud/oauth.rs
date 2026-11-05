@@ -78,6 +78,12 @@ fn random_state() -> String {
     URL_SAFE_NO_PAD.encode(bytes)
 }
 
+/// The apps' code flow (with PKCE) sends Google no nonce, so there is none
+/// to show Steps Cloud.
+pub fn sign_in_nonce() -> Option<String> {
+    None
+}
+
 pub fn auth_url(client_id: &str, redirect_uri: &str, pkce: &Pkce, state: &str) -> String {
     let params = [
         ("client_id", client_id),
