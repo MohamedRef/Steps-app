@@ -177,7 +177,7 @@ items:
       - "A lesion above the red nucleus gives decorticate posturing: arms flexed (hands near the cor)."
       - "Vermis lesions cause truncal ataxia, not posturing."
       - "Subthalamic lesions cause contralateral hemiballismus."
-      - "A cord lesion would not give this brainstem posture."
+      - "A complete cord injury at C5 gives flaccid (later spastic) paralysis below the level with a sensory level; it cannot produce a reflex posture of the arms, which needs brainstem motor nuclei above the cord."
     src: { page: 524, quote: "Between red and vestibular nuclei (brainstem)" }
     status: unverified
   # ---------- p525: ischemic brain disease ----------
@@ -185,7 +185,7 @@ items:
     kind: card
     topic: ischemic-brain-disease
     front: When does irreversible neuronal injury begin in hypoxia, and which areas are most vulnerable?
-    back: "After 5 minutes. Most vulnerable: hippocampus (CA1), neocortex, cerebellum (Purkinje cells), watershed areas (\"vulnerable hippos need pure water\")."
+    back: "Once hypoxia passes 5 minutes. The most sensitive regions: CA1 of the hippocampus, the neocortex, cerebellar Purkinje cells and the watershed zones (\"vulnerable hippos need pure water\")."
     src: { page: 525, quote: "Irreversible neuronal injury begins after 5 minutes of hypoxia. Most vulnerable: hippocampus (CA1 region), neocortex, cerebellum (Purkinje cells), watershed areas (“vulnerable hippos need pure water”)." }
     status: unverified
     tags: [high-yield]
@@ -415,6 +415,13 @@ items:
     src: { page: 526, quote: "Basilar artery Pons, medulla, lower midbrain." }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L03.232
+    kind: cloze
+    topic: effects-of-strokes
+    text: "First Aid's memory aid for locked-in syndrome after basilar artery occlusion: \"locked in the {{c1::basement}}\" (basilar)."
+    src: { page: 526, quote: "Locked-in syndrome (locked in the basement)." }
+    status: unverified
+    tags: [high-yield]
   - id: neuro.L03.221
     kind: card
     topic: effects-of-strokes
@@ -433,15 +440,28 @@ items:
   - id: neuro.L03.030
     kind: table
     topic: effects-of-strokes
-    title: Lateral pontine (AICA) vs lateral medullary (PICA) syndromes
-    columns: [Feature, AICA, PICA]
+    title: Lateral pontine syndrome (AICA)
+    columns: [Feature, AICA lesion]
     rows:
-      - [Specific nucleus, "Facial nerve nuclei: LMN face paralysis, ↓ lacrimation, ↓ salivation, ↓ anterior 2/3 taste", "Nucleus ambiguus (IX, X): dysphagia, hoarseness, ↓ gag, hiccups"]
-      - [Inner ear, "Ipsilateral sensorineural deafness, vertigo (labyrinthine artery)", ""]
-      - [Shared, "Vomiting, vertigo, nystagmus; ↓ pain and temperature of contralateral body and ipsilateral face; ipsilateral Horner; ipsilateral ataxia, dysmetria", Same]
-      - [Name, Lateral pontine syndrome, "Lateral medullary (Wallenberg) syndrome"]
-    blanks: [[0, 1], [0, 2], [1, 1], [3, 1], [3, 2]]
+      - [Specific nucleus, "Facial nerve nuclei: LMN face paralysis, ↓ lacrimation, ↓ salivation, ↓ anterior 2/3 taste"]
+      - [Inner ear, "Ipsilateral sensorineural deafness, vertigo (labyrinthine artery, a branch of AICA)"]
+      - [Shared with PICA, "Vomiting, vertigo, nystagmus; ↓ pain and temperature of contralateral body and ipsilateral face; ipsilateral Horner; ipsilateral ataxia, dysmetria"]
+      - [Name, Lateral pontine syndrome]
+    blanks: [[0, 1], [1, 1], [3, 1]]
     src: { page: 526, quote: "Lateral pontine syndrome. Facial nerve nuclei effects are specific to AICA lesions." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L03.231
+    kind: table
+    topic: effects-of-strokes
+    title: Lateral medullary syndrome (PICA)
+    columns: [Feature, PICA lesion]
+    rows:
+      - [Specific nucleus, "Nucleus ambiguus (CN IX, X): dysphagia, hoarseness, ↓ gag, hiccups"]
+      - [Shared with AICA, "Vomiting, vertigo, nystagmus; ↓ pain and temperature of contralateral body and ipsilateral face; ipsilateral Horner; ipsilateral ataxia, dysmetria"]
+      - [Name, "Lateral medullary (Wallenberg) syndrome"]
+    blanks: [[0, 1], [2, 1]]
+    src: { page: 527, quote: "Lateral medullary (Wallenberg) syndrome. Nucleus ambiguus effects are specific to PICA lesions" }
     status: unverified
     tags: [high-yield]
   - id: neuro.L03.031
@@ -537,7 +557,7 @@ items:
       - "Right. Neonatal intraventricular hemorrhage originates in the germinal matrix in the subventricular zone of premature, low-birth-weight infants."
       - "Bridging veins tear in subdural hematomas."
       - "The middle meningeal artery bleeds into the epidural space."
-      - "The book names the germinal matrix, not the choroid plexus."
+      - "The choroid plexus makes CSF; in preterm infants the fragile, highly vascular layer that bleeds is the germinal matrix in the subventricular zone, not the choroid plexus."
       - "Emissary vein damage causes subgaleal hemorrhage outside the skull."
     src: { page: 527, quote: "Originates in germinal matrix, a highly vascularized layer within the subventricular zone." }
     status: unverified
@@ -634,10 +654,17 @@ items:
     kind: card
     topic: subdural-hematoma
     front: Which vessels bleed in a subdural hematoma, and what is its CT shape?
-    back: Bridging veins. A crescent-shaped hemorrhage that crosses suture lines and can cause midline shift. Also seen in shaken babies.
+    back: "Bridging veins. On CT it is a crescent that crosses suture lines and can push the midline over."
     src: { page: 528, quote: "Crescent-shaped hemorrhage (red arrows in C and D ) that crosses suture lines. Can cause midline shift" }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L03.236
+    kind: card
+    topic: subdural-hematoma
+    front: "In which pediatric setting is subdural hematoma classically seen?"
+    back: "Shaken babies (abusive head trauma)."
+    src: { page: 528, quote: "Also seen in shaken babies." }
+    status: unverified
   - id: neuro.L03.211
     kind: cloze
     topic: subdural-hematoma
@@ -679,10 +706,17 @@ items:
     kind: card
     topic: subarachnoid-hemorrhage
     front: When does vasospasm occur after subarachnoid hemorrhage, what does it cause, and what may help?
-    back: 3-10 days after the bleed (from blood breakdown or rebleed) → ischemic infarct; nimodipine may improve neurologic outcome. SAH also ↑ the risk of hydrocephalus (communicating and/or noncommunicating).
+    back: "3-10 days after the bleed (blood breakdown or rebleed) → ischemic infarct; nimodipine may improve the neurologic outcome."
     src: { page: 528, quote: "Vasospasm can occur due to blood breakdown or rebleed 3-10 days after hemorrhage → ischemic infarct; nimodipine may improve neurologic outcome." }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L03.237
+    kind: card
+    topic: subarachnoid-hemorrhage
+    front: "Which type of hydrocephalus does subarachnoid hemorrhage raise the risk of?"
+    back: "Both: communicating and/or noncommunicating hydrocephalus."
+    src: { page: 528, quote: "↑ risk of developing communicating and/ or noncommunicating hydrocephalus." }
+    status: unverified
   - id: neuro.L03.047
     kind: mcq
     topic: subarachnoid-hemorrhage
@@ -853,7 +887,7 @@ items:
     rows:
       - [Broca (expressive), Inferior frontal gyrus (frontal lobe), Nonfluent, Intact, "Frustrated, insight intact; broken boca"]
       - [Wernicke (receptive), Superior temporal gyrus (temporal lobe), Fluent, Impaired, "No insight; word salad"]
-      - [Conduction, Arcuate fasciculus, Fluent, Intact, Impaired repetition]
+      - [Conduction, Arcuate fasciculus, "Fluent (standard teaching, not stated in FA)", "Intact (standard teaching, not stated in FA)", Impaired repetition]
       - [Global, Broca and Wernicke areas, Nonfluent, Impaired, ""]
     blanks: [[0, 1], [0, 2], [0, 3], [1, 1], [1, 2], [1, 3], [2, 1], [2, 4], [3, 2], [3, 3]]
     src: { page: 529, quote: "Wernicke (receptive) Wernicke area in superior temporal gyrus of temporal lobe. Fluent speech with impaired language comprehension. Patients do not have insight." }
@@ -938,7 +972,7 @@ items:
       - "An ACom aneurysm affects the optic chiasm (visual field loss), not eye movements or the pupil."
       - "CN VI palsy causes failed abduction, without a blown pupil or ptosis."
       - "Sympathetic loss (Horner) gives a small pupil, not a dilated one."
-      - "A CN III lesion here is ipsilateral to the findings, and the book's compressive cause is the PCom aneurysm."
+      - "A CN III lesion gives findings on its own side, so a right-sided nucleus lesion can't explain a left CN III palsy; the book's compressive cause is a PCom aneurysm."
     src: { page: 530, quote: "PCom—compression → ipsilateral CN III palsy → mydriasis (“blown pupil”); may also see ptosis, “down and out” eye." }
     status: unverified
   # ---------- p530: fever vs heat stroke ----------
@@ -964,18 +998,18 @@ items:
       temperature is 41.5°C, and his urine is dark. Creatine kinase is markedly elevated. What is the
       most appropriate immediate management?
     options:
-      - Rapid external cooling with rehydration and electrolyte correction
-      - Acetaminophen
-      - Ibuprofen
-      - Broad-spectrum antibiotics alone
-      - Dantrolene with succinylcholine avoidance only
+      - "Rapid external cooling with rehydration and electrolyte correction"
+      - "Acetaminophen"
+      - "Ibuprofen"
+      - "Broad-spectrum antibiotics alone"
+      - "Dantrolene"
     answer: 0
     why:
       - "Right. Heat stroke (> 40°C, CNS dysfunction, rhabdomyolysis): rapid external cooling, rehydration and electrolyte correction."
       - "Antipyretics act on cytokine-driven fever; heat stroke is failure to dissipate heat."
       - "Ibuprofen treats fever comfort and may worsen kidney injury here."
       - "Antibiotics are for infection-driven fever."
-      - "The book's management for heat stroke is cooling and rehydration."
+      - "Dantrolene treats malignant hyperthermia triggered by volatile anesthetics or succinylcholine, not exertional heat stroke."
     src: { page: 530, quote: "Rapid external cooling, rehydration and electrolyte correction" }
     status: unverified
   # ---------- p531: seizures ----------
@@ -1077,7 +1111,7 @@ items:
       - "Occipital seizures give visual phenomena."
       - "Motor cortex seizures cause focal jerking."
       - "3-Hz spike-and-wave is absence (generalized), with no aura or postictal confusion."
-      - "The cerebellum is not a seizure focus in the book."
+      - "The cerebellar vermis controls truncal balance; a vermis lesion gives truncal ataxia, not auras or automatisms."
     src: { page: 531, quote: "Originate in a single area of the brain, most commonly the medial temporal lobe." }
     status: unverified
   # ---------- p531: generalized seizures ----------
@@ -1115,7 +1149,7 @@ items:
       - "Focal temporal spikes fit focal seizures with aura and postictal confusion."
       - "A normal video EEG during events suggests psychogenic nonepileptic events."
       - "Burst suppression is seen in severe encephalopathy, not this child."
-      - "Periodic sharp wave complexes are not the absence pattern."
+      - "Periodic sharp wave complexes are the EEG sign of Creutzfeldt-Jakob disease (rapid dementia with myoclonus)."
     src: { page: 531, quote: "Absence (petit mal)—3 Hz spike and-wave discharges on EEG" }
     status: unverified
   # ---------- p532: headaches ----------
@@ -1196,7 +1230,7 @@ items:
     answer: 0
     why:
       - "Right. Trigeminal neuralgia is most often due to compression of the CN V root by an aberrant vascular loop; treat with carbamazepine."
-      - "The book names vascular compression as the usual cause."
+      - "MS can cause trigeminal neuralgia (a pontine plaque at the CN V root entry), usually in a younger patient with other deficits; in a 62-year-old with a normal exam the usual cause is vascular compression."
       - "Zoster gives a vesicular rash and postherpetic pain, not this pattern."
       - "Giant cell arteritis causes a secondary headache with jaw claudication."
       - "CGRP release underlies migraine (4-72 hr pulsating pain)."
@@ -1242,6 +1276,7 @@ items:
     blanks: [[0, 1], [1, 1], [2, 1]]
     src: { page: 533, quote: "In hemiballismus, half-of-body is going ballistic" }
     status: unverified
+    tags: [high-yield]
   - id: neuro.L03.085
     kind: mcq
     topic: dyskinesias
@@ -1305,9 +1340,9 @@ items:
     why:
       - "Right. Restless legs syndrome is associated with iron deficiency (likely here from menorrhagia), CKD and diabetes."
       - "Ceruloplasmin is for Wilson disease (asterixis, movement disorder)."
-      - "The book doesn't list thyroid disease among RLS associations."
+      - "Thyroid antibodies point to autoimmune thyroiditis (Hashimoto); RLS is linked to iron deficiency, CKD and diabetes."
       - "CK screens for myopathy, not RLS."
-      - "ANA isn't part of the RLS association list."
+      - "ANA screens for lupus and other connective tissue disease, which present with rash, arthritis or serositis rather than evening leg urges."
     src: { page: 533, quote: "may be associated with iron deficiency, CKD, diabetes mellitus (especially with neuropathy)." }
     status: unverified
   # ---------- p534: neurodegenerative movement disorders ----------
@@ -1329,10 +1364,17 @@ items:
     kind: card
     topic: neurodegenerative-movement-disorders
     front: What is lost in Parkinson disease, and what do the affected neurons contain?
-    back: Dopaminergic neurons of the substantia nigra pars compacta (depigmentation). Lewy bodies, intracellular eosinophilic inclusions of α-synuclein ("Parkinsynuclein"). Dementia is usually late.
+    back: "Dopaminergic neurons of the substantia nigra pars compacta (it looks pale). The surviving neurons hold Lewy bodies: eosinophilic intracellular α-synuclein inclusions (\"Parkinsynuclein\")."
     src: { page: 534, quote: "Affected neurons contain Lewy bodies: intracellular eosinophilic inclusions composed of α-synuclein B . Think “Parkinsynuclein.”" }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L03.238
+    kind: card
+    topic: neurodegenerative-movement-disorders
+    front: "When does dementia usually appear in Parkinson disease?"
+    back: "Late in the course."
+    src: { page: 534, quote: "Dementia is usually a late finding." }
+    status: unverified
   - id: neuro.L03.213
     kind: cloze
     topic: neurodegenerative-movement-disorders
@@ -1352,6 +1394,13 @@ items:
     front: "Huntington disease: what is lost, what is the genetics, and when does it start?"
     back: "Loss of GABAergic neurons in the striatum. Autosomal dominant CAG repeat expansion in HTT on chromosome 4 (toxic gain of function), with anticipation. Onset usually 30-50 years."
     src: { page: 534, quote: "Loss of GABAergic neurons in striatum. Autosomal dominant trinucleotide (CAG)n repeat expansion in huntingtin (HTT) gene on chromosome 4 (4 letters)  toxic gain of function." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L03.233
+    kind: cloze
+    topic: neurodegenerative-movement-disorders
+    text: "Huntington disease: the HTT gene sits on chromosome {{c1::4}}, and \"Hunt\" has 4 letters."
+    src: { page: 534, quote: "repeat expansion in huntingtin (HTT) gene on chromosome 4 (4 letters)" }
     status: unverified
     tags: [high-yield]
   - id: neuro.L03.092
@@ -1476,10 +1525,17 @@ items:
     kind: card
     topic: dementia
     front: What causes Creutzfeldt-Jakob disease, and how can it be transmitted?
-    back: "Prions: PrPc → PrPsc (β-pleated sheet resistant to proteases). Usually sporadic, but transmissible by contaminated materials (corneal transplant, neurosurgical equipment). Spongiform cortex without inflammation."
+    back: "Prions: normal PrPc turns into PrPsc, a protease-resistant β-pleated sheet. Most cases are sporadic, but contaminated material (corneal grafts, neurosurgical instruments) can pass it on."
     src: { page: 535, quote: "Typically sporadic, but may be transmitted by contaminated materials (eg, corneal transplant, neurosurgical equipment). Spongiform cortex E (vacuolation without inflammation)." }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L03.239
+    kind: card
+    topic: dementia
+    front: "What does the cortex look like in Creutzfeldt-Jakob disease?"
+    back: "Spongiform: full of vacuoles, with no inflammation."
+    src: { page: 535, quote: "Spongiform cortex E (vacuolation without inflammation)." }
+    status: unverified
   - id: neuro.L03.102
     kind: mcq
     topic: dementia
@@ -1531,7 +1587,7 @@ items:
     kind: card
     topic: idiopathic-intracranial-hypertension
     front: What is idiopathic intracranial hypertension (pseudotumor cerebri), and what do imaging and CSF show?
-    back: "↑ ICP with normal brain imaging (no mass, hydrocephalus or venous sinus thrombosis) and normal CSF composition. MRI may show empty sella, flattening of the posterior globe or transverse sinus stenosis (2° to ↑ ICP)."
+    back: "Raised ICP with a normal scan (no mass, hydrocephalus or sinus clot) and normal CSF. On MRI the pressure itself can empty the sella, flatten the back of the globe or narrow the transverse sinus."
     src: { page: 536, quote: "Also called pseudotumor cerebri. ↑ ICP with normal brain imaging (eg, no mass, hydrocephalus, or venous sinus thrombosis) and normal CSF composition." }
     status: unverified
     tags: [high-yield]
@@ -1556,7 +1612,7 @@ items:
     kind: card
     topic: idiopathic-intracranial-hypertension
     front: What causes the dural sinus narrowing in venous sinus stenosis–induced intracranial hypertension, and what test shows it?
-    back: "Often 2° to chronic thrombosis, fibrotic narrowing or compression by arachnoid granulations. Magnetic resonance venography shows focal transverse sinus stenosis."
+    back: "Usually a long-standing clot, scarring of the sinus, or arachnoid granulations pressing on it. MR venography shows a focal narrowing of the transverse sinus."
     src: { page: 536, quote: "Often 2° to chronic thrombosis, fibrotic narrowing, or compression by arachnoid granulations. Focal transverse sinus stenosis on magnetic resonance venography." }
     status: unverified
   - id: neuro.L03.108
@@ -1607,14 +1663,20 @@ items:
     kind: card
     topic: hydrocephalus
     front: Why does normal pressure hydrocephalus cause its triad, and how is it treated?
-    back: "Expanding ventricles distort the fibers of the corona radiata. CSF pressure is elevated only episodically. Treatment: CSF drainage via LP or shunt placement."
+    back: "The enlarging ventricles stretch the corona radiata fibers. Treatment: drain CSF by LP or place a shunt."
     src: { page: 536, quote: "Expansion of ventricles A distorts the fibers of the corona radiata" }
+    status: unverified
+  - id: neuro.L03.240
+    kind: cloze
+    topic: hydrocephalus
+    text: "Normal pressure hydrocephalus: CSF pressure is raised only {{c1::episodically}}."
+    src: { page: 536, quote: "Affects older adults; idiopathic; CSF pressure elevated only episodically" }
     status: unverified
   - id: neuro.L03.112
     kind: card
     topic: hydrocephalus
     front: What is noncommunicating (obstructive) hydrocephalus? Give examples.
-    back: "Structural blockage of CSF circulation within the ventricular system (eg, aqueduct of Sylvius stenosis, colloid cyst blocking the foramen of Monro, tumor). Ventricles upstream of the obstruction are dilated."
+    back: "A physical block to CSF flow inside the ventricles, so only the ventricles above the block enlarge. Examples: a narrowed cerebral aqueduct (of Sylvius), a colloid cyst plugging the foramen of Monro, a tumor."
     src: { page: 536, quote: "Caused by structural blockage of CSF circulation within ventricular system (eg, stenosis of aqueduct of Sylvius, colloid cyst blocking foramen of Monro, tumor B )." }
     status: unverified
     tags: [high-yield]
@@ -1665,8 +1727,16 @@ items:
     kind: card
     topic: multiple-sclerosis
     front: What is multiple sclerosis, and who does it most often affect?
-    back: "Autoimmune inflammation and demyelination of the CNS (brain and spinal cord) with later axonal damage. Most often females aged 20–40; ↑ prevalence farther from the equator. Relapsing-remitting is the most common course."
+    back: "An autoimmune disease that inflames and strips myelin in the brain and spinal cord, later damaging axons. Typical patient: a woman aged 20–40; commoner the farther from the equator."
     src: { page: 537, quote: "Autoimmune inflammation and demyelination of CNS (brain and spinal cord) with subsequent axonal damage. Most often affects females aged 20-40; ↑ prevalence in regions farther from the equator." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L03.241
+    kind: card
+    topic: multiple-sclerosis
+    front: "What is the most common clinical course of multiple sclerosis?"
+    back: "Relapsing-remitting."
+    src: { page: 537, quote: "Relapsing and remitting is most common clinical course." }
     status: unverified
     tags: [high-yield]
   - id: neuro.L03.117
@@ -1686,8 +1756,8 @@ items:
   - id: neuro.L03.118
     kind: card
     topic: multiple-sclerosis
-    front: What is the Lhermitte sign, and what is the Uhthoff phenomenon?
-    back: "Lhermitte sign: electric shock–like sensation from neck (cervical) flexion, transmitted along the spinal cord. Uhthoff phenomenon: MS symptoms worsen with heat."
+    front: "What is the Lhermitte sign in multiple sclerosis?"
+    back: "Bending the neck forward sends an electric shock–like feeling down the spine."
     src: { page: 537, quote: "electric shock–like sensation originating from cervical flexion, transmitted along the spinal cord [Lhermitte sign]" }
     status: unverified
   - id: neuro.L03.216
@@ -1700,7 +1770,7 @@ items:
     kind: card
     topic: multiple-sclerosis
     front: What are the CSF and MRI findings in multiple sclerosis?
-    back: "CSF: ↑ IgG and myelin basic protein; oligoclonal bands aid diagnosis. MRI is the gold standard: periventricular plaques (oligodendrocyte loss, reactive gliosis), multiple white matter lesions disseminated in space and time."
+    back: "CSF: raised IgG and myelin basic protein; oligoclonal bands support the diagnosis. MRI is the best test: plaques around the ventricles (lost oligodendrocytes, reactive gliosis) and many white matter lesions spread out in space and time."
     src: { page: 537, quote: "↑ IgG level and myelin basic protein in CSF. Oligoclonal bands in CSF aid in diagnosis. MRI is gold standard." }
     status: unverified
     tags: [high-yield]
@@ -1791,6 +1861,13 @@ items:
     src: { page: 538, quote: "Autoimmune condition that destroys Schwann cells via inflammation and demyelination of motor fibers, sensory fibers, peripheral nerves" }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L03.234
+    kind: card
+    topic: other-demyelinating-disorders
+    front: "What is thought to trigger acute inflammatory demyelinating polyneuropathy?"
+    back: "Vaccinations (inoculations) or stress, with molecular mimicry likely helping it along."
+    src: { page: 538, quote: "Likely facilitated by molecular mimicry and triggered by inoculations or stress." }
+    status: unverified
   - id: neuro.L03.126
     kind: cloze
     topic: other-demyelinating-disorders
@@ -1896,6 +1973,13 @@ items:
     back: "Skeletal muscle degeneration that develops during illness, especially in critical care: flaccid, symmetric paralysis and muscle atrophy in the subacute phase; may involve respiratory muscles and make weaning hard. Unclear, multifactorial, with loss of myosin."
     src: { page: 538, quote: "Presents with flaccid and symmetric paralysis and atrophy of muscles in subacute illness phase." }
     status: unverified
+  - id: neuro.L03.235
+    kind: card
+    topic: other-demyelinating-disorders
+    front: "Which other ICU-acquired disorder is critical illness myopathy associated with?"
+    back: "Critical illness polyneuropathy (CIP)."
+    src: { page: 538, quote: "likely multifactorial, with loss of myosin. Associated with CIP." }
+    status: unverified
   - id: neuro.L03.132
     kind: card
     topic: other-demyelinating-disorders
@@ -1990,19 +2074,26 @@ items:
     topic: neurocutaneous-disorders
     prompt: Enumerate the features of neurofibromatosis type I (CICLOPSS).
     points:
-      - Café-au-lait spots
-      - Intellectual disability
-      - Cutaneous neurofibromas
-      - Lisch nodules (pigmented iris hamartomas)
-      - Optic gliomas
-      - Pheochromocytomas
-      - Seizures/focal neurologic signs (often from meningioma)
-      - Bone lesions (eg, sphenoid dysplasia)
+      - "Café-au-lait spots"
+      - "Intellectual disability"
+      - "Cutaneous neurofibromas"
+      - "Lisch nodules (pigmented iris hamartomas)"
+      - "Optic gliomas"
+      - "Pheochromocytomas"
+      - "Seizures"
+      - "Focal neurologic signs (often from meningioma)"
     pass: 6
-    hook: "CICLOPSS: الـ Cyclops عنده عين واحدة، وNF1 عنده optic glioma و Lisch nodules في العين."
+    hook: "CICLOPSS حرف بحرف: Café-au-lait، Intellectual disability، Cutaneous neurofibromas، Lisch nodules، Optic gliomas، Pheochromocytomas، Seizures، focal neurologic Signs. والـ Cyclops بعين واحدة يفكّرك إن اتنين منهم في العين (Lisch و Optic)."
     src: { page: 539, quote: "Café-au-lait spots F , Intellectual disability, Cutaneous neurofibromas G, Lisch nodules (pigmented iris hamartomas H), Optic gliomas, Pheochromocytomas, Seizures/focal neurologic Signs (often from meningioma), bone lesions (eg, sphenoid dysplasia)." }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L03.242
+    kind: card
+    topic: neurocutaneous-disorders
+    front: "Besides the CICLOPSS features, which bone lesion does First Aid list in neurofibromatosis type I?"
+    back: "Sphenoid dysplasia (a bone lesion; not one of the CICLOPSS letters)."
+    src: { page: 539, quote: "Seizures/focal neurologic Signs (often from meningioma), bone lesions (eg, sphenoid dysplasia)." }
+    status: unverified
   - id: neuro.L03.141
     kind: card
     topic: neurocutaneous-disorders
@@ -2097,7 +2188,7 @@ items:
     kind: card
     topic: adult-primary-brain-tumors
     front: Describe glioblastoma (location, behavior, genetics).
-    back: "Common, highly malignant 1° brain tumor, ~1-year median survival. In the cerebral hemispheres; can cross the corpus callosum («butterfly glioma»). Associated with EGFR amplification."
+    back: "A frequent and very aggressive primary brain tumor; median survival about 1 year. It sits in the cerebral hemispheres and may spread across the corpus callosum (\"butterfly glioma\"). Linked to EGFR amplification."
     src: { page: 540, quote: "Common, highly malignant 1° brain tumor with ~1-year median survival. Found in cerebral hemispheres. Can cross corpus callosum (“butterfly glioma” A ). Associated with EGFR amplification." }
     status: unverified
     tags: [high-yield]
@@ -2177,6 +2268,7 @@ items:
     text: "Schwannoma: Schwann cell origin, {{c1::S-100}} ⊕; biphasic: dense hypercellular areas with {{c2::spindle cells}} alternating with {{c3::hypocellular, myxoid}} areas."
     src: { page: 540, quote: "Biphasic, dense, hypercellular areas containing spindle cells alternating with hypocellular, myxoid areas L ." }
     status: unverified
+    tags: [high-yield]
   - id: neuro.L03.157
     kind: table
     topic: adult-primary-brain-tumors
@@ -2553,7 +2645,7 @@ items:
     kind: card
     topic: spinal-cord-lesions
     front: What does anterior spinal artery occlusion spare, and where is the watershed?
-    back: "Cord infarction sparing the dorsal horns and dorsal columns. Watershed is the mid-thoracic ASA territory, because the artery of Adamkiewicz supplies the ASA below T8. Can follow aortic aneurysm repair."
+    back: "The infarct leaves the dorsal horns and dorsal columns intact. The weak (watershed) zone is the mid-thoracic ASA territory, because below T8 the ASA is fed by the artery of Adamkiewicz. Can follow aortic aneurysm repair."
     src: { page: 544, quote: "Watershed area is mid-thoracic ASA territory, as the artery of Adamkiewicz supplies ASA below T8." }
     status: unverified
     tags: [high-yield]
@@ -2725,7 +2817,7 @@ items:
     kind: card
     topic: cerebral-palsy
     front: What is cerebral palsy, and what are its strongest risk factors?
-    back: "Permanent motor dysfunction from a nonprogressive injury to the developing fetal/infant brain; the most common movement disorder in children. Strongest risk factors: prematurity and low birth weight. Associated with periventricular leukomalacia (focal white matter necrosis)."
+    back: "Lasting motor dysfunction from a nonprogressive injury to the developing fetal or infant brain; the commonest movement disorder of childhood. Biggest risk factors: prematurity and low birth weight."
     src: { page: 545, quote: "Permanent motor dysfunction resulting from nonprogressive injury to developing fetal/infant brain." }
     status: unverified
     tags: [high-yield]
@@ -2840,16 +2932,16 @@ items:
       close her right eye, sounds seem painfully loud in her right ear, and food tastes odd. There are no vesicles and the
       rest of the neurologic exam is normal. What is the most appropriate treatment?
     options:
-      - Glucocorticoids
-      - IV alteplase
-      - Doxycycline alone without assessing for exposure
-      - Surgical decompression of the parotid
-      - No treatment because the lesion is central
+      - "Glucocorticoids"
+      - "IV alteplase"
+      - "Doxycycline"
+      - "Surgical decompression of the parotid"
+      - "No treatment because the lesion is central"
     answer: 0
     why:
       - "Right. Forehead involvement means an LMN (peripheral) lesion; isolated and sudden, it is Bell palsy: glucocorticoids +/− acyclovir."
       - "Alteplase treats acute ischemic stroke, which gives a central palsy sparing the forehead."
-      - "Doxycycline is for facial palsy from Lyme disease, which needs exposure history or other Lyme signs."
+      - "Doxycycline treats facial palsy from Lyme disease, which needs tick exposure or other Lyme signs (erythema migrans)."
       - "Parotid tumors cause gradual, not overnight, palsy."
       - "A central lesion spares the forehead; here the forehead is weak, so it is peripheral."
     src: { page: 546, quote: "Treatment: glucocorticoids +/– acyclovir." }

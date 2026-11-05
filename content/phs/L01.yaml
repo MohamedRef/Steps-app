@@ -44,6 +44,20 @@ items:
     src: { page: 256, quote: "Case-control study Retrospectively compares a group of people with disease to a group without disease." }
     status: unverified
     tags: [high-yield]
+  - id: phs.L01.092
+    kind: card
+    topic: observational-studies
+    front: "Twin concordance study: what does it show when one monozygotic twin has schizophrenia?"
+    back: "The other monozygotic twin has a much higher concordance rate than a dizygotic twin would, pointing to a strong genetic component."
+    src: { page: 256, quote: "If one monozygotic twin develops schizophrenia, the other twin has a much higher concordance rate than dizygotic twins, showing a strong genetic component." }
+    status: unverified
+  - id: phs.L01.093
+    kind: card
+    topic: observational-studies
+    front: "Adoption study: what is the risk for an adopted child whose biological parent had schizophrenia?"
+    back: "Higher risk of schizophrenia, whatever the health of the adoptive parents."
+    src: { page: 256, quote: "An adopted child has a higher risk of developing schizophrenia if their biological parent had schizophrenia, regardless of the adoptive parents’ health." }
+    status: unverified
   - id: phs.L01.002
     kind: card
     topic: observational-studies
@@ -91,9 +105,16 @@ items:
   - id: phs.L01.006
     kind: card
     topic: clinical-therapeutic-trial
-    front: What improves the quality of a clinical trial, and what does double-blind and triple-blind mean?
-    back: Randomized, controlled and double-blinded trials are best. Double-blind means neither subject nor researcher knows the group; triple-blind adds blinding of the researchers analyzing the data.
+    front: Which three design features make a clinical trial higher quality?
+    back: Randomization, a control group and double blinding.
     src: { page: 257, quote: "Study quality improves when clinical trial is randomized, controlled, and double-blinded (ie, neither subject nor researcher knows whether the subject is in the treatment or control group)." }
+    status: unverified
+  - id: phs.L01.075
+    kind: card
+    topic: clinical-therapeutic-trial
+    front: "In a trial, what is the difference between double-blind and triple-blind?"
+    back: "Double-blind: neither the subjects nor the researchers know who got which treatment. Triple-blind: the people analyzing the data are kept unaware as well."
+    src: { page: 257, quote: "Triple-blind refers to additional blinding of the researchers analyzing the data." }
     status: unverified
   - id: phs.L01.007
     kind: card
@@ -165,9 +186,23 @@ items:
   - id: phs.L01.012
     kind: card
     topic: off-label-drug-use
-    front: What is off-label drug use, why is it done, and what is the book's example?
-    back: Using a drug in a form, population or dosage not specifically approved by the FDA, eg, for an illness with no approved treatment or after approved options fail. Example — TCAs for neuropathic/chronic pain.
+    front: What is off-label drug use?
+    back: Giving a drug for a disease, a patient group, a form or a dose that the FDA has not specifically approved it for.
     src: { page: 257, quote: "Use of a drug to treat a disease in a form, population group, or dosage that is not specifically approved by the FDA." }
+    status: unverified
+  - id: phs.L01.076
+    kind: card
+    topic: off-label-drug-use
+    front: "What are the two reasons the book gives for off-label drug use?"
+    back: "The illness has no approved drug treatment, or the approved options have already failed and alternatives are being explored."
+    src: { page: 257, quote: "Reasons for off-label use include treatment of an illness with no approved pharmacologic treatment or exploring alternative treatments after failure of approved options." }
+    status: unverified
+  - id: phs.L01.077
+    kind: card
+    topic: off-label-drug-use
+    front: "What is the book's example of off-label drug use?"
+    back: "Tricyclic antidepressants given for neuropathic or chronic pain."
+    src: { page: 257, quote: "Example: use of tricyclic antidepressants for treating neuropathic/chronic pain." }
     status: unverified
   - id: phs.L01.013
     kind: mcq
@@ -196,7 +231,7 @@ items:
     kind: card
     topic: bradford-hill-criteria
     front: What are the Bradford Hill criteria?
-    back: Principles that give limited support (necessary but not sufficient) for a causal relationship between a presumed cause and effect.
+    back: A set of principles that only partly supports a cause-and-effect claim; meeting them is needed but is not enough to prove causation.
     src: { page: 257, quote: "A group of principles that provide limited support (ie, necessary but not sufficient criteria) for establishing evidence of a causal relationship between presumed cause and effect." }
     status: unverified
   - id: phs.L01.015
@@ -276,10 +311,20 @@ items:
       - [Number needed to treat, NNT = 1/ARR (lower = better treatment)]
       - [Number needed to harm, NNH = 1/AR (higher = safer exposure)]
       - [Case fatality rate, "CFR% = deaths/cases × 100"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 258, quote: "Number needed to treat Number of patients who need to be treated for 1 patient to benefit. Lower number = better treatment. NNT = 1/ARR" }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L01.078
+    kind: table
+    topic: quantifying-risk
+    title: Mortality rate and attack rate
+    columns: [Measure, Formula]
+    rows:
       - [Mortality rate, "Deaths per 1000 people per year"]
       - [Attack rate, "People who become ill / total people exposed"]
-    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1]]
-    src: { page: 258, quote: "Number needed to treat Number of patients who need to be treated for 1 patient to benefit. Lower number = better treatment. NNT = 1/ARR" }
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 259, quote: "Attack rate Proportion of exposed people who become ill." }
     status: unverified
     tags: [high-yield]
   - id: phs.L01.021
@@ -307,7 +352,7 @@ items:
       - "Right. ARR = 10% – 6% = 4% = 0.04; NNT = 1/ARR = 1/0.04 = 25."
       - "4 is the ARR in percent, not the NNT."
       - "RRR = 0.04/0.10 = 0.4 (40%), which is not the NNT."
-      - "16 is not derived from these numbers."
+      - "16 ≈ 1/0.06 inverts the drug group's event rate, not the ARR."
       - "60 is the RR (6%/10% = 0.6) as a percent, not the NNT; 1 – RR = 0.4 is the RRR."
     src: { page: 258, quote: "Number of patients who need to be treated for 1 patient to benefit. Lower number = better treatment. NNT = 1/ARR" }
     status: unverified
@@ -386,10 +431,17 @@ items:
   - id: phs.L01.028
     kind: card
     topic: likelihood-ratio
-    front: What do LR+ > 10 and LR– < 0.1 indicate, and how do you get posttest probability?
-    back: "LR+ > 10: highly specific test. LR– < 0.1: highly sensitive test. Pretest odds × LR = posttest odds; posttest probability = posttest odds/(posttest odds + 1)."
-    src: { page: 259, quote: "> 10 indicates a highly specific test, while LR– < 0.1 indicates a highly sensitive test. Pretest odds × LR = posttest odds. Posttest probability = posttest odds / (posttest odds + 1)." }
+    front: What do LR+ > 10 and LR– < 0.1 tell you about a test?
+    back: "A very large LR+ (above 10) points to a highly specific test; a very small LR– (below 0.1) points to a highly sensitive one."
+    src: { page: 259, quote: "LR+ > 10 indicates a highly specific test, while LR– < 0.1 indicates a highly sensitive test." }
     status: unverified
+  - id: phs.L01.079
+    kind: cloze
+    topic: likelihood-ratio
+    text: "Multiply the {{c1::pretest odds}} by the LR to get the posttest odds; posttest probability = posttest odds ÷ ({{c2::posttest odds + 1}})."
+    src: { page: 259, quote: "Pretest odds × LR = posttest odds. Posttest probability = posttest odds / (posttest odds + 1)." }
+    status: unverified
+    tags: [high-yield]
   - id: phs.L01.029
     kind: mcq
     topic: likelihood-ratio
@@ -484,7 +536,7 @@ items:
     kind: card
     topic: evaluation-of-diagnostic-tests
     front: Which diagnostic test properties are fixed, and which vary with prevalence?
-    back: Sensitivity and specificity are fixed properties of a test. PPV and NPV vary with the disease prevalence in the population tested.
+    back: Sensitivity and specificity belong to the test itself and stay the same. PPV and NPV shift with how common the disease is in the group being tested.
     src: { page: 260, quote: "Sensitivity and specificity are fixed properties of a test. PPV and NPV vary depending on disease prevalence in population being tested." }
     status: unverified
     tags: [high-yield]
@@ -531,6 +583,13 @@ items:
     src: { page: 260, quote: "A = 100% sensitivity cutoff value B = practical compromise between speciﬁcity and sensitivity C = 100% speciﬁcity cutoff value" }
     status: unverified
     tags: [high-yield]
+  - id: phs.L01.080
+    kind: card
+    topic: evaluation-of-diagnostic-tests
+    front: "For a disease diagnosed by LOW values (eg, anemia), how does the cutoff graph change?"
+    back: "TP and TN swap sides, so the effects of moving the cutoff reverse: a change that raised sensitivity and NPV for a high-value disease now lowers them, and vice versa."
+    src: { page: 260, quote: "Note: In diseases where diagnosis is based on lower values (eg, anemia), the TP and TN are switched in the graph, ie, ↓ sensitivity and ↓ NPV, and vice-versa." }
+    status: unverified
   - id: phs.L01.040
     kind: mcq
     topic: evaluation-of-diagnostic-tests
@@ -549,7 +608,7 @@ items:
       - "Right. TP = 180, FP = 80. PPV = TP/(TP + FP) = 180/260 ≈ 69%."
       - "90% is the sensitivity (180/200)."
       - "97% is the NPV: TN = 720, FN = 20, so 720/740."
-      - "18% does not follow from these numbers."
+      - "18% is TP/total (180/1000), not PPV."
       - "26% is the proportion testing positive (260/1000)."
     src: { page: 260, quote: "Positive predictive value Probability that a person who has a positive test result actually has the disease. PPV = TP / (TP + FP)" }
     status: unverified
@@ -579,7 +638,7 @@ items:
     kind: card
     topic: roc-curve
     front: What does an ROC curve plot, and what marks the better test?
-    back: The true-positive rate (sensitivity) against the false-positive rate (1 – specificity). The better test has a higher area under the curve (AUC), with the curve closer to the upper left corner. AUC = 1 is ideal; AUC = 0.5 means no predictive value.
+    back: Sensitivity (true-positive rate) on one axis versus 1 – specificity (false-positive rate) on the other. A better test bows toward the top-left corner and has a larger AUC; AUC = 1 is ideal and AUC = 0.5 means no predictive value.
     src: { page: 261, quote: "Plots the true-positive rate (sensitivity) against the false-positive rate (1 – specificity). The better performing test will have a higher area under the curve (AUC), with the curve closer to the upper left corner." }
     status: unverified
     tags: [high-yield]
@@ -726,6 +785,7 @@ items:
     blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
     src: { page: 263, quote: "Berkson bias—cases and/ or controls selected from hospitals (bedside bias) are less healthy and have different exposures" }
     status: unverified
+    tags: [high-yield]
   - id: phs.L01.052
     kind: mcq
     topic: bias-and-study-errors
@@ -798,15 +858,36 @@ items:
     kind: card
     topic: statistical-distribution
     front: What is the difference between standard deviation and standard error?
-    back: SD is the variability of values around their mean. SE estimates the variability of (theoretical) sample means around the true population mean; SE = σ/√n, so SE ↓ as n ↑. Variance = SD².
+    back: SD describes how spread out the individual values are around their own mean. SE describes how spread out (theoretical) sample means would be around the true population mean.
     src: { page: 265, quote: "Standard error = an estimate of how much variability exists in a (theoretical) set of sample means around the true population mean." }
     status: unverified
     tags: [high-yield]
+  - id: phs.L01.081
+    kind: cloze
+    topic: statistical-distribution
+    text: "SE = {{c1::σ/√n}}, so SE gets smaller as {{c2::sample size (n)}} gets larger."
+    src: { page: 265, quote: "SE = σ/√n. SE ↓ as n ↑." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L01.082
+    kind: cloze
+    topic: statistical-distribution
+    text: "Variance = {{c1::SD squared}}."
+    src: { page: 265, quote: "Variance = (SD)2." }
+    status: unverified
   - id: phs.L01.057
     kind: cloze
     topic: statistical-distribution
     text: In a normal distribution, mean = median = mode, and about {{c1::68%}}, {{c2::95%}} and {{c3::99.7%}} of values lie within 1, 2 and 3 SD of the mean.
     src: { page: 265, quote: "Normal distribution Gaussian, also called bell-shaped. Mean = median = mode." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L01.083
+    kind: card
+    topic: statistical-distribution
+    front: "Which measure of central tendency is best for normally distributed data?"
+    back: "The mean."
+    src: { page: 265, quote: "For normal distribution, mean is the best measure of central tendency." }
     status: unverified
     tags: [high-yield]
   - id: phs.L01.058
@@ -848,8 +929,16 @@ items:
   - id: phs.L01.060
     kind: card
     topic: statistical-hypothesis-testing
-    front: Define the null hypothesis, the alternative hypothesis and the P value.
-    back: "H0: zero difference between groups or variables in the population. H1: at least one difference or association. P value: the probability of results at least as extreme as observed, assuming H0 is correct; commonly 0.05."
+    front: Define the null hypothesis (H0) and the alternative hypothesis (H1).
+    back: "H0 says the two groups or variables in the population do not differ at all. H1 says there is at least one difference or association between them."
+    src: { page: 265, quote: "Also called H0. Hypothesis with zero difference between two groups or variables in the population." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L01.084
+    kind: card
+    topic: statistical-hypothesis-testing
+    front: "What is a P value, and what cutoff is commonly accepted?"
+    back: "The chance of getting results at least as extreme as the ones observed if H0 were true. The usual cutoff is 0.05."
     src: { page: 265, quote: "Probability of obtaining test results at least as extreme as those observed in the sample, assuming that H0 is correct. Commonly accepted as 0.05" }
     status: unverified
     tags: [high-yield]
@@ -888,6 +977,20 @@ items:
     src: { page: 266, quote: "Type I error (α) Stating that there is an effect or difference when none exists (H0 incorrectly rejected in favor of H1)." }
     status: unverified
     tags: [high-yield]
+  - id: phs.L01.085
+    kind: cloze
+    topic: testing-errors
+    text: "α is the probability of making a {{c1::type I error}}, and it is usually set at {{c2::0.05}}."
+    src: { page: 266, quote: "α is the probability of making a type I error (usually 0.05 is chosen)." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L01.086
+    kind: card
+    topic: testing-errors
+    front: "Can a study prove the alternative hypothesis (H1)?"
+    back: "No. It can only reject H0 as very unlikely."
+    src: { page: 266, quote: "You can never “prove” H1, but you can reject the H0 as being very unlikely." }
+    status: unverified
   - id: phs.L01.063
     kind: enumerate
     topic: testing-errors
@@ -898,7 +1001,7 @@ items:
       - ↑ precision of measurement
       - ↑ α level (statistical significance level)
     pass: 4
-    hook: "الكتاب بيقول There is power in numbers: العدد الأكبر أهمهم، ومعاه effect أكبر وقياس أدق و α أعلى."
+    hook: "الكتاب بيقول There is power in numbers: العدد الأكبر أشهرهم، ومعاه effect أكبر وقياس أدق و α أعلى."
     src: { page: 266, quote: "↑ power and ↓ β by: ↑ sample size ↑ expected effect size ↑ precision of measurement ↑ α level (↑ statistical significance level)." }
     status: unverified
     tags: [high-yield]
@@ -965,9 +1068,30 @@ items:
   - id: phs.L01.068
     kind: card
     topic: confidence-interval
-    front: What is a confidence interval, and how is it calculated for a sample mean?
-    back: The range within which the true population mean is expected to fall with a specified probability. CI = 1 – α; CI = x̄ ± Z(SE), with Z = 1.96 for 95% and 2.58 for 99%. It narrows as sample size increases.
+    front: What is a confidence interval (CI)?
+    back: A range of values that should contain the true population mean with a stated probability.
     src: { page: 267, quote: "Range of values within which the true mean of the population is expected to fall, with a specified probability." }
+    status: unverified
+  - id: phs.L01.087
+    kind: cloze
+    topic: confidence-interval
+    text: "CI = 1 – {{c1::α}}; the commonly used 95% CI corresponds to α = {{c2::0.05}}."
+    src: { page: 267, quote: "CI = 1 – α. The 95% CI (corresponding to α = 0.05) is often used." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L01.088
+    kind: cloze
+    topic: confidence-interval
+    text: "CI for a sample mean = x̄ ± {{c1::Z(SE)}}, where Z = {{c2::1.96}} for a 95% CI and {{c3::2.58}} for a 99% CI."
+    src: { page: 267, quote: "CI for sample mean = x ± Z(SE) For the 95% CI, Z = 1.96. For the 99% CI, Z = 2.58." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L01.089
+    kind: card
+    topic: confidence-interval
+    front: "What happens to the CI as sample size increases?"
+    back: "It becomes narrower."
+    src: { page: 267, quote: "As sample size increases, CI narrows." }
     status: unverified
   - id: phs.L01.069
     kind: table
@@ -1007,9 +1131,27 @@ items:
   - id: phs.L01.071
     kind: card
     topic: meta-analysis
-    front: What does a meta-analysis do, what does it improve, and what limits it?
-    back: It pools summary data from multiple studies for a more precise effect estimate and estimates heterogeneity. It improves power, strength of evidence and generalizability (external validity). It is limited by the quality of individual studies and bias in study selection.
-    src: { page: 267, quote: "Improves power, strength of evidence, and generalizability (external validity) of study findings. Limited by quality of individual studies and bias in study selection." }
+    front: What does a meta-analysis do?
+    back: It combines summary data (eg, means, RRs) from several studies to estimate an effect size more precisely, and it measures how much effect sizes vary between the studies (heterogeneity).
+    src: { page: 267, quote: "A method of statistical analysis that pools summary data (eg, means, RRs) from multiple studies for a more precise estimate of the size of an effect. Also estimates heterogeneity of effect sizes between studies." }
+    status: unverified
+  - id: phs.L01.090
+    kind: enumerate
+    topic: meta-analysis
+    prompt: Enumerate what a meta-analysis improves (3).
+    points:
+      - Power
+      - Strength of evidence
+      - Generalizability (external validity)
+    pass: 3
+    src: { page: 267, quote: "Improves power, strength of evidence, and generalizability (external validity) of study findings." }
+    status: unverified
+  - id: phs.L01.091
+    kind: card
+    topic: meta-analysis
+    front: "What limits a meta-analysis?"
+    back: "Weak individual studies, and bias in which studies get chosen for it."
+    src: { page: 267, quote: "Limited by quality of individual studies and bias in study selection." }
     status: unverified
   - id: phs.L01.072
     kind: mcq

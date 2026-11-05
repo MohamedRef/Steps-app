@@ -73,6 +73,7 @@ items:
     back: MSH and ACTH share the same precursor molecule, POMC; ↑ MSH ↑ melanogenesis by melanocytes.
     src: { page: 332, quote: "Causes hyperpigmentation in Cushing disease, as MSH and ACTH share the same precursor molecule, POMC" }
     status: unverified
+    tags: [high-yield]
   - id: endo.L03.007
     kind: card
     topic: hypothalamic-pituitary-hormones
@@ -108,7 +109,7 @@ items:
       - Hypogonadism
       - Galactorrhea
     pass: 4
-    hook: "الـ prolactin العالي بيقفل الـ GnRH، فالمبيض يسكت: ما فيش دورة (amenorrhea)، ما فيش estrogen (osteoporosis و hypogonadism)، واللبن ينزل (galactorrhea)."
+    hook: "الـ prolactinoma بيعمل 4 حاجات: 2 في الغدد (amenorrhea و hypogonadism)، 1 في العضم (osteoporosis)، و1 في الصدر (galactorrhea)."
     src: { page: 332, quote: "Pituitary prolactinoma → amenorrhea, osteoporosis, hypogonadism, galactorrhea" }
     status: unverified
   - id: endo.L03.009
@@ -195,11 +196,44 @@ items:
   - id: endo.L03.016
     kind: card
     topic: growth-hormone
-    front: What does GH excess cause in adults and in children, and how is it treated?
-    back: Acromegaly in adults, gigantism in children (eg, pituitary adenoma). Treatment is somatostatin analogs (eg, octreotide) or surgery.
+    front: What does GH excess (eg, a pituitary adenoma) cause in adults and in children?
+    back: Acromegaly in adults; gigantism in children.
     src: { page: 333, quote: "Excess secretion of GH (eg, pituitary adenoma) may cause acromegaly (adults) or gigantism (children). Treatment: somatostatin analogs (eg, octreotide) or surgery." }
     status: unverified
     tags: [high-yield]
+  - id: endo.L03.130
+    kind: card
+    topic: growth-hormone
+    front: How is GH excess treated?
+    back: With a somatostatin analog such as octreotide, or with surgery.
+    src: { page: 333, quote: "Treatment: somatostatin analogs (eg, octreotide) or surgery." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.121
+    kind: card
+    topic: growth-hormone
+    front: What is GH's other name, and which gland secretes it?
+    back: Somatotropin; it comes from the anterior pituitary.
+    src: { page: 333, quote: "Also called somatotropin. Secreted by anterior pituitary." }
+    status: unverified
+  - id: endo.L03.122
+    kind: cloze
+    topic: growth-hormone
+    text: GH is released in {{c1::pulses}} in response to {{c2::GHRH}}.
+    src: { page: 333, quote: "Released in pulses in response to growth hormone–releasing hormone (GHRH)." }
+    status: unverified
+  - id: endo.L03.123
+    kind: table
+    topic: growth-hormone
+    title: GH and IGF-1 target effects (book figure)
+    columns: [Target, Acting hormone, Effects]
+    rows:
+      - [Bone, IGF-1, "↑ amino acid uptake, ↑ protein synthesis, ↑ DNA and RNA synthesis, ↑ chondroitin sulfate, ↑ collagen, ↑ cell size and number"]
+      - [Muscle, IGF-1, "↑ amino acid uptake, ↑ protein synthesis"]
+      - [Adipose tissue, GH directly, "↓ glucose uptake, ↑ lipolysis"]
+    blanks: [[0, 2], [1, 2], [2, 1], [2, 2]]
+    src: { page: 333, quote: "Glucose uptake Lipolysis DNA and RNA synthesis Chondroitin sulfate Collagen Cell size and number" }
+    status: unverified
   - id: endo.L03.017
     kind: mcq
     topic: growth-hormone
@@ -218,7 +252,7 @@ items:
     why:
       - "Right. Excess GH causes acromegaly, and GH ↑ insulin resistance (diabetogenic)."
       - "Autoimmune β-cell destruction is type 1 DM, not a GH effect."
-      - "The book does not link GH to glucagon release; the diabetogenic effect is insulin resistance."
+      - "GH's diabetogenic effect is peripheral insulin resistance, not α-cell stimulation."
       - "SGLT2 handles filtered glucose; GH doesn't act through it."
       - "Cortisol is also diabetogenic, but an ACTH source isn't suggested here; his tumor makes GH."
     src: { page: 333, quote: "↑ insulin resistance (diabetogenic)." }
@@ -228,9 +262,10 @@ items:
     kind: card
     topic: antidiuretic-hormone
     front: Where is ADH synthesized, and where is it stored and secreted?
-    back: Synthesized in the hypothalamus (supraoptic and paraventricular nuclei); stored and secreted by the posterior pituitary.
+    back: Made by neurons of the supraoptic and paraventricular nuclei in the hypothalamus; the posterior pituitary holds it and releases it.
     src: { page: 333, quote: "Synthesized in hypothalamus (supraoptic and paraventricular nuclei), stored and secreted by posterior pituitary." }
     status: unverified
+    tags: [high-yield]
   - id: endo.L03.019
     kind: table
     topic: antidiuretic-hormone
@@ -249,6 +284,7 @@ items:
     text: ADH ↓ serum osmolality and ↑ urine osmolality by regulating insertion of {{c1::aquaporin channels}} in the {{c2::principal cells}} of the renal collecting duct.
     src: { page: 333, quote: "via regulation of aquaporin channel insertion in principal cells of renal collecting duct." }
     status: unverified
+    tags: [high-yield]
   - id: endo.L03.021
     kind: table
     topic: antidiuretic-hormone
@@ -265,9 +301,10 @@ items:
     kind: card
     topic: antidiuretic-hormone
     front: What is desmopressin used for?
-    back: It is an ADH analog used for central DI and nocturnal enuresis.
+    back: It mimics ADH, so it treats central DI and bedwetting at night (nocturnal enuresis).
     src: { page: 333, quote: "Desmopressin (ADH analog) is a treatment for central DI and nocturnal enuresis." }
     status: unverified
+    tags: [high-yield]
   - id: endo.L03.106
     kind: card
     topic: antidiuretic-hormone
@@ -309,8 +346,15 @@ items:
     kind: card
     topic: prolactin
     front: Prolactin is structurally homologous to which hormone?
-    back: Growth hormone. Prolactin is secreted mainly by the anterior pituitary.
+    back: Growth hormone.
     src: { page: 334, quote: "Secreted mainly by anterior pituitary. Structurally homologous to growth hormone." }
+    status: unverified
+  - id: endo.L03.131
+    kind: card
+    topic: prolactin
+    front: Where is prolactin mainly secreted?
+    back: Mostly from the anterior pituitary.
+    src: { page: 334, quote: "Secreted mainly by anterior pituitary." }
     status: unverified
   - id: endo.L03.026
     kind: card
@@ -480,6 +524,20 @@ items:
     back: On the anterior pituitary (↓ sensitivity to TRH) and the hypothalamus (↓ TRH secretion).
     src: { page: 335, quote: "Negative feedback primarily by free T3/T4: Anterior pituitary → ↓ sensitivity to TRH Hypothalamus → ↓ TRH secretion" }
     status: unverified
+  - id: endo.L03.116
+    kind: cloze
+    topic: thyroid-hormones
+    text: "{{c1::TRH}} stimulates {{c2::TSH}} release, and TSH stimulates the thyroid {{c3::follicular cells}}."
+    src: { page: 335, quote: "TRH → ⊕ TSH release → ⊕ follicular cells." }
+    status: unverified
+  - id: endo.L03.115
+    kind: card
+    topic: thyroid-hormones
+    front: In Graves disease, what stimulates the thyroid follicular cells in place of TSH?
+    back: Thyroid-stimulating immunoglobulin (TSI), an antibody that switches the follicular cells on.
+    src: { page: 335, quote: "Thyroid-stimulating immunoglobulin (TSI) may ⊕ follicular cells in Graves disease." }
+    status: unverified
+    tags: [high-yield]
   - id: endo.L03.041
     kind: table
     topic: thyroid-hormones
@@ -490,6 +548,13 @@ items:
       - [↓ TBG, "Steroid use, nephrotic syndrome, cirrhosis", ↓ total T3/T4]
     blanks: [[0, 1], [1, 1]]
     src: { page: 335, quote: "↑ TBG in pregnancy, OCP use (↑ estrogen → ↑ TBG) → ↑ total T3/T4 ↓ TBG in steroid use, nephrotic syndrome, cirrhosis → ↓ total T3/T4" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.120
+    kind: cloze
+    topic: thyroid-hormones
+    text: Most T3/T4 in the blood is carried by {{c1::thyroxine-binding globulin (TBG)}}, and the bound hormone is {{c2::inactive}}.
+    src: { page: 335, quote: "Thyroxine-binding globulin (TBG) binds most T3/T4 in blood. Bound T3/T4 = inactive." }
     status: unverified
     tags: [high-yield]
   - id: endo.L03.042
@@ -525,10 +590,18 @@ items:
   - id: endo.L03.044
     kind: card
     topic: parathyroid-hormone
-    front: Which cells secrete PTH, and what is its primary function?
-    back: Chief cells of the parathyroid. Its primary function is to ↑ free Ca2+ in the blood.
+    front: Which cells secrete PTH?
+    back: The chief cells of the parathyroid glands.
     src: { page: 336, quote: "SOURCE Chief cells of parathyroid FUNCTION ↑ free Ca2+ in the blood (1° function)" }
     status: unverified
+  - id: endo.L03.132
+    kind: card
+    topic: parathyroid-hormone
+    front: What is the primary function of PTH?
+    back: To raise the free (ionized) Ca2+ in the blood.
+    src: { page: 336, quote: "FUNCTION ↑ free Ca2+ in the blood (1° function)" }
+    status: unverified
+    tags: [high-yield]
   - id: endo.L03.045
     kind: enumerate
     topic: parathyroid-hormone
@@ -556,15 +629,22 @@ items:
     kind: card
     topic: parathyroid-hormone
     front: How does PTH activate osteoclasts?
-    back: PTH ↑ RANK-L secreted by osteoblasts and osteocytes; RANK-L binds RANK on osteoclasts and their precursors → bone resorption. Intermittent PTH release can also stimulate bone formation.
+    back: PTH makes osteoblasts and osteocytes release more RANK-L, which binds RANK on osteoclasts and their precursors and switches them on → bone resorption.
     src: { page: 336, quote: "secreted by osteoblasts and osteocytes; binds RANK (receptor) on osteoclasts and their precursors to stimulate osteoclasts" }
     status: unverified
     tags: [high-yield]
+  - id: endo.L03.133
+    kind: card
+    topic: parathyroid-hormone
+    front: What can intermittent PTH release do to bone?
+    back: It can also stimulate bone formation, not only resorption.
+    src: { page: 336, quote: "(intermittent PTH release can also stimulate bone formation)" }
+    status: unverified
   - id: endo.L03.048
     kind: card
     topic: parathyroid-hormone
     front: What is PTHrP, and in which malignancies is it commonly increased?
-    back: PTH-related peptide; it functions like PTH. Commonly increased in malignancies such as squamous cell carcinoma of the lung and renal cell carcinoma.
+    back: A peptide that acts just like PTH; cancers often make too much of it, such as lung squamous cell carcinoma and renal cell carcinoma.
     src: { page: 336, quote: "PTH-related peptide (PTHrP) functions like PTH and is commonly increased in malignancies (eg, squamous cell carcinoma of the lung, renal cell carcinoma)" }
     status: unverified
     tags: [high-yield]
@@ -595,7 +675,7 @@ items:
     stem: >-
       A 52-year-old man with alcohol use disorder is admitted with vomiting and diarrhea for 5
       days. He has perioral numbness and muscle cramps. Serum calcium is 6.9 mg/dL and magnesium is
-      0.6 mg/dL (very low). PTH is inappropriately low. Calcium infusion alone fails to correct his
+      0.6 mg/dL. PTH is inappropriately low. Calcium infusion alone fails to correct his
       calcium. Which of the following best explains the low PTH?
     options:
       - Severe hypomagnesemia suppresses PTH secretion
@@ -610,7 +690,7 @@ items:
       - "↑ PO4 raises PTH, not lowers it."
       - "Calcitonin is not important in normal Ca2+ homeostasis and would not cause this picture."
       - "PTHrP raises calcium; he is hypocalcemic."
-    src: { page: 336, quote: "Common causes of ↓ Mg2+ include diarrhea, aminoglycosides, diuretics, alcohol use disorder" }
+    src: { page: 336, quote: "↓ serum Mg2+ → ↑ PTH secretion ↓↓ serum Mg2+ → ↓ PTH secretion" }
     status: unverified
   # ---------- p337: calcium homeostasis ----------
   - id: endo.L03.052
@@ -682,6 +762,7 @@ items:
     back: In the parafollicular (C) cells of the thyroid.
     src: { page: 337, quote: "Parafollicular cells (C cells) of thyroid." }
     status: unverified
+    tags: [high-yield]
   - id: endo.L03.100
     kind: card
     topic: calcitonin
@@ -701,22 +782,22 @@ items:
     topic: calcitonin
     stem: >-
       A 47-year-old woman underwent total thyroidectomy for a large multinodular goiter 6 months ago, with
-      all four parathyroid glands preserved. She takes levothyroxine and feels well. She has no
-      paresthesias, muscle cramps or bone pain, and Chvostek and Trousseau signs are negative. She asks
-      whether losing her thyroid will affect her calcium. Which of the following is most likely?
+      all four parathyroid glands preserved. She takes levothyroxine. Serum calcium is 9.4 mg/dL, the
+      same as before surgery, although the tissue that made her calcitonin is gone. Which of the
+      following best explains why her calcium has stayed normal?
     options:
-      - Normal serum calcium
-      - Hypercalcemia from loss of calcitonin
-      - Hypocalcemia from loss of calcitonin
-      - Increased bone resorption causing osteoporosis
-      - Hyperphosphatemia from loss of calcitonin
+      - PTH from her parathyroids sets her free calcium
+      - Levothyroxine takes over calcitonin's effect on bone
+      - Her parathyroid chief cells now secrete calcitonin
+      - Her kidneys switch off 1α-hydroxylase to save calcium
+      - Her osteoclasts become more active to offset the loss
     answer: 0
     why:
-      - "Right. Removing the thyroid removes the C cells, but calcitonin is not important in normal Ca2+ homeostasis; PTH with preserved parathyroids keeps calcium normal."
-      - "Loss of calcitonin doesn't raise calcium meaningfully."
-      - "Hypocalcemia after thyroidectomy comes from parathyroid injury, which was avoided here."
-      - "Calcitonin ↓ bone resorption, but its loss is not a clinically important cause of bone loss."
-      - "Phosphate is set by PTH and vitamin D, not calcitonin."
+      - "Right. Calcitonin from the C cells is not important in normal Ca2+ homeostasis; free Ca2+ is held by PTH, and her parathyroids were preserved."
+      - "T4 has no calcitonin-like action on osteoclasts; it replaces only thyroid hormone."
+      - "Chief cells make PTH; calcitonin comes only from the parafollicular (C) cells of the thyroid."
+      - "Turning off 1α-hydroxylase would lower calcitriol and gut Ca2+ absorption, lowering calcium, not holding it."
+      - "Calcitonin ↓ bone resorption, so its loss would favour resorption, which would raise calcium, not explain a steady level."
     src: { page: 337, quote: "Calcitonin opposes actions of PTH. Not important in normal Ca2+ homeostasis" }
     status: unverified
   # ---------- p337: glucagon ----------
@@ -727,12 +808,20 @@ items:
     back: Glycogenolysis, gluconeogenesis, lipolysis and ketogenesis.
     src: { page: 337, quote: "Promotes glycogenolysis, gluconeogenesis, lipolysis, ketogenesis." }
     status: unverified
+    tags: [high-yield]
   - id: endo.L03.108
     kind: card
     topic: glucagon
-    front: Which cells make glucagon, and when is it released?
-    back: Pancreatic α cells; it raises blood glucose when it falls too low (fasting state).
+    front: Which cells make glucagon?
+    back: The α cells of the pancreas.
     src: { page: 337, quote: "Made by α cells of pancreas." }
+    status: unverified
+  - id: endo.L03.136
+    kind: card
+    topic: glucagon
+    front: When is glucagon released, and to what end?
+    back: When blood glucose drops too low, as in fasting; it brings blood sugar back up.
+    src: { page: 337, quote: "Elevates blood sugar levels to maintain homeostasis when bloodstream glucose levels fall too low (ie, fasting state)." }
     status: unverified
   - id: endo.L03.059
     kind: enumerate
@@ -751,8 +840,8 @@ items:
     topic: glucagon
     stem: >-
       A 34-year-old man runs a marathon after skipping breakfast. Two hours into the race his blood
-      glucose is 68 mg/dL. A hormone released by peripheral islet cells rises. Which of the
-      following processes does this hormone stimulate?
+      glucose is 68 mg/dL. The pancreatic hormone secreted in response to hypoglycemia rises. Which
+      of the following processes does this hormone stimulate?
     options:
       - Ketogenesis
       - Glycogen synthesis
@@ -761,7 +850,7 @@ items:
       - GLUT4 insertion in muscle
     answer: 0
     why:
-      - "Right. Hypoglycemia triggers glucagon from α cells (islet periphery), which promotes glycogenolysis, gluconeogenesis, lipolysis and ketogenesis."
+      - "Right. Hypoglycemia triggers glucagon from α cells, which promotes glycogenolysis, gluconeogenesis, lipolysis and ketogenesis."
       - "Glycogen synthesis is an insulin action."
       - "Triglyceride synthesis is an insulin action."
       - "K+ uptake into cells is an insulin action."
@@ -804,6 +893,14 @@ items:
     back: Both the liver and the kidneys.
     src: { page: 338, quote: "Insulin is synthesized in pancreas and cleared by both liver and kidneys." }
     status: unverified
+  - id: endo.L03.124
+    kind: card
+    topic: insulin
+    front: What kind of receptor does insulin bind, and what does binding lead to?
+    back: A receptor with tyrosine kinase activity; it drives carrier-mediated glucose uptake into insulin-dependent tissue and turns on gene transcription.
+    src: { page: 338, quote: "Binds insulin receptors (tyrosine kinase activity ), inducing glucose uptake (carrier mediated transport) into insulin-dependent tissue and gene transcription." }
+    status: unverified
+    tags: [high-yield]
   - id: endo.L03.064
     kind: enumerate
     topic: insulin
@@ -866,7 +963,7 @@ items:
       - Placenta
       - Spermatocytes
     pass: 9
-    hook: "الكتاب بيقولك BRICK LIPS: كل دول بياخدوا السكر من غير ما يستنّوا الـ insulin. الاتنين اللي بيستنّوا: العضل والدهن (GLUT4)."
+    hook: "الكتاب بيقولك BRICK LIPS: 9 أماكن (Brain و RBCs و Intestine و Cornea و Kidney و Liver و Islet cells و Placenta و Spermatocytes) بياخدوا السكر من غير ما يستنّوا الـ insulin."
     src: { page: 338, quote: "BRICK LIPS (insulin-independent glucose uptake): Brain, RBCs, Intestine, Cornea, Kidney, Liver, Islet (β) cells, Placenta, Spermatocytes." }
     status: unverified
     tags: [high-yield]
@@ -929,12 +1026,54 @@ items:
     back: Cholesterol entry via StAR, the step the figure marks as rate-limiting; cholesterol desmolase then makes pregnenolone.
     src: { page: 339, quote: "Cholesterol (via StARa) Pregnenolone" }
     status: unverified
+  - id: endo.L03.118
+    kind: card
+    topic: adrenal-steroids-and-cah
+    front: Which enzyme turns cholesterol into pregnenolone in the adrenal steroid pathway?
+    back: Cholesterol desmolase.
+    src: { page: 339, quote: "Cholesterol desmolase Aldosterone synthase 21-hydroxylase 11β-hydroxylase" }
+    status: unverified
+  - id: endo.L03.117
+    kind: card
+    topic: adrenal-steroids-and-cah
+    front: Which enzyme turns pregnenolone into progesterone?
+    back: 3β-hydroxysteroid dehydrogenase (it does the same step on the 17-hydroxy and DHEA branches).
+    src: { page: 339, quote: "Angiotensin II 3β-hydroxysteroid dehydrogenase Estrone Estradiol" }
+    status: unverified
+  - id: endo.L03.113
+    kind: table
+    topic: adrenal-steroids-and-cah
+    title: Adrenal zones and their products (book figure)
+    columns: [Site, Class made, Main product, Key control or enzyme]
+    rows:
+      - [Zona glomerulosa, Mineralocorticoids, Aldosterone, Angiotensin II stimulates aldosterone synthase]
+      - [Zona fasciculata, Glucocorticoids, Cortisol, 11β-hydroxylase makes cortisol from 11-deoxycortisol]
+      - [Zona reticularis, Androgens, "DHEA, androstenedione, testosterone", 17α-hydroxylase opens the androgen branch]
+      - [Peripheral tissue, "Estrogens, DHT", "Estrone, estradiol, DHT", "Aromatase (estrogens), 5α-reductase (DHT)"]
+    blanks: [[0, 1], [0, 3], [1, 1], [2, 1], [3, 1]]
+    src: { page: 339, quote: "ZONA GLOMERULOSA Mineralocorticoids ZONA FASCICULATA Glucocorticoids PERIPHERAL TISSUE ZONA RETICULARIS Androgens Estrogens, DHT" }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.114
+    kind: cloze
+    topic: adrenal-steroids-and-cah
+    text: In the zona glomerulosa, {{c1::angiotensin II}} stimulates {{c2::aldosterone synthase}}, the last step to aldosterone.
+    src: { page: 339, quote: "Aldosterone synthase 21-hydroxylase 11β-hydroxylase ZONA GLOMERULOSA Mineralocorticoids" }
+    status: unverified
+    tags: [high-yield]
   - id: endo.L03.074
     kind: card
     topic: adrenal-steroids-and-cah
     front: Which enzymes convert androgens in peripheral tissue, and which drugs block them?
     back: "Aromatase (androstenedione → estrone, testosterone → estradiol), blocked by anastrozole, letrozole, exemestane. 5α-reductase (testosterone → DHT), blocked by finasteride."
     src: { page: 339, quote: "Anastrozole, letrozole, exemestane Finasteride Androstenedione Testosterone Dihydrotestosterone" }
+    status: unverified
+  - id: endo.L03.119
+    kind: card
+    topic: adrenal-steroids-and-cah
+    front: Where is aromatase mostly found?
+    back: Mostly outside the adrenal, in peripheral tissues.
+    src: { page: 339, quote: "a Rate-limiting step, b Mostly in peripheral tissues." }
     status: unverified
   - id: endo.L03.075
     kind: card
@@ -1021,9 +1160,17 @@ items:
   - id: endo.L03.081
     kind: card
     topic: cortisol
-    front: Where is cortisol made and what carries it in blood?
-    back: Adrenal zona fasciculata; bound to corticosteroid-binding globulin.
+    front: Which adrenal zone makes cortisol?
+    back: The zona fasciculata.
     src: { page: 340, quote: "Adrenal zona fasciculata. Bound to corticosteroid-binding globulin." }
+    status: unverified
+    tags: [high-yield]
+  - id: endo.L03.134
+    kind: card
+    topic: cortisol
+    front: What carries cortisol in the blood?
+    back: Corticosteroid-binding globulin.
+    src: { page: 340, quote: "Bound to corticosteroid-binding globulin." }
     status: unverified
   - id: endo.L03.082
     kind: enumerate
@@ -1071,7 +1218,7 @@ items:
     kind: card
     topic: cortisol
     front: What are the effects of cortisol on fibroblasts?
-    back: ↓ fibroblast activity → poor wound healing, ↓ collagen synthesis, ↑ striae.
+    back: Fibroblasts work less, so wounds heal badly, less collagen is made, and striae appear more.
     src: { page: 340, quote: "↓ Fibroblast activity (poor wound healing, ↓ collagen synthesis, ↑ striae)" }
     status: unverified
   - id: endo.L03.086
@@ -1089,11 +1236,24 @@ items:
     back: CRH (hypothalamus) → ACTH (pituitary) → cortisol (zona fasciculata); excess cortisol feeds back to ↓ CRH, ACTH and cortisol.
     src: { page: 340, quote: "CRH (hypothalamus) stimulates ACTH release (pituitary) → cortisol production in adrenal zona fasciculata. Excess cortisol ↓ CRH, ACTH, and cortisol secretion." }
     status: unverified
+  - id: endo.L03.125
+    kind: card
+    topic: cortisol
+    front: Which two inputs drive CRH and the cortisol axis in the book's figure?
+    back: Stress and the circadian rhythm.
+    src: { page: 340, quote: "Hypothalamus Stress Circadian rhythm Downstream cortisol function" }
+    status: unverified
+  - id: endo.L03.126
+    kind: cloze
+    topic: cortisol
+    text: In the anterior pituitary, {{c1::proopiomelanocortin (POMC)}} gives rise to {{c2::ACTH}}, MSH and {{c3::endorphins}}.
+    src: { page: 340, quote: "CRH Endorphins MSH ACTH Proopiomelanocortin Anterior pituitary" }
+    status: unverified
   - id: endo.L03.102
     kind: card
     topic: cortisol
     front: What can chronic stress do to the cortisol axis?
-    back: Prolonged cortisol secretion, cortisol resistance, impaired immunocompetency and HPA axis dysregulation.
+    back: Cortisol stays high for a long time, tissues stop responding well to it, immune defence weakens, and the HPA axis loses its normal control.
     src: { page: 340, quote: "Chronic stress may induce prolonged cortisol secretion, cortisol resistance, impaired immunocompetency, and dysregulation of HPA axis." }
     status: unverified
   - id: endo.L03.088
@@ -1137,7 +1297,7 @@ items:
     kind: card
     topic: appetite-regulation
     front: What increases ghrelin production?
-    back: Sleep deprivation, fasting, or Prader-Willi syndrome. (Ghrelin makes you ghrow hunghry.)
+    back: Missing sleep, going without food, and Prader-Willi syndrome all push it up. The book's line is "Ghrelin makes you ghrow hunghry."
     src: { page: 340, quote: "Sleep deprivation, fasting, or Prader-Willi syndrome → ↑ ghrelin production." }
     status: unverified
     tags: [high-yield]
@@ -1148,6 +1308,7 @@ items:
     back: Obese people have more adipose tissue, so leptin is ↑, but they are tolerant or resistant to its appetite-suppressing effect.
     src: { page: 340, quote: "Obese people have ↑ leptin due to ↑ adipose tissue but are tolerant or resistant to leptin’s anorexigenic effect." }
     status: unverified
+    tags: [high-yield]
   - id: endo.L03.103
     kind: card
     topic: appetite-regulation
@@ -1161,6 +1322,13 @@ items:
     front: What do sleep deprivation and starvation do to leptin production?
     back: They ↓ leptin production.
     src: { page: 340, quote: "Sleep deprivation or starvation → ↓ leptin production." }
+    status: unverified
+  - id: endo.L03.127
+    kind: card
+    topic: appetite-regulation
+    front: Why do exogenous cannabinoids cause "the munchies"?
+    back: They act on cannabinoid receptors in the hypothalamus and nucleus accumbens, where endocannabinoids ↑ appetite.
+    src: { page: 340, quote: "Act at cannabinoid receptors in hypothalamus and nucleus accumbens, two key brain areas for the homeostatic and hedonic control of food intake → ↑ appetite. Exogenous cannabinoids cause “the munchies.”" }
     status: unverified
   - id: endo.L03.092
     kind: mcq
@@ -1205,8 +1373,21 @@ items:
   - id: endo.L03.094
     kind: cloze
     topic: signaling-pathways-of-endocrine-hormones
-    text: ADH acts via {{c1::cAMP}} at the V2 receptor and via {{c2::IP3}} at the V1 receptor; histamine uses cAMP at {{c3::H2}} and IP3 at H1.
+    text: ADH acts via {{c1::cAMP}} at the V2 receptor and via {{c2::IP3}} at the V1 receptor.
     src: { page: 341, quote: "ADH (V2- receptor), MSH, PTH, Calcitonin, Histamine (H2-receptor), Glucagon, GHRH" }
+    status: unverified
+  - id: endo.L03.135
+    kind: cloze
+    topic: signaling-pathways-of-endocrine-hormones
+    text: Histamine acts via cAMP at the {{c1::H2}} receptor and via IP3 at the {{c2::H1}} receptor.
+    src: { page: 341, quote: "Histamine (H2-receptor), Glucagon, GHRH FLAT ChAMPs CHuGG cGMP BNP, ANP, EDRF (NO) BAD GraMPa Think vasodilation and diuresis IP3 GnRH, Oxytocin, ADH (V1-receptor), TRH, Histamine (H1-receptor)" }
+    status: unverified
+  - id: endo.L03.128
+    kind: card
+    topic: signaling-pathways-of-endocrine-hormones
+    front: What clue does the book give for the hormones that use the JAK/STAT pathway?
+    back: Think acidophils (GH, prolactin) and cytokines.
+    src: { page: 341, quote: "JAK/STAT pathway Think acidophils and cytokines GET a JAKed PIG" }
     status: unverified
   - id: endo.L03.095
     kind: mcq
@@ -1237,14 +1418,26 @@ items:
     back: They are lipophilic, so specific binding globulins ↑ their solubility.
     src: { page: 341, quote: "Steroid hormones are lipophilic and therefore must circulate bound to specific binding globulins, which ↑ their solubility." }
     status: unverified
+  - id: endo.L03.129
+    kind: order
+    topic: signaling-pathways-of-steroid-hormones
+    prompt: Put the steps of steroid hormone signaling in order.
+    steps:
+      - The hormone binds its receptor in the nucleus or the cytoplasm
+      - The receptor changes shape and exposes its DNA-binding part
+      - The hormone–receptor complex binds an enhancer-like element in DNA
+      - The gene is transcribed (pre-mRNA → mRNA)
+      - Ribosomes make the protein → response
+    src: { page: 341, quote: "Binding to receptor located in nucleus or in cytoplasm Transformation of receptor to expose DNA-binding protein" }
+    status: unverified
   - id: endo.L03.097
     kind: table
     topic: signaling-pathways-of-steroid-hormones
     title: Sex hormone–binding globulin (SHBG)
     columns: [Change, Who, Result]
     rows:
-      - [↑ SHBG, Males, ↓ free testosterone → gynecomastia]
-      - [↓ SHBG, Females, ↑ free testosterone → hirsutism]
+      - [↑ SHBG, Males, "Less testosterone left unbound, so gynecomastia"]
+      - [↓ SHBG, Females, "More testosterone left unbound, so hirsutism"]
     blanks: [[0, 2], [1, 2]]
     src: { page: 341, quote: "In males, ↑ sex hormone–binding globulin (SHBG) lowers free testosterone → gynecomastia. In females, ↓ SHBG raises free testosterone → hirsutism." }
     status: unverified

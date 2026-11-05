@@ -46,6 +46,16 @@ fn same(a: &str, b: &str) -> bool {
     a.len() == b.len() && a.bytes().zip(b.bytes()).fold(0u8, |acc, (x, y)| acc | (x ^ y)) == 0
 }
 
+/// Whether changing or removing the account's username and password needs
+/// the current password. A device signed in with the password does (a
+/// session left open on someone else's computer must not be able to lock
+/// Mohamed out); one signed in with Google doesn't, so a forgotten password
+/// can still be reset from his own phone. Nothing to check before the
+/// first one is set.
+pub fn needs_current(by_password: bool, username: Option<&str>) -> bool {
+    by_password && username.is_some()
+}
+
 /// How long a username stays locked after `failures` wrong passwords in a row.
 pub fn lock_for(failures: u32) -> Option<u64> {
     let over = failures.checked_sub(LOCK_AFTER)?;
@@ -323,5 +333,12 @@ mod tests {
         assert_eq!(a.username().unwrap().as_deref(), Some("mo.refaat"));
         a.set_username(None).unwrap();
         assert_eq!(a.username().unwrap(), None);
+    }
+
+    #[test]
+    fn only_a_password_session_needs_the_current_password() {
+        assert!(needs_current(true, Some("mo.refaat")));
+        assert!(!needs_current(false, Some("mo.refaat")), "Google can reset a forgotten one");
+        assert!(!needs_current(true, None), "nothing to check yet");
     }
 }

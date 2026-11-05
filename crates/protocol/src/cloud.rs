@@ -91,6 +91,18 @@ pub struct PasswordSignIn {
 pub struct SetPassword {
     pub username: String,
     pub password_key: String,
+    /// The current password's key (for the current username), required when
+    /// the caller signed in with the password ([`PasswordLogin::needs_current`]).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub current_key: Option<String>,
+}
+
+/// `DELETE /v1/login` (signed in): turn the username and password off.
+#[derive(Clone, Debug, Default, PartialEq, Serialize, Deserialize)]
+pub struct RemovePassword {
+    /// As [`SetPassword::current_key`].
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub current_key: Option<String>,
 }
 
 /// `GET /v1/login`, and the answer to `POST`/`DELETE /v1/login`: the
@@ -99,6 +111,10 @@ pub struct SetPassword {
 pub struct PasswordLogin {
     #[serde(default)]
     pub username: Option<String>,
+    /// This device signed in with the password, so a change or removal must
+    /// give the current one (a session left open elsewhere can't take over).
+    #[serde(default)]
+    pub needs_current: bool,
 }
 
 /// Argon2id cost for [`PasswordSignIn::password_key`]: memory in KiB,

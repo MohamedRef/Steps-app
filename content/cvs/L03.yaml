@@ -86,15 +86,29 @@ items:
       - Hypoxia/hypercapnia (↓ Po2/↑ Pco2)
       - Nondihydropyridine Ca2+ channel blockers
     pass: 4
-    hook: "القلب بيضعف من 2 أدوية (β-blocker و verapamil/diltiazem)، وقلب تعبان (HF)، وجو وحش حواليه (acidosis و hypoxia/hypercapnia)."
+    hook: "القلب بيضعف من 2 أدوية (β1-blockade و non-DHP CCBs)، وقلب تعبان (HF with systolic dysfunction)، وجو وحش حواليه (acidosis و hypoxia/hypercapnia)."
     src: { page: 288, quote: "Contractility (and SV) ↓ with: β1-blockade (↓ cAMP) Heart failure (HF) with systolic dysfunction Acidosis Hypoxia/hypercapnia (↓ Po2/↑ Pco2) Nondihydropyridine Ca2+ channel blockers" }
     status: unverified
   - id: cvs.L03.007
     kind: card
     topic: cardiac-output-variables
     front: What approximates preload, and what does it depend on?
-    back: Ventricular end-diastolic volume (EDV). It depends on venous tone and circulating blood volume, both of which affect venous return.
+    back: It is estimated by the ventricle's end-diastolic volume (EDV), which is set by venous tone and blood volume, the two things that govern venous return.
     src: { page: 288, quote: "Preload approximated by ventricular end- diastolic volume (EDV); depends on venous tone and circulating blood volume, both of which affect venous return." }
+    status: unverified
+  - id: cvs.L03.123
+    kind: card
+    topic: cardiac-output-variables
+    front: What happens to stroke volume in a failing heart, and what kinds of dysfunction cause it?
+    back: Stroke volume falls, from systolic dysfunction, diastolic dysfunction, or both.
+    src: { page: 288, quote: "A failing heart has ↓ SV (systolic and/or diastolic dysfunction)." }
+    status: unverified
+  - id: cvs.L03.124
+    kind: card
+    topic: cardiac-output-variables
+    front: How does a rise in arterial pressure raise afterload?
+    back: Higher pressure raises ventricular wall tension (by Laplace's law), and higher wall tension means higher afterload.
+    src: { page: 288, quote: "↑ pressure → ↑ wall tension per Laplace's law → ↑ afterload." }
     status: unverified
   - id: cvs.L03.008
     kind: table
@@ -202,8 +216,22 @@ items:
   - id: cvs.L03.015
     kind: cloze
     topic: cardiac-output-equations
-    text: "Stroke volume = {{c1::EDV − ESV}}; ejection fraction = {{c2::SV / EDV}}, normally {{c3::50%-70%}}."
+    text: "Stroke volume = {{c1::EDV − ESV}} (ESV = end-systolic volume)."
     src: { page: 289, quote: "Stroke volume SV = EDV − ESV ESV = end-systolic volume." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.130
+    kind: cloze
+    topic: cardiac-output-equations
+    text: "Ejection fraction = {{c1::SV / EDV}}, which is (EDV − ESV) / EDV."
+    src: { page: 289, quote: "Ejection fraction EF = SV = EDV − ESV EDV EDV" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.131
+    kind: cloze
+    topic: cardiac-output-equations
+    text: "A normal ejection fraction is {{c1::50%-70%}}."
+    src: { page: 289, quote: "EF is an index of ventricular contractility (↓ in systolic HF; usually normal in diastolic HF). Normal EF is 50%-70%." }
     status: unverified
     tags: [high-yield]
   - id: cvs.L03.016
@@ -213,6 +241,7 @@ items:
     back: Ventricular contractility. It is ↓ in systolic HF and usually normal in diastolic HF.
     src: { page: 289, quote: "EF is an index of ventricular contractility (↓ in systolic HF; usually normal in diastolic HF). Normal EF is 50%-70%." }
     status: unverified
+    tags: [high-yield]
   - id: cvs.L03.017
     kind: card
     topic: cardiac-output-equations
@@ -387,7 +416,7 @@ items:
     why:
       - "That would be true if resistance varied with 1/r."
       - "That would be true if resistance varied with 1/r²."
-      - "No standard relation gives 8-fold."
+      - "That would be true if resistance varied with 1/r³ (2³ = 8)."
       - "Right. R = 8ηl/πr4, so R ∝ 1/r4: halving r raises R by 2^4 = 16."
       - "A narrower vessel has more resistance, not less."
     src: { page: 290, quote: "∝ r4 R ∝ 1/r4" }
@@ -396,10 +425,31 @@ items:
   - id: cvs.L03.110
     kind: cloze
     topic: resistance-pressure-flow
-    text: "Volumetric flow rate Q = {{c1::flow velocity (v) × cross-sectional area (A)}}. ΔP = {{c2::Q × R}}, which is analogous to Ohm's law (V = I × R). Flow is proportional to {{c3::r⁴}}, so resistance ∝ 1/r⁴."
+    text: "Volumetric flow rate Q = {{c1::flow velocity (v) × cross-sectional area (A)}}."
     src: { page: 290, quote: "Volumetric flow rate ( ) = flow velocity (v) × cross-sectional area (A)" }
     status: unverified
     tags: [high-yield]
+  - id: cvs.L03.132
+    kind: cloze
+    topic: resistance-pressure-flow
+    text: "ΔP = {{c1::Q × R}}, which is analogous to {{c2::Ohm's law}} for electrical circuits (V = I × R)."
+    src: { page: 290, quote: "∆P = × R is analogous to Ohm’s Law for electrical circuits (V = I × R)." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.133
+    kind: cloze
+    topic: resistance-pressure-flow
+    text: "Flow is proportional to {{c1::r⁴}}, so resistance is proportional to {{c2::1/r⁴}}."
+    src: { page: 290, quote: "∝ r4 R ∝ 1/r4" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.125
+    kind: card
+    topic: resistance-pressure-flow
+    front: Which way does a pressure gradient drive blood flow?
+    back: From the region of higher pressure toward the region of lower pressure.
+    src: { page: 290, quote: "Pressure gradient drives flow from high pressure to low pressure." }
+    status: unverified
   - id: cvs.L03.034
     kind: card
     topic: cardiac-vascular-function-curves
@@ -436,7 +486,7 @@ items:
     options:
       - The cardiac function curve shifts down (↓ inotropy)
       - The vascular function curve shifts left (↓ venous return and mean systemic pressure)
-      - The vascular function curve rotates clockwise (↑ TPR)
+      - The vascular function curve rotates (↑ TPR)
       - The cardiac function curve shifts up (↑ inotropy)
       - The vascular function curve shifts right (↑ circulating volume)
     answer: 1
@@ -475,10 +525,19 @@ items:
   - id: cvs.L03.040
     kind: card
     topic: pressure-volume-loops-cardiac-cycle
-    front: What causes S1 and S2, and where is each loudest?
-    back: "S1: mitral and tricuspid valve closure, loudest at the mitral area. S2: aortic and pulmonary valve closure, loudest at the left upper sternal border."
-    src: { page: 291, quote: "S1—mitral and tricuspid valve closure. Loudest at mitral area. S2—aortic and pulmonary valve closure. Loudest at left upper sternal border." }
+    front: What causes S1, and where is it loudest?
+    back: The mitral and tricuspid valves shutting; it is best heard over the mitral area.
+    src: { page: 291, quote: "S1—mitral and tricuspid valve closure. Loudest at mitral area." }
     status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.134
+    kind: card
+    topic: pressure-volume-loops-cardiac-cycle
+    front: What causes S2, and where is it loudest?
+    back: The aortic and pulmonary valves shutting; it is best heard at the left upper sternal border.
+    src: { page: 291, quote: "S2—aortic and pulmonary valve closure. Loudest at left upper sternal border." }
+    status: unverified
+    tags: [high-yield]
   - id: cvs.L03.041
     kind: table
     topic: pressure-volume-loops-cardiac-cycle
@@ -697,11 +756,18 @@ items:
     title: Splitting of S2
     columns: [Type, Seen in, Mechanism]
     rows:
-      - [Wide, "Pulmonic stenosis, right bundle branch block", Delayed RV emptying; exaggeration of normal splitting]
+      - [Wide, "Pulmonic stenosis, right bundle branch block", "Delayed RV emptying → delayed P2, especially on inspiration; exaggeration of normal splitting"]
       - [Fixed, ASD, "Left-to-right shunt → ↑ RA and RV volumes → ↑ flow through pulmonic valve, independent of respiration"]
       - [Paradoxical, "Aortic stenosis, left bundle branch block", "Delayed aortic closure: P2 before A2; split heard on expiration, gone on inspiration"]
     blanks: [[0, 1], [1, 1], [2, 1], [2, 2]]
     src: { page: 293, quote: "Fixed splitting Heard in ASD. ASD → left-to-right shunt → ↑ RA and RV volumes → ↑ flow through pulmonic valve → delayed pulmonic valve closure (independent of respiration)." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.126
+    kind: cloze
+    topic: splitting-of-s2
+    text: "In wide splitting of S2 the pulmonic sound is delayed, especially on {{c1::inspiration}}; it is an {{c2::exaggeration of normal splitting}}."
+    src: { page: 293, quote: "Causes delayed pulmonic sound (especially on inspiration). An exaggeration of normal splitting." }
     status: unverified
     tags: [high-yield]
   - id: cvs.L03.053
@@ -711,6 +777,7 @@ items:
     back: P2 occurs before A2. On inspiration P2 closes later and moves closer to A2, eliminating the split; on expiration the split can be heard (opposite to physiologic splitting).
     src: { page: 293, quote: "On inspiration, P2 closes later and moves closer to A2, “paradoxically” eliminating the split. On expiration, the split can be heard (opposite to physiologic splitting)." }
     status: unverified
+    tags: [high-yield]
   - id: cvs.L03.112
     kind: card
     topic: splitting-of-s2
@@ -842,16 +909,16 @@ items:
     kind: card
     topic: heart-murmurs
     front: "What commonly causes mitral regurgitation?"
-    back: "Ischemic heart disease (post-MI), mitral valve prolapse, LV dilatation and rheumatic fever."
-    src: { page: 295, quote: "MR: often due to ischemic heart disease (post-MI), MVP, LV dilatation, rheumatic fever (RF)" }
+    back: "Ischemic heart disease (post-MI), mitral valve prolapse, LV dilatation and rheumatic fever; infective endocarditis can also cause it."
+    src: { page: 295, quote: "MR: often due to ischemic heart disease (post-MI), MVP, LV dilatation, rheumatic fever (RF) TR: often due to RV dilatation; may be 2° to permanent pacemaker placement MR or TR: infective endocarditis" }
     status: unverified
     tags: [high-yield]
   - id: cvs.L03.116
     kind: card
     topic: heart-murmurs
     front: "What commonly causes tricuspid regurgitation?"
-    back: "RV dilatation; it may also follow placement of a permanent pacemaker."
-    src: { page: 295, quote: "TR: often due to RV dilatation; may be 2° to permanent pacemaker placement" }
+    back: "RV dilatation; it may also follow placement of a permanent pacemaker, and infective endocarditis can cause it."
+    src: { page: 295, quote: "TR: often due to RV dilatation; may be 2° to permanent pacemaker placement MR or TR: infective endocarditis" }
     status: unverified
   - id: cvs.L03.063
     kind: card
@@ -860,12 +927,20 @@ items:
     back: Late crescendo murmur with a midsystolic click (after the carotid pulse), best heard over the apex, loudest just before S2. The click is sudden tensing of the chordae tendineae as the leaflets prolapse into the LA.
     src: { page: 295, quote: "MC due to sudden tensing of chordae tendineae as mitral leaflets prolapse into LA (chordae cause crescendo with click)" }
     status: unverified
+    tags: [high-yield]
   - id: cvs.L03.064
     kind: card
     topic: heart-murmurs
-    front: What can cause mitral valve prolapse, and what does it predispose to?
-    back: Rheumatic fever, chordae rupture, mitral annular disjunction, or myxomatous degeneration (1° or 2° to connective tissue disease). Usually benign, but can predispose to infective endocarditis.
-    src: { page: 295, quote: "Usually benign, but can predispose to infective endocarditis Can be caused by RF, chordae rupture, mitral annular disjunction, or myxomatous degeneration (1° or 2° to connective tissue disease)" }
+    front: What can cause mitral valve prolapse?
+    back: Rheumatic fever, ruptured chordae, mitral annular disjunction, or myxomatous degeneration (primary, or secondary to a connective tissue disease).
+    src: { page: 295, quote: "Can be caused by RF, chordae rupture, mitral annular disjunction, or myxomatous degeneration (1° or 2° to connective tissue disease)" }
+    status: unverified
+  - id: cvs.L03.135
+    kind: card
+    topic: heart-murmurs
+    front: What is the usual course of mitral valve prolapse, and which infection can it predispose to?
+    back: It is mostly harmless, but it can predispose to infective endocarditis.
+    src: { page: 295, quote: "Usually benign, but can predispose to infective endocarditis" }
     status: unverified
   - id: cvs.L03.065
     kind: card
@@ -899,9 +974,25 @@ items:
   - id: cvs.L03.117
     kind: card
     topic: heart-murmurs
-    front: "What are the peripheral signs of aortic regurgitation, and what can it progress to?"
-    back: "Wide pulse pressure, pistol shot femoral pulse and a pulsing nail bed; a hyperdynamic pulse and head bobbing when severe and chronic. It can progress to left HF."
-    src: { page: 295, quote: "Wide pulse pressure, pistol shot femoral pulse, pulsing nail bed Hyperdynamic pulse and head bobbing when severe and chronic Can progress to left HF" }
+    front: "What are the peripheral signs of aortic regurgitation?"
+    back: "A wide pulse pressure, a pistol-shot sound over the femoral artery, and visibly pulsing nail beds."
+    src: { page: 295, quote: "Wide pulse pressure, pistol shot femoral pulse, pulsing nail bed" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.142
+    kind: card
+    topic: heart-murmurs
+    front: "Which pulse and head signs appear when aortic regurgitation is severe and chronic?"
+    back: "A bounding (hyperdynamic) pulse and bobbing of the head with each heartbeat."
+    src: { page: 295, quote: "Hyperdynamic pulse and head bobbing when severe and chronic" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.143
+    kind: card
+    topic: heart-murmurs
+    front: "What can aortic regurgitation progress to?"
+    back: "Left-sided heart failure."
+    src: { page: 295, quote: "Can progress to left HF" }
     status: unverified
     tags: [high-yield]
   - id: cvs.L03.068
@@ -915,10 +1006,25 @@ items:
   - id: cvs.L03.069
     kind: card
     topic: heart-murmurs
-    front: What is the main cause of mitral stenosis, and what can chronic MS lead to?
-    back: Late and highly specific sequela of rheumatic fever. Chronic MS → LA dilation and pulmonary congestion, atrial fibrillation, Ortner syndrome, hemoptysis, right HF.
-    src: { page: 295, quote: "Late and highly specific sequelae of RF Chronic MS can result in LA dilation and pulmonary congestion, atrial fibrillation, Ortner syndrome, hemoptysis, right HF" }
+    front: What is the main cause of mitral stenosis?
+    back: Rheumatic fever; mitral stenosis is a late and very specific consequence of it.
+    src: { page: 295, quote: "Late and highly specific sequelae of RF" }
     status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.136
+    kind: enumerate
+    topic: heart-murmurs
+    prompt: Enumerate the 5 consequences of chronic mitral stenosis.
+    points:
+      - LA dilation and pulmonary congestion
+      - Atrial fibrillation
+      - Ortner syndrome
+      - Hemoptysis
+      - Right HF
+    pass: 4
+    src: { page: 295, quote: "Chronic MS can result in LA dilation and pulmonary congestion, atrial fibrillation, Ortner syndrome, hemoptysis, right HF" }
+    status: unverified
+    tags: [high-yield]
   - id: cvs.L03.070
     kind: card
     topic: heart-murmurs
@@ -1002,6 +1108,13 @@ items:
     src: { page: 296, quote: "Phase 2 = plateau (“platwo”)—Ca2+ influx through voltage-gated Ca2+ channels balances K+ efflux." }
     status: unverified
     tags: [high-yield]
+  - id: cvs.L03.127
+    kind: card
+    topic: myocardial-action-potential
+    front: In which cardiac cells does the myocardial action potential occur?
+    back: In every cardiac myocyte apart from the cells of the SA and AV nodes.
+    src: { page: 296, quote: "Occurs in all cardiac myocytes except for those in the SA and AV nodes." }
+    status: unverified
   - id: cvs.L03.074
     kind: enumerate
     topic: myocardial-action-potential
@@ -1093,7 +1206,7 @@ items:
       - "Right. Adenosine (like ACh) ↓ the rate of diastolic depolarization (phase 4 slope), which sets HR."
       - "Nodal cells have no phase 2."
       - "↑ HCN opening is the sympathetic effect that ↑ HR."
-      - "A threshold closer to the resting potential would speed the rate, and this isn't the mechanism given."
+      - "A more negative threshold is reached sooner in phase 4, so it would ↑ HR, the opposite of the slowing seen here (standard physiology, not in First Aid)."
     src: { page: 296, quote: "ACh/adenosine ↓ the rate of diastolic depolarization and ↓ HR" }
     status: unverified
   # ---------- p297: electrocardiogram ----------
@@ -1200,10 +1313,25 @@ items:
   - id: cvs.L03.087
     kind: card
     topic: natriuretic-peptides
-    front: What releases BNP, how does it compare with ANP, and what is the BNP test used for?
-    back: Ventricular myocytes, in response to ↑ tension. Similar action to ANP with a longer half-life. The BNP test is used to diagnose HF (very good negative predictive value).
-    src: { page: 297, quote: "Released from ventricular myocytes in response to ↑ tension. Similar physiologic action to ANP, with longer half-life. BNP blood test used for diagnosing HF (very good negative predictive value)." }
+    front: Which cells release BNP, and what triggers its release?
+    back: B-type (brain) natriuretic peptide is secreted by ventricular myocytes when the tension on them rises.
+    src: { page: 297, quote: "B-type (brain) natriuretic peptide Released from ventricular myocytes in response to ↑ tension." }
     status: unverified
+  - id: cvs.L03.137
+    kind: card
+    topic: natriuretic-peptides
+    front: How does BNP compare with ANP?
+    back: It acts in much the same way as ANP but stays in the blood longer (longer half-life).
+    src: { page: 297, quote: "Similar physiologic action to ANP, with longer half-life." }
+    status: unverified
+  - id: cvs.L03.138
+    kind: card
+    topic: natriuretic-peptides
+    front: What is the BNP blood test used for, and what is its main strength?
+    back: Diagnosing heart failure; a normal result is very good at ruling it out (high negative predictive value).
+    src: { page: 297, quote: "BNP blood test used for diagnosing HF (very good negative predictive value)." }
+    status: unverified
+    tags: [high-yield]
   - id: cvs.L03.088
     kind: mcq
     topic: natriuretic-peptides
@@ -1234,12 +1362,21 @@ items:
     back: ↑ Pco2, ↓ pH of blood, and ↓ Po2 (<60 mm Hg).
     src: { page: 298, quote: "Peripheral—carotid and aortic bodies are stimulated by ↑ Pco2, ↓ pH of blood, and ↓ Po2 (<60 mm Hg)." }
     status: unverified
+    tags: [high-yield]
   - id: cvs.L03.090
     kind: card
     topic: baroreceptors-chemoreceptors
-    front: What stimulates the central chemoreceptors, and what happens to them with chronically raised Pco2?
-    back: Changes in pH and Pco2 of brain interstitial fluid (driven by arterial CO2, since H+ cannot cross the blood-brain barrier); they don't respond to Po2. With chronic ↑ Pco2 (eg, COPD) they become less sensitive → ↑ dependence on peripheral chemoreceptors sensing ↓ O2 to drive respiration.
-    src: { page: 298, quote: "Do not respond to Po2. Central chemoreceptors become less sensitive with chronically ↑ Pco2 (eg, COPD) → ↑ dependence on peripheral chemoreceptors to detect ↓ O2 to drive respiration." }
+    front: What stimulates the central chemoreceptors, and do they sense Po2?
+    back: Shifts in the pH and Pco2 of the brain's interstitial fluid, which follow arterial CO2 because H+ cannot get across the blood-brain barrier. Po2 does not affect them.
+    src: { page: 298, quote: "Central—are stimulated by changes in pH and Pco2 of brain interstitial fluid, which in turn are influenced by arterial CO2 as H+ cannot cross the blood-brain barrier. Do not respond to Po2." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.139
+    kind: card
+    topic: baroreceptors-chemoreceptors
+    front: How do the central chemoreceptors change with a chronically raised Pco2 (eg, COPD), and what then drives breathing?
+    back: They lose sensitivity, so the drive to breathe leans more on the peripheral chemoreceptors sensing low O2.
+    src: { page: 298, quote: "Central chemoreceptors become less sensitive with chronically ↑ Pco2 (eg, COPD) → ↑ dependence on peripheral chemoreceptors to detect ↓ O2 to drive respiration." }
     status: unverified
     tags: [high-yield]
   - id: cvs.L03.091
@@ -1277,6 +1414,7 @@ items:
     back: "↑ Carotid sinus pressure → ↑ afferent baroreceptor firing → ↑ AV node refractory period → ↓ HR → ↓ CO, plus peripheral vasodilation → presyncope or syncope."
     src: { page: 298, quote: "↑ carotid sinus pressure → ↑ afferent baroreceptor firing → ↑ AV node refractory period → ↓ HR → ↓ CO. Also leads to peripheral vasodilation." }
     status: unverified
+    tags: [high-yield]
   - id: cvs.L03.122
     kind: card
     topic: baroreceptors-chemoreceptors
@@ -1293,7 +1431,7 @@ items:
       - Bradycardia
       - Respiratory depression
     pass: 3
-    hook: "الضغط جوه الدماغ عالي ← الجسم يعلّي الضغط عشان يوصل دم، والـ baroreceptors تفرمل القلب، والتنفس يقف: ضغط عالي ونبض بطيء ونفس ضعيف."
+    hook: "Cushing triad = 3 حاجات مش متوقع تيجي سوا: ضغط عالي (hypertension)، ونبض بطيء (bradycardia)، ونفس ضعيف (respiratory depression)."
     src: { page: 298, quote: "Component of Cushing reflex (triad of hypertension, bradycardia, and respiratory depression)" }
     status: unverified
     tags: [high-yield]
@@ -1337,9 +1475,41 @@ items:
   - id: cvs.L03.096
     kind: card
     topic: normal-resting-cardiac-pressures
-    front: What does pulmonary capillary wedge pressure estimate, when is it misleading, and how is it measured?
-    back: Left atrial pressure and LV end-diastolic pressure (LVEDP), except in mitral stenosis, where PCWP > LVEDP. Measured via a Swan-Ganz catheter.
-    src: { page: 298, quote: "Pulmonary capillary wedge pressure (PCWP; mm Hg) estimates left atrial pressure and LV end-diastolic pressure (LVEDP), except in mitral stenosis, where PCWP > LVEDP. Measured via Swan-Ganz catheter." }
+    front: What does pulmonary capillary wedge pressure (PCWP) estimate?
+    back: It stands in for the left atrial pressure and the LV end-diastolic pressure (LVEDP).
+    src: { page: 298, quote: "Pulmonary capillary wedge pressure (PCWP; mm Hg) estimates left atrial pressure and LV end-diastolic pressure (LVEDP)" }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.140
+    kind: card
+    topic: normal-resting-cardiac-pressures
+    front: In which valve disease does PCWP stop matching LVEDP, and which way is it off?
+    back: Mitral stenosis; there PCWP reads higher than LVEDP.
+    src: { page: 298, quote: "except in mitral stenosis, where PCWP > LVEDP." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L03.141
+    kind: card
+    topic: normal-resting-cardiac-pressures
+    front: Which catheter is used to measure PCWP?
+    back: The Swan-Ganz catheter.
+    src: { page: 298, quote: "Measured via Swan-Ganz catheter." }
+    status: unverified
+  - id: cvs.L03.144
+    kind: table
+    topic: normal-resting-cardiac-pressures
+    title: Normal resting cardiac pressures (mm Hg)
+    columns: [Site, Normal pressure]
+    rows:
+      - [Right atrium, "<5"]
+      - [Right ventricle, "25/<5"]
+      - [Pulmonary artery, "25/<8"]
+      - [PCWP, "4-12"]
+      - [Left atrium, "<12"]
+      - [Left ventricle, "120/<12"]
+      - [Aorta, "120/80"]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
+    src: { page: 298, quote: "Measured via Swan-Ganz catheter. <12 <5 4-12 PCWP 120 80 120 <12 25 <8 25 <5" }
     status: unverified
     tags: [high-yield]
   - id: cvs.L03.097
@@ -1401,10 +1571,17 @@ items:
     kind: card
     topic: autoregulation
     front: Why is the pulmonary vasculature unique in its response to hypoxia?
-    back: Alveolar hypoxia causes vasoconstriction, so only well-ventilated areas are perfused. In other organs hypoxia causes vasodilation.
+    back: In the lung, low alveolar O2 narrows the local vessels, steering blood to well-ventilated areas. Everywhere else, hypoxia widens vessels.
     src: { page: 299, quote: "The pulmonary vasculature is unique in that alveolar hypoxia causes vasoconstriction so that only well-ventilated areas are perfused. In other organs, hypoxia causes vasodilation" }
     status: unverified
     tags: [high-yield]
+  - id: cvs.L03.128
+    kind: card
+    topic: autoregulation
+    front: What is autoregulation?
+    back: An organ's ability to hold its blood flow steady across a broad range of perfusion pressures.
+    src: { page: 299, quote: "Autoregulation How blood flow to an organ remains constant over a wide range of perfusion pressures." }
+    status: unverified
   - id: cvs.L03.100
     kind: mcq
     topic: autoregulation
@@ -1446,6 +1623,12 @@ items:
     topic: capillary-fluid-exchange
     text: "Net fluid flow Jv = {{c1::Kf [(Pc − Pi) − σ(πc − πi)]}}, where Kf is {{c2::capillary permeability to fluid}} and σ is the {{c3::reflection coefficient}}."
     src: { page: 299, quote: "Jv = net fluid flow = Kf [(Pc − Pi) − σ(πc − πi)] Kf = capillary permeability to fluid σ = reflection coefficient" }
+    status: unverified
+  - id: cvs.L03.129
+    kind: cloze
+    topic: capillary-fluid-exchange
+    text: "The reflection coefficient (σ) in the Starling equation measures capillary {{c1::impermeability to protein}}."
+    src: { page: 299, quote: "σ = reflection coefficient (measure of capillary impermeability to protein)" }
     status: unverified
   - id: cvs.L03.103
     kind: enumerate
