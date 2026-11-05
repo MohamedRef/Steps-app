@@ -4,13 +4,20 @@
 
 /* ---------- two panes: question | explanation ---------- */
 .desk-split { display: flex; flex-direction: column; gap: var(--sp-4); min-width: 0; }
-.desk-main, .desk-side { min-width: 0; display: flex; flex-direction: column; gap: var(--sp-3); }
+/* A long word breaks rather than spill over the divider (UX #580). */
+.desk-main, .desk-side { min-width: 0; display: flex; flex-direction: column; gap: var(--sp-3); overflow-wrap: break-word; }
 .desk-waiting { display: none; }
 /* Under both panes, full width: the grade row stays in one place. */
 .desk-footer { display: flex; flex-direction: column; gap: var(--sp-3); margin-block-start: var(--sp-4); min-width: 0; }
 
 @media (min-width: 840px) {
   .content:has(.desk-split, .desk-list-detail) { max-width: none; }
+}
+/* Two panes only when the panes themselves have room (UX #580): by the
+   window's width, the rail at 840 left each pane a word per line. 44rem
+   grows with Larger text, so big type stays one column longer. */
+.desk-panes { container: panes / inline-size; min-width: 0; }
+@container panes (min-width: 44rem) {
   .desk-split {
     display: grid;
     grid-template-columns: minmax(0, 3fr) minmax(16rem, 2fr);
