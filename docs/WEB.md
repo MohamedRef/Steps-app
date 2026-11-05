@@ -80,10 +80,13 @@ Cloud project as the desktop one:
 - Authorized JavaScript origin: `https://steps-web.hamorefaat85.workers.dev`
 - Authorized redirect URI: `https://steps-web.hamorefaat85.workers.dev/`
 
-It exists ("Steps web", created 2026-11-02, same project as Steps Desktop).
-Its client ID is public (it is in every sign-in URL), and the web app keeps no
-secret. The web build reads it from `STEPS_WEB_GOOGLE_CLIENT_ID` (or
-`WEB_GOOGLE_CLIENT_ID` in `crates/app/src/cloud/mod.rs`), and the hub accepts
+It exists since 2026-11-05: Google Cloud project "Steps" (`steps-513803`,
+Testing mode), next to the desktop client. Its client ID is public (it is in
+every sign-in URL), and the web app keeps no secret. The repo variable
+`STEPS_WEB_GOOGLE_CLIENT_ID` holds it; `web-deploy.yml` passes it to
+`scripts/web/build.sh`, which builds it in (without it the web app hides
+sign-in; `WEB_GOOGLE_CLIENT_ID` in `crates/app/src/cloud/mod.rs` is the
+fallback), and the hub accepts
 its ID tokens once it is in the repo variable `STEPS_GOOGLE_CLIENT_IDS` (or
 `STEPS_WEB_GOOGLE_CLIENT_ID`), which the deploy passes to the Worker
 ([CLOUD.md](CLOUD.md) §3.2). As with the desktop client, only the test users on the
