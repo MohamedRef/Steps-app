@@ -148,9 +148,16 @@ items:
   - id: bio.L02.012
     kind: card
     topic: rough-er
-    front: What is made in the rough endoplasmic reticulum?
-    back: Secretory (exported) proteins, and N-linked oligosaccharides are added to lysosomal and other proteins. Proteins within organelles (ER, Golgi, lysosomes) are also formed in RER.
+    front: Which kind of protein is synthesized in the rough endoplasmic reticulum for export, and which sugar addition happens there?
+    back: Secretory (exported) proteins; N-linked oligosaccharides are added there to lysosomal and other proteins.
     src: { page: 45, quote: "Site of synthesis of secretory (exported) proteins and of N-linked oligosaccharide addition to lysosomal and other proteins." }
+    status: unverified
+  - id: bio.L02.075
+    kind: card
+    topic: rough-er
+    front: Where are the proteins that live inside organelles (ER, Golgi, lysosomes) made?
+    back: In the rough ER.
+    src: { page: 45, quote: "Proteins within organelles (eg, ER, Golgi bodies, lysosomes) are formed in RER." }
     status: unverified
   - id: bio.L02.013
     kind: card
@@ -198,11 +205,25 @@ items:
   - id: bio.L02.017
     kind: card
     topic: smooth-er
-    front: What are the functions of the smooth ER, and which enzyme is located there?
-    back: Steroid synthesis and detoxification of drugs and poisons (no surface ribosomes). It holds glucose-6-phosphatase, the last step of both glycogenolysis and gluconeogenesis.
-    src: { page: 45, quote: "Site of steroid synthesis and detoxification of drugs and poisons. Lacks surface ribosomes. Location of glucose-6-phosphatase (last step in both glycogenolysis and gluconeogenesis)." }
+    front: What are the 2 functions of the smooth ER?
+    back: Steroid synthesis, and detoxification of drugs and poisons.
+    src: { page: 45, quote: "Site of steroid synthesis and detoxification of drugs and poisons. Lacks surface ribosomes." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L02.076
+    kind: cloze
+    topic: smooth-er
+    text: The smooth ER holds {{c1::glucose-6-phosphatase}}, the last step of both {{c2::glycogenolysis}} and {{c3::gluconeogenesis}}.
+    src: { page: 45, quote: "Location of glucose-6-phosphatase (last step in both glycogenolysis and gluconeogenesis)." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L02.077
+    kind: card
+    topic: smooth-er
+    front: How does smooth ER look different from rough ER?
+    back: It has no ribosomes on its surface.
+    src: { page: 45, quote: "Lacks surface ribosomes." }
+    status: unverified
   - id: bio.L02.018
     kind: card
     topic: smooth-er
@@ -293,7 +314,7 @@ items:
     kind: card
     topic: cell-trafficking
     front: What does the signal recognition particle do, and what happens without it?
-    back: An abundant cytosolic ribonucleoprotein that carries the polypeptide-ribosome complex from the cytosol to the RER. Absent or dysfunctional SRP → protein accumulates in the cytosol.
+    back: "It is a common RNA-protein particle in the cytosol that escorts the ribosome and its new peptide to the RER; without a working SRP, the protein piles up in the cytosol."
     src: { page: 45, quote: "Signal recognition particle (SRP)—abundant, cytosolic ribonucleoprotein that traffics polypeptide-ribosome complex from the cytosol to the RER. Absent or dysfunctional SRP → accumulation of protein in cytosol." }
     status: unverified
   - id: bio.L02.025
@@ -401,9 +422,15 @@ items:
   - id: bio.L02.032
     kind: card
     topic: proteasome
-    front: What is the proteasome, and which immune process does it serve?
-    back: A barrel-shaped protein complex that degrades polyubiquitin-tagged proteins. It plays a role in the immune response (MHC I-mediated), and its defects are implicated in neurodegenerative diseases.
-    src: { page: 46, quote: "Barrel-shaped protein complex that degrades polyubiquitin-tagged proteins. Plays a role in many cellular processes, including immune response (MHC I–mediated)." }
+    front: What is the proteasome, and which proteins does it degrade?
+    back: A barrel-shaped protein complex that breaks down proteins tagged with polyubiquitin.
+    src: { page: 46, quote: "Barrel-shaped protein complex that degrades polyubiquitin-tagged proteins." }
+    status: unverified
+  - id: bio.L02.078
+    kind: cloze
+    topic: proteasome
+    text: The proteasome plays a role in the {{c1::MHC I}}-mediated immune response, and defects in the ubiquitin-proteasome system are implicated in {{c2::neurodegenerative}} diseases.
+    src: { page: 46, quote: "Plays a role in many cellular processes, including immune response (MHC I–mediated). Defects in ubiquitin-proteasome system also implicated in diverse human diseases including neurodegenerative diseases." }
     status: unverified
   - id: bio.L02.033
     kind: mcq
@@ -420,14 +447,14 @@ items:
       - Ubiquitin-proteasome degradation feeding MHC I
       - Peroxisomal β-oxidation
       - Clathrin-mediated endocytosis
-      - Autophagy via the Golgi
+      - COPI retrograde transport
     answer: 1
     why:
       - "Mannose-6-phosphate targets enzymes to lysosomes; it doesn't tag cytosolic viral proteins."
       - "Right. The proteasome degrades polyubiquitin-tagged proteins and serves the MHC I-mediated immune response."
       - "Peroxisomes oxidize fatty acids."
       - "Clathrin brings material in from outside, such as LDL."
-      - "The Golgi modifies and sorts proteins; it isn't the barrel-shaped complex."
+      - "COPI vesicles carry cargo backward (Golgi → Golgi, cis-Golgi → ER); they don't degrade tagged cytosolic proteins."
     src: { page: 46, quote: "Barrel-shaped protein complex that degrades polyubiquitin-tagged proteins. Plays a role in many cellular processes, including immune response (MHC I–mediated)." }
     status: unverified
   # ---------- p46: cytoskeletal elements and microtubules ----------
@@ -448,9 +475,22 @@ items:
     kind: card
     topic: cytoskeletal-elements
     front: What is a microtubule made of?
-    back: A cylinder of a helical array of polymerized α- and β-tubulin heterodimers; each dimer has 2 GTP bound. Its negative end is near the nucleus and positive end points to the periphery.
+    back: A cylinder built from a helical array of polymerized α- and β-tubulin heterodimers.
     src: { page: 46, quote: "Cylindrical outer structure composed of a helical array of polymerized heterodimers of α- and β-tubulin. Each dimer has 2 GTP bound." }
     status: unverified
+  - id: bio.L02.079
+    kind: cloze
+    topic: cytoskeletal-elements
+    text: Each tubulin dimer of a microtubule has {{c1::2 GTP}} bound.
+    src: { page: 46, quote: "Each dimer has 2 GTP bound." }
+    status: unverified
+  - id: bio.L02.080
+    kind: cloze
+    topic: cytoskeletal-elements
+    text: A microtubule's {{c1::negative}} end is near the nucleus and its {{c2::positive}} end points to the periphery.
+    src: { page: 46, quote: "Negative end near nucleus. Positive end points to periphery." }
+    status: unverified
+    tags: [high-yield]
   - id: bio.L02.036
     kind: table
     topic: cytoskeletal-elements
@@ -522,14 +562,14 @@ items:
     kind: card
     topic: cilia-structure
     front: What does axonemal dynein do?
-    back: It is an ATPase linking the peripheral 9 doublets; it bends the cilium by differential sliding of the doublets.
+    back: "It is the ATP-burning motor that ties the 9 outer doublets together; by making neighboring doublets slide unequally, it bends the cilium."
     src: { page: 47, quote: "Axonemal dynein—ATPase that links peripheral 9 doublets and causes bending of cilium by differential sliding of doublets." }
     status: unverified
   - id: bio.L02.043
     kind: card
     topic: cilia-structure
     front: What do nonmotile (primary) cilia do, and what can their dysgenesis cause?
-    back: They are chemical signal sensors in signal transduction and cell growth control. Dysgenesis may cause polycystic kidney disease, mitral valve prolapse or retinal degeneration.
+    back: "They sense chemical signals and help pass them on and control cell growth. When they form badly, the result can be polycystic kidney disease, mitral valve prolapse or retinal degeneration."
     src: { page: 47, quote: "Nonmotile (primary) cilia work as chemical signal sensors and have a role in signal transduction and cell growth control. Dysgenesis may lead to polycystic kidney disease, mitral valve prolapse, or retinal degeneration." }
     status: unverified
   - id: bio.L02.044
@@ -667,7 +707,7 @@ items:
     topic: collagen
     front: What is the most abundant protein in the human body, and which of its types are most common?
     back: Collagen. Types I to IV are the most common.
-    src: { page: 48, quote: "Collagen Most abundant protein in the human body." }
+    src: { page: 48, quote: "Collagen Most abundant protein in the human body. Extensively modified by posttranslational modification. Organizes and strengthens extracellular matrix. Types I to IV are the most common types in humans." }
     status: unverified
   - id: bio.L02.054
     kind: table
@@ -702,7 +742,7 @@ items:
       - Cleavage of terminal regions → tropocollagen
       - Assembly into fibrils
       - Cross-linking by lysyl oxidase (copper) → collagen fibers
-    src: { page: 48, quote: "Synthesis—translation of collagen α chains (preprocollagen)—usually Gly-X-Y (X is often proline or lysine and Y is often hydroxyproline or hydroxylysine)." }
+    src: { page: 48, quote: "Synthesis—translation of collagen α chains (preprocollagen)—usually Gly-X-Y (X is often proline or lysine and Y is often hydroxyproline or hydroxylysine). Collagen is 1/3 glycine; glycine content of collagen is less variable than that of lysine and proline. Hydroxylation—hydroxylation (“hydroxCylation”) of specific proline and lysine residues. Requires vitamin C; deficiency → scurvy. Glycosylation—glycosylation of pro-α-chain hydroxylysine residues and formation of procollagen via hydrogen and disulfide bonds (triple helix of 3 collagen α chains). Problems forming triple helix → osteogenesis imperfecta. Exocytosis—exocytosis of procollagen into extracellular space. Proteolytic processing—cleavage of disulfide-rich terminal regions of procollagen → insoluble tropocollagen. Assembly and alignment—collagen assembles in fibrils and aligns for cross-linking. Cross-linking—reinforcement of staggered tropocollagen molecules by covalent lysine- hydroxylysine cross-linkage (by copper- containing lysyl oxidase) to make collagen fibers." }
     status: unverified
     tags: [high-yield]
   - id: bio.L02.057
@@ -721,7 +761,7 @@ items:
       - [Triple helix formation (procollagen), "Hydrogen and disulfide bonds", Osteogenesis imperfecta]
       - [Cross-linking of tropocollagen, "Copper-containing lysyl oxidase", Menkes disease]
     blanks: [[0, 1], [0, 2], [1, 2], [2, 1], [2, 2]]
-    src: { page: 48, quote: "Requires vitamin C; deficiency → scurvy." }
+    src: { page: 48, quote: "Requires vitamin C; deficiency → scurvy. Glycosylation—glycosylation of pro-α-chain hydroxylysine residues and formation of procollagen via hydrogen and disulfide bonds (triple helix of 3 collagen α chains). Problems forming triple helix → osteogenesis imperfecta. Exocytosis—exocytosis of procollagen into extracellular space. Proteolytic processing—cleavage of disulfide-rich terminal regions of procollagen → insoluble tropocollagen. Assembly and alignment—collagen assembles in fibrils and aligns for cross-linking. Cross-linking—reinforcement of staggered tropocollagen molecules by covalent lysine- hydroxylysine cross-linkage (by copper- containing lysyl oxidase) to make collagen fibers. Cross-linking of collagen ↑ with age. Problems with cross-linking → Menkes disease." }
     status: unverified
     tags: [high-yield]
   - id: bio.L02.059
@@ -840,8 +880,15 @@ items:
   - id: bio.L02.067
     kind: card
     topic: ehlers-danlos
-    front: How is Ehlers-Danlos syndrome inherited, and which enzyme deficiency can cause it?
-    back: Inheritance and severity vary; it can be autosomal dominant or recessive. It can be caused by procollagen peptidase deficiency.
+    front: How is Ehlers-Danlos syndrome inherited?
+    back: Inheritance and severity vary between its many types; it can be autosomal dominant or recessive.
+    src: { page: 49, quote: "Multiple types. Inheritance and severity vary. Can be autosomal dominant or recessive. May be associated with joint dislocation, berry and aortic aneurysms, organ rupture." }
+    status: unverified
+  - id: bio.L02.081
+    kind: card
+    topic: ehlers-danlos
+    front: Which enzyme deficiency can cause Ehlers-Danlos syndrome?
+    back: Procollagen peptidase deficiency.
     src: { page: 49, quote: "Can be caused by procollagen peptidase deficiency." }
     status: unverified
   - id: bio.L02.068
