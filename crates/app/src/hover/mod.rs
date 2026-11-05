@@ -44,21 +44,28 @@ fn merged(course: Option<&str>) -> Glossary {
     let parts = crate::content::GLOSSARY_PARTS;
     let own = course.and_then(|c| parts.iter().find(|(name, _)| *name == c));
     let mut g = match own {
-        Some((_, yaml)) => {
-            let mut g = parse(yaml).unwrap_or_else(empty);
-            if let Some(shared) = parse(GLOSSARY_YAML) {
-                g.absorb(shared);
-            }
-            g
-        }
+        Some((_, yaml)) => parse(yaml).unwrap_or_else(empty),
         None => parse(GLOSSARY_YAML).unwrap_or_else(empty),
     };
+    // A word the course keeps plain (a book mnemonic like repro's "TIN")
+    // stays plain in its view, even where another file explains it (#271).
+    let own_plain: std::collections::HashSet<String> =
+        if own.is_some() { g.plain.iter().cloned().collect() } else { Default::default() };
+    let mut take = |mut p: Glossary| {
+        p.entries.retain(|e| !e.spellings().any(|s| own_plain.contains(s)));
+        g.absorb(p);
+    };
+    if own.is_some()
+        && let Some(shared) = parse(GLOSSARY_YAML)
+    {
+        take(shared);
+    }
     for (name, yaml) in parts {
         if Some(*name) == course {
             continue;
         }
         if let Some(p) = parse(yaml) {
-            g.absorb(p);
+            take(p);
         }
     }
     g
@@ -101,6 +108,15 @@ pub fn course_overrides() -> serde_json::Value {
             for (term, v) in own.get(key).and_then(|v| v.as_object()).into_iter().flatten() {
                 if base.and_then(|b| b.get(term)) != Some(v) {
                     m.insert(term.clone(), v.clone());
+                }
+            }
+            // The course's plain words go as null: no peek for them there,
+            // whatever the shared table says (#271).
+            for word in &glossary_for(course).plain {
+                let lower_key = word.to_lowercase();
+                let k = if key == "exact" { word } else { &lower_key };
+                if base.is_some_and(|b| b.contains_key(k)) {
+                    m.insert(k.clone(), serde_json::Value::Null);
                 }
             }
             if !m.is_empty() {
@@ -197,5 +213,10 @@ mod tests {
         assert!(er.as_str().is_some_and(|t| t.starts_with("Estrogen receptor")), "{er}");
         // Only what differs from the shared table is sent.
         assert!(o["repro"]["exact"].get("SAAG").is_none());
+        // repro's plain mnemonics stay unexplained there (#271).
+        assert!(o["repro"]["exact"]["TIN"].is_null());
+        assert!(o["repro"]["exact"]["CAB"].is_null());
+        assert!(glossary_for("repro").find("TIN").is_none());
+        assert!(glossary().find("TIN").is_some());
     }
 }
