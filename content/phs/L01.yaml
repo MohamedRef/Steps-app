@@ -101,6 +101,37 @@ items:
       - "Prevalence is measured by a cross-sectional study."
     src: { page: 256, quote: "Looks to see if odds of prior exposure or risk factor differ by disease state. Odds ratio (OR)." }
     status: unverified
+  - id: phs.L01.094
+    kind: table
+    topic: observational-studies
+    title: "Observational studies: the book's COPD examples"
+    columns: [Book's example, Study type]
+    rows:
+      - [Patients with COPD had higher odds of a smoking history than those without COPD, Case-control]
+      - [People who smoke had a higher risk of developing COPD than people who do not, Cohort]
+      - [COPD prevalence was higher in more polluted cities, Ecological]
+    blanks: [[0, 1], [1, 1], [2, 1]]
+    src: { page: 256, quote: "Odds ratio (OR). Control the case in the OR. Patients with COPD had higher odds of a smoking history than those without COPD." }
+    status: unverified
+  - id: phs.L01.095
+    kind: card
+    topic: observational-studies
+    front: Besides comparing populations, what is an ecological study used for?
+    back: To monitor population health.
+    src: { page: 256, quote: "Measures population data not necessarily applicable to individuals (ecological fallacy). Used to monitor population health." }
+    status: unverified
+  - id: phs.L01.096
+    kind: card
+    topic: observational-studies
+    front: "On the book's past-present-future timeline, where does each observational design look?"
+    back: >-
+      Cross-sectional: the present only (compare disease prevalence by risk factor). Case-control: starts from
+      diseased cases and controls without disease, then looks back to compare risk factor frequency.
+      Retrospective cohort: reviews previous records of risk factors and compares disease incidence.
+      Prospective cohort: starts from risk factor groups now and follows them into the future to compare
+      disease incidence.
+    src: { page: 256, quote: "Retrospective cohort study Review previous records Compare disease incidence" }
+    status: unverified
   # ---------- p257: clinical therapeutic trial ----------
   - id: phs.L01.006
     kind: card
@@ -181,6 +212,30 @@ items:
       - "Analyzing by treatment received is as-treated analysis, which ↑ risk of bias."
       - "Blinding is a separate design feature."
     src: { page: 257, quote: "Attempts to avoid bias from attrition, crossover, and nonrandom noncompliance, but may dilute the true effects of intervention." }
+    status: unverified
+  - id: phs.L01.097
+    kind: card
+    topic: clinical-therapeutic-trial
+    front: What is a clinical therapeutic trial?
+    back: An experimental study in humans that compares the therapeutic benefits of 2 or more interventions (eg, treatment vs placebo, treatment vs treatment).
+    src: { page: 257, quote: "Experimental study involving humans. Compares therapeutic benefits of ≥2 interventions (eg, treatment vs placebo, treatment vs treatment)." }
+    status: unverified
+  - id: phs.L01.098
+    kind: card
+    topic: clinical-therapeutic-trial
+    front: Which clinical trial phases are open label, and which are randomized, controlled and anonymized?
+    back: Phases 0, 1 and 4 are open label. Phases 2 and 3 are randomized, controlled and anonymized.
+    src: { page: 257, quote: "Moderate number of patients with disease of interest. Randomized, controlled, anonymized. Large number of patients with disease of interest. Randomized, controlled, anonymized." }
+    status: unverified
+  - id: phs.L01.099
+    kind: card
+    topic: clinical-therapeutic-trial
+    front: Who are the subjects in phase 0 and phase 1 trials, compared with phases 2 and 3?
+    back: >-
+      Phase 0: a very small number of healthy volunteers or patients with the disease. Phase 1: a small number of
+      healthy volunteers or patients with the disease. Phases 2 and 3: only patients with the disease (moderate,
+      then large numbers).
+    src: { page: 257, quote: "Very small number of healthy volunteers or patients with disease of interest. Open label. Small number of healthy volunteers or patients with disease of interest. Open label." }
     status: unverified
   # ---------- p257: off-label ----------
   - id: phs.L01.012
@@ -384,6 +439,108 @@ items:
     back: The proportion of exposed people who become ill. If 80 people are exposed and 60 become ill, the attack rate is 75%.
     src: { page: 259, quote: "Proportion of exposed people who become ill. If 80 people in a town are exposed and 60 people become ill, attack rate is 75%." }
     status: unverified
+  - id: phs.L01.100
+    kind: card
+    topic: quantifying-risk
+    front: "Case-control study: 20/30 patients with lung cancer and 5/25 healthy controls report smoking. What is the OR, and what does it mean?"
+    back: >-
+      a = 20, c = 10, b = 5, d = 20, so OR = ad/bc = (20 × 20)/(5 × 10) = 8: patients with lung cancer are 8 times
+      more likely to have a history of smoking. "You take a case to the OR."
+    src: { page: 258, quote: "If in a case-control study, 20/30 patients with lung cancer and 5/25 healthy individuals report smoking, the OR is 8; so the patients with lung cancer are 8 times more likely to have a history of smoking. You take a case to the OR." }
+    status: unverified
+  - id: phs.L01.101
+    kind: card
+    topic: quantifying-risk
+    front: Define relative risk and interpret RR = 1, > 1 and < 1.
+    back: >-
+      RR = risk of developing disease in the exposed group ÷ risk in the unexposed group. RR = 1: no association
+      between exposure and disease. RR > 1: exposure associated with ↑ disease occurrence. RR < 1: exposure
+      associated with ↓ disease occurrence.
+    src: { page: 258, quote: "Risk of developing disease in the exposed group divided by risk in the unexposed group. RR = 1 → no association between exposure and disease. RR > 1 → exposure associated with ↑ disease occurrence. RR < 1 → exposure associated with ↓ disease occurrence." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L01.102
+    kind: card
+    topic: quantifying-risk
+    front: "5/10 people exposed to radiation and 1/10 people not exposed are diagnosed with cancer. What is the RR?"
+    back: "RR = (5/10)/(1/10) = 5: people exposed to radiation have a 5 times greater risk of developing cancer."
+    src: { page: 258, quote: "If 5/10 people exposed to radiation are diagnosed with cancer, and 1/10 people not exposed to radiation are diagnosed with cancer, the RR is 5; so people exposed to radiation have a 5 times greater risk of developing cancer." }
+    status: unverified
+  - id: phs.L01.103
+    kind: card
+    topic: quantifying-risk
+    front: "Define relative risk reduction. 2% of vaccinated and 8% of unvaccinated patients get the flu: what are RR and RRR?"
+    back: >-
+      RRR is the proportion of risk reduction attributable to the intervention (ART) compared with a control (ARC):
+      RRR = 1 – RR = (ARC – ART)/ARC. Here RR = 2/8 = 0.25 and RRR = 0.75.
+    src: { page: 258, quote: "The proportion of risk reduction attributable to the intervention/ treatment (ART) as compared to a control (ARC). If 2% of patients who receive a flu shot develop the flu, while 8% of unvaccinated patients develop the flu, then RR = 2/8 = 0.25, and RRR = 0.75." }
+    status: unverified
+  - id: phs.L01.104
+    kind: card
+    topic: quantifying-risk
+    front: "Risk of lung cancer is 21% in people who smoke and 1% in people who don't. What is the attributable risk?"
+    back: "20% (21% – 1%): attributable risk is the difference in risk between exposed and unexposed groups."
+    src: { page: 258, quote: "If risk of lung cancer in people who smoke is 21% and risk in people who don’t smoke is 1%, then the attributable risk is 20%." }
+    status: unverified
+  - id: phs.L01.105
+    kind: card
+    topic: quantifying-risk
+    front: "8% of people given a placebo vaccine and 2% given a flu vaccine get the flu. What is the ARR?"
+    back: "ARR = 8% – 2% = 6% = 0.06 (a difference in risk, not a proportion)."
+    src: { page: 258, quote: "If 8% of people who receive a placebo vaccine develop the flu vs 2% of people who receive a flu vaccine, then ARR = 8%–2% = 6% = 0.06." }
+    status: unverified
+  - id: phs.L01.106
+    kind: card
+    topic: quantifying-risk
+    front: Define number needed to treat. Is a lower or a higher NNT better?
+    back: "The number of patients who need to be treated for 1 patient to benefit (NNT = 1/ARR). A lower number = a better treatment."
+    src: { page: 258, quote: "Number of patients who need to be treated for 1 patient to benefit. Lower number = better treatment." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L01.107
+    kind: card
+    topic: quantifying-risk
+    front: Define number needed to harm. Is a lower or a higher NNH safer?
+    back: "The number of patients who need to be exposed to a risk factor for 1 patient to be harmed (NNH = 1/AR). A higher number = a safer exposure."
+    src: { page: 258, quote: "Number of patients who need to be exposed to a risk factor for 1 patient to be harmed. Higher number = safer exposure." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L01.108
+    kind: card
+    topic: quantifying-risk
+    front: "Define case fatality rate. 4 patients die among 10 cases of meningitis: what is the CFR?"
+    back: "The percentage of deaths among those with the disease (CFR% = deaths/cases × 100). Here 4/10 = 40%."
+    src: { page: 258, quote: "Percentage of deaths occurring among those with disease. If 4 patients die among 10 cases of meningitis, case fatality rate is 40%." }
+    status: unverified
+  - id: phs.L01.109
+    kind: card
+    topic: quantifying-risk
+    front: "Define mortality rate. 80 people in a town of 10,000 die over 2 years: what is the mortality rate?"
+    back: "The number of deaths (in general or from a specific cause) in a population over a defined period, as deaths/1000 people per year. Here 80/10,000 over 2 years = 4 per 1000 per year."
+    src: { page: 259, quote: "Number of deaths (in general or due to specific cause) within a population over a defined period. If 80 people in a town of 10,000 die over 2 years, mortality rate is 4 per 1000 per year." }
+    status: unverified
+  - id: phs.L01.110
+    kind: mcq
+    topic: quantifying-risk
+    stem: >-
+      In a randomized trial of a new anticoagulant after knee replacement, deep venous thrombosis occurs in 4% of
+      patients given the drug and in 16% of patients given placebo. Which of the following is the relative risk
+      reduction with the drug?
+    options:
+      - "0.75"
+      - "0.25"
+      - "0.12"
+      - "8"
+      - "4"
+    answer: 0
+    why:
+      - "Right. RR = 4%/16% = 0.25, and RRR = 1 – RR = 0.75 (or (ARC – ART)/ARC = 12/16)."
+      - "0.25 is the RR, not the RRR."
+      - "0.12 is the absolute risk reduction (16% – 4%)."
+      - "8 is roughly the NNT (1/0.12 ≈ 8.3), not the RRR."
+      - "4 is the inverse of the RR (16/4), not a risk reduction."
+    src: { page: 258, quote: "The proportion of risk reduction attributable to the intervention/ treatment (ART) as compared to a control (ARC)." }
+    status: unverified
   # ---------- p259: demographic transition ----------
   - id: phs.L01.025
     kind: table
@@ -418,6 +575,13 @@ items:
       - "A stable population has a ↓ (not ↓↓) birth rate and a column shape."
       - "Life expectancy is long in developed countries."
       - "Mortality declines with development."
+    src: { page: 259, quote: "As a country proceeds to higher levels of development, birth and mortality rates decline to varying degrees, changing the age composition of the population." }
+    status: unverified
+  - id: phs.L01.111
+    kind: card
+    topic: demographic-transition
+    front: What is the demographic transition?
+    back: As a country develops, its birth and mortality rates fall to varying degrees, which changes the age composition of the population.
     src: { page: 259, quote: "As a country proceeds to higher levels of development, birth and mortality rates decline to varying degrees, changing the age composition of the population." }
     status: unverified
   # ---------- p259: likelihood ratio ----------
@@ -494,6 +658,12 @@ items:
       - "ANOVA compares means of 3 or more groups."
     src: { page: 259, quote: "P value for the survival difference can be calculated using log rank test or Cox regression." }
     status: unverified
+  - id: phs.L01.112
+    kind: cloze
+    topic: kaplan-meier-curve
+    text: "A Kaplan-Meier curve estimates the probability of {{c1::survival over time}}; the outcome can be any event, but it is frequently {{c2::mortality}}."
+    src: { page: 259, quote: "Used to estimate probability of survival over time. Graphic representation shows the survival probabilities (y-axis) vs length of time (x-axis). Useful for displaying “time-to-event” data. Outcomes examined may include any event, but frequently include mortality." }
+    status: unverified
   # ---------- p260: hazard ratio ----------
   - id: phs.L01.032
     kind: card
@@ -530,6 +700,13 @@ items:
       - "The HR compares rates between groups; it is not a proportion of patients."
       - "The 95% CI excludes 1, so the result is significant."
     src: { page: 260, quote: "HR < 1—event occurs less frequently in the treatment/exposure group (protective effect)." }
+    status: unverified
+  - id: phs.L01.113
+    kind: card
+    topic: hazard-ratio
+    front: What is a hazard ratio?
+    back: A measure of how often a particular event (eg, death, relapse) occurs in one group compared with another, over time.
+    src: { page: 260, quote: "Measure of how often a particular event (eg, death, relapse) occurs in one group compared with another, over time." }
     status: unverified
   # ---------- p260: diagnostic tests ----------
   - id: phs.L01.035
@@ -633,6 +810,47 @@ items:
       - "Sensitivity and specificity are fixed for a given cutoff; changing the cutoff changes them."
     src: { page: 260, quote: "Lowering the cutoff value: B A (↑ FP FN)" }
     status: unverified
+  - id: phs.L01.114
+    kind: card
+    topic: evaluation-of-diagnostic-tests
+    front: Define sensitivity. What does a value near 100% mean?
+    back: >-
+      The proportion of all people with disease who test positive (the ability to correctly identify those with the
+      disease). A value near 100% is desirable for ruling OUT disease and means a low false-negative rate.
+    src: { page: 260, quote: "Proportion of all people with disease who test positive, or the ability of a test to correctly identify those with the disease. Value approaching 100% is desirable for ruling out disease and indicates a low false-negative rate." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L01.115
+    kind: card
+    topic: evaluation-of-diagnostic-tests
+    front: Define specificity. What does a value near 100% mean?
+    back: >-
+      The proportion of all people without disease who test negative (the ability to correctly identify those
+      without the disease). A value near 100% is desirable for ruling IN disease and means a low false-positive rate.
+    src: { page: 260, quote: "Proportion of all people without disease who test negative, or the ability of a test to correctly identify those without the disease. Value approaching 100% is desirable for ruling in disease and indicates a low false-positive rate." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L01.116
+    kind: card
+    topic: evaluation-of-diagnostic-tests
+    front: Define positive predictive value.
+    back: The probability that a person with a positive test result actually has the disease (PPV = TP/(TP + FP)).
+    src: { page: 260, quote: "Probability that a person who has a positive test result actually has the disease. PPV = TP / (TP + FP)" }
+    status: unverified
+  - id: phs.L01.117
+    kind: card
+    topic: evaluation-of-diagnostic-tests
+    front: Define negative predictive value.
+    back: The probability that a person with a negative test result actually does not have the disease (NPV = TN/(TN + FN)).
+    src: { page: 260, quote: "Probability that a person with a negative test result actually does not have the disease. NPV = TN / (TN + FN)" }
+    status: unverified
+  - id: phs.L01.118
+    kind: card
+    topic: evaluation-of-diagnostic-tests
+    front: "In the book's cutoff figure (two overlapping curves, disease present vs absent), what are cutoffs A, B and C?"
+    back: "A = the 100% sensitivity cutoff. B = a practical compromise between specificity and sensitivity. C = the 100% specificity cutoff."
+    src: { page: 260, quote: "A = 100% sensitivity cutoff value B = practical compromise between speciﬁcity and sensitivity C = 100% speciﬁcity cutoff value" }
+    status: unverified
   # ---------- p261: ROC ----------
   - id: phs.L01.042
     kind: card
@@ -663,6 +881,12 @@ items:
       - "A higher AUC means better discrimination, with high sensitivity at low false-positive rates."
       - "AUC = 0.5 is the no-predictive-value diagonal."
     src: { page: 261, quote: "The better performing test will have a higher area under the curve (AUC), with the curve closer to the upper left corner." }
+    status: unverified
+  - id: phs.L01.119
+    kind: cloze
+    topic: roc-curve
+    text: "An ROC curve shows how well a diagnostic test can {{c1::distinguish between 2 groups}} (eg, disease vs healthy); a test with no predictive value has an AUC of {{c2::0.5}}, and an actual test lies between 0.5 and 1."
+    src: { page: 261, quote: "ROC curve demonstrates how well a diagnostic test can distinguish between 2 groups (eg, disease vs healthy)." }
     status: unverified
   # ---------- p261: precision vs accuracy ----------
   - id: phs.L01.044
@@ -754,6 +978,26 @@ items:
       - "Both rise with ↑ diagnostic sensitivity, not with longer survival."
     src: { page: 262, quote: "↑ survival time — ↑" }
     status: unverified
+  - id: phs.L01.120
+    kind: cloze
+    topic: incidence-vs-prevalence
+    text: "The exact relation is prevalence ÷ ({{c1::1 – prevalence}}) = incidence rate × {{c2::average duration of disease}}."
+    src: { page: 262, quote: "Prevalence Incidence rate × average duration 1 – prevalence = of disease" }
+    status: unverified
+  - id: phs.L01.121
+    kind: cloze
+    topic: incidence-vs-prevalence
+    text: "Incidence looks at {{c1::new}} cases (incidents); prevalence looks at {{c2::all current}} cases."
+    src: { page: 262, quote: "Incidence looks at new cases (incidents)." }
+    status: unverified
+  - id: phs.L01.122
+    kind: card
+    topic: incidence-vs-prevalence
+    front: How does prevalence relate to pretest probability and to PPV and NPV?
+    back: Prevalence ≈ pretest probability, so ↑ prevalence → ↑ PPV and ↓ NPV.
+    src: { page: 262, quote: "Prevalence ∼ pretest probability. ↑ prevalence → ↑ PPV and ↓ NPV." }
+    status: unverified
+    tags: [high-yield]
   # ---------- p263: bias ----------
   - id: phs.L01.050
     kind: table
@@ -809,6 +1053,73 @@ items:
       - "Observer-expectancy is a researcher's belief altering the outcome."
     src: { page: 263, quote: "Lead-time bias Early detection interpreted as ↑ survival, but the disease course has not changed" }
     status: unverified
+  - id: phs.L01.123
+    kind: table
+    topic: bias-and-study-errors
+    title: "Bias: the book's example for each type"
+    columns: [Book's example, Bias]
+    rows:
+      - [Patients with disease recall exposure after learning of similar cases, Recall bias]
+      - [Using a faulty automatic sphygmomanometer, Measurement bias]
+      - [Patients in the treatment group spend more time in highly specialized hospital units, Procedure bias]
+      - [An observer expecting the treatment group to recover is more likely to document positive outcomes, Observer-expectancy bias]
+      - ["Breast cancer diagnosed early by mammography seems to survive longer, because the cancer is known for longer", Lead-time bias]
+      - [A slowly progressive cancer is more likely to be detected by screening than a rapidly progressive one, Length-time bias]
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
+    src: { page: 263, quote: "Patients in treatment group spend more time in highly specialized hospital units" }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L01.124
+    kind: card
+    topic: bias-and-study-errors
+    front: The book groups biases by the stage of a study. Which biases belong to each stage?
+    back: >-
+      Recruiting participants: selection bias. Performing the study: recall, measurement, procedure and
+      observer-expectancy bias. Interpreting results: lead-time and length-time bias.
+    src: { page: 263, quote: "Interpreting results Lead-time bias Early detection interpreted as ↑ survival, but the disease course has not changed" }
+    status: unverified
+  - id: phs.L01.125
+    kind: card
+    topic: bias-and-study-errors
+    front: How does randomization reduce selection bias?
+    back: It creates groups with similar distributions of both known and unknown variables.
+    src: { page: 263, quote: "Randomization (creates groups with similar distributions of known and unknown variables)" }
+    status: unverified
+  - id: phs.L01.126
+    kind: card
+    topic: bias-and-study-errors
+    front: "How do you reduce lead-time bias, and what is the caveat?"
+    back: Measure "back-end" survival (adjust survival for the severity of disease at diagnosis); adjusting for severity can mask causality.
+    src: { page: 263, quote: "Measure “back-end” survival (adjust survival according to the severity of disease at the time of diagnosis); a caveat of adjusting for severity is the potential masking of causality" }
+    status: unverified
+  - id: phs.L01.127
+    kind: cloze
+    topic: bias-and-study-errors
+    text: "The Hawthorne effect (participants change behavior when aware of being observed; \"Hawthorne watches you like a hawk\") is an example of {{c1::measurement bias}}."
+    src: { page: 263, quote: "Hawthorne effect—participants change behavior upon awareness of being observed (Hawthorne watches you like a hawk)." }
+    status: unverified
+  - id: phs.L01.128
+    kind: mcq
+    topic: bias-and-study-errors
+    stem: >-
+      Investigators interview mothers of 150 infants born with cleft palate and mothers of 300 healthy infants
+      about medications taken during pregnancy. Mothers of affected infants, who have read about similar cases,
+      report far more over-the-counter drug use. Which change to the study design would best reduce this bias?
+    options:
+      - Use prenatal medical records as the source of exposure data
+      - Recruit the controls from hospital wards
+      - Blind the investigators to the hypothesis
+      - Enlarge the sample to increase power
+      - Stratify the analysis by maternal age
+    answer: 0
+    why:
+      - "Right. This is recall bias (awareness of the disorder alters recall); use medical records and shorten the time from exposure to follow-up."
+      - "Hospital controls introduce Berkson (selection) bias rather than fixing recall."
+      - "Blinding reduces procedure and observer-expectancy bias, not the subjects' recall."
+      - "A bigger sample improves power but does not remove a systematic recall error."
+      - "Stratification handles confounding or effect modification, not recall bias."
+    src: { page: 263, quote: "Recall bias Awareness of disorder alters recall by subjects; common in retrospective studies Patients with disease recall exposure after learning of similar cases Decrease time from exposure to follow-up; use medical records as sources" }
+    status: unverified
   # ---------- p264: confounding vs effect modification ----------
   - id: phs.L01.053
     kind: table
@@ -846,6 +1157,24 @@ items:
       - "A confounder is not on a causal pathway; matches do not cause smoking-related cancer."
     src: { page: 264, quote: "Coffee appears to be linked to lung cancer, but smoking is the true cause, as coffee drinkers tend to smoke more" }
     status: unverified
+  - id: phs.L01.129
+    kind: card
+    topic: confounding-vs-effect-modification
+    front: What three strategies reduce confounding?
+    back: >-
+      Crossover studies (each subject serves as their own control); matching (patients with similar
+      characteristics in both treatment and control groups); analytic techniques (eg, regression analysis when the
+      confounders are known and were measured).
+    src: { page: 264, quote: "Crossover studies (subject serves as self-control) Matching (patients with similar characteristics in both treatment and control groups) Analytic techniques (eg, regression analysis when confounding variables are known and were measured)" }
+    status: unverified
+  - id: phs.L01.130
+    kind: card
+    topic: confounding-vs-effect-modification
+    front: After stratification, how do confounding and effect modification look different?
+    back: "Confounding: the association disappears in every stratum. Effect modification: the association is strong in one subgroup and weak or absent in the other."
+    src: { page: 264, quote: "Note: Association was strong in one subgroup with weak/no association in the other subgroup." }
+    status: unverified
+    tags: [high-yield]
   # ---------- p265: statistical distribution ----------
   - id: phs.L01.055
     kind: card
@@ -925,6 +1254,19 @@ items:
       - "A lower mean than median is negative skew."
     src: { page: 265, quote: "For skewed data, median is a better measure of central tendency than mean." }
     status: unverified
+  - id: phs.L01.131
+    kind: cloze
+    topic: statistical-distribution
+    text: "Mean = {{c1::sum of values ÷ total number of values}}. Median = {{c2::the middle value of the data sorted from least to greatest}} (with an even number of values, the average of the middle two). Mode = {{c3::the most common value}}."
+    src: { page: 265, quote: "Mean = (sum of values)/(total number of values). Most affected by outliers (extreme values). Median = middle value of a list of data sorted from least to greatest. If there is an even number of values, the median will be the average of the middle two values. Mode = most common value." }
+    status: unverified
+  - id: phs.L01.132
+    kind: card
+    topic: statistical-distribution
+    front: For skewed data, which measure of central tendency is better?
+    back: The median is a better measure than the mean.
+    src: { page: 265, quote: "For skewed data, median is a better measure of central tendency than mean." }
+    status: unverified
   # ---------- p265: hypothesis testing ----------
   - id: phs.L01.060
     kind: card
@@ -962,6 +1304,12 @@ items:
       - "It says nothing about individual responders."
       - "It says nothing about the proportion of patients who respond."
     src: { page: 265, quote: "P value Probability of obtaining test results at least as extreme as those observed in the sample, assuming that H0 is correct." }
+    status: unverified
+  - id: phs.L01.133
+    kind: cloze
+    topic: statistical-hypothesis-testing
+    text: "A P value cutoff of 0.05 means that fewer than {{c1::5%}} of such repeated tests would show results that extreme {{c2::by chance alone}}."
+    src: { page: 265, quote: "Commonly accepted as 0.05 (<5% of such repeated tests would show results that extreme just by chance alone)." }
     status: unverified
   # ---------- p266: testing errors ----------
   - id: phs.L01.062
@@ -1035,6 +1383,22 @@ items:
       - "Confounding distorts an association; here the issue is sample size."
     src: { page: 266, quote: "If you ↑ sample size, you ↑ power. There is power in numbers." }
     status: unverified
+  - id: phs.L01.134
+    kind: card
+    topic: testing-errors
+    front: In the 2 × 2 grid of reality vs study result, which are the two correct results, and which cell is power?
+    back: >-
+      Stating there is an effect when one exists (H0 rejected in favor of H1): this cell is power (1 – β).
+      Stating there is no effect when none exists (H0 not rejected). The wrong cells are α (type I) and β (type II).
+    src: { page: 266, quote: "Correct result Stating that there is an effect or difference when one exists (H0 rejected in favor of H1). Stating that there is no effect or difference when none exists (H0 not rejected)." }
+    status: unverified
+  - id: phs.L01.135
+    kind: card
+    topic: testing-errors
+    front: "If P < α, what do you conclude and why?"
+    back: "Assuming H0 is true, the chance of getting these results is smaller than the chance of a type I error, so H0 is rejected as false."
+    src: { page: 266, quote: "If P < α, then assuming H0 is true, the probability of obtaining the test results would be less than the probability of making a type I error. H0 is therefore rejected as false." }
+    status: unverified
   # ---------- p266: statistical vs clinical significance ----------
   - id: phs.L01.066
     kind: card
@@ -1063,6 +1427,13 @@ items:
       - "A large sample increases power; it does not make the result a false positive."
       - "You can never prove H1, only reject H0."
     src: { page: 266, quote: "eg, a study might show a statistical significance of lowered blood sugar levels by 1 mg/dL correlated with better outcomes, but this may not be clinically as important." }
+    status: unverified
+  - id: phs.L01.136
+    kind: card
+    topic: statistical-vs-clinical-significance
+    front: What does high statistical significance mean, and what does high clinical significance mean?
+    back: High statistical significance = a low probability that the results are due to chance. High clinical significance = the intervention is likely to have a large impact on patient outcomes.
+    src: { page: 266, quote: "If there is a high statistical significance, then there is a low probability that the results are due to chance. Clinical significance—measure of effect on treatment outcomes. An intervention with high clinical significance is likely to have a large impact on patient outcomes/measures." }
     status: unverified
   # ---------- p267: confidence interval ----------
   - id: phs.L01.068
@@ -1211,4 +1582,36 @@ items:
       - "Fisher's exact test compares 2 proportions in small samples."
       - "The log rank test compares survival curves."
     src: { page: 267, quote: "ANOVA Checks differences between means of 3 or more groups." }
+    status: unverified
+  - id: phs.L01.137
+    kind: card
+    topic: common-statistical-tests
+    front: "Walk the book's flowchart: how do you choose between t-test, ANOVA, chi-square and Fisher's exact test?"
+    back: >-
+      Numerical variables (means): 2 groups → t-test; ≥ 3 groups → ANOVA. Categorical variables (proportions):
+      large sample → chi-square; small sample → Fisher's exact test.
+    src: { page: 267, quote: "Categorical (proportions) Numerical (means) t-test Variables to be compared 2 groups ≥ 3 groups ANOVA Chi-square test Large sample size Small sample size Fisher’s exact test" }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L01.138
+    kind: mcq
+    topic: common-statistical-tests
+    stem: >-
+      A resident at a rural clinic records whether each of 12 smokers and 10 nonsmokers attending a chest clinic
+      has chronic cough (yes or no). She wants to know whether the proportion with cough differs between the two
+      groups. Which statistical test is most appropriate?
+    options:
+      - Fisher's exact test
+      - Chi-square test
+      - t-test
+      - ANOVA
+      - Log rank test
+    answer: 0
+    why:
+      - "Right. Two proportions of a categorical outcome in a small sample: Fisher's exact test is used instead of chi-square."
+      - "Chi-square compares categorical proportions in large samples."
+      - "A t-test compares the means of 2 groups, not proportions."
+      - "ANOVA compares the means of 3 or more groups."
+      - "The log rank test compares Kaplan-Meier survival curves."
+    src: { page: 267, quote: "Fisher’s exact test Checks differences between 2 percentages or proportions of categorical, nominal outcomes. Use instead of chi-square test with small samples." }
     status: unverified
