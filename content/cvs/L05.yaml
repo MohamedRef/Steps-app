@@ -36,6 +36,14 @@ items:
     src: { page: 321, quote: "Predisposed by Virchow triad (SHE): Stasis (eg, post-op, long drive/flight) Hypercoagulability (eg, defect in coagulation cascade proteins, such as factor V Leiden; oral contraceptive use; pregnancy) Endothelial damage (exposed collagen triggers clotting cascade)" }
     status: unverified
     tags: [high-yield]
+  - id: cvs.L05.120
+    kind: card
+    topic: deep-venous-thrombosis
+    front: "What is a DVT, and how does it present?"
+    back: "A blood clot in a deep vein, giving a swollen, red, warm and painful limb."
+    src: { page: 321, quote: "Blood clot within a deep vein → swelling, redness A , warmth, pain." }
+    status: unverified
+    tags: [high-yield]
   - id: cvs.L05.002
     kind: card
     topic: deep-venous-thrombosis
@@ -132,7 +140,7 @@ items:
       - "Loop diuretics also cause gout flares."
       - "Right. In hypertension with gout, avoid loop and thiazide diuretics; use ACE inhibitors, CCBs or ARBs, especially losartan."
       - "More thiazide means more gout flares."
-      - "Propranolol isn't the preferred agent here."
+      - "β-blockers aren't on First Aid's list for hypertension with gout (ACE inhibitors, CCBs, ARBs), and adding one leaves the gout-provoking thiazide in place."
       - "Chlorthalidone is a thiazide-like diuretic and also triggers gout."
     src: { page: 321, quote: "ACE inhibitors, channel blockers, ARBs (especially losartan). Ca2+ Avoid loop and thiazide diuretics as these can cause gout flares." }
     status: unverified
@@ -183,23 +191,23 @@ items:
     kind: mcq
     topic: cardiovascular-agents-molecular-targets
     stem: >-
-      A 64-year-old man with ischemic cardiomyopathy is admitted with cool extremities, hypotension and
-      worsening dyspnea. His cardiac index is low despite diuresis, so an IV inotrope and vasodilator is
-      started that does not act on adrenergic receptors. Which of the following is the drug's most direct
-      molecular effect?
+      A 64-year-old man with ischemic cardiomyopathy is admitted to the cardiac care unit with worsening
+      dyspnea, cool extremities and a blood pressure of 96/60 mm Hg. An intravenous infusion of milrinone is
+      started, and his systemic vascular resistance falls over the next hour. Which of the following best
+      explains the drug's effect on vascular smooth muscle?
     options:
-      - Inhibition of PDE-3, which raises cAMP
-      - Inhibition of PDE-5, which raises cGMP
-      - Stimulation of the natriuretic peptide receptor
-      - Blockade of L-type voltage-gated Ca2+ channels
-      - Stimulation of Gq-coupled receptors
+      - It inhibits PDE-3, so cAMP is not broken down
+      - It inhibits PDE-5, so cGMP is not broken down
+      - It activates guanylate cyclase, so cGMP rises
+      - It blocks L-type Ca2+ channels, so Ca2+ entry falls
+      - It activates Gs-coupled receptors, so cAMP is made
     answer: 0
     why:
-      - "Right. Milrinone inhibits PDE-3, so cAMP is not broken down: more contractility in the heart and relaxation of vascular smooth muscle."
-      - "Sildenafil is the PDE-5 inhibitor; it is not an inotrope."
-      - "ANP and BNP act there; they relax vessels but do not raise contractility."
-      - "L-type channel blockade lowers contractility, the opposite of what this patient needs."
-      - "Gq agonists (eg, angiotensin II, vasopressin) contract vascular smooth muscle."
+      - "Right. In the p322 figure milrinone is the PDE-3 inhibitor: cAMP is not broken down to AMP, so vascular smooth muscle relaxes and resistance falls."
+      - "PDE-5 inhibition is sildenafil's action in the figure, not milrinone's."
+      - "Activating the natriuretic peptide receptor, a guanylate cyclase, is how ANP and BNP relax vessels."
+      - "L-type channel blockade is the calcium channel blocker mechanism (p323)."
+      - "Gs agonists (eg, epinephrine at β2, prostacyclin, fenoldopam) raise cAMP by stimulating adenylate cyclase; milrinone instead stops cAMP from being broken down."
     src: { page: 322, quote: "Milrinone PDE-3 INHIBITOR Sildenafil PDE-5 INHIBITOR" }
     status: unverified
   # ---------- p322: nitrates ----------
@@ -242,7 +250,7 @@ items:
       - Hypertrophic cardiomyopathy
       - Concurrent PDE-5 inhibitor use
     pass: 3
-    hook: "التلاتة محتاجين preload: الـ RV infarct، والـ HCM، والـ sildenafil هيوقّع الضغط معاه."
+    hook: "تلاتة ممنوع معاهم الـ nitrates: قلب يمين مضروب (RV infarction)، وقلب تخين (HCM)، وحباية PDE-5 inhibitor في نفس الوقت."
     src: { page: 322, quote: "Contraindicated in right ventricular infarction, hypertrophic cardiomyopathy, and with concurrent PDE-5 inhibitor use." }
     status: unverified
     tags: [high-yield]
@@ -275,6 +283,22 @@ items:
     front: Which calcium channel blockers are dihydropyridines and which are nondihydropyridines, and where does each act?
     back: "Dihydropyridines (amlodipine, clevidipine, nicardipine, nifedipine, nimodipine): vascular smooth muscle. Nondihydropyridines (diltiazem, verapamil): heart."
     src: { page: 323, quote: "Amlodipine, clevidipine, nicardipine, nifedipine, nimodipine (dihydropyridines, act on vascular smooth muscle); diltiazem, verapamil (nondihydropyridines, act on heart)." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.118
+    kind: card
+    topic: calcium-channel-blockers
+    front: "What is the mechanism of calcium channel blockers?"
+    back: "They block voltage-dependent L-type Ca2+ channels in cardiac and smooth muscle, so the muscle contracts less forcefully."
+    src: { page: 323, quote: "Block voltage-dependent L-type calcium channels of cardiac and smooth muscle → ↓ muscle contractility." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.119
+    kind: card
+    topic: calcium-channel-blockers
+    front: "Which vessels do dihydropyridine calcium channel blockers (amlodipine, nifedipine) mainly dilate?"
+    back: "Arteries, which fits their use in hypertension, angina and Raynaud phenomenon."
+    src: { page: 323, quote: "Dihydropyridine mainly dilates arteries." }
     status: unverified
     tags: [high-yield]
   - id: cvs.L05.016
@@ -397,6 +421,7 @@ items:
     back: Labetalol, clevidipine, fenoldopam, nicardipine, nitroprusside.
     src: { page: 323, quote: "Treat with labetalol, clevidipine, fenoldopam, nicardipine, nitroprusside." }
     status: unverified
+    tags: [high-yield]
   - id: cvs.L05.024
     kind: card
     topic: hypertensive-emergency
@@ -436,7 +461,7 @@ items:
     why:
       - "Methemoglobinemia causes chocolate-colored blood and cyanosis, classically with nitrates."
       - "Right. Nitroprusside releases cyanide; cyanide blocks oxygen use, causing lactic acidosis and highly oxygenated venous blood."
-      - "Hyperkalemia isn't a nitroprusside effect named here."
+      - "Nitroprusside's danger is the cyanide it releases; hyperkalemia would not explain bright red venous blood (oxygen left unused by the tissues) or the lactic acidosis."
       - "Lupus is a hydralazine effect."
       - "Rebound hypertension follows abrupt withdrawal of drugs such as clonidine; it gives no lactic acidosis or bright red venous blood."
     src: { page: 323, quote: "Can cause cyanide toxicity (releases cyanide)." }
@@ -506,8 +531,14 @@ items:
   - id: cvs.L05.031
     kind: cloze
     topic: ranolazine
-    text: "Ranolazine is used for {{c1::refractory angina}}. Adverse effects: constipation, dizziness, headache, nausea and {{c2::QT prolongation}}."
-    src: { page: 324, quote: "Refractory angina. AdvERSE EFFECTS Constipation, dizziness, headache, nausea, QT prolongation." }
+    text: "Ranolazine is used for {{c1::refractory angina}}."
+    src: { page: 324, quote: "Refractory angina." }
+    status: unverified
+  - id: cvs.L05.122
+    kind: cloze
+    topic: ranolazine
+    text: "Ranolazine adverse effects: constipation, dizziness, headache, nausea and {{c1::QT prolongation}}."
+    src: { page: 324, quote: "Constipation, dizziness, headache, nausea, QT prolongation." }
     status: unverified
   - id: cvs.L05.032
     kind: mcq
@@ -621,8 +652,14 @@ items:
   - id: cvs.L05.041
     kind: cloze
     topic: lipid-lowering-agents
-    text: "Bile acid resin adverse effects: GI upset and ↓ absorption of {{c1::other drugs and fat-soluble vitamins}}. They raise triglycerides {{c2::slightly}}."
+    text: "Bile acid resin adverse effects: GI upset and ↓ absorption of {{c1::other drugs and fat-soluble vitamins}}."
     src: { page: 324, quote: "GI upset, ↓ absorption of other drugs and fat-soluble vitamins" }
+    status: unverified
+  - id: cvs.L05.123
+    kind: cloze
+    topic: lipid-lowering-agents
+    text: "Bile acid resins lower LDL (↓↓) but raise HDL and triglycerides only {{c1::slightly}}."
+    src: { page: 324, quote: "Bile acid resins Cholestyramine, colesevelam, colestipol slightly slightly" }
     status: unverified
   - id: cvs.L05.042
     kind: card
@@ -662,7 +699,7 @@ items:
       - Hyperglycemia
       - Hyperuricemia
     pass: 3
-    hook: "النياسين بيحمّر الوش، وبيعلّي السكر، وبيعلّي اليوريك: وش أحمر وسكر ونقرس."
+    hook: "النياسين بيعلّي 3 حاجات: حُمرة الوش، والسكر، واليوريك."
     src: { page: 325, quote: "Flushed face (prostaglandin mediated; ↓ by NSAIDs or long-term use) Hyperglycemia Hyperuricemia" }
     status: unverified
     tags: [high-yield]
@@ -760,6 +797,7 @@ items:
     text: "Digoxin is used in HF (↑ {{c1::contractility}}) and in atrial fibrillation (↓ conduction at the {{c2::AV node}} and depression of the SA node)."
     src: { page: 326, quote: "HF (↑ contractility); atrial fibrillation (↓ conduction at AV node and depression of SA node)" }
     status: unverified
+    tags: [high-yield]
   - id: cvs.L05.054
     kind: enumerate
     topic: digoxin
@@ -938,10 +976,16 @@ items:
   - id: cvs.L05.069
     kind: cloze
     topic: class-i-antiarrhythmics
-    text: "Class IB is used for acute ventricular arrhythmias (especially {{c1::post-MI}}) and {{c2::digitalis-induced arrhythmias}}. Adverse effects: CNS stimulation or depression, cardiovascular depression."
-    src: { page: 326, quote: "Acute ventricular arrhythmias (especially post MI), digitalis-induced arrhythmias." }
+    text: "Class IB is used for acute ventricular arrhythmias, especially {{c1::post-MI}} (First Aid: \"IB is Best post-MI\"), and for {{c2::digitalis-induced arrhythmias}}."
+    src: { page: 326, quote: "Acute ventricular arrhythmias (especially post MI), digitalis-induced arrhythmias. IB is Best post-MI." }
     status: unverified
     tags: [high-yield]
+  - id: cvs.L05.121
+    kind: cloze
+    topic: class-i-antiarrhythmics
+    text: "Class IB adverse effects: {{c1::CNS stimulation or depression}} and {{c2::cardiovascular depression}}."
+    src: { page: 326, quote: "CNS stimulation/depression, cardiovascular depression." }
+    status: unverified
   - id: cvs.L05.070
     kind: enumerate
     topic: class-i-antiarrhythmics
@@ -1038,7 +1082,7 @@ items:
       - Dofetilide
     answer: 2
     why:
-      - "Amiodarone can be used in AF and in structural heart disease."
+      - "Amiodarone is a class III drug used for atrial fibrillation; First Aid's contraindication in structural and ischemic heart disease belongs to class IC, not class III."
       - "Digoxin slows AV conduction in AF and helps HF."
       - "Right. Class IC drugs are proarrhythmic post-MI and contraindicated in structural and ischemic heart disease."
       - "β-blockers control rate in AF and are given post-MI."
@@ -1196,6 +1240,7 @@ items:
     text: "Sotalol causes {{c1::torsades de pointes}} and excessive β blockade. Ibutilide causes {{c2::torsades de pointes}}."
     src: { page: 328, quote: "Sotalol—torsades de pointes, excessive β blockade. Ibutilide—torsades de pointes." }
     status: unverified
+    tags: [high-yield]
   - id: cvs.L05.089
     kind: enumerate
     topic: class-iii-antiarrhythmics
@@ -1209,7 +1254,7 @@ items:
       - Constipation
       - Cardiovascular (bradycardia, heart block, HF)
     pass: 5
-    hook: "الأميودارون بيلف الجسم كله: الرئة تتليف، والكبد، والغدة يا تقل يا تزيد، والعين والجلد يزرقّوا."
+    hook: "الأميودارون بيلف الجسم كله في 7 محطات: الرئة تتليف، والكبد يتعب، والغدة يا تقل يا تزيد (iodine)، والـ hapten يعمل deposits في القرنية وجلد أزرق رمادي، والأعصاب، والإمساك، والقلب (bradycardia و block و HF)."
     src: { page: 328, quote: "Amiodarone—pulmonary fibrosis, hepatotoxicity, hypothyroidism or hyperthyroidism (amiodarone is 40% iodine by weight)" }
     status: unverified
     tags: [high-yield]
@@ -1265,7 +1310,7 @@ items:
     why:
       - "Right. Class III drugs block K+ channels, ↑ AP duration and QT, and sotalol causes torsades de pointes."
       - "Class IV drugs slow AV conduction; they do not cause torsades."
-      - "Class IC drugs do not affect ERP in Purkinje tissue."
+      - "Strong Na+ channel block is class IC, which leaves the ERP of Purkinje and ventricular tissue unchanged and barely changes AP duration, so it does not lengthen the QT that sets up torsades; sotalol is class III."
       - "That is digoxin."
       - "That is ivabradine."
     src: { page: 328, quote: "Sotalol—torsades de pointes, excessive β blockade." }
@@ -1282,7 +1327,13 @@ items:
   - id: cvs.L05.095
     kind: cloze
     topic: class-iv-antiarrhythmics
-    text: "Class IV drugs are used for {{c1::rate control in atrial fibrillation/flutter}} and prevention of nodal arrhythmias. Adverse effects: constipation, {{c2::gingival hyperplasia}}, flushing, edema, and HF, AV block and sinus node depression."
+    text: "Class IV drugs are used for {{c1::rate control in atrial fibrillation/flutter}} and prevention of {{c2::nodal arrhythmias}}."
+    src: { page: 328, quote: "Rate control in atrial fibrillation/flutter, prevention of nodal arrhythmias." }
+    status: unverified
+  - id: cvs.L05.124
+    kind: cloze
+    topic: class-iv-antiarrhythmics
+    text: "Class IV adverse effects: constipation, {{c1::gingival hyperplasia}}, flushing, edema, and cardiovascular effects ({{c2::HF, AV block, sinus node depression}})."
     src: { page: 328, quote: "Constipation, gingival hyperplasia, flushing, edema, cardiovascular effects (HF, AV block, sinus node depression)." }
     status: unverified
   - id: cvs.L05.096
@@ -1311,9 +1362,25 @@ items:
   - id: cvs.L05.097
     kind: card
     topic: other-antiarrhythmics
-    front: How does adenosine slow AV node conduction, and what is it used for?
-    back: It ↑ K+ efflux, hyperpolarizing the cell, and ↓ Ca2+ current, decreasing AV node conduction. It is the drug of choice for diagnosing and terminating certain SVTs, and acts for about 15 seconds.
-    src: { page: 328, quote: "out of cells → hyperpolarizing the cell and ↓ ICa, decreasing AV node conduction. Drug of choice in diagnosing/terminating certain forms of SVT." }
+    front: How does adenosine slow AV node conduction?
+    back: It lets more K+ leave the cell, which hyperpolarizes it, and it reduces the Ca2+ current, so AV node conduction slows.
+    src: { page: 328, quote: "out of cells → hyperpolarizing the cell and ↓ ICa, decreasing AV node conduction." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.125
+    kind: card
+    topic: other-antiarrhythmics
+    front: "What is adenosine the drug of choice for?"
+    back: "Diagnosing and stopping certain forms of SVT."
+    src: { page: 328, quote: "Drug of choice in diagnosing/terminating certain forms of SVT." }
+    status: unverified
+    tags: [high-yield]
+  - id: cvs.L05.126
+    kind: card
+    topic: other-antiarrhythmics
+    front: "How long does adenosine act?"
+    back: "Very briefly, about 15 seconds."
+    src: { page: 328, quote: "Very short acting (~15 sec)." }
     status: unverified
     tags: [high-yield]
   - id: cvs.L05.098

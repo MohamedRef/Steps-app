@@ -47,6 +47,8 @@ struct Claims {
     email: Option<String>,
     #[serde(default)]
     email_verified: Option<EmailVerified>,
+    #[serde(default)]
+    nonce: Option<String>,
 }
 
 /// Google sends `true`, older tokens sent `"true"`.
@@ -88,6 +90,8 @@ pub enum GoogleError {
     Expired,
     #[error("email missing or not verified")]
     EmailNotVerified,
+    #[error("nonce does not match this sign-in")]
+    WrongNonce,
 }
 
 fn b64(s: &str) -> Result<Vec<u8>, GoogleError> {
@@ -106,6 +110,7 @@ pub fn verify_id_token(
     id_token: &str,
     jwks: &Jwks,
     client_ids: &[String],
+    nonce: Option<&str>,
     now_ms: u64,
 ) -> Result<GoogleIdentity, GoogleError> {
     let mut parts = id_token.split('.');
@@ -135,6 +140,13 @@ pub fn verify_id_token(
     }
     if !client_ids.contains(&claims.aud) {
         return Err(GoogleError::WrongAudience);
+    }
+    // The web flow puts a nonce in the token; only the tab that asked
+    // for it knows it (#542). The apps' code flow carries none.
+    if let Some(want) = claims.nonce.as_deref()
+        && nonce != Some(want)
+    {
+        return Err(GoogleError::WrongNonce);
     }
     let now_s = now_ms / 1000;
     if claims.exp + LEEWAY_S <= now_s || claims.iat > now_s + LEEWAY_S {
@@ -242,7 +254,7 @@ mod tests {
     fn accepts_a_valid_token() {
         let token = sign(&claims("learner@example.com", NOW));
         assert_eq!(token_kid(&token).unwrap(), KID);
-        let id = verify_id_token(&token, &jwks(), &ids(), NOW).unwrap();
+        let id = verify_id_token(&token, &jwks(), &ids(), None, NOW).unwrap();
         assert_eq!(id.email, "learner@example.com");
         assert_eq!(id.sub, "110169484474386276334");
     }
@@ -251,36 +263,53 @@ mod tests {
     fn rejects_bad_tokens() {
         let mut c = claims("learner@example.com", NOW);
         c["aud"] = json!("someone-elses-app");
-        assert_eq!(verify_id_token(&sign(&c), &jwks(), &ids(), NOW), Err(GoogleError::WrongAudience));
+        assert_eq!(verify_id_token(&sign(&c), &jwks(), &ids(), None, NOW), Err(GoogleError::WrongAudience));
 
         let mut c = claims("learner@example.com", NOW);
         c["iss"] = json!("https://evil.example");
-        assert_eq!(verify_id_token(&sign(&c), &jwks(), &ids(), NOW), Err(GoogleError::WrongIssuer));
+        assert_eq!(verify_id_token(&sign(&c), &jwks(), &ids(), None, NOW), Err(GoogleError::WrongIssuer));
 
         let c = claims("learner@example.com", NOW - 2 * 3600 * 1000);
-        assert_eq!(verify_id_token(&sign(&c), &jwks(), &ids(), NOW), Err(GoogleError::Expired));
+        assert_eq!(verify_id_token(&sign(&c), &jwks(), &ids(), None, NOW), Err(GoogleError::Expired));
 
         let mut c = claims("learner@example.com", NOW);
         c["email_verified"] = json!(false);
-        assert_eq!(verify_id_token(&sign(&c), &jwks(), &ids(), NOW), Err(GoogleError::EmailNotVerified));
+        assert_eq!(
+            verify_id_token(&sign(&c), &jwks(), &ids(), None, NOW),
+            Err(GoogleError::EmailNotVerified)
+        );
 
         // Signed claims, then the email swapped.
         let token = sign(&claims("learner@example.com", NOW));
         let parts: Vec<&str> = token.split('.').collect();
         let other = URL_SAFE_NO_PAD.encode(serde_json::to_vec(&claims("intruder@example.com", NOW)).unwrap());
         let forged = format!("{}.{}.{}", parts[0], other, parts[2]);
-        assert_eq!(verify_id_token(&forged, &jwks(), &ids(), NOW), Err(GoogleError::BadSignature));
+        assert_eq!(verify_id_token(&forged, &jwks(), &ids(), None, NOW), Err(GoogleError::BadSignature));
 
         let mut keys = jwks();
         keys.keys[0].kid = "rotated".into();
-        assert_eq!(verify_id_token(&token, &keys, &ids(), NOW), Err(GoogleError::UnknownKey));
+        assert_eq!(verify_id_token(&token, &keys, &ids(), None, NOW), Err(GoogleError::UnknownKey));
+    }
+
+    #[test]
+    fn a_web_token_needs_the_nonce_it_was_issued_for() {
+        // #542: the web flow's token carries a nonce only the asking tab knows.
+        let mut c = claims("learner@example.com", NOW);
+        c["nonce"] = json!("9f1c");
+        let token = sign(&c);
+        assert!(verify_id_token(&token, &jwks(), &ids(), Some("9f1c"), NOW).is_ok());
+        assert_eq!(verify_id_token(&token, &jwks(), &ids(), None, NOW), Err(GoogleError::WrongNonce));
+        assert_eq!(verify_id_token(&token, &jwks(), &ids(), Some("0000"), NOW), Err(GoogleError::WrongNonce));
+        // The apps' tokens carry none, so a sent nonce changes nothing.
+        let plain = sign(&claims("learner@example.com", NOW));
+        assert!(verify_id_token(&plain, &jwks(), &ids(), Some("9f1c"), NOW).is_ok());
     }
 
     #[test]
     fn accepts_string_email_verified() {
         let mut c = claims("learner@example.com", NOW);
         c["email_verified"] = json!("true");
-        assert!(verify_id_token(&sign(&c), &jwks(), &ids(), NOW).is_ok());
+        assert!(verify_id_token(&sign(&c), &jwks(), &ids(), None, NOW).is_ok());
     }
 
     #[test]
