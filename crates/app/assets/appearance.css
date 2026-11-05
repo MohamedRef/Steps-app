@@ -87,3 +87,86 @@
     border-color: var(--line); box-shadow: none;
   }
 }
+
+/* ---------- the minimal styles ----------
+   No ledges, no shadows and no decoration in the hero's corner; they differ
+   only in how a card is told apart from the page. */
+.app:is([data-appearance="borderless"], [data-appearance="dividers"], [data-appearance="side-line"], [data-appearance="soft-fill"], [data-appearance="mono"]) {
+  --card-shadow: none;
+}
+.app:is([data-appearance="calm"], [data-appearance="borderless"], [data-appearance="dividers"], [data-appearance="side-line"], [data-appearance="soft-fill"], [data-appearance="mono"]) .hero::before,
+.app:is([data-appearance="calm"], [data-appearance="borderless"], [data-appearance="dividers"], [data-appearance="side-line"], [data-appearance="soft-fill"], [data-appearance="mono"]) .hero::after {
+  display: none;
+}
+/* The session lengths sit level in every minimal style. */
+.app:is([data-appearance="borderless"], [data-appearance="dividers"], [data-appearance="side-line"], [data-appearance="soft-fill"], [data-appearance="mono"]) .td-chip {
+  min-block-size: var(--tap); align-items: center; padding-block: 0; border-radius: 8px;
+}
+
+/* Borderless: cards are plain surfaces on the page, set apart by space. */
+.app[data-appearance="borderless"] { --card-border: transparent; }
+.app[data-appearance="borderless"] .content { gap: var(--sp-6); }
+.app[data-appearance="borderless"] :is(.card, .stat-tile, .tap-list, .lectures, .choice-list, .coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn):not(.hero) { border-color: transparent; }
+.app[data-appearance="borderless"] .td-chip:not([aria-checked="true"]) { border-color: transparent; }
+.app[data-appearance="borderless"] :is(.nav, .topbar) { border-color: transparent; }
+
+/* Dividers: no boxes at all, only rules between things, on one plain page. */
+.app[data-appearance="dividers"] { --card-border: transparent; }
+.app[data-appearance="dividers"], .app[data-appearance="dividers"] :is(.content, .topbar, .nav) { background: var(--surface); }
+.app[data-appearance="dividers"] :is(.card, .tap-list, .lectures, .choice-list, .coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn):not(.hero) {
+  background: transparent; border: 0; border-block-end: 1px solid var(--line); border-radius: 0;
+}
+.app[data-appearance="dividers"] .stat-tile { background: transparent; border: 0; border-radius: 0; }
+.app[data-appearance="dividers"] .stat-tile + .stat-tile { border-inline-start: 1px solid var(--line); }
+.app[data-appearance="dividers"] .stat-tiles { border-block: 1px solid var(--line); padding-block: var(--sp-1); }
+.app[data-appearance="dividers"] .card-flat { background: transparent; }
+.app[data-appearance="dividers"] .td-chip { border: 0; background: transparent; border-radius: 0; border-block-end: 2px solid transparent; }
+.app[data-appearance="dividers"] .td-chip[aria-checked="true"] { background: transparent; color: var(--accent); border-block-end-color: var(--accent); }
+
+/* Side line: a thin brand line at a card's start is all there is; the hero
+   is text on the page and its button carries the colour. */
+.app[data-appearance="side-line"] :is(.card, .tap-list, .lectures, .coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn):not(.hero) {
+  background: transparent; border: 0; border-inline-start: 2px solid var(--accent); border-radius: 0;
+}
+.app[data-appearance="side-line"] .stat-tile { background: transparent; border: 0; border-inline-start: 2px solid var(--line); border-radius: 0; }
+.app[data-appearance="side-line"] .td-chip { border: 0; background: transparent; border-radius: 0; }
+.app[data-appearance="side-line"] .td-chip[aria-checked="true"] { background: transparent; color: var(--accent); text-decoration: underline 2px; text-underline-offset: 6px; }
+.app[data-appearance="side-line"] .nav { border-color: transparent; background: var(--bg); }
+
+/* Soft fill: one plain page, cards a quiet grey step off it, no lines. */
+.app[data-appearance="soft-fill"] { --card-border: transparent; }
+.app[data-appearance="soft-fill"], .app[data-appearance="soft-fill"] :is(.content, .topbar) { background: var(--surface); }
+.app[data-appearance="soft-fill"] :is(.card, .stat-tile, .tap-list, .lectures, .choice-list, .coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn):not(.hero) {
+  background: var(--surface-2); border-color: transparent;
+}
+.app[data-appearance="soft-fill"] .card :is(.choice-list, .tap-list) { background: transparent; }
+.app[data-appearance="soft-fill"] .answer:not([data-state]) { background: var(--surface); }
+.app[data-appearance="soft-fill"] .td-chip:not([aria-checked="true"]) { background: var(--surface-2); border-color: transparent; }
+.app[data-appearance="soft-fill"] .nav { background: var(--surface-2); border-color: transparent; }
+
+/* Mono: ink and paper. Colour is kept for meaning (right, wrong, links)
+   and the one main action; the rest is text and hairlines. */
+.app[data-appearance="mono"] :is(.card, .stat-tile, .tap-list, .lectures, .choice-list, .coll:not([data-layout="cards"]), .coll[data-layout="cards"] button.coll-btn):not(.hero) {
+  background: transparent; border-color: var(--line);
+}
+.app[data-appearance="mono"] .stat-num { color: var(--text); }
+.app[data-appearance="mono"] .td-chip:not([aria-checked="true"]) { background: transparent; }
+.app[data-appearance="mono"] .td-chip[aria-checked="true"] { background: var(--text); border-color: var(--text); color: var(--bg); }
+.app[data-appearance="mono"] .nav-item[aria-current="page"] { color: var(--text); }
+.app[data-appearance="mono"] .nav-item[aria-current="page"]::before { background: var(--text); }
+.app[data-appearance="mono"] .brand-name { color: var(--text); }
+
+/* A hero without its fill (Side line, Mono) reads in the page's ink. */
+.app:is([data-appearance="side-line"], [data-appearance="mono"]) .hero {
+  background: transparent; color: var(--text); box-shadow: none;
+}
+.app[data-appearance="side-line"] .hero { border: 0; border-inline-start: 4px solid var(--accent); border-radius: 0; }
+.app[data-appearance="mono"] .hero { border: 1px solid var(--text); }
+.app:is([data-appearance="side-line"], [data-appearance="mono"]) .hero :is(.muted, .page-sub, .hero-meta) { color: var(--muted); opacity: 1; }
+.app:is([data-appearance="side-line"], [data-appearance="mono"]) .hero .chip { background: var(--accent-soft); color: var(--accent-ink); }
+.app:is([data-appearance="side-line"], [data-appearance="mono"]) .hero .note { background: var(--soft); }
+.app:is([data-appearance="side-line"], [data-appearance="mono"]) .hero .card { background: var(--soft); }
+.app:is([data-appearance="side-line"], [data-appearance="mono"]) :is(.btn-on-hero, .hero .btn-primary) {
+  background: var(--accent); border-color: var(--accent); color: var(--on-accent);
+}
+.app[data-appearance="mono"] :is(.btn-on-hero, .hero .btn-primary) { background: var(--text); border-color: var(--text); color: var(--bg); }

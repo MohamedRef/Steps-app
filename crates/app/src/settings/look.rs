@@ -31,6 +31,11 @@ fn appearance_label(a: Appearance) -> (&'static str, &'static str) {
         Appearance::Calm => (tx::APPEARANCE_CALM, tx::APPEARANCE_CALM_SUB),
         Appearance::Outline => (tx::APPEARANCE_OUTLINE, tx::APPEARANCE_OUTLINE_SUB),
         Appearance::Tinted => (tx::APPEARANCE_TINTED, tx::APPEARANCE_TINTED_SUB),
+        Appearance::Borderless => (tx::APPEARANCE_BORDERLESS, tx::APPEARANCE_BORDERLESS_SUB),
+        Appearance::Dividers => (tx::APPEARANCE_DIVIDERS, tx::APPEARANCE_DIVIDERS_SUB),
+        Appearance::SideLine => (tx::APPEARANCE_SIDE_LINE, tx::APPEARANCE_SIDE_LINE_SUB),
+        Appearance::SoftFill => (tx::APPEARANCE_SOFT_FILL, tx::APPEARANCE_SOFT_FILL_SUB),
+        Appearance::Mono => (tx::APPEARANCE_MONO, tx::APPEARANCE_MONO_SUB),
         Appearance::LiquidGlass => (tx::APPEARANCE_GLASS, tx::APPEARANCE_GLASS_SUB),
     }
 }

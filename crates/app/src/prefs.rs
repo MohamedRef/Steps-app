@@ -135,7 +135,10 @@ impl NavStyle {
 /// solid ledge and buttons press down into it. Calm is flat with hairlines;
 /// Outline draws cards as clear outlines on the page; Tinted fills them with
 /// the theme's soft colour; Liquid Glass keeps content solid and brings a
-/// frosted treatment to navigation. `data-appearance` on `.app`
+/// frosted treatment to navigation. Five minimal styles drop every ledge and
+/// decoration: Borderless (space, no lines), Dividers (rules, no boxes),
+/// Side line (a brand line at a card's start), Soft fill (grey cards on a
+/// plain page) and Mono (ink and paper). `data-appearance` on `.app`
 /// (assets/appearance.css, assets/liquid-glass.css).
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum Appearance {
@@ -144,11 +147,27 @@ pub enum Appearance {
     Calm,
     Outline,
     Tinted,
+    Borderless,
+    Dividers,
+    SideLine,
+    SoftFill,
+    Mono,
     LiquidGlass,
 }
 
 impl Appearance {
-    pub const ALL: [Self; 5] = [Self::Stepped, Self::Calm, Self::Outline, Self::Tinted, Self::LiquidGlass];
+    pub const ALL: [Self; 10] = [
+        Self::Stepped,
+        Self::Calm,
+        Self::Borderless,
+        Self::Dividers,
+        Self::SideLine,
+        Self::SoftFill,
+        Self::Mono,
+        Self::Outline,
+        Self::Tinted,
+        Self::LiquidGlass,
+    ];
 
     /// Stored value and `data-appearance`.
     pub fn as_str(self) -> &'static str {
@@ -157,6 +176,11 @@ impl Appearance {
             Self::Calm => "calm",
             Self::Outline => "outline",
             Self::Tinted => "tinted",
+            Self::Borderless => "borderless",
+            Self::Dividers => "dividers",
+            Self::SideLine => "side-line",
+            Self::SoftFill => "soft-fill",
+            Self::Mono => "mono",
             Self::LiquidGlass => "liquid-glass",
         }
     }
@@ -179,8 +203,8 @@ pub struct DevicePrefs {
     pub pen_hover: bool,
     /// Peeks when the mouse rests on a word (Settings › Mac).
     pub mouse_hover: bool,
-    /// Stepped, Calm, Outline, Tinted or Liquid Glass. Older files have no
-    /// line for it and load as Stepped.
+    /// One of [`Appearance::ALL`]. Older files have no line for it and load
+    /// as Stepped.
     pub appearance: Appearance,
 }
 
