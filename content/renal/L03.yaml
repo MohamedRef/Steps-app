@@ -111,6 +111,7 @@ items:
     back: "HIKIN': HI K+ INtracellularly."
     src: { page: 599, quote: "HIKIN’: HI K+ INtracellularly." }
     status: unverified
+    tags: [high-yield]
   - id: renal.L03.009
     kind: cloze
     topic: fluid-compartments
@@ -141,13 +142,28 @@ items:
     back: "Plasma volume = TBV × (1 – Hct) = 5 × (1 – 0.40) = 3 L."
     src: { page: 599, quote: "Plasma volume = TBV × (1 – Hct)." }
     status: unverified
+  - id: renal.L03.151
+    kind: cloze
+    topic: fluid-compartments
+    text: "Normal hematocrit is about {{c1::37%–50%}}."
+    src: { page: 599, quote: "Normal Hct ≈ 37%–50%" }
+    status: unverified
+  - id: renal.L03.152
+    kind: card
+    topic: fluid-compartments
+    front: "What two volumes make up the blood volume?"
+    back: "Plasma volume plus RBC volume (about 6 L in First Aid's figure)."
+    src: { page: 599, quote: "Blood volume = plasma + RBC volume (6 L)" }
+    status: unverified
   - id: renal.L03.013
     kind: mcq
     topic: fluid-compartments
     stem: >-
-      A 70-kg man is enrolled in a physiology study. He receives an injection of a substance that
-      distributes through the plasma and interstitial fluid but does not enter cells, and its dilution is
-      measured once it has equilibrated. Which substance was most likely injected?
+      A 45-year-old woman is evaluated as a living kidney donor for her sister. She is healthy, with a
+      blood pressure of 118/76 mm Hg and normal laboratory studies. As part of her workup, her
+      extracellular fluid volume is measured: a substance is injected that distributes through the plasma
+      and interstitial fluid but does not enter cells, and its dilution is measured once it has
+      equilibrated. Which substance was most likely injected?
     options:
       - Radiolabeled albumin
       - Inulin
@@ -158,7 +174,7 @@ items:
     why:
       - "Radiolabeled albumin stays in the vessels; it measures plasma volume."
       - "Right. Inulin (or mannitol) stays outside cells and crosses capillaries, so it measures extracellular volume."
-      - "Heavy water enters all compartments and measures total body water (not covered in First Aid's list; the point is it isn't ECF only)."
+      - "Heavy water enters all compartments, cells included, so it measures total body water, not ECF only (not in First Aid's list)."
       - "PAH is cleared almost completely in one pass; it estimates effective renal plasma flow."
       - "Glucose enters cells and is metabolized."
     src: { page: 599, quote: "Extracellular volume can be measured by inulin or mannitol." }
@@ -222,9 +238,17 @@ items:
   - id: renal.L03.018
     kind: card
     topic: renal-clearance
-    front: Define renal clearance (Cx) and give its formula.
-    back: "The volume of plasma from which a substance is completely cleared in the urine per unit time. Cx = (Ux × V) / Px."
+    front: "Define renal clearance (Cx)."
+    back: "The volume of plasma per unit time that is completely cleared of the substance into the urine."
     src: { page: 600, quote: "volume of plasma from which the substance is completely cleared in the urine per unit time." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L03.153
+    kind: card
+    topic: renal-clearance
+    front: "What is the formula for the renal clearance of X (Cx)?"
+    back: "Cx = (Ux × V) / Px: urine concentration × urine flow, divided by plasma concentration."
+    src: { page: 600, quote: "Renal clearance Cx = (Ux V)/Px = volume of plasma from which the substance is completely cleared in the urine per unit time." }
     status: unverified
     tags: [high-yield]
   - id: renal.L03.019
@@ -251,9 +275,10 @@ items:
     kind: mcq
     topic: renal-clearance
     stem: >-
-      In a study of a new drug in healthy volunteers, GFR measured by inulin clearance is 100 mL/min. The
-      drug is not bound to plasma proteins, and its renal clearance is 250 mL/min. Which of the following
-      best describes how the kidney handles this drug?
+      A 60-year-old man with gout is enrolled in a trial of a new urate-lowering drug. He has no other
+      illnesses, and his GFR measured by inulin clearance is 100 mL/min. The drug is not bound to plasma
+      proteins, and after a dose its renal clearance is 250 mL/min. Which of the following best describes
+      how his kidneys handle this drug?
     options:
       - It is filtered and undergoes net tubular secretion
       - It is filtered and undergoes net tubular reabsorption
@@ -294,7 +319,7 @@ items:
     kind: card
     topic: glomerular-filtration-rate
     front: Does creatinine clearance overestimate or underestimate GFR, and why?
-    back: It slightly overestimates GFR, because creatinine is moderately secreted by the proximal renal tubules.
+    back: "Slightly overestimates it: besides being filtered, some creatinine is also secreted by the proximal tubule, so more ends up in the urine than filtration alone puts there."
     src: { page: 600, quote: "Creatinine clearance is an approximate measure of GFR. Slightly overestimates GFR because creatinine is moderately secreted by proximal renal tubules." }
     status: unverified
     tags: [high-yield]
@@ -344,8 +369,9 @@ items:
     kind: mcq
     topic: renal-blood-flow-autoregulation
     stem: >-
-      In an animal experiment, the NaCl concentration of fluid reaching the macula densa is raised by
-      microperfusion while systemic blood pressure is held constant. Which change follows within seconds?
+      A 22-year-old man with Fanconi syndrome has a generalized reabsorption defect in the proximal
+      convoluted tubule, so more NaCl than normal reaches his macula densa. His blood pressure is 118/74
+      mm Hg. Which change in his kidney follows the increased NaCl delivery within seconds?
     options:
       - Afferent arteriole constriction and ↓ renal blood flow
       - Afferent arteriole dilation and ↑ renal blood flow
@@ -394,9 +420,10 @@ items:
     kind: mcq
     topic: effective-renal-plasma-flow
     stem: >-
-      A physiology student infuses para-aminohippuric acid into a volunteer. Urine PAH is 30 mg/mL, urine
-      flow is 1 mL/min, and plasma PAH is 0.05 mg/mL. Hematocrit is 50%. Which value is closest to the
-      volunteer's renal blood flow?
+      A 40-year-old man who lives at high altitude is evaluated as a living kidney donor for his brother.
+      He is healthy. During renal function testing para-aminohippuric acid is infused: urine PAH is 30
+      mg/mL, urine flow 1 mL/min, and plasma PAH 0.05 mg/mL. His hematocrit is 50%. Which value is closest
+      to his renal blood flow?
     options:
       - 300 mL/min
       - 600 mL/min
@@ -405,7 +432,7 @@ items:
       - 1500 mL/min
     answer: 3
     why:
-      - "300 would be half the eRPF; check the arithmetic."
+      - "300 comes from multiplying the eRPF by (1 − Hct) (600 × 0.5) instead of dividing by it; blood flow must be larger than plasma flow."
       - "600 mL/min is the eRPF (30 × 1 / 0.05), not the blood flow."
       - "900 would assume a hematocrit of about 33%."
       - "Right. eRPF = 30 × 1 / 0.05 = 600 mL/min; RBF = 600 / (1 − 0.5) = 1200 mL/min."
@@ -548,9 +575,10 @@ items:
     kind: mcq
     topic: reabsorption-and-secretion-rate
     stem: >-
-      In a volunteer, GFR is 120 mL/min. A drug that is freely filtered has a plasma concentration of
-      0.1 mg/mL, a urine concentration of 30 mg/mL, and urine flow is 1 mL/min. Which of the following
-      best describes renal handling of the drug?
+      A 55-year-old woman with a urinary tract infection starts a new antibiotic that is freely filtered.
+      Her GFR is 120 mL/min. At steady state the drug's plasma concentration is 0.1 mg/mL, its urine
+      concentration 30 mg/mL, and urine flow 1 mL/min. Which of the following best describes how her
+      kidneys handle the drug?
     options:
       - Net secretion of 18 mg/min
       - Net reabsorption of 18 mg/min
@@ -600,9 +628,17 @@ items:
     kind: card
     topic: glucose-clearance
     front: What is the splay phenomenon in glucose reabsorption?
-    back: Tm for glucose is reached gradually rather than sharply because nephrons are heterogeneous (different Tm points); it is the part of the titration curve between threshold and Tm.
+    back: "Nephrons differ in their own Tm, so as plasma glucose rises they saturate one after another; the titration curve bends gradually between the threshold and Tm instead of at one sharp corner."
     src: { page: 602, quote: "Splay phenomenon—Tm for glucose is reached gradually rather than sharply due to the heterogeneity of nephrons (ie, different Tm points); represented by the portion of the titration curve between threshold and Tm ." }
     status: unverified
+  - id: renal.L03.147
+    kind: card
+    topic: glucose-clearance
+    front: "Glucosuria is an important clinical clue to which disease?"
+    back: "Diabetes mellitus."
+    src: { page: 602, quote: "Glucosuria is an important clinical clue to diabetes mellitus." }
+    status: unverified
+    tags: [high-yield]
   - id: renal.L03.053
     kind: mcq
     topic: glucose-clearance
@@ -629,9 +665,24 @@ items:
   - id: renal.L03.054
     kind: card
     topic: nephron-transport-physiology
-    front: What does the early PCT reabsorb, and what kind of absorption is it?
-    back: All glucose and amino acids, and most HCO3–, Na+, Cl–, PO43–, K+, H2O and uric acid. It is isotonic absorption.
+    front: "What does the early PCT reabsorb?"
+    back: "All the glucose and amino acids, and most of the HCO3–, Na+, Cl–, PO43–, K+, H2O and uric acid."
     src: { page: 603, quote: "Early PCT—contains brush border. Reabsorbs all glucose and amino acids and most HCO –" }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L03.154
+    kind: card
+    topic: nephron-transport-physiology
+    front: "What kind of absorption happens in the early PCT?"
+    back: "Isotonic absorption: solute and water leave together."
+    src: { page: 603, quote: "Reabsorbs all glucose and amino acids and most HCO – 3 , Na+, Cl–, PO 3– 4 , K+, H2O, and uric acid. Isotonic absorption." }
+    status: unverified
+  - id: renal.L03.149
+    kind: card
+    topic: nephron-transport-physiology
+    front: "Which part of the nephron has a brush border?"
+    back: "The early PCT."
+    src: { page: 603, quote: "Early PCT—contains brush border." }
     status: unverified
     tags: [high-yield]
   - id: renal.L03.055
@@ -699,9 +750,17 @@ items:
   - id: renal.L03.062
     kind: card
     topic: nephron-transport-physiology
-    front: What does aldosterone do in the principal cells and in the α-intercalated cells of the collecting tubule?
-    back: "Principal cells: ↑ apical K+ conductance, ↑ Na+/K+ pump, ↑ ENaC activity → lumen negativity → K+ secretion. α-intercalated cells: lumen negativity → ↑ H+ ATPase activity → ↑ H+ secretion → ↑ HCO3–/Cl– exchanger activity."
+    front: "What does aldosterone do in the principal cells of the collecting tubule?"
+    back: "↑ apical K+ conductance, ↑ Na+/K+ pump and ↑ ENaC activity → lumen negativity → K+ secretion."
     src: { page: 603, quote: "In principal cells: ↑ apical K+ conductance, ↑ Na+/K+ pump, ↑ epithelial Na+ channel (ENaC) activity → lumen negativity → K+ secretion." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L03.155
+    kind: card
+    topic: nephron-transport-physiology
+    front: "What does aldosterone do in the α-intercalated cells of the collecting tubule?"
+    back: "Lumen negativity → ↑ H+ ATPase activity → ↑ H+ secretion → ↑ HCO3–/Cl– exchanger activity."
+    src: { page: 603, quote: "In α-intercalated cells: lumen negativity → ↑ H+ ATPase activity → ↑ H+ secretion → ↑ HCO − 3 /Cl− exchanger activity." }
     status: unverified
     tags: [high-yield]
   - id: renal.L03.063
@@ -888,6 +947,13 @@ items:
       - "Corticosteroids treat apparent mineralocorticoid excess, not an overactive Na+ channel."
     src: { page: 604, quote: "Presents similarly to hyperaldosteronism, but aldosterone is nearly undetectable Treatment: amiloride" }
     status: unverified
+  - id: renal.L03.150
+    kind: cloze
+    topic: renal-tubular-defects
+    text: "In syndrome of apparent mineralocorticoid excess, serum aldosterone is {{c1::low}}: First Aid's mnemonic is that {{c2::cortisol}} tries to be the SAME as aldosterone."
+    src: { page: 604, quote: "↓ serum aldosterone level; cortisol tries to be the SAME as aldosterone" }
+    status: unverified
+    tags: [high-yield]
   # ---------- p605: features of renal disorders ----------
   - id: renal.L03.078
     kind: table
@@ -970,9 +1036,11 @@ items:
     kind: mcq
     topic: relative-concentrations-along-proximal-tubule
     stem: >-
-      In a micropuncture study, fluid is sampled at the end of the proximal tubule. For one substance the
-      tubular fluid-to-plasma concentration ratio is 0.1, the lowest of all solutes measured. Which
-      substance is it most likely to be?
+      A 52-year-old woman has a partial nephrectomy for a 2-cm renal mass found incidentally on CT. Her
+      kidney function is normal. During surgery, with her consent, fluid is sampled by micropuncture from
+      the end of a proximal tubule in normal kidney tissue. For one solute the tubular fluid-to-plasma
+      concentration ratio ([TF/P]) is 0.1, the lowest of all solutes measured. Which solute is it most
+      likely to be?
     options:
       - Glucose
       - Inulin
@@ -1005,9 +1073,17 @@ items:
   - id: renal.L03.086
     kind: card
     topic: renin-angiotensin-aldosterone-system
-    front: Where does conversion of angiotensin I to angiotensin II occur most extensively, and what else does ACE break down?
-    back: In the lung (ACE is produced by vascular endothelial cells in the lung). ACE also breaks down bradykinin.
+    front: "Where does conversion of angiotensin I to angiotensin II occur most extensively?"
+    back: "In the lung, where vascular endothelial cells produce ACE."
     src: { page: 606, quote: "Catalyzes conversion of angiotensin I to angiotensin II. Located in many tissues but conversion occurs most extensively in the lung. Produced by vascular endothelial cells in the lung." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L03.156
+    kind: card
+    topic: renin-angiotensin-aldosterone-system
+    front: "Besides converting angiotensin I, which vasodilator does ACE break down?"
+    back: "Bradykinin."
+    src: { page: 606, quote: "Bradykinin breakdown" }
     status: unverified
     tags: [high-yield]
   - id: renal.L03.087
@@ -1134,9 +1210,15 @@ items:
   - id: renal.L03.094
     kind: card
     topic: juxtaglomerular-apparatus
-    front: How do JG cells and macula densa cells communicate, and how does the JGA protect GFR short- and long-term?
-    back: Via gap junctions. Short term, through autoregulation; long term, through regulation of the renin-angiotensin-aldosterone system.
+    front: "How do JG cells and macula densa cells communicate?"
+    back: "Through gap junctions."
     src: { page: 607, quote: "JG cells and macula densa communicate via gap junctions. JGA prevents short-term changes in GFR through autoregulation and maintains GFR long-term through regulation of the renin angiotensin-aldosterone system." }
+    status: unverified
+  - id: renal.L03.157
+    kind: cloze
+    topic: juxtaglomerular-apparatus
+    text: "The JGA prevents short-term changes in GFR through {{c1::autoregulation}} and maintains GFR long-term through {{c2::the renin-angiotensin-aldosterone system}}."
+    src: { page: 607, quote: "JGA prevents short-term changes in GFR through autoregulation and maintains GFR long-term through regulation of the renin angiotensin-aldosterone system." }
     status: unverified
   - id: renal.L03.095
     kind: card
@@ -1214,6 +1296,14 @@ items:
     src: { page: 607, quote: "PCT cells convert 25-OH vitamin D3 to 1,25 (OH)2 vitamin D3 (calcitriol, active form). Increases calcium absorption in small bowel." }
     status: unverified
     tags: [high-yield]
+  - id: renal.L03.148
+    kind: card
+    topic: kidney-endocrine-paracrine-functions
+    front: "What does calcitriol (1,25-(OH)2 vitamin D3) do in the small bowel?"
+    back: "It increases calcium absorption."
+    src: { page: 607, quote: "PCT cells convert 25-OH vitamin D3 to 1,25 (OH)2 vitamin D3 (calcitriol, active form). Increases calcium absorption in small bowel." }
+    status: unverified
+    tags: [high-yield]
   - id: renal.L03.099
     kind: card
     topic: kidney-endocrine-paracrine-functions
@@ -1225,9 +1315,23 @@ items:
   - id: renal.L03.100
     kind: card
     topic: kidney-endocrine-paracrine-functions
-    front: What does dopamine do in the kidney at low and at high doses?
-    back: Secreted by PT cells, it promotes natriuresis. Low doses dilate interlobular arteries, afferent and efferent arterioles → ↑ RBF with little or no change in GFR. Higher doses act as a vasoconstrictor.
+    front: "What does dopamine made by proximal tubule cells do to sodium excretion?"
+    back: "It increases it (natriuresis)."
     src: { page: 607, quote: "Secreted by PT cells, promotes natriuresis. At low doses; dilates interlobular arteries, afferent arterioles, efferent arterioles → ↑ RBF, little or no change in GFR. At higher doses; acts as vasoconstrictor." }
+    status: unverified
+  - id: renal.L03.158
+    kind: card
+    topic: kidney-endocrine-paracrine-functions
+    front: "What does dopamine do to renal blood flow and GFR at low doses?"
+    back: "It widens the interlobular arteries and both arterioles, so renal blood flow rises while GFR barely changes."
+    src: { page: 607, quote: "At low doses; dilates interlobular arteries, afferent arterioles, efferent arterioles → ↑ RBF, little or no change in GFR." }
+    status: unverified
+  - id: renal.L03.159
+    kind: card
+    topic: kidney-endocrine-paracrine-functions
+    front: "What does dopamine do to renal vessels at higher doses?"
+    back: "It narrows them: it acts as a vasoconstrictor."
+    src: { page: 607, quote: "At higher doses; acts as vasoconstrictor." }
     status: unverified
   - id: renal.L03.101
     kind: mcq
@@ -1276,23 +1380,46 @@ items:
       - [PCT, ↓ PO43– reabsorption]
       - [PCT (1α-hydroxylase), "↑ 1,25-(OH)2 D3 production (↑ gut Ca2+ and PO43– absorption)"]
     blanks: [[0, 1], [1, 1], [2, 1]]
-    src: { page: 608, quote: "Secreted in response to ↓ plasma [Ca2+ ], ↑ plasma [PO4 3– ], or ↓ plasma 1,25-(OH)2 D3." }
+    src: { page: 608, quote: "Causes ↑ [Ca2+ ] reabsorption (DCT), ↓ [PO4 3– ] reabsorption (PCT), and ↑ 1,25-(OH)2 D3 production (↑ Ca2+ and PO4 3– absorption from gut via vitamin D)." }
     status: unverified
     tags: [high-yield]
   - id: renal.L03.105
     kind: card
     topic: hormones-acting-on-kidney
-    front: What triggers aldosterone secretion, and what does it do in the kidney?
-    back: "↓ blood volume (via AT II) and ↑ plasma [K+]. It causes ↑ Na+ reabsorption, ↑ K+ secretion and ↑ H+ secretion."
+    front: "What triggers aldosterone secretion?"
+    back: "↓ blood volume (via AT II) and ↑ plasma [K+]."
+    src: { page: 608, quote: "↓ blood volume (via AT II) and ↑ plasma [K+ ]; causes ↑ Na+ reabsorption, ↑ K+ secretion, ↑ H+ secretion." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L03.160
+    kind: card
+    topic: hormones-acting-on-kidney
+    front: "What does aldosterone do in the kidney?"
+    back: "↑ Na+ reabsorption, ↑ K+ secretion and ↑ H+ secretion."
     src: { page: 608, quote: "↓ blood volume (via AT II) and ↑ plasma [K+ ]; causes ↑ Na+ reabsorption, ↑ K+ secretion, ↑ H+ secretion." }
     status: unverified
     tags: [high-yield]
   - id: renal.L03.106
     kind: card
     topic: hormones-acting-on-kidney
-    front: What triggers ADH secretion, and how does it act on principal cells?
-    back: ↑ plasma osmolarity and ↓ blood volume. It binds receptors on principal cells → ↑ aquaporins → ↑ H2O reabsorption, and ↑ urea reabsorption in medullary collecting ducts to maximize the corticopapillary osmotic gradient.
+    front: "What triggers ADH secretion?"
+    back: "↑ plasma osmolarity and ↓ blood volume."
     src: { page: 608, quote: "Secreted in response to ↑ plasma osmolarity and ↓ blood volume. Binds to receptors on principal cells, causing ↑ number of aquaporins and ↑ H2O reabsorption." }
+    status: unverified
+  - id: renal.L03.161
+    kind: card
+    topic: hormones-acting-on-kidney
+    front: "How does ADH act on principal cells?"
+    back: "It binds their receptors → more aquaporins → ↑ H2O reabsorption."
+    src: { page: 608, quote: "Binds to receptors on principal cells, causing ↑ number of aquaporins and ↑ H2O reabsorption." }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L03.162
+    kind: card
+    topic: hormones-acting-on-kidney
+    front: "Why does ADH increase urea reabsorption in the medullary collecting ducts?"
+    back: "To maximize the corticopapillary osmotic gradient."
+    src: { page: 608, quote: "↑ reabsorption of urea in medullary collecting ducts to maximize corticopapillary osmotic gradient." }
     status: unverified
   - id: renal.L03.107
     kind: mcq
@@ -1393,21 +1520,21 @@ items:
     stem: >-
       A 48-year-old man with alcohol use disorder is admitted with vomiting. Serum potassium is 2.8 mEq/L
       and calcium 7.6 mg/dL, and both stay low despite 2 days of intravenous replacement. ECG shows
-      polymorphic ventricular tachycardia with a twisting QRS axis. Deficiency of which electrolyte best
-      explains the refractory potassium and calcium and the arrhythmia?
+      polymorphic ventricular tachycardia with a twisting QRS axis. Which of the following is the most
+      appropriate step to correct his potassium and calcium?
     options:
-      - Magnesium
-      - Phosphate
-      - Sodium
-      - Chloride
-      - Bicarbonate
+      - Intravenous magnesium sulfate
+      - A higher dose of intravenous potassium chloride
+      - A continuous calcium gluconate infusion
+      - Intravenous sodium bicarbonate
+      - Oral phosphate supplements
     answer: 0
     why:
-      - "Right. Low magnesium causes tetany, torsades de pointes, hypokalemia and hypocalcemia (when Mg2+ < 1.0 mEq/L); K+ and Ca2+ won't correct until Mg2+ is replaced."
-      - "Low phosphate causes bone loss and osteomalacia, not torsades with refractory hypokalemia."
-      - "Low sodium causes nausea, stupor, coma and seizures."
-      - "Low chloride goes with metabolic alkalosis but doesn't cause torsades."
-      - "Bicarbonate is an acid-base value, not the cause of refractory hypocalcemia."
+      - "Right. Refractory hypokalemia and hypocalcemia with torsades de pointes is the picture of low magnesium (Mg2+ < 1.0 mEq/L). K+ and Ca2+ won't stay up until Mg2+ is replaced: low Mg2+ keeps the kidney wasting K+ and blunts PTH release (accepted physiology beyond the First Aid table), and magnesium also treats the torsades."
+      - "He already failed 2 days of K+ replacement; more K+ keeps leaking out while Mg2+ stays low."
+      - "Calcium alone won't hold while Mg2+ is low, and it does not treat the cause of the torsades."
+      - "Bicarbonate shifts K+ into cells and lowers ionized Ca2+, so it would make both worse."
+      - "Phosphate binds calcium (hyperphosphatemia causes hypocalcemia), so it would lower his calcium further."
     src: { page: 609, quote: "Magnesium Tetany, torsades de pointes, hypokalemia, hypocalcemia (when [Mg2+ ] <1.0 mEq/L)" }
     status: unverified
   # ---------- p609: acid-base physiology ----------
@@ -1479,6 +1606,32 @@ items:
       - "> 12 mEq/L → ↑ anion gap (GOLDMARK); 8–12 mEq/L → normal anion gap (SHARDS)"
     src: { page: 610, quote: "Check arterial pH pH < 7.35 pH > 7.45 Pco2 > 44 mm Hg HCO3 – < 20 mEq/L HCO3 – > 28 mEq/L Acidemia Alkalemia" }
     status: unverified
+  - id: renal.L03.144
+    kind: order
+    topic: acidosis-and-alkalosis
+    prompt: "Put First Aid's steps for an alkalemia in order."
+    steps:
+      - "Check arterial pH (> 7.45 = alkalemia)"
+      - "Check PCO2 (< 36 mm Hg → respiratory alkalosis) and HCO3– (> 28 mEq/L → metabolic alkalosis)"
+      - "For a metabolic alkalosis, check urine Cl–"
+      - "< 20 mEq/L → saline-responsive; > 20 mEq/L → saline-resistant"
+    src: { page: 610, quote: "Check arterial pH pH < 7.35 pH > 7.45 Pco2 > 44 mm Hg HCO3 – < 20 mEq/L HCO3 – > 28 mEq/L Acidemia Alkalemia" }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L03.145
+    kind: cloze
+    topic: acidosis-and-alkalosis
+    text: "In alkalemia, a PCO2 below {{c1::36}} mm Hg means a {{c2::respiratory}} alkalosis."
+    src: { page: 610, quote: "Pco2 < 36 mm Hg Pco2 = 40 mm Hg Respiratory acidosis Respiratory alkalosis" }
+    status: unverified
+    tags: [high-yield]
+  - id: renal.L03.146
+    kind: cloze
+    topic: acidosis-and-alkalosis
+    text: "Alkalemia is an arterial pH above {{c1::7.45}}; with an HCO3– above {{c2::28}} mEq/L it is a metabolic alkalosis."
+    src: { page: 610, quote: "Check arterial pH pH < 7.35 pH > 7.45 Pco2 > 44 mm Hg HCO3 – < 20 mEq/L HCO3 – > 28 mEq/L Acidemia Alkalemia" }
+    status: unverified
+    tags: [high-yield]
   - id: renal.L03.120
     kind: enumerate
     topic: acidosis-and-alkalosis
@@ -1544,6 +1697,7 @@ items:
     pass: 5
     src: { page: 610, quote: "Hyperventilation Anxiety/panic attack Hypoxemia (eg, high altitude) Salicylates (early) Tumor PulmOnary embOlism Pregnancy" }
     status: unverified
+    tags: [high-yield]
   - id: renal.L03.125
     kind: table
     topic: acidosis-and-alkalosis
@@ -1630,10 +1784,18 @@ items:
   - id: renal.L03.130
     kind: card
     topic: renal-tubular-acidosis
-    front: What are the causes of proximal RTA (type 2), and what is it associated with?
-    back: Fanconi syndrome, multiple myeloma, carbonic anhydrase inhibitors. It ↑ the risk of hypophosphatemic rickets (in Fanconi syndrome).
+    front: "What are the causes of proximal RTA (type 2)?"
+    back: "Fanconi syndrome, multiple myeloma, carbonic anhydrase inhibitors."
     src: { page: 611, quote: "Fanconi syndrome, multiple myeloma, carbonic anhydrase inhibitors" }
     status: unverified
+  - id: renal.L03.163
+    kind: card
+    topic: renal-tubular-acidosis
+    front: "Proximal RTA in Fanconi syndrome raises the risk of which bone disease?"
+    back: "Hypophosphatemic rickets."
+    src: { page: 611, quote: "↑ risk for hypophosphatemic rickets (in Fanconi syndrome)" }
+    status: unverified
+    tags: [high-yield]
   - id: renal.L03.131
     kind: card
     topic: renal-tubular-acidosis
