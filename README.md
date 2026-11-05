@@ -57,6 +57,8 @@ After the first install, new versions and new lectures arrive by themselves, and
 
 ## For whoever works on it
 
+**Start with [docs/HANDBOOK.md](docs/HANDBOOK.md)**: the whole project on one page (architecture, how to build, test and release it, the rules I work by, and where things stand right now).
+
 How to run it: [docs/RUN.md](docs/RUN.md). Releases and updates: [docs/RELEASE.md](docs/RELEASE.md). Sync: [docs/CLOUD.md](docs/CLOUD.md). How the content is written: [docs/CONTENT.md](docs/CONTENT.md), [docs/LESSONS.md](docs/LESSONS.md) and [docs/SOURCES.md](docs/SOURCES.md). Who writes what: [docs/WORKSTREAMS.md](docs/WORKSTREAMS.md).
 
 — Mohamed Refaat
