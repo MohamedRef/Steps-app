@@ -30,5 +30,17 @@ if [ -n "$book" ]; then
   bad=1
 fi
 
-[ "$bad" -eq 0 ] || { echo "Remove them with git rm --cached and add them to .gitignore."; exit 1; }
-echo "Tracked files: no build output, no book text, nothing over 5 MB"
+# Mohamed, 2026-11-05: the repo never names the tools it was written with
+# (no assistant names, generated-by lines or co-author trailers). The eponym
+# "Bernard" (Horner syndrome) is medicine, not a tool. The pattern is split
+# so this file doesn't match itself.
+tool="cl""aude|anthr""opic"
+named="$(git grep -nIiE "$tool" -- . | grep -viE "(${tool%%|*})[ -]bernard" || true)"
+if [ -n "$named" ]; then
+  echo "Files name an assistant or carry a generated-by line (Mohamed: never on GitHub):"
+  head -10 <<<"$named"
+  bad=1
+fi
+
+[ "$bad" -eq 0 ] || { echo "Fix the files listed above (git rm --cached and .gitignore for tracked output)."; exit 1; }
+echo "Tracked files: no build output, no book text, nothing over 5 MB, no assistant names"

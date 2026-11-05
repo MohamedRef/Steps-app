@@ -5,7 +5,7 @@
 //! Everything outside `wasm` is plain Rust, tested natively against real
 //! SQLite. `wasm` binds it to the Cloudflare runtime (Worker + Durable Object).
 // adapted from batna-app main: crates/server (auth, devices and sync only:
-// no AI, TTS, push or blobs).
+// no text-to-speech, push or blobs).
 
 pub mod account;
 pub mod config;
