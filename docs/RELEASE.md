@@ -118,7 +118,20 @@ other and keeps the data.
 1. Once, on the Mac: the permanent keys (§2: `just release-keys`, the
    public update key committed, `just release-keys-backup`).
 2. Set `version` in `Cargo.toml` in a PR (with its `changes/` line) and merge it.
-3. Actions › Release › Run workflow. It builds the content pack, the
+   Before you press Release, on that commit of `main` (#341, #342):
+   - **Nightly checks**, **Mac** and **Android preview APK** are green
+     (start them from Actions › Run workflow if they haven't run on it;
+     `daily.yml` usually has). The real Release refuses a commit without a
+     green Nightly checks and Mac run.
+   - **Release with "Dry run" ticked** (the default) is green: it builds,
+     signs and checks the APK and Steps.app exactly as the real run does and
+     publishes nothing, so a Mac signing problem shows up before a version
+     number is spent.
+   - The web app (`https://steps-web.hamorefaat85.workers.dev`) shows
+     sign-in under الإعدادات › المزامنة. Web and Steps Cloud deploy by
+     themselves after green CI on `main`; nothing to press for them.
+   - Settings › المزامنة signs in on one device.
+3. Actions › Release › Run workflow, with "Dry run" **unticked**. It builds the content pack, the
    release APK (Linux) and Steps.app (macOS runner), signs them with the
    keys above, bakes in Steps Cloud and the Google client (sync), and
    publishes:
@@ -173,8 +186,10 @@ and the files the manifest names: the APK, the zipped Steps.app, and
 What a device checks before it uses anything:
 
 1. The signature, against the public key built into the app
-   (`crates/app/update-key.pub` for release builds; previews carry the CI
-   preview key). Nothing in an unsigned or changed manifest is read.
+   (`crates/app/update-key.pub`). Release builds and the preview builds
+   of `main` carry the same release update key (the preview workflow copies
+   that file); only pull request builds use a one-off key, and they publish
+   nothing. Nothing in an unsigned or changed manifest is read.
 2. The channel inside the manifest is the one asked for, the format is one
    this build understands, and every file name is a plain name (no paths,
    no URLs).
@@ -277,7 +292,7 @@ a full build.
 | Key | Where it lives | Made by |
 |---|---|---|
 | Release update key (secret) | Mac Keychain, service `steps-update` | `just update-keygen`, once. The public half is committed as `crates/app/update-key.pub`. |
-| Preview update key | GitHub Actions cache of the preview workflow | The workflow, on first run. Never the release key. |
+| One-off update key | Made by a pull request's preview build and thrown away | The workflow, each PR run. Nothing signed with it is published; main's previews use the release key. |
 
 `crates/app/update-key.pub` holds no key until `just update-keygen` runs, so
 until then a release build trusts no feed at all. Back the secret up with the

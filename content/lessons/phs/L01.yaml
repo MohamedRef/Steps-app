@@ -19,7 +19,7 @@ lessons:
           - **Case-control**: بنبدأ بناس ==عندهم المرض== وناس مش عندهم، ونرجع ورا نشوف مين اتعرض. بتطلّع **odds ratio** («Control the case in the OR»).
           - **Cohort**: بنبدأ بناس ==اتعرضوا== وناس ما اتعرضوش، ونشوف مين جاله المرض بعدين (prospective أو retrospective). بتطلّع **incidence** و **relative risk**.
           - **Cross-sectional**: صورة دلوقتي للمرض والـ risk factors مع بعض ← **prevalence**، وبتبين association بس مش causality.
-          - **Case series**: وصف مرضى، من غير comparison group، فما تقدرش تقول risk factor.
+          - **Case series**: وصف مرضى، من غير comparison group، فما تقدرش تبيّن association بين risk factor والمرض.
         page: 256
         quote: "Cohort study Compares a group with a given exposure or risk factor to a group without such exposure. Looks to see if exposure or risk factor is associated with later development of disease."
       - kind: figure
@@ -126,7 +126,7 @@ lessons:
       - "Ecological fallacy: بيانات المجتمع مش للفرد."
       - "Intention-to-treat: once randomized, always analyzed."
       - "Can I SWIM: Safety، Work، Improvement (← FDA)، Market."
-    practice: [phs.L01.001, phs.L01.002, phs.L01.003, phs.L01.004, phs.L01.005, phs.L01.006, phs.L01.007, phs.L01.008, phs.L01.009, phs.L01.010, phs.L01.011, phs.L01.012, phs.L01.013, phs.L01.014, phs.L01.015, phs.L01.016]
+    practice: [phs.L01.001, phs.L01.092, phs.L01.093, phs.L01.002, phs.L01.003, phs.L01.004, phs.L01.005, phs.L01.006, phs.L01.075, phs.L01.007, phs.L01.008, phs.L01.009, phs.L01.010, phs.L01.011, phs.L01.012, phs.L01.076, phs.L01.077, phs.L01.013, phs.L01.014, phs.L01.015, phs.L01.016]
   - id: phs.L01.lesson2
     title: "الـ 2 × 2 table: OR و RR و NNT من غير لخبطة"
     hook: "ارسم الجدول صح مرة واحدة، وكل المعادلات هتطلع لوحدها"
@@ -218,7 +218,12 @@ lessons:
         quote: "NNT = 1/ARR"
       - kind: aside
         tone: tip
-        text: "معدلات تانية: **case fatality rate** = الوفيات ÷ الحالات (4 من 10 حالات meningitis ماتوا ← 40%). **Mortality rate** = وفيات لكل 1000 في السنة. **Attack rate** = اللي تعبوا ÷ كل اللي اتعرضوا (60 من 80 ← 75%)."
+        text: "**Case fatality rate** = الوفيات ÷ الحالات (4 من 10 حالات meningitis ماتوا ← 40%)."
+        page: 258
+        quote: "If 4 patients die among 10 cases of meningitis, case fatality rate is 40%."
+      - kind: aside
+        tone: tip
+        text: "معدلات تانية: **Mortality rate** = وفيات لكل 1000 في السنة. **Attack rate** = اللي تعبوا ÷ كل اللي اتعرضوا (60 من 80 ← 75%)."
         page: 259
         quote: "Proportion of exposed people who become ill. If 80 people in a town are exposed and 60 people become ill, attack rate is 75%."
       - kind: table
@@ -254,7 +259,7 @@ lessons:
       - "AR و ARR فروق؛ RRR = 1 – RR. NNT = 1/ARR، NNH = 1/AR."
       - "LR+ > 10 specific، LR– < 0.1 sensitive. Pretest odds × LR = posttest odds."
       - "Kaplan-Meier ← log rank أو Cox."
-    practice: [phs.L01.017, phs.L01.018, phs.L01.019, phs.L01.020, phs.L01.021, phs.L01.022, phs.L01.023, phs.L01.024, phs.L01.025, phs.L01.026, phs.L01.027, phs.L01.028, phs.L01.029, phs.L01.030, phs.L01.031]
+    practice: [phs.L01.017, phs.L01.018, phs.L01.019, phs.L01.020, phs.L01.078, phs.L01.021, phs.L01.022, phs.L01.023, phs.L01.024, phs.L01.025, phs.L01.026, phs.L01.027, phs.L01.028, phs.L01.079, phs.L01.029, phs.L01.030, phs.L01.031]
   - id: phs.L01.lesson3
     title: "Sensitivity و specificity و PPV: التحليل اللي بيتسأل كل امتحان"
     hook: "SN-N-OUT و SP-P-IN، وليه الـ PPV بيتغيّر لما تغيّر المكان مش الـ test"
@@ -339,7 +344,7 @@ lessons:
           - "الـ sensitivity والـ specificity بيتحركوا عكس بعض."
           - "الأربعة بيتغيروا مع الـ cutoff."
         page: 260
-        quote: "Raising the cutoff value: ↑ Sensitivity ↑ NPV Speciﬁcity PPV"
+        quote: "C = 100% speciﬁcity cutoff value"
       - kind: explain
         title: "الـ ROC curve"
         text: |-
@@ -361,7 +366,7 @@ lessons:
       - "Sensitivity و specificity ثابتين؛ PPV بيعلى مع الـ prevalence و NPV بيقل."
       - "Cutoff أقل ← sensitivity و NPV ↑. ROC: AUC أعلى أحسن، 0.5 مالوش قيمة."
       - "Precision ضد random error، accuracy ضد systematic error."
-    practice: [phs.L01.032, phs.L01.033, phs.L01.034, phs.L01.035, phs.L01.036, phs.L01.037, phs.L01.038, phs.L01.039, phs.L01.040, phs.L01.041, phs.L01.042, phs.L01.043, phs.L01.044, phs.L01.045]
+    practice: [phs.L01.032, phs.L01.033, phs.L01.034, phs.L01.035, phs.L01.036, phs.L01.037, phs.L01.038, phs.L01.039, phs.L01.080, phs.L01.040, phs.L01.041, phs.L01.042, phs.L01.043, phs.L01.044, phs.L01.045]
   - id: phs.L01.lesson4
     title: "Incidence و prevalence، والـ bias اللي بيبوّظ الدراسات"
     hook: "دوا بيطوّل عمر المريض من غير ما يشفيه بيزوّد الـ prevalence. ليه؟"
@@ -420,7 +425,7 @@ lessons:
         text: |-
           **وإحنا بنجمع الناس**: **selection bias** (عينة مش ممثلة؛ غالباً sampling bias): convenience sampling، و ==Berkson bias== (الحالات من المستشفى أعيى ومختلفين)، و attrition bias (اللي ضاعوا من الـ follow-up مختلفين). العلاج: **randomization** واختيار comparison group صح.
 
-          **وإحنا بنعمل الدراسة**: **recall bias** (اللي عنده المرض بيفتكر الـ exposure أكتر؛ نستخدم السجلات)، **measurement bias** (جهاز ضغط بايظ، **Hawthorne effect**: الناس بتتغير لما تعرف إنها متراقبة)، **procedure bias**، و **observer-expectancy** (Pygmalion). العلاج: ==blinding== و placebo.
+          **وإحنا بنعمل الدراسة**: **recall bias** (اللي عنده المرض بيفتكر الـ exposure أكتر؛ نستخدم السجلات)، **measurement bias** (جهاز ضغط بايظ، **Hawthorne effect**: الناس بتتغير لما تعرف إنها متراقبة)، **procedure bias**، و **observer-expectancy** (Pygmalion). العلاج: الـ measurement bias بيقل بطرق جمع data ==objective و standardized ومتجربة قبل كده== و placebo group، أما الـ procedure و الـ observer-expectancy فعلاجهم ==blinding==.
         page: 263
         quote: "Berkson bias—cases and/ or controls selected from hospitals (bedside bias) are less healthy and have different exposures"
       - kind: explain
@@ -473,7 +478,7 @@ lessons:
         items: [phs.L01.047, phs.L01.048, phs.L01.050, phs.L01.051, phs.L01.053]
     recap:
       - "Prevalence ≈ incidence × duration. Survival ↑ ← prevalence ↑ بس. Vaccine ← الاتنين ↓."
-      - "Selection (Berkson، attrition) ← randomization. Recall ← السجلات. Measurement (Hawthorne)، procedure، observer-expectancy ← blinding."
+      - "Selection (Berkson، attrition) ← randomization. Recall ← السجلات. Measurement (Hawthorne) ← طرق standardized متجربة + placebo. Procedure و observer-expectancy ← blinding."
       - "Lead-time: اكتشاف بدري شكله survival أطول. Length-time: الـ screening بيمسك البطيء."
       - "Confounding: الـ association تختفي بعد التقسيم. Effect modification: حقيقية وبتختلف."
     practice: [phs.L01.046, phs.L01.047, phs.L01.048, phs.L01.049, phs.L01.050, phs.L01.051, phs.L01.052, phs.L01.053, phs.L01.054]
@@ -527,10 +532,13 @@ lessons:
         text: |-
           - **H0** (null): ==مفيش فرق==. **H1**: فيه فرق أو association.
           - **P value**: احتمال تطلع نتيجة متطرفة كده أو أكتر ==لو H0 صح==. غالباً الحد 0.05.
-
-          لو P < α بنرفض H0. وعمرك ما بتـ "prove" الـ H1، إنت بس بترفض الـ H0 لأنه بعيد الاحتمال.
         page: 265
         quote: "P value Probability of obtaining test results at least as extreme as those observed in the sample, assuming that H0 is correct."
+      - kind: aside
+        tone: tip
+        text: "لو P < α بنرفض H0. وعمرك ما بتـ «prove» الـ H1، إنت بس بترفض الـ H0 لأنه بعيد الاحتمال."
+        page: 266
+        quote: "You can never “prove” H1, but you can reject the H0 as being very unlikely."
       - kind: aside
         tone: analogy
         text: "قصة الكتاب: **أول مرة** الولد صرخ «ذيب!» والبلد صدّقت ومكانش فيه ذيب ← ==type I== (false positive، α). **تاني مرة** البلد ما صدّقتش وكان فيه ذيب فعلاً ← ==type II== (false negative، β)."
@@ -612,4 +620,4 @@ lessons:
       - "Type I = false positive (α)، type II = false negative (β). Power = 1 – β ويزيد بالعدد."
       - "CI للـ ratio فيه 1، أو للفرق فيه 0 ← مش significant."
       - "t-test لـ 2 means، ANOVA لـ 3+، chi-square للنسب، Fisher للعينات الصغيرة."
-    practice: [phs.L01.055, phs.L01.056, phs.L01.057, phs.L01.058, phs.L01.059, phs.L01.060, phs.L01.061, phs.L01.062, phs.L01.063, phs.L01.064, phs.L01.065, phs.L01.066, phs.L01.067, phs.L01.068, phs.L01.069, phs.L01.070, phs.L01.071, phs.L01.072, phs.L01.073, phs.L01.074]
+    practice: [phs.L01.055, phs.L01.056, phs.L01.081, phs.L01.082, phs.L01.057, phs.L01.083, phs.L01.058, phs.L01.059, phs.L01.060, phs.L01.084, phs.L01.061, phs.L01.062, phs.L01.085, phs.L01.086, phs.L01.063, phs.L01.064, phs.L01.065, phs.L01.066, phs.L01.067, phs.L01.068, phs.L01.087, phs.L01.088, phs.L01.089, phs.L01.069, phs.L01.070, phs.L01.071, phs.L01.090, phs.L01.091, phs.L01.072, phs.L01.073, phs.L01.074]

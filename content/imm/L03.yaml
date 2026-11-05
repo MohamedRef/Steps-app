@@ -26,11 +26,24 @@ items:
   - id: imm.L03.001
     kind: card
     topic: antibody-structure-and-function
-    front: Which part of an antibody recognizes antigen, and which part fixes complement?
-    back: The Fab fragment (light and heavy chains) recognizes antigen. The Fc region of IgM and IgG fixes complement. The heavy chain contributes to both Fc and Fab; the light chain only to Fab.
-    src: { page: 102, quote: "Fab fragment consisting of light (L) and heavy (H) chains recognizes antigens. Fc region of IgM and IgG fixes complement. Heavy chain contributes to Fc and Fab regions. Light chain contributes only to Fab region." }
+    front: Which part of an antibody recognizes antigen, and which chains make it up?
+    back: The Fab fragment, built from both a light and a heavy chain, is the part that binds antigen.
+    src: { page: 102, quote: "Fab fragment consisting of light (L) and heavy (H) chains recognizes antigens." }
     status: unverified
     tags: [high-yield]
+  - id: imm.L03.118
+    kind: cloze
+    topic: antibody-structure-and-function
+    text: The {{c1::Fc}} region of {{c2::IgM and IgG}} fixes complement.
+    src: { page: 102, quote: "Fc region of IgM and IgG fixes complement." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L03.119
+    kind: cloze
+    topic: antibody-structure-and-function
+    text: The {{c1::heavy}} chain contributes to both the Fc and Fab regions, whereas the {{c2::light}} chain contributes only to the {{c3::Fab}} region.
+    src: { page: 102, quote: "Heavy chain contributes to Fc and Fab regions. Light chain contributes only to Fab region." }
+    status: unverified
   - id: imm.L03.002
     kind: card
     topic: antibody-structure-and-function
@@ -87,10 +100,11 @@ items:
     kind: mcq
     topic: antibody-structure-and-function
     stem: >-
-      A 4-month-old boy has recurrent candidiasis, chronic diarrhea and Pneumocystis pneumonia.
-      Lymph node biopsy shows no germinal centers. Flow cytometry shows almost no T or B cells. Genetic
-      testing shows loss-of-function mutations in an enzyme pair needed to cut and rejoin gene segments
-      for both B- and T-cell receptors. Which step of antibody generation is directly impaired?
+      A 4-month-old boy is brought to the physician because of recurrent oral candidiasis, chronic
+      diarrhea and poor weight gain. He now has Pneumocystis pneumonia. His newborn screen showed absent
+      T-cell receptor excision circles (TRECs). A chest x-ray shows no thymic shadow. Flow cytometry shows
+      almost no T or B cells, with a normal number of NK cells. Adenosine deaminase activity in his red
+      cells is normal. Which of the following processes is most likely defective in this patient?
     options:
       - Random addition of nucleotides by TdT
       - V(D)J recombination
@@ -99,11 +113,11 @@ items:
       - Pairing of heavy chains with light chains
     answer: 1
     why:
-      - "TdT adds random nucleotides at the junctions; it does not cut and rejoin the segments."
-      - "Right. RAG1 and RAG2 randomly recombine VJ and V(D)J segments; a RAG mutation causes a VDJ recombination defect and SCID."
-      - "Isotype switching is an antigen-dependent step that needs CD40L and cytokines; it comes later."
-      - "Somatic hypermutation happens in germinal centers after antigen exposure."
-      - "Random heavy-light pairing needs receptors that were already recombined."
+      - "TdT only adds extra nucleotides at the junctions to increase diversity; without it receptors still form, so T and B cells would not be absent."
+      - "Right. Absent T and B cells with spared NK cells and normal ADA fits RAG1/RAG2 deficiency: the receptor genes cannot be cut and rejoined (VJ and V(D)J recombination), so neither T- nor B-cell receptors form and SCID results."
+      - "Isotype switching is a later, antigen-driven step that needs CD40L and cytokines; it does not explain missing T cells."
+      - "Somatic hypermutation happens in germinal centers after antigen exposure; it does not explain missing T and B cells."
+      - "Random heavy-light pairing needs receptor genes that have already been recombined, and T cells do not use it."
     src: { page: 102, quote: "Random recombination of VJ (light-chain) or V(D)J (heavy-chain) genes by RAG1 and RAG2" }
     status: unverified
   # ---------- p103: immunoglobulin isotypes ----------
@@ -119,7 +133,7 @@ items:
     kind: card
     topic: immunoglobulin-isotypes
     front: What is the difference between affinity and avidity?
-    back: "Affinity: the strength of a single antibody-antigen interaction. Avidity: the overall binding strength from multiple antibody-antigen interactions in a multivalent molecule (enhanced by the hinge region and heavy chain domains)."
+    back: "Affinity is how tightly one antigen-binding site holds one antigen. Avidity is the total grip of a molecule that binds through several sites at once; the hinge region and heavy chain domains increase it."
     src: { page: 103, quote: "Affinity refers to the strength of a single antibody–antigen interaction. Avidity (enhanced by the hinge region and heavy chain domains) describes the overall binding strength resulting from multiple antibody–antigen interactions in a multivalent molecule." }
     status: unverified
   - id: imm.L03.010
@@ -149,7 +163,7 @@ items:
     kind: cloze
     topic: immunoglobulin-isotypes
     text: "{{c1::IgG}} is associated with warm autoimmune hemolytic anemia; {{c2::IgM}} is associated with cold autoimmune hemolytic anemia."
-    src: { page: 103, quote: "Associated with warm autoimmune hemolytic anemia (“warm weather is Good!”)." }
+    src: { page: 103, quote: "Associated with warm autoimmune hemolytic anemia (“warm weather is Good!”). IgA J chain J chain IgG IgA IgM IgD IgE Prevents attachment of bacteria and viruses to mucous membranes; does not fix complement. Monomer (in circulation) or dimer (with J chain when secreted). Crosses epithelial cells by transcytosis. Produced in GI tract (eg, by Peyer patches) and protects against gut infections (eg, Giardia). Most produced antibody overall, but has lower serum concentrations. Released into secretions (tears, saliva, mucus) and breast milk. Picks up secretory component from epithelial cells, which protects the Fc portion from luminal proteases. IgM J chain J chain IgG IgA IgM IgD IgE First antibody to be produced during an immune response. Fixes complement. Antigen receptor on the surface of B cells. Monomer on B cell, pentamer with J chain when secreted. Pentamer enables avid binding to antigen while humoral response evolves. Associated with cold autoimmune hemolytic anemia." }
     status: unverified
     tags: [high-yield]
   - id: imm.L03.013
@@ -527,10 +541,27 @@ items:
   - id: imm.L03.042
     kind: card
     topic: important-cytokines
-    front: What are the book's mnemonics for IL-4, IL-5 and IL-13?
-    back: "IL-4: \"Ain't too proud 2 BEG 4 help\" (Th2, B cells, IgE, IgG). IL-5: \"I have 5 BAEs\" (B cells, IgA, Eosinophils). IL-13: \"Interleukin thirtEEn promotes IgE\"."
-    src: { page: 106, quote: "Ain’t too proud 2 BEG 4 help." }
+    front: What is the book's mnemonic for interleukin-4?
+    back: "\"Ain't too proud 2 BEG 4 help\": IL-4 drives Th2 (helper) differentiation, B-cell growth, and class switching to IgE and IgG."
+    src: { page: 106, quote: "Interleukin-4 Induces differentiation of T cells into Th (helper) 2 cells. Promotes growth of B cells. Enhances class switching to IgE and IgG. Ain’t too proud 2 BEG 4 help." }
     status: unverified
+    tags: [high-yield]
+  - id: imm.L03.116
+    kind: card
+    topic: important-cytokines
+    front: What is the book's mnemonic for interleukin-5?
+    back: "\"I have 5 BAEs\": IL-5 drives B-cell growth, class switching to IgA, and Eosinophil growth and differentiation."
+    src: { page: 106, quote: "Interleukin-5 Promotes growth and differentiation of B cells. Enhances class switching to IgA. Stimulates growth and differentiation of Eosinophils. I have 5 BAEs." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L03.117
+    kind: card
+    topic: important-cytokines
+    front: What is the book's mnemonic for interleukin-13?
+    back: "\"Interleukin thirtEEn promotes IgE\": IL-13 pushes B cells to make IgE."
+    src: { page: 106, quote: "Interleukin-13 Promotes IgE production by B cells. Induces alternative macrophage activation. Interleukin thirtEEn promotes IgE." }
+    status: unverified
+    tags: [high-yield]
   - id: imm.L03.043
     kind: cloze
     topic: important-cytokines
@@ -628,11 +659,25 @@ items:
   - id: imm.L03.051
     kind: card
     topic: type-i-interferons
-    front: How do type I interferons (IFN-α, IFN-β) protect neighboring cells from viruses?
-    back: Virus-infected cells make them; they act on local cells, priming them by downregulating protein synthesis (to resist viral replication) and upregulating MHC expression (to help recognize infected cells). They act on RNA and DNA viruses and also activate antitumor immunity.
-    src: { page: 107, quote: "Cells infected with a virus synthesize these glycoproteins, which act on local cells, priming them for viral defense by downregulating protein synthesis to resist potential viral replication and by upregulating MHC expression to facilitate recognition of infected cells." }
+    front: Type I interferons (IFN-α, IFN-β) made by a virus-infected cell act on nearby cells. How do they make those cells resist viral replication?
+    back: They turn down protein synthesis in the neighboring cells, so a virus that enters has little machinery to copy itself.
+    src: { page: 107, quote: "Cells infected with a virus synthesize these glycoproteins, which act on local cells, priming them for viral defense by downregulating protein synthesis to resist potential viral replication" }
     status: unverified
     tags: [high-yield]
+  - id: imm.L03.120
+    kind: card
+    topic: type-i-interferons
+    front: How do type I interferons help the immune system recognize virus-infected cells?
+    back: They raise MHC expression on local cells, so infected cells display viral antigen more clearly.
+    src: { page: 107, quote: "and by upregulating MHC expression to facilitate recognition of infected cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L03.121
+    kind: cloze
+    topic: type-i-interferons
+    text: Type I interferons act against both {{c1::RNA and DNA}} viruses, and they also play a major role in activating {{c2::antitumor}} immunity.
+    src: { page: 107, quote: "interferons interfere with both RNA and DNA viruses. Cells infected with a virus synthesize these glycoproteins, which act on local cells, priming them for viral defense by downregulating protein synthesis to resist potential viral replication and by upregulating MHC expression to facilitate recognition of infected cells. Also play a major role in activating antitumor immunity." }
+    status: unverified
   - id: imm.L03.052
     kind: enumerate
     topic: type-i-interferons
@@ -652,7 +697,7 @@ items:
     kind: card
     topic: type-i-interferons
     front: What are the adverse effects of interferon therapy?
-    back: Flulike symptoms, depression, neutropenia, myopathy, interferon-induced autoimmunity.
+    back: "A flu-like illness, low mood (depression), a low neutrophil count, muscle disease (myopathy), and autoimmunity set off by the interferon itself."
     src: { page: 107, quote: "Flulike symptoms, depression, neutropenia, myopathy, interferon-induced autoimmunity." }
     status: unverified
   - id: imm.L03.054
@@ -841,7 +886,7 @@ items:
     topic: vaccination
     front: Which vaccines are subunit, recombinant, polysaccharide or conjugate vaccines?
     back: HBV (antigen = HBsAg), HPV, acellular pertussis (aP), N meningitidis (various strains), S pneumoniae, Hib, herpes zoster.
-    src: { page: 109, quote: "HBV (antigen = HBsAg), HPV, acellular pertussis (aP), N meningitidis (various strains), S pneumoniae" }
+    src: { page: 109, quote: "HBV (antigen = HBsAg), HPV, acellular pertussis (aP), N meningitidis (various strains), S pneumoniae (PPSV23 polysaccharide primarily T-cell–independent response; a polysaccharide conjugated to a carrier protein; produces a T-cell– dependent response). Hib, herpes zoster." }
     status: unverified
   - id: imm.L03.067
     kind: card
@@ -947,11 +992,45 @@ items:
   - id: imm.L03.077
     kind: card
     topic: hypersensitivity-types
-    front: What is serum sickness, when do symptoms appear, and what are they?
-    back: The prototypic immune complex disease. Antibodies to foreign proteins form complexes that deposit in tissues 1-2 weeks after exposure → complement activation (↓ C3, C4). Fever, urticaria, arthralgia, proteinuria, lymphadenopathy. Serum sickness-like reactions occur with some drugs (haptens, e.g., penicillin, monoclonal antibodies) and infections (e.g., hepatitis B).
+    front: What is serum sickness, and how does it cause tissue damage?
+    back: "The model immune complex disease: the body makes antibodies against a foreign protein, the antibody-antigen complexes settle in tissues, and the complement they activate drives inflammation and damage."
     src: { page: 111, quote: "Serum sickness—the prototypic immune complex disease. Antibodies to foreign proteins are produced and 1-2 weeks later, antibody- antigen complexes form and deposit in tissues → complement activation → inflammation and tissue damage (↓ serum C3, C4)." }
     status: unverified
     tags: [high-yield]
+  - id: imm.L03.122
+    kind: cloze
+    topic: hypersensitivity-types
+    text: In serum sickness, immune complexes form and symptoms appear {{c1::1-2 weeks}} after exposure to the foreign antigen.
+    src: { page: 111, quote: "Fever, urticaria, arthralgia, proteinuria, lymphadenopathy occur 1-2 weeks after antigen exposure." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L03.123
+    kind: cloze
+    topic: hypersensitivity-types
+    text: Complement consumption in serum sickness lowers serum {{c1::C3}} and {{c2::C4}}.
+    src: { page: 111, quote: "complement activation → inflammation and tissue damage (↓ serum C3, C4)." }
+    status: unverified
+  - id: imm.L03.124
+    kind: enumerate
+    topic: hypersensitivity-types
+    prompt: Enumerate the clinical findings of serum sickness (5).
+    points:
+      - Fever
+      - Urticaria
+      - Arthralgia
+      - Proteinuria
+      - Lymphadenopathy
+    pass: 5
+    src: { page: 111, quote: "Fever, urticaria, arthralgia, proteinuria, lymphadenopathy occur 1-2 weeks after antigen exposure." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L03.125
+    kind: card
+    topic: hypersensitivity-types
+    front: What can trigger a serum sickness-like reaction?
+    back: "Certain drugs that can behave as haptens, such as penicillin and monoclonal antibodies, and certain infections, such as hepatitis B."
+    src: { page: 111, quote: "Serum sickness–like reactions are associated with some drugs (may act as haptens, eg, penicillin, monoclonal antibodies) and infections (eg, hepatitis B)." }
+    status: unverified
   - id: imm.L03.078
     kind: card
     topic: hypersensitivity-types
@@ -965,6 +1044,14 @@ items:
     front: What are the two mechanisms of type IV hypersensitivity?
     back: "1. Direct cell cytotoxicity: CD8+ cytotoxic T cells kill targeted cells. 2. Inflammatory reaction: effector CD4+ T cells recognize antigen and release inflammation-inducing cytokines. No antibodies are involved."
     src: { page: 111, quote: "Two mechanisms, each involving T cells: 1. Direct cell cytotoxicity: CD8+ cytotoxic T cells kill targeted cells. 2. Inflammatory reaction: effector CD4+ T cells recognize antigen and release inflammation-inducing cytokines" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L03.127
+    kind: card
+    topic: hypersensitivity-types
+    front: What is the book's mnemonic for the timing of type IV hypersensitivity?
+    back: "\"Fourth (type) and last (delayed)\": type IV is the delayed-type hypersensitivity reaction."
+    src: { page: 111, quote: "Fourth (type) and last (delayed)." }
     status: unverified
     tags: [high-yield]
   - id: imm.L03.080
@@ -1211,7 +1298,7 @@ items:
     topic: immunodeficiencies
     front: What are the features of selective IgA deficiency (the book's A's)?
     back: Majority Asymptomatic; can see Airway and GI infections, Autoimmune disease (e.g., celiac), Atopy, and Anaphylaxis to IgA in blood products. ↓ IgA with normal IgG and IgM; ↑ giardiasis.
-    src: { page: 114, quote: "Majority Asymptomatic Can see Airway and GI infections, Autoimmune disease (eg, celiac disease), Atopy, Anaphylaxis to IgA in blood products" }
+    src: { page: 114, quote: "Majority Asymptomatic Can see Airway and GI infections, Autoimmune disease (eg, celiac disease), Atopy, Anaphylaxis to IgA in blood products ↓ IgA with normal IgG, IgM levels ↑ susceptibility to giardiasis" }
     status: unverified
     tags: [high-yield]
   - id: imm.L03.094
@@ -1249,7 +1336,19 @@ items:
     topic: immunodeficiencies
     front: What is the book's mnemonic for autosomal dominant hyper-IgE (Job) syndrome?
     back: "\"Learn the ABCDEF's to get a Job STAT!\": cold staph Abscesses, retained Baby teeth, Coarse facies, Dermatologic problems (eczema), ↑ IgE (and eosinophils), bone Fractures from minor trauma; STAT3 mutation."
-    src: { page: 114, quote: "Cold (noninflamed) staphylococcal Abscesses, retained Baby teeth, Coarse facies, Dermatologic problems (eczema), ↑ IgE, bone Fractures from minor trauma" }
+    src: { page: 114, quote: "Deficiency of Th17 cells due to STAT3 mutation → impaired recruitment of neutrophils to sites of infection Cold (noninflamed) staphylococcal Abscesses, retained Baby teeth, Coarse facies, Dermatologic problems (eczema), ↑ IgE, bone Fractures from minor trauma ↑ IgE ↑ eosinophils Learn the ABCDEF’s to get a Job STAT!" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L03.126
+    kind: table
+    topic: immunodeficiencies
+    title: The two 22q11 microdeletion presentations
+    columns: [Syndrome, Defects]
+    rows:
+      - ["DiGeorge syndrome", "Thymic, parathyroid and cardiac defects"]
+      - ["Velocardiofacial syndrome", "Palate, facial and cardiac defects"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 114, quote: "22q11 microdeletion; failure to develop 3rd and 4th pharyngeal pouches → absent thymus and parathyroids DiGeorge syndrome—thymic, parathyroid, cardiac defects Velocardiofacial syndrome— palate, facial, cardiac defects" }
     status: unverified
     tags: [high-yield]
   - id: imm.L03.097
@@ -1286,6 +1385,7 @@ items:
     back: "\"Granny's cats keep her positive\" (CGD → catalase ⊕)."
     src: { page: 115, quote: "↑ susceptibility to catalase ⊕ organisms (granny’s cats keep her positive)" }
     status: unverified
+    tags: [high-yield]
   - id: imm.L03.100
     kind: cloze
     topic: immunodeficiencies
@@ -1406,11 +1506,12 @@ items:
     hook: "الكتاب: Some Bacteria Produce No Serious granules: Staph، Burkholderia، Pseudomonas، Nocardia، Serratia."
     src: { page: 116, quote: "Some Bacteria Produce No Serious granules: Staphylococcus, Burkholderia cepacia, Pseudomonas aeruginosa, Nocardia, Serratia" }
     status: unverified
+    tags: [high-yield]
   - id: imm.L03.107
     kind: card
     topic: infections-in-immunodeficiency
     front: As a rule, what kinds of infections do B-cell and T-cell deficiencies produce?
-    back: B-cell deficiencies tend to produce recurrent bacterial infections; T-cell deficiencies produce more fungal and viral infections.
+    back: "Mostly bacteria, again and again, when B cells are missing; mostly fungi and viruses when T cells are missing."
     src: { page: 116, quote: "Note: B-cell deficiencies tend to produce recurrent bacterial infections, whereas T-cell deficiencies produce more fungal and viral infections." }
     status: unverified
     tags: [high-yield]

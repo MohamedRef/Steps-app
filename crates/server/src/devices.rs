@@ -28,7 +28,19 @@ CREATE TABLE IF NOT EXISTS devices (
 /// in as numbered steps through [`crate::sql::migrate`].
 pub fn migrate(db: &impl Sql) -> Result<(), SqlError> {
     db.exec_batch(SCHEMA)?;
-    crate::sql::migrate(db, "devices_schema", &["ALTER TABLE devices ADD COLUMN retired_hash TEXT"])
+    crate::sql::migrate(
+        db,
+        "devices_schema",
+        &[
+            "ALTER TABLE devices ADD COLUMN retired_hash TEXT",
+            // Signed in with the username and password (not Google): such a
+            // device must give the current password to change it. Devices
+            // from before this column count as password ones, to be safe: a
+            // Google one signs in with Google again to be trusted (#541).
+            // `register` always sets it for a new sign-in.
+            "ALTER TABLE devices ADD COLUMN by_password INTEGER NOT NULL DEFAULT 1",
+        ],
+    )
 }
 
 #[derive(Debug, PartialEq, Eq, thiserror::Error)]
@@ -204,6 +216,34 @@ impl<'a, S: Sql> Devices<'a, S> {
         Ok(!rows.is_empty())
     }
 
+    /// Notes how the device signed in: with the username and password, or
+    /// with Google. Called after every [`Self::register`].
+    pub fn set_by_password(&self, device: &str, by_password: bool) -> Result<(), SqlError> {
+        self.db.exec(
+            "UPDATE devices SET by_password = ? WHERE device_id = ?",
+            &[u64::from(by_password).into(), device.into()],
+        )?;
+        Ok(())
+    }
+
+    /// Signs out every device that signed in with the username and password,
+    /// except `keep`: after the password changes or goes, the old one opens
+    /// nothing (#540). Returns the devices signed out.
+    pub fn revoke_password_sessions(&self, keep: &str, now_ms: u64) -> Result<Vec<String>, SqlError> {
+        let rows = self.db.exec(
+            "UPDATE devices SET revoked_ms = ?, refresh_hash = NULL, prev_hash = NULL, retired_hash = NULL
+             WHERE by_password = 1 AND revoked_ms IS NULL AND device_id != ? RETURNING device_id",
+            &[now_ms.into(), keep.into()],
+        )?;
+        Ok(rows.into_iter().filter_map(|r| r.into_iter().next()).filter_map(Value::into_string).collect())
+    }
+
+    /// Whether the device signed in with the username and password.
+    pub fn by_password(&self, device: &str) -> Result<bool, SqlError> {
+        let rows = self.db.exec("SELECT by_password FROM devices WHERE device_id = ?", &[device.into()])?;
+        Ok(rows.first().and_then(|r| r.first()).and_then(Value::as_u64).unwrap_or(0) != 0)
+    }
+
     /// The email a device signed in with, while it is signed in.
     pub fn email(&self, device: &str) -> Result<Option<String>, SqlError> {
         let rows = self
@@ -297,6 +337,42 @@ mod tests {
         d.register(&info("s24u", "Galaxy S24 Ultra", Platform::Android), "me@example.com", "h4", NOW + 50)
             .unwrap();
         assert!(d.is_active(id("s24u")).unwrap());
+    }
+
+    #[test]
+    fn a_password_change_signs_out_the_other_password_sessions() {
+        let db = MemSql::new();
+        let d = Devices::new(&db).unwrap();
+        for (dev, by_password) in [("phone", false), ("pc", true), ("laptop", true), ("tab", false)] {
+            d.register(&info(dev, dev, Platform::Other), "me@example.com", dev, NOW).unwrap();
+            d.set_by_password(dev, by_password).unwrap();
+        }
+        assert_eq!(d.revoke_password_sessions("laptop", NOW + 1).unwrap(), ["pc"]);
+        assert!(!d.is_active("pc").unwrap());
+        assert_eq!(d.refresh("pc", "pc", "pc2", NOW + 2), Err(RefreshError::Revoked));
+        for dev in ["phone", "laptop", "tab"] {
+            assert!(d.is_active(dev).unwrap(), "{dev} stays");
+        }
+        assert_eq!(d.revoke_password_sessions("phone", NOW + 3).unwrap(), ["laptop"]);
+        assert!(d.revoke_password_sessions("phone", NOW + 4).unwrap().is_empty());
+    }
+
+    #[test]
+    fn devices_from_before_the_column_count_as_password_sessions() {
+        let db = MemSql::new();
+        db.exec_batch(SCHEMA).unwrap();
+        crate::sql::migrate(&db, "devices_schema", &["ALTER TABLE devices ADD COLUMN retired_hash TEXT"])
+            .unwrap();
+        db.exec_batch(
+            "INSERT INTO devices (device_id, name, platform, email, signed_in_ms, last_seen_ms)
+             VALUES ('old-pc', 'PC', 'web', 'me@example.com', 1, 1)",
+        )
+        .unwrap();
+        let d = Devices::new(&db).unwrap(); // adds by_password
+        assert!(d.by_password("old-pc").unwrap(), "how it signed in is unknown: ask for the password");
+        d.register(&info("new-phone", "Phone", Platform::Android), "me@example.com", "h2", NOW).unwrap();
+        d.set_by_password("new-phone", false).unwrap();
+        assert!(!d.by_password("new-phone").unwrap(), "a fresh Google sign-in is trusted");
     }
 
     #[test]

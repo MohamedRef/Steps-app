@@ -34,7 +34,7 @@ items:
   - id: heme.L03.003
     kind: cloze
     topic: hemoglobin-electrophoresis
-    text: "Electrophoresis order from anode: \"A {{c1::Fat}} {{c2::Santa}} {{c3::Claus}} can't go far\" (A, F, S, C). HbC is closest to the cathode."
+    text: "\"A Fat Santa Claus can't go far\": HbA migrates farthest toward the anode, then {{c1::HbF}}, then {{c2::HbS}}, then {{c3::HbC}}, which stays closest to the cathode."
     src: { page: 416, quote: "A Fat Santa Claus can’t go far. HbC is closest to the Cathode. HbA is closest to the Anode." }
     status: unverified
   - id: heme.L03.004
@@ -51,7 +51,7 @@ items:
       - [CC, Hb C disease]
       - [SC, Hb SC disease]
     blanks: [[1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1]]
-    src: { page: 416, quote: "AA Normal adult ↑ AF Normal newborn ↑ AS Sickle cell trait ↑ SS Sickle cell disease ↑ AC Hb C trait ↑ CC Hb C disease" }
+    src: { page: 416, quote: "AA Normal adult ↑ AF Normal newborn ↑ AS Sickle cell trait ↑ SS Sickle cell disease ↑ AC Hb C trait ↑ CC Hb C disease ↑ SC C A: normal hemoglobin β chain (HbA, adult) F: normal hemoglobin γ chain (HbF, fetal) S: sickle cell hemoglobin β chain (HbS) C: hemoglobin C β chain (HbC) S F A Hb SC disease" }
     status: unverified
   - id: heme.L03.005
     kind: mcq
@@ -151,7 +151,7 @@ items:
       - "Adhesion: platelets bind vWF via GpIb at the site of injury and release ADP, Ca2+ and TXA2"
       - "Activation: ADP binding to P2Y12 induces GpIIb/IIIa expression"
       - "Aggregation: fibrinogen binds GpIIb/IIIa and links platelets"
-    src: { page: 417, quote: "AGGREGATION Fibrinogen binds GpIIb/IIIa receptors and links platelets" }
+    src: { page: 417, quote: "AGGREGATION Fibrinogen binds GpIIb/IIIa receptors and links platelets Balance between ACTIVATION ADHESION EXPOSURE INJURY Anti-aggregation factors: PGI2 and NO (released by endothelial cells) ↑ blood flow ↓ platelet aggregation Pro-aggregation factors: TXA2 (released by platelets) ↓ blood flow ↑ platelet aggregation Endothelial damage → transient vasoconstriction via neural stimulation reflex and endothelin (released from damaged cell) vWF binds to exposed collagen (vWF is from Weibel-Palade bodies of endothelial cells and α-granules of platelets) Platelets bind vWF via GpIb receptor at the site of injury only (specific) → platelets undergo conformational change ADP binding to P2Y12 receptor induces GpIIb/IIIa expression at platelet surface → rapid irreversible platelet aggregation Platelets release ADP and Ca2+ (necessary for coagulation cascade), TXA2 ADP helps platelets adhere to endothelium" }
     status: unverified
     tags: [high-yield]
   - id: heme.L03.042
@@ -185,12 +185,20 @@ items:
     blanks: [[0, 1], [1, 1], [0, 2], [1, 2]]
     src: { page: 417, quote: "Anti-aggregation factors: PGI2 and NO (released by endothelial cells) ↑ blood flow ↓ platelet aggregation Pro-aggregation factors: TXA2 (released by platelets)" }
     status: unverified
+    tags: [high-yield]
   - id: heme.L03.013
     kind: card
     topic: platelet-plug-formation
-    front: What is the platelet plug of primary hemostasis like, and what makes it stable?
-    back: A temporary plug that stops bleeding but is unstable and easily dislodged. The coagulation cascade (secondary hemostasis) forms an insoluble fibrin mesh that stabilizes it.
+    front: What is the platelet plug of primary hemostasis like?
+    back: A temporary plug that stops bleeding but is unstable and easily dislodged.
     src: { page: 417, quote: "Temporary plug stops bleeding; unstable, easily dislodged" }
+    status: unverified
+  - id: heme.L03.049
+    kind: card
+    topic: platelet-plug-formation
+    front: What does the coagulation cascade (secondary hemostasis) add to the platelet plug?
+    back: An insoluble fibrin mesh that makes the plug stable.
+    src: { page: 417, quote: "Formation of insoluble fibrin mesh." }
     status: unverified
   - id: heme.L03.014
     kind: mcq
@@ -215,6 +223,13 @@ items:
       - "Cyclooxygenase is inhibited by aspirin; it doesn't explain a failed ristocetin assay."
     src: { page: 417, quote: "Failure of aggregation with ristocetin assay occurs in von Willebrand disease and Bernard-Soulier syndrome." }
     status: unverified
+  - id: heme.L03.050
+    kind: cloze
+    topic: platelet-plug-formation
+    text: Failure of aggregation with the ristocetin assay occurs in {{c1::von Willebrand disease}} and {{c2::Bernard-Soulier syndrome}}.
+    src: { page: 417, quote: "Failure of aggregation with ristocetin assay occurs in von Willebrand disease and Bernard-Soulier syndrome." }
+    status: unverified
+    tags: [high-yield]
   # ---------- p417: thrombogenesis ----------
   - id: heme.L03.015
     kind: table
@@ -281,7 +296,7 @@ items:
       - "Right. Without GpIIb/IIIa (Glanzmann thrombasthenia) fibrinogen cannot link platelets, so no agonist causes aggregation, while vWF-GpIb binding with ristocetin is intact."
       - "Cyclooxygenase loss (as with aspirin) would not block aggregation to every agonist."
       - "Factor VIII deficiency is hemophilia A, a coagulation (secondary hemostasis) defect with joint bleeds."
-    src: { page: 417, quote: "Eptifibatide and tirofiban inhibit GpIIb/IIIa (fibrinogen receptor) directly." }
+    src: { page: 417, quote: "Deficiency: Glanzmann thrombasthenia" }
     status: unverified
   # ---------- p418: coagulation and kinin pathways ----------
   - id: heme.L03.021
@@ -324,15 +339,29 @@ items:
       - [Thrombolytics, "Alteplase, reteplase, tenecteplase"]
       - [Antifibrinolytics, "Aminocaproic acid, tranexamic acid"]
     blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
-    src: { page: 418, quote: "THROMBOLYTICS: - alteplase, reteplase, tenecteplase ANTIFIBRINOLYTICS: - aminocaproic acid, tranexamic acid" }
+    src: { page: 418, quote: "ANTICOAGULANTS: - LMWH (eg, dalteparin, enoxaparin) - heparin - direct Xa inhibitors (eg, apixaban) - fondaparinux ANTICOAGULANTS: - heparin - LMWH (eg, dalteparin, enoxaparin) - direct thrombin inhibitors (eg, argatroban, bivalirudin, dabigatran) Tissue factor VII VIIa XII Prothrombin Kallikrein Bradykinin ↑ vasodilation ↑ permeability ↑ pain Kinin cascade HMWK Thrombin Plasminogen Plasmin THROMBOLYTICS: - alteplase, reteplase, tenecteplase ANTIFIBRINOLYTICS: - aminocaproic acid, tranexamic acid" }
     status: unverified
+    tags: [high-yield]
   - id: heme.L03.025
     kind: card
     topic: coagulation-and-kinin-pathways
-    front: What does bradykinin do, and what activates and inactivates it?
-    back: ↑ vasodilation, ↑ permeability and ↑ pain. Kallikrein activates bradykinin (from HMWK); ACE inactivates it.
+    front: What are the effects of bradykinin?
+    back: It raises vasodilation, vascular permeability and pain.
+    src: { page: 418, quote: "Bradykinin ↑ vasodilation ↑ permeability ↑ pain" }
+    status: unverified
+  - id: heme.L03.051
+    kind: cloze
+    topic: coagulation-and-kinin-pathways
+    text: In the kinin cascade, {{c1::kallikrein}} activates bradykinin (from HMWK).
+    src: { page: 418, quote: "Note: Kallikrein activates bradykinin" }
+    status: unverified
+  - id: heme.L03.052
+    kind: cloze
+    topic: coagulation-and-kinin-pathways
+    text: "{{c1::ACE}} inactivates bradykinin."
     src: { page: 418, quote: "Note: Kallikrein activates bradykinin ACE inactivates bradykinin" }
     status: unverified
+    tags: [high-yield]
   - id: heme.L03.026
     kind: card
     topic: coagulation-and-kinin-pathways
@@ -361,6 +390,67 @@ items:
     text: Factor {{c1::XIIIa}} (fibrin stabilizing factor) cross-links fibrin monomers into the mesh that stabilizes the platelet plug; it needs {{c2::Ca2+}}.
     src: { page: 418, quote: "Fibrin mesh stabilizes platelet plug Aggregation Fibrin monomers Ia Ca2+ XIIIa XIII" }
     status: unverified
+  - id: heme.L03.053
+    kind: order
+    topic: coagulation-and-kinin-pathways
+    prompt: Put the steps of the contact activation (intrinsic) and common pathways in order, from contact to fibrin.
+    steps:
+      - "XII → XIIa (contact with collagen, basement membrane, activated platelets)"
+      - "XI → XIa"
+      - "IX → IXa (with cofactor VIIIa)"
+      - "X → Xa (with cofactor Va)"
+      - "Prothrombin (II) → thrombin (IIa)"
+      - "Fibrinogen (I) → fibrin (Ia)"
+    src: { page: 418, quote: "XI XIa IX X II IXa VIIIa VIII with vWF XIIa Xa Va * * IIa I Fibrinogen" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.054
+    kind: cloze
+    topic: coagulation-and-kinin-pathways
+    text: In the tissue factor (extrinsic) pathway, {{c1::tissue factor}} and factor {{c2::VIIa}} activate factor X.
+    src: { page: 418, quote: "Tissue factor VII VIIa XII Prothrombin" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.055
+    kind: cloze
+    topic: coagulation-and-kinin-pathways
+    text: In the common pathway, factor {{c1::Xa}} (with Va) turns prothrombin into {{c2::thrombin (IIa)}}, which turns fibrinogen into fibrin.
+    src: { page: 418, quote: "XI XIa IX X II IXa VIIIa VIII with vWF XIIa Xa Va * * IIa I Fibrinogen" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.056
+    kind: cloze
+    topic: coagulation-and-kinin-pathways
+    text: The two cofactors of the coagulation cascade are factor {{c1::VIIIa}} (with IXa) and factor {{c2::Va}} (with Xa).
+    src: { page: 418, quote: "IXa VIIIa VIII with vWF XIIa Xa Va" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L03.057
+    kind: cloze
+    topic: coagulation-and-kinin-pathways
+    text: The contact activation (intrinsic) pathway is started by {{c1::collagen}}, {{c2::basement membrane}} and {{c3::activated platelets}}.
+    src: { page: 418, quote: "Collagen, basement membrane, activated platelets Tissue factor (extrinsic) pathway" }
+    status: unverified
+  - id: heme.L03.058
+    kind: cloze
+    topic: coagulation-and-kinin-pathways
+    text: Factor {{c1::XIIa}} also starts the kinin cascade, in which kallikrein makes bradykinin from HMWK.
+    src: { page: 418, quote: "XII Prothrombin Kallikrein Bradykinin ↑ vasodilation ↑ permeability ↑ pain Kinin cascade HMWK" }
+    status: unverified
+  - id: heme.L03.059
+    kind: cloze
+    topic: coagulation-and-kinin-pathways
+    text: "{{c1::C1-esterase inhibitor}} is the brake on factor XIIa and kallikrein."
+    src: { page: 418, quote: "C1-esterase inhibitor" }
+    status: unverified
+  - id: heme.L03.060
+    kind: card
+    topic: coagulation-and-kinin-pathways
+    front: Which proteins does the coagulation figure list as the regulatory anticoagulant proteins?
+    back: Protein C and protein S.
+    src: { page: 418, quote: "REGULATORYANTICOAGULANT PROTEINS: - proteins C and S" }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L03.029
     kind: mcq
     topic: coagulation-and-kinin-pathways
@@ -450,7 +540,7 @@ items:
     kind: card
     topic: vitamin-k-dependent-coagulation
     front: Why are neonates vitamin K deficient, and how is it prevented?
-    back: Neonates lack enteric bacteria, which produce vitamin K. Early administration of vitamin K overcomes the neonatal deficiency/coagulopathy.
+    back: Their gut has no bacteria yet, and gut bacteria are what make vitamin K. Giving vitamin K soon after birth prevents the deficiency and its bleeding.
     src: { page: 419, quote: "Neonates lack enteric baKteria, which produce vitamin K. Early administration of vitamin K overcomes neonatal deficiency/coagulopathy." }
     status: unverified
   - id: heme.L03.035

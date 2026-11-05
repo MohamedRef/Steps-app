@@ -11,6 +11,9 @@ use super::GoogleClient;
 const AUTH_URL: &str = "https://accounts.google.com/o/oauth2/v2/auth";
 /// `sessionStorage`: the state this tab sent, so only its own answer counts.
 const STATE_KEY: &str = "steps:oauth-state";
+/// `sessionStorage`: the nonce this tab sent, which Steps Cloud checks
+/// against the token's (#542).
+const NONCE_KEY: &str = "steps:oauth-nonce";
 
 /// Only the apps exchange codes; the web gets an ID token straight back.
 #[derive(Clone, Debug)]
@@ -24,12 +27,20 @@ pub enum OAuthError {
 
 thread_local! {
     static RETURNED: RefCell<Option<String>> = const { RefCell::new(None) };
+    static NONCE: RefCell<Option<String>> = const { RefCell::new(None) };
 }
 
-fn random() -> String {
+/// 128 random bits as hex; `None` when the browser has no randomness, and
+/// then sign-in doesn't start (a fixed state would check nothing, #542).
+fn random() -> Option<String> {
     let mut bytes = [0u8; 16];
-    let _ = getrandom::fill(&mut bytes);
-    bytes.iter().map(|b| format!("{b:02x}")).collect()
+    getrandom::fill(&mut bytes).ok()?;
+    Some(bytes.iter().map(|b| format!("{b:02x}")).collect())
+}
+
+/// The nonce of the sign-in Google just answered, for Steps Cloud.
+pub fn sign_in_nonce() -> Option<String> {
+    NONCE.with(|n| n.borrow().clone())
 }
 
 /// The address Google sends the page back to: the app itself.
@@ -56,13 +67,13 @@ pub fn auth_url(client_id: &str, redirect_uri: &str, state: &str, nonce: &str) -
 pub async fn go_to_google(client: &GoogleClient) -> String {
     let Some(window) = web_sys::window() else { return "no window".into() };
     let Some(redirect) = here() else { return "no address".into() };
-    let state = random();
+    let (Some(state), Some(nonce)) = (random(), random()) else { return "no randomness".into() };
     let Some(storage) = window.session_storage().ok().flatten() else { return "no sessionStorage".into() };
-    if storage.set_item(STATE_KEY, &state).is_err() {
+    if storage.set_item(STATE_KEY, &state).is_err() || storage.set_item(NONCE_KEY, &nonce).is_err() {
         return "sessionStorage refused".into();
     }
     crate::platform::web::save_now().await;
-    let url = auth_url(&client.client_id, &redirect, &state, &random());
+    let url = auth_url(&client.client_id, &redirect, &state, &nonce);
     match window.location().assign(&url) {
         Ok(()) => std::future::pending().await,
         Err(e) => format!("{e:?}"),
@@ -75,11 +86,16 @@ pub fn catch_redirect() {
     let Some(window) = web_sys::window() else { return };
     let Ok(hash) = window.location().hash() else { return };
     let Some(fragment) = hash.strip_prefix('#') else { return };
-    let expected = window.session_storage().ok().flatten().and_then(|s| {
-        let v = s.get_item(STATE_KEY).ok().flatten();
-        let _ = s.remove_item(STATE_KEY);
-        v
-    });
+    let storage = window.session_storage().ok().flatten();
+    let take = |key: &str| {
+        storage.as_ref().and_then(|s| {
+            let v = s.get_item(key).ok().flatten();
+            let _ = s.remove_item(key);
+            v
+        })
+    };
+    let expected = take(STATE_KEY);
+    let nonce = take(NONCE_KEY);
     let Some(answer) = parse_fragment(fragment, expected.as_deref()) else { return };
     if let Some(path) = here()
         && let Ok(history) = window.history()
@@ -87,7 +103,10 @@ pub fn catch_redirect() {
         let _ = history.replace_state_with_url(&wasm_bindgen::JsValue::NULL, "", Some(&path));
     }
     match answer {
-        Ok(token) => RETURNED.with(|r| *r.borrow_mut() = Some(token)),
+        Ok(token) => {
+            RETURNED.with(|r| *r.borrow_mut() = Some(token));
+            NONCE.with(|n| *n.borrow_mut() = nonce);
+        }
         Err(e) => crate::diag::report!("Google sign-in: {e:?}"),
     }
 }

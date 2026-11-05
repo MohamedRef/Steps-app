@@ -28,9 +28,15 @@ items:
   - id: neuro.L05.001
     kind: card
     topic: vertigo
-    front: What is vertigo, and which kind is more common?
-    back: "A sensation of spinning while actually stationary, a subtype of dizziness distinct from lightheadedness. Peripheral vertigo is more common than central."
-    src: { page: 549, quote: "Sensation of spinning while actually stationary. Subtype of “dizziness,” but distinct from “lightheadedness.” Peripheral vertigo is more common than central vertigo." }
+    front: What is vertigo?
+    back: "The feeling that the world is spinning when the patient is not moving; one kind of dizziness, separate from feeling lightheaded."
+    src: { page: 549, quote: "Sensation of spinning while actually stationary. Subtype of “dizziness,” but distinct from “lightheadedness.”" }
+    status: unverified
+  - id: neuro.L05.115
+    kind: cloze
+    topic: vertigo
+    text: "{{c1::Peripheral}} vertigo is more common than {{c2::central}} vertigo."
+    src: { page: 549, quote: "Peripheral vertigo is more common than central vertigo." }
     status: unverified
   - id: neuro.L05.002
     kind: card
@@ -73,20 +79,20 @@ items:
     stem: >-
       A 58-year-old man with hypertension has 6 hours of continuous spinning vertigo and vomiting. He has purely vertical
       nystagmus that does not lessen when he fixes his gaze on a target, and he cannot walk heel to toe; his finger-to-nose
-      test is clumsy on the left. Hearing is normal. What is the most likely location of the lesion?
+      test is clumsy on the left. Hearing is normal. What is the most likely cause of his vertigo?
     options:
-      - Brainstem or cerebellum
-      - Semicircular canal
-      - Vestibular nerve
-      - Endolymphatic sac
-      - Cochlea
+      - Stroke affecting the vestibular nuclei and cerebellum
+      - Debris in a semicircular canal
+      - Inflammation of the vestibular nerve
+      - Endolymphatic hydrops
+      - Vestibular schwannoma compressing CN VIII
     answer: 0
     why:
-      - "Right. Purely vertical nystagmus not suppressed by fixation, with ataxia and dysmetria, points to central vertigo (eg, cerebellar or brainstem stroke)."
-      - "Canal debris (BPPV) gives brief episodes on head movement with horizontal-torsional nystagmus."
-      - "Vestibular neuritis is peripheral: nystagmus is suppressed by fixation and there is no dysmetria."
-      - "Ménière disease brings hearing loss and tinnitus."
-      - "Cochlear disease affects hearing, which is normal here."
+      - "Right. Purely vertical nystagmus not suppressed by fixation, with ataxia and dysmetria, is central vertigo; sudden onset in an older man with hypertension points to a posterior circulation stroke."
+      - "Canal debris (BPPV) gives spells of 1 minute or less on head movement, with horizontal-torsional nystagmus that fixation suppresses."
+      - "Vestibular neuritis is peripheral: its nystagmus is suppressed by fixation and it causes no dysmetria."
+      - "Endolymphatic hydrops (Ménière disease) brings episodes with sensorineural hearing loss and tinnitus; hearing is normal here."
+      - "A vestibular schwannoma grows slowly and first causes one-sided hearing loss and tinnitus, not 6 hours of sudden vertigo with dysmetria."
     src: { page: 549, quote: "Due to brainstem or cerebellar lesions (eg, stroke affecting vestibular nuclei, demyelinating disease, or posterior fossa tumor)." }
     status: unverified
   - id: neuro.L05.006
@@ -250,6 +256,20 @@ items:
     src: { page: 550, quote: "Drainage into uvea and sclera with prostaglandin agonists (eg, latanoprost, bimatoprost)" }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L05.113
+    kind: cloze
+    topic: aqueous-humor-pathway
+    text: "In the iris, the {{c1::dilator}} muscle carries {{c2::α1}} receptors and the sphincter muscle carries {{c3::M3}} receptors."
+    src: { page: 550, quote: "Iris Dilator muscle (α1 ) Sphincter muscle (M3)" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.114
+    kind: card
+    topic: aqueous-humor-pathway
+    front: What holds the lens in place?
+    back: "Zonule (zonular) fibers hang the lens from the ciliary body."
+    src: { page: 550, quote: "Suspended from ciliary body by zonule fibers." }
+    status: unverified
   - id: neuro.L05.020
     kind: mcq
     topic: refractive-errors
@@ -318,9 +338,23 @@ items:
   - id: neuro.L05.023
     kind: card
     topic: glaucoma
-    front: What is glaucoma, and what does funduscopy show?
-    back: "Optic neuropathy with progressive vision loss (peripheral → central), usually but not always with ↑ IOP. Most often 1°, sometimes 2° (uveitis, glucocorticoids). Funduscopy: optic disc cupping (thinning of the outer rim)."
+    front: What is glaucoma, and does it always come with ↑ intraocular pressure?
+    back: "A disease of the optic nerve that slowly takes away vision. IOP is raised in most patients, but not in all."
     src: { page: 551, quote: "Optic neuropathy causing progressive vision loss (peripheral → central). Usually, but not always, accompanied by ↑ intraocular pressure (IOP)." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.100
+    kind: cloze
+    topic: glaucoma
+    text: "Glaucoma is most often {{c1::1°}}, but can be 2° to an identifiable cause such as {{c2::uveitis}} or {{c3::glucocorticoids}}."
+    src: { page: 551, quote: "Etiology is most often 1°, but can be 2° to an identifiable cause (eg, uveitis, glucocorticoids)." }
+    status: unverified
+  - id: neuro.L05.101
+    kind: card
+    topic: glaucoma
+    front: What does funduscopy show in glaucoma?
+    back: "Cupping of the optic disc: its outer rim becomes thin."
+    src: { page: 551, quote: "Funduscopy: optic disc cupping (normal A vs thinning of outer rim of optic disc B )." }
     status: unverified
     tags: [high-yield]
   - id: neuro.L05.088
@@ -333,9 +367,43 @@ items:
   - id: neuro.L05.024
     kind: card
     topic: glaucoma
-    front: What is open-angle glaucoma, who gets it, and how is it treated?
-    back: "Angle is open; ↑ resistance to drainage through the trabecular meshwork. Most common type in the US. Risk factors: ↑ age, Black race, family history, diabetes. Usually asymptomatic, found incidentally. Treat with prostaglandins or β-blockers."
-    src: { page: 551, quote: "Associated with ↑ resistance to aqueous humor drainage through trabecular meshwork." }
+    front: What is the mechanism of open-angle glaucoma?
+    back: "The angle looks normal (open), but aqueous meets ↑ resistance as it drains through the trabecular meshwork."
+    src: { page: 551, quote: "Anterior chamber angle is open (normal). Most common type in US. Associated with ↑ resistance to aqueous humor drainage through trabecular meshwork." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.102
+    kind: cloze
+    topic: glaucoma
+    text: "{{c1::Open-angle}} glaucoma is the most common type of glaucoma in the US."
+    src: { page: 551, quote: "Open-angle glaucoma Anterior chamber angle is open (normal). Most common type in US." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.103
+    kind: enumerate
+    topic: glaucoma
+    prompt: Enumerate the risk factors for open-angle glaucoma (4).
+    points:
+      - ↑ age
+      - Black race
+      - Family history
+      - Diabetes mellitus
+    pass: 3
+    src: { page: 551, quote: "Risk factors: ↑ age, race (↑ incidence in Black population), family history, diabetes mellitus." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.104
+    kind: card
+    topic: glaucoma
+    front: How is open-angle glaucoma usually found?
+    back: "It is usually asymptomatic, so it tends to be found incidentally, eg on a routine eye exam."
+    src: { page: 551, quote: "Typically asymptomatic and discovered incidentally." }
+    status: unverified
+  - id: neuro.L05.105
+    kind: cloze
+    topic: glaucoma
+    text: "Open-angle glaucoma is treated with {{c1::prostaglandins}} or {{c2::β-blockers}}."
+    src: { page: 551, quote: "Treat with prostaglandins or β-blockers." }
     status: unverified
     tags: [high-yield]
   - id: neuro.L05.025
@@ -413,6 +481,7 @@ items:
     back: "Loss of central vision (scotomas), since the macula is the central retina. Distortion of straight lines (metamorphopsia) is an early symptom of the wet type."
     src: { page: 552, quote: "Distortion of straight lines (metamorphopsia) is an early symptom." }
     status: unverified
+    tags: [high-yield]
   - id: neuro.L05.031
     kind: table
     topic: retinal-disorders
@@ -442,11 +511,33 @@ items:
   - id: neuro.L05.033
     kind: card
     topic: retinal-disorders
-    front: What causes retinal artery occlusion, and what does it look like?
-    back: "Usually embolism (carotid atherosclerosis > cardiogenic), less often giant cell arteritis. Acute painless monocular vision loss. Funduscopy: cloudy retina with a cherry-red spot at the fovea; emboli may be seen (cholesterol crystals = yellow refractile deposits)."
-    src: { page: 552, quote: "Presents with acute, painless monocular vision loss. Funduscopy: cloudy retina with “cherry-red” spot at fovea D" }
+    front: What usually causes retinal artery occlusion?
+    back: "An embolus, most often from carotid atherosclerosis (more than from the heart); giant cell arteritis is a less common cause."
+    src: { page: 552, quote: "Blockage of central or branch retinal artery usually due to embolism (carotid artery atherosclerosis > cardiogenic); less commonly due to giant cell arteritis." }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L05.106
+    kind: card
+    topic: retinal-disorders
+    front: How does retinal artery occlusion present?
+    back: "Sudden loss of vision in one eye, without pain."
+    src: { page: 552, quote: "Presents with acute, painless monocular vision loss." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.107
+    kind: cloze
+    topic: retinal-disorders
+    text: "Retinal artery occlusion on funduscopy: {{c1::cloudy}} retina with a {{c2::cherry-red spot}} at the {{c3::fovea}}."
+    src: { page: 552, quote: "Funduscopy: cloudy retina with “cherry-red” spot at fovea D" }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.108
+    kind: card
+    topic: retinal-disorders
+    front: In retinal artery occlusion, what do cholesterol emboli look like on funduscopy?
+    back: "Small, shiny (refractile) yellow deposits inside retinal arterioles."
+    src: { page: 552, quote: "identifiable retinal emboli (eg, cholesterol crystals appear as small, yellow, refractile deposits in arterioles)." }
+    status: unverified
   - id: neuro.L05.034
     kind: card
     topic: retinal-disorders
@@ -458,11 +549,29 @@ items:
   - id: neuro.L05.035
     kind: card
     topic: retinal-disorders
-    front: "What is retinal detachment, and what are its types?"
-    back: "Separation of the neurosensory retina from the retinal pigment epithelium → loss of choroidal blood supply → photoreceptor degeneration. Rhegmatogenous (most common; retinal tears, posterior vitreous detachment, ↑ with age and high myopia) or nonrhegmatogenous (tractional or exudative)."
-    src: { page: 552, quote: "Rhegmatogenous (most common)—due to retinal tears; often associated with posterior vitreous detachment" }
+    front: "What is retinal detachment, and why do the photoreceptors suffer?"
+    back: "The neurosensory retina lifts off the retinal pigment epithelium, so it loses its choroidal blood supply; the photoreceptors become hypoxic and degenerate."
+    src: { page: 552, quote: "Separation of neurosensory retina from underlying retinal pigment epithelium → loss of choroidal blood supply → hypoxia and degeneration of photoreceptors." }
     status: unverified
     tags: [high-yield]
+  - id: neuro.L05.109
+    kind: table
+    topic: retinal-disorders
+    title: Types of retinal detachment
+    columns: [Type, Cause]
+    rows:
+      - [Rhegmatogenous (most common), "Retinal tears, often with posterior vitreous detachment; less often trauma"]
+      - [Nonrhegmatogenous, "Tractional or exudative (fluid accumulation)"]
+    blanks: [[0, 1], [1, 1]]
+    src: { page: 552, quote: "Rhegmatogenous (most common)—due to retinal tears; often associated with posterior vitreous detachment (↑ risk with advanced age, high myopia), less frequently traumatic." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.110
+    kind: cloze
+    topic: retinal-disorders
+    text: "Posterior vitreous detachment, which leads to rhegmatogenous retinal detachment, is more likely with {{c1::advanced age}} and {{c2::high myopia}}."
+    src: { page: 552, quote: "often associated with posterior vitreous detachment (↑ risk with advanced age, high myopia)" }
+    status: unverified
   - id: neuro.L05.097
     kind: card
     topic: retinal-disorders
@@ -574,8 +683,15 @@ items:
     kind: card
     topic: papilledema
     front: What is papilledema, and why does it happen?
-    back: "Optic disc swelling, usually bilateral, from ↑ ICP (eg, mass effect), caused by impaired axoplasmic flow in the optic nerve. Funduscopy: elevated disc with blurred margins."
+    back: "Raised intracranial pressure (eg, from a mass) blocks axoplasmic transport along CN II, so the optic discs swell, usually both of them."
     src: { page: 553, quote: "Optic disc swelling (usually bilateral) due to ↑ ICP (eg, 2° to mass effect). Results from impaired axoplasmic flow in optic nerve." }
+    status: unverified
+    tags: [high-yield]
+  - id: neuro.L05.112
+    kind: cloze
+    topic: papilledema
+    text: "Papilledema on funduscopy: {{c1::elevated}} optic disc with {{c2::blurred}} margins."
+    src: { page: 553, quote: "Funduscopy: elevated optic disc with blurred margins A ." }
     status: unverified
     tags: [high-yield]
   - id: neuro.L05.043
@@ -704,10 +820,17 @@ items:
   - id: neuro.L05.051
     kind: card
     topic: pupillary-control
-    front: Besides the pupil, what do the third-order sympathetic fibers supply, and how do you remember short vs long ciliary nerves?
-    back: "Smooth muscle of the eyelids (minor retractors) and sweat glands of the forehead and face. Short ciliary nerves shorten the pupil (parasympathetic); long ciliary nerves lengthen it (sympathetic)."
+    front: Besides the pupil dilator, what do the third-order sympathetic fibers supply?
+    back: "Smooth muscle of the eyelids (minor retractors) and sweat glands of the forehead and face."
     src: { page: 554, quote: "Sympathetic fibers also innervate smooth muscle of eyelids (minor retractors) and sweat glands of forehead and face." }
     status: unverified
+  - id: neuro.L05.111
+    kind: cloze
+    topic: pupillary-control
+    text: "{{c1::Short}} ciliary nerves (parasympathetic) shorten the pupil diameter; {{c2::long}} ciliary nerves (sympathetic) make it longer."
+    src: { page: 554, quote: "Short ciliary nerves shorten the pupil diameter." }
+    status: unverified
+    tags: [high-yield]
   - id: neuro.L05.052
     kind: card
     topic: pupillary-control
@@ -747,7 +870,7 @@ items:
       - Miosis
       - Anhidrosis and absent flushing of that side of the face
     pass: 3
-    hook: "PAM is horny: Ptosis، Anhidrosis، Miosis. الـ ptosis خفيفة لأن العضلة الـ sympathetic صغيرة (superior tarsal)، مش الـ levator."
+    hook: "الـ ptosis هنا خفيفة لأن الـ sympathetic بيشغّل عضلة صغيرة بس في الجفن (superior tarsal muscle)، والـ pupil بتصغر لأن الـ dilator اتشل، والوش بينشف من ناحية واحدة."
     src: { page: 555, quote: "Ptosis (slight drooping of eyelid: superior tarsal muscle)  Miosis (pupil constriction)  Anhidrosis (absence of sweating) and absence of flushing of affected side of face" }
     status: unverified
     tags: [high-yield]
@@ -891,7 +1014,7 @@ items:
     kind: card
     topic: cranial-nerve-iii-iv-vi-palsies
     front: What are the signs of CN VI palsy?
-    back: "The affected eye cannot abduct and rests medially in primary gaze."
+    back: "The eye cannot abduct (turn outward), so even in primary gaze it sits turned in toward the nose."
     src: { page: 556, quote: "Affected eye unable to abduct and is displaced medially in primary position of gaze." }
     status: unverified
     tags: [high-yield]
@@ -1084,21 +1207,23 @@ items:
     topic: internuclear-ophthalmoplegia
     stem: >-
       A 27-year-old woman has double vision. When asked to look right, her left eye stops at the midline and her right eye
-      shows nystagmus. Looking left is normal, and both eyes converge normally on a near target. Where is the lesion?
+      shows nystagmus; when asked to look left, her right eye stops at the midline and her left eye shows nystagmus. Both
+      eyes converge normally on a near target, and the pupils and eyelids are normal. What is the most likely underlying
+      disease?
     options:
-      - Left medial longitudinal fasciculus
-      - Right medial longitudinal fasciculus
-      - Left oculomotor nerve
-      - Right abducens nucleus
-      - Right paramedian pontine reticular formation
+      - Multiple sclerosis
+      - Diabetic ischemia of both oculomotor nerves
+      - Myasthenia gravis
+      - Pancoast tumor
+      - Cavernous sinus thrombosis
     answer: 0
     why:
-      - "Right. Left INO: the left eye fails to adduct on right gaze and the abducting right eye shows nystagmus; normal convergence shows CN III and the medial rectus work."
-      - "A right MLF lesion stops the right eye adducting on left gaze."
-      - "A CN III palsy would impair convergence and cause ptosis."
-      - "A right CN VI nucleus lesion paralyzes rightward gaze in both eyes."
-      - "A right PPRF lesion also causes a conjugate rightward gaze palsy."
-    src: { page: 558, quote: "Directional term (eg, right INO, left INO) refers to the eye that is unable to adduct." }
+      - "Right. Bilateral INO (each eye fails to adduct, the abducting eye shows nystagmus, convergence normal) comes from lesions of both MLFs, which are highly myelinated; in a young woman this is classic for multiple sclerosis."
+      - "Ischemic CN III palsy gives ptosis and a down-and-out eye, and convergence would also fail."
+      - "Myasthenia gravis gives fatigable ptosis and diplopia that varies, not a fixed MLF pattern with normal lids."
+      - "A Pancoast tumor causes Horner syndrome (ptosis, miosis, anhidrosis), not a gaze palsy."
+      - "Cavernous sinus thrombosis follows a facial or sinus infection, with fever, proptosis and ↓ corneal sensation."
+    src: { page: 558, quote: "Lesions may be unilateral or bilateral (latter classically seen in multiple sclerosis, stroke)." }
     status: unverified
   # ---------- p559: eyelid disorders ----------
   - id: neuro.L05.080
@@ -1122,6 +1247,7 @@ items:
     back: "Spread from bacterial sinusitis; most commonly S aureus and streptococci."
     src: { page: 559, quote: "Most commonly caused by S aureus and streptococci." }
     status: unverified
+    tags: [high-yield]
   - id: neuro.L05.082
     kind: table
     topic: eyelid-disorders
@@ -1160,7 +1286,7 @@ items:
     why:
       - "Right. Orbital cellulitis (from sinusitis; pain and diplopia with eye movement) risks vision loss, cavernous sinus thrombosis and intracranial spread."
       - "A chalazion is a painless blocked gland, not a complication."
-      - "Retinoblastoma is a tumor, not an infectious complication."
+      - "Retinoblastoma presents in young children with leukocoria, strabismus or nystagmus, not fever and painful eye movement after sinusitis."
       - "Angle closure is a different emergency with a fixed mid-dilated pupil."
       - "Xanthelasma is a lipid deposit."
     src: { page: 559, quote: "Posterior eyelid infection affecting orbit contents (fat and muscles) B , 2º to bacterial sinusitis." }

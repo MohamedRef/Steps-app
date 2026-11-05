@@ -8,7 +8,7 @@ name: Mac
 # still shows up within a day. Not a required check.
 on:
   schedule:
-    - cron: "17 2 * * *"
+    - cron: "18 2 * * *"
   workflow_dispatch:
 
 # A started run finishes; a waiting one is replaced by the newest.
@@ -25,7 +25,8 @@ env:
 jobs:
   macos:
     # adapted from batna-app main: .github/workflows/ci.yml (macos)
-    timeout-minutes: 45
+    # A cold run (no cache, dx built from source) took 40 minutes (#343).
+    timeout-minutes: 75
     name: Mac app compiles
     runs-on: macos-15
     steps:

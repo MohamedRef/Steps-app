@@ -62,9 +62,21 @@ items:
   - id: heme.L04.002
     kind: card
     topic: rbc-morphology
-    front: How do acanthocytes (spur cells) differ from echinocytes (burr cells)?
-    back: "Acanthocytes: projections of varying size at irregular intervals (asymmetric); liver disease, abetalipoproteinemia, vitamin E deficiency. Echinocytes: smaller, more uniform projections (even); liver disease, ESRD, pyruvate kinase deficiency."
-    src: { page: 420, quote: "Smaller and more uniform projections than acanthocytes (echinocytes are even)" }
+    front: "How do the projections of acanthocytes (spur cells) differ from those of echinocytes (burr cells)?"
+    back: "Acanthocyte spikes vary in size and sit at irregular intervals (asymmetric); echinocyte spikes are smaller and more uniform (even)."
+    src: { page: 420, quote: "Projections of varying size at irregular intervals (acanthocytes are asymmetric) Echinocytes B (“burr cells”) Liver disease, ESRD, pyruvate kinase deficiency Smaller and more uniform projections than acanthocytes (echinocytes are even)" }
+    status: unverified
+  - id: heme.L04.233
+    kind: cloze
+    topic: rbc-morphology
+    text: "Acanthocytes (spur cells) are seen in {{c1::liver disease}}, {{c2::abetalipoproteinemia}} and {{c3::vitamin E deficiency}}."
+    src: { page: 420, quote: "Acanthocytes A (“spur cells”) Liver disease, abetalipoproteinemia, vitamin E deficiency" }
+    status: unverified
+  - id: heme.L04.234
+    kind: cloze
+    topic: rbc-morphology
+    text: "Echinocytes (burr cells) are seen in {{c1::liver disease}}, {{c2::ESRD}} and {{c3::pyruvate kinase deficiency}}."
+    src: { page: 420, quote: "Echinocytes B (“burr cells”) Liver disease, ESRD, pyruvate kinase deficiency" }
     status: unverified
   - id: heme.L04.003
     kind: enumerate
@@ -140,6 +152,7 @@ items:
     back: Phagocytic removal of Heinz bodies (denatured hemoglobin) by splenic macrophages leaves bite cells ("take a bite of Heinz ketchup").
     src: { page: 421, quote: "Phagocytic removal of Heinz bodies → bite cells (take a bite of Heinz [ketchup])" }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.009
     kind: mcq
     topic: rbc-inclusions
@@ -217,7 +230,7 @@ items:
     status: unverified
   - id: heme.L04.014
     kind: mcq
-    topic: anemias
+    topic: macrocytic-anemias
     stem: >-
       A 58-year-old man with a 30-year history of heavy drinking has fatigue. He has spider angiomata and
       mild jaundice. Hemoglobin is 10.8 g/dL and MCV is 108 fL. The smear shows round macrocytes. Serum
@@ -257,23 +270,24 @@ items:
     kind: mcq
     topic: reticulocyte-production-index
     stem: >-
-      A 27-year-old woman has fatigue for 3 months. Hematocrit is 22% (normal 45%), and the reticulocyte
-      count is 6%. Using a maturation time of 2 days for this hematocrit, her reticulocyte production
-      index is about 1.5. What does this value indicate?
+      A 27-year-old woman has had fatigue for 3 months. She has no jaundice, dark urine or splenomegaly.
+      Hematocrit is 22% (normal 45%) and the reticulocyte count is 6%. At this hematocrit the
+      reticulocyte maturation time is 2 days. Which of the following is the most likely cause of her
+      anemia?
     options:
-      - The marrow is compensating appropriately for hemolysis
-      - The marrow response is inadequate for the degree of anemia
-      - The reticulocyte count is falsely low
-      - The anemia must be caused by acute blood loss
-      - The anemia is macrocytic
-    answer: 1
+      - Hereditary spherocytosis
+      - Warm autoimmune hemolytic anemia
+      - Iron deficiency anemia
+      - G6PD deficiency
+      - Hemolysis from a prosthetic heart valve
+    answer: 2
     why:
-      - "Compensatory RBC production gives an RPI above 3."
-      - "Right. An RPI below 2 indicates an inadequate marrow response; the raw 6% overstated it because the hematocrit was low."
-      - "The raw count is falsely high in anemia; the RPI corrects it downward."
-      - "The RPI says how well the marrow responds, not that the cause is blood loss."
-      - "The RPI does not measure cell size."
-    src: { page: 423, quote: "low RPI (<2) indicates inadequate response to correct anemia." }
+      - "Hereditary spherocytosis is a hemolytic anemia: the marrow compensates and the RPI is above 3, but hers is about 1.5."
+      - "Warm AIHA destroys RBCs while the marrow compensates (RPI above 3); her marrow response is inadequate."
+      - "Right. RPI = 6% × (22/45) / 2 ≈ 1.5. The raw 6% looked high only because the hematocrit is low; an RPI below 2 means the marrow is not responding enough, which fits a production problem such as iron deficiency, a nonhemolytic anemia with a low reticulocyte index."
+      - "G6PD deficiency is a hemolytic anemia with a compensating marrow (RPI above 3)."
+      - "Mechanical valve hemolysis is a hemolytic anemia with a compensating marrow (RPI above 3)."
+    src: { page: 423, quote: "High RPI (>3) indicates compensatory RBC production; low RPI (<2) indicates inadequate response to correct anemia." }
     status: unverified
   - id: heme.L04.018
     kind: card
@@ -287,21 +301,22 @@ items:
     kind: mcq
     topic: mentzer-index
     stem: >-
-      A 24-year-old man of Greek descent has a mild microcytic anemia on a pre-employment blood test. MCV
-      is 64 fL and the RBC count is 6.2 million/mm3 (Mentzer index about 10). Ferritin is normal. He feels
-      well and has no bleeding. Hemoglobin electrophoresis is most likely to show which of the following?
+      A 24-year-old man of Greek descent has a mild microcytic anemia on a pre-employment blood test. His
+      father was told years ago that he carries β-thalassemia trait. MCV is 64 fL and the RBC count is
+      6.2 million/mm3 (Mentzer index about 10). Ferritin is normal. He feels well and has no bleeding.
+      Hemoglobin electrophoresis is most likely to show which of the following?
     options:
       - "Increased HbA2"
       - "Absent HbA with markedly increased HbS"
       - "Hemoglobin made of γ4 tetramers (Hb Barts)"
-      - "Normal hemoglobin fractions"
+      - "Absent HbA with increased HbF and HbA2"
       - "Hemoglobin crystals from a glutamic acid-to-lysine substitution"
     answer: 0
     why:
-      - "Right. A Mentzer index below 13 suggests thalassemia trait; in a Mediterranean man this is β-thalassemia minor (one β-globin gene mutated on chromosome 11), which gives a mild microcytic anemia with ↑ HbA2."
+      - "Right. A Mentzer index below 13 suggests thalassemia trait, and with a father who carries β-thalassemia trait he most likely inherited one mutated β-globin gene (chromosome 11): β-thalassemia minor, a mild microcytic anemia with ↑ HbA2."
       - "Absent HbA with ↑↑ HbS is sickle cell anemia, a hemolytic normocytic anemia."
       - "Hb Barts (γ4) is α-thalassemia with all 4 α genes deleted, which causes hydrops fetalis."
-      - "Normal fractions with a Mentzer index above 13 would fit iron deficiency; his index is about 10 and ferritin is normal. α-thalassemia trait also gives normal fractions with a Mentzer index below 13, but it is more common in people of Asian and African descent, while β-thalassemia is more common in Mediterranean people like him, so ↑ HbA2 is the best answer."
+      - "Absent HbA with ↑ HbF and HbA2 is β-thalassemia major (β0/β0): a severe, transfusion-dependent anemia from infancy, not a mild anemia found by chance in a well adult."
       - "The glutamic acid-to-lysine mutation is HbC disease, with crystals and target cells on the smear."
     src: { page: 425, quote: "β-thalassemia minor Mild microcytic anemia. ↑ HbA2" }
     status: unverified
@@ -358,8 +373,8 @@ items:
   - id: heme.L04.024
     kind: card
     topic: microcytic-hypochromic-anemias
-    front: What are the causes of iron deficiency, and which step of heme synthesis does it reduce?
-    back: Chronic bleeding (GI loss, heavy menstrual bleeding), malnutrition, absorption disorders, GI surgery (eg, gastrectomy), or ↑ demand (eg, pregnancy). It reduces the final step of heme synthesis.
+    front: "What are the causes of iron deficiency, and which step of heme synthesis does it reduce?"
+    back: "Iron is lost or lacking through chronic blood loss (from the gut or with heavy periods), a poor diet, poor absorption, surgery such as gastrectomy, or a higher need as in pregnancy. Without iron, the last step of heme synthesis falls."
     src: { page: 424, quote: "↓ iron due to chronic bleeding (eg, GI loss, heavy menstrual bleeding), malnutrition, absorption disorders, GI surgery (eg, gastrectomy), or ↑ demand (eg, pregnancy) → ↓ final step in heme synthesis." }
     status: unverified
   - id: heme.L04.025
@@ -394,9 +409,32 @@ items:
   - id: heme.L04.028
     kind: card
     topic: microcytic-hypochromic-anemias
-    front: What is the genetic basis of α-thalassemia, and how does it differ from iron deficiency on the CBC?
-    back: α-globin gene deletions on chromosome 16 (cis = same chromosome, trans = separate chromosomes; normal is αα/αα) → ↓ α-globin synthesis. It often has an ↑ RBC count, unlike iron deficiency. Target cells on the smear; ↑ prevalence in people of Asian and African descent.
-    src: { page: 424, quote: "α-globin gene deletions on chromosome 16 → ↓ α-globin synthesis." }
+    front: "What is the genetic basis of α-thalassemia?"
+    back: "Loss of α-globin genes on chromosome 16 (normal is αα/αα), either both on one chromosome (cis) or one on each (trans), so less α-globin is made."
+    src: { page: 424, quote: "α-globin gene deletions on chromosome 16 → ↓ α-globin synthesis. May have cis deletion (deletions occur on same chromosome) or trans deletion (deletions occur on separate chromosomes). Normal is αα/αα." }
+    status: unverified
+  - id: heme.L04.235
+    kind: card
+    topic: microcytic-hypochromic-anemias
+    front: "How does the RBC count in α-thalassemia often differ from that in iron deficiency anemia?"
+    back: "It is often high in α-thalassemia, unlike iron deficiency."
+    src: { page: 424, quote: "Often ↑ RBC count, in contrast to iron deficiency anemia." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.236
+    kind: card
+    topic: microcytic-hypochromic-anemias
+    front: "In which populations is α-thalassemia more prevalent?"
+    back: "People of Asian and African descent."
+    src: { page: 424, quote: "↑ prevalence in people of Asian and African descent." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.237
+    kind: card
+    topic: microcytic-hypochromic-anemias
+    front: "Which RBC shape does the peripheral smear show in α-thalassemia?"
+    back: "Target cells."
+    src: { page: 424, quote: "↑ prevalence in people of Asian and African descent. Target cells C on peripheral smear." }
     status: unverified
   - id: heme.L04.029
     kind: table
@@ -486,6 +524,14 @@ items:
     src: { page: 425, quote: "marrow expansion (“crew cut” on skull x-ray D ) → skeletal deformities" }
     status: unverified
     tags: [high-yield]
+  - id: heme.L04.238
+    kind: card
+    topic: microcytic-hypochromic-anemias
+    front: "What does the peripheral smear show in β-thalassemia major?"
+    back: "Target cells, with marked variation in RBC size and shape (↑ anisopoikilocytosis)."
+    src: { page: 425, quote: "Severe microcytic anemia with target cells and ↑ anisopoikilocytosis requiring blood transfusions" }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.176
     kind: cloze
     topic: microcytic-hypochromic-anemias
@@ -533,7 +579,7 @@ items:
     kind: card
     topic: microcytic-hypochromic-anemias
     front: "What can gene therapy do in severe β-thalassemia?"
-    back: "Gene therapy (β-globin addition or editing) can restore β-globin production and reduce transfusion dependence."
+    back: "By adding or editing the β-globin gene it lets cells make β-globin again and lowers the need for transfusions."
     src: { page: 425, quote: "For severe cases, gene therapy (β-globin addition/editing) can restore β-globin production and reduce transfusion dependence." }
     status: unverified
   - id: heme.L04.035
@@ -586,25 +632,65 @@ items:
   - id: heme.L04.038
     kind: card
     topic: microcytic-hypochromic-anemias
-    front: Who is at ↑ risk of lead exposure, and how is lead poisoning treated?
-    back: "Children: chipped paint in old houses (built before 1978). Adults: the workplace (eg, batteries, ammunition). Treatment: chelation with succimer, EDTA, dimercaprol."
-    src: { page: 425, quote: "Treatment: chelation with succimer, EDTA, dimercaprol. ↑ exposure risk: children—chipped paint in old houses (built before 1978); adults—workplace (eg, batteries, ammunition)." }
+    front: "How is lead poisoning treated?"
+    back: "Chelation with succimer, EDTA or dimercaprol."
+    src: { page: 425, quote: "Treatment: chelation with succimer, EDTA, dimercaprol." }
     status: unverified
+    tags: [high-yield]
+  - id: heme.L04.240
+    kind: card
+    topic: microcytic-hypochromic-anemias
+    front: "Who is at ↑ risk of lead exposure?"
+    back: "Children living in old houses with chipped paint (built before 1978), and adults exposed at work (eg, batteries, ammunition)."
+    src: { page: 425, quote: "↑ exposure risk: children—chipped paint in old houses (built before 1978); adults—workplace (eg, batteries, ammunition)." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.039
     kind: card
     topic: microcytic-hypochromic-anemias
-    front: What are the causes of sideroblastic anemia?
-    back: Genetic (eg, X-linked defect in the ALA synthase gene), acquired (myelodysplastic syndromes), and reversible (alcohol is most common; also lead poisoning, vitamin B6 deficiency, copper deficiency, drugs such as isoniazid and linezolid).
+    front: "What are the causes of sideroblastic anemia?"
+    back: "Three groups: genetic (an X-linked ALA synthase gene defect), acquired (myelodysplastic syndromes), and reversible, most often alcohol, plus lead, low vitamin B6 or copper, and drugs such as isoniazid or linezolid."
     src: { page: 425, quote: "Causes: genetic (eg, X-linked defect in ALA synthase gene), acquired (myelodysplastic syndromes), and reversible (alcohol is most common; also lead poisoning, vitamin B6 deficiency, copper deficiency, drugs [eg, isoniazid, linezolid])." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.040
     kind: card
     topic: microcytic-hypochromic-anemias
-    front: What are the lab findings and treatment of sideroblastic anemia?
-    back: ↑ iron, normal/↓ TIBC, ↑ ferritin; ringed sideroblasts (Prussian blue-stained iron-laden mitochondria) in the bone marrow; basophilic stippling on the smear. Treatment is pyridoxine (B6, cofactor for ALA synthase).
+    front: "What are the iron studies in sideroblastic anemia?"
+    back: "High serum iron and ferritin, with a normal or low TIBC."
     src: { page: 425, quote: "Lab findings: ↑ iron, normal/↓ TIBC, ↑ ferritin." }
     status: unverified
+    tags: [high-yield]
+  - id: heme.L04.241
+    kind: card
+    topic: microcytic-hypochromic-anemias
+    front: "What does the bone marrow show in sideroblastic anemia, and which stain shows it?"
+    back: "Ringed sideroblasts: erythroid precursors with iron-loaded mitochondria around the nucleus, seen with Prussian blue."
+    src: { page: 425, quote: "Ringed sideroblasts (with iron-laden, Prussian blue–stained mitochondria) seen in bone marrow." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.242
+    kind: card
+    topic: microcytic-hypochromic-anemias
+    front: "What does the peripheral smear show in sideroblastic anemia?"
+    back: "Basophilic stippling of the RBCs."
+    src: { page: 425, quote: "Peripheral blood smear: basophilic stippling of RBCs." }
+    status: unverified
+  - id: heme.L04.239
+    kind: card
+    topic: microcytic-hypochromic-anemias
+    front: "Is sideroblastic anemia always microcytic?"
+    back: "No: some acquired forms may be normocytic or macrocytic."
+    src: { page: 425, quote: "Peripheral blood smear: basophilic stippling of RBCs. Some acquired variants may be normocytic or macrocytic." }
+    status: unverified
+  - id: heme.L04.243
+    kind: card
+    topic: microcytic-hypochromic-anemias
+    front: "How is sideroblastic anemia treated, and why does it work?"
+    back: "Pyridoxine (vitamin B6), the cofactor ALA synthase needs."
+    src: { page: 425, quote: "Treatment: pyridoxine (B6 , cofactor for ALA synthase)." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.041
     kind: mcq
     topic: microcytic-hypochromic-anemias
@@ -655,10 +741,18 @@ items:
   - id: heme.L04.043
     kind: card
     topic: macrocytic-anemias
-    front: What is the mechanism of megaloblastic anemia, and what are its findings?
-    back: Impaired DNA synthesis → maturation of the nucleus of marrow precursors is delayed relative to the cytoplasm. Findings are RBC macrocytosis, hypersegmented neutrophils, and glossitis.
+    front: "What is the mechanism of megaloblastic anemia?"
+    back: "DNA synthesis is impaired, so the nucleus of marrow precursors matures later than their cytoplasm."
     src: { page: 426, quote: "Impaired DNA synthesis → maturation of nucleus of precursor cells in bone marrow delayed relative to maturation of cytoplasm." }
     status: unverified
+  - id: heme.L04.244
+    kind: card
+    topic: macrocytic-anemias
+    front: "What are the findings of megaloblastic anemia?"
+    back: "Large RBCs (macrocytosis), hypersegmented neutrophils and glossitis."
+    src: { page: 426, quote: "RBC macrocytosis, hypersegmented neutrophils (arrow in A ), glossitis." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.044
     kind: enumerate
     topic: macrocytic-anemias
@@ -689,25 +783,26 @@ items:
   - id: heme.L04.046
     kind: card
     topic: macrocytic-anemias
-    front: What are the causes of folate deficiency?
-    back: Malnutrition (eg, chronic alcohol overuse), malabsorption, drugs (eg, methotrexate, trimethoprim, phenytoin), and ↑ requirement (eg, hemolytic anemia, pregnancy).
+    front: "What are the causes of folate deficiency?"
+    back: "A poor diet (often with chronic alcohol use), poor absorption, drugs such as methotrexate, trimethoprim or phenytoin, and a higher need, as in hemolysis or pregnancy."
     src: { page: 426, quote: "Causes: malnutrition (eg, chronic alcohol overuse), malabsorption, drugs (eg, methotrexate, trimethoprim, phenytoin), ↑ requirement (eg, hemolytic anemia, pregnancy)." }
     status: unverified
   - id: heme.L04.047
     kind: card
     topic: macrocytic-anemias
-    front: What are the causes of vitamin B12 deficiency?
-    back: Pernicious anemia, malabsorption (eg, Crohn disease), pancreatic insufficiency, gastrectomy, insufficient intake (eg, veganism), and Diphyllobothrium latum (fish tapeworm).
+    front: "What are the causes of vitamin B12 deficiency?"
+    back: "Pernicious anemia; poor absorption (eg, Crohn disease), pancreatic insufficiency or a removed stomach; too little intake (eg, a vegan diet); and the fish tapeworm Diphyllobothrium latum."
     src: { page: 426, quote: "Causes: pernicious anemia, malabsorption (eg, Crohn disease), pancreatic insufficiency, gastrectomy, insufficient intake (eg, veganism), Diphyllobothrium latum (fish tapeworm)." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.048
     kind: card
     topic: macrocytic-anemias
-    front: Which tracts are affected in subacute combined degeneration from B12 deficiency, and why?
-    back: The spinocerebellar tract, lateral corticospinal tract, and dorsal columns, because B12 is involved in fatty acid pathways and myelin synthesis.
+    front: "Which tracts are affected in subacute combined degeneration from B12 deficiency, and why?"
+    back: "The dorsal columns, the lateral corticospinal tract and the spinocerebellar tract, because B12 is needed for fatty acid pathways and for making myelin."
     src: { page: 426, quote: "subacute combined degeneration (due to involvement of B12 in fatty acid pathways and myelin synthesis): spinocerebellar tract, lateral corticospinal tract, dorsal column dysfunction." }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.049
     kind: card
     topic: macrocytic-anemias
@@ -730,6 +825,7 @@ items:
     back: "Orotic aciduria has no hyperammonemia; OTC deficiency has ↑ orotic acid with hyperammonemia."
     src: { page: 426, quote: "No hyperammonemia (vs ornithine transcarbamylase deficiency—↑ orotic acid with hyperammonemia)." }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.184
     kind: cloze
     topic: macrocytic-anemias
@@ -757,6 +853,28 @@ items:
     back: "Uridine monophosphate or uridine triacetate, which bypass the mutated enzyme."
     src: { page: 426, quote: "Treatment: uridine monophosphate or uridine triacetate to bypass mutated enzyme." }
     status: unverified
+  - id: heme.L04.245
+    kind: card
+    topic: macrocytic-anemias
+    front: "What is nonmegaloblastic anemia?"
+    back: "A macrocytic anemia in which DNA synthesis is normal."
+    src: { page: 426, quote: "Nonmegaloblastic anemia Macrocytic anemia in which DNA synthesis is normal." }
+    status: unverified
+  - id: heme.L04.246
+    kind: card
+    topic: macrocytic-anemias
+    front: "What causes nonmegaloblastic anemia?"
+    back: "Chronic alcohol overuse and liver disease."
+    src: { page: 426, quote: "Causes: chronic alcohol overuse, liver disease. RBC macrocytosis without hypersegmented neutrophils." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.247
+    kind: card
+    topic: macrocytic-anemias
+    front: "How does the smear of nonmegaloblastic anemia differ from that of megaloblastic anemia?"
+    back: "The RBCs are large, but there are no hypersegmented neutrophils."
+    src: { page: 426, quote: "RBC macrocytosis without hypersegmented neutrophils." }
+    status: unverified
   - id: heme.L04.051
     kind: card
     topic: macrocytic-anemias
@@ -783,6 +901,12 @@ items:
     front: "Which physical abnormalities occur in up to 50% of Diamond-Blackfan anemia cases?"
     back: "Short stature, craniofacial abnormalities, and upper extremity malformations (triphalangeal thumbs)."
     src: { page: 426, quote: "Short stature, craniofacial abnormalities, and upper extremity malformations (triphalangeal thumbs) in up to 50% of cases." }
+    status: unverified
+  - id: heme.L04.248
+    kind: cloze
+    topic: macrocytic-anemias
+    text: "First Aid's line for Diamond-Blackfan anemia: \"A pure {{c1::Diamond}} causes pure {{c2::red cell aplasia}}.\""
+    src: { page: 426, quote: "A pure Diamond causes pure red cell aplasia." }
     status: unverified
   - id: heme.L04.191
     kind: card
@@ -888,13 +1012,48 @@ items:
     src: { page: 427, quote: "Inflammation (eg, ↑ IL-6) → ↑ hepcidin (released by liver, binds ferroportin on intestinal mucosal cells and macrophages, thus inhibiting iron transport)" }
     status: unverified
     tags: [high-yield]
+  - id: heme.L04.251
+    kind: enumerate
+    topic: nonhemolytic-normocytic-anemias
+    prompt: "Enumerate the conditions associated with anemia of chronic disease (4)."
+    points:
+      - "Chronic infections"
+      - "Neoplastic disorders"
+      - "Chronic kidney disease"
+      - "Autoimmune diseases (eg, SLE, rheumatoid arthritis)"
+    pass: 4
+    src: { page: 427, quote: "Associated with conditions such as chronic infections, neoplastic disorders, chronic kidney disease, and autoimmune diseases (eg, SLE, rheumatoid arthritis)." }
+    status: unverified
   - id: heme.L04.058
     kind: card
     topic: nonhemolytic-normocytic-anemias
-    front: What are the findings and treatment of anemia of chronic disease?
-    back: ↓ iron, ↓ TIBC, ↑ ferritin; normocytic but can become microcytic. Treat the underlying inflammation, use blood transfusion judiciously, and consider erythropoiesis-stimulating agents such as EPO (eg, in chronic kidney disease).
+    front: "What are the iron studies in anemia of chronic disease?"
+    back: "Low iron, low TIBC and high ferritin."
     src: { page: 427, quote: "↓ iron, ↓ TIBC, ↑ ferritin. Normocytic, but can become microcytic." }
     status: unverified
+    tags: [high-yield]
+  - id: heme.L04.252
+    kind: card
+    topic: nonhemolytic-normocytic-anemias
+    front: "What is the MCV in anemia of chronic disease?"
+    back: "Normocytic, but it can become microcytic."
+    src: { page: 427, quote: "↓ iron, ↓ TIBC, ↑ ferritin. Normocytic, but can become microcytic." }
+    status: unverified
+  - id: heme.L04.253
+    kind: card
+    topic: nonhemolytic-normocytic-anemias
+    front: "How is anemia of chronic disease treated?"
+    back: "Treat the cause of the inflammation, transfuse only when needed, and consider erythropoiesis-stimulating agents such as EPO (eg, in chronic kidney disease)."
+    src: { page: 427, quote: "Treatment: address underlying cause of inflammation, judicious use of blood transfusion, consider erythropoiesis- stimulating agents such as EPO (eg, in chronic kidney disease)." }
+    status: unverified
+  - id: heme.L04.249
+    kind: card
+    topic: nonhemolytic-normocytic-anemias
+    front: "What is aplastic anemia?"
+    back: "Failure or destruction of hematopoietic stem cells."
+    src: { page: 427, quote: "Aplastic anemia A Failure or destruction of hematopoietic stem cells." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.059
     kind: enumerate
     topic: nonhemolytic-normocytic-anemias
@@ -933,18 +1092,49 @@ items:
     src: { page: 427, quote: "Normal cell morphology, but hypocellular bone marrow with fatty infiltration" }
     status: unverified
     tags: [high-yield]
+  - id: heme.L04.250
+    kind: enumerate
+    topic: nonhemolytic-normocytic-anemias
+    prompt: "Enumerate the symptoms of aplastic anemia (7)."
+    points:
+      - "Fatigue"
+      - "Malaise"
+      - "Pallor"
+      - "Purpura"
+      - "Mucosal bleeding"
+      - "Petechiae"
+      - "Infection"
+    pass: 5
+    src: { page: 427, quote: "Symptoms: fatigue, malaise, pallor, purpura, mucosal bleeding, petechiae, infection." }
+    status: unverified
   - id: heme.L04.061
     kind: card
     topic: nonhemolytic-normocytic-anemias
-    front: What are the associated findings of Fanconi anemia?
-    back: An autosomal recessive DNA repair defect → bone marrow failure, with normocytosis or macrocytosis, short stature, café-au-lait spots, thumb/radial defects, and predisposition to malignancy.
+    front: "What are the common associated findings of Fanconi anemia?"
+    back: "Short stature, café-au-lait spots, thumb and radial defects, and a predisposition to malignancy."
     src: { page: 427, quote: "Common associated findings include short stature, café-au-lait spots, thumb/radial defects, predisposition to malignancy." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.254
+    kind: card
+    topic: nonhemolytic-normocytic-anemias
+    front: "What is the defect in Fanconi anemia, and what does it lead to?"
+    back: "An autosomal recessive DNA repair defect that leads to bone marrow failure."
+    src: { page: 427, quote: "Fanconi anemia (autosomal recessive DNA repair defect → bone marrow failure);" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.255
+    kind: card
+    topic: nonhemolytic-normocytic-anemias
+    front: "What RBC size does Fanconi anemia show on the CBC?"
+    back: "Normocytosis or macrocytosis."
+    src: { page: 427, quote: "repair defect → bone marrow failure); normocytosis or macrocytosis on CBC." }
     status: unverified
   - id: heme.L04.062
     kind: card
     topic: nonhemolytic-normocytic-anemias
-    front: How is aplastic anemia treated?
-    back: Withdraw the offending agent; immunosuppressive regimens (eg, antithymocyte globulin, cyclosporine); bone marrow allograft; RBC/platelet transfusion; bone marrow stimulation (eg, GM-CSF).
+    front: "How is aplastic anemia treated?"
+    back: "Stop the drug or agent causing it; suppress the immune attack (antithymocyte globulin, cyclosporine); give a bone marrow allograft; support with RBC and platelet transfusions; and stimulate the marrow (eg, GM-CSF)."
     src: { page: 427, quote: "Treatment: withdrawal of offending agent, immunosuppressive regimens (eg, antithymocyte globulin, cyclosporine), bone marrow allograft, RBC/platelet transfusion, bone marrow stimulation (eg, GM-CSF)." }
     status: unverified
   - id: heme.L04.063
@@ -974,9 +1164,25 @@ items:
   - id: heme.L04.064
     kind: card
     topic: intrinsic-hemolytic-anemias
-    front: What is the defect in hereditary spherocytosis, and why are the cells removed?
-    back: Primarily autosomal dominant defects in proteins linking the RBC membrane skeleton and plasma membrane (eg, ankyrin, band 3, protein 4.2, spectrin). Small round RBCs with no central pallor; ↓ surface area/dehydration → ↑ MCHC → premature removal by the spleen (extravascular hemolysis).
+    front: "Which proteins are defective in hereditary spherocytosis?"
+    back: "Proteins that link the RBC membrane skeleton to the plasma membrane: ankyrin, band 3, protein 4.2 and spectrin."
     src: { page: 428, quote: "Due to defect in proteins interacting with RBC membrane skeleton and plasma membrane (eg, ankyrin, band 3, protein 4.2, spectrin)." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.256
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "How is hereditary spherocytosis mainly inherited?"
+    back: "Autosomal dominant (primarily)."
+    src: { page: 428, quote: "Primarily autosomal dominant. Due to defect in proteins interacting with RBC membrane skeleton" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.257
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "Why does the spleen remove spherocytes early?"
+    back: "Lost surface area and dehydration raise the MCHC, leaving small round cells without central pallor that the spleen clears (extravascular hemolysis)."
+    src: { page: 428, quote: "Small, round RBCs with no central pallor. ↓ surface area/dehydration → ↑ MCHC → premature removal by spleen (extravascular hemolysis)." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.065
@@ -986,6 +1192,7 @@ items:
     back: "↓ mean fluorescence of RBCs in the eosin-5-maleimide (EMA) binding test, and ↑ fragility in the osmotic fragility test (RBCs hemolyse in hypotonic solution)."
     src: { page: 428, quote: "Labs: ↓ mean fluorescence of RBCs in eosin 5-maleimide (EMA) binding test, ↑ fragility in osmotic fragility test" }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.194
     kind: card
     topic: intrinsic-hemolytic-anemias
@@ -1009,8 +1216,8 @@ items:
   - id: heme.L04.066
     kind: card
     topic: intrinsic-hemolytic-anemias
-    front: What is the mechanism of paroxysmal nocturnal hemoglobinuria (PNH)?
-    back: An acquired PIGA mutation in a hematopoietic stem cell → impaired GPI anchor synthesis for decay-accelerating factor (DAF/CD55) and membrane inhibitor of reactive lysis (MIRL/CD59), which protect the RBC membrane from complement → ↑ complement-mediated intravascular hemolysis, especially at night.
+    front: "What is the mechanism of paroxysmal nocturnal hemoglobinuria (PNH)?"
+    back: "A stem cell acquires a PIGA mutation and cannot build GPI anchors, so its RBCs lack CD55 (DAF) and CD59 (MIRL), which normally shield them from complement; complement then lyses RBCs inside vessels, mostly at night."
     src: { page: 428, quote: "Acquired PIGA mutation → impaired GPI anchor synthesis for decay-accelerating factor (DAF/CD55) and membrane inhibitor of reactive lysis (MIRL/ CD59), which protect RBC membrane from complement." }
     status: unverified
     tags: [high-yield]
@@ -1029,38 +1236,138 @@ items:
   - id: heme.L04.068
     kind: card
     topic: intrinsic-hemolytic-anemias
-    front: How is PNH diagnosed and treated?
-    back: CD55/59 ⊖ RBCs on flow cytometry. Treatment is eculizumab, which targets the terminal complement protein C5. PNH is associated with aplastic anemia and acute leukemias.
-    src: { page: 428, quote: "Labs: CD55/59 ⊖ RBCs on flow cytometry. Treatment: eculizumab (targets terminal complement protein C5)." }
+    front: "Which lab test diagnoses PNH?"
+    back: "Flow cytometry showing RBCs that lack CD55 and CD59."
+    src: { page: 428, quote: "Labs: CD55/59 ⊖ RBCs on flow cytometry." }
     status: unverified
+    tags: [high-yield]
+  - id: heme.L04.258
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "How is PNH treated?"
+    back: "Eculizumab, which blocks the terminal complement protein C5."
+    src: { page: 428, quote: "Treatment: eculizumab (targets terminal complement protein C5)." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.259
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "Which conditions is PNH associated with?"
+    back: "Aplastic anemia and acute leukemias."
+    src: { page: 428, quote: "Pink/red urine in morning. Associated with aplastic anemia, acute leukemias." }
+    status: unverified
+  - id: heme.L04.260
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "What color is the urine in PNH, and when?"
+    back: "Pink or red, in the morning."
+    src: { page: 428, quote: "venous thrombosis (eg, Budd-Chiari syndrome). Pink/red urine in morning." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.069
     kind: card
     topic: intrinsic-hemolytic-anemias
-    front: What is the mechanism of hemolysis in G6PD deficiency, and what triggers it?
-    back: X-linked recessive. G6PD defect → ↓ NADPH → ↓ reduced glutathione → ↑ RBC susceptibility to oxidative stress (eg, sulfa drugs, antimalarials, fava beans) → hemolysis (extravascular and intravascular).
+    front: "What is the mechanism of hemolysis in G6PD deficiency, and what triggers it?"
+    back: "It is X-linked recessive. Without G6PD the RBC makes little NADPH, so it cannot keep glutathione reduced; oxidant stress such as sulfa drugs, antimalarials or fava beans then destroys it, both outside and inside vessels."
     src: { page: 428, quote: "G6PD defect → ↓ NADPH → ↓ reduced glutathione → ↑ RBC susceptibility to oxidative stress (eg, sulfa drugs, antimalarials, fava beans) → hemolysis." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.070
     kind: card
     topic: intrinsic-hemolytic-anemias
-    front: What are the clinical and lab findings of G6PD deficiency?
-    back: Back pain and hemoglobinuria a few days after oxidant stress. ↓ G6PD activity (may be falsely normal during acute hemolysis); smear shows Heinz bodies and bite cells ("Stress makes me eat bites of fava beans with Heinz ketchup").
-    src: { page: 428, quote: "Labs: ↓ G6PD activity (may be falsely normal during acute hemolysis), blood smear shows RBCs with Heinz bodies and bite cells." }
+    front: "What does the blood smear show in G6PD deficiency?"
+    back: "Heinz bodies and bite cells (\"Stress makes me eat bites of fava beans with Heinz ketchup\")."
+    src: { page: 428, quote: "blood smear shows RBCs with Heinz bodies and bite cells. “Stress makes me eat bites of fava beans with Heinz ketchup.”" }
     status: unverified
+    tags: [high-yield]
+  - id: heme.L04.261
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "When do symptoms appear in G6PD deficiency, and what are they?"
+    back: "Back pain and hemoglobinuria a few days after oxidant stress."
+    src: { page: 428, quote: "Back pain, hemoglobinuria a few days after oxidant stress." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.262
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "When can the G6PD activity test be falsely normal?"
+    back: "During acute hemolysis."
+    src: { page: 428, quote: "Labs: ↓ G6PD activity (may be falsely normal during acute hemolysis)" }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.071
     kind: card
     topic: intrinsic-hemolytic-anemias
-    front: What is the mechanism and presentation of pyruvate kinase deficiency?
-    back: Autosomal recessive. ↓ ATP → rigid RBCs → extravascular hemolysis. ↑ 2,3-BPG → ↓ hemoglobin affinity for O2. Hemolytic anemia in a newborn; smear shows burr cells.
-    src: { page: 428, quote: "Pyruvate kinase defect → ↓ ATP → rigid RBCs → extravascular hemolysis. Increases levels of 2,3-BPG → ↓ hemoglobin affinity for O2" }
+    front: "What is the mechanism of hemolysis in pyruvate kinase deficiency?"
+    back: "Less ATP makes the RBCs rigid, so they are destroyed outside vessels (extravascular hemolysis)."
+    src: { page: 428, quote: "Pyruvate kinase defect → ↓ ATP → rigid RBCs → extravascular hemolysis." }
+    status: unverified
+  - id: heme.L04.263
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "How is pyruvate kinase deficiency inherited?"
+    back: "Autosomal recessive."
+    src: { page: 428, quote: "Autosomal recessive. Pyruvate kinase defect → ↓ ATP" }
+    status: unverified
+  - id: heme.L04.264
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "How does pyruvate kinase deficiency change hemoglobin's O2 affinity?"
+    back: "It raises 2,3-BPG, which lowers hemoglobin's affinity for O2."
+    src: { page: 428, quote: "Increases levels of 2,3-BPG → ↓ hemoglobin affinity for O2" }
+    status: unverified
+  - id: heme.L04.265
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "When does pyruvate kinase deficiency typically present?"
+    back: "As a hemolytic anemia in a newborn."
+    src: { page: 428, quote: "Hemolytic anemia in a newborn." }
+    status: unverified
+  - id: heme.L04.266
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "Which RBC shape does the smear show in pyruvate kinase deficiency?"
+    back: "Burr cells."
+    src: { page: 428, quote: "Labs: blood smear shows burr cells." }
     status: unverified
   - id: heme.L04.072
     kind: card
     topic: intrinsic-hemolytic-anemias
-    front: What is the molecular defect of sickle cell anemia, and what precipitates sickling?
-    back: A point mutation in the β-globin gene (glutamic acid → valine) alters a hydrophobic region → hemoglobin aggregation. ↓ O2, ↑ altitude or acidosis makes deoxygenated HbS polymerize → vaso-occlusive disease. Newborns are initially asymptomatic because of ↑ HbF and ↓ HbS.
+    front: "What is the molecular defect of sickle cell anemia?"
+    back: "A β-globin point mutation swaps glutamic acid for valine, changing a hydrophobic region of the chain so hemoglobin aggregates."
     src: { page: 428, quote: "Point mutation in β-globin gene → single amino acid substitution (glutamic acid → valine) alters hydrophobic region on β-globin chain → aggregation of hemoglobin." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.267
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "What precipitates sickling in sickle cell anemia?"
+    back: "Low O2, high altitude or acidosis, which make deoxygenated HbS polymerize → vaso-occlusive disease."
+    src: { page: 428, quote: "Pathogenesis: ↓ O2 , ↑ altitude, or acidosis precipitates sickling (deoxygenated HbS polymerizes) → vaso-occlusive disease." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.268
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "Why are newborns with sickle cell anemia asymptomatic at first?"
+    back: "They still have high HbF and little HbS."
+    src: { page: 428, quote: "Newborns are initially asymptomatic because of ↑ HbF and ↓ HbS." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.269
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "Is the hemolysis of sickle cell anemia intravascular or extravascular?"
+    back: "Both."
+    src: { page: 428, quote: "→ aggregation of hemoglobin. Causes extravascular and intravascular hemolysis." }
+    status: unverified
+  - id: heme.L04.270
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "What does the skull x-ray show in sickle cell anemia, and why?"
+    back: "A \"crew cut\" appearance, from marrow expansion driven by ↑ erythropoiesis (also seen in thalassemias)."
+    src: { page: 428, quote: "“Crew cut” on skull x-ray due to marrow expansion from ↑ erythropoiesis (also seen in thalassemias)." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.073
@@ -1088,16 +1395,47 @@ items:
   - id: heme.L04.075
     kind: card
     topic: intrinsic-hemolytic-anemias
-    front: What does Hb electrophoresis show in sickle cell anemia, and how is it treated?
-    back: Absent HbA, ↑↑ HbS, ↑ HbF, normal/mildly ↑ HbA2. Treatment is hydroxyurea (↑ HbF), gene therapy, autologous transplant, hydration.
-    src: { page: 428, quote: "Hb electrophoresis: absent HbA, ↑↑ HbS, ↑ HbF, and normal/mildly ↑ HbA2 . Treatment: hydroxyurea (↑ HbF), gene therapy, autologous transplant, hydration." }
+    front: "What does Hb electrophoresis show in sickle cell anemia?"
+    back: "No HbA, much HbS, raised HbF, and a normal or slightly raised HbA2."
+    src: { page: 428, quote: "Hb electrophoresis: absent HbA, ↑↑ HbS, ↑ HbF, and normal/mildly ↑ HbA2 ." }
     status: unverified
+    tags: [high-yield]
+  - id: heme.L04.271
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "How is sickle cell anemia treated?"
+    back: "Hydroxyurea (raises HbF), gene therapy, autologous transplant and hydration."
+    src: { page: 428, quote: "Treatment: hydroxyurea (↑ HbF), gene therapy, autologous transplant, hydration." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.076
     kind: card
     topic: intrinsic-hemolytic-anemias
-    front: What is HbC disease, and what does the smear show?
-    back: A glutamic acid-to-lysine mutation in β-globin causing extravascular hemolysis. Homozygotes have hemoglobin crystals inside RBCs and target cells. HbSC (one of each mutant gene) is milder than HbSS.
-    src: { page: 428, quote: "HbSC (1 of each mutant gene) milder than HbSS. Blood smear in homozygotes: hemoglobin crystals inside RBCs, target cells." }
+    front: "What is the mutation in HbC disease?"
+    back: "A glutamic acid-to-lysine substitution in β-globin."
+    src: { page: 428, quote: "HbC disease Glutamic acid–to-lycine (lysine) mutation in β-globin." }
+    status: unverified
+  - id: heme.L04.272
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "What type of hemolysis does HbC disease cause?"
+    back: "Extravascular."
+    src: { page: 428, quote: "Glutamic acid–to-lycine (lysine) mutation in β-globin. Causes extravascular hemolysis." }
+    status: unverified
+  - id: heme.L04.273
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "What does the blood smear show in HbC homozygotes?"
+    back: "Hemoglobin crystals inside RBCs, and target cells."
+    src: { page: 428, quote: "Blood smear in homozygotes: hemoglobin crystals inside RBCs, target cells." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.274
+    kind: card
+    topic: intrinsic-hemolytic-anemias
+    front: "How does HbSC disease compare with HbSS?"
+    back: "HbSC (one of each mutant gene) is milder."
+    src: { page: 428, quote: "HbSC (1 of each mutant gene) milder than HbSS." }
     status: unverified
   - id: heme.L04.077
     kind: card
@@ -1106,6 +1444,7 @@ items:
     back: Sickle cell trait gives resistance to malaria.
     src: { page: 428, quote: "Heterozygotes (sickle cell trait) have resistance to malaria." }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.078
     kind: mcq
     topic: intrinsic-hemolytic-anemias
@@ -1215,33 +1554,114 @@ items:
     src: { page: 429, quote: "Warm AIHA–chronic anemia in which primarily IgG causes extravascular > > > intravascular hemolysis. Seen in SLE and CLL and with certain drugs (eg, β-lactams, α-methyldopa)." }
     status: unverified
     tags: [high-yield]
+  - id: heme.L04.275
+    kind: card
+    topic: extrinsic-hemolytic-anemias
+    front: "What is the usual cause of autoimmune hemolytic anemia?"
+    back: "It is usually idiopathic."
+    src: { page: 429, quote: "A normocytic anemia that is usually idiopathic and Coombs ⊕." }
+    status: unverified
+  - id: heme.L04.276
+    kind: card
+    topic: extrinsic-hemolytic-anemias
+    front: "What is the result of the Coombs test in autoimmune hemolytic anemia?"
+    back: "Positive."
+    src: { page: 429, quote: "A normocytic anemia that is usually idiopathic and Coombs ⊕." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.277
+    kind: card
+    topic: extrinsic-hemolytic-anemias
+    front: "What does the peripheral smear show in autoimmune hemolytic anemia?"
+    back: "Spherocytes and agglutinated RBCs."
+    src: { page: 429, quote: "Spherocytes and agglutinated RBCs A on peripheral blood smear." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.083
     kind: cloze
     topic: extrinsic-hemolytic-anemias
     text: "\"Warm weather is {{c1::Good}}\": warm AIHA is mainly {{c2::IgG}}; cold AIHA is mainly {{c3::IgM}} + complement."
     src: { page: 429, quote: "“Warm weather is Good.”" }
     status: unverified
+    tags: [high-yield]
+  - id: heme.L04.278
+    kind: card
+    topic: extrinsic-hemolytic-anemias
+    front: "What are the two main mechanisms of drug-induced hemolytic anemia?"
+    back: "Antibody-mediated immune destruction of RBCs, or oxidant injury by free radicals (which G6PD deficiency can make worse)."
+    src: { page: 429, quote: "Most commonly due to antibody-mediated immune destruction of RBCs or oxidant injury via free radical damage (may be exacerbated in G6PD deficiency)." }
+    status: unverified
   - id: heme.L04.084
     kind: card
     topic: extrinsic-hemolytic-anemias
-    front: In drug-induced hemolytic anemia, what do spherocytes and bite cells suggest?
-    back: Spherocytes suggest immune (antibody-mediated) hemolysis; bite cells suggest oxidative hemolysis (free radical damage, worse in G6PD deficiency). Common causes are antibiotics (penicillins, cephalosporins), NSAIDs, immunotherapy, chemotherapy.
+    front: "In drug-induced hemolytic anemia, what do spherocytes and bite cells suggest?"
+    back: "Spherocytes point to immune hemolysis; bite cells point to oxidative hemolysis."
     src: { page: 429, quote: "Spherocytes suggest immune hemolysis. Bite cells suggest oxidative hemolysis." }
+    status: unverified
+  - id: heme.L04.279
+    kind: card
+    topic: extrinsic-hemolytic-anemias
+    front: "Which drugs commonly cause drug-induced hemolytic anemia?"
+    back: "Antibiotics (penicillins, cephalosporins), NSAIDs, immunotherapy and chemotherapy."
+    src: { page: 429, quote: "Common causes include antibiotics (eg, penicillins, cephalosporins), NSAIDs, immunotherapy, chemotherapy." }
+    status: unverified
+  - id: heme.L04.280
+    kind: card
+    topic: extrinsic-hemolytic-anemias
+    front: "Where does the hemolysis of drug-induced hemolytic anemia occur?"
+    back: "It can be both extravascular and intravascular."
+    src: { page: 429, quote: "Bite cells suggest oxidative hemolysis. Can cause both extravascular and intravascular hemolysis." }
     status: unverified
   - id: heme.L04.085
     kind: card
     topic: extrinsic-hemolytic-anemias
-    front: What is microangiopathic hemolytic anemia, and where is it seen?
-    back: RBCs are damaged passing through obstructed or narrowed vessels (intravascular hemolysis), giving schistocytes (helmet cells). Seen in DIC, TTP/HUS, SLE, HELLP syndrome, hypertensive emergency.
-    src: { page: 429, quote: "RBCs are damaged when passing through obstructed or narrowed vessels. Causes intravascular hemolysis. Seen in DIC, TTP/HUS, SLE, HELLP syndrome, hypertensive emergency." }
+    front: "What is the mechanism of microangiopathic hemolytic anemia?"
+    back: "RBCs are torn as they squeeze through blocked or narrowed small vessels, so they break inside the vessels (intravascular hemolysis)."
+    src: { page: 429, quote: "RBCs are damaged when passing through obstructed or narrowed vessels. Causes intravascular hemolysis." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.281
+    kind: enumerate
+    topic: extrinsic-hemolytic-anemias
+    prompt: "Enumerate the conditions in which microangiopathic hemolytic anemia is seen (5)."
+    points:
+      - "DIC"
+      - "TTP/HUS"
+      - "SLE"
+      - "HELLP syndrome"
+      - "Hypertensive emergency"
+    pass: 4
+    src: { page: 429, quote: "Seen in DIC, TTP/HUS, SLE, HELLP syndrome, hypertensive emergency." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.282
+    kind: card
+    topic: extrinsic-hemolytic-anemias
+    front: "What does the smear show in microangiopathic hemolytic anemia?"
+    back: "Schistocytes (helmet cells), from RBCs split mechanically."
+    src: { page: 429, quote: "Schistocytes (eg, “helmet cells”) are seen on peripheral blood smear due to mechanical destruction (schisto = to split) of RBCs." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.086
     kind: card
     topic: extrinsic-hemolytic-anemias
-    front: What causes macroangiopathic hemolytic anemia, and which infections cause hemolysis?
-    back: Prosthetic heart valves and aortic stenosis (mechanical destruction; schistocytes on the smear). Infections such as malaria and Babesia ↑ RBC destruction.
+    front: "What causes macroangiopathic hemolytic anemia?"
+    back: "Prosthetic heart valves and aortic stenosis, which destroy RBCs mechanically."
     src: { page: 429, quote: "Prosthetic heart valves and aortic stenosis may also cause hemolytic anemia 2° to mechanical destruction of RBCs." }
+    status: unverified
+  - id: heme.L04.283
+    kind: card
+    topic: extrinsic-hemolytic-anemias
+    front: "What does the smear show in macroangiopathic hemolytic anemia?"
+    back: "Schistocytes."
+    src: { page: 429, quote: "mechanical destruction of RBCs. Schistocytes on peripheral blood smear. Hemolytic anemia due to infection" }
+    status: unverified
+  - id: heme.L04.284
+    kind: card
+    topic: extrinsic-hemolytic-anemias
+    front: "Which infections cause hemolytic anemia?"
+    back: "Malaria and Babesia, which ↑ RBC destruction."
+    src: { page: 429, quote: "Hemolytic anemia due to infection ↑ destruction of RBCs (eg, malaria, Babesia)." }
     status: unverified
   - id: heme.L04.087
     kind: mcq
@@ -1281,9 +1701,25 @@ items:
   - id: heme.L04.089
     kind: card
     topic: leukopenias
-    front: How do glucocorticoids change neutrophil, eosinophil and lymphocyte counts, and why?
-    back: They cause neutrophilia (↓ activation of neutrophil adhesion molecules, impairing migration out of vessels), but eosinopenia (eosinophils sequestered in lymph nodes) and lymphopenia (lymphocyte apoptosis).
+    front: "Why do glucocorticoids cause neutrophilia?"
+    back: "They ↓ activation of neutrophil adhesion molecules, so neutrophils cannot leave the vessels for sites of inflammation."
     src: { page: 429, quote: "Glucocorticoids ↓ activation of neutrophil adhesion molecules, impairing migration out of the vasculature to sites of inflammation." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.285
+    kind: card
+    topic: leukopenias
+    front: "How do glucocorticoids lower the eosinophil count?"
+    back: "They sequester eosinophils in lymph nodes."
+    src: { page: 429, quote: "In contrast, glucocorticoids sequester eosinophils in lymph nodes" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.286
+    kind: card
+    topic: leukopenias
+    front: "How do glucocorticoids lower the lymphocyte count?"
+    back: "They cause lymphocyte apoptosis."
+    src: { page: 429, quote: "glucocorticoids sequester eosinophils in lymph nodes and cause apoptosis of lymphocytes." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.090
@@ -1319,23 +1755,100 @@ items:
       - [Lead poisoning, Ferrochelatase and ALA dehydratase, "Protoporphyrin, ALA (blood)", "Microcytic anemia (basophilic stippling, ringed sideroblasts), GI and kidney disease"]
       - [Acute intermittent porphyria, Porphobilinogen deaminase (autosomal dominant), "Porphobilinogen, ALA", "5 P's: painful abdomen, port wine-colored pee, polyneuropathy, psychological disturbances, precipitated by ↑ ALA synthase"]
       - [Porphyria cutanea tarda, Uroporphyrinogen decarboxylase, Uroporphyrin (tea-colored urine), Blistering cutaneous photosensitivity and hyperpigmentation]
-    blanks: [[0, 1], [1, 1], [2, 1], [1, 2], [2, 2]]
-    src: { page: 430, quote: "Acute intermittent porphyria Porphobilinogen deaminase (autosomal dominant mutation) Porphobilinogen, ALA" }
+    blanks: [[0, 1], [1, 1], [2, 1], [0, 2], [1, 2], [2, 2], [0, 3], [1, 3], [2, 3]]
+    src: { page: 430, quote: "Lead poisoning A Ferrochelatase and ALA dehydratase Protoporphyrin, ALA (blood) Microcytic anemia (basophilic stippling in peripheral smear A , ringed sideroblasts in bone marrow), GI and kidney disease. Acute intermittent porphyria Porphobilinogen deaminase (autosomal dominant mutation) Porphobilinogen, ALA Symptoms (5 P’s): ▪ Painful abdomen ▪ Port wine–colored Pee ▪ Polyneuropathy ▪ Psychological disturbances ▪ Precipitated by factors that ↑ ALA synthase (eg, drugs [CYP450 inducers], alcohol, starvation) Treatment: hemin and glucose. Porphyria cutanea tarda B Uroporphyrinogen decarboxylase Uroporphyrin (tea- colored urine) Blistering cutaneous photosensitivity and hyperpigmentation" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.287
+    kind: enumerate
+    topic: heme-synthesis-porphyrias-and-lead-poisoning
+    prompt: "Enumerate the symptoms of acute intermittent porphyria (the 5 P's) (5)."
+    points:
+      - "Painful abdomen"
+      - "Port wine-colored Pee"
+      - "Polyneuropathy"
+      - "Psychological disturbances"
+      - "Precipitated by factors that ↑ ALA synthase (eg, CYP450 inducers, alcohol, starvation)"
+    pass: 4
+    hook: "الكتاب بيعدّهم 5 P's: Painful abdomen، Port wine Pee، Polyneuropathy، Psychological، Precipitated."
+    src: { page: 430, quote: "Symptoms (5 P’s): ▪ Painful abdomen ▪ Port wine–colored Pee ▪ Polyneuropathy ▪ Psychological disturbances ▪ Precipitated by factors that ↑ ALA synthase (eg, drugs [CYP450 inducers], alcohol, starvation)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.288
+    kind: order
+    topic: heme-synthesis-porphyrias-and-lead-poisoning
+    prompt: "Heme synthesis, from the first substrates to heme."
+    steps:
+      - Succinyl CoA + glycine
+      - Aminolevulinic acid (ALA)
+      - Porphobilinogen
+      - Hydroxymethylbilane
+      - Uroporphyrinogen III
+      - Coproporphyrinogen III
+      - Protoporphyrin
+      - Heme
+    src: { page: 430, quote: "Succinyl CoA + glycine Glucose, hemin Sideroblastic anemia (X-linked) ALA synthase (rate-limiting step) Aminolevulinic acid" }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.092
     kind: card
     topic: heme-synthesis-porphyrias-and-lead-poisoning
-    front: What is the rate-limiting enzyme of heme synthesis, its substrates and cofactor, and where does it act?
-    back: ALA synthase, which joins succinyl CoA + glycine into aminolevulinic acid in the mitochondria; it needs B6. An X-linked defect causes sideroblastic anemia.
-    src: { page: 430, quote: "Succinyl CoA + glycine Glucose, hemin Sideroblastic anemia (X-linked) ALA synthase (rate-limiting step)" }
+    front: "What is the rate-limiting enzyme of heme synthesis?"
+    back: "ALA synthase."
+    src: { page: 430, quote: "Sideroblastic anemia (X-linked) ALA synthase (rate-limiting step)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.289
+    kind: card
+    topic: heme-synthesis-porphyrias-and-lead-poisoning
+    front: "Which substrates does ALA synthase join, and what does it make?"
+    back: "Succinyl CoA + glycine → aminolevulinic acid (ALA)."
+    src: { page: 430, quote: "Succinyl CoA + glycine Glucose, hemin Sideroblastic anemia (X-linked) ALA synthase (rate-limiting step) Aminolevulinic acid" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.290
+    kind: card
+    topic: heme-synthesis-porphyrias-and-lead-poisoning
+    front: "Which vitamin is the cofactor of ALA synthase?"
+    back: "Vitamin B6 (pyridoxine)."
+    src: { page: 425, quote: "Treatment: pyridoxine (B6 , cofactor for ALA synthase)." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.291
+    kind: card
+    topic: heme-synthesis-porphyrias-and-lead-poisoning
+    front: "In which part of the cell does ALA synthase work?"
+    back: "The mitochondria."
+    src: { page: 430, quote: "ALA synthase (rate-limiting step) Aminolevulinic acid Lead poisoning MITOCHONDRIA" }
+    status: unverified
+  - id: heme.L04.292
+    kind: card
+    topic: heme-synthesis-porphyrias-and-lead-poisoning
+    front: "Which anemia does an inherited ALA synthase defect cause, and how is it inherited?"
+    back: "Sideroblastic anemia, X-linked."
+    src: { page: 430, quote: "Sideroblastic anemia (X-linked) ALA synthase (rate-limiting step)" }
+    status: unverified
+  - id: heme.L04.293
+    kind: card
+    topic: heme-synthesis-porphyrias-and-lead-poisoning
+    front: "What suppresses ALA synthase?"
+    back: "Glucose and hemin."
+    src: { page: 430, quote: "Succinyl CoA + glycine Glucose, hemin Sideroblastic anemia (X-linked) ALA synthase" }
     status: unverified
   - id: heme.L04.093
     kind: card
     topic: heme-synthesis-porphyrias-and-lead-poisoning
-    front: What precipitates acute intermittent porphyria, and how is it treated?
-    back: Factors that ↑ ALA synthase (eg, drugs that induce CYP450, alcohol, starvation). Treatment is hemin and glucose (which suppress ALA synthase).
-    src: { page: 430, quote: "Precipitated by factors that ↑ ALA synthase (eg, drugs [CYP450 inducers], alcohol, starvation) Treatment: hemin and glucose." }
+    front: "What precipitates acute intermittent porphyria?"
+    back: "Anything that raises ALA synthase: drugs that induce CYP450, alcohol, and starvation."
+    src: { page: 430, quote: "Precipitated by factors that ↑ ALA synthase (eg, drugs [CYP450 inducers], alcohol, starvation)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.294
+    kind: card
+    topic: heme-synthesis-porphyrias-and-lead-poisoning
+    front: "How is acute intermittent porphyria treated?"
+    back: "Hemin and glucose."
+    src: { page: 430, quote: "alcohol, starvation) Treatment: hemin and glucose." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.094
@@ -1375,6 +1888,7 @@ items:
     back: "Familial, or hepatitis C."
     src: { page: 430, quote: "Causes: familial, hepatitis C." }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.201
     kind: card
     topic: heme-synthesis-porphyrias-and-lead-poisoning
@@ -1445,7 +1959,7 @@ items:
       - [Signs, "Abdominal pain, vomiting, GI bleeding; radiopaque pill on x-ray; anion gap metabolic acidosis, multiorgan failure; scarring with GI obstruction", "Arthropathy, cirrhosis, cardiomyopathy, diabetes and skin pigmentation (bronze diabetes), hypogonadism"]
       - [Treatment, "Chelation (deferoxamine, deferasirox), gastric lavage", "Chelation, regular therapeutic phlebotomy (unless contraindicated, eg, anemia)"]
     blanks: [[1, 1], [1, 2], [2, 1], [2, 2]]
-    src: { page: 431, quote: "Arthropathy, cirrhosis, cardiomyopathy, diabetes mellitus and skin pigmentation (“bronze diabetes”), hypogonadism." }
+    src: { page: 431, quote: "SYMPTOMS/SIGNS Abdominal pain, vomiting, GI bleeding. Radiopaque pill seen on x-ray. May progress to anion gap metabolic acidosis and multiorgan failure. Leads to scarring with GI obstruction. Arthropathy, cirrhosis, cardiomyopathy, diabetes mellitus and skin pigmentation (“bronze diabetes”), hypogonadism. TREATMENT Chelation (eg, deferoxamine, deferasirox), gastric lavage. Chelation, regular therapeutic phlebotomy (unless contraindicated, eg, anemia)" }
     status: unverified
   - id: heme.L04.099
     kind: mcq
@@ -1504,7 +2018,7 @@ items:
     kind: card
     topic: coagulation-disorders
     front: "What does the thrombin time (TT) measure?"
-    back: "The rate of conversion of fibrinogen → fibrin."
+    back: "How fast fibrinogen is turned into fibrin."
     src: { page: 431, quote: "TT—measures the rate of conversion of fibrinogen → fibrin." }
     status: unverified
   - id: heme.L04.206
@@ -1522,9 +2036,17 @@ items:
   - id: heme.L04.101
     kind: card
     topic: coagulation-disorders
-    front: How does a mixing study separate a factor deficiency from a factor inhibitor?
-    back: Normal plasma is added to the patient's plasma. A clotting factor deficiency corrects (PT or PTT returns to normal); a factor inhibitor (most commonly against factor VIII) does not.
-    src: { page: 431, quote: "Clotting factor deficiencies should correct (the PT or PTT returns to within the appropriate normal range), whereas factor inhibitors will not correct." }
+    front: "How does a mixing study separate a factor deficiency from a factor inhibitor?"
+    back: "Normal plasma is added to the patient's plasma: a missing factor is replaced, so the PT or PTT returns to normal; an inhibitor keeps it prolonged."
+    src: { page: 431, quote: "Diagnosed with a mixing study, in which normal plasma is added to patient’s plasma. Clotting factor deficiencies should correct (the PT or PTT returns to within the appropriate normal range), whereas factor inhibitors will not correct." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.295
+    kind: card
+    topic: coagulation-disorders
+    front: "Which factor are acquired factor inhibitors most commonly against?"
+    back: "Factor VIII."
+    src: { page: 431, quote: "Coagulation disorders can be due to clotting factor deficiencies or acquired factor inhibitors (most commonly against factor VIII)." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.102
@@ -1538,8 +2060,8 @@ items:
     kind: card
     topic: coagulation-disorders
     front: "How does hemorrhage present in hemophilia?"
-    back: "Hemarthroses (bleeding into joints, eg, knee), easy bruising, and bleeding after trauma or surgery (eg, dental procedures)."
-    src: { page: 431, quote: "Hemorrhage in hemophilia—hemarthroses (bleeding into joints, eg, knee" }
+    back: "Bleeding into joints (hemarthroses, eg, the knee), easy bruising, and bleeding after trauma or surgery such as dental procedures."
+    src: { page: 431, quote: "Hemorrhage in hemophilia—hemarthroses (bleeding into joints, eg, knee A ), easy bruising, bleeding after trauma or surgery (eg, dental procedures)." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.208
@@ -1586,10 +2108,25 @@ items:
   - id: heme.L04.103
     kind: card
     topic: coagulation-disorders
-    front: What are the coagulation tests in vitamin K deficiency?
-    back: ↑ PT and ↑ PTT (general coagulation defect), with a normal bleeding time; ↓ activity of factors II, VII, IX, X, protein C and protein S.
-    src: { page: 431, quote: "General coagulation defect. Bleeding time normal. ↓ activity of factors II, VII, IX, X, protein C, protein S." }
+    front: "What are the PT and PTT in vitamin K deficiency?"
+    back: "Both are prolonged (a general coagulation defect)."
+    src: { page: 431, quote: "Vitamin K deficiency ↑ ↑ General coagulation defect." }
     status: unverified
+    tags: [high-yield]
+  - id: heme.L04.296
+    kind: card
+    topic: coagulation-disorders
+    front: "What is the bleeding time in vitamin K deficiency?"
+    back: "Normal."
+    src: { page: 431, quote: "Vitamin K deficiency ↑ ↑ General coagulation defect. Bleeding time normal." }
+    status: unverified
+  - id: heme.L04.297
+    kind: cloze
+    topic: coagulation-disorders
+    text: "Vitamin K deficiency ↓ the activity of factors {{c1::II, VII, IX and X}} and of proteins {{c2::C and S}}."
+    src: { page: 431, quote: "↓ activity of factors II, VII, IX, X, protein C, protein S." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.104
     kind: mcq
     topic: coagulation-disorders
@@ -1617,9 +2154,17 @@ items:
   - id: heme.L04.105
     kind: card
     topic: platelet-disorders
-    front: What do all platelet disorders share?
-    back: ↑ bleeding time, mucous membrane bleeding, and microhemorrhages (eg, petechiae, epistaxis). The platelet count is usually low but may be normal in qualitative disorders.
+    front: "Which findings do all platelet disorders share?"
+    back: "A prolonged bleeding time, bleeding from mucous membranes, and microhemorrhages such as petechiae and epistaxis."
     src: { page: 432, quote: "All platelet disorders have ↑ bleeding time (BT), mucous membrane bleeding, and microhemorrhages (eg, petechiae, epistaxis)." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.298
+    kind: card
+    topic: platelet-disorders
+    front: "What is the platelet count in platelet disorders?"
+    back: "Usually low, but it may be normal in qualitative disorders."
+    src: { page: 432, quote: "Platelet count (PC) is usually low, but may be normal in qualitative disorders." }
     status: unverified
   - id: heme.L04.106
     kind: table
@@ -1632,16 +2177,30 @@ items:
       - [Immune thrombocytopenia, ↓, "Anti-GpIIb/IIIa antibodies → splenic macrophages phagocytose platelets; ↑ megakaryocytes in marrow"]
       - [Uremic platelet dysfunction, –, Uremic toxins in renal failure interfere with adhesion and aggregation]
     blanks: [[0, 2], [1, 2], [2, 2], [3, 2]]
-    src: { page: 432, quote: "Autosomal recessive defect in adhesion. ↓ GpIb → ↓ platelet-to-vWF adhesion. Labs: ↓ platelet aggregation, Big platelets." }
+    src: { page: 432, quote: "Bernard-Soulier syndrome –/↓ ↑ Autosomal recessive defect in adhesion. ↓ GpIb → ↓ platelet-to-vWF adhesion. Labs: ↓ platelet aggregation, Big platelets. Glanzmann thrombasthenia – ↑ Autosomal recessive defect in aggregation. ↓ GpIIb/IIIa (↓ integrin αIIb β3 ) → ↓ platelet-to-platelet aggregation and defective platelet plug formation. Labs: blood smear shows no platelet clumping. Immune thrombocytopenia ↓ ↑ Destruction of platelets in spleen. Most commonly due to anti-GpIIb/IIIa antibodies → splenic macrophages phagocytose platelets. May be idiopathic or 2° to autoimmune disorders (eg, SLE), viral illness (eg, HIV, HCV), malignancy (eg, CLL), or drug reactions. Labs: ↑ megakaryocytes on bone marrow biopsy, ↓ platelet count. Treatment: glucocorticoids, IVIG, rituximab, TPO receptor agonists (eg, eltrombopag, romiplostim), or splenectomy for refractory ITP. Uremic platelet dysfunction – ↑ In patients with renal failure, uremic toxins accumulate and interfere with platelet adhesion and aggregation." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.107
     kind: card
     topic: platelet-disorders
-    front: What can immune thrombocytopenia (ITP) be secondary to, and how is it treated?
-    back: It may be idiopathic or 2° to autoimmune disorders (eg, SLE), viral illness (eg, HIV, HCV), malignancy (eg, CLL), or drug reactions. Treatment is glucocorticoids, IVIG, rituximab, TPO receptor agonists (eltrombopag, romiplostim), or splenectomy for refractory ITP.
+    front: "What can immune thrombocytopenia (ITP) be secondary to?"
+    back: "It may be idiopathic, or follow autoimmune disease (eg, SLE), a viral illness (eg, HIV, HCV), a malignancy (eg, CLL) or a drug reaction."
+    src: { page: 432, quote: "May be idiopathic or 2° to autoimmune disorders (eg, SLE), viral illness (eg, HIV, HCV), malignancy (eg, CLL), or drug reactions." }
+    status: unverified
+  - id: heme.L04.299
+    kind: enumerate
+    topic: platelet-disorders
+    prompt: "Enumerate the treatments of immune thrombocytopenia (ITP) (5)."
+    points:
+      - "Glucocorticoids"
+      - "IVIG"
+      - "Rituximab"
+      - "TPO receptor agonists (eg, eltrombopag, romiplostim)"
+      - "Splenectomy for refractory ITP"
+    pass: 4
     src: { page: 432, quote: "Treatment: glucocorticoids, IVIG, rituximab, TPO receptor agonists (eg, eltrombopag, romiplostim), or splenectomy for refractory ITP." }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.108
     kind: mcq
     topic: platelet-disorders
@@ -1668,9 +2227,17 @@ items:
   - id: heme.L04.109
     kind: card
     topic: thrombotic-microangiopathies
-    front: How do thrombotic microangiopathies differ from DIC in the lab?
-    back: They may resemble DIC but lack the findings of a consumptive coagulopathy (↑ PT, ↑ PTT, ↓ fibrinogen), because clotting factors are not widely activated. Normal PT and PTT distinguish TTP and HUS from DIC.
+    front: "Which lab findings of DIC do thrombotic microangiopathies lack, and why?"
+    back: "The signs of a consumptive coagulopathy (↑ PT, ↑ PTT, ↓ fibrinogen), because their cause does not involve widespread clotting factor activation."
     src: { page: 432, quote: "May resemble DIC, but do not exhibit lab findings of a consumptive coagulopathy (eg, ↑ PT, ↑ PTT, ↓ fibrinogen), as etiology does not involve widespread clotting factor activation." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.300
+    kind: card
+    topic: thrombotic-microangiopathies
+    front: "Which lab finding helps tell TTP and HUS apart from DIC?"
+    back: "A normal PT and PTT, because the coagulation pathway is not activated."
+    src: { page: 432, quote: "Normal PT and PTT helps distinguish TTP and HUS (coagulation pathway is not activated) from DIC (coagulation pathway is activated)" }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.110
@@ -1685,7 +2252,7 @@ items:
       - [Differentiating symptoms, Triad + fever + neurologic symptoms, Triad + bloody diarrhea]
       - [Treatment, "Plasma exchange, glucocorticoids, rituximab", Supportive care]
     blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [3, 1], [3, 2], [4, 1]]
-    src: { page: 432, quote: "DIFFERENTIATING SYMPTOMS Triad + fever + neurologic symptoms Triad + bloody diarrhea" }
+    src: { page: 432, quote: "EPIDEMIOLOGY Typically females Typically children PATHOPHYSIOLOGY Inhibition or deficiency of ADAMTS13 (a vWF metalloprotease) → ↓ degradation of vWF multimers → ↑ large vWF multimers → ↑ platelet adhesion and aggregation (microthrombi formation) Predominately caused by Shiga toxin–producing Escherichia coli (STEC) infection (serotype O157:H7), which causes profound endothelial dysfunction → capillary microthrombi → renal vascular occlusion. PRESENTATION Triad of thrombocytopenia (↓ platelets), microangiopathic hemolytic anemia (↓ Hb, schistocytes, ↑ LDH), acute kidney injury (↑ Cr) DIFFERENTIATING SYMPTOMS Triad + fever + neurologic symptoms Triad + bloody diarrhea LABS Normal PT and PTT helps distinguish TTP and HUS (coagulation pathway is not activated) from DIC (coagulation pathway is activated) TREATMENT Plasma exchange, glucocorticoids, rituximab Supportive care" }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.111
@@ -1741,6 +2308,7 @@ items:
     back: "vWF concentrates or desmopressin, which releases the vWF and factor VIII stored in the endothelium."
     src: { page: 433, quote: "Treatment: vWF concentrates, desmopressin (releases vWF and factor VIII stored in endothelium)." }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.113
     kind: card
     topic: mixed-platelet-and-coagulation-disorders
@@ -1753,7 +2321,7 @@ items:
     kind: card
     topic: mixed-platelet-and-coagulation-disorders
     front: "Why does DIC cause both thrombosis and bleeding?"
-    back: "Widespread clotting factor activation → a thromboembolic state that consumes clotting factors → ↑ thromboses and ↑ hemorrhages (eg, oozing from puncture sites)."
+    back: "Clotting factors are switched on throughout the circulation, so clots form widely and use the factors up; the patient both clots and bleeds (eg, oozing from puncture sites)."
     src: { page: 433, quote: "Widespread clotting factor activation → thromboembolic state with excessive clotting factor consumption → ↑ thromboses, ↑ hemorrhages (eg, blood oozing from puncture sites)." }
     status: unverified
     tags: [high-yield]
@@ -1761,7 +2329,7 @@ items:
     kind: card
     topic: mixed-platelet-and-coagulation-disorders
     front: "When is DIC chronic rather than acute?"
-    back: "When clotting factor production can compensate for consumption; acute DIC is life-threatening."
+    back: "When the body makes clotting factors fast enough to keep up with their use; acute DIC is life-threatening."
     src: { page: 433, quote: "May be acute (life-threatening) or chronic (if clotting factor production can compensate for consumption)." }
     status: unverified
   - id: heme.L04.114
@@ -1839,7 +2407,7 @@ items:
       - [Protein C or S deficiency, "↓ inactivation of factors Va and VIIIa; ↑ risk of warfarin-induced skin necrosis"]
       - [Prothrombin G20210A mutation, "Point mutation in the 3′ untranslated region → ↑ prothrombin production → ↑ plasma levels and venous clots"]
     blanks: [[0, 1], [1, 1], [2, 1], [3, 1]]
-    src: { page: 433, quote: "Point mutation in 3′ untranslated region → ↑ production of prothrombin → ↑ plasma levels and venous clots." }
+    src: { page: 433, quote: "Antithrombin deficiency Has no direct effect on the PT, PTT, or thrombin time but diminishes the increase in PTT following standard heparin dosing. Can also be acquired: renal failure/nephrotic syndrome → antithrombin loss in urine → ↓ inhibition of factors IIa and Xa. Factor V Leiden Production of mutant factor V (guanine → adenine DNA point mutation → Arg506Gln mutation near the cleavage site) that is resistant to degradation by activated protein C. Complications include DVT, cerebral vein thrombosis, recurrent pregnancy loss. Protein C or S deficiency ↓ ability to inactivate factors Va and VIIIa. ↑ risk of warfarin-induced skin necrosis. Together, protein C Cancels, and protein S Stops, coagulation. Prothrombin G20210A mutation Point mutation in 3′ untranslated region → ↑ production of prothrombin → ↑ plasma levels and venous clots." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.118
@@ -1848,6 +2416,7 @@ items:
     text: "Together, protein C {{c1::Cancels}}, and protein S {{c2::Stops}}, coagulation."
     src: { page: 433, quote: "Together, protein C Cancels, and protein S Stops, coagulation." }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.119
     kind: mcq
     topic: hereditary-thrombophilias
@@ -1888,7 +2457,7 @@ items:
       - "Antithrombin deficiency causes heparin resistance, not warfarin skin necrosis."
       - "Right. Protein C or S deficiency (↓ inactivation of Va and VIIIa) ↑ the risk of warfarin-induced skin necrosis."
       - "Prothrombin G20210A ↑ prothrombin and venous clots but is not the classic cause of skin necrosis."
-      - "Factor XII deficiency is not a cause in First Aid."
+      - "Factor XII is not vitamin K-dependent, so warfarin does not lower it; a lack of factor XII prolongs the PTT in the lab but does not cause clots or skin necrosis."
       - "Hemophilia B is a bleeding disorder."
     src: { page: 433, quote: "↓ ability to inactivate factors Va and VIIIa. ↑ risk of warfarin-induced skin necrosis." }
     status: unverified
@@ -1904,18 +2473,65 @@ items:
       - [FFP / PCC, "FFP has all coagulation factors and plasma proteins; PCC has II, VII, IX, X, protein C and S", "Cirrhosis, immediate anticoagulation reversal"]
       - [Cryoprecipitate, "Fibrinogen, factor VIII, factor XIII, vWF, fibronectin", Factor deficiencies involving fibrinogen and factor VIII]
       - [Albumin, ↑ intravascular volume and oncotic pressure, "Post-paracentesis, therapeutic plasmapheresis"]
-    blanks: [[0, 1], [2, 1], [3, 1], [3, 2], [4, 2]]
-    src: { page: 434, quote: "Cryoprecipitate Contains fibrinogen, factor VIII, factor XIII, vWF, and fibronectin" }
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [3, 2], [4, 2]]
+    src: { page: 434, quote: "Packed RBCs ↑ Hb and O2 binding (carrying) capacity, ↑ Hb ~1 g/dL per unit, ↑ Hct ~3% per unit Acute blood loss, severe anemia Platelets ↑ platelet count; one unit of single donor platelets by ~5,000/μL; one unit of multi-donor apheresis platelets by ~30,000/μL Stop significant bleeding (thrombocytopenia, qualitative platelet defects) Fresh frozen plasma/ prothrombin complex concentrate ↑ coagulation factor levels; FFP contains all coagulation factors and plasma proteins; PCC generally contains factors II, VII, IX, and X, as well as protein C and S Cirrhosis, immediate anticoagulation reversal Cryoprecipitate Contains fibrinogen, factor VIII, factor XIII, vWF, and fibronectin Coagulation factor deficiencies involving fibrinogen and factor VIII Albumin ↑ intravascular volume and oncotic pressure Post-paracentesis, therapeutic plasmapheresis" }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.122
     kind: card
     topic: blood-transfusion-therapy
-    front: What are the risks of blood transfusion listed in First Aid?
-    back: Infection transmission (low), transfusion reactions, TACO (volume overload → pulmonary edema, hypertension), TRALI (hypoxia and inflammation → noncardiogenic pulmonary edema, hypotension), iron overload (2° hemochromatosis), hypocalcemia (citrate chelates Ca2+), and hyperkalemia (RBCs lyse in old units).
-    src: { page: 434, quote: "hypocalcemia (citrate is a Ca2+ chelator), and hyperkalemia (RBCs may lyse in old blood units)." }
+    front: "Why can blood transfusion cause hypocalcemia?"
+    back: "The citrate in stored blood binds (chelates) Ca2+."
+    src: { page: 434, quote: "hypocalcemia (citrate is a Ca2+ chelator)" }
     status: unverified
     tags: [high-yield]
+  - id: heme.L04.301
+    kind: enumerate
+    topic: blood-transfusion-therapy
+    prompt: "Enumerate the risks of blood transfusion listed in First Aid (7)."
+    points:
+      - "Infection transmission (low)"
+      - "Transfusion reactions"
+      - "Transfusion-associated circulatory overload (TACO)"
+      - "Transfusion-related acute lung injury (TRALI)"
+      - "Iron overload (2° hemochromatosis)"
+      - "Hypocalcemia"
+      - "Hyperkalemia"
+    pass: 5
+    src: { page: 434, quote: "Blood transfusion risks include infection transmission (low), transfusion reactions, transfusion-associated circulatory overload (TACO; volume overload → pulmonary edema, hypertension), transfusion-related acute lung injury (TRALI; hypoxia and inflammation → noncardiogenic pulmonary edema, hypotension), iron overload (may lead to 2° hemochromatosis), hypocalcemia (citrate is a Ca2+ chelator), and hyperkalemia (RBCs may lyse in old blood units)." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.302
+    kind: card
+    topic: blood-transfusion-therapy
+    front: "Why can transfusion of old blood units cause hyperkalemia?"
+    back: "RBCs may lyse in old units and release their potassium."
+    src: { page: 434, quote: "and hyperkalemia (RBCs may lyse in old blood units)." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.303
+    kind: card
+    topic: blood-transfusion-therapy
+    front: "What is TACO, and what happens to the blood pressure?"
+    back: "Transfusion-associated circulatory overload: too much volume → pulmonary edema, with hypertension."
+    src: { page: 434, quote: "transfusion-associated circulatory overload (TACO; volume overload → pulmonary edema, hypertension)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.304
+    kind: card
+    topic: blood-transfusion-therapy
+    front: "What is TRALI, and what happens to the blood pressure?"
+    back: "Transfusion-related acute lung injury: hypoxia and inflammation → noncardiogenic pulmonary edema, with hypotension."
+    src: { page: 434, quote: "transfusion-related acute lung injury (TRALI; hypoxia and inflammation → noncardiogenic pulmonary edema, hypotension)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.305
+    kind: card
+    topic: blood-transfusion-therapy
+    front: "Which complication of transfusion can lead to 2° hemochromatosis?"
+    back: "Iron overload."
+    src: { page: 434, quote: "iron overload (may lead to 2° hemochromatosis)" }
+    status: unverified
   - id: heme.L04.123
     kind: mcq
     topic: blood-transfusion-therapy
@@ -1984,8 +2600,8 @@ items:
       - [Cells, Reed-Sternberg cells, "Majority B cells; rarely T-cell lineage"]
       - [Age, "Bimodal: young adults, > 55 years", Children and adults]
       - [Associations, EBV, "Autoimmune diseases and viral infections (HIV, EBV, HTLV)"]
-    blanks: [[0, 1], [0, 2], [2, 1], [3, 1]]
-    src: { page: 434, quote: "Localized, single group of nodes with contiguous spread (stage is strongest predictor of prognosis). Better prognosis." }
+    blanks: [[0, 1], [0, 2], [1, 1], [2, 1], [3, 1], [3, 2], [4, 1], [4, 2]]
+    src: { page: 434, quote: "Localized, single group of nodes with contiguous spread (stage is strongest predictor of prognosis). Better prognosis. Multiple lymph nodes involved; extranodal involvement common; noncontiguous spread. Worse prognosis. Characterized by Reed-Sternberg cells. Majority involve B cells; rarely of T-cell lineage. Bimodal distribution: young adults, >55 years. Can occur in children and adults. Associated with EBV. May be associated with autoimmune diseases and viral infections (eg, HIV, EBV, HTLV)." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.127
@@ -1995,6 +2611,22 @@ items:
     back: Low-grade fever, night sweats, weight loss.
     src: { page: 434, quote: "Both may have constitutional (“B”) signs/symptoms: low-grade fever, night sweats, weight loss." }
     status: unverified
+  - id: heme.L04.306
+    kind: card
+    topic: hodgkin-vs-non-hodgkin-lymphoma
+    front: "What is the age distribution of Hodgkin lymphoma?"
+    back: "Bimodal: young adults and people over 55."
+    src: { page: 434, quote: "Bimodal distribution: young adults, >55 years." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.307
+    kind: card
+    topic: hodgkin-vs-non-hodgkin-lymphoma
+    front: "Which virus is Hodgkin lymphoma associated with?"
+    back: "EBV."
+    src: { page: 434, quote: "Can occur in children and adults. Associated with EBV." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.128
     kind: mcq
     topic: hodgkin-vs-non-hodgkin-lymphoma
@@ -2013,15 +2645,23 @@ items:
       - "Age matters, but the book names stage as the strongest predictor."
       - "Right. Hodgkin lymphoma (localized, contiguous spread, young adult) has stage as the strongest predictor of prognosis."
       - "B symptoms occur in both lymphomas but are not named as the strongest predictor."
-      - "LDH is not the predictor First Aid names."
+      - "A high LDH reflects tumor burden, but for Hodgkin lymphoma the book names stage as the strongest predictor of prognosis."
       - "EBV is an association, not the strongest prognostic factor."
     src: { page: 434, quote: "stage is strongest predictor of prognosis" }
     status: unverified
   - id: heme.L04.129
     kind: card
     topic: hodgkin-lymphoma
-    front: What do Reed-Sternberg cells look like, and which markers do they express?
-    back: Large B cells with a bilobed nucleus, 2 mirrored halves and prominent nucleoli ("owl eyes"). They are CD15+ and CD30+ of B-cell origin ("2 owl eyes × 15 = 30").
+    front: "What do Reed-Sternberg cells look like?"
+    back: "Large B cells with a two-lobed nucleus whose halves mirror each other and large nucleoli (\"owl eyes\")."
+    src: { page: 434, quote: "Contains Reed Sternberg cells: large B cells with a bilobed nucleus, 2 mirrored halves, and prominent nucleoli (“owl eyes” A )." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.308
+    kind: card
+    topic: hodgkin-lymphoma
+    front: "Which markers do Reed-Sternberg cells express?"
+    back: "CD15 and CD30; they are of B-cell origin (\"2 owl eyes × 15 = 30\")."
     src: { page: 434, quote: "RS cells are CD15+ and CD30+ B-cell origin. 2 owl eyes × 15 = 30." }
     status: unverified
     tags: [high-yield]
@@ -2074,8 +2714,8 @@ items:
       - [Mantle cell lymphoma, "t(11;14): cyclin D1 (11) and heavy-chain Ig (14); CD5+", Adult males; very aggressive; late-stage at presentation]
       - [Marginal zone lymphoma, "t(11;18)", "Chronic inflammation (Sjögren, chronic gastritis/MALT; may regress with H pylori eradication)"]
       - [Primary CNS lymphoma, "EBV related; HIV/AIDS", "AIDS-defining; often a single ring-enhancing lesion; distinguish from toxoplasmosis"]
-    blanks: [[0, 1], [1, 2], [2, 1], [3, 1], [4, 1]]
-    src: { page: 435, quote: "t(14;18)—translocation of heavy-chain Ig (14) and BCL-2 (18)" }
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2], [3, 1], [3, 2], [4, 1], [4, 2], [5, 1], [5, 2]]
+    src: { page: 435, quote: "Burkitt lymphoma Adolescents or young adults “Burkid” lymphoma (more common in kids) t(8;14)—translocation of c-myc (8) and heavy-chain Ig (14) “Starry sky” appearance (StarBurst), sheets of lymphocytes with interspersed “tingible body” macrophages (arrows in A ). Associated with EBV. Jaw lesion B in endemic form in Africa; pelvis or abdomen in sporadic form. Diffuse large B-cell lymphoma Usually older adults, but 20% in children Mutations in BCL-2, BCL-6 Most common type of non-Hodgkin lymphoma in adults. Follicular lymphoma Adults t(14;18)—translocation of heavy-chain Ig (14) and BCL-2 (18) Indolent course with painless “waxing and waning” lymphadenopathy. Bcl-2 normally inhibits apoptosis. Mantle cell lymphoma Adult males >> adult females t(11;14)—translocation of cyclin D1 (11) and heavy-chain Ig (14), CD5+ Very aggressive, patients typically present with late-stage disease. Marginal zone lymphoma Adults t(11;18) Associated with chronic inflammation (eg, Sjögren syndrome, chronic gastritis [MALT lymphoma; may regress with H pylori eradication]). Primary central nervous system lymphoma Adults EBV related; associated with HIV/ AIDS Considered an AIDS-defining illness. Variable presentation: confusion, memory loss, seizures. CNS mass (often single, ring-enhancing lesion on MRI) in immunocompromised patients C , needs to be distinguished from toxoplasmosis via CSF analysis or other lab tests." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.133
@@ -2085,13 +2725,86 @@ items:
     back: "A \"starry sky\" appearance (StarBurst): sheets of lymphocytes with interspersed \"tingible body\" macrophages."
     src: { page: 435, quote: "“Starry sky” appearance (StarBurst), sheets of lymphocytes with interspersed “tingible body” macrophages" }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.134
     kind: card
     topic: non-hodgkin-lymphoma
-    front: What does Bcl-2 normally do, and which lymphoma overexpresses it by translocation?
-    back: Bcl-2 normally inhibits apoptosis. Follicular lymphoma, t(14;18).
-    src: { page: 435, quote: "Indolent course with painless “waxing and waning” lymphadenopathy. Bcl-2 normally inhibits apoptosis." }
+    front: "What does Bcl-2 normally do?"
+    back: "It inhibits apoptosis."
+    src: { page: 435, quote: "Bcl-2 normally inhibits apoptosis." }
     status: unverified
+    tags: [high-yield]
+  - id: heme.L04.316
+    kind: card
+    topic: non-hodgkin-lymphoma
+    front: "Which lymphoma overexpresses BCL-2 by translocation, and which translocation?"
+    back: "Follicular lymphoma, t(14;18)."
+    src: { page: 435, quote: "Follicular lymphoma Adults t(14;18)—translocation of heavy-chain Ig (14) and BCL-2 (18)" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.317
+    kind: card
+    topic: non-hodgkin-lymphoma
+    front: "What is the clinical course of follicular lymphoma?"
+    back: "Indolent, with painless lymph nodes that grow and shrink (\"waxing and waning\")."
+    src: { page: 435, quote: "Indolent course with painless “waxing and waning” lymphadenopathy." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.314
+    kind: card
+    topic: non-hodgkin-lymphoma
+    front: "What is the course of mantle cell lymphoma?"
+    back: "Very aggressive; patients usually present with late-stage disease."
+    src: { page: 435, quote: "Very aggressive, patients typically present with late-stage disease." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.315
+    kind: card
+    topic: non-hodgkin-lymphoma
+    front: "Which surface marker does mantle cell lymphoma express?"
+    back: "CD5."
+    src: { page: 435, quote: "t(11;14)—translocation of cyclin D1 (11) and heavy-chain Ig (14), CD5+" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.309
+    kind: card
+    topic: non-hodgkin-lymphoma
+    front: "Which virus is primary CNS lymphoma related to?"
+    back: "EBV."
+    src: { page: 435, quote: "Primary central nervous system lymphoma Adults EBV related;" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.310
+    kind: card
+    topic: non-hodgkin-lymphoma
+    front: "In which patients does primary CNS lymphoma occur?"
+    back: "Immunocompromised patients: it is associated with HIV/AIDS and is an AIDS-defining illness."
+    src: { page: 435, quote: "EBV related; associated with HIV/ AIDS Considered an AIDS-defining illness." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.313
+    kind: card
+    topic: non-hodgkin-lymphoma
+    front: "How does primary CNS lymphoma present?"
+    back: "Variably: confusion, memory loss, seizures."
+    src: { page: 435, quote: "Variable presentation: confusion, memory loss, seizures." }
+    status: unverified
+  - id: heme.L04.311
+    kind: card
+    topic: non-hodgkin-lymphoma
+    front: "What does primary CNS lymphoma look like on MRI?"
+    back: "Often a single ring-enhancing lesion."
+    src: { page: 435, quote: "CNS mass (often single, ring-enhancing lesion on MRI) in immunocompromised patients" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.312
+    kind: card
+    topic: non-hodgkin-lymphoma
+    front: "Which infection must primary CNS lymphoma be told apart from, and how?"
+    back: "Toxoplasmosis, by CSF analysis or other lab tests."
+    src: { page: 435, quote: "needs to be distinguished from toxoplasmosis via CSF analysis or other lab tests." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.135
     kind: table
     topic: non-hodgkin-lymphoma
@@ -2143,7 +2856,7 @@ items:
       - "Right. Marginal zone (MALT) lymphoma, t(11;18), is associated with chronic gastritis and may regress with H pylori eradication."
       - "ATRA treats APL."
       - "Imatinib treats CML."
-      - "Surgery is not the treatment the book names; eradication can make it regress."
+      - "Gastrectomy removes the tumor but leaves its driver untreated: MALT lymphoma grows on chronic H pylori gastritis and may regress once H pylori is eradicated, so removing the stomach is not needed."
       - "Hydroxyurea is used in sickle cell and myeloproliferative neoplasms."
     src: { page: 435, quote: "Associated with chronic inflammation (eg, Sjögren syndrome, chronic gastritis [MALT lymphoma; may regress with H pylori eradication])." }
     status: unverified
@@ -2220,6 +2933,7 @@ items:
     back: "IgG (most common) > IgA > Ig light chains."
     src: { page: 436, quote: "Overproduction of IgG (most common) > IgA > Ig light chains." }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.219
     kind: card
     topic: plasma-cell-dyscrasias
@@ -2239,7 +2953,7 @@ items:
     kind: card
     topic: plasma-cell-dyscrasias
     front: "What does the bone marrow biopsy show in multiple myeloma?"
-    back: "> 10% monoclonal plasma cells with clock-face chromatin and intracytoplasmic inclusions containing Ig."
+    back: "More than 10% monoclonal plasma cells, with clock-face chromatin and Ig-filled inclusions in the cytoplasm."
     src: { page: 436, quote: "Bone marrow biopsy shows >10% monoclonal plasma cells with clock-face chromatin C and intracytoplasmic inclusions containing Ig." }
     status: unverified
     tags: [high-yield]
@@ -2247,7 +2961,7 @@ items:
     kind: card
     topic: plasma-cell-dyscrasias
     front: "What does the bone marrow biopsy show in Waldenström macroglobulinemia?"
-    back: "> 10% monoclonal B lymphocytes with plasma cell features (lymphoplasmacytic lymphoma) and intranuclear pseudoinclusions containing IgM."
+    back: "More than 10% monoclonal B cells that look like plasma cells (lymphoplasmacytic lymphoma), with IgM-filled pseudoinclusions in the nucleus."
     src: { page: 436, quote: "Bone marrow biopsy shows >10% monoclonal B lymphocytes with plasma cell features (lymphoplasmacytic lymphoma) and intranuclear pseudoinclusions containing IgM." }
     status: unverified
     tags: [high-yield]
@@ -2289,7 +3003,7 @@ items:
       - "IgG is most common in multiple myeloma, which gives CRAB with lytic lesions."
       - "IgA is the second most common myeloma protein."
       - "Right. Waldenström macroglobulinemia overproduces IgM, the largest Ig, so it causes hyperviscosity (headache, bleeding, blurry vision) and sausage-link retinal veins."
-      - "IgE myeloma is not in First Aid's list."
+      - "IgE is a small monomer and is almost never the overproduced protein; it is too small to thicken the blood, and myeloma makes IgG > IgA > light chains."
       - "Light chains alone cause Bence Jones proteinuria, not hyperviscosity."
     src: { page: 436, quote: "Overproduction of IgM (macroglobulinemia because IgM is the largest Ig)." }
     status: unverified
@@ -2319,9 +3033,55 @@ items:
   - id: heme.L04.145
     kind: card
     topic: myelodysplastic-syndromes
-    front: What are myelodysplastic syndromes, and how do they differ from AML?
-    back: Stem cell disorders with ineffective hematopoiesis → defective maturation of nonlymphoid lineages. Marrow blasts < 20% (vs > 20% in AML). Caused by de novo mutations or exposures (radiation, benzene, chemotherapy); can transform to AML; more common in older adults.
+    front: "How do myelodysplastic syndromes differ from AML in the bone marrow?"
+    back: "MDS has fewer than 20% marrow blasts; AML has more than 20%."
     src: { page: 436, quote: "Bone marrow blasts <20% (vs >20% in AML)." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.318
+    kind: card
+    topic: myelodysplastic-syndromes
+    front: "What are myelodysplastic syndromes?"
+    back: "Stem cell disorders with ineffective hematopoiesis, in which the nonlymphoid lineages fail to mature normally."
+    src: { page: 436, quote: "Stem cell disorders involving ineffective hematopoiesis → defects in cell maturation of nonlymphoid lineages." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.319
+    kind: card
+    topic: myelodysplastic-syndromes
+    front: "What causes myelodysplastic syndromes?"
+    back: "De novo mutations or environmental exposure (eg, radiation, benzene, chemotherapy)."
+    src: { page: 436, quote: "Caused by de novo mutations or environmental exposure (eg, radiation, benzene, chemotherapy)." }
+    status: unverified
+  - id: heme.L04.320
+    kind: card
+    topic: myelodysplastic-syndromes
+    front: "What can myelodysplastic syndromes transform into?"
+    back: "AML."
+    src: { page: 436, quote: "Risk of transformation to AML." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.321
+    kind: card
+    topic: myelodysplastic-syndromes
+    front: "In which age group are myelodysplastic syndromes more common?"
+    back: "Older adults."
+    src: { page: 436, quote: "Risk of transformation to AML. More common in older adults." }
+    status: unverified
+  - id: heme.L04.322
+    kind: card
+    topic: myelodysplastic-syndromes
+    front: "What is the pseudo-Pelger-Huët anomaly?"
+    back: "Neutrophils with bilobed (\"duet\") nuclei."
+    src: { page: 436, quote: "Pseudo-Pelger-Huët anomaly—neutrophils with bilobed (“duet”) nuclei" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.323
+    kind: card
+    topic: myelodysplastic-syndromes
+    front: "What is the pseudo-Pelger-Huët anomaly associated with?"
+    back: "Myelodysplastic syndromes or drugs (eg, immunosuppressants)."
+    src: { page: 436, quote: "Associated with myelodysplastic syndromes or drugs (eg, immunosuppressants)." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.146
@@ -2352,22 +3112,23 @@ items:
   - id: heme.L04.147
     kind: card
     topic: leukemias
-    front: Why does leukemia cause anemia, infections and hemorrhage?
-    back: "Unregulated WBC growth in the marrow → marrow failure → anemia (↓ RBCs), infections (↓ mature WBCs), and hemorrhage (↓ platelets)."
+    front: "Why does leukemia cause anemia, infections and hemorrhage?"
+    back: "Leukemic cells crowd the marrow until it fails: too few RBCs gives anemia, too few mature WBCs gives infections, and too few platelets gives bleeding."
     src: { page: 437, quote: "Unregulated growth and differentiation of WBCs in bone marrow → marrow failure → anemia (↓ RBCs), infections (↓ mature WBCs), and hemorrhage (↓ platelets)." }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.224
     kind: card
     topic: leukemias
     front: "What is the WBC count in leukemia?"
-    back: "Usually ↑ circulating WBCs (malignant leukocytes in the blood), although some cases present with normal or ↓ WBCs."
+    back: "Usually high, from malignant WBCs in the blood, but some cases have a normal or low count."
     src: { page: 437, quote: "Usually presents with ↑ circulating WBCs (malignant leukocytes in blood), although some cases present with normal/↓ WBCs." }
     status: unverified
   - id: heme.L04.225
     kind: card
     topic: leukemias
     front: "Which organs can leukemic cells infiltrate?"
-    back: "Liver, spleen, lymph nodes, and skin (leukemia cutis)."
+    back: "The liver, spleen, lymph nodes and skin (leukemia cutis)."
     src: { page: 437, quote: "Leukemic cell infiltration of liver, spleen, lymph nodes, and skin (leukemia cutis) possible." }
     status: unverified
   - id: heme.L04.148
@@ -2381,16 +3142,32 @@ items:
       - [Hairy cell leukemia, Adult males, "Hairlike projections; TRAP+; BRAF; dry tap; massive splenomegaly, pancytopenia"]
       - [AML, Median onset 65 years, "Auer rods (myeloperoxidase+); ↑↑↑ myeloblasts; leukostasis"]
       - [CML, "45-85 years, median 64", "t(9;22) BCR-ABL; mature and maturing granulocytes, basophils; splenomegaly"]
-    blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]]
-    src: { page: 437, quote: "Age >60 years. Most common adult leukemia. CD20+, CD23+, CD5+ B-cell neoplasm." }
+    blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [0, 2], [1, 2], [2, 2], [3, 2], [4, 2]]
+    src: { page: 437, quote: "Acute lymphoblastic leukemia/lymphoma Most frequently occurs in children; less common in adults (worse prognosis). T-cell ALL can present as mediastinal mass (presenting as SVC-like syndrome). Associated with Down syndrome. Peripheral blood and bone marrow have ↑↑↑ lymphoblasts A . TdT+ (marker of pre-T and pre-B cells), CD10+ (marker of pre-B cells). Most responsive to therapy. May spread to CNS and testes. t(12;21) → better prognosis; t(9;22) (Philadelphia chromosome) → worse prognosis. Chronic lymphocytic leukemia/small lymphocytic lymphoma Age >60 years. Most common adult leukemia. CD20+, CD23+, CD5+ B-cell neoplasm. Often asymptomatic, progresses slowly; smudge cells B in peripheral blood smear; autoimmune hemolytic anemia. CLL = Crushed Little Lymphocytes (smudge cells). Richter transformation—CLL/SLL transformation into an aggressive lymphoma, most commonly diffuse large B-cell lymphoma (DLBCL). Hairy cell leukemia Adult males. Mature B-cell tumor. Cells have filamentous, hairlike projections (fuzzy appearing on LM C ). Peripheral lymphadenopathy is uncommon. Causes marrow fibrosis → dry tap on aspiration. Patients usually present with massive splenomegaly and pancytopenia. Stains TRAP (Tartrate-Resistant Acid Phosphatase) ⊕ (TRAPped in a hairy situation). TRAP stain largely replaced with flow cytometry. Associated with BRAF mutations. Treatment: purine analogs (cladribine, pentostatin). Myeloid neoplasms Acute myelogenous leukemia Median onset 65 years. Auer rods D ; myeloperoxidase ⊕ cytoplasmic inclusions seen mostly in APL (formerly M3 AML); ↑↑↑ circulating myeloblasts on peripheral smear. May present with leukostasis (capillary occlusion by malignant, nondistensible cells → organ damage). Risk factors: prior exposure to alkylating chemotherapy, radiation, benzene, myeloproliferative disorders, Down syndrome (typically acute megakaryoblastic leukemia [formerly M7 AML]). APL: t(15;17) PML-RARα, responds to all-trans retinoic acid (vitamin A) and arsenic trioxide, which induce differentiation of promyelocytes; DIC is a common presentation. Chronic myelogenous leukemia Peak incidence: 45-85 years; median age: 64 years. Defined by the Philadelphia chromosome (t[9;22], BCR-ABL) and myeloid stem cell proliferation. Presents with dysregulated production of mature and maturing granulocytes (eg, neutrophils, metamyelocytes, myelocytes, basophils E ) and splenomegaly." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.149
     kind: card
     topic: leukemias
-    front: Which translocations give a better and a worse prognosis in ALL?
-    back: t(12;21) → better prognosis; t(9;22) (Philadelphia chromosome) → worse prognosis. ALL is the most responsive to therapy.
+    front: "Which translocations give a better and a worse prognosis in ALL?"
+    back: "t(12;21) → better prognosis; t(9;22) (Philadelphia chromosome) → worse prognosis."
     src: { page: 437, quote: "t(12;21) → better prognosis; t(9;22) (Philadelphia chromosome) → worse prognosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.324
+    kind: card
+    topic: leukemias
+    front: "Which leukemia is the most responsive to therapy?"
+    back: "ALL."
+    src: { page: 437, quote: "CD10+ (marker of pre-B cells). Most responsive to therapy." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.325
+    kind: card
+    topic: leukemias
+    front: "Where may ALL spread?"
+    back: "To the CNS and the testes."
+    src: { page: 437, quote: "Most responsive to therapy. May spread to CNS and testes." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.226
@@ -2402,10 +3179,11 @@ items:
   - id: heme.L04.150
     kind: card
     topic: leukemias
-    front: What is Richter transformation?
-    back: Transformation of CLL/SLL into an aggressive lymphoma, most commonly diffuse large B-cell lymphoma (DLBCL).
+    front: "What is Richter transformation?"
+    back: "CLL/SLL turning into an aggressive lymphoma, most often DLBCL."
     src: { page: 437, quote: "Richter transformation—CLL/SLL transformation into an aggressive lymphoma, most commonly diffuse large B-cell lymphoma (DLBCL)." }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.151
     kind: card
     topic: leukemias
@@ -2423,25 +3201,72 @@ items:
   - id: heme.L04.152
     kind: card
     topic: leukemias
-    front: What are the genetics, treatment and typical complication of acute promyelocytic leukemia (APL)?
-    back: t(15;17) PML-RARα. It responds to all-trans retinoic acid (vitamin A) and arsenic trioxide, which induce differentiation of promyelocytes. DIC is a common presentation.
-    src: { page: 437, quote: "APL: t(15;17) PML-RARα, responds to all-trans retinoic acid (vitamin A) and arsenic trioxide, which induce differentiation of promyelocytes; DIC is a common presentation." }
+    front: "What is the genetic defect of acute promyelocytic leukemia (APL)?"
+    back: "t(15;17), which makes PML-RARα."
+    src: { page: 437, quote: "APL: t(15;17) PML-RARα," }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.326
+    kind: card
+    topic: leukemias
+    front: "How is APL treated, and how do the drugs work?"
+    back: "All-trans retinoic acid (vitamin A) and arsenic trioxide, which make the promyelocytes differentiate."
+    src: { page: 437, quote: "responds to all-trans retinoic acid (vitamin A) and arsenic trioxide, which induce differentiation of promyelocytes" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.327
+    kind: card
+    topic: leukemias
+    front: "Which coagulation disorder is a common presentation of APL?"
+    back: "DIC."
+    src: { page: 437, quote: "which induce differentiation of promyelocytes; DIC is a common presentation." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.153
     kind: card
     topic: leukemias
-    front: What are the risk factors for AML?
-    back: Prior alkylating chemotherapy, radiation, benzene, myeloproliferative disorders, and Down syndrome (typically acute megakaryoblastic leukemia, formerly M7 AML).
+    front: "Which type of AML is typical in Down syndrome?"
+    back: "Acute megakaryoblastic leukemia (formerly M7 AML)."
+    src: { page: 437, quote: "Down syndrome (typically acute megakaryoblastic leukemia [formerly M7 AML])." }
+    status: unverified
+  - id: heme.L04.328
+    kind: enumerate
+    topic: leukemias
+    prompt: "Enumerate the risk factors for AML (5)."
+    points:
+      - "Prior alkylating chemotherapy"
+      - "Radiation"
+      - "Benzene"
+      - "Myeloproliferative disorders"
+      - "Down syndrome"
+    pass: 4
     src: { page: 437, quote: "Risk factors: prior exposure to alkylating chemotherapy, radiation, benzene, myeloproliferative disorders, Down syndrome (typically acute megakaryoblastic leukemia [formerly M7 AML])." }
     status: unverified
+    tags: [high-yield]
+  - id: heme.L04.329
+    kind: card
+    topic: leukemias
+    front: "What is leukostasis in AML?"
+    back: "Malignant cells that cannot deform block capillaries, causing organ damage."
+    src: { page: 437, quote: "May present with leukostasis (capillary occlusion by malignant, nondistensible cells → organ damage)." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.154
     kind: card
     topic: leukemias
-    front: How can CML progress, and what is it treated with?
-    back: It may accelerate and transform to AML or ALL ("blast crisis"). It responds to BCR-ABL tyrosine kinase inhibitors (eg, imatinib).
-    src: { page: 437, quote: "May accelerate and transform to AML or ALL (“blast crisis”). Responds to BCR-ABL tyrosine kinase inhibitors (eg, imatinib)." }
+    front: "How can CML progress?"
+    back: "It may accelerate and transform to AML or ALL (\"blast crisis\")."
+    src: { page: 437, quote: "May accelerate and transform to AML or ALL (“blast crisis”)." }
     status: unverified
+    tags: [high-yield]
+  - id: heme.L04.330
+    kind: card
+    topic: leukemias
+    front: "Which drugs does CML respond to?"
+    back: "BCR-ABL tyrosine kinase inhibitors (eg, imatinib)."
+    src: { page: 437, quote: "Responds to BCR-ABL tyrosine kinase inhibitors (eg, imatinib)." }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.155
     kind: mcq
     topic: leukemias
@@ -2583,17 +3408,57 @@ items:
   - id: heme.L04.160
     kind: card
     topic: myeloproliferative-neoplasms
-    front: What is essential thrombocythemia?
-    back: Massive proliferation of megakaryocytes and platelets, causing bleeding and thrombosis; the smear shows many platelets that may be large or abnormal; erythromelalgia may occur.
+    front: "What is essential thrombocythemia?"
+    back: "A massive proliferation of megakaryocytes and platelets."
+    src: { page: 438, quote: "Essential thrombocythemia Characterized by massive proliferation of megakaryocytes and platelets." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.331
+    kind: card
+    topic: myeloproliferative-neoplasms
+    front: "What are the symptoms of essential thrombocythemia?"
+    back: "Bleeding and thrombosis."
     src: { page: 438, quote: "Characterized by massive proliferation of megakaryocytes and platelets. Symptoms include bleeding and thrombosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.332
+    kind: card
+    topic: myeloproliferative-neoplasms
+    front: "What does the blood smear show in essential thrombocythemia?"
+    back: "Many more platelets than normal, which may be large or abnormally formed."
+    src: { page: 438, quote: "Blood smear shows markedly increased number of platelets, which may be large or otherwise abnormally formed" }
+    status: unverified
+  - id: heme.L04.333
+    kind: card
+    topic: myeloproliferative-neoplasms
+    front: "Which symptom of polycythemia vera may also occur in essential thrombocythemia?"
+    back: "Erythromelalgia."
+    src: { page: 438, quote: "which may be large or otherwise abnormally formed B . Erythromelalgia may occur." }
     status: unverified
   - id: heme.L04.161
     kind: card
     topic: myeloproliferative-neoplasms
-    front: What is the mechanism of myelofibrosis, and what are its findings?
-    back: Atypical megakaryocyte hyperplasia → ↑ TGF-β → ↑ fibroblast activity → marrow fibrosis. Massive splenomegaly and teardrop RBCs ("bone marrow cries because it's fibrosed and is a dry tap").
+    front: "What is the mechanism of myelofibrosis?"
+    back: "Atypical megakaryocytes multiply and secrete more TGF-β, which drives fibroblasts until fibrosis wipes out the marrow."
     src: { page: 438, quote: "Atypical megakaryocyte hyperplasia → ↑ TGF-β secretion → ↑ fibroblast activity → obliteration of bone marrow with fibrosis." }
     status: unverified
+    tags: [high-yield]
+  - id: heme.L04.334
+    kind: card
+    topic: myeloproliferative-neoplasms
+    front: "Which spleen finding is associated with myelofibrosis?"
+    back: "Massive splenomegaly."
+    src: { page: 438, quote: "obliteration of bone marrow with fibrosis. Associated with massive splenomegaly" }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.335
+    kind: card
+    topic: myeloproliferative-neoplasms
+    front: "Which RBC shape and which aspirate result mark myelofibrosis?"
+    back: "Teardrop RBCs and a dry tap (\"Bone marrow cries because it's fibrosed and is a dry tap\")."
+    src: { page: 438, quote: "“teardrop” RBCs C . “Bone marrow cries because it’s fibrosed and is a dry tap.”" }
+    status: unverified
+    tags: [high-yield]
   - id: heme.L04.162
     kind: table
     topic: myeloproliferative-neoplasms
@@ -2604,9 +3469,10 @@ items:
       - [Essential thrombocythemia, −, −, ↑, ⊝, "⊕ (30%-50%)"]
       - [Myelofibrosis, ↓, Variable, Variable, ⊝, "⊕ (30%-50%)"]
       - [CML, ↓, ↑, ↑, ⊕, ⊝]
-    blanks: [[0, 5], [3, 4], [3, 5], [2, 1]]
-    src: { page: 438, quote: "RBCS WBCS PLATELETS PHILADELPHIA CHROMOSOME JAK2 MUTATIONS Polycythemia vera ↑ ↑ ↑ ⊝ ⊕" }
+    blanks: [[0, 1], [0, 2], [0, 3], [0, 4], [0, 5], [1, 1], [1, 2], [1, 3], [1, 4], [1, 5], [2, 1], [2, 2], [2, 3], [2, 4], [2, 5], [3, 1], [3, 2], [3, 3], [3, 4], [3, 5]]
+    src: { page: 438, quote: "RBCS WBCS PLATELETS PHILADELPHIA CHROMOSOME JAK2 MUTATIONS Polycythemia vera ↑ ↑ ↑ ⊝ ⊕ Essential thrombocythemia − − ↑ ⊝ ⊕ (30%-50%) Myelofibrosis ↓ Variable Variable ⊝ ⊕ (30%-50%) CML ↓ ↑ ↑ ⊕ ⊝" }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.163
     kind: mcq
     topic: myeloproliferative-neoplasms
@@ -2641,7 +3507,7 @@ items:
       - [FLT3-ITD/FLT3-TKD, "↑ tyrosine kinase → ↑ MAPK/PI3K", AML]
       - [KIT (D816V), "↑ c-Kit tyrosine kinase → clonal mast cell proliferation", "Systemic mastocytosis (↑ tryptase, flushing, pruritus)"]
     blanks: [[0, 2], [1, 2], [2, 2], [3, 2], [4, 2]]
-    src: { page: 438, quote: "FLT3-ITD/FLT3-TKD ↑ tyrosine kinase → ↑ MAPK/PI3K in AML" }
+    src: { page: 438, quote: "BCR-ABL (t[9;22]) ↑ constitutive tyrosine kinase (ABL) → ↑ RAS/MAPK and PI3K/AKT → CML, some B-cell ALL (“Philly chromosome”) JAK2 V617F ↑ JAK-STAT signaling → PV > ET > PMF, ↓ EPO in PV CALR/MPL Non-JAK MPN drivers in essential thrombocythemia/primary myelofibrosis → ↑ JAK-STAT, normal EPO FLT3-ITD/FLT3-TKD ↑ tyrosine kinase → ↑ MAPK/PI3K in AML KIT (D816V) ↑ c-Kit tyrosine kinase → clonal mast cell proliferation → systemic mastocytosis (↑ tryptase, flushing, pruritus)" }
     status: unverified
   - id: heme.L04.165
     kind: mcq
@@ -2677,8 +3543,8 @@ items:
       - [Neutrophil morphology, "Toxic granulation, Döhle bodies, cytoplasmic vacuoles", Pseudo-Pelger-Huët anomaly]
       - [LAP score, ↑, ↓]
       - [Eosinophils and basophils, Normal, ↑]
-    blanks: [[2, 1], [2, 2], [3, 1], [3, 2]]
-    src: { page: 439, quote: "LAP SCORE ↑ ↓ (↓ LAP enzyme in neutrophils) EOSINOPHILS AND BASOPHILS Normal ↑" }
+    blanks: [[0, 1], [0, 2], [1, 1], [1, 2], [2, 1], [2, 2], [3, 1], [3, 2]]
+    src: { page: 439, quote: "DEFINITION Reactive neutrophilia >50,000 cells/mm3 Myeloproliferative neoplasm ⊕ for BCR-ABL NEUTROPHIL MORPHOLOGY Toxic granulation, Döhle bodies, cytoplasmic vacuoles Pseudo-Pelger-Huët anomaly LAP SCORE ↑ ↓ (↓ LAP enzyme in neutrophils) EOSINOPHILS AND BASOPHILS Normal ↑" }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.167
@@ -2713,7 +3579,7 @@ items:
       - [Inappropriate absolute, –, ↑, –, ↑, "Exogenous EPO (blood doping), androgens; EPO-secreting malignancy (RCC, HCC)"]
       - [Polycythemia vera, ↑, ↑↑, –, ↓, EPO ↓ from negative feedback]
     blanks: [[0, 1], [1, 3], [2, 4], [3, 4], [1, 5], [2, 5]]
-    src: { page: 439, quote: "Exogenous EPO (athlete misuse, also called “blood doping”), androgen supplementation. Inappropriate EPO secretion: malignancy (eg, RCC, HCC)." }
+    src: { page: 439, quote: "Relative ↓ – – – Dehydration, burns. Appropriate absolute – ↑ ↓ ↑ Lung disease, congenital heart disease, high altitude, obstructive sleep apnea. Inappropriate absolute – ↑ – ↑ Exogenous EPO (athlete misuse, also called “blood doping”), androgen supplementation. Inappropriate EPO secretion: malignancy (eg, RCC, HCC). Polycythemia vera ↑ ↑↑ – ↓ EPO ↓ in PCV due to negative feedback suppressing renal EPO production." }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.169
@@ -2751,16 +3617,17 @@ items:
       - ["t(15;17)", APL (formerly M3 AML)]
       - ["t(9;22) (Philadelphia)", "CML (BCR-ABL hybrid), ALL (less common)"]
     blanks: [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1]]
-    src: { page: 439, quote: "t(14;18) Follicular lymphoma (BCL-2 activation) t(15;17) APL (formerly M3 type of AML)" }
+    src: { page: 439, quote: "t(8;14) Burkitt (Burk-8) lymphoma (c-myc activation) The Ig heavy chain genes on chromosome 14 are constitutively expressed. When other genes (eg, c-myc and BCL-2) are translocated next to this heavy chain gene region, they are overexpressed. t(11;14) t(11;18) Mantle cell lymphoma (cyclin D1 activation) Marginal zone lymphoma t(14;18) Follicular lymphoma (BCL-2 activation) t(15;17) APL (formerly M3 type of AML) t(9;22) (Philadelphia chromosome) CML (BCR-ABL hybrid), ALL (less common); Philadelphia CreaML cheese" }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.171
     kind: card
     topic: chromosomal-translocations
-    front: Why are genes translocated next to chromosome 14 overexpressed in lymphomas?
-    back: The Ig heavy chain genes on chromosome 14 are constitutively expressed, so genes moved next to them (eg, c-myc, BCL-2) are overexpressed.
+    front: "Why are genes translocated next to chromosome 14 overexpressed in lymphomas?"
+    back: "The Ig heavy chain locus on chromosome 14 is always switched on in B cells, so an oncogene moved beside it (eg, c-myc, BCL-2) is driven along with it."
     src: { page: 439, quote: "The Ig heavy chain genes on chromosome 14 are constitutively expressed. When other genes (eg, c-myc and BCL-2) are translocated next to this heavy chain gene region, they are overexpressed." }
     status: unverified
+    tags: [high-yield]
   - id: heme.L04.172
     kind: mcq
     topic: chromosomal-translocations
@@ -2786,16 +3653,39 @@ items:
   - id: heme.L04.173
     kind: card
     topic: langerhans-cell-histiocytosis
-    front: How does Langerhans cell histiocytosis present in a child?
-    back: Lytic bone lesions and a skin rash, or recurrent otitis media with a mass involving the mastoid bone. It is a group of proliferative disorders of Langerhans cells (skin antigen-presenting cells) that are functionally immature and do not effectively stimulate primary T cells.
+    front: "How does Langerhans cell histiocytosis present in a child?"
+    back: "With lytic bone lesions and a skin rash, or with recurrent otitis media and a mass involving the mastoid bone."
     src: { page: 439, quote: "Presents in a child as lytic bone lesions and skin rash or as recurrent otitis media with a mass involving the mastoid bone." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.336
+    kind: card
+    topic: langerhans-cell-histiocytosis
+    front: "What is Langerhans cell histiocytosis?"
+    back: "A group of proliferative disorders of Langerhans cells, the antigen-presenting cells normally found in the skin."
+    src: { page: 439, quote: "Collective group of proliferative disorders of Langerhans cells (antigen-presenting cells normally found in the skin)." }
+    status: unverified
+  - id: heme.L04.337
+    kind: card
+    topic: langerhans-cell-histiocytosis
+    front: "Why do the cells of Langerhans cell histiocytosis stimulate T cells poorly?"
+    back: "They are functionally immature, so their antigen presentation does not effectively stimulate primary T cells."
+    src: { page: 439, quote: "Cells are functionally immature and do not effectively stimulate primary T cells via antigen presentation." }
     status: unverified
   - id: heme.L04.174
     kind: card
     topic: langerhans-cell-histiocytosis
-    front: Which markers and EM finding identify Langerhans cells?
-    back: S-100, CD1a and CD207; Birbeck granules ("tennis rackets" or rod-shaped on EM).
-    src: { page: 439, quote: "Cells express S-100, CD1a, and CD207. Birbeck granules (“tennis rackets” or rod-shaped on EM) are characteristic" }
+    front: "Which markers do Langerhans cells express?"
+    back: "S-100, CD1a and CD207."
+    src: { page: 439, quote: "Cells express S-100, CD1a, and CD207." }
+    status: unverified
+    tags: [high-yield]
+  - id: heme.L04.338
+    kind: card
+    topic: langerhans-cell-histiocytosis
+    front: "Which electron microscopy finding is characteristic of Langerhans cells?"
+    back: "Birbeck granules, shaped like tennis rackets or rods."
+    src: { page: 439, quote: "Birbeck granules (“tennis rackets” or rod-shaped on EM) are characteristic" }
     status: unverified
     tags: [high-yield]
   - id: heme.L04.175

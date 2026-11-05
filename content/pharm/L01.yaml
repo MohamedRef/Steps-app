@@ -77,7 +77,7 @@ items:
       point. Adding a large excess of substrate does not restore the reaction rate, and the drug does
       not resemble the substrate. Which of the following best describes this inhibitor?
     options:
-      - It binds an allosteric site and lowers the drug's efficacy at the target
+      - It binds an allosteric site and lowers Vmax (↓ efficacy) without changing Km
       - It resembles the substrate and raises the Km
       - It binds the active site reversibly and lowers potency
       - It increases the enzyme's affinity for its substrate
@@ -136,9 +136,22 @@ items:
   - id: pharm.L01.013
     kind: card
     topic: pharmacokinetics
-    front: Define clearance (CL), give its formula, and name what impairs it.
-    back: "The volume of plasma cleared of drug per unit time. CL = rate of elimination / plasma drug concentration = Vd × Ke (elimination constant). Impaired by defects in cardiac, hepatic or renal function."
-    src: { page: 229, quote: "The volume of plasma cleared of drug per unit time. Clearance may be impaired with defects in cardiac, hepatic, or renal function." }
+    front: "Define clearance (CL)."
+    back: "The plasma volume freed of the drug in each unit of time."
+    src: { page: 229, quote: "The volume of plasma cleared of drug per unit time." }
+    status: unverified
+  - id: pharm.L01.053
+    kind: cloze
+    topic: pharmacokinetics
+    text: "CL = rate of drug elimination / plasma drug concentration = {{c1::Vd × Ke}} (Ke = elimination constant)."
+    src: { page: 229, quote: "rate of elimination of drug = Vd × Ke (elimination constant)" }
+    status: unverified
+  - id: pharm.L01.054
+    kind: card
+    topic: pharmacokinetics
+    front: "Which organ problems can impair drug clearance?"
+    back: "Disease of the heart, the liver or the kidneys."
+    src: { page: 229, quote: "Clearance may be impaired with defects in cardiac, hepatic, or renal function." }
     status: unverified
   - id: pharm.L01.014
     kind: cloze
@@ -151,13 +164,13 @@ items:
     kind: card
     topic: pharmacokinetics
     front: What is steady state?
-    back: A dynamic equilibrium in which drug concentration stays constant (rate of elimination = rate of administration).
+    back: The drug level holds flat because the amount removed per unit time matches the amount given; it is dynamic, not static.
     src: { page: 229, quote: "Steady state is a dynamic equilibrium in which drug concentration stays constant (ie, rate of drug elimination = rate of drug administration)." }
     status: unverified
   - id: pharm.L01.016
     kind: cloze
     topic: pharmacokinetics
-    text: In first-order kinetics, a drug infused at a constant rate takes {{c1::4-5}} half-lives to reach steady state, and {{c2::3.3}} half-lives to reach 90% of it.
+    text: With a constant infusion of a first-order drug, the level plateaus (steady state) after about {{c1::4-5}} half-lives and is at 90% of that plateau after {{c2::3.3}} half-lives.
     src: { page: 229, quote: "In first-order kinetics, a drug infused at a constant rate takes 4-5 half-lives to reach steady state. It takes 3.3 half-lives to reach 90% of the steady-state level." }
     status: unverified
     tags: [high-yield]
@@ -286,9 +299,17 @@ items:
   - id: pharm.L01.026
     kind: card
     topic: drug-metabolism
-    front: Which metabolic phase do geriatric patients lose first, and why do slow acetylators get more adverse effects from isoniazid?
-    back: Geriatric patients lose phase I first. Slow acetylators metabolize drugs such as isoniazid at a ↓ rate, so they have ↑ adverse effects.
-    src: { page: 230, quote: "Geriatric patients lose phase I first. Patients who are slow acetylators have ↑ adverse effects from certain drugs because of ↓ rate of metabolism (eg, isoniazid)." }
+    front: "Which metabolic phase do geriatric patients lose first?"
+    back: "Phase I goes first; phase II is relatively kept."
+    src: { page: 230, quote: "Geriatric patients lose phase I first." }
+    status: unverified
+    tags: [high-yield]
+  - id: pharm.L01.055
+    kind: card
+    topic: drug-metabolism
+    front: "Why do slow acetylators get more adverse effects from isoniazid?"
+    back: "They break down drugs such as isoniazid more slowly, so the drug builds up and side effects rise."
+    src: { page: 230, quote: "Patients who are slow acetylators have ↑ adverse effects from certain drugs because of ↓ rate of metabolism (eg, isoniazid)." }
     status: unverified
     tags: [high-yield]
   - id: pharm.L01.027
@@ -383,7 +404,7 @@ items:
     kind: card
     topic: urine-ph-drug-elimination
     front: How does ionization affect a drug's elimination in urine?
-    back: Ionized species are trapped in urine and cleared quickly; neutral forms can be reabsorbed.
+    back: The charged form stays in the tubular urine and leaves quickly; the uncharged form can diffuse back into the blood.
     src: { page: 231, quote: "Ionized species are trapped in urine and cleared quickly. Neutral forms can be reabsorbed." }
     status: unverified
   - id: pharm.L01.034
@@ -410,7 +431,7 @@ items:
     kind: card
     topic: urine-ph-drug-elimination
     front: What is pKa?
-    back: The pH at which a weak acid or base is 50% ionized and 50% nonionized; it represents the strength of the weak acid or base.
+    back: The pH where half of a weak acid or base is charged and half is uncharged; it tells you how strong that acid or base is.
     src: { page: 231, quote: "pH at which drugs (weak acid or base) are 50% ionized and 50% nonionized. The pKa represents the strength of the weak acid or base." }
     status: unverified
   - id: pharm.L01.037
@@ -579,7 +600,7 @@ items:
     kind: card
     topic: therapeutic-index
     front: What is the therapeutic window?
-    back: The range of drug concentrations that can safely and effectively treat disease.
+    back: The band of drug levels high enough to work but low enough to stay safe.
     src: { page: 233, quote: "Therapeutic window—range of drug concentrations that can safely and effectively treat disease." }
     status: unverified
   - id: pharm.L01.050

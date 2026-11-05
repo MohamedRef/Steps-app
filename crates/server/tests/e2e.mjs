@@ -137,11 +137,11 @@ assert.equal(blocked.status, 401);
 const tabletToken = refreshed.json.access_token;
 const key = randomBytes(32).toString("base64url");
 const wrongKey = randomBytes(32).toString("base64url");
-assert.deepEqual((await api("GET", "/v1/login", { token: tabletToken })).json, { username: null });
+assert.deepEqual((await api("GET", "/v1/login", { token: tabletToken })).json, { username: null, needs_current: false });
 const set = await api("POST", "/v1/login", { token: tabletToken, body: { username: " Mo.Refaat ", password_key: key } });
 assert.equal(set.status, 200, JSON.stringify(set.json));
-assert.deepEqual(set.json, { username: "mo.refaat" });
-assert.deepEqual((await api("GET", "/v1/login", { token: tabletToken })).json, { username: "mo.refaat" });
+assert.deepEqual(set.json, { username: "mo.refaat", needs_current: false });
+assert.deepEqual((await api("GET", "/v1/login", { token: tabletToken })).json, { username: "mo.refaat", needs_current: false });
 assert.equal((await api("POST", "/v1/login", { body: { username: "x", password_key: key } })).status, 401);
 const borrowed = { device_id: "library-pc", name: "Library PC", model: null, platform: "web" };
 const passwordSignIn = (username, password_key) =>
@@ -173,12 +173,34 @@ assert.equal((await passwordSignIn("mo.refaat", key)).status, 429);
 // A new password (from a signed-in device) lifts the lock; a new username frees the old one.
 const key2 = randomBytes(32).toString("base64url");
 const renamed = await api("POST", "/v1/login", { token: tabletToken, body: { username: "dr.mo", password_key: key2 } });
-assert.deepEqual(renamed.json, { username: "dr.mo" });
+assert.deepEqual(renamed.json, { username: "dr.mo", needs_current: false });
+// A new password signs out every other device that signed in with the old one.
+const pcAfter = await api("POST", "/v1/auth/refresh", { body: { refresh_token: pcRefresh.json.refresh_token } });
+assert.equal(pcAfter.json.code, "device_revoked", JSON.stringify(pcAfter.json));
+assert.equal((await api("GET", "/v1/login", { token: tabletToken })).status, 200, "the phone stays signed in");
+// A session signed in with the password changes or removes it only with the
+// current one: one left open on a borrowed computer can't lock him out.
+const pc2 = await passwordSignIn("dr.mo", key2);
+assert.equal(pc2.status, 200, JSON.stringify(pc2.json));
+const pcToken = pc2.json.access_token;
+assert.deepEqual((await api("GET", "/v1/login", { token: pcToken })).json, { username: "dr.mo", needs_current: true });
+const takeover = await api("POST", "/v1/login", { token: pcToken, body: { username: "dr.mo", password_key: wrongKey } });
+assert.equal(takeover.json.code, "wrong_password", JSON.stringify(takeover.json));
+const wrongCurrent = await api("DELETE", "/v1/login", { token: pcToken, body: { current_key: wrongKey } });
+assert.equal(wrongCurrent.json.code, "wrong_password", JSON.stringify(wrongCurrent.json));
+const changed = await api("POST", "/v1/login", {
+  token: pcToken, body: { username: "dr.mo", password_key: key2, current_key: key2 },
+});
+assert.deepEqual(changed.json, { username: "dr.mo", needs_current: true }, JSON.stringify(changed.json));
+assert.equal((await api("GET", "/v1/login", { token: pcToken })).status, 200, "the device that changed it stays");
 assert.equal((await passwordSignIn("mo.refaat", key)).json.code, "wrong_password");
-assert.equal((await passwordSignIn("dr.mo", key2)).status, 200);
+const pc3 = await passwordSignIn("dr.mo", key2);
+assert.equal(pc3.status, 200);
 const removed = await api("DELETE", "/v1/login", { token: tabletToken });
-assert.deepEqual(removed.json, { username: null });
+assert.deepEqual(removed.json, { username: null, needs_current: false });
 assert.equal((await passwordSignIn("dr.mo", key2)).status, 401);
+const pcGone = await api("POST", "/v1/auth/refresh", { body: { refresh_token: pc3.json.refresh_token } });
+assert.equal(pcGone.json.code, "device_revoked", "turning the password off signs its sessions out");
 b.ws.close();
 console.log("Steps Cloud e2e: sign-in, password sign-in, refresh, sync, devices and revoke passed");
 process.exit(0);
