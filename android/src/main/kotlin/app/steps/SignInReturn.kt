@@ -1,6 +1,7 @@
 package app.steps
 
 import android.app.Activity
+import android.app.ActivityManager
 import android.content.Intent
 import android.os.Bundle
 
@@ -18,5 +19,20 @@ class SignInReturnActivity : Activity() {
             ?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED)
             ?.let { startActivity(it) }
         finish()
+    }
+}
+
+/**
+ * Whether Steps is in front (crates/app/src/cloud/mod.rs, `in_foreground`).
+ * Google's sign-in code is single-use, and Android may cut a backgrounded
+ * app's sockets mid-request (ECONNABORTED) after Google has already taken the
+ * code, so the exchange waits until Steps is in front.
+ */
+object SignInBridge {
+    @JvmStatic
+    fun inForeground(): Boolean {
+        val info = ActivityManager.RunningAppProcessInfo()
+        ActivityManager.getMyMemoryState(info)
+        return info.importance <= ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
     }
 }

@@ -1,0 +1,15 @@
+pub const TITLE: &str = "اختصارات الكيبورد";
+pub const OPEN: &str = "اعرض الاختصارات";
+pub const CLOSE: &str = "اقفل";
+pub const NOTE: &str = "بتشتغل على كيبورد التابلت والماك. على الماك استخدم ⌘ بدل Ctrl.";
+pub const SCREENS: &str = "تروح لشاشة";
+pub const SETTINGS: &str = "الإعدادات";
+pub const REVEAL: &str = "تكشف الإجابة";
+pub const RATE: &str = "تقيّم نفسك (من نسيت لسهل)";
+pub const OPTIONS: &str = "تختار إجابة في سؤال الاختيارات";
+pub const NEXT: &str = "اللي بعده";
+pub const MOVE: &str = "السؤال اللي بعده أو اللي قبله في الامتحان";
+pub const FLAG: &str = "تعلّم السؤال عشان ترجعله";
+pub const ESC: &str = "تقفل أي حاجة مفتوحة";
+pub const HELP: &str = "القايمة دي";
+pub const PAGE: &str = "تروح لصفحة في First Aid";

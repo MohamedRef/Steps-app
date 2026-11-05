@@ -47,6 +47,9 @@ struct PendingSignIn {
     until: Instant,
     retry_at: Instant,
     attempts: u32,
+    /// A code exchange was cut off, so Google may already have taken the
+    /// code: `invalid_grant` now means "sign in again", not a refusal.
+    dropped: bool,
 }
 
 enum SignInStep {
@@ -59,7 +62,7 @@ enum SignInStep {
 impl PendingSignIn {
     fn new(step: SignInStep, life: Duration) -> Self {
         let now = Instant::now();
-        Self { step, until: now + life, retry_at: now, attempts: 0 }
+        Self { step, until: now + life, retry_at: now, attempts: 0, dropped: false }
     }
 
     /// 1, 2, 4, 8, 15, 15… seconds: quick enough to finish right after the
@@ -324,12 +327,29 @@ impl Engine {
                 self.problem = Some(Problem::NotConfigured);
                 return;
             };
+            // Steps is behind the browser: Android may cut the request off
+            // after Google took the single-use code. Wait for the front
+            // (a Kick, or the next look a second later) instead.
+            if !oauth::may_exchange(&google) {
+                pending.retry_at = Instant::now() + Duration::from_secs(1);
+                self.pending_sign_in = Some(pending);
+                self.problem = Some(Problem::SignInWaiting);
+                return;
+            }
             let auth = auth.clone();
             match blocking(move || oauth::exchange(&google, &auth)).await {
                 Ok(id_token) => pending = PendingSignIn::new(SignInStep::IdToken(id_token), ID_TOKEN_LIFE),
                 Err(OAuthError::Network(e)) => {
                     crate::diag::report!("Google sign-in: network: {e}");
+                    pending.dropped = true;
                     self.wait_for_network(pending);
+                    return;
+                }
+                Err(OAuthError::CodeSpent) if pending.dropped => {
+                    crate::diag::report!(
+                        "Google sign-in: the cut-off exchange had used the code; sign in again"
+                    );
+                    self.problem = Some(Problem::SignInInterrupted);
                     return;
                 }
                 Err(e) => {

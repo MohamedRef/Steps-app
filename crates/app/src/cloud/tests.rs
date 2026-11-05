@@ -714,6 +714,72 @@ fn a_sign_in_that_reaches_google_but_not_steps_cloud_waits_too() {
 }
 
 #[test]
+fn a_code_waits_while_steps_is_behind_the_browser() {
+    // Android: the redirect reaches the loopback listener while Chrome is
+    // in front. The single-use code must not go out until Steps is back.
+    let fake = Fake::start();
+    live_hub(&fake);
+    let s = store();
+    let me = s.device();
+    token_endpoint("steps-test-behind", &fake);
+    fake.route("POST /token", 200, r#"{"id_token":"google-id-token"}"#);
+    fake.route("POST /v1/auth/google", 200, json(&session(&me, "acc-b", now() + DAY)));
+    super::oauth::IN_BACKGROUND.lock().unwrap().push("steps-test-behind".into());
+    let mut run = start(&fake, s, None, google("steps-test-behind"));
+    run.send(Command::SignInGoogle);
+    browser_returns("steps-test-behind", "code=ok");
+    let st = run.status("waiting", |st| st.problem == Some(Problem::SignInWaiting));
+    assert!(st.finishing_sign_in);
+    // It keeps looking (every second) without sending the code.
+    std::thread::sleep(Duration::from_millis(1500));
+    run.send(Command::Kick);
+    std::thread::sleep(Duration::from_millis(200));
+    assert!(fake.requests("POST /token").is_empty(), "the code stays home while Steps is behind");
+    // Back in front: one exchange, and Steps goes live.
+    super::oauth::IN_BACKGROUND.lock().unwrap().retain(|c| c != "steps-test-behind");
+    run.send(Command::Kick);
+    run.status("live", |st| st.sync == SyncState::Live);
+    assert_eq!(fake.requests("POST /token").len(), 1);
+}
+
+/// Mohamed's alpha.1 log: the exchange was cut off ("Software caused
+/// connection abort") after Google had taken the code, and the retry got
+/// `invalid_grant`. That ends in "sign in again", not a vague failure.
+#[test]
+fn an_exchange_cut_off_after_google_took_the_code_asks_to_sign_in_again() {
+    use std::io::{Read, Write};
+    // Google's token endpoint: takes the first request and drops the
+    // connection without answering; the code is spent after that.
+    let google_side = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+    let url = format!("http://{}/token", google_side.local_addr().unwrap());
+    std::thread::spawn(move || {
+        for (i, stream) in google_side.incoming().enumerate() {
+            let Ok(mut stream) = stream else { return };
+            let mut buf = [0u8; 8192];
+            let _ = stream.read(&mut buf);
+            if i == 0 {
+                continue; // dropped: the request was read, no answer
+            }
+            let body = r#"{"error":"invalid_grant","error_description":"Bad Request"}"#;
+            let _ = write!(
+                stream,
+                "HTTP/1.1 400 Bad Request\r\ncontent-type: application/json\r\ncontent-length: {}\r\nconnection: close\r\n\r\n{body}",
+                body.len()
+            );
+        }
+    });
+    super::oauth::TOKEN_URLS.lock().unwrap().push(("steps-test-cut".into(), url));
+    let fake = Fake::start();
+    let mut run = start(&fake, store(), None, google("steps-test-cut"));
+    run.send(Command::SignInGoogle);
+    browser_returns("steps-test-cut", "code=ok");
+    run.status("waiting", |st| st.problem == Some(Problem::SignInWaiting));
+    let st = run.status("sign in again", |st| st.problem == Some(Problem::SignInInterrupted));
+    assert!(!st.finishing_sign_in);
+    assert!(fake.requests("POST /v1/auth/google").is_empty());
+}
+
+#[test]
 fn without_a_google_client_sign_in_is_not_configured() {
     let fake = Fake::start();
     let mut run = start(&fake, store(), None, None);

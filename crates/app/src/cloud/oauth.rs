@@ -39,6 +39,9 @@ pub enum OAuthError {
     /// call made while Chrome is still in front looks like: worth retrying
     /// once Steps is back.
     Network(String),
+    /// Google said `invalid_grant`: the code was already used or ran out.
+    /// After a dropped exchange this means the dropped one reached Google.
+    CodeSpent,
     Failed(String),
 }
 
@@ -49,6 +52,7 @@ impl std::fmt::Display for OAuthError {
             Self::TimedOut => f.write_str("sign-in timed out"),
             Self::Browser(e) => write!(f, "couldn't open the browser: {e}"),
             Self::Network(e) => write!(f, "network: {e}"),
+            Self::CodeSpent => f.write_str("the sign-in code was already used or ran out (invalid_grant)"),
             Self::Failed(e) => f.write_str(e),
         }
     }
@@ -210,11 +214,31 @@ pub fn exchange(client: &GoogleClient, auth: &Authorization) -> Result<String, O
     let mut res = agent.post(&token_url).send_form(form).map_err(|e| OAuthError::Network(e.to_string()))?;
     if !res.status().is_success() {
         let body = res.body_mut().read_to_string().unwrap_or_default();
+        if body.contains("invalid_grant") {
+            return Err(OAuthError::CodeSpent);
+        }
         return Err(OAuthError::Failed(format!("token exchange {}: {body}", res.status())));
     }
     let token: TokenResponse = res.body_mut().read_json().map_err(|e| OAuthError::Failed(e.to_string()))?;
     Ok(token.id_token)
 }
+
+/// Whether the code may go to Google now: only while Steps is in front
+/// ([`super::in_foreground`]). The code is single-use and Android can abort
+/// a backgrounded app's request after Google took it, which leaves nothing
+/// to retry with (`invalid_grant`).
+pub fn may_exchange(client: &GoogleClient) -> bool {
+    #[cfg(test)]
+    if IN_BACKGROUND.lock().unwrap_or_else(std::sync::PoisonError::into_inner).contains(&client.client_id) {
+        return false;
+    }
+    let _ = client;
+    super::in_foreground()
+}
+
+/// Test clients whose app is "in the background", by client id.
+#[cfg(test)]
+pub static IN_BACKGROUND: std::sync::Mutex<Vec<String>> = std::sync::Mutex::new(Vec::new());
 
 /// Google's token endpoint; a test points a client of its own at a local one.
 fn token_url(client: &GoogleClient) -> String {
