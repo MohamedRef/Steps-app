@@ -61,20 +61,26 @@ fn export_browser_fixtures() {
     std::fs::create_dir_all(&dir).unwrap();
     let mut manifest = Vec::new();
     for width in [320, 384, 600, 840, 1280] {
-        for theme in Theme::ALL {
-            for appearance in Appearance::ALL.iter().copied() {
-                for size in [TextSize::Normal, TextSize::Larger] {
-                    let case = Case { theme, appearance, size };
-                    CASE.with(|c| *c.borrow_mut() = Some(case));
-                    let mut dom = VirtualDom::new(fixture);
-                    dom.rebuild_in_place();
-                    let html = dioxus::ssr::render(&dom);
-                    assert!(html.contains("settings-window") && html.contains("text-sample"));
-                    let file =
-                        format!("{width}-{}-{}-{}.html", theme.as_str(), appearance.as_str(), size.as_str());
-                    std::fs::write(dir.join(&file), format!("<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head><body>{html}</body></html>")).unwrap();
-                    manifest.push(serde_json::json!({"file":file,"width":width,"dir":"rtl","theme":theme.as_str(),"appearance":appearance.as_str(),"size":size.as_str()}));
-                }
+        // Every theme in the default style, and every style on one light, one
+        // dark and the true-black theme: the pairs that differ, without
+        // multiplying the run by every combination.
+        let cases = Theme::ALL.into_iter().map(|t| (t, Appearance::default())).chain(
+            [Theme::Paper, Theme::Night, Theme::Black].into_iter().flat_map(|t| {
+                Appearance::ALL.into_iter().filter(|a| *a != Appearance::default()).map(move |a| (t, a))
+            }),
+        );
+        for (theme, appearance) in cases {
+            for size in [TextSize::Normal, TextSize::Larger] {
+                let case = Case { theme, appearance, size };
+                CASE.with(|c| *c.borrow_mut() = Some(case));
+                let mut dom = VirtualDom::new(fixture);
+                dom.rebuild_in_place();
+                let html = dioxus::ssr::render(&dom);
+                assert!(html.contains("settings-window") && html.contains("text-sample"));
+                let file =
+                    format!("{width}-{}-{}-{}.html", theme.as_str(), appearance.as_str(), size.as_str());
+                std::fs::write(dir.join(&file), format!("<!doctype html><html><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"></head><body>{html}</body></html>")).unwrap();
+                manifest.push(serde_json::json!({"file":file,"width":width,"dir":"rtl","theme":theme.as_str(),"appearance":appearance.as_str(),"size":size.as_str()}));
             }
         }
     }

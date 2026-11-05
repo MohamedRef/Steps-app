@@ -155,11 +155,16 @@ fn github_icon() -> Element {
 fn app_mark() -> Element {
     rsx! {
         svg { view_box: "0 0 108 108", "aria-hidden": "true",
-            rect { width: "108", height: "108", fill: "#9a6a12" }
-            g { transform: "translate(54 56) scale(1.18) translate(-56 -57)",
-                path { d: "M31 47 C31 37 41 32 53 33 C63 34 72 35 79 38 C83 40 82 44 78 46 C70 50 62 55 54 60 C49 63 43 66 38 64 C33 62 31 56 31 47 Z", fill: "#f6efe0" }
-                path { d: "M53 34 C55 42 56 50 54 59", fill: "none", stroke: "#9a6a12", stroke_width: "1.5", stroke_linecap: "round", opacity: "0.5" }
-                path { d: "M45 64.5 C45 64.5 39 72 39 76 A6 6 0 0 0 51 76 C51 72 45 64.5 45 64.5 Z", fill: "#2f6b4f" }
+            defs {
+                linearGradient { id: "us-petrol", x1: "0", y1: "0", x2: "1", y2: "1",
+                    stop { offset: "0", stop_color: "#2e7899" }
+                    stop { offset: "1", stop_color: "#123a4f" }
+                }
+            }
+            rect { width: "108", height: "108", fill: "url(#us-petrol)" }
+            g { transform: "translate(-4 0)",
+                path { d: "M72 32 H44 a8 8 0 0 0 -8 8 V48 a8 8 0 0 0 8 8 H64 a8 8 0 0 1 8 8 V68 a8 8 0 0 1 -8 8 H36", fill: "none", stroke: "#f4f8fb", stroke_width: "9", stroke_linecap: "round", stroke_linejoin: "round" }
+                circle { cx: "80", cy: "32", r: "5.5", fill: "#f2c45a" }
             }
         }
     }

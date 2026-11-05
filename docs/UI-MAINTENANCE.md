@@ -24,7 +24,7 @@ latter must be updated through its storage operation.
 |---|---|---|
 | Card markup | `crates/app/src/ui.rs::Card`, `DivCard`, `CardButton` | All base-card surfaces; explicit native tags and attributes are retained |
 | Navigation row markup and semantics | `ui.rs::ActionRow` | All Settings section links |
-| Card radius, padding, border, shadow | `assets/main.css`: `--radius-card`, `--card-pad`, `--card-border`, `--card-shadow` | Normal cards and collection surfaces; Glossy remains an explicit variant |
+| Card radius, padding, border, shadow | `assets/main.css`: `--radius-card`, `--card-pad`, `--card-border`, `--card-shadow` | Normal cards and collection surfaces; Stepped sets `--card-shadow` to its ledge |
 | Row layout, icon, title and detail | `assets/parts.css` | Every `.activity-row` |
 | Default list presentation | `parts.rs::Layout::DEFAULT` | New collection choices; saved per-screen choices keep precedence |
 | Settings sections and search terms | `settings/mod.rs`: `Section`, `GROUPS`, `SectionView` | Index, search and detail pane |

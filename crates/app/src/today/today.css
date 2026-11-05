@@ -18,13 +18,16 @@
 }
 
 /* ---------- session length ---------- */
-.td-time { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-2); }
-.td-time-q { font-size: var(--fs-sm); color: var(--muted); margin-inline-end: auto; }
+.td-time { display: flex; align-items: flex-end; flex-wrap: wrap; gap: var(--sp-2); }
+.td-time-q { align-self: center; font-size: var(--fs-sm); color: var(--muted); margin-inline-end: auto; }
+/* The lengths rise like steps: each longer session stands a little taller. */
 .td-chip {
   min-inline-size: 3rem;
   min-block-size: var(--tap);
+  display: inline-flex; align-items: flex-end; justify-content: center;
   padding-inline: var(--sp-3);
-  border-radius: var(--radius-pill);
+  padding-block: 0 0.55rem;
+  border-radius: 10px 10px 4px 4px;
   border: 1px solid var(--line);
   background: var(--surface);
   color: var(--muted);
@@ -32,7 +35,10 @@
   font-size: var(--fs-sm);
   cursor: pointer;
 }
-.td-chip[aria-checked="true"] { background: var(--accent-soft); border-color: transparent; color: var(--accent-ink); font-weight: 700; }
+.td-chip:nth-of-type(2) { min-block-size: calc(var(--tap) + 0.4rem); }
+.td-chip:nth-of-type(3) { min-block-size: calc(var(--tap) + 0.8rem); }
+.td-chip:nth-of-type(4) { min-block-size: calc(var(--tap) + 1.2rem); }
+.td-chip[aria-checked="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); font-weight: 700; }
 .td-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
 /* ---------- the one recommended start (the shared .hero) ---------- */
@@ -173,10 +179,12 @@ table.plan th { color: var(--muted); font-weight: 600; }
 .recap-week h2 { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
 .recap-week ul { margin: 0; padding-inline-start: var(--sp-4); }
 
-/* Glossy · Material You (assets/appearance.css draws the shared parts);
-   only Today's own pieces here. Nothing blurs, nothing moves. */
-.app[data-appearance="glossy"] .td-chip { background: color-mix(in srgb, var(--surface) 70%, var(--accent-soft)); }
-.app[data-appearance="glossy"] .td-hero .td-go { border-radius: var(--radius-pill); }
+/* Stepped (assets/appearance.css draws the shared parts): the session
+   lengths stand on the ledge, the picked one on the brand's. */
+.app[data-appearance="stepped"] .td-chip { box-shadow: 0 2px 0 var(--ledge); }
+.app[data-appearance="stepped"] .td-chip[aria-checked="true"] { box-shadow: 0 2px 0 var(--ledge-deep); }
+.app[data-appearance="outline"] .td-chip:not([aria-checked="true"]) { background: transparent; border: 1.5px solid var(--outline); }
+.app[data-appearance="tinted"] .td-chip:not([aria-checked="true"]) { background: var(--soft); border-color: transparent; }
 
 /* Settings › Review: the page gate switch (A2). */
 .st-switch { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); cursor: pointer; min-block-size: var(--target, 48px); }

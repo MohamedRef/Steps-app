@@ -70,11 +70,21 @@
 .hero .chip { background: color-mix(in srgb, var(--on-accent) 14%, transparent); border-color: transparent; color: inherit; }
 .btn-on-hero { background: var(--surface); border-color: var(--surface); color: var(--accent); font-weight: 700; min-block-size: var(--tap-lg); }
 .hero > * { position: relative; }
-/* Faint rings in the corner: decoration only, no image. */
+/* The Steps mark climbs in the corner, its summit dot lit: decoration
+   only, no image. */
+.hero::before, .hero::after { content: ""; position: absolute; pointer-events: none; }
 .hero::before {
-  content: ""; position: absolute; inline-size: 9rem; block-size: 9rem; border-radius: 50%;
-  inset-block-start: -2.5rem; inset-inline-end: -4.5rem; border: 1px solid currentColor; opacity: 0.08;
-  box-shadow: 0 0 0 1.4rem currentColor, 0 0 0 2.8rem currentColor; pointer-events: none;
+  inline-size: 3.75rem; block-size: 4rem; inset-block-start: var(--sp-3); inset-inline-end: var(--sp-3);
+  background: currentColor; opacity: 0.2;
+  -webkit-mask: var(--mark-line) center / contain no-repeat; mask: var(--mark-line) center / contain no-repeat;
+}
+.hero::after {
+  inline-size: 0.7rem; block-size: 0.7rem; border-radius: 50%; background: var(--summit);
+  /* The dot sits where the S starts (viewBox 27 22 60 64: x 80, y 32). The
+     mark is never mirrored and the app is always RTL, so the inline-end
+     edge is the mark's left: 53 of its 60 units from there. */
+  inset-block-start: calc(var(--sp-3) + 4rem * 10 / 64 - 0.35rem);
+  inset-inline-end: calc(var(--sp-3) + 3.75rem * 53 / 60 - 0.35rem);
 }
 
 /* ---------- stat tiles ----------

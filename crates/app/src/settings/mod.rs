@@ -115,7 +115,9 @@ impl Section {
             }
             Self::Reminders => "notifications permission quiet hours اشعارات تنبيهات اذونات هدوء مواعيد",
             Self::Sync => "google sign in account cloud devices جوجل دخول حساب مزامنة أجهزة",
-            Self::Look => "theme font text size appearance calm glossy ثيم خط حجم ألوان شكل",
+            Self::Look => {
+                "theme font text size appearance stepped calm outline tinted glass ثيم خط حجم ألوان شكل نمط درجات"
+            }
             Self::Tablet => "pen hover sidebar navigation قلم قائمة تابلت",
             Self::Mac => "keyboard shortcuts mouse hover sidebar كيبورد اختصارات ماوس قائمة",
             Self::Data => {
