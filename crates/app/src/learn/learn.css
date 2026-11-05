@@ -413,7 +413,9 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 .ls-figure figcaption .ls-rich { font-size: var(--fs-sm); }
 
 /* Classes figure authors use (docs/LESSONS.md): theme colours only. */
-.ls-fig-svg svg text { fill: var(--text); font-family: var(--font-latin); font-size: 13px; }
+/* Readex Pro runs about 3% wider than the face the figures were drawn for;
+   a hair of tracking keeps every label inside its picture. */
+.ls-fig-svg svg text { fill: var(--text); font-family: var(--font-latin); font-size: 13px; letter-spacing: -0.03em; }
 .ls-fig-svg svg .t-sm { font-size: 11px; }
 .ls-fig-svg svg .t-lg { font-size: 16px; }
 .ls-fig-svg svg .t-b { font-weight: 700; }
