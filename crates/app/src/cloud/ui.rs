@@ -378,13 +378,13 @@ fn LoginCard() -> Element {
         section { class: "card pw-card",
             h2 { {tx::PW_TITLE} }
             match &login.username {
-                None => rsx! { p { class: "muted", {tx::LOADING} } },
+                None => rsx! { p { class: "muted", {waiting_line(state())} } },
                 Some(Some(name)) => rsx! {
                     div { class: "sync-who",
                         span { class: "row-icon", aria_hidden: "true", {crate::icons::section("sync")} }
                         div { class: "row-copy",
                             small { {tx::PW_YOURS} }
-                            bdi { class: "sync-email", dir: "ltr", "{name}" }
+                            bdi { class: "sync-email", dir: "ltr", title: "{name}", "{name}" }
                         }
                     }
                     if saved {
@@ -474,7 +474,7 @@ fn SignedIn(status: CloudStatus) -> Element {
             span { class: "row-icon", aria_hidden: "true", {crate::icons::section("sync")} }
             div { class: "row-copy",
                 small { {tx::SIGNED_IN_AS} }
-                bdi { class: "sync-email", dir: "ltr", "{email}" }
+                bdi { class: "sync-email", dir: "ltr", title: "{email}", "{email}" }
             }
         }
         if status.temporary {
@@ -497,24 +497,39 @@ fn SignedIn(status: CloudStatus) -> Element {
     }
 }
 
+/// Whether Steps Cloud answers now, so a card can load from it.
+fn reachable(state: SyncState) -> bool {
+    matches!(state, SyncState::Live | SyncState::CatchingUp | SyncState::Connecting)
+}
+
+/// What a card that loads from Steps Cloud says before it has anything:
+/// "loading" while it can, else that it waits for the server (UX #581;
+/// offline it said «بيحمّل…» forever).
+fn waiting_line(state: SyncState) -> &'static str {
+    if reachable(state) { tx::LOADING } else { tx::WAITING_SERVER }
+}
+
 #[component]
 fn DevicesCard() -> Element {
     let cloud = use_context::<Cloud>();
     let devices = cloud.devices.read().clone();
     let now = now_ms();
+    let state = cloud.status.read().sync;
     rsx! {
         section { class: "card sync-devices",
             div { class: "section-head",
                 h2 { {tx::DEVICES} }
                 button {
                     class: "btn btn-ghost",
+                    // Nothing to ask while the server can't be reached (UX #581).
+                    disabled: !reachable(state),
                     onclick: move |_| cloud.send(Command::LoadDevices),
                     {crate::icons::refresh()}
                     {tx::REFRESH}
                 }
             }
             match devices {
-                None => rsx! { p { class: "muted", {tx::LOADING} } },
+                None => rsx! { p { class: "muted", {waiting_line(state)} } },
                 Some(Err(p)) => rsx! { p { class: "small", {problem_line(p)} } },
                 Some(Ok(list)) => rsx! {
                     ul { class: "device-list",

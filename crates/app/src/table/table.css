@@ -10,10 +10,20 @@
   overscroll-behavior-inline: contain;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: var(--surface);
   max-inline-size: 100%;
   /* Keeps the pinned column's z-index inside the box. */
   isolation: isolate;
+  /* A shadow on the edge that has more to scroll to, gone once he reaches
+     it (UX #589: the last column was just cut at the card edge). The two
+     covers move with the content ("local") and hide the shadows, which stay
+     on the box ("scroll"), at either end. */
+  --tb-shade: color-mix(in srgb, var(--text) 22%, transparent);
+  background:
+    linear-gradient(to right, var(--surface) 40%, transparent) left / 2rem 100% no-repeat local,
+    linear-gradient(to left, var(--surface) 40%, transparent) right / 2rem 100% no-repeat local,
+    radial-gradient(farthest-side at 0 50%, var(--tb-shade), transparent) left / 0.9rem 100% no-repeat scroll,
+    radial-gradient(farthest-side at 100% 50%, var(--tb-shade), transparent) right / 0.9rem 100% no-repeat scroll,
+    var(--surface);
 }
 .tb-grid {
   border-collapse: separate;

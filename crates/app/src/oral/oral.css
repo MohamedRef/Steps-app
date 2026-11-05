@@ -172,3 +172,11 @@
 .oral-said[data-enough="yes"] { color: var(--good); font-weight: 600; }
 .oral-your-notes { border-block-start: 1px solid var(--line); padding-block-start: var(--sp-2); white-space: pre-wrap; }
 .oral-big.good[data-suggest="yes"] { outline: 2px solid var(--good); outline-offset: 2px; }
+
+/* A narrow run (320px, or 384 with Larger text): the two buttons stack, so
+   «اعرض الإجابة» keeps one line instead of breaking in two (UX #588). */
+.oral-run { container: oral-run / inline-size; }
+@container oral-run (max-width: 20rem) {
+  .oral-actions { grid-template-columns: minmax(0, 1fr); gap: var(--sp-2); }
+  .oral-big, .oral-small { min-block-size: 3.5rem; }
+}

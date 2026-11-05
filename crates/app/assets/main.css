@@ -88,6 +88,10 @@ input[type="date"], input[type="time"], input[type="datetime-local"], input[type
   unicode-bidi: isolate;
   text-align: end;
 }
+/* An empty dir=auto field resolves left to right, so its Arabic hint read
+   backwards and the caret started on the wrong side (UX #582). Right to
+   left until he types; then dir=auto follows what he wrote. */
+:is(input, textarea)[dir="auto"]:placeholder-shown { direction: rtl; }
 button { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 /* Checkboxes drawn from the theme: native boxes stay white in Night on some
@@ -119,6 +123,14 @@ input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
 .brand { display: flex; align-items: baseline; gap: var(--sp-2); min-width: 0; }
 .brand-name { font-weight: 700; font-size: var(--fs-lg); color: var(--accent); }
 .brand-tag { color: var(--muted); font-size: var(--fs-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* The full line only when the bar has room for it; in rem, so Larger text
+   switches sooner (UX #584: «…MLE Step 1 مذاكرة» at 320). */
+.topbar { container: topbar / inline-size; }
+.brand-tag-short { display: none; }
+@container topbar (max-width: 23rem) {
+  .brand-tag:not(.brand-tag-short) { display: none; }
+  .brand-tag-short { display: inline; }
+}
 .icon-button {
   border: 1px solid var(--line);
   background: var(--surface);

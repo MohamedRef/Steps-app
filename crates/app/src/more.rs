@@ -19,24 +19,52 @@ pub struct Tool {
     pub label: &'static str,
     pub icon: fn() -> Element,
     pub open: fn(Ui),
+    /// The page it opens over the screen (`lecture::shown`), if a page:
+    /// the rail marks the tool, not the screen under it (UX #583).
+    pub page: Option<&'static str>,
 }
 
-pub const REFERENCES: Tool =
-    Tool { label: i18n::refs::TITLE, icon: icons::references, open: crate::lecture::open_references };
-pub const COURSES: Tool =
-    Tool { label: i18n::courses::TITLE, icon: icons::courses, open: crate::courses::open_map };
+pub const REFERENCES: Tool = Tool {
+    label: i18n::refs::TITLE,
+    icon: icons::references,
+    open: crate::lecture::open_references,
+    page: Some(crate::lecture::REFERENCES),
+};
+pub const COURSES: Tool = Tool {
+    label: i18n::courses::TITLE,
+    icon: icons::courses,
+    open: crate::courses::open_map,
+    page: Some(crate::courses::MAP),
+};
 pub const ABBREVIATIONS: Tool = Tool {
     label: i18n::abbr::DICT_TITLE,
     icon: icons::abbreviations,
     open: |ui| crate::abbrdict::open(ui, None),
+    page: Some(crate::abbrdict::PAGE),
 };
-pub const GO_PAGE: Tool = Tool { label: i18n::gopage::TOOL, icon: icons::go_page, open: crate::gopage::open };
-pub const NOTES: Tool =
-    Tool { label: i18n::notes::LIST_TITLE, icon: icons::notes, open: crate::notes::open_list };
-pub const UWORLD: Tool =
-    Tool { label: i18n::qbank::PAGE_TITLE, icon: icons::uworld, open: crate::qbank::open };
+// A sheet over the screen, not a page.
+pub const GO_PAGE: Tool =
+    Tool { label: i18n::gopage::TOOL, icon: icons::go_page, open: crate::gopage::open, page: None };
+pub const NOTES: Tool = Tool {
+    label: i18n::notes::LIST_TITLE,
+    icon: icons::notes,
+    open: crate::notes::open_list,
+    page: Some(crate::notes::PAGE),
+};
+pub const UWORLD: Tool = Tool {
+    label: i18n::qbank::PAGE_TITLE,
+    icon: icons::uworld,
+    open: crate::qbank::open,
+    page: Some(crate::qbank::PAGE),
+};
 pub const ADD_CARD: Tool =
-    Tool { label: i18n::refs::ADD_CARD, icon: icons::add_card, open: |_| crate::own::open_new() };
+    Tool { label: i18n::refs::ADD_CARD, icon: icons::add_card, open: |_| crate::own::open_new(), page: None };
+
+/// The label of the tool whose page is on top of `screen` now, if any.
+pub fn open_tool(screen: Screen) -> Option<&'static str> {
+    let shown = crate::lecture::shown(screen)?;
+    TOOLS.iter().find(|t| t.page == Some(shown.as_str())).map(|t| t.label)
+}
 
 /// The tools the rail and sidebar list under the screens from 600dp (More
 /// holds them on phones).
@@ -105,7 +133,7 @@ pub fn More() -> Element {
     rsx! {
         button {
             class: "nav-item nav-more",
-            "aria-current": if holds(current) { "page" } else { "false" },
+            "aria-current": if holds(current) || open_tool(current).is_some() { "page" } else { "false" },
             "aria-expanded": if open() { "true" } else { "false" },
             "aria-haspopup": "dialog",
             "aria-label": i18n::nav::MORE,
@@ -210,12 +238,14 @@ mod tests {
 #[component]
 pub fn ToolButtons() -> Element {
     let ui = use_context::<Ui>();
+    let on = open_tool(*ui.screen.read());
     rsx! {
         div { class: "nav-tools", role: "group", aria_label: i18n::nav::MORE_TOOLS,
             for tool in TOOLS {
                 button {
                     key: "{tool.label}",
                     class: "nav-item nav-tool",
+                    "aria-current": if on == Some(tool.label) { "page" } else { "false" },
                     aria_label: tool.label,
                     title: tool.label,
                     onclick: move |_| (tool.open)(ui),
