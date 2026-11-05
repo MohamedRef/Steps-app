@@ -41,6 +41,18 @@ pub fn Today() -> Element {
     let mut ui = use_context::<Ui>();
     let settings = use_context::<crate::settings::SettingsNav>();
     let ready = o.due + new_today > 0;
+    // "Done" only once he has studied today: a first launch, or a plan day
+    // with nothing to start (a mock day, a rest day), is not a finished day.
+    let finished = !ready && o.seen > 0 && target.as_ref().is_none_or(|t| t.done.new + t.done.reviews > 0);
+    let headline = if ready {
+        tx::READY_Q
+    } else if finished {
+        tx::DONE_Q
+    } else if o.seen == 0 {
+        tx::WELCOME_Q
+    } else {
+        tx::DAY_Q
+    };
     let minutes = crate::onboarding::session_minutes();
     // Everything today, reviews and the new items' first looks.
     let all_minutes = o.due_minutes + (new_today as u32 * NEW_ITEM_SECS).div_ceil(60);
@@ -54,7 +66,7 @@ pub fn Today() -> Element {
                 header { class: "page-head td-greet",
                     div { class: "td-greet-text",
                         p { class: "page-eyebrow", {tx::EYEBROW} }
-                        h1 { {if ready { tx::READY_Q } else { tx::DONE_Q }} }
+                        h1 { {headline} }
                     }
                     span { class: "td-art", aria_hidden: "true", {crate::icons::pulse()} }
                 }
@@ -75,7 +87,7 @@ pub fn Today() -> Element {
                         }
                     }
                 }
-                Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0 && o.locked == 0, minutes }
+                Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0 && o.locked == 0, finished, minutes }
                 crate::catchup::CatchUpCard { due: o.due, due_minutes: o.due_minutes }
                 // Each count opens what it counts.
                 div { class: "stat-tiles",
@@ -196,6 +208,7 @@ fn Hero(
     due_minutes: u32,
     due_tomorrow: u32,
     nothing: bool,
+    finished: bool,
     minutes: u32,
 ) -> Element {
     let ui = use_context::<Ui>();
@@ -235,7 +248,7 @@ fn Hero(
             if !ready {
                 if nothing {
                     p { class: "td-body", {tx::NOTHING_WRITTEN} }
-                } else {
+                } else if finished {
                     h2 { {tx::ALL_DONE} }
                     if unseen > 0 {
                         p { class: "td-body", "{tx::NEW_CAP_REACHED} · {tx::TOMORROW} {due_tomorrow}" }
@@ -305,6 +318,8 @@ const AHEAD_ITEMS: usize = 10;
 
 /// The exam plan's day on Today: days to the exam, today's target with a
 /// ring for how much of it is done, and a calm note if the plan is tight.
+/// The ring shows only when today's plan counts something (new items or
+/// reviews): on a mock or rest day with nothing due it would read "100%".
 #[component]
 fn PlanHero(t: DailyTarget, due: usize, due_minutes: u32) -> Element {
     let Some(day) = t.today().cloned() else { return rsx! {} };
@@ -313,7 +328,7 @@ fn PlanHero(t: DailyTarget, due: usize, due_minutes: u32) -> Element {
     // Reviews: what he has answered today plus what is still due.
     let target_total = goal + t.done.reviews + due as u32;
     let done_total = t.done.new.min(goal) + t.done.reviews;
-    let pct = (done_total * 100).checked_div(target_total).unwrap_or(100);
+    let pct = (done_total * 100).checked_div(target_total);
     let minutes = due_minutes + (left * NEW_ITEM_SECS).div_ceil(60);
     let tight = match t.plan.status {
         // Inside the final window the hero already says mocks and weak topics.
@@ -349,23 +364,26 @@ fn PlanHero(t: DailyTarget, due: usize, due_minutes: u32) -> Element {
     let ui = use_context::<Ui>();
     rsx! {
         div { class: "plan-line",
-            button {
-                class: "tap tap-plain ring-tap",
-                aria_label: tx::PLAN_HINT,
-                title: tx::PLAN_HINT,
-                onclick: move |e: MouseEvent| {
-                    e.stop_propagation();
-                    crate::stats::open(ui, crate::stats::Tab::Plan)
-                },
-                div {
-                    class: "ring",
-                    role: "progressbar",
-                    aria_label: tx::RING_LABEL,
-                    aria_valuemin: "0",
-                    aria_valuemax: "100",
-                    aria_valuenow: "{pct}",
-                    style: "--p: {pct}%",
-                    span { class: "ring-hole", bdi { "{pct}%" } }
+            if let Some(pct) = pct {
+                button {
+                    class: "tap tap-plain ring-tap",
+                    aria_label: tx::PLAN_HINT,
+                    title: tx::PLAN_HINT,
+                    onclick: move |e: MouseEvent| {
+                        e.stop_propagation();
+                        crate::stats::open(ui, crate::stats::Tab::Plan)
+                    },
+                    div {
+                        class: "ring",
+                        role: "progressbar",
+                        aria_label: tx::RING_LABEL,
+                        aria_valuemin: "0",
+                        aria_valuemax: "100",
+                        aria_valuenow: "{pct}",
+                        style: "--p: {pct}%",
+                        span { class: "ring-hole", bdi { "{pct}%" } }
+                    }
+                    span { class: "ring-caption", bdi { {tx::ring_caption(done_total, target_total)} } }
                 }
             }
             div { class: "plan-text",

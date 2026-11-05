@@ -135,6 +135,8 @@ fn the_shortcuts_open_the_bank_settings_lessons_and_lectures() {
 fn a_day_with_no_new_items_left_says_it_is_done_and_offers_the_next_lesson() {
     let _ =
         crate::store::shared().put_review_settings(&ReviewSettings { new_per_day: 0, ..Default::default() });
+    // He studied one card today, so the day really is done.
+    answered_today();
     let mut app = App::open(Screen::Today);
     app.assert_has(tx::DONE_Q);
     app.assert_has(tx::ALL_DONE);
@@ -214,6 +216,72 @@ fn a_plan_done_for_today_offers_to_get_ahead() {
     if app.tap_if(tx::AHEAD) {
         assert!(on(&app, Screen::Study));
     }
+}
+
+/// A card answered well a moment ago: seen, and not due again today.
+fn answered_today() {
+    use steps_core::review::{Origin, ReviewEvent};
+    let card = first_of("card");
+    crate::store::shared()
+        .append_review(ReviewEvent {
+            confidence: None,
+            reason: None,
+            item_id: card.id,
+            grade: Grade::Good,
+            origin: Origin::Study,
+            at_ms: crate::store::now_ms() - 60_000,
+            took_ms: 5_000,
+        })
+        .unwrap();
+}
+
+#[test]
+fn a_first_launch_with_nothing_to_start_is_not_a_done_day() {
+    // Before he has studied anything, a day with nothing to start yet never
+    // says "done".
+    let _ =
+        crate::store::shared().put_review_settings(&ReviewSettings { new_per_day: 0, ..Default::default() });
+    let app = App::open(Screen::Today);
+    app.assert_has(tx::WELCOME_Q);
+    app.assert_lacks(tx::DONE_Q);
+    app.assert_lacks(tx::ALL_DONE);
+}
+
+#[test]
+fn a_plan_started_today_has_nothing_missed_and_nothing_done() {
+    // A fresh install: onboarding saves the exam day and starts the plan today.
+    let exam = today().plus(300);
+    let mut settings = PlanSettings { weekdays: [true; 7], ..Default::default() };
+    settings.set_exam(exam, today());
+    let app = planned(settings);
+    app.assert_has(tx::HERO_KICKER_PLAN);
+    app.assert_has(tx::WELCOME_Q);
+    app.assert_lacks(tx::DONE_Q);
+    app.assert_lacks(tx::ALL_DONE);
+    app.assert_lacks(crate::i18n::plan::SPREAD);
+    // The first day is the baseline self-assessment: nothing to count, so
+    // no ring reading "100%".
+    app.assert_lacks("100%");
+}
+
+#[test]
+fn the_rebalance_card_acts_in_place_inside_the_hero() {
+    // A plan that ran yesterday, with yesterday's new items not started.
+    let exam = today().plus(120);
+    let app_settings = PlanSettings {
+        exam: Some(exam),
+        weekdays: [true; 7],
+        started: Some(today().plus(-10)),
+        ..Default::default()
+    };
+    let mut app = planned(app_settings);
+    app.assert_has(crate::i18n::plan::SPREAD);
+    // The before/after preview opens in place, not the lessons.
+    app.tap(crate::i18n::plan::PREVIEW);
+    assert!(on(&app, Screen::Today), "the preview stays on Today");
+    app.tap(crate::i18n::plan::SPREAD);
+    assert!(on(&app, Screen::Today), "spreading stays on Today");
+    app.assert_has(crate::i18n::plan::SPREAD_DONE);
 }
 
 /// A card missed two days ago: due again now.
