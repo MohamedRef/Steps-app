@@ -47,6 +47,6 @@ fn explore() {
         for ev in ["input", "change", "keydown", "pointerdown"] {
             out += &format!("---- {ev}\n{}\n", app.listing(ev));
         }
-        std::fs::write(format!("/tmp/claude-0/explore-{screen:?}.txt"), out).unwrap();
+        std::fs::write(std::env::temp_dir().join(format!("explore-{screen:?}.txt")), out).unwrap();
     }
 }

@@ -8,7 +8,7 @@ It does three things:
 2. **Devices**: lists every signed-in device with its last sync, and signs one out remotely (its socket closes at once).
 3. **Live sync**: one Durable Object per account is the WebSocket hub (hibernation, so idle sockets cost nothing). It keeps the op log; your reviews and settings arrive on the other devices within seconds.
 
-Cost: **$0**. Nothing here needs a card on file. There is no D1 database, no R2 and no AI.
+Cost: **$0**. Nothing here needs a card on file. There is no D1 database and no R2.
 
 ## 1. What syncs
 
