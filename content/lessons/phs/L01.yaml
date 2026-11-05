@@ -119,6 +119,15 @@ lessons:
         why: "ودول necessary but not sufficient: بيدعموا الـ causality ومش بيثبتوها. والباقي: strength (قوة الـ association)، specificity، و experiment (تجارب حيوانات أو in vitro)."
         page: 257
         quote: "Temporality The presumed cause precedes the effect by an expected amount of time. Biological gradient Greater effect observed with greater exposure to the presumed cause (dose-response relationship)."
+      - kind: aside
+        tone: exam
+        text: |-
+          مين بيدخل كل phase، وليه؟
+          - **Phase 0 و 1**: عدد ==صغير جداً ثم صغير== من **healthy volunteers أو patients with disease of interest**، و ==open label==. السؤال هنا «الدوا آمن؟ والجرعة كام؟»، فمش محتاجين نخبّي حاجة عن حد.
+          - **Phase 2 و 3**: عدد متوسط ثم كبير من ==المرضى بس==، و **randomized, controlled, anonymized**. هنا السؤال «بيشتغل؟ أحسن من الموجود؟»، فلازم randomization و blinding عشان النتيجة ما تتلوّنش بالـ bias.
+          - **Phase 4**: postmarketing surveillance، open label تاني، لأن الدوا خلاص في السوق.
+        page: 257
+        quote: "Sample Very small number of healthy volunteers or patients with disease of interest. Open label. Small number of healthy volunteers or patients with disease of interest. Open label. Moderate number of patients with disease of interest. Randomized, controlled, anonymized."
       - kind: try
         items: [phs.L01.001, phs.L01.003, phs.L01.008, phs.L01.009, phs.L01.015]
     recap:
@@ -126,7 +135,7 @@ lessons:
       - "Ecological fallacy: بيانات المجتمع مش للفرد."
       - "Intention-to-treat: once randomized, always analyzed."
       - "Can I SWIM: Safety، Work، Improvement (← FDA)، Market."
-    practice: [phs.L01.001, phs.L01.092, phs.L01.093, phs.L01.002, phs.L01.003, phs.L01.004, phs.L01.005, phs.L01.006, phs.L01.075, phs.L01.007, phs.L01.008, phs.L01.009, phs.L01.010, phs.L01.011, phs.L01.012, phs.L01.076, phs.L01.077, phs.L01.013, phs.L01.014, phs.L01.015, phs.L01.016]
+    practice: [phs.L01.001, phs.L01.092, phs.L01.093, phs.L01.002, phs.L01.003, phs.L01.004, phs.L01.005, phs.L01.006, phs.L01.075, phs.L01.007, phs.L01.008, phs.L01.009, phs.L01.010, phs.L01.011, phs.L01.012, phs.L01.076, phs.L01.077, phs.L01.013, phs.L01.014, phs.L01.015, phs.L01.016, phs.L01.094, phs.L01.095, phs.L01.096, phs.L01.097, phs.L01.098, phs.L01.099]
   - id: phs.L01.lesson2
     title: "الـ 2 × 2 table: OR و RR و NNT من غير لخبطة"
     hook: "ارسم الجدول صح مرة واحدة، وكل المعادلات هتطلع لوحدها"
@@ -169,6 +178,18 @@ lessons:
           - لو المرض ==نادر== (low prevalence)، الـ OR تقريباً = الـ RR.
         page: 258
         quote: "For rare diseases (low prevalence), OR approximates RR."
+      - kind: explain
+        title: "مثال الكتاب للـ OR خطوة بخطوة"
+        text: |-
+          case-control: **20 من 30** مريض lung cancer و **5 من 25** سليم قالوا إنهم بيدخنوا.
+
+          - املا الجدول: a = 20 (cases مدخنين)، c = 10 (cases مش مدخنين)، b = 5 (controls مدخنين)، d = 20 (controls مش مدخنين).
+          - OR = ad/bc = (20 × 20)/(5 × 10) = ==8==.
+          - المعنى: مرضى الـ lung cancer عندهم odds ==8 أضعاف== إن يكون عندهم تاريخ تدخين.
+
+          ليه odds مش risk؟ لأننا اخترنا الناس **حسب المرض**، فإحنا اللي حددنا كام case وكام control، فمينفعش نحسب risk المرض من الجدول. اللي ينفع نقارنه هو odds الـ exposure. وده سر جملة الكتاب: «==You take a case to the OR==».
+        page: 258
+        quote: "If in a case-control study, 20/30 patients with lung cancer and 5/25 healthy individuals report smoking, the OR is 8; so the patients with lung cancer are 8 times more likely to have a history of smoking. You take a case to the OR."
       - kind: check
         question: "5 of 10 people exposed to radiation and 1 of 10 unexposed people get cancer. What is the relative risk?"
         options:
@@ -237,6 +258,11 @@ lessons:
         hide: [[3, 1], [3, 2], [3, 3]]
         page: 259
         quote: "Birth rate ↑↑ ↓ ↓↓ Mortality rate ↑ ↓ ↓ Life expectancy Short Long Long Population Growing Stable Declining"
+      - kind: reveal
+        prompt: "ليه الهرم بيتقلب من قاعدة عريضة لقاعدة ضيقة كل ما البلد تتقدم؟"
+        answer: "لأن مع التقدّم ==الـ birth rate والـ mortality rate بيقلّوا== (بدرجات مختلفة). مواليد أقل ← القاعدة (الأطفال) تضيق. وفيات أقل و life expectancy أطول ← الكبار يعيشوا أكتر فالقمة تتخن. ده بيغيّر ==age composition== السكان: من growing لـ stable لـ declining."
+        page: 259
+        quote: "As a country proceeds to higher levels of development, birth and mortality rates decline to varying degrees, changing the age composition of the population."
       - kind: explain
         title: "الـ likelihood ratio"
         text: |-
@@ -259,7 +285,7 @@ lessons:
       - "AR و ARR فروق؛ RRR = 1 – RR. NNT = 1/ARR، NNH = 1/AR."
       - "LR+ > 10 specific، LR– < 0.1 sensitive. Pretest odds × LR = posttest odds."
       - "Kaplan-Meier ← log rank أو Cox."
-    practice: [phs.L01.017, phs.L01.018, phs.L01.019, phs.L01.020, phs.L01.078, phs.L01.021, phs.L01.022, phs.L01.023, phs.L01.024, phs.L01.025, phs.L01.026, phs.L01.027, phs.L01.028, phs.L01.079, phs.L01.029, phs.L01.030, phs.L01.031]
+    practice: [phs.L01.017, phs.L01.018, phs.L01.019, phs.L01.020, phs.L01.078, phs.L01.021, phs.L01.022, phs.L01.023, phs.L01.024, phs.L01.025, phs.L01.026, phs.L01.027, phs.L01.028, phs.L01.079, phs.L01.029, phs.L01.030, phs.L01.031, phs.L01.100, phs.L01.101, phs.L01.102, phs.L01.103, phs.L01.104, phs.L01.105, phs.L01.106, phs.L01.107, phs.L01.108, phs.L01.109, phs.L01.110, phs.L01.111, phs.L01.112]
   - id: phs.L01.lesson3
     title: "Sensitivity و specificity و PPV: التحليل اللي بيتسأل كل امتحان"
     hook: "SN-N-OUT و SP-P-IN، وليه الـ PPV بيتغيّر لما تغيّر المكان مش الـ test"
@@ -290,6 +316,11 @@ lessons:
           - **NPV** = TN/(TN + FN): لو negative، احتمال إنه سليم فعلاً.
         page: 260
         quote: "SN-N-OUT = highly SeNsitive test, when Negative, rules OUT disease High sensitivity test used for screening"
+      - kind: reveal
+        prompt: "ليه الـ sensitivity القريبة من 100% بتنفع ==تستبعد== المرض، مش تأكده؟"
+        answer: "الـ sensitivity = نسبة العيانين اللي الـ test طلّعهم positive. لو قريبة من 100% يبقى ==الـ false negatives قليلين جداً==: تقريباً مفيش عيان بيعدّي بـ negative. فلو النتيجة negative تقدر تطمّن وتستبعد المرض. بس الـ positive ممكن يكون فيه FP كتير، فمش بيأكد. والعكس في الـ specificity القريبة من 100%: الـ ==false positives قليلين== فالـ positive بيأكد المرض (rule in)."
+        page: 260
+        quote: "Value approaching 100% is desirable for ruling out disease and indicates a low false-negative rate."
       - kind: reveal
         prompt: "نفس الـ test، بنستخدمه مرة في عيادة متخصصة (المرض منتشر) ومرة في screening للناس كلها (المرض نادر). إيه اللي هيتغيّر؟"
         answer: "الـ sensitivity والـ specificity ==ثابتين== (خواص الـ test). اللي بيتغيّر الـ **PPV** والـ **NPV**: prevalence أعلى ← ==PPV أعلى== و NPV أقل. فالـ positive في العيادة المتخصصة يصدّق أكتر من الـ positive في الـ screening."
@@ -366,7 +397,7 @@ lessons:
       - "Sensitivity و specificity ثابتين؛ PPV بيعلى مع الـ prevalence و NPV بيقل."
       - "Cutoff أقل ← sensitivity و NPV ↑. ROC: AUC أعلى أحسن، 0.5 مالوش قيمة."
       - "Precision ضد random error، accuracy ضد systematic error."
-    practice: [phs.L01.032, phs.L01.033, phs.L01.034, phs.L01.035, phs.L01.036, phs.L01.037, phs.L01.038, phs.L01.039, phs.L01.080, phs.L01.040, phs.L01.041, phs.L01.042, phs.L01.043, phs.L01.044, phs.L01.045]
+    practice: [phs.L01.032, phs.L01.033, phs.L01.034, phs.L01.035, phs.L01.036, phs.L01.037, phs.L01.038, phs.L01.039, phs.L01.080, phs.L01.040, phs.L01.041, phs.L01.042, phs.L01.043, phs.L01.044, phs.L01.045, phs.L01.113, phs.L01.114, phs.L01.115, phs.L01.116, phs.L01.117, phs.L01.118, phs.L01.119]
   - id: phs.L01.lesson4
     title: "Incidence و prevalence، والـ bias اللي بيبوّظ الدراسات"
     hook: "دوا بيطوّل عمر المريض من غير ما يشفيه بيزوّد الـ prevalence. ليه؟"
@@ -420,6 +451,11 @@ lessons:
         why: "أي حاجة بتمنع حالات جديدة (vaccine، risk factors أقل) بتقلل الاتنين. أي حاجة بتغيّر مدة المرض بس (survival، mortality، recovery، علاج) بتغيّر الـ prevalence بس. والـ test الأحسن بيلاقي حالات أكتر فالاتنين يعلوا."
         page: 262
         quote: "SITUATION INCIDENCE PREVALENCE ↑ survival time — ↑ ↑ mortality rate — ↓ Faster recovery time — ↓"
+      - kind: reveal
+        prompt: "الكتاب كاتب المعادلة الدقيقة: prevalence ÷ (1 – prevalence) = incidence rate × average duration. إمتى تقدر تختصرها لـ prevalence ≈ incidence × duration؟"
+        answer: "لما المرض ==مش منتشر== (prevalence صغيرة): ساعتها 1 – prevalence تقريباً = 1، فالمقام يختفي وتفضل ==prevalence ≈ incidence × duration==. وده نفس منطق الحوض: كمية المية = سرعة الحنفية × المدة اللي المية بتقعدها."
+        page: 262
+        quote: "Prevalence Incidence rate × average duration 1 – prevalence = of disease"
       - kind: explain
         title: "الـ bias في كل مرحلة"
         text: |-
@@ -435,6 +471,24 @@ lessons:
           - **Length-time bias**: الـ screening بيمسك الأمراض ==البطيئة== أكتر (لأنها قاعدة مدة أطول من غير أعراض)، أما السريعة بتبان بأعراض قبل الـ screening. الحل: RCT بين screening ولا لأ.
         page: 263
         quote: "Lead-time bias Early detection interpreted as ↑ survival, but the disease course has not changed"
+      - kind: table
+        title: "كل bias ومثال الكتاب عليه"
+        columns: ["Bias", "Book's example", "Fix"]
+        rows:
+          - ["Recall", "Patients with disease recall exposure after learning of similar cases", "Shorter time to follow-up; medical records"]
+          - ["Measurement", "A faulty automatic sphygmomanometer", "Objective, standardized, pretested methods; placebo group"]
+          - ["Procedure", "Treatment group spends more time in highly specialized units", "Blinding and placebo"]
+          - ["Observer-expectancy", "Observer expecting recovery documents more positive outcomes", "Blinding and placebo"]
+          - ["Lead-time", "Breast cancer found early by mammography seems to survive longer", "Back-end survival (adjust for severity at diagnosis)"]
+          - ["Length-time", "A slowly progressive cancer is more likely found by screening", "RCT of screening vs no screening"]
+        hide: [[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0]]
+        page: 263
+        quote: "Recall bias Awareness of disorder alters recall by subjects; common in retrospective studies Patients with disease recall exposure after learning of similar cases Decrease time from exposure to follow-up; use medical records as sources"
+      - kind: aside
+        tone: trap
+        text: "الـ **back-end survival** بيصلّح الـ lead-time لأنه بيقارن المرضى ==على نفس الـ severity وقت التشخيص==، فالسنين «الزيادة» اللي جات من الاكتشاف البدري بتتشال. بس خلي بالك من تحذير الكتاب: الـ adjusting للـ severity ممكن ==يخبّي causality== حقيقية."
+        page: 263
+        quote: "Measure “back-end” survival (adjust survival according to the severity of disease at the time of diagnosis); a caveat of adjusting for severity is the potential masking of causality"
       - kind: check
         question: "Mothers of babies with birth defects report more medication use in pregnancy than mothers of healthy babies, though pharmacy records show no difference. Which bias?"
         options:
@@ -481,7 +535,7 @@ lessons:
       - "Selection (Berkson، attrition) ← randomization. Recall ← السجلات. Measurement (Hawthorne) ← طرق standardized متجربة + placebo. Procedure و observer-expectancy ← blinding."
       - "Lead-time: اكتشاف بدري شكله survival أطول. Length-time: الـ screening بيمسك البطيء."
       - "Confounding: الـ association تختفي بعد التقسيم. Effect modification: حقيقية وبتختلف."
-    practice: [phs.L01.046, phs.L01.047, phs.L01.048, phs.L01.049, phs.L01.050, phs.L01.051, phs.L01.052, phs.L01.053, phs.L01.054]
+    practice: [phs.L01.046, phs.L01.047, phs.L01.048, phs.L01.049, phs.L01.050, phs.L01.051, phs.L01.052, phs.L01.053, phs.L01.054, phs.L01.120, phs.L01.121, phs.L01.122, phs.L01.123, phs.L01.124, phs.L01.125, phs.L01.126, phs.L01.127, phs.L01.128, phs.L01.129, phs.L01.130]
   - id: phs.L01.lesson5
     title: "التوزيع والـ P value والأخطاء والـ CI: الإحصاء بتاع الامتحان"
     hook: "الولد اللي بيصرخ ذيب مرتين بيشرح الـ type I والـ type II في قصة واحدة"
@@ -544,6 +598,32 @@ lessons:
         text: "قصة الكتاب: **أول مرة** الولد صرخ «ذيب!» والبلد صدّقت ومكانش فيه ذيب ← ==type I== (false positive، α). **تاني مرة** البلد ما صدّقتش وكان فيه ذيب فعلاً ← ==type II== (false negative، β)."
         page: 266
         quote: "1st time boy cries wolf, the town believes there is a wolf, but there is not (false positive)."
+      - kind: figure
+        title: "الحقيقة ضد نتيجة الدراسة"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <text x="200" y="18" class="t-sm t-b">Reality</text>
+            <text x="150" y="40" class="t-sm t-b">H1 true</text>
+            <text x="262" y="40" class="t-sm t-b">H0 true</text>
+            <text x="8" y="85" class="t-sm t-b">Study rejects H0</text>
+            <text x="8" y="150" class="t-sm t-b">Does not reject H0</text>
+            <rect class="fg-good" x="125" y="50" width="110" height="60"/>
+            <rect class="fg-bad" x="235" y="50" width="110" height="60"/>
+            <rect class="fg-bad" x="125" y="115" width="110" height="60"/>
+            <rect class="fg-good" x="235" y="115" width="110" height="60"/>
+            <text x="140" y="78" class="t-sm t-b">Power (1 − β)</text>
+            <text x="140" y="96" class="t-sm t-mut">correct</text>
+            <text x="250" y="78" class="t-sm t-b">α: Type I</text>
+            <text x="250" y="96" class="t-sm t-mut">false positive</text>
+            <text x="140" y="143" class="t-sm t-b">β: Type II</text>
+            <text x="140" y="161" class="t-sm t-mut">false negative</text>
+            <text x="250" y="143" class="t-sm t-b">Correct</text>
+            <text x="250" y="161" class="t-sm t-mut">no effect, none found</text>
+          </svg>
+        caption: "الخانتين الخضر هما الـ correct results: لقيت فرق وهو موجود (ودي الـ ==power==)، أو ما لقيتش فرق وهو مش موجود. الخانتين الحمر هما الغلط: α لما ترفض H0 وهو صح، و β لما تسيبه وهو غلط."
+        alt: "A 2 by 2 grid. Columns: reality H1 true, H0 true. Rows: study rejects H0, study does not reject H0. Cells: power (1 minus beta) correct; alpha type I error; beta type II error; correct."
+        page: 266
+        quote: "Correct result Stating that there is an effect or difference when one exists (H0 rejected in favor of H1). Stating that there is no effect or difference when none exists (H0 not rejected)."
       - kind: explain
         title: "الـ power"
         text: |-
@@ -612,6 +692,40 @@ lessons:
         why: "من الكتاب: «Tea is meant for 2»، و ANOVA = ANalysis Of VAriance، و chi-square «chi-tegorical». والـ **meta-analysis** بيجمع دراسات كتير فبيزود الـ power والـ generalizability، بس محدود بجودة الدراسات والـ selection bias."
         page: 267
         quote: "t-test Checks differences between means of 2 groups. Tea is meant for 2."
+      - kind: figure
+        title: "تختار الـ test إزاي؟ سؤالين بس"
+        svg: |-
+          <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="L01st" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 z" class="fg-head"/></marker></defs>
+            <rect class="fg-ink" x="110" y="8" width="140" height="30" rx="6"/>
+            <text x="122" y="28" class="t-sm t-b">Variables compared</text>
+            <rect class="fg-acc" x="10" y="70" width="150" height="30" rx="6"/>
+            <text x="22" y="90" class="t-sm t-b">Numerical (means)</text>
+            <rect class="fg-acc" x="200" y="70" width="150" height="30" rx="6"/>
+            <text x="208" y="90" class="t-sm t-b">Categorical (proportions)</text>
+            <line class="fg-arrow" x1="160" y1="38" x2="90" y2="68" marker-end="url(#L01st)"/>
+            <line class="fg-arrow" x1="200" y1="38" x2="270" y2="68" marker-end="url(#L01st)"/>
+            <rect class="fg-good" x="5" y="150" width="75" height="40" rx="6"/>
+            <text x="18" y="168" class="t-sm t-b">t-test</text>
+            <text x="14" y="184" class="t-sm t-mut">2 groups</text>
+            <rect class="fg-good" x="90" y="150" width="75" height="40" rx="6"/>
+            <text x="102" y="168" class="t-sm t-b">ANOVA</text>
+            <text x="98" y="184" class="t-sm t-mut">≥ 3 groups</text>
+            <rect class="fg-good" x="190" y="150" width="80" height="40" rx="6"/>
+            <text x="196" y="168" class="t-sm t-b">Chi-square</text>
+            <text x="196" y="184" class="t-sm t-mut">large sample</text>
+            <rect class="fg-good" x="278" y="150" width="78" height="40" rx="6"/>
+            <text x="284" y="168" class="t-sm t-b">Fisher's</text>
+            <text x="284" y="184" class="t-sm t-mut">small sample</text>
+            <line class="fg-arrow" x1="70" y1="100" x2="45" y2="148" marker-end="url(#L01st)"/>
+            <line class="fg-arrow" x1="100" y1="100" x2="125" y2="148" marker-end="url(#L01st)"/>
+            <line class="fg-arrow" x1="260" y1="100" x2="232" y2="148" marker-end="url(#L01st)"/>
+            <line class="fg-arrow" x1="290" y1="100" x2="315" y2="148" marker-end="url(#L01st)"/>
+          </svg>
+        caption: "السؤال الأول: بتقارن ==أرقام== (متوسطات زي الضغط) ولا ==فئات== (نسب زي عنده hypertension ولا لأ)؟ التاني: كام مجموعة؟ أو قد إيه العينة؟ الـ Fisher's exact test بيحسب الاحتمال بالظبط، فبيتستخدم مكان الـ chi-square لما العينة صغيرة (زي 20 راجل و 20 ست)، لأن الـ chi-square تقريب بيحتاج أعداد كبيرة."
+        alt: "Flowchart from variables compared: numerical means split into t-test for 2 groups and ANOVA for 3 or more; categorical proportions split into chi-square for large samples and Fisher's exact test for small samples."
+        page: 267
+        quote: "Categorical (proportions) Numerical (means) t-test Variables to be compared 2 groups ≥ 3 groups ANOVA Chi-square test Large sample size Small sample size Fisher’s exact test"
       - kind: try
         items: [phs.L01.057, phs.L01.058, phs.L01.062, phs.L01.063, phs.L01.069]
     recap:
@@ -620,4 +734,4 @@ lessons:
       - "Type I = false positive (α)، type II = false negative (β). Power = 1 – β ويزيد بالعدد."
       - "CI للـ ratio فيه 1، أو للفرق فيه 0 ← مش significant."
       - "t-test لـ 2 means، ANOVA لـ 3+، chi-square للنسب، Fisher للعينات الصغيرة."
-    practice: [phs.L01.055, phs.L01.056, phs.L01.081, phs.L01.082, phs.L01.057, phs.L01.083, phs.L01.058, phs.L01.059, phs.L01.060, phs.L01.084, phs.L01.061, phs.L01.062, phs.L01.085, phs.L01.086, phs.L01.063, phs.L01.064, phs.L01.065, phs.L01.066, phs.L01.067, phs.L01.068, phs.L01.087, phs.L01.088, phs.L01.089, phs.L01.069, phs.L01.070, phs.L01.071, phs.L01.090, phs.L01.091, phs.L01.072, phs.L01.073, phs.L01.074]
+    practice: [phs.L01.055, phs.L01.056, phs.L01.081, phs.L01.082, phs.L01.057, phs.L01.083, phs.L01.058, phs.L01.059, phs.L01.060, phs.L01.084, phs.L01.061, phs.L01.062, phs.L01.085, phs.L01.086, phs.L01.063, phs.L01.064, phs.L01.065, phs.L01.066, phs.L01.067, phs.L01.068, phs.L01.087, phs.L01.088, phs.L01.089, phs.L01.069, phs.L01.070, phs.L01.071, phs.L01.090, phs.L01.091, phs.L01.072, phs.L01.073, phs.L01.074, phs.L01.131, phs.L01.132, phs.L01.133, phs.L01.134, phs.L01.135, phs.L01.136, phs.L01.137, phs.L01.138]
