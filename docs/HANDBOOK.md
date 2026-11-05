@@ -211,7 +211,7 @@ GitHub Actions settings (Settings › Secrets and variables › Actions). Names 
 
 The Worker's own secrets (`TOKEN_SIGNING_KEY`, `ALLOWED_EMAILS`) live in Cloudflare; the first deploy makes the signing key. `crates/server/wrangler.toml` keeps `GOOGLE_CLIENT_IDS` empty on purpose; the deploy passes it from the variable, so a dashboard edit would be overwritten.
 
-If sign-in fails: check `STEPS_GOOGLE_CLIENT_IDS`, then run Actions › Deploy Steps Cloud › Run workflow, then `curl https://steps-cloud.hamorefaat85.workers.dev/v1/health`. Android sign-in waiting and retry logic is in `crates/app/src/cloud/oauth.rs` and `engine.rs`; the return activity is `android/src/main/kotlin/app/steps/SignInReturn.kt`.
+If sign-in fails: check `STEPS_GOOGLE_CLIENT_IDS`, then run Actions › Deploy Steps Cloud › Run workflow, then `curl https://steps-cloud.hamorefaat85.workers.dev/v1/health`. Android sign-in waiting and retry logic is in `crates/app/src/cloud/oauth.rs` and `engine.rs`; the return activity is `android/src/main/kotlin/app/steps/SignInReturn.kt`. On Android the single-use code goes to Google only while Steps is in front (`SignInBridge.inForeground`): Android can abort a backgrounded app's request after Google took the code, and the retry then gets `invalid_grant` (#629). If that still happens, the app says to sign in again.
 
 ## 10. Releases, signing and updates
 
@@ -262,7 +262,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 - **Only other source so far:** First Aid 2026. B&B videos and UWorld ids per lecture come from a public mapping document (QBANK.md).
 
 ### Roadmap
-- **1.0.0-alpha.2:** anything found by the last UX walk and the final code check of alpha.1, plus whatever daily use of alpha.1 turns up. Confirm the scheduled workflows fire again (#614) and close it.
+- **1.0.0-alpha.2:** anything found by the last UX walk and the final code check of alpha.1, plus whatever daily use of alpha.1 turns up. Confirm the scheduled workflows fire again (#614) and close it. Android Google sign-in no longer fails with `invalid_grant` when Chrome is in front (#629).
 - **Later (not started until I ask):** audit the three research reports on Step 1 apps and websites against the app. Likely gaps: an NBME/UWSA score tracker beyond the current log, a question-bank mistake log by question id, and new cards only from pages already read. Features that copy a commercial question bank stay low priority, since I already have the banks.
 - **More sources:** Pathoma, Sketchy, UWorld notes and my own materials merge into the First Aid lectures and topics as they arrive ([SOURCES.md](SOURCES.md)). When the first non-First-Aid source arrives, `steps-tools refs` must learn to read its text.
 - **Approvals:** I check items against the book in the app and export my verdicts; fixes follow per lecture.
