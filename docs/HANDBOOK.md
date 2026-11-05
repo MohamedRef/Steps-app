@@ -99,7 +99,7 @@ Rust stable (edition 2024, minimum 1.90), Dioxus 0.7 with HTML/CSS for the UI. A
 | `.github/workflows/` | CI, nightly, deploys, release (§6). |
 | `justfile` | Every common command. `just` with no argument lists them. |
 
-**File layout rule (2026-11-05):** a file holds one concern, and work that many people change in parallel lives in many small files rather than one shared one, so parallel PRs rarely touch the same lines. A new feature adds its own folder (`crates/app/src/<feature>/`), its own text file (`i18n/<feature>.rs`), its own CSS and its own `changes/<topic>.yaml`, and adds only one declaration line to a shared list. Content is already split per course (§8). Rust modules group a concern rather than one type per file. Splits are behavior-preserving and land one area per PR.
+**File layout rule (2026-11-05):** a file holds one concern, and work that many people change in parallel lives in many small files rather than one shared one, so parallel PRs rarely touch the same lines. A new feature adds its own folder (`crates/app/src/<feature>/`), its own text file (`i18n/<feature>.rs`), its own CSS and its own `changes/<topic>.yaml`, and adds only one declaration line to a shared list. Content is already split per course (§8). Rust modules group a concern rather than one type per file. Unit tests longer than a screen live in a sibling file (`plan.rs` declares `#[cfg(test)] mod tests;` and the tests sit in `plan/tests.rs`), so a test change and a code change rarely meet. Splits are behavior-preserving (same module paths and test names) and land one area per PR.
 
 How the pieces talk: content YAML → `steps-tools packs build` → one signed content pack. Apps carry a built-in pack and download newer ones from the update feed without a new APK when only content changed. Each device keeps its reviews, checks and settings in SQLite (IndexedDB in the browser) and pushes an outbox of ops to Steps Cloud over a WebSocket; other devices get them within seconds. Everything works offline.
 
@@ -270,7 +270,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 - **Approvals:** I check items against the book in the app and export my verdicts; fixes follow per lecture.
 - **Beta, then stable:** after daily use of the alpha; I decide when.
 - **Exam:** Step 1 around September 2027 (date not fixed yet). Since May 2026 the exam is 14 blocks of 30 minutes, up to 20 questions each.
-- **Smaller files, fewer merge conflicts:** split the busiest shared files one area per PR, with no behavior change (§3 file layout rule). Done: UI text (`i18n.rs` into `i18n/`, one file per feature).
+- **Smaller files, fewer merge conflicts:** split the busiest shared files one area per PR, with no behavior change (§3 file layout rule). Done: UI text (`i18n.rs` into `i18n/`, one file per feature); core unit tests in sibling files.
 
 ### Known issues
 - **#614 Scheduled workflows are not firing.** GitHub had not run this repo's `schedule:` triggers; #612 re-saved each cron line under my account. `daily.yml` starts the platform runs after green CI on `main` meanwhile. Check Actions for runs with event `schedule`.
