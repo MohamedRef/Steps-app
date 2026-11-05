@@ -191,3 +191,7 @@ table.plan th { color: var(--muted); font-weight: 600; }
 .st-switch-text { display: grid; gap: var(--sp-1, 0.25rem); }
 .st-switch-text h2 { margin: 0; }
 .td-locked { margin: 0; }
+/* Side line and Mono draw the hero on the page, so its ring takes the
+   page's colours instead of the brand fill's. */
+.app:is([data-appearance="side-line"], [data-appearance="mono"]) .td-hero .ring { background: conic-gradient(var(--accent) var(--p), var(--line) 0); }
+.app:is([data-appearance="side-line"], [data-appearance="mono"]) .td-hero .ring-hole { background: var(--bg); color: var(--text); }

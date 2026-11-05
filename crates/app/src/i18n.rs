@@ -1587,8 +1587,19 @@ pub mod settings {
     pub const APPEARANCE: &str = "نمط الواجهة";
     pub const APPEARANCE_STEPPED: &str = "درجات";
     pub const APPEARANCE_STEPPED_SUB: &str = "شكل Steps: كروت واقفة على درجة، وزراير بتنزل لما تدوس عليها";
-    pub const APPEARANCE_CALM: &str = "سادة";
-    pub const APPEARANCE_CALM_SUB: &str = "أسطح سادة وخطوط رفيعة، من غير درجات ولا لمعة";
+    pub const APPEARANCE_CALM: &str = "خط رفيع";
+    pub const APPEARANCE_CALM_SUB: &str = "كروت بخط رفيع جدًا، من غير ظل ولا زخرفة";
+    pub const APPEARANCE_BORDERLESS: &str = "من غير حدود";
+    pub const APPEARANCE_BORDERLESS_SUB: &str = "كروت من غير خطوط خالص، والمسافات هي اللي بتفصل";
+    pub const APPEARANCE_DIVIDERS: &str = "فواصل";
+    pub const APPEARANCE_DIVIDERS_SUB: &str = "مفيش كروت، بس خطوط فاصلة بين الحاجات على صفحة واحدة";
+    pub const APPEARANCE_SIDE_LINE: &str = "خط جانبي";
+    pub const APPEARANCE_SIDE_LINE_SUB: &str =
+        "خط رفيع بلون الثيم على جنب كل كارت، والزرار الأساسي هو اللي ملوّن";
+    pub const APPEARANCE_SOFT_FILL: &str = "رمادي فاتح";
+    pub const APPEARANCE_SOFT_FILL_SUB: &str = "كروت رمادي فاتح على صفحة سادة، من غير خطوط";
+    pub const APPEARANCE_MONO: &str = "أبيض وأسود";
+    pub const APPEARANCE_MONO_SUB: &str = "حبر على ورق: اللون للصح والغلط والزرار الأساسي بس";
     pub const APPEARANCE_OUTLINE: &str = "خطوط";
     pub const APPEARANCE_OUTLINE_SUB: &str = "كروت شفافة بحدود واضحة، زي كشكول المذاكرة";
     pub const APPEARANCE_TINTED: &str = "ملوّن";

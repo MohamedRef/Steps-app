@@ -53,12 +53,13 @@ brand blue. Night shift keeps its amber accent: it must have no colour where
 blue outweighs red. Theme ids never change. `theme.rs` tests every pairing
 above against WCAG AA (4.5:1).
 
-## Appearance: Stepped, Calm, Outline, Tinted and Liquid Glass
+## Appearance: ten surface styles
 
 A device preference (`prefs::Appearance`, `appearance=` in
 `device-prefs.txt`, default Stepped, never synced), picked in
 Settings › Look › "نمط الواجهة". It sets
-`data-appearance="stepped|calm|outline|tinted|liquid-glass"` on `.app`; only
+`data-appearance="stepped|calm|borderless|dividers|side-line|soft-fill|mono|outline|tinted|liquid-glass"`
+on `.app`; only
 CSS reads it, so switching keeps every screen's state. The old `glossy`
 value loads as Stepped.
 
@@ -67,7 +68,14 @@ value loads as Stepped.
   `--card-shadow`; brand-filled things (the hero, the primary button, the
   picked session length) stand on `--ledge-deep`. Pressing moves a button
   down onto its ledge instead of shrinking it. No blur.
-- Calm: flat surfaces and hairlines, main.css as it is.
+- Calm («خط رفيع», Hairline): flat surfaces and hairlines, main.css as it is,
+  without the hero's corner mark.
+- The minimal styles (no ledges, shadows or hero mark): Borderless (cards
+  without lines, set apart by space), Dividers (no boxes, rules between
+  things on one plain page), Side line (a 2px brand line at a card's start;
+  the hero is ink on the page and its button carries the colour), Soft fill
+  (`--surface-2` cards on a `--surface` page) and Mono (ink and paper; colour
+  only for meaning and the main action).
 - Outline: cards are transparent with a firmer 1.5px `--outline`, like a
   study notebook; the bars take the page colour.
 - Tinted: cards take `--soft`, tiles `--surface-2`, the bar `--soft`;
