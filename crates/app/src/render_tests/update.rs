@@ -342,9 +342,15 @@ fn many(kind: ChangeKind, n: usize, what: &str) -> Vec<Change> {
 #[test]
 fn the_changelog_folds_long_lists_and_older_builds() {
     let u = install(&dead_feed(), "0.1.0", 44, notify());
+    // Relative dates: the sheet counts days from the real clock, so fixed
+    // dates would drift out of "yesterday" / "5 days ago" as days pass.
+    let ago = |days: i64| {
+        (chrono::Utc::now() - chrono::Duration::days(days)).format("%Y-%m-%dT08:00:00Z").to_string()
+    };
+    let newest = ago(0);
     let mut history = vec![release(
         50,
-        "2026-11-04T08:00:00Z",
+        &newest,
         [
             many(ChangeKind::New, 8, "محاضرة"),
             many(ChangeKind::Improved, 2, "تحسين"),
@@ -353,13 +359,8 @@ fn the_changelog_folds_long_lists_and_older_builds() {
         .concat(),
         false,
     )];
-    let dates = [
-        "2026-11-03T08:00:00Z",
-        "2026-11-02T08:00:00Z",
-        "2026-10-30T08:00:00Z",
-        "2026-09-01T08:00:00Z",
-        "2025-12-01T08:00:00Z",
-    ];
+    let dates =
+        [ago(1), ago(2), ago(5), "2026-09-01T08:00:00Z".to_owned(), "2025-12-01T08:00:00Z".to_owned()];
     for (i, d) in dates.iter().enumerate() {
         history.push(release(
             49 - i as u64,
