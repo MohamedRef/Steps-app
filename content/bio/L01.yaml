@@ -75,6 +75,19 @@ items:
     back: Inactive X chromosomes (heterochromatin); they may be visible on the periphery of the nucleus.
     src: { page: 32, quote: "Barr bodies (inactive X chromosomes) may be visible on the periphery of nucleus." }
     status: unverified
+  - id: bio.L01.128
+    kind: card
+    topic: chromatin-structure
+    front: Which histones make up the nucleosome's histone octamer, and which histone sits outside it?
+    back: Two each of H2A, H2B, H3 and H4 (the book's figure labels the nucleosome "(H2A, H2B, H3, H4) ×2"). H1 is the linker histone, binding the nucleosome and the linker DNA.
+    src: { page: 32, quote: "Nucleosome (H2A, H2B, H3, H4) 2" }
+    status: unverified
+  - id: bio.L01.129
+    kind: cloze
+    topic: chromatin-structure
+    text: In the book's chromatin figure, heterochromatin goes with histone {{c1::deacetylation}} and euchromatin with histone {{c2::acetylation}}; heterochromatin = highly condensed ({{c3::hidden}} chromatin).
+    src: { page: 32, quote: "Heterochromatin (histone deacetylation) Supercoiled structure H1 histone (linker) DNAdouble-helix Euchromatin (histone acetylation)" }
+    status: unverified
   - id: bio.L01.007
     kind: mcq
     topic: chromatin-structure
@@ -274,6 +287,14 @@ items:
     back: The 5′ end; the triphosphate is the energy source for the new bond.
     src: { page: 33, quote: "5′ end of incoming nucleotide bears the triphosphate (energy source for the bond)." }
     status: unverified
+  - id: bio.L01.130
+    kind: card
+    topic: nucleotides
+    front: According to the book's ring figure, which molecules donate the atoms of the purine ring, and which build the pyrimidine ring?
+    back: "Purine ring: glycine, aspartate, glutamine, THF (twice) and CO2. Pyrimidine ring: carbamoyl phosphate and aspartate."
+    src: { page: 33, quote: "Aspartate Purine (A, G) Pyrimidine (C, U, T) Glutamine THF THF Carbamoyl phosphate CO2 Glycine Aspartate" }
+    status: unverified
+    tags: [high-yield]
   - id: bio.L01.025
     kind: mcq
     topic: nucleotides
@@ -318,6 +339,40 @@ items:
     src: { page: 34, quote: "CPS1 = m1tochondria, urea cycle, found in liver CPS2 = cytwosol, pyrimidine synthesis, found in most cells" }
     status: unverified
     tags: [high-yield]
+  - id: bio.L01.131
+    kind: card
+    topic: de-novo-nucleotide-synthesis
+    front: In de novo pyrimidine synthesis, what does CPS2 combine to make carbamoyl phosphate, and what does it spend?
+    back: Glutamine + CO2, using 2 ATP (releasing 2 ADP + Pi and glutamate).
+    src: { page: 34, quote: "Glutamine + CO₂" }
+    status: unverified
+  - id: bio.L01.132
+    kind: cloze
+    topic: de-novo-nucleotide-synthesis
+    text: In de novo pyrimidine synthesis, carbamoyl phosphate takes up {{c1::aspartate}} to make {{c2::orotic acid}}, which is converted to {{c3::UMP}} (the step impaired in orotic aciduria).
+    src: { page: 34, quote: "Orotic acid Aspartate Impaired in orotic aciduria UMP" }
+    status: unverified
+  - id: bio.L01.133
+    kind: card
+    topic: de-novo-nucleotide-synthesis
+    front: In the pyrimidine pathway, which enzyme turns the ribonucleotide UDP into the deoxyribonucleotide dUDP, and which drug blocks it?
+    back: Ribonucleotide reductase (UDP → dUDP, on the way to dUMP and dTMP; UDP can also go to CTP). Hydroxyurea inhibits it.
+    src: { page: 34, quote: "UMP UDP dUDP CTP dUMP dTMP DHF" }
+    status: unverified
+  - id: bio.L01.134
+    kind: card
+    topic: de-novo-nucleotide-synthesis
+    front: What does thymidylate synthase do, and how is its folate cofactor regenerated?
+    back: It turns dUMP into dTMP, using N5,N10-methylene THF, which becomes DHF. Dihydrofolate reductase turns DHF back into THF (blocked by MTX, TMP and pyrimethamine); 5-FU blocks thymidylate synthase itself.
+    src: { page: 34, quote: "methylene THF Thymidylate synthase" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L01.135
+    kind: cloze
+    topic: de-novo-nucleotide-synthesis
+    text: "De novo purine synthesis builds the base on ribose: ribose 5-P → {{c1::PRPP}} (by {{c2::PRPP synthetase}}) → {{c3::IMP}} → AMP and GMP."
+    src: { page: 34, quote: "Ribose 5-P PRPP IMP AMP GMP" }
+    status: unverified
   - id: bio.L01.027
     kind: card
     topic: de-novo-nucleotide-synthesis
@@ -485,6 +540,33 @@ items:
     back: Urate oxidase; it turns uric acid into allantoin.
     src: { page: 35, quote: "Allantoin Allopurinol Febuxostat Excretion Urate oxidase (rasburicase) Uric acid" }
     status: unverified
+  - id: bio.L01.136
+    kind: card
+    topic: purine-salvage-deficiencies
+    front: Which salvage enzyme recycles adenine, and which recycles guanine and hypoxanthine?
+    back: APRT (adenine phosphoribosyltransferase) adds PRPP to adenine → AMP. HGPRT (hypoxanthine guanine phosphoribosyltransferase) adds PRPP to guanine → GMP and to hypoxanthine → IMP.
+    src: { page: 35, quote: "APRT, adenine phosphoribosyltransferase; HGPRT, hypoxanthine guanine phosphoribosyltransferase" }
+    status: unverified
+  - id: bio.L01.137
+    kind: order
+    topic: purine-salvage-deficiencies
+    prompt: Put the steps of adenosine breakdown to its excreted end product in order (book's purine figure).
+    steps:
+      - Adenosine
+      - Inosine (by adenosine deaminase, ADA)
+      - Hypoxanthine
+      - Xanthine (by xanthine oxidase)
+      - Uric acid (by xanthine oxidase)
+    src: { page: 35, quote: "Uric acid Xanthine XO XO Lesch-Nyhan syndrome HGPRT IMP Inosine Cladribine, pentostatin ADA SCID Adenosine" }
+    status: unverified
+  - id: bio.L01.138
+    kind: card
+    topic: purine-salvage-deficiencies
+    front: Which drugs block xanthine oxidase, and which 2 steps does it catalyze?
+    back: Allopurinol and febuxostat. Xanthine oxidase turns hypoxanthine into xanthine and xanthine into uric acid.
+    src: { page: 35, quote: "Allopurinol Febuxostat Excretion Urate oxidase (rasburicase) Uric acid Xanthine XO XO" }
+    status: unverified
+    tags: [high-yield]
   - id: bio.L01.041
     kind: mcq
     topic: purine-salvage-deficiencies
@@ -600,6 +682,19 @@ items:
     src: { page: 36, quote: "Occurs in 5′ → 3′ direction (“5ynth3sis”) in continuous and discontinuous (Okazaki fragment) fashion. Semiconservative." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L01.139
+    kind: cloze
+    topic: dna-replication
+    text: DNA replication is more complex in {{c1::eukaryotes}} than in prokaryotes, but the two share {{c2::analogous enzymes}}.
+    src: { page: 36, quote: "More complex in eukaryotes than in prokaryotes, but shares analogous enzymes." }
+    status: unverified
+  - id: bio.L01.140
+    kind: card
+    topic: dna-replication
+    front: What is the replication fork?
+    back: The Y-shaped region along the DNA template where the leading and lagging strands are synthesized.
+    src: { page: 36, quote: "Y-shaped region along DNA template where leading and lagging strands are synthesized." }
+    status: unverified
   - id: bio.L01.048
     kind: card
     topic: dna-replication
@@ -675,6 +770,12 @@ items:
     topic: dna-replication
     text: Telomerase is upregulated in {{c1::progenitor cells}} and often in {{c2::cancer}}; it is downregulated in {{c3::aging and progeria}}.
     src: { page: 36, quote: "Upregulated in progenitor cells and also often in cancer; downregulated in aging and progeria." }
+    status: unverified
+  - id: bio.L01.141
+    kind: cloze
+    topic: dna-replication
+    text: Telomerase adds TTAGGG to the 3′ ends of chromosomes to avoid {{c1::loss of genetic material}} with every {{c2::duplication}}.
+    src: { page: 36, quote: "adds DNA (TTAGGG) to 3′ ends of chromosomes to avoid loss of genetic material with every duplication." }
     status: unverified
   - id: bio.L01.056
     kind: mcq
@@ -839,6 +940,19 @@ items:
     back: DNA polymerase slips in a region of repetitive nucleotides and inserts or removes extra nucleotides. Insertion of more repeats across generations causes anticipation (eg, CAG repeats in Huntington disease).
     src: { page: 38, quote: "Anticipation occurs secondary to insertion of increased repeats across generations. Example: CAG repeat expansion in Huntington disease." }
     status: unverified
+  - id: bio.L01.142
+    kind: cloze
+    topic: dna-mutations
+    text: "Splice site mutations (retained intron in mRNA) are rare causes of {{c1::cancers}}, {{c2::dementia}} and {{c3::epilepsy}}, besides some β-thalassemias, Gaucher disease and Marfan syndrome."
+    src: { page: 38, quote: "Retained intron in mRNA → protein with impaired or altered function. Examples: rare causes of cancers, dementia, epilepsy, some types of β-thalassemia, Gaucher disease, Marfan syndrome." }
+    status: unverified
+  - id: bio.L01.143
+    kind: card
+    topic: dna-mutations
+    front: After a frameshift mutation, what can happen to the protein, and what replication error can cause one?
+    back: The protein may be shorter or longer, and its function disrupted or altered. It may arise from slippage of DNA polymerase during replication at repetitive nucleotide regions.
+    src: { page: 38, quote: "Protein may be shorter or longer, and its function may be disrupted or altered. May occur due to slippage of DNA polymerase during replication at repetitive nucleotide regions." }
+    status: unverified
   - id: bio.L01.068
     kind: mcq
     topic: dna-mutations
@@ -890,6 +1004,20 @@ items:
       - [Low, Unavailable, Not expressed]
     blanks: [[0, 2], [1, 2], [2, 2], [3, 2]]
     src: { page: 39, quote: "Lac genes strongly expressed Low glucose Lactose available High glucose Lactose unavailable High glucose Lactose available Low glucose Lactose unavailable" }
+    status: unverified
+  - id: bio.L01.144
+    kind: card
+    topic: lac-operon
+    front: Why is the lac operon a classic example of a genetic response to an environmental change?
+    back: Glucose is E coli's preferred metabolic substrate, but when glucose is absent and lactose is available, the lac operon is activated so the cell switches to lactose metabolism.
+    src: { page: 39, quote: "Classic example of a genetic response to an environmental change. Glucose is the preferred metabolic substrate in E coli, but when glucose is absent and lactose is available, the lac operon is activated to switch to lactose metabolism." }
+    status: unverified
+  - id: bio.L01.145
+    kind: card
+    topic: lac-operon
+    front: In the book's lac operon figure, which gene makes the repressor protein, and which genes lie after the promoter and operator?
+    back: LacI makes the repressor protein. LacZ, LacY and LacA are the lac genes transcribed after the promoter and operator (CAP site upstream).
+    src: { page: 39, quote: "Lacl LacZ LacY LacA CAP site cAMP" }
     status: unverified
   - id: bio.L01.072
     kind: mcq
@@ -1275,6 +1403,13 @@ items:
     front: What 2 things are responsible for the accuracy of amino acid selection during translation?
     back: Aminoacyl-tRNA synthetase (uses ATP; one per amino acid) and binding of the charged tRNA to the codon.
     src: { page: 42, quote: "Aminoacyl-tRNA synthetase (uses ATP; 1 unique enzyme per respective amino acid) and binding of charged tRNA to the codon are responsible for the accuracy of amino acid selection." }
+    status: unverified
+  - id: bio.L01.146
+    kind: card
+    topic: trna
+    front: When aminoacyl-tRNA synthetase charges a tRNA, which high-energy molecule does it use and what is released?
+    back: ATP; the charging (aminoacylation) step in the book's tRNA figure releases AMP + PPi.
+    src: { page: 42, quote: "AMP + PPi" }
     status: unverified
   - id: bio.L01.100
     kind: card
