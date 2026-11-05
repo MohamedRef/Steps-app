@@ -86,7 +86,7 @@ lessons:
       - "Elastin: non-hydroxylated، fibrillin scaffold، lysyl oxidase. Elastase ← α1-antitrypsin."
       - "Marfan: FBN1 على 15، AD، dissection أشهر سبب وفاة، lens لفوق."
       - "Homocystinuria: CBS، AR، ذكاء أقل، thrombosis، lens لتحت."
-    practice: [bio.L03.001, bio.L03.002, bio.L03.003, bio.L03.004, bio.L03.005, bio.L03.006, bio.L03.007, bio.L03.008, bio.L03.009, bio.L03.010, bio.L03.011, bio.L03.039, bio.L03.040]
+    practice: [bio.L03.001, bio.L03.002, bio.L03.003, bio.L03.004, bio.L03.005, bio.L03.006, bio.L03.007, bio.L03.008, bio.L03.009, bio.L03.010, bio.L03.011, bio.L03.039, bio.L03.040, bio.L03.045]
   - id: bio.L03.lesson2
     title: "تقنيات المعمل: كل سؤال وتقنيته"
     hook: "السؤال دايماً: عايز تشوف DNA ولا RNA ولا بروتين ولا خلية ولا كروموسوم؟"
@@ -110,6 +110,14 @@ lessons:
           وتعيد لحد ما الـ DNA يكفي. استخدامات الكتاب: ==neonatal HIV== و herpes encephalitis.
         page: 50
         quote: "Denaturation—DNA template, DNA primers, a heat-stable DNA polymerase, and deoxynucleotide triphosphates (dNTPs) are heated to separate the DNA strands."
+      - kind: reveal
+        prompt: "ليه الـ DNA polymerase في الـ PCR لازم يكون heat-stable؟ وإمتى نبطّل الـ cycles؟"
+        answer: |-
+          لأن كل cycle بنسخّن لحد ما الـ strands تنفصل (denaturation)؛ أي polymerase عادي هيبوظ من أول cycle. الـ heat-stable بيستحمل التسخين والتبريد كل مرة.
+
+          والـ cycles بتتكرر (كل مرة الكمية بتتضاعف) ==لحد ما كمية الـ DNA تبقى كفاية==.
+        page: 50
+        quote: "Heating and cooling cycles continue until the amount of DNA is sufficient."
       - kind: explain
         title: "CRISPR/Cas9: مقص بـ GPS"
         text: |-
@@ -134,6 +142,13 @@ lessons:
         text: "بيجمع الاتنين: ==بروتين== على الـ membrane و probe من ==dsDNA==. بيدوّر على البروتينات اللي بتمسك في الـ DNA، زي الـ transcription factors."
         page: 51
         quote: "Combines Southern and Western blots. Protein is probed with labeled dsDNA. Detects DNA- binding proteins (eg, transcription factors)."
+      - kind: explain
+        title: "Northern و Western بالتفصيل"
+        text: |-
+          - **Northern**: نفس الـ Southern بالظبط بس العينة ==RNA==. بيقيس كمية الـ mRNA وحجمه (يعني الجين شغال قد إيه)، وبيلقط الـ **splicing errors** (mRNA أطول أو أقصر من الطبيعي).
+          - **Western**: البروتين يتفصل بـ gel electrophoresis ويتنقل على membrane، وبعدين ==labeled antibody== يمسك البروتين المطلوب. بيعرّفك البروتين ده موجود ولا لأ و**كميته** قد إيه.
+        page: 51
+        quote: "Sample protein is separated via gel electrophoresis and transferred to a membrane. Labeled antibody is used to bind relevant protein. This helps identify specific protein and determines quantity."
       - kind: check
         question: "You want to know if a transcript has a splicing error. Which blot?"
         options: ["Northern", "Southern", "Western", "Southwestern"]
@@ -175,6 +190,25 @@ lessons:
         alt: "Flow cytometry scatter plot with CD8 on the x-axis and CD3 on the y-axis split into four quadrants; the lower right quadrant, CD8 positive and CD3 negative, is empty."
         page: 52
         quote: "In this example, right lower quadrant is empty because all CD8-expressing cells also express CD3."
+      - kind: table
+        title: "الـ 4 quadrants في رسمة الكتاب"
+        columns: ["Quadrant", "CD8", "CD3"]
+        rows:
+          - ["Left lower", "−", "−"]
+          - ["Right lower (empty)", "+", "−"]
+          - ["Left upper", "−", "+"]
+          - ["Right upper", "+", "+"]
+        hide: [[1, 1], [1, 2], [3, 1], [3, 2]]
+        page: 52
+        quote: "Cells in left lower quadrant ⊝ for both CD8 and CD3."
+      - kind: explain
+        title: "ليه الـ quadrant ده فاضي؟"
+        text: |-
+          الـ data بتترسم **histogram** لو بنقيس حاجة واحدة، أو ==scatter plot== لو بنقارن حاجتين (زي CD3 قصاد CD8).
+
+          كل الـ CD8 T cells هي T cells أصلاً، يعني عليها ==CD3== (علامة كل الـ T cells). فمفيش خلية CD8+ و CD3− ← الـ right lower quadrant فاضي. الـ left upper هي الـ T cells اللي مش CD8 (زي الـ CD4)، والـ left lower خلايا مش T خالص.
+        page: 52
+        quote: "Data are plotted either as histogram (one measure) or scatter plot (any two measures, as shown)."
       - kind: explain
         title: "الكروموسومات"
         text: |-
@@ -185,6 +219,17 @@ lessons:
           و **molecular cloning**: DNA بشري جوه بكتيريا ← insulin و growth hormone.
         page: 53
         quote: "Colchicine is added to cultured cells to disrupt the assembly of mitotic spindles and arrest cells at metaphase of mitosis."
+      - kind: explain
+        title: "الـ spectral karyotyping: كل كروموسوم بلونه"
+        text: |-
+          في الـ karyotype العادي بنفرّق الكروموسومات بالشكل والحجم والـ banding. في الـ **spectral karyotyping** كل كروموسوم ==بيتلوّن== بـ fluorescent probes مختلفة، فأي حتة في غير مكانها تبان فوراً:
+          - **Translocation**: حتة بلون كروموسوم لازقة في كروموسوم تاني (مثال الكتاب: unbalanced بين 17 و 19).
+          - **Duplication**: نسخة زيادة ← trisomy أو tetrasomy (مثال الكتاب: chromosome 8).
+          - **Microdeletion**: مكان ==مافيهوش لون== قصاد نفس المكان منوّر في النسخة التانية.
+
+          يعني بيكشف الـ ==aneuploidies== والـ translocations.
+        page: 53
+        quote: "Chromosomes are “painted” by hybridization with fluorescent probes that distinguish each chromosome from the others. Used to identify aneuploidies and translocations in a karyotype."
       - kind: match
         prompt: "وصّل كل سؤال بالتقنية"
         pairs:
@@ -214,4 +259,4 @@ lessons:
       - "CRISPR: gRNA + Cas9. NHEJ knock-out، HDR knock-in."
       - "SNoW DRoP. Southwestern = DNA-binding proteins."
       - "Flow = خلية خلية (CD4+). ELISA screening. Karyotype بالـ colchicine في metaphase."
-    practice: [bio.L03.012, bio.L03.013, bio.L03.014, bio.L03.015, bio.L03.016, bio.L03.017, bio.L03.018, bio.L03.019, bio.L03.020, bio.L03.021, bio.L03.022, bio.L03.023, bio.L03.024, bio.L03.025, bio.L03.026, bio.L03.027, bio.L03.028, bio.L03.029, bio.L03.030, bio.L03.031, bio.L03.032, bio.L03.033, bio.L03.034, bio.L03.035, bio.L03.036, bio.L03.037, bio.L03.038, bio.L03.041, bio.L03.042, bio.L03.043, bio.L03.044]
+    practice: [bio.L03.012, bio.L03.013, bio.L03.014, bio.L03.015, bio.L03.016, bio.L03.017, bio.L03.018, bio.L03.019, bio.L03.020, bio.L03.021, bio.L03.022, bio.L03.023, bio.L03.024, bio.L03.025, bio.L03.026, bio.L03.027, bio.L03.028, bio.L03.029, bio.L03.030, bio.L03.031, bio.L03.032, bio.L03.033, bio.L03.034, bio.L03.035, bio.L03.036, bio.L03.037, bio.L03.038, bio.L03.041, bio.L03.042, bio.L03.043, bio.L03.044, bio.L03.046, bio.L03.047, bio.L03.048, bio.L03.049, bio.L03.050, bio.L03.051, bio.L03.052, bio.L03.053]

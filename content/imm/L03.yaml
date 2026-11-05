@@ -1616,3 +1616,118 @@ items:
       - "In leukemia it can be beneficial (graft-versus-tumor effect)."
     src: { page: 117, quote: "Grafted immunocompetent T cells proliferate in the immunocompromised host and reject host cells with “foreign” proteins → severe organ dysfunction HLA mismatches ↑ the risk for GVHD Type IV hypersensitivity reaction" }
     status: unverified
+  # ---------- coverage pass: complement figure and margin notes (p104) ----------
+  - id: imm.L03.128
+    kind: cloze
+    topic: complement
+    text: "Opsonin comes from the {{c1::Greek}} for \"{{c2::to prepare for eating}}\"."
+    src: { page: 104, quote: "Opsonin (Greek) = to prepare for eating." }
+    status: unverified
+  - id: imm.L03.129
+    kind: cloze
+    topic: complement
+    text: "{{c1::C3a and C5a}} stimulate mast-cell degranulation; the released {{c2::histamine}} increases endothelial permeability, and {{c3::C5a}} mediates neutrophil chemotaxis (inflammation)."
+    src: { page: 104, quote: "C3a and C5a stimulate mast-cell degranulation Histamine increases endothelial permeability C5a-mediated neutrophil chemotaxis Inflamation" }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L03.130
+    kind: order
+    topic: complement
+    prompt: "Classic complement pathway, from the trigger to cell lysis (book figure)."
+    steps:
+      - "Antigen-antibody complex binds the C1 complex"
+      - "C4 and C2 are cleaved (C4b, C2b)"
+      - "C4b + C2b = C3 convertase cleaves C3 (C3a, C3b)"
+      - "C3b joins to make C5 convertase, which cleaves C5 (C5a, C5b)"
+      - "C5b + C6-C9 = membrane attack complex → cytolysis"
+    src: { page: 104, quote: "Ag-Ab complex Sugar moiety or Antigen C3 convertase C3 convertase C3b amplification loop Polymerized C9 C2 C4 C3 C2b C4b" }
+    status: unverified
+  - id: imm.L03.131
+    kind: card
+    topic: complement
+    front: In the book's complement figure, how does the lectin pathway start, and which components does it share with the classic pathway?
+    back: MBL-MASP binds a sugar moiety on the microbial surface and, like the C1 complex, cleaves C4 and C2 to build the C3 convertase (C4b2b).
+    src: { page: 104, quote: "Lectin—mannose or other sugars on microbe surface." }
+    status: unverified
+  - id: imm.L03.132
+    kind: card
+    topic: complement
+    front: In the book's complement figure, what builds the alternative pathway's C3 convertase, and what is the C3b amplification loop?
+    back: C3b on the microbial surface binds factor B (Bb), helped by properdin or factor D, to make a C3 convertase; each C3b it makes can build more convertase, so C3b amplifies itself.
+    src: { page: 104, quote: "FactorB (Bb) Properdin or factor D Microbial surface Properdin or factor D FactorB (Bb) C3b" }
+    status: unverified
+  - id: imm.L03.133
+    kind: card
+    topic: complement
+    front: Where do the three complement pathways meet, and what are the three end effects in the book's figure?
+    back: "All three (classic, lectin, alternative) make a C3 convertase, then a C5 convertase. End effects: C3b opsonization (phagocyte complement receptor), C3a/C5a inflammation (mast cells, neutrophil chemotaxis), and C5b-C9 membrane attack complex (cell lysis)."
+    src: { page: 104, quote: "C3b Phagocyte Microbe Complement receptor Opsonization C6 C6 C7 C8 C8 C5b C5b Membrane attack complex (MAC) Microbe surface Cell lysis Cytolysis" }
+    status: unverified
+    tags: [high-yield]
+  # ---------- coverage pass: respiratory burst figure (p107) ----------
+  - id: imm.L03.134
+    kind: cloze
+    topic: respiratory-burst
+    text: "NADPH plays a role in both the {{c1::creation}} and the {{c2::neutralization}} of reactive oxygen species."
+    src: { page: 107, quote: "NADPH plays a role in both the creation and neutralization of ROS." }
+    status: unverified
+    tags: [high-yield]
+  - id: imm.L03.135
+    kind: order
+    topic: respiratory-burst
+    prompt: "How the neutrophil protects itself from its own H2O2 (book figure)."
+    steps:
+      - "G6PD (HMP shunt) turns glucose-6-P into 6-phosphogluconolactone and makes NADPH"
+      - "Glutathione reductase uses NADPH to turn oxidized glutathione (GSSG) back into reduced GSH"
+      - "Glutathione peroxidase uses GSH to turn H2O2 into H2O"
+    src: { page: 107, quote: "Glucose-6-phosphate dehydrogenase G6PD Glutathione reductase Catalase/glutathione peroxidase" }
+    status: unverified
+  - id: imm.L03.136
+    kind: card
+    topic: respiratory-burst
+    front: In the respiratory burst figure, what does bacterial catalase do?
+    back: It breaks the bacterium's H2O2 down into H2O + O2, which is why catalase ⊕ organisms can escape a CGD phagocyte.
+    src: { page: 107, quote: "H2O + O2 via bacterial catalase" }
+    status: unverified
+  # ---------- coverage pass: hypersensitivity, vaccines, transfusion ----------
+  - id: imm.L03.137
+    kind: card
+    topic: hypersensitivity-types
+    front: What is the book's image for remembering a type III reaction?
+    back: "Imagine an immune complex as 3 things stuck together: antigen-antibody-complement."
+    src: { page: 111, quote: "In type III reaction, imagine an immune complex as 3 things stuck together: antigen- antibody-complement." }
+    status: unverified
+  - id: imm.L03.138
+    kind: cloze
+    topic: vaccination
+    text: "Vaccination induces an {{c1::active}} immune response ({{c2::humoral and/or cellular}}) to specific pathogens."
+    src: { page: 109, quote: "Vaccination Induces an active immune response (humoral and/or cellular) to specific pathogens." }
+    status: unverified
+  - id: imm.L03.139
+    kind: card
+    topic: vaccination
+    front: How does an mRNA vaccine work?
+    back: A lipid nanoparticle delivers mRNA, causing the host's cells to synthesize a foreign protein (e.g., the spike protein of SARS-CoV-2).
+    src: { page: 109, quote: "A lipid nanoparticle delivers mRNA, causing cells to synthesize foreign protein (eg, spike protein of SARS-CoV-2)." }
+    status: unverified
+  - id: imm.L03.140
+    kind: card
+    topic: vaccination
+    front: What is a toxoid vaccine, and why does it not cause disease?
+    back: A denatured bacterial toxin with an intact receptor binding site; it stimulates the immune system to make antibodies without the potential to cause disease.
+    src: { page: 109, quote: "Denatured bacterial toxin with an intact receptor binding site. Stimulates immune system to make antibodies without potential for causing disease." }
+    status: unverified
+  - id: imm.L03.141
+    kind: card
+    topic: blood-transfusion-reactions
+    front: Which immunologic transfusion reaction in the book's table causes hemolysis?
+    back: Only the acute hemolytic transfusion reaction (Hemolysis = Yes); febrile nonhemolytic, TRALI, allergic and TACO reactions do not.
+    src: { page: 112, quote: "Type II hypersensitivity (anti-ABO antibodies) → complement-mediated intravascular hemolysis Yes" }
+    status: unverified
+  - id: imm.L03.142
+    kind: card
+    topic: blood-transfusion-reactions
+    front: In a febrile nonhemolytic transfusion reaction, what comes from the donor blood and what from the host?
+    back: "Donor: WBCs that release preformed cytokines (during blood storage). Host: anti-HLA, anti-leukocyte IgG reacting with donor WBCs."
+    src: { page: 112, quote: "Cytokines released from donor WBCs during blood storage or triggered by recipient anti-HLA antibodies reacting with donor WBCs" }
+    status: unverified
