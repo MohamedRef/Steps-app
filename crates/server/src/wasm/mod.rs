@@ -14,8 +14,8 @@ use serde::de::DeserializeOwned;
 use serde_json::json;
 use steps_protocol::PROTOCOL_VERSION;
 use steps_protocol::cloud::{
-    ApiError, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, RefreshRequest, Session, SetPassword,
-    normalize_username, valid_username,
+    ApiError, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, RefreshRequest, RemovePassword,
+    Session, SetPassword, normalize_username, valid_username,
 };
 use wasm_bindgen::JsValue;
 use worker::{
@@ -231,7 +231,13 @@ async fn sign_in_google(mut req: Request, env: &Env, cfg: &Config) -> Result<Res
     if !jwks.keys.iter().any(|k| k.kid == kid) {
         jwks = google_jwks(&url, true).await?;
     }
-    let identity = match google::verify_id_token(&sign_in.id_token, &jwks, &cfg.google_client_ids, now) {
+    let identity = match google::verify_id_token(
+        &sign_in.id_token,
+        &jwks,
+        &cfg.google_client_ids,
+        sign_in.nonce.as_deref(),
+        now,
+    ) {
         Ok(id) => id,
         Err(e) => return api_error(ErrorCode::Unauthorized, format!("Google ID token: {e}")),
     };
@@ -241,8 +247,12 @@ async fn sign_in_google(mut req: Request, env: &Env, cfg: &Config) -> Result<Res
     let account_id = tokens::account_id_for_google_sub(&identity.sub);
     let device = sign_in.device.device_id.clone();
     let refresh = tokens::new_refresh(&account_id, &device, tokens::random_bytes().map_err(js_err)?);
-    let register =
-        Register { info: sign_in.device, email: identity.email, refresh_hash: refresh.hash.clone() };
+    let register = Register {
+        info: sign_in.device,
+        email: identity.email,
+        refresh_hash: refresh.hash.clone(),
+        by_password: false,
+    };
     let mut resp = call_do(env, &account_id, Method::Post, "/register", None, Some(&register)).await?;
     if resp.status_code() != 200 {
         return Ok(resp);
@@ -334,7 +344,8 @@ async fn sign_in_password(mut req: Request, env: &Env, cfg: &Config) -> Result<R
     }
     let device = sign_in.device.device_id.clone();
     let refresh = tokens::new_refresh(&account_id, &device, tokens::random_bytes().map_err(js_err)?);
-    let register = Register { info: sign_in.device, email, refresh_hash: refresh.hash.clone() };
+    let register =
+        Register { info: sign_in.device, email, refresh_hash: refresh.hash.clone(), by_password: true };
     let mut resp = call_do(env, &account_id, Method::Post, "/register", None, Some(&register)).await?;
     if resp.status_code() != 200 {
         return Ok(resp);
@@ -367,6 +378,7 @@ async fn manage_login(
         Ok(s) => s,
         Err(resp) => return Ok(resp),
     };
+    let needs_current = pw::needs_current(state.by_password, state.username.as_deref());
     let username = match method {
         Method::Get => state.username,
         Method::Post => {
@@ -374,6 +386,12 @@ async fn manage_login(
                 Ok(b) => b,
                 Err(r) => return r,
             };
+            if needs_current
+                && let Some(refused) =
+                    check_current(env, state.username.as_deref(), set.current_key.as_deref(), claims).await?
+            {
+                return Ok(refused);
+            }
             let username = normalize_username(&set.username);
             if !valid_username(&username) {
                 return api_error(ErrorCode::InvalidRequest, "username must be 3-32 of a-z 0-9 . _ -");
@@ -398,6 +416,17 @@ async fn manage_login(
             Some(username)
         }
         _ => {
+            if needs_current {
+                // DELETE may carry a body: the current password.
+                let text = req.text().await.unwrap_or_default();
+                let remove: RemovePassword = serde_json::from_str(&text).unwrap_or_default();
+                if let Some(refused) =
+                    check_current(env, state.username.as_deref(), remove.current_key.as_deref(), claims)
+                        .await?
+                {
+                    return Ok(refused);
+                }
+            }
             if let Some(old) = &state.username {
                 call_login(env, old, "/clear", &LoginClear { account_id: claims.sub.clone() }).await?;
             }
@@ -411,7 +440,37 @@ async fn manage_login(
             return Ok(resp);
         }
     }
-    Response::from_json(&PasswordLogin { username })
+    Response::from_json(&PasswordLogin { username, needs_current })
+}
+
+/// Checks the current password against the account's username, through its
+/// Login object (so wrong ones count towards its lock). `None` when it is
+/// right; otherwise the answer to send.
+async fn check_current(
+    env: &Env,
+    username: Option<&str>,
+    current_key: Option<&str>,
+    claims: &AccessClaims,
+) -> Result<Option<Response>> {
+    let (Some(username), Some(key)) = (username, current_key.filter(|k| pw::parse_key(k).is_some())) else {
+        return api_error(ErrorCode::WrongPassword, "the current password is needed").map(Some);
+    };
+    let mut resp = call_login(env, username, "/check", &LoginCheck { key: key.to_owned() }).await?;
+    if resp.status_code() != 200 {
+        return Ok(Some(resp));
+    }
+    match resp.json::<Checked>().await? {
+        Checked::Ok { account_id, .. } if account_id == claims.sub => Ok(None),
+        Checked::Ok { .. } | Checked::Wrong => {
+            api_error(ErrorCode::WrongPassword, "the current password is wrong").map(Some)
+        }
+        Checked::Locked { retry_after_ms } => error_response(ApiError {
+            code: ErrorCode::TooManyTries,
+            message: "too many wrong passwords for this username".into(),
+            retry_after_ms: Some(retry_after_ms),
+        })
+        .map(Some),
+    }
 }
 
 fn js_err(e: impl std::fmt::Display) -> worker::Error {

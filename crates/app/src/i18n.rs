@@ -1526,6 +1526,10 @@ pub mod cloud {
     pub const TEMPORARY: &str =
         "دخول مؤقت: هتخرج لوحدك لما تقفل التاب أو التطبيق. لو خلصت قبلها، دوس «اخرج من الجهاز ده».";
     pub const P_WRONG_PASSWORD: &str = "اسم المستخدم أو الباسورد مش مظبوط. جرّب تاني.";
+    pub const P_CURRENT_WRONG: &str = "الباسورد الحالي مش مظبوط. جرّب تاني.";
+    pub const CURRENT_PASSWORD: &str = "الباسورد الحالي";
+    pub const CURRENT_HINT: &str =
+        "إنت داخل بالباسورد، فعشان تغيّره أو تقفله اكتب الحالي. نسيته؟ غيّره من جهاز داخل بجيميلك.";
     pub const P_LOCKED: &str = "محاولات غلط كتير. استنى شوية وجرّب تاني.";
     /// "استنى 5 دقايق": the lock's wait, with the Egyptian number forms.
     pub fn locked(minutes: u64) -> String {

@@ -32,10 +32,10 @@ lessons:
           - ["Rubor + calor", "Vasodilation → ↑ blood flow", "Histamine, prostaglandins, bradykinin, NO"]
           - ["Tumor", "Endothelial contraction → exudate from postcapillary venules", "LTC4/D4/E4, histamine, serotonin, bradykinin"]
           - ["Dolor", "Sensitized sensory nerve endings", "Bradykinin, PGE2, histamine"]
-          - ["Functio laesa", "Inflammation impairs function", "Hand cellulitis: can't make a fist"]
+          - ["Functio laesa", "Inflammation impairs function (hand cellulitis: can't make a fist)", "— (none listed)"]
         hide: [[0, 1], [1, 1], [2, 2]]
         page: 209
-        quote: "Dolor Pain. Sensitization of sensory nerve endings. Mediated by bradykinin, PGE2, histamine."
+        quote: "Rubor and calor Redness and warmth. Vasodilation (relaxation of arteriolar smooth muscle) → ↑ blood flow. Mediated by histamine, prostaglandins, bradykinin, NO. Tumor Swelling. Endothelial contraction/disruption (eg, from tissue damage) → ↑ vascular permeability → leakage of protein-rich fluid from postcapillary venules into interstitial space (exudate) → ↑ interstitial oncotic pressure. Endothelial cell contraction is mediated by leukotrienes (C4, D4, E4), histamine, serotonin, bradykinin. Dolor Pain. Sensitization of sensory nerve endings. Mediated by bradykinin, PGE2, histamine. Functio laesa Loss of function. Inflammation impairs function (eg, inability to make fist due to hand cellulitis)."
       - kind: reveal
         prompt: "الـ histamine والـ bradykinin موجودين في الأحمرار والورم والألم كلهم. إيه اللي بيفرّق الورم عن الأحمرار؟"
         answer: "الأحمرار والسخونية من ==vasodilation== في الـ arterioles (دم أكتر). الورم من ==endothelial contraction== في الـ postcapillary venules، فالـ junctions تفتح والـ protein-rich fluid يخرج (exudate) ويعلّي الـ interstitial oncotic pressure."
@@ -50,6 +50,39 @@ lessons:
           - "↑ PGE2"
           - "↑ Temperature set point"
         why: "الـ macrophage يطلّع IL-1 و TNF، دول يعلّوا الـ COX في الـ hypothalamus، فالـ PGE2 يعلى والـ set point يطلع. عشان كده الـ NSAIDs (COX inhibitors) بتنزّل الحرارة."
+        page: 209
+        quote: "Pyrogens (eg, LPS) induce macrophages to release IL-1 and TNF → ↑ COX activity in perivascular cells of anterior hypothalamus → ↑ PGE2 → ↑ temperature set point."
+      - kind: figure
+        title: "الحرارة بتطلع إزاي"
+        svg: |-
+          <svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="pL02f" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-acc" d="M0,0 L10,5 L0,10 z"/></marker><marker id="pL02g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head-bad" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <rect class="fg-box" x="6" y="14" width="96" height="44" rx="8"/>
+            <text x="18" y="34" class="t-sm t-b">Pyrogen</text>
+            <text x="18" y="50" class="t-sm t-mut">(eg, LPS)</text>
+            <rect class="fg-box" x="132" y="14" width="96" height="44" rx="8"/>
+            <text x="142" y="40" class="t-sm t-b">Macrophage</text>
+            <rect class="fg-acc" x="258" y="14" width="96" height="44" rx="8"/>
+            <text x="270" y="34" class="t-sm t-acc">IL-1</text>
+            <text x="270" y="50" class="t-sm t-acc">TNF</text>
+            <path class="fg-arrow-acc" d="M104 36 L 128 36" marker-end="url(#pL02f)"/>
+            <path class="fg-arrow-acc" d="M230 36 L 254 36" marker-end="url(#pL02f)"/>
+            <path class="fg-arrow-acc" d="M300 60 L 70 100" marker-end="url(#pL02f)"/>
+            <rect class="fg-acc" x="6" y="104" width="96" height="44" rx="8"/>
+            <text x="18" y="124" class="t-sm t-b">↑ COX</text>
+            <text x="18" y="140" class="t-sm t-mut">hypothalamus</text>
+            <rect class="fg-acc" x="132" y="104" width="96" height="44" rx="8"/>
+            <text x="152" y="130" class="t-sm t-b">↑ PGE2</text>
+            <rect class="fg-bad" x="258" y="104" width="96" height="44" rx="8"/>
+            <text x="268" y="124" class="t-sm t-bad">↑ Temperature</text>
+            <text x="268" y="140" class="t-sm t-bad">set point</text>
+            <path class="fg-arrow-acc" d="M104 126 L 128 126" marker-end="url(#pL02f)"/>
+            <path class="fg-arrow-acc" d="M230 126 L 254 126" marker-end="url(#pL02f)"/>
+            <path class="fg-arrow-bad" d="M54 178 L 54 152" marker-end="url(#pL02g)"/>
+            <text x="64" y="178" class="t-sm t-bad">Ibuprofen blocks COX here</text>
+          </svg>
+        caption: "الـ pyrogen بيصحّي الـ macrophage، فيطلّع IL-1 و TNF، ودول يعلّوا الـ COX في الـ anterior hypothalamus، فالـ PGE2 يزيد والـ set point يطلع. الـ ibuprofen بيقفل الـ COX، فالسلسلة تقف قبل الـ PGE2."
+        alt: "A two-row flow chart: pyrogen such as LPS acts on a macrophage, which releases IL-1 and TNF; these raise COX in the anterior hypothalamus, which raises PGE2 and the temperature set point. An arrow marks ibuprofen blocking the COX step."
         page: 209
         quote: "Pyrogens (eg, LPS) induce macrophages to release IL-1 and TNF → ↑ COX activity in perivascular cells of anterior hypothalamus → ↑ PGE2 → ↑ temperature set point."
       - kind: check
@@ -420,6 +453,45 @@ lessons:
           - **Remodeling** (أسبوع لـ 6 شهور وأكتر): fibroblasts. الـ type III بيتبدّل بـ ==type I== ← tensile strength أعلى.
         page: 212
         quote: "Fibroblasts Type III collagen replaced by type I collagen, ↑ tensile strength of tissue"
+      - kind: figure
+        title: "الجرح على خط الزمن"
+        svg: |-
+          <svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg">
+            <defs><marker id="pL02w" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path class="fg-head" d="M0,0 L10,5 L0,10 z"/></marker></defs>
+            <path class="fg-arrow" d="M6 30 L 352 30" marker-end="url(#pL02w)"/>
+            <text x="6" y="20" class="t-sm t-mut">Day 0</text>
+            <text x="92" y="20" class="t-sm t-mut">Day 3</text>
+            <text x="186" y="20" class="t-sm t-mut">1 week</text>
+            <text x="292" y="20" class="t-sm t-mut">6+ months</text>
+            <rect class="fg-bad" x="6" y="40" width="100" height="150" rx="8"/>
+            <text x="14" y="58" class="t-sm t-bad t-b">Inflammatory</text>
+            <text x="14" y="78" class="t-sm">Platelets</text>
+            <text x="14" y="94" class="t-sm">Neutrophils</text>
+            <text x="14" y="110" class="t-sm">Macrophages</text>
+            <text x="14" y="134" class="t-sm t-mut">Clot</text>
+            <text x="14" y="150" class="t-sm t-mut">↑ Permeability</text>
+            <rect class="fg-acc" x="112" y="40" width="118" height="150" rx="8"/>
+            <text x="120" y="58" class="t-sm t-acc t-b">Proliferative</text>
+            <text x="120" y="78" class="t-sm">Fibroblasts</text>
+            <text x="120" y="94" class="t-sm">Myofibroblasts</text>
+            <text x="120" y="110" class="t-sm">Endothelial cells</text>
+            <text x="120" y="134" class="t-sm t-b">Type III collagen</text>
+            <text x="120" y="150" class="t-sm t-mut">Granulation tissue</text>
+            <text x="120" y="166" class="t-sm t-mut">Contraction</text>
+            <text x="120" y="182" class="t-sm t-bad">Vit C, copper</text>
+            <rect class="fg-good" x="236" y="40" width="118" height="150" rx="8"/>
+            <text x="244" y="58" class="t-sm t-good t-b">Remodeling</text>
+            <text x="244" y="78" class="t-sm">Fibroblasts</text>
+            <text x="244" y="102" class="t-sm t-b">III → Type I</text>
+            <text x="244" y="118" class="t-sm t-mut">↑ Tensile strength</text>
+            <text x="244" y="142" class="t-sm t-mut">Collagenases</text>
+            <text x="244" y="158" class="t-sm t-mut">need zinc</text>
+            <text x="244" y="182" class="t-sm t-bad">Zinc</text>
+          </svg>
+        caption: "تلات مراحل متداخلة: الـ inflammatory لحد يوم 3، الـ proliferative من يوم 3 لأسابيع (granulation tissue و type III collagen)، والـ remodeling من أسبوع لـ 6 شهور وأكتر (type III يتبدّل بـ type I). الأحمر تحت كل مرحلة: النقص اللي بيأخّرها."
+        alt: "A timeline from day 0 to over 6 months with three phases: inflammatory (platelets, neutrophils, macrophages; clot, increased permeability) up to day 3; proliferative (fibroblasts, myofibroblasts, endothelial cells; type III collagen, granulation tissue, contraction; delayed by vitamin C and copper deficiency) from day 3 to weeks; remodeling (fibroblasts; type III replaced by type I collagen, increased tensile strength; collagenases need zinc) from 1 week to 6+ months."
+        page: 212
+        quote: "Remodeling (1 week-6+ months after wound) Fibroblasts Type III collagen replaced by type I collagen, ↑ tensile strength of tissue Collagenases (require zinc to function) break down type III collagen Zinc deficiency → delayed wound healing"
       - kind: order
         prompt: "رتّب أنواع الـ collagen في الجرح من الأول للآخر"
         steps:
@@ -483,7 +555,7 @@ lessons:
           - "الـ keloid مش parallel."
           - "الـ type IV مش هو اللي بيتراكم في الـ scars."
       - kind: try
-        items: [path.L02.054, path.L02.055, path.L02.056, path.L02.057]
+        items: [path.L02.054, path.L02.055, path.L02.056]
     recap:
       - "FGF و VEGF و TGF-β للـ angiogenesis. PDGF من الـ platelets للـ fibroblasts."
       - "Inflammatory (3 أيام) ← proliferative (type III، myofibroblasts) ← remodeling (type I)."

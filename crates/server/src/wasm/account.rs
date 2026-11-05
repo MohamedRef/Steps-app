@@ -115,6 +115,7 @@ impl DurableObject for Account {
                 let body: Register = req.json().await?;
                 let expires =
                     devices.register(&body.info, &body.email, &body.refresh_hash, now).map_err(sql_err)?;
+                devices.set_by_password(&body.info.device_id, body.by_password).map_err(sql_err)?;
                 Response::from_json(&Expiry { refresh_expires_ms: expires, email: body.email })
             }
             (Method::Post, "/refresh") => {
@@ -149,7 +150,8 @@ impl DurableObject for Account {
                     return api_error(ErrorCode::DeviceRevoked, "this device was signed out");
                 };
                 let username = AccountLogin::open(&db).username().map_err(sql_err)?;
-                Response::from_json(&AccountLoginState { email, username })
+                let by_password = devices.by_password(&caller).map_err(sql_err)?;
+                Response::from_json(&AccountLoginState { email, username, by_password })
             }
             (Method::Post, "/login") => {
                 let caller = Self::device_header(&req)?;
@@ -158,6 +160,10 @@ impl DurableObject for Account {
                 }
                 let body: LoginName = req.json().await?;
                 AccountLogin::open(&db).set_username(body.username.as_deref()).map_err(sql_err)?;
+                // The password changed or went: its other sessions end (#540).
+                for device in devices.revoke_password_sessions(&caller, now).map_err(sql_err)? {
+                    self.close_device(&device);
+                }
                 Response::empty()
             }
             (Method::Post, "/revoke") => {

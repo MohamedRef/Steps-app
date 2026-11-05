@@ -305,6 +305,51 @@ fn a_refresh_the_hub_refuses_signs_the_device_out() {
 }
 
 /// Starts a signed-in engine against a hub that answers hello with `replies`.
+#[test]
+fn a_password_session_gives_the_current_password_to_change_or_remove_it() {
+    let fake = Fake::start();
+    live_hub(&fake);
+    let s = store();
+    let me = s.device();
+    fake.route("GET /v1/login", 200, r#"{"username":"mohamed","needs_current":true}"#);
+    fake.route(
+        "DELETE /v1/login",
+        401,
+        r#"{"code":"wrong_password","message":"the current password is wrong"}"#,
+    );
+    fake.route("DELETE /v1/login", 200, r#"{"username":null}"#);
+    let mut run = start(&fake, s, Some(session(&me, "acc-1", now() + DAY)), None);
+    run.status("live", |st| st.sync == SyncState::Live);
+    let is_login = |e: &Event| matches!(e, Event::Login(l) if !l.saving);
+    run.send(Command::LoadLogin);
+    let Event::Login(l) = run.event("login", is_login) else { unreachable!() };
+    assert!(l.needs_current, "Settings asks for the current password");
+
+    run.send(Command::RemoveLogin { current: Some("not my password".into()) });
+    let Event::Login(l) = run.event("wrong current", is_login) else { unreachable!() };
+    assert_eq!(l.problem, Some(Problem::CurrentWrong), "a wrong current password says so");
+    assert_eq!(l.username, Some(Some("mohamed".into())), "the password stays on");
+
+    run.send(Command::RemoveLogin { current: Some("the right password".into()) });
+    let Event::Login(l) = run.event("removed", |e| matches!(e, Event::Login(l) if l.saved)) else {
+        unreachable!()
+    };
+    assert_eq!(l.username, Some(None));
+    let sent = fake.requests("DELETE /v1/login");
+    assert_eq!(sent.len(), 2);
+    for (req, password) in sent.iter().zip(["not my password", "the right password"]) {
+        let body: serde_json::Value = serde_json::from_str(&req.body).unwrap();
+        let key = body["current_key"].as_str().expect("the current password's key goes along");
+        assert_eq!(key.len(), 43, "a 32-byte stretched key, not the password: {key}");
+        assert!(!req.body.contains(password));
+    }
+    assert_ne!(sent[0].body, sent[1].body);
+    assert!(
+        fake.requests("POST /v1/auth/refresh").is_empty(),
+        "a wrong current password is not an expired token"
+    );
+}
+
 fn hub_says(replies: impl Fn() -> Vec<Reply> + Send + 'static) -> (Fake, Run) {
     let fake = Fake::start();
     fake.on_message(move |m| if matches!(m, ClientMsg::Hello { .. }) { replies() } else { Vec::new() });
