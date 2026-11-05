@@ -83,6 +83,39 @@ jobs:
               --body "The nightly coverage job failed on ${GITHUB_SHA::7}: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
           fi
 
+  later-dates:
+    name: Tests on later dates (tomorrow, next year)
+    # A test pinned to today's date passes the day it is written and turns
+    # every pull request red the next morning (2026-11-05: the changelog
+    # test). This runs every test with the clock moved forward, so such a
+    # test is caught here at night, not on everyone's PRs.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v5
+      - name: libfaketime
+        run: sudo apt-get update && sudo apt-get install -y faketime
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: later-dates
+          save-if: ${{ github.ref == 'refs/heads/main' }}
+      - name: Every test, 37 hours on (past midnight) and 400 days on (another year)
+        run: scripts/test-later-dates.sh '+37h' '+400d'
+      - name: Open an issue when a test depends on today's date
+        if: failure() && github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Nightly: a test depends on today's date"
+          if [ -z "$(gh issue list -R "$GITHUB_REPOSITORY" --state open --search "in:title \"$title\"" --json number --jq '.[].number')" ]; then
+            gh issue create -R "$GITHUB_REPOSITORY" --title "$title" \
+              --body "A test failed with the clock moved forward on ${GITHUB_SHA::7}: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID. Use dates relative to now (or a fixed clock) in that test (docs/RUN.md § Tests and coverage)."
+          fi
+
   web:
     name: Web app compiles (wasm32)
     runs-on: ubuntu-24.04
