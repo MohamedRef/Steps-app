@@ -45,6 +45,18 @@ jobs:
       # written with. The pull request's title and body are checked here;
       # merge with them as the squash message (docs/RUN.md), so branch
       # commit trailers never reach main.
+      # A merge through `gh api .../merge` or the gh CLI adds a generated-by
+      # line to the commit on main (#616-#625). main can't be rewritten, so
+      # this only warns; merge with the GitHub MCP tool (HANDBOOK section 7).
+      - name: No assistant names in the merge commit on main
+        if: github.event_name == 'push'
+        run: |
+          tool="cl""aude|anthr""opic"
+          hits="$(git log -1 --format=%B | grep -iE "$tool" | grep -viE "(${tool%%|*})[ -]bernard" || true)"
+          if [ -n "$hits" ]; then
+            echo "::warning title=Merge message names a tool::$(git log -1 --format=%h) on main names a tool in its message. Merge with the GitHub MCP merge tool and your own commit_message, never gh api .../merge (HANDBOOK section 7)."
+            echo "$hits" | head -5
+          fi
       - name: No assistant names in the pull request's text
         if: github.event_name == 'pull_request'
         # Read live, not from the event, so editing the text and re-running

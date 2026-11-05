@@ -160,8 +160,7 @@ Things to know:
 4. **Update this handbook** if the change touches anything it describes, and §12 if it changes the state, the roadmap or the known issues.
 5. Keep [RUN.md](RUN.md) current when a command or setup step changes.
 6. `git merge origin/main` (no rebase), `just check`, push, open the PR against `main`.
-7. When CI and the screens check are green and there are no conflicts, squash-merge at once with the PR's title and body as the commit message:
-   `gh api -X PUT repos/MohamedRef/Steps-app/pulls/N/merge -f merge_method=squash -f sha=<head> -f commit_title="<title> (#N)" -F commit_message=@body.txt`
+7. When CI and the screens check are green and there are no conflicts, squash-merge at once with the GitHub MCP merge tool (`merge_pull_request`, `merge_method: squash`, `expectedHeadSha`), giving `commit_title` = "<PR title> (#N)" and a short `commit_message` you write yourself (what changed, `Fixes #N`). **Never merge with `gh api .../merge` or the `gh` CLI, and never with the plain "merge" method:** those paths add a generated-by line or the branch's co-author trailers to the commit on `main` (#616–#625), and `main`'s history can't be rewritten. CI warns on `main` when a merge commit's message names a tool.
 8. If `main` goes red, fixing it comes before anything else.
 
 ## 8. Content pipeline and schema
