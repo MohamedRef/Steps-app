@@ -22,6 +22,7 @@ concurrency:
 
 permissions:
   contents: read
+  pull-requests: read
 
 env:
   CARGO_TERM_COLOR: always
@@ -46,13 +47,17 @@ jobs:
       # commit trailers never reach main.
       - name: No assistant names in the pull request's text
         if: github.event_name == 'pull_request'
+        # Read live, not from the event, so editing the text and re-running
+        # the job is enough.
         env:
-          PR_TEXT: ${{ github.event.pull_request.title }} ${{ github.event.pull_request.body }}
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
           tool="cl""aude|anthr""opic"
-          hits="$(printf '%s\n' "$PR_TEXT" | grep -iE "$tool" | grep -viE "(${tool%%|*})[ -]bernard" || true)"
+          text="$(gh api "repos/$GITHUB_REPOSITORY/pulls/$PR_NUMBER" --jq '.title + "\n" + (.body // "")')"
+          hits="$(printf '%s\n' "$text" | grep -iE "$tool" | grep -viE "(${tool%%|*})[ -]bernard" || true)"
           if [ -n "$hits" ]; then
-            echo "::error title=Assistant named::The pull request's title or body names an assistant (Mohamed: never on GitHub). Edit it and re-run:"
+            echo "::error title=Assistant named::The pull request's title or body names an assistant (Mohamed: never on GitHub). Edit it (the gh CLI adds a footer on every write; edit with the GitHub web page or API tools that don't) and re-run this job:"
             echo "$hits" | head -10
             exit 1
           fi
