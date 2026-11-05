@@ -178,6 +178,10 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     bdi { dir: "ltr", lang: "en", "{lecture_title}" }
                 }
             }
+            // B&B and UWorld for this lecture, at the start of the lesson.
+            if i == 0 {
+                crate::qbank::LessonStrip { lecture: super::lecture_of(&lesson.id).to_string() }
+            }
             for (k , st) in lesson.steps.iter().enumerate().filter(|(k, _)| seen.read()[*k]) {
                 Stage {
                     key: "{k}",

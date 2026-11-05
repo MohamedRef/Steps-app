@@ -47,6 +47,7 @@ fn Host(p: With) -> Element {
         crate::browser_fixture::Shell { screen: crate::Screen::Learn, focus: false,
             match p.show {
                 "section" => rsx! { LectureSection { lecture: "cvs.L04" } },
+                "strip" => rsx! { LessonStrip { lecture: "cvs.L04" } },
                 _ => rsx! { LookupWith { text: p.text } },
             }
         }
@@ -59,7 +60,7 @@ fn LookupWith(text: &'static str) -> Element {
     // result block with the same lookup.
     let found = lookup(text);
     rsx! {
-        LookupPage {}
+        IndexPage {}
         if let Some((l, _)) = found { span { class: "probe", "{l}" } }
     }
 }
@@ -82,14 +83,71 @@ fn a_lecture_lists_its_videos_with_copy_buttons() {
     assert!(html.contains(&esc(tx::TITLE)), "{html}");
     assert_eq!(html.matches(r#"class="qb-set""#).count(), lec.sets.len());
     let with_qids = lec.sets.iter().filter(|s| !s.qids.is_empty()).count();
-    assert_eq!(html.matches("tap-chip qb-copy").count(), with_qids);
+    assert_eq!(html.matches("tap-chip qb-copy").count(), with_qids + 1, "each video and the whole lecture");
     assert!(html.contains("Atherosclerosis"));
     assert!(html.contains(tx::FIND));
 }
 
 #[test]
-fn the_lookup_page_asks_for_a_number() {
+fn the_index_page_searches_by_name_or_number() {
     let html = render("lookup", "");
-    assert!(html.contains(tx::PAGE_TITLE) && html.contains(r#"inputmode="numeric""#), "{html}");
+    assert!(html.contains(tx::PAGE_TITLE) && html.contains(tx::PLACEHOLDER), "{html}");
     assert!(html.contains(&esc(tx::SOURCE)));
+}
+
+#[test]
+fn the_index_lists_every_course_with_a_tick_and_a_copy_button() {
+    let html = render("lookup", "");
+    let courses = Library::get()
+        .program
+        .courses
+        .iter()
+        .filter(|c| course_lectures(&c.id).any(|l| l.count() > 0))
+        .count();
+    assert!(courses >= 15, "{courses}");
+    assert_eq!(html.matches("qb-node qb-course").count(), courses);
+    assert_eq!(html.matches(r#"class="qb-pick""#).count(), courses, "closed courses show no lectures");
+    assert!(html.matches("tap-chip qb-copy").count() >= courses);
+    assert!(html.contains("qb-basket") && html.contains(&esc(tx::BASKET_EMPTY)), "{html}");
+    assert!(
+        html.contains(tx::SHOW_BASKET) && !html.contains(r#"class="search qb-paste""#),
+        "the basket opens on a tap"
+    );
+}
+
+#[test]
+fn a_lesson_opens_with_its_lectures_videos_and_qids() {
+    let lec = data().lecture("cvs.L04").unwrap();
+    let html = render("strip", "");
+    assert!(
+        html.contains(&tx::videos(lec.sets.len())) && html.contains(&tx::questions(lec.count())),
+        "{html}"
+    );
+    assert!(html.contains("qb-copy") && html.contains(tx::VIDEOS));
+    assert_eq!(html.matches(r#"class="qb-set""#).count(), 0, "the list opens on a tap");
+}
+
+#[test]
+fn the_basket_takes_ticked_nodes_in_book_order_and_pasted_qids() {
+    let lec = data().lecture("cvs.L04").unwrap();
+    let first = lec.sets.iter().find(|s| !s.qids.is_empty()).unwrap();
+    let none = BTreeSet::new();
+    let picked = BTreeSet::from([format!("v:{}", first.video)]);
+    assert_eq!(basket(&picked, "", &none, true), first.qids);
+    let whole = BTreeSet::from(["l:cvs.L04".to_string()]);
+    assert_eq!(basket(&whole, "7 8", &none, true).len(), lec.count() + 2);
+    let done = BTreeSet::from([first.video.clone()]);
+    assert_eq!(basket(&whole, "", &done, true).len(), lec.count() - first.qids.len(), "done videos left out");
+    assert_eq!(basket(&whole, "", &done, false).len(), lec.count(), "unless he keeps them");
+    let course = BTreeSet::from(["c:cvs".to_string()]);
+    let all_cvs: usize = course_lectures("cvs").map(LectureSets::count).sum();
+    assert_eq!(basket(&course, "", &none, true).len(), all_cvs);
+    let tests = cut(&basket(&course, "", &none, true), TestPrefs::default(), 1);
+    assert!(tests.iter().all(|t| t.len() <= MAX_TEST) && tests.concat().len() == all_cvs);
+}
+
+#[test]
+fn only_a_whole_number_looks_a_qid_up() {
+    assert!(lookup("Atherosclerosis").is_none());
+    assert!(lookup("12 34").is_none(), "two numbers are a paste, not a lookup");
 }
