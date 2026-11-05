@@ -38,6 +38,12 @@ pub const NEW_THING: Noun =
         one: "حاجة جديدة", two: "حاجتين جداد", few: "حاجات جديدة", many: "حاجة جديدة"
     };
 pub const TIME: Noun = Noun { one: "مرة", two: "مرتين", few: "مرات", many: "مرة" };
+/// A UWorld custom test.
+pub const TEST: Noun = Noun {
+    one: "امتحان واحد", two: "امتحانين", few: "امتحانات", many: "امتحان"
+};
+pub const VIDEO: Noun =
+    Noun { one: "فيديو واحد", two: "فيديوهين", few: "فيديوهات", many: "فيديو" };
 pub const CASE: Noun =
     Noun { one: "حالة واحدة", two: "حالتين", few: "حالات", many: "حالة" };
 

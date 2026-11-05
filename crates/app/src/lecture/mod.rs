@@ -146,7 +146,7 @@ pub fn LecturePage(id: String) -> Element {
         return rsx! { crate::notes::NotesList {} };
     }
     if id == crate::qbank::PAGE {
-        return rsx! { crate::qbank::LookupPage {} };
+        return rsx! { crate::qbank::IndexPage {} };
     }
     let ui = use_context::<Ui>();
     let lib = Library::get();

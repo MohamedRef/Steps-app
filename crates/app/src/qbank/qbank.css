@@ -20,3 +20,54 @@ button.qb-copy { flex: none; min-block-size: var(--target, 48px); display: inlin
 .qb-found p { margin: 0; }
 .qb-found .btn { min-block-size: var(--target, 48px); }
 .qb-note { margin-block-start: var(--sp-4); }
+
+/* The index (IndexPage): courses › lectures › videos, each with a ✓ for the
+   basket and a copy button; the basket sticks to the bottom of the page. */
+.qb-tree, .qb-kids { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
+.qb-tree { margin-block-start: var(--sp-3); }
+.qb-course { border: 1px solid var(--card-border, var(--line)); border-radius: var(--radius-card); background: var(--surface); overflow: clip; }
+.qb-course > .qb-kids { padding: var(--sp-1) var(--sp-2) var(--sp-2); gap: var(--sp-1); background: var(--bg); border-block-start: 1px solid var(--line); }
+.qb-node .qb-kids .qb-kids { margin-inline-start: var(--sp-4); gap: var(--sp-1); }
+.qb-row { display: flex; align-items: center; gap: var(--sp-2); padding: var(--sp-2) var(--sp-3); min-block-size: var(--row); }
+.qb-kids .qb-row { padding-inline: var(--sp-1); }
+.qb-pick { inline-size: 22px; block-size: 22px; margin: 0; flex: none; accent-color: var(--accent); }
+.qb-name { flex: 1; min-inline-size: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+  font: inherit; color: inherit; text-align: start; background: none; border: 0; padding: 0; cursor: pointer;
+  min-block-size: var(--target, 48px); justify-content: center; }
+.qb-title { font-weight: 600; overflow-wrap: anywhere; }
+.qb-meter { display: block; inline-size: min(10rem, 100%); block-size: 4px; border-radius: 2px; background: var(--surface-2, var(--soft)); overflow: hidden; }
+.qb-meter > span { display: block; block-size: 100%; background: var(--good); }
+.qb-set .qb-pick { margin-inline-end: calc(var(--sp-1) * -1); }
+.qb-panel { display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-2) var(--sp-3) var(--sp-3); }
+.qb-prefs { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-4); }
+.qb-size { display: flex; align-items: center; gap: var(--sp-2); }
+.qb-size input { inline-size: 9rem; accent-color: var(--accent); }
+.qb-split { display: flex; gap: var(--sp-1); }
+.qb-split .chip[aria-pressed="true"] { background: var(--accent-soft); border-color: transparent; color: var(--accent-ink); font-weight: 600; }
+.qb-check { display: inline-flex; align-items: center; gap: var(--sp-1); min-block-size: var(--target, 48px); cursor: pointer; }
+.qb-check input { inline-size: 18px; block-size: 18px; margin: 0; accent-color: var(--accent); }
+.qb-reshuffle { min-block-size: var(--target, 48px); }
+.qb-tests-line { margin: 0; }
+.qb-tests { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+.qb-test { min-block-size: var(--target, 48px); display: inline-flex; align-items: center; }
+.qb-basket { position: sticky; inset-block-end: var(--sp-2); z-index: 2; margin-block-start: var(--sp-4);
+  display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-3);
+  border: 1.5px solid var(--accent); border-radius: var(--radius-card); background: var(--surface);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.16); }
+.qb-basket-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-2); }
+.qb-basket-head > b { margin-inline-end: auto; }
+.qb-basket-toggle { min-block-size: var(--target, 48px); }
+.qb-basket-opts { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-2); }
+.qb-basket[data-open="true"] { max-block-size: 75dvh; overflow-y: auto; }
+.qb-basket p { margin: 0; }
+.qb-paste { margin: 0; }
+.qb-paste > span { color: var(--muted); font-weight: 600; }
+
+/* The top of a lesson (LessonStrip). */
+.qb-strip { display: flex; flex-direction: column; gap: var(--sp-2); padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--radius-control, var(--radius)); background: var(--accent-soft); color: var(--accent-ink); }
+.qb-strip-row { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); }
+.qb-strip-text { flex: 1; min-inline-size: 12rem; font-size: var(--fs-sm); font-weight: 600; }
+.qb-strip-list { min-block-size: var(--target, 48px); }
+.qb-strip .qb-panel { padding: 0; }
+.qb-strip .qb-set { background: var(--surface); }
