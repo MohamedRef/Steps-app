@@ -98,6 +98,10 @@ jobs:
         run: cargo run -q -p steps-tools -- validate
       - name: Build
         if: steps.due.outputs.go == 'true'
+        env:
+          # The Web OAuth client id (public; docs/WEB.md). Empty: the web
+          # app builds without Google sign-in.
+          STEPS_WEB_GOOGLE_CLIENT_ID: ${{ vars.STEPS_WEB_GOOGLE_CLIENT_ID }}
         run: scripts/web/build.sh
       - name: Check the Cloudflare token
         id: ready
