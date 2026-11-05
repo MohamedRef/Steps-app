@@ -155,6 +155,7 @@ fn problem_text(p: Problem) -> &'static str {
         Problem::Outdated => tx::P_OUTDATED,
         Problem::ClockOff => tx::P_CLOCK,
         Problem::WrongPassword => tx::P_WRONG_PASSWORD,
+        Problem::CurrentWrong => tx::P_CURRENT_WRONG,
         Problem::Locked(_) => tx::P_LOCKED,
         Problem::UsernameTaken => tx::P_TAKEN,
         Problem::BadUsername => tx::P_BAD_USERNAME,
@@ -331,6 +332,11 @@ fn LoginCard() -> Element {
     let mut username = use_signal(String::new);
     let mut password = use_signal(String::new);
     let mut again = use_signal(String::new);
+    // A session that signed in with the password gives the current one to
+    // change or remove it (Steps Cloud checks it).
+    let mut old = use_signal(String::new);
+    let needs_current = login.needs_current && current.is_some();
+    let given = move || if needs_current { Some(old.peek().clone()) } else { None };
     let mut mismatch = use_signal(|| false);
     // The form starts from the username the account has.
     let known = current.clone();
@@ -348,10 +354,25 @@ fn LoginCard() -> Element {
         if saved {
             password.set(String::new());
             again.set(String::new());
+            old.set(String::new());
             editing.set(false);
         }
     }));
-    let ready = !username.read().trim().is_empty() && !password.read().is_empty() && !again.read().is_empty();
+    let ready = !username.read().trim().is_empty()
+        && !password.read().is_empty()
+        && !again.read().is_empty()
+        && (!needs_current || !old.read().is_empty());
+    let current_field = rsx! {
+        label { class: "field",
+            span { {tx::CURRENT_PASSWORD} }
+            input {
+                r#type: "password", name: "current-password", dir: "ltr", autocomplete: "current-password",
+                value: "{old}",
+                oninput: move |e| old.set(e.value()),
+            }
+            span { class: "field-hint", {tx::CURRENT_HINT} }
+        }
+    };
     let problem = if mismatch() { Some(Problem::Mismatch) } else { login.problem };
     rsx! {
         section { class: "card pw-card",
@@ -382,8 +403,13 @@ fn LoginCard() -> Element {
                             return;
                         }
                         mismatch.set(false);
-                        cloud.send(Command::SetLogin { username: username.peek().clone(), password: password.peek().clone() });
+                        cloud.send(Command::SetLogin {
+                            username: username.peek().clone(),
+                            password: password.peek().clone(),
+                            current: given(),
+                        });
                     },
+                    if needs_current { {current_field.clone()} }
                     label { class: "field",
                         span { {tx::USERNAME} }
                         input {
@@ -421,8 +447,13 @@ fn LoginCard() -> Element {
                     }
                 }
             } else if current.is_some() {
+                if needs_current { {current_field} }
                 div { class: "sync-actions",
-                    button { class: "btn btn-danger", disabled: login.saving, onclick: move |_| cloud.send(Command::RemoveLogin), {tx::PW_REMOVE} }
+                    button { class: "btn btn-danger",
+                        disabled: login.saving || (needs_current && old.read().is_empty()),
+                        onclick: move |_| cloud.send(Command::RemoveLogin { current: given() }),
+                        {tx::PW_REMOVE}
+                    }
                     button { class: "btn btn-secondary", onclick: move |_| editing.set(true), {tx::PW_CHANGE} }
                 }
             }

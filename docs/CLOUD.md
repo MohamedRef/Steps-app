@@ -112,7 +112,7 @@ Sync in one paragraph: the device sends `hello { last_seq }`, gets the missing o
 
 ### 4.1 Username and password
 
-For a borrowed laptop or a library computer, where your Gmail isn't. Set a username and password once from a signed-in device (Settings › المزامنة › «الدخول باسم مستخدم وباسورد»); then on any device, signed out, type them in the same screen. It is the same account as Google, so everything syncs down, including where each lesson stands. Tick «الجهاز ده مش بتاعي» on someone else's device: the session then lives only in that browser tab (`sessionStorage`) or, in the Mac and Android apps, in memory, and ends when it closes. Sign out there when you're done, or from your phone's «أجهزتك».
+For a borrowed laptop or a library computer, where your Gmail isn't. Set a username and password once from a signed-in device (Settings › المزامنة › «الدخول باسم مستخدم وباسورد»); then on any device, signed out, type them in the same screen. It is the same account as Google, so everything syncs down, including where each lesson stands. Tick «الجهاز ده مش بتاعي» on someone else's device: the session then lives only in that browser tab (`sessionStorage`) or, in the Mac and Android apps, in memory, and ends when it closes. Sign out there when you're done, or from your phone's «أجهزتك». A session that signed in with the password can change or turn off the password only by giving the current one (the Worker checks it against the username's Login object, so wrong ones count towards its lock). A Google-signed-in device needs none, so a forgotten password is reset from the phone.
 
 How the password is kept safe:
 

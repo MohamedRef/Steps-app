@@ -7,7 +7,8 @@ use std::time::Duration;
 
 use steps_protocol::client::{Backoff, Effect, Phase, SyncClient};
 use steps_protocol::cloud::{
-    DeviceInfo, DeviceSummary, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, Session, SetPassword,
+    DeviceInfo, DeviceSummary, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, RemovePassword,
+    Session, SetPassword,
 };
 use steps_protocol::sync::{ClientMsg, MAX_OPS_PER_PUSH, ServerMsg};
 use tokio::sync::mpsc::{UnboundedReceiver, UnboundedSender};
@@ -234,10 +235,18 @@ impl Engine {
                 let result = self.authed(|api, access| async move { api.login(&access).await }).await;
                 self.login_answer(result);
             }
-            Command::SetLogin { username, password } => self.set_login(username, password).await,
-            Command::RemoveLogin => {
+            Command::SetLogin { username, password, current } => {
+                self.set_login(username, password, current).await
+            }
+            Command::RemoveLogin { current } => {
                 self.login_busy();
-                let result = self.authed(|api, access| async move { api.remove_login(&access).await }).await;
+                let Some(current_key) = self.current_key(current).await else { return };
+                let body = RemovePassword { current_key };
+                let call = move |api: Api, access: String| {
+                    let body = body.clone();
+                    async move { api.remove_login(&access, &body).await }
+                };
+                let result = self.authed(call).await;
                 self.login_answer(result);
             }
             Command::SignOut => {
@@ -415,11 +424,15 @@ impl Engine {
         match result {
             Some(Ok(l)) => {
                 self.login.username = Some(l.username);
+                self.login.needs_current = l.needs_current;
                 self.login.saved = was_saving;
                 self.login.problem = None;
             }
             Some(Err(e)) => {
-                self.login.problem = Some(password_problem(&e).unwrap_or_else(|| {
+                // Here a wrong password can only be the current one.
+                let p = password_problem(&e)
+                    .map(|p| if p == Problem::WrongPassword { Problem::CurrentWrong } else { p });
+                self.login.problem = Some(p.unwrap_or_else(|| {
                     self.cloud_error(&e);
                     self.problem.unwrap_or(Problem::Server)
                 }));
@@ -429,7 +442,25 @@ impl Engine {
         self.events.send(Event::Login(self.login.clone())).ok();
     }
 
-    async fn set_login(&mut self, username: String, password: String) {
+    /// The current password's key for the account's username (it may differ
+    /// from a new username being set). `Some(None)` when none was given; `None`
+    /// when stretching failed (the reason is shown).
+    async fn current_key(&mut self, current: Option<String>) -> Option<Option<String>> {
+        let Some(current) = current.filter(|c| !c.is_empty()) else { return Some(None) };
+        let Some(Some(name)) = self.login.username.clone() else { return Some(None) };
+        match stretch(name, current).await {
+            Ok(k) => Some(Some(k)),
+            Err(e) => {
+                crate::diag::report!("checking the current password: {e}");
+                self.login.saving = false;
+                self.login.problem = Some(Problem::Server);
+                self.events.send(Event::Login(self.login.clone())).ok();
+                None
+            }
+        }
+    }
+
+    async fn set_login(&mut self, username: String, password: String, current: Option<String>) {
         if let Err(why) = password::check_new(&username, &password) {
             self.login.problem = Some(match why {
                 Invalid::Username => Problem::BadUsername,
@@ -450,7 +481,8 @@ impl Engine {
                 return;
             }
         };
-        let body = SetPassword { username, password_key: key };
+        let Some(current_key) = self.current_key(current).await else { return };
+        let body = SetPassword { username, password_key: key, current_key };
         let call = move |api: Api, access: String| {
             let body = body.clone();
             async move { api.set_login(&access, &body).await }

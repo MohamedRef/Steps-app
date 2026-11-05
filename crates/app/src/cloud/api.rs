@@ -6,8 +6,8 @@
 use serde::Serialize;
 use serde::de::DeserializeOwned;
 use steps_protocol::cloud::{
-    ApiError, DeviceList, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, RefreshRequest, Session,
-    SetPassword,
+    ApiError, DeviceList, ErrorCode, GoogleSignIn, PasswordLogin, PasswordSignIn, RefreshRequest,
+    RemovePassword, Session, SetPassword,
 };
 
 #[derive(Clone, Debug, PartialEq)]
@@ -91,8 +91,12 @@ impl Api {
         read(self.call(Verb::Post, "/v1/login", Some(access), Some(json(body)?)).await)
     }
 
-    pub async fn remove_login(&self, access: &str) -> Result<PasswordLogin, CloudError> {
-        read(self.call(Verb::Delete, "/v1/login", Some(access), None).await)
+    pub async fn remove_login(
+        &self,
+        access: &str,
+        body: &RemovePassword,
+    ) -> Result<PasswordLogin, CloudError> {
+        read(self.call(Verb::Delete, "/v1/login", Some(access), Some(json(body)?)).await)
     }
 
     pub async fn refresh(&self, refresh_token: &str) -> Result<Session, CloudError> {
@@ -138,7 +142,12 @@ impl Api {
         crate::platform::time::blocking(move || {
             let res = match (verb, body) {
                 (Verb::Get, _) => with_auth(agent.get(&url), bearer).call(),
-                (Verb::Delete, _) => with_auth(agent.delete(&url), bearer).call(),
+                // ureq leaves a DELETE's body off unless told to send it.
+                (Verb::Delete, Some(body)) => with_auth(agent.delete(&url), bearer)
+                    .header("content-type", "application/json")
+                    .force_send_body()
+                    .send(body.as_bytes()),
+                (Verb::Delete, None) => with_auth(agent.delete(&url), bearer).call(),
                 (Verb::Post, Some(body)) => with_auth(agent.post(&url), bearer)
                     .header("content-type", "application/json")
                     .send(body.as_bytes()),

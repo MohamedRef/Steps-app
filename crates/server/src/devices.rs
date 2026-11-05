@@ -28,7 +28,16 @@ CREATE TABLE IF NOT EXISTS devices (
 /// in as numbered steps through [`crate::sql::migrate`].
 pub fn migrate(db: &impl Sql) -> Result<(), SqlError> {
     db.exec_batch(SCHEMA)?;
-    crate::sql::migrate(db, "devices_schema", &["ALTER TABLE devices ADD COLUMN retired_hash TEXT"])
+    crate::sql::migrate(
+        db,
+        "devices_schema",
+        &[
+            "ALTER TABLE devices ADD COLUMN retired_hash TEXT",
+            // Signed in with the username and password (not Google): such a
+            // device must give the current password to change it.
+            "ALTER TABLE devices ADD COLUMN by_password INTEGER NOT NULL DEFAULT 0",
+        ],
+    )
 }
 
 #[derive(Debug, PartialEq, Eq, thiserror::Error)]
@@ -202,6 +211,22 @@ impl<'a, S: Sql> Devices<'a, S> {
             .db
             .exec("SELECT 1 FROM devices WHERE device_id = ? AND revoked_ms IS NULL", &[device.into()])?;
         Ok(!rows.is_empty())
+    }
+
+    /// Notes how the device signed in: with the username and password, or
+    /// with Google. Called after every [`Self::register`].
+    pub fn set_by_password(&self, device: &str, by_password: bool) -> Result<(), SqlError> {
+        self.db.exec(
+            "UPDATE devices SET by_password = ? WHERE device_id = ?",
+            &[u64::from(by_password).into(), device.into()],
+        )?;
+        Ok(())
+    }
+
+    /// Whether the device signed in with the username and password.
+    pub fn by_password(&self, device: &str) -> Result<bool, SqlError> {
+        let rows = self.db.exec("SELECT by_password FROM devices WHERE device_id = ?", &[device.into()])?;
+        Ok(rows.first().and_then(|r| r.first()).and_then(Value::as_u64).unwrap_or(0) != 0)
     }
 
     /// The email a device signed in with, while it is signed in.
