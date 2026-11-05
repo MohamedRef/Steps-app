@@ -9,6 +9,8 @@ mod demo;
 mod mistakes;
 mod period;
 mod scores;
+mod uworld;
+pub use uworld::reload as reload_uworld;
 
 use std::collections::BTreeMap;
 

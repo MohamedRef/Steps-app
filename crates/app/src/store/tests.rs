@@ -54,6 +54,22 @@ fn settings_by_prefix() {
 }
 
 #[test]
+fn a_deleted_setting_is_gone_and_queued_for_sync() {
+    let s = Store::open_in_memory().unwrap();
+    s.put_setting("uw.miss.1", &1).unwrap();
+    s.put_setting("uw.miss.2", &2).unwrap();
+    let before = s.outbox_len();
+    s.delete_setting("uw.miss.1").unwrap();
+    s.delete_setting("uw.miss.never").unwrap();
+    assert_eq!(s.setting::<i32>("uw.miss.1"), None);
+    assert_eq!(s.settings_with_prefix::<i32>("uw.miss."), vec![("uw.miss.2".to_string(), 2)]);
+    // The tombstone replaces the row's queued write; a key never set queues nothing.
+    assert!(s.outbox_len() <= before + 1);
+    s.put_setting("uw.miss.1", &3).unwrap();
+    assert_eq!(s.setting::<i32>("uw.miss.1"), Some(3), "logging it again brings it back");
+}
+
+#[test]
 fn a_write_and_its_outbox_entry_land_together() {
     let s = Store::open_in_memory().unwrap();
     s.conn.lock().unwrap().execute("DROP TABLE sync_outbox", []).unwrap();

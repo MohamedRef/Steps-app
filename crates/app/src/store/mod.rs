@@ -429,6 +429,18 @@ impl Store {
         self.put_lww("settings", "key", key, None, &serde_json::to_string(value)?, false, &hlc)
     }
 
+    /// Deletes a synced setting on every device (a tombstone). A key never
+    /// set is left alone.
+    pub fn delete_setting(&self, key: &str) -> Result<()> {
+        let value: Option<String> = {
+            let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+            conn.query_row("SELECT value FROM settings WHERE key = ?1", [key], |r| r.get(0)).optional()?
+        };
+        let Some(value) = value else { return Ok(()) };
+        let hlc = self.tick(now_ms());
+        self.put_lww("settings", "key", key, None, &value, true, &hlc)
+    }
+
     /// A setting for this device only (never synced, never imported), kept
     /// in `meta` under `local.<key>`.
     pub fn local_setting<T: DeserializeOwned>(&self, key: &str) -> Option<T> {
