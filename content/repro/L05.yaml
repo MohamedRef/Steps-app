@@ -76,8 +76,28 @@ items:
   - id: repro.L05.004
     kind: cloze
     topic: gnrh-analogs
-    text: "GnRH analogs: {{c1::pulsatile}} for pregnancy, {{c2::continuous}} for cancer. Adverse effects: hypogonadism, ↓ libido, erectile dysfunction, nausea, vomiting."
+    text: "GnRH analogs: {{c1::pulsatile}} for pregnancy, {{c2::continuous}} for cancer."
     src: { page: 673, quote: "Pulsatile for pregnancy, continuous for cancer. ADVERSE EFFECTS Hypogonadism, ↓ libido, erectile dysfunction, nausea, vomiting." }
+    status: unverified
+  - id: repro.L05.043
+    kind: enumerate
+    topic: gnrh-analogs
+    prompt: Enumerate the adverse effects of GnRH analogs (leuprolide, goserelin, nafarelin, histrelin).
+    points:
+      - Hypogonadism
+      - ↓ libido
+      - Erectile dysfunction
+      - Nausea
+      - Vomiting
+    pass: 4
+    src: { page: 673, quote: "ADVERSE EFFECTS Hypogonadism, ↓ libido, erectile dysfunction, nausea, vomiting." }
+    status: unverified
+  - id: repro.L05.044
+    kind: card
+    topic: gnrh-analogs
+    front: Can GnRH analogs stand in for natural GnRH?
+    back: Yes; they can be used in place of GnRH (given in pulses, they act as agonists).
+    src: { page: 673, quote: "MECHANISM Act as GnRH agonists when used in pulsatile fashion. When used in continuous fashion, first transiently act as GnRH agonists (tumor flare), but subsequently act as GnRH antagonists (downregulate GnRH receptor in pituitary → ↓ FSH and ↓ LH → ↓ estrogen in females and ↓ testosterone in males). Can be used in lieu of GnRH." }
     status: unverified
   - id: repro.L05.005
     kind: mcq
@@ -94,8 +114,8 @@ items:
     answer: 1
     why:
       - "Liver toxicity doesn't explain bone pain."
-      - "Right. Continuous GnRH analogs first act as agonists (tumor flare), raising testosterone before receptors downregulate; an antiandrogen or degarelix avoids this."
-      - "Leuprolide doesn't act at the receptor at all."
+      - "Right. Continuous GnRH analogs first act as agonists (tumor flare), raising testosterone before receptors downregulate; degarelix, a GnRH antagonist, has no start-up flare."
+      - "Leuprolide acts at the pituitary GnRH receptor, not the androgen receptor."
       - "Prolactin isn't involved."
       - "Downregulation lowers sex hormones."
     src: { page: 673, quote: "first transiently act as GnRH agonists (tumor flare)" }
@@ -104,11 +124,25 @@ items:
   - id: repro.L05.006
     kind: card
     topic: degarelix
-    front: How does degarelix differ from leuprolide, and what are its adverse effects?
-    back: Degarelix is a GnRH antagonist with no start-up flare, used for prostate cancer. Adverse effects are hot flashes and liver toxicity.
+    front: How does degarelix work, and how does that differ from leuprolide at the start of therapy?
+    back: It is a GnRH antagonist, so unlike leuprolide there is no start-up flare.
     src: { page: 674, quote: "MECHANISM GnRH antagonist. No start-up flare. CLINICAL USE Prostate cancer. ADVERSE EFFECTS Hot flashes, liver toxicity." }
     status: unverified
     tags: [high-yield]
+  - id: repro.L05.045
+    kind: card
+    topic: degarelix
+    front: What is degarelix used for?
+    back: Prostate cancer.
+    src: { page: 674, quote: "MECHANISM GnRH antagonist. No start-up flare. CLINICAL USE Prostate cancer. ADVERSE EFFECTS Hot flashes, liver toxicity." }
+    status: unverified
+  - id: repro.L05.046
+    kind: card
+    topic: degarelix
+    front: What are the adverse effects of degarelix?
+    back: Hot flashes and liver toxicity.
+    src: { page: 674, quote: "MECHANISM GnRH antagonist. No start-up flare. CLINICAL USE Prostate cancer. ADVERSE EFFECTS Hot flashes, liver toxicity." }
+    status: unverified
   # ---------- p674: ethinyl estradiol ----------
   - id: repro.L05.007
     kind: card
@@ -168,13 +202,27 @@ items:
     title: Selective estrogen receptor modulators
     columns: [Drug, Action, Use, Key risk]
     rows:
-      - [Clomiphene, Antagonist at hypothalamus → ↑ LH and FSH, Anovulatory infertility (PCOS), "Multiple pregnancies, ovarian enlargement, visual disturbances"]
-      - [Tamoxifen, "Antagonist at breast; partial agonist at uterus, bone", ER/PR ⊕ breast cancer; prevent gynecomastia, "Thromboembolism, endometrial hyperplasia or cancer"]
-      - [Raloxifene, "Antagonist at breast, uterus; agonist at bone", Postmenopausal osteoporosis, "Thromboembolism, but no ↑ endometrial cancer"]
+      - [Clomiphene, Antagonist at hypothalamus → ↑ LH and FSH, Anovulatory infertility (PCOS), "Hot flashes, multiple pregnancies, ovarian enlargement, visual disturbances"]
+      - [Tamoxifen, "Antagonist at breast; partial agonist at uterus, bone", ER/PR ⊕ breast cancer; prevent gynecomastia, "Hot flashes, thromboembolism (especially with smoking), endometrial hyperplasia or cancer"]
+      - [Raloxifene, "Antagonist at breast, uterus; agonist at bone", Postmenopausal osteoporosis, "Hot flashes, thromboembolism (especially with smoking), but no ↑ endometrial cancer"]
     blanks: [[0, 1], [0, 2], [1, 1], [1, 3], [2, 1], [2, 2]]
-    src: { page: 674, quote: "Antagonist at breast, uterus; agonist at bone; hot flashes, ↑ risk of thromboembolic events (especially with tobacco smoking), but no increased risk of endometrial cancer (vs tamoxifen, so you can “relax”); used primarily to treat postmenopausal osteoporosis." }
+    src: { page: 674, quote: "Clomiphene Antagonist at estrogen receptors in hypothalamus. Prevents normal feedback inhibition and ↑ release of LH and FSH from pituitary, which stimulates ovulation. Used to treat infertility due to anovulation (eg, PCOS). May cause hot flashes, ovarian enlargement, multiple simultaneous pregnancies, visual disturbances. Tamoxifen Antagonist at breast, partial agonist at uterus, bone. Hot flashes, ↑ risk of thromboembolic events (especially with tobacco smoking), and endometrial hyperplasia and/or cancer. Used to treat and prevent recurrence of ER/PR ⊕ breast cancer and to prevent gynecomastia in patients undergoing prostate cancer therapy. Raloxifene Antagonist at breast, uterus; agonist at bone; hot flashes, ↑ risk of thromboembolic events (especially with tobacco smoking), but no increased risk of endometrial cancer (vs tamoxifen, so you can “relax”); used primarily to treat postmenopausal osteoporosis." }
     status: unverified
     tags: [high-yield]
+  - id: repro.L05.047
+    kind: card
+    topic: serms
+    front: Which adverse effect do clomiphene, tamoxifen and raloxifene all share?
+    back: Hot flashes.
+    src: { page: 674, quote: "May cause hot flashes, ovarian enlargement, multiple simultaneous pregnancies, visual disturbances. Tamoxifen Antagonist at breast, partial agonist at uterus, bone. Hot flashes, ↑ risk of thromboembolic events (especially with tobacco smoking), and endometrial hyperplasia and/or cancer." }
+    status: unverified
+  - id: repro.L05.048
+    kind: card
+    topic: serms
+    front: Which habit especially ↑ the thromboembolism risk of tamoxifen and raloxifene?
+    back: Tobacco smoking.
+    src: { page: 674, quote: "Raloxifene Antagonist at breast, uterus; agonist at bone; hot flashes, ↑ risk of thromboembolic events (especially with tobacco smoking)" }
+    status: unverified
   - id: repro.L05.042
     kind: card
     topic: serms
@@ -238,8 +286,24 @@ items:
   - id: repro.L05.015
     kind: card
     topic: aromatase-inhibitors
-    front: How do anastrozole, letrozole and exemestane work, and what are they used for?
-    back: They inhibit peripheral conversion of androgens to estrogen. Used for ER ⊕ breast cancer in postmenopausal females; letrozole can also treat anovulatory infertility (PCOS).
+    front: How do anastrozole, letrozole and exemestane work?
+    back: They block the peripheral conversion of androgens to estrogen.
+    src: { page: 674, quote: "Inhibit peripheral conversion of androgens to estrogen. CLINICAL USE ER ⊕ breast cancer in postmenopausal females. Letrozole can be used to treat infertility from anovulation (eg, PCOS)." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.049
+    kind: card
+    topic: aromatase-inhibitors
+    front: What is the main use of aromatase inhibitors?
+    back: ER ⊕ breast cancer in postmenopausal females.
+    src: { page: 674, quote: "Inhibit peripheral conversion of androgens to estrogen. CLINICAL USE ER ⊕ breast cancer in postmenopausal females. Letrozole can be used to treat infertility from anovulation (eg, PCOS)." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.050
+    kind: card
+    topic: aromatase-inhibitors
+    front: Which aromatase inhibitor can treat infertility, and of what kind?
+    back: Letrozole, for anovulatory infertility (eg, PCOS).
     src: { page: 674, quote: "Inhibit peripheral conversion of androgens to estrogen. CLINICAL USE ER ⊕ breast cancer in postmenopausal females. Letrozole can be used to treat infertility from anovulation (eg, PCOS)." }
     status: unverified
     tags: [high-yield]
@@ -260,9 +324,16 @@ items:
   - id: repro.L05.016
     kind: card
     topic: progestins
-    front: How do progestins act on the endometrium and cervix, and what are they used for?
-    back: They bind progesterone receptors, ↓ growth and ↑ vascularization of the endometrium, and thicken cervical mucus. Used for contraception (pill, IUD, implant, depot), endometrial cancer and abnormal uterine bleeding.
+    front: How do progestins act on the endometrium and cervix?
+    back: They bind progesterone receptors, ↓ endometrial growth and ↑ its vascularization, and thicken cervical mucus.
     src: { page: 674, quote: "Bind progesterone receptors, ↓ growth and ↑ vascularization of endometrium, thicken cervical mucus." }
+    status: unverified
+  - id: repro.L05.051
+    kind: card
+    topic: progestins
+    front: What are progestins used for?
+    back: Contraception (pill, IUD, implant, depot injection), endometrial cancer and abnormal uterine bleeding.
+    src: { page: 674, quote: "CLINICAL USE Contraception (forms include pill, intrauterine device, implant, depot injection), endometrial cancer, abnormal uterine bleeding." }
     status: unverified
   - id: repro.L05.017
     kind: card
@@ -282,8 +353,24 @@ items:
   - id: repro.L05.019
     kind: card
     topic: antiprogestins
-    front: What are mifepristone and ulipristal, and what is each used for?
-    back: Competitive inhibitors at progesterone receptors. Mifepristone (with misoprostol) terminates pregnancy; ulipristal is emergency contraception.
+    front: How do mifepristone and ulipristal work?
+    back: They competitively inhibit progestins at progesterone receptors.
+    src: { page: 675, quote: "Competitive inhibitors of progestins at progesterone receptors. CLINICAL USE Termination of pregnancy (mifepristone with misoprostol); emergency contraception (ulipristal)." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.052
+    kind: card
+    topic: antiprogestins
+    front: What is mifepristone used for, and with which drug?
+    back: Termination of pregnancy, given with misoprostol.
+    src: { page: 675, quote: "Competitive inhibitors of progestins at progesterone receptors. CLINICAL USE Termination of pregnancy (mifepristone with misoprostol); emergency contraception (ulipristal)." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.053
+    kind: card
+    topic: antiprogestins
+    front: Which antiprogestin is used for emergency contraception?
+    back: Ulipristal.
     src: { page: 675, quote: "Competitive inhibitors of progestins at progesterone receptors. CLINICAL USE Termination of pregnancy (mifepristone with misoprostol); emergency contraception (ulipristal)." }
     status: unverified
     tags: [high-yield]
@@ -374,17 +461,61 @@ items:
   - id: repro.L05.025
     kind: card
     topic: danazol
-    front: What is danazol, what is it used for, and what are its adverse effects?
-    back: A synthetic androgen, partial agonist at androgen receptors. Used for endometriosis and hereditary angioedema. Adverse effects are weight gain, edema, acne, hirsutism, masculinization, ↓ HDL, hepatotoxicity and idiopathic intracranial hypertension.
+    front: What kind of drug is danazol, and how does it act?
+    back: A man-made androgen that only partly switches on androgen receptors (a partial agonist).
     src: { page: 675, quote: "Synthetic androgen that acts as partial agonist at androgen receptors. CLINICAL USE Endometriosis, hereditary angioedema." }
+    status: unverified
+  - id: repro.L05.054
+    kind: card
+    topic: danazol
+    front: What is danazol used for?
+    back: Endometriosis and hereditary angioedema.
+    src: { page: 675, quote: "Synthetic androgen that acts as partial agonist at androgen receptors. CLINICAL USE Endometriosis, hereditary angioedema." }
+    status: unverified
+  - id: repro.L05.055
+    kind: enumerate
+    topic: danazol
+    prompt: Enumerate the adverse effects of danazol.
+    points:
+      - Weight gain
+      - Edema
+      - Acne
+      - Hirsutism
+      - Masculinization
+      - ↓ HDL
+      - Hepatotoxicity
+      - Idiopathic intracranial hypertension
+    pass: 6
+    src: { page: 675, quote: "ADVERSE EFFECTS Weight gain, edema, acne, hirsutism, masculinization, ↓ HDL levels, hepatotoxicity, idiopathic intracranial hypertension." }
     status: unverified
   # ---------- p675: testosterone ----------
   - id: repro.L05.026
     kind: card
     topic: testosterone
-    front: What are the uses and adverse effects of testosterone and methyltestosterone?
-    back: Used for hypogonadism and to promote 2° sex characteristics. Adverse effects are virilization in females, testicular atrophy in males, premature epiphyseal closure, acne, ↑ erythrocytosis, ↑ LDL and ↓ HDL.
+    front: What are testosterone and methyltestosterone used for?
+    back: Hypogonadism, and to bring on 2° sex characteristics.
+    src: { page: 675, quote: "CLINICAL USE Treat hypogonadism and promote development of 2° sex characteristics." }
+    status: unverified
+  - id: repro.L05.056
+    kind: enumerate
+    topic: testosterone
+    prompt: Enumerate the adverse effects of testosterone and methyltestosterone.
+    points:
+      - Virilization in females
+      - Testicular atrophy in males
+      - Premature closure of epiphyseal plates
+      - Acne
+      - ↑ erythrocytosis
+      - ↑ LDL, ↓ HDL
+    pass: 5
     src: { page: 675, quote: "Virilization in females; testicular atrophy in males. Premature closure of epiphyseal plates. Risk of acne, ↑ erythrocytosis, ↑ LDL, ↓ HDL." }
+    status: unverified
+  - id: repro.L05.057
+    kind: card
+    topic: testosterone
+    front: How do testosterone and methyltestosterone act?
+    back: As agonists at androgen receptors.
+    src: { page: 675, quote: "Testosterone, methyltestosterone MECHANISM Agonists at androgen receptors." }
     status: unverified
   # ---------- p676: anabolic steroids ----------
   - id: repro.L05.040
@@ -418,11 +549,19 @@ items:
       - Polycythemia (↑ EPO)
       - Psychiatric (aggression, mania, withdrawal depression)
       - ↑ LDL, ↓ HDL → ↑ atherosclerosis and MI
-      - "Males: testicular atrophy, infertility, gynecomastia, acne"
+      - "Males: testicular atrophy, infertility, gynecomastia, acne, premature epiphyseal closure (young users)"
       - "Females: virilization, ↓ breast size, acne, alopecia"
     pass: 5
-    hook: "من فوق لتحت: المخ (roid rage)، القلب (LDL)، الدم (polycythemia)، الكبد (adenoma)، والـ gonads (خصية صغيرة عند الراجل، واسترجال عند الست)."
-    src: { page: 676, quote: "Hepatotoxicity (↑ AST/ALT, cholestasis, hepatic adenoma), polycythemia (↑ EPO). Psychiatric: aggression (“roid rage”), mania, withdrawal depression; mood swings common. Cardiovascular: ↑ LDL, ↓ HDL → ↑ atherosclerosis/MI risk." }
+    hook: "من فوق لتحت: المخ (roid rage)، القلب (LDL)، الدم (polycythemia)، الكبد (adenoma)، والـ gonads (خصية صغيرة وعضم بيقفل بدري عند الراجل الصغير، واسترجال عند الست)."
+    src: { page: 676, quote: "Hepatotoxicity (↑ AST/ALT, cholestasis, hepatic adenoma), polycythemia (↑ EPO). Psychiatric: aggression (“roid rage”), mania, withdrawal depression; mood swings common. Cardiovascular: ↑ LDL, ↓ HDL → ↑ atherosclerosis/MI risk. Males: Testicular atrophy, infertility (↓ spermatogenesis), gynecomastia (↑ aromatization → ↑ E2), acne, premature epiphyseal closure (young users). Females: Virilization (hirsutism, amenorrhea, clitoromegaly), ↓ breast size, acne, alopecia." }
+    status: unverified
+    tags: [high-yield]
+  - id: repro.L05.058
+    kind: card
+    topic: anabolic-steroids
+    front: Which combination of findings in a young male should make you suspect anabolic steroid use?
+    back: Infertility with high muscle mass, small testes and gynecomastia.
+    src: { page: 676, quote: "Suspect usage in young male with infertility + high muscle mass + small testes + gynecomastia" }
     status: unverified
     tags: [high-yield]
   - id: repro.L05.029
@@ -533,22 +672,23 @@ items:
     kind: mcq
     topic: tamsulosin
     stem: >-
-      A 68-year-old man with BPH had dizziness when standing on a nonselective α1-blocker. He is
-      switched to a drug selective for prostatic receptors. Which receptor does it target?
+      A 68-year-old man with BPH gets dizzy and light-headed whenever he stands up after starting
+      terazosin. His urinary symptoms had improved. He is switched to tamsulosin and the dizziness
+      goes away while his urine flow stays better. Which property of tamsulosin explains the switch?
     options:
-      - α1A/D
-      - α1B
-      - α2
-      - β2
-      - Muscarinic M3
+      - Selectivity for prostatic α1A/D receptors over vascular α1B receptors
+      - Selectivity for vascular α1B receptors over prostatic α1A/D receptors
+      - Inhibition of 5α-reductase
+      - Agonism at central α2 receptors
+      - Antagonism at bladder muscarinic M3 receptors
     answer: 0
     why:
-      - "Right. Tamsulosin is selective for α1A/D in the prostate, sparing vascular α1B receptors."
-      - "α1B is the vascular receptor that tamsulosin spares."
-      - "α2 isn't the target."
-      - "β2 agonists like terbutaline relax the uterus."
-      - "M3 blockers can worsen retention."
-    src: { page: 676, quote: "α1 -antagonist selective for α1A/D receptors in prostate (vs vascular α1B receptors)" }
+      - "Right. Tamsulosin is selective for α1A/D in the prostate, sparing vascular α1B receptors, so it lowers smooth muscle tone in the prostate without dropping blood pressure on standing."
+      - "Blocking vascular α1B is what drops blood pressure; tamsulosin spares those receptors."
+      - "5α-reductase inhibition is finasteride, which shrinks the gland slowly; tamsulosin is an α1-antagonist."
+      - "Central α2 agonism lowers blood pressure and is not how tamsulosin works."
+      - "M3 blockers can worsen urinary retention in BPH."
+    src: { page: 676, quote: "α1 -antagonist selective for α1A/D receptors in prostate (vs vascular α1B receptors) → ↓ smooth muscle tone → ↑ urine flow." }
     status: unverified
   # ---------- p676: minoxidil ----------
   - id: repro.L05.037
