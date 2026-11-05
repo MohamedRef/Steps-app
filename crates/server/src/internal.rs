@@ -13,6 +13,9 @@ pub struct Register {
     pub info: DeviceInfo,
     pub email: String,
     pub refresh_hash: String,
+    /// Signed in with the username and password, not Google.
+    #[serde(default)]
+    pub by_password: bool,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -39,6 +42,9 @@ pub struct Expiry {
 pub struct AccountLoginState {
     pub email: String,
     pub username: Option<String>,
+    /// The caller signed in with the password: a change needs the current one.
+    #[serde(default)]
+    pub by_password: bool,
 }
 
 /// Account object `POST /login`: the username it has from now on.

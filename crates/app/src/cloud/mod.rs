@@ -105,8 +105,13 @@ pub enum Command {
     SetLogin {
         username: String,
         password: String,
+        /// The current password, when [`LoginStatus::needs_current`].
+        current: Option<String>,
     },
-    RemoveLogin,
+    /// Turn the username and password off (`current` as for `SetLogin`).
+    RemoveLogin {
+        current: Option<String>,
+    },
     SignOut,
     LoadDevices,
     RevokeDevice(String),
@@ -138,6 +143,9 @@ pub struct LoginStatus {
     /// The last change went through.
     pub saved: bool,
     pub problem: Option<Problem>,
+    /// This device signed in with the password: a change or removal needs
+    /// the current one (Steps Cloud checks it).
+    pub needs_current: bool,
 }
 
 /// Passwords stay out of logs.
@@ -150,7 +158,7 @@ impl std::fmt::Debug for Command {
             }
             Self::LoadLogin => write!(f, "LoadLogin"),
             Self::SetLogin { username, .. } => write!(f, "SetLogin {{ username: {username:?} }}"),
-            Self::RemoveLogin => write!(f, "RemoveLogin"),
+            Self::RemoveLogin { .. } => write!(f, "RemoveLogin"),
             Self::SignOut => write!(f, "SignOut"),
             Self::LoadDevices => write!(f, "LoadDevices"),
             Self::RevokeDevice(d) => write!(f, "RevokeDevice({d:?})"),
@@ -189,6 +197,8 @@ pub enum Problem {
     ClockOff,
     /// Username and password don't match.
     WrongPassword,
+    /// The current password given for a change is wrong.
+    CurrentWrong,
     /// Too many wrong passwords: the next try counts in this many minutes.
     Locked(u64),
     UsernameTaken,
