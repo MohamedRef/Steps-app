@@ -1,0 +1,12 @@
+pub const TITLE: &str = "مراجعك";
+pub const ADD_CARD: &str = "كارت جديد";
+pub const SEARCH: &str = "دوّر في المحاضرات";
+pub const SEARCH_HINT: &str = "دوّر على محاضرة أو موضوع…";
+pub const LECTURES: &str = "المحاضرات";
+pub const NO_MATCH: &str = "مفيش محاضرة أو موضوع بالاسم ده. جرّب كلمة إنجليزي من العنوان.";
+pub const CHECKED: &str = "راجعت صحته";
+pub const CHECKED_HINT: &str = "اللي علّمت عليه ✓ صح وإنت بتذاكر، من كل اللي في المحاضرة.";
+pub const WRITING: &str = "لسه بتتكتب";
+pub const STATUS: &str = "حالة المادة";
+pub const STATUS_BODY: &str = "إنك تخلّص درس أو تجاوب صح مش معناه إن المحتوى اتراجع. صحة المحتوى بتتحسب بس من ✓ اللي إنت بتديها للكارت وإنت بتذاكر، والباقي فاضل unverified لحد ما تراجعه.";
+pub const CHECKED_ALL: &str = "راجعت صحته في كل المحاضرات:";

@@ -83,7 +83,7 @@ Rust stable (edition 2024, minimum 1.90), Dioxus 0.7 with HTML/CSS for the UI. A
 | Path | What it is |
 |---|---|
 | `crates/core` | Pure logic, no UI and no IO; builds for wasm32. Content schema and validation (`content.rs`, `validate.rs`, `lesson.rs`, `glossary.rs`, `quote.rs`), FSRS and scheduling (`srs.rs`, `review/`, `session.rs`), planner (`plan.rs`), timed exam (`exam.rs`), self-assessment (`selfassess.rs`), pages read (`pages.rs`), stats, packs (`pack.rs`), update feed (`update.rs`), themes (`theme.rs`). |
-| `crates/app` | The app (Dioxus). One module per feature (`today`, `study`, `bank`, `case`, `learn`, `lecture`, `plan`, `stats`, `oral`, `notes`, `own`, `qbank`, `labs`, `settings`, `update`, `cloud`, …). `store/` is SQLite and sync outbox; `platform/` is device glue (Android JNI, Mac, browser); `i18n.rs` holds all Arabic UI text; `prefs.rs` and `look.rs` hold appearance; `render_tests/` are the screen tests. |
+| `crates/app` | The app (Dioxus). One module per feature (`today`, `study`, `bank`, `case`, `learn`, `lecture`, `plan`, `stats`, `oral`, `notes`, `own`, `qbank`, `labs`, `settings`, `update`, `cloud`, …). `store/` is SQLite and sync outbox; `platform/` is device glue (Android JNI, Mac, browser); `i18n/` holds all Arabic UI text, one file per feature (`i18n/today.rs`, …) declared in `i18n/mod.rs`; `prefs.rs` and `look.rs` hold appearance; `render_tests/` are the screen tests. |
 | `crates/protocol` | Wire types shared by app and server: sync ops and tables (`sync.rs`, `TABLES`), cloud API (`cloud.rs`), merge rules, client state machine. |
 | `crates/server` | Steps Cloud, the Cloudflare Worker (Durable Objects, no D1/R2). `wrangler.toml`. |
 | `crates/tools` | `steps-tools` CLI: `validate`, `refs`, `packs`, `ids`, `content` (next-id, new-item, diff, preflight), `anki`, `qbank sync`, `update` (changes, guard, publish), `verdicts`. |
@@ -98,6 +98,8 @@ Rust stable (edition 2024, minimum 1.90), Dioxus 0.7 with HTML/CSS for the UI. A
 | `fixtures/` | Sample content (`fixtures/content/sample.yaml` shows every item kind). |
 | `.github/workflows/` | CI, nightly, deploys, release (§6). |
 | `justfile` | Every common command. `just` with no argument lists them. |
+
+**File layout rule (2026-11-05):** a file holds one concern, and work that many people change in parallel lives in many small files rather than one shared one, so parallel PRs rarely touch the same lines. A new feature adds its own folder (`crates/app/src/<feature>/`), its own text file (`i18n/<feature>.rs`), its own CSS and its own `changes/<topic>.yaml`, and adds only one declaration line to a shared list. Content is already split per course (§8). Rust modules group a concern rather than one type per file. Splits are behavior-preserving and land one area per PR.
 
 How the pieces talk: content YAML → `steps-tools packs build` → one signed content pack. Apps carry a built-in pack and download newer ones from the update feed without a new APK when only content changed. Each device keeps its reviews, checks and settings in SQLite (IndexedDB in the browser) and pushes an outbox of ops to Steps Cloud over a WebSocket; other devices get them within seconds. Everything works offline.
 
@@ -247,7 +249,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 - **Shape language:** rising-step minute chips, a hero with a staircase and a gold summit, cards on a solid "ledge", a docked bottom bar with a top marker, the mark before the "Steps" wordmark.
 - **Themes (8 + follow the device):** صبح (Paper), بترولي (Night), أسود AMOLED (True black), سهر (Night shift, amber, no blue), سكرَب (Scrubs), سيبيا (Sepia), نيلي (Indigo), تباين عالي (High contrast). Code: `crates/core/src/theme.rs` (every colour pair is tested for WCAG AA 4.5:1). Theme ids never change.
 - **Styles (10):** درجات (Stepped, the default), خط رفيع, من غير حدود, فواصل, خط جانبي, رمادي فاتح, أبيض وأسود, خطوط, ملوّن, زجاج. Code: `crates/app/src/prefs.rs` (`Appearance`) and `crates/app/assets/appearance.css`. A device preference, never synced.
-- Labels are in `crates/app/src/i18n.rs` (`THEME_*`, `APPEARANCE_*`). I prefer minimal looks, and alternatives offered as options rather than a single pick.
+- Labels are in `crates/app/src/i18n/` (`THEME_*`, `APPEARANCE_*`). I prefer minimal looks, and alternatives offered as options rather than a single pick.
 - Feature stylesheets use tokens only (`--bg`, `--surface`, `--accent`, …), never their own hex colours or copies of shared parts.
 
 ## 12. Current state, roadmap and known issues
@@ -262,6 +264,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 - **Only other source so far:** First Aid 2026. B&B videos and UWorld ids per lecture come from a public mapping document (QBANK.md).
 
 ### Roadmap
+- **Smaller files, fewer merge conflicts:** split the busiest shared files one area per PR, with no behavior change (§3 file layout rule). Done: UI text (`i18n.rs` into `i18n/`, one file per feature).
 - **1.0.0-alpha.2:** anything found by the last UX walk and the final code check of alpha.1, plus whatever daily use of alpha.1 turns up. Confirm the scheduled workflows fire again (#614) and close it.
 - **Later (not started until I ask):** audit the three research reports on Step 1 apps and websites against the app. Likely gaps: an NBME/UWSA score tracker beyond the current log, a question-bank mistake log by question id, and new cards only from pages already read. Features that copy a commercial question bank stay low priority, since I already have the banks.
 - **More sources:** Pathoma, Sketchy, UWorld notes and my own materials merge into the First Aid lectures and topics as they arrive ([SOURCES.md](SOURCES.md)). When the first non-First-Aid source arrives, `steps-tools refs` must learn to read its text.
