@@ -143,6 +143,9 @@ fn body_problems(body: &Body) -> Vec<String> {
             if hook.as_deref().is_some_and(empty) {
                 p.push("enumerate hook is empty".into());
             }
+            if let Some(n) = stated_count(prompt).filter(|n| *n != points.len()) {
+                p.push(format!("enumerate prompt asks for {n} but lists {} points", points.len()));
+            }
         }
         Body::Essay { prompt, outline } => {
             if empty(prompt) || outline.is_empty() {
@@ -258,6 +261,21 @@ pub fn glossary(g: &crate::glossary::Glossary, approved: Option<&BTreeSet<String
         }
     }
     out
+}
+
+/// The count an enumerate prompt states ("List the 11 criteria …", "Name 4
+/// causes"), if any: a number right after list/name/give/mention/state,
+/// optionally with "the" or "all" between. A mismatch with the points
+/// usually means a YAML flow list split items at commas (#556).
+fn stated_count(prompt: &str) -> Option<usize> {
+    let words: Vec<String> = prompt
+        .split_whitespace()
+        .map(|w| w.trim_matches(|c: char| !c.is_alphanumeric()).to_lowercase())
+        .collect();
+    let verb =
+        words.iter().position(|w| matches!(w.as_str(), "list" | "name" | "give" | "mention" | "state"))?;
+    let mut rest = words[verb + 1..].iter().skip_while(|w| matches!(w.as_str(), "the" | "all"));
+    rest.next()?.parse().ok()
 }
 
 #[cfg(test)]
@@ -470,5 +488,13 @@ plain: [PDA, NOT, NOT]"
         ] {
             assert!(msgs.iter().any(|m| m == want), "{want}: {msgs:#?}");
         }
+    }
+
+    #[test]
+    fn an_enumerate_prompt_count_matches_its_points() {
+        assert_eq!(stated_count("List the 11 criteria for substance use disorder."), Some(11));
+        assert_eq!(stated_count("Name 4 causes of SIADH"), Some(4));
+        assert_eq!(stated_count("List the causes of SIADH"), None);
+        assert_eq!(stated_count("Which 3 drugs?"), None);
     }
 }
