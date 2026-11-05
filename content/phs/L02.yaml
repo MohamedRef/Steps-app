@@ -26,13 +26,27 @@ items:
     kind: card
     topic: pearson-correlation
     front: What does a negative Pearson r mean?
-    back: Negative correlation (as one variable ↑, the other ↓).
+    back: The variables move in opposite directions; when one rises, the other falls (negative correlation).
     src: { page: 268, quote: "Negative r value → negative correlation (as one variable ↑, the other variable ↓)." }
+    status: unverified
+  - id: phs.L02.050
+    kind: card
+    topic: pearson-correlation
+    front: "What does a positive Pearson r mean?"
+    back: "The two variables move together: when one rises, so does the other (positive correlation)."
+    src: { page: 268, quote: "Positive r value → positive correlation (as one variable ↑, the other variable ↑)." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L02.051
+    kind: cloze
+    topic: pearson-correlation
+    text: "{{c1::Variance}} measures how far the measured values in a data set spread from their average."
+    src: { page: 268, quote: "Variance is how much the measured values differ from the average value in a data set." }
     status: unverified
   - id: phs.L02.003
     kind: cloze
     topic: pearson-correlation
-    text: "The coefficient of determination = {{c1::r²}}: the proportion of variance in one variable that can be explained by variance in the other."
+    text: "The coefficient of determination, {{c1::r²}}, tells you what share of one variable's variance is accounted for by the other variable's variance."
     src: { page: 268, quote: "Coefficient of determination = r2 (proportion of variance in one variable that can be explained by variance in the other variable)." }
     status: unverified
     tags: [high-yield]
@@ -91,7 +105,7 @@ items:
     kind: card
     topic: core-ethical-principles
     front: With what can beneficence conflict, and which traditionally wins?
-    back: With autonomy (an informed patient has the right to decide) or with what is best for society (eg, mandatory TB treatment). Traditionally, patient interest supersedes.
+    back: It can clash with the informed patient's own choice (autonomy) or with society's good (eg, compulsory TB treatment). The patient's interest usually comes first.
     src: { page: 268, quote: "May conflict with autonomy (an informed patient has the right to decide) or what is best for society (eg, mandatory TB treatment). Traditionally, patient interest supersedes." }
     status: unverified
   - id: phs.L02.009
@@ -120,7 +134,7 @@ items:
       - Principle of double effect
       - Justice
       - Therapeutic privilege
-      - Nonmaleficence alone, which forbids any risk of respiratory depression
+      - Nonmaleficence
       - Duty to protect
     answer: 0
     why:
@@ -163,14 +177,14 @@ items:
     kind: card
     topic: decision-making-capacity
     front: Do intellectual disabilities or mental illnesses exclude decision-making capacity?
-    back: No, unless the patient's condition presently impairs their ability to make healthcare decisions.
+    back: No. They only matter if, right now, the condition stops the patient from making healthcare decisions.
     src: { page: 268, quote: "Intellectual disabilities and mental illnesses are not exclusion criteria unless the patient’s condition presently impairs their ability to make healthcare decisions." }
     status: unverified
   - id: phs.L02.015
     kind: card
     topic: decision-making-capacity
     front: Can a decision made with capacity be revoked because the patient later loses capacity?
-    back: No. Decisions made with capacity cannot be revoked simply because the patient later loses capacity.
+    back: No. A choice made while the patient had capacity still stands after capacity is lost.
     src: { page: 268, quote: "Note that decisions made with capacity cannot be revoked simply if the patient later loses capacity." }
     status: unverified
   - id: phs.L02.016
@@ -244,7 +258,7 @@ items:
   - id: phs.L02.021
     kind: cloze
     topic: informed-consent
-    text: "{{c1::Therapeutic privilege}}: withholding information when disclosure would severely harm the patient or undermine informed decision-making capacity."
+    text: "{{c1::Therapeutic privilege}} lets the physician hold back information if telling it would seriously harm the patient or damage their ability to make an informed decision."
     src: { page: 269, quote: "Therapeutic Privilege—withholding information when disclosure would severely harm the patient or undermine informed decision-making capacity" }
     status: unverified
   - id: phs.L02.022
@@ -275,10 +289,18 @@ items:
   - id: phs.L02.023
     kind: card
     topic: consent-for-minors
-    front: Who is generally a minor, and when is parental consent not needed for their treatment?
-    back: Any person <18 years old. Exceptions to parental consent include emergency treatment (eg, blood transfusions) or a legally emancipated minor (eg, married, self-supporting, or in the military).
+    front: Who is generally considered a minor for healthcare consent?
+    back: Anyone younger than 18 years.
+    src: { page: 269, quote: "A minor is generally any person <18 years old." }
+    status: unverified
+  - id: phs.L02.052
+    kind: card
+    topic: consent-for-minors
+    front: "Parental consent is generally needed for a minor; which two general exceptions does the book give?"
+    back: "Emergency treatment (eg, a blood transfusion), and a minor who is legally emancipated (eg, married, self-supporting or serving in the military)."
     src: { page: 269, quote: "exceptions exist for emergency treatment (eg, blood transfusions) or if minor is legally emancipated (eg, married, self-supporting, or in the military)." }
     status: unverified
+    tags: [high-yield]
   - id: phs.L02.024
     kind: enumerate
     topic: consent-for-minors
@@ -352,7 +374,7 @@ items:
     kind: card
     topic: advance-directives
     front: What does a DNR order prohibit, and what may the patient still consider?
-    back: It prohibits CPR. The patient may still consider other life-sustaining measures (eg, intubation, feeding tube, chemotherapy).
+    back: It rules out CPR only. Other life-sustaining care (eg, intubation, a feeding tube, chemotherapy) can still be chosen.
     src: { page: 269, quote: "DNR order prohibits cardiopulmonary resuscitation (CPR). Patient may still consider other life- sustaining measures (eg, intubation, feeding tube, chemotherapy)." }
     status: unverified
     tags: [high-yield]
@@ -413,7 +435,7 @@ items:
     kind: card
     topic: ventilator-life-support
     front: If surrogates indicate the patient would not have wanted ventilator life support, what is done?
-    back: Withhold or withdraw life support, regardless of what the surrogate prefers.
+    back: Do not start it, or stop it, even if the surrogate personally wants it continued.
     src: { page: 270, quote: "If surrogates indicate patient would not have wanted to receive life support with ventilation → withhold or withdraw life support regardless of what the surrogate prefers." }
     status: unverified
     tags: [high-yield]
@@ -427,7 +449,7 @@ items:
   - id: phs.L02.035
     kind: cloze
     topic: ventilator-life-support
-    text: "Surrogate discussions about continuing or withdrawing ventilatory support focus on both the {{c1::prognosis}} of the condition and the {{c2::believed wishes of the patient}}."
+    text: "When surrogates decide whether to keep or stop a ventilator, the talk centers on two things: the condition's {{c1::prognosis}} and {{c2::what the patient is believed to have wanted}}."
     src: { page: 270, quote: "focusing on both the prognosis of the condition and the believed wishes of the patient." }
     status: unverified
   - id: phs.L02.036
@@ -543,7 +565,7 @@ items:
     kind: card
     topic: confidentiality
     front: For reportable diseases, whom do physicians warn, and what may dangerous communicable diseases require?
-    back: Public officials, who then notify people at risk. Dangerous communicable diseases such as TB or Ebola may require involuntary treatment.
+    back: They tell public health officials, and the officials alert the people at risk. A dangerous infection such as TB or Ebola can justify treatment against the patient's will.
     src: { page: 270, quote: "physicians may have a duty to warn public officials, who will then notify people at risk. Dangerous communicable diseases, such as TB or Ebola, may require involuntary treatment." }
     status: unverified
   - id: phs.L02.045
