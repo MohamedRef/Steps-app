@@ -108,10 +108,14 @@ pub fn daily_target(data: &StudyData, settings: &PlanSettings) -> Option<DailyTa
 /// morning against the items first seen yesterday. The plan already spreads
 /// the gap by itself; this only lets Today and the planner say so, and offer
 /// the catch-up day instead.
+///
+/// Only a plan that already ran yesterday can have missed anything: on the
+/// day the plan starts (a fresh install, or the first exam day saved) there
+/// is no yesterday's share, so nothing is missed.
 fn missed_yesterday(data: &StudyData, settings: &PlanSettings) -> (u32, Vec<u32>) {
     let clock = stats::Clock { now_ms: data.clock.now_ms - 86_400_000, ..data.clock };
     let yesterday = clock.today();
-    if yesterday.until(data.clock.today()) != 1 {
+    if yesterday.until(data.clock.today()) != 1 || settings.started.is_none_or(|s| s > yesterday) {
         return (0, Vec::new());
     }
     let seen = |p: &[plan::LectureProgress]| p.iter().map(|l| l.seen.min(l.total)).sum::<u32>();
@@ -642,7 +646,12 @@ pub(crate) fn RebalanceCard(t: DailyTarget) -> Element {
         .collect();
     let choose_now = choose;
     rsx! {
-        crate::ui::Card { class: "plan-rebalance",
+        crate::ui::Card {
+            class: "plan-rebalance",
+            // On Today this card sits inside the hero, whose tap opens a
+            // session or the next lesson: its buttons and the preview's
+            // disclosure act here and go no further.
+            onclick: move |e: MouseEvent| e.stop_propagation(),
             match choice {
                 None => rsx! {
                     p { {tx::missed(missed)} }

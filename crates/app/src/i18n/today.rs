@@ -42,6 +42,10 @@ pub const PLAN_TODAY: &str = "خطة النهارده:";
 pub const PLAN_NEW: &str = "جديد";
 pub const ABOUT: &str = "حوالي";
 pub const RING_LABEL: &str = "اللي خلّصته من خطة النهارده";
+/// Under the ring: what the percent counts, "3 من 40 اتعملوا".
+pub fn ring_caption(done: u32, total: u32) -> String {
+    format!("{done} من {total} اتعملوا")
+}
 pub const NEW_LEFT_1: &str = "فاضل";
 pub const NEW_LEFT_2: &str = "جديد من خطة النهارده. كل جلسة بتقرّبك.";
 pub const NEW_DONE: &str = "خلّصت جديد النهارده. اللي فاضل مراجعة بس.";
@@ -75,6 +79,10 @@ pub const TIGHT_HIGH_YIELD: &str = "الوقت مش مكفّي كل الجديد
 pub const EYEBROW: &str = "جلسة صغيرة، وفهم ثابت";
 pub const READY_Q: &str = "جاهز لجلسة هادية؟";
 pub const DONE_Q: &str = "خلّصت النهارده. عاش!";
+/// The very first day, before anything is studied: never "done".
+pub const WELCOME_Q: &str = "أهلاً بيك. نبدأ من الأول؟";
+/// A day with nothing to start yet (a mock day, a rest day) and nothing done.
+pub const DAY_Q: &str = "شوف خطة النهارده";
 pub const TIME_Q: &str = "معاك قد إيه؟";
 pub const TIME_HINT: &str = "طول الجلسة. بيتحفظ كاختيارك العادي.";
 /// "5 د" on a session-length chip.

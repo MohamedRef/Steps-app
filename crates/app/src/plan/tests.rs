@@ -116,8 +116,12 @@ fn yesterdays_missed_new_items_are_counted_not_blamed() {
         clock,
         demo: false,
     };
-    let settings =
-        PlanSettings { exam: Some(clock.today().plus(120)), weekdays: [true; 7], ..PlanSettings::default() };
+    let settings = PlanSettings {
+        exam: Some(clock.today().plus(120)),
+        weekdays: [true; 7],
+        started: Some(clock.today().plus(-10)),
+        ..PlanSettings::default()
+    };
     let idle = daily_target(&data(Vec::new()), &settings).unwrap();
     assert!(idle.missed > 0, "yesterday's share wasn't started");
     assert_eq!(idle.before.len(), idle.plan.days.len());
@@ -129,4 +133,48 @@ fn yesterdays_missed_new_items_are_counted_not_blamed() {
         .map(|it| ReviewEvent::new(it.id.clone(), Grade::Good, Origin::Review, now_ms - DAY_MS, 5000))
         .collect();
     assert_eq!(daily_target(&data(did), &settings).unwrap().missed, 0);
+}
+
+#[test]
+fn a_plan_that_starts_today_has_missed_nothing() {
+    use steps_core::stats::Clock;
+
+    let Some(lecture) =
+        crate::content::Library::get().lectures.values().find(|l| l.items.len() >= 20).cloned()
+    else {
+        return; // no content embedded
+    };
+    // A fixed moment, never the test machine's today.
+    const DAY_MS: i64 = 86_400_000;
+    let clock = Clock {
+        now_ms: 20_400 * DAY_MS + 12 * 3_600_000,
+        zone: steps_core::zone::Zone::fixed(0),
+        rollover_hour: 4,
+    };
+    let today = clock.today();
+    let fresh = StudyData {
+        lectures: vec![lecture],
+        events: Vec::new(),
+        marks: Default::default(),
+        forecast: Some(Vec::new()),
+        clock,
+        demo: false,
+    };
+    let at = |started: Option<Day>| {
+        let mut s = PlanSettings { weekdays: [true; 7], started, ..PlanSettings::default() };
+        s.exam = Some(today.plus(120));
+        daily_target(&fresh, &s).unwrap()
+    };
+    // First launch: onboarding saves the exam day and starts the plan today.
+    let mut first = PlanSettings { weekdays: [true; 7], ..PlanSettings::default() };
+    first.set_exam(today.plus(120), today);
+    let t = daily_target(&fresh, &first).unwrap();
+    assert_eq!(t.missed, 0, "nothing was asked of yesterday");
+    assert!(t.before.is_empty());
+    assert_eq!(t.done, stats::DayDone::default(), "nothing done before he starts");
+    // A plan with no start day (a preview) has no yesterday either.
+    assert_eq!(at(None).missed, 0);
+    // A plan that has run for days (past its baseline day) and got nothing
+    // yesterday did miss its share.
+    assert!(at(Some(today.plus(-10))).missed > 0);
 }
