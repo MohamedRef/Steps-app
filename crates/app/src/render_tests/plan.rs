@@ -188,9 +188,16 @@ fn a_plan_too_tight_for_the_days_left_says_so() {
 
 #[test]
 fn a_roomy_plan_is_on_track() {
+    // The real pack keeps growing, so "roomy" must not depend on its size:
+    // the furthest exam day the planner takes and a review cap far above
+    // any day's load (400 days stopped fitting at about 9,400 items).
     let mut app = App::with(Screen::Stats, || {
-        *crate::plan::SETTINGS.write() =
-            PlanSettings { exam: Some(today().plus(400)), weekdays: [true; 7], ..PlanSettings::default() };
+        *crate::plan::SETTINGS.write() = PlanSettings {
+            exam: Some(today().plus(steps_core::plan::MAX_DAYS_AHEAD)),
+            weekdays: [true; 7],
+            review_cap: 5_000,
+            ..PlanSettings::default()
+        };
     });
     super::sheets::tap_row(&mut app, "tab", crate::i18n::stats::TAB_PLAN);
     app.assert_has(tx::ON_TRACK);
