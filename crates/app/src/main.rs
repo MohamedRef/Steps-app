@@ -259,6 +259,9 @@ fn AppAt(start: Screen, children: Element) -> Element {
                 div { class: "brand",
                     span { class: "brand-name", {i18n::app::NAME} }
                     span { class: "brand-tag", {i18n::app::TAGLINE} }
+                    // A narrow bar cut the line inside «USMLE» (UX #584):
+                    // there it says only the exam (main.css).
+                    bdi { class: "brand-tag brand-tag-short", dir: "ltr", {i18n::app::TAGLINE_SHORT} }
                 }
                 button {
                     class: "icon-button",
@@ -348,7 +351,8 @@ fn screen_body(screen: Screen) -> Element {
 #[component]
 fn NavButton(screen: Screen, class: &'static str) -> Element {
     let mut ui = use_context::<Ui>();
-    let active = *ui.screen.read() == screen;
+    // A tool page on top (المواد, مراجعك…) takes the mark (UX #583).
+    let active = *ui.screen.read() == screen && more::open_tool(screen).is_none();
     rsx! {
         button {
             class,

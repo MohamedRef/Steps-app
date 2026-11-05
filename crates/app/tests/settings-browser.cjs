@@ -40,7 +40,7 @@ async function run() {
           htmlFontSize: parseFloat(getComputedStyle(document.documentElement).fontSize),
           viewport: innerWidth,
           documentWidth: document.documentElement.scrollWidth,
-          dialog: { left: box.left, right: box.right, width: box.width, height: box.height },
+          dialog: { left: box.left, right: box.right, width: box.width, height: box.height, inner: dialog.clientWidth },
           paneOverflow: visible(pane) ? pane.scrollWidth - pane.clientWidth : 0,
           listVisible: visible(list) || visible(search),
           title: document.querySelector('#settings-title')?.textContent.trim(),
@@ -95,8 +95,11 @@ async function run() {
         `${name}: root text-size preference not applied: ${JSON.stringify(layout)}`);
       assert.ok(Math.abs(layout.fontSize - expectedAppSize) < 0.1,
         `${name}: unexpected responsive text size: ${JSON.stringify(layout)}`);
-      assert.equal(layout.listVisible, item.width >= 600, `${name}: section index visibility`);
-      assert.equal(layout.back.includes('settings-back'), item.width < 600, `${name}: responsive Back target`);
+      // Two panes only when the dialog is 38rem wide inside (UX #587), so
+      // 600px and Larger text keep the phone's list-then-section flow.
+      const split = layout.dialog.inner / layout.htmlFontSize >= 38;
+      assert.equal(layout.listVisible, split, `${name}: section index visibility`);
+      assert.equal(layout.back.includes('settings-back'), !split, `${name}: responsive Back target`);
 
       if ((item.size === 'larger' && item.appearance === 'calm') ||
           (item.size === 'normal' && item.appearance === 'liquid-glass' &&

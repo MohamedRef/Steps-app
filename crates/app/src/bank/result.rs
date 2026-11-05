@@ -236,7 +236,10 @@ fn ScoreRows(rows: Vec<(String, Score, String, Option<String>)>) -> Element {
                             Some(t) => super::practise(ui, &lecture, Some(t.clone())),
                             None => crate::lecture::open(ui, &lecture),
                         },
-                        bdi { class: "score-label", "{label}" }
+                        // The cell stays right to left with the name inline in
+                        // it, so an English topic starts at the row's edge like
+                        // a lecture does, not beside the bar (UX #586).
+                        span { class: "score-label", bdi { "{label}" } }
                         div { class: "score-bar", aria_hidden: "true",
                             div { class: "score-fill", style: "inline-size: {s.percent()}%;" }
                         }

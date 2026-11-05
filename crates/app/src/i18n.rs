@@ -5,6 +5,7 @@
 pub mod app {
     pub const NAME: &str = "Steps";
     pub const TAGLINE: &str = "مذاكرة USMLE Step 1، جلسة قصيرة كل مرة";
+    pub const TAGLINE_SHORT: &str = "USMLE Step 1";
 }
 
 /// Counted nouns in Egyptian Arabic, so no screen writes "5 ساعة" or
@@ -1486,6 +1487,7 @@ pub mod cloud {
     pub const NEVER_SYNCED: &str = "لسه ما اتزامنش";
     pub const SIGN_OUT_DEVICE: &str = "خرّجه";
     pub const LOADING: &str = "بيحمّل…";
+    pub const WAITING_SERVER: &str = "هتظهر هنا أول ما يتوصل بالسيرفر.";
 
     pub const P_NOT_CONFIGURED: &str = "تسجيل الدخول لسه ما اتظبطش في النسخة دي.";
     pub const P_NOT_ALLOWED: &str = "الحساب ده مش مسموح له. ادخل بالجيميل اللي متسجل في السيرفر.";

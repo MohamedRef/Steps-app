@@ -160,7 +160,13 @@ fn signed_in_it_shows_the_account_the_state_and_the_devices() {
     ] {
         set(&mut app, CloudStatus { email: Some("mohamed@example.com".into()), ..status(state) });
         app.assert_has(line);
+        // Unreachable, the cards waiting on the server say so instead of
+        // «بيحمّل…» forever, and Refresh has nothing to ask (UX #581).
+        let away = matches!(state, SyncState::Offline | SyncState::Stopped);
+        assert_eq!(app.html().contains(tx::WAITING_SERVER), away, "{state:?}");
+        assert_eq!(app.can_tap(tx::REFRESH), !away, "{state:?}");
     }
+    set(&mut app, CloudStatus { email: Some("mohamed@example.com".into()), ..status(SyncState::Live) });
     // Live or catching up: the Devices list is asked for.
     assert!(sent().iter().filter(|c| *c == "LoadDevices").count() >= 1);
 

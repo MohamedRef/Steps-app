@@ -44,7 +44,11 @@
 .settings-intro p { margin-block: var(--sp-1) 0; color: var(--muted); font-size: var(--fs-sm); }
 .settings-empty { padding: var(--sp-4); text-align: center; color: var(--muted); }
 .settings-empty p { margin-block: 0 var(--sp-3); }
-@media (max-width: 599.98px) {
+/* One pane (the list, then a section) until the dialog itself has room for
+   two: at 600px with Larger text the index got ~150px and wrapped a word
+   per line (UX #587). In rem, so Larger text keeps one pane longer. */
+.settings-window { container: settings / inline-size; }
+@container settings (max-width: 37.99rem) {
   .settings-window[data-drilled="false"] .settings-pane,
   .settings-window[data-drilled="false"] .settings-title-section,
   .settings-window[data-drilled="false"] .settings-back,
@@ -58,6 +62,8 @@
     border: 1px solid var(--line); border-radius: var(--radius-sheet); overflow: hidden;
     box-shadow: 0 12px 40px rgb(0 0 0 / 0.2);
   }
+}
+@container settings (min-width: 38rem) {
   .settings-body { grid-template-columns: minmax(11rem, 30%) minmax(0, 1fr); }
   .settings-index { border-inline-end: 1px solid var(--line-soft, var(--line)); }
   .settings-sections .activity-row { padding-inline: var(--sp-3); }
@@ -120,7 +126,9 @@
    icon, name (+ "this device"), last sync, and a sign-out at the row end. */
 .sync-who { display: flex; align-items: center; gap: var(--sp-3); }
 .sync-who .row-copy small { color: var(--muted); font-size: var(--fs-sm); }
-.sync-email { align-self: flex-start; font-family: var(--font-latin, inherit); font-weight: 600; overflow-wrap: anywhere; text-align: start; }
+/* One line, cut with an ellipsis (the whole address in its title), never
+   broken mid-word: "student@example.co / m" at 320 (UX #585). */
+.sync-email { display: block; align-self: flex-start; max-inline-size: 100%; font-family: var(--font-latin, inherit); font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: start; }
 .sync-state { padding-inline-start: calc(2.25rem + var(--sp-3)); display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-1) var(--sp-2); margin: 0; }
 .sync-state > span:not(.chip) + span:not(.chip)::before { content: "· "; }
 .sync-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: var(--sp-2); margin-block-start: var(--sp-1); }
