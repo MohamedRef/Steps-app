@@ -151,6 +151,7 @@ fn problem_text(p: Problem) -> &'static str {
         Problem::SignedOutRemotely => tx::P_REMOTE,
         Problem::Network => tx::P_NETWORK,
         Problem::SignInWaiting => tx::P_SIGN_IN_WAITING,
+        Problem::SignInInterrupted => tx::P_INTERRUPTED,
         Problem::Server => tx::P_SERVER,
         Problem::Outdated => tx::P_OUTDATED,
         Problem::ClockOff => tx::P_CLOCK,
