@@ -25,7 +25,8 @@ env:
 jobs:
   macos:
     # adapted from batna-app main: .github/workflows/ci.yml (macos)
-    timeout-minutes: 45
+    # A cold run (no cache, dx built from source) took 40 minutes (#343).
+    timeout-minutes: 75
     name: Mac app compiles
     runs-on: macos-15
     steps:

@@ -5,7 +5,7 @@ name: Failure alerts
 # one issue "<workflow> failed on main" (or comments on the open one), and
 # closes it when the next run of that workflow passes. Coverage keeps its
 # own issue (nightly.yml). Runs started by hand are left alone: whoever
-# started one is looking at it.
+# started one is looking at it. Runs daily.yml starts count as nightly ones.
 
 on:
   workflow_run:
@@ -33,7 +33,9 @@ jobs:
   alert:
     name: Open or close the alert
     if: >-
-      contains(fromJSON('["schedule", "workflow_run"]'), github.event.workflow_run.event) &&
+      (contains(fromJSON('["schedule", "workflow_run"]'), github.event.workflow_run.event) ||
+       (github.event.workflow_run.event == 'workflow_dispatch' &&
+        github.event.workflow_run.triggering_actor.login == 'github-actions[bot]')) &&
       contains(fromJSON('["success", "failure", "timed_out"]'), github.event.workflow_run.conclusion)
     runs-on: ubuntu-24.04
     timeout-minutes: 5

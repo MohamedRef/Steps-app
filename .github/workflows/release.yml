@@ -9,6 +9,8 @@ name: Release
 # - a release of its own (`steps-v<version>`) with the APK and the zipped
 #   Steps.app for installing by hand.
 #
+# Dry run by default: it builds, signs and checks the APK and Steps.app and
+# publishes nothing; untick "Dry run" for the real release (#341).
 # By hand only (Actions › Release › Run workflow), and from main only:
 # nothing is released unless Mohamed says go, and never from a branch that
 # hasn't been reviewed and merged (#104). The keys come from repo secrets that
@@ -27,6 +29,11 @@ on:
         description: "Short notes (Egyptian Arabic, optional)"
         required: false
         default: ""
+      dry_run:
+        description: "Dry run: build and sign the APK and Steps.app, publish nothing (#341)"
+        type: boolean
+        required: false
+        default: true
 
 concurrency:
   group: release
@@ -52,6 +59,10 @@ jobs:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    permissions:
+      contents: read
+      # To check Nightly checks and Mac passed on this commit.
+      actions: read
     outputs:
       version: ${{ steps.v.outputs.version }}
       channels: ${{ steps.v.outputs.channels }}
@@ -69,6 +80,8 @@ jobs:
           save-if: false
       - name: Release version and its channels
         id: v
+        env:
+          DRY_RUN: ${{ inputs.dry_run }}
         run: |
           v="$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)"
           channels="$(cargo run -q -p steps-tools -- update channels --version "$v" | tr '\n' ' ')"
@@ -83,14 +96,35 @@ jobs:
             fi
           done
           if ! out="$(cargo run -q -p steps-tools -- update guard --version "$v" "${previous[@]}" 2>&1)"; then
-            echo "::error::$out"
-            exit 1
+            if [ "$DRY_RUN" = true ]; then
+              # A dry run publishes nothing, so it still builds; the real run would stop here.
+              echo "::warning::A real release would stop here: $out"
+            else
+              echo "::error::$out"
+              exit 1
+            fi
           fi
           build="$(scripts/build-number.sh)"
           echo "version=$v" >> "$GITHUB_OUTPUT"
           echo "channels=$channels" >> "$GITHUB_OUTPUT"
           echo "build=$build" >> "$GITHUB_OUTPUT"
           echo "Steps $v (build $build) → $channels"
+      # A real release ships only a commit that passed the platform checks
+      # (#341): Nightly checks (Android, web, Worker, coverage) and Mac.
+      - name: Nightly checks and Mac passed on this commit
+        if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          ok=true
+          for wf in nightly.yml mac.yml; do
+            if [ -z "$(gh run list --workflow "$wf" --commit "$GITHUB_SHA" --status success --limit 1 --json databaseId --jq '.[].databaseId')" ]; then
+              echo "::error::$wf has no green run on ${GITHUB_SHA::7}: run it (Actions › Run workflow on main) and release once it passes (docs/RELEASE.md §4)."
+              ok=false
+            fi
+          done
+          $ok
       - name: Every key is there
         env:
           HAVE_UPDATE: ${{ secrets.STEPS_UPDATE_SECRET != '' }}
@@ -200,7 +234,8 @@ jobs:
     name: Release Steps.app
     needs: prepare
     runs-on: macos-15
-    timeout-minutes: 60
+    # A cold macOS build took 40 minutes (#343).
+    timeout-minutes: 75
     env:
       STEPS_BUILD: ${{ needs.prepare.outputs.build }}
     steps:
@@ -267,6 +302,8 @@ jobs:
   publish:
     name: Publish the release and its update feed
     needs: [prepare, android, mac]
+    # A dry run stops after the signed builds (their artifacts stay on the run).
+    if: ${{ !inputs.dry_run }}
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     env:
