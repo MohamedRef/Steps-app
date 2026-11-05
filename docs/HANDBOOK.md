@@ -83,7 +83,7 @@ Rust stable (edition 2024, minimum 1.90), Dioxus 0.7 with HTML/CSS for the UI. A
 | Path | What it is |
 |---|---|
 | `crates/core` | Pure logic, no UI and no IO; builds for wasm32. Content schema and validation (`content.rs`, `validate.rs`, `lesson.rs`, `glossary.rs`, `quote.rs`), FSRS and scheduling (`srs.rs`, `review/`, `session.rs`), planner (`plan.rs`), timed exam (`exam.rs`), self-assessment (`selfassess.rs`), pages read (`pages.rs`), stats, packs (`pack.rs`), update feed (`update.rs`), themes (`theme.rs`). |
-| `crates/app` | The app (Dioxus). One module per feature (`today`, `study`, `bank`, `case`, `learn`, `lecture`, `plan`, `stats`, `oral`, `notes`, `own`, `qbank`, `labs`, `settings`, `update`, `cloud`, …). `store/` is SQLite and sync outbox; `platform/` is device glue (Android JNI, Mac, browser); `i18n.rs` holds all Arabic UI text; `prefs.rs` and `look.rs` hold appearance; `render_tests/` are the screen tests. |
+| `crates/app` | The app (Dioxus). One module per feature (`today`, `study`, `bank`, `case`, `learn`, `lecture`, `plan`, `stats`, `oral`, `notes`, `own`, `qbank`, `labs`, `settings`, `update`, `cloud`, …). `store/` is SQLite and sync outbox; `platform/` is device glue (Android JNI, Mac, browser); `i18n/` holds all Arabic UI text, one file per feature (`i18n/today.rs`, …) declared in `i18n/mod.rs`; `prefs.rs` and `look.rs` hold appearance; `render_tests/` are the screen tests. |
 | `crates/protocol` | Wire types shared by app and server: sync ops and tables (`sync.rs`, `TABLES`), cloud API (`cloud.rs`), merge rules, client state machine. |
 | `crates/server` | Steps Cloud, the Cloudflare Worker (Durable Objects, no D1/R2). `wrangler.toml`. |
 | `crates/tools` | `steps-tools` CLI: `validate`, `refs`, `packs`, `ids`, `content` (next-id, new-item, diff, preflight), `anki`, `qbank sync`, `update` (changes, guard, publish), `verdicts`. |
@@ -98,6 +98,8 @@ Rust stable (edition 2024, minimum 1.90), Dioxus 0.7 with HTML/CSS for the UI. A
 | `fixtures/` | Sample content (`fixtures/content/sample.yaml` shows every item kind). |
 | `.github/workflows/` | CI, nightly, deploys, release (§6). |
 | `justfile` | Every common command. `just` with no argument lists them. |
+
+**File layout rule (2026-11-05):** a file holds one concern, and work that many people change in parallel lives in many small files rather than one shared one, so parallel PRs rarely touch the same lines. A new feature adds its own folder (`crates/app/src/<feature>/`), its own text file (`i18n/<feature>.rs`), its own CSS and its own `changes/<topic>.yaml`, and adds only one declaration line to a shared list. Content is already split per course (§8). Rust modules group a concern rather than one type per file. Unit tests longer than a screen live in a sibling file (`plan.rs` declares `#[cfg(test)] mod tests;` and the tests sit in `plan/tests.rs`), so a test change and a code change rarely meet. Splits are behavior-preserving (same module paths and test names) and land one area per PR.
 
 How the pieces talk: content YAML → `steps-tools packs build` → one signed content pack. Apps carry a built-in pack and download newer ones from the update feed without a new APK when only content changed. Each device keeps its reviews, checks and settings in SQLite (IndexedDB in the browser) and pushes an outbox of ops to Steps Cloud over a WebSocket; other devices get them within seconds. Everything works offline.
 
@@ -211,7 +213,7 @@ GitHub Actions settings (Settings › Secrets and variables › Actions). Names 
 
 The Worker's own secrets (`TOKEN_SIGNING_KEY`, `ALLOWED_EMAILS`) live in Cloudflare; the first deploy makes the signing key. `crates/server/wrangler.toml` keeps `GOOGLE_CLIENT_IDS` empty on purpose; the deploy passes it from the variable, so a dashboard edit would be overwritten.
 
-If sign-in fails: check `STEPS_GOOGLE_CLIENT_IDS`, then run Actions › Deploy Steps Cloud › Run workflow, then `curl https://steps-cloud.hamorefaat85.workers.dev/v1/health`. Android sign-in waiting and retry logic is in `crates/app/src/cloud/oauth.rs` and `engine.rs`; the return activity is `android/src/main/kotlin/app/steps/SignInReturn.kt`.
+If sign-in fails: check `STEPS_GOOGLE_CLIENT_IDS`, then run Actions › Deploy Steps Cloud › Run workflow, then `curl https://steps-cloud.hamorefaat85.workers.dev/v1/health`. Android sign-in waiting and retry logic is in `crates/app/src/cloud/oauth.rs` and `engine.rs`; the return activity is `android/src/main/kotlin/app/steps/SignInReturn.kt`. On Android the single-use code goes to Google only while Steps is in front (`SignInBridge.inForeground`): Android can abort a backgrounded app's request after Google took the code, and the retry then gets `invalid_grant` (#629). If that still happens, the app says to sign in again.
 
 ## 10. Releases, signing and updates
 
@@ -247,7 +249,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 - **Shape language:** rising-step minute chips, a hero with a staircase and a gold summit, cards on a solid "ledge", a docked bottom bar with a top marker, the mark before the "Steps" wordmark.
 - **Themes (8 + follow the device):** صبح (Paper), بترولي (Night), أسود AMOLED (True black), سهر (Night shift, amber, no blue), سكرَب (Scrubs), سيبيا (Sepia), نيلي (Indigo), تباين عالي (High contrast). Code: `crates/core/src/theme.rs` (every colour pair is tested for WCAG AA 4.5:1). Theme ids never change.
 - **Styles (10):** درجات (Stepped, the default), خط رفيع, من غير حدود, فواصل, خط جانبي, رمادي فاتح, أبيض وأسود, خطوط, ملوّن, زجاج. Code: `crates/app/src/prefs.rs` (`Appearance`) and `crates/app/assets/appearance.css`. A device preference, never synced.
-- Labels are in `crates/app/src/i18n.rs` (`THEME_*`, `APPEARANCE_*`). I prefer minimal looks, and alternatives offered as options rather than a single pick.
+- Labels are in `crates/app/src/i18n/` (`THEME_*`, `APPEARANCE_*`). I prefer minimal looks, and alternatives offered as options rather than a single pick.
 - Feature stylesheets use tokens only (`--bg`, `--surface`, `--accent`, …), never their own hex colours or copies of shared parts.
 
 ## 12. Current state, roadmap and known issues
@@ -262,12 +264,13 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 - **Only other source so far:** First Aid 2026. B&B videos and UWorld ids per lecture come from a public mapping document (QBANK.md).
 
 ### Roadmap
-- **1.0.0-alpha.2:** anything found by the last UX walk and the final code check of alpha.1, plus whatever daily use of alpha.1 turns up. Confirm the scheduled workflows fire again (#614) and close it.
+- **1.0.0-alpha.2:** anything found by the last UX walk and the final code check of alpha.1, plus whatever daily use of alpha.1 turns up. Confirm the scheduled workflows fire again (#614) and close it. Android Google sign-in no longer fails with `invalid_grant` when Chrome is in front (#629).
 - **Later (not started until I ask):** audit the three research reports on Step 1 apps and websites against the app. Likely gaps: an NBME/UWSA score tracker beyond the current log, a question-bank mistake log by question id, and new cards only from pages already read. Features that copy a commercial question bank stay low priority, since I already have the banks.
 - **More sources:** Pathoma, Sketchy, UWorld notes and my own materials merge into the First Aid lectures and topics as they arrive ([SOURCES.md](SOURCES.md)). When the first non-First-Aid source arrives, `steps-tools refs` must learn to read its text.
 - **Approvals:** I check items against the book in the app and export my verdicts; fixes follow per lecture.
 - **Beta, then stable:** after daily use of the alpha; I decide when.
 - **Exam:** Step 1 around September 2027 (date not fixed yet). Since May 2026 the exam is 14 blocks of 30 minutes, up to 20 questions each.
+- **Smaller files, fewer merge conflicts:** split the busiest shared files one area per PR, with no behavior change (§3 file layout rule). Done: UI text (`i18n.rs` into `i18n/`, one file per feature); core unit tests in sibling files.
 
 ### Known issues
 - **#614 Scheduled workflows are not firing.** GitHub had not run this repo's `schedule:` triggers; #612 re-saved each cron line under my account. `daily.yml` starts the platform runs after green CI on `main` meanwhile. Check Actions for runs with event `schedule`.
