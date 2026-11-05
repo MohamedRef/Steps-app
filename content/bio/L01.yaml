@@ -141,7 +141,7 @@ items:
     stem: >-
       A 7-year-old boy is evaluated for intellectual disability and hyperactivity. He has a long face,
       large ears and a prominent jaw. Genetic testing shows a large CGG repeat expansion in the
-      promoter region of the FMR1 gene, and FMR1 protein is absent. Which mechanism most directly
+      5′ region of the FMR1 gene, and FMR1 protein is absent. Which mechanism most directly
       silences the gene?
     options:
       - Acetylation of histone lysine residues
@@ -301,8 +301,20 @@ items:
   - id: bio.L01.026
     kind: card
     topic: de-novo-nucleotide-synthesis
-    front: What is the rate-limiting enzyme of de novo pyrimidine synthesis, and what do the 2 carbamoyl phosphate synthetases differ in?
-    back: "Carbamoyl phosphate synthetase II (CPS2). CPS1 = mitochondria, urea cycle, liver (\"m1tochondria\"). CPS2 = cytosol, pyrimidine synthesis, most cells (\"cytwosol\")."
+    front: What is the rate-limiting enzyme of de novo pyrimidine synthesis?
+    back: Carbamoyl phosphate synthetase II (CPS2).
+    src: { page: 34, quote: "CPS2 (carbamoyl phosphate synthetase II)* PRPP (phosphoribosyl pyrophosphate) synthetase (requires aspartate) (de novo requires aspartate, glycine, glutamine, and THF) Purine base production or reuse from salvage pathway Pyrimidine base production Dihydrofolate reductase MTX, TMP, pyrimethamine 5-FU Hydroxyurea 6-MP, MTX, azathioprine Leﬂunomide 2 ADP + Pi + Glutamate 2 ATP Mycophenolate, ribavirin THF *denotes rate-limiting step" }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L01.124
+    kind: table
+    topic: de-novo-nucleotide-synthesis
+    title: CPS1 vs CPS2
+    columns: [Enzyme, Location, Pathway, Found in]
+    rows:
+      - [CPS1, "Mitochondria (\"m1tochondria\")", Urea cycle, Liver]
+      - [CPS2, "Cytosol (\"cytwosol\")", Pyrimidine synthesis, Most cells]
+    blanks: [[0, 1], [0, 2], [0, 3], [1, 1], [1, 2], [1, 3]]
     src: { page: 34, quote: "CPS1 = m1tochondria, urea cycle, found in liver CPS2 = cytwosol, pyrimidine synthesis, found in most cells" }
     status: unverified
     tags: [high-yield]
@@ -432,14 +444,14 @@ items:
     topic: purine-salvage-deficiencies
     front: What is the defect in Lesch-Nyhan syndrome, and why is uric acid high?
     back: Deficient or mutated HGPRT → ↓ GMP (from guanine) and ↓ IMP (from hypoxanthine). Compensatory ↑ purine synthesis (↑ PRPP amidotransferase) → excess uric acid.
-    src: { page: 35, quote: "Defective purine salvage. Deficient or mutated HGPRT → ↓ GMP (from guanine) and ↓ IMP (from hypoxanthine) formation." }
+    src: { page: 35, quote: "Defective purine salvage. Deficient or mutated HGPRT → ↓ GMP (from guanine) and ↓ IMP (from hypoxanthine) formation. Compensatory ↑ in purine synthesis (↑ PRPP amidotransferase activity) → excess uric acid production." }
     status: unverified
     tags: [high-yield]
   - id: bio.L01.038
     kind: cloze
     topic: purine-salvage-deficiencies
     text: Lesch-Nyhan syndrome is inherited {{c1::X-linked recessive}} and is treated with {{c2::allopurinol or febuxostat}}.
-    src: { page: 35, quote: "X-linked recessive." }
+    src: { page: 35, quote: "X-linked recessive. Findings: intellectual disability, self-mutilation, aggression, hyperuricemia (red/orange “sand” [sodium urate crystals] in diaper), gout, dystonia, macrocytosis. HGPRT: Hyperuricemia Gout Pissed off (aggression, self-mutilation) Red/orange crystals in urine Tense muscles (dystonia) Treatment: allopurinol, febuxostat." }
     status: unverified
     tags: [high-yield]
   - id: bio.L01.039
@@ -462,9 +474,16 @@ items:
   - id: bio.L01.040
     kind: card
     topic: purine-salvage-deficiencies
-    front: Which drugs does the book's purine salvage figure place at the adenosine deaminase (ADA) step, and which enzyme does rasburicase supply?
-    back: Cladribine and pentostatin sit at the ADA step (pentostatin inhibits ADA). Rasburicase is urate oxidase (uric acid → allantoin).
+    front: Which drugs does the book's purine salvage figure place at the adenosine deaminase (ADA) step?
+    back: Cladribine and pentostatin; the figure places both at the ADA step.
     src: { page: 35, quote: "Cladribine, pentostatin ADA SCID" }
+    status: unverified
+  - id: bio.L01.125
+    kind: card
+    topic: purine-salvage-deficiencies
+    front: Which enzyme does rasburicase supply, and what does it make from uric acid?
+    back: Urate oxidase; it turns uric acid into allantoin.
+    src: { page: 35, quote: "Allantoin Allopurinol Febuxostat Excretion Urate oxidase (rasburicase) Uric acid" }
     status: unverified
   - id: bio.L01.041
     kind: mcq
@@ -569,8 +588,15 @@ items:
   - id: bio.L01.047
     kind: card
     topic: dna-replication
-    front: In which direction does DNA replication occur, and in what fashion?
-    back: 5′ → 3′ ("5ynth3sis"), continuous on the leading strand and discontinuous (Okazaki fragments) on the lagging strand. It is semiconservative.
+    front: In which direction is new DNA synthesized?
+    back: 5′ → 3′ ("5ynth3sis").
+    src: { page: 36, quote: "Occurs in 5′ → 3′ direction (“5ynth3sis”) in continuous and discontinuous (Okazaki fragment) fashion. Semiconservative." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L01.126
+    kind: cloze
+    topic: dna-replication
+    text: DNA replication runs in a {{c1::continuous}} and a {{c2::discontinuous (Okazaki fragment)}} fashion, and it is {{c3::semiconservative}}.
     src: { page: 36, quote: "Occurs in 5′ → 3′ direction (“5ynth3sis”) in continuous and discontinuous (Okazaki fragment) fashion. Semiconservative." }
     status: unverified
     tags: [high-yield]
@@ -639,11 +665,17 @@ items:
   - id: bio.L01.055
     kind: card
     topic: dna-replication
-    front: What is telomerase, what does it add, and where is it up- or downregulated?
-    back: "A eukaryotic reverse transcriptase (RNA-dependent DNA polymerase) that adds TTAGGG to the 3′ ends of chromosomes. Upregulated in progenitor cells and often in cancer; downregulated in aging and progeria. (Telomerase TAGs for Greatness and Glory.)"
+    front: What kind of enzyme is telomerase, and what does it add to chromosomes?
+    back: "A eukaryotic RNA-dependent DNA polymerase (reverse transcriptase) that adds TTAGGG to the 3′ ends of chromosomes. (Telomerase TAGs for Greatness and Glory.)"
     src: { page: 36, quote: "A reverse transcriptase (RNA- dependent DNA polymerase) that adds DNA (TTAGGG) to 3′ ends of chromosomes to avoid loss of genetic material with every duplication." }
     status: unverified
     tags: [high-yield]
+  - id: bio.L01.127
+    kind: cloze
+    topic: dna-replication
+    text: Telomerase is upregulated in {{c1::progenitor cells}} and often in {{c2::cancer}}; it is downregulated in {{c3::aging and progeria}}.
+    src: { page: 36, quote: "Upregulated in progenitor cells and also often in cancer; downregulated in aging and progeria." }
+    status: unverified
   - id: bio.L01.056
     kind: mcq
     topic: dna-replication
@@ -749,8 +781,8 @@ items:
     why:
       - "Right. Xeroderma pigmentosum: defective nucleotide excision repair, which occurs in G1."
       - "S phase is when mismatch repair mainly works."
-      - "The book doesn't place a repair pathway in G2."
-      - "No repair pathway in the book works in M."
+      - "G2 comes after DNA synthesis; the book places nucleotide excision repair of UV dimers in G1, not G2."
+      - "In M phase the chromosomes are condensed and being separated; none of the repair pathways (NER in G1, mismatch in S, BER throughout) is tied to it."
       - "Base excision repair works throughout the cell cycle."
     src: { page: 37, quote: "Repairs bulky helix-distorting lesions (eg, pyrimidine dimers). Occurs in G1 phase of cell cycle." }
     status: unverified
@@ -932,7 +964,7 @@ items:
     topic: gene-expression-regulation
     front: What is a promoter, and what does a promoter mutation usually cause?
     back: The upstream, AT-rich site (TATA and CAAT boxes) where RNA polymerase II and transcription factors bind; it increases initiation of transcription. A promoter mutation commonly causes a dramatic ↓ in gene transcription.
-    src: { page: 40, quote: "Promoter mutation commonly results in dramatic ↓ in level of gene transcription." }
+    src: { page: 40, quote: "Site where RNA polymerase II and multiple other transcription factors bind to DNA upstream from gene locus (AT-rich upstream sequence with TATA and CAAT boxes, which differ between eukaryotes and prokaryotes). Promoters increase initiation of transcription. Promoter mutation commonly results in dramatic ↓ in level of gene transcription." }
     status: unverified
     tags: [high-yield]
   - id: bio.L01.076
@@ -964,10 +996,11 @@ items:
     kind: mcq
     topic: gene-expression-regulation
     stem: >-
-      A family with a hereditary anemia carries a single-base substitution about 30 base pairs upstream
-      of the transcription start site of a globin gene, in an AT-rich sequence. The coding sequence is
-      normal, but red cell precursors contain very little of that globin's mRNA. Which element is most
-      likely mutated?
+      A 4-year-old boy of Mediterranean descent is brought to the clinic for pallor and fatigue. His
+      hemoglobin is 9.1 g/dL with microcytic red cells, and iron studies are normal. Gene sequencing
+      shows a normal coding sequence but a single-base substitution about 30 base pairs upstream of the
+      transcription start site of a globin gene, in an AT-rich sequence. His reticulocytes contain very
+      little of that globin's mRNA. Which element is most likely mutated?
     options:
       - Enhancer within an intron
       - Promoter (TATA box)
@@ -1001,7 +1034,7 @@ items:
     kind: card
     topic: rna-processing
     front: What happens at cytoplasmic processing bodies (P-bodies)?
-    back: mRNA quality control. They contain exonucleases, decapping enzymes and microRNAs; mRNAs may be degraded or stored there for future translation.
+    back: "mRNA quality control: with their exonucleases, decapping enzymes and microRNAs, P-bodies either break an mRNA down or hold it to be translated later."
     src: { page: 40, quote: "mRNA quality control occurs at cytoplasmic processing bodies (P-bodies), which contain exonucleases, decapping enzymes, and microRNAs; mRNAs may be degraded or stored in P-bodies for future translation." }
     status: unverified
   - id: bio.L01.082
@@ -1015,7 +1048,7 @@ items:
     kind: card
     topic: rna-processing
     front: What is the Kozak sequence, and what happens when it is mutated?
-    back: The initiation site in most eukaryotic mRNA; it helps the small ribosomal subunit bind the mRNA. Mutations impair translation initiation → ↓ protein synthesis.
+    back: "Where translation starts on most eukaryotic mRNAs: it is the landing spot for the small ribosomal subunit. A mutation there means translation can't start well, so less protein is made."
     src: { page: 40, quote: "Kozak sequence—initiation site in most eukaryotic mRNA. Facilitates binding of small subunit of ribosome to mRNA. Mutations in sequence → impairment of initiation of translation → ↓ protein synthesis." }
     status: unverified
   - id: bio.L01.084
@@ -1027,11 +1060,11 @@ items:
       a point mutation in the 5′ untranslated region just before the AUG start codon. Which process is
       most likely impaired?
     options:
-      - Binding of RNA polymerase II to the promoter
-      - Addition of the poly-A tail
+      - Binding of RNA polymerase II to the TATA box of the gene's promoter
+      - Addition of the poly-A tail after the AAUAAA polyadenylation signal
       - Binding of the small ribosomal subunit to the mRNA at the initiation site
-      - Removal of introns by the spliceosome
-      - Charging of tRNA by aminoacyl-tRNA synthetase
+      - Removal of introns by snRNPs of the spliceosome at GU-AG junctions
+      - Charging of tRNA with its amino acid by aminoacyl-tRNA synthetase
     answer: 2
     why:
       - "A promoter defect would lower mRNA, but mRNA is normal here."
@@ -1101,14 +1134,14 @@ items:
       - rRNA
       - mRNA
       - tRNA
-      - Bacterial mRNA only
+      - 5S rRNA
       - DNA
     answer: 1
     why:
       - "rRNA is made by RNA polymerase I, which the toxin spares."
       - "Right. α-amanitin from death cap mushrooms inhibits RNA polymerase II, which makes mRNA; it causes dysentery and severe hepatotoxicity."
       - "tRNA is made by RNA polymerase III."
-      - "Prokaryotic RNA polymerase is the target of rifamycins."
+      - "5S rRNA is made by RNA polymerase III, not the polymerase this toxin blocks."
       - "The toxin blocks transcription, not DNA replication."
     src: { page: 40, quote: "α-amanitin, found in Amanita phalloides (death cap mushrooms), inhibits RNA polymerase II. Causes dysentery and severe hepatotoxicity if ingested." }
     status: unverified
@@ -1119,7 +1152,7 @@ items:
     topic: introns-exons
     front: What do exons and introns each do?
     back: Exons carry the genetic information coding for protein or functional RNA; they exit the nucleus and are expressed. Introns don't code for protein but help regulate gene expression; they stay in the nucleus.
-    src: { page: 41, quote: "Exons contain the actual genetic information coding for protein or functional RNA. Introns do not code for protein, but are important in regulation of gene expression." }
+    src: { page: 41, quote: "Exons contain the actual genetic information coding for protein or functional RNA. Introns do not code for protein, but are important in regulation of gene expression. Different exons are frequently combined by alternative splicing to produce a larger number of unique proteins. Introns are intervening sequences and stay in the nucleus, whereas exons exit and are expressed." }
     status: unverified
   - id: bio.L01.091
     kind: card
@@ -1132,9 +1165,11 @@ items:
     kind: mcq
     topic: introns-exons
     stem: >-
-      A naive B cell in a lymph node first displays IgM on its surface. After activation, the same cell
-      and its daughters secrete large amounts of IgM with the same antigen specificity but without the
-      membrane anchor. Which process allows one gene to make both forms?
+      A 23-year-old woman receives her first dose of hepatitis B vaccine at a university health clinic.
+      Her naive B cells that recognize the vaccine antigen first display IgM on their surface. One week
+      later, her serum contains anti-HBs IgM with the same antigen specificity, secreted by the
+      activated cells and their daughters and lacking the membrane anchor. Which process allows one
+      gene to make both forms?
     options:
       - Somatic hypermutation
       - Alternative splicing of the primary transcript
@@ -1192,11 +1227,11 @@ items:
       - Charging of tRNA
     answer: 1
     why:
-      - "Capping isn't the defect in this syndrome."
+      - "Capping adds the 7-methylguanosine cap to the 5′ end; floppy baby with tongue fasciculations is spinal muscular atrophy, whose ↓ SMN protein disrupts snRNP assembly for splicing, not capping."
       - "Right. Spinal muscular atrophy: ↓ SMN protein impairs snRNP assembly → degeneration of anterior horns → symmetric weakness (floppy baby syndrome)."
       - "Mismatch repair defects cause Lynch syndrome."
       - "Polyadenylation defects cause early mRNA degradation, not this disease."
-      - "tRNA charging defects aren't in the book's list for this picture."
+      - "tRNA charging by aminoacyl-tRNA synthetases is a translation step; floppy baby syndrome with tongue fasciculations is spinal muscular atrophy, a defect of snRNP assembly for splicing."
     src: { page: 41, quote: "in spinal muscular atrophy, snRNP assembly is affected due to ↓ SMN protein → congenital degeneration of anterior horns of spinal cord → symmetric weakness (hypotonia, or “floppy baby syndrome”)." }
     status: unverified
     tags: [high-yield]
@@ -1305,7 +1340,7 @@ items:
       - "Methionine starts eukaryotic proteins."
       - "Right. In prokaryotes AUG codes for N-formylmethionine, and fMet stimulates neutrophil chemotaxis."
       - "Tryptophan (UGG) is the other single-codon amino acid, not a start residue."
-      - "The book doesn't link this amino acid to chemotaxis."
+      - "Selenocysteine is a rare amino acid built into a few enzymes; it doesn't start bacterial peptides or draw neutrophils."
       - "Lysine adds positive charge to histones; it isn't a start residue."
     src: { page: 42, quote: "Codes for N-formylmethionine (fMet). fMet stimulates neutrophil chemotaxis." }
     status: unverified
@@ -1374,13 +1409,13 @@ items:
     topic: protein-synthesis
     front: What catalyzes peptide bond formation, and how far does the ribosome move each step?
     back: rRNA (a "ribozyme"). The ribosome advances 3 nucleotides toward the 3′ end of the mRNA, moving the peptidyl tRNA to the P site (translocation).
-    src: { page: 43, quote: "rRNA (“ribozyme”) catalyzes peptide bond formation, transfers growing polypeptide to amino acid in A site." }
+    src: { page: 43, quote: "rRNA (“ribozyme”) catalyzes peptide bond formation, transfers growing polypeptide to amino acid in A site. Ribosome advances 3 nucleotides toward 3′ end of mRNA, moving peptidyl tRNA to P site (translocation)." }
     status: unverified
   - id: bio.L01.110
     kind: card
     topic: protein-synthesis
     front: What is the Shine-Dalgarno sequence?
-    back: The ribosomal binding site in prokaryotic mRNA, recognized by 16S RNA; it aligns the ribosome with the start codon so the code is read correctly.
+    back: "Where the ribosome docks on bacterial (prokaryotic) mRNA: the 16S RNA of the small subunit pairs with it, lining the ribosome up on the start codon."
     src: { page: 43, quote: "Shine-Dalgarno sequence—ribosomal binding site in prokaryotic mRNA. Recognized by 16S RNA in ribosomal subunit." }
     status: unverified
   - id: bio.L01.111
@@ -1398,11 +1433,11 @@ items:
       - Aminoacyl-tRNA synthetase
     answer: 1
     why:
-      - "Initiation factors aren't the toxin's target."
+      - "Initiation factors (eIFs) recognize the 5′ cap; diphtheria toxin acts on an elongation factor instead."
       - "Right. Elongation factors are targets of bacterial toxins such as diphtheria and Pseudomonas exotoxin, stopping translation."
       - "Peptide bonds are made by rRNA (a ribozyme), which the toxin doesn't target."
       - "Release factors act at termination."
-      - "tRNA charging isn't blocked by this toxin."
+      - "Aminoacyl-tRNA synthetases charge tRNA using ATP before translation; bacterial toxins such as diphtheria target the elongation factor, not tRNA charging."
     src: { page: 43, quote: "Elongation factors are targets of bacterial toxins (eg, Diphtheria, Pseudomonas)." }
     status: unverified
     tags: [high-yield]
@@ -1420,14 +1455,14 @@ items:
     prompt: Enumerate the covalent posttranslational alterations (6).
     points: [Phosphorylation, Glycosylation, Hydroxylation, Methylation, Acetylation, Ubiquitination]
     pass: 5
-    hook: "6 حاجات بتتلزق في البروتين بعد ما يتعمل: Phosphate و Glyco (سكر) و Hydroxyl و Methyl و Acetyl و Ubiquitin (اللي بيبعته للزبالة)."
+    hook: "6 حاجات بتتلزق في البروتين بعد ما يتعمل: Phosphate و Glyco (سكر) و Hydroxyl و Methyl و Acetyl و Ubiquitin."
     src: { page: 43, quote: "Covalent alterations Phosphorylation, glycosylation, hydroxylation, methylation, acetylation, and ubiquitination." }
     status: unverified
   - id: bio.L01.114
     kind: card
     topic: posttranslational-modifications
     front: What are chaperone proteins, and when does heat shock protein expression rise?
-    back: Intracellular proteins that help proteins fold and stay folded. In yeast, HSPs (eg, HSP60) are constitutive but rise with high temperature, acidic pH and hypoxia to prevent denaturing/misfolding.
+    back: "Helpers inside the cell that get proteins into shape and keep them there. In yeast, HSPs such as HSP60 are always made, and heat, acid pH or low oxygen push their levels up so proteins don't unfold or misfold."
     src: { page: 43, quote: "Intracellular protein involved in facilitating and maintaining protein folding. In yeast, heat shock proteins (eg, HSP60) are constitutively expressed, but expression may increase with high temperatures, acidic pH, and hypoxia to prevent protein denaturing/misfolding." }
     status: unverified
   - id: bio.L01.115

@@ -70,6 +70,7 @@ items:
     text: "{{c1::PGI2}} (prostacyclin) is a vasodilator and platelet aggregation inhibitor (Platelet-Gathering Inhibitor)."
     src: { page: 495, quote: "is a vasodilator and platelet aggregation inhibitor. Neutrophils arrive “B4” others. Platelet-Gathering Inhibitor." }
     status: unverified
+    tags: [high-yield]
   - id: msk.L04.006
     kind: card
     topic: arachidonic-acid-pathways
@@ -110,10 +111,18 @@ items:
   - id: msk.L04.009
     kind: card
     topic: acetaminophen
-    front: How does acetaminophen work, and what can it not do?
-    back: "Reversibly inhibits cyclooxygenase, mostly in the CNS; inactivated peripherally. Antipyretic and analgesic, but not anti-inflammatory."
+    front: How does acetaminophen work?
+    back: "It blocks cyclooxygenase reversibly, and does so mainly in the brain and spinal cord, because in the periphery it is inactivated."
     src: { page: 495, quote: "Reversibly inhibits cyclooxygenase, mostly in CNS. Inactivated peripherally." }
     status: unverified
+  - id: msk.L04.058
+    kind: card
+    topic: acetaminophen
+    front: What does acetaminophen do clinically, and what can it not do?
+    back: It brings down fever and relieves pain (antipyretic, analgesic), but it is not anti-inflammatory.
+    src: { page: 495, quote: "CLINICAL USE Antipyretic, analgesic, but not anti-inflammatory. Used instead of aspirin to avoid Reye syndrome in children with viral infection." }
+    status: unverified
+    tags: [high-yield]
   - id: msk.L04.010
     kind: card
     topic: acetaminophen
@@ -126,7 +135,7 @@ items:
     kind: card
     topic: acetaminophen
     front: How does acetaminophen overdose damage the liver, and what is the antidote?
-    back: "Hepatic necrosis: the metabolite NAPQI depletes glutathione and forms toxic byproducts in the liver. N-acetylcysteine is the antidote; it regenerates glutathione."
+    back: "Its metabolite NAPQI uses up the liver's glutathione and then makes toxic products in liver tissue, so the liver necroses. The antidote, N-acetylcysteine, works by restoring glutathione."
     src: { page: 495, quote: "Overdose produces hepatic necrosis; acetaminophen metabolite (NAPQI) depletes glutathione and forms toxic tissue byproducts in liver. N-acetylcysteine is antidote—regenerates glutathione." }
     status: unverified
     tags: [high-yield]
@@ -156,9 +165,17 @@ items:
   - id: msk.L04.013
     kind: card
     topic: aspirin
-    front: How does aspirin's mechanism differ from other NSAIDs, and what does it do to bleeding tests?
-    back: "It irreversibly inhibits COX-1 and COX-2 by covalent acetylation → ↓ TXA2 and prostaglandins. Bleeding time ↑, no effect on PT or PTT; the effect lasts until new platelets are made."
+    front: What does aspirin do to bleeding tests, and how long does its effect last?
+    back: "It prolongs the bleeding time but leaves the PT and PTT unchanged, and the effect persists until the marrow makes new platelets."
     src: { page: 496, quote: "bleeding time. No effect on PT, PTT. Effect lasts until new platelets are produced." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.059
+    kind: card
+    topic: aspirin
+    front: How does aspirin's mechanism differ from other NSAIDs?
+    back: "It inactivates both COX-1 and COX-2 permanently, by attaching an acetyl group to them (covalent acetylation), so less TXA2 and fewer prostaglandins are made. Other NSAIDs block COX reversibly."
+    src: { page: 496, quote: "NSAID that irreversibly (aspirin) inhibits cyclooxygenase (both ) by covalent acetylation COX-1 and COX-2" }
     status: unverified
     tags: [high-yield]
   - id: msk.L04.014
@@ -192,7 +209,7 @@ items:
     kind: card
     topic: aspirin
     front: What acid-base pattern does aspirin toxicity cause, and how is overdose treated?
-    back: "Respiratory alkalosis early, then mixed metabolic acidosis-respiratory alkalosis. Treatment: NaHCO3."
+    back: "First a respiratory alkalosis; later it turns into a mixed picture of metabolic acidosis with respiratory alkalosis. An overdose is treated with sodium bicarbonate (NaHCO3)."
     src: { page: 496, quote: "Toxic doses cause respiratory alkalosis early, but transitions to mixed metabolic acidosis-respiratory alkalosis. Overdose treatment: NaHCO3" }
     status: unverified
     tags: [high-yield]
@@ -254,6 +271,7 @@ items:
     text: "Celecoxib reversibly and selectively inhibits {{c1::COX-2}} (First Aid: \"Selecoxib\")."
     src: { page: 496, quote: "Reversibly and selectively inhibits the cyclooxygenase (COX) isoform 2 (“Selecoxib”)" }
     status: unverified
+    tags: [high-yield]
   - id: msk.L04.020
     kind: card
     topic: celecoxib
@@ -279,7 +297,7 @@ items:
     why:
       - "Right. Celecoxib blocks COX-2 (endothelial PGI2) but spares COX-1, so platelet TXA2 continues: ↑ risk of thrombosis."
       - "TXA2 depends on COX-1, which celecoxib spares."
-      - "This is not the book's mechanism."
+      - "The book does not say COX-2 blockade shunts arachidonic acid into leukotrienes; leukotrienes cause neutrophil chemotaxis and bronchoconstriction, not thrombosis. The clot risk comes from less endothelial PGI2 while COX-1 still makes platelet TXA2."
       - "COX-1 is spared, so gastric protection is kept; that is the drug's advantage."
       - "Celecoxib does not act on phospholipase A2."
     src: { page: 496, quote: "TXA2 production is dependent on COX-1. CLINICAL USE Rheumatoid arthritis, osteoarthritis. ADVERSE EFFECTS ↑ risk of thrombosis, sulfa allergy." }
@@ -288,11 +306,25 @@ items:
   - id: msk.L04.022
     kind: card
     topic: nonsteroidal-anti-inflammatory-drugs
-    front: How do NSAIDs work, and which NSAID closes a PDA?
-    back: "They reversibly inhibit COX-1 and COX-2, blocking prostaglandin synthesis. Antipyretic, analgesic, anti-inflammatory. Indomethacin closes a PDA."
+    front: Which NSAID is used to close a patent ductus arteriosus?
+    back: Indomethacin.
     src: { page: 496, quote: "Antipyretic, analgesic, anti-inflammatory. Indomethacin is used to close a PDA." }
     status: unverified
     tags: [high-yield]
+  - id: msk.L04.060
+    kind: card
+    topic: nonsteroidal-anti-inflammatory-drugs
+    front: How do NSAIDs (other than aspirin) work?
+    back: They block both COX-1 and COX-2 reversibly, so prostaglandins are not made.
+    src: { page: 496, quote: "Reversibly inhibit cyclooxygenase (both COX-1 and COX-2). Block prostaglandin synthesis." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.061
+    kind: cloze
+    topic: nonsteroidal-anti-inflammatory-drugs
+    text: "NSAIDs are {{c1::antipyretic}}, {{c2::analgesic}} and {{c3::anti-inflammatory}}."
+    src: { page: 496, quote: "CLINICAL USE Antipyretic, analgesic, anti-inflammatory." }
+    status: unverified
   - id: msk.L04.051
     kind: enumerate
     topic: nonsteroidal-anti-inflammatory-drugs
@@ -318,7 +350,7 @@ items:
       - Renal ischemia
       - Aplastic anemia
     pass: 4
-    hook: "الـ prostaglandins بتحمي المعدة وبتوسّع الـ afferent arteriole. شيلها: المعدة تتقرّح والكلية تجوع."
+    hook: "الـ prostaglandins بتحمي المعدة وبتوسّع الـ afferent arteriole. شيلها: المعدة تتقرّح (gastric ulcer) والكلية تجوع (renal ischemia)، والكلية كمان تلتهب (interstitial nephritis)، والنخاع ممكن يقف (aplastic anemia). 2 للكلية + معدة + نخاع = 4."
     src: { page: 496, quote: "Interstitial nephritis, gastric ulcer (prostaglandins protect gastric mucosa), renal ischemia (prostaglandins vasodilate afferent arteriole), aplastic anemia." }
     status: unverified
   - id: msk.L04.024
@@ -339,8 +371,8 @@ items:
       - "Right. Prostaglandins vasodilate the afferent arteriole; blocking them causes renal ischemia."
       - "NSAIDs do not act on the efferent arteriole; ACE inhibitors relax it."
       - "Crystals fit acyclovir or methotrexate, not NSAIDs."
-      - "This is not an NSAID effect in the book."
-      - "The book's mechanism is loss of afferent vasodilation."
+      - "Immune complexes in glomeruli cause glomerulonephritis, with hematuria and casts; the book's NSAID kidney lesions are interstitial nephritis and renal ischemia, not immune complex disease."
+      - "The book names no toxic NSAID metabolite that poisons tubules; her creatinine rose because blocking prostaglandins took away afferent arteriole dilation (renal ischemia). Beyond First Aid: poorly perfused kidneys, as in heart failure, lean on that dilation most."
     src: { page: 496, quote: "renal ischemia (prostaglandins vasodilate afferent arteriole)" }
     status: unverified
   # ---------- Leflunomide (p496) ----------
@@ -385,11 +417,23 @@ items:
   - id: msk.L04.028
     kind: card
     topic: bisphosphonates
-    front: How do bisphosphonates work? Name four.
-    back: "Pyrophosphate analogs that bind hydroxyapatite in bone, inhibiting osteoclasts and promoting their apoptosis. Alendronate, ibandronate, risedronate, zoledronate."
+    front: How do bisphosphonates work?
+    back: "They mimic pyrophosphate and stick to hydroxyapatite in bone, where they switch off osteoclasts and push them into apoptosis."
     src: { page: 496, quote: "Pyrophosphate analogs; bind hydroxyapatite in bone, inhibiting osteoclast activity and promoting osteoclast apoptosis." }
     status: unverified
     tags: [high-yield]
+  - id: msk.L04.062
+    kind: enumerate
+    topic: bisphosphonates
+    prompt: Enumerate the bisphosphonates First Aid lists (4).
+    points:
+      - Alendronate
+      - Ibandronate
+      - Risedronate
+      - Zoledronate
+    pass: 4
+    src: { page: 496, quote: "Bisphosphonates Alendronate, ibandronate, risedronate, zoledronate." }
+    status: unverified
   - id: msk.L04.029
     kind: enumerate
     topic: bisphosphonates
@@ -438,9 +482,16 @@ items:
   - id: msk.L04.032
     kind: card
     topic: recombinant-parathyroid-hormone
-    front: How do teriparatide and abaloparatide work, and how do they differ from bisphosphonates?
-    back: "Recombinant PTH analogs that ↑ osteoblastic activity when given in a pulsatile way. Used for osteoporosis; they cause ↑ bone growth compared with antiresorptive therapies."
+    front: How do teriparatide and abaloparatide work?
+    back: "They are recombinant analogs of PTH; given in pulses (intermittently), they make osteoblasts more active."
     src: { page: 497, quote: "Recombinant PTH analog. ↑ osteoblastic activity when administered in pulsatile fashion." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.063
+    kind: cloze
+    topic: recombinant-parathyroid-hormone
+    text: "Recombinant PTH (teriparatide, abaloparatide) is used for {{c1::osteoporosis}} and causes {{c2::more bone growth}} than antiresorptive therapies such as bisphosphonates."
+    src: { page: 497, quote: "CLINICAL USE Osteoporosis. Causes ↑ bone growth compared to antiresorptive therapies (eg, bisphosphonates)." }
     status: unverified
     tags: [high-yield]
   - id: msk.L04.033
@@ -543,6 +594,7 @@ items:
     back: "\"Febu-xo-stat makes Xanthine Oxidase static.\" \"All painful flares are preventable\" (allopurinol prevents flares)."
     src: { page: 497, quote: "Febuxostat Inhibits xanthine oxidase. Think, “febu-xo-stat makes Xanthine Oxidase static.”" }
     status: unverified
+    tags: [high-yield]
   - id: msk.L04.038
     kind: enumerate
     topic: gout-drugs
@@ -592,9 +644,9 @@ items:
     answer: 0
     why:
       - "Right. Azathioprine and 6-MP are broken down by xanthine oxidase; allopurinol raises their levels → myelosuppression."
-      - "The book's mechanism is the drug interaction."
+      - "The book lists no direct marrow toxicity for allopurinol; the timing with azathioprine points to the interaction, since blocking xanthine oxidase stops azathioprine and 6-MP from being broken down."
       - "Allopurinol is not a CYP450 inducer in the book."
-      - "This does not happen."
+      - "Urate crystals deposit in joints and the kidneys (urate nephropathy, uric acid calculi), not in bone marrow, and allopurinol lowers urate anyway."
       - "That is leflunomide."
     src: { page: 497, quote: "↑ concentrations of xanthine oxidase active metabolites, azathioprine, and 6-MP." }
     status: unverified
@@ -637,7 +689,7 @@ items:
     kind: card
     topic: tnf-alpha-inhibitors
     front: What are the adverse effects of TNF-α inhibitors, and why?
-    back: "Predisposition to infection, including reactivation of latent TB, since TNF is important in granuloma formation and stabilization. They can also cause drug-induced lupus."
+    back: "Infections, especially latent TB waking up, because TNF is what builds and holds granulomas together; they can also cause drug-induced lupus."
     src: { page: 498, quote: "Predisposition to infection, including reactivation of latent TB, since TNF is important in granuloma formation and stabilization. Can also lead to drug-induced lupus." }
     status: unverified
     tags: [high-yield]
@@ -647,6 +699,7 @@ items:
     text: "{{c1::Etanercept}} intercepts TNF: it is a decoy receptor for TNF-α fused to IgG1 Fc."
     src: { page: 498, quote: "Etanercept intercepts TNF." }
     status: unverified
+    tags: [high-yield]
   - id: msk.L04.045
     kind: mcq
     topic: tnf-alpha-inhibitors
@@ -665,8 +718,8 @@ items:
       - "Right. Anti-TNF-α antibodies (adalimumab, infliximab) reactivate latent TB, since TNF holds granulomas together."
       - "IL-17 blockers treat psoriasis in this section; TB reactivation is the book's TNF-α warning."
       - "Ustekinumab targets IL-12/IL-23 for psoriasis."
-      - "Not one of this section's drugs."
-      - "Not one of this section's drugs."
+      - "IL-2 drives T-cell proliferation; none of the drugs in this First Aid section blocks it, and TB reactivation is the book's warning for TNF-α blockade, since TNF holds granulomas together."
+      - "IL-6 is not a target of any drug in this First Aid section; the book ties TB reactivation to blocking TNF-α, which keeps granulomas stable."
     src: { page: 498, quote: "including reactivation of latent TB, since TNF is important in granuloma formation and stabilization." }
     status: unverified
   # ---------- Psoriasis biologics (p498) ----------
@@ -708,11 +761,25 @@ items:
   - id: msk.L04.048
     kind: card
     topic: imiquimod
-    front: How does imiquimod work, and what is it used for?
-    back: "Binds TLR-7 on macrophages, monocytes and dendritic cells to activate them → a topical antitumor immune response modifier. Used for anogenital warts and actinic keratosis; causes itching, burning pain and rashes at the site."
-    src: { page: 498, quote: "Binds toll-like receptor 7 (TLR-7) of macrophages, monocytes, and dendritic cells to activate them" }
+    front: How does imiquimod work?
+    back: "It switches on macrophages, monocytes and dendritic cells through toll-like receptor 7 (TLR-7), acting as a cream that turns the immune response against tumors."
+    src: { page: 498, quote: "Binds toll-like receptor 7 (TLR-7) of macrophages, monocytes, and dendritic cells to activate them → topical antitumor immune response modifier." }
     status: unverified
     tags: [high-yield]
+  - id: msk.L04.064
+    kind: cloze
+    topic: imiquimod
+    text: "Imiquimod is used for {{c1::anogenital warts}} and {{c2::actinic keratosis}}."
+    src: { page: 498, quote: "CLINICAL USE Anogenital warts, actinic keratosis." }
+    status: unverified
+    tags: [high-yield]
+  - id: msk.L04.065
+    kind: card
+    topic: imiquimod
+    front: What are imiquimod's adverse effects?
+    back: Itching and a burning pain where the cream is applied, and rashes.
+    src: { page: 498, quote: "ADVERSE EFFECTS Itching, burning pain at site of application, rashes." }
+    status: unverified
   - id: msk.L04.049
     kind: mcq
     topic: imiquimod
@@ -731,7 +798,7 @@ items:
       - "Right. Imiquimod binds TLR-7 and is used for actinic keratosis and anogenital warts."
       - "TLR-4 binds LPS; not imiquimod's target."
       - "That is brodalumab."
-      - "That is the target of TNF-α inhibitors' ligand."
+      - "The TNF-α receptor is what etanercept mimics as a decoy; it is not imiquimod's target."
       - "Retinoids are not this drug."
     src: { page: 498, quote: "Binds toll-like receptor 7 (TLR-7) of macrophages, monocytes, and dendritic cells to activate them" }
     status: unverified

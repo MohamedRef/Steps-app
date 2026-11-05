@@ -1,7 +1,7 @@
 //! Steps Cloud's HTTP API (docs/CLOUD.md §2). Async on every target: on the
 //! Mac and Android a blocking `ureq` call runs on tokio's blocking pool, in
 //! the browser it is a `fetch` (docs/WEB.md).
-// adapted from batna-app main: crates/app/src/cloud/api.rs (no AI, TTS or usage)
+// adapted from batna-app main: crates/app/src/cloud/api.rs (no text-to-speech or usage endpoints)
 
 use serde::Serialize;
 use serde::de::DeserializeOwned;

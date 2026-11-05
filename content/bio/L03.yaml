@@ -47,8 +47,15 @@ items:
     kind: card
     topic: elastin
     front: What is the genetic defect in Marfan syndrome?
-    back: Autosomal dominant FBN1 mutation on chromosome 15 (fifteen) → defective fibrillin-1, a glycoprotein that sheathes elastin and sequesters TGF-β. Variable expression from pleiotropy.
+    back: An FBN1 mutation on chromosome 15 (fifteen) → defective fibrillin-1, a glycoprotein that sheathes elastin and sequesters TGF-β.
     src: { page: 50, quote: "FBN1 gene mutation on chromosome 15 (fifteen) results in defective fibrillin-1, a glycoprotein that forms a sheath around elastin and sequesters TGF-β." }
+    status: unverified
+    tags: [high-yield]
+  - id: bio.L03.040
+    kind: cloze
+    topic: elastin
+    text: Marfan syndrome is {{c1::autosomal dominant}}, with variable expression and symptoms due to {{c2::pleiotropy}}.
+    src: { page: 50, quote: "Marfan syndrome—autosomal dominant (with variable expression and symptoms due to pleiotropy) connective tissue disorder affecting skeleton, heart, and eyes." }
     status: unverified
     tags: [high-yield]
   - id: bio.L03.006
@@ -64,7 +71,7 @@ items:
       - Mitral valve prolapse
       - ↑ risk of spontaneous pneumothorax
     pass: 5
-    hook: "Marfan بيضرب 3 أماكن: الهيكل (طويل، صدر، مفاصل، صوابع)، القلب (aorta و mitral)، والرئة (pneumothorax). والعين؟ الـ lens بيطلع لفوق."
+    hook: "Marfan هنا في 3 أماكن: الهيكل (طويل، صدر، مفاصل، صوابع)، القلب (aorta و mitral)، والرئة (pneumothorax)."
     src: { page: 50, quote: "Findings: tall with long extremities; chest wall deformity (pectus carinatum [pigeon chest] or pectus excavatum A ); hypermobile joints; long, tapering fingers and toes (arachnodactyly); cystic medial necrosis of aorta" }
     status: unverified
     tags: [high-yield]
@@ -185,9 +192,9 @@ items:
     kind: mcq
     topic: pcr
     stem: >-
-      A 6-week-old infant is born to a mother with untreated HIV. Maternal IgG crosses the placenta, so
-      the infant's anti-HIV antibody test is positive. Which test best shows whether the infant is
-      infected?
+      A 6-week-old boy born to a mother with untreated HIV is brought for a well-baby visit. He is
+      feeding well and gaining weight, and the examination is normal. His anti-HIV antibody test is
+      positive, but maternal IgG crosses the placenta. Which test best shows whether he is infected?
     options:
       - ELISA for anti-HIV antibodies
       - Western blot for anti-HIV antibodies
@@ -326,9 +333,20 @@ items:
   - id: bio.L03.023
     kind: card
     topic: flow-cytometry
-    front: What does flow cytometry measure, and how?
-    back: Size, granularity and protein expression (immunophenotype) of individual cells. Cells are tagged with fluorescent-labeled antibodies and analyzed one at a time with a laser, measuring light scatter and fluorescence.
+    front: Which 3 properties of individual cells does flow cytometry assess?
+    back: Size, granularity and protein expression (immunophenotype).
     src: { page: 52, quote: "Laboratory technique to assess size, granularity, and protein expression (immunophenotype) of individual cells in a sample." }
+    status: unverified
+  - id: bio.L03.041
+    kind: order
+    topic: flow-cytometry
+    prompt: Put the steps of flow cytometry in order.
+    steps:
+      - Cells are tagged with antibodies to surface or intracellular proteins
+      - The antibodies carry a unique fluorescent dye
+      - A laser is focused on one cell at a time
+      - Light scatter and fluorescence intensity are measured and plotted
+    src: { page: 52, quote: "Cells are tagged with antibodies specific to surface or intracellular proteins. Antibodies are then tagged with a unique fluorescent dye. Sample is analyzed one cell at a time by focusing a laser on the cell and measuring light scatter and intensity of fluorescence." }
     status: unverified
   - id: bio.L03.024
     kind: card
@@ -371,9 +389,28 @@ items:
   - id: bio.L03.027
     kind: card
     topic: microarrays
-    front: What are microarrays used for?
-    back: Comparing the relative transcription of genes in two RNA samples. With DNA, they detect SNPs and copy number variants for genotyping, clinical genetic testing, forensics, cancer mutations and genetic linkage analysis.
-    src: { page: 52, quote: "Used to compare the relative transcription of genes in two RNA samples. Can detect single nucleotide polymorphisms (SNPs) and copy number variants (CNVs) for genotyping" }
+    front: What are microarrays used for when run on RNA?
+    back: Comparing the relative transcription of genes in two RNA samples.
+    src: { page: 52, quote: "Used to compare the relative transcription of genes in two RNA samples." }
+    status: unverified
+  - id: bio.L03.042
+    kind: cloze
+    topic: microarrays
+    text: When run on DNA, microarrays detect {{c1::single nucleotide polymorphisms (SNPs)}} and {{c2::copy number variants (CNVs)}}.
+    src: { page: 52, quote: "Can detect single nucleotide polymorphisms (SNPs) and copy number variants (CNVs) for genotyping, clinical genetic testing, forensic analysis, and cancer mutation and genetic linkage analysis when DNA is used." }
+    status: unverified
+  - id: bio.L03.043
+    kind: enumerate
+    topic: microarrays
+    prompt: Enumerate the uses of DNA microarrays (5).
+    points:
+      - Genotyping
+      - Clinical genetic testing
+      - Forensic analysis
+      - Cancer mutation analysis
+      - Genetic linkage analysis
+    pass: 4
+    src: { page: 52, quote: "Can detect single nucleotide polymorphisms (SNPs) and copy number variants (CNVs) for genotyping, clinical genetic testing, forensic analysis, and cancer mutation and genetic linkage analysis when DNA is used." }
     status: unverified
   - id: bio.L03.028
     kind: mcq
@@ -413,8 +450,14 @@ items:
   - id: bio.L03.030
     kind: card
     topic: elisa
-    front: How does ELISA produce a signal, and how does its specificity compare with Western blot?
-    back: An antibody linked to an enzyme acts on added substrate to give a detectable signal. It can have high sensitivity and specificity but is less specific than Western blot; often used to screen for HIV.
+    front: How does ELISA produce a signal?
+    back: The detecting antibody carries an enzyme; substrate added to the well reacts with that enzyme and gives a signal that can be read.
+    src: { page: 52, quote: "Detection involves the use of an antibody linked to an enzyme. Added substrate reacts with the enzyme, producing a detectable signal." }
+    status: unverified
+  - id: bio.L03.044
+    kind: cloze
+    topic: elisa
+    text: ELISA can have high sensitivity and specificity but is less specific than {{c1::Western blot}}; it is often used to screen for {{c2::HIV}} infection.
     src: { page: 52, quote: "Can have high sensitivity and specificity, but is less specific than Western blot. Often used to screen for HIV infection." }
     status: unverified
   - id: bio.L03.031
@@ -501,7 +544,7 @@ items:
     kind: card
     topic: molecular-cloning
     front: What is molecular cloning, and what is it used for?
-    back: Production of a recombinant DNA molecule in a bacterial or eukaryotic host cell line; used to make human proteins in bacteria (eg, human growth hormone, insulin).
+    back: "Making recombinant DNA inside host cells (bacteria or a eukaryotic cell line). It lets bacteria make human proteins such as insulin and growth hormone."
     src: { page: 53, quote: "Production of a recombinant DNA molecule in a bacterial or eukaryotic cell line host. Useful for production of human proteins by bacteria (eg, human growth hormone, insulin)." }
     status: unverified
   - id: bio.L03.038

@@ -18,7 +18,7 @@ The workstreams (which thread writes which course) are in `docs/WORKSTREAMS.md`.
 - **The textbook never goes in git**: no PDF and no extracted text (cropped book figures for lessons are the one exception). Items paraphrase it, cite `src.page`, and quote only what proves the fact. CI enforces this.
 - Every content item ships `status: unverified`. Only Mohamed approves (`content/approved.txt`, from his in-app export).
 - The book's answer is the exam answer. Newer guidelines or a different source's view go in `update:` with the name and year, never as silent changes.
-- No real patient data to any AI engine. Tests never call live APIs.
+- No real patient data to any outside service. Tests never call live APIs.
 - No generated images. Lesson figures are inline SVG drawings, crops of the book's own figures (`book: true`, cited by page), or open-licence images with credit, licence and source (`docs/LESSONS.md` § Images).
 
 ## USMLE style
@@ -31,6 +31,7 @@ The workstreams (which thread writes which course) are in `docs/WORKSTREAMS.md`.
 - UI text is Egyptian Arabic (`crates/app/src/i18n.rs`, one module per feature). Medical content is in English, wrapped in `<bdi>` inside Arabic UI.
 
 ## Workflow
+- **Nothing on GitHub names the tools the work was written with** (Mohamed, 2026-11-05): no assistant or AI names, no "generated with" footers, co-author trailers, session links or "requested by" headers in commits, branch names, PR titles and bodies, issues, comments, reviews, docs or code. Squash-merge with the PR's own title and body as the message, so branch commit trailers never reach `main`. CI checks the tracked files and the PR's title and body.
 - Branch from `origin/main` and open PRs with base `main`. Before merging, merge the latest `origin/main`, run `just check`, wait for green CI, then squash-merge it yourself.
 - **Merge the moment it is ready** (Mohamed, 2026-11-04): a PR with every check green and no conflicts is squash-merged right away, never left waiting. A blocker that would take long (a red `main`, a big fix) is split across more threads or agents so it is fixed fast.
 - `just check` = check-tracked-files, `cargo fmt --all --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace`, `steps-tools validate`, `steps-tools packs build --check`.

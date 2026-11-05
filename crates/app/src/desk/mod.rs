@@ -67,17 +67,21 @@ pub fn Panes(
     footer: Option<Element>,
 ) -> Element {
     rsx! {
-        div { class: "desk-split", "data-wide": if wide_side { "side" } else { "main" },
-            div { class: "desk-main", {primary} }
-            match secondary {
-                Some(side) => rsx! {
-                    aside { class: "desk-side", aria_label: tx::SIDE_LABEL, {side} }
-                },
-                None => rsx! {
-                    aside { class: "desk-side desk-waiting", aria_label: tx::SIDE_LABEL,
-                        p { class: "muted small", {tx::SIDE_WAITING} }
-                    }
-                },
+        // The panes split by their own width, not the window's (UX #580):
+        // at 840 the side rail left each pane ~130–260px.
+        div { class: "desk-panes",
+            div { class: "desk-split", "data-wide": if wide_side { "side" } else { "main" },
+                div { class: "desk-main", {primary} }
+                match secondary {
+                    Some(side) => rsx! {
+                        aside { class: "desk-side", aria_label: tx::SIDE_LABEL, {side} }
+                    },
+                    None => rsx! {
+                        aside { class: "desk-side desk-waiting", aria_label: tx::SIDE_LABEL,
+                            p { class: "muted small", {tx::SIDE_WAITING} }
+                        }
+                    },
+                }
             }
         }
         if let Some(f) = footer {
