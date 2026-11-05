@@ -37,9 +37,12 @@ The model to copy is `content/lessons/cvs/L01.yaml`.
 8. **Short.** 6–10 minutes, 8–16 steps. A lecture usually needs 3–7 lessons
    that follow the book's order and together cover every page.
 9. **Link to the cards.** End with a `try` step (1–5 playable items: card,
-   cloze, enumerate, essay, table, order) and list the lecture items the
-   lesson teaches in `practice:`.
-10. **A picture in every lesson.** At least one figure per lesson, more where
+   cloze, enumerate, essay, table, order; never an MCQ or a case, which the
+   player drops) and list the lecture items the lesson teaches in
+   `practice:`. Every item of the lecture is in some lesson's `practice:`.
+   `steps-tools validate` checks all three.
+10. **A picture in every lesson.** At least one figure per lesson (validate
+    checks it), more where
     they teach. Draw diagrams, pathways, vicious cycles, algorithms, scales
     and anatomy sketches as inline SVG, with theme classes (below) or
     `var(--token)` colours; no scripts, links, embedded images, `<style>` or

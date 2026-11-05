@@ -875,6 +875,10 @@ pub fn validate(file: &LessonFile, cx: &LessonContext<'_>) -> Vec<Problem> {
                 bad(at, format!("practice item {id} is not in {lid}"));
             }
         }
+        // LESSONS.md rule 10: a picture in every lesson.
+        if !lesson.steps.iter().any(|s| matches!(s.body, StepBody::Figure { .. })) {
+            bad(at, "a lesson needs at least one figure step (LESSONS.md rule 10)".into());
+        }
         for (si, step) in lesson.steps.iter().enumerate() {
             let sat = format!("{at} step {}", si + 1);
             if let Some((_, keys)) = cx.raw_step_keys.iter().find(|(k, _)| *k == (li, si)) {
@@ -899,19 +903,41 @@ pub fn validate(file: &LessonFile, cx: &LessonContext<'_>) -> Vec<Problem> {
             {
                 bad(&sat, "a book figure needs its page".into());
             }
-            if let StepBody::Try { items: ids } = &step.body
-                && !ids.is_empty()
-                && ids.iter().all(|id| lec.items.iter().any(|i| &i.id == id))
-                && !ids
-                    .iter()
-                    .any(|id| lec.items.iter().any(|i| &i.id == id && PLAYABLE.contains(&i.body.kind())))
-            {
-                bad(&sat, format!("a try step needs an item the lesson can play ({})", PLAYABLE.join(", ")));
+            // LESSONS.md rule 9: a try step plays every item it lists, so
+            // each must be a kind the player shows (an MCQ is dropped).
+            if let StepBody::Try { items: ids } = &step.body {
+                for id in ids {
+                    if let Some(i) = lec.items.iter().find(|i| &i.id == id)
+                        && !PLAYABLE.contains(&i.body.kind())
+                    {
+                        bad(
+                            &sat,
+                            format!(
+                                "try item {id} is a {}; a try step plays only {}",
+                                i.body.kind(),
+                                PLAYABLE.join(", ")
+                            ),
+                        );
+                    }
+                }
             }
             for m in step_problems(&step.body, &items) {
                 bad(&sat, m);
             }
         }
+    }
+    // LESSONS.md rule 9: every item of the lecture is practised from the
+    // lesson that teaches it.
+    let practised: BTreeSet<&str> =
+        file.lessons.iter().flat_map(|l| l.practice.iter().map(String::as_str)).collect();
+    let missing: Vec<&str> = items.iter().copied().filter(|id| !practised.contains(id)).collect();
+    if !file.lessons.is_empty() && !missing.is_empty() {
+        let shown: Vec<&str> = missing.iter().copied().take(8).collect();
+        let more = if missing.len() > 8 { format!(" and {} more", missing.len() - 8) } else { String::new() };
+        bad(
+            lid,
+            format!("{} items are in no lesson's practice list: {}{more}", missing.len(), shown.join(", ")),
+        );
     }
     out
 }
@@ -1434,7 +1460,7 @@ lessons:
       - kind: try
         items: [cvs.L04.001, cvs.L04.002]
     recap: [Beck triad = hypotension, JVD, muffled sounds]
-    practice: [cvs.L04.003]
+    practice: [cvs.L04.001, cvs.L04.002, cvs.L04.003, cvs.L04.004, cvs.L04.005, cvs.L04.006, cvs.L04.007, cvs.L04.008]
     status: unverified
 "##;
 
@@ -1513,17 +1539,36 @@ lessons:
     }
 
     #[test]
-    fn a_try_step_needs_an_item_the_lesson_can_play() {
+    fn a_try_step_plays_every_item_it_lists() {
         let mut f = good();
         let last = f.lessons[0].steps.len() - 1;
-        // An MCQ and a case: neither plays inside a lesson (#177).
+        // An MCQ and a case: neither plays inside a lesson (#177, #449, #520).
         f.lessons[0].steps[last].body =
-            StepBody::Try { items: vec!["cvs.L04.003".into(), "cvs.L04.006".into()] };
+            StepBody::Try { items: vec!["cvs.L04.003".into(), "cvs.L04.006".into(), "cvs.L04.008".into()] };
         let p = problems(&f);
-        assert!(p.iter().any(|m| m.contains("a try step needs an item the lesson can play")), "{p:?}");
-        f.lessons[0].steps[last].body =
-            StepBody::Try { items: vec!["cvs.L04.003".into(), "cvs.L04.008".into()] };
+        assert!(p.iter().any(|m| m.contains("try item cvs.L04.003 is a mcq")), "{p:?}");
+        assert!(p.iter().any(|m| m.contains("try item cvs.L04.006 is a case")), "{p:?}");
+        assert!(!p.iter().any(|m| m.contains("cvs.L04.008")), "{p:?}");
+        f.lessons[0].steps[last].body = StepBody::Try { items: vec!["cvs.L04.008".into()] };
         assert_eq!(problems(&f), Vec::<String>::new());
+    }
+
+    #[test]
+    fn every_lesson_has_a_figure_and_every_item_is_practised() {
+        let mut f = good();
+        f.lessons[0].steps.retain(|s| !matches!(s.body, StepBody::Figure { .. }));
+        f.lessons[0].practice.retain(|id| id != "cvs.L04.005" && id != "cvs.L04.007");
+        let p = problems(&f);
+        assert!(
+            p.iter().any(|m| m.contains("cvs.L04.lesson1: a lesson needs at least one figure step")),
+            "{p:?}"
+        );
+        assert!(
+            p.iter()
+                .any(|m| m
+                    .contains("cvs.L04: 2 items are in no lesson's practice list: cvs.L04.005, cvs.L04.007")),
+            "{p:?}"
+        );
     }
 
     #[test]
