@@ -259,6 +259,53 @@ pub fn build(doc: &Doc, map: &Map, source: &str, url: &str, order: &[&str]) -> R
     })
 }
 
+/// UWorld's custom test takes at most this many questions.
+pub const MAX_TEST: usize = 40;
+
+/// How a list that doesn't divide into full tests is cut.
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum Split {
+    /// Tests of near-equal size: 42 at 40 a test → 21 + 21.
+    #[default]
+    Even,
+    /// Full tests and one short test of the rest: 42 → 40 + 2.
+    Rest,
+}
+
+/// Every whole number in `text`, in order, once: QIDs pasted from
+/// UWorld, a note or this app, whatever separates them.
+pub fn parse_qids(text: &str) -> Vec<u32> {
+    let mut seen = BTreeSet::new();
+    numbers(text).filter(|q| *q > 0 && seen.insert(*q)).collect()
+}
+
+/// Cuts `qids` into custom tests of at most `size` questions (1 to
+/// [`MAX_TEST`]), each QID once, shuffled by `seed` when there is one.
+pub fn tests(qids: &[u32], size: usize, split: Split, seed: Option<u64>) -> Vec<Vec<u32>> {
+    let size = size.clamp(1, MAX_TEST);
+    let mut seen = BTreeSet::new();
+    let mut all: Vec<u32> = qids.iter().copied().filter(|q| seen.insert(*q)).collect();
+    if let Some(seed) = seed {
+        crate::exam::Rng::new(seed).shuffle(&mut all);
+    }
+    match split {
+        Split::Rest => all.chunks(size).map(<[u32]>::to_vec).collect(),
+        Split::Even => {
+            let n = all.len().div_ceil(size);
+            let mut out = Vec::with_capacity(n);
+            let mut rest = all.as_slice();
+            for i in 0..n {
+                let take = all.len() / n + usize::from(i < all.len() % n);
+                let (head, tail) = rest.split_at(take);
+                out.push(head.to_vec());
+                rest = tail;
+            }
+            out
+        }
+    }
+}
+
 /// Everything wrong with the map and the QIDs, given the lecture ids that
 /// exist.
 pub fn problems(map: &Map, qb: &QBank, lectures: &BTreeSet<&str>) -> Vec<String> {
@@ -363,5 +410,40 @@ mod tests {
         for want in ["bio.L06 is not a lecture", "QID 500 is listed twice", "QID 999 is retired"] {
             assert!(p.contains(want), "{want}: {p}");
         }
+    }
+    #[test]
+    fn pasted_qids_read_with_any_separator_once() {
+        assert_eq!(parse_qids("1707, 2033,44\n1707  #12 x"), [1707, 2033, 44, 12]);
+        assert_eq!(parse_qids("1.5, 0"), [1, 5]);
+        assert!(parse_qids("none").is_empty());
+    }
+
+    #[test]
+    fn tests_hold_each_qid_once_at_most_forty() {
+        let ids: Vec<u32> = (1..=42).chain([5, 6]).collect();
+        let even = tests(&ids, 40, Split::Even, None);
+        assert_eq!(even.iter().map(Vec::len).collect::<Vec<_>>(), [21, 21]);
+        assert_eq!(even.concat(), (1..=42).collect::<Vec<_>>(), "in order, repeats dropped");
+        let rest = tests(&ids, 40, Split::Rest, None);
+        assert_eq!(rest.iter().map(Vec::len).collect::<Vec<_>>(), [40, 2]);
+        let hundred: Vec<u32> = (1..=100).collect();
+        assert_eq!(
+            tests(&hundred, 40, Split::Even, None).iter().map(Vec::len).collect::<Vec<_>>(),
+            [34, 33, 33]
+        );
+        assert_eq!(tests(&hundred, 99, Split::Rest, None)[0].len(), MAX_TEST, "never over 40");
+        assert_eq!(tests(&hundred, 0, Split::Rest, None).len(), 100);
+        assert!(tests(&[], 40, Split::Even, None).is_empty());
+    }
+
+    #[test]
+    fn a_seed_shuffles_the_same_way_every_time() {
+        let ids: Vec<u32> = (1..=80).collect();
+        let a = tests(&ids, 40, Split::Even, Some(7));
+        assert_eq!(a, tests(&ids, 40, Split::Even, Some(7)));
+        assert_ne!(a.concat(), ids, "shuffled");
+        let mut back = a.concat();
+        back.sort_unstable();
+        assert_eq!(back, ids, "nothing lost");
     }
 }
