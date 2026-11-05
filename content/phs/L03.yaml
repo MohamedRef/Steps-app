@@ -141,22 +141,58 @@ items:
   - id: phs.L03.011
     kind: card
     topic: patients-with-disabilities
-    front: How should you communicate with a patient who has a cognitive impairment?
-    back: Concrete, specific language; simple, direct questions; no background noise or distractions; don't assume they can read; adapt to how they understand best (eg, gestures, demonstrating a task).
+    front: What kind of language and questions suit a patient with a cognitive impairment?
+    back: Plain, concrete wording and short, direct questions.
     src: { page: 271, quote: "For patients with a cognitive impairment, use concrete, specific language. Ask simple, direct questions." }
+    status: unverified
+  - id: phs.L03.068
+    kind: enumerate
+    topic: patients-with-disabilities
+    prompt: "Besides concrete language and simple questions, enumerate 3 more ways to communicate with a patient who has a cognitive impairment."
+    points:
+      - "Remove background noise and distractions"
+      - "Don't assume the patient can read"
+      - "Adapt to how the patient understands best (eg, hand gestures, asking them to demonstrate a task)"
+    pass: 3
+    src: { page: 271, quote: "Eliminate background noise and distractions. Do not assume the patient can read. Adjust to how the patient understands best (eg, use hand gestures or ask them to demonstrate a task)." }
     status: unverified
   - id: phs.L03.012
     kind: card
     topic: patients-with-disabilities
     front: How do you communicate with a patient who is deaf and prefers to lipread?
-    back: Ask their preferred mode; get attention with light touch or waving; eliminate background noise, face the patient, and do not change your mode of speaking. Use an interpreter when necessary.
+    back: Cut out background noise, keep your face toward them, and speak the way you normally do.
     src: { page: 271, quote: "For patients who prefer to speak and lipread, eliminate background noise, face the patient, and do not change your mode of speaking." }
+    status: unverified
+  - id: phs.L03.069
+    kind: enumerate
+    topic: patients-with-disabilities
+    prompt: "Enumerate 3 general steps for communicating with a patient who is deaf or hard of hearing."
+    points:
+      - "Ask which way of communicating they prefer"
+      - "Get their attention with a light touch or a wave"
+      - "Use an interpreter when needed"
+    pass: 3
+    src: { page: 271, quote: "Ask patients who are deaf or hard of hearing their preferred mode of communication. Use light touch or waving to get their attention." }
     status: unverified
   - id: phs.L03.013
     kind: cloze
     topic: patients-with-disabilities
-    text: "Ask if {{c1::assistance is desired}} rather than assuming the patient cannot do something alone; don't bring up a disability if it is {{c2::not relevant}} to the visit, and don't skip relevant parts of the {{c3::physical exam}}."
+    text: "With a patient who has a disability, {{c1::ask whether they want help}} instead of assuming they can't manage on their own."
     src: { page: 271, quote: "Ask if assistance is desired rather than assuming the patient cannot do something alone." }
+    status: unverified
+  - id: phs.L03.070
+    kind: card
+    topic: patients-with-disabilities
+    front: "A wheelchair user comes in with an ear infection. Should you raise the disability?"
+    back: "No. Leave the disability out of the visit when it has nothing to do with the problem."
+    src: { page: 271, quote: "do not bring up a disability if it is not relevant to a visit (eg, a patient in a wheelchair with an ear infection)." }
+    status: unverified
+  - id: phs.L03.071
+    kind: card
+    topic: patients-with-disabilities
+    front: "A patient's disability makes the physical exam hard. May you skip relevant parts of it?"
+    back: "No. Do every part of the exam that is relevant, even when it is challenging."
+    src: { page: 271, quote: "Do not skip relevant parts of the physical exam even if the disability makes the exam challenging." }
     status: unverified
   - id: phs.L03.014
     kind: mcq
@@ -199,7 +235,7 @@ items:
     kind: card
     topic: cultural-formulation-interview
     front: If a patient doesn't want to follow medical advice for cultural reasons, what should the physician investigate?
-    back: Whether there is a way to combine their plans with the standard medical regimen.
+    back: Whether the patient's own plans can be fitted together with the standard treatment.
     src: { page: 272, quote: "If they do not want to follow medical advice, investigate if there is a way to combine their plans with the standard medical regimen." }
     status: unverified
   - id: phs.L03.017
@@ -235,8 +271,15 @@ items:
   - id: phs.L03.019
     kind: cloze
     topic: trauma-informed-care
-    text: "In trauma-informed care, do not ask invasive questions requiring the patient to describe trauma {{c1::in detail}}; ask {{c2::permission}} before discussion, and before the exam reassure them they may {{c3::signal to end it immediately}}."
+    text: "In trauma-informed care, avoid invasive questions that make the patient recount the trauma {{c1::in detail}}, and get their {{c2::permission}} before talking about it."
     src: { page: 272, quote: "Do not ask invasive questions requiring the patient to describe trauma in detail. Ask permission prior to discussion." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L03.072
+    kind: cloze
+    topic: trauma-informed-care
+    text: "Before examining a trauma survivor, tell them they can {{c1::signal to stop the exam at once}} if it becomes too uncomfortable physically or emotionally."
+    src: { page: 272, quote: "Before the physical exam, reassure patients that they may signal to end it immediately if they experience too much physical or emotional discomfort." }
     status: unverified
     tags: [high-yield]
   - id: phs.L03.020
@@ -283,6 +326,20 @@ items:
     src: { page: 272, quote: "Helpful when patient has some desire to change, but it does not require that the patient be committed to making the change." }
     status: unverified
     tags: [high-yield]
+  - id: phs.L03.073
+    kind: card
+    topic: motivational-interviewing
+    front: "In motivational interviewing, what kinds of barriers should you assess?"
+    back: "Anything that makes behavior change hard, such as poor access to food or untreated trauma."
+    src: { page: 272, quote: "Assess barriers (eg, food access, untreated trauma) that may make behavior change difficult." }
+    status: unverified
+  - id: phs.L03.074
+    kind: card
+    topic: motivational-interviewing
+    front: "Why assess a patient's readiness for change in motivational interviewing?"
+    back: "It guides which goals the physician suggests."
+    src: { page: 272, quote: "Assessing a patient’s readiness for change is also important for guiding physician-suggested goals." }
+    status: unverified
   - id: phs.L03.023
     kind: enumerate
     topic: motivational-interviewing
@@ -325,7 +382,7 @@ items:
     kind: card
     topic: inclusive-history-taking
     front: Can you infer sexual behavior from a patient's stated sexual orientation?
-    back: No. Avoid assumptions about orientation, gender identity, expression and behavior (eg, a patient who identifies as heterosexual may engage in same-sex sexual activity).
+    back: No. Don't assume orientation, gender identity, gender expression or behavior; someone who identifies as heterosexual may still have same-sex partners.
     src: { page: 272, quote: "a patient who identifies as heterosexual may engage in same-sex sexual activity" }
     status: unverified
   - id: phs.L03.026
@@ -338,8 +395,22 @@ items:
     kind: card
     topic: inclusive-history-taking
     front: Should you ask about gender identity when a gender-nonconforming patient comes for a hand laceration?
-    back: No. Do not bring up gender or sexuality if it is not relevant to the visit.
+    back: No. Leave gender and sexuality out of a visit when they have nothing to do with the problem.
     src: { page: 272, quote: "Do not bring up gender or sexuality if it is not relevant to the visit (eg, a gender-nonconforming patient seeking care for a hand laceration)." }
+    status: unverified
+  - id: phs.L03.075
+    kind: card
+    topic: inclusive-history-taking
+    front: "How can a physician model inclusive use of pronouns?"
+    back: "State your own pronouns when you introduce yourself, ask how the patient wants to be addressed, and make sure the patient's correct name and pronouns are in the electronic medical record."
+    src: { page: 272, quote: "Also consider ways of being inclusive (eg, ensuring correct name and pronouns are in the electronic medical record)." }
+    status: unverified
+  - id: phs.L03.076
+    kind: card
+    topic: inclusive-history-taking
+    front: "What does the book ask you to remember about trust with gender- and sexuality-diverse patients?"
+    back: "Reassure them that the visit is confidential, and know that trust grows over time by listening to and learning from the patient."
+    src: { page: 272, quote: "Remember: trust is built over time, and listening to and learning from patients about how they would like to approach the topics discussed above is key." }
     status: unverified
   - id: phs.L03.028
     kind: mcq
@@ -350,17 +421,17 @@ items:
       sexual history?
     options:
       - "\"Do you have a partner? Tell me about your sexual partners.\""
-      - "\"Is your wife aware of your visit today?\""
-      - "\"Do you have sex with men, women, or both? Since you're married, I'll assume women.\""
-      - "\"Do you use condoms with your boyfriend?\""
-      - "\"Since you're heterosexual, we'll skip testing for some infections.\""
+      - "\"Tell me about your husband or wife.\""
+      - "\"Since this is a routine visit, we can skip the sexual history.\""
+      - "\"Do you have a girlfriend at the moment?\""
+      - "\"What is your sexual orientation? That tells me which tests you need.\""
     answer: 0
     why:
       - "Right. Use gender-neutral terms such as \"partner\" until the patient instructs otherwise, and avoid assumptions."
-      - "\"Wife\" assumes the partner's gender."
-      - "Marital status doesn't tell you sexual behavior."
-      - "\"Boyfriend\" assumes the partner's gender."
-      - "Orientation doesn't predict behavior; a heterosexual-identifying patient may have same-sex activity."
+      - "\"Husband or wife\" assumes the patient is married and uses gendered terms before the patient has said anything."
+      - "A sexual history is part of a routine preventive visit; leaving it out is not the inclusive choice."
+      - "\"Girlfriend\" assumes the partner's gender."
+      - "Orientation doesn't predict behavior; a heterosexual-identifying patient may have same-sex activity, so ask about behavior."
     src: { page: 272, quote: "Avoid making assumptions about sexual orientation, gender identity, gender expression, and behavior" }
     status: unverified
   # ---------- p273: use of interpreters ----------
@@ -421,6 +492,14 @@ items:
       - "Ask what language is preferred instead of assuming."
     src: { page: 273, quote: "If an interpreter is unavailable in person, interpretation services may be provided by telephone or video call." }
     status: unverified
+  - id: phs.L03.077
+    kind: card
+    topic: use-of-interpreters
+    front: "A patient has an accent and a non-English name. How do you decide what language to use?"
+    back: "Ask which language they prefer; never assume poor English from name, skin tone or accent."
+    src: { page: 273, quote: "Do not assume that a patient is a poor English speaker because of name, skin tone, or accent. Ask the patient what language is preferred." }
+    status: unverified
+    tags: [high-yield]
   # ---------- p273: delivering bad news (SPIKES) ----------
   - id: phs.L03.034
     kind: enumerate
@@ -478,9 +557,27 @@ items:
   - id: phs.L03.037
     kind: card
     topic: challenging-scenarios
-    front: What are appropriate responses to challenging patient scenarios like?
-    back: Patient-centered, open-ended and empathetic; acknowledge obstacles, validate emotions, create open-ended dialogue, and reflect the ethical principles and multiple points of view.
+    front: Which three qualities mark an appropriate response to a challenging patient scenario?
+    back: It is centered on the patient, open-ended and empathetic.
     src: { page: 274, quote: "Appropriate responses are patient-centered, open-ended, and empathetic." }
+    status: unverified
+  - id: phs.L03.078
+    kind: enumerate
+    topic: challenging-scenarios
+    prompt: "Enumerate the 3 communication moves the book lists for challenging scenarios."
+    points:
+      - "Acknowledge obstacles"
+      - "Validate emotions"
+      - "Create open-ended dialogue"
+    pass: 3
+    src: { page: 274, quote: "Acknowledge obstacles (“I understand this plan may be difficult...”), validate emotions (“It’s understandable to feel frustrated...”), and create open-ended dialogue (“What concerns you most about...?”)." }
+    status: unverified
+  - id: phs.L03.079
+    kind: card
+    topic: challenging-scenarios
+    front: "What should a response to a challenging scenario reflect and take into account?"
+    back: "The ethical principles (autonomy, beneficence, nonmaleficence, justice) and the views of everyone involved: patient, family, culture and the care team."
+    src: { page: 274, quote: "Responses should reflect ethical principles (autonomy, beneficence, nonmaleficence, justice) and consider multiple points of view—patient, family, culture, and healthcare team." }
     status: unverified
   - id: phs.L03.038
     kind: card
@@ -516,8 +613,16 @@ items:
     kind: card
     topic: challenging-scenarios
     front: The family asks you not to tell the patient a poor prognosis because they "can't handle it". What do you do?
-    back: Explore why (including cultural factors); explain that if the patient wants to know, it won't be withheld. Only if you believe the patient might seriously harm self or others if informed may you invoke therapeutic privilege.
+    back: Find out why the family feels this way (cultural reasons included), and explain that the information will not be kept from the patient if they want it.
     src: { page: 274, quote: "Explain that if the patient would like to know information concerning care, it will not be withheld." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L03.080
+    kind: card
+    topic: challenging-scenarios
+    front: "When may you withhold a poor prognosis from a patient under therapeutic privilege?"
+    back: "Only when you believe the news might lead the patient to seriously harm themselves or others."
+    src: { page: 274, quote: "However, if you believe the patient might seriously harm self or others if informed, you may invoke therapeutic privilege and withhold the information." }
     status: unverified
     tags: [high-yield]
   - id: phs.L03.043
@@ -539,7 +644,7 @@ items:
     kind: card
     topic: challenging-scenarios
     front: A terminally ill patient requests physician-assisted dying. What may the physician do?
-    back: Most states prohibit most forms of it, but physicians may prescribe medically appropriate analgesics even if they potentially shorten the patient's life.
+    back: Nearly every state bans most forms of it, but the physician may still give appropriate pain relief even if it could shorten life.
     src: { page: 274, quote: "Physicians may, however, prescribe medically appropriate analgesics even if they potentially shorten the patient’s life." }
     status: unverified
   - id: phs.L03.046
@@ -561,7 +666,7 @@ items:
     kind: card
     topic: challenging-scenarios
     front: A woman after mastectomy says she feels "ugly". What do you do?
-    back: Find out why she feels this way; do not offer falsely reassuring statements (eg, "You still look good").
+    back: Explore what makes her feel that way, and avoid hollow reassurance such as 'You still look good'.
     src: { page: 274, quote: "Find out why the patient feels this way. Do not offer falsely reassuring statements" }
     status: unverified
   - id: phs.L03.049
@@ -582,7 +687,7 @@ items:
     kind: card
     topic: challenging-scenarios
     front: An invasive test was done on the wrong patient. What is the obligation?
-    back: Regardless of the outcome, the physician must inform the patient that a mistake has been made.
+    back: Tell the patient that a mistake happened, whether or not it caused harm; this is an ethical duty.
     src: { page: 275, quote: "Regardless of the outcome, a physician is ethically obligated to inform a patient that a mistake has been made." }
     status: unverified
     tags: [high-yield]
@@ -596,16 +701,45 @@ items:
   - id: phs.L03.053
     kind: card
     topic: challenging-scenarios
-    front: A 7-year-old feels responsible for his sister's death from cancer. How do you talk to him?
-    back: At ages 5–7, children understand death is permanent. Give a direct, concrete description of her death, avoid clichés and euphemisms, reassure him he is not responsible, normalize feelings, and encourage play and healthy coping.
-    src: { page: 275, quote: "Provide a direct, concrete description of his sister’s death. Avoid clichés and euphemisms. Reassure the boy that he is not responsible." }
+    front: From what ages do children begin to understand that death is permanent?
+    back: Ages 5–7. They start to grasp that death is permanent, that all body functions stop for good, and that every living thing eventually dies.
+    src: { page: 275, quote: "At ages 5-7, children begin to understand that death is permanent, all life functions end completely at death, and everything that is alive eventually dies." }
     status: unverified
+  - id: phs.L03.081
+    kind: enumerate
+    topic: challenging-scenarios
+    prompt: "A 7-year-old boy feels responsible for his sister's death from cancer. Enumerate the 5 parts of the response."
+    points:
+      - "Describe her death directly and concretely"
+      - "Avoid clichés and euphemisms"
+      - "Reassure him that he is not responsible"
+      - "Identify and normalize his fears and feelings"
+      - "Encourage play and healthy coping (eg, remembering her in his own way)"
+    pass: 4
+    src: { page: 275, quote: "Provide a direct, concrete description of his sister’s death. Avoid clichés and euphemisms. Reassure the boy that he is not responsible. Identify and normalize fears and feelings. Encourage play and healthy coping behaviors (eg, remembering her in his own way)." }
+    status: unverified
+    tags: [high-yield]
   - id: phs.L03.054
     kind: card
     topic: challenging-scenarios
     front: A patient is a victim of intimate partner violence. What do you do?
-    back: Ask if they are safe and help make an emergency plan; ask direct, open-ended questions and summarize back; do not necessarily pressure them to leave or report (unless state law requires).
+    back: Ask whether they are safe, and help them make an emergency plan if they don't have one.
     src: { page: 275, quote: "Ask if patient is safe and help devise an emergency plan if there isn’t one." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L03.082
+    kind: card
+    topic: challenging-scenarios
+    front: "How should you ask an intimate partner violence victim about the exam findings?"
+    back: "Ask direct, open-ended questions, repeat their answers back in summary, and ask if they have any questions."
+    src: { page: 275, quote: "Ask patient direct, open-ended questions about exam findings and summarize patient’s answers back to them. Ask if patient has any questions." }
+    status: unverified
+  - id: phs.L03.083
+    kind: card
+    topic: challenging-scenarios
+    front: "Should you push a victim of intimate partner violence to leave the partner or report it?"
+    back: "Not necessarily; avoid pressure, unless state law requires a report."
+    src: { page: 275, quote: "Do not necessarily pressure patient to leave a partner or disclose the incident to the authorities (unless required by state law)." }
     status: unverified
     tags: [high-yield]
   - id: phs.L03.055
@@ -634,8 +768,20 @@ items:
     kind: card
     topic: challenging-scenarios
     front: A drug company offers a sponsorship in exchange for advertising its drug. What do you do?
-    back: Reject it; generally decline gifts and sponsorships to avoid conflict of interest. AMA exceptions include gifts directly benefiting patients, funding for trainee education, independently awarded grants, and funds distributed without attribution to sponsors.
+    back: Turn it down. As a rule, refuse gifts and sponsorships so there is no conflict of interest.
     src: { page: 275, quote: "Reject this offer. Generally, decline gifts and sponsorships to avoid any conflict of interest." }
+    status: unverified
+  - id: phs.L03.084
+    kind: enumerate
+    topic: challenging-scenarios
+    prompt: "Enumerate the 4 exceptions the AMA Code of Ethics makes to declining industry gifts and funds."
+    points:
+      - "Gifts that directly benefit patients"
+      - "Special funding for the education of students, residents and fellows"
+      - "Grants whose recipients are chosen by independent institutional criteria"
+      - "Funds handed out without naming the sponsor"
+    pass: 4
+    src: { page: 275, quote: "The AMA Code of Ethics does make exceptions for gifts directly benefitting patients; special funding for medical education of students, residents, fellows; grants whose recipients are chosen by independent institutional criteria; and funds that are distributed without attribution to sponsors." }
     status: unverified
   - id: phs.L03.059
     kind: card
@@ -655,9 +801,23 @@ items:
   - id: phs.L03.061
     kind: card
     topic: challenging-scenarios
-    front: A dependent patient has injuries inconsistent with the caretaker's story. What do you do?
-    back: Document a detailed history and exam, interview the patient alone if possible, give care, and if suspicion remains contact protective services; tell the caretaker of your obligation to report. Reporting reasonable suspicion is required by law.
+    front: Is reporting suspected abuse or neglect of a dependent patient optional?
+    back: No. The law requires physicians to report any reasonable suspicion of abuse, neglect or endangerment.
     src: { page: 275, quote: "Physicians are required by law to report any reasonable suspicion of abuse, neglect, or endangerment." }
+    status: unverified
+    tags: [high-yield]
+  - id: phs.L03.085
+    kind: enumerate
+    topic: challenging-scenarios
+    prompt: "A dependent patient has injuries that don't match the caretaker's story. Enumerate the 5 steps."
+    points:
+      - "Document a detailed history and physical"
+      - "Interview the patient alone if possible and appropriate"
+      - "Provide any needed medical care"
+      - "If suspicion remains, contact the right agency (eg, child or adult protective services)"
+      - "Tell the caretaker about your obligation to report"
+    pass: 4
+    src: { page: 275, quote: "Document detailed history and physical. If possible and appropriate, interview the patient alone. Provide any necessary medical care. If suspicion remains, contact the appropriate agencies or authorities (eg, child or adult protective services) for an evaluation. Inform the caretaker of your obligation to report." }
     status: unverified
     tags: [high-yield]
   - id: phs.L03.062
