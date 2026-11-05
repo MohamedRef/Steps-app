@@ -285,11 +285,11 @@ lessons:
       - kind: explain
         title: "الـ capsule: البكتيريا لابسة جاكيت ناعم"
         text: |-
-          الـ capsule بتخلي البكتيريا ناعمة فالـ phagocyte ما يعرفش يمسكها. الحل الطبيعي: الجسم ==يعمل opsonization== (يغطيها بـ antibody و complement)، وبعدين **الطحال** يشيلها من الدم.
+          الـ capsule بتخلي البكتيريا ناعمة فالـ phagocyte ما يعرفش يمسكها: يعني هي **antiphagocytic virulence factor**، ونفس الـ polysaccharide ده (لوحده أو مربوط في protein) هو الـ antigen اللي بنعمل منه الـ vaccine. الحل الطبيعي: الجسم ==يعمل opsonization== (يغطيها بـ antibody و complement)، وبعدين **الطحال** يشيلها من الدم.
 
           عشان كده المريض اللي ==مالوش طحال== (asplenia) بيتعب جداً من الـ encapsulated bacteria، ولازم ياخد vaccines ضد **N meningitidis** و **S pneumoniae** و **H influenzae**.
         page: 125
-        quote: "Are opsonized, and then cleared by spleen. Asplenics (No Spleen Here) have ↓ opsonizing ability and thus ↑ risk for severe infections"
+        quote: "Their capsules serve as an antiphagocytic virulence factor. Capsular polysaccharide +/– protein conjugate can serve as an antigen in vaccines. A polysaccharide antigen alone cannot be presented to T cells; immunogenicity can be enhanced by conjugating capsule antigens to a carrier protein. Please SHiNE my SKiS. Are opsonized, and then cleared by spleen. Asplenics (No Spleen Here) have ↓ opsonizing ability and thus ↑ risk for severe infections"
       - kind: mnemonic
         word: "PSHNESKS"
         parts:
@@ -417,7 +417,7 @@ lessons:
       - "Urease ← ammonia ← struvite (Proteus). Pee CHUNKSS."
       - "Catalase ⊕ بيتعبوا مريض الـ CGD. Notoriously Big Bubbling HASSLE."
       - "Spores: dipicolinic acid؛ autoclave 121°C / 15 min / 15 psi."
-    practice: [mic.L01.037, mic.L01.038, mic.L01.039, mic.L01.040, mic.L01.041, mic.L01.042, mic.L01.043, mic.L01.044, mic.L01.045, mic.L01.046, mic.L01.047, mic.L01.048, mic.L01.049, mic.L01.050, mic.L01.051, mic.L01.052, mic.L01.053, mic.L01.054, mic.L01.090, mic.L01.107]
+    practice: [mic.L01.037, mic.L01.038, mic.L01.039, mic.L01.040, mic.L01.041, mic.L01.042, mic.L01.043, mic.L01.044, mic.L01.045, mic.L01.046, mic.L01.047, mic.L01.048, mic.L01.049, mic.L01.050, mic.L01.051, mic.L01.052, mic.L01.053, mic.L01.054, mic.L01.090, mic.L01.107, mic.L01.110]
   - id: mic.L01.lesson4
     title: "البكتيريا بتهرب من المناعة ومن الدوا إزاي، وبتسلّف بعضها الجينات"
     hook: "الـ resistance مش بيتولد في كل بكتيريا لوحده: هي بتاخده جاهز من جارتها"
@@ -429,12 +429,14 @@ lessons:
       - kind: explain
         title: "4 حيل ضد المناعة"
         text: |-
+          الأربعة دول هدفهم واحد: ==الهروب من الـ immune response==.
+
           - **capsule**: ناعمة ومشحونة ← حاجز ضد الـ phagocytosis والـ complement. أهم virulence factor.
           - ==Protein A== (S aureus): بيمسك الـ **Fc** بتاع الـ IgG من الضهر، فالـ antibody يتلف بالمقلوب وما يعرفش يعمل opsonization.
           - **IgA protease** (SHiN: S pneumoniae، H influenzae type b، Neisseria): بيكسّر الـ IgA فالبكتيريا تقعد على الـ mucosa.
           - ==M protein== (group A strep): ضد الـ phagocytosis، وشبه الـ cardiac myosin.
         page: 127
-        quote: "Protein A Binds Fc region of IgG. Prevents opsonization and phagocytosis. Expressed by S aureus."
+        quote: "These promote evasion of host immune response. Capsular polysaccharide Highly charged, hydrophilic structure. Acts as barrier to phagocytosis and complement-mediated lysis. Major determinant of virulence. Protein A Binds Fc region of IgG. Prevents opsonization and phagocytosis. Expressed by S aureus."
       - kind: reveal
         prompt: "الـ M protein شبه الـ cardiac myosin. ده بيفسّر إيه؟"
         answer: "==molecular mimicry==: الـ antibodies اللي اتعملت ضد الـ M protein بتضرب القلب كمان، وده غالباً اللي ورا الـ **acute rheumatic fever** بعد التهاب الزور بالـ group A strep."
@@ -511,6 +513,31 @@ lessons:
         hide: [[0, 1], [1, 1], [0, 2], [1, 2]]
         page: 128
         quote: "Specialized An “excision” event. Lysogenic phage infects bacterium; viral DNA incorporates into bacterial chromosome."
+      - kind: explain
+        title: "ليه generalized بياخد أي جين، و specialized بياخد الجيران بس؟"
+        text: |-
+          - **Generalized** (==lytic phage==): الـ phage بيقطّع الـ DNA بتاع البكتيريا حتت، وهو بيعبّي نفسه بيغلط ويعبّي **أي حتة** من الـ chromosome في الـ capsid بداله. فأي جين ممكن يتنقل، بالصدفة.
+          - **Specialized** (==lysogenic phage==): الـ phage DNA بيقعد في مكان ثابت في الـ chromosome. لما يخرج (excision) ممكن يشيل معاه ==الجينات اللي جنبه بالظبط==. فبيتنقل بس الجيران.
+
+          وفي الحالتين الـ phage بعد كده بيصيب بكتيريا تانية ويسلّمها الجينات دي.
+        page: 128
+        quote: "Generalized A “packaging” error. Lytic phage infects bacterium, leading to cleavage of bacterial DNA. Parts of bacterial chromosomal DNA may become packaged in phage capsid. Phage infects another bacterium, transferring these genes."
+      - kind: order
+        prompt: "رتّب خطوات الـ specialized transduction"
+        steps:
+          - "Lysogenic phage infects a bacterium"
+          - "Viral DNA incorporates into the bacterial chromosome"
+          - "Phage DNA is excised with flanking bacterial genes"
+          - "DNA is packaged into a phage capsid"
+          - "Phage infects another bacterium"
+        why: "الـ lysogenic phage لازم يدخل الـ chromosome الأول، وبعدين يخرج (excision) شايل جيرانه، يتعبّى، ويصيب بكتيريا جديدة."
+        page: 128
+        quote: "Specialized An “excision” event. Lysogenic phage infects bacterium; viral DNA incorporates into bacterial chromosome. When phage DNA is excised, flanking bacterial genes may be excised with it. DNA is packaged into phage capsid and can infect another bacterium."
+      - kind: aside
+        tone: tip
+        text: "الأسامي في الـ conjugation: الـ F+ عنده الـ **fertility factor** plasmid (جينات الـ sex pilus والـ conjugation)، واللي ==مالوش الـ plasmid ده اسمه F–==. الـ sex pilus بتاع الـ F+ هو اللي بيمسك في الـ F–، مش العكس."
+        page: 128
+        quote: "plasmid contains genes required for sex pilus and conjugation. Bacteria without this plasmid are termed F– . Sex pilus on F+ bacterium contacts F− bacterium."
       - kind: mnemonic
         word: "ABCDS"
         parts:
@@ -552,7 +579,7 @@ lessons:
       - "Resistance: تكسير/تعديل الدوا، تغيير الهدف، أو طرده."
       - "Transformation (DNA عريان، SHiN)، conjugation (pilus)، transduction (phage)، transposition (Tn1546/vanA)."
       - "ABCD'S جيناتهم في lysogenic phage."
-    practice: [mic.L01.055, mic.L01.056, mic.L01.057, mic.L01.058, mic.L01.059, mic.L01.060, mic.L01.061, mic.L01.062, mic.L01.063, mic.L01.064, mic.L01.065, mic.L01.066, mic.L01.067, mic.L01.068, mic.L01.091, mic.L01.092, mic.L01.101, mic.L01.109]
+    practice: [mic.L01.055, mic.L01.056, mic.L01.057, mic.L01.058, mic.L01.059, mic.L01.060, mic.L01.061, mic.L01.062, mic.L01.063, mic.L01.064, mic.L01.065, mic.L01.066, mic.L01.067, mic.L01.068, mic.L01.091, mic.L01.092, mic.L01.101, mic.L01.109, mic.L01.111, mic.L01.112, mic.L01.113, mic.L01.114]
   - id: mic.L01.lesson5
     title: "الـ toxins: الـ exotoxin سلاح متصوّب والـ endotoxin قنبلة"
     hook: "اعرف الـ toxin بيضرب فين، وهتعرف المرض من غير ما تحفظه"
