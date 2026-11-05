@@ -24,9 +24,17 @@ items:
   - id: resp.L02.002
     kind: card
     topic: respiratory-tree
-    front: Where is airway resistance highest, and where is it lowest?
-    back: Highest in the large- to medium-sized bronchi; lowest in the terminal bronchioles, which are many in parallel.
+    front: Where is airway resistance highest?
+    back: In the large- to medium-sized bronchi.
     src: { page: 680, quote: "Airway resistance highest in the large- to medium-sized bronchi." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L02.025
+    kind: card
+    topic: respiratory-tree
+    front: Which airways have the least resistance, and why?
+    back: The terminal bronchioles. Each is narrow, but there are so many of them side by side (in parallel) that their combined resistance is the lowest.
+    src: { page: 680, quote: "Small airways consist of bronchioles that further divide into terminal bronchioles (large numbers in parallel → least airway resistance)." }
     status: unverified
     tags: [high-yield]
   - id: resp.L02.003
@@ -52,8 +60,15 @@ items:
   - id: resp.L02.005
     kind: cloze
     topic: respiratory-tree
-    text: "Respiratory zone epithelium: mostly {{c1::cuboidal}} cells in respiratory bronchioles, then {{c2::simple squamous}} cells up to the alveoli."
+    text: "Respiratory zone epithelium: mostly {{c1::cuboidal}} cells in respiratory bronchioles."
     src: { page: 680, quote: "Mostly cuboidal cells in respiratory bronchioles, then simple squamous cells up to alveoli. Cilia terminate in respiratory bronchioles." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L02.026
+    kind: cloze
+    topic: respiratory-tree
+    text: "Beyond the respiratory bronchioles, the epithelium up to the alveoli is {{c1::simple squamous}}."
+    src: { page: 680, quote: "Mostly cuboidal cells in respiratory bronchioles, then simple squamous cells up to alveoli." }
     status: unverified
     tags: [high-yield]
   - id: resp.L02.006
@@ -83,32 +98,48 @@ items:
     kind: mcq
     topic: respiratory-tree
     stem: >-
-      A 30-year-old man has an acute asthma attack. Bronchoconstriction narrows his airways. In which airway is
-      resistance to airflow normally greatest?
+      A 30-year-old man with mild asthma asks his physician in clinic why the early narrowing of his small airways
+      went unnoticed on routine testing. The physician explains that in a healthy lung the small airways add very
+      little to total airway resistance. In which segment of the airway tree is resistance to airflow normally
+      greatest?
     options:
       - Terminal bronchioles
       - Respiratory bronchioles
       - Large- to medium-sized bronchi
       - Alveolar ducts
-      - Nose
+      - Bronchioles (small airways)
     answer: 2
     why:
-      - "Terminal bronchioles are many in parallel, so they have the least resistance."
-      - "Respiratory bronchioles are in the respiratory zone, far beyond the high-resistance segment."
+      - "Each terminal bronchiole is narrow, but huge numbers lie in parallel, so together they have the least resistance."
+      - "Respiratory bronchioles lie past the terminal bronchioles in the gas-exchange zone, where the combined cross-section is even larger and resistance is negligible."
       - "Right. Airway resistance is highest in the large- to medium-sized bronchi."
-      - "Alveolar ducts are gas-exchange structures with negligible resistance."
-      - "First Aid places the highest resistance in the large- to medium-sized bronchi."
+      - "Alveolar ducts are respiratory-zone passages with an enormous combined cross-section, so flow through them meets almost no resistance."
+      - "Bronchioles are the small airways the physician means: they branch into many parallel tubes, so they add little resistance, which is why early disease there can stay silent."
     src: { page: 680, quote: "Airway resistance highest in the large- to medium-sized bronchi. Small airways consist of bronchioles that further divide into terminal bronchioles (large numbers in parallel → least airway resistance)." }
     status: unverified
   # ---------- p681: lung anatomy ----------
   - id: resp.L02.008
     kind: card
     topic: lung-anatomy
-    front: How many lobes does each lung have, and what replaces the middle lobe on the left?
-    back: Right lung 3 lobes; left lung 2 lobes plus the lingula (homolog of the right middle lobe). The space of the absent middle lobe is occupied by the heart.
+    front: How many lobes does each lung have?
+    back: Three on the right, two on the left.
     src: { page: 681, quote: "Right lung has 3 lobes; Left has less lobes (2) and lingula (homolog of right middle lobe [RML])." }
     status: unverified
     tags: [high-yield]
+  - id: resp.L02.027
+    kind: cloze
+    topic: lung-anatomy
+    text: "The {{c1::lingula}} of the left lung is the homolog of the right middle lobe."
+    src: { page: 681, quote: "Left has less lobes (2) and lingula (homolog of right middle lobe [RML])." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L02.028
+    kind: card
+    topic: lung-anatomy
+    front: What fills the place of a middle lobe in the left lung?
+    back: The heart sits in that space.
+    src: { page: 681, quote: "Instead of a middle lobe, left lung has a space occupied by the heart A ." }
+    status: unverified
   - id: resp.L02.009
     kind: cloze
     topic: lung-anatomy
@@ -192,11 +223,26 @@ items:
   - id: resp.L02.015
     kind: card
     topic: lung-anatomy
-    front: Where is the thoracentesis needle placed, and why?
-    back: Above the rib, to avoid the neurovascular bundle below each rib; and not below the 9th rib, to avoid abdominal structures (eg, right hepatic lobe, spleen).
-    src: { page: 681, quote: "Needle above the rib → avoid neurovascular bundle below each rib. Avoid below 9th rib → risk of injuring abdominal structures (eg, right hepatic lobe, spleen)." }
+    front: In thoracentesis, why does the needle go just above a rib?
+    back: The intercostal neurovascular bundle runs along the lower edge of each rib, so staying on the upper edge of the rib below spares it.
+    src: { page: 681, quote: "Needle above the rib → avoid neurovascular bundle below each rib." }
     status: unverified
     tags: [high-yield]
+  - id: resp.L02.029
+    kind: card
+    topic: lung-anatomy
+    front: In thoracentesis, why avoid going below the 9th rib?
+    back: Below that level the needle can hit abdominal organs, such as the right lobe of the liver or the spleen.
+    src: { page: 681, quote: "Avoid below 9th rib → risk of injuring abdominal structures (eg, right hepatic lobe, spleen)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L02.030
+    kind: card
+    topic: lung-anatomy
+    front: What is thoracentesis?
+    back: Draining fluid or air from the pleural space, the gap between the visceral and parietal pleura.
+    src: { page: 681, quote: "Thoracentesis—removal of fluid or air from pleural space between visceral and parietal pleura." }
+    status: unverified
   - id: resp.L02.016
     kind: mcq
     topic: lung-anatomy
@@ -236,8 +282,21 @@ items:
   - id: resp.L02.018
     kind: cloze
     topic: diaphragm-structures
-    text: "Diaphragm mnemonics: \"I ate (8) ten eggs at twelve\" (IVC T8, esophagus T10, aorta T12); \"At T-1-2 it's the {{c1::red, white, and blue}}\" (aorta, thoracic duct, azygos vein)."
+    text: "Structures through the diaphragm at T12 (aorta, thoracic duct, azygos vein): \"At T-1-2 it's the {{c1::red, white, and blue}}\"."
     src: { page: 681, quote: "(“At T-1-2 it’s the red, white, and blue”)" }
+    status: unverified
+  - id: resp.L02.031
+    kind: cloze
+    topic: diaphragm-structures
+    text: "Diaphragm levels mnemonic (First Aid): \"I ate ({{c1::8}}) ten eggs at twelve\": IVC T8, esophagus T{{c2::10}}, aorta T{{c3::12}}."
+    src: { page: 681, quote: "I ate (8) ten eggs at twelve." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L02.032
+    kind: cloze
+    topic: diaphragm-structures
+    text: "Diaphragm levels mnemonic (First Aid): the number of {{c1::letters}} = the T level: \"vena cava\" (8 letters) T8, \"oesophagus\" (10) T10, \"aortic hiatus\" (12) T12."
+    src: { page: 681, quote: "Number of letters = T level:" }
     status: unverified
   - id: resp.L02.019
     kind: cloze

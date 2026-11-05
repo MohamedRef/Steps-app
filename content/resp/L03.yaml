@@ -84,8 +84,15 @@ items:
   - id: resp.L03.005
     kind: card
     topic: work-of-breathing
-    front: What is the work of breathing, and what two kinds of work make it up?
-    back: The energy (O2) used by the respiratory muscles to produce the needed ventilation. It is flow-resistive plus elastic work (work = pressure × volume), overcoming airway resistance and elastic recoil.
+    front: What is the work of breathing?
+    back: The energy (or O2) the breathing muscles spend to move enough air to meet the body's metabolic needs.
+    src: { page: 682, quote: "Refers to the energy expended or O2 consumed by respiratory muscles to produce the ventilation needed to meet the body’s metabolic demand." }
+    status: unverified
+  - id: resp.L03.088
+    kind: card
+    topic: work-of-breathing
+    front: Which two kinds of work make up the work of breathing, and what does each overcome?
+    back: Flow-resistive work, against airway resistance, and elastic work, against the lung's elastic recoil (work = pressure × volume).
     src: { page: 682, quote: "Combination of flow-resistive and elastic work (ie, work = force × distance = pressure × volume)—needed to overcome both elastic recoil and airway resistance." }
     status: unverified
   - id: resp.L03.006
@@ -140,9 +147,16 @@ items:
   - id: resp.L03.009
     kind: card
     topic: physiologic-dead-space
-    front: What makes up physiologic dead space, and where in a healthy lung is alveolar dead space largest?
-    back: Anatomic dead space of the conducting airways plus alveolar dead space; the apex of a healthy lung contributes most alveolar dead space.
-    src: { page: 682, quote: "anatomic dead space of conducting airways plus alveolar dead space; apex of healthy lung is largest contributor of alveolar dead space." }
+    front: What makes up physiologic dead space?
+    back: The anatomic dead space of the conducting airways plus the alveolar dead space.
+    src: { page: 682, quote: "VD = physiologic dead space = anatomic dead space of conducting airways plus alveolar dead space" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.089
+    kind: cloze
+    topic: physiologic-dead-space
+    text: "In a healthy lung, the {{c1::apex}} is the largest contributor of alveolar dead space."
+    src: { page: 682, quote: "apex of healthy lung is largest contributor of alveolar dead space." }
     status: unverified
     tags: [high-yield]
   - id: resp.L03.010
@@ -156,21 +170,21 @@ items:
     topic: physiologic-dead-space
     stem: >-
       A 67-year-old man with COPD is intubated in the ICU for an acute exacerbation. On the ventilator his tidal volume
-      is 500 mL, arterial PCO2 is 40 mm Hg and mixed expired PCO2 is 30 mm Hg. What is his physiologic dead space?
+      is 500 mL, arterial PCO2 is 40 mm Hg and mixed expired PCO2 is 20 mm Hg. What is his physiologic dead space?
     options:
-      - 75 mL
       - 125 mL
       - 150 mL
-      - 375 mL
+      - 200 mL
+      - 250 mL
       - 500 mL
-    answer: 1
+    answer: 3
     why:
-      - "That would need (PaCO2 − PECO2)/PaCO2 of 0.15."
-      - "Right. VD = VT × (PaCO2 − PECO2)/PaCO2 = 500 × (40 − 30)/40 = 125 mL."
-      - "150 mL is the typical normal VD quoted on p683, not this calculation."
-      - "375 mL is VT − VD, the part of the breath that does exchange gas."
-      - "That is the whole tidal volume."
-    src: { page: 682, quote: "VD = volume of inspired air that does not take part in gas exchange." }
+      - "That would need a mixed expired PCO2 of 30 mm Hg: 500 × (40 − 30)/40 = 125 mL."
+      - "150 mL is the normal VD (p683). His COPD causes V/Q mismatch, which adds alveolar dead space, so his physiologic dead space is larger."
+      - "That would need (PaCO2 − PECO2)/PaCO2 of 0.4, ie, a mixed expired PCO2 of 24 mm Hg."
+      - "Right. VD = VT × (PaCO2 − PECO2)/PaCO2 = 500 × (40 − 20)/40 = 250 mL, well above the normal 150 mL because V/Q mismatch in lung disease adds alveolar dead space."
+      - "That divides by PECO2 (20) instead of PaCO2 (40), which turns the whole tidal volume into dead space."
+    src: { page: 682, quote: "Physiologic dead space—approximately equivalent to anatomic dead space in normal lungs. May be greater than anatomic dead space in lung diseases with ventilation/ perfusion mismatch." }
     status: unverified
   # ---------- p683: ventilation ----------
   - id: resp.L03.012
@@ -211,7 +225,7 @@ items:
       - "4.2 L/min was his alveolar ventilation at rest: (500 − 150) × 12."
       - "That would need VT − VD of 100 mL."
       - "Right. VA = (VT − VD) × RR = (200 − 150) × 30 = 1.5 L/min; rapid shallow breathing wastes ventilation on dead space."
-      - "That is far too low for these numbers."
+      - "0.6 L/min would need VT − VD of only 20 mL ((200 − 180) × 30), ie, a dead space of 180 mL; his is 150 mL."
     src: { page: 683, quote: "VA = (VT − VD) × RR" }
     status: unverified
     tags: [high-yield]
@@ -226,9 +240,37 @@ items:
   - id: resp.L03.016
     kind: card
     topic: lung-and-chest-wall-properties
-    front: What is elastic recoil, and what is true of the pressures at FRC?
-    back: Lungs tend to collapse inward and the chest wall to spring outward. At FRC, airway and alveolar pressures are atmospheric (zero), intrapleural pressure is negative (preventing atelectasis), the opposing pulls balance, and PVR is at a minimum.
-    src: { page: 683, quote: "At FRC, airway and alveolar pressures equal atmospheric pressure (PB; called zero), and intrapleural pressure is negative (preventing atelectasis)." }
+    front: What is elastic recoil?
+    back: The lungs' tendency to pull inward and collapse, against the chest wall's tendency to spring outward.
+    src: { page: 683, quote: "Elastic recoil Tendency for lungs to collapse inward and chest wall to spring outward." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.090
+    kind: cloze
+    topic: lung-and-chest-wall-properties
+    text: "At FRC, airway and alveolar pressures equal {{c1::atmospheric pressure}} (PB, called zero)."
+    src: { page: 683, quote: "At FRC, airway and alveolar pressures equal atmospheric pressure (PB; called zero)" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.091
+    kind: cloze
+    topic: lung-and-chest-wall-properties
+    text: "At FRC, intrapleural pressure is {{c1::negative}}, which prevents {{c2::atelectasis}}."
+    src: { page: 683, quote: "intrapleural pressure is negative (preventing atelectasis)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.092
+    kind: cloze
+    topic: lung-and-chest-wall-properties
+    text: "At FRC, the inward pull of the {{c1::lung}} is balanced by the outward pull of the {{c2::chest wall}}, so system pressure is atmospheric."
+    src: { page: 683, quote: "The inward pull of the lung is balanced by the outward pull of the chest wall. System pressure is atmospheric." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.093
+    kind: cloze
+    topic: lung-and-chest-wall-properties
+    text: "Pulmonary vascular resistance is at a {{c1::minimum}} at FRC."
+    src: { page: 683, quote: "Pulmonary vascular resistance (PVR) is at a minimum." }
     status: unverified
     tags: [high-yield]
   - id: resp.L03.017
@@ -255,8 +297,9 @@ items:
     kind: mcq
     topic: lung-and-chest-wall-properties
     stem: >-
-      A healthy 25-year-old man breathes quietly. At the end of a normal expiration, before the next breath, which
-      statement is true?
+      A 25-year-old man volunteers for a study in the pulmonary function laboratory. He has no symptoms, his
+      examination is normal, and his spirometry is normal. An esophageal balloon records his pleural pressure while he
+      breathes quietly. At the end of a normal expiration, before the next breath, which statement is true?
     options:
       - Intrapleural pressure is zero
       - Alveolar pressure is negative
@@ -320,7 +363,7 @@ items:
     kind: card
     topic: pulmonary-circulation
     front: What does DLCO measure?
-    back: The extent to which CO passes from the air sacs of the lungs into the blood.
+    back: How readily inhaled carbon monoxide crosses from the alveoli into the pulmonary capillary blood.
     src: { page: 684, quote: "DLCO is the extent to which CO passes from air sacs of lungs into blood." }
     status: unverified
   - id: resp.L03.026
@@ -405,9 +448,17 @@ items:
   - id: resp.L03.031
     kind: card
     topic: ventilation-perfusion-mismatch
-    front: How do ventilation and perfusion compare between apex and base, and what happens in exercise?
-    back: Both ventilation and perfusion are greater at the base. With exercise (↑ cardiac output), apical capillaries dilate and V/Q approaches 1.
-    src: { page: 685, quote: "Both ventilation and perfusion are greater at the base of the lung than at the apex of the lung. With exercise (↑ cardiac output), there is vasodilation of apical capillaries → ratio approaches 1." }
+    front: How do ventilation and perfusion compare between the apex and the base of the lung?
+    back: The base gets more of both, more air and more blood than the apex.
+    src: { page: 685, quote: "Both ventilation and perfusion are greater at the base of the lung than at the apex of the lung." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.094
+    kind: card
+    topic: ventilation-perfusion-mismatch
+    front: What happens to apical V/Q during exercise, and why?
+    back: Cardiac output rises, the apical capillaries open up (vasodilate), and the apical V/Q falls toward 1.
+    src: { page: 685, quote: "With exercise (↑ cardiac output), there is vasodilation of apical capillaries → ratio approaches 1." }
     status: unverified
     tags: [high-yield]
   - id: resp.L03.032
@@ -497,7 +548,7 @@ items:
       - "That would need PaO2 90 mm Hg."
       - "Right. PAO2 = 150 − 40/0.8 = 100; A-a = 100 − 70 = 30, above the normal (32/4) + 4 = 12."
       - "That miscalculates PAO2 as 120."
-      - "That subtracts PaCO2 from PaO2 rather than using PAO2."
+      - "That uses PIO2 (150) in place of PAO2: 150 − 70 = 80. PAO2 must first subtract PaCO2/RQ."
       - "100 mm Hg is the PAO2, not the gradient."
     src: { page: 685, quote: "A-a gradient = PAO2 – PaO2 ." }
     status: unverified
@@ -520,7 +571,7 @@ items:
     kind: card
     topic: carbon-dioxide-transport
     front: What is the Haldane effect?
-    back: In the lungs, Hb oxygenation promotes dissociation of H+, shifting equilibrium toward CO2 production, so CO2 is released from RBCs.
+    back: When Hb picks up O2 in the lungs it lets go of its H+. That H+ drives the bicarbonate reaction back toward CO2, and the CO2 leaves the red cells to be exhaled.
     src: { page: 686, quote: "In the lungs, Hb oxygenation promotes dissociation of H+ → equilibrium shifts towards CO2 production → CO2 is released from RBCs (Haldane effect)." }
     status: unverified
     tags: [high-yield]
@@ -576,6 +627,13 @@ items:
     src: { page: 686, quote: "CNS depression from opiate overdose, obesity hypoventilation syndrome, neuromuscular weakness" }
     status: unverified
     tags: [high-yield]
+  - id: resp.L03.104
+    kind: cloze
+    topic: hypoxia-and-hypoxemia
+    text: "PIO2 = FIO2 × ({{c1::PB − PH2O}}); a low PIO2 is most commonly due to ↓ PB at {{c2::high altitude}}."
+    src: { page: 686, quote: "PIO2 = FIO2 × (PB – PH2O): most commonly due to ↓PB in high altitude" }
+    status: unverified
+    tags: [high-yield]
   - id: resp.L03.044
     kind: card
     topic: hypoxia-and-hypoxemia
@@ -609,25 +667,54 @@ items:
   - id: resp.L03.046
     kind: card
     topic: hemoglobin
-    front: What is the structure of adult hemoglobin, and what is positive cooperativity?
-    back: Four subunits (2 α, 2 β), each binding one O2. As an allosteric protein, oxygenated Hb has high O2 affinity (300×) and deoxygenated Hb has low affinity, which promotes O2 unloading.
+    front: What is the structure of adult hemoglobin?
+    back: Four polypeptide chains, two α and two β, and each one carries one O2.
     src: { page: 687, quote: "Normal adult hemoglobin (Hb) is composed of 4 polypeptide subunits (2 α and 2 β) that each bind one O2 molecule." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.095
+    kind: card
+    topic: hemoglobin
+    front: What does positive cooperativity mean for hemoglobin's O2 binding?
+    back: Hb is allosteric. Once oxygenated it holds O2 with very high affinity (300×); deoxygenated Hb has low affinity, which helps it unload O2.
+    src: { page: 687, quote: "Hb is an allosteric protein that exhibits positive cooperativity when binding to O2, such that: ▘ Oxygenated Hb has high affinity for O2 (300×). ▘ Deoxygenated Hb has low affinity for O2 → promotes release/unloading of O2." }
     status: unverified
     tags: [high-yield]
   - id: resp.L03.047
     kind: card
     topic: hemoglobin
-    front: How does myoglobin differ from hemoglobin?
-    back: A single polypeptide chain with one heme; higher O2 affinity than Hb; no positive cooperativity, so its curve is not sigmoidal. Essential for full oxygenation of aerobically active muscle.
-    src: { page: 687, quote: "Myoglobin is composed of a single polypeptide chain associated with one heme moiety. Higher affinity for oxygen than Hb." }
+    front: What is the structure of myoglobin?
+    back: One polypeptide chain carrying a single heme.
+    src: { page: 687, quote: "Myoglobin is composed of a single polypeptide chain associated with one heme moiety." }
     status: unverified
     tags: [high-yield]
+  - id: resp.L03.096
+    kind: cloze
+    topic: hemoglobin
+    text: "Myoglobin has a {{c1::higher}} affinity for O2 than hemoglobin."
+    src: { page: 687, quote: "Higher affinity for oxygen than Hb." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.097
+    kind: card
+    topic: hemoglobin
+    front: Why is myoglobin's O2 curve not sigmoidal?
+    back: It is a monomer, so there are no other subunits to cooperate with; without positive cooperativity the curve is hyperbolic.
+    src: { page: 687, quote: "Myoglobin is monomeric and thus does not show positive cooperativity; curve lacks sigmoidal appearance." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.098
+    kind: cloze
+    topic: hemoglobin
+    text: "Myoglobin is essential for full oxygenation of {{c1::aerobically active muscle}}."
+    src: { page: 687, quote: "Essential for full oxygenation of aerobically active muscle." }
+    status: unverified
   - id: resp.L03.048
     kind: mcq
     topic: hemoglobin
     stem: >-
       A 24-year-old man develops severe muscle pain and dark red-brown urine after an extreme endurance workout. His
-      urine contains the monomeric O2-binding protein released from his injured skeletal muscle. Compared with
+      urine contains the protein released from his injured skeletal muscle. Compared with
       hemoglobin, how does this protein bind O2?
     options:
       - Hyperbolic curve with higher O2 affinity than Hb
@@ -670,9 +757,16 @@ items:
   - id: resp.L03.051
     kind: card
     topic: oxygen-content-of-blood
-    front: What happens to O2 content, saturation and PaO2 when Hb falls, and how is O2 delivery calculated?
-    back: O2 content falls, but O2 saturation and PaO2 are unchanged. O2 delivery = cardiac output × O2 content.
+    front: What happens to O2 content, saturation and PaO2 when Hb falls?
+    back: Arterial O2 content falls, while O2 saturation and PaO2 stay the same.
     src: { page: 687, quote: "With ↓ Hb there is ↓ O2 content of arterial blood, but no change in O2 saturation and Pao2 ." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.099
+    kind: cloze
+    topic: oxygen-content-of-blood
+    text: "O2 delivery to tissues = {{c1::cardiac output}} × {{c2::O2 content of blood}}."
+    src: { page: 687, quote: "O2 delivery to tissues = cardiac output × O2 content of blood." }
     status: unverified
     tags: [high-yield]
   - id: resp.L03.052
@@ -754,8 +848,14 @@ items:
   - id: resp.L03.057
     kind: cloze
     topic: oxyhemoglobin-dissociation-curve
-    text: "The ODC is sigmoidal because of {{c1::positive cooperativity}}: tetrameric Hb binds 4 O2 with higher affinity for each subsequent O2. A right shift means {{c2::↑}} P50."
+    text: "The ODC is sigmoidal because of {{c1::positive cooperativity}}: tetrameric Hb binds 4 O2 with higher affinity for each subsequent O2."
     src: { page: 687, quote: "ODC has sigmoidal shape due to positive cooperativity (ie, tetrameric Hb molecule can bind 4 O2 molecules and has higher affinity for each subsequent O2 molecule bound)." }
+    status: unverified
+  - id: resp.L03.100
+    kind: cloze
+    topic: oxyhemoglobin-dissociation-curve
+    text: "A right shift of the ODC means {{c1::↑}} P50; a left shift means {{c2::↓}} P50."
+    src: { page: 687, quote: "(↑ P50)" }
     status: unverified
   - id: resp.L03.058
     kind: mcq
@@ -803,6 +903,13 @@ items:
     src: { page: 688, quote: "Chronic hypoxic pulmonary vasoconstriction → ↑ pulmonary vascular resistance → pulmonary hypertension, right ventricular hypertrophy (RVH)." }
     status: unverified
     tags: [high-yield]
+  - id: resp.L03.105
+    kind: card
+    topic: response-to-high-altitude
+    front: Why does 2,3-BPG rise at high altitude?
+    back: Red cells run more glycolysis, and BPG mutase isomerizes the extra intermediate into 2,3-BPG.
+    src: { page: 688, quote: "↑ 2,3-BPG (binds to Hb → rightward shift of oxyhemoglobin dissociation curve → ↑ O2 release) due to increased glycolysis and isomerization by BPG mutase." }
+    status: unverified
   - id: resp.L03.061
     kind: mcq
     topic: response-to-high-altitude
@@ -837,15 +944,23 @@ items:
   - id: resp.L03.063
     kind: card
     topic: response-to-exercise
-    front: What happens to V/Q distribution and the ODC during exercise?
-    back: ↑ HR and SV → ↑ Q̇ → ↑ pulmonary blood flow → V/Q from base to apex becomes more uniform. ↑ CO2 and ↓ pH at tissues shift the ODC right → more O2 offloading.
+    front: What happens to V/Q distribution during exercise?
+    back: Heart rate and stroke volume rise, so cardiac output and pulmonary blood flow rise, and V/Q evens out from base to apex.
+    src: { page: 688, quote: "↑ HR and ↑ SV → ↑ Q̇ → ↑ pulmonary blood flow → ↑ ratio from base to apex (becoming more uniform)." }
+    status: unverified
+  - id: resp.L03.101
+    kind: card
+    topic: response-to-exercise
+    front: How does exercise shift the ODC at the tissues?
+    back: Working cells make more CO2 and lower the local pH, which pushes the curve to the right so the tissues receive more O2.
     src: { page: 688, quote: "↑ cellular respiration → ↑ CO2 production and ↓ pH at tissues → right shift of ODC → tissue offloading of more O2" }
     status: unverified
+    tags: [high-yield]
   - id: resp.L03.064
     kind: mcq
     topic: response-to-exercise
     stem: >-
-      During a maximal treadmill test, a healthy 22-year-old has arterial and mixed venous blood sampled. Compared with
+      During a maximal treadmill test, a healthy 22-year-old man has arterial and mixed venous blood sampled. Compared with
       rest, which value is most likely unchanged?
     options:
       - Venous PO2
@@ -915,8 +1030,22 @@ items:
   - id: resp.L03.067
     kind: cloze
     topic: methemoglobin
-    text: "Methemoglobinemia presents with cyanosis that {{c1::does not improve with supplemental O2}} and {{c2::chocolate}}-colored blood; treat with {{c3::methylene blue}} and vitamin C."
+    text: "Methemoglobinemia presents with cyanosis that {{c1::does not improve with supplemental O2}}."
+    src: { page: 688, quote: "may present with cyanosis (does not improve with supplemental O2 )" }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.102
+    kind: cloze
+    topic: methemoglobin
+    text: "Methemoglobinemia gives {{c1::chocolate}}-colored blood."
     src: { page: 688, quote: "may present with cyanosis (does not improve with supplemental O2 ) and chocolate- colored blood." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.103
+    kind: cloze
+    topic: methemoglobin
+    text: "Methemoglobinemia is treated with {{c1::methylene blue}} and {{c2::vitamin C}}."
+    src: { page: 688, quote: "Methemoglobinemia can be treated with methylene blue and vitamin C." }
     status: unverified
     tags: [high-yield]
   - id: resp.L03.068
@@ -999,11 +1128,25 @@ items:
     src: { page: 689, quote: "↑ carboxyhemoglobin (CO-Hb) on co-oximetry (cannot be distinguished with pulse oximetry)." }
     status: unverified
     tags: [high-yield]
+  - id: resp.L03.106
+    kind: cloze
+    topic: cyanide-vs-carbon-monoxide-poisoning
+    text: "Carbon monoxide comes from {{c1::incomplete combustion}} of carbon-containing compounds (tobacco smoke, furnaces, space heaters, fires, motor exhaust)."
+    src: { page: 689, quote: "From tobacco smoke, furnaces, space heaters, fires, motor exhaust (incomplete combustion of carbon-containing compounds)." }
+    status: unverified
+    tags: [high-yield]
+  - id: resp.L03.107
+    kind: card
+    topic: cyanide-vs-carbon-monoxide-poisoning
+    front: Are bilateral globus pallidus lesions specific to CO poisoning?
+    back: They are the classic CO finding, but cyanide toxicity can occasionally produce them too.
+    src: { page: 689, quote: "Classically associated with bilateral globus pallidus lesions on MRI A (although, rarely, these lesions can be seen with cyanide toxicity)." }
+    status: unverified
   - id: resp.L03.075
     kind: mcq
     topic: cyanide-vs-carbon-monoxide-poisoning
     stem: >-
-      In winter, a mother and her two children are brought in with headache, vomiting and confusion. They used a
+      In winter, a 34-year-old mother and her two children, aged 6 and 9, are brought in with headache, vomiting and confusion. They used a
       charcoal heater in a closed room. Pulse oximetry reads 98%. Which MRI finding is classically associated?
     options:
       - Bilateral globus pallidus lesions
