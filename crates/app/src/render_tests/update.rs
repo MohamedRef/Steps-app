@@ -342,9 +342,14 @@ fn many(kind: ChangeKind, n: usize, what: &str) -> Vec<Change> {
 #[test]
 fn the_changelog_folds_long_lists_and_older_builds() {
     let u = install(&dead_feed(), "0.1.0", 44, notify());
+    // Dates relative to today, so the labels don't drift as the calendar
+    // moves ("yesterday" on the day it was written is "5 days ago" later).
+    let now = chrono::Utc::now();
+    let ago = |days: i64| (now - chrono::Duration::days(days)).format("%Y-%m-%dT08:00:00Z").to_string();
+    let a_while = now - chrono::Duration::days(40);
     let mut history = vec![release(
         50,
-        "2026-11-04T08:00:00Z",
+        &ago(0),
         [
             many(ChangeKind::New, 8, "محاضرة"),
             many(ChangeKind::Improved, 2, "تحسين"),
@@ -353,13 +358,7 @@ fn the_changelog_folds_long_lists_and_older_builds() {
         .concat(),
         false,
     )];
-    let dates = [
-        "2026-11-03T08:00:00Z",
-        "2026-11-02T08:00:00Z",
-        "2026-10-30T08:00:00Z",
-        "2026-09-01T08:00:00Z",
-        "2025-12-01T08:00:00Z",
-    ];
+    let dates = [ago(1), ago(2), ago(5), ago(40), ago(400)];
     for (i, d) in dates.iter().enumerate() {
         history.push(release(
             49 - i as u64,
@@ -393,7 +392,17 @@ fn the_changelog_folds_long_lists_and_older_builds() {
     app.assert_has(tx::YESTERDAY);
     app.assert_has(tx::TWO_DAYS_AGO);
     app.assert_has(&tx::DAYS_AGO.replace("{n}", "5"));
-    app.assert_has(&format!("1 {}", tx::MONTHS[8]));
+    {
+        use chrono::Datelike;
+        let month = tx::MONTHS[a_while.month0() as usize];
+        let day = a_while.day();
+        let label = if a_while.year() == now.year() {
+            format!("{day} {month}")
+        } else {
+            format!("{day} {month} {}", a_while.year())
+        };
+        app.assert_has(&label);
+    }
     app.assert_lacks("إصلاح 49");
     app.tap("v0.1.0 (49)");
     app.assert_has("إصلاح 49");
@@ -401,7 +410,7 @@ fn the_changelog_folds_long_lists_and_older_builds() {
     app.assert_lacks("إصلاح 49");
     app.assert_lacks(tx::BADGE_INSTALLED);
     app.tap(tx::SHOW_OLDER);
-    app.assert_has("2025");
+    app.assert_has(&(now - chrono::Duration::days(400)).format("%Y").to_string());
     app.assert_has(tx::BADGE_INSTALLED);
     // The foot: GitHub opens the channel's releases page.
     app.tap("GitHub");
