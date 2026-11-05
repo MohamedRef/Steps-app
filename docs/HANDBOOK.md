@@ -257,7 +257,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 *Last updated: 2026-11-05.*
 
 ### State
-- **Released:** `1.0.0-alpha.1` on 2026-11-05 (#611): APK, Mac app, web and Steps Cloud. Release: <https://github.com/MohamedRef/Steps-app/releases/tag/steps-v1.0.0-alpha.1>.
+- **Released:** `1.0.0-alpha.1` on 2026-11-05 (#611), then `1.0.0-alpha.2` the same day: APK, Mac app, web and Steps Cloud. Latest release: <https://github.com/MohamedRef/Steps-app/releases/tag/steps-v1.0.0-alpha.2>. Installed alpha.1 builds update to it over the air.
 - **Content:** all 84 lectures written (16 First Aid courses + Rapid Review), about 9,400 items: about 5,100 cards, 1,700 MCQs, 1,050 clozes, 1,500 tables and lists, and 360 lessons. All `unverified` until I approve them.
 - **Quality:** two full review rounds (code, platform, UX, and content per course group) were run on 2026-11-04 and 2026-11-05; every finding of every severity was fixed and closed before alpha.1.
 - **Sync:** Steps Cloud is deployed with Google sign-in working (GCP project `steps-513803`) and password sign-in.
@@ -265,7 +265,8 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 - **UWorld index (2026-11-05):** More › أسئلة UWorld is a tree of every course, lecture and B&B video with a copy button on each and a basket that cuts any mix (and pasted ids) into custom tests of up to 40; each lesson opens with its lecture's B&B videos and UWorld ids. It follows the public "Exam Maker Tool" (uworld-tool.streamlit.app) and fixes its gaps (search, counts, done videos, a stable shuffle).
 
 ### Roadmap
-- **1.0.0-alpha.2:** anything found by the last UX walk and the final code check of alpha.1, plus whatever daily use of alpha.1 turns up. Confirm the scheduled workflows fire again (#614) and close it. Android Google sign-in no longer fails with `invalid_grant` when Chrome is in front (#629). Today on a first launch: the plan starts the day the exam day is first saved, so the first day has nothing "missed from yesterday", never says "done" before anything is studied, and hides the progress ring when today's plan counts nothing (a self-assessment or rest day); the ring now says what it counts ("3 of 40 done"). The rebalance card's buttons and its before/after preview act in place inside the Today hero instead of opening Lessons.
+- **1.0.0-alpha.2 (released 2026-11-05):** First Aid coverage fixes, Android Google sign-in without `invalid_grant` when Chrome is in front (#629), the Today first-launch fixes (#637), the UWorld tree, basket and lesson strip (#638) and the UWorld mistake log (#640).
+- **1.0.0-alpha.3:** whatever daily use of the alpha turns up. Confirm the scheduled workflows fire again (#614) and close it.
 - **Research gaps (2026-11-05):** of the three gaps the research reports named, the NBME/UWSA score tracker (Progress › اختباراتي: chart, trend and readiness verdict) and new cards only from pages read (the pages-read gate) were already in the app. The third, a UWorld mistake log by question id, is on Progress › الغلطات: type a QID and the reason (`steps_core::uwmiss`, one synced setting `uw.miss.<qid>` each), see the most common reason with what to change, and the lectures with most misses with their QIDs to copy into a UWorld custom test. Features that copy a commercial question bank stay low priority, since I already have the banks.
 - **More sources:** Pathoma, Sketchy, UWorld notes and my own materials merge into the First Aid lectures and topics as they arrive ([SOURCES.md](SOURCES.md)). When the first non-First-Aid source arrives, `steps-tools refs` must learn to read its text.
 - **Approvals:** I check items against the book in the app and export my verdicts; fixes follow per lecture.

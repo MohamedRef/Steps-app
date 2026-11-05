@@ -4,7 +4,7 @@ Steps is my USMLE Step 1 study app. I built it for one learner, me, and it is pr
 
 It is made for short, focused sessions: spaced repetition (FSRS), Step 1 style vignette questions with an explanation for every option, lessons that explain the why in Egyptian Arabic, cases, timed blocks and an Anki export. It works offline on my phone (S24 Ultra), my tablet (Tab S11), my Mac and in any browser, and keeps them in sync.
 
-The current version is **1.0.0-alpha.1**, the first alpha.
+The current version is **1.0.0-alpha.2**, the second alpha.
 
 ## What I study from
 
@@ -46,10 +46,10 @@ Steps has its own look: the **S** icon that climbs like a stair with a gold dot 
 
 ## Install the alpha
 
-The alpha is on GitHub: [Steps 1.0.0-alpha.1](https://github.com/MohamedRef/Steps-app/releases/tag/steps-v1.0.0-alpha.1).
+The alpha is on GitHub: [Steps 1.0.0-alpha.2](https://github.com/MohamedRef/Steps-app/releases/tag/steps-v1.0.0-alpha.2).
 
-- **Android (phone and tablet):** install `steps-1.0.0-alpha.1.apk`. It installs over a preview build signed with the same key and keeps the data.
-- **Mac:** unzip `Steps-1.0.0-alpha.1-mac.zip`, move `Steps.app` to Applications, and run this once in Terminal:
+- **Android (phone and tablet):** install `steps-1.0.0-alpha.2.apk`. It installs over a preview build signed with the same key and keeps the data.
+- **Mac:** unzip `Steps-1.0.0-alpha.2-mac.zip`, move `Steps.app` to Applications, and run this once in Terminal:
   `xattr -dr com.apple.quarantine /Applications/Steps.app`
 - **Web:** open <https://steps-web.hamorefaat85.workers.dev>, then "Add to Home Screen" or "Install app" if you like.
 
