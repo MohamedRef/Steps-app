@@ -5,7 +5,7 @@ Tab S11 and the Mac. A release is a signed APK sideloaded onto both Galaxy
 devices, plus a Steps.app built on the Mac. There are no store listings and no
 paid developer accounts. Everything here costs $0.
 
-The first **alpha**, `1.0.0-alpha.1`, was released on 2026-11-05. Releases are built and published by the **Release** workflow
+The first **alpha**, `1.0.0-alpha.1`, was released on 2026-11-05, and `1.0.0-alpha.2` the same day. Releases are built and published by the **Release** workflow
 (`.github/workflows/release.yml`, run by hand; §4). The CI *preview* APKs
 (§3) come once a night when `main` moved, or when Mohamed runs the workflow by hand.
 
