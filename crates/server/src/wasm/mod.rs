@@ -231,7 +231,13 @@ async fn sign_in_google(mut req: Request, env: &Env, cfg: &Config) -> Result<Res
     if !jwks.keys.iter().any(|k| k.kid == kid) {
         jwks = google_jwks(&url, true).await?;
     }
-    let identity = match google::verify_id_token(&sign_in.id_token, &jwks, &cfg.google_client_ids, now) {
+    let identity = match google::verify_id_token(
+        &sign_in.id_token,
+        &jwks,
+        &cfg.google_client_ids,
+        sign_in.nonce.as_deref(),
+        now,
+    ) {
         Ok(id) => id,
         Err(e) => return api_error(ErrorCode::Unauthorized, format!("Google ID token: {e}")),
     };

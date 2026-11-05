@@ -67,6 +67,11 @@ pub struct GoogleSignIn {
     /// Google ID token from the browser sign-in (OAuth + PKCE).
     pub id_token: String,
     pub device: DeviceInfo,
+    /// The web app's sign-in nonce (#542). A token that carries a `nonce`
+    /// claim is taken only with the same nonce, so a leaked web ID token
+    /// can't be replayed without the tab that asked for it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub nonce: Option<String>,
 }
 
 /// `POST /v1/auth/password`: sign in on a device without Google (a

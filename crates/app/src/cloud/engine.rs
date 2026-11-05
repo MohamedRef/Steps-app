@@ -331,7 +331,11 @@ impl Engine {
             }
         }
         let SignInStep::IdToken(id_token) = &pending.step else { return };
-        let body = GoogleSignIn { id_token: id_token.clone(), device: self.device.clone() };
+        let body = GoogleSignIn {
+            id_token: id_token.clone(),
+            device: self.device.clone(),
+            nonce: oauth::sign_in_nonce(),
+        };
         match self.api.sign_in_google(&body).await {
             Ok(session) => self.begin_session(session, true),
             Err(CloudError::Network(e)) => {
@@ -694,6 +698,10 @@ impl Engine {
     async fn pump(&mut self) {
         if self.ws.is_none() || self.hold_pushes_until.is_some_and(|t| Instant::now() < t) {
             return;
+        }
+        // Ops written while the clock was wrong go up with a fresh stamp (#539).
+        if let Err(e) = self.store.restamp_future(crate::store::now_ms()) {
+            crate::diag::report!("restamping outbox: {e}");
         }
         let outbox = match self.store.outbox_skipping(MAX_OPS_PER_PUSH, &self.hub_lacks) {
             Ok(o) => o,
