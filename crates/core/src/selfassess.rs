@@ -216,7 +216,7 @@ pub fn trend(points: &[(Day, u8)]) -> Option<i16> {
 }
 
 /// Stores a [`Day`] as `YYYY-MM-DD`, so exports read plainly.
-mod iso_day {
+pub(crate) mod iso_day {
     use serde::{Deserialize, Deserializer, Serializer, de::Error};
 
     use crate::plan::Day;

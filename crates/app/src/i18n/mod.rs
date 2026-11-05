@@ -32,6 +32,9 @@ pub mod weak;
 /// B&B videos and UWorld QIDs per lecture (qbank/mod.rs).
 pub mod qbank;
 
+/// The UWorld mistake log by QID (stats/uworld.rs).
+pub mod uwmiss;
+
 pub mod nav;
 
 pub mod today;

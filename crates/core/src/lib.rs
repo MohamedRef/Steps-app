@@ -23,5 +23,6 @@ pub mod srs;
 pub mod stats;
 pub mod theme;
 pub mod update;
+pub mod uwmiss;
 pub mod validate;
 pub mod zone;

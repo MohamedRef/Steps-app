@@ -1,5 +1,6 @@
 //! Synced (LWW) settings that screens keep in globals for speed: the plan,
-//! course statuses, sounds, reminders and the bank's finished papers.
+//! course statuses, sounds, reminders, the bank's finished papers and the UWorld
+//! mistake log.
 //! Anything that changes the store from outside this run
 //! (a sync from another device, a restore, an import) must call [`reload`],
 //! or the next local save would write the stale copy back with a newer
@@ -16,5 +17,6 @@ pub fn reload() {
     crate::learn::reload();
     crate::weak::reload();
     crate::qbank::reload();
+    crate::stats::reload_uworld();
     crate::courses::reload();
 }

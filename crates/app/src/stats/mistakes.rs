@@ -114,6 +114,8 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
                 }
             }
         }
+        // UWorld questions he missed, logged by ID (uworld.rs).
+        super::uworld::UworldMistakes {}
     }
 }
 

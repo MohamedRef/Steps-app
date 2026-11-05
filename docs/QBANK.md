@@ -13,3 +13,6 @@ Each First Aid lecture in Steps lists its Boards and Beyond videos and, under ea
   It needs one repo setting, once: Settings › Actions › General › Workflow permissions › **Allow GitHub Actions to create and approve pull requests**. Without it the run pushes the branch `qbank/sync-<date>` and fails, saying so; open the PR from that branch by hand.
 - When the doc adds a video the map doesn't cover, the run stops and names it (`no lecture for B&B Cardiology › … › …`). Add a line to `bb-map.yaml` and run again.
 - `steps-tools validate` checks that every lecture in the map exists, that no QID appears twice or retired, and that `uworld.yaml` was not edited by hand.
+
+## Mistakes by QID
+Progress › الغلطات has a UWorld card: type the ID of a question you missed and pick why (didn't know it, misread, changed a right answer, a reasoning step, timing). Steps files it under its lecture with this mapping and shows the most common reason and the lectures with the most misses, each with its QIDs to copy into a custom test. Only the number, the reason and your short note are kept (synced settings `uw.miss.<qid>`), never question text.
