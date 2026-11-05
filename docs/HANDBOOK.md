@@ -82,7 +82,7 @@ Rust stable (edition 2024, minimum 1.90), Dioxus 0.7 with HTML/CSS for the UI. A
 
 | Path | What it is |
 |---|---|
-| `crates/core` | Pure logic, no UI and no IO; builds for wasm32. Content schema and validation (`content.rs`, `validate.rs`, `lesson.rs`, `glossary.rs`, `quote.rs`), FSRS and scheduling (`srs.rs`, `review/`, `session.rs`), planner (`plan.rs`), timed exam (`exam.rs`), self-assessment (`selfassess.rs`), pages read (`pages.rs`), stats, packs (`pack.rs`), update feed (`update.rs`), themes (`theme.rs`). |
+| `crates/core` | Pure logic, no UI and no IO; builds for wasm32. Content schema and validation (`content.rs`, `validate.rs`, `lesson.rs` with `lesson/markup.rs` and `lesson/check.rs`, `glossary.rs`, `quote.rs`), FSRS and scheduling (`srs.rs`, `review/`, `session.rs`), planner (`plan.rs`), timed exam (`exam.rs`), self-assessment (`selfassess.rs`), pages read (`pages.rs`), stats, packs (`pack.rs`), update feed (`update.rs`), themes (`theme.rs`). |
 | `crates/app` | The app (Dioxus). One module per feature (`today`, `study`, `bank`, `case`, `learn`, `lecture`, `plan`, `stats`, `oral`, `notes`, `own`, `qbank`, `labs`, `settings`, `update`, `cloud`, …). `store/` is SQLite and sync outbox; `platform/` is device glue (Android JNI, Mac, browser); `i18n/` holds all Arabic UI text, one file per feature (`i18n/today.rs`, …) declared in `i18n/mod.rs`; `prefs.rs` and `look.rs` hold appearance; `render_tests/` are the screen tests. |
 | `crates/protocol` | Wire types shared by app and server: sync ops and tables (`sync.rs`, `TABLES`), cloud API (`cloud.rs`), merge rules, client state machine. |
 | `crates/server` | Steps Cloud, the Cloudflare Worker (Durable Objects, no D1/R2). `wrangler.toml`. |
@@ -270,7 +270,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 - **Approvals:** I check items against the book in the app and export my verdicts; fixes follow per lecture.
 - **Beta, then stable:** after daily use of the alpha; I decide when.
 - **Exam:** Step 1 around September 2027 (date not fixed yet). Since May 2026 the exam is 14 blocks of 30 minutes, up to 20 questions each.
-- **Smaller files, fewer merge conflicts:** split the busiest shared files one area per PR, with no behavior change (§3 file layout rule). Done: UI text (`i18n.rs` into `i18n/`, one file per feature); core unit tests in sibling files.
+- **Smaller files, fewer merge conflicts:** split the busiest shared files one area per PR, with no behavior change (§3 file layout rule). Done: UI text (`i18n.rs` into `i18n/`, one file per feature); unit tests of every crate in sibling files; `lesson.rs` split into schema, `lesson/markup.rs` and `lesson/check.rs`.
 
 ### Known issues
 - **#614 Scheduled workflows are not firing.** GitHub had not run this repo's `schedule:` triggers; #612 re-saved each cron line under my account. `daily.yml` starts the platform runs after green CI on `main` meanwhile. Check Actions for runs with event `schedule`.
