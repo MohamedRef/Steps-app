@@ -40,6 +40,22 @@ jobs:
           fetch-depth: 2
       - name: No build output, book text or huge files in git
         run: scripts/check-tracked-files.sh
+      # Mohamed, 2026-11-05: nothing on GitHub names the tools the work was
+      # written with. The pull request's title and body are checked here;
+      # merge with them as the squash message (docs/RUN.md), so branch
+      # commit trailers never reach main.
+      - name: No assistant names in the pull request's text
+        if: github.event_name == 'pull_request'
+        env:
+          PR_TEXT: ${{ github.event.pull_request.title }} ${{ github.event.pull_request.body }}
+        run: |
+          tool="cl""aude|anthr""opic"
+          hits="$(printf '%s\n' "$PR_TEXT" | grep -iE "$tool" | grep -viE "(${tool%%|*})[ -]bernard" || true)"
+          if [ -n "$hits" ]; then
+            echo "::error title=Assistant named::The pull request's title or body names an assistant (Mohamed: never on GitHub). Edit it and re-run:"
+            echo "$hits" | head -10
+            exit 1
+          fi
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: rustfmt, clippy
