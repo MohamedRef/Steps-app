@@ -260,7 +260,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 *Last updated: 2026-11-06.*
 
 ### State
-- **Released:** `1.0.0-alpha.1` on 2026-11-05 (#611), then `1.0.0-alpha.2` the same day: APK, Mac app, web and Steps Cloud. Latest release: <https://github.com/MohamedRef/Steps-app/releases/tag/steps-v1.0.0-alpha.2>. Installed alpha.1 builds update to it over the air.
+- **Released:** `1.0.0-alpha.1` and `1.0.0-alpha.2` on 2026-11-05 (#611, #641), then `1.0.0-alpha.3` on 2026-11-06: APK, Mac app, web and Steps Cloud. Latest release: <https://github.com/MohamedRef/Steps-app/releases/tag/steps-v1.0.0-alpha.3>. Installed alpha builds update to it over the air.
 - **Content:** all 84 lectures written (16 First Aid courses + Rapid Review), about 9,400 items: about 5,100 cards, 1,700 MCQs, 1,050 clozes, 1,500 tables and lists, and 360 lessons. All `unverified` until I approve them.
 - **Quality:** two full review rounds (code, platform, UX, and content per course group) were run on 2026-11-04 and 2026-11-05; every finding of every severity was fixed and closed before alpha.1.
 - **Sync:** Steps Cloud is deployed with Google sign-in working (GCP project `steps-513803`) and password sign-in.
@@ -269,7 +269,8 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 
 ### Roadmap
 - **1.0.0-alpha.2 (released 2026-11-05):** First Aid coverage fixes, Android Google sign-in without `invalid_grant` when Chrome is in front (#629), the Today first-launch fixes (#637), the UWorld tree, basket and lesson strip (#638) and the UWorld mistake log (#640).
-- **1.0.0-alpha.3:** whatever daily use of the alpha turns up.
+- **1.0.0-alpha.3 (released 2026-11-06):** the Android screen no longer freezes after lock and unlock, and the update check is faster (#643).
+- **1.0.0-alpha.4:** whatever daily use of the alpha turns up.
 - **Research gaps (2026-11-05):** of the three gaps the research reports named, the NBME/UWSA score tracker (Progress › اختباراتي: chart, trend and readiness verdict) and new cards only from pages read (the pages-read gate) were already in the app. The third, a UWorld mistake log by question id, is on Progress › الغلطات: type a QID and the reason (`steps_core::uwmiss`, one synced setting `uw.miss.<qid>` each), see the most common reason with what to change, and the lectures with most misses with their QIDs to copy into a UWorld custom test. Features that copy a commercial question bank stay low priority, since I already have the banks.
 - **More sources:** Pathoma, Sketchy, UWorld notes and my own materials merge into the First Aid lectures and topics as they arrive ([SOURCES.md](SOURCES.md)). When the first non-First-Aid source arrives, `steps-tools refs` must learn to read its text.
 - **Approvals:** I check items against the book in the app and export my verdicts; fixes follow per lecture.
