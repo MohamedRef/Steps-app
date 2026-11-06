@@ -141,7 +141,7 @@ On Linux, building the desktop app needs `libwebkit2gtk-4.1-dev libgtk-3-dev lib
 | `mac.yml` (Mac) | nightly + by hand | Mac clippy, tests and `dx bundle`. Never on PRs: Mac runners are slow |
 | `steps-android-preview.yml` | nightly when `main` moved + by hand | signed preview APK on the `steps-preview` prerelease; PRs touching `android/` build it as a check |
 | `settings-browser.yml`, `android-webview-regression.yml` | nightly + by hand | Settings browser check; Android WebView renderer-loss tests |
-| `daily.yml` | after green CI on `main` | starts any platform workflow that hasn't run on `main` for 20 hours, and opens "Scheduled workflows are not firing" while no scheduled Nightly ran for 36 hours |
+| `daily.yml` | after every CI run (`main` or any pull request) | starts any platform workflow that hasn't run on `main` for 20 hours (QBank sync: a week), and opens "Nightly checks have not run for 36 hours" while Nightly hasn't run on `main` for 36 hours |
 | `alerts.yml` | after nightly/deploy runs | opens "<workflow> failed on main" issues and closes them when green again |
 | `web-deploy.yml` | after green CI on `main`, when app or content changed | deploys the web app to `https://steps-web.hamorefaat85.workers.dev` |
 | `cloud-deploy.yml` | after green CI on `main`, when `crates/server` or `crates/protocol` changed; or by hand | deploys Steps Cloud and smoke-tests sign-in |
@@ -152,7 +152,7 @@ Things to know:
 - A PR waits only on CI and the screens browser check. Everything platform-specific runs nightly.
 - A newer push to a branch cancels its older run, on `main` too.
 - A run that still says "in progress" after its jobs finished, and answers "run not running" to Cancel, is GitHub recording the end late (5 to 30 minutes). Don't re-run or push for it.
-- GitHub runs a `schedule:` as the user who last edited the cron line. Schedules were not firing (#340, #614); #612 moved each cron by a minute, merged by me, so they should fire again. `daily.yml` covers for them meanwhile. Before any release, check that Nightly checks, Mac and Android preview have run green on the release commit.
+- GitHub creates no `schedule:` events for this repo (#340, #614), even after #552 and #612 (merged by me) moved each cron line and every scheduled workflow was disabled and enabled again on 2026-11-06. So `daily.yml` starts the platform runs after every CI run, without cron; the `schedule:` lines stay and run too if GitHub ever fires them. Before any release, check that Nightly checks, Mac and Android preview have run green on the release commit.
 
 ## 7. How a change gets merged
 
@@ -254,7 +254,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 
 ## 12. Current state, roadmap and known issues
 
-*Last updated: 2026-11-05.*
+*Last updated: 2026-11-06.*
 
 ### State
 - **Released:** `1.0.0-alpha.1` on 2026-11-05 (#611), then `1.0.0-alpha.2` the same day: APK, Mac app, web and Steps Cloud. Latest release: <https://github.com/MohamedRef/Steps-app/releases/tag/steps-v1.0.0-alpha.2>. Installed alpha.1 builds update to it over the air.
@@ -266,7 +266,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 
 ### Roadmap
 - **1.0.0-alpha.2 (released 2026-11-05):** First Aid coverage fixes, Android Google sign-in without `invalid_grant` when Chrome is in front (#629), the Today first-launch fixes (#637), the UWorld tree, basket and lesson strip (#638) and the UWorld mistake log (#640).
-- **1.0.0-alpha.3:** whatever daily use of the alpha turns up. Confirm the scheduled workflows fire again (#614) and close it.
+- **1.0.0-alpha.3:** whatever daily use of the alpha turns up.
 - **Research gaps (2026-11-05):** of the three gaps the research reports named, the NBME/UWSA score tracker (Progress › اختباراتي: chart, trend and readiness verdict) and new cards only from pages read (the pages-read gate) were already in the app. The third, a UWorld mistake log by question id, is on Progress › الغلطات: type a QID and the reason (`steps_core::uwmiss`, one synced setting `uw.miss.<qid>` each), see the most common reason with what to change, and the lectures with most misses with their QIDs to copy into a UWorld custom test. Features that copy a commercial question bank stay low priority, since I already have the banks.
 - **More sources:** Pathoma, Sketchy, UWorld notes and my own materials merge into the First Aid lectures and topics as they arrive ([SOURCES.md](SOURCES.md)). When the first non-First-Aid source arrives, `steps-tools refs` must learn to read its text.
 - **Approvals:** I check items against the book in the app and export my verdicts; fixes follow per lecture.
@@ -275,7 +275,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 - **Smaller files, fewer merge conflicts:** split the busiest shared files one area per PR, with no behavior change (§3 file layout rule). Done: UI text (`i18n.rs` into `i18n/`, one file per feature); unit tests of every crate in sibling files; `lesson.rs` split into schema, `lesson/markup.rs` and `lesson/check.rs`.
 
 ### Known issues
-- **#614 Scheduled workflows are not firing.** GitHub had not run this repo's `schedule:` triggers; #612 re-saved each cron line under my account. `daily.yml` starts the platform runs after green CI on `main` meanwhile. Check Actions for runs with event `schedule`.
+- **GitHub schedules don't fire** (2026-11-06). GitHub has never created a `schedule` run for this repo. `daily.yml` starts the platform runs after every CI run instead (#614 closed), and opens an issue if Nightly hasn't run for 36 hours. Check Actions for runs with event `schedule` now and then.
 - A workflow run can stay "in progress" for up to about 30 minutes after it finished. Ignore it (§6).
 - The lowercase clone URL `github.com/mohamedref/steps-app` once served a stale `main`; use `https://github.com/MohamedRef/Steps-app.git`.
 - Nightly coverage, later-date tests and platform builds only alert through issues; no alert issue doesn't prove they ran, so look at the runs before a release.
