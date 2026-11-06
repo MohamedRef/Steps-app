@@ -280,6 +280,9 @@ pub enum ContentCheck {
     New,
     /// The feed or the pack couldn't be fetched or taken; tried again later.
     Failed,
+    /// The feed names a newer pack and it is being fetched (the app's half
+    /// of the check already shows).
+    Fetching,
 }
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct Status {

@@ -454,7 +454,16 @@ fn range_start<B>(res: &ureq::http::Response<B>) -> Option<u64> {
 #[cfg(not(target_arch = "wasm32"))]
 pub(crate) fn agent(url: &str, timeout: Duration) -> ureq::Agent {
     let local = url.starts_with("http://127.0.0.1") || url.starts_with("http://localhost");
-    let mut config = ureq::Agent::config_builder().http_status_as_error(false).timeout_global(Some(timeout));
+    // A connection Android cut while Steps was in the background (screen
+    // locked) fails within seconds instead of holding the check for the
+    // whole `timeout`: every read must make progress.
+    let mut config = ureq::Agent::config_builder()
+        .http_status_as_error(false)
+        .timeout_global(Some(timeout))
+        .timeout_resolve(Some(STALL))
+        .timeout_connect(Some(STALL))
+        .timeout_per_read(Some(STALL))
+        .timeout_per_write(Some(STALL));
     if local {
         config = config.proxy(None);
     } else if cfg!(test) {
@@ -462,6 +471,11 @@ pub(crate) fn agent(url: &str, timeout: Duration) -> ureq::Agent {
     }
     config.build().into()
 }
+
+/// How long a lookup, a connection or one read may stall before the
+/// request counts as failed.
+#[cfg(not(target_arch = "wasm32"))]
+const STALL: Duration = Duration::from_secs(20);
 
 /// Tries within one download before it waits for the next check or tap.
 const RESUME_TRIES: u32 = 3;

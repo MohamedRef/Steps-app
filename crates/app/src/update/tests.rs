@@ -1230,3 +1230,93 @@ fn the_background_job_of_a_development_build_never_checks() {
     // The UI of this process never sees it: only `init` makes it the app's.
     assert!(get().is_none());
 }
+
+/// Serves `dir`, holding every `.pack` answer until `gate` lets it go.
+fn serve_gated(dir: PathBuf, gate: std::sync::mpsc::Receiver<()>) -> String {
+    use std::io::{BufRead as _, BufReader};
+    let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+    let url = format!("http://{}", listener.local_addr().unwrap());
+    std::thread::spawn(move || {
+        for stream in listener.incoming().flatten() {
+            let mut reader = BufReader::new(stream);
+            let mut line = String::new();
+            if reader.read_line(&mut line).is_err() {
+                continue;
+            }
+            let path = line.split_whitespace().nth(1).unwrap_or("/").trim_start_matches('/').to_owned();
+            loop {
+                let mut h = String::new();
+                if reader.read_line(&mut h).is_err() || h.trim().is_empty() {
+                    break;
+                }
+            }
+            if path.ends_with(".pack") {
+                let _ = gate.recv();
+            }
+            let mut stream = reader.into_inner();
+            let body = fs::read(dir.join(&path)).unwrap_or_default();
+            let head =
+                format!("HTTP/1.1 200 OK\r\nContent-Length: {}\r\nConnection: close\r\n\r\n", body.len());
+            let _ = stream.write_all(head.as_bytes()).and_then(|()| stream.write_all(&body));
+        }
+    });
+    url
+}
+
+/// Mohamed, 2026-11-06: "checking for an update is very slow". The app's
+/// answer shows as soon as the feed is read, while the content pack (several
+/// megabytes on a phone) is still on its way.
+#[test]
+fn the_app_offer_shows_before_the_content_pack_arrives() {
+    let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+    let signer = ed25519_dalek::SigningKey::from_bytes(&[12; 32]);
+    let feed = pack_feed(&signer, 45, Some(41), &pack, Vec::new());
+    let (open, gate) = std::sync::mpsc::channel();
+    let url = serve_gated(feed.path().to_path_buf(), gate);
+    let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 40, true) };
+    let (u, _data) = updater(&url, info);
+    let check = std::thread::spawn(move || u.check(false));
+    let mut waited = 0;
+    while u.status().content_check != Some(ContentCheck::Fetching) {
+        assert!(waited < 500, "the pack download never started");
+        std::thread::sleep(std::time::Duration::from_millis(10));
+        waited += 1;
+    }
+    assert!(matches!(u.status().phase, Phase::Available(_)), "the new build shows while the pack downloads");
+    open.send(()).unwrap();
+    check.join().unwrap();
+    assert_eq!(u.status().content_check, Some(ContentCheck::New));
+    assert!(matches!(u.status().phase, Phase::Available(_)));
+}
+
+/// Mohamed, 2026-11-06: a check Android cut while the phone was locked is
+/// tried again as soon as Steps is back in front, not at the next 6-hour
+/// check; with nothing failed, coming back fetches nothing.
+#[test]
+fn a_check_cut_while_locked_is_tried_again_when_steps_is_back_in_front() {
+    let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+    let signer = ed25519_dalek::SigningKey::from_bytes(&[13; 32]);
+    let feed = pack_feed(&signer, 45, Some(41), &pack, Vec::new());
+    let (url, seen) = serve_logged(feed.path().to_path_buf(), None);
+    let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 40, true) };
+    let (u, _data) = updater(&url, info);
+    // "Tell me first": the build itself waits for a tap.
+    u.set_mode(Mode::Notify);
+
+    // The feed can't be read (the connection was cut).
+    let manifest = feed.path().join(MANIFEST_FILE);
+    let held = feed.path().join("held.json");
+    fs::rename(&manifest, &held).unwrap();
+    u.check(false);
+    assert!(matches!(u.status().phase, Phase::Failed { why: Failure::Network, .. }));
+    assert_eq!(u.status().content_check, Some(ContentCheck::Failed));
+
+    fs::rename(&held, &manifest).unwrap();
+    u.resumed(false);
+    assert!(matches!(u.status().phase, Phase::Available(_)), "{:?}", u.status().phase);
+    assert_eq!(u.status().content_check, Some(ContentCheck::New));
+
+    let asked = seen.lock().unwrap().len();
+    u.resumed(false);
+    assert_eq!(seen.lock().unwrap().len(), asked, "nothing failed, nothing fetched");
+}
