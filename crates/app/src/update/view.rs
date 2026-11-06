@@ -360,6 +360,7 @@ fn ContentResult(status: Status) -> Element {
         (true, _) | (_, Some(ContentCheck::New)) => ("", tx::CONTENT_NEW),
         (false, Some(ContentCheck::Current)) => ("✓ ", tx::CONTENT_CURRENT),
         (false, Some(ContentCheck::Failed)) => ("", tx::CONTENT_FAILED),
+        (false, Some(ContentCheck::Fetching)) => ("", tx::CONTENT_FETCHING),
         (false, None) => return rsx! {},
     };
     // The same box as the app's half above, so the two read as a pair.
@@ -729,6 +730,10 @@ pub fn use_android_install(ui: Ui) {
                     }
                 }
                 (Phase::NeedsPermission(_), Some(false)) if install_allowed() => work(Updater::install),
+                // Back in front: a check or download Android cut while the
+                // phone was locked is tried again now (after one still in
+                // flight ends).
+                (_, Some(false)) => work(|u| u.resumed(crate::platform::network::metered())),
                 (Phase::Ready(o), Some(true)) if s.prefs.mode == Mode::Auto => {
                     let tried = s.prefs.auto_failed.as_deref() == Some(o.key().as_str());
                     if calm(*ui.screen.peek()) && !overlay_open() && !tried && install_quietly() {

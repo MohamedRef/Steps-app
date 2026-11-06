@@ -155,6 +155,31 @@ impl Updater {
         }
     }
 
+    /// Steps is back in front (Android: the phone was unlocked or the app
+    /// reopened). A check or download that Android cut while Steps was in
+    /// the background is tried again now instead of at the next 6-hour
+    /// check: a failed check, a newer content pack that didn't arrive, or a
+    /// build download that stopped half-way (it resumes from its `.part`).
+    pub fn resumed(&'static self, metered: bool) {
+        // A check or download still in flight fails within `STALL` if its
+        // connection was cut; wait for it, then look at how it ended.
+        drop(self.job.lock());
+        let s = self.status();
+        if s.off.is_some() || s.prefs.mode == Mode::Off {
+            return;
+        }
+        let wifi = !metered;
+        let auto = s.prefs.mode == Mode::Auto && wifi;
+        match s.phase {
+            Phase::Failed { offer: None, why: Failure::Network } => self.check_with(auto, wifi),
+            // Only a started download (automatic on Wi-Fi, or a tap) ends
+            // like this, so it picks up again on any network.
+            Phase::Failed { offer: Some(_), why: Failure::Network } => self.download(),
+            _ if s.content_check == Some(ContentCheck::Failed) && wifi => self.check_with(auto, true),
+            _ => {}
+        }
+    }
+
     /// Sends the notification due now through `post` (false: not shown, try
     /// again at the next check) and remembers it once shown.
     pub(super) fn send_notice(&self, post: impl FnOnce(&Notice) -> bool) -> Option<Notice> {
@@ -228,26 +253,34 @@ impl Updater {
             }
         };
         self.remember_history(&m.history);
-        if content {
-            let found = self.refresh_content(&m);
-            self.tx.send_modify(|s| s.content_check = Some(found));
-        }
-        match self.offer(&m) {
-            Ok(Some(offer)) => {
-                if let Some(k) = keep.filter(|k| k.asset == offer.asset) {
+        // The app's answer shows as soon as the feed is read; the content
+        // pack (megabytes) and the build download come after it.
+        let to_download = match self.offer(&m) {
+            Ok(Some(offer)) => match keep.filter(|k| k.asset == offer.asset) {
+                Some(k) => {
                     self.set_phase(match self.status().phase {
                         Phase::Checking => Phase::Ready(k),
                         other => other,
                     });
-                    return;
+                    None
                 }
-                self.set_phase(Phase::Available(offer.clone()));
-                if download {
-                    self.download_locked(offer);
+                None => {
+                    self.set_phase(Phase::Available(offer.clone()));
+                    download.then_some(offer)
                 }
+            },
+            Ok(None) => None,
+            Err(why) => {
+                self.set_phase(Phase::Failed { offer: None, why });
+                None
             }
-            Ok(None) => {}
-            Err(why) => self.set_phase(Phase::Failed { offer: None, why }),
+        };
+        if content {
+            let found = self.refresh_content(&m);
+            self.tx.send_modify(|s| s.content_check = Some(found));
+        }
+        if let Some(offer) = to_download {
+            self.download_locked(offer);
         }
     }
 
@@ -338,6 +371,7 @@ impl Updater {
             let bytes = match self.held(&asset) {
                 Some(bytes) => bytes,
                 None => {
+                    self.tx.send_modify(|s| s.content_check = Some(ContentCheck::Fetching));
                     let url = format!("{}/{}", self.feed_url(), asset.file);
                     let bytes = get_limited(&url, asset.size, Duration::from_secs(10 * 60))
                         .map_err(|f| (false, format!("{f:?}")))?;

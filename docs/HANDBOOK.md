@@ -98,6 +98,7 @@ Rust stable (edition 2024, minimum 1.90), Dioxus 0.7 with HTML/CSS for the UI. A
 | `fixtures/` | Sample content (`fixtures/content/sample.yaml` shows every item kind). |
 | `.github/workflows/` | CI, nightly, deploys, release (§6). |
 | `justfile` | Every common command. `just` with no argument lists them. |
+| `vendor/` | Dioxus 0.7.10 `dioxus-desktop` and `dioxus-interpreter-js`, patched (via `[patch.crates-io]` in the root `Cargo.toml`) so the screen keeps updating after Android destroys the WebView's edit socket while the phone is locked. Same patch as Batna. Read `vendor/README.md` before any Dioxus upgrade and drop the folder once upstream (DioxusLabs/dioxus#5812) ships the fix. Test: `cargo test -p dioxus-desktop --lib reconnect` (needs the desktop WebView libraries). |
 
 **File layout rule (2026-11-05):** a file holds one concern, and work that many people change in parallel lives in many small files rather than one shared one, so parallel PRs rarely touch the same lines. A new feature adds its own folder (`crates/app/src/<feature>/`), its own text file (`i18n/<feature>.rs`), its own CSS and its own `changes/<topic>.yaml`, and adds only one declaration line to a shared list. Content is already split per course (§8). Rust modules group a concern rather than one type per file. Unit tests longer than a screen live in a sibling file (`plan.rs` declares `#[cfg(test)] mod tests;` and the tests sit in `plan/tests.rs`), so a test change and a code change rarely meet. Splits are behavior-preserving (same module paths and test names) and land one area per PR.
 
@@ -238,6 +239,8 @@ Full detail: [RELEASE.md](RELEASE.md) and [COMPATIBILITY.md](COMPATIBILITY.md).
 4. Web and Cloud deploy by themselves after green CI on `main`.
 5. Update the README's version and install links and §12 here.
 
+A check shows the app's answer as soon as the feed is read; a newer content pack downloads after it (Settings shows «بيجيب الدروس والأسئلة الجديدة…»), then an automatic build download. Every request through `update::agent` (updates, Steps Cloud, Google sign-in) fails after 20 s without progress (lookup, connect, each read or write), so a connection Android cut while the phone was locked doesn't hold anything for minutes. When Steps comes back to the front on Android, a check, content pack or build download that failed on the network is tried again at once (`Updater::resumed`); sync does the same with its `Kick`.
+
 Installed apps update themselves from their channel's feed; Settings › التحديثات switches between preview, alpha, beta and stable without reinstalling. Content-only changes ship as a new content pack without a new APK. The first install of the Mac app needs `xattr -dr com.apple.quarantine /Applications/Steps.app` once (it is self-signed).
 
 ## 11. Identity: icon, font, themes and styles
@@ -277,6 +280,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 ### Known issues
 - **GitHub schedules don't fire** (2026-11-06). GitHub has never created a `schedule` run for this repo. `daily.yml` starts the platform runs after every CI run instead (#614 closed), and opens an issue if Nightly hasn't run for 36 hours. Check Actions for runs with event `schedule` now and then.
 - A workflow run can stay "in progress" for up to about 30 minutes after it finished. Ignore it (§6).
+- The lock/unlock screen-freeze fix (`vendor/`) is tested on desktop sockets only, not yet on a real phone.
 - The lowercase clone URL `github.com/mohamedref/steps-app` once served a stale `main`; use `https://github.com/MohamedRef/Steps-app.git`.
 - Nightly coverage, later-date tests and platform builds only alert through issues; no alert issue doesn't prove they ran, so look at the runs before a release.
 

@@ -65,6 +65,7 @@ pub const RESULT_CONTENT: &str = "الدروس والأسئلة";
 pub const CONTENT_CURRENT: &str = "معاك آخر محتوى";
 pub const CONTENT_NEW: &str = "فيه محتوى جديد نزل، وهيفتح لوحده أول ما تخلّص اللي بتذاكره";
 pub const CONTENT_FAILED: &str = "مقدرش يجيب المحتوى الجديد دلوقتي، هيجرّب تاني بعدين";
+pub const CONTENT_FETCHING: &str = "بيجيب الدروس والأسئلة الجديدة…";
 
 // Mode and channel.
 pub const MODE: &str = "إزاي يتحدّث";
