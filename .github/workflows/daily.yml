@@ -1,21 +1,22 @@
 name: Daily platform runs
 
-# GitHub never fired this repo's `schedule:` triggers (#340): no Nightly,
-# Mac, preview APK or browser check ran at night, and nothing said so. This
-# doesn't rely on cron. After each green CI run on main, it starts every
-# platform workflow whose newest run on main is more than 20 hours old, so
-# each one runs at most about once a day, and only on days when main moved.
-# A run started here counts as a nightly one for alerts.yml.
+# GitHub creates no `schedule:` events for this repo (#340, #614), even
+# after Mohamed's own commits moved every cron line and every workflow was
+# disabled and enabled again, so nothing ran at night and nothing said so.
+# This doesn't rely on GitHub's cron: it runs after every CI run (a push to
+# main or any pull request, which happen many times a day) and starts every
+# platform workflow on main whose newest run there is older than its
+# interval: a day for the nightly ones, a week for QBank sync. A run started
+# here counts as a nightly one for alerts.yml. The `schedule:` lines stay in
+# each workflow, so they run by themselves too once GitHub fires them.
 #
-# It also warns when the newest *scheduled* Nightly run is more than 36
-# hours old (or there is none), and keeps one issue open about it until the
-# schedules fire again.
+# It also keeps one issue open while Nightly checks haven't run on main for
+# 36 hours, until they run again.
 
 on:
   workflow_run:
     workflows: [CI]
     types: [completed]
-    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -32,9 +33,8 @@ concurrency:
 jobs:
   kick:
     name: Start what hasn't run today
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push')
+    # Any finished CI run will do: it only tells this job that time passed.
+    # What starts is always main, never the pull request's code.
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     env:
@@ -44,36 +44,43 @@ jobs:
       - name: Start stale platform workflows on main
         run: |
           now="$(date -u +%s)"
-          for wf in nightly.yml mac.yml steps-android-preview.yml settings-browser.yml android-webview-regression.yml; do
+          # workflow:hours since its last run on main
+          for item in nightly.yml:20 mac.yml:20 steps-android-preview.yml:20 settings-browser.yml:20 \
+            android-webview-regression.yml:20 qbank-sync.yml:160; do
+            wf="${item%%:*}" every="${item##*:}"
             last="$(gh run list --workflow "$wf" --branch main --limit 1 --json createdAt --jq '.[0].createdAt // empty')"
             age=999999
             if [ -n "$last" ]; then
               age=$(( (now - $(date -u -d "$last" +%s)) / 3600 ))
             fi
-            if [ "$age" -ge 20 ]; then
+            if [ "$age" -ge "$every" ]; then
               gh workflow run "$wf" --ref main
               echo "started $wf (last run on main ${age}h ago)"
             else
               echo "$wf ran ${age}h ago: nothing to do"
             fi
           done
-      - name: Scheduled Nightly older than 36 hours?
+      - name: Nightly checks older than 36 hours?
         run: |
-          title="Scheduled workflows are not firing"
-          last="$(gh run list --workflow nightly.yml --event schedule --limit 1 --json createdAt --jq '.[0].createdAt // empty')"
-          open="$(gh issue list --state open --search "in:title \"$title\"" --json number,title \
-            --jq ".[] | select(.title == \"$title\") | .number" | head -1)"
+          title="Nightly checks have not run for 36 hours"
+          old_title="Scheduled workflows are not firing"
+          last="$(gh run list --workflow nightly.yml --branch main --limit 1 --json createdAt --jq '.[0].createdAt // empty')"
+          issues() {
+            gh issue list --state open --search "in:title \"$1\"" --json number,title \
+              --jq ".[] | select(.title == \"$1\") | .number"
+          }
           if [ -n "$last" ] && [ $(( $(date -u +%s) - $(date -u -d "$last" +%s) )) -lt $(( 36 * 3600 )) ]; then
-            echo "Last scheduled Nightly: $last"
-            if [ -n "$open" ]; then
-              gh issue close "$open" --comment "A scheduled Nightly ran at $last: the schedules fire again."
-            fi
+            echo "Last Nightly on main: $last"
+            # Closed without a comment (Mohamed, 2026-11-05).
+            for n in $(issues "$title") $(issues "$old_title"); do
+              gh issue close "$n" --reason completed
+            done
             exit 0
           fi
-          msg="No scheduled Nightly checks run in the last 36 hours (last: ${last:-never}). daily.yml starts the platform workflows after green CI on main meanwhile."
+          msg="Nightly checks have not run on main for 36 hours (last: ${last:-never})."
           echo "::warning::$msg"
-          if [ -z "$open" ]; then
+          if [ -z "$(issues "$title")" ]; then
             gh issue create --title "$title" --body "$msg
 
-          GitHub runs a \`schedule:\` as the user who last changed its cron line. The fix that usually works: Mohamed merges the PR that shifts each cron line by one minute himself (docs/RUN.md § Tests and coverage). This issue closes itself when a scheduled Nightly runs (#340)."
+          GitHub creates no schedule events for this repo, so daily.yml starts Nightly after CI runs; none ran in this time. Start Nightly checks by hand (Actions › Nightly checks › Run workflow) if needed. This issue closes itself when Nightly runs again."
           fi
