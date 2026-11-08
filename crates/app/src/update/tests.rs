@@ -1386,3 +1386,45 @@ fn a_fresh_update_check_clears_an_old_content_failure() {
     assert_eq!(u.status().content_check, Some(ContentCheck::New));
     assert!(matches!(u.status().phase, Phase::UpToDate));
 }
+
+#[test]
+fn github_api_fallback_is_used_only_for_network_failures() {
+    use std::sync::atomic::Ordering;
+
+    let data = tempfile::tempdir().unwrap();
+    let u = Updater::new(
+        data.path().join("updates"),
+        build("0.1.0", 42, true),
+        Some(UpdatePlatform::AndroidArm64),
+        None,
+        None,
+    );
+    let channel = u.installed().channel;
+    *u.api_assets.lock().unwrap() = Some((
+        channel,
+        std::collections::HashMap::from([(MANIFEST_FILE.to_owned(), 99)]),
+    ));
+    let api = "https://api.github.com/repos/MohamedRef/Steps-app/releases/assets/99";
+    let seen = Mutex::new(Vec::new());
+    let result = u.fetch_feed_asset(MANIFEST_FILE, |url| {
+        seen.lock().unwrap().push(url.to_owned());
+        if url == api { Ok(b"signed feed bytes".to_vec()) } else { Err(Failure::Network) }
+    });
+    assert_eq!(result, Ok(b"signed feed bytes".to_vec()));
+    assert_eq!(
+        seen.into_inner().unwrap(),
+        [format!("{}/{}", u.feed_url(), MANIFEST_FILE), api.to_owned()]
+    );
+    assert!(u.prefer_api.load(Ordering::Relaxed));
+
+    // Verification failures are never turned into a fallback that might
+    // accidentally bypass signature or digest checks.
+    u.prefer_api.store(false, Ordering::Relaxed);
+    let seen = Mutex::new(Vec::new());
+    let result: Result<Vec<u8>, Failure> = u.fetch_feed_asset(MANIFEST_FILE, |url| {
+        seen.lock().unwrap().push(url.to_owned());
+        Err(Failure::Verify("wrong signature".into()))
+    });
+    assert_eq!(result, Err(Failure::Verify("wrong signature".into())));
+    assert_eq!(seen.into_inner().unwrap(), [format!("{}/{}", u.feed_url(), MANIFEST_FILE)]);
+}
