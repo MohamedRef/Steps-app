@@ -171,6 +171,28 @@ pub fn resume_at(at: usize, n: usize) -> String {
     format!("هتكمّل من خطوة {at} من {n}")
 }
 
+// Lesson reading settings (learn/reading.rs, Settings › Look).
+pub const READING: &str = "شكل القراية";
+pub const READING_OPEN: &str = "شكل القراية: حجم الخط والمسافات والعرض";
+pub const READ_SIZE: &str = "حجم خط الدرس";
+pub const READ_SIZE_SMALL: &str = "صغير";
+pub const READ_SIZE_NORMAL: &str = "عادي";
+pub const READ_SIZE_LARGE: &str = "كبير";
+pub const READ_SIZE_LARGER: &str = "أكبر";
+pub const READ_SPACING: &str = "المسافة بين السطور";
+pub const READ_SPACING_SNUG: &str = "ضيقة";
+pub const READ_SPACING_NORMAL: &str = "عادية";
+pub const READ_SPACING_AIRY: &str = "واسعة";
+pub const READ_WIDTH: &str = "عرض السطر";
+pub const READ_WIDTH_HINT: &str = "على التابلت والماك";
+pub const READ_WIDTH_NARROW: &str = "ضيق";
+pub const READ_WIDTH_BOOK: &str = "زي الكتاب";
+pub const READ_WIDTH_WIDE: &str = "عريض";
+/// The preview line: Arabic with two English terms, like a lesson.
+pub const READ_SAMPLE: [&str; 5] =
+    ["الـ ", "ACE inhibitors", " بتقلل الـ ", "angiotensin II", "، فالضغط بينزل."];
+pub const READ_DONE: &str = "تمام";
+
 // Your own highlights in a lesson (learn/highlight.rs).
 pub const HL_BAR: &str = "هايلايت";
 pub const HL_YELLOW: &str = "أصفر";

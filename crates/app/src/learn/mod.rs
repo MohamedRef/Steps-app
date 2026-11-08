@@ -11,6 +11,7 @@ mod browser;
 mod highlight;
 mod player;
 mod practice;
+pub mod reading;
 mod remind;
 mod steps;
 mod text;

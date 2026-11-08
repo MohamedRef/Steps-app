@@ -383,7 +383,7 @@
     if (records.every((r) => r.target.closest?.(".uhl-layer, .uhl-bar") || r.target.classList?.contains("uhl-layer"))) return;
     if (records.every((r) => [...r.addedNodes, ...r.removedNodes].every((n) => n.classList?.contains("uhl-layer")) && r.type === "childList" && (r.addedNodes.length || r.removedNodes.length))) return;
     redraw();
-  }).observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ["hidden", "class"], characterData: true });
+  }).observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ["hidden", "class", "data-read-size", "data-read-spacing", "data-read-width"], characterData: true });
 
   H.start = (init, send) => {
     H.lesson = init.lesson;
