@@ -55,11 +55,18 @@ pub struct Palette {
     /// The info sheet (what a tapped "ص N" chip opens): a raised layer in
     /// its own tint, so it never reads as one more card on the page.
     pub sheet: &'static str,
+    /// The key-term pill (`==key==` in lessons): a hue opposite the theme's
+    /// own (coral on the petrol themes, rose on Scrubs, sky on Sepia, mint on
+    /// Indigo, olive on Night shift, apricot on the Study pair), so the few
+    /// key terms of a step stand out from the card instead of blending in.
+    pub key: &'static str,
+    /// Text on `key`.
+    pub key_ink: &'static str,
 }
 
 impl Palette {
     /// `(css variable, value)` for every token.
-    pub fn tokens(&self) -> [(&'static str, &'static str); 18] {
+    pub fn tokens(&self) -> [(&'static str, &'static str); 20] {
         [
             ("--bg", self.bg),
             ("--surface", self.surface),
@@ -79,6 +86,8 @@ impl Palette {
             ("--gold", self.gold),
             ("--gold-soft", self.gold_soft),
             ("--sheet", self.sheet),
+            ("--key", self.key),
+            ("--key-ink", self.key_ink),
         ]
     }
 
@@ -136,6 +145,8 @@ pub const PAPER: Palette = Palette {
     gold: "#8a641d",
     gold_soft: "#fbf1d9",
     sheet: "#fcf4e0",
+    key: "#ffb38a",
+    key_ink: "#3a1606",
 };
 
 /// Night: the default dark theme ("steps-dark"): deep petrol with a light
@@ -160,6 +171,8 @@ pub const NIGHT: Palette = Palette {
     gold: "#e3c581",
     gold_soft: "#3d3624",
     sheet: "#2c4f64",
+    key: "#ffab8a",
+    key_ink: "#3a1408",
 };
 
 /// True black, for OLED screens: the page and cards are `#000000`, so those
@@ -186,6 +199,8 @@ pub const BLACK: Palette = Palette {
     gold: "#e3c581",
     gold_soft: "#2a2416",
     sheet: "#1c2a33",
+    key: "#ffab8a",
+    key_ink: "#3a1408",
 };
 
 /// Night shift: for studying late. Very dark and warm, with no colour where
@@ -211,6 +226,8 @@ pub const NIGHT_SHIFT: Palette = Palette {
     gold: "#d9b56a",
     gold_soft: "#2e2414",
     sheet: "#3a2c1f",
+    key: "#bcd27a",
+    key_ink: "#1e2608",
 };
 
 /// Scrubs: clinic teal on a fresh mint page, like a ward in the morning.
@@ -234,6 +251,8 @@ pub const SCRUBS: Palette = Palette {
     gold: "#80601a",
     gold_soft: "#fbf1d9",
     sheet: "#fcf1d8",
+    key: "#f7a8c4",
+    key_ink: "#3d0a1c",
 };
 
 /// Sepia: warm book paper and brown ink, for long reading. The info sheet is
@@ -258,6 +277,8 @@ pub const SEPIA: Palette = Palette {
     gold: "#6e510f",
     gold_soft: "#f5e7c2",
     sheet: "#dde9f0",
+    key: "#a6d4f2",
+    key_ink: "#0c2e45",
 };
 
 /// Indigo: deep blue-violet with a soft periwinkle brand, a calmer dark than
@@ -282,6 +303,8 @@ pub const INDIGO: Palette = Palette {
     gold: "#e6c983",
     gold_soft: "#3b3626",
     sheet: "#383b78",
+    key: "#8fe3b8",
+    key_ink: "#0b2a1c",
 };
 
 /// High contrast: black on white with a strong blue brand, outlines a step
@@ -306,6 +329,66 @@ pub const CONTRAST: Palette = Palette {
     gold: "#5c4200",
     gold_soft: "#fbefcc",
     sheet: "#fff1c2",
+    key: "#ffe14d",
+    key_ink: "#000000",
+};
+
+/// Study: a calm light theme for long reading sessions. Dark text on a light
+/// page reads best in a lit room (the "positive polarity advantage",
+/// Piepenbrock et al., Ergonomics 2013/2014), but a pure white page is the
+/// brightest thing on the desk, so the page is a soft sage-grey paper and the
+/// text a deep slate instead of black, at moderate (not maximal) contrast.
+/// The brand stays a dusty petrol, so it is still Steps, only quieter.
+pub const STUDY: Palette = Palette {
+    scheme: Scheme::Light,
+    bg: "#eef1ee",
+    surface: "#f7f8f5",
+    surface_2: "#e4e9e5",
+    text: "#27302e",
+    muted: "#56625f",
+    line: "#d6ddd8",
+    accent: "#3b6478",
+    on_accent: "#f7f8f5",
+    accent_soft: "#dae6ec",
+    accent_ink: "#2f5263",
+    soft: "#e8eeea",
+    good: "#2f6b4c",
+    good_soft: "#e1eee6",
+    bad: "#9c4436",
+    bad_soft: "#f5e4de",
+    gold: "#775a1c",
+    gold_soft: "#f2e8cf",
+    sheet: "#f3e6c9",
+    key: "#f6bf8c",
+    key_ink: "#3b2008",
+};
+
+/// Study dim: the same calm theme for a dark room. In low light, light text
+/// on a dark page tires the eyes less (Xie et al., IEEE Access 2021), and a
+/// dark page is most comfortable at moderate contrast, so the page is a soft
+/// slate (never pure black) and the text a misty off-white instead of white.
+pub const STUDY_DIM: Palette = Palette {
+    scheme: Scheme::Dark,
+    bg: "#181c1e",
+    surface: "#202527",
+    surface_2: "#293033",
+    text: "#dde2dc",
+    muted: "#a9b3ae",
+    line: "#3e474a",
+    accent: "#a3c4d3",
+    on_accent: "#172328",
+    accent_soft: "#2a3a42",
+    accent_ink: "#c7dde7",
+    soft: "#252b2e",
+    good: "#9fcbab",
+    good_soft: "#213129",
+    bad: "#e6a597",
+    bad_soft: "#3b2725",
+    gold: "#d6bd84",
+    gold_soft: "#34301f",
+    sheet: "#34424a",
+    key: "#c98a55",
+    key_ink: "#1e1006",
 };
 
 /// What the learner picked in Settings › Look.
@@ -325,12 +408,19 @@ pub enum Theme {
     Sepia,
     Indigo,
     Contrast,
+    /// Study by day, Study dim when the device is dark.
+    SystemStudy,
+    /// Calm sage paper for long reading sessions.
+    Study,
+    /// Calm slate for studying in a dark room.
+    StudyDim,
 }
 
 impl Theme {
-    pub const ALL: [Self; 10] = [
+    pub const ALL: [Self; 13] = [
         Self::System,
         Self::SystemBlack,
+        Self::SystemStudy,
         Self::Paper,
         Self::Night,
         Self::Black,
@@ -339,6 +429,8 @@ impl Theme {
         Self::Sepia,
         Self::Indigo,
         Self::Contrast,
+        Self::Study,
+        Self::StudyDim,
     ];
 
     /// Stored value.
@@ -354,6 +446,9 @@ impl Theme {
             Self::Sepia => "sepia",
             Self::Indigo => "indigo",
             Self::Contrast => "contrast",
+            Self::SystemStudy => "system-study",
+            Self::Study => "study",
+            Self::StudyDim => "study-dim",
         }
     }
 
@@ -365,7 +460,7 @@ impl Theme {
     /// device; see [`Theme::day_and_night`]).
     pub fn palette(self) -> Option<&'static Palette> {
         match self {
-            Self::System | Self::SystemBlack => None,
+            Self::System | Self::SystemBlack | Self::SystemStudy => None,
             Self::Paper => Some(&PAPER),
             Self::Night => Some(&NIGHT),
             Self::Black => Some(&BLACK),
@@ -374,6 +469,8 @@ impl Theme {
             Self::Sepia => Some(&SEPIA),
             Self::Indigo => Some(&INDIGO),
             Self::Contrast => Some(&CONTRAST),
+            Self::Study => Some(&STUDY),
+            Self::StudyDim => Some(&STUDY_DIM),
         }
     }
 
@@ -383,6 +480,7 @@ impl Theme {
         match self {
             Self::System => (&PAPER, &NIGHT),
             Self::SystemBlack => (&PAPER, &BLACK),
+            Self::SystemStudy => (&STUDY, &STUDY_DIM),
             fixed => {
                 let p = fixed.palette().unwrap_or(&PAPER);
                 (p, p)

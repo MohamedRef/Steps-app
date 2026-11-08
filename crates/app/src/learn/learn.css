@@ -45,21 +45,38 @@
 }
 
 /* ---------- text ---------- */
-.ls-rich { display: flex; flex-direction: column; gap: var(--sp-3); font-size: 1.05rem; line-height: 1.95; }
+/* Colour follows importance (the signaling principle: cues on the few
+   relevant words help learning, Mayer). Four steps, strongest first:
+   1. ==key== marker: a pill in the theme's opposite hue (--key), 1-3 a step;
+   2. step heading, question and **terms**: full text colour, bold;
+   3. body text: the text colour softened a notch toward the card, so long
+      paragraphs glare less and the bold terms stand out from them;
+   4. source chips and meta: muted.
+   adapted from batna-app main: crates/app/src/learn/learn.css */
+.ls-rich {
+  display: flex; flex-direction: column; gap: var(--sp-3); font-size: 1.05rem; line-height: 1.95;
+  color: color-mix(in oklab, var(--text) 84%, var(--surface));
+}
+.ls-h, .ls-q { color: var(--text); }
 .ls-rich p { margin: 0; }
 .ls-rich ul, .ls-rich ol { margin: 0; padding-inline-start: 1.4rem; display: grid; gap: var(--sp-2); }
 .ls-rich li::marker { color: var(--accent); }
 /* **bold** is a term, set in weight only; ==key== is one of the step's few
    key terms and gets the marker (docs/LESSONS.md). */
-.ls-rich strong, .ls-mn-hook strong { font-weight: 700; }
+.ls-rich strong, .ls-mn-hook strong { font-weight: 700; color: var(--text); }
 /* Every lesson text, Line ones too (options, cards, cells, recap): never
    the browser's yellow, which is unreadable at night (#321). */
 mark {
-  color: inherit;
+  /* A pill in the theme's opposite hue (--key, per theme in
+     steps_core::theme), so a key term stands out from its card and is never
+     confused with plain bold. --key-ink on --key is AA-tested there. */
+  color: var(--key-ink);
   font-weight: 700;
-  background: linear-gradient(transparent 55%, var(--accent-soft) 55%);
-  padding-inline: 2px;
-  border-radius: 2px;
+  background: var(--key);
+  padding: 1px 0.45em;
+  border-radius: var(--radius-pill);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 .ls-rich bdi { font-size: 0.97em; }
 /* An English run inside Arabic is one LTR box (learn/text.rs `runs`): split
@@ -203,7 +220,9 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 .ls-count { flex: none; font-variant-numeric: tabular-nums; }
 /* Name the lesson and keep its English lecture label separate. */
 .ls-context { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; }
-.ls-context-title { margin: 0; font-size: var(--fs-lg); font-weight: 700; line-height: 1.5; overflow-wrap: anywhere; }
+/* The lesson name is context, the step heading below is what to read: the
+   name is smaller and muted so the eye lands on the step first. */
+.ls-context-title { margin: 0; font-size: var(--fs-md); font-weight: 600; color: var(--muted); line-height: 1.5; overflow-wrap: anywhere; }
 .ls-context-lecture { margin: 0; overflow-wrap: anywhere; }
 .ls-stage {
   gap: var(--sp-3);
@@ -500,7 +519,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 }
 .ls-reveal > *, .ls-check > *, .ls-mnemonic > * { margin: 0; }
 .ls-q { font-size: 1.25rem; font-weight: 600; line-height: 1.6; }
-.ls-q .ls-rich { font-size: inherit; }
+.ls-q .ls-rich { font-size: inherit; color: inherit; }
 .ls-answer {
   border-inline-start: 4px solid var(--good);
   background: var(--good-soft);

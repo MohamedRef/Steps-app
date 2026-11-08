@@ -22,6 +22,9 @@ fn theme_label(t: Theme) -> (&'static str, &'static str) {
         Theme::Sepia => (tx::THEME_SEPIA, tx::THEME_SEPIA_SUB),
         Theme::Indigo => (tx::THEME_INDIGO, tx::THEME_INDIGO_SUB),
         Theme::Contrast => (tx::THEME_CONTRAST, tx::THEME_CONTRAST_SUB),
+        Theme::SystemStudy => (tx::THEME_SYSTEM_STUDY, tx::THEME_SYSTEM_STUDY_SUB),
+        Theme::Study => (tx::THEME_STUDY, tx::THEME_STUDY_SUB),
+        Theme::StudyDim => (tx::THEME_STUDY_DIM, tx::THEME_STUDY_DIM_SUB),
     }
 }
 
