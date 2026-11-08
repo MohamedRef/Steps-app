@@ -117,6 +117,8 @@ pub struct Updater {
     tx: watch::Sender<Status>,
     /// One check, download or install at a time.
     job: Mutex<()>,
+    /// Reuse GitHub's API download path when the normal release CDN fails.
+    prefer_api: std::sync::atomic::AtomicBool,
 }
 
 /// The one updater of this process. On Android the background job may open
@@ -522,7 +524,14 @@ fn get_small(url: &str) -> Result<Vec<u8>, Failure> {
 /// The body, cut one byte past `limit` (so a caller can tell it was longer).
 #[cfg(not(target_arch = "wasm32"))]
 fn get_limited(url: &str, limit: u64, timeout: Duration) -> Result<Vec<u8>, Failure> {
-    let mut res = agent(url, timeout).get(url).call().map_err(|_| Failure::Network)?;
+    let mut req = agent(url, timeout).get(url);
+    if url.starts_with("https://api.github.com/") {
+        req = req.header("User-Agent", "Steps-Updates");
+        if url.contains("/releases/assets/") {
+            req = req.header("Accept", "application/octet-stream");
+        }
+    }
+    let mut res = req.call().map_err(|_| Failure::Network)?;
     if res.status().as_u16() != 200 {
         return Err(Failure::Network);
     }
