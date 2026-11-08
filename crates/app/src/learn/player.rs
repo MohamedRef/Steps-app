@@ -102,6 +102,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
     use_hook(|| {
         document::eval(SWIPE_JS);
     });
+    super::highlight::use_highlights(&lesson.id);
     let view = VIEW();
     let pages = view == View::Pages;
     // The reading choices (learn/reading.rs) and whether their popover is open.

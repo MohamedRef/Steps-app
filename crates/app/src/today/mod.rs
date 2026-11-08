@@ -87,6 +87,10 @@ pub fn Today() -> Element {
                         }
                     }
                 }
+                // An open Study session comes first: continuing it beats starting another.
+                if let Some((index, total)) = crate::study::running_progress() {
+                    ResumeStudy { index, total }
+                }
                 Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0 && o.locked == 0, finished, minutes }
                 crate::catchup::CatchUpCard { due: o.due, due_minutes: o.due_minutes }
                 // Each count opens what it counts.
@@ -193,6 +197,34 @@ pub fn Today() -> Element {
                 }
             }
             div { class: "tab-aside", LibraryList {} }
+        }
+    }
+}
+
+/// Back to the Study session already open (this run, or restored after a
+/// restart). It only switches screens: no new START is queued, so grading
+/// and Undo stay with the same item. Adapted from batna-app main:
+/// crates/app/src/today/mod.rs.
+#[component]
+fn ResumeStudy(index: usize, total: usize) -> Element {
+    let mut ui = use_context::<Ui>();
+    rsx! {
+        crate::ui::Card { class: "card-action td-resume",
+            onclick: move |_| ui.screen.set(Screen::Study),
+            div { class: "td-resume-copy",
+                strong { {tx::RESUME_TITLE} }
+                span { class: "muted small num-ltr", "{index} / {total}" }
+            }
+            button {
+                r#type: "button",
+                class: "btn btn-primary td-resume-action",
+                onclick: move |e: MouseEvent| {
+                    e.stop_propagation();
+                    ui.screen.set(Screen::Study);
+                },
+                {tx::RESUME_SESSION}
+                {crate::icons::arrow_go()}
+            }
         }
     }
 }

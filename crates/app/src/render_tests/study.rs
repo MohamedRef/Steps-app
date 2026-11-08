@@ -681,3 +681,104 @@ fn a_repro_card_in_review_hovers_with_the_repro_glossary() {
     let er = &crate::hover::course_overrides()["repro"]["exact"]["ER"][0];
     assert!(er.as_str().is_some_and(|t| t.starts_with("Estrogen receptor")), "{er}");
 }
+
+// ---------------------------------------------------------------------------
+// Continuing a session from Today, and after a restart
+
+fn continue_card(app: &App, pos: &str) {
+    app.assert_has(crate::i18n::today::RESUME_TITLE);
+    app.assert_has(pos);
+}
+
+#[test]
+fn today_continues_the_open_session_without_starting_another() {
+    let cards = ids_of("card");
+    let (second, _) = front_back(&cards[1]);
+    let mut app = session(&[&cards[0], &cards[1]]);
+    app.tap(tx::REVEAL).tap(grade_label(Grade::Good));
+    app.tap(Screen::Today.label());
+    continue_card(&app, "2 / 2");
+    app.tap(crate::i18n::today::RESUME_SESSION);
+    app.assert_has(&second);
+    assert!(
+        app.run(|| {
+            use dioxus::prelude::*;
+            START.peek().is_none()
+        }),
+        "continuing never queues a new session"
+    );
+    assert_eq!(reviews().len(), 1, "no answer is saved twice");
+    // Undo still reaches the answer given before leaving.
+    assert!(app.can_tap(tx::UNDO));
+    app.tap(tx::END);
+    app.tap(Screen::Today.label());
+    app.assert_lacks(crate::i18n::today::RESUME_TITLE);
+}
+
+#[test]
+fn an_unfinished_session_comes_back_after_a_restart() {
+    let cards = ids_of("card");
+    let (second, _) = front_back(&cards[1]);
+    {
+        let mut app = session(&[&cards[0], &cards[1]]);
+        app.tap(tx::REVEAL).tap(grade_label(Grade::Again));
+    }
+    // A new app over the same data, as after Android ends the process.
+    let mut app = App::open(Screen::Today);
+    continue_card(&app, "2 / 3");
+    app.tap(crate::i18n::today::RESUME_SESSION);
+    app.assert_has(&second);
+    app.tap(tx::REVEAL).tap(grade_label(Grade::Good));
+    // The Again retry came back with it.
+    app.assert_has(tx::BADGE_RETRY);
+    app.tap(tx::REVEAL).tap(grade_label(Grade::Good));
+    app.assert_has(tx::SUMMARY_TITLE);
+    assert_eq!(reviews().len(), 3, "each answer saved once");
+    // A finished session is not offered again.
+    let app = App::open(Screen::Today);
+    app.assert_lacks(crate::i18n::today::RESUME_TITLE);
+}
+
+#[test]
+fn a_restart_restores_undo_of_the_answer_before_it() {
+    let cards = ids_of("card");
+    let (first, _) = front_back(&cards[0]);
+    {
+        let mut app = session(&[&cards[0], &cards[1]]);
+        app.tap(tx::REVEAL).tap(grade_label(Grade::Good));
+    }
+    let mut app = App::open(Screen::Study);
+    app.tap(tx::UNDO);
+    app.assert_has(&first);
+    assert!(reviews().is_empty(), "undo after a restart takes the saved answer back");
+}
+
+#[test]
+fn a_session_saved_before_another_answer_is_not_restored() {
+    let cards = ids_of("card");
+    {
+        let mut app = session(&[&cards[0], &cards[1]]);
+        app.tap(tx::REVEAL).tap(grade_label(Grade::Good));
+    }
+    // An answer the checkpoint never saw (a crash between the two, or sync).
+    crate::store::shared()
+        .append_review(steps_core::review::ReviewEvent::new(&cards[1], Grade::Good, Origin::Study, 1, 1))
+        .unwrap();
+    let app = App::open(Screen::Today);
+    app.assert_lacks(crate::i18n::today::RESUME_TITLE);
+    let saved = crate::store::shared()
+        .local_setting::<steps_core::session::SessionCheckpoint>(crate::study::checkpoint::KEY);
+    assert!(saved.is_none(), "a stale checkpoint is dropped, not kept for later");
+}
+
+#[test]
+fn ending_a_session_forgets_it_for_the_next_start() {
+    let cards = ids_of("card");
+    {
+        let mut app = session(&[&cards[0], &cards[1]]);
+        app.tap(tx::REVEAL).tap(grade_label(Grade::Good));
+        app.tap(tx::END);
+    }
+    let app = App::open(Screen::Today);
+    app.assert_lacks(crate::i18n::today::RESUME_TITLE);
+}

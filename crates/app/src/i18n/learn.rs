@@ -192,3 +192,16 @@ pub const READ_WIDTH_WIDE: &str = "عريض";
 pub const READ_SAMPLE: [&str; 5] =
     ["الـ ", "ACE inhibitors", " بتقلل الـ ", "angiotensin II", "، فالضغط بينزل."];
 pub const READ_DONE: &str = "تمام";
+
+// Your own highlights in a lesson (learn/highlight.rs).
+pub const HL_BAR: &str = "هايلايت";
+pub const HL_YELLOW: &str = "أصفر";
+pub const HL_GREEN: &str = "أخضر";
+pub const HL_BLUE: &str = "أزرق";
+pub const HL_PINK: &str = "بمبي";
+pub const HL_ORANGE: &str = "برتقاني";
+pub const HL_FILL: &str = "هايلايت";
+pub const HL_UNDERLINE: &str = "خط تحت";
+pub const HL_PILL: &str = "كبسولة";
+pub const HL_RECT: &str = "مستطيل";
+pub const HL_REMOVE: &str = "امسح";

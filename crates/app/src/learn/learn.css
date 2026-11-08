@@ -898,4 +898,72 @@ button.ls-soon .coll-title { color: var(--muted); }
 /* A phone's lesson is always the screen's width: no width to choose. */
 @media (max-width: 599px) {
   .ls-read-pop .ls-read-width { display: none; }
+
+/* ---------- your own highlights (highlight.js) ---------- */
+/* Adapted from batna-app main: crates/app/src/learn/learn.css (#770); the
+   bar wears Steps' own card radius and stepped ledge. */
+/* Bright marker colours on every theme (--uhl-* in main.css); the words on a fill turn dark
+   through ::highlight(uhl-ink). A WebView without the Custom Highlight API
+   gets a lighter fill instead, so the theme's own text still reads. */
+[data-uhl-host] { position: relative; isolation: isolate; }
+.uhl-layer { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: visible; }
+.uhl-layer i { position: absolute; display: block; background: var(--c); }
+:is(.uhl-layer i, .uhl-dot)[data-c="yellow"] { --c: var(--uhl-yellow); }
+:is(.uhl-layer i, .uhl-dot)[data-c="green"] { --c: var(--uhl-green); }
+:is(.uhl-layer i, .uhl-dot)[data-c="blue"] { --c: var(--uhl-blue); }
+:is(.uhl-layer i, .uhl-dot)[data-c="pink"] { --c: var(--uhl-pink); }
+:is(.uhl-layer i, .uhl-dot)[data-c="orange"] { --c: var(--uhl-orange); }
+.uhl-layer i[data-sh="pill"] { border-radius: 999px; }
+.uhl-layer i[data-sh="rect"] { border-radius: 2px; }
+:root[data-uhl-ink="no"] .uhl-layer i[data-s="fill"] { opacity: 0.45; }
+::highlight(uhl-ink) { color: var(--uhl-ink); }
+
+.uhl-bar {
+  position: fixed;
+  z-index: 80;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  max-inline-size: calc(100vw - 16px);
+  padding: 6px 10px;
+  border-radius: var(--radius-card, 16px);
+  background: var(--sheet);
+  color: var(--text);
+  border: 1px solid var(--line);
+  /* The Steps ledge under the bar, then a soft lift off the page. */
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--line) 82%, var(--accent)), 0 10px 24px rgb(0 0 0 / 0.18);
+  font-size: var(--fs-sm);
+}
+.uhl-bar[hidden] { display: none; }
+.uhl-dots, .uhl-seg { display: flex; gap: 4px; align-items: center; }
+.uhl-dot {
+  inline-size: 34px;
+  block-size: 34px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: var(--c);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12);
+  cursor: pointer;
+}
+.uhl-dot[aria-pressed="true"] { border-color: var(--text); }
+.uhl-seg { padding: 2px; border-radius: var(--radius-pill, 999px); background: var(--surface-2); }
+.uhl-opt, .uhl-del {
+  min-block-size: 34px;
+  padding-inline: 10px;
+  border: 0;
+  border-radius: var(--radius-pill, 999px);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.uhl-opt[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.uhl-del { color: var(--bad); background: var(--bad-soft); }
+.uhl-del[hidden] { display: none; }
+/* A finger needs bigger targets than a mouse. */
+@media (pointer: coarse) {
+  .uhl-dot { inline-size: 40px; block-size: 40px; }
+  .uhl-opt, .uhl-del { min-block-size: 40px; }
 }
