@@ -70,6 +70,42 @@ pub struct Step {
     /// reference (no length cap, Mohamed 2026-10-29).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub quote: Option<String>,
+    /// Memory hooks this step's topic already has elsewhere, shown under the
+    /// step as a reminder (with a way back to the lesson that taught them):
+    /// an enumerate item id (`cvs.L04.033`, its تحشيشة) or a mnemonic step
+    /// as `<lesson id>:<WORD>` (`cvs.L04.lesson2:MINT`). See [`Reminder`].
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub remind: Vec<String>,
+}
+
+/// One entry of a step's `remind` list.
+// Adapted from batna-app main: crates/core/src/lesson/mod.rs (Reminder).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Reminder<'a> {
+    /// An enumerate item's `hook`.
+    Item(&'a str),
+    /// A mnemonic step, by its lesson and its `word`.
+    Mnemonic { lesson: &'a str, word: &'a str },
+}
+
+impl<'a> Reminder<'a> {
+    /// `cvs.L04.033` or `cvs.L04.lesson2:MINT`; `None` when it is neither.
+    pub fn parse(s: &'a str) -> Option<Self> {
+        let s = s.trim();
+        let id_like =
+            |x: &str| !x.is_empty() && !x.contains(char::is_whitespace) && x.split('.').count() == 3;
+        match s.split_once(':') {
+            // A mnemonic's word may have spaces ("ABCD OF C").
+            Some((lesson, word))
+                if id_like(lesson) && lesson.contains(".lesson") && !word.trim().is_empty() =>
+            {
+                Some(Self::Mnemonic { lesson, word })
+            }
+            Some(_) => None,
+            None if id_like(s) && !s.contains(".lesson") => Some(Self::Item(s)),
+            None => None,
+        }
+    }
 }
 
 /// A picture in a figure step: an image file under `content/lessons/img/`.
@@ -321,7 +357,7 @@ pub fn allowed_keys(kind: &str) -> Option<&'static [&'static str]> {
 /// Item kinds a lesson's `try` step (and the study player) can show.
 pub const PLAYABLE: &[&str] = &["card", "cloze", "enumerate", "essay", "table", "order"];
 
-pub const SHARED_STEP_KEYS: &[&str] = &["kind", "page", "quote"];
+pub const SHARED_STEP_KEYS: &[&str] = &["kind", "page", "quote", "remind"];
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]

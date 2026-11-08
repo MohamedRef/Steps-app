@@ -180,7 +180,7 @@ Rules for writing: [CONTENT.md](CONTENT.md) (items), [LESSONS.md](LESSONS.md) (l
 - `content/qbank/`: `uworld.yaml` (generated) and `bb-map.yaml` (B&B section → lecture). `content/labs.yaml`: lab values.
 - `content/approved.txt`: items I approved. `content/ids-retired.txt`: ids never to reuse.
 
-**Items:** every item has `id` (`cvs.L04.001`, never reused), `kind` (`card`, `cloze`, `mcq`, `enumerate`, `essay`, `case`, `table`, `order`, `calc`), `topic` (a slug of First Aid's own heading, in book order), `src.page`, `src.quote` (the page's own words that prove the fact), `status: unverified`. One fact per card or cloze; lists become `enumerate` (optionally with a `hook`, a تحشيشة); comparisons become `table`; each topic gets at least one Step 1 vignette MCQ (A–E, one best answer, a `why` per option, testing one step past the diagnosis). The book's own emphasis is tagged `high-yield`.
+**Items:** every item has `id` (`cvs.L04.001`, never reused), `kind` (`card`, `cloze`, `mcq`, `enumerate`, `essay`, `case`, `table`, `order`, `calc`), `topic` (a slug of First Aid's own heading, in book order), `src.page`, `src.quote` (the page's own words that prove the fact), `status: unverified`. One fact per card or cloze; lists become `enumerate` (optionally with a `hook`, a تحشيشة), and a lesson step that teaches a list again lists that تحشيشة in `remind:` so it shows under the step with a link back to the lesson that taught it (LESSONS.md rule 13; `pack::SCHEMA` 3); comparisons become `table`; each topic gets at least one Step 1 vignette MCQ (A–E, one best answer, a `why` per option, testing one step past the diagnosis). The book's own emphasis is tagged `high-yield`.
 
 **Pipeline:**
 1. Book text per lecture lives outside git (§13).
@@ -263,6 +263,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 
 ### State
 - **Released:** `1.0.0-alpha.1` and `1.0.0-alpha.2` on 2026-11-05 (#611, #641), then `1.0.0-alpha.3` on 2026-11-06: APK, Mac app, web and Steps Cloud. Latest release: <https://github.com/MohamedRef/Steps-app/releases/tag/steps-v1.0.0-alpha.3>. Installed alpha builds update to it over the air.
+- **Reminders (2026-11-08):** lesson steps that repeat a list show its تحشيشة again (`remind:`, 140 reminders on 121 steps, «من درس …» opens the lesson that taught it), ported from Batna #771. `pack::SCHEMA` is 3, so this ships with an app build, not as a content-only update; older apps keep their built-in content until they update.
 - **Content:** all 84 lectures written (16 First Aid courses + Rapid Review), about 9,400 items: about 5,100 cards, 1,700 MCQs, 1,050 clozes, 1,500 tables and lists, and 360 lessons. All `unverified` until I approve them.
 - **Quality:** two full review rounds (code, platform, UX, and content per course group) were run on 2026-11-04 and 2026-11-05; every finding of every severity was fixed and closed before alpha.1.
 - **Sync:** Steps Cloud is deployed with Google sign-in working (GCP project `steps-513803`) and password sign-in.

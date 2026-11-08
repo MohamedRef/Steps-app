@@ -11,6 +11,7 @@ mod browser;
 mod highlight;
 mod player;
 mod practice;
+mod remind;
 mod steps;
 mod text;
 pub use text::Rich;

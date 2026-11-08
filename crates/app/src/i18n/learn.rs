@@ -183,3 +183,8 @@ pub const HL_UNDERLINE: &str = "خط تحت";
 pub const HL_PILL: &str = "كبسولة";
 pub const HL_RECT: &str = "مستطيل";
 pub const HL_REMOVE: &str = "امسح";
+// Reminders under a step: a تحشيشة this topic already has (docs/CONTENT.md).
+pub const REMIND: &str = "افتكر التحشيشة";
+pub const REMIND_LIST: &str = "افتكرها";
+pub const REMIND_FROM: &str = "من درس";
+pub const REMIND_FROM_HINT: &str = "افتح الدرس اللي التحشيشة دي اتشرحت فيه";

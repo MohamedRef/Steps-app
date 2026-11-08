@@ -358,6 +358,10 @@ fn Stage(
                     StepView { key: "{r}", body: step.body.clone(), seed: seed.clone(), on_answer }
                 }
             }
+            // A تحشيشة this topic already has, from this lesson or another.
+            if !try_done && !step.remind.is_empty() {
+                super::remind::Reminders { remind: step.remind.clone(), here: seed.split('#').next().unwrap_or_default().to_string() }
+            }
             if can_retry && !try_done {
                 button {
                     class: "icon-button ls-retry",
