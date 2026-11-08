@@ -516,7 +516,7 @@ fn hash_file(path: &Path) -> std::io::Result<(u64, String)> {
 }
 
 fn get_small(url: &str) -> Result<Vec<u8>, Failure> {
-    let bytes = get_limited(url, MAX_FEED_BYTES, Duration::from_secs(30))?;
+    let bytes = get_limited(url, MAX_FEED_BYTES, Duration::from_secs(12))?;
     if bytes.len() as u64 > MAX_FEED_BYTES {
         return Err(Failure::Verify("feed too large".into()));
     }
