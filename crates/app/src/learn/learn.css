@@ -21,7 +21,7 @@
   font-size: var(--fs-sm);
   font-weight: 700;
 }
-.ls-h { font-size: var(--fs-lg); margin: 0 0 var(--sp-3); line-height: 1.4; }
+.ls-h { font-size: calc(var(--fs-lg) * var(--ls-scale, 1)); margin: 0 0 var(--sp-3); line-height: 1.4; }
 .ls-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; }
 .ls-verdict {
   font-weight: 700;
@@ -45,7 +45,7 @@
 }
 
 /* ---------- text ---------- */
-.ls-rich { display: flex; flex-direction: column; gap: var(--sp-3); font-size: 1.05rem; line-height: 1.95; }
+.ls-rich { display: flex; flex-direction: column; gap: var(--sp-3); font-size: calc(1.05rem * var(--ls-scale, 1)); line-height: calc(1.95 * var(--ls-space, 1)); }
 .ls-rich p { margin: 0; }
 .ls-rich ul, .ls-rich ol { margin: 0; padding-inline-start: 1.4rem; display: grid; gap: var(--sp-2); }
 .ls-rich li::marker { color: var(--accent); }
@@ -158,7 +158,9 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 
 /* ---------- the player ---------- */
 .ls-player {
-  max-inline-size: 48rem;
+  /* The reading width (learn/reading.rs): one column on a phone or a
+     narrow window, the step's column beside the lesson's name when wide. */
+  max-inline-size: var(--ls-one, 48rem);
   margin-inline: auto;
   inline-size: 100%;
   /* Fills the screen so the footer sits at the bottom on every step. */
@@ -236,7 +238,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   .ls-player[data-view="steps"] {
     max-inline-size: none;
     display: grid;
-    grid-template-columns: minmax(14rem, 19rem) minmax(0, 52rem);
+    grid-template-columns: minmax(14rem, 19rem) minmax(0, var(--ls-col, 52rem));
     grid-template-rows: auto auto auto 1fr;
     justify-content: center;
     align-items: start;
@@ -499,7 +501,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   gap: var(--sp-2);
 }
 .ls-reveal > *, .ls-check > *, .ls-mnemonic > * { margin: 0; }
-.ls-q { font-size: 1.25rem; font-weight: 600; line-height: 1.6; }
+.ls-q { font-size: calc(1.25rem * var(--ls-scale, 1)); font-weight: 600; line-height: calc(1.6 * var(--ls-space, 1)); }
 .ls-q .ls-rich { font-size: inherit; }
 .ls-answer {
   border-inline-start: 4px solid var(--good);
@@ -572,7 +574,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   background: var(--accent-soft);
   border: 1px solid var(--line-soft, var(--line));
 }
-.ls-why-box .ls-rich { font-size: var(--fs-md); }
+.ls-why-box .ls-rich { font-size: calc(var(--fs-md) * var(--ls-scale, 1)); }
 
 /* tiles: order, match, sort */
 .ls-pool { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
@@ -758,7 +760,7 @@ button.ls-slot:hover { border-color: var(--accent); }
 
 /* table */
 .ls-table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
-.ls-table table { border-collapse: collapse; inline-size: 100%; font-size: var(--fs-sm); }
+.ls-table table { border-collapse: collapse; inline-size: 100%; font-size: calc(var(--fs-sm) * var(--ls-scale, 1)); }
 .ls-table th, .ls-table td { padding: var(--sp-2) var(--sp-3); border-block-end: 1px solid var(--line); text-align: start; vertical-align: top; }
 .ls-table thead th { background: var(--accent-soft); color: var(--accent); }
 .ls-table tbody th { font-weight: 700; background: var(--bg); }
@@ -823,3 +825,77 @@ button.ls-soon .coll-title { color: var(--muted); }
 }
 .ls-tools { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-block: var(--sp-2) 0; }
 .ls-tools .abd-open { min-block-size: var(--target, 48px); }
+
+/* ---------- reading: text size, line spacing, line width ----------
+   learn/reading.rs; values adapted from kabar-app main:
+   crates/app/assets/main.css (Reading settings). The step's text scales,
+   the bar and the buttons stay as they are. */
+[data-read-size="s"] { --ls-scale: 0.9; }
+[data-read-size="l"] { --ls-scale: 1.15; }
+[data-read-size="xl"] { --ls-scale: 1.3; }
+[data-read-spacing="snug"] { --ls-space: 0.86; }
+[data-read-spacing="airy"] { --ls-space: 1.2; }
+.ls-player[data-read-width="narrow"] { --ls-one: 38rem; --ls-col: 40rem; }
+.ls-player[data-read-width="wide"] { --ls-one: none; --ls-col: 80rem; }
+
+/* The popover hangs from the bar (sticky, so positioned), not from the
+   button: on a phone it spans the bar's width instead of running off it. */
+.ls-read { flex: none; }
+/* Open, the bar rises over the sticky footer, so the popover covers it. */
+.ls-bar:has(.ls-read-pop) { z-index: 40; }
+.ls-read-aa {
+  inline-size: var(--target);
+  block-size: var(--target);
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-soft, var(--line));
+  background: var(--surface);
+  color: var(--muted);
+  font-family: var(--font-latin);
+  font-weight: 700;
+  cursor: pointer;
+}
+.ls-read-aa:hover, .ls-read-aa[aria-expanded="true"] { color: var(--accent); border-color: var(--accent); }
+.ls-read-scrim { position: fixed; inset: 0; z-index: 30; }
+/* Under the bar, over the step: the text never moves while he chooses. */
+.ls-read-pop {
+  position: absolute;
+  inset-block-start: calc(100% + var(--sp-2));
+  inset-inline-end: 0;
+  z-index: 31;
+  inline-size: min(24rem, 100%);
+  max-block-size: calc(100dvh - 6rem);
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: grid;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  background: var(--glass-solid, var(--surface));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.18);
+}
+.ls-read-title { margin: 0; font-size: var(--fs-md); }
+.ls-read-done { justify-self: end; min-block-size: var(--target); }
+.ls-read-choices { display: grid; gap: var(--sp-3); }
+.ls-read-field { display: grid; gap: var(--sp-1); }
+.ls-read-label { font-size: var(--fs-sm); font-weight: 600; color: var(--muted); }
+/* The preview follows every choice as it changes. */
+.ls-read-preview {
+  margin: 0;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius);
+  background: var(--bg);
+  font-size: calc(1.05rem * var(--ls-scale, 1));
+  line-height: calc(1.95 * var(--ls-space, 1));
+}
+.ls-read-sizes [data-size] .ls-read-glyph { line-height: 1; font-weight: 700; }
+.ls-read-sizes [data-size="s"] .ls-read-glyph { font-size: 0.85rem; }
+.ls-read-sizes [data-size="m"] .ls-read-glyph { font-size: 1.05rem; }
+.ls-read-sizes [data-size="l"] .ls-read-glyph { font-size: 1.3rem; }
+.ls-read-sizes [data-size="xl"] .ls-read-glyph { font-size: 1.55rem; }
+/* A phone's lesson is always the screen's width: no width to choose. */
+@media (max-width: 599px) {
+  .ls-read-pop .ls-read-width { display: none; }
+}

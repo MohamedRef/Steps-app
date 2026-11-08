@@ -1,4 +1,5 @@
-//! Settings › Look: colour themes, appearance styles and text size, per device.
+//! Settings › Look: colour themes, appearance styles, text size and lesson
+//! reading, per device.
 
 use dioxus::prelude::*;
 use steps_core::theme::Theme;
@@ -120,5 +121,6 @@ pub fn LookSection() -> Element {
             }
             p { class: "text-sample", {tx::TEXT_SAMPLE_AR} " " bdi { {tx::TEXT_SAMPLE_TERM} } "؟" }
         }
+        crate::learn::reading::ReadingSection {}
     }
 }
