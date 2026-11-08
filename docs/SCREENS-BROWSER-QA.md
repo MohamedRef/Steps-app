@@ -45,6 +45,7 @@ stylesheet and `data-appearance` on `.app`. 38 files × 40 = 1,520 cases, about
 | Lesson | Exactly the saved step is shown, with its kind; the step meter's `progressbar` value; a visible way forward; an unanswered question offers Skip and keeps its gate note screen-reader only |
 | Study | The running item's kind and the session `progressbar` |
 | Figures | Every `<text>` label of every lesson figure stays inside its picture's `viewBox`: one past the edge is cut off on the phone |
+| Own highlights | `crates/app/tests/highlight-browser.cjs` on one lesson step at 1280px: select a word → the bar shows → yellow draws a shape and sends one `add:` with that word; tap it → green sends `put:`, Remove sends `del:` and the shape goes; a saved highlight draws again on a fresh page |
 | Errors | Any browser page error fails the job |
 
 Calm, Larger, 384px screenshots in both schemes and `report.json` are

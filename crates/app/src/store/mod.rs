@@ -305,6 +305,22 @@ impl Store {
         Ok(logged)
     }
 
+    /// A fingerprint of the live review log, for Study checkpoints: a
+    /// session saved before another answer (or an Undo, or a synced answer)
+    /// must never come back as though it included it. Device-local, never
+    /// synced (adapted from batna-app main: crates/app/src/store/mod.rs).
+    pub fn study_review_marker(&self) -> Result<String> {
+        let log = self.reviews()?;
+        let bytes = serde_json::to_vec(&log)?;
+        // FNV-1a: stable across builds and platforms, unlike `DefaultHasher`.
+        let mut hash = 0xcbf2_9ce4_8422_2325_u64;
+        for byte in &bytes {
+            hash ^= u64::from(*byte);
+            hash = hash.wrapping_mul(0x0100_0000_01b3);
+        }
+        Ok(format!("v1:{}:{hash:016x}", log.len()))
+    }
+
     /// Takes one answer back (Undo): its row gets the tombstone, queued for
     /// sync, so every device replays the schedule without it. False when it
     /// was already gone (or never existed): nothing is written twice.
@@ -774,6 +790,22 @@ mod tests;
 #[cfg(test)]
 mod snapshot_tests {
     use super::Store;
+
+    #[test]
+    fn study_marker_follows_saved_answers_and_undo_and_survives_reopen() {
+        use steps_core::review::{Grade, Origin, ReviewEvent};
+        let store = Store::open_in_memory().unwrap();
+        let empty = store.study_review_marker().unwrap();
+        let logged = store
+            .append_review(ReviewEvent::new("cvs.L04.001", Grade::Good, Origin::Study, 100, 200))
+            .unwrap();
+        let after = store.study_review_marker().unwrap();
+        assert_ne!(empty, after, "a saved answer makes an older checkpoint stale");
+        let reopened = Store::from_snapshot(&store.snapshot().unwrap().1).unwrap();
+        assert_eq!(after, reopened.study_review_marker().unwrap());
+        store.retract_review(&logged.id).unwrap();
+        assert_eq!(store.study_review_marker().unwrap(), empty, "only live answers count");
+    }
 
     /// The web build keeps the database as bytes: they come back whole,
     /// with the same device, and an empty snapshot is a fresh store.

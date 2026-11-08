@@ -185,6 +185,10 @@ a line in `ATTRIBUTION.md`:
 The app shows the credit under the caption. The pack build embeds the file,
 so nothing is fetched at runtime.
 
+## Own highlights
+
+Mohamed can highlight any words in a step himself (`learn/highlight.js`, `steps_core::highlight`): select them and a small bar offers five colours, a fill or an underline, and a pill or a rectangle; tapping a highlight changes or removes it. They are his notes, not content: each is stored as its own synced setting (`hl.<lesson>.<id>`, a tombstone `{"gone":true}` when removed), never in `content/`. A highlight is found again by its words and up to 32 characters around them, so rewording a sentence in a lesson can drop a highlight on it; small edits elsewhere in the step keep it. Shapes are drawn in a `.uhl-layer` under the text, never inside the step's own nodes, and text on a fill turns dark through the CSS Custom Highlight API. The swipe that turns steps ignores drags while text is selected. Ported from Batna #770.
+
 ## Check before the PR
 
 `cargo run -p steps-tools -- validate` checks schema, ids, pages, quotes,
