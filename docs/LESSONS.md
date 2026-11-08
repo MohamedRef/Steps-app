@@ -69,6 +69,25 @@ The model to copy is `content/lessons/cvs/L01.yaml`.
     core thread to reword a shared meaning). The same entries fill the per-course «قاموس
     الاختصارات» (Lessons screen, More), with the lessons that use each one.
 
+13. **Bring the تحشيشة back** (Mohamed, 2026-11-08). A step that teaches a
+    list which already has a تحشيشة (an enumerate item's `hook`, in this
+    lecture or any other, or a `mnemonic` step of another lesson) lists it in
+    `remind:`, so it shows under the step and, from another lesson, links
+    back to it:
+
+    ```yaml
+    - kind: explain
+      remind: [cvs.L04.002, cvs.L04.lesson1:TTTTT]
+    ```
+
+    Only on explain, figure, aside, mnemonic or open-table steps (a hook
+    under a question gives the answer away). When the same list repeats,
+    remind of the first تحشيشة instead of inventing another; partial
+    overlap still earns a reminder. A mnemonic step doesn't remind of an
+    item whose hook is that same mnemonic (it is already on the screen).
+    `validate` fails on an entry that is not an enumerate with a hook or a
+    lesson's mnemonic word, and on a step that reminds of itself.
+
 ## File shape
 
 ```yaml
@@ -165,6 +184,16 @@ a line in `ATTRIBUTION.md`:
 
 The app shows the credit under the caption. The pack build embeds the file,
 so nothing is fetched at runtime.
+
+## Text by importance
+
+How colour and weight rank lesson text (2026-11-08, from Batna #767, with Steps' own colours). Change it only with evidence.
+
+| Choice | Evidence |
+|---|---|
+| `==key==` is a pill in the theme's opposite hue (`--key`/`--key-ink` in `crates/core/src/theme.rs`: coral on Paper, Night and True black, rose on Scrubs, sky on Sepia, mint on Indigo, olive on Night shift, yellow on High contrast, apricot on the Study pair). Tests keep it AA-readable and clearly apart from the card, page and accent container. | Signaling principle: cues on the few relevant words improve learning (Mayer; Cambridge Handbook of Multimedia Learning ch. 11). Hence at most 3 a step. |
+| Step heading, question and `**terms**` in full text colour and bold; body text a notch softer (84% text toward the card); meta muted; the lesson name above the card muted and smaller | One focal point: the eye lands on the step, then on its terms. |
+| Study theme: sage-grey paper, slate text; Study dim: soft slate page, misty off-white text; both at moderate contrast (7–15:1, tested) | Dark text on a light page reads best in a lit room (Piepenbrock et al., Ergonomics 2013, 2014); a dark page tires less in a dark room and is most comfortable at moderate contrast (Xie et al., IEEE Access 2021). |
 
 ## Own highlights
 

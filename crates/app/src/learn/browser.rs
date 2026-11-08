@@ -94,6 +94,9 @@ fn export_screen_fixtures_learn() {
         ("cvs.L01.lesson1", 6, false),
         ("cvs.L01.lesson1", 6, true),
         ("cvs.L01.lesson2", 3, false),
+        // A step with reminders (2026-11-08): the 5 T's hook and the
+        // TTTTT mnemonic from the cardiovascular lesson, linked back.
+        ("rr.L04.lesson2", 5, false),
     ];
     for (lesson, at, abbr) in mixed {
         let (_, l) = Library::get().lesson(lesson).expect("mixed-text lesson");

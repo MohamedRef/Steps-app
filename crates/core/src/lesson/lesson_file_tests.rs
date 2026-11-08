@@ -487,6 +487,7 @@ fn embedding_images_fills_data_urls_and_reports_missing_or_big_files() {
         },
         page: Some(317),
         quote: None,
+        remind: vec![],
     };
     f.lessons[0].steps = vec![fig("cvs/tamponade.webp"), fig("cvs/missing.png"), fig("cvs/huge.JPG")];
     let mut asked = Vec::new();
