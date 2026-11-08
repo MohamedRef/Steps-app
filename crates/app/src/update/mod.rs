@@ -119,6 +119,8 @@ pub struct Updater {
     job: Mutex<()>,
     /// Reuse GitHub's API download path when the normal release CDN fails.
     prefer_api: std::sync::atomic::AtomicBool,
+    /// Cache the API's asset-name map for one check to avoid extra lookups.
+    api_assets: Mutex<Option<(Channel, std::collections::HashMap<String, u64>)>>,
 }
 
 /// The one updater of this process. On Android the background job may open
