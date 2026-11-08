@@ -191,6 +191,9 @@ fn AppAt(start: Screen, children: Element) -> Element {
     let settings = use_context_provider(settings::SettingsNav::new);
     use_context_provider(update::sheet::UpdateSheetNav::new);
     store::use_provide_review();
+    // An unfinished Study session from before a restart, checked against
+    // the review log, is back before Today first renders.
+    study::use_restore();
     cloud::use_provide_cloud();
     #[cfg(target_arch = "wasm32")]
     platform::web::use_saver();
@@ -198,6 +201,8 @@ fn AppAt(start: Screen, children: Element) -> Element {
     // Android: a renderer reclaimed in the background ends Steps quietly
     // instead of crashing it; earlier crashes show in the diagnostics.
     use_hook(platform::webview_guard::install);
+    // Time in another app doesn't count toward a Study answer's duration.
+    study::use_foreground_reset();
     let current = *ui.screen.read();
     // System themes follow the device's dark mode. Android's WebView can't
     // be trusted for it (it reports light under a light activity theme), so
