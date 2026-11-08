@@ -2,6 +2,31 @@
 
 use super::*;
 
+// The public GitHub Releases API is a second path when the normal release
+// download host is unreachable on a mobile network. An asset ID is used only
+// after matching its exact filename; signed manifests and SHA-256 still decide
+// what is safe to install.
+#[derive(serde::Deserialize)]
+struct GithubRelease {
+    assets: Vec<GithubAsset>,
+}
+
+#[derive(serde::Deserialize)]
+struct GithubAsset {
+    id: u64,
+    name: String,
+    state: String,
+}
+
+pub(super) fn api_asset_id(json: &[u8], name: &str) -> Option<u64> {
+    serde_json::from_slice::<GithubRelease>(json)
+        .ok()?
+        .assets
+        .into_iter()
+        .find(|asset| asset.name == name && asset.state == "uploaded")
+        .map(|asset| asset.id)
+}
+
 /// Whether a feed pack with digest `sha` is exactly the content this app
 /// has built in: CI builds the pack before the APK and bakes its digest in
 /// as `STEPS_BUILTIN_CONTENT`. Only while no downloaded pack is in use, so a
@@ -83,9 +108,11 @@ impl Updater {
             info,
             platform,
             feed_override,
-            retry_after: Duration::from_secs(20),
+            retry_after: Duration::from_secs(3),
             tx,
             job: Mutex::new(()),
+            prefer_api: std::sync::atomic::AtomicBool::new(false),
+            api_assets: Mutex::new(None),
         }
     }
 
@@ -235,12 +262,22 @@ impl Updater {
         if self.status().off.is_some() {
             return;
         }
+        // Asset IDs belong to this snapshot of the release; do not reuse
+        // them after a future publisher replaces the release's feed.
+        *self.api_assets.lock().unwrap() = None;
         let keep = match self.status().phase {
             // A finished download for the same offer stays; it's re-checked anyway.
             Phase::Ready(o) | Phase::Installed(o) | Phase::NeedsPermission(o) => Some(o),
             _ => None,
         };
-        self.set_phase(Phase::Checking);
+        // A new tap must not display the previous check's content failure
+        // beside a fresh app spinner (the misleading state in Settings).
+        self.tx.send_modify(|s| {
+            s.phase = Phase::Checking;
+            if content {
+                s.content_check = None;
+            }
+        });
         let manifest = self.fetch_manifest();
         self.update_prefs(|p| p.last_check_ms = Some(now_ms()));
         let m = match manifest {
@@ -284,13 +321,74 @@ impl Updater {
         }
     }
 
+    /// Resolves one *named* asset on the same public release via GitHub's API.
+    /// Used only when normal release downloads fail; no unsigned API fields
+    /// are ever trusted for versions, payload sizes or digests.
+    fn github_asset_url(&self, name: &str) -> Option<String> {
+        if self.feed_override.is_some() {
+            return None;
+        }
+        let channel = self.installed().channel;
+        let id = self
+            .api_assets
+            .lock()
+            .unwrap()
+            .as_ref()
+            .filter(|(cached, _)| *cached == channel)
+            .and_then(|(_, assets)| assets.get(name).copied());
+        if let Some(id) = id {
+            return Some(format!("https://api.github.com/repos/MohamedRef/Steps-app/releases/assets/{id}"));
+        }
+        let release = format!(
+            "https://api.github.com/repos/MohamedRef/Steps-app/releases/tags/{}",
+            channel.release_tag()
+        );
+        let json = get_limited(&release, MAX_FEED_BYTES * 4, Duration::from_secs(12)).ok()?;
+        let id = api_asset_id(&json, name)?;
+        let parsed: GithubRelease = serde_json::from_slice(&json).ok()?;
+        let ids =
+            parsed.assets.into_iter().filter(|a| a.state == "uploaded").map(|a| (a.name, a.id)).collect();
+        *self.api_assets.lock().unwrap() = Some((channel, ids));
+        Some(format!("https://api.github.com/repos/MohamedRef/Steps-app/releases/assets/{id}"))
+    }
+
+    /// Prefer GitHub's regular release CDN; if that path is blocked or cut
+    /// off, use the public API's binary asset endpoint. Once that route
+    /// works, reuse it for the signature and following content/build requests
+    /// rather than spending another whole timeout on the blocked CDN.
+    pub(super) fn fetch_feed_asset<T>(
+        &self,
+        name: &str,
+        download: impl Fn(&str) -> Result<T, Failure>,
+    ) -> Result<T, Failure> {
+        use std::sync::atomic::Ordering;
+        if self.prefer_api.load(Ordering::Relaxed)
+            && let Some(url) = self.github_asset_url(name)
+            && let Ok(value) = download(&url)
+        {
+            return Ok(value);
+        }
+        let url = format!("{}/{}", self.feed_url(), name);
+        match download(&url) {
+            Err(Failure::Network) if self.feed_override.is_none() => {
+                report!("update download {name}: release URL unreachable; trying GitHub API");
+                let Some(api_url) = self.github_asset_url(name) else {
+                    return Err(Failure::Network);
+                };
+                let value = download(&api_url)?;
+                self.prefer_api.store(true, Ordering::Relaxed);
+                Ok(value)
+            }
+            result => result,
+        }
+    }
+
     /// The channel's `update.json`, signature checked.
     pub(super) fn fetch_manifest(&self) -> Result<UpdateManifest, Failure> {
         let key = self.info.key.ok_or(Failure::Verify("no key".into()))?;
-        let base = self.feed_url();
         let fetch = || -> Result<_, Failure> {
-            let json = get_small(&format!("{base}/{MANIFEST_FILE}"))?;
-            let sig = get_small(&format!("{base}/{SIGNATURE_FILE}"))?;
+            let json = self.fetch_feed_asset(MANIFEST_FILE, get_small)?;
+            let sig = self.fetch_feed_asset(SIGNATURE_FILE, get_small)?;
             let sig = String::from_utf8(sig).map_err(|_| Failure::Verify("signature".into()))?;
             Ok(verify_manifest(&json, &sig, &key))
         };
@@ -372,11 +470,16 @@ impl Updater {
                 Some(bytes) => bytes,
                 None => {
                     self.tx.send_modify(|s| s.content_check = Some(ContentCheck::Fetching));
-                    let url = format!("{}/{}", self.feed_url(), asset.file);
-                    let bytes = get_limited(&url, asset.size, Duration::from_secs(10 * 60))
-                        .map_err(|f| (false, format!("{f:?}")))?;
-                    check_download(&asset, bytes.len() as u64, &sha256_hex(&bytes))
-                        .map_err(|e| (false, e.to_string()))?;
+                    // Keep a verified partial content download across a
+                    // dropped connection, just like the APK downloader.
+                    // The content.* name keeps it safe from app-file cleanup.
+                    let path = self.dir.join("content.download");
+                    self.fetch_feed_asset(&asset.file, |url| {
+                        self.fetch_asset_to_path(url, &asset, &path, None)
+                    })
+                    .map_err(|f| (false, format!("{f:?}")))?;
+                    let bytes = fs::read(&path).map_err(|e| (false, e.to_string()))?;
+                    let _ = fs::remove_file(&path);
                     bytes
                 }
             };
@@ -493,12 +596,11 @@ impl Updater {
     }
 
     pub(super) fn download_locked(&self, offer: Offer) {
-        let base = self.feed_url();
         let _ = fs::create_dir_all(&self.dir);
         self.clear_downloads(Some(&offer.asset.file));
         let path = self.dir.join(&offer.asset.file);
         self.set_phase(Phase::Downloading { offer: offer.clone(), done: 0 });
-        match self.fetch_build(&format!("{base}/{}", offer.asset.file), &offer, &path) {
+        match self.fetch_feed_asset(&offer.asset.file, |url| self.fetch_build(url, &offer, &path)) {
             Ok(()) => {
                 if let Err(e) = save_staged(&self.dir, &offer) {
                     report!("update staged.json: {e}");
@@ -513,21 +615,24 @@ impl Updater {
         }
     }
 
-    /// Streams the build to `<file>.part` while hashing it, checks size and
-    /// SHA-256 against the signed manifest, then renames it into place.
-    ///
-    /// A download that stops (the network drops, Steps closes) keeps its
-    /// `.part`, and the next try asks only for the rest (an HTTP `Range`),
-    /// within this call (a few tries, a little apart) and on the next check
-    /// or tap. The whole file is still checked at the end; a resumed file
-    /// that doesn't match is thrown away and fetched once more from the
-    /// start.
+    /// Build and content use the same resumable, hash-verified file transfer.
+    /// Content does not change the app's phase/progress while it downloads.
     pub(super) fn fetch_build(&self, url: &str, offer: &Offer, path: &Path) -> Result<(), Failure> {
+        self.fetch_asset_to_path(url, &offer.asset, path, Some(offer))
+    }
+
+    fn fetch_asset_to_path(
+        &self,
+        url: &str,
+        asset: &UpdateAsset,
+        path: &Path,
+        show_app_progress: Option<&Offer>,
+    ) -> Result<(), Failure> {
+        fs::create_dir_all(&self.dir).map_err(|e| Failure::Install(e.to_string()))?;
         let part = part_of(path);
         let meta = meta_of(path);
-        let expected = PartMeta { size: offer.asset.size, sha256: offer.asset.sha256.clone() };
-        // A .part from another signed build must never be resumed, even if
-        // that build used the same filename and byte count.
+        let expected = PartMeta { size: asset.size, sha256: asset.sha256.clone() };
+        // Never resume partial bytes belonging to another signed payload.
         if read_part_meta(&meta).as_ref() != Some(&expected) {
             let _ = fs::remove_file(&part);
         }
@@ -537,9 +642,8 @@ impl Updater {
         let mut tries = 0;
         loop {
             let before = fs::metadata(&part).map_or(0, |m| m.len());
-            match self.fetch_some(url, offer, &part) {
+            match self.fetch_some_asset(url, asset, &part, show_app_progress) {
                 Ok(()) => {}
-                // It got somewhere before the line dropped: go on from there.
                 Err(Failure::Network)
                     if tries < RESUME_TRIES && fs::metadata(&part).map_or(0, |m| m.len()) > before =>
                 {
@@ -552,7 +656,7 @@ impl Updater {
                 Err(e) => return Err(e),
             }
             let (size, sha) = hash_file(&part).map_err(|e| Failure::Install(e.to_string()))?;
-            match check_download(&offer.asset, size, &sha) {
+            match check_download(asset, size, &sha) {
                 Ok(()) => {
                     fs::rename(&part, path).map_err(|e| Failure::Install(e.to_string()))?;
                     let _ = fs::remove_file(&meta);
@@ -560,7 +664,7 @@ impl Updater {
                 }
                 Err(e) => {
                     let _ = fs::remove_file(&part);
-                    if fresh_after_bad {
+                    if fresh_after_bad || show_app_progress.is_none() {
                         return Err(update_failure(e));
                     }
                     fresh_after_bad = true;
@@ -569,16 +673,27 @@ impl Updater {
         }
     }
 
-    /// The web build never downloads builds (each deploy is the newest).
     #[cfg(target_arch = "wasm32")]
-    pub(super) fn fetch_some(&self, _url: &str, _offer: &Offer, _part: &Path) -> Result<(), Failure> {
+    fn fetch_some_asset(
+        &self,
+        _url: &str,
+        _asset: &UpdateAsset,
+        _part: &Path,
+        _show_app_progress: Option<&Offer>,
+    ) -> Result<(), Failure> {
         Err(Failure::Network)
     }
 
-    /// Appends what `part` still lacks (all of it when it's empty).
+    /// Appends what the partial file lacks, or starts afresh on HTTP 200.
     #[cfg(not(target_arch = "wasm32"))]
-    pub(super) fn fetch_some(&self, url: &str, offer: &Offer, part: &Path) -> Result<(), Failure> {
-        let size = offer.asset.size;
+    fn fetch_some_asset(
+        &self,
+        url: &str,
+        asset: &UpdateAsset,
+        part: &Path,
+        show_app_progress: Option<&Offer>,
+    ) -> Result<(), Failure> {
+        let size = asset.size;
         let mut have = fs::metadata(part).map_or(0, |m| m.len());
         if have > size {
             let _ = fs::remove_file(part);
@@ -588,20 +703,34 @@ impl Updater {
             return Ok(());
         }
         let mut req = agent(url, Duration::from_secs(30 * 60)).get(url);
+        if url.starts_with("https://api.github.com/repos/MohamedRef/Steps-app/releases/assets/") {
+            req = req.header("User-Agent", "Steps-Updates").header("Accept", "application/octet-stream");
+        }
         if have > 0 {
             req = req.header("Range", format!("bytes={have}-"));
         }
         let mut res = req.call().map_err(|_| Failure::Network)?;
+        // If the server advertises a shorter file than the signed feed,
+        // fail immediately instead of repeatedly downloading a truncated
+        // pack (or accepting GitHub's JSON asset metadata as binary).
+        if matches!(res.status().as_u16(), 200 | 206)
+            && let Some(declared) = res
+                .headers()
+                .get("content-length")
+                .and_then(|h| h.to_str().ok())
+                .and_then(|h| h.parse::<u64>().ok())
+            && declared != size - if res.status().as_u16() == 206 { have } else { 0 }
+        {
+            return Err(Failure::Network);
+        }
         let mut file = match res.status().as_u16() {
             206 if have > 0 && range_start(&res) == Some(have) => {
                 fs::OpenOptions::new().append(true).open(part)
             }
-            // The server sent all of it: start over.
             200 => fs::File::create(part),
-            // The part is no use to the server (changed file): start over.
             416 if have > 0 => {
                 let _ = fs::remove_file(part);
-                return self.fetch_some(url, offer, part);
+                return self.fetch_some_asset(url, asset, part, show_app_progress);
             }
             _ => return Err(Failure::Network),
         }
@@ -611,7 +740,9 @@ impl Updater {
         }
         let mut reader = res.body_mut().as_reader().take(size - have);
         let (mut done, mut shown) = (have, have);
-        self.set_phase(Phase::Downloading { offer: offer.clone(), done });
+        if let Some(offer) = show_app_progress {
+            self.set_phase(Phase::Downloading { offer: offer.clone(), done });
+        }
         let mut buf = vec![0u8; 64 * 1024];
         let result = loop {
             let n = match reader.read(&mut buf) {
@@ -625,10 +756,11 @@ impl Updater {
             done += n as u64;
             if done - shown > size / 100 {
                 shown = done;
-                self.set_phase(Phase::Downloading { offer: offer.clone(), done });
+                if let Some(offer) = show_app_progress {
+                    self.set_phase(Phase::Downloading { offer: offer.clone(), done });
+                }
             }
         };
-        // What came is kept for the next try, even when the line dropped.
         file.sync_all().map_err(|e| Failure::Install(e.to_string()))?;
         result?;
         if done < size { Err(Failure::Network) } else { Ok(()) }

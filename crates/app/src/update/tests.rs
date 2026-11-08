@@ -1320,3 +1320,106 @@ fn a_check_cut_while_locked_is_tried_again_when_steps_is_back_in_front() {
     u.resumed(false);
     assert_eq!(seen.lock().unwrap().len(), asked, "nothing failed, nothing fetched");
 }
+
+#[test]
+fn github_api_fallback_only_uses_a_named_uploaded_asset() {
+    // A filename mismatch or an asset still being processed cannot become
+    // the signed manifest's download, even though the API lists both.
+    let json = serde_json::json!({
+        "assets": [
+            {"id": 11, "name": "update.json", "state": "uploaded"},
+            {"id": 12, "name": "update.json.sig", "state": "starter"},
+            {"id": 13, "name": "update.json.old", "state": "uploaded"}
+        ]
+    });
+    let bytes = serde_json::to_vec(&json).unwrap();
+    assert_eq!(service::api_asset_id(&bytes, "update.json"), Some(11));
+    assert_eq!(service::api_asset_id(&bytes, "update.json.sig"), None);
+    assert_eq!(service::api_asset_id(&bytes, "UPDATE.JSON"), None);
+    assert_eq!(service::api_asset_id(b"not json", "update.json"), None);
+}
+
+#[test]
+fn a_content_pack_resumes_from_a_partial_download() {
+    // A previous content download was interrupted after writing a prefix.
+    // On a later check, only the missing bytes are requested, then the
+    // signed SHA-256 and decoded pack are checked before it is installed.
+    let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+    let signer = ed25519_dalek::SigningKey::from_bytes(&[14; 32]);
+    let feed = pack_feed(&signer, 45, Some(40), &pack, Vec::new());
+    let (url, seen) = serve_logged(feed.path().to_path_buf(), None);
+    let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 40, true) };
+    let (u, _data) = updater(&url, info);
+    fs::create_dir_all(&u.dir).unwrap();
+    let path = u.dir.join("content.download");
+    let prefix = (pack.len() / 3).max(1);
+    fs::write(part_of(&path), &pack[..prefix]).unwrap();
+    let meta = PartMeta { size: pack.len() as u64, sha256: sha256_hex(&pack) };
+    fs::write(meta_of(&path), serde_json::to_vec(&meta).unwrap()).unwrap();
+
+    u.check(false);
+
+    assert_eq!(u.status().content_check, Some(ContentCheck::New));
+    assert!(u.status().content_waiting);
+    assert_eq!(fs::read(u.dir.join(PACK_FILE)).unwrap(), pack);
+    assert!(!part_of(&path).exists());
+    let ranges: Vec<_> = seen
+        .lock()
+        .unwrap()
+        .iter()
+        .filter(|(path, _)| path.ends_with(".pack"))
+        .map(|(_, range)| range.clone())
+        .collect();
+    assert_eq!(ranges, [Some(format!("bytes={prefix}-"))]);
+}
+
+#[test]
+fn a_fresh_update_check_clears_an_old_content_failure() {
+    let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+    let signer = ed25519_dalek::SigningKey::from_bytes(&[15; 32]);
+    let feed = pack_feed(&signer, 45, Some(40), &pack, Vec::new());
+    let url = serve(feed.path().to_path_buf());
+    let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 40, true) };
+    let (u, _data) = updater(&url, info);
+    u.set_status_for_tests(|s| s.content_check = Some(ContentCheck::Failed));
+    u.check(false);
+    assert_eq!(u.status().content_check, Some(ContentCheck::New));
+    assert!(matches!(u.status().phase, Phase::UpToDate));
+}
+
+#[test]
+fn github_api_fallback_is_used_only_for_network_failures() {
+    use std::sync::atomic::Ordering;
+
+    let data = tempfile::tempdir().unwrap();
+    let u = Updater::new(
+        data.path().join("updates"),
+        build("0.1.0", 42, true),
+        Some(UpdatePlatform::AndroidArm64),
+        None,
+        None,
+    );
+    let channel = u.installed().channel;
+    *u.api_assets.lock().unwrap() =
+        Some((channel, std::collections::HashMap::from([(MANIFEST_FILE.to_owned(), 99)])));
+    let api = "https://api.github.com/repos/MohamedRef/Steps-app/releases/assets/99";
+    let seen = Mutex::new(Vec::new());
+    let result = u.fetch_feed_asset(MANIFEST_FILE, |url| {
+        seen.lock().unwrap().push(url.to_owned());
+        if url == api { Ok(b"signed feed bytes".to_vec()) } else { Err(Failure::Network) }
+    });
+    assert_eq!(result, Ok(b"signed feed bytes".to_vec()));
+    assert_eq!(seen.into_inner().unwrap(), [format!("{}/{}", u.feed_url(), MANIFEST_FILE), api.to_owned()]);
+    assert!(u.prefer_api.load(Ordering::Relaxed));
+
+    // Verification failures are never turned into a fallback that might
+    // accidentally bypass signature or digest checks.
+    u.prefer_api.store(false, Ordering::Relaxed);
+    let seen = Mutex::new(Vec::new());
+    let result: Result<Vec<u8>, Failure> = u.fetch_feed_asset(MANIFEST_FILE, |url| {
+        seen.lock().unwrap().push(url.to_owned());
+        Err(Failure::Verify("wrong signature".into()))
+    });
+    assert_eq!(result, Err(Failure::Verify("wrong signature".into())));
+    assert_eq!(seen.into_inner().unwrap(), [format!("{}/{}", u.feed_url(), MANIFEST_FILE)]);
+}
