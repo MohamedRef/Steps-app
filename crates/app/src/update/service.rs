@@ -693,7 +693,9 @@ impl Updater {
         // fail immediately instead of repeatedly downloading a truncated
         // pack (or accepting GitHub's JSON asset metadata as binary).
         if matches!(res.status().as_u16(), 200 | 206)
-            && let Some(declared) = res.headers().get("content-length")
+            && let Some(declared) = res
+                .headers()
+                .get("content-length")
                 .and_then(|h| h.to_str().ok())
                 .and_then(|h| h.parse::<u64>().ok())
             && declared != size - if res.status().as_u16() == 206 { have } else { 0 }
