@@ -138,13 +138,16 @@ fn main() {
     {
         use dioxus::desktop::{Config, LogicalSize, WindowBuilder};
         // STEPS_WINDOW_SIZE=412x900 previews the phone layout on the Mac.
+        // The Mac opens wide enough for the two-column lesson (adapted from
+        // batna-app main: crates/app/src/main.rs).
+        let default_size = if cfg!(target_os = "macos") { (1280.0, 820.0) } else { (1100.0, 760.0) };
         let (w, h) = std::env::var("STEPS_WINDOW_SIZE")
             .ok()
             .and_then(|v| {
                 let (w, h) = v.split_once('x')?;
                 Some((w.parse().ok()?, h.parse().ok()?))
             })
-            .unwrap_or((1100.0, 760.0));
+            .unwrap_or(default_size);
         let window = WindowBuilder::new()
             .with_title("Steps")
             .with_inner_size(LogicalSize::new(w, h))

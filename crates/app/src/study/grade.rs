@@ -55,6 +55,7 @@ pub fn GradeRow(item_id: String, suggested: Option<Grade>, on_grade: EventHandle
                             }
                         },
                         span { {grade_label(grade)} }
+                        span { class: "st-grade-key", aria_hidden: "true", "{i + 1}" }
                         if let Some(label) = suggestion_label(suggested, grade) {
                             span { class: "rating-suggested", "{label}" }
                         }

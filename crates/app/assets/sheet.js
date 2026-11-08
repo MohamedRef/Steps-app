@@ -8,6 +8,9 @@
 //   body   : scrolled to the top, pulling down drags the sheet too.
 //   Esc    : closes the sheet before anything under it.
 //   outside: a tap outside the sheet closes it (and does nothing else).
+//   side   : from 1100px wide (sheet.css) the sheet is a full-height side
+//            panel beside the content: no resizing, and a tap outside is
+//            an ordinary tap (nothing is covered, so nothing to dismiss).
 // The size is a fraction of the window height (--sheet-f), remembered for
 // the next sheet. Listeners are delegated from document, installed once.
 if (!window.__stepsSheetInit) {
@@ -43,6 +46,8 @@ if (!window.__stepsSheetInit) {
   // The fraction the sheet really covers (short content stays short).
   const shown = (el) => el.offsetHeight / vh();
   const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+  // The side panel of wide windows (sheet.css, 1100px).
+  const side = () => matchMedia("(min-width: 1100px)").matches;
 
   // The sheet floats over the page (Mohamed, 2026-10-29: it overlays the
   // content, it never pushes it up), so it adds no room under the page and
@@ -123,7 +128,7 @@ if (!window.__stepsSheetInit) {
   let lastTap = 0;
   document.addEventListener("pointerdown", (e) => {
     const grip = e.target instanceof Element && e.target.closest(".bsheet-grip, .bsheet-head");
-    if (!grip || e.button > 0 || e.target.closest("button")) return;
+    if (!grip || e.button > 0 || e.target.closest("button") || side()) return;
     const el = grip.closest(".bsheet");
     if (!el) return;
     e.preventDefault();
@@ -158,7 +163,7 @@ if (!window.__stepsSheetInit) {
     (e) => {
       const body = e.target instanceof Element && e.target.closest(".bsheet-body");
       const el = body?.closest(".bsheet");
-      if (!el || e.touches.length > 1) return;
+      if (!el || e.touches.length > 1 || side()) return;
       pull = { el, body, y0: e.touches[0].clientY };
     },
     { passive: true },
@@ -191,7 +196,7 @@ if (!window.__stepsSheetInit) {
   // ---- keyboard (on window, before the app's shortcuts on document) ----
   window.addEventListener("keydown", (e) => {
     const grip = e.target instanceof Element && e.target.closest(".bsheet-grip");
-    if (!grip) return;
+    if (!grip || side()) return;
     const el = grip.closest(".bsheet");
     if (!el) return;
     const f = shown(el);
@@ -229,7 +234,7 @@ if (!window.__stepsSheetInit) {
   // card or backdrop are theirs. Keyboard and scripted clicks don't count.
   const PASS = "[aria-haspopup], [role=dialog], [role=menu], [role=tooltip], [class*=backdrop], [class*=scrim]";
   window.addEventListener("click", (e) => {
-    if (!e.isTrusted || e.detail === 0) return;
+    if (!e.isTrusted || e.detail === 0 || side()) return;
     const t = e.target instanceof Element ? e.target : null;
     if (!t || t.closest(".bsheet") || t.closest(PASS)) return;
     const open = sheets().filter((s) => !s.classList.contains("closing"));

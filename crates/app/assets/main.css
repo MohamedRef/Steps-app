@@ -330,10 +330,30 @@ input[type="file"]::file-selector-button {
 /* Redrawn when a content update switches in (main.rs); adds no box. */
 .content-rev { display: contents; }
 @media (min-width: 840px) {
-  /* A reading column (60rem, 80rem on dashboards: desk.css) at the start
-     side; the padding, not a max-width, keeps it there so the scrollbar
-     stays at the window's edge. */
-  .content { padding-inline: var(--sp-6) max(var(--sp-6), calc(100% - var(--content-max, 60rem) - var(--sp-6))); }
+  /* The window is the canvas (it was a 60rem column hugging the start
+     side, which left half a Mac window empty). Content is centred, so any
+     room left over is shared by both sides instead of piling up on one:
+     lists and reading screens up to 72rem (rows stay scannable), a lesson
+     80rem (its two columns, learn.css), dashboards and the course map
+     100rem. The padding, not a max-width, so the scrollbar stays at the
+     window's edge. Idea from batna-app main: crates/app/assets/main.css
+     (#739). */
+  .content {
+    --pad: clamp(var(--sp-6), 2.5vw, 3rem);
+    --content-max: 72rem;
+    padding-inline: max(var(--pad), calc((100% - var(--content-max)) / 2));
+    container: content / inline-size;
+  }
+  .content:has(.ls-player) { --content-max: 80rem; }
+  .content:is([data-screen="Today"], [data-screen="Study"], [data-screen="Oral"], [data-screen="Stats"]):not(:has(.lec-page)),
+  .content:has(.lec-page.courses) { --content-max: 100rem; }
+}
+@media (min-width: 1100px) {
+  /* An open info sheet is a side panel at the inline end (sheet.css): the
+     content gives it room instead of sliding under it. */
+  :root[data-sheet="open"] .content {
+    padding-inline-end: max(calc(var(--side-sheet-w) + var(--pad)), calc((100% - var(--content-max)) / 2));
+  }
 }
 
 h1 { font-size: var(--fs-xl); margin: 0; line-height: 1.35; }
