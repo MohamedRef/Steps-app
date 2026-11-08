@@ -2,15 +2,17 @@
    from batna-app main: crates/app/assets/sheet.css). A raised layer in its
    own colour (--sheet, a tinted surface tested per theme) with an accent
    hairline and a long shadow, so it never reads as one more card on the
-   page. Docked at the bottom on every width, a phone-width card from
-   600dp. Its height is --sheet-f of the window: at most, until he sizes
-   it, then exactly. No scrim: the page under it stays usable, and it floats over the page
-   without moving it. */
+   page. Docked at the bottom on phones and a phone-width card from 600dp,
+   centred over the content (not the whole window, so the rail doesn't push
+   it off centre). Its height is --sheet-f of the window: at most, until he
+   sizes it, then exactly. No scrim: the page under it stays usable, and it
+   floats over the page without moving it. From 1100dp (the Mac, the Tab
+   S11 in landscape) it is a full-height side panel instead (below). */
 .bsheet {
   --sheet-f: 0.56;
   position: fixed;
   z-index: 41;
-  inset-inline: 0;
+  inset-inline: var(--sheet-nav, 0px) 0;
   inset-block-end: 0;
   margin: 0 auto;
   inline-size: 100%;
@@ -30,7 +32,11 @@
 /* Once he has sized it (sheet.js), it keeps that height. */
 .bsheet.sized { block-size: calc(var(--sheet-f) * 100dvh); }
 @media (min-width: 600px) {
-  .bsheet { max-inline-size: min(28rem, calc(100% - 2 * var(--sp-6))); }
+  :root { --sheet-nav: var(--rail-w); }
+  .bsheet { max-inline-size: min(28rem, calc(100% - var(--sheet-nav) - 2 * var(--sp-6))); }
+}
+@media (min-width: 840px) {
+  :root:not([data-nav-style="slim"]) { --sheet-nav: var(--sidebar-w); }
 }
 @media (prefers-reduced-motion: no-preference) {
   .bsheet { animation: bsheet-in 220ms cubic-bezier(0.2, 0, 0, 1) both; }
@@ -94,3 +100,40 @@
 .bsheet-body > * { flex-shrink: 0; }
 /* Tinted boxes inside (a quote, a note) stay boxes on the tinted sheet. */
 .bsheet :is(.note, blockquote, figure) { background: color-mix(in srgb, var(--surface) 55%, var(--sheet)); }
+
+/* ---------- wide windows: a side panel ----------
+   From 1100dp the sheet docks along the window's inline-end edge (the
+   left, in this right-to-left app) at full height, in the space a phone
+   column leaves empty. The content makes room for it (main.css), so
+   nothing under it is covered: not the step, not Continue. It stays open
+   while he works beside it; ✕ or Esc closes it. No handle: the height is
+   the window's. */
+@media (min-width: 1100px) {
+  :root { --side-sheet-w: min(26rem, 34vw); }
+  .bsheet, .bsheet.sized {
+    inset-block: 0;
+    inset-inline: auto 0;
+    margin: 0;
+    inline-size: var(--side-sheet-w);
+    max-inline-size: none;
+    block-size: auto;
+    max-block-size: none;
+    border: 0;
+    border-inline-start: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+    border-radius: 0;
+    box-shadow: 0 0 36px rgb(0 0 0 / 0.22), 0 0 6px rgb(0 0 0 / 0.08);
+  }
+  .bsheet-grip { display: none; }
+  .bsheet-head {
+    cursor: auto;
+    touch-action: auto;
+    padding-block: calc(var(--sp-4) + env(safe-area-inset-top, 0px)) var(--sp-3);
+    border-block-end: 1px solid var(--line-soft, var(--line));
+  }
+  .bsheet-body { flex: 1 1 auto; padding-block-start: var(--sp-3); }
+}
+@media (min-width: 1100px) and (prefers-reduced-motion: no-preference) {
+  .bsheet { animation-name: bsheet-side-in; }
+  .bsheet.closing { transform: translateX(-100%); }
+}
+@keyframes bsheet-side-in { from { transform: translateX(-100%); opacity: 0.6; } to { transform: none; opacity: 1; } }

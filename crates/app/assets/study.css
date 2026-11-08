@@ -198,3 +198,24 @@
 /* ---------- Stepped ----------
    The revealed answer stands on the ledge like a card. */
 .app[data-appearance="stepped"] .st-answer { box-shadow: 0 3px 0 var(--ledge); }
+
+/* Keyboard hints on the Mac and a tablet with a trackpad: the key that
+   rates (1-4) in the rating's corner, so he learns them without opening
+   the list. Never on touch. From batna-app main: study.css (#740). */
+.st-grade-key { display: none; }
+@media (min-width: 840px) and (hover: hover) and (pointer: fine) {
+  .st-grades .rating { position: relative; }
+  .st-grade-key {
+    display: inline-grid;
+    place-items: center;
+    position: absolute;
+    inset-inline-end: var(--sp-2);
+    inset-block-start: var(--sp-1);
+    min-inline-size: 1.2rem;
+    block-size: 1.2rem;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    font: 600 0.75rem/1 var(--font-latin);
+    color: var(--muted);
+  }
+}

@@ -220,6 +220,8 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                 button {
                     class: if pages { "ls-arrow" } else { "btn btn-secondary" },
                     "data-nav": "back",
+                    // Right-to-left: the earlier step is on the right.
+                    "aria-keyshortcuts": "ArrowRight",
                     aria_label: tx::BACK,
                     title: tx::BACK,
                     disabled: i == 0,
@@ -256,7 +258,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     button {
                         class: "ls-arrow ls-arrow-next",
                         "data-nav": "next",
-                        "aria-keyshortcuts": "Enter",
+                        "aria-keyshortcuts": "Enter ArrowLeft",
                         aria_label: tx::NEXT,
                         title: tx::NEXT,
                         disabled: !can_go,
@@ -268,7 +270,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     button {
                         class: "btn btn-primary btn-lg ls-next",
                         "data-nav": "next",
-                        "aria-keyshortcuts": "Enter",
+                        "aria-keyshortcuts": "Enter ArrowLeft",
                         disabled: !can_go,
                         aria_describedby: if needs_answer { Some("ls-gate-hint") } else { None },
                         onclick: move |_| go_next(i + 1),

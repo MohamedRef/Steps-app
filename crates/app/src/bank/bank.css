@@ -277,6 +277,9 @@ bdi.bank-scope { font-family: var(--font-latin); }
 /* Without past papers there is no side column: the setup keeps a reading
    measure instead of stretching. */
 .bank-cols:not(.tab-cols) > .tab-main { max-inline-size: 44rem; }
+/* On the wide canvas (main.css) that measure sits in the middle, not
+   against one edge. */
+@media (min-width: 840px) { .bank-cols:not(.tab-cols) > .tab-main { margin-inline: auto; inline-size: 100%; } }
 /* The lab values button (labs/mod.rs) closes the question's chip row. */
 .q-meta .q-labs { margin-inline-start: auto; min-block-size: var(--tap); padding: 0 var(--sp-2); font-size: 0.8rem; }
 /* The facts behind a missed question (bank/behind.rs). */

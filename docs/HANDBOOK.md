@@ -53,7 +53,7 @@ These come from my own decisions. Follow them even when a default tool or habit 
 - **Tests never depend on today's date.** Build dates from "now" (`now - 5 days`) or pass a fixed clock. A test pinned to a date once turned every PR red the next morning. The nightly run moves the clock 37 hours and 400 days forward to catch this.
 - **Tests never depend on the size of the content.** A test that grows with the bank (a paper of every MCQ, every item) slows every run as lectures are written. Use a small paper or one topic. Keep each test well under a minute; CI warns about any test over 60 seconds.
 - Keep CI fast. A slow run is a bug to fix, not to wait out. Don't add new per-PR jobs without asking me.
-- UI uses logical CSS properties only (RTL). Layout follows window width (compact under 600dp, medium under 840dp, expanded from 840dp), never the device name.
+- UI uses logical CSS properties only (RTL). Layout follows window width (compact under 600dp, medium under 840dp, expanded from 840dp), never the device name. From 840dp the whole window is the canvas (centred past 100rem); reading screens keep their own line length inside it. From 1100dp an info sheet (book page, abbreviations, labs, go to page) is a full-height side panel at the inline end and the content makes room for it; a lesson turns into two columns when the content area itself is 54rem or wider (a container query on `.content`).
 - Review events are append-only; statuses and settings are last-writer-wins; synced tables carry `account_id`, `device_id`, an HLC timestamp and a tombstone.
 
 **Merging**
@@ -257,7 +257,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 
 ## 12. Current state, roadmap and known issues
 
-*Last updated: 2026-11-06.*
+*Last updated: 2026-11-08.*
 
 ### State
 - **Released:** `1.0.0-alpha.1` and `1.0.0-alpha.2` on 2026-11-05 (#611, #641), then `1.0.0-alpha.3` on 2026-11-06: APK, Mac app, web and Steps Cloud. Latest release: <https://github.com/MohamedRef/Steps-app/releases/tag/steps-v1.0.0-alpha.3>. Installed alpha builds update to it over the air.
@@ -270,7 +270,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 ### Roadmap
 - **1.0.0-alpha.2 (released 2026-11-05):** First Aid coverage fixes, Android Google sign-in without `invalid_grant` when Chrome is in front (#629), the Today first-launch fixes (#637), the UWorld tree, basket and lesson strip (#638) and the UWorld mistake log (#640).
 - **1.0.0-alpha.3 (released 2026-11-06):** the Android screen no longer freezes after lock and unlock, and the update check is faster (#643).
-- **1.0.0-alpha.4:** whatever daily use of the alpha turns up.
+- **1.0.0-alpha.4:** whatever daily use of the alpha turns up. So far: the Mac and landscape-tablet layout (whole-window canvas, two-column lessons, side-panel sheets) and safer keyboard review keys (arrows in lessons, Space/Enter rates Good, Z undo), ideas taken from Batna #739 and #740. Batna's resizable study panes, focus mode (#741) and ⌘K palette (#743) are candidates for later.
 - **Research gaps (2026-11-05):** of the three gaps the research reports named, the NBME/UWSA score tracker (Progress › اختباراتي: chart, trend and readiness verdict) and new cards only from pages read (the pages-read gate) were already in the app. The third, a UWorld mistake log by question id, is on Progress › الغلطات: type a QID and the reason (`steps_core::uwmiss`, one synced setting `uw.miss.<qid>` each), see the most common reason with what to change, and the lectures with most misses with their QIDs to copy into a UWorld custom test. Features that copy a commercial question bank stay low priority, since I already have the banks.
 - **More sources:** Pathoma, Sketchy, UWorld notes and my own materials merge into the First Aid lectures and topics as they arrive ([SOURCES.md](SOURCES.md)). When the first non-First-Aid source arrives, `steps-tools refs` must learn to read its text.
 - **Approvals:** I check items against the book in the app and export my verdicts; fixes follow per lecture.

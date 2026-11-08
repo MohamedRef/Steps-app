@@ -1,9 +1,11 @@
 //! Keyboard shortcuts for tablet keyboards and the Mac (PARITY.md §6.5):
 //! Ctrl/⌘ + 1–7 for the screens, Ctrl/⌘ + , for Settings, Ctrl/⌘ + G for a
 //! First Aid page, and on study
-//! screens Space to reveal, 1–4 to rate, A–E for MCQ options, Enter for next,
-//! ← / → between questions of a timed paper, F to flag, Esc to close, ? for
-//! the list.
+//! screens Space to reveal (then Space or Enter rates Good), 1–4 to rate, Z
+//! to undo, A–E for MCQ options, Enter for next, ← / → between lesson steps
+//! and the questions of a timed paper, F to flag, Esc to close, ? for the
+//! list. The key safety rules (no auto-repeat, nothing while typing, a
+//! dialog first) are adapted from batna-app main: crates/app/src/shortcuts/mod.rs.
 //!
 //! Screens don't register handlers: a key presses the visible, enabled button
 //! whose `aria-keyshortcuts` names it (`"Space"`, `"1"`, `"A"`, `"Enter"`,
@@ -26,8 +28,11 @@ pub fn open_sheet(open: bool) {
 const KEYS_JS: &str = r#"
 if (window.__stepsKeys) document.removeEventListener("keydown", window.__stepsKeys, true);
 window.__stepsKeys = (e) => {
+  // One press, one action: a held key never runs through several cards.
+  if (e.defaultPrevented || e.isComposing || e.repeat) return;
   const t = e.target;
-  const typing = t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable);
+  const typing = t && (t.isContentEditable ||
+    t.closest?.('input, textarea, select, [contenteditable=""], [contenteditable="true"], [role="textbox"]'));
   const mod = e.metaKey || e.ctrlKey;
   if (mod && !e.altKey && !e.shiftKey) {
     if (/^Digit[1-7]$/.test(e.code)) { e.preventDefault(); dioxus.send("go:" + e.code.slice(5)); return; }
@@ -35,11 +40,13 @@ window.__stepsKeys = (e) => {
     if (e.code === "KeyG") { e.preventDefault(); dioxus.send("page"); return; }
     return;
   }
-  if (e.altKey || mod) return;
-  if (e.key === "Escape") {
-    if (window.__stepsHover && window.__stepsHover.visible()) { window.__stepsHover.hide(); e.preventDefault(); return; }
-  } else if (typing) return;
-  if (e.key === "?" || e.key === "\u061F") { e.preventDefault(); dioxus.send("help"); return; }
+  if (e.altKey || mod || (e.shiftKey && e.key !== "?" && e.key !== "؟")) return;
+  if (e.key === "Escape" && window.__stepsHover?.visible()) {
+    window.__stepsHover.hide(); e.preventDefault(); return;
+  }
+  // Typing an answer, a note or a search never grades, reveals or moves.
+  if (typing && e.key !== "Escape") return;
+  if (e.key === "?" || e.key === "؟") { e.preventDefault(); dioxus.send("help"); return; }
   // By physical key, so an Arabic keyboard layout works the same.
   let key = null;
   if (e.code === "Space") key = "space";
@@ -47,16 +54,23 @@ window.__stepsKeys = (e) => {
   else if (e.key === "Escape") key = "escape";
   else if (/^(Digit|Numpad)[1-9]$/.test(e.code)) key = e.code.slice(-1);
   else if (e.key === "ArrowLeft" || e.key === "ArrowRight") key = e.key.toLowerCase();
-  else if (/^Key[A-F]$/.test(e.code)) key = e.code.slice(3).toLowerCase();
+  else if (/^Key[A-FZ]$/.test(e.code)) key = e.code.slice(3).toLowerCase();
   if (!key) return;
-  // An open dialog (the shortcut list) takes the keys first.
-  const scope = document.querySelector("[role=dialog][aria-modal=true], [role=alertdialog][aria-modal=true]") || document;
-  const hit = [...scope.querySelectorAll("[aria-keyshortcuts]")].find((el) =>
-    !el.disabled && el.getClientRects().length > 0 &&
-    el.getAttribute("aria-keyshortcuts").toLowerCase().split(/\s+/).includes(key));
+  // An open dialog takes the keys first; nothing behind it is pressed.
+  const modal = document.querySelector('[role="dialog"][aria-modal="true"], [role="alertdialog"][aria-modal="true"]');
+  const scope = modal || document;
+  const shown = (el) => !el.disabled && !el.closest('[hidden], [inert], [aria-hidden="true"]') &&
+    el.getClientRects().length > 0 && getComputedStyle(el).visibility !== "hidden";
+  const find = (name) => [...scope.querySelectorAll("[aria-keyshortcuts]")].find((el) =>
+    shown(el) && el.getAttribute("aria-keyshortcuts").toLowerCase().split(/\s+/).includes(name));
+  let hit = find(key);
+  // Like a flashcard deck: with the answer shown, Space or Enter rates Good
+  // (3). Only on a Study card, never in a lesson, a dialog or an exam.
+  const inStudy = !modal && document.querySelector('main.content[data-screen="Study"] .st-item');
+  if (!hit && inStudy && (key === "space" || key === "enter")) hit = find("3");
   if (!hit) return;
   // Enter and Space already press a focused button; don't press twice.
-  if ((key === "enter" || key === "space") && t && t.tagName === "BUTTON" && t !== hit) return;
+  if ((key === "enter" || key === "space") && t?.closest?.("button, a[href], [role=button]")) return;
   e.preventDefault();
   hit.click();
 };
@@ -129,12 +143,14 @@ pub fn KeysSheet() -> Element {
         return rsx! {};
     }
     let screens = format!("{} … {}", nav::TODAY, nav::STATS);
-    let rows: [(&[&str], String); 12] = [
+    let rows: [(&[&str], String); 14] = [
         (&["Ctrl", "1–7"], format!("{} ({screens})", tx::SCREENS)),
         (&["Ctrl", ","], tx::SETTINGS.into()),
         (&["Ctrl", "G"], tx::PAGE.into()),
         (&["Space"], tx::REVEAL.into()),
+        (&["Space", "Enter"], tx::GOOD.into()),
         (&["1", "2", "3", "4"], tx::RATE.into()),
+        (&["Z"], tx::UNDO.into()),
         (&["A", "B", "C", "D", "E"], tx::OPTIONS.into()),
         (&["Enter"], tx::NEXT.into()),
         (&["←", "→"], tx::MOVE.into()),
@@ -193,6 +209,28 @@ mod tests {
 
     fn keep() {
         NAV.with(|n| n.set(Some((consume_context(), consume_context()))));
+    }
+
+    #[test]
+    fn review_keys_stay_safe() {
+        // The dispatcher runs as script in the web view; pin its safety rules.
+        for rule in [
+            "e.defaultPrevented || e.isComposing || e.repeat",
+            "[role=\"textbox\"]",
+            "if (typing && e.key !== \"Escape\") return",
+            "const scope = modal || document",
+            "[hidden], [inert], [aria-hidden=\"true\"]",
+            "if (!hit && inStudy",
+            "find(\"3\")",
+            "Key[A-FZ]",
+        ] {
+            assert!(KEYS_JS.contains(rule), "missing key rule: {rule}");
+        }
+        // Lessons move by the arrows, right-to-left: → back, ← next.
+        let player = include_str!("../learn/player.rs");
+        assert!(player.contains("\"aria-keyshortcuts\": \"ArrowRight\""));
+        assert!(player.contains("\"aria-keyshortcuts\": \"Enter ArrowLeft\""));
+        assert!(include_str!("../study/mod.rs").contains("\"aria-keyshortcuts\": \"Z\""));
     }
 
     #[test]

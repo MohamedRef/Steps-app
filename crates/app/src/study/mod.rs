@@ -388,6 +388,7 @@ pub fn Study() -> Element {
                             if can_undo {
                                 button {
                                     class: "btn-link st-undo",
+                                    "aria-keyshortcuts": "Z",
                                     title: tx::UNDO_HINT,
                                     aria_label: tx::UNDO_HINT,
                                     onclick: {

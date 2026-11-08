@@ -222,6 +222,49 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 @keyframes ls-in-back { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
 .ls-player[data-dir="back"] .ls-stage { animation-name: ls-in-back; }
 
+/* ---------- wide windows: the lesson as a workspace ----------
+   When the content area itself is wide (the Mac, the Tab S11 in landscape;
+   a container query, so an open side sheet narrows it back to one column),
+   the lesson's name, lecture and the B&B / UWorld strip sit in a side
+   column that stays in view, and the step with its buttons right under it
+   takes a reading-width column. The buttons follow the step instead of
+   waiting at the foot of a tall window, and stay pinned to the bottom when
+   a step is longer than the window. Hidden steps stay mounted out of the
+   grid, so answers and Back still work. Idea from batna-app main:
+   crates/app/src/learn/learn.css (#739); the layout is Steps' own. */
+@container content (min-width: 54rem) {
+  .ls-player[data-view="steps"] {
+    max-inline-size: none;
+    display: grid;
+    grid-template-columns: minmax(14rem, 19rem) minmax(0, 52rem);
+    grid-template-rows: auto auto auto 1fr;
+    justify-content: center;
+    align-items: start;
+    column-gap: clamp(var(--sp-6), 3vw, 3rem);
+    row-gap: var(--sp-3);
+  }
+  .ls-player[data-view="steps"] > .ls-bar { grid-column: 1 / -1; grid-row: 1; padding-block-end: var(--sp-2); border-block-end: 1px solid var(--line-soft, var(--line)); }
+  .ls-player[data-view="steps"] > :is(.ls-context, .qb-strip) { grid-column: 1; }
+  .ls-player[data-view="steps"] > .ls-context {
+    grid-row: 2;
+    position: sticky;
+    top: var(--sp-4);
+    padding: var(--sp-4);
+    background: var(--surface);
+    border: 1px solid var(--line-soft, var(--line));
+    border-inline-start: 3px solid var(--accent);
+    border-radius: var(--radius-card);
+  }
+  .ls-player[data-view="steps"] > .qb-strip { grid-row: 3; }
+  .ls-player[data-view="steps"] > .ls-stage { grid-column: 2; grid-row: 2 / span 2; }
+  .ls-player[data-view="steps"] > .ls-nav {
+    grid-column: 2;
+    grid-row: 4;
+    align-self: start;
+    margin-block-start: 0;
+  }
+}
+
 /* Focus: a lesson takes the whole phone screen. The app bar and the tab
    bar step aside (× closes the lesson); wider windows keep their rail. */
 .app:has(.ls-player) > .topbar { display: none; }

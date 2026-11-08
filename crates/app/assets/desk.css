@@ -162,8 +162,8 @@ kbd {
      with .tab-sticky stays in view while the other one scrolls.
    - .tab-grid: a card grid, 1 column on phones, 2 from 600px, 3 from
      1100px with data-max="3".
-   Dashboards (Today, Bank, Cases, Oral, Progress) use up to 80rem; the
-   study and reading screens keep the 60rem column of main.css. */
+   The canvas is the whole window (main.css); reading screens keep their
+   own line length inside it. */
 .tab-cols, .tab-main, .tab-aside { display: flex; flex-direction: column; gap: var(--sp-4); min-width: 0; }
 /* A column's cards keep their full height. A sticky column has a max
    height, and a flex item with overflow (the .hero, a .grouped list) has
@@ -178,8 +178,6 @@ kbd {
   .tab-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (min-width: 840px) {
-  .content[data-screen="Today"], .content[data-screen="Bank"], .content[data-screen="Cases"],
-  .content[data-screen="Oral"], .content[data-screen="Stats"] { --content-max: 80rem; }
   .tab-cols {
     display: grid;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -201,8 +199,9 @@ kbd {
 }
 @media (min-width: 1100px) {
   .tab-grid[data-max="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  /* ...until the column itself is wide enough for two. */
-  .tab-cols .tab-grid[data-max="3"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* ...and inside a column as many as the column's own width holds (a
+     narrow side column keeps one). From batna-app main: desk.css (#739). */
+  .tab-cols .tab-grid[data-max="3"] { grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); }
 }
 /* Short landscape windows: a little less air so more fits above the fold. */
 @media (min-width: 840px) and (max-height: 760px) {
