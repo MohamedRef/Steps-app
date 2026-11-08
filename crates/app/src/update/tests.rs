@@ -1375,11 +1375,14 @@ fn a_content_pack_resumes_from_a_partial_download() {
 
 #[test]
 fn a_fresh_update_check_clears_an_old_content_failure() {
-    let feed = fixture_feed();
+    let pack = Pack::new(crate::content::Library::get().index.clone(), Vec::new()).encode();
+    let signer = ed25519_dalek::SigningKey::from_bytes(&[15; 32]);
+    let feed = pack_feed(&signer, 45, Some(40), &pack, Vec::new());
     let url = serve(feed.path().to_path_buf());
-    let (u, _data) = updater(&url, build("0.1.0", 42, true));
+    let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 40, true) };
+    let (u, _data) = updater(&url, info);
     u.set_status_for_tests(|s| s.content_check = Some(ContentCheck::Failed));
     u.check(false);
-    assert_ne!(u.status().content_check, Some(ContentCheck::Failed));
+    assert_eq!(u.status().content_check, Some(ContentCheck::New));
     assert!(matches!(u.status().phase, Phase::UpToDate));
 }
