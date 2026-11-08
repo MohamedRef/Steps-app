@@ -8,6 +8,7 @@
 
 #[cfg(test)]
 mod browser;
+mod highlight;
 mod player;
 mod practice;
 mod steps;
