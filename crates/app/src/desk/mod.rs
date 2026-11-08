@@ -22,22 +22,47 @@ use crate::settings::{DeviceOnly, Section};
 
 const DESK_CSS: Css = css!("assets/desk.css");
 const NAV_CSS: Css = css!("assets/nav.css");
+const RESIZE_JS: &str = include_str!("resize.js");
+
+/// The width a `split:N` message from resize.js saves: 35–70, or 0 to go
+/// back to each item's default.
+fn split_width(msg: &str) -> Option<u8> {
+    let n: u8 = msg.strip_prefix("split:")?.parse().ok()?;
+    (n == 0 || (35..=70).contains(&n)).then_some(n)
+}
 
 /// Rendered once by the app root: the desk's styles, the stored device
 /// switches, the hover script, the keyboard and (on the Mac) the menu.
 #[component]
 pub fn Chrome() -> Element {
     let ui = use_context::<Ui>();
-    // The device switches reach nav.css and hover.js as data-* on <html>.
+    // The device switches reach nav.css and hover.js as data-* on <html>,
+    // and the saved pane width as --desk-split (0: each item's default).
     use_effect(move || {
         let p = *ui.prefs.read();
         let on_off = |on: bool| if on { "on" } else { "off" };
         document::eval(&format!(
-            "const d = document.documentElement.dataset; d.navStyle = {:?}; d.penHover = {:?}; d.mouseHover = {:?};",
+            "const r = document.documentElement, d = r.dataset; d.navStyle = {:?}; d.penHover = {:?}; d.mouseHover = {:?}; d.deskFocus = {:?}; {}",
             p.nav_style.as_str(),
             on_off(p.pen_hover),
             on_off(p.mouse_hover),
+            on_off(p.desk_focus),
+            if p.desk_split == 0 {
+                "r.style.removeProperty('--desk-split');".to_string()
+            } else {
+                format!("r.style.setProperty('--desk-split', '{}%');", p.desk_split)
+            },
         ));
+    });
+    // The pane divider's drag and keys (resize.js) report the width they
+    // settle on; it is kept per device.
+    use_future(move || async move {
+        let mut script = document::eval(RESIZE_JS);
+        while let Ok(msg) = script.recv::<String>().await {
+            if let Some(width) = split_width(&msg) {
+                ui.update_prefs(|p| p.desk_split = width);
+            }
+        }
     });
     // A content pack switched in while open restyles the nav and desk too.
     let _ = crate::content::REV.read();
@@ -59,6 +84,10 @@ pub fn Chrome() -> Element {
 ///
 /// `wide_side` gives the secondary pane the wide column, for long answers.
 /// `footer` (the grade row) sits under both panes at full width.
+///
+/// Where the two panes sit side by side, a divider between them resizes
+/// them (drag, arrows, Home/End; a double click restores the default). The
+/// width is kept per device ([`crate::prefs::DevicePrefs::desk_split`]).
 #[component]
 pub fn Panes(
     primary: Element,
@@ -66,12 +95,29 @@ pub fn Panes(
     #[props(default)] wide_side: bool,
     footer: Option<Element>,
 ) -> Element {
+    let default = if wide_side { 40 } else { 60 };
+    let saved = try_use_context::<Ui>().map_or(0, |ui| ui.prefs.read().desk_split);
+    let width = if saved == 0 { default } else { saved };
     rsx! {
         // The panes split by their own width, not the window's (UX #580):
         // at 840 the side rail left each pane ~130–260px.
         div { class: "desk-panes",
             div { class: "desk-split", "data-wide": if wide_side { "side" } else { "main" },
                 div { class: "desk-main", {primary} }
+                div {
+                    class: "desk-resize",
+                    role: "separator",
+                    tabindex: "0",
+                    aria_orientation: "vertical",
+                    aria_valuemin: "35",
+                    aria_valuemax: "70",
+                    aria_valuenow: "{width}",
+                    aria_valuetext: "{width}%",
+                    aria_label: tx::SPLIT_HANDLE,
+                    title: tx::SPLIT_HELP,
+                    "data-default": "{default}",
+                    span { class: "desk-resize-grip", aria_hidden: "true" }
+                }
                 match secondary {
                     Some(side) => rsx! {
                         aside { class: "desk-side", aria_label: tx::SIDE_LABEL, {side} }
@@ -86,6 +132,31 @@ pub fn Panes(
         }
         if let Some(f) = footer {
             div { class: "desk-footer", {f} }
+        }
+    }
+}
+
+/// Focus mode for the Mac and the tablet: one press hides the sidebar (and
+/// a lesson's side column) while a lesson or a study card is open, so the
+/// task gets the whole window. Kept per device; F or
+/// the button again brings everything back. Phones already give a task the
+/// whole screen, so the button shows from 600dp only (desk.css). Idea from
+/// batna-app main: crates/app/src/desk/mod.rs (#741).
+#[component]
+pub fn FocusToggle() -> Element {
+    let ui = use_context::<Ui>();
+    let on = ui.prefs.read().desk_focus;
+    let label = if on { tx::FOCUS_LEAVE } else { tx::FOCUS_ENTER };
+    rsx! {
+        button {
+            r#type: "button",
+            class: "desk-focus",
+            aria_pressed: if on { "true" } else { "false" },
+            "aria-keyshortcuts": "F",
+            aria_label: label,
+            title: "{label} (F)",
+            onclick: move |_| ui.update_prefs(|p| p.desk_focus = !p.desk_focus),
+            {if on { crate::icons::focus_leave() } else { crate::icons::focus_enter() }}
         }
     }
 }
@@ -175,5 +246,27 @@ fn Toggle(label: &'static str, note: &'static str, on: bool, onchange: EventHand
                 onchange: move |e| onchange.call(e.checked()),
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn the_divider_saves_only_widths_it_allows() {
+        assert_eq!(split_width("split:35"), Some(35));
+        assert_eq!(split_width("split:70"), Some(70));
+        assert_eq!(split_width("split:0"), Some(0));
+        for bad in ["split:34", "split:71", "split:x", "width:50", ""] {
+            assert_eq!(split_width(bad), None, "{bad}");
+        }
+        for needed in
+            ["setPointerCapture", "pointercancel", "dblclick", "ArrowLeft", "Home", "rtl", "split:0"]
+        {
+            assert!(RESIZE_JS.contains(needed), "resize.js needs {needed}");
+        }
+        let css = DESK_CSS.text();
+        assert!(css.contains("var(--desk-split, 60%)") && css.contains("data-desk-focus=\"on\""));
     }
 }

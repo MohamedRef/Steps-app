@@ -75,6 +75,16 @@ pub fn references() -> Element {
     stroke(OPEN_BOOK)
 }
 
+/// Focus mode on: four corners pulled out (the screen widens).
+pub fn focus_enter() -> Element {
+    stroke("M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5")
+}
+
+/// Focus mode off: four corners pulled in (back to the sidebar).
+pub fn focus_leave() -> Element {
+    stroke("M9 4v5H4M20 9h-5V4M15 20v-5h5M4 15h5v5")
+}
+
 /// Go to a page: a page with an arrow into it, so it doesn't look like
 /// References' book beside it (UX #303).
 pub fn go_page() -> Element {

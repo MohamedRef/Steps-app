@@ -241,6 +241,15 @@ pub fn ToolButtons() -> Element {
     let on = open_tool(*ui.screen.read());
     rsx! {
         div { class: "nav-tools", role: "group", aria_label: i18n::nav::MORE_TOOLS,
+            // Quick search (Ctrl/⌘ + K), for the tablet without a keyboard too.
+            button {
+                class: "nav-item nav-tool nav-quick",
+                aria_label: i18n::keys::QS_TITLE,
+                title: "{i18n::keys::QS_TITLE} (⌘K)",
+                onclick: move |_| crate::shortcuts::open_palette(true),
+                span { class: "glyph", aria_hidden: "true", {icons::search()} }
+                span { class: "label", {i18n::keys::QS_TITLE} }
+            }
             for tool in TOOLS {
                 button {
                     key: "{tool.label}",

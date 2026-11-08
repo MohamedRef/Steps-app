@@ -170,6 +170,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     onclick: move |_| set_view(if pages { View::Steps } else { View::Pages }),
                     {if pages { crate::icons::steps() } else { crate::icons::book() }}
                 }
+                crate::desk::FocusToggle {}
             }
             // Name the lesson independently of the exercise step below.
             header { class: "ls-context",

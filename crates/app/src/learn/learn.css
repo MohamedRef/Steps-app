@@ -265,6 +265,24 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   }
 }
 
+/* Focus mode (desk.css): one centred reading column, the lesson's name a
+   quiet line over the step, Back and Continue right under it. */
+@media (min-width: 600px) {
+  :root[data-desk-focus="on"] .ls-player[data-view="steps"] {
+    display: flex;
+    max-inline-size: 48rem;
+  }
+  :root[data-desk-focus="on"] .ls-player[data-view="steps"] > .ls-context {
+    position: static;
+    padding: 0;
+    background: none;
+    border: 0;
+  }
+  :root[data-desk-focus="on"] .ls-player[data-view="steps"] > .ls-context .ls-context-title { font-size: var(--fs-md); color: var(--muted); }
+  :root[data-desk-focus="on"] .ls-player[data-view="steps"] > .qb-strip { display: none; }
+  :root[data-desk-focus="on"] .ls-player > .ls-nav { margin-block-start: 0; }
+}
+
 /* Focus: a lesson takes the whole phone screen. The app bar and the tab
    bar step aside (× closes the lesson); wider windows keep their rail. */
 .app:has(.ls-player) > .topbar { display: none; }
