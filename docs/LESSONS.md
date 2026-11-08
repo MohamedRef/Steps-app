@@ -166,6 +166,16 @@ a line in `ATTRIBUTION.md`:
 The app shows the credit under the caption. The pack build embeds the file,
 so nothing is fetched at runtime.
 
+## Text by importance
+
+How colour and weight rank lesson text (2026-11-08, from Batna #767, with Steps' own colours). Change it only with evidence.
+
+| Choice | Evidence |
+|---|---|
+| `==key==` is a pill in the theme's opposite hue (`--key`/`--key-ink` in `crates/core/src/theme.rs`: coral on Paper, Night and True black, rose on Scrubs, sky on Sepia, mint on Indigo, olive on Night shift, yellow on High contrast, apricot on the Study pair). Tests keep it AA-readable and clearly apart from the card, page and accent container. | Signaling principle: cues on the few relevant words improve learning (Mayer; Cambridge Handbook of Multimedia Learning ch. 11). Hence at most 3 a step. |
+| Step heading, question and `**terms**` in full text colour and bold; body text a notch softer (84% text toward the card); meta muted; the lesson name above the card muted and smaller | One focal point: the eye lands on the step, then on its terms. |
+| Study theme: sage-grey paper, slate text; Study dim: soft slate page, misty off-white text; both at moderate contrast (7–15:1, tested) | Dark text on a light page reads best in a lit room (Piepenbrock et al., Ergonomics 2013, 2014); a dark page tires less in a dark room and is most comfortable at moderate contrast (Xie et al., IEEE Access 2021). |
+
 ## Check before the PR
 
 `cargo run -p steps-tools -- validate` checks schema, ids, pages, quotes,

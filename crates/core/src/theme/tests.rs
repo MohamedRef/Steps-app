@@ -1,6 +1,6 @@
 use super::*;
 
-const ALL: [(&str, &Palette); 8] = [
+const ALL: [(&str, &Palette); 10] = [
     ("paper", &PAPER),
     ("night", &NIGHT),
     ("black", &BLACK),
@@ -9,6 +9,8 @@ const ALL: [(&str, &Palette); 8] = [
     ("sepia", &SEPIA),
     ("indigo", &INDIGO),
     ("contrast", &CONTRAST),
+    ("study", &STUDY),
+    ("study-dim", &STUDY_DIM),
 ];
 
 #[test]
@@ -49,6 +51,7 @@ fn every_theme_meets_wcag_aa_for_text() {
             ("accent on sheet", p.accent, p.sheet),
             ("good on sheet", p.good, p.sheet),
             ("bad on sheet", p.bad, p.sheet),
+            ("key-ink on key", p.key_ink, p.key),
         ];
         for (what, fg, bg) in pairs {
             let c = contrast(fg, bg);
@@ -76,6 +79,40 @@ fn the_info_sheet_stands_out() {
             assert!(luminance(p.sheet) > luminance(p.surface), "{name}: a dark sheet sits above its cards");
         }
     }
+}
+
+#[test]
+fn the_key_term_pill_stands_out() {
+    // A ==key== pill must read as a different colour from the card, the page
+    // and the accent container (selected rows), never one more shade of the
+    // theme (adapted from batna-app main: crates/core/src/theme.rs).
+    let dist = |a: &str, b: &str| {
+        let (a, b) = (rgb(a), rgb(b));
+        let d = |x: u8, y: u8| (f64::from(x) - f64::from(y)).powi(2);
+        (d(a.0, b.0) + d(a.1, b.1) + d(a.2, b.2)).sqrt()
+    };
+    for (name, p) in ALL {
+        for (what, under) in [("card", p.surface), ("page", p.bg), ("accent-soft", p.accent_soft)] {
+            let d = dist(p.key, under);
+            assert!(d >= 48.0, "{name}: key-term pill vs {what} too close ({d:.0})");
+        }
+    }
+}
+
+#[test]
+fn study_themes_are_calm() {
+    // Readable (AA is checked above) but never the harshest pair: no pure
+    // white or black page, card or text, and body text below the 21:1 glare
+    // of black on white.
+    for p in [&STUDY, &STUDY_DIM] {
+        for hex in [p.bg, p.surface, p.text] {
+            assert!(!["#ffffff", "#000000"].contains(&hex), "{hex}");
+        }
+        let c = contrast(p.text, p.surface);
+        assert!((7.0..=15.0).contains(&c), "study text contrast {c:.1}:1");
+    }
+    assert_eq!(Theme::SystemStudy.day_and_night(), (&STUDY, &STUDY_DIM));
+    assert!(Theme::SystemStudy.css().contains("prefers-color-scheme: dark){:root{--bg:#181c1e;"));
 }
 
 #[test]
