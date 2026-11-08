@@ -112,6 +112,7 @@ impl Updater {
             tx,
             job: Mutex::new(()),
             prefer_api: std::sync::atomic::AtomicBool::new(false),
+            api_assets: Mutex::new(None),
         }
     }
 
@@ -261,6 +262,9 @@ impl Updater {
         if self.status().off.is_some() {
             return;
         }
+        // Asset IDs belong to this snapshot of the release; do not reuse
+        // them after a future publisher replaces the release's feed.
+        *self.api_assets.lock().unwrap() = None;
         let keep = match self.status().phase {
             // A finished download for the same offer stays; it's re-checked anyway.
             Phase::Ready(o) | Phase::Installed(o) | Phase::NeedsPermission(o) => Some(o),
@@ -324,10 +328,31 @@ impl Updater {
         if self.feed_override.is_some() {
             return None;
         }
-        let tag = self.installed().channel.release_tag();
-        let release = format!("https://api.github.com/repos/MohamedRef/Steps-app/releases/tags/{tag}");
+        let channel = self.installed().channel;
+        let id = self
+            .api_assets
+            .lock()
+            .unwrap()
+            .as_ref()
+            .filter(|(cached, _)| *cached == channel)
+            .and_then(|(_, assets)| assets.get(name).copied());
+        if let Some(id) = id {
+            return Some(format!("https://api.github.com/repos/MohamedRef/Steps-app/releases/assets/{id}"));
+        }
+        let release = format!(
+            "https://api.github.com/repos/MohamedRef/Steps-app/releases/tags/{}",
+            channel.release_tag()
+        );
         let json = get_limited(&release, MAX_FEED_BYTES * 4, Duration::from_secs(12)).ok()?;
         let id = api_asset_id(&json, name)?;
+        let parsed: GithubRelease = serde_json::from_slice(&json).ok()?;
+        let ids = parsed
+            .assets
+            .into_iter()
+            .filter(|a| a.state == "uploaded")
+            .map(|a| (a.name, a.id))
+            .collect();
+        *self.api_assets.lock().unwrap() = Some((channel, ids));
         Some(format!("https://api.github.com/repos/MohamedRef/Steps-app/releases/assets/{id}"))
     }
 
