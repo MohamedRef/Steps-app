@@ -346,12 +346,8 @@ impl Updater {
         let json = get_limited(&release, MAX_FEED_BYTES * 4, Duration::from_secs(12)).ok()?;
         let id = api_asset_id(&json, name)?;
         let parsed: GithubRelease = serde_json::from_slice(&json).ok()?;
-        let ids = parsed
-            .assets
-            .into_iter()
-            .filter(|a| a.state == "uploaded")
-            .map(|a| (a.name, a.id))
-            .collect();
+        let ids =
+            parsed.assets.into_iter().filter(|a| a.state == "uploaded").map(|a| (a.name, a.id)).collect();
         *self.api_assets.lock().unwrap() = Some((channel, ids));
         Some(format!("https://api.github.com/repos/MohamedRef/Steps-app/releases/assets/{id}"))
     }
