@@ -20,7 +20,7 @@ use crate::look::{Css, css};
 use crate::prefs::NavStyle;
 use crate::settings::{DeviceOnly, Section};
 
-const DESK_CSS: Css = css!("assets/desk.css");
+pub(crate) const DESK_CSS: Css = css!("assets/desk.css");
 const NAV_CSS: Css = css!("assets/nav.css");
 const RESIZE_JS: &str = include_str!("resize.js");
 
