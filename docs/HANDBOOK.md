@@ -127,7 +127,7 @@ On Linux, building the desktop app needs `libwebkit2gtk-4.1-dev libgtk-3-dev lib
 ## 5. Tests and checks
 
 - **`just check`** runs everything CI's per-PR `check` job runs, against `origin/main`: tracked-files check, `cargo fmt --all --check`, `cargo clippy --workspace --all-targets -- -D warnings`, `cargo test --workspace`, the Node and Python tests, `steps-tools validate`, `packs build --check`, `ids check` (ids my records point at must survive) and the What's new gate (`changes/<topic>.yaml`; commit it first). Needs `node` and `python3`. Without `just`, run those lines from the `justfile` by hand.
-- **Screen tests** (`crates/app/src/render_tests/`) open the whole app with the real content, tap through it and read each screen. Each starts from empty data and never touches a real profile or the network.
+- **Screen tests** (`crates/app/src/render_tests/`) open the whole app with the real content, tap through it and read each screen. Each starts from empty data and never touches a real profile or the network. Opening a second `App` in the same test keeps the data, which is how a restart is tested (`render_tests/study.rs`, session restore).
 - **Browser checks:** `crates/app/tests/screens-browser.cjs` (lesson and study, per PR) and `settings-browser.cjs` (nightly). See [SCREENS-BROWSER-QA.md](SCREENS-BROWSER-QA.md) and [SETTINGS-BROWSER-QA.md](SETTINGS-BROWSER-QA.md).
 - **Coverage:** at least 90% of lines, checked nightly. `cargo llvm-cov --workspace --summary-only --ignore-filename-regex '(browser\.rs|browser_fixture\.rs|crates/app/src/platform/)'`.
 - **Later dates:** `scripts/test-later-dates.sh` runs every test binary under `faketime` at +37 hours and +400 days.
@@ -278,6 +278,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 - **Approvals:** I check items against the book in the app and export my verdicts; fixes follow per lecture.
 - **Beta, then stable:** after daily use of the alpha; I decide when.
 - **Exam:** Step 1 around September 2027 (date not fixed yet). Since May 2026 the exam is 14 blocks of 30 minutes, up to 20 questions each.
+- **Study sessions survive leaving and restarts (2026-11-08, ideas from Batna #753, #755, #756):** Today shows "كمّل الجلسة" first while a Study session is open, and returns to the same item without starting another. After every step the queue is saved on this device only (local setting `study.session.v1`, `steps_core::session::SessionCheckpoint`) with a fingerprint of the live review log (`Store::study_review_marker`); at the next start it comes back only when that fingerprint and every saved grade still match the log, otherwise it is dropped, so no answer is ever replayed. Ending a session or finishing it clears the save. Time spent in another app no longer counts as answer time (`study/foreground.rs` + `foreground.js`, tested by `crates/app/tests/study-visibility.test.cjs`). Not yet tried on a real phone after Android kills the app.
 - **Smaller files, fewer merge conflicts:** split the busiest shared files one area per PR, with no behavior change (§3 file layout rule). Done: UI text (`i18n.rs` into `i18n/`, one file per feature); unit tests of every crate in sibling files; `lesson.rs` split into schema, `lesson/markup.rs` and `lesson/check.rs`.
 
 ### Known issues
@@ -285,6 +286,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 - **GitHub schedules don't fire** (2026-11-06). GitHub has never created a `schedule` run for this repo. `daily.yml` starts the platform runs after every CI run instead (#614 closed), and opens an issue if Nightly hasn't run for 36 hours. Check Actions for runs with event `schedule` now and then.
 - A workflow run can stay "in progress" for up to about 30 minutes after it finished. Ignore it (§6).
 - The lock/unlock screen-freeze fix (`vendor/`) is tested on desktop sockets only, not yet on a real phone.
+- Restoring a Study session after Android ends the app is covered by screen tests (a second app over the same data), not yet checked on a real phone.
 - The lowercase clone URL `github.com/mohamedref/steps-app` once served a stale `main`; use `https://github.com/MohamedRef/Steps-app.git`.
 - Nightly coverage, later-date tests and platform builds only alert through issues; no alert issue doesn't prove they ran, so look at the runs before a release.
 

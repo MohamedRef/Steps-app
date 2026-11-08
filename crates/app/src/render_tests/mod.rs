@@ -13,7 +13,7 @@ mod cloud;
 mod crawl;
 mod data;
 mod dom;
-mod kit;
+pub(crate) mod kit;
 mod learn;
 mod lecture;
 mod nav;

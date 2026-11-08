@@ -24,6 +24,7 @@ check base="origin/main":
     cargo test --workspace
     node --test crates/app/tests/system-back.test.cjs
     node --test crates/app/tests/ui-runtime.test.mjs
+    node --test crates/app/tests/study-visibility.test.cjs
     python3 -m unittest discover -s scripts/tests -p 'test_content_impact.py'
     cargo run -q -p steps-tools -- validate
     cargo run -q -p steps-tools -- packs build --check
