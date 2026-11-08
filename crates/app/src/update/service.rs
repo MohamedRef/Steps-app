@@ -643,7 +643,7 @@ impl Updater {
                 }
                 Err(e) => {
                     let _ = fs::remove_file(&part);
-                    if fresh_after_bad {
+                    if fresh_after_bad || show_app_progress.is_none() {
                         return Err(update_failure(e));
                     }
                     fresh_after_bad = true;
@@ -689,6 +689,17 @@ impl Updater {
             req = req.header("Range", format!("bytes={have}-"));
         }
         let mut res = req.call().map_err(|_| Failure::Network)?;
+        // If the server advertises a shorter file than the signed feed,
+        // fail immediately instead of repeatedly downloading a truncated
+        // pack (or accepting GitHub's JSON asset metadata as binary).
+        if matches!(res.status().as_u16(), 200 | 206)
+            && let Some(declared) = res.headers().get("content-length")
+                .and_then(|h| h.to_str().ok())
+                .and_then(|h| h.parse::<u64>().ok())
+            && declared != size - if res.status().as_u16() == 206 { have } else { 0 }
+        {
+            return Err(Failure::Network);
+        }
         let mut file = match res.status().as_u16() {
             206 if have > 0 && range_start(&res) == Some(have) => {
                 fs::OpenOptions::new().append(true).open(part)
