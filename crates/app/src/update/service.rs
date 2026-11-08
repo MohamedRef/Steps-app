@@ -356,7 +356,7 @@ impl Updater {
     /// off, use the public API's binary asset endpoint. Once that route
     /// works, reuse it for the signature and following content/build requests
     /// rather than spending another whole timeout on the blocked CDN.
-    fn fetch_feed_asset<T>(
+    pub(super) fn fetch_feed_asset<T>(
         &self,
         name: &str,
         download: impl Fn(&str) -> Result<T, Failure>,
