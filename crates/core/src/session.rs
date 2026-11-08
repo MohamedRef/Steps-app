@@ -7,6 +7,8 @@
 
 use std::collections::{BTreeMap, HashSet};
 
+use serde::{Deserialize, Serialize};
+
 use crate::content::{Body, Item, Lecture, OutlineEntry, Status};
 use crate::pages::PagesRead;
 use crate::review::Grade;
@@ -54,7 +56,7 @@ pub struct Inputs<'a> {
 }
 
 /// One planned item.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Planned {
     pub item_id: String,
     pub lecture: String,
@@ -174,7 +176,7 @@ fn interleave(mut items: Vec<Planned>) -> Vec<Planned> {
 // A running session
 
 /// How one item went.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Outcome {
     pub item_id: String,
     pub grade: Grade,
@@ -185,7 +187,7 @@ pub struct Outcome {
 
 /// A session in progress. An item graded Again comes back once at the end of
 /// the session, so it is retrieved again while it is still fresh.
-#[derive(Debug, Clone, Default)]
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct Session {
     queue: Vec<Planned>,
     pos: usize,
@@ -196,7 +198,7 @@ pub struct Session {
 }
 
 /// What one grade changed, to take it back exactly.
-#[derive(Debug, Clone, PartialEq, Eq)]
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 struct Step {
     /// The position before the grade (hidden items it skipped included).
     pos: usize,
@@ -300,6 +302,54 @@ impl Session {
             }
         }
         added
+    }
+
+    /// Whether a saved session can be reopened after a restart: every grade
+    /// it holds must still be in the review log as the same Study answer, so
+    /// a corrupt or stale snapshot never replays a grade (adapted from
+    /// batna-app main: crates/core/src/session/running.rs).
+    pub(crate) fn valid_for_restore(
+        &self,
+        reviews: &std::collections::HashMap<String, crate::review::ReviewEvent>,
+        playable: impl Fn(&str) -> bool,
+    ) -> bool {
+        if self.queue.is_empty()
+            || self.pos >= self.queue.len()
+            || self.steps.len() != self.outcomes.len()
+            || self.queue.iter().any(|p| !playable(&p.item_id))
+        {
+            return false;
+        }
+        let mut used_events = HashSet::new();
+        let mut again_retry_ids = HashSet::new();
+        let mut last_pos = None;
+        for (step, outcome) in self.steps.iter().zip(&self.outcomes) {
+            if step.pos >= self.queue.len()
+                || self.queue[step.pos].item_id != outcome.item_id
+                || last_pos.is_some_and(|pos| step.pos <= pos)
+            {
+                return false;
+            }
+            let Some(id) = step.event.as_deref() else { return false };
+            let Some(event) = reviews.get(id) else { return false };
+            if !used_events.insert(id)
+                || event.origin != crate::review::Origin::Study
+                || event.item_id != outcome.item_id
+                || event.grade != outcome.grade
+            {
+                return false;
+            }
+            if let Some(index) = step.retry_at
+                && (index >= self.queue.len()
+                    || self.queue[index].item_id != outcome.item_id
+                    || outcome.grade != Grade::Again
+                    || !again_retry_ids.insert(outcome.item_id.clone()))
+            {
+                return false;
+            }
+            last_pos = Some(step.pos);
+        }
+        last_pos.is_none_or(|pos| self.pos > pos) && self.retried == again_retry_ids
     }
 
     pub fn summary(&self) -> Summary {
@@ -817,6 +867,9 @@ pub fn outline_sections(outline: &[OutlineEntry]) -> Vec<(String, Vec<String>)> 
         })
         .collect()
 }
+
+mod checkpoint;
+pub use checkpoint::*;
 
 #[cfg(test)]
 mod tests;

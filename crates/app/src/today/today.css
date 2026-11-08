@@ -196,3 +196,19 @@ table.plan th { color: var(--muted); font-weight: 600; }
    page's colours instead of the brand fill's. */
 .app:is([data-appearance="side-line"], [data-appearance="mono"]) .td-hero .ring { background: conic-gradient(var(--accent) var(--p), var(--line) 0); }
 .app:is([data-appearance="side-line"], [data-appearance="mono"]) .td-hero .ring-hole { background: var(--bg); color: var(--text); }
+
+/* Continuing the open Study session: one card, set apart from starting a new
+   one beneath it. */
+.td-resume {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  border-color: var(--accent);
+}
+.td-resume-copy { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; }
+.td-resume-action { display: inline-flex; gap: var(--sp-2); align-items: center; justify-content: center; min-block-size: max(var(--target), var(--tap)); }
+@media (max-width: 599.98px) {
+  .td-resume-action { inline-size: 100%; }
+}

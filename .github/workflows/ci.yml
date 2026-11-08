@@ -110,6 +110,8 @@ jobs:
         run: node --test crates/app/tests/system-back.test.cjs
       - name: Production Android Back and Settings keyboard regression tests
         run: node --test crates/app/tests/ui-runtime.test.mjs
+      - name: Study foreground clock regression tests
+        run: node --test crates/app/tests/study-visibility.test.cjs
       - name: Content impact classification tests
         run: python3 -m unittest discover -s scripts/tests -p 'test_content_impact.py' -v
       - name: Explain update impact
