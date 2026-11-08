@@ -11,6 +11,7 @@ fn shown_text_covers_what_the_step_shows_and_svg_words_only() {
         },
         page: Some(3),
         quote: Some("not shown".into()),
+        remind: vec![],
     };
     let t = step.shown_text();
     assert_eq!(t[0], "Wedge pressure");
@@ -173,4 +174,57 @@ page: 3
     assert_eq!(step.page, Some(3));
     let back: Step = serde_yaml_ng::from_str(&serde_yaml_ng::to_string(&step).unwrap()).unwrap();
     assert_eq!(step, back);
+}
+
+#[test]
+fn reminders_parse_item_ids_and_lesson_mnemonics() {
+    assert_eq!(Reminder::parse("cvs.L04.033"), Some(Reminder::Item("cvs.L04.033")));
+    assert_eq!(
+        Reminder::parse("cvs.L04.lesson2:MINT"),
+        Some(Reminder::Mnemonic { lesson: "cvs.L04.lesson2", word: "MINT" })
+    );
+    assert_eq!(
+        Reminder::parse("cvs.L04.lesson2:ABCD OF C"),
+        Some(Reminder::Mnemonic { lesson: "cvs.L04.lesson2", word: "ABCD OF C" })
+    );
+    for bad in ["", "cvs.L04", "cvs.L04.lesson2", "cvs.L04.lesson2:", "cvs.L04.033:X", "cvs L04.033"] {
+        assert_eq!(Reminder::parse(bad), None, "{bad:?}");
+    }
+}
+
+#[test]
+fn remind_lists_parse_stay_unique_and_skip_question_steps() {
+    let explain = |remind: Vec<&str>| Step {
+        body: StepBody::Explain { title: None, text: "Murmurs".into() },
+        page: None,
+        quote: None,
+        remind: remind.into_iter().map(String::from).collect(),
+    };
+    assert!(remind_problems(&explain(vec!["cvs.L04.033", "cvs.L04.lesson2:MINT"])).is_empty());
+    assert_eq!(
+        remind_problems(&explain(vec!["cvs.L04.033", "cvs.L04.033"])),
+        ["remind `cvs.L04.033` is listed twice"]
+    );
+    assert_eq!(
+        remind_problems(&explain(vec!["MINT"])),
+        ["remind `MINT` is neither an item id nor `<lesson id>:<WORD>`"]
+    );
+    let mut question = explain(vec!["cvs.L04.033"]);
+    question.body = StepBody::Order { prompt: "p".into(), steps: vec!["a".into(), "b".into()], why: None };
+    assert_eq!(
+        remind_problems(&question),
+        ["remind goes on an explain, figure, aside, mnemonic or open table step, not a order step"]
+    );
+    let mut table = explain(vec!["cvs.L04.033"]);
+    table.body = StepBody::Table {
+        title: "t".into(),
+        columns: vec!["a".into()],
+        rows: vec![vec!["x".into()]],
+        hide: vec![],
+    };
+    assert!(remind_problems(&table).is_empty());
+    if let StepBody::Table { hide, .. } = &mut table.body {
+        hide.push([0, 0]);
+    }
+    assert_eq!(remind_problems(&table).len(), 1);
 }

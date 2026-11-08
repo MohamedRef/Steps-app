@@ -69,6 +69,25 @@ The model to copy is `content/lessons/cvs/L01.yaml`.
     core thread to reword a shared meaning). The same entries fill the per-course «قاموس
     الاختصارات» (Lessons screen, More), with the lessons that use each one.
 
+13. **Bring the تحشيشة back** (Mohamed, 2026-11-08). A step that teaches a
+    list which already has a تحشيشة (an enumerate item's `hook`, in this
+    lecture or any other, or a `mnemonic` step of another lesson) lists it in
+    `remind:`, so it shows under the step and, from another lesson, links
+    back to it:
+
+    ```yaml
+    - kind: explain
+      remind: [cvs.L04.002, cvs.L04.lesson1:TTTTT]
+    ```
+
+    Only on explain, figure, aside, mnemonic or open-table steps (a hook
+    under a question gives the answer away). When the same list repeats,
+    remind of the first تحشيشة instead of inventing another; partial
+    overlap still earns a reminder. A mnemonic step doesn't remind of an
+    item whose hook is that same mnemonic (it is already on the screen).
+    `validate` fails on an entry that is not an enumerate with a hook or a
+    lesson's mnemonic word, and on a step that reminds of itself.
+
 ## File shape
 
 ```yaml

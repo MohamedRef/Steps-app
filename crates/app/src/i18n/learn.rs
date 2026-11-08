@@ -170,3 +170,9 @@ pub const LESSON_STARTED: &str = "فيه درس بدأته";
 pub fn resume_at(at: usize, n: usize) -> String {
     format!("هتكمّل من خطوة {at} من {n}")
 }
+
+// Reminders under a step: a تحشيشة this topic already has (docs/CONTENT.md).
+pub const REMIND: &str = "افتكر التحشيشة";
+pub const REMIND_LIST: &str = "افتكرها";
+pub const REMIND_FROM: &str = "من درس";
+pub const REMIND_FROM_HINT: &str = "افتح الدرس اللي التحشيشة دي اتشرحت فيه";

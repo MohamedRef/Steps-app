@@ -10,6 +10,7 @@
 mod browser;
 mod player;
 mod practice;
+mod remind;
 mod steps;
 mod text;
 pub use text::Rich;
