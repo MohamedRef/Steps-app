@@ -214,7 +214,7 @@ If sign-in fails: check `STEPS_GOOGLE_CLIENT_IDS`, run Actions › Deploy Steps 
 
 Full detail: [RELEASE.md](RELEASE.md) and [COMPATIBILITY.md](COMPATIBILITY.md).
 
-**Versions:** `version` in the root `Cargo.toml`. Stages `1.0.0-alpha.N` → `1.0.0-beta.N` → `1.0.0`; I decide when to move stage. The APK `versionCode` comes from the version and never goes down. The build number is the commit count on `main` (`scripts/build-number.sh`). `steps-tools update guard` refuses `-alpha.0` and versions that aren't newer.
+**Versions** (since 2026-11-09, docs/RELEASE.md §1): a release is `YEAR.MONTH.N` (`2026.11.1`), worked out by `scripts/version.sh release` from this month's `v*` tags; nobody bumps `Cargo.toml` (it stays `2026.11.0`; CI writes the real version in with `scripts/version.sh apply`). The channel (alpha, beta, stable) is picked when the Release workflow runs. Build number = commit count on `main`, one counter for previews and releases; Android `versionCode` = `20000000 + build` and may never go down. Settings › About shows `2026.11.1 · بناء 812`. `steps-tools update guard` refuses versions that aren't newer. Before that: `1.0.0-alpha.1` to `1.0.0-alpha.3`.
 
 **Permanent keys. Never make them again:** a new keystore forces uninstalling Steps on every device, and a new update key strands every installed build.
 
@@ -261,7 +261,7 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 - **On `main` since alpha.3, waiting for alpha.4:** the Mac and landscape-tablet layout and safer review keys; resizable study panes, focus mode and quick search (Ctrl/⌘+K); keyboard focus that follows the task; lesson text weighted by importance with a key-term pill per theme; the calm Study themes; my own highlights in lessons; lesson reading settings; mnemonic reminders on repeated lists (`pack::SCHEMA` 3, so it needs the new app build); Study sessions that survive leaving the app and restarts, with a constant-time check of the review log.
 
 ### Roadmap
-- **1.0.0-alpha.4:** release what is on `main` (above), plus whatever daily use turns up.
+- **Next release, `2026.11.1`** (calendar numbering from now on, §10): release what is on `main` (above), plus whatever daily use turns up.
 - **More sources:** Pathoma, Sketchy, UWorld notes and my own materials, merged into the First Aid lectures and topics as they arrive ([SOURCES.md](SOURCES.md)). With the first one, `steps-tools refs` must learn to read its text.
 - **Approvals:** I check items against the book in the app and export my verdicts; fixes follow per lecture.
 - **Smaller files:** keep splitting the busiest shared files, one area per PR, with no change in behaviour. Done so far: UI text, unit tests, the lesson module.
@@ -269,6 +269,7 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 - Features that copy a commercial question bank stay low priority: I already have the banks.
 - **Exam:** Step 1 around September 2027 (date not fixed). Since May 2026 it is 14 blocks of 30 minutes, up to 20 questions each.
 - **Phone touch and quick search (2026-11-09, from Batna #746-#751 and #758):** every phone control in the shell, lists, bank and tables is a full 48dp target; the Study progress row splits into a meter row and an Undo/End row under 600dp; the top bar has a search button (`shortcuts::SearchButton`) for «دوّر بسرعة», which gives focus back to it when closed. `crates/app/tests/screens-browser.cjs` checks these at 320 and 384px, a 520px-tall (keyboard-up) Study screen, and `mobile-touch-browser.cjs` the list, bank and table controls. The nightly Cloud end-to-end test builds the Worker with `--no-opt` in a throwaway `wrangler.e2e.toml` and uses a cached `wasm-bindgen` CLI built at the Cargo.lock version, so GitHub release-download 504s no longer stop it (Batna #760, #762).
+- **Calendar versions (2026-11-09, from Batna #768, Mohamed's pick):** the next release is `2026.11.1`, tagged `v2026.11.1`, with `Steps-<version>-android.apk`, `-mac.zip` and `SHA256SUMS.txt`; installed alpha.3 builds take it as an ordinary update (higher version and versionCode, same keys and feeds).
 
 ### Known issues
 - **#646 Nightly checks failed on main** (2026-11-08, on 71e5538). Open; it closes itself when Nightly passes again.

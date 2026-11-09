@@ -68,6 +68,7 @@ mod today;
 mod ui;
 mod update;
 mod verify;
+mod version;
 mod weak;
 
 use crate::look::{Css, css};

@@ -1,13 +1,14 @@
 name: Release
 
-# Builds a real Steps release (alpha, beta or stable, from `version` in
-# Cargo.toml) and publishes it (docs/RELEASE.md §4–5): the signed release
-# APK, the signed Steps.app and the content pack, on
+# Builds a real Steps release and publishes it (docs/RELEASE.md §1, §4–5):
+# the signed release APK, the signed Steps.app and the content pack. The
+# version is the calendar's (YEAR.MONTH.N, scripts/version.sh release) and
+# the channel is picked here (alpha unless told), on
 #
-# - the channel feed(s) the version belongs to (`steps-alpha`, …): the
-#   signed update.json the installed apps read, files first, manifest last;
-# - a release of its own (`steps-v<version>`) with the APK and the zipped
-#   Steps.app for installing by hand.
+# - the channel feed(s) the release reaches (`steps-alpha`, …): the signed
+#   update.json the installed apps read, files first, manifest last;
+# - a release of its own (`v<version>`) with Steps-<version>-android.apk,
+#   Steps-<version>-mac.zip and SHA256SUMS.txt for installing by hand.
 #
 # Dry run by default: it builds, signs and checks the APK and Steps.app and
 # publishes nothing; untick "Dry run" for the real release (#341).
@@ -21,6 +22,11 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
+      channel:
+        description: "Channel: alpha (default), beta (also reaches alpha) or stable (reaches everyone)"
+        type: choice
+        options: [alpha, beta, stable]
+        default: alpha
       notes_en:
         description: "Short notes (English, optional: what's new comes from changes/)"
         required: false
@@ -71,7 +77,8 @@ jobs:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
-          # The build number is main's commit count (scripts/build-number.sh).
+          # The build number is main's commit count and the version counts
+          # this month's release tags (scripts/version.sh).
           fetch-depth: 0
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
@@ -82,9 +89,10 @@ jobs:
         id: v
         env:
           DRY_RUN: ${{ inputs.dry_run }}
+          CHANNEL: ${{ inputs.channel }}
         run: |
-          v="$(sed -n 's/^version = "\(.*\)"/\1/p' Cargo.toml | head -1)"
-          channels="$(cargo run -q -p steps-tools -- update channels --version "$v" | tr '\n' ' ')"
+          read -r v build < <(scripts/version.sh release)
+          channels="$(cargo run -q -p steps-tools -- update channels --version "$v" --channel "${CHANNEL:-alpha}" | tr '\n' ' ')"
           [ -n "${channels// }" ] || { echo "::error::$v belongs on no channel"; exit 1; }
           # Refuse the -alpha.0 placeholder and a version that isn't newer
           # than what a channel's feed already carries (a re-run included).
@@ -104,7 +112,6 @@ jobs:
               exit 1
             fi
           fi
-          build="$(scripts/build-number.sh)"
           echo "version=$v" >> "$GITHUB_OUTPUT"
           echo "channels=$channels" >> "$GITHUB_OUTPUT"
           echo "build=$build" >> "$GITHUB_OUTPUT"
@@ -163,6 +170,10 @@ jobs:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
+      # The release's version in the build (versionName, the app's label);
+      # never committed.
+      - name: Release version into Cargo.toml
+        run: scripts/version.sh apply "${{ needs.prepare.outputs.version }}"
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: aarch64-linux-android
@@ -242,6 +253,8 @@ jobs:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
+      - name: Release version into Cargo.toml
+        run: scripts/version.sh apply "${{ needs.prepare.outputs.version }}"
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: llvm-tools
@@ -360,20 +373,23 @@ jobs:
           GH_REPO: ${{ github.repository }}
           V: ${{ needs.prepare.outputs.version }}
           CHANNELS: ${{ needs.prepare.outputs.channels }}
+          CHANNEL: ${{ inputs.channel || 'alpha' }}
+          NOTES_EN: ${{ inputs.notes_en }}
+          NOTES_AR_EG: ${{ inputs.notes_ar_eg }}
         run: |
-          # The release people install from by hand.
-          tag="steps-v$V"
+          # The release people install from by hand: v<version>, with
+          # uniform file names, checksums and what's new from changes/.
+          tag="v$V"
           mkdir -p dist/human
-          cp dist/in/steps-release-apk/steps.apk "dist/human/steps-$V.apk"
+          cp dist/in/steps-release-apk/steps.apk "dist/human/Steps-$V-android.apk"
           cp dist/in/steps-release-mac/Steps.app.zip "dist/human/Steps-$V-mac.zip"
+          (cd dist/human && sha256sum Steps-* > SHA256SUMS.txt)
+          first="${CHANNELS%% *}"
+          scripts/release-notes.sh "dist/update/$first/update.json" "$CHANNEL" "$NOTES_EN" "$NOTES_AR_EG" > dist/notes.md
           if ! gh release view "$tag" >/dev/null 2>&1; then
-            gh release create "$tag" --prerelease --target "$GITHUB_SHA" --title "Steps $V" --notes "$(cat <<NOTES
-          Steps $V, built by the Release workflow (run ${{ github.run_number }}, ${GITHUB_SHA::7}).
-
-          - Android (S24 Ultra, Tab S11): install steps-$V.apk. It is signed with the same permanent release key as the preview builds, so it installs over any Steps already there and keeps your data. From now on it updates itself from the $CHANNELS feed; Settings › Updates switches to preview, beta or stable without reinstalling.
-          - Mac: unzip Steps-$V-mac.zip, move Steps.app to Applications, then once: \`xattr -dr com.apple.quarantine /Applications/Steps.app\` (it is self-signed). Later versions install themselves.
-          NOTES
-          )"
+            flag=--prerelease
+            [ "$CHANNEL" = stable ] && flag=--latest
+            gh release create "$tag" "$flag" --target "$GITHUB_SHA" --title "Steps $V" --notes-file dist/notes.md
           fi
           gh release upload "$tag" dist/human/* --clobber
           # The feeds: files first, the signed manifest last.

@@ -244,9 +244,8 @@ fn SectionList(current: Section) -> Element {
                 .as_ref()
                 .and_then(crate::update::view::summary)
                 .unwrap_or_else(|| s.summary().to_string()),
-            // The version isolated left to right (LRI … PDI): bare in the
-            // Arabic line it read "alpha.0-1.0.0" (UX #295).
-            Section::About => format!("{} \u{2066}{}\u{2069}", tx::VERSION, env!("CARGO_PKG_VERSION")),
+            // Each Latin piece isolated left to right (LRI … PDI), UX #295.
+            Section::About => format!("{} {}", tx::VERSION, crate::version::line()),
             _ => s.summary().to_string(),
         }
     };

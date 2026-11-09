@@ -39,7 +39,10 @@ pub fn initial() -> Option<Menu> {
 pub fn menu_bar() -> Menu {
     let about = AboutMetadata {
         name: Some("Steps".into()),
-        version: Some(env!("CARGO_PKG_VERSION").into()),
+        version: Some(match crate::version::build() {
+            0 => crate::version::VERSION.to_owned(),
+            b => format!("{} (build {b})", crate::version::VERSION),
+        }),
         comments: Some("USMLE Step 1 study, one short session at a time.".into()),
         ..Default::default()
     };

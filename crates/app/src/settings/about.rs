@@ -18,7 +18,7 @@ pub fn AboutSection() -> Element {
         Card { class: "about",
             p { class: "about-name", {app::NAME} }
             p { class: "muted", {app::TAGLINE} }
-            p { {tx::VERSION} " " bdi { dir: "ltr", {env!("CARGO_PKG_VERSION")} } }
+            p { {tx::VERSION} " " {crate::version::line()} }
         }
         Card {
             h2 { {tx::CONTENT} }

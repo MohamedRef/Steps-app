@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Publishes the current release builds as an over-the-air update
-# (docs/RELEASE.md §5): one signed feed per channel the version belongs to
-# (an alpha → steps-alpha; a beta → alpha + beta; a release → all three),
+# (docs/RELEASE.md §5): one signed feed per channel the release reaches
+# (alpha unless `steps-tools update channels --channel` says otherwise),
 # each on its own GitHub release. The content pack rides along, so lectures
 # reach devices whose app updates are off.
 #

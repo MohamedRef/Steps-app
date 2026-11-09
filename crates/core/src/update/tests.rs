@@ -25,7 +25,7 @@ fn manifest(channel: Channel, version: &str, build: u64) -> UpdateManifest {
         notes: UpdateNotes::default(),
         assets: vec![
             UpdateAsset {
-                version_code: Some(v(version).version_code()),
+                version_code: Some(version_code(build)),
                 ..asset(UpdatePlatform::AndroidArm64, &format!("steps-{version}.apk"), &"ab".repeat(32))
             },
             asset(UpdatePlatform::Content, &format!("steps-content-{version}.pack"), &"cd".repeat(32)),
@@ -91,23 +91,33 @@ fn versions_order_alpha_beta_rc_release() {
 }
 
 #[test]
-fn version_codes_match_the_release_script() {
-    // The examples in scripts/android-release-apk.sh.
-    assert_eq!(v("1.2.3-alpha.4").version_code(), 10_203_104);
-    assert_eq!(v("1.0.0-alpha.1").version_code(), 10_000_101);
-    assert_eq!(v("0.1.0").version_code(), 100_999);
-    // The workspace sits at 0.1.1-alpha.0 until the first alpha: above
-    // the early previews (0.1.0, stage 999) so they keep updating, and
-    // below every real alpha.
-    assert!(v("0.1.0").version_code() < v("0.1.1-alpha.0").version_code());
-    assert!(v("0.1.0") < v("0.1.1-alpha.0"));
-    assert!(v("0.1.1-alpha.0").version_code() < v("0.1.1-alpha.1").version_code());
-    assert!(v("0.1.1-alpha.0").version_code() < v("1.0.0-alpha.1").version_code());
-    assert!(v("0.1.1-alpha.0") < v("0.1.1-alpha.1"));
-    let ladder = ["1.0.0-alpha.1", "1.0.0-alpha.2", "1.0.0-beta.1", "1.0.0-rc.1", "1.0.0", "1.0.1-alpha.1"];
-    for pair in ladder.windows(2) {
-        assert!(v(pair[0]).version_code() < v(pair[1]).version_code());
-    }
+fn version_codes_follow_the_build() {
+    // The recipe in scripts/android-release-apk.sh.
+    assert_eq!(version_code(564), 20_000_564);
+    // Above every code the old recipe made (1.0.0-alpha.3 was 10 000 103),
+    // so the first build of the new scheme installs over it.
+    assert!(version_code(1) > 10_000_103);
+    assert!(version_code(2_000_000_000 - VERSION_CODE_BASE) <= 2_100_000_000, "Android's ceiling");
+}
+
+#[test]
+fn calendar_versions_sort_above_the_old_alphas() {
+    assert!(v("2026.11.1") > v("1.0.0-alpha.3"));
+    assert!(v("2026.11.0") > v("1.0.0-alpha.3"));
+    assert!(v("2026.11.1") > v("1.0.0"));
+    assert!(v("2026.11.1") < v("2026.11.2"));
+    assert!(v("2026.11.9") < v("2026.12.1"));
+    assert!(v("2026.12.1") < v("2027.1.1"));
+    assert_eq!(v("2026.11.1").to_string(), "2026.11.1");
+    assert_eq!(v("2026.11.1").channels(), Channel::RELEASE);
+}
+
+#[test]
+fn channels_reach_the_ones_below() {
+    assert_eq!(Channel::Alpha.reach(), [Channel::Alpha]);
+    assert_eq!(Channel::Beta.reach(), [Channel::Alpha, Channel::Beta]);
+    assert_eq!(Channel::Stable.reach(), Channel::RELEASE);
+    assert_eq!(Channel::Preview.reach(), [Channel::Preview]);
 }
 
 #[test]
