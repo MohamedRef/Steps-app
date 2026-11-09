@@ -2,6 +2,8 @@
 //! verdicts, and the settings, kept in memory over the store. It implements
 //! [`StudyStore`] for the study player and the other study screens.
 
+#[cfg(test)]
+mod replay_perf;
 mod study;
 
 use std::cell::RefCell;
