@@ -673,7 +673,8 @@ mod hierarchy_tests {
     #[test]
     fn wide_windows_put_the_plan_first_and_let_the_list_scroll() {
         let css = include_str!("today.css");
-        let wide = css.split("@media (min-width: 1100px) and (min-height: 740px)").nth(1).expect("wide Today");
+        let wide =
+            css.split("@media (min-width: 1100px) and (min-height: 740px)").nth(1).expect("wide Today");
         for rule in [
             ".today-cols.tab-cols[data-wide=\"aside\"]",
             "grid-template-columns: minmax(0, 3fr) minmax(18rem, 2fr)",
