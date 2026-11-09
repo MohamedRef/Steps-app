@@ -14,9 +14,13 @@ mod backend;
 #[cfg(test)]
 mod browser;
 mod card;
+pub(crate) mod checkpoint;
+pub(crate) use checkpoint::use_restore;
 pub(crate) mod cloze;
 mod enumerate;
 mod essay;
+mod foreground;
+pub(crate) use foreground::use_foreground_reset;
 pub mod grade;
 mod item;
 mod planning;
@@ -120,6 +124,20 @@ fn due_elsewhere(store: &StudyStoreHandle) -> usize {
 
 static SESSION: GlobalSignal<Session> = Signal::global(Session::default);
 static PHASE: GlobalSignal<Phase> = Signal::global(|| Phase::Setup);
+
+/// The running session's place (1-based) and length, while one is open and
+/// unfinished, so Today can offer to continue it. Read reactively: a session
+/// that ends stops offering. Continuing never queues a new START.
+/// Adapted from batna-app main: crates/app/src/study/mod.rs.
+pub fn running_progress() -> Option<(usize, usize)> {
+    if *PHASE.read() != Phase::Running {
+        return None;
+    }
+    let session = SESSION.read();
+    let (pos, total) = session.progress();
+    (total > 0 && !session.is_done() && session.current().is_some()).then_some((pos + 1, total))
+}
+
 static STARTED: GlobalSignal<Instant> = Signal::global(Instant::now);
 /// What the last Undo said: taken back (the item is reopened) or not saved,
 /// or that the last rating wasn't saved.
@@ -145,6 +163,15 @@ fn tagged_event(item_id: String, grade: Grade, at_ms: i64, took_ms: u32, tags: T
         confidence: tags.confidence,
         reason: tags.reason.filter(|_| grade == Grade::Again),
         ..ReviewEvent::new(item_id, grade, Origin::Study, at_ms, took_ms)
+    }
+}
+
+/// A new session is saved for a restart; an empty one clears the old save.
+fn checkpoint_started(session: &Session, empty: bool) {
+    if empty {
+        checkpoint::clear();
+    } else {
+        checkpoint::save_running(session);
     }
 }
 
@@ -217,6 +244,7 @@ pub fn Study() -> Element {
             session.set(Session::new(planned));
             started.set(Instant::now());
             phase.set(if empty { Phase::Summary } else { Phase::Running });
+            checkpoint_started(&session.peek(), empty);
         }
     };
 
@@ -232,6 +260,7 @@ pub fn Study() -> Element {
                 session.set(Session::new(planned));
                 started.set(Instant::now());
                 phase.set(if empty { Phase::Summary } else { Phase::Running });
+                checkpoint_started(&session.peek(), empty);
                 return;
             }
             let picked: Vec<&Lecture> = ready_lectures()
@@ -291,6 +320,7 @@ pub fn Study() -> Element {
             undo_note.set(Some(tx::UNDONE));
             started.set(Instant::now());
             phase.set(Phase::Running);
+            checkpoint::save_running(&session.peek());
         }
     };
 
@@ -335,7 +365,10 @@ pub fn Study() -> Element {
             match current.and_then(|p| find(&p.item_id).map(|(l, i)| (p, l, i))) {
                 // Only when content changed under a running session; "end" still works.
                 None => rsx! {
-                    button { class: "btn btn-primary btn-lg", onclick: move |_| phase.set(Phase::Summary), {tx::END} }
+                    button { class: "btn btn-primary btn-lg", onclick: move |_| {
+                        phase.set(Phase::Summary);
+                        checkpoint::clear();
+                    }, {tx::END} }
                 },
                 Some((p, lecture, item)) => {
                     let item = store.0.borrow().effective(item);
@@ -368,7 +401,9 @@ pub fn Study() -> Element {
                         started.set(Instant::now());
                         if session.read().is_done() {
                             phase.set(Phase::Summary);
+                            checkpoint::clear();
                         } else {
+                            checkpoint::save_running(&session.peek());
                             crate::sounds::play(if grade == Grade::Again {
                                 crate::sounds::Cue::Wrong
                             } else {
@@ -385,6 +420,7 @@ pub fn Study() -> Element {
                                 div { class: "progress-fill", style: "inline-size: {pos * 100 / len.max(1)}%" }
                             }
                             span { class: "muted small num-ltr st-count", "{pos + 1} / {len}" }
+                            crate::desk::FocusToggle {}
                             if can_undo {
                                 button {
                                     class: "btn-link st-undo",
@@ -402,7 +438,10 @@ pub fn Study() -> Element {
                                 class: "btn-link",
                                 "aria-keyshortcuts": "Escape",
                                 "data-back": "true",
-                                onclick: move |_| phase.set(Phase::Summary),
+                                onclick: move |_| {
+                                    phase.set(Phase::Summary);
+                                    checkpoint::clear();
+                                },
                                 {tx::END}
                             }
                         }
@@ -421,6 +460,7 @@ pub fn Study() -> Element {
                                     move |ids: Vec<String>| {
                                         let more = plan_items(&store_for_add, &ids);
                                         session.write().append(more);
+                                        checkpoint::save_running(&session.peek());
                                         pending.set(None);
                                     }
                                 },
@@ -473,7 +513,10 @@ pub fn Study() -> Element {
                         move |_| undo()
                     },
                     undo_failed: undo_note() == Some(tx::UNDO_FAILED),
-                    on_again: move |_| phase.set(Phase::Setup),
+                    on_again: move |_| {
+                        phase.set(Phase::Setup);
+                        checkpoint::clear();
+                    },
                 }
             }
         }

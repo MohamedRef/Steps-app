@@ -170,3 +170,43 @@ pub const LESSON_STARTED: &str = "فيه درس بدأته";
 pub fn resume_at(at: usize, n: usize) -> String {
     format!("هتكمّل من خطوة {at} من {n}")
 }
+
+// Lesson reading settings (learn/reading.rs, Settings › Look).
+pub const READING: &str = "شكل القراية";
+pub const READING_OPEN: &str = "شكل القراية: حجم الخط والمسافات والعرض";
+pub const READ_SIZE: &str = "حجم خط الدرس";
+pub const READ_SIZE_SMALL: &str = "صغير";
+pub const READ_SIZE_NORMAL: &str = "عادي";
+pub const READ_SIZE_LARGE: &str = "كبير";
+pub const READ_SIZE_LARGER: &str = "أكبر";
+pub const READ_SPACING: &str = "المسافة بين السطور";
+pub const READ_SPACING_SNUG: &str = "ضيقة";
+pub const READ_SPACING_NORMAL: &str = "عادية";
+pub const READ_SPACING_AIRY: &str = "واسعة";
+pub const READ_WIDTH: &str = "عرض السطر";
+pub const READ_WIDTH_HINT: &str = "على التابلت والماك";
+pub const READ_WIDTH_NARROW: &str = "ضيق";
+pub const READ_WIDTH_BOOK: &str = "زي الكتاب";
+pub const READ_WIDTH_WIDE: &str = "عريض";
+/// The preview line: Arabic with two English terms, like a lesson.
+pub const READ_SAMPLE: [&str; 5] =
+    ["الـ ", "ACE inhibitors", " بتقلل الـ ", "angiotensin II", "، فالضغط بينزل."];
+pub const READ_DONE: &str = "تمام";
+
+// Your own highlights in a lesson (learn/highlight.rs).
+pub const HL_BAR: &str = "هايلايت";
+pub const HL_YELLOW: &str = "أصفر";
+pub const HL_GREEN: &str = "أخضر";
+pub const HL_BLUE: &str = "أزرق";
+pub const HL_PINK: &str = "بمبي";
+pub const HL_ORANGE: &str = "برتقاني";
+pub const HL_FILL: &str = "هايلايت";
+pub const HL_UNDERLINE: &str = "خط تحت";
+pub const HL_PILL: &str = "كبسولة";
+pub const HL_RECT: &str = "مستطيل";
+pub const HL_REMOVE: &str = "امسح";
+// Reminders under a step: a تحشيشة this topic already has (docs/CONTENT.md).
+pub const REMIND: &str = "افتكر التحشيشة";
+pub const REMIND_LIST: &str = "افتكرها";
+pub const REMIND_FROM: &str = "من درس";
+pub const REMIND_FROM_HINT: &str = "افتح الدرس اللي التحشيشة دي اتشرحت فيه";

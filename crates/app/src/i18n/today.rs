@@ -137,3 +137,7 @@ pub const CHECKED_ROW: &str = "مراجعة صحة المحتوى";
 pub fn checked_sub(n: usize) -> String {
     format!("راجعت صحة {} لحد دلوقتي", super::count::count(n, &super::count::ITEM))
 }
+
+// A Study session still open (this run, or restored after a restart).
+pub const RESUME_TITLE: &str = "عندك جلسة مذاكرة لسه مفتوحة";
+pub const RESUME_SESSION: &str = "كمّل الجلسة";

@@ -38,6 +38,12 @@ pub const THEME_INDIGO: &str = "نيلي";
 pub const THEME_INDIGO_SUB: &str = "غامق، أزرق بنفسجي هادي";
 pub const THEME_CONTRAST: &str = "تباين عالي";
 pub const THEME_CONTRAST_SUB: &str = "أسود على أبيض وحدود أوضح، للنور القوي أو العين التعبانة";
+pub const THEME_STUDY: &str = "مذاكرة";
+pub const THEME_STUDY_SUB: &str = "فاتح هادي، ورق رمادي مخضر وخط مش أسود ساطع، للقراية الطويلة في النور";
+pub const THEME_STUDY_DIM: &str = "مذاكرة خافت";
+pub const THEME_STUDY_DIM_SUB: &str = "رمادي أردوازي وخط مش أبيض ساطع، للمذاكرة في أوضة ضلمة";
+pub const THEME_SYSTEM_STUDY: &str = "مذاكرة زي الجهاز";
+pub const THEME_SYSTEM_STUDY_SUB: &str = "مذاكرة بالنهار، ومذاكرة خافت لما الجهاز يبقى غامق";
 
 pub const APPEARANCE: &str = "نمط الواجهة";
 pub const APPEARANCE_STEPPED: &str = "درجات";

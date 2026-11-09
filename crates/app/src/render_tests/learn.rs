@@ -1038,3 +1038,39 @@ fn explain_links_only_show_where_a_lesson_teaches_the_item() {
     let want = app.run(|| crate::learn::lesson_for_item(&item).map(|l| l.id.clone()));
     assert_eq!(app.run(|| crate::learn::OPEN.peek().clone()), want);
 }
+
+#[test]
+fn reading_choices_restyle_the_lesson_and_stay_on_this_device() {
+    use crate::prefs::{ReadSize, ReadSpacing, ReadWidth, Reading};
+    let mut app = play(lesson());
+    // The book's defaults, on the player the lesson CSS keys on.
+    let html = app.html();
+    for attr in ["data-read-size=\"m\"", "data-read-spacing=\"normal\"", "data-read-width=\"book\""] {
+        assert!(html.contains(attr), "{attr}");
+    }
+    // Closed: × is the Escape target. Open: «Aa» is, so Escape and Back
+    // close the popover before they close the lesson.
+    assert!(!app.has(tx::READ_SPACING));
+    app.tap(tx::READING_OPEN);
+    app.assert_has(tx::READ_SPACING);
+    app.assert_has(tx::READ_SAMPLE[1]);
+    let html = app.html();
+    assert!(html.contains("aria-expanded=\"true\""), "the button says the popover is open");
+    let escape = html.matches("aria-keyshortcuts=\"Escape\"").count();
+    assert_eq!(escape, 1, "only the popover answers Escape while it is open");
+
+    app.tap(tx::READ_SIZE_LARGER);
+    app.tap(tx::READ_SPACING_AIRY);
+    app.tap(tx::READ_WIDTH_NARROW);
+    let html = app.html();
+    for attr in ["data-read-size=\"xl\"", "data-read-spacing=\"airy\"", "data-read-width=\"narrow\""] {
+        assert!(html.contains(attr), "{attr}");
+    }
+    let want = Reading { size: ReadSize::Larger, spacing: ReadSpacing::Airy, width: ReadWidth::Narrow };
+    assert_eq!(app.run(|| crate::prefs::DevicePrefs::load().reading), want, "kept in the device file");
+
+    // Done closes it; the lesson is where it was.
+    app.tap(tx::READ_DONE);
+    assert!(!app.has(tx::READ_SPACING));
+    app.assert_has(&format!("1/{}", lesson().steps.len()));
+}

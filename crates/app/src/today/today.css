@@ -196,3 +196,41 @@ table.plan th { color: var(--muted); font-weight: 600; }
    page's colours instead of the brand fill's. */
 .app:is([data-appearance="side-line"], [data-appearance="mono"]) .td-hero .ring { background: conic-gradient(var(--accent) var(--p), var(--line) 0); }
 .app:is([data-appearance="side-line"], [data-appearance="mono"]) .td-hero .ring-hole { background: var(--bg); color: var(--text); }
+
+/* Continuing the open Study session: one card, set apart from starting a new
+   one beneath it. */
+.td-resume {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  border-color: var(--accent);
+}
+.td-resume-copy { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; }
+.td-resume-action { display: inline-flex; gap: var(--sp-2); align-items: center; justify-content: center; min-block-size: max(var(--target), var(--tap)); }
+@media (max-width: 599.98px) {
+  .td-resume-action { inline-size: 100%; }
+}
+
+/* Mac and wide windows: today's plan comes first. The plan takes the wider
+   column and scrolls with the page; the lecture list beside it is the
+   reference, narrower, and scrolls on its own. Short windows keep the
+   sticky plan (more of it stays in view). Adapted from batna-app main:
+   crates/app/src/today/today.css (#742). */
+@media (min-width: 1100px) and (min-height: 740px) {
+  .today-cols.tab-cols[data-wide="aside"] {
+    grid-template-columns: minmax(0, 3fr) minmax(18rem, 2fr);
+    column-gap: clamp(var(--sp-4), 2vw, var(--sp-6));
+    align-items: start;
+  }
+  .today-cols > .tab-main.tab-sticky { position: static; max-block-size: none; overflow: visible; }
+  .today-cols > .tab-aside {
+    position: sticky;
+    inset-block-start: var(--sp-4);
+    max-block-size: calc(100dvh - 2 * var(--sp-6));
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scroll-padding-block: var(--sp-4);
+  }
+}

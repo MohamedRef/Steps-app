@@ -33,6 +33,9 @@
     if (e.pointerType === "mouse" || !e.isPrimary || !e.target.closest) return;
     // Anywhere on the lesson turns it, the empty space under a short step
     // too (#311), except the top bar and the footer's buttons.
+    // Selecting words to highlight them (highlight.js) is not a page turn.
+    const sel = window.getSelection && window.getSelection();
+    if (sel && !sel.isCollapsed) return;
     const player = e.target.closest(".ls-player");
     if (!player || e.target.closest(".ls-bar, .ls-nav") || e.target.closest(NOT_HERE)) return;
     const el = player.querySelector(".ls-stage:not([hidden])");
@@ -45,6 +48,9 @@
     const dx = e.clientX - g.x;
     const dy = e.clientY - g.y;
     if (!g.on) {
+      // A long press that started a text selection is highlighting.
+      const sel = window.getSelection && window.getSelection();
+      if (sel && !sel.isCollapsed) return void (g = null);
       // Mostly vertical: he's scrolling the page, not turning it.
       if (Math.abs(dy) > 12 && Math.abs(dy) >= Math.abs(dx)) return void (g = null);
       if (Math.abs(dx) < 12) return;

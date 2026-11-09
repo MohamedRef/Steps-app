@@ -82,7 +82,7 @@ rule names where it lives and the test that holds it.
 | A new platform or change kind | add the enum variant; check no device still runs a build older than the skip rule |
 | The meaning of a feed field | bump `UPDATE_FORMAT` |
 | The pack's byte layout | new `MAGIC` |
-| A content field or item kind | bump `pack::SCHEMA` and ship it with an app build |
+| A content field or item kind | bump `pack::SCHEMA` and ship it with an app build (3 since 2026-11-08: lesson steps' `remind`) |
 | Stylesheets | nothing: `ui_build` is set when the feed is built |
 | The database | append to `MIGRATIONS`, never edit an old entry |
 | A sync wire type | add with `#[serde(default)]`, or bump `PROTOCOL_VERSION` |
