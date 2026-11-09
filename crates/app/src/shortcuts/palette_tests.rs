@@ -27,3 +27,32 @@ fn every_word_matches_in_any_case() {
     assert!(matches("Heart FAILURE", "heart failure and shock"));
     assert!(!matches("heart renal", "heart failure"));
 }
+
+#[test]
+fn settings_sections_are_found_by_their_words() {
+    let lib = Library::get();
+    let hits = find("backup", lib);
+    assert!(hits.iter().any(|h| h.go == Go::Section(Section::Data)), "{hits:?}");
+    let hits = find("fsrs", lib);
+    assert!(hits.iter().any(|h| h.go == Go::Section(Section::Study)), "{hits:?}");
+    assert!(find("", lib).iter().all(|h| !matches!(h.go, Go::Section(_))));
+}
+
+#[test]
+fn lecture_questions_only_when_asked_and_only_with_mcqs() {
+    let lib = Library::get();
+    let has_mcq = |id: &str| {
+        lib.lectures
+            .get(id)
+            .is_some_and(|l| l.items.iter().any(|i| matches!(i.body, steps_core::content::Body::Mcq { .. })))
+    };
+    let lecture = lib.index.lectures.iter().find(|e| has_mcq(&e.id)).expect("a lecture with MCQs");
+    for ask in ["questions", "أسئلة"] {
+        let hits = find(&format!("{ask} {}", lecture.id), lib);
+        assert!(hits.iter().any(|h| h.go == Go::Questions(lecture.id.clone())), "{hits:?}");
+        assert!(hits.iter().all(|h| !matches!(&h.go, Go::Questions(id) if !has_mcq(id))));
+    }
+    assert!(find(&lecture.id, lib).iter().all(|h| !matches!(h.go, Go::Questions(_))));
+    assert!(questions_query("questions ").is_none());
+    assert!(questions_query("bank").is_none());
+}

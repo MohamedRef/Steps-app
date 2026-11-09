@@ -60,7 +60,7 @@ pub fn ItemView(
         tx::BADGE_REVIEW
     };
     rsx! {
-        crate::ui::Card { element: crate::ui::CardElement::Article, class: "st-item", "data-kind": item.body.kind(),
+        crate::ui::Card { element: crate::ui::CardElement::Article, class: "st-item", tabindex: "-1", "data-kind": item.body.kind(),
             // hover.js reads this course's glossary first (#318).
             "data-course": steps_core::program::course_of(&item.id),
             // Screen readers only: a heading to jump to for each item; the
