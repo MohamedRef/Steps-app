@@ -25,8 +25,8 @@ derived from it (`scripts/android-release-apk.sh`). An alpha always sorts
 before its beta, and a beta before the release, so each stage installs over
 the previous one and keeps your data.
 
-Until the first alpha, the version stays `1.0.0-alpha.0` (versionCode
-10000100). The first alpha is `1.0.0-alpha.1` (10000101), then
+Before the first alpha the version was `1.0.0-alpha.0` (versionCode
+10000100). The first alpha was `1.0.0-alpha.1` (10000101), then
 `1.0.0-alpha.2`…, `1.0.0-beta.1` (10000501)…, and `1.0.0` (10000999). Every
 step sorts above the one before, and every build is signed with the same
 permanent keys (§2), so each installs over the last and keeps the data: no
@@ -44,7 +44,7 @@ key decides which feeds it trusts. Back them up the day they are made.
 ### The permanent keys (once, before the first alpha)
 
 Mohamed makes the keys himself on his Mac. Nothing here costs money, and no
-key or password ever goes into the repo, a file in it, or the chat.
+key or password ever goes into the repo, a file in it, or a message.
 
 1. Tools, once: `brew install just gh` and `brew install --cask temurin`
    (it brings `keytool`), Rust (`rustup`), then `gh auth login` (GitHub.com,
@@ -69,8 +69,8 @@ key or password ever goes into the repo, a file in it, or the chat.
    macOS may ask for the login password to trust the code-signing
    certificate.
 3. The script prints the new public update key (one line ending in `=`).
-   Paste that line in the Steps chat, and it lands in a PR that commits
-   `crates/app/update-key.pub` (it is public). Until that PR merges, the
+   Commit that line as `crates/app/update-key.pub` in a PR (it is
+   public). Until that PR merges, the
    "Android preview APK" job on `main` fails on purpose with "holds no key
    yet".
 4. **`just release-keys-backup`** (or `just release-keys-backup /Volumes/USB`):
