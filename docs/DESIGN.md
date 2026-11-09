@@ -1,7 +1,7 @@
 # Steps design system
 
 Steps' own identity (2026-11-05): the S mark, Readex Pro, the stepped shape
-language, eight colour themes and five surface styles. Every screen builds
+language, ten colour themes and ten surface styles. Every screen builds
 from the tokens and shared classes below; feature stylesheets add layout,
 never their own colours or their own copy of a button, chip or sheet.
 
@@ -45,7 +45,7 @@ Aliases in `parts.css` for code ported from the design reference:
 Themes (Arabic names in brackets): Paper («صبح»), Night («بترولي»), True
 black («أسود AMOLED»), Night shift («سهر»), Scrubs («سكرَب», clinic teal),
 Sepia («سيبيا», warm book paper with a cool sheet), Indigo («نيلي», a
-blue-violet dark) and High contrast («تباين عالي»). Paper and Night carry the
+blue-violet dark), High contrast («تباين عالي»), and the calm Study («مذاكرة», sage paper) and Study dim («مذاكرة خافت», slate) for long sessions. Paper and Night carry the
 redesign's steps-light / steps-dark
 (Paper's muted is one step darker than the reference's `#5b7080` to pass AA
 on `--surface-2`). True black keeps `#000000` page and cards with Night's

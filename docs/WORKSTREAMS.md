@@ -1,6 +1,6 @@
 # Workstreams
 
-Each workstream is one project thread. A content workstream writes only its own courses (`content/<course>/`, `content/lessons/<course>/`, `content/book-refs/<course>/`, `content/glossary/<course>.yaml`), so they never conflict. `chunk` in `content/index.yaml` names the workstream of each lecture.
+Content is split into workstreams so parallel work never touches the same files. A content workstream writes only its own courses (`content/<course>/`, `content/lessons/<course>/`, `content/book-refs/<course>/`, `content/glossary/<course>.yaml`), so they never conflict. `chunk` in `content/index.yaml` names the workstream of each lecture.
 
 | Chunk | Workstream | Courses (First Aid pages) |
 |---|---|---|
@@ -17,7 +17,7 @@ Each workstream is one project thread. A content workstream writes only its own 
 | 11 | Neurology and Special Senses | neuro (500–568) |
 | 12 | Renal and Respiratory | renal (596–628), resp (678–706) |
 | 13 | Reproductive | repro (630–676) |
-| 14 | USMLE app features: timed vignette blocks, lab values sheet, Rapid Review mode, course screens without MSc wording | crates/app |
+| 14 | USMLE app features: timed vignette blocks, lab values sheet, exam tools | crates/app |
 | 15 | Rapid Review (Section III's closing tables, one lecture per table) | rr (707–746) |
 
-Order inside a content workstream: one lecture per PR, in book order; items first, then its lessons.
+Every lecture is written (2026-11-05); the workstreams now say who owns a course's folders when it changes. Order inside a workstream: book order, items first, then their lessons.
