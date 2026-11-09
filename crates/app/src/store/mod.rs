@@ -161,6 +161,28 @@ const MIGRATIONS: &[&str] = &[
         deleted     INTEGER NOT NULL DEFAULT 0
     ) STRICT;
 ",
+    "
+    -- The Study checkpoint marker (study/checkpoint.rs): a random token that
+    -- every change to the review log replaces in the same transaction, so
+    -- reading it costs nothing however long the log grows. Device-local,
+    -- never synced; a fresh random token per change keeps two copies of one
+    -- database that each took a different answer from ever matching.
+    -- Adapted from batna-app main: crates/app/src/store/mod.rs.
+    INSERT OR IGNORE INTO meta (key, value)
+    VALUES ('study.review_revision.v2', lower(hex(randomblob(16))));
+    CREATE TRIGGER review_revision_insert AFTER INSERT ON review_events BEGIN
+      UPDATE meta SET value = lower(hex(randomblob(16)))
+      WHERE key = 'study.review_revision.v2';
+    END;
+    CREATE TRIGGER review_revision_update AFTER UPDATE ON review_events BEGIN
+      UPDATE meta SET value = lower(hex(randomblob(16)))
+      WHERE key = 'study.review_revision.v2';
+    END;
+    CREATE TRIGGER review_revision_delete AFTER DELETE ON review_events BEGIN
+      UPDATE meta SET value = lower(hex(randomblob(16)))
+      WHERE key = 'study.review_revision.v2';
+    END;
+",
 ];
 
 const REVIEW_SETTINGS_KEY: &str = "review";
@@ -305,11 +327,27 @@ impl Store {
         Ok(logged)
     }
 
-    /// A fingerprint of the live review log, for Study checkpoints: a
-    /// session saved before another answer (or an Undo, or a synced answer)
-    /// must never come back as though it included it. Device-local, never
-    /// synced (adapted from batna-app main: crates/app/src/store/mod.rs).
+    /// The review log's revision, for Study checkpoints: a session saved
+    /// before another answer (or an Undo, or a synced answer) must never come
+    /// back as though it included it. SQLite triggers replace it in the same
+    /// transaction as every change to `review_events`, local or synced, so a
+    /// crash between saving an answer and saving the checkpoint leaves the
+    /// old checkpoint stale. One row read, whatever the log's length.
+    /// Device-local, never synced (adapted from batna-app main:
+    /// crates/app/src/store/mod.rs).
     pub fn study_review_marker(&self) -> Result<String> {
+        let conn = self.conn.lock().unwrap_or_else(std::sync::PoisonError::into_inner);
+        let revision: String =
+            conn.query_row("SELECT value FROM meta WHERE key = 'study.review_revision.v2'", [], |r| {
+                r.get(0)
+            })?;
+        Ok(format!("v2:{revision}"))
+    }
+
+    /// The marker builds before the revision wrote: a fingerprint of the
+    /// whole live log. Only for a v1 checkpoint saved by one of them, read
+    /// once at the next start; the next save writes a v2 marker.
+    pub fn study_review_marker_legacy(&self) -> Result<String> {
         let log = self.reviews()?;
         let bytes = serde_json::to_vec(&log)?;
         // FNV-1a: stable across builds and platforms, unlike `DefaultHasher`.
@@ -785,6 +823,10 @@ fn new_device_id() -> String {
 }
 
 #[cfg(test)]
+mod marker_perf;
+#[cfg(test)]
+mod revision_tests;
+#[cfg(test)]
 mod tests;
 
 #[cfg(test)]
@@ -804,7 +846,8 @@ mod snapshot_tests {
         let reopened = Store::from_snapshot(&store.snapshot().unwrap().1).unwrap();
         assert_eq!(after, reopened.study_review_marker().unwrap());
         store.retract_review(&logged.id).unwrap();
-        assert_eq!(store.study_review_marker().unwrap(), empty, "only live answers count");
+        assert_ne!(store.study_review_marker().unwrap(), after, "Undo makes the checkpoint stale");
+        assert!(store.reviews().unwrap().is_empty(), "Undo takes the answer out of the log");
     }
 
     /// The web build keeps the database as bytes: they come back whole,

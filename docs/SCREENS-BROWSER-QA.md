@@ -46,6 +46,7 @@ stylesheet and `data-appearance` on `.app`. 38 files × 40 = 1,520 cases, about
 | Study | The running item's kind and the session `progressbar` |
 | Figures | Every `<text>` label of every lesson figure stays inside its picture's `viewBox`: one past the edge is cut off on the phone |
 | Own highlights | `crates/app/tests/highlight-browser.cjs` on one lesson step at 1280px: select a word → the bar shows → yellow draws a shape and sends one `add:` with that word; tap it → green sends `put:`, Remove sends `del:` and the shape goes; a saved highlight draws again on a fresh page |
+| Study foreground | The production `study/foreground.js` on `study-item-card.html` at 384px, scrolled inside the card: a `visibilitychange` and a `pageshow` (Android resuming the WebView, a page back from the cache) send `visible` twice and leave the same card, once, at the same scroll place |
 | Errors | Any browser page error fails the job |
 
 Calm, Larger, 384px screenshots in both schemes and `report.json` are
