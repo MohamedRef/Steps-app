@@ -162,6 +162,48 @@ async function figureChecks(page, fixtures) {
   console.log(`Checked the labels of ${r.figures} lesson figures.`);
 }
 
+// Coming back to the app (Android resumes the WebView, or the page comes
+// back from the browser's cache) runs the production foreground script
+// (study/foreground.js) on a running card: the same item stays, once, and
+// the place he had scrolled to in it stays too. A process Android killed is
+// the checkpoint's job, not this one (adapted from batna-app main:
+// crates/app/tests/keyboard-focus-browser.cjs).
+async function foregroundChecks(page, fixtures) {
+  await page.goto(pathToFileURL(path.join(fixtures, 'study', 'study-item-card.html')).href);
+  await page.setViewportSize({ width: 384, height: 520 });
+  const script = await fs.readFile(path.join(__dirname, '../src/study/foreground.js'), 'utf8');
+  await page.evaluate(() => {
+    window.dioxus = { send: message => (window.__foregroundSent ||= []).push(message) };
+    // Room to scroll at any text size: the card's own height is not the point.
+    const main = document.querySelector('main.content');
+    main.style.blockSize = '480px';
+    main.style.overflowY = 'auto';
+    const pad = document.createElement('div');
+    pad.style.blockSize = '1600px';
+    main.querySelector('.st-item').after(pad);
+  });
+  await page.addScriptTag({ content: '(async () => {\n' + script + '\n})();' });
+  const before = await page.evaluate(() => {
+    const main = document.querySelector('main.content');
+    main.scrollTop = 420;
+    return { top: main.scrollTop, html: main.querySelector('.st-item').outerHTML };
+  });
+  assert.ok(before.top > 0, 'the card scrolls');
+  await page.evaluate(() => {
+    document.dispatchEvent(new Event('visibilitychange'));
+    window.dispatchEvent(new Event('pageshow'));
+  });
+  const after = await page.evaluate(() => {
+    const main = document.querySelector('main.content');
+    const items = main.querySelectorAll('.st-item');
+    return { top: main.scrollTop, count: items.length, html: items[0]?.outerHTML, sent: window.__foregroundSent };
+  });
+  assert.equal(after.top, before.top, 'coming back keeps the place in the card');
+  assert.equal(after.count, 1, 'coming back never adds a second card');
+  assert.equal(after.html, before.html, 'coming back keeps the same card as it was');
+  assert.deepEqual(after.sent, ['visible', 'visible'], 'the app hears it came back');
+}
+
 async function run() {
   const fixtures = path.resolve(process.argv[2]);
   const output = path.resolve(process.argv[3] || path.join(fixtures, 'results'));
@@ -241,6 +283,8 @@ async function run() {
     }
     current = 'figures';
     await figureChecks(page, fixtures);
+    current = 'study foreground';
+    await foregroundChecks(page, fixtures);
     current = 'own highlights';
     await highlightChecks(browser, fixtures);
     current = 'keyboard focus';

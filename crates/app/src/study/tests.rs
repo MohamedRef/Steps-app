@@ -79,3 +79,74 @@ fn summary_and_progress_speak_to_screen_readers() {
     let source = include_str!("mod.rs");
     assert!(source.contains("aria_valuetext: \"{pos + 1} {tx::OF} {len}\""));
 }
+
+thread_local! {
+    static SHOWN: std::cell::Cell<Option<Signal<bool>>> = const { std::cell::Cell::new(None) };
+    static ANSWER: std::cell::RefCell<Option<String>> = const { std::cell::RefCell::new(None) };
+}
+
+/// The app's review context stays while only the Study screen leaves and
+/// comes back (switching tabs). The session starts with one item already
+/// graded, the way the player does it: the answer saved, then the session
+/// moved on (adapted from batna-app main: crates/app/src/study/flow.rs).
+fn remount_shell() -> Element {
+    crate::store::use_private_review(&[]);
+    let store = use_context::<StudyStoreHandle>();
+    let shown = use_signal(|| true);
+    SHOWN.with(|s| s.set(Some(shown)));
+    use_hook(|| {
+        let first = |kind: &str| {
+            ready_lectures()
+                .into_iter()
+                .flat_map(|l| &l.items)
+                .find(|i| i.body.kind() == kind)
+                .unwrap()
+                .id
+                .clone()
+        };
+        let mut session = Session::new(plan_items(&store, &[first("card"), first("cloze")]));
+        let item = session.current().unwrap().item_id.clone();
+        let id =
+            store.0.borrow_mut().record_logged(ReviewEvent::new(item, Grade::Good, Origin::Study, 1, 20));
+        let id = id.unwrap().unwrap();
+        session.grade_logged(Grade::Good, Some(id.clone()), |_| false);
+        ANSWER.with(|a| *a.borrow_mut() = Some(id));
+        *SESSION.write() = session;
+        *PHASE.write() = Phase::Running;
+    });
+    rsx! {
+        crate::browser_fixture::Shell { screen: crate::Screen::Study, focus: true,
+            if shown() {
+                Study {}
+            }
+        }
+    }
+}
+
+#[test]
+fn leaving_study_and_coming_back_keeps_the_item_the_answers_and_undo() {
+    let mut dom = VirtualDom::new(remount_shell);
+    dom.rebuild_in_place();
+    let logged = |dom: &VirtualDom| {
+        dom.in_scope(ScopeId::APP, || use_context::<crate::store::Review>().backend.borrow().reviews_logged())
+    };
+    let state = |dom: &VirtualDom| dom.in_scope(ScopeId::APP, || SESSION.peek().progress());
+    let before = dioxus::ssr::render(&dom);
+    assert!(before.contains("data-kind=\"cloze\""), "{before}");
+    assert_eq!((logged(&dom), state(&dom)), (1, (1, 2)));
+
+    let mut shown = SHOWN.with(|s| s.get()).unwrap();
+    dom.in_scope(ScopeId::APP, || shown.set(false));
+    let _ = dom.render_immediate_to_vec();
+    assert!(!dioxus::ssr::render(&dom).contains("st-item"), "Study left the screen");
+    dom.in_scope(ScopeId::APP, || shown.set(true));
+    let _ = dom.render_immediate_to_vec();
+
+    let after = dioxus::ssr::render(&dom);
+    assert!(after.contains("data-kind=\"cloze\""), "the same item comes back: {after}");
+    assert_eq!(logged(&dom), 1, "coming back never logs a second answer");
+    assert_eq!(state(&dom), (1, 2), "nor restarts the session");
+    let answer = ANSWER.with(|a| a.borrow().clone());
+    let undo = dom.in_scope(ScopeId::APP, || SESSION.peek().clone().undo().and_then(|u| u.event));
+    assert_eq!(undo, answer, "Undo still takes back that answer");
+}

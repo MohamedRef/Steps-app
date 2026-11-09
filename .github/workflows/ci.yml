@@ -102,7 +102,21 @@ jobs:
         if: always()
         run: |
           grep -oE 'test [^ ]+ has been running for over 60 seconds' test-output.txt 2>/dev/null \
-            | awk '{print "::warning title=Slow test::" $2 " ran over a minute; make it smaller (docs/RUN.md § Tests and coverage)"}' || true
+            | awk '{print "::warning title=Slow test::" $2 " ran over a minute; make it smaller (docs/HANDBOOK.md section 5)"}' || true
+      # What a Study step costs as the log grows (checkpoint marker, FSRS
+      # replay, the grade path), in the run's summary. Informational: a
+      # hosted runner is not his phone, so no timing gate. Reuses the test
+      # build above; under a second.
+      - name: Study step cost (informational)
+        run: |
+          set -o pipefail
+          cargo test -p steps-app --no-default-features _perf::profile_ -- --ignored --nocapture 2>&1 | tee study-cost.log
+          {
+            echo "### Study step cost, hosted Linux runner (debug build)"
+            echo '~~~'
+            grep -E 'STUDY_(CHECKPOINT_MARKER|REPLAY)_BASELINE' study-cost.log | sort || true
+            echo '~~~'
+          } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/setup-node@v5
         with:
           node-version: 22

@@ -126,7 +126,7 @@ On Linux the desktop app needs `libwebkit2gtk-4.1-dev libgtk-3-dev libxdo-dev li
 - **Browser checks** (Chromium): `crates/app/tests/screens-browser.cjs` (lessons and study, with the keyboard-focus and highlight checks, per PR) and `settings-browser.cjs` (daily). See [SCREENS-BROWSER-QA.md](SCREENS-BROWSER-QA.md) and [SETTINGS-BROWSER-QA.md](SETTINGS-BROWSER-QA.md).
 - **Coverage:** at least 90% of lines, checked daily: `cargo llvm-cov --workspace --summary-only --ignore-filename-regex '(browser\.rs|browser_fixture\.rs|crates/app/src/platform/)'` (`cargo install cargo-llvm-cov` once).
 - **Later dates:** `scripts/test-later-dates.sh` runs every test binary under `faketime` at +37 hours and +400 days.
-- CI warns about any test that runs over a minute.
+- CI warns about any test that runs over a minute, and its run summary shows what a Study step costs at 100, 1,000 and 3,000 answers (informational, no timing gate).
 
 ## 6. CI, platform runs and deploys
 
@@ -233,7 +233,7 @@ Full detail: [RELEASE.md](RELEASE.md) and [COMPATIBILITY.md](COMPATIBILITY.md).
 4. Web and Cloud deploy by themselves after green CI on `main`.
 5. Update the README's version and links, and §12 here.
 
-**Updates:** installed apps update themselves from their channel's feed; Settings › التحديثات switches between preview, alpha, beta and stable without reinstalling. The manifest is Ed25519-signed and every file is checked against its SHA-256 and size. When the usual GitHub download host fails, the updater finds the same file through the GitHub release API; downloads resume after a cut. Every network request has bounded timeouts, and a failed check or download is retried as soon as Steps is back in front on Android. The Mac app needs `xattr -dr com.apple.quarantine /Applications/Steps.app` once after the first install (it is self-signed).
+**Updates:** installed apps update themselves from their channel's feed; Settings › التحديثات switches between preview, alpha, beta and stable without reinstalling. The manifest is Ed25519-signed and every file is checked against its SHA-256 and size. Every request (updates, Steps Cloud, Google sign-in) fails after 20 s without progress, and a failed check or download is retried as soon as Steps is back in front on Android. The Mac app needs `xattr -dr com.apple.quarantine /Applications/Steps.app` once after the first install (it is self-signed).
 
 ## 11. Look: icon, font, themes and styles
 
@@ -258,7 +258,7 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 - **Quality:** two full review rounds (code, platform, UX, content by course) on 2026-11-04 and 2026-11-05; every finding of every severity was fixed before alpha.1.
 - **Sync:** Steps Cloud is live with Google and password sign-in.
 - **Sources:** only First Aid 2026 so far. B&B videos and UWorld ids come from a public mapping document ([QBANK.md](QBANK.md)).
-- **On `main` since alpha.3, waiting for alpha.4:** the Mac and landscape-tablet layout and safer review keys; resizable study panes, focus mode and quick search (Ctrl/⌘+K); keyboard focus that follows the task; lesson text weighted by importance with a key-term pill per theme; the calm Study themes; my own highlights in lessons; lesson reading settings; mnemonic reminders on repeated lists (`pack::SCHEMA` 3, so it needs the new app build); Study sessions that survive leaving the app and restarts; more reliable Android updates on restricted networks.
+- **On `main` since alpha.3, waiting for alpha.4:** the Mac and landscape-tablet layout and safer review keys; resizable study panes, focus mode and quick search (Ctrl/⌘+K); keyboard focus that follows the task; lesson text weighted by importance with a key-term pill per theme; the calm Study themes; my own highlights in lessons; lesson reading settings; mnemonic reminders on repeated lists (`pack::SCHEMA` 3, so it needs the new app build); Study sessions that survive leaving the app and restarts, with a constant-time check of the review log.
 
 ### Roadmap
 - **1.0.0-alpha.4:** release what is on `main` (above), plus whatever daily use turns up.
@@ -271,7 +271,7 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 
 ### Known issues
 - **#646 Nightly checks failed on main** (2026-11-08, on 71e5538). Open; it closes itself when Nightly passes again.
-- Not yet confirmed on a real phone: the lock/unlock screen-freeze fix (`vendor/`), the Android update fallback when the GitHub download host is blocked (test on Wi-Fi and mobile data before a release), and restoring a Study session after Android ends the app.
+- Not yet confirmed on a real phone: the lock/unlock screen-freeze fix (`vendor/`), and restoring a Study session after Android ends the app.
 - GitHub never fires this repo's schedules; `daily.yml` covers for them (§6).
 
 ## 13. Where things live outside the repo

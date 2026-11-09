@@ -26,6 +26,13 @@ impl SessionCheckpoint {
         Self { version: Self::VERSION, review_marker, session: session.clone() }
     }
 
+    /// Saved by a build before the review revision: its marker is the
+    /// whole-log fingerprint, so the app checks it against that once, and
+    /// the next save writes the v2 revision.
+    pub fn uses_legacy_review_marker(&self) -> bool {
+        self.review_marker.starts_with("v1:")
+    }
+
     /// The saved session, or `None` for an old or corrupt snapshot, a grade
     /// missing from (or changed in) the log, or an item that can't be shown:
     /// better to start fresh than to risk a second FSRS answer.
@@ -112,6 +119,13 @@ mod tests {
         assert!(
             SessionCheckpoint::new(&Session::default(), "m".into()).recover("m", &live, |_| true).is_none()
         );
+    }
+
+    #[test]
+    fn only_a_v1_marker_reads_as_legacy() {
+        let session = Session::new(vec![plan("a")]);
+        assert!(SessionCheckpoint::new(&session, "v1:0:cbf29ce484222325".into()).uses_legacy_review_marker());
+        assert!(!SessionCheckpoint::new(&session, "v2:00ff".into()).uses_legacy_review_marker());
     }
 
     #[test]
