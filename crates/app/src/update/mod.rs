@@ -117,10 +117,6 @@ pub struct Updater {
     tx: watch::Sender<Status>,
     /// One check, download or install at a time.
     job: Mutex<()>,
-    /// Reuse GitHub's API download path when the normal release CDN fails.
-    prefer_api: std::sync::atomic::AtomicBool,
-    /// Cache the API's asset-name map for one check to avoid extra lookups.
-    api_assets: Mutex<Option<(Channel, std::collections::HashMap<String, u64>)>>,
 }
 
 /// The one updater of this process. On Android the background job may open
@@ -516,7 +512,7 @@ fn hash_file(path: &Path) -> std::io::Result<(u64, String)> {
 }
 
 fn get_small(url: &str) -> Result<Vec<u8>, Failure> {
-    let bytes = get_limited(url, MAX_FEED_BYTES, Duration::from_secs(12))?;
+    let bytes = get_limited(url, MAX_FEED_BYTES, Duration::from_secs(30))?;
     if bytes.len() as u64 > MAX_FEED_BYTES {
         return Err(Failure::Verify("feed too large".into()));
     }
@@ -526,14 +522,7 @@ fn get_small(url: &str) -> Result<Vec<u8>, Failure> {
 /// The body, cut one byte past `limit` (so a caller can tell it was longer).
 #[cfg(not(target_arch = "wasm32"))]
 fn get_limited(url: &str, limit: u64, timeout: Duration) -> Result<Vec<u8>, Failure> {
-    let mut req = agent(url, timeout).get(url);
-    if url.starts_with("https://api.github.com/") {
-        req = req.header("User-Agent", "Steps-Updates");
-        if url.contains("/releases/assets/") {
-            req = req.header("Accept", "application/octet-stream");
-        }
-    }
-    let mut res = req.call().map_err(|_| Failure::Network)?;
+    let mut res = agent(url, timeout).get(url).call().map_err(|_| Failure::Network)?;
     if res.status().as_u16() != 200 {
         return Err(Failure::Network);
     }
