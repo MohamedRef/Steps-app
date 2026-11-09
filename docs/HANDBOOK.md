@@ -260,7 +260,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 
 ## 12. Current state, roadmap and known issues
 
-*Last updated: 2026-11-08.*
+*Last updated: 2026-11-09.*
 
 ### State
 - **Released:** `1.0.0-alpha.1` and `1.0.0-alpha.2` on 2026-11-05 (#611, #641), then `1.0.0-alpha.3` on 2026-11-06: APK, Mac app, web and Steps Cloud. Latest release: <https://github.com/MohamedRef/Steps-app/releases/tag/steps-v1.0.0-alpha.3>. Installed alpha builds update to it over the air.
@@ -281,6 +281,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 - **Beta, then stable:** after daily use of the alpha; I decide when.
 - **Exam:** Step 1 around September 2027 (date not fixed yet). Since May 2026 the exam is 14 blocks of 30 minutes, up to 20 questions each.
 - **Study sessions survive leaving and restarts (2026-11-08, ideas from Batna #753, #755, #756):** Today shows "كمّل الجلسة" first while a Study session is open, and returns to the same item without starting another. After every step the queue is saved on this device only (local setting `study.session.v1`, `steps_core::session::SessionCheckpoint`) with a fingerprint of the live review log (`Store::study_review_marker`); at the next start it comes back only when that fingerprint and every saved grade still match the log, otherwise it is dropped, so no answer is ever replayed. Ending a session or finishing it clears the save. Time spent in another app no longer counts as answer time (`study/foreground.rs` + `foreground.js`, tested by `crates/app/tests/study-visibility.test.cjs`). Not yet tried on a real phone after Android kills the app.
+- **Phone touch and quick search (2026-11-09, from Batna #746-#751 and #758):** every phone control in the shell, lists, bank and tables is a full 48dp target; the Study progress row splits into a meter row and an Undo/End row under 600dp; the top bar has a search button (`shortcuts::SearchButton`) for «دوّر بسرعة», which gives focus back to it when closed. `crates/app/tests/screens-browser.cjs` checks these at 320 and 384px, a 520px-tall (keyboard-up) Study screen, and `mobile-touch-browser.cjs` the list, bank and table controls. The nightly Cloud end-to-end test builds the Worker with `--no-opt` in a throwaway `wrangler.e2e.toml` and uses a cached `wasm-bindgen` CLI built at the Cargo.lock version, so GitHub release-download 504s no longer stop it (Batna #760, #762).
 - **Smaller files, fewer merge conflicts:** split the busiest shared files one area per PR, with no behavior change (§3 file layout rule). Done: UI text (`i18n.rs` into `i18n/`, one file per feature); unit tests of every crate in sibling files; `lesson.rs` split into schema, `lesson/markup.rs` and `lesson/check.rs`.
 
 ### Known issues

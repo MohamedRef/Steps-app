@@ -8,6 +8,7 @@ const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { chromium } = require('playwright');
 const { highlightChecks } = require('./highlight-browser.cjs');
+const { mobileControlChecks } = require('./mobile-touch-browser.cjs');
 
 const WIDTHS = [320, 384, 600, 840, 1280];
 const SCHEMES = ['light', 'dark'];
@@ -161,6 +162,107 @@ async function figureChecks(page, fixtures) {
   console.log(`Checked the labels of ${r.figures} lesson figures.`);
 }
 
+// Phone-only geometry the generic control audit misses: the Study progress
+// row, a short (keyboard-reduced) viewport and the navigation shell.
+async function phoneChecks(page, { screen, item, name, width, scheme, appearance, size }) {
+  if (screen !== 'study' || (width !== 320 && width !== 384)) return;
+  const base = width === 384 && scheme === 'light' && appearance === 'calm' && size === 'normal';
+  if (item.phase === 'running') {
+    // A readable meter above 48dp Undo/End controls, never an overlapped row.
+    const compact = await page.evaluate(() => {
+      const get = selector => {
+        const node = document.querySelector(selector);
+        if (!node || !node.getClientRects().length) return null;
+        const b = node.getBoundingClientRect();
+        return { left: b.left, right: b.right, top: b.top, bottom: b.bottom, width: b.width, height: b.height };
+      };
+      return {
+        meter: get('.st-progress > .st-bar'),
+        count: get('.st-progress > .st-count'),
+        undo: get('.st-progress > .st-undo'),
+        end: get('.st-progress > button[data-back="true"]'),
+      };
+    });
+    const { meter, count, undo, end } = compact;
+    assert.ok(meter && count && end, `${name}: progress, count and exit stay accessible`);
+    assert.ok(meter.width >= 60 && meter.right <= width + 1 && meter.left >= -1,
+      `${name}: meter must keep a readable width: ${JSON.stringify(compact)}`);
+    assert.ok(meter.bottom <= end.top + 1 && count.bottom <= end.top + 1,
+      `${name}: the action row sits below the progress: ${JSON.stringify(compact)}`);
+    assert.ok(end.height >= 47.5 && end.left >= -1 && end.right <= width + 1,
+      `${name}: End stays inside the phone viewport`);
+    if (undo) {
+      assert.ok(undo.height >= 47.5 && (undo.right <= end.left + 1 || end.right <= undo.left + 1),
+        `${name}: Undo and End must not overlap`);
+    }
+    if (base) {
+      // An Android WebView shrunk by the keyboard: End stays reachable, the
+      // item scrolls, and visible grades keep their size.
+      await page.setViewportSize({ width: 384, height: 520 });
+      const short = await page.evaluate(() => {
+        const main = document.querySelector('main.content');
+        main.scrollTop = 0;
+        const exit = main.querySelector('.st-progress button[data-back="true"]')?.getBoundingClientRect();
+        const canScroll = main.scrollHeight > main.clientHeight;
+        main.scrollTop = main.scrollHeight;
+        const grades = [...main.querySelectorAll('.st-grades button')]
+          .filter(el => el.getClientRects().length > 0 && !el.disabled)
+          .map(el => {
+            const r = el.getBoundingClientRect();
+            return { top: r.top, bottom: r.bottom, left: r.left, right: r.right, width: r.width, height: r.height };
+          });
+        main.scrollTop = 0;
+        return { end: exit && { top: exit.top, bottom: exit.bottom }, canScroll,
+          viewportHeight: window.innerHeight, grades, scrollWidth: document.documentElement.scrollWidth };
+      });
+      await page.setViewportSize({ width: 384, height: 900 });
+      assert.ok(short.end && short.end.top >= -1 && short.end.bottom <= 521,
+        `${name}: End must stay reachable at the top of a short viewport: ${JSON.stringify(short)}`);
+      assert.ok(short.viewportHeight === 520 && short.scrollWidth <= 385,
+        `${name}: no sideways overflow on a short phone: ${JSON.stringify(short)}`);
+      assert.deepEqual(short.grades.filter(g => g.height < 47.5 || g.left < -1 || g.right > 385 ||
+        (g.bottom > 521 && !short.canScroll)), [],
+        `${name}: visible grade targets must stay usable: ${JSON.stringify(short)}`);
+    }
+  }
+  if (item.phase === 'setup') {
+    // The control audit scopes main.content, not the shell: cover the
+    // bottom bar at phone widths.
+    const tabs = await page.evaluate(() => {
+      const nav = document.querySelector('.app > .nav');
+      if (!nav) return null;
+      return [...nav.querySelectorAll('button.nav-item')].filter(el =>
+        el.getClientRects().length > 0 && getComputedStyle(el).display !== 'none')
+        .map(el => {
+          const r = el.getBoundingClientRect();
+          return { name: el.getAttribute('aria-label') || el.textContent.trim(),
+            width: r.width, height: r.height, left: r.left, right: r.right };
+        });
+    });
+    if (tabs) {
+      assert.ok(tabs.length >= 4, `${name}: bottom navigation missing: ${JSON.stringify(tabs)}`);
+      assert.deepEqual(tabs.filter(b => !b.name || b.width < 47.5 || b.height < 47.5 ||
+        b.left < -1 || b.right > width + 1), [],
+        `${name}: bottom tab unnamed, undersized or off-screen`);
+    }
+    if (base) {
+      // More's real CSS, though this static fixture cannot open it.
+      const close = await page.evaluate(() => {
+        const sheet = document.createElement('div');
+        sheet.className = 'more-sheet';
+        sheet.innerHTML = '<button class="btn btn-ghost more-close">إغلاق</button>';
+        document.querySelector('.app').append(sheet);
+        const r = sheet.querySelector('button').getBoundingClientRect();
+        const b = sheet.getBoundingClientRect();
+        sheet.remove();
+        return { width: r.width, height: r.height, sheetRight: b.right, sheetLeft: b.left };
+      });
+      assert.ok(close.width > 0 && close.height >= 47.5 && close.sheetLeft >= -1 && close.sheetRight <= width + 1,
+        `${name}: More's Close must be 48dp and stay on screen: ${JSON.stringify(close)}`);
+    }
+  }
+}
+
 async function run() {
   const fixtures = path.resolve(process.argv[2]);
   const output = path.resolve(process.argv[3] || path.join(fixtures, 'results'));
@@ -228,6 +330,9 @@ async function run() {
                 assert.deepEqual(m.unnamed, [], `${name}: controls without a name`);
                 assert.deepEqual(m.tooSmall, [], `${name}: controls under ${FLOOR[screen]} (${m.target}px)`);
                 await screenChecks(page, item, name);
+                // Phone checks adapted from batna-app main:
+                // crates/app/tests/screens-browser.cjs (#747, #749, #751).
+                await phoneChecks(page, { screen, item, name, width, scheme, appearance, size });
                 if (width === 384 && appearance === 'calm' && size === 'larger') {
                   await page.screenshot({ path: path.join(output, `${name}.png`), fullPage: true });
                 }
@@ -240,6 +345,8 @@ async function run() {
     }
     current = 'figures';
     await figureChecks(page, fixtures);
+    current = 'compact controls';
+    await mobileControlChecks(page, fixtures);
     current = 'own highlights';
     await highlightChecks(browser, fixtures);
     assert.deepEqual(errors, [], 'browser page errors');

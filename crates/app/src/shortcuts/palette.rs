@@ -25,6 +25,35 @@ pub fn is_open() -> bool {
     *OPEN.peek()
 }
 
+/// Closing search (Esc, ✕ or the backdrop) gives focus back to the control
+/// that opened it, if it is still on screen; following a result does not,
+/// since that leaves the old screen. Adapted from batna-app main:
+/// crates/app/src/shortcuts/palette.rs (#746).
+fn dismiss() {
+    open(false);
+    document::eval(
+        "requestAnimationFrame(() => { const el = window.__stepsSearchOpener; \
+         if (el?.isConnected && el.getClientRects().length) el.focus({ preventScroll: true }); });",
+    );
+}
+
+/// The phone's way in: a search button on the top bar (which shows under
+/// 600dp; the rail and sidebar have their own). It opens the same box as
+/// Ctrl/⌘ + K.
+#[component]
+pub fn SearchButton() -> Element {
+    rsx! {
+        button {
+            r#type: "button",
+            class: "icon-button topbar-search",
+            aria_label: tx::QS_TITLE,
+            title: tx::QS_TITLE,
+            onclick: move |_| open(true),
+            {crate::icons::search()}
+        }
+    }
+}
+
 const MAX: usize = 12;
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -178,12 +207,15 @@ pub fn Palette() -> Element {
     }
     let hits = find(&query.read(), Library::get());
     rsx! {
-        div { class: "sheet-backdrop qs-backdrop", onclick: move |_| open(false) }
+        div { class: "sheet-backdrop qs-backdrop", onclick: move |_| dismiss() }
         section {
             class: "qs",
             role: "dialog",
             "aria-modal": "true",
             "aria-labelledby": "qs-title",
+            onmounted: move |_| {
+                document::eval("window.__stepsSearchOpener = document.activeElement;");
+            },
             h2 { id: "qs-title", class: "qs-sr", {tx::QS_TITLE} }
             div { class: "qs-field",
                 span { class: "qs-icon", aria_hidden: "true", {crate::icons::search()} }
@@ -207,7 +239,7 @@ pub fn Palette() -> Element {
                     "aria-label": tx::CLOSE,
                     "aria-keyshortcuts": "Escape",
                     "data-back": "true",
-                    onclick: move |_| open(false),
+                    onclick: move |_| dismiss(),
                     kbd { "Esc" }
                 }
             }

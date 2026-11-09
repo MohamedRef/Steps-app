@@ -20,7 +20,7 @@ use crate::settings::SettingsNav;
 use crate::{Screen, Ui};
 
 mod palette;
-pub use palette::{Palette, open as open_palette};
+pub use palette::{Palette, SearchButton, open as open_palette};
 
 static SHEET_OPEN: GlobalSignal<bool> = Signal::global(|| false);
 

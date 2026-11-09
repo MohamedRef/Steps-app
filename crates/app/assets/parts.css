@@ -38,7 +38,7 @@
 .page-eyebrow, .page-sub { color: var(--muted); font-size: var(--fs-sm); }
 .section-head { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); min-block-size: var(--tap); }
 .section-head h2 { font-size: var(--fs-md); font-weight: 700; }
-.section-head .btn-ghost { min-block-size: var(--tap); padding-inline: var(--sp-2); font-size: var(--fs-sm); }
+.section-head .btn-ghost { min-block-size: max(var(--target), var(--tap)); padding-inline: var(--sp-2); font-size: var(--fs-sm); }
 
 /* ---------- status chips ----------
    span.chip with data-tone: accent (current), good (done), bad (needs
@@ -287,12 +287,17 @@ input[type="checkbox"][role="switch"]:checked::after { inset-inline-start: calc(
   border: 0; border-radius: 999px; background: none; color: var(--muted); cursor: pointer; padding: 0;
 }
 .view-seg > button::after { content: ""; position: absolute; inset-block: min(0px, calc((100% - var(--target)) / 2)); inset-inline: 0; }
+/* Compact touch layouts show the whole 48dp hit area. The former 36px
+   buttons relied on overlapping pseudo-element hit areas. */
+@media (max-width: 599.98px) {
+  .view-seg > button { inline-size: var(--target); block-size: var(--target); }
+}
 .view-seg > button .icon { inline-size: 1.15rem; block-size: 1.15rem; }
 .view-seg > button[aria-checked="true"] { background: var(--surface); color: var(--accent); box-shadow: 0 1px 2px color-mix(in srgb, var(--text) 14%, transparent); }
 .view-seg > button:focus-visible, .view-sort-btn:focus-visible, .view-menu-item:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .view-sort { position: relative; }
 .view-sort-btn {
-  display: inline-flex; align-items: center; gap: 6px; min-block-size: 2.4rem; padding-inline: var(--sp-3);
+  display: inline-flex; align-items: center; gap: 6px; min-block-size: var(--target); padding-inline: var(--sp-3);
   border: 1px solid var(--line-soft, var(--line)); border-radius: 999px; background: var(--surface);
   color: var(--text); font: inherit; font-size: var(--fs-sm); cursor: pointer;
 }
