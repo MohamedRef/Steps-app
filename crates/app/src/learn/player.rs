@@ -102,8 +102,13 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
     use_hook(|| {
         document::eval(SWIPE_JS);
     });
+    super::highlight::use_highlights(&lesson.id);
     let view = VIEW();
     let pages = view == View::Pages;
+    // The reading choices (learn/reading.rs) and whether their popover is open.
+    let reading = ui.prefs.read().reading;
+    let [(_, read_size), (_, read_spacing), (_, read_width)] = super::reading::attrs(reading);
+    let read_open = use_signal(|| false);
     let question_steps: Vec<bool> = lesson.steps.iter().map(|step| step.body.is_question()).collect();
 
     let go = {
@@ -151,11 +156,15 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
             class: "ls-player",
             "data-view": if pages { "pages" } else { "steps" },
             "data-dir": dir(),
+            "data-read-size": read_size,
+            "data-read-spacing": read_spacing,
+            "data-read-width": read_width,
             header { class: "ls-bar",
                 button {
                     class: "ls-close",
                     "data-back": "true",
-                    "aria-keyshortcuts": "Escape",
+                    // Escape closes the reading popover first, when it is open.
+                    "aria-keyshortcuts": if read_open() { None } else { Some("Escape") },
                     aria_label: tx::CLOSE,
                     title: tx::CLOSE,
                     onclick: move |_| close(ui),
@@ -163,6 +172,7 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                 }
                 StepMeter { current: i + 1, question_steps }
                 span { class: "muted small ls-count num-ltr", "{i + 1}/{n}" }
+                super::reading::ReadingButton { open: read_open }
                 button {
                     class: "ls-view",
                     aria_label: if pages { tx::TO_STEPS } else { tx::TO_PAGES },
@@ -357,6 +367,10 @@ fn Stage(
                 for r in std::iter::once(round()) {
                     StepView { key: "{r}", body: step.body.clone(), seed: seed.clone(), on_answer }
                 }
+            }
+            // A تحشيشة this topic already has, from this lesson or another.
+            if !try_done && !step.remind.is_empty() {
+                super::remind::Reminders { remind: step.remind.clone(), here: seed.split('#').next().unwrap_or_default().to_string() }
             }
             if can_retry && !try_done {
                 button {

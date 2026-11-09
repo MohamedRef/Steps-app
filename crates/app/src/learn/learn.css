@@ -21,7 +21,7 @@
   font-size: var(--fs-sm);
   font-weight: 700;
 }
-.ls-h { font-size: var(--fs-lg); margin: 0 0 var(--sp-3); line-height: 1.4; }
+.ls-h { font-size: calc(var(--fs-lg) * var(--ls-scale, 1)); margin: 0 0 var(--sp-3); line-height: 1.4; }
 .ls-row { display: flex; flex-wrap: wrap; gap: var(--sp-2); align-items: center; }
 .ls-verdict {
   font-weight: 700;
@@ -45,21 +45,38 @@
 }
 
 /* ---------- text ---------- */
-.ls-rich { display: flex; flex-direction: column; gap: var(--sp-3); font-size: 1.05rem; line-height: 1.95; }
+/* Colour follows importance (the signaling principle: cues on the few
+   relevant words help learning, Mayer). Four steps, strongest first:
+   1. ==key== marker: a pill in the theme's opposite hue (--key), 1-3 a step;
+   2. step heading, question and **terms**: full text colour, bold;
+   3. body text: the text colour softened a notch toward the card, so long
+      paragraphs glare less and the bold terms stand out from them;
+   4. source chips and meta: muted.
+   adapted from batna-app main: crates/app/src/learn/learn.css */
+.ls-rich {
+  display: flex; flex-direction: column; gap: var(--sp-3); font-size: calc(1.05rem * var(--ls-scale, 1)); line-height: calc(1.95 * var(--ls-space, 1));
+  color: color-mix(in oklab, var(--text) 84%, var(--surface));
+}
+.ls-h, .ls-q { color: var(--text); }
 .ls-rich p { margin: 0; }
 .ls-rich ul, .ls-rich ol { margin: 0; padding-inline-start: 1.4rem; display: grid; gap: var(--sp-2); }
 .ls-rich li::marker { color: var(--accent); }
 /* **bold** is a term, set in weight only; ==key== is one of the step's few
    key terms and gets the marker (docs/LESSONS.md). */
-.ls-rich strong, .ls-mn-hook strong { font-weight: 700; }
+.ls-rich strong, .ls-mn-hook strong { font-weight: 700; color: var(--text); }
 /* Every lesson text, Line ones too (options, cards, cells, recap): never
    the browser's yellow, which is unreadable at night (#321). */
 mark {
-  color: inherit;
+  /* A pill in the theme's opposite hue (--key, per theme in
+     steps_core::theme), so a key term stands out from its card and is never
+     confused with plain bold. --key-ink on --key is AA-tested there. */
+  color: var(--key-ink);
   font-weight: 700;
-  background: linear-gradient(transparent 55%, var(--accent-soft) 55%);
-  padding-inline: 2px;
-  border-radius: 2px;
+  background: var(--key);
+  padding: 1px 0.45em;
+  border-radius: var(--radius-pill);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 .ls-rich bdi { font-size: 0.97em; }
 /* An English run inside Arabic is one LTR box (learn/text.rs `runs`): split
@@ -158,7 +175,9 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 
 /* ---------- the player ---------- */
 .ls-player {
-  max-inline-size: 48rem;
+  /* The reading width (learn/reading.rs): one column on a phone or a
+     narrow window, the step's column beside the lesson's name when wide. */
+  max-inline-size: var(--ls-one, 48rem);
   margin-inline: auto;
   inline-size: 100%;
   /* Fills the screen so the footer sits at the bottom on every step. */
@@ -203,7 +222,9 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 .ls-count { flex: none; font-variant-numeric: tabular-nums; }
 /* Name the lesson and keep its English lecture label separate. */
 .ls-context { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; }
-.ls-context-title { margin: 0; font-size: var(--fs-lg); font-weight: 700; line-height: 1.5; overflow-wrap: anywhere; }
+/* The lesson name is context, the step heading below is what to read: the
+   name is smaller and muted so the eye lands on the step first. */
+.ls-context-title { margin: 0; font-size: var(--fs-md); font-weight: 600; color: var(--muted); line-height: 1.5; overflow-wrap: anywhere; }
 .ls-context-lecture { margin: 0; overflow-wrap: anywhere; }
 .ls-stage {
   gap: var(--sp-3);
@@ -236,7 +257,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   .ls-player[data-view="steps"] {
     max-inline-size: none;
     display: grid;
-    grid-template-columns: minmax(14rem, 19rem) minmax(0, 52rem);
+    grid-template-columns: minmax(14rem, 19rem) minmax(0, var(--ls-col, 52rem));
     grid-template-rows: auto auto auto 1fr;
     justify-content: center;
     align-items: start;
@@ -517,8 +538,8 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   gap: var(--sp-2);
 }
 .ls-reveal > *, .ls-check > *, .ls-mnemonic > * { margin: 0; }
-.ls-q { font-size: 1.25rem; font-weight: 600; line-height: 1.6; }
-.ls-q .ls-rich { font-size: inherit; }
+.ls-q { font-size: calc(1.25rem * var(--ls-scale, 1)); font-weight: 600; line-height: calc(1.6 * var(--ls-space, 1)); }
+.ls-q .ls-rich { font-size: inherit; color: inherit; }
 .ls-answer {
   border-inline-start: 4px solid var(--good);
   background: var(--good-soft);
@@ -590,7 +611,7 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
   background: var(--accent-soft);
   border: 1px solid var(--line-soft, var(--line));
 }
-.ls-why-box .ls-rich { font-size: var(--fs-md); }
+.ls-why-box .ls-rich { font-size: calc(var(--fs-md) * var(--ls-scale, 1)); }
 
 /* tiles: order, match, sort */
 .ls-pool { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
@@ -776,7 +797,7 @@ button.ls-slot:hover { border-color: var(--accent); }
 
 /* table */
 .ls-table-scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); }
-.ls-table table { border-collapse: collapse; inline-size: 100%; font-size: var(--fs-sm); }
+.ls-table table { border-collapse: collapse; inline-size: 100%; font-size: calc(var(--fs-sm) * var(--ls-scale, 1)); }
 .ls-table th, .ls-table td { padding: var(--sp-2) var(--sp-3); border-block-end: 1px solid var(--line); text-align: start; vertical-align: top; }
 .ls-table thead th { background: var(--accent-soft); color: var(--accent); }
 .ls-table tbody th { font-weight: 700; background: var(--bg); }
@@ -841,3 +862,161 @@ button.ls-soon .coll-title { color: var(--muted); }
 }
 .ls-tools { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-block: var(--sp-2) 0; }
 .ls-tools .abd-open { min-block-size: var(--target, 48px); }
+
+/* ---------- reading: text size, line spacing, line width ----------
+   learn/reading.rs; values adapted from kabar-app main:
+   crates/app/assets/main.css (Reading settings). The step's text scales,
+   the bar and the buttons stay as they are. */
+[data-read-size="s"] { --ls-scale: 0.9; }
+[data-read-size="l"] { --ls-scale: 1.15; }
+[data-read-size="xl"] { --ls-scale: 1.3; }
+[data-read-spacing="snug"] { --ls-space: 0.86; }
+[data-read-spacing="airy"] { --ls-space: 1.2; }
+.ls-player[data-read-width="narrow"] { --ls-one: 38rem; --ls-col: 40rem; }
+.ls-player[data-read-width="wide"] { --ls-one: none; --ls-col: 80rem; }
+
+/* The popover hangs from the bar (sticky, so positioned), not from the
+   button: on a phone it spans the bar's width instead of running off it. */
+.ls-read { flex: none; }
+/* Open, the bar rises over the sticky footer, so the popover covers it. */
+.ls-bar:has(.ls-read-pop) { z-index: 40; }
+.ls-read-aa {
+  inline-size: var(--target);
+  block-size: var(--target);
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  border: 1px solid var(--line-soft, var(--line));
+  background: var(--surface);
+  color: var(--muted);
+  font-family: var(--font-latin);
+  font-weight: 700;
+  cursor: pointer;
+}
+.ls-read-aa:hover, .ls-read-aa[aria-expanded="true"] { color: var(--accent); border-color: var(--accent); }
+.ls-read-scrim { position: fixed; inset: 0; z-index: 30; }
+/* Under the bar, over the step: the text never moves while he chooses. */
+.ls-read-pop {
+  position: absolute;
+  inset-block-start: calc(100% + var(--sp-2));
+  inset-inline-end: 0;
+  z-index: 31;
+  inline-size: min(24rem, 100%);
+  max-block-size: calc(100dvh - 6rem);
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: grid;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  background: var(--glass-solid, var(--surface));
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: 0 12px 32px rgb(0 0 0 / 0.18);
+}
+.ls-read-title { margin: 0; font-size: var(--fs-md); }
+.ls-read-done { justify-self: end; min-block-size: var(--target); }
+.ls-read-choices { display: grid; gap: var(--sp-3); }
+.ls-read-field { display: grid; gap: var(--sp-1); }
+.ls-read-label { font-size: var(--fs-sm); font-weight: 600; color: var(--muted); }
+/* The preview follows every choice as it changes. */
+.ls-read-preview {
+  margin: 0;
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius);
+  background: var(--bg);
+  font-size: calc(1.05rem * var(--ls-scale, 1));
+  line-height: calc(1.95 * var(--ls-space, 1));
+}
+.ls-read-sizes [data-size] .ls-read-glyph { line-height: 1; font-weight: 700; }
+.ls-read-sizes [data-size="s"] .ls-read-glyph { font-size: 0.85rem; }
+.ls-read-sizes [data-size="m"] .ls-read-glyph { font-size: 1.05rem; }
+.ls-read-sizes [data-size="l"] .ls-read-glyph { font-size: 1.3rem; }
+.ls-read-sizes [data-size="xl"] .ls-read-glyph { font-size: 1.55rem; }
+/* A phone's lesson is always the screen's width: no width to choose. */
+@media (max-width: 599px) {
+  .ls-read-pop .ls-read-width { display: none; }
+}
+
+/* ---------- your own highlights (highlight.js) ---------- */
+/* Adapted from batna-app main: crates/app/src/learn/learn.css (#770); the
+   bar wears Steps' own card radius and stepped ledge. */
+/* Bright marker colours on every theme (--uhl-* in main.css); the words on a fill turn dark
+   through ::highlight(uhl-ink). A WebView without the Custom Highlight API
+   gets a lighter fill instead, so the theme's own text still reads. */
+[data-uhl-host] { position: relative; isolation: isolate; }
+.uhl-layer { position: absolute; inset: 0; z-index: -1; pointer-events: none; overflow: visible; }
+.uhl-layer i { position: absolute; display: block; background: var(--c); }
+:is(.uhl-layer i, .uhl-dot)[data-c="yellow"] { --c: var(--uhl-yellow); }
+:is(.uhl-layer i, .uhl-dot)[data-c="green"] { --c: var(--uhl-green); }
+:is(.uhl-layer i, .uhl-dot)[data-c="blue"] { --c: var(--uhl-blue); }
+:is(.uhl-layer i, .uhl-dot)[data-c="pink"] { --c: var(--uhl-pink); }
+:is(.uhl-layer i, .uhl-dot)[data-c="orange"] { --c: var(--uhl-orange); }
+.uhl-layer i[data-sh="pill"] { border-radius: 999px; }
+.uhl-layer i[data-sh="rect"] { border-radius: 2px; }
+:root[data-uhl-ink="no"] .uhl-layer i[data-s="fill"] { opacity: 0.45; }
+::highlight(uhl-ink) { color: var(--uhl-ink); }
+
+.uhl-bar {
+  position: fixed;
+  z-index: 80;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  max-inline-size: calc(100vw - 16px);
+  padding: 6px 10px;
+  border-radius: var(--radius-card, 16px);
+  background: var(--sheet);
+  color: var(--text);
+  border: 1px solid var(--line);
+  /* The Steps ledge under the bar, then a soft lift off the page. */
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--line) 82%, var(--accent)), 0 10px 24px rgb(0 0 0 / 0.18);
+  font-size: var(--fs-sm);
+}
+.uhl-bar[hidden] { display: none; }
+.uhl-dots, .uhl-seg { display: flex; gap: 4px; align-items: center; }
+.uhl-dot {
+  inline-size: 34px;
+  block-size: 34px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  background: var(--c);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.12);
+  cursor: pointer;
+}
+.uhl-dot[aria-pressed="true"] { border-color: var(--text); }
+.uhl-seg { padding: 2px; border-radius: var(--radius-pill, 999px); background: var(--surface-2); }
+.uhl-opt, .uhl-del {
+  min-block-size: 34px;
+  padding-inline: 10px;
+  border: 0;
+  border-radius: var(--radius-pill, 999px);
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  cursor: pointer;
+}
+.uhl-opt[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); }
+.uhl-del { color: var(--bad); background: var(--bad-soft); }
+.uhl-del[hidden] { display: none; }
+/* A finger needs bigger targets than a mouse. */
+@media (pointer: coarse) {
+  .uhl-dot { inline-size: 40px; block-size: 40px; }
+  .uhl-opt, .uhl-del { min-block-size: 40px; }
+}
+/* Reminders under a step: the تحشيشة this topic already has (remind.rs). */
+.ls-remind { display: flex; flex-direction: column; gap: var(--sp-2); margin-block-start: var(--sp-3); }
+.ls-remind-one {
+  border: 2px dashed var(--accent); border-radius: var(--radius);
+  background: var(--accent-soft); padding: var(--sp-3) var(--sp-4);
+  display: flex; flex-direction: column; gap: var(--sp-1);
+}
+.ls-remind-one > p { margin: 0; }
+.ls-remind-label { font-weight: 800; color: var(--accent); }
+.ls-remind-what { font-size: var(--fs-sm); color: var(--muted); font-family: var(--font-latin); }
+.ls-remind-word { font-family: var(--font-latin); letter-spacing: 0.2em; font-weight: 800; color: var(--accent); }
+.ls-remind-parts { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; font-family: var(--font-latin); font-size: var(--fs-sm); }
+.ls-remind-parts b { display: inline-block; min-inline-size: 2rem; color: var(--accent); }
+.ls-remind-text p { margin: 0; white-space: pre-line; }
+.ls-remind-from { align-self: flex-start; font-size: var(--fs-sm); }

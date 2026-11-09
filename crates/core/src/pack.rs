@@ -25,8 +25,9 @@ pub const MAGIC: &[u8; 8] = b"STEPSPK1";
 /// or misread: an older app then refuses the newer pack (and keeps its
 /// built-in content) instead of showing it with pieces silently missing.
 /// Packs from before the field read as 0. 2: courses can cite slides
-/// (`program::Source`).
-pub const SCHEMA: u32 = 2;
+/// (`program::Source`). 3: lesson steps can `remind` of a تحشيشة taught
+/// elsewhere (`lesson::Reminder`).
+pub const SCHEMA: u32 = 3;
 
 /// Highest miniz level: slower to pack (only when content changes), not to unpack.
 const LEVEL: u8 = 10;
