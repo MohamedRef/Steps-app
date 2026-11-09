@@ -81,7 +81,7 @@ impl Section {
         Self::ALL.into_iter().find(|s| s.id() == id)
     }
 
-    fn title(self) -> &'static str {
+    pub(crate) fn title(self) -> &'static str {
         match self {
             Self::Study => crate::i18n::study_settings::SECTION,
             Self::Reminders => crate::i18n::remind::SECTION,
@@ -95,7 +95,7 @@ impl Section {
         }
     }
 
-    fn summary(self) -> &'static str {
+    pub(crate) fn summary(self) -> &'static str {
         match self {
             Self::Study => crate::i18n::study_settings::SECTION_SUB,
             Self::Reminders => crate::i18n::remind::SECTION_SUB,
@@ -108,7 +108,7 @@ impl Section {
             Self::About => tx::ABOUT_SUB,
         }
     }
-    fn matches(self, query: &str) -> bool {
+    pub(crate) fn matches(self, query: &str) -> bool {
         let keywords = match self {
             Self::Study => {
                 "study review daily limit fsrs sounds vibration onboarding weak marks مذاكرة مراجعة حد يومي صوت اهتزاز ترحيب علامات"

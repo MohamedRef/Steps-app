@@ -355,7 +355,7 @@ fn Stage(
         if per_part { before.is_some() && !fresh() } else { checked || (answered_before && !fresh()) };
     let texts = use_hook(|| step.shown_text());
     rsx! {
-        crate::ui::Card { element: crate::ui::CardElement::Article, class: "ls-stage", hidden: !current, "data-kind": step.body.kind(), "data-n": k + 1,
+        crate::ui::Card { element: crate::ui::CardElement::Article, class: "ls-stage", tabindex: "-1", hidden: !current, "data-kind": step.body.kind(), "data-n": k + 1,
             if try_done {
                 div { class: "ls-try-done",
                     p { class: "ls-kicker", {tx::TRY} }

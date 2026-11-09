@@ -139,6 +139,13 @@ pub fn use_shortcuts() {
             follow(&msg, ui, settings);
         }
     });
+    // After a key (or a screen reader) reveals, grades, undoes or turns a
+    // lesson step, focus moves to the new card or step instead of falling
+    // back to the page. It never presses anything; mouse clicks are left alone.
+    use_future(|| async move {
+        let mut eval = document::eval(include_str!("focus.js"));
+        while eval.recv::<String>().await.is_ok() {}
+    });
 }
 
 /// Does what one message from the key script asks.
@@ -273,6 +280,24 @@ mod tests {
         assert!(player.contains("\"aria-keyshortcuts\": \"ArrowRight\""));
         assert!(player.contains("\"aria-keyshortcuts\": \"Enter ArrowLeft\""));
         assert!(include_str!("../study/mod.rs").contains("\"aria-keyshortcuts\": \"Z\""));
+    }
+
+    #[test]
+    fn keyboard_focus_follows_the_task_but_never_presses() {
+        let focus = include_str!("focus.js");
+        for rule in [
+            "e.detail !== 0 || modalOpen()",
+            "editable(active)",
+            "pointerdown",
+            "freshControl(item) || item",
+            "data-grade=\"good\"",
+        ] {
+            assert!(focus.contains(rule), "missing focus rule: {rule}");
+        }
+        assert!(!focus.contains(".click();"), "focus.js must never press a button");
+        // The card and the lesson step can take focus when they have nothing else.
+        assert!(include_str!("../study/item.rs").contains(r#"class: "st-item", tabindex: "-1""#));
+        assert!(include_str!("../learn/player.rs").contains(r#"class: "ls-stage", tabindex: "-1""#));
     }
 
     #[test]
