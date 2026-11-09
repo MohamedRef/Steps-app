@@ -59,7 +59,7 @@ key decides which feeds it trusts. Back them up the day they are made.
 ### The permanent keys (once, before the first alpha)
 
 Mohamed makes the keys himself on his Mac. Nothing here costs money, and no
-key or password ever goes into the repo, a file in it, or the chat.
+key or password ever goes into the repo, a file in it, or a message.
 
 1. Tools, once: `brew install just gh` and `brew install --cask temurin`
    (it brings `keytool`), Rust (`rustup`), then `gh auth login` (GitHub.com,
@@ -84,8 +84,8 @@ key or password ever goes into the repo, a file in it, or the chat.
    macOS may ask for the login password to trust the code-signing
    certificate.
 3. The script prints the new public update key (one line ending in `=`).
-   Paste that line in the Steps chat, and it lands in a PR that commits
-   `crates/app/update-key.pub` (it is public). Until that PR merges, the
+   Commit that line as `crates/app/update-key.pub` in a PR (it is
+   public). Until that PR merges, the
    "Android preview APK" job on `main` fails on purpose with "holds no key
    yet".
 4. **`just release-keys-backup`** (or `just release-keys-backup /Volumes/USB`):

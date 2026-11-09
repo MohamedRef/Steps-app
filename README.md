@@ -31,13 +31,13 @@ When I add other sources, they go under the same First Aid topics, and each item
 
 Every item starts as unverified, and only I mark it approved after I have checked it against the book.
 
-Around the content: review and study sessions, a question bank, timed blocks in the 2026 exam format (up to 20 questions in 30 minutes), a lab values sheet, go to a book page, a catch-up plan, weak spots, the Boards & Beyond videos and UWorld question ids for each lecture, oral mode with the screen off, and study reminders.
+Around the content: study sessions that pick up where I left them, a question bank, timed blocks in the 2026 exam format (up to 20 questions in 30 minutes), an exam planner with catch-up, my NBME and UWSA scores with a readiness check, a lab values sheet, go to a book page, weak spots, the Boards & Beyond videos and UWorld question ids for each lecture with a custom-test maker, a log of my UWorld misses, my own notes, cards and highlights, oral mode with the screen off, quick search and study reminders.
 
 ## How it looks
 
 Steps has its own look: the **S** icon that climbs like a stair with a gold dot at the top, the **Readex Pro** font, and an Egyptian Arabic, right to left interface.
 
-- **8 themes:** صبح, بترولي, أسود AMOLED, سهر, سكرَب, سيبيا, نيلي and تباين عالي, plus "follow the device" for light and dark.
+- **10 themes:** صبح, بترولي, أسود AMOLED, سهر, سكرَب, سيبيا, نيلي, تباين عالي, مذاكرة and مذاكرة خافت, plus three that follow the device's light and dark.
 - **10 styles** for cards and buttons: درجات (the default), خط رفيع, من غير حدود, فواصل, خط جانبي, رمادي فاتح, أبيض وأسود, خطوط, ملوّن and زجاج.
 
 ## Sync and sign-in
@@ -57,8 +57,6 @@ After the first install, new versions and new lectures arrive by themselves, and
 
 ## For whoever works on it
 
-**Start with [docs/HANDBOOK.md](docs/HANDBOOK.md)**: the whole project on one page (architecture, how to build, test and release it, the rules I work by, and where things stand right now).
-
-How to run it: [docs/RUN.md](docs/RUN.md). Releases and updates: [docs/RELEASE.md](docs/RELEASE.md). Sync: [docs/CLOUD.md](docs/CLOUD.md). How the content is written: [docs/CONTENT.md](docs/CONTENT.md), [docs/LESSONS.md](docs/LESSONS.md) and [docs/SOURCES.md](docs/SOURCES.md). Who writes what: [docs/WORKSTREAMS.md](docs/WORKSTREAMS.md).
+Start with **[docs/HANDBOOK.md](docs/HANDBOOK.md)**: the whole project on one page (the rules I work by, how it is built, tested, merged and released, and where things stand right now), with links to every other doc.
 
 — Mohamed Refaat

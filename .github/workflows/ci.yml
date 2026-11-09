@@ -45,16 +45,16 @@ jobs:
       # written with. The pull request's title and body are checked here;
       # merge with them as the squash message (docs/RUN.md), so branch
       # commit trailers never reach main.
-      # A merge through `gh api .../merge` or the gh CLI adds a generated-by
-      # line to the commit on main (#616-#625). main can't be rewritten, so
-      # this only warns; merge with the GitHub MCP tool (HANDBOOK section 7).
+      # Some merge paths append a generated-by line or co-author trailers
+      # to the commit on main (#616-#625). main is never rewritten, so this
+      # only warns; squash with a hand-written message (HANDBOOK section 7).
       - name: No assistant names in the merge commit on main
         if: github.event_name == 'push'
         run: |
           tool="cl""aude|anthr""opic"
           hits="$(git log -1 --format=%B | grep -iE "$tool" | grep -viE "(${tool%%|*})[ -]bernard" || true)"
           if [ -n "$hits" ]; then
-            echo "::warning title=Merge message names a tool::$(git log -1 --format=%h) on main names a tool in its message. Merge with the GitHub MCP merge tool and your own commit_message, never gh api .../merge (HANDBOOK section 7)."
+            echo "::warning title=Merge message names a tool::$(git log -1 --format=%h) on main names a tool in its message. Squash-merge with a hand-written commit message, never a default one (HANDBOOK section 7)."
             echo "$hits" | head -5
           fi
       - name: No assistant names in the pull request's text
@@ -102,7 +102,21 @@ jobs:
         if: always()
         run: |
           grep -oE 'test [^ ]+ has been running for over 60 seconds' test-output.txt 2>/dev/null \
-            | awk '{print "::warning title=Slow test::" $2 " ran over a minute; make it smaller (docs/RUN.md § Tests and coverage)"}' || true
+            | awk '{print "::warning title=Slow test::" $2 " ran over a minute; make it smaller (docs/HANDBOOK.md section 5)"}' || true
+      # What a Study step costs as the log grows (checkpoint marker, FSRS
+      # replay, the grade path), in the run's summary. Informational: a
+      # hosted runner is not his phone, so no timing gate. Reuses the test
+      # build above; under a second.
+      - name: Study step cost (informational)
+        run: |
+          set -o pipefail
+          cargo test -p steps-app --no-default-features _perf::profile_ -- --ignored --nocapture 2>&1 | tee study-cost.log
+          {
+            echo "### Study step cost, hosted Linux runner (debug build)"
+            echo '~~~'
+            grep -E 'STUDY_(CHECKPOINT_MARKER|REPLAY)_BASELINE' study-cost.log | sort || true
+            echo '~~~'
+          } >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/setup-node@v5
         with:
           node-version: 22
