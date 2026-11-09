@@ -1,12 +1,12 @@
 # Keeping up with Batna
 
-Steps shares Batna's engine and UI. Batna's app, UI and tool improvements are ported to Steps so the work is never done twice; Batna's content (`content/`) and changelog (`changes/`) never are.
+Steps began as a copy of Batna's engine and UI and is now a separate app. A Batna improvement that helps Steps can be ported so the work isn't done twice, adapted to Steps' own look and credited in a comment ("adapted from batna-app main: <path>"). Batna's content (`content/`), changelog (`changes/`) and calculators never are.
 
 **Last Batna commit ported: `e2e9517` (Batna main, 2026-11-04).** From `0b6e07e` up to it, ported: the web app's service worker and separate content pack (#624), username + password sign-in and lessons resuming on any device (#621, with the password key re-pinned for Steps' own salt `steps-login-v1`), sync property tests (#625) and the refs `-0%` fix (#629). Skipped: calculators (#626, #634, #637), Batna content (#622, #636), and Batna's test and coverage work (#627, #628, #630, #631): Steps rebuilt its own suite and coverage gate, and those PRs' code changes only reshaped code for Batna's tests.
 
-Ported on its own since: Batna #770 (own highlights in lessons, 2026-11-08), with Steps' card radius and ledge on the bar.
+Since then, single features are ported one PR at a time and credited in that PR and in the code, not through this full diff.
 
-How to port (the core thread does this):
+How to port everything since the last ported commit:
 
 ```bash
 git -C ../batna-app fetch origin main

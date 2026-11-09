@@ -65,8 +65,8 @@ The model to copy is `content/lessons/cvs/L01.yaml`.
     isn't an abbreviation (emphasis like `NOT`, a Roman numeral, a
     mnemonic's letters, a trial name), add it to that file's `plain:` list.
     Shared terms live in `content/glossary.yaml`; a term already there or in
-    another course's file is refused as a duplicate, so reuse it (ask the
-    core thread to reword a shared meaning). The same entries fill the per-course «قاموس
+    another course's file is refused as a duplicate, so reuse it (reword a
+    shared meaning in its own PR). The same entries fill the per-course «قاموس
     الاختصارات» (Lessons screen, More), with the lessons that use each one.
 
 13. **Bring the تحشيشة back** (Mohamed, 2026-11-08). A step that teaches a
@@ -187,7 +187,7 @@ so nothing is fetched at runtime.
 
 ## Text by importance
 
-How colour and weight rank lesson text (2026-11-08, from Batna #767, with Steps' own colours). Change it only with evidence.
+How colour and weight rank lesson text (2026-11-08, with Steps' own colours). Change it only with evidence.
 
 | Choice | Evidence |
 |---|---|
@@ -197,7 +197,7 @@ How colour and weight rank lesson text (2026-11-08, from Batna #767, with Steps'
 
 ## Own highlights
 
-Mohamed can highlight any words in a step himself (`learn/highlight.js`, `steps_core::highlight`): select them and a small bar offers five colours, a fill or an underline, and a pill or a rectangle; tapping a highlight changes or removes it. They are his notes, not content: each is stored as its own synced setting (`hl.<lesson>.<id>`, a tombstone `{"gone":true}` when removed), never in `content/`. A highlight is found again by its words and up to 32 characters around them, so rewording a sentence in a lesson can drop a highlight on it; small edits elsewhere in the step keep it. Shapes are drawn in a `.uhl-layer` under the text, never inside the step's own nodes, and text on a fill turns dark through the CSS Custom Highlight API. The swipe that turns steps ignores drags while text is selected. Ported from Batna #770.
+Mohamed can highlight any words in a step himself (`learn/highlight.js`, `steps_core::highlight`): select them and a small bar offers five colours, a fill or an underline, and a pill or a rectangle; tapping a highlight changes or removes it. They are his notes, not content: each is stored as its own synced setting (`hl.<lesson>.<id>`, a tombstone `{"gone":true}` when removed), never in `content/`. A highlight is found again by its words and up to 32 characters around them, so rewording a sentence in a lesson can drop a highlight on it; small edits elsewhere in the step keep it. Shapes are drawn in a `.uhl-layer` under the text, never inside the step's own nodes, and text on a fill turns dark through the CSS Custom Highlight API. The swipe that turns steps ignores drags while text is selected.
 
 ## Check before the PR
 
