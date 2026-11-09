@@ -86,6 +86,17 @@ impl Channel {
         }
     }
 
+    /// The feeds a release on this channel goes to: a beta also reaches
+    /// everyone on alpha, a stable release everyone.
+    pub fn reach(self) -> &'static [Channel] {
+        match self {
+            Self::Preview => &[Self::Preview],
+            Self::Alpha => &[Self::Alpha],
+            Self::Beta => &[Self::Alpha, Self::Beta],
+            Self::Stable => &[Self::Alpha, Self::Beta, Self::Stable],
+        }
+    }
+
     /// `update.json`'s URL for this channel.
     pub fn feed_url(self) -> String {
         format!("{FEED_BASE}/{}/{MANIFEST_FILE}", self.release_tag())
@@ -316,7 +327,23 @@ pub struct UpdateAsset {
     pub build: Option<u64>,
 }
 
-/// A workspace version: `1.0.0`, `1.0.0-alpha.2`, `1.0.0-beta.1`, `1.0.0-rc.1`.
+/// Android's `versionCode` for a build: [`VERSION_CODE_BASE`] plus the
+/// build number, the same recipe as `scripts/android-release-apk.sh`. Since
+/// 2026-11-09 (Mohamed) every build, preview or release, takes its number
+/// from one counter (the commits on main, `scripts/version.sh`), so the code
+/// grows with every build whatever its version (docs/RELEASE.md §1).
+pub fn version_code(build: u64) -> u64 {
+    VERSION_CODE_BASE + build
+}
+
+/// Above every code the old `1.0.0-alpha.N` recipe made (10 000 1NN), so
+/// installed apps take the first build of the new scheme as an update.
+pub const VERSION_CODE_BASE: u64 = 20_000_000;
+
+/// A workspace version. Since 2026-11-09 a release is `YEAR.MONTH.N`
+/// (`2026.11.1`, the first of November 2026); the older `1.0.0-alpha.2`,
+/// `1.0.0-beta.1` and `1.0.0-rc.1` forms still parse, since feeds and
+/// installed apps carry them, and every calendar version sorts above them.
 #[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub struct Version {
     pub major: u32,
@@ -362,22 +389,10 @@ impl Version {
         Some(Self { major, minor, patch, stage })
     }
 
-    /// Android's `versionCode`, the same recipe as
-    /// `scripts/android-release-apk.sh`: `1.2.3-alpha.4` → 10203104. Major,
-    /// minor and patch, then the stage (alpha 100+N, beta 500+N, rc 800+N, a
-    /// release 999), so each update installs over the one before.
-    pub fn version_code(self) -> u64 {
-        let stage = match self.stage {
-            Stage::Alpha(n) => 100 + u64::from(n),
-            Stage::Beta(n) => 500 + u64::from(n),
-            Stage::Rc(n) => 800 + u64::from(n),
-            Stage::Final => 999,
-        };
-        (u64::from(self.major) * 10_000 + u64::from(self.minor) * 100 + u64::from(self.patch)) * 1000 + stage
-    }
-
-    /// The release channels that should offer this version: a beta also
-    /// reaches everyone on alpha, a release everyone.
+    /// The release channels this version may be published on: an old-style
+    /// alpha only on alpha, a beta on alpha and beta, a version without a
+    /// stage (every calendar version) on any of them. Which ones a release
+    /// actually reaches is its channel's [`Channel::reach`].
     pub fn channels(self) -> &'static [Channel] {
         match self.stage {
             Stage::Alpha(_) => &[Channel::Alpha],

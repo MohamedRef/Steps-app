@@ -12,27 +12,42 @@ The first **alpha**, `1.0.0-alpha.1`, was released on 2026-11-05, `1.0.0-alpha.2
 Steps has its own keys, its own feed and its own package (`app.steps`).
 It never shares a key, a feed or a client with Batna or any other app.
 
-## 1. Stages
+## 1. Versions and build numbers
 
-| Stage | Version | When |
+Since 2026-11-09 (Mohamed picked it, as Batna did) Steps uses calendar
+versions and one build counter: a version people read, and a build number
+that only grows.
+
+| What | Rule | Example |
 |---|---|---|
-| **Alpha** (first) | `1.0.0-alpha.N` | All workstreams in docs/WORKSTREAMS.md are merged, the critic rounds are clean, and Mohamed says go. |
-| **Beta** | `1.0.0-beta.N` | Later, after daily use of the alpha. Mohamed decides. |
-| **Stable** | `1.0.0` | Later still. Mohamed decides. |
+| Version | `YEAR.MONTH.N` in Cairo time, N = this month's releases so far + 1 | `2026.11.1`, `2026.11.2`, `2026.12.1` |
+| Build number | Commits on `main` (`git rev-list --count HEAD`): one counter for previews and releases | `812` |
+| Release tag | `v<version>` | `v2026.11.1` |
+| Channel | Not part of the number: alpha (default), beta or stable, picked when the Release workflow runs; previews are their own channel | |
+| Android `versionCode` | `20000000 + build` (`steps_core::update::version_code`) | `20000812` |
+| Android `versionName` | The version | `2026.11.1` |
+| In the app (Settings › About) | Version and build | `2026.11.1 · بناء 812` |
+| Preview build | The latest release's version, its own build | `2026.11.1 · بناء 845` |
 
-The version is `version` in the root `Cargo.toml`. The APK's `versionCode` is
-derived from it (`scripts/android-release-apk.sh`). An alpha always sorts
-before its beta, and a beta before the release, so each stage installs over
-the previous one and keeps your data.
+`scripts/version.sh release` prints the next release's version and build,
+`scripts/version.sh preview` a preview's, and `scripts/version.sh apply V`
+writes V into `Cargo.toml` for the build (CI only, never committed). The
+`version` committed in `Cargo.toml` stays `2026.11.0`: local builds and the
+previews before the first calendar release carry it. Nothing is bumped by
+hand before a release.
 
-Until the first alpha, the version stays `1.0.0-alpha.0` (versionCode
-10000100). The first alpha is `1.0.0-alpha.1` (10000101), then
-`1.0.0-alpha.2`…, `1.0.0-beta.1` (10000501)…, and `1.0.0` (10000999). Every
-step sorts above the one before, and every build is signed with the same
-permanent keys (§2), so each installs over the last and keeps the data: no
-uninstall between alpha, beta and stable. The versionCode may never go
-down: the preview workflow refuses to publish a build below the live
-feed's. Only move to a bare version (`1.0.0`) for a real stable release.
+Why the switch is safe: every calendar version sorts above every
+`1.0.0-alpha.N` (2026 > 1), and `20000000 + build` is above every old
+versionCode (`1.0.0-alpha.3` was `10000103`), so installed apps take the
+first new build as an ordinary update, on the same keys and package. Old
+versions still parse (`steps_core::update::Version`), since old feeds and
+installed apps carry them. The feed tags (`steps-preview`, `steps-alpha`,
+…) never change: the installed apps read them. The versionCode may never go
+down; the preview workflow refuses to publish a build below the live feed's.
+
+Before 2026-11-09: `1.0.0-alpha.1` and `1.0.0-alpha.2` (2026-11-05) and
+`1.0.0-alpha.3` (2026-11-06), tagged `steps-v1.0.0-alpha.N`, versionCode
+from the version (`1.0.0-alpha.3` → `10000103`).
 
 **The keys are permanent** (Mohamed, 2026-11-04). They are made once, before
 the first alpha, by `scripts/release-secrets.sh` (§4), and never replaced:
@@ -116,8 +131,9 @@ other and keeps the data.
 
 1. Once, on the Mac: the permanent keys (§2: `just release-keys`, the
    public update key committed, `just release-keys-backup`).
-2. Set `version` in `Cargo.toml` in a PR (with its `changes/` line) and merge it.
-   Before you press Release, on that commit of `main` (#341, #342):
+2. Nothing to bump: the Release workflow works out the version
+   (`scripts/version.sh release`). Before you press Release, on the
+   commit of `main` it will build (#341, #342):
    - **Nightly checks**, **Mac** and **Android preview APK** are green
      (start them from Actions › Run workflow if they haven't run on it;
      `daily.yml` usually has). The real Release refuses a commit without a
@@ -130,12 +146,14 @@ other and keeps the data.
      sign-in under الإعدادات › المزامنة. Web and Steps Cloud deploy by
      themselves after green CI on `main`; nothing to press for them.
    - Settings › المزامنة signs in on one device.
-3. Actions › Release › Run workflow, with "Dry run" **unticked**. It builds the content pack, the
+3. Actions › Release › Run workflow, pick the channel (alpha unless
+   Mohamed says beta or stable), with "Dry run" **unticked**. It builds the content pack, the
    release APK (Linux) and Steps.app (macOS runner), signs them with the
    keys above, bakes in Steps Cloud and the Google client (sync), and
    publishes:
-   - `steps-v<version>`: `steps-<version>.apk` and `Steps-<version>-mac.zip`
-     for installing by hand;
+   - `v<version>`: `Steps-<version>-android.apk`, `Steps-<version>-mac.zip`
+     and `SHA256SUMS.txt` for installing by hand, with what's new from
+     `changes/` (`scripts/release-notes.sh`);
    - the channel feed(s) (`steps-alpha`, …): the signed `update.json`
      that installed release builds read (§5).
 4. The first time only, install by hand: install the APK on both Galaxy
@@ -148,14 +166,15 @@ other and keeps the data.
 
 ### By hand on the Mac (fallback)
 
-1. Set `version` in `Cargo.toml` (`1.0.0-alpha.1` the first time).
+1. `scripts/version.sh apply "$(scripts/version.sh release | cut -d' ' -f1)"`
+   (don't commit the change).
 2. Run `just check`, then `just apk` and `just bundle-mac`.
 3. Install by hand the first time. Copy `Steps.app` to Applications, and run
    `just install-android <serial>` for the phone and the tablet.
 4. Walk the device checks: study a session on each device, check that
    reminders ring on one device only, and check that export and import
    round-trip.
-5. Tag it, e.g. `git tag steps-v1.0.0-alpha.1`.
+5. Tag it, e.g. `git tag v2026.11.1`.
 6. From the second alpha on, `just publish-update` sends it over the air
    instead of step 3 (§5).
 

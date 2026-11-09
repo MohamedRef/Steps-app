@@ -220,7 +220,7 @@ If sign-in fails: check `STEPS_GOOGLE_CLIENT_IDS`, then run Actions › Deploy S
 
 Full detail: [RELEASE.md](RELEASE.md) and [COMPATIBILITY.md](COMPATIBILITY.md).
 
-**Versions:** `version` in the root `Cargo.toml`. Stages: `1.0.0-alpha.N` → `1.0.0-beta.N` → `1.0.0`; I decide when to move stage. The APK `versionCode` comes from the version and may never go down. Build number = commit count on `main` (`scripts/build-number.sh`). `steps-tools update guard` refuses `-alpha.0` and versions that aren't newer.
+**Versions** (since 2026-11-09, docs/RELEASE.md §1): a release is `YEAR.MONTH.N` (`2026.11.1`), worked out by `scripts/version.sh release` from this month's `v*` tags; nobody bumps `Cargo.toml` (it stays `2026.11.0`; CI writes the real version in with `scripts/version.sh apply`). The channel (alpha, beta, stable) is picked when the Release workflow runs. Build number = commit count on `main`, one counter for previews and releases; Android `versionCode` = `20000000 + build` and may never go down. Settings › About shows `2026.11.1 · بناء 812`. `steps-tools update guard` refuses versions that aren't newer. Before that: `1.0.0-alpha.1` to `1.0.0-alpha.3`.
 
 **Permanent keys (never regenerate them):**
 
@@ -281,6 +281,7 @@ Steps has its own look, chosen by me on 2026-11-05 (#604, #609). Full design sys
 - **Beta, then stable:** after daily use of the alpha; I decide when.
 - **Exam:** Step 1 around September 2027 (date not fixed yet). Since May 2026 the exam is 14 blocks of 30 minutes, up to 20 questions each.
 - **Study sessions survive leaving and restarts (2026-11-08, ideas from Batna #753, #755, #756):** Today shows "كمّل الجلسة" first while a Study session is open, and returns to the same item without starting another. After every step the queue is saved on this device only (local setting `study.session.v1`, `steps_core::session::SessionCheckpoint`) with a fingerprint of the live review log (`Store::study_review_marker`); at the next start it comes back only when that fingerprint and every saved grade still match the log, otherwise it is dropped, so no answer is ever replayed. Ending a session or finishing it clears the save. Time spent in another app no longer counts as answer time (`study/foreground.rs` + `foreground.js`, tested by `crates/app/tests/study-visibility.test.cjs`). Not yet tried on a real phone after Android kills the app.
+- **Calendar versions (2026-11-09, from Batna #768, Mohamed's pick):** the next release is `2026.11.1`, tagged `v2026.11.1`, with `Steps-<version>-android.apk`, `-mac.zip` and `SHA256SUMS.txt`; installed alpha.3 builds take it as an ordinary update (higher version and versionCode, same keys and feeds).
 - **Smaller files, fewer merge conflicts:** split the busiest shared files one area per PR, with no behavior change (§3 file layout rule). Done: UI text (`i18n.rs` into `i18n/`, one file per feature); unit tests of every crate in sibling files; `lesson.rs` split into schema, `lesson/markup.rs` and `lesson/check.rs`.
 
 ### Known issues

@@ -42,7 +42,7 @@ fn keygen_manifest_sign_verify_round_trip() {
     )
     .unwrap();
     assert_eq!(m.assets[0].file, "steps-1.0.0-alpha.2-android-arm64.apk");
-    assert_eq!(m.assets[0].version_code, Some(10_000_102));
+    assert_eq!(m.assets[0].version_code, Some(20_000_000));
     assert_eq!(m.assets[1].file, "steps-content-1.0.0-alpha.2-content.pack");
     assert_eq!(m.assets[1].version_code, None);
 
@@ -179,7 +179,16 @@ fn channels_follow_the_version() {
     let channels = |v: &str| run(dir.path(), &strings(&["channels", "--version", v]));
     assert_eq!(channels("0.1.1-alpha.1").unwrap(), "alpha");
     assert_eq!(channels("0.2.0-beta.1").unwrap(), "alpha\nbeta");
-    assert_eq!(channels("1.0.0").unwrap(), "alpha\nbeta\nstable");
+    // A calendar version (or any without a stage) goes to alpha unless
+    // its channel is named.
+    assert_eq!(channels("2026.11.1").unwrap(), "alpha");
+    assert_eq!(channels("1.0.0").unwrap(), "alpha");
+    let on = |v: &str, c: &str| run(dir.path(), &strings(&["channels", "--version", v, "--channel", c]));
+    assert_eq!(on("2026.11.1", "beta").unwrap(), "alpha\nbeta");
+    assert_eq!(on("2026.11.1", "stable").unwrap(), "alpha\nbeta\nstable");
+    assert!(on("2026.11.1", "preview").is_err());
+    assert!(on("1.0.0-alpha.3", "beta").is_err(), "an old alpha stays an alpha");
+    assert_eq!(on("1.0.0-beta.1", "beta").unwrap(), "alpha\nbeta");
     assert!(channels("one").is_err(), "a bad version fails instead of publishing nowhere");
 }
 

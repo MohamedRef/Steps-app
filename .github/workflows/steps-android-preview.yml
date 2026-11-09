@@ -102,6 +102,13 @@ jobs:
           persist-credentials: false
           # "What's new" reads the changes/ files merged since the build on the feed.
           fetch-depth: 0
+      # A preview carries the latest release's version (Cargo.toml's before
+      # the first calendar release) and its own build (docs/RELEASE.md §1).
+      - name: Preview version into Cargo.toml
+        run: |
+          read -r version build < <(scripts/version.sh preview)
+          scripts/version.sh apply "$version"
+          echo "Steps $version (build $build)"
       - uses: dtolnay/rust-toolchain@stable
         with:
           targets: aarch64-linux-android
@@ -169,7 +176,7 @@ jobs:
             echo "STEPS_UPDATE_CHANNEL=preview"
             echo "STEPS_UPDATE_KEY=$(grep -v '^#' ~/.steps-preview-update/key.pub | head -1)"
             # main's commit count, the same scale as releases (#110)
-            echo "STEPS_BUILD=$(scripts/build-number.sh)"
+            echo "STEPS_BUILD=$(scripts/version.sh preview | cut -d' ' -f2)"
             echo "STEPS_COMMIT=${GITHUB_SHA::7}"
           } >> "$GITHUB_ENV"
 
@@ -356,7 +363,7 @@ jobs:
           if live="$(gh release download "$TAG" -p update.json -O - 2>/dev/null)"; then
             old_code="$(jq -r '.assets[] | select(.platform == "android-arm64") | .version_code // 0' <<<"$live")"
             if [[ "$old_code" =~ ^[0-9]+$ && "$new_code" =~ ^[0-9]+$ ]] && (( new_code < old_code )); then
-              echo "::error::versionCode $new_code is below the published preview's $old_code. Raise version in Cargo.toml (docs/RELEASE.md §1)."
+              echo "::error::versionCode $new_code is below the published preview's $old_code. The build number must only grow (docs/RELEASE.md §1)."
               exit 1
             fi
           fi
