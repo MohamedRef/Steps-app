@@ -1,16 +1,18 @@
 //! Quick search, Ctrl/⌘ + K (or the search button on the rail): one box
-//! that jumps to a screen, a tool, a lecture, a lesson or a First Aid page
-//! ("ص 32" or just "32"). Everything comes from the library on the device;
+//! that jumps to a screen, a tool, a lecture, a lesson, a First Aid page
+//! ("ص 32" or just "32"), a Settings section, or a lecture's questions
+//! ("questions heart failure", "أسئلة …"). Everything comes from the library on the device;
 //! nothing is saved or sent. Results open through the same calls as the
 //! buttons that open them, so no session or answer is thrown away.
-//! Adapted from batna-app main: crates/app/src/shortcuts/palette.rs (#743);
+//! Adapted from batna-app main: crates/app/src/shortcuts/palette.rs (#743,
+//! Settings sections and lecture questions from #744);
 //! the page jump and the tools are Steps' own.
 
 use dioxus::prelude::*;
 
 use crate::content::Library;
 use crate::i18n::keys as tx;
-use crate::settings::SettingsNav;
+use crate::settings::{Section, SettingsNav};
 use crate::{Screen, Ui};
 
 static OPEN: GlobalSignal<bool> = Signal::global(|| false);
@@ -61,6 +63,8 @@ enum Go {
     Screen(Screen),
     Tool(&'static str),
     Settings,
+    Section(Section),
+    Questions(String),
     Page(u32, String),
     Lecture(String),
     Lesson(String),
@@ -81,9 +85,20 @@ fn matches(query: &str, words: &str) -> bool {
     query.to_lowercase().split_whitespace().all(|w| words.contains(w))
 }
 
+/// "questions <lecture>" (or أسئلة / bank / mcq): only then are lectures
+/// offered as question practice, so a plain search stays short.
+fn questions_query(query: &str) -> Option<&str> {
+    ["questions ", "question ", "bank ", "mcq ", "أسئلة ", "اسئلة ", "سؤال "]
+        .into_iter()
+        .find_map(|prefix| query.strip_prefix(prefix))
+        .map(str::trim)
+        .filter(|s| !s.is_empty())
+}
+
 /// With nothing typed: the screens, the tools and Settings. Typed: those
-/// that match, a First Aid page when it is a number, then lectures and
-/// lessons, best match first.
+/// that match, Settings sections, a First Aid page when it is a number, a
+/// lecture's questions when asked for, then lectures and lessons, best
+/// match first.
 fn find(query: &str, lib: &Library) -> Vec<Hit> {
     let q = query.trim().to_lowercase();
     let mut hits = Vec::new();
@@ -121,6 +136,35 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
     }
     if q.is_empty() {
         return hits;
+    }
+    // The same words the Settings search box finds them by.
+    for section in Section::ALL {
+        if section.applies() && section.matches(&q) {
+            hits.push(Hit {
+                key: format!("c-{}", section.id()),
+                name: section.title().into(),
+                sub: tx::KIND_SECTION.into(),
+                english: false,
+                go: Go::Section(section),
+            });
+        }
+    }
+    if let Some(needle) = questions_query(&q) {
+        for e in &lib.index.lectures {
+            let Some(lecture) = lib.lectures.get(&e.id) else { continue };
+            let tag = lib.lecture_tag(&e.id);
+            if matches(needle, &format!("{} {} {tag}", e.id, e.title))
+                && lecture.items.iter().any(|i| matches!(i.body, steps_core::content::Body::Mcq { .. }))
+            {
+                hits.push(Hit {
+                    key: format!("q-{}", e.id),
+                    name: e.title.clone(),
+                    sub: format!("{} · {tag}", tx::KIND_QUESTIONS),
+                    english: true,
+                    go: Go::Questions(e.id.clone()),
+                });
+            }
+        }
     }
     if let crate::gopage::Target::Page { page, lecture } = crate::gopage::target(lib, &q) {
         hits.push(Hit {
@@ -175,7 +219,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
 
 fn follow(go: Go, mut ui: Ui, settings: SettingsNav) {
     open(false);
-    if go != Go::Settings {
+    if !matches!(go, Go::Settings | Go::Section(_)) {
         settings.close();
     }
     match go {
@@ -186,6 +230,8 @@ fn follow(go: Go, mut ui: Ui, settings: SettingsNav) {
             }
         }
         Go::Settings => settings.show(None),
+        Go::Section(section) => settings.show(Some(section)),
+        Go::Questions(id) => crate::bank::practise(ui, &id, None),
         Go::Page(page, lecture) => crate::pagesheet::open(page, &lecture, None, false, None),
         Go::Lecture(id) => crate::lecture::open(ui, &id),
         Go::Lesson(id) => crate::learn::open(ui, &id),
