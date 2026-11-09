@@ -4,7 +4,7 @@
 import { spawn } from "node:child_process";
 import { generateKeyPairSync, createSign, randomBytes } from "node:crypto";
 import { createServer } from "node:http";
-import { writeFileSync, rmSync } from "node:fs";
+import { readFileSync, writeFileSync, rmSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import assert from "node:assert/strict";
@@ -32,6 +32,17 @@ const jwksServer = createServer((_req, res) => {
   res.end(JSON.stringify({ keys: [jwk] }));
 });
 await new Promise((resolve) => jwksServer.listen(KEY_PORT, "127.0.0.1", resolve));
+// The integration test needs a release Rust build, not Binaryen packaging.
+// Keep production's wrangler.toml untouched: on CI GitHub's binaryen archive
+// has repeatedly returned 504, preventing *any* Worker test from starting.
+// worker-build accepts --no-opt; use it only in this ephemeral test config.
+const config = join(serverDir, "wrangler.e2e.toml");
+const liveConfig = readFileSync(join(serverDir, "wrangler.toml"), "utf8");
+const buildCommand = 'command = "CARGO_PROFILE_RELEASE_STRIP=false worker-build --release"';
+if (!liveConfig.includes(buildCommand)) throw Error("Cannot find the production Worker build command");
+writeFileSync(config, liveConfig.replace(
+  buildCommand, 'command = "CARGO_PROFILE_RELEASE_STRIP=false worker-build --release --no-opt"',
+));
 const vars = join(serverDir, ".dev.vars");
 const state = join(serverDir, ".wrangler", "e2e-state");
 writeFileSync(vars, [
@@ -42,12 +53,13 @@ writeFileSync(vars, [
 ].join("\n"));
 rmSync(state, { recursive: true, force: true });
 const dev = spawn(process.env.WRANGLER ?? "wrangler", [
-  "dev", "--port", String(PORT), "--ip", "127.0.0.1", "--persist-to", state,
+  "dev", "--config", config, "--port", String(PORT), "--ip", "127.0.0.1", "--persist-to", state,
 ], { cwd: serverDir, stdio: ["ignore", "inherit", "inherit"] });
 function cleanup() {
   dev.kill("SIGTERM");
   jwksServer.close();
   rmSync(vars, { force: true });
+  rmSync(config, { force: true });
 }
 process.on("exit", cleanup);
 async function api(method, path, { token, body } = {}) {
