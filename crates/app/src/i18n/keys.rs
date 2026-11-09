@@ -15,3 +15,16 @@ pub const FLAG: &str = "تعلّم السؤال عشان ترجعله";
 pub const ESC: &str = "تقفل أي حاجة مفتوحة";
 pub const HELP: &str = "القايمة دي";
 pub const PAGE: &str = "تروح لصفحة في First Aid";
+pub const QUICK: &str = "دوّر بسرعة: شاشة، محاضرة، درس أو صفحة";
+pub const FOCUS: &str = "وضع التركيز في الدرس والمراجعة";
+pub const SPLIT: &str = "الفاصل بين السؤال والشرح: الأسهم تحركه";
+// Quick search (shortcuts/palette.rs).
+pub const QS_TITLE: &str = "دوّر بسرعة";
+pub const QS_PLACEHOLDER: &str = "شاشة، محاضرة، درس، أو رقم صفحة…";
+pub const QS_NONE: &str = "مفيش حاجة بالاسم ده.";
+pub const QS_HINT: &str = "↑ ↓ تتنقّل · Enter تفتح · Esc تقفل";
+pub const KIND_SCREEN: &str = "شاشة";
+pub const KIND_TOOL: &str = "أداة";
+pub const KIND_PAGE: &str = "صفحة";
+pub const KIND_LECTURE: &str = "محاضرة";
+pub const KIND_LESSON: &str = "درس";

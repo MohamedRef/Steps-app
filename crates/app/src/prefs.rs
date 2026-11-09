@@ -18,6 +18,8 @@ const NAV_STYLE: &str = "nav_style";
 const PEN_HOVER: &str = "pen_hover";
 const MOUSE_HOVER: &str = "mouse_hover";
 const APPEARANCE: &str = "appearance";
+const DESK_SPLIT: &str = "desk_split";
+const DESK_FOCUS: &str = "desk_focus";
 const READ_SIZE: &str = "read_size";
 const READ_SPACING: &str = "read_spacing";
 const READ_WIDTH: &str = "read_width";
@@ -305,6 +307,12 @@ pub struct DevicePrefs {
     /// One of [`Appearance::ALL`]. Older files have no line for it and load
     /// as Stepped.
     pub appearance: Appearance,
+    /// The question pane's share of a two-pane study card, in percent
+    /// (35–70); 0 keeps each item's own default (desk/mod.rs).
+    pub desk_split: u8,
+    /// Focus mode on the Mac and tablet: the sidebar and the lesson's side
+    /// column step aside while a lesson or a study card is open.
+    pub desk_focus: bool,
     /// Lesson text size, line spacing and line width. Older files have no
     /// lines for them and load as the defaults.
     pub reading: Reading,
@@ -319,6 +327,8 @@ impl Default for DevicePrefs {
             pen_hover: true,
             mouse_hover: true,
             appearance: Appearance::default(),
+            desk_split: 0,
+            desk_focus: false,
             reading: Reading::default(),
         }
     }
@@ -361,6 +371,12 @@ impl DevicePrefs {
             pen_hover: map.get(PEN_HOVER) != Some(&"off"),
             mouse_hover: map.get(MOUSE_HOVER) != Some(&"off"),
             appearance: map.get(APPEARANCE).map_or_else(Appearance::default, |v| Appearance::parse(v)),
+            desk_split: map
+                .get(DESK_SPLIT)
+                .and_then(|v| v.parse::<u8>().ok())
+                .filter(|v| (35..=70).contains(v))
+                .unwrap_or(0),
+            desk_focus: map.get(DESK_FOCUS) == Some(&"on"),
             reading: Reading {
                 size: map.get(READ_SIZE).map_or_else(ReadSize::default, |v| ReadSize::parse(v)),
                 spacing: map.get(READ_SPACING).map_or_else(ReadSpacing::default, |v| ReadSpacing::parse(v)),
@@ -373,13 +389,15 @@ impl DevicePrefs {
         let on_off = |on: bool| if on { "on" } else { "off" };
         format!(
             "{THEME}={}\n{TEXT_SIZE}={}\n{NAV_STYLE}={}\n{PEN_HOVER}={}\n{MOUSE_HOVER}={}\n{APPEARANCE}={}\n\
-             {READ_SIZE}={}\n{READ_SPACING}={}\n{READ_WIDTH}={}\n",
+             {DESK_SPLIT}={}\n{DESK_FOCUS}={}\n{READ_SIZE}={}\n{READ_SPACING}={}\n{READ_WIDTH}={}\n",
             self.theme.as_str(),
             self.text_size.as_str(),
             self.nav_style.as_str(),
             on_off(self.pen_hover),
             on_off(self.mouse_hover),
             self.appearance.as_str(),
+            self.desk_split,
+            on_off(self.desk_focus),
             self.reading.size.as_str(),
             self.reading.spacing.as_str(),
             self.reading.width.as_str(),
@@ -429,6 +447,8 @@ mod tests {
             pen_hover: false,
             mouse_hover: true,
             appearance: Appearance::Tinted,
+            desk_split: 65,
+            desk_focus: true,
             reading: Reading { size: ReadSize::Larger, spacing: ReadSpacing::Airy, width: ReadWidth::Narrow },
         };
         assert_eq!(DevicePrefs::parse(&p.render()), p);
@@ -522,6 +542,16 @@ mod tests {
                 );
             }
         }
+    }
+
+    #[test]
+    fn desk_split_and_focus_keep_safe_defaults() {
+        let old = DevicePrefs::parse("theme=night\n");
+        assert_eq!((old.desk_split, old.desk_focus), (0, false));
+        assert_eq!(DevicePrefs::parse("desk_split=99\ndesk_focus=yes").desk_split, 0);
+        assert_eq!(DevicePrefs::parse("desk_split=34").desk_split, 0);
+        let p = DevicePrefs::parse("desk_split=35\ndesk_focus=on");
+        assert_eq!((p.desk_split, p.desk_focus), (35, true));
     }
 
     #[test]

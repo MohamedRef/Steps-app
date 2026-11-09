@@ -24,6 +24,8 @@ pub fn out_dir(screen: &str) -> PathBuf {
         crate::PARTS_CSS.text().to_string(),
         crate::APPEARANCE_CSS.text().to_string(),
         crate::sheet::CSS.text().to_string(),
+        // Chrome draws this in every window: panes, divider, focus button.
+        crate::desk::DESK_CSS.text().to_string(),
     ]
     .join("\n");
     std::fs::write(dir.join("app.css"), app).unwrap();

@@ -420,6 +420,7 @@ pub fn Study() -> Element {
                                 div { class: "progress-fill", style: "inline-size: {pos * 100 / len.max(1)}%" }
                             }
                             span { class: "muted small num-ltr st-count", "{pos + 1} / {len}" }
+                            crate::desk::FocusToggle {}
                             if can_undo {
                                 button {
                                     class: "btn-link st-undo",

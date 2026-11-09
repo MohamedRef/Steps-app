@@ -13,3 +13,8 @@ pub const SIDE_WAITING: &str = "الشرح وصفحة الكتاب هيظهرو�
 pub const SIDE_LABEL: &str = "الشرح";
 #[allow(dead_code)]
 pub const LIST_LABEL: &str = "القايمة";
+// Focus mode and the pane divider (desk/mod.rs).
+pub const FOCUS_ENTER: &str = "وضع التركيز: خبّي القايمة";
+pub const FOCUS_LEAVE: &str = "اطلع من وضع التركيز";
+pub const SPLIT_HANDLE: &str = "عرض السؤال والشرح";
+pub const SPLIT_HELP: &str = "اسحب الفاصل أو استخدم الأسهم، ودوس مرتين يرجع زي الأول";
