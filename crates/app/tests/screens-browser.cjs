@@ -8,6 +8,7 @@ const path = require('node:path');
 const { pathToFileURL } = require('node:url');
 const { chromium } = require('playwright');
 const { highlightChecks } = require('./highlight-browser.cjs');
+const { keyboardFocusChecks } = require('./keyboard-focus-browser.cjs');
 
 const WIDTHS = [320, 384, 600, 840, 1280];
 const SCHEMES = ['light', 'dark'];
@@ -286,6 +287,8 @@ async function run() {
     await foregroundChecks(page, fixtures);
     current = 'own highlights';
     await highlightChecks(browser, fixtures);
+    current = 'keyboard focus';
+    await keyboardFocusChecks(browser);
     assert.deepEqual(errors, [], 'browser page errors');
     const stale = [...KNOWN.small, ...KNOWN.overflow, ...KNOWN.noHeading].filter(k => !seen.has(k));
     await fs.writeFile(path.join(output, 'report.json'),
