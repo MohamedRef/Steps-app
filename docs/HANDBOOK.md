@@ -268,6 +268,7 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 - **Beta, then stable:** after daily use of the alphas; I decide when.
 - Features that copy a commercial question bank stay low priority: I already have the banks.
 - **Exam:** Step 1 around September 2027 (date not fixed). Since May 2026 it is 14 blocks of 30 minutes, up to 20 questions each.
+- **Phone touch and quick search (2026-11-09, from Batna #746-#751 and #758):** every phone control in the shell, lists, bank and tables is a full 48dp target; the Study progress row splits into a meter row and an Undo/End row under 600dp; the top bar has a search button (`shortcuts::SearchButton`) for «دوّر بسرعة», which gives focus back to it when closed. `crates/app/tests/screens-browser.cjs` checks these at 320 and 384px, a 520px-tall (keyboard-up) Study screen, and `mobile-touch-browser.cjs` the list, bank and table controls. The nightly Cloud end-to-end test builds the Worker with `--no-opt` in a throwaway `wrangler.e2e.toml` and uses a cached `wasm-bindgen` CLI built at the Cargo.lock version, so GitHub release-download 504s no longer stop it (Batna #760, #762).
 - **Calendar versions (2026-11-09, from Batna #768, Mohamed's pick):** the next release is `2026.11.1`, tagged `v2026.11.1`, with `Steps-<version>-android.apk`, `-mac.zip` and `SHA256SUMS.txt`; installed alpha.3 builds take it as an ordinary update (higher version and versionCode, same keys and feeds).
 
 ### Known issues

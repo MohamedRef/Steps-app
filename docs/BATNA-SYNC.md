@@ -6,6 +6,8 @@ Steps began as a copy of Batna's engine and UI and is now a separate app. A Batn
 
 Since then, single features are ported one PR at a time and credited in that PR and in the code, not through this full diff.
 
+Ported on its own since (each adapted, not patched): Batna #737 (#643), #739/#740 (#645), #741/#743 (#652), #753/#755/#756 (#650), #767 colours (#651), #770 own highlights (#649), #771 reminders (#654), and on 2026-11-09 #746-#751, #758, #760 and #762 (phone touch targets, phone quick search, Cloud test CI). Not ported: #769 (Batna's own icon), #768 (Batna's calendar version numbers), #765 (Batna's Mac preview workflow), calculator parts of #744 and #748.
+
 How to port everything since the last ported commit:
 
 ```bash

@@ -370,5 +370,14 @@ kbd {
 .qs-list:not(:has(.qs-row:focus)) .qs-row:first-of-type { background: color-mix(in srgb, var(--accent-soft) 60%, transparent); }
 .qs-empty { padding: var(--sp-4); color: var(--muted); }
 .qs-hint { margin: 0; padding: var(--sp-2) var(--sp-4); border-block-start: 1px solid var(--line-soft, var(--line)); color: var(--muted); font-size: var(--fs-sm); }
+/* Phones: when the keyboard takes half the screen, the results shrink and
+   scroll and the box stays inside the safe area (batna-app #746). */
+@media (max-width: 599.98px) {
+  .qs {
+    inset-block-start: max(0.5rem, env(safe-area-inset-top, 0px));
+    max-block-size: calc(100dvh - max(0.5rem, env(safe-area-inset-top, 0px)) - max(0.5rem, env(safe-area-inset-bottom, 0px)));
+  }
+  .qs-list { flex: 1 1 auto; max-block-size: none; }
+}
 @media (hover: none) { .qs-hint, .qs-close kbd { display: none; } .qs-close::after { content: "✕"; } }
 @media (prefers-contrast: more), (forced-colors: active) { .qs, .qs-row:focus-visible { border-width: 2px; } }

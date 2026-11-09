@@ -272,12 +272,17 @@ fn AppAt(start: Screen, children: Element) -> Element {
                     // there it says only the exam (main.css).
                     bdi { class: "brand-tag brand-tag-short", dir: "ltr", {i18n::app::TAGLINE_SHORT} }
                 }
-                button {
-                    class: "icon-button",
-                    aria_label: Screen::Settings.label(),
-                    title: Screen::Settings.label(),
-                    onclick: move |_| settings.show(None),
-                    {icons::nav(Screen::Settings)}
+                // Search and Settings as one group; the phone's touch way
+                // into quick search (Ctrl/⌘ + K on a keyboard).
+                div { class: "topbar-actions",
+                    shortcuts::SearchButton {}
+                    button {
+                        class: "icon-button",
+                        aria_label: Screen::Settings.label(),
+                        title: Screen::Settings.label(),
+                        onclick: move |_| settings.show(None),
+                        {icons::nav(Screen::Settings)}
+                    }
                 }
             }
             nav { class: "nav", aria_label: i18n::nav::LABEL,

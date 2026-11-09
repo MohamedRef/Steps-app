@@ -154,5 +154,24 @@ jobs:
         run: |
           cargo install worker-build --version ^0.8 --locked
           npm install -g wrangler@4
+      # worker-build downloads wasm-bindgen from GitHub Releases, which has
+      # answered 504 for whole runs. Build the CLI from crates.io at the
+      # Cargo.lock version and cache it (adapted from batna-app #762).
+      - name: wasm-bindgen version from Cargo.lock
+        id: bindgen
+        run: echo "version=$(awk '/^name = "wasm-bindgen"$/{getline; gsub(/version = |"/, ""); print; exit}' Cargo.lock)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/wasm-bindgen
+          key: wasm-bindgen-cli-${{ steps.bindgen.outputs.version }}-${{ runner.os }}-${{ runner.arch }}
+      - name: Pinned wasm-bindgen CLI (no release download)
+        env:
+          VERSION: ${{ steps.bindgen.outputs.version }}
+        run: |
+          if [ ! -x "$HOME/.cargo/bin/wasm-bindgen" ]; then
+            cargo install wasm-bindgen-cli --version "$VERSION" --locked
+          fi
+          "$HOME/.cargo/bin/wasm-bindgen" --version | grep -Fx "wasm-bindgen $VERSION"
+          echo "WASM_BINDGEN_BIN=$HOME/.cargo/bin/wasm-bindgen" >> "$GITHUB_ENV"
       - name: Steps Cloud end-to-end (fake Google, two devices)
         run: node crates/server/tests/e2e.mjs

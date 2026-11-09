@@ -190,3 +190,18 @@ fn the_rail_tools_open_their_pages() {
     super::sheets::tap_row(&mut app, "nav-tool", crate::i18n::refs::ADD_CARD);
     assert_eq!(screen(&app), "Today");
 }
+
+#[test]
+fn the_phone_bar_search_opens_quick_search_and_closing_returns_focus() {
+    let mut app = start();
+    app.assert_lacks(crate::i18n::keys::QS_HINT);
+    app.tap("topbar-search");
+    assert!(app.can_tap("qs-close"), "the phone's search button opens quick search");
+    SCRIPTS.with_borrow_mut(Vec::clear);
+    app.tap("qs-close");
+    assert!(!app.can_tap("qs-close"), "✕ closes it");
+    assert!(
+        SCRIPTS.with_borrow(|s| s.iter().any(|js| js.contains("__stepsSearchOpener"))),
+        "closing gives focus back to the button that opened it"
+    );
+}
