@@ -74,6 +74,13 @@ impl Run {
     #[track_caller]
     fn status(&mut self, what: &str, pred: impl Fn(&CloudStatus) -> bool) -> CloudStatus {
         let from = self.statuses.len();
+        self.status_since(from, what, pred)
+    }
+
+    /// The first matching status since a saved position, including statuses
+    /// already collected by `event` while waiting for another event.
+    #[track_caller]
+    fn status_since(&mut self, from: usize, what: &str, pred: impl Fn(&CloudStatus) -> bool) -> CloudStatus {
         let end = Instant::now() + Duration::from_secs(8);
         loop {
             self.pump();
@@ -538,6 +545,35 @@ fn an_older_hub_keeps_unknown_table_ops_without_blocking_the_rest() {
 
 // --- Google sign-in ---------------------------------------------------
 
+#[test]
+fn waiting_for_browser_done_keeps_an_already_received_live_status() {
+    let (commands, _command_rx) = unbounded_channel();
+    let (events, event_rx) = unbounded_channel();
+    let s = store();
+    let mut old_live = CloudStatus::not_configured(s.device());
+    old_live.sync = SyncState::Live;
+    old_live.email = Some("previous@example.com".into());
+    let mut run =
+        Run { commands, events: event_rx, store: s, statuses: vec![old_live.clone()], others: Vec::new() };
+    let mut live = old_live;
+    live.email = Some("mohamed@example.com".into());
+    let before_sign_in = run.statuses.len();
+
+    // Queue both before waiting: event() must pump Live while reading
+    // browser completion, as it can on a fast engine thread in Mac CI.
+    events.send(Event::SigningIn(false)).unwrap();
+    events.send(Event::Status(live.clone())).unwrap();
+    assert_eq!(run.event("browser done", |e| matches!(e, Event::SigningIn(_))), Event::SigningIn(false));
+    assert_eq!(run.statuses.last(), Some(&live));
+    assert!(run.events.is_empty(), "no second Live event is coming");
+    assert_eq!(run.status_since(before_sign_in, "live", |st| st.sync == SyncState::Live), live);
+
+    // Ordinary status() calls still wait past every status already read.
+    let next = CloudStatus::not_configured(s.device());
+    events.send(Event::Status(next.clone())).unwrap();
+    assert_eq!(run.status("new status", |_| true), next);
+}
+
 /// Plays the browser: waits for the engine to open Google's page for
 /// `client`, then sends the redirect with `query` (`code=…`), carrying the
 /// page's state unless `query` has its own.
@@ -593,11 +629,12 @@ fn signing_in_with_google_reaches_steps_cloud_and_goes_live() {
     fake.route("POST /v1/auth/google", 200, json(&session(&me, "acc-g", now() + DAY)));
     let mut run = start(&fake, s, None, google("steps-test-ok"));
     assert_eq!(run.status("signed out", |_| true).sync, SyncState::SignedOut);
+    let before_sign_in = run.statuses.len();
     run.send(Command::SignInGoogle);
     assert_eq!(run.event("browser open", |e| matches!(e, Event::SigningIn(_))), Event::SigningIn(true));
     browser_returns("steps-test-ok", "code=4%2F0Ab");
     assert_eq!(run.event("browser done", |e| matches!(e, Event::SigningIn(_))), Event::SigningIn(false));
-    let live = run.status("live", |st| st.sync == SyncState::Live);
+    let live = run.status_since(before_sign_in, "live", |st| st.sync == SyncState::Live);
     assert_eq!(live.email.as_deref(), Some("mohamed@example.com"));
     let token = fake.requests("POST /token");
     assert!(token[0].body.contains("code=4%2F0Ab"), "{}", token[0].body);
