@@ -27,10 +27,9 @@ jobs:
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v5
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: ./.github/actions/rust
         with:
           targets: aarch64-linux-android
-          components: clippy
       - uses: Swatinem/rust-cache@v2
         with:
           save-if: ${{ github.ref == 'refs/heads/main' }}
@@ -54,7 +53,7 @@ jobs:
       - uses: actions/checkout@v5
       - name: System libraries for the desktop WebView
         run: sudo apt-get update && sudo apt-get install -y libwebkit2gtk-4.1-dev libgtk-3-dev libxdo-dev libsoup-3.0-dev
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: ./.github/actions/rust
         with:
           components: llvm-tools-preview
       - uses: taiki-e/install-action@v2
@@ -98,7 +97,7 @@ jobs:
       - uses: actions/checkout@v5
       - name: libfaketime
         run: sudo apt-get update && sudo apt-get install -y faketime
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: ./.github/actions/rust
       - uses: Swatinem/rust-cache@v2
         with:
           key: later-dates
@@ -122,10 +121,9 @@ jobs:
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v5
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: ./.github/actions/rust
         with:
           targets: wasm32-unknown-unknown
-          components: clippy
       - uses: Swatinem/rust-cache@v2
         with:
           key: web
@@ -139,10 +137,9 @@ jobs:
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: ./.github/actions/rust
         with:
           targets: wasm32-unknown-unknown
-          components: clippy
       - uses: Swatinem/rust-cache@v2
         with:
           save-if: ${{ github.ref == 'refs/heads/main' }}
