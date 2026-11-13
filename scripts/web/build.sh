@@ -31,7 +31,8 @@ pack=$(CARGO_PROFILE_RELEASE_STRIP=false cargo build -p steps-app --bin steps --
 import json, sys
 for line in sys.stdin:
     m = json.loads(line)
-    if m.get("reason") == "build-script-executed" and "/build/steps-app-" in m.get("out_dir", ""):
+    # Match the package, not the folder: Rust 1.100 names it build/steps-app/<hash>/out.
+    if m.get("reason") == "build-script-executed" and "#steps-app@" in m.get("package_id", ""):
         print(m["out_dir"] + "/content.pack")
 ' | tail -1)
 [[ -f "$pack" ]] || { echo "content.pack not found (cargo didn't report steps-app's build script)" >&2; exit 1; }
