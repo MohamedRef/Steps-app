@@ -38,6 +38,11 @@ fmt:
 validate:
     cargo run -q -p steps-tools -- validate
 
+# Rewrite the content numbers in README.md and docs/HANDBOOK.md §12 from
+# content/ (`steps-tools counts --check` is the Nightly check)
+counts:
+    cargo run -q -p steps-tools -- counts --write
+
 # Authoring (docs/AUTHORING.md): the next free item and lesson ids of a lecture
 content-next-id lecture:
     cargo run -q -p steps-tools -- content next-id {{lecture}}
@@ -84,8 +89,10 @@ web:
 web-release:
     scripts/web/build.sh
 
-# Android debug APK on a connected device (needs dx 0.7.10, Android SDK + NDK)
+# Android debug APK on a connected device (needs dx 0.7.10, Android SDK + NDK).
+# rust-toolchain.toml pins Rust without cross targets; each cross recipe adds its own.
 android:
+    rustup target add aarch64-linux-android
     cd crates/app && dx serve --platform android --no-default-features --features mobile
 
 # --- release builds (docs/RELEASE.md; nothing is released before Mohamed says go) ---
@@ -114,6 +121,7 @@ content-digest:
 
 # Build a signed release APK into dist/android/steps.apk
 apk:
+    rustup target add aarch64-linux-android
     rm -rf {{dist}}/android && mkdir -p {{dist}}/android
     export STEPS_BUILTIN_CONTENT="$({{just_executable()}} content-digest)" && cd {{app}} && STEPS_BUILD="$(../../scripts/build-number.sh)" STEPS_COMMIT="$(git rev-parse --short HEAD)" dx bundle --platform android --release --package-types apk --target aarch64-linux-android --no-default-features --features mobile --out-dir ../../{{dist}}/android/raw
     # dx leaves a debug build; rebuild it as a release (not debuggable, R8, versionCode).
@@ -155,6 +163,7 @@ publish-update notes_en="" notes_ar_eg="":
 
 # Install the Worker tools once: wrangler 4 + worker-build
 cloud-tools:
+    rustup target add wasm32-unknown-unknown
     npm install -g wrangler@4
     cargo install worker-build --version ^0.8 --locked
 
@@ -164,10 +173,12 @@ cloud-setup:
 
 # Run Steps Cloud locally on http://127.0.0.1:8787 (local workerd)
 cloud-dev:
+    rustup target add wasm32-unknown-unknown
     cd {{server}} && wrangler dev
 
 # Deploy to steps-cloud.<your-subdomain>.workers.dev
 cloud-deploy:
+    rustup target add wasm32-unknown-unknown
     cd {{server}} && wrangler deploy
 
 # Stream live logs from the deployed Worker

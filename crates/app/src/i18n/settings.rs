@@ -64,9 +64,9 @@ pub const APPEARANCE_OUTLINE: &str = "خطوط";
 pub const APPEARANCE_OUTLINE_SUB: &str = "كروت شفافة بحدود واضحة، زي كشكول المذاكرة";
 pub const APPEARANCE_TINTED: &str = "ملوّن";
 pub const APPEARANCE_TINTED_SUB: &str = "كروت متلوّنة بلون الثيم، والصفحة أهدى منها";
-pub const APPEARANCE_GLASS: &str = "زجاج";
+pub const APPEARANCE_GLASS: &str = "زجاج مصنفر";
 pub const APPEARANCE_GLASS_SUB: &str =
-    "خلفية وكروت زجاجية ناعمة وشريط تنقّل مطفي، مع الحفاظ على وضوح أسئلة المذاكرة";
+    "كروت زجاج مطفي واقفة على حافّة، فوق سلّم من لون الثيم، والأسئلة فاضلة واضحة";
 
 pub const TEXT_SIZE: &str = "حجم الواجهة";
 pub const TEXT_SMALLER: &str = "أصغر";

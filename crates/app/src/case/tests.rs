@@ -193,3 +193,10 @@ fn a_long_stem_is_cut_to_one_line_and_other_kinds_have_none() {
     let (_, card) = find_item("cvs.L01.001").unwrap();
     assert_eq!(first_line(card), "");
 }
+
+// Issue #673: case steps follow the bank's rule, so numbers read smallest first.
+#[test]
+fn numeric_step_options_go_smallest_first() {
+    let o = opts(&["Above 30", "Above 10", "Above 20"]);
+    assert_eq!(option_order(&o, 3, 1), [1, 2, 0]);
+}

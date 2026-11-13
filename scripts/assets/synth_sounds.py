@@ -1,16 +1,20 @@
 #!/usr/bin/env python3
-"""Synthesize Steps's study sounds (chunk 20; PARITY.md 2.1).
+"""Synthesize Steps' study sounds.
 
-Nothing is sampled or downloaded, so there is no licence to track. Two cues,
-three variations each:
+Nothing is sampled or downloaded, so there is no licence to track. The cues
+follow Steps' picture of studying as a climb, two cues with three variations
+each:
 
-- chime-N: a soft, short rising chime for a right answer.
-- calm-N: a calm tone when a session ends (a struck bowl, not a fanfare).
+- step-N: a right answer is a light footstep up: a short run of rising
+  wooden or plucked notes (marimba bar, kalimba tine, a soft swoop up).
+- summit-N: the end of a session is reaching the top: a few notes climb and
+  open onto one warm, held chord.
 
 Renders 48 kHz mono, normalizes to about -18 LUFS (measured with ffmpeg's
-EBU R128 filter; a little quieter than Batna's, for long study sessions) and
-writes 16-bit WAV to assets/sounds/, which every web view plays.
-Adapted from batna-app main: scripts/assets/synth_sounds.py.
+EBU R128 filter; quiet enough for long study sessions) and writes 16-bit WAV
+to assets/sounds/, which every web view plays. The loudness pipeline
+(`loudness`, `finish`, `write_wav`) is adapted from batna-app main:
+scripts/assets/synth_sounds.py; the instruments and the cues are Steps' own.
 
     pip install numpy      # and ffmpeg on PATH
     python3 scripts/assets/synth_sounds.py
@@ -30,50 +34,112 @@ RATE = 48_000
 TARGET_LUFS = -18.0
 
 
-def envelope(n: int, attack: float, decay: float) -> np.ndarray:
-    t = np.arange(n) / RATE
-    rise = np.clip(t / attack, 0, 1) ** 2
-    return rise * np.exp(-t / decay)
+def hz(note: str) -> float:
+    """'A4' -> 440.0; sharps as 'F#5'."""
+    names = {"C": -9, "D": -7, "E": -5, "F": -4, "G": -2, "A": 0, "B": 2}
+    semis = names[note[0]] + (1 if "#" in note else 0)
+    octave = int(note[-1])
+    return 440.0 * 2 ** ((semis + 12 * (octave - 4)) / 12)
+
+
+def timeline(seconds: float) -> np.ndarray:
+    return np.zeros(int(seconds * RATE))
+
+
+def place(out: np.ndarray, x: np.ndarray, at: float, gain: float = 1.0) -> None:
+    start = max(0, int(at * RATE))
+    end = min(len(out), start + len(x))
+    out[start:end] += gain * x[: end - start]
 
 
 def fade_out(x: np.ndarray, seconds: float) -> np.ndarray:
     k = int(seconds * RATE)
     x = x.copy()
-    x[-k:] *= np.linspace(1, 0, k)
+    x[-k:] *= np.linspace(1, 0, k) ** 2
     return x
 
 
-def chime(notes: list[float], gap: float, partials: list[tuple[float, float, float]], tail: float, seed: int) -> np.ndarray:
-    """Quick rising struck notes with a soft attack; the last one rings longer."""
+def one_pole_lowpass(x: np.ndarray, cutoff: float) -> np.ndarray:
+    a = np.exp(-2 * np.pi * cutoff / RATE)
+    y = np.empty_like(x)
+    acc = 0.0
+    for i, v in enumerate(x):
+        acc = (1 - a) * v + a * acc
+        y[i] = acc
+    return y
+
+
+def marimba(f0: float, length: float, seed: int) -> np.ndarray:
+    """A struck wooden bar: the tuned bar's inharmonic modes (1, 3.93, 9.2),
+    the upper ones dying fast, plus a tiny felt-mallet knock."""
     rng = np.random.default_rng(seed)
-    n = int((gap * (len(notes) - 1) + tail) * RATE)
-    t = np.arange(n) / RATE
-    out = np.zeros(n)
-    for i, f0 in enumerate(notes):
-        start = int(i * gap * RATE)
-        m = n - start
-        tt = t[:m]
-        life = tail if i == len(notes) - 1 else gap * 2.2
-        note = np.zeros(m)
-        for ratio, amp, decay in partials:
-            note += amp * np.sin(2 * np.pi * f0 * ratio * tt + rng.uniform(0, 2 * np.pi)) * envelope(m, 0.004, life * decay)
-        out[start:] += note * (0.75 if i < len(notes) - 1 else 1.0)
-    return fade_out(out, 0.06)
+    t = np.arange(int(length * RATE)) / RATE
+    x = np.zeros_like(t)
+    for ratio, amp, life in [(1.0, 1.0, 0.28), (3.93, 0.32, 0.05), (9.2, 0.08, 0.015)]:
+        x += amp * np.sin(2 * np.pi * f0 * ratio * t + rng.uniform(0, 2 * np.pi)) * np.exp(-t / life)
+    knock = one_pole_lowpass(rng.standard_normal(len(t)), 1800) * np.exp(-t / 0.004) * 0.6
+    attack = np.clip(t / 0.002, 0, 1)
+    return (x + knock) * attack
 
 
-def bowl(base: float, length: float, partials: list[tuple[float, float, float]], beat: float, seed: int) -> np.ndarray:
-    """A struck singing bowl: near-harmonic partials, each a pair of slightly
-    detuned sines (the slow beating that makes a bowl sound calm), a soft
-    mallet attack and a long, even decay."""
+def kalimba(f0: float, length: float, seed: int) -> np.ndarray:
+    """A plucked metal tine (Karplus-Strong with a soft pluck), with the
+    tine's bright 'click' partial near 5.4x that fades within a breath."""
     rng = np.random.default_rng(seed)
     n = int(length * RATE)
+    period = int(RATE / f0)
+    buf = one_pole_lowpass(rng.uniform(-1, 1, period), 3000)
+    out = np.empty(n)
+    for i in range(n):
+        out[i] = buf[i % period]
+        buf[i % period] = 0.996 * 0.5 * (buf[i % period] + buf[(i + 1) % period])
     t = np.arange(n) / RATE
-    out = np.zeros(n)
-    for ratio, amp, life in partials:
-        f = base * ratio
-        for detune in (-beat / 2, beat / 2):
-            out += 0.5 * amp * np.sin(2 * np.pi * (f + detune) * t + rng.uniform(0, 2 * np.pi)) * envelope(n, 0.02, length * 0.3 * life)
-    return fade_out(out, 0.4)
+    out += 0.25 * np.sin(2 * np.pi * f0 * 5.4 * t) * np.exp(-t / 0.03)
+    return out * np.clip(t / 0.003, 0, 1)
+
+
+def swoop(f_from: float, f_to: float, length: float) -> np.ndarray:
+    """A soft rounded tone that glides up a step as it sounds (a quick FM
+    pluck): the 'hop' of a right answer."""
+    t = np.arange(int(length * RATE)) / RATE
+    glide = f_to + (f_from - f_to) * np.exp(-t / 0.025)
+    phase = 2 * np.pi * np.cumsum(glide) / RATE
+    index = 1.2 * np.exp(-t / 0.05)
+    x = np.sin(phase + index * np.sin(2 * phase))
+    return x * np.clip(t / 0.004, 0, 1) * np.exp(-t / 0.16)
+
+
+def pad(freqs: list[float], length: float, attack: float, seed: int) -> np.ndarray:
+    """A warm held chord: each note a few gently detuned soft partials with
+    a slow vibrato, swelling in and fading long (the view from the top)."""
+    rng = np.random.default_rng(seed)
+    t = np.arange(int(length * RATE)) / RATE
+    x = np.zeros_like(t)
+    for f in freqs:
+        for detune in (-0.6, 0.0, 0.7):
+            vib = 1 + 0.0025 * np.sin(2 * np.pi * rng.uniform(4.2, 5.4) * t)
+            ph = 2 * np.pi * np.cumsum((f + detune) * vib) / RATE + rng.uniform(0, 2 * np.pi)
+            x += np.sin(ph) + 0.3 * np.sin(2 * ph) + 0.08 * np.sin(3 * ph)
+    shape = np.clip(t / attack, 0, 1) ** 1.5 * np.exp(-np.maximum(t - attack, 0) / (length * 0.45))
+    return x / (3 * len(freqs)) * shape
+
+
+def climb(notes: list[str], step: float, voice) -> np.ndarray:
+    """Notes rising one after another, each a footstep up."""
+    out = timeline(step * (len(notes) - 1) + 0.6)
+    for i, n in enumerate(notes):
+        place(out, voice(hz(n), 0.6, i), i * step, 0.8 + 0.2 * i / max(1, len(notes) - 1))
+    return fade_out(out, 0.08)
+
+
+def summit(notes: list[str], step: float, voice, chord: list[str], length: float, attack: float, seed: int) -> np.ndarray:
+    """A short climb that opens onto a held chord at the top."""
+    arrive = step * len(notes)
+    out = timeline(arrive + length)
+    for i, n in enumerate(notes):
+        place(out, voice(hz(n), 0.9, seed * 10 + i), i * step, 0.55)
+    place(out, pad([hz(c) for c in chord], length, attack, seed), arrive - attack * 0.6, 1.0)
+    return fade_out(out, 0.5)
 
 
 def write_wav(path: Path, x: np.ndarray) -> None:
@@ -107,16 +173,15 @@ def finish(name: str, x: np.ndarray) -> None:
     tmp.unlink(missing_ok=True)
 
 
-BELL = [(1, 1, 0.35), (2, 0.22, 0.2), (3, 0.06, 0.12)]
 VARIANTS = {
-    # right answer: short, soft, rising
-    "chime-1": lambda: chime([660, 880], 0.09, BELL, 0.45, 1),  # two notes, a fourth up
-    "chime-2": lambda: chime([784, 1175], 0.08, [(1, 1, 0.4), (2.76, 0.22, 0.16), (5.4, 0.06, 0.08)], 0.55, 2),  # glassy, a fifth up
-    "chime-3": lambda: chime([523, 659, 784], 0.07, BELL, 0.5, 3),  # a quick major triad
-    # end of session: one calm struck tone
-    "calm-1": lambda: bowl(220, 2.8, [(1, 1, 1), (2.71, 0.35, 0.6), (5.1, 0.12, 0.35)], 1.2, 1),  # warm bowl
-    "calm-2": lambda: bowl(174, 3.2, [(1, 1, 1), (2.76, 0.25, 0.55), (5.4, 0.08, 0.3)], 0.8, 2),  # deeper, slower beat
-    "calm-3": lambda: bowl(262, 2.4, [(1, 1, 1), (2, 0.3, 0.6), (3, 0.12, 0.4), (4.2, 0.05, 0.25)], 1.6, 3),  # brighter, rounder
+    # right answer: a light footstep up
+    "step-1": lambda: climb(["D5", "E5", "A5"], 0.065, marimba),  # wooden steps, pentatonic
+    "step-2": lambda: climb(["F5", "C6"], 0.075, kalimba),  # two plucked tines, a fifth up
+    "step-3": lambda: swoop(hz("G5") * 0.94, hz("D6"), 0.5),  # one soft hop up
+    # end of session: reaching the top
+    "summit-1": lambda: summit(["C5", "E5", "G5", "C6"], 0.11, marimba, ["C4", "G4", "D5", "E5"], 2.4, 0.25, 1),
+    "summit-2": lambda: summit(["D5", "E5", "A5"], 0.13, kalimba, ["D4", "A4", "E5"], 2.6, 0.3, 2),
+    "summit-3": lambda: summit(["F4"], 0.2, marimba, ["F3", "C4", "A4", "E5"], 2.8, 0.7, 3),  # a slow sunrise swell
 }
 
 

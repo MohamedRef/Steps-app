@@ -106,8 +106,8 @@ impl Palette {
             out.push(';');
         }
         // Glass highlights mix toward white; on True black they turn to
-        // black, so its pixels stay off. Liquid Glass
-        // (assets/liquid-glass.css) hides its colour field and keeps surfaces
+        // black, so its pixels stay off. Frost
+        // (assets/frost.css) hides its colour field and keeps surfaces
         // opaque there for the same reason.
         out.push_str(if self.is_true_black() {
             "--glass-white:#000000;\

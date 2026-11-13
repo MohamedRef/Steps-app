@@ -195,6 +195,12 @@ pub fn validate(file: &LessonFile, cx: &LessonContext<'_>) -> Vec<Problem> {
             if step.quote.is_some() && step.page.is_none() {
                 bad(&sat, "a quote needs its page".into());
             }
+            if step.quote.as_deref().is_some_and(crate::quote::ends_mid_sentence) {
+                bad(
+                    &sat,
+                    "the quote ends mid-sentence; complete it from the book (never shorten a quote)".into(),
+                );
+            }
             if let StepBody::Figure { image: Some(p), .. } = &step.body
                 && p.book
                 && step.page.is_none()
