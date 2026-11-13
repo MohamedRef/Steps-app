@@ -30,6 +30,7 @@ fn catches_the_common_mistakes() {
     let msgs: Vec<String> = lecture(&l, &Context::default()).iter().map(|p| p.to_string()).collect();
     let has = |s: &str| msgs.iter().any(|m| m.contains(s));
     assert!(has("outside the lecture"), "{msgs:#?}");
+
     assert!(has("used twice"));
     assert!(has("4 or 5 options"));
     assert!(has("out of range"));
@@ -217,4 +218,17 @@ fn an_enumerate_prompt_count_matches_its_points() {
     assert_eq!(stated_count("Enumerate the 3 D's of pellagra."), Some(3));
     assert_eq!(stated_count("Name three causes"), Some(3));
     assert_eq!(stated_count("Enumerate the features of pellagra"), None);
+}
+
+#[test]
+fn a_quote_cut_mid_sentence_is_refused() {
+    let l = lec(&format!(
+        "{HEAD}items:
+  - {{ id: cvs.L04.001, kind: card, front: a, back: b, src: {{ page: 318, quote: 'caused by a period of' }}, status: unverified }}
+  - {{ id: cvs.L04.002, kind: card, front: a, back: b, src: {{ page: 318, quote: 'caused by a period of ↓ cerebral blood flow.' }}, status: unverified }}
+"
+    ));
+    let msgs: Vec<String> = lecture(&l, &Context::default()).iter().map(|p| p.to_string()).collect();
+    assert!(msgs.iter().any(|m| m.contains("cvs.L04.001") && m.contains("ends mid-sentence")), "{msgs:#?}");
+    assert!(!msgs.iter().any(|m| m.contains("cvs.L04.002")), "{msgs:#?}");
 }

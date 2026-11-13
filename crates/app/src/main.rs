@@ -80,7 +80,7 @@ const MAIN_CSS: Css = css!("assets/main.css");
 const SHAPE_CSS: Css = css!("assets/shape.css");
 const PARTS_CSS: Css = css!("assets/parts.css");
 const APPEARANCE_CSS: Css = css!("assets/appearance.css");
-const LIQUID_GLASS_CSS: Css = css!("assets/liquid-glass.css");
+const FROST_CSS: Css = css!("assets/frost.css");
 
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum Screen {
@@ -253,7 +253,7 @@ fn AppAt(start: Screen, children: Element) -> Element {
         style { {PARTS_CSS.text()} }
         style { {APPEARANCE_CSS.text()} }
         style { {sheet::CSS.text()} }
-        style { {LIQUID_GLASS_CSS.text()} }
+        style { {FROST_CSS.text()} }
         style { {look} }
         desk::Chrome {}
         div {
@@ -261,7 +261,7 @@ fn AppAt(start: Screen, children: Element) -> Element {
             lang: "ar",
             dir: "rtl",
             // Changing appearance only switches CSS; navigation state, input,
-            // and scroll position stay mounted (assets/liquid-glass.css).
+            // and scroll position stay mounted (assets/frost.css).
             "data-appearance": ui.prefs.read().appearance.as_str(),
             "data-focus": if *ui.focus.read() { "true" } else { "false" },
             header { class: "topbar",

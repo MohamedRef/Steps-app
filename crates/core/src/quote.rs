@@ -115,9 +115,33 @@ pub fn plain(quote: &str) -> String {
         .join("\n")
 }
 
+/// Words a book sentence never ends on: a quote whose last word is one of
+/// these was cut mid-sentence (#664; cvs.L04.241 stopped at "a period of").
+const CUT_WORDS: [&str; 14] =
+    ["and", "or", "of", "as", "by", "the", "to", "with", "in", "from", "that", "which", "due", "via"];
+
+/// The quote stops mid-sentence: its last word is a function word with
+/// nothing after it ("…caused by a period of"). A word with its own
+/// punctuation ("as.", "of)") or a final symbol ("↓ or normal ↓") passes.
+pub fn ends_mid_sentence(quote: &str) -> bool {
+    quote.split_whitespace().last().is_some_and(|w| CUT_WORDS.contains(&w.to_ascii_lowercase().as_str()))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn a_quote_cut_after_a_function_word_is_caught() {
+        assert!(ends_mid_sentence("Transient loss of consciousness caused by a period of"));
+        assert!(ends_mid_sentence("Spares platelet function as\n"));
+        assert!(ends_mid_sentence("| Drug | Use |\n| Aspirin | Pain and"));
+        assert!(!ends_mid_sentence("caused by a period of ↓ cerebral blood flow."));
+        assert!(!ends_mid_sentence("ADH LEVEL ↓ or normal ↓ Normal or ↑"));
+        assert!(!ends_mid_sentence("Vitamin A"));
+        assert!(!ends_mid_sentence("(as)"));
+        assert!(!ends_mid_sentence(""));
+    }
 
     #[test]
     fn one_line_is_a_paragraph() {
