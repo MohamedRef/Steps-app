@@ -1,13 +1,13 @@
 # Run Steps
 
 ## Mac (desktop)
-1. Install Rust (`curl https://sh.rustup.rs -sSf | sh`) and `just` (`brew install just`).
+1. Install Rust (`curl https://sh.rustup.rs -sSf | sh`) and `just` (`brew install just`). The first `cargo` call in the repo installs the version pinned in `rust-toolchain.toml`.
 2. Clone the repo: `git clone https://github.com/MohamedRef/Steps-app && cd Steps-app` (Steps's code is on `main`).
 3. `just run` opens the app. `STEPS_WINDOW_SIZE=412x900 just run` previews the phone layout. `STEPS_OPEN_SCREEN=study just run` opens a screen directly. `STEPS_OPEN_LECTURE=cvs.L01 just run` opens that lecture's page over the first screen. `STEPS_OPEN_LECTURE=references` opens the References list instead. `STEPS_COURSE=cvs just run` puts one course in view on Lessons, Review and Questions (`all` for every course), and `STEPS_COURSE_SHEET=1` opens the course sheet at launch. `STEPS_OPEN_SETTINGS=look just run` opens Settings on a section (`study`, `reminders`, `sync`, `look`, `tablet`, `mac`, `data`, `updates`, `about`; empty for the list). Theme and interface size (`text_size`) are kept per device in `device-prefs.txt` in the data folder (Settings › Your data shows where).
    - Progress screen previews: `STEPS_OPEN_SCREEN=stats STEPS_STATS_TAB=plan STEPS_PLAN_EXAM=2027-01-20 STEPS_STATS_DEMO=1 just run` opens the exam planner with a preset exam day and demo numbers (labelled as demo on screen). `STEPS_STATS_TAB` is `progress`, `mistakes` or `plan`.
 
 ## S24 Ultra and Tab S11 (Android)
-1. One-time setup: install the Dioxus CLI 0.7.10 (`cargo install dioxus-cli --version 0.7.10 --locked`), Java 17, and Android Studio's SDK plus NDK r27c. Then run `rustup target add aarch64-linux-android`.
+1. One-time setup: install the Dioxus CLI 0.7.10 (`cargo install dioxus-cli --version 0.7.10 --locked`), Java 17, and Android Studio's SDK plus NDK r27c. `just android` and `just apk` add the `aarch64-linux-android` target to the pinned Rust themselves.
 2. Turn on USB debugging on the phone or tablet (Settings › About phone › Software information › tap Build number 7 times, then Developer options › USB debugging), and connect it with a cable.
 3. `just android` builds and installs a debug build. The app id is `app.steps`, so it installs next to any other app without touching its data.
 
