@@ -87,7 +87,7 @@ Rust 1.100.0, pinned in `rust-toolchain.toml` (edition 2024), and Dioxus 0.7 wit
 | `crates/app` | The app: one folder per feature (`today`, `study`, `bank`, `case`, `learn`, `lecture`, `plan`, `stats`, `oral`, `notes`, `own`, `qbank`, `labs`, `shortcuts`, `settings`, `update`, `cloud`, …). `store/` is SQLite plus the sync outbox; `platform/` is device glue (Android JNI, Mac, browser); `i18n/` holds all Arabic UI text, one file per feature; `prefs.rs` and `look.rs` hold appearance; `render_tests/` are the screen tests; `assets/` holds its CSS and small scripts; `tests/` the Node and browser checks. |
 | `crates/protocol` | Types shared by app and server: sync ops and `TABLES` (`sync.rs`), the cloud API (`cloud.rs`), merge rules, the client state machine. |
 | `crates/server` | Steps Cloud, the Cloudflare Worker (Durable Objects, no D1 or R2), with `wrangler.toml`. |
-| `crates/tools` | The `steps-tools` CLI: `validate`, `refs`, `packs`, `ids`, `content` (next-id, new-item, diff, preflight), `anki`, `qbank sync`, `update` (changes, guard, publish), `verdicts`. |
+| `crates/tools` | The `steps-tools` CLI: `validate`, `refs`, `packs`, `ids`, `content` (next-id, new-item, diff, preflight), `anki`, `qbank sync`, `update` (changes, guard, publish), `verdicts`, `counts` (the numbers in README and §12). |
 | `crates/anki` | Builds the `.apkg`. |
 | `content/` | All study content as YAML (§8). |
 | `changes/` | One YAML per user-visible change; becomes the in-app "What's new". |
@@ -137,7 +137,7 @@ On Linux the desktop app needs `libwebkit2gtk-4.1-dev libgtk-3-dev libxdo-dev li
 |---|---|---|
 | `ci.yml` (CI) | every PR and push to `main` | "fmt, clippy, tests, content", about 5 to 13 minutes; the app is checked with `--no-default-features`, so no WebKitGTK install |
 | `screens-browser.yml` | every PR | lesson and study browser check |
-| `nightly.yml` (Nightly checks) | daily (see below) + by hand | Android arm64, web wasm32 and Worker compiles; the 90% coverage gate; tests on later dates |
+| `nightly.yml` (Nightly checks) | daily (see below) + by hand | Android arm64, web wasm32 and Worker compiles; the 90% coverage gate; tests on later dates; README and §12 counts within 5% of the content |
 | `mac.yml` (Mac) | daily + by hand | Mac clippy, tests and `dx bundle`; never on PRs, Mac runners are slow |
 | `steps-android-preview.yml` | daily when `main` moved + by hand | signed preview APK on the `steps-preview` prerelease; PRs touching `android/` build it as a check |
 | `settings-browser.yml`, `android-webview-regression.yml` | daily + by hand | Settings browser check; Android WebView renderer-loss tests |
@@ -258,7 +258,7 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 
 ### State
 - **Latest release:** `1.0.0-alpha.3` (2026-11-06): APK, Mac app, web and Steps Cloud. <https://github.com/MohamedRef/Steps-app/releases/tag/steps-v1.0.0-alpha.3>. Earlier: alpha.1 and alpha.2 (both 2026-11-05).
-- **Content:** all 84 lectures written (16 First Aid courses + Rapid Review), about 9,400 items (5,100 cards, 1,700 MCQs, 1,050 clozes, 1,500 tables and lists) and 360 lessons, with First Aid coverage gaps filled after alpha.1. All `unverified` until I approve them.
+- **Content:** all 84 lectures written (16 First Aid courses + Rapid Review), <!-- counts -->about 10,030 items (5,440 cards, 1,710 MCQs, 1,170 clozes, 980 tables, 580 lists, 140 orders, 6 cases), 360 lessons and 2,870 glossary terms<!-- /counts -->, with First Aid coverage gaps filled after alpha.1. All `unverified` until I approve them.
 - **Quality:** two full review rounds (code, platform, UX, content by course) on 2026-11-04 and 2026-11-05; every finding of every severity was fixed before alpha.1.
 - **Sync:** Steps Cloud is live with Google and password sign-in.
 - **Sources:** only First Aid 2026 so far. B&B videos and UWorld ids come from a public mapping document ([QBANK.md](QBANK.md)).

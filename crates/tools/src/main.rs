@@ -8,6 +8,7 @@
 //! steps-tools update <keygen | manifest | sign | verify>   update feeds (docs/RELEASE.md §5)
 //! steps-tools refs [--lecture cvs.L04] [--write]   page references against the book (refs.rs)
 //! steps-tools qbank sync --from EXPORT.txt [--check]   UWorld QIDs per lecture (docs/QBANK.md)
+//! steps-tools counts [--write | --check]   content numbers in README.md and docs/HANDBOOK.md (counts.rs)
 //! ```
 
 use std::collections::BTreeSet;
@@ -20,6 +21,7 @@ use steps_core::validate::{self, Context};
 mod anki;
 mod changes;
 mod content;
+mod counts;
 mod ids;
 mod lessons;
 mod packs;
@@ -61,6 +63,7 @@ fn main() -> ExitCode {
         Some("ids") => report(ids::run(&root, &args[1..])),
         Some("content") => report(content::run(&root, &args[1..])),
         Some("qbank") => report(qbank::run(&root, &args[1..])),
+        Some("counts") => report(counts::run(&root, &args[1..])),
         _ => usage(),
     }
 }
@@ -87,7 +90,7 @@ fn flag<'a>(args: &'a [String], name: &str) -> Option<&'a str> {
 
 fn usage() -> ExitCode {
     eprintln!(
-        "usage: steps-tools <validate | anki | packs build | verdicts FILE | update … | refs | ids <list | check --base REF> | content <next-id | new-item | diff | preflight> | qbank sync --from FILE> [--root DIR] (see the top of crates/tools/src/main.rs)"
+        "usage: steps-tools <validate | anki | packs build | verdicts FILE | update … | refs | ids <list | check --base REF> | content <next-id | new-item | diff | preflight> | qbank sync --from FILE | counts [--write | --check]> [--root DIR] (see the top of crates/tools/src/main.rs)"
     );
     ExitCode::from(2)
 }

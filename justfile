@@ -38,6 +38,11 @@ fmt:
 validate:
     cargo run -q -p steps-tools -- validate
 
+# Rewrite the content numbers in README.md and docs/HANDBOOK.md §12 from
+# content/ (`steps-tools counts --check` is the Nightly check)
+counts:
+    cargo run -q -p steps-tools -- counts --write
+
 # Authoring (docs/AUTHORING.md): the next free item and lesson ids of a lecture
 content-next-id lecture:
     cargo run -q -p steps-tools -- content next-id {{lecture}}
