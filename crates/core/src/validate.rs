@@ -7,6 +7,8 @@ use std::fmt;
 
 use crate::content::{self, Body, Lecture, Status};
 
+pub mod cues;
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Problem {
     /// The item id, or the lecture id for file-level problems.
