@@ -107,14 +107,14 @@
 .appearance-swatch[data-swatch="side-line"] { border: 0; border-radius: 0; background: transparent; border-inline-start: 3px solid var(--accent); }
 .appearance-swatch[data-swatch="soft-fill"] { background: var(--surface-2); border-color: transparent; }
 .appearance-swatch[data-swatch="mono"] { background: transparent; border: 1.5px solid var(--text); }
-.appearance-swatch[data-swatch="liquid-glass"] {
-  border-radius: var(--radius-pill);
-  border-color: color-mix(in srgb, var(--accent) 28%, var(--line));
-  background: linear-gradient(145deg,
-    color-mix(in srgb, var(--surface) 72%, var(--glass-white, white)),
-    color-mix(in srgb, var(--accent-soft) 72%, var(--surface)));
-  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--glass-white, white) 55%, transparent),
-    0 3px 8px rgb(0 0 0 / 0.1);
+/* Frost: a frosted pane on a brand ledge, over a step of the theme's colour. */
+.appearance-swatch[data-swatch="frost"] {
+  border-color: color-mix(in srgb, var(--line) 55%, var(--accent));
+  background:
+    linear-gradient(color-mix(in srgb, var(--surface) 70%, transparent), color-mix(in srgb, var(--surface) 70%, transparent)),
+    linear-gradient(to top, color-mix(in srgb, var(--accent) 30%, var(--surface)) 0 45%, transparent 45%) no-repeat 100% 0 / 50% 100%,
+    color-mix(in srgb, var(--accent-soft) 60%, var(--surface));
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--accent) 35%, transparent);
 }
 .text-sample { background: var(--bg); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4); }
 .path { font-family: ui-monospace, monospace; font-size: var(--fs-sm); overflow-wrap: anywhere; }

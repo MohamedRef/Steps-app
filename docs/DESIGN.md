@@ -9,7 +9,7 @@ never their own colours or their own copy of a button, chip or sheet.
 
 The foundation (this file, `crates/core/src/theme.rs`, `crates/app/src/prefs.rs`,
 `crates/app/src/look.rs`, `assets/main.css` root tokens, `assets/parts.css`,
-`assets/appearance.css`, `assets/liquid-glass.css`, `assets/shape.css`,  `assets/nav.css`,
+`assets/appearance.css`, `assets/frost.css`, `assets/shape.css`,  `assets/nav.css`,
 `assets/desk.css`, `more.rs`, the shell in `main.rs`, Settings › Look) is
 changed by one owner at a time. A screen that needs a new token or shared
 part asks for it, or adds a feature-local class in its own stylesheet.
@@ -58,7 +58,7 @@ above against WCAG AA (4.5:1).
 A device preference (`prefs::Appearance`, `appearance=` in
 `device-prefs.txt`, default Stepped, never synced), picked in
 Settings › Look › "نمط الواجهة". It sets
-`data-appearance="stepped|calm|borderless|dividers|side-line|soft-fill|mono|outline|tinted|liquid-glass"`
+`data-appearance="stepped|calm|borderless|dividers|side-line|soft-fill|mono|outline|tinted|frost"`
 on `.app`; only
 CSS reads it, so switching keeps every screen's state. The old `glossy`
 value loads as Stepped.
@@ -81,26 +81,29 @@ value loads as Stepped.
 - Tinted: cards take `--soft`, tiles `--surface-2`, the bar `--soft`;
   answers stay on `--surface` so a question reads the same in every style.
 - More contrast and forced colours drop ledges and tints for plain lines.
-- Liquid Glass (`assets/liquid-glass.css`): an **iOS-inspired CSS treatment**, not
-  Apple's native refraction. It reads as glass because there is something
-  behind it: a fixed colour field from the theme (accent, accent-soft, gold,
-  good) behind the page and Settings (`.app::before`,
-  `.settings-window::before`). On `.app`, `--surface`, `--surface-2`,
-  `--raised` and `--bg` become translucent copies of the solid values kept
-  on `:root` (`--glass-solid`, `--glass-solid-2`, `--glass-solid-raised`,
-  `--glass-solid-bg`), so every card, row, input and button turns to glass
+- Frost (`assets/frost.css`, «زجاج مصنفر»): Steps' own glass, built on the
+  climb picture rather than a glossy lens. Behind the page and Settings
+  (`.app::before`, `.settings-window::before`) sits a fixed terrace field:
+  four steps of the theme's accent rising across the bottom of the window,
+  each with a brighter 5px tread on top, a soft `--accent-soft` wash from the
+  top, and a gold summit glow where the last step ends (the icon's gold
+  dot). On `.app`, `--surface`, `--surface-2`, `--raised` and `--bg` become
+  matte translucent copies of the solid values kept on `:root`
+  (`--glass-solid`, `--glass-solid-2`, `--glass-solid-raised`,
+  `--glass-solid-bg`), so every card, row, input and button turns to frost
   with no per-screen CSS. Overlays (sheets, dialogs, menus, onboarding, the
-  figure viewer) and heroes get the solid values back. A bright rim and top
-  glint (`light-dark()`: subtle on dark themes), pill controls and a tinted
-  lens for the selected tab and segment. On phones the bottom bar floats over
-  the page (same grid area as `.content`, which pads for it) so lists scroll
-  under the frosted bar; focus mode is unchanged. Blur only on the bar, the
-  Settings header, sticky bars and sheets, never per card. True black: the
-  theme sets `--glass-field-on: 0` and `--glass-alpha*: 100%`, so pixels
+  figure viewer) and heroes get the solid values back. No specular glint and
+  no pills: a pane has a hairline frost edge (`--frost-edge`) and stands on a
+  translucent brand ledge (`--frost-ledge`), buttons press down into theirs
+  as in Stepped, and the selected segment and tab are a solid step with a
+  brand tread under them. The bottom bar stays docked (Steps' bar), frosted,
+  with a tread along its top on phones. Blur (a soft 12px, low saturation)
+  only on bars, the Settings header and sheets, never per card. True black:
+  the theme sets `--glass-field-on: 0` and `--glass-alpha*: 100%`, so pixels
   stay off. Ink painted in the surface colour must read
-  `var(--glass-solid, var(--surface))` (test
-  `surface_ink_stays_solid_under_liquid_glass`). Reduced transparency, more
-  contrast and forced colours fall back to solid surfaces.
+  `var(--glass-solid, var(--surface))` (test `surface_ink_stays_solid_under_frost`).
+  Reduced transparency, more contrast and forced colours fall back to solid
+  surfaces. A stored `liquid-glass` (the style Frost replaced) loads as Frost.
 
 A feature that needs a style variant of its own class writes
 `.app[data-appearance="stepped"] .my-class { … }` in its own stylesheet,

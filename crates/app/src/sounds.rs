@@ -1,9 +1,10 @@
-//! Study sounds, synthesized by `scripts/assets/synth_sounds.py`: a soft
-//! chime for a right answer and a calm tone when a session ends, three
-//! variations each, picked in Settings › Study. WAV, so every web view plays
-//! them. Phones also give a light tap of vibration with each cue
-//! ([`crate::platform::haptics`]). Adapted from Batna's
-//! `crates/app/src/sounds.rs` (main).
+//! Study sounds, synthesized by `scripts/assets/synth_sounds.py` and made
+//! for Steps: a right answer is a light footstep up (`step-N`) and the end
+//! of a session is reaching the top (`summit-N`), three variations each,
+//! picked in Settings › Study. WAV, so every web view plays them. Phones
+//! also give a light tap of vibration with each cue
+//! ([`crate::platform::haptics`]). Adapted from batna-app main:
+//! crates/app/src/sounds.rs (the playing code; the sounds are Steps' own).
 
 use std::collections::HashMap;
 use std::sync::LazyLock;
@@ -27,9 +28,10 @@ pub enum Cue {
 #[serde(default)]
 pub struct SoundPrefs {
     pub on: bool,
-    /// Right-answer chime, 1 to 3.
+    /// Right-answer sound (`step-N`), 1 to 3. The field keeps its first
+    /// name so synced settings still load.
     pub chime: u8,
-    /// End-of-session tone, 1 to 3.
+    /// End-of-session sound (`summit-N`), 1 to 3.
     pub calm: u8,
     /// Vibrate with each cue (shown only where the device has a motor).
     pub vibrate: bool,
@@ -69,12 +71,12 @@ pub fn reload() {
 pub const VARIATIONS: u8 = 3;
 
 const FILES: [(&str, &[u8]); 6] = [
-    ("chime-1", include_bytes!("../../../assets/sounds/chime-1.wav")),
-    ("chime-2", include_bytes!("../../../assets/sounds/chime-2.wav")),
-    ("chime-3", include_bytes!("../../../assets/sounds/chime-3.wav")),
-    ("calm-1", include_bytes!("../../../assets/sounds/calm-1.wav")),
-    ("calm-2", include_bytes!("../../../assets/sounds/calm-2.wav")),
-    ("calm-3", include_bytes!("../../../assets/sounds/calm-3.wav")),
+    ("step-1", include_bytes!("../../../assets/sounds/step-1.wav")),
+    ("step-2", include_bytes!("../../../assets/sounds/step-2.wav")),
+    ("step-3", include_bytes!("../../../assets/sounds/step-3.wav")),
+    ("summit-1", include_bytes!("../../../assets/sounds/summit-1.wav")),
+    ("summit-2", include_bytes!("../../../assets/sounds/summit-2.wav")),
+    ("summit-3", include_bytes!("../../../assets/sounds/summit-3.wav")),
 ];
 
 const RIGHT_VOLUME: f32 = 0.5;
@@ -89,8 +91,8 @@ fn sound_for(cue: Cue, prefs: &SoundPrefs) -> Option<(String, f32)> {
     let pick = |n: u8| n.clamp(1, VARIATIONS);
     match cue {
         _ if !prefs.on => None,
-        Cue::Right => Some((format!("chime-{}", pick(prefs.chime)), RIGHT_VOLUME)),
-        Cue::SessionEnd => Some((format!("calm-{}", pick(prefs.calm)), END_VOLUME)),
+        Cue::Right => Some((format!("step-{}", pick(prefs.chime)), RIGHT_VOLUME)),
+        Cue::SessionEnd => Some((format!("summit-{}", pick(prefs.calm)), END_VOLUME)),
         Cue::Wrong => None,
     }
 }
@@ -234,7 +236,7 @@ mod tests {
         assert_eq!(sound_for(Cue::Right, &off), None);
         assert_eq!(sound_for(Cue::Wrong, &SoundPrefs::default()), None);
         let odd = SoundPrefs { chime: 9, ..SoundPrefs::default() };
-        assert_eq!(sound_for(Cue::Right, &odd).unwrap().0, "chime-3");
+        assert_eq!(sound_for(Cue::Right, &odd).unwrap().0, "step-3");
     }
 
     #[test]

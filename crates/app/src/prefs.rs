@@ -235,12 +235,12 @@ pub struct Reading {
 /// colour theme. Stepped, the default, is Steps' own look: cards stand on a
 /// solid ledge and buttons press down into it. Calm is flat with hairlines;
 /// Outline draws cards as clear outlines on the page; Tinted fills them with
-/// the theme's soft colour; Liquid Glass keeps content solid and brings a
-/// frosted treatment to navigation. Five minimal styles drop every ledge and
+/// the theme's soft colour; Frost is Steps' glass: matte frosted panes on
+/// ledges over a terrace of the theme's colour, content kept solid. Five minimal styles drop every ledge and
 /// decoration: Borderless (space, no lines), Dividers (rules, no boxes),
 /// Side line (a brand line at a card's start), Soft fill (grey cards on a
 /// plain page) and Mono (ink and paper). `data-appearance` on `.app`
-/// (assets/appearance.css, assets/liquid-glass.css).
+/// (assets/appearance.css, assets/frost.css).
 #[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
 pub enum Appearance {
     #[default]
@@ -253,7 +253,7 @@ pub enum Appearance {
     SideLine,
     SoftFill,
     Mono,
-    LiquidGlass,
+    Frost,
 }
 
 impl Appearance {
@@ -267,7 +267,7 @@ impl Appearance {
         Self::Mono,
         Self::Outline,
         Self::Tinted,
-        Self::LiquidGlass,
+        Self::Frost,
     ];
 
     /// Stored value and `data-appearance`.
@@ -282,7 +282,7 @@ impl Appearance {
             Self::SideLine => "side-line",
             Self::SoftFill => "soft-fill",
             Self::Mono => "mono",
-            Self::LiquidGlass => "liquid-glass",
+            Self::Frost => "frost",
         }
     }
 
@@ -290,6 +290,10 @@ impl Appearance {
         // "glossy" was the gradient style Stepped replaced (2026-11-05).
         if s == "glossy" {
             return Self::Stepped;
+        }
+        // "liquid-glass" was the glass style Frost replaced (2026-11-13).
+        if s == "liquid-glass" {
+            return Self::Frost;
         }
         Self::ALL.into_iter().find(|t| t.as_str() == s).unwrap_or_default()
     }
@@ -484,6 +488,8 @@ mod tests {
         // The old gradient style moves to Stepped, the style that replaced it.
         assert_eq!(DevicePrefs::parse("appearance=glossy").appearance, Appearance::Stepped);
         assert_eq!(DevicePrefs::parse("appearance=calm").appearance, Appearance::Calm);
+        // The old glass style moves to Frost, Steps' own glass.
+        assert_eq!(DevicePrefs::parse("appearance=liquid-glass").appearance, Appearance::Frost);
         for appearance in Appearance::ALL {
             let with_appearance = DevicePrefs { appearance, ..p };
             assert_eq!(DevicePrefs::parse(&with_appearance.render()), with_appearance);
@@ -491,10 +497,10 @@ mod tests {
     }
 
     #[test]
-    fn liquid_glass_has_solid_accessibility_fallbacks() {
-        let css = include_str!("../assets/liquid-glass.css");
+    fn frost_has_solid_accessibility_fallbacks() {
+        let css = include_str!("../assets/frost.css");
         for expected in [
-            ".app[data-appearance=\"liquid-glass\"]",
+            ".app[data-appearance=\"frost\"]",
             "@supports",
             "prefers-reduced-transparency: reduce",
             "prefers-contrast: more",
@@ -509,8 +515,8 @@ mod tests {
     }
 
     #[test]
-    fn surface_ink_stays_solid_under_liquid_glass() {
-        // Liquid Glass turns --surface translucent (assets/liquid-glass.css).
+    fn surface_ink_stays_solid_under_frost() {
+        // Frost turns --surface translucent (assets/frost.css).
         // Text, ticks, fills and strokes painted in the surface colour (light
         // ink on a coloured fill) read the solid copy instead, or they fade.
         fn walk(dir: &std::path::Path, out: &mut Vec<std::path::PathBuf>) {

@@ -44,7 +44,7 @@ fn fixture() -> Element {
         style { {crate::SHAPE_CSS.text()} }
         style { {crate::PARTS_CSS.text()} }
         style { {crate::APPEARANCE_CSS.text()} }
-        style { {crate::LIQUID_GLASS_CSS.text()} }
+        style { {crate::FROST_CSS.text()} }
         style { {prefs.css()} }
         div { class: "app", lang: "ar", dir: "rtl", "data-appearance": case.appearance.as_str(),
             main { id: "background", button { id: "opener", r#type: "button", "Settings" } }
