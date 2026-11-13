@@ -79,7 +79,7 @@ These are my own decisions. They win over any default tool or habit.
 
 ## 3. Repo map and architecture
 
-Rust 1.100.0, pinned in `rust-toolchain.toml` (edition 2024, `rust-version` 1.90), and Dioxus 0.7 with HTML/CSS. A Cargo workspace:
+Rust 1.100.0, pinned in `rust-toolchain.toml` (edition 2024), and Dioxus 0.7 with HTML/CSS. A Cargo workspace:
 
 | Path | What it is |
 |---|---|
