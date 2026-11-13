@@ -167,3 +167,21 @@ fn raw_keys_skip_what_isnt_an_item() {
     assert_eq!(flag(&["--out".to_string()], "--out"), None);
     assert_eq!(rel(Path::new("/a"), Path::new("/b/c")), "/b/c");
 }
+
+// Issues #665 and #666: validate prints the key-longest share per lecture
+// and refuses padded distractors and a bank-wide share over the limit.
+#[test]
+fn answer_cues_are_reported_and_gated() {
+    use steps_core::validate::cues::Cues;
+    let ok = Cues { mcqs: 4, key_longest: 1, padded: vec![], key_at: [1, 1, 1, 1, 0] };
+    let (report, problems) =
+        cue_report(&[("cvs.L04".into(), ok.clone()), ("cvs.L05".into(), Cues::default())]);
+    assert!(problems.is_empty(), "{problems:?}");
+    assert!(report.contains("1 of 4 MCQs (25.0%"), "{report}");
+    assert!(report.contains("cvs.L04 1/4 (25%)") && !report.contains("cvs.L05"), "{report}");
+    let bad =
+        Cues { mcqs: 4, key_longest: 2, padded: vec![("cvs.L04.002".into(), 4)], key_at: [4, 0, 0, 0, 0] };
+    let (_, problems) = cue_report(&[("cvs.L04".into(), bad)]);
+    assert!(problems.iter().any(|p| p.starts_with("cvs.L04.002: option E ends in")), "{problems:?}");
+    assert!(problems.iter().any(|p| p.contains("50.0% of MCQs, over the 25% limit")), "{problems:?}");
+}

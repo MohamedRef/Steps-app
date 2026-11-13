@@ -141,3 +141,49 @@ fn papers_saved_before_drafts_still_load() {
     json.as_object_mut().unwrap().remove("draft");
     assert_eq!(serde_json::from_value::<Paper>(json).unwrap(), p);
 }
+
+/// Issue #673: written keys lean to "A", so every screen and export that
+/// shows an MCQ or a case step must take its order from
+/// `steps_core::exam::option_order`. Papers are built by `exam::practice` and
+/// `exam::mock` only (no `Question { .. }` written by hand outside tests), the
+/// question card follows `q.order`, the case player and the Anki export call
+/// `option_order`, and the one other view of an MCQ's options is the ✎ editor,
+/// which edits them in written order on purpose.
+#[test]
+fn every_mcq_screen_takes_the_shuffled_order() {
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR"));
+    let read = |p: &str| std::fs::read_to_string(root.join(p)).unwrap();
+    let mut files = Vec::new();
+    let mut dirs = vec![root.join("src")];
+    while let Some(d) = dirs.pop() {
+        for e in std::fs::read_dir(d).unwrap().flatten() {
+            let p = e.path();
+            let name = p.file_name().unwrap().to_string_lossy().to_string();
+            if p.is_dir() {
+                if name != "render_tests" {
+                    dirs.push(p);
+                }
+            } else if name.ends_with(".rs") && name != "tests.rs" && !name.ends_with("_tests.rs") {
+                files.push(p);
+            }
+        }
+    }
+    for f in &files {
+        let text = std::fs::read_to_string(f).unwrap();
+        let rel = f.strip_prefix(root).unwrap().to_string_lossy().replace('\\', "/");
+        assert!(
+            !text.contains("Question {"),
+            "{rel} builds a paper question by hand; use exam::practice or exam::mock"
+        );
+        let shows_mcq_options =
+            text.contains("Body::Mcq {") && text.contains("options") && text.contains("rsx!");
+        assert!(
+            !shows_mcq_options || ["src/bank/question.rs", "src/verify/mod.rs"].contains(&rel.as_str()),
+            "{rel} shows MCQ options; show them in exam::option_order"
+        );
+    }
+    assert!(read("src/bank/question.rs").contains("q.order.iter()"));
+    assert!(read("src/case/player.rs").contains("option_order("));
+    assert!(read("src/case/choices.rs").contains("exam::option_order("));
+    assert!(read("../anki/src/lib.rs").contains("let order = option_order(id, opts);"));
+}

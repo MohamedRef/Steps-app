@@ -2,15 +2,12 @@
 
 use steps_core::exam::{self, Rng};
 
-/// The order a step's options are shown in, as written indices. Shuffled
-/// per attempt (`seed`) so the key isn't always "A"; steps whose options
+/// The order a step's options are shown in, as written indices: the bank's
+/// rule (`exam::option_order`), seeded per attempt (`seed`) so the key isn't
+/// always "A". Numeric options go smallest first, and steps whose options
 /// refer to each other ("All of these", "A and C") keep their order.
 pub(super) fn option_order(options: &[String], seed: u64, step: usize) -> Vec<usize> {
-    let mut order: Vec<usize> = (0..options.len()).collect();
-    if exam::shufflable(options) {
-        Rng::new(seed ^ (step as u64).wrapping_mul(0x9E37_79B9_7F4A_7C15)).shuffle(&mut order);
-    }
-    order
+    exam::option_order(options, &mut Rng::new(seed ^ (step as u64).wrapping_mul(0x9E37_79B9_7F4A_7C15)))
 }
 
 /// "A"–"E": the key that picks the option shown at `pos`.

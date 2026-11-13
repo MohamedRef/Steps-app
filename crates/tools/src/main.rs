@@ -141,6 +141,8 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
 
     let mut items = 0;
     let mut files = 0;
+    // Answer cues in the MCQs (validate/cues.rs), per lecture and bank-wide.
+    let mut cues = Vec::new();
     let mut listed = BTreeSet::new();
     for entry in &index.lectures {
         listed.insert(entry.id.clone());
@@ -194,7 +196,10 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
             }
         }
         items += lec.items.len();
+        cues.push((lec.lecture.clone(), validate::cues::lecture(&lec)));
     }
+    let (cue_report, cue_problems) = cue_report(&cues);
+    problems.extend(cue_problems);
     // Lecture files that the index doesn't list.
     if let Ok(dirs) = std::fs::read_dir(&content) {
         for dir in dirs.flatten().filter(|d| {
@@ -238,12 +243,52 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     problems.extend(refs::check_locks(root, &listed.iter().cloned().collect::<Vec<_>>()));
     if problems.is_empty() {
         Ok(format!(
-            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms",
+            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms\n{cue_report}",
             index.lectures.len()
         ))
     } else {
         Err(problems)
     }
+}
+
+/// The MCQ answer cues: one line bank-wide, one per lecture (key longest,
+/// MCQs), and a problem for each padded distractor or a bank-wide key-longest
+/// share over the limit.
+fn cue_report(per_lecture: &[(String, validate::cues::Cues)]) -> (String, Vec<String>) {
+    use validate::cues::{Cues, KEY_LONGEST_LIMIT};
+    let mut all = Cues::default();
+    let mut lines = Vec::new();
+    for (id, c) in per_lecture.iter().filter(|(_, c)| c.mcqs > 0) {
+        all.add(c);
+        lines.push(format!("{id} {}/{} ({:.0}%)", c.key_longest, c.mcqs, 100.0 * c.key_longest_share()));
+    }
+    let [a, b, c, d, e] = all.key_at;
+    let mut report = format!(
+        "MCQ cues: the key is the single longest option in {} of {} MCQs ({:.1}%, limit {:.0}%); keys written at A–E: {a}/{b}/{c}/{d}/{e}\nkey longest per lecture: {}",
+        all.key_longest,
+        all.mcqs,
+        100.0 * all.key_longest_share(),
+        100.0 * KEY_LONGEST_LIMIT,
+        lines.join(", ")
+    );
+    let mut problems: Vec<String> = all
+        .padded
+        .iter()
+        .map(|(id, i)| {
+            format!("{id}: option {} ends in \"only\"/\"alone\", padding that marks it as wrong (docs/CONTENT.md)", char::from(b'A' + *i as u8))
+        })
+        .collect();
+    if all.key_longest_share() > KEY_LONGEST_LIMIT {
+        problems.push(format!(
+            "MCQs: the key is the single longest option in {:.1}% of MCQs, over the {:.0}% limit; trim keys (docs/CONTENT.md)",
+            100.0 * all.key_longest_share(),
+            100.0 * KEY_LONGEST_LIMIT
+        ));
+    }
+    if !all.padded.is_empty() {
+        report.push_str(&format!("; {} padded options", all.padded.len()));
+    }
+    (report, problems)
 }
 
 /// `content/glossary.yaml` and every `content/glossary/<course>.yaml`, as
