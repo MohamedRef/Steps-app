@@ -40,7 +40,7 @@ fn appearance_label(a: Appearance) -> (&'static str, &'static str) {
         Appearance::SideLine => (tx::APPEARANCE_SIDE_LINE, tx::APPEARANCE_SIDE_LINE_SUB),
         Appearance::SoftFill => (tx::APPEARANCE_SOFT_FILL, tx::APPEARANCE_SOFT_FILL_SUB),
         Appearance::Mono => (tx::APPEARANCE_MONO, tx::APPEARANCE_MONO_SUB),
-        Appearance::LiquidGlass => (tx::APPEARANCE_GLASS, tx::APPEARANCE_GLASS_SUB),
+        Appearance::Frost => (tx::APPEARANCE_GLASS, tx::APPEARANCE_GLASS_SUB),
     }
 }
 

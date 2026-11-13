@@ -57,8 +57,8 @@ async function run() {
       });
       assert.equal(layout.direction, item.dir, name);
       assert.equal(layout.appearance, item.appearance, `${name}: appearance preference`);
-      if (item.appearance === 'liquid-glass') {
-        assert.ok(layout.settingsBackground.includes('radial-gradient'), `${name}: glass must be visible in Settings`);
+      if (item.appearance === 'frost') {
+        assert.ok(layout.settingsBackground.includes('radial-gradient'), `${name}: frost terraces must be visible in Settings`);
         const translucent = /^(rgba|color)\(.*(\/|,)\s*0?\.\d+\)$/.test(layout.settingsCardBackground);
         const trueBlack = item.theme === 'black' || (item.theme === 'system-black' && item.scheme === 'dark');
         if (trueBlack) {
@@ -73,7 +73,7 @@ async function run() {
           const root = document.querySelector('.app');
           root.setAttribute('data-appearance', 'calm');
           const background = getComputedStyle(el).backgroundColor;
-          root.setAttribute('data-appearance', 'liquid-glass');
+          root.setAttribute('data-appearance', 'frost');
           return background;
         });
         if (!trueBlack) {
@@ -102,7 +102,7 @@ async function run() {
       assert.equal(layout.back.includes('settings-back'), !split, `${name}: responsive Back target`);
 
       if ((item.size === 'larger' && item.appearance === 'calm') ||
-          (item.size === 'normal' && item.appearance === 'liquid-glass' &&
+          (item.size === 'normal' && item.appearance === 'frost' &&
             item.width === 384 && ['paper', 'night', 'black'].includes(item.theme))) {
         await page.screenshot({ path: path.join(output, name + '.png') });
       }
