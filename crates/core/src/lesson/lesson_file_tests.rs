@@ -254,6 +254,7 @@ fn step_level_problems() {
     steps[0].page = Some(330);
     steps[3].quote = Some("a quote".into());
     steps[2].page = None;
+    steps[1].quote = Some("Spares platelet function as".into());
     let lec = lecture();
     let cx = LessonContext {
         lecture: &lec,
@@ -266,6 +267,7 @@ fn step_level_problems() {
         "cvs.L04.lesson1 step 1: page 330 is outside the lesson's pages 305-319",
         "cvs.L04.lesson1 step 4: a quote needs its page",
         "cvs.L04.lesson1 step 3: a book figure needs its page",
+        "cvs.L04.lesson1 step 2: the quote ends mid-sentence; complete it from the book (never shorten a quote)",
     ] {
         assert!(p.contains(&want.to_string()), "{want}: {p:?}");
     }

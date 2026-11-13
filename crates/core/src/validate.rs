@@ -77,6 +77,9 @@ pub fn lecture(lec: &Lecture, cx: &Context<'_>) -> Vec<Problem> {
         if item.src.is_primary() && (item.src.page < first || item.src.page > last) {
             bad(at, format!("src.page {} is outside the lecture (pages {first}-{last})", item.src.page));
         }
+        if item.src.quote.as_deref().is_some_and(crate::quote::ends_mid_sentence) {
+            bad(at, "src.quote ends mid-sentence; complete it from the book (never shorten a quote)".into());
+        }
         if item.status == Status::Approved && !cx.approved.is_some_and(|a| a.contains(at)) {
             bad(
                 at,

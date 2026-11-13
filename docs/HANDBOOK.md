@@ -44,7 +44,7 @@ These are my own decisions. They win over any default tool or habit.
 
 **Content**
 - The textbook never goes in git: no PDF, no extracted text. Cropped book figures for lessons are the one exception. Items paraphrase the book, cite `src.page`, and quote what proves the fact. CI enforces this (`scripts/check-tracked-files.sh`).
-- **No maximum length on First Aid quotes.** Never shorten a quote to fit a limit.
+- **No maximum length on First Aid quotes.** Never shorten a quote to fit a limit. `steps-tools validate` refuses an item or lesson quote whose last word is a function word ("of", "as", "and"…), the sign of a quote cut mid-sentence; complete it from the book.
 - **Content is never shortened or deduplicated.** First Aid is already condensed, so nothing leaves a lecture, a lesson or a course glossary because it also appears elsewhere. Each course glossary lists every term its lectures use, even when another course lists it too (validate refuses a term only when it appears twice in the same file).
 - Every item ships `status: unverified`. Only I approve, through my in-app export (`content/approved.txt`).
 - The book's answer is the exam answer. A newer guideline or another source's view goes in `update:` with its name and year, never as a silent change.
