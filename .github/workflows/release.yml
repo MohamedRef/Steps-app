@@ -80,7 +80,7 @@ jobs:
           # The build number is main's commit count and the version counts
           # this month's release tags (scripts/version.sh).
           fetch-depth: 0
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: ./.github/actions/rust
       - uses: Swatinem/rust-cache@v2
         with:
           key: release-tools
@@ -174,7 +174,7 @@ jobs:
       # never committed.
       - name: Release version into Cargo.toml
         run: scripts/version.sh apply "${{ needs.prepare.outputs.version }}"
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: ./.github/actions/rust
         with:
           targets: aarch64-linux-android
       - uses: Swatinem/rust-cache@v2
@@ -255,7 +255,7 @@ jobs:
           persist-credentials: false
       - name: Release version into Cargo.toml
         run: scripts/version.sh apply "${{ needs.prepare.outputs.version }}"
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: ./.github/actions/rust
         with:
           components: llvm-tools
       - uses: Swatinem/rust-cache@v2
@@ -329,7 +329,7 @@ jobs:
           persist-credentials: false
           # What's new reads the changes/ files merged since the feed's build.
           fetch-depth: 0
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: ./.github/actions/rust
       - uses: Swatinem/rust-cache@v2
         with:
           key: release-tools

@@ -109,7 +109,7 @@ jobs:
           read -r version build < <(scripts/version.sh preview)
           scripts/version.sh apply "$version"
           echo "Steps $version (build $build)"
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: ./.github/actions/rust
         with:
           targets: aarch64-linux-android
       - uses: Swatinem/rust-cache@v2

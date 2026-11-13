@@ -1,4 +1,12 @@
+# One Rust version for every machine and CI job, so a new stable release
+# can't turn `clippy -D warnings` red with no code change. Bump it in its own
+# PR, after `just check` passes on the new version (docs/HANDBOOK.md §4).
+#
+# Host-only: no cross targets here, or every `cargo` call would first try to
+# download them. Jobs and recipes that build for Android, the web or the
+# Worker add their target themselves (.github/actions/rust, the justfile,
+# scripts/web/build.sh).
 [toolchain]
-channel = "stable"
-targets = ["aarch64-apple-darwin", "aarch64-linux-android", "wasm32-unknown-unknown"]
+channel = "1.100.0"
+profile = "minimal"
 components = ["rustfmt", "clippy"]
