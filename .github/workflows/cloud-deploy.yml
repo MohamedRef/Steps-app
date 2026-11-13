@@ -84,7 +84,7 @@ jobs:
           else
             echo "go=true" >> "$GITHUB_OUTPUT"
           fi
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: ./.github/actions/rust
         if: steps.due.outputs.go == 'true'
         with:
           targets: wasm32-unknown-unknown

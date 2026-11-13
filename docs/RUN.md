@@ -1,13 +1,13 @@
 # Run Steps
 
 ## Mac (desktop)
-1. Install Rust (`curl https://sh.rustup.rs -sSf | sh`) and `just` (`brew install just`).
+1. Install Rust (`curl https://sh.rustup.rs -sSf | sh`) and `just` (`brew install just`). The first `cargo` call in the repo installs the version pinned in `rust-toolchain.toml`.
 2. Clone the repo: `git clone https://github.com/MohamedRef/Steps-app && cd Steps-app` (Steps's code is on `main`).
 3. `just run` opens the app. `STEPS_WINDOW_SIZE=412x900 just run` previews the phone layout. `STEPS_OPEN_SCREEN=study just run` opens a screen directly. `STEPS_OPEN_LECTURE=cvs.L01 just run` opens that lecture's page over the first screen. `STEPS_OPEN_LECTURE=references` opens the References list instead. `STEPS_COURSE=cvs just run` puts one course in view on Lessons, Review and Questions (`all` for every course), and `STEPS_COURSE_SHEET=1` opens the course sheet at launch. `STEPS_OPEN_SETTINGS=look just run` opens Settings on a section (`study`, `reminders`, `sync`, `look`, `tablet`, `mac`, `data`, `updates`, `about`; empty for the list). Theme and interface size (`text_size`) are kept per device in `device-prefs.txt` in the data folder (Settings › Your data shows where).
    - Progress screen previews: `STEPS_OPEN_SCREEN=stats STEPS_STATS_TAB=plan STEPS_PLAN_EXAM=2027-01-20 STEPS_STATS_DEMO=1 just run` opens the exam planner with a preset exam day and demo numbers (labelled as demo on screen). `STEPS_STATS_TAB` is `progress`, `mistakes` or `plan`.
 
 ## S24 Ultra and Tab S11 (Android)
-1. One-time setup: install the Dioxus CLI 0.7.10 (`cargo install dioxus-cli --version 0.7.10 --locked`), Java 17, and Android Studio's SDK plus NDK r27c. Then run `rustup target add aarch64-linux-android`.
+1. One-time setup: install the Dioxus CLI 0.7.10 (`cargo install dioxus-cli --version 0.7.10 --locked`), Java 17, and Android Studio's SDK plus NDK r27c. `just android` and `just apk` add the `aarch64-linux-android` target to the pinned Rust themselves.
 2. Turn on USB debugging on the phone or tablet (Settings › About phone › Software information › tap Build number 7 times, then Developer options › USB debugging), and connect it with a cable.
 3. `just android` builds and installs a debug build. The app id is `app.steps`, so it installs next to any other app without touching its data.
 
@@ -44,6 +44,10 @@ One file, `steps/anki/steps.apkg` in the project files folder (HANDBOOK §13), h
 - Settings › صدّر مراجعاتك للمحتوى writes `steps-verdicts-YYYY-MM-DD.yaml` (format `steps.verdicts/v1`) to `~/Downloads` on the Mac, or to `Android/data/app.steps/files` on the phone and tablet (open it with the Files app or over USB). The same text is shown on screen, so you can copy it. `steps-tools verdicts FILE` turns it into a fix list per lecture, and `--approve` adds your ✓ to `content/approved.txt`.
 - Settings › نسخة احتياطية من كل حاجة writes `steps-export-YYYY-MM-DD.json` (every review, check and setting) to `~/Downloads` on the Mac. On the phone and tablet it is written to the app's folder, then the system "Save to" dialog offers Downloads or Drive. Settings › استرجع نسخة merges such a file back (nothing is deleted; the newer row wins). On Android its button opens the system file picker, so a copy on Drive restores a new phone without any cloud.
 - Settings also sets the desired retention (85, 90 or 95%) and new items a day (15, 30, 45 or 60). After 400 reviews the schedule is fitted to your own memory, and it is refitted once a week.
+
+## Counts
+- The content numbers in `README.md` ("What is inside") and `docs/HANDBOOK.md` §12 are generated: `just counts` (`steps-tools counts --write`) rewrites the text between `<!-- counts -->` and `<!-- /counts -->` from `content/`. Never edit them by hand. `steps-tools counts` prints them exactly.
+- They are rounded ("about"), so a content PR leaves them alone and stays inside its course folders. The Nightly checks run `steps-tools counts --check`, which fails and opens "Nightly: README and handbook counts out of date" once any number is more than 5% away; then run `just counts` in a small PR of its own.
 
 ## UWorld QIDs and B&B videos per lecture
 Each lecture lists its Boards and Beyond videos with their UWorld question IDs to paste into a custom test. `scripts/qbank-sync.sh` refreshes them from the public doc in one command, and a weekly GitHub workflow opens a PR when they change (close and reopen it to run CI). Details in [QBANK.md](QBANK.md).

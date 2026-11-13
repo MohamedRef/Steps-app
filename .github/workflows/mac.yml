@@ -31,11 +31,11 @@ jobs:
     runs-on: macos-15
     steps:
       - uses: actions/checkout@v5
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: ./.github/actions/rust
         with:
           # dx strips the release binary with rust-objcopy, which needs
           # libLLVM from llvm-tools.
-          components: clippy, llvm-tools
+          components: llvm-tools
       - uses: Swatinem/rust-cache@v2
         with:
           key: macos
