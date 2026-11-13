@@ -3,7 +3,8 @@ name: Nightly checks
 # The slow and platform checks, nightly and by hand only, never per pull
 # request (Mohamed, 2026-11-04; they moved here from ci.yml): Android arm64,
 # web and Worker compiles, the Worker end-to-end test and the 90% coverage
-# gate. Run one now: Actions › Nightly checks › Run workflow.
+# gate, and the content counts quoted in README.md and docs/HANDBOOK.md.
+# Run one now: Actions › Nightly checks › Run workflow.
 on:
   schedule:
     - cron: "9 3 * * *"
@@ -114,6 +115,35 @@ jobs:
           if [ -z "$(gh issue list -R "$GITHUB_REPOSITORY" --state open --search "in:title \"$title\"" --json number --jq '.[].number')" ]; then
             gh issue create -R "$GITHUB_REPOSITORY" --title "$title" \
               --body "A test failed with the clock moved forward on ${GITHUB_SHA::7}: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID. Use dates relative to now (or a fixed clock) in that test (docs/RUN.md § Tests and coverage)."
+          fi
+
+  counts:
+    name: Counts in README and handbook
+    # The numbers are rounded ("about"), so content pull requests leave them
+    # alone; once the content has moved more than 5% away, say so here.
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          key: counts
+          save-if: ${{ github.ref == 'refs/heads/main' }}
+      - name: README and handbook counts within 5% of the content
+        run: cargo run -q -p steps-tools -- counts --check
+      - name: Open an issue when the counts are out of date
+        if: failure() && github.event_name == 'schedule'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          title="Nightly: README and handbook counts out of date"
+          if [ -z "$(gh issue list -R "$GITHUB_REPOSITORY" --state open --search "in:title \"$title\"" --json number --jq '.[].number')" ]; then
+            gh issue create -R "$GITHUB_REPOSITORY" --title "$title" \
+              --body "The content moved more than 5% from the numbers in README.md or docs/HANDBOOK.md on ${GITHUB_SHA::7}: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID. Run \`just counts\` and open a PR with the result (docs/RUN.md § Counts)."
           fi
 
   web:

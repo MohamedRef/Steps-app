@@ -45,6 +45,10 @@ One file, `steps/anki/steps.apkg` in the project files folder (HANDBOOK §13), h
 - Settings › نسخة احتياطية من كل حاجة writes `steps-export-YYYY-MM-DD.json` (every review, check and setting) to `~/Downloads` on the Mac. On the phone and tablet it is written to the app's folder, then the system "Save to" dialog offers Downloads or Drive. Settings › استرجع نسخة merges such a file back (nothing is deleted; the newer row wins). On Android its button opens the system file picker, so a copy on Drive restores a new phone without any cloud.
 - Settings also sets the desired retention (85, 90 or 95%) and new items a day (15, 30, 45 or 60). After 400 reviews the schedule is fitted to your own memory, and it is refitted once a week.
 
+## Counts
+- The content numbers in `README.md` ("What is inside") and `docs/HANDBOOK.md` §12 are generated: `just counts` (`steps-tools counts --write`) rewrites the text between `<!-- counts -->` and `<!-- /counts -->` from `content/`. Never edit them by hand. `steps-tools counts` prints them exactly.
+- They are rounded ("about"), so a content PR leaves them alone and stays inside its course folders. The Nightly checks run `steps-tools counts --check`, which fails and opens "Nightly: README and handbook counts out of date" once any number is more than 5% away; then run `just counts` in a small PR of its own.
+
 ## UWorld QIDs and B&B videos per lecture
 Each lecture lists its Boards and Beyond videos with their UWorld question IDs to paste into a custom test. `scripts/qbank-sync.sh` refreshes them from the public doc in one command, and a weekly GitHub workflow opens a PR when they change (close and reopen it to run CI). Details in [QBANK.md](QBANK.md).
 
