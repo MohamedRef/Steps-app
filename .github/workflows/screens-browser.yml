@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v5
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: ./.github/actions/rust
       - uses: Swatinem/rust-cache@v2
         with:
           shared-key: settings-browser

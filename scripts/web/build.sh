@@ -4,12 +4,15 @@
 # host can serve.
 #   scripts/web/build.sh            release build
 #   scripts/web/build.sh --dev      faster, unoptimised
-# Needs the wasm32 target (rust-toolchain.toml) and wasm-bindgen-cli at the
+# Adds the wasm32 target to the pinned Rust (rust-toolchain.toml) and needs wasm-bindgen-cli at the
 # same version as Cargo.lock's wasm-bindgen; wasm-opt (binaryen) is used when
 # it is installed.
 set -euo pipefail
 root="$(cd "$(dirname "$0")/../.." && pwd)"
 cd "$root"
+# rust-toolchain.toml lists no cross targets, so host-only cargo calls never
+# download them; this build adds its own (a no-op once installed).
+if command -v rustup >/dev/null; then rustup target add wasm32-unknown-unknown >/dev/null; fi
 profile=web-release
 [[ "${1:-}" == "--dev" ]] && profile=dev
 out="$root/target/web/steps"

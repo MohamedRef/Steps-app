@@ -1,0 +1,37 @@
+name: Rust from rust-toolchain.toml
+description: >
+  Installs the Rust version pinned in rust-toolchain.toml, plus only the
+  cross targets and extra components this job needs.
+inputs:
+  targets:
+    description: Space- or comma-separated targets, such as aarch64-linux-android
+    required: false
+    default: ""
+  components:
+    description: Extra components beyond rustfmt and clippy, such as llvm-tools
+    required: false
+    default: ""
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      working-directory: ${{ github.workspace }}
+      env:
+        TARGETS: ${{ inputs.targets }}
+        COMPONENTS: ${{ inputs.components }}
+      run: |
+        set -euo pipefail
+        # rustup 1.28+ installs the toolchain file's version here; an older
+        # rustup installs it on the first proxy call instead.
+        rustup toolchain install 2>/dev/null || cargo --version
+        for t in ${TARGETS//,/ }; do rustup target add "$t"; done
+        for c in ${COMPONENTS//,/ }; do rustup component add "$c"; done
+        rustc --version
+        # The same build settings the previous toolchain action set: smaller
+        # caches and faster cold builds on a runner.
+        {
+          echo "CARGO_INCREMENTAL=0"
+          echo "CARGO_PROFILE_DEV_DEBUG=0"
+          echo "CARGO_TERM_COLOR=always"
+          echo "RUST_BACKTRACE=short"
+        } >> "$GITHUB_ENV"

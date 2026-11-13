@@ -71,6 +71,7 @@ These are my own decisions. They win over any default tool or habit.
 
 **GitHub**
 - Everything on GitHub reads as written by me. Commits, branch names, PR titles and bodies, issues, reviews, docs and code never name the tools the work was written with: no generated-by footers, co-author trailers or session links. CI fails on tracked files that do and warns on PR text and merge messages.
+- Branch names are the short topic (`toolchain-pin`, `cvs-quote-fix`), with no prefix naming a tool, a session or an assistant. A branch is deleted once its PR is merged or closed.
 - No GitHub comments as a workflow. Issues close through "Fixes #N" in a PR, or a close reason.
 
 **Tone**
@@ -78,7 +79,7 @@ These are my own decisions. They win over any default tool or habit.
 
 ## 3. Repo map and architecture
 
-Rust stable (edition 2024, at least 1.90) and Dioxus 0.7 with HTML/CSS. A Cargo workspace:
+Rust 1.100.0, pinned in `rust-toolchain.toml` (edition 2024), and Dioxus 0.7 with HTML/CSS. A Cargo workspace:
 
 | Path | What it is |
 |---|---|
@@ -86,7 +87,7 @@ Rust stable (edition 2024, at least 1.90) and Dioxus 0.7 with HTML/CSS. A Cargo 
 | `crates/app` | The app: one folder per feature (`today`, `study`, `bank`, `case`, `learn`, `lecture`, `plan`, `stats`, `oral`, `notes`, `own`, `qbank`, `labs`, `shortcuts`, `settings`, `update`, `cloud`, …). `store/` is SQLite plus the sync outbox; `platform/` is device glue (Android JNI, Mac, browser); `i18n/` holds all Arabic UI text, one file per feature; `prefs.rs` and `look.rs` hold appearance; `render_tests/` are the screen tests; `assets/` holds its CSS and small scripts; `tests/` the Node and browser checks. |
 | `crates/protocol` | Types shared by app and server: sync ops and `TABLES` (`sync.rs`), the cloud API (`cloud.rs`), merge rules, the client state machine. |
 | `crates/server` | Steps Cloud, the Cloudflare Worker (Durable Objects, no D1 or R2), with `wrangler.toml`. |
-| `crates/tools` | The `steps-tools` CLI: `validate`, `refs`, `packs`, `ids`, `content` (next-id, new-item, diff, preflight), `anki`, `qbank sync`, `update` (changes, guard, publish), `verdicts`. |
+| `crates/tools` | The `steps-tools` CLI: `validate`, `refs`, `packs`, `ids`, `content` (next-id, new-item, diff, preflight), `anki`, `qbank sync`, `update` (changes, guard, publish), `verdicts`, `counts` (the numbers in README and §12). |
 | `crates/anki` | Builds the `.apkg`. |
 | `content/` | All study content as YAML (§8). |
 | `changes/` | One YAML per user-visible change; becomes the in-app "What's new". |
@@ -108,12 +109,14 @@ Full detail: [RUN.md](RUN.md).
 | Platform | One-time setup | Command |
 |---|---|---|
 | Mac desktop | Rust (`rustup`), `brew install just` | `just run` (`STEPS_WINDOW_SIZE=412x900` previews the phone; `STEPS_OPEN_SCREEN`, `STEPS_OPEN_LECTURE`, `STEPS_OPEN_SETTINGS` open a screen; `STEPS_DATA_DIR` uses another profile) |
-| Android debug, on a cable | `cargo install dioxus-cli --version 0.7.10 --locked`, Java 17, Android SDK + NDK r27c, `rustup target add aarch64-linux-android` | `just android` (app id `app.steps`) |
+| Android debug, on a cable | `cargo install dioxus-cli --version 0.7.10 --locked`, Java 17, Android SDK + NDK r27c (the recipe adds the Rust target) | `just android` (app id `app.steps`) |
 | Android release APK | the keys (§10) | `just apk`, then `just install-android <serial>` |
 | Mac release app | the keys (§10) | `just bundle-mac` → `dist/mac/Steps.app` |
 | Web | `cargo install wasm-bindgen-cli@<version in Cargo.lock> --locked` | `just web` → http://localhost:8080 ([WEB.md](WEB.md)) |
 | Steps Cloud locally | `just cloud-tools` | `just cloud-dev` → http://127.0.0.1:8787 |
 | Anki file | — | `just anki` → `dist/anki/steps.apkg` ([ANKI.md](ANKI.md)) |
+
+**Rust version:** `rust-toolchain.toml` pins one version (now 1.100.0) with rustfmt and clippy, and no cross targets, so host-only work (`just check`, tests, `validate`) never downloads Android or wasm targets. The recipes that build for another target add it themselves (`just android`, `just apk`, `scripts/web/build.sh`, `just cloud-*`); CI jobs install Rust through `.github/actions/rust`, passing only the targets and extra components they need. To move to a newer Rust: change `channel`, run `just check`, fix any new clippy findings in the same PR.
 
 Sync in a local build needs `.env` (copy `.env.example`; git-ignored) with `STEPS_CLOUD_URL`, `STEPS_GOOGLE_CLIENT_ID` and `STEPS_GOOGLE_CLIENT_SECRET`. Without it the app runs offline and says sync isn't set up.
 
@@ -134,7 +137,7 @@ On Linux the desktop app needs `libwebkit2gtk-4.1-dev libgtk-3-dev libxdo-dev li
 |---|---|---|
 | `ci.yml` (CI) | every PR and push to `main` | "fmt, clippy, tests, content", about 5 to 13 minutes; the app is checked with `--no-default-features`, so no WebKitGTK install |
 | `screens-browser.yml` | every PR | lesson and study browser check |
-| `nightly.yml` (Nightly checks) | daily (see below) + by hand | Android arm64, web wasm32 and Worker compiles; the 90% coverage gate; tests on later dates |
+| `nightly.yml` (Nightly checks) | daily (see below) + by hand | Android arm64, web wasm32 and Worker compiles; the 90% coverage gate; tests on later dates; README and §12 counts within 5% of the content |
 | `mac.yml` (Mac) | daily + by hand | Mac clippy, tests and `dx bundle`; never on PRs, Mac runners are slow |
 | `steps-android-preview.yml` | daily when `main` moved + by hand | signed preview APK on the `steps-preview` prerelease; PRs touching `android/` build it as a check |
 | `settings-browser.yml`, `android-webview-regression.yml` | daily + by hand | Settings browser check; Android WebView renderer-loss tests |
@@ -145,6 +148,7 @@ On Linux the desktop app needs `libwebkit2gtk-4.1-dev libgtk-3-dev libxdo-dev li
 | `qbank-sync.yml` | weekly, through `daily.yml` | refreshes B&B videos and UWorld ids; opens a PR when they change ([QBANK.md](QBANK.md)) |
 | `release.yml` (Release) | by hand only | §10 |
 
+- Every job installs Rust with `.github/actions/rust` (the version in `rust-toolchain.toml`, plus only its own `targets` and `components`), never a floating `stable`.
 - A PR waits only on CI and the screens check.
 - A newer push to a branch cancels its older run, on `main` too.
 - GitHub has never fired this repo's `schedule:` triggers, so `daily.yml` starts the platform runs after CI instead. The `schedule:` lines stay in case GitHub ever fires them.
@@ -250,11 +254,11 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 
 ## 12. State, roadmap and known issues
 
-*Last updated: 2026-11-09.*
+*Last updated: 2026-11-13.*
 
 ### State
 - **Latest release:** `1.0.0-alpha.3` (2026-11-06): APK, Mac app, web and Steps Cloud. <https://github.com/MohamedRef/Steps-app/releases/tag/steps-v1.0.0-alpha.3>. Earlier: alpha.1 and alpha.2 (both 2026-11-05).
-- **Content:** all 84 lectures written (16 First Aid courses + Rapid Review), about 9,400 items (5,100 cards, 1,700 MCQs, 1,050 clozes, 1,500 tables and lists) and 360 lessons, with First Aid coverage gaps filled after alpha.1. All `unverified` until I approve them.
+- **Content:** all 84 lectures written (16 First Aid courses + Rapid Review), <!-- counts -->about 10,030 items (5,440 cards, 1,710 MCQs, 1,170 clozes, 980 tables, 580 lists, 140 orders, 6 cases), 360 lessons and 2,870 glossary terms<!-- /counts -->, with First Aid coverage gaps filled after alpha.1. All `unverified` until I approve them.
 - **Quality:** two full review rounds (code, platform, UX, content by course) on 2026-11-04 and 2026-11-05; every finding of every severity was fixed before alpha.1.
 - **Sync:** Steps Cloud is live with Google and password sign-in.
 - **Sources:** only First Aid 2026 so far. B&B videos and UWorld ids come from a public mapping document ([QBANK.md](QBANK.md)).
@@ -272,6 +276,7 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 - **Calendar versions (2026-11-09, from Batna #768, Mohamed's pick):** the next release is `2026.11.1`, tagged `v2026.11.1`, with `Steps-<version>-android.apk`, `-mac.zip` and `SHA256SUMS.txt`; installed alpha.3 builds take it as an ordinary update (higher version and versionCode, same keys and feeds).
 
 ### Known issues
+- **Review of 2026-11-13** (on 150add5) opened #662 to #677; they are being fixed one PR per issue. Done here: Rust pinned to 1.100.0 with cross targets only where needed (#674); remote branches with a tool name in their prefix deleted (#677).
 - **#646 Nightly checks failed on main** (2026-11-08, on 71e5538). Open; it closes itself when Nightly passes again.
 - Not yet confirmed on a real phone: the lock/unlock screen-freeze fix (`vendor/`), and restoring a Study session after Android ends the app.
 - GitHub never fires this repo's schedules; `daily.yml` covers for them (§6).

@@ -20,14 +20,18 @@ When I add other sources, they go under the same First Aid topics, and each item
 
 ## What is inside
 
+<!-- counts -->
 | | |
 |---|---|
-| Cards | about 5,100 |
-| Step 1 style questions (single best answer, A–E) | about 1,700 |
-| Clozes | about 1,050 |
-| Tables and lists to recall | about 1,500 |
+| Cards | about 5,440 |
+| Step 1 style questions (single best answer, A–E) | about 1,710 |
+| Clozes | about 1,170 |
+| Tables and lists to recall | about 1,560 |
+| Steps to put in order, and cases | about 150 |
 | Lessons in Egyptian Arabic, with drawings and try-it steps | about 360 |
-| **All study items** | **about 9,400** |
+| Glossary terms explained on hover | about 2,870 |
+| **All study items** | **about 10,030** |
+<!-- /counts -->
 
 Every item starts as unverified, and only I mark it approved after I have checked it against the book.
 
