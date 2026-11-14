@@ -316,6 +316,10 @@ const HIGH_YIELD: &str = "high-yield";
 /// by judgment, so the tag no longer ranks anything (issue #667).
 const HIGH_YIELD_LIMIT: f64 = 0.30;
 
+/// Courses First Aid calls high-yield as a whole, so every item carries the
+/// tag and the limit doesn't apply: Rapid Review (p. 707; Mohamed, 2026-11-14).
+const ALL_HIGH_YIELD: [&str; 1] = ["rr"];
+
 /// `high-yield` per course: one report line, and a problem for each course
 /// over the limit.
 fn high_yield_report(per_course: &[(String, usize, usize)]) -> (String, Vec<String>) {
@@ -324,14 +328,14 @@ fn high_yield_report(per_course: &[(String, usize, usize)]) -> (String, Vec<Stri
     let lines: Vec<String> =
         per_course.iter().map(|(c, t, n)| format!("{c} {t}/{n} ({:.0}%)", 100.0 * share(*t, *n))).collect();
     let report = format!(
-        "high-yield: {all_t} of {all_n} items ({:.1}%, limit {:.0}% per course): {}",
+        "high-yield: {all_t} of {all_n} items ({:.1}%, limit {:.0}% per course, rr exempt): {}",
         100.0 * share(all_t, all_n),
         100.0 * HIGH_YIELD_LIMIT,
         lines.join(", ")
     );
     let problems = per_course
         .iter()
-        .filter(|(_, t, n)| share(*t, *n) > HIGH_YIELD_LIMIT)
+        .filter(|(c, t, n)| !ALL_HIGH_YIELD.contains(&c.as_str()) && share(*t, *n) > HIGH_YIELD_LIMIT)
         .map(|(c, t, n)| {
             format!(
                 "{c}: {t} of {n} items ({:.0}%) are tagged high-yield, over the {:.0}% limit; tag only First Aid's own emphasis (docs/CONTENT.md, scripts/high_yield_tags.py)",

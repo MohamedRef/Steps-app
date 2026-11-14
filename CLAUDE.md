@@ -23,7 +23,7 @@ Steps was built on 2026-11-04 from a copy of Batna (`MohamedRef/Batna-app`, Moha
 
 ## USMLE style
 - Step 1 tests mechanisms in clinical vignettes. MCQs are **single best answer vignettes**: age, sex, setting, presentation, findings, then one question ("Which of the following is the most likely cause / mechanism / next finding?"), five options (A–E), one best answer, and a `why` line for every option. Test one step past the diagnosis (mechanism, associated finding, drug's adverse effect), as Step 1 does.
-- Cards and clozes hold the First Aid facts, one fact each. Tag `high-yield` only what First Aid itself emphasises (its red bold mnemonics, or its own "most common", "classic" and the like in the item's quote), never by judgment (`docs/CONTENT.md`).
+- Cards and clozes hold the First Aid facts, one fact each. Tag `high-yield` only what First Aid itself emphasises (its red bold mnemonics, or its own "most common", "classic" and the like in the item's quote), never by judgment; every Rapid Review item is high-yield (`docs/CONTENT.md`).
 - Lessons explain the why in Egyptian Arabic so the facts stick (`docs/LESSONS.md`).
 
 ## Language

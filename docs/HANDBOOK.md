@@ -179,7 +179,7 @@ How to write it: [CONTENT.md](CONTENT.md) (items), [LESSONS.md](LESSONS.md) (les
 - `content/qbank/`: `uworld.yaml` (generated) and `bb-map.yaml` (B&B section → lecture). `content/labs.yaml`: lab values.
 - `content/approved.txt`: items I approved. `content/ids-retired.txt`: ids never reused.
 
-**Items:** each has `id` (`cvs.L04.001`, never reused), `kind` (`card`, `cloze`, `mcq`, `enumerate`, `essay`, `case`, `table`, `order`, `calc`), `topic` (a slug of First Aid's own heading, in book order), `src.page`, `src.quote` and `status: unverified`. One fact per card or cloze; lists become `enumerate`, optionally with a `hook` (a تحشيشة); comparisons become `table`; each topic gets at least one Step 1 vignette MCQ (A–E, one best answer, a `why` per option, one step past the diagnosis). `high-yield` marks only First Aid's own emphasis on the item's fact: a red bold mnemonic or the book's words such as "most common" or "classic" in its quote (Mohamed, 2026-11-14; rule in `docs/CONTENT.md`, applied by `scripts/high_yield_tags.py --pdf …`, about 14% of items; `validate` refuses a course over 30%). A lesson step that teaches a list again lists its تحشيشة under `remind:`.
+**Items:** each has `id` (`cvs.L04.001`, never reused), `kind` (`card`, `cloze`, `mcq`, `enumerate`, `essay`, `case`, `table`, `order`, `calc`), `topic` (a slug of First Aid's own heading, in book order), `src.page`, `src.quote` and `status: unverified`. One fact per card or cloze; lists become `enumerate`, optionally with a `hook` (a تحشيشة); comparisons become `table`; each topic gets at least one Step 1 vignette MCQ (A–E, one best answer, a `why` per option, one step past the diagnosis). `high-yield` marks only First Aid's own emphasis on the item's fact: a red bold mnemonic or the book's words such as "most common" or "classic" in its quote (Mohamed, 2026-11-14; rule in `docs/CONTENT.md`, applied by `scripts/high_yield_tags.py --pdf …`, about 15% of the First Aid course items, plus all of Rapid Review, which the book calls high-yield as a whole; `validate` refuses a course over 30%, `rr` exempt). A lesson step that teaches a list again lists its تحشيشة under `remind:`.
 
 **Pipeline**
 1. The book text per lecture lives outside git (§13).
@@ -280,7 +280,7 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 
 ### Known issues
 - **Review of 2026-11-13** (on 150add5) opened #662 to #677; they are being fixed one PR per issue. Done here: Rust pinned to 1.100.0 with cross targets only where needed (#674); remote branches with a tool name in their prefix deleted (#677).
-- **#667 high-yield on 58% of items** (2026-11-14): fixed. The tag now follows the book's own emphasis (red bold mnemonics, "most common", "classic" and the like), about 1,400 of 10,000 items; the courses were retagged one PR each, and `validate` refuses a course over 30%.
+- **#667 high-yield on 58% of items** (2026-11-14): fixed. The tag now follows the book's own emphasis (red bold mnemonics, "most common", "classic" and the like), about 1,380 of 9,000 First Aid course items plus all 1,036 Rapid Review items; the courses were retagged one PR each, and `validate` refuses a course over 30% (`rr` exempt).
 - **#646 Nightly checks failed on main** (2026-11-08, on 71e5538). Open; it closes itself when Nightly passes again.
 - Not yet confirmed on a real phone: the lock/unlock screen-freeze fix (`vendor/`), and restoring a Study session after Android ends the app.
 - GitHub never fires this repo's schedules; `daily.yml` covers for them (§6).

@@ -10,9 +10,11 @@ An item is `high-yield` when its `src.quote`, found on its `src.page`:
    appears in the item's own text (the item tests the mnemonic's fact), or
 2. says one of EMPHASIS, and the item's own text says one too.
 
-Nothing else: not the Section II/III titles or the Rapid Review preface,
-which call everything high-yield. Items from another source (`src.book`)
-keep their tags. The rule is in docs/CONTENT.md.
+Nothing else: not the Section II/III titles, which call everything
+high-yield. The one exception is Rapid Review (`rr`): the book presents all
+of it as high-yield information (p. 707), so every `rr` item keeps the tag
+(Mohamed, 2026-11-14) and this script leaves it alone. Items from another
+source (`src.book`) keep their tags. The rule is in docs/CONTENT.md.
 
 The book stays outside git, so this runs where the PDF is (PyMuPDF):
 
@@ -37,6 +39,8 @@ PAGE_OFFSET = 22
 # The red of First Aid's bold mnemonics (ElectraLTStd-Bold).
 MNEMONIC_RED = 0xB82837
 TAG = "high-yield"
+# Courses the book calls high-yield as a whole: every item keeps the tag.
+ALL_HIGH_YIELD = {"rr"}
 
 EMPHASIS = re.compile(
     r"(?i)(?<![\w])(most common(ly)?|most frequent(ly)?|#1|number one|classic(al(ly)?)?|"
@@ -213,7 +217,8 @@ def main() -> int:
     root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     book = Book(a.pdf)
     files = sorted(glob.glob(os.path.join(root, "content", "*", "L*.yaml")))
-    files = [f for f in files if os.path.basename(os.path.dirname(f)) not in ("lessons", "glossary", "qbank")]
+    skip = {"lessons", "glossary", "qbank"} | ALL_HIGH_YIELD
+    files = [f for f in files if os.path.basename(os.path.dirname(f)) not in skip]
     if a.courses:
         files = [f for f in files if os.path.basename(os.path.dirname(f)) in a.courses]
     totals = collections.Counter()

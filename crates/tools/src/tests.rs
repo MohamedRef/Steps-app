@@ -190,9 +190,10 @@ fn answer_cues_are_reported_and_gated() {
 // reports its share per course and refuses a course over the limit.
 #[test]
 fn high_yield_share_is_reported_and_gated() {
-    let (report, problems) = high_yield_report(&[("cvs".into(), 3, 20), ("rr".into(), 0, 0)]);
+    let (report, problems) =
+        high_yield_report(&[("cvs".into(), 3, 20), ("rr".into(), 9, 9), ("path".into(), 0, 0)]);
     assert!(problems.is_empty(), "{problems:?}");
-    assert!(report.contains("3 of 20 items (15.0%") && report.contains("cvs 3/20 (15%)"), "{report}");
+    assert!(report.contains("12 of 29 items") && report.contains("cvs 3/20 (15%)"), "{report}");
     let (_, problems) = high_yield_report(&[("cvs".into(), 3, 20), ("mic".into(), 7, 10)]);
     assert_eq!(problems.len(), 1, "{problems:?}");
     assert!(problems[0].starts_with("mic: 7 of 10 items (70%)"), "{problems:?}");
