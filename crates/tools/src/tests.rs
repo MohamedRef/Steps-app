@@ -185,3 +185,15 @@ fn answer_cues_are_reported_and_gated() {
     assert!(problems.iter().any(|p| p.starts_with("cvs.L04.002: option E ends in")), "{problems:?}");
     assert!(problems.iter().any(|p| p.contains("50.0% of MCQs, over the 25% limit")), "{problems:?}");
 }
+
+// Issue #667: `high-yield` follows the book's own emphasis, so validate
+// reports its share per course and refuses a course over the limit.
+#[test]
+fn high_yield_share_is_reported_and_gated() {
+    let (report, problems) = high_yield_report(&[("cvs".into(), 3, 20), ("rr".into(), 0, 0)]);
+    assert!(problems.is_empty(), "{problems:?}");
+    assert!(report.contains("3 of 20 items (15.0%") && report.contains("cvs 3/20 (15%)"), "{report}");
+    let (_, problems) = high_yield_report(&[("cvs".into(), 3, 20), ("mic".into(), 7, 10)]);
+    assert_eq!(problems.len(), 1, "{problems:?}");
+    assert!(problems[0].starts_with("mic: 7 of 10 items (70%)"), "{problems:?}");
+}
