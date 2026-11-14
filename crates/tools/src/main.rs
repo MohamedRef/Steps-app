@@ -146,6 +146,8 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     let mut files = 0;
     // Answer cues in the MCQs (validate/cues.rs), per lecture and bank-wide.
     let mut cues = Vec::new();
+    // `high-yield` per course: (course, tagged, items).
+    let mut high_yield: Vec<(String, usize, usize)> = Vec::new();
     let mut listed = BTreeSet::new();
     for entry in &index.lectures {
         listed.insert(entry.id.clone());
@@ -200,9 +202,20 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
         }
         items += lec.items.len();
         cues.push((lec.lecture.clone(), validate::cues::lecture(&lec)));
+        let course = lec.lecture.split('.').next().unwrap_or_default().to_string();
+        let tagged = lec.items.iter().filter(|i| i.tags.iter().any(|t| t == HIGH_YIELD)).count();
+        match high_yield.iter_mut().find(|(c, ..)| *c == course) {
+            Some((_, t, n)) => {
+                *t += tagged;
+                *n += lec.items.len();
+            }
+            None => high_yield.push((course, tagged, lec.items.len())),
+        }
     }
     let (cue_report, cue_problems) = cue_report(&cues);
     problems.extend(cue_problems);
+    let (hy_report, hy_problems) = high_yield_report(&high_yield);
+    problems.extend(hy_problems);
     // Lecture files that the index doesn't list.
     if let Ok(dirs) = std::fs::read_dir(&content) {
         for dir in dirs.flatten().filter(|d| {
@@ -246,7 +259,7 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     problems.extend(refs::check_locks(root, &listed.iter().cloned().collect::<Vec<_>>()));
     if problems.is_empty() {
         Ok(format!(
-            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms\n{cue_report}",
+            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms\n{cue_report}\n{hy_report}",
             index.lectures.len()
         ))
     } else {
@@ -291,6 +304,52 @@ fn cue_report(per_lecture: &[(String, validate::cues::Cues)]) -> (String, Vec<St
     if !all.padded.is_empty() {
         report.push_str(&format!("; {} padded options", all.padded.len()));
     }
+    (report, problems)
+}
+
+/// The tag for First Aid's own emphasis (docs/CONTENT.md, issue #667).
+const HIGH_YIELD: &str = "high-yield";
+
+/// The most of a course's items that may carry `high-yield`. The book
+/// emphasises about one item in seven (red bold mnemonics and its own words
+/// such as "most common"); a course far over that has drifted back to tagging
+/// by judgment, so the tag no longer ranks anything (issue #667).
+const HIGH_YIELD_LIMIT: f64 = 0.30;
+
+/// Courses First Aid calls high-yield as a whole, so every item carries the
+/// tag and the limit doesn't apply: Rapid Review (p. 707; Mohamed, 2026-11-14).
+const ALL_HIGH_YIELD: [&str; 1] = ["rr"];
+
+/// A course needs this many items before its share means anything (a test
+/// fixture of eight items with three tagged is fine).
+const HIGH_YIELD_MIN_ITEMS: usize = 50;
+
+/// `high-yield` per course: one report line, and a problem for each course
+/// over the limit.
+fn high_yield_report(per_course: &[(String, usize, usize)]) -> (String, Vec<String>) {
+    let share = |t: usize, n: usize| if n == 0 { 0.0 } else { t as f64 / n as f64 };
+    let (all_t, all_n) = per_course.iter().fold((0, 0), |(a, b), (_, t, n)| (a + t, b + n));
+    let lines: Vec<String> =
+        per_course.iter().map(|(c, t, n)| format!("{c} {t}/{n} ({:.0}%)", 100.0 * share(*t, *n))).collect();
+    let report = format!(
+        "high-yield: {all_t} of {all_n} items ({:.1}%, limit {:.0}% per course, rr exempt): {}",
+        100.0 * share(all_t, all_n),
+        100.0 * HIGH_YIELD_LIMIT,
+        lines.join(", ")
+    );
+    let problems = per_course
+        .iter()
+        .filter(|(c, t, n)| {
+            !ALL_HIGH_YIELD.contains(&c.as_str()) && *n >= HIGH_YIELD_MIN_ITEMS && share(*t, *n) > HIGH_YIELD_LIMIT
+        })
+        .map(|(c, t, n)| {
+            format!(
+                "{c}: {t} of {n} items ({:.0}%) are tagged high-yield, over the {:.0}% limit; tag only First Aid's own emphasis (docs/CONTENT.md, scripts/high_yield_tags.py)",
+                100.0 * share(*t, *n),
+                100.0 * HIGH_YIELD_LIMIT
+            )
+        })
+        .collect();
     (report, problems)
 }
 
