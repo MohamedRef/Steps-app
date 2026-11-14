@@ -194,7 +194,9 @@ fn high_yield_share_is_reported_and_gated() {
         high_yield_report(&[("cvs".into(), 3, 20), ("rr".into(), 9, 9), ("path".into(), 0, 0)]);
     assert!(problems.is_empty(), "{problems:?}");
     assert!(report.contains("12 of 29 items") && report.contains("cvs 3/20 (15%)"), "{report}");
-    let (_, problems) = high_yield_report(&[("cvs".into(), 3, 20), ("mic".into(), 7, 10)]);
+    // Over the limit counts only for a course big enough to have a share.
+    let (_, problems) =
+        high_yield_report(&[("cvs".into(), 3, 8), ("mic".into(), 70, 100), ("rr".into(), 60, 60)]);
     assert_eq!(problems.len(), 1, "{problems:?}");
-    assert!(problems[0].starts_with("mic: 7 of 10 items (70%)"), "{problems:?}");
+    assert!(problems[0].starts_with("mic: 70 of 100 items (70%)"), "{problems:?}");
 }

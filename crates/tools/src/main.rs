@@ -320,6 +320,10 @@ const HIGH_YIELD_LIMIT: f64 = 0.30;
 /// tag and the limit doesn't apply: Rapid Review (p. 707; Mohamed, 2026-11-14).
 const ALL_HIGH_YIELD: [&str; 1] = ["rr"];
 
+/// A course needs this many items before its share means anything (a test
+/// fixture of eight items with three tagged is fine).
+const HIGH_YIELD_MIN_ITEMS: usize = 50;
+
 /// `high-yield` per course: one report line, and a problem for each course
 /// over the limit.
 fn high_yield_report(per_course: &[(String, usize, usize)]) -> (String, Vec<String>) {
@@ -335,7 +339,9 @@ fn high_yield_report(per_course: &[(String, usize, usize)]) -> (String, Vec<Stri
     );
     let problems = per_course
         .iter()
-        .filter(|(c, t, n)| !ALL_HIGH_YIELD.contains(&c.as_str()) && share(*t, *n) > HIGH_YIELD_LIMIT)
+        .filter(|(c, t, n)| {
+            !ALL_HIGH_YIELD.contains(&c.as_str()) && *n >= HIGH_YIELD_MIN_ITEMS && share(*t, *n) > HIGH_YIELD_LIMIT
+        })
         .map(|(c, t, n)| {
             format!(
                 "{c}: {t} of {n} items ({:.0}%) are tagged high-yield, over the {:.0}% limit; tag only First Aid's own emphasis (docs/CONTENT.md, scripts/high_yield_tags.py)",
