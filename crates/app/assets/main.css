@@ -144,10 +144,13 @@ input[type="checkbox"]:disabled { opacity: 0.5; cursor: default; }
 }
 .brand-tag { color: var(--muted); font-size: var(--fs-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 /* The full line only when the bar has room for it; in rem, so Larger text
-   switches sooner (UX #584: «…MLE Step 1 مذاكرة» at 320). */
+   switches sooner (UX #584: «…MLE Step 1 مذاكرة» at 320). The name, the
+   whole line and the two buttons need about 31rem, so every bar narrower
+   than that says only the exam: at 23rem the line was still cut inside a
+   word at 384 and 412 («جلسة قص…», #750). */
 .topbar { container: topbar / inline-size; }
 .brand-tag-short { display: none; }
-@container topbar (max-width: 23rem) {
+@container topbar (max-width: 32rem) {
   .brand-tag:not(.brand-tag-short) { display: none; }
   .brand-tag-short { display: inline; }
 }
@@ -325,7 +328,11 @@ input[type="file"]::file-selector-button {
   min-height: 0;
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding-block: var(--sp-4) var(--sp-6);
+  /* The air under the last thing on a screen. A footer pinned to the foot
+     of the scroller reaches down through exactly this much (bank.css
+     .run-foot), so every rule that changes it sets the variable. */
+  --content-end: var(--sp-6);
+  padding-block: var(--sp-4) var(--content-end);
   padding-inline: max(var(--sp-4), env(safe-area-inset-left, 0px));
   display: flex;
   flex-direction: column;

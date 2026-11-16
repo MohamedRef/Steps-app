@@ -102,16 +102,19 @@ bdi.bank-scope { font-family: var(--font-latin); }
 .run-progress { flex: 1; }
 .run-sub { display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
 /* The next step sits at the foot of the scroller, above the nav bar, and
-   the last option can always scroll clear of it. */
+   the last option can always scroll clear of it. It reaches down through
+   the whole of the scroller's bottom padding (`--content-end`, main.css),
+   safe area included: reaching through less left a strip under the button
+   where the page showed as it scrolled (#751). */
 .run-foot {
   position: sticky;
-  inset-block-end: calc(-1 * var(--sp-4));
-  margin-block-end: calc(-1 * var(--sp-4));
+  inset-block-end: calc(-1 * var(--content-end, var(--sp-6)));
+  margin-block-end: calc(-1 * var(--content-end, var(--sp-6)));
   z-index: 4;
   display: flex;
   flex-direction: column;
   gap: var(--sp-2);
-  padding-block: var(--sp-3) var(--sp-4);
+  padding-block: var(--sp-3) var(--content-end, var(--sp-6));
   background: var(--bg);
   border-block-start: 1px solid var(--line);
 }

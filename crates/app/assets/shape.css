@@ -214,6 +214,6 @@ button.chip { border-color: var(--line-soft); }
      own close or finish button is the way out. */
   .app[data-focus="true"] { grid-template-rows: 0 1fr 0; }
   .app[data-focus="true"] :is(.nav, .topbar) { display: none; }
-  .app[data-focus="true"] .content { padding-block-start: calc(var(--sp-2) + env(safe-area-inset-top, 0px)); padding-block-end: calc(var(--sp-6) + env(safe-area-inset-bottom, 0px)); }
+  .app[data-focus="true"] .content { padding-block-start: calc(var(--sp-2) + env(safe-area-inset-top, 0px)); --content-end: calc(var(--sp-6) + env(safe-area-inset-bottom, 0px)); padding-block-end: var(--content-end); }
 }
 @keyframes more-rise { from { opacity: 0; transform: translateY(8px); } }
