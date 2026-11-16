@@ -75,9 +75,10 @@ pub fn ItemView(
             }
             p { class: "st-where muted small",
                 bdi {
+                    // A heading that is the answer itself waits for the answer.
                     match &topic_title {
-                        Some(t) => format!("{lecture_title} · {t}"),
-                        None => lecture_title.clone(),
+                        Some(t) if revealed() || !item.body.topic_gives_away(t) => format!("{lecture_title} · {t}"),
+                        _ => lecture_title.clone(),
                     }
                 }
             }

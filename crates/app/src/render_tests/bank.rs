@@ -539,6 +539,48 @@ fn the_report_link_reopens_the_check_after_a_verdict() {
     assert!(!check.contains_key(&q.id));
 }
 
+/// The text of the chips above the stem.
+fn meta_row(app: &App) -> String {
+    let n = app
+        .page
+        .walk()
+        .into_iter()
+        .find(|&n| app.page.attr(n, "class").is_some_and(|c| c.split(' ').any(|c| c == "q-meta")))
+        .expect("a question has its chips row");
+    app.page.text(n)
+}
+
+#[test]
+fn the_topic_chip_waits_for_the_answer() {
+    // The topic is a First Aid heading: often the diagnosis itself (#743).
+    let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
+    let q = shown(&app);
+    let lecture = lecture_of(&q.id);
+    let topic =
+        crate::bank::topic_title(&lecture, q.topic.as_deref().expect("an MCQ is filed under a topic"));
+    let crumb = crate::content::Library::get().crumb(&lecture);
+    assert!(meta_row(&app).contains(&crumb), "the lecture chip is there from the start");
+    assert!(!meta_row(&app).contains(&topic), "no topic before the answer: {}", meta_row(&app));
+    let (right, _) = options(&q);
+    app.answer(&right);
+    assert!(!meta_row(&app).contains(&topic), "choosing is not answering");
+    app.tap(tx::CHECK);
+    assert!(meta_row(&app).contains(&topic), "the topic shows with the answer: {}", meta_row(&app));
+}
+
+#[test]
+fn a_timed_paper_never_names_the_topic_while_it_runs() {
+    let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);
+    let q = shown(&app);
+    let topic = crate::bank::topic_title(
+        &lecture_of(&q.id),
+        q.topic.as_deref().expect("an MCQ is filed under a topic"),
+    );
+    let (right, _) = options(&q);
+    app.answer(&right);
+    assert!(!meta_row(&app).contains(&topic), "no topic on a running paper: {}", meta_row(&app));
+}
+
 #[test]
 fn a_lecture_chip_on_an_answered_question_opens_the_lecture_page() {
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);

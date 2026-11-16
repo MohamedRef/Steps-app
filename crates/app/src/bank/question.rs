@@ -53,7 +53,10 @@ pub fn QuestionView(
                 } else {
                     span { class: "chip", bdi { "{crate::content::Library::get().crumb(&lecture.lecture)}" } }
                 }
-                if let Some(t) = topic {
+                // The topic is a First Aid heading: often the diagnosis the
+                // stem asks him to work out, sometimes the keyed option
+                // itself. It shows with the answer, never before.
+                if let Some(t) = topic.filter(|_| reveal) {
                     span { class: "chip", bdi { "{t}" } }
                 }
                 // As on the exam screen: the lab values, a tap from any question.
