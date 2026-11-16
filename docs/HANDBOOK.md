@@ -72,7 +72,7 @@ These are my own decisions. They win over any default tool or habit.
 
 **GitHub**
 - Everything on GitHub reads as written by me. Commits, branch names, PR titles and bodies, issues, reviews, docs and code never name the tools the work was written with: no generated-by footers, co-author trailers or session links. CI fails on tracked files that do and warns on PR text and merge messages.
-- Branch names are the short topic (`toolchain-pin`, `cvs-quote-fix`), with no prefix naming a tool, a session or an assistant. A branch is deleted once its PR is merged or closed.
+- Branch names are the short topic (`toolchain-pin`, `cvs-quote-fix`), with no prefix naming a tool, a session or an assistant. A branch is deleted once its PR is merged or closed: GitHub does it when "Automatically delete head branches" is on (repository Settings → General → Pull Requests); §12 says where that stands.
 - No GitHub comments as a workflow. Issues close through "Fixes #N" in a PR, or a close reason.
 
 **Tone**
@@ -279,7 +279,9 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 - **Calendar versions (2026-11-09, from Batna #768, Mohamed's pick):** the next release is `2026.11.1`, tagged `v2026.11.1`, with `Steps-<version>-android.apk`, `-mac.zip` and `SHA256SUMS.txt`; installed alpha.3 builds take it as an ordinary update (higher version and versionCode, same keys and feeds).
 
 ### Known issues
-- **Review of 2026-11-13** (on 150add5) opened #662 to #677; they are being fixed one PR per issue. Done here: Rust pinned to 1.100.0 with cross targets only where needed (#674); remote branches with a tool name in their prefix deleted (#677).
+- **Review of 2026-11-13** (on 150add5) opened #662 to #677; they are being fixed one PR per issue. Done here: Rust pinned to 1.100.0 with cross targets only where needed (#674); #677 (57 remote branches with a tool name in their prefix) was closed as not planned, so those branches are still on the remote (#752).
+- **Review of 2026-11-16** (on c9b34cf) opened #743 to #752. Fixed the same day: the bank's topic chip no longer names the answer (#743), each course glossary explains its own abbreviations (#744), lesson check cues (#746), Today leads with the lesson before a lecture's first cards (#747), the Cases screen is «حسابات» (#748), hooks on the long recall lists (#749), the phone tagline and the bank's answer footer (#750, #751). Open: #745 (Steps' own look and wording; waiting for my choice between the proposed palettes) and #752.
+- **#752 merged branches stay on the remote** (2026-11-16): open. The remote holds 184 branches: every branch merged since #661 and the 57 with a tool prefix. "Automatically delete head branches" is off. Turning it on and deleting the merged branches are done by the repository owner in GitHub; a pull request can do neither.
 - **#667 high-yield on 58% of items** (2026-11-14): fixed. The tag now follows the book's own emphasis (red bold mnemonics, "most common", "classic" and the like), about 1,380 of 9,000 First Aid course items plus all 1,036 Rapid Review items; the courses were retagged one PR each, and `validate` refuses a course over 30% (`rr` exempt).
 - **#744 abbreviations showed another field's meaning** (2026-11-16): fixed. Every course glossary now explains each abbreviation its lessons and items show (2,183 entries added, US spelling), the shared file went from 2,154 terms to the 836 Steps uses, and `validate` refuses a course term that only another file explains.
 - **#746 answer cues in lesson checks** (2026-11-16): fixed. The key is the single longest option in 129 of 621 check questions (20.8%, from 38%), and `validate` now reports and limits it as it does for the bank.
