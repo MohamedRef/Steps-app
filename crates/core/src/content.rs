@@ -127,6 +127,37 @@ impl Body {
             Self::Order { .. } => "order",
         }
     }
+
+    /// Whether naming `topic` (the First Aid heading the item is filed
+    /// under) before the answer would give the answer away: the heading is
+    /// in what the item hides and not in what it shows. A heading's lead-in
+    /// counts ("Vitamin D" of "Vitamin D: deficiency"); one under 4 letters
+    /// is too short to judge.
+    pub fn topic_gives_away(&self, topic: &str) -> bool {
+        let fold = |s: &str| s.to_lowercase();
+        let head = fold(topic.split([':', '(']).next().unwrap_or_default().trim());
+        if head.chars().count() < 4 {
+            return false;
+        }
+        let (shown, hidden) = match self {
+            Self::Card { front, back } => (fold(front), fold(back)),
+            Self::Cloze { text, .. } => {
+                let blanks = cloze_blanks(text).unwrap_or_default();
+                let hidden: Vec<String> = blanks.into_iter().map(|(_, answer)| fold(&answer)).collect();
+                let mut shown = fold(text);
+                for h in &hidden {
+                    shown = shown.replace(h.as_str(), " ");
+                }
+                (shown, hidden.join(" "))
+            }
+            Self::Mcq { stem, options, answer, .. } => {
+                (fold(stem), options.get(*answer).map(|o| fold(o)).unwrap_or_default())
+            }
+            Self::Enumerate { prompt, points, .. } => (fold(prompt), fold(&points.join(" "))),
+            _ => return false,
+        };
+        hidden.contains(&head) && !shown.contains(&head)
+    }
 }
 
 /// Every key an item of each kind may have, shared keys included. Serde can't
@@ -300,6 +331,51 @@ mod tests {
         assert_eq!(cloze_blanks("{{c1::}}"), None);
         assert_eq!(cloze_blanks("stray }}"), None);
         assert_eq!(cloze_blanks("{{c1::{{c2::nested}}"), None);
+    }
+
+    #[test]
+    fn a_topic_gives_the_answer_away_only_when_the_item_hides_it() {
+        let card = |front: &str, back: &str| Body::Card { front: front.into(), back: back.into() };
+        // The heading is the answer.
+        assert!(
+            card(
+                "What is the most common ventricular preexcitation syndrome?",
+                "Wolff-Parkinson-White syndrome."
+            )
+            .topic_gives_away("Wolff-Parkinson-White syndrome")
+        );
+        // The front already names it: nothing left to give away.
+        assert!(
+            !card("Which drugs treat Wolff-Parkinson-White syndrome?", "Procainamide or ibutilide.")
+                .topic_gives_away("Wolff-Parkinson-White syndrome")
+        );
+        // The answer never mentions the heading.
+        assert!(
+            !card("What is a nucleosome?", "DNA looped twice around a histone octamer.")
+                .topic_gives_away("Chromatin structure")
+        );
+        // A heading's lead-in is enough; a very short one is not judged.
+        assert!(
+            card("What do granulomas activate with 1α-hydroxylase?", "Vitamin D.")
+                .topic_gives_away("Vitamin D: excess")
+        );
+        assert!(!card("Which element?", "Zn.").topic_gives_away("Zn"));
+        // A cloze: only its blanks are hidden.
+        let cloze = |text: &str| Body::Cloze { text: text.into(), extra: None };
+        assert!(
+            cloze("{{c1::Rotavirus}} is the main cause of infantile gastroenteritis.")
+                .topic_gives_away("Rotavirus")
+        );
+        assert!(!cloze("Rotavirus is a {{c1::dsRNA}} virus.").topic_gives_away("Rotavirus"));
+        // An MCQ: the keyed option.
+        let mcq = Body::Mcq {
+            stem: "Which organelle is most abundant in plasma cells?".into(),
+            options: vec!["Smooth endoplasmic reticulum".into(), "Rough endoplasmic reticulum".into()],
+            answer: 1,
+            why: vec![String::new(), String::new()],
+        };
+        assert!(mcq.topic_gives_away("Rough endoplasmic reticulum"));
+        assert!(!mcq.topic_gives_away("Golgi apparatus"));
     }
 
     #[test]

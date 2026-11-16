@@ -65,6 +65,38 @@ fn a_card_is_revealed_graded_and_saved_as_a_study_review() {
     assert!(app.can_tap(tx::UNDO_LAST));
 }
 
+/// A card whose topic line would (`away`) or would not answer it, with the
+/// line as the player prints it.
+fn card_by_topic_line(away: bool) -> Option<(String, String)> {
+    let lib = crate::content::Library::get();
+    ids_of("card").into_iter().find_map(|id| {
+        let i = item(&id);
+        let lecture = lib.lectures.values().find(|l| l.items.iter().any(|x| x.id == id))?;
+        let topic = lecture.topics.iter().find(|t| Some(&t.id) == i.topic.as_ref())?;
+        (i.body.topic_gives_away(&topic.title) == away)
+            .then(|| (id, format!("{} · {}", lecture.title, topic.title)))
+    })
+}
+
+#[test]
+fn a_topic_that_is_the_answer_waits_for_the_answer() {
+    // "Wolff-Parkinson-White syndrome" over "the most common preexcitation
+    // syndrome?" answers the card (#743).
+    let Some((card, line)) = card_by_topic_line(true) else {
+        return;
+    };
+    let mut app = session(&[&card]);
+    app.assert_lacks(&line);
+    app.tap(tx::REVEAL);
+    app.assert_has(&line);
+}
+
+#[test]
+fn a_topic_that_is_not_the_answer_shows_from_the_start() {
+    let (card, line) = card_by_topic_line(false).expect("a card whose topic does not answer it");
+    session(&[&card]).assert_has(&line);
+}
+
 #[test]
 fn again_brings_the_card_back_as_a_retry_and_onto_the_summary_list() {
     let card = first_of("card");
