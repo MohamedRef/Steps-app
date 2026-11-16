@@ -1,6 +1,6 @@
 use super::*;
 
-const ALL: [(&str, &Palette); 10] = [
+const ALL: [(&str, &Palette); 11] = [
     ("paper", &PAPER),
     ("night", &NIGHT),
     ("black", &BLACK),
@@ -11,6 +11,7 @@ const ALL: [(&str, &Palette); 10] = [
     ("contrast", &CONTRAST),
     ("study", &STUDY),
     ("study-dim", &STUDY_DIM),
+    ("indigo-day", &INDIGO_DAY),
 ];
 
 #[test]
@@ -113,6 +114,23 @@ fn study_themes_are_calm() {
     }
     assert_eq!(Theme::SystemStudy.day_and_night(), (&STUDY, &STUDY_DIM));
     assert!(Theme::SystemStudy.css().contains("prefers-color-scheme: dark){:root{--bg:#181c1e;"));
+}
+
+// Issue #745: Indigo has a light partner, and one choice that follows the
+// device between the two.
+#[test]
+fn indigo_follows_the_device_between_its_day_and_its_dark() {
+    assert_eq!(Theme::SystemIndigo.palette(), None);
+    assert_eq!(Theme::SystemIndigo.day_and_night(), (&INDIGO_DAY, &INDIGO));
+    let css = Theme::SystemIndigo.css();
+    assert!(css.starts_with(":root{--bg:#f4f4fb;"), "{css}");
+    assert!(css.contains("prefers-color-scheme: dark){:root{--bg:#14142b;"), "{css}");
+    // The device's own answer picks one palette outright.
+    assert!(Theme::SystemIndigo.css_for(Some(true)).starts_with(":root{--bg:#14142b;"));
+    assert!(Theme::IndigoDay.css().starts_with(":root{--bg:#f4f4fb;"));
+    assert!(INDIGO_DAY.css().ends_with("color-scheme:light;"));
+    // The default stays the petrol pair.
+    assert_eq!(Theme::default().day_and_night(), (&PAPER, &NIGHT));
 }
 
 #[test]

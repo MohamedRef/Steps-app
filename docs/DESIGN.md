@@ -45,7 +45,8 @@ Aliases in `parts.css` for code ported from the design reference:
 Themes (Arabic names in brackets): Paper («صبح»), Night («بترولي»), True
 black («أسود AMOLED»), Night shift («سهر»), Scrubs («سكرَب», clinic teal),
 Sepia («سيبيا», warm book paper with a cool sheet), Indigo («نيلي», a
-blue-violet dark), High contrast («تباين عالي»), and the calm Study («مذاكرة», sage paper) and Study dim («مذاكرة خافت», slate) for long sessions. Paper and Night carry the
+blue-violet dark) with its light partner Indigo day («نيلي فاتح», lilac paper
+and a deep indigo brand), High contrast («تباين عالي»), and the calm Study («مذاكرة», sage paper) and Study dim («مذاكرة خافت», slate) for long sessions. Paper and Night carry the
 redesign's steps-light / steps-dark
 (Paper's muted is one step darker than the reference's `#5b7080` to pass AA
 on `--surface-2`). True black keeps `#000000` page and cards with Night's

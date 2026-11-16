@@ -26,6 +26,8 @@ fn theme_label(t: Theme) -> (&'static str, &'static str) {
         Theme::SystemStudy => (tx::THEME_SYSTEM_STUDY, tx::THEME_SYSTEM_STUDY_SUB),
         Theme::Study => (tx::THEME_STUDY, tx::THEME_STUDY_SUB),
         Theme::StudyDim => (tx::THEME_STUDY_DIM, tx::THEME_STUDY_DIM_SUB),
+        Theme::SystemIndigo => (tx::THEME_SYSTEM_INDIGO, tx::THEME_SYSTEM_INDIGO_SUB),
+        Theme::IndigoDay => (tx::THEME_INDIGO_DAY, tx::THEME_INDIGO_DAY_SUB),
     }
 }
 
