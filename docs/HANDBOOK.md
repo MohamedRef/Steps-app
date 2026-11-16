@@ -259,15 +259,15 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 *Last updated: 2026-11-16.*
 
 ### State
-- **Latest release:** `1.0.0-alpha.3` (2026-11-06): APK, Mac app, web and Steps Cloud. <https://github.com/MohamedRef/Steps-app/releases/tag/steps-v1.0.0-alpha.3>. Earlier: alpha.1 and alpha.2 (both 2026-11-05).
+- **Latest release:** `2026.11.4` (2026-11-16, alpha channel): APK, Mac app, web and Steps Cloud. <https://github.com/MohamedRef/Steps-app/releases/tag/v2026.11.4>. Earlier: `2026.11.3` (2026-11-14), `2026.11.2` (2026-11-13), `2026.11.1` (2026-11-09), and before the calendar numbers `1.0.0-alpha.1` to `alpha.3` (2026-11-05 and 2026-11-06).
 - **Content:** all 84 lectures written (16 First Aid courses + Rapid Review), <!-- counts -->about 10,040 items (5,440 cards, 1,720 MCQs, 1,170 clozes, 980 tables, 580 lists, 140 orders, 6 cases), 360 lessons and 1,550 glossary terms<!-- /counts -->, with First Aid coverage gaps filled after alpha.1. All `unverified` until I approve them.
 - **Quality:** two full review rounds (code, platform, UX, content by course) on 2026-11-04 and 2026-11-05; every finding of every severity was fixed before alpha.1.
 - **Sync:** Steps Cloud is live with Google and password sign-in.
 - **Sources:** only First Aid 2026 so far. B&B videos and UWorld ids come from a public mapping document ([QBANK.md](QBANK.md)).
-- **On `main` since alpha.3, waiting for alpha.4:** the Mac and landscape-tablet layout and safer review keys; resizable study panes, focus mode and quick search (Ctrl/⌘+K); keyboard focus that follows the task; lesson text weighted by importance with a key-term pill per theme; the calm Study themes; my own highlights in lessons; lesson reading settings; mnemonic reminders on repeated lists (`pack::SCHEMA` 3, so it needs the new app build); Study sessions that survive leaving the app and restarts, with a constant-time check of the review log.
+- **On `main` since `2026.11.4`:** nothing yet. That release carries everything up to 7041d3c, the fixes of the 2026-11-16 review included (below).
 
 ### Roadmap
-- **Next release, `2026.11.1`** (calendar numbering from now on, §10): release what is on `main` (above), plus whatever daily use turns up.
+- **Next release, `2026.11.5`** (calendar numbering, §10): whatever daily use of `2026.11.4` turns up.
 - **More sources:** Pathoma, Sketchy, UWorld notes and my own materials, merged into the First Aid lectures and topics as they arrive ([SOURCES.md](SOURCES.md)). With the first one, `steps-tools refs` must learn to read its text.
 - **Approvals:** I check items against the book in the app and export my verdicts; fixes follow per lecture.
 - **Smaller files:** keep splitting the busiest shared files, one area per PR, with no change in behaviour. Done so far: UI text, unit tests, the lesson module.
