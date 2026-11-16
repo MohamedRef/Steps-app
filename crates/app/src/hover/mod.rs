@@ -213,10 +213,11 @@ mod tests {
         assert!(er.as_str().is_some_and(|t| t.starts_with("Estrogen receptor")), "{er}");
         // Only what differs from the shared table is sent.
         assert!(o["repro"]["exact"].get("SAAG").is_none());
-        // repro's plain mnemonics stay unexplained there (#271).
-        assert!(o["repro"]["exact"]["TIN"].is_null());
-        assert!(o["repro"]["exact"]["CAB"].is_null());
-        assert!(glossary_for("repro").find("TIN").is_none());
-        assert!(glossary().find("TIN").is_some());
+        // A word a course keeps plain stays unexplained there, though another
+        // course explains it (#271): bio's splice-site `AG` is not the anion gap.
+        let bio = o["bio"]["exact"].as_object().expect("bio overrides");
+        assert!(bio.get("AG").is_some_and(|v| v.is_null()), "{:?}", bio.get("AG"));
+        assert!(glossary_for("bio").find("AG").is_none());
+        assert!(glossary().find("AG").is_some());
     }
 }

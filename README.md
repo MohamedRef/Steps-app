@@ -24,13 +24,13 @@ When I add other sources, they go under the same First Aid topics, and each item
 | | |
 |---|---|
 | Cards | about 5,440 |
-| Step 1 style questions (single best answer, A–E) | about 1,710 |
+| Step 1 style questions (single best answer, A–E) | about 1,720 |
 | Clozes | about 1,170 |
 | Tables and lists to recall | about 1,560 |
 | Steps to put in order, and cases | about 150 |
 | Lessons in Egyptian Arabic, with drawings and try-it steps | about 360 |
-| Glossary terms explained on hover | about 2,870 |
-| **All study items** | **about 10,030** |
+| Glossary terms explained on hover | about 1,550 |
+| **All study items** | **about 10,040** |
 <!-- /counts -->
 
 Every item starts as unverified, and only I mark it approved after I have checked it against the book.
