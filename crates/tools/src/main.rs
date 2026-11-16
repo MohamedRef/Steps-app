@@ -258,7 +258,9 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
         Err(e) => problems.extend(e),
     }
     // Lessons (docs/LESSONS.md), with every abbreviation in the glossary.
-    let (_, lessons) = lessons::validate_all(root, &approved, glossary.as_ref(), &mut problems);
+    let (_, lessons, check_cues) = lessons::validate_all(root, &approved, glossary.as_ref(), &mut problems);
+    let (check_report, check_problems) = lesson_cue_report(&check_cues);
+    problems.extend(check_problems);
     // UWorld QIDs per lecture (docs/QBANK.md).
     let lecture_ids: BTreeSet<&str> = index.lectures.iter().map(|l| l.id.as_str()).collect();
     problems.extend(qbank::problems(root, &lecture_ids, &known_sources));
@@ -268,7 +270,7 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     problems.extend(refs::check_locks(root, &listed.iter().cloned().collect::<Vec<_>>()));
     if problems.is_empty() {
         Ok(format!(
-            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms\n{cue_report}\n{hy_report}\n{glossary_report}",
+            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms\n{cue_report}\n{check_report}\n{hy_report}\n{glossary_report}",
             index.lectures.len()
         ))
     } else {
@@ -312,6 +314,40 @@ fn cue_report(per_lecture: &[(String, validate::cues::Cues)]) -> (String, Vec<St
     }
     if !all.padded.is_empty() {
         report.push_str(&format!("; {} padded options", all.padded.len()));
+    }
+    (report, problems)
+}
+
+/// The same cues in the lessons' check questions (issue #746): one line
+/// with the share over all lessons and each course's, and a problem when
+/// the share over all lessons passes the MCQ limit. A check has three or
+/// four options, so chance alone is 25–33%. Options ending in "only" or
+/// "alone" are counted, not refused: in a short check some carry the
+/// distinction itself ("Anterior horn cells only").
+fn lesson_cue_report(per_course: &[(String, validate::cues::Cues)]) -> (String, Vec<String>) {
+    use validate::cues::{Cues, KEY_LONGEST_LIMIT};
+    let mut all = Cues::default();
+    let mut lines = Vec::new();
+    for (course, c) in per_course.iter().filter(|(_, c)| c.mcqs > 0) {
+        all.add(c);
+        lines.push(format!("{course} {}/{} ({:.0}%)", c.key_longest, c.mcqs, 100.0 * c.key_longest_share()));
+    }
+    let report = format!(
+        "lesson check cues: the key is the single longest option in {} of {} checks ({:.1}%, limit {:.0}%); {} options end in \"only\"/\"alone\"; per course: {}",
+        all.key_longest,
+        all.mcqs,
+        100.0 * all.key_longest_share(),
+        100.0 * KEY_LONGEST_LIMIT,
+        all.padded.len(),
+        lines.join(", ")
+    );
+    let mut problems = Vec::new();
+    if all.key_longest_share() > KEY_LONGEST_LIMIT {
+        problems.push(format!(
+            "lessons: the key is the single longest option in {:.1}% of check questions, over the {:.0}% limit; trim keys (docs/LESSONS.md)",
+            100.0 * all.key_longest_share(),
+            100.0 * KEY_LONGEST_LIMIT
+        ));
     }
     (report, problems)
 }

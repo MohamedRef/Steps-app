@@ -85,20 +85,39 @@ pub fn unknown_abbreviations(file: &LessonFile, g: &Glossary) -> Vec<String> {
     out
 }
 
-/// Checks every lesson file. Returns `(files, lessons)` and pushes problems.
+/// The answer cues in every course's lesson checks (validate/cues.rs,
+/// issue #746): `(course, cues)` in file order.
+pub fn check_cues(
+    files: &[(PathBuf, LessonFile, String)],
+) -> Vec<(String, steps_core::validate::cues::Cues)> {
+    let mut out: Vec<(String, steps_core::validate::cues::Cues)> = Vec::new();
+    for (_, file, _) in files {
+        let course = steps_core::program::course_of(&file.lecture);
+        let cues = steps_core::validate::cues::lessons(file);
+        match out.iter_mut().find(|(c, _)| c == course) {
+            Some((_, all)) => all.add(&cues),
+            None => out.push((course.to_string(), cues)),
+        }
+    }
+    out
+}
+
+/// Checks every lesson file. Returns `(files, lessons)` and the answer cues
+/// of each course's check questions ([`check_cues`]), and pushes problems.
 pub fn validate_all(
     root: &Path,
     approved: &BTreeSet<String>,
     glossary: Option<&Glossary>,
     problems: &mut Vec<String>,
-) -> (usize, usize) {
+) -> (usize, usize, Vec<(String, steps_core::validate::cues::Cues)>) {
     let files = match load(root) {
         Ok(f) => f,
         Err(p) => {
             problems.extend(p);
-            return (0, 0);
+            return (0, 0, Vec::new());
         }
     };
+    let cues = check_cues(&files);
     let content = root.join("content");
     let mut lessons = 0;
     for (path, file, text) in &files {
@@ -133,7 +152,7 @@ pub fn validate_all(
     problems.extend(
         lesson::embed_images(&mut all, read_image(root)).into_iter().map(|p| format!("lessons: {p}")),
     );
-    (all.len(), lessons)
+    (all.len(), lessons, cues)
 }
 
 /// Every step's `remind` entry points at something that holds a hook: an
@@ -302,7 +321,7 @@ lessons:
         )
         .unwrap();
         let mut problems = Vec::new();
-        let (files, lessons) = validate_all(root, &BTreeSet::new(), Some(&g), &mut problems);
+        let (files, lessons, _) = validate_all(root, &BTreeSet::new(), Some(&g), &mut problems);
         assert_eq!((files, lessons), (3, 2), "{problems:#?}");
         for want in [
             "content/lessons/cvs/L05.yaml: lecture is cvs.L04, the file name says cvs.L05",
@@ -322,7 +341,7 @@ lessons:
         let root = dir.path();
         write(root, "content/lessons/cvs/L04.yaml", "schema: [");
         let mut problems = Vec::new();
-        assert_eq!(validate_all(root, &BTreeSet::new(), None, &mut problems), (0, 0));
+        assert_eq!(validate_all(root, &BTreeSet::new(), None, &mut problems), (0, 0, Vec::new()));
         assert_eq!(problems.len(), 1);
         assert!(problems[0].starts_with("content/lessons/cvs/L04.yaml: "), "{problems:?}");
         // A directory with a .yaml name can't be read.
