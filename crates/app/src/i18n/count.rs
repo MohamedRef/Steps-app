@@ -45,7 +45,7 @@ pub const TEST: Noun = Noun {
 pub const VIDEO: Noun =
     Noun { one: "فيديو واحد", two: "فيديوهين", few: "فيديوهات", many: "فيديو" };
 pub const CASE: Noun =
-    Noun { one: "حالة واحدة", two: "حالتين", few: "حالات", many: "حالة" };
+    Noun { one: "مسألة واحدة", two: "مسألتين", few: "مسائل", many: "مسألة" };
 
 pub const FIELD: Noun =
     Noun { one: "خانة واحدة", two: "خانتين", few: "خانات", many: "خانة" };

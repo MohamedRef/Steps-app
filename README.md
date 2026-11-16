@@ -2,7 +2,7 @@
 
 Steps is my USMLE Step 1 study app. I built it for one learner, me, and it is private.
 
-It is made for short, focused sessions: spaced repetition (FSRS), Step 1 style vignette questions with an explanation for every option, lessons that explain the why in Egyptian Arabic, cases, timed blocks and an Anki export. It works offline on my phone (S24 Ultra), my tablet (Tab S11), my Mac and in any browser, and keeps them in sync.
+It is made for short, focused sessions: spaced repetition (FSRS), Step 1 style vignette questions with an explanation for every option, lessons that explain the why in Egyptian Arabic, step-by-step equation drills, timed blocks and an Anki export. It works offline on my phone (S24 Ultra), my tablet (Tab S11), my Mac and in any browser, and keeps them in sync.
 
 The current version is **1.0.0-alpha.3**, the third alpha.
 

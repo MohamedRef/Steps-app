@@ -40,7 +40,7 @@ fn other_counted_lines_agree() {
 
 #[test]
 fn each_count_takes_the_right_form() {
-    assert_eq!(today::due_cases(2), "حالتين مستنية مراجعة في شاشة الحالات");
+    assert_eq!(today::due_cases(2), "مسألتين مستنية مراجعة في شاشة الحسابات");
     assert_eq!(today::exam_in(1), "الامتحان بكرة. إنت جاهز أكتر مما فاكر.");
     assert_eq!(today::exam_in(2), "فاضل يومين على الامتحان");
     assert!(today::tight_days(1).starts_with("الخطة محتاجة يوم مذاكرة زيادة في الأسبوع"));

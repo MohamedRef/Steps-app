@@ -12,7 +12,7 @@ pub const WRITING: &str = "المحاضرة دي لسه بتتكتب. أول م�
 pub const LESSONS: &str = "الدروس";
 pub const PRACTICE: &str = "اتمرّن";
 pub const MCQS: &str = "سؤال اختيارات في البنك";
-pub const CASES: &str = "حالة";
+pub const CASES: &str = "مسألة";
 pub const TOPICS: &str = "المواضيع";
 pub const CHECKED: &str = "صحة المحتوى: راجعت";
 /// "قريت 6 من 21 صفحة" (A2).

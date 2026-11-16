@@ -4,9 +4,9 @@ pub const NEW: &str = "جديد متاح";
 pub fn locked(n: usize) -> String {
     format!("جديد مستني تقرا صفحاته في First Aid: {}", super::count::count(n, &super::count::ITEM))
 }
-/// "3 حالات مستنية مراجعة في شاشة الحالات".
+/// "3 مسائل مستنية مراجعة في شاشة الحسابات".
 pub fn due_cases(n: usize) -> String {
-    format!("{} مستنية مراجعة في شاشة الحالات", super::count::count(n, &super::count::CASE))
+    format!("{} مستنية مراجعة في شاشة الحسابات", super::count::count(n, &super::count::CASE))
 }
 pub const ALL_DONE: &str = "خلّصت المستحق النهارده. شغل حلو.";
 pub const NEW_CAP_REACHED: &str = "وخلّصت الجديد اللي محدّده لليوم";
