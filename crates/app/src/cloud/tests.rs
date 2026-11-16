@@ -808,10 +808,15 @@ fn an_exchange_cut_off_after_google_took_the_code_asks_to_sign_in_again() {
     super::oauth::TOKEN_URLS.lock().unwrap().push(("steps-test-cut".into(), url));
     let fake = Fake::start();
     let mut run = start(&fake, store(), None, google("steps-test-cut"));
+    // Both statuses can come in one read on a fast engine thread (Mac CI,
+    // #757), so each wait looks from before the sign-in, not from the
+    // statuses the wait before it already read.
+    let before_sign_in = run.statuses.len();
     run.send(Command::SignInGoogle);
     browser_returns("steps-test-cut", "code=ok");
-    run.status("waiting", |st| st.problem == Some(Problem::SignInWaiting));
-    let st = run.status("sign in again", |st| st.problem == Some(Problem::SignInInterrupted));
+    run.status_since(before_sign_in, "waiting", |st| st.problem == Some(Problem::SignInWaiting));
+    let st = run
+        .status_since(before_sign_in, "sign in again", |st| st.problem == Some(Problem::SignInInterrupted));
     assert!(!st.finishing_sign_in);
     assert!(fake.requests("POST /v1/auth/google").is_empty());
 }
