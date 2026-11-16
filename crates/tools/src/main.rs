@@ -22,6 +22,7 @@ mod anki;
 mod changes;
 mod content;
 mod counts;
+mod glossary;
 mod ids;
 mod lessons;
 mod packs;
@@ -149,6 +150,8 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     // `high-yield` per course: (course, tagged, items).
     let mut high_yield: Vec<(String, usize, usize)> = Vec::new();
     let mut listed = BTreeSet::new();
+    // Every lecture read, for the glossary check below.
+    let mut lectures: Vec<Lecture> = Vec::new();
     for entry in &index.lectures {
         listed.insert(entry.id.clone());
         let path = lecture_path(&content, &entry.id);
@@ -211,6 +214,7 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
             }
             None => high_yield.push((course, tagged, lec.items.len())),
         }
+        lectures.push(lec);
     }
     let (cue_report, cue_problems) = cue_report(&cues);
     problems.extend(cue_problems);
@@ -237,12 +241,17 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     // file plus `content/glossary/<course>.yaml`, checked as one.
     let mut terms = 0;
     let mut glossary = None;
+    let mut glossary_report = String::from("glossary: none");
     match read_glossary(&content) {
         Ok(Some(g)) => {
             terms = g.entries.len();
             for p in validate::glossary(&g, Some(&approved)) {
                 problems.push(format!("content/glossary: {p}"));
             }
+            // Each course explains its own abbreviations (glossary.rs).
+            let (report, outside) = glossary::check(root, &g, &lectures);
+            glossary_report = report;
+            problems.extend(outside);
             glossary = Some(g);
         }
         Ok(None) => {}
@@ -259,7 +268,7 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     problems.extend(refs::check_locks(root, &listed.iter().cloned().collect::<Vec<_>>()));
     if problems.is_empty() {
         Ok(format!(
-            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms\n{cue_report}\n{hy_report}",
+            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms\n{cue_report}\n{hy_report}\n{glossary_report}",
             index.lectures.len()
         ))
     } else {

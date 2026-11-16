@@ -45,7 +45,7 @@ These are my own decisions. They win over any default tool or habit.
 **Content**
 - The textbook never goes in git: no PDF, no extracted text. Cropped book figures for lessons are the one exception. Items paraphrase the book, cite `src.page`, and quote what proves the fact. CI enforces this (`scripts/check-tracked-files.sh`).
 - **No maximum length on First Aid quotes.** Never shorten a quote to fit a limit. `steps-tools validate` refuses an item or lesson quote whose last word is a function word ("of", "as", "and"…), the sign of a quote cut mid-sentence; complete it from the book.
-- **Content is never shortened or deduplicated.** First Aid is already condensed, so nothing leaves a lecture, a lesson or a course glossary because it also appears elsewhere. Each course glossary lists every term its lectures use, even when another course lists it too (validate refuses a term only when it appears twice in the same file).
+- **Content is never shortened or deduplicated.** First Aid is already condensed, so nothing leaves a lecture, a lesson or a course glossary because it also appears elsewhere. Each course glossary lists every term its lectures use, with the meaning that course intends, even when another course lists it too (validate refuses a term twice in the same file, and an abbreviation a course shows that only another glossary file explains).
 - **MCQs give no answer cues.** The key is not the longest option (trim keys, never pad distractors) and no distractor ends in a padding "only"/"alone"; `steps-tools validate` prints the key-longest share per lecture and refuses a bank-wide share over 25% or a padded distractor (docs/CONTENT.md).
 - Every item ships `status: unverified`. Only I approve, through my in-app export (`content/approved.txt`).
 - The book's answer is the exam answer. A newer guideline or another source's view goes in `update:` with its name and year, never as a silent change.
@@ -174,7 +174,7 @@ How to write it: [CONTENT.md](CONTENT.md) (items), [LESSONS.md](LESSONS.md) (les
 - `content/index.yaml`: every lecture with its printed page range and its workstream (`chunk`).
 - `content/<course>/LNN.yaml`: a lecture's items. `content/lessons/<course>/LNN.yaml`: its lessons (`steps.lesson/v1`).
 - `content/book-refs/<course>/LNN.tsv`: locked page references.
-- `content/glossary/<course>.yaml`: the course's terms. `content/glossary.yaml`: shared terms.
+- `content/glossary/<course>.yaml`: every abbreviation the course's lessons and items show, with the course's meaning (the app reads it first). `content/glossary.yaml`: the same terms as Steps reads them outside any one course; `validate` prints how many of them nothing uses.
 - `content/sources.yaml`: sources besides First Aid (`fa2026`). An item from another source carries `src.book: <id>` and goes under the same First Aid lecture and topic, never a parallel tree.
 - `content/qbank/`: `uworld.yaml` (generated) and `bb-map.yaml` (B&B section → lecture). `content/labs.yaml`: lab values.
 - `content/approved.txt`: items I approved. `content/ids-retired.txt`: ids never reused.
@@ -256,11 +256,11 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 
 ## 12. State, roadmap and known issues
 
-*Last updated: 2026-11-14.*
+*Last updated: 2026-11-16.*
 
 ### State
 - **Latest release:** `1.0.0-alpha.3` (2026-11-06): APK, Mac app, web and Steps Cloud. <https://github.com/MohamedRef/Steps-app/releases/tag/steps-v1.0.0-alpha.3>. Earlier: alpha.1 and alpha.2 (both 2026-11-05).
-- **Content:** all 84 lectures written (16 First Aid courses + Rapid Review), <!-- counts -->about 10,030 items (5,440 cards, 1,710 MCQs, 1,170 clozes, 980 tables, 580 lists, 140 orders, 6 cases), 360 lessons and 2,870 glossary terms<!-- /counts -->, with First Aid coverage gaps filled after alpha.1. All `unverified` until I approve them.
+- **Content:** all 84 lectures written (16 First Aid courses + Rapid Review), <!-- counts -->about 10,040 items (5,440 cards, 1,720 MCQs, 1,170 clozes, 980 tables, 580 lists, 140 orders, 6 cases), 360 lessons and 1,550 glossary terms<!-- /counts -->, with First Aid coverage gaps filled after alpha.1. All `unverified` until I approve them.
 - **Quality:** two full review rounds (code, platform, UX, content by course) on 2026-11-04 and 2026-11-05; every finding of every severity was fixed before alpha.1.
 - **Sync:** Steps Cloud is live with Google and password sign-in.
 - **Sources:** only First Aid 2026 so far. B&B videos and UWorld ids come from a public mapping document ([QBANK.md](QBANK.md)).
@@ -281,6 +281,7 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 ### Known issues
 - **Review of 2026-11-13** (on 150add5) opened #662 to #677; they are being fixed one PR per issue. Done here: Rust pinned to 1.100.0 with cross targets only where needed (#674); remote branches with a tool name in their prefix deleted (#677).
 - **#667 high-yield on 58% of items** (2026-11-14): fixed. The tag now follows the book's own emphasis (red bold mnemonics, "most common", "classic" and the like), about 1,380 of 9,000 First Aid course items plus all 1,036 Rapid Review items; the courses were retagged one PR each, and `validate` refuses a course over 30% (`rr` exempt).
+- **#744 abbreviations showed another field's meaning** (2026-11-16): fixed. Every course glossary now explains each abbreviation its lessons and items show (2,183 entries added, US spelling), the shared file went from 2,154 terms to the 836 Steps uses, and `validate` refuses a course term that only another file explains.
 - **#646 Nightly checks failed on main** (2026-11-08, on 71e5538). Open; it closes itself when Nightly passes again.
 - Not yet confirmed on a real phone: the lock/unlock screen-freeze fix (`vendor/`), and restoring a Study session after Android ends the app.
 - GitHub never fires this repo's schedules; `daily.yml` covers for them (§6).
