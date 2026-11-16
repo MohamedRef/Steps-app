@@ -558,6 +558,8 @@ fn theme_name(t: Theme) -> &'static str {
         Theme::SystemStudy => s::THEME_SYSTEM_STUDY,
         Theme::Study => s::THEME_STUDY,
         Theme::StudyDim => s::THEME_STUDY_DIM,
+        Theme::SystemIndigo => s::THEME_SYSTEM_INDIGO,
+        Theme::IndigoDay => s::THEME_INDIGO_DAY,
     }
 }
 

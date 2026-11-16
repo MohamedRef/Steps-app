@@ -307,6 +307,32 @@ pub const INDIGO: Palette = Palette {
     key_ink: "#0b2a1c",
 };
 
+/// Indigo day: lilac paper and a deep indigo brand, the light partner of
+/// Indigo (issue #745: a look of Steps' own beside the petrol default).
+pub const INDIGO_DAY: Palette = Palette {
+    scheme: Scheme::Light,
+    bg: "#f4f4fb",
+    surface: "#ffffff",
+    surface_2: "#ebecf7",
+    text: "#1c1e45",
+    muted: "#5b5e86",
+    line: "#dcdef0",
+    accent: "#3b3fa3",
+    on_accent: "#ffffff",
+    accent_soft: "#e1e3fa",
+    accent_ink: "#33378f",
+    soft: "#ecedfa",
+    good: "#277654",
+    good_soft: "#e8f4ec",
+    bad: "#ad493c",
+    bad_soft: "#fbece7",
+    gold: "#8a641d",
+    gold_soft: "#fbf1d9",
+    sheet: "#fcf4e0",
+    key: "#ffd27a",
+    key_ink: "#3a2603",
+};
+
 /// High contrast: black on white with a strong blue brand, outlines a step
 /// darker, for bright light or tired eyes.
 pub const CONTRAST: Palette = Palette {
@@ -414,19 +440,25 @@ pub enum Theme {
     Study,
     /// Calm slate for studying in a dark room.
     StudyDim,
+    /// Indigo day by day, Indigo when the device is dark.
+    SystemIndigo,
+    /// Lilac paper with a deep indigo brand.
+    IndigoDay,
 }
 
 impl Theme {
-    pub const ALL: [Self; 13] = [
+    pub const ALL: [Self; 15] = [
         Self::System,
         Self::SystemBlack,
         Self::SystemStudy,
+        Self::SystemIndigo,
         Self::Paper,
         Self::Night,
         Self::Black,
         Self::NightShift,
         Self::Scrubs,
         Self::Sepia,
+        Self::IndigoDay,
         Self::Indigo,
         Self::Contrast,
         Self::Study,
@@ -449,6 +481,8 @@ impl Theme {
             Self::SystemStudy => "system-study",
             Self::Study => "study",
             Self::StudyDim => "study-dim",
+            Self::SystemIndigo => "system-indigo",
+            Self::IndigoDay => "indigo-day",
         }
     }
 
@@ -460,7 +494,7 @@ impl Theme {
     /// device; see [`Theme::day_and_night`]).
     pub fn palette(self) -> Option<&'static Palette> {
         match self {
-            Self::System | Self::SystemBlack | Self::SystemStudy => None,
+            Self::System | Self::SystemBlack | Self::SystemStudy | Self::SystemIndigo => None,
             Self::Paper => Some(&PAPER),
             Self::Night => Some(&NIGHT),
             Self::Black => Some(&BLACK),
@@ -471,6 +505,7 @@ impl Theme {
             Self::Contrast => Some(&CONTRAST),
             Self::Study => Some(&STUDY),
             Self::StudyDim => Some(&STUDY_DIM),
+            Self::IndigoDay => Some(&INDIGO_DAY),
         }
     }
 
@@ -481,6 +516,7 @@ impl Theme {
             Self::System => (&PAPER, &NIGHT),
             Self::SystemBlack => (&PAPER, &BLACK),
             Self::SystemStudy => (&STUDY, &STUDY_DIM),
+            Self::SystemIndigo => (&INDIGO_DAY, &INDIGO),
             fixed => {
                 let p = fixed.palette().unwrap_or(&PAPER);
                 (p, p)
