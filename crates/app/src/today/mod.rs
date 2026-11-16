@@ -54,6 +54,12 @@ pub fn Today() -> Element {
         tx::DAY_Q
     };
     let minutes = crate::onboarding::session_minutes();
+    // Nothing due, and the next new card comes from a lecture he has had no
+    // lesson from yet: that lesson leads and its cards follow (#747).
+    let teach = (o.due == 0 && new_today > 0)
+        .then(|| unseen(&*review.backend.borrow(), &o, 1))
+        .and_then(|ids| ids.first().and_then(|id| crate::learn::lesson_before(id)))
+        .map(|l| (l.id.clone(), l.minutes));
     // Everything today, reviews and the new items' first looks.
     let all_minutes = o.due_minutes + (new_today as u32 * NEW_ITEM_SECS).div_ceil(60);
 
@@ -91,7 +97,7 @@ pub fn Today() -> Element {
                 if let Some((index, total)) = crate::study::running_progress() {
                     ResumeStudy { index, total }
                 }
-                Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0 && o.locked == 0, finished, minutes }
+                Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0 && o.locked == 0, finished, minutes, teach }
                 crate::catchup::CatchUpCard { due: o.due, due_minutes: o.due_minutes }
                 // Each count opens what it counts.
                 div { class: "stat-tiles",
@@ -242,17 +248,25 @@ fn Hero(
     nothing: bool,
     finished: bool,
     minutes: u32,
+    /// The lesson that goes before today's new cards, and its minutes.
+    teach: Option<(String, u32)>,
 ) -> Element {
     let ui = use_context::<Ui>();
     let review = use_review();
     let ready = due + new_today > 0;
-    // The card's one job: start the session, or with nothing due, the next lesson.
-    let next = crate::learn::next_lesson(&[]).map(|l| l.id.clone());
+    // The card's one job: start the session, or with nothing due, the next
+    // lesson. Before a lecture's first cards, its lesson.
+    let next = teach
+        .as_ref()
+        .map(|(id, _)| id.clone())
+        .or_else(|| crate::learn::next_lesson(&[]).map(|l| l.id.clone()));
     let cta_next = next.clone();
+    let session_first = ready && teach.is_none();
+    let lesson_minutes = teach.as_ref().map(|(_, m)| *m);
     rsx! {
         crate::ui::Card {
             class: "hero card-action td-hero",
-            onclick: move |_| open_recommended(ui, ready, next.as_deref(), minutes),
+            onclick: move |_| open_recommended(ui, session_first, next.as_deref(), minutes),
             div { class: "hero-meta",
                 span { {if target.is_some() { tx::HERO_KICKER_PLAN } else if due > 0 { tx::HERO_KICKER } else { tx::HERO_KICKER_NEW }} }
                 match target.clone() {
@@ -273,6 +287,9 @@ fn Hero(
             if let Some(t) = target.clone() {
                 // The plan's day says what today holds; the start follows it.
                 PlanHero { t, due, due_minutes }
+            } else if teach.is_some() {
+                h2 { {tx::TEACH_HEAD} }
+                p { class: "td-body", {tx::teach_body(new_today)} }
             } else if ready {
                 h2 { {tx::headline(due, new_today)} }
                 p { class: "td-body", {tx::hero_body(due, new_today)} }
@@ -298,22 +315,37 @@ fn Hero(
                 r#type: "button",
                 onclick: move |e: MouseEvent| {
                     e.stop_propagation();
-                    open_recommended(ui, ready, cta_next.as_deref(), minutes);
+                    open_recommended(ui, session_first, cta_next.as_deref(), minutes);
                 },
-                if ready {
+                if let Some(m) = lesson_minutes {
+                    {tx::start_lesson(m)}
+                } else if ready {
                     {tx::start_session(minutes)}
                 } else {
                     {tx::OPEN_NEXT_LESSON}
                 }
                 {crate::icons::arrow_go()}
             }
+            // The cards stay one tap away for whoever has read the pages.
+            if teach.is_some() {
+                button {
+                    class: "btn-link td-skip",
+                    r#type: "button",
+                    onclick: move |e: MouseEvent| {
+                        e.stop_propagation();
+                        open_recommended(ui, true, None, minutes);
+                    },
+                    {tx::cards_anyway(minutes)}
+                }
+            }
         }
     }
 }
 
-/// The whole-card tap and visible button share one route and study budget.
-fn open_recommended(mut ui: Ui, ready: bool, next: Option<&str>, minutes: u32) {
-    if ready {
+/// The whole-card tap and visible button share one route and study budget:
+/// the session when `session` leads, else the lesson `next`.
+fn open_recommended(mut ui: Ui, session: bool, next: Option<&str>, minutes: u32) {
+    if session {
         *crate::study::START.write() = Some(crate::study::Start { lectures: None, items: None, minutes });
         ui.screen.set(Screen::Study);
     } else if let Some(id) = next {

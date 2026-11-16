@@ -236,7 +236,13 @@ pub fn Player(lesson: Lesson, lecture_title: String) -> Element {
                     aria_label: tx::BACK,
                     title: tx::BACK,
                     disabled: i == 0,
-                    onclick: move |_| go_back(i - 1),
+                    // The first step has no earlier one: a tap that reaches a
+                    // disabled button (a test, a script) does nothing.
+                    onclick: move |_| {
+                        if let Some(earlier) = i.checked_sub(1) {
+                            go_back(earlier);
+                        }
+                    },
                     if pages {
                         {crate::icons::chevron(false)}
                     } else {
