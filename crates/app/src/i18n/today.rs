@@ -129,6 +129,25 @@ pub fn plan_reviews_only(due: usize) -> String {
 }
 pub const MINUTES_HINT: &str = "شوف الحمل في الأيام الجاية";
 pub const OPEN_NEXT_LESSON: &str = "افتح الدرس الجاي";
+// New cards from a lecture he has had no lesson from yet: the lesson leads
+// and its cards follow (#747).
+pub const TEACH_HEAD: &str = "الدرس الأول، وبعده كروته.";
+/// "30 حاجة جديدة مستنياك بعد الدرس. …"
+pub fn teach_body(new: usize) -> String {
+    format!(
+        "{} مستنياك بعد الدرس. افهمها الأول، والتسميع بعدها أسهل.",
+        super::count::count(new, &super::count::NEW_THING)
+    )
+}
+pub const START_LESSON: &str = "ابدأ بالدرس";
+/// The hero's button on such a day, with the lesson's own length.
+pub fn start_lesson(minutes: u32) -> String {
+    format!("{START_LESSON} · {}", super::count::count(minutes, &super::count::MINUTE))
+}
+/// The quiet second way under it: the cards anyway.
+pub fn cards_anyway(minutes: u32) -> String {
+    format!("أو {}", start_session(minutes))
+}
 pub const CONTINUE_HEAD: &str = "كمّل من مكانك";
 pub const ALL_LESSONS: &str = "كل الدروس";
 pub const MORE_HEAD: &str = "حاجات تانية تفيدك";

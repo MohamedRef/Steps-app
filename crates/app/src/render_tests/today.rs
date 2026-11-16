@@ -32,8 +32,19 @@ fn planned(settings: PlanSettings) -> App {
     app
 }
 
+/// The lesson a fresh install's first new cards wait behind.
+fn first_lesson() -> &'static steps_core::lesson::Lesson {
+    crate::content::Library::get().all_lessons().map(|(_, l)| l).next().expect("a lesson is written")
+}
+
+/// Whether a lesson is open in its player.
+fn in_a_lesson(app: &App) -> bool {
+    app.html().contains("ls-player")
+}
+
 #[test]
-fn a_fresh_day_leads_with_new_items_and_starts_a_session() {
+fn a_fresh_day_leads_with_the_lesson_and_keeps_the_cards_one_tap_away() {
+    // Recalling facts no lesson has taught yet is guessing (#747).
     let mut app = App::open(Screen::Today);
     app.assert_has(tx::EYEBROW);
     app.assert_has(tx::READY_Q);
@@ -43,15 +54,37 @@ fn a_fresh_day_leads_with_new_items_and_starts_a_session() {
     app.assert_has(tx::READY);
     app.assert_has(tx::WRITING);
     app.assert_has(tx::UNVERIFIED_NOTE);
+    app.assert_has(tx::TEACH_HEAD);
+    app.assert_has(&tx::start_lesson(first_lesson().minutes));
+    app.tap(tx::START_LESSON);
+    assert!(in_a_lesson(&app), "the hero's button opens the lesson");
+
+    // The cards anyway, for whoever has read the pages.
+    let mut app = App::open(Screen::Today);
     let minutes = app.run(crate::onboarding::session_minutes);
-    app.tap(&tx::start_session(minutes));
+    app.tap(&tx::cards_anyway(minutes));
     assert!(on(&app, Screen::Study));
     app.assert_has(crate::i18n::study::END);
 }
 
 #[test]
-fn the_whole_hero_card_starts_the_session_too() {
+fn the_whole_hero_card_opens_the_lesson_on_a_fresh_day() {
     let mut app = App::open(Screen::Today);
+    app.tap(tx::HERO_KICKER_NEW);
+    assert!(in_a_lesson(&app));
+}
+
+#[test]
+fn after_a_lesson_of_the_lecture_the_hero_starts_the_session() {
+    let lesson = first_lesson().id.clone();
+    let mut app = App::open(Screen::Today);
+    app.run(move || crate::learn::mark_done_for_tests(&lesson));
+    app.settle();
+    app.assert_lacks(tx::TEACH_HEAD);
+    app.assert_lacks(tx::START_LESSON);
+    let minutes = app.run(crate::onboarding::session_minutes);
+    app.assert_has(&tx::start_session(minutes));
+    // The whole card and its button both start the session.
     app.tap(tx::HERO_KICKER_NEW);
     assert!(on(&app, Screen::Study));
     app.assert_has(crate::i18n::study::BADGE_NEW);
@@ -307,6 +340,8 @@ fn a_due_card_leads_the_hero_and_its_count_starts_a_review() {
     one_due();
     let mut app = App::open(Screen::Today);
     app.assert_has(tx::HERO_KICKER);
+    // What is due comes before any lesson.
+    app.assert_lacks(tx::START_LESSON);
     app.assert_has(tx::DUE_HINT);
     // The lecture in progress carries its due count.
     app.assert_has(tx::DUE_CHIP);

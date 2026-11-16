@@ -179,6 +179,25 @@ pub fn next_lesson(prefer: &[String]) -> Option<&'static Lesson> {
     from(&crate::courses::focus::shows).or_else(|| from(&|_| true))
 }
 
+/// The lesson to do before new cards of `item_id`'s lecture: the lecture's
+/// first lesson, while none of its lessons is finished (#747). `None` once
+/// he has finished one there, and for a lecture with no lessons.
+pub fn lesson_before(item_id: &str) -> Option<&'static Lesson> {
+    let lecture = item_id.rsplit_once('.').map(|(l, _)| l)?;
+    let file = Library::get().lessons.get(lecture)?;
+    if file.lessons.iter().any(|l| mark(&l.id).is_some()) {
+        return None;
+    }
+    file.lessons.first()
+}
+
+/// Screen tests: this lesson is finished.
+#[cfg(test)]
+pub fn mark_done_for_tests(id: &str) {
+    save_mark(id, Mark { done_ms: crate::store::now_ms(), right: 0, asked: 0 });
+    *MARKS_REV.write() += 1;
+}
+
 /// The lesson that teaches an item: one that practises it, else the first
 /// lesson of its lecture that covers its topic.
 pub fn lesson_for_item(item_id: &str) -> Option<&'static Lesson> {
