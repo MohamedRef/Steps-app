@@ -155,6 +155,42 @@ fn glossary_problems_reach_validate() {
     assert!(read_glossary(&root.join("content")).is_err());
 }
 
+// Issue #744: a course explains the abbreviations it shows in its own
+// glossary file, and validate says how much of the shared file is in use.
+#[test]
+fn a_course_explains_its_own_abbreviations() {
+    let dir = content_tree();
+    let root = dir.path();
+    let about_glossary = |root: &Path| -> Vec<String> {
+        validate_all(root).unwrap_err().into_iter().filter(|p| p.starts_with("content/glossary/")).collect()
+    };
+    // The fixture lecture (cvs.L04) writes CXR and IVC; the shared file
+    // explains both, and KDOQI besides, which nothing uses.
+    let shared = "schema: steps.glossary/v1\nentries:\n  - { term: CXR, kind: abbr, text: Chest X-ray, status: unverified }\n  - { term: IVC, kind: abbr, text: Inferior vena cava, status: unverified }\n  - { term: KDOQI, kind: abbr, text: A kidney guideline group, status: unverified }\n";
+    write(root, "content/glossary.yaml", shared);
+    // No course file: nothing to hold the course to.
+    assert!(about_glossary(root).is_empty());
+    // A course file that explains one of the two.
+    let cxr = "schema: steps.glossary/v1\nentries:\n  - { term: CXR, kind: abbr, text: Chest X-ray, status: unverified }\n";
+    write(root, "content/glossary/cvs.yaml", cxr);
+    let problems = about_glossary(root);
+    assert_eq!(problems.len(), 1, "{problems:#?}");
+    assert!(
+        problems[0].starts_with(
+            "content/glossary/cvs.yaml: cvs lessons or items show `IVC`, explained only in another glossary file"
+        ),
+        "{problems:#?}"
+    );
+    // The line validate prints names the shared term nothing uses.
+    let all = read_glossary(&root.join("content")).unwrap().unwrap();
+    let lecture: Lecture = serde_yaml_ng::from_str(crate::testkit::SAMPLE).unwrap();
+    let (report, _) = glossary::check(root, &all, &[lecture]);
+    assert_eq!(report, "glossary: 3 shared terms, 1 that no content or screen text uses (KDOQI)");
+    // Explained, or kept plain: both settle it.
+    write(root, "content/glossary/cvs.yaml", &format!("{cxr}plain: [IVC]\n"));
+    assert!(about_glossary(root).is_empty());
+}
+
 #[test]
 fn raw_keys_skip_what_isnt_an_item() {
     let keys = raw_keys(

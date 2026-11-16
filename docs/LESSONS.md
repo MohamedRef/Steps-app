@@ -64,10 +64,16 @@ The model to copy is `content/lessons/cvs/L01.yaml`.
     …") to your course's `content/glossary/<course>.yaml`, or, when the word
     isn't an abbreviation (emphasis like `NOT`, a Roman numeral, a
     mnemonic's letters, a trial name), add it to that file's `plain:` list.
-    Shared terms live in `content/glossary.yaml`; a term already there or in
-    another course's file is refused as a duplicate, so reuse it (reword a
-    shared meaning in its own PR). The same entries fill the per-course «قاموس
-    الاختصارات» (Lessons screen, More), with the lessons that use each one.
+    **Your course file explains every abbreviation your course shows**, in
+    lessons and items alike, with the meaning your course intends first and
+    the book's US spelling: the app reads the course file before any other,
+    so `LA` is the left atrium in cardiovascular whatever another file says.
+    A term may also be in `content/glossary.yaml` (the meanings Steps uses
+    outside any one course) or in another course's file; the validator
+    refuses a term twice within one file, and refuses an abbreviation your
+    course shows that only another file explains. The same entries fill the
+    per-course «قاموس الاختصارات» (Lessons screen, More), with the lessons
+    that use each one.
 
 13. **Bring the تحشيشة back** (Mohamed, 2026-11-08). A step that teaches a
     list which already has a تحشيشة (an enumerate item's `hook`, in this
