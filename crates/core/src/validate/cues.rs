@@ -1,9 +1,11 @@
-//! Answer cues in the written MCQs: hints that point at the key without
-//! any medicine. The key that is the single longest option, distractors
-//! padded with a final "only" or "alone", and where the key was written.
-//! `steps-tools validate` prints these per lecture so they cannot drift back.
+//! Answer cues in the written MCQs and in the lessons' check questions:
+//! hints that point at the key without any medicine. The key that is the
+//! single longest option, distractors padded with a final "only" or "alone",
+//! and where the key was written. `steps-tools validate` prints these per
+//! lecture (MCQs) and per course (lesson checks) so they cannot drift back.
 
 use crate::content::{Body, Lecture};
+use crate::lesson::{LessonFile, StepBody};
 
 /// The bank-wide limit on MCQs whose key is the single longest option. With
 /// five options chance is about 20%.
@@ -41,27 +43,48 @@ impl Cues {
     }
 }
 
+impl Cues {
+    /// Counts one question: its options, the key's index, and the id a
+    /// padded option is reported under.
+    fn count(&mut self, id: &str, options: &[String], answer: usize) {
+        let Some(key) = options.get(answer) else {
+            return;
+        };
+        self.mcqs += 1;
+        if let Some(n) = self.key_at.get_mut(answer) {
+            *n += 1;
+        }
+        let len = |s: &str| s.trim().chars().count();
+        if options.len() > 1 && options.iter().enumerate().all(|(i, o)| i == answer || len(o) < len(key)) {
+            self.key_longest += 1;
+        }
+        for (i, o) in options.iter().enumerate() {
+            if i != answer && padded(o) {
+                self.padded.push((id.to_string(), i));
+            }
+        }
+    }
+}
+
 /// The cues in one lecture's MCQs.
 pub fn lecture(lec: &Lecture) -> Cues {
     let mut out = Cues::default();
     for item in &lec.items {
-        let Body::Mcq { options, answer, .. } = &item.body else {
-            continue;
-        };
-        let Some(key) = options.get(*answer) else {
-            continue;
-        };
-        out.mcqs += 1;
-        if let Some(n) = out.key_at.get_mut(*answer) {
-            *n += 1;
+        if let Body::Mcq { options, answer, .. } = &item.body {
+            out.count(&item.id, options, *answer);
         }
-        let len = |s: &str| s.trim().chars().count();
-        if options.len() > 1 && options.iter().enumerate().all(|(i, o)| i == *answer || len(o) < len(key)) {
-            out.key_longest += 1;
-        }
-        for (i, o) in options.iter().enumerate() {
-            if i != *answer && padded(o) {
-                out.padded.push((item.id.clone(), i));
+    }
+    out
+}
+
+/// The cues in one lesson file's `check` steps (issue #746). A padded
+/// option is reported as `<lesson id> step <n>`.
+pub fn lessons(file: &LessonFile) -> Cues {
+    let mut out = Cues::default();
+    for lesson in &file.lessons {
+        for (k, step) in lesson.steps.iter().enumerate() {
+            if let StepBody::Check { options, answer, .. } = &step.body {
+                out.count(&format!("{} step {}", lesson.id, k + 1), options, *answer);
             }
         }
     }

@@ -222,6 +222,44 @@ fn answer_cues_are_reported_and_gated() {
     assert!(problems.iter().any(|p| p.contains("50.0% of MCQs, over the 25% limit")), "{problems:?}");
 }
 
+// Issue #746: the lessons' check questions get the same report, per course,
+// and the same limit over all of them.
+#[test]
+fn lesson_check_cues_are_reported_and_gated() {
+    use steps_core::validate::cues::Cues;
+    let ok =
+        Cues { mcqs: 8, key_longest: 2, padded: vec![("cvs.L04.lesson1 step 3".into(), 0)], key_at: [2; 5] };
+    let (report, problems) = lesson_cue_report(&[("cvs".into(), ok.clone()), ("gi".into(), Cues::default())]);
+    // A padded option is counted, not refused.
+    assert!(problems.is_empty(), "{problems:?}");
+    assert!(
+        report.starts_with("lesson check cues: the key is the single longest option in 2 of 8 checks (25.0%")
+    );
+    assert!(report.contains("1 options end in") && report.contains("cvs 2/8 (25%)"), "{report}");
+    assert!(!report.contains("gi "), "{report}");
+    let bad = Cues { mcqs: 8, key_longest: 3, ..ok };
+    let (_, problems) = lesson_cue_report(&[("cvs".into(), bad)]);
+    assert_eq!(problems.len(), 1, "{problems:?}");
+    assert!(problems[0].contains("37.5% of check questions, over the 25% limit"), "{problems:?}");
+}
+
+// Each course's checks are counted once, from its lesson files.
+#[test]
+fn lesson_checks_are_counted_per_course() {
+    let dir = content_tree();
+    let root = dir.path();
+    let lesson = |n: u32, options: &str| {
+        format!(
+            "schema: steps.lesson/v1\nlecture: cvs.L04\nlessons:\n  - id: cvs.L04.lesson{n}\n    title: t\n    hook: h\n    minutes: 5\n    pages: [305, 319]\n    topics: [shock]\n    goals: [g]\n    recap: [r]\n    status: unverified\n    steps:\n      - {{ kind: check, question: q, options: [{options}], answer: 0, why: [a, b, c] }}\n"
+        )
+    };
+    write(root, "content/lessons/cvs/L04.yaml", &lesson(1, "Tamponade physiology, b, c"));
+    let files = lessons::load(root).unwrap();
+    let cues = lessons::check_cues(&files);
+    assert_eq!(cues.len(), 1);
+    assert_eq!((cues[0].0.as_str(), cues[0].1.mcqs, cues[0].1.key_longest), ("cvs", 1, 1));
+}
+
 // Issue #667: `high-yield` follows the book's own emphasis, so validate
 // reports its share per course and refuses a course over the limit.
 #[test]

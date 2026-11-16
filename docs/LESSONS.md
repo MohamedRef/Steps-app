@@ -125,7 +125,7 @@ Every step may have `page:` and `quote:`.
 | `mnemonic` | `word`, `parts: [{key, text}]`, `hook?` | Letter tiles that open one by one. The keys must spell the word. |
 | `aside` | `tone` (tip, exam, trap, analogy, joke), `text` | A coloured box. |
 | `update` | `text`, `ref` | Guideline note; says the book wins in the exam. |
-| `check` | `question`, `options` (3–5), `answer` (0-based), `why` (one per option) | Single best answer; options are shuffled. |
+| `check` | `question`, `options` (3–5), `answer` (0-based), `why` (one per option) | Single best answer; options are shuffled. The key must not stand out by length: trim it to the fact, or give a distractor its full name. `validate` prints, per course, how often the key is the single longest option and refuses more than 25% over all lessons; it also counts options ending in "only"/"alone", which belong only where the word carries the distinction. |
 | `order` | `prompt`, `steps` (3–8, correct order), `why?` | Tap the steps in order. |
 | `match` | `prompt`, `pairs` (3–6 `[left, right]`), `why?` | Tap left then right. Right sides must differ. |
 | `sort` | `prompt`, `bins` (2–4), `cards` (3–10 `{text, bin}`), `why?` | Drop cards into bins. |
