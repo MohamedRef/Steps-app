@@ -20,8 +20,10 @@ pub fn nav_path(screen: Screen) -> &'static str {
         }
         // a list of answer choices, the second one ticked
         Screen::Bank => "M4 6h.01M4 12l1.5 1.5L8 11M4 18h.01M10 6h10M11 12h9M10 18h10",
-        // stethoscope
-        Screen::Cases => "M6 3v5a4 4 0 0 0 8 0V3M10 12v3a4 4 0 0 0 8 0v-2M18 13a2 2 0 1 0 0-4 2 2 0 0 0 0 4z",
+        // a calculator: the screen holds equation drills (#748)
+        Screen::Cases => {
+            "M7 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM9 7h6M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"
+        }
         // microphone
         Screen::Oral => "M9 4a3 3 0 0 1 6 0v7a3 3 0 0 1-6 0zM5 11a7 7 0 0 0 14 0M12 18v3M9 21h6",
         // three bars on a baseline
