@@ -1095,6 +1095,44 @@ fn a_vq_question_shows_its_number_in_the_bar() {
     app.assert_has(tx::VERDICT_RIGHT);
 }
 
+/// Quick search opens VQ-0001 before the bank screen ever drew.
+fn open_vq_from_search(app: &mut App) {
+    use crate::vq::{testing, vault};
+    testing::install();
+    assert!(vault::save(&testing::key()));
+    crate::content::Library::reload();
+    app.run(|| crate::shortcuts::open_palette(true));
+    app.type_into(crate::i18n::keys::QS_TITLE, "VQ-0001");
+    app.tap("VQ-0001");
+    app.assert_has(crate::vq::testing::STEM);
+}
+
+#[test]
+fn a_question_opened_from_search_comes_with_its_mark() {
+    let mut app = App::open(Screen::Today);
+    let marked = BTreeSet::from([crate::vq::testing::ID.to_string()]);
+    crate::store::shared().put_setting("bank.marked", &marked).unwrap();
+    open_vq_from_search(&mut app);
+    assert_eq!(attr_of(&app, "exam-mark", "aria-pressed"), "true");
+    // Unmarked here, it leaves the kept list.
+    app.tap("exam-mark");
+    assert!(kept_marks().is_empty());
+}
+
+#[test]
+fn a_question_opened_from_search_never_drops_a_paper_the_app_was_killed_in() {
+    crate::store::shared().put_local_setting("bank.open_paper", &Some(open_paper(60_000))).unwrap();
+    let mut app = App::open(Screen::Today);
+    open_vq_from_search(&mut app);
+    // As when a new paper starts from the setup: the left one is scored first.
+    let papers = crate::store::shared().settings_with_prefix::<steps_core::exam::Outcome>("bank.paper.");
+    assert_eq!(papers.len(), 1, "the killed paper is kept with the finished ones");
+    assert_eq!(papers[0].1.total.total, KEPT as u32);
+    // It went in once: the bank no longer offers it as a left paper.
+    app.tap(tx::LEAVE);
+    app.assert_lacks(tx::PAUSED_TITLE);
+}
+
 #[test]
 fn the_navigator_says_each_question_s_state() {
     let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);

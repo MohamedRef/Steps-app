@@ -422,6 +422,11 @@ pub fn start(mode: Mode, questions: Vec<Question>) {
 /// A new paper, a block or practice. The questions he marked before come
 /// marked.
 pub fn start_paper(mode: Mode, block: bool, questions: Vec<Question>) {
+    // Quick search can start one before the bank ever drew: its memory (the
+    // marks) and a paper the app was killed in are read first, or the new
+    // paper would come unmarked and its save would clear the killed one.
+    load_history();
+    restore_open();
     // A new paper never throws away one he left: that one is scored first.
     if let Some(paused) = PAUSED.write().take() {
         close(paused, now_ms());
