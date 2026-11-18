@@ -37,7 +37,8 @@ pub fn Result() -> Element {
     let timed = paper.mode.timed();
     let s = exam::summary(&paper.questions, &paper.answers, paper.mode, outcome.took_ms);
     let lib = Library::get();
-    let first = |show: Show| (0..paper.questions.len()).find(|&i| show.takes(&paper.questions[i], &paper.answers[i]));
+    let first =
+        |show: Show| (0..paper.questions.len()).find(|&i| show.takes(&paper.questions[i], &paper.answers[i]));
     let mut open = move |show: Show, from: Option<usize>| {
         if let Some(at) = from {
             review.set(Some((at, show)));
@@ -51,7 +52,9 @@ pub fn Result() -> Element {
         .iter()
         .zip(&paper.answers)
         .enumerate()
-        .map(|(i, (q, a))| (i, crate::vq::name(&q.id), lib.crumb(&q.lecture), a.graded(q), a.took_ms, a.flagged))
+        .map(|(i, (q, a))| {
+            (i, crate::vq::name(&q.id), lib.crumb(&q.lecture), a.graded(q), a.took_ms, a.flagged)
+        })
         .collect();
     // A VQ question can be found again by its number in quick search.
     let numbered = rows.iter().any(|r| r.1.is_some());
@@ -63,7 +66,10 @@ pub fn Result() -> Element {
         .filter_map(|c| s.by_course.get(&c.id).map(|score| (c.title.clone(), *score)))
         .collect();
     courses.extend(
-        s.by_course.iter().filter(|(id, _)| lib.program.course(id).is_none()).map(|(id, sc)| (id.clone(), *sc)),
+        s.by_course
+            .iter()
+            .filter(|(id, _)| lib.program.course(id).is_none())
+            .map(|(id, sc)| (id.clone(), *sc)),
     );
     let weak: Vec<(String, String, Score)> = exam::focus_topics(&outcome, 60)
         .into_iter()

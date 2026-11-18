@@ -325,7 +325,12 @@ fn the_summary_counts_times_and_courses() {
     ];
     let took = |chosen, ms, flagged| Answer { chosen, took_ms: ms, flagged, ..Answer::default() };
     // Right, wrong and marked, blank, right and marked.
-    let answers = [took(Some(1), 40_000, false), took(Some(3), 80_000, true), took(None, 0, false), took(Some(2), 20_000, true)];
+    let answers = [
+        took(Some(1), 40_000, false),
+        took(Some(3), 80_000, true),
+        took(None, 0, false),
+        took(Some(2), 20_000, true),
+    ];
     let s = summary(&qs, &answers, Mode::Mock, 200_000);
     assert_eq!(s.total, Score { right: 2, total: 4 });
     assert_eq!((s.wrong, s.blank, s.marked), (1, 1, 2));
@@ -347,7 +352,12 @@ fn the_summary_counts_times_and_courses() {
 
 #[test]
 fn a_retake_takes_the_wrong_blank_and_marked_ones_in_order() {
-    let qs = [q("1", "cvs.L04", "cp", 1), q("2", "cvs.L04", "cp", 1), q("3", "cvs.L04", "cp", 1), q("4", "cvs.L04", "cp", 1)];
+    let qs = [
+        q("1", "cvs.L04", "cp", 1),
+        q("2", "cvs.L04", "cp", 1),
+        q("3", "cvs.L04", "cp", 1),
+        q("4", "cvs.L04", "cp", 1),
+    ];
     let marked = Answer { flagged: true, ..a(Some(1)) };
     let answers = [a(Some(1)), a(Some(0)), marked, a(None)];
     assert_eq!(retake(&qs, &answers), ["2", "3", "4"]);

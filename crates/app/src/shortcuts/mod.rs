@@ -2,9 +2,9 @@
 //! Ctrl/⌘ + 1–7 for the screens, Ctrl/⌘ + , for Settings, Ctrl/⌘ + G for a
 //! First Aid page, and on study
 //! screens Space to reveal (then Space or Enter rates Good), 1–4 to rate, Z
-//! to undo, A–E for MCQ options, Enter for next, ← / → between lesson steps
-//! and the questions of a timed paper, F to flag, Esc to close, ? for the
-//! list. The key safety rules (no auto-repeat, nothing while typing, a
+//! to undo, A–E for MCQ options, Enter to confirm an answer or go on, ← / →
+//! between lesson steps and the questions of a bank paper, F to mark a
+//! question, Esc to close, ? for the list. The key safety rules (no auto-repeat, nothing while typing, a
 //! dialog first) are adapted from batna-app main: crates/app/src/shortcuts/mod.rs.
 //!
 //! Screens don't register handlers: a key presses the visible, enabled button

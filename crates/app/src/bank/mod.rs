@@ -656,7 +656,8 @@ pub fn retake() {
     };
     let lectures: BTreeSet<&str> = ids.iter().map(|id| steps_core::program::lecture_of(id)).collect();
     let owned = study_lectures_where(|l| lectures.contains(l));
-    let pool: Vec<exam::Mcq> = exam::mcqs(&owned).into_iter().filter(|q| ids.iter().any(|id| id == q.id)).collect();
+    let pool: Vec<exam::Mcq> =
+        exam::mcqs(&owned).into_iter().filter(|q| ids.iter().any(|id| id == q.id)).collect();
     start_paper(mode, block, exam::practice(&pool, pool.len(), now_ms() as u64));
 }
 

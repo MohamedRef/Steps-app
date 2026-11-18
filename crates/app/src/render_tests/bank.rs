@@ -708,7 +708,10 @@ fn the_lecture_and_topic_chips_wait_for_the_answer() {
     assert_eq!(meta_row(&app), None, "choosing is not answering");
     app.tap(tx::CHECK);
     let row = meta_row(&app).expect("the chips with the answer");
-    assert!(row.contains(&crumb) && row.contains(&topic), "the lecture and topic show with the answer: {row}");
+    assert!(
+        row.contains(&crumb) && row.contains(&topic),
+        "the lecture and topic show with the answer: {row}"
+    );
 }
 
 #[test]
@@ -1036,7 +1039,10 @@ fn the_top_bar_names_the_paper_and_holds_its_tools() {
     // The kind, «سؤال 1 من 10», and «1 / 10», which opens the navigator.
     assert_eq!(texts_of(&app, "exam-kind"), [tx::kind(false, true)]);
     assert_eq!(texts_of(&app, "exam-of"), [tx::question_of(1, n)]);
-    assert_eq!(attr_of(&app, "exam-count", "aria-label"), format!("{}: {}", tx::NAV_OPEN, tx::question_of(1, n)));
+    assert_eq!(
+        attr_of(&app, "exam-count", "aria-label"),
+        format!("{}: {}", tx::NAV_OPEN, tx::question_of(1, n))
+    );
     // A First Aid question has no number of its own to show.
     assert!(with_class(&app, "exam-qid").is_empty(), "no id label for a First Aid question");
     // The mark, with its key and its state in words.

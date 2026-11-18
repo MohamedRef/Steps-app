@@ -10,8 +10,8 @@ use steps_core::exam::{self, Filter, MOCK_SIZE, Mode, Only};
 use steps_core::program::{Group, course_of};
 
 use super::{
-    HISTORY, PAUSED, date, lecture_title, minutes, now_ms, resume, short_lecture_title, start,
-    start_paper, study_lectures, study_lectures_where, submit_paused, topic_title,
+    HISTORY, PAUSED, date, lecture_title, minutes, now_ms, resume, short_lecture_title, start, start_paper,
+    study_lectures, study_lectures_where, submit_paused, topic_title,
 };
 use crate::content::Library;
 use crate::i18n::bank as tx;

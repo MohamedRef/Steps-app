@@ -103,7 +103,8 @@ Existing tests live beside the owning facade in a child `tests.rs` module.
   at least the shared 48dp `--target`; the compact `--tap` (40px) is only for
   dense chips outside those screens. The browser checks fail on a regression.
 - **Words, not only colour:** a right or wrong answer, a suggested grade
-  («مقترح») and a flagged question say so in words as well as colour.
+  («مقترح»), a marked question and a struck-out option say so in words as
+  well as colour; the bank's navigator adds ✓, ✗ and a flag to its colours.
 - **Announcements and focus:** a result screen (study summary, bank result,
   finished lesson) moves focus to its heading so screen readers announce it;
   a tutor check reads its verdict through a polite live region; after a key
@@ -116,8 +117,9 @@ Existing tests live beside the owning facade in a child `tests.rs` module.
 - **Save failures retry in place:** a failed write says so where it happened,
   with «حاول تاني», through `persistence::WriteFailed`, and keeps the user's
   choice on screen. Review events are append-only and never queued.
-- **Keys:** in a timed paper ← is next and → is previous (the app reads right
-  to left), F flags; A–E never change an answer under an open dialog.
+- **Keys:** in a bank paper ← is next and → is previous (the app reads right
+  to left), Enter confirms the picked answer, F marks; A–E never change an
+  answer under an open dialog.
 - **Narrow phones:** grids use `min(<size>, 100%)` column minimums, so nothing
   is wider than a 320px screen at the larger text size.
 
