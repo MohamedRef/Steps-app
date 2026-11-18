@@ -54,6 +54,13 @@ pub fn registry(pack: &Pack) -> Registry {
             ids.insert(format!("lesson {}", l.id), format!("lecture {}", file.lecture));
         }
     }
+    // Sealed VQ questions: their ids and kinds are in clear, so they are
+    // checked like any item, without the key.
+    for file in &pack.sealed {
+        for item in &file.items {
+            ids.insert(format!("item {}", item.id), format!("kind {}", item.kind));
+        }
+    }
     ids
 }
 
@@ -189,5 +196,23 @@ mod tests {
         head.insert("lecture cvs.L04".into(), "course xx".into());
         let r = compare(&base, &head, &none);
         assert!(!r.breaking() && r.moved.len() == 1);
+    }
+
+    #[test]
+    fn sealed_questions_count_without_the_key() {
+        use crate::sealed::{Key, SealedItem, SealedLecture};
+        let key = Key::from_bytes([7; 32]);
+        let file = SealedLecture::new(
+            "cvs.L04",
+            &key,
+            vec![SealedItem { id: "cvs.L04.vq0001".into(), kind: "mcq".into(), sealed: "AQ".into() }],
+        );
+        let base = registry(&Pack::new(index(), vec![lecture()]));
+        let head = registry(&Pack::new(index(), vec![lecture()]).with_sealed(vec![file]));
+        assert_eq!(head.get("item cvs.L04.vq0001").map(String::as_str), Some("kind mcq"));
+        let r = compare(&base, &head, &BTreeSet::new());
+        assert_eq!(r.added, ["item cvs.L04.vq0001"]);
+        // Gone again: breaking, like any item his records point at.
+        assert!(compare(&head, &base, &BTreeSet::new()).breaking());
     }
 }

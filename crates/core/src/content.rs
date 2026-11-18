@@ -251,6 +251,12 @@ impl Source {
     pub fn is_primary(&self) -> bool {
         self.book_id() == PRIMARY_SOURCE
     }
+
+    /// The First Aid page the item cites. Another source's `page` counts its
+    /// own pages, or a question bank's questions (`VQ-0001`), so it is none.
+    pub fn first_aid_page(&self) -> Option<u32> {
+        (self.is_primary() && self.page > 0).then_some(self.page)
+    }
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
@@ -392,6 +398,15 @@ mod tests {
         }
         assert_eq!(allowed_keys("table"), Some(&["title", "columns", "rows", "blanks"][..]));
         assert_eq!(allowed_keys("flashcard"), None);
+    }
+
+    #[test]
+    fn only_first_aid_cites_a_first_aid_page() {
+        let src = |book: Option<&str>, page| Source { book: book.map(str::to_owned), page, quote: None };
+        assert_eq!(src(None, 317).first_aid_page(), Some(317));
+        assert_eq!(src(Some(PRIMARY_SOURCE), 317).first_aid_page(), Some(317));
+        assert_eq!(src(None, 0).first_aid_page(), None, "his own cards may have no page");
+        assert_eq!(src(Some("vq"), 317).first_aid_page(), None, "VQ-0317 is a question, not a page");
     }
 
     #[test]

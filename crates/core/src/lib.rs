@@ -18,6 +18,7 @@ pub mod qbank;
 pub mod quote;
 pub mod response;
 pub mod review;
+pub mod sealed;
 pub mod selfassess;
 pub mod session;
 pub mod srs;

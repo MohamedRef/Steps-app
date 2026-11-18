@@ -15,7 +15,8 @@ fn tools(args: &[&str]) -> Output {
 
 fn tools_with(args: &[&str], env: &[(&str, &str)]) -> Output {
     let mut c = Command::new(env!("CARGO_BIN_EXE_steps-tools"));
-    c.args(args).env_remove("STEPS_UPDATE_SECRET");
+    // Nothing from the shell running the tests: keys come only from `env`.
+    c.args(args).env_remove("STEPS_UPDATE_SECRET").env_remove("STEPS_VQ_KEY").env_remove("STEPS_VQ_REQUIRED");
     for (k, v) in env {
         c.env(k, v);
     }
@@ -136,4 +137,36 @@ fn update_sign_reads_the_secret_from_the_environment() {
     assert!(o.status.success() && out(&o).starts_with("signed "), "{}", err(&o));
     let o = tools(&["update", "verify", f, "--public-key", k]);
     assert_eq!(out(&o), "ok: alpha 1.0.0-alpha.4 build 9, 1 file(s) match\n", "{}", err(&o));
+}
+
+#[test]
+fn vq_keys_come_from_the_environment_and_are_never_echoed() {
+    // keygen prints a key the other commands read.
+    let o = tools(&["vq", "keygen"]);
+    assert!(o.status.success(), "{}", err(&o));
+    let key = out(&o).lines().next().unwrap().strip_prefix("STEPS_VQ_KEY=").unwrap().to_string();
+    let dir = tree();
+    let root = dir.path().to_str().unwrap();
+    let plain = tempfile::tempdir().unwrap();
+    let lecture = "schema: steps.content/v1\nlecture: cvs.L04\nitems:\n  - { id: cvs.L04.vq0001, kind: mcq, topic: shock, stem: s, options: [a, b], answer: 0, why: [x, y], src: { book: vq, page: 1 }, status: unverified, tags: [vq] }\n";
+    std::fs::create_dir_all(plain.path().join("cvs")).unwrap();
+    std::fs::write(plain.path().join("cvs/L04.yaml"), lecture).unwrap();
+    let folder = plain.path().to_str().unwrap();
+    let o = tools_with(&["vq", "seal", folder, "--root", root], &[("STEPS_VQ_KEY", &key)]);
+    assert!(o.status.success() && out(&o).starts_with("sealed 1 questions"), "{}", err(&o));
+    // Without the key, CI's switch makes the closed questions a problem.
+    let o = tools_with(&["validate", "--root", root], &[("STEPS_VQ_REQUIRED", "1")]);
+    assert!(
+        err(&o)
+            .contains("VQ: 1 sealed questions not opened (STEPS_VQ_KEY is not set), and STEPS_VQ_REQUIRED=1"),
+        "{}",
+        err(&o)
+    );
+    // A key that doesn't parse is named, never shown.
+    let bad = format!("{key}X");
+    let o = tools_with(&["validate", "--root", root], &[("STEPS_VQ_KEY", &bad)]);
+    assert_eq!(o.status.code(), Some(1));
+    assert!(err(&o).starts_with("STEPS_VQ_KEY: not a VQ key") && !err(&o).contains(&key[..9]), "{}", err(&o));
+    let o = tools(&["vq", "open", folder, "--root", root]);
+    assert!(err(&o).starts_with("STEPS_VQ_KEY is not set"), "{}", err(&o));
 }

@@ -73,22 +73,35 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     };
     let verdicts = read(Path::new(file)).map_err(|e| vec![e])?;
     let (_, lectures) = crate::packs::load(root)?;
+    // Sealed VQ questions, opened with STEPS_VQ_KEY (docs/VQ.md); without
+    // it they are only named.
+    let opened = crate::vq::opened_items(root)?;
+    let sealed: BTreeSet<String> = crate::vq::sealed_lectures(root)?
+        .into_iter()
+        .flat_map(|f| f.items.into_iter().map(|i| i.id))
+        .collect();
     let items: BTreeMap<&str, (&str, &Item)> = lectures
         .iter()
         .flat_map(|l| l.items.iter().map(move |i| (i.id.as_str(), (l.lecture.as_str(), i))))
+        .chain(opened.iter().map(|(l, i)| (i.id.as_str(), (l.as_str(), i))))
         .collect();
 
     let latest = latest(&verdicts);
     let mut fixes: BTreeMap<&str, Vec<String>> = BTreeMap::new();
     let mut approved = Vec::new();
     let mut unknown = Vec::new();
+    let mut unopened = Vec::new();
     // Changed since he judged them: never approved, never applied (#18).
     let mut changed = Vec::new();
     // ✓ from an export without fingerprints: can't tell, so not approved.
     let mut unchecked = Vec::new();
     for (id, v) in &latest {
         let Some((lecture, item)) = items.get(id) else {
-            unknown.push(id.to_string());
+            if sealed.contains(*id) {
+                unopened.push(id.to_string())
+            } else {
+                unknown.push(id.to_string())
+            }
             continue;
         };
         if current(v, item) == Some(false) {
@@ -159,6 +172,14 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     if !unknown.is_empty() {
         writeln!(out, "Not in the content any more (renumbered or not merged yet): {}", unknown.join(", "))
             .unwrap();
+    }
+    if !unopened.is_empty() {
+        writeln!(
+            out,
+            "Sealed VQ questions, not read (set STEPS_VQ_KEY to list them): {}",
+            unopened.join(", ")
+        )
+        .unwrap();
     }
     if args.iter().any(|a| a == "--approve") {
         let added = add_approved(&root.join("content/approved.txt"), &approved).map_err(|e| vec![e])?;

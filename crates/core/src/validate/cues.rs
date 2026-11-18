@@ -4,6 +4,8 @@
 //! and where the key was written. `steps-tools validate` prints these per
 //! lecture (MCQs) and per course (lesson checks) so they cannot drift back.
 
+use std::collections::BTreeSet;
+
 use crate::content::{Body, Lecture};
 use crate::lesson::{LessonFile, StepBody};
 
@@ -66,10 +68,12 @@ impl Cues {
     }
 }
 
-/// The cues in one lecture's MCQs.
-pub fn lecture(lec: &Lecture) -> Cues {
+/// The cues in one lecture's MCQs. MCQs from a question bank (`qbank`: the
+/// sources of kind `qbank`) are left out: Mohamed keeps them exactly as the
+/// bank wrote them, a longest key included (2026-11-18).
+pub fn lecture(lec: &Lecture, qbank: &BTreeSet<String>) -> Cues {
     let mut out = Cues::default();
-    for item in &lec.items {
+    for item in lec.items.iter().filter(|i| !qbank.contains(i.src.book_id())) {
         if let Body::Mcq { options, answer, .. } = &item.body {
             out.count(&item.id, options, *answer);
         }

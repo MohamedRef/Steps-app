@@ -13,9 +13,10 @@ use miniz_oxide::deflate::compress_to_vec;
 use miniz_oxide::inflate::decompress_to_vec_with_limit;
 use serde::{Deserialize, Serialize};
 
-use crate::content::{Index, Lecture};
+use crate::content::{Index, Lecture, SourceBook};
 use crate::lesson::LessonFile;
 use crate::program::Program;
+use crate::sealed::SealedLecture;
 
 /// The first bytes of every pack. Bump the digit when the layout changes.
 pub const MAGIC: &[u8; 8] = b"STEPSPK1";
@@ -27,6 +28,10 @@ pub const MAGIC: &[u8; 8] = b"STEPSPK1";
 /// Packs from before the field read as 0. 2: courses can cite slides
 /// (`program::Source`). 3: lesson steps can `remind` of a تحشيشة taught
 /// elsewhere (`lesson::Reminder`).
+///
+/// Not bumped for [`Pack::sealed`] and [`Pack::sources`] (2026-11-18): they
+/// are new fields of the pack itself, which older apps ignore, and an older
+/// app could never open sealed questions anyway.
 pub const SCHEMA: u32 = 3;
 
 /// Highest miniz level: slower to pack (only when content changes), not to unpack.
@@ -56,6 +61,15 @@ pub struct Pack {
     /// (`Program::fallback`); an older app ignores it and shows every lecture.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub program: Option<Program>,
+    /// The sealed VQ files (`content/<course>/vq/LNN.yaml`, `crate::sealed`),
+    /// copied as they are, in lecture order: a device opens them only with
+    /// Mohamed's key. Older packs have none.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub sealed: Vec<SealedLecture>,
+    /// `content/sources.yaml`'s sources, so a device can name an item's
+    /// source on its page chip (`VQ-0001`). Older packs have none.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub sources: Vec<SourceBook>,
 }
 
 #[derive(Debug, thiserror::Error)]
@@ -75,7 +89,30 @@ impl Pack {
     pub fn new(index: Index, mut lectures: Vec<Lecture>) -> Self {
         let pos = |id: &str| index.lectures.iter().position(|e| e.id == id).unwrap_or(usize::MAX);
         lectures.sort_by(|a, b| pos(&a.lecture).cmp(&pos(&b.lecture)).then(a.lecture.cmp(&b.lecture)));
-        Pack { schema: SCHEMA, index, lectures, lessons: Vec::new(), look: BTreeMap::new(), program: None }
+        Pack {
+            schema: SCHEMA,
+            index,
+            lectures,
+            lessons: Vec::new(),
+            look: BTreeMap::new(),
+            program: None,
+            sealed: Vec::new(),
+            sources: Vec::new(),
+        }
+    }
+
+    /// Adds the sealed VQ files, in the lectures' order.
+    pub fn with_sealed(mut self, mut sealed: Vec<SealedLecture>) -> Self {
+        let pos = |id: &str| self.index.lectures.iter().position(|e| e.id == id).unwrap_or(usize::MAX);
+        sealed.sort_by(|a, b| pos(&a.lecture).cmp(&pos(&b.lecture)).then(a.lecture.cmp(&b.lecture)));
+        self.sealed = sealed;
+        self
+    }
+
+    /// Adds `content/sources.yaml`'s sources.
+    pub fn with_sources(mut self, sources: Vec<SourceBook>) -> Self {
+        self.sources = sources;
+        self
     }
 
     /// Adds the lesson files, in the lectures' order.
@@ -222,10 +259,48 @@ impl Pack {
                 }
             }
         }
+        // Sealed questions: listed lectures, `<lecture>.vqNNNN` ids that no
+        // other item has, and one key for every file.
+        let mut sealed_files = BTreeSet::new();
+        let mut keys = BTreeSet::new();
+        for file in &self.sealed {
+            let lid = file.lecture.as_str();
+            if file.schema != crate::sealed::SCHEMA {
+                out.push(format!(
+                    "{lid} sealed: schema is {:?}, expected {:?}",
+                    file.schema,
+                    crate::sealed::SCHEMA
+                ));
+            }
+            if !listed.contains(lid) {
+                out.push(format!("{lid} sealed: the lecture isn't listed in the index"));
+            }
+            if !sealed_files.insert(lid) {
+                out.push(format!("{lid} sealed: the file appears twice"));
+            }
+            keys.insert(file.key.as_str());
+            for item in &file.items {
+                if crate::sealed::under(&item.id, lid).is_none() {
+                    out.push(format!("{}: sealed id isn't {lid}.vqNNNN", item.id));
+                }
+                if !all_items.insert(item.id.as_str()) {
+                    out.push(format!("{}: item id is used twice", item.id));
+                }
+            }
+        }
+        if keys.len() > 1 {
+            let keys: Vec<&str> = keys.into_iter().collect();
+            out.push(format!("sealed: files were sealed with different keys ({})", keys.join(", ")));
+        }
         if let Some(program) = &self.program {
             out.extend(program.problems(&self.index).into_iter().map(|p| format!("program: {p}")));
         }
         out
+    }
+
+    /// How many sealed questions the pack carries.
+    pub fn sealed_count(&self) -> usize {
+        self.sealed.iter().map(|f| f.items.len()).sum()
     }
 
     pub fn item_count(&self) -> usize {
@@ -345,6 +420,78 @@ mod tests {
         let p = twice.problems();
         assert!(p.iter().any(|m| m.contains("lesson id is used twice")), "{p:?}");
         assert!(p.iter().any(|m| m.contains("the file appears twice")), "{p:?}");
+    }
+
+    /// A sealed file for `lecture` holding questions `ids`, sealed with a
+    /// key made here.
+    fn sealed(lecture: &str, fill: u8, ids: &[&str]) -> crate::sealed::SealedLecture {
+        use crate::sealed::{Key, Opened, SealedLecture, seal_item};
+        let key = Key::from_bytes([fill; 32]);
+        let mcq = sample().items.into_iter().find(|i| i.body.kind() == "mcq").unwrap();
+        let items = ids
+            .iter()
+            .map(|id| {
+                seal_item(
+                    &key,
+                    &Opened::with_image(crate::content::Item { id: id.to_string(), ..mcq.clone() }, None),
+                )
+            })
+            .collect();
+        SealedLecture::new(lecture, &key, items)
+    }
+
+    #[test]
+    fn sealed_files_and_sources_travel_as_they_are() {
+        let sources: crate::content::Sources =
+            serde_yaml_ng::from_str(include_str!("../../../content/sources.yaml")).unwrap();
+        let pack = Pack::new(index(), vec![sample()])
+            .with_sealed(vec![
+                sealed("cvs.L05", 7, &["cvs.L05.vq0002"]),
+                sealed("cvs.L04", 7, &["cvs.L04.vq0001"]),
+            ])
+            .with_sources(sources.sources.clone());
+        // In the index's order.
+        assert_eq!(
+            pack.sealed.iter().map(|f| f.lecture.as_str()).collect::<Vec<_>>(),
+            ["cvs.L04", "cvs.L05"]
+        );
+        assert_eq!(pack.sealed_count(), 2);
+        assert_eq!(pack.problems(), Vec::<String>::new());
+        let back = Pack::decode(&pack.encode()).unwrap();
+        assert_eq!(back, pack);
+        assert_eq!(back.sources, sources.sources);
+        // A pack without them reads as before, and writes neither field.
+        let plain = Pack::new(index(), vec![sample()]);
+        let json = serde_json::to_string(&plain).unwrap();
+        assert!(!json.contains("\"sealed\"") && !json.contains("\"sources\""), "{json}");
+        assert!(Pack::decode(&plain.encode()).unwrap().sealed.is_empty());
+    }
+
+    #[test]
+    fn sealed_ids_lectures_and_keys_are_checked() {
+        let mut stray = sealed("cvs.L09", 7, &["cvs.L09.vq0001"]);
+        stray.schema = "steps.sealed/v0".into();
+        let pack = Pack::new(index(), vec![sample()]).with_sealed(vec![
+            sealed("cvs.L04", 7, &["cvs.L04.vq0001", "cvs.L04.001", "cvs.L05.vq0002"]),
+            sealed("cvs.L04", 7, &["cvs.L04.vq0003"]),
+            sealed("cvs.L05", 8, &["cvs.L05.vq0001"]),
+            stray,
+        ]);
+        let p = pack.problems();
+        let key = |fill: u8| crate::sealed::Key::from_bytes([fill; 32]).id();
+        let mut keys = [key(7), key(8)];
+        keys.sort();
+        for want in [
+            "cvs.L04.001: sealed id isn't cvs.L04.vqNNNN".to_string(),
+            "cvs.L04.001: item id is used twice".into(),
+            "cvs.L05.vq0002: sealed id isn't cvs.L04.vqNNNN".into(),
+            "cvs.L04 sealed: the file appears twice".into(),
+            "cvs.L09 sealed: the lecture isn't listed in the index".into(),
+            "cvs.L09 sealed: schema is \"steps.sealed/v0\", expected \"steps.sealed/v1\"".into(),
+            format!("sealed: files were sealed with different keys ({}, {})", keys[0], keys[1]),
+        ] {
+            assert!(p.contains(&want), "{want}: {p:#?}");
+        }
     }
 
     #[test]

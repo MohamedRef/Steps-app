@@ -5,9 +5,10 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::fmt;
 
-use crate::content::{self, Body, Lecture, Status};
+use crate::content::{self, Body, Item, Lecture, Status};
 
 pub mod cues;
+pub mod sealed;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct Problem {
@@ -29,6 +30,17 @@ pub struct Context<'a> {
     pub raw_keys: BTreeMap<String, Vec<String>>,
     /// Item ids Mohamed approved (`content/approved.txt`).
     pub approved: Option<&'a BTreeSet<String>>,
+    /// The sources of kind `qbank` (`content/sources.yaml`). Their MCQs
+    /// stay exactly as the bank wrote them: 2 to 26 options, and no answer-cue
+    /// rules (Mohamed, 2026-11-18).
+    pub qbank: Option<&'a BTreeSet<String>>,
+}
+
+impl Context<'_> {
+    /// Whether `item` comes from a question bank.
+    pub fn is_qbank(&self, item: &Item) -> bool {
+        self.qbank.is_some_and(|q| q.contains(item.src.book_id()))
+    }
 }
 
 pub fn lecture(lec: &Lecture, cx: &Context<'_>) -> Vec<Problem> {
@@ -61,47 +73,61 @@ pub fn lecture(lec: &Lecture, cx: &Context<'_>) -> Vec<Problem> {
             Some(n) if n.len() == 3 && n.bytes().all(|b| b.is_ascii_digit()) => {}
             _ => bad(at, format!("id must be {lid}.NNN (three digits)")),
         }
-        if let Some(keys) = cx.raw_keys.get(at) {
-            let own = content::allowed_keys(item.body.kind()).unwrap_or(&[]);
-            for k in keys {
-                if !own.contains(&k.as_str()) && !content::SHARED_KEYS.contains(&k.as_str()) {
-                    bad(at, format!("unknown key `{k}` for kind {}", item.body.kind()));
-                }
-            }
-        }
-        match &item.topic {
-            Some(t) if !topics.is_empty() && !topics.contains(t.as_str()) => {
-                bad(at, format!("topic `{t}` is not in the lecture's topics"));
-            }
-            None if !topics.is_empty() => bad(at, "topic is missing".into()),
-            _ => {}
-        }
-        if item.src.is_primary() && (item.src.page < first || item.src.page > last) {
-            bad(at, format!("src.page {} is outside the lecture (pages {first}-{last})", item.src.page));
-        }
-        if item.src.quote.as_deref().is_some_and(crate::quote::ends_mid_sentence) {
-            bad(at, "src.quote ends mid-sentence; complete it from the book (never shorten a quote)".into());
-        }
-        if item.status == Status::Approved && !cx.approved.is_some_and(|a| a.contains(at)) {
-            bad(
-                at,
-                "status approved: only Mohamed approves (add the id to content/approved.txt from his export)"
-                    .into(),
-            );
-        }
-        if let Some(u) = &item.update
-            && (u.text.trim().is_empty() || u.reference.trim().is_empty())
-        {
-            bad(at, "update needs both text and ref".into());
-        }
-        for message in body_problems(&item.body) {
+        for message in item_rules(lec, item, cx) {
             bad(at, message);
         }
     }
     out
 }
 
-fn body_problems(body: &Body) -> Vec<String> {
+/// The rules every item meets inside its lecture, wherever it is kept: an
+/// open lecture file, or sealed (`validate::sealed`). The id's own shape is
+/// the caller's to check.
+pub fn item_rules(lec: &Lecture, item: &Item, cx: &Context<'_>) -> Vec<String> {
+    let mut out = Vec::new();
+    let at = item.id.as_str();
+    let [first, last] = lec.book.pages;
+    if let Some(keys) = cx.raw_keys.get(at) {
+        let own = content::allowed_keys(item.body.kind()).unwrap_or(&[]);
+        for k in keys {
+            if !own.contains(&k.as_str()) && !content::SHARED_KEYS.contains(&k.as_str()) {
+                out.push(format!("unknown key `{k}` for kind {}", item.body.kind()));
+            }
+        }
+    }
+    let has_topics = !lec.topics.is_empty();
+    match &item.topic {
+        Some(t) if has_topics && !lec.topics.iter().any(|x| x.id == *t) => {
+            out.push(format!("topic `{t}` is not in the lecture's topics"));
+        }
+        None if has_topics => out.push("topic is missing".into()),
+        _ => {}
+    }
+    if item.src.is_primary() && (item.src.page < first || item.src.page > last) {
+        out.push(format!("src.page {} is outside the lecture (pages {first}-{last})", item.src.page));
+    }
+    if item.src.quote.as_deref().is_some_and(crate::quote::ends_mid_sentence) {
+        out.push("src.quote ends mid-sentence; complete it from the book (never shorten a quote)".into());
+    }
+    if item.status == Status::Approved && !cx.approved.is_some_and(|a| a.contains(at)) {
+        out.push(
+            "status approved: only Mohamed approves (add the id to content/approved.txt from his export)"
+                .into(),
+        );
+    }
+    if let Some(u) = &item.update
+        && (u.text.trim().is_empty() || u.reference.trim().is_empty())
+    {
+        out.push("update needs both text and ref".into());
+    }
+    out.extend(body_problems(&item.body, cx.is_qbank(item)));
+    out
+}
+
+/// A question bank's MCQ keeps the bank's own options (`Context::qbank`).
+const QBANK_OPTIONS: std::ops::RangeInclusive<usize> = 2..=26;
+
+fn body_problems(body: &Body, qbank: bool) -> Vec<String> {
     let mut p = Vec::new();
     let empty = |s: &str| s.trim().is_empty();
     match body {
@@ -124,7 +150,9 @@ fn body_problems(body: &Body) -> Vec<String> {
             if empty(stem) {
                 p.push("mcq stem is empty".into());
             }
-            if !(4..=5).contains(&options.len()) {
+            if qbank && !QBANK_OPTIONS.contains(&options.len()) {
+                p.push(format!("a question bank's mcq needs 2 to 26 options, has {}", options.len()));
+            } else if !qbank && !(4..=5).contains(&options.len()) {
                 p.push(format!("mcq needs 4 or 5 options, has {}", options.len()));
             }
             if *answer >= options.len() {

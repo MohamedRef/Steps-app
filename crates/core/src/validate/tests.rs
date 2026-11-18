@@ -232,3 +232,38 @@ fn a_quote_cut_mid_sentence_is_refused() {
     assert!(msgs.iter().any(|m| m.contains("cvs.L04.001") && m.contains("ends mid-sentence")), "{msgs:#?}");
     assert!(!msgs.iter().any(|m| m.contains("cvs.L04.002")), "{msgs:#?}");
 }
+
+// Mohamed, 2026-11-18: a question bank's MCQs keep their own options (2 to
+// 26), while First Aid MCQs keep 4 or 5.
+#[test]
+fn a_question_bank_mcq_keeps_its_own_options() {
+    let mcq = |id: &str, book: &str, n: usize| {
+        let options: Vec<String> = (0..n).map(|i| format!("o{i}")).collect();
+        format!(
+            "  - {{ id: {id}, kind: mcq, stem: s, options: [{}], answer: 0, why: [{}], src: {{ {book}page: 302 }}, status: unverified }}\n",
+            options.join(", "),
+            options.join(", ")
+        )
+    };
+    let l = lec(&format!(
+        "{HEAD}items:\n{}{}{}{}",
+        mcq("cvs.L04.001", "book: vq, ", 2),
+        mcq("cvs.L04.002", "book: vq, ", 26),
+        mcq("cvs.L04.003", "book: vq, ", 27),
+        mcq("cvs.L04.004", "", 6),
+    ));
+    let qbank: BTreeSet<String> = ["vq".to_string()].into();
+    let cx = Context { qbank: Some(&qbank), ..Context::default() };
+    let msgs: Vec<String> = lecture(&l, &cx).iter().map(|p| p.to_string()).collect();
+    assert_eq!(
+        msgs,
+        [
+            "cvs.L04.003: a question bank's mcq needs 2 to 26 options, has 27",
+            "cvs.L04.004: mcq needs 4 or 5 options, has 6",
+        ],
+        "{msgs:#?}"
+    );
+    // A source nobody named a question bank keeps the First Aid rule.
+    let msgs: Vec<String> = lecture(&l, &Context::default()).iter().map(|p| p.to_string()).collect();
+    assert_eq!(msgs.iter().filter(|m| m.contains("4 or 5 options")).count(), 4, "{msgs:#?}");
+}
