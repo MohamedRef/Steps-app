@@ -60,14 +60,16 @@ pub fn check(root: &Path, base: &Registry, head: &Registry) -> Res<String> {
 }
 
 /// The content of a checkout as one pack (no stylesheets or images:
-/// ids only).
+/// ids only), the sealed questions' clear ids included.
 pub fn pack_at(root: &Path) -> Res<Pack> {
     let (index, lectures) = crate::packs::load(root)?;
     let lessons = match root.join("content/lessons").exists() {
         true => crate::lessons::load(root)?.into_iter().map(|(_, f, _)| f).collect(),
         false => Vec::new(),
     };
-    let mut pack = Pack::new(index, lectures).with_lessons(lessons);
+    // Sealed VQ questions name their ids in clear: no key needed.
+    let mut pack =
+        Pack::new(index, lectures).with_lessons(lessons).with_sealed(crate::vq::sealed_lectures(root)?);
     if let Ok(p) = crate::read_yaml(&root.join("content/program.yaml")) {
         pack = pack.with_program(p);
     }

@@ -140,6 +140,7 @@ fn Bar(item_id: String) -> Element {
             let save = judge.clone();
             rsx! {
                 Editor {
+                    item_id: item_id.clone(),
                     body: entry.item.body.clone(),
                     on_save: move |(edit, n): (Edit, String)| {
                         let mut save = save.clone();
@@ -171,8 +172,14 @@ fn Bar(item_id: String) -> Element {
 }
 
 /// The ✎ editor: the kind's text fields, each in its own box, plus a note.
+/// A VQ question's figure stays in sight above them (`crate::vq`).
 #[component]
-fn Editor(body: Body, on_save: EventHandler<(Edit, String)>, on_cancel: EventHandler<()>) -> Element {
+fn Editor(
+    item_id: String,
+    body: Body,
+    on_save: EventHandler<(Edit, String)>,
+    on_cancel: EventHandler<()>,
+) -> Element {
     let fields = verify::editable_fields(&body);
     let mut drafts = use_signal(|| fields.iter().map(|(k, v)| (*k, draft_text(v))).collect::<Vec<_>>());
     let mut note = use_signal(String::new);
@@ -207,6 +214,7 @@ fn Editor(body: Body, on_save: EventHandler<(Edit, String)>, on_cancel: EventHan
 
     rsx! {
         div { class: "verify-editor",
+            crate::vq::Figure { item_id }
             for (i, (key, before)) in fields.iter().enumerate() {
                 label { key: "{key}", class: "verify-field",
                     span { {field_label(key)} " " bdi { class: "muted small", "({key})" } }

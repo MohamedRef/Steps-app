@@ -46,7 +46,13 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         return Err(missing);
     }
     let program = crate::read_yaml(&root.join("content/program.yaml")).map_err(|e| vec![e])?;
-    let pack = Pack::new(index, lectures).with_lessons(lessons).with_look(look(root)?).with_program(program);
+    // The sealed VQ files go in as they are: no key here (docs/VQ.md).
+    let pack = Pack::new(index, lectures)
+        .with_lessons(lessons)
+        .with_look(look(root)?)
+        .with_program(program)
+        .with_sealed(crate::vq::sealed_lectures(root)?)
+        .with_sources(sources(root)?);
     let problems = pack.problems();
     if !problems.is_empty() {
         // Devices refuse such a pack; never build one.
@@ -59,10 +65,11 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
         Err(e) => return Err(vec![format!("the pack doesn't decode: {e}")]),
     }
     let summary = format!(
-        "{} lecture(s), {} items, {} lesson(s), {} stylesheet(s), {:.1} KB packed",
+        "{} lecture(s), {} items, {} lesson(s), {} sealed question(s), {} stylesheet(s), {:.1} KB packed",
         pack.lectures.len(),
         pack.item_count(),
         pack.lessons.iter().map(|f| f.lessons.len()).sum::<usize>(),
+        pack.sealed_count(),
         pack.look.len(),
         bytes.len() as f64 / 1024.0
     );
@@ -73,6 +80,16 @@ pub fn run(root: &Path, args: &[String]) -> Result<String, Vec<String>> {
     std::fs::create_dir_all(&out).map_err(|e| vec![format!("{}: {e}", out.display())])?;
     std::fs::write(&path, &bytes).map_err(|e| vec![format!("{}: {e}", path.display())])?;
     Ok(format!("{}: {summary}", path.display()))
+}
+
+/// `content/sources.yaml`'s sources, so a device can name an item's source
+/// (`VQ-0001`); none when the file is missing.
+fn sources(root: &Path) -> Result<Vec<steps_core::content::SourceBook>, Vec<String>> {
+    let path = root.join("content/sources.yaml");
+    if !path.exists() {
+        return Ok(Vec::new());
+    }
+    crate::read_yaml::<steps_core::content::Sources>(&path).map(|s| s.sources).map_err(|e| vec![e])
 }
 
 /// Every stylesheet of the app, by path under `crates/app`, so the pack can
@@ -142,7 +159,7 @@ mod tests {
         let out = root.join("out");
         let report = run(root, &args(&["build", "--out", out.to_str().unwrap()])).unwrap();
         assert!(
-            report.contains("steps-content.pack: 1 lecture(s), 8 items, 0 lesson(s), 2 stylesheet(s)"),
+            report.contains("steps-content.pack: 1 lecture(s), 8 items, 0 lesson(s), 0 sealed question(s), 2 stylesheet(s)"),
             "{report}"
         );
         let pack = Pack::decode(&std::fs::read(out.join("steps-content.pack")).unwrap()).unwrap();

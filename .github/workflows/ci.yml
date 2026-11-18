@@ -129,7 +129,12 @@ jobs:
       - name: Explain update impact
         if: github.event_name == 'pull_request'
         run: python3 scripts/content_impact.py --base HEAD^1 --head HEAD >> "$GITHUB_STEP_SUMMARY"
+      # The sealed VQ questions are opened and checked with the key; with
+      # the key missing, sealed questions fail the check (docs/VQ.md).
       - name: Content checks (schema, ids, pages, approvals)
+        env:
+          STEPS_VQ_KEY: ${{ secrets.STEPS_VQ_KEY }}
+          STEPS_VQ_REQUIRED: "1"
         run: cargo run -q -p steps-tools -- validate
       - name: Offline content pack builds and round-trips
         run: cargo run -q -p steps-tools -- packs build --check

@@ -18,16 +18,19 @@ pub const MAX: usize = 4;
 
 /// The facts behind `mcq` in its lecture: playable items on the same printed
 /// page first, then the same topic, in book order; never the MCQ itself,
-/// never hidden ones.
+/// never hidden ones. A question from a question bank (VQ) cites no First
+/// Aid page, so its facts are its topic's.
 pub fn facts<'a>(lecture: &'a Lecture, mcq: &Item, hidden: impl Fn(&str) -> bool) -> Vec<&'a Item> {
     let usable =
         |i: &&Item| i.id != mcq.id && crate::study::PLAYABLE.contains(&i.body.kind()) && !hidden(&i.id);
-    let same_page = lecture.items.iter().filter(usable).filter(|i| i.src.page == mcq.src.page);
+    let page = mcq.src.first_aid_page();
+    let on_page = |i: &&Item| page.is_some() && i.src.first_aid_page() == page;
+    let same_page = lecture.items.iter().filter(usable).filter(on_page);
     let same_topic = lecture
         .items
         .iter()
         .filter(usable)
-        .filter(|i| i.src.page != mcq.src.page && mcq.topic.is_some() && i.topic == mcq.topic);
+        .filter(|i| !on_page(i) && mcq.topic.is_some() && i.topic == mcq.topic);
     same_page.chain(same_topic).take(MAX).collect()
 }
 

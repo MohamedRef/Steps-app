@@ -1,7 +1,8 @@
 //! Quick search, Ctrl/⌘ + K (or the search button on the rail): one box
 //! that jumps to a screen, a tool, a lecture, a lesson, a First Aid page
-//! ("ص 32" or just "32"), a Settings section, or a lecture's questions
-//! ("questions heart failure", "أسئلة …"). Everything comes from the library on the device;
+//! ("ص 32" or just "32"), a Settings section, a lecture's questions
+//! ("questions heart failure", "أسئلة …"), or one VQ question once his key
+//! opened them ("VQ-0001", "vq0001", "vq 1"). Everything comes from the library on the device;
 //! nothing is saved or sent. Results open through the same calls as the
 //! buttons that open them, so no session or answer is thrown away.
 //! Adapted from batna-app main: crates/app/src/shortcuts/palette.rs (#743,
@@ -65,6 +66,8 @@ enum Go {
     Settings,
     Section(Section),
     Questions(String),
+    /// One question, as a tutor set (a VQ question by its number).
+    Question(String),
     Page(u32, String),
     Lecture(String),
     Lesson(String),
@@ -166,7 +169,18 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
             }
         }
     }
-    if let crate::gopage::Target::Page { page, lecture } = crate::gopage::target(lib, &q) {
+    // A VQ question by its number; then the number is no First Aid page.
+    let vq = crate::vq::search_number(&q);
+    if let Some(id) = vq.and_then(|n| lib.vq.question(n)) {
+        hits.push(Hit {
+            key: format!("v-{id}"),
+            name: crate::vq::name(id).unwrap_or_default(),
+            sub: format!("{} · {}", crate::i18n::vq::KIND, lib.crumb(id)),
+            english: true,
+            go: Go::Question(id.to_string()),
+        });
+    }
+    if let (None, crate::gopage::Target::Page { page, lecture }) = (vq, crate::gopage::target(lib, &q)) {
         hits.push(Hit {
             key: format!("p-{page}"),
             name: format!("{} {page}", tx::KIND_PAGE),
@@ -232,6 +246,7 @@ fn follow(go: Go, mut ui: Ui, settings: SettingsNav) {
         Go::Settings => settings.show(None),
         Go::Section(section) => settings.show(Some(section)),
         Go::Questions(id) => crate::bank::practise(ui, &id, None),
+        Go::Question(id) => crate::bank::open_question(ui, &id),
         Go::Page(page, lecture) => crate::pagesheet::open(page, &lecture, None, false, None),
         Go::Lecture(id) => crate::lecture::open(ui, &id),
         Go::Lesson(id) => crate::learn::open(ui, &id),

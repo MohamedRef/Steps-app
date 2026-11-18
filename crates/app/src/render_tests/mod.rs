@@ -31,6 +31,7 @@ mod today;
 mod update;
 mod verify;
 mod views;
+mod vq;
 
 use std::time::Duration;
 

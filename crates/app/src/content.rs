@@ -7,7 +7,7 @@ use std::collections::BTreeMap;
 use std::sync::RwLock;
 use std::sync::atomic::{AtomicU64, Ordering};
 
-use steps_core::content::{Index, Lecture};
+use steps_core::content::{Index, Lecture, SourceBook};
 use steps_core::lesson::{Lesson, LessonFile};
 use steps_core::pack::Pack;
 use steps_core::program::{Course, Program};
@@ -28,6 +28,12 @@ pub struct Library {
     pub lessons: BTreeMap<String, LessonFile>,
     /// First Aid's disciplines and systems as courses (`content/program.yaml`).
     pub program: Program,
+    /// `content/sources.yaml`'s sources, for page chips (`VQ-0001`); older
+    /// packs have none.
+    pub sources: Vec<SourceBook>,
+    /// The sealed VQ questions: what the pack carries, and those this
+    /// device's key opened into their lectures (`crate::vq`).
+    pub vq: crate::vq::Bank,
 }
 
 /// The library in use. Each one is leaked: screens hold `&'static` items,
@@ -36,8 +42,20 @@ static LIB: RwLock<Option<&'static Library>> = RwLock::new(None);
 /// Bumped each time the library is replaced, so caches built from it know.
 static GENERATION: AtomicU64 = AtomicU64::new(0);
 
+// Screen tests run side by side in one process: a test that replaces the
+// library (a content switch, a VQ key) replaces its own thread's, so no
+// other test sees its content.
+#[cfg(test)]
+thread_local! {
+    static OWN: std::cell::Cell<Option<&'static Library>> = const { std::cell::Cell::new(None) };
+}
+
 impl Library {
     pub fn get() -> &'static Library {
+        #[cfg(test)]
+        if let Some(lib) = OWN.with(std::cell::Cell::get) {
+            return lib;
+        }
         if let Some(lib) = *LIB.read().unwrap_or_else(|e| e.into_inner()) {
             return lib;
         }
@@ -52,11 +70,17 @@ impl Library {
         }
     }
 
-    /// Opens the newest pack again (one the update feed just delivered).
-    /// Screens built from the old one must be shown again afterwards.
+    /// Opens the newest pack again (one the update feed just delivered, or
+    /// with the VQ key just kept or forgotten). Screens built from the old
+    /// one must be shown again afterwards.
     pub fn reload() {
         let fresh: &'static Library = Box::leak(Box::new(Library::load()));
-        *LIB.write().unwrap_or_else(|e| e.into_inner()) = Some(fresh);
+        #[cfg(test)]
+        OWN.with(|own| own.set(Some(fresh)));
+        #[cfg(not(test))]
+        {
+            *LIB.write().unwrap_or_else(|e| e.into_inner()) = Some(fresh);
+        }
         GENERATION.fetch_add(1, Ordering::SeqCst);
     }
 
@@ -68,6 +92,10 @@ impl Library {
     /// True once the running process has actually opened a library.
     /// A startup timer alone cannot certify a downloaded pack as working.
     pub(crate) fn is_initialized() -> bool {
+        #[cfg(test)]
+        if OWN.with(std::cell::Cell::get).is_some() {
+            return true;
+        }
         LIB.read().unwrap_or_else(|e| e.into_inner()).is_some()
     }
 
@@ -83,8 +111,12 @@ impl Library {
         let pack = crate::update::installed_pack()
             .unwrap_or_else(|| Pack::decode(built_in).expect("built-in content pack"));
         let program = pack.program_or_fallback();
-        let Pack { index, lectures, lessons, look, .. } = pack;
+        let Pack { index, lectures, lessons, look, sealed, sources, .. } = pack;
+        // The stylesheets are the whole process's, and tests set them on their own.
+        #[cfg(not(test))]
         crate::look::set(look);
+        #[cfg(test)]
+        drop(look);
         let lectures = lectures.into_iter().map(|l| (l.lecture.clone(), l));
         let lessons = lessons.into_iter().map(|l| (l.lecture.clone(), l));
         // Screen tests need a lecture still being written ("بتتكتب"); with
@@ -95,9 +127,13 @@ impl Library {
             let u = unwritten.clone();
             (lectures.filter(move |(id, _)| *id != unwritten), lessons.filter(move |(id, _)| *id != u))
         };
-        let lectures = lectures.collect();
+        let mut lectures = lectures.collect();
         let lessons = lessons.collect();
-        Library { index, lectures, lessons, program }
+        // With his key on this device, the VQ questions join their lectures.
+        #[cfg(test)]
+        let sealed = crate::vq::testing::with_fixture(sealed);
+        let vq = crate::vq::open_into(&sealed, crate::vq::vault::load().as_ref(), &mut lectures);
+        Library { index, lectures, lessons, program, sources, vq }
     }
 
     /// Every lesson in book order, with its lecture id.
@@ -130,7 +166,7 @@ pub static REV: dioxus::prelude::GlobalSignal<u64> = dioxus::prelude::Signal::gl
 
 /// Something built from the library once, and again after it is replaced.
 pub struct Derived<T: 'static> {
-    cell: RwLock<Option<(u64, &'static T)>>,
+    cell: RwLock<Option<(u64, &'static Library, &'static T)>>,
 }
 
 impl<T: Send + Sync + 'static> Derived<T> {
@@ -140,13 +176,16 @@ impl<T: Send + Sync + 'static> Derived<T> {
 
     pub fn get(&self, build: impl FnOnce(&'static Library) -> T) -> &'static T {
         let generation = Library::generation();
-        if let Some((g, value)) = *self.cell.read().unwrap_or_else(|e| e.into_inner())
+        let lib = Library::get();
+        // The library itself too: a test thread may have its own (`OWN`).
+        if let Some((g, from, value)) = *self.cell.read().unwrap_or_else(|e| e.into_inner())
             && g == generation
+            && std::ptr::eq(from, lib)
         {
             return value;
         }
-        let value: &'static T = Box::leak(Box::new(build(Library::get())));
-        *self.cell.write().unwrap_or_else(|e| e.into_inner()) = Some((generation, value));
+        let value: &'static T = Box::leak(Box::new(build(lib)));
+        *self.cell.write().unwrap_or_else(|e| e.into_inner()) = Some((generation, lib, value));
         value
     }
 }

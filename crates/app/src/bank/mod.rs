@@ -329,6 +329,19 @@ pub fn course_changed() {
     setup::course_changed();
 }
 
+/// One question as a tutor set (quick search: `VQ-0001`). A paper in
+/// progress stays: the bank shows it, and the question waits.
+pub fn open_question(mut ui: crate::Ui, id: &str) {
+    ui.screen.set(crate::Screen::Bank);
+    if matches!(*PHASE.peek(), Phase::Running(_)) {
+        return;
+    }
+    let lecture = steps_core::program::lecture_of(id);
+    let lectures = study_lectures_where(|l| l == lecture);
+    let pool: Vec<exam::Mcq> = exam::mcqs(&lectures).into_iter().filter(|q| q.id == id).collect();
+    start(Mode::Tutor, exam::practice(&pool, 1, now_ms() as u64));
+}
+
 pub fn start(mode: Mode, questions: Vec<Question>) {
     // A new paper never throws away one he left: that one is scored first.
     if let Some(paused) = PAUSED.write().take() {

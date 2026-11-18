@@ -46,7 +46,7 @@ These are my own decisions. They win over any default tool or habit.
 - The textbook never goes in git: no PDF, no extracted text. Cropped book figures for lessons are the one exception. Items paraphrase the book, cite `src.page`, and quote what proves the fact. CI enforces this (`scripts/check-tracked-files.sh`).
 - **No maximum length on First Aid quotes.** Never shorten a quote to fit a limit. `steps-tools validate` refuses an item or lesson quote whose last word is a function word ("of", "as", "and"…), the sign of a quote cut mid-sentence; complete it from the book.
 - **Content is never shortened or deduplicated.** First Aid is already condensed, so nothing leaves a lecture, a lesson or a course glossary because it also appears elsewhere. Each course glossary lists every term its lectures use, with the meaning that course intends, even when another course lists it too (validate refuses a term twice in the same file, and an abbreviation a course shows that only another glossary file explains).
-- **MCQs give no answer cues.** The key is not the longest option (trim keys, never pad distractors) and no distractor ends in a padding "only"/"alone"; `steps-tools validate` prints the key-longest share per lecture and refuses a bank-wide share over 25% or a padded distractor (docs/CONTENT.md). The lessons' check questions follow the same rule: validate prints their share per course and refuses more than 25% over all lessons (docs/LESSONS.md).
+- **MCQs give no answer cues.** The key is not the longest option (trim keys, never pad distractors) and no distractor ends in a padding "only"/"alone"; `steps-tools validate` prints the key-longest share per lecture and refuses a bank-wide share over 25% or a padded distractor (docs/CONTENT.md). The lessons' check questions follow the same rule: validate prints their share per course and refuses more than 25% over all lessons (docs/LESSONS.md). A question bank's MCQs (a `qbank` source: VQ) stay exactly as written, with 2 to 26 options and no cue rules (Mohamed, 2026-11-18).
 - Every item ships `status: unverified`. Only I approve, through my in-app export (`content/approved.txt`).
 - The book's answer is the exam answer. A newer guideline or another source's view goes in `update:` with its name and year, never as a silent change.
 - No generated images. Lesson figures are inline SVG, crops of the book's figures (`book: true`, cited by page), or open-licence images with credit, licence and source.
@@ -84,11 +84,11 @@ Rust 1.100.0, pinned in `rust-toolchain.toml` (edition 2024), and Dioxus 0.7 wit
 
 | Path | What it is |
 |---|---|
-| `crates/core` | Pure logic, no UI or IO, builds for wasm32: content schema and validation (`content.rs`, `validate.rs`, `lesson.rs` + `lesson/`, `glossary.rs`, `quote.rs`), FSRS and sessions (`srs.rs`, `review/`, `session.rs`), planner (`plan.rs`), timed exam (`exam.rs`), self-assessment (`selfassess.rs`), pages read (`pages.rs`), highlights (`highlight.rs`), UWorld misses (`uwmiss.rs`), question-bank tests (`qbank.rs`), packs (`pack.rs`), update feed (`update.rs`), themes (`theme.rs`). |
-| `crates/app` | The app: one folder per feature (`today`, `study`, `bank`, `case`, `learn`, `lecture`, `plan`, `stats`, `oral`, `notes`, `own`, `qbank`, `labs`, `shortcuts`, `settings`, `update`, `cloud`, …). `store/` is SQLite plus the sync outbox; `platform/` is device glue (Android JNI, Mac, browser); `i18n/` holds all Arabic UI text, one file per feature; `prefs.rs` and `look.rs` hold appearance; `render_tests/` are the screen tests; `assets/` holds its CSS and small scripts; `tests/` the Node and browser checks. |
+| `crates/core` | Pure logic, no UI or IO, builds for wasm32: content schema and validation (`content.rs`, `validate.rs`, `lesson.rs` + `lesson/`, `glossary.rs`, `quote.rs`), FSRS and sessions (`srs.rs`, `review/`, `session.rs`), planner (`plan.rs`), timed exam (`exam.rs`), self-assessment (`selfassess.rs`), pages read (`pages.rs`), highlights (`highlight.rs`), UWorld misses (`uwmiss.rs`), question-bank tests (`qbank.rs`), packs (`pack.rs`), sealed VQ questions (`sealed.rs`), update feed (`update.rs`), themes (`theme.rs`). |
+| `crates/app` | The app: one folder per feature (`today`, `study`, `bank`, `case`, `learn`, `lecture`, `plan`, `stats`, `oral`, `notes`, `own`, `qbank`, `labs`, `shortcuts`, `settings`, `update`, `cloud`, `vq`, …). `store/` is SQLite plus the sync outbox; `platform/` is device glue (Android JNI, Mac, browser); `i18n/` holds all Arabic UI text, one file per feature; `prefs.rs` and `look.rs` hold appearance; `render_tests/` are the screen tests; `assets/` holds its CSS and small scripts; `tests/` the Node and browser checks. |
 | `crates/protocol` | Types shared by app and server: sync ops and `TABLES` (`sync.rs`), the cloud API (`cloud.rs`), merge rules, the client state machine. |
 | `crates/server` | Steps Cloud, the Cloudflare Worker (Durable Objects, no D1 or R2), with `wrangler.toml`. |
-| `crates/tools` | The `steps-tools` CLI: `validate`, `refs`, `packs`, `ids`, `content` (next-id, new-item, diff, preflight), `anki`, `qbank sync`, `update` (changes, guard, publish), `verdicts`, `counts` (the numbers in README and §12). |
+| `crates/tools` | The `steps-tools` CLI: `validate`, `refs`, `packs`, `ids`, `content` (next-id, new-item, diff, preflight), `anki`, `qbank sync`, `update` (changes, guard, publish), `verdicts`, `counts` (the numbers in README and §12), `vq` (keygen, open, seal). |
 | `crates/anki` | Builds the `.apkg`. |
 | `content/` | All study content as YAML (§8). |
 | `changes/` | One YAML per user-visible change; becomes the in-app "What's new". |
@@ -176,6 +176,7 @@ How to write it: [CONTENT.md](CONTENT.md) (items), [LESSONS.md](LESSONS.md) (les
 - `content/book-refs/<course>/LNN.tsv`: locked page references.
 - `content/glossary/<course>.yaml`: every abbreviation the course's lessons and items show, with the course's meaning (the app reads it first). `content/glossary.yaml`: the same terms as Steps reads them outside any one course; `validate` prints how many of them nothing uses.
 - `content/sources.yaml`: sources besides First Aid (`fa2026`). An item from another source carries `src.book: <id>` and goes under the same First Aid lecture and topic, never a parallel tree.
+- `content/<course>/vq/LNN.yaml`: my VQ question bank's questions filed under that lecture, **sealed** (`steps.sealed/v1`, encrypted with the VQ key, §10). Only `steps-tools vq seal` writes them; `vq open` gives them back in plain YAML outside the repo for editing. Packs carry them as they are, and a device opens them once I paste the key in Settings › بياناتك. [VQ.md](VQ.md).
 - `content/qbank/`: `uworld.yaml` (generated) and `bb-map.yaml` (B&B section → lecture). `content/labs.yaml`: lab values.
 - `content/approved.txt`: items I approved. `content/ids-retired.txt`: ids never reused.
 
@@ -228,6 +229,7 @@ Full detail: [RELEASE.md](RELEASE.md) and [COMPATIBILITY.md](COMPATIBILITY.md).
 | Android release keystore (RSA 4096, alias `steps`) | my Mac: `~/.steps/steps-release.jks`, password in the Keychain item `steps-android` | `STEPS_ANDROID_KEYSTORE`, `STEPS_ANDROID_KEYSTORE_PASSWORD`; public fingerprint in the variable `STEPS_ANDROID_CERT_SHA256` (workflows refuse an APK signed with anything else) |
 | Update signing key (Ed25519) | secret half in the Keychain item `steps-update`; public half committed as `crates/app/update-key.pub` | `STEPS_UPDATE_SECRET` |
 | Mac code-signing identity "Steps Code Signing" | my Mac's Keychain, also `~/.steps/steps-codesign.p12` (password: Keychain `steps-codesign`) | `STEPS_MAC_CERT_P12`, `STEPS_MAC_CERT_PASSWORD` |
+| VQ key (32 bytes, typed as 13 groups of four; `steps-tools vq keygen`) | my password manager; each unlocked device keeps a copy in its vault, never in its database ([VQ.md](VQ.md)) | `STEPS_VQ_KEY` (CI's `validate` opens and checks the sealed questions with it) |
 
 `just release-keys` made them once; run again, it reuses every key and only refreshes the GitHub secrets. **Backup:** an encrypted `Steps-release-keys.dmg` from `just release-keys-backup` (keys, Keychain passwords, `RESTORE.txt`), kept in two places, passphrase in my password manager. On a new Mac: restore from it, then `just release-keys`.
 
@@ -256,19 +258,20 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 
 ## 12. State, roadmap and known issues
 
-*Last updated: 2026-11-16.*
+*Last updated: 2026-11-18.*
 
 ### State
 - **Latest release:** `2026.11.4` (2026-11-16, alpha channel): APK, Mac app, web and Steps Cloud. <https://github.com/MohamedRef/Steps-app/releases/tag/v2026.11.4>. Earlier: `2026.11.3` (2026-11-14), `2026.11.2` (2026-11-13), `2026.11.1` (2026-11-09), and before the calendar numbers `1.0.0-alpha.1` to `alpha.3` (2026-11-05 and 2026-11-06).
 - **Content:** all 84 lectures written (16 First Aid courses + Rapid Review), <!-- counts -->about 10,040 items (5,440 cards, 1,720 MCQs, 1,170 clozes, 980 tables, 580 lists, 140 orders, 6 cases), 360 lessons and 1,550 glossary terms<!-- /counts -->, with First Aid coverage gaps filled after alpha.1. All `unverified` until I approve them.
 - **Quality:** two full review rounds (code, platform, UX, content by course) on 2026-11-04 and 2026-11-05; every finding of every severity was fixed before alpha.1.
 - **Sync:** Steps Cloud is live with Google and password sign-in.
-- **Sources:** only First Aid 2026 so far. B&B videos and UWorld ids come from a public mapping document ([QBANK.md](QBANK.md)).
-- **On `main` since `2026.11.4`:** nothing yet. That release carries everything up to 7041d3c, the fixes of the 2026-11-16 review included (below).
+- **Sources:** First Aid 2026, and my VQ question bank (`vq`), which is sealed: the code to seal, check, pack and open it is in place, its 1,314 questions are not written in yet ([VQ.md](VQ.md)). B&B videos and UWorld ids come from a public mapping document ([QBANK.md](QBANK.md)).
+- **On `main` since `2026.11.4`:** the sealed VQ bank (2026-11-18): `steps-tools vq keygen | open | seal`, its checks in `validate` (CI opens them with the secret `STEPS_VQ_KEY`), and in the app the key card in Settings › بياناتك, figures above options, the educational objective after the why lines, the `VQ-0001` chip, the «أسئلة VQ» filter and quick search by number. `2026.11.4` carries everything up to 7041d3c, the fixes of the 2026-11-16 review included (below).
 
 ### Roadmap
 - **Next release, `2026.11.5`** (calendar numbering, §10): whatever daily use of `2026.11.4` turns up.
 - **More sources:** Pathoma, Sketchy, UWorld notes and my own materials, merged into the First Aid lectures and topics as they arrive ([SOURCES.md](SOURCES.md)). With the first one, `steps-tools refs` must learn to read its text.
+- **VQ questions:** the 1,314 questions filed under their lectures and topics, sealed with `steps-tools vq seal`, one course per PR ([VQ.md](VQ.md)); the secret `STEPS_VQ_KEY` must be set in GitHub before the first one, or CI's `validate` fails on them.
 - **Approvals:** I check items against the book in the app and export my verdicts; fixes follow per lecture.
 - **Smaller files:** keep splitting the busiest shared files, one area per PR, with no change in behaviour. Done so far: UI text, unit tests, the lesson module.
 - **Beta, then stable:** after daily use of the alphas; I decide when.
@@ -311,6 +314,7 @@ The project files folder is a shared working folder that sits beside the repo (o
 | [RUN.md](RUN.md) | running the app on each device, data files, env variables |
 | [CONTENT.md](CONTENT.md), [LESSONS.md](LESSONS.md), [AUTHORING.md](AUTHORING.md) | writing items and lessons, and the commands around them |
 | [SOURCES.md](SOURCES.md), [CONTENT-IDS.md](CONTENT-IDS.md), [WORKSTREAMS.md](WORKSTREAMS.md) | other sources, ids, folder ownership |
+| [VQ.md](VQ.md) | my VQ question bank: the key, the sealed files, editing them, unlocking a device |
 | [QBANK.md](QBANK.md), [ANKI.md](ANKI.md) | UWorld and B&B data; the Anki export |
 | [DESIGN.md](DESIGN.md), [UI-MAINTENANCE.md](UI-MAINTENANCE.md) | design system; UI architecture and rules |
 | [SCREENS-BROWSER-QA.md](SCREENS-BROWSER-QA.md), [SETTINGS-BROWSER-QA.md](SETTINGS-BROWSER-QA.md) | browser checks |

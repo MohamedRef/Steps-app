@@ -21,7 +21,7 @@ fn counts_a_key_longer_than_every_other_option() {
         mcq("cvs.L04.004", "a, bb, ccc, dddd", 2),
     ]
     .concat());
-    let c = lecture(&l);
+    let c = lecture(&l, &BTreeSet::new());
     assert_eq!(c.mcqs, 4);
     assert_eq!(c.key_longest, 2);
     assert_eq!(c.key_at, [1, 1, 1, 1, 0]);
@@ -32,17 +32,35 @@ fn counts_a_key_longer_than_every_other_option() {
 fn flags_distractors_padded_with_only_or_alone() {
     let l =
         lec(&mcq("cvs.L04.001", "Prednisone alone, Stratum corneum only., Only aspirin, Lonely heart", 2));
-    assert_eq!(lecture(&l).padded, [("cvs.L04.001".to_string(), 0), ("cvs.L04.001".to_string(), 1)]);
+    assert_eq!(
+        lecture(&l, &BTreeSet::new()).padded,
+        [("cvs.L04.001".to_string(), 0), ("cvs.L04.001".to_string(), 1)]
+    );
     // The key itself is not a cue of this kind.
     let l = lec(&mcq("cvs.L04.002", "Prednisone alone, b, c, d", 0));
-    assert!(lecture(&l).padded.is_empty());
+    assert!(lecture(&l, &BTreeSet::new()).padded.is_empty());
     assert!(!padded("Alone"), "a one-word option is the thing itself, not padding");
+}
+
+// Mohamed, 2026-11-18: a question bank's MCQs stay as written, so the cue
+// rules never count them.
+#[test]
+fn question_bank_mcqs_are_left_out() {
+    let bank = mcq("cvs.L04.002", "Aortic stenosis with a slow-rising pulse, b, Drug alone, d", 0)
+        .replace("src: { page: 302 }", "src: { book: vq, page: 2 }");
+    let l = lec(&[mcq("cvs.L04.001", "a, bb, ccc, dddd", 3), bank].concat());
+    let qbank: BTreeSet<String> = ["vq".to_string()].into();
+    let c = lecture(&l, &qbank);
+    assert_eq!((c.mcqs, c.key_longest, c.padded.len()), (1, 1, 0));
+    // Without the bank's id, it counts like any MCQ.
+    let c = lecture(&l, &BTreeSet::new());
+    assert_eq!((c.mcqs, c.key_longest, c.padded.len()), (2, 2, 1));
 }
 
 #[test]
 fn adds_up_across_lectures() {
     let mut all = Cues::default();
-    let one = lecture(&lec(&mcq("cvs.L04.001", "Aortic stenosis, b, c, Drug alone", 0)));
+    let one = lecture(&lec(&mcq("cvs.L04.001", "Aortic stenosis, b, c, Drug alone", 0)), &BTreeSet::new());
     all.add(&one);
     all.add(&one);
     assert_eq!((all.mcqs, all.key_longest, all.padded.len(), all.key_at[0]), (2, 2, 2, 2));

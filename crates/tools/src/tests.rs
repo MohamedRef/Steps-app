@@ -4,6 +4,11 @@ fn root() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../..")
 }
 
+/// `validate` with no VQ key, whatever the shell running the tests has.
+fn validate_all(root: &Path) -> Result<String, Vec<String>> {
+    validate_with(root, &vq::Env::default())
+}
+
 #[test]
 fn repo_content_is_valid() {
     if let Err(problems) = validate_all(&root()) {
@@ -273,4 +278,28 @@ fn high_yield_share_is_reported_and_gated() {
         high_yield_report(&[("cvs".into(), 3, 8), ("mic".into(), 70, 100), ("rr".into(), 60, 60)]);
     assert_eq!(problems.len(), 1, "{problems:?}");
     assert!(problems[0].starts_with("mic: 70 of 100 items (70%)"), "{problems:?}");
+}
+
+// The repo is public: a VQ question in an open lecture file is refused,
+// whether its id or its source gives it away.
+#[test]
+fn a_vq_question_in_an_open_file_is_refused() {
+    let dir = content_tree();
+    let root = dir.path();
+    let sample = crate::testkit::SAMPLE;
+    write(
+        root,
+        "content/cvs/L04.yaml",
+        &sample.replacen("id: cvs.L04.003", "id: cvs.L04.vq0003", 1).replacen(
+            "src: { page: 317 }",
+            "src: { book: vq, page: 317 }",
+            1,
+        ),
+    );
+    let problems = validate_all(root).unwrap_err();
+    let sealed: Vec<&String> =
+        problems.iter().filter(|p| p.contains("VQ questions are kept sealed")).collect();
+    assert_eq!(sealed.len(), 2, "{problems:#?}");
+    assert!(sealed.iter().any(|p| p.starts_with("content/cvs/L04.yaml: cvs.L04.vq0003: ")), "{sealed:#?}");
+    assert!(sealed[0].contains("content/cvs/vq/L04.yaml"), "{sealed:#?}");
 }

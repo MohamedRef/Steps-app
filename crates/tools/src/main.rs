@@ -9,7 +9,12 @@
 //! steps-tools refs [--lecture cvs.L04] [--write]   page references against the book (refs.rs)
 //! steps-tools qbank sync --from EXPORT.txt [--check]   UWorld QIDs per lecture (docs/QBANK.md)
 //! steps-tools counts [--write | --check]   content numbers in README.md and docs/HANDBOOK.md (counts.rs)
+//! steps-tools vq <keygen | open DIR | seal DIR>   the sealed VQ questions (docs/VQ.md, vq.rs)
 //! ```
+//!
+//! `validate` opens the sealed VQ questions with `STEPS_VQ_KEY`; without it
+//! it says how many it left unopened, which `STEPS_VQ_REQUIRED=1` (CI) makes
+//! a problem.
 
 use std::collections::BTreeSet;
 use std::path::{Path, PathBuf};
@@ -32,6 +37,7 @@ mod refs;
 mod testkit;
 mod update;
 mod verdicts;
+mod vq;
 
 fn main() -> ExitCode {
     let args: Vec<String> = std::env::args().skip(1).collect();
@@ -65,6 +71,7 @@ fn main() -> ExitCode {
         Some("content") => report(content::run(&root, &args[1..])),
         Some("qbank") => report(qbank::run(&root, &args[1..])),
         Some("counts") => report(counts::run(&root, &args[1..])),
+        Some("vq") => report(vq::run(&root, &args[1..])),
         _ => usage(),
     }
 }
@@ -91,14 +98,20 @@ fn flag<'a>(args: &'a [String], name: &str) -> Option<&'a str> {
 
 fn usage() -> ExitCode {
     eprintln!(
-        "usage: steps-tools <validate | anki | packs build | verdicts FILE | update … | refs | ids <list | check --base REF> | content <next-id | new-item | diff | preflight> | qbank sync --from FILE | counts [--write | --check]> [--root DIR] (see the top of crates/tools/src/main.rs)"
+        "usage: steps-tools <validate | anki | packs build | verdicts FILE | update … | refs | ids <list | check --base REF> | content <next-id | new-item | diff | preflight> | qbank sync --from FILE | counts [--write | --check] | vq <keygen | open DIR | seal DIR>> [--root DIR] (see the top of crates/tools/src/main.rs)"
     );
     ExitCode::from(2)
 }
 
-/// Checks `content/index.yaml` and every `content/<chapter>/LNN.yaml`.
+/// Checks `content/index.yaml` and every `content/<chapter>/LNN.yaml`, the
+/// sealed VQ files with the key in `STEPS_VQ_KEY` (`vq::Env`).
 /// Returns a one-line summary, or every problem found.
 pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
+    validate_with(root, &vq::Env::from_env().map_err(|e| vec![e])?)
+}
+
+/// [`validate_all`] with the VQ key given, not read from the environment.
+pub fn validate_with(root: &Path, vq_env: &vq::Env) -> Result<String, Vec<String>> {
     let mut problems = Vec::new();
     let content = root.join("content");
     let index: Index = match read_yaml(&content.join("index.yaml")) {
@@ -119,7 +132,9 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     }
     let approved = read_approved(&content.join("approved.txt"));
     // The sources items cite (`src.book`); First Aid is the primary one.
+    // A question bank's MCQs keep their own shape (`Context::qbank`).
     let mut known_sources = BTreeSet::new();
+    let mut qbank_sources = BTreeSet::new();
     match read_yaml::<steps_core::content::Sources>(&content.join("sources.yaml")) {
         Ok(s) => {
             if s.schema != steps_core::content::SOURCES_SCHEMA {
@@ -131,6 +146,9 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
             for b in &s.sources {
                 if !known_sources.insert(b.id.clone()) {
                     problems.push(format!("content/sources.yaml: {} appears twice", b.id));
+                }
+                if b.kind == QBANK {
+                    qbank_sources.insert(b.id.clone());
                 }
             }
             if !known_sources.contains(steps_core::content::PRIMARY_SOURCE) {
@@ -189,7 +207,8 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
                 entry.pages
             ));
         }
-        let cx = Context { raw_keys: raw_keys(&text), approved: Some(&approved) };
+        let cx =
+            Context { raw_keys: raw_keys(&text), approved: Some(&approved), qbank: Some(&qbank_sources) };
         for p in validate::lecture(&lec, &cx) {
             problems.push(format!("{}: {p}", rel(root, &path)));
         }
@@ -202,9 +221,20 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
                     item.src.book_id()
                 ));
             }
+            // The repo is public: a VQ question in an open file is in git in clear.
+            if item.src.book_id() == steps_core::sealed::SOURCE
+                || steps_core::sealed::number(&item.id).is_some()
+            {
+                problems.push(format!(
+                    "{}: {}: VQ questions are kept sealed in {}, never in clear (steps-tools vq seal, docs/VQ.md)",
+                    rel(root, &path),
+                    item.id,
+                    vq::sealed_rel(&lec.lecture)
+                ));
+            }
         }
         items += lec.items.len();
-        cues.push((lec.lecture.clone(), validate::cues::lecture(&lec)));
+        cues.push((lec.lecture.clone(), validate::cues::lecture(&lec, &qbank_sources)));
         let course = lec.lecture.split('.').next().unwrap_or_default().to_string();
         let tagged = lec.items.iter().filter(|i| i.tags.iter().any(|t| t == HIGH_YIELD)).count();
         match high_yield.iter_mut().find(|(c, ..)| *c == course) {
@@ -268,9 +298,12 @@ pub fn validate_all(root: &Path) -> Result<String, Vec<String>> {
     problems.extend(content::unfinished(root));
     // Page references checked against the book (refs.rs).
     problems.extend(refs::check_locks(root, &listed.iter().cloned().collect::<Vec<_>>()));
+    // The sealed VQ questions (vq.rs, docs/VQ.md).
+    let (vq_report, vq_problems) = vq::check(root, &index, &lectures, &approved, &qbank_sources, vq_env);
+    problems.extend(vq_problems);
     if problems.is_empty() {
         Ok(format!(
-            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms\n{cue_report}\n{check_report}\n{hy_report}\n{glossary_report}",
+            "content OK: {courses} courses, {files} of {} lectures written, {items} items, {lessons} lessons, {terms} glossary terms\n{cue_report}\n{check_report}\n{hy_report}\n{glossary_report}\n{vq_report}",
             index.lectures.len()
         ))
     } else {
@@ -354,6 +387,10 @@ fn lesson_cue_report(per_course: &[(String, validate::cues::Cues)]) -> (String, 
 
 /// The tag for First Aid's own emphasis (docs/CONTENT.md, issue #667).
 const HIGH_YIELD: &str = "high-yield";
+
+/// The kind of source whose MCQs keep their own options and skip the cue
+/// rules (`content/sources.yaml`, Mohamed 2026-11-18).
+const QBANK: &str = "qbank";
 
 /// The most of a course's items that may carry `high-yield`. The book
 /// emphasises about one item in seven (red bold mnemonics and its own words
