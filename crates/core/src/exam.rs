@@ -1,6 +1,9 @@
 //! The question bank and mock exams: which MCQs to ask, in what order, how
 //! long the paper may take, and how it scored. Pure logic: the app passes in
-//! the clock, the seed and the answer history.
+//! the clock, the seed and the answer history. What he does to a question
+//! on the paper (marks, struck options, highlighted words) is kept on its
+//! [`Answer`]; [`stem`] holds the highlight ranges and [`summary`] the
+//! numbers of the end-of-paper screen.
 
 use std::collections::{BTreeMap, BTreeSet};
 
@@ -8,6 +11,12 @@ use serde::{Deserialize, Serialize};
 
 use crate::content::{Body, Lecture, Status};
 use crate::review::{Confidence, ErrorReason, Grade, Origin, ReviewEvent};
+
+pub mod stem;
+mod summary;
+
+pub use stem::Span;
+pub use summary::{Graded, Summary, retake, summary};
 
 /// 90 seconds per question in timed mode and in blocks, as on Step 1
 /// (since 14 May 2026: fourteen 30-minute blocks of at most 20 items,
@@ -63,6 +72,8 @@ pub enum Only {
     All,
     /// Never answered, or wrong the last time.
     WrongOrUnseen,
+    /// Marked on a paper and not unmarked since ([`History::marked`]).
+    Marked,
 }
 
 /// What the bank screen asks for. An empty set means "any".
@@ -77,20 +88,23 @@ pub struct Filter {
 }
 
 impl Filter {
-    pub fn matches(&self, q: &Mcq, last: &LastResults) -> bool {
+    /// Whether `q` is in scope, given what the bank remembers (the last
+    /// results and the marks).
+    pub fn matches(&self, q: &Mcq, history: &History) -> bool {
         let lecture_ok = self.lectures.is_empty() || self.lectures.contains(q.lecture);
         let topic_ok = self.topics.is_empty()
             || q.topic.is_some_and(|t| self.topics.contains(&(q.lecture.to_string(), t.to_string())));
         let tags_ok = self.tags.is_empty() || q.tags.iter().any(|t| self.tags.contains(t));
         let only_ok = match self.only {
             Only::All => true,
-            Only::WrongOrUnseen => last.get(q.id) != Some(&true),
+            Only::WrongOrUnseen => history.last.get(q.id) != Some(&true),
+            Only::Marked => history.marked.contains(q.id),
         };
         lecture_ok && topic_ok && tags_ok && only_ok
     }
 
-    pub fn select<'a>(&self, pool: &[Mcq<'a>], last: &LastResults) -> Vec<Mcq<'a>> {
-        pool.iter().filter(|q| self.matches(q, last)).copied().collect()
+    pub fn select<'a>(&self, pool: &[Mcq<'a>], history: &History) -> Vec<Mcq<'a>> {
+        pool.iter().filter(|q| self.matches(q, history)).copied().collect()
     }
 }
 
@@ -291,6 +305,8 @@ pub struct Answer {
     /// The original option index, not the shown position.
     pub chosen: Option<usize>,
     pub took_ms: u32,
+    /// Marked («متعلّم عليه»). A mark outlives the paper: the bank keeps
+    /// every marked question in [`History::marked`].
     pub flagged: bool,
     /// How sure he was before checking, when he said.
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -298,11 +314,40 @@ pub struct Answer {
     /// Why he missed it, when he said (wrong answers only).
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub reason: Option<ErrorReason>,
+    /// Options he struck out, by original index: drawn muted and crossed
+    /// out, and still selectable.
+    #[serde(default, skip_serializing_if = "BTreeSet::is_empty")]
+    pub struck: BTreeSet<usize>,
+    /// Words of the stem he highlighted ([`stem`]).
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub highlights: Vec<Span>,
 }
 
 impl Answer {
     pub fn correct(&self, q: &Question) -> bool {
         self.chosen == Some(q.answer)
+    }
+
+    /// Right, wrong, or left blank.
+    pub fn graded(&self, q: &Question) -> Graded {
+        match self.chosen {
+            None => Graded::Blank,
+            Some(_) if self.correct(q) => Graded::Right,
+            Some(_) => Graded::Wrong,
+        }
+    }
+
+    /// Strikes the option out, or brings it back.
+    pub fn toggle_strike(&mut self, option: usize) {
+        if !self.struck.remove(&option) {
+            self.struck.insert(option);
+        }
+    }
+
+    /// Highlights the stem's characters `start..end`, or takes the
+    /// highlight off them when they are all highlighted already.
+    pub fn toggle_highlight(&mut self, start: usize, end: usize) {
+        stem::toggle(&mut self.highlights, Span(start, end));
     }
 }
 
@@ -398,12 +443,17 @@ pub fn focus_topics(o: &Outcome, below: u32) -> Vec<(&str, Score)> {
     if weak.is_empty() { weak_topics(o, below, 1) } else { weak }
 }
 
-/// The bank's own memory: the last result per item (for "wrong or unseen")
-/// and every finished timed paper. Serde so the store can keep it.
+/// The bank's own memory: the last result per item (for "wrong or unseen"),
+/// every finished timed paper, and the questions he marked. Serde so the
+/// store can keep it.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize)]
 pub struct History {
     pub last: LastResults,
     pub papers: Vec<Outcome>,
+    /// Item ids marked on any paper and not unmarked since: a mark outlives
+    /// its paper, so a later paper can be drawn from them ([`Only::Marked`]).
+    #[serde(default)]
+    pub marked: BTreeSet<String>,
 }
 
 impl History {
@@ -412,6 +462,19 @@ impl History {
             if a.chosen.is_some() {
                 self.last.insert(q.id.clone(), a.correct(q));
             }
+        }
+    }
+
+    /// Marks `id` (or unmarks it); whether that changed anything.
+    pub fn mark(&mut self, id: &str, on: bool) -> bool {
+        if on { self.marked.insert(id.to_string()) } else { self.marked.remove(id) }
+    }
+
+    /// Shows the marks he already made on a new paper's questions, so
+    /// unmarking one there takes it off the list.
+    pub fn marks_on(&self, questions: &[Question], answers: &mut [Answer]) {
+        for (q, a) in questions.iter().zip(answers) {
+            a.flagged = self.marked.contains(&q.id);
         }
     }
 }
