@@ -2,7 +2,8 @@
 //! Cardiovascular › its first lecture, with a figure, sealed with a key made
 //! here (never a real one). Each test thread has its own, and its own
 //! library (`content::Library::reload`), so tests side by side never see
-//! each other's questions.
+//! each other's questions, and a test with the fixture never sees the real
+//! bank's questions either.
 
 use std::cell::RefCell;
 
@@ -70,8 +71,11 @@ pub fn install() {
     crate::content::Library::reload();
 }
 
-/// `sealed` with this thread's fixture (`content::Library::load`).
-pub fn with_fixture(mut sealed: Vec<SealedLecture>) -> Vec<SealedLecture> {
-    sealed.extend(EXTRA.with(|e| e.borrow().clone()));
-    sealed
+/// The sealed questions this thread's library opens (`content::Library::load`):
+/// the fixture alone once a test installed it, in place of the real bank, so
+/// what the screen tests count and unlock never depends on the questions
+/// sealed in the content; otherwise the pack's own.
+pub fn with_fixture(sealed: Vec<SealedLecture>) -> Vec<SealedLecture> {
+    let fixture = EXTRA.with(|e| e.borrow().clone());
+    if fixture.is_empty() { sealed } else { fixture }
 }
