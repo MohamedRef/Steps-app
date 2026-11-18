@@ -10,6 +10,10 @@ First Aid for the USMLE Step 1 2026 (`fa2026`) is the backbone: its sections are
 4. Lessons cite the source on the step (`book: <id>` beside `page:`) where the app supports it; until then keep a source's teaching in items.
 5. A source's page references are not yet checked by `steps-tools refs` (it reads First Aid only). When the first non-First-Aid source arrives, `refs` is extended to read `/mnt/project-files/steps/sources/<id>/`.
 
+## The VQ question bank
+
+`vq` (kind `qbank`) is Mohamed's own question bank. Its questions are MCQs filed under the First Aid lecture and topic they test, like any source's items, but they are **sealed**: they live encrypted in `content/<course>/vq/LNN.yaml`, never in an open lecture file, and open only with his key ([VQ.md](VQ.md)). `src.page` is the question's number (`page: 1` is VQ-0001, which the app's page chip shows). A question bank's MCQs keep their own options (2 to 26) and are left out of the answer-cue rules (Mohamed, 2026-11-18).
+
 ## When sources disagree
 
 The First Aid answer is the exam answer in Steps. Another source's different number or claim goes in `update: { text, ref }` on the First Aid item, naming the source and year.

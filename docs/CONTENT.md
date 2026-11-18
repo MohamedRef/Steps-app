@@ -30,6 +30,7 @@ Steps teaches USMLE Step 1 from **First Aid for the USMLE Step 1 2026** (the pri
 - Write from the book only. First Aid's own mnemonics are welcome (credit them as the book's). Put newer guidance or another source's different view in `update: { text, ref }`.
 - `src.page` is the page that holds the fact the item tests, and `src.quote` (required: every page chip shows it) is that page's own words containing it.
 - An item from a source other than First Aid adds `src.book: <id>` (an id in `content/sources.yaml`); its `src.page` is that source's page and is not range-checked.
+- An MCQ from a question bank (a source of kind `qbank`) stays exactly as the bank wrote it: 2 to 26 options, and it is left out of the answer-cue rules (Mohamed, 2026-11-18). The VQ bank's questions are sealed and never written in an open lecture file ([VQ.md](VQ.md)).
 
 ## Checks
 

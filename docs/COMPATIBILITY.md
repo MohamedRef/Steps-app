@@ -16,7 +16,7 @@ rule names where it lives and the test that holds it.
 | Feed format | `UPDATE_FORMAT` in `crates/core/src/update.rs` | integer | `verify_manifest` |
 | Pack container | `MAGIC` = `STEPSPK1` in `crates/core/src/pack.rs` | the magic bytes | `Pack::decode` |
 | Pack schema | `pack::SCHEMA` (the content types a build reads) | integer | `Pack::decode` |
-| File schemas | `steps.content/v1`, `steps.lesson/v1`, `steps.program/v1`, `steps.glossary/v1` | exact tag | `Pack::problems`, `steps-tools validate` |
+| File schemas | `steps.content/v1`, `steps.lesson/v1`, `steps.program/v1`, `steps.glossary/v1`, `steps.sealed/v1` (VQ, docs/VQ.md) | exact tag | `Pack::problems`, `steps-tools validate` |
 | Stylesheet build | `UpdateManifest::ui_build` | exact match | `update::mod`, `update::recovery` |
 | Database schema | `MIGRATIONS` in `crates/app/src/store/mod.rs` (`user_version`) | integer | the store |
 | Sync protocol | `PROTOCOL_VERSION` in `crates/protocol` | integer | Steps Cloud's hub |
@@ -58,6 +58,10 @@ rule names where it lives and the test that holds it.
   `steps-tools packs build` and `update verify`. A refused pack is
   remembered for the app build that refused it and not fetched again until
   the app changes; the device keeps its last good pack (`docs/RELEASE.md`).
+- **New pack fields** that an older app can simply skip need no schema
+  bump: the pack itself takes unknown fields. `sealed` (the VQ questions,
+  which an older app could never open) and `sources` came this way
+  (2026-11-18).
 - **Stylesheets** apply only on the exact build in `ui_build`; other builds
   use the content with their own look.
 - **Ids.** Lecture, item, topic and lesson ids study records point at are

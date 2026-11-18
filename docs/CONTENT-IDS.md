@@ -34,7 +34,9 @@ every push to main (the previous main). The rules (`crates/core/src/ids.rs`):
 | Duplicate or misplaced ids | fail earlier, in `Pack::problems` and `steps-tools validate` |
 
 The baseline is the content itself at the base commit (or in a published
-pack), so there is no separate snapshot file to maintain.
+pack), so there is no separate snapshot file to maintain. Sealed VQ
+questions (`path.L03.vq0001`, docs/VQ.md) keep their ids and kinds in clear,
+so they are checked the same way without the key.
 
 ## When an id really has to go
 

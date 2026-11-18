@@ -45,6 +45,9 @@ One file, `steps/anki/steps.apkg` in the project files folder (HANDBOOK §13), h
 - Settings › نسخة احتياطية من كل حاجة writes `steps-export-YYYY-MM-DD.json` (every review, check and setting) to `~/Downloads` on the Mac. On the phone and tablet it is written to the app's folder, then the system "Save to" dialog offers Downloads or Drive. Settings › استرجع نسخة merges such a file back (nothing is deleted; the newer row wins). On Android its button opens the system file picker, so a copy on Drive restores a new phone without any cloud.
 - Settings also sets the desired retention (85, 90 or 95%) and new items a day (15, 30, 45 or 60). After 400 reviews the schedule is fitted to your own memory, and it is refitted once a week.
 
+## The VQ questions (sealed)
+My VQ question bank comes sealed in the content ([VQ.md](VQ.md)). To open it on a device: Settings › بياناتك › «مفتاح بنك VQ», paste the key from the password manager and tap «افتح»; the questions join the bank at once, with no restart. Each device is unlocked once (the key is kept on the device, never in a backup or a sync), and «اقفل على الجهاز ده» locks it again. For `steps-tools vq open`, `vq seal` or a `validate` that opens the questions, export `STEPS_VQ_KEY` in the shell first.
+
 ## Counts
 - The content numbers in `README.md` ("What is inside") and `docs/HANDBOOK.md` §12 are generated: `just counts` (`steps-tools counts --write`) rewrites the text between `<!-- counts -->` and `<!-- /counts -->` from `content/`. Never edit them by hand. `steps-tools counts` prints them exactly.
 - They are rounded ("about"), so a content PR leaves them alone and stays inside its course folders. The Nightly checks run `steps-tools counts --check`, which fails and opens "Nightly: README and handbook counts out of date" once any number is more than 5% away; then run `just counts` in a small PR of its own.
