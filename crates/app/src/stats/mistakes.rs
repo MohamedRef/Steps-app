@@ -100,6 +100,10 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
                                 span { class: "mistake-text tap-row-main",
                                     bdi { dir: "ltr", {find(&m.item_id).map(preview).unwrap_or_default()} }
                                 }
+                                // A VQ question names its number, to find it again.
+                                if let Some(label) = find(&m.item_id).and_then(crate::vq::source_label) {
+                                    span { class: "chip", bdi { dir: "ltr", "{label}" } }
+                                }
                                 if m.sure {
                                     span { class: "chip mc-sure", title: mc::WAS_SURE_HINT, {mc::WAS_SURE} }
                                 }

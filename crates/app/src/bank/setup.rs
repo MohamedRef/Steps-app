@@ -176,8 +176,12 @@ fn all_lectures() -> String {
 const COUNTS: [usize; 4] = [10, 20, 40, usize::MAX];
 /// Step 1 blocks hold up to 20 questions (30 minutes) since May 2026.
 const MOCK_COUNTS: [usize; 3] = [10, 15, 20];
-const TAGS: [(&str, &str); 3] =
-    [("high-yield", tx::TAG_HIGH_YIELD), ("book-question", tx::TAG_BOOK), ("numbers", tx::TAG_NUMBERS)];
+const TAGS: [(&str, &str); 4] = [
+    ("high-yield", tx::TAG_HIGH_YIELD),
+    ("book-question", tx::TAG_BOOK),
+    ("numbers", tx::TAG_NUMBERS),
+    (steps_core::sealed::TAG, crate::i18n::vq::TAG),
+];
 const MODES: [(Mode, &str, &str); 3] = [
     (Mode::Tutor, tx::MODE_TUTOR_NAME, tx::MODE_TUTOR_HINT),
     (Mode::Timed, tx::MODE_TIMED_NAME, tx::MODE_TIMED_HINT),

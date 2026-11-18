@@ -13,6 +13,8 @@
 //!
 //! The app holds merged lectures only; the shared-folder file can also carry
 //! drafts. Both use the same note ids, so either import updates the other.
+//! The VQ questions his key opened stay in Steps: the deck is the same as
+//! `steps-tools anki` writes, which never has them (docs/VQ.md).
 
 use dioxus::prelude::*;
 
@@ -49,7 +51,7 @@ pub fn AnkiExport() -> Element {
     let review = use_review();
     let lib = Library::get();
     let lectures = lib.lectures.len();
-    let items: usize = lib.lectures.values().map(|l| l.items.len()).sum();
+    let items: usize = lib.lectures.values().map(|l| l.items.len()).sum::<usize>() - lib.vq.opened();
     let busy = *state.read() == State::Working;
 
     let export = move || {
@@ -163,7 +165,14 @@ fn export_now<'a>(
     judgement: impl Fn(&str) -> Option<&'a Judgement>,
     notes: &BTreeMap<String, String>,
 ) -> Result<(usize, String), String> {
-    let mut lectures: Vec<_> = Library::get().lectures.values().cloned().collect();
+    let lib = Library::get();
+    let lectures = lib.lectures.values();
+    let mut lectures: Vec<Lecture> = lectures
+        .map(|l| Lecture {
+            items: l.items.iter().filter(|i| !lib.vq.has(&i.id)).cloned().collect(),
+            ..l.clone()
+        })
+        .collect();
     // His own cards ride along as `Steps::My own cards`.
     lectures.extend(crate::own::lecture().cloned());
     let v = verdicts(&lectures, judgement);

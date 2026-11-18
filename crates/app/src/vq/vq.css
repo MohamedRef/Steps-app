@@ -1,0 +1,73 @@
+/* The VQ question bank (vq/): a question's figure, its full-size view and
+   the key card in Settings › بياناتك. Tokens only; logical properties. */
+
+/* The figure above the options: at most the card's width, never taller
+   than most of the screen. */
+.vq-figure {
+  display: block;
+  inline-size: 100%;
+  margin-block: var(--sp-2) var(--sp-3);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+  cursor: zoom-in;
+}
+.vq-figure img {
+  display: block;
+  max-inline-size: 100%;
+  max-block-size: 70vh;
+  block-size: auto;
+  margin-inline: auto;
+  object-fit: contain;
+}
+
+/* Full size: the image at its own size over the screen, scrolled when it is
+   bigger than the window. */
+.vq-full {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  padding-block: env(safe-area-inset-top, 0px) env(safe-area-inset-bottom, 0px);
+  outline: none;
+}
+.vq-full-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-3);
+}
+.vq-full-bar .icon-button {
+  inline-size: var(--target);
+  block-size: var(--target);
+  font-size: 1.4rem;
+}
+.vq-full-name { font-weight: 600; }
+.vq-full-scroll {
+  flex: 1;
+  min-block-size: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  display: flex;
+}
+.vq-full-scroll img {
+  display: block;
+  margin: auto;
+  max-inline-size: none;
+  block-size: auto;
+}
+
+/* The educational objective, with the explanation (the shared .note box). */
+.vq-objective { margin-block: var(--sp-3) 0; }
+.vq-objective-head { margin: 0 0 var(--sp-1); font-size: var(--fs-sm); }
+.vq-objective p { margin: 0; }
+
+/* The key card. */
+.vq-key .vq-state { margin: 0; }
+.vq-key .vq-form { display: flex; flex-direction: column; gap: var(--sp-3); }
+.vq-key .vq-form input { font-family: var(--font-latin); letter-spacing: 0.04em; }
+.vq-key .row { margin-block-start: var(--sp-2); }

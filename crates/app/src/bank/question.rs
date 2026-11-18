@@ -1,5 +1,7 @@
-//! One MCQ on screen: stem, options, and (once revealed) the right answer,
-//! why each option is right or wrong, the book page and any guideline update.
+//! One MCQ on screen: stem, its figure when it has one (VQ questions,
+//! `crate::vq`), options, and (once revealed) the right answer, why each
+//! option is right or wrong, a VQ question's educational objective, the book
+//! page (or `VQ-0001`) and any guideline update.
 
 use dioxus::prelude::*;
 use steps_core::content::Body;
@@ -63,6 +65,7 @@ pub fn QuestionView(
                 crate::labs::LabButton { class: "q-labs" }
             }
             p { class: "q-stem", lang: "en", dir: "ltr", "{stem}" }
+            crate::vq::Figure { item_id: item.id.clone() }
             ol { class: "q-options", lang: "en", dir: "ltr",
                 for (orig, letter, text, reason, state) in rows.clone() {
                     li { key: "{orig}",
@@ -120,11 +123,17 @@ pub fn QuestionView(
                     }
                 }
             }
+            // A VQ question's educational objective, after its why lines.
+            crate::vq::Objective { item_id: item.id.clone() }
             div { class: "q-foot",
-                crate::hover::BookPage { page: item.src.page, quote, of: item.id.clone() }
+                // A question bank's item is named by its number, not a page.
+                match crate::vq::source_label(&item) {
+                    Some(label) => rsx! { crate::vq::SourceChip { label } },
+                    None => rsx! { crate::hover::BookPage { page: item.src.page, quote, of: item.id.clone() } },
+                }
                 crate::notes::NoteChip {
                     anchor: steps_core::note::Anchor::Item(item.id.clone()),
-                    page: (item.src.page > 0).then_some(item.src.page),
+                    page: item.src.first_aid_page(),
                 }
             }
             // A miss shows the cards that hold what it tested.

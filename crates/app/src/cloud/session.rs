@@ -137,8 +137,10 @@ impl SessionVault for KeyringVault {
     }
 }
 
+/// Sets the platform credential store once; the VQ key's vault uses it too
+/// (`vq::vault`).
 #[cfg(not(target_arch = "wasm32"))]
-fn init_default_store() {
+pub(crate) fn init_default_store() {
     static ONCE: std::sync::Once = std::sync::Once::new();
     type Store = keyring_core::Result<std::sync::Arc<keyring_core::CredentialStore>>;
     ONCE.call_once(|| {
@@ -221,8 +223,9 @@ impl SessionVault for FileVault {
 }
 
 /// Replaces `path` with `bytes` in one step, readable by this user only.
-#[cfg(any(target_os = "macos", test))]
-fn write_private(path: &std::path::Path, bytes: &[u8]) -> std::io::Result<()> {
+/// The VQ key's desktop vault writes with it too (`vq::vault`).
+#[cfg(not(any(target_os = "android", target_arch = "wasm32")))]
+pub(crate) fn write_private(path: &std::path::Path, bytes: &[u8]) -> std::io::Result<()> {
     use std::io::Write;
     let tmp = path.with_extension("tmp");
     let _ = std::fs::remove_file(&tmp);

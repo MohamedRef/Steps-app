@@ -95,7 +95,8 @@ pub fn page_content(lib: &Library, page: u32, scope: &Scope, hidden: impl Fn(&st
         .map(|e| e.id.clone());
     let mut out = PageContent { lecture, ..Default::default() };
     for item in lib.lectures.values().filter(|l| in_scope(&l.lecture)).flat_map(|l| l.items.iter()) {
-        if item.src.page != page || hidden(&item.id) {
+        // A First Aid page: a question bank's number (VQ-0317) is not one.
+        if item.src.first_aid_page() != Some(page) || hidden(&item.id) {
             continue;
         }
         let kind = item.body.kind();

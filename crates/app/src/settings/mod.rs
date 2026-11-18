@@ -121,7 +121,7 @@ impl Section {
             Self::Tablet => "pen hover sidebar navigation قلم قائمة تابلت",
             Self::Mac => "keyboard shortcuts mouse hover sidebar كيبورد اختصارات ماوس قائمة",
             Self::Data => {
-                "backup restore export import anki diagnostics نسخة احتياطية استرجاع تصدير استيراد تشخيص"
+                "backup restore export import anki diagnostics vq key نسخة احتياطية استرجاع تصدير استيراد تشخيص مفتاح"
             }
             Self::Updates => "version download install changelog اصدار نسخة تنزيل تثبيت جديد",
             Self::About => "version content book source اصدار نسخة محتوى كتاب مصدر",

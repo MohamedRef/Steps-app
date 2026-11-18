@@ -69,6 +69,7 @@ mod ui;
 mod update;
 mod verify;
 mod version;
+mod vq;
 mod weak;
 
 use crate::look::{Css, css};

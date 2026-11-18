@@ -36,7 +36,9 @@ pub fn weak_ids<'a>(log: impl IntoIterator<Item = &'a LoggedReview>) -> BTreeSet
 pub fn on_page<'a>(lib: &'a Library, weak: &BTreeSet<String>, lecture: &str, page: u32) -> Vec<&'a Item> {
     lib.lectures
         .get(lecture)
-        .map(|l| l.items.iter().filter(|i| i.src.page == page && weak.contains(&i.id)).collect())
+        .map(|l| {
+            l.items.iter().filter(|i| i.src.first_aid_page() == Some(page) && weak.contains(&i.id)).collect()
+        })
         .unwrap_or_default()
 }
 

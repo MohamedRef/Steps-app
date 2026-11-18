@@ -1,5 +1,6 @@
 //! Builds the offline content pack (`steps_core::pack`) from
-//! `content/index.yaml`, `content/program.yaml` and every `content/<chapter>/LNN.yaml`, and embeds it
+//! `content/index.yaml`, `content/program.yaml`, `content/sources.yaml`, every `content/<chapter>/LNN.yaml`
+//! and the sealed VQ files `content/<chapter>/vq/LNN.yaml` (copied as they are: no key here), and embeds it
 //! with `include_bytes!`, the same pattern as Batna's build.rs (adapted from
 //! batna-app main: crates/app/build.rs). A new lecture file needs no code
 //! change. A file that doesn't parse is left out with a warning; CI's
@@ -7,10 +8,11 @@
 
 use std::path::PathBuf;
 
-use steps_core::content::{Index, Lecture};
+use steps_core::content::{Index, Lecture, Sources};
 use steps_core::lesson::LessonFile;
 use steps_core::pack::Pack;
 use steps_core::program::Program;
+use steps_core::sealed::SealedLecture;
 
 fn main() {
     let root = PathBuf::from(std::env::var("CARGO_MANIFEST_DIR").unwrap()).join("../..");
@@ -24,6 +26,7 @@ fn main() {
             .expect("content/index.yaml parses");
 
     let mut files = Vec::new();
+    let mut sealed_files = Vec::new();
     for dir in std::fs::read_dir(&content).expect("content/ exists").flatten() {
         // content/glossary/ holds the per-course glossaries and
         // content/qbank/ the UWorld QIDs (docs/QBANK.md), not lectures.
@@ -38,8 +41,21 @@ fn main() {
                 files.push(p);
             }
         }
+        // content/<chapter>/vq/: the sealed VQ questions (docs/VQ.md).
+        let vq = dir.path().join("vq");
+        if vq.is_dir() {
+            println!("cargo:rerun-if-changed={}", vq.display());
+            for f in std::fs::read_dir(&vq).unwrap().flatten() {
+                let p = f.path();
+                if p.extension().is_some_and(|e| e == "yaml") {
+                    println!("cargo:rerun-if-changed={}", p.display());
+                    sealed_files.push(p);
+                }
+            }
+        }
     }
     files.sort();
+    sealed_files.sort();
 
     let mut lectures = Vec::new();
     for f in files {
@@ -85,10 +101,27 @@ fn main() {
         serde_yaml_ng::from_str(&std::fs::read_to_string(&program_path).expect("content/program.yaml"))
             .expect("content/program.yaml parses");
 
+    let mut sealed = Vec::new();
+    for f in sealed_files {
+        match serde_yaml_ng::from_str::<SealedLecture>(&std::fs::read_to_string(&f).unwrap()) {
+            Ok(s) => sealed.push(s),
+            Err(e) => println!("cargo:warning={}: left out of the app: {e}", f.display()),
+        }
+    }
+    let sources_path = content.join("sources.yaml");
+    println!("cargo:rerun-if-changed={}", sources_path.display());
+    let sources: Sources =
+        serde_yaml_ng::from_str(&std::fs::read_to_string(&sources_path).expect("content/sources.yaml"))
+            .expect("content/sources.yaml parses");
+
     let out = PathBuf::from(std::env::var("OUT_DIR").unwrap());
     let pack = out.join("content.pack");
-    std::fs::write(&pack, Pack::new(index, lectures).with_lessons(lessons).with_program(program).encode())
-        .unwrap();
+    let built = Pack::new(index, lectures)
+        .with_lessons(lessons)
+        .with_program(program)
+        .with_sealed(sealed)
+        .with_sources(sources.sources);
+    std::fs::write(&pack, built.encode()).unwrap();
     // The per-course glossaries (content/glossary/<course>.yaml), embedded
     // beside content/glossary.yaml (crate::hover).
     let glossary_dir = content.join("glossary");

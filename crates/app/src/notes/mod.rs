@@ -72,7 +72,7 @@ fn step<'a>(
 /// An anchor's printed page in the library as it is now.
 pub fn page_of(lib: &'static Library, anchor: &Anchor) -> Option<u32> {
     match anchor {
-        Anchor::Item(id) => item(lib, id).map(|i| i.src.page).filter(|p| *p > 0),
+        Anchor::Item(id) => item(lib, id).and_then(|i| i.src.first_aid_page()),
         Anchor::Lesson(id) => step(lib, id).and_then(|(_, s)| s.page),
         Anchor::Page(p) => Some(*p),
     }
