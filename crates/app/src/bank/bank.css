@@ -22,10 +22,13 @@
 .chip.toggle[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--text); font-weight: 600; }
 .chip .count { flex: none; color: var(--muted); font-variant-numeric: tabular-nums; }
 .chip.weak { background: var(--bad-soft); border-color: transparent; color: var(--text); }
+/* A weak topic on the result opens the bank on it: a full 48dp to touch. */
+button.chip.weak { display: inline-flex; align-items: center; gap: var(--sp-1); min-block-size: var(--target); }
 .chip.page { font-variant-numeric: tabular-nums; }
 
 
 .start-row { display: flex; flex-wrap: wrap; gap: var(--sp-3); margin-block-start: var(--sp-2); }
+.sum .start-row .btn { min-block-size: var(--target); }
 
 
 /* ---------- setup ---------- */
@@ -77,11 +80,22 @@ bdi.bank-scope { font-family: var(--font-latin); }
 .history .score, .history .pct { font-variant-numeric: tabular-nums; }
 .history .pct { font-weight: 700; min-inline-size: 3.5rem; text-align: end; }
 
-/* ---------- player ---------- */
-/* One column that may shrink below its content, so the navigator scrolls
-   inside the card instead of widening the page under 840px. */
-.bank-run { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); }
-.run-main { display: flex; flex-direction: column; gap: var(--sp-3); min-width: 0; }
+/* ---------- a paper: the frame ----------
+   A paper (player.rs) and a finished one's review (review.rs) draw the
+   same screen, as a Step 1 question bank's test interface does: the top
+   bar stays in view, the navigator stands beside the question from 840dp,
+   and the one next step stays at the foot. A running paper fills the
+   screen, so its foot sits at the bottom even under a short question. */
+.bank:has(> .bank-run) { min-block-size: 100%; }
+.bank-run {
+  flex: 1 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  gap: var(--sp-3);
+}
+.run-body { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); min-inline-size: 0; }
+.run-main { display: flex; flex-direction: column; gap: var(--sp-3); min-inline-size: 0; }
 /* Pinned to the very top of `main.content`: it reaches up through the
    scroller's top padding so nothing shows above it. */
 .run-sticky {
@@ -95,34 +109,10 @@ bdi.bank-scope { font-family: var(--font-latin); }
   padding-block: var(--sp-4) var(--sp-2);
   background: var(--bg);
 }
-.run-head { display: flex; align-items: center; gap: var(--sp-3); }
-.run-head .run-count { font-weight: 600; font-size: var(--fs-sm); color: var(--muted); flex: none; }
 .run-leave { flex: none; inline-size: var(--target); block-size: var(--target); border: 0; border-radius: 50%; background: transparent; color: var(--text); font-size: 1.1rem; cursor: pointer; }
 @media (hover: hover) { .run-leave:hover { background: var(--accent-soft); } }
-.run-progress { flex: 1; }
-.run-sub { display: flex; align-items: center; gap: var(--sp-2); flex-wrap: wrap; }
-/* The next step sits at the foot of the scroller, above the nav bar, and
-   the last option can always scroll clear of it. It reaches down through
-   the whole of the scroller's bottom padding (`--content-end`, main.css),
-   safe area included: reaching through less left a strip under the button
-   where the page showed as it scrolled (#751). */
-.run-foot {
-  position: sticky;
-  inset-block-end: calc(-1 * var(--content-end, var(--sp-6)));
-  margin-block-end: calc(-1 * var(--content-end, var(--sp-6)));
-  z-index: 4;
-  display: flex;
-  flex-direction: column;
-  gap: var(--sp-2);
-  padding-block: var(--sp-3) var(--content-end, var(--sp-6));
-  background: var(--bg);
-  border-block-start: 1px solid var(--line);
-}
-.run-hint { text-align: center; }
-.run-main-action { inline-size: 100%; }
-.run-actions { display: flex; flex-wrap: wrap; gap: var(--sp-2); justify-content: flex-end; }
-.run-actions .btn-primary { min-inline-size: 8rem; }
 
+/* The time a timed paper has, draining under the bar (player.rs Timer). */
 .timer { block-size: 6px; border-radius: var(--radius-pill); background: var(--line); overflow: hidden; }
 .timer-fill {
   block-size: 100%;
@@ -134,36 +124,215 @@ bdi.bank-scope { font-family: var(--font-latin); }
 }
 @keyframes bank-drain { from { inline-size: 100%; } to { inline-size: 0%; } }
 
-.run-side { display: flex; flex-direction: column; gap: var(--sp-3); min-inline-size: 0; }
-.navigator { display: flex; gap: var(--sp-1); overflow-x: auto; padding: 3px; max-inline-size: 100%; scroll-padding-inline: var(--sp-4); }
-.nav-cell {
-  position: relative;
+/* ---------- the top bar (bar.rs) ----------
+   From 840dp: ✕, the kind, «سؤال N من M», the VQ number, the mark and the
+   moves, then the tools, the clock and «إنهاء البلوك»; those three wrap to
+   a second line together when the window is narrow. Under 840dp «N / M»
+   (it opens the navigator) stands in for «سؤال N من M». Under 600dp the bar
+   is compact: ✕, «N / M», the number, the clock, the mark and ⋮, which
+   holds the tools and the end; the moves sit at the foot. */
+.exam-bar {
+  /* Its own width decides whether the tools fit (below). */
+  container: exam-bar / inline-size;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2);
+  background: var(--surface);
+  border: 1px solid var(--card-border, var(--line));
+  border-radius: var(--radius-card);
+  box-shadow: var(--card-shadow);
+}
+.exam-bar :is(.btn, .chip.tap-chip) {
+  min-block-size: var(--target);
+}
+.exam-bar .icon-button {
   flex: none;
   inline-size: var(--target);
   block-size: var(--target);
-  border-radius: 8px;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  cursor: pointer;
-  font-variant-numeric: tabular-nums;
-  font-family: var(--font-latin);
 }
-.nav-cell[data-done="yes"] { background: var(--accent-soft); border-color: transparent; }
-.nav-cell[data-flag="yes"] { box-shadow: inset 0 -3px 0 var(--accent); }
-/* Flagged is a glyph as well as the bar, so it shows without colour. */
-.nav-flag { position: absolute; inset-block-start: 1px; inset-inline-end: 3px; font-size: 0.625rem; line-height: 1; color: var(--accent); }
-.nav-cell[aria-current="true"] { outline: 2px solid var(--accent); outline-offset: 1px; font-weight: 700; }
+.exam-bar .icon { inline-size: 1.15rem; block-size: 1.15rem; }
+.exam-where, .exam-moves, .exam-side, .exam-tools { display: flex; align-items: center; gap: var(--sp-2); min-inline-size: 0; }
+.exam-where { flex-wrap: wrap; }
+.exam-moves { gap: var(--sp-1); }
+.exam-side { flex-wrap: wrap; justify-content: flex-end; margin-inline-start: auto; }
+.exam-bar .exam-kind { font-size: var(--fs-sm); padding: var(--sp-1) var(--sp-3); }
+.exam-of { font-size: var(--fs-md); font-weight: 700; white-space: nowrap; }
+.exam-qid { font-family: var(--font-latin); font-size: var(--fs-sm); color: var(--muted); white-space: nowrap; }
+.exam-bar .exam-count { display: none; gap: var(--sp-1); padding-inline: var(--sp-3); }
+.exam-count .num-ltr { font-weight: 700; }
+.exam-mark { gap: var(--sp-2); padding-inline: var(--sp-3); }
+/* Marked: the mark's own gold, so it reads at a glance and never as a grade. */
+.exam-bar .exam-mark[aria-pressed="true"] { background: var(--gold-soft); border-color: var(--gold); color: var(--gold); }
+.exam-move:disabled { opacity: 0.4; cursor: default; }
+/* The tools look like the bar's other quiet buttons. */
+.exam-tools .btn { background: var(--raised); border-color: var(--line-soft, var(--line)); color: var(--text); font-weight: 600; }
+.exam-tools .nt-chip { display: inline-flex; align-items: center; padding-inline: var(--sp-3); font-size: var(--fs-sm); }
+.exam-clock {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  min-block-size: var(--target);
+  padding-inline: var(--sp-3);
+  border-radius: var(--radius-control);
+  background: var(--surface-2);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  white-space: nowrap;
+}
+.exam-clock .num-ltr { font-size: var(--fs-md); font-weight: 700; }
+/* The time left is the one dark chip in the bar, as on the exam's screen. */
+.exam-clock[data-kind="left"] { background: var(--text); color: var(--glass-solid, var(--surface)); }
+.exam-end { font-weight: 700; }
+.exam-bar .exam-more { display: none; }
+/* Too narrow for the whole bar on one line: the tools go to ⋮ before
+   anything wraps. */
+@container exam-bar (max-width: 68rem) {
+  .exam-tools { display: none; }
+  .exam-bar .exam-more { display: inline-grid; }
+}
+@media (max-width: 839.98px) {
+  .exam-bar .exam-count { display: inline-flex; }
+  .exam-of { display: none; }
+}
+@media (max-width: 599.98px) {
+  /* On the page itself, like Steps' top bar on a phone, so one row holds
+     ✕, «N / M», the number, the clock, the mark and ⋮ at 360dp. */
+  .exam-bar { gap: var(--sp-1); padding: 0; background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+  .exam-bar :is(.exam-kind, .exam-moves, .exam-tools, .exam-end, .exam-mark-word, .exam-clock-icon, .exam-clock-word, .exam-count-icon) { display: none; }
+  .exam-bar .exam-count { padding-inline: var(--sp-2); }
+  .exam-side { display: contents; }
+  .exam-clock { order: 1; margin-inline-start: auto; padding-inline: var(--sp-2); }
+  .exam-bar .exam-mark { order: 2; inline-size: var(--target); padding: 0; }
+  .exam-bar .exam-more { order: 3; display: inline-grid; }
+}
 
+/* ---------- the navigator (navigator.rs) ----------
+   A 48dp cell per question: answered is filled, not yet is an outline,
+   right and wrong carry ✓ and ✗ as well as their colour, a mark carries a
+   flag, and the question on screen a ring. From 840dp it is a column
+   beside the question; narrower, «N / M» opens it as a sheet. */
+.run-nav { display: none; }
+.run-nav-title { font-size: var(--fs-sm); font-weight: 600; color: var(--muted); }
+.navigator {
+  list-style: none;
+  margin: 0;
+  padding: 3px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, var(--target));
+  gap: var(--sp-1);
+}
+.nav-cell {
+  position: relative;
+  display: grid;
+  place-items: center;
+  inline-size: var(--target);
+  block-size: var(--target);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-family: var(--font-latin);
+  font-size: var(--fs-sm);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.nav-cell[data-state="answered"] { background: var(--accent-soft); border-color: transparent; color: var(--accent-ink); font-weight: 600; }
+.nav-cell[data-state="right"] { background: var(--good-soft); border-color: transparent; color: var(--good); font-weight: 600; }
+.nav-cell[data-state="wrong"] { background: var(--bad-soft); border-color: transparent; color: var(--bad); font-weight: 600; }
+.nav-cell[data-flag="yes"] { border-color: var(--gold); }
+.nav-cell[aria-current="true"] { outline: 2px solid var(--accent); outline-offset: 1px; font-weight: 700; }
+.nav-cell:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (hover: hover) { .nav-cell[aria-current="false"]:hover { border-color: var(--accent); } }
+.nav-cell .nav-mark { position: absolute; inset-block-start: 3px; inset-inline-start: 5px; font-size: 0.7rem; line-height: 1; }
+.nav-cell .nav-flag { position: absolute; inset-block-start: 3px; inset-inline-end: 3px; color: var(--gold); line-height: 0; }
+.nav-flag .icon { inline-size: 0.75rem; block-size: 0.75rem; stroke-width: 2.4; }
+.nav-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1) var(--sp-3);
+  font-size: var(--fs-sm);
+  color: var(--muted);
+}
+.nav-legend li { display: flex; align-items: center; gap: var(--sp-2); }
+.nav-swatch {
+  flex: none;
+  display: inline-grid;
+  place-items: center;
+  inline-size: 1rem;
+  block-size: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: var(--surface);
+  font-size: 0.625rem;
+  line-height: 1;
+}
+.nav-swatch[data-state="answered"] { background: var(--accent-soft); border-color: transparent; }
+.nav-swatch[data-state="right"] { background: var(--good-soft); border-color: transparent; color: var(--good); }
+.nav-swatch[data-state="wrong"] { background: var(--bad-soft); border-color: transparent; color: var(--bad); }
+.nav-swatch.nav-flag { border-color: var(--gold); color: var(--gold); }
 @media (min-width: 840px) {
-  .bank-run[data-mode="timed"] { grid-template-columns: minmax(0, 1fr) 15rem; align-items: start; }
-  .run-side { position: sticky; inset-block-start: var(--sp-4); }
-  .navigator { flex-wrap: wrap; overflow: visible; }
+  .run-body { grid-template-columns: auto minmax(0, 1fr); }
+  .run-nav { display: flex; flex-direction: column; gap: var(--sp-3); align-self: start; padding: var(--sp-3); }
+  .run-nav .navigator { grid-template-columns: repeat(4, var(--target)); }
+  .run-nav .nav-legend { flex-direction: column; }
+}
+/* With the answer out, the explanation stands beside the question. Short
+   of the full 72rem canvas (main.css) there is no room for both and the
+   navigator's column, so the explanation takes the column and «N / M» in
+   the bar opens the navigator, as it does under 840dp. */
+@container content (max-width: 71.5rem) {
+  .bank-run[data-reveal="true"] .run-body { grid-template-columns: minmax(0, 1fr); }
+  .bank-run[data-reveal="true"] .run-nav { display: none; }
+  .bank-run[data-reveal="true"] .exam-bar .exam-count { display: inline-flex; }
+  .bank-run[data-reveal="true"] .exam-of { display: none; }
+}
+
+/* ---------- the foot: the one next step ----------
+   It sits at the foot of the scroller, above the nav bar, and the last
+   option can always scroll clear of it. It reaches down through the whole
+   of the scroller's bottom padding (`--content-end`, main.css), safe area
+   included: reaching through less left a strip under the button where the
+   page showed as it scrolled (#751). On a phone the moves sit beside it;
+   wider, they are in the top bar and the hint on strikes and highlights
+   stands beside the button. */
+.run-foot {
+  position: sticky;
+  inset-block-end: calc(-1 * var(--content-end, var(--sp-6)));
+  margin-block: auto calc(-1 * var(--content-end, var(--sp-6)));
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding-block: var(--sp-3) var(--content-end, var(--sp-6));
+  background: var(--bg);
+  border-block-start: 1px solid var(--line);
+}
+.run-foot-main { flex: 1; min-inline-size: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
+.run-main-action { inline-size: 100%; min-block-size: max(var(--target), var(--tap-lg)); }
+.run-foot .exam-move {
+  flex: none;
+  inline-size: var(--target);
+  block-size: var(--target);
+}
+.run-hint { display: none; }
+@media (min-width: 600px) {
+  .run-foot .exam-move { display: none; }
+  .run-foot-main { flex-direction: row; align-items: center; gap: var(--sp-4); }
+  .run-main-action { flex: none; inline-size: auto; min-inline-size: 12rem; }
+  .run-hint { display: block; flex: 1; min-inline-size: 0; text-align: start; }
 }
 
 /* ---------- one question ---------- */
 .q { gap: var(--sp-3); }
 /* The lecture and topic are a quiet line; the clinical stem leads. */
-.q-meta { display: flex; flex-wrap: wrap; gap: var(--sp-1) var(--sp-2); min-inline-size: 0; }
+.q-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-1) var(--sp-2); min-inline-size: 0; }
 .q-meta .chip { font-size: 0.75rem; line-height: 1.7; inline-size: fit-content; max-inline-size: 100%; }
 /* The lecture chip opens the lecture: a full 48dp to touch. */
 .q-meta .chip.tap {
@@ -173,6 +342,10 @@ bdi.bank-scope { font-family: var(--font-latin); }
 }
 .q-stem, .q-text, .q-why { overflow-wrap: anywhere; }
 .q-stem { font-family: var(--font-latin); font-size: calc(var(--fs-lg) * 1.12); font-weight: 600; line-height: 1.5; text-align: start; }
+/* Words selected in the stem (stem.js) become a highlight in the theme's
+   soft gold, kept with the paper. */
+.q-stem { -webkit-user-select: text; user-select: text; }
+.q-hl { background: var(--gold-soft); color: inherit; border-radius: 4px; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
 .q-options { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); font-family: var(--font-latin); }
 /* The letters in the explanation list. */
 .q-letter {
@@ -186,76 +359,42 @@ bdi.bank-scope { font-family: var(--font-latin); }
 }
 .q-text { flex: 1; }
 /* Options are the shared button.answer (assets/parts.css); only the
-   English face is set here. */
-.q-option { font-family: var(--font-latin); }
+   English face is set here. A long press or a secondary click strikes one
+   out, so neither may select its words or open the system's menu. */
+.q-option { font-family: var(--font-latin); -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 .q-option .answer-mark { font-family: var(--font); }
+/* Struck out: muted and crossed through, still his to pick; once the answer
+   shows, its right or wrong colours win and the line stays. */
+.q-option[data-struck="true"] { color: var(--muted); }
+.q-option[data-struck="true"]:is([data-state=""], :not([data-state])) { border-style: dashed; background: var(--bg); }
+.q-option[data-struck="true"] .answer-text { text-decoration: line-through; text-decoration-thickness: 1.5px; }
 .q-why { margin: var(--sp-1) 0 0; padding-inline-start: calc(1.9rem + var(--sp-3) * 2); font-size: var(--fs-sm); color: var(--muted); line-height: 1.5; }
-.q-foot { display: flex; gap: var(--sp-2); }
+.q-foot { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+/* The book page chip opens its page: a full 48dp to touch. */
+.q-foot button.tap-chip { display: inline-flex; align-items: center; min-block-size: var(--target); }
 .q-update { background: var(--accent-soft); border-radius: var(--radius); padding: var(--sp-3) var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-1); }
-
-/* ---------- result ---------- */
-.big-score { display: flex; align-items: baseline; gap: var(--sp-3); }
-.big-score .pct { font-size: 2.6rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
-.score-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-2); }
-.score-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 5rem 3.5rem;
-  align-items: center;
-  gap: var(--sp-3);
-  min-block-size: var(--target);
-  padding-block: var(--sp-1);
-}
-@media (hover: hover) { .score-row:hover .score-label { color: var(--accent); } }
-.score-label { overflow-wrap: anywhere; font-size: var(--fs-sm); }
-.score-bar { block-size: 8px; border-radius: var(--radius-pill); background: var(--line); overflow: hidden; }
-.score-fill { block-size: 100%; background: var(--good); }
-.score-num { font-variant-numeric: tabular-nums; text-align: end; font-size: var(--fs-sm); }
-@media (min-width: 840px) { .score-row { grid-template-columns: minmax(0, 1fr) 10rem 4rem; } }
-
-.review-list { display: flex; flex-direction: column; gap: var(--sp-2); }
-.review-item {
+/* Over an answered question: «إجابة غلط · اخترت C، والإجابة الصح B». */
+.q-verdict {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--sp-2);
-  cursor: pointer;
-  min-block-size: var(--target);
-  padding-inline: var(--sp-3);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface);
-  text-align: start;
-  inline-size: 100%;
+  gap: var(--sp-1) var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  border-radius: var(--radius-control);
+  background: var(--surface-2);
+  color: var(--text);
 }
-.review-item[aria-current="true"] { border-color: var(--accent); background: var(--accent-soft); }
-.review-item .mark { font-weight: 700; }
-.review-item[data-right="yes"] .mark { color: var(--good); }
-.review-item[data-right="no"] .mark { color: var(--bad); }
-.review-item .stem-peek { flex: 1; min-width: 0; color: var(--muted); font-size: var(--fs-sm); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-family: var(--font-latin); text-align: start; }
-.review-detail { display: flex; flex-direction: column; gap: var(--sp-3); }
-.review-detail-head { display: flex; align-items: center; gap: var(--sp-3); }
-.review-detail-head .run-count { font-weight: 700; flex: 1; }
-.bank-close {
-  min-block-size: var(--target);
-  padding-inline: var(--sp-3);
-}
-.report {
-  align-self: flex-start;
-  min-block-size: var(--target);
-}
-/* Read to screen readers only: states that are drawn as glyphs or colour. */
-.bank-sr {
-  position: absolute;
-  inline-size: 1px;
-  block-size: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-/* In the review's detail pane the question and its explanation stack. */
-.desk-detail .desk-split { display: flex; flex-direction: column; }
+.q-verdict[data-tone="good"] { background: var(--good-soft); }
+.q-verdict[data-tone="bad"] { background: var(--bad-soft); }
+.q-verdict[data-tone="good"] :is(.q-verdict-icon, strong) { color: var(--good); }
+.q-verdict[data-tone="bad"] :is(.q-verdict-icon, strong) { color: var(--bad); }
+.q-verdict-icon { font-size: var(--fs-lg); font-weight: 700; line-height: 1; }
+.q-verdict strong { font-size: var(--fs-md); font-weight: 700; }
+.q-verdict-time { margin-inline-start: auto; }
 
 /* ---------- desk: explanation pane (≥840px) ---------- */
 .q-explain { gap: var(--sp-3); }
+.q-explain-head { display: none; font-size: var(--fs-md); font-weight: 700; }
 .q-why-list { display: none; list-style: none; margin: 0; padding: 0; flex-direction: column; gap: var(--sp-2); font-family: var(--font-latin); font-size: var(--fs-sm); line-height: 1.5; }
 .q-why-list li { display: flex; gap: var(--sp-2); align-items: flex-start; color: var(--muted); }
 .q-why-list .q-letter { inline-size: 1.5rem; block-size: 1.5rem; font-size: 0.75rem; }
@@ -267,25 +406,16 @@ bdi.bank-scope { font-family: var(--font-latin); }
 .q-why-list li[data-state="wrong"] .q-letter { background: var(--bad); color: var(--glass-solid, var(--surface)); }
 @media (min-width: 840px) {
   .q-why-list { display: flex; }
+  .q-explain-head { display: block; }
   .desk-split .q-why { display: none; }
 }
-
-/* ---------- submit confirm (the shared .sheet) ---------- */
-.sheet.bank-confirm .start-row .btn { flex: 1 1 10rem; }
-
-/* A running paper fills the screen, so its footer sits at the bottom even
-   under a short question. */
-.bank:has(> .bank-run) { min-block-size: 100%; }
-.bank-run { flex: 1 0 auto; }
-.run-foot { margin-block-start: auto; }
-/* Without past papers there is no side column: the setup keeps a reading
-   measure instead of stretching. */
-.bank-cols:not(.tab-cols) > .tab-main { max-inline-size: 44rem; }
-/* On the wide canvas (main.css) that measure sits in the middle, not
-   against one edge. */
-@media (min-width: 840px) { .bank-cols:not(.tab-cols) > .tab-main { margin-inline: auto; inline-size: 100%; } }
-/* The lab values button (labs/mod.rs) closes the question's chip row. */
-.q-meta .q-labs { margin-inline-start: auto; min-block-size: var(--tap); padding: 0 var(--sp-2); font-size: 0.8rem; }
+/* The bar stays on top of the page, so the explanation pane scrolls with
+   the question instead of sticking under the bar. */
+.bank-run .desk-side { position: static; max-block-size: none; overflow: visible; }
+.report {
+  align-self: flex-start;
+  min-block-size: var(--target);
+}
 /* The facts behind a missed question (bank/behind.rs). */
 .q-behind { display: flex; flex-direction: column; gap: var(--sp-2); margin-block-start: var(--sp-3);
   padding-block-start: var(--sp-3); border-block-start: 1px solid var(--line); }
@@ -295,4 +425,96 @@ bdi.bank-scope { font-family: var(--font-latin); }
   padding: var(--sp-2) var(--sp-3); border-radius: var(--radius-control, var(--radius)); background: var(--soft); }
 .q-behind-text { min-inline-size: 0; overflow-wrap: anywhere; font-size: var(--fs-sm); text-align: start; }
 .q-behind-list .chip { flex: none; }
-.q-behind > .btn { align-self: flex-start; }
+.q-behind > .btn { align-self: flex-start; min-block-size: var(--target); }
+
+/* ---------- sheets over a paper (the shared .sheet) ---------- */
+.bank-close {
+  min-block-size: var(--target);
+  padding-inline: var(--sp-3);
+}
+.sheet.bank-confirm .start-row .btn { flex: 1 1 10rem; min-block-size: var(--target); }
+/* Ending the paper, in the compact bar's tools menu. */
+.exam-tools-end { color: var(--bad); }
+.exam-tools-end .row-icon { background: var(--bad-soft); color: var(--bad); }
+.nav-sheet .nav-legend { margin-block-start: var(--sp-1); }
+/* Read to screen readers only: states that are drawn as glyphs or colour. */
+.bank-sr {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- the end of a paper (result.rs) ----------
+   As at the end of a block: what he did and the two next steps on top,
+   the score and the four counts, the table of the questions beside the
+   score per course from 840dp, then what to revise first. */
+.sum { display: flex; flex-direction: column; gap: var(--sp-4); }
+.sum > * { flex-shrink: 0; }
+.sum-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3); }
+.sum-grow { flex: 1 1 0; }
+.sum-head .btn { min-block-size: var(--target); }
+.sum-head .chip { font-size: var(--fs-sm); padding: var(--sp-1) var(--sp-3); }
+.sum-top { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-3); }
+.sum-score { gap: var(--sp-1); justify-content: center; }
+.big-score { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--sp-1) var(--sp-3); }
+.big-score .pct { font-size: 2.6rem; font-weight: 700; color: var(--accent); font-variant-numeric: tabular-nums; }
+.big-score .num-ltr { font-size: var(--fs-xl); font-weight: 600; }
+.sum-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.sum-tiles .stat-tile[data-tone="good"] .stat-num { color: var(--good); }
+.sum-tiles .stat-tile[data-tone="bad"] .stat-num { color: var(--bad); }
+.sum-tiles .stat-tile[data-tone="gold"] .stat-num { color: var(--gold); }
+.sum-tiles .stat-tile:disabled { box-shadow: none; }
+.sum-cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--sp-4); align-items: start; }
+.sum-table-wrap { overflow-x: auto; }
+.sum-table { inline-size: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+.sum-table th { padding: var(--sp-2); text-align: start; font-weight: 500; color: var(--muted); white-space: nowrap; }
+.sum-table td { padding-block: 0; padding-inline: var(--sp-2); border-block-start: 1px solid var(--line-soft, var(--line)); }
+.sum-row { cursor: pointer; }
+@media (hover: hover) { .sum-row:hover { background: var(--accent-soft); } }
+.sum-row[data-flag="yes"] > td:first-child { border-inline-start: 3px solid var(--gold); }
+.sum-open {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  min-block-size: var(--target);
+  min-inline-size: var(--target);
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.sum-open:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: var(--radius-sm, 6px); }
+.sum-flag { color: var(--gold); line-height: 0; }
+.sum-flag .icon { inline-size: 0.95rem; block-size: 0.95rem; }
+.sum-result { font-weight: 600; white-space: nowrap; }
+.sum-row[data-graded="right"] .sum-result { color: var(--good); }
+.sum-row[data-graded="wrong"] .sum-result { color: var(--bad); }
+.sum-row[data-graded="blank"] .sum-result { color: var(--muted); }
+.sum-courses { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-3); }
+.sum-courses li { display: flex; flex-direction: column; gap: var(--sp-1); }
+.sum-course-head { display: flex; justify-content: space-between; gap: var(--sp-2); font-size: var(--fs-sm); }
+.score-bar { block-size: 8px; border-radius: var(--radius-pill); background: var(--surface-2); overflow: hidden; }
+.score-fill { block-size: 100%; border-radius: inherit; background: var(--accent); }
+@media (max-width: 599.98px) {
+  /* Each next step gets its own full-width line. */
+  .sum-grow { display: none; }
+  .sum-head .btn { flex: 1 1 100%; }
+}
+@media (min-width: 600px) { .sum-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (min-width: 840px) {
+  .sum-top { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+  .sum-cols { grid-template-columns: minmax(0, 2fr) minmax(16rem, 1fr); }
+}
+
+/* Without past papers there is no side column: the setup keeps a reading
+   measure instead of stretching. */
+.bank-cols:not(.tab-cols) > .tab-main { max-inline-size: 44rem; }
+/* On the wide canvas (main.css) that measure sits in the middle, not
+   against one edge. */
+@media (min-width: 840px) { .bank-cols:not(.tab-cols) > .tab-main { margin-inline: auto; inline-size: 100%; } }

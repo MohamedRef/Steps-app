@@ -61,32 +61,65 @@ fn pool_skips_other_kinds_and_rejected_items() {
 fn filters_combine() {
     let lib = library();
     let pool = mcqs(&lib);
-    let last = LastResults::new();
+    let history = History::default();
     let mut f = Filter::default();
-    assert_eq!(f.select(&pool, &last).len(), 40);
+    assert_eq!(f.select(&pool, &history).len(), 40);
     f.lectures.insert("cvs.L09".into());
-    assert_eq!(f.select(&pool, &last).len(), 10);
+    assert_eq!(f.select(&pool, &history).len(), 10);
     f.lectures.clear();
     f.topics.insert(("cvs.L04".into(), "shock".into()));
-    assert_eq!(f.select(&pool, &last).len(), 10);
+    assert_eq!(f.select(&pool, &history).len(), 10);
     f.tags.insert("high-yield".into());
     // i % 3 == 0 and i % 5 == 0: 0, 15.
-    assert_eq!(f.select(&pool, &last).len(), 2);
+    assert_eq!(f.select(&pool, &history).len(), 2);
 }
 
 #[test]
 fn wrong_or_unseen_drops_only_last_right() {
     let lib = library();
     let pool = mcqs(&lib);
-    let mut last = LastResults::new();
-    last.insert("cvs.L09.000".into(), true);
-    last.insert("cvs.L09.001".into(), false);
+    let mut history = History::default();
+    history.last.insert("cvs.L09.000".into(), true);
+    history.last.insert("cvs.L09.001".into(), false);
     let f =
         Filter { lectures: ["cvs.L09".to_string()].into(), only: Only::WrongOrUnseen, ..Filter::default() };
-    let ids: Vec<&str> = f.select(&pool, &last).iter().map(|q| q.id).collect();
+    let ids: Vec<&str> = f.select(&pool, &history).iter().map(|q| q.id).collect();
     assert_eq!(ids.len(), 9);
     assert!(!ids.contains(&"cvs.L09.000"));
     assert!(ids.contains(&"cvs.L09.001"));
+}
+
+#[test]
+fn marked_keeps_only_marked_questions_right_or_wrong() {
+    let lib = library();
+    let pool = mcqs(&lib);
+    let mut history = History::default();
+    // Right last time, but marked: a mark is his, whatever the result.
+    history.last.insert("cvs.L09.003".into(), true);
+    assert!(history.mark("cvs.L09.003", true));
+    assert!(history.mark("cvs.L04.007", true));
+    assert!(!history.mark("cvs.L04.007", true), "marking twice changes nothing");
+    let f = Filter { only: Only::Marked, ..Filter::default() };
+    let ids: Vec<&str> = f.select(&pool, &history).iter().map(|q| q.id).collect();
+    assert_eq!(ids, ["cvs.L04.007", "cvs.L09.003"]);
+    // The other filters still narrow it.
+    let f = Filter { lectures: ["cvs.L09".to_string()].into(), ..f };
+    assert_eq!(f.select(&pool, &history).len(), 1);
+    // Unmarked: gone from the list.
+    assert!(history.mark("cvs.L09.003", false));
+    assert!(f.select(&pool, &history).is_empty());
+    // A saved setup names it as the bank's other filter does.
+    assert_eq!(serde_json::to_string(&Only::Marked).unwrap(), r#""marked""#);
+}
+
+#[test]
+fn a_new_paper_shows_the_marks_already_made() {
+    let mut history = History::default();
+    history.mark("2", true);
+    let qs = [q("1", "cvs.L04", "cp", 1), q("2", "cvs.L04", "cp", 1)];
+    let mut answers = vec![Answer::default(); 2];
+    history.marks_on(&qs, &mut answers);
+    assert_eq!(answers.iter().map(|a| a.flagged).collect::<Vec<_>>(), [false, true]);
 }
 
 #[test]
@@ -248,8 +281,87 @@ fn confidence_and_reason_go_with_the_answer() {
 fn answers_saved_before_confidence_still_load() {
     let old: Answer = serde_json::from_str(r#"{"chosen":1,"took_ms":5,"flagged":false}"#).unwrap();
     assert_eq!((old.confidence, old.reason), (None, None));
+    assert!(old.struck.is_empty() && old.highlights.is_empty());
     let json = serde_json::to_string(&old).unwrap();
     assert!(!json.contains("confidence") && !json.contains("reason"));
+    assert!(!json.contains("struck") && !json.contains("highlights"));
+}
+
+#[test]
+fn strikes_and_highlights_go_with_the_answer() {
+    let mut a = Answer::default();
+    a.toggle_strike(3);
+    a.toggle_strike(0);
+    assert_eq!(a.struck.iter().copied().collect::<Vec<_>>(), [0, 3]);
+    a.toggle_strike(3);
+    assert_eq!(a.struck.iter().copied().collect::<Vec<_>>(), [0]);
+    // A struck option can still be the answer.
+    a.chosen = Some(0);
+    assert!(a.correct(&q("1", "cvs.L04", "cp", 0)));
+    a.toggle_highlight(10, 20);
+    a.toggle_highlight(15, 18);
+    assert_eq!(a.highlights, [Span(10, 15), Span(18, 20)]);
+    // Kept in the saved paper and read back.
+    let json = serde_json::to_string(&a).unwrap();
+    assert!(json.contains(r#""struck":[0]"#) && json.contains(r#""highlights":[[10,15],[18,20]]"#), "{json}");
+    assert_eq!(serde_json::from_str::<Answer>(&json).unwrap(), a);
+}
+
+#[test]
+fn each_question_is_graded_right_wrong_or_blank() {
+    let question = q("1", "cvs.L04", "cp", 1);
+    assert_eq!(a(Some(1)).graded(&question), Graded::Right);
+    assert_eq!(a(Some(2)).graded(&question), Graded::Wrong);
+    assert_eq!(a(None).graded(&question), Graded::Blank);
+}
+
+#[test]
+fn the_summary_counts_times_and_courses() {
+    let qs = [
+        q("cvs.L04.001", "cvs.L04", "cp", 1),
+        q("cvs.L09.002", "cvs.L09", "ie", 0),
+        q("renal.L02.003", "renal.L02", "aki", 2),
+        q("renal.L02.004", "renal.L02", "aki", 2),
+    ];
+    let took = |chosen, ms, flagged| Answer { chosen, took_ms: ms, flagged, ..Answer::default() };
+    // Right, wrong and marked, blank, right and marked.
+    let answers = [
+        took(Some(1), 40_000, false),
+        took(Some(3), 80_000, true),
+        took(None, 0, false),
+        took(Some(2), 20_000, true),
+    ];
+    let s = summary(&qs, &answers, Mode::Mock, 200_000);
+    assert_eq!(s.total, Score { right: 2, total: 4 });
+    assert_eq!((s.wrong, s.blank, s.marked), (1, 1, 2));
+    assert_eq!(s.allowed_ms, Some(4 * MS_PER_QUESTION));
+    assert_eq!(s.used_ms, 200_000);
+    // The mean of the questions' own times, blanks included.
+    assert_eq!(s.per_question_ms, 35_000);
+    assert_eq!(s.by_course["cvs"], Score { right: 1, total: 2 });
+    assert_eq!(s.by_course["renal"], Score { right: 1, total: 2 });
+    assert_eq!(s.by_course.len(), 2);
+    // A paper handed in after its time (left, then resumed late) used all of it.
+    assert_eq!(summary(&qs, &answers, Mode::Timed, 9_000_000).used_ms, 4 * MS_PER_QUESTION);
+    // A tutor paper has no clock: its time is its own.
+    let tutor = summary(&qs, &answers, Mode::Tutor, 9_000_000);
+    assert_eq!((tutor.allowed_ms, tutor.used_ms), (None, 9_000_000));
+    // Nothing to average in an empty paper.
+    assert_eq!(summary(&[], &[], Mode::Tutor, 0).per_question_ms, 0);
+}
+
+#[test]
+fn a_retake_takes_the_wrong_blank_and_marked_ones_in_order() {
+    let qs = [
+        q("1", "cvs.L04", "cp", 1),
+        q("2", "cvs.L04", "cp", 1),
+        q("3", "cvs.L04", "cp", 1),
+        q("4", "cvs.L04", "cp", 1),
+    ];
+    let marked = Answer { flagged: true, ..a(Some(1)) };
+    let answers = [a(Some(1)), a(Some(0)), marked, a(None)];
+    assert_eq!(retake(&qs, &answers), ["2", "3", "4"]);
+    assert!(retake(&qs[..1], &answers[..1]).is_empty());
 }
 
 #[test]

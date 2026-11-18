@@ -1,41 +1,76 @@
-//! After a paper: the score, per lecture and per topic, the weakest topics,
-//! and a review of every question with its explanation.
+//! The end of a paper: its score (n / m and %), the time used of the time
+//! allowed and per question, tiles for right, wrong, blank and marked, a
+//! table of the questions, the score per course (system or discipline), the
+//! weakest topics, and the two next steps: review the wrong ones, or a new
+//! block of the wrong and marked ones. A row, a tile or «راجع الأسئلة
+//! الغلط» opens the review (`review.rs`) on what it shows.
 
 use dioxus::prelude::*;
-use steps_core::content::Body;
-use steps_core::exam::{self, Mode, Score};
+use steps_core::exam::{self, Graded, Score};
 
-use super::question::QuestionView;
-use super::{PHASE, Phase, back_to_setup, lookup, minutes, start, topic_title};
+use super::clock::face;
+use super::review::{Review, Show};
+use super::{PHASE, Phase, back_to_setup, retake, to_top, topic_title};
+use crate::content::Library;
 use crate::i18n::bank as tx;
-use crate::i18n::count::{MINUTE, count};
-
-#[derive(Clone, Copy, PartialEq)]
-enum Show {
-    All,
-    Wrong,
-    Flagged,
-}
 
 #[component]
 pub fn Result() -> Element {
+    let mut review = use_signal(|| None::<(usize, Show)>);
+    let ui = use_context::<crate::Ui>();
     let Phase::Done { paper, outcome } = PHASE.read().clone() else {
         return rsx! {};
     };
-    let mut show =
-        use_signal(|| if outcome.total.right < outcome.total.total { Show::Wrong } else { Show::All });
+    if let Some((at, show)) = review() {
+        return rsx! {
+            Review {
+                at,
+                show,
+                ongo: move |i| review.set(Some((i, show))),
+                onclose: move |_| {
+                    review.set(None);
+                    to_top();
+                },
+            }
+        };
+    }
     let timed = paper.mode.timed();
-    let ui = use_context::<crate::Ui>();
-
-    let lectures: Vec<(String, Score)> = outcome.by_lecture.iter().map(|(l, s)| (l.clone(), *s)).collect();
-    let topics: Vec<(String, String, Score)> = outcome
-        .by_topic
+    let s = exam::summary(&paper.questions, &paper.answers, paper.mode, outcome.took_ms);
+    let lib = Library::get();
+    let first =
+        |show: Show| (0..paper.questions.len()).find(|&i| show.takes(&paper.questions[i], &paper.answers[i]));
+    let mut open = move |show: Show, from: Option<usize>| {
+        if let Some(at) = from {
+            review.set(Some((at, show)));
+            to_top();
+        }
+    };
+    let missed = first(Show::Missed);
+    let can_retake = !exam::retake(&paper.questions, &paper.answers).is_empty();
+    let rows: Vec<(usize, Option<String>, String, Graded, u32, bool)> = paper
+        .questions
         .iter()
-        .map(|(k, s)| {
-            let (l, t) = k.split_once('/').unwrap_or((k, ""));
-            (l.to_string(), t.to_string(), *s)
+        .zip(&paper.answers)
+        .enumerate()
+        .map(|(i, (q, a))| {
+            (i, crate::vq::name(&q.id), lib.crumb(&q.lecture), a.graded(q), a.took_ms, a.flagged)
         })
         .collect();
+    // A VQ question can be found again by its number in quick search.
+    let numbered = rows.iter().any(|r| r.1.is_some());
+    // Courses in the book's order; any the program doesn't list, last.
+    let mut courses: Vec<(String, Score)> = lib
+        .program
+        .courses
+        .iter()
+        .filter_map(|c| s.by_course.get(&c.id).map(|score| (c.title.clone(), *score)))
+        .collect();
+    courses.extend(
+        s.by_course
+            .iter()
+            .filter(|(id, _)| lib.program.course(id).is_none())
+            .map(|(id, sc)| (id.clone(), *sc)),
+    );
     let weak: Vec<(String, String, Score)> = exam::focus_topics(&outcome, 60)
         .into_iter()
         .take(5)
@@ -44,114 +79,157 @@ pub fn Result() -> Element {
             (l.to_string(), t.to_string(), s)
         })
         .collect();
-    let several_lectures = lectures.len() > 1;
-
-    let wrong: Vec<_> = paper
-        .questions
-        .iter()
-        .zip(&paper.answers)
-        .filter(|(q, a)| !a.correct(q))
-        .map(|(q, _)| q.clone())
-        .collect();
-    let has_wrong = !wrong.is_empty();
-    let filter = *show.read();
-    let rows: Vec<_> = paper
-        .questions
-        .iter()
-        .zip(&paper.answers)
-        .enumerate()
-        .filter(|(_, (q, a))| match filter {
-            Show::All => true,
-            Show::Wrong => !a.correct(q),
-            Show::Flagged => a.flagged,
-        })
-        .map(|(i, (q, a))| (i, q.clone(), a.clone()))
-        .collect();
-    let any_flagged = paper.answers.iter().any(|a| a.flagged);
-    let mut open = use_signal(|| None::<usize>);
-    let detail = open()
-        .and_then(|i| Some((i, paper.questions.get(i)?.clone(), paper.answers.get(i)?.clone())))
-        .map(|(i, q, a)| {
-            rsx! {
-                div { class: "review-detail",
-                    div { class: "review-detail-head",
-                        span { class: "run-count", "{tx::QUESTION} " bdi { "{i + 1}" } }
-                        button {
-                            class: "btn-link bank-close",
-                            "aria-keyshortcuts": "Escape",
-                            // Android Back closes the question before leaving the result.
-                            "data-back": "true",
-                            onclick: move |_| open.set(None),
-                            {tx::CLOSE}
-                        }
-                    }
-                    QuestionView { key: "{i}", q, chosen: a.chosen, reveal: true }
-                }
-            }
-        });
+    let pct = s.total.percent();
+    let tiles = [
+        (Show::Right, s.total.right, tx::RIGHT, "good"),
+        (Show::Wrong, s.wrong, tx::WRONG, "bad"),
+        (Show::Blank, s.blank, tx::TILE_BLANK, ""),
+        (Show::Marked, s.marked, tx::MARKED, "gold"),
+    ]
+    .map(|(show, n, label, tone)| (show, n, label, tone, first(show)));
 
     rsx! {
-        crate::ui::Card { class: "result",
-            // Submit is gone: land focus on the result so it is read out.
-            h1 {
-                tabindex: "-1",
-                onmounted: move |e: MountedEvent| async move {
-                    let _ = e.set_focus(true).await;
-                },
-                if paper.mode == Mode::Mock { {tx::MOCK_TITLE} } else { {tx::RESULT} }
-            }
-            div { class: "big-score",
-                bdi { class: "pct", "{outcome.total.percent()}%" }
-                span { class: "muted", bdi { "{outcome.total.right}" } " {tx::OF} " bdi { "{outcome.total.total}" } }
-            }
-            div { class: "muted small",
-                if timed {
-                    "{tx::TOOK} " {count(minutes(outcome.took_ms), &MINUTE)}
+        div { class: "sum",
+            header { class: "sum-head",
+                // The paper is gone: land focus on the result so it is read out.
+                h1 {
+                    tabindex: "-1",
+                    onmounted: move |e: MountedEvent| async move {
+                        let _ = e.set_focus(true).await;
+                    },
+                    if paper.block { {tx::MOCK_TITLE} } else { {tx::RESULT} }
                 }
-                if outcome.unanswered > 0 {
-                    " · " bdi { "{outcome.unanswered}" } " {tx::UNANSWERED}"
+                span { class: "chip", "data-tone": "accent", {tx::kind(paper.block, timed)} }
+                span { class: "sum-grow" }
+                // The two next steps sit with the score, not under the table.
+                if missed.is_some() {
+                    button { class: "btn btn-secondary", onclick: move |_| open(Show::Missed, missed), {tx::REVIEW_WRONG} }
+                }
+                if can_retake {
+                    button { class: "btn btn-primary", onclick: move |_| retake(), {tx::RETAKE} }
+                } else {
+                    button { class: "btn btn-primary", onclick: move |_| back_to_setup(), {tx::NEW_PAPER} }
                 }
             }
-            if has_wrong {
+            div { class: "sum-top",
+                crate::ui::Card { class: "sum-score",
+                    span { class: "muted small", {tx::RESULT} }
+                    div { class: "big-score",
+                        bdi { class: "pct", "{pct}%" }
+                        bdi { class: "num-ltr muted", "{s.total.right} / {s.total.total}" }
+                    }
+                    p { class: "small",
+                        {tx::used_of(&face(s.used_ms), s.allowed_ms.map(face).as_deref())}
+                        " · {tx::PER_QUESTION} "
+                        bdi { class: "num-ltr", {face(s.per_question_ms)} }
+                    }
+                }
+                // Each tile opens the review on what it counts.
+                div { class: "stat-tiles sum-tiles",
+                    for (show, n, label, tone, from) in tiles {
+                        button {
+                            key: "{label}",
+                            class: "tap stat-tile",
+                            "data-tone": tone,
+                            disabled: n == 0,
+                            onclick: move |_| open(show, from),
+                            span { class: "stat-num", "{n}" }
+                            span { class: "stat-label", {label} }
+                        }
+                    }
+                }
+            }
+            if s.wrong > 0 {
                 p { class: "small", {tx::SENT_TO_REVIEW} }
             }
-            // The one next step sits with the score, not under the review list.
-            div { class: "start-row",
-                if has_wrong {
-                    button {
-                        class: "btn btn-primary btn-lg",
-                        onclick: { let wrong = wrong.clone(); move |_| start(Mode::Tutor, wrong.clone()) },
-                        {tx::RETRY_WRONG}
+            div { class: "sum-cols",
+                crate::ui::Card { class: "sum-table-card",
+                    h2 { {tx::TABLE} }
+                    div { class: "sum-table-wrap",
+                        table { class: "sum-table",
+                            thead {
+                                tr {
+                                    th { scope: "col", {tx::COL_NO} }
+                                    // Only VQ questions have an id to show.
+                                    if numbered {
+                                        th { scope: "col", {tx::COL_ID} }
+                                    }
+                                    th { scope: "col", {tx::COL_LECTURE} }
+                                    th { scope: "col", {tx::COL_RESULT} }
+                                    th { scope: "col", {tx::COL_TIME} }
+                                }
+                            }
+                            tbody {
+                                for (i, label, crumb, graded, took, marked) in rows {
+                                    tr {
+                                        key: "{i}",
+                                        class: "sum-row",
+                                        "data-graded": match graded { Graded::Right => "right", Graded::Wrong => "wrong", Graded::Blank => "blank" },
+                                        "data-flag": if marked { "yes" } else { "no" },
+                                        onclick: move |_| open(Show::All, Some(i)),
+                                        td {
+                                            button {
+                                                class: "sum-open",
+                                                "aria-label": tx::open_question(i + 1),
+                                                onclick: move |e| {
+                                                    e.stop_propagation();
+                                                    open(Show::All, Some(i));
+                                                },
+                                                bdi { class: "num-ltr", "{i + 1}" }
+                                                if marked {
+                                                    span { class: "sum-flag", aria_hidden: "true", {crate::icons::flag()} }
+                                                    span { class: "bank-sr", "، {tx::MARKED}" }
+                                                }
+                                            }
+                                        }
+                                        if numbered {
+                                            td { if let Some(label) = label { bdi { dir: "ltr", lang: "en", "{label}" } } }
+                                        }
+                                        td { bdi { "{crumb}" } }
+                                        td { class: "sum-result",
+                                            match graded {
+                                                Graded::Right => rsx! { "✓ {tx::RIGHT}" },
+                                                Graded::Wrong => rsx! { "✗ {tx::WRONG}" },
+                                                Graded::Blank => rsx! { {tx::TILE_BLANK} },
+                                            }
+                                        }
+                                        td { bdi { class: "num-ltr", {face(u64::from(took))} } }
+                                    }
+                                }
+                            }
+                        }
                     }
-                } else {
-                    button { class: "btn btn-primary btn-lg", onclick: move |_| back_to_setup(), {tx::NEW_PAPER} }
+                    p { class: "muted small",
+                        {tx::TABLE_HINT}
+                        if numbered { " " {tx::TABLE_HINT_VQ} }
+                    }
+                }
+                crate::ui::Card { class: "sum-courses-card",
+                    h2 { {tx::BY_COURSE} }
+                    ul { class: "sum-courses",
+                        for (title, score) in courses {
+                            li { key: "{title}",
+                                div { class: "sum-course-head",
+                                    bdi { lang: "en", "{title}" }
+                                    bdi { class: "num-ltr", "{score.right}/{score.total}" }
+                                }
+                                div { class: "score-bar", aria_hidden: "true",
+                                    div { class: "score-fill", style: "inline-size: {score.percent()}%;" }
+                                }
+                            }
+                        }
+                    }
                 }
             }
-        }
-
-        if several_lectures {
-            crate::ui::Card { class: "",
-                h2 { {tx::BY_LECTURE} }
-                ScoreRows {
-                    rows: lectures.into_iter().map(|(l, s)| (crate::content::Library::get().crumb(&l), s, l, None)).collect::<Vec<_>>(),
-                }
-            }
-        }
-        if !topics.is_empty() {
-            crate::ui::Card { class: "",
-                h2 { {tx::BY_TOPIC} }
-                ScoreRows {
-                    rows: topics.into_iter().map(|(l, t, s)| (topic_title(&l, &t), s, l, Some(t))).collect::<Vec<_>>(),
-                }
-                h2 { class: "label", {tx::WEAK} }
-                // Praise only a score that earns it; otherwise point at the
-                // review list below (#233).
-                if weak.is_empty() && outcome.total.percent() >= 60 {
-                    p { class: "muted small", {tx::ALL_STRONG} }
-                } else if weak.is_empty() {
-                } else {
+            // What to revise next: a weak topic opens the bank set to it.
+            if !weak.is_empty() || pct >= 60 {
+                crate::ui::Card { class: "sum-weak",
+                    h2 { class: "label", {tx::WEAK} }
+                    // Praise only a score that earns it (#233).
+                    if weak.is_empty() {
+                        p { class: "muted small", {tx::ALL_STRONG} }
+                    }
                     div { class: "chips",
-                        // A weak topic opens the bank set to practise just it.
                         for (l, t, s) in weak {
                             button {
                                 key: "{l}/{t}",
@@ -165,95 +243,15 @@ pub fn Result() -> Element {
                     }
                 }
             }
-        }
-
-        crate::ui::Card { class: "",
-            h2 { {tx::REVIEW} }
-            div { class: "chips",
-                for (value, label) in [(Show::All, tx::SHOW_ALL), (Show::Wrong, tx::SHOW_WRONG), (Show::Flagged, tx::SHOW_FLAGGED)] {
-                    if value != Show::Flagged || any_flagged {
-                        button {
-                            class: "chip toggle",
-                            "aria-pressed": if filter == value { "true" } else { "false" },
-                            onclick: move |_| show.set(value),
-                            {label}
-                        }
-                    }
+            div { class: "start-row",
+                button {
+                    class: "btn btn-secondary",
+                    // Android Back on the result returns to the bank.
+                    "data-back": "true",
+                    onclick: move |_| back_to_setup(),
+                    {tx::BACK}
                 }
             }
         }
-        crate::desk::ListDetail {
-            list: rsx! {
-                div { class: "review-list",
-                    for (i, q, a) in rows {
-                        button {
-                            key: "{i}",
-                            class: "review-item",
-                            "data-right": if a.correct(&q) { "yes" } else { "no" },
-                            "aria-current": if open() == Some(i) { "true" } else { "false" },
-                            onclick: move |_| open.set(Some(i)),
-                            span { class: "mark", aria_hidden: "true", if a.correct(&q) { "✓" } else { "✗" } }
-                            span { "{tx::QUESTION} " bdi { "{i + 1}" } }
-                            span { class: "bank-sr", if a.correct(&q) { "، {tx::RIGHT}" } else { "، {tx::WRONG}" } }
-                            bdi { class: "stem-peek", {stem_peek(&q.id)} }
-                            if a.flagged {
-                                span { class: "muted", aria_hidden: "true", " ⚑" }
-                                span { class: "bank-sr", "، {tx::FLAGGED}" }
-                            }
-                        }
-                    }
-                }
-            },
-            detail: detail,
-        }
-
-        div { class: "start-row",
-            button {
-                class: "btn btn-secondary",
-                // Android Back on the result returns to the bank; an open
-                // question's Close takes it first.
-                "data-back": if open().is_none() { "true" } else { "false" },
-                onclick: move |_| back_to_setup(),
-                {tx::BACK}
-            }
-        }
-    }
-}
-
-/// Score per lecture (a row opens the lecture's page) or per topic (a row
-/// opens the bank set to that topic).
-#[component]
-fn ScoreRows(rows: Vec<(String, Score, String, Option<String>)>) -> Element {
-    let ui = use_context::<crate::Ui>();
-    rsx! {
-        ul { class: "score-rows",
-            for (i, (label, s, lecture, topic)) in rows.into_iter().enumerate() {
-                li { key: "{i}",
-                    button {
-                        class: "tap tap-plain score-row",
-                        title: if topic.is_some() { tx::PRACTISE_TOPIC } else { tx::OPEN_LECTURE },
-                        onclick: move |_| match &topic {
-                            Some(t) => super::practise(ui, &lecture, Some(t.clone())),
-                            None => crate::lecture::open(ui, &lecture),
-                        },
-                        // The cell stays right to left with the name inline in
-                        // it, so an English topic starts at the row's edge like
-                        // a lecture does, not beside the bar (UX #586).
-                        span { class: "score-label", bdi { "{label}" } }
-                        div { class: "score-bar", aria_hidden: "true",
-                            div { class: "score-fill", style: "inline-size: {s.percent()}%;" }
-                        }
-                        bdi { class: "score-num", "{s.right}/{s.total}" }
-                    }
-                }
-            }
-        }
-    }
-}
-
-fn stem_peek(id: &str) -> String {
-    match lookup(id).map(|(_, i)| i.body) {
-        Some(Body::Mcq { stem, .. }) => stem.chars().take(90).collect(),
-        _ => String::new(),
     }
 }

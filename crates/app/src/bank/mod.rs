@@ -2,13 +2,28 @@
 //! tag, in tutor mode (the explanation after every question) or timed mode
 //! (the review at the end), and sit timed mock exams scored per lecture and
 //! topic. Picking, timing and scoring live in `steps_core::exam`.
+//!
+//! A paper on screen works like a Step 1 question bank's test interface, in
+//! Steps' own look: a top bar (`bar.rs`) with the mark, the moves, the
+//! tools and the clock (`clock.rs`), the navigator (`navigator.rs`), choices
+//! he can strike out (`question.rs`) and a stem he can highlight
+//! (`stem.rs`), the verdict over an answered question, and at the end the
+//! block's summary (`result.rs`) and its review (`review.rs`). A mark
+//! outlives its paper: marked questions are kept in the synced setting
+//! `bank.marked`, and the setup can draw a paper from them.
 
+mod bar;
 mod behind;
+mod clock;
+mod navigator;
 mod player;
 mod question;
 mod result;
+mod review;
 mod setup;
+mod stem;
 
+use std::collections::BTreeSet;
 use std::sync::atomic::{AtomicBool, Ordering};
 use web_time::{SystemTime, UNIX_EPOCH};
 
@@ -28,6 +43,10 @@ const BANK_CSS: Css = css!("src/bank/bank.css");
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct Paper {
     pub mode: Mode,
+    /// Started as a block (the setup's «بلوك زي الامتحان», or a new block
+    /// from a finished one) rather than as practice: its top bar says so.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub block: bool,
     pub questions: Vec<Question>,
     pub answers: Vec<Answer>,
     pub at: usize,
@@ -58,6 +77,7 @@ impl Paper {
         let now = now_ms();
         Self {
             mode,
+            block: false,
             answers: vec![Answer::default(); questions.len()],
             questions,
             at: 0,
@@ -82,17 +102,42 @@ impl Paper {
 
     /// Tutor mode: check the draft once. Returns the question and answer to
     /// send to review, or `None` when there is no draft or it was already
-    /// checked (a second tap or Enter).
+    /// checked (a second tap or Enter). Its time is every moment it was on
+    /// screen until now; the explanation read after it doesn't count.
     fn check(&mut self, now: i64) -> Option<(Question, Answer)> {
         let at = self.at;
         if self.mode != Mode::Tutor || self.answers[at].chosen.is_some() {
             return None;
         }
         let option = self.draft.take()?;
+        let spent = u32::try_from(now.saturating_sub(self.shown_ms).max(0)).unwrap_or(u32::MAX);
         let a = &mut self.answers[at];
         a.chosen = Some(option);
-        a.took_ms = u32::try_from(now.saturating_sub(self.shown_ms).max(0)).unwrap_or(u32::MAX);
+        a.took_ms = a.took_ms.saturating_add(spent);
         Some((self.questions[at].clone(), a.clone()))
+    }
+
+    /// Whether the question at `at` shows its answer: a tutor question once
+    /// checked. A timed paper shows nothing until it goes in.
+    pub fn revealed(&self, at: usize) -> bool {
+        self.mode == Mode::Tutor && self.answers.get(at).is_some_and(|a| a.chosen.is_some())
+    }
+
+    /// Marks the current question, or unmarks it: its id and whether it is
+    /// marked now.
+    fn toggle_mark(&mut self) -> (String, bool) {
+        let at = self.at;
+        let a = &mut self.answers[at];
+        a.flagged ^= true;
+        (self.questions[at].id.clone(), a.flagged)
+    }
+
+    /// Strikes an option of the current question out, or brings it back.
+    /// A checked tutor question is done with.
+    fn strike(&mut self, option: usize) {
+        if !self.revealed(self.at) {
+            self.answers[self.at].toggle_strike(option);
+        }
     }
 
     /// How sure he is of the current question, before it is checked (tutor)
@@ -123,10 +168,13 @@ impl Paper {
         Some((event, old))
     }
 
-    /// Add the time on the current question before moving off it.
+    /// Add the time on the current question before moving off it (a
+    /// checked tutor question's time stopped at its check).
     fn leave(&mut self, now: i64) {
         let spent = u32::try_from(now.saturating_sub(self.shown_ms).max(0)).unwrap_or(u32::MAX);
-        if let Some(a) = self.answers.get_mut(self.at) {
+        if !self.revealed(self.at)
+            && let Some(a) = self.answers.get_mut(self.at)
+        {
             a.took_ms = a.took_ms.saturating_add(spent);
         }
         self.shown_ms = now;
@@ -159,6 +207,26 @@ const LEGACY_PAPERS_KEY: &str = "bank.papers";
 /// A timed paper Mohamed left part-way: kept, with its clock running, until
 /// he goes back to it or submits it (#35).
 pub static PAUSED: GlobalSignal<Option<Paper>> = Signal::global(|| None);
+
+/// The questions he marked, on every device (`exam::History::marked`): one
+/// synced setting holding the ids.
+const MARKED_KEY: &str = "bank.marked";
+
+fn stored_marks() -> BTreeSet<String> {
+    crate::store::shared().setting(MARKED_KEY).unwrap_or_default()
+}
+
+/// Keeps a mark, or its removal, in the synced list. It starts from the
+/// stored list, so a mark another device synced meanwhile stays.
+fn keep_mark(id: &str, on: bool) {
+    let mut history = History { marked: stored_marks(), ..History::default() };
+    if history.mark(id, on) {
+        crate::store::save_setting(MARKED_KEY, &history.marked);
+    }
+    if HISTORY.peek().marked != history.marked {
+        HISTORY.write().marked = history.marked;
+    }
+}
 
 #[component]
 pub fn Bank() -> Element {
@@ -250,6 +318,10 @@ pub fn reload_history() {
     if HISTORY.peek().papers != papers {
         HISTORY.write().papers = papers;
     }
+    let marked = stored_marks();
+    if HISTORY.peek().marked != marked {
+        HISTORY.write().marked = marked;
+    }
     if *HISTORY_LOADED.peek() {
         *HISTORY_LOADED.write() = false;
     }
@@ -272,6 +344,7 @@ fn load_history() {
         }
     }
     history.papers = stored_papers();
+    history.marked = stored_marks();
     *HISTORY.write() = history;
 }
 
@@ -343,12 +416,25 @@ pub fn open_question(mut ui: crate::Ui, id: &str) {
 }
 
 pub fn start(mode: Mode, questions: Vec<Question>) {
+    start_paper(mode, false, questions);
+}
+
+/// A new paper, a block or practice. The questions he marked before come
+/// marked.
+pub fn start_paper(mode: Mode, block: bool, questions: Vec<Question>) {
+    // Quick search can start one before the bank ever drew: its memory (the
+    // marks) and a paper the app was killed in are read first, or the new
+    // paper would come unmarked and its save would clear the killed one.
+    load_history();
+    restore_open();
     // A new paper never throws away one he left: that one is scored first.
     if let Some(paused) = PAUSED.write().take() {
         close(paused, now_ms());
     }
     if !questions.is_empty() {
-        *PHASE.write() = Phase::Running(Paper::new(mode, questions));
+        let mut paper = Paper { block, ..Paper::new(mode, questions) };
+        HISTORY.peek().marks_on(&paper.questions, &mut paper.answers);
+        *PHASE.write() = Phase::Running(paper);
         to_top();
     }
     keep_open();
@@ -410,6 +496,29 @@ pub fn choose(option: usize) {
         p.pick(option);
     }
     keep_open();
+}
+
+/// «تأكيد الإجابة»: tutor mode checks the selected option; a timed paper
+/// already holds the pick as its answer, so it moves on to the next
+/// question.
+pub fn confirm() {
+    enum Then {
+        Check,
+        Go(usize),
+        Nothing,
+    }
+    let then = match &*PHASE.peek() {
+        Phase::Running(p) if !p.mode.timed() => Then::Check,
+        Phase::Running(p) if p.answers[p.at].chosen.is_some() && p.at + 1 < p.questions.len() => {
+            Then::Go(p.at + 1)
+        }
+        _ => Then::Nothing,
+    };
+    match then {
+        Then::Check => check(),
+        Then::Go(next) => go(next),
+        Then::Nothing => {}
+    }
 }
 
 /// Tutor mode: check the selected option, reveal the explanation and send
@@ -485,12 +594,76 @@ pub fn go(to: usize) {
     }
 }
 
-pub fn toggle_flag() {
-    if let Phase::Running(p) = &mut *PHASE.write() {
-        let at = p.at;
-        p.answers[at].flagged ^= true;
+/// «علّم» on the question on screen: marked on the paper and in the synced
+/// list of marked questions, or taken off both.
+pub fn toggle_mark() {
+    let marked = match &mut *PHASE.write() {
+        Phase::Running(p) => Some(p.toggle_mark()),
+        _ => None,
+    };
+    if let Some((id, on)) = marked {
+        keep_mark(&id, on);
     }
     keep_open();
+}
+
+/// «علّم» while reviewing a finished paper: the paper's question `at`.
+pub fn toggle_review_mark(at: usize) {
+    let marked = match &mut *PHASE.write() {
+        Phase::Done { paper, .. } if at < paper.questions.len() => {
+            let a = &mut paper.answers[at];
+            a.flagged ^= true;
+            Some((paper.questions[at].id.clone(), a.flagged))
+        }
+        _ => None,
+    };
+    if let Some((id, on)) = marked {
+        keep_mark(&id, on);
+    }
+}
+
+/// A long press or a secondary click on an option: struck out, or back.
+pub fn strike(option: usize) {
+    if let Phase::Running(p) = &mut *PHASE.write() {
+        p.strike(option);
+    }
+    keep_open();
+}
+
+/// Words selected in question `at`'s stem: highlighted, or no longer
+/// (`exam::stem::toggle`), on the running paper or a finished one.
+pub fn highlight(at: usize, start: usize, end: usize) {
+    match &mut *PHASE.write() {
+        Phase::Running(p) => {
+            if let Some(a) = p.answers.get_mut(at) {
+                a.toggle_highlight(start, end);
+            }
+        }
+        Phase::Done { paper, .. } => {
+            if let Some(a) = paper.answers.get_mut(at) {
+                a.toggle_highlight(start, end);
+            }
+        }
+        Phase::Setup => {}
+    }
+    keep_open();
+}
+
+/// «بلوك جديد من الغلط والمتعلّم عليه»: a new paper of the finished one's
+/// wrong, blank and marked questions (`exam::retake`), in its mode, shuffled
+/// again and as Mohamed sees them now (his edits in, his ✗ items out).
+pub fn retake() {
+    let (mode, block, ids) = match &*PHASE.peek() {
+        Phase::Done { paper, .. } => {
+            (paper.mode, paper.block, exam::retake(&paper.questions, &paper.answers))
+        }
+        _ => return,
+    };
+    let lectures: BTreeSet<&str> = ids.iter().map(|id| steps_core::program::lecture_of(id)).collect();
+    let owned = study_lectures_where(|l| lectures.contains(l));
+    let pool: Vec<exam::Mcq> =
+        exam::mcqs(&owned).into_iter().filter(|q| ids.iter().any(|id| id == q.id)).collect();
+    start_paper(mode, block, exam::practice(&pool, pool.len(), now_ms() as u64));
 }
 
 /// End the paper: score it, and for timed papers send every answer to

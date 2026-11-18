@@ -16,7 +16,7 @@ Cost: **$0**. Nothing here needs a card on file. There is no D1 database and no 
 |---|---|---|
 | `review_events` | append-only (a delete is a tombstone) | every review: item, grade, time, and the optional confidence (sure / unsure / guess) and error reason |
 | `item_status` | last writer wins (HLC) | your ✓ / ✎ / ✗ content checks |
-| `settings` | last writer wins (HLC) | retention, new items a day and other study settings; lesson marks; where each unfinished lesson stands (`lessonpos.<id>`: step, answers, notes, score) |
+| `settings` | last writer wins (HLC) | retention, new items a day and other study settings; lesson marks; the bank's finished papers and marked questions (`bank.marked`); where each unfinished lesson stands (`lessonpos.<id>`: step, answers, notes, score) |
 | `own_cards` | last writer wins (HLC, a delete is a tombstone) | the cards you write yourself |
 | `self_assessments` | last writer wins (HLC, a delete is a tombstone) | your NBME / UWSA / Free 120 scores |
 

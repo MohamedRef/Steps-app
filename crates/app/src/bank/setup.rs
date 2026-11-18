@@ -10,7 +10,7 @@ use steps_core::exam::{self, Filter, MOCK_SIZE, Mode, Only};
 use steps_core::program::{Group, course_of};
 
 use super::{
-    HISTORY, PAUSED, date, lecture_title, minutes, now_ms, resume, short_lecture_title, start,
+    HISTORY, PAUSED, date, lecture_title, minutes, now_ms, resume, short_lecture_title, start, start_paper,
     study_lectures, study_lectures_where, submit_paused, topic_title,
 };
 use crate::content::Library;
@@ -194,16 +194,18 @@ const MODES: [(Mode, &str, &str); 3] = [
 enum Empty {
     /// Every question in scope was right last time.
     AllRight,
+    /// No question in scope is marked.
+    NoneMarked,
     /// No question of the chosen kinds in scope.
     Tags,
     /// The chosen topics have no questions.
     Topics,
 }
 
-fn why_empty(filter: &Filter, pool: &[exam::Mcq], last: &exam::LastResults) -> Empty {
-    let any = |f: &Filter| pool.iter().any(|q| f.matches(q, last));
+fn why_empty(filter: &Filter, pool: &[exam::Mcq], history: &exam::History) -> Empty {
+    let any = |f: &Filter| pool.iter().any(|q| f.matches(q, history));
     if filter.only != Only::All && any(&Filter { only: Only::All, ..filter.clone() }) {
-        Empty::AllRight
+        if filter.only == Only::Marked { Empty::NoneMarked } else { Empty::AllRight }
     } else if !filter.tags.is_empty()
         && any(&Filter { tags: BTreeSet::new(), only: Only::All, ..filter.clone() })
     {
@@ -217,7 +219,7 @@ fn why_empty(filter: &Filter, pool: &[exam::Mcq], last: &exam::LastResults) -> E
 fn widen(reason: Empty) {
     let mut f = FILTER.write();
     match reason {
-        Empty::AllRight => f.only = Only::All,
+        Empty::AllRight | Empty::NoneMarked => f.only = Only::All,
         Empty::Tags => {
             f.tags.clear();
             f.only = Only::All;
@@ -269,8 +271,8 @@ pub fn Setup() -> Element {
     let advanced = *ADVANCED.read() && mode != Mode::Mock;
     let filter = FILTER.read().clone();
     let history = HISTORY.read();
-    let selected = filter.select(&pool, &history.last);
-    let empty_reason = selected.is_empty().then(|| why_empty(&filter, &pool, &history.last));
+    let selected = filter.select(&pool, &history);
+    let empty_reason = selected.is_empty().then(|| why_empty(&filter, &pool, &history));
     drop(history);
     let available = selected.len();
     let count = *COUNT.read();
@@ -309,8 +311,10 @@ pub fn Setup() -> Element {
     // What else narrows the scope, said under its title.
     let mut narrowing: Vec<&str> =
         TAGS.iter().filter(|(t, _)| filter.tags.contains(*t)).map(|(_, label)| *label).collect();
-    if filter.only == Only::WrongOrUnseen {
-        narrowing.push(tx::ONLY_WRONG);
+    match filter.only {
+        Only::WrongOrUnseen => narrowing.push(tx::ONLY_WRONG),
+        Only::Marked => narrowing.push(tx::ONLY_MARKED),
+        Only::All => {}
     }
     let (title, latin) = scope_title(&filter, &lectures);
     let filtered = filter != Filter::default();
@@ -319,14 +323,14 @@ pub fn Setup() -> Element {
         let filter = FILTER.read().clone();
         let lectures = study_lectures();
         let pool = exam::mcqs(&lectures);
-        let selected = filter.select(&pool, &HISTORY.read().last);
+        let selected = filter.select(&pool, &HISTORY.read());
         start(*MODE.read(), exam::practice(&selected, *COUNT.read(), now_ms() as u64));
     };
     let start_mock = move |_| {
         let lectures = block_lectures();
         let pool = exam::mcqs(&lectures);
         let mode = if *BLOCK_TUTOR.read() { Mode::Tutor } else { Mode::Mock };
-        start(mode, exam::mock(&pool, *MOCK_COUNT.read(), now_ms() as u64));
+        start_paper(mode, true, exam::mock(&pool, *MOCK_COUNT.read(), now_ms() as u64));
     };
     let shown = count.min(available);
     // The block draws from every course, not just the one in view.
@@ -478,13 +482,14 @@ pub fn Setup() -> Element {
                                 p { class: "small",
                                     match reason {
                                         Empty::AllRight => tx::EMPTY_ALL_RIGHT,
+                                        Empty::NoneMarked => tx::EMPTY_NONE_MARKED,
                                         Empty::Tags => tx::EMPTY_TAGS,
                                         Empty::Topics => tx::EMPTY_TOPICS,
                                     }
                                 }
                                 button { class: "btn btn-tonal", onclick: move |_| widen(reason),
                                     match reason {
-                                        Empty::AllRight => tx::WIDEN_ALL_RIGHT,
+                                        Empty::AllRight | Empty::NoneMarked => tx::WIDEN_ALL_RIGHT,
                                         Empty::Tags => tx::WIDEN_TAGS,
                                         Empty::Topics => tx::WIDEN_ALL,
                                     }
@@ -585,13 +590,17 @@ pub fn Setup() -> Element {
                                         {label}
                                     }
                                 }
-                                Chip {
-                                    on: filter.only == Only::WrongOrUnseen,
-                                    onclick: move |_| {
-                                        let mut f = FILTER.write();
-                                        f.only = if f.only == Only::All { Only::WrongOrUnseen } else { Only::All };
-                                    },
-                                    {tx::ONLY_WRONG}
+                                // One at a time: wrong or unseen, or the marked ones.
+                                for (only, label) in [(Only::WrongOrUnseen, tx::ONLY_WRONG), (Only::Marked, tx::ONLY_MARKED)] {
+                                    Chip {
+                                        key: "{only:?}",
+                                        on: filter.only == only,
+                                        onclick: move |_| {
+                                            let mut f = FILTER.write();
+                                            f.only = if f.only == only { Only::All } else { only };
+                                        },
+                                        {label}
+                                    }
                                 }
                             }
                             if filtered {

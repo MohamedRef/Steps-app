@@ -1,24 +1,46 @@
-//! One MCQ on screen: stem, its figure when it has one (VQ questions,
-//! `crate::vq`), options, and (once revealed) the right answer, why each
-//! option is right or wrong, a VQ question's educational objective, the book
-//! page (or `VQ-0001`) and any guideline update.
+//! One MCQ on screen: stem (with his highlights, `stem.rs`), its figure when
+//! it has one (VQ questions, `crate::vq`), options he can strike out, and
+//! once revealed the verdict, the right answer, why each option is right or
+//! wrong, a VQ question's educational objective, the lecture and topic, the
+//! book page (or `VQ-0001`), the ✓ / ✎ / ✗ check and any guideline update.
+//! Side by side from 840dp (`desk::Panes`), stacked below.
 
 use dioxus::prelude::*;
 use steps_core::content::Body;
-use steps_core::exam::Question;
+use steps_core::exam::{Answer, Graded, Question};
 use steps_core::review::verify::Check;
 
+use super::stem::Stem;
 use super::{lookup, topic_title};
 use crate::i18n::bank as tx;
 use crate::store::use_review;
 
+/// The letter an option is shown under: A for the first shown.
+pub fn letter(shown: usize) -> char {
+    char::from(b'A' + (shown.min(25)) as u8)
+}
+
+/// The right option's letter as shown, and the picked one's.
+pub fn letters(q: &Question, chosen: Option<usize>) -> (char, Option<char>) {
+    let shown = |orig: usize| q.order.iter().position(|&o| o == orig).map(letter);
+    (shown(q.answer).unwrap_or('?'), chosen.and_then(shown))
+}
+
 #[component]
 pub fn QuestionView(
     q: Question,
+    /// What he did with it on the paper: struck options, highlights, time.
+    a: Answer,
+    /// The option shown as picked: the draft (tutor) or the answer.
     chosen: Option<usize>,
     reveal: bool,
+    /// The question's place in its paper, for the stem's highlights.
+    at: usize,
     /// Called with the original option index; `None` makes the options read-only.
     onchoose: Option<EventHandler<usize>>,
+    /// A long press or a secondary click on an option (original index).
+    #[props(default)]
+    onstrike: Option<EventHandler<usize>>,
 ) -> Element {
     let Some((lecture, item)) = lookup(&q.id) else {
         return rsx! { p { class: "note", {tx::NOT_FOUND} } };
@@ -31,9 +53,8 @@ pub fn QuestionView(
     let rows = q.order.iter().enumerate().filter_map(|(shown, &orig)| {
         let text = options.get(orig)?.clone();
         let reason = why.get(orig).cloned().unwrap_or_default();
-        let letter = char::from(b'A' + shown as u8);
         let state = answer_state(reveal, orig == q.answer, chosen == Some(orig));
-        Some((orig, letter, text, reason, state))
+        Some((orig, letter(shown), text, reason, state, a.struck.contains(&orig)))
     });
     let rows: Vec<_> = rows.collect();
     let locked = onchoose.is_none();
@@ -41,48 +62,55 @@ pub fn QuestionView(
     let primary = rsx! {
         crate::ui::Card { element: crate::ui::CardElement::Article, class: "q",
             "data-course": steps_core::program::course_of(&item.id),
-            // Once the answer shows, the lecture chip opens the lecture's
-            // page. While a paper runs it stays a label, so a stray tap never
-            // leaves the paper.
-            div { class: "q-meta",
-                if reveal {
+            if reveal {
+                Verdict { q: q.clone(), chosen, took_ms: a.took_ms }
+                // The lecture and topic say what the question tested, so
+                // they wait for the answer: the topic is often the diagnosis
+                // the stem asks for (#743), the lecture a cue in a mixed
+                // block. The lecture chip opens the lecture's page.
+                div { class: "q-meta",
                     button {
                         class: "chip tap",
                         title: tx::OPEN_LECTURE,
                         onclick: { let id = lecture.lecture.clone(); move |_| crate::lecture::open(ui, &id) },
                         bdi { "{crate::content::Library::get().crumb(&lecture.lecture)}" }
                     }
-                } else {
-                    span { class: "chip", bdi { "{crate::content::Library::get().crumb(&lecture.lecture)}" } }
+                    if let Some(t) = topic {
+                        span { class: "chip", bdi { "{t}" } }
+                    }
                 }
-                // The topic is a First Aid heading: often the diagnosis the
-                // stem asks him to work out, sometimes the keyed option
-                // itself. It shows with the answer, never before.
-                if let Some(t) = topic.filter(|_| reveal) {
-                    span { class: "chip", bdi { "{t}" } }
-                }
-                // As on the exam screen: the lab values, a tap from any question.
-                crate::labs::LabButton { class: "q-labs" }
             }
-            p { class: "q-stem", lang: "en", dir: "ltr", "{stem}" }
+            Stem { text: stem.clone(), highlights: a.highlights.clone(), at }
             crate::vq::Figure { item_id: item.id.clone() }
             ol { class: "q-options", lang: "en", dir: "ltr",
-                for (orig, letter, text, reason, state) in rows.clone() {
+                for (orig, letter, text, reason, state, struck) in rows.clone() {
                     li { key: "{orig}",
                         button {
                             class: "q-option answer",
                             "data-state": state,
+                            "data-struck": if struck { "true" } else { "false" },
                             disabled: locked,
                             "aria-pressed": if chosen == Some(orig) { "true" } else { "false" },
-                            "aria-keyshortcuts": if locked { "" } else { letter.to_string() },
+                            // A–E; F marks the question (bar.rs).
+                            "aria-keyshortcuts": if locked || letter > 'E' { String::new() } else { letter.to_string() },
                             "data-peek": if reveal { reason.clone() } else { String::new() },
                             onclick: move |_| {
                                 if let Some(h) = onchoose {
                                     h.call(orig);
                                 }
                             },
+                            // A long press (touch) or a secondary click strikes it out.
+                            oncontextmenu: move |e: MouseEvent| {
+                                if let Some(h) = onstrike {
+                                    e.prevent_default();
+                                    h.call(orig);
+                                }
+                            },
                             span { class: "answer-key", "{letter}" }
                             span { class: "q-text answer-text", "{text}" }
+                            if struck {
+                                span { class: "bank-sr", lang: "ar", dir: "rtl", "، {tx::STRUCK}" }
+                            }
                             // The state in words, so it never rests on colour alone.
                             if reveal && state == "correct" {
                                 span { class: "answer-mark", lang: "ar", dir: "rtl", "✓ {tx::RIGHT_PICKED}" }
@@ -106,12 +134,13 @@ pub fn QuestionView(
     if !reveal {
         return primary;
     }
-    // The explanation: why for every option (wide windows), the book page,
-    // the ✓ / ✎ / ✗ check and any guideline update.
+    // The explanation: why for every option (wide windows), the objective,
+    // the book page or the VQ number, the ✓ / ✎ / ✗ check and any update.
     let secondary = rsx! {
         crate::ui::Card { element: crate::ui::CardElement::Div, class: "q-explain",
+            h2 { class: "q-explain-head", {tx::EXPLANATION} }
             ol { class: "q-why-list", lang: "en", dir: "ltr",
-                for (orig, letter, _, reason, state) in rows {
+                for (orig, letter, _, reason, state, _) in rows {
                     li { key: "{orig}", "data-state": if matches!(state, "correct" | "missed") { "right" } else { state },
                         span { class: "q-letter", "{letter}" }
                         if matches!(state, "correct" | "missed") {
@@ -131,10 +160,6 @@ pub fn QuestionView(
                     Some(label) => rsx! { crate::vq::SourceChip { label } },
                     None => rsx! { crate::hover::BookPage { page: item.src.page, quote, of: item.id.clone() } },
                 }
-                crate::notes::NoteChip {
-                    anchor: steps_core::note::Anchor::Item(item.id.clone()),
-                    page: item.src.first_aid_page(),
-                }
             }
             // A miss shows the cards that hold what it tested.
             if chosen != Some(q.answer) {
@@ -152,6 +177,33 @@ pub fn QuestionView(
     };
     rsx! {
         crate::desk::Panes { primary, secondary: Some(secondary) }
+    }
+}
+
+/// «إجابة غلط · اخترت C، والإجابة الصح B · الوقت 1:12» over an answered
+/// question. Its words are on screen; the player's live region reads the
+/// verdict out once.
+#[component]
+fn Verdict(q: Question, chosen: Option<usize>, took_ms: u32) -> Element {
+    let a = Answer { chosen, ..Answer::default() };
+    let graded = a.graded(&q);
+    let (right, picked) = letters(&q, chosen);
+    let (tone, word, icon) = match graded {
+        Graded::Right => ("good", tx::VERDICT_RIGHT, "✓"),
+        Graded::Wrong => ("bad", tx::VERDICT_WRONG, "✗"),
+        Graded::Blank => ("blank", tx::VERDICT_BLANK, "–"),
+    };
+    rsx! {
+        div { class: "q-verdict", "data-tone": tone,
+            span { class: "q-verdict-icon", aria_hidden: "true", "{icon}" }
+            strong { {word} }
+            span { class: "q-verdict-picked", {tx::picked(picked, right)} }
+            if took_ms > 0 {
+                span { class: "q-verdict-time muted small",
+                    "{tx::TOOK} " bdi { class: "num-ltr", {super::clock::face(u64::from(took_ms))} }
+                }
+            }
+        }
     }
 }
 

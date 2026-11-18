@@ -198,6 +198,21 @@ pub fn refresh() -> Element {
     stroke("M19.5 12a7.5 7.5 0 1 1-2.2-5.3M19.5 4.5v4h-4")
 }
 
+/// A mark on a question in a paper: a flag on its pole.
+pub fn flag() -> Element {
+    stroke("M5 21V4M5 4h11l-2 4 2 4H5")
+}
+
+/// A paper's clock: a stopwatch.
+pub fn clock() -> Element {
+    stroke("M12 5a8 8 0 1 0 0 16 8 8 0 1 0 0-16zM12 9v4l2 2M9 2h6")
+}
+
+/// A paper's questions at a glance (its navigator): four squares.
+pub fn grid() -> Element {
+    stroke("M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z")
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
