@@ -1,23 +1,17 @@
 //! The paper's top bar, as a Step 1 question bank's test interface has one,
-//! in Steps' look: the paper's kind and «سؤال N من M», a VQ question's
-//! number, the mark, the moves, the tools (lab values, a note), the clock
-//! and «إنهاء البلوك». Under 840dp «N / M» opens the navigator; under 600dp
-//! the bar is compact: «N / M», the number, the clock, the mark and a tools
-//! menu, with the moves at the foot of the screen (`player.rs`).
+//! in Steps' look: the way out, the paper's kind and «سؤال N من M», a VQ
+//! question's number, the mark, the moves, the tools (lab values, a note),
+//! the clock and «إنهاء البلوك». Under 840dp «N / M» opens the navigator;
+//! under 600dp the bar is compact: «N / M», the number, the clock, the mark
+//! and a tools menu, with the moves at the foot of the screen (`player.rs`).
+//! Which parts show at which width is bank.css's job; the markup is the
+//! same at every width.
 
 use dioxus::prelude::*;
 use steps_core::note::Anchor;
 
 use super::clock::{Clock, ClockChip};
 use crate::i18n::bank as tx;
-
-/// How the bar ends: a running paper's «إنهاء البلوك», or a review's way
-/// back to the result (its way out, so Back takes it).
-#[derive(Debug, Clone, Copy, PartialEq, Eq)]
-pub enum End {
-    Paper,
-    Review,
-}
 
 #[component]
 pub fn ExamBar(
@@ -34,34 +28,30 @@ pub fn ExamBar(
     ongo: EventHandler<usize>,
     clock: Clock,
     onnav: EventHandler<()>,
-    end: End,
-    onend: EventHandler<()>,
-    /// The running paper's ✕: leave it (a timed one waits, its clock on).
-    onleave: Option<EventHandler<()>>,
-    #[props(default)] leave_hint: String,
+    /// The ✕ at the bar's start: leave the paper (a timed one waits, its
+    /// clock on), or close a review. Android Back and Escape take it.
+    onout: EventHandler<()>,
+    out_label: String,
+    #[props(default)] out_hint: String,
+    /// «إنهاء البلوك», on a running paper; a review has none.
+    onend: Option<EventHandler<()>>,
 ) -> Element {
     let mut tools = use_signal(|| false);
     // A VQ question's number; a First Aid question has none to show.
     let label = crate::vq::name(&item_id);
-    let end_label = match end {
-        End::Paper => tx::END,
-        End::Review => tx::BACK_TO_RESULT,
-    };
-    let review = end == End::Review;
+    let hint = if out_hint.is_empty() { out_label.clone() } else { out_hint.clone() };
     rsx! {
         header { class: "exam-bar",
-            if let Some(leave) = onleave {
-                button {
-                    class: "icon-button run-leave",
-                    // Android Back takes it while the app's bar is hidden.
-                    "data-back": "true",
-                    // Esc leaves too, as in study, lessons and cases (UX #296).
-                    "aria-keyshortcuts": "Escape",
-                    "aria-label": tx::LEAVE,
-                    title: if leave_hint.is_empty() { tx::LEAVE.to_string() } else { leave_hint.clone() },
-                    onclick: move |_| leave.call(()),
-                    span { aria_hidden: "true", "✕" }
-                }
+            button {
+                class: "icon-button run-leave",
+                // Android Back takes it while the app's bar is hidden.
+                "data-back": "true",
+                // Esc leaves too, as in study, lessons and cases (UX #296).
+                "aria-keyshortcuts": "Escape",
+                "aria-label": "{out_label}",
+                title: "{hint}",
+                onclick: move |_| onout.call(()),
+                span { aria_hidden: "true", "✕" }
             }
             div { class: "exam-where",
                 span { class: "chip exam-kind", "data-tone": "accent", "{kind}" }
@@ -94,36 +84,30 @@ pub fn ExamBar(
                 Move { to: prev, next: false, ongo }
                 Move { to: next, next: true, ongo }
             }
-            span { class: "exam-grow" }
-            div { class: "exam-tools",
-                crate::labs::LabButton { class: "exam-tool" }
-                crate::notes::NoteChip { anchor: Anchor::Item(item_id.clone()), page, show_text: false }
-            }
-            ClockChip { clock }
-            button {
-                class: if review { "btn btn-secondary exam-end" } else { "btn btn-danger exam-end" },
-                "data-exit": if review { "true" } else { "false" },
-                "data-back": if review { "true" } else { "false" },
-                "aria-keyshortcuts": if review { "Escape" } else { "" },
-                onclick: move |_| onend.call(()),
-                {end_label}
-            }
-            button {
-                class: "icon-button exam-more",
-                aria_haspopup: "dialog",
-                "aria-label": tx::TOOLS,
-                title: tx::TOOLS_TITLE,
-                onclick: move |_| tools.set(true),
-                {crate::icons::more()}
+            // The tools, the clock, the end and ⋮ keep together: when the
+            // bar wraps, they go to its second line as one.
+            div { class: "exam-side",
+                div { class: "exam-tools",
+                    crate::labs::LabButton { class: "exam-tool" }
+                    crate::notes::NoteChip { anchor: Anchor::Item(item_id.clone()), page, show_text: false }
+                }
+                ClockChip { clock }
+                if let Some(end) = onend {
+                    button { class: "btn btn-danger exam-end", onclick: move |_| end.call(()), {tx::END} }
+                }
+                // Where the tools don't fit in the bar, they are here.
+                button {
+                    class: "icon-button exam-more",
+                    aria_haspopup: "dialog",
+                    "aria-label": if onend.is_some() { tx::TOOLS } else { tx::TOOLS_REVIEW },
+                    title: tx::TOOLS_TITLE,
+                    onclick: move |_| tools.set(true),
+                    {crate::icons::more()}
+                }
             }
         }
         if tools() {
-            ToolsSheet {
-                item_id: item_id.clone(),
-                page,
-                end: if review { None } else { Some(onend) },
-                onclose: move |_| tools.set(false),
-            }
+            ToolsSheet { item_id: item_id.clone(), page, end: onend, onclose: move |_| tools.set(false) }
         }
     }
 }
@@ -171,6 +155,7 @@ fn ToolsSheet(
                 h2 { id: "exam-tools-title", {tx::TOOLS_TITLE} }
                 button {
                     class: "btn btn-ghost bank-close",
+                    autofocus: true,
                     "data-back": "true",
                     "aria-keyshortcuts": "Escape",
                     onclick: move |_| onclose.call(()),
@@ -181,6 +166,7 @@ fn ToolsSheet(
                 li {
                     button {
                         class: "tap tap-row",
+                        aria_haspopup: "dialog",
                         onclick: move |_| {
                             onclose.call(());
                             crate::labs::open();
@@ -199,7 +185,7 @@ fn ToolsSheet(
                         },
                         span { class: "row-icon", aria_hidden: "true", {crate::icons::notes()} }
                         span { class: "tap-row-main",
-                            if has_note { {crate::i18n::notes::CHIP_HAS} } else { {crate::i18n::notes::CHIP_ADD} }
+                            if has_note { {crate::i18n::notes::CHIP_HAS} } else { {crate::i18n::notes::ADD_HINT} }
                         }
                     }
                 }

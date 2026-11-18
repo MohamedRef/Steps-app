@@ -7,9 +7,9 @@
 use dioxus::prelude::*;
 use steps_core::exam::{Answer, Graded, Question};
 
-use super::bar::{End, ExamBar, Move};
+use super::bar::{ExamBar, Move};
 use super::clock::Clock;
-use super::navigator::{Cell, CellState, NavColumn, NavSheet};
+use super::navigator::{Cell, CellState, Legend, NavColumn, NavSheet};
 use super::question::QuestionView;
 use super::{PHASE, Phase, lookup, toggle_review_mark};
 use crate::i18n::bank as tx;
@@ -83,7 +83,7 @@ pub fn Review(at: usize, show: Show, ongo: EventHandler<usize>, onclose: EventHa
         .collect();
     let page = lookup(&q.id).and_then(|(_, item)| item.src.first_aid_page());
     rsx! {
-        div { class: "bank-run", "data-mode": "review",
+        div { class: "bank-run", "data-mode": "review", "data-reveal": "true",
             div { class: "run-sticky",
                 ExamBar {
                     kind: format!("{} · {}", tx::REVIEWING, show.label()),
@@ -98,12 +98,14 @@ pub fn Review(at: usize, show: Show, ongo: EventHandler<usize>, onclose: EventHa
                     ongo,
                     clock: Clock::On { took_ms: u64::from(a.took_ms), since_ms: None },
                     onnav: move |_| nav_open.set(true),
-                    end: End::Review,
-                    onend: onclose,
+                    // Its way out is back to the result; it has no end.
+                    onout: onclose,
+                    out_label: tx::BACK_TO_RESULT.to_string(),
+                    onend: None,
                 }
             }
             div { class: "run-body",
-                NavColumn { cells: cells.clone(), at, results: true, ongo }
+                NavColumn { cells: cells.clone(), at, legend: Legend::Review, ongo }
                 div { class: "run-main",
                     QuestionView { key: "{q.id}-{at}", q: q.clone(), a: a.clone(), chosen: a.chosen, reveal: true, at, onchoose: None }
                     div { class: "run-foot",
@@ -123,7 +125,7 @@ pub fn Review(at: usize, show: Show, ongo: EventHandler<usize>, onclose: EventHa
                 }
             }
             if nav_open() {
-                NavSheet { cells, at, results: true, ongo, onclose: move |_| nav_open.set(false) }
+                NavSheet { cells, at, legend: Legend::Review, ongo, onclose: move |_| nav_open.set(false) }
             }
         }
     }

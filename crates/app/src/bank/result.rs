@@ -53,6 +53,8 @@ pub fn Result() -> Element {
         .enumerate()
         .map(|(i, (q, a))| (i, crate::vq::name(&q.id), lib.crumb(&q.lecture), a.graded(q), a.took_ms, a.flagged))
         .collect();
+    // A VQ question can be found again by its number in quick search.
+    let numbered = rows.iter().any(|r| r.1.is_some());
     // Courses in the book's order; any the program doesn't list, last.
     let mut courses: Vec<(String, Score)> = lib
         .program
@@ -142,7 +144,10 @@ pub fn Result() -> Element {
                             thead {
                                 tr {
                                     th { scope: "col", {tx::COL_NO} }
-                                    th { scope: "col", {tx::COL_ID} }
+                                    // Only VQ questions have an id to show.
+                                    if numbered {
+                                        th { scope: "col", {tx::COL_ID} }
+                                    }
                                     th { scope: "col", {tx::COL_LECTURE} }
                                     th { scope: "col", {tx::COL_RESULT} }
                                     th { scope: "col", {tx::COL_TIME} }
@@ -171,7 +176,9 @@ pub fn Result() -> Element {
                                                 }
                                             }
                                         }
-                                        td { if let Some(label) = label { bdi { dir: "ltr", lang: "en", "{label}" } } }
+                                        if numbered {
+                                            td { if let Some(label) = label { bdi { dir: "ltr", lang: "en", "{label}" } } }
+                                        }
                                         td { bdi { "{crumb}" } }
                                         td { class: "sum-result",
                                             match graded {
@@ -186,7 +193,10 @@ pub fn Result() -> Element {
                             }
                         }
                     }
-                    p { class: "muted small", {tx::TABLE_HINT} }
+                    p { class: "muted small",
+                        {tx::TABLE_HINT}
+                        if numbered { " " {tx::TABLE_HINT_VQ} }
+                    }
                 }
                 crate::ui::Card { class: "sum-courses-card",
                     h2 { {tx::BY_COURSE} }

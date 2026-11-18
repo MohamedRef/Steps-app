@@ -56,43 +56,59 @@ fn state_name(s: CellState) -> &'static str {
     }
 }
 
-/// The cells and their legend. `results` adds right and wrong to the legend
-/// (a tutor paper, a review).
+/// Which states a navigator's legend names: a timed paper shows answered
+/// ones, a tutor paper and a review right and wrong; a review's blanks were
+/// never answered rather than not yet.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Legend {
+    Timed,
+    Tutor,
+    Review,
+}
+
+/// The cells and their legend.
 #[component]
-pub fn Navigator(cells: Vec<Cell>, at: usize, results: bool, ongo: EventHandler<usize>) -> Element {
+pub fn Navigator(cells: Vec<Cell>, at: usize, legend: Legend, ongo: EventHandler<usize>) -> Element {
     rsx! {
-        div { class: "navigator", role: "list",
+        // A list of buttons (not buttons playing list items), so each cell
+        // stays a button to a screen reader. The numbers run left to right,
+        // as the question's own text does.
+        ol { class: "navigator", dir: "ltr",
             for (i, cell) in cells.into_iter().enumerate() {
-                button {
-                    key: "{i}",
-                    role: "listitem",
-                    class: "nav-cell",
-                    "data-state": state_name(cell.state),
-                    "data-flag": if cell.marked { "yes" } else { "no" },
-                    "aria-current": if i == at { "true" } else { "false" },
-                    // The state is spoken too, not only drawn.
-                    "aria-label": cell_label(i, cell, i == at),
-                    onclick: move |_| ongo.call(i),
-                    span { class: "nav-num", "{i + 1}" }
-                    match cell.state {
-                        CellState::Right => rsx! { span { class: "nav-mark", aria_hidden: "true", "✓" } },
-                        CellState::Wrong => rsx! { span { class: "nav-mark", aria_hidden: "true", "✗" } },
-                        _ => rsx! {},
-                    }
-                    if cell.marked {
-                        span { class: "nav-flag", aria_hidden: "true", {crate::icons::flag()} }
+                li { key: "{i}",
+                    button {
+                        class: "nav-cell",
+                        "data-state": state_name(cell.state),
+                        "data-flag": if cell.marked { "yes" } else { "no" },
+                        "aria-current": if i == at { "true" } else { "false" },
+                        // The state is spoken too, not only drawn.
+                        "aria-label": cell_label(i, cell, i == at),
+                        onclick: move |_| ongo.call(i),
+                        span { class: "nav-num", "{i + 1}" }
+                        match cell.state {
+                            CellState::Right => rsx! { span { class: "nav-mark", aria_hidden: "true", "✓" } },
+                            CellState::Wrong => rsx! { span { class: "nav-mark", aria_hidden: "true", "✗" } },
+                            _ => rsx! {},
+                        }
+                        if cell.marked {
+                            span { class: "nav-flag", aria_hidden: "true", {crate::icons::flag()} }
+                        }
                     }
                 }
             }
         }
         ul { class: "nav-legend", aria_hidden: "true",
-            li { span { class: "nav-swatch", "data-state": "answered" } {tx::LEGEND_ANSWERED} }
-            li { span { class: "nav-swatch", "data-state": "blank" } {tx::LEGEND_BLANK} }
-            li { span { class: "nav-swatch nav-flag", {crate::icons::flag()} } {tx::MARKED} }
-            if results {
+            if legend == Legend::Timed {
+                li { span { class: "nav-swatch", "data-state": "answered" } {tx::LEGEND_ANSWERED} }
+            } else {
                 li { span { class: "nav-swatch", "data-state": "right", "✓" } {tx::LEGEND_RIGHT} }
                 li { span { class: "nav-swatch", "data-state": "wrong", "✗" } {tx::LEGEND_WRONG} }
             }
+            li {
+                span { class: "nav-swatch", "data-state": "blank" }
+                if legend == Legend::Review { {tx::TILE_BLANK} } else { {tx::LEGEND_BLANK} }
+            }
+            li { span { class: "nav-swatch nav-flag", {crate::icons::flag()} } {tx::MARKED} }
         }
     }
 }
@@ -100,11 +116,11 @@ pub fn Navigator(cells: Vec<Cell>, at: usize, results: bool, ongo: EventHandler<
 /// The navigator as a column beside the question (from 840dp; hidden
 /// narrower, where [`NavSheet`] takes its place).
 #[component]
-pub fn NavColumn(cells: Vec<Cell>, at: usize, results: bool, ongo: EventHandler<usize>) -> Element {
+pub fn NavColumn(cells: Vec<Cell>, at: usize, legend: Legend, ongo: EventHandler<usize>) -> Element {
     rsx! {
         crate::ui::Card { element: crate::ui::CardElement::Aside, class: "run-nav", aria_label: tx::NAV_LABEL,
             h2 { class: "run-nav-title", {tx::NAV_TITLE} }
-            Navigator { cells, at, results, ongo }
+            Navigator { cells, at, legend, ongo }
         }
     }
 }
@@ -115,7 +131,7 @@ pub fn NavColumn(cells: Vec<Cell>, at: usize, results: bool, ongo: EventHandler<
 pub fn NavSheet(
     cells: Vec<Cell>,
     at: usize,
-    results: bool,
+    legend: Legend,
     ongo: EventHandler<usize>,
     onclose: EventHandler<()>,
 ) -> Element {
@@ -140,7 +156,7 @@ pub fn NavSheet(
             Navigator {
                 cells,
                 at,
-                results,
+                legend,
                 ongo: move |i| {
                     onclose.call(());
                     ongo.call(i);

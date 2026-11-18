@@ -355,7 +355,10 @@ fn the_result_opens_each_question_and_goes_back_to_the_bank() {
     app.assert_has(&tx::question_of(1, n));
     app.assert_has(tx::RIGHT_PICKED);
     app.assert_has(tx::EXPLANATION);
-    app.tap("exam-end");
+    // Its ✕ goes back to the result, and Back takes it.
+    assert_eq!(attr_of(&app, "run-leave", "aria-label"), tx::BACK_TO_RESULT);
+    assert_eq!(attr_of(&app, "run-leave", "data-back"), "true");
+    app.tap(tx::BACK_TO_RESULT);
     app.assert_lacks(tx::BACK_TO_RESULT);
     app.tap(tx::BACK);
     app.assert_has(tx::START_TUTOR);
@@ -389,7 +392,7 @@ fn a_timed_paper_marks_moves_and_asks_before_it_goes_in() {
     app.tap("exam-end");
     app.assert_has(tx::CONFIRM_TITLE);
     app.assert_has(&tx::confirm_blank(n - 1));
-    app.assert_has(tx::CONFIRM_MARKED);
+    app.assert_has(&tx::confirm_marked(1));
     app.tap(tx::CONFIRM_BACK_TO);
     app.assert_lacks(tx::CONFIRM_TITLE);
     app.assert_has(&format!("2 / {n}"));
@@ -408,7 +411,7 @@ fn a_timed_paper_marks_moves_and_asks_before_it_goes_in() {
     app.tap(tx::MARKED);
     app.assert_has(&format!("{} · {}", tx::REVIEWING, tx::SHOW_MARKED));
     app.assert_has(&tx::question_of(1, n));
-    app.tap("exam-end");
+    app.tap(tx::BACK_TO_RESULT);
 
     // The paper is kept in the history on the setup.
     app.tap(tx::BACK);
@@ -861,7 +864,7 @@ fn ending_with_blanks_asks_once_and_the_backdrop_closes_it() {
     app.tap("exam-end");
     app.assert_has(&tx::confirm_blank(n - 1));
     // Nothing marked: the sheet says nothing of marks.
-    app.assert_lacks(tx::CONFIRM_MARKED);
+    app.assert_lacks(&tx::confirm_marked(1));
     // The way back is to the first blank, the second question.
     app.assert_has(tx::CONFIRM_BACK_TO);
     app.tap("sheet-backdrop");
@@ -1317,7 +1320,9 @@ fn the_end_of_a_block_sums_it_up() {
     app.tap(tx::NEXT);
     app.assert_has(&tx::question_of(3, n));
     app.assert_has(tx::VERDICT_BLANK);
-    app.tap("exam-end");
+    // A review has no end of its own: its way out is back to the result.
+    assert!(with_class(&app, "exam-end").is_empty());
+    app.tap(tx::BACK_TO_RESULT);
 
     // A new paper of the wrong, blank and marked ones, marks kept.
     app.tap(tx::RETAKE);
@@ -1349,7 +1354,7 @@ fn the_compact_bar_opens_the_navigator_and_the_tools_as_sheets() {
     app.tap(tx::CONFIRM_BACK_TO);
     app.tap("exam-more");
     // The bar's own note chip comes first.
-    app.tap_nth(crate::i18n::notes::CHIP_ADD, 1);
+    app.tap_nth(crate::i18n::notes::ADD_HINT, 1);
     assert!(with_class(&app, "exam-tools-sheet").is_empty(), "the menu closes as the note opens");
 }
 

@@ -100,6 +100,8 @@ pub const MARKED: &str = "متعلّم عليه";
 pub const END: &str = "إنهاء البلوك";
 pub const LEAVE: &str = "اخرج";
 pub const TOOLS: &str = "أدوات: القيم المعملية، ملاحظة، إنهاء البلوك";
+/// The tools menu of a finished paper's review, which has no end.
+pub const TOOLS_REVIEW: &str = "أدوات: القيم المعملية، ملاحظة";
 pub const TOOLS_TITLE: &str = "أدوات";
 pub const LEFT_ABOUT: &str = "فاضل حوالي";
 /// The clock of a timed paper: «الوقت الباقي 18 دقيقة و42 ثانية».
@@ -182,6 +184,8 @@ pub const COL_LECTURE: &str = "المادة والـ system";
 pub const COL_RESULT: &str = "النتيجة";
 pub const COL_TIME: &str = "الوقت";
 pub const TABLE_HINT: &str = "دوس على أي سؤال يفتحلك بالشرح.";
+/// After [`TABLE_HINT`] when the paper has VQ questions (quick search finds `VQ-0001`).
+pub const TABLE_HINT_VQ: &str = "وتقدر تكتب أي ID في البحث يطلعلك السؤال.";
 /// A row's button, for screen readers: «افتح سؤال 3 بالشرح».
 pub fn open_question(n: usize) -> String {
     format!("افتح {QUESTION} {n} بالشرح")
@@ -216,7 +220,14 @@ pub const CONFIRM_TITLE: &str = "تنهي البلوك دلوقتي؟";
 pub fn confirm_blank(n: usize) -> String {
     format!("لسه {} من غير إجابة، والفاضي مالوش درجة.", questions(n))
 }
-pub const CONFIRM_MARKED: &str = "متعلّم عليهم كنت عايز ترجعلهم.";
+/// «وفيه سؤالين متعلّم عليهم كنت عايز ترجعلهم.»
+pub fn confirm_marked(n: usize) -> String {
+    if n == 1 {
+        "وفيه سؤال متعلّم عليه كنت عايز ترجعله.".to_string()
+    } else {
+        format!("وفيه {} متعلّم عليهم كنت عايز ترجعلهم.", questions(n))
+    }
+}
 pub const CONFIRM_BACK_TO: &str = "ارجع للسؤال";
 pub const CONFIRM_BACK: &str = "ارجع للامتحان";
 pub const CONFIRM_END: &str = "أنهي البلوك كده";

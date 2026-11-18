@@ -7,9 +7,9 @@
 use dioxus::prelude::*;
 use steps_core::exam::{self, Mode};
 
-use super::bar::{End, ExamBar, Move};
+use super::bar::{ExamBar, Move};
 use super::clock::Clock;
-use super::navigator::{Cell, CellState, NavColumn, NavSheet};
+use super::navigator::{Cell, CellState, Legend, NavColumn, NavSheet};
 use super::question::{QuestionView, letters};
 use super::{
     PHASE, Phase, check, choose, confirm, finish, go, leave, lookup, minutes, now_ms, set_confidence,
@@ -62,6 +62,7 @@ pub fn Player() -> Element {
         Clock::On { took_ms: u64::from(a.took_ms), since_ms: (!checked).then_some(p.shown_ms) }
     };
     let page = lookup(&q.id).and_then(|(_, item)| item.src.first_aid_page());
+    let legend = if timed { Legend::Timed } else { Legend::Tutor };
     // Blanks left: he is asked once before the paper goes in.
     let mut end = move |_: ()| {
         if answered < n {
@@ -74,7 +75,12 @@ pub fn Player() -> Element {
     let next = (!last).then_some(at + 1);
 
     rsx! {
-        div { class: "bank-run", "data-mode": if timed { "timed" } else { "tutor" },
+        div {
+            class: "bank-run",
+            "data-mode": if timed { "timed" } else { "tutor" },
+            // With the answer out, the explanation may take the navigator's
+            // column (bank.css).
+            "data-reveal": if checked { "true" } else { "false" },
             // The bar, and a timed paper's clock, stay in view while he
             // scrolls a long question (#234).
             div { class: "run-sticky",
@@ -91,10 +97,10 @@ pub fn Player() -> Element {
                     ongo: go,
                     clock,
                     onnav: move |_| nav_open.set(true),
-                    end: End::Paper,
-                    onend: end,
-                    onleave: move |_| leave(),
-                    leave_hint: if timed { tx::LEAVE_TIMED_HINT.to_string() } else { String::new() },
+                    onout: move |_| leave(),
+                    out_label: tx::LEAVE.to_string(),
+                    out_hint: if timed { tx::LEAVE_TIMED_HINT.to_string() } else { String::new() },
+                    onend: Some(EventHandler::new(end)),
                 }
                 if timed {
                     Timer { key: "{p.started_ms}", n, started_ms: p.started_ms }
@@ -106,7 +112,7 @@ pub fn Player() -> Element {
                 if checked { {tx::checked(a.correct(&q), right_letter)} }
             }
             div { class: "run-body",
-                NavColumn { cells: cells.clone(), at, results: !timed, ongo: go }
+                NavColumn { cells: cells.clone(), at, legend, ongo: go }
                 div { class: "run-main",
                     QuestionView {
                         key: "{q.id}-{at}",
@@ -136,12 +142,6 @@ pub fn Player() -> Element {
                     div { class: "run-foot",
                         Move { to: prev, next: false, ongo: go }
                         div { class: "run-foot-main",
-                            if !checked && !(timed && last) {
-                                p { class: "muted small run-hint", {tx::TOOLS_HINT} }
-                                if selected.is_none() {
-                                    span { class: "bank-sr", {tx::PICK_FIRST} }
-                                }
-                            }
                             if checked && !last {
                                 button {
                                     class: "btn btn-primary btn-lg run-main-action",
@@ -175,6 +175,14 @@ pub fn Player() -> Element {
                                     {tx::CHECK}
                                 }
                             }
+                            // What a long press and a selection do, beside
+                            // the step they come before (hidden on phones).
+                            if !checked && !(timed && last) {
+                                p { class: "muted small run-hint", {tx::TOOLS_HINT} }
+                                if selected.is_none() {
+                                    span { class: "bank-sr", {tx::PICK_FIRST} }
+                                }
+                            }
                         }
                         Move { to: next, next: true, ongo: go }
                     }
@@ -184,7 +192,7 @@ pub fn Player() -> Element {
                 NavSheet {
                     cells,
                     at,
-                    results: !timed,
+                    legend,
                     ongo: go,
                     onclose: move |_| nav_open.set(false),
                 }
@@ -229,7 +237,7 @@ fn ConfirmEnd(
                 h2 { id: "bank-confirm-title", {tx::CONFIRM_TITLE} }
                 p { {tx::confirm_blank(blank)} }
                 if marked > 0 {
-                    p { bdi { "{marked}" } " " {tx::CONFIRM_MARKED} }
+                    p { {tx::confirm_marked(marked)} }
                 }
                 if let Some(left) = left {
                     p { class: "muted small", "{tx::LEFT_ABOUT} " {count(left, &MINUTE)} }
@@ -294,15 +302,21 @@ mod tests {
         };
         for sel in [
             ".chip.toggle",
-            ".score-row",
             ".bank-close",
             ".q-meta .chip.tap",
+            ".q-foot button.tap-chip",
+            ".q-behind > .btn",
             ".report",
             ".exam-bar :is(.btn, .chip.tap-chip)",
+            ".sum-head .btn",
             ".sum-open",
+            "button.chip.weak",
+            ".sum .start-row .btn",
         ] {
             assert!(rule(sel).contains("min-block-size: var(--target);"), "{sel}");
         }
+        // The foot's one step: 48dp, or the taller main-action size.
+        assert!(rule(".run-main-action").contains("min-block-size: max(var(--target), var(--tap-lg));"));
         for sel in [".nav-cell", ".run-leave", ".exam-bar .icon-button", ".run-foot .exam-move"] {
             assert!(rule(sel).contains("inline-size: var(--target);"), "{sel}");
             assert!(rule(sel).contains("block-size: var(--target);"), "{sel}");
