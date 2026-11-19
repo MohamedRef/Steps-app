@@ -122,6 +122,7 @@ pub fn TryItems(items: Vec<String>, on_answer: EventHandler<bool>) -> Element {
                         topic_title,
                         fresh,
                         retry: false,
+                        in_lesson: true,
                         on_grade,
                     }
                 }

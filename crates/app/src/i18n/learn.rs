@@ -57,6 +57,10 @@ pub const KEY: &str = "الإجابة الصح";
 pub const RETRY: &str = "حاول تاني";
 pub const MATCH: &str = "وصّل";
 pub const MATCH_HINT: &str = "اختار من الشمال، وبعدين اللي يناسبه من اليمين.";
+/// A matched tile's name for screen readers: its words, then its pair.
+pub fn paired_with(tile: &str, other: &str) -> String {
+    format!("{tile}، اتوصّلت بـ {other}")
+}
 pub const SORT: &str = "صنّف";
 pub const SORT_HINT: &str = "اسحب كل كارت لخانته، أو دوس عليه وبعدين على الخانة.";
 pub const SORT_PICKED: &str = "تمام، دلوقتي دوس على الخانة اللي تناسبه.";
