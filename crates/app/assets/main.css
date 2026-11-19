@@ -424,9 +424,14 @@ button.tap-chip { cursor: pointer; min-block-size: 1.75rem; line-height: 1.6; co
 button.tap-chip:active { transform: var(--press, scale(0.97)); }
 @media (hover: hover) and (pointer: fine) { button.tap-chip:hover { border-color: var(--accent); } }
 .chip.ready { background: var(--good-soft); border-color: transparent; color: var(--good); font-weight: 600; }
-/* A picked chip says so with a tick, not only with its fill (UX-28): the
-   lecture and topic picks, filters and course chips. */
-:is(.chip, .st-chip, .mc-chip)[aria-pressed="true"]::before { content: "✓"; margin-inline-end: 0.35em; font-weight: 700; }
+/* A picked selection chip says so with a tick, not only with its fill
+   (UX-28). Only chips that pick from a group: the Review setup's lectures
+   and topics, the reason filters, the course pickers of the dictionary and
+   notes, the qbank split. Toggles (pause, typing, read, focus) and the
+   bank's own chips (bank.css) are left alone. */
+:is(.st-chips .st-chip, .mc-chips .mc-chip, .abd-courses .abd-course, .ntl-courses .chip, .qb-split .chip)[aria-pressed="true"]::before {
+  content: "✓"; margin-inline-end: 0.35em; font-weight: 700;
+}
 
 /* ---------- Today: the lecture list ---------- */
 .lectures { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
