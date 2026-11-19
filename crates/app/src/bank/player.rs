@@ -26,6 +26,9 @@ pub fn Player() -> Element {
     use_drop(super::run::unwatch);
     let mut confirming = use_signal(|| false);
     let mut nav_open = use_signal(|| false);
+    // On a phone the strike and highlight hint is a tip he dismisses once
+    // on this device (UX-29); wider, it stands beside the main step.
+    let mut tip = use_signal(|| !crate::store::shared().local_setting::<bool>(TIP_KEY).unwrap_or(false));
     let Phase::Running(p) = PHASE.read().clone() else {
         return rsx! {};
     };
@@ -55,6 +58,7 @@ pub fn Player() -> Element {
                 (Some(_), false) => CellState::Wrong,
             },
             marked: a.flagged,
+            out: false,
         })
         .collect();
     let clock = if timed {
@@ -127,6 +131,19 @@ pub fn Player() -> Element {
                         onchoose: if checked { None } else { Some(EventHandler::new(choose)) },
                         onstrike: if checked { None } else { Some(EventHandler::new(strike)) },
                         reserve: !timed,
+                    }
+                    if tip() && !checked {
+                        div { class: "note run-tip",
+                            p { class: "small", {tx::TOOLS_TIP} }
+                            button {
+                                class: "btn btn-ghost run-tip-ok",
+                                onclick: move |_| {
+                                    let _ = crate::store::shared().put_local_setting(TIP_KEY, &true);
+                                    tip.set(false);
+                                },
+                                {tx::TIP_OK}
+                            }
+                        }
                     }
                     // Optional taps (crate::metacog): how sure he is while the
                     // answer is still his, and why he missed it once it's out.
@@ -215,6 +232,9 @@ pub fn Player() -> Element {
 
 /// The foot's one step, which takes the keyboard once «تأكيد الإجابة» is gone.
 const MAIN_ACTION: &str = ".bank-run .run-main-action";
+
+/// Set on this device once he has dismissed the phone's tools tip.
+const TIP_KEY: &str = "bank.tools_tip_seen";
 
 /// «إنهاء البلوك» with questions left blank: says how many before the paper
 /// goes in. The safe choice, going back to the first blank, comes first,

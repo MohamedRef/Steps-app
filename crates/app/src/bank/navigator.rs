@@ -24,6 +24,9 @@ pub enum CellState {
 pub struct Cell {
     pub state: CellState,
     pub marked: bool,
+    /// Outside what a review goes through (the wrong ones, the marked
+    /// ones, …): drawn faint, still a tap away (UX-19).
+    pub out: bool,
 }
 
 /// "سؤال 3، متجاوب، متعلّم عليه، إنت هنا" for a navigator cell.
@@ -40,6 +43,9 @@ pub fn cell_label(i: usize, cell: Cell, here: bool) -> String {
     );
     if cell.marked {
         parts.push(tx::MARKED.to_string());
+    }
+    if cell.out {
+        parts.push(tx::OUT_OF_REVIEW.to_string());
     }
     if here {
         parts.push(tx::NOW_HERE.to_string());
@@ -69,6 +75,7 @@ pub enum Legend {
 /// The cells and their legend.
 #[component]
 pub fn Navigator(cells: Vec<Cell>, at: usize, legend: Legend, ongo: EventHandler<usize>) -> Element {
+    let some_out = cells.iter().any(|c| c.out);
     rsx! {
         // A list of buttons (not buttons playing list items), so each cell
         // stays a button to a screen reader. The numbers run left to right,
@@ -80,6 +87,7 @@ pub fn Navigator(cells: Vec<Cell>, at: usize, legend: Legend, ongo: EventHandler
                         class: "nav-cell",
                         "data-state": state_name(cell.state),
                         "data-flag": if cell.marked { "yes" } else { "no" },
+                        "data-out": if cell.out { "true" } else { "false" },
                         "aria-current": if i == at { "true" } else { "false" },
                         // The state is spoken too, not only drawn.
                         "aria-label": cell_label(i, cell, i == at),
@@ -109,6 +117,9 @@ pub fn Navigator(cells: Vec<Cell>, at: usize, legend: Legend, ongo: EventHandler
                 if legend == Legend::Review { {tx::TILE_BLANK} } else { {tx::LEGEND_BLANK} }
             }
             li { span { class: "nav-swatch nav-flag", {crate::icons::flag()} } {tx::MARKED} }
+            if some_out {
+                li { span { class: "nav-swatch", "data-out": "true" } {tx::LEGEND_OUT} }
+            }
         }
     }
 }
@@ -177,7 +188,7 @@ mod tests {
 
     #[test]
     fn navigator_cells_say_their_state() {
-        let cell = |state, marked| Cell { state, marked };
+        let cell = |state, marked| Cell { state, marked, out: false };
         assert_eq!(cell_label(0, cell(CellState::Blank, false), false), "سؤال 1، من غير إجابة");
         assert_eq!(
             cell_label(2, cell(CellState::Answered, true), true),
@@ -185,5 +196,7 @@ mod tests {
         );
         assert_eq!(cell_label(4, cell(CellState::Right, false), false), "سؤال 5، صح");
         assert_eq!(cell_label(5, cell(CellState::Wrong, true), false), "سؤال 6، غلط، متعلّم عليه");
+        let out = Cell { out: true, ..cell(CellState::Right, false) };
+        assert_eq!(cell_label(0, out, false), "سؤال 1، صح، مش من اللي بتراجعه");
     }
 }

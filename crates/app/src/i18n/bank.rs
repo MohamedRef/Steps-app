@@ -44,7 +44,10 @@ pub const EMPTY_TITLE: &str = "لسه مفيش أسئلة اختيار من مت
 pub const EMPTY_BODY: &str = "أول ما محاضرة فيها أسئلة MCQ تخلص، هتلاقيها هنا على طول.";
 pub const LECTURES: &str = "المحاضرات";
 pub const TOPICS: &str = "المواضيع";
-pub const PICK_LECTURE_FOR_TOPICS: &str = "اختار محاضرة أو أكتر عشان تظهر مواضيعها.";
+pub const PICK_LECTURE_FOR_TOPICS: &str = "اختار محاضرة وهتظهر مواضيعها تحتها على طول.";
+/// Over a picked lecture's topic chips: «المواضيع في Pathology».
+pub const TOPICS_IN: &str = "المواضيع في";
+pub const NO_TOPICS: &str = "أسئلة المحاضرة دي مش متقسمة على مواضيع.";
 pub const TAGS: &str = "نوع السؤال";
 pub const TAG_HIGH_YIELD: &str = "مهم جدًا";
 pub const TAG_BOOK: &str = "أسئلة الكتاب";
@@ -91,9 +94,13 @@ pub const PREV: &str = "السؤال اللي فات";
 pub const CHECK: &str = "تأكيد الإجابة";
 /// Read to screen readers while «تأكيد الإجابة» waits for a pick.
 pub const PICK_FIRST: &str = "اختار إجابتك الأول، وبعدين أكّدها.";
-/// Beside «تأكيد الإجابة»: what a long press and a selection do.
+/// Beside «تأكيد الإجابة»: what a long press and a selection do. Words he
+/// selects are coloured («لوّن»); «علّم» is only the flag on a question.
 pub const TOOLS_HINT: &str =
-    "اضغط على الاختيار مطولًا (أو كليك يمين) عشان تشطب عليه، وحدّد أي كلام في السؤال عشان تعلّم عليه.";
+    "اضغط على الاختيار مطولًا (أو كليك يمين) عشان تشطب عليه، وحدّد أي كلام في السؤال عشان تلوّنه.";
+/// The same on a phone, once, until he says he has it (UX-29).
+pub const TOOLS_TIP: &str = "اضغط مطولًا على أي اختيار عشان تشطب عليه، وحدّد أي كلام في السؤال عشان تلوّنه.";
+pub const TIP_OK: &str = "تمام، فهمت";
 pub const MARK: &str = "علّم";
 pub const MARKED: &str = "متعلّم عليه";
 /// Ends the paper: its result comes next.
@@ -198,13 +205,32 @@ pub const BY_COURSE: &str = "حسب الـ system";
 pub const WEAK: &str = "ابدأ مراجعتك بدول";
 pub const ALL_STRONG: &str = "مفيش موضوع تحت 60٪. شغل حلو.";
 pub const REVIEW_WRONG: &str = "راجع الأسئلة الغلط";
-pub const RETAKE: &str = "بلوك جديد من الغلط والمتعلّم عليه";
+/// The same, when some were left blank too: it goes through both.
+pub const REVIEW_MISSED: &str = "راجع الغلط واللي ما اتجاوبش";
+pub const REVIEW_BLANK: &str = "راجع اللي ما اتجاوبش";
+/// «بلوك جديد من الغلط واللي ما اتجاوبش · 8 أسئلة»: what a new block from
+/// a finished one takes, and how many, before it starts.
+pub fn retake(wrong: bool, blank: bool, marked: bool, n: usize) -> String {
+    let parts: Vec<&str> = [(wrong, "الغلط"), (blank, "اللي ما اتجاوبش"), (marked, "المتعلّم عليه")]
+        .into_iter()
+        .filter_map(|(on, what)| on.then_some(what))
+        .collect();
+    format!("بلوك جديد من {} · {}", parts.join(" و"), questions(n))
+}
 /// The review's top bar: what it goes through.
 pub const REVIEWING: &str = "مراجعة";
 pub const SHOW_ALL: &str = "الكل";
 pub const SHOW_RIGHT: &str = "الصح";
 pub const SHOW_WRONG: &str = "الغلط";
+pub const SHOW_MISSED: &str = "الغلط واللي ما اتجاوبش";
 pub const SHOW_BLANK: &str = "اللي ما اتجاوبش";
+/// A review's place among the questions it goes through: «1 من 8».
+pub fn walk_of(k: usize, of: usize) -> String {
+    format!("{k} {OF} {of}")
+}
+/// A navigator cell the review doesn't go through, and its legend.
+pub const OUT_OF_REVIEW: &str = "مش من اللي بتراجعه";
+pub const LEGEND_OUT: &str = "مش في المراجعة دي";
 pub const SHOW_MARKED: &str = "المتعلّم عليه";
 pub const BACK_TO_RESULT: &str = "رجوع للنتيجة";
 pub const BACK: &str = "رجوع للبنك";

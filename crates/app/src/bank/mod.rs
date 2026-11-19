@@ -655,21 +655,37 @@ pub fn highlight(at: usize, start: usize, end: usize) {
     keep_open();
 }
 
-/// «بلوك جديد من الغلط والمتعلّم عليه»: a new paper of the finished one's
-/// wrong, blank and marked questions (`exam::retake`), in its mode, shuffled
-/// again and as Mohamed sees them now (his edits in, his ✗ items out).
+/// «بلوك جديد من الغلط …»: a new paper of the finished one's wrong, blank
+/// and marked questions (`exam::retake`), in its mode, shuffled again and as
+/// Mohamed sees them now (his edits in, his ✗ items out).
 pub fn retake() {
-    let (mode, block, ids) = match &*PHASE.peek() {
-        Phase::Done { paper, .. } => {
-            (paper.mode, paper.block, exam::retake(&paper.questions, &paper.answers))
-        }
+    let (mode, block) = match &*PHASE.peek() {
+        Phase::Done { paper, .. } => (paper.mode, paper.block),
         _ => return,
+    };
+    let Some(questions) = retake_questions(|pool| exam::practice(pool, pool.len(), now_ms() as u64)) else {
+        return;
+    };
+    start_paper(mode, block, questions);
+}
+
+/// How many questions «بلوك جديد» would hold, said on its button before
+/// it starts (UX-19): the retake's questions he can still see.
+pub fn retake_size() -> usize {
+    retake_questions(|pool| pool.len()).unwrap_or(0)
+}
+
+/// `make` over the finished paper's retake pool, as `retake` draws it.
+fn retake_questions<T>(make: impl FnOnce(&[exam::Mcq]) -> T) -> Option<T> {
+    let ids = match &*PHASE.peek() {
+        Phase::Done { paper, .. } => exam::retake(&paper.questions, &paper.answers),
+        _ => return None,
     };
     let lectures: BTreeSet<&str> = ids.iter().map(|id| steps_core::program::lecture_of(id)).collect();
     let owned = study_lectures_where(|l| lectures.contains(l));
     let pool: Vec<exam::Mcq> =
         exam::mcqs(&owned).into_iter().filter(|q| ids.iter().any(|id| id == q.id)).collect();
-    start_paper(mode, block, exam::practice(&pool, pool.len(), now_ms() as u64));
+    Some(make(&pool))
 }
 
 /// End the paper: score it, and for timed papers send every answer to

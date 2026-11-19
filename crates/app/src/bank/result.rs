@@ -9,8 +9,8 @@ use dioxus::prelude::*;
 use steps_core::exam::{self, Graded, Score};
 
 use super::clock::face;
-use super::review::{Review, Show};
-use super::{PHASE, Phase, back_to_setup, retake, to_top, topic_title};
+use super::review::{Review, Show, review_label};
+use super::{PHASE, Phase, back_to_setup, retake, retake_size, to_top, topic_title};
 use crate::content::Library;
 use crate::i18n::bank as tx;
 
@@ -52,7 +52,8 @@ pub fn Result() -> Element {
         }
     };
     let missed = first(Show::Missed);
-    let can_retake = !exam::retake(&paper.questions, &paper.answers).is_empty();
+    // The new block's size, on its button before it starts (UX-19).
+    let retake_n = retake_size();
     let rows: Vec<(usize, Option<String>, String, Graded, u32, bool)> = paper
         .questions
         .iter()
@@ -108,11 +109,16 @@ pub fn Result() -> Element {
                 span { class: "chip", "data-tone": "accent", {tx::kind(paper.block, timed)} }
                 span { class: "sum-grow" }
                 // The two next steps sit with the score, not under the table.
+                // Named by what they hold: blanks are not wrong answers (UX-19).
                 if missed.is_some() {
-                    button { class: "btn btn-secondary", onclick: move |_| open(Show::Missed, missed), {tx::REVIEW_WRONG} }
+                    button { class: "btn btn-secondary sum-review", onclick: move |_| open(Show::Missed, missed),
+                        {review_label(s.wrong, s.blank)}
+                    }
                 }
-                if can_retake {
-                    button { class: "btn btn-primary", onclick: move |_| retake(), {tx::RETAKE} }
+                if retake_n > 0 {
+                    button { class: "btn btn-primary sum-retake", onclick: move |_| retake(),
+                        {tx::retake(s.wrong > 0, s.blank > 0, s.marked > 0, retake_n)}
+                    }
                 } else {
                     button { class: "btn btn-primary", onclick: move |_| back_to_setup(), {tx::NEW_PAPER} }
                 }

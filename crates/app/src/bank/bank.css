@@ -71,6 +71,38 @@ bdi.bank-scope { font-family: var(--font-latin); }
 .bank-customise { align-self: stretch; }
 .bank-customise[aria-expanded="true"] { border-color: var(--accent); color: var(--accent); }
 .bank-advanced { gap: var(--sp-2); }
+/* A picked lecture's topics, right under its course's chips (UX-27). */
+.bank-topics {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3) var(--sp-3);
+  border-inline-start: 3px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--soft);
+}
+.bank-topics > .label { font-size: var(--fs-sm); font-weight: 600; color: var(--muted); }
+.bank-topics .chip.toggle:not([aria-pressed="true"]) { background: var(--surface); }
+/* While he customises, the count and the start stay at the foot of the
+   screen, over the long list of chips (UX-27). */
+.bank-pin {
+  position: sticky;
+  inset-block-end: 0;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-2) var(--sp-3);
+  margin: var(--sp-2) calc(-1 * var(--card-pad, var(--sp-4))) calc(-1 * var(--card-pad, var(--sp-4)));
+  padding: var(--sp-3) var(--card-pad, var(--sp-4));
+  background: var(--glass-solid, var(--surface));
+  border-block-start: 1px solid var(--line);
+  border-end-start-radius: var(--radius-card);
+  border-end-end-radius: var(--radius-card);
+}
+.bank-pin p { margin: 0; }
+.bank-pin .btn { min-block-size: var(--target); }
 .bank-reset { align-self: flex-start; }
 .bank-empty { display: flex; flex-direction: column; gap: var(--sp-2); align-items: flex-start; }
 /* A paper he left: its kind beside the title says which one waits. */
@@ -262,6 +294,8 @@ bdi.bank-scope { font-family: var(--font-latin); }
 .nav-cell[data-state="wrong"] { background: var(--bad-soft); border-color: transparent; color: var(--bad); font-weight: 600; }
 .nav-cell[data-flag="yes"] { border-color: var(--gold); }
 .nav-cell[aria-current="true"] { outline: 2px solid var(--accent); outline-offset: 1px; font-weight: 700; }
+/* A review of some questions draws the others faint; they still open (UX-19). */
+.nav-cell[data-out="true"]:not([aria-current="true"]) { opacity: 0.45; }
 .nav-cell:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 @media (hover: hover) { .nav-cell[aria-current="false"]:hover { border-color: var(--accent); } }
 .nav-cell .nav-mark { position: absolute; inset-block-start: 3px; inset-inline-start: 5px; font-size: 0.7rem; line-height: 1; }
@@ -294,6 +328,7 @@ bdi.bank-scope { font-family: var(--font-latin); }
 .nav-swatch[data-state="right"] { background: var(--good-soft); border-color: transparent; color: var(--good); }
 .nav-swatch[data-state="wrong"] { background: var(--bad-soft); border-color: transparent; color: var(--bad); }
 .nav-swatch.nav-flag { border-color: var(--gold); color: var(--gold); }
+.nav-swatch[data-out="true"] { opacity: 0.45; }
 @media (min-width: 840px) {
   .run-body { grid-template-columns: auto minmax(0, 1fr); }
   .run-nav { display: flex; flex-direction: column; gap: var(--sp-3); align-self: start; padding: var(--sp-3); }
@@ -346,7 +381,13 @@ bdi.bank-scope { font-family: var(--font-latin); }
   block-size: var(--target);
 }
 .run-hint { display: none; }
+/* The phone's way to learn the strike and the highlight (UX-29): a tip
+   until he dismisses it; wider, .run-hint says it beside the main step. */
+.run-tip { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--sp-2) var(--sp-3); }
+.run-tip p { margin: 0; flex: 1 1 12rem; }
+.run-tip .btn { min-block-size: var(--target); }
 @media (min-width: 600px) {
+  .run-tip { display: none; }
   .run-foot .exam-move { display: none; }
   .run-foot-main { flex-direction: row; align-items: center; gap: var(--sp-4); }
   .run-main-action { flex: none; inline-size: auto; min-inline-size: 12rem; }

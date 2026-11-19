@@ -18,6 +18,10 @@ pub fn ExamBar(
     kind: String,
     at: usize,
     n: usize,
+    /// A review of some of the questions: where this one is among them,
+    /// and how many they are («1 من 8»), shown in place of «2 / 10».
+    #[props(default)]
+    walk: Option<(usize, usize)>,
     item_id: String,
     /// The question's First Aid page, for the note.
     page: Option<u32>,
@@ -41,6 +45,11 @@ pub fn ExamBar(
     // A VQ question's number; a First Aid question has none to show.
     let label = crate::vq::name(&item_id);
     let hint = if out_hint.is_empty() { out_label.clone() } else { out_hint.clone() };
+    let of = tx::question_of(at + 1, n);
+    let (count, where_label) = match walk {
+        Some((k, m)) => (format!("{k} / {m}"), format!("{}، {of}", tx::walk_of(k, m))),
+        None => (format!("{} / {n}", at + 1), of.clone()),
+    };
     rsx! {
         header { class: "exam-bar",
             button {
@@ -59,22 +68,29 @@ pub fn ExamBar(
                 button {
                     class: "btn btn-secondary exam-count",
                     aria_haspopup: "dialog",
-                    "aria-label": "{tx::NAV_OPEN}: {tx::question_of(at + 1, n)}",
+                    "aria-label": "{tx::NAV_OPEN}: {where_label}",
                     title: tx::NAV_OPEN,
                     onclick: move |_| onnav.call(()),
                     span { class: "exam-count-icon", aria_hidden: "true", {crate::icons::grid()} }
-                    bdi { class: "num-ltr", "{at + 1} / {n}" }
+                    bdi { class: "num-ltr", "{count}" }
                 }
-                strong { class: "exam-of", {tx::question_of(at + 1, n)} }
+                strong { class: "exam-of",
+                    match walk {
+                        Some((k, m)) => tx::walk_of(k, m),
+                        None => of,
+                    }
+                }
                 if let Some(label) = label {
                     bdi { class: "exam-qid", dir: "ltr", lang: "en", "{label}" }
                 }
             }
+            // One name; its state is aria-pressed (UX-42). The word on it
+            // says the state too, so a mark never rests on colour alone.
             button {
                 class: "btn exam-mark",
                 "aria-pressed": if marked { "true" } else { "false" },
                 "aria-keyshortcuts": "F",
-                "aria-label": if marked { tx::MARKED } else { tx::MARK },
+                "aria-label": tx::MARK,
                 onclick: move |_| onmark.call(()),
                 span { class: "exam-mark-icon", aria_hidden: "true", {crate::icons::flag()} }
                 span { class: "exam-mark-word", aria_hidden: "true", if marked { {tx::MARKED} } else { {tx::MARK} } }
