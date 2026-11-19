@@ -24,8 +24,8 @@ mod run;
 mod setup;
 mod stem;
 
+use std::cell::Cell;
 use std::collections::BTreeSet;
-use std::sync::atomic::{AtomicBool, Ordering};
 use web_time::{SystemTime, UNIX_EPOCH};
 
 use dioxus::prelude::*;
@@ -445,9 +445,13 @@ pub fn start_paper(mode: Mode, block: bool, questions: Vec<Question>) {
 /// Android killing the app (#255). Device-only: a paper half done on the
 /// phone is not one to continue on the tablet.
 const OPEN_KEY: &str = "bank.open_paper";
-/// Whether `OPEN_KEY` may hold a paper, so clicks with no paper open don't
-/// rewrite an empty key every time.
-static OPEN_STORED: AtomicBool = AtomicBool::new(true);
+thread_local! {
+    /// Whether `OPEN_KEY` may hold a paper, so clicks with no paper open don't
+    /// rewrite an empty key every time. One per thread, like the store it
+    /// mirrors: the app's UI thread, or a test's own (a flag shared across
+    /// test threads let one test's empty bank skip another's clearing).
+    static OPEN_STORED: Cell<bool> = const { Cell::new(true) };
+}
 
 /// Write the open paper, or clear it once none is open. Called after every
 /// change to a paper: answers, flags, moves, leave, submit.
@@ -457,10 +461,10 @@ fn keep_open() {
         (Phase::Running(p), None) => Some(p.clone()),
         _ => None,
     };
-    if open.is_none() && !OPEN_STORED.load(Ordering::Relaxed) {
+    if open.is_none() && !OPEN_STORED.get() {
         return;
     }
-    OPEN_STORED.store(open.is_some(), Ordering::Relaxed);
+    OPEN_STORED.set(open.is_some());
     let _ = crate::store::shared().put_local_setting(OPEN_KEY, &open);
 }
 
@@ -473,7 +477,7 @@ fn restore_open() {
     }
     match crate::store::shared().local_setting::<Option<Paper>>(OPEN_KEY).flatten() {
         Some(p) if !p.questions.is_empty() => *PAUSED.write() = Some(p),
-        _ => OPEN_STORED.store(false, Ordering::Relaxed),
+        _ => OPEN_STORED.set(false),
     }
 }
 
@@ -767,6 +771,21 @@ pub fn submit_paused() {
 pub fn back_to_setup() {
     *PHASE.write() = Phase::Setup;
     to_top();
+}
+
+/// The bank's tab tapped again (main.rs `reselect`): a finished paper's
+/// result, or its review, gives way to the setup; a paper in progress stays
+/// where it is; the setup goes back to its top.
+pub fn to_start() {
+    let (done, setup) = {
+        let phase = PHASE.peek();
+        (matches!(*phase, Phase::Done { .. }), matches!(*phase, Phase::Setup))
+    };
+    if done {
+        back_to_setup();
+    } else if setup {
+        to_top();
+    }
 }
 
 pub fn minutes(ms: u64) -> u64 {

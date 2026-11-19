@@ -144,6 +144,18 @@ fn a_page_chip_in_a_lesson_opens_its_sheet_and_abbreviations_open_theirs() {
 }
 
 #[test]
+fn a_tab_tapped_again_closes_the_page_over_its_screen() {
+    let mut app = App::with(Screen::Learn, || crate::abbrdict::open(consume_context::<Ui>(), None));
+    // The dictionary's search is on screen, the lessons' heading is not.
+    app.assert_has(crate::i18n::abbr::DICT_SEARCH);
+    app.assert_lacks(crate::i18n::learn::HEAD);
+    app.tap_tab(Screen::Learn);
+    assert!(app.run(|| crate::lecture::shown(Screen::Learn)).is_none());
+    app.assert_lacks(crate::i18n::abbr::DICT_SEARCH);
+    app.assert_has(crate::i18n::learn::HEAD);
+}
+
+#[test]
 fn the_dictionary_lists_a_course_a_to_z_and_searches_it() {
     let mut app = App::with(Screen::Learn, || crate::abbrdict::open(consume_context::<Ui>(), None));
     use crate::i18n::abbr as tx;

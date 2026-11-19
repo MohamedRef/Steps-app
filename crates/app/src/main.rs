@@ -364,6 +364,25 @@ fn screen_body(screen: Screen) -> Element {
     }
 }
 
+/// The tab in view, tapped again, goes back to its start, as a phone's tab
+/// bar does: a page over it (a lecture page or a tool) closes; a finished
+/// bank paper's result and a study session's summary give way to their
+/// setup; a paper or a session in progress stays as it is; and the screen
+/// goes back to its top.
+fn reselect(screen: Screen) {
+    if lecture::shown(screen).is_some() {
+        lecture::close_all();
+        return;
+    }
+    match screen {
+        Screen::Bank => bank::to_start(),
+        Screen::Study => study::to_start(),
+        _ => {
+            document::eval(r#"document.querySelector("main.content")?.scrollTo(0, 0);"#);
+        }
+    }
+}
+
 #[component]
 fn NavButton(screen: Screen, class: &'static str) -> Element {
     let mut ui = use_context::<Ui>();
@@ -375,7 +394,14 @@ fn NavButton(screen: Screen, class: &'static str) -> Element {
             class,
             "aria-current": if active { "page" } else { "false" },
             "aria-label": screen.label(),
-            onclick: move |_| ui.screen.set(screen),
+            // The tab in view, tapped again, goes back to its start.
+            onclick: move |_| {
+                if *ui.screen.peek() == screen {
+                    reselect(screen);
+                } else {
+                    ui.screen.set(screen);
+                }
+            },
             span { class: "glyph", {icons::nav(screen)} }
             span { class: "label", {screen.label()} }
         }
