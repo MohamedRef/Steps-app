@@ -415,6 +415,12 @@ fn summary_return_class(has_follow_up: bool) -> &'static str {
     if has_follow_up { "btn-link" } else { "btn btn-primary" }
 }
 
+/// The first-try score's colour: good from half right up, plain below, the
+/// way `score_line` words it.
+fn score_tone(right: u32, asked: u32) -> &'static str {
+    if right * 2 >= asked { "good" } else { "plain" }
+}
+
 #[component]
 fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
     let mut ui = use_context::<Ui>();
@@ -436,8 +442,9 @@ fn Summary(lesson: Lesson, right: u32, asked: u32) -> Element {
             }
             p { class: "muted", Line { text: lesson.title.clone() } }
             if asked > 0 {
-                p { class: "ls-score",
-                    strong { "{right}/{asked}" }
+                // Green from half right up; under that, plain ink (UX-37).
+                p { class: "ls-score", "data-tone": score_tone(right, asked),
+                    strong { class: "num-ltr", "{right}/{asked}" }
                     " {tx::FIRST_TRY}"
                 }
                 p { class: "small", {tx::score_line(right, asked)} }
@@ -536,6 +543,21 @@ mod ux_tests {
     fn last_lesson_has_a_primary_exit_without_practice_or_next_lesson() {
         assert_eq!(summary_return_class(false), "btn btn-primary");
         assert_eq!(summary_return_class(true), "btn-link");
+    }
+
+    #[test]
+    fn a_low_first_try_score_is_not_painted_green() {
+        assert_eq!(
+            [(0, 2), (1, 3), (1, 2), (2, 2), (3, 5)].map(|(r, a)| score_tone(r, a)),
+            ["plain", "plain", "good", "good", "good"]
+        );
+        let css = include_str!("learn.css");
+        assert!(css.contains(".ls-score[data-tone=\"good\"] strong { color: var(--good); }"));
+        assert!(!css.contains(".ls-score strong { color: var(--good); }"));
+        // A next-lesson title that wraps gets rounded corners, not a pill.
+        assert!(css.contains(
+            ".ls-summary-actions .btn { border-radius: calc(max(var(--target), var(--tap)) / 2); }"
+        ));
     }
 
     #[test]

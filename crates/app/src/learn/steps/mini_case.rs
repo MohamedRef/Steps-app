@@ -133,7 +133,14 @@ pub(super) fn MiniCase(
                                 }
                             }
                             if done.is_some() {
-                                div { class: "ls-why-box ls-pop", dir: "ltr", lang: "en", Rich { text: s.why.clone() } }
+                                // English like the case, unless the explanation
+                                // is Arabic: then it reads right to left (UX-06).
+                                div {
+                                    class: "ls-why-box ls-pop",
+                                    dir: line_dir(&s.why),
+                                    lang: if line_dir(&s.why) == "ltr" { "en" } else { "ar" },
+                                    Rich { text: s.why.clone() }
+                                }
                                 if !s.options.is_empty() {
                                     button {
                                         class: "icon-button ls-retry",

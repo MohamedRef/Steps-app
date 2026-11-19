@@ -151,7 +151,14 @@ pub(super) fn Mnemonic(word: String, parts: Vec<MnemonicPart>, hook: Option<Stri
                     li { key: "{i}", "data-open": if shown.read()[i] { "yes" } else { "no" },
                         span { class: "ls-mn-k", "{p.key}" }
                         if shown.read()[i] {
-                            bdi { class: "ls-pop", "{p.text}" }
+                            // A line with Arabic in it reads right to left, its
+                            // English terms isolated, beside its letter (UX-22).
+                            bdi {
+                                class: "ls-pop ls-mn-text",
+                                dir: line_dir(&p.text),
+                                lang: if line_dir(&p.text) == "ltr" { "en" } else { "ar" },
+                                Line { text: p.text.clone() }
+                            }
                         } else {
                             span { class: "muted", "…" }
                         }

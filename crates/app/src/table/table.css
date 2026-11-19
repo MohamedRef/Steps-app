@@ -1,6 +1,7 @@
 /* table items. The grid is
-   English like the book, so it runs LTR inside the Arabic UI; its own box
-   scrolls sideways on phones, with the row labels pinned to the start edge. */
+   English like the book, so it runs LTR inside the Arabic UI; a grid wider
+   than the card scrolls sideways in its own box, with the row labels pinned
+   to the start edge. */
 
 .tb-item { display: flex; flex-direction: column; gap: var(--sp-3); min-width: 0; }
 .tb-title { font-size: var(--fs-lg); line-height: 1.45; }
@@ -65,6 +66,8 @@
 
 .tb-reveal {
   inline-size: 100%;
+  /* A 48dp target even in a column squeezed to its words (UX-25). */
+  min-inline-size: var(--target);
   min-block-size: var(--target);
   border: 1px dashed var(--accent);
   border-radius: 8px;
@@ -103,3 +106,29 @@
 .tb-actions { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
 .tb-verdict { font-weight: 600; }
 .tb-verdict.good { color: var(--good); }
+
+/* ---------- phones (UX-25) ----------
+   No column floor: each column takes what its words need and the cells
+   wrap, so the two- and three-column tables most items have fit the card
+   with their words whole (or hyphenated); only a table whose words can't
+   fit scrolls. In a narrow cell ✓ and ✗ stack instead of widening it. */
+.tb-marks { flex-wrap: wrap; }
+@media (max-width: 599.98px) {
+  .tb-grid th, .tb-grid td { min-inline-size: 0; padding: var(--sp-2); hyphens: auto; }
+  .tb-grid .tb-pin { min-inline-size: 0; }
+  .tb-input { min-inline-size: 3.5rem; }
+}
+/* A table still wider than its box fades out at its inline end until he
+   scrolls there, where the browser can follow the scroll; elsewhere the
+   edge shadows above say it. The grid is always left to right, so the
+   inline end is the right. */
+@property --tb-fade { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@supports (animation-timeline: scroll()) {
+  .tb-scroll {
+    -webkit-mask-image: linear-gradient(to left, transparent, var(--text) var(--tb-fade));
+    mask-image: linear-gradient(to left, transparent, var(--text) var(--tb-fade));
+    animation: tb-more linear both;
+    animation-timeline: scroll(self inline);
+  }
+}
+@keyframes tb-more { from, 90% { --tb-fade: 2.5rem; } to { --tb-fade: 0px; } }

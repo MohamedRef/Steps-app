@@ -570,6 +570,10 @@ button.ls-now { display: flex; flex-direction: column; align-items: stretch; gap
 .ls-mn-lines li { display: flex; gap: var(--sp-3); align-items: baseline; padding: 4px var(--sp-2); border-radius: 8px; }
 .ls-mn-lines li[data-open="yes"] { background: var(--accent-soft); }
 .ls-mn-k { flex: none; inline-size: 2.4rem; font-weight: 800; color: var(--accent); font-family: var(--font-latin); }
+/* A line with Arabic in it reads right to left but keeps to its letter's
+   side of the row, like the English lines (learn/steps/presentation.rs). */
+.ls-mn-text { min-inline-size: 0; overflow-wrap: anywhere; }
+.ls-mn-text[dir="rtl"] { text-align: end; }
 .ls-mn-hook { border-block-start: 1px dashed var(--line); padding-block-start: var(--sp-2); }
 .ls-mnemonic .btn-link { align-self: center; }
 
@@ -685,6 +689,15 @@ button.ls-slot:hover { border-color: var(--accent); }
 .ls-match-col .ls-tile { overflow-wrap: anywhere; hyphens: auto; }
 .ls-match-col { display: flex; flex-direction: column; gap: var(--sp-2); }
 .ls-match-col .ls-tile { inline-size: 100%; }
+/* A made pair: both tiles carry the number he made it in (UX-04). Once all
+   are made the rows line up instead, and the numbers go. */
+.ls-pair {
+  flex: none; display: grid; place-items: center;
+  min-inline-size: 1.5rem; block-size: 1.5rem; padding-inline: 4px;
+  border: 1.5px solid var(--good); border-radius: var(--radius-pill);
+  background: var(--glass-solid, var(--surface)); color: var(--good);
+  font-family: var(--font-latin); font-size: var(--fs-sm); font-weight: 700; font-variant-numeric: tabular-nums;
+}
 /* sort: bins share a row while each keeps ~13rem (two or three on a
    tablet), and stack as full-width rows on a phone. Flex, not a grid, so
    an odd bin out stretches instead of leaving an empty cell. */
@@ -827,7 +840,10 @@ button.ls-slot:hover { border-color: var(--accent); }
 .ls-confetti { font-size: 3rem; line-height: 1.2; animation: ls-bounce 700ms var(--ease); }
 @keyframes ls-bounce { 0% { transform: scale(0.4); } 60% { transform: scale(1.15); } 100% { transform: none; } }
 .ls-score { font-size: var(--fs-xl); }
-.ls-score strong { color: var(--good); font-variant-numeric: tabular-nums; }
+.ls-score strong { font-variant-numeric: tabular-nums; }
+/* Green from half right up; a lower first try is plain ink, not a
+   misleading "well done" colour (UX-37). */
+.ls-score[data-tone="good"] strong { color: var(--good); }
 .ls-recap {
   text-align: start;
   inline-size: 100%;
@@ -841,6 +857,9 @@ button.ls-slot:hover { border-color: var(--accent); }
 }
 .ls-recap li::marker { content: "✓  "; color: var(--good); }
 .ls-summary-actions { display: flex; flex-direction: column; gap: var(--sp-2); inline-size: 100%; align-items: stretch; margin-block-start: var(--sp-2); }
+/* Half a one-line button's height: a pill on one line, rounded corners
+   when a long next-lesson title wraps to two (UX-37). */
+.ls-summary-actions .btn { border-radius: calc(max(var(--target), var(--tap)) / 2); }
 .ls-summary-actions button.primary { align-self: stretch; }
 @media (prefers-reduced-motion: reduce) { .ls-confetti, .ls-mn-key { animation: none; transition: none; } }
 /* Unwritten lectures open the lecture's page: a dashed card, quiet text. */

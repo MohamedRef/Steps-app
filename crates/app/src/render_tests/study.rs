@@ -60,9 +60,72 @@ fn a_card_is_revealed_graded_and_saved_as_a_study_review() {
     // One item: the session ends on its summary, which takes the focus.
     app.assert_has(tx::SUMMARY_TITLE);
     assert!(app.mount_events() > 0);
+    // A card counts as a card, not a question (UX-36).
+    app.assert_has(tx::sum_items(1));
     app.assert_has(tx::SUM_ALL_SOLID);
     app.assert_has(tx::NEXT_SESSION);
     assert!(app.can_tap(tx::UNDO_LAST));
+    // Undo is a text button, not a second main action.
+    assert!(app.html().contains(r#"class="btn-link st-undo-last""#));
+}
+
+#[test]
+fn only_the_grades_stay_in_reach_and_a_reason_still_rates_again() {
+    use crate::i18n::metacog as mc;
+    use steps_core::review::ErrorReason;
+    let card = first_of("card");
+    let mut app = session(&[&card.id]);
+    app.tap(tx::REVEAL);
+    let html = app.html();
+    // The sticky block is the four grades alone (UX-12): the heading comes
+    // before it and the reasons after it, behind one line.
+    let (before, after) = html.split_once(r#"class="st-grades""#).expect("the grades");
+    assert!(before.contains("st-grade-head"), "the heading scrolls with the item");
+    let (grades, rest) = after.split_once(r#"class="st-why""#).expect("the reasons' line");
+    assert_eq!(grades.matches(r#"class="rating""#).count(), 4);
+    assert!(!grades.contains("mc-chip"), "no reason chip in the sticky block");
+    assert!(rest.contains("mc-chip") && rest.contains("<summary"));
+    app.assert_has(mc::REASON_LABEL_AGAIN);
+    // A reason still rates the card «تاني», and says why.
+    app.tap(mc::MISREAD);
+    let saved = reviews();
+    assert_eq!(saved.len(), 1);
+    assert_eq!((saved[0].event.grade, saved[0].event.reason), (Grade::Again, Some(ErrorReason::Misread)));
+}
+
+#[test]
+fn one_grade_is_filled_the_suggested_one_or_good() {
+    let card = first_of("card");
+    let mut app = session(&[&card.id]);
+    app.tap(tx::REVEAL);
+    assert_eq!(filled(&app.html()), ["good"], "no suggestion: Good is the one filled");
+    app.assert_lacks(tx::SUGGESTED_SHORT);
+}
+
+#[test]
+fn a_suggested_grade_is_the_one_filled_and_a_shown_blank_is_not_wrong() {
+    let cloze = first_of("cloze");
+    let mut app = session(&[&cloze.id]);
+    app.tap(tx::REVEAL_BLANKS);
+    // «مش فاكر، وريني» suggests «تاني»: that one is filled, Good isn't (UX-24).
+    assert_eq!(filled(&app.html()), ["again"]);
+    app.assert_has(tx::SUGGESTED_SHORT);
+    // The answers he asked to see are shown plainly, not as wrong (UX-23).
+    let html = app.html();
+    assert!(html.contains(r#"data-match="shown""#), "{html}");
+    assert!(!html.contains(r#"class="st-filled" data-match="wrong""#), "{html}");
+    app.assert_has(tx::CLOZE_SHOWN);
+    app.assert_lacks(tx::CLOZE_WRONG);
+}
+
+/// The grades drawn filled (`data-emph="yes"`), by `data-grade`.
+fn filled(html: &str) -> Vec<String> {
+    html.split("<button")
+        .skip(1)
+        .filter_map(|tag| tag.split('>').next())
+        .filter(|tag| tag.contains(r#"data-emph="yes""#))
+        .filter_map(|tag| tag.split("data-grade=\"").nth(1)?.split('"').next().map(str::to_string))
+        .collect()
 }
 
 /// A card whose topic line would (`away`) or would not answer it, with the
@@ -155,7 +218,9 @@ fn ending_early_shows_the_summary_and_another_session_goes_back_to_setup() {
     let cards = ids_of("card");
     let mut app = session(&[&cards[0], &cards[1]]);
     app.tap(tx::END);
-    app.assert_has(tx::SUMMARY_EMPTY);
+    // Where he stopped, and the rest waits (UX-36).
+    app.assert_has(&tx::stopped_at(1, 2));
+    app.assert_lacks(tx::SUMMARY_TITLE);
     app.assert_has(tx::NEXT_TOMORROW);
     app.tap(tx::ANOTHER);
     app.assert_has(tx::TITLE);

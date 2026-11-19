@@ -137,7 +137,7 @@ Radii: `--radius` 10px, `--radius-control` 13px, `--radius-card` 16px,
 | Answer choice | `button.answer[data-state=selected\|correct\|wrong\|missed] > span.answer-key + span.answer-text + span.answer-mark` | Disabled after checking; `.answer-mark` says ✓/✗ in words or icon. |
 | Counter | `span.num-ltr` | Any "3 / 12", %, count in Arabic text. |
 | Progress | `div.progress[role=progressbar] > div.progress-fill` | `data-tone="good"` for done. |
-| Rating row | `div.rating-row > button.rating[data-grade=again\|hard\|good\|easy] > span + span.rating-when` | Real intervals only. Content checks never sit here. |
+| Rating row | `div.rating-row > button.rating[data-grade=again\|hard\|good\|easy][data-emph=yes\|no] > span + span.rating-when` | Real intervals only, read right to left with the number in `bdi.num-ltr` («5 ساعات»). One grade is filled (`data-emph="yes"`): the one the item suggests, which also says «مقترح», else Good. In study only the row stays sticky on phones and tablets in portrait. Content checks never sit here. |
 | Sheet | `div.sheet-backdrop` + `div.sheet[role=dialog] > div.sheet-head` | Bottom sheet on phones, ≤430px box from 600px; scrolls inside. For forms, confirms and lists. |
 | Info sheet | `crate::sheet::Sheet { label_id, on_close, head, children }` | What a tap opens to tell more (the book page). No scrim; `--sheet` colour; he drags it to any height (stops at 32/56/90%), flings or drags down to close, Esc/Back close; the size is remembered (`assets/sheet.js`). |
 | Field | `label.field > span + input + span.field-hint? + span.field-error[role=alert]?`, `[data-invalid=true]` | Keep the typed text on errors. |

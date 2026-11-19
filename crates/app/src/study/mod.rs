@@ -24,8 +24,12 @@ pub(crate) use foreground::use_foreground_reset;
 pub mod grade;
 mod item;
 mod planning;
+mod tab;
+pub use tab::shown as tab_shown;
 
+use std::cell::Cell;
 use std::collections::{BTreeSet, HashMap, HashSet};
+use std::rc::Rc;
 use web_time::Instant;
 
 use dioxus::prelude::*;
@@ -81,6 +85,18 @@ fn lecture_title(l: &Lecture) -> String {
     } else {
         Library::get().title(&l.lecture).to_string()
     }
+}
+
+/// When the button he pressed went away with its tap (a reveal, Undo) and
+/// focus fell to the page, it lands on `selector` instead (UX-35), without
+/// scrolling. Focus that is still somewhere stays: after a key,
+/// shortcuts/focus.js has already put it on the next task.
+pub(crate) fn focus_if_lost(selector: &'static str) {
+    document::eval(&format!(
+        "requestAnimationFrame(() => {{ const a = document.activeElement; \
+         if (a && a !== document.body && a.isConnected) return; \
+         document.querySelector({selector:?})?.focus({{ preventScroll: true }}); }});"
+    ));
 }
 
 /// Whether the study player can show this item (MCQs go to the bank, cases
@@ -280,6 +296,9 @@ pub fn Study() -> Element {
         }
     });
 
+    // Where the screen was opened from, for the bar tab (tab.rs).
+    let trail = tab::use_trail();
+    let first_run = use_hook(|| Rc::new(Cell::new(true)));
     // Today's "start a session" button, and any "study these" asked for
     // while Study is already open (a book page's sheet, a lecture page over
     // it): an effect, so a request made here is not left waiting. A session
@@ -288,6 +307,8 @@ pub fn Study() -> Element {
     use_effect({
         let mut apply = apply.clone();
         move || {
+            // A request taken as the screen opens came with the move here.
+            let just_opened = first_run.replace(false);
             if START.read().is_none() {
                 return;
             }
@@ -297,6 +318,7 @@ pub fn Study() -> Element {
                     pending.set(Some(req));
                 } else {
                     apply(req);
+                    tab::started(trail.as_ref(), just_opened);
                 }
             }
         }
@@ -413,8 +435,10 @@ pub fn Study() -> Element {
                     };
                     rsx! {
                         div { class: "st-progress",
+                            // The value is the item on screen, as its words
+                            // say it ("2 من 16"), like the lesson's meter.
                             div { class: "progress st-bar", "data-tone": "good", role: "progressbar",
-                                aria_valuemin: "0", aria_valuemax: "{len}", aria_valuenow: "{pos}",
+                                aria_valuemin: "1", aria_valuemax: "{len}", aria_valuenow: "{pos + 1}",
                                 aria_label: "{pos + 1} {tx::OF} {len}",
                                 aria_valuetext: "{pos + 1} {tx::OF} {len}",
                                 div { class: "progress-fill", style: "inline-size: {pos * 100 / len.max(1)}%" }
@@ -494,6 +518,12 @@ pub fn Study() -> Element {
         }
         Phase::Summary => {
             let summary = session.read().summary();
+            // Ended before the last item: where he stopped (UX-36).
+            let stopped = {
+                let s = session.read();
+                let (pos, len) = s.progress();
+                (!s.is_done()).then_some((pos + 1, len))
+            };
             let next = store.0.borrow().next_due_ms(now_ms());
             let shaky: Vec<(String, String)> = summary
                 .shaky
@@ -505,6 +535,7 @@ pub fn Study() -> Element {
                     items: summary.items,
                     right: summary.right,
                     fresh: summary.fresh,
+                    stopped,
                     shaky,
                     next: next.map(|t| when_label(now_ms(), t, &crate::store::zone())),
                     can_undo: session.read().can_undo(),
@@ -516,6 +547,7 @@ pub fn Study() -> Element {
                     on_again: move |_| {
                         phase.set(Phase::Setup);
                         checkpoint::clear();
+                        tab::release();
                     },
                 }
             }

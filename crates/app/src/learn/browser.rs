@@ -81,6 +81,7 @@ fn export_screen_fixtures_learn() {
     }
     sort_states(&dir, &mut manifest);
     case_states(&dir, &mut manifest);
+    answer_states(&dir, &mut manifest);
     // One fixture per step kind the written lessons use; the set grows with
     // the content (Steps started with one lecture on 2026-11-04).
     assert!(kinds.len() >= 8, "the lessons use most step kinds: {kinds:?}");
@@ -226,6 +227,67 @@ fn case_states(dir: &std::path::Path, manifest: &mut Vec<serde_json::Value>) {
             "file": file, "screen": "learn", "kind": "case", "view": "steps",
             "lesson": lesson.id, "step": at + 1, "steps": lesson.steps.len(),
             "question": answer.is_none(),
+        }));
+    }
+}
+
+/// Steps with their answers out (2026-11-19 UX pass): a match part-way (one
+/// pair made, both its tiles numbered) and finished (rows lined up), a
+/// mnemonic opened on a line with Arabic in it, and a check with English
+/// options whose explanations are Arabic.
+fn answer_states(dir: &std::path::Path, manifest: &mut Vec<serde_json::Value>) {
+    let arabic = |t: &str| t.chars().any(|c| ('\u{0600}'..='\u{06FF}').contains(&c));
+    let find = |pick: &dyn Fn(&StepBody) -> bool| {
+        Library::get()
+            .all_lessons()
+            .flat_map(|(_, l)| l.steps.iter().enumerate().map(move |(at, s)| (l, at, s)))
+            .find(|(_, _, s)| pick(&s.body))
+    };
+    let mut states = Vec::new();
+    if let Some((l, at, s)) = find(&|b| matches!(b, StepBody::Match { .. })) {
+        let StepBody::Match { pairs, .. } = &s.body else { unreachable!() };
+        let n = pairs.len();
+        states.push(("match-paired", l, at, Draft::Match { done: vec![n - 1], misses: 1 }, None));
+        states.push((
+            "match-done",
+            l,
+            at,
+            Draft::Match { done: (0..n).rev().collect(), misses: 1 },
+            Some(false),
+        ));
+    }
+    let mixed_mnemonic =
+        |b: &StepBody| matches!(b, StepBody::Mnemonic { parts, .. } if parts.iter().any(|p| arabic(&p.text)));
+    if let Some((l, at, s)) = find(&mixed_mnemonic) {
+        let StepBody::Mnemonic { parts, .. } = &s.body else { unreachable!() };
+        states.push(("mnemonic-open", l, at, Draft::Mnemonic { shown: vec![true; parts.len()] }, None));
+    }
+    let english_options = |b: &StepBody| {
+        matches!(b, StepBody::Check { options, why, .. }
+            if options.iter().all(|o| super::text::is_latin(o)) && why.iter().any(|w| arabic(w)))
+    };
+    if let Some((l, at, s)) = find(&english_options) {
+        let StepBody::Check { options, answer, .. } = &s.body else { unreachable!() };
+        let wrong = (answer + 1) % options.len();
+        states.push(("check-checked", l, at, Draft::Check { pick: Some(wrong), checked: true }, Some(false)));
+    }
+    for (name, lesson, at, draft, answer) in states {
+        let case = Case {
+            lesson: lesson.id.clone(),
+            at,
+            view: View::Steps,
+            draft: Some((draft, answer)),
+            abbr: false,
+        };
+        let mut dom = VirtualDom::new_with_props(root, case);
+        dom.rebuild_in_place();
+        let file = format!("lesson-{name}-steps.html");
+        write_page(dir, &file, &dom);
+        let step = &lesson.steps[at];
+        manifest.push(serde_json::json!({
+            "file": file, "screen": "learn", "kind": step.body.kind(), "view": "steps",
+            "lesson": lesson.id, "step": at + 1, "steps": lesson.steps.len(),
+            "question": step.body.is_question() && answer.is_none(),
         }));
     }
 }

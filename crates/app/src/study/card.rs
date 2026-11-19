@@ -31,7 +31,20 @@ pub fn CardItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
                 }
             },
             secondary: shown().then(|| rsx! {
-                div { class: "st-answer", lang: "en", dir: "ltr", "{back}" }
+                div {
+                    class: "st-answer",
+                    lang: "en",
+                    dir: "ltr",
+                    tabindex: "-1",
+                    // The reveal button is gone with its tap: the answer
+                    // takes its focus (UX-35).
+                    onmounted: move |_| {
+                        if !reopened {
+                            super::focus_if_lost("main.content .st-item .st-answer");
+                        }
+                    },
+                    "{back}"
+                }
             }),
             footer: shown().then(|| rsx! {
                 GradeRow { item_id: item.id.clone(), suggested: None, on_grade }

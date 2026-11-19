@@ -7,6 +7,9 @@ pub(super) fn SummaryView(
     items: usize,
     right: usize,
     fresh: usize,
+    /// Ended early: the item he stopped at (1-based) and the session's length.
+    #[props(default)]
+    stopped: Option<(usize, usize)>,
     shaky: Vec<(String, String)>,
     next: Option<String>,
     can_undo: bool,
@@ -14,6 +17,11 @@ pub(super) fn SummaryView(
     undo_failed: bool,
     on_again: EventHandler<()>,
 ) -> Element {
+    let title = match stopped {
+        Some((at, of)) => tx::stopped_at(at, of),
+        None if items == 0 => tx::SUMMARY_EMPTY.to_string(),
+        None => tx::SUMMARY_TITLE.to_string(),
+    };
     rsx! {
         crate::ui::Card { class: "st-summary",
             // The last grade button is gone: land focus on the result.
@@ -22,11 +30,11 @@ pub(super) fn SummaryView(
                 onmounted: move |e: MountedEvent| async move {
                     let _ = e.set_focus(true).await;
                 },
-                {if items == 0 { tx::SUMMARY_EMPTY } else { tx::SUMMARY_TITLE }}
+                "{title}"
             }
             if items > 0 {
                 dl { class: "st-stats",
-                    div { dt { {tx::SUM_ITEMS} } dd { "{items}" } }
+                    div { dt { {tx::sum_items(items)} } dd { "{items}" } }
                     div { dt { {tx::SUM_RIGHT} } dd { "{right}" } }
                     div { dt { {tx::SUM_NEW} } dd { "{fresh}" } }
                 }
@@ -52,10 +60,11 @@ pub(super) fn SummaryView(
             }
             div { class: "st-actions",
                 button { class: "btn btn-primary btn-lg", onclick: move |_| on_again.call(()), {tx::ANOTHER} }
-                // He tapped one grade too many: bring the last item back.
-                if can_undo {
-                    button { class: "btn btn-secondary btn-lg", onclick: move |_| on_undo.call(()), {tx::UNDO_LAST} }
-                }
+            }
+            // He tapped one grade too many: bring the last item back. A
+            // quiet text button, not a second main action (UX-36).
+            if can_undo {
+                button { class: "btn-link st-undo-last", onclick: move |_| on_undo.call(()), {tx::UNDO_LAST} }
             }
         }
     }

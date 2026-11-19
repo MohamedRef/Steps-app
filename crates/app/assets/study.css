@@ -133,11 +133,21 @@
 .st-filled[data-match="right"] { background: var(--good-soft); color: var(--good); }
 .st-filled[data-match="close"] { background: var(--accent-soft); color: var(--accent); }
 .st-filled[data-match="wrong"] { background: var(--bad-soft); color: var(--bad); }
+/* A blank he asked to see (UX-23): the blank's own look, filled in, with no
+   mark; not the wrong style, though it comes back like a miss. */
+.st-filled[data-match="shown"] {
+  background: var(--accent-soft); color: var(--text);
+  border-block-end: 2px solid var(--accent); border-radius: 6px 6px 0 0;
+}
 .st-typed { opacity: 0.75; }
 .st-verdict { font-weight: 600; }
 .st-verdict[data-match="right"] { color: var(--good); }
 .st-verdict[data-match="close"] { color: var(--accent); }
 .st-verdict[data-match="wrong"] { color: var(--bad); }
+/* The verdict or the answer takes the focus a tapped reveal button took
+   with it (UX-35): a calm ring for keys, nothing for a tap. */
+:is(.st-verdict, .st-answer):focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+:is(.st-verdict, .st-answer):focus:not(:focus-visible) { outline: none; }
 
 /* ---------- enumerate and essay ---------- */
 .st-recall {
@@ -166,18 +176,35 @@
 @media (min-width: 840px) { .st-compare:has(.st-mine-col) { grid-template-columns: 1fr 2fr; } }
 
 /* ---------- grades ----------
-   "افتكرتها قد إيه؟": the shared .rating-row (parts.css) under its title.
-   The suggestion a kind computes gets a thicker ring; Good keeps its
-   filled brand look. */
-.st-grades { display: flex; flex-direction: column; gap: var(--sp-2); margin-block-start: var(--sp-2); }
-.st-grade-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--sp-2); margin: 0; }
-.st-grades .rating[data-suggested="yes"] { box-shadow: 0 0 0 2px currentColor; }
-.st-grades .rating[data-grade="good"][data-suggested="yes"] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--accent); }
-.st-grades .rating:disabled { opacity: 0.6; cursor: default; }
-/* Recommendation must also read as text, including in high-contrast mode. */
-.rating-suggested { font-size: var(--fs-sm); font-weight: 600; line-height: 1.2; }
+   "افتكرتها قد إيه؟" (.st-grade-head), the shared .rating-row (parts.css)
+   alone in .st-grades, then the optional reasons (.st-why). One grade is
+   filled: the one the kind suggests, with «مقترح» on its top edge, else
+   Good (UX-24). */
+.st-grade-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 var(--sp-2); margin: var(--sp-2) 0 0; }
 /* The content check above stays visibly apart from the rating row. */
-.verify + .st-grades { margin-block-start: var(--sp-4); }
+.verify + .st-grade-head { margin-block-start: var(--sp-4); }
+.st-grades { display: flex; flex-direction: column; }
+.st-grades .rating { position: relative; }
+.st-grades .rating:disabled { opacity: 0.6; cursor: default; }
+/* The recommendation also reads as text, high contrast included. It sits on
+   the button's top edge, so the four grades keep one height; the row
+   leaves it room. */
+.st-grades .rating-row[data-suggested="yes"] { padding-block-start: var(--sp-2); }
+.rating-suggested {
+  position: absolute; inset-block-start: -0.8em; inset-inline: 0; margin-inline: auto; inline-size: fit-content;
+  padding: 0 0.5em; border: 1px solid var(--accent); border-radius: var(--radius-pill);
+  background: var(--glass-solid, var(--surface)); color: var(--accent-ink);
+  font-size: 0.75rem; font-weight: 700; line-height: 1.5; white-space: nowrap;
+}
+/* Stepped: the filled grade stands on the deep ledge, whichever it is. */
+.app[data-appearance="stepped"] .st-grades .rating[data-emph="no"]:not(:disabled):not(:active) { box-shadow: 0 2px 0 var(--ledge); }
+.app[data-appearance="stepped"] .st-grades .rating[data-emph="yes"]:not(:disabled):not(:active) { box-shadow: 0 3px 0 var(--ledge-deep); }
+/* Why he forgot it: one quiet line under the grades; its chips rate «تاني».
+   The picker's own head repeats the line, so only screen readers get it. */
+.st-why > summary { color: var(--muted); font-size: var(--fs-sm); }
+.st-why[open] > summary { color: var(--text); }
+.st-why .mc { margin-block-start: var(--sp-1); }
+.st-why .mc-head { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0; }
 /* Tablets and the Mac: the item card fills the screen, so the grade row
    sits at the foot of the window on every item, in the same place for the
    thumb, the S Pen and the eye, however short the question is. */
@@ -189,7 +216,7 @@
 }
 @media (max-width: 839.98px) {
   /* Thumb reach on the phone and the tablet in portrait: long items keep
-     the grades at the bottom of the screen. */
+     the four grades, and only them, at the bottom of the screen (UX-12). */
   .st-grades {
     position: sticky; inset-block-end: 0; z-index: 2;
     background: var(--surface); padding-block: var(--sp-2);
@@ -199,6 +226,8 @@
 
 /* ---------- summary ---------- */
 .st-summary h1:focus { outline: none; }
+/* Undo is a quiet text button under the main action, at the start edge. */
+.st-summary .st-undo-last { align-self: flex-start; padding-inline: var(--sp-1); }
 .st-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-2); margin: 0; }
 .st-stats div { background: var(--bg); border-radius: var(--radius); padding: var(--sp-3); text-align: center; }
 .st-stats dt { color: var(--muted); font-size: var(--fs-sm); }
@@ -225,7 +254,6 @@
    the list. Never on touch. From batna-app main: study.css (#740). */
 .st-grade-key { display: none; }
 @media (min-width: 840px) and (hover: hover) and (pointer: fine) {
-  .st-grades .rating { position: relative; }
   .st-grade-key {
     display: inline-grid;
     place-items: center;
@@ -239,6 +267,8 @@
     font: 600 0.75rem/1 var(--font-latin);
     color: var(--muted);
   }
+  /* On the filled grade the key takes the button's own ink (UX-24). */
+  .st-grades .rating[data-emph="yes"] .st-grade-key { color: inherit; border-color: currentColor; }
 }
 
 /* Keyboard focus lands on the new card or lesson step (shortcuts/focus.js):

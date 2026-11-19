@@ -29,7 +29,7 @@ use steps_core::content::CaseStep;
 use steps_core::lesson::{MnemonicPart, Picture, SortCard, StepBody, Tone};
 use steps_core::response::{Attempt, Draft};
 
-use super::text::{Line, Rich, is_latin};
+use super::text::{Line, Rich, is_latin, line_dir};
 use crate::i18n::learn as tx;
 use crate::order::grade::{misplaced, shuffled};
 
@@ -152,10 +152,14 @@ pub fn AnsweredBefore(body: StepBody) -> Element {
         _ => (tx::CHECK, String::new()),
     };
     let key = match body {
-        StepBody::Check { options, answer, why, .. } => rsx! {
-            p { class: "ls-key-line", Line { text: options.get(answer).cloned().unwrap_or_default() } }
-            p { class: "ls-why small", Line { text: why.get(answer).cloned().unwrap_or_default() } }
-        },
+        StepBody::Check { options, answer, why, .. } => {
+            let w = why.get(answer).cloned().unwrap_or_default();
+            let d = line_dir(&w);
+            rsx! {
+                p { class: "ls-key-line", Line { text: options.get(answer).cloned().unwrap_or_default() } }
+                p { class: "ls-why small", dir: d, Line { text: w } }
+            }
+        }
         StepBody::Order { steps, why, .. } => rsx! {
             ol { class: "ls-key small", dir: "ltr", lang: "en",
                 for (i , s) in steps.iter().enumerate() { li { key: "{i}", "{s}" } }

@@ -3,8 +3,9 @@
 //! Each blank is tap-to-reveal, then self-marked ✓ / ✗; or, with typing on,
 //! the learner types every blank and "Check" marks them (and can be overruled
 //! per cell). When every blank is marked, the share recalled suggests a grade.
-//! On phones the grid scrolls sideways in its own box with the row labels
-//! (column 0) pinned.
+//! On phones the cells wrap with no column floor, so most tables fit the
+//! card; one whose words can't fit scrolls sideways in its own box, faded at
+//! its end, with the row labels (column 0) pinned.
 
 pub mod grade;
 
@@ -191,5 +192,22 @@ fn BlankCell(index: usize, answer: String, pinned: bool, typing: bool, state: Si
                 }
             }
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn a_phone_table_has_no_column_floor_and_says_when_it_scrolls() {
+        let css = include_str!("table.css");
+        // UX-25: no 7rem column floor on a phone, and ✓ / ✗ stack in a
+        // narrow cell, so a three-column table fits the card.
+        let phone = css.split("@media (max-width: 599.98px)").nth(1).expect("a phone block");
+        let phone = phone.split("\n}").next().unwrap();
+        assert!(phone.contains(".tb-grid th, .tb-grid td { min-inline-size: 0;"), "{phone}");
+        assert!(css.contains(".tb-marks { flex-wrap: wrap; }"));
+        // One that still overflows fades out at its end until scrolled there.
+        assert!(css.contains("animation-timeline: scroll(self inline);"));
+        assert!(css.contains("@keyframes tb-more"));
     }
 }

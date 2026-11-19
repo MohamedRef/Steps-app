@@ -62,7 +62,13 @@ pub(super) fn Check(
                                     }
                                 }
                                 if checked() && (i == answer || picked() == Some(i)) {
-                                    p { class: "ls-why small ls-pop", Line { text: why.get(i).cloned().unwrap_or_default() } }
+                                    // Its own direction: an Arabic line under
+                                    // English options reads right to left (UX-06).
+                                    {
+                                        let w = why.get(i).cloned().unwrap_or_default();
+                                        let d = line_dir(&w);
+                                        rsx! { p { class: "ls-why small ls-pop", dir: d, Line { text: w } } }
+                                    }
                                 }
                             }
                         }

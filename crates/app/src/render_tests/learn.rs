@@ -933,15 +933,28 @@ fn today_offers_the_next_lesson_and_then_the_one_part_way() {
 }
 
 #[test]
-fn a_study_item_links_to_the_lesson_that_explains_it() {
+fn a_study_item_links_to_the_lesson_that_explains_it_but_not_inside_a_lesson() {
     let l = lesson();
     let mut app = play(l);
     play_up_to(&mut app, "try");
-    // The try step's card is a study item: "explain it to me" opens its lesson.
+    // Inside a lesson the try step's card has neither "explain it to me"
+    // (the lesson is the explanation) nor a note chip of its own beside the
+    // step's (UX-41).
+    let step = app.page.text(stage(&app));
+    assert!(!step.contains(tx::EXPLAIN), "{step}");
+    assert_eq!(step.matches(crate::i18n::notes::CHIP_ADD).count(), 1, "{step}");
+    // The same card in a study session links to the lesson that teaches it.
     let card = two_cards().remove(0);
     let teaching = app.run(|| crate::learn::lesson_for_item(&card).map(|l| l.id.clone()));
     if let Some(teaching) = teaching {
-        tap_here(&mut app, tx::EXPLAIN);
+        let mut app = App::open(Screen::Study);
+        let ids = vec![card.clone()];
+        app.run(move || {
+            *crate::study::START.write() =
+                Some(crate::study::Start { lectures: None, items: Some(ids), minutes: 5 })
+        });
+        app.assert_has(crate::i18n::notes::CHIP_ADD);
+        app.tap(tx::EXPLAIN);
         assert_eq!(app.run(|| crate::learn::OPEN.peek().clone()), Some(teaching));
     }
 }

@@ -41,6 +41,20 @@ pub(crate) fn segments(text: &str) -> Vec<Seg> {
     out
 }
 
+/// The study browser fixture opens with every blank shown, as after
+/// «مش فاكر، وريني», so the shown blanks and the grade row are checked too.
+#[cfg(test)]
+pub(crate) static SHOWN_FOR_FIXTURE: std::sync::atomic::AtomicBool =
+    std::sync::atomic::AtomicBool::new(false);
+
+fn shown_for_fixture(_answers: &[String]) -> Option<Vec<Blank>> {
+    #[cfg(test)]
+    if SHOWN_FOR_FIXTURE.load(std::sync::atomic::Ordering::Relaxed) {
+        return Some(mark_blanks(_answers, &vec![String::new(); _answers.len()], true));
+    }
+    None
+}
+
 #[component]
 pub fn ClozeItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
     let Body::Cloze { text, extra } = &item.body else { return rsx! {} };
@@ -51,19 +65,14 @@ pub fn ClozeItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
         .collect();
     let any_numeric = answers.iter().any(|a| a.chars().any(|c| c.is_ascii_digit()));
     let mut typed = use_signal(|| vec![String::new(); answers.len()]);
-    // None while answering; Some(results) once checked or revealed.
-    let mut results = use_signal(|| None::<Vec<Match>>);
+    // None while answering; Some(blanks) once checked or revealed.
+    let mut results = use_signal(|| shown_for_fixture(&answers));
 
     let check = {
         let answers = answers.clone();
         move |reveal: bool| {
             let got = typed.read().clone();
-            let r = answers
-                .iter()
-                .zip(&got)
-                .map(|(a, t)| if reveal && t.trim().is_empty() { Match::Wrong } else { check_typed(a, t) })
-                .collect();
-            results.set(Some(r));
+            results.set(Some(mark_blanks(&answers, &got, reveal)));
         }
     };
     let mut check_typed_now = check.clone();
@@ -107,16 +116,19 @@ pub fn ClozeItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
                                 }
                             },
                             Some(r) => {
-                                let m = r[b];
+                                let blank = r[b];
                                 let got = typed.read()[b].trim().to_string();
                                 rsx! {
-                                    span { key: "{i}", class: "st-filled", "data-match": match_name(m),
-                                        if m != Match::Right && !got.is_empty() {
+                                    span { key: "{i}", class: "st-filled", "data-match": blank.look(),
+                                        if blank.matched != Match::Right && !got.is_empty() {
                                             s { class: "st-typed", "{got}" }
                                             " "
                                         }
                                         strong { "{answer}" }
-                                        span { class: "st-mark", aria_hidden: "true", {match_mark(m)} }
+                                        // Shown because he asked: no ✓ or ✗ to judge it.
+                                        if !blank.shown {
+                                            span { class: "st-mark", aria_hidden: "true", {match_mark(blank.matched)} }
+                                        }
                                     }
                                 }
                             }
@@ -135,15 +147,59 @@ pub fn ClozeItem(item: Item, on_grade: EventHandler<Grade>) -> Element {
                     p { class: "muted small", {tx::CLOZE_TIP} }
                 }
             },
-            Some(r) => rsx! {
-                p { class: "st-verdict", "data-match": match_name(overall(&r)), {verdict(&r)} }
-                if let Some(extra) = extra {
-                    div { class: "st-answer", lang: "en", dir: "ltr", "{extra}" }
+            Some(r) => {
+                let matched: Vec<Match> = r.iter().map(|b| b.matched).collect();
+                let all_shown = r.iter().all(|b| b.shown);
+                rsx! {
+                    p {
+                        class: "st-verdict",
+                        tabindex: "-1",
+                        "data-match": if all_shown { "shown" } else { match_name(overall(&matched)) },
+                        // «صحّح» or «مش فاكر، وريني» went with its tap: the
+                        // verdict takes its focus, and is read out (UX-35).
+                        onmounted: move |_| super::focus_if_lost("main.content .st-item .st-verdict"),
+                        {if all_shown { tx::CLOZE_SHOWN } else { verdict(&matched) }}
+                    }
+                    if let Some(extra) = extra {
+                        div { class: "st-answer", lang: "en", dir: "ltr", "{extra}" }
+                    }
+                    GradeRow { item_id: item.id.clone(), suggested: Some(suggest_cloze(&matched)), on_grade }
                 }
-                GradeRow { item_id: item.id.clone(), suggested: Some(suggest_cloze(&r)), on_grade }
-            },
+            }
         }
     }
+}
+
+/// One blank once checked: how what he typed matched, and whether he left
+/// it empty and asked to see it.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub(crate) struct Blank {
+    pub matched: Match,
+    pub shown: bool,
+}
+
+impl Blank {
+    /// How it is drawn: a blank he asked to see is shown plainly, never in
+    /// the wrong style (UX-23); it still counts as not recalled.
+    fn look(self) -> &'static str {
+        if self.shown { "shown" } else { match_name(self.matched) }
+    }
+}
+
+/// Checks every blank: «مش فاكر، وريني» (`reveal`) shows the ones left
+/// empty, which count as not recalled; what he typed is checked either way.
+pub(crate) fn mark_blanks(answers: &[String], typed: &[String], reveal: bool) -> Vec<Blank> {
+    answers
+        .iter()
+        .zip(typed)
+        .map(|(a, t)| {
+            if reveal && t.trim().is_empty() {
+                Blank { matched: Match::Wrong, shown: true }
+            } else {
+                Blank { matched: check_typed(a, t), shown: false }
+            }
+        })
+        .collect()
 }
 
 fn overall(r: &[Match]) -> Match {
@@ -201,6 +257,24 @@ mod tests {
         // Malformed braces stay text.
         assert_eq!(segments("open {{c1 never closed"), [Seg::Text("open {{c1 never closed".into())]);
         assert_eq!(segments("{{c1}} no answer"), [Seg::Text("{{c1}} no answer".into())]);
+    }
+
+    #[test]
+    fn blanks_shown_on_request_are_not_drawn_wrong() {
+        let answers = ["neural crest".to_string(), "4-5".to_string()];
+        let typed = [String::new(), "4-5".to_string()];
+        let shown = mark_blanks(&answers, &typed, true);
+        assert_eq!(shown[0], Blank { matched: Match::Wrong, shown: true });
+        assert_eq!(shown[0].look(), "shown");
+        assert_eq!(shown[1], Blank { matched: Match::Right, shown: false });
+        assert_eq!(shown[1].look(), "right");
+        // «صحّح» with a blank left empty: that blank is wrong, not shown.
+        let checked = mark_blanks(&answers, &typed, false);
+        assert_eq!(checked[0].look(), "wrong");
+        // A shown blank still counts as not recalled for the suggestion.
+        assert_eq!(suggest_cloze(&[shown[0].matched]), suggest_cloze(&[Match::Wrong]));
+        let css = include_str!("../../assets/study.css");
+        assert!(css.contains(".st-filled[data-match=\"shown\"]"), "a neutral look of its own");
     }
 
     #[test]

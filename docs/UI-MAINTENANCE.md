@@ -110,11 +110,13 @@ Existing tests live beside the owning facade in a child `tests.rs` module.
 - **Announcements and focus:** a result screen (study summary, bank result,
   finished lesson) moves focus to its heading so screen readers announce it;
   a tutor check reads its verdict through a polite live region; after a key
-  reveals, grades, undoes or turns a step, focus moves to the new card or step.
-  A sheet over a bank paper (navigator, tools, end of block) and the note
-  sheet take focus when they open and give it back to what opened them when
-  they close (`bank/run.js`, `notes/mod.rs`); focus moved by script never
-  scrolls the page.
+  reveals, grades, undoes or turns a step, focus moves to the new card or step;
+  when a tapped reveal or Undo in study takes its own button away, focus goes
+  to the answer, the cloze's verdict or the reopened card, never the page
+  (`study::focus_if_lost`). A sheet over a bank paper (navigator, tools, end
+  of block) and the note sheet take focus when they open and give it back to
+  what opened them when they close (`bank/run.js`, `notes/mod.rs`); focus
+  moved by script never scrolls the page.
 - **Clean pages:** helper explanations for disabled actions are for screen
   readers only (`.ls-sr-only`); the visible page stays free of helper notes.
 - **Back:** Android Back and Escape use the visible Back or Close control of
