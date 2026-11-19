@@ -62,7 +62,10 @@ fn the_settings_change_and_are_kept_for_next_time() {
 fn a_round_is_asked_revealed_ticked_and_rated() {
     let mut app = setup();
     start(&mut app);
-    app.assert_has(tx::LISTEN);
+    // Voice off: straight to the think timer, and the card says so, not
+    // «اسمع السؤال» (UX-31).
+    app.assert_has(tx::THINKING);
+    app.assert_lacks(tx::LISTEN);
     app.assert_has(tx::END);
     app.assert_has(tx::REPEAT);
     app.assert_has(tx::NOTES);
@@ -114,7 +117,9 @@ fn ending_at_once_misses_nothing_and_another_round_starts() {
     start(&mut app);
     app.tap(tx::END);
     app.assert_has(tx::DONE);
-    app.assert_has(tx::NONE_MISSED);
+    // Nothing rated: no praise for it (UX-31).
+    app.assert_has(tx::NONE_RATED);
+    app.assert_lacks(tx::NONE_MISSED);
     app.tap(tx::ANOTHER);
     app.assert_has(tx::SHOW);
     app.tap(tx::END);

@@ -142,31 +142,29 @@ fn Setup() -> Element {
         .filter(|e| all.iter().any(|p| p.lecture == e.id))
         .map(|e| (e.id.clone(), e.title.clone()))
         .collect();
+    let any = !lectures.is_empty();
+    // Lecture titles repeat across courses ("Pathology" in eight): each
+    // course is a group named in Arabic and English (UX-14).
+    let groups: Vec<(String, String, Vec<(String, String)>)> = lib
+        .by_course(lectures, |(id, _)| id.as_str())
+        .into_iter()
+        .map(|g| (g.id.clone(), format!("{} · {}", g.short(), g.title()), g.rows))
+        .collect();
     let available = all.iter().filter(|p| settings.lecture.as_ref().is_none_or(|l| *l == p.lecture)).count();
 
     rsx! {
-        // Tablet landscape and the Mac: what oral mode is and Start on one
-        // side, its settings on the other.
+        // Tablet landscape and the Mac: what oral mode is on one side; its
+        // choices, then Start, on the other. On a phone the choices come
+        // before Start, as in any form (UX-14).
         div { class: "tab-cols oral-cols",
             div { class: "tab-main tab-sticky",
-                // With questions to ask, the whole card starts (the button's click bubbles up).
-                crate::ui::Card {
-                    class: if available > 0 { "card-action oral-setup" } else { "oral-setup" },
-                    onclick: move |_| if available > 0 { start(&store.read()) },
+                crate::ui::Card { class: "oral-setup",
                     h1 { {tx::TITLE} }
                     p { class: "note small", {tx::HONEST} }
-                    if available > 0 {
-                        p { class: "muted small", "{tx::AVAILABLE} " {count(available, &QUESTION)} }
-                        button {
-                            class: "oral-start",
-                            "aria-keyshortcuts": "Enter",
-                            {tx::START}
-                        }
-                    }
                 }
             }
-            div { class: "tab-aside",
-                if lectures.is_empty() {
+            div { class: "tab-aside oral-choices",
+                if !any {
                     p { class: "note", {tx::EMPTY} }
                 } else {
                     crate::ui::Card { class: "oral-setup",
@@ -178,12 +176,16 @@ fn Setup() -> Element {
                                     SETTINGS.write().lecture = (!v.is_empty()).then_some(v);
                                 },
                                 option { value: "", selected: settings.lecture.is_none(), {tx::ALL_LECTURES} }
-                                for (id, title) in lectures {
-                                    option {
-                                        key: "{id}",
-                                        value: "{id}",
-                                        selected: settings.lecture.as_deref() == Some(id.as_str()),
-                                        "{title}"
+                                for (course, label, rows) in groups {
+                                    optgroup { key: "{course}", label: "{label}",
+                                        for (id, title) in rows {
+                                            option {
+                                                key: "{id}",
+                                                value: "{id}",
+                                                selected: settings.lecture.as_deref() == Some(id.as_str()),
+                                                "{title}"
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -217,13 +219,15 @@ fn Setup() -> Element {
                                 },
                             }
                         }
+                        // On/off choices are switches, as in Settings (UX-34).
                         label { class: "oral-check",
+                            span { {tx::VOICE} }
                             input {
                                 r#type: "checkbox",
+                                role: "switch",
                                 checked: settings.voice,
                                 onchange: move |e| SETTINGS.write().voice = e.checked(),
                             }
-                            span { {tx::VOICE} }
                         }
                         if settings.voice {
                             div { class: "oral-field",
@@ -242,14 +246,28 @@ fn Setup() -> Element {
                             }
                         }
                         label { class: "oral-check",
+                            span { {tx::AUTO} }
                             input {
                                 r#type: "checkbox",
+                                role: "switch",
                                 checked: settings.auto_continue,
                                 onchange: move |e| SETTINGS.write().auto_continue = e.checked(),
                             }
-                            span { {tx::AUTO} }
                         }
                         p { class: "muted small", {tx::AUTO_HINT} }
+                    }
+                    // With questions to ask, the whole card starts (the button's click bubbles up).
+                    if available > 0 {
+                        crate::ui::Card {
+                            class: "card-action oral-setup oral-go",
+                            onclick: move |_| start(&store.read()),
+                            p { class: "muted small", "{tx::AVAILABLE} " {count(available, &QUESTION)} }
+                            button {
+                                class: "oral-start",
+                                "aria-keyshortcuts": "Enter",
+                                {tx::START}
+                            }
+                        }
                     }
                 }
             }
@@ -445,7 +463,8 @@ fn Runner() -> Element {
             crate::desk::Panes {
                 primary: rsx! {
                     crate::ui::Card { class: "oral-question", "data-course": "{course}",
-                        h2 { class: "muted small", {tx::LISTEN} }
+                        // «اسمع السؤال» only while it is read out (UX-31).
+                        h2 { class: "muted small", {if phase_now == Phase::Asking { tx::LISTEN } else { tx::QUESTION }} }
                         div { class: "en", dir: "ltr", lang: "en",
                             for (i, line) in p.question.iter().enumerate() {
                                 p { key: "{i}", class: if i + 1 == p.question.len() { "oral-ask" } else { "" }, "{line}" }
@@ -696,7 +715,8 @@ fn Summary() -> Element {
         crate::ui::Card {
             h2 { {tx::MISSED} }
             if t.missed.is_empty() {
-                p { class: "muted", {tx::NONE_MISSED} }
+                // Praise only when he rated something (UX-31).
+                p { class: "muted", {if t.good + t.again == 0 { tx::NONE_RATED } else { tx::NONE_MISSED }} }
             } else {
                 // A missed question opens on its card in a study session.
                 ul { class: "en oral-missed tap-list", dir: "ltr", lang: "en",

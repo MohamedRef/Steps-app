@@ -28,6 +28,8 @@ pub const TICK_HINT: &str = "علّم على النقط اللي قلتها.";
 pub const SAID: &str = "قلت";
 pub const ENOUGH: &str = "كفاية للنجاح";
 pub const LISTEN: &str = "اسمع السؤال";
+/// The card's heading once the question has been read out.
+pub const QUESTION: &str = "السؤال";
 pub const THINKING: &str = "فكّر وجاوب بصوتك";
 pub const WHAT_ELSE: &str = "وإيه كمان؟";
 pub const ANSWER: &str = "الإجابة";
@@ -53,5 +55,8 @@ pub const DONE_AGAIN: &str = "تاني";
 pub const DONE_HEARD: &str = "سمعتها بس";
 pub const MISSED: &str = "الأسئلة اللي محتاجة مراجعة";
 pub const NONE_MISSED: &str = "ولا سؤال وقع منك. شغل حلو!";
+/// Ended before rating any question: nothing to praise or to fix.
+pub const NONE_RATED: &str = "ما قيّمتش أي سؤال المرة دي.";
 pub const ANOTHER: &str = "جلسة كمان";
-pub const BACK: &str = "رجوع للإعدادات";
+/// Back to oral mode's own choices, not the app's Settings.
+pub const BACK: &str = "رجوع للاختيارات";
