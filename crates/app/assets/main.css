@@ -52,8 +52,9 @@
   --dur: 180ms;
 }
 /* Phones (compact): one notch denser. A 384dp-wide S24 showed big type,
-   1rem padding nested two deep and 44-56px rows, so the type, spacing and
-   control scales each step down here. Touch targets stay at 40px or more. */
+   1rem padding nested two deep and 44-56px rows, so the type and spacing
+   step down here. Controls keep the full 48dp touch target (--tap 3rem):
+   the top bar's buttons, .btn, segments and tabs (UX-26). */
 @media (max-width: 599.98px) {
   :root {
     --fs-sm: 0.8125rem;
@@ -63,8 +64,8 @@
     --sp-3: 0.625rem;
     --sp-4: 0.75rem;
     --sp-6: 1.125rem;
-    --tap: 2.5rem;
-    --tap-lg: 2.75rem;
+    --tap: 3rem;
+    --tap-lg: 3rem;
     --row: 3rem;
     --lh: 1.5;
     --nav-h: 56px;
@@ -96,6 +97,11 @@ bdi { font-family: var(--font-latin); }
 /* WebKitGTK ignores the dir attribute's isolation on bdi: "1–22" showed as
    "22–1" (B5). Say it in CSS so every bdi dir="ltr" reads left to right. */
 bdi[dir="ltr"] { direction: ltr; unicode-bidi: isolate; }
+/* An English title on a line of its own in an Arabic row starts where the
+   row starts (the right), not at the row's far edge (UX-21). */
+bdi[dir="ltr"]:is(.lecture-title, .coll-title) { text-align: match-parent; }
+/* Read by screen readers, not drawn: a chart's numbers in words. */
+.sr-only { position: absolute; inline-size: 1px; block-size: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; margin: 0; }
 /* Date, time and number fields read left to right inside the Arabic form:
    otherwise WebKit lays 19:00 out as "PM 00:07" (UX #101). */
 input[type="date"], input[type="time"], input[type="datetime-local"], input[type="number"] {
@@ -263,6 +269,8 @@ input[type="file"]::file-selector-button {
 .segmented:has(.seg-hint) { border-radius: var(--radius); }
 .segmented:has(.seg-hint) > button { min-block-size: var(--tap-lg); }
 .seg-hint { font-size: 0.75rem; color: var(--muted); font-weight: 400; }
+/* --muted on --accent-soft is under 4.5:1 in Paper (UX-32). */
+.segmented > button[aria-checked="true"] .seg-hint { color: var(--accent-ink); }
 
 /* ---------- navigation: bottom bar (compact) ---------- */
 .nav {
@@ -416,6 +424,9 @@ button.tap-chip { cursor: pointer; min-block-size: 1.75rem; line-height: 1.6; co
 button.tap-chip:active { transform: var(--press, scale(0.97)); }
 @media (hover: hover) and (pointer: fine) { button.tap-chip:hover { border-color: var(--accent); } }
 .chip.ready { background: var(--good-soft); border-color: transparent; color: var(--good); font-weight: 600; }
+/* A picked chip says so with a tick, not only with its fill (UX-28): the
+   lecture and topic picks, filters and course chips. */
+:is(.chip, .st-chip, .mc-chip)[aria-pressed="true"]::before { content: "✓"; margin-inline-end: 0.35em; font-weight: 700; }
 
 /* ---------- Today: the lecture list ---------- */
 .lectures { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--sp-2); }
