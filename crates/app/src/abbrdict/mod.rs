@@ -227,7 +227,9 @@ pub fn Dictionary() -> Element {
                     }
                 }
             }
-            div { class: "abd-courses", role: "group", aria_label: tx::DICT_COURSES,
+            // A sideways scroller on phones (abbrdict.css): every course is
+            // reachable by scrolling, which the browser check knows by data-scroll-x.
+            div { class: "abd-courses", role: "group", aria_label: tx::DICT_COURSES, "data-scroll-x": "true",
                 for (id, short) in list {
                     button {
                         key: "{id}",
