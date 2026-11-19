@@ -79,7 +79,8 @@ pub fn video_name(set: &Set) -> &str {
     set.video.split_once(" › ").map_or(set.video.as_str(), |(_, v)| v)
 }
 
-fn copy_text(text: &str) {
+/// Puts `text` on the clipboard (also the VQ video link's copy button).
+pub(crate) fn copy_text(text: &str) {
     document::eval(&format!(
         "navigator.clipboard && navigator.clipboard.writeText({})",
         serde_json::to_string(text).unwrap_or_default()

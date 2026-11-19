@@ -17,8 +17,8 @@
 //!   bytes (SIV style), so an untouched question never shows in a diff.
 //!
 //! A sealed item opens to [`Opened`]: the item itself and, when the question
-//! has them, its figure and its educational objective. Pure: no randomness
-//! and no IO.
+//! has them, its figure, its educational objective and the [`Video`] that
+//! explains it. Pure: no randomness and no IO.
 
 use std::fmt;
 
@@ -90,6 +90,35 @@ pub struct Opened {
     /// the bank words it. Shown with the explanation.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub objective: Option<String>,
+    /// The video that explains the question (pack schema 4).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub video: Option<Video>,
+}
+
+/// The video that explains a question: its YouTube id and its title. The
+/// app shows the title and opens the link; it never plays or fetches it.
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct Video {
+    /// The 11-character YouTube video id (`AxAAL7ZJQ4c`).
+    pub youtube: String,
+    /// The video's title (`HY USMLE Oncology - #314`).
+    pub title: String,
+}
+
+impl Video {
+    /// The longest title a video may carry.
+    pub const MAX_TITLE: usize = 200;
+
+    /// `https://www.youtube.com/watch?v=<id>`.
+    pub fn url(&self) -> String {
+        format!("https://www.youtube.com/watch?v={}", self.youtube)
+    }
+
+    /// Whether `id` has a YouTube video id's shape: 11 of A–Z, a–z, 0–9, `-`, `_`.
+    pub fn is_id(id: &str) -> bool {
+        id.len() == 11 && id.bytes().all(|b| b.is_ascii_alphanumeric() || b == b'-' || b == b'_')
+    }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, thiserror::Error)]
@@ -280,12 +309,18 @@ impl Opened {
             image: bytes.map(|b| STANDARD.encode(b)),
             image_type: bytes.map(|_| IMAGE_TYPE.to_string()),
             objective: None,
+            video: None,
         }
     }
 
     /// The same question with its educational objective.
     pub fn with_objective(self, objective: Option<String>) -> Self {
         Self { objective, ..self }
+    }
+
+    /// The same question with the video that explains it.
+    pub fn with_video(self, video: Option<Video>) -> Self {
+        Self { video, ..self }
     }
 }
 

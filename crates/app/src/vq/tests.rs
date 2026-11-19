@@ -2,7 +2,7 @@ use std::collections::BTreeMap;
 
 use steps_core::sealed::{Opened, SealedItem, SealedLecture, seal_item};
 
-use super::testing::{FIGURE, ID, LECTURE, key, other_key, question};
+use super::testing::{FIGURE, ID, LECTURE, key, other_key, question, video};
 use super::*;
 
 /// The fixture lecture alone, and its sealed file.
@@ -15,7 +15,9 @@ fn parts() -> (BTreeMap<String, Lecture>, SealedLecture) {
     let items = vec![
         seal_item(
             &key(),
-            &Opened::with_image(question(), Some(FIGURE)).with_objective(Some("Taught.".into())),
+            &Opened::with_image(question(), Some(FIGURE))
+                .with_objective(Some("Taught.".into()))
+                .with_video(Some(video())),
         ),
         seal_item(&key(), &Opened::with_image(second, None)),
     ];
@@ -39,6 +41,25 @@ fn the_right_key_opens_the_questions_into_their_lecture() {
     assert_eq!(bank.image("cvs.L01.vq0002"), None);
     assert_eq!(bank.objective(ID), Some("Taught."));
     assert_eq!(bank.objective("cvs.L01.vq0002"), None);
+    assert_eq!(bank.video(ID), Some(&video()));
+    assert_eq!(
+        bank.video(ID).map(|v| v.url()).as_deref(),
+        Some("https://www.youtube.com/watch?v=Fixture_0-1")
+    );
+    assert_eq!(bank.video("cvs.L01.vq0002"), None);
+}
+
+#[test]
+fn a_video_without_a_youtube_id_s_shape_is_left_out() {
+    let (mut lectures, _) = parts();
+    let odd = steps_core::sealed::Video { youtube: "javascript:alert(1)".into(), title: "T".into() };
+    let file = SealedLecture::new(
+        LECTURE,
+        &key(),
+        vec![seal_item(&key(), &Opened::with_image(question(), None).with_video(Some(odd)))],
+    );
+    let bank = open_into(std::slice::from_ref(&file), Some(&key()), &mut lectures);
+    assert!(bank.has(ID) && bank.video(ID).is_none(), "the question opens; its link doesn't");
 }
 
 #[test]

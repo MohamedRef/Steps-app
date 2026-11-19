@@ -398,6 +398,17 @@ pub fn practise(mut ui: crate::Ui, lecture: &str, topic: Option<String>) {
     to_top();
 }
 
+/// Opens the bank on one set of questions (the side menu's «أسئلة MH»). A
+/// paper in progress stays on screen; the set waits for the next.
+pub fn open_set(mut ui: crate::Ui, set: exam::Set) {
+    setup::choose_set(set);
+    if matches!(*PHASE.peek(), Phase::Done { .. }) {
+        *PHASE.write() = Phase::Setup;
+    }
+    ui.screen.set(crate::Screen::Bank);
+    to_top();
+}
+
 /// The course in view changed: lecture and topic picks of other courses go.
 pub fn course_changed() {
     setup::course_changed();

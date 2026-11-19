@@ -6,7 +6,7 @@ use std::collections::BTreeSet;
 
 use dioxus::prelude::*;
 use serde::{Deserialize, Serialize};
-use steps_core::exam::{self, Filter, MOCK_SIZE, Mode, Only};
+use steps_core::exam::{self, Filter, MOCK_SIZE, Mode, Only, Set};
 use steps_core::program::{Group, course_of};
 
 use super::{
@@ -86,6 +86,9 @@ impl Saved {
         self.filter.lectures.retain(|l| lectures.contains(l.as_str()));
         self.filter.topics.retain(|(l, t)| topics.contains(&(l.as_str(), t.as_str())));
         self.filter.tags.retain(|t| tags.contains(t.as_str()));
+        if !pool.iter().any(|q| self.filter.set.holds(q)) {
+            self.filter.set = Set::Steps;
+        }
         let lib = Library::get();
         self.block_courses.retain(|c| lib.program.course(c).is_some());
         if !COUNTS.contains(&self.count) {
@@ -144,11 +147,25 @@ fn block_courses(pool: &[exam::Mcq]) -> Vec<(Group, String, String, usize)> {
 /// Narrows the filters to one lecture, or one of its topics (a lecture
 /// page's "questions", a weak topic after a paper), as practice.
 pub fn focus(lecture: &str, topic: Option<String>) {
-    *FILTER.write() = Filter {
+    let mut f = Filter {
         lectures: BTreeSet::from([lecture.to_string()]),
         topics: topic.into_iter().map(|t| (lecture.to_string(), t)).collect(),
+        set: FILTER.peek().set,
         ..Filter::default()
     };
+    // The set in view, if it has questions there; else the one that has.
+    let owned = study_lectures();
+    let pool = exam::mcqs(&owned);
+    let history = HISTORY.peek();
+    if f.select(&pool, &history).is_empty()
+        && let Some(other) = Set::ALL
+            .into_iter()
+            .find(|s| *s != f.set && !Filter { set: *s, ..f.clone() }.select(&pool, &history).is_empty())
+    {
+        f.set = other;
+    }
+    drop(history);
+    *FILTER.write() = f;
     if *MODE.peek() == Mode::Mock {
         *MODE.write() = Mode::Tutor;
     }
@@ -176,12 +193,8 @@ fn all_lectures() -> String {
 const COUNTS: [usize; 4] = [10, 20, 40, usize::MAX];
 /// Step 1 blocks hold up to 20 questions (30 minutes) since May 2026.
 const MOCK_COUNTS: [usize; 3] = [10, 15, 20];
-const TAGS: [(&str, &str); 4] = [
-    ("high-yield", tx::TAG_HIGH_YIELD),
-    ("book-question", tx::TAG_BOOK),
-    ("numbers", tx::TAG_NUMBERS),
-    (steps_core::sealed::TAG, crate::i18n::vq::TAG),
-];
+const TAGS: [(&str, &str); 3] =
+    [("high-yield", tx::TAG_HIGH_YIELD), ("book-question", tx::TAG_BOOK), ("numbers", tx::TAG_NUMBERS)];
 const MODES: [(Mode, &str, &str); 3] = [
     (Mode::Tutor, tx::MODE_TUTOR_NAME, tx::MODE_TUTOR_HINT),
     (Mode::Timed, tx::MODE_TIMED_NAME, tx::MODE_TIMED_HINT),
@@ -224,7 +237,36 @@ fn widen(reason: Empty) {
             f.tags.clear();
             f.only = Only::All;
         }
-        Empty::Topics => *f = Filter::default(),
+        Empty::Topics => *f = Filter { set: f.set, ..Filter::default() },
+    }
+}
+
+/// Moves the bank to another set of questions, with its own scope: the
+/// lectures, topics and kinds picked in one set mean nothing in the other.
+pub(super) fn choose_set(set: Set) {
+    let mut f = FILTER.write();
+    if f.set != set {
+        *f = Filter { set, only: f.only, ..Filter::default() };
+    }
+}
+
+/// The sets with questions, each with how many: none when Steps' own are
+/// all there is, so the switch only shows once the VQ bank is open.
+fn sets(all: &[exam::Mcq]) -> Vec<(Set, usize)> {
+    let counts: Vec<(Set, usize)> =
+        Set::ALL.into_iter().map(|s| (s, all.iter().filter(|q| s.holds(q)).count())).collect();
+    if counts.iter().filter(|(_, n)| *n > 0).count() > 1 { counts } else { Vec::new() }
+}
+
+/// `set`, or Steps' own when `pool` has none of it (the VQ key was let go).
+fn in_view(set: Set, pool: &[exam::Mcq]) -> Set {
+    if pool.iter().any(|q| set.holds(q)) { set } else { Set::Steps }
+}
+
+fn set_name(set: Set) -> &'static str {
+    match set {
+        Set::Steps => tx::SET_STEPS,
+        Set::Vq => crate::i18n::vq::SET,
     }
 }
 
@@ -248,28 +290,35 @@ fn scope_title(filter: &Filter, lectures: &[(String, usize)]) -> (String, bool) 
 pub fn Setup() -> Element {
     let lib = Library::get();
     let owned = study_lectures();
-    let pool = exam::mcqs(&owned);
-    use_hook(|| restore(&pool));
+    let all = exam::mcqs(&owned);
+    use_hook(|| restore(&all));
     // Keep the scope and mode for the next launch whenever they change.
     use_effect(|| {
         let _ = (MODE.read(), FILTER.read(), COUNT.read(), MOCK_COUNT.read(), ADVANCED.read());
         let _ = (BLOCK_COURSES.read(), BLOCK_TUTOR.read());
         let _ = crate::store::shared().put_local_setting(SETUP_KEY, &Saved::now());
     });
-    if pool.is_empty() {
+    if all.is_empty() {
         return rsx! {
             crate::ui::Card {
                 h1 { {tx::TITLE} }
                 h2 { class: "muted", {tx::EMPTY_TITLE} }
                 p { {tx::EMPTY_BODY} }
             }
-            History {}
+            History { set: Set::Steps }
         };
     }
 
     let mode = *MODE.read();
     let advanced = *ADVANCED.read() && mode != Mode::Mock;
-    let filter = FILTER.read().clone();
+    // Steps' own questions or the VQ bank's, never both on one paper.
+    let sets = sets(&all);
+    let mut filter = FILTER.read().clone();
+    if sets.is_empty() {
+        filter.set = Set::Steps;
+    }
+    let set = filter.set;
+    let pool: Vec<exam::Mcq> = all.iter().filter(|q| set.holds(q)).copied().collect();
     let history = HISTORY.read();
     let selected = filter.select(&pool, &history);
     let empty_reason = selected.is_empty().then(|| why_empty(&filter, &pool, &history));
@@ -308,40 +357,46 @@ pub fn Setup() -> Element {
     let tags_present: BTreeSet<&str> = pool.iter().flat_map(|q| q.tags.iter().map(String::as_str)).collect();
     let tags: Vec<(&str, &str)> = TAGS.into_iter().filter(|(t, _)| tags_present.contains(t)).collect();
     // What else narrows the scope, said under its title.
-    let mut narrowing: Vec<&str> =
-        TAGS.iter().filter(|(t, _)| filter.tags.contains(*t)).map(|(_, label)| *label).collect();
+    let mut narrowing: Vec<&str> = Vec::new();
+    if set != Set::Steps {
+        narrowing.push(set_name(set));
+    }
+    narrowing.extend(TAGS.iter().filter(|(t, _)| filter.tags.contains(*t)).map(|(_, label)| *label));
     match filter.only {
         Only::WrongOrUnseen => narrowing.push(tx::ONLY_WRONG),
         Only::Marked => narrowing.push(tx::ONLY_MARKED),
         Only::All => {}
     }
     let (title, latin) = scope_title(&filter, &lectures);
-    let filtered = filter != Filter::default();
+    let filtered = filter.narrowed();
 
     let start_practice = move |_| {
-        let filter = FILTER.read().clone();
+        let mut filter = FILTER.read().clone();
         let lectures = study_lectures();
         let pool = exam::mcqs(&lectures);
+        filter.set = in_view(filter.set, &pool);
         let selected = filter.select(&pool, &HISTORY.read());
         start(*MODE.read(), exam::practice(&selected, *COUNT.read(), now_ms() as u64));
     };
     let start_mock = move |_| {
         let lectures = block_lectures();
-        let pool = exam::mcqs(&lectures);
+        let all = exam::mcqs(&lectures);
+        let set = in_view(FILTER.read().set, &all);
+        let pool: Vec<exam::Mcq> = all.into_iter().filter(|q| set.holds(q)).collect();
         let mode = if *BLOCK_TUTOR.read() { Mode::Tutor } else { Mode::Mock };
         start_paper(mode, true, exam::mock(&pool, *MOCK_COUNT.read(), now_ms() as u64));
     };
     let shown = count.min(available);
     // The block draws from every course, not just the one in view.
     let all_owned = study_lectures_where(|_| true);
-    let all_pool = exam::mcqs(&all_owned);
+    let all_pool: Vec<exam::Mcq> = exam::mcqs(&all_owned).into_iter().filter(|q| set.holds(q)).collect();
     let systems = block_courses(&all_pool);
     let chosen = BLOCK_COURSES.read().clone();
     let block_tutor = *BLOCK_TUTOR.read();
     let pool_size =
         all_pool.iter().filter(|q| chosen.is_empty() || chosen.contains(course_of(q.lecture))).count();
     let mock_shown = mock_count.min(pool_size);
-    let has_history = !HISTORY.read().papers.is_empty();
+    let has_history = HISTORY.read().papers.iter().any(|o| o.set == set);
     let mode_hint = if mode == Mode::Tutor { tx::PRESET_TUTOR } else { tx::PRESET_TIMED };
 
     rsx! {
@@ -352,7 +407,22 @@ pub fn Setup() -> Element {
                 Paused {}
                 header { class: "page-head",
                     crate::courses::CourseChip {}
-                    h1 { {tx::TITLE} }
+                    h1 { if set == Set::Vq { {crate::i18n::vq::BANK_TITLE} } else { {tx::TITLE} } }
+                }
+                // Which questions: Steps' own or the VQ bank's (MH).
+                if !sets.is_empty() {
+                    div { class: "segmented bank-sets", role: "radiogroup", "aria-label": tx::SET_LABEL,
+                        for (s, n) in sets.iter().copied() {
+                            button {
+                                key: "{s:?}",
+                                role: "radio",
+                                "aria-checked": if set == s { "true" } else { "false" },
+                                onclick: move |_| choose_set(s),
+                                span { {set_name(s)} }
+                                span { class: "seg-hint", {tx::questions(n)} }
+                            }
+                        }
+                    }
                 }
                 div { class: "segmented bank-modes", role: "radiogroup", "aria-label": tx::MODE_LABEL,
                     for (m, name, hint) in MODES {
@@ -613,7 +683,11 @@ pub fn Setup() -> Element {
                                 }
                             }
                             if filtered {
-                                button { class: "btn btn-ghost bank-reset", onclick: move |_| *FILTER.write() = Filter::default(),
+                                button { class: "btn btn-ghost bank-reset",
+                                    onclick: move |_| {
+                                        let set = FILTER.peek().set;
+                                        *FILTER.write() = Filter { set, ..Filter::default() };
+                                    },
                                     {tx::RESET_SCOPE}
                                 }
                             }
@@ -644,7 +718,7 @@ pub fn Setup() -> Element {
             }
             if has_history {
                 div { class: "tab-aside tab-sticky",
-                    History {}
+                    History { set }
                 }
             }
         }
@@ -711,9 +785,10 @@ fn Count(on: bool, onclick: EventHandler<MouseEvent>, children: Element) -> Elem
 }
 
 #[component]
-fn History() -> Element {
+fn History(set: Set) -> Element {
     let ui = use_context::<crate::Ui>();
-    let papers = HISTORY.read().papers.clone();
+    // Each set keeps its own past papers.
+    let papers: Vec<exam::Outcome> = HISTORY.read().papers.iter().filter(|o| o.set == set).cloned().collect();
     if papers.is_empty() {
         return rsx! {};
     }

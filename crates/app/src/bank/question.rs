@@ -160,8 +160,10 @@ pub fn QuestionView(
                     }
                 }
             }
-            // A VQ question's educational objective, after its why lines.
+            // A VQ question's educational objective, after its why lines,
+            // then the video that explains it.
             crate::vq::Objective { item_id: item.id.clone() }
+            crate::vq::VideoLink { item_id: item.id.clone() }
             div { class: "q-foot",
                 // A question bank's item is named by its number, not a page.
                 match crate::vq::source_label(&item) {

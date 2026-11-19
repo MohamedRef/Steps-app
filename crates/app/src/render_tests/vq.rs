@@ -1,7 +1,8 @@
 //! The sealed VQ bank on screen (docs/VQ.md), over a one-question fixture
 //! sealed with a test key (`vq::testing`): locked, nothing of it shows;
-//! unlocked in Settings › بياناتك, the question, its figure and its VQ-0001
-//! chip; another key, typed or kept, leaves it locked.
+//! unlocked in Settings › بياناتك, a bank of its own («أسئلة MH»), the
+//! question, its figure, its video and its VQ-0001 chip; another key, typed
+//! or kept, leaves it locked.
 
 use super::App;
 use crate::Screen;
@@ -35,8 +36,9 @@ fn locked_nothing_of_the_bank_shows() {
     let mut app = App::open(Screen::Bank);
     assert_eq!((Library::get().vq.sealed, Library::get().vq.opened()), (1, 0));
     assert!(!in_library());
-    app.tap(crate::i18n::bank::CUSTOMISE);
-    app.assert_lacks(tx::TAG);
+    // No set switch and no MH entry in the side menu.
+    app.assert_lacks(tx::SET);
+    app.assert_lacks(crate::i18n::bank::SET_STEPS);
     search(&mut app, "VQ-0001");
     app.assert_lacks(tx::KIND);
     app.run(|| crate::shortcuts::open_palette(false));
@@ -63,14 +65,40 @@ fn unlocked_the_question_its_figure_and_its_chip_show() {
     assert!(!serde_json::to_string(&export.document).unwrap().contains(&testing::key().text()[..9]));
     app.tap(crate::i18n::settings::CLOSE);
 
-    // The bank's filter has the bank's chip.
+    // A bank of its own: Steps' questions don't count it, and its set (from
+    // the switch or the side menu) holds it alone.
     app.tap(Screen::Bank.label());
-    app.tap(crate::i18n::bank::CUSTOMISE);
-    app.assert_has(tx::TAG);
+    app.assert_has(crate::i18n::bank::SET_STEPS);
+    app.assert_has(crate::i18n::bank::TITLE);
+    let steps = Library::get()
+        .lectures
+        .values()
+        .flat_map(|l| &l.items)
+        .filter(|i| {
+            matches!(i.body, steps_core::content::Body::Mcq { .. }) && !i.tags.iter().any(|t| t == "vq")
+        })
+        .count();
+    assert!(steps > 1);
+    app.tap(tx::SET);
+    app.assert_has(tx::BANK_TITLE);
+    app.assert_has(&crate::i18n::bank::questions(1));
+    app.assert_has(&crate::i18n::bank::questions(steps));
+    // Practice from it is the question alone.
+    app.tap(crate::i18n::bank::START_TUTOR);
+    app.assert_has(testing::STEM);
+    app.assert_has("1 / 1");
+    app.tap(crate::i18n::bank::LEAVE);
+    app.tap(crate::i18n::bank::END);
+    app.tap_tab(Screen::Bank);
+    app.tap(crate::i18n::bank::SET_STEPS);
+    app.assert_lacks(tx::BANK_TITLE);
 
-    // Quick search opens the question as a tutor set.
+    // Quick search: the question, and its video by name and link.
     search(&mut app, "vq 1");
     app.assert_has(tx::KIND);
+    app.assert_has(tx::KIND_VIDEO);
+    app.assert_has(testing::VIDEO_TITLE);
+    app.assert_has("https://www.youtube.com/watch?v=Fixture_0-1");
     app.tap("VQ-0001");
     app.assert_has(testing::STEM);
     let alt = tx::figure_alt("VQ-0001");
@@ -97,6 +125,20 @@ fn unlocked_the_question_its_figure_and_its_chip_show() {
     assert!(html.contains(r#"class="note vq-objective" lang="en" dir="ltr""#), "{html}");
     assert!(app.html().contains(r#"class="chip vq-chip""#), "the VQ-0001 chip");
     app.assert_has("VQ-0001");
+    // The video after the objective: its title opens it, its link is there
+    // to read and copy.
+    let html = app.html();
+    let objective = html.find(r#"class="note vq-objective""#).unwrap();
+    let video = html.find(r#"class="note vq-video""#).expect("the video");
+    assert!(objective < video, "the video comes after the objective");
+    app.assert_has(tx::VIDEO);
+    app.assert_has(testing::VIDEO_TITLE);
+    app.assert_has("https://www.youtube.com/watch?v=Fixture_0-1");
+    crate::cloud::OPENED.lock().unwrap().clear();
+    app.tap(tx::VIDEO_OPEN);
+    assert_eq!(*crate::cloud::OPENED.lock().unwrap(), ["https://www.youtube.com/watch?v=Fixture_0-1"]);
+    app.tap(tx::VIDEO_COPY);
+    app.assert_has(tx::VIDEO_COPIED);
 
     // At the next start the key is still here.
     Library::reload();

@@ -22,6 +22,12 @@ pub struct Tool {
     /// The page it opens over the screen (`lecture::shown`), if a page:
     /// the rail marks the tool, not the screen under it (UX #583).
     pub page: Option<&'static str>,
+    /// Whether it shows now; most always do.
+    pub shows: fn() -> bool,
+}
+
+fn always() -> bool {
+    true
 }
 
 pub const REFERENCES: Tool = Tool {
@@ -29,36 +35,59 @@ pub const REFERENCES: Tool = Tool {
     icon: icons::references,
     open: crate::lecture::open_references,
     page: Some(crate::lecture::REFERENCES),
+    shows: always,
 };
 pub const COURSES: Tool = Tool {
     label: i18n::courses::TITLE,
     icon: icons::courses,
     open: crate::courses::open_map,
     page: Some(crate::courses::MAP),
+    shows: always,
 };
 pub const ABBREVIATIONS: Tool = Tool {
     label: i18n::abbr::DICT_TITLE,
     icon: icons::abbreviations,
     open: |ui| crate::abbrdict::open(ui, None),
     page: Some(crate::abbrdict::PAGE),
+    shows: always,
 };
 // A sheet over the screen, not a page.
-pub const GO_PAGE: Tool =
-    Tool { label: i18n::gopage::TOOL, icon: icons::go_page, open: crate::gopage::open, page: None };
+pub const GO_PAGE: Tool = Tool {
+    label: i18n::gopage::TOOL,
+    icon: icons::go_page,
+    open: crate::gopage::open,
+    page: None,
+    shows: always,
+};
 pub const NOTES: Tool = Tool {
     label: i18n::notes::LIST_TITLE,
     icon: icons::notes,
     open: crate::notes::open_list,
     page: Some(crate::notes::PAGE),
+    shows: always,
 };
 pub const UWORLD: Tool = Tool {
     label: i18n::qbank::PAGE_TITLE,
     icon: icons::uworld,
     open: crate::qbank::open,
     page: Some(crate::qbank::PAGE),
+    shows: always,
 };
-pub const ADD_CARD: Tool =
-    Tool { label: i18n::refs::ADD_CARD, icon: icons::add_card, open: |_| crate::own::open_new(), page: None };
+/// The VQ bank, a bank of its own (the bank's set), once this device opened it.
+pub const MH: Tool = Tool {
+    label: i18n::vq::SET,
+    icon: icons::mh,
+    open: |ui| crate::bank::open_set(ui, steps_core::exam::Set::Vq),
+    page: None,
+    shows: || crate::content::Library::get().vq.opened() > 0,
+};
+pub const ADD_CARD: Tool = Tool {
+    label: i18n::refs::ADD_CARD,
+    icon: icons::add_card,
+    open: |_| crate::own::open_new(),
+    page: None,
+    shows: always,
+};
 
 /// The label of the tool whose page is on top of `screen` now, if any.
 pub fn open_tool(screen: Screen) -> Option<&'static str> {
@@ -68,7 +97,7 @@ pub fn open_tool(screen: Screen) -> Option<&'static str> {
 
 /// The tools the rail and sidebar list under the screens from 600dp (More
 /// holds them on phones).
-pub const TOOLS: [Tool; 7] = [COURSES, GO_PAGE, REFERENCES, ABBREVIATIONS, NOTES, UWORLD, ADD_CARD];
+pub const TOOLS: [Tool; 8] = [COURSES, GO_PAGE, REFERENCES, ABBREVIATIONS, NOTES, UWORLD, MH, ADD_CARD];
 
 /// One row in More.
 #[derive(Clone, Copy)]
@@ -90,6 +119,13 @@ impl Row {
         }
     }
 
+    fn shows(self) -> bool {
+        match self {
+            Row::Tool(t) => (t.shows)(),
+            _ => true,
+        }
+    }
+
     fn is(self, screen: Screen) -> bool {
         matches!(self, Row::Screen(s) if s == screen)
     }
@@ -107,6 +143,7 @@ const GROUPS: [(&str, &[Row]); 2] = [
             Row::Tool(ABBREVIATIONS),
             Row::Tool(NOTES),
             Row::Tool(UWORLD),
+            Row::Tool(MH),
             Row::Tool(ADD_CARD),
             Row::Screen(Screen::Stats),
             Row::Settings,
@@ -155,7 +192,7 @@ pub fn More() -> Element {
                 for (title, rows) in GROUPS {
                     div { key: "{title}", class: "more-group", role: "group", aria_label: title,
                         h2 { class: "more-group-title", {title} }
-                        for (k, &row) in rows.iter().enumerate() {
+                        for (k, &row) in rows.iter().enumerate().filter(|(_, r)| r.shows()) {
                             button {
                                 key: "{k}",
                                 class: "more-row",
@@ -250,7 +287,7 @@ pub fn ToolButtons() -> Element {
                 span { class: "glyph", aria_hidden: "true", {icons::search()} }
                 span { class: "label", {i18n::keys::QS_TITLE} }
             }
-            for tool in TOOLS {
+            for tool in TOOLS.into_iter().filter(|t| (t.shows)()) {
                 button {
                     key: "{tool.label}",
                     class: "nav-item nav-tool",

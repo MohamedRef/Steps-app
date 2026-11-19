@@ -75,6 +75,32 @@ fn filters_combine() {
 }
 
 #[test]
+fn the_vq_bank_is_a_set_of_its_own() {
+    let mut lib = library();
+    lib[1].items.push(mcq("cvs.L09.vq0001", "ie", &["vq"], ABCD, 0));
+    lib[1].items.push(mcq("cvs.L09.vq0002", "ie", &["vq", "high-yield"], ABCD, 0));
+    let pool = mcqs(&lib);
+    let history = History::default();
+    let steps = Filter::default();
+    assert_eq!(steps.select(&pool, &history).len(), 40, "Steps' own, without the VQ questions");
+    let vq = Filter { set: Set::Vq, ..Filter::default() };
+    let ids: Vec<&str> = vq.select(&pool, &history).iter().map(|q| q.id).collect();
+    assert_eq!(ids, ["cvs.L09.vq0001", "cvs.L09.vq0002"]);
+    // The other filters narrow inside the set.
+    let f = Filter { tags: ["high-yield".to_string()].into(), ..vq.clone() };
+    assert_eq!(f.select(&pool, &history).len(), 1);
+    assert!(!vq.narrowed() && !steps.narrowed() && f.narrowed());
+    // A paper of VQ questions alone is the VQ bank's; any other is Steps'.
+    let paper = practice(&vq.select(&pool, &history), 2, 7);
+    assert_eq!(score(&paper, &[], Mode::Tutor, 0, 0).set, Set::Vq);
+    let mixed = practice(&pool, 42, 7);
+    assert_eq!(score(&mixed, &[], Mode::Tutor, 0, 0).set, Set::Steps);
+    // A filter saved before sets existed reads as Steps'.
+    let old: Filter = serde_json::from_str(r#"{"lectures":[],"topics":[],"tags":[],"only":"all"}"#).unwrap();
+    assert_eq!(old, Filter::default());
+}
+
+#[test]
 fn wrong_or_unseen_drops_only_last_right() {
     let lib = library();
     let pool = mcqs(&lib);

@@ -103,6 +103,11 @@ pub fn uworld() -> Element {
     stroke("M9 3L7 21M17 3l-2 18M4 8.5h16M3 15.5h16")
 }
 
+/// The MH question bank (its videos): a play button in a frame.
+pub fn mh() -> Element {
+    stroke("M4 5h16v14H4zM10 9l5 3-5 3z")
+}
+
 /// The course map: a graduation cap.
 pub fn courses() -> Element {
     stroke("M2 9l10-5 10 5-10 5zM6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5M22 9v6")

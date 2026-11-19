@@ -68,6 +68,8 @@ enum Go {
     Questions(String),
     /// One question, as a tutor set (a VQ question by its number).
     Question(String),
+    /// A link to open in the browser (the video of a VQ question).
+    Link(String),
     Page(u32, String),
     Lecture(String),
     Lesson(String),
@@ -188,17 +190,30 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
             }
         }
     }
-    // A VQ question by its number; then the number is no First Aid page.
+    // A VQ question by its number, and the video that explains it, named
+    // and linked; then the number is no First Aid page.
     let vq = crate::vq::search_number(&q);
     if let Some(id) = vq.and_then(|n| lib.vq.question(n)) {
+        let name = crate::vq::name(id).unwrap_or_default();
+        let video = lib.vq.video(id);
         hits.push(Hit {
             key: format!("v-{id}"),
-            name: crate::vq::name(id).unwrap_or_default(),
+            name: name.clone(),
             sub: format!("{} · {}", crate::i18n::vq::KIND, lib.crumb(id)),
             english: true,
             go: Go::Question(id.to_string()),
-            detail: None,
+            detail: video.map(|v| v.title.clone()),
         });
+        if let Some(v) = video {
+            hits.push(Hit {
+                key: format!("y-{id}"),
+                name: v.title.clone(),
+                sub: format!("{} · {name}", crate::i18n::vq::KIND_VIDEO),
+                english: true,
+                go: Go::Link(v.url()),
+                detail: Some(v.url()),
+            });
+        }
     }
     if let (None, crate::gopage::Target::Page { page, lecture }) = (vq, crate::gopage::target(lib, &q)) {
         hits.push(Hit {
@@ -342,6 +357,11 @@ fn follow(go: Go, mut ui: Ui, settings: SettingsNav) {
         Go::Section(section) => settings.show(Some(section)),
         Go::Questions(id) => crate::bank::practise(ui, &id, None),
         Go::Question(id) => crate::bank::open_question(ui, &id),
+        Go::Link(url) => {
+            if let Err(e) = crate::cloud::open_url(&url) {
+                crate::diag::report!("quick search didn't open {url}: {e}");
+            }
+        }
         Go::Page(page, lecture) => crate::pagesheet::open(page, &lecture, None, false, None),
         Go::Lecture(id) => crate::lecture::open(ui, &id),
         Go::Lesson(id) => crate::learn::open(ui, &id),
