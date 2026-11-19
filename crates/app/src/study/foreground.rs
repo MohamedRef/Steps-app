@@ -11,7 +11,8 @@ use super::{PHASE, Phase, STARTED};
 const FOREGROUND_JS: &str = include_str!("foreground.js");
 
 /// Installed once by the app shell, not per Study mount, so switching tabs
-/// never leaves a stale listener behind.
+/// never leaves a stale listener behind. It also keeps the screen trail the
+/// bar tab of a session follows (tab.rs).
 pub(crate) fn use_foreground_reset() {
     use_future(|| async move {
         let mut eval = document::eval(FOREGROUND_JS);
@@ -21,6 +22,7 @@ pub(crate) fn use_foreground_reset() {
             }
         }
     });
+    super::tab::use_screen_trail();
 }
 
 /// Restarts the answer clock, only while a session runs.

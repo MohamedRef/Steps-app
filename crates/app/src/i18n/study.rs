@@ -56,6 +56,8 @@ pub const CLOZE_TIP: &str = "الأرقام بتتصحح من غير الوحد�
 pub const CLOZE_RIGHT: &str = "مظبوط.";
 pub const CLOZE_CLOSE: &str = "قريب جدًا. بص على الإجابة كاملة.";
 pub const CLOZE_WRONG: &str = "الإجابة الصح مكتوبة فوق. هترجعلك تاني قريب.";
+/// Every blank shown on «مش فاكر، وريني»: no verdict, only the answer.
+pub const CLOZE_SHOWN: &str = "دي الإجابة. هترجعلك تاني قريب.";
 
 pub const ENUM_GOAL_A: &str = "فيه";
 pub const ENUM_GOAL_C: &str = "منهم تعدّي.";
@@ -99,7 +101,15 @@ pub const EASY: &str = "سهل";
 
 pub const SUMMARY_TITLE: &str = "خلصت الجلسة، برافو عليك";
 pub const SUMMARY_EMPTY: &str = "الجلسة خلصت";
-pub const SUM_ITEMS: &str = "سؤال";
+/// A session ended before its last item: where he stopped, and the rest is
+/// not lost (it stays due, or new, for the next session).
+pub fn stopped_at(at: usize, of: usize) -> String {
+    format!("وقفت عند {at} من {of}، والباقي هيستناك")
+}
+/// The summary's count of what he answered: cards, whatever their kind.
+pub fn sum_items(n: usize) -> &'static str {
+    super::count::word(n, &super::count::CARD)
+}
 pub const SUM_RIGHT: &str = "صح من أول مرة";
 pub const SUM_NEW: &str = "جديد";
 pub const SUM_ALL_SOLID: &str = "كله كان ثابت. المراجعة الجاية هتيجي بعد فترة أطول.";

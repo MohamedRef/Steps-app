@@ -40,6 +40,10 @@ pub fn ItemView(
     retry: bool,
     #[props(default)] reopened: bool,
     #[props(default)] tagging: bool,
+    /// Inside a lesson's «جرّب بنفسك» step: the step has its own note chip,
+    /// and the lesson is the explanation, so the item shows neither (UX-41).
+    #[props(default)]
+    in_lesson: bool,
     on_grade: EventHandler<Grade>,
 ) -> Element {
     let revealed = use_context_provider(|| Revealed(Signal::new(false))).0;
@@ -64,8 +68,17 @@ pub fn ItemView(
             // hover.js reads this course's glossary first (#318).
             "data-course": steps_core::program::course_of(&item.id),
             // Screen readers only: a heading to jump to for each item; the
-            // chips below show the same on screen.
-            h1 { class: "st-sr-only", "{kind_label(&item.body)} · {lecture_title}" }
+            // chips below show the same on screen. Reopened by Undo, the
+            // item takes the focus the Undo button took away (UX-35).
+            h1 {
+                class: "st-sr-only",
+                onmounted: move |_| {
+                    if reopened {
+                        super::focus_if_lost("main.content .st-item");
+                    }
+                },
+                "{kind_label(&item.body)} · {lecture_title}"
+            }
             header { class: "st-item-head",
                 span { class: "chip st-badge", "data-badge": if retry { "retry" } else if fresh { "new" } else { "review" }, {badge} }
                 span { class: "chip", {kind_label(&item.body)} }
@@ -93,12 +106,14 @@ pub fn ItemView(
                 }
             }
             footer { class: "st-item-foot",
-                crate::learn::ExplainLink { item_id: item.id.clone() }
-                // His note stays out of sight until the answer is (it may hold it).
-                crate::notes::NoteChip {
-                    anchor: steps_core::note::Anchor::Item(item.id.clone()),
-                    page: (item.src.page > 0).then_some(item.src.page),
-                    show_text: revealed(),
+                if !in_lesson {
+                    crate::learn::ExplainLink { item_id: item.id.clone() }
+                    // His note stays out of sight until the answer is (it may hold it).
+                    crate::notes::NoteChip {
+                        anchor: steps_core::note::Anchor::Item(item.id.clone()),
+                        page: (item.src.page > 0).then_some(item.src.page),
+                        show_text: revealed(),
+                    }
                 }
                 // His own cards may have no page.
                 if item.src.page > 0 {

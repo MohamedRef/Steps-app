@@ -367,8 +367,9 @@ fn screen_body(screen: Screen) -> Element {
 #[component]
 fn NavButton(screen: Screen, class: &'static str) -> Element {
     let mut ui = use_context::<Ui>();
-    // A tool page on top (المواد, مراجعك…) takes the mark (UX #583).
-    let active = *ui.screen.read() == screen && more::open_tool(screen).is_none();
+    // A tool page on top (المواد, مراجعك…) takes the mark (UX #583). A study
+    // session Today started stays under Today (study/tab.rs).
+    let active = study::tab_shown(*ui.screen.read()) == screen && more::open_tool(screen).is_none();
     rsx! {
         button {
             class,
