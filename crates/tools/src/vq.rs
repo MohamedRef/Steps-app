@@ -18,7 +18,7 @@ use std::path::{Path, PathBuf};
 
 use serde::{Deserialize, Serialize};
 use steps_core::content::{Index, Item, Lecture};
-use steps_core::sealed::{self, Key, Opened, SealedLecture};
+use steps_core::sealed::{self, Key, Opened, SealedLecture, Video};
 use steps_core::validate::{self, Context};
 
 type Res<T> = Result<T, Vec<String>>;
@@ -265,17 +265,20 @@ struct Plain {
     items: Vec<PlainItem>,
 }
 
-/// A question in clear: the item, with its educational objective on it.
+/// A question in clear: the item, with its educational objective and the
+/// video that explains it on it.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 struct PlainItem {
     #[serde(flatten)]
     item: Item,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     objective: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    video: Option<Video>,
 }
 
-/// The one key a plain question has beyond an item's.
-const OBJECTIVE: &str = "objective";
+/// The keys a plain question has beyond an item's.
+const OWN_KEYS: [&str; 2] = ["objective", "video"];
 
 /// DIR as an absolute path, refused when it is inside the repo: plain
 /// questions must never be where git could take them.
@@ -354,7 +357,10 @@ fn open(root: &Path, dir: &Path, env: &Env) -> Res<String> {
         let file = Plain {
             schema: steps_core::content::SCHEMA.into(),
             lecture: lecture.clone(),
-            items: items.into_iter().map(|o| PlainItem { item: o.item, objective: o.objective }).collect(),
+            items: items
+                .into_iter()
+                .map(|o| PlainItem { item: o.item, objective: o.objective, video: o.video })
+                .collect(),
         };
         let yaml = serde_yaml_ng::to_string(&file).map_err(|e| vec![e.to_string()])?;
         let head = format!(
@@ -407,7 +413,9 @@ fn seal(root: &Path, dir: &Path, env: &Env) -> Res<String> {
             .iter()
             .map(|p| {
                 let figure = sealed::number(&p.item.id).and_then(|n| images.get(&n)).map(Vec::as_slice);
-                let opened = Opened::with_image(p.item.clone(), figure).with_objective(p.objective.clone());
+                let opened = Opened::with_image(p.item.clone(), figure)
+                    .with_objective(p.objective.clone())
+                    .with_video(p.video.clone());
                 sealed::seal_item(key, &opened)
             })
             .collect();
@@ -525,7 +533,7 @@ fn read_plain(dir: &Path, listed: &BTreeSet<&str>) -> PlainDir {
                 for k in keys.iter().filter(|k| {
                     !own.contains(&k.as_str())
                         && !steps_core::content::SHARED_KEYS.contains(&k.as_str())
-                        && k.as_str() != OBJECTIVE
+                        && !OWN_KEYS.contains(&k.as_str())
                 }) {
                     problems.push(format!("{shown}: {id}: unknown key `{k}`"));
                 }

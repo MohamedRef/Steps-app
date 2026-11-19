@@ -116,16 +116,46 @@ fn a_figure_is_optional_and_a_small_webp() {
     let mut gif = Opened::with_image(shown.clone(), Some(b"RIFF\x04\x00\x00\x00WEBPVP8L"));
     gif.image_type = Some("image/gif".into());
     assert!(messages(&gif).iter().any(|m| m.contains("image_type is Some(\"image/gif\")")));
-    let typed =
-        Opened { image: None, image_type: Some("image/webp".into()), item: shown.clone(), objective: None };
+    let typed = Opened {
+        image: None,
+        image_type: Some("image/webp".into()),
+        item: shown.clone(),
+        objective: None,
+        video: None,
+    };
     assert!(messages(&typed).iter().any(|m| m.ends_with("image_type without an image")));
     let garbled = Opened {
         image: Some("***".into()),
         image_type: Some("image/webp".into()),
         item: shown,
         objective: None,
+        video: None,
     };
     assert!(messages(&garbled).iter().any(|m| m.ends_with("image is not base64")));
+}
+
+#[test]
+fn a_video_has_a_youtube_id_and_a_title() {
+    use crate::sealed::Video;
+    let o = Opened::with_image(question("cvs.L04.vq0006", ""), None);
+    let video = |youtube: &str, title: &str| Some(Video { youtube: youtube.into(), title: title.into() });
+    let linked = o.clone().with_video(video("Ab3_xYz-012", "Step 1 review - #12"));
+    assert!(messages(&linked).is_empty(), "{:#?}", messages(&linked));
+    assert_eq!(
+        linked.video.as_ref().map(Video::url).as_deref(),
+        Some("https://www.youtube.com/watch?v=Ab3_xYz-012")
+    );
+    for (youtube, title, says) in [
+        ("Ab3_xYz-01", "Title", "is not a YouTube video id"),
+        ("Ab3_xYz-012!", "Title", "is not a YouTube video id"),
+        ("https://youtu", "Title", "is not a YouTube video id"),
+        ("Ab3_xYz-012", " ", "video.title is empty"),
+        ("Ab3_xYz-012", "Title ", "spaces at an end"),
+        ("Ab3_xYz-012", &"t".repeat(201), "over 200 characters"),
+    ] {
+        let msgs = messages(&o.clone().with_video(video(youtube, title)));
+        assert!(msgs.iter().any(|m| m.contains(says)), "{youtube:?} {title:?}: {msgs:#?}");
+    }
 }
 
 #[test]

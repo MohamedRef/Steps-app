@@ -16,11 +16,15 @@ const FIGURE: &[u8] = b"RIFF\x0c\x00\x00\x00WEBPVP8L\x00\x00";
 /// What the first question teaches.
 const OBJECTIVE: &str = "Reflex (vasovagal) syncope is the most common cause of fainting.";
 
+/// The video that explains the first question.
+const VIDEO: &str = "    video:\n      youtube: Ab3_xYz-012\n      title: \"Step 1 review - #12\"\n";
+
 /// The open folder `vq open` would write: two questions under the fixture
-/// lecture `cvs.L04`, the first with a figure and an educational objective.
+/// lecture `cvs.L04`, the first with a figure, an educational objective and
+/// the video that explains it.
 fn plain_dir() -> tempfile::TempDir {
     let dir = tempfile::tempdir().unwrap();
-    let taught = question(1, &format!("    objective: \"{OBJECTIVE}\"\n"));
+    let taught = question(1, &format!("    objective: \"{OBJECTIVE}\"\n{VIDEO}"));
     write(dir.path(), "cvs/L04.yaml", &plain(&[question(2, ""), taught]));
     std::fs::create_dir_all(dir.path().join("images")).unwrap();
     std::fs::write(dir.path().join("images/VQ-0001.webp"), FIGURE).unwrap();
@@ -86,8 +90,11 @@ fn seal_then_open_then_seal_changes_nothing() {
     assert_eq!(first.image_bytes().as_deref(), Some(FIGURE));
     assert_eq!(first.image_type.as_deref(), Some(sealed::IMAGE_TYPE));
     assert_eq!(first.objective.as_deref(), Some(OBJECTIVE));
+    let video = first.video.as_ref().expect("the video, sealed with the question");
+    assert_eq!((video.youtube.as_str(), video.title.as_str()), ("Ab3_xYz-012", "Step 1 review - #12"));
+    assert!(!text.contains("Ab3_xYz-012") && !text.contains("review - #12"), "the video is sealed too");
     let second = sealed::open_item(&key(7), &file.items[1]).unwrap();
-    assert_eq!((second.image, second.objective), (None, None));
+    assert_eq!((second.image, second.objective, second.video), (None, None, None));
 
     // Open into a fresh folder: the same questions and figure come out.
     let out_dir = tempfile::tempdir().unwrap();
@@ -101,7 +108,7 @@ fn seal_then_open_then_seal_changes_nothing() {
         "the objective sits on its item:\n{written}"
     );
     let back: Plain = serde_yaml_ng::from_str(&written).unwrap();
-    let taught = question(1, &format!("    objective: \"{OBJECTIVE}\"\n"));
+    let taught = question(1, &format!("    objective: \"{OBJECTIVE}\"\n{VIDEO}"));
     let want: Plain = serde_yaml_ng::from_str(&plain(&[taught, question(2, "")])).unwrap();
     assert_eq!(back.items, want.items);
     assert_eq!(back.items[0].objective.as_deref(), Some(OBJECTIVE));
@@ -242,10 +249,11 @@ fn with_the_key_validate_opens_every_question_and_checks_it() {
     );
     // An item's own rules, and the bank's: a topic the lecture doesn't have,
     // another page, no tag, and a figure that isn't WebP.
-    let broken = question(2, "    objective: \" \"\n")
-        .replace("topic: shock", "topic: murmurs")
-        .replace("page: 2", "page: 3")
-        .replace("tags: [vq]", "tags: [no-figure]");
+    let broken =
+        question(2, "    objective: \" \"\n    video:\n      youtube: not-an-id\n      title: \" \"\n")
+            .replace("topic: shock", "topic: murmurs")
+            .replace("page: 2", "page: 3")
+            .replace("tags: [vq]", "tags: [no-figure]");
     write(dir.path(), "cvs/L04.yaml", &plain(&[question(1, ""), broken]));
     std::fs::write(dir.path().join("images/VQ-0001.webp"), b"\x89PNG\r\n\x1a\n0000").unwrap();
     seal(root, dir.path(), &with(7)).unwrap();
@@ -256,6 +264,8 @@ fn with_the_key_validate_opens_every_question_and_checks_it() {
         "content/cvs/vq/L04.yaml: cvs.L04.vq0002: src.page must be 2, the id's VQ number",
         "content/cvs/vq/L04.yaml: cvs.L04.vq0002: tags need `vq`",
         "content/cvs/vq/L04.yaml: cvs.L04.vq0002: objective is empty; write it or leave it out",
+        "content/cvs/vq/L04.yaml: cvs.L04.vq0002: video.youtube \"not-an-id\" is not a YouTube video id (11 of A-Z a-z 0-9 - _)",
+        "content/cvs/vq/L04.yaml: cvs.L04.vq0002: video.title is empty",
     ] {
         assert!(problems.iter().any(|p| p == want), "{want}: {problems:#?}");
     }

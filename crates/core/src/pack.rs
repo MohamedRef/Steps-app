@@ -27,12 +27,15 @@ pub const MAGIC: &[u8; 8] = b"STEPSPK1";
 /// built-in content) instead of showing it with pieces silently missing.
 /// Packs from before the field read as 0. 2: courses can cite slides
 /// (`program::Source`). 3: lesson steps can `remind` of a تحشيشة taught
-/// elsewhere (`lesson::Reminder`).
+/// elsewhere (`lesson::Reminder`). 4: a sealed VQ question can carry the
+/// video that explains it (`sealed::Video`); apps from 2026.11.5 open
+/// sealed questions with `deny_unknown_fields`, so they must keep their
+/// pack rather than lose every question that has one.
 ///
 /// Not bumped for [`Pack::sealed`] and [`Pack::sources`] (2026-11-18): they
 /// are new fields of the pack itself, which older apps ignore, and an older
 /// app could never open sealed questions anyway.
-pub const SCHEMA: u32 = 3;
+pub const SCHEMA: u32 = 4;
 
 /// Highest miniz level: slower to pack (only when content changes), not to unpack.
 const LEVEL: u8 = 10;

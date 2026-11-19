@@ -8,8 +8,12 @@
 //! - [`open_into`] opens them while the library loads (`content::Library`).
 //! - `vault` keeps the key on the device, never in the database.
 //! - [`KeyCard`] is the Settings card; [`Figure`] shows a question's figure,
-//!   [`Objective`] its educational objective with the explanation, and
-//!   [`SourceChip`] its `VQ-0001` in place of a page.
+//!   [`Objective`] its educational objective with the explanation,
+//!   [`VideoLink`] the video that explains it, and [`SourceChip`] its
+//!   `VQ-0001` in place of a page.
+//!
+//! The bank shows them as their own set, «أسئلة MH» (`exam::Set::Vq`), apart
+//! from Steps' own questions.
 
 mod figure;
 mod key;
@@ -20,9 +24,9 @@ pub mod vault;
 use std::collections::BTreeMap;
 
 use steps_core::content::{Item, Lecture};
-use steps_core::sealed::{self, Key, SealedLecture};
+use steps_core::sealed::{self, Key, SealedLecture, Video};
 
-pub use figure::{Figure, Objective, SourceChip};
+pub use figure::{Figure, Objective, SourceChip, VideoLink};
 pub use key::KeyCard;
 
 use crate::content::Library;
@@ -47,6 +51,8 @@ pub struct Bank {
     images: BTreeMap<String, String>,
     /// The opened questions' educational objectives, by item id.
     objectives: BTreeMap<String, String>,
+    /// The videos that explain the opened questions, by item id.
+    videos: BTreeMap<String, Video>,
 }
 
 impl Bank {
@@ -79,6 +85,11 @@ impl Bank {
     /// The question's educational objective.
     pub fn objective(&self, id: &str) -> Option<&str> {
         self.objectives.get(id).map(String::as_str)
+    }
+
+    /// The video that explains the question.
+    pub fn video(&self, id: &str) -> Option<&Video> {
+        self.videos.get(id)
     }
 }
 
@@ -114,6 +125,9 @@ pub fn open_into(
             }
             if let Some(objective) = opened.objective.filter(|o| !o.trim().is_empty()) {
                 bank.objectives.insert(opened.item.id.clone(), objective);
+            }
+            if let Some(video) = opened.video.filter(|v| Video::is_id(&v.youtube)) {
+                bank.videos.insert(opened.item.id.clone(), video);
             }
             bank.numbers.insert(n, opened.item.id.clone());
             lecture.items.push(opened.item);

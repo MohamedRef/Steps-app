@@ -8,7 +8,7 @@
 use std::cell::RefCell;
 
 use steps_core::content::{Body, Item, Source, Status};
-use steps_core::sealed::{Key, Opened, SealedLecture, seal_item};
+use steps_core::sealed::{Key, Opened, SealedLecture, Video, seal_item};
 
 pub const LECTURE: &str = "cvs.L01";
 pub const ID: &str = "cvs.L01.vq0001";
@@ -19,6 +19,13 @@ pub const RIGHT: &str = "Mitral regurgitation from the fixture";
 pub const FIGURE: &[u8] = b"RIFF\x0c\x00\x00\x00WEBPVP8L\x00\x00";
 /// What the fixture teaches, shown with its explanation.
 pub const OBJECTIVE: &str = "The fixture's objective: an apical holosystolic murmur is mitral regurgitation.";
+/// The video that explains it (an id of the right shape, never fetched).
+pub const VIDEO_ID: &str = "Fixture_0-1";
+pub const VIDEO_TITLE: &str = "Step 1 fixture - #1";
+
+pub fn video() -> Video {
+    Video { youtube: VIDEO_ID.into(), title: VIDEO_TITLE.into() }
+}
 
 thread_local! {
     static EXTRA: RefCell<Vec<SealedLecture>> = const { RefCell::new(Vec::new()) };
@@ -65,7 +72,9 @@ pub fn question() -> Item {
 /// This thread's packs carry the sealed fixture from now on, and its
 /// library opens again with it (locked until a key is kept).
 pub fn install() {
-    let opened = Opened::with_image(question(), Some(FIGURE)).with_objective(Some(OBJECTIVE.into()));
+    let opened = Opened::with_image(question(), Some(FIGURE))
+        .with_objective(Some(OBJECTIVE.into()))
+        .with_video(Some(video()));
     let sealed = seal_item(&key(), &opened);
     EXTRA.with(|e| *e.borrow_mut() = vec![SealedLecture::new(LECTURE, &key(), vec![sealed])]);
     crate::content::Library::reload();

@@ -76,9 +76,36 @@ pub enum Only {
     Marked,
 }
 
+/// Which questions the bank draws from: Steps' own, or Mohamed's VQ bank,
+/// which he keeps apart as «أسئلة MH» (2026-11-19). A paper never mixes them.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Serialize, Deserialize)]
+#[serde(rename_all = "snake_case")]
+pub enum Set {
+    #[default]
+    Steps,
+    /// Questions tagged [`crate::sealed::TAG`].
+    Vq,
+}
+
+impl Set {
+    pub const ALL: [Set; 2] = [Set::Steps, Set::Vq];
+
+    /// The set `q` belongs to.
+    pub fn of(q: &Mcq) -> Set {
+        if q.tags.iter().any(|t| t == crate::sealed::TAG) { Set::Vq } else { Set::Steps }
+    }
+
+    pub fn holds(self, q: &Mcq) -> bool {
+        Set::of(q) == self
+    }
+}
+
 /// What the bank screen asks for. An empty set means "any".
 #[derive(Debug, Clone, PartialEq, Eq, Default, Serialize, Deserialize)]
 pub struct Filter {
+    /// The questions it draws from; filters saved before sets read as Steps'.
+    #[serde(default)]
+    pub set: Set,
     pub lectures: BTreeSet<String>,
     /// `(lecture, topic)`: topic ids are only unique inside a lecture.
     pub topics: BTreeSet<(String, String)>,
@@ -100,7 +127,12 @@ impl Filter {
             Only::WrongOrUnseen => history.last.get(q.id) != Some(&true),
             Only::Marked => history.marked.contains(q.id),
         };
-        lecture_ok && topic_ok && tags_ok && only_ok
+        self.set.holds(q) && lecture_ok && topic_ok && tags_ok && only_ok
+    }
+
+    /// Whether it narrows its set at all: a lecture, topic, tag or result.
+    pub fn narrowed(&self) -> bool {
+        *self != Filter { set: self.set, ..Filter::default() }
     }
 
     pub fn select<'a>(&self, pool: &[Mcq<'a>], history: &History) -> Vec<Mcq<'a>> {
@@ -389,6 +421,9 @@ impl Score {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub struct Outcome {
     pub mode: Mode,
+    /// The questions it was drawn from; papers from before sets read as Steps'.
+    #[serde(default)]
+    pub set: Set,
     pub at_ms: i64,
     pub took_ms: u64,
     pub total: Score,
@@ -399,8 +434,11 @@ pub struct Outcome {
 }
 
 pub fn score(questions: &[Question], answers: &[Answer], mode: Mode, at_ms: i64, took_ms: u64) -> Outcome {
+    // A paper is the VQ bank's when every question on it is one of its own.
+    let vq = !questions.is_empty() && questions.iter().all(|q| crate::sealed::number(&q.id).is_some());
     let mut out = Outcome {
         mode,
+        set: if vq { Set::Vq } else { Set::Steps },
         at_ms,
         took_ms,
         total: Score::default(),

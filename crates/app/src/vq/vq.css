@@ -66,6 +66,33 @@
 .vq-objective-head { margin: 0 0 var(--sp-1); font-size: var(--fs-sm); }
 .vq-objective p { margin: 0; }
 
+/* The video that explains the question: its title opens it, its link can
+   be copied. */
+.vq-video { margin-block: var(--sp-3) 0; display: flex; flex-direction: column; gap: var(--sp-2); }
+.vq-video-head { margin: 0; font-size: var(--fs-sm); }
+.vq-video-open {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-block-size: var(--target);
+  text-align: start;
+  font-weight: 600;
+  color: var(--accent);
+}
+.vq-video-play { flex: none; font-size: 0.9em; }
+.vq-video-title { overflow-wrap: anywhere; }
+.vq-video-link { display: flex; align-items: center; flex-wrap: wrap; gap: var(--sp-2); }
+.vq-video-url {
+  flex: 1;
+  min-inline-size: 0;
+  font-family: var(--font-latin);
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+.vq-video-copy { min-block-size: var(--target); }
+
 /* The key card. */
 .vq-key .vq-state { margin: 0; }
 .vq-key .vq-form { display: flex; flex-direction: column; gap: var(--sp-3); }

@@ -51,8 +51,9 @@ pub fn file(f: &SealedLecture) -> Vec<Problem> {
 /// An opened question, inside its lecture: an ordinary item's rules (topic,
 /// MCQ shape, approvals: `validate::item_rules`) and the bank's own: `src`
 /// is `vq` at the id's number, the `vq` tag, a figure, when it has one,
-/// that is a WebP of at most [`sealed::MAX_IMAGE_BYTES`], and an educational
-/// objective, when it has one, that says something. Figures are optional: a
+/// that is a WebP of at most [`sealed::MAX_IMAGE_BYTES`], an educational
+/// objective, when it has one, that says something, and a video, when it
+/// has one, with a YouTube id's shape and a title. Figures are optional: a
 /// stem's "is shown" often means values shown as text.
 pub fn opened(lec: &Lecture, o: &Opened, cx: &Context<'_>) -> Vec<Problem> {
     let item = &o.item;
@@ -87,6 +88,22 @@ pub fn opened(lec: &Lecture, o: &Opened, cx: &Context<'_>) -> Vec<Problem> {
     }
     if o.objective.as_deref().is_some_and(|t| t.trim().is_empty()) {
         out.push("objective is empty; write it or leave it out".into());
+    }
+    if let Some(v) = &o.video {
+        if !sealed::Video::is_id(&v.youtube) {
+            out.push(format!(
+                "video.youtube {:?} is not a YouTube video id (11 of A-Z a-z 0-9 - _)",
+                v.youtube
+            ));
+        }
+        let title = v.title.trim();
+        if title.is_empty() {
+            out.push("video.title is empty".into());
+        } else if title != v.title || title.contains('\n') {
+            out.push("video.title has spaces at an end or a line break".into());
+        } else if title.chars().count() > sealed::Video::MAX_TITLE {
+            out.push(format!("video.title is over {} characters", sealed::Video::MAX_TITLE));
+        }
     }
     out.into_iter().map(|message| Problem { at: item.id.clone(), message }).collect()
 }

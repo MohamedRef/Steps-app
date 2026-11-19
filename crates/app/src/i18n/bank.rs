@@ -2,6 +2,9 @@ pub const PRACTISE_TOPIC: &str = "اتمرّن على الموضوع ده";
 pub const OPEN_LECTURE: &str = "افتح المحاضرة";
 pub const TITLE: &str = "بنك الأسئلة";
 pub const MODE_LABEL: &str = "طريقة الحل";
+/// Which questions the bank draws from: Steps' own, or the VQ bank's.
+pub const SET_LABEL: &str = "أنهي أسئلة";
+pub const SET_STEPS: &str = "أسئلة Steps";
 pub const MODE_TUTOR_NAME: &str = "تدريب بشرح";
 pub const MODE_TUTOR_HINT: &str = "الشرح بعد كل سؤال";
 pub const MODE_TIMED_NAME: &str = "تدريب بالوقت";
