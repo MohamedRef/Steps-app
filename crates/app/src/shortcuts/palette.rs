@@ -71,6 +71,14 @@ enum Go {
     Page(u32, String),
     Lecture(String),
     Lesson(String),
+    /// A lecture's topic: the lesson that teaches it, else the lecture.
+    Topic(String, String),
+    /// An abbreviation, in the dictionary of its course.
+    Term(String, String),
+    /// Nothing found here: the same words in the Lessons search, or in the
+    /// dictionary.
+    SearchLessons(String),
+    SearchTerms(String),
 }
 
 #[derive(Clone, Debug)]
@@ -80,7 +88,13 @@ struct Hit {
     sub: String,
     english: bool,
     go: Go,
+    /// English shown after `sub`, isolated (a term's meaning).
+    detail: Option<String>,
 }
+
+/// Abbreviations shown at most, so a word common in meanings ("histone")
+/// can't push the rest out.
+const MAX_TERMS: usize = 4;
 
 /// Every word of the query is somewhere in `words`, in any case.
 fn matches(query: &str, words: &str) -> bool {
@@ -114,6 +128,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
                 sub: tx::KIND_SCREEN.into(),
                 english: false,
                 go: Go::Screen(screen),
+                detail: None,
             });
         }
     }
@@ -125,6 +140,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
                 sub: tx::KIND_TOOL.into(),
                 english: false,
                 go: Go::Tool(tool.label),
+                detail: None,
             });
         }
     }
@@ -135,6 +151,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
             sub: tx::KIND_TOOL.into(),
             english: false,
             go: Go::Settings,
+            detail: None,
         });
     }
     if q.is_empty() {
@@ -149,6 +166,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
                 sub: tx::KIND_SECTION.into(),
                 english: false,
                 go: Go::Section(section),
+                detail: None,
             });
         }
     }
@@ -165,6 +183,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
                     sub: format!("{} · {tag}", tx::KIND_QUESTIONS),
                     english: true,
                     go: Go::Questions(e.id.clone()),
+                    detail: None,
                 });
             }
         }
@@ -178,6 +197,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
             sub: format!("{} · {}", crate::i18n::vq::KIND, lib.crumb(id)),
             english: true,
             go: Go::Question(id.to_string()),
+            detail: None,
         });
     }
     if let (None, crate::gopage::Target::Page { page, lecture }) = (vq, crate::gopage::target(lib, &q)) {
@@ -187,6 +207,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
             sub: lib.crumb(&lecture),
             english: false,
             go: Go::Page(page, lecture),
+            detail: None,
         });
     }
     for e in &lib.index.lectures {
@@ -201,6 +222,7 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
                 sub: format!("{} · {tag}", tx::KIND_LECTURE),
                 english: true,
                 go: Go::Lecture(e.id.clone()),
+                detail: None,
             });
         }
     }
@@ -213,9 +235,51 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
                 sub: format!("{} · {crumb}", tx::KIND_LESSON),
                 english: false,
                 go: Go::Lesson(lesson.id.clone()),
+                detail: None,
             });
         }
     }
+    // A lecture's topics (UX-15): "histone" finds where it is taught.
+    for e in &lib.index.lectures {
+        let Some(lecture) = lib.lectures.get(&e.id) else { continue };
+        for t in &lecture.topics {
+            if matches(&q, &format!("{} {}", t.id, t.title)) {
+                hits.push(Hit {
+                    key: format!("o-{}/{}", e.id, t.id),
+                    name: t.title.clone(),
+                    sub: format!("{} · {}", tx::KIND_TOPIC, lib.crumb(&e.id)),
+                    english: true,
+                    go: Go::Topic(e.id.clone(), t.id.clone()),
+                    detail: None,
+                });
+            }
+        }
+    }
+    // Abbreviations by their spelling first, then by a word of their
+    // meaning; one of each, in the first course that explains it.
+    let mut terms: Vec<(u8, Hit)> = Vec::new();
+    for c in &lib.program.courses {
+        let Some(list) = crate::abbrdict::index().get(&c.id) else { continue };
+        for t in list {
+            let Some(rank) = crate::abbrdict::rank(t.entry, &q) else { continue };
+            if terms.iter().any(|(_, h)| h.name == t.entry.term) {
+                continue;
+            }
+            terms.push((
+                rank,
+                Hit {
+                    key: format!("g-{}/{}", c.id, t.entry.term),
+                    name: t.entry.term.clone(),
+                    sub: format!("{} · {}", tx::KIND_TERM, c.short),
+                    english: true,
+                    go: Go::Term(c.id.clone(), t.entry.term.clone()),
+                    detail: Some(t.entry.text.clone()),
+                },
+            ));
+        }
+    }
+    terms.sort_by_key(|(rank, _)| *rank);
+    hits.extend(terms.into_iter().take(MAX_TERMS).map(|(_, h)| h));
     // Exact, then starts with, then the rest; a stable sort keeps book order.
     hits.sort_by_key(|h| {
         let name = h.name.to_lowercase();
@@ -228,7 +292,38 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
         }
     });
     hits.truncate(MAX);
+    // Nothing here: the same words where longer texts are searched.
+    if hits.is_empty() {
+        let typed = query.trim().to_string();
+        hits.push(Hit {
+            key: "x-lessons".into(),
+            name: tx::search_lessons(&typed),
+            sub: tx::KIND_SCREEN_LESSONS.into(),
+            english: false,
+            go: Go::SearchLessons(typed.clone()),
+            detail: None,
+        });
+        hits.push(Hit {
+            key: "x-terms".into(),
+            name: tx::SEARCH_TERMS.into(),
+            sub: crate::i18n::abbr::DICT_TITLE.into(),
+            english: false,
+            go: Go::SearchTerms(typed),
+            detail: None,
+        });
+    }
     hits
+}
+
+/// Only the ways to search elsewhere: nothing matched.
+fn nothing_found(hits: &[Hit]) -> bool {
+    hits.iter().all(|h| matches!(h.go, Go::SearchLessons(_) | Go::SearchTerms(_)))
+}
+
+/// The lesson that teaches `topic` of `lecture`, if one does.
+fn lesson_of(lib: &Library, lecture: &str, topic: &str) -> Option<String> {
+    let file = lib.lessons.get(lecture)?;
+    file.lessons.iter().find(|l| l.topics.iter().any(|t| t == topic)).map(|l| l.id.clone())
 }
 
 fn follow(go: Go, mut ui: Ui, settings: SettingsNav) {
@@ -250,6 +345,13 @@ fn follow(go: Go, mut ui: Ui, settings: SettingsNav) {
         Go::Page(page, lecture) => crate::pagesheet::open(page, &lecture, None, false, None),
         Go::Lecture(id) => crate::lecture::open(ui, &id),
         Go::Lesson(id) => crate::learn::open(ui, &id),
+        Go::Topic(lecture, topic) => match lesson_of(Library::get(), &lecture, &topic) {
+            Some(lesson) => crate::learn::open(ui, &lesson),
+            None => crate::lecture::open(ui, &lecture),
+        },
+        Go::Term(course, term) => crate::abbrdict::open_search(ui, Some(course), &term),
+        Go::SearchLessons(q) => crate::learn::search(ui, &q),
+        Go::SearchTerms(q) => crate::abbrdict::open_search(ui, None, &q),
     }
 }
 
@@ -305,7 +407,7 @@ pub fn Palette() -> Element {
                 }
             }
             div { id: "qs-list", class: "qs-list", role: "list",
-                if hits.is_empty() {
+                if nothing_found(&hits) && !query.read().trim().is_empty() {
                     p { class: "qs-empty", role: "status", {tx::QS_NONE} }
                 }
                 for hit in hits {
@@ -323,7 +425,13 @@ pub fn Palette() -> Element {
                         } else {
                             span { class: "qs-name", "{hit.name}" }
                         }
-                        span { class: "qs-sub", "{hit.sub}" }
+                        span { class: "qs-sub",
+                            "{hit.sub}"
+                            if let Some(d) = hit.detail.as_ref() {
+                                " · "
+                                bdi { dir: "ltr", lang: "en", "{d}" }
+                            }
+                        }
                     }
                 }
             }

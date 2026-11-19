@@ -67,6 +67,14 @@ pub fn forget() {
     *FROM.write() = Screen::Learn;
 }
 
+/// Opens the Lessons list searching for `q` (quick search's way in when
+/// nothing else matched).
+pub fn search(mut ui: Ui, q: &str) {
+    forget();
+    *QUERY.write() = q.to_string();
+    ui.screen.set(Screen::Learn);
+}
+
 /// Enter a chosen course's catalogue without a stale search or selected
 /// lecture; completion data and saved list-view preferences remain intact.
 pub(crate) fn reset_course_browse() {
