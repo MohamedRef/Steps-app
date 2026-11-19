@@ -133,9 +133,13 @@ bdi.bank-scope { font-family: var(--font-latin); }
    scroller's usual 1.5rem, so whatever is scrolled to (a focused control,
    the verdict) stops below it. run.js keeps --run-bar-h at its height. */
 .content:has(.bank-run) {
+  /* Until run.js has measured it: the bar's height at each width. */
+  --run-bar-guess: 4.25rem;
   overflow-anchor: none;
-  scroll-padding-block-start: calc(var(--run-bar-h, 5rem) + var(--sp-2));
+  scroll-padding-block-start: calc(var(--run-bar-h, var(--run-bar-guess)) + var(--sp-2));
 }
+@media (min-width: 600px) { .content:has(.bank-run) { --run-bar-guess: 9.125rem; } }
+@media (min-width: 840px) { .content:has(.bank-run) { --run-bar-guess: 5.625rem; } }
 .bank-run {
   flex: 1 0 auto;
   display: grid;
@@ -342,12 +346,14 @@ bdi.bank-scope { font-family: var(--font-latin); }
    there it takes half the width, not a third, and a tutor paper keeps its
    place from the first question (desk.css's quiet waiting pane), so the
    question never narrows under him. */
-.bank-run .desk-split { display: flex; flex-direction: column; }
+.bank-run .desk-split { display: flex; flex-direction: column; align-items: stretch; }
 .bank-run :is(.desk-resize, .desk-waiting) { display: none; }
 @container content (min-width: 71.5rem) {
+  /* The divider's own column is the gap between the panes. */
   .bank-run .desk-split {
     display: grid;
     grid-template-columns: minmax(14rem, var(--desk-split, 50%)) var(--sp-6) minmax(14rem, 1fr);
+    column-gap: 0;
     align-items: start;
   }
   .bank-run :is(.desk-resize, .desk-waiting) { display: flex; }
