@@ -135,6 +135,12 @@ pub fn NavSheet(
     ongo: EventHandler<usize>,
     onclose: EventHandler<()>,
 ) -> Element {
+    // The question on screen takes the focus; closing gives it back to «N / M».
+    super::run::use_sheet_focus(
+        "nav",
+        ".nav-sheet .nav-cell[aria-current=\"true\"]",
+        ".bank-run .exam-count",
+    );
     rsx! {
         div { class: "sheet-backdrop", onclick: move |_| onclose.call(()) }
         div {
@@ -146,7 +152,6 @@ pub fn NavSheet(
                 h2 { id: "nav-sheet-title", {tx::NAV_TITLE} }
                 button {
                     class: "btn btn-ghost bank-close",
-                    autofocus: true,
                     "data-back": "true",
                     "aria-keyshortcuts": "Escape",
                     onclick: move |_| onclose.call(()),

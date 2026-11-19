@@ -26,7 +26,13 @@ pub fn Result() -> Element {
             Review {
                 at,
                 show,
-                ongo: move |i| review.set(Some((i, show))),
+                // Another question opens at its top (UX-02).
+                ongo: move |i| {
+                    if i != at {
+                        to_top();
+                    }
+                    review.set(Some((i, show)));
+                },
                 onclose: move |_| {
                     review.set(None);
                     to_top();

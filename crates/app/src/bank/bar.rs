@@ -141,6 +141,7 @@ fn ToolsSheet(
     end: Option<EventHandler<()>>,
     onclose: EventHandler<()>,
 ) -> Element {
+    super::run::use_sheet_focus("tools", ".exam-tools-sheet .bank-close", ".bank-run .exam-more");
     let review = crate::store::use_review();
     let anchor = Anchor::Item(item_id.clone());
     let has_note = review.backend.borrow().note(&anchor).is_some();
@@ -155,7 +156,6 @@ fn ToolsSheet(
                 h2 { id: "exam-tools-title", {tx::TOOLS_TITLE} }
                 button {
                     class: "btn btn-ghost bank-close",
-                    autofocus: true,
                     "data-back": "true",
                     "aria-keyshortcuts": "Escape",
                     onclick: move |_| onclose.call(()),

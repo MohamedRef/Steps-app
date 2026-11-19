@@ -23,6 +23,7 @@ pub fn Player() -> Element {
     // A running paper gets the whole phone screen; ✕ is the way out.
     crate::parts::use_focus_mode(true);
     super::stem::use_highlights();
+    use_drop(super::run::unwatch);
     let mut confirming = use_signal(|| false);
     let mut nav_open = use_signal(|| false);
     let Phase::Running(p) = PHASE.read().clone() else {
@@ -84,6 +85,8 @@ pub fn Player() -> Element {
             // The bar, and a timed paper's clock, stay in view while he
             // scrolls a long question (#234).
             div { class: "run-sticky",
+                // Its height keeps what is scrolled to clear of it (run.js).
+                onmounted: move |_| super::run::watch(),
                 ExamBar {
                     kind: tx::kind(p.block, timed),
                     at,
@@ -123,6 +126,7 @@ pub fn Player() -> Element {
                         at,
                         onchoose: if checked { None } else { Some(EventHandler::new(choose)) },
                         onstrike: if checked { None } else { Some(EventHandler::new(strike)) },
+                        reserve: !timed,
                     }
                     // Optional taps (crate::metacog): how sure he is while the
                     // answer is still his, and why he missed it once it's out.
@@ -146,10 +150,9 @@ pub fn Player() -> Element {
                                 button {
                                     class: "btn btn-primary btn-lg run-main-action",
                                     "aria-keyshortcuts": "Enter",
-                                    // Check is gone: keep the keyboard on the next step.
-                                    onmounted: move |e: MountedEvent| async move {
-                                        let _ = e.set_focus(true).await;
-                                    },
+                                    // Check is gone: keep the keyboard on the next step,
+                                    // without scrolling the page to the foot (UX-01).
+                                    onmounted: move |_| super::run::focus(MAIN_ACTION),
                                     onclick: move |_| go(at + 1),
                                     {tx::NEXT}
                                 }
@@ -158,9 +161,9 @@ pub fn Player() -> Element {
                                 button {
                                     class: "btn btn-primary btn-lg run-main-action",
                                     "aria-keyshortcuts": if timed { "" } else { "Enter" },
-                                    onmounted: move |e: MountedEvent| async move {
+                                    onmounted: move |_| {
                                         if checked {
-                                            let _ = e.set_focus(true).await;
+                                            super::run::focus(MAIN_ACTION);
                                         }
                                     },
                                     onclick: move |_| end(()),
@@ -210,9 +213,12 @@ pub fn Player() -> Element {
     }
 }
 
+/// The foot's one step, which takes the keyboard once «تأكيد الإجابة» is gone.
+const MAIN_ACTION: &str = ".bank-run .run-main-action";
+
 /// «إنهاء البلوك» with questions left blank: says how many before the paper
-/// goes in. The safe choice, going back to the first blank, comes first and
-/// is what Escape does.
+/// goes in. The safe choice, going back to the first blank, comes first,
+/// has the focus and is what Escape does.
 #[component]
 fn ConfirmEnd(
     blank: usize,
@@ -221,6 +227,11 @@ fn ConfirmEnd(
     first_blank: Option<usize>,
     onclose: EventHandler<()>,
 ) -> Element {
+    super::run::use_sheet_focus(
+        "confirm",
+        ".bank-confirm .btn-primary",
+        ".bank-run :is(.exam-end, .exam-more)",
+    );
     let back = move |_| {
         onclose.call(());
         if let Some(i) = first_blank {
@@ -245,7 +256,6 @@ fn ConfirmEnd(
                 div { class: "start-row",
                     button {
                         class: "btn btn-primary",
-                        autofocus: true,
                         "data-back": "true",
                         "aria-keyshortcuts": "Escape",
                         onclick: back,

@@ -56,6 +56,7 @@ pub fn Review(at: usize, show: Show, ongo: EventHandler<usize>, onclose: EventHa
     // Like the paper, it gets the whole phone screen; «رجوع للنتيجة» is the way out.
     crate::parts::use_focus_mode(true);
     super::stem::use_highlights();
+    use_drop(super::run::unwatch);
     let mut nav_open = use_signal(|| false);
     let Phase::Done { paper, .. } = PHASE.read().clone() else {
         return rsx! {};
@@ -85,6 +86,7 @@ pub fn Review(at: usize, show: Show, ongo: EventHandler<usize>, onclose: EventHa
     rsx! {
         div { class: "bank-run", "data-mode": "review", "data-reveal": "true",
             div { class: "run-sticky",
+                onmounted: move |_| super::run::watch(),
                 ExamBar {
                     kind: format!("{} · {}", tx::REVIEWING, show.label()),
                     at,

@@ -8,18 +8,23 @@
 /* Lecture and topic titles can be longer than a phone is wide: let them wrap
    inside the chip instead of running off the card. */
 .bank .chip { white-space: normal; overflow-wrap: anywhere; max-inline-size: 100%; text-align: start; line-height: 1.35; }
-.bank .chip.toggle { display: inline-flex; align-items: center; gap: var(--sp-2); }
+.bank .chip.toggle { display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2); }
 /* At most two lines; the full title is the chip's tooltip. */
 .chip-label { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; overflow: hidden; min-inline-size: 0; }
+/* A full 48dp each way: «10» alone was 36px wide (UX-26). */
 .chip.toggle {
   cursor: pointer;
   min-block-size: var(--target);
+  min-inline-size: var(--target);
   padding-block: var(--sp-1);
   padding-inline: var(--sp-3);
   font-size: var(--fs-sm);
   background: var(--surface);
 }
-.chip.toggle[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--text); font-weight: 600; }
+.chip.toggle:is([aria-pressed="true"], [aria-checked="true"]) { background: var(--accent-soft); border-color: var(--accent); color: var(--text); font-weight: 600; }
+/* A picked lecture, topic, system or kind says so with a ✓, not only a
+   lighter fill (UX-28). Counts are one choice of several (radios): no ✓. */
+.bank .chip.toggle[aria-pressed="true"]::before { content: "✓"; flex: none; font-weight: 700; color: var(--accent-ink); }
 .chip .count { flex: none; color: var(--muted); font-variant-numeric: tabular-nums; }
 .chip.weak { background: var(--bad-soft); border-color: transparent; color: var(--text); }
 /* A weak topic on the result opens the bank on it: a full 48dp to touch. */
@@ -90,6 +95,15 @@ bdi.bank-scope { font-family: var(--font-latin); }
    and the one next step stays at the foot. A running paper fills the
    screen, so its foot sits at the bottom even under a short question. */
 .bank:has(> .bank-run) { min-block-size: 100%; }
+/* The paper never moves under him (UX-01). Scroll anchoring would keep the
+   stem still when the verdict and the lecture chips come in above it, which
+   pushed the verdict under the bar; and the bar is 4-9rem tall, not the
+   scroller's usual 1.5rem, so whatever is scrolled to (a focused control,
+   the verdict) stops below it. run.js keeps --run-bar-h at its height. */
+.content:has(.bank-run) {
+  overflow-anchor: none;
+  scroll-padding-block-start: calc(var(--run-bar-h, 5rem) + var(--sp-2));
+}
 .bank-run {
   flex: 1 0 auto;
   display: grid;
@@ -286,15 +300,22 @@ bdi.bank-scope { font-family: var(--font-latin); }
   .run-nav .navigator { grid-template-columns: repeat(4, var(--target)); }
   .run-nav .nav-legend { flex-direction: column; }
 }
-/* With the answer out, the explanation stands beside the question. Short
-   of the full 72rem canvas (main.css) there is no room for both and the
-   navigator's column, so the explanation takes the column and «N / M» in
-   the bar opens the navigator, as it does under 840dp. */
-@container content (max-width: 71.5rem) {
-  .bank-run[data-reveal="true"] .run-body { grid-template-columns: minmax(0, 1fr); }
-  .bank-run[data-reveal="true"] .run-nav { display: none; }
-  .bank-run[data-reveal="true"] .exam-bar .exam-count { display: inline-flex; }
-  .bank-run[data-reveal="true"] .exam-of { display: none; }
+/* The columns never change when the answer comes out (UX-18): from 840dp
+   the navigator keeps its column, and the explanation goes under the
+   question, as on a Step 1 question bank's review. Only the full 72rem
+   canvas (main.css) has room for it beside the question and the navigator;
+   there it takes half the width, not a third, and a tutor paper keeps its
+   place from the first question (desk.css's quiet waiting pane), so the
+   question never narrows under him. */
+.bank-run .desk-split { display: flex; flex-direction: column; }
+.bank-run :is(.desk-resize, .desk-waiting) { display: none; }
+@container content (min-width: 71.5rem) {
+  .bank-run .desk-split {
+    display: grid;
+    grid-template-columns: minmax(14rem, var(--desk-split, 50%)) var(--sp-6) minmax(14rem, 1fr);
+    align-items: start;
+  }
+  .bank-run :is(.desk-resize, .desk-waiting) { display: flex; }
 }
 
 /* ---------- the foot: the one next step ----------
@@ -344,7 +365,12 @@ bdi.bank-scope { font-family: var(--font-latin); }
   min-block-size: var(--target);
 }
 .q-stem, .q-text, .q-why { overflow-wrap: anywhere; }
-.q-stem { font-family: var(--font-latin); font-size: calc(var(--fs-lg) * 1.12); font-weight: 600; line-height: 1.5; text-align: start; }
+/* The vignette reads like the exam's (UX-10): regular weight, the options'
+   size on a phone, a step larger on wider windows, so a long stem leaves
+   the options in view. */
+.q-stem { font-family: var(--font-latin); font-size: var(--fs-md); font-weight: 400; line-height: 1.55; text-align: start; }
+@media (min-width: 600px) { .q-stem { font-size: 1.0625rem; } }
+@media (min-width: 840px) { .q-stem { font-size: 1.125rem; } }
 /* Words selected in the stem (stem.js) become a highlight in the theme's
    soft gold, kept with the paper. */
 .q-stem { -webkit-user-select: text; user-select: text; }
@@ -366,6 +392,23 @@ bdi.bank-scope { font-family: var(--font-latin); }
    out, so neither may select its words or open the system's menu. */
 .q-option { font-family: var(--font-latin); -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
 .q-option .answer-mark { font-family: var(--font); }
+/* Under 840dp an answered option keeps its text's width (UX-11): its mark
+   is the ✓ or ✗ alone, and the words (the verdict above says them too)
+   are read out, not drawn. */
+@media (max-width: 839.98px) {
+  .q-option .answer-mark { font-size: var(--fs-md); }
+  .q-option .answer-mark-words {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+/* An answered option's why is printed under it or in the explanation, so
+   no pointer gets the hover underline that marks a peek (UX-17). */
+.bank .q-option[data-peek] { text-decoration: none; }
 /* Struck out: muted and crossed through, still his to pick; once the answer
    shows, its right or wrong colours win and the line stays. */
 .q-option[data-struck="true"] { color: var(--muted); }
@@ -456,6 +499,9 @@ bdi.bank-scope { font-family: var(--font-latin); }
    score per course from 840dp, then what to revise first. */
 .sum { display: flex; flex-direction: column; gap: var(--sp-4); }
 .sum > * { flex-shrink: 0; }
+/* The heading takes focus only to be read out (result.rs), as the study and
+   lesson summaries' do: it is no control, so it draws no focus box. */
+.sum h1:focus { outline: none; }
 .sum-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2) var(--sp-3); }
 .sum-grow { flex: 1 1 0; }
 .sum-head .btn { min-block-size: var(--target); }

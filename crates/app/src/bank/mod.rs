@@ -20,6 +20,7 @@ mod player;
 mod question;
 mod result;
 mod review;
+mod run;
 mod setup;
 mod stem;
 
@@ -476,8 +477,8 @@ fn restore_open() {
     }
 }
 
-/// A new bank view (paper, result, setup) opens at its top, not at the
-/// scroll offset of the long setup or result page before it.
+/// A new bank view (paper, result, setup) or another question opens at its
+/// top, not at the scroll offset of the page before it.
 fn to_top() {
     document::eval(r#"document.querySelector("main.content")?.scrollTo(0, 0);"#);
 }
@@ -576,20 +577,25 @@ pub fn set_reason(reason: ErrorReason) {
     }
 }
 
-/// Move to question `to` (clamped).
+/// Move to question `to` (clamped). Another question opens at its top, so
+/// its first lines (age, sex, setting) are never under the bar (UX-02).
 pub fn go(to: usize) {
     let now = now_ms();
-    let overdue = {
+    let (moved, overdue) = {
         let mut phase = PHASE.write();
         let Phase::Running(p) = &mut *phase else { return };
+        let from = p.at;
         p.leave(now);
         p.at = to.min(p.questions.len().saturating_sub(1));
         p.draft = None;
-        p.overdue(now)
+        (p.at != from, p.overdue(now))
     };
     if overdue {
         finish();
     } else {
+        if moved {
+            to_top();
+        }
         keep_open();
     }
 }
