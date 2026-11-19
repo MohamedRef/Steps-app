@@ -99,7 +99,7 @@ pub fn Player() -> Element {
                     onnav: move |_| nav_open.set(true),
                     onout: move |_| leave(),
                     out_label: tx::LEAVE.to_string(),
-                    out_hint: if timed { tx::LEAVE_TIMED_HINT.to_string() } else { String::new() },
+                    out_hint: (if timed { tx::LEAVE_TIMED_HINT } else { tx::LEAVE_TUTOR_HINT }).to_string(),
                     onend: Some(EventHandler::new(end)),
                 }
                 if timed {

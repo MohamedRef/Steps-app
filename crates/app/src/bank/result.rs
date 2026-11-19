@@ -120,8 +120,9 @@ pub fn Result() -> Element {
                     }
                     p { class: "small",
                         {tx::used_of(&face(s.used_ms), s.allowed_ms.map(face).as_deref())}
+                        // The answers' own times: a blank is no answer's time.
                         " · {tx::PER_QUESTION} "
-                        bdi { class: "num-ltr", {face(s.per_question_ms)} }
+                        bdi { class: "num-ltr", {s.per_question_ms.map_or_else(|| tx::NO_TIME.to_string(), face)} }
                     }
                 }
                 // Each tile opens the review on what it counts.
@@ -193,7 +194,15 @@ pub fn Result() -> Element {
                                                 Graded::Blank => rsx! { {tx::TILE_BLANK} },
                                             }
                                         }
-                                        td { bdi { class: "num-ltr", {face(u64::from(took))} } }
+                                        // A question never opened has no time, not 0:00.
+                                        td {
+                                            if took == 0 {
+                                                span { class: "muted", aria_hidden: "true", title: tx::NOT_OPENED, {tx::NO_TIME} }
+                                                span { class: "bank-sr", {tx::NOT_OPENED} }
+                                            } else {
+                                                bdi { class: "num-ltr", {face(u64::from(took))} }
+                                            }
+                                        }
                                     }
                                 }
                             }

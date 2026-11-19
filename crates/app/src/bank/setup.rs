@@ -691,29 +691,36 @@ fn History() -> Element {
     }
 }
 
-/// A timed paper he left part-way: go back to it, or submit it as it is.
+/// A paper he left part-way (✕), timed or tutor: go back to it, or end it
+/// as it is. Only a timed paper has a clock to tell.
 #[component]
 fn Paused() -> Element {
     let Some(p) = PAUSED.read().clone() else {
         return rsx! {};
     };
     let n = p.questions.len();
+    let timed = p.mode.timed();
     let answered = p.answers.iter().filter(|a| a.chosen.is_some()).count();
     let left = exam::remaining_ms(n, p.started_ms, now_ms());
     rsx! {
         crate::ui::Card { class: "paused",
-            h2 { {tx::PAUSED_TITLE} }
+            div { class: "paused-head",
+                h2 { {tx::PAUSED_TITLE} }
+                span { class: "chip", "data-tone": "accent", {tx::kind(p.block, timed)} }
+            }
             p { class: "muted small",
                 "{tx::PAUSED_BODY} " bdi { "{answered}/{n}" }
-                if left > 0 {
+                if timed && left > 0 {
                     " {tx::PAUSED_LEFT} " {counted(minutes(left), &MINUTE)}
-                } else {
+                } else if timed {
                     " · {tx::PAUSED_OVER}"
                 }
             }
             div { class: "start-row",
                 button { class: "btn btn-primary", onclick: move |_| resume(), {tx::RESUME} }
-                button { class: "btn btn-secondary", onclick: move |_| submit_paused(), {tx::SUBMIT_NOW} }
+                button { class: "btn btn-secondary", onclick: move |_| submit_paused(),
+                    if timed { {tx::SUBMIT_NOW} } else { {tx::END} }
+                }
             }
         }
     }

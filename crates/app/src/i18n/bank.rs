@@ -175,7 +175,11 @@ pub fn used_of(used: &str, allowed: Option<&str>) -> String {
         None => format!("{TOOK} {used}"),
     }
 }
-pub const PER_QUESTION: &str = "متوسط السؤال";
+/// Before the mean time of the questions he answered (blanks left out).
+pub const PER_QUESTION: &str = "متوسط السؤال اللي جاوبته";
+/// A time there is none of: a question never opened, or no answer to average.
+pub const NO_TIME: &str = "—";
+pub const NOT_OPENED: &str = "ما اتفتحش";
 pub const TILE_BLANK: &str = "ما اتجاوبش";
 pub const TABLE: &str = "الأسئلة";
 pub const COL_NO: &str = "#";
@@ -209,11 +213,12 @@ pub const SENT_TO_REVIEW: &str = "الأسئلة اللي غلطت فيها هت
 pub const REPORT: &str = "بلّغ عن مشكلة";
 pub const CLOSE: &str = "اقفل";
 pub const LEAVE_TIMED_HINT: &str = "الامتحان هيستناك، والوقت شغّال";
-pub const PAUSED_TITLE: &str = "عندك امتحان لسه مفتوح";
+pub const LEAVE_TUTOR_HINT: &str = "البلوك هيستناك، وترجعله وقت ما تحب";
+pub const PAUSED_TITLE: &str = "عندك بلوك لسه مفتوح";
 pub const PAUSED_BODY: &str = "جاوبت";
 pub const PAUSED_LEFT: &str = "والوقت اللي فاضل حوالي";
 pub const PAUSED_OVER: &str = "وقته خلص، فهيتسلّم زي ما هو.";
-pub const RESUME: &str = "كمّل";
+pub const RESUME: &str = "كمّل البلوك";
 pub const SUBMIT_NOW: &str = "سلّمه دلوقتي";
 pub const CONFIRM_TITLE: &str = "تنهي البلوك دلوقتي؟";
 /// «لسه 3 أسئلة من غير إجابة، والفاضي مالوش درجة.»

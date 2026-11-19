@@ -480,11 +480,44 @@ fn a_new_paper_scores_the_one_left_first() {
 }
 
 #[test]
-fn a_tutor_paper_left_just_ends() {
+fn a_tutor_paper_left_waits_and_comes_back_where_it_was() {
+    // UX-03: ✕ (or Android Back) on a tutor block used to end it for good.
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
+    let n = paper_n(&mut app);
+    let (right, _) = options(&shown(&app));
+    app.answer(&right).tap(tx::CHECK);
+    app.tap(tx::NEXT);
+    let second = shown(&app);
     app.tap(tx::LEAVE);
-    app.assert_has(tx::START_TUTOR);
-    app.assert_lacks(tx::PAUSED_TITLE);
+    // The setup offers it back, with no clock to tell.
+    app.assert_has(tx::PAUSED_TITLE);
+    app.assert_has(&tx::kind(false, false));
+    app.assert_has(&format!("1/{n}"));
+    app.assert_lacks(tx::PAUSED_LEFT);
+    app.assert_lacks(tx::PAUSED_OVER);
+    // Kept on the device too, so the app being closed doesn't lose it.
+    assert_eq!(kept_paper().map(|p| p.at), Some(1));
+    app.tap(tx::RESUME);
+    assert_eq!(shown(&app).id, second.id, "back on the question he left");
+    app.assert_has(&format!("2 / {n}"));
+    assert_eq!(attrs_of(&app, "nav-cell", "data-state")[0], "right", "his checked answer stays");
+    // Left again and ended from the setup: the result comes.
+    app.tap(tx::LEAVE);
+    app.tap_nth(tx::END, 0);
+    app.assert_has(tx::RESULT);
+    assert_eq!(reviews().len(), 1, "a checked answer is logged once");
+    assert_eq!(kept_paper(), None);
+}
+
+#[test]
+fn escape_never_leaves_a_paper() {
+    let app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
+    // ✕ is still Android Back's target, but no key leaves the block.
+    assert_eq!(attr_of(&app, "run-leave", "data-back"), "true");
+    assert_eq!(attr_of(&app, "run-leave", "aria-keyshortcuts"), "");
+    let html = app.html();
+    let run = &html[html.find("class=\"bank-run\"").expect("a paper on screen")..];
+    assert!(!run.contains("aria-keyshortcuts=\"Escape\""), "no Escape target while no sheet is open");
 }
 
 #[test]
@@ -1128,9 +1161,14 @@ fn a_question_opened_from_search_never_drops_a_paper_the_app_was_killed_in() {
     let papers = crate::store::shared().settings_with_prefix::<steps_core::exam::Outcome>("bank.paper.");
     assert_eq!(papers.len(), 1, "the killed paper is kept with the finished ones");
     assert_eq!(papers[0].1.total.total, KEPT as u32);
-    // It went in once: the bank no longer offers it as a left paper.
+    // It went in once: the paper left now is the one-question set, not it.
     app.tap(tx::LEAVE);
-    app.assert_lacks(tx::PAUSED_TITLE);
+    app.assert_has(tx::PAUSED_TITLE);
+    let left = app.run(|| {
+        use dioxus::prelude::*;
+        crate::bank::PAUSED.peek().as_ref().map(|p| p.questions.len())
+    });
+    assert_eq!(left, Some(1));
 }
 
 #[test]
@@ -1405,11 +1443,11 @@ fn the_compact_bar_opens_the_navigator_and_the_tools_as_sheets() {
 #[test]
 fn keys_select_confirm_and_move_the_right_way() {
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
-    // A–E pick; F marks; Escape leaves.
+    // A–E pick; F marks; Escape never leaves (it only closes sheets).
     let keys = attrs_of(&app, "q-option", "aria-keyshortcuts");
     assert!(keys.iter().zip(["A", "B", "C", "D", "E"]).all(|(k, want)| k == want), "{keys:?}");
     assert_eq!(attr_of(&app, "exam-mark", "aria-keyshortcuts"), "F");
-    assert_eq!(attr_of(&app, "run-leave", "aria-keyshortcuts"), "Escape");
+    assert_eq!(attr_of(&app, "run-leave", "aria-keyshortcuts"), "");
     // ← goes on and → back: the app reads right to left.
     for (label, key) in [(tx::NEXT, "ArrowLeft"), (tx::PREV, "ArrowRight")] {
         let moves: Vec<String> = with_class(&app, "exam-move")

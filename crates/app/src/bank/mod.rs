@@ -204,8 +204,8 @@ const PAPER_PREFIX: &str = "bank.paper.";
 /// The single list the first version kept; still read, never written.
 const LEGACY_PAPERS_KEY: &str = "bank.papers";
 
-/// A timed paper Mohamed left part-way: kept, with its clock running, until
-/// he goes back to it or submits it (#35).
+/// A paper Mohamed left part-way (✕), timed or tutor: kept until he goes
+/// back to it or ends it (#35, UX-03). A timed paper's clock keeps running.
 pub static PAUSED: GlobalSignal<Option<Paper>> = Signal::global(|| None);
 
 /// The questions he marked, on every device (`exam::History::marked`): one
@@ -440,20 +440,20 @@ pub fn start_paper(mode: Mode, block: bool, questions: Vec<Question>) {
     keep_open();
 }
 
-/// The open timed paper (running or left), kept on this device so it
-/// survives Android killing the app (#255). Device-only: a paper half done
-/// on the phone is not one to continue on the tablet.
+/// The open paper (running or left), kept on this device so it survives
+/// Android killing the app (#255). Device-only: a paper half done on the
+/// phone is not one to continue on the tablet.
 const OPEN_KEY: &str = "bank.open_paper";
-/// Whether `OPEN_KEY` may hold a paper, so tutor clicks don't rewrite an
-/// empty key every time.
+/// Whether `OPEN_KEY` may hold a paper, so clicks with no paper open don't
+/// rewrite an empty key every time.
 static OPEN_STORED: AtomicBool = AtomicBool::new(true);
 
-/// Write the open timed paper, or clear it once none is open. Called after
-/// every change to a paper: answers, flags, moves, leave, submit.
+/// Write the open paper, or clear it once none is open. Called after every
+/// change to a paper: answers, flags, moves, leave, submit.
 fn keep_open() {
     let open = match (&*PHASE.peek(), &*PAUSED.peek()) {
         (_, Some(p)) => Some(p.clone()),
-        (Phase::Running(p), None) if p.mode.timed() => Some(p.clone()),
+        (Phase::Running(p), None) => Some(p.clone()),
         _ => None,
     };
     if open.is_none() && !OPEN_STORED.load(Ordering::Relaxed) {
@@ -463,15 +463,15 @@ fn keep_open() {
     let _ = crate::store::shared().put_local_setting(OPEN_KEY, &open);
 }
 
-/// Once per launch: a timed paper the app was killed in comes back as the
-/// left paper, with "continue" and "submit now". Its clock kept running,
-/// as it does after Leave.
+/// Once per launch: a paper the app was killed in comes back as the left
+/// paper, with "continue" and "end it now". A timed one's clock kept
+/// running, as it does after Leave.
 fn restore_open() {
     if PAUSED.peek().is_some() || !matches!(*PHASE.peek(), Phase::Setup) {
         return;
     }
     match crate::store::shared().local_setting::<Option<Paper>>(OPEN_KEY).flatten() {
-        Some(p) if p.mode.timed() && !p.questions.is_empty() => *PAUSED.write() = Some(p),
+        Some(p) if !p.questions.is_empty() => *PAUSED.write() = Some(p),
         _ => OPEN_STORED.store(false, Ordering::Relaxed),
     }
 }
@@ -704,14 +704,13 @@ fn close(paper: Paper, now: i64) -> Outcome {
     outcome
 }
 
-/// "Leave" on the player. Tutor answers are already recorded, so a tutor set
-/// just ends; a timed paper is kept for later instead of thrown away.
+/// "Leave" (✕) on the player: the paper is kept for later, tutor or timed,
+/// never thrown away; the setup offers it back (UX-03). Its checked tutor
+/// answers are already in review.
 pub fn leave() {
     let now = now_ms();
     let mut phase = PHASE.write();
-    if let Phase::Running(p) = &mut *phase
-        && p.mode.timed()
-    {
+    if let Phase::Running(p) = &mut *phase {
         p.leave(now);
         *PAUSED.write() = Some(p.clone());
     }
@@ -721,8 +720,8 @@ pub fn leave() {
     keep_open();
 }
 
-/// Back to the paper he left. Its clock kept running; past the limit it is
-/// submitted as it stands.
+/// Back to the paper he left, on the question he left it at. A timed
+/// paper's clock kept running; past the limit it is submitted as it stands.
 pub fn resume() {
     let Some(mut p) = PAUSED.write().take() else { return };
     let now = now_ms();

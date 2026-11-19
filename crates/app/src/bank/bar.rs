@@ -28,8 +28,9 @@ pub fn ExamBar(
     ongo: EventHandler<usize>,
     clock: Clock,
     onnav: EventHandler<()>,
-    /// The ✕ at the bar's start: leave the paper (a timed one waits, its
-    /// clock on), or close a review. Android Back and Escape take it.
+    /// The ✕ at the bar's start: leave the paper (it waits, a timed one with
+    /// its clock on), or close a review. Android Back takes it; Escape only
+    /// closes the paper's sheets and dialogs, never the paper (UX-03).
     onout: EventHandler<()>,
     out_label: String,
     #[props(default)] out_hint: String,
@@ -44,10 +45,9 @@ pub fn ExamBar(
         header { class: "exam-bar",
             button {
                 class: "icon-button run-leave",
-                // Android Back takes it while the app's bar is hidden.
+                // Android Back takes it while the app's bar is hidden. Esc
+                // does not: one stray press must never leave a block.
                 "data-back": "true",
-                // Esc leaves too, as in study, lessons and cases (UX #296).
-                "aria-keyshortcuts": "Escape",
                 "aria-label": "{out_label}",
                 title: "{hint}",
                 onclick: move |_| onout.call(()),
