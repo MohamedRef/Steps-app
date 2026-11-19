@@ -127,7 +127,7 @@ Every step may have `page:` and `quote:`.
 | `update` | `text`, `ref` | Guideline note; says the book wins in the exam. |
 | `check` | `question`, `options` (3–5), `answer` (0-based), `why` (one per option) | Single best answer; options are shuffled. The key must not stand out by length: trim it to the fact, or give a distractor its full name. `validate` prints, per course, how often the key is the single longest option and refuses more than 25% over all lessons; it also counts options ending in "only"/"alone", which belong only where the word carries the distinction. |
 | `order` | `prompt`, `steps` (3–8, correct order), `why?` | Tap the steps in order. |
-| `match` | `prompt`, `pairs` (3–6 `[left, right]`), `why?` | Tap left then right. Right sides must differ. |
+| `match` | `prompt`, `pairs` (3–6 `[left, right]`), `why?` | Tap left then right; both tiles of a made pair carry the same number, and once every pair is made the right column lines up with the left. Right sides must differ. |
 | `sort` | `prompt`, `bins` (2–4), `cards` (3–10 `{text, bin}`), `why?` | Drop cards into bins. |
 | `case` | `stem`, `steps: [{reveal?, question, options?, answer?, why}]` | A mini case, one decision at a time. Options are shuffled in the app, like `check`. |
 | `table` | `title`, `columns`, `rows`, `hide?` (`[row, col]`) | A table with cells to recall. |
