@@ -179,7 +179,9 @@ markup so all three layouts work without per-layout code.
   it. The rail stays from 600dp.
 - `main.content` is the one scroll container. Its children keep their
   natural height, and `scroll-padding` keeps a focused field clear of a
-  sticky action bar. `.tab-grid` and `.tab-cols` rows are `max-content`
+  sticky action bar. A bank paper sets its own from its top bar's measured
+  height (`bank/run.js`) and turns scroll anchoring off, so the verdict
+  coming in above the stem never moves the page. `.tab-grid` and `.tab-cols` rows are `max-content`
   and start-aligned, so a short card never stretches and a tall one never
   collapses.
 

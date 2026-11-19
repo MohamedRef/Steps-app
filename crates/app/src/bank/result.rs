@@ -9,8 +9,8 @@ use dioxus::prelude::*;
 use steps_core::exam::{self, Graded, Score};
 
 use super::clock::face;
-use super::review::{Review, Show};
-use super::{PHASE, Phase, back_to_setup, retake, to_top, topic_title};
+use super::review::{Review, Show, review_label};
+use super::{PHASE, Phase, back_to_setup, retake, retake_size, to_top, topic_title};
 use crate::content::Library;
 use crate::i18n::bank as tx;
 
@@ -26,7 +26,13 @@ pub fn Result() -> Element {
             Review {
                 at,
                 show,
-                ongo: move |i| review.set(Some((i, show))),
+                // Another question opens at its top (UX-02).
+                ongo: move |i| {
+                    if i != at {
+                        to_top();
+                    }
+                    review.set(Some((i, show)));
+                },
                 onclose: move |_| {
                     review.set(None);
                     to_top();
@@ -46,7 +52,8 @@ pub fn Result() -> Element {
         }
     };
     let missed = first(Show::Missed);
-    let can_retake = !exam::retake(&paper.questions, &paper.answers).is_empty();
+    // The new block's size, on its button before it starts (UX-19).
+    let retake_n = retake_size();
     let rows: Vec<(usize, Option<String>, String, Graded, u32, bool)> = paper
         .questions
         .iter()
@@ -102,11 +109,16 @@ pub fn Result() -> Element {
                 span { class: "chip", "data-tone": "accent", {tx::kind(paper.block, timed)} }
                 span { class: "sum-grow" }
                 // The two next steps sit with the score, not under the table.
+                // Named by what they hold: blanks are not wrong answers (UX-19).
                 if missed.is_some() {
-                    button { class: "btn btn-secondary", onclick: move |_| open(Show::Missed, missed), {tx::REVIEW_WRONG} }
+                    button { class: "btn btn-secondary sum-review", onclick: move |_| open(Show::Missed, missed),
+                        {review_label(s.wrong, s.blank)}
+                    }
                 }
-                if can_retake {
-                    button { class: "btn btn-primary", onclick: move |_| retake(), {tx::RETAKE} }
+                if retake_n > 0 {
+                    button { class: "btn btn-primary sum-retake", onclick: move |_| retake(),
+                        {tx::retake(s.wrong > 0, s.blank > 0, s.marked > 0, retake_n)}
+                    }
                 } else {
                     button { class: "btn btn-primary", onclick: move |_| back_to_setup(), {tx::NEW_PAPER} }
                 }
@@ -120,8 +132,9 @@ pub fn Result() -> Element {
                     }
                     p { class: "small",
                         {tx::used_of(&face(s.used_ms), s.allowed_ms.map(face).as_deref())}
+                        // The answers' own times: a blank is no answer's time.
                         " · {tx::PER_QUESTION} "
-                        bdi { class: "num-ltr", {face(s.per_question_ms)} }
+                        bdi { class: "num-ltr", {s.per_question_ms.map_or_else(|| tx::NO_TIME.to_string(), face)} }
                     }
                 }
                 // Each tile opens the review on what it counts.
@@ -193,7 +206,15 @@ pub fn Result() -> Element {
                                                 Graded::Blank => rsx! { {tx::TILE_BLANK} },
                                             }
                                         }
-                                        td { bdi { class: "num-ltr", {face(u64::from(took))} } }
+                                        // A question never opened has no time, not 0:00.
+                                        td {
+                                            if took == 0 {
+                                                span { class: "muted", aria_hidden: "true", title: tx::NOT_OPENED, {tx::NO_TIME} }
+                                                span { class: "bank-sr", {tx::NOT_OPENED} }
+                                            } else {
+                                                bdi { class: "num-ltr", {face(u64::from(took))} }
+                                            }
+                                        }
                                     }
                                 }
                             }

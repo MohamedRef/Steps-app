@@ -336,8 +336,8 @@ fn the_summary_counts_times_and_courses() {
     assert_eq!((s.wrong, s.blank, s.marked), (1, 1, 2));
     assert_eq!(s.allowed_ms, Some(4 * MS_PER_QUESTION));
     assert_eq!(s.used_ms, 200_000);
-    // The mean of the questions' own times, blanks included.
-    assert_eq!(s.per_question_ms, 35_000);
+    // The mean of the answered questions' own times: (40 + 80 + 20) / 3.
+    assert_eq!(s.per_question_ms, Some(46_666));
     assert_eq!(s.by_course["cvs"], Score { right: 1, total: 2 });
     assert_eq!(s.by_course["renal"], Score { right: 1, total: 2 });
     assert_eq!(s.by_course.len(), 2);
@@ -347,7 +347,28 @@ fn the_summary_counts_times_and_courses() {
     let tutor = summary(&qs, &answers, Mode::Tutor, 9_000_000);
     assert_eq!((tutor.allowed_ms, tutor.used_ms), (None, 9_000_000));
     // Nothing to average in an empty paper.
-    assert_eq!(summary(&[], &[], Mode::Tutor, 0).per_question_ms, 0);
+    assert_eq!(summary(&[], &[], Mode::Tutor, 0).per_question_ms, None);
+}
+
+#[test]
+fn the_average_time_is_over_answered_questions_only() {
+    let qs: Vec<Question> = (1..=10).map(|i| q(&i.to_string(), "cvs.L04", "cp", 1)).collect();
+    let took = |chosen, ms| Answer { chosen, took_ms: ms, ..Answer::default() };
+    // Four answered, two opened and skipped, four never opened.
+    let mut answers = vec![took(None, 0); 10];
+    answers[0] = took(Some(1), 30_000);
+    answers[1] = took(Some(0), 10_000);
+    answers[2] = took(Some(1), 20_000);
+    answers[3] = took(Some(2), 40_000);
+    answers[4] = took(None, 50_000);
+    answers[5] = took(None, 20_000);
+    let s = summary(&qs, &answers, Mode::Tutor, 170_000);
+    // Not the paper's time over its ten questions (17 s), nor every row's
+    // time over the six opened: the four answers' own times.
+    assert_eq!(s.per_question_ms, Some(25_000));
+    // Opened but nothing answered: no average to give.
+    let skipped = [took(None, 9_000), took(None, 0)];
+    assert_eq!(summary(&qs[..2], &skipped, Mode::Timed, 9_000).per_question_ms, None);
 }
 
 #[test]

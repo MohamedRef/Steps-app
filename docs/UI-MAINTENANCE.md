@@ -111,18 +111,23 @@ Existing tests live beside the owning facade in a child `tests.rs` module.
   reveals, grades, undoes or turns a step, focus moves to the new card or step;
   when a tapped reveal or Undo in study takes its own button away, focus goes
   to the answer, the cloze's verdict or the reopened card, never the page
-  (`study::focus_if_lost`).
+  (`study::focus_if_lost`). A sheet over a bank paper (navigator, tools, end
+  of block) and the note sheet take focus when they open and give it back to
+  what opened them when they close (`bank/run.js`, `notes/mod.rs`); focus
+  moved by script never scrolls the page.
 - **Clean pages:** helper explanations for disabled actions are for screen
   readers only (`.ls-sr-only`); the visible page stays free of helper notes.
 - **Back:** Android Back and Escape use the visible Back or Close control of
   the top-most layer (`data-back`), so Back never skips past where a screen
-  was opened from.
+  was opened from. One exception: in a bank paper Escape only closes its
+  sheets and dialogs, never the paper; its ✕ (and Android Back) leaves it,
+  and the paper, tutor or timed, waits on the setup to be resumed.
 - **Save failures retry in place:** a failed write says so where it happened,
   with «حاول تاني», through `persistence::WriteFailed`, and keeps the user's
   choice on screen. Review events are append-only and never queued.
 - **Keys:** in a bank paper ← is next and → is previous (the app reads right
   to left), Enter confirms the picked answer, F marks; A–E never change an
-  answer under an open dialog.
+  answer under an open dialog; Escape never leaves the paper.
 - **Narrow phones:** grids use `min(<size>, 100%)` column minimums, so nothing
   is wider than a 320px screen at the larger text size.
 

@@ -199,8 +199,26 @@ pub fn NoteSheet() -> Element {
     }
 }
 
+/// The note sheet takes focus in its field when it opens, without scrolling
+/// the page under it, and gives it back to what opened it (the note chip,
+/// or a paper's ⋮) when it closes, unless something else took it (UX-35).
+/// The opener is read a frame late, once a menu that opened the sheet has
+/// handed focus back to its own button.
+const FOCUS_FIELD_JS: &str = "requestAnimationFrame(() => { \
+    const a = document.activeElement; \
+    window.__stepsNoteOpener = a && a !== document.body && !a.closest('.nt-sheet') ? a : null; \
+    document.querySelector('.nt-sheet textarea')?.focus({ preventScroll: true }); });";
+const FOCUS_BACK_JS: &str = "requestAnimationFrame(() => { \
+    const el = window.__stepsNoteOpener; window.__stepsNoteOpener = null; \
+    const a = document.activeElement; \
+    if (a && a !== document.body && a.isConnected) return; \
+    if (el?.isConnected && el.getClientRects().length) el.focus({ preventScroll: true }); });";
+
 #[component]
 fn Sheet(editing: Editing) -> Element {
+    use_drop(|| {
+        document::eval(FOCUS_BACK_JS);
+    });
     let review = use_review();
     let lib = Library::get();
     let existing = review.backend.borrow().note(&editing.anchor).cloned();
@@ -260,7 +278,9 @@ fn Sheet(editing: Editing) -> Element {
                 textarea {
                     dir: "auto",
                     rows: 6,
-                    autofocus: true,
+                    onmounted: move |_| {
+                        document::eval(FOCUS_FIELD_JS);
+                    },
                     placeholder: tx::HINT,
                     "aria-invalid": if problem().is_some() { "true" } else { "false" },
                     value: "{text}",

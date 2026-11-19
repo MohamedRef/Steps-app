@@ -1,8 +1,9 @@
 //! A finished paper's review: the paper's own screen (top bar, navigator,
 //! question), every question revealed with his pick, his struck options and
 //! highlights, the verdict and the explanation. It goes through the
-//! questions the result asked for (the wrong ones, the marked ones, …);
-//! the navigator still jumps to any of them.
+//! questions the result asked for (the wrong ones, the marked ones, …),
+//! counted among themselves; the navigator still jumps to any question,
+//! the others drawn faint.
 
 use dioxus::prelude::*;
 use steps_core::exam::{Answer, Graded, Question};
@@ -40,14 +41,27 @@ impl Show {
         }
     }
 
-    fn label(self) -> &'static str {
+    /// What the review goes through, in a word or two. «راجع الأسئلة
+    /// الغلط» takes the blanks too, and then says so (UX-19).
+    fn label(self, wrong: bool, blank: bool) -> &'static str {
         match self {
             Show::All => tx::SHOW_ALL,
             Show::Right => tx::SHOW_RIGHT,
+            Show::Missed if blank && !wrong => tx::SHOW_BLANK,
+            Show::Missed if blank => tx::SHOW_MISSED,
             Show::Wrong | Show::Missed => tx::SHOW_WRONG,
             Show::Blank => tx::SHOW_BLANK,
             Show::Marked => tx::SHOW_MARKED,
         }
+    }
+}
+
+/// The result's way into the missed ones, named by what they are.
+pub fn review_label(wrong: u32, blank: u32) -> &'static str {
+    match (wrong > 0, blank > 0) {
+        (true, true) => tx::REVIEW_MISSED,
+        (false, true) => tx::REVIEW_BLANK,
+        _ => tx::REVIEW_WRONG,
     }
 }
 
@@ -56,6 +70,7 @@ pub fn Review(at: usize, show: Show, ongo: EventHandler<usize>, onclose: EventHa
     // Like the paper, it gets the whole phone screen; «رجوع للنتيجة» is the way out.
     crate::parts::use_focus_mode(true);
     super::stem::use_highlights();
+    use_drop(super::run::unwatch);
     let mut nav_open = use_signal(|| false);
     let Phase::Done { paper, .. } = PHASE.read().clone() else {
         return rsx! {};
@@ -68,27 +83,37 @@ pub fn Review(at: usize, show: Show, ongo: EventHandler<usize>, onclose: EventHa
     let taken: Vec<usize> = (0..n).filter(|&i| show.takes(&paper.questions[i], &paper.answers[i])).collect();
     let prev = taken.iter().rev().find(|&&i| i < at).copied();
     let next = taken.iter().find(|&&i| i > at).copied();
+    // Counted inside what it goes through: «1 من 8», not «2 / 10» (UX-19).
+    let walk = (taken.len() < n)
+        .then(|| taken.iter().position(|&i| i == at).map(|k| (k + 1, taken.len())))
+        .flatten();
+    let graded = |g: Graded| taken.iter().any(|&i| paper.answers[i].graded(&paper.questions[i]) == g);
+    let what = show.label(graded(Graded::Wrong), graded(Graded::Blank));
     let cells: Vec<Cell> = paper
         .questions
         .iter()
         .zip(&paper.answers)
-        .map(|(q, a)| Cell {
+        .enumerate()
+        .map(|(i, (q, a))| Cell {
             state: match a.graded(q) {
                 Graded::Right => CellState::Right,
                 Graded::Wrong => CellState::Wrong,
                 Graded::Blank => CellState::Blank,
             },
             marked: a.flagged,
+            out: !taken.contains(&i),
         })
         .collect();
     let page = lookup(&q.id).and_then(|(_, item)| item.src.first_aid_page());
     rsx! {
         div { class: "bank-run", "data-mode": "review", "data-reveal": "true",
             div { class: "run-sticky",
+                onmounted: move |_| super::run::watch(),
                 ExamBar {
-                    kind: format!("{} · {}", tx::REVIEWING, show.label()),
+                    kind: format!("{} · {what}", tx::REVIEWING),
                     at,
                     n,
+                    walk,
                     item_id: q.id.clone(),
                     page,
                     marked: a.flagged,
