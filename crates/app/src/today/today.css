@@ -6,27 +6,31 @@
 .td-greet { flex-direction: row; align-items: center; justify-content: space-between; gap: var(--sp-3); }
 .td-greet-text { min-width: 0; }
 .td-greet p { margin: 0; }
+/* A quiet mark, drawn flat: a filled circle read as a button (UX-38). */
 .td-art {
   flex: none;
   inline-size: 2.75rem;
   block-size: 2.75rem;
   display: grid;
   place-items: center;
-  border-radius: 50%;
-  background: var(--accent-soft);
   color: var(--accent-ink);
+  opacity: 0.75;
+  pointer-events: none;
 }
 
 /* ---------- session length ---------- */
-.td-time { display: flex; align-items: flex-end; flex-wrap: wrap; gap: var(--sp-2); }
+/* Every length is at least a full 48dp target, in every surface style
+   (appearance.css sizes the level chips by --tap). */
+.td-time { display: flex; align-items: flex-end; flex-wrap: wrap; gap: var(--sp-2); --tap: max(var(--target, 48px), 3rem); }
 .td-time-q { align-self: center; font-size: var(--fs-sm); color: var(--muted); margin-inline-end: auto; }
-/* The lengths rise like steps: each longer session stands a little taller. */
+/* The lengths rise like steps: each longer session stands a little taller.
+   The shortest is a full 48dp target, every label centred (UX-16). */
 .td-chip {
-  min-inline-size: 3rem;
+  min-inline-size: max(var(--target, 48px), 3rem);
   min-block-size: var(--tap);
-  display: inline-flex; align-items: flex-end; justify-content: center;
+  display: inline-flex; align-items: center; justify-content: center;
   padding-inline: var(--sp-3);
-  padding-block: 0 0.55rem;
+  padding-block: 0;
   border-radius: 10px 10px 4px 4px;
   border: 1px solid var(--line);
   background: var(--surface);
@@ -84,6 +88,8 @@
 .today-cols .stat-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .stat-tile[data-accent="true"] { background: var(--accent-soft); border-color: transparent; }
 .stat-tile[data-accent="true"] .stat-num { color: var(--accent-ink); }
+/* --muted on --accent-soft is under 4.5:1 in Paper (UX-32). */
+.stat-tile[data-accent="true"] .stat-label { color: var(--accent-ink); }
 .due-cases { align-self: start; }
 .td-estimate { align-self: start; display: inline-flex; align-items: center; gap: var(--sp-2); font-size: var(--fs-sm); }
 
@@ -200,21 +206,9 @@ table.plan th { color: var(--muted); font-weight: 600; }
 .app:is([data-appearance="side-line"], [data-appearance="mono"]) .td-hero .ring { background: conic-gradient(var(--accent) var(--p), var(--line) 0); }
 .app:is([data-appearance="side-line"], [data-appearance="mono"]) .td-hero .ring-hole { background: var(--bg); color: var(--text); }
 
-/* Continuing the open Study session: one card, set apart from starting a new
-   one beneath it. */
-.td-resume {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: var(--sp-3);
-  border-color: var(--accent);
-}
-.td-resume-copy { display: flex; flex-direction: column; gap: var(--sp-1); min-inline-size: 0; }
-.td-resume-action { display: inline-flex; gap: var(--sp-2); align-items: center; justify-content: center; min-block-size: max(var(--target), var(--tap)); }
-@media (max-width: 599.98px) {
-  .td-resume-action { inline-size: 100%; }
-}
+/* An open Study session: the hero continues it, and starting a new one is
+   the quiet link under it (UX-33). */
+.td-hero .td-resume-pos { font-variant-numeric: tabular-nums; }
 
 /* Mac and wide windows: today's plan comes first. The plan takes the wider
    column and scrolls with the page; the lecture list beside it is the

@@ -16,6 +16,8 @@ pub struct DayFacts {
     pub learned: u32,
     pub due_left: usize,
     pub due_tomorrow: u32,
+    /// New items still open for today: then the day isn't over (UX-38).
+    pub new_left: usize,
 }
 
 /// Today's line, once he has studied; nothing before that.
@@ -29,7 +31,11 @@ pub fn day_line(f: DayFacts) -> Option<String> {
         line += &tx::learned(f.learned);
     }
     line += ". ";
-    line += &if f.due_left == 0 { tx::done_rest(f.due_tomorrow) } else { tx::left(f.due_left) };
+    line += &match (f.due_left, f.new_left) {
+        (0, 0) => tx::done_rest(f.due_tomorrow),
+        (0, _) => tx::REVIEWS_DONE_NEW_WAITS.to_string(),
+        (n, _) => tx::left(n),
+    };
     Some(line)
 }
 
@@ -60,7 +66,7 @@ impl Week {
 
 /// The line and, when there is a week behind him, the weekly card.
 #[component]
-pub fn TodayRecap(due_left: usize, due_tomorrow: u32) -> Element {
+pub fn TodayRecap(due_left: usize, due_tomorrow: u32, #[props(default)] new_left: usize) -> Element {
     let ui = use_context::<crate::Ui>();
     let review = use_review();
     let now = now_ms();
@@ -73,6 +79,7 @@ pub fn TodayRecap(due_left: usize, due_tomorrow: u32) -> Element {
         learned: learned.last().copied().unwrap_or(0),
         due_left,
         due_tomorrow,
+        new_left,
     });
     let week = use_memo(move || {
         let _ = (review.revision)();
@@ -137,13 +144,23 @@ mod tests {
 
     #[test]
     fn the_line_says_what_he_did_and_what_is_next() {
-        let done = day_line(DayFacts { answered: 30, learned: 8, due_left: 0, due_tomorrow: 25 }).unwrap();
+        let done =
+            day_line(DayFacts { answered: 30, learned: 8, due_left: 0, due_tomorrow: 25, new_left: 0 }).unwrap();
         assert!(done.contains("30") && done.contains('8') && done.contains("25"), "{done}");
         assert!(done.contains(tx::DONE_REST));
-        let more = day_line(DayFacts { answered: 12, learned: 0, due_left: 9, due_tomorrow: 3 }).unwrap();
+        let more =
+            day_line(DayFacts { answered: 12, learned: 0, due_left: 9, due_tomorrow: 3, new_left: 0 }).unwrap();
         assert_eq!(more, "النهارده جاوبت 12 سؤال. فاضل 9 مراجعات لو عندك وقت، ولو لأ بكرة موجودة.");
-        let one = day_line(DayFacts { answered: 1, learned: 2, due_left: 0, due_tomorrow: 0 }).unwrap();
+        let one = day_line(DayFacts { answered: 1, learned: 2, due_left: 0, due_tomorrow: 0, new_left: 0 }).unwrap();
         assert_eq!(one, "النهارده جاوبت سؤال واحد، واتعلمت حاجتين جداد. مراجعة النهارده خلصت، استريح.");
+    }
+
+    #[test]
+    fn with_new_items_still_open_the_day_never_says_rest() {
+        // Today's hero offers the next lesson then; the line agrees (UX-38).
+        let line = day_line(DayFacts { answered: 5, due_left: 0, new_left: 12, ..DayFacts::default() }).unwrap();
+        assert!(line.ends_with(tx::REVIEWS_DONE_NEW_WAITS), "{line}");
+        assert!(!line.contains(tx::DONE_REST), "{line}");
     }
 
     #[test]
