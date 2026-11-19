@@ -13,6 +13,7 @@ pub mod import;
 mod install;
 pub mod notes;
 pub mod own;
+pub mod ownq;
 pub mod pages;
 mod paths;
 pub mod selfassess;
@@ -182,6 +183,29 @@ const MIGRATIONS: &[&str] = &[
       UPDATE meta SET value = lower(hex(randomblob(16)))
       WHERE key = 'study.review_revision.v2';
     END;
+",
+    "
+    -- The questions he adds from a file (steps_core::ownq::OwnQuestion as
+    -- JSON), keyed `<category>/<id>`, and their figures in chunks keyed
+    -- `<sha256>.<n>` (`{\"kind\", \"data\"}`). Last writer wins.
+    CREATE TABLE own_questions (
+        id          TEXT PRIMARY KEY,
+        value       TEXT NOT NULL,
+        account_id  TEXT,
+        device_id   TEXT NOT NULL,
+        hlc_wall    INTEGER NOT NULL,
+        hlc_counter INTEGER NOT NULL,
+        deleted     INTEGER NOT NULL DEFAULT 0
+    ) STRICT;
+    CREATE TABLE own_images (
+        id          TEXT PRIMARY KEY,
+        value       TEXT NOT NULL,
+        account_id  TEXT,
+        device_id   TEXT NOT NULL,
+        hlc_wall    INTEGER NOT NULL,
+        hlc_counter INTEGER NOT NULL,
+        deleted     INTEGER NOT NULL DEFAULT 0
+    ) STRICT;
 ",
 ];
 

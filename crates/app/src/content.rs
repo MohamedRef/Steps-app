@@ -34,6 +34,8 @@ pub struct Library {
     /// The sealed VQ questions: what the pack carries, and those this
     /// device's key opened into their lectures (`crate::vq`).
     pub vq: crate::vq::Bank,
+    /// The questions he added from a file, in the lectures they name (`crate::ownq`).
+    pub mine: crate::ownq::Mine,
 }
 
 /// The library in use. Each one is leaked: screens hold `&'static` items,
@@ -133,7 +135,9 @@ impl Library {
         #[cfg(test)]
         let sealed = crate::vq::testing::with_fixture(sealed);
         let vq = crate::vq::open_into(&sealed, crate::vq::vault::load().as_ref(), &mut lectures);
-        Library { index, lectures, lessons, program, sources, vq }
+        // And the questions he added from a file, from the synced store.
+        let mine = crate::ownq::open_into(crate::store::shared().own_questions(), &mut lectures);
+        Library { index, lectures, lessons, program, sources, vq, mine }
     }
 
     /// Every lesson in book order, with its lecture id.

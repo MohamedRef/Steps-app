@@ -117,5 +117,7 @@ pub mod saving;
 /// His notes on items, lesson steps and pages (notes/mod.rs).
 pub mod notes;
 
+/// The questions he adds from a file (ownq/).
+pub mod ownq;
 /// The sealed VQ question bank (vq/).
 pub mod vq;

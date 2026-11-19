@@ -215,6 +215,18 @@ fn find(query: &str, lib: &Library) -> Vec<Hit> {
             });
         }
     }
+    // One of his own questions by its id (`P-0001`), in any of his categories.
+    for mine in lib.mine.find(&q) {
+        let id = mine.item_id();
+        hits.push(Hit {
+            key: format!("m-{id}"),
+            name: format!("{} · {}", mine.category, mine.id),
+            sub: format!("{} · {}", crate::i18n::ownq::KIND, lib.crumb(&id)),
+            english: true,
+            go: Go::Question(id),
+            detail: None,
+        });
+    }
     if let (None, crate::gopage::Target::Page { page, lecture }) = (vq, crate::gopage::target(lib, &q)) {
         hits.push(Hit {
             key: format!("p-{page}"),
