@@ -84,10 +84,13 @@ bdi.bank-scope { font-family: var(--font-latin); }
 .bank-topics > .label { font-size: var(--fs-sm); font-weight: 600; color: var(--muted); }
 .bank-topics .chip.toggle:not([aria-pressed="true"]) { background: var(--surface); }
 /* While he customises, the count and the start stay at the foot of the
-   screen, over the long list of chips (UX-27). */
+   screen, over the long list of chips (UX-27). Stuck, it reaches down
+   through the scroller's bottom padding (`--content-end`, main.css), as
+   .run-foot does: stopping short left a strip under it where the chips
+   showed as they scrolled. */
 .bank-pin {
   position: sticky;
-  inset-block-end: 0;
+  inset-block-end: calc(-1 * var(--content-end, var(--sp-6)));
   z-index: 2;
   display: flex;
   flex-wrap: wrap;
