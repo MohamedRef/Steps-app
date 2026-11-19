@@ -29,8 +29,10 @@ pub struct Summary {
     pub used_ms: u64,
     /// A timed paper's time; none for a tutor paper, which has no clock.
     pub allowed_ms: Option<u64>,
-    /// The questions' own times, on average: the mean of the time column.
-    pub per_question_ms: u64,
+    /// The time on an answered question, on average: the answered rows of
+    /// the time column. A question left blank (never opened, or opened and
+    /// skipped) is not an answer's time. None when nothing was answered.
+    pub per_question_ms: Option<u64>,
     /// Course id (`cvs`, `pharm`) → score.
     pub by_course: BTreeMap<String, Score>,
 }
@@ -45,11 +47,11 @@ pub fn summary(questions: &[Question], answers: &[Answer], mode: Mode, took_ms: 
         marked: 0,
         used_ms: allowed_ms.map_or(took_ms, |limit| took_ms.min(limit)),
         allowed_ms,
-        per_question_ms: 0,
+        per_question_ms: None,
         by_course: BTreeMap::new(),
     };
     let blank = Answer::default();
-    let mut times = 0u64;
+    let (mut times, mut answered) = (0u64, 0u64);
     for (i, q) in questions.iter().enumerate() {
         let a = answers.get(i).unwrap_or(&blank);
         let graded = a.graded(q);
@@ -58,9 +60,12 @@ pub fn summary(questions: &[Question], answers: &[Answer], mode: Mode, took_ms: 
         out.blank += u32::from(graded == Graded::Blank);
         out.marked += u32::from(a.flagged);
         out.by_course.entry(course_of(&q.lecture).to_string()).or_default().add(graded == Graded::Right);
-        times += u64::from(a.took_ms);
+        if graded != Graded::Blank {
+            times += u64::from(a.took_ms);
+            answered += 1;
+        }
     }
-    out.per_question_ms = times.checked_div(questions.len() as u64).unwrap_or(0);
+    out.per_question_ms = times.checked_div(answered);
     out
 }
 

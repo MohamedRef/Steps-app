@@ -82,7 +82,9 @@ pub fn Chrome() -> Element {
 /// secondary pane follows the primary one. With no `secondary` yet (before
 /// the answer), wide windows keep the place with a quiet hint.
 ///
-/// `wide_side` gives the secondary pane the wide column, for long answers.
+/// `wide_side` gives the secondary pane the wide column, for long answers;
+/// `split` sets another default share for the primary pane (the bank's 50,
+/// which its stylesheet matches).
 /// `footer` (the grade row) sits under both panes at full width.
 ///
 /// Where the two panes sit side by side, a divider between them resizes
@@ -93,9 +95,10 @@ pub fn Panes(
     primary: Element,
     secondary: Option<Element>,
     #[props(default)] wide_side: bool,
+    #[props(default)] split: Option<u8>,
     footer: Option<Element>,
 ) -> Element {
-    let default = if wide_side { 40 } else { 60 };
+    let default = split.unwrap_or(if wide_side { 40 } else { 60 });
     let saved = try_use_context::<Ui>().map_or(0, |ui| ui.prefs.read().desk_split);
     let width = if saved == 0 { default } else { saved };
     rsx! {

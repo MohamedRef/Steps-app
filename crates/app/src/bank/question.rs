@@ -3,7 +3,8 @@
 //! once revealed the verdict, the right answer, why each option is right or
 //! wrong, a VQ question's educational objective, the lecture and topic, the
 //! book page (or `VQ-0001`), the ✓ / ✎ / ✗ check and any guideline update.
-//! Side by side from 840dp (`desk::Panes`), stacked below.
+//! The explanation sits under the question, and beside it on the full 72rem
+//! canvas (`desk::Panes`, bank.css).
 
 use dioxus::prelude::*;
 use steps_core::content::Body;
@@ -41,6 +42,10 @@ pub fn QuestionView(
     /// A long press or a secondary click on an option (original index).
     #[props(default)]
     onstrike: Option<EventHandler<usize>>,
+    /// Keep the explanation's place before the answer is out (a tutor
+    /// paper), so the question never narrows when it comes (UX-18).
+    #[props(default)]
+    reserve: bool,
 ) -> Element {
     let Some((lecture, item)) = lookup(&q.id) else {
         return rsx! { p { class: "note", {tx::NOT_FOUND} } };
@@ -111,15 +116,13 @@ pub fn QuestionView(
                             if struck {
                                 span { class: "bank-sr", lang: "ar", dir: "rtl", "، {tx::STRUCK}" }
                             }
-                            // The state in words, so it never rests on colour alone.
-                            if reveal && state == "correct" {
-                                span { class: "answer-mark", lang: "ar", dir: "rtl", "✓ {tx::RIGHT_PICKED}" }
-                            }
-                            if reveal && state == "missed" {
-                                span { class: "answer-mark", lang: "ar", dir: "rtl", "✓ {tx::RIGHT_ANSWER}" }
-                            }
-                            if reveal && state == "wrong" {
-                                span { class: "answer-mark", lang: "ar", dir: "rtl", "✗ {tx::YOUR_ANSWER}" }
+                            // The state in words, so it never rests on colour alone;
+                            // under 840dp the words are read out only (bank.css).
+                            if let Some((icon, words)) = mark(reveal, state) {
+                                span { class: "answer-mark", lang: "ar", dir: "rtl",
+                                    "{icon}"
+                                    span { class: "answer-mark-words", " {words}" }
+                                }
                             }
                         }
                         // Under each option on phones; the side pane has them on wide windows.
@@ -132,6 +135,11 @@ pub fn QuestionView(
         }
     };
     if !reveal {
+        if reserve {
+            return rsx! {
+                crate::desk::Panes { primary, secondary: None, split: SPLIT }
+            };
+        }
         return primary;
     }
     // The explanation: why for every option (wide windows), the objective,
@@ -176,7 +184,7 @@ pub fn QuestionView(
         }
     };
     rsx! {
-        crate::desk::Panes { primary, secondary: Some(secondary) }
+        crate::desk::Panes { primary, secondary: Some(secondary), split: SPLIT }
     }
 }
 
@@ -194,7 +202,8 @@ fn Verdict(q: Question, chosen: Option<usize>, took_ms: u32) -> Element {
         Graded::Blank => ("blank", tx::VERDICT_BLANK, "–"),
     };
     rsx! {
-        div { class: "q-verdict", "data-tone": tone,
+        // Brought into view below the bar when part of it is hidden (UX-01).
+        div { class: "q-verdict", "data-tone": tone, onmounted: move |_| super::run::verdict(),
             span { class: "q-verdict-icon", aria_hidden: "true", "{icon}" }
             strong { {word} }
             span { class: "q-verdict-picked", {tx::picked(picked, right)} }
@@ -204,6 +213,20 @@ fn Verdict(q: Question, chosen: Option<usize>, took_ms: u32) -> Element {
                 }
             }
         }
+    }
+}
+
+/// The question's share where the explanation stands beside it: half, so
+/// the explanation is no narrow column (bank.css's 50%, UX-18).
+const SPLIT: Option<u8> = Some(50);
+
+/// An answered option's mark: its icon and its words.
+fn mark(reveal: bool, state: &str) -> Option<(char, &'static str)> {
+    match (reveal, state) {
+        (true, "correct") => Some(('✓', tx::RIGHT_PICKED)),
+        (true, "missed") => Some(('✓', tx::RIGHT_ANSWER)),
+        (true, "wrong") => Some(('✗', tx::YOUR_ANSWER)),
+        _ => None,
     }
 }
 

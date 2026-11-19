@@ -20,6 +20,7 @@ mod player;
 mod question;
 mod result;
 mod review;
+mod run;
 mod setup;
 mod stem;
 
@@ -204,8 +205,8 @@ const PAPER_PREFIX: &str = "bank.paper.";
 /// The single list the first version kept; still read, never written.
 const LEGACY_PAPERS_KEY: &str = "bank.papers";
 
-/// A timed paper Mohamed left part-way: kept, with its clock running, until
-/// he goes back to it or submits it (#35).
+/// A paper Mohamed left part-way (✕), timed or tutor: kept until he goes
+/// back to it or ends it (#35, UX-03). A timed paper's clock keeps running.
 pub static PAUSED: GlobalSignal<Option<Paper>> = Signal::global(|| None);
 
 /// The questions he marked, on every device (`exam::History::marked`): one
@@ -440,20 +441,20 @@ pub fn start_paper(mode: Mode, block: bool, questions: Vec<Question>) {
     keep_open();
 }
 
-/// The open timed paper (running or left), kept on this device so it
-/// survives Android killing the app (#255). Device-only: a paper half done
-/// on the phone is not one to continue on the tablet.
+/// The open paper (running or left), kept on this device so it survives
+/// Android killing the app (#255). Device-only: a paper half done on the
+/// phone is not one to continue on the tablet.
 const OPEN_KEY: &str = "bank.open_paper";
-/// Whether `OPEN_KEY` may hold a paper, so tutor clicks don't rewrite an
-/// empty key every time.
+/// Whether `OPEN_KEY` may hold a paper, so clicks with no paper open don't
+/// rewrite an empty key every time.
 static OPEN_STORED: AtomicBool = AtomicBool::new(true);
 
-/// Write the open timed paper, or clear it once none is open. Called after
-/// every change to a paper: answers, flags, moves, leave, submit.
+/// Write the open paper, or clear it once none is open. Called after every
+/// change to a paper: answers, flags, moves, leave, submit.
 fn keep_open() {
     let open = match (&*PHASE.peek(), &*PAUSED.peek()) {
         (_, Some(p)) => Some(p.clone()),
-        (Phase::Running(p), None) if p.mode.timed() => Some(p.clone()),
+        (Phase::Running(p), None) => Some(p.clone()),
         _ => None,
     };
     if open.is_none() && !OPEN_STORED.load(Ordering::Relaxed) {
@@ -463,21 +464,21 @@ fn keep_open() {
     let _ = crate::store::shared().put_local_setting(OPEN_KEY, &open);
 }
 
-/// Once per launch: a timed paper the app was killed in comes back as the
-/// left paper, with "continue" and "submit now". Its clock kept running,
-/// as it does after Leave.
+/// Once per launch: a paper the app was killed in comes back as the left
+/// paper, with "continue" and "end it now". A timed one's clock kept
+/// running, as it does after Leave.
 fn restore_open() {
     if PAUSED.peek().is_some() || !matches!(*PHASE.peek(), Phase::Setup) {
         return;
     }
     match crate::store::shared().local_setting::<Option<Paper>>(OPEN_KEY).flatten() {
-        Some(p) if p.mode.timed() && !p.questions.is_empty() => *PAUSED.write() = Some(p),
+        Some(p) if !p.questions.is_empty() => *PAUSED.write() = Some(p),
         _ => OPEN_STORED.store(false, Ordering::Relaxed),
     }
 }
 
-/// A new bank view (paper, result, setup) opens at its top, not at the
-/// scroll offset of the long setup or result page before it.
+/// A new bank view (paper, result, setup) or another question opens at its
+/// top, not at the scroll offset of the page before it.
 fn to_top() {
     document::eval(r#"document.querySelector("main.content")?.scrollTo(0, 0);"#);
 }
@@ -576,20 +577,25 @@ pub fn set_reason(reason: ErrorReason) {
     }
 }
 
-/// Move to question `to` (clamped).
+/// Move to question `to` (clamped). Another question opens at its top, so
+/// its first lines (age, sex, setting) are never under the bar (UX-02).
 pub fn go(to: usize) {
     let now = now_ms();
-    let overdue = {
+    let (moved, overdue) = {
         let mut phase = PHASE.write();
         let Phase::Running(p) = &mut *phase else { return };
+        let from = p.at;
         p.leave(now);
         p.at = to.min(p.questions.len().saturating_sub(1));
         p.draft = None;
-        p.overdue(now)
+        (p.at != from, p.overdue(now))
     };
     if overdue {
         finish();
     } else {
+        if moved {
+            to_top();
+        }
         keep_open();
     }
 }
@@ -649,21 +655,37 @@ pub fn highlight(at: usize, start: usize, end: usize) {
     keep_open();
 }
 
-/// «بلوك جديد من الغلط والمتعلّم عليه»: a new paper of the finished one's
-/// wrong, blank and marked questions (`exam::retake`), in its mode, shuffled
-/// again and as Mohamed sees them now (his edits in, his ✗ items out).
+/// «بلوك جديد من الغلط …»: a new paper of the finished one's wrong, blank
+/// and marked questions (`exam::retake`), in its mode, shuffled again and as
+/// Mohamed sees them now (his edits in, his ✗ items out).
 pub fn retake() {
-    let (mode, block, ids) = match &*PHASE.peek() {
-        Phase::Done { paper, .. } => {
-            (paper.mode, paper.block, exam::retake(&paper.questions, &paper.answers))
-        }
+    let (mode, block) = match &*PHASE.peek() {
+        Phase::Done { paper, .. } => (paper.mode, paper.block),
         _ => return,
+    };
+    let Some(questions) = retake_questions(|pool| exam::practice(pool, pool.len(), now_ms() as u64)) else {
+        return;
+    };
+    start_paper(mode, block, questions);
+}
+
+/// How many questions «بلوك جديد» would hold, said on its button before
+/// it starts (UX-19): the retake's questions he can still see.
+pub fn retake_size() -> usize {
+    retake_questions(|pool| pool.len()).unwrap_or(0)
+}
+
+/// `make` over the finished paper's retake pool, as `retake` draws it.
+fn retake_questions<T>(make: impl FnOnce(&[exam::Mcq]) -> T) -> Option<T> {
+    let ids = match &*PHASE.peek() {
+        Phase::Done { paper, .. } => exam::retake(&paper.questions, &paper.answers),
+        _ => return None,
     };
     let lectures: BTreeSet<&str> = ids.iter().map(|id| steps_core::program::lecture_of(id)).collect();
     let owned = study_lectures_where(|l| lectures.contains(l));
     let pool: Vec<exam::Mcq> =
         exam::mcqs(&owned).into_iter().filter(|q| ids.iter().any(|id| id == q.id)).collect();
-    start_paper(mode, block, exam::practice(&pool, pool.len(), now_ms() as u64));
+    Some(make(&pool))
 }
 
 /// End the paper: score it, and for timed papers send every answer to
@@ -704,14 +726,13 @@ fn close(paper: Paper, now: i64) -> Outcome {
     outcome
 }
 
-/// "Leave" on the player. Tutor answers are already recorded, so a tutor set
-/// just ends; a timed paper is kept for later instead of thrown away.
+/// "Leave" (✕) on the player: the paper is kept for later, tutor or timed,
+/// never thrown away; the setup offers it back (UX-03). Its checked tutor
+/// answers are already in review.
 pub fn leave() {
     let now = now_ms();
     let mut phase = PHASE.write();
-    if let Phase::Running(p) = &mut *phase
-        && p.mode.timed()
-    {
+    if let Phase::Running(p) = &mut *phase {
         p.leave(now);
         *PAUSED.write() = Some(p.clone());
     }
@@ -721,8 +742,8 @@ pub fn leave() {
     keep_open();
 }
 
-/// Back to the paper he left. Its clock kept running; past the limit it is
-/// submitted as it stands.
+/// Back to the paper he left, on the question he left it at. A timed
+/// paper's clock kept running; past the limit it is submitted as it stands.
 pub fn resume() {
     let Some(mut p) = PAUSED.write().take() else { return };
     let now = now_ms();

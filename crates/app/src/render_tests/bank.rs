@@ -276,6 +276,28 @@ fn the_setup_offers_the_three_modes_and_counts_the_pool() {
 }
 
 #[test]
+fn the_counts_are_one_choice_of_several() {
+    let mut app = App::open(Screen::Bank);
+    // UX-42: one radio group, one size checked, never a set of toggles.
+    let checked = |app: &App| -> Vec<String> {
+        with_class(app, "toggle")
+            .into_iter()
+            .filter(|&n| app.page.attr(n, "role") == Some("radio"))
+            .filter(|&n| app.page.attr(n, "aria-checked") == Some("true"))
+            .map(|n| app.page.text(n))
+            .collect()
+    };
+    assert!(attrs_of(&app, "toggle", "role").iter().all(|r| r == "radio"));
+    assert!(attrs_of(&app, "toggle", "aria-pressed").iter().all(String::is_empty));
+    assert_eq!(checked(&app), ["20"]);
+    app.tap("40");
+    assert_eq!(checked(&app), ["40"]);
+    app.tap(tx::MODE_MOCK_NAME);
+    app.tap("15");
+    assert_eq!(checked(&app), ["15"]);
+}
+
+#[test]
 fn a_tutor_paper_checks_each_answer_and_sends_it_to_review() {
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
     let n = paper_n(&mut app);
@@ -330,8 +352,9 @@ fn a_tutor_paper_checks_each_answer_and_sends_it_to_review() {
     app.assert_has(tx::TABLE);
     app.assert_has(tx::REVIEW_WRONG);
 
-    // A new paper of the wrong one.
-    app.tap(tx::RETAKE);
+    // A new paper of the wrong one, its size said before it starts.
+    assert_eq!(texts_of(&app, "sum-retake"), [tx::retake(true, false, false, 1)]);
+    app.tap("sum-retake");
     app.assert_has("1 / 1");
 }
 
@@ -344,8 +367,8 @@ fn the_result_opens_each_question_and_goes_back_to_the_bank() {
     assert!(app.mount_events() > 0);
     // All right and nothing marked: nothing to review or retake, a new
     // paper instead; strong topics praised.
-    app.assert_lacks(tx::REVIEW_WRONG);
-    app.assert_lacks(tx::RETAKE);
+    assert!(!app.can_tap("sum-review"));
+    assert!(!app.can_tap("sum-retake"));
     app.assert_has(tx::NEW_PAPER);
     app.assert_has(tx::ALL_STRONG);
     // A row opens its question with the explanation, then closes.
@@ -480,11 +503,44 @@ fn a_new_paper_scores_the_one_left_first() {
 }
 
 #[test]
-fn a_tutor_paper_left_just_ends() {
+fn a_tutor_paper_left_waits_and_comes_back_where_it_was() {
+    // UX-03: ✕ (or Android Back) on a tutor block used to end it for good.
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
+    let n = paper_n(&mut app);
+    let (right, _) = options(&shown(&app));
+    app.answer(&right).tap(tx::CHECK);
+    app.tap(tx::NEXT);
+    let second = shown(&app);
     app.tap(tx::LEAVE);
-    app.assert_has(tx::START_TUTOR);
-    app.assert_lacks(tx::PAUSED_TITLE);
+    // The setup offers it back, with no clock to tell.
+    app.assert_has(tx::PAUSED_TITLE);
+    app.assert_has(&tx::kind(false, false));
+    app.assert_has(&format!("1/{n}"));
+    app.assert_lacks(tx::PAUSED_LEFT);
+    app.assert_lacks(tx::PAUSED_OVER);
+    // Kept on the device too, so the app being closed doesn't lose it.
+    assert_eq!(kept_paper().map(|p| p.at), Some(1));
+    app.tap(tx::RESUME);
+    assert_eq!(shown(&app).id, second.id, "back on the question he left");
+    app.assert_has(&format!("2 / {n}"));
+    assert_eq!(attrs_of(&app, "nav-cell", "data-state")[0], "right", "his checked answer stays");
+    // Left again and ended from the setup: the result comes.
+    app.tap(tx::LEAVE);
+    app.tap_nth(tx::END, 0);
+    app.assert_has(tx::RESULT);
+    assert_eq!(reviews().len(), 1, "a checked answer is logged once");
+    assert_eq!(kept_paper(), None);
+}
+
+#[test]
+fn escape_never_leaves_a_paper() {
+    let app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
+    // ✕ is still Android Back's target, but no key leaves the block.
+    assert_eq!(attr_of(&app, "run-leave", "data-back"), "true");
+    assert_eq!(attr_of(&app, "run-leave", "aria-keyshortcuts"), "");
+    let html = app.html();
+    let run = &html[html.find("class=\"bank-run\"").expect("a paper on screen")..];
+    assert!(!run.contains("aria-keyshortcuts=\"Escape\""), "no Escape target while no sheet is open");
 }
 
 #[test]
@@ -503,7 +559,7 @@ fn a_mock_is_scored_and_kept_as_a_mock() {
     app.tap(tx::CONFIRM_END);
     app.assert_has(tx::MOCK_TITLE);
     app.assert_has(&tx::kind(true, true));
-    app.assert_has(tx::RETAKE);
+    assert!(app.can_tap("sum-retake"));
     let saved = reviews();
     assert_eq!(saved.len(), 1);
     assert_eq!((saved[0].event.origin, saved[0].event.grade), (Origin::Mock, Grade::Again));
@@ -528,6 +584,74 @@ fn a_block_with_the_explanation_says_so_and_checks_each_answer() {
     app.answer(&right).tap(tx::CHECK);
     app.assert_has(tx::VERDICT_RIGHT);
     assert_eq!(reviews().len(), 1);
+}
+
+#[test]
+fn customising_shows_all_lectures_picked_and_a_lecture_s_topics_under_it() {
+    let mut app = App::open(Screen::Bank);
+    app.tap(tx::CUSTOMISE);
+    // Nothing picked is every lecture, said by a pressed chip (UX-28).
+    let pressed = |app: &App| -> Vec<String> {
+        with_class(app, "toggle")
+            .into_iter()
+            .filter(|&n| app.page.attr(n, "aria-pressed") == Some("true"))
+            .map(|n| app.page.text(n))
+            .collect()
+    };
+    assert_eq!(pressed(&app), [tx::ALL_LECTURES]);
+    app.assert_has(tx::PICK_LECTURE_FOR_TOPICS);
+    assert!(with_class(&app, "bank-topics").is_empty());
+    // A lecture picked: its topics open right after its course's chips, and
+    // the count and the start wait at the foot (UX-27).
+    let id = lecture_with_mcq_topics(1).expect("a lecture has MCQs filed under a topic");
+    let short = crate::bank::short_lecture_title(&id);
+    let lecture_chip = with_class(&app, "toggle")
+        .into_iter()
+        .find(|&n| app.page.attr(n, "title") == Some(crate::bank::lecture_title(&id).as_str()))
+        .expect("the lecture's chip");
+    app.fire("click", EventData::Mouse(SerializedMouseData::default()), lecture_chip);
+    assert_eq!(pressed(&app).len(), 1, "«كل المحاضرات» lets go: {:?}", pressed(&app));
+    assert!(pressed(&app)[0].contains(&short));
+    let groups = texts_of(&app, "bank-topics");
+    assert_eq!(groups.len(), 1);
+    assert!(groups[0].starts_with(&format!("{} {short}", tx::TOPICS_IN)), "{groups:?}");
+    assert!(groups[0].contains(&mcq_topics(&id)[0].title));
+    // In page order: the lecture's chip, its topics, then the next course.
+    let order = app.page.walk();
+    let place = |n: usize| order.iter().position(|&m| m == n).unwrap();
+    let chip = with_class(&app, "toggle")
+        .into_iter()
+        .find(|&n| app.page.attr(n, "title") == Some(crate::bank::lecture_title(&id).as_str()))
+        .map(place)
+        .unwrap();
+    let topics = place(with_class(&app, "bank-topics")[0]);
+    let next_course = with_class(&app, "course-label")
+        .into_iter()
+        .map(place)
+        .filter(|&at| at > chip)
+        .min()
+        .unwrap_or(usize::MAX);
+    assert!(chip < topics && topics < next_course, "the topics sit under the lecture's course");
+    assert_eq!(with_class(&app, "bank-pin").len(), 1);
+    assert!(texts_of(&app, "bank-pin")[0].contains(tx::START_TUTOR));
+    // «كل المحاضرات» again: every lecture, no topic left picked.
+    app.tap(tx::ALL_LECTURES);
+    assert_eq!(pressed(&app), [tx::ALL_LECTURES]);
+    app.assert_has(tx::SCOPE_ALL);
+}
+
+#[test]
+fn the_phone_tip_on_strikes_and_highlights_goes_once_dismissed() {
+    let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
+    app.assert_has(tx::TOOLS_TIP);
+    // Highlighting is «لوّن»: «علّم» is the flag's alone.
+    assert!(tx::TOOLS_HINT.contains("تلوّنه") && !tx::TOOLS_HINT.contains("تعلّم"));
+    app.tap(tx::TIP_OK);
+    app.assert_lacks(tx::TOOLS_TIP);
+    // Kept on the device: the next paper doesn't show it.
+    app.tap(tx::LEAVE);
+    app.tap(tx::START_TUTOR);
+    app.assert_lacks(tx::TOOLS_TIP);
 }
 
 #[test]
@@ -1128,9 +1252,14 @@ fn a_question_opened_from_search_never_drops_a_paper_the_app_was_killed_in() {
     let papers = crate::store::shared().settings_with_prefix::<steps_core::exam::Outcome>("bank.paper.");
     assert_eq!(papers.len(), 1, "the killed paper is kept with the finished ones");
     assert_eq!(papers[0].1.total.total, KEPT as u32);
-    // It went in once: the bank no longer offers it as a left paper.
+    // It went in once: the paper left now is the one-question set, not it.
     app.tap(tx::LEAVE);
-    app.assert_lacks(tx::PAUSED_TITLE);
+    app.assert_has(tx::PAUSED_TITLE);
+    let left = app.run(|| {
+        use dioxus::prelude::*;
+        crate::bank::PAUSED.peek().as_ref().map(|p| p.questions.len())
+    });
+    assert_eq!(left, Some(1));
 }
 
 #[test]
@@ -1249,7 +1378,9 @@ fn a_mark_is_kept_beyond_the_paper_and_brings_the_question_back() {
     let q = shown(&app);
     app.tap("exam-mark");
     assert_eq!(attr_of(&app, "exam-mark", "aria-pressed"), "true");
-    assert_eq!(attr_of(&app, "exam-mark", "aria-label"), tx::MARKED);
+    // Its name stays; the state is aria-pressed, and the word on it says it.
+    assert_eq!(attr_of(&app, "exam-mark", "aria-label"), tx::MARK);
+    assert_eq!(texts_of(&app, "exam-mark-word"), [tx::MARKED]);
     assert_eq!(kept_marks(), BTreeSet::from([q.id.clone()]), "the synced list holds it");
     // Unmarked: off the list; marked again: back on.
     app.tap("exam-mark");
@@ -1355,21 +1486,30 @@ fn the_end_of_a_block_sums_it_up() {
         app.assert_has(&title);
     }
 
-    // «راجع الأسئلة الغلط» opens the review on the missed ones.
-    app.tap(tx::REVIEW_WRONG);
-    assert_eq!(texts_of(&app, "exam-kind"), [format!("{} · {}", tx::REVIEWING, tx::SHOW_WRONG)]);
-    app.assert_has(&tx::question_of(2, n));
+    // The missed ones are wrong and blank: the review says it takes both,
+    // and counts inside them (UX-19).
+    app.tap(tx::REVIEW_MISSED);
+    assert_eq!(texts_of(&app, "exam-kind"), [format!("{} · {}", tx::REVIEWING, tx::SHOW_MISSED)]);
+    assert_eq!(texts_of(&app, "exam-of"), [tx::walk_of(1, n - 1)]);
+    assert!(attr_of(&app, "exam-count", "aria-label").ends_with(&tx::question_of(2, n)));
     app.assert_has(tx::VERDICT_WRONG);
     app.assert_has(tx::EXPLANATION);
+    // The right one is outside the review: faint in the navigator, and no
+    // way back to it from the first missed one.
+    assert_eq!(attrs_of(&app, "nav-cell", "data-out")[..3], ["true", "false", "false"]);
+    app.assert_has(tx::LEGEND_OUT);
+    assert!(!app.can_tap(tx::PREV));
     app.tap(tx::NEXT);
-    app.assert_has(&tx::question_of(3, n));
+    assert_eq!(texts_of(&app, "exam-of"), [tx::walk_of(2, n - 1)]);
     app.assert_has(tx::VERDICT_BLANK);
     // A review has no end of its own: its way out is back to the result.
     assert!(with_class(&app, "exam-end").is_empty());
     app.tap(tx::BACK_TO_RESULT);
 
-    // A new paper of the wrong, blank and marked ones, marks kept.
-    app.tap(tx::RETAKE);
+    // A new paper of the wrong, blank and marked ones, marks kept; its
+    // button says so, with its size.
+    assert_eq!(texts_of(&app, "sum-retake"), [tx::retake(true, true, true, n - 1)]);
+    app.tap("sum-retake");
     let retake = running(&mut app);
     assert_eq!(retake.questions.len(), n - 1);
     assert_eq!(retake.answers.iter().filter(|a| a.flagged).count(), 2);
@@ -1405,11 +1545,11 @@ fn the_compact_bar_opens_the_navigator_and_the_tools_as_sheets() {
 #[test]
 fn keys_select_confirm_and_move_the_right_way() {
     let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
-    // A–E pick; F marks; Escape leaves.
+    // A–E pick; F marks; Escape never leaves (it only closes sheets).
     let keys = attrs_of(&app, "q-option", "aria-keyshortcuts");
     assert!(keys.iter().zip(["A", "B", "C", "D", "E"]).all(|(k, want)| k == want), "{keys:?}");
     assert_eq!(attr_of(&app, "exam-mark", "aria-keyshortcuts"), "F");
-    assert_eq!(attr_of(&app, "run-leave", "aria-keyshortcuts"), "Escape");
+    assert_eq!(attr_of(&app, "run-leave", "aria-keyshortcuts"), "");
     // ← goes on and → back: the app reads right to left.
     for (label, key) in [(tx::NEXT, "ArrowLeft"), (tx::PREV, "ArrowRight")] {
         let moves: Vec<String> = with_class(&app, "exam-move")

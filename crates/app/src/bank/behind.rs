@@ -1,6 +1,9 @@
 //! "اللي ورا الغلطة": after a missed MCQ, the cards and clozes that hold the
-//! facts it tested, and one tap to study them now. The same First Aid page
-//! first, then the same topic, never another lecture. Answers in that
+//! facts it tested, and one tap to study them now. Its own topic on its own
+//! First Aid page first, then the rest of its topic; another topic on the
+//! same page only for a question filed under no topic (a page holds several
+//! topics, and their facts are not what it tested); never another lecture.
+//! Answers in that
 //! session are ordinary reviews, so FSRS sees them like any other. The
 //! paper stays where it was: the bank keeps it until he comes back.
 //! Inspired by AMBOSS's "Get Anki cards" on a Qbank question and the AnKing
@@ -16,22 +19,31 @@ use crate::store::use_review;
 /// At most this many facts under one question.
 pub const MAX: usize = 4;
 
-/// The facts behind `mcq` in its lecture: playable items on the same printed
-/// page first, then the same topic, in book order; never the MCQ itself,
-/// never hidden ones. A question from a question bank (VQ) cites no First
-/// Aid page, so its facts are its topic's.
+/// The facts behind `mcq` in its lecture, in book order within each rank:
+/// playable items of its topic on its printed page, then the rest of its
+/// topic; items of the same page under another topic only when the MCQ has
+/// no topic. Never the MCQ itself, never hidden ones. A question from a
+/// question bank (VQ) cites no First Aid page, so its facts are its topic's.
 pub fn facts<'a>(lecture: &'a Lecture, mcq: &Item, hidden: impl Fn(&str) -> bool) -> Vec<&'a Item> {
-    let usable =
-        |i: &&Item| i.id != mcq.id && crate::study::PLAYABLE.contains(&i.body.kind()) && !hidden(&i.id);
     let page = mcq.src.first_aid_page();
-    let on_page = |i: &&Item| page.is_some() && i.src.first_aid_page() == page;
-    let same_page = lecture.items.iter().filter(usable).filter(on_page);
-    let same_topic = lecture
+    let on_page = |i: &Item| page.is_some() && i.src.first_aid_page() == page;
+    let in_topic = |i: &Item| mcq.topic.is_some() && i.topic == mcq.topic;
+    // 0: same topic and page; 1: same topic; 2: same page, for an MCQ with no topic.
+    let rank = |i: &Item| match (in_topic(i), on_page(i)) {
+        (true, true) => Some(0),
+        (true, false) => Some(1),
+        (false, true) if mcq.topic.is_none() => Some(2),
+        _ => None,
+    };
+    let mut found: Vec<(u8, &Item)> = lecture
         .items
         .iter()
-        .filter(usable)
-        .filter(|i| !on_page(i) && mcq.topic.is_some() && i.topic == mcq.topic);
-    same_page.chain(same_topic).take(MAX).collect()
+        .filter(|i| i.id != mcq.id && crate::study::PLAYABLE.contains(&i.body.kind()) && !hidden(&i.id))
+        .filter_map(|i| rank(i).map(|r| (r, i)))
+        .collect();
+    // Stable: book order stays within a rank.
+    found.sort_by_key(|(r, _)| *r);
+    found.into_iter().map(|(_, i)| i).take(MAX).collect()
 }
 
 /// Where a fact stands in review, in words.
@@ -100,39 +112,84 @@ pub fn Behind(lecture: String, item: Item) -> Element {
 mod tests {
     use super::*;
     use crate::content::Library;
-    use steps_core::content::Body;
+    use steps_core::content::{Body, BookRef, Source, Status};
 
-    fn first_mcq(lec: &Lecture) -> &Item {
-        lec.items.iter().find(|i| matches!(i.body, Body::Mcq { .. })).expect("an MCQ")
+    /// A card under `topic` on printed page `page`. `facts` reads only the
+    /// question's id, topic and page, so the question is one of these too.
+    fn item(id: &str, topic: Option<&str>, page: u32) -> Item {
+        Item {
+            id: format!("bio.L01.{id}"),
+            body: Body::Card { front: format!("front {id}"), back: "back".into() },
+            topic: topic.map(str::to_string),
+            src: Source { book: None, page, quote: None },
+            status: Status::Unverified,
+            update: None,
+            tags: Vec::new(),
+        }
+    }
+
+    /// One lecture, in book order: two topics share page 35, and the
+    /// question's own topic also runs on to page 36.
+    fn lecture(mcq_topic: Option<&str>) -> (Lecture, Item) {
+        let mcq = item("900", mcq_topic, 35);
+        let items = vec![
+            item("001", Some("ada"), 35),
+            item("002", Some("ada"), 35),
+            item("003", Some("code"), 34),
+            item("004", Some("code"), 35),
+            item("005", Some("lesch"), 35),
+            item("006", Some("code"), 36),
+            item("007", Some("code"), 35),
+            mcq.clone(),
+            item("008", None, 35),
+        ];
+        let lecture = Lecture {
+            schema: steps_core::content::SCHEMA.into(),
+            lecture: "bio.L01".into(),
+            title: "Molecular".into(),
+            author: None,
+            book: BookRef { chapter: 1, pages: [33, 40] },
+            topics: Vec::new(),
+            items,
+        };
+        (lecture, mcq)
+    }
+
+    fn ids(found: &[&Item]) -> Vec<String> {
+        found.iter().map(|i| i.id.trim_start_matches("bio.L01.").to_string()).collect()
     }
 
     #[test]
-    fn facts_come_from_the_same_page_then_topic_and_never_another_lecture() {
-        let lib = Library::get();
-        let lec = lib
-            .lectures
-            .values()
-            .find(|l| l.items.iter().any(|i| matches!(i.body, Body::Mcq { .. })))
-            .unwrap();
-        for mcq in lec.items.iter().filter(|i| matches!(i.body, Body::Mcq { .. })) {
-            let found = facts(lec, mcq, |_| false);
-            assert!(found.len() <= MAX);
-            let mut left_page = false;
-            for f in &found {
-                assert!(f.id.starts_with(&lec.lecture));
-                assert_ne!(f.id, mcq.id);
-                assert!(crate::study::PLAYABLE.contains(&f.body.kind()));
-                if f.src.page == mcq.src.page {
-                    assert!(!left_page, "same-page facts come first");
-                } else {
-                    left_page = true;
-                    assert_eq!(f.topic, mcq.topic);
-                }
-            }
-        }
-        // Hidden items never show.
-        let mcq = first_mcq(lec);
-        assert!(facts(lec, mcq, |_| true).is_empty());
+    fn facts_come_from_the_question_s_topic_on_its_page_then_the_rest_of_the_topic() {
+        // A genetic-code question on page 35: never ADA or Lesch-Nyhan,
+        // though they are on the same page.
+        let (lec, mcq) = lecture(Some("code"));
+        assert_eq!(ids(&facts(&lec, &mcq, |_| false)), ["004", "007", "003", "006"]);
+        // At most MAX; the same page outranks book order.
+        let more = Lecture {
+            items: [lec.items.clone(), vec![item("010", Some("code"), 35)]].concat(),
+            ..lec.clone()
+        };
+        assert_eq!(ids(&facts(&more, &mcq, |_| false)), ["004", "007", "010", "003"]);
+        // Hidden items and the question itself never show.
+        assert_eq!(ids(&facts(&lec, &mcq, |id| id.ends_with("004"))), ["007", "003", "006"]);
+        assert!(facts(&lec, &mcq, |_| true).is_empty());
+    }
+
+    #[test]
+    fn a_question_with_no_topic_takes_its_page() {
+        let (lec, mcq) = lecture(None);
+        assert_eq!(ids(&facts(&lec, &mcq, |_| false)), ["001", "002", "004", "005"]);
+        // No page and no topic (a question bank's item): nothing to show.
+        let vq = Item { src: Source { book: Some("vq".into()), page: 12, quote: None }, ..mcq };
+        assert!(facts(&lec, &vq, |_| false).is_empty());
+    }
+
+    #[test]
+    fn a_question_bank_item_takes_its_topic_on_any_page() {
+        let (lec, mcq) = lecture(Some("code"));
+        let vq = Item { src: Source { book: Some("vq".into()), page: 12, quote: None }, ..mcq };
+        assert_eq!(ids(&facts(&lec, &vq, |_| false)), ["003", "004", "006", "007"]);
     }
 
     #[component]
@@ -154,7 +211,7 @@ mod tests {
         let mcq = lec.items.iter().find(|i| i.id == "cvs.L01.009").unwrap();
         let found = facts(lec, mcq, |_| false);
         assert!(!found.is_empty(), "page {} has cards", mcq.src.page);
-        assert!(found.iter().all(|f| f.src.page == mcq.src.page));
+        assert!(found.iter().all(|f| f.topic == mcq.topic), "only its own topic's facts");
         let mut dom = VirtualDom::new_with_props(Panel, PanelProps { id: mcq.id.clone() });
         dom.rebuild_in_place();
         let html = dioxus::ssr::render(&dom);

@@ -305,7 +305,6 @@ pub fn Setup() -> Element {
         };
         topics.sort_by_key(rank);
     }
-    let topic_prefix = several_lectures && filter.lectures.len() != 1;
     let tags_present: BTreeSet<&str> = pool.iter().flat_map(|q| q.tags.iter().map(String::as_str)).collect();
     let tags: Vec<(&str, &str)> = TAGS.into_iter().filter(|(t, _)| tags_present.contains(t)).collect();
     // What else narrows the scope, said under its title.
@@ -407,10 +406,10 @@ pub fn Setup() -> Element {
                             }
                         }
                         div { class: "bank-count",
-                            span { class: "muted small", {tx::COUNT} }
-                            div { class: "chips",
+                            span { class: "muted small", id: "bank-mock-count", {tx::COUNT} }
+                            div { class: "chips", role: "radiogroup", "aria-labelledby": "bank-mock-count",
                                 for c in MOCK_COUNTS {
-                                    Chip { key: "{c}", on: mock_count == c, onclick: move |_| *MOCK_COUNT.write() = c, bdi { "{c}" } }
+                                    Count { key: "{c}", on: mock_count == c, onclick: move |_| *MOCK_COUNT.write() = c, bdi { "{c}" } }
                                 }
                             }
                         }
@@ -464,10 +463,10 @@ pub fn Setup() -> Element {
                         }
                         p { class: "muted small", {mode_hint} }
                         div { class: "bank-count",
-                            span { class: "muted small", {tx::COUNT} }
-                            div { class: "chips",
+                            span { class: "muted small", id: "bank-count", {tx::COUNT} }
+                            div { class: "chips", role: "radiogroup", "aria-labelledby": "bank-count",
                                 for c in COUNTS {
-                                    Chip {
+                                    Count {
                                         key: "{c}",
                                         on: count == c,
                                         onclick: move |_| *COUNT.write() = c,
@@ -520,10 +519,25 @@ pub fn Setup() -> Element {
                         crate::ui::Card { class: "bank-advanced", id: "bank-advanced",
                             if several_lectures {
                                 h2 { class: "label", {tx::LECTURES} }
+                                if filter.lectures.is_empty() {
+                                    p { class: "muted small", {tx::PICK_LECTURE_FOR_TOPICS} }
+                                }
+                                // Nothing picked is every lecture, and says so (UX-28).
+                                div { class: "chips",
+                                    Chip {
+                                        on: filter.lectures.is_empty() && filter.topics.is_empty(),
+                                        onclick: move |_| {
+                                            let mut f = FILTER.write();
+                                            f.lectures.clear();
+                                            f.topics.clear();
+                                        },
+                                        {all_lectures()}
+                                    }
+                                }
                                 for group in crate::content::Library::get().by_course(lectures, |(id, _)| id.as_str()) {
                                     h3 { key: "{group.id}", class: "label course-label", "{group.short()}" }
                                     div { class: "chips",
-                                        for (id, n) in group.rows {
+                                        for (id, n) in group.rows.iter().cloned() {
                                             Chip {
                                                 key: "{id}",
                                                 on: filter.lectures.contains(&id),
@@ -534,8 +548,9 @@ pub fn Setup() -> Element {
                                                         if !f.lectures.remove(&id) {
                                                             f.lectures.insert(id.clone());
                                                         }
+                                                        // A lecture let go takes its topics with it.
                                                         let keep = f.lectures.clone();
-                                                        f.topics.retain(|(l, _)| keep.is_empty() || keep.contains(l));
+                                                        f.topics.retain(|(l, _)| keep.contains(l));
                                                     }
                                                 },
                                                 title: lecture_title(&id),
@@ -544,34 +559,28 @@ pub fn Setup() -> Element {
                                             }
                                         }
                                     }
-                                }
-                            }
-
-                            h2 { class: "label", {tx::TOPICS} }
-                            if topics.is_empty() {
-                                p { class: "muted small", {tx::PICK_LECTURE_FOR_TOPICS} }
-                            } else {
-                                div { class: "chips",
-                                    for (lecture, topic) in topics {
-                                        Chip {
-                                            key: "{lecture}/{topic}",
-                                            on: filter.topics.contains(&(lecture.clone(), topic.clone())),
-                                            onclick: {
-                                                let key = (lecture.clone(), topic.clone());
-                                                move |_| {
-                                                    let mut f = FILTER.write();
-                                                    if !f.topics.remove(&key) {
-                                                        f.topics.insert(key.clone());
-                                                    }
-                                                }
-                                            },
-                                            if topic_prefix {
-                                                bdi { "{short_lecture_title(&lecture)} › {topic_title(&lecture, &topic)}" }
-                                            } else {
-                                                bdi { {topic_title(&lecture, &topic)} }
+                                    // A picked lecture's topics open right under its
+                                    // course, not under every lecture of the bank (UX-27).
+                                    for (id, _) in group.rows.iter().filter(|(id, _)| filter.lectures.contains(id)).cloned() {
+                                        div { key: "topics-{id}", class: "bank-topics", role: "group",
+                                            "aria-label": "{tx::TOPICS_IN} {short_lecture_title(&id)}",
+                                            span { class: "label",
+                                                "{tx::TOPICS_IN} "
+                                                bdi { "{short_lecture_title(&id)}" }
+                                            }
+                                            TopicChips {
+                                                topics: topics.iter().filter(|(l, _)| *l == id).cloned().collect::<Vec<_>>(),
+                                                picked: filter.topics.clone(),
                                             }
                                         }
                                     }
+                                }
+                            } else {
+                                h2 { class: "label", {tx::TOPICS} }
+                                if topics.is_empty() {
+                                    p { class: "muted small", {tx::NO_TOPICS} }
+                                } else {
+                                    TopicChips { topics: topics.clone(), picked: filter.topics.clone() }
                                 }
                             }
 
@@ -608,6 +617,21 @@ pub fn Setup() -> Element {
                                     {tx::RESET_SCOPE}
                                 }
                             }
+                            // The count and the start stay at hand while he
+                            // picks, however long the list (UX-27).
+                            div { class: "bank-pin",
+                                if empty_reason.is_some() {
+                                    p { class: "small", strong { {tx::NONE_MATCH} } }
+                                } else {
+                                    p { class: "small",
+                                        strong { {counted(shown, &QUESTION)} }
+                                        span { class: "muted", " · {tx::POOL_OF} " {counted(available, &QUESTION)} }
+                                    }
+                                    button { class: "btn btn-primary", onclick: start_practice,
+                                        if mode == Mode::Tutor { {tx::START_TUTOR} } else { {tx::START_TIMED} }
+                                    }
+                                }
+                            }
                         }
                     }
                     p { class: "note bank-scope-note",
@@ -621,6 +645,31 @@ pub fn Setup() -> Element {
             if has_history {
                 div { class: "tab-aside tab-sticky",
                     History {}
+                }
+            }
+        }
+    }
+}
+
+/// A lecture's topic chips, in book order: each picked or not (UX-27).
+#[component]
+fn TopicChips(topics: Vec<(String, String)>, picked: BTreeSet<(String, String)>) -> Element {
+    rsx! {
+        div { class: "chips",
+            for (lecture, topic) in topics {
+                Chip {
+                    key: "{lecture}/{topic}",
+                    on: picked.contains(&(lecture.clone(), topic.clone())),
+                    onclick: {
+                        let key = (lecture.clone(), topic.clone());
+                        move |_| {
+                            let mut f = FILTER.write();
+                            if !f.topics.remove(&key) {
+                                f.topics.insert(key.clone());
+                            }
+                        }
+                    },
+                    bdi { {topic_title(&lecture, &topic)} }
                 }
             }
         }
@@ -641,6 +690,20 @@ fn Chip(
             class: "chip toggle",
             title,
             "aria-pressed": if on { "true" } else { "false" },
+            onclick: move |e| onclick.call(e),
+            {children}
+        }
+    }
+}
+
+/// One of a paper's sizes: a radio, since exactly one is picked (UX-42).
+#[component]
+fn Count(on: bool, onclick: EventHandler<MouseEvent>, children: Element) -> Element {
+    rsx! {
+        button {
+            class: "chip toggle",
+            role: "radio",
+            "aria-checked": if on { "true" } else { "false" },
             onclick: move |e| onclick.call(e),
             {children}
         }
@@ -691,29 +754,36 @@ fn History() -> Element {
     }
 }
 
-/// A timed paper he left part-way: go back to it, or submit it as it is.
+/// A paper he left part-way (✕), timed or tutor: go back to it, or end it
+/// as it is. Only a timed paper has a clock to tell.
 #[component]
 fn Paused() -> Element {
     let Some(p) = PAUSED.read().clone() else {
         return rsx! {};
     };
     let n = p.questions.len();
+    let timed = p.mode.timed();
     let answered = p.answers.iter().filter(|a| a.chosen.is_some()).count();
     let left = exam::remaining_ms(n, p.started_ms, now_ms());
     rsx! {
         crate::ui::Card { class: "paused",
-            h2 { {tx::PAUSED_TITLE} }
+            div { class: "paused-head",
+                h2 { {tx::PAUSED_TITLE} }
+                span { class: "chip", "data-tone": "accent", {tx::kind(p.block, timed)} }
+            }
             p { class: "muted small",
                 "{tx::PAUSED_BODY} " bdi { "{answered}/{n}" }
-                if left > 0 {
+                if timed && left > 0 {
                     " {tx::PAUSED_LEFT} " {counted(minutes(left), &MINUTE)}
-                } else {
+                } else if timed {
                     " · {tx::PAUSED_OVER}"
                 }
             }
             div { class: "start-row",
                 button { class: "btn btn-primary", onclick: move |_| resume(), {tx::RESUME} }
-                button { class: "btn btn-secondary", onclick: move |_| submit_paused(), {tx::SUBMIT_NOW} }
+                button { class: "btn btn-secondary", onclick: move |_| submit_paused(),
+                    if timed { {tx::SUBMIT_NOW} } else { {tx::END} }
+                }
             }
         }
     }
