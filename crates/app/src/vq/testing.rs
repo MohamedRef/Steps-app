@@ -21,7 +21,7 @@ pub const FIGURE: &[u8] = b"RIFF\x0c\x00\x00\x00WEBPVP8L\x00\x00";
 pub const OBJECTIVE: &str = "The fixture's objective: an apical holosystolic murmur is mitral regurgitation.";
 /// The video that explains it (an id of the right shape, never fetched).
 pub const VIDEO_ID: &str = "Fixture_0-1";
-pub const VIDEO_TITLE: &str = "HY USMLE Fixture - #1";
+pub const VIDEO_TITLE: &str = "Step 1 fixture - #1";
 
 pub fn video() -> Video {
     Video { youtube: VIDEO_ID.into(), title: VIDEO_TITLE.into() }

@@ -17,7 +17,7 @@ const FIGURE: &[u8] = b"RIFF\x0c\x00\x00\x00WEBPVP8L\x00\x00";
 const OBJECTIVE: &str = "Reflex (vasovagal) syncope is the most common cause of fainting.";
 
 /// The video that explains the first question.
-const VIDEO: &str = "    video:\n      youtube: AxAAL7ZJQ4c\n      title: \"HY USMLE Oncology - #314\"\n";
+const VIDEO: &str = "    video:\n      youtube: Ab3_xYz-012\n      title: \"Step 1 review - #12\"\n";
 
 /// The open folder `vq open` would write: two questions under the fixture
 /// lecture `cvs.L04`, the first with a figure, an educational objective and
@@ -91,8 +91,8 @@ fn seal_then_open_then_seal_changes_nothing() {
     assert_eq!(first.image_type.as_deref(), Some(sealed::IMAGE_TYPE));
     assert_eq!(first.objective.as_deref(), Some(OBJECTIVE));
     let video = first.video.as_ref().expect("the video, sealed with the question");
-    assert_eq!((video.youtube.as_str(), video.title.as_str()), ("AxAAL7ZJQ4c", "HY USMLE Oncology - #314"));
-    assert!(!text.contains("AxAAL7ZJQ4c") && !text.contains("Oncology"), "the video is sealed too");
+    assert_eq!((video.youtube.as_str(), video.title.as_str()), ("Ab3_xYz-012", "Step 1 review - #12"));
+    assert!(!text.contains("Ab3_xYz-012") && !text.contains("review - #12"), "the video is sealed too");
     let second = sealed::open_item(&key(7), &file.items[1]).unwrap();
     assert_eq!((second.image, second.objective, second.video), (None, None, None));
 

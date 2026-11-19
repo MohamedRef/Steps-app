@@ -139,19 +139,19 @@ fn a_video_has_a_youtube_id_and_a_title() {
     use crate::sealed::Video;
     let o = Opened::with_image(question("cvs.L04.vq0006", ""), None);
     let video = |youtube: &str, title: &str| Some(Video { youtube: youtube.into(), title: title.into() });
-    let linked = o.clone().with_video(video("AxAAL7ZJQ4c", "HY USMLE Oncology - #314"));
+    let linked = o.clone().with_video(video("Ab3_xYz-012", "Step 1 review - #12"));
     assert!(messages(&linked).is_empty(), "{:#?}", messages(&linked));
     assert_eq!(
         linked.video.as_ref().map(Video::url).as_deref(),
-        Some("https://www.youtube.com/watch?v=AxAAL7ZJQ4c")
+        Some("https://www.youtube.com/watch?v=Ab3_xYz-012")
     );
     for (youtube, title, says) in [
-        ("AxAAL7ZJQ4", "Title", "is not a YouTube video id"),
-        ("AxAAL7ZJQ4c!", "Title", "is not a YouTube video id"),
+        ("Ab3_xYz-01", "Title", "is not a YouTube video id"),
+        ("Ab3_xYz-012!", "Title", "is not a YouTube video id"),
         ("https://youtu", "Title", "is not a YouTube video id"),
-        ("AxAAL7ZJQ4c", " ", "video.title is empty"),
-        ("AxAAL7ZJQ4c", "Title ", "spaces at an end"),
-        ("AxAAL7ZJQ4c", &"t".repeat(201), "over 200 characters"),
+        ("Ab3_xYz-012", " ", "video.title is empty"),
+        ("Ab3_xYz-012", "Title ", "spaces at an end"),
+        ("Ab3_xYz-012", &"t".repeat(201), "over 200 characters"),
     ] {
         let msgs = messages(&o.clone().with_video(video(youtube, title)));
         assert!(msgs.iter().any(|m| m.contains(says)), "{youtube:?} {title:?}: {msgs:#?}");

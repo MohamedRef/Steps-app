@@ -100,9 +100,9 @@ pub struct Opened {
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Video {
-    /// The 11-character YouTube video id (`AxAAL7ZJQ4c`).
+    /// The 11-character YouTube video id (`Ab3_xYz-012`).
     pub youtube: String,
-    /// The video's title (`HY USMLE Oncology - #314`).
+    /// The video's title (`Step 1 review - #12`).
     pub title: String,
 }
 
