@@ -25,7 +25,8 @@ pub fn CourseHead(short: String, title: String) -> Element {
     let ui = use_context::<Ui>();
     rsx! {
         h3 { class: "course-head",
-            button { class: "tap tap-plain course-head-btn", title: crate::i18n::courses::TITLE, onclick: move |_| crate::courses::open_map(ui),
+            // Read as two words, not «بيوكيمستريBiochemistry» (UX-42).
+            button { class: "tap tap-plain course-head-btn", aria_label: "{short}، {title}", title: crate::i18n::courses::TITLE, onclick: move |_| crate::courses::open_map(ui),
                 span { class: "course-head-short", "{short}" }
                 bdi { class: "course-head-title", dir: "ltr", lang: "en", "{title}" }
                 span { class: "chev", aria_hidden: "true" }

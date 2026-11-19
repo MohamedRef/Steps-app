@@ -100,8 +100,10 @@ Existing tests live beside the owning facade in a child `tests.rs` module.
 ## UI rules the tests hold
 
 - **Touch targets:** every control in study, lessons, the bank and Settings is
-  at least the shared 48dp `--target`; the compact `--tap` (40px) is only for
-  dense chips outside those screens. The browser checks fail on a regression.
+  at least the shared 48dp `--target`; on phones `--tap` is 48px too (3rem),
+  so the top bar, `.btn`, segments and tabs are full targets; wider windows
+  keep `--tap` at 2.75rem for pointer use. The browser checks fail on a
+  regression.
 - **Words, not only colour:** a right or wrong answer, a suggested grade
   («مقترح»), a marked question and a struck-out option say so in words as
   well as colour; the bank's navigator adds ✓, ✗ and a flag to its colours.

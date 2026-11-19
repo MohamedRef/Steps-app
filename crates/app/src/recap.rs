@@ -145,20 +145,23 @@ mod tests {
     #[test]
     fn the_line_says_what_he_did_and_what_is_next() {
         let done =
-            day_line(DayFacts { answered: 30, learned: 8, due_left: 0, due_tomorrow: 25, new_left: 0 }).unwrap();
+            day_line(DayFacts { answered: 30, learned: 8, due_left: 0, due_tomorrow: 25, new_left: 0 })
+                .unwrap();
         assert!(done.contains("30") && done.contains('8') && done.contains("25"), "{done}");
         assert!(done.contains(tx::DONE_REST));
-        let more =
-            day_line(DayFacts { answered: 12, learned: 0, due_left: 9, due_tomorrow: 3, new_left: 0 }).unwrap();
+        let more = day_line(DayFacts { answered: 12, learned: 0, due_left: 9, due_tomorrow: 3, new_left: 0 })
+            .unwrap();
         assert_eq!(more, "النهارده جاوبت 12 سؤال. فاضل 9 مراجعات لو عندك وقت، ولو لأ بكرة موجودة.");
-        let one = day_line(DayFacts { answered: 1, learned: 2, due_left: 0, due_tomorrow: 0, new_left: 0 }).unwrap();
+        let one = day_line(DayFacts { answered: 1, learned: 2, due_left: 0, due_tomorrow: 0, new_left: 0 })
+            .unwrap();
         assert_eq!(one, "النهارده جاوبت سؤال واحد، واتعلمت حاجتين جداد. مراجعة النهارده خلصت، استريح.");
     }
 
     #[test]
     fn with_new_items_still_open_the_day_never_says_rest() {
         // Today's hero offers the next lesson then; the line agrees (UX-38).
-        let line = day_line(DayFacts { answered: 5, due_left: 0, new_left: 12, ..DayFacts::default() }).unwrap();
+        let line =
+            day_line(DayFacts { answered: 5, due_left: 0, new_left: 12, ..DayFacts::default() }).unwrap();
         assert!(line.ends_with(tx::REVIEWS_DONE_NEW_WAITS), "{line}");
         assert!(!line.contains(tx::DONE_REST), "{line}");
     }

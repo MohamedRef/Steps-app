@@ -68,6 +68,20 @@ pub const MINUTES: &str = "دقيقة تركيز";
 pub const ANSWERS: &str = "سؤال وكارت جاوبتهم";
 pub const MONTH_START: &str = "من 30 يوم";
 pub const TODAY: &str = "النهارده";
+/// The activity chart for a screen reader: each day of a week with its
+/// minutes, or a month's total and the days with study (UX-32).
+pub fn activity_summary<'a>(days: impl Iterator<Item = (&'a str, u32)>, week: bool) -> String {
+    use super::count::{DAY, MINUTE, count};
+    let days: Vec<(&str, u32)> = days.collect();
+    if week {
+        let each: Vec<String> = days.iter().map(|(d, m)| format!("{d} {m}")).collect();
+        format!("دقايق المذاكرة: {}", each.join("، "))
+    } else {
+        let total: u32 = days.iter().map(|(_, m)| m).sum();
+        let studied = days.iter().filter(|(_, m)| *m > 0).count();
+        format!("{} مذاكرة في {} من الشهر", count(total, &MINUTE), count(studied, &DAY))
+    }
+}
 pub fn day_bar(minutes: u32, answers: u32) -> String {
     use super::count::{ANSWER, MINUTE, count};
     format!("{}، {}", count(minutes, &MINUTE), count(answers, &ANSWER))

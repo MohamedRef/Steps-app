@@ -180,7 +180,11 @@ fn RetestCard(ids: Vec<String>, data: Rc<StudyData>) -> Element {
 
 /// The MCQs among `ids`, shuffled with `seed`, as the questions of a tutor
 /// block: every one of them, and nothing else.
-pub(crate) fn mcq_block<'a>(lectures: impl IntoIterator<Item = &'a Lecture>, ids: &[String], seed: u64) -> Vec<Question> {
+pub(crate) fn mcq_block<'a>(
+    lectures: impl IntoIterator<Item = &'a Lecture>,
+    ids: &[String],
+    seed: u64,
+) -> Vec<Question> {
     let pool: Vec<steps_core::exam::Mcq> =
         steps_core::exam::mcqs(lectures).into_iter().filter(|q| ids.iter().any(|id| id == q.id)).collect();
     steps_core::exam::practice(&pool, pool.len(), seed)
