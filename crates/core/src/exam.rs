@@ -76,27 +76,49 @@ pub enum Only {
     Marked,
 }
 
-/// Which questions the bank draws from: Steps' own, or Mohamed's VQ bank,
-/// which he keeps apart as «أسئلة MH» (2026-11-19). A paper never mixes them.
-#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Serialize, Deserialize)]
+/// Which questions the bank draws from: Steps' own, Mohamed's VQ bank,
+/// which he keeps apart as «أسئلة MH» (2026-11-19), or a category of the
+/// questions he added from a file (`crate::ownq`). A paper never mixes them.
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Set {
     #[default]
     Steps,
     /// Questions tagged [`crate::sealed::TAG`].
     Vq,
+    /// His questions of one category (tagged `mine:<category>`).
+    Own(String),
 }
 
 impl Set {
-    pub const ALL: [Set; 2] = [Set::Steps, Set::Vq];
-
     /// The set `q` belongs to.
     pub fn of(q: &Mcq) -> Set {
-        if q.tags.iter().any(|t| t == crate::sealed::TAG) { Set::Vq } else { Set::Steps }
+        Set::of_tags(q.tags)
     }
 
-    pub fn holds(self, q: &Mcq) -> bool {
-        Set::of(q) == self
+    /// The set an item with these tags belongs to.
+    pub fn of_tags(tags: &[String]) -> Set {
+        if tags.iter().any(|t| t == crate::sealed::TAG) {
+            Set::Vq
+        } else if let Some(c) = crate::ownq::category_of(tags) {
+            Set::Own(c.to_string())
+        } else {
+            Set::Steps
+        }
+    }
+
+    pub fn holds(&self, q: &Mcq) -> bool {
+        Set::of(q) == *self
+    }
+
+    /// Every set `pool` has questions of, Steps' first, then the VQ bank,
+    /// then his categories by name.
+    pub fn present(pool: &[Mcq]) -> Vec<Set> {
+        let mut out: BTreeSet<Set> = BTreeSet::new();
+        for q in pool {
+            out.insert(Set::of(q));
+        }
+        out.into_iter().collect()
     }
 }
 
@@ -132,7 +154,7 @@ impl Filter {
 
     /// Whether it narrows its set at all: a lecture, topic, tag or result.
     pub fn narrowed(&self) -> bool {
-        *self != Filter { set: self.set, ..Filter::default() }
+        *self != Filter { set: self.set.clone(), ..Filter::default() }
     }
 
     pub fn select<'a>(&self, pool: &[Mcq<'a>], history: &History) -> Vec<Mcq<'a>> {

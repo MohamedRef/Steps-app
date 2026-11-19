@@ -147,6 +147,9 @@ pub fn QuestionView(
     let secondary = rsx! {
         crate::ui::Card { element: crate::ui::CardElement::Div, class: "q-explain",
             h2 { class: "q-explain-head", {tx::EXPLANATION} }
+            // One of his own questions may have no why lines: its explanation
+            // stands on its own below.
+            if rows.iter().any(|r| !r.3.is_empty()) {
             ol { class: "q-why-list", lang: "en", dir: "ltr",
                 for (orig, letter, _, reason, state, _) in rows {
                     li { key: "{orig}", "data-state": if matches!(state, "correct" | "missed") { "right" } else { state },
@@ -160,15 +163,24 @@ pub fn QuestionView(
                     }
                 }
             }
-            // A VQ question's educational objective, after its why lines,
-            // then the video that explains it.
+            }
+            // One of his own questions: its explanation. Then a VQ question's,
+            // or his, educational objective, and the video that explains it.
+            crate::ownq::Explanation { item_id: item.id.clone() }
             crate::vq::Objective { item_id: item.id.clone() }
             crate::vq::VideoLink { item_id: item.id.clone() }
             div { class: "q-foot",
-                // A question bank's item is named by its number, not a page.
-                match crate::vq::source_label(&item) {
-                    Some(label) => rsx! { crate::vq::SourceChip { label } },
-                    None => rsx! { crate::hover::BookPage { page: item.src.page, quote, of: item.id.clone() } },
+                // A question bank's item is named by its number, not a page;
+                // his own by its category and id, with the page he named.
+                match (crate::vq::source_label(&item), crate::ownq::name(&item.id)) {
+                    (Some(label), _) => rsx! { crate::vq::SourceChip { label } },
+                    (None, Some(label)) => rsx! {
+                        crate::vq::SourceChip { label }
+                        if item.src.page > 0 {
+                            crate::hover::BookPage { page: item.src.page, quote, of: item.id.clone() }
+                        }
+                    },
+                    (None, None) => rsx! { crate::hover::BookPage { page: item.src.page, quote, of: item.id.clone() } },
                 }
             }
             // A miss shows the cards that hold what it tested.

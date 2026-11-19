@@ -21,6 +21,7 @@ pub fn DataSection() -> Element {
         crate::anki::AnkiExport {}
         crate::verify::ExportVerdicts {}
         div { class: "section-head", h2 { {tx::DATA_GROUP_DEVICE} } }
+        crate::ownq::OwnQuestionsCard {}
         crate::vq::KeyCard {}
         Card {
             h2 { {tx::DATA_FOLDER} }

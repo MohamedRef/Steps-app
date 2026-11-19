@@ -66,7 +66,7 @@ impl App {
 
     /// Taps the paper's option carrying `text`.
     #[track_caller]
-    fn answer(&mut self, text: &str) -> &mut Self {
+    pub(crate) fn answer(&mut self, text: &str) -> &mut Self {
         let n = self.option("click", text);
         self.fire("click", EventData::Mouse(SerializedMouseData::default()), n);
         self

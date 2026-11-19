@@ -262,6 +262,8 @@ fn table_label(name: &str) -> String {
         "own_cards" => tx::T_OWN.to_string(),
         "notes" => tx::T_NOTES.to_string(),
         "self_assessments" => tx::T_SCORES.to_string(),
+        "own_questions" => tx::T_OWN_QUESTIONS.to_string(),
+        "own_images" => tx::T_OWN_IMAGES.to_string(),
         other => other.replace('_', " "),
     }
 }
@@ -276,6 +278,7 @@ mod tests {
         assert_eq!(table_label("item_status"), tx::T_CHECKS);
         assert_eq!(table_label("settings"), tx::T_SETTINGS);
         assert_eq!(table_label("own_cards"), tx::T_OWN);
+        assert_eq!(table_label("own_questions"), tx::T_OWN_QUESTIONS);
         assert_eq!(table_label("lesson_progress"), "lesson progress");
     }
 }

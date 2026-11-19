@@ -12,8 +12,16 @@ use crate::i18n::vq as tx;
 /// Nothing when the question has no figure (or isn't a VQ question).
 #[component]
 pub fn Figure(item_id: String) -> Element {
-    let Some(src) = Library::get().vq.image(&item_id).map(str::to_owned) else { return rsx! {} };
-    let name = super::name(&item_id).unwrap_or_default();
+    let lib = Library::get();
+    let src = lib.vq.image(&item_id).map(str::to_owned).or_else(|| crate::ownq::image_url(&item_id));
+    let Some(src) = src else {
+        // One of his own, whose figure another device is still sending.
+        if crate::ownq::image_waiting(&item_id) {
+            return rsx! { p { class: "muted small ownq-wait", role: "status", {crate::i18n::ownq::WAITING_FIGURE} } };
+        }
+        return rsx! {};
+    };
+    let name = super::name(&item_id).or_else(|| crate::ownq::name(&item_id)).unwrap_or_default();
     let alt = tx::figure_alt(&name);
     let mut big = use_signal(|| false);
     rsx! {
@@ -70,7 +78,10 @@ pub fn Figure(item_id: String) -> Element {
 /// explanation; nothing when it has none. English, as the bank wrote it.
 #[component]
 pub fn Objective(item_id: String) -> Element {
-    let Some(text) = Library::get().vq.objective(&item_id).map(str::to_owned) else { return rsx! {} };
+    let lib = Library::get();
+    let text =
+        lib.vq.objective(&item_id).or_else(|| lib.mine.get(&item_id).and_then(|q| q.objective.as_deref()));
+    let Some(text) = text.map(str::to_owned) else { return rsx! {} };
     rsx! {
         style { {CSS.text()} }
         aside { class: "note vq-objective", lang: "en", dir: "ltr",
@@ -85,8 +96,13 @@ pub fn Objective(item_id: String) -> Element {
 /// never plays or fetches it. Nothing when the question has none.
 #[component]
 pub fn VideoLink(item_id: String) -> Element {
-    let Some(video) = Library::get().vq.video(&item_id).cloned() else { return rsx! {} };
+    let lib = Library::get();
+    let video =
+        lib.vq.video(&item_id).cloned().or_else(|| lib.mine.get(&item_id).and_then(|q| q.video.clone()));
+    let Some(video) = video else { return rsx! {} };
     let url = video.url();
+    // His own may come without a title: the link stands for it.
+    let title = if video.title.trim().is_empty() { url.clone() } else { video.title.clone() };
     let mut copied = use_signal(|| false);
     rsx! {
         style { {CSS.text()} }
@@ -106,7 +122,7 @@ pub fn VideoLink(item_id: String) -> Element {
                     }
                 },
                 span { class: "vq-video-play", aria_hidden: "true", "▶" }
-                bdi { class: "vq-video-title", lang: "en", dir: "ltr", "{video.title}" }
+                bdi { class: "vq-video-title", lang: "en", dir: "ltr", "{title}" }
             }
             div { class: "vq-video-link",
                 bdi { class: "vq-video-url", lang: "en", dir: "ltr", "{url}" }

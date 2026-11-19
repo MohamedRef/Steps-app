@@ -19,6 +19,8 @@ Cost: **$0**. Nothing here needs a card on file. There is no D1 database and no 
 | `settings` | last writer wins (HLC) | retention, new items a day and other study settings; lesson marks; the bank's finished papers and marked questions (`bank.marked`); where each unfinished lesson stands (`lessonpos.<id>`: step, answers, notes, score) |
 | `own_cards` | last writer wins (HLC, a delete is a tombstone) | the cards you write yourself |
 | `self_assessments` | last writer wins (HLC, a delete is a tombstone) | your NBME / UWSA / Free 120 scores |
+| `own_questions` | last writer wins (HLC, a delete is a tombstone) | the questions you add from a file, one row each, keyed `<category>/<id>` ([OWN-QUESTIONS.md](OWN-QUESTIONS.md)) |
+| `own_images` | last writer wins (HLC) | their figures, in chunks of 45 KB (`<sha256>.<n>`) so each fits one op |
 
 Places (`Store::put_place`) sync too, so a new device opens a lesson at the step you left; a place too big for one op stays on its device. A row written again before it went up keeps only its newest op in the outbox, so a lesson's place costs one op per push however many answers. The open timed bank paper stays on its device on purpose: two devices restoring the same paper could count its answers twice.
 

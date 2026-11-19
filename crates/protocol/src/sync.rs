@@ -51,6 +51,10 @@ pub const TABLES: &[(&str, SyncKind)] = &[
     ("notes", SyncKind::Lww),
     // His NBME / UWSA / Free 120 scores, one JSON row each (`steps_core::selfassess`).
     ("self_assessments", SyncKind::Lww),
+    // The questions he adds from a file, one JSON row each, and their
+    // figures in chunks that each fit an op (`steps_core::ownq`).
+    ("own_questions", SyncKind::Lww),
+    ("own_images", SyncKind::Lww),
 ];
 
 pub fn table_kind(table: &str) -> Option<SyncKind> {

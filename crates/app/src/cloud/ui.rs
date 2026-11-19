@@ -69,8 +69,10 @@ fn follow(cloud: Cloud, mut handle: super::CloudHandle, review: crate::store::Re
                 Event::Devices(d) => devices.set(Some(d)),
                 Event::SigningIn(on) => signing_in.set(on),
                 Event::Login(l) => login.set(l),
-                Event::Changed(_) => {
+                Event::Changed(tables) => {
                     // Another device answered, judged or changed a setting.
+                    // Questions he added there open with the library, later.
+                    crate::ownq::synced(&tables);
                     let _ = crate::store::shared().observe_stored();
                     review.backend.borrow_mut().reload_and_notify();
                 }

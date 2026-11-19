@@ -719,10 +719,27 @@ pub fn finish() {
     keep_open();
 }
 
+/// The set a paper was drawn from, by its questions' tags: one set, or
+/// Steps' when they are mixed (or no longer in the library).
+fn paper_set(questions: &[Question]) -> exam::Set {
+    let lib = crate::content::Library::get();
+    let sets: std::collections::BTreeSet<exam::Set> = questions
+        .iter()
+        .map(|q| {
+            lib.lectures
+                .get(steps_core::program::lecture_of(&q.id))
+                .and_then(|l| l.items.iter().find(|i| i.id == q.id))
+                .map_or(exam::Set::Steps, |i| exam::Set::of_tags(&i.tags))
+        })
+        .collect();
+    if sets.len() == 1 { sets.into_iter().next().unwrap_or_default() } else { exam::Set::Steps }
+}
+
 /// Score a paper; for timed ones, record the answers and save the result.
 fn close(paper: Paper, now: i64) -> Outcome {
     let took = u64::try_from(now.saturating_sub(paper.started_ms)).unwrap_or(0);
-    let outcome = exam::score(&paper.questions, &paper.answers, paper.mode, now, took);
+    let mut outcome = exam::score(&paper.questions, &paper.answers, paper.mode, now, took);
+    outcome.set = paper_set(&paper.questions);
     if paper.mode.timed() {
         for (q, a) in paper.questions.iter().zip(&paper.answers) {
             if let Some(e) = exam::review_event(q, a, paper.mode, now) {

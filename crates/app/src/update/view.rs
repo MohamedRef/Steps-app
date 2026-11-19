@@ -692,6 +692,15 @@ pub fn use_content_switch(ui: Ui) {
                     loaded_for += 1;
                     super::pack_settled();
                 }
+                // Questions he added on another device: the library opens
+                // again with them at the same calm moments.
+                if calm(*ui.screen.peek()) && !overlay_open() && crate::ownq::take_changed() {
+                    crate::content::Library::reload();
+                    if let Some(r) = &review {
+                        r.backend.borrow_mut().library_replaced();
+                    }
+                    *crate::content::REV.write() += 1;
+                }
                 if super::get().is_none() {
                     continue;
                 }

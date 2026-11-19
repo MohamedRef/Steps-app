@@ -150,7 +150,7 @@ pub fn focus(lecture: &str, topic: Option<String>) {
     let mut f = Filter {
         lectures: BTreeSet::from([lecture.to_string()]),
         topics: topic.into_iter().map(|t| (lecture.to_string(), t)).collect(),
-        set: FILTER.peek().set,
+        set: FILTER.peek().set.clone(),
         ..Filter::default()
     };
     // The set in view, if it has questions there; else the one that has.
@@ -158,9 +158,9 @@ pub fn focus(lecture: &str, topic: Option<String>) {
     let pool = exam::mcqs(&owned);
     let history = HISTORY.peek();
     if f.select(&pool, &history).is_empty()
-        && let Some(other) = Set::ALL
-            .into_iter()
-            .find(|s| *s != f.set && !Filter { set: *s, ..f.clone() }.select(&pool, &history).is_empty())
+        && let Some(other) = Set::present(&pool).into_iter().find(|s| {
+            *s != f.set && !Filter { set: s.clone(), ..f.clone() }.select(&pool, &history).is_empty()
+        })
     {
         f.set = other;
     }
@@ -237,7 +237,7 @@ fn widen(reason: Empty) {
             f.tags.clear();
             f.only = Only::All;
         }
-        Empty::Topics => *f = Filter { set: f.set, ..Filter::default() },
+        Empty::Topics => *f = Filter { set: f.set.clone(), ..Filter::default() },
     }
 }
 
@@ -246,16 +246,26 @@ fn widen(reason: Empty) {
 pub(super) fn choose_set(set: Set) {
     let mut f = FILTER.write();
     if f.set != set {
-        *f = Filter { set, only: f.only, ..Filter::default() };
+        let only = f.only;
+        *f = Filter { set, only, ..Filter::default() };
     }
 }
 
 /// The sets with questions, each with how many: none when Steps' own are
 /// all there is, so the switch only shows once the VQ bank is open.
 fn sets(all: &[exam::Mcq]) -> Vec<(Set, usize)> {
-    let counts: Vec<(Set, usize)> =
-        Set::ALL.into_iter().map(|s| (s, all.iter().filter(|q| s.holds(q)).count())).collect();
-    if counts.iter().filter(|(_, n)| *n > 0).count() > 1 { counts } else { Vec::new() }
+    let mut present = Set::present(all);
+    if !present.contains(&Set::Steps) {
+        present.insert(0, Set::Steps);
+    }
+    let counts: Vec<(Set, usize)> = present
+        .into_iter()
+        .map(|s| {
+            let n = all.iter().filter(|q| s.holds(q)).count();
+            (s, n)
+        })
+        .collect();
+    if counts.len() > 1 { counts } else { Vec::new() }
 }
 
 /// `set`, or Steps' own when `pool` has none of it (the VQ key was let go).
@@ -263,10 +273,20 @@ fn in_view(set: Set, pool: &[exam::Mcq]) -> Set {
     if pool.iter().any(|q| set.holds(q)) { set } else { Set::Steps }
 }
 
-fn set_name(set: Set) -> &'static str {
+fn set_name(set: &Set) -> String {
     match set {
-        Set::Steps => tx::SET_STEPS,
-        Set::Vq => crate::i18n::vq::SET,
+        Set::Steps => tx::SET_STEPS.to_string(),
+        Set::Vq => crate::i18n::vq::SET.to_string(),
+        Set::Own(c) => crate::i18n::ownq::set(c),
+    }
+}
+
+/// The bank's heading with `set` in view.
+fn bank_title(set: &Set) -> String {
+    match set {
+        Set::Steps => tx::TITLE.to_string(),
+        Set::Vq => crate::i18n::vq::BANK_TITLE.to_string(),
+        Set::Own(c) => crate::i18n::ownq::bank_title(c),
     }
 }
 
@@ -317,7 +337,7 @@ pub fn Setup() -> Element {
     if sets.is_empty() {
         filter.set = Set::Steps;
     }
-    let set = filter.set;
+    let set = filter.set.clone();
     let pool: Vec<exam::Mcq> = all.iter().filter(|q| set.holds(q)).copied().collect();
     let history = HISTORY.read();
     let selected = filter.select(&pool, &history);
@@ -357,14 +377,15 @@ pub fn Setup() -> Element {
     let tags_present: BTreeSet<&str> = pool.iter().flat_map(|q| q.tags.iter().map(String::as_str)).collect();
     let tags: Vec<(&str, &str)> = TAGS.into_iter().filter(|(t, _)| tags_present.contains(t)).collect();
     // What else narrows the scope, said under its title.
-    let mut narrowing: Vec<&str> = Vec::new();
+    let mut narrowing: Vec<String> = Vec::new();
     if set != Set::Steps {
-        narrowing.push(set_name(set));
+        narrowing.push(set_name(&set));
     }
-    narrowing.extend(TAGS.iter().filter(|(t, _)| filter.tags.contains(*t)).map(|(_, label)| *label));
+    narrowing
+        .extend(TAGS.iter().filter(|(t, _)| filter.tags.contains(*t)).map(|(_, label)| label.to_string()));
     match filter.only {
-        Only::WrongOrUnseen => narrowing.push(tx::ONLY_WRONG),
-        Only::Marked => narrowing.push(tx::ONLY_MARKED),
+        Only::WrongOrUnseen => narrowing.push(tx::ONLY_WRONG.to_string()),
+        Only::Marked => narrowing.push(tx::ONLY_MARKED.to_string()),
         Only::All => {}
     }
     let (title, latin) = scope_title(&filter, &lectures);
@@ -374,14 +395,14 @@ pub fn Setup() -> Element {
         let mut filter = FILTER.read().clone();
         let lectures = study_lectures();
         let pool = exam::mcqs(&lectures);
-        filter.set = in_view(filter.set, &pool);
+        filter.set = in_view(filter.set.clone(), &pool);
         let selected = filter.select(&pool, &HISTORY.read());
         start(*MODE.read(), exam::practice(&selected, *COUNT.read(), now_ms() as u64));
     };
     let start_mock = move |_| {
         let lectures = block_lectures();
         let all = exam::mcqs(&lectures);
-        let set = in_view(FILTER.read().set, &all);
+        let set = in_view(FILTER.read().set.clone(), &all);
         let pool: Vec<exam::Mcq> = all.into_iter().filter(|q| set.holds(q)).collect();
         let mode = if *BLOCK_TUTOR.read() { Mode::Tutor } else { Mode::Mock };
         start_paper(mode, true, exam::mock(&pool, *MOCK_COUNT.read(), now_ms() as u64));
@@ -407,18 +428,18 @@ pub fn Setup() -> Element {
                 Paused {}
                 header { class: "page-head",
                     crate::courses::CourseChip {}
-                    h1 { if set == Set::Vq { {crate::i18n::vq::BANK_TITLE} } else { {tx::TITLE} } }
+                    h1 { "{bank_title(&set)}" }
                 }
                 // Which questions: Steps' own or the VQ bank's (MH).
                 if !sets.is_empty() {
                     div { class: "segmented bank-sets", role: "radiogroup", "aria-label": tx::SET_LABEL,
-                        for (s, n) in sets.iter().copied() {
+                        for (s, n) in sets.iter().cloned() {
                             button {
                                 key: "{s:?}",
                                 role: "radio",
                                 "aria-checked": if set == s { "true" } else { "false" },
-                                onclick: move |_| choose_set(s),
-                                span { {set_name(s)} }
+                                onclick: { let s = s.clone(); move |_| choose_set(s.clone()) },
+                                span { bdi { "{set_name(&s)}" } }
                                 span { class: "seg-hint", {tx::questions(n)} }
                             }
                         }
@@ -685,7 +706,7 @@ pub fn Setup() -> Element {
                             if filtered {
                                 button { class: "btn btn-ghost bank-reset",
                                     onclick: move |_| {
-                                        let set = FILTER.peek().set;
+                                        let set = FILTER.peek().set.clone();
                                         *FILTER.write() = Filter { set, ..Filter::default() };
                                     },
                                     {tx::RESET_SCOPE}
@@ -718,7 +739,7 @@ pub fn Setup() -> Element {
             }
             if has_history {
                 div { class: "tab-aside tab-sticky",
-                    History { set }
+                    History { set: set.clone() }
                 }
             }
         }

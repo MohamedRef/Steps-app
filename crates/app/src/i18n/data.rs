@@ -61,4 +61,6 @@ pub const T_CHECKS: &str = "علاماتك على المحتوى";
 pub const T_SETTINGS: &str = "الإعدادات";
 pub const T_OWN: &str = "كروتك";
 pub const T_NOTES: &str = "ملاحظاتك";
+pub const T_OWN_QUESTIONS: &str = "أسئلتك من ملفات";
+pub const T_OWN_IMAGES: &str = "صور أسئلتك";
 pub const T_SCORES: &str = "اختباراتك";

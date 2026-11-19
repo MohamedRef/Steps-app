@@ -10,6 +10,7 @@ pub mod layout;
 pub mod lesson;
 pub mod note;
 pub mod own;
+pub mod ownq;
 pub mod pack;
 pub mod pages;
 pub mod plan;
