@@ -249,6 +249,24 @@ impl App {
         self
     }
 
+    /// Taps `screen`'s tab in the bar (rail and sidebar alike), not a button
+    /// on the page that happens to share its word.
+    #[track_caller]
+    pub fn tap_tab(&mut self, screen: Screen) -> &mut Self {
+        let n = self
+            .page
+            .walk()
+            .into_iter()
+            .find(|&n| {
+                self.page.nodes[n].listeners.contains(&"click")
+                    && self.page.attr(n, "class").is_some_and(|c| c.contains("nav-item"))
+                    && self.page.attr(n, "aria-label") == Some(screen.label())
+            })
+            .unwrap_or_else(|| panic!("no tab for {}:\n{}", screen.label(), self.listing("click")));
+        self.fire("click", EventData::Mouse(SerializedMouseData::default()), n);
+        self
+    }
+
     /// Taps it if it is there; says whether it was.
     pub fn tap_if(&mut self, label: &str) -> bool {
         let Some(&n) = self.targets("click", label).first() else { return false };

@@ -124,6 +124,10 @@ Existing tests live beside the owning facade in a child `tests.rs` module.
   was opened from. One exception: in a bank paper Escape only closes its
   sheets and dialogs, never the paper; its ✕ (and Android Back) leaves it,
   and the paper, tutor or timed, waits on the setup to be resumed.
+- **The tab in view, tapped again, goes back to its start** (main.rs
+  `reselect`), as a phone's tab bar does: a lecture page or a tool over the
+  screen closes; a finished bank paper's result and a study summary give way
+  to their setup; a paper or a session in progress stays as it is.
 - **Save failures retry in place:** a failed write says so where it happened,
   with «حاول تاني», through `persistence::WriteFailed`, and keeps the user's
   choice on screen. Review events are append-only and never queued.

@@ -198,6 +198,23 @@ enum Phase {
     Summary,
 }
 
+/// The review tab tapped again (main.rs `reselect`): a summary gives way to
+/// the setup, as «جلسة كمان» does; a session in progress stays where it is;
+/// the setup goes back to its top.
+pub fn to_start() {
+    let phase = *PHASE.peek();
+    match phase {
+        Phase::Summary => {
+            *PHASE.write() = Phase::Setup;
+            checkpoint::clear();
+            tab::release();
+        }
+        Phase::Setup => {}
+        Phase::Running => return,
+    }
+    document::eval(r#"document.querySelector("main.content")?.scrollTo(0, 0);"#);
+}
+
 #[component]
 pub fn Study() -> Element {
     let store = use_store();

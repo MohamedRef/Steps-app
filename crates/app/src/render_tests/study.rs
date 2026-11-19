@@ -214,6 +214,22 @@ fn undo_on_the_summary_reopens_the_last_item() {
 }
 
 #[test]
+fn the_review_tab_tapped_again_takes_a_summary_back_to_the_setup_and_leaves_a_session_alone() {
+    let cards = ids_of("card");
+    let mut app = session(&[&cards[0], &cards[1]]);
+    // A session in progress stays where it is.
+    app.tap_tab(Screen::Study);
+    app.assert_has(tx::END);
+    app.tap(tx::END);
+    app.assert_has(&tx::stopped_at(1, 2));
+    // The summary gives way to the setup, as «جلسة كمان» does.
+    app.tap_tab(Screen::Study);
+    app.assert_lacks(&tx::stopped_at(1, 2));
+    app.assert_has(tx::TITLE);
+    app.assert_has(tx::LECTURES);
+}
+
+#[test]
 fn ending_early_shows_the_summary_and_another_session_goes_back_to_setup() {
     let cards = ids_of("card");
     let mut app = session(&[&cards[0], &cards[1]]);

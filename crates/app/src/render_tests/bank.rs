@@ -388,6 +388,28 @@ fn the_result_opens_each_question_and_goes_back_to_the_bank() {
 }
 
 #[test]
+fn the_bank_tab_tapped_again_takes_a_result_back_to_the_setup_and_leaves_a_paper_alone() {
+    let mut app = paper(tx::MODE_TUTOR_NAME, tx::START_TUTOR);
+    let n = paper_n(&mut app);
+    // A paper in progress stays where it is.
+    app.tap_tab(Screen::Bank);
+    app.assert_has(&tx::question_of(1, n));
+    all_right_tutor(&mut app);
+    app.assert_has(tx::RESULT);
+    // From the result, or a question opened from it, the tab goes back to the setup.
+    app.tap(&tx::open_question(1));
+    app.assert_has(tx::BACK_TO_RESULT);
+    app.tap_tab(Screen::Bank);
+    app.assert_lacks(tx::BACK_TO_RESULT);
+    app.assert_lacks(tx::RESULT);
+    app.assert_has(tx::START_TUTOR);
+    assert!(app.run(|| {
+        use dioxus::prelude::*;
+        matches!(*PHASE.peek(), Phase::Setup)
+    }));
+}
+
+#[test]
 fn a_timed_paper_marks_moves_and_asks_before_it_goes_in() {
     let mut app = paper(tx::MODE_TIMED_NAME, tx::START_TIMED);
     let n = paper_n(&mut app);
