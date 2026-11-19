@@ -35,12 +35,6 @@ pub fn page_range(first: u32, last: u32) -> String {
     if first >= last { first.to_string() } else { format!("{first}–{last}") }
 }
 
-/// The same in one line: "صفحة 287", "صفحات 287–290".
-pub fn pages_text(first: u32, last: u32, slides: bool) -> String {
-    let (word, range) = pages_span(first, last, slides);
-    format!("{word} {range}")
-}
-
 pub const PAGE_ONE: &str = "صفحة";
 pub const PAGE_MANY: &str = "صفحات";
 pub const SLIDE_MANY: &str = "سلايدز";
@@ -51,8 +45,9 @@ mod tests {
 
     #[test]
     fn a_range_on_one_page_names_one_page() {
-        assert_eq!(pages_text(287, 287, false), "صفحة 287");
-        assert_eq!(pages_text(287, 290, false), "صفحات 287–290");
+        assert_eq!(pages_span(287, 287, false), (PAGE_ONE, "287".to_string()));
+        assert_eq!(pages_span(287, 290, false), (PAGE_MANY, "287–290".to_string()));
+        assert_eq!((PAGE_ONE, PAGE_MANY), ("صفحة", "صفحات"));
         assert_eq!(pages_span(5, 5, true), (SLIDE_TITLE, "5".to_string()));
         assert_eq!(pages_span(1, 53, true), (SLIDE_MANY, "1–53".to_string()));
         assert_eq!(page_range(32, 32), "32");

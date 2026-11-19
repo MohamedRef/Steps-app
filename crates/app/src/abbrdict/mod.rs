@@ -109,7 +109,7 @@ pub fn rank(entry: &Entry, query: &str) -> Option<u8> {
     }
     let spellings: Vec<String> =
         std::iter::once(&entry.term).chain(&entry.aliases).map(|t| t.to_lowercase()).collect();
-    if spellings.iter().any(|t| *t == q) {
+    if spellings.contains(&q) {
         return Some(0);
     }
     if spellings.iter().any(|t| t.starts_with(&q)) {

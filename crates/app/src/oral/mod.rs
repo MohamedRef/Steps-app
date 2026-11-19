@@ -124,6 +124,10 @@ fn start(store: &StudyStoreHandle) {
     *SESSION.write() = Some(s);
 }
 
+/// A course's lectures in the setup's list: its id, its label and its
+/// (id, title) lectures.
+type CourseGroup = (String, String, Vec<(String, String)>);
+
 #[component]
 fn Setup() -> Element {
     let store = use_store();
@@ -145,7 +149,7 @@ fn Setup() -> Element {
     let any = !lectures.is_empty();
     // Lecture titles repeat across courses ("Pathology" in eight): each
     // course is a group named in Arabic and English (UX-14).
-    let groups: Vec<(String, String, Vec<(String, String)>)> = lib
+    let groups: Vec<CourseGroup> = lib
         .by_course(lectures, |(id, _)| id.as_str())
         .into_iter()
         .map(|g| (g.id.clone(), format!("{} · {}", g.short(), g.title()), g.rows))
