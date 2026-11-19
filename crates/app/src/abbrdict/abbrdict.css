@@ -3,7 +3,18 @@
 .abd-head { display: flex; align-items: flex-start; gap: var(--sp-2); }
 .abd-head .page-head { flex: 1; min-inline-size: 0; }
 .abd-courses { display: flex; flex-wrap: wrap; gap: var(--sp-2); margin-block: var(--sp-3); }
-.abd-courses .abd-course { display: inline-flex; align-items: center; min-block-size: var(--target, 48px); }
+.abd-courses .abd-course { display: inline-flex; align-items: center; flex: none; min-block-size: var(--target, 48px); }
+/* Phones: the courses are one row that scrolls sideways, not ~250px of
+   chips above the list (UX-30). */
+@media (max-width: 599.98px) {
+  .abd-courses { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x proximity;
+    margin-inline: calc(-1 * var(--sp-4)); padding-inline: var(--sp-4); }
+  .abd-courses::-webkit-scrollbar { display: none; }
+  .abd-courses .abd-course { scroll-snap-align: start; }
+}
+/* A hit from another course names it before the meaning. */
+.abd-in { margin-inline-end: var(--sp-1); font-size: 0.75rem; vertical-align: 0.1em; }
+.abd-elsewhere .abd-l { font-size: var(--fs-md); color: var(--muted); }
 .abd-head .lec-back { min-inline-size: var(--target, 48px); min-block-size: var(--target, 48px); }
 .abd-letter { margin-block-start: var(--sp-4); }
 .abd-l { position: sticky; inset-block-start: 0; z-index: 1; margin: 0 0 var(--sp-2); padding-block: var(--sp-1);

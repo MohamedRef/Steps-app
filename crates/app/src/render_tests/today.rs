@@ -132,8 +132,10 @@ fn a_started_lecture_shows_in_progress_and_opens_its_page() {
     app.tap(crate::i18n::study::REVEAL).tap(crate::study::grade::grade_label(Grade::Again));
     app.tap(Screen::Today.label());
     app.assert_has(tx::IN_PROGRESS);
-    app.assert_has(tx::STARTED);
-    app.tap(tx::STARTED);
+    // "بدأت 1 من 26": the count reads in order (UX-38).
+    let started = format!("{} 1 من", tx::STARTED);
+    app.assert_has(&started);
+    app.tap(&started);
     let lecture = card.id.rsplit_once('.').unwrap().0;
     let title = crate::content::Library::get().title(lecture).to_string();
     app.assert_has(&title);

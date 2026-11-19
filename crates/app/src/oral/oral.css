@@ -15,8 +15,10 @@
   padding-inline: var(--sp-3) 2.5rem;
 }
 .oral-field input[type="range"] { accent-color: var(--accent); }
-.oral-check { display: flex; align-items: center; gap: var(--sp-2); min-block-size: var(--tap); cursor: pointer; }
-.oral-check input { inline-size: 1.25rem; block-size: 1.25rem; accent-color: var(--accent); }
+/* An on/off choice: its words, then the shared switch at the row's end. */
+.oral-check { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); min-block-size: var(--target, 48px); cursor: pointer; }
+.oral-choices { display: flex; flex-direction: column; gap: var(--sp-4); }
+.oral-go { gap: var(--sp-2); }
 
 
 .oral-start {

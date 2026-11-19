@@ -4,6 +4,8 @@ pub const COMMA: &str = "، ";
 use super::count::{DAY, NEW_THING, QUESTION, REVIEW, count};
 
 pub const DONE_REST: &str = "مراجعة النهارده خلصت، استريح.";
+/// Reviews done while today's new items still wait (UX-38).
+pub const REVIEWS_DONE_NEW_WAITS: &str = "المراجعة خلصت، والجديد مستنيك لو ليك نفس.";
 pub const WEEK_TITLE: &str = "آخر 7 أيام";
 pub const WEEK_RETENTION: &str = "بتفتكر صح:";
 pub const WEEK_WEAK: &str = "يستاهلوا رجوع:";

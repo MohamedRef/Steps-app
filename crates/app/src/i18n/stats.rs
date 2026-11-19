@@ -25,9 +25,14 @@ pub const WEAK_START: &str = "ذاكر دول";
 pub const MISTAKES_TITLE: &str = "اللي غلطت فيه آخر 14 يوم";
 pub const MISTAKES_EMPTY: &str = "مفيش غلطات مفتوحة. كمّل كده.";
 pub const MISTAKES_START: &str = "جلسة من الغلطات";
+/// The missed MCQs as a tutor block in the bank (UX-08).
+pub const MISTAKES_BLOCK: &str = "بلوك من الغلطات";
+pub const BLOCK_COUNT: &str = "في البلوك";
 pub const MISSED: &str = "غلطت";
 
 pub const SESSION_COUNT: &str = "في الجلسة";
+/// Where a session button would have nothing it can play.
+pub const SESSION_NONE: &str = "مفيش كروت هنا لجلسة: الأسئلة بتتحل في بنك الأسئلة.";
 pub const STUDY_HINT: &str = "افتح المراجعة";
 pub const APPROVED_HINT: &str = "علاماتك وتصديرها في الإعدادات";
 pub const TOPIC_HINT: &str = "ذاكر الموضوع ده لوحده";
@@ -63,6 +68,20 @@ pub const MINUTES: &str = "دقيقة تركيز";
 pub const ANSWERS: &str = "سؤال وكارت جاوبتهم";
 pub const MONTH_START: &str = "من 30 يوم";
 pub const TODAY: &str = "النهارده";
+/// The activity chart for a screen reader: each day of a week with its
+/// minutes, or a month's total and the days with study (UX-32).
+pub fn activity_summary<'a>(days: impl Iterator<Item = (&'a str, u32)>, week: bool) -> String {
+    use super::count::{DAY, MINUTE, count};
+    let days: Vec<(&str, u32)> = days.collect();
+    if week {
+        let each: Vec<String> = days.iter().map(|(d, m)| format!("{d} {m}")).collect();
+        format!("دقايق المذاكرة: {}", each.join("، "))
+    } else {
+        let total: u32 = days.iter().map(|(_, m)| m).sum();
+        let studied = days.iter().filter(|(_, m)| *m > 0).count();
+        format!("{} مذاكرة في {} من الشهر", count(total, &MINUTE), count(studied, &DAY))
+    }
+}
 pub fn day_bar(minutes: u32, answers: u32) -> String {
     use super::count::{ANSWER, MINUTE, count};
     format!("{}، {}", count(minutes, &MINUTE), count(answers, &ANSWER))

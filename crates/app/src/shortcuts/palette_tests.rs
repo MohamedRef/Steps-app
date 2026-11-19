@@ -56,3 +56,37 @@ fn lecture_questions_only_when_asked_and_only_with_mcqs() {
     assert!(questions_query("questions ").is_none());
     assert!(questions_query("bank").is_none());
 }
+
+#[test]
+fn topics_and_abbreviations_are_found_too() {
+    // UX-15: a word of a topic's title finds the topic; an abbreviation
+    // finds itself, with its meaning beside it.
+    let lib = Library::get();
+    let (lecture, topic) = lib
+        .index
+        .lectures
+        .iter()
+        .filter_map(|e| lib.lectures.get(&e.id))
+        .find_map(|l| l.topics.first().map(|t| (l.lecture.clone(), t.clone())))
+        .expect("a lecture with topics");
+    let hits = find(&topic.title, lib);
+    assert!(hits.iter().any(|h| h.go == Go::Topic(lecture.clone(), topic.id.clone())), "{hits:?}");
+    let (course, terms) =
+        crate::abbrdict::index().iter().find(|(_, t)| !t.is_empty()).expect("a course with abbreviations");
+    let term = &terms[0].entry;
+    let hits = find(&term.term, lib);
+    let hit = hits.iter().find(|h| matches!(&h.go, Go::Term(_, t) if *t == term.term)).expect("the term");
+    assert!(hit.detail.is_some(), "its meaning shows");
+    let _ = course;
+    assert!(hits.iter().filter(|h| matches!(h.go, Go::Term(..))).count() <= MAX_TERMS);
+}
+
+#[test]
+fn nothing_found_offers_the_lessons_and_the_dictionary() {
+    let hits = find("zzzz-nothing-here", Library::get());
+    assert!(nothing_found(&hits));
+    assert_eq!(hits.len(), 2);
+    assert!(hits.iter().any(|h| h.go == Go::SearchLessons("zzzz-nothing-here".into())));
+    assert!(hits.iter().any(|h| h.go == Go::SearchTerms("zzzz-nothing-here".into())));
+    assert!(!nothing_found(&find("", Library::get())));
+}

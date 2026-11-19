@@ -38,6 +38,8 @@ pub const EXAM_HINT: &str = "بيوزّع المحاضرات والمراجعة 
 pub const READY_TITLE: &str = "كده جاهز تبدأ.";
 pub const READY_BODY: &str = "اختياراتك تتعدّل في أي وقت. ودي حاجات اختيارية لو حابب تظبطها دلوقتي:";
 pub const START_LESSON: &str = "ابدأ أول درس";
+/// The same button once a lesson is done (UX-43).
+pub const NEXT_LESSON: &str = "كمّل الدرس الجاي";
 pub const START_TODAY: &str = "افتح النهارده";
 pub const DETAIL_DONE: &str = "تمام";
 pub const DAYS_ROW: &str = "أيام المذاكرة";

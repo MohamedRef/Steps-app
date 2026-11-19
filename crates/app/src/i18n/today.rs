@@ -15,13 +15,15 @@ pub const NOTHING_WRITTEN: &str = "المحتوى لسه بيتكتب. أول م
 pub const STORE_FAILED: &str = "مش قادر أفتح قاعدة البيانات، فالمراجعات مش هتتحفظ بعد ما تقفل التطبيق:";
 pub const WRITE_FAILED: &str = "في اختيار ما اتحفظش على الجهاز، جرّبه تاني:";
 pub const IN_PROGRESS: &str = "محاضرات شغّال فيها";
-pub const OF: &str = "من";
-pub const STARTED: &str = "بدأتهم";
+pub const STARTED: &str = "بدأت";
+/// "بدأت 1 من 26" under a lecture in progress (UX-38).
+pub fn started(seen: usize, total: usize) -> String {
+    format!("{STARTED} {seen} من {total}")
+}
 pub const DUE_CHIP: &str = "مستحق";
 pub const LIBRARY: &str = "المحاضرات";
 pub const READY: &str = "جاهزة";
 pub const WRITING: &str = "بتتكتب";
-pub const PAGES: &str = "صفحات";
 pub const UNVERIFIED_NOTE: &str = "كل المحتوى لسه ما اتراجعش. أول ما تشوف أي سؤال، علّم عليه صح أو غلط.";
 pub const UNVERIFIED_HINT: &str = "علاماتك بتتبعت من الإعدادات › البيانات";
 pub const DUE_HINT: &str = "ابدأ مراجعة المستحق";
@@ -146,7 +148,7 @@ pub fn start_lesson(minutes: u32) -> String {
 }
 /// The quiet second way under it: the cards anyway.
 pub fn cards_anyway(minutes: u32) -> String {
-    format!("أو {}", start_session(minutes))
+    or(&start_session(minutes))
 }
 pub const CONTINUE_HEAD: &str = "كمّل من مكانك";
 pub const ALL_LESSONS: &str = "كل الدروس";
@@ -158,5 +160,13 @@ pub fn checked_sub(n: usize) -> String {
 }
 
 // A Study session still open (this run, or restored after a restart).
+pub const HERO_KICKER_OPEN: &str = "جلسة مفتوحة";
 pub const RESUME_TITLE: &str = "عندك جلسة مذاكرة لسه مفتوحة";
+pub const RESUME_BODY: &str = "كمّل من مكان ما وقفت، وكل إجابة اتحفظت.";
 pub const RESUME_SESSION: &str = "كمّل الجلسة";
+/// The quiet second way under it: a new session ends the open one (UX-33).
+pub const NEW_INSTEAD: &str = "أو ابدأ جلسة جديدة، والمفتوحة تقفل";
+/// "أو ابدأ بالدرس · 8 دقايق".
+pub fn or(action: &str) -> String {
+    format!("أو {action}")
+}

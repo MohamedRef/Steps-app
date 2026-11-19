@@ -103,9 +103,10 @@ pub fn WeakSection() -> Element {
         style { {CSS.text()} }
         crate::ui::Card {
             h2 { {tx::SETTING_TITLE} }
-            label { class: "weak-toggle",
-                input { r#type: "checkbox", checked: on, onchange: move |e| set_show(e.checked()) }
+            // A switch, like every on/off setting (UX-34).
+            label { class: "weak-toggle st-switch",
                 span { {tx::SETTING_LINE} }
+                input { r#type: "checkbox", role: "switch", checked: on, onchange: move |e| set_show(e.checked()) }
             }
         }
     }

@@ -91,6 +91,23 @@ fn later_closes_it_and_settings_opens_it_again() {
     app.assert_has(tx::WELCOME_TITLE);
 }
 
+#[test]
+fn finishing_after_settings_reopened_it_leaves_settings_too() {
+    // UX-43: «افتح النهارده» shows Today, not Settings still on top.
+    let mut app = App::first_launch(Screen::Today);
+    app.tap(tx::LATER);
+    app.tap(Screen::Settings.label());
+    app.tap(crate::i18n::study_settings::SECTION);
+    app.tap(tx::REOPEN);
+    to_ready(&mut app);
+    // No lesson done yet: the first one.
+    app.assert_has(tx::START_LESSON);
+    app.assert_lacks(tx::NEXT_LESSON);
+    app.tap(tx::START_TODAY);
+    assert!(!app.can_tap("settings-backdrop"), "Settings closed with it");
+    assert!(app.html().contains(r#"data-screen="Today""#));
+}
+
 fn to_ready(app: &mut App) {
     app.tap(tx::CONTINUE);
     app.tap(tx::CONTINUE);

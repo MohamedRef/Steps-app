@@ -201,3 +201,16 @@ fn a_launch_can_name_its_screen_and_settings_opens_over_today() {
     app.tap("nav-item nav-foot");
     assert!(app.can_tap("settings-backdrop"));
 }
+
+#[test]
+fn the_reading_choices_in_look_draw_like_the_lessons() {
+    // UX-07: Settings opens over Today, where the lesson's stylesheet is not
+    // loaded; the section brings the rules for its size glyphs and preview.
+    let mut app = open_section(tx::LOOK);
+    let html = app.html();
+    assert!(html.contains("ls-read-preview"), "the preview is there");
+    assert!(html.contains("--ls-scale: 1.3"), "the sizes' scale comes with it");
+    assert!(html.contains(".ls-read-glyph"), "the glyphs' sizes come with it");
+    app.tap(crate::i18n::learn::READ_SIZE_LARGER);
+    assert!(app.html().contains(r#"data-read-size="xl""#), "the preview follows the pick");
+}

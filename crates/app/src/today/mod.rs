@@ -88,16 +88,16 @@ pub fn Today() -> Element {
                             class: "td-chip",
                             role: "radio",
                             "aria-checked": minutes == m,
+                            // "5 د" on the chip, "5 دقايق" read aloud (UX-42).
+                            aria_label: count(m, &crate::i18n::count::MINUTE),
                             onclick: move |_| crate::onboarding::set_session_minutes(m),
                             bdi { {tx::minutes_short(m)} }
                         }
                     }
                 }
-                // An open Study session comes first: continuing it beats starting another.
-                if let Some((index, total)) = crate::study::running_progress() {
-                    ResumeStudy { index, total }
-                }
-                Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0 && o.locked == 0, finished, minutes, teach }
+                // An open Study session comes first: the hero continues it,
+                // and starting another is its quiet second way (UX-33).
+                Hero { target: target.clone(), due: o.due, new_today, unseen: o.unseen, due_minutes: o.due_minutes, due_tomorrow: o.due_tomorrow, nothing: o.seen == 0 && o.unseen == 0 && o.locked == 0, finished, minutes, teach, resume: crate::study::running_progress() }
                 crate::catchup::CatchUpCard { due: o.due, due_minutes: o.due_minutes }
                 // Each count opens what it counts.
                 div { class: "stat-tiles",
@@ -170,7 +170,7 @@ pub fn Today() -> Element {
                         }
                     }
                 }
-                crate::recap::TodayRecap { due_left: o.due, due_tomorrow: o.due_tomorrow }
+                crate::recap::TodayRecap { due_left: o.due, due_tomorrow: o.due_tomorrow, new_left: new_today }
                 // Extra shortcuts remain available without competing with today's work.
                 details { class: "td-extras",
                     summary { class: "section-head td-extras-toggle",
@@ -207,34 +207,6 @@ pub fn Today() -> Element {
     }
 }
 
-/// Back to the Study session already open (this run, or restored after a
-/// restart). It only switches screens: no new START is queued, so grading
-/// and Undo stay with the same item. Adapted from batna-app main:
-/// crates/app/src/today/mod.rs.
-#[component]
-fn ResumeStudy(index: usize, total: usize) -> Element {
-    let mut ui = use_context::<Ui>();
-    rsx! {
-        crate::ui::Card { class: "card-action td-resume",
-            onclick: move |_| ui.screen.set(Screen::Study),
-            div { class: "td-resume-copy",
-                strong { {tx::RESUME_TITLE} }
-                span { class: "muted small num-ltr", "{index} / {total}" }
-            }
-            button {
-                r#type: "button",
-                class: "btn btn-primary td-resume-action",
-                onclick: move |e: MouseEvent| {
-                    e.stop_propagation();
-                    ui.screen.set(Screen::Study);
-                },
-                {tx::RESUME_SESSION}
-                {crate::icons::arrow_go()}
-            }
-        }
-    }
-}
-
 /// The one recommended start: what today holds in a sentence and the
 /// button that starts it. With an exam plan, the plan's day leads.
 #[component]
@@ -250,8 +222,13 @@ fn Hero(
     minutes: u32,
     /// The lesson that goes before today's new cards, and its minutes.
     teach: Option<(String, u32)>,
+    /// An open Study session (this run, or restored after a restart): where
+    /// it stands. The hero then continues it; only switching screens, so no
+    /// new START is queued and grading and Undo stay with the same item.
+    /// Adapted from batna-app main: crates/app/src/today/mod.rs.
+    resume: Option<(usize, usize)>,
 ) -> Element {
-    let ui = use_context::<Ui>();
+    let mut ui = use_context::<Ui>();
     let review = use_review();
     let ready = due + new_today > 0;
     // The card's one job: start the session, or with nothing due, the next
@@ -263,6 +240,48 @@ fn Hero(
     let cta_next = next.clone();
     let session_first = ready && teach.is_none();
     let lesson_minutes = teach.as_ref().map(|(_, m)| *m);
+    if let Some((index, total)) = resume {
+        // Starting a new session ends the open one, so it is the quiet way
+        // and says so; a lesson leaves the session open.
+        let other = if lesson_minutes.is_some() || !ready {
+            tx::or(&lesson_minutes.map_or_else(|| tx::OPEN_NEXT_LESSON.to_string(), tx::start_lesson))
+        } else {
+            tx::NEW_INSTEAD.to_string()
+        };
+        return rsx! {
+            crate::ui::Card {
+                class: "hero card-action td-hero",
+                onclick: move |_| ui.screen.set(Screen::Study),
+                div { class: "hero-meta",
+                    span { {tx::HERO_KICKER_OPEN} }
+                }
+                h2 { {tx::RESUME_TITLE} }
+                p { class: "td-body",
+                    bdi { class: "num-ltr td-resume-pos", "{index} / {total}" }
+                    " · {tx::RESUME_BODY}"
+                }
+                button {
+                    class: "btn btn-lg btn-on-hero td-go",
+                    r#type: "button",
+                    onclick: move |e: MouseEvent| {
+                        e.stop_propagation();
+                        ui.screen.set(Screen::Study);
+                    },
+                    {tx::RESUME_SESSION}
+                    {crate::icons::arrow_go()}
+                }
+                button {
+                    class: "btn-link td-skip",
+                    r#type: "button",
+                    onclick: move |e: MouseEvent| {
+                        e.stop_propagation();
+                        open_recommended(ui, session_first, cta_next.as_deref(), minutes);
+                    },
+                    {other}
+                }
+            }
+        };
+    }
     rsx! {
         crate::ui::Card {
             class: "hero card-action td-hero",
@@ -597,7 +616,7 @@ fn Progress(lecture: LectureProgress) -> Element {
                         aria_valuenow: "{lecture.seen}",
                         span { class: "progress-fill", style: "inline-size: {pct}%" }
                     }
-                    span { class: "muted small", "{course} · {lecture.seen} {tx::OF} {lecture.total} {tx::STARTED}" }
+                    span { class: "muted small", "{course} · {tx::started(lecture.seen, lecture.total)}" }
                 }
                 if lecture.due > 0 {
                     span { class: "chip due", "{lecture.due} {tx::DUE_CHIP}" }
@@ -618,7 +637,8 @@ fn LibraryList() -> Element {
         let items = lib.lectures.get(&entry.id).map(|l| l.items.len());
         let number = crate::content::lecture_no(&entry.id);
         let [first, last] = entry.pages;
-        (entry.id.clone(), number, entry.title.clone(), items, format!("{first}–{last}"))
+        let pages = crate::i18n::book::pages_span(first, last, lib.program.slides(&entry.id));
+        (entry.id.clone(), number, entry.title.clone(), items, pages)
     });
     let groups = lib.by_course(rows.collect(), |r| r.0.as_str());
     rsx! {
@@ -636,7 +656,7 @@ fn LibraryList() -> Element {
         for group in groups {
             crate::parts::CourseHead { key: "{group.id}", short: group.short().to_string(), title: group.title().to_string() }
             ol { class: "tap-list lectures-list",
-                for (id, number, title, items, pages) in group.rows {
+                for (id, number, title, items, (word, pages)) in group.rows {
                     li { key: "{id}",
                         button {
                             class: "tap tap-row lecture-row",
@@ -645,7 +665,7 @@ fn LibraryList() -> Element {
                             span { class: "num", "{number}" }
                             span { class: "tap-row-main",
                                 bdi { class: "lecture-title", dir: "ltr", "{title}" }
-                                span { class: "muted small", if lib.program.slides(&id) { "{crate::i18n::lecture::SLIDES} " } else { "{tx::PAGES} " } bdi { dir: "ltr", "{pages}" } }
+                                span { class: "muted small", "{word} " bdi { dir: "ltr", "{pages}" } }
                             }
                             match items {
                                 Some(n) => rsx! { span { class: "chip ready", "{tx::READY} · " {count(n, &ITEM)} } },

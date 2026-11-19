@@ -255,22 +255,18 @@ fn the_setup_starts_a_session_from_the_ready_lectures() {
         .clone();
     let title = lib.title(&lecture).to_string();
     app.assert_has(&title);
-    app.assert_has(tx::CLEAR_ALL);
+    // Every lecture by default, said by its own chip (UX-28).
+    assert!(app.html().contains(r#"aria-pressed="true">كل المحاضرات"#), "{}", app.html());
 
-    // Clearing every lecture leaves nothing to study.
-    app.tap(tx::CLEAR_ALL);
-    app.assert_has(tx::PICK_ALL);
-    app.assert_has(tx::NOTHING_NOW);
-    assert!(!app.can_tap(tx::START));
-    // Picking the lecture back shows its topics.
+    // A lecture tapped from all is picked alone, and shows its topics.
     app.tap(&title);
     app.assert_has(tx::TOPICS);
     let topic = lib.lectures[&lecture].topics[0].title.clone();
     app.tap(&topic);
     app.tap(&topic);
-    // One lecture of several: the button picks them all, then clears.
-    app.tap(tx::PICK_ALL);
-    app.assert_has(tx::CLEAR_ALL);
+    // «كل المحاضرات» takes them all again.
+    app.tap(tx::ALL_LECTURES);
+    app.assert_lacks(tx::TOPICS);
 
     // A time choice changes the plan; the preview counts it.
     let twenty = crate::i18n::count::count(20, &crate::i18n::count::MINUTE);
@@ -287,8 +283,7 @@ fn a_topic_narrows_the_session_to_its_items() {
     let mut app = App::open(Screen::Study);
     let lecture = &crate::content::Library::get().lectures["cvs.L01"];
     let last = lecture.topics.last().unwrap();
-    // Only cvs.L01 picked, so its topics show.
-    app.tap(tx::CLEAR_ALL);
+    // Only cvs.L01 picked (tapped from all), so its topics show.
     app.tap(crate::content::Library::get().title("cvs.L01"));
     app.tap(&last.title);
     app.tap(tx::START);

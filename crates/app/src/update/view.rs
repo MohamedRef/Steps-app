@@ -32,7 +32,7 @@ pub(super) const UPDATE_CSS: &str = r#"
 .ur-row { display: flex; align-items: center; gap: var(--sp-3); inline-size: 100%; min-block-size: var(--tap-lg);
   padding: var(--sp-2) var(--sp-3); background: none; border: 0; color: inherit; text-align: start; font: inherit; cursor: pointer; }
 .ur-row + .ur-row { border-block-start: 1px solid var(--line); }
-.ur-row:disabled { cursor: default; }
+.ur-row:disabled, .ur-static { cursor: default; }
 .ur-row:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .ur-text { flex: 1; min-inline-size: 0; display: grid; gap: 2px; }
 .ur-title { font-weight: 600; }
@@ -40,6 +40,23 @@ pub(super) const UPDATE_CSS: &str = r#"
 .update-toggle { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
 .update-toggle-text { display: grid; gap: var(--sp-1); }
 "#;
+
+/// One row of what is on this device: a button that opens what it brought
+/// when the sheet can open, else a plain row with no chevron.
+#[component]
+fn UpdateRow(open: Option<EventHandler<MouseEvent>>, children: Element) -> Element {
+    match open {
+        Some(open) => rsx! {
+            button { class: "ur-row", onclick: move |e| open.call(e),
+                {children}
+                span { class: "chev", aria_hidden: "true" }
+            }
+        },
+        None => rsx! {
+            div { class: "ur-row ur-static", {children} }
+        },
+    }
+}
 
 /// The updater's status, following its thread.
 pub fn use_update_status() -> Signal<Option<Status>> {
@@ -132,8 +149,8 @@ pub fn UpdatesSection() -> Element {
         matches!(s.phase, Phase::Checking | Phase::Downloading { .. } | Phase::Installing(_))
     });
     // Updates that are off for a reason this build already knows (no data
-    // folder at all counts as a development build).
-    let off = s.as_ref().map_or(Some(Off::DevBuild), |s| s.off);
+    // folder at all: the web build, or else a development build).
+    let off = s.as_ref().map_or(Some(Off::without_updater(cfg!(target_arch = "wasm32"))), |s| s.off);
     let has_offer = s.as_ref().is_some_and(|s| {
         matches!(
             s.phase,
@@ -145,6 +162,9 @@ pub fn UpdatesSection() -> Element {
         )
     });
     let sheet = try_use_context::<UpdateSheetNav>();
+    // The sheet draws from the updater's status: with no updater (the web
+    // build) the rows only say what is here, with no chevron (UX-09).
+    let can_open = sheet.is_some() && s.is_some();
 
     // The content row opens what the content update brought while it is
     // new to him, else the whole changelog.
@@ -185,10 +205,8 @@ pub fn UpdatesSection() -> Element {
         // apart from it, since a content-only update changes only the second.
         div { class: "section-head", h2 { id: "updates-title", {tx::GROUP_HAVE} } }
         crate::ui::Card { class: "ur-card", aria_labelledby: "updates-title",
-            button {
-                class: "ur-row",
-                disabled: sheet.is_none(),
-                onclick: open_changes(SheetMode::History),
+            UpdateRow {
+                open: can_open.then(|| EventHandler::new(open_changes(SheetMode::History))),
                 span { class: "row-icon", aria_hidden: "true", {crate::icons::section("updates")} }
                 span { class: "ur-text",
                     span { class: "ur-title", {tx::ROW_APP} }
@@ -206,12 +224,9 @@ pub fn UpdatesSection() -> Element {
                         }
                     }
                 }
-                span { class: "chev", aria_hidden: "true" }
             }
-            button {
-                class: "ur-row",
-                disabled: sheet.is_none(),
-                onclick: open_changes(content_mode),
+            UpdateRow {
+                open: can_open.then(|| EventHandler::new(open_changes(content_mode))),
                 span { class: "row-icon", aria_hidden: "true", {crate::icons::book()} }
                 span { class: "ur-text",
                     span { class: "ur-title", {tx::ROW_CONTENT} }
@@ -222,7 +237,6 @@ pub fn UpdatesSection() -> Element {
                 if content_news {
                     span { class: "chip", "data-tone": "good", {tx::BADGE_NEW} }
                 }
-                span { class: "chev", aria_hidden: "true" }
             }
         }
         div { class: "section-head", h2 { {tx::GROUP_CHECK} } }
@@ -231,6 +245,7 @@ pub fn UpdatesSection() -> Element {
                 p { class: "muted small", role: "status",
                     {match off {
                         Off::DevBuild => tx::OFF_DEV,
+                        Off::Web => tx::OFF_WEB,
                         Off::NoKey => tx::OFF_KEY,
                         Off::NoPlatform => tx::OFF_PLATFORM,
                         Off::NotInBundle => tx::OFF_BUNDLE,

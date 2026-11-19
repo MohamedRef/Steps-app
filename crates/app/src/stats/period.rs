@@ -9,7 +9,7 @@ use dioxus::prelude::*;
 use steps_core::stats::{self, Period};
 
 use super::{StudyData, Tab, open};
-use crate::i18n::plan::WEEKDAYS_SHORT;
+use crate::i18n::plan::{WEEKDAYS, WEEKDAYS_SHORT};
 use crate::i18n::stats as tx;
 
 /// Week or month; kept while the app runs.
@@ -100,6 +100,18 @@ pub fn PeriodHead(data: Rc<StudyData>) -> Element {
             if now.answers == 0 {
                 span { class: "muted small", {tx::ACTIVITY_EMPTY} }
             }
+            // The chart in words, for a screen reader (UX-32).
+            span { class: "sr-only",
+                {tx::activity_summary(now.days.iter().map(|d| (WEEKDAYS[d.day.weekday()], d.minutes)), week)}
+            }
+            // A week's minutes over its bars; a month's are too many to read.
+            if week {
+                span { class: "st-bar-values small muted", dir: "ltr", aria_hidden: "true",
+                    for d in now.days.iter() {
+                        span { key: "{d.day.0}", if d.minutes > 0 { "{d.minutes}" } }
+                    }
+                }
+            }
             span { class: "st-bars", "data-span": if week { "week" } else { "month" }, dir: "ltr", aria_hidden: "true",
                 for (i , d) in now.days.iter().enumerate() {
                     span {
@@ -158,5 +170,13 @@ mod tests {
         assert_eq!(change(&with(8, 10), &with(6, 10)), Some((true, 20)));
         assert_eq!(change(&with(5, 10), &with(7, 10)), Some((false, 20)));
         assert_eq!(change(&with(5, 10), &Period::default()), None);
+    }
+
+    #[test]
+    fn the_chart_reads_as_words() {
+        let week = tx::activity_summary([("السبت", 12), ("الحد", 0)].into_iter(), true);
+        assert!(week.contains("السبت 12") && week.contains("الحد 0"), "{week}");
+        let month = tx::activity_summary([("السبت", 12), ("الحد", 0), ("الاتنين", 5)].into_iter(), false);
+        assert!(month.contains("17") && month.contains("يومين"), "{month}");
     }
 }
