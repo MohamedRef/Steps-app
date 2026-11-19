@@ -299,6 +299,8 @@ fn Questions() -> Element {
         },
         Step::Ready => {
             let days = weekdays.read().iter().filter(|d| **d).count();
+            // The web build can't ring a reminder, so it doesn't offer one (UX-43).
+            let remind_here = !cfg!(target_arch = "wasm32");
             let theme = theme_name(ui.prefs.read().theme);
             let reminders = if times.read().is_empty() {
                 tx::REMIND_OFF.to_string()
@@ -316,6 +318,8 @@ fn Questions() -> Element {
                         (Step::Reminders, tx::REMIND_ROW, reminders),
                         (Step::Theme, tx::THEME_ROW, theme.to_string()),
                     ]
+                        .into_iter()
+                        .filter(|(s, _, _)| remind_here || *s != Step::Reminders)
                     {
                         li { key: "{title}",
                             button { class: "tap tap-row", onclick: move |_| detail.set(Some(s)),
@@ -462,6 +466,8 @@ fn Questions() -> Element {
 
     let is_detail = detail().is_some();
     let last = step() + 1 == STEPS.len();
+    // Once a lesson is done, the way in is the next one, not the first.
+    let any_done = Library::get().all_lessons().any(|(_, l)| crate::learn::mark(&l.id).is_some());
     rsx! {
         style { {CSS} }
         div { class: "onboard-backdrop",
@@ -489,22 +495,26 @@ fn Questions() -> Element {
                             {tx::DETAIL_DONE}
                         }
                     } else if last {
+                        // Finishing leaves Settings too, when it was opened
+                        // from there (UX-43): the screen it opens is in view.
                         button {
                             class: "btn btn-primary btn-lg btn-block",
                             onclick: move |_| {
                                 close();
+                                settings.close();
                                 match crate::learn::next_lesson(&[]) {
                                     Some(l) => crate::learn::open(ui, &l.id),
                                     None => ui.screen.set(crate::Screen::Learn),
                                 }
                             },
-                            {tx::START_LESSON}
+                            {if any_done { tx::NEXT_LESSON } else { tx::START_LESSON }}
                             {crate::icons::arrow_go()}
                         }
                         button {
                             class: "btn btn-ghost btn-block",
                             onclick: move |_| {
                                 close();
+                                settings.close();
                                 ui.screen.set(crate::Screen::Today);
                             },
                             {tx::START_TODAY}

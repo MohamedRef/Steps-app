@@ -8,6 +8,8 @@ pub const DICT_OPEN: &str = "القاموس كله";
 pub const DICT_COURSES: &str = "المادة";
 pub const DICT_SEARCH: &str = "دوّر على اختصار أو معناه";
 pub const DICT_NO_MATCH: &str = "مفيش اختصار بالكلام ده في المادة دي.";
+/// Search hits from the other courses, under the course in view (UX-30).
+pub const DICT_ELSEWHERE: &str = "في مواد تانية";
 pub const DICT_EMPTY: &str = "لسه مفيش دروس فيها اختصارات.";
 pub const ABBR: super::count::Noun =
     super::count::Noun {

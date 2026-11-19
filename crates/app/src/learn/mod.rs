@@ -67,6 +67,14 @@ pub fn forget() {
     *FROM.write() = Screen::Learn;
 }
 
+/// Opens the Lessons list searching for `q` (quick search's way in when
+/// nothing else matched).
+pub fn search(mut ui: Ui, q: &str) {
+    forget();
+    *QUERY.write() = q.to_string();
+    ui.screen.set(Screen::Learn);
+}
+
 /// Enter a chosen course's catalogue without a stale search or selected
 /// lecture; completion data and saved list-view preferences remain intact.
 pub(crate) fn reset_course_browse() {
@@ -517,12 +525,12 @@ fn Others(shown: String) -> Element {
 /// book, or "سلايدز 1–53" for a slide-deck course.
 #[component]
 pub(crate) fn BookPages(id: String, pages: [u32; 2]) -> Element {
-    let label = if Library::get().program.slides(&id) { crate::i18n::lecture::SLIDES } else { tx::PAGES };
     let [first, last] = pages;
+    let (label, range) = crate::i18n::book::pages_span(first, last, Library::get().program.slides(&id));
     rsx! {
         span { class: "ls-nowrap ls-pages",
             "{label} "
-            bdi { dir: "ltr", class: "num-ltr", if first == last { "{first}" } else { "{first}–{last}" } }
+            bdi { dir: "ltr", class: "num-ltr", "{range}" }
         }
     }
 }

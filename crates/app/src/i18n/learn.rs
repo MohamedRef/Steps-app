@@ -5,7 +5,6 @@ pub const CONTINUE: &str = "كمّل";
 pub const ALL_LESSONS_DONE: &str = "خلّصت كل الدروس المكتوبة. عاش!";
 pub const UNVERIFIED_NOTE: &str = "الدروس لسه ما اتراجعتش: الكتاب هو المرجع، ولو لقيت حاجة مش مظبوطة قولّي.";
 pub const WRITING: &str = "بتتكتب";
-pub const PAGES: &str = "صفحات";
 pub const NEW: &str = "جديد";
 pub const EXPLAIN: &str = "اشرحهولي";
 pub const EXPLAIN_HINT: &str = "افتح الدرس اللي بيشرح السؤال ده";

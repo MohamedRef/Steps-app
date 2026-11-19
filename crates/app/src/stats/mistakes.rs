@@ -6,7 +6,8 @@
 use std::rc::Rc;
 
 use dioxus::prelude::*;
-use steps_core::content::{Body, Item};
+use steps_core::content::{Body, Item, Lecture};
+use steps_core::exam::{Mode, Question};
 use steps_core::review::ErrorReason;
 use steps_core::stats;
 
@@ -18,11 +19,23 @@ use crate::metacog::{METACOG_CSS, reason_label};
 #[component]
 pub fn Mistakes(data: Rc<StudyData>) -> Element {
     let mut ui = use_context::<crate::Ui>();
-    // A session on exactly these items (one mistake, or one topic's).
+    // Exactly these items (one mistake, or one topic's): cards and clozes as
+    // a session; MCQs only play in the bank, so on their own they open there
+    // as a tutor block.
+    let seed = data.clock.now_ms as u64;
     let mut session = move |ids: Vec<String>| {
-        *crate::study::START.write() =
-            Some(crate::study::Start { lectures: None, items: Some(ids), minutes: 10 });
-        ui.screen.set(crate::Screen::Study);
+        let cards: Vec<String> = ids.iter().filter(|id| crate::study::is_playable(id)).cloned().collect();
+        if !cards.is_empty() {
+            *crate::study::START.write() =
+                Some(crate::study::Start { lectures: None, items: Some(cards), minutes: 10 });
+            ui.screen.set(crate::Screen::Study);
+        } else {
+            let block = mcq_block(crate::content::Library::get().lectures.values(), &ids, seed);
+            if !block.is_empty() {
+                crate::bank::start(Mode::Tutor, block);
+                ui.screen.set(crate::Screen::Bank);
+            }
+        }
     };
     let all = stats::mistakes(&data.lectures, &data.events, &data.marks, data.clock.now_ms);
     let (reasons, _) = stats::mistake_reasons(&all);
@@ -34,6 +47,9 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
         None => all.clone(),
     };
     let ids = stats::mistakes_session(&groups);
+    // The missed MCQs, as a tutor block (UX-08).
+    let block = mcq_block(&data.lectures, &ids, seed);
+    let has_cards = ids.iter().any(|id| crate::study::is_playable(id));
     let retest = stats::retest_due(&data.lectures, &data.events, &data.marks, data.clock);
     let find = |id: &str| data.lectures.iter().flat_map(|l| &l.items).find(|i| i.id == id);
     rsx! {
@@ -73,7 +89,14 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
                         }
                     }
                 }
-                SessionButton { label: tx::MISTAKES_START, ids }
+                // Cards and clozes play in a session, MCQs in a tutor block:
+                // each button counts its own, so neither is ever empty.
+                if has_cards {
+                    SessionButton { label: tx::MISTAKES_START, ids }
+                }
+                if !block.is_empty() {
+                    BlockButton { questions: block.clone(), primary: !has_cards }
+                }
             }
         }
         for g in groups.iter() {
@@ -128,11 +151,7 @@ pub fn Mistakes(data: Rc<StudyData>) -> Element {
 #[component]
 fn RetestCard(ids: Vec<String>, data: Rc<StudyData>) -> Element {
     let mut ui = use_context::<crate::Ui>();
-    let pool: Vec<steps_core::exam::Mcq> = steps_core::exam::mcqs(&data.lectures)
-        .into_iter()
-        .filter(|q| ids.iter().any(|id| id == q.id))
-        .collect();
-    let questions = steps_core::exam::practice(&pool, pool.len(), data.clock.now_ms as u64);
+    let questions = mcq_block(&data.lectures, &ids, data.clock.now_ms as u64);
     let n = questions.len();
     let cards = ids.iter().any(|id| crate::study::is_playable(id));
     rsx! {
@@ -155,6 +174,39 @@ fn RetestCard(ids: Vec<String>, data: Rc<StudyData>) -> Element {
                     span { class: "muted small", {crate::i18n::count::count(n, &crate::i18n::count::QUESTION)} }
                 }
             }
+        }
+    }
+}
+
+/// The MCQs among `ids`, shuffled with `seed`, as the questions of a tutor
+/// block: every one of them, and nothing else.
+pub(crate) fn mcq_block<'a>(
+    lectures: impl IntoIterator<Item = &'a Lecture>,
+    ids: &[String],
+    seed: u64,
+) -> Vec<Question> {
+    let pool: Vec<steps_core::exam::Mcq> =
+        steps_core::exam::mcqs(lectures).into_iter().filter(|q| ids.iter().any(|id| id == q.id)).collect();
+    steps_core::exam::practice(&pool, pool.len(), seed)
+}
+
+/// «بلوك من الغلطات»: the missed MCQs as a tutor block in the bank, with
+/// how many it holds. The main action when the misses are all MCQs.
+#[component]
+fn BlockButton(questions: Vec<Question>, primary: bool) -> Element {
+    let mut ui = use_context::<crate::Ui>();
+    let n = questions.len();
+    rsx! {
+        div { class: "session-start",
+            button {
+                class: if primary { "btn btn-primary" } else { "btn btn-secondary" },
+                onclick: move |_| {
+                    crate::bank::start(Mode::Tutor, questions.clone());
+                    ui.screen.set(crate::Screen::Bank);
+                },
+                {tx::MISTAKES_BLOCK}
+            }
+            span { class: "muted small", {crate::i18n::count::count(n, &crate::i18n::count::QUESTION)} " {tx::BLOCK_COUNT}" }
         }
     }
 }
@@ -204,6 +256,19 @@ fn hide_clozes(text: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn the_mistakes_block_holds_the_missed_mcqs_and_nothing_else() {
+        let lib = crate::content::Library::get();
+        let lectures: Vec<&Lecture> = lib.lectures.values().collect();
+        let of_kind = |kind: &str| {
+            lectures.iter().flat_map(|l| &l.items).find(|i| i.body.kind() == kind).map(|i| i.id.clone())
+        };
+        let (mcq, card) = (of_kind("mcq").expect("an MCQ"), of_kind("card").expect("a card"));
+        let block = mcq_block(lectures.iter().copied(), &[card.clone(), mcq.clone()], 7);
+        assert_eq!(block.iter().map(|q| q.id.as_str()).collect::<Vec<_>>(), [mcq.as_str()]);
+        assert!(mcq_block(lectures.iter().copied(), &[card], 7).is_empty(), "cards never go to the bank");
+    }
 
     #[test]
     fn clozes_are_hidden() {

@@ -45,6 +45,9 @@ fn reopen(review: &crate::store::Review) {
     *crate::content::REV.write() += 1;
 }
 
+/// The user name the key is saved under in his password manager.
+const VAULT_USER: &str = "Steps VQ";
+
 #[component]
 pub fn KeyCard() -> Element {
     let review = crate::store::use_review();
@@ -107,6 +110,16 @@ pub fn KeyCard() -> Element {
                         e.prevent_default();
                         submit();
                     },
+                    // The key lives in his password manager: a fixed user
+                    // name it can file the key under, never shown (UX-40).
+                    input {
+                        r#type: "text",
+                        name: "username",
+                        autocomplete: "username",
+                        value: VAULT_USER,
+                        readonly: true,
+                        hidden: true,
+                    }
                     label { class: "field",
                         span { {tx::FIELD} }
                         input {
@@ -114,7 +127,7 @@ pub fn KeyCard() -> Element {
                             name: "vq-key",
                             dir: "ltr",
                             lang: "en",
-                            autocomplete: "off",
+                            autocomplete: "current-password",
                             autocapitalize: "characters",
                             spellcheck: "false",
                             placeholder: tx::PLACEHOLDER,

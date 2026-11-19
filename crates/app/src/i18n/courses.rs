@@ -44,11 +44,11 @@ pub fn started(seen: usize, total: usize) -> String {
 }
 /// The tile's foot: "قلب · ص 284–328".
 pub fn tile_line(short: &str, from: u32, to: u32) -> String {
-    format!("{short} · ص {from}–{to}")
+    format!("{short} · ص {}", super::book::page_range(from, to))
 }
 /// "First Aid ص 284–328 (45 صفحة)".
 pub fn book_pages(from: u32, to: u32, pages: u32) -> String {
-    format!("First Aid ص {from}–{to} ({})", count(pages, &PAGE))
+    format!("First Aid ص {} ({})", super::book::page_range(from, to), count(pages, &PAGE))
 }
 pub fn content_line(written: usize, lectures: usize, items: usize, lessons: usize) -> String {
     format!("{} · {} · {}", ready_lectures(written, lectures), count(items, &CARD), count(lessons, &LESSON))

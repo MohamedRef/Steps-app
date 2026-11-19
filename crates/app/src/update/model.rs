@@ -156,6 +156,9 @@ pub fn notice(s: &Status) -> Option<Notice> {
 pub enum Off {
     /// A development build (`dx serve`, `cargo run`).
     DevBuild,
+    /// The web build: each deploy is the newest build, fetched in the
+    /// background and used from the next open (docs/WEB.md).
+    Web,
     /// No update key yet: `just update-keygen` hasn't run.
     NoKey,
     /// No builds are published for this system (Linux, x86 Android).
@@ -438,4 +441,13 @@ impl BuildInfo {
 /// The build number (CI's run number for previews, 0 otherwise).
 pub fn build_number() -> u64 {
     get().map_or_else(|| BuildInfo::from_env().build, |u| u.info.build)
+}
+
+impl Off {
+    /// Why a build with no updater at all doesn't update itself: the web
+    /// build never has one; elsewhere it is a development build (no data
+    /// folder).
+    pub fn without_updater(web: bool) -> Off {
+        if web { Off::Web } else { Off::DevBuild }
+    }
 }

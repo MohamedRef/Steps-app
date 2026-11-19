@@ -326,11 +326,16 @@ pub fn SessionButton(label: &'static str, ids: Vec<String>) -> Element {
         })
         .collect();
     let count = playable.len();
+    // Never a dead button: with nothing it can play, say why instead.
+    if playable.is_empty() {
+        return rsx! {
+            p { class: "muted small session-none", {tx::SESSION_NONE} }
+        };
+    }
     rsx! {
         div { class: "session-start",
             button {
                 class: "btn btn-primary",
-                disabled: playable.is_empty(),
                 // Inside a card that opens on a tap (Today's hero), this button's own job wins.
                 onclick: move |e: MouseEvent| {
                     e.stop_propagation();

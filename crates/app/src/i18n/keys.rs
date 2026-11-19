@@ -30,3 +30,14 @@ pub const KIND_LECTURE: &str = "محاضرة";
 pub const KIND_LESSON: &str = "درس";
 pub const KIND_SECTION: &str = "قسم في الإعدادات";
 pub const KIND_QUESTIONS: &str = "أسئلة المحاضرة";
+/// A lecture's topic (UX-15).
+pub const KIND_TOPIC: &str = "موضوع";
+/// An abbreviation from the dictionary.
+pub const KIND_TERM: &str = "اختصار";
+/// Nothing found: the same words in the Lessons search…
+pub fn search_lessons(q: &str) -> String {
+    format!("دوّر في الدروس عن «{q}»")
+}
+pub const KIND_SCREEN_LESSONS: &str = "الدروس";
+/// …or in the abbreviations dictionary.
+pub const SEARCH_TERMS: &str = "دوّر في القاموس";

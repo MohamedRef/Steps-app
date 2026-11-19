@@ -11,8 +11,8 @@ pub fn due_elsewhere(n: usize) -> String {
 pub const TITLE: &str = "جلسة مذاكرة";
 pub const EMPTY_LIBRARY: &str = "لسه مفيش محاضرة جاهزة للمذاكرة هنا. أول ما محاضرة تتكتب هتلاقيها في القايمة، ولحد ده ما يحصل تقدر تذاكر من Anki.";
 pub const LECTURES: &str = "المحاضرات";
-pub const PICK_ALL: &str = "اختار الكل";
-pub const CLEAR_ALL: &str = "امسح الاختيار";
+/// The chip that takes every lecture (UX-28).
+pub const ALL_LECTURES: &str = "كل المحاضرات";
 pub const TOPICS: &str = "المواضيع";
 pub const TIME: &str = "الوقت";
 pub const NEW: &str = "جديد";

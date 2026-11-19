@@ -236,11 +236,16 @@ button.st-activity { gap: var(--sp-2); }
 .st-activity-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-2); }
 .st-bars { display: flex; align-items: flex-end; gap: var(--sp-2); block-size: 6.5rem; }
 .st-bars[data-span="month"] { gap: 2px; }
-.st-bar { flex: 1; min-inline-size: 0; border-radius: 5px 5px 2px 2px; background: var(--surface-2); }
+/* Past days in a light step of the brand, today in full: --surface-2 on a
+   white card was about 1.1:1 (UX-32). */
+.st-bar { flex: 1; min-inline-size: 0; border-radius: 5px 5px 2px 2px; background: color-mix(in srgb, var(--accent) 35%, var(--glass-solid, var(--surface))); }
 .st-bars[data-span="month"] .st-bar { border-radius: 2px; }
 .st-bar[data-today="true"] { background: var(--accent); }
 .st-bar-labels { display: flex; justify-content: space-between; gap: var(--sp-2); }
 .st-bars[data-span="week"] + .st-bar-labels > span { flex: 1; text-align: center; }
+/* A week's minutes, one over each bar (same columns as the bars). */
+.st-bar-values { display: flex; gap: var(--sp-2); font-variant-numeric: tabular-nums; min-block-size: 1.2em; }
+.st-bar-values > span { flex: 1; text-align: center; }
 .st-minis { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 /* ---------- self-assessment tab (scores.rs) ---------- */

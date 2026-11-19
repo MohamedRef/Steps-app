@@ -205,8 +205,10 @@ pub fn LecturePage(id: String) -> Element {
                     div { class: "lecture-main",
                         h1 { bdi { class: "lecture-title", "{entry.title}" } }
                         span { class: "muted small",
-                            if lib.program.slides(&id) { "{tx::SLIDES} " } else { "{tx::PAGES} " }
-                            bdi { dir: "ltr", "{first}–{last}" }
+                            {
+                                let (word, range) = crate::i18n::book::pages_span(first, last, lib.program.slides(&id));
+                                rsx! { "{word} " bdi { dir: "ltr", "{range}" } }
+                            }
                         }
                     }
                 }
