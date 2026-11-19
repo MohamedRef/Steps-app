@@ -4,7 +4,11 @@ pub const SECTION_SUB: &str = "تذكير هادي بمراجعة اليوم";
 /// Android's notification channel, as Settings › Notifications lists it.
 pub const CHANNEL: &str = "تذكير المذاكرة";
 pub const CHANNEL_ABOUT: &str = "تذكير هادي بمراجعة اليوم";
-pub const PHONE_ONLY: &str = "التذكير بيرن من تطبيق Steps المتثبّت على الموبايل أو الماك، مش من نسخة التطوير.";
+/// Where reminders can't ring here: the web build, or a development build.
+pub const PHONE_ONLY: &str = if cfg!(target_arch = "wasm32") { WEB_ONLY } else { DEV_ONLY };
+pub const DEV_ONLY: &str = "التذكير بيرن من تطبيق Steps المتثبّت على الموبايل أو الماك، مش من نسخة التطوير.";
+/// The web build (UX-09): no notifications from a browser tab.
+pub const WEB_ONLY: &str = "دي نسخة الويب، والتذكير مش بيرن منها. بيرن من تطبيق Steps على الموبايل أو الماك.";
 pub const MAC_HINT: &str =
     "على الماك الإشعار بيظهر حتى لو Steps مقفولة. لو ما ظهرش، اسمح لـ Steps من إعدادات النظام › الإشعارات.";
 pub const DAILY: &str = "تذكير المذاكرة اليومي";

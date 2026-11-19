@@ -156,10 +156,13 @@ pub fn ReadingButton(open: Signal<bool>) -> Element {
     }
 }
 
-/// Settings › Look: the same choices, with what they change.
+/// Settings › Look: the same choices, with what they change. The lesson's
+/// stylesheet comes along: it draws the size glyphs and the preview's text
+/// size and spacing, and Settings can open over any screen (UX-07).
 #[component]
 pub fn ReadingSection() -> Element {
     rsx! {
+        style { {crate::learn::CSS.text()} }
         crate::ui::Card {
             h2 { {tx::READING} crate::settings::DeviceOnly {} }
             ReadingChoices {}

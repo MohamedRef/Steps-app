@@ -217,12 +217,19 @@ fn a_renewed_preview_key_explains_the_one_reinstall() {
 
 #[test]
 fn updates_that_cannot_run_here_say_why() {
-    // No updater at all: a development build.
+    // No updater at all: a development build (the web build says it is the
+    // web, `Off::without_updater`). Its rows have nothing to open, so they
+    // are plain rows, not dead buttons (UX-09).
     let app = open_updates();
     app.assert_has(tx::OFF_DEV);
     app.assert_lacks(tx::MODE);
+    app.assert_has(tx::ROW_APP);
+    assert!(!app.can_tap(tx::ROW_APP) && !app.can_tap(tx::ROW_CONTENT), "{}", app.html());
+    assert_eq!(Off::without_updater(true), Off::Web);
+    assert_eq!(Off::without_updater(false), Off::DevBuild);
     for (why, line) in [
         (Off::DevBuild, tx::OFF_DEV),
+        (Off::Web, tx::OFF_WEB),
         (Off::NoKey, tx::OFF_KEY),
         (Off::NoPlatform, tx::OFF_PLATFORM),
         (Off::NotInBundle, tx::OFF_BUNDLE),

@@ -25,9 +25,14 @@ pub const WEAK_START: &str = "ذاكر دول";
 pub const MISTAKES_TITLE: &str = "اللي غلطت فيه آخر 14 يوم";
 pub const MISTAKES_EMPTY: &str = "مفيش غلطات مفتوحة. كمّل كده.";
 pub const MISTAKES_START: &str = "جلسة من الغلطات";
+/// The missed MCQs as a tutor block in the bank (UX-08).
+pub const MISTAKES_BLOCK: &str = "بلوك من الغلطات";
+pub const BLOCK_COUNT: &str = "في البلوك";
 pub const MISSED: &str = "غلطت";
 
 pub const SESSION_COUNT: &str = "في الجلسة";
+/// Where a session button would have nothing it can play.
+pub const SESSION_NONE: &str = "مفيش كروت هنا لجلسة: الأسئلة بتتحل في بنك الأسئلة.";
 pub const STUDY_HINT: &str = "افتح المراجعة";
 pub const APPROVED_HINT: &str = "علاماتك وتصديرها في الإعدادات";
 pub const TOPIC_HINT: &str = "ذاكر الموضوع ده لوحده";
