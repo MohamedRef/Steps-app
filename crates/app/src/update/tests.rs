@@ -652,8 +652,27 @@ fn a_pack_with_a_stylesheet_that_reaches_out_is_refused() {
     u.check(false);
     assert!(!u.status().content_waiting);
     let dir = data.path().join("updates");
-    assert!(is_unreadable(&dir, &info, &sha256_hex(&pack)));
+    assert!(unreadable_as(&dir, &info, &sha256_hex(&pack)).is_some());
     assert!(!is_rejected(&dir, &sha256_hex(&pack)), "not a crash: a later app may take it");
+}
+
+#[test]
+fn a_pack_that_needs_a_newer_app_says_so_and_waits_for_it() {
+    let mut newer = Pack::new(crate::content::Library::get().index.clone(), Vec::new());
+    newer.schema = steps_core::pack::SCHEMA + 1;
+    let pack = newer.encode();
+    let signer = ed25519_dalek::SigningKey::from_bytes(&[10; 32]);
+    let feed = pack_feed(&signer, 42, None, &pack, Vec::new());
+    let url = serve(feed.path().to_path_buf());
+    let info = BuildInfo { key: Some(signer.verifying_key()), ..build("0.1.0", 42, true) };
+    let (u, data) = updater(&url, info.clone());
+    u.check(false);
+    assert_eq!(u.status().content_check, Some(ContentCheck::NeedsApp), "not a failure to retry (#830)");
+    let dir = data.path().join("updates");
+    assert_eq!(unreadable_as(&dir, &info, &sha256_hex(&pack)), Some(true));
+    // Checked again, it still waits for the app, never "you have the latest".
+    u.check(false);
+    assert_eq!(u.status().content_check, Some(ContentCheck::NeedsApp));
 }
 
 #[test]
@@ -758,7 +777,7 @@ fn a_pack_with_broken_ids_or_references_is_refused_and_never_opened() {
     assert_eq!(u.status().content_check, Some(ContentCheck::Failed));
     let dir = data.path().join("updates");
     assert!(!dir.join(PACK_FILE).exists());
-    assert!(is_unreadable(&dir, &info, &sha256_hex(&pack)), "not fetched again");
+    assert!(unreadable_as(&dir, &info, &sha256_hex(&pack)).is_some(), "not fetched again");
 
     // The same pack already on disk (from an older build without the
     // check) is dropped at the next start, and the built-in one is used.
@@ -874,7 +893,9 @@ fn a_mismatched_pack_download_is_tried_again() {
     assert_eq!(u.status().content_check, Some(ContentCheck::Failed));
     assert_eq!(pack_requests(&seen), 2, "each check tries the network again");
     let dir = data.path().join("updates");
-    assert!(!is_rejected(&dir, &sha256_hex(&pack)) && !is_unreadable(&dir, &info, &sha256_hex(&pack)));
+    assert!(
+        !is_rejected(&dir, &sha256_hex(&pack)) && !unreadable_as(&dir, &info, &sha256_hex(&pack)).is_some()
+    );
 }
 
 #[test]
@@ -1196,23 +1217,23 @@ fn the_unreadable_list_keeps_the_last_sixteen_once_each() {
     let dir = tmp.path();
     let app = build("0.1.0", 40, true);
     for i in 0..18u8 {
-        mark_unreadable(dir, &app, &sha256_hex(&[i]));
+        mark_unreadable(dir, &app, &sha256_hex(&[i]), false);
     }
-    mark_unreadable(dir, &app, &sha256_hex(&[17]).to_ascii_uppercase());
+    mark_unreadable(dir, &app, &sha256_hex(&[17]).to_ascii_uppercase(), false);
     let list = unreadable(dir);
     assert_eq!(list.len(), 16);
-    assert!(!is_unreadable(dir, &app, &sha256_hex(&[0])), "the oldest went");
-    assert!(is_unreadable(dir, &app, &sha256_hex(&[17])));
+    assert!(unreadable_as(dir, &app, &sha256_hex(&[0])).is_none(), "the oldest went");
+    assert_eq!(unreadable_as(dir, &app, &sha256_hex(&[17])), Some(false));
     // A later app build starts a fresh list.
     let later = build("0.1.0", 41, true);
-    assert!(!is_unreadable(dir, &later, &sha256_hex(&[17])));
-    mark_unreadable(dir, &later, &sha256_hex(&[1]));
+    assert!(unreadable_as(dir, &later, &sha256_hex(&[17])).is_none());
+    mark_unreadable(dir, &later, &sha256_hex(&[1]), false);
     assert_eq!(unreadable(dir).len(), 1);
     // A folder that can't be written: it is only reported.
     let file = dir.join("a-file");
     fs::write(&file, b"").unwrap();
-    mark_unreadable(&file, &app, &sha256_hex(&[2]));
-    assert!(!is_unreadable(&file, &app, &sha256_hex(&[2])));
+    mark_unreadable(&file, &app, &sha256_hex(&[2]), false);
+    assert!(unreadable_as(&file, &app, &sha256_hex(&[2])).is_none());
 }
 
 #[test]

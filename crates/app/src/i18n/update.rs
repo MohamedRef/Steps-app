@@ -46,6 +46,17 @@ pub const KEY_CHANGED_STEPS: [&str; 4] = [
     "افتحها واسترجع النسخة من الإعدادات › بياناتك.",
 ];
 pub const GET_PREVIEW: &str = "نزّل آخر نسخة تجربة";
+/// The Mac runs Steps from the read-only copy it makes of a downloaded app.
+pub const TRANSLOCATED: &str = "الماك مشغّل Steps من نسخة مؤقتة للقراءة بس، لأنه لسه متعلّم إنه «اتنزّل من النت»، فالتحديث مش عارف يتحط. اعمل ده مرة واحدة:";
+pub const TRANSLOCATED_STEPS: [&str; 4] = [
+    "اقفل Steps خالص (⌘Q).",
+    "لو Steps.app مش في Applications، اسحبه هناك بالـ Finder.",
+    "افتح Terminal والصق السطر ده:",
+    "افتح Steps من Applications، ودوس «جرّب تاني».",
+];
+pub const UNQUARANTINE: &str = "xattr -dr com.apple.quarantine /Applications/Steps.app";
+pub const COPY_COMMAND: &str = "انسخ السطر";
+pub const COPIED: &str = "اتنسخ ✓";
 pub const LATER: &str = "بعدين";
 pub const WHATS_NEW: &str = "الجديد";
 
@@ -67,6 +78,9 @@ pub const RESULT_CONTENT: &str = "الدروس والأسئلة";
 pub const CONTENT_CURRENT: &str = "معاك آخر محتوى";
 pub const CONTENT_NEW: &str = "فيه محتوى جديد نزل، وهيفتح لوحده أول ما تخلّص اللي بتذاكره";
 pub const CONTENT_FAILED: &str = "مقدرش يجيب المحتوى الجديد دلوقتي، هيجرّب تاني بعدين";
+/// The feed's content needs a newer Steps (#830).
+pub const CONTENT_NEEDS_APP: &str =
+    "فيه محتوى جديد محتاج نسخة أحدث من Steps: هيفتح لوحده بعد ما تحدّث التطبيق";
 pub const CONTENT_FETCHING: &str = "بيجيب الدروس والأسئلة الجديدة…";
 
 // Mode and channel.

@@ -361,12 +361,18 @@ impl Updater {
         // A pack refused before stays refused: what is in use is the newest
         // there is for this device. One this app build couldn't take waits
         // for an app update.
-        if is_rejected(&self.dir, &asset.sha256) || is_unreadable(&self.dir, &self.info, &asset.sha256) {
+        if is_rejected(&self.dir, &asset.sha256) {
             return ContentCheck::Current;
+        }
+        match unreadable_as(&self.dir, &self.info, &asset.sha256) {
+            Some(true) => return ContentCheck::NeedsApp,
+            Some(false) => return ContentCheck::Current,
+            None => {}
         }
         // Err((true, _)): this build can't take the file, and it is
         // remembered so it isn't fetched again; Err((false, _)): try again
         // next time (a cut or mismatched download included).
+        let mut newer = false;
         let result = (|| -> Result<(), (bool, String)> {
             let bytes = match self.held(&asset) {
                 Some(bytes) => bytes,
@@ -380,7 +386,10 @@ impl Updater {
                     bytes
                 }
             };
-            let pack = Pack::decode(&bytes).map_err(|e| (true, e.to_string()))?;
+            let pack = Pack::decode(&bytes).map_err(|e| {
+                newer = matches!(e, steps_core::pack::PackError::TooNew(_));
+                (true, e.to_string())
+            })?;
             if let Some(first) = pack.problems().first() {
                 return Err((true, format!("content problem: {first}")));
             }
@@ -415,10 +424,10 @@ impl Updater {
             }
             Err((bad, e)) => {
                 if bad {
-                    mark_unreadable(&self.dir, &self.info, &asset.sha256);
+                    mark_unreadable(&self.dir, &self.info, &asset.sha256, newer);
                 }
                 report!("content pack {} not taken: {e}", asset.file);
-                ContentCheck::Failed
+                if newer { ContentCheck::NeedsApp } else { ContentCheck::Failed }
             }
         }
     }
@@ -651,7 +660,7 @@ impl Updater {
         let offer = match self.status().phase {
             Phase::Ready(o)
             | Phase::NeedsPermission(o)
-            | Phase::Failed { offer: Some(o), why: Failure::Install(_) } => o,
+            | Phase::Failed { offer: Some(o), why: Failure::Install(_) | Failure::Translocated } => o,
             _ => return,
         };
         let path = match self.verified_staged(&offer) {

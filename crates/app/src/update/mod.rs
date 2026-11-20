@@ -259,6 +259,9 @@ fn install_build(path: &Path, offer: &Offer) -> Phase {
             why: Failure::Install("not running from Steps.app".into()),
         };
     };
+    if bundle::translocated(&app) {
+        return Phase::Failed { offer: Some(offer.clone()), why: Failure::Translocated };
+    }
     match bundle::install_zip(path, &app, bundle::ditto_extract, |new| bundle::check_signature(new, &app)) {
         Ok(()) => Phase::Installed(offer.clone()),
         Err(e) => Phase::Failed { offer: Some(offer.clone()), why: Failure::Install(e) },
@@ -289,7 +292,7 @@ pub fn apply_staged_on_launch() {
     {
         return;
     }
-    let Some(app) = bundle::running_bundle() else { return };
+    let Some(app) = bundle::running_bundle().filter(|a| !bundle::translocated(a)) else { return };
     let path = dir.join(&offer.asset.file);
     let verified = fs::read(&path)
         .is_ok_and(|bytes| check_download(&offer.asset, bytes.len() as u64, &sha256_hex(&bytes)).is_ok());
@@ -404,6 +407,10 @@ struct Unreadable {
     sha256: String,
     /// `version+build` of the app that refused it.
     app: String,
+    /// Refused because it needs a newer app (`PackError::TooNew`), not
+    /// because it was broken: it opens once Steps is updated.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    newer: bool,
 }
 
 fn app_key(info: &BuildInfo) -> String {
@@ -414,19 +421,21 @@ fn unreadable(dir: &Path) -> Vec<Unreadable> {
     fs::read(dir.join(PACK_UNREADABLE)).ok().and_then(|b| serde_json::from_slice(&b).ok()).unwrap_or_default()
 }
 
-fn is_unreadable(dir: &Path, info: &BuildInfo, sha256: &str) -> bool {
+/// Whether this build refused the pack before, and if so whether it was
+/// for needing a newer app.
+fn unreadable_as(dir: &Path, info: &BuildInfo, sha256: &str) -> Option<bool> {
     let app = app_key(info);
-    unreadable(dir).iter().any(|u| u.app == app && u.sha256.eq_ignore_ascii_case(sha256))
+    unreadable(dir).iter().find(|u| u.app == app && u.sha256.eq_ignore_ascii_case(sha256)).map(|u| u.newer)
 }
 
-fn mark_unreadable(dir: &Path, info: &BuildInfo, sha256: &str) {
+fn mark_unreadable(dir: &Path, info: &BuildInfo, sha256: &str, newer: bool) {
     let app = app_key(info);
     // Entries from earlier app builds no longer apply.
     let mut list: Vec<_> = unreadable(dir).into_iter().filter(|u| u.app == app).collect();
     if list.iter().any(|u| u.sha256.eq_ignore_ascii_case(sha256)) {
         return;
     }
-    list.push(Unreadable { sha256: sha256.to_ascii_lowercase(), app });
+    list.push(Unreadable { sha256: sha256.to_ascii_lowercase(), app, newer });
     let excess = list.len().saturating_sub(16);
     list.drain(..excess);
     if let Err(e) = write_json(dir, PACK_UNREADABLE, &list) {

@@ -130,7 +130,9 @@ pub(super) fn primary_action(phase: &Phase) -> Option<(&'static str, fn())> {
         Phase::Ready(_) => Some((tx::INSTALL_NOW, install)),
         Phase::NeedsPermission(_) => Some((tx::TRY_AGAIN, install)),
         Phase::Installed(_) => Some((tx::RESTART_NOW, restart)),
-        Phase::Failed { offer: Some(_), why: Failure::Install(_) } => Some((tx::TRY_AGAIN, install)),
+        Phase::Failed { offer: Some(_), why: Failure::Install(_) | Failure::Translocated } => {
+            Some((tx::TRY_AGAIN, install))
+        }
         Phase::Failed { offer: Some(_), why: Failure::Network | Failure::Verify(_) } => {
             Some((tx::TRY_AGAIN, download))
         }
@@ -375,6 +377,7 @@ fn ContentResult(status: Status) -> Element {
         (true, _) | (_, Some(ContentCheck::New)) => ("", tx::CONTENT_NEW),
         (false, Some(ContentCheck::Current)) => ("✓ ", tx::CONTENT_CURRENT),
         (false, Some(ContentCheck::Failed)) => ("", tx::CONTENT_FAILED),
+        (false, Some(ContentCheck::NeedsApp)) => ("", tx::CONTENT_NEEDS_APP),
         (false, Some(ContentCheck::Fetching)) => ("", tx::CONTENT_FETCHING),
         (false, None) => return rsx! {},
     };
@@ -418,6 +421,7 @@ fn PhaseView(phase: Phase, auto: bool, label: bool) -> Element {
         Phase::Failed { why: Failure::Install(_), .. } => tx::FAILED_INSTALL,
         Phase::Failed { why: Failure::TooNew, .. } => tx::TOO_NEW,
         Phase::Failed { why: Failure::KeyChanged, .. } => tx::KEY_CHANGED,
+        Phase::Failed { why: Failure::Translocated, .. } => tx::TRANSLOCATED,
     };
     let failed = matches!(phase, Phase::Failed { .. });
     let detail = match &phase {
@@ -472,6 +476,9 @@ fn PhaseView(phase: Phase, auto: bool, label: bool) -> Element {
             if let Some(d) = detail {
                 p { class: "muted small", dir: "ltr", bdi { "{d}" } }
             }
+            if matches!(phase, Phase::Failed { why: Failure::Translocated, .. }) {
+                Translocated {}
+            }
             if matches!(phase, Phase::Failed { why: Failure::KeyChanged, .. }) {
                 ol { class: "small",
                     for (i, step) in tx::KEY_CHANGED_STEPS.iter().enumerate() {
@@ -495,6 +502,34 @@ fn PhaseView(phase: Phase, auto: bool, label: bool) -> Element {
                     button { class: "btn btn-primary", onclick: move |_| run(), {label} }
                     if matches!(phase, Phase::NeedsPermission(_)) {
                         button { class: "btn btn-secondary", onclick: move |_| open_install_permission(), {tx::OPEN_PERMISSION} }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// The Mac's one-time fix for an app run from its read-only copy: the
+/// steps, and the Terminal line with a button that copies it.
+#[component]
+fn Translocated() -> Element {
+    let mut copied = use_signal(|| false);
+    rsx! {
+        ol { class: "small",
+            for (i, step) in tx::TRANSLOCATED_STEPS.iter().enumerate() {
+                li { key: "{i}", {*step}
+                    if i == 2 {
+                        div { class: "row",
+                            code { dir: "ltr", lang: "en", {tx::UNQUARANTINE} }
+                            button {
+                                class: "btn btn-tonal",
+                                onclick: move |_| {
+                                    crate::qbank::copy_text(tx::UNQUARANTINE);
+                                    copied.set(true);
+                                },
+                                if copied() { {tx::COPIED} } else { {tx::COPY_COMMAND} }
+                            }
+                        }
                     }
                 }
             }
