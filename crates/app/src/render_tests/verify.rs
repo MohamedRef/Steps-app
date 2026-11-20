@@ -3,6 +3,7 @@
 //! study session and an MCQ in the bank.
 
 use steps_core::content::Body;
+use steps_core::exam::{Mode, Question};
 use steps_core::review::verify::Verdict;
 
 use super::App;
@@ -109,7 +110,7 @@ fn an_mcq_answer_is_edited_from_the_bank() {
         .find(|i| matches!(&i.body, Body::Mcq { stem, .. } if text.contains(stem.as_str())))
         .unwrap();
     let Body::Mcq { options, answer, .. } = &q.body else { unreachable!() };
-    app.tap(&options[*answer]).tap(bx::CHECK);
+    app.answer(&options[*answer]).tap(bx::CHECK);
     app.tap(tx::EDIT);
     app.assert_has(tx::F_STEM);
     app.assert_has(tx::F_OPTIONS);
@@ -120,6 +121,28 @@ fn an_mcq_answer_is_edited_from_the_bank() {
     app.form("change", &options[0], &other.to_string());
     app.tap(tx::SAVE);
     assert_eq!(verdict(&q.id).map(|v| v.0), Some(Verdict::Edited));
+}
+
+#[test]
+fn a_numeric_mcq_option_picks_the_answer_not_the_navigator() {
+    // #839: repro.L03.046's key is "5", which matched .nav-cell "5" under App::tap.
+    use crate::i18n::bank as bx;
+    let mut ids: Vec<String> = vec!["repro.L03.046".into()];
+    ids.extend(ids_of("mcq").into_iter().filter(|id| id != "repro.L03.046").take(5));
+    let mut questions = Vec::new();
+    for id in ids {
+        let i = item(&id);
+        let Body::Mcq { options, answer, .. } = &i.body else { unreachable!() };
+        let lecture = id.rsplit_once('.').unwrap().0.to_string();
+        let order = (0..options.len()).collect();
+        questions.push(Question { id, lecture, topic: i.topic.clone(), answer: *answer, order });
+    }
+    let mut app = App::open(Screen::Bank);
+    app.run(move || crate::bank::start(Mode::Tutor, questions));
+    app.assert_has("1 / 6");
+    app.answer("5").tap(bx::CHECK);
+    app.assert_has("1 / 6");
+    app.assert_has(tx::QUESTION);
 }
 
 #[test]
