@@ -247,6 +247,11 @@ pub enum Failure {
     /// Preview only: CI's update or APK signing key was renewed; install
     /// the newest preview by hand once.
     KeyChanged,
+    /// Mac: Steps runs from the read-only copy macOS makes of an app still
+    /// marked as downloaded (App Translocation), so it can't replace
+    /// itself; moving it to Applications and unmarking it once fixes that.
+    #[cfg_attr(not(target_os = "macos"), allow(dead_code))]
+    Translocated,
 }
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Phase {
@@ -283,6 +288,9 @@ pub enum ContentCheck {
     New,
     /// The feed or the pack couldn't be fetched or taken; tried again later.
     Failed,
+    /// The feed's pack needs a newer app (a higher pack schema): it opens
+    /// with the app update, and no retry before it helps.
+    NeedsApp,
     /// The feed names a newer pack and it is being fetched (the app's half
     /// of the check already shows).
     Fetching,
