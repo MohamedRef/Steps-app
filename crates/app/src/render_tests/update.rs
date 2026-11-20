@@ -267,6 +267,7 @@ fn the_content_rows_say_what_came() {
         (Some(ContentCheck::Current), false, tx::CONTENT_CURRENT),
         (Some(ContentCheck::New), false, tx::CONTENT_NEW),
         (Some(ContentCheck::Failed), false, tx::CONTENT_FAILED),
+        (Some(ContentCheck::NeedsApp), false, tx::CONTENT_NEEDS_APP),
         (Some(ContentCheck::Current), true, tx::CONTENT_NEW),
     ] {
         u.set_status_for_tests(|s| {

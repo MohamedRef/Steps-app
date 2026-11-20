@@ -288,6 +288,9 @@ pub enum ContentCheck {
     New,
     /// The feed or the pack couldn't be fetched or taken; tried again later.
     Failed,
+    /// The feed's pack needs a newer app (a higher pack schema): it opens
+    /// with the app update, and no retry before it helps.
+    NeedsApp,
     /// The feed names a newer pack and it is being fetched (the app's half
     /// of the check already shows).
     Fetching,

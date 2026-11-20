@@ -78,6 +78,9 @@ pub const RESULT_CONTENT: &str = "الدروس والأسئلة";
 pub const CONTENT_CURRENT: &str = "معاك آخر محتوى";
 pub const CONTENT_NEW: &str = "فيه محتوى جديد نزل، وهيفتح لوحده أول ما تخلّص اللي بتذاكره";
 pub const CONTENT_FAILED: &str = "مقدرش يجيب المحتوى الجديد دلوقتي، هيجرّب تاني بعدين";
+/// The feed's content needs a newer Steps (#830).
+pub const CONTENT_NEEDS_APP: &str =
+    "فيه محتوى جديد محتاج نسخة أحدث من Steps: هيفتح لوحده بعد ما تحدّث التطبيق";
 pub const CONTENT_FETCHING: &str = "بيجيب الدروس والأسئلة الجديدة…";
 
 // Mode and channel.
