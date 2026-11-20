@@ -8,7 +8,7 @@
 //! objective and video) is kept here by item id, for the screens.
 
 pub mod file;
-mod import;
+pub(crate) mod import;
 #[cfg(test)]
 mod tests;
 
