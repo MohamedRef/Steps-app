@@ -32,6 +32,7 @@ mod hover;
 mod i18n;
 mod icons;
 mod import;
+mod inbox;
 mod labs;
 mod learn;
 mod lecture;
@@ -344,6 +345,7 @@ fn AppAt(start: Screen, children: Element) -> Element {
             notes::NoteSheet {}
             courses::Picker {}
             own::ShareInbox {}
+            inbox::FileInbox {}
             {children}
             onboarding::Onboarding {}
         }

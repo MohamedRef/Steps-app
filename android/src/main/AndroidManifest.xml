@@ -20,8 +20,12 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application>
         <!-- Share-to-Steps: text from any app, plus "Steps" in the text-selection
-             menu, becomes a draft of Mohamed's own card (Share.kt). Invisible;
-             it hands the text over and opens Steps. -->
+             menu, becomes a draft of Mohamed's own card (Share.kt). A file
+             shared or opened with Steps (an Excel sheet, a zip, JSON or YAML)
+             opens Settings › Your data on it: a backup to restore, else
+             questions to add (inbox.rs). Invisible; it hands the text or file
+             over and opens Steps. The file types match
+             platform::documents::QUESTIONS (a test checks). -->
         <activity
             android:name="app.steps.ShareActivity"
             android:exported="true"
@@ -38,6 +42,37 @@
                 <action android:name="android.intent.action.PROCESS_TEXT" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <data android:mimeType="text/plain" />
+            </intent-filter>
+            <!-- A shared file (text/plain above also brings a .yaml shared as text). -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                <data android:mimeType="application/vnd.ms-excel" />
+                <data android:mimeType="application/zip" />
+                <data android:mimeType="application/x-zip-compressed" />
+                <data android:mimeType="application/json" />
+                <data android:mimeType="application/yaml" />
+                <data android:mimeType="application/x-yaml" />
+                <data android:mimeType="text/yaml" />
+                <data android:mimeType="text/x-yaml" />
+                <data android:mimeType="application/octet-stream" />
+            </intent-filter>
+            <!-- "Open with" from Files, Drive or a chat app. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="content" />
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+                <data android:mimeType="application/vnd.ms-excel" />
+                <data android:mimeType="application/zip" />
+                <data android:mimeType="application/x-zip-compressed" />
+                <data android:mimeType="application/json" />
+                <data android:mimeType="application/yaml" />
+                <data android:mimeType="application/x-yaml" />
+                <data android:mimeType="text/yaml" />
+                <data android:mimeType="text/x-yaml" />
+                <data android:mimeType="application/octet-stream" />
             </intent-filter>
         </activity>
         <!-- Google sign-in: the browser page's "back to Steps" link

@@ -86,6 +86,19 @@ pub fn OwnQuestionsCard() -> Element {
         let read = check(&name, &bytes);
         step.set(Step::Preview { name, read: Box::new(read) });
     };
+    // A file shared to Steps (`crate::inbox`): read as if picked here.
+    use_effect(move || {
+        if crate::inbox::QUESTIONS.read().is_some() {
+            spawn(async move {
+                let Some(arrived) = crate::inbox::QUESTIONS.write().take() else { return };
+                match arrived.bytes {
+                    Some(bytes) => load(arrived.name, bytes),
+                    None => step.set(Step::Failed(tx::COPY_FAILED.into())),
+                }
+                crate::inbox::scroll_to(crate::inbox::QUESTIONS_CARD);
+            });
+        }
+    });
     let mut load_path = move |name: String, path: PathBuf| match std::fs::read(&path) {
         Ok(bytes) => {
             let _ = std::fs::remove_file(&path);
@@ -217,7 +230,7 @@ pub fn OwnQuestionsCard() -> Element {
 
     rsx! {
         style { {super::CSS.text()} }
-        crate::ui::Card { class: "ownq-card",
+        crate::ui::Card { class: "ownq-card", id: crate::inbox::QUESTIONS_CARD,
             h2 { {tx::TITLE} }
             {body}
             Categories {}
