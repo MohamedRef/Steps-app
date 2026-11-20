@@ -185,9 +185,8 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-      - uses: cargo-bins/cargo-binstall@8a2045612414e945291083f820cd50b4d8fc2218 # v1.26.0
       - name: Install dx 0.7.10
-        run: cargo binstall -y --force dioxus-cli@0.7.10
+        uses: ./.github/actions/dx
       - uses: actions/download-artifact@v4
         with:
           name: steps-release-pack
@@ -262,10 +261,7 @@ jobs:
           key: macos
           save-if: false
       - name: Install dx 0.7.10
-        run: |
-          if ! dx --version 2>/dev/null | grep -q '0.7.10'; then
-            cargo install dioxus-cli --version 0.7.10 --locked
-          fi
+        uses: ./.github/actions/dx
       - uses: actions/download-artifact@v4
         with:
           name: steps-release-pack
