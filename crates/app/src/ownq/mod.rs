@@ -40,6 +40,11 @@ impl Mine {
         self.questions.get(item_id)
     }
 
+    /// Whether any of his questions is filed under MH (the MH bank's own).
+    pub fn has_mh(&self) -> bool {
+        self.questions.values().any(|q| steps_core::ownq::is_mh(&q.category))
+    }
+
     /// The item id of a question asked for by its own id (`P-0001`), in
     /// any category.
     pub fn find(&self, id: &str) -> Vec<&OwnQuestion> {

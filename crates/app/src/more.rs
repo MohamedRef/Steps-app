@@ -79,7 +79,10 @@ pub const MH: Tool = Tool {
     icon: icons::mh,
     open: |ui| crate::bank::open_set(ui, steps_core::exam::Set::Vq),
     page: None,
-    shows: || crate::content::Library::get().vq.opened() > 0,
+    shows: || {
+        let lib = crate::content::Library::get();
+        lib.vq.opened() > 0 || lib.mine.has_mh()
+    },
 };
 pub const ADD_CARD: Tool = Tool {
     label: i18n::refs::ADD_CARD,

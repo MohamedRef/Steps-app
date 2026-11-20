@@ -105,8 +105,22 @@ pub fn problem(p: &steps_core::ownq::Problem) -> String {
         P::NoPlace => "ناقص page أو lecture: صفحة First Aid أو رقم المحاضرة.".into(),
         P::PageNotInBook(n) => format!("صفحة {n} مش في محاضرة مكتوبة في Steps."),
         P::BadPage(t) => format!("الصفحة «{t}» مش رقم."),
-        P::UnknownLecture(l) => format!("المحاضرة «{l}» مش موجودة (زي cvs.L04)."),
-        P::UnknownTopic(t) => format!("الموضوع «{t}» مش في المحاضرة دي."),
+        P::UnknownLecture { asked, course } => match (course.first(), course.last()) {
+            (Some(first), Some(last)) if first != last => format!(
+                "المحاضرة «{asked}» مش موجودة: المادة دي فيها من {first} لـ {last}. أو اكتب صفحة First Aid في page بدلها."
+            ),
+            (Some(only), _) => {
+                format!(
+                    "المحاضرة «{asked}» مش موجودة: المادة دي فيها {only} بس. أو اكتب صفحة First Aid في page بدلها."
+                )
+            }
+            _ => format!(
+                "المحاضرة «{asked}» مش موجودة: اكتبها زي cvs.L04، أو اكتب صفحة First Aid في page بدلها."
+            ),
+        },
+        P::UnknownTopic(t) => {
+            format!("الموضوع «{t}» مش في المحاضرة دي: اكتبه زي ما هو مكتوب في Steps، أو سيبه فاضي.")
+        }
         P::BadVideo(v) => format!("«{v}» مش لينك فيديو يوتيوب."),
         P::NoImage(n) => format!("الصورة «{n}» مش في الـ zip."),
         P::TooManyTags => "أكتر من 10 tags.".into(),

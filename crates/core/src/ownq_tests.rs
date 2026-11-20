@@ -140,6 +140,7 @@ fn every_problem_names_its_row_and_good_rows_still_stand() {
         bad(16, &[], &["B", "C"]),
         bad(17, &[("page", "905")], &[]),
         good(18, "p-1"),
+        bad(20, &[("lecture", "cvs.L11")], &[]),
         bad(19, &[("colour", "red")], &[]),
     ];
     let (qs, problems) = read(&rows, &places, &BTreeMap::new());
@@ -156,7 +157,7 @@ fn every_problem_names_its_row_and_good_rows_still_stand() {
     assert_eq!(at(9), [&Problem::NoPlace]);
     assert_eq!(at(10), [&Problem::PageNotInBook(1500)]);
     assert_eq!(at(11), [&Problem::BadPage("page two".into())]);
-    assert_eq!(at(12), [&Problem::UnknownLecture("xx.L09".into())]);
+    assert_eq!(at(12), [&Problem::UnknownLecture { asked: "xx.L09".into(), course: vec![] }]);
     assert_eq!(at(13), [&Problem::UnknownTopic("Shock".into())]);
     assert_eq!(at(14), [&Problem::BadVideo("https://vimeo.com/123".into())]);
     assert_eq!(at(15), [&Problem::NoImage("missing.png".into())]);
@@ -164,6 +165,10 @@ fn every_problem_names_its_row_and_good_rows_still_stand() {
     assert_eq!(at(17), [&Problem::PageNotInBook(905)], "a lecture not written yet takes no questions");
     assert_eq!(at(18), [&Problem::Twice("p-1 (2)".into())], "ids are one per category, in any case");
     assert_eq!(at(0), [&Problem::UnknownColumn("colour".into())]);
+    assert_eq!(
+        at(20),
+        [&Problem::UnknownLecture { asked: "cvs.L11".into(), course: vec!["cvs.L03".into()] }]
+    );
     let (_, none) = read(&[], &places, &BTreeMap::new());
     assert_eq!(none, [RowProblem { line: 0, problem: Problem::NoRows }]);
 }

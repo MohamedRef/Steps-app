@@ -13,7 +13,7 @@ Code: `steps_core::ownq` (rows → questions, problems, the import plan, figure 
 | Column | | What |
 |---|---|---|
 | `id` | required | letters, digits, `-`, `_`, at most 40; unique in its category in any case |
-| `category` | required | the bank it is in, at most 30 characters |
+| `category` | required | the bank it is in, at most 30 characters; `MH` (any case) files it into the MH bank itself, beside the sealed VQ questions |
 | `page` or `lecture` | one required | a printed First Aid page (the lecture whose range holds it, if written) or a lecture id such as `cvs.L04`, which wins |
 | `topic` | optional | a topic of that lecture, by id or title, any case |
 | `stem` | required | |
@@ -26,7 +26,7 @@ Code: `steps_core::ownq` (rows → questions, problems, the import plan, figure 
 | `video`, `video_title` | optional | a YouTube link of any form, or its id, and the title to show |
 | `tags` | optional | comma-separated, at most 10 |
 
-A row with a problem is left out and named («الصف 5: …», or «السؤال 5» in a JSON or YAML list); the other rows still go in. An unknown column is named and skipped.
+A lecture that isn't one is named with the lectures its course has (`imm.L01` to `imm.L04`), with the page as the other way. A row with a problem is left out and named («الصف 5: …», or «السؤال 5» in a JSON or YAML list); the other rows still go in. An unknown column is named and skipped.
 
 ## Adding and updating
 
