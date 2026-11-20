@@ -101,11 +101,16 @@ impl Set {
         if tags.iter().any(|t| t == crate::sealed::TAG) {
             Set::Vq
         } else if let Some(c) = crate::ownq::category_of(tags) {
-            // His own MH questions join the MH bank.
-            if crate::ownq::is_mh(c) { Set::Vq } else { Set::Own(c.to_string()) }
+            Set::of_category(c)
         } else {
             Set::Steps
         }
+    }
+
+    /// The set his questions of `category` are in: their own, except that
+    /// MH questions join the MH bank.
+    pub fn of_category(category: &str) -> Set {
+        if crate::ownq::is_mh(category) { Set::Vq } else { Set::Own(category.to_string()) }
     }
 
     pub fn holds(&self, q: &Mcq) -> bool {

@@ -32,7 +32,24 @@ A lecture that isn't one is named with the lectures its course has (`imm.L01` to
 
 On Android the file can also come from outside Steps (#836): **share** it to Steps, or **«Open with» Steps**, from Files, Drive or a chat app. Steps opens Settings › بياناتك with the file already read, as if picked in the card. A JSON file that is a Steps backup goes to the restore card instead. `app.steps.ShareActivity` copies the file into the app (at most 50 MB) and keeps its name in `PendingFile`; `crate::inbox` takes it when Steps comes to the front and hands it to the card. The manifest offers Steps for the same types as the card's picker (`platform::documents::QUESTIONS`, which a test checks against the manifest).
 
-Picking a file shows what it would do («هيتضاف 12 · هيتعدّل 3 · 200 زي ما هي») and every problem, then «ضيفهم» stores the new and changed rows. A question is keyed by its category and id: the same file again changes nothing, and a row edited in it replaces its question. A question that moves to another lecture gets a new item id (`<lecture>.mine-<category hash>-<id>`), so its answer history starts again. The card lists each category with its count; «امسح» deletes a category's questions on every device (their answers stay in the log).
+Picking a file shows what it would do, question by question, like Anki's import log (`ownq/report.rs`, 2026-11-20):
+- a sentence that names the bank: «هيتضاف 12 سؤال ويتعدّل 3 أسئلة في «أسئلة Pathoma»»;
+- a tile for each group: «هيتضاف», «هيتعدّل», «زي ما هو» and «هيتساب». The pressed tile lists its group, and before «ضيفهم» the rows left out come first.
+- each listed question with:
+  - its id, and a chip when it has a figure or a video;
+  - the start of its stem;
+  - its lecture and topic, its page, and its answer;
+  - for a changed question, what changed («اتغيّر: الإجابة بقت C (كانت B)، الشرح», from `steps_core::ownq::changes`). A question that moved to another lecture also says that its answers start again.
+- each row left out, with where it is and why.
+
+«ضيفهم» stores the new and changed rows and turns the same view into what the import did:
+- «اتضاف سؤالين في «أسئلة MH»», and the tiles «اتضاف», «اتعدّل», «زي ما هو» and «اتساب»;
+- a tap on a listed question closes Settings and opens it in the bank;
+- «افتح أسئلة MH في البنك» opens the bank on that set.
+
+The report stays while Steps is open, until another file is read or «ضيف ملف تاني» is tapped, so it is still there after opening a question from it.
+
+A question is keyed by its category and id: the same file again changes nothing, and a row edited in it replaces its question. A question that moves to another lecture gets a new item id (`<lecture>.mine-<category hash>-<id>`), so its answer history starts again. The card lists each category with its count. A tap on a category opens it in the bank, and «امسح» deletes the category's questions on every device; their answers stay in the log.
 
 ## In the app
 

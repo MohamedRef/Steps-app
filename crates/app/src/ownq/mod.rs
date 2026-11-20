@@ -9,6 +9,7 @@
 
 pub mod file;
 pub(crate) mod import;
+pub(crate) mod report;
 #[cfg(test)]
 mod tests;
 
