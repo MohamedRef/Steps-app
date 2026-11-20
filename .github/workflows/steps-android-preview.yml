@@ -43,6 +43,7 @@ on:
       - crates/app/src/platform/**
       - crates/app/src/update/**
       - scripts/android-check-apk.sh
+      - scripts/android-bundle.sh
       - scripts/android-release-apk.sh
   workflow_dispatch:
 
@@ -213,9 +214,8 @@ jobs:
           STEPS_GOOGLE_CLIENT_ID: ${{ env.KEEP_KEY == 'true' && vars.STEPS_GOOGLE_CLIENT_ID || '' }}
           STEPS_GOOGLE_CLIENT_SECRET: ${{ env.KEEP_KEY == 'true' && secrets.STEPS_GOOGLE_CLIENT_SECRET || '' }}
         run: |
-          dx bundle --platform android --release --package-types apk \
-            --target aarch64-linux-android --no-default-features --features mobile \
-            --out-dir ../../dist/android/raw
+          # Tries again when Maven doesn't answer (the script says why).
+          ../../scripts/android-bundle.sh ../../dist/android/raw
 
       - name: Rebuild as a release APK (not debuggable, R8, versionCode)
         if: env.CONTENT_ONLY != 'true'

@@ -140,7 +140,7 @@ On Linux the desktop app needs `libwebkit2gtk-4.1-dev libgtk-3-dev libxdo-dev li
 | `screens-browser.yml` | every PR | lesson and study browser check |
 | `nightly.yml` (Nightly checks) | daily (see below) + by hand | Android arm64, web wasm32 and Worker compiles; the 90% coverage gate; tests on later dates; README and §12 counts within 5% of the content |
 | `mac.yml` (Mac) | daily + by hand | Mac clippy, tests and `dx bundle`; never on PRs, Mac runners are slow |
-| `steps-android-preview.yml` | daily when `main` moved + by hand | signed preview APK on the `steps-preview` prerelease; PRs touching `android/` build it as a check |
+| `steps-android-preview.yml` | daily when `main` moved + by hand | signed preview APK on the `steps-preview` prerelease; PRs touching `android/` build it as a check. It and `release.yml` build the APK through `scripts/android-bundle.sh`, which tries twice more (after 1 and 3 minutes) when Gradle couldn't fetch from Maven |
 | `settings-browser.yml`, `android-webview-regression.yml` | daily + by hand | Settings browser check; Android WebView renderer-loss tests |
 | `daily.yml` | after every CI run | starts each platform workflow above that hasn't run on `main` for 20 hours (QBank sync: a week), and opens "Nightly checks have not run for 36 hours" when that happens |
 | `alerts.yml` | after platform and deploy runs | opens "<workflow> failed on main" and closes it when the next run passes |
@@ -289,6 +289,7 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 - **Calendar versions (2026-11-09, from Batna #768, Mohamed's pick):** the next release is `2026.11.1`, tagged `v2026.11.1`, with `Steps-<version>-android.apk`, `-mac.zip` and `SHA256SUMS.txt`; installed alpha.3 builds take it as an ordinary update (higher version and versionCode, same keys and feeds).
 
 ### Known issues
+- **2026-11-20, Maven:** Gradle couldn't fetch its Kotlin plugin from Maven («Could not find org.jetbrains.kotlin:kotlin-gradle-plugin») in the `2026.11.9` release and in #835's build, a few minutes at a time; a re-run passed. The APK build now tries again by itself (`scripts/android-bundle.sh`).
 - **2026-11-20, found updating to `2026.11.8`:** #829 a Mac update failed with "Read-only file system" when Steps ran from macOS's read-only copy (not in Applications, still marked as downloaded); #830 content needing a newer app said "will try again later". Both fixed in #828, in `2026.11.9` (the one-time Mac fix is in the update card; the README's install steps stand). #831: see the questions-from-a-file fixes.
 - **#831** (2026-11-20, his first file of questions): lecture ids that don't exist (`imm.L08`, `cvs.L11`) were refused with no way forward, and MH questions would have opened a second MH bank. Fixed in #832, in `2026.11.9`: the message names the course's lectures or the page as the way, and `MH` joins the MH bank.
 - **Review of 2026-11-13** (on 150add5) opened #662 to #677; they are being fixed one PR per issue. Done here: Rust pinned to 1.100.0 with cross targets only where needed (#674); #677 (57 remote branches with a tool name in their prefix) was closed as not planned, so those branches are still on the remote (#752).

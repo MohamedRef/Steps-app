@@ -206,9 +206,8 @@ jobs:
         env:
           STEPS_GOOGLE_CLIENT_SECRET: ${{ secrets.STEPS_GOOGLE_CLIENT_SECRET }}
         run: |
-          dx bundle --platform android --release --package-types apk \
-            --target aarch64-linux-android --no-default-features --features mobile \
-            --out-dir ../../dist/android/raw
+          # Tries again when Maven doesn't answer (the script says why).
+          ../../scripts/android-bundle.sh ../../dist/android/raw
       - name: Rebuild as a release APK (not debuggable, R8, versionCode)
         run: |
           APK="$(scripts/android-release-apk.sh)"
