@@ -1,7 +1,8 @@
 //! Android's system document dialogs for Settings › Your data: "Save to" for
-//! an export, and the file picker for a restore (`app.steps.Documents` in
-//! android/). The Mac writes to ~/Downloads and uses the WebView's own file
-//! input, so these are Android-only; elsewhere they report `Failed`.
+//! an export, and the file picker for a restore or for questions from a file
+//! (`app.steps.Documents` in android/). The Mac writes to ~/Downloads and uses
+//! the WebView's own file input, so these are Android-only; elsewhere they
+//! report `Failed`.
 // Adapted from batna-app main: crates/app/src/platform/android.rs (save_document, save_state).
 
 use std::time::Duration;
@@ -36,12 +37,36 @@ pub fn save(path: &str, name: &str) -> Result<(), String> {
     }
 }
 
-/// Shows the system file picker.
-pub fn open() -> Result<(), String> {
+/// What a restore picks: a backup is JSON, which some providers label as
+/// octet-stream or plain text.
+pub const BACKUP: &[&str] = &["application/json", "application/octet-stream", "text/plain"];
+
+/// What questions from a file pick: an Excel sheet, a zip, JSON or YAML (#834).
+/// Providers label YAML several ways, and some give a sheet or a zip a generic
+/// type; the file is read by its extension, so a wrong pick is still told.
+pub const QUESTIONS: &[&str] = &[
+    "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    "application/vnd.ms-excel",
+    "application/zip",
+    "application/x-zip-compressed",
+    "application/json",
+    "application/yaml",
+    "application/x-yaml",
+    "text/yaml",
+    "text/x-yaml",
+    "application/octet-stream",
+    "text/plain",
+];
+
+/// Shows the system file picker, offering files of `types` (MIME types).
+pub fn open(types: &[&str]) -> Result<(), String> {
     #[cfg(target_os = "android")]
-    return android::open();
+    return android::open(&types.join(","));
     #[cfg(not(target_os = "android"))]
-    Err("not on Android".into())
+    {
+        let _ = types;
+        Err("not on Android".into())
+    }
 }
 
 /// The dialog's state; a finished state is handed out once.
@@ -115,13 +140,14 @@ mod android {
         })
     }
 
-    pub fn open() -> Result<(), String> {
+    pub fn open(types: &str) -> Result<(), String> {
         documents(|env, class, activity| {
+            let types = env.new_string(types)?;
             env.call_static_method(
                 class,
                 jni_str!("open"),
-                jni_sig!("(Landroid/app/Activity;)V"),
-                &[JValue::Object(activity)],
+                jni_sig!("(Landroid/app/Activity;Ljava/lang/String;)V"),
+                &[JValue::Object(activity), JValue::Object(&types)],
             )
             .map(drop)
         })

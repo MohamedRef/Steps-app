@@ -86,10 +86,31 @@ fn speech_without_a_webview_fails_quietly_and_the_session_goes_on() {
 #[test]
 fn documents_are_android_only() {
     assert_eq!(documents::save("/tmp/steps-export.json", "steps-export.json"), Err("not on Android".into()));
-    assert_eq!(documents::open(), Err("not on Android".into()));
+    assert_eq!(documents::open(documents::BACKUP), Err("not on Android".into()));
     assert_eq!(documents::state(), DocState::Failed);
     assert_eq!(rt().block_on(documents::finished()), DocState::Failed);
     assert!(documents::POLL < Duration::from_secs(1));
+}
+
+/// #834: the Android picker greyed out Excel and zip files for questions from
+/// a file, because it offered only a backup's types.
+#[test]
+fn the_questions_picker_offers_every_kind_of_file_it_reads() {
+    for (kind, mime) in [
+        ("xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
+        ("zip", "application/zip"),
+        ("json", "application/json"),
+        ("yaml", "application/yaml"),
+        ("yml", "application/x-yaml"),
+    ] {
+        assert!(documents::QUESTIONS.contains(&mime), "{kind}: {mime}");
+    }
+    // A restore still offers only a backup's types.
+    assert!(!documents::BACKUP.iter().any(|t| t.contains("spreadsheet") || t.contains("zip")));
+    // The types reach Kotlin as one comma-separated string.
+    for t in documents::QUESTIONS.iter().chain(documents::BACKUP) {
+        assert!(!t.contains(',') && t.contains('/'), "{t}");
+    }
 }
 
 #[test]
