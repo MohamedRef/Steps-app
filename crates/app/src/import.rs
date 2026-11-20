@@ -119,7 +119,7 @@ pub fn ImportCard() -> Element {
                         class: "verify-btn plain",
                         disabled: picking(),
                         onclick: move |_| {
-                            if documents::open().is_ok() {
+                            if documents::open(documents::BACKUP).is_ok() {
                                 picking.set(true);
                                 spawn(async move {
                                     let done = documents::finished().await;

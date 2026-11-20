@@ -104,7 +104,7 @@ pub fn OwnQuestionsCard() -> Element {
                         class: "btn btn-primary",
                         disabled: picking(),
                         onclick: move |_| {
-                            if documents::open().is_ok() {
+                            if documents::open(documents::QUESTIONS).is_ok() {
                                 picking.set(true);
                                 spawn(async move {
                                     let done = documents::finished().await;

@@ -11,8 +11,8 @@ import kotlin.concurrent.thread
 
 /**
  * Settings › Your data on Android: the system "Save to" dialog for an export,
- * and the system file picker for a restore (Storage Access Framework:
- * Downloads, Drive…, no permission needed).
+ * and the system file picker for a restore or for questions from a file
+ * (Storage Access Framework: Downloads, Drive…, no permission needed).
  *
  * Save: the export is first written to the app's own folder, which the Files
  * app can't open; this invisible activity asks where to put it and copies it
@@ -35,11 +35,17 @@ class DocumentActivity : Activity() {
                     .setType(if (name.endsWith(".json")) "application/json" else "application/octet-stream")
                     .putExtra(Intent.EXTRA_TITLE, intent.getStringExtra(EXTRA_NAME) ?: "steps-export.json")
             } else {
-                // Some providers label JSON as octet-stream or plain text.
+                // The caller's types (a restore: JSON; questions from a file:
+                // Excel, zip, JSON, YAML). Some providers label JSON and YAML as
+                // octet-stream or plain text, so callers list those too.
+                val types =
+                    intent.getStringExtra(EXTRA_TYPES)?.split(',')?.map { it.trim() }?.filter { it.isNotEmpty() }
+                        ?.takeIf { it.isNotEmpty() }
+                        ?: listOf("application/json", "application/octet-stream", "text/plain")
                 Intent(Intent.ACTION_OPEN_DOCUMENT)
                     .addCategory(Intent.CATEGORY_OPENABLE)
                     .setType("*/*")
-                    .putExtra(Intent.EXTRA_MIME_TYPES, arrayOf("application/json", "application/octet-stream", "text/plain"))
+                    .putExtra(Intent.EXTRA_MIME_TYPES, types.toTypedArray())
             }
         try {
             @Suppress("DEPRECATION")
@@ -74,7 +80,7 @@ class DocumentActivity : Activity() {
                     }
                     Documents.done(Documents.SAVED, name, null)
                 } else {
-                    val copy = File(cache, "restore.json")
+                    val copy = File(cache, PICKED)
                     resolver.openInputStream(uri).use { input ->
                         requireNotNull(input) { "no input stream" }
                         copy.outputStream().use { out -> copyCapped(input, out) }
@@ -83,7 +89,7 @@ class DocumentActivity : Activity() {
                 }
             } catch (e: Exception) {
                 Log.w(TAG, "Could not copy the document", e)
-                if (source == null) File(cache, "restore.json").delete()
+                if (source == null) File(cache, PICKED).delete()
                 Documents.done(Documents.FAILED, null, null)
             }
             runOnUiThread { finish() }
@@ -96,7 +102,7 @@ class DocumentActivity : Activity() {
         if (isFinishing && Documents.state() == Documents.BUSY) Documents.done(Documents.CANCELLED, null, null)
     }
 
-    /** A backup is a few MB; stop a wrong pick (a video, a big PDF) early. */
+    /** A backup or a file of questions is a few MB; stop a wrong pick (a video, a big PDF) early. */
     private fun copyCapped(input: java.io.InputStream, out: java.io.OutputStream) {
         val buffer = ByteArray(64 * 1024)
         var total = 0L
@@ -104,7 +110,7 @@ class DocumentActivity : Activity() {
             val n = input.read(buffer)
             if (n < 0) break
             total += n
-            if (total > MAX_RESTORE_BYTES) throw java.io.IOException("larger than a Steps backup")
+            if (total > MAX_RESTORE_BYTES) throw java.io.IOException("larger than a Steps file")
             out.write(buffer, 0, n)
         }
     }
@@ -121,10 +127,14 @@ class DocumentActivity : Activity() {
     companion object {
         private const val TAG = "StepsDocuments"
         private const val REQUEST = 3
-        // A real backup is a few MB.
+        // The cache copy of the picked file (a backup or a file of questions).
+        private const val PICKED = "picked"
+        // A real backup, or questions with their figures, is a few MB.
         private const val MAX_RESTORE_BYTES = 50L * 1024 * 1024
         const val EXTRA_PATH = "app.steps.documents.PATH"
         const val EXTRA_NAME = "app.steps.documents.NAME"
+        /** Open only: the MIME types to offer, comma-separated. */
+        const val EXTRA_TYPES = "app.steps.documents.TYPES"
     }
 }
 
@@ -143,13 +153,16 @@ object Documents {
 
     /** Shows the "Save to" dialog for the file at [path], suggesting [name]. */
     @JvmStatic
-    fun save(activity: Activity, path: String, name: String) = start(activity, path, name)
+    fun save(activity: Activity, path: String, name: String) = start(activity, path, name, null)
 
-    /** Shows the file picker; the picked file is copied into the cache. */
+    /**
+     * Shows the file picker offering [types] (MIME types, comma-separated); the
+     * picked file is copied into the cache.
+     */
     @JvmStatic
-    fun open(activity: Activity) = start(activity, null, null)
+    fun open(activity: Activity, types: String) = start(activity, null, null, types)
 
-    private fun start(activity: Activity, path: String?, name: String?) {
+    private fun start(activity: Activity, path: String?, name: String?, types: String?) {
         current = BUSY
         chosenName = null
         copyPath = null
@@ -159,6 +172,7 @@ object Documents {
                 if (path != null) {
                     intent.putExtra(DocumentActivity.EXTRA_PATH, path).putExtra(DocumentActivity.EXTRA_NAME, name)
                 }
+                if (types != null) intent.putExtra(DocumentActivity.EXTRA_TYPES, types)
                 activity.startActivity(intent)
             } catch (e: Exception) {
                 Log.w("StepsDocuments", "Could not start the document dialog", e)
