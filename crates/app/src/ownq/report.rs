@@ -5,6 +5,8 @@
 //! figure or a video; a changed one says what changed. After the import a
 //! question opens in the bank with a tap.
 
+use std::collections::{BTreeMap, BTreeSet};
+
 use dioxus::prelude::*;
 use steps_core::exam::Set;
 use steps_core::ownq::{self, Field, OwnQuestion, Plan};
@@ -81,6 +83,19 @@ impl Report {
         }
     }
 
+    /// The banks it adds to or changes, each once, with a category of each
+    /// (`MH` and `mh` both go to «أسئلة MH»).
+    pub fn sets(&self) -> Vec<(String, String)> {
+        let mut out: Vec<(String, String)> = Vec::new();
+        for c in &self.categories {
+            let name = set_name(c);
+            if !out.iter().any(|(n, _)| *n == name) {
+                out.push((name, c.clone()));
+            }
+        }
+        out
+    }
+
     /// The group shown first: before the import, the rows left out (they
     /// are his to fix), then what it adds; after it, what it did.
     pub fn first(&self, done: bool) -> Option<Group> {
@@ -102,31 +117,34 @@ pub fn report(
     skipped: Vec<String>,
 ) -> Report {
     let lib = Library::get();
-    let by_key = |qs: &[OwnQuestion], key: &str| qs.iter().find(|q| q.key() == key).cloned();
+    // By key, once: a file of a few thousand questions stays quick.
+    let (incoming, existing) = (by_key(incoming), by_key(existing));
     let lines = |keys: &[String], with_old: bool| -> Vec<Line> {
         keys.iter()
             .filter_map(|key| {
-                let q = by_key(incoming, key)?;
-                let old = if with_old { by_key(existing, key) } else { None };
-                Some(line(lib, &q, old.as_ref()))
+                let q = incoming.get(key)?;
+                let old = if with_old { existing.get(key).copied() } else { None };
+                Some(line(lib, q, old))
             })
             .collect()
     };
-    let mut categories: Vec<String> = plan
+    let categories: BTreeSet<String> = plan
         .new
         .iter()
         .chain(&plan.changed)
-        .filter_map(|key| by_key(incoming, key).map(|q| q.category))
+        .filter_map(|key| incoming.get(key).map(|q| q.category.clone()))
         .collect();
-    categories.sort();
-    categories.dedup();
     Report {
         new: lines(&plan.new, false),
         changed: lines(&plan.changed, true),
         same: lines(&plan.same, false),
         skipped,
-        categories,
+        categories: categories.into_iter().collect(),
     }
+}
+
+fn by_key(questions: &[OwnQuestion]) -> BTreeMap<String, &OwnQuestion> {
+    questions.iter().map(|q| (q.key(), q)).collect()
 }
 
 fn line(lib: &Library, q: &OwnQuestion, old: Option<&OwnQuestion>) -> Line {
@@ -186,7 +204,7 @@ pub fn ReportView(report: Report, done: bool) -> Element {
     let mut picked = use_signal(|| None::<Group>);
     let ui = use_context::<crate::Ui>();
     let settings = use_context::<crate::settings::SettingsNav>();
-    let several = report.categories.len() > 1;
+    let several = report.sets().len() > 1;
     let tone = |g: Group| match g {
         Group::New => "good",
         Group::Changed => "accent",

@@ -302,3 +302,19 @@ fn the_card_shows_what_a_file_will_do_and_did_and_opens_each_question() {
     app.assert_has(tx::PICK);
     assert!(app.can_tap(&tx::open_set(&set)));
 }
+
+#[test]
+fn a_bank_two_categories_go_to_is_named_once() {
+    let _app = App::open(Screen::Today);
+    let json = r#"{"questions": [
+      {"id": "A-1", "category": "MH", "lecture": "cvs.L03", "stem": "One?", "options": ["One", "Two"], "answer": "A"},
+      {"id": "A-2", "category": "mh", "lecture": "cvs.L03", "stem": "Two?", "options": ["One", "Two"], "answer": "B"},
+      {"id": "A-3", "category": "Pathoma", "lecture": "cvs.L03", "stem": "Three?", "options": ["One", "Two"], "answer": "B"}
+    ]}"#;
+    let r = check("q.json", json.as_bytes()).report;
+    assert_eq!(r.categories, ["MH", "Pathoma", "mh"]);
+    let mh = i18n::vq::SET.to_string();
+    let pathoma = i18n::ownq::set("Pathoma");
+    assert_eq!(r.sets(), [(mh.clone(), "MH".to_string()), (pathoma.clone(), "Pathoma".to_string())]);
+    assert_eq!(i18n::ownq::will(3, 0, &[mh, pathoma]), "هيتضاف 3 أسئلة في «أسئلة MH» و«أسئلة Pathoma».");
+}

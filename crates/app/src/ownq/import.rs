@@ -212,7 +212,7 @@ pub fn OwnQuestionsCard() -> Element {
                     p { {tx::NOTHING_NEW} }
                 } else {
                     p { role: "status",
-                        strong { {tx::will(read.report.new.len(), read.report.changed.len(), &read.report.categories.iter().map(|c| report::set_name(c)).collect::<Vec<_>>())} }
+                        strong { {tx::will(read.report.new.len(), read.report.changed.len(), &names(&read.report))} }
                     }
                 }
                 ReportView { report: read.report.clone(), done: false }
@@ -246,18 +246,17 @@ pub fn OwnQuestionsCard() -> Element {
             }
         }
         Step::Done { name, report } => {
-            let sets: Vec<String> = report.categories.iter().map(|c| report::set_name(c)).collect();
             rsx! {
                 p { class: "small", "{tx::FILE} " bdi { dir: "ltr", "{name}" } }
-                p { role: "status", strong { {tx::done(report.new.len(), report.changed.len(), &sets)} } }
+                p { role: "status", strong { {tx::done(report.new.len(), report.changed.len(), &names(&report))} } }
                 ReportView { report: (*report).clone(), done: true }
                 div { class: "row",
-                    for (i, c) in report.categories.iter().cloned().enumerate() {
+                    for (i, (set, c)) in report.sets().into_iter().enumerate() {
                         button {
-                            key: "{c}",
+                            key: "{set}",
                             class: if i == 0 { "btn btn-primary" } else { "btn btn-tonal" },
-                            onclick: { let c = c.clone(); move |_| report::open_category(ui, settings, &c) },
-                            {tx::open_set(&report::set_name(&c))}
+                            onclick: move |_| report::open_category(ui, settings, &c),
+                            {tx::open_set(&set)}
                         }
                     }
                     button { class: "btn btn-secondary", onclick: move |_| restart(), {tx::AGAIN} }
@@ -278,6 +277,11 @@ pub fn OwnQuestionsCard() -> Element {
             Categories {}
         }
     }
+}
+
+/// The banks a report adds to or changes, by name.
+fn names(report: &Report) -> Vec<String> {
+    report.sets().into_iter().map(|(name, _)| name).collect()
 }
 
 /// His categories, each with how many questions, and a way to delete one.
@@ -305,7 +309,7 @@ fn Categories() -> Element {
                             title: tx::open_set(&report::set_name(&c)),
                             onclick: { let c = c.clone(); move |_| report::open_category(ui, settings, &c) },
                             span { class: "tap-row-main",
-                                bdi { {report::set_name(&c)} }
+                                bdi { "{tx::set(&c)}" }
                                 span { class: "muted small", {crate::i18n::bank::questions(n)} }
                             }
                             span { class: "chev", aria_hidden: "true" }
