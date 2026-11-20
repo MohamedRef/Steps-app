@@ -88,6 +88,20 @@ pub fn ImportCard() -> Element {
         });
     };
 
+    // A backup shared to Steps (`crate::inbox`): read as if picked here.
+    use_effect(move || {
+        if crate::inbox::BACKUP.read().is_some() {
+            spawn(async move {
+                let Some(arrived) = crate::inbox::BACKUP.write().take() else { return };
+                match arrived.bytes {
+                    Some(bytes) => load(arrived.name, String::from_utf8_lossy(&bytes).into_owned()),
+                    None => step.set(Step::Failed(tx::IMPORT_COPY_FAILED.to_string())),
+                }
+                crate::inbox::scroll_to(crate::inbox::BACKUP_CARD);
+            });
+        }
+    });
+
     let body = match step() {
         Step::Pick => {
             let files = found_files();
@@ -221,7 +235,7 @@ pub fn ImportCard() -> Element {
     };
 
     rsx! {
-        crate::ui::Card { class: "",
+        crate::ui::Card { class: "", id: crate::inbox::BACKUP_CARD,
             h2 { {tx::IMPORT_TITLE} }
             {body}
         }

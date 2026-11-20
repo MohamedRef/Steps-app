@@ -30,6 +30,8 @@ A lecture that isn't one is named with the lectures its course has (`imm.L01` to
 
 ## Adding and updating
 
+On Android the file can also come from outside Steps (#836): **share** it to Steps, or **«Open with» Steps**, from Files, Drive or a chat app. Steps opens Settings › بياناتك with the file already read, as if picked in the card. A JSON file that is a Steps backup goes to the restore card instead. `app.steps.ShareActivity` copies the file into the app (at most 50 MB) and keeps its name in `PendingFile`; `crate::inbox` takes it when Steps comes to the front and hands it to the card. The manifest offers Steps for the same types as the card's picker (`platform::documents::QUESTIONS`, which a test checks against the manifest).
+
 Picking a file shows what it would do («هيتضاف 12 · هيتعدّل 3 · 200 زي ما هي») and every problem, then «ضيفهم» stores the new and changed rows. A question is keyed by its category and id: the same file again changes nothing, and a row edited in it replaces its question. A question that moves to another lecture gets a new item id (`<lecture>.mine-<category hash>-<id>`), so its answer history starts again. The card lists each category with its count; «امسح» deletes a category's questions on every device (their answers stay in the log).
 
 ## In the app
