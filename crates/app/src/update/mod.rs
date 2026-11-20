@@ -259,6 +259,9 @@ fn install_build(path: &Path, offer: &Offer) -> Phase {
             why: Failure::Install("not running from Steps.app".into()),
         };
     };
+    if bundle::translocated(&app) {
+        return Phase::Failed { offer: Some(offer.clone()), why: Failure::Translocated };
+    }
     match bundle::install_zip(path, &app, bundle::ditto_extract, |new| bundle::check_signature(new, &app)) {
         Ok(()) => Phase::Installed(offer.clone()),
         Err(e) => Phase::Failed { offer: Some(offer.clone()), why: Failure::Install(e) },
@@ -289,7 +292,7 @@ pub fn apply_staged_on_launch() {
     {
         return;
     }
-    let Some(app) = bundle::running_bundle() else { return };
+    let Some(app) = bundle::running_bundle().filter(|a| !bundle::translocated(a)) else { return };
     let path = dir.join(&offer.asset.file);
     let verified = fs::read(&path)
         .is_ok_and(|bytes| check_download(&offer.asset, bytes.len() as u64, &sha256_hex(&bytes)).is_ok());

@@ -17,6 +17,14 @@ pub fn running_bundle() -> Option<PathBuf> {
     bundle_of(&exe)
 }
 
+/// Whether `bundle` is the read-only copy macOS runs an app from while it is
+/// still marked as downloaded (`…/AppTranslocation/<id>/d/Steps.app`): no
+/// update can be written there.
+#[cfg_attr(not(target_os = "macos"), allow(dead_code))]
+pub fn translocated(bundle: &Path) -> bool {
+    bundle.components().any(|c| c.as_os_str() == "AppTranslocation")
+}
+
 fn bundle_of(exe: &Path) -> Option<PathBuf> {
     let macos = exe.parent()?;
     let contents = macos.parent()?;
@@ -161,6 +169,14 @@ mod tests {
         let exe = Path::new("/Applications/Steps.app/Contents/MacOS/steps");
         assert_eq!(bundle_of(exe), Some(PathBuf::from("/Applications/Steps.app")));
         assert_eq!(bundle_of(Path::new("/home/me/steps/target/release/steps")), None);
+    }
+
+    #[test]
+    fn the_read_only_copy_macos_runs_a_downloaded_app_from_is_told_apart() {
+        let copy = Path::new("/private/var/folders/ld/3q/T/AppTranslocation/7DF52FD1-23B3/d/Steps.app");
+        assert!(translocated(copy));
+        assert!(!translocated(Path::new("/Applications/Steps.app")));
+        assert!(!translocated(Path::new("/Users/me/AppTranslocationNotes/Steps.app")));
     }
 
     #[test]

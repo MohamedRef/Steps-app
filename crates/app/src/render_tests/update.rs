@@ -216,6 +216,24 @@ fn a_renewed_preview_key_explains_the_one_reinstall() {
 }
 
 #[test]
+fn a_mac_app_run_from_its_read_only_copy_explains_the_one_fix() {
+    let u = install(&dead_feed(), "0.1.0", 41, notify());
+    let mut app = open_updates();
+    let o = u.status().banner().cloned();
+    u.set_status_for_tests(|s| s.phase = Phase::Failed { offer: o.clone(), why: Failure::Translocated });
+    app.settle();
+    app.assert_has(tx::TRANSLOCATED);
+    for step in tx::TRANSLOCATED_STEPS {
+        app.assert_has(step);
+    }
+    app.assert_has(tx::UNQUARANTINE);
+    app.tap(tx::COPY_COMMAND);
+    app.assert_has(tx::COPIED);
+    // No raw path or OS error: just what to do.
+    app.assert_lacks("Read-only file system");
+}
+
+#[test]
 fn updates_that_cannot_run_here_say_why() {
     // No updater at all: a development build (the web build says it is the
     // web, `Off::without_updater`). Its rows have nothing to open, so they

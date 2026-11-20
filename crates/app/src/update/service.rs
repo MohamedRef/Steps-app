@@ -651,7 +651,7 @@ impl Updater {
         let offer = match self.status().phase {
             Phase::Ready(o)
             | Phase::NeedsPermission(o)
-            | Phase::Failed { offer: Some(o), why: Failure::Install(_) } => o,
+            | Phase::Failed { offer: Some(o), why: Failure::Install(_) | Failure::Translocated } => o,
             _ => return,
         };
         let path = match self.verified_staged(&offer) {

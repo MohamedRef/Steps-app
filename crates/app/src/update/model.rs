@@ -247,6 +247,11 @@ pub enum Failure {
     /// Preview only: CI's update or APK signing key was renewed; install
     /// the newest preview by hand once.
     KeyChanged,
+    /// Mac: Steps runs from the read-only copy macOS makes of an app still
+    /// marked as downloaded (App Translocation), so it can't replace
+    /// itself; moving it to Applications and unmarking it once fixes that.
+    #[cfg_attr(not(target_os = "macos"), allow(dead_code))]
+    Translocated,
 }
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub enum Phase {
