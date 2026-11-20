@@ -95,6 +95,9 @@ fn the_vq_bank_is_a_set_of_its_own() {
     assert_eq!(score(&paper, &[], Mode::Tutor, 0, 0).set, Set::Vq);
     let mixed = practice(&pool, 42, 7);
     assert_eq!(score(&mixed, &[], Mode::Tutor, 0, 0).set, Set::Steps);
+    // His own questions filed under MH join the MH bank; another category is its own.
+    assert_eq!(Set::of_tags(&["mine".into(), "mine:mh".into()]), Set::Vq);
+    assert_eq!(Set::of_tags(&["mine".into(), "mine:Pathoma".into()]), Set::Own("Pathoma".into()));
     // A filter saved before sets existed reads as Steps'.
     let old: Filter = serde_json::from_str(r#"{"lectures":[],"topics":[],"tags":[],"only":"all"}"#).unwrap();
     assert_eq!(old, Filter::default());

@@ -82,6 +82,38 @@ fn json_and_yaml_take_lists_and_count_by_question() {
 }
 
 #[test]
+fn questions_filed_under_mh_join_the_mh_bank_itself() {
+    let json = r#"[{"id": "VQ-1315", "category": "mh", "lecture": "imm.L04", "topic": "Immunosuppressants",
+        "stem": "Which drug binds cyclophilin?", "options": ["Cyclosporine", "Sirolimus"], "answer": "A"}]"#;
+    let mut app = App::open(Screen::Today);
+    let c = check("mh.json", json.as_bytes());
+    assert!(c.problems.is_empty(), "{:?}", c.problems);
+    let item = c.questions[0].item();
+    assert_eq!(steps_core::exam::Set::of_tags(&item.tags), steps_core::exam::Set::Vq);
+    crate::store::shared().put_own_questions(&c.questions, &[]).unwrap();
+    Library::reload();
+    app.run(|| *crate::content::REV.write() += 1);
+    // The side menu's MH entry shows without the sealed bank's key, and the
+    // bank has one MH set, not a second of the same name.
+    assert!((crate::more::MH.shows)());
+    app.tap_tab(Screen::Bank);
+    app.tap(i18n::vq::SET);
+    app.assert_has(i18n::vq::BANK_TITLE);
+    let lectures: Vec<_> = Library::get().lectures.values().cloned().collect();
+    let sets = steps_core::exam::Set::present(&steps_core::exam::mcqs(&lectures));
+    assert_eq!(sets, [steps_core::exam::Set::Steps, steps_core::exam::Set::Vq], "no second MH set");
+    app.assert_has(&i18n::bank::questions(1));
+    // A lecture that isn't one says which the course has.
+    let wrong = check("w.json", json.replace("imm.L04", "imm.L08").as_bytes());
+    assert_eq!(wrong.problems.len(), 1);
+    assert!(
+        wrong.problems[0].contains("imm.L01") && wrong.problems[0].contains("imm.L04"),
+        "{:?}",
+        wrong.problems
+    );
+}
+
+#[test]
 fn a_file_that_isnt_one_says_what_is_wrong() {
     assert_eq!(file::read("notes.pdf", b"%PDF").problems, [FileProblem::Kind("notes.pdf".into())]);
     assert_eq!(file::read("q.zip", &zip_of(&[("a.txt", b"x")])).problems, [FileProblem::NoQuestions]);

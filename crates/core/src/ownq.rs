@@ -132,6 +132,15 @@ pub fn key(category: &str, id: &str) -> String {
     format!("{category}/{id}")
 }
 
+/// The category that files a question into the MH (VQ) bank itself
+/// (Mohamed, 2026-11-20): his own additions to it sit beside the sealed ones.
+pub const MH: &str = "MH";
+
+/// Whether `category` is the MH bank's.
+pub fn is_mh(category: &str) -> bool {
+    category.trim().eq_ignore_ascii_case(MH)
+}
+
 /// `mine:<category>`.
 pub fn set_tag(category: &str) -> String {
     format!("{SET_PREFIX}{category}")
@@ -206,11 +215,19 @@ pub enum Problem {
     FewOptions,
     Gap(char),
     BadAnswer(String),
-    WhyCount { options: usize, why: usize },
+    WhyCount {
+        options: usize,
+        why: usize,
+    },
     NoPlace,
     PageNotInBook(u32),
     BadPage(String),
-    UnknownLecture(String),
+    /// A lecture Steps doesn't have, with the lectures its course has (none
+    /// when the course isn't one either).
+    UnknownLecture {
+        asked: String,
+        course: Vec<String>,
+    },
     UnknownTopic(String),
     BadVideo(String),
     NoImage(String),
@@ -245,6 +262,12 @@ impl Places<'_> {
     fn lecture_of_page(&self, page: u32) -> Option<&str> {
         let e = self.index.lectures.iter().find(|e| (e.pages[0]..=e.pages[1]).contains(&page))?;
         self.lectures.contains_key(&e.id).then_some(e.id.as_str())
+    }
+
+    /// The lectures of `lecture`'s course (`imm.L08` → `imm.L01`…), in order.
+    fn lectures_of_course(&self, lecture: &str) -> Vec<String> {
+        let course = lecture.split('.').next().unwrap_or_default().to_lowercase();
+        self.lectures.keys().filter(|id| id.split('.').next() == Some(course.as_str())).cloned().collect()
     }
 
     /// A topic by id or by title, any case.
@@ -392,7 +415,10 @@ fn question(
             if places.lectures.contains_key(l) {
                 Some(l.to_string())
             } else {
-                p.push(Problem::UnknownLecture(l.to_string()));
+                p.push(Problem::UnknownLecture {
+                    asked: l.to_string(),
+                    course: places.lectures_of_course(l),
+                });
                 None
             }
         }

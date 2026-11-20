@@ -101,7 +101,8 @@ impl Set {
         if tags.iter().any(|t| t == crate::sealed::TAG) {
             Set::Vq
         } else if let Some(c) = crate::ownq::category_of(tags) {
-            Set::Own(c.to_string())
+            // His own MH questions join the MH bank.
+            if crate::ownq::is_mh(c) { Set::Vq } else { Set::Own(c.to_string()) }
         } else {
             Set::Steps
         }
