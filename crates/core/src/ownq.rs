@@ -554,6 +554,56 @@ pub fn plan(existing: &[OwnQuestion], incoming: &[OwnQuestion]) -> Plan {
     out
 }
 
+/// A part of a question that a file again can change ([`changes`]).
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub enum Field {
+    /// Another lecture: a new item id, so its answers start again.
+    Lecture,
+    Topic,
+    Page,
+    Stem,
+    Options,
+    Answer,
+    Why,
+    Explanation,
+    Objective,
+    Image,
+    Video,
+    Tags,
+}
+
+/// What a file again changes in a question it updates, in this order.
+pub fn changes(old: &OwnQuestion, new: &OwnQuestion) -> Vec<Field> {
+    let mut out = Vec::new();
+    let mut differ = |same: bool, field: Field| {
+        if !same {
+            out.push(field);
+        }
+    };
+    differ(old.lecture == new.lecture, Field::Lecture);
+    differ(old.topic == new.topic, Field::Topic);
+    differ(old.page == new.page, Field::Page);
+    differ(old.stem == new.stem, Field::Stem);
+    differ(old.options == new.options, Field::Options);
+    // The same letter with the options moved is still another answer.
+    differ(
+        old.answer == new.answer && old.options.get(old.answer) == new.options.get(new.answer),
+        Field::Answer,
+    );
+    differ(old.why == new.why, Field::Why);
+    differ(old.explanation == new.explanation, Field::Explanation);
+    differ(old.objective == new.objective, Field::Objective);
+    differ(old.image.as_ref().map(|i| &i.sha256) == new.image.as_ref().map(|i| &i.sha256), Field::Image);
+    differ(old.video == new.video, Field::Video);
+    differ(old.tags == new.tags, Field::Tags);
+    out
+}
+
+/// An answer's letter (`0` → `A`).
+pub fn letter(answer: usize) -> char {
+    LETTERS.chars().nth(answer).unwrap_or('?')
+}
+
 /// The categories, each with how many questions, in name order.
 pub fn categories(questions: &[OwnQuestion]) -> Vec<(String, usize)> {
     let mut out: BTreeMap<&str, usize> = BTreeMap::new();

@@ -249,3 +249,38 @@ fn an_import_adds_new_ids_and_changes_edited_ones() {
     let text = serde_json::to_string(&new[0]).unwrap();
     assert_eq!(serde_json::from_str::<OwnQuestion>(&text).unwrap(), new[0]);
 }
+
+#[test]
+fn a_file_again_names_what_it_changed_in_a_question() {
+    let (index, lectures) = book();
+    let places = Places { index: &index, lectures: &lectures };
+    let one = |fields: &[(&str, &str)]| {
+        let mut r = good(2, "P-1");
+        for (k, v) in fields {
+            r.fields.insert(k.to_string(), v.to_string());
+        }
+        let (qs, problems) = read(&[r], &places, &BTreeMap::new());
+        assert!(problems.is_empty(), "{problems:?}");
+        qs.into_iter().next().unwrap()
+    };
+    let old = one(&[]);
+    assert!(changes(&old, &old).is_empty());
+    assert_eq!(changes(&old, &one(&[("answer", "c")])), [Field::Answer]);
+    assert_eq!(letter(old.answer), 'B');
+    assert_eq!(letter(one(&[("answer", "c")]).answer), 'C');
+    assert_eq!(
+        changes(&old, &one(&[("stem", "Edited"), ("explanation", "Other."), ("tags", "x")])),
+        [Field::Stem, Field::Explanation, Field::Tags]
+    );
+    // Another lecture (a page in another range) moves the question, and its topic goes.
+    assert_eq!(
+        changes(&old, &one(&[("page", "425"), ("topic", "")])),
+        [Field::Lecture, Field::Topic, Field::Page]
+    );
+    // The options swapped around the same letter: the answer is another one.
+    let swapped = one(&[("A", "Mitral regurgitation"), ("B", "Aortic stenosis")]);
+    assert_eq!(changes(&old, &swapped), [Field::Options, Field::Answer]);
+    assert_eq!(changes(&old, &one(&[("video", "")])), [Field::Video]);
+    assert_eq!(crate::exam::Set::of_category("mh"), crate::exam::Set::Vq);
+    assert_eq!(crate::exam::Set::of_category("Pathoma"), crate::exam::Set::Own("Pathoma".into()));
+}

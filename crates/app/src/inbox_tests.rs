@@ -81,7 +81,7 @@ fn a_shared_file_of_questions_opens_your_data_with_it_read() {
     app.assert_has(otx::TITLE);
     app.assert_has(TEMPLATE_NAME);
     // The sheet alone: its second question's figure would come in a zip.
-    app.assert_has(&otx::plan(1, 0, 0));
+    app.assert_has(&otx::will(1, 0, &[otx::set("Pathoma")]));
     assert!(app.run(|| QUESTIONS.peek().is_none()), "taken once");
     // One Android couldn't copy says so (Settings is open on the card already).
     app.run(|| *QUESTIONS.write() = Some(Arrived { name: "big.zip".into(), bytes: None }));

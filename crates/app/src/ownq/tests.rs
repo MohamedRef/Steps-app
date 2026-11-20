@@ -182,3 +182,123 @@ fn added_questions_join_their_lecture_as_a_bank_of_their_own() {
     assert!(Library::get().mine.get(&q.item_id()).is_none());
     assert!(crate::store::shared().own_questions().is_empty());
 }
+
+/// The JSON file again: U-1's answer moved to A, U-2 still wrong, and a new
+/// U-3 on a page.
+const AGAIN: &str = r#"{"questions": [
+  {"id": "U-1", "category": "UWorld notes", "lecture": "cvs.L03", "stem": "Which murmur is holosystolic at the apex?",
+   "options": ["Aortic stenosis", "Mitral regurgitation"], "answer": "A",
+   "why": ["Right upper sternal border.", "Right. Apex, to the axilla."],
+   "video": {"youtube": "Ab3_xYz-012", "title": "Murmurs"}, "tags": ["murmurs"]},
+  {"id": "U-2", "category": "UWorld notes", "page": 295, "stem": "Second?", "options": ["One", "Two"], "answer": "C"},
+  {"id": "U-3", "category": "UWorld notes", "page": 295, "stem": "Third,   on\n two lines?", "options": ["One", "Two"], "answer": "B"}
+]}"#;
+
+/// Adds the JSON file's good question (U-1), through the card's own `apply`.
+fn add_json() {
+    let review = dioxus::prelude::consume_context::<crate::store::Review>();
+    let checked = check("q.json", JSON.as_bytes());
+    super::import::apply(&checked, &review).unwrap();
+}
+
+fn ids(lines: &[super::report::Line]) -> Vec<&str> {
+    lines.iter().map(|l| l.id.as_str()).collect()
+}
+
+#[test]
+fn a_report_names_each_question_and_what_a_file_again_changes() {
+    use super::report::Group;
+    use steps_core::ownq::Field;
+
+    let _app = App::with(Screen::Today, add_json);
+    let lib = Library::get();
+    let r = check("q.json", AGAIN.as_bytes()).report;
+    assert_eq!(ids(&r.new), ["U-3"]);
+    assert_eq!(ids(&r.changed), ["U-1"]);
+    assert!(r.same.is_empty());
+    assert_eq!(r.categories, ["UWorld notes"]);
+
+    let u1 = &r.changed[0];
+    assert_eq!((u1.answer, u1.was), ('A', Some('B')));
+    assert_eq!(u1.changes, [Field::Answer]);
+    assert_eq!(i18n::ownq::changed(&u1.changes, u1.was, u1.answer), "اتغيّر: الإجابة بقت A (كانت B)");
+    assert!(u1.video && !u1.figure);
+    assert_eq!(u1.place, lib.crumb("cvs.L03"));
+    assert_eq!(u1.page, None);
+
+    let u3 = &r.new[0];
+    assert_eq!(u3.stem, "Third, on two lines?");
+    assert_eq!(u3.page, Some(295));
+    assert_eq!(u3.place, lib.crumb("cvs.L03"), "page 295 is in cvs.L03");
+    assert_eq!((u3.answer, u3.was), ('B', None));
+    assert!(u3.changes.is_empty());
+
+    assert_eq!(r.skipped.len(), 1);
+    assert!(r.skipped[0].contains("«C»"), "{:?}", r.skipped);
+    // Before the import the rows to fix come first; after it, what it did.
+    assert_eq!(r.first(false), Some(Group::Skipped));
+    assert_eq!(r.first(true), Some(Group::New));
+    // The file as it was changes nothing.
+    let same = check("q.json", JSON.as_bytes()).report;
+    assert_eq!(ids(&same.same), ["U-1"]);
+    assert!(same.new.is_empty() && same.changed.is_empty() && same.categories.is_empty());
+
+    let long = "word ".repeat(60);
+    let cut = super::report::stem_start(&long);
+    assert!(cut.ends_with('…') && cut.chars().count() <= 161, "{cut}");
+}
+
+#[test]
+fn the_card_shows_what_a_file_will_do_and_did_and_opens_each_question() {
+    use super::report::Group;
+    use i18n::ownq as tx;
+
+    let mut app = App::open(Screen::Today);
+    app.tap(Screen::Settings.label());
+    app.tap(i18n::settings::DATA);
+    app.run(|| {
+        *crate::inbox::QUESTIONS.write() =
+            Some(crate::inbox::Arrived { name: "q.json".into(), bytes: Some(JSON.as_bytes().to_vec()) })
+    });
+    app.wait(50);
+
+    // Before: the row left out first, with why; then what it adds.
+    app.assert_has(tx::group_title(Group::Skipped, false));
+    app.assert_has("«C»");
+    app.tap(tx::group(Group::New, false));
+    app.assert_has(tx::group_title(Group::New, false));
+    app.assert_has("U-1");
+    app.assert_has("Which murmur is holosystolic at the apex?");
+    app.assert_has(&tx::answer('B'));
+    app.assert_has(tx::VIDEO);
+    assert!(!app.can_tap("Which murmur is holosystolic"), "not added yet: nothing to open");
+
+    // After: what it did, by question.
+    app.tap(tx::APPLY);
+    let set = tx::set("UWorld notes");
+    app.assert_has(&tx::done(1, 0, std::slice::from_ref(&set)));
+    app.assert_has(tx::group_title(Group::New, true));
+    app.assert_has(tx::TAP_TO_OPEN);
+
+    // The category opens in the bank.
+    app.tap(&tx::open_set(&set));
+    app.assert_lacks(tx::TITLE);
+    app.assert_has(&tx::bank_title("UWorld notes"));
+
+    // Back in Settings the report is still there, and a question opens.
+    app.tap(Screen::Settings.label());
+    app.tap(i18n::settings::DATA);
+    app.assert_has(tx::group_title(Group::New, true));
+    app.tap("Which murmur is holosystolic at the apex?");
+    app.assert_lacks(tx::TITLE);
+    app.assert_has("Which murmur is holosystolic at the apex?");
+    app.assert_has("Mitral regurgitation");
+
+    // Another file starts afresh; the category list opens the bank too.
+    app.tap(Screen::Settings.label());
+    app.tap(i18n::settings::DATA);
+    app.tap(tx::AGAIN);
+    app.assert_lacks(tx::group_title(Group::New, true));
+    app.assert_has(tx::PICK);
+    assert!(app.can_tap(&tx::open_set(&set)));
+}

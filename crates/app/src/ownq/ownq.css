@@ -8,6 +8,27 @@
 .ownq-cat { display: flex; align-items: center; gap: var(--sp-2); padding: var(--sp-2) var(--sp-3); }
 .ownq-cat .tap-row-main { flex: 1; min-inline-size: 0; }
 .ownq-cats .btn { min-block-size: var(--target); }
+.ownq-cat-open { flex: 1; min-inline-size: 0; display: flex; align-items: center; gap: var(--sp-2); min-block-size: var(--target); }
+
+/* The report of a file (report.rs), like Anki's import log: a tile per
+   group (the pressed one is the list shown), then its questions. */
+.ownq-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-block: var(--sp-3) var(--sp-2); }
+.ownq-tiles .stat-tile { min-block-size: 3.75rem; padding: var(--sp-1); }
+.ownq-tiles .stat-label { line-height: 1.3; }
+.ownq-tiles .stat-tile[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+.ownq-tiles .stat-tile[data-tone="good"] .stat-num { color: var(--good); }
+.ownq-tiles .stat-tile[data-tone="accent"] .stat-num { color: var(--accent); }
+.ownq-tiles .stat-tile[data-tone="bad"] .stat-num { color: var(--bad); }
+.ownq-group { margin-block: var(--sp-3) var(--sp-1); }
+.ownq-lines { max-block-size: 60vh; overflow: auto; margin-block: var(--sp-2); }
+.ownq-line { display: flex; padding: var(--sp-3) var(--sp-4); }
+.ownq-line-main { gap: var(--sp-1); }
+.ownq-line-head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--sp-2); }
+.ownq-stem {
+  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2;
+  overflow: hidden; text-align: start;
+}
+.ownq-what { color: var(--accent-ink); }
 
 /* A question's own explanation, after the why lines. */
 .ownq-explain { margin-block: var(--sp-3) 0; }

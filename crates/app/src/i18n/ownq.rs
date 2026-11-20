@@ -1,7 +1,10 @@
 //! The questions he adds from a file (ownq/): the card in Settings › بياناتك,
 //! what a file's rows get wrong, and the bank's name for each category.
 
+use steps_core::ownq::Field;
+
 use super::count::{QUESTION, count};
+use crate::ownq::report::Group;
 
 pub const TITLE: &str = "ضيف أسئلة من ملف";
 pub const INTRO: &str = "ارفع ملف Excel (أو JSON أو YAML)، لوحده أو في zip مع صوره. كل تصنيف بيبقى بنك لوحده، والأسئلة بتتزامن على كل أجهزتك.";
@@ -33,29 +36,117 @@ pub const MORE_PROBLEMS: &str = "وغلطات تانية بنفس الشكل.";
 pub const WAITING_FIGURE: &str = "الصورة لسه بتوصل من جهازك التاني.";
 pub const EXPLANATION: &str = "الشرح";
 
-/// «هيتضاف 12 · هيتعدّل 3 · 200 زي ما هم».
-pub fn plan(new: usize, changed: usize, same: usize) -> String {
+/// «هيتضاف 12 سؤال ويتعدّل 3 أسئلة في «أسئلة Pathoma».»
+pub fn will(new: usize, changed: usize, sets: &[String]) -> String {
     let mut parts = Vec::new();
     if new > 0 {
         parts.push(format!("هيتضاف {}", count(new, &QUESTION)));
     }
     if changed > 0 {
-        parts.push(format!("هيتعدّل {}", count(changed, &QUESTION)));
+        let verb = if parts.is_empty() { "هيتعدّل" } else { "يتعدّل" };
+        parts.push(format!("{verb} {}", count(changed, &QUESTION)));
     }
-    if same > 0 {
-        parts.push(format!("{} زي ما هي", count(same, &QUESTION)));
-    }
-    parts.join(" · ")
+    format!("{} في {}.", parts.join(" و"), quoted(sets))
 }
 
-/// «اتضاف 12 واتعدّل 3. تلاقيهم في بنك الأسئلة تحت تصنيفهم.»
-pub fn done(new: usize, changed: usize) -> String {
-    let mut s = format!("اتضاف {}", count(new, &QUESTION));
-    if changed > 0 {
-        s.push_str(&format!(" واتعدّل {}", count(changed, &QUESTION)));
+fn quoted(sets: &[String]) -> String {
+    sets.iter().map(|s| format!("«{s}»")).collect::<Vec<_>>().join(" و")
+}
+
+/// «اتضاف 12 سؤال واتعدّل 3 أسئلة في «أسئلة Pathoma».»
+pub fn done(new: usize, changed: usize, sets: &[String]) -> String {
+    let mut parts = Vec::new();
+    if new > 0 {
+        parts.push(format!("اتضاف {}", count(new, &QUESTION)));
     }
-    s.push_str(". تلاقيهم في بنك الأسئلة تحت تصنيفهم.");
-    s
+    if changed > 0 {
+        parts.push(format!("اتعدّل {}", count(changed, &QUESTION)));
+    }
+    format!("{} في {}.", parts.join(" و"), quoted(sets))
+}
+
+/// «افتح أسئلة MH في البنك».
+pub fn open_set(set: &str) -> String {
+    format!("افتح {set} في البنك")
+}
+
+// The report of a file (ownq/report.rs), like Anki's import log.
+
+pub const FIGURE: &str = "صورة";
+pub const VIDEO: &str = "فيديو";
+pub const TAP_TO_OPEN: &str = "دوس على أي سؤال تفتحه في البنك.";
+pub const MOVED: &str = "اتنقل لمحاضرة تانية، فإجاباتك عليه هتبدأ من الأول.";
+
+/// A report tile: what a file does (or did) to its questions.
+pub fn group(g: Group, done: bool) -> &'static str {
+    match (g, done) {
+        (Group::New, true) => "اتضاف",
+        (Group::New, false) => "هيتضاف",
+        (Group::Changed, true) => "اتعدّل",
+        (Group::Changed, false) => "هيتعدّل",
+        (Group::Same, _) => "زي ما هو",
+        (Group::Skipped, true) => "اتساب",
+        (Group::Skipped, false) => "هيتساب",
+    }
+}
+
+/// A report list's heading; its count follows.
+pub fn group_title(g: Group, done: bool) -> &'static str {
+    match (g, done) {
+        (Group::New, true) => "الأسئلة اللي اتضافت",
+        (Group::New, false) => "الأسئلة اللي هتتضاف",
+        (Group::Changed, true) => "الأسئلة اللي اتعدّلت",
+        (Group::Changed, false) => "الأسئلة اللي هتتعدّل",
+        (Group::Same, true) => "موجودة زي ما هي، ما اتغيّرتش",
+        (Group::Same, false) => "موجودة زي ما هي، مش هتتغيّر",
+        (Group::Skipped, true) => "صفوف فيها غلطة، ما اتضافتش",
+        (Group::Skipped, false) => "صفوف فيها غلطة، مش هتتضاف",
+    }
+}
+
+/// «ص 118»: a First Aid page.
+pub fn page(n: u32) -> String {
+    format!("ص {n}")
+}
+
+/// «الإجابة C».
+pub fn answer(letter: char) -> String {
+    format!("الإجابة {letter}")
+}
+
+/// «و23 سؤال كمان.»: questions a report lists no more of.
+pub fn more(n: usize) -> String {
+    format!("و{} كمان.", count(n, &QUESTION))
+}
+
+/// A part of a question, as «اتغيّر: …» names it.
+pub fn field(f: Field) -> &'static str {
+    match f {
+        Field::Lecture => "المحاضرة",
+        Field::Topic => "الموضوع",
+        Field::Page => "الصفحة",
+        Field::Stem => "نص السؤال",
+        Field::Options => "الاختيارات",
+        Field::Answer => "الإجابة",
+        Field::Why => "شرح الاختيارات",
+        Field::Explanation => "الشرح",
+        Field::Objective => "الهدف التعليمي",
+        Field::Image => "الصورة",
+        Field::Video => "الفيديو",
+        Field::Tags => "الـ tags",
+    }
+}
+
+/// «اتغيّر: الإجابة بقت C (كانت B)، الشرح».
+pub fn changed(fields: &[Field], was: Option<char>, now: char) -> String {
+    let parts: Vec<String> = fields
+        .iter()
+        .map(|f| match (f, was) {
+            (Field::Answer, Some(w)) if w != now => format!("الإجابة بقت {now} (كانت {w})"),
+            _ => field(*f).to_string(),
+        })
+        .collect();
+    format!("اتغيّر: {}", parts.join("، "))
 }
 
 /// «اتمسح 12 سؤال.»

@@ -8,6 +8,7 @@ use dioxus::prelude::*;
 use steps_core::ownq::{self, OwnQuestion, Places, Plan, RowProblem};
 
 use super::file::{self, Read, Shape};
+use super::report::{self, Report, ReportView};
 use crate::content::Library;
 use crate::i18n::ownq as tx;
 use crate::platform::documents::{self, DocState};
@@ -15,15 +16,24 @@ use crate::platform::documents::{self, DocState};
 /// The template, `steps-questions-template.xlsx` beside this file (docs/OWN-QUESTIONS.md).
 pub const TEMPLATE: &[u8] = include_bytes!("steps-questions-template.xlsx");
 pub const TEMPLATE_NAME: &str = "steps-questions-template.xlsx";
-/// Problems listed at most; the rest are summed up.
-const SHOWN_PROBLEMS: usize = 30;
+/// The last file's report, kept while Steps is open: a question opened from
+/// it closes Settings, and the report is still there on the way back, until
+/// another file.
+static LAST: GlobalSignal<Option<(String, Report)>> = Signal::global(|| None);
 
 #[derive(Clone, PartialEq)]
 enum Step {
     Pick,
     Reading,
-    Preview { name: String, read: Box<Checked> },
-    Done { new: usize, changed: usize },
+    Preview {
+        name: String,
+        read: Box<Checked>,
+    },
+    /// What the file did, question by question.
+    Done {
+        name: String,
+        report: Box<Report>,
+    },
     Failed(String),
 }
 
@@ -34,6 +44,8 @@ pub struct Checked {
     pub plan: Plan,
     /// Each problem in words, with where it is.
     pub problems: Vec<String>,
+    /// What it would do, question by question.
+    pub report: Report,
     figures: Vec<(ownq::Image, Vec<u8>)>,
 }
 
@@ -50,9 +62,11 @@ pub fn check(name: &str, bytes: &[u8]) -> Checked {
             format!("{}: {}", tx::at(*line, sheet), tx::problem(problem))
         }),
     );
-    let plan = ownq::plan(&crate::store::shared().own_questions(), &questions);
+    let existing = crate::store::shared().own_questions();
+    let plan = ownq::plan(&existing, &questions);
+    let report = report::report(&questions, &existing, &plan, problems.clone());
     let figures = read.figures(&questions);
-    Checked { questions, plan, problems, figures }
+    Checked { questions, plan, problems, report, figures }
 }
 
 /// Stores the new and changed questions and opens the library again with them.
@@ -76,12 +90,29 @@ pub fn reopen(review: &crate::store::Review) {
 #[component]
 pub fn OwnQuestionsCard() -> Element {
     let review = crate::store::use_review();
-    let mut step = use_signal(|| Step::Pick);
+    let ui = use_context::<crate::Ui>();
+    let settings = use_context::<crate::settings::SettingsNav>();
+    let mut step = use_signal(|| match LAST.peek().as_ref() {
+        Some((name, report)) => Step::Done { name: name.clone(), report: Box::new(report.clone()) },
+        None => Step::Pick,
+    });
+    // Back to picking a file: the last report goes.
+    let mut restart = move || {
+        *LAST.write() = None;
+        step.set(Step::Pick);
+    };
+    // A category deleted below takes the report of its questions with it.
+    use_effect(move || {
+        if LAST.read().is_none() && matches!(*step.peek(), Step::Done { .. }) {
+            step.set(Step::Pick);
+        }
+    });
     let mut picking = use_signal(|| false);
     let mut template = use_signal(|| None::<Result<String, String>>);
     let _ = crate::content::REV.read();
 
     let mut load = move |name: String, bytes: Vec<u8>| {
+        *LAST.write() = None;
         step.set(Step::Reading);
         let read = check(&name, &bytes);
         step.set(Step::Preview { name, read: Box::new(read) });
@@ -172,7 +203,6 @@ pub fn OwnQuestionsCard() -> Element {
         },
         Step::Preview { name, read } => {
             let adds = read.plan.new.len() + read.plan.changed.len();
-            let more = read.problems.len().saturating_sub(SHOWN_PROBLEMS);
             let review = review.clone();
             rsx! {
                 p { class: "small", "{tx::FILE} " bdi { dir: "ltr", "{name}" } }
@@ -181,20 +211,13 @@ pub fn OwnQuestionsCard() -> Element {
                 } else if adds == 0 {
                     p { {tx::NOTHING_NEW} }
                 } else {
-                    p { role: "status", strong { {tx::plan(read.plan.new.len(), read.plan.changed.len(), read.plan.same.len())} } }
+                    p { role: "status",
+                        strong { {tx::will(read.report.new.len(), read.report.changed.len(), &read.report.categories.iter().map(|c| report::set_name(c)).collect::<Vec<_>>())} }
+                    }
                 }
-                if !read.problems.is_empty() {
-                    ul { class: "ownq-problems", role: "list",
-                        for (i, p) in read.problems.iter().take(SHOWN_PROBLEMS).enumerate() {
-                            li { key: "{i}", class: "small", "{p}" }
-                        }
-                    }
-                    if more > 0 {
-                        p { class: "muted small", {tx::MORE_PROBLEMS} }
-                    }
-                    if adds > 0 {
-                        p { class: "muted small", {tx::SKIPPED} }
-                    }
+                ReportView { report: read.report.clone(), done: false }
+                if !read.problems.is_empty() && adds > 0 {
+                    p { class: "muted small", {tx::SKIPPED} }
                 }
                 div { class: "row",
                     if adds > 0 {
@@ -202,9 +225,13 @@ pub fn OwnQuestionsCard() -> Element {
                             class: "btn btn-primary",
                             onclick: {
                                 let read = read.clone();
+                                let name = name.clone();
                                 move |_| {
                                     step.set(match apply(&read, &review) {
-                                        Ok((new, changed)) => Step::Done { new, changed },
+                                        Ok(_) => {
+                                            *LAST.write() = Some((name.clone(), read.report.clone()));
+                                            Step::Done { name: name.clone(), report: Box::new(read.report.clone()) }
+                                        }
                                         Err(e) => Step::Failed(e),
                                     });
                                 }
@@ -212,19 +239,34 @@ pub fn OwnQuestionsCard() -> Element {
                             {tx::APPLY}
                         }
                     }
-                    button { class: "btn btn-secondary", onclick: move |_| step.set(Step::Pick),
+                    button { class: "btn btn-secondary", onclick: move |_| restart(),
                         if adds > 0 { {tx::CANCEL} } else { {tx::BACK} }
                     }
                 }
             }
         }
-        Step::Done { new, changed } => rsx! {
-            p { role: "status", {tx::done(new, changed)} }
-            button { class: "btn btn-secondary", onclick: move |_| step.set(Step::Pick), {tx::AGAIN} }
-        },
+        Step::Done { name, report } => {
+            let sets: Vec<String> = report.categories.iter().map(|c| report::set_name(c)).collect();
+            rsx! {
+                p { class: "small", "{tx::FILE} " bdi { dir: "ltr", "{name}" } }
+                p { role: "status", strong { {tx::done(report.new.len(), report.changed.len(), &sets)} } }
+                ReportView { report: (*report).clone(), done: true }
+                div { class: "row",
+                    for (i, c) in report.categories.iter().cloned().enumerate() {
+                        button {
+                            key: "{c}",
+                            class: if i == 0 { "btn btn-primary" } else { "btn btn-tonal" },
+                            onclick: { let c = c.clone(); move |_| report::open_category(ui, settings, &c) },
+                            {tx::open_set(&report::set_name(&c))}
+                        }
+                    }
+                    button { class: "btn btn-secondary", onclick: move |_| restart(), {tx::AGAIN} }
+                }
+            }
+        }
         Step::Failed(e) => rsx! {
             p { class: "verify-error", role: "alert", "{tx::FAILED} " bdi { dir: "ltr", "{e}" } }
-            button { class: "btn btn-secondary", onclick: move |_| step.set(Step::Pick), {tx::BACK} }
+            button { class: "btn btn-secondary", onclick: move |_| restart(), {tx::BACK} }
         },
     };
 
@@ -242,6 +284,8 @@ pub fn OwnQuestionsCard() -> Element {
 #[component]
 fn Categories() -> Element {
     let review = crate::store::use_review();
+    let ui = use_context::<crate::Ui>();
+    let settings = use_context::<crate::settings::SettingsNav>();
     let _ = crate::content::REV.read();
     let mut asking = use_signal(|| None::<String>);
     let mut said = use_signal(|| None::<String>);
@@ -255,9 +299,16 @@ fn Categories() -> Element {
             for (c, n) in cats {
                 li { key: "{c}",
                     div { class: "ownq-cat",
-                        div { class: "tap-row-main",
-                            bdi { "{tx::set(&c)}" }
-                            span { class: "muted small", {crate::i18n::bank::questions(n)} }
+                        // The category opens in the bank.
+                        button {
+                            class: "tap tap-plain ownq-cat-open",
+                            title: tx::open_set(&report::set_name(&c)),
+                            onclick: { let c = c.clone(); move |_| report::open_category(ui, settings, &c) },
+                            span { class: "tap-row-main",
+                                bdi { {report::set_name(&c)} }
+                                span { class: "muted small", {crate::i18n::bank::questions(n)} }
+                            }
+                            span { class: "chev", aria_hidden: "true" }
                         }
                         if asking() == Some(c.clone()) {
                             button {
@@ -269,6 +320,8 @@ fn Categories() -> Element {
                                         asking.set(None);
                                         match crate::store::shared().delete_own_category(&c) {
                                             Ok(n) => {
+                                                // A report may name questions that are gone.
+                                                *LAST.write() = None;
                                                 reopen(&review);
                                                 said.set(Some(tx::deleted(n)));
                                             }
