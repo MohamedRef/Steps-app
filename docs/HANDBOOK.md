@@ -301,7 +301,7 @@ Steps has its own look, chosen by me on 2026-11-05. Full design system: [DESIGN.
 - **#667 high-yield on 58% of items** (2026-11-14): fixed. The tag now follows the book's own emphasis (red bold mnemonics, "most common", "classic" and the like), about 1,380 of 9,000 First Aid course items plus all 1,036 Rapid Review items; the courses were retagged one PR each, and `validate` refuses a course over 30% (`rr` exempt).
 - **#744 abbreviations showed another field's meaning** (2026-11-16): fixed. Every course glossary now explains each abbreviation its lessons and items show (2,183 entries added, US spelling), the shared file went from 2,154 terms to the 836 Steps uses, and `validate` refuses a course term that only another file explains.
 - **#746 answer cues in lesson checks** (2026-11-16): fixed. The key is the single longest option in 129 of 621 check questions (20.8%, from 38%), and `validate` now reports and limits it as it does for the bank.
-- **#646 Nightly checks failed on main** (2026-11-08, on 71e5538). Open; it closes itself when Nightly passes again.
+- **#839 / #840 Nightly later-dates check** (2026-11-20, on 6015648): `render_tests::verify::an_mcq_answer_is_edited_from_the_bank` called `App::tap` on the right option, so when the time-seeded draw picked an MCQ whose key was `"5"` (`repro.L03.046`) it tapped the navigator's question 5 instead. Fixed on `main` (`App::answer` scopes option clicks to `.q-options` and matches `.answer-text` first); #840 closes itself when Nightly passes again.
 - Not yet confirmed on a real phone: the lock/unlock screen-freeze fix (`vendor/`), and restoring a Study session after Android ends the app.
 - GitHub never fires this repo's schedules; `daily.yml` covers for them (§6).
 

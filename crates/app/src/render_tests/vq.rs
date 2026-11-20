@@ -113,7 +113,7 @@ fn unlocked_the_question_its_figure_and_its_chip_show() {
     app.assert_lacks(testing::OBJECTIVE);
     // Answered: the objective after the why lines, and its number where a
     // First Aid question shows its page.
-    app.tap(testing::RIGHT);
+    app.answer(testing::RIGHT);
     app.tap(crate::i18n::bank::CHECK);
     app.assert_has("Why Mitral regurgitation from the fixture.");
     app.assert_has(tx::OBJECTIVE);

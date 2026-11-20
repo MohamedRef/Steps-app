@@ -43,10 +43,17 @@ fn option_text(i: &Item, at: usize) -> String {
     options[at].clone()
 }
 
+/// The `.answer-text` words inside `.q-option` button `n`.
+fn answer_words(app: &App, n: usize) -> Option<String> {
+    let children = &app.page.nodes[n].children;
+    let &c = children.iter().find(|&&c| app.page.attr(c, "class") == Some("q-text answer-text"))?;
+    Some(app.page.text(c))
+}
+
 impl App {
     /// The paper's option carrying `text` that listens for `event`: only an
-    /// option, never a glossary term in the stem whose title happens to hold
-    /// the same words.
+    /// option, never a glossary term in the stem or a navigator number whose
+    /// words happen to hold the same characters.
     #[track_caller]
     fn option(&self, event: &str, text: &str) -> usize {
         let in_options = |mut n: usize| loop {
@@ -58,10 +65,10 @@ impl App {
                 None => return false,
             }
         };
-        self.targets(event, text)
-            .into_iter()
-            .find(|&n| in_options(n) && self.page.text(n).contains(text))
-            .unwrap_or_else(|| panic!("no option {text:?}:\n{}", self.listing(event)))
+        let found = self.targets(event, text);
+        let exact = found.iter().copied().find(|&n| answer_words(self, n).as_deref() == Some(text));
+        let fallback = found.into_iter().find(|&n| in_options(n) && self.page.text(n).contains(text));
+        exact.or(fallback).unwrap_or_else(|| panic!("no option {text:?}:\n{}", self.listing(event)))
     }
 
     /// Taps the paper's option carrying `text`.
@@ -84,10 +91,10 @@ impl App {
     /// disabled) or not.
     #[track_caller]
     fn option_attr(&self, text: &str, name: &str) -> String {
-        let n = with_class(self, "q-option")
-            .into_iter()
-            .find(|&n| self.page.text(n).contains(text))
-            .unwrap_or_else(|| panic!("no option {text:?}"));
+        let opts = with_class(self, "q-option");
+        let exact = opts.iter().copied().find(|&n| answer_words(self, n).as_deref() == Some(text));
+        let fallback = opts.into_iter().find(|&n| self.page.text(n).contains(text));
+        let n = exact.or(fallback).unwrap_or_else(|| panic!("no option {text:?}"));
         self.page.attr(n, name).unwrap_or_default().to_string()
     }
 }
